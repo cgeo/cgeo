@@ -519,6 +519,10 @@
         <item name="android:max">5</item>
         <item name="android:stepSize">0.5</item>
         <item name="android:isIndicator">true</item>
+        <!-- show accented stars, but hide "unused parts" of the stars completely (merge into background) -->
+        <item name="android:progressTint">@color/colorAccent</item>
+        <item name="android:secondaryProgressTint">@color/colorBackground</item>
+        <item name="android:progressBackgroundTint">@color/colorBackground</item>
     </style>
 
     <!-- map progressbar style -->
