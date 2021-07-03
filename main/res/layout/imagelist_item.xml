@@ -82,8 +82,8 @@
 
         <ImageView
             android:id="@+id/image_delete"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="@dimen/buttonSize_iconButton"
+            android:layout_height="@dimen/buttonSize_iconButton"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:scaleType="centerInside"
@@ -94,8 +94,8 @@
 
         <ImageView
             android:id="@+id/image_drag"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
+            android:layout_width="@dimen/buttonSize_iconButton"
+            android:layout_height="@dimen/buttonSize_iconButton"
             android:layout_centerVertical="true"
             android:layout_marginLeft="6dp"
             android:layout_marginRight="6dp"
