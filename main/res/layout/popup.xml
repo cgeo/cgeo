@@ -37,9 +37,10 @@
                     android:id="@+id/more_details"
                     style="@style/button_small"
                     android:layout_width="fill_parent"
-                    android:layout_height="40dip"
-                    android:layout_toLeftOf="@id/offline_hint"
+                    android:layout_height="fill_parent"
                     android:layout_gravity="center_horizontal"
+                    android:layout_toLeftOf="@id/offline_hint"
+                    android:insetTop="0dp"
                     android:text="@string/popup_more" />
 
                 <Button
