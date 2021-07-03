@@ -72,10 +72,10 @@ public class EmojiUtils {
     // The newest emoji standard can be found here: https://unicode.org/emoji/charts/full-emoji-list.html
 
     public static final int SMILEY_LIKE = 0x1f600;
-    public static final int SMILEY_LOVE = 0x1f60d;
-    public static final int SMILEY_MONOCLE = 0x1f9d0;
+    public static final int SMILEY_LOVE = 0x1f499;
+    public static final int SMILEY_MONOCLE = 0x1f453;
     public static final int SPARKLES = 0x2728;
-
+    
 
     private static final EmojiSet[] symbols = {
         // category symbols
