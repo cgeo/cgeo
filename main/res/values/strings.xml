@@ -415,7 +415,6 @@
     <string name="caches_copy_selected">Copy selected</string>
     <string name="caches_copy_all">Copy all</string>
     <string name="caches_map_locus_export">Export to Locus</string>
-    <string name="caches_filter">Filter (legacy)</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter by</string>
     <string name="caches_filter_size">Size</string>

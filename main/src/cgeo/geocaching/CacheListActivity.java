@@ -753,7 +753,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         try {
             // toplevel menu items
             setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
-            setEnabled(menu, R.id.menu_filter_legacy, search != null && search.getCount() > 0);
+            //setEnabled(menu, R.id.menu_filter_legacy, search != null && search.getCount() > 0); //remove for upcoming beta
             setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
             if (adapter.isSelectMode()) {
                 menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode_exit))
@@ -909,8 +909,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_invert_selection) {
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
-        } else if (menuItem == R.id.menu_filter_legacy) {
-            showLegacyFilterMenu(null);
+//        } else if (menuItem == R.id.menu_filter_legacy) { //remove for upcoming beta
+//            showLegacyFilterMenu(null);
         } else if (menuItem == R.id.menu_filter) {
             showFilterMenu(null);
         } else if (menuItem == R.id.menu_import_web) {
