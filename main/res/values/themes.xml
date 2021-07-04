@@ -115,6 +115,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorOnSurface">@color/colorAccent</item>
         <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
+        <item name="android:background">@color/settings_colorBackgroundDark</item>
     </style>
 
     <style name="settings.DialogTheme.light" parent="@style/Theme.AppCompat.Light.Dialog.Alert">
