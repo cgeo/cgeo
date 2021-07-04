@@ -9,7 +9,6 @@ import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.list.PseudoList;
@@ -640,10 +639,6 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
-    private void setFilterTitle() {
-        binding.filterButtonTitle.setText(Settings.getCacheType().getL10n());
-    }
-
     private void init() {
         if (initialized) {
             return;
@@ -677,21 +672,18 @@ public class MainActivity extends AbstractActionBarActivity {
 
         binding.filterButton.setClickable(true);
         binding.filterButton.setOnClickListener(v -> selectGlobalTypeFilter());
-        binding.filterButton.setOnLongClickListener(v -> {
-            Settings.setCacheType(CacheType.ALL);
-            setFilterTitle();
-            return true;
-        });
 
         updateCacheCounter();
 
-        setFilterTitle();
         checkRestore();
         DataStore.cleanIfNeeded(this);
     }
 
     protected void selectGlobalTypeFilter() {
-        Dialogs.selectGlobalTypeFilter(this, cacheType -> setFilterTitle());
+        // TODO: remove all legacy code parts related to the old global cache type filter
+        //Dialogs.selectGlobalTypeFilter(this, cacheType -> setFilterTitle());
+
+        SimpleDialog.of(this).setTitle(R.string.search_filter_temporary_user_information_title).setMessage(R.string.search_filter_temporary_user_information).show();
     }
 
     public void updateCacheCounter() {
