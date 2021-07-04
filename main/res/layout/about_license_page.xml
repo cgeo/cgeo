@@ -16,7 +16,6 @@
             android:id="@+id/license"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
@@ -24,17 +23,17 @@
             android:focusable="true"
             android:linksClickable="false"
             android:text="@string/about_apache_license"
+            style="@style/about_base"
             android:textSize="@dimen/textSize_headingPrimary" />
 
         <TextView
             android:id="@+id/license_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:layout_margin="7dip"
             android:paddingLeft="3dip"
             android:text="@null"
-            android:textSize="@dimen/textSize_detailsPrimary" />
+            style="@style/about_base" />
     </LinearLayout>
 
 </ScrollView>

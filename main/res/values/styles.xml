@@ -622,17 +622,19 @@
     </style>
 
     <!-- about pages styles -->
-    <style name="about_contributors">
+    <style name="about_base">
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
         <item name="android:layout_gravity">left</item>
+    </style>
+    <style name="about_contributors" parent="@style/about_base">
         <item name="android:layout_margin">7dip</item>
         <item name="android:linksClickable">true</item>
         <item name="android:paddingLeft">3dip</item>
-        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
-    <style name="about_info_title">
+    <style name="about_info_title" parent="@style/about_base">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
     <style name="about_info_content" parent="about_info_title">
         <item name="android:layout_marginBottom">5dip</item>
@@ -641,14 +643,11 @@
         <item name="android:clickable">true</item>
         <item name="android:focusable">true</item>
         <item name="android:linksClickable">false</item>
-        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
     <style name="about_changes" parent="about_info_title">
-        <item name="android:layout_gravity">left</item>
         <item name="android:layout_margin">7dip</item>
         <item name="android:linksClickable">true</item>
         <item name="android:paddingLeft">3dip</item>
-        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
 </resources>

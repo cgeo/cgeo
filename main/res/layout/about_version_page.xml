@@ -9,7 +9,7 @@
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical" >
+        android:orientation="vertical">
 
         <FrameLayout
             android:layout_width="fill_parent"
@@ -62,24 +62,19 @@
         </FrameLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
-            <TextView
-                style="@style/separator_horizontal_headline"
-                android:text="@string/about_version" />
+            <TextView style="@style/separator_horizontal_headline" android:text="@string/about_version" />
         </RelativeLayout>
 
         <TextView
             android:id="@+id/about_version_string"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:textIsSelectable="true"
-            android:textSize="@dimen/textSize_detailsPrimary"
+            style="@style/about_base"
             android:textStyle="bold"
             tools:text="version string is determined by the gradle build"/>
 
@@ -87,24 +82,19 @@
             android:id="@+id/about_special_build"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="left"
             android:layout_marginBottom="5dip"
             android:layout_marginLeft="10dip"
             android:layout_marginRight="10dip"
             android:textIsSelectable="true"
-            android:textSize="@dimen/textSize_detailsPrimary"
+            style="@style/about_base"
             android:textStyle="bold"
             android:visibility="gone"
             tools:text="additional text in case of deprecated eclipse build"
             tools:visibility="visible"/>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
-            <TextView
-                style="@style/separator_horizontal_headline"
-                android:text="@string/about_donate" />
+            <TextView style="@style/separator_horizontal_headline" android:text="@string/about_donate" />
         </RelativeLayout>
 
         <LinearLayout
@@ -124,12 +114,8 @@
         </LinearLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-
             <View style="@style/separator_horizontal" />
-
-            <TextView
-                style="@style/separator_horizontal_headline"
-                android:text="@string/about_help" />
+            <TextView style="@style/separator_horizontal_headline" android:text="@string/about_help" />
         </RelativeLayout>
 
         <TableLayout
