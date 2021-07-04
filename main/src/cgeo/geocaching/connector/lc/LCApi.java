@@ -1,15 +1,21 @@
 package cgeo.geocaching.connector.lc;
 
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
@@ -94,12 +100,16 @@ final class LCApi {
 
     @NonNull
     protected static Collection<Geocache> searchByCenter(final Geopoint center) {
+        return searchByCenter(center, 10);
+    }
+
+    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInKm) {
         if (!Settings.isGCPremiumMember()) {
             return Collections.emptyList();
         }
         final Parameters params = new Parameters("skip", "0");
-        params.add("take", "20");
-        params.add("radiusMeters", "10000");
+        params.add("take", "200");
+        params.add("radiusMeters", "" + (distanceInKm * 1000));
         params.add("origin.latitude", String.valueOf(center.getLatitude()));
         params.add("origin.longitude", String.valueOf(center.getLongitude()));
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
@@ -110,6 +120,25 @@ final class LCApi {
             return Collections.emptyList();
         }
     }
+
+    @NonNull
+    public static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
+        //for now we have to assume that LCConnector supports only SINGLE criteria search
+
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
+        if (of != null && !of.allowsCachesOf(connector)) {
+            return new ArrayList<>();
+        }
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 10 : df.getMaxRangeValue().intValue());
+        }
+
+        //by default, search around current position
+        return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
+    }
+
 
     @NonNull
     private static Single<Response> apiRequest(final String uri) {

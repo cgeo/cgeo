@@ -195,6 +195,7 @@ public class GeocacheFilter {
         return "[" + ExpressionParser.toConfig(config) + "]" + (tree == null ? "" : FILTER_PARSER.getConfig(tree));
     }
 
+    @NonNull
     @Override
     public String toString() {
         return toConfig();
@@ -222,7 +223,10 @@ public class GeocacheFilter {
         list.addAll(itemsToKeep);
     }
 
-    /** constructs a new GeocacheFilter which is identical to this filter but adds the given AND conditions to it */
+    /**
+     * constructs a new GeocacheFilter which is identical to this filter but adds the given AND conditions to it.
+     * New filters are added BEFORE existing one (assuming that they have priority in case it is necessary to decide to filter one or the other)
+     */
     public GeocacheFilter and(final IGeocacheFilter ... filters) {
 
         if (filters == null || filters.length == 0) {
@@ -230,10 +234,10 @@ public class GeocacheFilter {
         }
 
         final AndGeocacheFilter andFilter = new AndGeocacheFilter();
-        andFilter.addChild(this.tree);
         for (IGeocacheFilter f : filters) {
             andFilter.addChild(f);
         }
+        andFilter.addChild(this.tree);
         return new GeocacheFilter(null, openInAdvancedMode, includeInconclusive, andFilter);
     }
 
@@ -261,6 +265,19 @@ public class GeocacheFilter {
         return result;
     }
 
+    /**
+     * Helper method to be used in conjunction with {@link #getAndChainIfPossible()} by search providers
+     * only offering SPECIFIC filter capabilities. This method searches and returns specific base filters contained in a given filter list
+     */
+    public static <T extends BaseGeocacheFilter> T findInChain(final List<BaseGeocacheFilter> filters, final Class<T> filterClazz) {
+        for (BaseGeocacheFilter filter : filters) {
+            if (filterClazz.isAssignableFrom(filter.getClass())) {
+                return (T) filter;
+            }
+        }
+        return null;
+    }
+
     private void getAndChainIfPossibleInternal(final IGeocacheFilter filterToCheck, final List<BaseGeocacheFilter> chain) {
 
         if (filterToCheck instanceof AndGeocacheFilter && (!(filterToCheck instanceof NotGeocacheFilter))) {
@@ -271,6 +288,7 @@ public class GeocacheFilter {
             chain.add((BaseGeocacheFilter) filterToCheck);
         }
     }
+
 
     public String toUserDisplayableString() {
         if (!StringUtils.isBlank(getName())) {
