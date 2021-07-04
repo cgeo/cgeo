@@ -278,7 +278,6 @@
     <string name="caches_copy_selected">Kopyang naselekta</string>
     <string name="caches_copy_all">Kopyahon tanan</string>
     <string name="caches_map_locus_export">I-eksport adto sa Locus</string>
-    <string name="caches_filter">Pilter</string>
     <string name="caches_filter_title">Piltir sa</string>
     <string name="caches_filter_size">Ang gidak-on</string>
     <string name="caches_filter_type">Ang matang</string>
@@ -547,7 +546,7 @@
     <!-- days remaining -->
     <string name="last_day_available">ang uwahi nga adlaw kay pwede gamiton</string>
     <string name="cache_offline_refresh">I-refresh</string>
-    <string name="cache_offline_drop">Kuhaon</string>
+    <string name="cache_offline_drop">Tangtanga</string>
     <string name="cache_offline_store">Gitipigan</string>
     <string name="cache_offline_stored">Gitipigan sa usa ka aparato</string>
     <string name="cache_offline_not_ready">Dili anaa basta offline</string>

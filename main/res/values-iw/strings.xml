@@ -303,7 +303,7 @@
     <string name="caches_copy_selected">העתק בחירה</string>
     <string name="caches_copy_all">העתק הכל</string>
     <string name="caches_map_locus_export">יצא לLocus</string>
-    <string name="caches_filter">מיין</string>
+    <string name="caches_filter">מסנן</string>
     <string name="caches_filter_title">מיין לפי</string>
     <string name="caches_filter_size">גודל</string>
     <string name="caches_filter_type">סוג</string>
@@ -433,6 +433,7 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="last_day_available">היום האחרון הזמין</string>
+    <string name="cache_offline_drop">הסר</string>
     <string name="cache_dialog_loading_details">Loading cache details&#8230;</string>
     <string name="cache_dialog_offline_save_message">Saving cache for offline use&#8230;</string>
     <string name="cache_dialog_offline_drop_message">Removing cache from device memory&#8230;</string>

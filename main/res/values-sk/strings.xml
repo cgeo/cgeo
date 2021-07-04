@@ -363,7 +363,7 @@
     <string name="caches_copy_selected">Kopírovať vybrané</string>
     <string name="caches_copy_all">Kopírovať všetko</string>
     <string name="caches_map_locus_export">Exportovať do Locus</string>
-    <string name="caches_filter">Filtrovať</string>
+    <string name="caches_filter">Filter</string>
     <string name="caches_filter_title">Filtrovať</string>
     <string name="caches_filter_size">Veľkosť</string>
     <string name="caches_filter_type">Typ</string>

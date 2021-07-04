@@ -922,7 +922,7 @@
     </plurals>
     <string name="last_day_available">laatste dag beschikbaar</string>
     <string name="cache_offline_refresh">Verversen</string>
-    <string name="cache_offline_drop">Verwijderen</string>
+    <string name="cache_offline_drop">Verwijder</string>
     <string name="cache_delete_userdefined_waypoints">Gebruiker gedefinieerde waypoints verwijderen</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Verwijder alle gebruiker gedefinieerde waypoints van deze cache?\n\nWaypoints worden definitief verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_userdefined_waypoints_note">Opmerking: Je hebt \"waypoints van notitie\" ingeschakeld. Als er coördinaten in je persoonlijke notitie worden herkend door c:geo, worden hiervan automatisch waypoints aangemaakt. Je kunt dit uitschakelen in het persoonlijke notitiebewerkingsvenster.</string>

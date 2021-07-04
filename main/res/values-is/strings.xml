@@ -238,7 +238,7 @@
     <string name="caches_copy_selected">Afrita valda</string>
     <string name="caches_copy_all">Afrita alla</string>
     <string name="caches_map_locus_export">Flytja út í Locus</string>
-    <string name="caches_filter">Sía frá</string>
+    <string name="caches_filter">Sía</string>
     <string name="caches_filter_title">Sía eftir</string>
     <string name="caches_filter_size">Stærð</string>
     <string name="caches_filter_type">Tegund</string>
@@ -423,6 +423,7 @@
     </plurals>
     <string name="last_day_available">fáanlegt í síðasta lagi í dag</string>
     <string name="cache_offline_refresh">Endurhlaða</string>
+    <string name="cache_offline_drop">Eyða</string>
     <string name="cache_offline_store">Vista</string>
     <string name="cache_offline_stored">Vistað í tæki</string>
     <string name="cache_offline_not_ready">Ekki í boði án netsambands</string>

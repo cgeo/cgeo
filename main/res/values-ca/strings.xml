@@ -923,7 +923,7 @@
     </plurals>
     <string name="last_day_available">darrer dia disponible</string>
     <string name="cache_offline_refresh">Actualitza</string>
-    <string name="cache_offline_drop">Esborra</string>
+    <string name="cache_offline_drop">Elimina</string>
     <string name="cache_delete_userdefined_waypoints">Elimineu els punts de ruta definits per l\'usuari</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Voleu eliminar tots els punts de ruta definits per l\'usuari d\'aquest catxé? \n\nEls punts de ruta se suprimiran immediatament, no es pot desfer.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: teniu activat el \"punts de ruta des de la nota\". Si teniu coordenades a la vostra nota personal reconegudes per c: geo, els punts de ruta es recrearan automàticament per a ells. Podeu desactivar-ho al quadre d\'edició de notes personals.</string>

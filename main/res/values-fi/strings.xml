@@ -361,7 +361,7 @@
     <string name="caches_copy_selected">Kopioi valitut</string>
     <string name="caches_copy_all">Kopioi kaikki</string>
     <string name="caches_map_locus_export">Vie Locus:iin</string>
-    <string name="caches_filter">Suodatin</string>
+    <string name="caches_filter">Suodata</string>
     <string name="caches_filter_title">Suodata</string>
     <string name="caches_filter_size">Koko</string>
     <string name="caches_filter_type">Tyyppi</string>

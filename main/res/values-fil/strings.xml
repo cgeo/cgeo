@@ -287,7 +287,7 @@
     <string name="caches_copy_selected">Kopyahin ang napili</string>
     <string name="caches_copy_all">Kopyahin lahat</string>
     <string name="caches_map_locus_export">Ang mga lokus ay I-eksport</string>
-    <string name="caches_filter">Salain</string>
+    <string name="caches_filter">Pagsasala</string>
     <string name="caches_filter_title">Ang pagsasala ayon sa</string>
     <string name="caches_filter_size">Ang Sukat</string>
     <string name="caches_filter_type">Uri</string>
@@ -575,7 +575,7 @@
     <!-- days remaining -->
     <string name="last_day_available">magagamit sa huling araw</string>
     <string name="cache_offline_refresh">Mag-refresh</string>
-    <string name="cache_offline_drop">Ang tanggalin</string>
+    <string name="cache_offline_drop">Tanggalin</string>
     <string name="cache_offline_store">Ang imbakan</string>
     <string name="cache_offline_stored">Iniimbak sa aparato</string>
     <string name="cache_offline_not_ready">Hindi pwedeng makuha sa offline</string>
