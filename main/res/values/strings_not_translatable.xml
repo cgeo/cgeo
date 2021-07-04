@@ -70,30 +70,28 @@
 
     <!-- recent contributors, meaning: this year + last year -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
-    <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, p=project leader, s=support, t=testing) -->
+    <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
-    bekuno|https://github.com/bekuno|c|
+    BeckyDTP|https://github.com/BeckyDTP|c|
+    bekuno|https://github.com/bekuno|ci|
     bmuzzin|https://github.com/bmuzzin|c|
-    capoaira|https://github.com/capoaira|c|
     cayacdev|https://github.com/cayacdev|c|
-    eddiemuc|https://github.com/eddiemuc|c|
+    eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
-    geocachermgo|https://github.com/geocachermgo|t|
-    jakedot|https://github.com/jakedot|c|
-    jgoestl|https://github.com/jgoestl|c|
     jonas-koeritz|https://github.com/jonas-koeritz|c|
-    Lineflyer|https://github.com/Lineflyer|tsd|
+    Lineflyer|https://github.com/Lineflyer|tsdi|
     Lomanic|https://github.com/Lomanic|c|
     MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
-    moving-bits|https://github.com/moving-bits|cg|
-    mucek4||cp|
-    murggel|https://github.com/murggel|c|
+    moving-bits|https://github.com/moving-bits|cdgs|
+    mucek4||cip|
+    murggel|https://github.com/murggel|cd|
     okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
     Peter Storch|https://github.com/pstorch|c|
     Rainer S.|https://github.com/rsudev|c|
-    SammysHP|https://www.sammyshp.de/||
+    S-Bartfast|https://github.com/S-Bartfast|c|
+    SammysHP|https://www.sammyshp.de/|i|
     TakoTheDank|https://github.com/TacoTheDank|c|
     UniQP|https://github.com/UniQP|c|
     </string>
@@ -107,14 +105,18 @@
     bjdupuis||c|
     blafoo||c|
     campbeb||c|
+    capoaira|https://github.com/capoaira|c|
     ControlTheBit||c|
     Eisbehr||c|
     emividmark|||
     Filipe C.||c|
     following5|||
+    geocachermgo|https://github.com/geocachermgo|t|
     HolgerJeromin|||
     Iiro Jäppinen||g|
     Jan Žatecký|https://www.jaytech.cz/|g|
+    jakedot|https://github.com/jakedot|c|
+    jgoestl|https://github.com/jgoestl|c|
     JoWi24|https://joachim-wilke.de/|c|
     Karsten Priegnitz|https://github.com/koem|cg|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|

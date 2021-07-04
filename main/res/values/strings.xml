@@ -644,6 +644,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">support</string>
     <string name="contribution_documentation">documentation</string>
+    <string name="contribution_infrastructure">infrastructure</string>
     <string name="contribution_projectleader">open source project leader</string>
     <string name="contribution_graphics">graphics</string>
 
