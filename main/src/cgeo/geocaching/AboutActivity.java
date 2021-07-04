@@ -344,10 +344,11 @@ public class AboutActivity extends TabbedViewPagerActivity {
                         break;
                     }
                     final String temp = s.substring(p2 + 1, p3);
-                    roles = checkRoles(checkRoles(checkRoles(checkRoles(checkRoles(checkRoles("",
+                    roles = checkRoles(checkRoles(checkRoles(checkRoles(checkRoles(checkRoles(checkRoles("",
                         temp, 'c', R.string.contribution_code),
                         temp, 'd', R.string.contribution_documentation),
                         temp, 'g', R.string.contribution_graphics),
+                        temp, 'i', R.string.contribution_infrastructure),
                         temp, 'p', R.string.contribution_projectleader),
                         temp, 's', R.string.contribution_support),
                         temp, 't', R.string.contribution_tester);
