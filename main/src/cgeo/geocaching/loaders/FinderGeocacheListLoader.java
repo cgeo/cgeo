@@ -9,7 +9,7 @@ import androidx.annotation.NonNull;
 
 public class FinderGeocacheListLoader extends AbstractSearchLoader {
 
-    @NonNull private final String username;
+    @NonNull public final String username;
 
     public FinderGeocacheListLoader(final Activity activity, @NonNull final String username) {
         super(activity);
@@ -19,7 +19,7 @@ public class FinderGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         return nonEmptyCombineActive(ConnectorFactory.getSearchByFinderConnectors(),
-                connector -> connector.searchByFinder(username));
+            connector -> connector.searchByFinder(username));
     }
 
 }
