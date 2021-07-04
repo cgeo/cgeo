@@ -197,6 +197,12 @@
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
     </style>
 
+    <style name="button_icon_colored" parent="button_icon_accent">
+        <!-- display icon as colored image, without reverting all colors to tint color -->
+        <item name="iconTint">#FFFFFFFF</item>
+        <item name="iconTintMode">multiply</item>
+    </style>
+
      <style name="IconButtonThemeOverlay">
         <!-- For filled buttons, your theme's colorPrimary provides the default background color of the component -->
         <item name="colorPrimary">@color/colorText</item>
