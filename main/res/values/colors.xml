@@ -23,6 +23,7 @@
     <color name="text_icon">#FFFFFFFF</color>
 
     <color name="colorTextActionBar">#FFE4E4E4</color>
+    <color name="colorTextHintActionBar">@color/colorTextHint</color>
     <color name="colorBackgroundActionBar">#FF303030</color>
 
     <!-- values needed only until settings activity is based on AppCompatActivity -->
