@@ -929,4 +929,23 @@
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
     </application>
 
+    <queries>
+        <!-- packages we want to see using the package manager need to be declared starting with targetSDK 30, and we need to use specific strings / cannot use @string/xxx notation -->
+        <package android:name="btools.routingapp" />
+        <package android:name="cgeo.contacts" />
+        <package android:name="com.eclipsim.gpsstatus2" />
+        <package android:name="com.google.android.apps.translate" />
+        <package android:name="com.google.android.street" />
+        <package android:name="com.google.zxing.client.android" />
+        <package android:name="com.groundspeak.react.adventures" />
+        <package android:name="com.silentlexx.gpslock" />
+        <package android:name="com.sygic.aura" />
+        <package android:name="com.sygic.aura_voucher" />
+        <package android:name="com.webmajstr.pebble_gc" />
+        <package android:name="de.wolffire.chirpwolf" />
+        <package android:name="googoo.android.btgps" />
+        <package android:name="menion.android.locus" />
+        <package android:name="menion.android.whereyougo" />
+    </queries>
+
 </manifest>
