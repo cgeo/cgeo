@@ -73,6 +73,7 @@
         <item name="android:colorBackground">@color/settings_colorBackgroundDark</item>
         <item name="android:dialogTheme">@style/settings.DialogTheme</item>
         <item name="android:alertDialogTheme">@style/settings.DialogTheme</item>
+
         <!-- icon resources - can be moved (without suffix "_white") to drawables-night when based on AppCompatActivity -->
         <item name="settings_cloud">@drawable/settings_cloud_white</item>
         <item name="settings_details">@drawable/settings_details_white</item>
@@ -112,8 +113,6 @@
         <item name="android:textColor">@color/settings_primary_selector_night</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:background">@color/settings_colorDialogBackgroundDark</item>
-        <item name="android:windowBackground">@color/colorBackgroundTransparent</item>
         <item name="colorOnSurface">@color/colorAccent</item>
         <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
     </style>
@@ -122,8 +121,6 @@
         <item name="android:textColor">@color/settings_primary_selector_light</item>
         <item name="android:colorAccent">@color/colorAccent</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:background">@color/settings_colorDialogBackgroundLight</item>
-        <item name="android:windowBackground">@color/colorBackgroundTransparent</item>
         <item name="colorOnSurface">@color/colorAccent</item>
         <item name="android:buttonBarButtonStyle">@style/settings.buttons</item>
     </style>
