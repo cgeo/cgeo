@@ -390,7 +390,6 @@
     <string name="caches_copy_selected">Kopieer geselecteerde</string>
     <string name="caches_copy_all">Kopieer alles</string>
     <string name="caches_map_locus_export">Exporteer naar Locus</string>
-    <string name="caches_filter">Filter (verouderd)</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter op</string>
     <string name="caches_filter_size">Grootte</string>
@@ -585,6 +584,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">ondersteuning</string>
     <string name="contribution_documentation">documentatie</string>
+    <string name="contribution_infrastructure">infrastructuur</string>
     <string name="contribution_projectleader">open source projectleider</string>
     <string name="contribution_graphics">graphics</string>
     <string name="debug_user_error_report_title">Probleem melden</string>
@@ -1443,6 +1443,8 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Zoeken op filter</string>
     <string name="search_filter_info_message">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
+    <string name="search_filter_temporary_user_information_title">Nieuw filterframework</string>
+    <string name="search_filter_temporary_user_information">c:geo heeft een nieuw filtersysteem ingevoerd, dat flexibele en combineerbare filters, die opgeslagen kunnen worden, ondersteunt. \n\nHet globale filter kan vanaf nu direct gewijzigd worden in de cachelijsten en de plattegrond.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identificatie</string>
     <string name="search_tb_button">Zoeken naar trackable</string>

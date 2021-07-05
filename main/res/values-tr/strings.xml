@@ -390,7 +390,6 @@
     <string name="caches_copy_selected">Seçileni kopyala</string>
     <string name="caches_copy_all">Tümünü kopyala</string>
     <string name="caches_map_locus_export">Locus\'a aktarma</string>
-    <string name="caches_filter">Filtre (eski)</string>
     <string name="caches_filter_menuitem">Filtre</string>
     <string name="caches_filter_title">Filtreleme</string>
     <string name="caches_filter_size">Boyut</string>
