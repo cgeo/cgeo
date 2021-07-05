@@ -1,6 +1,6 @@
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
-- Fix: Theming error for downloader in light theme
+- Korrektur: Wegpunkt mit gleichem Namen, aber unterschiedliche Koordinaten aus der persönlichen Notiz extrahieren
+- Korrektur: Fehler beim Extrahieren der Benutzernotiz für Wegpunkt mit Formel
+- Korrektur: Exportiere Formel zu PN statt Koordinaten für abgeschlossene Formel
+- Korrektur: Offline-Karte und Theme-Ordner nach Neuinstallation und Wiederherstellung der Sicherung fehlerhaft
+- Fix: Track/Route kann nicht aktualisiert werden
+- Korrektur: Fehler im Theme für Downloader des hellen Theme
