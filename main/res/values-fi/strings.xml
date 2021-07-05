@@ -390,7 +390,6 @@
     <string name="caches_copy_selected">Kopioi valitut</string>
     <string name="caches_copy_all">Kopioi kaikki</string>
     <string name="caches_map_locus_export">Vie Locus:iin</string>
-    <string name="caches_filter">Suodatin (aiempi)</string>
     <string name="caches_filter_menuitem">Suodatin</string>
     <string name="caches_filter_title">Suodata</string>
     <string name="caches_filter_size">Koko</string>
@@ -585,6 +584,7 @@
     <string name="contribution_tester">testaaja</string>
     <string name="contribution_support">tuki</string>
     <string name="contribution_documentation">dokumentaatio</string>
+    <string name="contribution_infrastructure">Infrastruktuuri</string>
     <string name="contribution_projectleader">avoimen lähdekoodin projektin johtaja</string>
     <string name="contribution_graphics">grafiikat</string>
     <string name="debug_user_error_report_title">Ilmoita ongelmasta</string>
@@ -2051,7 +2051,7 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
