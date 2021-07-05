@@ -389,7 +389,6 @@
     <string name="caches_copy_selected">選択内容のコピー</string>
     <string name="caches_copy_all">すべてコピー</string>
     <string name="caches_map_locus_export">Locusにエクスポート</string>
-    <string name="caches_filter">フィルタ(旧)</string>
     <string name="caches_filter_menuitem">フィルタ</string>
     <string name="caches_filter_title">フィルタ</string>
     <string name="caches_filter_size">サイズ</string>
