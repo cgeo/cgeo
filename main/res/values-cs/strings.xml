@@ -392,7 +392,6 @@
     <string name="caches_copy_selected">Kopírovat vybrané</string>
     <string name="caches_copy_all">Kopírovat vše</string>
     <string name="caches_map_locus_export">Exportovat do Locusu</string>
-    <string name="caches_filter">Filtr (legacy)</string>
     <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtrovat podle</string>
     <string name="caches_filter_size">Velikost</string>
@@ -589,6 +588,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">podpora</string>
     <string name="contribution_documentation">dokumentace</string>
+    <string name="contribution_infrastructure">infrastruktura</string>
     <string name="contribution_projectleader">lídr projektu otevřeného zdrojového kódu</string>
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Nahlásit problém</string>
@@ -1467,6 +1467,8 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Hledat podle filtru</string>
     <string name="search_filter_info_message">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
+    <string name="search_filter_temporary_user_information_title">Nové filtrování</string>
+    <string name="search_filter_temporary_user_information">c:geo představilo nový systém filtrování, který podporuje flexibilní, kombinovatelné a ukládatelné filtry. \n\nGlobální filtr lze od nynějška měnit přímo v seznamech kešek a v živé mapě.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
