@@ -561,6 +561,7 @@
     <string name="contribution_tester">Tester</string>
     <string name="contribution_support">Support</string>
     <string name="contribution_documentation">Handbuch</string>
+    <string name="contribution_infrastructure">Infrastruktur</string>
     <string name="contribution_projectleader">Open Source Projektleiter</string>
     <string name="contribution_graphics">Grafiken</string>
     <string name="debug_user_error_report_title">Problem melden</string>
