@@ -1360,7 +1360,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshFilterForOnlineSearch() {
         //not supported yet for all online searches
-        if (type != CacheListType.SEARCH_FILTER && type != CacheListType.KEYWORD) {
+        if (type != CacheListType.SEARCH_FILTER && type != CacheListType.KEYWORD
+            && type != CacheListType.COORDINATE && type != CacheListType.FINDER
+            && type != CacheListType.OWNER && type != CacheListType.ADDRESS
+            && type != CacheListType.NEAREST) {
             return;
         }
 
@@ -1376,6 +1379,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             case KEYWORD:
                 if (loader instanceof KeywordGeocacheListLoader) {
                     extras.putString(Intents.EXTRA_KEYWORD, ((KeywordGeocacheListLoader) loader).keyword);
+                }
+                break;
+            case COORDINATE:
+            case ADDRESS:
+            case NEAREST:
+                break;
+            case OWNER:
+                if (loader instanceof OwnerGeocacheListLoader) {
+                    extras.putString(Intents.EXTRA_USERNAME, ((OwnerGeocacheListLoader) loader).username);
                 }
                 break;
             default:

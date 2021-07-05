@@ -5,8 +5,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
+import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -23,7 +25,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByViewPort {
+public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByCenter, ISearchByViewPort {
 
     @NonNull
     private static final String CACHE_URL = "https://adventurelab.page.link/";
@@ -135,6 +137,13 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         searchResult.setTotalCountGC(caches.size());
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
     }
+
+    @NonNull
+    @Override
+    public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
+        return new SearchResult(LCApi.searchByFilter(filter, this));
+    }
+
 
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {

@@ -1,11 +1,16 @@
 package cgeo.geocaching.connector.ec;
 
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.LogResult;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.GPX10Parser;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -13,6 +18,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
@@ -94,8 +100,12 @@ final class ECApi {
 
     @NonNull
     static Collection<Geocache> searchByCenter(final Geopoint center) {
+        return searchByCenter(center, 20);
+    }
+
+    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distance) {
         final Parameters params = new Parameters("fnc", "center");
-        params.add("distance", "20");
+        params.add("distance", "" + distance);
         params.add("lat", String.valueOf(center.getLatitude()));
         params.add("lon", String.valueOf(center.getLongitude()));
         try {
@@ -104,6 +114,24 @@ final class ECApi {
         } catch (final Exception ignored) {
             return Collections.emptyList();
         }
+    }
+
+    @NonNull
+    static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
+        //for now we have to assume that ECConnector supports only SINGLE criteria search
+
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
+        if (of != null && !of.allowsCachesOf(connector)) {
+            return new ArrayList<>();
+        }
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
+        if (df != null) {
+            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 20 : df.getMaxRangeValue().intValue());
+        }
+
+        //by default, search around current position
+        return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
     }
 
     @NonNull

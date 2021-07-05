@@ -156,34 +156,25 @@ public class SuApi {
         //for now we have to assume that SUConnector supports only SINGLE criteria search
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
-        final OriginGeocacheFilter of = findInList(filters, OriginGeocacheFilter.class);
+        final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
         if (of != null && !of.allowsCachesOf(connector)) {
             return new ArrayList<>();
         }
-        final DistanceGeocacheFilter df = findInList(filters, DistanceGeocacheFilter.class);
+        final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
         if (df != null) {
             return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 20f : df.getMaxRangeValue(), connector);
         }
-        final NameGeocacheFilter nf = findInList(filters, NameGeocacheFilter.class);
+        final NameGeocacheFilter nf = GeocacheFilter.findInChain(filters, NameGeocacheFilter.class);
         if (nf != null && !StringUtils.isEmpty(nf.getStringFilter().getTextValue())) {
             return searchByKeyword(nf.getStringFilter().getTextValue(), connector);
         }
-        final OwnerGeocacheFilter ownf = findInList(filters, OwnerGeocacheFilter.class);
+        final OwnerGeocacheFilter ownf = GeocacheFilter.findInChain(filters, OwnerGeocacheFilter.class);
         if (ownf != null && !StringUtils.isEmpty(ownf.getStringFilter().getTextValue())) {
             return searchByOwner(ownf.getStringFilter().getTextValue(), connector);
         }
 
         //by default, search around current position
         return searchByCenter(Sensors.getInstance().currentGeo().getCoords(), 20f, connector);
-    }
-
-    private static <T extends BaseGeocacheFilter> T findInList(final List<BaseGeocacheFilter> filters, final Class<T> filterClazz) {
-        for (BaseGeocacheFilter filter : filters) {
-            if (filterClazz.isAssignableFrom(filter.getClass())) {
-                return (T) filter;
-            }
-        }
-        return null;
     }
 
     private static String getSuLogType(final LogType logType) {

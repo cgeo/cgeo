@@ -2,6 +2,9 @@ package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
 
 import android.app.Activity;
@@ -9,7 +12,7 @@ import android.app.Activity;
 import androidx.annotation.NonNull;
 
 public class CoordsGeocacheListLoader extends AbstractSearchLoader {
-    @NonNull private final Geopoint coords;
+    @NonNull public final Geopoint coords;
 
     public CoordsGeocacheListLoader(final Activity activity, @NonNull final Geopoint coords) {
         super(activity);
@@ -18,8 +21,14 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByCenterConnectors(),
-                connector -> connector.searchByCenter(coords));
+        //use filter search instead of dedicated distance search
+        final GeocacheFilter baseFilter = GeocacheFilter.loadFromSettings();
+
+        final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) GeocacheFilterType.DISTANCE.create();
+        distanceFilter.setCoordinate(coords);
+
+        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(),
+            connector -> connector.searchByFilter(baseFilter.and(distanceFilter)));
     }
 
 }
