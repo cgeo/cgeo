@@ -35,12 +35,13 @@
 
                 <Button
                     android:id="@+id/more_details"
-                    style="@style/button_small"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_toLeftOf="@id/offline_hint"
+                    style="@style/button_full"
+                    android:layout_height="@dimen/buttonSize_iconButton"
+                    android:layout_centerVertical="true"
+                    android:layout_margin="3dp"
                     android:insetTop="0dp"
+                    android:insetBottom="0dp"
+                    android:layout_toLeftOf="@id/offline_hint"
                     android:text="@string/popup_more" />
 
                 <Button
@@ -48,6 +49,7 @@
                     style="@style/button_icon"
                     app:icon="@drawable/ic_menu_hint"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:layout_alignBaseline="@id/more_details"
                     android:layout_marginLeft="0dp"
                     android:visibility="gone"

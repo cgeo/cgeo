@@ -61,6 +61,7 @@
         android:layout_toRightOf="@+id/stars"
         android:gravity="center_vertical"
         android:textIsSelectable="false"
+        android:maxLines="1"
         android:visibility="gone"
         android:textColor="@color/colorText"
         tools:text="additional text"
