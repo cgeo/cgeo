@@ -390,7 +390,6 @@
     <string name="caches_copy_selected">Αντιγραφή επιλεγμένων</string>
     <string name="caches_copy_all">Αντιγραφή όλων</string>
     <string name="caches_map_locus_export">Εξαγωγή στο Locus</string>
-    <string name="caches_filter">Φίλτρο (legacy)</string>
     <string name="caches_filter_menuitem">Φίλτρο</string>
     <string name="caches_filter_title">Φιλτράρισμα κατά</string>
     <string name="caches_filter_size">Μέγεθος</string>
