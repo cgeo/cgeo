@@ -584,6 +584,7 @@
     <string name="contribution_tester">testador</string>
     <string name="contribution_support">suporte</string>
     <string name="contribution_documentation">documentação</string>
+    <string name="contribution_infrastructure">infra-estrutura</string>
     <string name="contribution_projectleader">líder do projecto opensource</string>
     <string name="contribution_graphics">grafismo</string>
     <string name="debug_user_error_report_title">Reportar um problema</string>
@@ -1442,6 +1443,8 @@
     <string name="search_filter">Filtrar</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
+    <string name="search_filter_temporary_user_information_title">Nova estrutura de filtros</string>
+    <string name="search_filter_temporary_user_information">O c:geo introduziu um novo sistema de filtragem, suportando filtros flexíveis, combináveis e armazenáveis. \n\nO filtro geral pode, a partir de agora, ser alterado directamente nas listas de caches e no mapa em tempo real.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
