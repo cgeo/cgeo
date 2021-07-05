@@ -1,8 +1,7 @@
-### Advanced filtering system (experimental)
+### Advanced filtering system
 - Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
 - Available in both cache lists and map view
-- This is work in progress, stay tuned!
-- The old filter systems are still available (for the time being), but will be superseeded by the new system at some point in time.
+- New "Search by filter" function
 
 ### Map
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
