@@ -48,6 +48,6 @@
     <dimen name="textSize_detailsSecondary">14sp</dimen>
 
     <!-- button size dimensions ====================================== -->
-    <dimen name="buttonSize_iconButton">42dp</dimen>
+    <dimen name="buttonSize_iconButton">45dp</dimen>
 
 </resources>
