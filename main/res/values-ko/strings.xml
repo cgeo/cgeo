@@ -389,7 +389,6 @@
     <string name="caches_copy_selected">선택 복사</string>
     <string name="caches_copy_all">전체 복사</string>
     <string name="caches_map_locus_export">Locus로 내보내기</string>
-    <string name="caches_filter">필터 (레가시)</string>
     <string name="caches_filter_menuitem">필터</string>
     <string name="caches_filter_title">필터링 기준</string>
     <string name="caches_filter_size">크기</string>
