@@ -4613,11 +4613,6 @@ public class DataStore {
     }
 
     @NonNull
-    public static String[] getSuggestionsFinderName(final String input) {
-        return getSuggestions(dbTableLogs, "author", input);
-    }
-
-    @NonNull
     public static String[] getSuggestionsGeocode(final String input) {
         return getSuggestions(dbTableCaches, "geocode", input);
     }

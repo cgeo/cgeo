@@ -106,27 +106,6 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/search_fbu" />
-        </RelativeLayout>
-
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
-            <AutoCompleteTextView
-                android:id="@+id/finder"
-                style="@style/textinput_embedded"
-                android:hint="@string/search_fbu_prefill"
-                android:imeOptions="actionGo" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/search_finder"
-            style="@style/button_full"
-            android:text="@string/search_fbu_button" />
-        <!-- ** -->
-
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
-            <TextView
-                style="@style/separator_horizontal_headline"
                 android:text="@string/search_hbu" />
         </RelativeLayout>
 
