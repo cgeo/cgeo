@@ -11,7 +11,7 @@
 
 ### Detalls del catxé
 - Novetat: Utilitzeu la finestra emergent de traducció de l'aplicació de Google Translate
-- Novetat: Permet canviar la icona assignada a la finestra emergent de detalls de catxé mitjançant un clic llarg (només a les memòries cau emmagatzemades)
+- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
 
 ### Descarregador
 - Canvi: les descàrregues es faran completament en segon pla; es mostrarà una notificació
