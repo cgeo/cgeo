@@ -489,7 +489,7 @@
     <string name="cache_filter_stringfilter_matchcase">Coincidència</string>
     <string name="cache_filter_stringfilter_info">Amb l\'opció \"Patró\", utilitzeu comodins * i ?. El * representa zero, un o diversos caràcters, el ? representa un sol caràcter. Per exemple, el patró \"V?la-seca*\" coincidirà, per exemple, \"Vila-seca\" o \"Vila-seca a la nit\", però no \"Un dia a Vila-seca\" o \"Villa-seca\"</string>
     <string name="cache_filter_stringfilter_type_is_not_present">No està present</string>
-    <string name="cache_filter_stringfilter_type_is_present">És present</string>
+    <string name="cache_filter_stringfilter_type_is_present" comment="cache_filter_stringfilter_type_is_present&#10;&#10;Is used as part of a choice list on how to filter a text field. &quot;Is present&quot; will filter all text fields with a non-empty value inside. ">És present</string>
     <string name="cache_filter_stringfilter_type_contains">Conté</string>
     <string name="cache_filter_stringfilter_type_starts_with">Comença amb</string>
     <string name="cache_filter_stringfilter_type_ends_with">Acaba amb</string>
@@ -1236,7 +1236,6 @@
     <string name="cache_listed_on">Llistat a %s</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
-    <string name="cache_chirpwolf_start">Inicieu Chirp Wolf per llegir les dades del chirp des d\'aquesta memòria cau</string>
     <string name="cache_chirpwolf_install">Instal·leu Chirp Wolf per poder llegir les dades del chirp</string>
     <string name="cache_alc_start">Obriu Adventure Lab per començar a jugar a aquesta aventura</string>
     <string name="cache_alc_install">Instal·leu el reproductor Adventure Lab per jugar a aquesta aventura</string>
