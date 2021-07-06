@@ -1,28 +1,28 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Pokročilý systém filtrování
+- Představujeme nový systém filtrování v aplikaci c:geo, který podporuje flexibilní, kombinovatelné a ukládatelné filtry
+- K dispozici v seznamech kešek i v zobrazení mapy
+- Nová funkce "Hledat podle filtru"
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+### Mapa
+- Novinka: Při vytváření uživatelem definované kešky při zobrazení mapy ze seznamu: Nabídne uživateli uložení nové kešky do aktuálního seznamu (místo výchozího seznamu pro uživatelem definované kešky)
+- Novinka: Oddělené filtry "vlastní" a "nalezené" v rychlém nastavení mapy
+- Změna: Zobrazení názvu kešky v podrobnostech ve vyskakovacím okně
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Detaily kešky
+- Novinka: Využijte vyskakovací okno pro překlad v aplikaci Překladač Google
+- Novinka: Umožňuje změnit přiřazenou ikonu ve vyskakovacím okně s podrobnostmi o kešce pomocí dlouhého kliknutí (pouze uložené kešky)
 
 ### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Změna: Stahování nyní probíhá zcela na pozadí, zobrazí se oznámení
+- Změna: Úspěšně stažené soubory automaticky přepíší existující soubory se stejným názvem
+- Změna: Pokud mapa vyžaduje určitý motiv, který ještě není nainstalován, aplikace c:geo automaticky stáhne a nainstaluje daný motiv
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Ostatní
+- Změna: Kompletně jsem přepracovali interní technické aspekty motivu aplikace c:geo, abychom mohli využívat některé modernější komponenty poskytované systémem Android. To s sebou přináší několik vedlejších efektů, z nichž některé nejsou zamýšlené. Jakékoli chyby nebo jiné neduhy nahlaste na naší [stránce GitHub](https://www.github.com/cgeo/cgeo/issues) nebo kontaktujte podporu.
+- Novinka: Podpora denního / nočního režimu ze systému (volitelně)
+- Novinka: Stahování seznamů záložek z geocaching.com - viz "Seznamy / pocket queries" v hlavním menu
+- Novinka: Ignorování možností pro geocaching.su
+- Změna: Odstraněna již neudržovaná navigační aplikace RMAPS
 - Oprava: Extrahování bodu trasy se stejným názvem ale odlišnými souřadnicemi z osobní poznámky
 - Oprava: Chyba při extrahování osobní poznámky pro bod trasy se vzorcem
 - Oprava: Export vzorce do osobní poznámky namísto souřadnic pro vyplněný vzorec
