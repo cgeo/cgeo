@@ -89,7 +89,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         int startPage = 0;
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            startPage = extras.getInt(EXTRA_ABOUT_STARTPAGE, startPage);
+            startPage = (int) extras.getLong(EXTRA_ABOUT_STARTPAGE, startPage);
         }
 
         final Page[] pages = Page.values();
