@@ -321,6 +321,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // nothing, we lost the window
         }
 
+        locationUpdater = new CacheDetailsGeoDirHandler(this);
+
         final long pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
             savedInstanceState != null ?
                 savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
@@ -365,7 +367,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             });
         }
 
-        locationUpdater = new CacheDetailsGeoDirHandler(this);
 
         // If we have a newer Android device setup Android Beam for easy cache sharing
         AndroidBeam.enable(this, this);
