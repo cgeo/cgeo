@@ -30,7 +30,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         WATCHLIST(R.string.cache_filter_status_select_label_watchlist, "watchlist", ImageParam.emoji(EmojiUtils.SMILEY_MONOCLE)),
         PREMIUM(R.string.cache_filter_status_select_label_premium, "premium", ImageParam.emoji(EmojiUtils.SPARKLES)),
         HAS_TRACKABLE(R.string.cache_filter_status_select_label_has_trackable, "has_trackable", ImageParam.id(R.drawable.trackable_all)),
-        HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.star_on)),
+        HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.star_accent_color)),
         HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_found_offline)),
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.waypoint_puzzle), R.string.cache_filter_status_select_infotext_solved_mystery);
 
