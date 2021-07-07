@@ -30,7 +30,7 @@
     <dimen name="textSize_headingSecondary">18sp</dimen>
 
     <!-- lists -->
-    <dimen name="textSize_listsPrimary">20sp</dimen>
+    <dimen name="textSize_listsPrimary">18sp</dimen>
     <dimen name="textSize_listsSecondary">16sp</dimen>
 
     <!-- calculator labels between input buttons -->
