@@ -16,6 +16,7 @@
         android:maxLines="1"
         android:ellipsize="end"
         android:textSize="@dimen/textSize_toolbarSingle"
+        android:textColor="@color/colorTextActionBar"
         android:text="@string/menu_lists_pocket_queries" />
 
     <androidx.appcompat.widget.SwitchCompat
@@ -26,5 +27,6 @@
         android:layout_centerVertical="true"
         android:gravity="right|center_vertical"
         android:textSize="@dimen/textSize_toolbarSecondary"
+        android:textColor="@color/colorTextActionBar"
         android:text="@string/show_all" />
 </RelativeLayout>
