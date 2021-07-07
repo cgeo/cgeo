@@ -10,18 +10,11 @@
 
     <color name="just_white">#FFFFFFFF</color>
     <color name="just_black">#FF000000</color>
-    <!--
-    <color name="link">#FF00C0FF</color>
-    <color name="button_enabled">#FF000000</color>
-    <color name="button_disabled">#66000000</color>
-    -->
     <color name="archived_cache_color">#FFAC0B0B</color>
-    <!--
-    <color name="button_default">#282828</color>
-    <color name="steel">#675C68</color>
-    -->
     <color name="text_icon">#FFFFFFFF</color>
 
+    <color name="colorText_listsPrimary">@color/colorText</color>
+    <color name="colorText_listsSecondary">@color/colorTextHint</color>
     <color name="colorTextActionBar">#FFE4E4E4</color>
     <color name="colorTextHintActionBar">@color/colorTextHint</color>
     <color name="colorBackgroundActionBar">#FF303030</color>

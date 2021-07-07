@@ -24,6 +24,7 @@
         android:minHeight="?android:attr/listPreferredItemHeight"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
         android:textIsSelectable="false"
         tools:text="trackable name"/>
 </LinearLayout>

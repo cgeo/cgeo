@@ -41,6 +41,7 @@
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
         android:paddingRight="5dip"
         android:layout_toLeftOf="@id/buttons"
         tools:text="name"/>
@@ -55,6 +56,7 @@
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
         android:layout_below="@id/label"
         android:layout_alignParentLeft="true"
         android:layout_toLeftOf="@id/buttons"
