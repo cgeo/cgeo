@@ -27,6 +27,7 @@
             android:scrollHorizontally="true"
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_listsPrimary"
+            android:textColor="@color/colorText_listsPrimary"
             tools:text="Address of place\nwith multiple lines"/>
 
         <TextView
@@ -39,6 +40,7 @@
             android:scrollHorizontally="true"
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_listsSecondary"
+            android:textColor="@color/colorText_listsSecondary"
             tools:text="distance"
             android:maxLines="1" />
 

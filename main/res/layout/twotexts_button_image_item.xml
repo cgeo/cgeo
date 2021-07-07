@@ -23,6 +23,7 @@
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsPrimary"
+        android:textColor="@color/colorText_listsPrimary"
         tools:text="title" />
     <TextView
         android:id="@+id/detail"
@@ -38,6 +39,7 @@
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsSecondary"
+        android:textColor="@color/colorText_listsSecondary"
         tools:text="detail info" />
 
     <Button
