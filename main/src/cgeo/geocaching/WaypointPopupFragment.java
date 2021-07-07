@@ -82,8 +82,10 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
 
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);
 
-            //Waypoint geocode
-            details.add(R.string.cache_geocode, wpCode);
+            //Waypoint name
+            if (StringUtils.isNotBlank(waypoint.getName())) {
+                details.add(R.string.cache_name, waypoint.getName());
+            }
             waypointDistance = details.addDistance(waypoint, waypointDistance);
             final String note = waypoint.getNote();
             if (StringUtils.isNotBlank(note)) {
