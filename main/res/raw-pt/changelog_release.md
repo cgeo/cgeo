@@ -1,24 +1,24 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Sistema de filtragem avançado
+- Apresentamos um novo sistema de filtragem no c:geo, que suporta filtros flexíveis, combináveis e armazenáveis
+- Disponível nas listas de caches e visualização de mapas
+- Nova função "Pesquisar por filtro"
 
-### Map
+### Mapa
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
 - New: Separate "own" and "found" filters in map quick settings
 - Change: Additionally show cache name in poup details
 
-### Cache details
+### Detalhes da cache
 - New: Make use of google translate in-app translation popup
 - New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
 
-### Downloader
+### Gestor de Transferências
 - Change: Downloads will now completely happen in background, a notification is shown
 - Change: Files downloaded successfully will automatically overwrite existing files having the same name
 - Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
+### Outro
+- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. Isto terá efeitos colaterais, alguns dos quais não intencionais. Por favor, reporte quaisquer erros ou falhas na nossa [página do GitHub](https://www.github.com/cgeo/cgeo/issues) ou entre em contacto com o suporte.
 - New: Support day / night mode from system (optional)
 - New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
 - New: Ignore capability for geocaching.su
