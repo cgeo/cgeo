@@ -15,6 +15,8 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import org.apache.commons.lang3.StringUtils;
+
 class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter.ViewHolder> {
 
     @NonNull private final PocketQueryListActivity activity;
@@ -64,7 +66,9 @@ class PocketQueryListAdapter extends RecyclerView.Adapter<PocketQueryListAdapter
         holder.binding.download.setVisibility(pocketQuery.isDownloadable() ? View.VISIBLE : View.GONE);
         holder.binding.cachelist.setVisibility(activity.onlyDownloadable() || pocketQuery.isBookmarkList() ? View.GONE : View.VISIBLE); // Currency, we aren't able to parse bookmark lists without download
         holder.binding.label.setText(pocketQuery.getName());
-        holder.binding.info.setText(Formatter.formatPocketQueryInfo(pocketQuery));
+        final String info = Formatter.formatPocketQueryInfo(pocketQuery);
+        holder.binding.info.setVisibility(StringUtils.isNotBlank(info) ? View.VISIBLE : View.GONE);
+        holder.binding.info.setText(info);
     }
 
 }
