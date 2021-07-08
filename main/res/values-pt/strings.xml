@@ -495,7 +495,7 @@
     <string name="cache_filter_stringfilter_searchtext_hint">Texto a pesquisar</string>
     <string name="cache_filter_stringfilter_info">Com a opção \'Modelo\', utilizar caracteres * e ?. * representa zero, um ou vários caracteres, ? representa um único carácter. Por exemplo, o modelo \'Barr?iro*\' corresponderá a \'Barroiro\' ou \'Barreiro à noite\' mas não a \'Um dia no Barreiro\' ou \'Barrasco\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Não está presente</string>
-    <string name="cache_filter_stringfilter_type_is_present">Está presente</string>
+    <string name="cache_filter_stringfilter_type_is_present" comment="cache_filter_stringfilter_type_is_present&#10;&#10;Is used as part of a choice list on how to filter a text field. &quot;Is present&quot; will filter all text fields with a non-empty value inside. ">Está presente</string>
     <string name="cache_filter_stringfilter_type_contains">Contém</string>
     <string name="cache_filter_stringfilter_type_starts_with">Começa por</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
@@ -1419,7 +1419,7 @@
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
-    <string name="map_show_caches_title">Mostrar Caches:</string>
+    <string name="map_show_caches_title">Mostrar Caches:\n</string>
     <string name="map_show_waypoints_title">Mostrar pontos adicionais:</string>
     <string name="map_show_other_title">Mostrar outro:</string>
     <!-- search -->
