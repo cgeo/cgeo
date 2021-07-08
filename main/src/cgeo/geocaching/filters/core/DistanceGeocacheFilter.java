@@ -5,6 +5,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
@@ -77,31 +78,10 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
     public void addToSql(final SqlBuilder sqlBuilder) {
         final Geopoint gp = (useCurrentPosition || coordinate == null)  ?
             Sensors.getInstance().currentGeo().getCoords() : coordinate;
-        final String sql = getSqlDistanceSquare(
-            sqlBuilder.getMainTableId() + ".latitude", sqlBuilder.getMainTableId() + ".longitude", (float) gp.getLatitude(), (float) gp.getLongitude());
+        final String sql = DataStore.getSqlDistanceSquare(
+            sqlBuilder.getMainTableId() + ".latitude", sqlBuilder.getMainTableId() + ".longitude", gp);
 
         addRangeToSqlBuilder(sqlBuilder, sql, v -> v * v);
-    }
-
-
-    private static String getSqlDistanceSquare(final String lat1, final String lon1, final float lat2, final float lon2) {
-        //This is SQL! So we use a simplified distance calculation here, according to: https://www.mkompf.com/gps/distcalc.html
-        //distance = sqrt(dx * dx + dy * dy)
-        //with distance: Distance in km
-        //dx = 111.3 * cos(lat) * (lon1 - lon2)
-        //lat = (lat1 + lat2) / 2 * 0.01745
-        //dy = 111.3 * (lat1 - lat2)
-        //lat1, lat2, lon1, lon2: Latitude, Longitude in degrees (not radians!)
-
-        //Unfortunately, SQLite in our version does not know functions like COS, SQRT or PI. So we have to perform some tricks...
-        final String dxExceptLon1Lon2Square = String.valueOf(Math.pow(Math.cos(lat2 * Math.PI / 180 * 0.01745) * 111.3, 2));
-        final String dyExceptLat1Lat2Square = String.valueOf(Math.pow(111.3, 2));
-
-        final String dxSquare = "(" + dxExceptLon1Lon2Square + " * (" + lon1 + " - " + lon2 + ") * (" + lon1 + " - " + lon2 + "))";
-        final String dySquare = "(" + dyExceptLat1Lat2Square + " * (" + lat1 + " - " + lat2 + ") * (" + lat1 + " - " + lat2 + "))";
-
-        final String dist = "(" + dxSquare + " + " + dySquare + ")";
-        return dist;
     }
 
 }

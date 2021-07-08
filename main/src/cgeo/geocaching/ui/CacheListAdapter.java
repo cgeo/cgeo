@@ -656,7 +656,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     private void checkEvents() {
-        eventsOnly = true;
+        eventsOnly = list.isEmpty() ? false : true;
         for (final Geocache cache : list) {
             if (!cache.isEventCache()) {
                 eventsOnly = false;

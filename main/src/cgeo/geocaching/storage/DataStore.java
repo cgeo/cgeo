@@ -3437,6 +3437,39 @@ public class DataStore {
             ") + ABS(" + tableExp + "longitude - " + String.format((Locale) null, "%.6f", coords.getLongitude()) + "))";
     }
 
+    public static String getSqlDistanceSquare(@Nullable final String tableId, final Geopoint latlon2) {
+        final String tableExp = tableId == null ? "" : tableId + ".";
+        return getSqlDistanceSquare(tableExp + "latitude", tableExp + "longitude", latlon2);
+    }
+
+        /**
+         * Returns an SQL expression calculation the SQUARE (!) distance between two coordinates in meters.
+         * Note that given (String) values for lat1/lon1 can be either numbers or e.g. SQL column names/expressions.
+         * lat/lon2, however, must be numbers for our calculation tricks to work.... (hey, this is SQL we're talking about!)
+         */
+    public static String getSqlDistanceSquare(final String lat1, final String lon1, final Geopoint latlon2) {
+        //This is SQL after all! So we have to use a simplified distance calculation here, according to: https://www.mkompf.com/gps/distcalc.html
+        //distance = sqrt(dx * dx + dy * dy)
+        //with distance: Distance in km
+        //dx = 111.3 * cos(lat) * (lon1 - lon2)
+        //lat = (lat1 + lat2) / 2 * 0.01745
+        //dy = 111.3 * (lat1 - lat2)
+        //lat1, lat2, lon1, lon2: Latitude, Longitude in degrees (not radians!)
+
+        final double lat2 = latlon2.getLatitude();
+        final double lon2 = latlon2.getLongitude();
+
+        //Unfortunately, SQLite in our version does not know functions like COS, SQRT or PI. So we have to perform some tricks...
+        final String dxExceptLon1Lon2Square = String.valueOf(Math.pow(Math.cos(lat2 * Math.PI / 180 * 0.01745) * 111.3, 2));
+        final String dyExceptLat1Lat2Square = String.valueOf(Math.pow(111.3, 2));
+
+        final String dxSquare = "(" + dxExceptLon1Lon2Square + " * (" + lon1 + " - " + lon2 + ") * (" + lon1 + " - " + lon2 + "))";
+        final String dySquare = "(" + dyExceptLat1Lat2Square + " * (" + lat1 + " - " + lat2 + ") * (" + lat1 + " - " + lat2 + "))";
+
+        final String dist = "(" + dxSquare + " + " + dySquare + ")";
+        return dist;
+    }
+
     /** Retrieve all stored caches from DB */
     @NonNull
     public static SearchResult loadCachedInViewport(final Viewport viewport, final CacheType cacheType) {
