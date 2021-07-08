@@ -33,6 +33,6 @@ public class NameComparator extends AbstractCacheComparator {
 
     @Override
     public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
-        sql.addOrder(sql.getMainTableId() + ".name", sortDesc);
+        sql.addOrder("LOWER(" + sql.getMainTableId() + ".name)", sortDesc);
     }
 }
