@@ -61,7 +61,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private static final String STATE_ADVANCED_VIEW = "state_advanced_view";
 
     private static final GeocacheFilterType[] BASIC_FILTER_TYPES =
-        new GeocacheFilterType[]{GeocacheFilterType.TYPE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN };
+        new GeocacheFilterType[]{GeocacheFilterType.TYPE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.STATUS };
     private static final Set<GeocacheFilterType> BASIC_FILTER_TYPES_SET = new HashSet<>(Arrays.asList(BASIC_FILTER_TYPES));
 
     private CacheFilterActivityBinding binding;
@@ -353,6 +353,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             if (!BASIC_FILTER_TYPES_SET.contains(fvh.getType()) || found.contains(fvh.getType())) {
                 return false;
             }
+            if (fvh.isOf(StatusFilterViewHolder.class) && !fvh.castTo(StatusFilterViewHolder.class).canBeSimplifiedLossless()) {
+                return false;
+            }
             found.add(fvh.getType());
         }
         return true;
@@ -370,6 +373,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             final ItemHolder itemHolder = (ItemHolder) this.binding.filterList.findViewHolderForLayoutPosition(pos);
             if (itemHolder != null) {
                 itemHolder.setControlsEnabled(true);
+                if (itemHolder.getFilterViewHolder().isOf(StatusFilterViewHolder.class)) {
+                    itemHolder.getFilterViewHolder().castTo(StatusFilterViewHolder.class).setSimpleView(false);
+                }
             }
         }
         adjustFilterEmptyView();
@@ -406,12 +412,20 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         final IFilterViewHolder<?> item = this.filterListAdapter.removeItem(pos);
                         this.filterListAdapter.addItem(startPos, item);
                     }
+                    final IFilterViewHolder<?> item = this.filterListAdapter.getItem(startPos);
+                    if (item.isOf(StatusFilterViewHolder.class)) {
+                        item.castTo(StatusFilterViewHolder.class).setSimpleView(true);
+                    }
                     found = true;
                     break;
                 }
             }
             if (!found) {
-                this.filterListAdapter.addItem(startPos, FilterViewHolderCreator.createFor(type, this));
+                final IFilterViewHolder<?> item = FilterViewHolderCreator.createFor(type, this);
+                if (item.isOf(StatusFilterViewHolder.class)) {
+                    item.castTo(StatusFilterViewHolder.class).setSimpleView(true);
+                }
+                this.filterListAdapter.addItem(startPos, item);
             }
             startPos++;
         }
@@ -427,10 +441,32 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private static class ItemHolder extends RecyclerView.ViewHolder {
         private final CacheFilterListItemBinding binding;
+        private IFilterViewHolder<?> filterViewHolder;
 
         ItemHolder(final View rowView) {
             super(rowView);
             binding = CacheFilterListItemBinding.bind(rowView);
+        }
+
+        public void setFilterViewHolder(final IFilterViewHolder<?> filterViewHolder) {
+            this.filterViewHolder = filterViewHolder;
+            this.binding.filterTitle.setText(this.filterViewHolder.getType().getUserDisplayableName());
+
+            //create view
+            final View view = filterViewHolder.getView();
+
+            // insert into main view
+            final ViewGroup insertPoint = this.binding.insertPoint;
+            insertPoint.removeAllViews(); //views are reused, so make sure to cleanup
+            if (view.getParent() != null) {
+                ((ViewGroup) view.getParent()).removeAllViews();
+            }
+            insertPoint.addView(view);
+
+        }
+
+        public IFilterViewHolder<?> getFilterViewHolder() {
+            return this.filterViewHolder;
         }
 
         public void setControlsEnabled(final boolean enabled) {
@@ -453,19 +489,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             if (filterViewHolder == null) {
                 return;
             }
-            holder.binding.filterTitle.setText(filterViewHolder.getType().getUserDisplayableName());
-
-            //create view
-            final View view = filterViewHolder.getView();
-
+            holder.setFilterViewHolder(filterViewHolder);
             setTheme();
-            // insert into main view
-            final ViewGroup insertPoint = holder.binding.insertPoint;
-            insertPoint.removeAllViews(); //views are reused, so make sure to cleanup
-            if (view.getParent() != null) {
-                ((ViewGroup) view.getParent()).removeAllViews();
-            }
-            insertPoint.addView(view);
         }
 
         @NonNull
