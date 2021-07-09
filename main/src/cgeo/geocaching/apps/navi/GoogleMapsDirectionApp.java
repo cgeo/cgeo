@@ -7,7 +7,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.utils.Log;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -25,10 +25,10 @@ class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
         try {
             final GeoData geo = Sensors.getInstance().currentGeo();
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                     .parse("http://maps.google.com/maps?f=d&saddr="
                             + geo.getCoords().getLatitude() + "," + geo.getCoords().getLongitude() + "&daddr="
                             + coords.getLatitude() + "," + coords.getLongitude())));

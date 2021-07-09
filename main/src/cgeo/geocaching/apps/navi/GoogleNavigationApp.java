@@ -9,10 +9,9 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -39,9 +38,9 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
         try {
-            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
+            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri
                     .parse("google.navigation:ll=" + coords.getLatitude() + ","
                             + coords.getLongitude() + "&mode=" + mode)));
 
@@ -68,7 +67,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
         }
 
         @Override
-        public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+        public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
             final ArrayList<IWaypoint> targets = new ArrayList<>();
             targets.add(cache);
             for (final Waypoint waypoint : cache.getWaypoints()) {
@@ -77,24 +76,22 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                 }
             }
             if (targets.size() > 1) {
-                selectDriveTarget(context, targets);
+                selectDriveTarget(activity, targets);
             } else {
-                super.navigate(context, cache);
+                super.navigate(activity, cache);
             }
         }
 
         /**
          * show a selection of all parking places and the cache itself, when using the navigation for driving
          */
-        private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
-            final Context themeContext = Dialogs.newContextThemeWrapper(context);
-            final LayoutInflater inflater = LayoutInflater.from(themeContext);
-            final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
+        private void selectDriveTarget(final Activity activity, final ArrayList<IWaypoint> targets) {
+            final ListAdapter adapter = new ArrayAdapter<IWaypoint>(activity, R.layout.cacheslist_item_select, targets) {
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
 
-                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
-                    final TextView tv = (TextView) view.findViewById(R.id.text);
+                    final View view = convertView == null ? activity.getLayoutInflater().inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
+                    final TextView tv = view.findViewById(R.id.text);
 
                     final IWaypoint item = getItem(position);
                     tv.setText(item.getName());
@@ -102,7 +99,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                     final int icon = item instanceof Waypoint ? item.getWaypointType().markerId : ((Geocache) item).getType().markerId;
                     tv.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
 
-                    final TextView infoView = (TextView) view.findViewById(R.id.info);
+                    final TextView infoView = view.findViewById(R.id.info);
                     if (item instanceof Waypoint) {
                         infoView.setText(((Waypoint) item).getNote());
                     } else {
@@ -113,15 +110,15 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                 }
             };
 
-            Dialogs.newBuilder(context)
+            Dialogs.newBuilder(activity)
                 .setTitle(R.string.cache_menu_navigation_drive_select_target)
                 .setAdapter(adapter, (dialog, which) -> {
                     final IWaypoint target = targets.get(which);
                     if (target instanceof Geocache) {
-                        GoogleNavigationDrivingApp.super.navigate(context, (Geocache) target);
+                        GoogleNavigationDrivingApp.super.navigate(activity, (Geocache) target);
                     }
                     if (target instanceof Waypoint) {
-                        navigate(context, (Waypoint) target);
+                        navigate(activity, (Waypoint) target);
                     }
                 }).show();
         }

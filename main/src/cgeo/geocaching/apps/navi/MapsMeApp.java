@@ -6,8 +6,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
 import android.app.Activity;
-import android.content.Context;
-import android.content.ContextWrapper;
 
 import androidx.annotation.NonNull;
 
@@ -24,26 +22,21 @@ class MapsMeApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
-        navigate(context, coords, getString(R.string.unknown));
+    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
+        navigate(activity, coords, getString(R.string.unknown));
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
         final List<Waypoint> waypoints = cache.getWaypoints();
         if (waypoints.isEmpty()) {
-            navigate(context, cache.getCoords(), cache.getName());
+            navigate(activity, cache.getCoords(), cache.getName());
         } else {
-            navigateWithWaypoints(context, cache);
+            navigateWithWaypoints(activity, cache);
         }
     }
 
-    private static void navigateWithWaypoints(final Context context, final Geocache cache) {
-        final Activity activity = getActivity(context);
-        if (activity == null) {
-            return;
-        }
-
+    private static void navigateWithWaypoints(final Activity activity, final Geocache cache) {
         final ArrayList<MWMPoint> points = new ArrayList<>();
         points.add(new MWMPoint(cache.getCoords().getLatitude(), cache.getCoords().getLongitude(), cache.getName()));
         for (final Waypoint waypoint : cache.getWaypoints()) {
@@ -56,34 +49,19 @@ class MapsMeApp extends AbstractPointNavigationApp {
         MapsWithMeApi.showPointsOnMap(activity, cache.getName(), pointsArray);
     }
 
-    private static void navigate(final Context context, final Geopoint coords, final String label) {
-        final Activity activity = getActivity(context);
-        if (activity == null) {
-            return;
-        }
-
+    private static void navigate(final Activity activity, final Geopoint coords, final String label) {
         MapsWithMeApi.showPointOnMap(activity, coords.getLatitude(), coords.getLongitude(), label);
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
-        navigate(context, waypoint.getCoords(), waypoint.getName());
+    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
+        navigate(activity, waypoint.getCoords(), waypoint.getName());
     }
 
     @Override
     public boolean isInstalled() {
         // the library can handle the app not being installed
         return true;
-    }
-
-    private static Activity getActivity(final Context context) {
-        // TODO Mapsme API will do a hard cast. We could locally fix this by re-declaring all API methods
-        if (context instanceof Activity) {
-            return (Activity) context;
-        } else if (context instanceof ContextWrapper) {
-            return getActivity(((ContextWrapper) context).getBaseContext());
-        }
-        return null;
     }
 
 }

@@ -5,7 +5,7 @@ import cgeo.geocaching.apps.AbstractLocusApp;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
-import android.content.Context;
+import android.app.Activity;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -36,12 +36,12 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
      *
      */
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
-        showInLocus(Collections.singletonList(waypoint), true, false, context);
+    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
+        showInLocus(Collections.singletonList(waypoint), true, false, activity);
     }
 
     @Override
-    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
-        showInLocus(Collections.singletonList(cache), true, false, context);
+    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
+        showInLocus(Collections.singletonList(cache), true, false, activity);
     }
 }
