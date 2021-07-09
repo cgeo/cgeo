@@ -23,6 +23,8 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     @SuppressWarnings("rawtypes")
     private final Map<Long, TabbedViewPagerFragment> fragmentMap = new LinkedHashMap<>();
 
+    private long initialPageId;
+    private boolean initialPageShown;
     private long currentPageId;
     private long[] orderedPages;
     private ViewPager2 viewPager = null;
@@ -40,6 +42,8 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
 
     protected void createViewPager(final long initialPageId, final long[] orderedPages, final Action1<Long> onPageChangeListener, final boolean isRefreshable) {
         this.isRefreshable = isRefreshable;
+        this.initialPageId = initialPageId;
+        this.initialPageShown = false;
         this.currentPageId = initialPageId;
         setOrderedPages(orderedPages);
         this.onPageChangeListener = onPageChangeListener;
@@ -106,7 +110,12 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         }
         notifyAdapterDataSetChanged();
         if (viewPager != null) {
-            viewPager.setCurrentItem(pageIdToPosition(currentPageId));
+            // if page requested originally has not been shown yet: try again
+            final int i = pageIdToPositionWithErrorcode(initialPageShown ? currentPageId : initialPageId);
+            if (i != -1) {
+                initialPageShown = true;
+            }
+            viewPager.setCurrentItem(i != -1 ? i : 0);
         }
     }
 
@@ -115,15 +124,21 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     private int pageIdToPosition(final long page) {
+        final int i = pageIdToPositionWithErrorcode(page);
+        return i == -1 ? 0 : i;
+    }
+
+    // returns -1 if page requested not in orderedPages
+    private int pageIdToPositionWithErrorcode(final long page) {
         if (orderedPages == null) {
-            return 0;
+            return -1;
         }
         for (int i = 0; i < orderedPages.length; i++) {
             if (orderedPages[i] == page) {
                 return i;
             }
         }
-        return 0;
+        return -1;
     }
 
     protected abstract String getTitle(long pageId);
