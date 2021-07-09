@@ -16,6 +16,7 @@ import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -33,6 +34,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
+import java.util.EnumSet;
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
@@ -193,6 +195,16 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByCente
     @Override
     public SearchResult searchByKeyword(@NonNull final String name) {
         return new SearchResult(OkapiClient.getCachesNamed(Sensors.getInstance().currentGeo().getCoords(), name, this));
+    }
+
+    @NonNull
+    @Override
+    public EnumSet<GeocacheFilterType> getFilterCapabilities() {
+        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
+            GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
+            GeocacheFilterType.TYPE, GeocacheFilterType.SIZE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN,
+            GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.LOG_ENTRY,
+            GeocacheFilterType.LOGS_COUNT);
     }
 
     @Override

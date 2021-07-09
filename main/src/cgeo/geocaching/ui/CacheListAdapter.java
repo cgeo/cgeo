@@ -123,6 +123,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
         buildFastScrollIndex();
+
+        DistanceComparator.updateGlobalGps(Sensors.getInstance().currentGeo().getCoords());
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {

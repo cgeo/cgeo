@@ -33,6 +33,7 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.list.ListNameMemento;
@@ -68,6 +69,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.sorting.SortActionProvider;
+import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.DataStore;
@@ -186,6 +188,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     private IFilter currentFilter = null;
     private GeocacheFilter currentCacheFilter = null;
+    private IGeocacheFilter currentAddFilterCriteria = null;
     private CacheComparator currentSort = null;
     private boolean currentInverseSort = false;
 
@@ -652,7 +655,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final LastPositionHelper lastPosition = new LastPositionHelper(this);
 
         currentCacheFilter = GeocacheFilter.loadFromSettings();
-        adapter.setFilter(currentFilter, currentCacheFilter);
+        applyAdapterFilter();
         prepareFilterBar();
 
         // resume location access
@@ -1207,10 +1210,16 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         currentCacheFilter = cacheFilter;
 
-        adapter.setFilter(currentFilter, currentCacheFilter);
+        applyAdapterFilter();
         prepareFilterBar();
         updateTitle();
         invalidateOptionsMenuCompatible();
+    }
+
+    private void applyAdapterFilter() {
+        final GeocacheFilter filter = currentAddFilterCriteria == null ?
+            currentCacheFilter : currentCacheFilter.and(currentAddFilterCriteria);
+        adapter.setFilter(currentFilter, filter);
     }
 
     @Override
@@ -1228,7 +1237,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         adapter = new CacheListAdapter(this, cacheList, type);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
-        adapter.setFilter(currentFilter, currentCacheFilter);
+        applyAdapterFilter();
         adapter.setComparator(this.currentSort);
 
         if (listFooter == null) {
@@ -1960,7 +1969,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 title = res.getString(R.string.caches_history);
                 listId = PseudoList.HISTORY_LIST.id;
                 markerId = EmojiUtils.NO_EMOJI;
-                loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter, adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
+                loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter, VisitComparator.singleton, currentInverseSort, offlineListLoadLimit);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
@@ -2038,6 +2047,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (loader != null && extras != null && extras.getSerializable(BUNDLE_ACTION_KEY) != null) {
             final AfterLoadAction action = (AfterLoadAction) extras.getSerializable(BUNDLE_ACTION_KEY);
             loader.setAfterLoadAction(action);
+        }
+        if (loader != null) {
+            currentAddFilterCriteria = loader.getAdditionalFilterParameter();
         }
         updateTitle();
         showProgress(true);
