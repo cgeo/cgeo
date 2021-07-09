@@ -78,7 +78,10 @@ public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     @Override
     protected String getUserDisplayableConfig() {
-        return super.getUserDisplayableConfig() + (percentage ? "%:" : "");
+        if (percentage) {
+            return (getMinRangeValue() == null ? "*" : (Math.round(getMinRangeValue() * 100)) + "%") + "-" + (getMaxRangeValue() == null ? "*" : (Math.round(getMaxRangeValue() * 100)) + "%");
+        }
+        return super.getUserDisplayableConfig();
     }
 
 
