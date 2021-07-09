@@ -139,7 +139,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             final LinearLayout layout = view.findViewById(R.id.details_list);
             details = new CacheDetailsCreator(getActivity(), layout);
 
-            addCacheDetails();
+            addCacheDetails(false);
 
             // offline use
             CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());

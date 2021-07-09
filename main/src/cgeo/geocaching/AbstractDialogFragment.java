@@ -119,7 +119,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         super.onPause();
     }
 
-    protected final void addCacheDetails() {
+    protected final void addCacheDetails(final boolean showGeocode) {
         assert cache != null;
 
         details.add(R.string.cache_name, TextUtils.coloredCacheText(cache, cache.getName()));
@@ -129,7 +129,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         final String cacheSize = cache.showSize() ? " (" + cache.getSize().getL10n() + ")" : "";
         details.add(R.string.cache_type, cacheType + cacheSize);
 
-        details.add(R.string.cache_geocode, cache.getShortGeocode());
+        if (showGeocode) {
+            details.add(R.string.cache_geocode, cache.getShortGeocode());
+        }
         details.addCacheState(cache);
 
         cacheDistance = details.addDistance(cache, cacheDistance);
