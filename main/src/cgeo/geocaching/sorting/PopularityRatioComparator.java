@@ -38,6 +38,6 @@ class PopularityRatioComparator extends AbstractCacheComparator {
     @Override
     public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
         //also sort by favourite count, should resemble ratio close enough
-        sql.addOrder(sql.getMainTableId() + ".favourite_cnt", sortDesc);
+        sql.addOrder(sql.getMainTableId() + ".favourite_cnt", !sortDesc);
     }
 }

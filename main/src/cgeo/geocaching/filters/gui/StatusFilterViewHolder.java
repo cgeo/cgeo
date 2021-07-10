@@ -55,8 +55,6 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE);
         statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG);
         statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY);
-        ButtonToggleGroup.alignWidths(statusOwn, statusFound, statusStored, statusFavorite, statusWatchlist,
-            statusPremium, statusHasTrackable, statusHasOwnVote, statusHasOfflineLog, statusSolvedMystery);
 
         return ll;
     }
@@ -72,7 +70,6 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
             binding.itemInfo.setOnClickListener(v -> SimpleDialog.of(getActivity()).setMessage(statusType.infoTextId).show());
         }
 
-        binding.itemTogglebuttongroup.setUseRelativeWidth(true);
         binding.itemTogglebuttongroup.addButtons(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_yes, R.string.cache_filter_status_select_no);
         final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ll.addView(view, llp);

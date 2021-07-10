@@ -1888,7 +1888,7 @@ public class Settings {
     }
 
     public static int getListInitialLoadLimit() {
-        return getInt(R.string.pref_list_initial_load_limit, 1000);
+        return getInt(R.string.pref_list_initial_load_limit, 0);
     }
 
 }

@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
 
 import android.app.Activity;
@@ -20,15 +21,19 @@ public class KeywordGeocacheListLoader extends AbstractSearchLoader {
     }
 
     @Override
+    public IGeocacheFilter getAdditionalFilterParameter() {
+        final NameGeocacheFilter nameFilter = (NameGeocacheFilter) GeocacheFilterType.NAME.create();
+        nameFilter.getStringFilter().setTextValue(keyword);
+        return nameFilter;
+    }
+
+    @Override
     public SearchResult runSearch() {
         //use filter search instead of dedicated keyword search
         final GeocacheFilter baseFilter = GeocacheFilter.loadFromSettings();
 
-        final NameGeocacheFilter nameFilter = (NameGeocacheFilter) GeocacheFilterType.NAME.create();
-        nameFilter.getStringFilter().setTextValue(keyword);
-
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(),
-            connector -> connector.searchByFilter(baseFilter.and(nameFilter)));
+        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(GeocacheFilterType.NAME),
+            connector -> connector.searchByFilter(baseFilter.and(getAdditionalFilterParameter())));
     }
 
 }

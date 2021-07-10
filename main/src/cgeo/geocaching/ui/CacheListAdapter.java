@@ -123,6 +123,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
         buildFastScrollIndex();
+
+        DistanceComparator.updateGlobalGps(Sensors.getInstance().currentGeo().getCoords());
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -656,7 +658,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     private void checkEvents() {
-        eventsOnly = true;
+        eventsOnly = list.isEmpty() ? false : true;
         for (final Geocache cache : list) {
             if (!cache.isEventCache()) {
                 eventsOnly = false;

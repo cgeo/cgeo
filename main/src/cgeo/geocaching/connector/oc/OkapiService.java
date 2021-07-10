@@ -13,6 +13,7 @@ enum OkapiService {
     SERVICE_ADD_LOG_IMAGE("/okapi/services/logs/images/add", OAuthLevel.Level3),
     SERVICE_USER("/okapi/services/users/user", OAuthLevel.Level1),
     SERVICE_USER_BY_USERNAME("/okapi/services/users/by_username", OAuthLevel.Level1),
+    SERVICE_USER_BY_USERID("/okapi/services/users/by_internal_id", OAuthLevel.Level1),
     SERVICE_UPLOAD_PERSONAL_NOTE("/okapi/services/caches/save_personal_notes", OAuthLevel.Level3),
     SERVICE_RESOLVE_URL("/okapi/services/caches/search/by_urls", OAuthLevel.Level1),
     SERVICE_API_INSTALLATION("/okapi/services/apisrv/installation", OAuthLevel.Level0),

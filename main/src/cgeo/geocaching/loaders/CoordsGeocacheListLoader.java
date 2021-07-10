@@ -5,6 +5,7 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 
 import android.app.Activity;
@@ -20,15 +21,19 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
     }
 
     @Override
+    public IGeocacheFilter getAdditionalFilterParameter() {
+        final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) GeocacheFilterType.DISTANCE.create();
+        distanceFilter.setCoordinate(coords);
+        return distanceFilter;
+    }
+
+    @Override
     public SearchResult runSearch() {
         //use filter search instead of dedicated distance search
         final GeocacheFilter baseFilter = GeocacheFilter.loadFromSettings();
 
-        final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) GeocacheFilterType.DISTANCE.create();
-        distanceFilter.setCoordinate(coords);
-
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(),
-            connector -> connector.searchByFilter(baseFilter.and(distanceFilter)));
+        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(GeocacheFilterType.DISTANCE),
+            connector -> connector.searchByFilter(baseFilter.and(getAdditionalFilterParameter())));
     }
 
 }

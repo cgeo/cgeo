@@ -61,7 +61,8 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
-        sql.addOrder(DataStore.getCoordDiffExpression(coords, sql.getMainTableId()), sortDesc);
+        //sql.addOrder(DataStore.getCoordDiffExpression(coords, sql.getMainTableId()), sortDesc);
+        sql.addOrder(DataStore.getSqlDistanceSquare(sql.getMainTableId(), coords), sortDesc);
     }
 
 }

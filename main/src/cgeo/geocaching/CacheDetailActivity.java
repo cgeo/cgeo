@@ -333,7 +333,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 Settings.setLastDetailsPage((int) (long) currentPageId);
             }
             requireGeodata = currentPageId == Page.DETAILS.id;
-            startOrStopGeoDataListener(false);
+            // resume location access
+            PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheDetailActivity) {
+
+                @Override
+                public void executeAfter() {
+                    startOrStopGeoDataListener(false);
+                }
+            });
 
             // dispose contextual actions on page change
             if (currentActionMode != null) {

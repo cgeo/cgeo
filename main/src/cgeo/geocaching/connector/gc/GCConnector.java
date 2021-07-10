@@ -27,6 +27,7 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -51,6 +52,7 @@ import androidx.annotation.Nullable;
 
 import java.io.File;
 import java.util.Arrays;
+import java.util.EnumSet;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -277,6 +279,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
         return GCMap.searchByViewport(viewport);
     }
+
+    @NonNull
+    @Override
+    public EnumSet<GeocacheFilterType> getFilterCapabilities() {
+        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
+            GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
+            GeocacheFilterType.TYPE, GeocacheFilterType.SIZE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN,
+            GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
+    }
+
 
     @Override
     @NonNull
