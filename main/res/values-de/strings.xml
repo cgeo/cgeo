@@ -507,6 +507,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Elemente hinzufügen</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Prozentual</string>
+    <string name="cache_filter_distance_coordinates">Koordinaten</string>
     <string name="cache_filter_distance_use_current_position">Eigene Position verwenden</string>
     <string name="cache_filter_status_select_all">Alle</string>
     <string name="cache_filter_status_select_yes">Ja</string>
@@ -528,8 +529,8 @@
     <string name="cache_filter_status_exclude_active">Aktive ausschließen</string>
     <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
     <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
-    <string name="cache_filter_log_entry_foundby">Gefunden von:</string>
-    <string name="cache_filter_log_entry_logtext">Log-Text:</string>
+    <string name="cache_filter_log_entry_foundby">Gefunden von</string>
+    <string name="cache_filter_log_entry_logtext">Logtext</string>
     <string name="cache_filter_stored_since_notstored">Nicht gespeichert</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 Stunden</string>
