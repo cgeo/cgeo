@@ -522,8 +522,6 @@
     <string name="cache_filter_status_exclude_active">Escludi Attivo</string>
     <string name="cache_filter_status_exclude_disabled">Escludi Disabilitato</string>
     <string name="cache_filter_status_exclude_archived">Escludi Archiviato</string>
-    <string name="cache_filter_log_entry_foundby">Trovato da:</string>
-    <string name="cache_filter_log_entry_logtext">Testo del Log:</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
