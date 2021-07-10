@@ -489,7 +489,7 @@
     <string name="cache_filter_stringfilter_matchcase">Coincidència</string>
     <string name="cache_filter_stringfilter_info">Amb l\'opció \"Patró\", utilitzeu comodins * i ?. El * representa zero, un o diversos caràcters, el ? representa un sol caràcter. Per exemple, el patró \"V?la-seca*\" coincidirà, per exemple, \"Vila-seca\" o \"Vila-seca a la nit\", però no \"Un dia a Vila-seca\" o \"Villa-seca\"</string>
     <string name="cache_filter_stringfilter_type_is_not_present">No està present</string>
-    <string name="cache_filter_stringfilter_type_is_present">És present</string>
+    <string name="cache_filter_stringfilter_type_is_present" comment="cache_filter_stringfilter_type_is_present&#10;&#10;Is used as part of a choice list on how to filter a text field. &quot;Is present&quot; will filter all text fields with a non-empty value inside. ">És present</string>
     <string name="cache_filter_stringfilter_type_contains">Conté</string>
     <string name="cache_filter_stringfilter_type_starts_with">Comença amb</string>
     <string name="cache_filter_stringfilter_type_ends_with">Acaba amb</string>

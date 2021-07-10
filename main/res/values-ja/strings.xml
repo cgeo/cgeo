@@ -491,7 +491,7 @@
     <string name="cache_filter_stringfilter_searchtext_hint">検索テキスト</string>
     <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
     <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
-    <string name="cache_filter_stringfilter_type_is_present">あり</string>
+    <string name="cache_filter_stringfilter_type_is_present" comment="cache_filter_stringfilter_type_is_present&#10;&#10;Is used as part of a choice list on how to filter a text field. &quot;Is present&quot; will filter all text fields with a non-empty value inside. ">あり</string>
     <string name="cache_filter_stringfilter_type_contains">以下を含む</string>
     <string name="cache_filter_stringfilter_type_starts_with">以下で始まる</string>
     <string name="cache_filter_stringfilter_type_ends_with">以下で終わる</string>
