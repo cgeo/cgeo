@@ -3,13 +3,15 @@ package cgeo.geocaching.filters.gui;
 import cgeo.geocaching.R;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.ui.ButtonToggleGroup;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 public class LogEntryFilterViewHolder extends BaseFilterViewHolder<LogEntryGeocacheFilter> {
 
@@ -31,29 +33,17 @@ public class LogEntryFilterViewHolder extends BaseFilterViewHolder<LogEntryGeoca
         llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
         ll.addView(inverseFoundBy, llp);
 
-        final TextView label1 = new TextView(getActivity(), null, 0, R.style.text_label);
-        label1.setText(R.string.cache_filter_log_entry_foundby);
-
-        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(0));
-        ll.addView(label1, llp);
-
-        foundByText = new EditText(getActivity(), null, 0, R.style.edittext_full);
-        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final Pair<View, EditText> foundByField = ViewUtils.createTextField(getActivity(), null, TextParam.id(R.string.cache_filter_log_entry_foundby), null, -1, 1, 1);
+        foundByText = foundByField.second;
+        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(0), 0, dpToPixel(5));
-        ll.addView(foundByText, llp);
+        ll.addView(foundByField.first, llp);
 
-        final TextView label2 = new TextView(getActivity(), null, 0, R.style.text_label);
-        label2.setText(R.string.cache_filter_log_entry_logtext);
-
-        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(5), 0, 0);
-        ll.addView(label2, llp);
-
-        logText = new EditText(getActivity(), null, 0, R.style.edittext_full);
-        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final Pair<View, EditText> logTextField = ViewUtils.createTextField(getActivity(), null, TextParam.id(R.string.cache_filter_log_entry_logtext), null, -1, 1, 1);
+        logText = logTextField.second;
+        llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(0), 0, dpToPixel(20));
-        ll.addView(logText, llp);
+        ll.addView(logTextField.first, llp);
 
         return ll;
     }

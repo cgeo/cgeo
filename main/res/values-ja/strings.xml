@@ -526,8 +526,12 @@
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名:</string>
     <string name="cache_filter_log_entry_logtext">ログの本文:</string>
+    <string name="cache_filter_stored_since_notstored">未保存</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0時間前</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
     <string-array name="cache_filter_stored_since_stored_values_label">
-        <item>8 hours</item>
+        <item>8時間前</item>
         <item>24時間前</item>
         <item>7日前</item>
         <item>30日前</item>
@@ -571,9 +575,10 @@
     <string name="about_contributors_other">そのほかの貢献者</string>
     <string name="about_components">コンポーネント</string>
     <string name="contribution_code">コー​​ド</string>
-    <string name="contribution_tester">テスター</string>
+    <string name="contribution_tester">テスト</string>
     <string name="contribution_support">サポート</string>
     <string name="contribution_documentation">ドキュメント</string>
+    <string name="contribution_infrastructure">インフラ</string>
     <string name="contribution_projectleader">オープンソース プロジェクト リーダー</string>
     <string name="contribution_graphics">グラフィックス</string>
     <string name="debug_user_error_report_title">問題を報告</string>
@@ -1420,6 +1425,8 @@
     <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
+    <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
+    <string name="search_filter_temporary_user_information">フィルタ機能を新しくしました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>

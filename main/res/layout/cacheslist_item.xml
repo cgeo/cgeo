@@ -102,8 +102,8 @@
             android:lines="1"
             android:scrollHorizontally="true"
             android:textSize="@dimen/textSize_listsSecondary"
-            android:textColor="@color/colorText_listsSecondary"
-            android:maxLines="1" />
+            android:textColor="@color/colorText_listsPrimary"
+            android:maxLines="1" /><!-- explicitly use default text color here -->
 
         <view
             android:id="@+id/direction"
@@ -156,10 +156,10 @@
             android:text=""
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_listsSecondary"
-            android:textColor="@color/colorText_listsSecondary"
+            android:textColor="@color/colorText_listsPrimary"
             android:textStyle="bold"
             tools:text="12"
-            android:maxLines="1" />
+            android:maxLines="1" /><!-- explicitly use default text color here -->
 
         <TextView
             android:id="@+id/favorite"
@@ -176,9 +176,9 @@
             android:scrollHorizontally="true"
             android:textIsSelectable="false"
             android:textSize="@dimen/textSize_listsSecondary"
-            android:textColor="@color/colorText_listsSecondary"
+            android:textColor="@color/colorText_listsPrimary"
             android:textStyle="bold"
-            tools:text="345" />
+            tools:text="345" /><!-- explicitly use default text color here -->
     </RelativeLayout>
 
 </LinearLayout>

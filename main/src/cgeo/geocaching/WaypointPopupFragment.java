@@ -109,7 +109,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
             });
 
             details = new CacheDetailsCreator(getActivity(), binding.detailsList);
-            addCacheDetails();
+            addCacheDetails(true);
 
             final View view = getView();
             assert view != null;

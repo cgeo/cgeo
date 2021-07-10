@@ -11,6 +11,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -38,8 +39,9 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         useCurrentPosition = ViewUtils.addCheckboxItem(getActivity(), ll, TextParam.id(R.string.cache_filter_distance_use_current_position), R.drawable.ic_menu_mylocation, null);
         useCurrentPosition.setChecked(true);
 
-        coordinate = new EditText(getActivity());
-        ll.addView(coordinate);
+        final Pair<View, EditText> coordField = ViewUtils.createTextField(getActivity(), null, TextParam.id(R.string.cache_filter_distance_coordinates), null, -1, 1, 1);
+        coordinate = coordField.second;
+        ll.addView(coordField.first);
 
         slider = new ContinuousRangeSlider(getActivity());
         slider.setScale(-0.2f, maxDistance + 0.2f, f -> {

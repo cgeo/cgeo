@@ -30,12 +30,12 @@ public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     @Override
     public Float getValue(final Geocache cache) {
-        if (!percentage) {
+        if (!percentage || cache.getFavoritePoints() == 0) {
             return (float) cache.getFavoritePoints();
         }
         final int rawFindsCount = cache.getFindsCount();
 
-        return rawFindsCount == 0 ? (float) cache.getFavoritePoints() : ((float) cache.getFavoritePoints()) / rawFindsCount;
+        return rawFindsCount == 0 ? null : ((float) cache.getFavoritePoints()) / rawFindsCount;
     }
 
     @Override
