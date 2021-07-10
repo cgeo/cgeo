@@ -528,8 +528,6 @@
     <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
-    <string name="cache_filter_log_entry_foundby">Gevonden door:</string>
-    <string name="cache_filter_log_entry_logtext">Log tekst:</string>
     <string name="cache_filter_stored_since_notstored">Niet opgeslagen</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 uur</string>
