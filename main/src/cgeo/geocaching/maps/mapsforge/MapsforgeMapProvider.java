@@ -332,7 +332,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
         if (fis != null) {
             try {
-                return new MapFile((FileInputStream) fis, 0, MapProviderFactory.getLanguage(Settings.getMapLanguage()));
+                return new MapFile((FileInputStream) fis, 0, Settings.getMapLanguage());
             } catch (MapFileException mfe) {
                 Log.e("Problem opening map file '" + mapFileCtx + "'", mfe);
             }

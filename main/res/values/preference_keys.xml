@@ -88,7 +88,7 @@
     <string translatable="false" name="pref_choose_list">choose_list</string>
     <string translatable="false" name="pref_list_initial_load_limit">list_initial_load_limit</string>
     <string translatable="false" name="pref_mapsource">mapsource</string>
-    <string translatable="false" name="pref_maplanguage">maplanguage</string>
+    <string translatable="false" name="pref_mapLanguage">mapLanguage</string>
     <string translatable="false" name="pref_mapRotation">mapRotation</string>
     <string translatable="false" name="pref_showwaypointsthreshold">waypointsthreshold</string>
     <string translatable="false" name="pref_zoomincludingwaypoints">zoomincludingwaypoints</string>
