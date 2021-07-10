@@ -524,8 +524,6 @@
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
-    <string name="cache_filter_log_entry_foundby">発見したユーザー名:</string>
-    <string name="cache_filter_log_entry_logtext">ログの本文:</string>
     <string name="cache_filter_stored_since_notstored">未保存</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0時間前</string>
