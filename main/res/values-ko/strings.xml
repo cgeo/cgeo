@@ -526,8 +526,6 @@
     <string name="cache_filter_status_exclude_active">활성캐시 제외</string>
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
-    <string name="cache_filter_log_entry_foundby">찾은 사용자:</string>
-    <string name="cache_filter_log_entry_logtext">로그 내용:</string>
     <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0시간</string>
