@@ -3,6 +3,8 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CheckboxItemBinding;
+import cgeo.geocaching.databinding.DialogEdittextBinding;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -12,6 +14,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.Gravity;
@@ -20,8 +23,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
@@ -36,6 +41,7 @@ import androidx.annotation.StyleRes;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class ViewUtils {
@@ -198,6 +204,36 @@ public class ViewUtils {
         final Button button = (Button) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.button_view, root, false);
         text.applyTo(button);
         return button;
+    }
+
+    public static Pair<View, EditText> createTextField(final Context context, final String currentValue, final TextParam label, @Nullable final TextParam suffix, final int inputType, final int minLines, final int maxLines) {
+        final DialogEdittextBinding binding = DialogEdittextBinding.inflate(LayoutInflater.from(context));
+        if (StringUtils.isNotBlank(currentValue)) {
+            binding.input.setText(currentValue);
+        }
+        if (label != null) {
+            binding.inputFrame.setHint(label.getText(context));
+        }
+        if (suffix != null) {
+            binding.inputFrame.setSuffixText(suffix.getText(context));
+        }
+        if (maxLines > 1) {
+            binding.input.setSingleLine(false);
+            binding.input.setLines(minLines);
+            binding.input.setMaxLines(maxLines);
+            binding.input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
+            binding.input.setVerticalScrollBarEnabled(true);
+            binding.input.setMovementMethod(ScrollingMovementMethod.getInstance());
+            binding.input.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
+            binding.input.invalidate();
+            Dialogs.moveCursorToEnd(binding.input);
+        } else {
+            binding.input.setSingleLine();
+        }
+        if (inputType >= 0) {
+            binding.input.setInputType(inputType);
+        }
+        return new Pair<>(binding.getRoot(), binding.input);
     }
 
     public static ImmutablePair<View, CheckBox> createCheckboxItem(final Activity activity, @Nullable final ViewGroup context, final TextParam text, final ImageParam icon, final TextParam infoText) {

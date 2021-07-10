@@ -2,12 +2,12 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.BottomsheetDialogWithActionbarBinding;
-import cgeo.geocaching.databinding.DialogEdittextBinding;
 import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -19,11 +19,10 @@ import android.app.ProgressDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.text.InputType;
-import android.text.method.ScrollingMovementMethod;
+import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
 
@@ -299,33 +298,11 @@ public final class Dialogs {
      * @param callback      method to call on positive confirmation, gets current text as parameter
      */
     public static void input(final Activity activity, final String title, final String currentValue, final String label, final int inputType, final int minLines, final int maxLines, final Consumer<String> callback) {
-        final DialogEdittextBinding binding = DialogEdittextBinding.inflate(activity.getLayoutInflater());
-        if (StringUtils.isNotBlank(currentValue)) {
-            binding.input.setText(currentValue);
-        }
-        if (StringUtils.isNotBlank(label)) {
-            binding.inputFrame.setHint(label);
-        }
-        if (maxLines > 1) {
-            binding.input.setSingleLine(false);
-            binding.input.setLines(minLines);
-            binding.input.setMaxLines(maxLines);
-            binding.input.setImeOptions(EditorInfo.IME_FLAG_NO_ENTER_ACTION);
-            binding.input.setVerticalScrollBarEnabled(true);
-            binding.input.setMovementMethod(ScrollingMovementMethod.getInstance());
-            binding.input.setScrollBarStyle(View.SCROLLBARS_INSIDE_INSET);
-            binding.input.invalidate();
-            moveCursorToEnd(binding.input);
-        } else {
-            binding.input.setSingleLine();
-        }
-        if (inputType >= 0) {
-            binding.input.setInputType(inputType);
-        }
+        final Pair<View, EditText> textField = ViewUtils.createTextField(activity, currentValue, TextParam.text(label), null, inputType, minLines, maxLines);
         newBuilder(activity)
-            .setView(binding.getRoot())
+            .setView(textField.first)
             .setTitle(title)
-            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(binding.input.getText().toString().trim()))
+            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(textField.second.getText().toString().trim()))
             .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
             .show();
     }
