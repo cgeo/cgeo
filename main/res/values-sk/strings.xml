@@ -522,8 +522,6 @@
     <string name="cache_filter_status_exclude_active">Okrem aktívnych</string>
     <string name="cache_filter_status_exclude_disabled">Okrem deaktivovaných</string>
     <string name="cache_filter_status_exclude_archived">Okrem archivovaných</string>
-    <string name="cache_filter_log_entry_foundby">Nájdené kým:</string>
-    <string name="cache_filter_log_entry_logtext">Text logu:</string>
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
