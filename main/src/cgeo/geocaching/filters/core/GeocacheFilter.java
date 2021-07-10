@@ -233,11 +233,17 @@ public class GeocacheFilter {
             return this;
         }
 
+        if (this.tree == null && filters.length == 1) {
+            return new GeocacheFilter(null, openInAdvancedMode, includeInconclusive, filters[0]);
+        }
+
         final AndGeocacheFilter andFilter = new AndGeocacheFilter();
         for (IGeocacheFilter f : filters) {
             andFilter.addChild(f);
         }
-        andFilter.addChild(this.tree);
+        if (this.tree != null) {
+            andFilter.addChild(this.tree);
+        }
         return new GeocacheFilter(null, openInAdvancedMode, includeInconclusive, andFilter);
     }
 

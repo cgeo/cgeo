@@ -168,6 +168,7 @@ final class OkapiClient {
     private static final String USER_UUID = "uuid";
     private static final String USER_USERNAME = "username";
     private static final String USER_CACHES_FOUND = "caches_found";
+    private static final String USER_INTERNAL_ID = "internal_id";
     private static final String USER_INFO_FIELDS = "username|caches_found";
 
     private static final String IMAGE_CAPTION = "caption";
@@ -325,9 +326,9 @@ final class OkapiClient {
                 break;
             case OWNER:
                 final String uuid = getUserUUID(connector, ((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
-                if (uuid != null) {
-                    valueMap.put("owner_uuid", uuid);
-                }
+                // If uuid ==null then user is not known on oc platform.
+                // In that case, set a nonexisting uuid so the search will return no result
+                valueMap.put("owner_uuid", uuid == null ? "unknown-user" : uuid);
                 break;
             case FAVORITES:
                 final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
@@ -372,10 +373,14 @@ final class OkapiClient {
             case LOG_ENTRY:
                 final LogEntryGeocacheFilter logEntryFilter = (LogEntryGeocacheFilter) basicFilter;
                 if (StringUtils.isNotBlank(logEntryFilter.getFoundByUser())) {
+                    String uuid2 = getUserUUID(connector, logEntryFilter.getFoundByUser());
+                    if (uuid2 == null) {
+                        uuid2 = "unknown-user"; //set a nonexisting uuid so the search will return nothing
+                    }
                     if (logEntryFilter.isInverse()) {
-                        valueMap.put("not_found_by", logEntryFilter.getFoundByUser());
+                        valueMap.put("not_found_by", uuid2);
                     } else {
-                        valueMap.put("found_by", logEntryFilter.getFoundByUser());
+                        valueMap.put("found_by", uuid2);
                     }
                 }
                 break;
@@ -1188,13 +1193,16 @@ final class OkapiClient {
 
     @Nullable
     public static String getUserUUID(@NonNull final OCApiConnector connector, @NonNull final String userName) {
-        final Parameters params = new Parameters("fields", USER_UUID, USER_USERNAME, userName);
-
-        final JSONResult result = getRequest(connector, OkapiService.SERVICE_USER_BY_USERNAME, params);
+        //try username as id
+        JSONResult result = getRequest(connector, OkapiService.SERVICE_USER_BY_USERID, new Parameters("fields", USER_UUID, USER_INTERNAL_ID, userName));
         if (!result.isSuccess) {
-            final OkapiError error = new OkapiError(result.data);
-            Log.e("OkapiClient.getUserUUID: error getting user info: '" + error.getMessage() + "'");
-            return null;
+            //try username as username
+            result = getRequest(connector, OkapiService.SERVICE_USER_BY_USERNAME, new Parameters("fields", USER_UUID, USER_USERNAME, userName));
+            if (!result.isSuccess) {
+                final OkapiError error = new OkapiError(result.data);
+                Log.e("OkapiClient.getUserUUID: error getting user info via id or username: '" + error.getMessage() + "'");
+                return null;
+            }
         }
 
         return result.data.path(USER_UUID).asText(null);

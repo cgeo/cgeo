@@ -34,12 +34,14 @@ import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.connector.unknown.UnknownConnector;
 import cgeo.geocaching.connector.wm.WaymarkingConnector;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.functions.Func1;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -48,7 +50,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
@@ -117,7 +121,17 @@ public final class ConnectorFactory {
     private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
     @NonNull
-    private static final Collection<ISearchByFilter> SEARCH_BY_FILTER_CONNECTORS = getMatchingConnectors(ISearchByFilter.class);
+    private static final Map<GeocacheFilterType, Collection<ISearchByFilter>> SEARCH_BY_FILTER_CONNECTOR_MAP = new HashMap<>();
+
+    static {
+        SEARCH_BY_FILTER_CONNECTOR_MAP.put(null, getMatchingConnectors(ISearchByFilter.class));
+        for (GeocacheFilterType filterCap : GeocacheFilterType.values()) {
+            final Collection<ISearchByFilter> connectors = getMatchingConnectors(ISearchByFilter.class, c -> c.getFilterCapabilities().contains(filterCap));
+            if (!connectors.isEmpty()) {
+                SEARCH_BY_FILTER_CONNECTOR_MAP.put(filterCap, connectors);
+            }
+        }
+    }
 
     private static boolean forceRelog = false; // c:geo needs to log into cache providers
 
@@ -128,9 +142,15 @@ public final class ConnectorFactory {
     @NonNull
     @SuppressWarnings("unchecked")
     private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz) {
+        return getMatchingConnectors(clazz, null);
+    }
+
+    @NonNull
+    @SuppressWarnings("unchecked")
+    private static <T extends IConnector> Collection<T> getMatchingConnectors(final Class<T> clazz, final Func1<T, Boolean> filter) {
         final List<T> matching = new ArrayList<>();
         for (final IConnector connector : CONNECTORS) {
-            if (clazz.isInstance(connector)) {
+            if (clazz.isInstance(connector) && (filter == null || filter.call((T) connector))) {
                 matching.add((T) connector);
             }
         }
@@ -169,7 +189,13 @@ public final class ConnectorFactory {
 
     @NonNull
     public static Collection<ISearchByFilter> getSearchByFilterConnectors() {
-        return SEARCH_BY_FILTER_CONNECTORS;
+        return getSearchByFilterConnectors(null);
+    }
+
+    @NonNull
+    public static Collection<ISearchByFilter> getSearchByFilterConnectors(final GeocacheFilterType type) {
+        final Collection<ISearchByFilter> result = SEARCH_BY_FILTER_CONNECTOR_MAP.get(type);
+        return result == null ? Collections.emptyList() : result;
     }
 
     @NonNull

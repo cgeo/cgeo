@@ -9,6 +9,7 @@ import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -20,6 +21,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Collection;
+import java.util.EnumSet;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -136,6 +138,13 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         final SearchResult searchResult = new SearchResult(caches);
         searchResult.setTotalCountGC(caches.size());
         return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+    }
+
+
+    @NonNull
+    @Override
+    public EnumSet<GeocacheFilterType> getFilterCapabilities() {
+        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN);
     }
 
     @NonNull

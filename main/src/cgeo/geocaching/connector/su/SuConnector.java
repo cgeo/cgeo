@@ -23,6 +23,7 @@ import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
@@ -40,6 +41,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.EnumSet;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -259,6 +261,12 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
             return new SearchResult(StatusCode.UNKNOWN_ERROR);
         }
 
+    }
+
+    @NonNull
+    @Override
+    public EnumSet<GeocacheFilterType> getFilterCapabilities() {
+        return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN, GeocacheFilterType.NAME, GeocacheFilterType.OWNER);
     }
 
     @Override
