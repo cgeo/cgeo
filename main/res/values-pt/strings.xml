@@ -528,8 +528,6 @@
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
-    <string name="cache_filter_log_entry_foundby">Encontrada por:</string>
-    <string name="cache_filter_log_entry_logtext">Texto de registo:</string>
     <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 horas</string>
@@ -1419,7 +1417,7 @@
     <string name="map_gm_autorotation_disable">Desactivar rotação automática do mapa?\n\nPode activá-la novamente no menu de rotação do mapa</string>
     <string name="quick_settings">Definições rápidas</string>
     <string name="quick_settings_info">Algumas definições de mapa (Definições de mapa, ocultar, rotas) foram movidas para o novo menu \"Definições rápidas\".\nPode abrir este menu, através do ícone no centro inferior do mapa.</string>
-    <string name="map_show_caches_title">Mostrar Caches:</string>
+    <string name="map_show_caches_title">Mostrar Caches:\n</string>
     <string name="map_show_waypoints_title">Mostrar pontos adicionais:</string>
     <string name="map_show_other_title">Mostrar outro:</string>
     <!-- search -->
