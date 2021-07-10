@@ -507,8 +507,6 @@
     <string name="cache_filter_status_exclude_active">Wyklucz aktywne</string>
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
-    <string name="cache_filter_log_entry_foundby">Znaleziona przez:</string>
-    <string name="cache_filter_log_entry_logtext">Tekst dziennika:</string>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
