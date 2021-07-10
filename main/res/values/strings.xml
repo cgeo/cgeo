@@ -551,6 +551,7 @@
     <string name="cache_filter_favorites_absolute">Absolute</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
 
+    <string name="cache_filter_distance_coordinates">Coordinates</string>
     <string name="cache_filter_distance_use_current_position">Use current position</string>
 
     <string name="cache_filter_status_select_all">All</string>
@@ -576,8 +577,8 @@
     <string name="cache_filter_status_exclude_disabled">Exclude Disabled</string>
     <string name="cache_filter_status_exclude_archived">Exclude Archived</string>
 
-    <string name="cache_filter_log_entry_foundby">Found by:</string>
-    <string name="cache_filter_log_entry_logtext">Log text:</string>
+    <string name="cache_filter_log_entry_foundby">Found by</string>
+    <string name="cache_filter_log_entry_logtext">Log text</string>
 
     <string name="cache_filter_stored_since_notstored">Not stored</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>

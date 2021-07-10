@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func2;
 
@@ -12,7 +13,7 @@ import android.content.DialogInterface;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
+import android.util.Pair;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -32,7 +33,6 @@ import java.util.List;
 import java.util.Set;
 import static java.lang.Boolean.TRUE;
 
-import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
@@ -373,26 +373,18 @@ public class SimpleDialog {
      */
 
     public void input(final int inputType, @Nullable final String defaultValue, @Nullable final String label, @Nullable final String suffix, final Consumer<String> okayListener) {
-        final TextInputLayout editTextFrame = (TextInputLayout) LayoutInflater.from(context).inflate(R.layout.dialog_edittext, null);
-        final EditText editText = editTextFrame.findViewById(R.id.input);
-        editText.setInputType(inputType < 0 ? InputType.TYPE_TEXT_FLAG_CAP_SENTENCES | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS | InputType.TYPE_CLASS_TEXT : inputType);
-        editText.setText(defaultValue == null ? "" : defaultValue.trim());
-        if (StringUtils.isNotBlank(label)) {
-            editTextFrame.setHint("");
-        }
-        if (StringUtils.isNotBlank(suffix)) {
-            editTextFrame.setSuffixText(suffix);
-        }
+
+        final Pair<View, EditText> textField = ViewUtils.createTextField(getContext(), defaultValue, TextParam.text(label), TextParam.text(suffix), inputType, 1, 1);
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
         applyCommons(builder);
-        builder.setView(editTextFrame);
+        builder.setView(textField.first);
         // remove whitespaces added by autocompletion of Android keyboard before calling okayListener
-        builder.setPositiveButton(getPositiveButton(), (dialog, which) -> okayListener.accept(editText.getText().toString().trim()));
+        builder.setPositiveButton(getPositiveButton(), (dialog, which) -> okayListener.accept(textField.second.getText().toString().trim()));
         builder.setNegativeButton(getNegativeButton(), (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
-        editText.addTextChangedListener(new TextWatcher() {
+        textField.second.addTextChangedListener(new TextWatcher() {
 
             @Override
             public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
@@ -410,12 +402,12 @@ public class SimpleDialog {
             }
         });
         // force keyboard
-        Keyboard.show(getContext(), editText);
+        Keyboard.show(getContext(), textField.second);
 
         // disable button
         dialog.show();
         enableDialogButtonIfNotEmpty(dialog, String.valueOf(defaultValue));
-        Dialogs.moveCursorToEnd(editText);
+        Dialogs.moveCursorToEnd(textField.second);
         adjustCommons(dialog);
     }
 
