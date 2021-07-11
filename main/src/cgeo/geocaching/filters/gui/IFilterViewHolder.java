@@ -19,4 +19,13 @@ public interface IFilterViewHolder<T extends IGeocacheFilter> {
     View getView();
 
     T createFilterFromView();
+
+    default <H extends IFilterViewHolder<?>> boolean  isOf(final Class<H> clazz) {
+        return clazz.isAssignableFrom(this.getClass());
+    }
+
+    @SuppressWarnings("unchecked")
+    default <H extends IFilterViewHolder<?>> H castTo(final Class<H> clazz) {
+        return (H) this;
+    }
 }

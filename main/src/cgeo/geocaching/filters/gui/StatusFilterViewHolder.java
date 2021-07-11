@@ -13,23 +13,55 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheFilter> {
+
+    private boolean simpleView = false;
 
     private ChipChoiceGroup activeDisabledArchivedGroup = null;
 
     private ButtonToggleGroup statusOwn = null;
     private ButtonToggleGroup statusFound = null;
+    private ButtonToggleGroup statusHasOfflineLog = null;
     private ButtonToggleGroup statusStored = null;
     private ButtonToggleGroup statusFavorite = null;
     private ButtonToggleGroup statusWatchlist = null;
     private ButtonToggleGroup statusPremium = null;
     private ButtonToggleGroup statusHasTrackable = null;
     private ButtonToggleGroup statusHasOwnVote = null;
-    private ButtonToggleGroup statusHasOfflineLog = null;
     private ButtonToggleGroup statusSolvedMystery = null;
+
+    private final List<ButtonToggleGroup> advancedGroups = new ArrayList<>();
+    private final List<View> advancedGroupViews = new ArrayList<>();
+
+    public boolean canBeSimplifiedLossless() {
+        for (ButtonToggleGroup group : advancedGroups) {
+            if (getFromGroup(group) != null) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public void setSimpleView(final boolean simpleView) {
+        this.simpleView = simpleView;
+        for (View advancedView : advancedGroupViews) {
+            advancedView.setVisibility(simpleView ? View.GONE : View.VISIBLE);
+        }
+        if (simpleView) {
+            for (ButtonToggleGroup group : advancedGroups) {
+                setFromBoolean(group, null);
+            }
+        }
+    }
+
+    public boolean isSimpleView() {
+        return this.simpleView;
+    }
 
     @Override
     public View createView() {
@@ -45,20 +77,22 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         activeDisabledArchivedGroup.setCheckedButtonByIndex(true, 0, 1, 2);
         ll.addView(activeDisabledArchivedGroup, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
-        statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND);
-        statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED);
-        statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED);
-        statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE);
-        statusWatchlist = createGroup(ll, StatusGeocacheFilter.StatusType.WATCHLIST);
-        statusPremium = createGroup(ll, StatusGeocacheFilter.StatusType.PREMIUM);
-        statusHasTrackable = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_TRACKABLE);
-        statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE);
-        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG);
-        statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY);
+        statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND, false);
+        statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED, false);
+        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, false);
+        statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED, true);
+        statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE, true);
+        statusWatchlist = createGroup(ll, StatusGeocacheFilter.StatusType.WATCHLIST, true);
+        statusPremium = createGroup(ll, StatusGeocacheFilter.StatusType.PREMIUM, true);
+        statusHasTrackable = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_TRACKABLE, true);
+        statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE, true);
+        statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY, true);
+
+        setSimpleView(this.simpleView);
 
         return ll;
     }
-    private ButtonToggleGroup createGroup(final LinearLayout ll, final StatusGeocacheFilter.StatusType statusType) {
+    private ButtonToggleGroup createGroup(final LinearLayout ll, final StatusGeocacheFilter.StatusType statusType, final boolean isAdvanced) {
         final View view = inflateLayout(R.layout.buttontogglegroup_labeled_item);
         final ButtontogglegroupLabeledItemBinding binding = ButtontogglegroupLabeledItemBinding.bind(view);
         binding.itemText.setText(statusType.labelId);
@@ -73,6 +107,10 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         binding.itemTogglebuttongroup.addButtons(R.string.cache_filter_status_select_all, R.string.cache_filter_status_select_yes, R.string.cache_filter_status_select_no);
         final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         ll.addView(view, llp);
+        if (isAdvanced) {
+            this.advancedGroups.add(binding.itemTogglebuttongroup);
+            this.advancedGroupViews.add(view);
+        }
         return binding.itemTogglebuttongroup;
     }
 
@@ -86,13 +124,13 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
 
         setFromBoolean(statusFound, filter.getStatusFound());
         setFromBoolean(statusOwn, filter.getStatusOwned());
+        setFromBoolean(statusHasOfflineLog, filter.getStatusHasOfflineLog());
         setFromBoolean(statusStored, filter.getStatusStored());
         setFromBoolean(statusFavorite, filter.getStatusFavorite());
         setFromBoolean(statusWatchlist, filter.getStatusWatchlist());
         setFromBoolean(statusPremium, filter.getStatusPremium());
         setFromBoolean(statusHasTrackable, filter.getStatusHasTrackable());
         setFromBoolean(statusHasOwnVote, filter.getStatusHasOwnVote());
-        setFromBoolean(statusHasOfflineLog, filter.getStatusHasOfflineLog());
         setFromBoolean(statusSolvedMystery, filter.getStatusSolvedMystery());
     }
 
@@ -108,13 +146,13 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
 
         filter.setStatusFound(getFromGroup(statusFound));
         filter.setStatusOwned(getFromGroup(statusOwn));
+        filter.setStatusHasOfflineLog(getFromGroup(statusHasOfflineLog));
         filter.setStatusStored(getFromGroup(statusStored));
         filter.setStatusFavorite(getFromGroup(statusFavorite));
         filter.setStatusWatchlist(getFromGroup(statusWatchlist));
         filter.setStatusPremium(getFromGroup(statusPremium));
         filter.setStatusHasTrackable(getFromGroup(statusHasTrackable));
         filter.setStatusHasOwnVote(getFromGroup(statusHasOwnVote));
-        filter.setStatusHasOfflineLog(getFromGroup(statusHasOfflineLog));
         filter.setStatusSolvedMystery(getFromGroup(statusSolvedMystery));
         return filter;
     }
