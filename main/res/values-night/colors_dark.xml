@@ -3,8 +3,6 @@
 
     <!-- dark theme-specific colors only -->
 
-    <color name="colorAccent">#F5981D</color>
-
     <color name="colorText">@color/just_white</color>
     <color name="colorTextDark">#AAFFFFFF</color>
     <color name="colorTextHint">#A0CCCCCC</color>
