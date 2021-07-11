@@ -507,6 +507,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Adicionar itens</string>
     <string name="cache_filter_favorites_absolute">Absoluto</string>
     <string name="cache_filter_favorites_percentage">Percentagem</string>
+    <string name="cache_filter_distance_coordinates">Coordenadas</string>
     <string name="cache_filter_distance_use_current_position">Usar posição actual</string>
     <string name="cache_filter_status_select_all">Todos</string>
     <string name="cache_filter_status_select_yes">Sim</string>
@@ -528,6 +529,8 @@
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
+    <string name="cache_filter_log_entry_foundby">Encontrado por</string>
+    <string name="cache_filter_log_entry_logtext">Texto do registo</string>
     <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 horas</string>
