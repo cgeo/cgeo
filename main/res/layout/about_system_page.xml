@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:padding="4dip"
     tools:context=".AboutActivity$SystemViewCreator" >
-
-    <LinearLayout
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" >
 
         <Button android:id="@+id/copy"
             style="@style/button_full"
@@ -20,30 +15,39 @@
             style="@style/button_full"
             android:text="@string/about_system_info_send_button" />
 
-        <TextView
-            android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="7dip"
-            android:linksClickable="true"
-            android:paddingLeft="3dip"
-            android:text="@string/about_system_include"
-            style="@style/about_base" />
+            android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/system"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="7dip"
-            android:linksClickable="true"
-            android:paddingLeft="3dip"
-            android:textIsSelectable="true"
-            style="@style/about_base"
-            android:textColor="@color/colorTextHint"
-            tools:text="long list of system properties"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dip"
+                android:linksClickable="true"
+                android:paddingLeft="3dip"
+                android:text="@string/about_system_include"
+                style="@style/about_base" />
 
-        <Button android:id="@+id/logcat"
-            style="@style/button_full"
-            android:text="@string/about_system_write_logcat" />
-    </LinearLayout>
+            <TextView
+                android:id="@+id/system"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="7dip"
+                android:linksClickable="true"
+                android:paddingLeft="3dip"
+                android:textIsSelectable="true"
+                style="@style/about_base"
+                android:textColor="@color/colorTextHint"
+                tools:text="long list of system properties"/>
 
-</ScrollView>
+            <Button android:id="@+id/logcat"
+                style="@style/button_full"
+                android:text="@string/about_system_write_logcat" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>
