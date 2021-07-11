@@ -503,6 +503,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Προσθήκη αντικειμένων</string>
     <string name="cache_filter_favorites_absolute">Απόλυτη</string>
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
+    <string name="cache_filter_distance_coordinates">Συντεταγμένες</string>
     <string name="cache_filter_distance_use_current_position">Χρήση τρέχουσας θέσης</string>
     <string name="cache_filter_status_select_all">Όλες</string>
     <string name="cache_filter_status_select_yes">Ναι</string>
@@ -520,6 +521,8 @@
     <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
+    <string name="cache_filter_log_entry_foundby">Βρέθηκε από</string>
+    <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής</string>
     <string name="cache_filter_stored_since_notstored">Μη αποθηκευμένες</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 ώρες</string>
