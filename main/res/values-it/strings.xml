@@ -12,7 +12,7 @@
     <string name="settings_titlebar">Impostazioni di c:geo</string>
     <!-- caches -->
     <string name="all_types">Tutti i tipi di cache</string>
-    <string name="traditional">Traditional cache</string>
+    <string name="traditional">Cache Tradizionale</string>
     <string name="multi">Multi-cache</string>
     <string name="mystery">Mystery cache</string>
     <string name="letterbox">Letterbox hybrid</string>
