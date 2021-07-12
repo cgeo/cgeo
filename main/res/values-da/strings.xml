@@ -855,10 +855,6 @@
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
     <string name="cache_waypoints">Rutepunkter</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d rutepunkt</item>
-        <item quantity="other">%d rutepunkter</item>
-    </plurals>
     <string name="cache_waypoints_add">Tilføj rutepunkt</string>
     <string name="cache_waypoints_add_currentLocation">Tilføj nuværende position</string>
     <string name="cache_waypoints_add_fromclipboard">Tilføj fra udklipsholder</string>
