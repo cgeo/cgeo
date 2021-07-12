@@ -24,7 +24,7 @@
 - New: Ignore capability for geocaching.su
 - Change: Removed no longer maintained RMAPS navigation app
 - Corretto: Estrazione di waypoint dalle note personali, con lo stesso nome ma coordinate diverse
-- Correzione: Errore nell'estrazione della nota utente per waypoint con un formula
+- Corretto: Errore nell'estrazione della nota utente per waypoint con un formula
 - Corretto: Esporta la formula in PN invece delle coordinate per la formula completata
 - Corretto: Mappa offline e cartelli temi non corretta dopo la reinstallazione e il ripristino del backup
 - Corretto: La traccia/rotta non può essere aggiornata

@@ -583,12 +583,6 @@
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d dodatna točka</item>
-        <item quantity="two">%d dodatni točki</item>
-        <item quantity="few">%d dodatne točke</item>
-        <item quantity="other">%d dodatnih točk</item>
-    </plurals>
     <string name="cache_waypoints_add">Dodaj točko</string>
     <string name="cache_hint">Namig</string>
     <string name="cache_logs">Dnevnik zapisov</string>

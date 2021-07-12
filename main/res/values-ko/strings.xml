@@ -505,6 +505,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">아이템 추가</string>
     <string name="cache_filter_favorites_absolute">절대적</string>
     <string name="cache_filter_favorites_percentage">비율</string>
+    <string name="cache_filter_distance_coordinates">좌표</string>
     <string name="cache_filter_distance_use_current_position">현 위치 사용</string>
     <string name="cache_filter_status_select_all">모든</string>
     <string name="cache_filter_status_select_yes">예</string>
@@ -526,8 +527,8 @@
     <string name="cache_filter_status_exclude_active">활성캐시 제외</string>
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
-    <string name="cache_filter_log_entry_foundby">찾은 사용자:</string>
-    <string name="cache_filter_log_entry_logtext">로그 내용:</string>
+    <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
+    <string name="cache_filter_log_entry_logtext">로그 내용</string>
     <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0시간</string>
@@ -1128,9 +1129,6 @@
     <string name="cache_images">사진</string>
     <string name="cache_advanced">고급</string>
     <string name="cache_waypoints">지점</string>
-    <plurals name="waypoints">
-        <item quantity="other">%d 지점</item>
-    </plurals>
     <string name="cache_waypoints_add">지점 추가</string>
     <string name="cache_waypoints_add_currentLocation">현재 위치 추가</string>
     <string name="cache_waypoints_add_fromclipboard">클립보드에서 붙여넣기</string>

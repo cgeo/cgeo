@@ -314,7 +314,7 @@
         <item quantity="other">%d 分钟</item>
     </plurals>
     <string name="caches_store_offline">离线存储</string>
-    <string name="caches_store_all">全部存储</string>
+    <string name="caches_store_all">全部儲存</string>
     <string name="caches_store_unsaved">存储未保存</string>
     <string name="caches_store_selected">儲存所選的</string>
     <string name="caches_history">查看历史</string>
@@ -428,7 +428,7 @@
     <string name="about_system_write_logcat_type_extended">附加的</string>
     <string name="about_system_write_logcat_success">日誌檔案 \"%1$s\" 已寫入資料夾 \"%2$s\"</string>
     <string name="about_system_write_logcat_error">檔案寫入錯誤</string>
-    <string name="changelog_github">全部标签列表</string>
+    <string name="changelog_github">所有改變的列表</string>
     <string name="about_nutshellmanual">線上手冊</string>
     <string name="about_contributors_carnerodetails">當成是c:geo的爸爸XD</string>
     <string name="about_contributors_recent">當前的貢獻者</string>
@@ -887,9 +887,6 @@
     <string name="cache_images">圖片</string>
     <string name="cache_advanced">進階</string>
     <string name="cache_waypoints">航點</string>
-    <plurals name="waypoints">
-        <item quantity="other">%d航點</item>
-    </plurals>
     <string name="cache_waypoints_add">新增航點</string>
     <string name="cache_waypoints_add_currentLocation">新增目前位置</string>
     <string name="cache_waypoints_add_fromclipboard">從剪貼簿新增</string>

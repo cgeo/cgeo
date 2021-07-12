@@ -12,7 +12,7 @@
     <string name="settings_titlebar">Impostazioni di c:geo</string>
     <!-- caches -->
     <string name="all_types">Tutti i tipi di cache</string>
-    <string name="traditional">Traditional cache</string>
+    <string name="traditional">Cache Tradizionale</string>
     <string name="multi">Multi-cache</string>
     <string name="mystery">Mystery cache</string>
     <string name="letterbox">Letterbox hybrid</string>
@@ -522,8 +522,6 @@
     <string name="cache_filter_status_exclude_active">Escludi Attivo</string>
     <string name="cache_filter_status_exclude_disabled">Escludi Disabilitato</string>
     <string name="cache_filter_status_exclude_archived">Escludi Archiviato</string>
-    <string name="cache_filter_log_entry_foundby">Trovato da:</string>
-    <string name="cache_filter_log_entry_logtext">Testo del Log:</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -1113,10 +1111,6 @@
     <string name="cache_images">Immagini</string>
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d Waypoint</item>
-        <item quantity="other">%d Waypoint</item>
-    </plurals>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>

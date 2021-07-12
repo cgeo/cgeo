@@ -511,6 +511,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Přidat položky</string>
     <string name="cache_filter_favorites_absolute">Absolutní</string>
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
+    <string name="cache_filter_distance_coordinates">Souřadnice</string>
     <string name="cache_filter_distance_use_current_position">Použít aktuální pozici</string>
     <string name="cache_filter_status_select_all">Vše</string>
     <string name="cache_filter_status_select_yes">Ano</string>
@@ -532,8 +533,8 @@
     <string name="cache_filter_status_exclude_active">Vyloučit aktivní</string>
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
-    <string name="cache_filter_log_entry_foundby">Nalezené kým:</string>
-    <string name="cache_filter_log_entry_logtext">Text logu:</string>
+    <string name="cache_filter_log_entry_foundby">Nalezené kým</string>
+    <string name="cache_filter_log_entry_logtext">Text logu</string>
     <string name="cache_filter_stored_since_notstored">Neuložené</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 hodin</string>
@@ -1158,12 +1159,6 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Pokročilé</string>
     <string name="cache_waypoints">Trasové body</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d bod trasy</item>
-        <item quantity="few">%d body trasy</item>
-        <item quantity="many">%d bodů trasy</item>
-        <item quantity="other">%d bodů trasy</item>
-    </plurals>
     <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>

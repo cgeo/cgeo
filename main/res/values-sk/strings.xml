@@ -522,8 +522,6 @@
     <string name="cache_filter_status_exclude_active">Okrem aktívnych</string>
     <string name="cache_filter_status_exclude_disabled">Okrem deaktivovaných</string>
     <string name="cache_filter_status_exclude_archived">Okrem archivovaných</string>
-    <string name="cache_filter_log_entry_foundby">Nájdené kým:</string>
-    <string name="cache_filter_log_entry_logtext">Text logu:</string>
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
@@ -1128,12 +1126,6 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Rozšírené</string>
     <string name="cache_waypoints">Body trasy</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d bod trasy</item>
-        <item quantity="few">%d body trasy</item>
-        <item quantity="many">%d bodov trasy</item>
-        <item quantity="other">%d bodov trasy</item>
-    </plurals>
     <string name="cache_waypoints_add">Pridať bod</string>
     <string name="cache_waypoints_add_currentLocation">Pridať aktuálne miesto</string>
     <string name="cache_waypoints_add_fromclipboard">Pridať zo schránky</string>

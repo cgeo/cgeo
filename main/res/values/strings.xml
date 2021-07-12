@@ -1260,15 +1260,7 @@
     <string name="cache_images">Images</string>
     <string name="cache_advanced">Advanced</string>
     <string name="cache_waypoints">Waypoints</string>
-    <plurals name="waypoints">
-        <item quantity="zero">%d waypoints</item>
-        <item quantity="one">%d waypoint</item>
-        <item quantity="two">%d waypoints</item>
-        <item quantity="few">%d waypoints</item>
-        <item quantity="many">%d waypoints</item>
-        <item quantity="other">%d waypoints</item>
-    </plurals>
-
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Add Waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Add current location</string>
     <string name="cache_waypoints_add_fromclipboard">Add from clipboard</string>

@@ -698,10 +698,6 @@
     <string name="cache_list_select_last">Utolsó választás</string>
     <string name="cache_images">Képek</string>
     <string name="cache_waypoints">Útpontok</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d útpont</item>
-        <item quantity="other">%d útpont</item>
-    </plurals>
     <string name="cache_waypoints_add">Útpont hozzáadása</string>
     <string name="cache_hint">Segítség</string>
     <string name="cache_hint_not_available">Nincs segítség megadva</string>

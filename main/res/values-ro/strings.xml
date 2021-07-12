@@ -646,11 +646,6 @@
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
     <string name="cache_waypoints">Puncte</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d Punct</item>
-        <item quantity="few">%d Puncte</item>
-        <item quantity="other">%d Puncte</item>
-    </plurals>
     <string name="cache_waypoints_add">Adaugă punct</string>
     <string name="cache_hint">Indiciu</string>
     <string name="cache_hint_not_available">Fără indiciu</string>
