@@ -108,7 +108,7 @@
         <view
             android:id="@+id/direction"
             android:layout_width="78dip"
-            android:layout_height="40px"
+            android:layout_height="28dip"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             class="cgeo.geocaching.ui.CompassMiniView"
@@ -146,9 +146,10 @@
         <TextView
             android:id="@+id/inventory"
             android:layout_width="match_parent"
-            android:layout_height="22dip"
+            android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_gravity="center_vertical|center_horizontal"
+            android:layout_marginBottom="1dip"
             app:drawableLeftCompat="@drawable/trackable_all"
             android:drawablePadding="-10sp"
             android:gravity="center"
@@ -164,7 +165,7 @@
         <TextView
             android:id="@+id/favorite"
             android:layout_width="match_parent"
-            android:layout_height="22dp"
+            android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:ellipsize="none"
             android:gravity="center"

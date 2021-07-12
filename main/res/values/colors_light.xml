@@ -8,12 +8,14 @@
     <color name="colorTextHint">#FF666666</color>
 
     <color name="colorTextHeadline">#88000000</color>
+    <color name="colorTextHintActionBar">#FFAAAAAA</color>
 
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundNotice">#FFDFDFDF</color>
     <color name="colorBackgroundTransparent">#44FFFFFF</color>
     <color name="colorBackgroundDialog">#FFFFFFFF</color>
     <color name="colorBackgroundSelected">#FFCCCCCC</color>
+    <color name="colorBackgroundActionBar">#FF505050</color>
 
     <color name="colorSeparator">#44000000</color>
 
