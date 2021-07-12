@@ -1126,12 +1126,6 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Rozšírené</string>
     <string name="cache_waypoints">Body trasy</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d bod trasy</item>
-        <item quantity="few">%d body trasy</item>
-        <item quantity="many">%d bodov trasy</item>
-        <item quantity="other">%d bodov trasy</item>
-    </plurals>
     <string name="cache_waypoints_add">Pridať bod</string>
     <string name="cache_waypoints_add_currentLocation">Pridať aktuálne miesto</string>
     <string name="cache_waypoints_add_fromclipboard">Pridať zo schránky</string>
