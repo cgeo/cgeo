@@ -939,7 +939,7 @@
         <package android:name="com.google.android.street" />
         <package android:name="com.google.zxing.client.android" />
         <package android:name="com.groundspeak.react.adventures" />
-        <package android:name="com.mapwithme.maps.app" />
+        <package android:name="com.mapswithme.maps.app" />
         <package android:name="com.mapswithme.maps.pro" />
         <package android:name="com.silentlexx.gpslock" />
         <package android:name="com.sygic.aura" />
@@ -955,6 +955,8 @@
         <package android:name="menion.android.locus.pro.asamm" />
         <package android:name="menion.android.locus.pro.computerBild" />
         <package android:name="menion.android.whereyougo" />
+        <package android:name="net.osmand" />
+        <package android:name="net.osmand.plus" />
     </queries>
 
 </manifest>
