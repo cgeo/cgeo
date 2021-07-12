@@ -484,7 +484,7 @@
         <item quantity="one">%1$d Element</item>
         <item quantity="other">%1$d Elemente</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Lade</string>
+    <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
