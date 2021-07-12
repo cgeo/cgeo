@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -13,11 +13,14 @@
 
         <Button android:id="@+id/share"
             style="@style/button_full"
+            android:layout_below="@id/copy"
             android:text="@string/about_system_info_send_button" />
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@id/share"
+        android:layout_above="@id/logcat">
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -45,9 +48,11 @@
                 android:textColor="@color/colorTextHint"
                 tools:text="long list of system properties"/>
 
-            <Button android:id="@+id/logcat"
-                style="@style/button_full"
-                android:text="@string/about_system_write_logcat" />
         </LinearLayout>
     </ScrollView>
-</LinearLayout>
+
+    <Button android:id="@+id/logcat"
+        style="@style/button_full"
+        android:layout_alignParentBottom="true"
+        android:text="@string/about_system_write_logcat" />
+</RelativeLayout>
