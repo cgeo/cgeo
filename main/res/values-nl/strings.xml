@@ -507,6 +507,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Items toevoegen</string>
     <string name="cache_filter_favorites_absolute">Absoluut</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
+    <string name="cache_filter_distance_coordinates">Coördinaten</string>
     <string name="cache_filter_distance_use_current_position">Huidige positie gebruiken</string>
     <string name="cache_filter_status_select_all">Alle</string>
     <string name="cache_filter_status_select_yes">Ja</string>
@@ -528,6 +529,8 @@
     <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
+    <string name="cache_filter_log_entry_foundby">Gevonden door</string>
+    <string name="cache_filter_log_entry_logtext">Log tekst</string>
     <string name="cache_filter_stored_since_notstored">Niet opgeslagen</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 uur</string>
@@ -1136,10 +1139,6 @@
     <string name="cache_images">Afbeeldingen</string>
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d waypoint</item>
-        <item quantity="other">%d waypoints</item>
-    </plurals>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
