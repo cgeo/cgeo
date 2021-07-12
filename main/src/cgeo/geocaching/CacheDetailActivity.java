@@ -2422,7 +2422,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // show number of waypoints directly in waypoint title
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
-            return res.getQuantityString(R.plurals.waypoints, waypointCount, waypointCount);
+            return String.format(getString(R.string.waypoints_tabtitle), waypointCount);
         }
         return this.getString(Page.find(pageId).titleStringId);
     }
