@@ -1111,12 +1111,6 @@
     <string name="cache_images">Zdjęcia</string>
     <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
-    <plurals name="waypoints">
-        <item quantity="one">1 punkt</item>
-        <item quantity="few">%d punkty</item>
-        <item quantity="many">%d punktów nawigacji</item>
-        <item quantity="other">%d punktów nawigacji</item>
-    </plurals>
     <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
