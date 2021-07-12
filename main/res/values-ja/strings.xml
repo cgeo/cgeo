@@ -1125,9 +1125,6 @@
     <string name="cache_images">画像</string>
     <string name="cache_advanced">追加設定</string>
     <string name="cache_waypoints">ウェイポイント</string>
-    <plurals name="waypoints">
-        <item quantity="other">%dウェイポイント</item>
-    </plurals>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
