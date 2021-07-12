@@ -1111,10 +1111,6 @@
     <string name="cache_images">Immagini</string>
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d Waypoint</item>
-        <item quantity="other">%d Waypoint</item>
-    </plurals>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
