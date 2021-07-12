@@ -1139,10 +1139,6 @@
     <string name="cache_images">Imagens</string>
     <string name="cache_advanced">Avançadas</string>
     <string name="cache_waypoints">Pontos adicionais</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d ponto adicional</item>
-        <item quantity="other">%d pontos adicionais</item>
-    </plurals>
     <string name="cache_waypoints_add">Adicionar Ponto Adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
