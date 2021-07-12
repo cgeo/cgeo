@@ -887,12 +887,6 @@
     <string name="cache_list_select_last">Paskutinis pasirinkimas</string>
     <string name="cache_images">Vaizdai</string>
     <string name="cache_waypoints">Papildomi taškai</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d papildomas taškas</item>
-        <item quantity="few">%d papildomi taškai</item>
-        <item quantity="many">%d papildomų taškų</item>
-        <item quantity="other">%d papildomų taškų</item>
-    </plurals>
     <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
     <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>

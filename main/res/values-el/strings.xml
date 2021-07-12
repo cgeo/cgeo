@@ -503,6 +503,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Προσθήκη αντικειμένων</string>
     <string name="cache_filter_favorites_absolute">Απόλυτη</string>
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
+    <string name="cache_filter_distance_coordinates">Συντεταγμένες</string>
     <string name="cache_filter_distance_use_current_position">Χρήση τρέχουσας θέσης</string>
     <string name="cache_filter_status_select_all">Όλες</string>
     <string name="cache_filter_status_select_yes">Ναι</string>
@@ -520,8 +521,8 @@
     <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
-    <string name="cache_filter_log_entry_foundby">Βρέθηκε από:</string>
-    <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής:</string>
+    <string name="cache_filter_log_entry_foundby">Βρέθηκε από</string>
+    <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής</string>
     <string name="cache_filter_stored_since_notstored">Μη αποθηκευμένες</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 ώρες</string>
@@ -1128,10 +1129,6 @@
     <string name="cache_images">Εικόνες</string>
     <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d σημείο διαδρομής</item>
-        <item quantity="other">%d σημεία διαδρομής</item>
-    </plurals>
     <string name="cache_waypoints_add">Προσθήκη Σημείου Αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>

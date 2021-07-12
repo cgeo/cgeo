@@ -503,6 +503,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">項目を追加</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
+    <string name="cache_filter_distance_coordinates">座標</string>
     <string name="cache_filter_distance_use_current_position">現在地を使用</string>
     <string name="cache_filter_status_select_all">すべて</string>
     <string name="cache_filter_status_select_yes">はい</string>
@@ -524,8 +525,8 @@
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
-    <string name="cache_filter_log_entry_foundby">発見したユーザー名:</string>
-    <string name="cache_filter_log_entry_logtext">ログの本文:</string>
+    <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
+    <string name="cache_filter_log_entry_logtext">ログの本文</string>
     <string name="cache_filter_stored_since_notstored">未保存</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0時間前</string>
@@ -1124,9 +1125,6 @@
     <string name="cache_images">画像</string>
     <string name="cache_advanced">追加設定</string>
     <string name="cache_waypoints">ウェイポイント</string>
-    <plurals name="waypoints">
-        <item quantity="other">%dウェイポイント</item>
-    </plurals>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
@@ -1426,7 +1424,7 @@
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
-    <string name="search_filter_temporary_user_information">フィルタ機能を新しくしました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
+    <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>

@@ -504,8 +504,6 @@
     <string name="cache_filter_status_exclude_active">Exclou Actiu</string>
     <string name="cache_filter_status_exclude_disabled">Exclou desactivat</string>
     <string name="cache_filter_status_exclude_archived">Exclou arxivats</string>
-    <string name="cache_filter_log_entry_foundby">Trobat per:</string>
-    <string name="cache_filter_log_entry_logtext">Text del registre:</string>
     <!-- about -->
     <string name="about_version">Versió</string>
     <string name="about_changelog">Historial de canvis</string>
@@ -1094,10 +1092,6 @@
     <string name="cache_images">Imatges</string>
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d fita</item>
-        <item quantity="other">%d fites</item>
-    </plurals>
     <string name="cache_waypoints_add">Afegeix una fita</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
