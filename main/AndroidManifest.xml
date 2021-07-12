@@ -941,6 +941,7 @@
         <package android:name="com.groundspeak.react.adventures" />
         <package android:name="com.mapswithme.maps.app" />
         <package android:name="com.mapswithme.maps.pro" />
+        <package android:name="com.orux.oruxmapsDonate" />
         <package android:name="com.silentlexx.gpslock" />
         <package android:name="com.sygic.aura" />
         <package android:name="com.sygic.aura_voucher" />
