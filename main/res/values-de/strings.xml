@@ -484,7 +484,7 @@
         <item quantity="one">%1$d Element</item>
         <item quantity="other">%1$d Elemente</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Lade</string>
+    <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
@@ -1139,10 +1139,6 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d Wegpunkt</item>
-        <item quantity="other">%d Wegpunkte</item>
-    </plurals>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
