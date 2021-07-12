@@ -947,10 +947,6 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_advanced">Avancerat</string>
     <string name="cache_waypoints">Punkter</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d punkt</item>
-        <item quantity="other">%d punkter</item>
-    </plurals>
     <string name="cache_waypoints_add">Lägg till punkt</string>
     <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
     <string name="cache_waypoints_add_fromclipboard">Lägg till från urklipp</string>
