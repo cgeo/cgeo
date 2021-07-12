@@ -8,6 +8,8 @@
         for dark theme-specific colors see values-night/colors.xml
     -->
 
+    <color name="colorAccent">#F5981D</color>
+
     <color name="just_white">#FFFFFFFF</color>
     <color name="just_black">#FF000000</color>
     <color name="archived_cache_color">#FFAC0B0B</color>

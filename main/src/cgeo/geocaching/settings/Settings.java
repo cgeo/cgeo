@@ -37,7 +37,7 @@ import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
+import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -1033,12 +1033,19 @@ public class Settings {
         }
     }
 
-    public static void setMapLanguage(final int languageId) {
-        putInt(R.string.pref_maplanguage, languageId);
+    public static void setMapLanguage(@Nullable final String language) {
+        putString(R.string.pref_mapLanguage, StringUtils.isBlank(language) ? "" : language);
     }
 
-    public static int getMapLanguage() {
-        return getInt(R.string.pref_maplanguage, MAP_LANGUAGE_DEFAULT);
+    @Nullable
+    public static String getMapLanguage() {
+        final String language = getString(R.string.pref_mapLanguage, null);
+        return StringUtils.isBlank(language) ? null : language;
+    }
+
+    public static int getMapLanguageId() {
+        final String language = getMapLanguage();
+        return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
     }
 
     public static void setMapDownloaderSource(final int source) {

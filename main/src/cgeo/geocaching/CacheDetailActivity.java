@@ -2437,7 +2437,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (cache.supportsLogging() || !cache.getLogs().isEmpty()) {
                 pages.add(Page.LOGS.id);
             }
-            if (CollectionUtils.isNotEmpty(cache.getFriendsLogs())) {
+            if (CollectionUtils.isNotEmpty(cache.getFriendsLogs()) && Settings.isFriendLogsWanted()) {
                 pages.add(Page.LOGSFRIENDS.id);
             }
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {

@@ -74,7 +74,7 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
-import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT;
+import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
 import android.annotation.SuppressLint;
@@ -443,9 +443,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
             && !DownloaderUtils.onOptionsItemSelected(this, id)) {
             final String language = MapProviderFactory.getLanguage(id);
-            if (language != null || id == MAP_LANGUAGE_DEFAULT) {
+            if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
                 item.setChecked(true);
-                changeLanguage(id);
+                changeLanguage(language);
                 return true;
             } else {
                 final MapSource mapSource = MapProviderFactory.getMapSource(id);
@@ -584,8 +584,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         }
     }
 
-    private void changeLanguage(final int languageId) {
-        Settings.setMapLanguage(languageId);
+    private void changeLanguage(final String language) {
+        Settings.setMapLanguage(language);
         mapRestart();
     }
 
