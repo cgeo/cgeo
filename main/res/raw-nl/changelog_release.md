@@ -1,28 +1,28 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Geavanceerd filtersysteem
+- Introductie van een nieuw filtersysteem binnen c:geo, waarmee flexibele, combineerbare filters opgeslagen kunnen worden
+- Beschikbaar in zowel cachelijsten als kaartweergave
+- Nieuwe functie "Zoeken middels filter"
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+### Kaart
+- Nieuw: Bij het maken van een door de gebruiker gedefinieerde cache tijdens het weergeven van een kaart uit een lijst: Bied gebruiker aan om een nieuwe cache op te slaan in de huidige lijst (in plaats van de standaardlijst voor caches die door de gebruiker zijn gedefinieerd)
+- Nieuw: Scheid "eigen" en "gevonden" filters in snelle kaartinstellingen
+- Wijziging: Ook cachenaam weergeven in de popup details
 
 ### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+- Nieuw: Maak gebruik van Google translate in-app vertalingspopup
+- Nieuw: Aanpassen van de toegewezen pictogram in cache details pop-up via lange tik (alleen opgeslagen caches)
 
 ### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+- Wijziging: Downloads zullen nu volledig plaatsvinden in de achtergrond, er wordt een melding getoond
+- Wijziging: Bestanden die met succes gedownload zijn zullen bestaande bestanden met dezelfde naam automatisch overschrijven
+- Wijziging: Als een kaart een bepaald thema vereist dat nog niet is geïnstalleerd zal c:geo dit thema automatisch downloaden en installeren
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Overig
+- Wijziging: We hebben de interne technische aspecten voor c:geo thema's volledig geherstructureerd om gebruik te kunnen maken van enkele modernere componenten die door Android aangeboden worden. Dit zal een aantal neveneffecten hebben, waarvan sommige onbedoeld zijn. Gelieve fouten of storingen te melden op onze [GitHub pagina](https://www.github.com/cgeo/cgeo/issues) of door contact op te nemen met support.
+- Nieuw: Ondersteuning dag / nachtmodus van het systeem (optioneel)
+- Nieuw: Download bladwijzerlijsten van geocaching.com - zie "Lijsten / pocket queries" in het hoofdmenu
+- Nieuw: Negeer mogelijkheid voor geocaching.su
+- Wijziging: De niet langer onderhouden RMAPS navigatie-app is verwijderd
 - Opgelost: Waypoint extractie met dezelfde naam, maar verschillende coördinaten uit persoonlijke notitie
 - Opgelost: Bug in het uitpakken van gebruikersnotitie voor waypoint met formule
 - Opgelost: Exporteer formule naar PN in plaats van coördinaten voor voltooide formule
