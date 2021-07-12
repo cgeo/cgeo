@@ -946,6 +946,12 @@
         <package android:name="de.wolffire.chirpwolf" />
         <package android:name="googoo.android.btgps" />
         <package android:name="menion.android.locus" />
+        <package android:name="menion.android.locus.free.amazon" />
+        <package android:name="menion.android.locus.free.samsung" />
+        <package android:name="menion.android.locus.pro" />
+        <package android:name="menion.android.locus.pro.amazon" />
+        <package android:name="menion.android.locus.pro.asamm" />
+        <package android:name="menion.android.locus.pro.computerBild" />
         <package android:name="menion.android.whereyougo" />
     </queries>
 
