@@ -491,7 +491,7 @@
     <string name="cache_filter_stringfilter_searchtext_hint">検索テキスト</string>
     <string name="cache_filter_stringfilter_info">検索方法の「パターン」でワイルドカード「?」と「*」を使用できます。「?」は任意の一文字、「*」は長さ0文字以上の任意の文字列を表します。 例えば、「H?mburg*」は「Homeburg」や「Hamburg at Night」などにマッチしますが、「A day in Hamburg」や「Hahmburg」にはマッチしません。</string>
     <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
-    <string name="cache_filter_stringfilter_type_is_present" comment="cache_filter_stringfilter_type_is_present&#10;&#10;Is used as part of a choice list on how to filter a text field. &quot;Is present&quot; will filter all text fields with a non-empty value inside. ">あり</string>
+    <string name="cache_filter_stringfilter_type_is_present">あり</string>
     <string name="cache_filter_stringfilter_type_contains">以下を含む</string>
     <string name="cache_filter_stringfilter_type_starts_with">以下で始まる</string>
     <string name="cache_filter_stringfilter_type_ends_with">以下で終わる</string>
@@ -503,6 +503,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">項目を追加</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
+    <string name="cache_filter_distance_coordinates">座標</string>
     <string name="cache_filter_distance_use_current_position">現在地を使用</string>
     <string name="cache_filter_status_select_all">すべて</string>
     <string name="cache_filter_status_select_yes">はい</string>
@@ -524,8 +525,8 @@
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
-    <string name="cache_filter_log_entry_foundby">発見したユーザー名:</string>
-    <string name="cache_filter_log_entry_logtext">ログの本文:</string>
+    <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
+    <string name="cache_filter_log_entry_logtext">ログの本文</string>
     <string name="cache_filter_stored_since_notstored">未保存</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0時間前</string>
@@ -1426,7 +1427,7 @@
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
-    <string name="search_filter_temporary_user_information">フィルタ機能を新しくしました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
+    <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>
