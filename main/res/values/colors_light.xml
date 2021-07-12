@@ -8,6 +8,7 @@
     <color name="colorTextHint">#FF666666</color>
 
     <color name="colorTextHeadline">#88000000</color>
+    <color name="colorTextHintActionBar">#FFAAAAAA</color>
 
     <color name="colorBackground">#FFFFFFFF</color>
     <color name="colorBackgroundNotice">#FFDFDFDF</color>
