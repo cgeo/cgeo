@@ -108,7 +108,7 @@
         <view
             android:id="@+id/direction"
             android:layout_width="78dip"
-            android:layout_height="28px"
+            android:layout_height="28dip"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
             android:layout_marginTop="21dip"
