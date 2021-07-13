@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal" >
@@ -15,7 +16,7 @@
         android:layout_toLeftOf="@id/switchAB"
         android:maxLines="1"
         android:ellipsize="end"
-        android:textSize="@dimen/textSize_toolbarSingle"
+        android:textSize="@dimen/textSize_toolbarPrimary"
         android:textColor="@color/colorTextActionBar"
         android:text="@string/menu_lists_pocket_queries" />
 
@@ -28,5 +29,6 @@
         android:gravity="right|center_vertical"
         android:textSize="@dimen/textSize_toolbarSecondary"
         android:textColor="@color/colorTextActionBar"
-        android:text="@string/show_all" />
+        android:text="@string/show_all"
+        tools:ignore="SpUsage" />
 </RelativeLayout>

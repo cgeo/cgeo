@@ -8,6 +8,6 @@
     android:minHeight="?attr/actionBarSize"
     app:navigationContentDescription="@string/abc_action_bar_up_description"
     app:navigationIcon="?attr/homeAsUpIndicator"
-    android:textSize="@dimen/textSize_toolbarSingle"
+    android:textSize="@dimen/textSize_toolbarPrimary"
     android:theme="@style/settings_actionbar_theme"
     />
