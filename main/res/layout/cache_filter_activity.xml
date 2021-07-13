@@ -37,7 +37,8 @@
             android:layout_centerVertical="true"
             android:gravity="center"
             android:layout_margin="6dp"
-            android:text="@string/cache_filter_add_button"/>
+            android:text="@string/cache_filter_add_button"
+            app:icon="@drawable/ic_menu_add" />
 
     </RelativeLayout>
 
