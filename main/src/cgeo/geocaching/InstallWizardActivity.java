@@ -29,6 +29,7 @@ import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -97,7 +98,11 @@ public class InstallWizardActivity extends AppCompatActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setTheme(R.style.cgeo);
+
+        // window without actionbar for a cleaner look
+        supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
+        setTheme(R.style.NoActionbarTheme);
+
         backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_BACKUPUTILS));
         if (savedInstanceState != null) {
             step = WizardStep.values()[savedInstanceState.getInt(BUNDLE_STEP)];
