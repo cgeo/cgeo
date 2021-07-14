@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.ProcessUtils.isChromeLaunchable;
@@ -11,6 +13,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.List;
 
 
 public class StartWebviewActivity extends AppCompatActivity {
@@ -24,17 +27,20 @@ public class StartWebviewActivity extends AppCompatActivity {
             if (isChromeLaunchable()) {
                 ShareUtils.openCustomTab(this, url);
             } else {
-                final ResolveInfo resolveInfo = ProcessUtils.getInstalledBrowsers(this).get(0);
+                final List<ResolveInfo> browsers = ProcessUtils.getInstalledBrowsers(this);
+                if (browsers.size() > 0) {
+                    final ResolveInfo resolveInfo = browsers.get(0);
 
-                final Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                launchIntent.setPackage(resolveInfo.activityInfo.packageName);
+                    final Intent launchIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    launchIntent.setPackage(resolveInfo.activityInfo.packageName);
 
-                startActivity(launchIntent);
+                    startActivity(launchIntent);
+                } else {
+                    ActivityMixin.showShortToast(this, R.string.no_browser_found);
+                }
             }
         }
-
         finish();
-
     }
 
     @Override
