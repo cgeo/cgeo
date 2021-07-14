@@ -5,7 +5,9 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -334,6 +336,15 @@ public final class MapMarkerUtils {
             // if not, perhaps logged offline
         } else if (cache.hasLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
+            // logs of type NOTE may have a NA/NM log attached to them
+            if (offlineLogType == LogType.NOTE) {
+                final LogEntry offlineLog = cache.getOfflineLog();
+                if (offlineLog.reportProblem == ReportProblemType.ARCHIVE) {
+                    return R.drawable.marker_archive;
+                } else if (offlineLog.reportProblem != ReportProblemType.NO_PROBLEM) {
+                    return R.drawable.marker_maintenance;
+                }
+            }
             return offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay();
             // an offline log is more important than a DNF
         } else if (cache.isDNF()) {
