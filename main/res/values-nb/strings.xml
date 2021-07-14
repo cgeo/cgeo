@@ -948,10 +948,6 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_advanced">Avansert</string>
     <string name="cache_waypoints">Veipunkter</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d veipunkt</item>
-        <item quantity="other">%d veipunkter</item>
-    </plurals>
     <string name="cache_waypoints_add">Legg til veipunkter</string>
     <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
