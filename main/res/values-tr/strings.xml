@@ -1135,10 +1135,6 @@
     <string name="cache_images">Görseller</string>
     <string name="cache_advanced">Gelişmiş</string>
     <string name="cache_waypoints">Yol noktaları</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d yol noktası</item>
-        <item quantity="other">%d yol noktası</item>
-    </plurals>
     <string name="cache_waypoints_add">Yol noktası ekle</string>
     <string name="cache_waypoints_add_currentLocation">Mevcut konumu ekle</string>
     <string name="cache_waypoints_add_fromclipboard">Panodan ekle</string>
