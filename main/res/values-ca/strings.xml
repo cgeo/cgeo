@@ -1092,10 +1092,6 @@
     <string name="cache_images">Imatges</string>
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
-    <plurals name="waypoints">
-        <item quantity="one">%d fita</item>
-        <item quantity="other">%d fites</item>
-    </plurals>
     <string name="cache_waypoints_add">Afegeix una fita</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
