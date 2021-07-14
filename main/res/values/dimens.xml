@@ -21,9 +21,9 @@
     <!-- font size dimensions ====================================== -->
 
     <!-- all toolbars except main screen -->
-    <dimen name="textSize_toolbarSingle">20sp</dimen>
-    <dimen name="textSize_toolbarPrimary">18sp</dimen>
-    <dimen name="textSize_toolbarSecondary">16sp</dimen>
+    <!-- (we explicitly use dp for toolbar to avoid cuts offs and follow material guidelines) -->
+    <dimen name="textSize_toolbarSingle">20dp</dimen>
+    <dimen name="textSize_toolbarSecondary">18dp</dimen>
 
     <!-- headings (not toolbar) -->
     <dimen name="textSize_headingPrimary">20sp</dimen>

@@ -78,6 +78,7 @@
         <item name="android:textColor">@color/colorTextActionBar</item>
         <item name="background">@color/colorBackgroundActionBar</item>
         <item name="titleTextStyle">@style/action_bar_title</item>
+        <item name="subtitleTextStyle">@style/action_bar_subtitle</item>
     </style>
 
     <style name="actionBarActionOverflow" parent="Widget.AppCompat.ActionButton.Overflow">
@@ -122,6 +123,12 @@
         <item name="android:text">c:geo</item>
         <item name="android:textSize">@dimen/textSize_toolbarSingle</item>
         <item name="android:textColor">@color/colorTextActionBar</item>
+    </style>
+
+    <style name="action_bar_subtitle" parent="action_bar_title">
+        <item name="android:textSize">@dimen/textSize_toolbarSecondary</item>
+        <item name="android:textColor">@color/colorTextHintActionBar</item>
+        <item name="android:text" />
     </style>
 
     <style name="settings_actionbar_theme" parent="@style/ThemeOverlay.MaterialComponents.ActionBar">
