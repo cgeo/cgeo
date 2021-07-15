@@ -1159,6 +1159,7 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Pokročilé</string>
     <string name="cache_waypoints">Trasové body</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Trasové body (%d)</string>
     <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
