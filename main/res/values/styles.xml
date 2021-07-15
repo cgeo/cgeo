@@ -87,11 +87,8 @@
     <style name="tool_bar" parent="actionBarStyle">
         <item name="android:layout_width">fill_parent</item>
         <item name="android:layout_height">@dimen/actionbar_height</item>
-        <item name="android:orientation">horizontal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:scaleType">center</item>
         <item name="colorControlNormal">@color/colorTextActionBar</item>
-        <item name="android:background">@color/colorBackgroundActionBar</item>
+        <item name="android:textColor">@color/colorText</item>
     </style>
 
     <style name="action_bar_action" parent="actionBarStyle">
