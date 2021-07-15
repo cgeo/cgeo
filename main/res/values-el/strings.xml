@@ -1129,7 +1129,7 @@
     <string name="cache_images">Εικόνες</string>
     <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">σημεία πορείας (%d)</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
     <string name="cache_waypoints_add">Προσθήκη Σημείου Αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
