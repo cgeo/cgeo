@@ -2,6 +2,13 @@
 <resources>
   <!-- changelog for the release branch -->
   <string name="changelog_release" translatable="false"><Data><![CDATA[<div>
+<h1>2021.07.15:</h1>
+
+<h4>Fixes:</h4>
+<ul>
+<li> Fix: Download of personal note from geocaching.com no longer working</li>
+</ul>
+
 <h1>2021.06.23:</h1>
 
 <h4>Fixes:</h4>
