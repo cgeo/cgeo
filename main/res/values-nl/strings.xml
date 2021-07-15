@@ -1139,6 +1139,7 @@
     <string name="cache_images">Afbeeldingen</string>
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
