@@ -1139,6 +1139,7 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Wegpunkte (%d)</string>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
