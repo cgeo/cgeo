@@ -1187,6 +1187,7 @@
     <string name="cache_menu_map_ext">Andere externe apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Openen in browser</string>
+    <string name="no_browser_found">Geen browser gevonden</string>
     <string name="cache_menu_open_with">Open met…</string>
     <string name="cache_menu_visit">Log bezoek</string>
     <string name="cache_log_too_long">Helaas kon c:geo je log niet insturen omdat deze te lang is. Toch bedankt voor het schrijven van zo\'n uitgebreide log ;-)</string>
