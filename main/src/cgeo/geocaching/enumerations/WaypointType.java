@@ -24,13 +24,13 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum WaypointType {
     FINAL("flag", "f", "Final Location", R.string.wp_final, R.string.wpnew_final, R.drawable.waypoint_flag, 3, R.drawable.dot_waypoint_flag),
-    OWN("own", "o", "Own", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 5, R.drawable.dot_waypoint),
+    OWN("own", "o", "Own", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 5, R.drawable.dot_waypoint_waypoint),
     PARKING("pkg", "p", "Parking Area", R.string.wp_pkg, R.string.wpnew_pkg, R.drawable.waypoint_pkg, -1, R.drawable.dot_waypoint_pkg),
-    PUZZLE("puzzle", "x", "Virtual Stage", R.string.wp_puzzle, R.string.wpnew_stage, R.drawable.waypoint_puzzle, 2, R.drawable.dot_waypoint),
-    STAGE("stage", "s", "Physical Stage", R.string.wp_stage, R.string.wpnew_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint),
-    TRAILHEAD("trailhead", "t", "Trailhead", R.string.wp_trailhead, R.string.wpnew_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint),
-    WAYPOINT("waypoint", "w", "Reference Point", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_reference),
-    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.string.wpnew_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_reference);
+    PUZZLE("puzzle", "x", "Virtual Stage", R.string.wp_puzzle, R.string.wpnew_stage, R.drawable.waypoint_puzzle, 2, R.drawable.dot_waypoint_puzzle),
+    STAGE("stage", "s", "Physical Stage", R.string.wp_stage, R.string.wpnew_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint_stage),
+    TRAILHEAD("trailhead", "t", "Trailhead", R.string.wp_trailhead, R.string.wpnew_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint_trailhead),
+    WAYPOINT("waypoint", "w", "Reference Point", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_waypoint),
+    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.string.wpnew_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_waypoint);
 
     @NonNull
     public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);
