@@ -1109,6 +1109,7 @@
     <string name="cache_menu_map_ext">Autres applications externes</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Navigateur</string>
+    <string name="no_browser_found">Aucun navigateur Internet n\'a été trouvé</string>
     <string name="cache_menu_open_with">Ouvrir avec…</string>
     <string name="cache_menu_visit">Signaler votre visite</string>
     <string name="cache_log_too_long">c:geo n\'a pas pu envoyer votre log car il est trop long. Merci d\'avoir essayé d\'écrire un log aussi complet ;-).</string>
