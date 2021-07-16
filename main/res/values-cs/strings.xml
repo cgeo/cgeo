@@ -1207,6 +1207,7 @@
     <string name="cache_menu_map_ext">Další externí aplikace</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otevřít v prohlížeči</string>
+    <string name="no_browser_found">Nebyl nalezen žádný prohlížeč</string>
     <string name="cache_menu_open_with">Otevřít pomocí…</string>
     <string name="cache_menu_visit">Zalogovat návštěvu</string>
     <string name="cache_log_too_long">Aplikace c:geo nemůže odeslat váš log, protože je příliš dlouhý. Děkujeme ale, že jste se pokusili napsat takto obsáhlý log ;-)</string>
