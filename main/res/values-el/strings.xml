@@ -1177,6 +1177,7 @@
     <string name="cache_menu_map_ext">Άλλες εξωτερικές εφαρμογές</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
+    <string name="no_browser_found">Δε βρέθηκε εφαρμογή περιήγησης</string>
     <string name="cache_menu_open_with">Άνοιγμα με…</string>
     <string name="cache_menu_visit">Καταγραφή επίσκεψης</string>
     <string name="cache_log_too_long">Το c:geoδεν μπορεί να στείλει αυτή την καταγραφή λόγω μεγέθους. Αλλά μπράβο σας για το τόσο μεγάλο κείμενο ;-)</string>
