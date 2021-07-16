@@ -1139,7 +1139,7 @@
     <string name="cache_images">Kuvat</string>
     <string name="cache_advanced">Lisäasetukset</string>
     <string name="cache_waypoints">Reittipisteet</string>
-    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">reittipisteet (%d)</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Reittipisteet (%d)</string>
     <string name="cache_waypoints_add">Lisää reittipiste</string>
     <string name="cache_waypoints_add_currentLocation">Lisää nykyinen sijainti</string>
     <string name="cache_waypoints_add_fromclipboard">Liitä leikepöydältä</string>
