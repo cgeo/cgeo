@@ -223,24 +223,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      *
      */
     private static void withMockedFilters(final Runnable runnable) {
-        // backup user settings
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-        final boolean excludeFound = Settings.isExcludeFound();
-        try {
-            // set up settings required for test
-            TestSettings.setExcludeMine(false);
-            TestSettings.setExcludeFound(false);
-            TestSettings.setExcludeDisabledCaches(false);
-
-            runnable.run();
-
-        } finally {
-            // restore user settings
-            TestSettings.setExcludeMine(excludeMine);
-            TestSettings.setExcludeFound(excludeFound);
-            TestSettings.setExcludeDisabledCaches(excludeDisabled);
-        }
+        runnable.run();
     }
 
     /**
@@ -293,7 +276,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
             try {
                 // set up settings required for test
-                TestSettings.setExcludeMine(false);
                 Settings.setCacheType(CacheType.ALL);
 
                 final GC3FJ5F mockedCache = new GC3FJ5F();

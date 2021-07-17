@@ -37,7 +37,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
 
         for (final Geocache cache : baseCaches) {
             final Set<Waypoint> filteredWaypoints = new HashSet<>(cache.getWaypoints());
-            MapUtils.filter(filteredWaypoints, checkOwnership);
+            MapUtils.filter(filteredWaypoints, getFilterContext(), checkOwnership);
             waypoints.addAll(filteredWaypoints);
         }
 
@@ -50,7 +50,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             final CacheType type = Settings.getCacheType();
 
             final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, type);
-            MapUtils.filter(waypointsInViewport, checkOwnership);
+            MapUtils.filter(waypointsInViewport, getFilterContext(), checkOwnership);
             waypoints.addAll(waypointsInViewport);
         }
 
@@ -80,7 +80,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
 
     /**
      * get waypoint IDs for geocodes and invalidate them
-     * @param geocodes
+     * @param geocodes the codes
      */
     public void invalidateWaypoints(final Collection<String> geocodes) {
         final Set<Geocache> baseCaches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_WAYPOINTS);

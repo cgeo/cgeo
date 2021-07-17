@@ -33,6 +33,7 @@ import cgeo.geocaching.files.GPXImporter;
 import cgeo.geocaching.filter.FilterActivity;
 import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.AbstractList;
@@ -151,6 +152,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
     private static final String STATE_FILTER = "currentFilter";
+    private static final String STATE_GEOCACHE_FILTER = "currentGeocacheFilter";
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_LIST_ID = "currentListId";
@@ -187,7 +189,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * remember current filter when switching between lists, so it can be re-applied afterwards
      */
     private IFilter currentFilter = null;
-    private GeocacheFilter currentCacheFilter = null;
+    private GeocacheFilterContext currentCacheFilter = null;
     private IGeocacheFilter currentAddFilterCriteria = null;
     private CacheComparator currentSort = null;
     private boolean currentInverseSort = false;
@@ -530,13 +532,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         setTitle(title);
 
-        currentCacheFilter = GeocacheFilter.loadFromSettings();
 
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             currentFilter = savedInstanceState.getParcelable(STATE_FILTER);
+            currentCacheFilter = savedInstanceState.getParcelable(STATE_GEOCACHE_FILTER);
             currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
             listId = savedInstanceState.getInt(STATE_LIST_ID);
@@ -544,6 +546,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
         } else {
             offlineListLoadLimit = getOfflineListInitialLoadLimit();
+            currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
         }
 
         initAdapter();
@@ -579,6 +582,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // Save the current Filter
         savedInstanceState.putParcelable(STATE_FILTER, currentFilter);
+        savedInstanceState.putParcelable(STATE_GEOCACHE_FILTER, currentCacheFilter);
         savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putInt(STATE_LIST_ID, listId);
@@ -654,7 +658,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // save current position
         final LastPositionHelper lastPosition = new LastPositionHelper(this);
 
-        currentCacheFilter = GeocacheFilter.loadFromSettings();
         applyAdapterFilter();
         prepareFilterBar();
 
@@ -1205,11 +1208,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return adapter.findCacheByGeocode(contextMenuGeocode);
     }
 
-    private void setFilter(final IFilter filter, final GeocacheFilter cacheFilter) {
-        currentFilter = filter;
-
-        currentCacheFilter = cacheFilter;
-
+    private void setFilter() {
         applyAdapterFilter();
         prepareFilterBar();
         updateTitle();
@@ -1218,7 +1217,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void applyAdapterFilter() {
         final GeocacheFilter filter = currentAddFilterCriteria == null ?
-            currentCacheFilter : currentCacheFilter.and(currentAddFilterCriteria);
+            currentCacheFilter.get() : currentCacheFilter.get().clone().and(currentAddFilterCriteria);
         adapter.setFilter(currentFilter, filter);
     }
 
@@ -1359,10 +1358,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
-            setFilter(FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]), currentCacheFilter);
+            currentFilter = FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]);
+            setFilter();
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            currentCacheFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
-            setFilter(currentFilter, currentCacheFilter);
+            currentCacheFilter = data.getParcelableExtra(GeocacheFilterActivity.EXTRA_FILTER_CONTEXT);
+            setFilter();
             refreshFilterForOnlineSearch();
         }
     }
@@ -1382,9 +1382,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final Bundle extras = new Bundle();
 
         switch (type) {
-            case SEARCH_FILTER:
-                extras.putString(Intents.EXTRA_FILTER, currentCacheFilter.toConfig());
-                break;
             case KEYWORD:
                 if (loader instanceof KeywordGeocacheListLoader) {
                     extras.putString(Intents.EXTRA_KEYWORD, ((KeywordGeocacheListLoader) loader).keyword);
@@ -1640,6 +1637,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
+        final CacheListType previousListType = type;
+
         if (id != listId) {
             //reset load limit
             offlineListLoadLimit = getOfflineListInitialLoadLimit();
@@ -1654,6 +1653,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         if (id == PseudoList.HISTORY_LIST.id) {
             type = CacheListType.HISTORY;
+            if (previousListType != type) {
+                currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
+            }
             LoaderManager.getInstance(this).destroyLoader(CacheListType.OFFLINE.getLoaderId());
             currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.HISTORY.getLoaderId(), extras, this);
         } else {
@@ -1669,6 +1671,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             type = CacheListType.OFFLINE;
 
+            if (previousListType != type) {
+                currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
+            }
             LoaderManager.getInstance(this).destroyLoader(CacheListType.HISTORY.getLoaderId());
             extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
             currentLoader = (OfflineGeocacheListLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
@@ -1677,7 +1682,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         initAdapter();
-
+        setFilter();
         showProgress(true);
         showFooterLoadingCaches();
         adapter.setSelectMode(false);
@@ -1776,10 +1781,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    public static void startActivityFilter(final Context context, final GeocacheFilter filter) {
+    public static void startActivityFilter(final Context context) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.SEARCH_FILTER);
-        cachesIntent.putExtra(Intents.EXTRA_FILTER, filter.toConfig());
         context.startActivity(cachesIntent);
     }
 
@@ -1825,7 +1829,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (Settings.getCacheType() != CacheType.ALL) {
             filters.add(Settings.getCacheType().getL10n());
         }
-        if (adapter.isFiltered()) {
+        if (adapter.hasActiveFilter()) {
             filters.add(adapter.getFilterName());
         }
         return filters;
@@ -1962,14 +1966,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     markerId = list.markerId;
                 }
 
-                loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter, adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
+                loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
 
                 break;
             case HISTORY:
                 title = res.getString(R.string.caches_history);
                 listId = PseudoList.HISTORY_LIST.id;
                 markerId = EmojiUtils.NO_EMOJI;
-                loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter, VisitComparator.singleton, currentInverseSort, offlineListLoadLimit);
+                loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, currentInverseSort, offlineListLoadLimit);
                 break;
             case NEAREST:
                 title = res.getString(R.string.caches_nearby);
@@ -2008,11 +2012,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 }
                 break;
             case SEARCH_FILTER:
-                final String filterConfig = extras.getString(Intents.EXTRA_FILTER);
                 markerId = EmojiUtils.NO_EMOJI;
-                if (filterConfig != null) {
-                    loader = new SearchFilterGeocacheListLoader(this, GeocacheFilter.createFromConfig(filterConfig));
-                }
+                loader = new SearchFilterGeocacheListLoader(this, currentCacheFilter.get());
                 break;
             case OWNER:
                 final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
@@ -2119,7 +2120,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final int totalCount = type.isStoredInDatabase ? search.getTotalCountGC() : search.getCount();
 
         final StringBuilder result = new StringBuilder();
-        if ((adapter.isFiltered() && adapter.getCount() != totalCount) || resultIsOfflineAndLimited()) {
+        final boolean isFiltered = adapter.hasActiveFilter() && adapter.getCount() != totalCount;
+        if (isFiltered || resultIsOfflineAndLimited()) {
             result.append(adapter.getCount());
             if (resultIsOfflineAndLimited()) {
                 result.append("+");

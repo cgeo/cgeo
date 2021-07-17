@@ -4,9 +4,11 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
 import android.content.Context;
 import android.content.Intent;
@@ -28,6 +30,7 @@ public class MapOptions {
     public MapState mapState;
     public String title;
     public int fromList;
+    public GeocacheFilterContext filterContext = new GeocacheFilterContext(LIVE);
 
     public MapOptions(final Context context, @Nullable final Bundle extras) {
         if (extras != null) {
@@ -44,6 +47,7 @@ public class MapOptions {
                 waypointType = WaypointType.WAYPOINT;
             }
             fromList = extras.getInt(Intents.EXTRA_LIST_ID, StoredList.TEMPORARY_LIST.id);
+            filterContext = extras.getParcelable(Intents.EXTRA_FILTER_CONTEXT);
         } else {
             mapMode = MapMode.LIVE;
             isStoredEnabled = true;
@@ -102,6 +106,7 @@ public class MapOptions {
         intent.putExtra(Intents.EXTRA_MAPSTATE, mapState);
         intent.putExtra(Intents.EXTRA_TITLE, title);
         intent.putExtra(Intents.EXTRA_LIST_ID, fromList);
+        intent.putExtra(Intents.EXTRA_FILTER_CONTEXT, filterContext);
         return intent;
     }
 

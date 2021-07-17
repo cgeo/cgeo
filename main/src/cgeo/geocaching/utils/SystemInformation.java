@@ -6,6 +6,8 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.playservices.GooglePlayServices;
@@ -21,6 +23,7 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
 
 import android.Manifest;
 import android.content.Context;
@@ -62,7 +65,6 @@ public final class SystemInformation {
         } else {
             usedDirectionSensor = "magnetometer & accelerometer";
         }
-        final String hideCaches = (Settings.isExcludeMyCaches() ? "own/ " : "") + (Settings.isExcludeFound() ? "found" : "") + (Settings.isExcludeDisabledCaches() ? "disabled " : "") + (Settings.isExcludeArchivedCaches() ? "archived" : "") + (Settings.isExcludeOfflineLog() ? "offlinelog" : "");
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("## System information").append("\n")
             .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
@@ -91,15 +93,15 @@ public final class SystemInformation {
 
             .append("\n")
             .append("\nProgram settings:")
-            .append("\n-------")
-            .append("\n- Hide caches: ").append(hideCaches.isEmpty() ? "-" : hideCaches)
+            .append("\n-------");
+            appendFilters(body);
+            body
             .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
             .append("\n- Set language: ").append(Settings.getUserLanguage().isEmpty() ? Locale.getDefault() + " (system default)" : Settings.getUserLanguage())
             .append("\n- System date format: ").append(Formatter.getShortDateFormat())
             .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
             .append("\n- Live map mode: ").append(Settings.isLiveMap())
             .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads())
-            .append("\n- Global filter: ").append(Settings.getCacheType().pattern)
             .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
             .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId));
         appendSettings(body);
@@ -144,6 +146,19 @@ public final class SystemInformation {
     private static void appendSettings(@NonNull final StringBuilder body) {
         body.append("\n- Settings: ").append(versionInfoToString(Settings.getActualVersion(), Settings.getExpectedVersion()))
             .append(", Count:").append(Settings.getPreferencesCount());
+    }
+
+    private static void appendFilters(@NonNull final StringBuilder body) {
+        body.append("\n- Filters: ");
+        for (GeocacheFilterContext.FilterType filterType : GeocacheFilterContext.FilterType.values()) {
+            if (TRANSIENT.equals(filterType)) {
+                continue;
+            }
+            body.append("\n    ").append(filterType.name()).append(": ");
+            final GeocacheFilter filter = new GeocacheFilterContext(filterType).get();
+            body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
+
+        }
     }
 
     private static void appendDirectory(@NonNull final StringBuilder body, @NonNull final String label, @NonNull final File directory) {

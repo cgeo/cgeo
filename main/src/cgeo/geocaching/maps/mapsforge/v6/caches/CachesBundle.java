@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
@@ -283,6 +284,21 @@ public class CachesBundle {
         }
         if (liveOverlay != null) {
             liveOverlay.switchCircles();
+        }
+    }
+
+    public void setFilterContext(final GeocacheFilterContext filterContext) {
+        if (wpOverlay != null) {
+            wpOverlay.setFilterContext(filterContext);
+        }
+        if (baseOverlay != null) {
+            baseOverlay.setFilterContext(filterContext);
+        }
+        if (storedOverlay != null) {
+            storedOverlay.setFilterContext(filterContext);
+        }
+        if (liveOverlay != null) {
+            liveOverlay.setFilterContext(filterContext);
         }
     }
 
