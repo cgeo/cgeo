@@ -207,7 +207,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         setThemeAndContentView(R.layout.logcache_activity);
         binding = LogcacheActivityBinding.bind(findViewById(R.id.logcache_viewroot));
 
-        date.init(binding.date, null, getSupportFragmentManager());
+        date.init(binding.date, null, null, getSupportFragmentManager());
         logType.setTextView(binding.type).setDisplayMapper(LogType::getL10n);
         reportProblem.setTextView(binding.reportProblem)
                 .setTextDisplayMapper(rp -> rp.getL10n() + " ▼")

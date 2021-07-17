@@ -14,7 +14,7 @@
         <TextView
             android:id="@+id/date_from_label"
             style="@style/text_label"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:textAlignment="textEnd"
             android:text="@string/cache_filter_datefilter_label_from"/>
 
@@ -23,7 +23,17 @@
             style="@style/button_full"
             android:layout_centerVertical="true"
             android:layout_toRightOf="@+id/date_from_label"
+            android:layout_toLeftOf="@id/date_from_reset"
             tools:text="5/3/2021" />
+
+        <ImageButton
+            android:id="@+id/date_from_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_reset"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
     <RelativeLayout
@@ -33,7 +43,7 @@
         <TextView
             android:id="@+id/date_to_label"
             style="@style/text_label"
-            android:layout_width="100dp"
+            android:layout_width="50dp"
             android:textAlignment="textEnd"
             android:layout_alignParentLeft="true"
             android:text="@string/cache_filter_datefilter_label_to"/>
@@ -41,11 +51,19 @@
         <Button
             android:id="@+id/date_to"
             style="@style/button_full"
-            android:layout_alignParentRight="true"
-            android:layout_toRightOf="@+id/date_to_label"
             android:layout_centerVertical="true"
+            android:layout_toRightOf="@+id/date_to_label"
+            android:layout_toLeftOf="@id/date_to_reset"
             tools:text="5/3/2021" />
 
+        <ImageButton
+            android:id="@+id/date_to_reset"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_menu_reset"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
 
