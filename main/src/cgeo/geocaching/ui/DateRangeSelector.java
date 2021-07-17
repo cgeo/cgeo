@@ -52,14 +52,12 @@ public class DateRangeSelector extends LinearLayout {
         final DateRangeSelectorViewBinding binding = DateRangeSelectorViewBinding.bind(view);
         this.setOrientation(VERTICAL);
 
-        minDateEditor.init(binding.dateFrom, null, ((FragmentActivity) getContext()).getSupportFragmentManager());
+        minDateEditor.init(binding.dateFrom, null, binding.dateFromReset, ((FragmentActivity) getContext()).getSupportFragmentManager());
         minDateEditor
-            .setAllowUserToUnset(true)
             .setPreselectDate(new Date())
             .setChangeListener(d -> onChange(d, true));
-        maxDateEditor.init(binding.dateTo, null, ((FragmentActivity) getContext()).getSupportFragmentManager());
+        maxDateEditor.init(binding.dateTo, null, binding.dateToReset, ((FragmentActivity) getContext()).getSupportFragmentManager());
         maxDateEditor
-            .setAllowUserToUnset(true)
             .setPreselectDate(new Date())
             .setChangeListener(d -> onChange(d, false));
         minDateEditor.setDate(null);

@@ -130,7 +130,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         setThemeAndContentView(R.layout.logtrackable_activity);
         binding = LogtrackableActivityBinding.bind(findViewById(R.id.logtrackable_activity_viewroot));
 
-        date.init(findViewById(R.id.date), findViewById(R.id.time), getSupportFragmentManager());
+        date.init(findViewById(R.id.date), findViewById(R.id.time), null, getSupportFragmentManager());
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
