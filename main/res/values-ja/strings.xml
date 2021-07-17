@@ -1125,6 +1125,7 @@
     <string name="cache_images">画像</string>
     <string name="cache_advanced">追加設定</string>
     <string name="cache_waypoints">ウェイポイント</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
     <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
@@ -1171,6 +1172,7 @@
     <string name="cache_menu_map_ext">ほかの外部アプリ</string>
     <string name="cache_menu_streetview">Googleストリートビュー</string>
     <string name="cache_menu_browser">ブラウザで開く</string>
+    <string name="no_browser_found">ブラウザが見つかりません</string>
     <string name="cache_menu_open_with">開く…</string>
     <string name="cache_menu_visit">ログを書く</string>
     <string name="cache_log_too_long">ログが長すぎるために投稿できませんでした。克明なログを書こうとしてくれてありがとう ;-)</string>
