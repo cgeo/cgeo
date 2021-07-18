@@ -345,9 +345,11 @@ final class OkapiClient {
                 if (!statusFilter.isExcludeDisabled()) {
                     value += "|Temporarily unavailable";
                 }
-                if (!statusFilter.isExcludeArchived()) {
-                    value += "|Archived";
-                }
+                //DON'T return archived caches even if the filter says so. See #11208 for explanation
+                //Note: if at a later point in time Archived shall be included, just add following codeline:
+                //   if (!statusFilter.isExcludeArchived()) {
+                //       value += "|Archived";
+                //   }
                 if (!value.isEmpty()) {
                     valueMap.put("status", value.substring(1));
                 }
