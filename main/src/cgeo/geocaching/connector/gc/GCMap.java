@@ -148,7 +148,7 @@ public class GCMap {
             fillForBasicFilter(baseFilter, search);
         }
 
-        return GCWebAPI.searchCaches(search);
+        return GCWebAPI.searchCaches(search, true);
     }
 
     private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
