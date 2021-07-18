@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
@@ -760,7 +761,7 @@ class GCWebAPI {
         return getAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocode), CacheDetails.class);
     }
 
-    static SearchResult searchCaches(final WebApiSearch search) {
+    static SearchResult searchCaches(final WebApiSearch search, final boolean includeGcVote) {
         final SearchResult result = new SearchResult();
 
         final MapSearchResultSet mapSearchResultSet = search.execute();
@@ -811,6 +812,9 @@ class GCWebAPI {
         }
 
         result.addAndPutInCache(foundCaches);
+        if (includeGcVote) {
+            GCVote.loadRatings(foundCaches);
+        }
         return result;
     }
 
@@ -819,7 +823,7 @@ class GCWebAPI {
             .setBox(viewport)
             .addCacheTypes(Settings.getCacheType())
             .setStatusOwn(Settings.isGCPremiumMember() && Settings.isExcludeMyCaches() ? false : null)
-            .setStatusFound(Settings.isGCPremiumMember() && Settings.isExcludeFound() ? false : null)
+            .setStatusFound(Settings.isGCPremiumMember() && Settings.isExcludeFound() ? false : null), false
         );
     }
 
