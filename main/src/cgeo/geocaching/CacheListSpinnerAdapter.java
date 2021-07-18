@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 
 class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
@@ -27,23 +28,23 @@ class CacheListSpinnerAdapter extends ArrayAdapter<AbstractList> {
 
     @Override
     public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-        return getCustomView(position, convertView, parent);
+        return getCustomView(position, convertView, parent, R.layout.cachelist_spinner_actionbar);
     }
 
 
     @Override
     public View getDropDownView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-        return getCustomView(position, convertView, parent);
+        return getCustomView(position, convertView, parent, R.layout.cachelist_spinner_dropdownitem);
     }
 
-    public View getCustomView(final int position, final View convertView, final ViewGroup parent) {
+    public View getCustomView(final int position, final View convertView, final ViewGroup parent, final @LayoutRes int layoutRes) {
 
         View resultView = convertView;
         final LayoutInflater inflater = LayoutInflater.from(cacheListActivity);
 
         final CacheListSpinnerAdapter.ViewHolder holder;
         if (resultView == null) {
-            resultView = inflater.inflate(R.layout.cachelist_spinneritem, parent, false);
+            resultView = inflater.inflate(layoutRes, parent, false);
             holder = new ViewHolder();
             holder.title = resultView.findViewById(android.R.id.text1);
             holder.subtitle = resultView.findViewById(android.R.id.text2);
