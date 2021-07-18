@@ -921,7 +921,7 @@
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_list_initial_load_limit"
             app:min="0"
-            app:max="5000"
+            app:max="50000"
             android:defaultValue="1000" />
 
         <PreferenceCategory android:title="@string/settings_title_gpx"
