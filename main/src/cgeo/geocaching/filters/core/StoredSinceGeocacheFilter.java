@@ -38,14 +38,14 @@ public class StoredSinceGeocacheFilter extends NumberRangeGeocacheFilter<Long> {
     @Override
     public Long getValue(final Geocache cache) {
         if (!cache.isOffline()) {
-            return -1L;
+            return -10L;
         }
-        return (System.currentTimeMillis() - cache.getUpdated()) / 1000;
+        return (System.currentTimeMillis() - cache.getDetailedUpdate()) / 1000;
     }
 
     @Override
     protected String getSqlColumnExpression(final SqlBuilder sqlBuilder) {
-        return "((" + System.currentTimeMillis() + " - " + sqlBuilder.getMainTableId() + ".updated) / 1000)";
+        return "((" + System.currentTimeMillis() + " - " + sqlBuilder.getMainTableId() + ".detailedupdate) / 1000)";
     }
 
     @Override
