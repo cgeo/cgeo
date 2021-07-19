@@ -101,7 +101,11 @@ public class ContentStorage {
         this.documentAccessor = new DocumentContentAccessor(this.context);
         this.fileAccessor = new FileContentAccessor(this.context);
         this.documentAccessor.refreshUriPermissionCache();
-        reevaluateFolderDefaults();
+        try {
+            reevaluateFolderDefaults();
+        } catch (RuntimeException ex) {
+            Log.e("ContentStorage: problem in initializing default folders", ex);
+        }
     }
 
     public void reevaluateFolderDefaults() {
