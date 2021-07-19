@@ -704,11 +704,6 @@
     <string name="init_select_language">Dil seçin</string>
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
-    <string name="init_category_exclude">Geocache\'leri hariç tut</string>
-    <string name="init_exclude_own">Benimkileri Hariç Tut</string>
-    <string name="init_summary_exclude_own">Sahibi olduklarımı hariç tut </string>
-    <string name="init_exclude_found">Bulduklarımı Hariç Tut</string>
-    <string name="init_summary_exclude_found">Bulduğum Geocache\'leri hariç tut</string>
     <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
@@ -729,12 +724,6 @@
     <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
     <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
     <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
-    <string name="init_disabled">Devredışı Olanları Dahil Etme</string>
-    <string name="init_summary_disabled">Devredışı bırakılmış Geocache\'leri dahil etme</string>
-    <string name="init_archived">Arşivlenmişleri Dahil Etme</string>
-    <string name="init_summary_archived">Arşivlenmiş Geocache\'leri dahil etme</string>
-    <string name="init_offlinelog">Çevrimdışı Kayıtlıları Hariç Tut</string>
-    <string name="init_summary_offlinelog">Çevrimdışı Kayıt girilmişleri hariç tut</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
     <string name="init_summary_global_wp_extraction_disable">Kişisel Geocache notlarından yol noktası çıkarmayı genel olarak devre dışı bırakın. Belirli Geocache\'ler için kişisel notlarınız altındaki onay kutusu devre dışı bırakılarak yine de etkinleştirilebilir</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>

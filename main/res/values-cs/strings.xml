@@ -152,7 +152,7 @@
     <string name="log_image_attach">Připojit obrázek</string>
     <string name="log_image_stored">Existující</string>
     <string name="log_image_camera">Nový</string>
-    <string name="log_image_delete">Smazat</string>
+    <string name="log_image_delete">Odstranit</string>
     <string name="log_image_caption">Titulek</string>
     <string name="log_image_description">Popis</string>
     <string name="log_image_scale">Měřítko</string>
@@ -171,7 +171,7 @@
     <string name="log_problem_damaged_text">Tento hráč oznámil poškození schránky.</string>
     <string name="log_problem_missing_label">Keška může být ztracená</string>
     <string name="log_problem_missing_text">Tento hráč oznámil, že keška může být ztracená.</string>
-    <string name="log_problem_other_label">Jiná</string>
+    <string name="log_problem_other_label">Jiný</string>
     <string name="log_problem_other_text">Tento hráč oznámil problém s keškou.</string>
     <string name="log_problem_archive_label">Keška by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
@@ -379,7 +379,7 @@
     <string name="caches_remove_selected">Odstranit vybrané ze seznamu</string>
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
-    <string name="caches_delete_events">Vymazat staré události</string>
+    <string name="caches_delete_events">Odstranit staré události</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrát upravené souřadnice pro všechny (vybrané) kešky a přepsat stávající souřadnice na serveru? Tento krok nelze vrátit zpět.</string>
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
@@ -414,7 +414,7 @@
     <string name="caches_filter_lists">Zařazené do seznamu</string>
     <string name="caches_filter_empty">(prázdný)</string>
     <string name="caches_removing_from_history">Čištění Historie…</string>
-    <string name="caches_clear_offlinelogs">Smazat offline logy</string>
+    <string name="caches_clear_offlinelogs">Vymazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
     <string name="caches_set_cache_icon">Nastavit ikony kešky</string>
@@ -489,7 +489,7 @@
         <item quantity="other">%1$d položek</item>
     </plurals>
     <string name="cache_filter_storage_load_button">Načíst</string>
-    <string name="cache_filter_storage_delete_button">Vymazat</string>
+    <string name="cache_filter_storage_delete_button">Odstranit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
     <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
@@ -712,11 +712,6 @@
     <string name="init_select_language">Zvolte jazyk</string>
     <string name="init_summary_select_language">Zvolte jazyk v aplikaci (vyžaduje restart)\n</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
-    <string name="init_category_exclude">Vyloučit kešky</string>
-    <string name="init_exclude_own">Vyloučit vlastní</string>
-    <string name="init_summary_exclude_own">Vyloučit vlastní kešky </string>
-    <string name="init_exclude_found">Vyloučit nalezené</string>
-    <string name="init_summary_exclude_found">Vyloučit nalezené kešky</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
     <string name="init_zoomincludingwaypoints">Přiblížit obsažené trasové body</string>
@@ -737,12 +732,6 @@
     <string name="init_summary_useInternalRouting">Použít interní směrování c:geo, aby bylo možné používat automatické stahování a další funkce</string>
     <string name="init_bigSmileysOnMap">Velké ikony pro zalogované kešky</string>
     <string name="init_summary_bigSmileysOnMap">Je-li povoleno, budou se na mapě namísto ikon podle typu zalogované kešky zobrazovat velké emotikony (vyžaduje restart).</string>
-    <string name="init_disabled">Nezobrazovat deaktivované keše</string>
-    <string name="init_summary_disabled">Nezobrazovat deaktivované kešky</string>
-    <string name="init_archived">Vyloučit archivované</string>
-    <string name="init_summary_archived">Vyloučit archivované kešky</string>
-    <string name="init_offlinelog">Vyloučit offline log</string>
-    <string name="init_summary_offlinelog">Vyloučit kešky s offline logem</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
     <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
     <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
@@ -1288,7 +1277,7 @@
     <string name="cache_log_types">Typy zápisů</string>
     <string name="cache_coordinates_no">Tato keška nemá souřadnice.</string>
     <string name="cache_clear_history">Vymazat historii</string>
-    <string name="cache_remove_from_history">Vymazat z historie</string>
+    <string name="cache_remove_from_history">Odstranit z historie</string>
     <string name="cache_license">Licence</string>
     <string name="cache_image">Obrázek</string>
     <string name="cache_image_open_file">Otevřít jako soubor</string>
@@ -1366,7 +1355,7 @@
     <string name="waypoint_edit">Upravit</string>
     <string name="waypoint_copy_coordinates">Kopírovat souřadnice</string>
     <string name="waypoint_clear_coordinates">Vymazat souřadnice</string>
-    <string name="waypoint_delete">Smazat</string>
+    <string name="waypoint_delete">Odstranit</string>
     <string name="waypoint_edit_title">Upravit trasový bod</string>
     <string name="waypoint_add_title">Přidat trasový bod</string>
     <string name="waypoint_added">Trasový bod přidán</string>

@@ -475,6 +475,9 @@
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
+    <string name="cache_filter_contexttype_live_title">Live-suodatin</string>
+    <string name="cache_filter_contexttype_offline_title">Offline-suodatin</string>
+    <string name="cache_filter_contexttype_transient_title">Suodatin</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
@@ -708,11 +711,6 @@
     <string name="init_select_language">Valitse kieli</string>
     <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
-    <string name="init_category_exclude">Jätä pois kätköt</string>
-    <string name="init_exclude_own">Rajaa pois omat</string>
-    <string name="init_summary_exclude_own">Rajaa pois omistamasi kätköt </string>
-    <string name="init_exclude_found">Rajaa pois löydetyt</string>
-    <string name="init_summary_exclude_found">Rajaa pois löytämäsi kätköt</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
@@ -733,12 +731,6 @@
     <string name="init_summary_useInternalRouting">Käytä c:geon sisäistä reititystä käyttääksesi automaattista reititystietojen lataamista ja muita toimintoja</string>
     <string name="init_bigSmileysOnMap">Isot kuvakkeet kirjatuille kätköille</string>
     <string name="init_summary_bigSmileysOnMap">Jos käytössä, kirjattujen kätköjen kohdalla näytetään isot hymiöt kätkötyyppikuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
-    <string name="init_disabled">Piilota hyllytetyt</string>
-    <string name="init_summary_disabled">Ohita hyllyllä olevat kätköt</string>
-    <string name="init_archived">Älä näytä arkistoituja</string>
-    <string name="init_summary_archived">Älä näytä arkistoituja kätköjä</string>
-    <string name="init_offlinelog">Rajaa pois offline-kirjatut</string>
-    <string name="init_summary_offlinelog">Rajaa pois kätköt, joissa on offline-kirjaus</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
@@ -1421,6 +1413,8 @@
     <string name="map_show_caches_title">Näytä kätköt:</string>
     <string name="map_show_waypoints_title">Näytä reittipisteet:</string>
     <string name="map_show_other_title">Näytä muu:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Kätkösuodatin liian monimutkainen</string>
+    <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
     <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>

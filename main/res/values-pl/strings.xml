@@ -665,11 +665,6 @@
     <string name="init_select_language">Wybierz język</string>
     <string name="init_summary_select_language">Wybierz język aplikacji (wymaga ponownego uruchomienia)\n</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
-    <string name="init_category_exclude">Wyklucz skrytki</string>
-    <string name="init_exclude_own">Wyklucz własne</string>
-    <string name="init_summary_exclude_own">Wyklucz skrytki, które założyłeś </string>
-    <string name="init_exclude_found">Wyklucz znalezione</string>
-    <string name="init_summary_exclude_found">Wyklucz skrytki, które znalazłeś</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
@@ -690,12 +685,6 @@
     <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych routingu i innych funkcji</string>
     <string name="init_bigSmileysOnMap">Duże ikony dla zalogowanych skrzynek</string>
     <string name="init_summary_bigSmileysOnMap">Jeśli włączone, duże ikony będą wyświetlane dla zalogowanych skrzynek zamiast ikon typu skrzynki (wymaga ponownego uruchomienia).</string>
-    <string name="init_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
-    <string name="init_summary_disabled">Wyklucz tymczasowo niedostępne skrzynki</string>
-    <string name="init_archived">Wyklucz zarchiwizowane</string>
-    <string name="init_summary_archived">Wyklucz zarchiwizowane skrzynki</string>
-    <string name="init_offlinelog">Wyklucz dziennik offline</string>
-    <string name="init_summary_offlinelog">Wyklucz skrytki z logowaniem offline</string>
     <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
     <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>

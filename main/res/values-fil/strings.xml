@@ -429,8 +429,6 @@
     <string name="init_summary_address">Ang adress ang ipakita sa halip na mga koordinado sa pangunahing iskrin</string>
     <string name="init_showwaypoints">Ipakita ang mga Waypoint</string>
     <string name="init_showwaypoint_description">Kung mas mababa ang ibinigay na halaga ng mga cache ito ay naka-display duon sa mapa, ang kanilang mga waypoint ay karagdagang ipapakita.</string>
-    <string name="init_disabled">Ang Naka-diable na Pagbubuklod</string>
-    <string name="init_summary_disabled">Ang Naka-diable na pagbubukod sa mga cache</string>
     <string name="init_save_log_img">Ang pag-save ng mga imahe</string>
     <string name="init_summary_save_log_img">I-seyb ang mga Image mula sa mga Log</string>
     <string name="init_units">Ang paggamit ng Imperyal na mga Yunit</string>

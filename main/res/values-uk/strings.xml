@@ -526,7 +526,6 @@
     <string name="init_select_language">Виберіть мову</string>
     <string name="init_summary_select_language">Оберіть мову програм (потрібен перезапуск)\n</string>
     <string name="init_use_default_language">Мова за замовчуванням</string>
-    <string name="init_category_exclude">виключити кеші</string>
     <string name="init_showwaypoints">Показати точки маршруту</string>
     <string name="init_showwaypoint_description">Якщо на карті відображається менше заданої кількості схованок, то додатково відображаються їхні шляхові точки.</string>
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
@@ -537,10 +536,6 @@
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
     <string name="init_bigSmileysOnMap">Великі іконки для журналювальних схованок</string>
     <string name="init_summary_bigSmileysOnMap">Якщо увімкнено, то великі смайли будуть показані для журнальованих кешів на мапі замість значка кешу (потребує перезапуску).</string>
-    <string name="init_disabled">виключити інвалідів</string>
-    <string name="init_summary_disabled">Виключити відключені кеші</string>
-    <string name="init_archived">виключити заархівовані</string>
-    <string name="init_summary_archived">Виключити архівовані кеші</string>
     <string name="init_global_wp_extraction_disable">відключити спосіб вилучення</string>
     <string name="init_summary_global_wp_extraction_disable">Глобально вимкнути видобуток шляхових точок з особистих схованок. Воно може бути увімкнено для окремих кеш, вимикаючи прапорець під особистою приміткою кешу</string>
     <string name="init_summary_customtabs_as_browser">Зовнішні веб-сайти будуть відображатися без залишення c:geo (лише при встановленні Chrome)</string>
