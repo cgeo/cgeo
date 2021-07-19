@@ -490,8 +490,6 @@
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
     <string name="init_brouterThreshold">Útvonaltervezés</string>
     <string name="init_brouterShowBothDistances">Légvonalbeli távolság mutatása</string>
-    <string name="init_disabled">Letiltott ládák kihagyása</string>
-    <string name="init_summary_disabled">Letiltott ládák kihagyása</string>
     <string name="init_save_log_img">Logokban található képek mentése</string>
     <string name="init_summary_save_log_img">Logokban található képek mentése</string>
     <string name="init_units">Mérföld/láb használata</string>
