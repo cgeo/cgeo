@@ -462,8 +462,6 @@
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
     <string name="init_showwaypoints">Arată puncte</string>
     <string name="init_showwaypoint_description">Dacă sunt afişate mai puţine cutii decât acest număr, afişează şi punctele adiţionale.</string>
-    <string name="init_disabled">Exclude Inactive</string>
-    <string name="init_summary_disabled">Exclude cutiile inactive</string>
     <string name="init_save_log_img">Salvează imagini</string>
     <string name="init_summary_save_log_img">Salvează imaginile din însemnări</string>
     <string name="init_units">Unităţi de măsură imperiale</string>
