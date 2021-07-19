@@ -1290,15 +1290,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 setViewGone(listFooterLine1);
             }
             setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalListSize), v -> {
-                offlineListLoadLimit = -1;
+                offlineListLoadLimit = 0;
                 refreshCurrentList();
             });
         } else {
             setViewGone(listFooterLine1);
             setViewGone(listFooterLine2);
-            // hiding footer for offline list is not possible, it must be removed instead
-            // http://stackoverflow.com/questions/7576099/hiding-footer-in-listview
-            //getListView().removeFooterView(listFooter);
         }
     }
 
@@ -2124,7 +2121,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean resultIsOfflineAndLimited() {
-        return type.isStoredInDatabase && search.getTotalCountGC() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
+        return type.isStoredInDatabase && offlineListLoadLimit > 0 && search.getTotalCountGC() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
     }
 
     /**
