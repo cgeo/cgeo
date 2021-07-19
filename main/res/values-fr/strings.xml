@@ -638,11 +638,6 @@
     <string name="init_select_language">Sélectionner la langue</string>
     <string name="init_summary_select_language">Sélectionnez la langue de l\'application (nécessite un redémarrage)\n</string>
     <string name="init_use_default_language">Utiliser la langue par défaut</string>
-    <string name="init_category_exclude">Exclure des caches</string>
-    <string name="init_exclude_own">Exclure mes caches</string>
-    <string name="init_summary_exclude_own">Exclure les caches qui m\'appartiennent</string>
-    <string name="init_exclude_found">Exclure les caches trouvées</string>
-    <string name="init_summary_exclude_found">Exclure les caches que j\'ai trouvées</string>
     <string name="init_showwaypoints">Afficher les points de passage</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points de passage sont affichés en plus sur la carte.</string>
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
@@ -660,10 +655,6 @@
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_bigSmileysOnMap">Gros icônes pour les caches trouvées</string>
     <string name="init_summary_bigSmileysOnMap">Si activé, de gros émoticônes seront affichés sur la carte pour les caches loguées (plutôt que les icônes type de cache). Un redémarrage de c:geo est nécessaire pour prise en compte.</string>
-    <string name="init_disabled">Exclure les caches désactivées</string>
-    <string name="init_summary_disabled">Exclure les caches désactivées</string>
-    <string name="init_archived">Exclure les éléments archivés</string>
-    <string name="init_summary_archived">Exclure les caches archivées</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
@@ -1336,6 +1327,7 @@
     <string name="quick_settings_info">Certains paramètres de la carte (paramètres de carte, masquage, guidage) ont été déplacés dans la nouvelle fenêtre surgissante \"Réglages rapides\".\nVous pouvez ouvrir cette fenêtre en utilisant l\'icône centrée au bas de la carte.</string>
     <string name="map_show_caches_title">Afficher les caches :</string>
     <string name="map_show_waypoints_title">Afficher les points de passage :</string>
+    <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
     <!-- search -->
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
     <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
