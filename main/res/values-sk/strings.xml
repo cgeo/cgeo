@@ -680,11 +680,6 @@
     <string name="init_select_language">Zvoľte jazyk</string>
     <string name="init_summary_select_language">Zvoľte jazyk aplikácie (vyžaduje reštart)\n</string>
     <string name="init_use_default_language">Použiť predvolený jazyk</string>
-    <string name="init_category_exclude">Nezahrnúť kešky</string>
-    <string name="init_exclude_own">Okrem vlastných</string>
-    <string name="init_summary_exclude_own">Nezahrnúť vlastné kešky </string>
-    <string name="init_exclude_found">Okrem nájdených</string>
-    <string name="init_summary_exclude_found">Nezahrnúť nájdené kešky</string>
     <string name="init_showwaypoints">Body trasy na mape</string>
     <string name="init_showwaypoint_description">Ak je na mape zobrazený menší počet skrýš, ako je tento, zobrazia sa aj body trás (waypoints).</string>
     <string name="init_zoomincludingwaypoints">Priblíženie vrátane bodov trasy</string>
@@ -705,12 +700,6 @@
     <string name="init_summary_useInternalRouting">Použitie internej navigácie c:geo, aby bolo možné využívať automatické preberanie údajov navigácie a ďalšie funkcie</string>
     <string name="init_bigSmileysOnMap">Veľké ikony pre zalogované kešky</string>
     <string name="init_summary_bigSmileysOnMap">Ak je to povolené, pre zalogované kešky sa na mape zobrazujú veľké ikony namiesto ikony typu kešky (vyžaduje reštart).</string>
-    <string name="init_disabled">Nezobrazovať deaktivované</string>
-    <string name="init_summary_disabled">Nezobrazovať deaktivované skrýše</string>
-    <string name="init_archived">Okrem archivovaných</string>
-    <string name="init_summary_archived">Nezobrazovať archivované kešky</string>
-    <string name="init_offlinelog">Okrem offline logov</string>
-    <string name="init_summary_offlinelog">Nezahrnúť kešky s offline logom</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške</string>
     <string name="init_customtabs_as_browser">Použiť Chrome WebView</string>
