@@ -552,7 +552,6 @@
     <string name="init_select_language">選擇語言</string>
     <string name="init_summary_select_language">顯示app的語言</string>
     <string name="init_use_default_language">使用預設語言</string>
-    <string name="init_category_exclude">排除cache</string>
     <string name="init_showwaypoints">顯示航點</string>
     <string name="init_showwaypoint_description">如果在地圖上顯示的cache少於給定的數量，則會另外顯示其它cache的waypoints。</string>
     <string name="init_zoomincludingwaypoints">放大(包含航點)</string>
@@ -563,10 +562,6 @@
     <string name="init_summary_brouterShowBothDistances">如果路線啟動了，除了計算出的路線長度外，還會顯示直線距離。</string>
     <string name="init_bigSmileysOnMap">對已登錄的cache用大圖示顯示</string>
     <string name="init_summary_bigSmileysOnMap">如果啟用大型圖式，將會在地圖上顯示已登錄的寶藏，而不是寶藏的類型圖式(必需重新啟動)</string>
-    <string name="init_disabled">排除關閉的cache</string>
-    <string name="init_summary_disabled">排除關閉的cache</string>
-    <string name="init_archived">排除歸檔的cache</string>
-    <string name="init_summary_archived">排除歸檔的cache</string>
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
     <string name="init_summary_global_wp_extraction_disable">關閉所有來自個人寶藏筆記的航點資訊，但還是可以在個別寶藏中的個人寶藏筆記下方的勾選框開啟它</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
