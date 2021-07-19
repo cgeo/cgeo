@@ -680,11 +680,6 @@
     <string name="init_select_language">Seleziona lingua</string>
     <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
-    <string name="init_category_exclude">Escludi cache</string>
-    <string name="init_exclude_own">Escludi Propri</string>
-    <string name="init_summary_exclude_own">Escludi i cache che possiedi </string>
-    <string name="init_exclude_found">Escludi Trovati</string>
-    <string name="init_summary_exclude_found">Escludi i cache che hai già trovato</string>
     <string name="init_showwaypoints">Mostra waypoints</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
@@ -705,12 +700,6 @@
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
     <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
     <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
-    <string name="init_disabled">Escludi disattivati</string>
-    <string name="init_summary_disabled">Escludi cache disattivati</string>
-    <string name="init_archived">Escludi archiviati</string>
-    <string name="init_summary_archived">Escludi cache archiviati</string>
-    <string name="init_offlinelog">Escludi Log Offline</string>
-    <string name="init_summary_offlinelog">Escludi cache con log offline</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
