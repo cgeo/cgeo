@@ -475,6 +475,9 @@
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
+    <string name="cache_filter_contexttype_live_title">Ζωντανό Φίλτρο</string>
+    <string name="cache_filter_contexttype_offline_title">Φίλτρο Χωρίς Σύνδεση</string>
+    <string name="cache_filter_contexttype_transient_title">Φίλτρο</string>
     <string name="cache_filter_include">Συμπερίληψη</string>
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
@@ -698,11 +701,6 @@
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
     <string name="init_summary_select_language">Επιλλέξτε γλώσσα στην εφαρμογή (Χρειάζεται επανεκκίνηση)\n</string>
     <string name="init_use_default_language">Χρήση προεπιλεγμένης Γλώσσας</string>
-    <string name="init_category_exclude">Εξαίρεση κρυπτών</string>
-    <string name="init_exclude_own">Εξαίρεση Ιδιόκτητων</string>
-    <string name="init_summary_exclude_own">Εξαίρεση κρυπτών που σας ανήκουν </string>
-    <string name="init_exclude_found">Εξαίρεση όσων βρήκατε</string>
-    <string name="init_summary_exclude_found">Εξαίρεση των κρυπτών που έχετε βρει</string>
     <string name="init_showwaypoints">Προβολή σημείων αναφοράς</string>
     <string name="init_showwaypoint_description">Αν εμφανίζονται στον χάρτη λιγότερες από τις δεδομένες κρύπτες, εμφανίζονται επιπλέον και τα σημεία τους.</string>
     <string name="init_zoomincludingwaypoints">Το επίπεδο εστίασης περιλαμβάνει τα waypoints</string>
@@ -723,12 +721,6 @@
     <string name="init_summary_useInternalRouting">Χρησιμοποιήστε την εσωτερική δρομολόγηση του c:geo για να μπορείτε να χρησιμοποιήσετε την αυτόματη δρομολόγηση δεδομένων λήψης και ενημέρωσης</string>
     <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια για καταγεγραμμένες κρύπτες</string>
     <string name="init_summary_bigSmileysOnMap">Εάν ενεργοποιηθεί θα φαίνονται μεγάλα emoticons στις καταγεγραμμένες κρύπτες στον χάρτη, αντί του εικονιδίου του τύπου της κρύπτης (απαιτείται επανεκκίνηση).</string>
-    <string name="init_disabled">Εξαίρεση Απενεργοποιημένων</string>
-    <string name="init_summary_disabled">Εξαίρεση απενεργοποιημένων κρυπτών</string>
-    <string name="init_archived">Εξαίρεση των αρχειοθετημένων</string>
-    <string name="init_summary_archived">Εξαίρεση των αρχειοθετημένων κρυπτών</string>
-    <string name="init_offlinelog">Εξαίρεση Καταγραφής Χωρίς Σύνδεση</string>
-    <string name="init_summary_offlinelog">Εξαίρεση κρυπτών με Καταγραφή εκτός σύνδεσης</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
     <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
@@ -1411,6 +1403,8 @@
     <string name="map_show_caches_title">Εμφάνιση κρυπτών:</string>
     <string name="map_show_waypoints_title">Εμφάνιση σημείων:</string>
     <string name="map_show_other_title">Εμφάνιση άλλων:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
+    <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
     <!-- search -->
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
     <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>

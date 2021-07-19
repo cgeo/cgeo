@@ -525,10 +525,6 @@
     <string name="init_brouterShowBothDistances">Mostrar distancia en linea recta</string>
     <string name="brouter_recalculating">Recalculando ruta en segundo plano…</string>
     <string name="init_summary_brouterShowBothDistances">Si la ruta está activa: Muestra la distancia recta además de la longitud calculada de la ruta.</string>
-    <string name="init_disabled">Excluir desactivados</string>
-    <string name="init_summary_disabled">Excluir cachés desactivados</string>
-    <string name="init_archived">Excluir archivados</string>
-    <string name="init_summary_archived">Excluir cachés archivados</string>
     <string name="init_summary_global_wp_extraction_disable">Deshabilita globalmente la extracción de waypoints de notas personales de caché. Todavía se puede habilitar para cachés individuales desactivando la casilla de verificación debajo de la nota personal del caché</string>
     <string name="init_save_log_img">Guardar imágenes</string>
     <string name="init_summary_save_log_img">Guardar imágenes de los registros</string>

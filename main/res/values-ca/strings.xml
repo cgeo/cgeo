@@ -662,11 +662,6 @@
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
-    <string name="init_category_exclude">Exclou catxés</string>
-    <string name="init_exclude_own">Exclou propis</string>
-    <string name="init_summary_exclude_own">Exclou els teus catxés</string>
-    <string name="init_exclude_found">Exclou trobats</string>
-    <string name="init_summary_exclude_found">Exclou els catxés que has trobat</string>
     <string name="init_showwaypoints">Mostra les fites</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
@@ -687,12 +682,6 @@
     <string name="init_summary_useInternalRouting">Utilitzeu l’encaminament intern per poder utilitzar la descàrrega automàtica de dades d’encaminament i altres funcions</string>
     <string name="init_bigSmileysOnMap">Icones grans per catxes registrats</string>
     <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran emoticones grans al mapa pels catxés registrats en lloc de la icona del tipus de catxe (cal reiniciar-lo).</string>
-    <string name="init_disabled">Exclou els desactivats</string>
-    <string name="init_summary_disabled">Exclou els catxés desactivats</string>
-    <string name="init_archived">Exclou arxivats</string>
-    <string name="init_summary_archived">Exclou els catxés arxivats</string>
-    <string name="init_offlinelog">Exclou registres fora de línia</string>
-    <string name="init_summary_offlinelog">Exclou els catxés amb el registre fora de línia</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>

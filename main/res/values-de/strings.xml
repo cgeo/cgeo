@@ -708,11 +708,6 @@
     <string name="init_select_language">Sprache auswählen</string>
     <string name="init_summary_select_language">Wähle In-App-Sprache (Neustart erforderlich)\n</string>
     <string name="init_use_default_language">Systemsprache verwenden</string>
-    <string name="init_category_exclude">Caches ausblenden</string>
-    <string name="init_exclude_own">Eigene ausblenden</string>
-    <string name="init_summary_exclude_own">Eigene Caches ausblenden </string>
-    <string name="init_exclude_found">Gefundene ausblenden</string>
-    <string name="init_summary_exclude_found">Eigene Caches ausblenden</string>
     <string name="init_showwaypoints">Wegpunkte zeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhaltet Wegpunkte</string>
@@ -733,12 +728,6 @@
     <string name="init_summary_useInternalRouting">Verwende das c:geo-interne Routing, um Routingdaten automatisch herunterzuladen oder andere Funktionen nutzen zu können</string>
     <string name="init_bigSmileysOnMap">Große Symbole für geloggte Caches</string>
     <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden große Emoticons für geloggte Caches auf der Karte anstatt des Cache-Typs angezeigt (Neustart erforderlich).</string>
-    <string name="init_disabled">Deaktivierte ausblenden</string>
-    <string name="init_summary_disabled">Deaktivierte Caches ausblenden</string>
-    <string name="init_archived">Archivierte ausblenden</string>
-    <string name="init_summary_archived">Archivierte Caches ausblenden</string>
-    <string name="init_offlinelog">Offline-Log ausblenden</string>
-    <string name="init_summary_offlinelog">Caches mit Offline-Log ausblenden</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird</string>
     <string name="init_customtabs_as_browser">Chrome WebView verwenden</string>

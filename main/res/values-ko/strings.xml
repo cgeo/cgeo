@@ -474,6 +474,9 @@
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
+    <string name="cache_filter_contexttype_live_title">라이브 필터</string>
+    <string name="cache_filter_contexttype_offline_title">오프라인 필터</string>
+    <string name="cache_filter_contexttype_transient_title">필터</string>
     <string name="cache_filter_include">포함</string>
     <string name="cache_filter_exclude">제외</string>
     <string name="cache_filter_userdisplay_complex">복잡하게</string>
@@ -706,11 +709,6 @@
     <string name="init_select_language">언어 선택</string>
     <string name="init_summary_select_language">앱 언어 선택 (다시 시작해야 함)\n</string>
     <string name="init_use_default_language">기본 언어 사용</string>
-    <string name="init_category_exclude">캐시 제외</string>
-    <string name="init_exclude_own">소유 제외</string>
-    <string name="init_summary_exclude_own">소유한 캐시 제외 </string>
-    <string name="init_exclude_found">찾음 제외</string>
-    <string name="init_summary_exclude_found">찾은 캐시 제외</string>
     <string name="init_showwaypoints">웨이포인트 보기</string>
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_zoomincludingwaypoints">확대에는 지점이 포함됩니다</string>
@@ -731,12 +729,6 @@
     <string name="init_summary_useInternalRouting">c:geo 내부 라우팅을 사용하여 자동 라우팅 데이터 다운로드 및 기타 기능을 사용하십시오.</string>
     <string name="init_bigSmileysOnMap">로그 된 캐시를 위한 큰 아이콘</string>
     <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 대신 지도에 로그 된 캐시에 대해 큰 이모티콘이 표시됩니다 (다시 시작해야 함).</string>
-    <string name="init_disabled">비활성캐시 제외하기</string>
-    <string name="init_summary_disabled">일시정지된 캐시 숨기기</string>
-    <string name="init_archived">영구보관 제외</string>
-    <string name="init_summary_archived">영구보관 캐시 제외</string>
-    <string name="init_offlinelog">오프라인 로그 제외</string>
-    <string name="init_summary_offlinelog">오프라인 로그한 캐시 제외</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
@@ -1129,6 +1121,7 @@
     <string name="cache_images">사진</string>
     <string name="cache_advanced">고급</string>
     <string name="cache_waypoints">지점</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">지점 (%d)</string>
     <string name="cache_waypoints_add">지점 추가</string>
     <string name="cache_waypoints_add_currentLocation">현재 위치 추가</string>
     <string name="cache_waypoints_add_fromclipboard">클립보드에서 붙여넣기</string>
@@ -1176,6 +1169,7 @@
     <string name="cache_menu_map_ext">기타 외부 앱</string>
     <string name="cache_menu_streetview">스트리트 뷰</string>
     <string name="cache_menu_browser">브라우저에서 열기</string>
+    <string name="no_browser_found">브라우저를 찾을 수 없음</string>
     <string name="cache_menu_open_with">다른 프로그램으로 열기…</string>
     <string name="cache_menu_visit">로그하기</string>
     <string name="cache_log_too_long">c:geo가 로그가 너무 길어서 제출할 수 없습니다. 하지만 이렇게 광범위한 로그를 작성 해주셔서 감사합니다 ;-)</string>
@@ -1408,6 +1402,8 @@
     <string name="map_show_caches_title">캐시 보기:</string>
     <string name="map_show_waypoints_title">지점 보기:</string>
     <string name="map_show_other_title">기타 보기:</string>
+    <string name="map_settings_cache_filter_too_complex_title">캐시 필터가 너무 복잡함</string>
+    <string name="map_settings_cache_filter_too_complex_message">현재 캐시 필터가 너무 복잡해서 여기에 추가 옵션을 적용할 수 없습니다. 일반적으로 이는 캐시 필터에 단순한 AND 논리 대신 NOT 또는 OR 표현식이 포함되어 있음을 의미합니다.</string>
     <!-- search -->
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
     <string name="search_bar_desc">캐시(지오코드, 키워드), 추적아이템(TB 코드)</string>
