@@ -702,11 +702,6 @@
     <string name="init_select_language">言語の選択</string>
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
-    <string name="init_category_exclude">キャッシュを除外</string>
-    <string name="init_exclude_own">自分のものを除外</string>
-    <string name="init_summary_exclude_own">所有しているキャッシュを除外</string>
-    <string name="init_exclude_found">発見を除外</string>
-    <string name="init_summary_exclude_found">自分で発見したキャッシュを除外</string>
     <string name="init_showwaypoints">地図でウェイポイントの表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
@@ -727,12 +722,6 @@
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
     <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
     <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
-    <string name="init_disabled">一時停止中キャッシュを除外</string>
-    <string name="init_summary_disabled">一時停止中キャッシュを除外</string>
-    <string name="init_archived">アーカイブ済みを除外</string>
-    <string name="init_summary_archived">アーカイブ済みキャッシュを除外</string>
-    <string name="init_offlinelog">オフラインログを除外</string>
-    <string name="init_summary_offlinelog">オフラインログがあるキャッシュを除外</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
