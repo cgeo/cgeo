@@ -9,6 +9,8 @@ import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -55,9 +57,11 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -180,8 +184,12 @@ public class Settings {
         return getInt(R.string.pref_settingsversion, 0);
     }
 
+    public static void setActualVersion(final int newVersion) {
+        putInt(R.string.pref_settingsversion, newVersion);
+    }
+
     public static int getExpectedVersion() {
-        return 5;
+        return 6;
     }
 
     private static void migrateSettings() {
@@ -240,8 +248,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_trackautovisit), prefsV0.getBoolean(getKey(R.string.pref_trackautovisit), false));
             e.putBoolean(getKey(R.string.pref_sigautoinsert), prefsV0.getBoolean(getKey(R.string.pref_sigautoinsert), false));
             e.putBoolean(getKey(R.string.pref_logimages), prefsV0.getBoolean(getKey(R.string.pref_logimages), false));
-            e.putBoolean(getKey(R.string.pref_excludedisabled), prefsV0.getInt(getKey(R.string.pref_excludedisabled), 0) != 0);
-            e.putBoolean(getKey(R.string.pref_excludemine), prefsV0.getInt(getKey(R.string.pref_excludemine), 0) != 0);
             e.putString(getKey(R.string.pref_mapfile), prefsV0.getString(getKey(R.string.pref_mapfile), null));
             e.putString(getKey(R.string.pref_signature), prefsV0.getString(getKey(R.string.pref_signature), null));
             e.putString(getKey(R.string.pref_pass_vote), prefsV0.getString(getKey(R.string.pref_pass_vote), null));
@@ -349,6 +355,30 @@ public class Settings {
             e.putInt(getKey(R.string.pref_settingsversion), 5);
             e.apply();
         }
+
+        if (currentVersion < 6) {
+            //migrate global own/found/disable/archived/offlinelog to LIVE filter
+            final Map<GeocacheFilter.QuickFilter, Boolean> legacyGlobalSettings = new HashMap<>();
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.OWNED, !getBooleanDirect("pref_excludemine", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !getBooleanDirect("pref_excludefound", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.DISABLED, !getBooleanDirect("pref_excludedisabled", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.ARCHIVED, !getBooleanDirect("pref_excludearchived", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, !getBooleanDirect("pref_excludeofflinelog", false));
+
+            final GeocacheFilterContext liveFilterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
+            GeocacheFilter liveFilter = liveFilterContext.get();
+
+            if (!liveFilter.hasSameQuickFilter(legacyGlobalSettings)) {
+                if (!liveFilter.canSetQuickFilterLossless()) {
+                    //settings can't be merged -> remove old filter
+                    liveFilter = GeocacheFilter.createEmpty();
+                }
+                liveFilter.setQuickFilterLossless(legacyGlobalSettings);
+                liveFilterContext.set(liveFilter);
+            }
+
+            setActualVersion(6);
+        }
     }
 
     private static String getKey(final int prefKeyId) {
@@ -395,8 +425,13 @@ public class Settings {
     }
 
     private static boolean getBoolean(final int prefKeyId, final boolean defaultValue) {
-        return sharedPrefs == null ? defaultValue : sharedPrefs.getBoolean(getKey(prefKeyId), defaultValue);
+        return getBooleanDirect(getKey(prefKeyId), defaultValue);
     }
+
+    private static boolean getBooleanDirect(final String prefKey, final boolean defaultValue) {
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getBoolean(prefKey, defaultValue);
+    }
+
 
     private static float getFloat(final int prefKeyId, final float defaultValue) {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getFloat(getKey(prefKeyId), defaultValue);
@@ -748,25 +783,30 @@ public class Settings {
         return getBoolean(R.string.pref_showaddress, true);
     }
 
+    @Deprecated
     public static boolean isExcludeMyCaches() {
-        return getBoolean(R.string.pref_excludemine, false);
+        return false; //prepare for later removal
     }
 
+    @Deprecated
     public static boolean isExcludeFound() {
-        return getBoolean(R.string.pref_excludefound, false);
+        return false; //prepare for later removal
     }
 
+    @Deprecated
     public static boolean isExcludeOfflineLog() {
-        return getBoolean(R.string.pref_excludeofflinelog, false);
+        return false; //prepare for later removal
     }
 
 
+    @Deprecated
     public static boolean isExcludeDisabledCaches() {
-        return getBoolean(R.string.pref_excludedisabled, false);
+        return false; //prepare for later removal
     }
 
+    @Deprecated
     public static boolean isExcludeArchivedCaches() {
-        return getBoolean(R.string.pref_excludearchived, isExcludeDisabledCaches());
+        return false; //prepare for later removal
     }
 
     public static boolean isExcludeWpOriginal() {
@@ -1182,6 +1222,7 @@ public class Settings {
      *
      * TODO: Should be removed completely in the near future.
      */
+    @Deprecated
     @NonNull
     public static CacheType getCacheType() {
         return CacheType.ALL;
@@ -1530,26 +1571,6 @@ public class Settings {
         return getInt(R.string.pref_supersizeDistance, 0);
     }
 
-    public static void setExcludeMine(final boolean exclude) {
-        putBoolean(R.string.pref_excludemine, exclude);
-    }
-
-    public static void setExcludeFound(final boolean exclude) {
-        putBoolean(R.string.pref_excludefound, exclude);
-    }
-
-    public static void setExcludeOfflineLog(final boolean exclude) {
-        putBoolean(R.string.pref_excludeofflinelog, exclude);
-    }
-
-    public static void setExcludeDisabled(final boolean exclude) {
-        putBoolean(R.string.pref_excludedisabled, exclude);
-    }
-
-    public static void setExcludeArchived(final boolean exclude) {
-        putBoolean(R.string.pref_excludearchived, exclude);
-    }
-
     public static void setExcludeWpOriginal(final boolean exclude) {
         putBoolean(R.string.pref_excludeWpOriginal, exclude);
     }
@@ -1885,13 +1906,13 @@ public class Settings {
     }
 
     /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
-    public static String getCacheFilterConfig() {
-        return getString(R.string.pref_cache_filter_config, null);
+    public static String getCacheFilterConfig(final String type) {
+        return getStringDirect(getKey(R.string.pref_cache_filter_config) + "." + type, null);
     }
 
     /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
-    public static void setCacheFilterConfig(final String config) {
-        putString(R.string.pref_cache_filter_config, config);
+    public static void setCacheFilterConfig(final String type, final String config) {
+        putStringDirect(getKey(R.string.pref_cache_filter_config) + "." + type, config);
     }
 
     public static int getListInitialLoadLimit() {

@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
@@ -155,5 +156,9 @@ public abstract class AbstractMap {
     }
 
     public abstract Collection<Geocache> getCaches();
+
+     public abstract GeocacheFilterContext getFilterContext();
+
+     public abstract MapOptions getMapOptions();
 
 }

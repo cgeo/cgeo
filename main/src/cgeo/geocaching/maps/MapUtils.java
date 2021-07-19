@@ -6,6 +6,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -36,7 +37,7 @@ public class MapUtils {
     }
 
     // filter waypoints from owned caches or certain wp types if requested.
-    public static void filter(final Set<Waypoint> waypoints, final boolean checkCacheFilters) {
+    public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext, final boolean checkCacheFilters) {
         final boolean excludeMine = checkCacheFilters && Settings.isExcludeMyCaches();
         final boolean excludeFound = checkCacheFilters && Settings.isExcludeFound();
         final boolean excludeDisabled = checkCacheFilters && Settings.isExcludeDisabledCaches();
@@ -44,7 +45,7 @@ public class MapUtils {
         final boolean excludeOfflineLog = checkCacheFilters && Settings.isExcludeOfflineLog();
         final CacheType filterCacheType = checkCacheFilters ? null : (Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType());
 
-        final GeocacheFilter filter = GeocacheFilter.loadFromSettings();
+        final GeocacheFilter filter = filterContext.get();
 
         final boolean excludeWpOriginal = Settings.isExcludeWpOriginal();
         final boolean excludeWpParking = Settings.isExcludeWpParking();
@@ -66,9 +67,9 @@ public class MapUtils {
     }
 
     /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
-    public static void filter(final Collection<Geocache> caches) {
+    public static void filter(final Collection<Geocache> caches, final GeocacheFilterContext filterContext) {
 
-        final GeocacheFilter filter = GeocacheFilter.loadFromSettings();
+        final GeocacheFilter filter = filterContext.get();
         filter.filterList(caches);
 
 
@@ -100,16 +101,16 @@ public class MapUtils {
 
     }
 
-    public static void openFilterActivity(final Activity activity, final Collection<Geocache> filteredList) {
+    public static void openFilterActivity(final Activity activity, final GeocacheFilterContext filterContext, final Collection<Geocache> filteredList) {
 
         GeocacheFilterActivity.selectFilter(
             activity,
-            GeocacheFilter.loadFromSettings(),
+            filterContext,
             filteredList, true);
     }
 
-    public static void setFilterBar(final Activity activity) {
-        final List<String> filterNames = getMapFilters();
+    public static void setFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
+        final List<String> filterNames = getMapFilters(filterContext);
         if (filterNames.isEmpty()) {
             activity.findViewById(R.id.filter_bar).setVisibility(GONE);
         } else {
@@ -120,14 +121,14 @@ public class MapUtils {
     }
 
     @NonNull
-    private static List<String> getMapFilters() {
+    private static List<String> getMapFilters(final GeocacheFilterContext filterContext) {
         final List<String> filters = new ArrayList<>();
         if (Settings.getCacheType() != CacheType.ALL) {
             filters.add(Settings.getCacheType().getL10n());
         }
 
-        final GeocacheFilter filter = GeocacheFilter.loadFromSettings();
-        if (filter.hasFilter()) {
+        final GeocacheFilter filter = filterContext.get();
+        if (filter.isFiltering()) {
             filters.add(filter.toUserDisplayableString());
         }
 

@@ -2,6 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 
@@ -56,7 +57,9 @@ public final class DefaultMap {
     }
 
     public static void startActivitySearch(final Activity fromActivity, final SearchResult search, final String title, final int fromList) {
-        startActivitySearch(fromActivity, getDefaultMapClass(), search, title, fromList);
+        final MapOptions mo = new MapOptions(search, title, fromList);
+        mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+        mo.startIntent(fromActivity, getDefaultMapClass());
     }
 
 }

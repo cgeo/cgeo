@@ -21,6 +21,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -74,6 +75,8 @@ import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
+import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_ID;
 
@@ -262,7 +265,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         this.mapAttribution = findViewById(R.id.map_attribution);
 
         // map settings popup
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -318,7 +321,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         } else {
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
-        MapUtils.setFilterBar(this);
+        MapUtils.setFilterBar(this, mapOptions.filterContext);
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
@@ -410,6 +413,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.isLiveEnabled) {
                 mapOptions.isStoredEnabled = true;
+                mapOptions.filterContext = new GeocacheFilterContext(LIVE);
+                caches.setFilterContext(mapOptions.filterContext);
+                onMapSettingsPopupFinished(false);
             }
 
             if (mapOptions.mapMode == MapMode.LIVE) {
@@ -473,6 +479,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             trackLayer.setHidden(Settings.isHideTrack());
             trackLayer.requestRedraw();
         }
+        MapUtils.setFilterBar(this, mapOptions.filterContext);
     }
 
     private void routingModeChanged(final RoutingMode newValue) {
@@ -566,7 +573,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
      */
     @SuppressWarnings("EmptyMethod")
     public void showFilterMenu(final View view) {
-        MapUtils.openFilterActivity(this,
+        MapUtils.openFilterActivity(this, mapOptions.filterContext,
             new SearchResult(caches.getVisibleCacheGeocodes()).getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
     }
 
@@ -708,7 +715,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         resumeRoute(false);
         resumeTrack(false);
         mapView.getModel().mapViewPosition.addObserver(this);
-        MapUtils.setFilterBar(this);
+        MapUtils.setFilterBar(this, mapOptions.filterContext);
     }
 
     @Override
@@ -779,6 +786,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
         // Live enabled map
         caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
+        caches.setFilterContext(mapOptions.filterContext);
 
         // Position layer
         this.positionLayer = new PositionLayer();
@@ -1635,7 +1643,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             }
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            MapUtils.setFilterBar(this);
+            mapOptions.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
+            onMapSettingsPopupFinished(false);
         }
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);

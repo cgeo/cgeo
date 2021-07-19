@@ -2,6 +2,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
@@ -40,6 +41,7 @@ public abstract class AbstractCachesOverlay {
     private final MapHandlers mapHandlers;
     private boolean invalidated = true;
     private boolean showCircles;
+    private GeocacheFilterContext filterContext;
     private final WeakReference<NewMap> mapRef;
 
     public AbstractCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
@@ -135,6 +137,14 @@ public abstract class AbstractCachesOverlay {
                 }
             }
         }
+    }
+
+    protected void setFilterContext(final GeocacheFilterContext filterContext) {
+        this.filterContext = filterContext;
+    }
+
+    protected GeocacheFilterContext getFilterContext() {
+        return filterContext;
     }
 
     protected void update(final Set<Geocache> cachesToDisplay) {
