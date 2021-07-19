@@ -526,7 +526,6 @@
     <string name="init_select_language">Izvēlieties valodu</string>
     <string name="init_summary_select_language">Izvēlēties aplikācijas valodu (nepieciešama restartēšana)\n</string>
     <string name="init_use_default_language">Lietot noklusējuma valodu</string>
-    <string name="init_category_exclude">Izņemt slēpņus</string>
     <string name="init_showwaypoints">Rādīt starpposmus</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
@@ -537,10 +536,6 @@
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
     <string name="init_bigSmileysOnMap">Lielas ikonas atrastiem slēpņiem</string>
     <string name="init_summary_bigSmileysOnMap">Ja tās tiek aktivizētas, kartē atrastajiem slēpņiem parādīsies lielās emocijzīmes slēpņu veidu ikonu vietā (nepieciešama restartēšana).</string>
-    <string name="init_disabled">Izlaist atspējotos</string>
-    <string name="init_summary_disabled">Izlaist atspējotos slēpņus</string>
-    <string name="init_archived">Izslēgt arhivētos</string>
-    <string name="init_summary_archived">Izslēgt arhivētos slēpņus</string>
     <string name="init_global_wp_extraction_disable">Atslēgt starpposmu izvilkšanu</string>
     <string name="init_save_log_img">Saglabāt attēlus</string>
     <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
