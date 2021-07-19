@@ -107,7 +107,7 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
             final SearchResult searchResult = useLastSearchResult ? lastSearchResult : ConnectorFactory.searchByViewport(newViewport);
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            MapUtils.filter(result);
+            MapUtils.filter(result, getFilterContext());
             // update the caches
             // first remove filtered out
             final Set<String> filteredCodes = searchResult.getFilteredGeocodes();

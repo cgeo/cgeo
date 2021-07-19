@@ -17,6 +17,7 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
@@ -571,7 +572,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
-            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged));
+            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -601,7 +602,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.onMapReady(() -> initializeMap(trailHistory));
 
-        MapUtils.setFilterBar(this.getActivity());
+        MapUtils.setFilterBar(this.getActivity(), mapOptions.filterContext);
 
         AndroidBeam.disable(activity);
 
@@ -689,7 +690,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
             });
         }
-        MapUtils.setFilterBar(activity);
+        MapUtils.setFilterBar(activity, mapOptions.filterContext);
         resumeTrack(false);
     }
 
@@ -793,6 +794,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (mapOptions.mapMode == MapMode.LIVE) {
                 Settings.setLiveMap(mapOptions.isLiveEnabled);
             }
+            if (mapOptions.isLiveEnabled) {
+                mapOptions.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
+                onMapSettingsPopupFinished(false);
+            }
             markersInvalidated = true;
             lastSearchResult = null;
             mapOptions.searchResult = null;
@@ -837,6 +842,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapView.setCircles(Settings.isShowCircles());
             mapView.repaintRequired(null);
         }
+        MapUtils.setFilterBar(activity, mapOptions.filterContext);
+
     }
 
     private void routingModeChanged(final RoutingMode newValue) {
@@ -1279,10 +1286,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             caches.addAll(cachesFromSearchResult);
 
 
-            if (mapMode == MapMode.LIVE || mapOptions.isLiveEnabled) {
-                synchronized (caches) {
-                    MapUtils.filter(caches);
-                }
+            synchronized (caches) {
+                MapUtils.filter(caches, mapOptions.filterContext);
             }
 
             countVisibleCaches();
@@ -1298,13 +1303,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     final boolean excludeArchived = Settings.isExcludeArchivedCaches();
                     final boolean excludeOfflineLogs = Settings.isExcludeOfflineLog();
                     final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs, type);
-                    MapUtils.filter(waypointsInViewport, true);
+                    MapUtils.filter(waypointsInViewport, mapOptions.filterContext, true);
                     waypoints.addAll(waypointsInViewport);
                 } else {
                     //All visible waypoints from the viewed caches
                     for (final Geocache c : caches.getAsList()) {
                         final Set<Waypoint> filteredWaypoints = new HashSet<>(c.getWaypoints());
-                        MapUtils.filter(filteredWaypoints, false);
+                        MapUtils.filter(filteredWaypoints, mapOptions.filterContext, false);
                         waypoints.addAll(filteredWaypoints);
                     }
                 }
@@ -1350,7 +1355,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             downloaded = true;
 
             final Set<Geocache> result = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            MapUtils.filter(result);
+            MapUtils.filter(result, mapOptions.filterContext);
 
             // update the caches
             // first remove filtered out
@@ -1831,6 +1836,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     public Collection<Geocache> getCaches() {
         return caches;
+    }
+
+    @Override
+    public GeocacheFilterContext getFilterContext() {
+        return mapOptions.filterContext;
+    }
+
+    @Override
+    public MapOptions getMapOptions() {
+        return mapOptions;
     }
 
 }

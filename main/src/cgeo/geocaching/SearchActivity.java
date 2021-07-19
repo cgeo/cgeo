@@ -8,7 +8,7 @@ import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
 import cgeo.geocaching.databinding.SearchActivityBinding;
-import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
@@ -287,7 +287,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByFilterFn() {
-        GeocacheFilterActivity.selectFilter(this, GeocacheFilter.loadFromSettings(), null, false);
+        GeocacheFilterActivity.selectFilter(this, new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE), null, false);
 
     }
 
@@ -295,8 +295,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            final GeocacheFilter selectedFilter = GeocacheFilter.createFromConfig(data.getStringExtra(GeocacheFilterActivity.EXTRA_FILTER_RESULT));
-            CacheListActivity.startActivityFilter(this, selectedFilter);
+            CacheListActivity.startActivityFilter(this);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }

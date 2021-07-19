@@ -205,7 +205,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
      * Called when a new page of caches was loaded.
      */
     public void reFilter() {
-        if (currentFilter != null || (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter())) {
+        if (hasActiveFilter()) {
             // Back up the list again
             originalList = new ArrayList<>(list);
 
@@ -230,7 +230,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         // If there is already a filter in place, this is a request to change or clear the filter, so we have to
         // replace the original cache list
-        if (currentFilter != null || (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter())) {
+        if (hasActiveFilter()) {
             list.clear();
             list.addAll(originalList);
         }
@@ -248,18 +248,19 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (currentFilter != null) {
             currentFilter.filter(list);
         }
-        if (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter()) {
+        if (currentGeocacheFilter != null && currentGeocacheFilter.isFiltering()) {
             currentGeocacheFilter.filterList(list);
         }
     }
 
-    public boolean isFiltered() {
-        return currentFilter != null || (currentGeocacheFilter != null && currentGeocacheFilter.hasFilter());
+    public boolean hasActiveFilter() {
+        final boolean newFilterFilters = currentGeocacheFilter != null && currentGeocacheFilter.isFiltering();
+        return currentFilter != null || newFilterFilters;
     }
 
     public String getFilterName() {
         return (currentFilter == null ? "-" : currentFilter.getName()) + "|" +
-            (currentGeocacheFilter == null || !currentGeocacheFilter.hasFilter() ? "-" : currentGeocacheFilter.toUserDisplayableString());
+            (currentGeocacheFilter == null || !currentGeocacheFilter.isFiltering() ? "-" : currentGeocacheFilter.toUserDisplayableString());
     }
 
     public int getCheckedCount() {

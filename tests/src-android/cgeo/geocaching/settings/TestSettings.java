@@ -16,14 +16,6 @@ public final class TestSettings extends Settings {
         throw new InstantiationError();
     }
 
-    public static void setExcludeDisabledCaches(final boolean exclude) {
-        putBoolean(R.string.pref_excludedisabled, exclude);
-    }
-
-    public static void setExcludeMine(final boolean exclude) {
-        putBoolean(R.string.pref_excludemine, exclude);
-    }
-
     public static void setLogin(final Credentials credentials) {
         Settings.setLogin(credentials.getUsernameRaw(), credentials.getPasswordRaw());
     }

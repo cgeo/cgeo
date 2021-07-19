@@ -2,6 +2,8 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.MapSettingsDialogBinding;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.IndividualRoute;
@@ -31,9 +33,12 @@ import androidx.annotation.StringRes;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import static java.lang.Boolean.TRUE;
 
 import com.google.android.material.button.MaterialButtonToggleGroup;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
 
@@ -47,19 +52,22 @@ public class MapSettingsUtils {
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
         colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
 
+        final GeocacheFilter filter = filterContext.get();
+        final Map<GeocacheFilter.QuickFilter, Boolean> quickFilter = filter.getQuickFilter();
+
         final ArrayList<SettingsCheckboxModel> allCbs = new ArrayList<>();
 
-        final SettingsCheckboxModel foundCb = createCb(allCbs, R.string.map_showc_found, ImageParam.id(R.drawable.marker_found), Settings.isExcludeFound(), Settings::setExcludeFound, true);
-        final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, ImageParam.id(R.drawable.marker_own), Settings.isExcludeMyCaches(), Settings::setExcludeMine, true);
-        final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled,  R.drawable.map_status_disabled, Settings.isExcludeDisabledCaches(), Settings::setExcludeDisabled, true);
-        final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, Settings.isExcludeArchivedCaches(), Settings::setExcludeArchived, true);
-        final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_offlinelog, R.drawable.marker_found_offline, Settings.isExcludeOfflineLog(), Settings::setExcludeOfflineLog, true);
+        final SettingsCheckboxModel foundCb = createCb(allCbs, R.string.map_showc_found, ImageParam.id(R.drawable.marker_found), quickFilter.get(GeocacheFilter.QuickFilter.FOUND), f -> quickFilter.put(GeocacheFilter.QuickFilter.FOUND, f), false);
+        final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, ImageParam.id(R.drawable.marker_own), quickFilter.get(GeocacheFilter.QuickFilter.OWNED), f -> quickFilter.put(GeocacheFilter.QuickFilter.OWNED, f), false);
+        final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled,  R.drawable.map_status_disabled, quickFilter.get(GeocacheFilter.QuickFilter.DISABLED), f -> quickFilter.put(GeocacheFilter.QuickFilter.DISABLED, f), false);
+        final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
+        final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_offlinelog, R.drawable.marker_found_offline, quickFilter.get(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG), f -> quickFilter.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, f), false);
         final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, R.drawable.waypoint_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
         final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, R.drawable.waypoint_pkg, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
         final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.tick, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
@@ -72,12 +80,14 @@ public class MapSettingsUtils {
         final LinearLayout leftColumn = columns.get(0);
         final LinearLayout rightColumn = columns.get(1);
 
+        final boolean disableCacheFilters = !filter.canSetQuickFilterLossless();
+
         leftColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_caches_title)));
-        foundCb.addToViewGroup(activity, leftColumn);
-        ownCb.addToViewGroup(activity, leftColumn);
-        disabledCb.addToViewGroup(activity, leftColumn);
-        archivedCb.addToViewGroup(activity, leftColumn);
-        offlineLogCb.addToViewGroup(activity, leftColumn);
+        foundCb.addToViewGroup(activity, leftColumn, disableCacheFilters);
+        ownCb.addToViewGroup(activity, leftColumn, disableCacheFilters);
+        disabledCb.addToViewGroup(activity, leftColumn, disableCacheFilters);
+        archivedCb.addToViewGroup(activity, leftColumn, disableCacheFilters);
+        offlineLogCb.addToViewGroup(activity, leftColumn, disableCacheFilters);
 
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_waypoints_title)));
         wpOriginalCb.addToViewGroup(activity, rightColumn);
@@ -112,7 +122,14 @@ public class MapSettingsUtils {
                 }
                 compactIconWrapper.setValue();
                 routingChoiceWrapper.setValue();
+
+                if (filter.canSetQuickFilterLossless() && !filter.hasSameQuickFilter(quickFilter)) {
+                    filter.setQuickFilterLossless(quickFilter);
+                    filterContext.set(filter);
+                }
+
                 onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
+
                 if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
                     if (route == null) {
                         Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
@@ -147,13 +164,13 @@ public class MapSettingsUtils {
         }
     }
 
-    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle, @DrawableRes final int resIcon, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle, @DrawableRes final int resIcon, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
         final SettingsCheckboxModel result = new SettingsCheckboxModel(resTitle, resIcon, currentValue, setValue, isNegated);
         coll.add(result);
         return result;
     }
 
-    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle,  final ImageParam imageParam, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle,  final ImageParam imageParam, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
         final SettingsCheckboxModel result = new SettingsCheckboxModel(resTitle, imageParam, currentValue, setValue, isNegated);
         coll.add(result);
         return result;
@@ -166,30 +183,44 @@ public class MapSettingsUtils {
         private final Action1<Boolean> setValue;
         private final boolean isNegated;
 
-        SettingsCheckboxModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+        SettingsCheckboxModel(@StringRes final int resTitle, @DrawableRes final int resIcon, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
             this.resTitle = resTitle;
             this.imageParam = ImageParam.id(resIcon);
-            this.currentValue = isNegated != currentValue;
+            this.currentValue = isNegated != (TRUE.equals(currentValue));
             this.setValue = setValue;
             this.isNegated = isNegated;
         }
 
-        SettingsCheckboxModel(@StringRes final int resTitle, final ImageParam imageParam, final boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+        SettingsCheckboxModel(@StringRes final int resTitle, final ImageParam imageParam, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
             this.resTitle = resTitle;
             this.imageParam = imageParam;
-            this.currentValue = isNegated != currentValue;
+            this.currentValue = isNegated != (TRUE.equals(currentValue));
             this.setValue = setValue;
             this.isNegated = isNegated;
         }
 
         public void setValue() {
-            this.setValue.call(isNegated != currentValue);
+            if (setValue != null) {
+                this.setValue.call(isNegated != currentValue);
+            }
         }
 
         public void addToViewGroup(final Activity ctx, final ViewGroup viewGroup) {
-            final CheckBox cb = ViewUtils.addCheckboxItem(ctx, viewGroup, TextParam.id(resTitle), imageParam);
-            cb.setChecked(currentValue);
-            cb.setOnCheckedChangeListener((v, c) -> this.currentValue = !this.currentValue);
+            addToViewGroup(ctx, viewGroup, false);
+        }
+
+        public void addToViewGroup(final Activity ctx, final ViewGroup viewGroup, final boolean disableView) {
+
+            final ImmutablePair<View, CheckBox> ip = ViewUtils.createCheckboxItem(ctx, viewGroup, TextParam.id(resTitle), imageParam, null);
+            viewGroup.addView(ip.left);
+            if (disableView) {
+                ip.right.setEnabled(false);
+                ip.left.setOnClickListener(v -> SimpleDialog.of(ctx).setTitle(R.string.map_settings_cache_filter_too_complex_title)
+                    .setMessage(R.string.map_settings_cache_filter_too_complex_message).show());
+            }
+
+            ip.right.setChecked(currentValue);
+            ip.right.setOnCheckedChangeListener((v, c) -> this.currentValue = !this.currentValue);
         }
     }
 

@@ -9,7 +9,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.TestSettings;
 import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 import java.util.Set;
@@ -22,13 +21,9 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
     public static void testGetViewport() {
         // backup user settings
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeFound = Settings.isExcludeFound();
         final CacheType cacheType = Settings.getCacheType();
         try {
             // set up settings required for test
-            TestSettings.setExcludeMine(false);
-            TestSettings.setExcludeFound(false);
             Settings.setCacheType(CacheType.ALL);
             GCLogin.getInstance().login();
 
@@ -59,8 +54,6 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
             }
         } finally {
             // restore user settings
-            TestSettings.setExcludeMine(excludeMine);
-            TestSettings.setExcludeFound(excludeFound);
             Settings.setCacheType(cacheType);
         }
     }

@@ -51,8 +51,9 @@ public enum GeocacheFilterType {
         return this.typeId;
     }
 
-    public BaseGeocacheFilter create() {
-        final BaseGeocacheFilter gcf = supplier.get();
+    @SuppressWarnings("unchecked")
+    public <T extends BaseGeocacheFilter> T create() {
+        final T gcf = (T) supplier.get();
         gcf.setType(this);
         return gcf;
     }

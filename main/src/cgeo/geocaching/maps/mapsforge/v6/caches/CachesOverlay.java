@@ -3,6 +3,7 @@ package cgeo.geocaching.maps.mapsforge.v6.caches;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
@@ -44,7 +45,7 @@ public class CachesOverlay extends AbstractCachesOverlay {
         return Schedulers.newThread().schedulePeriodicallyDirect(new CachesOverlay.LoadTimerAction(this), 0, 250, TimeUnit.MILLISECONDS);
     }
 
-    private static final class LoadTimerAction implements Runnable {
+    private final class LoadTimerAction implements Runnable {
 
         @NonNull
         private final WeakReference<CachesOverlay> overlayRef;
@@ -65,6 +66,7 @@ public class CachesOverlay extends AbstractCachesOverlay {
                 // Initially bring the main list in
                 if (overlay.firstRun || overlay.isInvalidated()) {
                     final Set<Geocache> cachesToDisplay = overlay.search.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
+                    MapUtils.filter(cachesToDisplay, getFilterContext());
                     overlay.display(cachesToDisplay);
                     overlay.firstRun = false;
                     overlay.refreshed();

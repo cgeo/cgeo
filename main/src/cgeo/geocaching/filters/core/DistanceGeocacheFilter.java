@@ -84,4 +84,15 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
         addRangeToSqlBuilder(sqlBuilder, sql, v -> v * v);
     }
 
+    @Override
+    public boolean isFiltering() {
+        return super.isFiltering() || !useCurrentPosition;
+    }
+
+    @Override
+    protected String getUserDisplayableConfig() {
+        return GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE_SHORT, getEffectiveCoordinate()) + "(" + super.getUserDisplayableConfig() + ")";
+    }
+
+
 }

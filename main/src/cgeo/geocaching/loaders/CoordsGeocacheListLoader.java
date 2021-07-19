@@ -4,9 +4,11 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
 import android.app.Activity;
 
@@ -30,10 +32,10 @@ public class CoordsGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         //use filter search instead of dedicated distance search
-        final GeocacheFilter baseFilter = GeocacheFilter.loadFromSettings();
+        final GeocacheFilter coordFilter = GeocacheFilterContext.getForType(LIVE).and(getAdditionalFilterParameter());
 
         return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(GeocacheFilterType.DISTANCE),
-            connector -> connector.searchByFilter(baseFilter.and(getAdditionalFilterParameter())));
+            connector -> connector.searchByFilter(coordFilter));
     }
 
 }

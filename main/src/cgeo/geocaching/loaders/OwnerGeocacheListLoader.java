@@ -3,9 +3,11 @@ package cgeo.geocaching.loaders;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
 import android.app.Activity;
 
@@ -30,12 +32,10 @@ public class OwnerGeocacheListLoader extends AbstractSearchLoader {
     @Override
     public SearchResult runSearch() {
         //use filter search instead of dedicated owner search
-        final GeocacheFilter baseFilter = GeocacheFilter.loadFromSettings();
-
-
+        final GeocacheFilter useFilter = GeocacheFilterContext.getForType(LIVE).and(getAdditionalFilterParameter());
 
         return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(GeocacheFilterType.OWNER),
-            connector -> connector.searchByFilter(baseFilter.and(getAdditionalFilterParameter())));
+            connector -> connector.searchByFilter(useFilter));
     }
 
 }

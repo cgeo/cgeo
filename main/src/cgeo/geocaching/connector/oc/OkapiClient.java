@@ -396,6 +396,7 @@ final class OkapiClient {
         final Geopoint usedCenter = center != null ? center : Sensors.getInstance().currentGeo().getCoords();
         final String centerString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, usedCenter) + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, usedCenter);
         valueMap.put("center", centerString);
+        valueMap.put("radius", "200");
         params.removeKey("search_method");
         params.put("search_method", METHOD_SEARCH_NEAREST);
     }
@@ -1064,7 +1065,7 @@ final class OkapiClient {
             }
         }
 
-        return SERVICE_CACHE_CORE_FIELDS;
+        return res.toString();
     }
 
     @NonNull

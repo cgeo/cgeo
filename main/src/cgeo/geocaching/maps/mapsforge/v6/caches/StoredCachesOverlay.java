@@ -87,7 +87,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
 
             final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
 
-            MapUtils.filter(cachesFromSearchResult);
+            MapUtils.filter(cachesFromSearchResult, getFilterContext());
 
             // render
             update(cachesFromSearchResult);

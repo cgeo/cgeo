@@ -16,6 +16,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.TrackUtils;
+import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -240,7 +241,8 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
             */
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            MapUtils.setFilterBar(this);
+            mapBase.getMapOptions().filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
+            mapBase.onMapSettingsPopupFinished(false);
         }
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
@@ -250,7 +252,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     public void showFilterMenu(final View view) {
-        MapUtils.openFilterActivity(this, mapBase.getCaches());
+        MapUtils.openFilterActivity(this, mapBase.getFilterContext(), mapBase.getCaches());
     }
 
 }

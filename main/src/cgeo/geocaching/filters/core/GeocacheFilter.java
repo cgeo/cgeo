@@ -2,30 +2,35 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 import cgeo.geocaching.utils.expressions.ExpressionParser;
+import cgeo.geocaching.utils.functions.Action1;
 
 import androidx.annotation.NonNull;
 
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.SortedMap;
 import java.util.TreeMap;
+import static java.lang.Boolean.TRUE;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 
-public class GeocacheFilter {
+public class GeocacheFilter implements Cloneable {
 
-    public static final GeocacheFilter EMPTY_FILTER = new GeocacheFilter(null, false, false, null);
+    public enum QuickFilter {
+        FOUND, OWNED, DISABLED, ARCHIVED, HAS_OFFLINE_LOG
+    }
 
     private static final String CONFIG_KEY_ADV_MODE = "advanced";
     private static final String CONFIG_KEY_INCLUDE_INCLUSIVE = "inconclusive";
@@ -41,8 +46,8 @@ public class GeocacheFilter {
         }
     }
 
-    private final String name;
-    private final IGeocacheFilter tree;
+    private String name;
+    private IGeocacheFilter tree;
 
     private final boolean openInAdvancedMode;
     private final boolean includeInconclusive;
@@ -67,8 +72,7 @@ public class GeocacheFilter {
             final GeocacheFilter other = storedFilters.get(newName);
             return other != null &&
                 (!Objects.equals(other.getTreeConfig(), filter.getTreeConfig()) ||
-                    filter.isIncludeInconclusive() != other.isIncludeInconclusive() ||
-                    filter.isOpenInAdvancedMode() != other.isOpenInAdvancedMode());
+                    filter.isIncludeInconclusive() != other.isIncludeInconclusive());
         }
 
         public static synchronized void save(final GeocacheFilter filter) {
@@ -93,7 +97,7 @@ public class GeocacheFilter {
         }
     }
 
-    public GeocacheFilter(final String name, final boolean openInAdvancedMode, final boolean includeInconclusive, final IGeocacheFilter tree) {
+    private GeocacheFilter(final String name, final boolean openInAdvancedMode, final boolean includeInconclusive, final IGeocacheFilter tree) {
         this.name = name;
         this.tree = tree;
         this.openInAdvancedMode = openInAdvancedMode;
@@ -122,6 +126,16 @@ public class GeocacheFilter {
     }
 
     @NonNull
+    public static GeocacheFilter create(final String name, final boolean openInAdvancedMode, final boolean includeInconclusive, final IGeocacheFilter tree) {
+        return new GeocacheFilter(name, openInAdvancedMode, includeInconclusive, tree);
+    }
+
+    @NonNull
+    public static GeocacheFilter createEmpty() {
+        return new GeocacheFilter(null, false, false, null);
+    }
+
+    @NonNull
     public static GeocacheFilter createFromConfig(final String filterConfig) {
         return createFromConfig(null, filterConfig);
     }
@@ -132,17 +146,8 @@ public class GeocacheFilter {
             return createInternal(pName, filterConfig, false);
         } catch (ParseException e) {
             //will never happen
-            return EMPTY_FILTER;
+            return createEmpty();
         }
-    }
-
-    @NonNull
-    public static GeocacheFilter loadFromSettings() {
-        return GeocacheFilter.createFromConfig(Settings.getCacheFilterConfig());
-    }
-
-    public void storeToSettings() {
-        Settings.setCacheFilterConfig(this.toConfig());
     }
 
     public static GeocacheFilter checkConfig(final String filterConfig) throws ParseException {
@@ -183,7 +188,7 @@ public class GeocacheFilter {
         return new GeocacheFilter(name, openInAdvancedMode, includeInconclusive, tree);
     }
 
-    public boolean hasFilter() {
+    public boolean isFiltering() {
         return tree != null && tree.isFiltering();
     }
 
@@ -223,9 +228,16 @@ public class GeocacheFilter {
         list.addAll(itemsToKeep);
     }
 
+    @Override
+    @NonNull
+    public GeocacheFilter clone() {
+        return createFromConfig(this.toConfig());
+    }
+
     /**
-     * constructs a new GeocacheFilter which is identical to this filter but adds the given AND conditions to it.
+     * modifies this GeocacheFilter by adding the given AND conditions to it.
      * New filters are added BEFORE existing one (assuming that they have priority in case it is necessary to decide to filter one or the other)
+     * returns this for convenience
      */
     public GeocacheFilter and(final IGeocacheFilter ... filters) {
 
@@ -234,7 +246,9 @@ public class GeocacheFilter {
         }
 
         if (this.tree == null && filters.length == 1) {
-            return new GeocacheFilter(null, openInAdvancedMode, includeInconclusive, filters[0]);
+            this.tree = filters[0];
+            this.name = null;
+            return this;
         }
 
         final AndGeocacheFilter andFilter = new AndGeocacheFilter();
@@ -242,9 +256,17 @@ public class GeocacheFilter {
             andFilter.addChild(f);
         }
         if (this.tree != null) {
-            andFilter.addChild(this.tree);
+            if (isAndFilter(this.tree)) {
+                for (IGeocacheFilter andChild : this.tree.getChildren()) {
+                    andFilter.addChild(andChild);
+                }
+            } else {
+                andFilter.addChild(this.tree);
+            }
         }
-        return new GeocacheFilter(null, openInAdvancedMode, includeInconclusive, andFilter);
+        this.name = null;
+        this.tree = andFilter;
+        return this;
     }
 
     public boolean isSaved() {
@@ -275,6 +297,7 @@ public class GeocacheFilter {
      * Helper method to be used in conjunction with {@link #getAndChainIfPossible()} by search providers
      * only offering SPECIFIC filter capabilities. This method searches and returns specific base filters contained in a given filter list
      */
+    @SuppressWarnings("unchecked")
     public static <T extends BaseGeocacheFilter> T findInChain(final List<BaseGeocacheFilter> filters, final Class<T> filterClazz) {
         for (BaseGeocacheFilter filter : filters) {
             if (filterClazz.isAssignableFrom(filter.getClass())) {
@@ -286,13 +309,69 @@ public class GeocacheFilter {
 
     private void getAndChainIfPossibleInternal(final IGeocacheFilter filterToCheck, final List<BaseGeocacheFilter> chain) {
 
-        if (filterToCheck instanceof AndGeocacheFilter && (!(filterToCheck instanceof NotGeocacheFilter))) {
+        if (isAndFilter(filterToCheck)) {
             for (IGeocacheFilter fChild : filterToCheck.getChildren()) {
                 getAndChainIfPossibleInternal(fChild, chain);
             }
         } else if (filterToCheck instanceof  BaseGeocacheFilter) {
             chain.add((BaseGeocacheFilter) filterToCheck);
         }
+    }
+
+    /**
+     * Extracts quickfilter settings from this filter. For each quickfilter, an entry is returned
+     * For each quickfilter, it is stored whether corresponding caches shall be shown (true) or not (false)
+     */
+    public Map<QuickFilter, Boolean> getQuickFilter() {
+        final Map<QuickFilter, Boolean> result = new HashMap<>();
+        final StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(), StatusGeocacheFilter.class);
+        result.put(QuickFilter.FOUND, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusFound()));
+        result.put(QuickFilter.OWNED, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusOwned()));
+        result.put(QuickFilter.HAS_OFFLINE_LOG, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusHasOfflineLog()));
+        result.put(QuickFilter.DISABLED, statusFilter == null || !statusFilter.isExcludeDisabled());
+        result.put(QuickFilter.ARCHIVED, statusFilter == null || !statusFilter.isExcludeArchived());
+        return result;
+    }
+
+    public boolean hasSameQuickFilter(final Map<QuickFilter, Boolean> newQuickFilter) {
+        final Map<QuickFilter, Boolean> quickFilter = getQuickFilter();
+        return quickFilter.equals(newQuickFilter);
+    }
+
+    public boolean canSetQuickFilterLossless() {
+        return getTree() == null || getTree() instanceof BaseGeocacheFilter || isAndFilter(getTree());
+    }
+
+    public void setQuickFilterLossless(final Map<QuickFilter, Boolean> newQuickFilter) {
+        if (!canSetQuickFilterLossless() || hasSameQuickFilter(newQuickFilter)) {
+            return;
+        }
+
+        StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(), StatusGeocacheFilter.class);
+        if (statusFilter == null) {
+            statusFilter = GeocacheFilterType.STATUS.create();
+            and(statusFilter);
+        }
+        final Map<QuickFilter, Boolean> quickFilter = getQuickFilter();
+        final StatusGeocacheFilter sFilter = statusFilter;
+        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.FOUND, f -> sFilter.setStatusFound(f ? null : false));
+        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.OWNED, f -> sFilter.setStatusOwned(f ? null : false));
+        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.HAS_OFFLINE_LOG, f -> sFilter.setStatusHasOfflineLog(f ? null : false));
+        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.DISABLED, f -> sFilter.setExcludeDisabled(!f));
+        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.ARCHIVED, f -> sFilter.setExcludeArchived(!f));
+    }
+
+    private void setSingleQuickFilter(final Map<QuickFilter, Boolean> currentFilter, final Map<QuickFilter, Boolean> newFilter, final QuickFilter qf, final Action1<Boolean> setter) {
+        final boolean currValue = TRUE.equals(currentFilter.get(qf));
+        final boolean newValue = TRUE.equals(newFilter.get(qf));
+        if (currValue == newValue) {
+            return;
+        }
+        setter.call(newValue);
+    }
+
+    private static boolean isAndFilter(final IGeocacheFilter filter) {
+        return filter instanceof AndGeocacheFilter && !(filter instanceof NotGeocacheFilter);
     }
 
 
