@@ -564,7 +564,6 @@
     <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
     <string name="init_select_language">Pasirinkite kalbą</string>
     <string name="init_use_default_language">Naudokite numatytąją kalbą</string>
-    <string name="init_category_exclude">Išskirkite slėptuves</string>
     <string name="init_showwaypoints">Rodyti papildomus taškus</string>
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
     <string name="init_zoomincludingwaypoints">Priartinimas su papildomais taškais</string>
@@ -573,10 +572,6 @@
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone…</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
     <string name="init_bigSmileysOnMap">Didelės užregistruotų slėptuvių piktogramos</string>
-    <string name="init_disabled">Atmesti išjungtas</string>
-    <string name="init_summary_disabled">Atmesti išjungtas slėptuves</string>
-    <string name="init_archived">Atmesti archyvuotas</string>
-    <string name="init_summary_archived">Atmesti archyvuotas slėptuves</string>
     <string name="init_global_wp_extraction_disable">Išjungti papildomų tašku išskleidimą</string>
     <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti papildomų taškų išskleidimą iš asmeninių slėptuvių užrašų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių užrašų</string>
     <string name="init_save_log_img">Išsaugoti vaizdus</string>
