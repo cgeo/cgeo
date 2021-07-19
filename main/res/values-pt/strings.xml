@@ -475,6 +475,9 @@
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
+    <string name="cache_filter_contexttype_live_title">Filtro em Tempo Real</string>
+    <string name="cache_filter_contexttype_offline_title">Filtro em Modo Offline</string>
+    <string name="cache_filter_contexttype_transient_title">Filtro</string>
     <string name="cache_filter_include">Incluir</string>
     <string name="cache_filter_exclude">Excluir</string>
     <string name="cache_filter_userdisplay_complex">Complexo</string>
@@ -708,11 +711,6 @@
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
-    <string name="init_category_exclude">Excluir caches</string>
-    <string name="init_exclude_own">Excluir Minhas</string>
-    <string name="init_summary_exclude_own">Exclui caches que lhe pertencem </string>
-    <string name="init_exclude_found">Excluir Encontradas</string>
-    <string name="init_summary_exclude_found">Exclui caches que já encontrou</string>
     <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
@@ -733,12 +731,6 @@
     <string name="init_summary_useInternalRouting">Use o encaminhamento interno do c:geo para poder usar o descarregamento automático dos dados de encaminhamento e outras funções</string>
     <string name="init_bigSmileysOnMap">Grandes ícones nas caches registadas</string>
     <string name="init_summary_bigSmileysOnMap">Se activado, as caches registadas serão mostradas no mapa por grandes emoticons, ao invés dos ícones do tipo de cache (requer reinício).</string>
-    <string name="init_disabled">Excluir Desactivadas</string>
-    <string name="init_summary_disabled">Exclui as caches desactivadas</string>
-    <string name="init_archived">Excluir Arquivadas</string>
-    <string name="init_summary_archived">Exclui as caches arquivadas</string>
-    <string name="init_offlinelog">Excluir com Registo Offline</string>
-    <string name="init_summary_offlinelog">Exclui caches com Registo Offline</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
@@ -1421,6 +1413,8 @@
     <string name="map_show_caches_title">Mostrar Caches:\n</string>
     <string name="map_show_waypoints_title">Mostrar pontos adicionais:</string>
     <string name="map_show_other_title">Mostrar outro:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filtro de cache muito complexo</string>
+    <string name="map_settings_cache_filter_too_complex_message">O filtro de cache actual é muito complexo para se aplicarem aqui as opções adicionais. Geralmente, isso significa que o filtro de cache contém expressões do tipo \"NOT\" (não) ou \"OR\" (ou) em vez de expressões simples lógicas do tipo \"AND\" (e).</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
     <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
