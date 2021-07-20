@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.databinding.CacheFilterActivityBinding;
 import cgeo.geocaching.databinding.CacheFilterListItemBinding;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
+import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
@@ -102,11 +103,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         } else {
             filterContext = new GeocacheFilterContext(TRANSIENT);
         }
-        originalFilterConfig = filterContext.get().toConfig();
+
 
         setTitle(getString(filterContext.getType().titleId));
-
-        fillViewFromFilter(originalFilterConfig, false);
+        fillViewFromFilter(filterContext.get().toConfig(), false);
+        originalFilterConfig = getFilterFromView().toConfig();
 
         this.binding.filterBasicAdvanced.setOnCheckedChangeListener((v, c) -> {
             if (c) {
@@ -247,6 +248,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                         filterList.add(FilterViewHolderCreator.createFor(c, this));
                     }
                 }
+                if (filterTree instanceof BaseGeocacheFilter) {
+                    filterList.add(FilterViewHolderCreator.createFor(filterTree, this));
+                }
                 filterListAdapter.setItems(filterList);
                 adjustFilterEmptyView();
                 //filterListAdapter.submitList(filterList, this::adjustFilterEmptyView);
@@ -312,14 +316,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     @Override
     public void onBackPressed() {
-        final GeocacheFilter originalFilter = GeocacheFilter.createFromConfig(originalFilterConfig);
         final GeocacheFilter newFilter = getFilterFromView();
-        if (!originalFilter.isFiltering() && !newFilter.isFiltering()) {
-            finish();
-        } else if (originalFilter.toConfig().equals(newFilter.toConfig())) {
-            finish();
-        } else {
+        final boolean filterWasChanged = !originalFilterConfig.equals(newFilter.toConfig());
+        if (filterWasChanged) {
             SimpleDialog.of(this).setTitle(R.string.confirm_unsaved_changes_title).setMessage(R.string.confirm_discard_changes).confirm((dialog, which) -> finish());
+        } else {
+            finish();
         }
     }
 
