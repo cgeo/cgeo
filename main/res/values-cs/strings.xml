@@ -1444,9 +1444,6 @@
     <string name="search_kw">Klíčová slova</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
     <string name="search_kw_button">Hledat podle klíčového slova</string>
-    <string name="search_fbu">Nalezeno</string>
-    <string name="search_fbu_prefill">Uživatelské jméno</string>
-    <string name="search_fbu_button">Hledat podle nálezce</string>
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hledat podle vlastníka</string>
@@ -1504,7 +1501,6 @@
     <!-- user -->
     <string name="user_menu_title">O</string>
     <string name="user_menu_view_hidden">Skryté kešky</string>
-    <string name="user_menu_view_found">Nalezené kešky</string>
     <string name="user_menu_open_browser">Otevřít profil v prohlížeči</string>
     <string name="user_menu_send_message">Odeslat zprávu</string>
     <string name="user_menu_send_email">Poslat e-mail</string>
