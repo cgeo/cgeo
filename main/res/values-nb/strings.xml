@@ -1202,9 +1202,6 @@
     <string name="search_kw">Nøkkelord</string>
     <string name="search_kw_prefill">Nøkkelord</string>
     <string name="search_kw_button">Søk med nøkkelord</string>
-    <string name="search_fbu">Funnet av</string>
-    <string name="search_fbu_prefill">Brukernavn</string>
-    <string name="search_fbu_button">Søk med brukernavn</string>
     <string name="search_hbu">Utplassert av</string>
     <string name="search_hbu_prefill">Eier</string>
     <string name="search_hbu_button">Søk med</string>
@@ -1254,7 +1251,6 @@
     <!-- user -->
     <string name="user_menu_title">Om</string>
     <string name="user_menu_view_hidden">Cachene gjemt</string>
-    <string name="user_menu_view_found">Cachene funnet</string>
     <string name="user_menu_open_browser">Åpne profil i nettleseren</string>
     <string name="user_menu_send_message">Send melding</string>
     <string name="user_menu_send_email">Send e-post</string>
