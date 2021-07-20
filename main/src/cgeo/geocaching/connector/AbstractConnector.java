@@ -310,9 +310,6 @@ public abstract class AbstractConnector implements IConnector {
             actions.add(new UserAction(R.string.user_menu_view_hidden, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
         }
 
-        if (this instanceof ISearchByFinder) {
-            actions.add(new UserAction(R.string.user_menu_view_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
-        }
         actions.add(new UserAction(R.string.copy_to_clipboard, R.drawable.ic_menu_copy, context -> {
             ClipboardUtils.copyToClipboard(context.userName);
             ActivityMixin.showToast(context.getContext(), R.string.clipboard_copy_ok);

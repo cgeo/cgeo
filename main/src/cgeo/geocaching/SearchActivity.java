@@ -180,7 +180,6 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         setSearchAction(binding.address, binding.searchAddress, this::findByAddressFn, null);
         setSearchAction(binding.geocode, binding.displayGeocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode);
         setSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
-        setSearchAction(binding.finder, binding.searchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
         setSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
         setSearchAction(null, binding.searchFilter, this::findByFilterFn, null);
         setSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
@@ -258,17 +257,6 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
         addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
         startActivity(addressesIntent);
-    }
-
-    private void findByFinderFn() {
-        final String usernameText = StringUtils.trim(binding.finder.getText().toString());
-
-        if (StringUtils.isBlank(usernameText)) {
-            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
-            return;
-        }
-
-        CacheListActivity.startActivityFinder(this, usernameText);
     }
 
     private void findByOwnerFn() {
