@@ -1117,9 +1117,6 @@
     <string name="search_kw">關鍵字</string>
     <string name="search_kw_prefill">關鍵字</string>
     <string name="search_kw_button">用關鍵字搜尋</string>
-    <string name="search_fbu">由發現</string>
-    <string name="search_fbu_prefill">使用者名稱</string>
-    <string name="search_fbu_button">用使用者名稱來搜尋</string>
     <string name="search_hbu">由藏寶</string>
     <string name="search_hbu_prefill">寶主</string>
     <string name="search_hbu_button">用寶主名稱來搜尋</string>
@@ -1165,7 +1162,6 @@
     <!-- user -->
     <string name="user_menu_title">關於</string>
     <string name="user_menu_view_hidden">藏的cache</string>
-    <string name="user_menu_view_found">找到的cache</string>
     <string name="user_menu_open_browser">在瀏覽器開啟資訊</string>
     <string name="user_menu_send_message">傳送訊息</string>
     <string name="user_menu_send_email">傳送電子郵件</string>
