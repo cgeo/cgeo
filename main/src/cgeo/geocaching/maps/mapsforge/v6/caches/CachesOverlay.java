@@ -76,10 +76,9 @@ public class CachesOverlay extends AbstractCachesOverlay {
                 final Viewport viewportNow = overlay.getViewport();
 
                 if (previousViewport != null && !previousViewport.equals(viewportNow)) {
-
-                    previousViewport = viewportNow;
                     overlay.updateTitle();
                 }
+                previousViewport = viewportNow;
             } catch (final Exception e) {
                 Log.w("CachesOverlay.LoadTimer.run", e);
             } finally {

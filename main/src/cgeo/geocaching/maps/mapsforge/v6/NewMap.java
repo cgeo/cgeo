@@ -1083,6 +1083,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             if (cache != null) {
                 return Formatter.formatMapSubtitle(cache);
             }
+            return "";
         }
 
         // count caches in the sub title
@@ -1090,17 +1091,11 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         final int total = countTotalCaches();
 
         final StringBuilder subtitle = new StringBuilder();
-        if (total != 0) {
-            if (visible != total && Settings.isDebug()) {
-                subtitle.append(visible).append('/').append(res.getQuantityString(R.plurals.cache_counts, total, total));
-            } else {
-                subtitle.append(res.getQuantityString(R.plurals.cache_counts, visible, visible));
-            }
+        if (visible != total && Settings.isDebug()) {
+            subtitle.append(visible).append('/').append(res.getQuantityString(R.plurals.cache_counts, total, total));
+        } else {
+            subtitle.append(res.getQuantityString(R.plurals.cache_counts, visible, visible));
         }
-
-        //        if (Settings.isDebug() && lastSearchResult != null && StringUtils.isNotBlank(lastSearchResult.getUrl())) {
-        //            subtitle.append(" [").append(lastSearchResult.getUrl()).append(']');
-        //        }
 
         return subtitle.toString();
     }
