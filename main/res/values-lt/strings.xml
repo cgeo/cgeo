@@ -1131,9 +1131,6 @@
     <string name="search_kw">Raktiniai žodžiai</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
     <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
-    <string name="search_fbu">Surado</string>
-    <string name="search_fbu_prefill">Vartotojo vardas</string>
-    <string name="search_fbu_button">Paieška pagal vartotojo vardą</string>
     <string name="search_hbu">Paslėpė</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
@@ -1183,7 +1180,6 @@
     <!-- user -->
     <string name="user_menu_title">Apie</string>
     <string name="user_menu_view_hidden">Paslėptos slėptuvės</string>
-    <string name="user_menu_view_found">Surastos slėptuvės</string>
     <string name="user_menu_open_browser">Atidaryti profilį naršyklėje</string>
     <string name="user_menu_send_message">Siųsti žinutę</string>
     <string name="user_menu_send_email">Siųsti el. laišką</string>
