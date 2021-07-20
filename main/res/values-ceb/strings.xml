@@ -757,8 +757,6 @@
     <string name="search_kw">Mga importanteng letra</string>
     <string name="search_kw_prefill">Importanteng letra</string>
     <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
-    <string name="search_fbu_prefill">Pangan na gigamit</string>
-    <string name="search_fbu_button">Pangitaa pinaagi sa ngalan sa tag-iya</string>
     <string name="search_hbu_prefill">Tag-iya</string>
     <string name="search_hbu_button">Pagpangita pinaagi sa pangan sa tag-iya</string>
     <string name="search_tb">Masundan</string>
@@ -799,7 +797,6 @@
     <!-- user -->
     <string name="user_menu_title">Mahitungod sa</string>
     <string name="user_menu_view_hidden">Mga natago na cache</string>
-    <string name="user_menu_view_found">Nakit-an ang mga cache</string>
     <string name="user_menu_open_browser">Abilihi ang profolio sa browser</string>
     <string name="user_menu_send_message">Magpadala ug mensahe</string>
     <string name="user_menu_open_contact">Ablihi ang kontak kard</string>
