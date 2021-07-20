@@ -1417,9 +1417,6 @@
     <string name="search_kw">Λέξεις-κλειδιά</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
-    <string name="search_fbu">Βρέθηκε από</string>
-    <string name="search_fbu_prefill">Όνομα χρήστη</string>
-    <string name="search_fbu_button">Αναζήτηση με το όνομα χρήστη</string>
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_hbu_prefill">Ιδιοκτήτης</string>
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
@@ -1475,7 +1472,6 @@
     <!-- user -->
     <string name="user_menu_title">Σχετικά</string>
     <string name="user_menu_view_hidden">Κρυμμένες κρύπτες</string>
-    <string name="user_menu_view_found">Κρύπτες που βρέθηκαν</string>
     <string name="user_menu_open_browser">Άνοιγμα προφίλ σε πρόγραμμα περιήγησης</string>
     <string name="user_menu_send_message">Αποστολή μηνύματος</string>
     <string name="user_menu_send_email">Αποστολή email</string>
