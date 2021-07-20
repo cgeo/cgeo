@@ -5,7 +5,7 @@ Caratteristiche principali:
 - Usa Google Maps o OpenStreetMaps
 - Cerca cache secondo vari criteri
 - Registra i tuoi ritrovamenti online o offline
-- Memorizza informazioni cache sul tuo dispositivo
+- Memorizza informazioni sul cache nel tuo dispositivo
 - Crea e gestisci i waypoint
 - Naviga utilizzando bussola, mappa o altre applicazioni
 - Importa/Esporta file GPX
