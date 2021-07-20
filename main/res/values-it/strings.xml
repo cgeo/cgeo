@@ -1392,9 +1392,6 @@
     <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
-    <string name="search_fbu">Trovato da</string>
-    <string name="search_fbu_prefill">Nome utente</string>
-    <string name="search_fbu_button">Cerca per nome utente</string>
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
@@ -1449,7 +1446,6 @@
     <!-- user -->
     <string name="user_menu_title">Info</string>
     <string name="user_menu_view_hidden">Cache nascosti</string>
-    <string name="user_menu_view_found">Cache trovati</string>
     <string name="user_menu_open_browser">Apri profilo nel browser</string>
     <string name="user_menu_send_message">Invia messaggio</string>
     <string name="user_menu_send_email">Invia email</string>
