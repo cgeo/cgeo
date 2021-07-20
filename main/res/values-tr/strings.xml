@@ -1416,9 +1416,6 @@
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
-    <string name="search_fbu">Bulan</string>
-    <string name="search_fbu_prefill">Kullanıcı adı</string>
-    <string name="search_fbu_button">Kullanıcı adına göre ara</string>
     <string name="search_hbu">Saklayan</string>
     <string name="search_hbu_prefill">Sahibi</string>
     <string name="search_hbu_button">Sahibine göre ara</string>
@@ -1474,7 +1471,6 @@
     <!-- user -->
     <string name="user_menu_title">Hakkında</string>
     <string name="user_menu_view_hidden">Saklanan Geocache\'ler</string>
-    <string name="user_menu_view_found">Bulunan Geocache\'ler</string>
     <string name="user_menu_open_browser">Profili tarayıcıda aç</string>
     <string name="user_menu_send_message">Mesaj gönder</string>
     <string name="user_menu_send_email">E-posta gönder</string>
