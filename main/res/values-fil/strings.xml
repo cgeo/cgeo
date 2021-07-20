@@ -797,8 +797,6 @@
     <string name="search_kw">Ang Mga Keyword</string>
     <string name="search_kw_prefill">Ang Keyword</string>
     <string name="search_kw_button">Ang Magsaliksik sa pamamagitan ng keyword</string>
-    <string name="search_fbu_prefill">Ang pangalan ng gumagamit</string>
-    <string name="search_fbu_button">Magsaliksik ayon sa pangalan ng gumagamit</string>
     <string name="search_hbu_prefill">Ang May-ari</string>
     <string name="search_hbu_button">Magsaliksik ayon sa pangalan ng may-ari</string>
     <string name="search_tb">Ang Pagsusubaybay</string>
@@ -843,7 +841,6 @@
     <!-- user -->
     <string name="user_menu_title">Ukol sa</string>
     <string name="user_menu_view_hidden">Nakatago ang mga cache</string>
-    <string name="user_menu_view_found">Natagpuan ang mga cache</string>
     <string name="user_menu_open_browser">Ang profile ay buksan sa browser</string>
     <string name="user_menu_send_message">Magpadala ng mensahe</string>
     <string name="user_menu_open_contact">Ang kard ng kontak ay buksan</string>
