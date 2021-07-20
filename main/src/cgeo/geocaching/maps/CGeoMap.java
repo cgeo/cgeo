@@ -297,16 +297,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (cache != null) {
                 return Formatter.formatMapSubtitle(cache);
             }
+            return "";
         }
         final StringBuilder subtitle = new StringBuilder();
-        if (!caches.isEmpty()) {
-            final int totalCount = caches.size();
+        final int totalCount = caches.size();
 
-            if (cachesCnt != totalCount && Settings.isDebug()) {
-                subtitle.append(cachesCnt).append('/').append(res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
-            } else {
-                subtitle.append(res.getQuantityString(R.plurals.cache_counts, cachesCnt, cachesCnt));
-            }
+        if (cachesCnt != totalCount && Settings.isDebug()) {
+            subtitle.append(cachesCnt).append('/').append(res.getQuantityString(R.plurals.cache_counts, totalCount, totalCount));
+        } else {
+            subtitle.append(res.getQuantityString(R.plurals.cache_counts, cachesCnt, cachesCnt));
         }
 
         if (Settings.isDebug() && lastSearchResult != null && StringUtils.isNotBlank(lastSearchResult.getUrl())) {

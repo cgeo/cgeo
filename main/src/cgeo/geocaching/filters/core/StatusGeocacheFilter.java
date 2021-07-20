@@ -308,7 +308,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 sqlBuilder.addWhere("LOWER(" + sqlBuilder.getMainTableId() + ".owner_real) " + (statusOwned ? "=" : "<>") + " LOWER(?)", Settings.getUserName());
             }
             if (statusFound != null) {
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found = " + (statusFound ? "1" : "0"));
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".found " + (statusFound ? "= 1" : "<> 1"));
             }
             if (statusStored != null && !statusStored) {
                 //this seems stupid, but we have to simply set a condition which is never true

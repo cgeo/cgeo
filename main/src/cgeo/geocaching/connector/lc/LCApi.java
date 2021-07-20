@@ -178,7 +178,12 @@ final class LCApi {
     @NonNull
     private static List<Geocache> importCachesFromJSON(final Response response) {
         try {
-            final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
+            final String jsonString = Network.getResponseData(response);
+            if (jsonString == null) {
+                Log.d("null response from network");
+                return Collections.emptyList();
+            }
+            final JsonNode json = JsonUtils.reader.readTree(jsonString);
             Log.d("_LC importCachesFromJson: " + json.toPrettyString());
             final JsonNode items = json.at("/Items");
             if (!items.isArray()) {

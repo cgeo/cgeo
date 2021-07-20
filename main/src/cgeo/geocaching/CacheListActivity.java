@@ -1290,15 +1290,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 setViewGone(listFooterLine1);
             }
             setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalListSize), v -> {
-                offlineListLoadLimit = -1;
+                offlineListLoadLimit = 0;
                 refreshCurrentList();
             });
         } else {
             setViewGone(listFooterLine1);
             setViewGone(listFooterLine2);
-            // hiding footer for offline list is not possible, it must be removed instead
-            // http://stackoverflow.com/questions/7576099/hiding-footer-in-listview
-            //getListView().removeFooterView(listFooter);
         }
     }
 
@@ -1525,6 +1522,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 activity.adapter.setSelectMode(false);
                 activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
                 activity.replaceCacheListFromSearch();
+            }
+            setLastListPosition();
+        }
+
+        public void setLastListPosition() {
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
                 if (lastListPosition > 0 && lastListPosition < activity.adapter.getCount()) {
                     activity.getListView().setSelectionFromTop(lastListPosition, onTopSpace);
                 }
@@ -1750,8 +1754,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (!type.isStoredInDatabase) {
             return;
         }
+
+        final LastPositionHelper lph = new LastPositionHelper(this);
         refreshSpinnerAdapter();
         switchListById(listId, action);
+        lph.setLastListPosition();
     }
 
     public static void startActivityOffline(final Context context) {
@@ -2124,7 +2131,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean resultIsOfflineAndLimited() {
-        return type.isStoredInDatabase && search.getTotalCountGC() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
+        return type.isStoredInDatabase && offlineListLoadLimit > 0 && search.getTotalCountGC() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
     }
 
     /**
