@@ -1525,6 +1525,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 activity.adapter.setSelectMode(false);
                 activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
                 activity.replaceCacheListFromSearch();
+            }
+            setLastListPosition();
+        }
+
+        public void setLastListPosition() {
+            final CacheListActivity activity = activityRef.get();
+            if (activity != null) {
                 if (lastListPosition > 0 && lastListPosition < activity.adapter.getCount()) {
                     activity.getListView().setSelectionFromTop(lastListPosition, onTopSpace);
                 }
@@ -1750,8 +1757,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (!type.isStoredInDatabase) {
             return;
         }
+
+        final LastPositionHelper lph = new LastPositionHelper(this);
         refreshSpinnerAdapter();
         switchListById(listId, action);
+        lph.setLastListPosition();
     }
 
     public static void startActivityOffline(final Context context) {
