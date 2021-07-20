@@ -752,8 +752,6 @@
     <string name="search_kw">Ključne besede</string>
     <string name="search_kw_prefill">Ključna beseda</string>
     <string name="search_kw_button">Iskanje po ključnih besedah</string>
-    <string name="search_fbu_prefill">Uporabniško ime</string>
-    <string name="search_fbu_button">Iskanje po uporabniškem imenu</string>
     <string name="search_hbu_prefill">Lastnik</string>
     <string name="search_hbu_button">Iskanje po imenu lastnika</string>
     <string name="search_tb">Sledljivčki</string>
@@ -793,7 +791,6 @@
     <!-- user -->
     <string name="user_menu_title">Uporabnik</string>
     <string name="user_menu_view_hidden">Skritih zakladov</string>
-    <string name="user_menu_view_found">Najdenih zakladov</string>
     <string name="user_menu_open_browser">Odpri profil v brskalniku</string>
     <string name="user_menu_send_message">Pošlji sporočilo</string>
     <string name="user_menu_open_contact">Odpri vizitko kontakta</string>
