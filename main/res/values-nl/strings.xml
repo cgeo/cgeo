@@ -1427,9 +1427,6 @@
     <string name="search_kw">Trefwoorden</string>
     <string name="search_kw_prefill">Trefwoord</string>
     <string name="search_kw_button">Zoeken op trefwoord</string>
-    <string name="search_fbu">Gevonden door</string>
-    <string name="search_fbu_prefill">Gebruikersnaam</string>
-    <string name="search_fbu_button">Zoeken op gebruikersnaam</string>
     <string name="search_hbu">Verborgen door</string>
     <string name="search_hbu_prefill">Eigenaar</string>
     <string name="search_hbu_button">Zoeken op eigenaar</string>
@@ -1487,7 +1484,6 @@
     <!-- user -->
     <string name="user_menu_title">Over</string>
     <string name="user_menu_view_hidden">Caches verstopt</string>
-    <string name="user_menu_view_found">Caches gevonden</string>
     <string name="user_menu_open_browser">Open profiel in browser</string>
     <string name="user_menu_send_message">Verstuur bericht</string>
     <string name="user_menu_send_email">E-mail verzenden</string>
