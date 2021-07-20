@@ -892,8 +892,6 @@
     <string name="search_kw">Kulcsszavak</string>
     <string name="search_kw_prefill">Kulcsszó</string>
     <string name="search_kw_button">Keresés kulcsszóval</string>
-    <string name="search_fbu_prefill">Felhasználónév</string>
-    <string name="search_fbu_button">Keresés felhasználónév szerint</string>
     <string name="search_hbu_prefill">Tulajdonos</string>
     <string name="search_hbu_button">Keresés tulajdonos neve alapján</string>
     <string name="search_tb">Utazó</string>
@@ -935,7 +933,6 @@
     <string name="geokret_type_coin">Érme</string>
     <!-- user -->
     <string name="user_menu_view_hidden">Ládák száma</string>
-    <string name="user_menu_view_found">Megtalálások száma</string>
     <string name="user_menu_open_browser">Profil megnyitása a böngészőben</string>
     <string name="user_menu_send_message">Üzenet küldése</string>
     <string name="user_menu_open_contact">Névjegy megnyitása</string>
