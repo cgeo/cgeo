@@ -1049,9 +1049,6 @@
     <string name="search_kw">Ключові слова</string>
     <string name="search_kw_prefill">Ключове слово</string>
     <string name="search_kw_button">пошук за ключовим словом</string>
-    <string name="search_fbu">Знайдено</string>
-    <string name="search_fbu_prefill">Ім\'я користувача</string>
-    <string name="search_fbu_button">пошук за іменем користувача</string>
     <string name="search_hbu">прихований</string>
     <string name="search_hbu_prefill">Власник</string>
     <string name="search_hbu_button">пошук за іменем користувача</string>
@@ -1101,7 +1098,6 @@
     <!-- user -->
     <string name="user_menu_title">Про</string>
     <string name="user_menu_view_hidden">Кеш приховано</string>
-    <string name="user_menu_view_found">знайдено кеш</string>
     <string name="user_menu_open_browser">Відкрити профіль в браузері</string>
     <string name="user_menu_send_message">Надіслати повідомлення</string>
     <string name="user_menu_send_email">Надіслати ел. листа</string>
