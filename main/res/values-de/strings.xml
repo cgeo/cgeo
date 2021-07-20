@@ -475,6 +475,9 @@
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
+    <string name="cache_filter_contexttype_live_title">Live-Filter</string>
+    <string name="cache_filter_contexttype_offline_title">Offline-Filter</string>
+    <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_userdisplay_complex">Komplex</string>
@@ -1410,6 +1413,8 @@
     <string name="map_show_caches_title">Caches anzeigen:</string>
     <string name="map_show_waypoints_title">Wegpunkte anzeigen:</string>
     <string name="map_show_other_title">Weiteres anzeigen:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Cache-Filter zu komplex</string>
+    <string name="map_settings_cache_filter_too_complex_message">Der aktuelle Cache-Filter ist zu komplex, um zusätzliche Optionen anzuwenden. Normalerweise bedeutet dies, dass der Cache-Filter eine Negation oder ODER-Ausdrücke anstelle von einfacher UND-Logik enthält.</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
@@ -1422,9 +1427,6 @@
     <string name="search_kw">Stichworte</string>
     <string name="search_kw_prefill">Stichwörter</string>
     <string name="search_kw_button">Suche mit Stichwörtern</string>
-    <string name="search_fbu">Gefunden von</string>
-    <string name="search_fbu_prefill">Benutzer</string>
-    <string name="search_fbu_button">Suche mit Benutzername</string>
     <string name="search_hbu">Versteckt von</string>
     <string name="search_hbu_prefill">Besitzer</string>
     <string name="search_hbu_button">Suche mit Besitzername</string>
@@ -1482,7 +1484,6 @@
     <!-- user -->
     <string name="user_menu_title">Über</string>
     <string name="user_menu_view_hidden">Versteckte Caches</string>
-    <string name="user_menu_view_found">Gefundene Caches</string>
     <string name="user_menu_open_browser">Profil im Browser öffnen</string>
     <string name="user_menu_send_message">Nachricht senden</string>
     <string name="user_menu_send_email">E-Mail senden</string>
