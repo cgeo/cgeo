@@ -780,8 +780,6 @@
     <string name="search_kw">Kata kunci</string>
     <string name="search_kw_prefill">Kata kunci</string>
     <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
-    <string name="search_fbu_prefill">Nama pengguna</string>
-    <string name="search_fbu_button">Pencarian berdasarkan nama pengguna</string>
     <string name="search_hbu_prefill">Pemilik</string>
     <string name="search_hbu_button">Cari berdasarkan nama pemilik</string>
     <string name="search_tb">Dilacak</string>
@@ -826,7 +824,6 @@
     <!-- user -->
     <string name="user_menu_title">Tentang</string>
     <string name="user_menu_view_hidden">Cache tersembunyi</string>
-    <string name="user_menu_view_found">Cache ditemukan</string>
     <string name="user_menu_open_browser">Buka profil di browser</string>
     <string name="user_menu_send_message">Kirim pesan</string>
     <string name="user_menu_open_contact">Kartu kontak yang terbuka</string>
