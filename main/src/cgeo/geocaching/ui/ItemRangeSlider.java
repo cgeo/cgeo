@@ -106,6 +106,12 @@ public class ItemRangeSlider<T> extends LinearLayout {
         ViewUtils.createHorizontallyDistributedText(getContext(), legendgroup, this.items, (idx, item) -> axisLabelMapper.call(idx, item));
     }
 
+    public void removeScaleLegend() {
+        //build legend
+        final LinearLayout legendgroup = binding.sliderLegendAnchor;
+        legendgroup.removeAllViews();
+    }
+
     public void setRangeAll() {
         setRange(this.items.get(0), this.items.get(this.items.size() - 1));
     }
