@@ -1405,9 +1405,6 @@
     <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
     <string name="search_kw_button">キーワードで検索</string>
-    <string name="search_fbu">発見したユーザー名</string>
-    <string name="search_fbu_prefill">ユーザー名</string>
-    <string name="search_fbu_button">ユーザー名で検索</string>
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
@@ -1464,7 +1461,6 @@
     <!-- user -->
     <string name="user_menu_title">ユーザー名:</string>
     <string name="user_menu_view_hidden">隠したキャッシュ</string>
-    <string name="user_menu_view_found">発見したキャッシュ</string>
     <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
     <string name="user_menu_send_message">メッセージを送信</string>
     <string name="user_menu_send_email">メールを送る</string>
