@@ -1213,9 +1213,6 @@
     <string name="search_kw">Nyckelord</string>
     <string name="search_kw_prefill">Nyckelord</string>
     <string name="search_kw_button">Sök med nyckelord</string>
-    <string name="search_fbu">Hittad av</string>
-    <string name="search_fbu_prefill">Användare</string>
-    <string name="search_fbu_button">Sök baserat på hittare</string>
     <string name="search_hbu">Gömd av</string>
     <string name="search_hbu_prefill">Ägare</string>
     <string name="search_hbu_button">Sök baserat på ägare</string>
@@ -1265,7 +1262,6 @@
     <!-- user -->
     <string name="user_menu_title">Om</string>
     <string name="user_menu_view_hidden">Gömda cacher</string>
-    <string name="user_menu_view_found">Hittade cacher</string>
     <string name="user_menu_open_browser">Öppna profil i webbläsaren</string>
     <string name="user_menu_send_message">Skicka meddelande</string>
     <string name="user_menu_send_email">Skicka e-post</string>
