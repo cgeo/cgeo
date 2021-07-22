@@ -86,6 +86,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -103,7 +104,6 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
 import android.view.KeyEvent;
@@ -554,7 +554,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         initAdapter();
 
-        prepareFilterBar();
+        FilterUtils.connectFilterBar(this);
+        updateFilterBar();
 
         if (type.canSwitch) {
             initActionBarSpinner();
@@ -663,7 +664,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final LastPositionHelper lastPosition = new LastPositionHelper(this);
 
         applyAdapterFilter();
-        prepareFilterBar();
+        updateFilterBar();
 
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheListActivity) {
@@ -727,6 +728,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
+        FilterUtils.connectFilterMenu(this);
 
         return true;
     }
@@ -763,7 +765,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         try {
             // toplevel menu items
             setEnabled(menu, R.id.menu_show_on_map, !isEmpty);
-            //setEnabled(menu, R.id.menu_filter_legacy, search != null && search.getCount() > 0); //remove for upcoming beta
             setVisibleEnabled(menu, R.id.menu_sort, !isHistory, !isEmpty);
             if (adapter.isSelectMode()) {
                 menu.findItem(R.id.menu_switch_select_mode).setTitle(res.getString(R.string.caches_select_mode_exit))
@@ -927,8 +928,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_invert_selection) {
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
-//        } else if (menuItem == R.id.menu_filter_legacy) { //remove for upcoming beta
-//            showLegacyFilterMenu(null);
         } else if (menuItem == R.id.menu_filter) {
             showFilterMenu(null);
         } else if (menuItem == R.id.menu_import_web) {
@@ -1039,7 +1038,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (view != null && Settings.getCacheType() != CacheType.ALL) {
             Dialogs.selectGlobalTypeFilter(this, cacheType -> {
                 refreshCurrentList();
-                prepareFilterBar();
+                updateFilterBar();
             });
         } else {
             FilterActivity.selectFilter(this);
@@ -1052,6 +1051,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public void showFilterMenu(final View view) {
         GeocacheFilterActivity.selectFilter(this, currentCacheFilter, adapter.getFilteredList(), !resultIsOfflineAndLimited());
+    }
+
+    /**
+     * called from the filter bar view
+     */
+    @Override
+    public boolean showFilterList(final View view) {
+        return FilterUtils.openFilterList(this, currentCacheFilter);
     }
 
     private void setComparator(final CacheComparator comparator) {
@@ -1226,7 +1233,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void setFilter() {
         applyAdapterFilter();
-        prepareFilterBar();
+        updateFilterBar();
         updateTitle();
         invalidateOptionsMenuCompatible();
     }
@@ -1374,10 +1381,24 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             currentFilter = FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]);
             setFilter();
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            currentCacheFilter = data.getParcelableExtra(GeocacheFilterActivity.EXTRA_FILTER_CONTEXT);
-            setFilter();
-            refreshFilterForOnlineSearch();
+            setAndRefreshFilterForOnlineSearch(data.getParcelableExtra(GeocacheFilterActivity.EXTRA_FILTER_CONTEXT));
         }
+    }
+
+    @Override
+    public void refreshWithFilter(final GeocacheFilter filter) {
+        currentCacheFilter.set(filter);
+        setFilter();
+        refreshFilterForOnlineSearch();
+
+        refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+        replaceCacheListFromSearch();
+    }
+
+    private void setAndRefreshFilterForOnlineSearch(final GeocacheFilterContext filterContext) {
+        currentCacheFilter = filterContext;
+        setFilter();
+        refreshFilterForOnlineSearch();
     }
 
     private void refreshFilterForOnlineSearch() {
@@ -1837,15 +1858,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         context.startActivity(cachesIntent);
     }
 
-    private void prepareFilterBar() {
-        final List<String> filterNames = getFilterNames();
-        if (filterNames.isEmpty()) {
-            findViewById(R.id.filter_bar).setVisibility(GONE);
-        } else {
-            final TextView filterTextView = findViewById(R.id.filter_text);
-            filterTextView.setText(TextUtils.join(", ", filterNames));
-            findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-        }
+    private void updateFilterBar() {
+        FilterUtils.updateFilterBar(this, getFilterNames());
     }
 
     @NonNull

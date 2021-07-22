@@ -6,6 +6,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
@@ -14,6 +15,7 @@ import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
@@ -242,7 +244,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapBase.getMapOptions().filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            mapBase.onMapSettingsPopupFinished(false);
+            mapBase.refreshMapData(false);
         }
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
@@ -252,7 +254,18 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
     @Override
     public void showFilterMenu(final View view) {
-        MapUtils.openFilterActivity(this, mapBase.getFilterContext(), mapBase.getCaches());
+        FilterUtils.openFilterActivity(this, mapBase.getFilterContext(), mapBase.getCaches());
     }
 
+    @Override
+    public boolean showFilterList(final View view) {
+        return FilterUtils.openFilterList(this, mapBase.getFilterContext());
+    }
+
+    @Override
+    public void refreshWithFilter(final GeocacheFilter filter) {
+        mapBase.getMapOptions().filterContext.set(filter);
+        MapUtils.filter(mapBase.getCaches(), mapBase.getMapOptions().filterContext);
+        mapBase.refreshMapData(true);
+    }
 }
