@@ -106,7 +106,7 @@
 
         <!-- Navigation Navigation -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceNavigationNavigationFragment"
             app:title="@string/settings_title_navigation_menu" />
     </PreferenceCategory>
 </PreferenceScreen>
