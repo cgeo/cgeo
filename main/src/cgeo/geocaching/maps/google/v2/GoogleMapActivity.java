@@ -266,6 +266,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapBase.getMapOptions().filterContext.set(filter);
         MapUtils.filter(mapBase.getCaches(), mapBase.getMapOptions().filterContext);
-        mapBase.refreshMapData(true);
+        mapBase.refreshMapData(false);
     }
 }

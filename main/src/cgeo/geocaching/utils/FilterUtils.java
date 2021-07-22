@@ -14,7 +14,8 @@ import android.os.Handler;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
-import static android.view.View.GONE;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,33 +35,30 @@ public class FilterUtils {
             filteredList, true);
     }
 
-    public static boolean openFilterList(final Activity activity, final GeocacheFilterContext filterContext) {
+    public static <T extends Activity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {
         final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
 
         if (filters.isEmpty()) {
             return false;
         } else {
             final boolean isFilterActive = filterContext.get().isFiltering();
-            final FilteredActivity filteredActivity = (FilteredActivity) activity;
-            if (null != filteredActivity) {
-                if (isFilterActive) {
-                    SimpleDialog.of(activity).setTitle(R.string.cache_filter_storage_select_clear_title)
-                        .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
-                        .setSelectionForNeutral(false)
-                        .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, false,
-                            (f, pos) -> filteredActivity.refreshWithFilter(f),
-                            (f, pos) -> {
-                            },
-                            (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty())
-                        );
-                } else {
-                    SimpleDialog.of(activity).setTitle(R.string.cache_filter_storage_select_title)
-                        .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, false,
-                            (f, pos) -> filteredActivity.refreshWithFilter(f),
-                            (f, pos) -> {
-                            }
-                        );
-                }
+            if (isFilterActive) {
+                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
+                    .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
+                    .setSelectionForNeutral(false)
+                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, false,
+                        (f, pos) -> filteredActivity.refreshWithFilter(f),
+                        (f, pos) -> {
+                        },
+                        (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty())
+                    );
+            } else {
+                SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
+                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, false,
+                        (f, pos) -> filteredActivity.refreshWithFilter(f),
+                        (f, pos) -> {
+                        }
+                    );
             }
         }
         return true;
@@ -69,7 +67,7 @@ public class FilterUtils {
     public static void updateFilterBar(final Activity activity, final Collection<String> filterNames) {
         final View filterView = activity.findViewById(R.id.filter_bar);
         if (filterNames.isEmpty()) {
-            filterView.setVisibility(GONE);
+            filterView.setVisibility(View.GONE);
         } else {
             final TextView filterTextView = activity.findViewById(R.id.filter_text);
             filterTextView.setText(TextUtils.join(", ", filterNames));
@@ -77,28 +75,20 @@ public class FilterUtils {
         }
     }
 
-    public static void connectFilterBar(final Activity activity) {
-        final FilteredActivity filteredActivity = (FilteredActivity) activity;
-        if (null != filteredActivity) {
-            final View filterView = activity.findViewById(R.id.filter_bar);
-            if (null != filterView) {
-                filterView.setOnLongClickListener(v -> filteredActivity.showFilterList(null));
-            }
-        }
+    /** filterView must exist */
+    public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
+        final View filterView = activity.findViewById(R.id.filter_bar);
+        filterView.setOnLongClickListener(v -> filteredActivity.showFilterList(null));
     }
 
-    public static void connectFilterMenu(final Activity activity) {
+    public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
 
         new Handler().post(new Runnable() {
             @Override
             public void run() {
-                final FilteredActivity filteredActivity = (FilteredActivity) activity;
-                if (null != filteredActivity) {
-                    final View view = activity.findViewById(R.id.menu_filter);
-                    if (view != null) {
-                        view.setOnClickListener(v -> filteredActivity.showFilterMenu(null));
-                        view.setOnLongClickListener(v -> filteredActivity.showFilterList(null));
-                    }
+                final View filterView = activity.findViewById(R.id.menu_filter);
+                if (filterView != null) {
+                    filterView.setOnLongClickListener(v -> filteredActivity.showFilterList(null));
                 }
             }
         });

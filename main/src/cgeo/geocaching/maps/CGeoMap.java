@@ -602,8 +602,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.onMapReady(() -> initializeMap(trailHistory));
 
-        FilterUtils.connectFilterBar(this.getActivity());
-        MapUtils.updateFilterBar(this.getActivity(), mapOptions.filterContext);
+        FilterUtils.initializeFilterBar(activity, mapActivity);
+        MapUtils.updateFilterBar(activity, mapOptions.filterContext);
 
         AndroidBeam.disable(activity);
 
@@ -733,7 +733,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         /* if we have an Actionbar find the my position toggle */
         initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(activity, menu));
-        FilterUtils.connectFilterMenu(activity);
+        FilterUtils.initializeFilterMenu(activity, mapActivity);
 
         return true;
     }

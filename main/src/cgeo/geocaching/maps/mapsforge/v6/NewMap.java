@@ -324,7 +324,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
 
-        FilterUtils.connectFilterBar(this);
+        FilterUtils.initializeFilterBar(this, this);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
@@ -348,7 +348,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
         initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(this, menu));
-        FilterUtils.connectFilterMenu(this);
+        FilterUtils.initializeFilterMenu(this, this);
 
         return result;
     }
@@ -435,6 +435,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                 // reset target cache on single mode map
                 targetGeocode = mapOptions.geocode;
             }
+        } else if (id == R.id.menu_filter) {
+            showFilterMenu(null);
         } else if (id == R.id.menu_store_caches) {
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
@@ -590,7 +592,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     @Override
     public void refreshWithFilter(final GeocacheFilter filter) {
         mapOptions.filterContext.set(filter);
-        refreshMapData(true);
+        refreshMapData(false);
     }
 
     private void changeMapSource(@NonNull final MapSource newSource) {

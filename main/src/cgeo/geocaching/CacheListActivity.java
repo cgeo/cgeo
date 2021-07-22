@@ -554,7 +554,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         initAdapter();
 
-        FilterUtils.connectFilterBar(this);
+        FilterUtils.initializeFilterBar(this, this);
         updateFilterBar();
 
         if (type.canSwitch) {
@@ -728,7 +728,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
-        FilterUtils.connectFilterMenu(this);
+        FilterUtils.initializeFilterMenu(this, this);
 
         return true;
     }
