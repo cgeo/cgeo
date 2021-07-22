@@ -53,7 +53,7 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/searchtext"
-        style="@style/textinput_dropdown"
+        style="@style/textinput_autocompletetextview"
         android:layout_below="@+id/filter_options"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true">
