@@ -152,8 +152,13 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
 
         @Override
+        public long getPageId() {
+            return Page.VERSION.id;
+        }
+
+        @Override
         public void setContent() {
-            final AboutActivity activity = (AboutActivity) activityWeakReference.get();
+            final AboutActivity activity = (AboutActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -201,8 +206,13 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
 
         @Override
+        public long getPageId() {
+            return Page.CHANGELOG.id;
+        }
+
+        @Override
         public void setContent() {
-            final Activity activity = activityWeakReference.get();
+            final Activity activity = getActivity();
             if (activity == null) {
                 return;
             }
@@ -230,8 +240,13 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
 
         @Override
+        public long getPageId() {
+            return Page.SYSTEM.id;
+        }
+
+        @Override
         public void setContent() {
-            final AboutActivity activity = (AboutActivity) activityWeakReference.get();
+            final AboutActivity activity = (AboutActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -268,6 +283,11 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
 
         @Override
+        public long getPageId() {
+            return Page.LICENSE.id;
+        }
+
+        @Override
         public void setContent() {
             binding.getRoot().setVisibility(View.VISIBLE);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
@@ -299,8 +319,13 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
 
         @Override
+        public long getPageId() {
+            return Page.CONTRIBUTORS.id;
+        }
+
+        @Override
         public void setContent() {
-            final Activity activity = activityWeakReference.get();
+            final Activity activity = getActivity();
             if (activity == null) {
                 return;
             }

@@ -980,7 +980,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         IMAGES(R.string.cache_images);
 
         private final int titleStringId;
-        private final long id;
+        public final long id;
 
         Page(final int titleStringId) {
             this.titleStringId = titleStringId;
@@ -1129,10 +1129,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
+        public long getPageId() {
+            return Page.DETAILS.id;
+        }
+
+        @Override
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
         public void setContent() {
             // retrieve activity and cache - if either of them is null, something's really wrong!
-            final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -1299,7 +1304,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
             @Override
             public void onClick(final View arg0) {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     activity.storeCache(false);
                 }
@@ -1307,7 +1312,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             @Override
             public boolean onLongClick(final View v) {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     activity.storeCache(true);
                 }
@@ -1318,7 +1323,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class MoveCacheClickListener implements OnLongClickListener {
             @Override
             public boolean onLongClick(final View v) {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     activity.moveCache();
                 }
@@ -1329,7 +1334,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class DropCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(final View arg0) {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     activity.dropCache();
                 }
@@ -1339,7 +1344,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private class RefreshCacheClickListener implements View.OnClickListener {
             @Override
             public void onClick(final View arg0) {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     activity.refreshCache();
                 }
@@ -1353,12 +1358,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             private final SimpleDisposableHandler handler;
 
             AbstractPropertyListener() {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 handler = new CheckboxHandler(DetailsViewCreator.this, activity, activity.progress);
             }
 
             public void doExecute(final int titleId, final int messageId, final Action1<SimpleDisposableHandler> action) {
-                final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+                final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
                 if (activity != null) {
                     if (activity.progress.isShowing()) {
                         activity.showToast(activity.res.getString(R.string.err_watchlist_still_managing));
@@ -1620,10 +1625,15 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
+        public long getPageId() {
+            return Page.DESCRIPTION.id;
+        }
+
+        @Override
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
         public void setContent() {
             // retrieve activity and cache - if either of them is null, something's really wrong!
-            final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -1938,9 +1948,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
+        public long getPageId() {
+            return Page.WAYPOINTS.id;
+        }
+
+        @Override
         public void setContent() {
             // retrieve activity and cache - if either if this is null, something is really wrong...
-            final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -2140,9 +2155,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
+        public long getPageId() {
+            return Page.INVENTORY.id;
+        }
+
+        @Override
         public void setContent() {
             // retrieve activity and cache - if either if this is null, something is really wrong...
-            final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -2170,9 +2190,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
+        public long getPageId() {
+            return Page.IMAGES.id;
+        }
+
+        @Override
         public void setContent() {
             // retrieve activity and cache - if either if this is null, something is really wrong...
-            final CacheDetailActivity activity = (CacheDetailActivity) activityWeakReference.get();
+            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -2462,9 +2487,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (pageId == Page.DESCRIPTION.id) {
             return new DescriptionViewCreator();
         } else if (pageId == Page.LOGS.id) {
-            return new CacheLogsViewCreator(this, true);
+            return CacheLogsViewCreator.newInstance(true);
         } else if (pageId == Page.LOGSFRIENDS.id) {
-            return new CacheLogsViewCreator(this, false);
+            return CacheLogsViewCreator.newInstance(false);
         } else if (pageId == Page.WAYPOINTS.id) {
             return new WaypointsViewCreator();
         } else if (pageId == Page.INVENTORY.id) {

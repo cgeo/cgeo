@@ -37,12 +37,6 @@ import org.apache.commons.text.StringEscapeUtils;
 
 public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBinding> {
 
-    protected final AbstractActionBarActivity activity;
-
-    public LogsViewCreator(final AbstractActionBarActivity activity) {
-        this.activity = activity;
-    }
-
     @Override
     public LogsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         return LogsPageBinding.inflate(inflater, container, false);
@@ -58,14 +52,14 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         final List<LogEntry> logs = getLogs();
 
         addHeaderView();
-        binding.getRoot().setAdapter(new ArrayAdapter<LogEntry>(activity, R.layout.logs_item, logs) {
+        binding.getRoot().setAdapter(new ArrayAdapter<LogEntry>(getActivity(), R.layout.logs_item, logs) {
 
             @Override
             @NonNull
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 View rowView = convertView;
                 if (rowView == null) {
-                    rowView = activity.getLayoutInflater().inflate(R.layout.logs_item, parent, false);
+                    rowView = getActivity().getLayoutInflater().inflate(R.layout.logs_item, parent, false);
                 }
                 LogViewHolder holder = (LogViewHolder) rowView.getTag();
                 if (holder == null) {
@@ -109,7 +103,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         if (log.hasLogImages()) {
             holder.binding.logImages.setText(log.getImageTitles());
             holder.binding.logImages.setVisibility(View.VISIBLE);
-            holder.binding.logImages.setOnClickListener(v -> ImagesActivity.startActivity(activity, getGeocode(), new ArrayList<>(log.logImages)));
+            holder.binding.logImages.setOnClickListener(v -> ImagesActivity.startActivity(getActivity(), getGeocode(), new ArrayList<>(log.logImages)));
         } else {
             holder.binding.logImages.setVisibility(View.GONE);
         }
@@ -134,6 +128,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
     protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
         return v -> {
+            final AbstractActionBarActivity activity = (AbstractActionBarActivity) getActivity();
             final String author = StringEscapeUtils.unescapeHtml4(log.author);
             final String title = activity.getString(R.string.cache_log_menu_popup_title, author);
 
