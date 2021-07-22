@@ -17,9 +17,11 @@ import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DifficultyAndTerrainGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 import cgeo.geocaching.filters.core.LogsCountGeocacheFilter;
 import cgeo.geocaching.filters.core.NameGeocacheFilter;
@@ -50,7 +52,6 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
-import static cgeo.geocaching.filters.core.GeocacheFilterType.DIFFICULTY;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -320,9 +321,13 @@ final class OkapiClient {
             case TERRAIN:
                 final NumberRangeGeocacheFilter<Float> nrFilter = (NumberRangeGeocacheFilter<Float>) basicFilter;
                 if (nrFilter.isFiltering()) {
-                    valueMap.put(nrFilter.getType() == DIFFICULTY ? "difficulty" : "terrain",
+                    valueMap.put(nrFilter.getType() == GeocacheFilterType.DIFFICULTY ? "difficulty" : "terrain",
                         (nrFilter.getMinRangeValue() == null ? "1" : ((int) Math.floor(nrFilter.getMinRangeValue()))) + "-" + (nrFilter.getMaxRangeValue() == null ? "5" : Math.round(nrFilter.getMaxRangeValue())));
                 }
+                break;
+            case DIFFICULTY_TERRAIN:
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, params, valueMap, connector);
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, params, valueMap, connector);
                 break;
             case OWNER:
                 final String uuid = getUserUUID(connector, ((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
