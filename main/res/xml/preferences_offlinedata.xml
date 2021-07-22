@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="?attr/settings_sdcard"
+    android:title="@string/settings_title_offlinedata"
+    android:summary="@string/settings_summary_offlinedata" >
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_logimages"
+        android:summary="@string/init_summary_save_log_img"
+        android:title="@string/init_save_log_img" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_choose_list"
+        android:summary="@string/init_summary_choose_list"
+        android:title="@string/init_choose_list" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_showListsInCacheList"
+        android:title="@string/init_listdisplay"
+        android:summary="@string/init_summary_listdisplay" />
+
+    <Preference
+        android:selectable="false"
+        android:summary="@string/init_summary_list_initial_load_limit"
+        android:title="@string/init_list_initial_load_limit" />
+    <cgeo.geocaching.settings.SeekbarPreference
+        android:key="@string/pref_list_initial_load_limit"
+        app:min="0"
+        app:max="@integer/list_load_limit_max"
+        android:defaultValue="@integer/list_load_limit_default" />
+
+    <PreferenceCategory android:title="@string/settings_title_gpx"
+        android:layout="@layout/preference_category" >
+        <Preference
+            android:key="@string/pref_persistablefolder_gpx"
+            android:title="@string/init_gpx_importexportdir" />
+        <!--
+                    <Preference
+                        android:key="@string/pref_gpxExportDir"
+                        android:title="@string/init_gpx_exportdir" />
+                    <Preference
+                        android:key="@string/pref_gpxImportDir"
+                        android:title="@string/init_gpx_importdir" /> -->
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_dbonsdcard_title"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_dbonsdcard_note">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_dbonsdcard"
+            android:title="@string/init_dbonsdcard" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_title_data_dir"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_dataDir_note">
+        <Preference
+            android:key="@string/pref_fakekey_dataDir"
+            android:title="@string/init_dataDir" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_maintenance"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_maintenance_directories_note">
+        <Preference
+            android:key="@string/pref_fakekey_preference_maintenance_directories"
+            android:title="@string/init_maintenance_directories"
+            android:layout="@layout/preference_button" />
+    </PreferenceCategory>
+
+</PreferenceScreen>

@@ -1,0 +1,77 @@
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="?attr/settings_nut"
+    android:title="@string/settings_title_system"
+    android:summary="@string/settings_summary_system" >
+
+    <PreferenceCategory android:title="@string/init_local_file_system"
+        android:layout="@layout/preference_category" android:key="@string/pref_group_localfilesystem">
+        <Preference
+            android:key="@string/pref_persistablefolder_basedir"
+            android:title="@string/init_base_directory_description" />
+        <Preference
+            android:key="@string/pref_persistablefolder_testdir"
+            android:title="Directory for Unit Tests. This setting is only needed for development and only visible in Debug mode" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_location"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_location_note">
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_googleplayservices"
+            android:title="@string/init_location_googleplayservices" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_low_power"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_low_power_note">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_lowpowermode"
+            android:title="@string/init_low_power_mode" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_force_orientation_sensor_title"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_force_orientation_sensor_note">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_force_orientation_sensor"
+            android:title="@string/init_force_orientation_sensor" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_hardware_acceleration_title"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_hardware_acceleration_note">
+        <CheckBoxPreference
+            android:key="@string/pref_hardware_acceleration"
+            android:title="@string/init_hardware_acceleration" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/init_debug_title"
+        android:layout="@layout/preference_category"
+        android:summary="@string/init_debug_note">
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_debug"
+            android:title="@string/init_debug" />
+        <Preference
+            android:key="@string/pref_generate_logcat"
+            android:title="@string/about_system_write_logcat"
+            android:layout="@layout/preference_button" />
+        <Preference
+            android:key="@string/pref_memory_dump"
+            android:title="@string/init_create_memory_dump"
+            android:layout="@layout/preference_button" />
+        <Preference
+            android:key="@string/pref_generate_infos_downloadmanager"
+            android:title="@string/about_system_write_infos_downloadmanager"
+            android:layout="@layout/preference_button" />
+        <Preference
+            android:key="@string/pref_view_settings"
+            android:title="@string/view_settings"
+            android:layout="@layout/preference_button" />
+    </PreferenceCategory>
+</PreferenceScreen>

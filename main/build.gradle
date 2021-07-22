@@ -339,6 +339,10 @@ dependencies {
     //def mapsforgeSource = 'com.github.mapsforge.mapsforge'
     //def mapsforgeVersion = '905e9d48bb' // master as of 31.3.21
 
+    // Settings Library + Appcompat for AndroidX
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.preference:preference:1.1.1'
+
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
     def mapsforgeSource = 'com.github.cgeo.mapsforge'
     def mapsforgeVersion = '91fa6e6254' // fix for #10128 + fix for #12145

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_ocnl"
+    android:title="@string/init_oc_nl" >
+
+    <PreferenceCategory android:title="@string/settings_settings"
+        android:layout="@layout/preference_category" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_connectorOCNLActive"
+            android:summary="@string/init_summary_oc_nl"
+            android:title="@string/settings_activate_oc_nl" />
+        <cgeo.geocaching.settings.TextPreference
+            android:dependency="@string/pref_connectorOCNLActive"
+            android:layout="@layout/text_preference"
+            android:text="@string/init_oc_nl_description" />
+        <cgeo.geocaching.settings.OAuthPreference
+            android:dependency="@string/pref_connectorOCNLActive"
+            android:key="@string/pref_fakekey_ocnl_authorization" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_information"
+        android:layout="@layout/preference_category" >
+
+        <Preference
+            android:key="@string/pref_fakekey_ocnl_website"
+            android:title="@string/settings_open_website" />
+        <cgeo.geocaching.settings.CapabilitiesPreference
+            android:title="@string/settings_features"
+            app:connector="OB" />
+    </PreferenceCategory>
+</PreferenceScreen>
