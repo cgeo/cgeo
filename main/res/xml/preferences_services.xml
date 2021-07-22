@@ -10,52 +10,52 @@
 
         <!-- Geocaching.com -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComFragment"
             app:title="@string/settings_title_gc"/>
 
         <!-- Geocaching.com Adventure Lab -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComAdventureLabsFragment"
             app:title="@string/settings_title_lc" />
 
         <!-- Opencaching.de -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingDeFragment"
             app:title="@string/init_oc" />
 
         <!-- Opencaching.pl -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingPlFragment"
             app:title="@string/init_oc_pl" />
 
         <!-- Opencaching.nl -->
         <Preference
-            app:fragment="TOOD"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingNlFragment"
             app:title="@string/init_oc_nl" />
 
         <!-- Opencaching.us -->
         <Preference
-            app:fragment="TOOD"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingUsFragment"
             app:title="@string/init_oc_us" />
 
         <!-- Opencaching.ro -->
         <Preference
-            app:fragment="TOOD"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceOpencachingRoFragment"
             app:title="@string/init_oc_ro" />
 
         <!-- Opencache.uk -->
         <Preference
-            app:fragment="TOOD"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceOpencacheUkFragment"
             app:title="@string/init_oc_uk" />
 
         <!-- Extremcaching.com -->
         <Preference
-            app:fragment="TOOD"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceExtremcachingComFragment"
             app:title="@string/settings_title_ec" />
 
         <!-- Geocaching.su -->
         <Preference
-            app:fragment="TOOD"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingSuFragment"
             app:title="@string/init_su" />
     </PreferenceCategory>
 
@@ -64,17 +64,17 @@
 
         <!-- Gcvote.com -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceGcvoteComFragment"
             app:title="@string/init_gcvote" />
 
         <!-- Geokrety.org -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceGeokretyOrgFragment"
             app:title="@string/init_geokrety" />
 
         <!-- Send2cgeo -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment"
             app:title="@string/init_sendToCgeo" />
     </PreferenceCategory>
 
@@ -83,7 +83,7 @@
 
         <!-- Twitter -->
         <Preference
-            app:fragment="TODO"
+            app:fragment="cgeo.geocaching.settings.fragments.PreferenceServiceTwitterFragment"
             app:title="@string/init_twitter" />
     </PreferenceCategory>
 

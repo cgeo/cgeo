@@ -5,63 +5,63 @@
 
     <!-- Services -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceServicesFragment"
         app:icon="?attr/settings_cloud"
         app:summary="@string/settings_summary_services"
         app:title="@string/settings_title_services" />
 
     <!-- Appearance -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceAppearanceFragment"
         app:icon="?attr/settings_eye"
         app:summary="@string/settings_summary_appearance"
         app:title="@string/settings_title_appearance" />
 
     <!-- Cache Details -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceCachedetailsFragment"
         app:icon="?attr/settings_details"
         app:summary="@string/settings_summary_cachedetails"
         app:title="@string/settings_title_cachedetails" />
 
     <!-- Map -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceMapFragment"
         app:icon="?attr/settings_map"
         app:summary="@string/settings_summary_map"
         app:title="@string/settings_title_map" />
 
     <!-- Logging -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceLoggingFragment"
         app:icon="?attr/settings_pen"
         app:summary="@string/settings_summary_logging"
         app:title="@string/settings_title_logging" />
 
     <!-- Offline data -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment"
         app:icon="?attr/settings_sdcard"
         app:summary="@string/settings_summary_offlinedata"
         app:title="@string/settings_title_offlinedata" />
 
     <!-- Navigation -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceNavigationFragment"
         app:icon="?attr/settings_arrow"
         app:summary="@string/settings_summary_navigation"
         app:title="@string/settings_title_navigation" />
 
     <!-- System -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceSystemFragment"
         app:icon="?attr/settings_nut"
         app:summary="@string/settings_summary_system"
         app:title="@string/settings_title_system" />
 
     <!-- Backup -->
     <Preference
-        app:fragment="TODO"
+        app:fragment="cgeo.geocaching.settings.fragments.PreferenceBackupFragment"
         app:icon="?attr/settings_backup"
         app:summary="@string/settings_summary_backup"
         app:title="@string/settings_title_backup" />
