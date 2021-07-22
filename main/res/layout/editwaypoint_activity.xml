@@ -79,7 +79,7 @@
             android:layout_marginBottom="16dp"
             tools:listitem="@android:layout/simple_spinner_item" />
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/name"
                 style="@style/textinput_embedded"

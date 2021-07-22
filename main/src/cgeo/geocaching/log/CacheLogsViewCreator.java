@@ -26,6 +26,8 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private final boolean allLogs;
     private final Resources res = CgeoApplication.getInstance().getResources();
     private final CacheDetailActivity cacheDetailActivity;
+    private TextView countview1 = null;
+    private TextView countview2 = null;
 
     public CacheLogsViewCreator(final CacheDetailActivity cacheDetailActivity, final boolean allLogs) {
         super(cacheDetailActivity);
@@ -55,7 +57,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected void addHeaderView() {
-        if (binding != null && binding.getRoot().getHeaderViewsCount() < 1) {
+        if (binding != null) {
             addLogCountsHeader();
             addEmptyLogsHeader();
         }
@@ -63,6 +65,11 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @SuppressLint("SetTextI18n")
     private void addLogCountsHeader() {
+        if (countview1 != null) {
+            binding.getRoot().removeHeaderView(countview1);
+            countview1 = null;
+        }
+
         final Map<LogType, Integer> logCounts = getCache().getLogCounts();
         if (logCounts != null) {
             final List<Entry<LogType, Integer>> sortedLogCounts = new ArrayList<>(logCounts.size());
@@ -82,18 +89,23 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }
 
-                final TextView countView = new TextView(activity);
-                countView.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
-                binding.getRoot().addHeaderView(countView, null, false);
+                countview1 = new TextView(activity);
+                countview1.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
+                binding.getRoot().addHeaderView(countview1, null, false);
             }
         }
     }
 
     private void addEmptyLogsHeader() {
+        if (countview2 != null) {
+            binding.getRoot().removeHeaderView(countview2);
+            countview2 = null;
+        }
+
         if (getLogs().isEmpty()) {
-            final TextView countView = new TextView(activity);
-            countView.setText(res.getString(R.string.log_empty_logbook));
-            binding.getRoot().addHeaderView(countView, null, false);
+            countview2 = new TextView(activity);
+            countview2.setText(res.getString(R.string.log_empty_logbook));
+            binding.getRoot().addHeaderView(countview2, null, false);
         }
     }
 

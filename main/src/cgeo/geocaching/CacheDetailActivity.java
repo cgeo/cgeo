@@ -2535,7 +2535,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         offlineRefresh.setOnClickListener(refreshCacheClickListener);
 
         if (cache.isOffline()) {
-            offlineText.setText(Formatter.formatStoredAgo(cache.getUpdated()));
+            offlineText.setText(Formatter.formatStoredAgo(cache.getDetailedUpdate()));
 
             offlineStore.setVisibility(View.GONE);
             offlineDrop.setVisibility(View.VISIBLE);
