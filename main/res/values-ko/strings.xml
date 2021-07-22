@@ -1416,9 +1416,6 @@
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
     <string name="search_kw_button">키워드로 검색</string>
-    <string name="search_fbu">찾은 사용자</string>
-    <string name="search_fbu_prefill">사용자명</string>
-    <string name="search_fbu_button">사용자명으로 검색</string>
     <string name="search_hbu">숨겨진 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
@@ -1476,7 +1473,6 @@
     <!-- user -->
     <string name="user_menu_title">소개</string>
     <string name="user_menu_view_hidden">숨긴 캐시</string>
-    <string name="user_menu_view_found">찾은 캐시</string>
     <string name="user_menu_open_browser">브라우저에서 회원정보 열기</string>
     <string name="user_menu_send_message">메시지 보내기</string>
     <string name="user_menu_send_email">이메일 보내기</string>

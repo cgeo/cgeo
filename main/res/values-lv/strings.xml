@@ -999,8 +999,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="search_kw">Atslēgvārdi</string>
     <string name="search_kw_prefill">Atslēgvārds</string>
     <string name="search_kw_button">Meklēt pēc atslēgvārda</string>
-    <string name="search_fbu_prefill">Lietotāja vārds</string>
-    <string name="search_fbu_button">Meklēt pēc lietotāja vārda</string>
     <string name="search_hbu_prefill">Īpašnieks</string>
     <string name="search_hbu_button">Meklēt pēc īpašnieka vārda</string>
     <string name="search_tb">Ceļotājs</string>
@@ -1047,7 +1045,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- user -->
     <string name="user_menu_title">Vairāk par</string>
     <string name="user_menu_view_hidden">Paslēptie slēpņi</string>
-    <string name="user_menu_view_found">Atrastie slēpņi</string>
     <string name="user_menu_open_browser">Atvērt profilu pārlūkprogrammā</string>
     <string name="user_menu_send_message">Nosūtīt ziņu</string>
     <string name="user_menu_open_contact">Atvērt kontakta kartīti</string>

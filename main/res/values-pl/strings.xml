@@ -1392,9 +1392,6 @@
     <string name="search_kw">Słowa kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
     <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
-    <string name="search_fbu">Znalezione przez</string>
-    <string name="search_fbu_prefill">Nazwa użytkownika</string>
-    <string name="search_fbu_button">Szukaj według nazwy użytkownika</string>
     <string name="search_hbu">Ukryte przez</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
@@ -1449,7 +1446,6 @@
     <!-- user -->
     <string name="user_menu_title">O użytkowniku</string>
     <string name="user_menu_view_hidden">Schowane skrzynki</string>
-    <string name="user_menu_view_found">Znalezione skrzynki</string>
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
     <string name="user_menu_send_email">Wyślij e-mail</string>
