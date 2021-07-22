@@ -125,7 +125,12 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     public void onCreate(final Bundle savedInstanceState) {
         Log.v(logToken + ".onCreate(Bundle)");
         ApplicationSettings.setLocale(this);
-        super.onCreate(savedInstanceState);
+        try {
+            super.onCreate(savedInstanceState);
+        } catch (Exception e) {
+            Log.e(e.toString());
+            throw e;
+        }
         onCreateCommon();
     }
 

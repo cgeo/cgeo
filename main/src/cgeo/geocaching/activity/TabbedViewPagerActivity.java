@@ -1,8 +1,10 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
@@ -13,7 +15,6 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import androidx.viewpager2.widget.ViewPager2;
 
-import java.lang.ref.WeakReference;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -146,11 +147,9 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     protected abstract TabbedViewPagerFragment createNewFragment(long pageId);
 
     private class ViewPagerAdapter extends FragmentStateAdapter {
-        private final WeakReference<FragmentActivity> fragmentActivityWeakReference;
 
         ViewPagerAdapter(final FragmentActivity fa) {
             super(fa);
-            fragmentActivityWeakReference = new WeakReference<>(fa);
         }
 
         @Override
@@ -163,7 +162,6 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
                 return fragment;
             }
             fragment = createNewFragment(pageId);
-            fragment.setActivity(fragmentActivityWeakReference.get());
             fragmentMap.put(pageId, fragment);
             return fragment;
         }
@@ -208,6 +206,11 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     @SuppressWarnings("rawtypes")
+    public void registerFragment(final long pageId, final TabbedViewPagerFragment fragment) {
+        fragmentMap.put(pageId, fragment);
+    }
+
+    @SuppressWarnings("rawtypes")
     protected void reinitializePage(final long pageId) {
         final TabbedViewPagerFragment fragment = fragmentMap.get(pageId);
         if (fragment != null) {
@@ -249,11 +252,69 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d("TabbedViewPagerActivity.onCreate");
+        if (savedInstanceState != null) {
+            initialPageId = savedInstanceState.getLong("initialPageId", 0);
+            initialPageShown = savedInstanceState.getBoolean("initialPageShown", false);
+            currentPageId = savedInstanceState.getLong("currentPageId", 0);
+            orderedPages = savedInstanceState.getLongArray("orderedPages");
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull final Bundle outState) {
+        super.onSaveInstanceState(outState);
+        outState.putLong("initialPageId", initialPageId);
+        outState.putBoolean("initialPageShown", initialPageShown);
+        outState.putLong("currentPageId", currentPageId);
+        outState.putLongArray("orderedPages", orderedPages);
+    }
+
+    @Override
     protected void onDestroy() {
+        Log.d("TabbedViewPagerActivity.onDestroy");
         if (viewPager != null) {
             viewPager.unregisterOnPageChangeCallback(pageChangeCallback);
         }
         super.onDestroy();
     }
+
+    // ---------------------------------------------------------------------------------
+    // ab hier lifecycle logging only
+    // ---------------------------------------------------------------------------------
+
+    /*
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.e("TabbedViewPagerActivity.onStart");
+    }
+
+    @Override
+    public void onRestart() {
+        super.onRestart();
+        Log.e("TabbedViewPagerActivity.onRestart");
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        Log.e("TabbedViewPagerActivity.onResume");
+    }
+
+    @Override
+    public void onPause() {
+        Log.e("TabbedViewPagerActivity.onPause");
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        Log.e("TabbedViewPagerActivity.onStop");
+        super.onStop();
+    }
+    */
 
 }

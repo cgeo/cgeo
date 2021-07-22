@@ -368,7 +368,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         if (pageId == Page.DETAILS.id) {
             return new DetailsViewCreator();
         } else if (pageId == Page.LOGS.id) {
-            return new TrackableLogsViewCreator(this);
+            return new TrackableLogsViewCreator();
         } else if (pageId == Page.IMAGES.id) {
             return new ImagesViewCreator();
         }
@@ -383,8 +383,13 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         }
 
         @Override
+        public long getPageId() {
+            return Page.IMAGES.id;
+        }
+
+        @Override
         public void setContent() {
-            final TrackableActivity activity = (TrackableActivity) activityWeakReference.get();
+            final TrackableActivity activity = (TrackableActivity) getActivity();
             if (activity == null) {
                 return;
             }
@@ -433,9 +438,14 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         }
 
         @Override
+        public long getPageId() {
+            return Page.DETAILS.id;
+        }
+
+        @Override
         @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
         public void setContent() {
-            final TrackableActivity activity = (TrackableActivity) activityWeakReference.get();
+            final TrackableActivity activity = (TrackableActivity) getActivity();
             if (activity == null) {
                 return;
             }

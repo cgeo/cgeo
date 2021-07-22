@@ -3,6 +3,8 @@ package cgeo.geocaching.log;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.TabbedViewPagerFragment;
+import cgeo.geocaching.databinding.LogsPageBinding;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.UserClickListener;
@@ -10,6 +12,7 @@ import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 
 import android.annotation.SuppressLint;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
@@ -23,25 +26,36 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
-    private final boolean allLogs;
+    private static final String BUNDLE_ALLLOGS = "alllogs";
+
     private final Resources res = CgeoApplication.getInstance().getResources();
-    private final CacheDetailActivity cacheDetailActivity;
     private TextView countview1 = null;
     private TextView countview2 = null;
 
-    public CacheLogsViewCreator(final CacheDetailActivity cacheDetailActivity, final boolean allLogs) {
-        super(cacheDetailActivity);
-        this.cacheDetailActivity = cacheDetailActivity;
-        this.allLogs = allLogs;
+    public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
+        final CacheLogsViewCreator fragment = new CacheLogsViewCreator();
+        final Bundle bundle = new Bundle();
+        bundle.putBoolean(BUNDLE_ALLLOGS, allLogs);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
+    @Override
+    public long getPageId() {
+        final Bundle arguments = getArguments();
+        return arguments == null ? 0 : arguments.getBoolean(BUNDLE_ALLLOGS) ? CacheDetailActivity.Page.LOGS.id : CacheDetailActivity.Page.LOGSFRIENDS.id;
     }
 
     private Geocache getCache() {
-        return cacheDetailActivity.getCache();
+        final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
+        return activity.getCache();
     }
 
     @Override
     protected List<LogEntry> getLogs() {
         final Geocache cache = getCache();
+        final Bundle arguments = getArguments();
+        final boolean allLogs = arguments == null || arguments.getBoolean(BUNDLE_ALLLOGS);
         final List<LogEntry> logs = allLogs ? cache.getLogs() : cache.getFriendsLogs();
         return addOwnOfflineLog(cache, logs);
     }
@@ -89,7 +103,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }
 
-                countview1 = new TextView(activity);
+                countview1 = new TextView(getActivity());
                 countview1.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
                 binding.getRoot().addHeaderView(countview1, null, false);
             }
@@ -103,7 +117,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
         }
 
         if (getLogs().isEmpty()) {
-            countview2 = new TextView(activity);
+            countview2 = new TextView(getActivity());
             countview2.setText(res.getString(R.string.log_empty_logbook));
             binding.getRoot().addHeaderView(countview2, null, false);
         }
@@ -111,13 +125,14 @@ public class CacheLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
+        final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
         if (getCache().canShareLog(log)) {
-            ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> getCache().shareLog(cacheDetailActivity, log));
-            ctxMenu.addItem(cacheDetailActivity.getString(R.string.cache_menu_browser),
-                    R.drawable.ic_menu_info_details, it -> getCache().openLogInBrowser(cacheDetailActivity, log));
+            ctxMenu.addItem(R.string.context_share_as_link, R.drawable.ic_menu_share, it -> getCache().shareLog(activity, log));
+            ctxMenu.addItem(activity.getString(R.string.cache_menu_browser),
+                    R.drawable.ic_menu_info_details, it -> getCache().openLogInBrowser(activity, log));
         }
         if (isOfflineLog(log)) {
-            ctxMenu.addItem(R.string.cache_personal_note_edit, R.drawable.ic_menu_edit, it -> new EditOfflineLogListener(getCache(), cacheDetailActivity).onClick(null));
+            ctxMenu.addItem(R.string.cache_personal_note_edit, R.drawable.ic_menu_edit, it -> new EditOfflineLogListener(getCache(), activity).onClick(null));
         }
         return ctxMenu;
     }
@@ -125,7 +140,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     @Override
     protected View.OnClickListener createOnLogClickListener(final LogViewHolder holder, final LogEntry log) {
         if (isOfflineLog(log)) {
-            return new EditOfflineLogListener(getCache(), cacheDetailActivity);
+            return new EditOfflineLogListener(getCache(), (CacheDetailActivity) getActivity());
         }
         return super.createOnLogClickListener(holder, log);
     }
@@ -147,19 +162,19 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     protected void fillViewHolder(final View convertView, final LogViewHolder holder, final LogEntry log) {
         super.fillViewHolder(convertView, holder, log);
         if (isOfflineLog(log)) {
-            holder.binding.author.setOnClickListener(new EditOfflineLogListener(getCache(), cacheDetailActivity));
+            holder.binding.author.setOnClickListener(new EditOfflineLogListener(getCache(), (CacheDetailActivity) getActivity()));
             holder.binding.logMark.setVisibility(View.VISIBLE);
             holder.binding.logMark.setImageResource(R.drawable.mark_orange);
         }
     }
 
     private boolean isOfflineLog(final LogEntry log) {
-        return log.author.equals(activity.getString(R.string.log_your_saved_log));
+        return log.author.equals(getString(R.string.log_your_saved_log));
     }
 
     @Override
     protected boolean isValid() {
-        return getCache() != null;
+        return getActivity() != null && getCache() != null;
     }
 
     @Override
