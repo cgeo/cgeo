@@ -43,7 +43,7 @@
                 android:text="@string/search_address" />
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/address"
                 style="@style/textinput_embedded"
@@ -64,7 +64,7 @@
                 android:text="@string/search_geo" />
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/geocode"
                 style="@style/textinput_embedded"
@@ -88,7 +88,7 @@
                 android:text="@string/search_kw" />
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/keyword"
                 style="@style/textinput_embedded"
@@ -109,7 +109,7 @@
                 android:text="@string/search_hbu" />
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/owner"
                 style="@style/textinput_embedded"
@@ -162,7 +162,7 @@
                 android:text="@string/search_tb" />
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_dropdown">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/trackable"
                 style="@style/textinput_embedded"

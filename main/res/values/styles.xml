@@ -225,9 +225,9 @@
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
-    <!-- textinput -->
+    <!-- TextInputLayout for AutoCompleteTextView or EditText -->
 
-    <style name="textinput_dropdown" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
+    <style name="textinput_autocompletetextview" parent="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu">
         <item name="android:padding">6dip</item>
         <item name="android:singleLine">true</item>
         <item name="android:autoText">true</item>
