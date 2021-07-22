@@ -21,6 +21,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
     private Set<String> geocodes;
     private String listName;
     private int markerId;
+    private boolean preventAskForDeletion;
 
     protected DeleteListCommand(@NonNull final Activity context, final int listId) {
         super(context);
@@ -35,6 +36,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
         final StoredList list = DataStore.getList(listId);
         listName = list.getTitle();
         markerId = list.markerId;
+        preventAskForDeletion = list.preventAskForDeletion;
         DataStore.removeList(listId);
     }
 
@@ -45,7 +47,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
         final int newListId = DataStore.createList(listName);
 
         // update the list cache
-        new StoredList(newListId, listName, markerId, 0);
+        new StoredList(newListId, listName, markerId, preventAskForDeletion, 0);
 
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
         DataStore.addToList(caches, newListId);

@@ -128,6 +128,12 @@
                 android:title="@string/caches_set_listmarker"
                 app:showAsAction="never|withText">
             </item>
+            <item
+                android:id="@+id/menu_set_askfordeletion"
+                android:title="@string/caches_askdeletion"
+                app:showAsAction="never"
+                android:visible="false">
+            </item>
         </menu>
     </item>
     <item
