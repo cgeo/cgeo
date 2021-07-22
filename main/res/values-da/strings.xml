@@ -1102,9 +1102,6 @@
     <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
     <string name="search_kw_button">Søg efter nøgleord</string>
-    <string name="search_fbu">Fundet af</string>
-    <string name="search_fbu_prefill">Brugernavn</string>
-    <string name="search_fbu_button">Søg brugernavn</string>
     <string name="search_hbu">Udlagt af</string>
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
@@ -1153,7 +1150,6 @@
     <!-- user -->
     <string name="user_menu_title">Om</string>
     <string name="user_menu_view_hidden">Skjulte cacher</string>
-    <string name="user_menu_view_found">Fundne cacher</string>
     <string name="user_menu_open_browser">Åbn profil i browser</string>
     <string name="user_menu_send_message">Send besked</string>
     <string name="user_menu_send_email">Send email</string>

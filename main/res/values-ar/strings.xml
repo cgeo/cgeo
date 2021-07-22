@@ -785,8 +785,6 @@
     <string name="search_kw">الكلمات المفتاحية</string>
     <string name="search_kw_prefill">كلمة مفتاحية</string>
     <string name="search_kw_button">البحث بواسطة الكلمة المفتاحية</string>
-    <string name="search_fbu_prefill">اسم المستخدم</string>
-    <string name="search_fbu_button">البحث بواسطة اسم المستخدم</string>
     <string name="search_hbu_prefill">المالك</string>
     <string name="search_hbu_button">البحث بواسطة اسم المالك</string>
     <string name="search_tb">أمتعة السفر</string>
@@ -831,7 +829,6 @@
     <!-- user -->
     <string name="user_menu_title">حول</string>
     <string name="user_menu_view_hidden">مخبآت مخفية</string>
-    <string name="user_menu_view_found">مخبآت تم العثور عليها</string>
     <string name="user_menu_open_browser">فتح الصفحة الشخصية في المتصفح</string>
     <string name="user_menu_send_message">إرسال رسالة</string>
     <string name="user_menu_open_contact">فتح بطاقة جهة الاتصال</string>

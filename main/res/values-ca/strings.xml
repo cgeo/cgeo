@@ -1370,9 +1370,6 @@
     <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
-    <string name="search_fbu">Trobat per</string>
-    <string name="search_fbu_prefill">Nom d\'usuari</string>
-    <string name="search_fbu_button">Cerca per nom d\'usuari</string>
     <string name="search_hbu">Amagat per</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
@@ -1427,7 +1424,6 @@
     <!-- user -->
     <string name="user_menu_title">Quant a</string>
     <string name="user_menu_view_hidden">Catxés amagats</string>
-    <string name="user_menu_view_found">Catxés trobats</string>
     <string name="user_menu_open_browser">Obre el perfil al navegador</string>
     <string name="user_menu_send_message">Envia un missatge</string>
     <string name="user_menu_send_email">Envia un correu electrònic</string>

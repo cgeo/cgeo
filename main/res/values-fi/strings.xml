@@ -1427,9 +1427,6 @@
     <string name="search_kw">Hakusanat</string>
     <string name="search_kw_prefill">Hakusana</string>
     <string name="search_kw_button">Hae hakusanalla</string>
-    <string name="search_fbu">Löytänyt</string>
-    <string name="search_fbu_prefill">Käyttäjätunnus</string>
-    <string name="search_fbu_button">Hae käyttäjätunnuksella</string>
     <string name="search_hbu">Piilottanut</string>
     <string name="search_hbu_prefill">Omistaja</string>
     <string name="search_hbu_button">Hae omistajan nimellä</string>
@@ -1487,7 +1484,6 @@
     <!-- user -->
     <string name="user_menu_title">Tietoja</string>
     <string name="user_menu_view_hidden">Kätköjä piilotettu</string>
-    <string name="user_menu_view_found">Kätköjä löydetty</string>
     <string name="user_menu_open_browser">Avaa profiili selaimessa</string>
     <string name="user_menu_send_message">Lähetä viesti</string>
     <string name="user_menu_send_email">Lähetä sähköposti</string>

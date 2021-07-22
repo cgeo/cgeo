@@ -1178,9 +1178,6 @@
     <string name="search_kw">Ключевые слова</string>
     <string name="search_kw_prefill">Ключевое слово</string>
     <string name="search_kw_button">Искать по ключевым словам</string>
-    <string name="search_fbu">Найден</string>
-    <string name="search_fbu_prefill">Имя пользователя</string>
-    <string name="search_fbu_button">Поиск по пользователю</string>
     <string name="search_hbu">Создан</string>
     <string name="search_hbu_prefill">Создатель</string>
     <string name="search_hbu_button">Поиск по создателю</string>
@@ -1228,7 +1225,6 @@
     <!-- user -->
     <string name="user_menu_title">О</string>
     <string name="user_menu_view_hidden">Созданные тайники</string>
-    <string name="user_menu_view_found">Найденные тайники</string>
     <string name="user_menu_open_browser">Открыть профиль в браузере</string>
     <string name="user_menu_send_message">Отправить сообщение</string>
     <string name="user_menu_send_email">Отправить e-mail</string>
