@@ -475,6 +475,9 @@
     <string name="cache_filtergroup_basic">Temel</string>
     <string name="cache_filtergroup_details">Detaylar</string>
     <string name="cache_filtergroup_userspecific">Kullanıcıya özgün</string>
+    <string name="cache_filter_contexttype_live_title">Canlı Filtre</string>
+    <string name="cache_filter_contexttype_offline_title">Çevrimdışı Filtre</string>
+    <string name="cache_filter_contexttype_transient_title">Filtre</string>
     <string name="cache_filter_include">Dahil et</string>
     <string name="cache_filter_exclude">Hariç Tut</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
@@ -507,6 +510,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Öğe Ekle</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
+    <string name="cache_filter_distance_coordinates">Koordinatlar</string>
     <string name="cache_filter_distance_use_current_position">Mevcut konumu kullan</string>
     <string name="cache_filter_status_select_all">Tümü</string>
     <string name="cache_filter_status_select_yes">Evet</string>
@@ -528,6 +532,8 @@
     <string name="cache_filter_status_exclude_active">Aktifleri Dahil Etme</string>
     <string name="cache_filter_status_exclude_disabled">Devredışıları Hariç Tut</string>
     <string name="cache_filter_status_exclude_archived">Arşivlenmişleri Hariç Tut</string>
+    <string name="cache_filter_log_entry_foundby">Bulan</string>
+    <string name="cache_filter_log_entry_logtext">Kayıt metni</string>
     <string name="cache_filter_stored_since_notstored">Kaydedilmemiş</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 saat</string>
@@ -582,6 +588,7 @@
     <string name="contribution_tester">test kullanıcısı</string>
     <string name="contribution_support">destek</string>
     <string name="contribution_documentation">belgeler</string>
+    <string name="contribution_infrastructure">altyapı</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Sorun bildir</string>
@@ -1124,6 +1131,7 @@
     <string name="cache_images">Görseller</string>
     <string name="cache_advanced">Gelişmiş</string>
     <string name="cache_waypoints">Yol noktaları</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Yol noktaları (%d)</string>
     <string name="cache_waypoints_add">Yol noktası ekle</string>
     <string name="cache_waypoints_add_currentLocation">Mevcut konumu ekle</string>
     <string name="cache_waypoints_add_fromclipboard">Panodan ekle</string>
@@ -1171,6 +1179,7 @@
     <string name="cache_menu_map_ext">Diğer harici uygulamalar</string>
     <string name="cache_menu_streetview">Sokak görünümü</string>
     <string name="cache_menu_browser">Tarayıcıda aç</string>
+    <string name="no_browser_found">Tarayıcı bulunamadı</string>
     <string name="cache_menu_open_with">Birlikte aç…</string>
     <string name="cache_menu_visit">Ziyaretini Kaydet</string>
     <string name="cache_log_too_long">c:geo, kaydınızı gönderemedi çünkü çok uzun. Ama böylesine kapsamlı bir kayıt yazmaya çalıştığınız için teşekkürler ;-)</string>
@@ -1404,6 +1413,8 @@
     <string name="map_show_caches_title">Bu Cache\'leri Göster:</string>
     <string name="map_show_waypoints_title">Bu yol noktalarını göster:</string>
     <string name="map_show_other_title">Diğerlerini göster:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filtre çok karmaşık</string>
+    <string name="map_settings_cache_filter_too_complex_message">Mevcut filtre daha fazla seçenek uygulamak için çok karmaşık. Bu genellikle filtrenin basit VE mantığı yerine DEĞİL veya VEYA içermesiyle alakalıdır.</string>
     <!-- search -->
     <string name="search_bar_hint">Cache/trackable ara</string>
     <string name="search_bar_desc">Geocache\'ler (geocode, anahtar kelime), Trackable (TB kodu)</string>
@@ -1422,6 +1433,8 @@
     <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
+    <string name="search_filter_temporary_user_information_title">Yeni filtre çerçevesi</string>
+    <string name="search_filter_temporary_user_information">c:geo, esnek, birleştirilebilir ve depolanabilir filtreleri destekleyen yeni bir filtreleme sistemini tanıttı. \n\nKüresel filtre bundan böyle doğrudan cache listelerinde ve canlı haritada değiştirilebilir.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
