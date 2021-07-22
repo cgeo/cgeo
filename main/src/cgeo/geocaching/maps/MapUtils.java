@@ -98,11 +98,11 @@ public class MapUtils {
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        FilterUtils.updateFilterBar(activity, getMapFilters(filterContext));
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterNames(filterContext));
     }
 
     @NonNull
-    private static List<String> getMapFilters(final GeocacheFilterContext filterContext) {
+    private static List<String> getActiveMapFilterNames(final GeocacheFilterContext filterContext) {
         final List<String> filters = new ArrayList<>();
         if (Settings.getCacheType() != CacheType.ALL) {
             filters.add(Settings.getCacheType().getL10n());

@@ -1391,8 +1391,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         setFilter();
         refreshFilterForOnlineSearch();
 
-        refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
-        replaceCacheListFromSearch();
+        refreshCurrentList();
     }
 
     private void setAndRefreshFilterForOnlineSearch(final GeocacheFilterContext filterContext) {
@@ -1859,11 +1858,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateFilterBar() {
-        FilterUtils.updateFilterBar(this, getFilterNames());
+        FilterUtils.updateFilterBar(this, getActiveFilterNames());
     }
 
     @NonNull
-    private List<String> getFilterNames() {
+    private List<String> getActiveFilterNames() {
         final List<String> filters = new ArrayList<>();
         if (Settings.getCacheType() != CacheType.ALL) {
             filters.add(Settings.getCacheType().getL10n());
