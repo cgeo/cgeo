@@ -63,8 +63,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private static final String STATE_ORIGINAL_FILTER_CONFIG = "state_original_filter_config";
 
     private static final GeocacheFilterType[] BASIC_FILTER_TYPES =
-        new GeocacheFilterType[]{GeocacheFilterType.TYPE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.STATUS };
+        new GeocacheFilterType[]{GeocacheFilterType.TYPE, GeocacheFilterType.DIFFICULTY_TERRAIN, GeocacheFilterType.STATUS };
     private static final Set<GeocacheFilterType> BASIC_FILTER_TYPES_SET = new HashSet<>(Arrays.asList(BASIC_FILTER_TYPES));
+
+    private static final GeocacheFilterType[] INTERNAL_FILTER_TYPES =
+        new GeocacheFilterType[]{GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN };
+    private static final Set<GeocacheFilterType> INTERNAL_FILTER_TYPES_SET = new HashSet<>(Arrays.asList(INTERNAL_FILTER_TYPES));
 
     private GeocacheFilterContext filterContext;
     private String originalFilterConfig;
@@ -268,6 +272,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void initializeFilterAdd() {
         final List<GeocacheFilterType> filterTypes = new ArrayList<>(Arrays.asList(GeocacheFilterType.values()));
+        filterTypes.removeAll(INTERNAL_FILTER_TYPES_SET);
+
         Collections.sort(filterTypes, (left, right) -> TextUtils.COLLATOR.compare(left.getUserDisplayableName(), right.getUserDisplayableName()));
         addFilter.setValues(filterTypes)
             .setDisplayMapper(GeocacheFilterType::getUserDisplayableName)
