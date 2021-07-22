@@ -1916,7 +1916,7 @@ public class Settings {
     }
 
     public static int getListInitialLoadLimit() {
-        return getInt(R.string.pref_list_initial_load_limit, R.integer.list_load_limit_default);
+        return getInt(R.string.pref_list_initial_load_limit, getKeyInt(R.integer.list_load_limit_default));
     }
 
 }
