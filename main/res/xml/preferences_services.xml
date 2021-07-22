@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:icon="?attr/settings_cloud"
+    app:title="@string/settings_title_services"
+    app:key="@string/preference_screen_services" >
+    <PreferenceCategory android:title="@string/settings_category_geocaching_platform"
+        android:layout="@layout/preference_category" >
+
+        <!-- Geocaching.com -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/settings_title_gc"/>
+
+        <!-- Geocaching.com Adventure Lab -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/settings_title_lc" />
+
+        <!-- Opencaching.de -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/init_oc" />
+
+        <!-- Opencaching.pl -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/init_oc_pl" />
+
+        <!-- Opencaching.nl -->
+        <Preference
+            app:fragment="TOOD"
+            app:title="@string/init_oc_nl" />
+
+        <!-- Opencaching.us -->
+        <Preference
+            app:fragment="TOOD"
+            app:title="@string/init_oc_us" />
+
+        <!-- Opencaching.ro -->
+        <Preference
+            app:fragment="TOOD"
+            app:title="@string/init_oc_ro" />
+
+        <!-- Opencache.uk -->
+        <Preference
+            app:fragment="TOOD"
+            app:title="@string/init_oc_uk" />
+
+        <!-- Extremcaching.com -->
+        <Preference
+            app:fragment="TOOD"
+            app:title="@string/settings_title_ec" />
+
+        <!-- Geocaching.su -->
+        <Preference
+            app:fragment="TOOD"
+            app:title="@string/init_su" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_category_geocaching_additionals"
+        android:layout="@layout/preference_category" >
+
+        <!-- Gcvote.com -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/init_gcvote" />
+
+        <!-- Geokrety.org -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/init_geokrety" />
+
+        <!-- Send2cgeo -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/init_sendToCgeo" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_category_social"
+        android:layout="@layout/preference_category" >
+
+        <!-- Twitter -->
+        <Preference
+            app:fragment="TODO"
+            app:title="@string/init_twitter" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_category_browser"
+        android:layout="@layout/preference_category" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_nativeUa"
+            android:summary="@string/init_summary_use_native_ua"
+            android:title="@string/init_use_native_ua" />
+    </PreferenceCategory>
+</PreferenceScreen>

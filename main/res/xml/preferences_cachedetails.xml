@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="?attr/settings_details"
+    android:title="@string/settings_title_cachedetails"
+    android:summary="@string/settings_summary_cachedetails" >
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_friendlogswanted"
+        android:summary="@string/init_summary_friends_and_own_logs_wanted"
+        android:title="@string/init_friends_and_own_logs_wanted" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_opendetailslastpage"
+        android:summary="@string/init_summary_openlastdetailspage"
+        android:title="@string/init_openlastdetailspage" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_livelist"
+        android:summary="@string/init_summary_livelist"
+        android:title="@string/init_livelist" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_global_wp_extraction_disable"
+        android:title="@string/init_global_wp_extraction_disable"
+        android:summary="@string/init_summary_global_wp_extraction_disable" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_customtabs_as_browser"
+        android:title="@string/init_customtabs_as_browser"
+        android:summary="@string/init_summary_customtabs_as_browser" />
+
+</PreferenceScreen>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_ocuk"
+    android:title="@string/init_oc_uk" >
+
+    <PreferenceCategory android:title="@string/settings_settings"
+        android:layout="@layout/preference_category" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_connectorOCUKActive"
+            android:summary="@string/init_summary_oc_uk"
+            android:title="@string/settings_activate_oc_uk" />
+        <cgeo.geocaching.settings.TextPreference
+            android:dependency="@string/pref_connectorOCUKActive"
+            android:layout="@layout/text_preference"
+            android:text="@string/init_oc_uk_description" />
+        <cgeo.geocaching.settings.OAuthPreference
+            android:dependency="@string/pref_connectorOCUKActive"
+            android:key="@string/pref_fakekey_ocuk_authorization" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_information"
+        android:layout="@layout/preference_category" >
+        <Preference
+            android:key="@string/pref_fakekey_ocuk_website"
+            android:title="@string/settings_open_website" />
+        <cgeo.geocaching.settings.CapabilitiesPreference
+            android:title="@string/settings_features"
+            app:connector="OK" />
+    </PreferenceCategory>
+</PreferenceScreen>

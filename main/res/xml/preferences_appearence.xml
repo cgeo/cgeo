@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="?attr/settings_eye"
+    android:key="@string/pref_appearance"
+    android:title="@string/settings_title_appearance"
+    android:summary="@string/settings_summary_appearance" >
+    <ListPreference
+        android:defaultValue="@string/pref_value_theme_dark"
+        android:entries="@array/settings_theme_entries"
+        android:entryValues="@array/pref_theme_values"
+        android:key="@string/pref_theme_setting"
+        android:title="@string/settings_theme_title"
+        android:summary="%s" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_showaddress"
+        android:summary="@string/init_summary_address"
+        android:title="@string/init_address" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_plainLogs"
+        android:summary="@string/init_summary_plain_logs"
+        android:title="@string/init_plain_logs" />
+    <ListPreference
+        android:key="@string/pref_selected_language"
+        android:title="@string/init_select_language" />
+    <CheckBoxPreference
+        android:defaultValue="false"
+        android:key="@string/pref_units_imperial"
+        android:summary="@string/init_summary_units"
+        android:title="@string/init_units" />
+</PreferenceScreen>

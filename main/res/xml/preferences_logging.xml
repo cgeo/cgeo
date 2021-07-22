@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:icon="?attr/settings_pen"
+    android:title="@string/settings_title_logging"
+    android:summary="@string/settings_summary_logging" >
+
+    <PreferenceCategory android:title="@string/init_signature"
+        android:layout="@layout/preference_category" >
+        <cgeo.geocaching.settings.TemplateTextPreference
+            android:key="@string/pref_signature"
+            android:title="@string/init_signature" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_sigautoinsert"
+            android:title="@string/init_sigautoinsert" />
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_category_logging_other"
+        android:layout="@layout/preference_category" >
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_trackautovisit"
+            android:summary="@string/init_summary_trackautovisit"
+            android:title="@string/init_trackautovisit" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_log_offline"
+            android:summary="@string/init_summary_log_offline"
+            android:title="@string/init_log_offline" />
+        <CheckBoxPreference
+            android:defaultValue="true"
+            android:key="@string/pref_offlinelogs_homescreen"
+            android:summary="@string/init_summary_offlinelogs_homescreen"
+            android:title="@string/init_offlinelogs_homescreen" />
+    </PreferenceCategory>
+</PreferenceScreen>

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PreferenceScreen
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:key="@string/preference_screen_navigation_menu"
+    android:title="@string/settings_title_navigation_menu" >
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_compass"
+        android:title="@string/compass_title" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_radar"
+        android:title="@string/cache_menu_radar" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_internal_map"
+        android:title="@string/cache_menu_map" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_locus"
+        android:title="@string/caches_map_locus" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_maps"
+        android:title="@string/cache_menu_map_ext" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_navigation"
+        android:title="@string/cache_menu_navigation_drive" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_streetview"
+        android:title="@string/cache_menu_streetview" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_oruxmaps"
+        android:title="@string/cache_menu_oruxmaps_online" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_oruxmaps_offline"
+        android:title="@string/cache_menu_oruxmaps_offline" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_sygic_walking"
+        android:title="@string/cache_menu_sygic_walk" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_sygic_driving"
+        android:title="@string/cache_menu_sygic_drive" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_osmand"
+        android:title="@string/cache_menu_osmand" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_walk"
+        android:title="@string/cache_menu_navigation_walk" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_transit"
+        android:title="@string/cache_menu_navigation_transit" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_bike"
+        android:title="@string/cache_menu_navigation_bike" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_google_maps_directions"
+        android:title="@string/cache_menu_maps_directions" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_where_you_go"
+        android:title="@string/cache_menu_whereyougo" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_pebble"
+        android:title="@string/cache_menu_pebble" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:enabled="false"
+        android:key="@string/pref_navigation_menu_mapswithme"
+        android:title="@string/cache_menu_mapswithme" />
+</PreferenceScreen>
