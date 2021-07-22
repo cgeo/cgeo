@@ -444,6 +444,7 @@
     <string name="caches_reset_cache_icons_title">Reset cache icons</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
+    <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
 
@@ -463,6 +464,7 @@
     <string name="list_dialog_remove_title">Remove list</string>
     <string name="list_dialog_remove_description">Do you want to remove the current list? All caches remaining in the list will be moved to \"Stored\".</string>
     <string name="list_dialog_remove_nowempty">List is empty. Do you want to remove the current list?</string>
+    <string name="list_dialog_do_not_ask_me_again">Do not ask me again for this list</string>
     <string name="list_dialog_remove">Remove</string>
     <string name="list_dialog_rename_title">Rename list</string>
     <string name="list_dialog_rename">Rename</string>

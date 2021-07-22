@@ -157,6 +157,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_LIST_ID = "currentListId";
     private static final String STATE_MARKER_ID = "currentMarkerId";
+    private static final String STATE_PREVENTASKFORDELETION = "preventAskForDeletion";
     private static final String STATE_CONTENT_STORAGE_ACTIVITY_HELPER = "contentStorageActivityHelper";
     private static final String STATE_OFFLINELISTLOADLIMIT_ID = "offlineListLoadLimit";
 
@@ -178,6 +179,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private long detailProgressTime = 0L;
     private int listId = StoredList.TEMPORARY_LIST.id; // Only meaningful for the OFFLINE type
     private int markerId = EmojiUtils.NO_EMOJI;
+    private boolean preventAskForDeletion = false;
     private int offlineListLoadLimit = getOfflineListInitialLoadLimit();
 
     /**
@@ -543,6 +545,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
             listId = savedInstanceState.getInt(STATE_LIST_ID);
             markerId = savedInstanceState.getInt(STATE_MARKER_ID);
+            preventAskForDeletion = savedInstanceState.getBoolean(STATE_PREVENTASKFORDELETION);
             offlineListLoadLimit = savedInstanceState.getInt(STATE_OFFLINELISTLOADLIMIT_ID);
         } else {
             offlineListLoadLimit = getOfflineListInitialLoadLimit();
@@ -587,6 +590,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putInt(STATE_LIST_ID, listId);
         savedInstanceState.putInt(STATE_MARKER_ID, markerId);
+        savedInstanceState.putBoolean(STATE_PREVENTASKFORDELETION, preventAskForDeletion);
         savedInstanceState.putInt(STATE_OFFLINELISTLOADLIMIT_ID, offlineListLoadLimit);
         savedInstanceState.putBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER, contentStorageActivityHelper.getState());
     }
@@ -804,6 +808,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             setVisible(menu, R.id.menu_rename_list, isNonDefaultList);
             setVisibleEnabled(menu, R.id.menu_make_list_unique, listId != PseudoList.ALL_LIST.id, !isEmpty);
             setVisible(menu, R.id.menu_set_listmarker, isNonDefaultList);
+            setVisible(menu, R.id.menu_set_askfordeletion, isNonDefaultList);
+            setEnabled(menu, R.id.menu_set_askfordeletion, preventAskForDeletion);
 
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
@@ -863,6 +869,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         markerId = newListMarker;
         MapMarkerUtils.resetLists();
         adapter.notifyDataSetChanged();
+    }
+
+    private void setPreventAskForDeletion(final boolean prevent) {
+        DataStore.setListPreventAskForDeletion(listId, prevent);
+        preventAskForDeletion = prevent;
+        invalidateOptionsMenuCompatible();
     }
 
     private void setCacheIcons(final int newCacheIcon) {
@@ -972,10 +984,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             EmojiUtils.selectEmojiPopup(this, markerId, 0, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
             EmojiUtils.selectEmojiPopup(this, -1, 0, this::setCacheIcons);
+        } else if (menuItem == R.id.menu_set_askfordeletion) {
+            setPreventAskForDeletion(false);
         } else {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void checkIfEmptyAndRemoveAfterConfirm() {
+        final boolean isNonDefaultList = isConcreteList() && listId != StoredList.STANDARD_LIST_ID;
+        // Check local cacheList first, and Datastore only if needed (because of filtered lists)
+        // Checking is done in this order for performance reasons
+        if (isNonDefaultList && !preventAskForDeletion && CollectionUtils.isEmpty(cacheList)
+            && DataStore.getAllStoredCachesCount(CacheType.ALL, listId) == 0) {
+            // ask user, if he wants to delete the now empty list
+            Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty), getString(R.string.list_dialog_do_not_ask_me_again), preventAskForDeletion -> {
+                removeListInternal();
+            }, this::setPreventAskForDeletion);
+        }
     }
 
     private boolean cacheToShow() {
@@ -1656,11 +1683,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 listId = id;
                 title = res.getString(R.string.list_all_lists);
                 markerId = EmojiUtils.NO_EMOJI;
+                preventAskForDeletion = true;
             } else {
                 final StoredList list = DataStore.getList(id);
                 listId = list.id;
                 title = list.title;
                 markerId = list.markerId;
+                preventAskForDeletion = list.preventAskForDeletion;
             }
             type = CacheListType.OFFLINE;
 
@@ -1936,6 +1965,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         final CacheListLoaderType enumType = CacheListLoaderType.values()[type];
         AbstractSearchLoader loader = null;
+        preventAskForDeletion = true;
         switch (enumType) {
             case OFFLINE:
                 // open either the requested or the last list
@@ -1960,6 +1990,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                     listId = list.id;
                     title = list.title;
                     markerId = list.markerId;
+                    preventAskForDeletion = list.preventAskForDeletion;
                 }
 
                 loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
@@ -2071,16 +2102,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         showProgress(false);
         hideLoading();
         invalidateOptionsMenuCompatible();
-        /* expand following block if necessary
         if (arg0 instanceof AbstractSearchLoader) {
             switch (((AbstractSearchLoader) arg0).getAfterLoadAction()) {
                 case CHECK_IF_EMPTY:
+                    checkIfEmptyAndRemoveAfterConfirm();
                     break;
                 case NO_ACTION:
                     break;
             }
         }
-        */
     }
 
     @Override
