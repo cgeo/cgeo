@@ -195,8 +195,9 @@ public final class MapMarkerUtils {
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
         if (assignedMarkers.size() > 0) {
             if (lPaint == null) {
-                final Pair<Integer, Integer> temp = DisplayUtils.getDrawableDimensions(res, R.drawable.dot_black);
-                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (temp.first * 1.2), (int) (temp.second * 1.2));
+                final Drawable marker = ResourcesCompat.getDrawable(res, R.drawable.dot_black, null);
+                assert marker != null;
+                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (marker.getIntrinsicWidth() * 1.2), (int) (marker.getIntrinsicHeight() * 1.2));
                 final int markerAvailable = markerDimensions.first;
                 lPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
             }
