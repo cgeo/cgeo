@@ -153,6 +153,11 @@
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
+    <style name="button_full_spinner" parent="button_full">
+        <item name="icon">@drawable/outline_arrow_drop_down_24</item>
+        <item name="iconGravity">textEnd</item>
+    </style>
+
     <style name="button_letter" parent="button">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:minWidth">40sp</item>
