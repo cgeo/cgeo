@@ -59,7 +59,7 @@ public class DifficultyAndTerrainFilterViewHolder extends BaseFilterViewHolder<D
         viewGroup.addView(linearLayout);
 
         // create label
-        linearLayout.addView(ViewUtils.createTextItem(getActivity(), R.style.cgeo, textParam));
+        linearLayout.addView(ViewUtils.createTextItem(getActivity(), R.style.text_label, textParam));
 
         // create range selector
         final ItemRangeSelectorViewHolder<Float, T> rangeView =
