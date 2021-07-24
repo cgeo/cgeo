@@ -189,7 +189,7 @@ public class Settings {
     }
 
     public static int getExpectedVersion() {
-        return 6;
+        return 7;
     }
 
     private static void migrateSettings() {
@@ -351,19 +351,22 @@ public class Settings {
 
         if (currentVersion < 5) {
             // non-used version which spilled into the nightlies. Just mark as migrated
-            final Editor e = sharedPrefs.edit();
-            e.putInt(getKey(R.string.pref_settingsversion), 5);
-            e.apply();
+            setActualVersion(5);
         }
 
         if (currentVersion < 6) {
+            // wrongly-used version which spilled into beta. Just mark as migrated
+            setActualVersion(6);
+        }
+
+        if (currentVersion < 7) {
             //migrate global own/found/disable/archived/offlinelog to LIVE filter
             final Map<GeocacheFilter.QuickFilter, Boolean> legacyGlobalSettings = new HashMap<>();
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.OWNED, !getBooleanDirect("pref_excludemine", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !getBooleanDirect("pref_excludefound", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.DISABLED, !getBooleanDirect("pref_excludedisabled", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.ARCHIVED, !getBooleanDirect("pref_excludearchived", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, !getBooleanDirect("pref_excludeofflinelog", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.OWNED, !getBooleanDirect("excludemine", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !getBooleanDirect("excludefound", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.DISABLED, !getBooleanDirect("excludedisabled", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.ARCHIVED, !getBooleanDirect("excludearchived", false));
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, !getBooleanDirect("excludeofflinelog", false));
 
             final GeocacheFilterContext liveFilterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
             GeocacheFilter liveFilter = liveFilterContext.get();
@@ -377,7 +380,7 @@ public class Settings {
                 liveFilterContext.set(liveFilter);
             }
 
-            setActualVersion(6);
+            setActualVersion(7);
         }
     }
 
