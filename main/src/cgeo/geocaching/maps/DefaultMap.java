@@ -45,7 +45,9 @@ public final class DefaultMap {
     }
 
     public static void startActivityGeoCode(final Context fromActivity, final Class<?> cls, final String geocode) {
-        new MapOptions(geocode).startIntent(fromActivity, cls);
+        final MapOptions mo = new MapOptions(geocode);
+        mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+        mo.startIntent(fromActivity, cls);
     }
 
     public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
@@ -61,5 +63,6 @@ public final class DefaultMap {
         mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
         mo.startIntent(fromActivity, getDefaultMapClass());
     }
+
 
 }
