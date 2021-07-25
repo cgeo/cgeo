@@ -75,7 +75,8 @@ public class FilterViewHolderCreator {
                 break;
             case DIFFICULTY:
             case TERRAIN:
-                result = createTerrainDifficultyFilterViewHolder();
+            case RATING:
+                result = create1to5ItemRangeSelectorViewHolder();
                 break;
             case DIFFICULTY_TERRAIN:
                 result = new DifficultyAndTerrainFilterViewHolder();
@@ -168,7 +169,7 @@ public class FilterViewHolderCreator {
         listInfoIsComplete = isComplete;
     }
 
-    private static IFilterViewHolder<?> createTerrainDifficultyFilterViewHolder() {
+    private static IFilterViewHolder<?> create1to5ItemRangeSelectorViewHolder() {
         final Float[] range = new Float[]{1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f};
         return new ItemRangeSelectorViewHolder<>(
             new ValueGroupFilterAccessor<Float, NumberRangeGeocacheFilter<Float>>()

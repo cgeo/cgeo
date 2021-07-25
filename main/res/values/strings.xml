@@ -492,6 +492,7 @@
     <string name="cache_filter_difficulty">Difficulty</string>
     <string name="cache_filter_terrain">Terrain</string>
     <string name="cache_filter_difficulty_terrain">Difficulty / Terrain</string>
+    <string name="cache_filter_rating">Rating</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache Attributes</string>
     <string name="cache_filter_favorites">Favorites</string>

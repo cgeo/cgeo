@@ -28,6 +28,7 @@ import cgeo.geocaching.filters.core.NameGeocacheFilter;
 import cgeo.geocaching.filters.core.NumberRangeGeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
+import cgeo.geocaching.filters.core.RatingGeocacheFilter;
 import cgeo.geocaching.filters.core.SizeGeocacheFilter;
 import cgeo.geocaching.filters.core.StatusGeocacheFilter;
 import cgeo.geocaching.filters.core.TypeGeocacheFilter;
@@ -328,6 +329,12 @@ final class OkapiClient {
             case DIFFICULTY_TERRAIN:
                 fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, params, valueMap, connector);
                 fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, params, valueMap, connector);
+                break;
+            case RATING:
+                final RatingGeocacheFilter ratingFilter = (RatingGeocacheFilter) basicFilter;
+                if (ratingFilter.getMinRangeValue() != null) {
+                    valueMap.put("rating", (ratingFilter.getMinRangeValue() == null ? "1" : ((int) Math.floor(ratingFilter.getMinRangeValue()))) + "-" + (ratingFilter.getMaxRangeValue() == null ? "5" : Math.round(ratingFilter.getMaxRangeValue())));
+                }
                 break;
             case OWNER:
                 final String uuid = getUserUUID(connector, ((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
