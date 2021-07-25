@@ -421,6 +421,7 @@
     <string name="caches_reset_cache_icons_title">Obnovit ikony kešek</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
+    <string name="caches_askdeletion">Zeptat se na smazání, pokud je prázdný</string>
     <string name="select_icon">Vybrat ikonu</string>
     <string name="onetime_missing_unicode_info">Vaše verze Androidu nepodporuje automatickou detekci podporovaných ikon - některé znaky mohou chybět</string>
     <!-- caches lists -->
@@ -439,6 +440,7 @@
     <string name="list_dialog_remove_title">Odstranit seznam</string>
     <string name="list_dialog_remove_description">Chceš odstranit aktuální seznam kešek? Všechny zbývající kešky budou přesunuty do seznamu „Uložené“.</string>
     <string name="list_dialog_remove_nowempty">Seznam je prázdný, chcete jej odstranit?</string>
+    <string name="list_dialog_do_not_ask_me_again">Znovu se neptat na tento seznam</string>
     <string name="list_dialog_remove">Odstranit</string>
     <string name="list_dialog_rename_title">Přejmenovat seznam</string>
     <string name="list_dialog_rename">Přejmenovat</string>
@@ -462,6 +464,7 @@
     <string name="cache_filter_owner">Vlastník kešky</string>
     <string name="cache_filter_difficulty">Obtížnost</string>
     <string name="cache_filter_terrain">Terén</string>
+    <string name="cache_filter_difficulty_terrain">Obtížnost / Terén</string>
     <string name="cache_filter_status">Stav</string>
     <string name="cache_filter_attributes">Atributy kešky</string>
     <string name="cache_filter_favorites">Oblíbené</string>
@@ -1264,6 +1267,7 @@
     <string name="cache_distance">Vzdálenost</string>
     <string name="cache_difficulty">Obtížnost</string>
     <string name="cache_terrain">Terén</string>
+    <string name="cache_difficulty_terrain">Obtížnost / Terén</string>
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
