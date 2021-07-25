@@ -1,28 +1,28 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Gelişmiş filtreleme sistemi
+- c:geo için esnek, birleştirilebilir ve depolanabilir filtreleri destekleyen yeni bir filtreleme sisteminin tanıtılıyor
+- Hem cache listelerinde hem de harita görünümünde mevcuttur
+- Yeni "Filtreye göre ara" işlevi
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+### Harita
+- Yeni: Bir listeden bir harita görüntülerken kullanıcı tanımlı bir cache oluşturma: Kullanıcıya mevcut listede (kullanıcı tanımlı cacheler için varsayılan liste yerine) yeni cache saklamasını sağlar
+- Yeni: Harita hızlı ayarlarında "kendi" ve "bulunan" filtreleri ayrıldı
+- Değişiklik: Ek olarak, açılır pencere ayrıntılarında cache adını göster
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Geocache Ayrıntıları
+- Yeni: Google translate uygulama içi çeviri açılır penceresini kullanın
+- Yeni: Cache ayrıntıları açılır penceresindeki atanan simgeyi uzun tıklamayla değiştirmeye izin ver (yalnızca depolanan cacheler)
 
-### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### İndirici
+- Değişiklik: İndirmeler artık tamamen arka planda gerçekleşecek, bildirim gönderilecek
+- Değişiklik: Başarıyla indirilen dosyalar, aynı ada sahip mevcut dosyaların üzerine otomatik olarak yazılacaktır
+- Değişiklik: Bir harita henüz yüklenmemiş belirli bir tema gerektiriyorsa, c:geo o temayı da otomatik olarak indirecek ve kuracaktır
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Diğer
+- Değişiklik: Android tarafından sağlanan daha modern bileşenlerden faydalanabilmek için c:geo temasının dahili teknik yönlerini tamamen elden geçirdik. Bunun, bazıları istenmeyen birkaç yan etkisi olacaktır. Lütfen hataları veya aksaklıkları [GitHub sayfamızdan](https://www.github.com/cgeo/cgeo/issues) veya destek ekibiyle iletişime geçerek bildirin.
+- Yeni: Sistemden gece / gündüz modunu destekler (isteğe bağlı)
+- Yeni: Geocaching.com'dan yer imi listelerini indirin - ana menüde "Listeler / cep sorguları"na bakın
+- Yeni: geocaching.su için yeteneği yoksay
+- Değişiklik: Artık bakımı yapılmayan RMAPS navigasyon uygulaması kaldırıldı
 - Düzeltme: Kişisel nottan aynı ada sahip ancak farklı koordinatlara sahip yol noktasını çıkarma
 - Düzeltme: Formüllü yol noktası için kullanıcı notunun çıkarılmasında hata
 - Düzeltme: Formülü tamamlanmış formül için koordinatlar yerine KN'ye aktar
