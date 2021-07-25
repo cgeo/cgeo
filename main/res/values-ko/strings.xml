@@ -418,6 +418,7 @@
     <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
     <string name="caches_set_listmarker">목록 표시 설정</string>
+    <string name="caches_askdeletion">비어 있으면 삭제 요청</string>
     <string name="select_icon">아이콘 선택</string>
     <string name="onetime_missing_unicode_info">안드로이드 버전은 지원되는 아이콘 자동 감지를 지원하지 않습니다. 일부 문자가 누락 될 수 있습니다.</string>
     <!-- caches lists -->
@@ -436,6 +437,7 @@
     <string name="list_dialog_remove_title">목록 제거</string>
     <string name="list_dialog_remove_description">현재 목록을 제거하시겠습니까? 목록에 있는 모든 캐시는 \"저장된 캐시\"로 이동됩니다.</string>
     <string name="list_dialog_remove_nowempty">목록이 비었습니다. 현재 목록을 제거할까요?</string>
+    <string name="list_dialog_do_not_ask_me_again">이 목록에 대해 다시 묻지 않음</string>
     <string name="list_dialog_remove">제거</string>
     <string name="list_dialog_rename_title">목록 이름 바꾸기</string>
     <string name="list_dialog_rename">이름변경</string>
