@@ -390,6 +390,7 @@
     <string name="caches_copy_selected">Copia la selezione</string>
     <string name="caches_copy_all">Copia tutto</string>
     <string name="caches_map_locus_export">Esporta in Locus</string>
+    <string name="caches_filter_menuitem">Filtro</string>
     <string name="caches_filter_title">Filtra per</string>
     <string name="caches_filter_size">Dimensione</string>
     <string name="caches_filter_type">Tipo</string>
@@ -418,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Reimposta icone cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
+    <string name="caches_askdeletion">Chiedi l\'eliminazione se vuota</string>
     <string name="select_icon">Seleziona icona</string>
     <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
     <!-- caches lists -->
@@ -436,6 +438,7 @@
     <string name="list_dialog_remove_title">Rimuovi lista</string>
     <string name="list_dialog_remove_description">Vuoi rimuovere la lista corrente? Tutti i cache contenuti verranno spostati nella lista base \"Salvati\".</string>
     <string name="list_dialog_remove_nowempty">Elenco vuoto. Vuoi eliminare l\'elenco corrente?</string>
+    <string name="list_dialog_do_not_ask_me_again">Non chiedere di nuovo per questo elenco</string>
     <string name="list_dialog_remove">Rimuovi</string>
     <string name="list_dialog_rename_title">Rinomina lista</string>
     <string name="list_dialog_rename">Rinomina</string>
@@ -470,9 +473,13 @@
     <string name="cache_filter_location">Posizione</string>
     <string name="cache_filter_stored_lists">Elenchi Archiviati</string>
     <string name="cache_filter_origin">Origine</string>
+    <string name="cache_filter_stored_since">Salvato dal</string>
     <string name="cache_filtergroup_basic">Base</string>
     <string name="cache_filtergroup_details">Dettagli</string>
     <string name="cache_filtergroup_userspecific">Specifico dell\'utente</string>
+    <string name="cache_filter_contexttype_live_title">Filtro Live</string>
+    <string name="cache_filter_contexttype_offline_title">Filtro Offline</string>
+    <string name="cache_filter_contexttype_transient_title">Filtro</string>
     <string name="cache_filter_include">Includi</string>
     <string name="cache_filter_exclude">Escludi</string>
     <string name="cache_filter_userdisplay_complex">Complesso</string>
@@ -505,6 +512,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Aggiungi elementi</string>
     <string name="cache_filter_favorites_absolute">Assoluto</string>
     <string name="cache_filter_favorites_percentage">Percentuale</string>
+    <string name="cache_filter_distance_coordinates">Coordinate</string>
     <string name="cache_filter_distance_use_current_position">Usa posizione corrente</string>
     <string name="cache_filter_status_select_all">Tutti</string>
     <string name="cache_filter_status_select_yes">Sì</string>
@@ -512,8 +520,12 @@
     <string name="cache_filter_status_select_label_found">Trovato</string>
     <string name="cache_filter_status_select_label_owned">Posseduto</string>
     <string name="cache_filter_status_select_label_stored">Salvato</string>
+    <string name="cache_filter_status_select_label_favorite">Proprio Preferito</string>
     <string name="cache_filter_status_select_label_watchlist">Nella Watchlist</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Contiene un Trackable</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Ha Il Voto Proprio</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Ha un Log Offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistery Risolto</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro riguarderà solo i cache mistery.\n\n Un mistery è considerato \'risolto\' se ha cambiato coordinate o sono state inserite le coordinate di un waypoint finale.</string>
     <string name="cache_filter_status_active">Attivo</string>
@@ -522,6 +534,26 @@
     <string name="cache_filter_status_exclude_active">Escludi Attivo</string>
     <string name="cache_filter_status_exclude_disabled">Escludi Disabilitato</string>
     <string name="cache_filter_status_exclude_archived">Escludi Archiviato</string>
+    <string name="cache_filter_log_entry_foundby">Trovato da</string>
+    <string name="cache_filter_log_entry_logtext">Testo del Log</string>
+    <string name="cache_filter_stored_since_notstored">Non salvato</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 ore</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 ore</item>
+        <item>24 ore</item>
+        <item>7 giorni</item>
+        <item>30 giorni</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7gg</item>
+        <item>30gg</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">l\'alba dei tempi</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Versione</string>
     <string name="about_changelog">Modifiche</string>
@@ -558,6 +590,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">supporto</string>
     <string name="contribution_documentation">documentazione</string>
+    <string name="contribution_infrastructure">infrastruttura</string>
     <string name="contribution_projectleader">leader del progetto open source</string>
     <string name="contribution_graphics">grafica</string>
     <string name="debug_user_error_report_title">Segnala un problema</string>
@@ -1100,6 +1133,7 @@
     <string name="cache_images">Immagini</string>
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
@@ -1147,6 +1181,7 @@
     <string name="cache_menu_map_ext">Altre applicazioni esterne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Apri nel browser</string>
+    <string name="no_browser_found">Nessun browser trovato</string>
     <string name="cache_menu_open_with">Apri con…</string>
     <string name="cache_menu_visit">Scrivi Log</string>
     <string name="cache_log_too_long">c:geo non ha potuto inviare il tuo log perché è troppo lungo. Ma grazie per aver provato a scrivere un log così esteso ;-)</string>
@@ -1380,6 +1415,8 @@
     <string name="map_show_caches_title">Mostra Cache:</string>
     <string name="map_show_waypoints_title">Mostra waypoint:</string>
     <string name="map_show_other_title">Mostra altro:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filtro cache troppo complesso</string>
+    <string name="map_settings_cache_filter_too_complex_message">Il filtro cache attuale è troppo complesso per applicare opzioni aggiuntive qui. Di solito questo significa che il filtro cache contiene espressioni NOT oppure OR invece di semplice logica AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca caches/trackables</string>
     <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
@@ -1395,8 +1432,11 @@
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
+    <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Cerca con Filtro</string>
     <string name="search_filter_info_message">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
+    <string name="search_filter_temporary_user_information_title">Nuovo filtro framework</string>
+    <string name="search_filter_temporary_user_information">c:geo ha introdotto un nuovo sistema di filtri, per supportare filtri flessibili, combinabili e salvabili. \n\nIl filtro globale può da ora in poi essere modificato direttamente negli elenchi di cache e nella mappa.</string>
     <string name="search_tb">Oggetto Trackable</string>
     <string name="search_tb_hint">Identificativo Trackable</string>
     <string name="search_tb_button">Cerca per trackable</string>
