@@ -189,7 +189,7 @@ public class Settings {
     }
 
     public static int getExpectedVersion() {
-        return 7;
+        return 8;
     }
 
     private static void migrateSettings() {
@@ -354,16 +354,18 @@ public class Settings {
             setActualVersion(5);
         }
 
-        if (currentVersion < 6) {
-            // wrongly-used version which spilled into beta. Just mark as migrated
-            setActualVersion(6);
-        }
-
-        if (currentVersion < 7) {
+        // the whole range of version numbers from 6 until 8 was "used" in different parts
+        // of migration of global exclude settings due to different bugs.
+        // Since this spilled into nightlies and beta, they can't be reused.
+        if (currentVersion < 8) {
             //migrate global own/found/disable/archived/offlinelog to LIVE filter
             final Map<GeocacheFilter.QuickFilter, Boolean> legacyGlobalSettings = new HashMap<>();
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.OWNED, !getBooleanDirect("excludemine", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !getBooleanDirect("excludefound", false));
+            //see #11311: in some cases, the "exclude found" might not exist yet on user's devices
+            final boolean legacyExcludeMine = getBooleanDirect("excludemine", false);
+            final boolean legacyExcludeFound = hasKeyDirect("excludefound") ? getBooleanDirect("excludefound", false) : legacyExcludeMine;
+
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.OWNED, !legacyExcludeMine);
+            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !legacyExcludeFound);
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.DISABLED, !getBooleanDirect("excludedisabled", false));
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.ARCHIVED, !getBooleanDirect("excludearchived", false));
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, !getBooleanDirect("excludeofflinelog", false));
@@ -380,7 +382,7 @@ public class Settings {
                 liveFilterContext.set(liveFilter);
             }
 
-            setActualVersion(7);
+            setActualVersion(8);
         }
     }
 
@@ -394,6 +396,10 @@ public class Settings {
 
     protected static String getString(final int prefKeyId, final String defaultValue) {
         return getStringDirect(getKey(prefKeyId), defaultValue);
+    }
+
+    private static boolean hasKeyDirect(final String prefKey) {
+        return sharedPrefs != null && sharedPrefs.contains(prefKey);
     }
 
     private static String getStringDirect(final String prefKey, final String defaultValue) {

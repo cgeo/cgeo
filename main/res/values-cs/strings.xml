@@ -477,6 +477,9 @@
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
+    <string name="cache_filter_contexttype_live_title">Live filtr</string>
+    <string name="cache_filter_contexttype_offline_title">Offline filtr</string>
+    <string name="cache_filter_contexttype_transient_title">Filtr</string>
     <string name="cache_filter_include">Zahrnout</string>
     <string name="cache_filter_exclude">Vyloučit</string>
     <string name="cache_filter_userdisplay_complex">Komplexní</string>
@@ -1432,6 +1435,8 @@
     <string name="map_show_caches_title">Zobrazit kešky:</string>
     <string name="map_show_waypoints_title">Zobrazit trasové body:</string>
     <string name="map_show_other_title">Zobrazit ostatní:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filtr kešek je příliš složitý</string>
+    <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
     <string name="search_bar_desc">Kešky (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
