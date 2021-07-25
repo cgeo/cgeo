@@ -285,7 +285,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
             GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
-            GeocacheFilterType.TYPE, GeocacheFilterType.SIZE, GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN,
+            GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
+            GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
             GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
     }
 

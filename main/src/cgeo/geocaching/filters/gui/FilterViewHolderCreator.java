@@ -77,6 +77,9 @@ public class FilterViewHolderCreator {
             case TERRAIN:
                 result = createTerrainDifficultyFilterViewHolder();
                 break;
+            case DIFFICULTY_TERRAIN:
+                result = new DifficultyAndTerrainFilterViewHolder();
+                break;
             case STATUS:
                 result = new StatusFilterViewHolder();
                 break;
