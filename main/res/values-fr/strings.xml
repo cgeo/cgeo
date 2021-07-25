@@ -423,6 +423,7 @@
     <string name="list_dialog_remove_title">Supprimer la liste</string>
     <string name="list_dialog_remove_description">Voulez-vous supprimer la liste courante ? Toutes les caches restantes seront déplacées dans \"Enregistrées\".</string>
     <string name="list_dialog_remove_nowempty">La liste est vide. Voulez vous la supprimer ?</string>
+    <string name="list_dialog_do_not_ask_me_again">Ne plus me demander pour cette liste</string>
     <string name="list_dialog_remove">Supprimer</string>
     <string name="list_dialog_rename_title">Renommer la liste</string>
     <string name="list_dialog_rename">Renommer</string>
