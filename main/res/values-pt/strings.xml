@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Repor ícones de geocaches</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
+    <string name="caches_askdeletion">Perguntar se pretende eliminar, caso esteja vazia</string>
     <string name="select_icon">Seleccionar ícone</string>
     <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Remover lista</string>
     <string name="list_dialog_remove_description">Pretende remover a lista actual de caches? Todas as caches presentes na lista serão movidas para a \"Lista geral\".</string>
     <string name="list_dialog_remove_nowempty">Esta lista está vazia. Você quer removê-la?</string>
+    <string name="list_dialog_do_not_ask_me_again">Não me voltar a perguntar para esta lista</string>
     <string name="list_dialog_remove">Remover</string>
     <string name="list_dialog_rename_title">Mudar o nome da lista</string>
     <string name="list_dialog_rename">Mudar o nome</string>
