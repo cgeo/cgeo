@@ -119,6 +119,10 @@ public class DataStore {
     public static final String DB_FILE_NAME_BACKUP = "cgeo.sqlite";
     public static final String DB_FILE_CORRUPTED_EXTENSION = ".corrupted";
 
+    // some fields names which are referenced multiple times
+    // name scheme is "FIELD_" + table name without prefix + "_" + field name
+    private static final String FIELD_LISTS_PREVENTASKFORDELETION = "preventAskForDeletion";
+
     public enum DBRestoreResult {
         RESTORE_SUCCESSFUL(R.string.init_restore_success),
         RESTORE_FAILED_GENERAL(R.string.init_restore_db_failed),
@@ -219,7 +223,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 95;
+    private static final int dbVersion = 96;
     public static final int customListIdOffset = 10;
 
     /**
@@ -250,7 +254,8 @@ public class DataStore {
         92, // add emoji id to cg_caches
         93,  // add emoji id to cg_lists
         94,  // add scale to offline log images
-        95   // add table to store custom filters
+        95,  // add table to store custom filters
+        96   // add preventAskForDeletion to cg_lists
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -328,7 +333,8 @@ public class DataStore {
             + "title TEXT NOT NULL, "
             + "updated LONG NOT NULL,"
             + "marker INTEGER NOT NULL,"        // unused from v93 on
-            + "emoji INTEGER DEFAULT 0"
+            + "emoji INTEGER DEFAULT 0,"
+            + FIELD_LISTS_PREVENTASKFORDELETION + " INTEGER DEFAULT 0"
             + "); ";
     private static final String dbCreateCachesLists = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableCachesLists + " ("
@@ -1590,6 +1596,15 @@ public class DataStore {
                             db.execSQL(dbCreateFilters);
                         } catch (final SQLException e) {
                             onUpgradeError(e, 95);
+                        }
+                    }
+
+                    //add preventAskForDeletion to cg_lists
+                    if (oldVersion < 96) {
+                        try {
+                            createColumnIfNotExists(db, dbTableLists, FIELD_LISTS_PREVENTASKFORDELETION + " INTEGER DEFAULT 0");
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 96);
                         }
                     }
 
@@ -3756,7 +3771,7 @@ public class DataStore {
 
         final Resources res = CgeoApplication.getInstance().getResources();
         final List<StoredList> lists = new ArrayList<>();
-        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
+        lists.add(new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong()));
 
         try {
             final String query = "SELECT l._id AS _id, l.title AS title, l.emoji AS emoji, COUNT(c.geocode) AS count" +
@@ -3778,9 +3793,10 @@ public class DataStore {
         final int indexTitle = cursor.getColumnIndex("title");
         final int indexEmoji = cursor.getColumnIndex("emoji");
         final int indexCount = cursor.getColumnIndex("count");
+        final int indexPreventAskForDeletion = cursor.getColumnIndex(FIELD_LISTS_PREVENTASKFORDELETION);
         return cursorToColl(cursor, new ArrayList<>(), cursor1 -> {
             final int count = indexCount != -1 ? cursor1.getInt(indexCount) : 0;
-            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexEmoji), count);
+            return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexEmoji), indexPreventAskForDeletion >= 0 && cursor1.getInt(indexPreventAskForDeletion) != 0, count);
         });
     }
 
@@ -3790,7 +3806,7 @@ public class DataStore {
         if (id >= customListIdOffset) {
             final Cursor cursor = database.query(
                     dbTableLists,
-                    new String[]{"_id", "title", "emoji"},
+                    new String[]{"_id", "title", "emoji", FIELD_LISTS_PREVENTASKFORDELETION},
                     "_id = ? ",
                     new String[] { String.valueOf(id - customListIdOffset) },
                     null,
@@ -3804,11 +3820,11 @@ public class DataStore {
 
         final Resources res = CgeoApplication.getInstance().getResources();
         if (id == PseudoList.ALL_LIST.id) {
-            return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, getAllCachesCount());
+            return new StoredList(PseudoList.ALL_LIST.id, res.getString(R.string.list_all_lists), EmojiUtils.NO_EMOJI, true, getAllCachesCount());
         }
 
         // fall back to standard list in case of invalid list id
-        return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
+        return new StoredList(StoredList.STANDARD_LIST_ID, res.getString(R.string.list_inbox), EmojiUtils.NO_EMOJI, false, (int) PreparedStatement.COUNT_CACHES_ON_STANDARD_LIST.simpleQueryForLong());
     }
 
     public static int getAllCachesCount() {
@@ -3844,6 +3860,7 @@ public class DataStore {
             values.put("title", name);
             values.put("updated", System.currentTimeMillis());
             values.put("marker", 0);
+            values.put(FIELD_LISTS_PREVENTASKFORDELETION, 0);
             values.put("emoji", 0);
 
             id = (int) database.insert(dbTableLists, null, values);
@@ -3938,6 +3955,34 @@ public class DataStore {
         try {
             final ContentValues values = new ContentValues();
             values.put("emoji", useEmoji);
+            values.put("updated", System.currentTimeMillis());
+
+            count = database.update(dbTableLists, values, "_id = " + (listId - customListIdOffset), null);
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+
+        return count;
+    }
+
+    /**
+     * @param listId   List to change
+     * @param prevent  value
+     * @return Number of lists changed
+     */
+    public static int setListPreventAskForDeletion(final int listId, final boolean prevent) {
+        if (listId == StoredList.STANDARD_LIST_ID) {
+            return 0;
+        }
+
+        init();
+
+        database.beginTransaction();
+        int count = 0;
+        try {
+            final ContentValues values = new ContentValues();
+            values.put(FIELD_LISTS_PREVENTASKFORDELETION, prevent ? 1 : 0);
             values.put("updated", System.currentTimeMillis());
 
             count = database.update(dbTableLists, values, "_id = " + (listId - customListIdOffset), null);

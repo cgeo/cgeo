@@ -24,7 +24,9 @@ import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -168,6 +170,43 @@ public final class Dialogs {
             runAfterwards.run();
         }
     }
+
+    /**
+     * Show dialog with title, message and checkbox
+     * Checkbox value is returned to the listeners
+     */
+    public static void confirmWithCheckbox(final Context context, final String title, final String message, final String checkboxInfo, final Action1<Boolean> onConfirm, @Nullable final Action1<Boolean> onCancel) {
+        final View content = LayoutInflater.from(context).inflate(R.layout.dialog_text_checkbox, null);
+        final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
+        final TextView textView = (TextView) content.findViewById(R.id.message);
+        textView.setText(message);
+        checkbox.setText(checkboxInfo);
+        checkbox.setChecked(false);
+
+        final AlertDialog alertDialog = Dialogs.newBuilder(context)
+            .setView(content)
+            .setTitle(title)
+            .setCancelable(true)
+            .setPositiveButton(R.string.yes, (dialog, which) -> onConfirm.call(checkbox.isChecked()))
+            .setNegativeButton(R.string.no, (dialog2, which2) -> {
+                if (onCancel != null) {
+                    onCancel.call(checkbox.isChecked());
+                } else {
+                    dialog2.dismiss();
+                }
+            })
+            .create();
+        alertDialog.show();
+
+        final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        button.setEnabled(true);
+        checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> button.setEnabled(!isChecked));
+
+        if (context instanceof Activity) {
+            alertDialog.setOwnerActivity((Activity) context);
+        }
+    }
+
 
     /**
      * Move the cursor to the end of the input field.

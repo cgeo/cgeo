@@ -726,7 +726,7 @@ final class OkapiClient {
             cache.setFound(response.get(CACHE_IS_FOUND).asBoolean());
         }
         if (response.has(CACHE_IS_WATCHED)) {
-            cache.setFound(response.get(CACHE_IS_WATCHED).asBoolean());
+            cache.setOnWatchlist(response.get(CACHE_IS_WATCHED).asBoolean());
         }
         if (response.has(CACHE_IS_RECOMMENDED)) {
             cache.setFavorite(response.get(CACHE_IS_RECOMMENDED).asBoolean());
