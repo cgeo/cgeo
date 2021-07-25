@@ -219,6 +219,10 @@ public class ViewUtils {
         return button;
     }
 
+    public static TextView createTextSpinnerView(final Context context, @Nullable final ViewGroup root) {
+        return (TextView) LayoutInflater.from(wrap(root == null ? context : root.getContext())).inflate(R.layout.textspinner_view, root, false);
+    }
+
     public static Pair<View, EditText> createTextField(final Context context, final String currentValue, final TextParam label, @Nullable final TextParam suffix, final int inputType, final int minLines, final int maxLines) {
         final DialogEdittextBinding binding = DialogEdittextBinding.inflate(LayoutInflater.from(context));
         if (StringUtils.isNotBlank(currentValue)) {

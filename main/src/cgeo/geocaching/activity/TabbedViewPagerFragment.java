@@ -13,28 +13,33 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewbinding.ViewBinding;
 
-import java.lang.ref.WeakReference;
-
 public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBinding> extends Fragment {
-    protected WeakReference<Activity> activityWeakReference = null;
     protected ViewBindingClass binding;
     protected ViewGroup container;
     private boolean contentIsUpToDate = false;
     private final Integer mutextContentIsUpToDate = 0;
 
-    public void setActivity(final Activity activity) {
-        this.activityWeakReference = new WeakReference<>(activity);
+    public TabbedViewPagerFragment() {
+        Log.d("new fragment for " + getClass().toString());
     }
 
     public void setClickListener(final View view, final String url) {
-        final Activity activity = activityWeakReference.get();
+        final Activity activity = getActivity();
         if (activity != null) {
             view.setOnClickListener(v -> ShareUtils.openUrl(activity, url));
         }
     }
 
+    @Override
+    public void onAttach(@NonNull final Activity activity) {
+        super.onAttach(activity);
+        // notify TabbedViewPagerActivity to help it rebuild the fragment cache
+        ((TabbedViewPagerActivity) activity).registerFragment(getPageId(), this);
+    }
+
     public abstract ViewBindingClass createView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
     public abstract void setContent();
+    public abstract long getPageId();
 
     @Override
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {

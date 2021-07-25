@@ -26,10 +26,14 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
 
     /**
      */
-    public TrackableLogsViewCreator(final TrackableActivity trackableActivity) {
-        super(trackableActivity);
-        this.trackableActivity = trackableActivity;
+    public TrackableLogsViewCreator() {
+        this.trackableActivity = (TrackableActivity) getActivity();
         trackable = trackableActivity.getTrackable();
+    }
+
+    @Override
+    public long getPageId() {
+        return CacheDetailActivity.Page.LOGS.id;
     }
 
     @Override
@@ -57,12 +61,12 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
             final String cacheName = log.cacheName;
             holder.binding.gcinfo.setOnClickListener(arg0 -> {
                 if (StringUtils.isNotBlank(cacheGuid)) {
-                    CacheDetailActivity.startActivityGuid(activity, cacheGuid, TextUtils.stripHtml(cacheName));
+                    CacheDetailActivity.startActivityGuid(getActivity(), cacheGuid, TextUtils.stripHtml(cacheName));
                 } else {
                     // for GeoKrety we only know the cache geocode
                     final String cacheGeocode = log.cacheGeocode;
                     if (ConnectorFactory.canHandle(cacheGeocode)) {
-                        CacheDetailActivity.startActivity(activity, cacheGeocode);
+                        CacheDetailActivity.startActivity(getActivity(), cacheGeocode);
                     }
                 }
             });

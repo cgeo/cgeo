@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
+import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
@@ -33,9 +34,9 @@ public class LiveCachesOverlay extends AbstractCachesOverlay {
     private SearchResult lastSearchResult = null;
     private Viewport lastViewport = null;
 
-    public LiveCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers) {
+    public LiveCachesOverlay(final NewMap map, final int overlayId, final Set<GeoEntry> geoEntries, final CachesBundle bundle, final Layer anchorLayer, final MapHandlers mapHandlers, final GeocacheFilterContext filterContext) {
         super(map, overlayId, geoEntries, bundle, anchorLayer, mapHandlers);
-
+        setFilterContext(filterContext);
         this.timer = startTimer();
     }
 

@@ -77,6 +77,9 @@ public class FilterViewHolderCreator {
             case TERRAIN:
                 result = createTerrainDifficultyFilterViewHolder();
                 break;
+            case DIFFICULTY_TERRAIN:
+                result = new DifficultyAndTerrainFilterViewHolder();
+                break;
             case STATUS:
                 result = new StatusFilterViewHolder();
                 break;
@@ -121,16 +124,16 @@ public class FilterViewHolderCreator {
                 result = null;
                 break;
         }
-        if (result != null) {
-            result.init(type, activity);
-            if (filter != null) {
-                fillViewFrom(result, filter);
-            }
+
+        result.init(type, activity);
+        if (filter != null) {
+            fillViewFrom(result, filter);
         }
 
         return result;
     }
 
+    @SuppressWarnings("unchecked")
     private static <T extends IGeocacheFilter> void fillViewFrom(final IFilterViewHolder<T> viewHolder, final IGeocacheFilter filter) {
         if (viewHolder != null && filter != null) {
             viewHolder.setViewFromFilter((T) filter);

@@ -6,11 +6,14 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
+import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.MfMapView;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
+
+import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -117,11 +120,12 @@ public class CachesBundle {
         this.baseOverlay = new SinglePointOverlay(map, coords, waypointType, BASE_OVERLAY_ID, this.geoEntries, this, separators.get(BASE_SEPARATOR), this.mapHandlers);
     }
 
-    public void handleLiveLayers(final NewMap map, final boolean enable) {
-        if (enable) {
+    public void handleLiveLayers(final NewMap map, @NonNull final MapOptions mapOptions) {
+
+        if (mapOptions.isLiveEnabled) {
             if (this.liveOverlay == null) {
                 final SeparatorLayer separator2 = this.separators.get(LIVE_SEPARATOR);
-                this.liveOverlay = new LiveCachesOverlay(map, LIVE_OVERLAY_ID, this.geoEntries, this, separator2, this.mapHandlers);
+                this.liveOverlay = new LiveCachesOverlay(map, LIVE_OVERLAY_ID, this.geoEntries, this, separator2, this.mapHandlers, mapOptions.filterContext);
             }
         } else {
             // Disable only download, keep stored caches
@@ -137,13 +141,13 @@ public class CachesBundle {
      *
      * @param enable true - enable stored layer, false - leave untouched
      */
-    public void enableStoredLayers(final NewMap map, final boolean enable) {
-        if (!enable || this.storedOverlay != null) {
+    public void handleStoredLayers(final NewMap map, @NonNull final MapOptions mapOptions) {
+        if (!mapOptions.isStoredEnabled || this.storedOverlay != null) {
             return;
         }
 
         final SeparatorLayer separator1 = this.separators.get(STORED_SEPARATOR);
-        this.storedOverlay = new StoredCachesOverlay(map, STORED_OVERLAY_ID, this.geoEntries, this, separator1, this.mapHandlers);
+        this.storedOverlay = new StoredCachesOverlay(map, STORED_OVERLAY_ID, this.geoEntries, this, separator1, this.mapHandlers, mapOptions.filterContext);
     }
 
     public void onDestroy() {

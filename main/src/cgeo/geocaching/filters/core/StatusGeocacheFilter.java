@@ -90,9 +90,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         }
 
         return
-            ((!excludeActive && !cache.isDisabled() && !cache.isArchived()) ||
-                (!excludeDisabled && cache.isDisabled()) ||
-                (!excludeArchived && cache.isArchived())) &&
+            (!excludeActive || cache.isDisabled() || cache.isArchived()) &&
+            (!excludeDisabled || !cache.isDisabled()) &&
+            (!excludeArchived || !cache.isArchived()) &&
             (statusOwned == null || (cache.isOwner() == statusOwned)) &&
             (statusFound == null || cache.isFound() == statusFound) &&
             (statusStored == null || cache.isOffline() == statusStored) &&
@@ -363,8 +363,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             }
             if (excludeActive) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled = 1");
-                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived = 1");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".disabled <> 0");
+                sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".archived <> 0");
                 sqlBuilder.closeWhere();
             }
             if (excludeDisabled) {

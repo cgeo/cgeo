@@ -31,7 +31,10 @@ public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends B
         this.axisLabelMapper = axisLabelMapper;
     }
 
-
+    public void removeScaleLegend() {
+        //remove legend
+        slider.removeScaleLegend();
+    }
 
     @Override
     public void setViewFromFilter(final F filter) {

@@ -5,13 +5,14 @@ import cgeo.geocaching.filters.core.LogsCountGeocacheFilter;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.ui.ContinuousRangeSlider;
 import cgeo.geocaching.ui.TextSpinner;
+import cgeo.geocaching.ui.ViewUtils;
 import static cgeo.geocaching.log.LogType.UNKNOWN;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import java.util.Arrays;
 
@@ -29,17 +30,17 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
         final LinearLayout ll = new LinearLayout(getActivity());
         ll.setOrientation(LinearLayout.VERTICAL);
 
-        final Button selectButton = new Button(getActivity(), null, 0 , R.style.button_full);
+        final TextView spinnerView = ViewUtils.createTextSpinnerView(getActivity(), ll);
 
-        selectSpinner.setTextView(selectButton);
+        selectSpinner.setTextView(spinnerView);
         selectSpinner
-            .setValues(Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, UNKNOWN))
             .setDisplayMapper(v -> v == UNKNOWN ? getActivity().getString(R.string.all_types_short) : v.getL10n())
+            .setValues(Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, UNKNOWN))
             .set(LogType.FOUND_IT);
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
-        ll.addView(selectButton, llp);
+        ll.addView(spinnerView, llp);
 
         slider = new ContinuousRangeSlider(getActivity());
         resetSliderScale();

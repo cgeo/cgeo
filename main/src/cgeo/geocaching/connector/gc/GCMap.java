@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.files.ParserException;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
+import cgeo.geocaching.filters.core.DifficultyAndTerrainGeocacheFilter;
 import cgeo.geocaching.filters.core.DifficultyGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.FavoritesGeocacheFilter;
@@ -181,6 +182,10 @@ public class GCMap {
                 break;
             case TERRAIN:
                 search.setTerrain(((TerrainGeocacheFilter) basicFilter).getMinRangeValue(), ((TerrainGeocacheFilter) basicFilter).getMaxRangeValue());
+                break;
+            case DIFFICULTY_TERRAIN:
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, search);
+                fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, search);
                 break;
             case OWNER:
                 search.setHiddenBy(((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
