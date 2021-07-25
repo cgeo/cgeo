@@ -421,8 +421,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             if (mapOptions.mapMode == MapMode.LIVE) {
                 Settings.setLiveMap(mapOptions.isLiveEnabled);
             }
-            caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
-            caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
+            caches.handleStoredLayers(this, mapOptions);
+            caches.handleLiveLayers(this, mapOptions);
             ActivityMixin.invalidateOptionsMenu(this);
             if (mapOptions.mapMode != MapMode.SINGLE) {
                 mapOptions.title = StringUtils.EMPTY;
@@ -783,9 +783,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         }
 
         // Stored enabled map
-        caches.enableStoredLayers(this, mapOptions.isStoredEnabled);
+        caches.handleStoredLayers(this, mapOptions);
         // Live enabled map
-        caches.handleLiveLayers(this, mapOptions.isLiveEnabled);
+        caches.handleLiveLayers(this, mapOptions);
         caches.setFilterContext(mapOptions.filterContext);
 
         // Position layer
