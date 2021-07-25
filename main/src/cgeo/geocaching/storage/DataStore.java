@@ -2100,7 +2100,7 @@ public class DataStore {
         return false;
     }
 
-    private static boolean storeIntoDatabase(final Geocache cache) {
+    public static boolean storeIntoDatabase(final Geocache cache) {
         cache.addStorageLocation(StorageLocation.DATABASE);
         cacheCache.putCacheInCache(cache);
         Log.d("Saving " + cache.toString() + " (" + cache.getLists() + ") to DB");
@@ -3334,7 +3334,7 @@ public class DataStore {
             throw new IllegalArgumentException("cacheType must not be null");
         }
         if (list <= 0) {
-            throw new IllegalArgumentException("list must be > 0");
+            return 0;
         }
         init();
 
@@ -3435,7 +3435,7 @@ public class DataStore {
 
             if (listId == PseudoList.HISTORY_LIST.id) {
                 sqlBuilder.addWhere(" ( visiteddate > 0 OR geocode IN (SELECT geocode FROM " + dbTableLogsOffline + ") )");
-            } else {
+            } else if (listId > 0) {
                 final String clId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode IN (SELECT " + clId + ".geocode FROM " + dbTableCachesLists + " " + clId + " WHERE list_id " +
                     (listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID) + ")");
