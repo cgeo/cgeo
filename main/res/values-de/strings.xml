@@ -460,6 +460,7 @@
     <string name="cache_filter_owner">Cache-Besitzer</string>
     <string name="cache_filter_difficulty">Schwierigkeit</string>
     <string name="cache_filter_terrain">Gelände</string>
+    <string name="cache_filter_difficulty_terrain">Schwierigkeit / Gelände</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-Attribute</string>
     <string name="cache_filter_favorites">Favoriten</string>
@@ -1244,6 +1245,7 @@
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>
+    <string name="cache_difficulty_terrain">Schwierigkeit / Gelände</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
     <string name="cache_rating_of_new">%1$.1f von %2$d</string>
