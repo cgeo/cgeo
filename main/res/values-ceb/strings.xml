@@ -320,6 +320,7 @@
     <string name="list_dialog_rename">Usba ang pangan</string>
     <string name="list_not_available">Ang listahan kay dili na magamit, pagbalhin ngadto sa standard nga lista</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Tin-aw</string>
     <!-- about -->
     <string name="about_version">Ang bersyon</string>
     <string name="about_system">Ang Sistema</string>
