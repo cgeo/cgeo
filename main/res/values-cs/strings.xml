@@ -465,6 +465,7 @@
     <string name="cache_filter_difficulty">Obtížnost</string>
     <string name="cache_filter_terrain">Terén</string>
     <string name="cache_filter_difficulty_terrain">Obtížnost / Terén</string>
+    <string name="cache_filter_rating">Hodnocení</string>
     <string name="cache_filter_status">Stav</string>
     <string name="cache_filter_attributes">Atributy kešky</string>
     <string name="cache_filter_favorites">Oblíbené</string>
