@@ -122,7 +122,7 @@ public abstract class AbstractMap {
         //
     }
 
-    public abstract void onMapSettingsPopupFinished(boolean circlesSwitched);
+    public abstract void refreshMapData(boolean circlesSwitched);
 
      @Nullable
     public Geocache getCurrentTargetCache() {

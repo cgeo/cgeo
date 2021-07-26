@@ -21,6 +21,7 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.list.StoredList;
@@ -69,6 +70,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
@@ -265,7 +267,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         this.mapAttribution = findViewById(R.id.map_attribution);
 
         // map settings popup
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -321,7 +323,10 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         } else {
             postZoomToViewport(new Viewport(Settings.getMapCenter().getCoords(), 0, 0));
         }
-        MapUtils.setFilterBar(this, mapOptions.filterContext);
+
+        FilterUtils.initializeFilterBar(this, this);
+        MapUtils.updateFilterBar(this, mapOptions.filterContext);
+
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
@@ -343,6 +348,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         MapProviderFactory.addMapViewLanguageMenuItems(menu);
 
         initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(this, menu));
+        FilterUtils.initializeFilterMenu(this, this);
+
         return result;
     }
 
@@ -407,15 +414,13 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         final int id = item.getItemId();
         if (id == android.R.id.home) {
             ActivityMixin.navigateUp(this);
-        } else if (id == R.id.menu_filter) {
-            showFilterMenu(null);
         } else if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.isLiveEnabled) {
                 mapOptions.isStoredEnabled = true;
                 mapOptions.filterContext = new GeocacheFilterContext(LIVE);
                 caches.setFilterContext(mapOptions.filterContext);
-                onMapSettingsPopupFinished(false);
+                refreshMapData(false);
             }
 
             if (mapOptions.mapMode == MapMode.LIVE) {
@@ -430,6 +435,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                 // reset target cache on single mode map
                 targetGeocode = mapOptions.geocode;
             }
+        } else if (id == R.id.menu_filter) {
+            showFilterMenu(null);
         } else if (id == R.id.menu_store_caches) {
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
@@ -466,7 +473,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         return true;
     }
 
-    private void onMapSettingsPopupFinished(final boolean circlesSwitched) {
+    private void refreshMapData(final boolean circlesSwitched) {
         if (circlesSwitched) {
             caches.switchCircles();
         }
@@ -479,7 +486,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             trackLayer.setHidden(Settings.isHideTrack());
             trackLayer.requestRedraw();
         }
-        MapUtils.setFilterBar(this, mapOptions.filterContext);
+        MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
 
     private void routingModeChanged(final RoutingMode newValue) {
@@ -571,10 +578,21 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     /**
      * @param view Not used here, required by layout
      */
-    @SuppressWarnings("EmptyMethod")
+    @Override
     public void showFilterMenu(final View view) {
-        MapUtils.openFilterActivity(this, mapOptions.filterContext,
+        FilterUtils.openFilterActivity(this, mapOptions.filterContext,
             new SearchResult(caches.getVisibleCacheGeocodes()).getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+    }
+
+    @Override
+    public boolean showFilterList(final View view) {
+        return FilterUtils.openFilterList(this, mapOptions.filterContext);
+    }
+
+    @Override
+    public void refreshWithFilter(final GeocacheFilter filter) {
+        mapOptions.filterContext.set(filter);
+        refreshMapData(false);
     }
 
     private void changeMapSource(@NonNull final MapSource newSource) {
@@ -715,7 +733,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         resumeRoute(false);
         resumeTrack(false);
         mapView.getModel().mapViewPosition.addObserver(this);
-        MapUtils.setFilterBar(this, mapOptions.filterContext);
+        MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
 
     @Override
@@ -1639,7 +1657,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         }
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             mapOptions.filterContext = data.getParcelableExtra(EXTRA_FILTER_CONTEXT);
-            onMapSettingsPopupFinished(false);
+            refreshMapData(false);
         }
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
