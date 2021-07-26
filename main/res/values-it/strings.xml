@@ -491,6 +491,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carica</string>
     <string name="cache_filter_storage_delete_button">Elimina</string>
+    <string name="cache_filter_storage_clear_button">Azzera</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
     <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
@@ -1434,7 +1435,7 @@
     <string name="search_hbu_button">Cerca per proprietario</string>
     <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Cerca con Filtro</string>
-    <string name="search_filter_info_message">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
+    <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_filter_temporary_user_information_title">Nuovo filtro framework</string>
     <string name="search_filter_temporary_user_information">c:geo ha introdotto un nuovo sistema di filtri, per supportare filtri flessibili, combinabili e salvabili. \n\nIl filtro globale può da ora in poi essere modificato direttamente negli elenchi di cache e nella mappa.</string>
     <string name="search_tb">Oggetto Trackable</string>
