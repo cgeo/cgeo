@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Nollaa kätkön kuvakkeet</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
+    <string name="caches_askdeletion">Pyydä poistamista, jos tyhjä</string>
     <string name="select_icon">Valitse kuvake</string>
     <string name="onetime_missing_unicode_info">Android-versiosi ei tue tuettujen kuvakkeiden automaattista tunnistamista - joitakin merkkejä voi puuttua</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Poista lista</string>
     <string name="list_dialog_remove_description">Haluatko poistaa nykyisen listan? Kaikki jäljelle jäävät kätköt listassa siirretään \"Tallennettuihin\".</string>
     <string name="list_dialog_remove_nowempty">Lista on tyhjä. Haluatko poistaa nykyisen listan?</string>
+    <string name="list_dialog_do_not_ask_me_again">Älä kysy minulta uudelleen tähän listaan liittyen</string>
     <string name="list_dialog_remove">Poista</string>
     <string name="list_dialog_rename_title">Uudelleennimeä luettelo</string>
     <string name="list_dialog_rename">Nimeä uudelleen</string>
@@ -460,6 +462,7 @@
     <string name="cache_filter_owner">Kätkön omistaja</string>
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
+    <string name="cache_filter_difficulty_terrain">Vaikeus / Maasto</string>
     <string name="cache_filter_status">Tila</string>
     <string name="cache_filter_attributes">Kätkön attribuutit</string>
     <string name="cache_filter_favorites">Suosikit</string>
@@ -1244,6 +1247,7 @@
     <string name="cache_distance">Etäisyys</string>
     <string name="cache_difficulty">Vaikeus</string>
     <string name="cache_terrain">Maasto</string>
+    <string name="cache_difficulty_terrain">Vaikeus / Maasto</string>
     <string name="cache_rating">Arviointi</string>
     <string name="cache_own_rating">Sinun arviointisi</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
