@@ -7,6 +7,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.databinding.AuthorizationCredentialsActivityBinding;
 import cgeo.geocaching.enumerations.StatusCode;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BundleUtils;
@@ -107,7 +108,9 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 finish();
             } else {
                 SimpleDialog.of(authorizationActivity).setTitle(R.string.init_login_popup)
-                    .setMessage(R.string.init_login_popup_failed_reason, statusCode.getErrorString(res)).show();
+                    .setMessage(TextParam.concat(TextParam.id(R.string.init_login_popup_failed_reason, ""),
+                        TextParam.id(statusCode.errorString)).setMovement(true))
+                    .show();
                 binding.check.setText(getAuthCheckAgain());
                 binding.check.setOnClickListener(new CheckListener());
                 binding.check.setEnabled(true);
