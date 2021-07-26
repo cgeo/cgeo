@@ -187,6 +187,9 @@ public class GCMap {
                 fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).difficultyGeocacheFilter, search);
                 fillForBasicFilter(((DifficultyAndTerrainGeocacheFilter) basicFilter).terrainGeocacheFilter, search);
                 break;
+            case RATING:
+                // not supported for online searches for this connector
+                break;
             case OWNER:
                 search.setHiddenBy(((OwnerGeocacheFilter) basicFilter).getStringFilter().getTextValue());
                 break;
