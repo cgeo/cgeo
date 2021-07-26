@@ -489,6 +489,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Verwijderen</string>
+    <string name="cache_filter_storage_clear_button">Wissen</string>
     <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
@@ -1432,7 +1433,7 @@
     <string name="search_hbu_button">Zoeken op eigenaar</string>
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Zoeken op filter</string>
-    <string name="search_filter_info_message">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
+    <string name="search_filter_info_message" formatted="false">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
     <string name="search_filter_temporary_user_information_title">Nieuw filterframework</string>
     <string name="search_filter_temporary_user_information">c:geo heeft een nieuw filtersysteem ingevoerd, dat flexibele en combineerbare filters, die opgeslagen kunnen worden, ondersteunt. \n\nHet globale filter kan vanaf nu direct gewijzigd worden in de cachelijsten en de plattegrond.</string>
     <string name="search_tb">Trackable</string>
