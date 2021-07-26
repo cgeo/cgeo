@@ -418,6 +418,7 @@
     <string name="caches_reset_cache_icons_title">キャッシュアイコンのリセット</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
+    <string name="caches_askdeletion">空の時に削除確認する</string>
     <string name="select_icon">アイコンの選択</string>
     <string name="onetime_missing_unicode_info">お使いのAndroidバージョンは、アイコンの自動検出をサポートしていません。一部の文字が欠落している可能性があります</string>
     <!-- caches lists -->
@@ -435,7 +436,8 @@
     <string name="list_dialog_create_err">新しいリストを作成することができませんでした</string>
     <string name="list_dialog_remove_title">リスト削除</string>
     <string name="list_dialog_remove_description">このキャッシュリストを削除しますか? このリストに含まれるキャッシュは「保存済み」リストに移動します</string>
-    <string name="list_dialog_remove_nowempty">リストは空です。現在のリストを削除しますか?</string>
+    <string name="list_dialog_remove_nowempty">このリストは空です。リストを削除しますか?</string>
+    <string name="list_dialog_do_not_ask_me_again">このリストには次回から確認しない</string>
     <string name="list_dialog_remove">削除</string>
     <string name="list_dialog_rename_title">リスト名の変更</string>
     <string name="list_dialog_rename">変更</string>
@@ -459,6 +461,7 @@
     <string name="cache_filter_owner">キャッシュオーナー</string>
     <string name="cache_filter_difficulty">難易度</string>
     <string name="cache_filter_terrain">地形</string>
+    <string name="cache_filter_difficulty_terrain">難易度/地形</string>
     <string name="cache_filter_status">状態</string>
     <string name="cache_filter_attributes">キャッシュ属性</string>
     <string name="cache_filter_favorites">お気に入り</string>
@@ -485,6 +488,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">読み込み</string>
     <string name="cache_filter_storage_delete_button">削除</string>
+    <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
@@ -1229,6 +1233,7 @@
     <string name="cache_distance">距離</string>
     <string name="cache_difficulty">難易度</string>
     <string name="cache_terrain">地形</string>
+    <string name="cache_difficulty_terrain">難易度/地形</string>
     <string name="cache_rating">評価</string>
     <string name="cache_own_rating">あなたの評価</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
@@ -1415,7 +1420,7 @@
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
-    <string name="search_filter_info_message">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
+    <string name="search_filter_info_message" formatted="false">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
     <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
@@ -1855,7 +1860,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="init_geokrety_userid">ユーザーID: %s</string>
     <string name="trackable_title_log_without_geocode">ジオコードが設定されていません</string>
     <string name="trackable_log_without_geocode">ジオコードのないログを投稿しようとしています。それは設定することが奨励されています。今すぐ追加しますか?</string>
-    <string name="do_not_ask_me_again">次回から表示しない</string>
+    <string name="do_not_ask_me_again">次回から確認しない</string>
     <string name="geokrety_parsing_failed">GeoKretyレスポンスを解析できませんでした</string>
     <string name="command_move_caches_progress">リスト:%1sにキャッシュを移動中</string>
     <plurals name="command_move_caches_result">
