@@ -334,6 +334,7 @@
     <string name="list_dialog_rename">Pangalanang muli</string>
     <string name="list_not_available">Ang listahan ay hindi na maaaring magtagal, lumipat sa mataas na pamantayang listahan</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Malinaw</string>
     <!-- about -->
     <string name="about_version">Ang bersiyon</string>
     <string name="about_changelog">Ang pagpalit sa log</string>
