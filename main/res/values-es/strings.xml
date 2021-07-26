@@ -385,6 +385,7 @@
     <string name="list_dialog_rename">Renombrar</string>
     <string name="list_not_available">La lista ya no está disponible, cambiando a la lista estándar</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Limpiar</string>
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
