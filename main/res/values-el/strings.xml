@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίων κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
+    <string name="caches_askdeletion">Ερώτηση για διαγραφή αν είναι κενό</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
     <string name="onetime_missing_unicode_info">Η έκδοση Android σας δεν υποστηρίζει την αυτόματη ανίχνευση εικονιδίων που υποστηρίζονται - ορισμένοι χαρακτήρες μπορεί να λείπουν</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Διαγραφή λίστας</string>
     <string name="list_dialog_remove_description">Θέλετε να καταργήσετε την τρέχουσα λίστα; Όλες οι κρύπτες που απομένουν στη λίστα θα μεταφερθούν στη λίστα «Αποθηκευμένες».</string>
     <string name="list_dialog_remove_nowempty">Η λίστα είναι κενή. Θέλετε να καταργήσετε την τρέχουσα λίστα;</string>
+    <string name="list_dialog_do_not_ask_me_again">Να μην ερωτηθώ ξανά για αυτή τη λίστα</string>
     <string name="list_dialog_remove">Διαγραφή</string>
     <string name="list_dialog_rename_title">Μετονομασία λίστας</string>
     <string name="list_dialog_rename">Μετονομασία</string>
@@ -460,6 +462,7 @@
     <string name="cache_filter_owner">Ιδιοκτήτης κρύπτης</string>
     <string name="cache_filter_difficulty">Δυσκολία</string>
     <string name="cache_filter_terrain">Έδαφος</string>
+    <string name="cache_filter_difficulty_terrain">Δυσκολία / Έδαφος</string>
     <string name="cache_filter_status">Κατάσταση</string>
     <string name="cache_filter_attributes">Χαρακτηριστικά κρύπτης</string>
     <string name="cache_filter_favorites">Αγαπημένες</string>
@@ -485,6 +488,7 @@
     <string name="cache_filter_userdisplay_not">NOT</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
+    <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
@@ -1234,6 +1238,7 @@
     <string name="cache_distance">Απόσταση</string>
     <string name="cache_difficulty">Δυσκολία</string>
     <string name="cache_terrain">Έδαφος</string>
+    <string name="cache_difficulty_terrain">Δυσκολία / Έδαφος</string>
     <string name="cache_rating">Βαθμολογία</string>
     <string name="cache_own_rating">Η βαθμολογία σας</string>
     <string name="cache_rating_of_new">%1$.1f από %2$d</string>
@@ -1422,7 +1427,7 @@
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
-    <string name="search_filter_info_message">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
+    <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
