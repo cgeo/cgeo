@@ -43,7 +43,7 @@ node('has-emulator') {
 
                         // build everything
                         // re-added the clean target, since builds fail after upgrading the unmock or java plugin of gradle
-                        sh './gradlew --no-daemon --stacktrace clean testDebug createBasicDebugCoverageReport checkstyle lintBasicDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests --scan'
+                        sh './gradlew --no-daemon --stacktrace clean testDebug createBasicDebugCoverageReport checkstyle lintBasicDebug -Pandroid.testInstrumentationRunnerArguments.notAnnotation=cgeo.geocaching.test.NotForIntegrationTests --scan || false'
 
                         // shutdown emulator to minimize memory usage on the agent
                         sh '[ -x "$HOME"/restart-emulator.sh ] && "$HOME"/restart-emulator.sh --stop'
