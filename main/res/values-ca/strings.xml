@@ -481,7 +481,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carregar</string>
     <string name="cache_filter_storage_delete_button">Esborra</string>
-    <string name="cache_filter_storage_clear_button">Esborra</string>
     <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
     <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
