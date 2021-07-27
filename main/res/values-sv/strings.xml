@@ -404,6 +404,7 @@
     <string name="list_dialog_rename">Byt namn</string>
     <string name="list_not_available">Listan är inte längre tillgänglig, byter till standardlistan</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Rensa</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Historik</string>

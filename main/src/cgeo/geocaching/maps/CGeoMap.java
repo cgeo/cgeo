@@ -63,6 +63,7 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
+import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.LeastRecentlyUsedSet;
@@ -571,7 +572,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
-            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::onMapSettingsPopupFinished, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -601,7 +602,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         mapView.onMapReady(() -> initializeMap(trailHistory));
 
-        MapUtils.setFilterBar(this.getActivity(), mapOptions.filterContext);
+        FilterUtils.initializeFilterBar(activity, mapActivity);
+        MapUtils.updateFilterBar(activity, mapOptions.filterContext);
 
         AndroidBeam.disable(activity);
 
@@ -689,7 +691,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
             });
         }
-        MapUtils.setFilterBar(activity, mapOptions.filterContext);
+        MapUtils.updateFilterBar(activity, mapOptions.filterContext);
         resumeTrack(false);
     }
 
@@ -731,6 +733,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         /* if we have an Actionbar find the my position toggle */
         initMyLocationSwitchButton(MapProviderFactory.createLocSwitchMenuItem(activity, menu));
+        FilterUtils.initializeFilterMenu(activity, mapActivity);
+
         return true;
     }
 
@@ -795,7 +799,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             if (mapOptions.isLiveEnabled) {
                 mapOptions.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
-                onMapSettingsPopupFinished(false);
+                refreshMapData(false);
             }
             markersInvalidated = true;
             lastSearchResult = null;
@@ -833,7 +837,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void onMapSettingsPopupFinished(final boolean circlesSwitched) {
+    public void refreshMapData(final boolean circlesSwitched) {
         markersInvalidated = true;
         Tile.cache.clear();
         overlayPositionAndScale.repaintRequired();
@@ -841,7 +845,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             mapView.setCircles(Settings.isShowCircles());
             mapView.repaintRequired(null);
         }
-        MapUtils.setFilterBar(activity, mapOptions.filterContext);
+        MapUtils.updateFilterBar(activity, mapOptions.filterContext);
 
     }
 

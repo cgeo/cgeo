@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.lc;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -19,6 +20,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
 
@@ -44,10 +46,11 @@ import org.apache.commons.lang3.StringUtils;
 final class LCApi {
 
     private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
+
     @NonNull
     private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
-    private static final String CONSUMER_KEY    = Settings.getALCConsumerKey();
+    private static final String CONSUMER_KEY    = LocalizationUtils.getString(R.string.alc_consumer_key);
 
     private LCApi() {
         // utility class with static methods

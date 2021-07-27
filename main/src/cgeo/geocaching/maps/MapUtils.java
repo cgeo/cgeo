@@ -7,21 +7,17 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.FilterUtils;
 
 import android.app.Activity;
 import android.text.Html;
 import android.text.Spanned;
-import android.text.TextUtils;
-import android.view.View;
-import android.widget.TextView;
-import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
 
@@ -101,27 +97,12 @@ public class MapUtils {
 
     }
 
-    public static void openFilterActivity(final Activity activity, final GeocacheFilterContext filterContext, final Collection<Geocache> filteredList) {
-
-        GeocacheFilterActivity.selectFilter(
-            activity,
-            filterContext,
-            filteredList, true);
-    }
-
-    public static void setFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        final List<String> filterNames = getMapFilters(filterContext);
-        if (filterNames.isEmpty()) {
-            activity.findViewById(R.id.filter_bar).setVisibility(GONE);
-        } else {
-            final TextView filterTextView = activity.findViewById(R.id.filter_text);
-            filterTextView.setText(TextUtils.join(", ", filterNames));
-            activity.findViewById(R.id.filter_bar).setVisibility(View.VISIBLE);
-        }
+    public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterNames(filterContext));
     }
 
     @NonNull
-    private static List<String> getMapFilters(final GeocacheFilterContext filterContext) {
+    private static List<String> getActiveMapFilterNames(final GeocacheFilterContext filterContext) {
         final List<String> filters = new ArrayList<>();
         if (Settings.getCacheType() != CacheType.ALL) {
             filters.add(Settings.getCacheType().getL10n());
@@ -140,6 +121,7 @@ public class MapUtils {
         Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_QUICK_SETTINGS);
         Dialogs.basicOneTimeMessage(activity, Settings.isLongTapOnMapActivated() ? OneTimeDialogs.DialogType.MAP_LONG_TAP_ENABLED : OneTimeDialogs.DialogType.MAP_LONG_TAP_DISABLED);
     }
+
     // workaround for colored ActionBar titles/subtitles
     // @todo remove after switching map ActionBar to Toolbar
     public static Spanned getColoredValue(final String value) {

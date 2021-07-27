@@ -270,6 +270,7 @@
     <string name="list_dialog_rename">Endurnefna</string>
     <string name="list_not_available">Listi ekki lengur til, skipti í staðlaðan lista</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Hreinsa</string>
     <!-- about -->
     <string name="about_version">Útgáfa</string>
     <string name="about_changelog">Breytingaskrá</string>

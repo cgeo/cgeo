@@ -422,6 +422,7 @@
     <string name="cache_filter_last_found">Vėliausia radimo data</string>
     <string name="cache_filter_userdisplay_none">Nieko</string>
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
+    <string name="cache_filter_storage_clear_button">Išvalyti</string>
     <string name="cache_filter_datefilter_label_from">Nuo:</string>
     <string name="cache_filter_datefilter_label_to">Iki:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Pasirinkti visas</string>

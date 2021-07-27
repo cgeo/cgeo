@@ -76,6 +76,7 @@ public class SimpleDialog {
     private TextParam positiveButton = TextParam.id(android.R.string.ok);
     private TextParam negativeButton = TextParam.id(android.R.string.cancel);
     private TextParam neutralButton = TextParam.id(android.R.string.untitled);
+    private boolean neutralButtonNeedsSelection = true;
 
     public static SimpleDialog of(final Activity activity) {
         return ofContext(activity);
@@ -140,6 +141,11 @@ public class SimpleDialog {
             buttonTps[idx] = buttonIds[idx] == 0 ? null : TextParam.id(buttonIds[idx]);
         }
         return setButtons(buttonTps);
+    }
+
+    public SimpleDialog setSelectionForNeutral(final boolean neutralButtonNeedsSelection) {
+        this.neutralButtonNeedsSelection = neutralButtonNeedsSelection;
+        return this;
     }
 
     /**
@@ -308,6 +314,11 @@ public class SimpleDialog {
                 }
             }
         }
+
+        if (!neutralButtonNeedsSelection && moreListeners.length > 1) {
+            builder.setNeutralButton(getNeutralButton(), (dialog, which) -> moreListeners[1].call(null, -1));
+        }
+
         final AlertDialog dialog = builder.create();
         dialog.show();
         adjustCommons(dialog);
@@ -416,7 +427,7 @@ public class SimpleDialog {
     }
 
 
-    private static void enableDisableButtons(final AlertDialog dialog, final boolean enable) {
+    private void enableDisableButtons(final AlertDialog dialog, final boolean enable) {
         if (dialog.getButton(DialogInterface.BUTTON_POSITIVE) != null) {
             dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(enable);
         }
@@ -425,9 +436,12 @@ public class SimpleDialog {
         }
 
         if (dialog.getButton(DialogInterface.BUTTON_NEUTRAL) != null) {
-            dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(enable);
+            if (!neutralButtonNeedsSelection) {
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(true);
+            } else {
+                dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setEnabled(enable);
+            }
         }
-
     }
 
 
