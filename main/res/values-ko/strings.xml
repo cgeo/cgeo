@@ -461,6 +461,8 @@
     <string name="cache_filter_owner">캐시 소유자</string>
     <string name="cache_filter_difficulty">난이도</string>
     <string name="cache_filter_terrain">지형등급</string>
+    <string name="cache_filter_difficulty_terrain">난이도 / 지형</string>
+    <string name="cache_filter_rating">평점</string>
     <string name="cache_filter_status">상태</string>
     <string name="cache_filter_attributes">캐시 속성</string>
     <string name="cache_filter_favorites">호감점수</string>
@@ -490,6 +492,8 @@
     <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
+    <string name="cache_filter_storage_select_title">필터 선택</string>
+    <string name="cache_filter_storage_select_clear_title">필터 선택 또는 현재 필터 지우기</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">아직 저장된 필터가 없습니다.</string>
     <string name="cache_filter_storage_save_title">이름으로 필터 저장</string>
     <string name="cache_filter_storage_save_confirm_title">필터 덮어 쓰기 저장</string>
@@ -1236,6 +1240,7 @@
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
+    <string name="cache_difficulty_terrain">난이도 / 지형</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
     <string name="cache_rating_of_new">%1$.1f 중 %2$d</string>
@@ -1423,7 +1428,7 @@
     <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
-    <string name="search_filter_info_message">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
+    <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_filter_temporary_user_information_title">새로운 필터 프레임워크</string>
     <string name="search_filter_temporary_user_information">c:geo는 새로운 필터링 시스템을 도입했습니다. 유연하고 결합 가능하며 저장 가능한 필터를 지원합니다. \n\n이제부터 글로벌 필터는 캐시 목록과 라이브 지도에서 직접 변경할 수 있습니다.</string>
     <string name="search_tb">추적아이템</string>
