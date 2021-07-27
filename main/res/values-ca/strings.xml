@@ -481,6 +481,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carregar</string>
     <string name="cache_filter_storage_delete_button">Esborra</string>
+    <string name="cache_filter_storage_clear_button">Esborra</string>
     <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
     <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
@@ -1374,7 +1375,7 @@
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
     <string name="search_filter_button">Cerca per Filtre</string>
-    <string name="search_filter_info_message">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
+    <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_tb">Traçable</string>
     <string name="search_tb_hint">Identificació del traçable</string>
     <string name="search_tb_button">Cerca de traçables</string>

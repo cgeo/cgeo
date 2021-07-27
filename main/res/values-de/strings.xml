@@ -460,6 +460,8 @@
     <string name="cache_filter_owner">Cache-Besitzer</string>
     <string name="cache_filter_difficulty">Schwierigkeit</string>
     <string name="cache_filter_terrain">Gelände</string>
+    <string name="cache_filter_difficulty_terrain">Schwierigkeit / Gelände</string>
+    <string name="cache_filter_rating">Bewertung</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-Attribute</string>
     <string name="cache_filter_favorites">Favoriten</string>
@@ -489,6 +491,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Löschen</string>
+    <string name="cache_filter_storage_clear_button">Leeren</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
     <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
@@ -1244,6 +1247,7 @@
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>
+    <string name="cache_difficulty_terrain">Schwierigkeit / Gelände</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
     <string name="cache_rating_of_new">%1$.1f von %2$d</string>
@@ -1432,7 +1436,7 @@
     <string name="search_hbu_button">Suche mit Besitzername</string>
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Suchen mit Filter</string>
-    <string name="search_filter_info_message">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
+    <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
     <string name="search_filter_temporary_user_information_title">Neues Filtersystem</string>
     <string name="search_filter_temporary_user_information">c:geo hat ein neues Filtersystem eingeführt, das flexible, kombinierbare und speicherbare Filter unterstützt. \n\nDer globale Filter kann von nun an direkt in Cachelisten und der Live-Karte geändert werden.</string>
     <string name="search_tb">Trackable</string>

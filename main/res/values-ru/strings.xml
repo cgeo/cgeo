@@ -400,6 +400,7 @@
     <string name="list_dialog_rename">Переименовать</string>
     <string name="list_not_available">Этот список больше недоступен, переключаюсь на список по умолчанию</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Очистить</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>

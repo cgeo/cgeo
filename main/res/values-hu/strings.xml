@@ -368,6 +368,7 @@
     <string name="list_dialog_rename">Átnevezés</string>
     <string name="list_not_available">A lista már nem elérhető, váltás az alapértelmezett listára</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Törlés</string>
     <!-- about -->
     <string name="about_version">Verzió</string>
     <string name="about_changelog">Változások</string>

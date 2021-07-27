@@ -418,6 +418,7 @@
     <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
     <string name="caches_set_listmarker">목록 표시 설정</string>
+    <string name="caches_askdeletion">비어 있으면 삭제 요청</string>
     <string name="select_icon">아이콘 선택</string>
     <string name="onetime_missing_unicode_info">안드로이드 버전은 지원되는 아이콘 자동 감지를 지원하지 않습니다. 일부 문자가 누락 될 수 있습니다.</string>
     <!-- caches lists -->
@@ -436,6 +437,7 @@
     <string name="list_dialog_remove_title">목록 제거</string>
     <string name="list_dialog_remove_description">현재 목록을 제거하시겠습니까? 목록에 있는 모든 캐시는 \"저장된 캐시\"로 이동됩니다.</string>
     <string name="list_dialog_remove_nowempty">목록이 비었습니다. 현재 목록을 제거할까요?</string>
+    <string name="list_dialog_do_not_ask_me_again">이 목록에 대해 다시 묻지 않음</string>
     <string name="list_dialog_remove">제거</string>
     <string name="list_dialog_rename_title">목록 이름 바꾸기</string>
     <string name="list_dialog_rename">이름변경</string>
@@ -487,6 +489,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
+    <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">아직 저장된 필터가 없습니다.</string>
     <string name="cache_filter_storage_save_title">이름으로 필터 저장</string>
@@ -1421,7 +1424,7 @@
     <string name="search_hbu_button">소유주로 검색</string>
     <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
-    <string name="search_filter_info_message">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
+    <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
     <string name="search_filter_temporary_user_information_title">새로운 필터 프레임워크</string>
     <string name="search_filter_temporary_user_information">c:geo는 새로운 필터링 시스템을 도입했습니다. 유연하고 결합 가능하며 저장 가능한 필터를 지원합니다. \n\n이제부터 글로벌 필터는 캐시 목록과 라이브 지도에서 직접 변경할 수 있습니다.</string>
     <string name="search_tb">추적아이템</string>

@@ -389,6 +389,7 @@
     <string name="list_dialog_rename">Pārdēvēt</string>
     <string name="list_not_available">Saraksts vairs nav pieejams, pārslēdzas uz standarta sarakstu</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_storage_clear_button">Notīrīt</string>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Izmaiņas</string>
