@@ -365,7 +365,6 @@
     <string name="list_dialog_rename">Redenumește</string>
     <string name="list_not_available">Lista nu mai există, revenire la lista standard</string>
     <!-- caches lists filter -->
-    <string name="cache_filter_storage_clear_button">Şterge</string>
     <!-- about -->
     <string name="about_version">Versiune</string>
     <string name="about_changelog">Istoric modificări</string>
