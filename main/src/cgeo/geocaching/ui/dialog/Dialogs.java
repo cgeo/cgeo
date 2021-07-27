@@ -258,7 +258,7 @@ public final class Dialogs {
 
     private static void updateActionbarAfterStateChange(final BottomSheetDialog dialog, final BottomsheetDialogWithActionbarBinding dialogView) {
         if (dialog.getBehavior().getState() == BottomSheetBehavior.STATE_EXPANDED) {
-            dialogView.toolbar.setNavigationIcon(R.drawable.ic_close_white);
+            dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_more_white);
         } else {
             dialogView.toolbar.setNavigationIcon(R.drawable.ic_expand_less_white);
         }
