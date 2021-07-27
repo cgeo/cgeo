@@ -74,7 +74,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
 
         @StringRes
         private final int resId;
-        private final long id;
+        public final long id;
 
         Page(@StringRes final int resId) {
             this.resId = resId;

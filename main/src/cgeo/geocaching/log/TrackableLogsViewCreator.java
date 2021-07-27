@@ -14,6 +14,7 @@ import android.view.View;
 
 import androidx.core.text.HtmlCompat;
 
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -21,30 +22,25 @@ import org.apache.commons.text.StringEscapeUtils;
 
 public class TrackableLogsViewCreator extends LogsViewCreator {
 
-    private Trackable trackable;
-    private final TrackableActivity trackableActivity;
-
-    /**
-     */
-    public TrackableLogsViewCreator() {
-        this.trackableActivity = (TrackableActivity) getActivity();
-        trackable = trackableActivity.getTrackable();
+    private Trackable getTrackable() {
+        final TrackableActivity activity = (TrackableActivity) getActivity();
+        return activity != null ? activity.getTrackable() : null;
     }
 
     @Override
     public long getPageId() {
-        return CacheDetailActivity.Page.LOGS.id;
+        return TrackableActivity.Page.LOGS.id;
     }
 
     @Override
     protected boolean isValid() {
-        return trackable != null;
+        return getTrackable() != null;
     }
 
     @Override
     protected List<LogEntry> getLogs() {
-        trackable = trackableActivity.getTrackable();
-        return trackable.getLogs();
+        final Trackable trackable = getTrackable();
+        return trackable != null ? trackable.getLogs() : Collections.emptyList();
     }
 
     @Override
@@ -80,19 +76,22 @@ public class TrackableLogsViewCreator extends LogsViewCreator {
 
     @Override
     protected String getGeocode() {
-        return trackable.getGeocode();
+        final Trackable trackable = getTrackable();
+        return trackable != null ? trackable.getGeocode() : "";
     }
 
     @Override
     protected View.OnClickListener createUserActionsListener(final LogEntry log) {
+        final Trackable trackable = getTrackable();
         return UserClickListener.forUser(trackable, StringEscapeUtils.unescapeHtml4(log.author), log.authorGuid);
     }
 
     @Override
     protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
-        if (trackable.canShareLog(log)) {
-            ctxMenu.addItem(trackableActivity.getString(R.string.cache_menu_browser),
-                R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(trackableActivity, trackable.getServiceSpecificLogUrl(log)));
+        final Trackable trackable = getTrackable();
+        if (trackable != null && trackable.canShareLog(log)) {
+            ctxMenu.addItem(getActivity().getString(R.string.cache_menu_browser),
+                R.drawable.ic_menu_info_details, it -> ShareUtils.openUrl(getActivity(), trackable.getServiceSpecificLogUrl(log)));
         }
         return ctxMenu;
     }

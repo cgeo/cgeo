@@ -23,9 +23,11 @@ import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
+import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
 
 import android.app.Activity;
 import android.content.Context;
@@ -146,7 +148,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             final float bearing = cameraPosition.bearing;
             if (canDisableAutoRotate && bearing == 0.0f && Settings.getMapRotation() == Settings.MAPROTATION_AUTO) {
                 canDisableAutoRotate = false;
-                SimpleDialog.of((Activity) getContext()).setTitle(R.string.map_gm_autorotation).setMessage(R.string.map_gm_autorotation_disable).confirm((dialog, which) -> {
+                final Context context = getContext();
+                Dialogs.advancedOneTimeMessage(context, MAP_AUTOROTATION_DISABLE, context.getString(MAP_AUTOROTATION_DISABLE.messageTitle), context.getString(MAP_AUTOROTATION_DISABLE.messageText), "", true, null, () -> {
                     Settings.setMapRotation(Settings.MAPROTATION_MANUAL);
 
                     // notify overlay
