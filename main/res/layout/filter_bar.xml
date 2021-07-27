@@ -10,7 +10,7 @@
 
     <ImageView
         style="@style/filter_bar_image"
-        android:src="@drawable/main_filter_default" >
+        android:src="@drawable/ic_menu_filter" >
     </ImageView>
 
     <TextView
