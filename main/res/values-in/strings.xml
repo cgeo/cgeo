@@ -325,7 +325,6 @@
     <string name="list_dialog_rename">Ubah nama</string>
     <string name="list_not_available">Daftar tidak lagi tersedia, beralih ke daftar standar</string>
     <!-- caches lists filter -->
-    <string name="cache_filter_storage_clear_button">Bersihkan</string>
     <!-- about -->
     <string name="about_version">Versi</string>
     <string name="about_changelog">Perubahan</string>
