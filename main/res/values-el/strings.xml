@@ -463,6 +463,7 @@
     <string name="cache_filter_difficulty">Δυσκολία</string>
     <string name="cache_filter_terrain">Έδαφος</string>
     <string name="cache_filter_difficulty_terrain">Δυσκολία / Έδαφος</string>
+    <string name="cache_filter_rating">Βαθμολογία</string>
     <string name="cache_filter_status">Κατάσταση</string>
     <string name="cache_filter_attributes">Χαρακτηριστικά κρύπτης</string>
     <string name="cache_filter_favorites">Αγαπημένες</string>
@@ -489,6 +490,8 @@
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
+    <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
+    <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
     <string name="cache_filter_storage_save_confirm_title">Αποθήκευση φίλτρου κατά την έξοδο</string>
@@ -1426,7 +1429,7 @@
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
-    <string name="search_filter_info_message">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
+    <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
