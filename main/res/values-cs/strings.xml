@@ -498,6 +498,8 @@
     <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Odstranit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
+    <string name="cache_filter_storage_select_title">Vyberte filtr</string>
+    <string name="cache_filter_storage_select_clear_title">Vyberte filtr nebo vymažte aktuální filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
     <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
     <string name="cache_filter_storage_save_confirm_title">Uložit přepsání filtru</string>
@@ -1459,7 +1461,7 @@
     <string name="search_hbu_button">Hledat podle vlastníka</string>
     <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Hledat podle filtru</string>
-    <string name="search_filter_info_message">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
+    <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
     <string name="search_filter_temporary_user_information_title">Nové filtrování</string>
     <string name="search_filter_temporary_user_information">c:geo představilo nový systém filtrování, který podporuje flexibilní, kombinovatelné a ukládatelné filtry. \n\nGlobální filtr lze od nynějška měnit přímo v seznamech kešek a v živé mapě.</string>
     <string name="search_tb">Sledovatelný předmět</string>
