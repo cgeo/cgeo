@@ -9,10 +9,14 @@ import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class ExpressionConfigTest {
-    final static List<String> stringListMulti = new ArrayList<>(Arrays.asList("value1", "value2", "value3"));
-    final static List<String> stringListSingle = new ArrayList<>(Arrays.asList("singleValue"));
-    final static String keyString = "testKey";
+    private static final List<String> stringListSingle = new ArrayList<>(Arrays.asList("singleValue"));
+    private static final List<String> stringListMulti = new ArrayList<>(Arrays.asList("value1", "value2", "value3"));
+    private static final String keyString = "testKey";
 
+    /**
+     * Put list with multi entries as default.
+     * Try to get default list returns this list.
+     */
     @Test
     public void testDefaultList() {
         final ExpressionConfig config = new ExpressionConfig();
@@ -22,6 +26,10 @@ public class ExpressionConfigTest {
         assertThat(defaultList).isEqualTo(stringListMulti);
     }
 
+    /**
+     * Empty expression config.
+     * Try to get default list returns empty list.
+     */
     @Test
     public void testEmptyDefaultList() {
         final ExpressionConfig config = new ExpressionConfig();
@@ -31,6 +39,11 @@ public class ExpressionConfigTest {
         assertThat(defaultList.size()).isEqualTo(0);
     }
 
+    /**
+     * Put list with multi entries as default.
+     * Add single value to default list.
+     * Try to get default list returns entries from multi-list plus the single value.
+     */
     @Test
     public void testAddToDefaultList() {
         final ExpressionConfig config = new ExpressionConfig();
@@ -42,17 +55,26 @@ public class ExpressionConfigTest {
         assertThat(defaultList.size()).isEqualTo(sizeBefore + 1);
     }
 
+    /**
+     * Put list with single entries as default.
+     * Try to get single value returns value of list.
+     */
     @Test
-    public void testGetSingleValueDefaultSizeSingle() {
+    public void testGetSingleValueListSingle() {
         final ExpressionConfig config = new ExpressionConfig();
         config.putDefaultList(stringListSingle);
 
         final String singleValue = config.getSingleValue();
         assertThat(singleValue).isNotNull();
+        assertThat(singleValue).isEqualTo(stringListSingle.get(0));
     }
 
+    /**
+     * Put list with multi entries as default.
+     * Try to get single value returns null.
+     */
     @Test
-    public void testGetSingleValueDefaultSizeMulti() {
+    public void testGetSingleValueListMulti() {
         final ExpressionConfig config = new ExpressionConfig();
         config.putDefaultList(stringListMulti);
 
@@ -60,6 +82,24 @@ public class ExpressionConfigTest {
         assertThat(singleValue).isNull();
     }
 
+    /**
+     * Add value to config 'keyString'.
+     * Try to get value from config.
+     */
+    @Test
+    public void testGetKeyValue() {
+        final ExpressionConfig config = new ExpressionConfig();
+        config.put(keyString, stringListMulti);
+
+        final List<String> value = config.get(keyString);
+        assertThat(value).isNotNull();
+        assertThat(value).isEqualTo(stringListMulti);
+    }
+
+    /**
+     * Add single value to config 'keyString'.
+     * Try to get first value.
+     */
     @Test
     public void testGetFirstValue() {
         final ExpressionConfig config = new ExpressionConfig();
@@ -69,6 +109,10 @@ public class ExpressionConfigTest {
         assertThat(firstValue).isTrue();
     }
 
+    /**
+     * Add single value to config 'keyString', which is not valid for the converter.
+     * Try to get first value returns default value.
+     */
     @Test
     public void testGetFirstValueDefault() {
         final ExpressionConfig config = new ExpressionConfig();
@@ -78,6 +122,10 @@ public class ExpressionConfigTest {
         assertThat(firstValue).isFalse();
     }
 
+    /**
+     * Add value to config 'keyString'.
+     * Create SubConfig from 'keyString' returns config with value from 'keyString' in defaultList.
+     */
     @Test
     public void testGetSubConfig() {
         final ExpressionConfig config = new ExpressionConfig();
