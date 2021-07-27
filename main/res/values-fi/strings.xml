@@ -419,7 +419,7 @@
     <string name="caches_reset_cache_icons_title">Nollaa kätkön kuvakkeet</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
-    <string name="caches_askdeletion">Pyydä poistamista, jos tyhjä</string>
+    <string name="caches_askdeletion">Kysy poistamista, jos tyhjä</string>
     <string name="select_icon">Valitse kuvake</string>
     <string name="onetime_missing_unicode_info">Android-versiosi ei tue tuettujen kuvakkeiden automaattista tunnistamista - joitakin merkkejä voi puuttua</string>
     <!-- caches lists -->
@@ -463,6 +463,7 @@
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
     <string name="cache_filter_difficulty_terrain">Vaikeus / Maasto</string>
+    <string name="cache_filter_rating">Arvostelu</string>
     <string name="cache_filter_status">Tila</string>
     <string name="cache_filter_attributes">Kätkön attribuutit</string>
     <string name="cache_filter_favorites">Suosikit</string>
@@ -494,6 +495,8 @@
     <string name="cache_filter_storage_delete_button">Poista</string>
     <string name="cache_filter_storage_clear_button">Tyhjennä</string>
     <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
+    <string name="cache_filter_storage_select_title">Valitse suodatin</string>
+    <string name="cache_filter_storage_select_clear_title">Valitse suodatin tai tyhjennä nykyinen suodatin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Yhtään suodatinta ei ole vielä tallennettu.</string>
     <string name="cache_filter_storage_save_title">Tallenna suodatin nimellä</string>
     <string name="cache_filter_storage_save_confirm_title">Tallenna suodattimen ylikirjoitus</string>
@@ -568,7 +571,7 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
-    <string name="about_system_collecting">Järjestelmätiedot kerätään, ole hyvä ja odota…</string>
+    <string name="about_system_collecting">Kerätään järjestelmätietoja, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
