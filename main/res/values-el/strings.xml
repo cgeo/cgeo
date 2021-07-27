@@ -463,6 +463,7 @@
     <string name="cache_filter_difficulty">Δυσκολία</string>
     <string name="cache_filter_terrain">Έδαφος</string>
     <string name="cache_filter_difficulty_terrain">Δυσκολία / Έδαφος</string>
+    <string name="cache_filter_rating">Βαθμολογία</string>
     <string name="cache_filter_status">Κατάσταση</string>
     <string name="cache_filter_attributes">Χαρακτηριστικά κρύπτης</string>
     <string name="cache_filter_favorites">Αγαπημένες</string>
@@ -488,8 +489,9 @@
     <string name="cache_filter_userdisplay_not">NOT</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
-    <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
+    <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
+    <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
     <string name="cache_filter_storage_save_confirm_title">Αποθήκευση φίλτρου κατά την έξοδο</string>
