@@ -489,7 +489,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
-    <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
     <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
