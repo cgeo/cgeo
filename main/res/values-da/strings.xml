@@ -399,7 +399,6 @@
     <string name="list_dialog_rename">Omdøb</string>
     <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
     <!-- caches lists filter -->
-    <string name="cache_filter_storage_clear_button">Fjern</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Ændringslog</string>
