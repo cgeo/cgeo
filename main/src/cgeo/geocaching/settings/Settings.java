@@ -601,10 +601,6 @@ public class Settings {
         return getString(R.string.pref_alc_launcher, "");
     }
 
-    public static String getALCConsumerKey() {
-        return getString(R.string.pref_alc_consumerkey, "");
-    }
-
     public static GCMemberState getGCMemberStatus() {
         return GCMemberState.fromString(getString(R.string.pref_memberstatus, ""));
     }
