@@ -1,28 +1,28 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Avancerat filtreringssystem
+- Introduktion av ett nytt filtreringssystem till c:geo, med stöd för flexibla, kombinerbara och lagringsbara filter
+- Tillgänglig i både cache-listor och kartvy
+- Ny funktion "Sök med filter"
 
-### Map
+### Karta
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+- Nytt: Separera "egna" och "hittade" filter i kartans snabbinställningar
+- Förändring: Visa även cachenamn i popup-detaljer
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Cachedetaljer
+- Nyhet: Använd Google Översätt som en popup-översättning i appen
+- Nyhet: Tillåt att ändra den tilldelade ikonen i cache-detaljer popup via långklick (endast lagrade cacher)
 
-### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### Nedladdare
+- Ändring: Nedladdningar kommer nu att ske helt i bakgrunden, en avisering visas
+- Förändring: Filer som laddats ner kommer automatiskt att skriva över befintliga filer med samma namn
+- Förändring: Om en karta kräver ett visst tema som inte är installerat ännu kommer c:geo automatiskt ladda ner och installera det temat
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Övrigt
+- Förändring: Vi har helt omarbetat de interna tekniska aspekterna c:geo tema för att kunna använda några mer moderna komponenter som tillhandahålls av Android. Detta kommer att ha ett par biverkningar, några av dem oavsiktliga. Rapportera eventuella fel eller fel antingen på vår [GitHub sida](https://www.github.com/cgeo/cgeo/issues) eller genom att kontakta support.
+- Nyhet: Support dag / natt läge från systemet (valbart)
+- Nyhet: Ladda ner bokmärkeslistor från geocaching.com - se "Listor / pocket querys" i huvudmenyn
+- Nyhet: Ignorera förmåga för geocaching.su
+- Förändring: Borttagen, RMAPS navigationsapp som inte längre underhålls
 - Fix: Extract waypoint with same name but different coordinates from personal note
 - Fix: Bug in extracting user note for waypoint with formula
 - Fix: Export formula to PN instead of coordinates for completed formula
