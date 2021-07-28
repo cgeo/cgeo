@@ -360,8 +360,8 @@
     <string name="caches_sort_favorites_ratio">Favoriler [%]</string>
     <string name="caches_sort_name">Ad</string>
     <string name="caches_sort_geocode">Geo Kodu</string>
-    <string name="caches_sort_rating">Derecelendirme</string>
-    <string name="caches_sort_vote">Oy (Derecenledirmeniz)</string>
+    <string name="caches_sort_rating">Puanlama</string>
+    <string name="caches_sort_vote">Oy (Puanlamanız)</string>
     <string name="caches_sort_inventory">İçindeki TB Sayısı</string>
     <string name="caches_sort_date_hidden">Yerleştirme tarihi</string>
     <string name="caches_sort_date_logged">Kayıt tarihi</string>
@@ -404,8 +404,8 @@
     <string name="caches_filter_popularity">Favoriler</string>
     <string name="caches_filter_popularity_ratio">Favoriler [%]</string>
     <string name="caches_filter_personal_data">Kişisel verilerle</string>
-    <string name="caches_filter_rating">Derecelendirme ile</string>
-    <string name="caches_filter_own_rating">Kendi derecelendirmem ile</string>
+    <string name="caches_filter_rating">Puanlama ile</string>
+    <string name="caches_filter_own_rating">Kendi puanlandırmam ile</string>
     <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
     <string name="caches_filter_own_waypoint">Kullanıcı tanımlı ara noktalar ile</string>
     <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Cache simgelerini sıfırla</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
+    <string name="caches_askdeletion">Boş ise silmeyi öner</string>
     <string name="select_icon">Simge seç</string>
     <string name="onetime_missing_unicode_info">Android sürümünüz, desteklenen simgelerin otomatik olarak algılanmasını desteklemiyor - bazı karakterler eksik olabilir</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Listeyi kaldır</string>
     <string name="list_dialog_remove_description">Geçerli listeyi kaldırmak istiyor musunuz? Listede kalan tüm Geocache\'ler \"Kaydedilen\" klasörüne taşınacak.</string>
     <string name="list_dialog_remove_nowempty">Liste boş. Geçerli listeyi kaldırmak istiyor musunuz?</string>
+    <string name="list_dialog_do_not_ask_me_again">Bu liste için yeniden sorma</string>
     <string name="list_dialog_remove">Kaldır</string>
     <string name="list_dialog_rename_title">Listeyi yeniden adlandır</string>
     <string name="list_dialog_rename">Yeniden Adlandır</string>
@@ -460,6 +462,8 @@
     <string name="cache_filter_owner">Geocache Sahibi</string>
     <string name="cache_filter_difficulty">Zorluk</string>
     <string name="cache_filter_terrain">Arazi</string>
+    <string name="cache_filter_difficulty_terrain">Zorluk / Arazi</string>
+    <string name="cache_filter_rating">Puanlama</string>
     <string name="cache_filter_status">Durum</string>
     <string name="cache_filter_attributes">Geocache Özellikleri</string>
     <string name="cache_filter_favorites">Favoriler</string>
@@ -489,7 +493,10 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
+    <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
+    <string name="cache_filter_storage_select_title">Filtre seçin</string>
+    <string name="cache_filter_storage_select_clear_title">Filtre seçin veya mevcut filtreyi temizleyin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
     <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
     <string name="cache_filter_storage_save_confirm_title">Filtreyi üzerine yazarak kaydet</string>
@@ -700,8 +707,8 @@
     <string name="init_signature_template_log">Kayıt metni</string>
     <string name="init_signature_template_size">Boyut</string>
     <string name="init_signature_template_type">Tür</string>
-    <string name="init_ratingwanted">GCvote Derecelendirme</string>
-    <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache derecelendirmesini yükle</string>
+    <string name="init_ratingwanted">GCvote Puanlaması</string>
+    <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache puanlamasını yükle</string>
     <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
     <string name="init_summary_friends_and_own_logs_wanted">Arkadaşlarınızın ve kendinizin kayıt sayfasını görüntüle</string>
     <string name="init_openlastdetailspage">Son Ayrıntılar Sayfası</string>
@@ -1244,8 +1251,9 @@
     <string name="cache_distance">Mesafe</string>
     <string name="cache_difficulty">Zorluk</string>
     <string name="cache_terrain">Arazi</string>
-    <string name="cache_rating">Derecelendirme</string>
-    <string name="cache_own_rating">Derecelendirmeniz</string>
+    <string name="cache_difficulty_terrain">Zorluk / Arazi</string>
+    <string name="cache_rating">Puanlama</string>
+    <string name="cache_own_rating">Puanlamanız</string>
     <string name="cache_rating_of_new">%1$.1f/%2$d</string>
     <string name="cache_favorite">Favori</string>
     <string name="cache_owner">Sahibi</string>
