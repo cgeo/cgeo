@@ -147,11 +147,7 @@ public class ViewUtils {
                 final TextView tv = new TextView(ctx);
                 tv.setText(itemText);
                 tv.setMaxLines(1);
-                if (Build.VERSION.SDK_INT >= 23) {
-                    tv.setTextColor(ctx.getColor(R.color.colorText));
-                } else if (APP_RESOURCES != null) {
-                    tv.setTextColor(APP_RESOURCES.getColor(R.color.colorText));
-                }
+                tv.setTextColor(ctx.getResources().getColor(R.color.colorText));
                 if (DEBUG_LAYOUT) {
                     tv.setBackgroundResource(R.drawable.mark_orange);
                 }

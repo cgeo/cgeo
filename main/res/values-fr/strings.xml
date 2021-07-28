@@ -462,7 +462,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Charger</string>
     <string name="cache_filter_storage_delete_button">Supprimer</string>
-    <string name="cache_filter_storage_clear_button">Effacer</string>
     <string name="cache_filter_storage_load_delete_title">Charger ou supprimer un filtre existant</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Aucun filtre n\'a encore été enregistré.</string>
     <string name="cache_filter_storage_save_title">Enregistrer et nommer le filtre</string>

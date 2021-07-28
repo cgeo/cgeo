@@ -497,8 +497,9 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Odstranit</string>
-    <string name="cache_filter_storage_clear_button">Vyčistit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
+    <string name="cache_filter_storage_select_title">Vyberte filtr</string>
+    <string name="cache_filter_storage_select_clear_title">Vyberte filtr nebo vymažte aktuální filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
     <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
     <string name="cache_filter_storage_save_confirm_title">Uložit přepsání filtru</string>

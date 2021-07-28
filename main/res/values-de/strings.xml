@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Cache-Symbole zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
+    <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
     <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Liste entfernen</string>
     <string name="list_dialog_remove_description">Soll die aktuelle Liste gelöscht werden? Alle Caches dieser Liste werden in die Standardliste verschoben.</string>
     <string name="list_dialog_remove_nowempty">Die Liste ist leer. Soll sie gelöscht werden?</string>
+    <string name="list_dialog_do_not_ask_me_again">Nicht erneut fragen für diese Liste</string>
     <string name="list_dialog_remove">Entfernen</string>
     <string name="list_dialog_rename_title">Liste umbenennen</string>
     <string name="list_dialog_rename">Umbenennen</string>
@@ -493,6 +495,8 @@
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_clear_button">Leeren</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
+    <string name="cache_filter_storage_select_title">Filter auswählen</string>
+    <string name="cache_filter_storage_select_clear_title">Filter wählen oder aktuellen Filter löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
     <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
     <string name="cache_filter_storage_save_confirm_title">Filter überschreiben</string>

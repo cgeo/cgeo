@@ -489,7 +489,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Verwijderen</string>
-    <string name="cache_filter_storage_clear_button">Wissen</string>
     <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>

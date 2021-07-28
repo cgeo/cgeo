@@ -43,4 +43,11 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
     public void putDefaultList(final List<String> list) {
         put(null, list);
     }
+
+    /** creates a new config object, taking the content of one key of this config and putting it into the default list */
+    public ExpressionConfig getSubConfig(final String key) {
+        final ExpressionConfig subConfig = new ExpressionConfig();
+        subConfig.putDefaultList(this.get(key));
+        return subConfig;
+    }
 }

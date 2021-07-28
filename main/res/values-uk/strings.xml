@@ -390,7 +390,6 @@
     <string name="list_dialog_rename">Перейменувати</string>
     <string name="list_not_available">Список більше не доступний, перемикаючись на стандартний список</string>
     <!-- caches lists filter -->
-    <string name="cache_filter_storage_clear_button">Чистий</string>
     <!-- about -->
     <string name="about_version">версія</string>
     <string name="about_changelog">журнал змін</string>

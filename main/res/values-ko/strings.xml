@@ -461,6 +461,8 @@
     <string name="cache_filter_owner">캐시 소유자</string>
     <string name="cache_filter_difficulty">난이도</string>
     <string name="cache_filter_terrain">지형등급</string>
+    <string name="cache_filter_difficulty_terrain">난이도 / 지형</string>
+    <string name="cache_filter_rating">평점</string>
     <string name="cache_filter_status">상태</string>
     <string name="cache_filter_attributes">캐시 속성</string>
     <string name="cache_filter_favorites">호감점수</string>
@@ -489,8 +491,9 @@
     </plurals>
     <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
-    <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
+    <string name="cache_filter_storage_select_title">필터 선택</string>
+    <string name="cache_filter_storage_select_clear_title">필터 선택 또는 현재 필터 지우기</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">아직 저장된 필터가 없습니다.</string>
     <string name="cache_filter_storage_save_title">이름으로 필터 저장</string>
     <string name="cache_filter_storage_save_confirm_title">필터 덮어 쓰기 저장</string>
@@ -1237,6 +1240,7 @@
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
+    <string name="cache_difficulty_terrain">난이도 / 지형</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
     <string name="cache_rating_of_new">%1$.1f 중 %2$d</string>

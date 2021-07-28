@@ -484,7 +484,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Wczytaj</string>
     <string name="cache_filter_storage_delete_button">Usuń</string>
-    <string name="cache_filter_storage_clear_button">Wyczyść</string>
     <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
     <string name="cache_filter_storage_save_title">Zapisz filtr pod nazwą</string>
