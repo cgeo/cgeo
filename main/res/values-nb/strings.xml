@@ -403,7 +403,6 @@
     <string name="list_dialog_rename">Endre listenavn</string>
     <string name="list_not_available">Listen er ikke lenger tilgjengelig, bytter til standarlisten</string>
     <!-- caches lists filter -->
-    <string name="cache_filter_storage_clear_button">Tøm</string>
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>

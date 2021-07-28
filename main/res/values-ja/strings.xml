@@ -462,6 +462,7 @@
     <string name="cache_filter_difficulty">難易度</string>
     <string name="cache_filter_terrain">地形</string>
     <string name="cache_filter_difficulty_terrain">難易度/地形</string>
+    <string name="cache_filter_rating">評価</string>
     <string name="cache_filter_status">状態</string>
     <string name="cache_filter_attributes">キャッシュ属性</string>
     <string name="cache_filter_favorites">お気に入り</string>
@@ -488,7 +489,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">読み込み</string>
     <string name="cache_filter_storage_delete_button">削除</string>
-    <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>

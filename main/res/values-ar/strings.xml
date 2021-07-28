@@ -331,7 +331,6 @@
     <string name="list_dialog_rename">أعد تسمية</string>
     <string name="list_not_available">القائمة لم تعد متوفرة، الانتقال إلى القائمة الموحدة</string>
     <!-- caches lists filter -->
-    <string name="cache_filter_storage_clear_button">مسح</string>
     <!-- about -->
     <string name="about_version">الإصدار</string>
     <string name="about_changelog">سجل التغييرات</string>

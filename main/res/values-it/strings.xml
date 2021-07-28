@@ -491,7 +491,6 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carica</string>
     <string name="cache_filter_storage_delete_button">Elimina</string>
-    <string name="cache_filter_storage_clear_button">Azzera</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
     <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
