@@ -40,10 +40,15 @@
     <string name="event_short">Événement</string>
     <string name="mega_short">Méga</string>
     <string name="giga_short">Giga</string>
+    <string name="cito_short">CITO</string>
     <string name="webcam_short">Webcam</string>
     <string name="virtual_short">Virtuelle</string>
     <string name="wherigo_short">Wherigo</string>
+    <string name="ape_short">APE</string>
     <string name="gchq_short">Siège GC</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Défini par l\'utilisateur</string>
     <string name="unknown_short">Inconnu</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
@@ -179,6 +184,7 @@
     <string name="err_captcha">Captcha obligatoire. Veuillez consulter notre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pour en savoir plus.</string>
     <string name="err_server">Échec de la connexion à Geocaching.com. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_ec">Impossible de contacter Extremcaching.com. Le site web peut ne pas fonctionner ou votre connexion Internet ne fonctionne pas.</string>
+    <string name="err_server_lc">Impossible de contacter labs.geocaching.com. Le site Web est peut-être inactif ou votre connexion internet ne fonctionne pas.</string>
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_login">Aucune compte renseigné</string>
@@ -430,6 +436,8 @@
     <string name="list_not_available">La liste n\'est plus disponible, basculement vers la liste standard</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avancé</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Basculer vers Basic</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Passer en mode \'Basique\' entraînera la perte des paramètres de filtre. Voulez-vous continuer ?</string>
     <string name="cache_filter_add_button">Ajouter des critères</string>
     <string name="cache_filter_option_and_or">Utilisez OU à la place de ET</string>
     <string name="cache_filter_option_inverse">Inverser filtre</string>
@@ -437,11 +445,14 @@
     <string name="cache_filter_name">Nom de la cache</string>
     <string name="cache_filter_type">Type de cache</string>
     <string name="cache_filter_size">Taille de la cache</string>
+    <string name="cache_filter_personalnote">Notes personnelles</string>
     <string name="cache_filter_description">Description de la cache</string>
     <string name="cache_filter_offlinelog">Journal hors-ligne</string>
     <string name="cache_filter_owner">Propriétaire de la cache</string>
     <string name="cache_filter_difficulty">Difficulté</string>
     <string name="cache_filter_terrain">Terrain</string>
+    <string name="cache_filter_difficulty_terrain">Difficulté / Terrain</string>
+    <string name="cache_filter_rating">Évaluation</string>
     <string name="cache_filter_status">Statut</string>
     <string name="cache_filter_attributes">Attributs de la cache</string>
     <string name="cache_filter_favorites">Favoris</string>
@@ -449,25 +460,37 @@
     <string name="cache_filter_hidden">Date de création</string>
     <string name="cache_filter_logs_count">Nombre de journaux</string>
     <string name="cache_filter_log_entry">Entrée du journal</string>
+    <string name="cache_filter_location">Localisation</string>
+    <string name="cache_filter_stored_lists">Listes stockées</string>
+    <string name="cache_filter_origin">Origine</string>
+    <string name="cache_filter_stored_since">Présent depuis</string>
     <string name="cache_filtergroup_basic">Basique</string>
     <string name="cache_filtergroup_details">Détails</string>
     <string name="cache_filtergroup_userspecific">Spécifique à l\'utilisateur</string>
+    <string name="cache_filter_contexttype_live_title">Filtre temps réel</string>
+    <string name="cache_filter_contexttype_offline_title">Filtre hors ligne</string>
+    <string name="cache_filter_contexttype_transient_title">Filtrer</string>
     <string name="cache_filter_include">Inclure</string>
     <string name="cache_filter_exclude">Exclure</string>
     <string name="cache_filter_userdisplay_complex">Complexe</string>
     <string name="cache_filter_userdisplay_none">Aucun</string>
+    <string name="cache_filter_userdisplay_not">NON</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one">%1$d élément</item>
         <item quantity="other">%1$d éléments</item>
     </plurals>
     <string name="cache_filter_storage_load_button">Charger</string>
     <string name="cache_filter_storage_delete_button">Supprimer</string>
+    <string name="cache_filter_storage_clear_button">Effacer</string>
     <string name="cache_filter_storage_load_delete_title">Charger ou supprimer un filtre existant</string>
+    <string name="cache_filter_storage_select_title">Sélectionner un filtre</string>
+    <string name="cache_filter_storage_select_clear_title">Sélectionner un filtre ou effacer le filtre courant</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Aucun filtre n\'a encore été enregistré.</string>
     <string name="cache_filter_storage_save_title">Enregistrer et nommer le filtre</string>
     <string name="cache_filter_storage_save_confirm_title">Écraser le filtre</string>
     <string name="cache_filter_storage_save_confirm_message">Un filtre portant le nom \'%s\' et avec un paramétrage différent existe déjà. Souhaitez-vous l\'écraser ?</string>
     <string name="cache_filter_stringfilter_matchcase">Sensible à la casse</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Texte à rechercher</string>
     <string name="cache_filter_stringfilter_type_is_not_present">N\'est pas présent</string>
     <string name="cache_filter_stringfilter_type_is_present">Est présent</string>
     <string name="cache_filter_stringfilter_type_contains">Contient</string>
@@ -476,13 +499,46 @@
     <string name="cache_filter_datefilter_label_from">Depuis le :</string>
     <string name="cache_filter_datefilter_label_to">Jusqu\'au :</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tout sélectionner</string>
+    <string name="cache_filter_checkboxlist_add_items">Ajouter plus d\'éléments</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Ajouter des éléments</string>
     <string name="cache_filter_favorites_absolute">Absolu</string>
     <string name="cache_filter_favorites_percentage">Pourcentage</string>
+    <string name="cache_filter_distance_coordinates">Coordonnées</string>
     <string name="cache_filter_distance_use_current_position">Utiliser la position courante</string>
     <string name="cache_filter_status_select_all">Tout</string>
+    <string name="cache_filter_status_select_yes">Oui</string>
+    <string name="cache_filter_status_select_no">Non</string>
+    <string name="cache_filter_status_select_label_found">Trouvée</string>
+    <string name="cache_filter_status_select_label_stored">Enregistrée</string>
+    <string name="cache_filter_status_select_label_watchlist">Suivie</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Contient un objet voyageur</string>
+    <string name="cache_filter_status_active">Active</string>
+    <string name="cache_filter_status_disabled">Désactivée</string>
+    <string name="cache_filter_status_archived">Archivée</string>
     <string name="cache_filter_status_exclude_active">Exclure les caches actives</string>
     <string name="cache_filter_status_exclude_disabled">Exclure les caches désactivées</string>
     <string name="cache_filter_status_exclude_archived">Exclure les caches archivées</string>
+    <string name="cache_filter_log_entry_foundby">Trouvée par</string>
+    <string name="cache_filter_log_entry_logtext">Texte du journal</string>
+    <string name="cache_filter_stored_since_notstored">Non enregistrée</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 heure</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 heures</item>
+        <item>24 heures</item>
+        <item>7 jours</item>
+        <item>30 jours</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7j</item>
+        <item>30j</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">la nuit des temps</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Versions</string>
@@ -652,6 +708,7 @@
     <string name="init_brouterProfileBike">Profil \"Vélo\"</string>
     <string name="init_brouterProfileCar">Profil \"Voiture\"</string>
     <string name="brouter_recalculating">Recalcul de l\'itinéraire en arrière-plan…</string>
+    <string name="brouter_missing_data">Ouvrir BRouter pour télécharger les données de routage manquantes (%s)</string>
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_bigSmileysOnMap">Gros icônes pour les caches trouvées</string>
@@ -746,6 +803,7 @@
     <string name="init_local_file_system">Système de fichiers local</string>
     <string name="init_base_directory_description">Dossier de base pour les données locales publiques</string>
     <string name="init_map_directory_description">Dossier des cartes hors ligne</string>
+    <string name="init_brouter_directory_description">Dossier avec données de routage BRouter</string>
     <string name="init_updateinterval_title">Intervalle de mise à jour</string>
     <string name="init_updateinterval_description">Vous rappelle tous les x jours de vérifier les mises à jour</string>
     <string name="init_gpx_importexportdir">Dossier GPX</string>
@@ -986,6 +1044,7 @@
     </plurals>
     <string name="last_day_available">dernier jour de disponibilité</string>
     <string name="cache_offline_refresh">Actualiser</string>
+    <string name="cache_offline_drop">Supprimer de la liste</string>
     <string name="cache_delete_userdefined_waypoints">Supprimer les points de passage définis par l\'utilisateur</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Supprimer tous les points de passage définis par l\'utilisateur de cette cache ?\n\nLes points de passage seront immédiatement supprimés, cette action est irréversible.</string>
     <string name="cache_delete_userdefined_waypoints_note">Note : vous avez activé \"extraction des points de passage depuis la note\". Si votre note personnelle contient des coordonnées reconnues par c:geo, les points de passage seront recréés automatiquement. Vous pouvez désactiver ce fonctionnement dans la fenêtre d\'édition de la note personnelle.</string>
@@ -1166,6 +1225,7 @@
     <string name="cache_distance">Distance</string>
     <string name="cache_difficulty">Difficulté</string>
     <string name="cache_terrain">Terrain</string>
+    <string name="cache_difficulty_terrain">Difficulté / Terrain</string>
     <string name="cache_rating">Évaluation</string>
     <string name="cache_own_rating">Votre évaluation</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1300,6 +1360,7 @@
     <string name="map_showc_own">Mes caches</string>
     <string name="map_showc_found">Trouvées</string>
     <string name="map_showc_disabled">Désactivées</string>
+    <string name="map_showc_archived">Archivées</string>
     <string name="map_showc_offlinelog">Visitées hors ligne</string>
     <string name="map_showwp_original">Originales</string>
     <string name="map_showwp_parking">Stationnement</string>
@@ -1328,6 +1389,7 @@
     <string name="quick_settings_info">Certains paramètres de la carte (paramètres de carte, masquage, guidage) ont été déplacés dans la nouvelle fenêtre surgissante \"Réglages rapides\".\nVous pouvez ouvrir cette fenêtre en utilisant l\'icône centrée au bas de la carte.</string>
     <string name="map_show_caches_title">Afficher les caches :</string>
     <string name="map_show_waypoints_title">Afficher les points de passage :</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filtre de cache trop complexe</string>
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
     <!-- search -->
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
@@ -1346,6 +1408,8 @@
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_filter">Filtrer</string>
     <string name="search_filter_button">Rechercher à l\'aide de filtres</string>
+    <string name="search_filter_temporary_user_information_title">Nouveau système de filtrage</string>
+    <string name="search_filter_temporary_user_information">c:geo a introduit un nouveau système de filtrage qui supporte les filtres flexibles, combinables et stockables. \n\nLe filtre global peut désormais être modifié directement dans les listes de caches et la carte live.</string>
     <string name="search_tb">Objet voyageur</string>
     <string name="search_tb_hint">Code de l\'objet voyageur</string>
     <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
@@ -1932,7 +1996,9 @@
     <string name="localfile_cannot_handle">Erreur lors de la lecture du fichier ou c:geo ne peut pas gérer ce type de fichier.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Recevoir le fichier</string>
+    <string name="receivedownload_success">Fichier enregistré avec succès en tant que \"%s\"</string>
     <string name="receivedownload_error">Erreur pendant la réception du fichier</string>
+    <string name="receivedownload_error_filenotfound_exception">Fichier introuvable lors de la réception de ce fichier.</string>
     <string name="receivedownload_amount_copied">%s a été copié</string>
     <string name="receivedownload_cancelled">Transfert de fichiers annulé</string>
     <!-- Download map preference and menu entry -->
@@ -1958,6 +2024,9 @@
     <string name="downloadmap_download">télécharger</string>
     <string name="downloadmap_retrieving_directory_data">Récupération des données du dossier …</string>
     <string name="downloadmap_checking_for_updates">Vérification des mises à jour…</string>
+    <string name="downloadtile_title">Données de routage manquantes</string>
+    <string name="downloadtile_info">c:geo ne peut pas calculer la route demandée car il y a un fichier de données de routage manquant. Voulez-vous télécharger les données de routage manquantes ?</string>
+    <string name="tileupdate_info">Voulez-vous vérifier les mises à jour des fichiers de données de routage téléchargés ?</string>
     <string name="mapupdate_info">Voulez-vous vérifier les mises à jour des fichiers de carte et de thème ?</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
     <string name="updates_check">Vérification des mises à jour</string>
@@ -1995,6 +2064,9 @@
     <string name="wizard_permissions_intro">c:geo a besoin de certaines autorisations sur votre appareil pour fonctionner correctement.\nJe vous donnerai plus de détails lors des prochaines étapes.</string>
     <string name="wizard_permissions_folder_title">Paramétrer le dossier : %s</string>
     <string name="wizard_basefolder_request_explanation">c:geo a besoin d\'un dossier local pour stocker des données comme des fichiers GPX, des sauvegardes, des notes de terrain et des fichiers journaux. Par défaut, ces fichiers sont stockés dans des sous-dossiers d\'un \"dossier de base\". Sélectionnez ou créez un tel dossier à l\'étape suivante.\n\nSi vous avez mis à jour c:geo à partir d\'une version précédente, sélectionnez le dossier existant \"cgeo\" à la racine du stockage de votre appareil.\nAstuce : Vous devrez peut-être d\'abord afficher le stockage interne de votre appareil dans le sélecteur de fichier qui va s\'afficher tout de suite.</string>
+    <string name="wizard_mapfolder_request_explanation">c:geo a besoin d\'un dossier local pour stocker des fichiers de carte hors ligne.</string>
+    <string name="wizard_mapthemesfolder_request_explanation">c:geo a besoin d\'un dossier local pour stocker les fichiers de thème pour les cartes hors ligne.</string>
+    <string name="wizard_select_or_create">Sélectionnez ou créez un tel dossier à l\'étape suivante.</string>
     <string name="wizard_platforms_title">Paramétrer les services</string>
     <string name="wizard_platforms_intro">Pour trouver des géocaches avec c:geo, vous avez besoin d\'un compte pour un service de géocaching supporté par c:geo.\nSélectionnez le service souhaité ci-dessous pour vous connecter avec votre compte existant ou créer un nouveau compte.</string>
     <string name="wizard_platforms_gc">geocaching.com</string>
@@ -2023,4 +2095,5 @@
     <string name="finish">Terminer</string>
     <string name="back">Retour</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Tout sélectionner</string>
 </resources>
