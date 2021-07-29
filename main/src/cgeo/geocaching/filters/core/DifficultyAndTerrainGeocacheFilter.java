@@ -8,11 +8,17 @@ import androidx.annotation.NonNull;
 
 public class DifficultyAndTerrainGeocacheFilter extends BaseGeocacheFilter {
 
-    public DifficultyGeocacheFilter difficultyGeocacheFilter = new DifficultyGeocacheFilter();
-    public TerrainGeocacheFilter terrainGeocacheFilter = new TerrainGeocacheFilter();
+    public DifficultyGeocacheFilter difficultyGeocacheFilter;
+    public TerrainGeocacheFilter terrainGeocacheFilter;
 
     private static final String CONFIG_DIFFICULTY = "difficulty";
     private static final String CONFIG_TERRAIN = "terrain";
+
+
+    public DifficultyAndTerrainGeocacheFilter() {
+        difficultyGeocacheFilter = GeocacheFilterType.DIFFICULTY.create();
+        terrainGeocacheFilter = GeocacheFilterType.TERRAIN.create();
+    }
 
     @Override
     public Boolean filter(final Geocache cache) {
