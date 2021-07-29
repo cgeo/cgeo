@@ -71,9 +71,7 @@ final class LCApi {
             return null;
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
-        final String at = getAlcAccessToken();
-        Log.d("token " + at);
-        headers.add("authorization", "bearer " + at);
+        headers.add("authorization", "bearer " + getAlcAccessToken());
         try {
             final Response response = apiRequest(ALC_ADVENTURES_URI + geocode.substring(2), null, headers).blockingGet();
             return importCacheFromDetail(response);
@@ -230,7 +228,7 @@ final class LCApi {
             cache.setType(CacheType.ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
-            cache.setFound(response.get("IsComplete").asBoolean());    //as soon as we're using active mode
+            cache.setFound(response.get("IsComplete").asBoolean());    // active mode only
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException ex) {
@@ -258,7 +256,7 @@ final class LCApi {
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
             cache.setType(CacheType.ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
-            cache.setFound(response.get("IsComplete").asBoolean());    //as soon as we're using active mode
+            cache.setFound(response.get("IsComplete").asBoolean()); // active mode only
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
