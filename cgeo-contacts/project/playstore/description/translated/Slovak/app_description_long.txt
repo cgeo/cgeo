@@ -1,4 +1,4 @@
-This is a contacts plugin for c:geo, an open source geocaching app. It will only work with the c:geo app installed and allows direct access to your phonebook when clicking on a username in c:geo.
+Toto je doplnok na kontakty pre c:geo, čo je geocachingová aplikácia s otvoreným zdrojovým kódom. Funguje len s nainštalovanou aplikáciou c:geo a umožňuje priamy prístup k telefónnemu zoznamu po kliknutí na meno používateľa v aplikácii c:geo.
 
 Využitie:
 Keď kliknete na meno používateľa v c:geo (napr. v logbooku kešky), ponuka obsahuje položku na otvorenie príslušnej vizitky kontaktu v zozname kontaktov v telefóne. Vďaka tomu je možné priamo zavolať alebo poslať správu používateľovi.
