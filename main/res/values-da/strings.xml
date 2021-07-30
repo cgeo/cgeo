@@ -31,8 +31,31 @@
     <string name="gps">GPS adventures-udstilling</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Locationless (Reverse) Cache</string>
+    <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Brugerdefineret cache</string>
     <string name="unknown">Ukendt Type</string>
+    <string name="all_types_short">Alle</string>
+    <string name="traditional_short">Traditionel</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mystery</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Event</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earthcache</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtuel</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Jubilæum</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="block_short">GCHQ blokken</string>
+    <string name="locationless_short">Locationless</string>
+    <string name="advlab_short">Adv Lab</string>
+    <string name="userdefined_short">Brugerdefineret</string>
+    <string name="unknown_short">Ukendt</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
     <string name="cache_size_small">Lille</string>
@@ -152,6 +175,7 @@
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
+    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaleret/Komprimeret:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
@@ -163,6 +187,7 @@
     <string name="err_captcha">Captcha påkrævet. Se venligst vores <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for vejledning.</string>
     <string name="err_server">Kan ikke forbinde til Geocaching.com (server eller forbindelsesfejl?)</string>
     <string name="err_server_ec">Kan ikke forbinde til Extremecaching.com. Hjemmesiden kan være nede eller du har ikke forbindelse til Internettet.</string>
+    <string name="err_server_lc">Kan ikke forbinde til labs.geocaching.com (server- eller forbindelsesfejl?).</string>
     <string name="err_server_su">Kan ikke forbinde til Geocaching.su. Serveren kan være nede eller din enhed mangler forbindelse til Internettet.</string>
     <string name="err_server_gk">Kan ikke oprette forbindelse til GeoKrety.org. Hjemmesiden kan være nede eller internetforbindelsen fungerer ikke.</string>
     <string name="err_login">Loginoplysninger mangler</string>
@@ -203,6 +228,7 @@
     <string name="err_tb_display">c:geo kan ikke vise den forespurgte Trackable. Er det virkelig en Trackable?</string>
     <string name="err_tb_details_open">c:geo kan ikke åbne Trackable-detaljer.</string>
     <string name="err_tb_not_loggable">Denne trackable kan ikke logges.</string>
+    <string name="err_tb_not_found">c:geo kan ikke finde trackable %s.</string>
     <string name="err_tb_find_that">c:geo kan ikke finde den forespurgte Trackable.</string>
     <string name="err_waypoint_cache_unknown">c:geo ved ikke hvilken cache, du ønsker at tilføje et rutepunkt til.</string>
     <string name="err_waypoint_add_failed">c: geo kunne ikke tilføje waypoint.</string>
@@ -259,6 +285,7 @@
     <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
     <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
+    <string name="confirm_discard_changes">Vil du kassere ændringer, som ikke er gemt?</string>
     <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
     <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
@@ -284,6 +311,7 @@
     <string name="menu_helpers">Hjælpeprogrammer</string>
     <string name="menu_settings">Indstillinger</string>
     <string name="menu_backup">Backup/gendannelse</string>
+    <string name="menu_update">Opdatér</string>
     <string name="menu_history">Historik</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skan geokode</string>
@@ -335,6 +363,8 @@
     <string name="caches_select_mode_exit">Afslut markering</string>
     <string name="caches_select_invert">Omvend markering</string>
     <string name="caches_nearby">I nærheden</string>
+    <string name="caches_remove_all">Fjern alle fra listen</string>
+    <string name="caches_remove_selected">Fjern valgte fra listen</string>
     <string name="caches_remove_all_completely">Slet alle fra enheden</string>
     <string name="caches_remove_selected_completely">Slet valgte fra enheden</string>
     <string name="caches_delete_events">Slet tidligere arrangementer</string>
@@ -374,6 +404,8 @@
     <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
+    <string name="caches_set_cache_icon">Indstil cache-ikoner</string>
+    <string name="caches_reset_cache_icons_title">Nulstil cache-ikoner</string>
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
     <string name="caches_set_listmarker">Sæt listemarkering</string>
     <string name="select_icon">Vælg ikon</string>
@@ -399,9 +431,75 @@
     <string name="list_dialog_rename">Omdøb</string>
     <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Avanceret</string>
+    <string name="cache_filter_name">Cachenavn</string>
+    <string name="cache_filter_type">Cachetype</string>
+    <string name="cache_filter_size">Størrelse</string>
+    <string name="cache_filter_personalnote">Personlig note</string>
+    <string name="cache_filter_description">Cachebeskrivelse</string>
+    <string name="cache_filter_offlinelog">Offline Log</string>
+    <string name="cache_filter_owner">Cacheejer</string>
+    <string name="cache_filter_difficulty">Sværhedsgrad</string>
+    <string name="cache_filter_terrain">Terræn</string>
+    <string name="cache_filter_rating">Vurdering</string>
+    <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_attributes">Cacheattributter</string>
+    <string name="cache_filter_favorites">Favoritter</string>
+    <string name="cache_filter_distance">Afstand</string>
+    <string name="cache_filter_hidden">Udlagt dato</string>
+    <string name="cache_filter_logs_count">Antal logninger</string>
+    <string name="cache_filter_last_found">Sidst Fundet Dato</string>
+    <string name="cache_filter_log_entry">Logtekst</string>
+    <string name="cache_filter_location">Placering</string>
+    <string name="cache_filter_stored_lists">Gemte Lister</string>
+    <string name="cache_filter_origin">Oprindelse</string>
+    <string name="cache_filtergroup_basic">Basal</string>
+    <string name="cache_filtergroup_details">Detaljer</string>
+    <string name="cache_filtergroup_userspecific">Brugerspecifik</string>
+    <string name="cache_filter_include">Medtag</string>
+    <string name="cache_filter_exclude">Udelad</string>
+    <string name="cache_filter_userdisplay_complex">Kompleks</string>
+    <string name="cache_filter_userdisplay_none">Ingen</string>
+    <string name="cache_filter_userdisplay_not">IKKE</string>
+    <string name="cache_filter_storage_delete_button">Slet</string>
+    <string name="cache_filter_storage_load_delete_title">Indlæs eller slet et eksisterende filter</string>
+    <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filtre er gemt endnu.</string>
+    <string name="cache_filter_storage_save_title">Gem filter med navn</string>
+    <string name="cache_filter_storage_save_confirm_title">Gem filter, overskriv</string>
+    <string name="cache_filter_stringfilter_type_contains">Indeholder</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Begynder med</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Slutter med</string>
+    <string name="cache_filter_stringfilter_type_pattern">Mønster</string>
+    <string name="cache_filter_datefilter_label_from">Fra:</string>
+    <string name="cache_filter_datefilter_label_to">Til:</string>
+    <string name="cache_filter_status_active">Aktiv</string>
+    <string name="cache_filter_status_disabled">Deaktiveret</string>
+    <string name="cache_filter_status_archived">Lukket</string>
+    <string name="cache_filter_status_exclude_active">Udelad aktive</string>
+    <string name="cache_filter_log_entry_foundby">Fundet af</string>
+    <string name="cache_filter_log_entry_logtext">Logtekst</string>
+    <string name="cache_filter_stored_since_notstored">Ikke gemt</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 timer</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0t</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 timer</item>
+        <item>24 timer</item>
+        <item>7 dage</item>
+        <item>30 dage</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8t</item>
+        <item>24t</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">arilds tid</string>
+    <string name="cache_filter_stored_since_stored_max_short">max</string>
     <!-- about -->
     <string name="about_version">Version</string>
     <string name="about_changelog">Ændringslog</string>
+    <string name="about_changelog_next_release">Næste udgivelse</string>
     <string name="about_system">System</string>
     <string name="about_donate">Støt os</string>
     <string name="about_donation_more">Besøg hjemmesiden for information</string>
@@ -409,6 +507,7 @@
     <string name="about_license">Licens</string>
     <string name="about_apache_license"><a href="">Apache License, Version 2.0</a></string>
     <string name="about_help">Hjælp</string>
+    <string name="about_system_collecting">Systemoplysninger er indsamlet, vent venligst…</string>
     <string name="about_system_include">Vedhæft følgende systemoplysninger når du sender en fejlrapport eller beder om yderligere oplysninger om c:geo:</string>
     <string name="about_system_info_send_button">Send via mail…</string>
     <string name="about_system_info">c:geo systeminformation</string>
@@ -419,11 +518,13 @@
     <string name="about_system_write_logcat_type_extended">Udvidet</string>
     <string name="about_system_write_logcat_success">Logfil \"%1$s\" skrevet til mappen \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Fejl ved skrivning af logfil</string>
+    <string name="about_system_write_infos_downloadmanager">Se downloads</string>
     <string name="changelog_github">Liste over alle ændringer</string>
     <string name="about_nutshellmanual">Online manual</string>
     <string name="about_contributors_carnerodetails">som c:geo\'s fader</string>
     <string name="about_contributors_recent">Seneste bidragsydere</string>
     <string name="about_contributors_specialthanks">Særlig tak til</string>
+    <string name="about_contributors_specialthanksdetails">· alle vores oversættere på [Crowdin.net](https://crowdin.net/project/cgeo)!\n· alle fejlfindere\n· og alle andre bidragsydere.\n</string>
     <string name="about_contributors_other">Andre bidragsydere</string>
     <string name="about_components">Komponenter</string>
     <string name="contribution_code">kode</string>
@@ -434,6 +535,7 @@
     <string name="contribution_graphics">grafik</string>
     <string name="debug_user_error_report_title">Rapportér et problem</string>
     <string name="debug_user_error_errortext">Der er opstået et uventet problem, som vi vil bede dig om at rapportere til os:</string>
+    <string name="debug_user_error_explain_options">Hjælp os med at løse fejl i c:geo ved at indberette dem. Send en e-mail med system-informationer og logfilen fra c:geo.\nSkriv også en detaljeret fejlbeskrivelse i mailen.\n\nFør du indberetter en fejl beder vi dig om at checke vores FAQ og/eller vores profil på de sociale medier.\nAndre kontakt-måder findes under \'Om c:geo\'</string>
     <!-- settings -->
     <string name="settings_title_open_settings">Åbn indstillinger?</string>
     <string name="settings_title_services">Tjenester</string>
@@ -460,6 +562,8 @@
     <string name="confirm_data_dir_move_title">Flyt geocache-datamappe?</string>
     <string name="confirm_data_dir_move">Flytning af geocache-datamappen kan tage meget lang tid afhængig af din enhed og mængden af data.</string>
     <string name="settings_title_basicmembers">Valgmuligheder for Basismedlemmer</string>
+    <string name="settings_title_navigation">Rute / Navigation</string>
+    <string name="settings_summary_navigation">Konfigurér offline routning, vælg foretrukne navigationsmetoder og vælg eksterne navigationsapps.</string>
     <string name="settings_title_system">System</string>
     <string name="settings_summary_system">Systemspecifikke indstillinger og fejlfindingsindstillinger.</string>
     <string name="settings_title_navigation_menu">Navigationsmenu</string>
@@ -548,6 +652,9 @@
     <string name="init_zoomincludingwaypoints_description">Når kortet viser én cache: Skal kortudsnittet justeres så alle rutepunkter er synlige?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
     <string name="init_brouterShowBothDistances">Vis afstand i lige linje</string>
+    <string name="init_brouterProfileWalk">\"Gang\" profil</string>
+    <string name="init_brouterProfileBike">\"Cykel\" profil</string>
+    <string name="init_brouterProfileCar">\"Bil\" profil</string>
     <string name="brouter_recalculating">Genberegner ruten i baggrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Hvis navigation er aktiv, vises afstand i lige linje sammen men beregnet rutelængde.</string>
     <string name="init_bigSmileysOnMap">Vis smileys for loggede cacher</string>
@@ -596,6 +703,7 @@
     <string name="init_user_confirmation">Jeg ved, hvad jeg gør</string>
     <string name="init_backup_success">Database blev kopieret til:</string>
     <string name="init_backup_failed">Backup af database fejlede.</string>
+    <string name="init_backup_unnecessary">Database er tom, backup er derfor ikke nødvendig. Opret en backup alligevel?</string>
     <string name="init_backup_folder_exists_error">Kunne ikke oprette en ny mappe til sikkerhedskopier. Har du allerede lavet en sikkerhedskopi inden for det sidste minut?</string>
     <string name="init_backup_no_backup_available">Ingen backupfil tilgængelig.</string>
     <string name="backup_confirm_overwrite">Dette vil slette din ældste sikkerhedskopi fra %s. \nVil du fortsætte?</string>
@@ -627,6 +735,7 @@
     <string name="settings_info_offline_maps_title">Oplysninger om offline kort</string>
     <string name="settings_info_themes_title">Oplysninger om korttemaer</string>
     <string name="init_mapsource_select">Vælg kortkilde</string>
+    <string name="init_gpx_importexportdir">GPX mappe</string>
     <string name="init_dataDir_note">Du kan vælge at gemme yderligere data for geocacher (spoilere, logbilleder osv.) i din eksterne hukommelse (emuleret eller ægte SD-kort, afhængig af din enhed).</string>
     <string name="init_maptrail">Vis spor</string>
     <string name="init_maptrail_length">Spor max. længde</string>
@@ -895,6 +1004,7 @@
     <string name="cache_menu_map_ext">Andre eksterne apps</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Åbn i browser</string>
+    <string name="no_browser_found">Ingen browser fundet</string>
     <string name="cache_menu_open_with">Åbn med…</string>
     <string name="cache_menu_visit">Log besøg</string>
     <string name="cache_log_too_long">c:geo kunne ikke indsende din log da den er for lang. Men tak for at du forsøgte at skrive sådan en omfattende log ;-)</string>
@@ -1077,6 +1187,7 @@
     <string name="map_view_map">Kort-view</string>
     <string name="map_rotation">Kortrotation</string>
     <string name="map_dot_mode">Brug små ikoner</string>
+    <string name="onetime_mapthemefixslow_title">Fix langsom gengivelse af korttema</string>
     <string name="init_hidewp">Skjul rutepunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale rutepunkter på kortet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsrutepunkter på kortet</string>
