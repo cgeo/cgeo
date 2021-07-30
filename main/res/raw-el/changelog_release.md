@@ -1,28 +1,28 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Προηγμένο σύστημα φιλτραρίσματος
+- Παρουσιάζοντας ένα νέο σύστημα φιλτραρίσματος στο c:geo, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα
+- Διαθέσιμο τόσο στις λίστες κρυπτών όσο και στην προβολή χάρτη
+- Νέα λειτουργία "Αναζήτηση με φίλτρο"
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+### Χάρτης
+- Νέο: Κατά τη δημιουργία μιας κρύπτης που καθορίζεται από το χρήστη κατά την εμφάνιση ενός χάρτη από μια λίστα: Επιλογή χρήστη για την αποθήκευση νέας κρύπτης στην τρέχουσα λίστα (αντί της προεπιλεγμένης λίστας για τις κρύπτες που ορίζονται από το χρήστη)
+- Νέο: Διαχωρισμός "δικές μου" και "βρέθηκαν" στις γρήγορες ρυθμίσεις χάρτη
+- Αλλαγή: Επιπλέον εμφάνιση ονόματος κρύπτης στις poup λεπτομέρειες
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Λεπτομέρειες κρύπτης
+- Νέο: Κάντε χρήση του google translate σε εντός της εφαρμογής αναδυόμενο μεταφραστή
+- Νέο: Να επιτρέπεται η αλλαγή του αντιστοιχισμένου εικονιδίου στις λεπτομέρειες της κρύπτης σε αναδυόμενο με μακρύ κλικ παράθυρο (αποθηκευμένες κρύπτες μόνο)
 
-### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### Μεραφορτωτής
+- Αλλαγή: Οι λήψεις θα γινονται πλέον στο παρασκήνιο, θα εμφανίζεται μια ειδοποίηση
+- Αλλαγή: Τα αρχεία που κατέβηκαν με επιτυχία θα αντικαταστήσουν αυτόματα τα υπάρχοντα αρχεία με το ίδιο όνομα
+- Αλλαγή: Εάν ένας χάρτης απαιτεί ένα συγκεκριμένο θέμα που δεν έχει εγκατασταθεί ακόμα, το c:geo θα το κατεβάσει και θα το εγκαταστήσει αυτόματα
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
+### Άλλο
+- Αλλαγή: Έχουμε επεξεργαστεί εντελώς τις εσωτερικές τεχνικές πτυχές c:geo theming για να είναι σε θέση να κάνουν χρήση ορισμένων πιο σύγχρονων λειτουργιών που παρέχονται από το Android. Αυτό θα έχει μερικές παρενέργειες, μερικές από τις οποίες δεν έίναι σκόπιμες. Παρακαλούμε αναφέρετε τυχόν σφάλματα ή δυσλειτουργίες είτε στη σελίδα μας [GitHub](https://www.github.com/cgeo/cgeo/issues) ή επικοινωνώντας με την υποστήριξη.
+- Νέο: Υποστήριξη λειτουργίας μέρας / νυκτός από το σύστημα (προαιρετικά)
+- Νέο: Κατεβάστε τις λίστες σελιδοδεικτών από την geocaching.com - δείτε "Λίστες / pocket queries" στο κύριο μενού
+- Νέο: Αγνοήστε την δυνατότητα για geocaching.su
+- Αλλαγή: Αφαιρέθηκε η χωρίς πλέον υποστήριξη εφαρμογή πλοήγησης RMAPS
 - Διόρθωση: Εξαγωγή σημείου αναφοράς με το ίδιο όνομα, αλλά διαφορετικές συντεταγμένες από προσωπική σημείωση
 - Διόρθωση: Σφάλμα στην εξαγωγή σημείωσης χρήστη για το σημείο αναφοράς με μαθ. τύπο
 - Fix: Εξαγωγή τύπου σε PN αντί για συντεταγμένες για τον ολοκληρωμένο τύπο

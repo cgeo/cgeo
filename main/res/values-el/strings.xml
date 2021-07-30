@@ -487,6 +487,10 @@
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
     <string name="cache_filter_userdisplay_none">Κανένα</string>
     <string name="cache_filter_userdisplay_not">NOT</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d αντικείμενο</item>
+        <item quantity="other">%1$d αντικείμενα</item>
+    </plurals>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
@@ -528,6 +532,10 @@
     <string name="cache_filter_status_select_label_has_own_vote">Εχει ψηφιστεί</string>
     <string name="cache_filter_status_select_label_has_offline_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Αυτή η ρύθμιση φίλτρου θα επηρεάσει μόνο κρυπτες γριφου.\n\n Ένας γρίφος θεωρείται «λυμένος» αν έχει αλλάγμενες συντεταγμένες ή ένα έγκυρο τελικό σημείο με συμπληρωμένο συντεταγμένες.</string>
+    <string name="cache_filter_status_active">Ενεργή</string>
+    <string name="cache_filter_status_disabled">Απενεργοποιημένη</string>
+    <string name="cache_filter_status_archived">Αρχειοθετημένη</string>
     <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
@@ -550,6 +558,7 @@
         <item>30μ</item>
     </string-array>
     <string name="cache_filter_stored_since_stored_max">την αυγή του χρόνου</string>
+    <string name="cache_filter_stored_since_stored_max_short">μέγιστο</string>
     <!-- about -->
     <string name="about_version">Έκδοση</string>
     <string name="about_changelog">Τι νέο υπάρχει;</string>
@@ -586,6 +595,7 @@
     <string name="contribution_tester">υπεύθυνος δοκιμών</string>
     <string name="contribution_support">υποστήριξη</string>
     <string name="contribution_documentation">τεκμηρίωση</string>
+    <string name="contribution_infrastructure">υποδομή</string>
     <string name="contribution_projectleader">επικεφαλής έργου ανοικτού κώδικα</string>
     <string name="contribution_graphics">γραφικά</string>
     <string name="debug_user_error_report_title">Αναφορά προβλήματος</string>
@@ -1431,6 +1441,8 @@
     <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
+    <string name="search_filter_temporary_user_information_title">Πλαίσιο νέου φίλτρου</string>
+    <string name="search_filter_temporary_user_information">Το c:geo εισήγαγε ένα νέο σύστημα φιλτραρίσματος, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα. \n\nΤο καθολικό φίλτρο μπορεί από τώρα και στο εξής να αλλάξει απευθείας στις λίστες κρυπτών και στον ζωντανό χάρτη.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
@@ -2125,4 +2137,5 @@
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="back">Πίσω</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
 </resources>
