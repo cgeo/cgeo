@@ -493,6 +493,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carregar</string>
     <string name="cache_filter_storage_delete_button">Eliminar</string>
+    <string name="cache_filter_storage_clear_button">Limpar</string>
     <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
     <string name="cache_filter_storage_select_clear_title">Seleccionar filtro ou limpar o filtro actual</string>

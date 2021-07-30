@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>
+    <string name="caches_askdeletion">Om verwijdering vragen indien leeg</string>
     <string name="select_icon">Pictogram selecteren</string>
     <string name="onetime_missing_unicode_info">Je Android versie ondersteunt geen automatische detectie van ondersteunde pictogrammen - sommige tekens kunnen ontbreken</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Verwijder lijst</string>
     <string name="list_dialog_remove_description">Wil je de huidige lijst van caches verwijderen? Alle overgebleven caches zullen worden verplaatst naar \"Opgeslagen\".</string>
     <string name="list_dialog_remove_nowempty">Lijst is leeg. Wil je de huidige lijst verwijderen?</string>
+    <string name="list_dialog_do_not_ask_me_again">Niet nogmaals vragen voor deze lijst</string>
     <string name="list_dialog_remove">Verwijder</string>
     <string name="list_dialog_rename_title">Hernoem lijst</string>
     <string name="list_dialog_rename">Hernoem</string>
@@ -460,6 +462,8 @@
     <string name="cache_filter_owner">Cache eigenaar</string>
     <string name="cache_filter_difficulty">Moeilijkheid</string>
     <string name="cache_filter_terrain">Terrein</string>
+    <string name="cache_filter_difficulty_terrain">Moeilijkheidsgraad / Terrein</string>
+    <string name="cache_filter_rating">Waardering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache attributen</string>
     <string name="cache_filter_favorites">Favorieten</string>
@@ -489,7 +493,10 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Verwijderen</string>
+    <string name="cache_filter_storage_clear_button">Wissen</string>
     <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
+    <string name="cache_filter_storage_select_title">Filter selecteren</string>
+    <string name="cache_filter_storage_select_clear_title">Selecteer filter of wis huidige filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
     <string name="cache_filter_storage_save_confirm_title">Opgeslagen filter overschrijven</string>
@@ -1244,6 +1251,7 @@
     <string name="cache_distance">Afstand</string>
     <string name="cache_difficulty">Moeilijkheid</string>
     <string name="cache_terrain">Terrein</string>
+    <string name="cache_difficulty_terrain">Moeilijkheidsgraad / Terrein</string>
     <string name="cache_rating">Waardering</string>
     <string name="cache_own_rating">Eigen waardering</string>
     <string name="cache_rating_of_new">%1$.1f van %2$d</string>

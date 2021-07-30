@@ -1,31 +1,31 @@
-### Advanced filtering system
-- Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
-- Available in both cache lists and map view
-- New "Search by filter" function
+### Sistema de filtratge avançat
+- Presentació d’un nou sistema de filtratge a C:geo, que admet filtres flexibles, combinables i emmagatzemables
+- Disponible tant a les llistes de catxés com a la vista de mapa
+- Nova funció "Cerca per filtre"
 
-### Map
-- New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
-- Change: Additionally show cache name in poup details
+### Mapa
+- Novetat: Al crear un catxé definit per l'usuari mentre es mostra un mapa d'una llista: oferim a l'usuari que emmagatzemi un catxé nou a la llista actual (en lloc de la llista predeterminada per a els catxés definits per l'usuari)
+- Novetat: separeu els filtres "propis" i "trobats" a la configuració ràpida del mapa
+- Canvi: mostra també el nom del catxé als detalls emergents
 
-### Cache details
-- New: Make use of google translate in-app translation popup
-- New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
+### Detalls del catxé
+- Novetat: Utilitzeu la finestra emergent de traducció de l'aplicació de Google Translate
+- Novetat: Permet canviar la icona assignada a la finestra emergent de detalls de catxé mitjançant un clic llarg (només als catxés emmagatzemats)
 
-### Downloader
-- Change: Downloads will now completely happen in background, a notification is shown
-- Change: Files downloaded successfully will automatically overwrite existing files having the same name
-- Change: If a map requires a certain theme which is not installed yet, c:geo will automatically download and install that theme as well
+### Descarregador
+- Canvi: Les descàrregues es faran completament en segon pla; es mostrarà una notificació
+- Canvi: Els fitxers descarregats correctament sobreescriuran automàticament els fitxers existents amb el mateix nom
+- Canvi: Si un mapa requereix un tema determinat que encara no està instal·lat, C:geo també descarregarà i instal·larà aquest tema automàticament
 
-### Other
-- Change: We've completely reworked the internal technical aspects c:geo theming to be able to make use of some more modern components provided by Android. This will have a couple of side-effects, some of them unintended. Please report any errors or glitches either on our [GitHub page](https://www.github.com/cgeo/cgeo/issues) or by contacting support.
-- New: Support day / night mode from system (optional)
-- New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
-- New: Ignore capability for geocaching.su
-- Change: Removed no longer maintained RMAPS navigation app
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
-- Fix: Theming error for downloader in light theme
+### Altres
+- Canvi: Hem reelaborat completament els aspectes tècnics interns de C:geo per poder fer ús d’alguns components més moderns proporcionats per Android. Això tindrà un parell d'efectes secundaris, alguns d'ells no desitjats. Informeu de qualsevol error a la nostra [ pàgina de GitHub ](https://www.github.com/cgeo/cgeo/issues) o contactant amb el servei d'assistència.
+- Novetat: Admet el mode dia / nit des del sistema (opcional)
+- Novetat: Descarregueu llistes de marcadors de geocaching.com; consulteu "Llistes / pocket queries" al menú principal
+- Novetat: Ignora la capacitat de geocaching.su
+- Canvi: S'ha suprimit l'aplicació de navegació RMAPS que ja no es mantenia
+- Solució: extreu el waypoint amb el mateix nom però diferents coordenades de la nota personal
+- Solució: Error en l'extracció de la nota d'usuari del waypoint amb fórmula
+- Solució: Exporteu la fórmula a PN en lloc de coordenades per a la fórmula completa
+- Solució: La carpeta de mapes fora de línia i temes és incorrecta després de tornar a instal·lar i restaurar la còpia de seguretat
+- Solució: El track/ruta no es pot actualitzar
+- Solució: Error temàtic per al descarregador en el tema lleuger

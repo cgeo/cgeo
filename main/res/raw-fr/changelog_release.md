@@ -23,9 +23,9 @@
 - New: Download bookmark lists from geocaching.com - see "Lists / pocket queries" in main menu
 - New: Ignore capability for geocaching.su
 - Change: Removed no longer maintained RMAPS navigation app
-- Fix: Extract waypoint with same name but different coordinates from personal note
+- Correction : Extraire un point de passage portant le même nom mais ayant des coordonnées différentes de la note personnelle
 - Fix: Bug in extracting user note for waypoint with formula
 - Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
-- Fix: Track/route cannot be updated
+- Correction : Le dossier de la carte hors-ligne et des thèmes est incorrect après réinstallation et restauration de la sauvegarde
+- Correction : La trace / l'itinéraire ne peut pas être mise à jour
 - Fix: Theming error for downloader in light theme

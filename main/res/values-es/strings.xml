@@ -33,6 +33,9 @@
     <string name="locationless">Caché sin ubicación (invertido)</string>
     <string name="userdefined">Caché definido por el usuario</string>
     <string name="unknown">De tipo desconocido</string>
+    <string name="all_types_short">Todos</string>
+    <string name="webcam_short">Cámara web</string>
+    <string name="virtual_short">Virtual</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Micro</string>
     <string name="cache_size_small">Pequeño</string>
@@ -249,6 +252,7 @@
     <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
     <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
     <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
+    <string name="confirm_discard_changes">¿Quieres descartar los cambios no guardados?</string>
     <string name="confirm_discard_wp_changes">¿Descartar los cambios en waypoints sin guardar?</string>
     <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
     <string name="warn_log_load_additional_data">c:geo no ha podido cargar datos adicionales (rastreables/puntos favoritos) para el registro.</string>
@@ -274,6 +278,9 @@
     <string name="menu_helpers">Programas útiles</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_backup">Copia de seguridad / Restauración</string>
+    <string name="menu_update">Actualizar</string>
+    <string name="menu_update_routingdata">Datos de ruta</string>
+    <string name="menu_update_mapdata">Datos del mapa</string>
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Escánear geocódigo</string>
@@ -291,6 +298,7 @@
     <string name="caches_more_caches_no">No hay más cachés</string>
     <string name="caches_more_caches_loading">Cargando cachés…</string>
     <string name="caches_more_caches_currently">actualmente</string>
+    <string name="caches_more_caches_next_x">Cargar siguientes %1$d cachés</string>
     <string name="caches_downloading">Descargando cachés…\nFaltan: </string>
     <string name="caches_eta_ltm">Menos de un minuto</string>
     <plurals name="caches_eta_mins">
@@ -325,6 +333,8 @@
     <string name="caches_select_mode_exit">Salir de modo selección</string>
     <string name="caches_select_invert">Invertir selección</string>
     <string name="caches_nearby">Cercanos</string>
+    <string name="caches_remove_all">Eliminar todo de la lista</string>
+    <string name="caches_remove_selected">Eliminar seleccionados de la lista</string>
     <string name="caches_delete_events">Borrar eventos pasados</string>
     <string name="caches_upload_modifiedcoords">Subir coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">¿Quieres subir las coordenadas modificadas para todos los cachés (seleccionados) y sobreescribir las coordenadas existentes en el servidor? Esto no se puede deshacer.</string>
@@ -385,9 +395,48 @@
     <string name="list_dialog_rename">Renombrar</string>
     <string name="list_not_available">La lista ya no está disponible, cambiando a la lista estándar</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_stringfilter_type_is_present">Está presente</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Comienza con</string>
+    <string name="cache_filter_status_select_no">No</string>
+    <string name="cache_filter_status_select_label_found">Encontrado</string>
+    <string name="cache_filter_status_select_label_owned">Propio</string>
+    <string name="cache_filter_status_select_label_stored">Guardados</string>
+    <string name="cache_filter_status_select_label_favorite">Propio Favorito</string>
+    <string name="cache_filter_status_select_label_watchlist">En lista de seguimiento</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Tiene rastreable</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Tiene voto propio</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Tiene registro sin conexión</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Misterio resuelto</string>
+    <string name="cache_filter_status_active">Activo</string>
+    <string name="cache_filter_status_disabled">Desactivado</string>
+    <string name="cache_filter_status_archived">Archivado</string>
+    <string name="cache_filter_status_exclude_active">Excluir activos</string>
+    <string name="cache_filter_status_exclude_disabled">Excluir desactivados</string>
+    <string name="cache_filter_status_exclude_archived">Excluir archivados</string>
+    <string name="cache_filter_stored_since_notstored">No guardado</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 horas</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 horas</item>
+        <item>24 horas</item>
+        <item>7 días</item>
+        <item>30 días</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">el amanecer de los tiempos</string>
+    <string name="cache_filter_stored_since_stored_max_short">máx</string>
     <!-- about -->
     <string name="about_version">Versión</string>
     <string name="about_changelog">Cambios</string>
+    <string name="about_changelog_nightly_build">Revisión Nocturna</string>
+    <string name="about_changelog_next_release">Siguiente versión</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Ayúdanos</string>
     <string name="about_donation_more">Visita el sitio web para información</string>
@@ -403,7 +452,9 @@
     <string name="about_system_write_logcat_type">¿Crear archivo de registro estándar o extendido?\n\nLos archivos de registro estándar estarán bien en la mayoría de los casos de uso.\nUsa archivos de registro extendidos sólo cuando te soliciten hacerlo.</string>
     <string name="about_system_write_logcat_type_standard">Estándar</string>
     <string name="about_system_write_logcat_type_extended">Extendido</string>
+    <string name="about_system_write_logcat_success">Archivo de registro \"%1$s\" escrito en la carpeta \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Error al escribir el archivo de registro</string>
+    <string name="about_system_write_infos_downloadmanager">Ver Descargas</string>
     <string name="changelog_github">Lista de todos los cambios</string>
     <string name="about_nutshellmanual">Manual en línea</string>
     <string name="about_contributors_carnerodetails">como padre de c:geo</string>
@@ -415,6 +466,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">soporte</string>
     <string name="contribution_documentation">documentación</string>
+    <string name="contribution_infrastructure">infraestructura</string>
     <string name="contribution_projectleader">líder del proyecto de código abierto</string>
     <string name="contribution_graphics">gráficos</string>
     <!-- settings -->
@@ -537,42 +589,78 @@
     <string name="init_listdisplay">Listas adicionales</string>
     <string name="init_livelist">Mostrar dirección</string>
     <!-- app theme -->
+    <string name="settings_theme_title">Tema</string>
+    <string-array name="settings_theme_entries">
+        <item>System Default</item>
+        <item>Claro</item>
+        <item>Oscuro</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Crear copia de seguridad</string>
     <string name="init_restore_title">Restaurar copia de seguridad</string>
+    <string name="init_backup_caches">cachés y waypoints</string>
     <string name="init_backup_program_settings">preferencias del programa</string>
     <string name="init_backup_logins">Incluir datos de la cuenta</string>
     <string name="init_backup">Hacer copia de seguridad de cachés /waypoints</string>
     <string name="init_backup_backup">Copia de seguridad</string>
+    <string name="init_backup_finished">Copia de seguridad finalizada</string>
+    <string name="init_backup_backup_failed">Falló la copia de seguridad</string>
+    <string name="init_backup_now">Iniciar copia de seguridad</string>
     <string name="init_backup_running">Creando copia de seguridad de la base de datos de cachés…</string>
     <string name="init_backup_restore">Restaurar</string>
+    <string name="init_restore_restored">Restauración completa</string>
+    <string name="init_backup_start_restore">Iniciar restauración</string>
+    <string name="init_backup_restore_different_backup">Restaurar una copia de seguridad diferente</string>
+    <string name="init_backup_restore_different_backup_explanation">Por favor, seleccione la carpeta que contiene la copia de seguridad que desea restaurar</string>
+    <string name="init_backup_backup_history">Historial de copias de seguridad</string>
+    <string name="init_backup_history_length_title">Número máximo de copias de seguridad</string>
+    <string name="init_backup_history_length_summary">Decide cuántas copias de seguridad deben ser asumidas. Cuando se alcanza el límite, las más antiguas se eliminarán automáticamente.</string>
+    <string name="init_backup_history_length_min">Solo recientes</string>
     <string name="init_backup_history_length_max">Mantener Todo</string>
+    <string name="init_backup_history_delete_warning">Ha guardado más copias de seguridad de las que permite el valor máximo configurado. ¿Realmente desea eliminar todas las copias de seguridad excedentes?</string>
     <string name="init_user_confirmation">Sé lo que estoy haciendo</string>
     <string name="init_backup_success">La base de datos de c:geo se ha copiado a:</string>
     <string name="init_backup_failed">Ha fallado la copia de seguridad.</string>
+    <string name="init_backup_folder_exists_error">No se puede crear una nueva carpeta de copia de seguridad. ¿Ya ha realizado una copia de seguridad en el último minuto?</string>
     <string name="init_backup_no_backup_available">No hay ningún archivo de copia de seguridad disponible.</string>
+    <string name="backup_confirm_overwrite">Esto eliminará su carpeta más antigua de copia de seguridad existente de %s. \n¿Desea continuar?</string>
+    <string name="restore_confirm_overwrite_database">ADVERTENCIA: ¡Esto sobrescribirá %s en tu dispositivo!</string>
+    <string name="restore_confirm_overwrite_database_and_settings">ADVERTENCIA: ¡Esto sobrescribirá %s y tu configuración actual en tu dispositivo!</string>
+    <string name="restore_confirm_overwrite_settings">ADVERTENCIA: ¡Esto sobrescribirá su configuración actual en su dispositivo!</string>
+    <string name="restore_information">Selecciona los elementos que quieres restaurar:</string>
     <string name="init_restore_success">Restauración completa.</string>
     <string name="init_restore_failed_dbrecreated">Restauración fallida: Copia de seguridad corrupta, base de datos tenía que ser recreada.</string>
+    <string name="init_restore_db_failed">La restauración de la base de datos ha fallado.</string>
+    <string name="init_restore_settings_failed">La restauración de la configuración del programa ha fallado.</string>
     <string name="init_restore_running">Restaurando la base de datos de cachés…</string>
     <string name="init_restore_confirm">La base de datos está vacia. ¿Desea restaurar la copia de seguridad de la base de datos?</string>
     <string name="init_backup_last">Copia guardada el</string>
     <string name="init_backup_unavailable">no disponible</string>
     <string name="init_backup_last_no">No hay ninguna copia de seguridad.</string>
+    <string name="init_restore_version_error">Formato inesperado - no se puede restaurar la base de datos.\n\nLa versión esperada es %1$d,\nla copia de seguridad tiene la versión %2$d</string>
     <string name="settings_title_backup">Copia de seguridad / Restauración</string>
     <string name="settings_summary_backup">Realizar copia de seguridad y restauración de los datos de caché/waypoint y de los ajustes del programa.</string>
+    <string name="init_backup_settings_logins">Guarda datos de la cuenta</string>
     <string name="init_backup_settings_backup_full_confirm">¿Desea almacenar datos sensibles relacionados con la cuenta? Estos pueden ser leídos por otras aplicaciones.</string>
     <string name="settings_savingerror">Error al guardar los ajustes</string>
     <string name="settings_saved">Configuración guardada correctamente en:</string>
+    <string name="backup_saved">Copia de seguridad guardada correctamente en:</string>
     <string name="init_backup_settings_restore">Restablecer ajustes</string>
     <string name="settings_readingerror">Error leyendo los ajustes</string>
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
     <string name="init_mapsource_select">Elegir proveedor de mapas</string>
+    <string name="init_updateinterval_title">Intervalo de actualización</string>
+    <string name="init_gpx_importexportdir">Carpeta GPX</string>
+    <string name="init_dataDir">Seleccionar carpeta de datos</string>
     <string name="init_dataDir_note">Puedes elegir almacenar los datos adicionales de los cachés (spoilers, imágenes de los registros, …) en tu almacenamiento externo (emulado o en una tarjeta SD real externa, dependiendo de tu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de rutas</string>
+    <string name="init_maptrail_length">Longitud máxima de la pista de historial</string>
+    <string name="init_maptrail_length_summary">Establece la longitud máxima de la pista de historia (ejecutada en cada inicio de c:geo). El valor predeterminado es de 700 puntos - ajuste de acuerdo a la memoria disponible.</string>
     <string name="init_summary_maptrail">Cuando se activ (y el GPS está activado) c:geo guarda el historial de tus movimientos como una ruta y lo muestra en el mapa.</string>
     <string name="init_trailcolor">Color de la línea del histórico de la ruta</string>
+    <string name="init_trailcolor_summary">Seleccionar color y opacidad para la línea del historial</string>
     <string name="init_trailwidth">Ancho de la línea del histórico de la ruta</string>
     <string name="init_directioncolor">Color de línea de dirección</string>
     <string name="init_directioncolor_summary">Seleccione el color y la opacidad para la línea de dirección. La línea de dirección muestra una línea recta al objetivo de navegación seleccionado, o la ruta de navegación especifica, si la ruta está habilitada instalando la aplicación BRouter.</string>
@@ -677,9 +765,32 @@
     <string name="sendToCgeo_download_fail">c:geo no ha podido descargar cachés. No hay conexión a internet o  send2cgeo no está disponible.</string>
     <string name="sendToCgeo_no_registration">c:geo no ha podido descargar cachés. El registro en send2cgeo ha expirado. Por favor registrate en ajustes.</string>
     <!-- Content Storage -->
+    <string name="contentstorage_selectfolder_dialog_choice_move">Mover todo el contenido</string>
+    <string name="contentstorage_selectfolder_dialog_choice_justselect">No hay más acciones</string>
     <!-- Persistable Folders and Uris -->
+    <string name="persistablefolder_usedefault">Usar el valor predeterminado</string>
+    <string name="persistablefolder_base">Base</string>
+    <string name="persistablefolder_offline_maps">Mapas sin conexión</string>
+    <string name="persistablefolder_offline_maps_themes">Temas del mapa</string>
+    <string name="persistablefolder_backup">Copia de seguridad</string>
+    <string name="persistablefolder_logfiles">Archivos de registro</string>
+    <string name="persistablefolder_fieldnotes">Notas de campo</string>
+    <string name="persistablefolder_spoilerimages">Imágenes reveladoras</string>
+    <string name="persistablefolder_routingbase">Enrutamiento</string>
+    <string name="persistablefolder_routingtiles">Datos de ruta</string>
+    <string name="persistableuri_track">Archivo de recorrido</string>
     <!-- FolderUtils: async processing -->
+    <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s hecho</string>
+    <string name="folder_process_status_currentfile">Procesar %1$s</string>
     <!-- FolderUtils: copy/move -->
+    <string name="folder_copy_progressbar_title">Copiando contenido de %1$s a %2$s</string>
+    <string name="folder_move_progressbar_title">Copiando contenido de %1$s a %2$s</string>
+    <string name="folder_copy_finished_title">Contenido de la carpeta copiado</string>
+    <string name="folder_move_finished_title">El contenido de la carpeta fue movido</string>
+    <string name="folder_copy_finished_dialog_message">El contenido de la carpeta %1$s fue copiado a %2$s.\n\n%3$s de %4$s y %5$s de %6$s fueron procesados.</string>
+    <string name="folder_move_finished_dialog_message">El contenido de la carpeta %1$s fue copiado a %2$s.\n\n%3$s de %4$s y %5$s de %6$s fueron procesados.</string>
+    <string name="folder_copy_move_finished_dialog_message_failure">La operación falló con el código %1$s mientras se procesaba el archivo %2$s.</string>
+    <string name="folder_move_finished_dialog_tap">Pulse \'ok\' para finalizar el cambio de carpeta.</string>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Comprobar autenticación</string>
@@ -689,12 +800,16 @@
     <string name="auth_register">Crear una cuenta</string>
     <string name="auth_connected">Conectado</string>
     <string name="auth_unconnected">Aún no conectado</string>
+    <string name="auth_connected_as">Conectado como %s.\nPresione aquí para actualizar o mantenga pulsado para eliminar los datos de autorización de c:geo.</string>
     <string name="auth_dialog_waiting">Esperando a %s…</string>
     <string name="auth_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
+    <string name="auth_explain_long">Presionando el botón \"Autorizar c:geo\" comenzará el proceso. Este proceso abrirá el navegador web con una página %s. Registrate en esta página y permite a <b>c:geo</b> acceder a tu cuenta. Eso es todo.</string>
     <string name="auth_forget_title">¿Olvidar la autorización?</string>
     <string name="auth_forget_message">Serás desconectado de este servicio. Tus credenciales guardadas actuales se perderán.</string>
     <!-- auth credentials -->
     <string name="auth_credentials_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
+    <string name="auth_credentials_explain_long">Si ya tienes una cuenta, por favor introduce las credenciales de tu cuenta para %s a continuación:</string>
+    <string name="auth_register_explain">Si aún no tiene una cuenta, pulse a continuación para ser redirigido a la página web del servicio para crear una cuenta. Asegúrese de utilizar el método con nombre de usuario y contraseña para crear una cuenta, ya que c:geo no soporta inicio de sesión a través de Google/Apple/Facebook. Después de la creación de una cuenta de validación de tu dirección de correo electrónico puede ser necesaria antes de poder usar el inicio de sesión con c:geo.</string>
     <!-- auth token -->
     <string name="auth_token_explain_short">El siguiente proceso permitirá a <b>c:geo</b> acceder a %s.</string>
     <!-- auth Twitter -->
@@ -717,6 +832,10 @@
     </plurals>
     <string name="last_day_available">último día disponible</string>
     <string name="cache_offline_refresh">Actualizar</string>
+    <string name="cache_offline_drop">Eliminar de la lista</string>
+    <string name="cache_delete_userdefined_waypoints">Eliminar waypoints definidos por el usuario</string>
+    <string name="cache_delete_userdefined_waypoints_confirm">¿Eliminar todos los waypoints definidos por el usuario de este caché?\n\nLos waypoints se eliminarán inmediatamente, no hay deshacer.</string>
+    <string name="cache_delete_userdefined_waypoints_note">Nota: Tiene habilitados \"waypoints de la nota\". Si tiene coordenadas en su nota personal reconocida por c:geo, los waypoints serán recreados para ellos automáticamente. Puede desactivar esto en el cuadro de diálogo de edición de notas personales.</string>
     <string name="cache_offline_store">Guardar</string>
     <string name="cache_offline_stored">Guardado en el dispositivo</string>
     <string name="cache_offline_not_ready">No preparado\npara usar desconectado</string>
@@ -856,6 +975,7 @@
     <string name="cache_name">Nombre</string>
     <string name="cache_name_set">Establecer nombre de caché</string>
     <string name="cache_name_updated">Nombre de caché actualizado</string>
+    <string name="cache_description_updated">Descripción del caché actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamaño</string>
     <string name="cache_distance">Distancia</string>
@@ -863,6 +983,7 @@
     <string name="cache_terrain">Terreno</string>
     <string name="cache_rating">Puntuación</string>
     <string name="cache_own_rating">Tu puntuación</string>
+    <string name="cache_rating_of_new">%1$.1f de %2$d</string>
     <string name="cache_favorite">Favorito</string>
     <string name="cache_owner">Propietario</string>
     <string name="cache_hidden">Oculto</string>
@@ -886,6 +1007,10 @@
     <string name="cache_share_field">Compartir</string>
     <string name="cache_time_full_hours">en punto</string>
     <string name="cache_listed_on">Listado en %s</string>
+    <string name="cache_whereyougo_start">Abre WhereYouGo para descargar e iniciar este cartucho</string>
+    <string name="cache_whereyougo_install">Instalar WhereYouGo para descargar e iniciar este cartucho</string>
+    <string name="cache_chirpwolf_start">Abrir Chirp Wolf para leer los datos de chirp para este caché</string>
+    <string name="cache_chirpwolf_install">Instalar Chirp Wolf para poder leer los datos de chirp</string>
     <string name="context_share_as_text">Compartir texto</string>
     <string name="context_share_as_link">Compartir enlace</string>
     <string name="create_internal_cache">Crear caché definido por el usuario</string>

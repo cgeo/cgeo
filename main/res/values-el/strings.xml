@@ -489,6 +489,7 @@
     <string name="cache_filter_userdisplay_not">NOT</string>
     <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
+    <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
     <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
