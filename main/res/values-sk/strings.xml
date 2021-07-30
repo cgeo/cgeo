@@ -392,6 +392,7 @@
     <string name="caches_copy_selected">Kopírovať vybrané</string>
     <string name="caches_copy_all">Kopírovať všetko</string>
     <string name="caches_map_locus_export">Exportovať do Locus</string>
+    <string name="caches_filter_menuitem">Filtrovať</string>
     <string name="caches_filter_title">Filtrovať</string>
     <string name="caches_filter_size">Veľkosť</string>
     <string name="caches_filter_type">Typ</string>
@@ -420,6 +421,7 @@
     <string name="caches_reset_cache_icons_title">Obnoviť ikony kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
+    <string name="caches_askdeletion">Požiadať o odstránenie, ak je prázdne</string>
     <string name="select_icon">Vybrať ikonu</string>
     <string name="onetime_missing_unicode_info">Vaša verzia systému Android nepodporuje automatické zisťovanie podporovaných ikon – niektoré znaky môžu chýbať</string>
     <!-- caches lists -->
@@ -438,6 +440,7 @@
     <string name="list_dialog_remove_title">Odstrániť zoznam</string>
     <string name="list_dialog_remove_description">Chcete odstrániť aktuálny zoznam skrýš? Všetky skrýše, ktoré sa nachádzajú v zozname budú presunuté do „Uložené“.</string>
     <string name="list_dialog_remove_nowempty">Zoznam je prázdny. Chcete odstrániť aktuálny zoznam?</string>
+    <string name="list_dialog_do_not_ask_me_again">Nepýtať sa nabudúce pre tento zoznam</string>
     <string name="list_dialog_remove">Odstrániť</string>
     <string name="list_dialog_rename_title">Premenovať zoznam</string>
     <string name="list_dialog_rename">Premenovať</string>
@@ -461,6 +464,8 @@
     <string name="cache_filter_owner">Vlastník kešky</string>
     <string name="cache_filter_difficulty">Náročnosť</string>
     <string name="cache_filter_terrain">Terén</string>
+    <string name="cache_filter_difficulty_terrain">Náročnosť/Terén</string>
+    <string name="cache_filter_rating">Hodnotenie</string>
     <string name="cache_filter_status">Stav</string>
     <string name="cache_filter_attributes">Atribúty kešky</string>
     <string name="cache_filter_favorites">Obľúbené</string>
@@ -471,9 +476,14 @@
     <string name="cache_filter_log_entry">Položka logu</string>
     <string name="cache_filter_location">Miesto</string>
     <string name="cache_filter_stored_lists">Uložené zoznamy</string>
+    <string name="cache_filter_origin">Pôvod</string>
+    <string name="cache_filter_stored_since">Uložené od</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
+    <string name="cache_filter_contexttype_live_title">Live filter</string>
+    <string name="cache_filter_contexttype_offline_title">Offline filter</string>
+    <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_include">Zahrnúť</string>
     <string name="cache_filter_exclude">Vylúčiť</string>
     <string name="cache_filter_userdisplay_complex">Zložité</string>
@@ -489,6 +499,8 @@
     <string name="cache_filter_storage_delete_button">Odstrániť</string>
     <string name="cache_filter_storage_clear_button">Vyčistiť</string>
     <string name="cache_filter_storage_load_delete_title">Načítať alebo odstrániť existujúci filter</string>
+    <string name="cache_filter_storage_select_title">Vyberte filter</string>
+    <string name="cache_filter_storage_select_clear_title">Vyberte filter alebo vymažte aktuálny filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatiaľ nie je uložený žiadny filter.</string>
     <string name="cache_filter_storage_save_title">Uložiť filter s názvom</string>
     <string name="cache_filter_storage_save_confirm_title">Uložiť filter a prepísať</string>
@@ -509,20 +521,48 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridať položky</string>
     <string name="cache_filter_favorites_absolute">Absolútne</string>
     <string name="cache_filter_favorites_percentage">Percentuálne</string>
+    <string name="cache_filter_distance_coordinates">Súradnice</string>
     <string name="cache_filter_distance_use_current_position">Použiť aktuálnu pozíciu</string>
     <string name="cache_filter_status_select_all">Všetko</string>
     <string name="cache_filter_status_select_yes">Áno</string>
     <string name="cache_filter_status_select_no">Nie</string>
     <string name="cache_filter_status_select_label_found">Nájdená</string>
+    <string name="cache_filter_status_select_label_owned">Vlastnená</string>
     <string name="cache_filter_status_select_label_stored">Uložená</string>
+    <string name="cache_filter_status_select_label_favorite">Vlastné favoritné</string>
     <string name="cache_filter_status_select_label_watchlist">V zozname sledovaných</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Má trasovateľný predmet</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Má vlastný hlas</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Vyriešená mysterka</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavenie filtra sa týka len mysteriek.\n\nMysterka sa považuje za „vyriešenú“, ak má zmenené súradnice alebo vyplnený finálny bod trasy so súradnicami.</string>
     <string name="cache_filter_status_active">Aktívna</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
     <string name="cache_filter_status_archived">Archivovaná</string>
     <string name="cache_filter_status_exclude_active">Okrem aktívnych</string>
     <string name="cache_filter_status_exclude_disabled">Okrem deaktivovaných</string>
     <string name="cache_filter_status_exclude_archived">Okrem archivovaných</string>
+    <string name="cache_filter_log_entry_foundby">Nájdené kým</string>
+    <string name="cache_filter_log_entry_logtext">Text logu</string>
+    <string name="cache_filter_stored_since_notstored">Neuložené</string>
+    <string name="cache_filter_stored_since_notstored_short">–</string>
+    <string name="cache_filter_stored_since_stored_zero">0 hodín</string>
+    <string name="cache_filter_stored_since_stored_zero_short">Oh</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 hodín</item>
+        <item>24 hodín</item>
+        <item>7 dní</item>
+        <item>30 dní</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">úsvit</string>
+    <string name="cache_filter_stored_since_stored_max_short">max.</string>
     <!-- about -->
     <string name="about_version">Verzia</string>
     <string name="about_changelog">Zmeny</string>
@@ -559,6 +599,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">podpora</string>
     <string name="contribution_documentation">dokumentácia</string>
+    <string name="contribution_infrastructure">infraštruktúra</string>
     <string name="contribution_projectleader">líder projektu otvoreného zdrojového kódu</string>
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Nahlásenie problému</string>
@@ -1041,6 +1082,7 @@
     </plurals>
     <string name="last_day_available">ostáva posledný deň</string>
     <string name="cache_offline_refresh">Obnoviť</string>
+    <string name="cache_offline_drop">Odstrániť zo zoznamu</string>
     <string name="cache_delete_userdefined_waypoints">Odstrániť vlastné body trasy</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Odstrániť všetky vlastné body trasy tejto kešky?\n\nBody trasy budú ihneď vymazané, nie je možné vrátiť do späť.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povolené \"body trasy z poznámky\". Ak máte v osobnej poznámke súradnice rozpoznané programom c:geo, body trasy sa automaticky znova vytvoria. Môžete to zakázať v dialógovom okne úpravy osobnej poznámky.</string>
@@ -1148,6 +1190,7 @@
     <string name="cache_dialog_favorite_remove_title">Obľúbené</string>
     <string name="cache_dialog_favorite_remove_message">Odstraňovanie skrýše z obľúbených…</string>
     <string name="cache_menu_navigate">Navigovať</string>
+    <string name="cache_menu_target">Nastaviť ako cieľ</string>
     <string name="cache_menu_navigation_drive">Navigácia (auto)</string>
     <string name="cache_menu_navigation_drive_select_target">Vybrať cieľ</string>
     <string name="cache_menu_navigation_walk">Navigácia (pešo)</string>
@@ -1162,6 +1205,7 @@
     <string name="cache_menu_map_ext">Ďalšie externé aplikácie</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otvoriť v prehliadači</string>
+    <string name="no_browser_found">Nebol nájdený prehliadač</string>
     <string name="cache_menu_open_with">Otvoriť s…</string>
     <string name="cache_menu_visit">Zalogovať návštevu</string>
     <string name="cache_log_too_long">Aplikácia c:geo nemôže odoslať váš log, pretože je príliš dlhý. Ďakujeme ale, že ste sa pokúsili napísať taký obsiahly log ;-)</string>
@@ -1226,6 +1270,7 @@
     <string name="cache_distance">Vzdialenosť</string>
     <string name="cache_difficulty">Náročnosť</string>
     <string name="cache_terrain">Terén</string>
+    <string name="cache_difficulty_terrain">Náročnosť/Terén</string>
     <string name="cache_rating">Hodnotenie</string>
     <string name="cache_own_rating">Vlastné hodnotenie</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
@@ -1397,6 +1442,8 @@
     <string name="map_show_caches_title">Zobraziť kešky:</string>
     <string name="map_show_waypoints_title">Zobraziť body trasy:</string>
     <string name="map_show_other_title">Zobraziť iné:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filter kešiek príliš zložitý</string>
+    <string name="map_settings_cache_filter_too_complex_message">Aktuálny filter kešiek je príliš zložitý na to, aby sa tu dali použiť ďalšie možnosti. Zvyčajne to znamená, že filter kešiek obsahuje výrazy NOT alebo OR namiesto jednoduchého logického výrazu AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
     <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
@@ -1412,8 +1459,11 @@
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hľadať podľa vlastníka</string>
+    <string name="search_filter">Filtrovať</string>
     <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
+    <string name="search_filter_temporary_user_information_title">Pracovný rámec nového filtra</string>
+    <string name="search_filter_temporary_user_information">Aplikácia c:geo predstavuje nový systém filtrovania s podporou flexibilných a kombinovateľných filtrov, ktoré možno ukladať.\n\nGlobálny filter je možné odteraz zmeniť priamo v zoznamoch kešiek a na aktívnej mape.</string>
     <string name="search_tb">Trasovateľné predmety</string>
     <string name="search_tb_hint">Identifikácia trasovateľného predmetu</string>
     <string name="search_tb_button">Hľadať trasov. predmety</string>
