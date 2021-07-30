@@ -33,6 +33,27 @@
     <string name="locationless">Posisjonsløs cache (omvendt)</string>
     <string name="userdefined">Brukerdefinert cache</string>
     <string name="unknown">Ukjent Type</string>
+    <string name="all_types_short">Alle</string>
+    <string name="traditional_short">Tradisjonelle</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mystery</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="event_short">Event</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="virtual_short">Virtuell</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="communceleb_short">Community</string>
+    <string name="ape_short">APE</string>
+    <string name="gchq_short">GC HQ</string>
+    <string name="gchqceleb_short">GC HQ-feiring</string>
+    <string name="locationless_short">Posisjonsløs</string>
+    <string name="advlab_short">Adventure LAB</string>
+    <string name="userdefined_short">Brukerdefinert</string>
+    <string name="unknown_short">Ukjent</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
     <string name="cache_size_small">Liten</string>
@@ -154,7 +175,10 @@
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalert/Komprimert:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bilde</string>
+    <string name="datetime_clear_button">Tøm</string>
+    <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- translation -->
+    <string name="translate">Oversett</string>
     <string name="translate_to_sys_lang">Oversett til %s</string>
     <string name="translate_to_english">Oversett til engelsk</string>
     <string name="translate_length_warning">Oversettelse kan mislykkes med store mengder tekst.</string>
@@ -286,6 +310,8 @@
     <string name="menu_helpers">Verktøyprogrammer</string>
     <string name="menu_settings">Innstillinger</string>
     <string name="menu_backup">Sikkerhetskopiering/gjenoppretting</string>
+    <string name="menu_update">Oppdater</string>
+    <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_history">Historikk</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skann GC-kode</string>
@@ -337,6 +363,8 @@
     <string name="caches_select_mode_exit">Avslutt velge-modus</string>
     <string name="caches_select_invert">Inverter merking</string>
     <string name="caches_nearby">I nærheten</string>
+    <string name="caches_remove_all">Fjern alle fra liste</string>
+    <string name="caches_remove_selected">Fjern merkede fra liste</string>
     <string name="caches_remove_all_completely">Slett alle fra enheten</string>
     <string name="caches_remove_selected_completely">Slett valgte fra enheten</string>
     <string name="caches_delete_events">Slett gamle eventer</string>
@@ -352,6 +380,7 @@
     <string name="caches_copy_selected">Kopier de merkede</string>
     <string name="caches_copy_all">Kopier alle</string>
     <string name="caches_map_locus_export">Eksporter til Locus</string>
+    <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter</string>
     <string name="caches_filter_size">Størrelse</string>
     <string name="caches_filter_type">Type</string>
@@ -403,9 +432,87 @@
     <string name="list_dialog_rename">Endre listenavn</string>
     <string name="list_not_available">Listen er ikke lenger tilgjengelig, bytter til standarlisten</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_mode_advanced">Avansert</string>
+    <string name="cache_filter_option_and_or">Bruk ELLER i stedet for OG</string>
+    <string name="cache_filter_option_inverse">Invertert Filter</string>
+    <string name="cache_filter_name">Cachenavn</string>
+    <string name="cache_filter_type">Cachetype</string>
+    <string name="cache_filter_size">Cachestørrelse</string>
+    <string name="cache_filter_personalnote">Personlig cachenotat</string>
+    <string name="cache_filter_description">Cachebeskrivelse</string>
+    <string name="cache_filter_offlinelog">Offline logg</string>
+    <string name="cache_filter_owner">Cacheeier</string>
+    <string name="cache_filter_difficulty">Vankelighetsgrad</string>
+    <string name="cache_filter_terrain">Terrenggrad</string>
+    <string name="cache_filter_status">Status</string>
+    <string name="cache_filter_attributes">Cacheattributter</string>
+    <string name="cache_filter_favorites">Favoritter</string>
+    <string name="cache_filter_distance">Avstand</string>
+    <string name="cache_filter_logs_count">Antall logger</string>
+    <string name="cache_filter_last_found">Dato for sist funn</string>
+    <string name="cache_filter_log_entry">Logginnhold</string>
+    <string name="cache_filter_location">Sted</string>
+    <string name="cache_filter_origin">Utgangspunkt</string>
+    <string name="cache_filter_stored_since">Lagret siden</string>
+    <string name="cache_filtergroup_basic">Enkel</string>
+    <string name="cache_filtergroup_details">Detaljer</string>
+    <string name="cache_filtergroup_userspecific">Brukerspesifikk</string>
+    <string name="cache_filter_include">Inkluder</string>
+    <string name="cache_filter_exclude">Ekskluder</string>
+    <string name="cache_filter_userdisplay_complex">Avansert</string>
+    <string name="cache_filter_userdisplay_none">Ingen</string>
+    <string name="cache_filter_userdisplay_not">IKKE</string>
+    <string name="cache_filter_storage_load_button">Last</string>
+    <string name="cache_filter_storage_delete_button">Slett</string>
+    <string name="cache_filter_stringfilter_matchcase">Skill store og små bokstaver</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Søketekst</string>
+    <string name="cache_filter_stringfilter_type_contains">Inneholder</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Starter med</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Slutter med</string>
+    <string name="cache_filter_stringfilter_type_pattern">Mønster</string>
+    <string name="cache_filter_datefilter_label_from">Fra:</string>
+    <string name="cache_filter_datefilter_label_to">Til:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Velg alle</string>
+    <string name="cache_filter_checkboxlist_add_items">Legg til flere elementer</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Legg til elementer</string>
+    <string name="cache_filter_favorites_absolute">Absolutt</string>
+    <string name="cache_filter_favorites_percentage">Prosent</string>
+    <string name="cache_filter_distance_use_current_position">Bruk gjeldende posisjon</string>
+    <string name="cache_filter_status_select_all">Alle</string>
+    <string name="cache_filter_status_select_yes">Ja</string>
+    <string name="cache_filter_status_select_no">Nei</string>
+    <string name="cache_filter_status_select_label_found">Funnet</string>
+    <string name="cache_filter_status_select_label_owned">Egen</string>
+    <string name="cache_filter_status_select_label_stored">Lagret</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Har sporbare</string>
+    <string name="cache_filter_status_active">Aktiv</string>
+    <string name="cache_filter_status_disabled">Deaktivert</string>
+    <string name="cache_filter_status_archived">Arkivert</string>
+    <string name="cache_filter_status_exclude_active">Ekskluder aktive</string>
+    <string name="cache_filter_status_exclude_disabled">Ekskluder deaktiverte</string>
+    <string name="cache_filter_stored_since_notstored">Ikke lagret</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 timer</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0t</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 timer</item>
+        <item>24 timer</item>
+        <item>7 dager</item>
+        <item>30 dager</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8t</item>
+        <item>24t</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">tidenes morgen</string>
+    <string name="cache_filter_stored_since_stored_max_short">maks</string>
     <!-- about -->
     <string name="about_version">Versjon</string>
     <string name="about_changelog">Oppdateringslogg</string>
+    <string name="about_changelog_next_release">Neste utgivelse</string>
     <string name="about_system">System</string>
     <string name="about_donate">Støtt oss</string>
     <string name="about_donation_more">Besøk nettsiden for informasjon</string>
@@ -423,6 +530,7 @@
     <string name="about_system_write_logcat_type_extended">Utvidet</string>
     <string name="about_system_write_logcat_success">Loggfil \"%1$s\" skrevet til mappe \"%2$s\"</string>
     <string name="about_system_write_logcat_error">Feil ved skriving av loggfil</string>
+    <string name="about_system_write_infos_downloadmanager">Vis nedlastinger</string>
     <string name="changelog_github">Liste over alle endringer</string>
     <string name="about_nutshellmanual">Elektronisk håndbok</string>
     <string name="about_contributors_carnerodetails">som faren til c:geo</string>
@@ -434,6 +542,7 @@
     <string name="contribution_tester">tester</string>
     <string name="contribution_support">Støtte</string>
     <string name="contribution_documentation">dokumentasjon</string>
+    <string name="contribution_infrastructure">infrastruktur</string>
     <string name="contribution_projectleader">open kildekode prosjektleder</string>
     <string name="contribution_graphics">grafikk</string>
     <string name="debug_user_error_report_title">Rapporter et problem</string>
@@ -478,6 +587,7 @@
     <string name="settings_goto_url_button">mer…</string>
     <string name="settings_activate_gc">Aktiver</string>
     <string name="settings_activate_ec">Aktiver</string>
+    <string name="settings_activate_lc">Aktiver</string>
     <string name="settings_gc_legal_note">Ved bruk av tjenesten geocaching.com godtar du Groundspeaks vilkår for bruk.</string>
     <string name="settings_info_facebook_login_title">Logg inn med Facebook eller Google</string>
     <string name="settings_info_facebook_login">Du kan ikke logge inn på geocaching.com i c:geo ved hjelp av Facebook- eller Google-kontoen din. Men det finnes en enkel vei rundt dette…</string>
@@ -555,7 +665,11 @@
     <string name="init_zoomincludingwaypoints_description">Ved visning av en enkelt cache: Skal kartutsnittet justeres slik at alle veipunktene blir synlig?</string>
     <string name="init_brouterThreshold">Beregn rute</string>
     <string name="init_brouterShowBothDistances">Vis distanse i rett linje</string>
+    <string name="init_autoDownloads">Automatisk nedlasting</string>
     <string name="init_brouterAutoTileDownloads_description">Tilby deg automatisk til å laste ned manglende rutingsflis-data.</string>
+    <string name="init_brouterProfileWalk">Profil for gange</string>
+    <string name="init_brouterProfileBike">Profil for sykkel</string>
+    <string name="init_brouterProfileCar">Profil for bil</string>
     <string name="brouter_recalculating">Beregner rute i bakgrunnen…</string>
     <string name="init_summary_brouterShowBothDistances">Om routing er aktiv: Vis distanse i rett linje i tillegg til den utregnede rutelengden.</string>
     <string name="init_useInternalRouting">Bruk intern ruting</string>
@@ -563,6 +677,7 @@
     <string name="init_summary_bigSmileysOnMap">Hvis aktivert, vises store uttrykksikoner for loggede cacher på kartet i stedet for ikon av cachetype (krever omstart).</string>
     <string name="init_global_wp_extraction_disable">Deaktiver uthenting av veipunkt</string>
     <string name="init_summary_global_wp_extraction_disable">Globalt deaktivere uthenting av veipunkt fra personlige cachenotater. Dette kan fortsatt aktiveres for enkeltcacher ved å deaktivere avmerkingsboksen under det personlige cachenotatet</string>
+    <string name="init_customtabs_as_browser">Bruk Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Eksterne nettsider vil vises uten at du forlater c:geo (kun hvis Chrome er installert)</string>
     <string name="init_save_log_img">Lagre bilder</string>
     <string name="init_summary_save_log_img">Lagre bilder fra loggene</string>
@@ -577,6 +692,11 @@
     <string name="init_livelist">Vis cachers retning i listen</string>
     <string name="init_summary_livelist">Vis en pil med kompassretning for cacher i en liste</string>
     <!-- app theme -->
+    <string-array name="settings_theme_entries">
+        <item>Systemstandard</item>
+        <item>Lyst</item>
+        <item>Mørkt</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Opprett sikkerhetskopi</string>
     <string name="init_backup_summary">Vær oppmerksom på at denne funksjonen kan sikkerhetskopiere cacher, veipunkter &amp; innstillinger, men ingen bilder fra cacher. \nFor å kunne gjenopprette dataene selv etter å ha mistet mobilen din, bør sikkerhetskopiene kopieres til en uavhengig plassering.</string>
@@ -641,6 +761,7 @@
     <string name="init_base_directory_description">Grunnmappen for offentlige lokale data</string>
     <string name="init_map_directory_description">Mappe for offline-kart</string>
     <string name="init_brouter_directory_description">Mapper med BRouter rutingsdata</string>
+    <string name="init_updateinterval_title">Oppdateringsintervall</string>
     <string name="init_gpx_importexportdir">GPX-mappe</string>
     <string name="init_dataDir">Velg mappe for data</string>
     <string name="init_dataDir_note">Du kan velge å lagre eksterne data for geocacher(spoilere, logbilder o. l.) på din enhets eksterne minne(emulert eller SD-kort, avhengig av din enhet).</string>
@@ -976,6 +1097,7 @@
     <string name="cache_dialog_favorite_remove_message">Fjerner cachen fra dine favoritter…</string>
     <string name="cache_menu_navigate">Navigér</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
+    <string name="cache_menu_navigation_drive_select_target">Velg mål</string>
     <string name="cache_menu_navigation_walk">Navigasjon (gående)</string>
     <string name="cache_menu_navigation_transit">Navigasjon (Kollektivtransport)</string>
     <string name="cache_menu_navigation_bike">Navigasjon (sykkel)</string>
@@ -998,6 +1120,9 @@
     <string name="menu_caches">Administrer cacher</string>
     <string name="cache_menu_event">Eksporter til kalender</string>
     <string name="cache_menu_extract_waypoints">Trekk ut veipunkter</string>
+    <string name="cache_menu_set_found">Sett som funnet</string>
+    <string name="cache_menu_set_DNF">Sett som ikke funnet</string>
+    <string name="cache_menu_reset_foundstate">Tilbakestill funnetstatus</string>
     <string name="cache_menu_set_cache_icon">Angi cacheikon</string>
     <string name="cache_icon_updated">Cacheikon er oppdatert</string>
     <string name="cache_menu_details">Detaljer</string>
@@ -1175,6 +1300,15 @@
     <string name="map_view_map">Kart</string>
     <string name="map_rotation">Kartrotasjon</string>
     <string name="map_dot_mode">Bruk kompakte ikon</string>
+    <string name="map_show_circles">Sirkler</string>
+    <string name="map_showc_own">Egne</string>
+    <string name="map_showc_found">Funnet</string>
+    <string name="map_showc_disabled">Deaktivert</string>
+    <string name="map_showc_archived">Arkivert</string>
+    <string name="map_showwp_original">Original</string>
+    <string name="map_showwp_parking">Parkering</string>
+    <string name="map_showwp_visited">Besøkt</string>
+    <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
     <string name="init_hidewp">Skjul veipunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
     <string name="init_summary_hidewp_parking">Skjul parkeringsveipunkter på kartet</string>
@@ -1205,6 +1339,7 @@
     <string name="search_hbu">Utplassert av</string>
     <string name="search_hbu_prefill">Eier</string>
     <string name="search_hbu_button">Søk med</string>
+    <string name="search_filter">Filter</string>
     <string name="search_tb">Sporbar (trackable)</string>
     <string name="search_tb_hint">Sporingskode</string>
     <string name="search_tb_button">Søk etter sporbare</string>
@@ -1214,6 +1349,7 @@
     <string name="search_address_result">Fant plasser</string>
     <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_title">Utvalgsspørring</string>
+    <string name="search_pocket_is_new">ny</string>
     <!-- trackable -->
     <string name="trackable">Sporbar (TB eller coin)</string>
     <string name="trackable_details_loading">Laster detaljene til den sporbare…</string>
@@ -1619,6 +1755,10 @@
     <string name="tts_oclock">klokken %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopiert til utklippstavlen</string>
+    <plurals name="days_ago">
+        <item quantity="one">%d dag siden</item>
+        <item quantity="other">%d dager siden</item>
+    </plurals>
     <plurals name="favorite_points">
         <item quantity="one">%s favoritt</item>
         <item quantity="other">%s favoritter</item>
@@ -1698,6 +1838,8 @@
     <string name="number_input_err_boundarymax">Verdien er for stor - settes til maksimalverdien</string>
     <string name="number_input_err_format">Feil tallformat</string>
     <!-- notification / channel texts -->
+    <string name="notification_channel_proximity_name">Nærhetsvarsler</string>
+    <string name="notification_channel_downloader_name">Nedlasting i c:geo</string>
     <string name="notification_proximity_title">c:geo nærhetsvarsling</string>
     <!-- individual routes -->
     <string name="individual_route">Individuell rute</string>
@@ -1748,6 +1890,7 @@
     <string name="switch_default">(standard)</string>
     <string name="yes">Ja</string>
     <string name="no">Nei</string>
+    <string name="show_all">Vis alle</string>
     <string name="routingmode_straight">Rett linje</string>
     <string name="routingmode_walk">Gå</string>
     <string name="routingmode_bike">Sykkel</string>
@@ -1772,8 +1915,10 @@
     <string name="localfile_title">Åpne en lokal fil</string>
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_intenttitle">Motta fil</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Last ned offlinekart</string>
+    <string name="download_title">Last ned fil</string>
     <string name="downloadmap_choose">Velg kart</string>
     <string name="downloadmap_filename">Laster ned %s</string>
     <string name="download_started">Nedlasting startet i bakgrunnen</string>
@@ -1787,6 +1932,7 @@
     <string name="downloadmap_directory">mappe</string>
     <string name="downloadmap_mapfile">kartfil</string>
     <string name="downloadmap_checking_for_updates">Ser etter oppdateringer…</string>
+    <string name="no_updates_found">Fant ingen oppdateringer</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Slett sporhistorikk</string>
     <string name="map_trailhistory_cleared">sporhistorikk slettet</string>
@@ -1824,6 +1970,7 @@
     <string name="wizard_status_storage_permission">Tillatelse for lagring</string>
     <string name="wizard_status_location_permission">Posisjonstillatelse</string>
     <string name="wizard_status_platform">Geocaching-tjenester</string>
+    <string name="wizard_not_now">Ikke nå</string>
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
     <string name="previous">Forrige</string>
@@ -1833,4 +1980,5 @@
     <string name="finish">Fullfør</string>
     <string name="back">Tilbake</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Velg alle</string>
 </resources>
