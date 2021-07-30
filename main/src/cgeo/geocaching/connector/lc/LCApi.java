@@ -2,7 +2,6 @@ package cgeo.geocaching.connector.lc;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -18,7 +17,6 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
@@ -40,7 +38,6 @@ import java.util.Locale;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import io.reactivex.rxjava3.core.Single;
 import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
@@ -51,15 +48,9 @@ final class LCApi {
     private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
 
     @NonNull
-    private static final Credentials credentials = Settings.getCredentials(GCConnector.getInstance());
+    private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
-    private static final String CONSUMER_KEY = LocalizationUtils.getString(R.string.alc_consumer_key);
-    private static final String ALC_ADVENTURES_URI = "https://labs-api.geocaching.com/Api/Adventures/";
-    private static final String ALC_LOGIN_URI = "https://labs-api.geocaching.com/Api/Accounts/Login?consumerKey=" + CONSUMER_KEY;
-    private static final ObjectNode alcLoginData = new ObjectNode(JsonUtils.factory).put("Username", credentials.getUserName()).put("Password", credentials.getPassword());
-
-    private static String alcAccessToken = "";
-    private static long alcAccessTokenExpiresAt = 0;
+    private static final String CONSUMER_KEY    = LocalizationUtils.getString(R.string.alc_consumer_key);
 
     private LCApi() {
         // utility class with static methods
@@ -71,10 +62,9 @@ final class LCApi {
             return null;
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
-        headers.add("authorization", "bearer " + getAlcAccessToken());
         try {
-            final Response response = apiRequest(ALC_ADVENTURES_URI + geocode.substring(2), null, headers).blockingGet();
-            return importCacheFromDetail(response);
+            final Response response = apiRequest(geocode.substring(2), null, headers).blockingGet();
+            return importCacheFromJSON(response);
         } catch (final Exception ignored) {
             return null;
         }
@@ -99,14 +89,13 @@ final class LCApi {
         Log.d("_LC Radius: " + String.valueOf((int) radius));
         final Parameters params = new Parameters("skip", "0");
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
-        headers.add("authorization", "bearer " + getAlcAccessToken());
         params.add("take", "500");
         params.add("radiusMeters", String.valueOf((int) radius));
         params.add("origin.latitude", String.valueOf(latcenter));
         params.add("origin.longitude", String.valueOf(loncenter));
         try {
-            final Response response = apiRequest(ALC_ADVENTURES_URI + "SearchV3", params, headers).blockingGet();
-            return importCachesFromSearch(response);
+            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
+            return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
         }
@@ -127,10 +116,9 @@ final class LCApi {
         params.add("origin.latitude", String.valueOf(center.getLatitude()));
         params.add("origin.longitude", String.valueOf(center.getLongitude()));
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
-        headers.add("authorization", "bearer " + getAlcAccessToken());
         try {
-            final Response response = apiRequest(ALC_ADVENTURES_URI + "SearchV3", params, headers).blockingGet();
-            return importCachesFromSearch(response);
+            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
+            return importCachesFromJSON(response);
         } catch (final Exception ignored) {
             return Collections.emptyList();
         }
@@ -154,6 +142,12 @@ final class LCApi {
         return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
     }
 
+
+    @NonNull
+    private static Single<Response> apiRequest(final String uri) {
+        return Network.getRequest(API_HOST + uri);
+    }
+
     @NonNull
     private static Single<Response> apiRequest(final String uri, final Parameters params, final Parameters headers) {
         return apiRequest(uri, params, headers, false);
@@ -162,7 +156,7 @@ final class LCApi {
     @NonNull
     private static Single<Response> apiRequest(final String uri, final Parameters params, final Parameters headers, final boolean isRetry) {
 
-        final Single<Response> response = Network.getRequest(uri, params, headers);
+        final Single<Response> response = Network.getRequest(API_HOST + uri, params, headers);
 
         // retry at most one time
         return response.flatMap((Function<Response, Single<Response>>) response1 -> {
@@ -174,18 +168,18 @@ final class LCApi {
     }
 
     @NonNull
-    private static Geocache importCacheFromDetail(final Response response) {
+    private static Geocache importCacheFromJSON(final Response response) {
         try {
             final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
-            return parseCacheFromDetail(json);
+            return parseCacheDetail(json);
         } catch (final Exception e) {
-            Log.w("_LC importCacheFromDetail", e);
+            Log.w("_LC importCacheFromJSON", e);
             return null;
         }
     }
 
     @NonNull
-    private static List<Geocache> importCachesFromSearch(final Response response) {
+    private static List<Geocache> importCachesFromJSON(final Response response) {
         try {
             final String jsonString = Network.getResponseData(response);
             if (jsonString == null) {
@@ -193,27 +187,27 @@ final class LCApi {
                 return Collections.emptyList();
             }
             final JsonNode json = JsonUtils.reader.readTree(jsonString);
-            Log.d("_LC importCachesFromSearch: " + json.toPrettyString());
+            Log.d("_LC importCachesFromJson: " + json.toPrettyString());
             final JsonNode items = json.at("/Items");
             if (!items.isArray()) {
                 return Collections.emptyList();
             }
             final List<Geocache> caches = new ArrayList<>(items.size());
             for (final JsonNode node : items) {
-                final Geocache cache = parseCacheFromSearch(node);
+                final Geocache cache = parseCache(node);
                 if (cache != null) {
                     caches.add(cache);
                 }
             }
             return caches;
         } catch (final Exception e) {
-            Log.w("_LC importCachesFromSearch", e);
+            Log.w("_LC importCachesFromJSON", e);
             return Collections.emptyList();
         }
     }
 
     @Nullable
-    private static Geocache parseCacheFromSearch(final JsonNode response) {
+    private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
             final JsonNode location = response.at("/Location");
@@ -228,19 +222,21 @@ final class LCApi {
             cache.setType(CacheType.ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
-            cache.setFound(response.get("IsComplete").asBoolean());    // active mode only
+            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
-        } catch (final NullPointerException ex) {
-            Log.e("_LC LCApi.parseCacheFromSearch", ex);
+        } catch (final NullPointerException e) {
+            Log.e("_LC LCApi.parseCache", e);
             return null;
         }
     }
 
+    // Having a separate parser for details is required because the API provider
+    // decided to use different upper/lower case wordings for the same entities
+
     @Nullable
-    private static Geocache parseCacheFromDetail(final JsonNode response) {
+    private static Geocache parseCacheDetail(final JsonNode response) {
         try {
-            Log.d(response.toPrettyString());
             final Geocache cache = new Geocache();
             final JsonNode location = response.at("/Location");
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
@@ -256,7 +252,8 @@ final class LCApi {
             cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
             cache.setType(CacheType.ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
-            cache.setFound(response.get("IsComplete").asBoolean()); // active mode only
+            // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
+            // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
             cache.setDisabled(false);
             cache.setHidden(parseDate(response.get("PublishedUtc").asText()));
             cache.setOwnerDisplayName(response.get("OwnerUsername").asText());
@@ -264,8 +261,8 @@ final class LCApi {
             cache.setDetailedUpdatedNow();
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
-        } catch (final NullPointerException ex) {
-            Log.e("_LC LCApi.parseCacheFromDetail", ex);
+        } catch (final NullPointerException e) {
+            Log.e("_LC LCApi.parseCache", e);
             return null;
         }
     }
@@ -308,8 +305,8 @@ final class LCApi {
                 }
 
                 result.add(wpt);
-            } catch (final NullPointerException ex) {
-                Log.e("_LC LCApi.parseWaypoints", ex);
+            } catch (final NullPointerException e) {
+                Log.e("_LC LCApi.parseWaypoints", e);
             }
         }
         return result;
@@ -323,23 +320,6 @@ final class LCApi {
             return new Date(0);
         }
 
-    }
-
-    private static String getAlcAccessToken() {
-        final Date now = new Date();
-        if (now.getTime() >= alcAccessTokenExpiresAt) {
-            try {
-                final Single<Response> response = Network.postJsonRequest(ALC_LOGIN_URI, alcLoginData);
-                final String jsonString = Network.getResponseData(response);
-                final JsonNode json = JsonUtils.reader.readTree(jsonString);
-                Log.d(json.toPrettyString());
-                alcAccessToken = json.get("access_token").asText();
-                alcAccessTokenExpiresAt = now.getTime() + json.get("expires_in").asLong() * 1000;
-            } catch (final Exception ex) {
-                Log.d("getAccessToken(): ", ex);
-            }
-        }
-        return alcAccessToken;
     }
 }
 
