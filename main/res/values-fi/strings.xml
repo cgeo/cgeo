@@ -419,6 +419,7 @@
     <string name="caches_reset_cache_icons_title">Nollaa kätkön kuvakkeet</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
+    <string name="caches_askdeletion">Kysy poistamista, jos tyhjä</string>
     <string name="select_icon">Valitse kuvake</string>
     <string name="onetime_missing_unicode_info">Android-versiosi ei tue tuettujen kuvakkeiden automaattista tunnistamista - joitakin merkkejä voi puuttua</string>
     <!-- caches lists -->
@@ -437,6 +438,7 @@
     <string name="list_dialog_remove_title">Poista lista</string>
     <string name="list_dialog_remove_description">Haluatko poistaa nykyisen listan? Kaikki jäljelle jäävät kätköt listassa siirretään \"Tallennettuihin\".</string>
     <string name="list_dialog_remove_nowempty">Lista on tyhjä. Haluatko poistaa nykyisen listan?</string>
+    <string name="list_dialog_do_not_ask_me_again">Älä kysy minulta uudelleen tähän listaan liittyen</string>
     <string name="list_dialog_remove">Poista</string>
     <string name="list_dialog_rename_title">Uudelleennimeä luettelo</string>
     <string name="list_dialog_rename">Nimeä uudelleen</string>
@@ -460,6 +462,8 @@
     <string name="cache_filter_owner">Kätkön omistaja</string>
     <string name="cache_filter_difficulty">Vaikeus</string>
     <string name="cache_filter_terrain">Maasto</string>
+    <string name="cache_filter_difficulty_terrain">Vaikeus / Maasto</string>
+    <string name="cache_filter_rating">Arvostelu</string>
     <string name="cache_filter_status">Tila</string>
     <string name="cache_filter_attributes">Kätkön attribuutit</string>
     <string name="cache_filter_favorites">Suosikit</string>
@@ -489,7 +493,10 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Lataa</string>
     <string name="cache_filter_storage_delete_button">Poista</string>
+    <string name="cache_filter_storage_clear_button">Tyhjennä</string>
     <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
+    <string name="cache_filter_storage_select_title">Valitse suodatin</string>
+    <string name="cache_filter_storage_select_clear_title">Valitse suodatin tai tyhjennä nykyinen suodatin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Yhtään suodatinta ei ole vielä tallennettu.</string>
     <string name="cache_filter_storage_save_title">Tallenna suodatin nimellä</string>
     <string name="cache_filter_storage_save_confirm_title">Tallenna suodattimen ylikirjoitus</string>
@@ -564,7 +571,7 @@
     <string name="about_license">Lisenssi</string>
     <string name="about_apache_license"><a href="">Apache-lisenssi, versio 2.0</a></string>
     <string name="about_help">Ohjeet</string>
-    <string name="about_system_collecting">Järjestelmätiedot kerätään, ole hyvä ja odota…</string>
+    <string name="about_system_collecting">Kerätään järjestelmätietoja, ole hyvä ja odota…</string>
     <string name="about_system_include">Liitä mukaan seuraavat järjestelmätiedot lähettäessäsi virheraporttia tai tiedustellessasi lisätietoja c:geosta:</string>
     <string name="about_system_info_send_button">Lähetä sähköpostitse…</string>
     <string name="about_system_info">c:geo järjestelmätiedot</string>
@@ -1244,6 +1251,7 @@
     <string name="cache_distance">Etäisyys</string>
     <string name="cache_difficulty">Vaikeus</string>
     <string name="cache_terrain">Maasto</string>
+    <string name="cache_difficulty_terrain">Vaikeus / Maasto</string>
     <string name="cache_rating">Arviointi</string>
     <string name="cache_own_rating">Sinun arviointisi</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
@@ -1432,7 +1440,7 @@
     <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_filter">Suodata</string>
     <string name="search_filter_button">Etsi suodattimella</string>
-    <string name="search_filter_info_message">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
+    <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_filter_temporary_user_information_title">Uusi suodatinkehys</string>
     <string name="search_filter_temporary_user_information">c:geo on ottanut käyttöön uuden suodatusjärjestelmän, joka tukee joustavia, yhdistettäviä ja tallennettavia suodattimia. \n\nLöydät globaalin suodattimen nyt kätkölistojen sekä (live-)kartan yläreunan suodatinnapin kautta.</string>
     <string name="search_tb">Reissaaja</string>
