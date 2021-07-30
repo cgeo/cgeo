@@ -489,6 +489,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">読み込み</string>
     <string name="cache_filter_storage_delete_button">削除</string>
+    <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
