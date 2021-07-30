@@ -228,7 +228,6 @@
     <string name="err_tb_display">c:geo無法顯示您要的旅行蟲資訊，它真的是旅行蟲/地理錢幣嗎</string>
     <string name="err_tb_details_open">c:geo 無法讀取旅行從的詳細資訊</string>
     <string name="err_tb_not_loggable">這個旅行蟲或地理錢幣無法登錄到系統</string>
-    <string name="err_tb_not_found">無法找到那個旅行蟲或地理錢幣</string>
     <string name="err_tb_find_that">無法找到那個旅行蟲或地理錢幣</string>
     <string name="err_waypoint_cache_unknown">哪個地理藏寶要加入航點</string>
     <string name="err_waypoint_add_failed">c:geo無法增加您的航點</string>
@@ -731,7 +730,6 @@
     <string name="init_backup_settings_restore">還原設定</string>
     <string name="settings_readingerror">錯誤讀取設定</string>
     <string name="settings_restart">c:geo必須馬上重新啟動來更新設定。</string>
-    <string name="settings_folder_changed">資料夾%1$s將改變成資料夾%2$s。按下%4$s來執行。</string>
     <string name="settings_info_offline_maps_title">離線地圖的資訊</string>
     <string name="settings_info_offline_maps">c:geo支援離線地圖。你使用不同提供者的地圖或是自行建立的地圖。您必須先選擇離線地圖的資料夾\'。</string>
     <string name="settings_info_themes_title">地圖外觀資訊</string>
@@ -1575,7 +1573,6 @@
     <plurals name="favorite_points">
         <item quantity="other">%s我的最愛</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt;%%我的最愛</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo捷徑</string>
     <string name="create_shortcut">建立捷徑</string>
@@ -1673,7 +1670,6 @@
     <string name="receivedownload_intenttitle">接收檔案</string>
     <string name="receivedownload_success">檔成功儲存為%s</string>
     <string name="receivedownload_error">接收檔案時發生錯誤</string>
-    <string name="receivedownload_error_io_exception">接收檔案錯誤。資料夾是可讀寫的嗎?</string>
     <string name="receivedownload_error_filenotfound_exception">找不到檔案當接收時</string>
     <string name="receivedownload_amount_copied">已複製 %s</string>
     <string name="receivedownload_cancelled">檔案傳輸取消</string>
@@ -1692,7 +1688,7 @@
     <string name="downloadmap_themefile">佈景檔案</string>
     <string name="downloadmap_tilefile">路線資料檔案</string>
     <string name="downloadmap_download">下載</string>
-    <string name="downloadmap_retrieving_directory_data">正在檢索資料...</string>
+    <string name="downloadmap_retrieving_directory_data">正在檢索資料…</string>
     <string name="downloadmap_checking_for_updates">正在檢查更新…</string>
     <string name="downloadtile_title">遺失路線資料</string>
     <string name="no_updates_found">未找到更新</string>
