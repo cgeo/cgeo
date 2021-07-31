@@ -52,7 +52,7 @@ public enum WaypointType {
     public final int dotMarkerId;
     public final int disabledMarkerId;
 
-    WaypointType(@NonNull final String id, @NonNull final String shortId, @NonNull final String gpx, @StringRes final int stringId, @StringRes final int stringIdNewWpt, @DrawableRes final int markerId, final int order, @DrawableRes final int dotMarkerId) {
+    WaypointType(@NonNull final String id, @NonNull final String shortId, @NonNull final String gpx, @StringRes final int stringId, @StringRes final int stringIdNewWpt, @DrawableRes final int markerId, final int order, @DrawableRes final int dotMarkerId, @DrawableRes final int disabledMarkerId) {
         this.id = id;
         this.shortId = shortId;
         this.gpx = gpx;
