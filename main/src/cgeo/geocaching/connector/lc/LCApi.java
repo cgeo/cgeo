@@ -45,12 +45,15 @@ import org.apache.commons.lang3.StringUtils;
 
 final class LCApi {
 
-    private static final SynchronizedDateFormat DATE_FORMAT = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
-
     @NonNull
     private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
     private static final String CONSUMER_KEY    = LocalizationUtils.getString(R.string.alc_consumer_key);
+
+    private static final String LOCATION  = "/Location";
+    private static final String LONGITUDE = "Longitude";
+    private static final String LATITUDE  = "Latitude";
+    private static final String TITLE     = "Title";
 
     private LCApi() {
         // utility class with static methods
@@ -58,7 +61,7 @@ final class LCApi {
 
     @Nullable
     protected static Geocache searchByGeocode(final String geocode) {
-        if (!Settings.isGCPremiumMember()) {
+        if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return null;
         }
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
@@ -73,7 +76,7 @@ final class LCApi {
     @NonNull
     protected static Collection<Geocache> searchByBBox(final Viewport viewport) {
 
-        if (!Settings.isGCPremiumMember() || viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
+        if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty() || viewport.getLatitudeSpan() == 0 || viewport.getLongitudeSpan() == 0) {
             return Collections.emptyList();
         }
 
@@ -86,7 +89,7 @@ final class LCApi {
         final Geopoint gp1 = new Geopoint(lat1, lon1);
         final Geopoint gp2 = new Geopoint(lat2, lon2);
         final double radius = gp1.distanceTo(gp2) * 500; // we get diameter in km, need radius in m
-        Log.d("_LC Radius: " + String.valueOf((int) radius));
+        Log.d("_LC Radius: " + (int) radius);
         final Parameters params = new Parameters("skip", "0");
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         params.add("take", "500");
@@ -106,8 +109,9 @@ final class LCApi {
         return searchByCenter(center, 10);
     }
 
+    @NonNull
     private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInKm) {
-        if (!Settings.isGCPremiumMember()) {
+        if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
         final Parameters params = new Parameters("skip", "0");
@@ -142,19 +146,18 @@ final class LCApi {
         return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
     }
 
-
     @NonNull
     private static Single<Response> apiRequest(final String uri) {
         return Network.getRequest(API_HOST + uri);
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, final Parameters params, final Parameters headers) {
+    private static Single<Response> apiRequest(final String uri, @Nullable final Parameters params, final Parameters headers) {
         return apiRequest(uri, params, headers, false);
     }
 
     @NonNull
-    private static Single<Response> apiRequest(final String uri, final Parameters params, final Parameters headers, final boolean isRetry) {
+    private static Single<Response> apiRequest(final String uri, @Nullable final Parameters params, final Parameters headers, final boolean isRetry) {
 
         final Single<Response> response = Network.getRequest(API_HOST + uri, params, headers);
 
@@ -167,10 +170,16 @@ final class LCApi {
         });
     }
 
-    @NonNull
+    @Nullable
     private static Geocache importCacheFromJSON(final Response response) {
         try {
-            final JsonNode json = JsonUtils.reader.readTree(Network.getResponseData(response));
+            final String jsonString = Network.getResponseData(response);
+            if (jsonString == null) {
+                Log.d("_LC importCacheFromJson: null response from network");
+                return null;
+            }
+            final JsonNode json = JsonUtils.reader.readTree(jsonString);
+            Log.d("_LC importCacheFromJson: " + json.toPrettyString());
             return parseCacheDetail(json);
         } catch (final Exception e) {
             Log.w("_LC importCacheFromJSON", e);
@@ -183,7 +192,7 @@ final class LCApi {
         try {
             final String jsonString = Network.getResponseData(response);
             if (jsonString == null) {
-                Log.d("null response from network");
+                Log.d("_LC importCachesFromJson: null response from network");
                 return Collections.emptyList();
             }
             final JsonNode json = JsonUtils.reader.readTree(jsonString);
@@ -210,15 +219,15 @@ final class LCApi {
     private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
-            final JsonNode location = response.at("/Location");
+            final JsonNode location = response.at(LOCATION);
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
             final String geocode = LCConnector.GEOCODE_PREFIX + response.get("Id").asText();
             cache.setReliableLatLon(true);
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
-            cache.setName(response.get("Title").asText());
-            cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
+            cache.setName(response.get(TITLE).asText());
+            cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(CacheType.ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
@@ -238,7 +247,7 @@ final class LCApi {
     private static Geocache parseCacheDetail(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
-            final JsonNode location = response.at("/Location");
+            final JsonNode location = response.at(LOCATION);
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
             final String geocode = LCConnector.GEOCODE_PREFIX + response.get("Id").asText();
@@ -247,9 +256,9 @@ final class LCApi {
             cache.setReliableLatLon(true);
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
-            cache.setName(response.get("Title").asText());
+            cache.setName(response.get(TITLE).asText());
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
-            cache.setCoords(new Geopoint(location.get("Latitude").asText(), location.get("Longitude").asText()));
+            cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
             cache.setType(CacheType.ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
@@ -278,8 +287,8 @@ final class LCApi {
         for (final JsonNode wptResponse: wptsJson) {
             stageCounter++;
             try {
-                final Waypoint wpt = new Waypoint(wptResponse.get("Title").asText(), WaypointType.PUZZLE, false);
-                final JsonNode location = wptResponse.at("/Location");
+                final Waypoint wpt = new Waypoint(wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
+                final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
                 final String desc  = wptResponse.get("Description").asText();
 
@@ -294,8 +303,8 @@ final class LCApi {
 
                 wpt.setNote("<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc + "<p><p>" + wptResponse.get("Question").asText());
 
-                final Geopoint pt = new Geopoint(location.get("Latitude").asDouble(), location.get("Longitude").asDouble());
-                if (pt != null && !pt.equals(pointZero)) {
+                final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
+                if (!pt.equals(pointZero)) {
                     wpt.setCoords(pt);
                 } else {
                     wpt.setOriginalCoordsEmpty(true);
@@ -314,12 +323,12 @@ final class LCApi {
 
     @Nullable
     private static Date parseDate(final String date) {
+        final SynchronizedDateFormat dateFormat = new SynchronizedDateFormat("yyyy-MM-dd", Locale.getDefault());
         try {
-            return DATE_FORMAT.parse(date);
+            return dateFormat.parse(date);
         } catch (final ParseException e) {
             return new Date(0);
         }
-
     }
 }
 
