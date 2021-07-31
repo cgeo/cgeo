@@ -73,7 +73,7 @@ public class InsetBuilder {
         }
 
         // vertical offset from bottom:
-        final int vDelta = height / 10;
+        final int vDelta = 0;
 
         // horizontal
         if (hPos == HORIZONTAL.CENTER) {
