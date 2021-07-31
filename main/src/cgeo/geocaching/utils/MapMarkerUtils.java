@@ -260,7 +260,7 @@ public final class MapMarkerUtils {
         if (showBackground(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(marker));
         } else {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_list));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_nopin));
         }
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
