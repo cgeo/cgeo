@@ -7,6 +7,7 @@ import static cgeo.geocaching.models.CalcState.ERROR_STRING;
 
 import android.content.Context;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Locale;
 
@@ -17,7 +18,7 @@ import org.json.JSONObject;
 /**
  * Data used to capture the state of this Variable such that it can be restored again later
  */
-public final class VariableData implements JSONAble {
+public final class VariableData implements JSONAble, Serializable {
     private final char name;
     /**
      * Note, we have to use a String rather than an Editable as Editable's can't be serialized
