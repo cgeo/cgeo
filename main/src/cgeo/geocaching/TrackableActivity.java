@@ -375,7 +375,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
 
-    private static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
+    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
 
         @Override
         public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {

@@ -1614,7 +1614,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      */
     protected ActionMode currentActionMode;
 
-    protected static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
+    public static class DescriptionViewCreator extends TabbedViewPagerFragment<CachedetailDescriptionPageBinding> {
 
         private int maxPersonalNotesChars = 0;
         private Geocache cache;
@@ -1929,7 +1929,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    private static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
+    public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
         private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
         private Geocache cache;
 
@@ -2147,7 +2147,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    private static class InventoryViewCreator extends TabbedViewPagerFragment<CachedetailInventoryPageBinding> {
+    public static class InventoryViewCreator extends TabbedViewPagerFragment<CachedetailInventoryPageBinding> {
 
         @Override
         public CachedetailInventoryPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -2182,7 +2182,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    private static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
+    public static class ImagesViewCreator extends TabbedViewPagerFragment<CachedetailImagesPageBinding> {
 
         @Override
         public CachedetailImagesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
