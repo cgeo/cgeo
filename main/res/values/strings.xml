@@ -346,6 +346,7 @@
     <string name="menu_scan_geo">Scan geocode</string>
     <string name="menu_lists_pocket_queries">Lists / pocket queries</string>
     <string name="menu_scan_description">c:geo can scan geocodes which are printed as QR code. The necessary app is not installed. Do you want to open Google Play to install it?</string>
+    <string name="menu_invert_order">Invert order</string>
 
     <!-- main screen -->
     <string name="live_map_button">Live map</string>
