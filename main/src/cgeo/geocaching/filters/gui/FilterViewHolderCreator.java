@@ -27,6 +27,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -65,7 +66,7 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                             CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
                         .setValueDisplayTextGetter(CacheType::getShortL10n)
-                        .setValueDrawableGetter(ct -> ImageParam.id(ct.markerId)) , 2, false);
+                        .setValueDrawableGetter(ct -> ImageParam.id(ct.markerId)) , 2, null);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
@@ -116,7 +117,8 @@ public class FilterViewHolderCreator {
                     ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
                         .setSelectableValues(ConnectorFactory.getConnectors())
                         .setValueDisplayTextGetter(IConnector::getName)
-                        .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)) , 1, true);
+                        .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)) , 1,
+                    new HashSet<>(ConnectorFactory.getActiveConnectors()));
                 break;
             case STORED_SINCE:
                 result = createStoredSinceFilterViewHolder();
@@ -197,7 +199,7 @@ public class FilterViewHolderCreator {
             .setValueDisplayTextGetter(f -> f.title)
             .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
-        return new CheckboxFilterViewHolder<>(vgfa, 1, true);
+        return new CheckboxFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
 
     private static IFilterViewHolder<?> createStoredSinceFilterViewHolder() {

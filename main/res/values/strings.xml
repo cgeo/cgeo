@@ -562,6 +562,7 @@
 
     <string name="cache_filter_checkboxlist_selectallnone">Select all</string>
     <string name="cache_filter_checkboxlist_add_items">Add more items</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Add all items</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Add items</string>
 
     <string name="cache_filter_favorites_absolute">Absolute</string>

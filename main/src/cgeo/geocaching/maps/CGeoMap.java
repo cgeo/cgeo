@@ -379,11 +379,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                         final int detailTotal = updateProgressData.getInt(KEY_TOTAL);
                         final int secondsElapsed = (int) (updateProgressData.getLong(KEY_ELAPSED_MS) / 1000);
 
-                        final int secondsRemaining = (detailTotal - detailProgress) * secondsElapsed / detailProgress;
+                        final int secondsRemaining = detailProgress <= 0 ? -1 : (detailTotal - detailProgress) * secondsElapsed / detailProgress;
 
                         final Resources res = map.res;
                         waitDialog.setProgress(detailProgress);
-                        if (secondsRemaining < 40) {
+                        if (secondsRemaining < 0) {
+                            waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.unknown_short));
+                        } else if (secondsRemaining < 40) {
                             waitDialog.setMessage(res.getString(R.string.caches_downloading) + " " + res.getString(R.string.caches_eta_ltm));
                         } else {
                             final int minsRemaining = secondsRemaining / 60;

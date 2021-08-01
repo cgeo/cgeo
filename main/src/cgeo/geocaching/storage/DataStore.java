@@ -4348,7 +4348,7 @@ public class DataStore {
             where.append(" AND ").append(dbTableCaches).append(".archived == 0");
         }
         if (excludeOfflineLogs) {
-            where.append(" AND NOT EXISTS (SELECT geocode FROM " + dbTableLogsOffline + " WHERE " + dbTableLogsOffline + ".geocode = " + dbTableWaypoints + ".geocode)");
+            where.append(" AND NOT EXISTS (SELECT " + dbTableLogsOffline + ".geocode FROM " + dbTableLogsOffline + " WHERE " + dbTableLogsOffline + ".geocode = " + dbTableWaypoints + ".geocode)");
         }
         if (type != CacheType.ALL) {
             where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
@@ -4360,7 +4360,7 @@ public class DataStore {
         }
         query.append(" FROM ").append(dbTableWaypoints).append(", ").append(dbTableCaches).append(" WHERE ").append(dbTableWaypoints)
                 .append(".geocode == ").append(dbTableCaches).append(".geocode AND ").append(where)
-                .append(" LIMIT " + (Settings.getKeyInt(R.integer.waypoint_threshold_max) * 2));  // Hardcoded limit to avoid memory overflow
+                .append(" LIMIT " + (Math.max(10, Settings.getKeyInt(R.integer.waypoint_threshold_max)) * 2));  // Hardcoded limit to avoid memory overflow
 
         return cursorToColl(database.rawQuery(query.toString(), null), new HashSet<>(), DataStore::createWaypointFromDatabaseContent);
     }

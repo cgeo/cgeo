@@ -6,6 +6,7 @@ import cgeo.geocaching.models.WaypointParser;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.SerializationUtils;
 import org.junit.Test;
 import static org.assertj.core.api.Assertions.failBecauseExceptionWasNotThrown;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -127,5 +128,17 @@ public class FormulaParserTest {
         } catch (final FormulaParser.ParseException e) {
             // expected
         }
+    }
+
+    @Test
+    public void testSerializeCalcState() {
+        final List<VariableData> variables = new ArrayList<>();
+        variables.add(new VariableData('a', "expression"));
+        final CalcState calcState = CoordinatesCalculateUtils.createCalcState("N  AB° 48.[B+C-A]^2", "E (B%C)°  38.(D+F)*2", variables);
+        calcState.buttons.add(new ButtonData());
+
+        final byte[] serValue = SerializationUtils.serialize(calcState);
+        final CalcState calcState2 = SerializationUtils.deserialize(serValue);
+        assertThat(calcState2.plainLat).isEqualTo(calcState.plainLat);
     }
 }
