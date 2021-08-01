@@ -2215,6 +2215,8 @@
         <item quantity="other">Route loaded with %d route points</item>
     </plurals>
     <string name="center_on_route">Center on route</string>
+    <string name="individual_route_set_as_start_title">Set as route start</string>
+    <string name="individual_route_set_as_start_message">Set this item as route start and move all subsequent items to the top of the current route?</string>
 
     <!-- individual track -->
     <string name="individual_track">GPX track/route</string>
