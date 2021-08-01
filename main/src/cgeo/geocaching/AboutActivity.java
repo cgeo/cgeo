@@ -144,7 +144,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         throw new IllegalStateException(); // cannot happen, when switch case is enum complete
     }
 
-    static class VersionViewCreator extends TabbedViewPagerFragment<AboutVersionPageBinding> {
+    public static class VersionViewCreator extends TabbedViewPagerFragment<AboutVersionPageBinding> {
 
         @Override
         public AboutVersionPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -198,7 +198,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
     }
 
-    static class ChangeLogViewCreator extends TabbedViewPagerFragment<AboutChangesPageBinding> {
+    public static class ChangeLogViewCreator extends TabbedViewPagerFragment<AboutChangesPageBinding> {
 
         @Override
         public AboutChangesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -232,7 +232,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
     }
 
-    static class SystemViewCreator extends TabbedViewPagerFragment<AboutSystemPageBinding> {
+    public static class SystemViewCreator extends TabbedViewPagerFragment<AboutSystemPageBinding> {
 
         @Override
         public AboutSystemPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -275,7 +275,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
     }
 
-    static class LicenseViewCreator extends TabbedViewPagerFragment<AboutLicensePageBinding> {
+    public static class LicenseViewCreator extends TabbedViewPagerFragment<AboutLicensePageBinding> {
 
         @Override
         public AboutLicensePageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
@@ -311,7 +311,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         }
     }
 
-    static class ContributorsViewCreator extends TabbedViewPagerFragment<AboutContributorsPageBinding> {
+    public static class ContributorsViewCreator extends TabbedViewPagerFragment<AboutContributorsPageBinding> {
 
         @Override
         public AboutContributorsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
