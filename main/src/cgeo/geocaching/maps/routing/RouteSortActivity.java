@@ -32,6 +32,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import com.google.android.material.button.MaterialButton;
 import com.mobeta.android.dslv.DragSortController;
@@ -106,7 +107,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                             title.setCompoundDrawablesRelativeWithIntrinsicBounds(0, 0, 0, 0);
                             break;
                         default:
-                            throw new IllegalStateException("unknow RouteItemType in RouteSortActivity");
+                            throw new IllegalStateException("unknown RouteItemType in RouteSortActivity");
                     }
                     title.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
                     detail.setOnClickListener(v1 -> CacheDetailActivity.startActivity(listView.getContext(), data.getGeocode(), data.getName()));
@@ -141,25 +142,31 @@ public class RouteSortActivity extends AbstractActionBarActivity {
         final SimpleFloatViewManager simpleFloatViewManager = new SimpleFloatViewManager(listView);
         simpleFloatViewManager.setBackgroundColor(getResources().getColor(R.color.colorBackgroundSelected));
         listView.setFloatViewManager(simpleFloatViewManager);
-
     }
 
-    private boolean delete(final int position) {
+    private void delete(final int position) {
         routeItems.remove(position);
         routeItemAdapter.notifyDataSetChanged();
         changed = true;
-        return true;
+    }
+
+    private void invertOrder() {
+        Collections.reverse(routeItems);
+        routeItemAdapter.notifyDataSetChanged();
+        changed = true;
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.menu_ok_cancel, menu);
+        menu.findItem(R.id.menu_invert_order).setVisible(true);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (item.getItemId() == R.id.menu_item_save) {
+        final int itemId = item.getItemId();
+        if (itemId == R.id.menu_item_save) {
             AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> DataStore.saveIndividualRoute(routeItems), () -> {
                 changed = false;
                 invalidateOptionsMenu();
@@ -167,10 +174,13 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                 finish();
             });
             return true;
-        } else if (item.getItemId() == R.id.menu_item_cancel) {
+        } else if (itemId == R.id.menu_item_cancel) {
             finish();
             return true;
-        } else if (item.getItemId() == android.R.id.home) {
+        } else if (itemId == R.id.menu_invert_order) {
+            invertOrder();
+            return true;
+        } else if (itemId == android.R.id.home) {
             onBackPressed();
             return true;
         }
