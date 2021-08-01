@@ -52,7 +52,7 @@ public class Trackable implements ILogable {
     private String goal = null;
     private String details = null;
     private String image = null;
-    private List<LogEntry> logs = new ArrayList<>();
+    private final List<LogEntry> logs = new ArrayList<>();
     private String trackingcode = null;
     private TrackableBrand brand = null;
     private TrackableConnector trackableConnector = null;
@@ -356,7 +356,10 @@ public class Trackable implements ILogable {
     }
 
     public void setLogs(final List<LogEntry> logs) {
-        this.logs = logs != null ? logs : new ArrayList<>();
+        this.logs.clear();
+        if (logs != null) {
+            this.logs.addAll(logs);
+        }
     }
 
     @Override
@@ -408,7 +411,7 @@ public class Trackable implements ILogable {
         }
         ImageUtils.addImagesFromHtml(images, geocode, getDetails());
         for (final LogEntry log : getLogs()) {
-            images.addAll(log.getLogImages());
+            images.addAll(log.logImages);
         }
         return images;
     }
