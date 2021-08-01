@@ -155,10 +155,17 @@ public final class Viewport {
     @NonNull
     public StringBuilder sqlWhere(@Nullable final String dbTable) {
         final String prefix = dbTable == null ? "" : (dbTable + ".");
-        return new StringBuilder(prefix).append("latitude >= ").append(getLatitudeMin()).append(" and ")
-                .append(prefix).append("latitude <= ").append(getLatitudeMax()).append(" and ")
-                .append(prefix).append("longitude >= ").append(getLongitudeMin()).append(" and ")
-                .append(prefix).append("longitude <= ").append(getLongitudeMax());
+        return new StringBuilder(prefix).append("latitude >= ").append(doubleToSql(getLatitudeMin())).append(" and ")
+                .append(prefix).append("latitude <= ").append(doubleToSql(getLatitudeMax())).append(" and ")
+                .append(prefix).append("longitude >= ").append(doubleToSql(getLongitudeMin())).append(" and ")
+                .append(prefix).append("longitude <= ").append(doubleToSql(getLongitudeMax()));
+    }
+
+    private static String doubleToSql(final double value) {
+        if (Double.isNaN(value) || Double.isInfinite(value)) {
+            return "0";
+        }
+        return String.valueOf(value).replace(',', '.');
     }
 
     /**
