@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- fixes -->
+    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -419,7 +421,7 @@
     <string name="caches_reset_cache_icons_title">Reimposta icone cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
-    <string name="caches_askdeletion">Chiedi l\'eliminazione se vuota</string>
+    <string name="caches_askdeletion">Chiedi di eliminare se vuota</string>
     <string name="select_icon">Seleziona icona</string>
     <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
     <!-- caches lists -->
