@@ -484,6 +484,7 @@
     <string name="cache_filter_datefilter_label_from">來自：</string>
     <string name="cache_filter_datefilter_label_to">至:</string>
     <string name="cache_filter_checkboxlist_selectallnone">選擇全部</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Alle Elemente hinzufügen</string>
     <string name="cache_filter_favorites_absolute">絕對</string>
     <string name="cache_filter_favorites_percentage">百分比</string>
     <string name="cache_filter_distance_use_current_position">使用目前位置</string>
