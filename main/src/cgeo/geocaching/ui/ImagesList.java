@@ -109,6 +109,7 @@ public class ImagesList {
         final CompositeDisposable disposables = new CompositeDisposable(new CancellableDisposable(this::removeAllViews));
 
         imagesView = parentView.findViewById(R.id.spoiler_list);
+        imagesView.removeAllViews();
 
         final HtmlImage imgGetter = new HtmlImage(geocode, true, false, false);
 
