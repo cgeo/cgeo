@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">OΚ</string>
     <!-- basics -->
     <string name="cache">Κρύπτη</string>
     <string name="detail">Λεπτομέρειες</string>
@@ -516,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Έως:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Επιλογή όλων</string>
     <string name="cache_filter_checkboxlist_add_items">Προσθέστε περισσότερα αντικείμενα</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Προσθήκη όλων των αντικειμένων</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Προσθήκη αντικειμένων</string>
     <string name="cache_filter_favorites_absolute">Απόλυτη</string>
     <string name="cache_filter_favorites_percentage">Ποσοστό</string>
