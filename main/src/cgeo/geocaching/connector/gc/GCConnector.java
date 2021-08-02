@@ -594,13 +594,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public void addToIgnorelist(@NonNull final Geocache cache) {
+    public boolean addToIgnorelist(@NonNull final Geocache cache) {
         GCParser.ignoreCache(cache);
+        return true;
     }
 
     @Override
-    public void removeFromIgnorelist(@NonNull final Geocache cache) {
+    public boolean removeFromIgnorelist(@NonNull final Geocache cache) {
         // Not supported for gc.com
+        return false;
     }
 
     @Override
