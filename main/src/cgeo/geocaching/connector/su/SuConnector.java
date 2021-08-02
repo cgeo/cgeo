@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserInfo;
 import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -17,7 +18,6 @@ import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
-import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
@@ -47,7 +47,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, ISearchByFilter, IFavoriteCapability, IVotingCapability, IgnoreCapability {
+public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, ISearchByFilter, IFavoriteCapability, IVotingCapability, IIgnoreCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -501,8 +501,19 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public void ignoreCache(@NonNull final Geocache cache) {
+    public void addToIgnorelist(@NonNull final Geocache cache) {
         SuApi.setIgnoreState(cache, true);
+    }
+    
+    
+    @Override
+    public boolean canRemoveFromIgnoreCache(@NonNull final Geocache cache) {
+        return true;
+    }
+
+    @Override
+    public void removeFromIgnorelist(@NonNull final Geocache cache) {
+        SuApi.setIgnoreState(cache, false);
     }
 
 }
