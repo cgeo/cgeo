@@ -517,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Buraya:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tümünü seç</string>
     <string name="cache_filter_checkboxlist_add_items">Daha fazla öğe ekle</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Tüm öğeleri ekle</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Öğe Ekle</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
