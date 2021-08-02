@@ -517,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Bis:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alle auswählen</string>
     <string name="cache_filter_checkboxlist_add_items">Weitere Elemente hinzufügen</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Alle Elemente hinzufügen</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Elemente hinzufügen</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Prozentual</string>
