@@ -232,13 +232,12 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     public void setViewFromFilter(final F filter) {
         this.visibleValues.clear();
         final Collection<T> set = filterAccessor.getValues(filter);
-        final boolean setCheckedAll = set.isEmpty() && this.alwaysVisibleItems == null;
         for (T value : filterAccessor.getSelectableValuesAsArray()) {
             if (set.contains(value) || this.alwaysVisibleItems == null || this.alwaysVisibleItems.contains(value)) {
                 this.visibleValues.add(value);
             }
             final ImmutablePair<View, CheckBox> cb = getValueCheckbox(value);
-            cb.right.setChecked(setCheckedAll || set.contains(value));
+            cb.right.setChecked((set.isEmpty() && this.alwaysVisibleItems == null) || set.contains(value));
         }
 
         relayout();
