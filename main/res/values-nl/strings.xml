@@ -517,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
     <string name="cache_filter_checkboxlist_add_items">Meer items toevoegen</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Alle items toevoegen</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Items toevoegen</string>
     <string name="cache_filter_favorites_absolute">Absoluut</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>
