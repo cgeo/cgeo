@@ -17,6 +17,61 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
+                android:text="@string/search_filter" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent">
+
+            <Button
+                android:id="@+id/search_filter"
+                style="@style/button_full"
+                android:text="@string/search_filter_button"
+                android:layout_alignParentLeft="true"
+                android:layout_toLeftOf="@+id/search_filter_info"
+                android:layout_centerVertical="true"
+                android:layout_width="wrap_content"/>
+
+            <ImageView
+                android:id="@+id/search_filter_info"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                app:srcCompat="@drawable/settings_info"
+                android:layout_marginLeft="0dp"
+                android:layout_marginRight="10dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true" />
+        </RelativeLayout>
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
+                android:text="@string/search_geo" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
+            <AutoCompleteTextView
+                android:id="@+id/geocode"
+                style="@style/textinput_embedded"
+                android:hint="@string/search_geo"
+                android:imeOptions="actionGo"
+                android:inputType="textVisiblePassword"
+                android:text="GC"
+                tools:ignore="HardcodedText" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/display_geocode"
+            style="@style/button_full"
+            android:text="@string/search_geo_button" />
+        <!-- ** -->
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
                 android:text="@string/search_coordinates" />
         </RelativeLayout>
 
@@ -61,30 +116,6 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
-                android:text="@string/search_geo" />
-        </RelativeLayout>
-
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
-            <AutoCompleteTextView
-                android:id="@+id/geocode"
-                style="@style/textinput_embedded"
-                android:hint="@string/search_geo"
-                android:imeOptions="actionGo"
-                android:inputType="textVisiblePassword"
-                android:text="GC"
-                tools:ignore="HardcodedText" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/display_geocode"
-            style="@style/button_full"
-            android:text="@string/search_geo_button" />
-        <!-- ** -->
-
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
-            <TextView
-                style="@style/separator_horizontal_headline"
                 android:text="@string/search_kw" />
         </RelativeLayout>
 
@@ -122,38 +153,6 @@
             style="@style/button_full"
             android:text="@string/search_hbu_button" />
         <!-- ** -->
-
-        <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
-            <TextView
-                style="@style/separator_horizontal_headline"
-                android:text="@string/search_filter" />
-        </RelativeLayout>
-
-        <RelativeLayout
-            android:layout_height="wrap_content"
-            android:layout_width="match_parent">
-
-        <Button
-            android:id="@+id/search_filter"
-            style="@style/button_full"
-            android:text="@string/search_filter_button"
-            android:layout_alignParentLeft="true"
-            android:layout_toLeftOf="@+id/search_filter_info"
-            android:layout_centerVertical="true"
-            android:layout_width="wrap_content"/>
-
-            <ImageView
-                android:id="@+id/search_filter_info"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                app:srcCompat="@drawable/settings_info"
-                android:layout_marginLeft="0dp"
-                android:layout_marginRight="10dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true" />
-
-        </RelativeLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
             <View style="@style/separator_horizontal" />

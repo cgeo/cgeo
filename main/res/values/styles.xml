@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
+<resources xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <!-- system definitions -->
 
@@ -425,7 +423,7 @@
     <!-- separators -->
     <style name="separator_horizontal">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">1dip</item>
+        <item name="android:layout_height">3dip</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:background">@color/colorSeparator</item>
     </style>
@@ -455,6 +453,7 @@
         <item name="android:scrollHorizontally">true</item>
         <item name="android:ellipsize">marquee</item>
         <item name="android:textSize">@dimen/textSize_headingPrimary</item>
+        <item name="android:textStyle">bold</item>
         <item name="android:background">@color/colorBackground</item>
     </style>
 
