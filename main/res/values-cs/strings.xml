@@ -521,6 +521,7 @@
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrat vše</string>
     <string name="cache_filter_checkboxlist_add_items">Přidat více položek</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Přidat všechny položky</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Přidat položky</string>
     <string name="cache_filter_favorites_absolute">Absolutní</string>
     <string name="cache_filter_favorites_percentage">Procentuálně</string>
