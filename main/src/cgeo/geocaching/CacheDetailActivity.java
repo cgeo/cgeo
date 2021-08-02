@@ -773,7 +773,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void ignoreCache() {
         SimpleDialog.of(this).setTitle(R.string.ignore_confirm_title).setMessage(R.string.ignore_confirm_message).confirm((dialog, which) -> {
-            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IIgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache));
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IIgnoreCapability) ConnectorFactory.getConnector(cache)).addToIgnorelist(cache));
             // For consistency, remove also the local cache immediately from memory cache and database
             if (cache.isOffline()) {
                 dropCache();
