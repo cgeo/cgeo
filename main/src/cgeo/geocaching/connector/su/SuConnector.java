@@ -501,8 +501,9 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public void addToIgnorelist(@NonNull final Geocache cache) {
+    public boolean addToIgnorelist(@NonNull final Geocache cache) {
         SuApi.setIgnoreState(cache, true);
+        return true;
     }
     
     
@@ -512,8 +513,9 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
     }
 
     @Override
-    public void removeFromIgnorelist(@NonNull final Geocache cache) {
+    public boolean removeFromIgnorelist(@NonNull final Geocache cache) {
         SuApi.setIgnoreState(cache, false);
+        return true;
     }
 
 }
