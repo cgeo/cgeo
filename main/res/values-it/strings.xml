@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- fixes -->
+    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -261,7 +263,7 @@
     <string name="warn_search_help_title">Necessiti di aiuto?</string>
     <string name="warn_search_help_address">Inserisci indirizzo o nome di luogo. Per esempio, usa un indirizzo simile a questo: \"Via Alessandro Volta 1, Milano, Italia\", oppure solo la città come \"Milano\" o di un luogo famoso come ad esempio \"Colosseo\".</string>
     <string name="warn_search_help_gccode">Inserisci il codice del geocache. Per esempio \"GC1VCAZ\".</string>
-    <string name="warn_search_help_keyword">Inserisci delle parole che supponi siano citate da qualche parte all\'interno del cache che vuoi trovare.</string>
+    <string name="warn_search_help_keyword">Inserisci delle parole che supponi siano citate da qualche parte all\'interno del cache che vuoi trovare. Per esempio \"Cache notturno\".</string>
     <string name="warn_search_help_user">Inserisci il nome dell\'utente di Geocaching.com.</string>
     <string name="warn_search_help_tb">Inserisci il codice del trackable. Per esempio \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Prego, inserire del testo nel log.</string>
@@ -271,7 +273,7 @@
     <string name="warn_invalid_character">Il carattere deve essere una lettera o una cifra</string>
     <string name="warn_notloggedin_title">Modalità offline</string>
     <string name="warn_notloggedin_short">Non loggato. La mappa live mostrerà solo i cache memorizzati localmente. Tocca qui per ulteriori informazioni.</string>
-    <string name="warn_notloggedin_long">Non connesso (ancora). Mappa live mostrerà solo le cache memorizzate localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
+    <string name="warn_notloggedin_long">Non connesso (ancora). La mappa live mostrerà solo i cache memorizzati localmente e le funzioni online non funzioneranno.\n\nNon c\'è nessuna connessione di rete, un problema di server oppure devi (ri)configurare i tuoi servizi di geocaching.\n\nVuoi configurare i servizi ora?</string>
     <string name="err_read_pocket_query_list">Errore nella lettura della lista di Pocket query.</string>
     <string name="err_read_bookmark_list">Errore nella lettura degli elenchi dei segnalibri.</string>
     <string name="info_log_posted">c:geo ha inviato il log con successo.</string>
@@ -379,8 +381,8 @@
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
-    <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutte le cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
-    <string name="caches_upload_allcoords">Carica le coordinate per tutte le cache</string>
+    <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
+    <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
     <string name="caches_upload_allcoords_dialogtitle">ATTENZIONE - Caricamento di tutte le coordinate</string>
     <string name="caches_upload_allcoords_warning">Questo sovrascriverà le coordinate esistenti sul server per tutte le cache (selezionate) della tua lista con le coordinate correnti nella tua lista in c:geo! Questo viene utilizzato solo in casi particolari, per esempio, quando hai importato un file GPX che contiene coordinate corrette come coordinate di lista. Questo non può essere annullato e lo si dovrebbe usare solo se si sa cosa si sta facendo. In casi normali dovresti preferire la funzione \"Carica coordinate modificate\" nello stesso menu.</string>
     <string name="caches_refresh_selected">Aggiorna i cache selezionati</string>
@@ -419,7 +421,7 @@
     <string name="caches_reset_cache_icons_title">Reimposta icone cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
-    <string name="caches_askdeletion">Chiedi l\'eliminazione se vuota</string>
+    <string name="caches_askdeletion">Chiedi di eliminare se vuota</string>
     <string name="select_icon">Seleziona icona</string>
     <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
     <!-- caches lists -->
@@ -648,7 +650,7 @@
     <string name="settings_gc_description">Autorizza c:geo per cercare cache su geocaching.com.</string>
     <string name="settings_ec_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
-    <string name="settings_lc_description">Includi le cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
+    <string name="settings_lc_description">Includi i cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
     <string name="lc_default_description">Questo è un cache Adventure Lab di geocaching.com. Le Adventure possono essere giocate solo con l\'app Adventure Lab di Groundspeak. Tocca l\'icona di Adventure Lab sulla pagina \"Dettagli\" per aprire/installare l\'app Adventure Lab per questa Adventure.\nSe non vuoi visualizzare e cercare i cache Adenture Lab sulla tua mappa, è possibile disattivarli utilizzando il menu \"impostazioni\" - Servizi - Geocaching.com Adventure Lab</string>
     <string name="settings_activate_oc">Attiva</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
@@ -731,7 +733,7 @@
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
-    <string name="init_bigSmileysOnMap">Icone grandi per le cache registrati</string>
+    <string name="init_bigSmileysOnMap">Icone grandi per i cache registrati</string>
     <string name="init_summary_bigSmileysOnMap">Se abilitata, grandi emoticons saranno mostrate per le cache visitate/loggate sulla mappa invece dell\'icona che mostra il tipo di cache (richiede il riavvio).</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
@@ -1788,7 +1790,7 @@
     <string name="attribute_powertrail_yes">Parte di una traccia power</string>
     <string name="attribute_powertrail_no">Non fa parte di una traccia power</string>
     <string name="attribute_challengecache_yes">Sfida cache</string>
-    <string name="attribute_challengecache_no">Nessuna cache di sfida</string>
+    <string name="attribute_challengecache_no">Nessun cache di sfida</string>
     <string name="attribute_hqsolutionchecker_yes">Controllo delle soluzioni Geocaching.com abilitato</string>
     <string name="attribute_hqsolutionchecker_no">Controllo soluzioni Geocaching.com non abilitato</string>
     <string name="attribute_handicaching_yes">Valutato su Handicaching.com</string>
