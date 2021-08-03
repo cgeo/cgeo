@@ -8,13 +8,6 @@
     android:orientation="vertical">
 
     <LinearLayout
-        android:id="@+id/slider_value_anchor"
-        android:layout_height="40dp"
-        android:layout_width="match_parent"
-        android:orientation="horizontal">
-    </LinearLayout>
-
-    <LinearLayout
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:orientation="horizontal">

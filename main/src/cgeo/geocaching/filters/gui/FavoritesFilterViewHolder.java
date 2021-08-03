@@ -31,14 +31,14 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
         percentage.addButtons(R.string.cache_filter_favorites_absolute, R.string.cache_filter_favorites_percentage);
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
+        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(5));
         ll.addView(percentage, llp);
         percentage.addOnButtonCheckedListener((v, i, b) -> resetSliderScale());
 
         slider = new ContinuousRangeSlider(getActivity());
         resetSliderScale();
         llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(20));
+        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(5));
         ll.addView(slider, llp);
 
         return ll;
