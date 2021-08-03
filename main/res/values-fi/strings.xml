@@ -517,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Mihin:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Valitse kaikki</string>
     <string name="cache_filter_checkboxlist_add_items">Lisää vielä kohteita</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Lisää kaikki kohteet</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lisää kohteita</string>
     <string name="cache_filter_favorites_absolute">Absoluuttinen</string>
     <string name="cache_filter_favorites_percentage">Prosenttiosuus</string>
