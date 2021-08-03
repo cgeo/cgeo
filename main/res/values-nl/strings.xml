@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- fixes -->
+    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Details</string>
@@ -514,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Aan:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Alles selecteren</string>
     <string name="cache_filter_checkboxlist_add_items">Meer items toevoegen</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Alle items toevoegen</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Items toevoegen</string>
     <string name="cache_filter_favorites_absolute">Absoluut</string>
     <string name="cache_filter_favorites_percentage">Percentage</string>

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- fixes -->
+    <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaylar</string>
@@ -514,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Buraya:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Tümünü seç</string>
     <string name="cache_filter_checkboxlist_add_items">Daha fazla öğe ekle</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Tüm öğeleri ekle</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Öğe Ekle</string>
     <string name="cache_filter_favorites_absolute">Mutlak</string>
     <string name="cache_filter_favorites_percentage">Yüzde</string>
