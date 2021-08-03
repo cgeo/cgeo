@@ -39,13 +39,13 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
             .set(LogType.FOUND_IT);
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
+        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(5));
         ll.addView(spinnerView, llp);
 
         slider = new ContinuousRangeSlider(getActivity());
         resetSliderScale();
         llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(20));
+        llp.setMargins(0, dpToPixel(5), 0, dpToPixel(5));
         ll.addView(slider, llp);
 
         return ll;

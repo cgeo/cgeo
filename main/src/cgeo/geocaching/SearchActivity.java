@@ -13,7 +13,6 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
-import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -218,20 +217,27 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByCoordsFn() {
-        final String latText = StringUtils.trim(binding.buttonLatitude.getText().toString());
-        final String lonText = StringUtils.trim(binding.buttonLongitude.getText().toString());
+        String[] latlonText = getCoordText();
 
-        if (StringUtils.isEmpty(latText) || StringUtils.isEmpty(lonText)) {
-            final GeoData geo = Sensors.getInstance().currentGeo();
-            binding.buttonLatitude.setText(geo.getCoords().format(GeopointFormatter.Format.LAT_DECMINUTE));
-            binding.buttonLongitude.setText(geo.getCoords().format(GeopointFormatter.Format.LON_DECMINUTE));
-        } else {
-            try {
-                CacheListActivity.startActivityCoordinates(this, new Geopoint(latText, lonText), null);
-            } catch (final Geopoint.ParseException e) {
-                showToast(res.getString(e.resource));
-            }
+        if (StringUtils.isEmpty(latlonText[0]) || StringUtils.isEmpty(latlonText[1])) {
+            final Geopoint gp = Sensors.getInstance().currentGeo().getCoords();
+            updateCoordinates(gp);
+            latlonText = getCoordText();
         }
+
+        try {
+            CacheListActivity.startActivityCoordinates(this, new Geopoint(latlonText[0], latlonText[1]), null);
+        } catch (final Geopoint.ParseException e) {
+            showToast(res.getString(e.resource));
+        }
+    }
+
+    private String[] getCoordText() {
+
+        return new String[] {
+            StringUtils.trim(binding.buttonLatitude.getText().toString()),
+            StringUtils.trim(binding.buttonLongitude.getText().toString())
+         };
     }
 
     private void findByKeywordFn() {
