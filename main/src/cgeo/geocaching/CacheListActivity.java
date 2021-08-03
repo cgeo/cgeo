@@ -343,8 +343,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final class LoadDetailsHandler extends DisposableHandler {
         private final WeakReference<CacheListActivity> activityRef;
 
+        private final LastPositionHelper lastPosition;
+
+
         LoadDetailsHandler(final CacheListActivity activity) {
             activityRef = new WeakReference<>(activity);
+            lastPosition = new LastPositionHelper(activity);
         }
 
         @Override
@@ -394,9 +398,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                                 final List<Geocache> cacheList = activity.cacheList;
                                 cacheList.clear();
                                 cacheList.addAll(result);
-                                activity.adapter.reFilter();
                             }
+                            activity.setFilter();
                             activity.setAdapterCurrentCoordinates(false);
+                            lastPosition.refreshListAtLastPosition();
 
                             activity.showProgress(false);
                             progress.dismiss();
