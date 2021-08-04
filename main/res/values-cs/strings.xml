@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Naskenovat geokód</string>
     <string name="menu_lists_pocket_queries">Seznamy / Pocket Queries</string>
     <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
+    <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
     <string name="live_map_button">Aktivní mapa</string>
     <string name="caches_nearby_button">Nejbližší</string>
@@ -2037,6 +2038,8 @@
         <item quantity="other">Trasa načtena s %d body trasy</item>
     </plurals>
     <string name="center_on_route">Vycentrovat na trasu</string>
+    <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
+    <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <!-- individual track -->
     <string name="individual_track">GPX stopa/trasa</string>
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
