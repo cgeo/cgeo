@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
     <string name="menu_lists_pocket_queries">Λίστες / pocket queries</string>
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
+    <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
     <string name="live_map_button">Live Χάρτης</string>
     <string name="caches_nearby_button">Σε κοντινή απόσταση</string>
@@ -1987,6 +1988,8 @@
         <item quantity="other">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
     </plurals>
     <string name="center_on_route">Κέντρο στη διαδρομή</string>
+    <string name="individual_route_set_as_start_title">Ορισμός ως Εναρξη διαδρομής</string>
+    <string name="individual_route_set_as_start_message">Να οριστεί αυτό το στοιχείο ως αρχή δρομολόγησης και να μετακινηθούν όλα τα επόμενα στοιχεία προς την κορυφή της τρέχουσας διαδρομής;</string>
     <!-- individual track -->
     <string name="individual_track">GPX διαδρομή</string>
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
