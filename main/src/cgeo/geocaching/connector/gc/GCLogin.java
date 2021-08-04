@@ -230,6 +230,7 @@ public class GCLogin extends AbstractLogin {
     public StatusCode logout() {
         try {
             getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout", null).blockingGet());
+            serverParameters = null;
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
