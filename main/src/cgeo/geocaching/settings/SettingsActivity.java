@@ -309,8 +309,22 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void initLCServicePreference(final boolean gcConnectorActive) {
         final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
-        getPreference(R.string.preference_screen_lc).setSummary(getServiceSummary(Settings.isLCConnectorActive() && isActiveGCPM));
-        getPreference(R.string.pref_connectorLCActive).setEnabled(isActiveGCPM);
+        getPreference(R.string.preference_screen_lc).setSummary(getLcServiceSummary(Settings.isLCConnectorActive(), gcConnectorActive));
+        if (isActiveGCPM) {
+            getPreference(R.string.pref_connectorLCActive).setEnabled(true);
+        }
+    }
+
+    private String getLcServiceSummary(final boolean lcConnectorActive, final boolean gcConnectorActive) {
+        if (!lcConnectorActive) {
+            return StringUtils.EMPTY;
+        }
+
+        //lc service is set to active by user. Check whether it can actually be actived due to GC conditions
+        final int lcStatusTextId = gcConnectorActive && Settings.isGCPremiumMember() ?
+            R.string.settings_service_active : R.string.settings_service_active_unavailable;
+
+        return CgeoApplication.getInstance().getString(lcStatusTextId);
     }
 
     private void setWebsite(final int preferenceKey, final String urlOrHost) {
@@ -969,7 +983,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             } else if (isPreference(preference, R.string.pref_connectorECActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
             } else if (isPreference(preference, R.string.pref_connectorLCActive)) {
-                preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_lc)).setSummary(summary);
+                preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_lc)).setSummary(getLcServiceSummary(boolVal, Settings.isGCConnectorActive()));
                 setResult(RESTART_NEEDED);
             } else if (isPreference(preference, R.string.pref_connectorSUActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_su)).setSummary(summary);
