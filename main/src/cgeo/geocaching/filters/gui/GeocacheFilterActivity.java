@@ -71,7 +71,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         new GeocacheFilterType[]{GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN };
     private static final Set<GeocacheFilterType> INTERNAL_FILTER_TYPES_SET = new HashSet<>(Arrays.asList(INTERNAL_FILTER_TYPES));
 
-    private GeocacheFilterContext filterContext;
+    private GeocacheFilterContext filterContext = new GeocacheFilterContext(TRANSIENT);
     private String originalFilterConfig;
 
     private CacheFilterActivityBinding binding;
@@ -104,7 +104,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         if (extras != null) {
             filterContext = extras.getParcelable(EXTRA_FILTER_CONTEXT);
-        } else {
+        }
+        if (filterContext == null) {
             filterContext = new GeocacheFilterContext(TRANSIENT);
         }
 
@@ -197,6 +198,9 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             fillViewFromFilter(savedInstanceState.getString(STATE_CURRENT_FILTER), savedInstanceState.getBoolean(STATE_ADVANCED_VIEW));
         }
         filterContext = (GeocacheFilterContext) savedInstanceState.getSerializable(STATE_FILTER_CONTEXT);
+        if (filterContext == null) {
+            filterContext = new GeocacheFilterContext(TRANSIENT);
+        }
         originalFilterConfig = savedInstanceState.getString(STATE_ORIGINAL_FILTER_CONFIG);
     }
 
