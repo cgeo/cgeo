@@ -11,8 +11,8 @@ public class DifficultyAndTerrainGeocacheFilter extends BaseGeocacheFilter {
     public DifficultyGeocacheFilter difficultyGeocacheFilter;
     public TerrainGeocacheFilter terrainGeocacheFilter;
 
-    private static final String CONFIG_DIFFICULTY = "difficulty";
-    private static final String CONFIG_TERRAIN = "terrain";
+    private static final String CONFIG_KEY_DIFFICULTY = "d";
+    private static final String CONFIG_KEY_TERRAIN = "t";
 
 
     public DifficultyAndTerrainGeocacheFilter() {
@@ -51,15 +51,15 @@ public class DifficultyAndTerrainGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public void setConfig(final ExpressionConfig config) {
-        setToFilterConfig(difficultyGeocacheFilter, CONFIG_DIFFICULTY, config);
-        setToFilterConfig(terrainGeocacheFilter, CONFIG_TERRAIN, config);
+        setToFilterConfig(difficultyGeocacheFilter, CONFIG_KEY_DIFFICULTY, config);
+        setToFilterConfig(terrainGeocacheFilter, CONFIG_KEY_TERRAIN, config);
     }
 
     @Override
     public ExpressionConfig getConfig() {
         final ExpressionConfig config = new ExpressionConfig();
-        addFromFilterConfig(difficultyGeocacheFilter, CONFIG_DIFFICULTY, config);
-        addFromFilterConfig(terrainGeocacheFilter, CONFIG_TERRAIN, config);
+        addFromFilterConfig(difficultyGeocacheFilter, CONFIG_KEY_DIFFICULTY, config);
+        addFromFilterConfig(terrainGeocacheFilter, CONFIG_KEY_TERRAIN, config);
         return config;
     }
 
