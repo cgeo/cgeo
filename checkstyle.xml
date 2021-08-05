@@ -7,7 +7,7 @@
     <property name="localeLanguage" value="en" />
 
     <module name="SuppressionFilter">
-        <property name="file" value="suppressions.xml"/>
+        <property name="file" value="${config_loc}/suppressions.xml"/>
     </module>
     <module name="FileTabCharacter">
         <property name="eachLine" value="true"/>
