@@ -694,6 +694,7 @@
     <string name="init_authorization_credential_username">Kullanıcı adı</string>
     <string name="init_authorization_credential_password">Şifre</string>
     <string name="settings_service_active">Aktif</string>
+    <string name="settings_service_active_unavailable">Aktif/Mevcut değil</string>
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
