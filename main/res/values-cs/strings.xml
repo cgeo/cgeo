@@ -699,6 +699,7 @@
     <string name="init_authorization_credential_username">Uživatelské jméno</string>
     <string name="init_authorization_credential_password">Heslo</string>
     <string name="settings_service_active">Aktivní</string>
+    <string name="settings_service_active_unavailable">Aktivní/Nedostupná</string>
     <string name="settings_navigation_disabled">Zdá se, že tato aplikace není nainstalována</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Zástupné řetězce - podobně jako [NAME] - jsou vyplněny označeným textem při použití šablony.</string>
