@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Skannaa geokoodi</string>
     <string name="menu_lists_pocket_queries">Listat / pocket queryt</string>
     <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
+    <string name="menu_invert_order">Käännä järjestys</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kartta</string>
     <string name="caches_nearby_button">Lähistöllä</string>
@@ -694,6 +695,7 @@
     <string name="init_authorization_credential_username">Käyttäjätunnus</string>
     <string name="init_authorization_credential_password">Salasana</string>
     <string name="settings_service_active">Aktiivinen</string>
+    <string name="settings_service_active_unavailable">Aktiivinen/Ei saatavilla</string>
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
     <string name="init_template_help">Paikanpitäjämerkit - kuten [NAME] - täytetään määritetyllä tekstillä, kun mallia käytetään.</string>
@@ -1987,6 +1989,8 @@
         <item quantity="other">Reitti ladattu %d reittipisteellä</item>
     </plurals>
     <string name="center_on_route">Keskitä reittiin</string>
+    <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
+    <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
     <!-- individual track -->
     <string name="individual_track">GPX jälki/reitti</string>
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
