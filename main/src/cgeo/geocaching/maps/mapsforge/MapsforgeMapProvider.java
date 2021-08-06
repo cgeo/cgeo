@@ -168,7 +168,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
    public static final class MapyCzMapSource extends AbstractMapsforgeMapSource {
 
-       MapyCzMapSource(MapProvider mapProvider, String name) {
+       MapyCzMapSource(final MapProvider mapProvider, final String name) {
            super(mapProvider, name, TileSourceMapyCz.INSTANCE);
        }
 

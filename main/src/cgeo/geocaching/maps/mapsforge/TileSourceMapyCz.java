@@ -1,10 +1,10 @@
 package cgeo.geocaching.maps.mapsforge;
 
-import org.mapsforge.core.model.Tile;
-import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
-
 import java.net.MalformedURLException;
 import java.net.URL;
+
+import org.mapsforge.core.model.Tile;
+import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 
 public class TileSourceMapyCz extends AbstractTileSource {
 
@@ -27,7 +27,7 @@ public class TileSourceMapyCz extends AbstractTileSource {
 
     private static final int ZOOM_LEVEL_MIN = 5;
 
-    public TileSourceMapyCz(String[] hostNames, int port) {
+    public TileSourceMapyCz(final String[] hostNames, final int port) {
         super(hostNames, port);
     }
 
@@ -37,7 +37,7 @@ public class TileSourceMapyCz extends AbstractTileSource {
     }
 
     @Override
-    public URL getTileUrl(Tile tile) throws MalformedURLException {
+    public URL getTileUrl(final Tile tile) throws MalformedURLException {
 
         return new URL(PROTOCOL, getHostName(), this.port, "/turist-m/" + tile.zoomLevel + '-' + tile.tileX + '-' + tile.tileY + ".png");
     }
