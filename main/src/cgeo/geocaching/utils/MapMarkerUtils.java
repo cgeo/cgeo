@@ -404,39 +404,50 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
-        int drawable;
+        int dotDrw = -1;
+        int tintColor = -1;
         if (cache.isFound()) {
-            drawable = R.drawable.dot_found;
+            dotDrw = R.drawable.dot_found;
         } else if (cache.hasLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
             // logs of type NOTE may have a NA/NM log attached to them
             if (offlineLogType.isFoundLog()) {
-                drawable = R.drawable.dot_found_offline;
+                dotDrw = R.drawable.dot_found_offline;
             } else if (offlineLogType == LogType.DIDNT_FIND_IT) {
-                drawable = R.drawable.dot_not_found_offline;
+                dotDrw = R.drawable.dot_not_found_offline;
             } else if (cache.hasWillAttendForFutureEvent()) {
-                drawable = R.drawable.dot_marker_calendar;
+                dotDrw = R.drawable.dot_marker_calendar;
             } else if (offlineLogType == LogType.NOTE) {
                 final LogEntry offlineLog = cache.getOfflineLog();
                 if (offlineLog.reportProblem == ReportProblemType.NO_PROBLEM) {
-                    drawable = R.drawable.dot_note_offline;
+                    dotDrw = R.drawable.dot_note_offline;
                 } else if (offlineLog.reportProblem == ReportProblemType.ARCHIVE) {
-                    drawable = R.drawable.dot_marker_archive_offline;
+                    dotDrw = R.drawable.dot_marker_archive_offline;
                 } else {
-                    drawable = R.drawable.dot_marker_maintenance_offline;
+                    dotDrw = R.drawable.dot_marker_maintenance_offline;
                 }
-            } else {
-                drawable = cache.getType().dotMarkerId;
             }
-        } else if (cache.isDisabled()) {
-            drawable = R.drawable.dot_disabled;
         } else if (cache.hasUserModifiedCoords()) {
-            drawable = R.drawable.dot_marker_usermodifiedcoords;
-        } else {
-            drawable = cache.getType().dotMarkerId;
+            dotDrw = R.drawable.dot_marker_usermodifiedcoords;
         }
-        final Drawable[] layers = { ResourcesCompat.getDrawable(res, drawable, null) };
-        return new LayerDrawable(layers);
+
+        if (dotDrw == -1) {
+            dotDrw = R.drawable.dot_foreground;
+            if (cache.isArchived() || cache.isDisabled()) {
+                tintColor = R.color.cacheType_disabled;
+            } else {
+                tintColor = cache.getType().typeColor;
+            }
+        }
+
+        Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background, null));
+        Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
+        if (tintColor != -1) DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, tintColor, null));
+
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(dotMarker));
+        insetsBuilder.withInset(new InsetBuilder(dotIcon, VERTICAL.CENTER, HORIZONTAL.CENTER));
+        return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
     /**
