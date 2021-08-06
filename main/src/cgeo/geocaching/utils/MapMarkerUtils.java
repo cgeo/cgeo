@@ -253,15 +253,14 @@ public final class MapMarkerUtils {
 
         // background: disabled or not
         // Temporarily use the same marker for everything. TODO: Redefine in connectors the icon disabled as "used in cachelist" (as inactive is done with greyscale instead)
+
         final Drawable marker = ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
-
-        // Show the background circle only on map - TODO: round marker for list
         if (showBackground(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(marker));
-        } else {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_nopin));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
         }
+        insetsBuilder.withInset(new InsetBuilder(marker));
+
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
 
