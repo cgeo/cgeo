@@ -26,6 +26,7 @@ import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -277,7 +278,9 @@ public final class MapMarkerUtils {
         } else {
             tintColor = cache.getType().typeColor;
         }
-        DrawableCompat.setTint(DrawableCompat.wrap(ResourcesCompat.getDrawable(res, backgroundDrawable, null)), tintColor);
+        Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, backgroundDrawable, null));
+        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
+        insetsBuilder.withInset(new InsetBuilder(background, VERTICAL.CENTER, HORIZONTAL.CENTER));
 
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
