@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detalhes</string>
@@ -516,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">Para:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Sel. todas</string>
     <string name="cache_filter_checkboxlist_add_items">Adicionar mais itens</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Adicionar todos os itens</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Adicionar itens</string>
     <string name="cache_filter_favorites_absolute">Absoluto</string>
     <string name="cache_filter_favorites_percentage">Percentagem</string>
@@ -692,6 +694,7 @@
     <string name="init_authorization_credential_username">Utilizador</string>
     <string name="init_authorization_credential_password">Palavra-passe</string>
     <string name="settings_service_active">Activo</string>
+    <string name="settings_service_active_unavailable">Activo/Indisponível</string>
     <string name="settings_navigation_disabled">Parece que esta aplicação não está instalada</string>
     <string name="init_signature">Assinatura</string>
     <string name="init_template_help">As etiquetas de espaço reservado - como [NAME] - são preenchidas com texto aonde o modelo for usado.</string>
