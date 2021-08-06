@@ -171,6 +171,11 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
        MapyCzMapSource(MapProvider mapProvider, String name) {
            super(mapProvider, name, TileSourceMapyCz.INSTANCE);
        }
+
+       @Override
+       public ImmutablePair<String, Boolean> calculateMapAttribution(final Context context) {
+            return new ImmutablePair<>(context.getString(R.string.map_attribution_mapy_cz), false);
+       }
    }
 
     public static final class CyclosmMapSource extends AbstractMapsforgeMapSource {

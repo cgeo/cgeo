@@ -59,6 +59,7 @@
     <string translatable="false" name="map_attribution_openstreetmap_html"><![CDATA[<a href="https://www.openstreetmap.org/copyright">© OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_openstreetmapde_html"><![CDATA[© <a href="https://openstreetmap.de/">OpenStreetMap DE</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
     <string translatable="false" name="map_attribution_cyclosm_html"><![CDATA[© <a href="https://www.cyclosm.org/">CyclOSM</a>, map data <a href="https://www.openstreetmap.org/copyright">OpenStreetMap contributors</a>]]></string>
+    <string translatable="false" name="map_attribution_mapy_cz"><![CDATA[© <a href="https://o.seznam.cz/">Seznam.cz, a.s.</a>]]></string>
 
     <!-- links to manual pages -->
     <string translatable="false" name="manual_url_settings_offline_maps">https://manual.cgeo.org/en/offlinemaps</string>
