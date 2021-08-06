@@ -27,6 +27,7 @@ import android.util.SparseArray;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -261,6 +262,23 @@ public final class MapMarkerUtils {
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
+        // TODO: Define the background in connector instead
+        int backgroundDrawable;
+        if (cache.getMapMarkerId() == R.drawable.marker) {
+            backgroundDrawable = R.drawable.background_gc;
+        } else if (cache.getMapMarkerId() == R.drawable.marker_oc) {
+            backgroundDrawable = R.drawable.background_oc;
+        } else {
+            backgroundDrawable = R.drawable.background_other;
+        }
+        int tintColor;
+        if (cache.isArchived() || cache.isDisabled()) {
+            tintColor = R.color.cacheType_disabled;
+        } else {
+            tintColor = cache.getType().typeColor;
+        }
+        DrawableCompat.setTint(DrawableCompat.wrap(ResourcesCompat.getDrawable(res, backgroundDrawable, null)), tintColor);
+
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
 
@@ -336,7 +354,7 @@ public final class MapMarkerUtils {
             }
         }
         if (cache.isDisabled()) {
-            return cache.getType().disabledMarkerId;
+            return cache.getType().typeColor;
         }
         return cache.getType().markerId;
     }

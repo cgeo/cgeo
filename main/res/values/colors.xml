@@ -42,4 +42,16 @@
     <color name="default_accuracycirclecolor">#66000000</color>
     <color name="default_accuracycirclefillcolor">#08000000</color>
 
+    <color name="cacheType_lab">#ff7b1fa2</color>
+    <color name="cacheType_virtual">#ff0288d1</color>
+    <color name="cacheType_mystery">#ff303f9f</color>
+    <color name="cacheType_event">#ffd32f2f</color>
+    <color name="cacheType_traditional">#ff388E3C</color>
+    <color name="cacheType_multi">#ffF57C00</color>
+    <color name="cacheType_cgeo">#fff7991d</color>
+    <color name="cacheType_unknown">#ff616161</color>
+    <color name="cacheType_special">#ffafb42b</color>
+    <color name="cacheType_disabled">#ff90a4ae</color>
+    <color name="cacheType_waypoint">#ffffffff</color>
+
 </resources>
