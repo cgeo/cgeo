@@ -1748,6 +1748,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                     ImagesActivity.startActivity(activity, cache.getGeocode(), cache.getSpoilers());
                 });
+
+                // if there is only a listing background image without other additional pictures, change the text to better explain the content.
+                if (cache.getSpoilers().size() == 1 && getString(R.string.cache_image_background).equals(cache.getSpoilers().get(0).title)) {
+                    binding.hintSpoilerlink.setText(R.string.cache_image_background);
+                } else {
+                    binding.hintSpoilerlink.setText(R.string.cache_menu_spoilers);
+                }
             } else {
                 binding.hintSpoilerlink.setVisibility(View.GONE);
                 binding.hintSpoilerlink.setClickable(true);
