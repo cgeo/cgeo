@@ -43,6 +43,7 @@
     <string translatable="false" name="map_source_osm_mapnik">OpenStreetMap.org</string>
     <string translatable="false" name="map_source_osm_osmde">OpenStreetMap.de</string>
     <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
+    <string translatable="false" name="map_source_mapy_cz">Mapy.cz</string>
 
     <!-- calendar adder -->
     <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>

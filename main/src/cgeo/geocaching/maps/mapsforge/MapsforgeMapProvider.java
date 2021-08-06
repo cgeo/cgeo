@@ -61,6 +61,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         registerMapSource(new OsmMapSource(this, resources.getString(R.string.map_source_osm_mapnik)));
         registerMapSource(new OsmdeMapSource(this, resources.getString(R.string.map_source_osm_osmde)));
         registerMapSource(new CyclosmMapSource(this, resources.getString(R.string.map_source_osm_cyclosm)));
+        registerMapSource(new MapyCzMapSource(this, resources.getString(R.string.map_source_mapy_cz)));
 
         //get notified if Offline Maps directory changes
         PersistableFolder.OFFLINE_MAPS.registerChangeListener(this, pf -> updateOfflineMaps());
@@ -163,6 +164,13 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return new ImmutablePair<>(MapsforgeMapProvider.getInstance().getAttributionFor(this.mapUri), true);
         }
 
+   }
+
+   public static final class MapyCzMapSource extends AbstractMapsforgeMapSource {
+
+       MapyCzMapSource(MapProvider mapProvider, String name) {
+           super(mapProvider, name, TileSourceMapyCz.INSTANCE);
+       }
    }
 
     public static final class CyclosmMapSource extends AbstractMapsforgeMapSource {
