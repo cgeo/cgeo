@@ -353,9 +353,6 @@ public final class MapMarkerUtils {
                 return offlineLogType;
             }
         }
-        if (cache.isDisabled()) {
-            return cache.getType().typeColor;
-        }
         return cache.getType().markerId;
     }
 
