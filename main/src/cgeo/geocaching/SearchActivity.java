@@ -19,6 +19,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
@@ -27,7 +28,9 @@ import android.app.SearchManager;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputFilter;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.AutoCompleteTextView;
@@ -187,6 +190,43 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
 
         binding.searchFilterInfo.setOnClickListener(v -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
+
+        handlePotentialClipboardGeocode();
+    }
+
+    /**
+     * Detect geocodes in clipboard
+     *
+     * Needs to run async as clipboard access is blocked if activity is not yet created.
+     */
+    private void handlePotentialClipboardGeocode() {
+        binding.geocodeInputLayout.postDelayed(() -> {
+            final String potentialGeocode = ClipboardUtils.getText();
+
+            if (ConnectorFactory.getConnector(potentialGeocode) instanceof ISearchByGeocode) {
+                binding.geocode.setText(potentialGeocode);
+                binding.geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
+
+                // clear hint if text input get changed
+                binding.geocode.addTextChangedListener(new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+                        // nothing
+                    }
+
+                    @Override
+                    public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                        // nothing
+                    }
+
+                    @Override
+                    public void afterTextChanged(final Editable s) {
+                        binding.geocodeInputLayout.setHelperText(null);
+                        binding.geocode.removeTextChangedListener(this);
+                    }
+                });
+            }
+        }, 500);
     }
 
     private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
