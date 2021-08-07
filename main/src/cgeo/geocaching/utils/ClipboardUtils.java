@@ -11,8 +11,7 @@ import androidx.annotation.Nullable;
 
 /**
  * Clipboard Utilities. Functions to copy data to the Android clipboard.
- * This class uses the deprecated function ClipboardManager.setText(CharSequence).
- * API 11 introduced setPrimaryClip(ClipData)
+ *
  */
 public final class ClipboardUtils {
 
@@ -27,7 +26,6 @@ public final class ClipboardUtils {
      *            The text to place in the clipboard.
      */
     public static void copyToClipboard(@NonNull final CharSequence text) {
-        // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
         final ClipboardManager clipboard = (ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
         if (clipboard != null) {
             final ClipData data = ClipData.newPlainText(null, text);
@@ -41,10 +39,13 @@ public final class ClipboardUtils {
      */
     @Nullable
     public static String getText() {
-        // fully qualified name used here to avoid buggy deprecation warning (of javac) on the import statement
         final ClipboardManager clipboard = (ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
-        final CharSequence text = clipboard.getText();
-        return text != null ? text.toString() : null;
+        final ClipData clip = clipboard.getPrimaryClip();
+        if (clip != null && clip.getItemCount() > 0) {
+            final CharSequence text = clip.getItemAt(0).getText();
+            return text != null ? text.toString() : null;
+        }
+        return null;
     }
 
     /**
