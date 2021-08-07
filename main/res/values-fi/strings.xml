@@ -694,6 +694,7 @@
     <string name="init_authorization_credential_username">Käyttäjätunnus</string>
     <string name="init_authorization_credential_password">Salasana</string>
     <string name="settings_service_active">Aktiivinen</string>
+    <string name="settings_service_active_unavailable">Aktiivinen/Ei saatavilla</string>
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
     <string name="init_template_help">Paikanpitäjämerkit - kuten [NAME] - täytetään määritetyllä tekstillä, kun mallia käytetään.</string>
