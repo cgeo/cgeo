@@ -158,14 +158,6 @@ public interface IConnector {
     boolean isZippedGPXFile(@NonNull String fileName);
 
     /**
-     * return true if coordinates of a cache are reliable. only implemented by GC connector
-     *
-     * @param cacheHasReliableLatLon
-     *            flag of the cache
-     */
-    boolean isReliableLatLon(boolean cacheHasReliableLatLon);
-
-    /**
      * extract a geocode from the given URL, if this connector can handle that URL somehow
      *
      */

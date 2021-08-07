@@ -971,7 +971,6 @@ abstract class GPXParser extends FileParser {
     private static Geocache createCache() {
         final Geocache newCache = new Geocache();
 
-        newCache.setReliableLatLon(true); // always assume correct coordinates, when importing from file instead of website
         newCache.setAttributes(Collections.emptyList()); // override the lazy initialized list
         newCache.setWaypoints(Collections.emptyList(), false); // override the lazy initialized list
 

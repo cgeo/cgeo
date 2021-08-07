@@ -141,12 +141,6 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
-    public boolean isReliableLatLon(final boolean cacheHasReliableLatLon) {
-        // let every cache have reliable coordinates by default
-        return true;
-    }
-
-    @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
         final String urlPrefix = getCacheUrlPrefix();

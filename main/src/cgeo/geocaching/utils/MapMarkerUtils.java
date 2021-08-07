@@ -85,7 +85,6 @@ public final class MapMarkerUtils {
         final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
             .append(cache.getAssignedEmoji())
-            .append(cache.isReliableLatLon())
             .append(cache.getType().id)
             .append(cache.isDisabled())
             .append(cache.isArchived())
@@ -253,10 +252,6 @@ public final class MapMarkerUtils {
         // Show the background circle only on map
         if (showBackground(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(marker));
-        }
-        // reliable or not
-        if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_notreliable));
         }
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);

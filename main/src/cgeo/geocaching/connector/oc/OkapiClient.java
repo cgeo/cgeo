@@ -636,7 +636,6 @@ final class OkapiClient {
     @NonNull
     private static Geocache parseSmallCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
-        cache.setReliableLatLon(true);
         try {
             parseCoreCache(response, cache);
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
@@ -651,7 +650,6 @@ final class OkapiClient {
     @NonNull
     private static Geocache parseCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
-        cache.setReliableLatLon(true);
         try {
 
             parseCoreCache(response, cache);
