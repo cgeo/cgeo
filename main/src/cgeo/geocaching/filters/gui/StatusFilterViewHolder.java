@@ -78,8 +78,8 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         ll.addView(activeDisabledArchivedGroup, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND, false);
-        statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED, false);
         statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, false);
+        statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED, false);
         statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED, true);
         statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE, true);
         statusWatchlist = createGroup(ll, StatusGeocacheFilter.StatusType.WATCHLIST, true);

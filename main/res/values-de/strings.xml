@@ -694,6 +694,7 @@
     <string name="init_authorization_credential_username">Benutzername</string>
     <string name="init_authorization_credential_password">Passwort</string>
     <string name="settings_service_active">Aktiv</string>
+    <string name="settings_service_active_unavailable">Aktiv/Nicht nutzbar</string>
     <string name="settings_navigation_disabled">Diese App scheint nicht installiert zu sein</string>
     <string name="init_signature">Signatur</string>
     <string name="init_template_help">Platzhalter - wie [NAME] - werden mit dem entsprechenden Text gefüllt, wenn die Vorlage genutzt wird.</string>

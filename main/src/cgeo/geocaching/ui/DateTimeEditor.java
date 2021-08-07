@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.TimeZone;
 
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.timepicker.MaterialTimePicker;
@@ -135,13 +136,13 @@ public class DateTimeEditor {
         public void onClick(final View arg0) {
             final MaterialDatePicker<Long> dateDialog = MaterialDatePicker.Builder
                     .datePicker()
-                    .setSelection(date.getTimeInMillis())
+                    .setSelection(date.getTimeInMillis() + TimeZone.getDefault().getRawOffset())
                     .build();
             dateDialog.addOnPositiveButtonClickListener(timestamp -> {
                 if (resetButton != null) {
                     dateUnset[0] = false;
                 }
-                date.setTimeInMillis(timestamp);
+                date.setTimeInMillis(timestamp - TimeZone.getDefault().getRawOffset());
                 triggerChange();
             });
             dateDialog.show(fragmentManager, "date_dialog");

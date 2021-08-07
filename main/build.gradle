@@ -605,11 +605,18 @@ tasks.whenTaskAdded { theTask ->
  */
 apply plugin: 'checkstyle'
 
+checkstyle {
+    // assign the checkstyle version explicitly here and in .idea/checkstyle-idea.xml
+    toolVersion = '8.44'
+
+    configDirectory = rootProject.projectDir
+    configFile = rootProject.file("checkstyle.xml")
+}
+
 tasks.register('checkstyle', Checkstyle) {
     group 'verification'
     description 'Check code standard'
 
-    configFile file("${project.rootDir}/checkstyle.xml")
     source 'src'
     source '../tests/src'
     source '../tests/src-android'

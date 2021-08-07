@@ -694,6 +694,7 @@
     <string name="init_authorization_credential_username">Gebruikersnaam</string>
     <string name="init_authorization_credential_password">Wachtwoord</string>
     <string name="settings_service_active">Actief</string>
+    <string name="settings_service_active_unavailable">Actief/niet beschikbaar</string>
     <string name="settings_navigation_disabled">Deze app lijkt niet geïnstalleerd te zijn</string>
     <string name="init_signature">Handtekening</string>
     <string name="init_template_help">Sjabloonvelden - zoals [NAME] - worden gevuld met de betreffende tekst wanneer het sjabloon wordt gebruikt.</string>
