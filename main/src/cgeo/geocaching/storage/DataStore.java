@@ -166,7 +166,7 @@ public class DataStore {
     private static final String QUERY_CACHE_DATA =
             "SELECT " +
                     "cg_caches.updated,"                  +  //  0
-                    "cg_caches.reason,"                   +  //  1
+                    "cg_caches.reason,"                   +  //  1 - unused column
                     "cg_caches.detailed,"                 +  //  2
                     "cg_caches.detailedupdate,"           +  //  3
                     "cg_caches.visiteddate,"              +  //  4
@@ -178,15 +178,15 @@ public class DataStore {
                     "cg_caches.owner,"                    +  // 10
                     "cg_caches.owner_real,"               +  // 11
                     "cg_caches.hidden,"                   +  // 12
-                    "cg_caches.hint,"                     +  // 13
+                    "cg_caches.hint,"                     +  // 13 - unused in this query -> lazyload
                     "cg_caches.size,"                     +  // 14
                     "cg_caches.difficulty,"               +  // 15
                     "cg_caches.direction,"                +  // 16
                     "cg_caches.distance,"                 +  // 17
                     "cg_caches.terrain,"                  +  // 18
-                    "cg_caches.location,"                 +  // 19
+                    "cg_caches.location,"                 +  // 19 - unused in this query -> lazyload
                     "cg_caches.personal_note,"            +  // 20
-                    "cg_caches.shortdesc,"                +  // 21
+                    "cg_caches.shortdesc,"                +  // 21 - unused in this query -> lazyload
                     "cg_caches.favourite_cnt,"            +  // 22
                     "cg_caches.rating,"                   +  // 23
                     "cg_caches.votes,"                    +  // 24
@@ -198,14 +198,14 @@ public class DataStore {
                     "cg_caches.favourite,"                +  // 30
                     "cg_caches.inventoryunknown,"         +  // 31
                     "cg_caches.onWatchlist,"              +  // 32
-                    "cg_caches.reliable_latlon,"          +  // 33
+                    "cg_caches.reliable_latlon,"          +  // 33 - unused column
                     "cg_caches.coordsChanged,"            +  // 34
                     "cg_caches.latitude,"                 +  // 35
                     "cg_caches.longitude,"                +  // 36
                     "cg_caches.finalDefined,"             +  // 37
-                    "cg_caches._id,"                      +  // 38
-                    "cg_caches.inventorycoins,"           +  // 39
-                    "cg_caches.inventorytags,"            +  // 40
+                    "cg_caches._id,"                      +  // 38 - unused in this query
+                    "cg_caches.inventorycoins,"           +  // 39 - unused column
+                    "cg_caches.inventorytags,"            +  // 40 - unused column
                     "cg_caches.logPasswordRequired,"      +  // 41
                     "cg_caches.watchlistCount,"           +  // 42
                     "cg_caches.preventWaypointsFromNote," +  // 43
@@ -302,7 +302,7 @@ public class DataStore {
             + "distance DOUBLE, "
             + "latitude DOUBLE, "
             + "longitude DOUBLE, "
-            + "reliable_latlon INTEGER, "
+            + "reliable_latlon INTEGER, "           // got unused while v96 - TODO should we remove the column?
             + "personal_note TEXT, "
             + "shortdesc TEXT, "
             + "description TEXT, "
@@ -332,7 +332,7 @@ public class DataStore {
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
             + "title TEXT NOT NULL, "
             + "updated LONG NOT NULL,"
-            + "marker INTEGER NOT NULL,"        // unused from v93 on
+            + "marker INTEGER NOT NULL,"            // unused from v93 on - TODO should we remove the column?
             + "emoji INTEGER DEFAULT 0,"
             + FIELD_LISTS_PREVENTASKFORDELETION + " INTEGER DEFAULT 0"
             + "); ";
@@ -2113,7 +2113,7 @@ public class DataStore {
         values.put("distance", cache.getDistance());
         values.put("direction", cache.getDirection());
         putCoords(values, cache.getCoords());
-        //values.put("reliable_latlon", cache.isReliableLatLon() ? 1 : 0); Todo: refactor
+        values.put("reliable_latlon", 0);          // Todo: refactor - remove column
         values.put("shortdesc", cache.getShortDescription());
         values.put("personal_note", cache.getPersonalNote());
         values.put("description", cache.getDescription());
@@ -2762,6 +2762,7 @@ public class DataStore {
     private static Geocache createCacheFromDatabaseContent(final Cursor cursor) {
         final Geocache cache = new Geocache();
 
+        // Column indexes are defined in 'QUERY_CACHE_DATA'
         cache.setUpdated(cursor.getLong(0));
         cache.setDetailed(cursor.getInt(2) == 1);
         cache.setDetailedUpdate(cursor.getLong(3));
@@ -2809,7 +2810,6 @@ public class DataStore {
         cache.setFavorite(cursor.getInt(30) == 1);
         cache.setInventoryItems(cursor.getInt(31));
         cache.setOnWatchlist(cursor.getInt(32) == 1);
-        //cache.setReliableLatLon(cursor.getInt(33) > 0); //TODO remove ReliableLatLon column
         cache.setUserModifiedCoords(cursor.getInt(34) > 0);
         cache.setCoords(getCoords(cursor, 35, 36));
         cache.setFinalDefined(cursor.getInt(37) > 0);
@@ -3859,7 +3859,7 @@ public class DataStore {
             final ContentValues values = new ContentValues();
             values.put("title", name);
             values.put("updated", System.currentTimeMillis());
-            values.put("marker", 0);
+            values.put("marker", 0); // ToDo - delete column?
             values.put(FIELD_LISTS_PREVENTASKFORDELETION, 0);
             values.put("emoji", 0);
 
