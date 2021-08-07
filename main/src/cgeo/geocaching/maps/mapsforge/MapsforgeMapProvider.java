@@ -174,7 +174,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
 
        @Override
        public ImmutablePair<String, Boolean> calculateMapAttribution(final Context context) {
-            return new ImmutablePair<>(context.getString(R.string.map_attribution_mapy_cz), false);
+            return new ImmutablePair<>(context.getString(R.string.map_attribution_mapy_cz_html), false);
        }
    }
 
