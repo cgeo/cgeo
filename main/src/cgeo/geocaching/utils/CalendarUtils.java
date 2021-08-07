@@ -162,4 +162,11 @@ public final class CalendarUtils {
 
         return new ImmutablePair<>(date.getTimeInMillis(), date.getTimeInMillis() + 86400000);
     }
+
+    /**
+     * Generate a time zone string for the users system time config
+     */
+    public static String getUserTimeZoneString() {
+        return new SimpleDateFormat("z", Locale.US).format(new Date());
+    }
 }

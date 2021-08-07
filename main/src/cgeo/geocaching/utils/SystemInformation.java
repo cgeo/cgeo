@@ -94,18 +94,24 @@ public final class SystemInformation {
             .append("\n")
             .append("\nProgram settings:")
             .append("\n-------");
-            appendFilters(body);
+            appendSettings(body);
             body
-            .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints)
             .append("\n- Set language: ").append(Settings.getUserLanguage().isEmpty() ? Locale.getDefault() + " (system default)" : Settings.getUserLanguage())
             .append("\n- System date format: ").append(Formatter.getShortDateFormat())
+            .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
             .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
-            .append("\n- Live map mode: ").append(Settings.isLiveMap())
-            .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads())
             .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-            .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId));
-        appendSettings(body);
+            .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
+            .append("\n- Live map mode: ").append(Settings.isLiveMap())
+            .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
         appendMapSourceInformation(body, context);
+        body
+            .append("\n")
+            .append("\nFilters:")
+            .append("\n-------")
+            .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints);
+        appendFilters(body);
+
         body
             .append("\n")
             .append("\nServices:")
@@ -149,15 +155,13 @@ public final class SystemInformation {
     }
 
     private static void appendFilters(@NonNull final StringBuilder body) {
-        body.append("\n- Filters: ");
         for (GeocacheFilterContext.FilterType filterType : GeocacheFilterContext.FilterType.values()) {
             if (TRANSIENT.equals(filterType)) {
                 continue;
             }
-            body.append("\n    ").append(filterType.name()).append(": ");
+            body.append("\n- ").append(filterType.name()).append(": ");
             final GeocacheFilter filter = new GeocacheFilterContext(filterType).get();
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
-
         }
     }
 
