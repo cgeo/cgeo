@@ -35,7 +35,6 @@ public abstract class Compare {
 
         if (all) {
             assertThat(actual.getCoords()).as(cacheStr + "coords").isEqualTo(expected.getCoords());
-            assertThat(actual.isReliableLatLon()).as(cacheStr + "reliable latlon").isTrue();
             assertThat(actual.isOwner()).as(cacheStr + "owning status").isEqualTo(expected.isOwner());
             assertThat(actual.getOwnerUserId()).as(cacheStr + "owner user id").isEqualTo(expected.getOwnerUserId());
             assertThat(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint()))).isTrue();

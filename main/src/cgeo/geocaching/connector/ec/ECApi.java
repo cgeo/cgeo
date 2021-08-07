@@ -234,7 +234,6 @@ final class ECApi {
     private static Geocache parseCache(final JsonNode response) {
         try {
             final Geocache cache = new Geocache();
-            cache.setReliableLatLon(true);
             cache.setGeocode("EC" + response.get("cache_id").asText());
             cache.setName(response.get("title").asText());
             cache.setCoords(new Geopoint(response.get("lat").asText(), response.get("lon").asText()));

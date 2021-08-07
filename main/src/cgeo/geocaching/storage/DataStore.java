@@ -2113,7 +2113,7 @@ public class DataStore {
         values.put("distance", cache.getDistance());
         values.put("direction", cache.getDirection());
         putCoords(values, cache.getCoords());
-        values.put("reliable_latlon", cache.isReliableLatLon() ? 1 : 0);
+        //values.put("reliable_latlon", cache.isReliableLatLon() ? 1 : 0); Todo: refactor
         values.put("shortdesc", cache.getShortDescription());
         values.put("personal_note", cache.getPersonalNote());
         values.put("description", cache.getDescription());
@@ -2809,7 +2809,7 @@ public class DataStore {
         cache.setFavorite(cursor.getInt(30) == 1);
         cache.setInventoryItems(cursor.getInt(31));
         cache.setOnWatchlist(cursor.getInt(32) == 1);
-        cache.setReliableLatLon(cursor.getInt(33) > 0);
+        //cache.setReliableLatLon(cursor.getInt(33) > 0); //TODO remove ReliableLatLon column
         cache.setUserModifiedCoords(cursor.getInt(34) > 0);
         cache.setCoords(getCoords(cursor, 35, 36));
         cache.setFinalDefined(cursor.getInt(37) > 0);

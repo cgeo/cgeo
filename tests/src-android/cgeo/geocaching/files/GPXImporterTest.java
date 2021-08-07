@@ -215,7 +215,6 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private static void assertCacheProperties(final Geocache cache) {
         assertThat(cache).isNotNull();
         assertThat(cache.getLocation().startsWith(",")).isFalse();
-        assertThat(cache.isReliableLatLon()).isTrue();
         if (GCConnector.getInstance().equals(ConnectorFactory.getConnector(cache))) {
             assertThat(String.valueOf(GCUtils.gcCodeToGcId(cache.getGeocode()))).isEqualTo(cache.getCacheId());
         }

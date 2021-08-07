@@ -291,8 +291,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
                 assert parsedCache != null;
                 assertThat(parsedCache).isNotNull();
 
-                assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
-                assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
+                assertThat(mockedCache.getCoords()).isEqualTo(parsedCache.getCoords());
 
             } finally {
                 // restore user settings

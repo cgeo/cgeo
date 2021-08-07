@@ -772,7 +772,6 @@ class GCWebAPI {
                 if (r.postedCoordinates != null) {
                     final Geocache c = new Geocache();
                     c.setDetailed(false);
-                    c.setReliableLatLon(true);
                     c.setGeocode(r.code);
                     c.setName(r.name);
                     if (r.userCorrectedCoordinates != null) {
