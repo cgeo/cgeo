@@ -8,6 +8,8 @@ import cgeo.geocaching.test.AbstractResourceInstrumentationTestCase;
 
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +21,9 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
     private static List<Download> getList(final AbstractDownloader downloader, final String url) {
         final String page = Network.getResponseData(Network.getRequest(url));
         final List<Download> list = new ArrayList<>();
-        downloader.analyzePage(Uri.parse(url), list, page);
+        if (page != null) {
+            downloader.analyzePage(Uri.parse(url), list, page);
+        }
         return list;
     }
 
@@ -33,6 +37,7 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         return i;
     }
 
+    @Nullable
     private static Download findByName(final List<Download> list, final String name) {
         for (Download d : list) {
             if (StringUtils.equals(d.getName(), name)) {
@@ -165,5 +170,4 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
         assertThat(sizeInfoFloat).isBetween(120.0F, 130.0F);
     }
-
 }

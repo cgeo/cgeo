@@ -11,6 +11,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ public class BRouterTileDownloader extends AbstractDownloader {
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final @NonNull String page) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_TILE, page);
         while (matchMap.find()) {
             final Download offlineMap = new Download(matchMap.group(1), Uri.parse(uri + matchMap.group(1)), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(2))), Formatter.formatBytes(Long.parseLong(matchMap.group(3))), offlineMapType, iconRes);
@@ -38,8 +39,9 @@ public class BRouterTileDownloader extends AbstractDownloader {
         }
     }
 
+    @Nullable
     @Override
-    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+    protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_TILE, page);
         while (matchMap.find()) {
             final String filename = matchMap.group(1);

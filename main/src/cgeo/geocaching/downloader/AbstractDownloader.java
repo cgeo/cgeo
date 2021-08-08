@@ -10,6 +10,8 @@ import android.app.Activity;
 import android.net.Uri;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.util.List;
@@ -47,10 +49,11 @@ public abstract class AbstractDownloader {
     }
 
     // find available maps, dir-up, subdirs
-    protected abstract void analyzePage(Uri uri, List<Download> list, String page);
+    protected abstract void analyzePage(Uri uri, List<Download> list, @NonNull String page);
 
     // find source for single map
-    protected abstract Download checkUpdateFor(String page, String remoteUrl, String remoteFilename);
+    @Nullable
+    protected abstract Download checkUpdateFor(@NonNull String page, String remoteUrl, String remoteFilename);
 
     // create update check page url for download page url
     // default is: identical
@@ -59,7 +62,7 @@ public abstract class AbstractDownloader {
     }
 
     // generic matchers
-    protected void basicUpMatcher(final Uri uri, final List<Download> list, final String page, final Pattern patternUp) {
+    protected void basicUpMatcher(final Uri uri, final List<Download> list, final @NonNull String page, final Pattern patternUp) {
         if (!mapBase.equals(uri)) {
             final MatcherWrapper matchUp = new MatcherWrapper(patternUp, page);
             if (matchUp.find()) {
