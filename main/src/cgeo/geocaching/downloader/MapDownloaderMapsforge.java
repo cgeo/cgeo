@@ -7,6 +7,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -23,7 +24,7 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final @NonNull String page) {
         basicUpMatcher(uri, list, page, PATTERN_UP);
 
         final MatcherWrapper matchDir = new MatcherWrapper(PATTERN_DIR, page);
@@ -39,8 +40,9 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
         }
     }
 
+    @Nullable
     @Override
-    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+    protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
         while (matchMap.find()) {
             final String filename = matchMap.group(1);

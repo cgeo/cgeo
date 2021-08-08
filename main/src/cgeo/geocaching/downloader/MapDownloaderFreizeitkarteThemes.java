@@ -13,6 +13,7 @@ import android.sax.RootElement;
 import android.util.Xml;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -63,12 +64,13 @@ public class MapDownloaderFreizeitkarteThemes extends AbstractThemeDownloader {
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final @NonNull String page) {
         new FZKParser().parse(page, list, offlineMapType);
     }
 
+    @Nullable
     @Override
-    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+    protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
         final List<Download> list = new ArrayList<>();
         new FZKParser().parse(page, list, offlineMapType);
         for (Download map : list) {
