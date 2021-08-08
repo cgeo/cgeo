@@ -3,16 +3,20 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import androidx.annotation.StringRes;
 import androidx.core.util.Consumer;
+
+import java.util.Arrays;
 
 public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
@@ -101,7 +105,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
             (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
             (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
-            (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
+            (statusHasOfflineLog == null || hasFoundOfflineLog(cache) == statusHasOfflineLog) &&
             (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
                 (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
     }
@@ -335,8 +339,11 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             }
             if (statusHasOfflineLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
+                final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
+
                 sqlBuilder.addWhere((statusHasOfflineLog ? "" : "NOT ") +
-                    "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
+                    "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
+                    " AND " + logTableId + ".type in (" + logIds + ")" + ")");
             }
 
             if (statusSolvedMystery != null) {
@@ -432,4 +439,13 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         }
         return cnt;
     }
+
+
+    private boolean hasFoundOfflineLog(final Geocache cache) {
+        if  (cache.hasLogOffline()) {
+            return cache.getOfflineLog().logType.isFoundLog();
+        }
+        return false;
+    }
+
 }
