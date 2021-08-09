@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Geocode scannen</string>
     <string name="menu_lists_pocket_queries">Listen / Pocket-Queries</string>
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
+    <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
     <string name="live_map_button">Live-Karte</string>
     <string name="caches_nearby_button">In der Nähe</string>
@@ -1988,6 +1989,7 @@
         <item quantity="other">Route geladen mit %d Punkten</item>
     </plurals>
     <string name="center_on_route">Route zentrieren</string>
+    <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <!-- individual track -->
     <string name="individual_track">GPX-Track/Route</string>
     <string name="map_load_track">Lade Track/Route aus GPX</string>
