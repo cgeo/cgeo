@@ -7,7 +7,8 @@ import cgeo.geocaching.utils.Log;
 
 import android.location.Address;
 import android.location.Geocoder;
-import android.test.suitebuilder.annotation.Suppress;
+
+import androidx.test.filters.Suppress;
 
 import java.util.Locale;
 

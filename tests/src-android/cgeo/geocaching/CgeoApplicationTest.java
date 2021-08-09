@@ -24,8 +24,8 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.test.Compare;
 
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.test.filters.MediumTest;
+import androidx.test.filters.SmallTest;
 
 import java.util.GregorianCalendar;
 
@@ -339,5 +339,4 @@ public class CgeoApplicationTest extends CGeoTestCase {
         TestSettings.setLogin(new Credentials("c:geo", "c:geo"));
         Settings.setGCMemberStatus(GCMemberState.BASIC);
     }
-
 }

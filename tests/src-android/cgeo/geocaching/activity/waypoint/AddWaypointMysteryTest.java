@@ -5,9 +5,8 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.models.Geocache;
 
-import android.test.suitebuilder.annotation.Suppress;
-
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.filters.Suppress;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
