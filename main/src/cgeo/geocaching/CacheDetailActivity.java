@@ -14,8 +14,8 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.IVotingCapability;
-import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -687,8 +687,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 menuItemGCVote.setVisible(((IVotingCapability) connector).supportsVoting(cache));
                 menuItemGCVote.setEnabled(Settings.isRatingWanted() && Settings.isGCVoteLoginValid());
             }
-            if (connector instanceof IgnoreCapability) {
-                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+            if (connector instanceof IIgnoreCapability) {
+                menu.findItem(R.id.menu_ignore).setVisible(((IIgnoreCapability) connector).canIgnoreCache(cache));
             }
             menu.findItem(R.id.menu_set_cache_icon).setVisible(cache.isOffline());
             menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
@@ -773,7 +773,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void ignoreCache() {
         SimpleDialog.of(this).setTitle(R.string.ignore_confirm_title).setMessage(R.string.ignore_confirm_message).confirm((dialog, which) -> {
-            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache));
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IIgnoreCapability) ConnectorFactory.getConnector(cache)).addToIgnorelist(cache));
             // For consistency, remove also the local cache immediately from memory cache and database
             if (cache.isOffline()) {
                 dropCache();
