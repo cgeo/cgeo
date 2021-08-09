@@ -22,9 +22,8 @@ import static cgeo.geocaching.connector.gc.GCParser.editModifiedCoordinates;
 import static cgeo.geocaching.connector.gc.GCParser.requestHtmlPage;
 import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
 
-import android.test.suitebuilder.annotation.MediumTest;
-
 import androidx.annotation.RawRes;
+import androidx.test.filters.MediumTest;
 
 import java.util.ArrayList;
 import java.util.List;

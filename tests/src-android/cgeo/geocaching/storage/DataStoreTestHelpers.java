@@ -10,8 +10,7 @@ import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 
-
-import android.test.suitebuilder.annotation.Suppress;
+import androidx.test.filters.Suppress;
 
 import java.util.ArrayList;
 import java.util.Date;
