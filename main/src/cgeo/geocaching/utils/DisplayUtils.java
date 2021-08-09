@@ -4,8 +4,6 @@ import cgeo.geocaching.CgeoApplication;
 
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.text.Layout;
@@ -58,8 +56,9 @@ public class DisplayUtils {
      * @return actual width and height
      */
     public static Pair<Integer, Integer> getDrawableDimensions(final Resources res, @DrawableRes final int resToFitIn) {
-        final Bitmap calc = BitmapFactory.decodeResource(res, resToFitIn);
-        return new Pair<>(calc.getWidth(), calc.getHeight());
+        final Drawable calc = ResourcesCompat.getDrawable(res, resToFitIn, null);
+        assert calc != null;
+        return new Pair<>(calc.getIntrinsicWidth(), calc.getIntrinsicHeight());
     }
 
     /**
