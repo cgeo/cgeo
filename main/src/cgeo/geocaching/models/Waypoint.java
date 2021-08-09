@@ -1,5 +1,6 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -477,4 +478,9 @@ public class Waypoint implements IWaypoint {
     public boolean belongsToUserDefinedCache() {
         return InternalConnector.getInstance().canHandle(geocode);
     }
+
+    public int getMapMarkerId() {
+        return ConnectorFactory.getConnector(geocode).getCacheMapMarkerId(false);
+    }
+
 }
