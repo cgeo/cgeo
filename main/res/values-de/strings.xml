@@ -1438,6 +1438,7 @@
     <string name="search_address_button">Suche mit Adresse</string>
     <string name="search_geo">Geocode</string>
     <string name="search_geo_button">Suche mit Geocode</string>
+    <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
     <string name="search_kw">Stichworte</string>
     <string name="search_kw_prefill">Stichwörter</string>
     <string name="search_kw_button">Suche mit Stichwörtern</string>
