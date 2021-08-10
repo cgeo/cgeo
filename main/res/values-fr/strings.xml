@@ -1403,6 +1403,7 @@
     <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Code de la cache</string>
     <string name="search_geo_button">Rechercher la cache</string>
+    <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mots-clés</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
