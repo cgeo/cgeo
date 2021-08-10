@@ -2062,7 +2062,11 @@ public class Geocache implements IWaypoint {
     }
 
     public int getMapMarkerId() {
-        return getConnector().getCacheMapMarkerId(false);
+        return getConnector().getCacheMapMarkerId();
+    }
+
+    public int getMapMarkerBackgroundId() {
+        return getConnector().getCacheMapMarkerBackgroundId();
     }
 
     public boolean isLogPasswordRequired() {

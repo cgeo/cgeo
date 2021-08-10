@@ -438,8 +438,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getCacheMapMarkerId(final boolean disabled) {
-        return disabled ? R.drawable.marker_disabled : R.drawable.marker;
+    public int getCacheMapMarkerId() {
+        return R.drawable.marker;
+    }
+
+    @Override
+    public int getCacheMapMarkerBackgroundId() {
+        return R.drawable.background_gc;
     }
 
     @Override

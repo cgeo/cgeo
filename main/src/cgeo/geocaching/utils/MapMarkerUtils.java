@@ -256,9 +256,6 @@ public final class MapMarkerUtils {
     private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers) {
         final int useEmoji = cache.getAssignedEmoji();
 
-        // background: disabled or not
-        // Temporarily use the same marker for everything. TODO: Redefine in connectors the icon disabled as "used in cachelist" (as inactive is done with greyscale instead)
-
         final Drawable marker = ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
         if (showBackground(cacheListType)) {
@@ -266,22 +263,8 @@ public final class MapMarkerUtils {
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        // TODO: Define the background in connector instead
-        int backgroundDrawable;
-        if (cache.getMapMarkerId() == R.drawable.marker) {
-            backgroundDrawable = R.drawable.background_gc;
-        } else if (cache.getMapMarkerId() == R.drawable.marker_oc) {
-            backgroundDrawable = R.drawable.background_oc;
-        } else {
-            backgroundDrawable = R.drawable.background_other;
-        }
-        int tintColor;
-        if (cache.isArchived() || cache.isDisabled()) {
-            tintColor = R.color.cacheType_disabled;
-        } else {
-            tintColor = cache.getType().typeColor;
-        }
-        Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, backgroundDrawable, null));
+        int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
+        Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
         insetsBuilder.withInset(new InsetBuilder(background, VERTICAL.CENTER, HORIZONTAL.CENTER));
 
@@ -297,7 +280,7 @@ public final class MapMarkerUtils {
             }
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji)));
         } else if (doubleSize) {
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, doubleSize));
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, true));
         } else {
             Drawable mainIcon = ResourcesCompat.getDrawable(res, mainMarkerId, null);
             insetsBuilder.withInset(new InsetBuilder(mainIcon, VERTICAL.CENTER, HORIZONTAL.CENTER));

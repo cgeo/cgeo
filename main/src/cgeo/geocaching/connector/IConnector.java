@@ -211,11 +211,14 @@ public interface IConnector {
     /**
      * Return the marker id of the caches for this connector. This creates the different backgrounds for cache markers
      * on the map.
-     *
-     * @param disabled
-     *            Whether to return the enabled or disabled marker type
      */
-    int getCacheMapMarkerId(boolean disabled);
+    int getCacheMapMarkerId();
+
+    /**
+     * Return the marker background id of the caches for this connector. This creates the different backgrounds for cache markers
+     * on the map.
+     */
+    int getCacheMapMarkerBackgroundId();
 
     /**
      * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filtered further during the
