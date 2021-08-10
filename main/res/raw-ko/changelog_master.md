@@ -1,7 +1,7 @@
  
-### Map
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
+### 지도
+- 신규: Mapy.cz를 온라인 지도 소스로 추가했습니다.
+- 신규: 개인 경로: 새로운 출발점 설정 및 경로 역전 허용
 
-### Other
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+### 추가 사항
+- 신규: 클립보드 콘텐츠를 유효한 GC코드로 파싱할 수 있는 경우 'GC코드로 검색'을 자동으로 미리 채움
