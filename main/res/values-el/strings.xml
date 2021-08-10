@@ -695,6 +695,7 @@
     <string name="init_authorization_credential_username">Όνομα χρήστη</string>
     <string name="init_authorization_credential_password">Κωδικός</string>
     <string name="settings_service_active">Ενεργή</string>
+    <string name="settings_service_active_unavailable">Ενεργό/Μη Διαθέσιμο</string>
     <string name="settings_navigation_disabled">Αυτή η εφαρμογή δεν είναι εγκατεστημένη</string>
     <string name="init_signature">Υπογραφή</string>
     <string name="init_template_help">Οι τοποθετούμενες συμβολοσειρές - όπως [NAME] - συμπληρώνονται με το καθορισμένο κείμενο όταν χρησιμοποιείται το πρότυπο.</string>
@@ -1437,6 +1438,7 @@
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
     <string name="search_geo_button">Αναζήτηση με γεωκωδικό</string>
+    <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
     <string name="search_kw">Λέξεις-κλειδιά</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
