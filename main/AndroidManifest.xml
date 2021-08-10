@@ -454,6 +454,8 @@
                 <data android:host="www.coord.info" />
                 <data android:pathPrefix="/GC" />
                 <data android:pathPrefix="/gc" />
+                <data android:pathPrefix="/Gc" />
+                <data android:pathPrefix="/gC" />
             </intent-filter>
 
             <!-- geocaching.com -->
@@ -471,6 +473,8 @@
                 <data android:pathPrefix="/seek/cache_details.aspx" />
                 <data android:pathPrefix="/geocache/GC" />
                 <data android:pathPrefix="/geocache/gc" />
+                <data android:pathPrefix="/geocache/Gc" />
+                <data android:pathPrefix="/geocache/gC" />
             </intent-filter>
 
             <!-- opencaching.CZ -->
@@ -487,6 +491,8 @@
                 <data android:host="www.opencaching.cz" />
                 <data android:pathPrefix="/OZ" />
                 <data android:pathPrefix="/oz" />
+                <data android:pathPrefix="/Oz" />
+                <data android:pathPrefix="/oZ" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -504,6 +510,8 @@
                 <data android:host="www.opencaching.de" />
                 <data android:pathPrefix="/OC" />
                 <data android:pathPrefix="/oc" />
+                <data android:pathPrefix="/Oc" />
+                <data android:pathPrefix="/oC" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -521,6 +529,8 @@
                 <data android:host="www.opencachingspain.es" />
                 <data android:pathPrefix="/OC" />
                 <data android:pathPrefix="/oc" />
+                <data android:pathPrefix="/Oc" />
+                <data android:pathPrefix="/oC" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -538,6 +548,8 @@
                 <data android:host="www.opencaching.fr" />
                 <data android:pathPrefix="/OC" />
                 <data android:pathPrefix="/oc" />
+                <data android:pathPrefix="/Oc" />
+                <data android:pathPrefix="/oC" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -555,6 +567,8 @@
                 <data android:host="www.opencaching.it" />
                 <data android:pathPrefix="/OC" />
                 <data android:pathPrefix="/oc" />
+                <data android:pathPrefix="/Oc" />
+                <data android:pathPrefix="/oC" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -572,6 +586,8 @@
                 <data android:host="www.opencaching.no" />
                 <data android:pathPrefix="/OC" />
                 <data android:pathPrefix="/oc" />
+                <data android:pathPrefix="/Oc" />
+                <data android:pathPrefix="/oC" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -589,6 +605,8 @@
                 <data android:host="www.opencaching.nl" />
                 <data android:pathPrefix="/OB" />
                 <data android:pathPrefix="/ob" />
+                <data android:pathPrefix="/Ob" />
+                <data android:pathPrefix="/oB" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -606,6 +624,8 @@
                 <data android:host="www.opencaching.pl" />
                 <data android:pathPrefix="/OP" />
                 <data android:pathPrefix="/op" />
+                <data android:pathPrefix="/Op" />
+                <data android:pathPrefix="/oP" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -623,6 +643,8 @@
                 <data android:host="www.opencache.uk" />
                 <data android:pathPrefix="/OK" />
                 <data android:pathPrefix="/ok" />
+                <data android:pathPrefix="/Ok" />
+                <data android:pathPrefix="/oK" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -640,6 +662,8 @@
                 <data android:host="www.opencaching.ro" />
                 <data android:pathPrefix="/OR" />
                 <data android:pathPrefix="/or" />
+                <data android:pathPrefix="/Or" />
+                <data android:pathPrefix="/oR" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
 
@@ -657,6 +681,8 @@
                 <data android:host="www.opencaching.us" />
                 <data android:pathPrefix="/OU" />
                 <data android:pathPrefix="/ou" />
+                <data android:pathPrefix="/Ou" />
+                <data android:pathPrefix="/oU" />
                 <data android:pathPrefix="/viewcache.php" />
             </intent-filter>
         </activity>
@@ -680,6 +706,8 @@
                 <data android:host="www.coord.info" />
                 <data android:pathPrefix="/TB" />
                 <data android:pathPrefix="/tb" />
+                <data android:pathPrefix="/Tb" />
+                <data android:pathPrefix="/tB" />
             </intent-filter>
 
             <!-- TravelBug URL tracking page -->
@@ -714,6 +742,8 @@
                 <data android:pathPrefix="/m/qr.php" />
                 <data android:pathPrefix="/GK" />
                 <data android:pathPrefix="/gk" />
+                <data android:pathPrefix="/Gk" />
+                <data android:pathPrefix="/gK" />
             </intent-filter>
 
         </activity>
