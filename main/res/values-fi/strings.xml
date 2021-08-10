@@ -1438,6 +1438,7 @@
     <string name="search_address_button">Etsi osoitteella</string>
     <string name="search_geo">GC-koodi</string>
     <string name="search_geo_button">Hae GC-koodilla</string>
+    <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
     <string name="search_kw">Hakusanat</string>
     <string name="search_kw_prefill">Hakusana</string>
     <string name="search_kw_button">Hae hakusanalla</string>
