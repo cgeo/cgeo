@@ -78,18 +78,24 @@ public class InsetBuilder {
         // horizontal
         if (hPos == HORIZONTAL.CENTER) {
             insetPadding[0] = (width - iWidth) / 2;
+            insetPadding[2] = insetPadding[0];
         } else if (hPos == HORIZONTAL.RIGHT) {
             insetPadding[0] = width - iWidth;
+            insetPadding[2] = width - iWidth - insetPadding[0];
+        } else {
+            insetPadding[2] = width - iWidth;
         }
-        insetPadding[2] = width - iWidth - insetPadding[0];
 
         // vertical
         if (vPos == VERTICAL.CENTER) {
             insetPadding[1] = Math.max((height - iHeight) / 2 - vDelta, 0);
+            insetPadding[3] = insetPadding[1];
         } else if (vPos == VERTICAL.BOTTOM) {
             insetPadding[1] = Math.max(height - iHeight - vDelta, 0);
+            insetPadding[3] = height - iHeight - insetPadding[1];
+        } else {
+            insetPadding[3] = height - iHeight;
         }
-        insetPadding[3] = height - iHeight - insetPadding[1];
 
         return insetPadding;
     }
