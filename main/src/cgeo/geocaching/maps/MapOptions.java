@@ -88,6 +88,15 @@ public class MapOptions {
         isLiveEnabled = false;
     }
 
+    public MapOptions(final Geopoint coords, final WaypointType type, final String title, final String geocode) {
+        this.coords = coords;
+        this.waypointType = type;
+        this.title = title;
+        this.geocode = geocode;
+        mapMode = MapMode.COORDS;
+        isLiveEnabled = false;
+    }
+
     public MapOptions(final String geocode) {
         this.geocode = geocode;
         this.mapMode = MapMode.SINGLE;

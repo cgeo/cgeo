@@ -307,7 +307,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             if (viewport != null) {
                 postZoomToViewport(viewport);
             }
-        } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
+        } else if (StringUtils.isNotEmpty(mapOptions.geocode) && mapOptions.mapMode != MapMode.COORDS) {
             final Viewport viewport = DataStore.getBounds(mapOptions.geocode, Settings.getZoomIncludingWaypoints());
 
             if (viewport != null) {
@@ -793,9 +793,13 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         if (mapOptions.searchResult != null) {
             this.caches = new CachesBundle(this, mapOptions.searchResult, this.mapView, this.mapHandlers);
         } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
-            this.caches = new CachesBundle(this, mapOptions.geocode, this.mapView, this.mapHandlers);
+            if (mapOptions.mapMode == MapMode.COORDS && mapOptions.coords != null) {
+                this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers, mapOptions.geocode);
+            } else {
+                this.caches = new CachesBundle(this, mapOptions.geocode, this.mapView, this.mapHandlers);
+            }
         } else if (mapOptions.coords != null) {
-            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers);
+            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers, null);
         } else {
             caches = new CachesBundle(this, this.mapView, this.mapHandlers);
         }

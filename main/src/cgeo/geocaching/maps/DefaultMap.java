@@ -4,6 +4,7 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
@@ -34,6 +35,10 @@ public final class DefaultMap {
 
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type, final String title) {
         new MapOptions(coords, type, title).startIntent(fromActivity, cls);
+    }
+
+    public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Waypoint waypoint) {
+        new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {

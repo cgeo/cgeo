@@ -38,7 +38,7 @@ class InternalMap extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
-        DefaultMap.startActivityCoords(activity, cls != null ? cls : Settings.getMapProvider().getMapClass(), waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
+        DefaultMap.startActivityCoords(activity, cls != null ? cls : Settings.getMapProvider().getMapClass(), waypoint);
     }
 
     @Override
