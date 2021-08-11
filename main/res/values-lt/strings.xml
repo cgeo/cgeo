@@ -21,7 +21,7 @@
     <string name="event">Renginys</string>
     <string name="mega">Mega-renginys</string>
     <string name="giga">Giga-renginys</string>
-    <string name="earth">Geologinė slėptuvė</string>
+    <string name="earth">Earth slėptuvė</string>
     <string name="cito">Aplinkos tvarkymo renginys</string>
     <string name="webcam">Webcam slėptuvė</string>
     <string name="virtual">Virtuali slėptuvė</string>
@@ -36,6 +36,17 @@
     <string name="userdefined">Vartotojo nustatyta slėptuvė</string>
     <string name="unknown">Nežinomo tipo</string>
     <string name="all_types_short">Visos</string>
+    <string name="traditional_short">Tradi</string>
+    <string name="multi_short">Multi</string>
+    <string name="mystery_short">Mystery</string>
+    <string name="letterbox_short">Letterbox</string>
+    <string name="mega_short">Mega</string>
+    <string name="giga_short">Giga</string>
+    <string name="earth_short">Earth</string>
+    <string name="cito_short">CITO</string>
+    <string name="webcam_short">Webcam</string>
+    <string name="wherigo_short">Wherigo</string>
+    <string name="unknown_short">Nežinoma</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Mikro</string>
     <string name="cache_size_small">Mažas</string>
@@ -168,6 +179,7 @@
     <string name="err_captcha">Būtina \"Captcha\". Norėdami gauti patarimų, skaitykite mūsų <a href="https://www.cgeo.org/faq#login-failed">DUK.</a>.</string>
     <string name="err_server">Nepavyksta susisiekti su Geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_ec">Nepavyksta susisiekti su Extremcaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
+    <string name="err_server_lc">Nepavyksta susisiekti su labs.geocaching.com. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
@@ -408,6 +420,7 @@
     <string name="list_dialog_rename">Pervadinti</string>
     <string name="list_not_available">Sąrašas nebeprieinamas, pereinama į standartinį sąrašą</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_option_inverse">Atvirkštinis filtras</string>
     <string name="cache_filter_name">Slėptuvės pavadinimas</string>
     <string name="cache_filter_type">Slėptuvės tipas</string>
     <string name="cache_filter_size">Slėptuvės dydis</string>
@@ -417,18 +430,74 @@
     <string name="cache_filter_owner">Slėptuvės savininkas</string>
     <string name="cache_filter_difficulty">Sudėtingumas</string>
     <string name="cache_filter_terrain">Vietovė</string>
+    <string name="cache_filter_difficulty_terrain">Sudėtingumas / Vietovė</string>
+    <string name="cache_filter_rating">Reitingas</string>
     <string name="cache_filter_status">Būsena</string>
+    <string name="cache_filter_attributes">Slėptuvės atributai</string>
     <string name="cache_filter_distance">Atstumas</string>
     <string name="cache_filter_hidden">Paslėpimo data</string>
     <string name="cache_filter_logs_count">Įrašų skaičius</string>
     <string name="cache_filter_last_found">Vėliausia radimo data</string>
+    <string name="cache_filter_origin">Šaltinis</string>
+    <string name="cache_filtergroup_basic">Pagrindiniai</string>
+    <string name="cache_filtergroup_details">Detalės</string>
+    <string name="cache_filter_contexttype_live_title">Filtras tiesiogiai</string>
+    <string name="cache_filter_contexttype_offline_title">Filtras neprisijungus</string>
+    <string name="cache_filter_contexttype_transient_title">Filtras</string>
+    <string name="cache_filter_exclude">Neįtraukti</string>
     <string name="cache_filter_userdisplay_none">Nieko</string>
+    <string name="cache_filter_userdisplay_not">NE</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d elementas</item>
+        <item quantity="few">%1$d elementai</item>
+        <item quantity="many">%1$d elementų</item>
+        <item quantity="other">%1$d elementų</item>
+    </plurals>
+    <string name="cache_filter_storage_load_button">Įkelti</string>
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
+    <string name="cache_filter_storage_clear_button">Išvalyti</string>
+    <string name="cache_filter_stringfilter_type_starts_with">Prasideda su</string>
+    <string name="cache_filter_stringfilter_type_ends_with">Baigiasi su</string>
+    <string name="cache_filter_stringfilter_type_pattern">Ruošinys</string>
     <string name="cache_filter_datefilter_label_from">Nuo:</string>
     <string name="cache_filter_datefilter_label_to">Iki:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Pasirinkti visas</string>
+    <string name="cache_filter_checkboxlist_add_items">Pridėti daugiau elementų</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridėti elementus</string>
+    <string name="cache_filter_favorites_percentage">Procentais</string>
+    <string name="cache_filter_distance_coordinates">Koordinatės</string>
     <string name="cache_filter_distance_use_current_position">Naudoti dabartinę vietą</string>
     <string name="cache_filter_status_select_all">Visos</string>
+    <string name="cache_filter_status_select_yes">Taip</string>
+    <string name="cache_filter_status_select_no">Ne</string>
+    <string name="cache_filter_status_select_label_found">Rasta</string>
+    <string name="cache_filter_status_select_label_stored">Išsaugota</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Išspręsta Mystery</string>
+    <string name="cache_filter_status_active">Aktyvi</string>
+    <string name="cache_filter_status_disabled">Išjungta</string>
+    <string name="cache_filter_status_archived">Archyvuota</string>
+    <string name="cache_filter_status_exclude_active">Neįtraukti aktyvias</string>
+    <string name="cache_filter_status_exclude_disabled">Neįtraukti išjungtas</string>
+    <string name="cache_filter_status_exclude_archived">Neįtraukti archyvuotas</string>
+    <string name="cache_filter_log_entry_foundby">Surado</string>
+    <string name="cache_filter_log_entry_logtext">Įrašo tekstas</string>
+    <string name="cache_filter_stored_since_notstored">Neišsaugota</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 valandų</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0val</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 valandos</item>
+        <item>24 valandos</item>
+        <item>7 dienos</item>
+        <item>30 dienų</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8val</item>
+        <item>24val</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
     <!-- about -->
     <string name="about_version">Versija</string>
     <string name="about_changelog">Pakeitimų žurnalas</string>
@@ -894,7 +963,7 @@
     <string name="cache_logs_friends_and_own">Draugų/nuosavi įrašai</string>
     <string name="cache_dialog_loading_details">Įkeliama slėptuvės informacija…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Įkeliamas puslapis</string>
-    <string name="cache_dialog_loading_details_status_details">Apdorojama informacija</string>
+    <string name="cache_dialog_loading_details_status_details">Apdorojami duomenys</string>
     <string name="cache_dialog_loading_details_status_spoilers">Įkeliami užuominos vaizdai</string>
     <string name="cache_dialog_loading_details_status_logs">Įkeliami įrašai</string>
     <string name="cache_dialog_loading_details_status_waypoints">Apdorojami papildomi taškai</string>
@@ -959,7 +1028,7 @@
     <string name="cache_not_status_found">Nerasta</string>
     <string name="cache_never_found">Niekada nesurastos</string>
     <string name="cache_found_last_30_days">Rasti per paskutines 30 dienų</string>
-    <string name="cache_status_archived">Suarchyvuota</string>
+    <string name="cache_status_archived">Archyvuota</string>
     <string name="cache_status_disabled">Išjungta</string>
     <string name="cache_status_active">Aktyvus</string>
     <string name="cache_status_premium">Tik Premium nariams</string>
@@ -983,6 +1052,7 @@
     <string name="cache_distance">Atstumas</string>
     <string name="cache_difficulty">Sudėtingumas</string>
     <string name="cache_terrain">Vietovė</string>
+    <string name="cache_difficulty_terrain">Sudėtingumas / Vietovė</string>
     <string name="cache_rating">Reitingas</string>
     <string name="cache_own_rating">Jūsų reitingas</string>
     <string name="cache_rating_of_new">%1$.1f iš %2$d</string>
@@ -1054,7 +1124,7 @@
     <string name="web_downloading">Atsisiunčiama</string>
     <string name="web_downloaded">Atsisiųsta</string>
     <!-- popup -->
-    <string name="popup_more">Daugiau informacijos</string>
+    <string name="popup_more">Daugiau detalių</string>
     <!-- waypoint -->
     <string name="waypoint">Papildomas taškas</string>
     <string name="waypoint_coordinates">Koordinatės</string>
@@ -1108,6 +1178,10 @@
     <string name="map_view_map">Žemėlapio šaltinis</string>
     <string name="map_rotation">Žemėlapio sukimas</string>
     <string name="map_dot_mode">Naudoti mažas piktogramas</string>
+    <string name="map_showc_found">Rasta</string>
+    <string name="map_showc_disabled">Išjungta</string>
+    <string name="map_showc_archived">Archyvuota</string>
+    <string name="map_showwp_original">Originalus</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
     <string name="init_summary_hidewp_parking">Slėpti parkingo taškus žemėlapyje</string>
@@ -1122,6 +1196,9 @@
     <string name="map_gm_autorotation">Žemėlapio autosukimas</string>
     <string name="map_gm_autorotation_disable">Išjungti automatinį žemėlapio pasukimą?\n\nGalėsite jį vėl įjungti per žemėlapio pasukimo meniu</string>
     <string name="quick_settings">Greiti nustatymai</string>
+    <string name="map_show_caches_title">Rodyti slėptuves:</string>
+    <string name="map_show_waypoints_title">Rodyti tarpinius taškus:</string>
+    <string name="map_show_other_title">Rodyti kitus:</string>
     <!-- search -->
     <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
     <string name="search_coordinates">Koordinatės</string>
@@ -1164,8 +1241,8 @@
     <string name="trackable_spotted_at_user">Rankose</string>
     <string name="trackable_spotted_unknown_location">Vieta nežinoma</string>
     <string name="trackable_spotted_owner">Savininko rankose</string>
-    <string name="trackable_spotted_archived">Suarchyvuota</string>
-    <string name="trackable_origin">Kilmė</string>
+    <string name="trackable_spotted_archived">Archyvuota</string>
+    <string name="trackable_origin">Šaltinis</string>
     <string name="trackable_unknown">Nenurodyta</string>
     <string name="trackable_released">Išleistas</string>
     <string name="trackable_distance">Nukeliauta</string>
@@ -1354,9 +1431,9 @@
     <string name="attribute_ticks_yes">Yra erkių</string>
     <string name="attribute_ticks_no">Erkių nėra</string>
     <string name="attribute_mine_yes">Yra apleistų kasyklų</string>
-    <string name="attribute_mine_no">Apleistų kasyklų nėra</string>
+    <string name="attribute_mine_no">Nėra apleistų kasyklų</string>
     <string name="attribute_cliff_yes">Yra skardis / krentantys akmenys</string>
-    <string name="attribute_cliff_no">Skardžio / krentančių akmenų nėra</string>
+    <string name="attribute_cliff_no">Nėra skardžio / krentančių akmenų</string>
     <string name="attribute_hunting_yes">Medžioklės teritorija</string>
     <string name="attribute_hunting_no">Ne medžioklės teritorija</string>
     <string name="attribute_danger_yes">Pavojinga vieta</string>
@@ -1389,8 +1466,8 @@
     <string name="attribute_oc_only_no">Registruojamas netik Opencaching</string>
     <string name="attribute_link_only_yes">Interneto nuoroda tik į kitą geo slėptuvių portalą</string>
     <string name="attribute_link_only_no">Interneto nuoroda netik į kitą geo slėptuvių portalą</string>
-    <string name="attribute_letterbox_yes">Pašto dėžė (reikia antspaudo)</string>
-    <string name="attribute_letterbox_no">Ne pašto dėžė (nereikia antspaudo)</string>
+    <string name="attribute_letterbox_yes">Letterbox (reikia antspaudo)</string>
+    <string name="attribute_letterbox_no">Ne Letterbox (nereikia antspaudo)</string>
     <string name="attribute_railway_yes">Netoliese yra veikiantis geležinkelis</string>
     <string name="attribute_railway_no">Netoliese veikiančio geležinkelio nėra</string>
     <string name="attribute_syringe_yes">Yra pirmoji pagalba</string>
@@ -1405,13 +1482,13 @@
     <string name="attribute_poi_no">Nėra lankytinos vietos</string>
     <string name="attribute_moving_target_yes">Judantis taikinys</string>
     <string name="attribute_moving_target_no">Nėra judančio taikinio</string>
-    <string name="attribute_webcam_yes">Internetinė kamera</string>
-    <string name="attribute_webcam_no">Nėra internetinės kameros</string>
+    <string name="attribute_webcam_yes">Webcam</string>
+    <string name="attribute_webcam_no">Ne Webcam</string>
     <string name="attribute_inside_yes">Uždarose patalpose (olos, pastatai ir kt.)</string>
     <string name="attribute_inside_no">Neuždarose erdvėse</string>
     <string name="attribute_in_water_yes">Vandenyje</string>
     <string name="attribute_in_water_no">Nevandenyje</string>
-    <string name="attribute_no_gps_yes">Be GPS (pašto dėžutės, kompaso žongliravimas,…)</string>
+    <string name="attribute_no_gps_yes">Be GPS (Letterbox, žongliravimas kompasu ,…)</string>
     <string name="attribute_no_gps_no">Su GPS</string>
     <string name="attribute_overnight_yes">Reikia pasilikti nakvynei</string>
     <string name="attribute_overnight_no">Nereikia pasilikti nakvynei</string>
@@ -1435,8 +1512,8 @@
     <string name="attribute_aircraft_no">Nėra orlaivio</string>
     <string name="attribute_investigation_yes">Tyrinėjimas</string>
     <string name="attribute_investigation_no">Nėra tyrinėjimo</string>
-    <string name="attribute_puzzle_yes">Galvosūkis / paslaptis</string>
-    <string name="attribute_puzzle_no">Nėra galvosūkio / paslapties</string>
+    <string name="attribute_puzzle_yes">Puzzle / Mystery</string>
+    <string name="attribute_puzzle_no">Ne puzzle / mystery</string>
     <string name="attribute_arithmetic_yes">Aritmetinė užduotis</string>
     <string name="attribute_arithmetic_no">Nėra aritmetinės užduoties</string>
     <string name="attribute_other_cache_yes">Kitas slėptuvės tipas</string>
@@ -1479,6 +1556,8 @@
     <string name="attribute_survey_marker_no">Ne šalia apžvalgos ženklo</string>
     <string name="attribute_bonuscache_yes">Bonus slėptuvė</string>
     <string name="attribute_bonuscache_no">Ne bonus slėptuvė</string>
+    <string name="attribute_powertrail_yes">Power trail dalis</string>
+    <string name="attribute_powertrail_no">Ne power trail dalis</string>
     <string name="attribute_challengecache_yes">Iššūkio slėptuvė</string>
     <string name="attribute_challengecache_no">Ne iššūkio slėptuvė</string>
     <string name="attribute_hqsolutionchecker_yes">Įjungtas Geocaching.com sprendimų tikrintuvas</string>
