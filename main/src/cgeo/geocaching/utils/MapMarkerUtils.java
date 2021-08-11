@@ -26,7 +26,6 @@ import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
@@ -175,7 +174,7 @@ public final class MapMarkerUtils {
         final WaypointType waypointType = waypoint.getWaypointType();
 
         //final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.isVisited() ? R.drawable.marker : cacheIsDisabled || cacheIsArchived ? R.drawable.marker : R.drawable.marker, null);
-        Drawable marker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker, null));
+        final Drawable marker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker, null));
 
         if (cacheIsDisabled || cacheIsArchived) {
             DrawableCompat.setTint(marker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
@@ -263,8 +262,8 @@ public final class MapMarkerUtils {
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
-        Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
+        final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
+        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
         insetsBuilder.withInset(new InsetBuilder(background, VERTICAL.CENTER, HORIZONTAL.CENTER));
 
@@ -282,7 +281,7 @@ public final class MapMarkerUtils {
         } else if (doubleSize) {
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, true));
         } else {
-            Drawable mainIcon = ResourcesCompat.getDrawable(res, mainMarkerId, null);
+            final Drawable mainIcon = ResourcesCompat.getDrawable(res, mainMarkerId, null);
             insetsBuilder.withInset(new InsetBuilder(mainIcon, VERTICAL.CENTER, HORIZONTAL.CENTER));
 
         }
@@ -423,9 +422,11 @@ public final class MapMarkerUtils {
             }
         }
 
-        Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background, null));
-        Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
-        if (tintColor != -1) DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, tintColor, null));
+        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background, null));
+        final Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
+        if (tintColor != -1) {
+            DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, tintColor, null));
+        }
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
