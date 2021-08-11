@@ -1438,6 +1438,7 @@
     <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geo kod</string>
     <string name="search_geo_button">Geo koduna göre ara</string>
+    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
