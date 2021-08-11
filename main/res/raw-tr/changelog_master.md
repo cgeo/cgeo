@@ -1,7 +1,7 @@
  
-### Map
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
+### Harita
+- Yeni: Mapy.cz çevrimiçi harita kaynağı olarak eklendi
+- Yeni: Özgün rota: Rotalara yeni başlangıç ekleme ve tersine çevirme özelliği
 
-### Other
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+### Diğer
+- Yeni: Kopyalama pananosundan bir Geokod ayrıştırılabiliyorsa 'Geokoduna göre ara' seçeneği otomatik olarak doldurulur
