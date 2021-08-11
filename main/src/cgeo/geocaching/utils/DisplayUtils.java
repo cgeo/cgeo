@@ -10,7 +10,6 @@ import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
-import android.util.Pair;
 import android.view.WindowManager;
 
 import androidx.annotation.ColorRes;
@@ -19,6 +18,9 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
 public class DisplayUtils {
+
+    public static final int SIZE_LIST_MARKER_DP = 12;  // size of a list marker in dp
+    public static final int SIZE_CACHE_MARKER_DP = 22; // size of a cache type marker in dp
 
     private DisplayUtils() {
         // Utility class, do not instantiate
@@ -49,25 +51,9 @@ public class DisplayUtils {
         return (int) (screenWidthDp / columnWidthDp + 0.5);
     }
 
-    /**
-     * get actual width and height of given drawable resource
-     * @param res - resources to load from
-     * @param resToFitIn - resource to check
-     * @return actual width and height
-     */
-    public static Pair<Integer, Integer> getDrawableDimensions(final Resources res, @DrawableRes final int resToFitIn) {
-        final Drawable calc = ResourcesCompat.getDrawable(res, resToFitIn, null);
-        assert calc != null;
-        return new Pair<>(calc.getIntrinsicWidth(), calc.getIntrinsicHeight());
-    }
-
-    /**
-     * get actual width and height of given drawable
-     * @param resToFitIn - drawable to check
-     * @return actual width and height
-     */
-    public static Pair<Integer, Integer> getDrawableDimensions(final Drawable resToFitIn) {
-        return new Pair<>(resToFitIn.getIntrinsicWidth(), resToFitIn.getIntrinsicHeight());
+    public static int getPxFromDp(final Resources res, final int size, final float scaleFactor) {
+        final float conversionFactor = (float) res.getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
+        return (int) (size * conversionFactor * scaleFactor);
     }
 
     public static Drawable getTintedDrawable(final Resources res, @DrawableRes final int menuRes, @ColorRes final int tintColor) {

@@ -17,6 +17,8 @@ import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetBuilder.HORIZONTAL;
 import cgeo.geocaching.utils.builders.InsetBuilder.VERTICAL;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
+import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
+import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
 
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
@@ -204,11 +206,8 @@ public final class MapMarkerUtils {
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
         if (assignedMarkers.size() > 0) {
             if (lPaint == null) {
-                final Drawable marker = ResourcesCompat.getDrawable(res, R.drawable.dot_found, null);
-                assert marker != null;
-                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (marker.getIntrinsicWidth() * 1.2), (int) (marker.getIntrinsicHeight() * 1.2));
-                final int markerAvailable = markerDimensions.first;
-                lPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f);
+                lPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
             }
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), VERTICAL.CENTER, HORIZONTAL.LEFT));
             if (assignedMarkers.size() > 1) {
@@ -273,11 +272,10 @@ public final class MapMarkerUtils {
         final boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
         if (useEmoji > 0 && !doubleSize) {
             if (cPaint == null) {
-                final Pair<Integer, Integer> markerDimensions = DisplayUtils.getDrawableDimensions(res, R.drawable.marker_oc);
-                final int markerAvailable = (int) (markerDimensions.first * 0.6);
-                cPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, (int) (markerDimensions.second * 0.05), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 0.7f);
+                cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, (int) (markerAvailable / 20), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji)));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), VERTICAL.CENTER, HORIZONTAL.CENTER));
         } else if (doubleSize) {
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, true));
         } else {
