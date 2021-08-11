@@ -23,14 +23,14 @@ import org.apache.commons.lang3.StringUtils;
  * Enum listing waypoint types
  */
 public enum WaypointType {
-    FINAL("flag", "f", "Final Location", R.string.wp_final, R.string.wpnew_final, R.drawable.waypoint_flag, 3, R.drawable.dot_waypoint_flag, R.drawable.waypoint_flag_disabled),
-    OWN("own", "o", "Own", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 5, R.drawable.dot_waypoint_waypoint, R.drawable.waypoint_waypoint_disabled),
+    FINAL("flag", "f", "Final Location", R.string.wp_final, R.string.wpnew_final, R.drawable.waypoint_flag, 3, R.drawable.dot_waypoint_flag),
+    OWN("own", "o", "Own", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 5, R.drawable.dot_waypoint_waypoint),
     PARKING("pkg", "p", "Parking Area", R.string.wp_pkg, R.string.wpnew_pkg, R.drawable.waypoint_pkg, -1, R.drawable.dot_waypoint_pkg),
-    PUZZLE("puzzle", "x", "Virtual Stage", R.string.wp_puzzle, R.string.wpnew_stage, R.drawable.waypoint_puzzle, 2, R.drawable.dot_waypoint_puzzle, R.drawable.waypoint_puzzle_disabled),
-    STAGE("stage", "s", "Physical Stage", R.string.wp_stage, R.string.wpnew_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint_stage, R.drawable.waypoint_stage_disabled),
-    TRAILHEAD("trailhead", "t", "Trailhead", R.string.wp_trailhead, R.string.wpnew_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint_trailhead, R.drawable.waypoint_trailhead_disabled),
-    WAYPOINT("waypoint", "w", "Reference Point", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_waypoint, R.drawable.waypoint_waypoint_disabled),
-    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.string.wpnew_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_waypoint, R.drawable.waypoint_waypoint_disabled);
+    PUZZLE("puzzle", "x", "Virtual Stage", R.string.wp_puzzle, R.string.wpnew_stage, R.drawable.waypoint_puzzle, 2, R.drawable.dot_waypoint_puzzle),
+    STAGE("stage", "s", "Physical Stage", R.string.wp_stage, R.string.wpnew_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint_stage),
+    TRAILHEAD("trailhead", "t", "Trailhead", R.string.wp_trailhead, R.string.wpnew_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint_trailhead),
+    WAYPOINT("waypoint", "w", "Reference Point", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_waypoint),
+    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.string.wpnew_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_waypoint);
 
     @NonNull
     public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);
@@ -50,7 +50,6 @@ public enum WaypointType {
 
     public final int order;
     public final int dotMarkerId;
-    public final int disabledMarkerId;
 
     WaypointType(@NonNull final String id, @NonNull final String shortId, @NonNull final String gpx, @StringRes final int stringId, @StringRes final int stringIdNewWpt, @DrawableRes final int markerId, final int order, @DrawableRes final int dotMarkerId) {
         this.id = id;
@@ -61,7 +60,6 @@ public enum WaypointType {
         this.markerId = markerId;
         this.order = order;
         this.dotMarkerId = dotMarkerId;
-        this.disabledMarkerId = disabledMarkerId;
     }
 
     /**

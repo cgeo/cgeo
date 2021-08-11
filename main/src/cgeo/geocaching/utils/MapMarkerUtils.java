@@ -144,6 +144,7 @@ public final class MapMarkerUtils {
         final int hashcode = new HashCodeBuilder()
             .append(waypoint.isVisited())
             .append(id)
+            .append(waypoint.getMapMarkerId())
             .append(assignedMarkers)
             .append(cacheIsDisabled)
             .append(cacheIsArchived)
@@ -173,18 +174,16 @@ public final class MapMarkerUtils {
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
-        //final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.isVisited() ? R.drawable.marker : cacheIsDisabled || cacheIsArchived ? R.drawable.marker : R.drawable.marker, null);
-        final Drawable marker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker, null));
-
-        if (cacheIsDisabled || cacheIsArchived) {
-            DrawableCompat.setTint(marker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
-        }
-
+        final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        final int markerId = null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId;
-        insetsBuilder.withInset(new InsetBuilder(markerId, VERTICAL.CENTER, HORIZONTAL.CENTER));
+        final Drawable mainMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId, null));
+        if (cacheIsDisabled || cacheIsArchived) {
+            DrawableCompat.setTint(mainMarker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
+        }
+        insetsBuilder.withInset(new InsetBuilder(mainMarker, VERTICAL.CENTER, HORIZONTAL.CENTER));
 
         if (cacheIsArchived) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, VERTICAL.CENTER, HORIZONTAL.CENTER, false));
