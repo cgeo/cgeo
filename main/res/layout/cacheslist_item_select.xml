@@ -8,11 +8,13 @@
     tools:context=".maps.mapsforge.v6.NewMap" >
 
     <!-- cache name and icon -->
+    <!-- first TextView gets the size of a cache marker as minimum height -->
 
     <TextView
         android:id="@+id/text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:minHeight="36dp"
         android:layout_gravity="left"
         android:layout_marginRight="3dip"
         android:ellipsize="end"
