@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Ler código GC</string>
     <string name="menu_lists_pocket_queries">Listas / pocket queries</string>
     <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
+    <string name="menu_invert_order">Inverter ordem</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Por perto</string>
@@ -1988,6 +1989,8 @@
         <item quantity="other">Rota carregada com %d pontos de rota</item>
     </plurals>
     <string name="center_on_route">Centrar na rota</string>
+    <string name="individual_route_set_as_start_title">Definir como início da rota</string>
+    <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
     <!-- individual track -->
     <string name="individual_track">Percurso/rota GPX</string>
     <string name="map_load_track">Carregar percurso/rota do GPX</string>

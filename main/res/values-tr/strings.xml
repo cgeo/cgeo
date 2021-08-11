@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Geocode tara</string>
     <string name="menu_lists_pocket_queries">Listeler / cep sorguları</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
+    <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
     <string name="live_map_button">Canlı harita</string>
     <string name="caches_nearby_button">Yakınlarda</string>
@@ -694,6 +695,7 @@
     <string name="init_authorization_credential_username">Kullanıcı adı</string>
     <string name="init_authorization_credential_password">Şifre</string>
     <string name="settings_service_active">Aktif</string>
+    <string name="settings_service_active_unavailable">Aktif/Mevcut değil</string>
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
@@ -1436,6 +1438,7 @@
     <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geo kod</string>
     <string name="search_geo_button">Geo koduna göre ara</string>
+    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
@@ -1987,6 +1990,8 @@
         <item quantity="other">Rota %d rota noktasıyla yüklendi</item>
     </plurals>
     <string name="center_on_route">Rotaya göre ortala</string>
+    <string name="individual_route_set_as_start_title">Rota başlangıcı olarak ayarla</string>
+    <string name="individual_route_set_as_start_message">Bu öğeyi rota başlangıcı olarak ayarlanıp, sonraki tüm öğeler mevcut rotanın üstüne taşınsın mı?</string>
     <!-- individual track -->
     <string name="individual_track">GPX yol/rota</string>
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>

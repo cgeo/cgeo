@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Scan geocode</string>
     <string name="menu_lists_pocket_queries">Lijsten / pocket queries</string>
     <string name="menu_scan_description">c:geo kan geocodes scannen die als QR code weergegeven zijn. De noodzakelijke app is niet geïnstalleerd. Wil je Google Play openen om de app te installeren?</string>
+    <string name="menu_invert_order">Volgorde omkeren</string>
     <!-- main screen -->
     <string name="live_map_button">Live kaart</string>
     <string name="caches_nearby_button">Dichtbij</string>
@@ -1988,6 +1989,8 @@
         <item quantity="other">Route geladen met %d routepunten</item>
     </plurals>
     <string name="center_on_route">Centreer op route</string>
+    <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
+    <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <!-- individual track -->
     <string name="individual_track">GPX spoor/route</string>
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
