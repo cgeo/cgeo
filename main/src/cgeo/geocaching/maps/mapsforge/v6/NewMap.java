@@ -55,6 +55,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -1409,12 +1410,18 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                         if (cache != null && item.getType() == CoordinatesType.CACHE) {
                             tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
                         } else {
-                            tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
+                            Waypoint waypoint = null;
                             if (item.getType() == CoordinatesType.WAYPOINT) {
+                                waypoint = DataStore.loadWaypoint(item.getId());
                                 text.append(Formatter.SEPARATOR).append(shortgeocode);
                                 if (cache != null) {
                                     text.append(Formatter.SEPARATOR).append(cache.getName());
                                 }
+                            }
+                            if (waypoint != null) {
+                                tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, waypoint).getDrawable(), null, null, null);
+                            } else {
+                                tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
                             }
                         }
                     } else {
