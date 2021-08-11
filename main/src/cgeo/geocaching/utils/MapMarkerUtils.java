@@ -204,7 +204,7 @@ public final class MapMarkerUtils {
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
         if (assignedMarkers.size() > 0) {
             if (lPaint == null) {
-                final Drawable marker = ResourcesCompat.getDrawable(res, R.drawable.dot_black, null);
+                final Drawable marker = ResourcesCompat.getDrawable(res, R.drawable.dot_found, null);
                 assert marker != null;
                 final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (marker.getIntrinsicWidth() * 1.2), (int) (marker.getIntrinsicHeight() * 1.2));
                 final int markerAvailable = markerDimensions.first;
