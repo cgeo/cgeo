@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">확인</string>
     <!-- basics -->
     <string name="cache">캐시</string>
     <string name="detail">상세표시</string>
@@ -493,6 +494,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
+    <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
     <string name="cache_filter_storage_select_title">필터 선택</string>
     <string name="cache_filter_storage_select_clear_title">필터 선택 또는 현재 필터 지우기</string>
@@ -513,6 +515,7 @@
     <string name="cache_filter_datefilter_label_to">종료일:</string>
     <string name="cache_filter_checkboxlist_selectallnone">모두 선택</string>
     <string name="cache_filter_checkboxlist_add_items">더 많은 아이템 추가</string>
+    <string name="cache_filter_checkboxlist_add_all_items">모든 아이템 추가</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">아이템 추가</string>
     <string name="cache_filter_favorites_absolute">절대적</string>
     <string name="cache_filter_favorites_percentage">비율</string>
@@ -689,6 +692,7 @@
     <string name="init_authorization_credential_username">사용자명</string>
     <string name="init_authorization_credential_password">비밀번호</string>
     <string name="settings_service_active">활성</string>
+    <string name="settings_service_active_unavailable">활성/사용할 수 없음</string>
     <string name="settings_navigation_disabled">이 앱이 설치되어 있지 않음</string>
     <string name="init_signature">서명</string>
     <string name="init_template_help">[NAME]과 같은 자리 표시 자 문자열은 템플릿을 사용할 때 지정된 텍스트로 채워집니다.</string>

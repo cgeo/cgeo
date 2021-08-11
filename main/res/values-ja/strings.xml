@@ -510,7 +510,8 @@
     <string name="cache_filter_datefilter_label_from">開始日:</string>
     <string name="cache_filter_datefilter_label_to">終了日:</string>
     <string name="cache_filter_checkboxlist_selectallnone">すべて選択</string>
-    <string name="cache_filter_checkboxlist_add_items">項目を追加</string>
+    <string name="cache_filter_checkboxlist_add_items">追加</string>
+    <string name="cache_filter_checkboxlist_add_all_items">すべて追加</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">項目を追加</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
@@ -685,6 +686,7 @@
     <string name="init_authorization_credential_username">ユーザー名</string>
     <string name="init_authorization_credential_password">パスワード</string>
     <string name="settings_service_active">有効</string>
+    <string name="settings_service_active_unavailable">有効/利用不可</string>
     <string name="settings_navigation_disabled">未インストール</string>
     <string name="init_signature">署名</string>
     <string name="init_template_help">[NAME] のようなプレースホルダは、テンプレート機能で指定された文字列に置換されます。</string>
@@ -1930,8 +1932,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_export_individual_route_as_track">トラックとしてエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
-    <string name="map_autotarget_individual_route">ルートの開始地点を目的地として設定</string>
-    <string name="map_disable_autotarget_individual_route">「ルートの開始地点を目的地として設定」は無効になっています</string>
+    <string name="map_autotarget_individual_route">ルートの開始地点を目的地に設定</string>
+    <string name="map_disable_autotarget_individual_route">「ルートの開始地点を目的地に設定」は無効になっています</string>
     <string name="map_clear_manual_targets">目的地を削除</string>
     <string name="map_manual_targets_cleared">目的地を削除しました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
