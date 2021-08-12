@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -464,6 +465,8 @@
     <string name="cache_filter_owner">Proprietario Cache</string>
     <string name="cache_filter_difficulty">Difficoltà</string>
     <string name="cache_filter_terrain">Terreno</string>
+    <string name="cache_filter_difficulty_terrain">Difficoltà/Terreno</string>
+    <string name="cache_filter_rating">Voto</string>
     <string name="cache_filter_status">Stato</string>
     <string name="cache_filter_attributes">Attributi Cache</string>
     <string name="cache_filter_favorites">Preferiti</string>
@@ -493,7 +496,10 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carica</string>
     <string name="cache_filter_storage_delete_button">Elimina</string>
+    <string name="cache_filter_storage_clear_button">Azzera</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
+    <string name="cache_filter_storage_select_title">Seleziona filtro</string>
+    <string name="cache_filter_storage_select_clear_title">Seleziona filtro o azzera filtro corrente</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
     <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
     <string name="cache_filter_storage_save_confirm_title">Salva filtro con sovrascrittura</string>
@@ -511,6 +517,7 @@
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto</string>
     <string name="cache_filter_checkboxlist_add_items">Aggiungi altri elementi</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Aggiungi tutti gli elementi</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Aggiungi elementi</string>
     <string name="cache_filter_favorites_absolute">Assoluto</string>
     <string name="cache_filter_favorites_percentage">Percentuale</string>
@@ -687,6 +694,7 @@
     <string name="init_authorization_credential_username">Utente</string>
     <string name="init_authorization_credential_password">Password</string>
     <string name="settings_service_active">Attiva</string>
+    <string name="settings_service_active_unavailable">Attivo/non disponibile</string>
     <string name="settings_navigation_disabled">Questa applicazione non sembra essere installata</string>
     <string name="init_signature">Firma</string>
     <string name="init_template_help">Le stringhe segnaposto - come [NAME] - sono riempite con il testo designato quando viene utilizzato il modello.</string>
@@ -1248,6 +1256,7 @@
     <string name="cache_distance">Distanza</string>
     <string name="cache_difficulty">Difficoltà</string>
     <string name="cache_terrain">Terreno</string>
+    <string name="cache_difficulty_terrain">Difficoltà/Terreno</string>
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
     <string name="cache_rating_of_new">%1$.1f di %2$d</string>
