@@ -1835,7 +1835,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     descriptionView.setVisibility(View.VISIBLE);
                     activity.addContextMenu(descriptionView);
-                    activity.potentiallyHideShortDescription();
+                    // TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
+                    //activity.potentiallyHideShortDescription();
                 }
                 if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
