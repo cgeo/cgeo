@@ -14,8 +14,6 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.builders.InsetBuilder;
-import cgeo.geocaching.utils.builders.InsetBuilder.HORIZONTAL;
-import cgeo.geocaching.utils.builders.InsetBuilder.VERTICAL;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
@@ -23,8 +21,10 @@ import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
 import android.util.Pair;
 import android.util.SparseArray;
+import android.view.Gravity;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -185,13 +185,13 @@ public final class MapMarkerUtils {
         if (cacheIsDisabled || cacheIsArchived) {
             DrawableCompat.setTint(mainMarker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
         }
-        insetsBuilder.withInset(new InsetBuilder(mainMarker, VERTICAL.CENTER, HORIZONTAL.CENTER));
+        insetsBuilder.withInset(new InsetBuilder(mainMarker, Gravity.CENTER));
 
         if (cacheIsArchived) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, VERTICAL.CENTER, HORIZONTAL.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
         }
         if (waypoint.isVisited()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_visited, VERTICAL.CENTER, HORIZONTAL.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_visited, Gravity.CENTER, false));
         }
 
         addListMarkers(res, insetsBuilder, assignedMarkers);
@@ -208,9 +208,9 @@ public final class MapMarkerUtils {
                 final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f);
                 lPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), VERTICAL.CENTER, HORIZONTAL.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
             if (assignedMarkers.size() > 1) {
-                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(1)), VERTICAL.CENTER, HORIZONTAL.RIGHT));
+                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
             }
         }
     }
@@ -263,7 +263,7 @@ public final class MapMarkerUtils {
         final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
-        insetsBuilder.withInset(new InsetBuilder(background, VERTICAL.CENTER, HORIZONTAL.CENTER));
+        insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
 
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
@@ -274,41 +274,41 @@ public final class MapMarkerUtils {
                 final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 0.7f);
                 cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, (int) (markerAvailable / 20), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), VERTICAL.CENTER, HORIZONTAL.CENTER));
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
         } else if (doubleSize) {
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, VERTICAL.CENTER, HORIZONTAL.CENTER, true));
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true));
         } else {
             final Drawable mainIcon = ResourcesCompat.getDrawable(res, mainMarkerId, null);
-            insetsBuilder.withInset(new InsetBuilder(mainIcon, VERTICAL.CENTER, HORIZONTAL.CENTER));
+            insetsBuilder.withInset(new InsetBuilder(mainIcon, Gravity.CENTER));
 
         }
         // archived
         if (cache.isArchived()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, VERTICAL.CENTER, HORIZONTAL.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
         }
         // own
         if (cache.isOwner()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, VERTICAL.TOP, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, Gravity.TOP | Gravity.RIGHT));
             // if not, checked if stored
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, VERTICAL.TOP, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
         }
         // will attend / found
         if (cache.hasWillAttendForFutureEvent() && !doubleSize) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, VERTICAL.TOP, HORIZONTAL.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, Gravity.TOP | Gravity.LEFT));
         } else if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
-                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, VERTICAL.TOP, HORIZONTAL.LEFT));
+                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT));
             }
         }
         // user modified coords
         if (showUserModifiedCoords(cache)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, VERTICAL.BOTTOM, HORIZONTAL.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
         }
         // personal note
         if (cache.getPersonalNote() != null) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, VERTICAL.BOTTOM, HORIZONTAL.LEFT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT));
         }
         // list markers
         addListMarkers(res, insetsBuilder, assignedMarkers);
@@ -326,7 +326,15 @@ public final class MapMarkerUtils {
 
         int index = 0;
         for (final int[] temp : insets) {
-            ld.setLayerInset(index++, temp[0], temp[1], temp[2], temp[3]);
+            if (Build.VERSION.SDK_INT > 22) {
+                if (temp[0] > 0) {
+                    ld.setLayerSize(index, temp[0], temp[0]);
+                }
+                ld.setLayerGravity(index, temp[1]);
+            } else {
+                ld.setLayerInset(index, temp[0], temp[1], temp[2], temp[3]);
+            }
+            index++;
         }
         return ld;
     }
@@ -427,7 +435,7 @@ public final class MapMarkerUtils {
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
-        insetsBuilder.withInset(new InsetBuilder(dotIcon, VERTICAL.CENTER, HORIZONTAL.CENTER));
+        insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
         return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
