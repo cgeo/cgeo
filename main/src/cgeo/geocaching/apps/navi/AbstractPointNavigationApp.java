@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -25,17 +25,17 @@ abstract class AbstractPointNavigationApp extends AbstractApp implements CacheNa
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         assert coords != null; // asserted by caller
-        navigate(activity, coords);
+        navigate(context, coords);
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
+    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
         final Geopoint coords = waypoint.getCoords();
         assert coords != null; // asserted by caller
-        navigate(activity, coords);
+        navigate(context, coords);
     }
 
     @Override

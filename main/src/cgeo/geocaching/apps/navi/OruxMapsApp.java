@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -23,7 +23,7 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
         super(getString(nameResourceId), intent);
     }
 
-    private void navigate(@NonNull final Activity activity, @NonNull final Geopoint point, @NonNull final String name) {
+    private void navigate(@NonNull final Context context, @NonNull final Geopoint point, @NonNull final String name) {
         final Intent intent = new Intent(this.intent);
         final double[] targetLat = { point.getLatitude() };
         final double[] targetLon = { point.getLongitude() };
@@ -34,26 +34,26 @@ abstract class OruxMapsApp extends AbstractPointNavigationApp {
             intent.putExtra(ORUXMAPS_EXTRA_NAME, targetName);
         }
 
-        activity.startActivity(intent);
+        context.startActivity(intent);
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
-        navigate(activity, point, "Waypoint");
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
+        navigate(context, point, "Waypoint");
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         assert coords != null; // guaranteed by caller
-        navigate(activity, coords, cache.getName());
+        navigate(context, coords, cache.getName());
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
+    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
         final Geopoint coords = waypoint.getCoords();
         assert coords != null; // guaranteed by caller
-        navigate(activity, coords, waypoint.getName());
+        navigate(context, coords, waypoint.getName());
     }
 
     static class OruxOnlineMapApp extends OruxMapsApp {

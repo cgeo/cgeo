@@ -2,7 +2,7 @@ package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.location.Geopoint;
 
-import android.app.Activity;
+import android.content.Context;
 
 import androidx.annotation.NonNull;
 
@@ -11,5 +11,5 @@ import androidx.annotation.NonNull;
  *
  */
 interface GeopointNavigationApp {
-    void navigate(@NonNull Activity activity, @NonNull Geopoint coords);
+    void navigate(@NonNull Context context, @NonNull Geopoint coords);
 }

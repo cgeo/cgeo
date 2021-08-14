@@ -4,7 +4,7 @@ import cgeo.geocaching.apps.AbstractApp;
 import cgeo.geocaching.apps.navi.CacheNavigationApp;
 import cgeo.geocaching.models.Geocache;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 
 import androidx.annotation.NonNull;
@@ -19,11 +19,11 @@ abstract class AbstractGeneralApp extends AbstractApp implements CacheNavigation
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final Intent intent = getLaunchIntent();
         if (intent != null) {
             intent.setFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-            activity.startActivity(intent);
+            context.startActivity(intent);
         }
     }
 }
