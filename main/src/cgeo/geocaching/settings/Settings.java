@@ -581,8 +581,8 @@ public class Settings {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
-    public static boolean isLCConnectorActive() {
-        return getBoolean(R.string.pref_connectorLCActive, true);
+    public static boolean isALConnectorActive() {
+        return getBoolean(R.string.pref_connectorALActive, true);
     }
 
     public static boolean isSUConnectorActive() {
