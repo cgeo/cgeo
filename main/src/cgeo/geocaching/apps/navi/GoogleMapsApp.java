@@ -9,7 +9,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.Log;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -27,34 +27,34 @@ class GoogleMapsApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint point) {
-        navigate(activity, point, activity.getString(R.string.waypoint));
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint point) {
+        navigate(context, point, context.getString(R.string.waypoint));
     }
 
-    private static void navigate(final Activity activity, final Geopoint point, final String label) {
+    private static void navigate(final Context context, final Geopoint point, final String label) {
         try {
             final String latitude = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, point);
             final String longitude = GeopointFormatter.format(Format.LON_DECDEGREE_RAW, point);
             final String geoLocation = "geo:" + latitude + "," + longitude;
             final String query = latitude + "," + longitude + "(" + label + ")";
             final String uriString = geoLocation + "?q=" + Uri.encode(query);
-            activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)));
+            context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(uriString)));
             return;
         } catch (final RuntimeException ignored) {
             // nothing
         }
         Log.i("GoogleMapsApp.navigate: No maps application available.");
 
-        ActivityMixin.showToast(activity, getString(R.string.err_application_no));
+        ActivityMixin.showToast(context, getString(R.string.err_application_no));
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
-        navigate(activity, cache.getCoords(), cache.getName());
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
+        navigate(context, cache.getCoords(), cache.getName());
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
-        navigate(activity, waypoint.getCoords(), waypoint.getName());
+    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
+        navigate(context, waypoint.getCoords(), waypoint.getName());
     }
 }

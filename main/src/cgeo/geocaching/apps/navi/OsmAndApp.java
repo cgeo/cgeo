@@ -7,7 +7,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -35,29 +35,29 @@ public class OsmAndApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geocache cache) {
+    public void navigate(@NonNull final Context context, @NonNull final Geocache cache) {
         final Geopoint coords = cache.getCoords();
         assert coords != null; // guaranteed by super class
-        navigate(activity, coords, cache.getName());
+        navigate(context, coords, cache.getName());
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Waypoint waypoint) {
+    public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
         final Geopoint coords = waypoint.getCoords();
         assert coords != null; // guaranteed by super class
-        navigate(activity, coords, waypoint.getName());
+        navigate(context, coords, waypoint.getName());
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
-        navigate(activity, coords, activity.getString(R.string.osmand_marker_cgeo));
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
+        navigate(context, coords, context.getString(R.string.osmand_marker_cgeo));
     }
 
-    private static void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords, @NonNull final String markerName) {
+    private static void navigate(@NonNull final Context context, @NonNull final Geopoint coords, @NonNull final String markerName) {
         final Parameters params = new Parameters(PARAM_LAT, String.valueOf(coords.getLatitude()),
                 PARAM_LON, String.valueOf(coords.getLongitude()),
                 PARAM_NAME, markerName);
-        activity.startActivity(buildIntent(params));
+        context.startActivity(buildIntent(params));
     }
 
     private static Intent buildIntent(@Nullable final Parameters parameters) {
