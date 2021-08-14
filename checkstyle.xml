@@ -119,9 +119,6 @@
             <property name="severity" value="warning" />
         </module>
         <module name="SuppressWarningsHolder" />
-        <module name="UnnecessaryParentheses">
-            <property name="severity" value="info" />
-        </module>
         <module name="UnusedImports">
             <property name="severity" value="warning" />
             <property name="processJavadoc" value="true" />

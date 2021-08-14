@@ -79,7 +79,7 @@
                  <TextView
                      android:id="@+id/device_heading"
                      style="@style/single_degree_style"
-                     android:width="36dip"
+                     android:width="42dip"
                      android:layout_toRightOf="@+id/device_heading_label"/>
 
                  <TextView
@@ -118,7 +118,8 @@
             android:layout_gravity="left"
             android:layout_marginLeft="3dip"
             android:layout_below="@+id/device_information"
-            android:text="@null" />
+            android:text="@null"
+            android:textSize="@dimen/textSize_compassTargeting" />
 
         <TextView
             android:id="@+id/distance"
@@ -129,7 +130,8 @@
             android:layout_gravity="right"
             android:layout_marginRight="3dip"
             android:layout_below="@+id/device_information"
-            android:text="@null" />
+            android:text="@null"
+            android:textSize="@dimen/textSize_compassTargeting" />
 
         <TextView
             android:id="@+id/nav_location"

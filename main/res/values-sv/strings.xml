@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -433,6 +434,7 @@
     <string name="cache_filter_owner">Cacheägare</string>
     <string name="cache_filter_difficulty">Svårighetsgrad</string>
     <string name="cache_filter_terrain">Terräng</string>
+    <string name="cache_filter_difficulty_terrain">Svårighetsgrad / Terräng</string>
     <string name="cache_filter_rating">Betyg</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-attribut</string>
@@ -469,6 +471,7 @@
     <string name="cache_filter_datefilter_label_to">Till:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Markera alla</string>
     <string name="cache_filter_checkboxlist_add_items">Lägg till fler objekt</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Lägg till alla objekt</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lägg till objekt</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
@@ -1176,6 +1179,7 @@
     <string name="cache_distance">Avstånd</string>
     <string name="cache_difficulty">Svårighet</string>
     <string name="cache_terrain">Terräng</string>
+    <string name="cache_difficulty_terrain">Svårighetsgrad / Terräng</string>
     <string name="cache_rating">Betyg</string>
     <string name="cache_own_rating">Eget betyg</string>
     <string name="cache_rating_of_new">%1$.1f av %2$d</string>
