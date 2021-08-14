@@ -327,6 +327,7 @@
     <string name="menu_scan_geo">Scansiona geocode</string>
     <string name="menu_lists_pocket_queries">Liste / pocket query</string>
     <string name="menu_scan_description">c:geo può eseguire una scansione di geocodes stampati oppure di immagini QR code. L\'applicazione necessaria non è installata. Desideri aprire Google Play per installarla?</string>
+    <string name="menu_invert_order">Inverti ordine</string>
     <!-- main screen -->
     <string name="live_map_button">Mappa</string>
     <string name="caches_nearby_button">Vicini</string>
@@ -1437,6 +1438,7 @@
     <string name="search_address_button">Cerca per indirizzo</string>
     <string name="search_geo">Codice geo</string>
     <string name="search_geo_button">Cerca per geo code</string>
+    <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
     <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
@@ -1988,6 +1990,8 @@
         <item quantity="other">Percorso caricato con %d punti di rotta</item>
     </plurals>
     <string name="center_on_route">Centra sul percorso</string>
+    <string name="individual_route_set_as_start_title">Imposta come percorso di partenza</string>
+    <string name="individual_route_set_as_start_message">Impostare questo elemento come inizio del percorso e spostare tutti gli elementi successivi in cima al percorso corrente?</string>
     <!-- individual track -->
     <string name="individual_track">Traccia/percorso GPX</string>
     <string name="map_load_track">Carica traccia/percorso da GPX</string>

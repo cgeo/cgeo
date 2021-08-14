@@ -1,7 +1,7 @@
  
-### Map
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
+### Kaart
+- Nieuw: Toegevoegd Mapy.cz als online kaartbron
+- Nieuw: Individuele route: Toestaan een nieuw begin in te stellen en de route om te keren
 
-### Other
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+### Overig
+- Nieuw: vul automatisch 'zoeken op geocode' in als klembord inhoud kan worden verwerkt als geldige geocode
