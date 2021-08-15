@@ -191,7 +191,9 @@
     <string name="log_problem_archive_text">This geocacher reported that this geocache should be archived. A community volunteer reviewer has been notified.</string>
 
     <string name="log_image_scale_option_noscaling">No scaling</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">scaled</string>
+    <string name="log_image_info_notscaled">not scaled</string>
     <string name="log_image_titleprefix">Image</string>
 
     <string name="datetime_clear_button">Clear</string>

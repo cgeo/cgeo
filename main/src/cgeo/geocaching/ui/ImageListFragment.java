@@ -218,6 +218,7 @@ public class ImageListFragment extends Fragment {
                 scaledWidth = scaledImageSizes.left;
                 scaledHeight = scaledImageSizes.middle;
             }
+            final String isScaled = getString(width != scaledWidth || height != scaledHeight ? R.string.log_image_info_scaled : R.string.log_image_info_notscaled);
 
             final long fileSize = imageFileInfo == null ? 0 : imageFileInfo.size;
             //A rough estimation for the size of the compressed image:
@@ -227,7 +228,7 @@ public class ImageListFragment extends Fragment {
             final long roughCompressedSize = width * height == 0 ? 0 :
                 ((fileSize * (scaledHeight * scaledWidth) / 10 / (width * height)) / 1024) * 1024;
 
-            return getString(R.string.log_image_info, width, height, Formatter.formatBytes(fileSize), scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
+            return getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
         }
 
         @NonNull
