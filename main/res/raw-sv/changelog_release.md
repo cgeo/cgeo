@@ -5,7 +5,7 @@
 
 ### Karta
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- New: Separate "own" and "found" filters in map quick settings
+- Nytt: Separera "egna" och "hittade" filter i kartans snabbinställningar
 - Förändring: Visa även cachenamn i popup-detaljer
 
 ### Cachedetaljer
