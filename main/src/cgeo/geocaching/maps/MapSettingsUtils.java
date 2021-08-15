@@ -42,7 +42,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
 
-    private static int colorAccent;
     private static boolean isShowCircles;
     private static boolean isAutotargetIndividualRoute;
     private static boolean showAutotargetIndividualRoute;
@@ -53,7 +52,6 @@ public class MapSettingsUtils {
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
     public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
-        colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
@@ -105,7 +103,6 @@ public class MapSettingsUtils {
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
 
         final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
-        final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }
