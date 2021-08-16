@@ -28,8 +28,8 @@ public class DataStoreTestHelpers extends CGeoTestCase  {
 
     private static final boolean EXECUTE_METHODS = false;
 
-    private static final String ARTIFICIAL_GEOCACHES_PRAEFIX = "GCFAKE";
-    private static final int ARTIFICAL_GEOCACHES_COUNT = 50000;
+    private static final String ARTIFICIAL_GEOCACHES_PREFIX = "GCFAKE";
+    private static final int ARTIFICIAL_GEOCACHES_COUNT = 50000;
 
     /**
      * Method creates dummy caches in the database
@@ -43,12 +43,12 @@ public class DataStoreTestHelpers extends CGeoTestCase  {
         }
 
         final List<Geocache> dummyCaches = new ArrayList<>();
-        for (int i = 0; i < ARTIFICAL_GEOCACHES_COUNT; i++) {
+        for (int i = 0; i < ARTIFICIAL_GEOCACHES_COUNT; i++) {
             dummyCaches.add(createDummyCache(i));
         }
         DataStore.saveCaches(dummyCaches, EnumSet.of(LoadFlags.SaveFlag.DB));
 
-        for (int i = 0; i < ARTIFICAL_GEOCACHES_COUNT; i++) {
+        for (int i = 0; i < ARTIFICIAL_GEOCACHES_COUNT; i++) {
             final String geocode = dummyCaches.get(i).getGeocode();
             DataStore.saveLogs(geocode, createDummyLogsForCache(geocode, 30), true);
         }
@@ -62,7 +62,7 @@ public class DataStoreTestHelpers extends CGeoTestCase  {
         }
 
         final Set<String> dummyCacheCodes = new HashSet<>();
-        for (int i = 0; i < ARTIFICAL_GEOCACHES_COUNT; i++) {
+        for (int i = 0; i < ARTIFICIAL_GEOCACHES_COUNT; i++) {
             dummyCacheCodes.add(getArtificialGeocode(i));
         }
         DataStore.removeCaches(dummyCacheCodes, EnumSet.of(LoadFlags.RemoveFlag.DB));
@@ -140,6 +140,6 @@ public class DataStoreTestHelpers extends CGeoTestCase  {
     }
 
     private static String getArtificialGeocode(final int idx) {
-        return ARTIFICIAL_GEOCACHES_PRAEFIX + idx;
+        return ARTIFICIAL_GEOCACHES_PREFIX + idx;
     }
 }
