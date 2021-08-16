@@ -647,9 +647,7 @@
     <string name="settings_category_social">Redes sociais</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
     <string name="settings_goto_url_button">mais …</string>
-    <string name="settings_activate_gc">Activar</string>
-    <string name="settings_activate_ec">Activar</string>
-    <string name="settings_activate_lc">Activar</string>
+    <string name="settings_service_activate">Activar</string>
     <string name="settings_gc_legal_note">Ao usar o serviço de geocaching.com, está a aceitar os Termos de Utilização da Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Início de Sessão com:\nFacebook ou Google</string>
     <string name="settings_info_facebook_login">Não consegue que o c:geo inicie a sessão em geocaching.com com a sua conta do Facebook ou Google. Mas existe uma solução simples…</string>
@@ -660,30 +658,22 @@
     <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
     <string name="settings_lc_description">Incluir caches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\". Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
     <string name="lc_default_description">Esta é uma geocache Adventure Lab (do serviço \'geocaching.com\'). As aventuras apenas podem ser jogadas dentro da aplicação Adventure Lab da Groundspeak. Toque no ícone Adventure Lab na página \"Detalhes\" para abrir/instalar a aplicação Adventure Lab para prosseguir com a aventura na mesma.\nSe não deseja ver as geocaches Adventure Lab no mapa e na pesquisa, pode desactiva-las em \"Definições\" - \"Serviços\" - \"Adventure Lab (geocaching.com)\"</string>
-    <string name="settings_activate_oc">Activar</string>
     <string name="init_summary_oc_de">Carregar caches a partir de \'opencaching.de\'</string>
     <string name="init_oc_de_description">Autoriza o c:geo em opencaching.de para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_pl">Activar</string>
     <string name="init_summary_oc_pl">Carregar caches a partir de \'opencaching.pl\'</string>
     <string name="init_oc_pl_description">Autoriza o c:geo em opencaching.pl para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_nl">Activar</string>
     <string name="init_summary_oc_nl">Carregar caches a partir de \'opencaching.nl\'</string>
     <string name="init_oc_nl_description">Autoriza o c:geo em opencaching.nl para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_us">Activar</string>
     <string name="init_summary_oc_us">Carregar caches a partir de \'opencaching.us\'</string>
     <string name="init_oc_us_description">Autoriza o c:geo em opencaching.us para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_ro">Activar</string>
     <string name="init_summary_oc_ro">Carregar caches a partir de \'opencaching.ro\'</string>
     <string name="init_oc_ro_description">Autoriza o c:geo em opencaching.ro para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_uk">Activar</string>
     <string name="init_summary_oc_uk">Carregar caches a partir de \'opencaching.uk\'</string>
     <string name="init_oc_uk_description">Autoriza o c:geo em opencache.uk a pesquisar por geocaches e a aceder/filtrar as suas caches encontradas.</string>
     <string name="init_summary_su">Carregar caches a partir de \'geocaching.su\'</string>
-    <string name="settings_activate_su">Activar</string>
     <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
     <string name="err_vote_send_rating">Erro ao enviar a avaliação.</string>
     <string name="vote_sent">Votação enviada com sucesso</string>
-    <string name="settings_activate_twitter">Activar</string>
     <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
     <string name="init_login_popup_ok">Sessão iniciada</string>
@@ -1438,6 +1428,7 @@
     <string name="search_address_button">Pesquisar por endereço</string>
     <string name="search_geo">Código GC</string>
     <string name="search_geo_button">Pesquisar por código GC</string>
+    <string name="search_geocode_from_clipboard">O Geocode foi colado da área de transferência.</string>
     <string name="search_kw">Palavras-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
@@ -1888,7 +1879,6 @@
     <string name="confirm_report_problem_title">Relatar Problema</string>
     <string name="confirm_report_problem_message">Pretende reportar que \'%s\'. Tem a certeza?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Activar</string>
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">ID de utilizador: %s</string>
