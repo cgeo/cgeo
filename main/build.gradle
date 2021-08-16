@@ -302,7 +302,7 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.3.0'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.4.0'
 
     // GeographicLib
     implementation 'net.sf.geographiclib:GeographicLib-Java:1.52'
