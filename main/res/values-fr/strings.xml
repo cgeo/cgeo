@@ -37,7 +37,6 @@
     <string name="userdefined">Cache personnalisée</string>
     <string name="unknown">Type inconnu</string>
     <string name="all_types_short">Toutes</string>
-    <string name="traditional_short">Traditionnelle</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystère</string>
     <string name="event_short">Événement</string>
@@ -444,7 +443,7 @@
     <string name="cache_filter_add_button">Ajouter des critères</string>
     <string name="cache_filter_option_and_or">Utilisez OU à la place de ET</string>
     <string name="cache_filter_option_inverse">Inverser filtre</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Appuyez ci-dessus sur \'Ajouter des critères\' pour modifier le filtre</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Appuyez sur “Ajouter des critères” pour modifier le filtre</string>
     <string name="cache_filter_name">Nom de la cache</string>
     <string name="cache_filter_type">Type de cache</string>
     <string name="cache_filter_size">Taille de la cache</string>
@@ -515,7 +514,6 @@
     <string name="cache_filter_status_select_label_stored">Enregistrée</string>
     <string name="cache_filter_status_select_label_watchlist">Suivie</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
-    <string name="cache_filter_status_select_label_has_trackable">Contient un objet voyageur</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
     <string name="cache_filter_status_archived">Archivée</string>
