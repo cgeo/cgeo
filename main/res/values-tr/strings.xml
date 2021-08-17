@@ -38,7 +38,6 @@
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
     <string name="all_types_short">Tümü</string>
-    <string name="traditional_short">Gelen</string>
     <string name="multi_short">Çoklu</string>
     <string name="mystery_short">Gizemli</string>
     <string name="letterbox_short">Letterbox</string>
