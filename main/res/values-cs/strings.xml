@@ -1450,6 +1450,7 @@
     <string name="search_address_button">Hledat podle adresy</string>
     <string name="search_geo">Geokód</string>
     <string name="search_geo_button">Hledat podle geokódu</string>
+    <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
     <string name="search_kw">Klíčová slova</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
     <string name="search_kw_button">Hledat podle klíčového slova</string>
