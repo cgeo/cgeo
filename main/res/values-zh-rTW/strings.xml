@@ -37,7 +37,6 @@
     <string name="userdefined">玩家自訂的寶藏</string>
     <string name="unknown">未知类型</string>
     <string name="all_types_short">全部類型</string>
-    <string name="traditional_short">傳統型藏寶</string>
     <string name="multi_short">多重型藏寶</string>
     <string name="mystery_short">謎題型藏寶</string>
     <string name="letterbox_short">信箱型藏寶</string>
@@ -250,8 +249,8 @@
     <string name="err_rendertheme_invalid">所选的主题不适用于当前mapsforge版本。切换至预置主题。</string>
     <string name="err_invalid_filename_char">不允許%c這個字元</string>
     <string name="warn_save_nothing">没有什么可以挽救的。</string>
-    <string name="warn_no_cache_coord">没有带有坐标的缓存。</string>
-    <string name="warn_no_coordinates">没有给定的坐标。</string>
+    <string name="warn_no_cache_coord">沒有座標的藏寶</string>
+    <string name="warn_no_coordinates">沒有設定坐標</string>
     <string name="warn_no_keyword">未给定关键词。</string>
     <string name="warn_no_username">未指定用户名。</string>
     <string name="warn_no_connector">没有当前可用的geocaching服务来提供这种类型的搜索</string>
@@ -322,10 +321,10 @@
     <string name="menu_scan_description">c:geo可讀取用QR code顯示的geocacode。 但需要的app未安裝，是否要開啟Google play來安裝必要的app?</string>
     <!-- main screen -->
     <string name="live_map_button">線上即時地圖</string>
-    <string name="caches_nearby_button">附近</string>
+    <string name="caches_nearby_button">鄰近的</string>
     <string name="advanced_search_button">搜索</string>
-    <string name="stored_caches_button">已存储</string>
-    <string name="any_button">转到</string>
+    <string name="stored_caches_button">已儲存:</string>
+    <string name="any_button">前往</string>
     <string name="unknown_scan">無法找到任何地理藏寶</string>
     <!-- caches -->
     <string name="caches_no_cache">此处无文件</string>
