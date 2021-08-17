@@ -239,7 +239,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         cache.setWaypoints(new ArrayList<>(), false);
         cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" + "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" + "Get some ice cream at N 50° 40.555E 006° 58.000\"");
 
-       cache.addWaypointsFromNote();
+        cache.addWaypointsFromNote();
         final List<Waypoint> waypoints = cache.getWaypoints();
 
         assertThat(waypoints).hasSize(3);
