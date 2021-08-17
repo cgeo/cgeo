@@ -37,7 +37,7 @@
     <string name="userdefined">Cache personnalisée</string>
     <string name="unknown">Type inconnu</string>
     <string name="all_types_short">Toutes</string>
-    <string name="traditional_short">Traditionnelle</string>
+    <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystère</string>
     <string name="event_short">Événement</string>
@@ -515,7 +515,7 @@
     <string name="cache_filter_status_select_label_stored">Enregistrée</string>
     <string name="cache_filter_status_select_label_watchlist">Suivie</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
-    <string name="cache_filter_status_select_label_has_trackable">Contient un objet voyageur</string>
+    <string name="cache_filter_status_select_label_has_trackable">Objet voyageur</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
     <string name="cache_filter_status_archived">Archivée</string>
