@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Kätkö pitäisi arkistoida</string>
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
-    <string name="log_image_info">%1$d x %2$d pikseliä, %3$s\nSkaalattu/pakattu:\n%4$d x %5$d pikseliä, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">skaalattu</string>
+    <string name="log_image_info_notscaled">ei skaalattu</string>
     <string name="log_image_titleprefix">Kuva</string>
     <string name="datetime_clear_button">Tyhjennä</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
