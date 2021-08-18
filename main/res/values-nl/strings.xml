@@ -38,7 +38,6 @@
     <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
     <string name="all_types_short">Alle</string>
-    <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mysterie</string>
     <string name="letterbox_short">Letterbox</string>
@@ -179,7 +178,6 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nGeschaald/gecomprimeerd:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Afbeelding</string>
     <string name="datetime_clear_button">Wissen</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
