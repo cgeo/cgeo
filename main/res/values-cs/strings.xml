@@ -38,6 +38,7 @@
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
     <string name="all_types_short">Vše</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multina</string>
     <string name="mystery_short">Mysterka</string>
     <string name="letterbox_short">Letterbox</string>
