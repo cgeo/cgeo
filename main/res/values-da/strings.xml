@@ -37,7 +37,6 @@
     <string name="userdefined">Brugerdefineret cache</string>
     <string name="unknown">Ukendt Type</string>
     <string name="all_types_short">Alle</string>
-    <string name="traditional_short">Traditionel</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -177,7 +176,6 @@
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaleret/Komprimeret:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
