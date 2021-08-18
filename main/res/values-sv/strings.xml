@@ -164,7 +164,6 @@
     <string name="log_problem_archive_label">Cachen bör arkiveras</string>
     <string name="log_problem_archive_text">Denna geocacharen rapporterade att denna geocache bör arkiveras. En reviewer har blivit informerad.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalning</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalad/komprimerad:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <string name="datetime_clear_button">Rensa</string>
     <string name="datetime_nodateset_display">Inget datum angivet</string>
