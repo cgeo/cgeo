@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">要アーカイブ</string>
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">拡大縮小済み</string>
+    <string name="log_image_info_notscaled">元の解像度</string>
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_clear_button">削除</string>
     <string name="datetime_nodateset_display">未設定</string>
