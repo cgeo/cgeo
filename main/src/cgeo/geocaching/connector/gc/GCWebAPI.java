@@ -28,6 +28,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -116,7 +117,15 @@ class GCWebAPI {
             return this;
         }
 
-            /** filters for given cache types. Works for V1 */
+        public SortType getSort() {
+            return this.sort;
+        }
+
+        public boolean getSortAsc() {
+            return this.sortAsc;
+        }
+
+        /** filters for given cache types. Works for V1 */
         public WebApiSearch addCacheTypes(final CacheType ... ct) {
             cacheTypes.addAll(CollectionStream.of(ct).filter(type -> type != CacheType.ALL).toList());
             return this;
@@ -253,6 +262,10 @@ class GCWebAPI {
         public WebApiSearch setOrigin(final Geopoint origin) {
             this.origin = origin;
             return this;
+        }
+
+        public Geopoint getOrigin() {
+            return this.origin;
         }
 
         /** Works with V1 */
@@ -769,53 +782,106 @@ class GCWebAPI {
 
         if (mapSearchResultSet.results != null) {
             for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
-                if (r.postedCoordinates != null) {
-                    final Geocache c = new Geocache();
-                    c.setDetailed(false);
-                    c.setReliableLatLon(true);
-                    c.setGeocode(r.code);
-                    c.setName(r.name);
-                    if (r.userCorrectedCoordinates != null) {
-                        c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
-                        c.setUserModifiedCoords(true);
-                    } else {
-                        c.setCoords(new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude));
-                        c.setUserModifiedCoords(false);
-                    }
-                    c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
-                    c.setDifficulty(r.difficulty);
-                    c.setTerrain(r.terrain);
-                    c.setSize(CacheSize.getByGcId(r.containerType));
-                    c.setPremiumMembersOnly(r.premiumOnly);
-                    c.setHidden(r.placedDate);
-                    c.setLastFound(r.lastFoundDate);
 
-                    //Only set found if the map returns a "found",
-                    //the map API will possibly lag behind and break
-                    //cache merging if "not found" is set
-                    if (r.userFound) {
-                        c.setFound(true);
-                    } else if (r.userDidNotFind) {
-                        c.setDNF(true);
-                    }
+                final Geopoint cacheCoord = r.postedCoordinates == null ? null : new Geopoint(r.postedCoordinates.latitude, r.postedCoordinates.longitude);
 
-                    c.setFavoritePoints(r.favoritePoints);
-                    c.setDisabled(r.cacheStatus == 1);
-                    if (r.owner != null) {
-                        c.setOwnerDisplayName(r.owner.username);
-                        c.setOwnerUserId(r.owner.username);
-                    }
-
-                    foundCaches.add(c);
+                final Geocache c = new Geocache();
+                c.setDetailed(false);
+                c.setReliableLatLon(true);
+                c.setGeocode(r.code);
+                c.setName(r.name);
+                if (r.userCorrectedCoordinates != null) {
+                    c.setCoords(new Geopoint(r.userCorrectedCoordinates.latitude, r.userCorrectedCoordinates.longitude));
+                    c.setUserModifiedCoords(true);
+                } else if (cacheCoord != null) {
+                    c.setCoords(cacheCoord);
+                    c.setUserModifiedCoords(false);
+                } else {
+                    //this can only happen for PREMIUM caches when searched by BASIC members.
+                    //Open issue: what to do with those?
+                    c.setCoords(null);
                 }
+                c.setType(CacheType.getByWaypointType(Integer.toString(r.geocacheType)));
+                c.setDifficulty(r.difficulty);
+                c.setTerrain(r.terrain);
+                c.setSize(CacheSize.getByGcId(r.containerType));
+                c.setPremiumMembersOnly(r.premiumOnly);
+                c.setHidden(r.placedDate);
+                c.setLastFound(r.lastFoundDate);
+
+                //Only set found if the map returns a "found",
+                //the map API will possibly lag behind and break
+                //cache merging if "not found" is set
+                if (r.userFound) {
+                    c.setFound(true);
+                } else if (r.userDidNotFind) {
+                    c.setDNF(true);
+                }
+
+                c.setFavoritePoints(r.favoritePoints);
+                c.setDisabled(r.cacheStatus == 1);
+                if (r.owner != null) {
+                    c.setOwnerDisplayName(r.owner.username);
+                    c.setOwnerUserId(r.owner.username);
+                }
+
+                foundCaches.add(c);
             }
+
         }
+
+        tryGuessMissingDistances(foundCaches, search);
 
         result.addAndPutInCache(foundCaches);
         if (includeGcVote) {
             GCVote.loadRatings(foundCaches);
         }
         return result;
+    }
+
+    /** For BASIC members, PREMIUM caches don't contain coordinates. This helper methods guesses distances for those caches */
+    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    private static void tryGuessMissingDistances(final List<Geocache> caches, final WebApiSearch search) {
+        if (caches == null || caches.isEmpty()) {
+            return;
+        }
+        //This heuristic only works if origin is given and sort is of type DISTANCE
+        if (search.getOrigin() == null || search.getSort() != WebApiSearch.SortType.DISTANCE) {
+            return;
+        }
+
+        //inverse the list in case of inverse sort
+        List<Geocache> loopCaches = caches;
+        if (!search.getSortAsc()) {
+            loopCaches = new ArrayList<>(caches);
+            Collections.reverse(loopCaches);
+        }
+
+        //This heuristic will assign each cache without coordinates the middle of the distance of two surrounding caches with known coordinates
+        //    to given pos
+        //All caches AFTER the last cache with know coords will get assigend its distance to pos plus 1
+        //If ALL caches have no coordinates, they get assigned a distance of 1
+        float lastDistance = 0;
+        final List<Geocache> emptyCoordCaches = new ArrayList<>();
+
+        for (Geocache c : loopCaches) {
+            if (c.getCoords() != null) {
+                final float newDistance = search.getOrigin().distanceTo(c.getCoords());
+                for (Geocache emptyC : emptyCoordCaches) {
+                    emptyC.setDistance((newDistance + lastDistance) / 2);
+                }
+                emptyCoordCaches.clear();
+                lastDistance = newDistance;
+            } else {
+                emptyCoordCaches.add(c);
+            }
+        }
+
+        if (!emptyCoordCaches.isEmpty()) {
+            for (Geocache emptyC : emptyCoordCaches) {
+                emptyC.setDistance(lastDistance == 0 ? 1 : lastDistance + 1);
+            }
+        }
     }
 
     static SearchResult searchMap(@NonNull final Viewport viewport) {
