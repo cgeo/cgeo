@@ -38,7 +38,6 @@
     <string name="userdefined">Cache definito dall\'utente</string>
     <string name="unknown">Tipo sconosciuto</string>
     <string name="all_types_short">Tutti</string>
-    <string name="traditional_short">Tradizionale</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -179,7 +178,6 @@
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
     <string name="datetime_clear_button">Resetta</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
