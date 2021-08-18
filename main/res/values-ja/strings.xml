@@ -38,6 +38,7 @@
     <string name="userdefined">ユーザー定義キャッシュ</string>
     <string name="unknown">不明なタイプ</string>
     <string name="all_types_short">すべて</string>
+    <string name="traditional_short">トラディショナル</string>
     <string name="multi_short">マルチ</string>
     <string name="mystery_short">ミステリー</string>
     <string name="letterbox_short">レターボックス</string>
