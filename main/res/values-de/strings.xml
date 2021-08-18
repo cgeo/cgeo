@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Cache sollte archiviert werden</string>
     <string name="log_problem_archive_text">Dieser Geocacher hat gemeldet, dass dieser Cache archiviert werden sollte. Ein Reviewer wurde benachrichtigt.</string>
     <string name="log_image_scale_option_noscaling">Keine Skalierung</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaliert/Komprimiert:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">skaliert</string>
+    <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
     <string name="datetime_clear_button">Leeren</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
@@ -1980,6 +1982,7 @@
     </plurals>
     <string name="center_on_route">Route zentrieren</string>
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
+    <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <!-- individual track -->
     <string name="individual_track">GPX-Track/Route</string>
     <string name="map_load_track">Lade Track/Route aus GPX</string>
