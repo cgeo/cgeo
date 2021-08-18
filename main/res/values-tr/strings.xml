@@ -38,7 +38,7 @@
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
     <string name="all_types_short">Tümü</string>
-    <string name="traditional_short">Gelen</string>
+    <string name="traditional_short">Gele</string>
     <string name="multi_short">Çoklu</string>
     <string name="mystery_short">Gizemli</string>
     <string name="letterbox_short">Letterbox</string>
@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nÖlçeklenmiş/Sıkıştırılmış:\n%4$d x %5$d px, ~ %6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">ölçekli</string>
+    <string name="log_image_info_notscaled">ölçeksiz</string>
     <string name="log_image_titleprefix">Resim</string>
     <string name="datetime_clear_button">Temizle</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
