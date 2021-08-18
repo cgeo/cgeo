@@ -37,7 +37,6 @@
     <string name="userdefined">玩家自訂的寶藏</string>
     <string name="unknown">未知类型</string>
     <string name="all_types_short">全部類型</string>
-    <string name="traditional_short">傳統型藏寶</string>
     <string name="multi_short">多重型藏寶</string>
     <string name="mystery_short">謎題型藏寶</string>
     <string name="letterbox_short">信箱型藏寶</string>
@@ -174,7 +173,6 @@
     <string name="log_problem_archive_label">此宝应该被存档</string>
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_clear_button">清除</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
