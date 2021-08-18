@@ -38,7 +38,7 @@
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
     <string name="all_types_short">Vše</string>
-    <string name="traditional_short">Tradička</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multina</string>
     <string name="mystery_short">Mysterka</string>
     <string name="letterbox_short">Letterbox</string>
@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Keška by měla být archivována</string>
     <string name="log_problem_archive_text">Tento hráč oznámil, že keška by měla být archivována. Reviewer byl informován.</string>
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">zmenšen</string>
+    <string name="log_image_info_notscaled">nezmenšen</string>
     <string name="log_image_titleprefix">Obrázek</string>
     <string name="datetime_clear_button">Vymazat</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
