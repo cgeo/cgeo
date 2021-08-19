@@ -38,6 +38,7 @@
     <string name="userdefined">사용자 정의 캐시</string>
     <string name="unknown">알수없는 형식</string>
     <string name="all_types_short">모든</string>
+    <string name="traditional_short">일반</string>
     <string name="multi_short">멀티</string>
     <string name="mystery_short">미스터리</string>
     <string name="letterbox_short">레터박스</string>
@@ -178,6 +179,9 @@
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">배율</string>
+    <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
     <string name="datetime_clear_button">지우기</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
