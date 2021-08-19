@@ -376,7 +376,7 @@ public final class GCParser {
     }
 
     @NonNull
-    static SearchResult parseAndSaveCacheFromText(final String page, @Nullable final DisposableHandler handler) {
+    static SearchResult parseAndSaveCacheFromText(@Nullable final String page, @Nullable final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         final SearchResult result = new SearchResult(parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
@@ -398,7 +398,7 @@ public final class GCParser {
      *         iff the status code is {@link StatusCode#NO_ERROR}.
      */
     @NonNull
-    private static ImmutablePair<StatusCode, Geocache> parseCacheFromText(final String pageIn, @Nullable final DisposableHandler handler) {
+    private static ImmutablePair<StatusCode, Geocache> parseCacheFromText(@Nullable final String pageIn, @Nullable final DisposableHandler handler) {
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_details);
 
         if (StringUtils.isBlank(pageIn)) {
@@ -825,7 +825,7 @@ public final class GCParser {
     }
 
     @Nullable
-    private static String getNumberString(final String numberWithPunctuation) {
+    private static String getNumberString(@Nullable final String numberWithPunctuation) {
         return StringUtils.replaceChars(numberWithPunctuation, ".,", "");
     }
 
@@ -998,7 +998,7 @@ public final class GCParser {
     }
 
     @Nullable
-    public static Trackable searchTrackable(final String geocode, final String guid, final String id) {
+    public static Trackable searchTrackable(@Nullable final String geocode, @Nullable final String guid, @Nullable final String id) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid) && StringUtils.isBlank(id)) {
             Log.w("GCParser.searchTrackable: No geocode nor guid nor id given");
             return null;
@@ -1921,6 +1921,7 @@ public final class GCParser {
         }
     }
 
+    @SuppressWarnings("UnusedReturnValue")
     static boolean ignoreCache(@NonNull final Geocache cache) {
         final String uri = "https://www.geocaching.com/bookmarks/ignore.aspx?guid=" + cache.getGuid() + "&WptTypeID=" + cache.getType().wptTypeId;
         final String page = GCLogin.getInstance().postRequestLogged(uri, null);
@@ -1944,7 +1945,7 @@ public final class GCParser {
     }
 
     @Nullable
-    public static String getUsername(final String page) {
+    public static String getUsername(@Nullable final String page) {
         final String username = TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, null);
         if (StringUtils.isNotBlank(username)) {
             return username;
@@ -1961,7 +1962,7 @@ public final class GCParser {
         int cachesCount = -1;
         try {
             final String intStringToParse = removeDotAndComma(TextUtils.getMatch(page, GCConstants.PATTERN_CACHES_FOUND, true, ""));
-            if (!intStringToParse.isEmpty()) {
+            if (!StringUtils.isBlank(intStringToParse)) {
                 cachesCount = Integer.parseInt(intStringToParse);
             }
         } catch (final NumberFormatException e) {
@@ -1971,8 +1972,8 @@ public final class GCParser {
         return cachesCount;
     }
 
-
-    private static String removeDotAndComma(final String str) {
+    @Nullable
+    private static String removeDotAndComma(@Nullable final String str) {
         return StringUtils.replaceChars(str, ".,", null);
     }
 }

@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -120,7 +121,7 @@ public enum CacheType {
     }
 
     @NonNull
-    public static CacheType getByPattern(final String pattern) {
+    public static CacheType getByPattern(@Nullable final String pattern) {
         final CacheType result = pattern != null ? FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result != null) {
             return result;
@@ -129,7 +130,7 @@ public enum CacheType {
     }
 
     @NonNull
-    public static CacheType getByGuid(final String guid) {
+    public static CacheType getByGuid(@Nullable final String guid) {
         final CacheType result = guid != null ? FIND_BY_GUID.get(guid) : null;
         if (result == null) {
             return UNKNOWN;
@@ -138,7 +139,7 @@ public enum CacheType {
     }
 
     @NonNull
-    public static CacheType getByWaypointType(final String typeNumber) {
+    public static CacheType getByWaypointType(@Nullable final String typeNumber) {
         final CacheType result = typeNumber != null ? FIND_BY_WPT_TYPE.get(typeNumber) : null;
         if (result == null) {
             // earthcaches don't use their numeric ID on search result pages, but a literal "earthcache". therefore have a fallback

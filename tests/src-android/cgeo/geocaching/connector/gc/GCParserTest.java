@@ -24,15 +24,19 @@ import static cgeo.geocaching.enumerations.LoadFlags.LOAD_CACHE_ONLY;
 
 import androidx.annotation.RawRes;
 import androidx.test.filters.MediumTest;
+import androidx.test.filters.SmallTest;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.Nullable;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class GCParserTest extends AbstractResourceInstrumentationTestCase {
 
+    @SmallTest
     public void testUnpublishedCacheNotOwner() {
         final int cache = R.raw.cache_unpublished;
         assertUnpublished(cache);
@@ -46,10 +50,12 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(result.getError()).isEqualTo(StatusCode.UNPUBLISHED_CACHE);
     }
 
+    @SmallTest
     public void testPublishedCacheWithUnpublishedInDescription1() {
         assertPublishedCache(R.raw.gc430fm_published, "Cache is Unpublished");
     }
 
+    @SmallTest
     public void testPublishedCacheWithUnpublishedInDescription2() {
         assertPublishedCache(R.raw.gc431f2_published, "Needle in a Haystack");
     }
@@ -64,6 +70,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache.getName()).isEqualTo(cacheName);
     }
 
+    @MediumTest
     public void testOwnCache() {
         final Geocache cache = parseCache(R.raw.own_cache);
         assertThat(cache).isNotNull();
@@ -100,7 +107,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
      *
      */
     @MediumTest
-    public static void testParseCacheFromTextWithMockedData() {
+    public void testParseCacheFromTextWithMockedData() {
         final String gcCustomDate = Settings.getGcCustomDate();
         try {
             for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
@@ -121,7 +128,8 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
-    public static void testWaypointsFromNote() {
+    @MediumTest
+    public void testWaypointsFromNote() {
         final Geocache cache = createCache(0);
 
         final Geopoint[] empty = {};
@@ -169,7 +177,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
     }
 
     @MediumTest
-    public static void testEditModifiedCoordinates() {
+    public void testEditModifiedCoordinates() {
         final Geocache cache = new Geocache();
         cache.setGeocode("GC2ZN4G");
         // upload coordinates
@@ -189,7 +197,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(cache3.hasUserModifiedCoords()).isFalse();
     }
 
-    private static void assertWaypointsFromNote(final Geocache cache, final Geopoint[] expected, final String note) {
+    private void assertWaypointsFromNote(final Geocache cache, final Geopoint[] expected, final String note) {
         cache.setPersonalNote(note);
         cache.setWaypoints(new ArrayList<>(), false);
         cache.addWaypointsFromNote();
@@ -200,16 +208,21 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         }
     }
 
+    @MediumTest
     public void testWaypointParsing() {
         Geocache cache = parseCache(R.raw.gc366bq);
+        assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(14);
         //make sure that waypoints are not duplicated
         cache = parseCache(R.raw.gc366bq);
+        assertThat(cache).isNotNull();
         assertThat(cache.getWaypoints()).hasSize(14);
     }
 
+    @MediumTest
     public void testWaypointParsingEmptyCoords() {
         final Geocache cache = parseCache(R.raw.gc366bq);
+        assertThat(cache).isNotNull();
         int countEmptyCoords = 0;
         for (final Waypoint wp : cache.getWaypoints()
              ) {
@@ -220,7 +233,8 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(countEmptyCoords).isEqualTo(1);
     }
 
-    public static void testNoteParsingWaypointTypes() {
+    @MediumTest
+    public void testNoteParsingWaypointTypes() {
         final Geocache cache = new Geocache();
         cache.setWaypoints(new ArrayList<>(), false);
         cache.setPersonalNote("\"Parking area at PARKING=N 50° 40.666E 006° 58.222\n" + "My calculated final coordinates: FINAL=N 50° 40.777E 006° 58.111\n" + "Get some ice cream at N 50° 40.555E 006° 58.000\"");
@@ -234,6 +248,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(waypoints.get(2).getWaypointType()).isEqualTo(WaypointType.WAYPOINT);
     }
 
+    @Nullable
     private Geocache parseCache(@RawRes final int resourceId) {
         final String page = getFileContent(resourceId);
         final SearchResult result = GCParser.parseAndSaveCacheFromText(page, null);
@@ -242,6 +257,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         return result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB);
     }
 
+    @MediumTest
     public void testTrackableNotActivated() {
         final String page = getFileContent(R.raw.tb123e_html);
         final Trackable trackable = GCParser.parseTrackable(page, "TB123E");
@@ -251,18 +267,22 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(trackable.getDetails()).isEqualTo(expectedDetails);
     }
 
-    public static void testOnlineCacheUrl() {
-        assertThat(StringUtils.right(CgeoApplicationTest.testSearchByGeocode("GC5EF16").getDescription(), 150)).as("related web page appended to description").contains("http://eventimgruenen.de/");
+    @MediumTest
+    public void testOnlineCacheUrl() {
+        assertThat(StringUtils.right(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GC5EF16")).getDescription(), 150)).as("related web page appended to description").contains("http://eventimgruenen.de/");
     }
 
-    public static void testOnlineEventDate() {
-        assertThat(CgeoApplicationTest.testSearchByGeocode("GC68TJE").getHiddenDate()).isEqualTo("2016-01-23");
+    @MediumTest
+    public void testOnlineEventDate() {
+        assertThat(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GC68TJE")).getHiddenDate()).isEqualTo("2016-01-23");
     }
 
-    public static void testOnlineWatchCount() {
-        assertThat(CgeoApplicationTest.testSearchByGeocode("GCK25B").getWatchlistCount()).as("Geocaching HQ watch count").isGreaterThan(50);
+    @MediumTest
+    public void testOnlineWatchCount() {
+        assertThat(Objects.requireNonNull(new CgeoApplicationTest().searchByGeocode("GCK25B")).getWatchlistCount()).as("Geocaching HQ watch count").isGreaterThan(50);
     }
 
+    @MediumTest
     public void testSpoilerDescriptionForOwner() {
         final Geocache cache = parseCache(R.raw.gc352y3_owner_view);
         assertThat(cache).isNotNull();
@@ -278,6 +298,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(spoiler.getDescription()).isEqualTo("Suche diese Schraube");
     }
 
+    @MediumTest
     public void testSpoilerWithoutTitleAndLinkToLargerImage() {
         final Geocache cache = parseCache(R.raw.gc6xyb6);
         assertThat(cache).isNotNull();
@@ -291,6 +312,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(spoiler.getUrl()).isEqualTo("https://img.geocaching.com/cache/large/124a14b5-87dd-42c6-8c83-52c184e07389.jpg");
     }
 
+    @MediumTest
     public void testSpoilerBackgroundImage() {
         final Geocache cache = parseCache(R.raw.gc45w92);
         assertThat(cache).isNotNull();
@@ -300,6 +322,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
         assertThat(spoiler.getUrl()).isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
     }
 
+    @MediumTest
     public void testFullScaleImageUrl() {
         assertThat(GCParser.fullScaleImageUrl("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1"))
                 .isEqualTo("https://www.dropbox.com/s/1kakwnpny8698hm/QR_Hintergrund.jpg?dl=1");
@@ -307,6 +330,7 @@ public class GCParserTest extends AbstractResourceInstrumentationTestCase {
                 .isEqualTo("http://imgcdn.geocaching.com/track/33cee358-f692-4f90-ace0-80c5a2c60a5c.jpg");
     }
 
+    @MediumTest
     public void testGetUsername() {
         assertThat(GCParser.getUsername(MockedCache.readCachePage("GC2CJPF"))).isEqualTo("abft");
     }
