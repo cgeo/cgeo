@@ -249,7 +249,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
      * @return geocode      geocode of the newly created cache
      */
     public static String createCache(final Context context, @Nullable final String name, @Nullable final String description, final int assignedEmoji, @Nullable final Geopoint geopoint, final int listId) {
-        final long newId = DataStore.incSequenceInternalCache();
+        final long newId = DataStore.getNextAvailableInternalCacheId();
         assertCacheExists(context, newId, name, description, assignedEmoji, geopoint, listId);
         return geocodeFromId(newId);
     }
