@@ -53,7 +53,7 @@
     <string translatable="false" name="pref_gc_avatar">gc_avatar</string>
     <string translatable="false" name="pref_gcvote_avatar">gcvote_avatar</string>
     <string translatable="false" name="pref_connectorECActive">connectorECActive</string>
-    <string translatable="false" name="pref_connectorLCActive">connectorLCActive</string>
+    <string translatable="false" name="pref_connectorALActive">connectorLCActive</string><!-- variable stays with "LC" for compatibility reasons -->
     <string translatable="false" name="pref_connectorGeokretyActive">connectorGeokretyActive</string>
     <string translatable="false" name="pref_user_vote">user-vote</string>
     <string translatable="false" name="pref_pass_vote">pass-vote</string>
@@ -243,7 +243,7 @@
     <string translatable="false" name="pref_fakekey_ocuk_register">fakekey_ocuk_register</string>
     <string translatable="false" name="pref_fakekey_ocuk_website">fakekey_ocuk_website</string>
     <string translatable="false" name="pref_fakekey_ec_website">fakekey_ec_website</string>
-    <string translatable="false" name="pref_fakekey_lc_website">fakekey_lc_website</string>
+    <string translatable="false" name="pref_fakekey_al_website">fakekey_al_website</string>
     <string translatable="false" name="pref_fakekey_su_website">fakekey_su_website</string>
     <string translatable="false" name="pref_su_tokensecret">su_tokensecret</string>
     <string translatable="false" name="pref_su_tokenpublic">su_tokenpublic</string>

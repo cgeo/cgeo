@@ -223,7 +223,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 96;
+    private static final int dbVersion = 97;
     public static final int customListIdOffset = 10;
 
     /**
@@ -252,10 +252,11 @@ public class DataStore {
         90, // add user guid to cg_caches and cg_logs
         91, // add fields to cg_extension
         92, // add emoji id to cg_caches
-        93,  // add emoji id to cg_lists
-        94,  // add scale to offline log images
-        95,  // add table to store custom filters
-        96   // add preventAskForDeletion to cg_lists
+        93, // add emoji id to cg_lists
+        94, // add scale to offline log images
+        95, // add table to store custom filters
+        96, // add preventAskForDeletion to cg_lists
+        97  // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -1608,6 +1609,23 @@ public class DataStore {
                         }
                     }
 
+                    //rename lab adventure caches geocodes prefix from LC to AL
+                    if (oldVersion < 97) {
+                        try {
+                            final String sql = " SET geocode = \"AL\" || SUBSTR(geocode, 3) WHERE SUBSTR(geocode, 1, 2) = \"LC\" AND LENGTH(geocode) > 10";
+                            db.execSQL("UPDATE " + dbTableCaches + sql);
+                            db.execSQL("UPDATE " + dbTableAttributes + sql);
+                            db.execSQL("UPDATE " + dbTableCachesLists + sql);
+                            db.execSQL("UPDATE " + dbTableLogCount + sql);
+                            db.execSQL("UPDATE " + dbTableLogs + sql);
+                            db.execSQL("UPDATE " + dbTableLogsOffline + sql);
+                            db.execSQL("UPDATE " + dbTableSpoilers + sql);
+                            db.execSQL("UPDATE " + dbTableTrackables + sql);
+                            db.execSQL("UPDATE " + dbTableWaypoints + sql);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 97);
+                        }
+                    }
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database

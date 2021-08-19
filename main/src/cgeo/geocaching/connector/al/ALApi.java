@@ -1,4 +1,4 @@
-package cgeo.geocaching.connector.lc;
+package cgeo.geocaching.connector.al;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
@@ -43,7 +43,7 @@ import io.reactivex.rxjava3.functions.Function;
 import okhttp3.Response;
 import org.apache.commons.lang3.StringUtils;
 
-final class LCApi {
+final class ALApi {
 
     @NonNull
     private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
@@ -55,7 +55,7 @@ final class LCApi {
     private static final String LATITUDE  = "Latitude";
     private static final String TITLE     = "Title";
 
-    private LCApi() {
+    private ALApi() {
         // utility class with static methods
     }
 
@@ -89,7 +89,7 @@ final class LCApi {
         final Geopoint gp1 = new Geopoint(lat1, lon1);
         final Geopoint gp2 = new Geopoint(lat2, lon2);
         final double radius = gp1.distanceTo(gp2) * 500; // we get diameter in km, need radius in m
-        Log.d("_LC Radius: " + (int) radius);
+        Log.d("_AL Radius: " + (int) radius);
         final Parameters params = new Parameters("skip", "0");
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
         params.add("take", "500");
@@ -130,7 +130,7 @@ final class LCApi {
 
     @NonNull
     public static Collection<Geocache> searchByFilter(final GeocacheFilter filter, final IConnector connector) {
-        //for now we have to assume that LCConnector supports only SINGLE criteria search
+        //for now we have to assume that ALConnector supports only SINGLE criteria search
 
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
         final OriginGeocacheFilter of = GeocacheFilter.findInChain(filters, OriginGeocacheFilter.class);
@@ -175,14 +175,14 @@ final class LCApi {
         try {
             final String jsonString = Network.getResponseData(response);
             if (jsonString == null) {
-                Log.d("_LC importCacheFromJson: null response from network");
+                Log.d("_AL importCacheFromJson: null response from network");
                 return null;
             }
             final JsonNode json = JsonUtils.reader.readTree(jsonString);
-            Log.d("_LC importCacheFromJson: " + json.toPrettyString());
+            Log.d("_AL importCacheFromJson: " + json.toPrettyString());
             return parseCacheDetail(json);
         } catch (final Exception e) {
-            Log.w("_LC importCacheFromJSON", e);
+            Log.w("_AL importCacheFromJSON", e);
             return null;
         }
     }
@@ -192,11 +192,11 @@ final class LCApi {
         try {
             final String jsonString = Network.getResponseData(response);
             if (jsonString == null) {
-                Log.d("_LC importCachesFromJson: null response from network");
+                Log.d("_AL importCachesFromJson: null response from network");
                 return Collections.emptyList();
             }
             final JsonNode json = JsonUtils.reader.readTree(jsonString);
-            Log.d("_LC importCachesFromJson: " + json.toPrettyString());
+            Log.d("_AL importCachesFromJson: " + json.toPrettyString());
             final JsonNode items = json.at("/Items");
             if (!items.isArray()) {
                 return Collections.emptyList();
@@ -210,7 +210,7 @@ final class LCApi {
             }
             return caches;
         } catch (final Exception e) {
-            Log.w("_LC importCachesFromJSON", e);
+            Log.w("_AL importCachesFromJSON", e);
             return Collections.emptyList();
         }
     }
@@ -222,7 +222,7 @@ final class LCApi {
             final JsonNode location = response.at(LOCATION);
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = LCConnector.GEOCODE_PREFIX + response.get("Id").asText();
+            final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
             cache.setGeocode(geocode);
             cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get(TITLE).asText());
@@ -234,7 +234,7 @@ final class LCApi {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
             return cache;
         } catch (final NullPointerException e) {
-            Log.e("_LC LCApi.parseCache", e);
+            Log.e("_AL ALApi.parseCache", e);
             return null;
         }
     }
@@ -249,7 +249,7 @@ final class LCApi {
             final JsonNode location = response.at(LOCATION);
             final String firebaseDynamicLink = response.get("FirebaseDynamicLink").asText();
             final String[] segments = firebaseDynamicLink.split("/");
-            final String geocode = LCConnector.GEOCODE_PREFIX + response.get("Id").asText();
+            final String geocode = ALConnector.GEOCODE_PREFIX + response.get("Id").asText();
             final String ilink = response.get("KeyImageUrl").asText();
             final String desc = response.get("Description").asText();
             cache.setGeocode(geocode);
@@ -269,7 +269,7 @@ final class LCApi {
             DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB));
             return cache;
         } catch (final NullPointerException e) {
-            Log.e("_LC LCApi.parseCache", e);
+            Log.e("_AL ALApi.parseCache", e);
             return null;
         }
     }
@@ -313,7 +313,7 @@ final class LCApi {
 
                 result.add(wpt);
             } catch (final NullPointerException e) {
-                Log.e("_LC LCApi.parseWaypoints", e);
+                Log.e("_AL ALApi.parseWaypoints", e);
             }
         }
         return result;
