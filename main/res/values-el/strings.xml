@@ -38,6 +38,7 @@
     <string name="userdefined">Κρύπτη ορισμένη από τον χρήστη</string>
     <string name="unknown">Άγνωστος τύπος</string>
     <string name="all_types_short">Όλες</string>
+    <string name="traditional_short">Κοινή</string>
     <string name="multi_short">Πολλαπλές</string>
     <string name="mystery_short">Μυστηρίου</string>
     <string name="letterbox_short">Letterbox</string>
