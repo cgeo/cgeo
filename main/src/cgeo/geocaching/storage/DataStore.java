@@ -512,8 +512,6 @@ public class DataStore {
     // reminder to myself: when adding a new CREATE TABLE statement:
     // make sure to add it to both onUpgrade() and onCreate()
 
-    private static final String SEQUENCE_INTERNAL_CACHE = "seq_internal_cache";
-
     public static int getExpectedDBVersion() {
         return dbVersion;
     }
@@ -1800,8 +1798,16 @@ public class DataStore {
         }
     }
 
-    public static synchronized long incSequenceInternalCache () {
-        return incSequence(SEQUENCE_INTERNAL_CACHE, 1000);
+    public static synchronized long getNextAvailableInternalCacheId() {
+        final int minimum = 1000;
+
+        init();
+        final Cursor c = database.rawQuery("SELECT MAX(CAST(SUBSTR(geocode," + (1 + InternalConnector.PREFIX.length()) + ") AS INTEGER)) FROM " + dbTableCaches + " WHERE substr(geocode,1," + InternalConnector.PREFIX.length() + ") = \"" + InternalConnector.PREFIX + "\"", new String []{});
+        final Set<Integer> nextId = cursorToColl(c, new HashSet<>(), GET_INTEGER_0);
+        for (Integer i : nextId) {
+            return Math.max(i + 1, minimum);
+        }
+        return minimum;
     }
 
     /**
