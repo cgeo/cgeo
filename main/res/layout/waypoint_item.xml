@@ -77,7 +77,7 @@
         android:lines="1"
         android:scrollHorizontally="true"
         android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsSecondary"
+        android:textColor="@color/colorText_listsPrimary"
         android:visibility="gone"
         tools:visiblity="visible"
         tools:text="1.2.3.4.5N 6.7.8.9.10S"
@@ -95,7 +95,7 @@
         android:maxLines="1"
         android:scrollHorizontally="true"
         android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsSecondary"
+        android:textColor="@color/colorText_listsPrimary"
         android:visibility="gone"
         android:text="@string/waypoint_calculated_coordinates"
         tools:visiblity="visible" />
@@ -108,7 +108,7 @@
         android:layout_marginLeft="12dp"
         android:focusable="false"
         android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsSecondary"
+        android:textColor="@color/colorText_listsPrimary"
         android:visibility="gone"
         tools:visiblity="visible"
         tools:text="Note"/>
@@ -121,7 +121,7 @@
         android:layout_marginLeft="12dp"
         android:focusable="false"
         android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsSecondary"
+        android:textColor="@color/colorText_listsPrimary"
         android:visibility="gone"
         tools:visiblity="visible"
         tools:text="User Note"/>
