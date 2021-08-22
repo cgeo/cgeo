@@ -46,6 +46,10 @@
     <!-- compass -->
     <dimen name="textSize_compassTargeting">26sp</dimen>
 
+    <!-- text input fields -->
+    <dimen name="textSize_textinputPrimary">18sp</dimen>
+    <dimen name="textSize_textinputSecondary">16sp</dimen>
+
     <!-- all other text -->
     <dimen name="textSize_detailsPrimary">16sp</dimen>
     <dimen name="textSize_detailsSecondary">14sp</dimen>
