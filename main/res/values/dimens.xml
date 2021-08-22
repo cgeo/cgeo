@@ -33,8 +33,8 @@
     <dimen name="textSize_listsPrimary">18sp</dimen>
     <dimen name="textSize_listsSecondary">16sp</dimen>
 
-    <!-- calculator labels between input buttons -->
-    <dimen name="textSize_calculator">22sp</dimen>
+    <!-- coordinate figures and waypoint calculator labels between input buttons -->
+    <dimen name="textSize_inputCoords">22sp</dimen>
 
     <!--- wizard -->
     <dimen name="textSize_headingWizard">26sp</dimen>
