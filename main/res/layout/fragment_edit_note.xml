@@ -13,14 +13,11 @@
 
         <EditText
             android:id="@+id/note"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:gravity="start"
+            style="@style/textinput_embedded"
             android:hint="@string/waypoint_note"
             android:importantForAutofill="no"
             android:inputType="textMultiLine"
-            android:minLines="8"
-            android:textSize="@dimen/textSize_detailsPrimary" />
+            android:minLines="99" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <CheckBox
