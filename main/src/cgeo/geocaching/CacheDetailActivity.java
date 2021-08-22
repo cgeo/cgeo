@@ -1835,7 +1835,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     descriptionView.setVisibility(View.VISIBLE);
                     activity.addContextMenu(descriptionView);
-                    activity.potentiallyHideShortDescription();
+                    // TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
+                    //activity.potentiallyHideShortDescription();
                 }
                 if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
@@ -1896,6 +1897,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     /**
      * Hide the short description, if it is contained somewhere at the start of the long description.
      */
+    /** TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
     public void potentiallyHideShortDescription() {
         final View shortView = findViewById(R.id.description);
         if (shortView == null) {
@@ -1913,6 +1915,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
     }
+    */
 
     private void ensureSaved() {
         if (!cache.isOffline()) {
