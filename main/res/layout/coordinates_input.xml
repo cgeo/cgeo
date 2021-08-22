@@ -35,14 +35,14 @@
                 android:layout_marginRight="2dp"
                 android:gravity="right"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_degrees"
                 android:selectAllOnFocus="true" />
 
             <TextView
                 android:id="@+id/LatSeparator1"
                 android:text="°"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -53,14 +53,14 @@
                 android:layout_marginRight="2dp"
                 android:gravity="right"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_minutes"
                 android:selectAllOnFocus="true" />
 
             <TextView
                 android:id="@+id/LatSeparator2"
                 android:text=","
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -71,14 +71,14 @@
                 android:layout_marginRight="2dp"
                 android:gravity="right"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_seconds"
                 android:selectAllOnFocus="true" />
 
             <TextView
                 android:id="@+id/LatSeparator3"
                 android:text=","
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -88,7 +88,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_fraction"
                 android:selectAllOnFocus="true" />
             <TextView
@@ -113,14 +113,14 @@
                 android:layout_marginRight="2dp"
                 android:gravity="right"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_degrees"
                 android:selectAllOnFocus="true" />
 
             <TextView
                 android:id="@+id/LonSeparator1"
                 android:text="°"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -131,14 +131,14 @@
                 android:layout_marginRight="2dp"
                 android:gravity="right"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_minutes"
                 android:selectAllOnFocus="true" />
 
             <TextView
                 android:id="@+id/LonSeparator2"
                 android:text=","
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -149,14 +149,14 @@
                 android:layout_marginRight="2dp"
                 android:gravity="right"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_seconds"
                 android:selectAllOnFocus="true" />
 
             <TextView
                 android:id="@+id/LonSeparator3"
                 android:text=","
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:layout_marginRight="1dp"
                 tools:ignore="HardcodedText" />
 
@@ -166,7 +166,7 @@
                 android:layout_marginLeft="2dp"
                 android:layout_marginRight="2dp"
                 android:inputType="number"
-                android:textSize="@dimen/textSize_calculator"
+                android:textSize="@dimen/textSize_inputCoords"
                 android:hint="@string/cc_hint_fraction"
                 android:selectAllOnFocus="true" />
         </TableRow>
