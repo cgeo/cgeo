@@ -301,7 +301,7 @@ public abstract class AbstractConnector implements IConnector {
         final List<UserAction> actions = getDefaultUserActions();
 
         if (this instanceof ISearchByOwner) {
-            actions.add(new UserAction(R.string.user_menu_view_hidden, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
+            actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.ic_menu_myplaces, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
         }
 
         actions.add(new UserAction(R.string.copy_to_clipboard, R.drawable.ic_menu_copy, context -> {
