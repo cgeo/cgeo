@@ -5,7 +5,7 @@
 
 ### Karta
 - New: On creating a user-defined cache while displaying a map from a list: Offer user to store new cache in current list (instead of default list for user-defined caches)
-- Nytt: Separera "egna" och "hittade" filter i kartans snabbinställningar
+- Nyhet: Separera "egna" och "hittade" filter i kartans snabbinställningar
 - Förändring: Visa även cachenamn i popup-detaljer
 
 ### Cachedetaljer
@@ -13,7 +13,7 @@
 - Nyhet: Tillåt att ändra den tilldelade ikonen i cache-detaljer popup via långklick (endast lagrade cacher)
 
 ### Nedladdare
-- Ändring: Nedladdningar kommer nu att ske helt i bakgrunden, en avisering visas
+- Förändring: Nedladdningar kommer nu att ske helt i bakgrunden, en avisering visas
 - Förändring: Filer som laddats ner kommer automatiskt att skriva över befintliga filer med samma namn
 - Förändring: Om en karta kräver ett visst tema som inte är installerat ännu kommer c:geo automatiskt ladda ner och installera det temat
 
