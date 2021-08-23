@@ -29,7 +29,7 @@ import org.apache.commons.lang3.StringUtils;
 public class GeocacheFilter implements Cloneable {
 
     public enum QuickFilter {
-        FOUND, OWNED, DISABLED, ARCHIVED, HAS_OFFLINE_LOG
+        FOUND, OWNED, DISABLED, ARCHIVED, HAS_OFFLINE_FOUND_LOG
     }
 
     private static final String CONFIG_KEY_ADV_MODE = "advanced";
@@ -327,7 +327,7 @@ public class GeocacheFilter implements Cloneable {
         final StatusGeocacheFilter statusFilter = findInChain(getAndChainIfPossible(), StatusGeocacheFilter.class);
         result.put(QuickFilter.FOUND, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusFound()));
         result.put(QuickFilter.OWNED, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusOwned()));
-        result.put(QuickFilter.HAS_OFFLINE_LOG, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusHasOfflineLog()));
+        result.put(QuickFilter.HAS_OFFLINE_FOUND_LOG, statusFilter == null || !Boolean.FALSE.equals(statusFilter.getStatusHasOfflineFoundLog()));
         result.put(QuickFilter.DISABLED, statusFilter == null || !statusFilter.isExcludeDisabled());
         result.put(QuickFilter.ARCHIVED, statusFilter == null || !statusFilter.isExcludeArchived());
         return result;
@@ -356,7 +356,7 @@ public class GeocacheFilter implements Cloneable {
         final StatusGeocacheFilter sFilter = statusFilter;
         setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.FOUND, f -> sFilter.setStatusFound(f ? null : false));
         setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.OWNED, f -> sFilter.setStatusOwned(f ? null : false));
-        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.HAS_OFFLINE_LOG, f -> sFilter.setStatusHasOfflineLog(f ? null : false));
+        setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.HAS_OFFLINE_FOUND_LOG, f -> sFilter.setStatusHasOfflineFoundLog(f ? null : false));
         setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.DISABLED, f -> sFilter.setExcludeDisabled(!f));
         setSingleQuickFilter(quickFilter, newQuickFilter, QuickFilter.ARCHIVED, f -> sFilter.setExcludeArchived(!f));
     }

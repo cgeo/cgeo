@@ -3,16 +3,20 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
 import androidx.annotation.StringRes;
 import androidx.core.util.Consumer;
+
+import java.util.Arrays;
 
 public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
@@ -31,7 +35,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         PREMIUM(R.string.cache_filter_status_select_label_premium, "premium", ImageParam.emoji(EmojiUtils.SPARKLES)),
         HAS_TRACKABLE(R.string.cache_filter_status_select_label_has_trackable, "has_trackable", ImageParam.id(R.drawable.trackable_all)),
         HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.star_accent_color)),
-        HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_found_offline)),
+        HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_note)),
+        HAS_OFFLINE_FOUND_LOG(R.string.cache_filter_status_select_label_has_offline_found_log, "has_offline_found_log", ImageParam.id(R.drawable.marker_found_offline)),
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.waypoint_puzzle), R.string.cache_filter_status_select_infotext_solved_mystery);
 
         @StringRes public final int labelId;
@@ -69,13 +74,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusHasTrackable = null;
     private Boolean statusHasOwnVote = null;
     private Boolean statusHasOfflineLog = null;
+    private Boolean statusHasOfflineFoundLog = null;
     private Boolean statusSolvedMystery = null;
 
 
     @Override
     public Boolean filter(final Geocache cache) {
 
-        if (statusHasOfflineLog != null) {
+        if (statusHasOfflineLog != null || statusHasOfflineFoundLog != null) {
             //trigger offline log load
             cache.getOfflineLog();
         }
@@ -102,6 +108,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
             (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
             (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
+            (statusHasOfflineFoundLog == null || hasFoundOfflineLog(cache) == statusHasOfflineFoundLog) &&
             (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
                 (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
     }
@@ -202,6 +209,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         this.statusHasOfflineLog = statusHasOfflineLog;
     }
 
+    public Boolean getStatusHasOfflineFoundLog() {
+        return statusHasOfflineFoundLog;
+    }
+
+    public void setStatusHasOfflineFoundLog(final Boolean statusHasOfflineFoundLog) {
+        this.statusHasOfflineFoundLog = statusHasOfflineFoundLog;
+    }
+
     public Boolean getStatusSolvedMystery() {
         return statusSolvedMystery;
     }
@@ -220,6 +235,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         statusHasTrackable = null;
         statusHasOwnVote = null;
         statusHasOfflineLog = null;
+        statusHasOfflineFoundLog = null;
         statusPremium = null;
 
         excludeActive = false;
@@ -235,6 +251,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.HAS_TRACKABLE, b -> statusHasTrackable = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OWN_VOTE, b -> statusHasOwnVote = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
+            checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_FOUND_LOG, b -> statusHasOfflineFoundLog = b);
             checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
@@ -268,6 +285,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         checkAndAddFlagToDefaultList(statusHasTrackable, StatusType.HAS_TRACKABLE, result);
         checkAndAddFlagToDefaultList(statusHasOwnVote, StatusType.HAS_OWN_VOTE, result);
         checkAndAddFlagToDefaultList(statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG, result);
+        checkAndAddFlagToDefaultList(statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG, result);
         checkAndAddFlagToDefaultList(statusSolvedMystery, StatusType.SOLVED_MYSTERY, result);
         if (excludeActive) {
             result.addToDefaultList(FLAG_EXCLUDE_ACTIVE);
@@ -294,8 +312,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     public boolean isFiltering() {
         return statusOwned != null || statusFound != null || statusStored != null || statusFavorite != null ||
             statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
-            statusHasOwnVote != null || statusHasOfflineLog != null || statusSolvedMystery != null ||
-            excludeArchived || excludeDisabled || excludeActive;
+            statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
+            statusSolvedMystery != null || excludeArchived || excludeDisabled || excludeActive;
     }
 
     @Override
@@ -338,7 +356,13 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 sqlBuilder.addWhere((statusHasOfflineLog ? "" : "NOT ") +
                     "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
             }
-
+            if (statusHasOfflineFoundLog != null) {
+                final String logTableId = sqlBuilder.getNewTableId();
+                final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
+                sqlBuilder.addWhere((statusHasOfflineFoundLog ? "" : "NOT ") +
+                        "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
+                        " AND " + logTableId + ".type in (" + logIds + ")" + ")");
+            }
             if (statusSolvedMystery != null) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".type <> '" + CacheType.MYSTERY.id + "'"); // only filters mysteries
@@ -390,6 +414,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasTrackable, StatusType.HAS_TRACKABLE);
         count = addIfStillFits(sb, count, statusHasOwnVote, StatusType.HAS_OWN_VOTE);
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
+        count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
         count = addIfTrue(sb, count, excludeDisabled, R.string.cache_filter_status_exclude_disabled);
@@ -431,5 +456,12 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             return cnt + 1;
         }
         return cnt;
+    }
+
+    private boolean hasFoundOfflineLog(final Geocache cache) {
+        if  (cache.hasLogOffline()) {
+            return cache.getOfflineLog().logType.isFoundLog();
+        }
+        return false;
     }
 }

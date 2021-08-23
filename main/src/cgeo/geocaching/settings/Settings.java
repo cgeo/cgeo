@@ -368,7 +368,6 @@ public class Settings {
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !legacyExcludeFound);
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.DISABLED, !getBooleanDirect("excludedisabled", false));
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.ARCHIVED, !getBooleanDirect("excludearchived", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, !getBooleanDirect("excludeofflinelog", false));
 
             final GeocacheFilterContext liveFilterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
             GeocacheFilter liveFilter = liveFilterContext.get();

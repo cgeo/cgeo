@@ -587,6 +587,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Has Trackable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Has Own Vote</string>
     <string name="cache_filter_status_select_label_has_offline_log">Has Offline Log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Has Offline Found Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Solved Mystery</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">This filter setting will only affect mystery caches.\n\n A mystery is considered \'solved\' if it has either changed coordinates or a valid final waypoint filled with coordinates.</string>
 
@@ -1531,7 +1532,7 @@
     <string name="map_showc_found">Found</string>
     <string name="map_showc_disabled">Disabled</string>
     <string name="map_showc_archived">Archived</string>
-    <string name="map_showc_offlinelog">Logged Offline</string>
+    <string name="map_showc_found_offline">Found (offline)</string>
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Parking</string>
     <string name="map_showwp_visited">Visited</string>
