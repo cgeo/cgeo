@@ -38,6 +38,7 @@
     <string name="userdefined">Door de gebruiker gedefinieerde cache</string>
     <string name="unknown">Onbekend type</string>
     <string name="all_types_short">Alle</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mysterie</string>
     <string name="letterbox_short">Letterbox</string>
