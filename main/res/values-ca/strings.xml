@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">D\'acord</string>
     <!-- basics -->
     <string name="cache">geoamagatall</string>
     <string name="detail">Detalls</string>
@@ -37,6 +38,7 @@
     <string name="userdefined">Catxé definit per l’usuari</string>
     <string name="unknown">Desconegut</string>
     <string name="all_types_short">Tots</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Misteri</string>
     <string name="letterbox_short">Letter</string>
@@ -177,6 +179,9 @@
     <string name="log_problem_archive_label">El catxé ha de ser arxivat</string>
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">a escala</string>
+    <string name="log_image_info_notscaled">no a escala</string>
     <string name="log_image_titleprefix">Imatge</string>
     <string name="datetime_clear_button">Esborra</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
@@ -325,6 +330,7 @@
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
     <string name="menu_lists_pocket_queries">Llistes / pocket queries</string>
     <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
+    <string name="menu_invert_order">Inverteix l’ordre</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Propers</string>
@@ -515,6 +521,7 @@
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleccionar tot</string>
     <string name="cache_filter_checkboxlist_add_items">Afegiu més elements</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Afegiu tots els elements</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Afegeix elements</string>
     <string name="cache_filter_favorites_absolute">Complet</string>
     <string name="cache_filter_favorites_percentage">Percentatge</string>
@@ -681,6 +688,7 @@
     <string name="init_authorization_credential_username">Nom d\'usuari</string>
     <string name="init_authorization_credential_password">Contrasenya</string>
     <string name="settings_service_active">Actiu</string>
+    <string name="settings_service_active_unavailable">Actiu/No disponible</string>
     <string name="settings_navigation_disabled">Aquesta aplicació no s\'ha instal·lat.</string>
     <string name="init_signature">Signatura</string>
     <string name="init_template_help">Les cadenes de marcador de posició, com ara [NAME], s’omplen amb el text designat quan s’utilitza la plantilla.</string>
@@ -1423,6 +1431,7 @@
     <string name="search_address_button">Cerca per l\'adreça</string>
     <string name="search_geo">Codi del catxé</string>
     <string name="search_geo_button">Cerca pel codi del catxé</string>
+    <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
     <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
@@ -1974,6 +1983,8 @@
         <item quantity="other">Ruta carregada amb %d punts de ruta</item>
     </plurals>
     <string name="center_on_route">Centre de la ruta</string>
+    <string name="individual_route_set_as_start_title">Estableix com a inici de ruta</string>
+    <string name="individual_route_set_as_start_message">Voleu definir aquest element com a inici de ruta i moure tots els elements posteriors a la part superior de la ruta actual?</string>
     <!-- individual track -->
     <string name="individual_track">GPX track/ruta</string>
     <string name="map_load_track">Carrega track/ruta del GPX</string>
