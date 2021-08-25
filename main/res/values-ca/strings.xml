@@ -1388,7 +1388,6 @@
     <string name="map_showc_found">Trobat</string>
     <string name="map_showc_disabled">Desactivat</string>
     <string name="map_showc_archived">Arxivat</string>
-    <string name="map_showc_offlinelog">Registrat fora de línia</string>
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Aparcament</string>
     <string name="map_showwp_visited">Visitat</string>
