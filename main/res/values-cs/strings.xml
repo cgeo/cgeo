@@ -1409,7 +1409,6 @@
     <string name="map_showc_found">Nalezené</string>
     <string name="map_showc_disabled">Deaktivované</string>
     <string name="map_showc_archived">Archivované</string>
-    <string name="map_showc_offlinelog">Zalogované offline</string>
     <string name="map_showwp_original">Původní</string>
     <string name="map_showwp_parking">Parkování</string>
     <string name="map_showwp_visited">Navštívené</string>
