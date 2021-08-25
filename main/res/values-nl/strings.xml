@@ -1387,7 +1387,6 @@
     <string name="map_showc_found">Gevonden</string>
     <string name="map_showc_disabled">Uitgeschakeld</string>
     <string name="map_showc_archived">Gearchiveerd</string>
-    <string name="map_showc_offlinelog">Offline gelogd</string>
     <string name="map_showwp_original">Origineel</string>
     <string name="map_showwp_parking">Parkeerplaats</string>
     <string name="map_showwp_visited">Bezocht</string>
