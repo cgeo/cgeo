@@ -1387,7 +1387,6 @@
     <string name="map_showc_found">Hittad</string>
     <string name="map_showc_disabled">Inaktiverad</string>
     <string name="map_showc_archived">Arkiverad</string>
-    <string name="map_showc_offlinelog">Loggad Offline</string>
     <string name="map_showwp_original">Ursprunglig</string>
     <string name="map_showwp_parking">Parkering</string>
     <string name="map_showwp_visited">Besökt</string>
