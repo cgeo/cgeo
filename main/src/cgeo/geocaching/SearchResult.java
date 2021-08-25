@@ -218,24 +218,14 @@ public class SearchResult implements Parcelable {
         this.totalCountGC = totalCountGC;
     }
 
-    public SearchResult filterSearchResults(final boolean excludeDisabled, final boolean excludeArchived) {
+    public SearchResult filterSearchResults() {
         final SearchResult result = new SearchResult(this);
         result.geocodes.clear();
-        final List<Geocache> includedCaches = new ArrayList<>();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-        int excluded = 0;
-        for (final Geocache cache : caches) {
-            // Is there any reason to exclude the cache from the list?
-            final boolean excludeCache = (excludeDisabled && cache.isDisabled()) || (excludeArchived && cache.isArchived());
-            if (excludeCache) {
-                excluded++;
-            } else {
-                includedCaches.add(cache);
-            }
-        }
+
+        final List<Geocache> includedCaches = new ArrayList<>(caches);
         result.addAndPutInCache(includedCaches);
-        // decrease maximum number of caches by filtered ones
-        result.setTotalCountGC(result.getTotalCountGC() - excluded);
+
         GCVote.loadRatings(includedCaches);
         return result;
     }

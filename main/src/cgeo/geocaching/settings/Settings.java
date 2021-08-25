@@ -773,32 +773,6 @@ public class Settings {
         return getBoolean(R.string.pref_showaddress, true);
     }
 
-    @Deprecated
-    public static boolean isExcludeMyCaches() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeFound() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeOfflineLog() {
-        return false; //prepare for later removal
-    }
-
-
-    @Deprecated
-    public static boolean isExcludeDisabledCaches() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeArchivedCaches() {
-        return false; //prepare for later removal
-    }
-
     public static boolean isExcludeWpOriginal() {
         return getBoolean(R.string.pref_excludeWpOriginal, false);
     }

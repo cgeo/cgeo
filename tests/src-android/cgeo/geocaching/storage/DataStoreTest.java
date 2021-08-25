@@ -111,17 +111,7 @@ public class DataStoreTest extends CGeoTestCase {
     // Check that queries don't throw an exception (see issue #1429).
     public static void testLoadWaypoints() {
         final Viewport viewport = new Viewport(new Geopoint(-1, -2), new Geopoint(3, 4));
-        //test all possible parameter combinations7
-        for (int i = 0; i < 64; i++) {
-            final boolean excludeMine = i % 2 == 0;
-            final boolean excludeFound = (i / 2) % 2 == 0;
-            final boolean excludeDisabled = (i / 4) % 2 == 0;
-            final boolean excludeArchived = (i / 8) % 2 == 0;
-            final boolean excludeOfflineLogs = (i / 16) % 2 == 0;
-            final CacheType cacheType = (i / 32) % 2 == 0 ? CacheType.ALL : CacheType.TRADITIONAL;
-
-            DataStore.loadWaypoints(viewport, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs);
-        }
+        DataStore.loadWaypoints(viewport);
     }
 
     // Check that saving a cache and trackable without logs works (see #2199)

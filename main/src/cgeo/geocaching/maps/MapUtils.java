@@ -32,12 +32,7 @@ public class MapUtils {
     }
 
     // filter waypoints from owned caches or certain wp types if requested.
-    public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext, final boolean checkCacheFilters) {
-        final boolean excludeMine = checkCacheFilters && Settings.isExcludeMyCaches();
-        final boolean excludeFound = checkCacheFilters && Settings.isExcludeFound();
-        final boolean excludeDisabled = checkCacheFilters && Settings.isExcludeDisabledCaches();
-        final boolean excludeArchived = checkCacheFilters && Settings.isExcludeArchivedCaches();
-        final boolean excludeOfflineLog = checkCacheFilters && Settings.isExcludeOfflineLog();
+    public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext) {
 
         final GeocacheFilter filter = filterContext.get();
 
@@ -49,7 +44,7 @@ public class MapUtils {
         for (final Waypoint wp : waypoints) {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
-            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog) ||
+            if (cache == null ||
                 !filter.filter(cache) ||
                 (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
                 (excludeWpParking && wpt == WaypointType.PARKING) ||
@@ -62,34 +57,8 @@ public class MapUtils {
 
     /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
     public static void filter(final Collection<Geocache> caches, final GeocacheFilterContext filterContext) {
-
         final GeocacheFilter filter = filterContext.get();
         filter.filterList(caches);
-
-
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeFound = Settings.isExcludeFound();
-        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-        final boolean excludeArchived = Settings.isExcludeArchivedCaches();
-        final boolean excludeOfflineLog = Settings.isExcludeOfflineLog();
-
-        // filtering required?
-        if (!excludeMine && !excludeFound && !excludeDisabled && !excludeArchived && !excludeOfflineLog) {
-            return;
-        }
-        final List<Geocache> removeList = new ArrayList<>();
-        for (final Geocache cache : caches) {
-            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog)) {
-                removeList.add(cache);
-            }
-        }
-        caches.removeAll(removeList);
-    }
-
-    private static boolean filterCache(final Geocache cache, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLog) {
-        return cache != null && (!excludeFound || !cache.isFound()) && (!excludeMine || !cache.isOwner()) && (!excludeDisabled || !cache.isDisabled()) && (!excludeArchived || !cache.isArchived()) &&
-                (!excludeOfflineLog || !cache.hasLogOffline());
-
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {

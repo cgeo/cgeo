@@ -15,7 +15,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
@@ -872,11 +871,7 @@ class GCWebAPI {
     }
 
     static SearchResult searchMap(@NonNull final Viewport viewport) {
-        return searchCaches (new WebApiSearch()
-            .setBox(viewport)
-            .setStatusOwn(Settings.isGCPremiumMember() && Settings.isExcludeMyCaches() ? false : null)
-            .setStatusFound(Settings.isGCPremiumMember() && Settings.isExcludeFound() ? false : null), false
-        );
+        return searchCaches(new WebApiSearch().setBox(viewport), false);
     }
 
 

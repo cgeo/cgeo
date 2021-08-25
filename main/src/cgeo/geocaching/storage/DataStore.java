@@ -4329,25 +4329,8 @@ public class DataStore {
      */
 
     @NonNull
-    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLogs) {
+    public static Set<Waypoint> loadWaypoints(final Viewport viewport) {
         final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
-        if (excludeFound) {
-            // found will contain the value -1 if cache was logged as DNF. Therefore we can't check if found == 0
-            where.append(" AND ").append(dbTableCaches).append(".found != 1");
-        }
-        if (excludeMine) {
-            where.append(" AND ").append(dbTableCaches).append(".owner_real <> '" + Settings.getUserName() + "'");
-        }
-
-        if (excludeDisabled) {
-            where.append(" AND ").append(dbTableCaches).append(".disabled == 0");
-        }
-        if (excludeArchived) {
-            where.append(" AND ").append(dbTableCaches).append(".archived == 0");
-        }
-        if (excludeOfflineLogs) {
-            where.append(" AND NOT EXISTS (SELECT " + dbTableLogsOffline + ".geocode FROM " + dbTableLogsOffline + " WHERE " + dbTableLogsOffline + ".geocode = " + dbTableWaypoints + ".geocode)");
-        }
 
         final StringBuilder query = new StringBuilder("SELECT ");
         for (int i = 0; i < WAYPOINT_COLUMNS.length; i++) {
