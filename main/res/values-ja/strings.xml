@@ -1368,7 +1368,6 @@
     <string name="map_showc_found">発見</string>
     <string name="map_showc_disabled">一時停止中</string>
     <string name="map_showc_archived">アーカイブ済み</string>
-    <string name="map_showc_offlinelog">オフラインログ</string>
     <string name="map_showwp_original">オリジナル</string>
     <string name="map_showwp_parking">駐車場</string>
     <string name="map_showwp_visited">訪問済み</string>
