@@ -1387,7 +1387,6 @@
     <string name="map_showc_found">Bulduğum</string>
     <string name="map_showc_disabled">Devredışı</string>
     <string name="map_showc_archived">Arşivlendi</string>
-    <string name="map_showc_offlinelog">Çevrimdışı Kaydedildi</string>
     <string name="map_showwp_original">Orijinal</string>
     <string name="map_showwp_parking">Park alanı</string>
     <string name="map_showwp_visited">Ziyaret edildi</string>
