@@ -13,12 +13,10 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -1472,8 +1470,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             if (item.getType() == CoordinatesType.CACHE) {
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
-                    final RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache, this);
-                    requestDetailsThread.start();
+                    popupGeocodes.add(cache.getGeocode());
+                    CachePopup.startActivityAllowTarget(this, cache.getGeocode());
                     return;
                 }
                 return;
@@ -1541,42 +1539,6 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     private void savePrefs() {
         Settings.setMapZoom(this.mapMode, mapView.getMapZoomLevel());
         Settings.setMapCenter(new MapsforgeGeoPoint(mapView.getModel().mapViewPosition.getCenter()));
-    }
-
-    private static class RequestDetailsThread extends Thread {
-
-        @NonNull
-        private final Geocache cache;
-        @NonNull
-        private final WeakReference<NewMap> mapRef;
-
-        RequestDetailsThread(@NonNull final Geocache cache, @NonNull final NewMap map) {
-            this.cache = cache;
-            this.mapRef = new WeakReference<>(map);
-        }
-
-        public boolean requestRequired() {
-            return CacheType.UNKNOWN == cache.getType() || cache.getDifficulty() == 0;
-        }
-
-        @Override
-        public void run() {
-            final NewMap map = this.mapRef.get();
-            if (map == null) {
-                return;
-            }
-            if (requestRequired()) {
-                try {
-                    /* final SearchResult search = */
-                    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
-                } catch (final Exception ex) {
-                    Log.w("Error requesting cache popup info", ex);
-                    ActivityMixin.showToast(map, R.string.err_request_popup_info);
-                }
-            }
-            map.popupGeocodes.add(cache.getGeocode());
-            CachePopup.startActivityAllowTarget(map, cache.getGeocode());
-        }
     }
 
     /**
