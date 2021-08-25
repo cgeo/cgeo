@@ -1376,7 +1376,6 @@
     <string name="map_showc_found">찾음</string>
     <string name="map_showc_disabled">일시정지됨</string>
     <string name="map_showc_archived">영구보관됨</string>
-    <string name="map_showc_offlinelog">오프라인으로 로그됨</string>
     <string name="map_showwp_original">원본</string>
     <string name="map_showwp_parking">주차</string>
     <string name="map_showwp_visited">방문했음</string>
