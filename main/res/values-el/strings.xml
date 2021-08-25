@@ -1387,7 +1387,6 @@
     <string name="map_showc_found">Βρέθηκε</string>
     <string name="map_showc_disabled">Απενεργοποιημένη</string>
     <string name="map_showc_archived">Αρχειοθετημένη</string>
-    <string name="map_showc_offlinelog">Καταχώρηση Χωρίς Σύνδεση</string>
     <string name="map_showwp_original">Αρχική</string>
     <string name="map_showwp_parking">Πάρκινγκ</string>
     <string name="map_showwp_visited">Επίσκεψη</string>
