@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.mapsforge.v6.caches;
 
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
@@ -47,9 +46,8 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
             final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
             final boolean excludeArchived = Settings.isExcludeArchivedCaches();
             final boolean excludeOfflineLog = Settings.isExcludeOfflineLog();
-            final CacheType type = Settings.getCacheType();
 
-            final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, type);
+            final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog);
             MapUtils.filter(waypointsInViewport, getFilterContext(), checkOwnership);
             waypoints.addAll(waypointsInViewport);
         }

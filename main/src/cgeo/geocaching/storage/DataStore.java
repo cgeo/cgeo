@@ -3329,10 +3329,7 @@ public class DataStore {
     /**
      * Number of caches stored for a given type and/or list
      */
-    public static int getAllStoredCachesCount(final CacheType cacheType, final int list) {
-        if (cacheType == null) {
-            throw new IllegalArgumentException("cacheType must not be null");
-        }
+    public static int getAllStoredCachesCount(final int list) {
         if (list <= 0) {
             throw new IllegalArgumentException("list must be > 0");
         }
@@ -3345,18 +3342,9 @@ public class DataStore {
                 if (list == PseudoList.HISTORY_LIST.id) {
                     compiledStmnt = PreparedStatement.HISTORY_COUNT.getStatement();
                 } else if (list == PseudoList.ALL_LIST.id) {
-                    if (cacheType == CacheType.ALL) {
-                        compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
-                    } else {
-                        compiledStmnt = PreparedStatement.COUNT_TYPE_ALL_LIST.getStatement();
-                        compiledStmnt.bindString(1, cacheType.id);
-                    }
-                } else if (cacheType == CacheType.ALL) {
-                    compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
-                    compiledStmnt.bindLong(1, list);
+                    compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_ALL_LIST.getStatement();
                 } else {
-                    compiledStmnt = PreparedStatement.COUNT_TYPE_LIST.getStatement();
-                    compiledStmnt.bindString(1, cacheType.id);
+                    compiledStmnt = PreparedStatement.COUNT_ALL_TYPES_LIST.getStatement();
                     compiledStmnt.bindLong(1, list);
                 }
 
@@ -3423,13 +3411,10 @@ public class DataStore {
      * @return a non-null set of geocodes
      */
     @NonNull
-    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final CacheType cacheType, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
-        if (cacheType == null) {
-            throw new IllegalArgumentException("cacheType must not be null");
-        }
+    private static Set<String> loadBatchOfStoredGeocodes(final Geopoint coords, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
 
-        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadBatchOfStoredGeocodes(coords=%s, type=%s, list=%d)",
-                String.valueOf(coords), String.valueOf(cacheType), listId)) {
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "DataStore.loadBatchOfStoredGeocodes(coords=%s, list=%d)",
+                String.valueOf(coords), listId)) {
 
             final SqlBuilder sqlBuilder = new SqlBuilder(dbTableCaches, new String[]{"geocode"});
 
@@ -3439,10 +3424,6 @@ public class DataStore {
                 final String clId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere(sqlBuilder.getMainTableId() + ".geocode IN (SELECT " + clId + ".geocode FROM " + dbTableCachesLists + " " + clId + " WHERE list_id " +
                     (listId != PseudoList.ALL_LIST.id ? "=" + Math.max(listId, 1) : ">= " + StoredList.STANDARD_LIST_ID) + ")");
-            }
-
-            if (cacheType != CacheType.ALL) {
-                sqlBuilder.addWhere("type = '" + cacheType.id + "'");
             }
             if (filter != null && filter.getTree() != null) {
                 filter.getTree().addToSql(sqlBuilder);
@@ -3512,14 +3493,14 @@ public class DataStore {
 
     /** Retrieve all stored caches from DB */
     @NonNull
-    public static SearchResult loadCachedInViewport(final Viewport viewport, final CacheType cacheType) {
-        return loadInViewport(false, viewport, cacheType);
+    public static SearchResult loadCachedInViewport(final Viewport viewport) {
+        return loadInViewport(false, viewport);
     }
 
     /** Retrieve stored caches from DB with listId >= 1 */
     @NonNull
-    public static SearchResult loadStoredInViewport(final Viewport viewport, final CacheType cacheType) {
-        return loadInViewport(true, viewport, cacheType);
+    public static SearchResult loadStoredInViewport(final Viewport viewport) {
+        return loadInViewport(true, viewport);
     }
 
     /**
@@ -3527,30 +3508,22 @@ public class DataStore {
      *
      * @param stored {@code true} to query caches stored in the database, {@code false} to also use the CacheCache
      * @param viewport the viewport defining the area to scan
-     * @param cacheType the cache type
      * @return the matching caches
      */
     @NonNull
-    private static SearchResult loadInViewport(final boolean stored, final Viewport viewport, final CacheType cacheType) {
+    private static SearchResult loadInViewport(final boolean stored, final Viewport viewport) {
         try (ContextLogger cLog = new ContextLogger("DataStore.loadInViewport()")) {
-            cLog.add("stored=%b,vp=%s,ct=%s", stored, viewport, cacheType);
+            cLog.add("stored=%b,vp=%s", stored, viewport);
 
             final Set<String> geocodes = new HashSet<>();
 
             // if not stored only, get codes from CacheCache as well
             if (!stored) {
-                geocodes.addAll(cacheCache.getInViewport(viewport, cacheType));
+                geocodes.addAll(cacheCache.getInViewport(viewport));
             }
 
             // viewport limitation
             final StringBuilder selection = buildCoordinateWhere(dbTableCaches, viewport);
-
-            // cacheType limitation
-            String[] selectionArgs = null;
-            if (cacheType != CacheType.ALL) {
-                selection.append(" AND type = ?");
-                selectionArgs = new String[] { String.valueOf(cacheType.id) };
-            }
 
             // offline caches only
             if (stored) {
@@ -3563,7 +3536,7 @@ public class DataStore {
                 final SearchResult sr = new SearchResult(queryToColl(dbTableCaches,
                         new String[]{"geocode"},
                         selection.toString(),
-                        selectionArgs,
+                        null,
                         null,
                         "500",
                         geocodes,
@@ -4356,7 +4329,7 @@ public class DataStore {
      */
 
     @NonNull
-    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLogs, final CacheType type) {
+    public static Set<Waypoint> loadWaypoints(final Viewport viewport, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLogs) {
         final StringBuilder where = buildCoordinateWhere(dbTableWaypoints, viewport);
         if (excludeFound) {
             // found will contain the value -1 if cache was logged as DNF. Therefore we can't check if found == 0
@@ -4374,9 +4347,6 @@ public class DataStore {
         }
         if (excludeOfflineLogs) {
             where.append(" AND NOT EXISTS (SELECT " + dbTableLogsOffline + ".geocode FROM " + dbTableLogsOffline + " WHERE " + dbTableLogsOffline + ".geocode = " + dbTableWaypoints + ".geocode)");
-        }
-        if (type != CacheType.ALL) {
-            where.append(" AND ").append(dbTableCaches).append(".type == '").append(type.id).append('\'');
         }
 
         final StringBuilder query = new StringBuilder("SELECT ");
@@ -4521,13 +4491,13 @@ public class DataStore {
 
     @NonNull
     public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId) {
-        return getBatchOfStoredCaches(coords, cacheType, listId, null, null, false, -1);
+        return getBatchOfStoredCaches(coords, listId, null, null, false, -1);
     }
 
     @NonNull
-    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
-        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, cacheType, listId, filter, sort, sortInverse, limit);
-        return new SearchResult(geocodes, getAllStoredCachesCount(cacheType, listId));
+    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
+        final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, listId, filter, sort, sortInverse, limit);
+        return new SearchResult(geocodes, getAllStoredCachesCount(listId));
     }
 
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
@@ -4544,7 +4514,7 @@ public class DataStore {
         // get cached CacheListActivity
         final Set<String> cachedGeocodes = new HashSet<>();
         for (final Tile tile : tiles) {
-            cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport(), CacheType.ALL));
+            cachedGeocodes.addAll(cacheCache.getInViewport(tile.getViewport()));
         }
         // remove found in search result
         cachedGeocodes.removeAll(searchResult.getGeocodes());

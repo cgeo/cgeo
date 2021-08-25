@@ -431,10 +431,6 @@ final class OkapiClient {
     /** pass 'null' as value for 'my' to exclude the legacy global application of own/filtered/disabled/archived-flags */
     @NonNull
     private static List<Geocache> requestCaches(@NonNull final OCApiConnector connector, @NonNull final Parameters params, @NonNull final Map<String, String> valueMap, final boolean my, final boolean forFilterSearch) {
-        // if a global type filter is set, and OKAPI does not know that type, then return an empty list instead of all caches
-        if (Settings.getCacheType() != CacheType.ALL && StringUtils.isBlank(getFilterFromType())) {
-            return Collections.emptyList();
-        }
 
         if (!forFilterSearch) {
             addFilterParams(valueMap, connector, my);
@@ -1167,21 +1163,12 @@ final class OkapiClient {
         if (!my && Settings.isExcludeFound() && connector.getSupportedAuthLevel() == OAuthLevel.Level3) {
             valueMap.put("found_status", "notfound_only");
         }
-
-        if (Settings.getCacheType() != CacheType.ALL) {
-            valueMap.put("type", getFilterFromType());
-        }
     }
 
     private static void addRetrieveParams(@NonNull final Parameters params, @NonNull final OCApiConnector connector) {
         params.add("retr_method", METHOD_RETRIEVE_CACHES);
         params.add("retr_params", "{\"fields\": \"" + getCoreFields(connector) + "\"}");
         params.add("wrap", "true");
-    }
-
-    @NonNull
-    private static String getFilterFromType() {
-        return getFilterFromType(Settings.getCacheType());
     }
 
     private static String getFilterFromType(final CacheType ct) {

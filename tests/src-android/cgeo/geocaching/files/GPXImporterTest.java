@@ -397,7 +397,7 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         FileUtils.mkdirs(tempDir);
         assertThat(tempDir).overridingErrorMessage("Could not create directory %s", tempDir.getPath()).exists();
         // workaround to get storage initialized
-        DataStore.getAllStoredCachesCount(CacheType.ALL, PseudoList.HISTORY_LIST.id);
+        DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id);
         listId = DataStore.createList("cgeogpxesTest");
     }
 

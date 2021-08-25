@@ -1270,7 +1270,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final SearchResult searchResult;
             final MapMode mapMode = mapOptions.mapMode;
             if (mapMode == MapMode.LIVE) {
-                searchResult = mapOptions.isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport(), Settings.getCacheType()));
+                searchResult = mapOptions.isLiveEnabled ? new SearchResult() : new SearchResult(DataStore.loadStoredInViewport(mapView.getViewport()));
             } else {
                 // map started from another activity
                 searchResult = mapOptions.searchResult != null ? new SearchResult(mapOptions.searchResult) : new SearchResult();
@@ -1280,7 +1280,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
             // live mode search result
             if (mapOptions.isLiveEnabled) {
-                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport(), Settings.getCacheType()));
+                searchResult.addSearchResult(DataStore.loadCachedInViewport(mapView.getViewport()));
             }
 
             downloaded = true;
@@ -1301,13 +1301,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (cachesCnt < Settings.getWayPointsThreshold() || mapOptions.geocode != null) {
                 if (mapOptions.isLiveEnabled || mapMode == MapMode.LIVE || mapMode == MapMode.COORDS) {
                     //All visible waypoints
-                    final CacheType type = Settings.getCacheType();
                     final boolean excludeMine = Settings.isExcludeMyCaches();
                     final boolean excludeFound = Settings.isExcludeFound();
                     final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
                     final boolean excludeArchived = Settings.isExcludeArchivedCaches();
                     final boolean excludeOfflineLogs = Settings.isExcludeOfflineLog();
-                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs, type);
+                    final Set<Waypoint> waypointsInViewport = DataStore.loadWaypoints(mapView.getViewport(), excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs);
                     MapUtils.filter(waypointsInViewport, mapOptions.filterContext, true);
                     waypoints.addAll(waypointsInViewport);
                 } else {

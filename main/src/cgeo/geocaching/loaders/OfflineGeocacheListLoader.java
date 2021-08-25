@@ -4,7 +4,6 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.DataStore;
 
@@ -33,7 +32,7 @@ public class OfflineGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return DataStore.getBatchOfStoredCaches(searchCenter, Settings.getCacheType(), listId, filter, sort, sortInverse, limit);
+        return DataStore.getBatchOfStoredCaches(searchCenter, listId, filter, sort, sortInverse, limit);
     }
 
     /**

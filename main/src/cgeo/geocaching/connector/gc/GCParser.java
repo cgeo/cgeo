@@ -909,8 +909,7 @@ public final class GCParser {
     }
 
     @Nullable
-    private static SearchResult searchByAny(@NonNull final CacheType cacheType, final boolean my, final Parameters params) {
-        insertCacheType(params, cacheType);
+    private static SearchResult searchByAny(final boolean my, final Parameters params) {
 
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
         final Parameters paramsWithF = addFToParams(params, my);
@@ -928,26 +927,26 @@ public final class GCParser {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeArchivedCaches(), cacheType);
+        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeArchivedCaches());
 
         GCLogin.getInstance().getLoginStatus(page);
 
         return search;
     }
 
-    public static SearchResult searchByCoords(@NonNull final Geopoint coords, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByCoords(@NonNull final Geopoint coords) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(cacheType, false, params);
+        return searchByAny(false, params);
     }
 
-    static SearchResult searchByKeyword(@NonNull final String keyword, @NonNull final CacheType cacheType) {
+    static SearchResult searchByKeyword(@NonNull final String keyword) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(cacheType, false, params);
+        return searchByAny(false, params);
     }
 
     private static boolean isSearchForMyCaches(final String userName) {
@@ -958,7 +957,7 @@ public final class GCParser {
         return false;
     }
 
-    public static SearchResult searchByUsername(final String userName, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByUsername(final String userName) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -966,10 +965,10 @@ public final class GCParser {
 
         final Parameters params = new Parameters("ul", escapePlus(userName));
 
-        return searchByAny(cacheType, isSearchForMyCaches(userName), params);
+        return searchByAny(isSearchForMyCaches(userName), params);
     }
 
-    public static SearchResult searchByPocketQuery(final String pocketGuid, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByPocketQuery(final String pocketGuid) {
         if (StringUtils.isBlank(pocketGuid)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
@@ -977,17 +976,17 @@ public final class GCParser {
 
         final Parameters params = new Parameters("pq", pocketGuid);
 
-        return searchByAny(cacheType, false, params);
+        return searchByAny(false, params);
     }
 
-    public static SearchResult searchByOwner(final String userName, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByOwner(final String userName) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", escapePlus(userName));
-        return searchByAny(cacheType, isSearchForMyCaches(userName), params);
+        return searchByAny(isSearchForMyCaches(userName), params);
     }
 
     /**

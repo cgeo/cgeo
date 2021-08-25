@@ -2,7 +2,6 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -39,7 +38,6 @@ public class MapUtils {
         final boolean excludeDisabled = checkCacheFilters && Settings.isExcludeDisabledCaches();
         final boolean excludeArchived = checkCacheFilters && Settings.isExcludeArchivedCaches();
         final boolean excludeOfflineLog = checkCacheFilters && Settings.isExcludeOfflineLog();
-        final CacheType filterCacheType = checkCacheFilters ? null : (Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType());
 
         final GeocacheFilter filter = filterContext.get();
 
@@ -51,7 +49,7 @@ public class MapUtils {
         for (final Waypoint wp : waypoints) {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
-            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, filterCacheType) ||
+            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog) ||
                 !filter.filter(cache) ||
                 (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
                 (excludeWpParking && wpt == WaypointType.PARKING) ||
@@ -75,25 +73,22 @@ public class MapUtils {
         final boolean excludeArchived = Settings.isExcludeArchivedCaches();
         final boolean excludeOfflineLog = Settings.isExcludeOfflineLog();
 
-        final CacheType filterCacheType = Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType();
-
         // filtering required?
-        if (!excludeMine && !excludeFound && !excludeDisabled && !excludeArchived && !excludeOfflineLog && filterCacheType.equals(CacheType.ALL)) {
+        if (!excludeMine && !excludeFound && !excludeDisabled && !excludeArchived && !excludeOfflineLog) {
             return;
         }
         final List<Geocache> removeList = new ArrayList<>();
         for (final Geocache cache : caches) {
-            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, filterCacheType)) {
+            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog)) {
                 removeList.add(cache);
             }
         }
         caches.removeAll(removeList);
     }
 
-    private static boolean filterCache(final Geocache cache, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLog, final CacheType globalType) {
+    private static boolean filterCache(final Geocache cache, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLog) {
         return cache != null && (!excludeFound || !cache.isFound()) && (!excludeMine || !cache.isOwner()) && (!excludeDisabled || !cache.isDisabled()) && (!excludeArchived || !cache.isArchived()) &&
-            (!excludeOfflineLog || !cache.hasLogOffline()) &&
-            (globalType == null || globalType.equals(CacheType.ALL) || globalType.equals(cache.getType()));
+                (!excludeOfflineLog || !cache.hasLogOffline());
 
     }
 
@@ -104,9 +99,6 @@ public class MapUtils {
     @NonNull
     private static List<String> getActiveMapFilterNames(final GeocacheFilterContext filterContext) {
         final List<String> filters = new ArrayList<>();
-        if (Settings.getCacheType() != CacheType.ALL) {
-            filters.add(Settings.getCacheType().getL10n());
-        }
 
         final GeocacheFilter filter = filterContext.get();
         if (filter.isFiltering()) {

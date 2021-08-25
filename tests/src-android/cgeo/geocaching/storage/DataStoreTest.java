@@ -79,7 +79,7 @@ public class DataStoreTest extends CGeoTestCase {
 
             // move to list (cache1=listId2, cache2=listId2)
             DataStore.moveToList(Collections.singletonList(cache1), listId1, listId2);
-            assertThat(DataStore.getAllStoredCachesCount(CacheType.ALL, listId2)).isEqualTo(1);
+            assertThat(DataStore.getAllStoredCachesCount(listId2)).isEqualTo(1);
 
             // remove list (cache1=listId2, cache2=listId2)
             assertThat(DataStore.removeList(listId1)).isTrue();
@@ -89,7 +89,7 @@ public class DataStoreTest extends CGeoTestCase {
 
             // mark stored (cache1=1, cache2=listId2)
             DataStore.moveToList(Collections.singletonList(cache2), listId1, listId2);
-            assertThat(DataStore.getAllStoredCachesCount(CacheType.ALL, listId2)).isEqualTo(2);
+            assertThat(DataStore.getAllStoredCachesCount(listId2)).isEqualTo(2);
 
             // drop stored (cache1=0, cache2=0)
             DataStore.removeList(listId2);
@@ -120,7 +120,7 @@ public class DataStoreTest extends CGeoTestCase {
             final boolean excludeOfflineLogs = (i / 16) % 2 == 0;
             final CacheType cacheType = (i / 32) % 2 == 0 ? CacheType.ALL : CacheType.TRADITIONAL;
 
-            DataStore.loadWaypoints(viewport, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs, cacheType);
+            DataStore.loadWaypoints(viewport, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLogs);
         }
     }
 
@@ -215,7 +215,7 @@ public class DataStoreTest extends CGeoTestCase {
         // check that sum of types equals 'all'
         assertThat(allCaches).isEqualTo(sumCaches);
         // check that two different routines behave the same
-        assertThat(sumCaches).isEqualTo(DataStore.getAllStoredCachesCount(CacheType.ALL, PseudoList.HISTORY_LIST.id));
+        assertThat(sumCaches).isEqualTo(DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id));
     }
 
     public static void testCachedMissing() {
