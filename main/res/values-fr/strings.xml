@@ -1386,7 +1386,6 @@
     <string name="map_showc_found">Trouvées</string>
     <string name="map_showc_disabled">Désactivées</string>
     <string name="map_showc_archived">Archivées</string>
-    <string name="map_showc_offlinelog">Visitées hors ligne</string>
     <string name="map_showwp_original">Originales</string>
     <string name="map_showwp_parking">Stationnement</string>
     <string name="map_showwp_visited">Visitées</string>
