@@ -9,7 +9,6 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheType;
@@ -1765,12 +1764,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (coordType == CoordinatesType.CACHE && StringUtils.isNotBlank(waypoint.getGeocode())) {
             final Geocache cache = DataStore.loadCache(waypoint.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null) {
-                final RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache);
-                if (!requestDetailsThread.requestRequired()) {
-                    // don't show popup if we have enough details
-                    progress.dismiss();
-                }
-                requestDetailsThread.start();
+                CGeoMap.markCacheAsDirty(cache.getGeocode());
+                CachePopup.startActivityAllowTarget(activity, cache.getGeocode());
                 return;
             }
             progress.dismiss();
@@ -1808,29 +1803,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             }
         }
         return new WaypointDistanceInfo(name, minDistance);
-    }
-
-    private class RequestDetailsThread extends Thread {
-
-        @NonNull private final Geocache cache;
-
-        RequestDetailsThread(@NonNull final Geocache cache) {
-            this.cache = cache;
-        }
-
-        public boolean requestRequired() {
-            return cache.getType() == CacheType.UNKNOWN || cache.getDifficulty() == 0;
-        }
-
-        @Override
-        public void run() {
-            if (requestRequired()) {
-                GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
-            }
-            CGeoMap.markCacheAsDirty(cache.getGeocode());
-            CachePopup.startActivityAllowTarget(activity, cache.getGeocode());
-            progress.dismiss();
-        }
     }
 
     public Collection<Geocache> getCaches() {
