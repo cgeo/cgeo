@@ -181,11 +181,8 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     protected String getUserDisplayableConfig() {
-        final StringBuilder sb = new StringBuilder((minRangeValue == null ? "*" : minRangeValue) + "-" + (maxRangeValue == null ? "*" : maxRangeValue));
-        if (specialNumber != null && includeSpecialNumber != null) {
-            sb.append(includeSpecialNumber ? "+" : "^").append(specialNumber);
-        }
-        return sb.toString();
+        return UserDisplayableStringUtils.getUserDisplayableConfig(minRangeValue != null, maxRangeValue != null,
+                minRangeValue != null ? minRangeValue.toString() : "", maxRangeValue != null ? maxRangeValue.toString() : "");
     }
 
     private boolean isEqualValue(final T v1, final T v2) {

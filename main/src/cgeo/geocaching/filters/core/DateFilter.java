@@ -24,6 +24,8 @@ public class DateFilter {
     private static final DateFormat DAY_DATE_FORMAT = new SimpleDateFormat("yyyy-MM-dd", Locale.US);
     private static final DateFormat DAY_DATE_FORMAT_SQL = DAY_DATE_FORMAT;
 
+    public static final DateFormat DAY_DATE_FORMAT_USER_DISPLAY = DAY_DATE_FORMAT;
+
     private Date minDate;
     private Date maxDate;
     private boolean isRelative = false;
@@ -155,19 +157,14 @@ public class DateFilter {
         }
     }
 
-
     public String getUserDisplayableConfig() {
-        final StringBuilder sb = new StringBuilder();
-        if (isRelative) {
-            sb.append(minDateOffset == -1 ? "*" : Formatter.formatDaysAgo(minDateOffset));
-            sb.append("-");
-            sb.append(maxDateOffset == -1 ? "*" : Formatter.formatDaysAhead(maxDateOffset));
-        } else {
-            sb.append(minDate == null ? "*" : DAY_DATE_FORMAT.format(minDate));
-            sb.append("-");
-            sb.append(maxDate == null ? "*" : DAY_DATE_FORMAT.format(maxDate));
-        }
-        return sb.toString();
-    }
+        final boolean minDateSet = isRelative ? minDateOffset != -1 : minDate != null;
+        final boolean maxDateSet = isRelative ? maxDateOffset != -1 : maxDate != null;
 
+
+        final String minDateString = minDateSet ? (isRelative ? Formatter.formatDaysAgo(minDateOffset) : DAY_DATE_FORMAT_USER_DISPLAY.format(minDate)) : "";
+        final String maxDateString = maxDateSet ? (isRelative ? Formatter.formatDaysAgo(maxDateOffset) : DAY_DATE_FORMAT_USER_DISPLAY.format(maxDate)) : "";
+
+        return UserDisplayableStringUtils.getUserDisplayableConfig(minDateSet, maxDateSet, minDateString, maxDateString);
+    }
 }

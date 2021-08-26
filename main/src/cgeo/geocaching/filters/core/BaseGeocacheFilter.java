@@ -44,7 +44,7 @@ public abstract class BaseGeocacheFilter implements IGeocacheFilter {
         if (level <= 2) {
             final String userDisplayValue = getUserDisplayableConfig();
             if (userDisplayValue != null) {
-                sb.append(":").append(userDisplayValue);
+                sb.append(": ").append(userDisplayValue);
             }
         }
         return sb.toString();

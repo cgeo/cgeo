@@ -472,7 +472,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         if (status != null) {
             if (cnt < USERDISPLAY_MAXELEMENTS) {
                 if (cnt > 0) {
-                    sb.append(",");
+                    sb.append(", ");
                 }
                 sb.append(LocalizationUtils.getString(statusType.labelId)).append("=")
                         .append(LocalizationUtils.getString(status ? R.string.cache_filter_status_select_yes : R.string.cache_filter_status_select_no));
@@ -486,7 +486,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         if (status) {
             if (cnt < USERDISPLAY_MAXELEMENTS) {
                 if (cnt > 0) {
-                    sb.append(",");
+                    sb.append(", ");
                 }
                 sb.append(LocalizationUtils.getString(textId));
             }

@@ -40,6 +40,6 @@ public class OrGeocacheFilter extends LogicalGeocacheFilter {
 
     @Override
     public String getUserDisplayableType() {
-        return "^";
+        return " ^ ";
     }
 }
