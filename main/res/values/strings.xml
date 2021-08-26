@@ -524,6 +524,8 @@
     <string name="cache_filter_storage_clear_button">Clear</string>
     <string name="cache_filter_storage_load_delete_title">Load or delete an existing filter</string>
     <string name="cache_filter_storage_select_title">Select filter</string>
+    <string name="cache_filter_storage_delete_title">Delete filter</string>
+    <string name="cache_filter_storage_delete_message">Do you really want to delete this filter config?</string>
     <string name="cache_filter_storage_select_clear_title">Select filter or clear current filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">No filter are stored yet.</string>
     <string name="cache_filter_storage_save_title">Save filter with name</string>

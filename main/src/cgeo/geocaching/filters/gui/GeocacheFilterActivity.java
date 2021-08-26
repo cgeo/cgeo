@@ -17,6 +17,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.Log;
@@ -154,24 +155,28 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         //handling of "load/delete" button
         binding.filterStorageManage.setOnClickListener(v -> {
-                final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
+            final List<GeocacheFilter> filters = new ArrayList<>(GeocacheFilter.Storage.getStoredFilters());
 
-                if (filters.isEmpty()) {
-                    SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title).setMessage(R.string.cache_filter_storage_load_delete_nofilter_message).show();
-                } else {
-                    SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title)
-                        .setButtons(R.string.cache_filter_storage_load_button, R.string.cache_filter_storage_delete_button, 0)
-                        .selectSingle(filters, (f, i) -> TextParam.text(f.getName()), -1, true,
-                            (f, pos) -> fillViewFromFilter(f.toConfig(), isAdvancedView()),
-                            (f, pos) -> {
-                                GeocacheFilter.Storage.delete(f);
-                                //if currently shown view was just deleted -> then delete it in view as well
-                                if (f.getName().contentEquals(binding.filterStorageName.getText())) {
-                                    binding.filterStorageName.setText("");
-                                }
-                            });
-               }
-            });
+            if (filters.isEmpty()) {
+                SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_load_delete_title).setMessage(R.string.cache_filter_storage_load_delete_nofilter_message).show();
+            } else {
+                Dialogs.selectItemDialogWithAdditionalDeleteButton(this, R.string.cache_filter_storage_load_delete_title,
+                        filters, (f) -> TextParam.text(f.getName()),
+                        // select listener
+                        (f) -> fillViewFromFilter(f.toConfig(), isAdvancedView()),
+                        // delete listener
+                        (f) -> SimpleDialog.of(this).setTitle(R.string.cache_filter_storage_delete_title)
+                                .setMessage(R.string.cache_filter_storage_delete_message)
+                                .confirm((dialog, which) -> {
+                                    GeocacheFilter.Storage.delete(f);
+                                    //if currently shown view was just deleted -> then delete it in view as well
+                                    if (f.getName().contentEquals(binding.filterStorageName.getText())) {
+                                        binding.filterStorageName.setText("");
+                                    }
+                                })
+                );
+            }
+        });
         ViewUtils.setTooltip(binding.filterStorageManage, TextParam.id(R.string.cache_filter_storage_load_delete_title));
 
     }

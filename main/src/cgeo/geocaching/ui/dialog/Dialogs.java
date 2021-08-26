@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -20,9 +21,12 @@ import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,6 +45,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
@@ -198,6 +203,46 @@ public final class Dialogs {
         if (context instanceof Activity) {
             alertDialog.setOwnerActivity((Activity) context);
         }
+    }
+
+    /**
+     * Show a select dialog with additional delete item button
+     */
+    public static <T> void selectItemDialogWithAdditionalDeleteButton(final Context context, final @StringRes int title, @NonNull final List<T> items, @NotNull final Func1<T, TextParam> displayMapper, final Action1<T> onSelectListener, final Action1<T> onDeleteListener) {
+        final AlertDialog.Builder builder = Dialogs.newBuilder(context).setTitle(title);
+        final AlertDialog[] dialog = new AlertDialog[] { null };
+
+        final ListAdapter adapter = new ArrayAdapter<T>(context, R.layout.select_or_delete_item, android.R.id.text1, items) {
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
+                //Use super class to create the View.
+                final View v = super.getView(position, convertView, parent);
+
+                // set text
+                final TextView tv = v.findViewById(android.R.id.text1);
+                displayMapper.call(getItem(position)).applyTo(tv);
+
+                // register delete listener
+                final View deleteButton = v.findViewById(R.id.delete);
+                deleteButton.setOnClickListener(v1 -> {
+                    onDeleteListener.call(items.get(position));
+
+                    // dismiss dialog
+                    if (dialog[0] != null) {
+                        dialog[0].dismiss();
+                    }
+                });
+                return v;
+            }
+        };
+
+        builder.setSingleChoiceItems(adapter, -1, (d, pos) -> {
+            d.dismiss();
+            onSelectListener.call(items.get(pos));
+        });
+
+        dialog[0] = builder.create();
+        dialog[0].show();
+
     }
 
 
