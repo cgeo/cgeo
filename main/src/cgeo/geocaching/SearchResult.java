@@ -218,7 +218,7 @@ public class SearchResult implements Parcelable {
         this.totalCountGC = totalCountGC;
     }
 
-    public SearchResult filterSearchResults() {
+    public SearchResult putInCacheAndLoadRating() {
         final SearchResult result = new SearchResult(this);
         result.geocodes.clear();
         final Set<Geocache> caches = DataStore.loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);

@@ -894,7 +894,7 @@ public final class GCParser {
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults();
+        final SearchResult search = searchResult.putInCacheAndLoadRating();
 
         GCLogin.getInstance().getLoginStatus(page);
 

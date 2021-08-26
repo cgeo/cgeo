@@ -4,7 +4,6 @@ import cgeo.CGeoTestCase;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.Tile;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.list.PseudoList;
@@ -191,21 +190,11 @@ public class DataStoreTest extends CGeoTestCase {
     }
 
     public static void testLoadCacheHistory() {
-        int sumCaches = 0;
-        int allCaches = 0;
-        for (final CacheType cacheType : CacheType.values()) {
-            final SearchResult historyOfType = DataStore.getBatchOfStoredCaches(null, cacheType, PseudoList.HISTORY_LIST.id);
-            assertThat(historyOfType).isNotNull();
-            if (cacheType != CacheType.ALL) {
-                sumCaches += historyOfType.getCount();
-            } else {
-                allCaches = historyOfType.getCount();
-            }
-        }
-        // check that sum of types equals 'all'
-        assertThat(allCaches).isEqualTo(sumCaches);
+        final SearchResult history = DataStore.getBatchOfStoredCaches(null, PseudoList.HISTORY_LIST.id);
+        assertThat(history).isNotNull();
+
         // check that two different routines behave the same
-        assertThat(sumCaches).isEqualTo(DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id));
+        assertThat(history.getCount()).isEqualTo(DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id));
     }
 
     public static void testCachedMissing() {

@@ -4473,7 +4473,7 @@ public class DataStore {
     }
 
     @NonNull
-    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final CacheType cacheType, final int listId) {
+    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final int listId) {
         return getBatchOfStoredCaches(coords, listId, null, null, false, -1);
     }
 

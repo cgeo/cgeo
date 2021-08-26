@@ -247,7 +247,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         withMockedFilters(() -> {
             final SearchResult search = GCParser.searchByOwner("Lineflyer");
             assertThat(search).isNotNull();
-            assertThat(search.getGeocodes()).hasSize(6);
+            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
             assertThat(search.getGeocodes()).contains("GC7J99X");
         });
     }
@@ -260,8 +260,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
         withMockedFilters(() -> {
             final SearchResult search = GCParser.searchByUsername("blafoo");
             assertThat(search).isNotNull();
-            assertThat(search.getTotalCountGC()).isEqualTo(10);
-            assertThat(search.getGeocodes()).contains("GCP0A9");
+            // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.
+            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
         });
     }
 
