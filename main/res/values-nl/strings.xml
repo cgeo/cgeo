@@ -538,6 +538,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Heeft Trackable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Heeft eigen stem</string>
     <string name="cache_filter_status_select_label_has_offline_log">Heeft offline log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
@@ -1387,6 +1388,7 @@
     <string name="map_showc_found">Gevonden</string>
     <string name="map_showc_disabled">Uitgeschakeld</string>
     <string name="map_showc_archived">Gearchiveerd</string>
+    <string name="map_showc_found_offline">Gevonden (offline)</string>
     <string name="map_showwp_original">Origineel</string>
     <string name="map_showwp_parking">Parkeerplaats</string>
     <string name="map_showwp_visited">Bezocht</string>
