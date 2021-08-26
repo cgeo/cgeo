@@ -542,6 +542,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Má trackovatelný předmět</string>
     <string name="cache_filter_status_select_label_has_own_vote">Má vlastní hlas</string>
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
@@ -1409,6 +1410,7 @@
     <string name="map_showc_found">Nalezené</string>
     <string name="map_showc_disabled">Deaktivované</string>
     <string name="map_showc_archived">Archivované</string>
+    <string name="map_showc_found_offline">Nalezeno (offline)</string>
     <string name="map_showwp_original">Původní</string>
     <string name="map_showwp_parking">Parkování</string>
     <string name="map_showwp_visited">Navštívené</string>
