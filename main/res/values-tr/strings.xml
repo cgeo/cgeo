@@ -538,6 +538,7 @@
     <string name="cache_filter_status_select_label_has_trackable">İçinde TB Olan</string>
     <string name="cache_filter_status_select_label_has_own_vote">Puanlama Girilmiş</string>
     <string name="cache_filter_status_select_label_has_offline_log">Çevrimdışı Kayıt Girilmiş</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Çevrımdışı Buldum Kaydı Olan</string>
     <string name="cache_filter_status_select_label_solved_mystery">Çözülmüş Gizemli</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Bu filtre ayarı sadece Gizemli cache\'ler için çalışır.\n\nEğer bir Gizemli cache\'in koordinatları değiştirilmişse veya geçerli bir yol noktasına koordinat girilmişse \'Çözülmüş\' olarak kabul edilir.</string>
     <string name="cache_filter_status_active">Aktif</string>
@@ -1387,6 +1388,7 @@
     <string name="map_showc_found">Bulduğum</string>
     <string name="map_showc_disabled">Devredışı</string>
     <string name="map_showc_archived">Arşivlendi</string>
+    <string name="map_showc_found_offline">Buldum (Çevrimdışı)</string>
     <string name="map_showwp_original">Orijinal</string>
     <string name="map_showwp_parking">Park alanı</string>
     <string name="map_showwp_visited">Ziyaret edildi</string>
