@@ -477,7 +477,6 @@
     <string name="cache_filter_location">Miesto</string>
     <string name="cache_filter_stored_lists">Uložené zoznamy</string>
     <string name="cache_filter_origin">Pôvod</string>
-    <string name="cache_filter_stored_since">Uložené od</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
