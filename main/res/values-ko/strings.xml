@@ -480,7 +480,6 @@
     <string name="cache_filter_location">위치</string>
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
-    <string name="cache_filter_stored_since">이후 저장</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
