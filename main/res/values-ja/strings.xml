@@ -480,7 +480,6 @@
     <string name="cache_filter_location">所在地</string>
     <string name="cache_filter_stored_lists">保存済みリスト</string>
     <string name="cache_filter_origin">公開元</string>
-    <string name="cache_filter_stored_since">保存日時</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
