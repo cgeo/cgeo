@@ -481,7 +481,7 @@
     <string name="cache_filter_location">Ort</string>
     <string name="cache_filter_stored_lists">Gespeicherte Listen</string>
     <string name="cache_filter_origin">Herkunft</string>
-    <string name="cache_filter_stored_since">Gespeichert seit</string>
+    <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
@@ -538,6 +538,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Hat Trackable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Hat eigene Wertung</string>
     <string name="cache_filter_status_select_label_has_offline_log">Hat Offline-Log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Hat Offline-Gefunden-Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Gelöster Mystery</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Diese Filtereinstellung wirkt sich nur auf Mysteries aus.\n\n Ein Mystery gilt als \'gelöst\', wenn entweder die Koordinaten geändert wurden oder ein gültiger Final-Wegpunkt mit gefüllten Koordinaten vorhanden ist.</string>
     <string name="cache_filter_status_active">Aktiv</string>
@@ -1387,6 +1388,7 @@
     <string name="map_showc_found">Gefundene</string>
     <string name="map_showc_disabled">Deaktivierte</string>
     <string name="map_showc_archived">Archivierte</string>
+    <string name="map_showc_found_offline">Gefunden (Offline)</string>
     <string name="map_showwp_original">Originale</string>
     <string name="map_showwp_parking">Parken</string>
     <string name="map_showwp_visited">Besuchte</string>
