@@ -482,7 +482,6 @@
     <string name="cache_filter_location">Ubicació</string>
     <string name="cache_filter_stored_lists">Llistes emmagatzemades</string>
     <string name="cache_filter_origin">Origen</string>
-    <string name="cache_filter_stored_since">Desat des de</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
     <string name="cache_filtergroup_userspecific">Específic de l\'usuari</string>
