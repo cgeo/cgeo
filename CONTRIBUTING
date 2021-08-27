@@ -1,0 +1,7 @@
+First of all:
+👍🎉  thanks for taking the time to contribute to c:geo! 🎉👍
+
+There are many ways to help us, e.g. write issues, translate c:geo on crowdin or help actively maintaining the code base.
+
+Before opening a PR, please read our [coding](https://github.com/cgeo/cgeo/wiki/Coding-Conventions) and [design](https://github.com/cgeo/cgeo/wiki/Themes%2C-styles-and-other-conventions) conventions.
+We do know, that we don't follow all conventions in c:geo our selves, but that's due to the fact that c:geo has grown since over 10 years now. As we are only a small team, we unfortunately don't have time to clean up all places which had existed before we agreed on those conventions. Please always try to leave the code a little cleaner than you have found it. ;-)
