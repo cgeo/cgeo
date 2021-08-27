@@ -1,7 +1,6 @@
 package cgeo.geocaching.filters;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
@@ -72,7 +71,7 @@ public class GeocacheFilterTestUtils {
         final SearchResult sr;
         try {
             DataStore.storeIntoDatabase(cache);
-            sr = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, -1, gcFilter, null, false, 1);
+            sr = DataStore.getBatchOfStoredCaches(null, -1, gcFilter, null, false, 1);
 
         } finally {
             DataStore.removeCache(cache.getGeocode(), EnumSet.of(LoadFlags.RemoveFlag.CACHE, LoadFlags.RemoveFlag.DB));
