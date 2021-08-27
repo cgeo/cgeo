@@ -481,7 +481,6 @@
     <string name="cache_filter_location">Τοποθεσία</string>
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filter_origin">Προέλευση</string>
-    <string name="cache_filter_stored_since">Αποθηκεύτηκε από</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
