@@ -481,7 +481,6 @@
     <string name="cache_filter_location">Konum</string>
     <string name="cache_filter_stored_lists">Saklanan Listeler</string>
     <string name="cache_filter_origin">Orijin</string>
-    <string name="cache_filter_stored_since">Depolandığı tarih</string>
     <string name="cache_filtergroup_basic">Temel</string>
     <string name="cache_filtergroup_details">Detaylar</string>
     <string name="cache_filtergroup_userspecific">Kullanıcıya özgün</string>
