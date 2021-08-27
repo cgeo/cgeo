@@ -1,7 +1,6 @@
 package cgeo.geocaching.filters;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.AndGeocacheFilter;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
@@ -13,6 +12,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.functions.Action1;
+
+import android.util.Pair;
 
 import java.util.EnumSet;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -29,7 +30,9 @@ public class GeocacheFilterTestUtils {
         //no instance for utils
     }
 
-    /** Standard method. Tests for a given cache and filter whether it is correctly filtered via logic AND DB! */
+    /**
+     * Standard method. Tests for a given cache and filter whether it is correctly filtered via logic AND DB!
+     */
     public static <T extends BaseGeocacheFilter> void testSingle(final GeocacheFilterType type, final Action1<Geocache> cacheSetter, final Action1<T> filterSetter, final Boolean expectedResult) {
         testSingleLogic(type, cacheSetter, filterSetter, expectedResult);
         testSingleDb(type, cacheSetter, filterSetter, expectedResult);
@@ -42,11 +45,8 @@ public class GeocacheFilterTestUtils {
     }
 
     public static <T extends BaseGeocacheFilter> boolean testSingleLogic(final GeocacheFilterType type, final Action1<Geocache> cacheSetter, final Action1<T> filterSetter, final Boolean expectedResult) {
-        final T filter = type.create();
-        filterSetter.call(filter);
-        final Geocache cache = new Geocache();
-        cacheSetter.call(cache);
-        return testSingleLogic(cache, filter, expectedResult);
+        final Pair<Geocache, T> data = prepareData(type, cacheSetter, filterSetter);
+        return testSingleLogic(data.first, data.second, expectedResult);
     }
 
     public static <T extends BaseGeocacheFilter> boolean testSingleDb(final GeocacheFilterType type, final Action1<Geocache> cacheSetter, final Action1<T> filterSetter, final Boolean expectedResult) {
@@ -54,10 +54,9 @@ public class GeocacheFilterTestUtils {
             return false;
         }
 
-        final T filter = type.create();
-        filterSetter.call(filter);
-        final Geocache cache = new Geocache();
-        cacheSetter.call(cache);
+        final Pair<Geocache, T> data = prepareData(type, cacheSetter, filterSetter);
+        final Geocache cache = data.first;
+        final T filter = data.second;
 
         final String geocode = "GCFILTERTEST" + DB_CACHE_INDEX.addAndGet(1);
         cache.setGeocode(geocode);
@@ -72,7 +71,7 @@ public class GeocacheFilterTestUtils {
         final SearchResult sr;
         try {
             DataStore.storeIntoDatabase(cache);
-            sr = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, -1, gcFilter, null, false, 1);
+            sr = DataStore.getBatchOfStoredCaches(null, -1, gcFilter, null, false, 1);
 
         } finally {
             DataStore.removeCache(cache.getGeocode(), EnumSet.of(LoadFlags.RemoveFlag.CACHE, LoadFlags.RemoveFlag.DB));
@@ -92,7 +91,18 @@ public class GeocacheFilterTestUtils {
         assertThat(result).as(descr).isEqualTo(expectedResult);
 
         return result;
-
-
     }
+
+    private static <T extends BaseGeocacheFilter> Pair<Geocache, T> prepareData(final GeocacheFilterType type, final Action1<Geocache> cacheSetter, final Action1<T> filterSetter) {
+        final T filter = type.create();
+        if (filterSetter != null) {
+            filterSetter.call(filter);
+        }
+        final Geocache cache = new Geocache();
+        if (cacheSetter != null) {
+            cacheSetter.call(cache);
+        }
+        return new Pair<>(cache, filter);
+    }
+
 }

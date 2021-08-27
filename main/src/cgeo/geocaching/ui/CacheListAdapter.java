@@ -4,7 +4,6 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CacheslistItemBinding;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
 import cgeo.geocaching.location.Geopoint;
@@ -61,7 +60,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private float azimuth = 0;
     private long lastSort = 0L;
     private boolean selectMode = false;
-    private IFilter currentFilter = null;
     private GeocacheFilter currentGeocacheFilter = null;
     private List<Geocache> originalList = null;
     private final boolean isLiveList = Settings.isLiveList();
@@ -216,7 +214,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     /**
      * Called after a user action on the filter menu.
      */
-    public void setFilter(final IFilter filter, final GeocacheFilter advancedFilter) {
+    public void setFilter(final GeocacheFilter advancedFilter) {
 
         GeocacheFilter gcFilter = null;
         if (advancedFilter != null) {
@@ -235,7 +233,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             list.addAll(originalList);
         }
 
-        currentFilter = filter;
         currentGeocacheFilter = gcFilter;
 
         performFiltering();
@@ -245,22 +242,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     private void performFiltering() {
         // Do the filtering or clear it
-        if (currentFilter != null) {
-            currentFilter.filter(list);
-        }
         if (currentGeocacheFilter != null && currentGeocacheFilter.isFiltering()) {
             currentGeocacheFilter.filterList(list);
         }
     }
 
     public boolean hasActiveFilter() {
-        final boolean newFilterFilters = currentGeocacheFilter != null && currentGeocacheFilter.isFiltering();
-        return currentFilter != null || newFilterFilters;
+        return currentGeocacheFilter != null && currentGeocacheFilter.isFiltering();
     }
 
     public String getFilterName() {
-        return (currentFilter == null ? "-" : currentFilter.getName()) + "|" +
-            (currentGeocacheFilter == null || !currentGeocacheFilter.isFiltering() ? "-" : currentGeocacheFilter.toUserDisplayableString());
+        return hasActiveFilter() ? "-" : currentGeocacheFilter.toUserDisplayableString();
     }
 
     public int getCheckedCount() {
@@ -653,7 +645,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     private void checkEvents() {
-        eventsOnly = list.isEmpty() ? false : true;
+        eventsOnly = !list.isEmpty();
         for (final Geocache cache : list) {
             if (!cache.isEventCache()) {
                 eventsOnly = false;
@@ -677,11 +669,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             names.add(name);
             reverseNames.add(StringUtils.reverse(name));
         }
-        final String commonPrefix = StringUtils.getCommonPrefix(names.toArray(new String[names.size()]));
+        final String commonPrefix = StringUtils.getCommonPrefix(names.toArray(new String[0]));
         if (StringUtils.length(commonPrefix) >= MIN_COMMON_CHARACTERS_SERIES) {
             series = true;
         } else {
-            final String commonSuffix = StringUtils.getCommonPrefix(reverseNames.toArray(new String[reverseNames.size()]));
+            final String commonSuffix = StringUtils.getCommonPrefix(reverseNames.toArray(new String[0]));
             if (StringUtils.length(commonSuffix) >= MIN_COMMON_CHARACTERS_SERIES) {
                 series = true;
             }

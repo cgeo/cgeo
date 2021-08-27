@@ -12,13 +12,6 @@
         android:icon="@drawable/ic_menu_filter"
         android:title="@string/caches_filter_menuitem"
         app:showAsAction="ifRoom|withText"/>
-    <!-- Remove legacy filter for upcoming beta
-    <item
-        android:id="@+id/menu_filter_legacy"
-        android:icon="@drawable/ic_menu_filter"
-        android:title="@string/caches_filter"
-        app:showAsAction="ifRoom|withText"/>
-        -->
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_menu_sort_alphabetically"
