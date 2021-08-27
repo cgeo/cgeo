@@ -401,9 +401,14 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         this.binding.filterPropsCheckboxesLine.setVisibility(View.VISIBLE);
         this.binding.filterAdditem.setVisibility(View.VISIBLE);
 
-        for (int pos = 0; pos < filterListAdapter.getItemCount(); pos++) {
+        // start with the highest index, as we will remove all filters which are not actively filtering
+        for (int pos = filterListAdapter.getItemCount() - 1; pos >= 0; pos--) {
             final ItemHolder itemHolder = (ItemHolder) this.binding.filterList.findViewHolderForLayoutPosition(pos);
             if (itemHolder != null) {
+                if (!itemHolder.getFilterViewHolder().createFilterFromView().isFiltering()) {
+                    this.filterListAdapter.removeItem(pos);
+                    continue;
+                }
                 itemHolder.setControlsEnabled(true);
                 if (itemHolder.getFilterViewHolder().isOf(StatusFilterViewHolder.class)) {
                     itemHolder.getFilterViewHolder().castTo(StatusFilterViewHolder.class).setSimpleView(false);
