@@ -481,7 +481,7 @@
     <string name="cache_filter_location">Sijainti</string>
     <string name="cache_filter_stored_lists">Tallennetut listat</string>
     <string name="cache_filter_origin">Alkuperä</string>
-    <string name="cache_filter_stored_since">Tallennettuna</string>
+    <string name="cache_filter_stored_since">Viimeisin yksityiskohtien päivitys</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
@@ -538,6 +538,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Sisältää reissaajan</string>
     <string name="cache_filter_status_select_label_has_own_vote">Sisältää oman äänen</string>
     <string name="cache_filter_status_select_label_has_offline_log">Sisältää offline-lokin</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Sisältää offline-tilassa kirjatun löydön</string>
     <string name="cache_filter_status_select_label_solved_mystery">Ratkaistu mysteeri</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Tämä suodatinasetus vaikuttaa vain mysteerikätköihin\n\n Mysteeri oletetaan olevan \'ratkaistu\' jos sillä on joko muutetut koordinaatit tai pätevä koordinaatit sisältävä viimeinen reittipiste.</string>
     <string name="cache_filter_status_active">Aktiivinen</string>
@@ -1387,6 +1388,7 @@
     <string name="map_showc_found">Löydetty</string>
     <string name="map_showc_disabled">Ei käytössä</string>
     <string name="map_showc_archived">Arkistoitu</string>
+    <string name="map_showc_found_offline">Löydetty (offline)</string>
     <string name="map_showwp_original">Alkuperäinen</string>
     <string name="map_showwp_parking">Pysäköinti</string>
     <string name="map_showwp_visited">Vierailtu</string>
