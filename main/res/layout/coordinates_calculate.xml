@@ -69,7 +69,7 @@
         <TextView
             android:id="@+id/LatDegChar"
             android:text="°"
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
 
@@ -83,7 +83,7 @@
         <TextView
             android:id="@+id/LatMinChar"
             android:text="'"
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
 
@@ -97,7 +97,7 @@
         <TextView
             android:id="@+id/LatPointChar"
             android:text="."
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             app:layout_gravity="center_vertical|left"
             android:layout_marginLeft="0dp"
             android:layout_marginRight="0dp"
@@ -121,7 +121,7 @@
         <TextView
             android:id="@+id/LatLastUnitsChar"
             android:text='"'
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
 
@@ -149,7 +149,7 @@
         <TextView
             android:id="@+id/LonDegChar"
             android:text="°"
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
 
@@ -163,7 +163,7 @@
         <TextView
             android:id="@+id/LonMinChar"
             android:text="'"
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
 
@@ -177,7 +177,7 @@
         <TextView
             android:id="@+id/LonPointChar"
             android:text="."
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             app:layout_gravity="center_vertical"
             tools:ignore="HardcodedText" />
 
@@ -200,7 +200,7 @@
         <TextView
             android:id="@+id/LonLastUnitsChar"
             android:text='"'
-            android:textSize="@dimen/textSize_calculator"
+            android:textSize="@dimen/textSize_inputCoords"
             android:layout_marginRight="1dp"
             tools:ignore="HardcodedText" />
     </androidx.gridlayout.widget.GridLayout>

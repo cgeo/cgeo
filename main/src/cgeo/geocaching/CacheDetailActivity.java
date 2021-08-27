@@ -13,6 +13,7 @@ import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.IVotingCapability;
@@ -20,7 +21,6 @@ import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
@@ -1658,7 +1658,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // extra description
             final String geocode = cache.getGeocode();
-            boolean hasExtraDescription = LCConnector.getInstance().canHandle(geocode); // could be generalized, but currently it's only LC
+            boolean hasExtraDescription = ALConnector.getInstance().canHandle(geocode); // could be generalized, but currently it's only AL
             if (hasExtraDescription) {
                 final IConnector conn = ConnectorFactory.getConnector(geocode);
                 if (conn != null) {
@@ -1842,7 +1842,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     descriptionView.setVisibility(View.VISIBLE);
                     activity.addContextMenu(descriptionView);
-                    activity.potentiallyHideShortDescription();
+                    // TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
+                    //activity.potentiallyHideShortDescription();
                 }
                 if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
@@ -1903,6 +1904,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     /**
      * Hide the short description, if it is contained somewhere at the start of the long description.
      */
+    /** TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
     public void potentiallyHideShortDescription() {
         final View shortView = findViewById(R.id.description);
         if (shortView == null) {
@@ -1920,6 +1922,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
     }
+    */
 
     private void ensureSaved() {
         if (!cache.isOffline()) {

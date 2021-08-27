@@ -8,7 +8,6 @@ import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.mapsforge.v6.MapHandlers;
 import cgeo.geocaching.maps.mapsforge.v6.NewMap;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.Log;
 
@@ -85,7 +84,7 @@ public class StoredCachesOverlay extends AbstractCachesOverlay {
         try {
             showProgress();
 
-            final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(getViewport().resize(1.2), Settings.getCacheType()));
+            final SearchResult searchResult = new SearchResult(DataStore.loadCachedInViewport(getViewport().resize(1.2)));
 
             final Set<Geocache> cachesFromSearchResult = searchResult.getCachesFromSearchResult(LoadFlags.LOAD_WAYPOINTS);
 

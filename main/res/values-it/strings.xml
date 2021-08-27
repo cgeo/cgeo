@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Dettagli</string>
@@ -37,7 +38,7 @@
     <string name="userdefined">Cache definito dall\'utente</string>
     <string name="unknown">Tipo sconosciuto</string>
     <string name="all_types_short">Tutti</string>
-    <string name="traditional_short">Tradizionale</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -178,7 +179,9 @@
     <string name="log_problem_archive_label">Questo cache dovrebbe essere archiviato</string>
     <string name="log_problem_archive_text">Questo geocacher ha segnalato che il cache dovrebbe essere archiviato. Un recensore volontario della community ha ricevuto una notifica.</string>
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">Ridotta</string>
+    <string name="log_image_info_notscaled">non ridotta</string>
     <string name="log_image_titleprefix">Immagine</string>
     <string name="datetime_clear_button">Resetta</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
@@ -326,6 +329,7 @@
     <string name="menu_scan_geo">Scansiona geocode</string>
     <string name="menu_lists_pocket_queries">Liste / pocket query</string>
     <string name="menu_scan_description">c:geo può eseguire una scansione di geocodes stampati oppure di immagini QR code. L\'applicazione necessaria non è installata. Desideri aprire Google Play per installarla?</string>
+    <string name="menu_invert_order">Inverti ordine</string>
     <!-- main screen -->
     <string name="live_map_button">Mappa</string>
     <string name="caches_nearby_button">Vicini</string>
@@ -464,6 +468,8 @@
     <string name="cache_filter_owner">Proprietario Cache</string>
     <string name="cache_filter_difficulty">Difficoltà</string>
     <string name="cache_filter_terrain">Terreno</string>
+    <string name="cache_filter_difficulty_terrain">Difficoltà/Terreno</string>
+    <string name="cache_filter_rating">Voto</string>
     <string name="cache_filter_status">Stato</string>
     <string name="cache_filter_attributes">Attributi Cache</string>
     <string name="cache_filter_favorites">Preferiti</string>
@@ -493,7 +499,10 @@
     </plurals>
     <string name="cache_filter_storage_load_button">Carica</string>
     <string name="cache_filter_storage_delete_button">Elimina</string>
+    <string name="cache_filter_storage_clear_button">Azzera</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
+    <string name="cache_filter_storage_select_title">Seleziona filtro</string>
+    <string name="cache_filter_storage_select_clear_title">Seleziona filtro o azzera filtro corrente</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
     <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
     <string name="cache_filter_storage_save_confirm_title">Salva filtro con sovrascrittura</string>
@@ -511,6 +520,7 @@
     <string name="cache_filter_datefilter_label_to">A:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Seleziona tutto</string>
     <string name="cache_filter_checkboxlist_add_items">Aggiungi altri elementi</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Aggiungi tutti gli elementi</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Aggiungi elementi</string>
     <string name="cache_filter_favorites_absolute">Assoluto</string>
     <string name="cache_filter_favorites_percentage">Percentuale</string>
@@ -639,9 +649,7 @@
     <string name="settings_category_social">Social media</string>
     <string name="settings_category_logging_other">Altre opzioni di log</string>
     <string name="settings_goto_url_button">altro …</string>
-    <string name="settings_activate_gc">Attiva</string>
-    <string name="settings_activate_ec">Attiva</string>
-    <string name="settings_activate_lc">Attiva</string>
+    <string name="settings_service_activate">Attiva</string>
     <string name="settings_gc_legal_note">Per usare i servizi di Geocaching.com, si applicano i termini e le condizioni del Contratto Groundspeak che deve essere approvato dall\'utente.</string>
     <string name="settings_info_facebook_login_title">Accedi tramite Facebook o Google</string>
     <string name="settings_info_facebook_login">Con il tuo account Facebook o Google non puoi fare login su geocaching.com. Ma c\'è una semplice alternativa…</string>
@@ -652,30 +660,22 @@
     <string name="settings_su_description">Autorizza c:geo per cercare cache su geocaching,su.</string>
     <string name="settings_lc_description">Includi i cache di Adventure Lab sulla mappa.\n\n(Disponibile solo per i membri premium \"Geocaching.com\". Richiede un servizio \"Geocaching.com\" attivato.)\n\nLa modifica di questa impostazione richiede un riavvio.</string>
     <string name="lc_default_description">Questo è un cache Adventure Lab di geocaching.com. Le Adventure possono essere giocate solo con l\'app Adventure Lab di Groundspeak. Tocca l\'icona di Adventure Lab sulla pagina \"Dettagli\" per aprire/installare l\'app Adventure Lab per questa Adventure.\nSe non vuoi visualizzare e cercare i cache Adenture Lab sulla tua mappa, è possibile disattivarli utilizzando il menu \"impostazioni\" - Servizi - Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Attiva</string>
     <string name="init_summary_oc_de">Carica cache da opencaching.de</string>
     <string name="init_oc_de_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.de</string>
-    <string name="settings_activate_oc_pl">Attiva</string>
     <string name="init_summary_oc_pl">Carica cache da opencaching.pl</string>
     <string name="init_oc_pl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.pl.</string>
-    <string name="settings_activate_oc_nl">Attiva</string>
     <string name="init_summary_oc_nl">Carica cache da opencaching.nl</string>
     <string name="init_oc_nl_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.nl.</string>
-    <string name="settings_activate_oc_us">Attiva</string>
     <string name="init_summary_oc_us">Carica cache da opencaching.us</string>
     <string name="init_oc_us_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.us.</string>
-    <string name="settings_activate_oc_ro">Attiva</string>
     <string name="init_summary_oc_ro">Carica cache da opencaching.ro</string>
     <string name="init_oc_ro_description">Autorizza c:geo a cercare cache ed accedere/filtrare i ritrovamenti su opencaching.ro.</string>
-    <string name="settings_activate_oc_uk">Attiva</string>
     <string name="init_summary_oc_uk">Carica cache da opencache.uk</string>
     <string name="init_oc_uk_description">Autorizza c:geo a cercare cache su opencache.uk.</string>
     <string name="init_summary_su">Carica cache da Geocaching.su</string>
-    <string name="settings_activate_su">Attiva</string>
     <string name="init_gcvote_password_description">Per poter votare un cache, è necessario seguire le istruzioni di GCVote.com e inserire la password di GCVote qui.</string>
     <string name="err_vote_send_rating">Errore durante l\'invio della valutazione.</string>
     <string name="vote_sent">Voto inviato correttamente</string>
-    <string name="settings_activate_twitter">Attiva</string>
     <string name="init_login_popup">Accesso</string>
     <string name="init_login_popup_working">Logging…</string>
     <string name="init_login_popup_ok">Accesso OK</string>
@@ -687,6 +687,7 @@
     <string name="init_authorization_credential_username">Utente</string>
     <string name="init_authorization_credential_password">Password</string>
     <string name="settings_service_active">Attiva</string>
+    <string name="settings_service_active_unavailable">Attivo/non disponibile</string>
     <string name="settings_navigation_disabled">Questa applicazione non sembra essere installata</string>
     <string name="init_signature">Firma</string>
     <string name="init_template_help">Le stringhe segnaposto - come [NAME] - sono riempite con il testo designato quando viene utilizzato il modello.</string>
@@ -1248,6 +1249,7 @@
     <string name="cache_distance">Distanza</string>
     <string name="cache_difficulty">Difficoltà</string>
     <string name="cache_terrain">Terreno</string>
+    <string name="cache_difficulty_terrain">Difficoltà/Terreno</string>
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
     <string name="cache_rating_of_new">%1$.1f di %2$d</string>
@@ -1428,6 +1430,7 @@
     <string name="search_address_button">Cerca per indirizzo</string>
     <string name="search_geo">Codice geo</string>
     <string name="search_geo_button">Cerca per geo code</string>
+    <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
     <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
@@ -1878,7 +1881,6 @@
     <string name="confirm_report_problem_title">Segnala un problema</string>
     <string name="confirm_report_problem_message">Vuoi segnalare \'%s\'. Sei sicuro?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Attiva</string>
     <string name="init_summary_geokrety">Abilitare le trackablee da GeoKrety.org</string>
     <string name="init_geokrety_description">Autorizza c:geo su GeoKrety.org per loggare trackables GeoKrety.</string>
     <string name="init_geokrety_userid">Id utente: %s</string>
@@ -1979,6 +1981,8 @@
         <item quantity="other">Percorso caricato con %d punti di rotta</item>
     </plurals>
     <string name="center_on_route">Centra sul percorso</string>
+    <string name="individual_route_set_as_start_title">Imposta come percorso di partenza</string>
+    <string name="individual_route_set_as_start_message">Impostare questo elemento come inizio del percorso e spostare tutti gli elementi successivi in cima al percorso corrente?</string>
     <!-- individual track -->
     <string name="individual_track">Traccia/percorso GPX</string>
     <string name="map_load_track">Carica traccia/percorso da GPX</string>

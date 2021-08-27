@@ -37,7 +37,6 @@
     <string name="userdefined">玩家自訂的寶藏</string>
     <string name="unknown">未知类型</string>
     <string name="all_types_short">全部類型</string>
-    <string name="traditional_short">傳統型藏寶</string>
     <string name="multi_short">多重型藏寶</string>
     <string name="mystery_short">謎題型藏寶</string>
     <string name="letterbox_short">信箱型藏寶</string>
@@ -174,7 +173,6 @@
     <string name="log_problem_archive_label">此宝应该被存档</string>
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">照片</string>
     <string name="datetime_clear_button">清除</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
@@ -250,8 +248,8 @@
     <string name="err_rendertheme_invalid">所选的主题不适用于当前mapsforge版本。切换至预置主题。</string>
     <string name="err_invalid_filename_char">不允許%c這個字元</string>
     <string name="warn_save_nothing">没有什么可以挽救的。</string>
-    <string name="warn_no_cache_coord">没有带有坐标的缓存。</string>
-    <string name="warn_no_coordinates">没有给定的坐标。</string>
+    <string name="warn_no_cache_coord">沒有座標的藏寶</string>
+    <string name="warn_no_coordinates">沒有設定坐標</string>
     <string name="warn_no_keyword">未给定关键词。</string>
     <string name="warn_no_username">未指定用户名。</string>
     <string name="warn_no_connector">没有当前可用的geocaching服务来提供这种类型的搜索</string>
@@ -322,10 +320,10 @@
     <string name="menu_scan_description">c:geo可讀取用QR code顯示的geocacode。 但需要的app未安裝，是否要開啟Google play來安裝必要的app?</string>
     <!-- main screen -->
     <string name="live_map_button">線上即時地圖</string>
-    <string name="caches_nearby_button">附近</string>
+    <string name="caches_nearby_button">鄰近的</string>
     <string name="advanced_search_button">搜索</string>
-    <string name="stored_caches_button">已存储</string>
-    <string name="any_button">转到</string>
+    <string name="stored_caches_button">已儲存:</string>
+    <string name="any_button">前往</string>
     <string name="unknown_scan">無法找到任何地理藏寶</string>
     <!-- caches -->
     <string name="caches_no_cache">此处无文件</string>
@@ -567,9 +565,7 @@
     <string name="settings_category_social">社群媒體</string>
     <string name="settings_category_logging_other">其他的登入選項</string>
     <string name="settings_goto_url_button">更多…</string>
-    <string name="settings_activate_gc">啟動</string>
-    <string name="settings_activate_ec">啟動</string>
-    <string name="settings_activate_lc">啟動</string>
+    <string name="settings_service_activate">啟動</string>
     <string name="settings_gc_legal_note">當你使用geocaching.com的服務時，就同意Groundspeak 的使用條款</string>
     <string name="settings_info_facebook_login_title">使用Google或Facebook的帳號登入</string>
     <string name="settings_info_facebook_login">無法使用Goolge和FB帳號登入Geocaching.com。但有簡單的替代方法</string>
@@ -578,30 +574,22 @@
     <string name="settings_gc_description">授权 c: geo 与 geocaching.com 搜索缓存。</string>
     <string name="settings_ec_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="settings_su_description">授权 c: geo 与寻宝游戏搜索缓存。</string>
-    <string name="settings_activate_oc">啟動</string>
     <string name="init_summary_oc_de">从 opencaching.de 加载缓存</string>
     <string name="init_oc_de_description">授權c:geo使用opencaching.de去尋找/存取/篩選您找到的藏寶</string>
-    <string name="settings_activate_oc_pl">啟動</string>
     <string name="init_summary_oc_pl">从 opencaching.pl 加载缓存</string>
     <string name="init_oc_pl_description">授權c:geo使用opencaching.pl去尋找/存取/篩選您找到的藏寶</string>
-    <string name="settings_activate_oc_nl">啟動</string>
     <string name="init_summary_oc_nl">从 opencaching.nl 加载缓存</string>
     <string name="init_oc_nl_description">授權c:geo使用opencaching.nl去尋找/存取/篩選您找到的藏寶</string>
-    <string name="settings_activate_oc_us">啟動</string>
     <string name="init_summary_oc_us">从 opencaching.us 加载缓存</string>
     <string name="init_oc_us_description">授權c:geo使用opencaching.us去尋找/存取/篩選您找到的藏寶</string>
-    <string name="settings_activate_oc_ro">啟動</string>
     <string name="init_summary_oc_ro">从 opencaching 加载缓存</string>
     <string name="init_oc_ro_description">授權c:geo使用opencaching.ro去尋找/存取/篩選您找到的藏寶</string>
-    <string name="settings_activate_oc_uk">啟動</string>
     <string name="init_summary_oc_uk">从 opencaching.us 加载缓存</string>
     <string name="init_oc_uk_description">授权 c: geo 与 extremcaching.com 搜索缓存和访问/筛选您找到的缓存。</string>
     <string name="init_summary_su">从 opencaching.pl 加载缓存</string>
-    <string name="settings_activate_su">啟動</string>
     <string name="init_gcvote_password_description">輸入GCVote.com的密碼，並根據GCVote.com的指示完成這個地理藏寶的評價。</string>
     <string name="err_vote_send_rating">發送評價時出現錯誤</string>
     <string name="vote_sent">成功上傳您的投票</string>
-    <string name="settings_activate_twitter">啟動</string>
     <string name="init_login_popup">登入</string>
     <string name="init_login_popup_working">登入中…</string>
     <string name="init_login_popup_ok">登入成功</string>
@@ -1584,7 +1572,6 @@
     <string name="confirm_report_problem_title">上报问题</string>
     <string name="confirm_report_problem_message">您確定要回報\'%s\'嗎？</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">啟用</string>
     <string name="init_geokrety_userid">使用者名稱:%s</string>
     <string name="trackable_title_log_without_geocode">未設定 geocode</string>
     <string name="do_not_ask_me_again">不要再詢問</string>

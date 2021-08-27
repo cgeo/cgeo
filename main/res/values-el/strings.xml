@@ -38,7 +38,7 @@
     <string name="userdefined">Κρύπτη ορισμένη από τον χρήστη</string>
     <string name="unknown">Άγνωστος τύπος</string>
     <string name="all_types_short">Όλες</string>
-    <string name="traditional_short">Κλασσικές</string>
+    <string name="traditional_short">Κοινή</string>
     <string name="multi_short">Πολλαπλές</string>
     <string name="mystery_short">Μυστηρίου</string>
     <string name="letterbox_short">Letterbox</string>
@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">Υπό κλίμακα</string>
+    <string name="log_image_info_notscaled">χωρίς κλιμάκωση</string>
     <string name="log_image_titleprefix">Εικόνα</string>
     <string name="datetime_clear_button">Kαθαρισμός</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
@@ -327,6 +329,7 @@
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
     <string name="menu_lists_pocket_queries">Λίστες / pocket queries</string>
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
+    <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
     <string name="live_map_button">Live Χάρτης</string>
     <string name="caches_nearby_button">Σε κοντινή απόσταση</string>
@@ -646,9 +649,7 @@
     <string name="settings_category_social">Κοινωνικά δίκτυα</string>
     <string name="settings_category_logging_other">Εμφάνιση περισσότερων επιλογών καταγραφής</string>
     <string name="settings_goto_url_button">περισσότερα…</string>
-    <string name="settings_activate_gc">Ενεργοποίηση</string>
-    <string name="settings_activate_ec">Ενεργοποίηση</string>
-    <string name="settings_activate_lc">Ενεργοποίηση</string>
+    <string name="settings_service_activate">Ενεργοποίηση</string>
     <string name="settings_gc_legal_note">Με την χρήση του geocaching.com, αποδέχεστε τους όρους χρήσης της Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Σύνδεση με χρήση Facebook ή Google</string>
     <string name="settings_info_facebook_login">Δεν μπορείτε να συνδεθείτε με το c:geo στο geocaching.com μέσω του λογαριασμού σας στο Facebook ή στο Google. Αλλά υπάρχει μια απλή λύση…</string>
@@ -659,30 +660,22 @@
     <string name="settings_su_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.su.</string>
     <string name="settings_lc_description">Συμπεριλάβετε κρύπτες Adventure Lab στο χάρτη.\n\n(Διαθέσιμο μόνο στα premium μέλη του \"Geocaching.com\". Απαιτεί μια ενεργοποιημένη υπηρεσία \"Geocaching.com\".)\n\nΗ αλλαγή αυτής της ρύθμισης απαιτεί επανεκκίνηση.</string>
     <string name="lc_default_description">Αυτή είναι μία Adventure Lab Cache. Αυτές μπορούν να παιχτούν μόνο με το Groundspeak Adventure Lab App. Πατήστε στο εικονίδιο του Adventure Lab στη σελίδα \"Λεπτομέρειες\" για να ανοίξετε/εγκαταστήσετε την εφαρμογή αυτή.\nΑν δεν θέλετε να βλέπετε κρύπτες Adenture Lab στο χάρτη και την αναζήτησή σας, μπορείτε να τις απενεργοποιήσετε, χρησιμοποιώντας το μενού \"Ρυθμίσεις\" - Υπηρεσίες - Geocaching - Adventure Lab</string>
-    <string name="settings_activate_oc">Ενεργοποίηση</string>
     <string name="init_summary_oc_de">Φόρτωση κρυπτών από opencaching.de</string>
     <string name="init_oc_de_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.de, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_pl">Ενεργοποίηση</string>
     <string name="init_summary_oc_pl">Φόρτωση κρυπτών από opencaching.pl</string>
     <string name="init_oc_pl_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.pl, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_nl">Ενεργοποίηση</string>
     <string name="init_summary_oc_nl">Φόρτωση κρυπτών από opencaching.nl</string>
     <string name="init_oc_nl_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.nl, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_us">Ενεργοποίηση</string>
     <string name="init_summary_oc_us">Φόρτωση κρυπτών από opencaching.us</string>
     <string name="init_oc_us_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.us, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_ro">Ενεργοποίηση</string>
     <string name="init_summary_oc_ro">Φόρτωση κρυπτών από opencaching.ro</string>
     <string name="init_oc_ro_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.de, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_uk">Ενεργοποίηση</string>
     <string name="init_summary_oc_uk">Φόρτωση κρυπτών από opencaching.uk</string>
     <string name="init_oc_uk_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.uk, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
     <string name="init_summary_su">Φόρτωση κρυπτών από Geocaching.su</string>
-    <string name="settings_activate_su">Ενεργοποίηση</string>
     <string name="init_gcvote_password_description">Για να είστε σε θέση να αξιολογήσετε μια κρύπτη, θα πρέπει να ακολουθήσετε τις οδηγίες στο GCVote.com και να εισάγετε εδώ τον κωδικό πρόσβασής σας GCVote.</string>
     <string name="err_vote_send_rating">Σφάλμα κατά την αποστολή της βαθμολογίας.</string>
     <string name="vote_sent">Η ψήφος δόθηκε επιτυχώς</string>
-    <string name="settings_activate_twitter">Ενεργοποίηση</string>
     <string name="init_login_popup">Σύνδεση</string>
     <string name="init_login_popup_working">Συνδέεται με…</string>
     <string name="init_login_popup_ok">Επιτυχής σύνδεση</string>
@@ -694,6 +687,7 @@
     <string name="init_authorization_credential_username">Όνομα χρήστη</string>
     <string name="init_authorization_credential_password">Κωδικός</string>
     <string name="settings_service_active">Ενεργή</string>
+    <string name="settings_service_active_unavailable">Ενεργό/Μη Διαθέσιμο</string>
     <string name="settings_navigation_disabled">Αυτή η εφαρμογή δεν είναι εγκατεστημένη</string>
     <string name="init_signature">Υπογραφή</string>
     <string name="init_template_help">Οι τοποθετούμενες συμβολοσειρές - όπως [NAME] - συμπληρώνονται με το καθορισμένο κείμενο όταν χρησιμοποιείται το πρότυπο.</string>
@@ -1436,6 +1430,7 @@
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
     <string name="search_geo_button">Αναζήτηση με γεωκωδικό</string>
+    <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
     <string name="search_kw">Λέξεις-κλειδιά</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
@@ -1886,7 +1881,6 @@
     <string name="confirm_report_problem_title">Αναφορά προβλήματος</string>
     <string name="confirm_report_problem_message">Θέλετε να αναφέρετε %s. Είστε σίγουρος;</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Ενεργοποίηση</string>
     <string name="init_summary_geokrety">Ενεργοποιείστε ανιχνεύσιμα από το GeoKrety.org</string>
     <string name="init_geokrety_description">Εξουσιοδοτείστε το c:geo να καταγράφει τα ανιχνεύσιμα GeoKrety στο GeoKrety.org.</string>
     <string name="init_geokrety_userid">Ταυτότητα χρήστη: %s</string>
@@ -1987,6 +1981,8 @@
         <item quantity="other">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
     </plurals>
     <string name="center_on_route">Κέντρο στη διαδρομή</string>
+    <string name="individual_route_set_as_start_title">Ορισμός ως Εναρξη διαδρομής</string>
+    <string name="individual_route_set_as_start_message">Να οριστεί αυτό το στοιχείο ως αρχή δρομολόγησης και να μετακινηθούν όλα τα επόμενα στοιχεία προς την κορυφή της τρέχουσας διαδρομής;</string>
     <!-- individual track -->
     <string name="individual_track">GPX διαδρομή</string>
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>

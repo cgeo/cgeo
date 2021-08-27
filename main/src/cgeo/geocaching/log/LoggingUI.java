@@ -46,7 +46,7 @@ public final class LoggingUI extends AbstractUIFactory {
             String text = logType.getL10n();
 
             if (isActive) {
-                text += " ✔";
+                text += " ✓";
             }
 
             return text;

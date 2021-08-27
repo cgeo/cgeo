@@ -37,7 +37,7 @@
     <string name="userdefined">Cache personnalisée</string>
     <string name="unknown">Type inconnu</string>
     <string name="all_types_short">Toutes</string>
-    <string name="traditional_short">Traditionnelle</string>
+    <string name="traditional_short">Tradi</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystère</string>
     <string name="event_short">Événement</string>
@@ -172,7 +172,9 @@
     <string name="log_problem_archive_label">La cache devrait être archivée</string>
     <string name="log_problem_archive_text">Ce géocacheur a signalé que cette géocache doit être archivée. Un examinateur bénévole a été notifié.</string>
     <string name="log_image_scale_option_noscaling">Pas de mise à l\'échelle</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nMise à l\'échelle/Compressée :\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">redimensionnée</string>
+    <string name="log_image_info_notscaled">non redimensionnée</string>
     <string name="log_image_titleprefix">Image</string>
     <string name="datetime_clear_button">Effacer</string>
     <string name="datetime_nodateset_display">Aucune date définie</string>
@@ -444,7 +446,7 @@
     <string name="cache_filter_add_button">Ajouter des critères</string>
     <string name="cache_filter_option_and_or">Utilisez OU à la place de ET</string>
     <string name="cache_filter_option_inverse">Inverser filtre</string>
-    <string name="cache_filter_hint_on_empty_filter_list">Appuyez ci-dessus sur \'Ajouter des critères\' pour modifier le filtre</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Appuyez sur “Ajouter des critères” pour modifier le filtre</string>
     <string name="cache_filter_name">Nom de la cache</string>
     <string name="cache_filter_type">Type de cache</string>
     <string name="cache_filter_size">Taille de la cache</string>
@@ -515,7 +517,6 @@
     <string name="cache_filter_status_select_label_stored">Enregistrée</string>
     <string name="cache_filter_status_select_label_watchlist">Suivie</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
-    <string name="cache_filter_status_select_label_has_trackable">Contient un objet voyageur</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
     <string name="cache_filter_status_archived">Archivée</string>
@@ -624,9 +625,7 @@
     <string name="settings_category_social">Réseaux sociaux</string>
     <string name="settings_category_logging_other">Options de visite supplémentaires</string>
     <string name="settings_goto_url_button">plus…</string>
-    <string name="settings_activate_gc">Activer</string>
-    <string name="settings_activate_ec">Activer</string>
-    <string name="settings_activate_lc">Activer</string>
+    <string name="settings_service_activate">Activer</string>
     <string name="settings_gc_legal_note">En utilisant les services de geocaching.com, vous acceptez les conditions d\'utilisation de Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Se connecter avec Facebook ou Google</string>
     <string name="settings_info_facebook_login">Vous ne pouvez pas faire c:geo se connecter à geocaching.com avec votre compte Facebook ou Google. Mais il y a une solution simple…</string>
@@ -635,30 +634,23 @@
     <string name="settings_gc_description">Autoriser c:geo à utiliser geocaching.com pour chercher des caches.</string>
     <string name="settings_ec_description">Autoriser c:geo à utiliser extremcaching.com pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
     <string name="settings_su_description">Autoriser c:geo à utiliser geocaching.su pour chercher des caches.</string>
-    <string name="settings_activate_oc">Activer</string>
+    <string name="lc_default_description">C\'est une Adventure Lab de geocaching.com. Les Adventures peuvent seulement être jouées avec l\'application Adventure Lab de Groundspeak. Appuyez sur l\'icône Adventure Lab sur l\'onglet “Détails” pour ouvrir/installer l\'application.\nSi vous ne voulez pas voir les Adventure Lab sur votre carte et la recherche, vous pouvez les désactiver dans le menu “Paramètres”, “Services”, puis “Geocaching.com Adventure Lab”</string>
     <string name="init_summary_oc_de">Charger les caches depuis opencaching.de</string>
     <string name="init_oc_de_description">Autoriser c:geo à utiliser opencaching.de pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-    <string name="settings_activate_oc_pl">Activer</string>
     <string name="init_summary_oc_pl">Charger les caches depuis opencaching.pl</string>
     <string name="init_oc_pl_description">Autoriser c:geo à utiliser opencaching.pl pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-    <string name="settings_activate_oc_nl">Activer</string>
     <string name="init_summary_oc_nl">Charger les caches depuis opencaching.nl</string>
     <string name="init_oc_nl_description">Autoriser c:geo à utiliser opencaching.nl pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-    <string name="settings_activate_oc_us">Activer</string>
     <string name="init_summary_oc_us">Charger les caches depuis opencaching.us</string>
     <string name="init_oc_us_description">Autoriser c:geo à utiliser opencaching.us pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-    <string name="settings_activate_oc_ro">Activer</string>
     <string name="init_summary_oc_ro">Charger les caches depuis opencaching.ro</string>
     <string name="init_oc_ro_description">Autoriser c:geo à utiliser opencaching.ro pour chercher des caches et accéder/filtrer vos caches trouvées.</string>
-    <string name="settings_activate_oc_uk">Activer</string>
     <string name="init_summary_oc_uk">Charger les caches depuis opencache.uk</string>
     <string name="init_oc_uk_description">Autoriser c:geo à utiliser opencache.uk pour rechercher des caches et accéder / filtrer vos caches trouvées.</string>
     <string name="init_summary_su">Charger les caches depuis Geocaching.su</string>
-    <string name="settings_activate_su">Activer</string>
     <string name="init_gcvote_password_description">Afin de pouvoir attribuer un vote à une cache, vous devez suivre les instructions de GCVote.com et entrer ici votre mot de passe GCVote.</string>
     <string name="err_vote_send_rating">Erreur à l’envoi de l\'évaluation.</string>
     <string name="vote_sent">Évaluation envoyée</string>
-    <string name="settings_activate_twitter">Activer</string>
     <string name="init_login_popup">Authentification</string>
     <string name="init_login_popup_working">Connexion…</string>
     <string name="init_login_popup_ok">Connecté</string>
@@ -1403,6 +1395,7 @@
     <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Code de la cache</string>
     <string name="search_geo_button">Rechercher la cache</string>
+    <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mots-clés</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
@@ -1850,7 +1843,6 @@
     <string name="confirm_report_problem_title">Signaler un problème</string>
     <string name="confirm_report_problem_message">Vous voulez signaler «%s». Êtes-vous sûr ?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Activer</string>
     <string name="init_summary_geokrety">Autoriser les objets voyageurs de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriser c:geo à ouvrir une session sur GeoKrety.org pour les objets voyageurs GeoKrets.</string>
     <string name="init_geokrety_userid">Utilisateur : %s</string>

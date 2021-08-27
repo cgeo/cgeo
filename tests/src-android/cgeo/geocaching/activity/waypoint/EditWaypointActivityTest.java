@@ -2,8 +2,7 @@ package cgeo.geocaching.activity.waypoint;
 
 import cgeo.geocaching.R;
 
-import android.test.suitebuilder.annotation.Suppress;
-
+import androidx.test.filters.Suppress;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.withChild;

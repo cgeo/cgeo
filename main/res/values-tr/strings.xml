@@ -38,7 +38,7 @@
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
     <string name="all_types_short">Tümü</string>
-    <string name="traditional_short">Gelen</string>
+    <string name="traditional_short">Gele</string>
     <string name="multi_short">Çoklu</string>
     <string name="mystery_short">Gizemli</string>
     <string name="letterbox_short">Letterbox</string>
@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nÖlçeklenmiş/Sıkıştırılmış:\n%4$d x %5$d px, ~ %6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">ölçekli</string>
+    <string name="log_image_info_notscaled">ölçeksiz</string>
     <string name="log_image_titleprefix">Resim</string>
     <string name="datetime_clear_button">Temizle</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
@@ -327,6 +329,7 @@
     <string name="menu_scan_geo">Geocode tara</string>
     <string name="menu_lists_pocket_queries">Listeler / cep sorguları</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
+    <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
     <string name="live_map_button">Canlı harita</string>
     <string name="caches_nearby_button">Yakınlarda</string>
@@ -646,9 +649,7 @@
     <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
     <string name="settings_goto_url_button">daha fazla …</string>
-    <string name="settings_activate_gc">Etkinleştir</string>
-    <string name="settings_activate_ec">Etkinleştir</string>
-    <string name="settings_activate_lc">Etkinleştir</string>
+    <string name="settings_service_activate">Etkinleştir</string>
     <string name="settings_gc_legal_note">Geocaching.com hizmetini kullanmak için Groundspeak kullanım şartlarını kabul edin.</string>
     <string name="settings_info_facebook_login_title">Facebook/Google ile giriş yapın</string>
     <string name="settings_info_facebook_login">Facebook veya Google hesabınızla geocaching.com\'a c:geo girişi yapamazsınız. Ancak basit bir çözüm var…</string>
@@ -659,30 +660,22 @@
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
     <string name="settings_lc_description">Adventure Lab cache\'leri de haritaya dahil et.\n\n(\"Geocaching.com\" ücretli üyeliği sahiplerine özeldir. \"Geocaching.com\" hizmeti c:geo\'da yetkilendirilmelidir.)\n\nBu ayarın değiştirilmesi yeniden başlatma gerektirir.</string>
     <string name="lc_default_description">Bu bir geocaching.com Adventure Lab Cache\'dir. Adventure\'lar sadece Groundspeak Adventure Lab uygulamasıyla oynanabilir. Adventure Lab uygulamasını açmak/kurmak için \'\'Detaylar\'\' sayfasındaki Adventure Lab ikonuna tıklayın.\nEğer haritanızda ve aramalarınızda Adventure Lab cache\'leri görmek istemiyorsanız \'\'Ayarlar\'\' üzerinden bu özelliği kapatabilirsiniz. Ayarlar-Servisler-Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Etkinleştir</string>
     <string name="init_summary_oc_de">opencaching.de üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_de_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencachin.de ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_pl">Etkinleştir</string>
     <string name="init_summary_oc_pl">opencaching.pl üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_pl_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.pl ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_nl">Etkinleştir</string>
     <string name="init_summary_oc_nl">opencaching.nl üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_nl_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.nl ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_us">Etkinleştir</string>
     <string name="init_summary_oc_us">opencaching.us üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_us_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.us ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_ro">Etkinleştir</string>
     <string name="init_summary_oc_ro">opencaching.ro üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_ro_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.ro ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_uk">Etkinleştir</string>
     <string name="init_summary_oc_uk">opencache.uk üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_uk_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencache.uk ile yetkilendirin.</string>
     <string name="init_summary_su">Geocaching.su üzerinden Geocache\'leri yükle</string>
-    <string name="settings_activate_su">Etkinleştir</string>
     <string name="init_gcvote_password_description">Bir Geocache\'i derecelendirmek için GCVote.com\'daki talimatları takip etmeniz ve buraya GCVote şifrenizi girmeniz gereklidir.</string>
     <string name="err_vote_send_rating">Puan gönderilirken hata oluştu.</string>
     <string name="vote_sent">Puanlama başarıyla gönderildi</string>
-    <string name="settings_activate_twitter">Etkinleştir</string>
     <string name="init_login_popup">Oturum açma</string>
     <string name="init_login_popup_working">Oturum açılıyor…</string>
     <string name="init_login_popup_ok">Oturum açıldı</string>
@@ -694,6 +687,7 @@
     <string name="init_authorization_credential_username">Kullanıcı adı</string>
     <string name="init_authorization_credential_password">Şifre</string>
     <string name="settings_service_active">Aktif</string>
+    <string name="settings_service_active_unavailable">Aktif/Mevcut değil</string>
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
@@ -1436,6 +1430,7 @@
     <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geo kod</string>
     <string name="search_geo_button">Geo koduna göre ara</string>
+    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
@@ -1886,7 +1881,6 @@
     <string name="confirm_report_problem_title">Sorun bildir</string>
     <string name="confirm_report_problem_message">Bunu bildirmek istiyorsunuz: \'%s\'. Emin misiniz?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Etkinleştir</string>
     <string name="init_summary_geokrety">Trackable\'ları GeoKrety.org\'da aktifleştirin</string>
     <string name="init_geokrety_description">c:geo\'yu GeoKrety trackable\'larını kayıt edebilmek için GeoKrety.org ile yetkilendir.</string>
     <string name="init_geokrety_userid">Kullanıcı adı:%s</string>
@@ -1987,6 +1981,8 @@
         <item quantity="other">Rota %d rota noktasıyla yüklendi</item>
     </plurals>
     <string name="center_on_route">Rotaya göre ortala</string>
+    <string name="individual_route_set_as_start_title">Rota başlangıcı olarak ayarla</string>
+    <string name="individual_route_set_as_start_message">Bu öğeyi rota başlangıcı olarak ayarlanıp, sonraki tüm öğeler mevcut rotanın üstüne taşınsın mı?</string>
     <!-- individual track -->
     <string name="individual_track">GPX yol/rota</string>
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>

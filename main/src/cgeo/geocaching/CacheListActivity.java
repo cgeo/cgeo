@@ -22,7 +22,6 @@ import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.export.BatchUploadModifiedCoordinates;
@@ -1001,7 +1000,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // Check local cacheList first, and Datastore only if needed (because of filtered lists)
         // Checking is done in this order for performance reasons
         if (isNonDefaultList && !preventAskForDeletion && CollectionUtils.isEmpty(cacheList)
-            && DataStore.getAllStoredCachesCount(CacheType.ALL, listId) == 0) {
+            && DataStore.getAllStoredCachesCount(listId) == 0) {
             // ask user, if he wants to delete the now empty list
             Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty), getString(R.string.list_dialog_do_not_ask_me_again), preventAskForDeletion -> {
                 removeListInternal();
@@ -1032,22 +1031,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void clearOfflineLogs() {
-        //Dialogs.confirmYesNo(this, R.string.caches_clear_offlinelogs, R.string.caches_clear_offlinelogs_message, (dialog, which) -> {
         SimpleDialog.of(this).setTitle(R.string.caches_clear_offlinelogs).setMessage(R.string.caches_clear_offlinelogs_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> {
             progress.show(CacheListActivity.this, null, res.getString(R.string.caches_clear_offlinelogs_progress), true, clearOfflineLogsHandler.disposeMessage());
             clearOfflineLogs(clearOfflineLogsHandler, adapter.getCheckedOrAllCaches());
         });
-    }
-
-    public void showLegacyFilterMenu(final View view) {
-        if (view != null && Settings.getCacheType() != CacheType.ALL) {
-            Dialogs.selectGlobalTypeFilter(this, cacheType -> {
-                refreshCurrentList();
-                updateFilterBar();
-            });
-        } else {
-            FilterActivity.selectFilter(this);
-        }
     }
 
     /**
@@ -1869,9 +1856,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @NonNull
     private List<String> getActiveFilterNames() {
         final List<String> filters = new ArrayList<>();
-        if (Settings.getCacheType() != CacheType.ALL) {
-            filters.add(Settings.getCacheType().getL10n());
-        }
         if (adapter.hasActiveFilter()) {
             filters.add(adapter.getFilterName());
         }

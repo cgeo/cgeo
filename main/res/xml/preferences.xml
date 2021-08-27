@@ -20,7 +20,7 @@
                     <cgeo.geocaching.settings.CheckBoxWithPopupPreference
                         android:defaultValue="false"
                         android:key="@string/pref_connectorGCActive"
-                        android:title="@string/settings_activate_gc"
+                        android:title="@string/settings_service_activate"
                         app:text="@string/settings_gc_legal_note"
                         app:title="@string/settings_title_gc"
                         app:url="@string/settings_gc_legal_note_url"
@@ -71,8 +71,8 @@
                     android:layout="@layout/preference_category" >
                     <CheckBoxPreference
                         android:defaultValue="true"
-                        android:key="@string/pref_connectorLCActive"
-                        android:title="@string/settings_activate_lc" />
+                        android:key="@string/pref_connectorALActive"
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:layout="@layout/text_preference"
                         android:text="@string/settings_lc_description" />
@@ -81,7 +81,7 @@
                 <PreferenceCategory android:title="@string/settings_information"
                     android:layout="@layout/preference_category" >
                     <Preference
-                        android:key="@string/pref_fakekey_lc_website"
+                        android:key="@string/pref_fakekey_al_website"
                         android:title="@string/settings_open_website" />
                     <cgeo.geocaching.settings.CapabilitiesPreference
                         android:title="@string/settings_features"
@@ -98,7 +98,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOCActive"
                         android:summary="@string/init_summary_oc_de"
-                        android:title="@string/settings_activate_oc" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorOCActive"
                         android:layout="@layout/text_preference"
@@ -129,7 +129,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOCPLActive"
                         android:summary="@string/init_summary_oc_pl"
-                        android:title="@string/settings_activate_oc_pl" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorOCPLActive"
                         android:layout="@layout/text_preference"
@@ -160,7 +160,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOCNLActive"
                         android:summary="@string/init_summary_oc_nl"
-                        android:title="@string/settings_activate_oc_nl" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorOCNLActive"
                         android:layout="@layout/text_preference"
@@ -192,7 +192,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOCUSActive"
                         android:summary="@string/init_summary_oc_us"
-                        android:title="@string/settings_activate_oc_us" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorOCUSActive"
                         android:layout="@layout/text_preference"
@@ -223,7 +223,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOCROActive"
                         android:summary="@string/init_summary_oc_ro"
-                        android:title="@string/settings_activate_oc_ro" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorOCROActive"
                         android:layout="@layout/text_preference"
@@ -254,7 +254,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorOCUKActive"
                         android:summary="@string/init_summary_oc_uk"
-                        android:title="@string/settings_activate_oc_uk" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorOCUKActive"
                         android:layout="@layout/text_preference"
@@ -284,7 +284,7 @@
                     <CheckBoxPreference
                         android:defaultValue="false"
                         android:key="@string/pref_connectorECActive"
-                        android:title="@string/settings_activate_ec" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorECActive"
                         android:layout="@layout/text_preference"
@@ -328,7 +328,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorSUActive"
                         android:summary="@string/init_summary_su"
-                        android:title="@string/settings_activate_su" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorSUActive"
                         android:layout="@layout/text_preference"
@@ -393,7 +393,7 @@
                         android:defaultValue="false"
                         android:key="@string/pref_connectorGeokretyActive"
                         android:summary="@string/init_summary_geokrety"
-                        android:title="@string/settings_activate_geokrety" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_connectorGeokretyActive"
                         android:layout="@layout/text_preference"
@@ -455,7 +455,7 @@
                     <CheckBoxPreference
                         android:defaultValue="false"
                         android:key="@string/pref_twitter"
-                        android:title="@string/settings_activate_twitter" />
+                        android:title="@string/settings_service_activate" />
                     <cgeo.geocaching.settings.TextPreference
                         android:dependency="@string/pref_twitter"
                         android:layout="@layout/text_preference"

@@ -33,8 +33,8 @@
     <dimen name="textSize_listsPrimary">18sp</dimen>
     <dimen name="textSize_listsSecondary">16sp</dimen>
 
-    <!-- calculator labels between input buttons -->
-    <dimen name="textSize_calculator">22sp</dimen>
+    <!-- coordinate figures and waypoint calculator labels between input buttons -->
+    <dimen name="textSize_inputCoords">22sp</dimen>
 
     <!--- wizard -->
     <dimen name="textSize_headingWizard">26sp</dimen>
@@ -42,6 +42,13 @@
 
     <!-- buttons -->
     <dimen name="textSize_buttonsPrimary">@dimen/textSize_detailsSecondary</dimen>
+
+    <!-- compass -->
+    <dimen name="textSize_compassTargeting">26sp</dimen>
+
+    <!-- text input fields -->
+    <dimen name="textSize_textinputPrimary">18sp</dimen>
+    <dimen name="textSize_textinputSecondary">16sp</dimen>
 
     <!-- all other text -->
     <dimen name="textSize_detailsPrimary">16sp</dimen>
