@@ -1,7 +1,6 @@
 package cgeo.geocaching.test;
 
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.files.GPX10Parser;
@@ -85,7 +84,7 @@ public abstract class AbstractResourceInstrumentationTestCase extends Instrument
 
     @Override
     protected void tearDown() throws Exception {
-        final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, temporaryListId);
+        final SearchResult search = DataStore.getBatchOfStoredCaches(null, temporaryListId);
         assertThat(search).isNotNull();
         DataStore.removeCaches(search.getGeocodes(), LoadFlags.REMOVE_ALL);
         DataStore.removeList(temporaryListId);

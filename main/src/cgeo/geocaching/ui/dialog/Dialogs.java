@@ -3,15 +3,12 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.BottomsheetDialogWithActionbarBinding;
 import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -36,10 +33,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.util.Consumer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
 import java.util.Objects;
 
 import com.google.android.material.bottomsheet.BottomSheetBehavior;
@@ -223,31 +216,6 @@ public final class Dialogs {
         if (dialog.isShowing()) {
             dialog.dismiss();
         }
-    }
-
-    public static void selectGlobalTypeFilter(final Activity activity, final Action1<CacheType> okayListener) {
-        final List<CacheType> cacheTypes = new ArrayList<>();
-
-        //first add the most used types
-        cacheTypes.add(CacheType.ALL);
-        cacheTypes.add(CacheType.TRADITIONAL);
-        cacheTypes.add(CacheType.MULTI);
-        cacheTypes.add(CacheType.MYSTERY);
-
-        // then add all other cache types sorted alphabetically
-        final List<CacheType> sorted = new ArrayList<>(Arrays.asList(CacheType.values()));
-        sorted.removeAll(cacheTypes);
-        Collections.sort(sorted, (left, right) -> TextUtils.COLLATOR.compare(left.getL10n(), right.getL10n()));
-        cacheTypes.addAll(sorted);
-
-        final int checkedItem = Math.max(0, cacheTypes.indexOf(Settings.getCacheType()));
-
-        SimpleDialog.of(activity).setTitle(R.string.menu_filter)
-            .selectSingle(cacheTypes, (ct, i) -> TextParam.text(ct.getL10n()), checkedItem, true, (item, position) -> {
-            final CacheType cacheType = cacheTypes.get(position);
-            Settings.setCacheType(cacheType);
-            okayListener.call(cacheType);
-        });
     }
 
     private static BottomSheetDialog bottomSheetDialog(final Context context, final View contentView) {

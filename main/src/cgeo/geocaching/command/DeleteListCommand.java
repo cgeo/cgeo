@@ -2,7 +2,6 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -30,7 +29,7 @@ public abstract class DeleteListCommand extends AbstractCommand {
 
     @Override
     protected void doCommand() {
-        final SearchResult caches = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, listId);
+        final SearchResult caches = DataStore.getBatchOfStoredCaches(null, listId);
         geocodes = caches.getGeocodes();
         // remember list details, as we have to create a new list eventually
         final StoredList list = DataStore.getList(listId);

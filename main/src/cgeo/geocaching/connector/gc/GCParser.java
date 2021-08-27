@@ -136,7 +136,6 @@ public final class GCParser {
         final String[] rows = StringUtils.splitByWholeSeparator(page, "<tr class=");
         final int rowsCount = rows.length;
 
-        int excludedCaches = 0;
         final List<Geocache> caches = new ArrayList<>();
         for (int z = 1; z < rowsCount; z++) {
             final Geocache cache = new Geocache();
@@ -168,18 +167,6 @@ public final class GCParser {
             } catch (final RuntimeException e) {
                 // failed to parse GUID and/or Disabled
                 Log.w("GCParser.parseSearch: Failed to parse GUID and/or Disabled data", e);
-            }
-
-            if (Settings.isExcludeDisabledCaches() && cache.isDisabled()) {
-                // skip disabled caches
-                excludedCaches++;
-                continue;
-            }
-
-            if (Settings.isExcludeArchivedCaches() && cache.isArchived()) {
-                // skip archived caches
-                excludedCaches++;
-                continue;
             }
 
             cache.setGeocode(TextUtils.getMatch(row, GCConstants.PATTERN_SEARCH_GEOCODE, true, 1, cache.getGeocode(), true));
@@ -288,7 +275,7 @@ public final class GCParser {
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (result != null) {
-                searchResult.setTotalCountGC(Integer.parseInt(result) - excludedCaches);
+                searchResult.setTotalCountGC(Integer.parseInt(result));
             }
         } catch (final NumberFormatException e) {
             Log.w("GCParser.parseSearch: Failed to parse cache count", e);
@@ -889,76 +876,47 @@ public final class GCParser {
         return search;
     }
 
-    /**
-     * Possibly hide caches found or hidden by user. This mutates its params argument when possible.
-     *
-     * @param params the parameters to mutate, or null to create a new Parameters if needed
-     * @param my {@code true} if the user's caches must be forcibly included regardless of their settings
-     * @return the original params if not null, maybe augmented with f=1, or a new Parameters with f=1 or null otherwise
-     */
-    private static Parameters addFToParams(final Parameters params, final boolean my) {
-        if (!my && Settings.isExcludeMyCaches()) {
-            if (params == null) {
-                return new Parameters("f", "1");
-            }
-            params.put("f", "1");
-            Log.i("Skipping caches found or hidden by user.");
-        }
-
-        return params;
-    }
-
     @Nullable
-    private static SearchResult searchByAny(@NonNull final CacheType cacheType, final boolean my, final Parameters params) {
-        insertCacheType(params, cacheType);
+    private static SearchResult searchByAny(final Parameters params) {
 
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
-        final Parameters paramsWithF = addFToParams(params, my);
-        final String page = GCLogin.getInstance().getRequestLogged(uri, paramsWithF);
+        final String page = GCLogin.getInstance().getRequestLogged(uri, params);
 
         if (StringUtils.isBlank(page)) {
             Log.w("GCParser.searchByAny: No data from server");
             return null;
         }
 
-        final String fullUri = uri + "?" + paramsWithF;
+        final String fullUri = uri + "?" + params;
         final SearchResult searchResult = parseSearch(fullUri, page);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByAny: No cache parsed");
             return searchResult;
         }
 
-        final SearchResult search = searchResult.filterSearchResults(Settings.isExcludeDisabledCaches(), Settings.isExcludeArchivedCaches(), cacheType);
+        final SearchResult search = searchResult.putInCacheAndLoadRating();
 
         GCLogin.getInstance().getLoginStatus(page);
 
         return search;
     }
 
-    public static SearchResult searchByCoords(@NonNull final Geopoint coords, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByCoords(@NonNull final Geopoint coords) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(cacheType, false, params);
+        return searchByAny(params);
     }
 
-    static SearchResult searchByKeyword(@NonNull final String keyword, @NonNull final CacheType cacheType) {
+    static SearchResult searchByKeyword(@NonNull final String keyword) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(cacheType, false, params);
+        return searchByAny(params);
     }
 
-    private static boolean isSearchForMyCaches(final String userName) {
-        if (userName.equalsIgnoreCase(Settings.getGcCredentials().getUserName())) {
-            Log.i("Overriding users choice because of self search, downloading all caches.");
-            return true;
-        }
-        return false;
-    }
-
-    public static SearchResult searchByUsername(final String userName, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByUsername(final String userName) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -966,10 +924,10 @@ public final class GCParser {
 
         final Parameters params = new Parameters("ul", escapePlus(userName));
 
-        return searchByAny(cacheType, isSearchForMyCaches(userName), params);
+        return searchByAny(params);
     }
 
-    public static SearchResult searchByPocketQuery(final String pocketGuid, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByPocketQuery(final String pocketGuid) {
         if (StringUtils.isBlank(pocketGuid)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
@@ -977,17 +935,17 @@ public final class GCParser {
 
         final Parameters params = new Parameters("pq", pocketGuid);
 
-        return searchByAny(cacheType, false, params);
+        return searchByAny(params);
     }
 
-    public static SearchResult searchByOwner(final String userName, @NonNull final CacheType cacheType) {
+    public static SearchResult searchByOwner(final String userName) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", escapePlus(userName));
-        return searchByAny(cacheType, isSearchForMyCaches(userName), params);
+        return searchByAny(params);
     }
 
     /**
@@ -1787,18 +1745,6 @@ public final class GCParser {
             }
         }
         return types;
-    }
-
-    /**
-     * Insert the right cache type restriction in parameters
-     *
-     * @param params
-     *            the parameters to insert the restriction into
-     * @param cacheType
-     *            the type of cache, or null to include everything
-     */
-    private static void insertCacheType(final Parameters params, final CacheType cacheType) {
-        params.put("tx", cacheType.guid);
     }
 
     private static void getExtraOnlineInfo(@NonNull final Geocache cache, final String page, final DisposableHandler handler) {

@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
@@ -237,7 +236,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
-            e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
             e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
             e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
@@ -666,18 +664,6 @@ public class Settings {
         return getBoolean(R.string.pref_lowpowermode, false);
     }
 
-    /**
-     * @param cacheType
-     *            The cache type used for future filtering
-     */
-    public static void setCacheType(final CacheType cacheType) {
-        if (cacheType == null) {
-            remove(R.string.pref_cachetype);
-        } else {
-            putString(R.string.pref_cachetype, cacheType.id);
-        }
-    }
-
     public static int getLastDisplayedList() {
         return getInt(R.string.pref_lastusedlist, StoredList.STANDARD_LIST_ID);
     }
@@ -785,32 +771,6 @@ public class Settings {
 
     public static boolean isShowAddress() {
         return getBoolean(R.string.pref_showaddress, true);
-    }
-
-    @Deprecated
-    public static boolean isExcludeMyCaches() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeFound() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeOfflineLog() {
-        return false; //prepare for later removal
-    }
-
-
-    @Deprecated
-    public static boolean isExcludeDisabledCaches() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeArchivedCaches() {
-        return false; //prepare for later removal
     }
 
     public static boolean isExcludeWpOriginal() {
@@ -1219,17 +1179,6 @@ public class Settings {
 
     static String getWebDeviceName() {
         return getString(R.string.pref_webDeviceName, Build.MODEL);
-    }
-
-    /**
-     * @return always return ALL for now.
-     *
-     * TODO: Should be removed completely in the near future.
-     */
-    @Deprecated
-    @NonNull
-    public static CacheType getCacheType() {
-        return CacheType.ALL;
     }
 
     /**
