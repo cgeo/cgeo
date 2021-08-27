@@ -453,7 +453,6 @@
     <string name="cache_filter_log_entry">Logginnhold</string>
     <string name="cache_filter_location">Sted</string>
     <string name="cache_filter_origin">Utgangspunkt</string>
-    <string name="cache_filter_stored_since">Lagret siden</string>
     <string name="cache_filtergroup_basic">Enkel</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Brukerspesifikk</string>
