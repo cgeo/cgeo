@@ -481,7 +481,6 @@
     <string name="cache_filter_location">Plats</string>
     <string name="cache_filter_stored_lists">Lagrade listor</string>
     <string name="cache_filter_origin">Ursprung</string>
-    <string name="cache_filter_stored_since">Sparad sedan</string>
     <string name="cache_filtergroup_basic">Basic</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Användarspecifik</string>
