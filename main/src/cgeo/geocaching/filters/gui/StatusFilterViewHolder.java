@@ -27,6 +27,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     private ButtonToggleGroup statusOwn = null;
     private ButtonToggleGroup statusFound = null;
     private ButtonToggleGroup statusHasOfflineLog = null;
+    private ButtonToggleGroup statusHasOfflineFoundLog = null;
     private ButtonToggleGroup statusStored = null;
     private ButtonToggleGroup statusFavorite = null;
     private ButtonToggleGroup statusWatchlist = null;
@@ -78,7 +79,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         ll.addView(activeDisabledArchivedGroup, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
         statusFound = createGroup(ll, StatusGeocacheFilter.StatusType.FOUND, false);
-        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, false);
+        statusHasOfflineFoundLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_FOUND_LOG, false);
         statusOwn = createGroup(ll, StatusGeocacheFilter.StatusType.OWNED, false);
         statusStored = createGroup(ll, StatusGeocacheFilter.StatusType.STORED, true);
         statusFavorite = createGroup(ll, StatusGeocacheFilter.StatusType.FAVORITE, true);
@@ -86,6 +87,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusPremium = createGroup(ll, StatusGeocacheFilter.StatusType.PREMIUM, true);
         statusHasTrackable = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_TRACKABLE, true);
         statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE, true);
+        statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, true);
         statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY, true);
 
         setSimpleView(this.simpleView);
@@ -125,6 +127,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         setFromBoolean(statusFound, filter.getStatusFound());
         setFromBoolean(statusOwn, filter.getStatusOwned());
         setFromBoolean(statusHasOfflineLog, filter.getStatusHasOfflineLog());
+        setFromBoolean(statusHasOfflineFoundLog, filter.getStatusHasOfflineFoundLog());
         setFromBoolean(statusStored, filter.getStatusStored());
         setFromBoolean(statusFavorite, filter.getStatusFavorite());
         setFromBoolean(statusWatchlist, filter.getStatusWatchlist());
@@ -147,6 +150,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         filter.setStatusFound(getFromGroup(statusFound));
         filter.setStatusOwned(getFromGroup(statusOwn));
         filter.setStatusHasOfflineLog(getFromGroup(statusHasOfflineLog));
+        filter.setStatusHasOfflineFoundLog(getFromGroup(statusHasOfflineFoundLog));
         filter.setStatusStored(getFromGroup(statusStored));
         filter.setStatusFavorite(getFromGroup(statusFavorite));
         filter.setStatusWatchlist(getFromGroup(statusWatchlist));

@@ -4,7 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.ProcessUtils;
 
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 
@@ -36,9 +36,9 @@ abstract class SygicNavigationApp extends AbstractPointNavigationApp {
     }
 
     @Override
-    public void navigate(@NonNull final Activity activity, @NonNull final Geopoint coords) {
+    public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
         final String str = "com.sygic.aura://coordinate|" + coords.getLongitude() + "|" + coords.getLatitude() + "|" + mode;
-        activity.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
+        context.startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(str)));
     }
 
     static class SygicNavigationWalkingApp extends SygicNavigationApp {

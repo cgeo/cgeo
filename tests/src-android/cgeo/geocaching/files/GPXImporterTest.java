@@ -4,7 +4,6 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCUtils;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.models.Geocache;
@@ -397,13 +396,13 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
         FileUtils.mkdirs(tempDir);
         assertThat(tempDir).overridingErrorMessage("Could not create directory %s", tempDir.getPath()).exists();
         // workaround to get storage initialized
-        DataStore.getAllStoredCachesCount(CacheType.ALL, PseudoList.HISTORY_LIST.id);
+        DataStore.getAllStoredCachesCount(PseudoList.HISTORY_LIST.id);
         listId = DataStore.createList("cgeogpxesTest");
     }
 
     @Override
     protected void tearDown() throws Exception {
-        final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, listId);
+        final SearchResult search = DataStore.getBatchOfStoredCaches(null, listId);
         final List<Geocache> cachesInList = new ArrayList<>(search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
         DataStore.markDropped(cachesInList);
         DataStore.removeList(listId);

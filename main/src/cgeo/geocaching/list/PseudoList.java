@@ -2,7 +2,6 @@ package cgeo.geocaching.list;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.storage.DataStore;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,7 @@ public abstract class PseudoList extends AbstractList {
     public static final AbstractList HISTORY_LIST = new PseudoList(HISTORY_LIST_ID, R.string.menu_history) {
         @Override
         public int getNumberOfCaches() {
-            return DataStore.getAllStoredCachesCount(CacheType.ALL, HISTORY_LIST_ID);
+            return DataStore.getAllStoredCachesCount(HISTORY_LIST_ID);
         }
     };
 

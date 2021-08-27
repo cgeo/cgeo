@@ -396,7 +396,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        return GCParser.searchByCoords(center, Settings.getCacheType());
+        return GCParser.searchByCoords(center);
     }
 
     @Override
@@ -506,7 +506,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByKeyword(@NonNull final String keyword) {
-        return GCParser.searchByKeyword(keyword, Settings.getCacheType());
+        return GCParser.searchByKeyword(keyword);
     }
 
     @Override
@@ -538,12 +538,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByOwner(@NonNull final String username) {
-        return GCParser.searchByOwner(username, Settings.getCacheType());
+        return GCParser.searchByOwner(username);
     }
 
     @Override
     public SearchResult searchByFinder(@NonNull final String username) {
-        return GCParser.searchByUsername(username, Settings.getCacheType());
+        return GCParser.searchByUsername(username);
     }
 
     @Override

@@ -8,7 +8,7 @@
 - New: Separate "own" and "found" filters in map quick settings
 - Change: Additionally show cache name in poup details
 
-### Cache details
+### Slėptuvės detalės
 - New: Make use of google translate in-app translation popup
 - New: Allow changing the assigned icon in cache details popup via long click (stored caches only)
 

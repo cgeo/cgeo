@@ -2,8 +2,7 @@ package cgeo.geocaching.log;
 
 import cgeo.geocaching.R;
 
-import android.test.suitebuilder.annotation.Suppress;
-
+import androidx.test.filters.Suppress;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.assertion.ViewAssertions.doesNotExist;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;

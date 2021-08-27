@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">확인</string>
     <!-- basics -->
     <string name="cache">캐시</string>
     <string name="detail">상세표시</string>
@@ -37,7 +38,7 @@
     <string name="userdefined">사용자 정의 캐시</string>
     <string name="unknown">알수없는 형식</string>
     <string name="all_types_short">모든</string>
-    <string name="traditional_short">전통</string>
+    <string name="traditional_short">일반</string>
     <string name="multi_short">멀티</string>
     <string name="mystery_short">미스터리</string>
     <string name="letterbox_short">레터박스</string>
@@ -178,7 +179,9 @@
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">배율</string>
+    <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
     <string name="datetime_clear_button">지우기</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
@@ -326,6 +329,7 @@
     <string name="menu_scan_geo">지오코드 스캔</string>
     <string name="menu_lists_pocket_queries">목록 / 포켓 쿼리</string>
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
+    <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
     <string name="live_map_button">라이브 지도</string>
     <string name="caches_nearby_button">인근 캐시</string>
@@ -493,6 +497,7 @@
     </plurals>
     <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
+    <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
     <string name="cache_filter_storage_select_title">필터 선택</string>
     <string name="cache_filter_storage_select_clear_title">필터 선택 또는 현재 필터 지우기</string>
@@ -513,6 +518,7 @@
     <string name="cache_filter_datefilter_label_to">종료일:</string>
     <string name="cache_filter_checkboxlist_selectallnone">모두 선택</string>
     <string name="cache_filter_checkboxlist_add_items">더 많은 아이템 추가</string>
+    <string name="cache_filter_checkboxlist_add_all_items">모든 아이템 추가</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">아이템 추가</string>
     <string name="cache_filter_favorites_absolute">절대적</string>
     <string name="cache_filter_favorites_percentage">비율</string>
@@ -641,9 +647,7 @@
     <string name="settings_category_social">SNS</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
     <string name="settings_goto_url_button">더보기…</string>
-    <string name="settings_activate_gc">활성화</string>
-    <string name="settings_activate_ec">활성화</string>
-    <string name="settings_activate_lc">활성화</string>
+    <string name="settings_service_activate">활성화</string>
     <string name="settings_gc_legal_note">geocaching.com 서비스를 사용하시면, 그라운드스픽사의 사용약관에 동의하시는 것입니다.</string>
     <string name="settings_info_facebook_login_title">페이스북 또는 구글을 사용하여 로그인</string>
     <string name="settings_info_facebook_login">c:geo 에서 페이스북 또는 구글 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다…</string>
@@ -654,30 +658,22 @@
     <string name="settings_su_description">캐시 검색을 위하여 geocaching.su에 c:geo를 인증하기</string>
     <string name="settings_lc_description">지도에 어드벤처 랩 캐시를 포함합니다.\n\n( \"Geocaching.com\"프리미엄 회원에게만 제공됩니다. 활성화된 \"Geocaching.com\"서비스가 필요합니다.)\n\n이 설정을 변경하려면 다시 시작해야합니다.</string>
     <string name="lc_default_description">이것은 geocaching.com 어드벤처 랩 캐시입니다. 어드벤처는 그라운드스픽 어드벤처 랩 앱에서만 플레이 할 수 있습니다. \"상세 정보\"페이지에서 어드벤처 랩 아이콘을 눌러 이 어드벤처를 위한 어드벤처 랩 앱을 열거나 설치합니다.\n지도 및 검색에서 어드벤처 랩 캐시를 보고 싶지 않은 경우 \"설정\"메뉴-서비스-Geocaching.com 어드벤처 랩을 사용하여 비활성화 할 수 있습니다.</string>
-    <string name="settings_activate_oc">활성화</string>
     <string name="init_summary_oc_de">Opencaching.de 에서 캐시 불러오기</string>
     <string name="init_oc_de_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.de에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_pl">활성화</string>
     <string name="init_summary_oc_pl">Opencaching.pl 에서 캐시 불러오기</string>
     <string name="init_oc_pl_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.pl에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_nl">활성화</string>
     <string name="init_summary_oc_nl">Opencaching.nl 에서 캐시 불러오기</string>
     <string name="init_oc_nl_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.nl에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_us">활성화</string>
     <string name="init_summary_oc_us">Opencaching.us 에서 캐시 불러오기</string>
     <string name="init_oc_us_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.us에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_ro">활성화</string>
     <string name="init_summary_oc_ro">Opencaching.ro 에서 캐시 불러오기</string>
     <string name="init_oc_ro_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.ro에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_uk">활성화</string>
     <string name="init_summary_oc_uk">Opencache.uk 에서 캐시 불러오기</string>
     <string name="init_oc_uk_description">캐시 검색과 찾은 캐시 접근을 위하여 opencache.uk에 c:geo를 인증하기</string>
     <string name="init_summary_su">Geocaching.su 에서 캐시 불러오기</string>
-    <string name="settings_activate_su">활성화</string>
     <string name="init_gcvote_password_description">캐시를 평가하려면, GCVote.com의 지시사항에 따른 후, GCVOte의 비밀번호를 여기 입력하세요.</string>
     <string name="err_vote_send_rating">등급을 보내는 중 오류가 발생했습니다.</string>
     <string name="vote_sent">투표가 성공적으로 송신됨</string>
-    <string name="settings_activate_twitter">활성화</string>
     <string name="init_login_popup">로그인</string>
     <string name="init_login_popup_working">로그인 중…</string>
     <string name="init_login_popup_ok">로그인 OK</string>
@@ -689,6 +685,7 @@
     <string name="init_authorization_credential_username">사용자명</string>
     <string name="init_authorization_credential_password">비밀번호</string>
     <string name="settings_service_active">활성</string>
+    <string name="settings_service_active_unavailable">활성/사용할 수 없음</string>
     <string name="settings_navigation_disabled">이 앱이 설치되어 있지 않음</string>
     <string name="init_signature">서명</string>
     <string name="init_template_help">[NAME]과 같은 자리 표시 자 문자열은 템플릿을 사용할 때 지정된 텍스트로 채워집니다.</string>
@@ -1422,6 +1419,7 @@
     <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
     <string name="search_geo_button">지오코드로 검색</string>
+    <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
     <string name="search_kw_button">키워드로 검색</string>
@@ -1865,7 +1863,6 @@
     <string name="confirm_report_problem_title">문제점 신고</string>
     <string name="confirm_report_problem_message">정말 \'%s\'를 신고하시겠습니까?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">활성화</string>
     <string name="init_summary_geokrety">GeoKrety.org에서 추적아이템 활성화</string>
     <string name="init_geokrety_description">GeoKrety 추적아이템을 로그하려면 GeoKrety.org에서 c:geo를 인증하세요.</string>
     <string name="init_geokrety_userid">사용자 ID : %s</string>
@@ -1959,6 +1956,8 @@
         <item quantity="other">경로는 %d 개의 경로점이 로드되었습니다.</item>
     </plurals>
     <string name="center_on_route">경로 중심</string>
+    <string name="individual_route_set_as_start_title">경로 시작 위치로 지정</string>
+    <string name="individual_route_set_as_start_message">이 항목을 경로 시작으로 설정하고 이후의 모든 항목을 현재 경로의 맨 위로 이동하시겠습니까?</string>
     <!-- individual track -->
     <string name="individual_track">GPX 트랙/경로</string>
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>

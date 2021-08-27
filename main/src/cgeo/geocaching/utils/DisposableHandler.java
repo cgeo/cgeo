@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -21,11 +22,11 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     protected static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
-    public DisposableHandler(final Looper serviceLooper) {
+    protected DisposableHandler(final Looper serviceLooper) {
         super(serviceLooper);
     }
 
-    public DisposableHandler() {
+    protected DisposableHandler() {
         super();
     }
 
@@ -126,7 +127,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
         return handler != null && handler.isDisposed();
     }
 
-    public static void sendLoadProgressDetail(final Handler handler, @StringRes final int resourceId) {
+    public static void sendLoadProgressDetail(@Nullable final Handler handler, @StringRes final int resourceId) {
         if (handler != null) {
             handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
         }

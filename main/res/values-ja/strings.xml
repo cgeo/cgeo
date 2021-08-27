@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">要アーカイブ</string>
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">拡大縮小済み</string>
+    <string name="log_image_info_notscaled">元の解像度</string>
     <string name="log_image_titleprefix">画像</string>
     <string name="datetime_clear_button">削除</string>
     <string name="datetime_nodateset_display">未設定</string>
@@ -327,6 +329,7 @@
     <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_lists_pocket_queries">リスト/ポケット・クエリ</string>
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
+    <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
     <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
@@ -510,7 +513,8 @@
     <string name="cache_filter_datefilter_label_from">開始日:</string>
     <string name="cache_filter_datefilter_label_to">終了日:</string>
     <string name="cache_filter_checkboxlist_selectallnone">すべて選択</string>
-    <string name="cache_filter_checkboxlist_add_items">項目を追加</string>
+    <string name="cache_filter_checkboxlist_add_items">追加</string>
+    <string name="cache_filter_checkboxlist_add_all_items">すべて追加</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">項目を追加</string>
     <string name="cache_filter_favorites_absolute">登録数</string>
     <string name="cache_filter_favorites_percentage">割合(%)</string>
@@ -637,9 +641,7 @@
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
     <string name="settings_goto_url_button">詳細…</string>
-    <string name="settings_activate_gc">有効化</string>
-    <string name="settings_activate_ec">有効化</string>
-    <string name="settings_activate_lc">有効化</string>
+    <string name="settings_service_activate">有効化</string>
     <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります</string>
     <string name="settings_info_facebook_login_title">FacebookやGoogleのアカウントでのログインについて</string>
     <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります…</string>
@@ -650,30 +652,22 @@
     <string name="settings_su_description">c:geoをgeocaching.suで認証してキャッシュを検索できるようにします</string>
     <string name="settings_lc_description">アドベンチャー・ラボ・キャッシュを地図に含めます\n\n(Geocaching.comのプレミアム会員である必要があります。Geocaching.comサービスを有効化してください)\n\nc:geoの再起動が必要です</string>
     <string name="lc_default_description">これはgeocaching.comのアドベンチャー・ラボ・キャッシュです。アドベンチャーはGroundspeakの Adventure Labアプリでのみプレイできます。 「詳細」ページのアドベンチャー・ラボ アイコンをタップすると、Adventure Labアプリを開いたりインストールしたりできます。\nアドベンチャー・ラボ・キャッシュを地図や検索に表示したくない場合は「設定」&gt;「サービス 」&gt;「ジオキャッシングサイト」&gt;「Geocaching.com Adventure Lab」で無効化できます。</string>
-    <string name="settings_activate_oc">有効化</string>
     <string name="init_summary_oc_de">opencaching.deからキャッシュを読み込み</string>
     <string name="init_oc_de_description">c:geoをopencaching.deで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_pl">有効化</string>
     <string name="init_summary_oc_pl">opencaching.plからキャッシュを読み込み</string>
     <string name="init_oc_pl_description">c:geoをopencaching.plで認証してキャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_nl">有効化</string>
     <string name="init_summary_oc_nl">opencaching.nlからキャッシュを読み込み</string>
     <string name="init_oc_nl_description">c:geoをopencaching.nlで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_us">有効化</string>
     <string name="init_summary_oc_us">opencaching.usからキャッシュを読み込み</string>
     <string name="init_oc_us_description">c:geoをopencaching.usで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_ro">有効化</string>
     <string name="init_summary_oc_ro">opencaching.roからキャッシュを読み込み</string>
     <string name="init_oc_ro_description">c:geoをopencaching.roで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_uk">有効化</string>
     <string name="init_summary_oc_uk">opencache.ukからキャッシュを読み込み</string>
     <string name="init_oc_uk_description">c:geoをopencache.ukで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="init_summary_su">Geocaching.suからキャッシュを読み込み</string>
-    <string name="settings_activate_su">有効化</string>
     <string name="init_gcvote_password_description">キャッシュを評価するにはGCVote.comに登録してGCVoteのパスワードを入力してください</string>
     <string name="err_vote_send_rating">評価を送信中にエラーが発生しました</string>
     <string name="vote_sent">評価は正常に送信されました</string>
-    <string name="settings_activate_twitter">有効化</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
     <string name="init_login_popup_ok">ログイン完了</string>
@@ -685,6 +679,7 @@
     <string name="init_authorization_credential_username">ユーザー名</string>
     <string name="init_authorization_credential_password">パスワード</string>
     <string name="settings_service_active">有効</string>
+    <string name="settings_service_active_unavailable">有効/利用不可</string>
     <string name="settings_navigation_disabled">未インストール</string>
     <string name="init_signature">署名</string>
     <string name="init_template_help">[NAME] のようなプレースホルダは、テンプレート機能で指定された文字列に置換されます。</string>
@@ -1858,7 +1853,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="confirm_report_problem_title">問題を報告</string>
     <string name="confirm_report_problem_message">「%s」を報告します。よろしいですか?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">有効化</string>
     <string name="init_summary_geokrety">GeoKrety.orgからトラッカブルを有効にする</string>
     <string name="init_geokrety_description">GeoKrety.orgでc:geoを認証してGeoKretyトラッカブルをログに記録します</string>
     <string name="init_geokrety_userid">ユーザーID: %s</string>
@@ -1930,8 +1924,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_export_individual_route_as_track">トラックとしてエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
-    <string name="map_autotarget_individual_route">ルートの開始地点を目的地として設定</string>
-    <string name="map_disable_autotarget_individual_route">「ルートの開始地点を目的地として設定」は無効になっています</string>
+    <string name="map_autotarget_individual_route">ルートの開始地点を目的地に設定</string>
+    <string name="map_disable_autotarget_individual_route">「ルートの開始地点を目的地に設定」は無効になっています</string>
     <string name="map_clear_manual_targets">目的地を削除</string>
     <string name="map_manual_targets_cleared">目的地を削除しました</string>
     <string name="map_clear_individual_route">個別ルート削除</string>
@@ -1945,6 +1939,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
         <item quantity="other">ルート(%dルート地点)を読み込みました</item>
     </plurals>
     <string name="center_on_route">ルートの中心に移動</string>
+    <string name="individual_route_set_as_start_title">ルート開始点にする</string>
+    <string name="individual_route_set_as_start_message">この場所をルートの開始点にして後続の場所を繰り上げますか?</string>
     <!-- individual track -->
     <string name="individual_track">GPXトラック/ルート</string>
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>

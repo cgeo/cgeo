@@ -10,15 +10,18 @@ import java.util.regex.Pattern;
  */
 final class UTFGridPosition {
 
+    static final int GRID_MAXX = 63;
+    static final int GRID_MAXY = 63;
+
     final int x;
     final int y;
     private static final Pattern PATTERN_JSON_KEY = Pattern.compile("[^\\d]*" + "(\\d+),\\s*(\\d+)" + "[^\\d]*"); // (12, 34)
 
     UTFGridPosition(final int x, final int y) {
-        if (x < 0 || x > UTFGrid.GRID_MAXX) {
+        if (x < 0 || x > GRID_MAXX) {
             throw new IllegalArgumentException("x outside bounds");
         }
-        if (y < 0 || y > UTFGrid.GRID_MAXY) {
+        if (y < 0 || y > GRID_MAXY) {
             throw new IllegalArgumentException("y outside bounds");
         }
         this.x = x;

@@ -1942,7 +1942,8 @@ public class Geocache implements IWaypoint {
         }
     }
 
-    public static SearchResult searchByGeocode(final String geocode, final String guid, final boolean forceReload, final DisposableHandler handler) {
+    @Nullable
+    public static SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final boolean forceReload, @Nullable final DisposableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e("Geocache.searchByGeocode: No geocode nor guid given");
             return null;

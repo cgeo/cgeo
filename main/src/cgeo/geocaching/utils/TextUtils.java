@@ -82,9 +82,9 @@ public final class TextUtils {
      *            Find the last occurring value
      * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
-    @SuppressWarnings("RedundantStringConstructorCall")
+    @Nullable
     @SuppressFBWarnings("DM_STRING_CTOR")
-    public static String getMatch(@Nullable final String data, final Pattern pattern, final boolean trim, final int group, final String defaultValue, final boolean last) {
+    public static String getMatch(@Nullable final String data, final Pattern pattern, final boolean trim, final int group, @Nullable final String defaultValue, final boolean last) {
         if (data != null) {
             final Matcher matcher = pattern.matcher(data);
             if (matcher.find()) {
@@ -102,6 +102,7 @@ public final class TextUtils {
                     // see http://developer.android.com/reference/java/lang/String.html#backing_array
                     // Thus the creation of a new String via String constructor is voluntary here!!
                     // And BTW: You cannot even see that effect in the debugger, but must use a separate memory profiler!
+                    //noinspection StringOperationCanBeSimplified
                     return trim ? new String(untrimmed).trim() : new String(untrimmed);
                 }
             }
@@ -123,7 +124,8 @@ public final class TextUtils {
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
-    public static String getMatch(final String data, final Pattern pattern, final boolean trim, final String defaultValue) {
+    @Nullable
+    public static String getMatch(@Nullable final String data, final Pattern pattern, final boolean trim, @Nullable final String defaultValue) {
         return getMatch(data, pattern, trim, 1, defaultValue, false);
     }
 
@@ -138,7 +140,8 @@ public final class TextUtils {
      *            Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
-    public static String getMatch(@Nullable final String data, final Pattern pattern, final String defaultValue) {
+    @Nullable
+    public static String getMatch(@Nullable final String data, final Pattern pattern, @Nullable final String defaultValue) {
         return getMatch(data, pattern, true, 1, defaultValue, false);
     }
 
@@ -150,7 +153,6 @@ public final class TextUtils {
     public static boolean matches(final String data, final Pattern pattern) {
         // matcher is faster than String.contains() and more flexible - it takes patterns instead of fixed texts
         return data != null && pattern.matcher(data).find();
-
     }
 
     /**
@@ -204,7 +206,10 @@ public final class TextUtils {
      * @return <tt>true</tt> if <tt>str</tt> contains HTML code that needs to go through a HTML renderer before
      *         being displayed, <tt>false</tt> if it can be displayed as-is without any loss
      */
-    public static boolean containsHtml(final String str) {
+    public static boolean containsHtml(@Nullable final String str) {
+        if (StringUtils.isBlank(str)) {
+            return false;
+        }
         return str.indexOf('<') != -1 || str.indexOf('&') != -1;
     }
 
@@ -254,6 +259,7 @@ public final class TextUtils {
         // loop back to the first non-whitespace character
         //noinspection StatementWithEmptyBody
         while (--i >= 0 && Character.isWhitespace(source.charAt(i))) {
+            // empty
         }
 
         if (i < length - 1) {
@@ -269,7 +275,8 @@ public final class TextUtils {
      * @param html a string containing either HTML or plain text
      * @return a string without any HTML markup
      */
-    public static String stripHtml(final String html) {
+    @Nullable
+    public static String stripHtml(@Nullable final String html) {
         return containsHtml(html) ? trimSpanned(HtmlCompat.fromHtml(html, HtmlCompat.FROM_HTML_MODE_LEGACY)).toString() : html;
     }
 
@@ -290,7 +297,7 @@ public final class TextUtils {
     }
 
     @NonNull
-    public static String getTextAfterIndexUntil(final String text, final int idx, final String endToken) {
+    public static String getTextAfterIndexUntil(final String text, final int idx, @Nullable final String endToken) {
         return getTextAfterIndexUntil(text, idx, endToken, -1);
     }
 
@@ -329,7 +336,7 @@ public final class TextUtils {
      * @return found text or empty string. Never null.
      */
     @NonNull
-    public static String getTextAfterIndexUntil(final String text, final int idx, final String endToken, final int maxLength) {
+    public static String getTextAfterIndexUntil(final String text, final int idx, @Nullable final String endToken, final int maxLength) {
         if (StringUtils.isEmpty(text) || idx >= text.length() - 1) {
             return "";
         }
@@ -350,6 +357,7 @@ public final class TextUtils {
      * Method returns null if no delimited value is found.
      * This is the 'inverse' function to {@link #createDelimitedValue(String, char, char)}
      */
+    @Nullable
     public static String parseNextDelimitedValue(@NonNull final String text, final char delimiterChar, final char escapeChar) {
         final String quotedDelim = "\\" + delimiterChar;
         final String quotedEsc = "\\" + escapeChar;
@@ -484,6 +492,7 @@ public final class TextUtils {
         return toComparableStringIgnoreCaseAndSpecialChars(s1).equals(toComparableStringIgnoreCaseAndSpecialChars(s2));
     }
 
+    @Nullable
     public static String toComparableStringIgnoreCaseAndSpecialChars(final String value) {
         if (value == null) {
             return null;
@@ -517,5 +526,4 @@ public final class TextUtils {
         }
         return pattern;
     }
-
 }

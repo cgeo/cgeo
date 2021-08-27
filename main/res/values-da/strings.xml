@@ -37,7 +37,6 @@
     <string name="userdefined">Brugerdefineret cache</string>
     <string name="unknown">Ukendt Type</string>
     <string name="all_types_short">Alle</string>
-    <string name="traditional_short">Traditionel</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -177,7 +176,6 @@
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaleret/Komprimeret:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Billede</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
@@ -577,8 +575,7 @@
     <string name="settings_category_social">Sociale medier</string>
     <string name="settings_category_logging_other">Andre logningsmuligheder</string>
     <string name="settings_goto_url_button">mere…</string>
-    <string name="settings_activate_gc">Aktivér</string>
-    <string name="settings_activate_ec">Aktivér</string>
+    <string name="settings_service_activate">Aktivér</string>
     <string name="settings_gc_legal_note">Når du bruger tjenesten geocaching.com, accepterer du Groundspeaks brugsvilkår.</string>
     <string name="settings_info_facebook_login_title">Log ind med Facebook eller Google</string>
     <string name="settings_info_facebook_login">Gennem c:geo kan du ikke logge ind på geocaching.com med din Facebook- eller Google-konto. Men der er en nem løsning…</string>
@@ -587,30 +584,22 @@
     <string name="settings_gc_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.com.</string>
     <string name="settings_ec_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på extremcaching.com.</string>
     <string name="settings_su_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.su.</string>
-    <string name="settings_activate_oc">Aktivér</string>
     <string name="init_summary_oc_de">Indlæs cacher fra opencaching.de</string>
     <string name="init_oc_de_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.de.</string>
-    <string name="settings_activate_oc_pl">Aktivér</string>
     <string name="init_summary_oc_pl">Indlæs cacher fra opencaching.pl</string>
     <string name="init_oc_pl_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.pl.</string>
-    <string name="settings_activate_oc_nl">Aktivér</string>
     <string name="init_summary_oc_nl">Indlæs cacher fra opencaching.nl</string>
     <string name="init_oc_nl_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.nl.</string>
-    <string name="settings_activate_oc_us">Aktivér</string>
     <string name="init_summary_oc_us">Indlæs cacher fra opencaching.us</string>
     <string name="init_oc_us_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.us.</string>
-    <string name="settings_activate_oc_ro">Aktivér</string>
     <string name="init_summary_oc_ro">Indlæs cacher fra opencaching.ro</string>
     <string name="init_oc_ro_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.ro.</string>
-    <string name="settings_activate_oc_uk">Aktivér</string>
     <string name="init_summary_oc_uk">Indlæs cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencache.uk.</string>
     <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
-    <string name="settings_activate_su">Aktivér</string>
     <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
     <string name="err_vote_send_rating">Fejl under afsendelse af bedømmelse.</string>
     <string name="vote_sent">Bedømmelse blev afsendt</string>
-    <string name="settings_activate_twitter">Aktivér</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logger ind…</string>
     <string name="init_login_popup_ok">Login OK</string>
@@ -1630,7 +1619,6 @@
     <string name="confirm_report_problem_title">Rapportér et problem</string>
     <string name="confirm_report_problem_message">Du er ved at rapportere \'%s\'. Er du sikker?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivér</string>
     <string name="init_summary_geokrety">Aktivér trackables fra GeoKrety.org</string>
     <string name="init_geokrety_description">Autorisér c:geo til at logge GeoKrety trackables på GeoKrety.org.</string>
     <string name="init_geokrety_userid">Brugerid: %s</string>

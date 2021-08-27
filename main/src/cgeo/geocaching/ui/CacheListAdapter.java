@@ -416,7 +416,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         holder.binding.checkbox.setOnClickListener(new SelectionCheckBoxListener(cache));
 
         distances.add(holder.binding.distance);
-        holder.binding.distance.setContent(cache.getCoords());
+        holder.binding.distance.setCacheData(cache.getCoords(), cache.getDistance());
+        holder.binding.distance.update(coords);
+
         compasses.add(holder.binding.direction);
         holder.binding.direction.setTargetCoords(cache.getCoords());
 
@@ -441,14 +443,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             holder.binding.inventory.setVisibility(View.VISIBLE);
         } else {
             holder.binding.inventory.setVisibility(View.GONE);
-        }
-
-        if (cache.getDistance() != null) {
-            holder.binding.distance.setDistance(cache.getDistance());
-        }
-
-        if (cache.getCoords() != null && coords != null) {
-            holder.binding.distance.update(coords);
         }
 
         // only show the direction if this is enabled in the settings

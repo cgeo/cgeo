@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">Ok</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -163,7 +164,6 @@
     <string name="log_problem_archive_label">Cachen bör arkiveras</string>
     <string name="log_problem_archive_text">Denna geocacharen rapporterade att denna geocache bör arkiveras. En reviewer har blivit informerad.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalning</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkalad/komprimerad:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Bild</string>
     <string name="datetime_clear_button">Rensa</string>
     <string name="datetime_nodateset_display">Inget datum angivet</string>
@@ -433,6 +433,7 @@
     <string name="cache_filter_owner">Cacheägare</string>
     <string name="cache_filter_difficulty">Svårighetsgrad</string>
     <string name="cache_filter_terrain">Terräng</string>
+    <string name="cache_filter_difficulty_terrain">Svårighetsgrad / Terräng</string>
     <string name="cache_filter_rating">Betyg</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cache-attribut</string>
@@ -469,6 +470,7 @@
     <string name="cache_filter_datefilter_label_to">Till:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Markera alla</string>
     <string name="cache_filter_checkboxlist_add_items">Lägg till fler objekt</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Lägg till alla objekt</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Lägg till objekt</string>
     <string name="cache_filter_favorites_absolute">Absolut</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
@@ -576,9 +578,7 @@
     <string name="settings_category_social">Sociala media</string>
     <string name="settings_category_logging_other">Andra loggningsinställningar</string>
     <string name="settings_goto_url_button">mer …</string>
-    <string name="settings_activate_gc">Aktivera</string>
-    <string name="settings_activate_ec">Aktivera</string>
-    <string name="settings_activate_lc">Aktivera</string>
+    <string name="settings_service_activate">Aktivera</string>
     <string name="settings_gc_legal_note">Genom att använda tjänster hos geocaching.com godkänner du Groundspeaks användarvillkor.</string>
     <string name="settings_info_facebook_login_title">Logga in med Facebook eller Google</string>
     <string name="settings_info_facebook_login">Du kan inte logga in på geocaching.com med ditt Facebook eller Google-konto. Men det finns en enkel lösning…</string>
@@ -589,30 +589,22 @@
     <string name="settings_su_description">Tillåt c:geo att söka efter cacher på geocaching.su.</string>
     <string name="settings_lc_description">Inkludera Adventure Lab cacher på kartan.\n\n(Endast tillgängliga för premiummedlemmar på \"Geocaching.com\". Kräver en aktiverad \"Geocaching.com\" service.)\n\nFör att ändra denna inställning krävs en omstart.</string>
     <string name="lc_default_description">Detta är en geocaching.com Adventure Lab Cache. Äventyr kan endast spelas med Groundspeak Adventure Lab-Appen. Klicka på Adventure Lab-ikonen på sidan \"Detaljer\" för att öppna/installera Adventure Lab-appen för detta äventyr därifrån.\nOm du inte vill se Adenture Lab cacher på kartan och sökningar kan du inaktivera dem genom att använda \"inställningar\" menyn - Tjänster - Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Aktivera</string>
     <string name="init_summary_oc_de">Ladda cacher från opencaching.de</string>
     <string name="init_oc_de_description">Använd c:geo med opencaching.de för att söka efter cacher samt för att filtrera dina funna cacher.</string>
-    <string name="settings_activate_oc_pl">Aktivera</string>
     <string name="init_summary_oc_pl">Ladda cacher från opencaching.pl</string>
     <string name="init_oc_pl_description">Använd c:geo med opencaching.pl för att söka efter cacher samt för att filtrera dina funna cacher.</string>
-    <string name="settings_activate_oc_nl">Aktivera</string>
     <string name="init_summary_oc_nl">Ladda cacher från opencaching.nl</string>
     <string name="init_oc_nl_description">Använd c:geo med opencaching.nl för att söka efter cacher samt för att filtrera dina funna cacher.</string>
-    <string name="settings_activate_oc_us">Aktivera</string>
     <string name="init_summary_oc_us">Ladda cacher från opencaching.us</string>
     <string name="init_oc_us_description">Använd c:geo med opencaching.us för att söka efter cacher samt för att filtrera dina funna cacher.</string>
-    <string name="settings_activate_oc_ro">Aktivera</string>
     <string name="init_summary_oc_ro">Ladda cacher från opencaching.ro</string>
     <string name="init_oc_ro_description">Använd c:geo med opencaching.ro för att söka efter cacher samt för att filtrera dina funna cacher.</string>
-    <string name="settings_activate_oc_uk">Aktivera</string>
     <string name="init_summary_oc_uk">Ladda cacher från opencache.uk</string>
     <string name="init_oc_uk_description">Använd c:geo med opencache.uk för att söka efter cacher samt för att filtrera dina funna cacher.</string>
     <string name="init_summary_su">Ladda cacher från geocaching.su</string>
-    <string name="settings_activate_su">Aktivera</string>
     <string name="init_gcvote_password_description">För att kunna betygsätta en cache måste du följa instruktionerna på GCVote.com och ange ditt lösenord till GCVote här.</string>
     <string name="err_vote_send_rating">Fel uppstod när betyget skickades.</string>
     <string name="vote_sent">Rösten har skickats</string>
-    <string name="settings_activate_twitter">Aktivera</string>
     <string name="init_login_popup">Inloggning</string>
     <string name="init_login_popup_working">Loggar in…</string>
     <string name="init_login_popup_ok">Inloggning OK</string>
@@ -1176,6 +1168,7 @@
     <string name="cache_distance">Avstånd</string>
     <string name="cache_difficulty">Svårighet</string>
     <string name="cache_terrain">Terräng</string>
+    <string name="cache_difficulty_terrain">Svårighetsgrad / Terräng</string>
     <string name="cache_rating">Betyg</string>
     <string name="cache_own_rating">Eget betyg</string>
     <string name="cache_rating_of_new">%1$.1f av %2$d</string>
@@ -1793,7 +1786,6 @@
     <string name="confirm_report_problem_title">Rapportera problem</string>
     <string name="confirm_report_problem_message">Du vill rapportera \'%s\'. Är du säker?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivera</string>
     <string name="init_summary_geokrety">Aktivera trackables från GeoKrety.org</string>
     <string name="init_geokrety_description">Tillåt c:geo att kommunicera med GeoKrety.org för att logga GeoKrety trackables.</string>
     <string name="init_geokrety_userid">Användarid: %s</string>

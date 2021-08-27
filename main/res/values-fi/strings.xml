@@ -179,7 +179,9 @@
     <string name="log_problem_archive_label">Kätkö pitäisi arkistoida</string>
     <string name="log_problem_archive_text">Tämä kätköilijä ilmoitti, että kätkö pitäisi arkistoida. Vapaaehtoiselle kätkötarkastajalle on ilmoitettu.</string>
     <string name="log_image_scale_option_noscaling">Ei skaalausta</string>
-    <string name="log_image_info">%1$d x %2$d pikseliä, %3$s\nSkaalattu/pakattu:\n%4$d x %5$d pikseliä, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">skaalattu</string>
+    <string name="log_image_info_notscaled">ei skaalattu</string>
     <string name="log_image_titleprefix">Kuva</string>
     <string name="datetime_clear_button">Tyhjennä</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
@@ -327,6 +329,7 @@
     <string name="menu_scan_geo">Skannaa geokoodi</string>
     <string name="menu_lists_pocket_queries">Listat / pocket queryt</string>
     <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
+    <string name="menu_invert_order">Käännä järjestys</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kartta</string>
     <string name="caches_nearby_button">Lähistöllä</string>
@@ -646,9 +649,7 @@
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut lokkausasetukset</string>
     <string name="settings_goto_url_button">Lisää…</string>
-    <string name="settings_activate_gc">Aktivoi</string>
-    <string name="settings_activate_ec">Aktivoi</string>
-    <string name="settings_activate_lc">Aktivoi</string>
+    <string name="settings_service_activate">Aktivoi</string>
     <string name="settings_gc_legal_note">Käyttämällä geocaching.com -palvelua hyväksyt samalla Groundspeakin käyttöehdot.</string>
     <string name="settings_info_facebook_login_title">Kirjaudu käyttäen Facebookia tai Googlea</string>
     <string name="settings_info_facebook_login">c:geo ei voi kirjautua geocaching.com:iin Facebook- tai Google-tilillä, mutta se on helppo kiertää…</string>
@@ -659,30 +660,22 @@
     <string name="settings_su_description">Anna c:geolle lupa geocaching.su-palvelun käyttöön etsiäksesi kätköjä.</string>
     <string name="settings_lc_description">Sisällytä Adventure Lab -katköt kartalla.\n\n(Saatavilla vain \"Geocaching.com\"in premium-jäsenille. Edellyttää aktivoitua \"Geocaching.com\"-palvelua.)\n\nTämän asetuksen vaihto edellyttää sovelluksen uudelleenkäynnistystä.</string>
     <string name="lc_default_description">Tämä on geocaching.com:in Adventure Lab Cache. Seikkailuja voi pelata vain Groundspeakin Adventure Lab -sovelluksen kanssa. Napauta Adventure Lab-kuvaketta \"Yksityiskohdat\" -sivulla avataksesi tai asentaaksesi Adventure Lab -sovelluksen tätä seikkailua varten.\nJos et halua nähdä Adventure Lab -kätköjä kartalla ja haussa, voit poistaa ne käytöstä \"asetukset\" -valikossa - Palvelut - Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Aktivoi</string>
     <string name="init_summary_oc_de">Lataa kätköt palvelusta opencaching.de</string>
     <string name="init_oc_de_description">Anna c:geolle lupa opencaching.de:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="settings_activate_oc_pl">Aktivoi</string>
     <string name="init_summary_oc_pl">Lataa kätköt palvelusta opencaching.pl</string>
     <string name="init_oc_pl_description">Anna c:geolle lupa opencaching.pl:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="settings_activate_oc_nl">Aktivoi</string>
     <string name="init_summary_oc_nl">Lataa kätköt palvelusta opencaching.nl</string>
     <string name="init_oc_nl_description">Anna c:geolle lupa opencaching.nl:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="settings_activate_oc_us">Aktivoi</string>
     <string name="init_summary_oc_us">Lataa kätköt palvelusta opencaching.us</string>
     <string name="init_oc_us_description">Anna c:geolle lupa opencaching.us:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="settings_activate_oc_ro">Aktivoi</string>
     <string name="init_summary_oc_ro">Lataa kätköt palvelusta opencaching.ro</string>
     <string name="init_oc_ro_description">Anna c:geolle lupa opencaching.ro:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
-    <string name="settings_activate_oc_uk">Aktivoi</string>
     <string name="init_summary_oc_uk">Lataa kätköt palvelusta opencache.uk</string>
     <string name="init_oc_uk_description">Anna c:geolle lupa opencache.uk:n käyttöön voidaksesi etsiä kätköjä sekä nähdä/valikoida löytämiäsi kätköjä.</string>
     <string name="init_summary_su">Lataa kätköt palvelusta Geocaching.su</string>
-    <string name="settings_activate_su">Aktivoi</string>
     <string name="init_gcvote_password_description">Voidaksesi arvostella kätköjä, seuraa ohjeita GCVote.com:ssa ja syötä GCvoten salasanasi tänne.</string>
     <string name="err_vote_send_rating">Virhe lähetettäessä arvostelua.</string>
     <string name="vote_sent">Arvostelu lähetetty onnistuneesti</string>
-    <string name="settings_activate_twitter">Aktivoi</string>
     <string name="init_login_popup">Kirjaudu</string>
     <string name="init_login_popup_working">Kirjaudutaan sisään…</string>
     <string name="init_login_popup_ok">Sisäänkirjautuminen onnistui</string>
@@ -694,6 +687,7 @@
     <string name="init_authorization_credential_username">Käyttäjätunnus</string>
     <string name="init_authorization_credential_password">Salasana</string>
     <string name="settings_service_active">Aktiivinen</string>
+    <string name="settings_service_active_unavailable">Aktiivinen/Ei saatavilla</string>
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
     <string name="init_template_help">Paikanpitäjämerkit - kuten [NAME] - täytetään määritetyllä tekstillä, kun mallia käytetään.</string>
@@ -1436,6 +1430,7 @@
     <string name="search_address_button">Etsi osoitteella</string>
     <string name="search_geo">GC-koodi</string>
     <string name="search_geo_button">Hae GC-koodilla</string>
+    <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
     <string name="search_kw">Hakusanat</string>
     <string name="search_kw_prefill">Hakusana</string>
     <string name="search_kw_button">Hae hakusanalla</string>
@@ -1886,7 +1881,6 @@
     <string name="confirm_report_problem_title">Ilmoita ongelmasta</string>
     <string name="confirm_report_problem_message">Haluat ilmoittaa \"%s\". Oletko varma?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivoi</string>
     <string name="init_summary_geokrety">Vahvista reissaajat sivulla GeoKrety.org</string>
     <string name="init_geokrety_description">Valtuuta c:geo sivulla GeoKrety.org lokataksesi GeoKrety-reissaajia.</string>
     <string name="init_geokrety_userid">Käyttäjätunnus: %s</string>
@@ -1987,6 +1981,8 @@
         <item quantity="other">Reitti ladattu %d reittipisteellä</item>
     </plurals>
     <string name="center_on_route">Keskitä reittiin</string>
+    <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
+    <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
     <!-- individual track -->
     <string name="individual_track">GPX jälki/reitti</string>
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>

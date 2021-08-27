@@ -1,4 +1,9 @@
-package cgeo.geocaching.filters.core;
+package cgeo.geocaching.filters;
+
+import cgeo.geocaching.filters.core.AndGeocacheFilter;
+import cgeo.geocaching.filters.core.GeocacheFilter;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.NameGeocacheFilter;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;

@@ -90,13 +90,12 @@
         android:layout_marginTop="1dip"
         android:layout_gravity="right|center_vertical">
 
-        <view
+        <cgeo.geocaching.ui.DistanceView
             android:id="@+id/distance"
             android:layout_width="78dip"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            class="cgeo.geocaching.ui.DistanceView"
             android:ellipsize="end"
             android:gravity="center"
             android:lines="1"
@@ -105,13 +104,12 @@
             android:textColor="@color/colorText_listsPrimary"
             android:maxLines="1" /><!-- explicitly use default text color here -->
 
-        <view
+        <cgeo.geocaching.ui.CompassMiniView
             android:id="@+id/direction"
             android:layout_width="78dip"
             android:layout_height="28dip"
             android:layout_centerHorizontal="true"
             android:layout_gravity="center"
-            class="cgeo.geocaching.ui.CompassMiniView"
             android:layout_below="@id/distance"
             android:gravity="center"
             android:minHeight="28px"

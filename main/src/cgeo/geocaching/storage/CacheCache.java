@@ -1,7 +1,6 @@
 package cgeo.geocaching.storage;
 
 import cgeo.geocaching.connector.gc.Tile;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore.StorageLocation;
@@ -81,7 +80,7 @@ public class CacheCache {
         }
     }
 
-    public synchronized Set<String> getInViewport(final Viewport viewport, final CacheType cacheType) {
+    public synchronized Set<String> getInViewport(final Viewport viewport) {
         final Set<String> geocodes = new HashSet<>();
         for (final Geocache cache : cachesCache.values()) {
             if (cache.getCoords() == null) {
@@ -90,7 +89,7 @@ public class CacheCache {
                 Log.w("CacheCache.getInViewport: got cache with null coordinates: " + cache.getGeocode());
                 continue;
             }
-            if (cacheType.contains(cache) && viewport.contains(cache)) {
+            if (viewport.contains(cache)) {
                 geocodes.add(cache.getGeocode());
             }
         }

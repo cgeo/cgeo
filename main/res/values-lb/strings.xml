@@ -453,8 +453,7 @@
     <string name="settings_category_social">Sozial Netzwierker</string>
     <string name="settings_category_logging_other">Aner Logging Optiounen</string>
     <string name="settings_goto_url_button">méi …</string>
-    <string name="settings_activate_gc">Aktivéieren</string>
-    <string name="settings_activate_ec">Aktivéieren</string>
+    <string name="settings_service_activate">Aktivéieren</string>
     <string name="settings_gc_legal_note">Mam benotzen vun de Servicer vu geocaching.com, akzeptéiers du d\'Benotzungsbedéngungen vu Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Login mat Facebook oder Google</string>
     <string name="settings_info_facebook_login">c:geo kann sech net iwwert den Facebook oder Google-Konto bei Geocaching.com umellen. Et gëtt awer eng einfach Léisung…</string>
@@ -463,30 +462,22 @@
     <string name="settings_gc_description">c:geo erlaben op Geocaching.com zouzegräifen, fir Cachen ze sichen.</string>
     <string name="settings_ec_description">c:geo erlaben op Extremcaching.com zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
     <string name="settings_su_description">c:geo erlaben op Geocaching.com zouzegräifen, fir Cachen ze sichen.</string>
-    <string name="settings_activate_oc">Aktivéieren</string>
     <string name="init_summary_oc_de">Lued Caches vun opencaching.de</string>
     <string name="init_oc_de_description">c:geo erlaben op opencaching.de zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_pl">Aktivéieren</string>
     <string name="init_summary_oc_pl">Cachen vun opencaching.pl lueden</string>
     <string name="init_oc_pl_description">c:geo erlaben op opencaching.pl zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_nl">Aktivéieren</string>
     <string name="init_summary_oc_nl">Cachen vun opencaching.nl lueden</string>
     <string name="init_oc_nl_description">c:geo erlaben op opencaching.nl zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_us">Aktivéieren</string>
     <string name="init_summary_oc_us">Cachen vun opencaching.us lueden</string>
     <string name="init_oc_us_description">c:geo erlaben op opencaching.us zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_ro">Aktivéieren</string>
     <string name="init_summary_oc_ro">Cachen vun opencaching.ro lueden</string>
     <string name="init_oc_ro_description">c:geo erlaben op opencaching.ro zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_uk">Aktivéieren</string>
     <string name="init_summary_oc_uk">Cachen vun opencaching.uk lueden</string>
     <string name="init_oc_uk_description">c:geo erlaben op opencaching.uk zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
     <string name="init_summary_su">Cachen vu Geocaching.su lueden</string>
-    <string name="settings_activate_su">Aktivéieren</string>
     <string name="init_gcvote_password_description">Fir ee Cache bewäerten ze kënnen, folleg d\'Uleedung op GCVote.com a tipp däin GCVote-Passwort hei.</string>
     <string name="err_vote_send_rating">Feeler beim Verschécken vun der Bewäertung.</string>
     <string name="vote_sent">Bewäertung erfollegräich verschéckt</string>
-    <string name="settings_activate_twitter">Aktivéieren</string>
     <string name="init_login_popup">Umellen</string>
     <string name="init_login_popup_working">Umeldung…</string>
     <string name="init_login_popup_ok">Umellen OK</string>
@@ -624,7 +615,6 @@
     <string name="send">Schécken</string>
     <string name="confirm_report_problem_title">Problem mellen</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivéieren</string>
     <string name="do_not_ask_me_again">Fro mech net nach emol</string>
     <string name="list_list_headline">Lëschten:</string>
     <!-- calendar adder -->

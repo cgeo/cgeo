@@ -2,7 +2,6 @@ package cgeo.geocaching.command;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
@@ -35,7 +34,7 @@ public abstract class MakeListUniqueCommand extends AbstractCommand {
 
     @Override
     protected void doCommand() {
-        final SearchResult search = DataStore.getBatchOfStoredCaches(null, CacheType.ALL, listId);
+        final SearchResult search = DataStore.getBatchOfStoredCaches(null, listId);
         final Set<Geocache> caches = DataStore.loadCaches(search.getGeocodes(), LoadFlags.LOAD_CACHE_OR_DB);
 
         for (final Geocache geocache : caches) {

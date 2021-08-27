@@ -1,4 +1,4 @@
-package cgeo.geocaching.connector.lc;
+package cgeo.geocaching.connector.al;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
@@ -27,23 +27,23 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class LCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByCenter, ISearchByViewPort {
+public class ALConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByCenter, ISearchByViewPort {
 
     @NonNull
     private static final String CACHE_URL = "https://adventurelab.page.link/";
 
     @NonNull
-    protected static final String GEOCODE_PREFIX = "LC";
+    protected static final String GEOCODE_PREFIX = "AL";
 
     /**
-     * Pattern for LC codes
+     * Pattern for AL codes
      */
     @NonNull
-    private static final Pattern PATTERN_LC_CODE = Pattern.compile("LC[-\\w]+", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_AL_CODE = Pattern.compile("AL[-\\w]+", Pattern.CASE_INSENSITIVE);
 
     private final String name;
 
-    private LCConnector() {
+    private ALConnector() {
         // singleton
         name = CgeoApplication.getInstance().getString(R.string.settings_title_lc);
     }
@@ -52,23 +52,23 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
      * initialization on demand holder pattern
      */
     private static class Holder {
-        @NonNull private static final LCConnector INSTANCE = new LCConnector();
+        @NonNull private static final ALConnector INSTANCE = new ALConnector();
     }
 
     @NonNull
-    public static LCConnector getInstance() {
+    public static ALConnector getInstance() {
         return Holder.INSTANCE;
     }
 
     @Override
     public boolean canHandle(@NonNull final String geocode) {
-        return PATTERN_LC_CODE.matcher(geocode).matches();
+        return PATTERN_AL_CODE.matcher(geocode).matches();
     }
 
     @NotNull
     @Override
     public String[] getGeocodeSqlLikeExpressions() {
-        return new String[]{"LC%"};
+        return new String[]{"AL%"};
     }
 
 
@@ -116,28 +116,28 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
         if (geocode == null) {
             return null;
         }
-        Log.d("_LC searchByGeocode: geocode = " + geocode);
+        Log.d("_AL searchByGeocode: geocode = " + geocode);
         DisposableHandler.sendLoadProgressDetail(handler, R.string.cache_dialog_loading_details_status_loadpage);
-        final Geocache cache = LCApi.searchByGeocode(geocode);
+        final Geocache cache = ALApi.searchByGeocode(geocode);
         return cache != null ? new SearchResult(cache) : null;
     }
 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        final Collection<Geocache> caches = LCApi.searchByBBox(viewport);
+        final Collection<Geocache> caches = ALApi.searchByBBox(viewport);
         final SearchResult searchResult = new SearchResult(caches);
         searchResult.setTotalCountGC(caches.size());
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        return searchResult.putInCacheAndLoadRating();
     }
 
     @Override
     @NonNull
     public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        final Collection<Geocache> caches = LCApi.searchByCenter(center);
+        final Collection<Geocache> caches = ALApi.searchByCenter(center);
         final SearchResult searchResult = new SearchResult(caches);
         searchResult.setTotalCountGC(caches.size());
-        return searchResult.filterSearchResults(false, false, Settings.getCacheType());
+        return searchResult.putInCacheAndLoadRating();
     }
 
 
@@ -150,7 +150,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @NonNull
     @Override
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
-        return new SearchResult(LCApi.searchByFilter(filter, this));
+        return new SearchResult(ALApi.searchByFilter(filter, this));
     }
 
 
@@ -167,7 +167,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isActive() {
-        return Settings.isLCConnectorActive() && Settings.isGCPremiumMember() && Settings.isGCConnectorActive();
+        return Settings.isALConnectorActive() && Settings.isGCPremiumMember() && Settings.isGCConnectorActive();
     }
 
     @Override
@@ -183,7 +183,7 @@ public class LCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
-        final String geocode = "LC" + StringUtils.substringAfter(url, "https://adventurelab.page.link/");
+        final String geocode = "AL" + StringUtils.substringAfter(url, "https://adventurelab.page.link/");
         if (canHandle(geocode)) {
             return geocode;
         }

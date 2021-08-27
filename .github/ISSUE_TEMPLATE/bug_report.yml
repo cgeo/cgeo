@@ -85,7 +85,7 @@ body:
       label: System information
       description: (optional) Providing your system information might be helpful in many cases.
       placeholder: Copy and paste it from c:geo Menu -> About c:geo -> Swipe right to System
-      render: shell
+      render: text
     validations:
       required: false
   - type: textarea
