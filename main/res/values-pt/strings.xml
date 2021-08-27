@@ -481,7 +481,6 @@
     <string name="cache_filter_location">Localização</string>
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
-    <string name="cache_filter_stored_since">Armazenada desde</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
