@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">ölçekli</string>
     <string name="log_image_info_notscaled">ölçeksiz</string>
     <string name="log_image_titleprefix">Resim</string>
-    <string name="datetime_clear_button">Temizle</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- translation -->
     <string name="translate">Çeviri</string>
@@ -398,25 +397,6 @@
     <string name="caches_map_locus_export">Locus\'a aktarma</string>
     <string name="caches_filter_menuitem">Filtre</string>
     <string name="caches_filter_title">Filtreleme</string>
-    <string name="caches_filter_size">Boyut</string>
-    <string name="caches_filter_type">Tür</string>
-    <string name="caches_filter_track">Trackable bulunan</string>
-    <string name="caches_filter_clear">Filtreleri temizle</string>
-    <string name="caches_filter_modified">Değiştirilmiş koordinatlar ile</string>
-    <string name="caches_filter_offline_log">Çevrimdışı kayıt ile</string>
-    <string name="caches_filter_origin">Başlangıç Noktası</string>
-    <string name="caches_filter_distance">Mesafe</string>
-    <string name="caches_filter_personal_note">Kişisel not ile</string>
-    <string name="caches_filter_popularity">Favoriler</string>
-    <string name="caches_filter_popularity_ratio">Favoriler [%]</string>
-    <string name="caches_filter_personal_data">Kişisel verilerle</string>
-    <string name="caches_filter_rating">Puanlama ile</string>
-    <string name="caches_filter_own_rating">Kendi puanlandırmam ile</string>
-    <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
-    <string name="caches_filter_own_waypoint">Kullanıcı tanımlı ara noktalar ile</string>
-    <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
-    <string name="caches_filter_lists">Bir listeye eklenmişler</string>
-    <string name="caches_filter_empty">(boş)</string>
     <string name="caches_removing_from_history">Geçmişten kaldırılıyor…</string>
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
@@ -1095,7 +1075,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Özellikler</string>
     <string name="cache_inventory">Envanter</string>
     <string name="cache_log_images_title">Kayıt görselleri</string>
     <string name="cache_log_image_default_title">Görsel</string>
@@ -1217,27 +1196,13 @@
     <string name="ignore_confirm_title">Dikkatli ol</string>
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
-    <string name="cache_stored">Kaydedilmiş</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
     <string name="cache_status_found">Bulundu</string>
     <string name="cache_not_status_found">Bulunmadı</string>
-    <string name="cache_never_found">Hiçbir bulunmadı</string>
-    <string name="cache_found_last_30_days">Son 30 gün içerisinde bulunanlar</string>
     <string name="cache_status_archived">Arşivlendi</string>
     <string name="cache_status_disabled">Devredışı</string>
     <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Sadece Premium üyeler</string>
-    <string name="cache_status_not_premium">Tüm Üyelere Erişim</string>
-    <string name="cache_status_stored">Kaydedilmiş</string>
-    <string name="cache_status_not_stored">Kaydedilmemiş</string>
-    <string name="cache_status_stored_lasteighthours">Son sekiz saat içinde</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Son yirmi dört saat içinde</string>
-    <string name="cache_status_stored_lastsevendays">Son yedi gün içinde</string>
-    <string name="cache_status_stored_lastthirtydays">Son otuz gün içinde</string>
-    <string name="cache_status_stored_morethaneighthours">Son sekiz saatten önce</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Son yirmi dört saatten önce</string>
-    <string name="cache_status_stored_morethansevendays">Son yedi günden önce</string>
-    <string name="cache_status_stored_morethanthirtydays">Son otuz günden önce</string>
     <string name="cache_geocode">Geo kodu</string>
     <string name="cache_name">İsim</string>
     <string name="cache_name_set">Cache ismi ayarla</string>
@@ -1249,7 +1214,6 @@
     <string name="cache_distance">Mesafe</string>
     <string name="cache_difficulty">Zorluk</string>
     <string name="cache_terrain">Arazi</string>
-    <string name="cache_difficulty_terrain">Zorluk / Arazi</string>
     <string name="cache_rating">Puanlama</string>
     <string name="cache_own_rating">Puanlamanız</string>
     <string name="cache_rating_of_new">%1$.1f/%2$d</string>
@@ -1258,9 +1222,7 @@
     <string name="cache_hidden">Yerleştirilme</string>
     <string name="cache_event">Saklanma Tarihi</string>
     <string name="cache_location">Konum</string>
-    <string name="cache_location_country">Ülke</string>
     <string name="cache_coordinates">Koordinatlar</string>
-    <string name="cache_calculator">Hesap Makinesi</string>
     <string name="cache_coordinates_original">Orjinal koordinatlar</string>
     <string name="cache_spoiler_images_title">İpucu görselleri</string>
     <string name="cache_log_types">Kayıt türleri</string>
@@ -1871,7 +1833,6 @@
         <item quantity="one">%s favori</item>
         <item quantity="other">%s favori</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favori</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo kısayolu</string>
     <string name="create_shortcut">Kısayol oluştur</string>
@@ -1972,7 +1933,6 @@
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
     <string name="map_clear_individual_route_confirm">Özel rotanızdan tüm cache/yol noktalarını kaldırmak istediğinize emin misiniz?</string>
     <string name="map_individual_route_cleared">Özel rota temizlendi</string>
-    <string name="save_sorted_route">Kaydet</string>
     <string name="sorted_route_saved">Özel rota kaydedildi</string>
     <string name="load_individual_route_error">Özel rota yüklenirken hata oluştu</string>
     <string name="route_item_not_yet_loaded">Rota henüz yüklenmedi</string>
