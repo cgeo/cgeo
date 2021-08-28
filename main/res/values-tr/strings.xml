@@ -401,7 +401,7 @@
     <string name="caches_filter_clear">Filtreleri temizle</string>
     <string name="caches_filter_modified">Değiştirilmiş koordinatlar ile</string>
     <string name="caches_filter_offline_log">Çevrimdışı kayıt ile</string>
-    <string name="caches_filter_origin">Başlangıç Noktası</string>
+    <string name="caches_filter_origin">Başlangıç noktası</string>
     <string name="caches_filter_distance">Mesafe</string>
     <string name="caches_filter_personal_note">Kişisel not ile</string>
     <string name="caches_filter_popularity">Favoriler</string>
