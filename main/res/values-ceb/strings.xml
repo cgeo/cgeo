@@ -111,6 +111,7 @@
     <string name="log_oc_team_comment">Ang komentaryo sa OC Team</string>
     <string name="log_your_saved_log">Ang imohang na-save nga log</string>
     <string name="log_empty_logbook">Walay sulod ang logbook sa kini nga cache.</string>
+    <string name="datetime_clear_button">Tin-aw</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Ang paghubad sa %s</string>
     <string name="translate_to_english">Ang paghubad sa Inglis</string>
@@ -280,17 +281,17 @@
     <string name="caches_copy_all">Kopyahon tanan</string>
     <string name="caches_map_locus_export">I-eksport adto sa Locus</string>
     <string name="caches_filter_title">Piltir sa</string>
-    <string name="caches_filter_size">Ang gidak-on</string>
-    <string name="caches_filter_type">Ang matang</string>
+    <string name="caches_filter_size">Gidak-on</string>
+    <string name="caches_filter_type">Matang</string>
     <string name="caches_filter_track">Adunay mga Trackable</string>
     <string name="caches_filter_clear">I-klaro ang mga pilter</string>
     <string name="caches_filter_modified">Adunay mausab na mga koordinar</string>
     <string name="caches_filter_offline_log">Adunay offline log</string>
     <string name="caches_filter_origin">Sinugdanan</string>
-    <string name="caches_filter_distance">Distansiya</string>
+    <string name="caches_filter_distance">Distansya</string>
     <string name="caches_filter_personal_note">Adunay personal na nota</string>
-    <string name="caches_filter_popularity">Ang mga paborito</string>
-    <string name="caches_filter_popularity_ratio">Ang mga paborito [%]</string>
+    <string name="caches_filter_popularity">Mga paborito</string>
+    <string name="caches_filter_popularity_ratio">Mga paborito [%]</string>
     <string name="caches_filter_personal_data">Adunay personal na datos</string>
     <string name="caches_filter_rating">Adunay grado</string>
     <string name="caches_filter_own_rating">Sa kaugalingong rating</string>
@@ -636,6 +637,7 @@
     <string name="ignore_confirm_title">Pag amping</string>
     <string name="ignore_confirm_message">Ibalewala ang cache pasabot nga ang kani nga cache kay dili na mausab samtang nag-loading ug mga datos gekan sa geocaching.com. Igo ra nimo makita ang cache pag-usab sa pagbalewala niini sa website.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Gitipigan</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
     <string name="cache_never_found">Wala nakit-an</string>
@@ -1165,6 +1167,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">I-save</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
