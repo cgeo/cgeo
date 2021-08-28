@@ -1,10 +1,10 @@
 ## Bugfix Release
 
 ### Design
-- Remove transition animation when opening cache details
+- Remove transition animation when opening cache
 - Increase font size for text input fields
 - Increase font size for some compass elements
-- User font color with higher contrast in waypoint tab
+- Use font color with higher contrast in waypoint tab
 - Make quick offline log check mark visible again
 - Increase font size for coordinate input fields
 
