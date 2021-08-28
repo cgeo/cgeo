@@ -74,7 +74,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
             );
         }
 
-        new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, true, false, (tab, position) -> tab.setText(getTitle(getItemId(position)))).attach();
+        new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, (tab, position) -> tab.setText(getTitle(getItemId(position)))).attach();
     }
 
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
