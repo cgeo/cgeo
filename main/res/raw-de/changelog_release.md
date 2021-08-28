@@ -7,7 +7,7 @@
 - Benutze Schrift mit höherem Kontrast im Wegpunkt-Tab
 - Häkchen im schnellen Offline-Log wieder sichtbar machen
 - Schriftgröße für Koordinateneingabe vergrößert
-- Respect system font size settings also on older Android versions (5,6 and 7)
+- Systemeinstellungen für die Schriftgröße auch bei älteren Android-Versionen (5,6 und 7) berücksichtigen
 
 ### Cache-Details
 - Fehlender Cache-Titel, wenn der Cache über Geocode oder Link geöffnet wurde (Änderung auf der Webseite)
