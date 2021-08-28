@@ -294,22 +294,6 @@
     <string name="caches_copy_all">Kopyahin lahat</string>
     <string name="caches_map_locus_export">I-luwas patungo sa lokus</string>
     <string name="caches_filter_title">Sinala ng</string>
-    <string name="caches_filter_size">Sukat</string>
-    <string name="caches_filter_type">Ang uri</string>
-    <string name="caches_filter_track">May mga trackable</string>
-    <string name="caches_filter_clear">Linisin ang mga salaan</string>
-    <string name="caches_filter_modified">May mga binagong mga koordinado</string>
-    <string name="caches_filter_offline_log">May log na offline</string>
-    <string name="caches_filter_origin">Ang pinagmulan</string>
-    <string name="caches_filter_distance">Ang distansya</string>
-    <string name="caches_filter_personal_note">May sariling sulat</string>
-    <string name="caches_filter_popularity">Ang mga paborito</string>
-    <string name="caches_filter_popularity_ratio">Ang mga paborito [%]</string>
-    <string name="caches_filter_personal_data">May sariling datos</string>
-    <string name="caches_filter_rating">May marka</string>
-    <string name="caches_filter_own_rating">May sariling marka</string>
-    <string name="caches_filter_multi_listing">Ang napakadaming lista ng may ibat-ibang esdado</string>
-    <string name="caches_filter_missing_gcvote">Natagpuan ang mga caches ay hindi ibinoto</string>
     <string name="caches_removing_from_history">Ang pagtanggal sa kasaysayan&#8230;</string>
     <string name="caches_clear_offlinelogs">Linisin ang saradong mga sulat</string>
     <string name="caches_clear_offlinelogs_message">Gusto mo bang burahin ang offline na mga naka-log?</string>
@@ -579,7 +563,6 @@
         <item quantity="one">tungkol sa %d araw na nakalipas</item>
         <item quantity="other">tungkol sa %d araw na nakalipas</item>
     </plurals>
-    <string name="cache_attributes">Mga Katangian</string>
     <string name="cache_inventory">Imbentaryo</string>
     <string name="cache_log_images_title">Mga nai-log na mga imahe</string>
     <string name="cache_log_image_default_title">Larawan</string>
@@ -664,14 +647,9 @@
     <string name="cache_status_offline_log">Naka-save na Log</string>
     <string name="cache_status_found">Nahanap</string>
     <string name="cache_not_status_found">Hindi nahanap</string>
-    <string name="cache_never_found">Hindi Kailanman Nahanap</string>
-    <string name="cache_found_last_30_days">Nakita sa nakaraang 30 na araw</string>
     <string name="cache_status_archived">Naka-archive</string>
     <string name="cache_status_disabled">Hindi pinagana</string>
     <string name="cache_status_premium">Mga Premyadong Miyembro lamang</string>
-    <string name="cache_status_not_premium">Makaka-access ang Lahat ng mga Miyembro</string>
-    <string name="cache_status_stored">Naka-imbak</string>
-    <string name="cache_status_not_stored">Hindi nakaimbak</string>
     <string name="cache_geocode">Ang code ng geo</string>
     <string name="cache_name">Ang pangalan</string>
     <string name="cache_type">Uri</string>
@@ -687,7 +665,6 @@
     <string name="cache_event">Petsa</string>
     <string name="cache_location">Ang lokasyon</string>
     <string name="cache_coordinates">Mga koordinado</string>
-    <string name="cache_calculator">Kalkulador</string>
     <string name="cache_coordinates_original">Orihinal na mga koordinado</string>
     <string name="cache_spoiler_images_title">Mga imahe ng spoiler</string>
     <string name="cache_log_types">Mag uri ng log</string>
@@ -1147,7 +1124,6 @@
         <item quantity="one">%s paborito</item>
         <item quantity="other">%s mga paborito</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% na mga paborito</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">ang c:geo na shortcut</string>
     <string name="create_shortcut">Lumikha ng malapit na daan</string>
