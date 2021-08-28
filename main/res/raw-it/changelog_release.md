@@ -1,3 +1,24 @@
+## Bugfix Release
+
+### Design
+- Remove transition animation when opening cache details
+- Increase font size for text input fields
+- Increase font size for some compass elements
+- User font color with higher contrast in waypoint tab
+- Make quick offline log check mark visible again
+- Increase font size for coordinate input fields
+
+### Dettagli del cache
+- Fix missing cache title if cache opened via geocode or link (website change)
+- Fix missing cache description on some caches
+
+### Altro
+- Show premium caches again in search results of basic members
+- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
+- Use more common English abbreviation for traditional cache in cache type filter
+
+## Feature Release 2021.08.15:
+
 ### Sistema di filtri avanzato
 - Introduzione di un nuovo sistema di filtri in c:geo, supporto di filtri flessibili, combinabili e memorizzabili
 - Disponibile sia negli elenchi dei cache che nella visualizzazione a mappa
