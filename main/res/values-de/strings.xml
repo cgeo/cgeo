@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">skaliert</string>
     <string name="log_image_info_notscaled">nicht skaliert</string>
     <string name="log_image_titleprefix">Bild</string>
-    <string name="datetime_clear_button">Leeren</string>
     <string name="datetime_nodateset_display">Kein Datum gewählt</string>
     <!-- translation -->
     <string name="translate">Übersetzen</string>
@@ -398,25 +397,6 @@
     <string name="caches_map_locus_export">Exportieren nach Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filtern nach</string>
-    <string name="caches_filter_size">Größe</string>
-    <string name="caches_filter_type">Typ</string>
-    <string name="caches_filter_track">Mit Trackables</string>
-    <string name="caches_filter_clear">Filter zurücksetzen</string>
-    <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
-    <string name="caches_filter_offline_log">Mit Offline-Log</string>
-    <string name="caches_filter_origin">Herkunft</string>
-    <string name="caches_filter_distance">Entfernung</string>
-    <string name="caches_filter_personal_note">Mit persönlicher Notiz</string>
-    <string name="caches_filter_popularity">Favoriten</string>
-    <string name="caches_filter_popularity_ratio">Favoriten [%]</string>
-    <string name="caches_filter_personal_data">Mit eigenen Informationen</string>
-    <string name="caches_filter_rating">Mit Bewertung</string>
-    <string name="caches_filter_own_rating">Mit eigener Bewertung</string>
-    <string name="caches_filter_multi_listing">Mehrfach gelistet mit unterschiedlichem Status</string>
-    <string name="caches_filter_own_waypoint">Mit nutzerdefinierten Wegpunkten</string>
-    <string name="caches_filter_missing_gcvote">Gefundene Caches ohne Bewertung</string>
-    <string name="caches_filter_lists">Einer Liste zugewiesen</string>
-    <string name="caches_filter_empty">(leer)</string>
     <string name="caches_removing_from_history">Lösche aus Verlauf…</string>
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
@@ -481,7 +461,7 @@
     <string name="cache_filter_location">Ort</string>
     <string name="cache_filter_stored_lists">Gespeicherte Listen</string>
     <string name="cache_filter_origin">Herkunft</string>
-    <string name="cache_filter_stored_since">Gespeichert seit</string>
+    <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
@@ -502,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Leeren</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
     <string name="cache_filter_storage_select_title">Filter auswählen</string>
+    <string name="cache_filter_storage_delete_title">Filter löschen</string>
+    <string name="cache_filter_storage_delete_message">Möchtest du diese Filterkonfiguration wirklich löschen?</string>
     <string name="cache_filter_storage_select_clear_title">Filter wählen oder aktuellen Filter löschen</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Es sind noch keine Filter gespeichert.</string>
     <string name="cache_filter_storage_save_title">Filter mit Namen speichern</string>
@@ -538,6 +520,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Hat Trackable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Hat eigene Wertung</string>
     <string name="cache_filter_status_select_label_has_offline_log">Hat Offline-Log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Hat Offline-Gefunden-Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Gelöster Mystery</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Diese Filtereinstellung wirkt sich nur auf Mysteries aus.\n\n Ein Mystery gilt als \'gelöst\', wenn entweder die Koordinaten geändert wurden oder ein gültiger Final-Wegpunkt mit gefüllten Koordinaten vorhanden ist.</string>
     <string name="cache_filter_status_active">Aktiv</string>
@@ -1095,7 +1078,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">vor über einem Jahr</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Attribute</string>
     <string name="cache_inventory">Inventar</string>
     <string name="cache_log_images_title">Logbild</string>
     <string name="cache_log_image_default_title">Bild</string>
@@ -1217,27 +1199,13 @@
     <string name="ignore_confirm_title">Sei vorsichtig</string>
     <string name="ignore_confirm_message">Ignorieren bedeutet, dass dieser Cache nicht mehr auftaucht, wenn du Daten von Geocaching.com lädst. Du kannst ihn nur wieder sichtbar machen, indem du das Ignorieren auf der Webseite aufhebst.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Gespeichert</string>
     <string name="cache_status_offline_log">Gespeicherter Log</string>
     <string name="cache_status_found">Gefunden</string>
     <string name="cache_not_status_found">Nicht gefunden</string>
-    <string name="cache_never_found">Noch kein Fund</string>
-    <string name="cache_found_last_30_days">Gefunden in den letzten 30 Tagen</string>
     <string name="cache_status_archived">Archiviert</string>
     <string name="cache_status_disabled">Deaktiviert</string>
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
-    <string name="cache_status_not_premium">Für alle Mitglieder</string>
-    <string name="cache_status_stored">Gespeichert</string>
-    <string name="cache_status_not_stored">Nicht gespeichert</string>
-    <string name="cache_status_stored_lasteighthours">Innerhalb der letzten acht Stunden</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Innerhalb der letzten 24 Stunden</string>
-    <string name="cache_status_stored_lastsevendays">Innerhalb der letzten sieben Tage</string>
-    <string name="cache_status_stored_lastthirtydays">Innerhalb der letzten dreißig Tage</string>
-    <string name="cache_status_stored_morethaneighthours">Vor den letzten acht Stunden</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Vor den letzten 24 Stunden</string>
-    <string name="cache_status_stored_morethansevendays">Vor den letzten sieben Tagen</string>
-    <string name="cache_status_stored_morethanthirtydays">Vor den letzten dreißig Tagen</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
     <string name="cache_name_set">Cachename festlegen</string>
@@ -1249,7 +1217,6 @@
     <string name="cache_distance">Entfernung</string>
     <string name="cache_difficulty">Schwierigkeit</string>
     <string name="cache_terrain">Gelände</string>
-    <string name="cache_difficulty_terrain">Schwierigkeit / Gelände</string>
     <string name="cache_rating">Bewertung</string>
     <string name="cache_own_rating">Eigene Bewertung</string>
     <string name="cache_rating_of_new">%1$.1f von %2$d</string>
@@ -1258,9 +1225,7 @@
     <string name="cache_hidden">Versteckt</string>
     <string name="cache_event">Zeitangabe</string>
     <string name="cache_location">Bundesland</string>
-    <string name="cache_location_country">Land / Region</string>
     <string name="cache_coordinates">Koordinaten</string>
-    <string name="cache_calculator">Rechner</string>
     <string name="cache_coordinates_original">Ursprüngliche Koordinaten</string>
     <string name="cache_spoiler_images_title">Hinweisbilder</string>
     <string name="cache_log_types">Logs</string>
@@ -1387,7 +1352,7 @@
     <string name="map_showc_found">Gefundene</string>
     <string name="map_showc_disabled">Deaktivierte</string>
     <string name="map_showc_archived">Archivierte</string>
-    <string name="map_showc_offlinelog">Offline geloggt</string>
+    <string name="map_showc_found_offline">Gefunden (Offline)</string>
     <string name="map_showwp_original">Originale</string>
     <string name="map_showwp_parking">Parken</string>
     <string name="map_showwp_visited">Besuchte</string>
@@ -1871,7 +1836,6 @@
         <item quantity="one">%s Favorit</item>
         <item quantity="other">%s Favoriten</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% Favoriten</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
@@ -1972,7 +1936,6 @@
     <string name="map_clear_individual_route">Individuelle Route löschen</string>
     <string name="map_clear_individual_route_confirm">Möchtest du alle Caches / Wegpunkte von deiner individuellen Route entfernen?</string>
     <string name="map_individual_route_cleared">Individuelle Route gelöscht</string>
-    <string name="save_sorted_route">Speichern</string>
     <string name="sorted_route_saved">Individuelle Route gespeichert</string>
     <string name="load_individual_route_error">Fehler beim Laden der individuellen Route</string>
     <string name="route_item_not_yet_loaded">Element noch nicht geladen</string>

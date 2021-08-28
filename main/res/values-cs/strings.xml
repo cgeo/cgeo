@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">zmenšen</string>
     <string name="log_image_info_notscaled">nezmenšen</string>
     <string name="log_image_titleprefix">Obrázek</string>
-    <string name="datetime_clear_button">Vymazat</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- translation -->
     <string name="translate">Přeložit</string>
@@ -400,25 +399,6 @@
     <string name="caches_map_locus_export">Exportovat do Locusu</string>
     <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtrovat podle</string>
-    <string name="caches_filter_size">Velikost</string>
-    <string name="caches_filter_type">Typ</string>
-    <string name="caches_filter_track">Se sledovatelnými předměty</string>
-    <string name="caches_filter_clear">Vymazat filtry</string>
-    <string name="caches_filter_modified">S upravenými souřadnicemi</string>
-    <string name="caches_filter_offline_log">S offline logy</string>
-    <string name="caches_filter_origin">Původ keše</string>
-    <string name="caches_filter_distance">Vzdálenost</string>
-    <string name="caches_filter_personal_note">S osobní poznámkou</string>
-    <string name="caches_filter_popularity">Oblíbenost</string>
-    <string name="caches_filter_popularity_ratio">Oblíbenost [%]</string>
-    <string name="caches_filter_personal_data">S osobními údaji</string>
-    <string name="caches_filter_rating">S hodnocením</string>
-    <string name="caches_filter_own_rating">S vlastním hodnocením</string>
-    <string name="caches_filter_multi_listing">Multi listing s různým stavem</string>
-    <string name="caches_filter_own_waypoint">S uživatelsky definovatelnými trasovými body</string>
-    <string name="caches_filter_missing_gcvote">Nalezené kešky bez GCVote hlasů</string>
-    <string name="caches_filter_lists">Zařazené do seznamu</string>
-    <string name="caches_filter_empty">(prázdný)</string>
     <string name="caches_removing_from_history">Čištění Historie…</string>
     <string name="caches_clear_offlinelogs">Vymazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
@@ -483,7 +463,7 @@
     <string name="cache_filter_location">Místo</string>
     <string name="cache_filter_stored_lists">Uložené seznamy</string>
     <string name="cache_filter_origin">Původ</string>
-    <string name="cache_filter_stored_since">Uložené od</string>
+    <string name="cache_filter_stored_since">Poslední aktualizace podrobností</string>
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
@@ -506,6 +486,8 @@
     <string name="cache_filter_storage_clear_button">Vyčistit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
     <string name="cache_filter_storage_select_title">Vyberte filtr</string>
+    <string name="cache_filter_storage_delete_title">Odstranit filtr</string>
+    <string name="cache_filter_storage_delete_message">Opravdu chcete odstranit tuto konfiguraci filtru?</string>
     <string name="cache_filter_storage_select_clear_title">Vyberte filtr nebo vymažte aktuální filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
     <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
@@ -542,6 +524,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Má trackovatelný předmět</string>
     <string name="cache_filter_status_select_label_has_own_vote">Má vlastní hlas</string>
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
@@ -1115,7 +1098,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">před více než rokem</string>
     <string name="cache_premium">Prémiový účet</string>
-    <string name="cache_attributes">Atributy</string>
     <string name="cache_inventory">Inventář</string>
     <string name="cache_log_images_title">Obrázky z logů</string>
     <string name="cache_log_image_default_title">Fotografie</string>
@@ -1237,27 +1219,13 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uloženo</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>
-    <string name="cache_never_found">Nikdy nenalezena</string>
-    <string name="cache_found_last_30_days">Nalezeno za posledních 30 dní</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
-    <string name="cache_status_not_premium">Přístupná všem uživatelům</string>
-    <string name="cache_status_stored">Uložené</string>
-    <string name="cache_status_not_stored">Neuložené</string>
-    <string name="cache_status_stored_lasteighthours">Za posledních 8 hodin</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Za posledních 24 hodin</string>
-    <string name="cache_status_stored_lastsevendays">Za posledních 7 dní</string>
-    <string name="cache_status_stored_lastthirtydays">Za posledních 30 dní</string>
-    <string name="cache_status_stored_morethaneighthours">Před posledními 8 hodinami</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Před posledními 24 hodinami</string>
-    <string name="cache_status_stored_morethansevendays">Před posledními 7 dny</string>
-    <string name="cache_status_stored_morethanthirtydays">Před posledními 30 dny</string>
     <string name="cache_geocode">GC kód</string>
     <string name="cache_name">Název</string>
     <string name="cache_name_set">Nastavit název kešky</string>
@@ -1269,7 +1237,6 @@
     <string name="cache_distance">Vzdálenost</string>
     <string name="cache_difficulty">Obtížnost</string>
     <string name="cache_terrain">Terén</string>
-    <string name="cache_difficulty_terrain">Obtížnost / Terén</string>
     <string name="cache_rating">Hodnocení</string>
     <string name="cache_own_rating">Vlastní hodnocení</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
@@ -1278,9 +1245,7 @@
     <string name="cache_hidden">Skryta</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Místo</string>
-    <string name="cache_location_country">Stát</string>
     <string name="cache_coordinates">Souřadnice</string>
-    <string name="cache_calculator">Kalkulačka</string>
     <string name="cache_coordinates_original">Původní souřadnice</string>
     <string name="cache_spoiler_images_title">Obrázky s nápovědou</string>
     <string name="cache_log_types">Typy zápisů</string>
@@ -1409,7 +1374,7 @@
     <string name="map_showc_found">Nalezené</string>
     <string name="map_showc_disabled">Deaktivované</string>
     <string name="map_showc_archived">Archivované</string>
-    <string name="map_showc_offlinelog">Zalogované offline</string>
+    <string name="map_showc_found_offline">Nalezeno (offline)</string>
     <string name="map_showwp_original">Původní</string>
     <string name="map_showwp_parking">Parkování</string>
     <string name="map_showwp_visited">Navštívené</string>
@@ -1907,7 +1872,6 @@
         <item quantity="many">%s oblíbených</item>
         <item quantity="other">%s oblíbených</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% oblíbených položek</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
     <string name="create_shortcut">Vytvořit zástupce</string>
@@ -2020,7 +1984,6 @@
     <string name="map_clear_individual_route">Vymazat individuální trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete odstranit všechny kešky/trasové body z vaší individuální trasy?</string>
     <string name="map_individual_route_cleared">Individuální trasa vymazána</string>
-    <string name="save_sorted_route">Uložit</string>
     <string name="sorted_route_saved">Individuální trasa uložena</string>
     <string name="load_individual_route_error">Chyba při načítání individuální trasy</string>
     <string name="route_item_not_yet_loaded">Soubor s trasou nebyl dosud načten</string>

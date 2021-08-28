@@ -352,25 +352,6 @@
     <string name="caches_copy_all">全部复制</string>
     <string name="caches_map_locus_export">导出到 Locus</string>
     <string name="caches_filter_title">筛选方式</string>
-    <string name="caches_filter_size">尺寸</string>
-    <string name="caches_filter_type">类型</string>
-    <string name="caches_filter_track">有可追踪物</string>
-    <string name="caches_filter_clear">清除筛选</string>
-    <string name="caches_filter_modified">有修改过的坐标</string>
-    <string name="caches_filter_offline_log">有离线日志</string>
-    <string name="caches_filter_origin">来源</string>
-    <string name="caches_filter_distance">距离</string>
-    <string name="caches_filter_personal_note">有个人笔记</string>
-    <string name="caches_filter_popularity">收藏人数</string>
-    <string name="caches_filter_popularity_ratio">收藏百分比 [%]</string>
-    <string name="caches_filter_personal_data">有个人数据</string>
-    <string name="caches_filter_rating">有评分</string>
-    <string name="caches_filter_own_rating">有任何评级</string>
-    <string name="caches_filter_multi_listing">不同状态的多列表</string>
-    <string name="caches_filter_own_waypoint">有用户定义的航点</string>
-    <string name="caches_filter_missing_gcvote">找到的缓存未投票</string>
-    <string name="caches_filter_lists">已被分配到某个列表</string>
-    <string name="caches_filter_empty">（空）</string>
     <string name="caches_removing_from_history">正从历史记录中删除…</string>
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
     <string name="caches_clear_offlinelogs_message">您想要清除离线日志吗？</string>
@@ -734,7 +715,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
-    <string name="cache_found_last_30_days">最近 30 天下载</string>
     <string name="cache_geocode">地理编码</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->

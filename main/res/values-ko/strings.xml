@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">배율</string>
     <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
-    <string name="datetime_clear_button">지우기</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
     <!-- translation -->
     <string name="translate">번역</string>
@@ -397,25 +396,6 @@
     <string name="caches_map_locus_export">Locus로 내보내기</string>
     <string name="caches_filter_menuitem">필터</string>
     <string name="caches_filter_title">필터링 기준</string>
-    <string name="caches_filter_size">크기</string>
-    <string name="caches_filter_type">유형</string>
-    <string name="caches_filter_track">추적아이템 있는 것</string>
-    <string name="caches_filter_clear">필터 지우기</string>
-    <string name="caches_filter_modified">수정된 좌표가 있는 것</string>
-    <string name="caches_filter_offline_log">오프라인 로그가 있는 것</string>
-    <string name="caches_filter_origin">출처</string>
-    <string name="caches_filter_distance">거리</string>
-    <string name="caches_filter_personal_note">개인 메모가 있는 것</string>
-    <string name="caches_filter_popularity">호감점수</string>
-    <string name="caches_filter_popularity_ratio">호감점수 [%]</string>
-    <string name="caches_filter_personal_data">개인 데이터가 있는 것</string>
-    <string name="caches_filter_rating">평점이 있는 것</string>
-    <string name="caches_filter_own_rating">자신이 평가 한 것</string>
-    <string name="caches_filter_multi_listing">여러 서비스에 동시에 올려진 것</string>
-    <string name="caches_filter_own_waypoint">사용자 정의 지점을 사용하기</string>
-    <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
-    <string name="caches_filter_lists">목록에 할당</string>
-    <string name="caches_filter_empty">(없음)</string>
     <string name="caches_removing_from_history">이전 기록에서 제거중…</string>
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
@@ -480,7 +460,6 @@
     <string name="cache_filter_location">위치</string>
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
-    <string name="cache_filter_stored_since">이후 저장</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
@@ -1085,7 +1064,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">1년 이상 이전</string>
     <string name="cache_premium">프리미엄</string>
-    <string name="cache_attributes">속성</string>
     <string name="cache_inventory">보관함</string>
     <string name="cache_log_images_title">로그 사진</string>
     <string name="cache_log_image_default_title">사진</string>
@@ -1207,27 +1185,13 @@
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
-    <string name="cache_stored">저장됨</string>
     <string name="cache_status_offline_log">저장된 로그</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
-    <string name="cache_never_found">찾지 못함</string>
-    <string name="cache_found_last_30_days">최근 30일간 찾은 캐시</string>
     <string name="cache_status_archived">영구보관됨</string>
     <string name="cache_status_disabled">일시정지됨</string>
     <string name="cache_status_active">활성</string>
     <string name="cache_status_premium">프리미엄 회원 전용</string>
-    <string name="cache_status_not_premium">모든 회원 접근가능</string>
-    <string name="cache_status_stored">저장됨</string>
-    <string name="cache_status_not_stored">저장되지 않음</string>
-    <string name="cache_status_stored_lasteighthours">지난 8 시간 이내</string>
-    <string name="cache_status_stored_lasttwentyfourhours">지난 24 시간 이내</string>
-    <string name="cache_status_stored_lastsevendays">지난 7 일 이내</string>
-    <string name="cache_status_stored_lastthirtydays">지난 30 일 이내</string>
-    <string name="cache_status_stored_morethaneighthours">지난 8 시간 전에</string>
-    <string name="cache_status_stored_morethantwentyfourhours">지난 24 시간 전에</string>
-    <string name="cache_status_stored_morethansevendays">지난 7 일 전에</string>
-    <string name="cache_status_stored_morethanthirtydays">지난 30 일 전에</string>
     <string name="cache_geocode">지오코드</string>
     <string name="cache_name">제목</string>
     <string name="cache_name_set">캐시 이름 설정</string>
@@ -1239,7 +1203,6 @@
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
-    <string name="cache_difficulty_terrain">난이도 / 지형</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
     <string name="cache_rating_of_new">%1$.1f 중 %2$d</string>
@@ -1248,9 +1211,7 @@
     <string name="cache_hidden">숨긴 날짜</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
-    <string name="cache_location_country">나라</string>
     <string name="cache_coordinates">좌표</string>
-    <string name="cache_calculator">계산기</string>
     <string name="cache_coordinates_original">원래 좌표</string>
     <string name="cache_spoiler_images_title">스포일러 사진</string>
     <string name="cache_log_types">로그 유형</string>
@@ -1376,7 +1337,6 @@
     <string name="map_showc_found">찾음</string>
     <string name="map_showc_disabled">일시정지됨</string>
     <string name="map_showc_archived">영구보관됨</string>
-    <string name="map_showc_offlinelog">오프라인으로 로그됨</string>
     <string name="map_showwp_original">원본</string>
     <string name="map_showwp_parking">주차</string>
     <string name="map_showwp_visited">방문했음</string>
@@ -1853,7 +1813,6 @@
     <plurals name="favorite_points">
         <item quantity="other">%s 호감점수</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt;%d%% 호감점수</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
     <string name="create_shortcut">바로가기 만들기</string>
@@ -1948,7 +1907,6 @@
     <string name="map_clear_individual_route">개인 경로 지우기</string>
     <string name="map_clear_individual_route_confirm">개별 경로에서 모든 캐시/지점을 제거 하시겠습니까?</string>
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
-    <string name="save_sorted_route">저장</string>
     <string name="sorted_route_saved">개인 경로가 저장되었습니다.</string>
     <string name="load_individual_route_error">개인 경로를 로드하는 중에 오류가 발생했습니다.</string>
     <string name="route_item_not_yet_loaded">경로 항목이 아직 로드되지 않았습니다.</string>

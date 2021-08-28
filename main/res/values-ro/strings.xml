@@ -325,23 +325,6 @@
     <string name="caches_copy_all">Copiază tot</string>
     <string name="caches_map_locus_export">Exportă către Locus</string>
     <string name="caches_filter_title">Filtrează după</string>
-    <string name="caches_filter_size">Dimensiune</string>
-    <string name="caches_filter_type">Tip</string>
-    <string name="caches_filter_track">Conţine obiecte călătoare</string>
-    <string name="caches_filter_clear">Anulează filtrele</string>
-    <string name="caches_filter_modified">Cu coordonate modificate</string>
-    <string name="caches_filter_offline_log">Cu însemnări salvate</string>
-    <string name="caches_filter_origin">Origine</string>
-    <string name="caches_filter_distance">Distanţă</string>
-    <string name="caches_filter_personal_note">Scrie notă personală</string>
-    <string name="caches_filter_popularity">Favorite</string>
-    <string name="caches_filter_popularity_ratio">Favorite [%]</string>
-    <string name="caches_filter_personal_data">Cu date personalizate</string>
-    <string name="caches_filter_rating">Cu voturi</string>
-    <string name="caches_filter_own_rating">Cu votul tău</string>
-    <string name="caches_filter_multi_listing">Afişare multiplă cu statut diferit</string>
-    <string name="caches_filter_missing_gcvote">Geocutii găsite, fără votul tău</string>
-    <string name="caches_filter_empty">(gol)</string>
     <string name="caches_removing_from_history">Şterge din istoric…</string>
     <string name="caches_clear_offlinelogs">Şterge însemnări stocate local</string>
     <string name="caches_clear_offlinelogs_message">Vrei să ştergi însemnările stocate local?</string>
@@ -613,7 +596,6 @@
         <item quantity="few">acum %d zile</item>
         <item quantity="other">acum %d zile</item>
     </plurals>
-    <string name="cache_attributes">Atribute</string>
     <string name="cache_inventory">Inventar</string>
     <string name="cache_log_images_title">Imagini însemnare</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -699,14 +681,9 @@
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
-    <string name="cache_never_found">Negăsită</string>
-    <string name="cache_found_last_30_days">Găsite în ultimele 30 de zile</string>
     <string name="cache_status_archived">Arhivată</string>
     <string name="cache_status_disabled">Inactivă</string>
     <string name="cache_status_premium">Doar membrii Premium</string>
-    <string name="cache_status_not_premium">Acces pentru toţi membrii</string>
-    <string name="cache_status_stored">Salvată</string>
-    <string name="cache_status_not_stored">Nesalvată</string>
     <string name="cache_geocode">Geocod</string>
     <string name="cache_name">Nume</string>
     <string name="cache_type">Tip</string>
@@ -1184,7 +1161,6 @@
         <item quantity="few">%s favorite</item>
         <item quantity="other">%s favorite</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favorite</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">legătură la c:geo</string>
     <string name="create_shortcut">Crează scurtătură</string>

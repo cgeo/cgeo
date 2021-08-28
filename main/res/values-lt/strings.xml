@@ -166,7 +166,6 @@
     <string name="log_problem_archive_text">Šis naudotojas pranešė, kad slėptuvė turėtų būti archyvuota. Savanoriui apžvalgininkui buvo pranešta.</string>
     <string name="log_image_scale_option_noscaling">Nekeisti dydžio</string>
     <string name="log_image_titleprefix">Vaizdas</string>
-    <string name="datetime_clear_button">Išvalyti</string>
     <!-- translation -->
     <string name="translate">Išversti</string>
     <string name="translate_to_sys_lang">Išversti į %s</string>
@@ -372,25 +371,6 @@
     <string name="caches_copy_all">Kopijuoti visas</string>
     <string name="caches_map_locus_export">Eksportuoti į Locus</string>
     <string name="caches_filter_title">Filtruoti</string>
-    <string name="caches_filter_size">Dydis</string>
-    <string name="caches_filter_type">Tipas</string>
-    <string name="caches_filter_track">Su keliauninkais</string>
-    <string name="caches_filter_clear">Valyti filtrus</string>
-    <string name="caches_filter_modified">Su pakeistomis koordinatėmis</string>
-    <string name="caches_filter_offline_log">Su išsaugotu įrašu</string>
-    <string name="caches_filter_origin">Šaltinis</string>
-    <string name="caches_filter_distance">Atstumas</string>
-    <string name="caches_filter_personal_note">Su asmenine pastaba</string>
-    <string name="caches_filter_popularity">Kaip mėgiamos</string>
-    <string name="caches_filter_popularity_ratio">Kaip mėgiamos [%]</string>
-    <string name="caches_filter_personal_data">Su asmeniniais duomenimis</string>
-    <string name="caches_filter_rating">Su reitingu</string>
-    <string name="caches_filter_own_rating">Su savo reitingu</string>
-    <string name="caches_filter_multi_listing">Daugiafunkciniai sąrašai su skirtingu statusu</string>
-    <string name="caches_filter_own_waypoint">Su vartotojo papildomais taškais</string>
-    <string name="caches_filter_missing_gcvote">Rastos slėptuvės be balsų</string>
-    <string name="caches_filter_lists">Priskirtas sąrašui</string>
-    <string name="caches_filter_empty">(tuščia)</string>
     <string name="caches_removing_from_history">Pašalinama iš Istorijos…</string>
     <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
     <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
@@ -904,7 +884,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">daugiau nei prieš metus</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributai</string>
     <string name="cache_inventory">Inventorius</string>
     <string name="cache_log_images_title">Įrašo vaizdo failai</string>
     <string name="cache_log_image_default_title">Nuotrauka</string>
@@ -1011,27 +990,13 @@
     <string name="ignore_confirm_title">Būk atsargus</string>
     <string name="ignore_confirm_message">Ignoruota slėptuvė reiškia, kad ši slėptuvė niekada neatsiras įkeliant duomenis iš geocaching.com. Jūs galėsite pamatyti slėptuvę tik nebeignoruojant svetainėje.</string>
     <string name="cache_status">Būsena</string>
-    <string name="cache_stored">Išsaugota</string>
     <string name="cache_status_offline_log">Išsaugotas įrašas</string>
     <string name="cache_status_found">Rasta</string>
     <string name="cache_not_status_found">Nerasta</string>
-    <string name="cache_never_found">Niekada nesurastos</string>
-    <string name="cache_found_last_30_days">Rasti per paskutines 30 dienų</string>
     <string name="cache_status_archived">Archyvuota</string>
     <string name="cache_status_disabled">Išjungta</string>
     <string name="cache_status_active">Aktyvus</string>
     <string name="cache_status_premium">Tik Premium nariams</string>
-    <string name="cache_status_not_premium">Prieinama visiems nariams</string>
-    <string name="cache_status_stored">Išsaugota</string>
-    <string name="cache_status_not_stored">Neišsaugota</string>
-    <string name="cache_status_stored_lasteighthours">Per paskutines aštuonias valandas</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Per paskutines dvidešimt keturias valandas</string>
-    <string name="cache_status_stored_lastsevendays">Per paskutines septynias dienas</string>
-    <string name="cache_status_stored_lastthirtydays">Per paskutines trisdešimt dienų</string>
-    <string name="cache_status_stored_morethaneighthours">Prieš paskutines aštuonias valandas</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Prieš paskutinę dvidešimt keturias valandas</string>
-    <string name="cache_status_stored_morethansevendays">Prieš paskutines septynias dienas</string>
-    <string name="cache_status_stored_morethanthirtydays">Prieš paskutines trisdešimt dienų</string>
     <string name="cache_geocode">Geo kodas</string>
     <string name="cache_name">Pavadinimas</string>
     <string name="cache_name_set">Nustatykite slėptuvės pavadinimą</string>
@@ -1041,7 +1006,6 @@
     <string name="cache_distance">Atstumas</string>
     <string name="cache_difficulty">Sudėtingumas</string>
     <string name="cache_terrain">Vietovė</string>
-    <string name="cache_difficulty_terrain">Sudėtingumas / Vietovė</string>
     <string name="cache_rating">Reitingas</string>
     <string name="cache_own_rating">Jūsų reitingas</string>
     <string name="cache_rating_of_new">%1$.1f iš %2$d</string>
@@ -1050,9 +1014,7 @@
     <string name="cache_hidden">Paslėpta</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Vieta</string>
-    <string name="cache_location_country">Šalis</string>
     <string name="cache_coordinates">Koordinatės</string>
-    <string name="cache_calculator">Skaičiuoklė</string>
     <string name="cache_coordinates_original">Originaliosios koordinatės</string>
     <string name="cache_spoiler_images_title">Užuominų vaizdai</string>
     <string name="cache_log_types">Įrašų tipai</string>
@@ -1621,7 +1583,6 @@
         <item quantity="many">%s mėgiamų</item>
         <item quantity="other">%s mėgiamų</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% megstami</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo nuoroda</string>
     <string name="create_shortcut">Sukurti nuorodą</string>
@@ -1715,7 +1676,6 @@
     <string name="map_clear_individual_route">Pašalinti asmeninį maršrutą</string>
     <string name="map_clear_individual_route_confirm">Ar norite pašalinti visas slėptuves/papildomus taškus iš asmeninio maršruto?</string>
     <string name="map_individual_route_cleared">Asmeninis maršrutas išvalytas</string>
-    <string name="save_sorted_route">Išsaugoti</string>
     <string name="sorted_route_saved">Asmeninis maršrutas išsaugotas</string>
     <string name="load_individual_route_error">Klaida įkeliant asmeninį maršrutą</string>
     <string name="route_item_not_yet_loaded">Maršruto elementas dar neįkeltas</string>

@@ -345,25 +345,6 @@
     <string name="caches_copy_all">Kopēt visu</string>
     <string name="caches_map_locus_export">Eksportēt uz Locus</string>
     <string name="caches_filter_title">Filtrēt</string>
-    <string name="caches_filter_size">Pēc lieluma</string>
-    <string name="caches_filter_type">Pēc tipa</string>
-    <string name="caches_filter_track">Ar ceļotājiem</string>
-    <string name="caches_filter_clear">Notīrīt filtrus</string>
-    <string name="caches_filter_modified">Ar izmainītām koordinātām</string>
-    <string name="caches_filter_offline_log">Ar bezsaistes ierakstu</string>
-    <string name="caches_filter_origin">Pēc izcelsmes</string>
-    <string name="caches_filter_distance">Pēc attāluma</string>
-    <string name="caches_filter_personal_note">Ar personisku piezīmi</string>
-    <string name="caches_filter_popularity">Pēc favorītu daudzuma</string>
-    <string name="caches_filter_popularity_ratio">Pēc favorītu [%]</string>
-    <string name="caches_filter_personal_data">Ar personīgiem datiem</string>
-    <string name="caches_filter_rating">Ar reitingu</string>
-    <string name="caches_filter_own_rating">Ar paša vērtējumu</string>
-    <string name="caches_filter_multi_listing">Vairākos saitos ar dažādiem statusiem</string>
-    <string name="caches_filter_own_waypoint">Ar lietotāja definētiem starpposmiem</string>
-    <string name="caches_filter_missing_gcvote">Atrastie slēpņi bez vērtējuma</string>
-    <string name="caches_filter_lists">Piešķirts sarakstam</string>
-    <string name="caches_filter_empty">(tukšs)</string>
     <string name="caches_removing_from_history">Dzēš no vēstures…</string>
     <string name="caches_clear_offlinelogs">Notīrīt bezsaistes ierakstus</string>
     <string name="caches_clear_offlinelogs_message">Vai izdzēst bezsaistes ierakstus?</string>
@@ -725,7 +706,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">vairāk nekā pirms gada</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atribūti</string>
     <string name="cache_inventory">Krājumi</string>
     <string name="cache_log_images_title">Apmeklējuma attēli</string>
     <string name="cache_log_image_default_title">Attēls</string>
@@ -823,27 +803,13 @@
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
-    <string name="cache_stored">Saglabāts</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
-    <string name="cache_never_found">Nekad nav atrasts</string>
-    <string name="cache_found_last_30_days">Atrastie pēdējo 30 dienu laikā</string>
     <string name="cache_status_archived">Arhivēts</string>
     <string name="cache_status_disabled">Atspējots</string>
     <string name="cache_status_active">Aktīvs</string>
     <string name="cache_status_premium">TIkai Premium lietotājiem</string>
-    <string name="cache_status_not_premium">Pieejams visiem lietotājiem</string>
-    <string name="cache_status_stored">Saglabāts</string>
-    <string name="cache_status_not_stored">Nav saglabāti</string>
-    <string name="cache_status_stored_lasteighthours">Pēdējo astoņu stundu laikā</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Pēdējo divdesmit četru stundu laikā</string>
-    <string name="cache_status_stored_lastsevendays">Pēdējo septiņu dienu laikā</string>
-    <string name="cache_status_stored_lastthirtydays">Pēdējo trīsdesmit dienu laikā</string>
-    <string name="cache_status_stored_morethaneighthours">Pirms vairāk kā astoņām stundām</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Pirms vairāk kā divdesmit četrām stundām</string>
-    <string name="cache_status_stored_morethansevendays">Pirms vairāk kā septiņām dienām</string>
-    <string name="cache_status_stored_morethanthirtydays">Pirms vairāl kā trīsdesmit dienām</string>
     <string name="cache_geocode">Geo kods</string>
     <string name="cache_name">Nosaukums</string>
     <string name="cache_name_set">Iestatīt slēpņa nosaukumu</string>
@@ -860,9 +826,7 @@
     <string name="cache_hidden">Paslēpts</string>
     <string name="cache_event">Datums</string>
     <string name="cache_location">Atrašanās vieta</string>
-    <string name="cache_location_country">Valsts</string>
     <string name="cache_coordinates">Koordinātas</string>
-    <string name="cache_calculator">Kalkulators</string>
     <string name="cache_coordinates_original">Sākotnējās koordinātas</string>
     <string name="cache_spoiler_images_title">\"Spoiler\" bilde (-es)</string>
     <string name="cache_log_types">Reģistrēto ierakstu tipi</string>
@@ -1367,7 +1331,6 @@ importēti %1$d slēpņi no %2$s</item>
         <item quantity="one">%s izlases</item>
         <item quantity="other">%s favorīti</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favorīti</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo saīsne</string>
     <string name="create_shortcut">Izveidot saīsni</string>

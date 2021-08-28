@@ -12,13 +12,6 @@
         android:icon="@drawable/ic_menu_filter"
         android:title="@string/caches_filter_menuitem"
         app:showAsAction="ifRoom|withText"/>
-    <!-- Remove legacy filter for upcoming beta
-    <item
-        android:id="@+id/menu_filter_legacy"
-        android:icon="@drawable/ic_menu_filter"
-        android:title="@string/caches_filter"
-        app:showAsAction="ifRoom|withText"/>
-        -->
     <item
         android:id="@+id/menu_sort"
         android:icon="@drawable/ic_menu_sort_alphabetically"
@@ -28,12 +21,12 @@
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_switch_select_mode"
-        android:icon="@drawable/ic_menu_agenda"
+        android:icon="@drawable/ic_menu_select_start"
         android:title="@string/caches_select_mode"
         app:showAsAction="ifRoom|withText"/>
     <item
         android:id="@+id/menu_invert_selection"
-        android:icon="@drawable/ic_menu_mark"
+        android:icon="@drawable/ic_menu_invert"
         android:title="@string/caches_select_invert"
         app:showAsAction="ifRoom|withText"/>
     <item

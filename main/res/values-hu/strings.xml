@@ -325,24 +325,6 @@
     <string name="caches_copy_all">Összes másolása</string>
     <string name="caches_map_locus_export">Exportálás Locus-ba</string>
     <string name="caches_filter_title">Szűrés eszerint</string>
-    <string name="caches_filter_size">Méret</string>
-    <string name="caches_filter_type">Típus</string>
-    <string name="caches_filter_track">Utazó a ládában</string>
-    <string name="caches_filter_clear">Szűrés törlése</string>
-    <string name="caches_filter_modified">Módosított koordináták</string>
-    <string name="caches_filter_offline_log">Offline log</string>
-    <string name="caches_filter_origin">Származás</string>
-    <string name="caches_filter_distance">Távolság</string>
-    <string name="caches_filter_personal_note">Személyes megjegyzés</string>
-    <string name="caches_filter_popularity">Kedvencek</string>
-    <string name="caches_filter_popularity_ratio">Kedvencek [%]</string>
-    <string name="caches_filter_personal_data">Személyes</string>
-    <string name="caches_filter_rating">Értékelve</string>
-    <string name="caches_filter_own_rating">Saját értékelés</string>
-    <string name="caches_filter_multi_listing">Különböző állapotú multik listázása</string>
-    <string name="caches_filter_missing_gcvote">Nem értékelt ládák</string>
-    <string name="caches_filter_lists">Listához csatolva</string>
-    <string name="caches_filter_empty">(üres)</string>
     <string name="caches_removing_from_history">Törlés az Előzményekből…</string>
     <string name="caches_clear_offlinelogs">Offline logok törlése</string>
     <string name="caches_clear_offlinelogs_message">Szeretnéd törölni az offline logokat?</string>
@@ -660,7 +642,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">több mint egy évvel ezelőtt</string>
     <string name="cache_premium">Prémium</string>
-    <string name="cache_attributes">Tulajdonságok</string>
     <string name="cache_inventory">Utazók</string>
     <string name="cache_log_images_title">Logfotók</string>
     <string name="cache_log_image_default_title">Fotó</string>
@@ -746,27 +727,12 @@
     <string name="ignore_confirm_title">Légy óvatos</string>
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
-    <string name="cache_stored">Elmentve</string>
     <string name="cache_status_offline_log">Offline log</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
-    <string name="cache_never_found">Szűz láda</string>
-    <string name="cache_found_last_30_days">Megtalálva az elmúlt 30 napban</string>
     <string name="cache_status_archived">Archiválva</string>
     <string name="cache_status_disabled">Letiltva</string>
     <string name="cache_status_premium">Csak prémium tagoknak</string>
-    <string name="cache_status_not_premium">Minden tag számára</string>
-    <string name="cache_status_stored">Elmentve</string>
-    <string name="cache_status_not_stored">Nincs elmentve</string>
-    <string name="cache_status_stored_lasteighthours">Az elmúlt 8 órában</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Az elmúlt 24 órában</string>
-    <string name="cache_status_stored_lastsevendays">Az elmúlt 7 napban</string>
-    <string name="cache_status_stored_lastthirtydays">Az elmúlt 30 napot megelőzően</string>
-    <string name="cache_status_stored_morethaneighthours">Az elmúlt 8 ór
-át megelőzően</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Az elmúlt 24 órát megelőzően</string>
-    <string name="cache_status_stored_morethansevendays">Az elmúlt 7 napot megelőzően</string>
-    <string name="cache_status_stored_morethanthirtydays">Az elmúlt 30 napot megelőzően</string>
     <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Név</string>
     <string name="cache_type">Típus</string>
@@ -782,7 +748,6 @@
     <string name="cache_event">Dátum</string>
     <string name="cache_location">Helyszín</string>
     <string name="cache_coordinates">Koordináták</string>
-    <string name="cache_calculator">Számológép</string>
     <string name="cache_coordinates_original">Eredeti koordináták</string>
     <string name="cache_spoiler_images_title">Spoiler képek</string>
     <string name="cache_log_types">Bejegyzéstípusok</string>
@@ -1248,7 +1213,6 @@
         <item quantity="one">%s kedvenc pont</item>
         <item quantity="other">%s kedvenc pont</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% kedvenc pont</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo parancsikon</string>
     <string name="create_shortcut">Parancsikon létrehozása</string>

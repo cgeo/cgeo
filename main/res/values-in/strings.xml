@@ -285,22 +285,6 @@
     <string name="caches_copy_all">Salin semua</string>
     <string name="caches_map_locus_export">Ekspor ke lokus</string>
     <string name="caches_filter_title">Filter menurut</string>
-    <string name="caches_filter_size">Ukuran</string>
-    <string name="caches_filter_type">Jenis</string>
-    <string name="caches_filter_track">Dengan yang bisa dilacak</string>
-    <string name="caches_filter_clear">Hapus filter</string>
-    <string name="caches_filter_modified">Dengan koordinat yang dimodifikasi</string>
-    <string name="caches_filter_offline_log">Dengan offline log</string>
-    <string name="caches_filter_origin">Asal</string>
-    <string name="caches_filter_distance">Jarak</string>
-    <string name="caches_filter_personal_note">Dengan catatan pribadi</string>
-    <string name="caches_filter_popularity">Favorit</string>
-    <string name="caches_filter_popularity_ratio">Favorit [%]</string>
-    <string name="caches_filter_personal_data">Dengan catatan pribadi</string>
-    <string name="caches_filter_rating">Dengan rating</string>
-    <string name="caches_filter_own_rating">Dengan penilaian sendiri</string>
-    <string name="caches_filter_multi_listing">Multi listing dengan keadaan berbeda</string>
-    <string name="caches_filter_missing_gcvote">Cache ditemukan tidak memilih</string>
     <string name="caches_removing_from_history">Menghapus dari riwayat&#8230;</string>
     <string name="caches_clear_offlinelogs">Hapus log offline</string>
     <string name="caches_clear_offlinelogs_message">Apakah anda ingin menghapus log offline?</string>
@@ -566,7 +550,6 @@
         <item quantity="other">sekitar %d hari yang lalu</item>
     </plurals>
     <string name="cache_premium">Meningkatkan</string>
-    <string name="cache_attributes">Atribut</string>
     <string name="cache_inventory">Persediaan</string>
     <string name="cache_log_images_title">Gambar log</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -650,14 +633,9 @@
     <string name="cache_status_offline_log">Log disimpan</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
-    <string name="cache_never_found">Tidak Pernah Ditemukan</string>
-    <string name="cache_found_last_30_days">Berdasarkan 30 hari terakhir</string>
     <string name="cache_status_archived">Diarsipkan</string>
     <string name="cache_status_disabled">Cacat</string>
     <string name="cache_status_premium">Anggota Premium saja</string>
-    <string name="cache_status_not_premium">Semua Akses Anggota</string>
-    <string name="cache_status_stored">Disimpan</string>
-    <string name="cache_status_not_stored">Tidak disimpan</string>
     <string name="cache_geocode">Kode geo</string>
     <string name="cache_name">Nama</string>
     <string name="cache_type">Jenis</string>
@@ -673,7 +651,6 @@
     <string name="cache_event">Tanggal</string>
     <string name="cache_location">Lokasi</string>
     <string name="cache_coordinates">Koordinat</string>
-    <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Koordinat Asli</string>
     <string name="cache_spoiler_images_title">Gambar spoiler</string>
     <string name="cache_log_types">Tipe log</string>
@@ -1123,7 +1100,6 @@
     <plurals name="favorite_points">
         <item quantity="other">%s favorit</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favorit</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c: jalan pintas geo</string>
     <string name="create_shortcut">Buat jalan pintas</string>

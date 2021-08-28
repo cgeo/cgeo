@@ -353,25 +353,6 @@
     <string name="caches_copy_all">Копировать все</string>
     <string name="caches_map_locus_export">Экспорт в Locus</string>
     <string name="caches_filter_title">Фильтровать по</string>
-    <string name="caches_filter_size">Размер</string>
-    <string name="caches_filter_type">Тип</string>
-    <string name="caches_filter_track">С трекаблами</string>
-    <string name="caches_filter_clear">Очистить фильтры</string>
-    <string name="caches_filter_modified">С измененными координатами</string>
-    <string name="caches_filter_offline_log">С сохраненными записями</string>
-    <string name="caches_filter_origin">Происхождение</string>
-    <string name="caches_filter_distance">Расстоянию</string>
-    <string name="caches_filter_personal_note">С личными записями</string>
-    <string name="caches_filter_popularity">Рекомендации</string>
-    <string name="caches_filter_popularity_ratio">Рекомендации [%]</string>
-    <string name="caches_filter_personal_data">С личными данными</string>
-    <string name="caches_filter_rating">С рейтингом</string>
-    <string name="caches_filter_own_rating">С собственным рейтингом</string>
-    <string name="caches_filter_multi_listing">На разных сайтах с разными статусами</string>
-    <string name="caches_filter_own_waypoint">С пользовательскими точками</string>
-    <string name="caches_filter_missing_gcvote">Найденные без оценок</string>
-    <string name="caches_filter_lists">Приписан к списку</string>
-    <string name="caches_filter_empty">(пустой)</string>
     <string name="caches_removing_from_history">Очистка истории…</string>
     <string name="caches_clear_offlinelogs">Удалить сохраненные записи</string>
     <string name="caches_clear_offlinelogs_message">Вы действительно хотите удалить сохраненные записи?</string>
@@ -868,7 +849,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">больше года назад</string>
     <string name="cache_premium">Премиум</string>
-    <string name="cache_attributes">Атрибуты</string>
     <string name="cache_inventory">Инвентарь</string>
     <string name="cache_log_images_title">Фотографии в блокноте</string>
     <string name="cache_log_image_default_title">Фото</string>
@@ -982,27 +962,13 @@
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">Сохранено</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
-    <string name="cache_never_found">Никем не найденные</string>
-    <string name="cache_found_last_30_days">Найденные за 30 дней</string>
     <string name="cache_status_archived">В архиве</string>
     <string name="cache_status_disabled">Вне игры</string>
     <string name="cache_status_active">Активный</string>
     <string name="cache_status_premium">Только для Премиум участников</string>
-    <string name="cache_status_not_premium">Доступно всем участникам</string>
-    <string name="cache_status_stored">Сохранен</string>
-    <string name="cache_status_not_stored">Не сохранен</string>
-    <string name="cache_status_stored_lasteighthours">За последние 8 часов</string>
-    <string name="cache_status_stored_lasttwentyfourhours">За последние 24 часа</string>
-    <string name="cache_status_stored_lastsevendays">За последние 7 дней</string>
-    <string name="cache_status_stored_lastthirtydays">За последние 30 дней</string>
-    <string name="cache_status_stored_morethaneighthours">За период, меньше чем 8 часов</string>
-    <string name="cache_status_stored_morethantwentyfourhours">За период, меньше чем 24 часа</string>
-    <string name="cache_status_stored_morethansevendays">За период, меньше чем 7 дней</string>
-    <string name="cache_status_stored_morethanthirtydays">За период, меньше чем 30 дней</string>
     <string name="cache_geocode">Код тайника</string>
     <string name="cache_name">Название</string>
     <string name="cache_name_set">Задать имя тайника</string>
@@ -1022,9 +988,7 @@
     <string name="cache_hidden">Спрятано</string>
     <string name="cache_event">Дата</string>
     <string name="cache_location">Место</string>
-    <string name="cache_location_country">Страна</string>
     <string name="cache_coordinates">Координаты</string>
-    <string name="cache_calculator">Калькулятор</string>
     <string name="cache_coordinates_original">Оригинальные координаты</string>
     <string name="cache_spoiler_images_title">Фото в спойлере</string>
     <string name="cache_log_types">Типы записей</string>
@@ -1591,7 +1555,6 @@
         <item quantity="many">%s рекомендаций</item>
         <item quantity="other">%s рекомендаций</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% рекомендаций</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>
@@ -1684,7 +1647,6 @@
     <string name="map_clear_individual_route">Очистить индивидуальный маршрут</string>
     <string name="map_clear_individual_route_confirm">Вы уверены, что хотите удалить все тайники/путевые точки из личного маршрута?</string>
     <string name="map_individual_route_cleared">Индивидуальный маршрут очищен</string>
-    <string name="save_sorted_route">Сохранить</string>
     <string name="sorted_route_saved">Личный маршрут сохранён</string>
     <string name="load_individual_route_error">Ошибка загрузки персонального маршрута</string>
     <string name="route_item_not_yet_loaded">Элемент маршрута еще не загружен</string>

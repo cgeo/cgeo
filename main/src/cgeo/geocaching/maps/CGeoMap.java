@@ -11,7 +11,6 @@ import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -754,8 +753,13 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
-            final int titleResource = mapOptions.isLiveEnabled ? R.string.map_live_disable : R.string.map_live_enable;
-            itemMapLive.setTitle(res.getString(titleResource));
+            if (mapOptions.isLiveEnabled) {
+                itemMapLive.setIcon(R.drawable.ic_menu_refresh);
+                itemMapLive.setTitle(res.getString(R.string.map_live_disable));
+            } else {
+                itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
+                itemMapLive.setTitle(res.getString(R.string.map_live_enable));
+            }
             itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
 
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
