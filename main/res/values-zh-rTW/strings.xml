@@ -174,7 +174,6 @@
     <string name="log_problem_archive_text">这个寻宝者报告此宝应该被存档。社区志愿审核人已经被通知。</string>
     <string name="log_image_scale_option_noscaling">原圖，不縮圖。</string>
     <string name="log_image_titleprefix">照片</string>
-    <string name="datetime_clear_button">清除</string>
     <string name="datetime_nodateset_display">沒有設定日期</string>
     <!-- translation -->
     <string name="translate">翻譯</string>
@@ -384,25 +383,6 @@
     <string name="caches_copy_all">全部复制</string>
     <string name="caches_map_locus_export">輸出至Locas app</string>
     <string name="caches_filter_title">篩選條件：</string>
-    <string name="caches_filter_size">尺寸</string>
-    <string name="caches_filter_type">類型</string>
-    <string name="caches_filter_track">和旅行蟲\地理錢幣</string>
-    <string name="caches_filter_clear">清除篩選條件</string>
-    <string name="caches_filter_modified">和更改後的座標</string>
-    <string name="caches_filter_offline_log">和離線日誌</string>
-    <string name="caches_filter_origin">原點</string>
-    <string name="caches_filter_distance">距離</string>
-    <string name="caches_filter_personal_note">和個人的紀錄</string>
-    <string name="caches_filter_popularity">我的最愛</string>
-    <string name="caches_filter_popularity_ratio">最愛的[%]</string>
-    <string name="caches_filter_personal_data">和個人的資料</string>
-    <string name="caches_filter_rating">和評價</string>
-    <string name="caches_filter_own_rating">有任何评级</string>
-    <string name="caches_filter_multi_listing">不同州的多重列表</string>
-    <string name="caches_filter_own_waypoint">和使用者定義的航點</string>
-    <string name="caches_filter_missing_gcvote">找到的缓存未投票</string>
-    <string name="caches_filter_lists">指派到一個列表</string>
-    <string name="caches_filter_empty">(空的)</string>
     <string name="caches_removing_from_history">正在從歷史記錄中刪除…</string>
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
     <string name="caches_clear_offlinelogs_message">你是否想要清除離線日誌？</string>
@@ -946,7 +926,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">超過一年</string>
     <string name="cache_premium">尊榮會員</string>
-    <string name="cache_attributes">属性</string>
     <string name="cache_inventory">旅行蟲/地理錢幣存量</string>
     <string name="cache_log_images_title">日誌圖片</string>
     <string name="cache_log_image_default_title">照片</string>
@@ -1054,27 +1033,13 @@
     <string name="cache_log_menu_popup_title">記錄至 %s</string>
     <string name="ignore_confirm_title">小心！</string>
     <string name="cache_status">狀態</string>
-    <string name="cache_stored">已儲存:</string>
     <string name="cache_status_offline_log">已儲存的日誌</string>
     <string name="cache_status_found">已找到</string>
     <string name="cache_not_status_found">未找到</string>
-    <string name="cache_never_found">從未找到</string>
-    <string name="cache_found_last_30_days">最近 30 天下载</string>
     <string name="cache_status_archived">封存、歸檔</string>
     <string name="cache_status_disabled">停用</string>
     <string name="cache_status_active">有效</string>
     <string name="cache_status_premium">僅限高級會員</string>
-    <string name="cache_status_not_premium">所有會員可讀取</string>
-    <string name="cache_status_stored">已儲存:</string>
-    <string name="cache_status_not_stored">未儲存</string>
-    <string name="cache_status_stored_lasteighthours">在這八小時</string>
-    <string name="cache_status_stored_lasttwentyfourhours">在這24小時</string>
-    <string name="cache_status_stored_lastsevendays">在這七天</string>
-    <string name="cache_status_stored_lastthirtydays">在這三天</string>
-    <string name="cache_status_stored_morethaneighthours">在八小時前</string>
-    <string name="cache_status_stored_morethantwentyfourhours">在24小時前</string>
-    <string name="cache_status_stored_morethansevendays">在七天前</string>
-    <string name="cache_status_stored_morethanthirtydays">在三天前</string>
     <string name="cache_geocode">Geo code</string>
     <string name="cache_name">名稱</string>
     <string name="cache_name_set">設置藏寶名稱</string>
@@ -1094,9 +1059,7 @@
     <string name="cache_hidden">已隱藏</string>
     <string name="cache_event">日期</string>
     <string name="cache_location">地點</string>
-    <string name="cache_location_country">国家：</string>
     <string name="cache_coordinates">坐標</string>
-    <string name="cache_calculator">計算機</string>
     <string name="cache_coordinates_original">原始座標</string>
     <string name="cache_spoiler_images_title">提示圖片</string>
     <string name="cache_log_types">藏寶類型</string>
@@ -1622,7 +1585,6 @@
     <string name="map_load_individual_route">載入個別的路徑</string>
     <string name="map_load_individual_route_confirm">覆蓋現有的路徑?</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
-    <string name="save_sorted_route">儲存</string>
     <string name="center_on_route">在航線置中</string>
     <!-- individual track -->
     <string name="individual_track">GPX的軌跡/航跡</string>
