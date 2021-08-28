@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">skaalattu</string>
     <string name="log_image_info_notscaled">ei skaalattu</string>
     <string name="log_image_titleprefix">Kuva</string>
-    <string name="datetime_clear_button">Tyhjennä</string>
     <string name="datetime_nodateset_display">Päivämäärää ei ole asetettu</string>
     <!-- translation -->
     <string name="translate">Käännä</string>
@@ -398,25 +397,6 @@
     <string name="caches_map_locus_export">Vie Locus:iin</string>
     <string name="caches_filter_menuitem">Suodatin</string>
     <string name="caches_filter_title">Suodata</string>
-    <string name="caches_filter_size">Koko</string>
-    <string name="caches_filter_type">Tyyppi</string>
-    <string name="caches_filter_track">Reissaajien mukaan</string>
-    <string name="caches_filter_clear">Tyhjennä suodatin</string>
-    <string name="caches_filter_modified">Muutettu koordinaatit</string>
-    <string name="caches_filter_offline_log">Offline-lokeja</string>
-    <string name="caches_filter_origin">Alkuperä</string>
-    <string name="caches_filter_distance">Etäisyys</string>
-    <string name="caches_filter_personal_note">Omia merkintöjä</string>
-    <string name="caches_filter_popularity">Suosikit</string>
-    <string name="caches_filter_popularity_ratio">Suosikit [%]</string>
-    <string name="caches_filter_personal_data">Omia tietoja</string>
-    <string name="caches_filter_rating">Luokitus</string>
-    <string name="caches_filter_own_rating">Oma luokitus</string>
-    <string name="caches_filter_multi_listing">Sama kätkö eri sivustoilla, osittain lokattu</string>
-    <string name="caches_filter_own_waypoint">Käyttäjän määrittämillä välipisteillä</string>
-    <string name="caches_filter_missing_gcvote">Löydettyjä kätköjä ei ole äänestetty</string>
-    <string name="caches_filter_lists">Asetettu listaan</string>
-    <string name="caches_filter_empty">(tyhjä)</string>
     <string name="caches_removing_from_history">Poistetaan historiasta…</string>
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
@@ -502,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Tyhjennä</string>
     <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
     <string name="cache_filter_storage_select_title">Valitse suodatin</string>
+    <string name="cache_filter_storage_delete_title">Poista suodatin</string>
+    <string name="cache_filter_storage_delete_message">Haluatko varmasti poistaa tämän suodatinmäärityksen?</string>
     <string name="cache_filter_storage_select_clear_title">Valitse suodatin tai tyhjennä nykyinen suodatin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Yhtään suodatinta ei ole vielä tallennettu.</string>
     <string name="cache_filter_storage_save_title">Tallenna suodatin nimellä</string>
@@ -1096,7 +1078,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">yli vuosi sitten</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Määritteet</string>
     <string name="cache_inventory">Tavaraluettelo</string>
     <string name="cache_log_images_title">Lokikuvat</string>
     <string name="cache_log_image_default_title">Kuva</string>
@@ -1218,27 +1199,13 @@
     <string name="ignore_confirm_title">Ole varovainen</string>
     <string name="ignore_confirm_message">Ohita kätkö tarkoittaa, että kätkö ei enää koskaan näy ladattaessa tietoja geocaching.com sivulta. Voit nähdä kätkön uudelleen vain poistamalla ohituksen verkkosivun kautta.</string>
     <string name="cache_status">Tila</string>
-    <string name="cache_stored">Tallennettu</string>
     <string name="cache_status_offline_log">Tallennettu loki</string>
     <string name="cache_status_found">Löydetty</string>
     <string name="cache_not_status_found">Ei löydetty</string>
-    <string name="cache_never_found">Löytämätön</string>
-    <string name="cache_found_last_30_days">Löydetty viimeisen 30 päivän aikana</string>
     <string name="cache_status_archived">Arkistoitu</string>
     <string name="cache_status_disabled">Ei käytössä</string>
     <string name="cache_status_active">Aktiivinen</string>
     <string name="cache_status_premium">Vain Premium-jäsenille</string>
-    <string name="cache_status_not_premium">Kaikille</string>
-    <string name="cache_status_stored">Tallennettu</string>
-    <string name="cache_status_not_stored">Ei tallennettu</string>
-    <string name="cache_status_stored_lasteighthours">8 tunnin sisällä</string>
-    <string name="cache_status_stored_lasttwentyfourhours">24 tunnin sisällä</string>
-    <string name="cache_status_stored_lastsevendays">7 päivän sisällä</string>
-    <string name="cache_status_stored_lastthirtydays">30 päivän sisällä</string>
-    <string name="cache_status_stored_morethaneighthours">Enemmän kuin 8 tuntia</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Enemmän kuin 24 tuntia</string>
-    <string name="cache_status_stored_morethansevendays">Enemmän kuin 7 päivää</string>
-    <string name="cache_status_stored_morethanthirtydays">Enemmän kuin 30 päivää</string>
     <string name="cache_geocode">Kätkökoodi</string>
     <string name="cache_name">Nimi</string>
     <string name="cache_name_set">Aseta kätkön nimi</string>
@@ -1250,7 +1217,6 @@
     <string name="cache_distance">Etäisyys</string>
     <string name="cache_difficulty">Vaikeus</string>
     <string name="cache_terrain">Maasto</string>
-    <string name="cache_difficulty_terrain">Vaikeus / Maasto</string>
     <string name="cache_rating">Arviointi</string>
     <string name="cache_own_rating">Sinun arviointisi</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
@@ -1259,9 +1225,7 @@
     <string name="cache_hidden">Piilotettu</string>
     <string name="cache_event">Päivämäärä</string>
     <string name="cache_location">Sijainti</string>
-    <string name="cache_location_country">Maa</string>
     <string name="cache_coordinates">Koordinaatit</string>
-    <string name="cache_calculator">Laskin</string>
     <string name="cache_coordinates_original">Alkuperäiset koordinaatit</string>
     <string name="cache_spoiler_images_title">Spoiler-kuvat</string>
     <string name="cache_log_types">Lokityypit</string>
@@ -1872,7 +1836,6 @@
         <item quantity="one">%s suosikki</item>
         <item quantity="other">%s suosikkia</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% suosikit</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
     <string name="create_shortcut">Luo pikakuvake</string>
@@ -1973,7 +1936,6 @@
     <string name="map_clear_individual_route">Tyhjennä yksittäinen reitti</string>
     <string name="map_clear_individual_route_confirm">Haluatko poistaa kaikki kätköt / reittipisteet yksittäiseltä reittiltäsi?</string>
     <string name="map_individual_route_cleared">Yksittäinen reitti tyhjennetty</string>
-    <string name="save_sorted_route">Tallenna</string>
     <string name="sorted_route_saved">Yksittäinen reitti tallennettu</string>
     <string name="load_individual_route_error">Virhe ladattaessa yksittäistä reittiä</string>
     <string name="route_item_not_yet_loaded">Reittikohdetta ei ole vielä ladattu</string>

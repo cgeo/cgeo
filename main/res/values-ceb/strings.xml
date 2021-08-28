@@ -280,22 +280,6 @@
     <string name="caches_copy_all">Kopyahon tanan</string>
     <string name="caches_map_locus_export">I-eksport adto sa Locus</string>
     <string name="caches_filter_title">Piltir sa</string>
-    <string name="caches_filter_size">Ang gidak-on</string>
-    <string name="caches_filter_type">Ang matang</string>
-    <string name="caches_filter_track">Adunay mga Trackable</string>
-    <string name="caches_filter_clear">I-klaro ang mga pilter</string>
-    <string name="caches_filter_modified">Adunay mausab na mga koordinar</string>
-    <string name="caches_filter_offline_log">Adunay offline log</string>
-    <string name="caches_filter_origin">Sinugdanan</string>
-    <string name="caches_filter_distance">Distansiya</string>
-    <string name="caches_filter_personal_note">Adunay personal na nota</string>
-    <string name="caches_filter_popularity">Ang mga paborito</string>
-    <string name="caches_filter_popularity_ratio">Ang mga paborito [%]</string>
-    <string name="caches_filter_personal_data">Adunay personal na datos</string>
-    <string name="caches_filter_rating">Adunay grado</string>
-    <string name="caches_filter_own_rating">Sa kaugalingong rating</string>
-    <string name="caches_filter_multi_listing">Daghang mga listahan nga adunay lain-laing estado</string>
-    <string name="caches_filter_missing_gcvote">Nakit-ang mga cache nga wala nabotaran</string>
     <string name="caches_removing_from_history">Pagkuha gikan sa sauna…</string>
     <string name="caches_clear_offlinelogs">Hawani ang offline nga mga log</string>
     <string name="caches_clear_offlinelogs_message">Ganahan ka ba nga hawanan ang mga offline log?</string>
@@ -550,7 +534,6 @@
         <item quantity="one">mahitungod sa %d nga adlaw na ang milabay</item>
         <item quantity="other">mahitungod sa %d nga mga adlaw na ang milabay</item>
     </plurals>
-    <string name="cache_attributes">Mga Attribute</string>
     <string name="cache_inventory">Imbentaryo</string>
     <string name="cache_log_images_title">Mga imahe sa Log</string>
     <string name="cache_log_image_default_title">Litrato</string>
@@ -629,14 +612,9 @@
     <string name="cache_status">Estado</string>
     <string name="cache_status_found">Nakit-an</string>
     <string name="cache_not_status_found">Wala makit-an</string>
-    <string name="cache_never_found">Wala nakit-an</string>
-    <string name="cache_found_last_30_days">Nakit-an ang uwahi nga 30 ka mga adlaw</string>
     <string name="cache_status_archived">Ge-arkibo</string>
     <string name="cache_status_disabled">Wala gipagana</string>
     <string name="cache_status_premium">Premium nga myembro lamang</string>
-    <string name="cache_status_not_premium">Tanang miyembro maka-access</string>
-    <string name="cache_status_stored">Gitipigan</string>
-    <string name="cache_status_not_stored">Wala tipigi</string>
     <string name="cache_geocode">Code sa Geo</string>
     <string name="cache_name">Pangalan</string>
     <string name="cache_type">Matang</string>
@@ -652,7 +630,6 @@
     <string name="cache_event">Petsa</string>
     <string name="cache_location">Lokasyon</string>
     <string name="cache_coordinates">Mga coordinates</string>
-    <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Orihinal nga coordinates</string>
     <string name="cache_spoiler_images_title">Spoiler nga imahe</string>
     <string name="cache_log_types">Klase sa log</string>
@@ -1101,7 +1078,6 @@
         <item quantity="one">%s paborito</item>
         <item quantity="other">%s mga paborito</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% mga paborito</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo laktoranan</string>
     <string name="create_shortcut">Maghimo og laktoranan</string>

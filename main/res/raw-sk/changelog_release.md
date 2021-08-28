@@ -1,3 +1,25 @@
+## Bugfix Release
+
+### Design
+- Remove transition animation when opening cache
+- Increase font size for text input fields
+- Increase font size for some compass elements
+- Use font color with higher contrast in waypoint tab
+- Make quick offline log check mark visible again
+- Increase font size for coordinate input fields
+- Respect system font size settings also on older Android versions (5,6 and 7)
+
+### Detaily kešky
+- Fix missing cache title if cache opened via geocode or link (website change)
+- Fix missing cache description on some caches
+
+### Iné
+- Show premium caches again in search results of basic members
+- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
+- Use more common English abbreviation for traditional cache in cache type filter
+
+## Feature Release 2021.08.15:
+
 ### Pokročilý systém filtrovania
 - Predstavenie nového systému filtrovania pre aplikáciu c:geo, podpora flexibilných, kombinovateľných a ukladateľných filtrov
 - K dispozícii v zoznamoch kešiek aj v zobrazení mapy

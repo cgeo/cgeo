@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">Ridotta</string>
     <string name="log_image_info_notscaled">non ridotta</string>
     <string name="log_image_titleprefix">Immagine</string>
-    <string name="datetime_clear_button">Resetta</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- translation -->
     <string name="translate">Traduci</string>
@@ -398,25 +397,6 @@
     <string name="caches_map_locus_export">Esporta in Locus</string>
     <string name="caches_filter_menuitem">Filtro</string>
     <string name="caches_filter_title">Filtra per</string>
-    <string name="caches_filter_size">Dimensione</string>
-    <string name="caches_filter_type">Tipo</string>
-    <string name="caches_filter_track">Con oggetti trackables</string>
-    <string name="caches_filter_clear">Rimuovi filtri</string>
-    <string name="caches_filter_modified">Con coordinate modificate</string>
-    <string name="caches_filter_offline_log">Con log offline</string>
-    <string name="caches_filter_origin">Origine</string>
-    <string name="caches_filter_distance">Distanza</string>
-    <string name="caches_filter_personal_note">Con una nota personale</string>
-    <string name="caches_filter_popularity">Preferiti</string>
-    <string name="caches_filter_popularity_ratio">Preferiti [%]</string>
-    <string name="caches_filter_personal_data">Con dati personali</string>
-    <string name="caches_filter_rating">Con valutazione (rating)</string>
-    <string name="caches_filter_own_rating">Con propria valutazione (rating)</string>
-    <string name="caches_filter_multi_listing">Lista cache con stato diverso tra i siti di logging</string>
-    <string name="caches_filter_own_waypoint">Con waypoint definiti dall\'utente</string>
-    <string name="caches_filter_missing_gcvote">Trovati cache non votati</string>
-    <string name="caches_filter_lists">Assegnato a una lista</string>
-    <string name="caches_filter_empty">(vuoto)</string>
     <string name="caches_removing_from_history">Rimozione dalla cronologia…</string>
     <string name="caches_clear_offlinelogs">Cancella i log offline</string>
     <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
@@ -1094,7 +1074,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">più di un anno fa</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Attributi</string>
     <string name="cache_inventory">Oggetti</string>
     <string name="cache_log_images_title">Immagini Log</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1216,27 +1195,13 @@
     <string name="ignore_confirm_title">Stai attento</string>
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
-    <string name="cache_stored">Salvato</string>
     <string name="cache_status_offline_log">Log salvato</string>
     <string name="cache_status_found">Trovato</string>
     <string name="cache_not_status_found">Non trovato</string>
-    <string name="cache_never_found">Mai trovato</string>
-    <string name="cache_found_last_30_days">Trovati negli ultimi 30 giorni</string>
     <string name="cache_status_archived">Archiviato</string>
     <string name="cache_status_disabled">Non attivo</string>
     <string name="cache_status_active">Attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
-    <string name="cache_status_not_premium">Per tutti gli utenti</string>
-    <string name="cache_status_stored">Salvato</string>
-    <string name="cache_status_not_stored">Non salvato</string>
-    <string name="cache_status_stored_lasteighthours">Nelle ultime otto ore</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Nelle ultime 24 ore</string>
-    <string name="cache_status_stored_lastsevendays">Negli ultimi sette giorni</string>
-    <string name="cache_status_stored_lastthirtydays">Negli ultimi 30 giorni</string>
-    <string name="cache_status_stored_morethaneighthours">Prima delle ultime 8 ore</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Prima delle ultime 24 ore</string>
-    <string name="cache_status_stored_morethansevendays">Prima degli ultimi sette giorni</string>
-    <string name="cache_status_stored_morethanthirtydays">Prima degli ultimi 30 giorni</string>
     <string name="cache_geocode">Codice geo</string>
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Imposta cachename</string>
@@ -1248,7 +1213,6 @@
     <string name="cache_distance">Distanza</string>
     <string name="cache_difficulty">Difficoltà</string>
     <string name="cache_terrain">Terreno</string>
-    <string name="cache_difficulty_terrain">Difficoltà/Terreno</string>
     <string name="cache_rating">Voto</string>
     <string name="cache_own_rating">Il tuo voto</string>
     <string name="cache_rating_of_new">%1$.1f di %2$d</string>
@@ -1257,9 +1221,7 @@
     <string name="cache_hidden">Nascosto il</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Luogo</string>
-    <string name="cache_location_country">Nazione</string>
     <string name="cache_coordinates">Coordinate</string>
-    <string name="cache_calculator">Calcolatrice</string>
     <string name="cache_coordinates_original">Coordinate originali</string>
     <string name="cache_spoiler_images_title">Immagini spoiler</string>
     <string name="cache_log_types">Tipi di Log</string>
@@ -1869,7 +1831,6 @@
         <item quantity="one">%s preferito</item>
         <item quantity="other">%s preferiti</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; preferiti %d%%</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
     <string name="create_shortcut">Crea collegamento</string>
@@ -1970,7 +1931,6 @@
     <string name="map_clear_individual_route">Cancella percorso individuale</string>
     <string name="map_clear_individual_route_confirm">Vuoi rimuovere tutte i cache/waypoint dal tuo percorso individuale?</string>
     <string name="map_individual_route_cleared">Percorso individuale cancellato</string>
-    <string name="save_sorted_route">Salva</string>
     <string name="sorted_route_saved">Percorso individuale salvato</string>
     <string name="load_individual_route_error">Errore caricando il percorso individuale</string>
     <string name="route_item_not_yet_loaded">Elemento del percorso non ancora caricato</string>

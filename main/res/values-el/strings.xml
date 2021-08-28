@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">Υπό κλίμακα</string>
     <string name="log_image_info_notscaled">χωρίς κλιμάκωση</string>
     <string name="log_image_titleprefix">Εικόνα</string>
-    <string name="datetime_clear_button">Kαθαρισμός</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- translation -->
     <string name="translate">Μετάφραση</string>
@@ -398,25 +397,6 @@
     <string name="caches_map_locus_export">Εξαγωγή στο Locus</string>
     <string name="caches_filter_menuitem">Φίλτρο</string>
     <string name="caches_filter_title">Φιλτράρισμα κατά</string>
-    <string name="caches_filter_size">Μέγεθος</string>
-    <string name="caches_filter_type">Τύπος</string>
-    <string name="caches_filter_track">Με Ανιχνεύσιμα</string>
-    <string name="caches_filter_clear">Καθαρισμός φίλτρων</string>
-    <string name="caches_filter_modified">Με τροποποιημένες συντεταγμένες</string>
-    <string name="caches_filter_offline_log">Με καταγραφή εκτός σύνδεσης</string>
-    <string name="caches_filter_origin">Προέλευση</string>
-    <string name="caches_filter_distance">Απόσταση</string>
-    <string name="caches_filter_personal_note">Με προσωπική σημείωση</string>
-    <string name="caches_filter_popularity">Αγαπημένα</string>
-    <string name="caches_filter_popularity_ratio">Αγαπημένα [%]</string>
-    <string name="caches_filter_personal_data">Με προσωπικά στοιχεία</string>
-    <string name="caches_filter_rating">Με βαθμολογία</string>
-    <string name="caches_filter_own_rating">Με τη δική μου βαθμολογία</string>
-    <string name="caches_filter_multi_listing">Πολλαπλή καταχώριση με διαφορετική κατάσταση</string>
-    <string name="caches_filter_own_waypoint">Με σημεία διαδρομής ορισμένα από το χρήστη</string>
-    <string name="caches_filter_missing_gcvote">Οι κρύπτες που βρέθηκαν δεν έχουν αξιολογηθεί</string>
-    <string name="caches_filter_lists">Κατανεμημένες σε μια λίστα</string>
-    <string name="caches_filter_empty">(κενό)</string>
     <string name="caches_removing_from_history">Κατάργηση από το ιστορικό…</string>
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
@@ -481,6 +461,7 @@
     <string name="cache_filter_location">Τοποθεσία</string>
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filter_origin">Προέλευση</string>
+    <string name="cache_filter_stored_since">Τελευταία ενημέρωση λεπτομερειών</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
@@ -501,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
+    <string name="cache_filter_storage_delete_title">Διαγραφή φίλτρου</string>
+    <string name="cache_filter_storage_delete_message">Σίγουρα θέλετε να διαγράψετε αυτό το πρότυπο φίλτρου;</string>
     <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
@@ -1094,7 +1077,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">πάνω από ένα χρόνο πριν</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Ιδιότητες</string>
     <string name="cache_inventory">Απόθεμα</string>
     <string name="cache_log_images_title">Αρχείο καταγραφής εικόνων</string>
     <string name="cache_log_image_default_title">Φωτογραφία</string>
@@ -1216,27 +1198,13 @@
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
-    <string name="cache_stored">Αποθηκευμένη</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
-    <string name="cache_never_found">Δεν βρέθηκε ποτέ</string>
-    <string name="cache_found_last_30_days">Βρέθηκαν τις τελευταίες 30 ημέρες</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
     <string name="cache_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_status_active">Ενεργή</string>
     <string name="cache_status_premium">Μόνο για Premium μέλη</string>
-    <string name="cache_status_not_premium">Πρόσβαση από όλα τα μέλη</string>
-    <string name="cache_status_stored">Αποθηκευμένες</string>
-    <string name="cache_status_not_stored">Μη αποθηκευμένες</string>
-    <string name="cache_status_stored_lasteighthours">Μέσα στις τελευταίες οκτώ ώρες</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Μέσα στις τελευταίες εικοσιτέσερεις ώρες</string>
-    <string name="cache_status_stored_lastsevendays">Μέσα στις τελευταίες επτά ημέρες</string>
-    <string name="cache_status_stored_lastthirtydays">Μέσα στις τελευταίες τριάντα μέρες</string>
-    <string name="cache_status_stored_morethaneighthours">Πρίν τις τελευταίες οκτώ ώρες</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Πρίν τις τελευταίες εικοσιτέσερεις ώρες</string>
-    <string name="cache_status_stored_morethansevendays">Πρίν τις τελευταίες επτά ημέρες</string>
-    <string name="cache_status_stored_morethanthirtydays">Πρίν τις τελευταίες τριάντα ημέρες</string>
     <string name="cache_geocode">Κωδικός κρύπτης</string>
     <string name="cache_name">Όνομα</string>
     <string name="cache_name_set">Τέθηκε όνομα κρύπτης</string>
@@ -1248,7 +1216,6 @@
     <string name="cache_distance">Απόσταση</string>
     <string name="cache_difficulty">Δυσκολία</string>
     <string name="cache_terrain">Έδαφος</string>
-    <string name="cache_difficulty_terrain">Δυσκολία / Έδαφος</string>
     <string name="cache_rating">Βαθμολογία</string>
     <string name="cache_own_rating">Η βαθμολογία σας</string>
     <string name="cache_rating_of_new">%1$.1f από %2$d</string>
@@ -1257,9 +1224,7 @@
     <string name="cache_hidden">Κρυμμένη</string>
     <string name="cache_event">Ημερομηνία</string>
     <string name="cache_location">Τοποθεσία</string>
-    <string name="cache_location_country">Χώρα</string>
     <string name="cache_coordinates">Συντεταγμένες</string>
-    <string name="cache_calculator">Αριθμομηχανή</string>
     <string name="cache_coordinates_original">Αρχικές Συντεταγμένες</string>
     <string name="cache_spoiler_images_title">Εικόνες spoiler</string>
     <string name="cache_log_types">Τύποι αρχείων καταγραφής</string>
@@ -1869,7 +1834,6 @@
         <item quantity="one">%s αγαπημένο</item>
         <item quantity="other">%s αγαπημένα</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; Αγαπημένα %d%%</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Συντόμευση c:geo</string>
     <string name="create_shortcut">Δημιουργία συντόμευσης</string>
@@ -1970,7 +1934,6 @@
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
     <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
-    <string name="save_sorted_route">Αποθήκευση</string>
     <string name="sorted_route_saved">Έγινε αποθήκευση της μεμονωμένης διαδρομής</string>
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>

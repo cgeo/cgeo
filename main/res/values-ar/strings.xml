@@ -291,22 +291,6 @@
     <string name="caches_copy_all">نسخ الكل</string>
     <string name="caches_map_locus_export">التصدير إلى Locus</string>
     <string name="caches_filter_title">تصفية حسب</string>
-    <string name="caches_filter_size">الحجم</string>
-    <string name="caches_filter_type">النوع</string>
-    <string name="caches_filter_track">بواسطة أمتعة السفر</string>
-    <string name="caches_filter_clear">مسح الفلاتر</string>
-    <string name="caches_filter_modified">مع إحدثيات معدلة</string>
-    <string name="caches_filter_offline_log">مع تسجيل الزيارة في وضع عدم الاتصال</string>
-    <string name="caches_filter_origin">الأصل</string>
-    <string name="caches_filter_distance">المسافة</string>
-    <string name="caches_filter_personal_note">مع ملاحظة شخصية</string>
-    <string name="caches_filter_popularity">المفضلات</string>
-    <string name="caches_filter_popularity_ratio">المفضلات [%]</string>
-    <string name="caches_filter_personal_data">مع البيانات الشخصية</string>
-    <string name="caches_filter_rating">مع التصنيف</string>
-    <string name="caches_filter_own_rating">مع التصنيف الخاص</string>
-    <string name="caches_filter_multi_listing">جدولة متعددة مع وضعية مختلفة</string>
-    <string name="caches_filter_missing_gcvote">العثور على مخبآت غير مصوت عليها</string>
     <string name="caches_removing_from_history">إزالة من التأريخ&#8230;</string>
     <string name="caches_clear_offlinelogs">مسح تسجيل الزيارة في وضع عدم الاتصال</string>
     <string name="caches_clear_offlinelogs_message">هل تريد مسح تسجيل الزيارات في وضع عدم الاتصال؟</string>
@@ -566,7 +550,6 @@
     <string name="cache_offline_not_ready">غير متاح في وضع عدم الاتصال</string>
     <string name="cache_offline_time_mins_few">منذ دقائق</string>
     <string name="cache_premium">برميوم</string>
-    <string name="cache_attributes">السمات</string>
     <string name="cache_inventory">المخزون</string>
     <string name="cache_log_images_title">صور تسجيل الزيارات</string>
     <string name="cache_log_image_default_title">صورة</string>
@@ -655,14 +638,9 @@
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
-    <string name="cache_never_found">لم يتم العثور عليه أبداً</string>
-    <string name="cache_found_last_30_days">تم العثور على آخر 30 يوما</string>
     <string name="cache_status_archived">تم أرشفته</string>
     <string name="cache_status_disabled">معطل</string>
     <string name="cache_status_premium">أعضاء برميوم فقط</string>
-    <string name="cache_status_not_premium">لكافة الأعضاء</string>
-    <string name="cache_status_stored">تم تخزينه</string>
-    <string name="cache_status_not_stored">لم يتم تخزينه</string>
     <string name="cache_geocode">كود المخبئ</string>
     <string name="cache_name">الاسم</string>
     <string name="cache_type">النوع</string>
@@ -678,7 +656,6 @@
     <string name="cache_event">التاريخ</string>
     <string name="cache_location">الموقع</string>
     <string name="cache_coordinates">الإحداثيات</string>
-    <string name="cache_calculator">العداد</string>
     <string name="cache_coordinates_original">الإحدثيات الأصلية</string>
     <string name="cache_spoiler_images_title">الصور المفسدة</string>
     <string name="cache_log_types">أنوع تسجيل الزيارات</string>
@@ -1118,7 +1095,6 @@
     <string name="tts_oclock">%s ساعة</string>
     <!-- various -->
     <string name="clipboard_copy_ok">تم نسخه إلى الحافظة</string>
-    <string name="more_than_percent_favorite_points">&gt; %d%% مفضلات</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">اختصار c:geo</string>
     <string name="create_shortcut">إنشاء اختصار</string>

@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">拡大縮小済み</string>
     <string name="log_image_info_notscaled">元の解像度</string>
     <string name="log_image_titleprefix">画像</string>
-    <string name="datetime_clear_button">削除</string>
     <string name="datetime_nodateset_display">未設定</string>
     <!-- translation -->
     <string name="translate">翻訳</string>
@@ -397,25 +396,6 @@
     <string name="caches_map_locus_export">Locusにエクスポート</string>
     <string name="caches_filter_menuitem">フィルタ</string>
     <string name="caches_filter_title">フィルタ</string>
-    <string name="caches_filter_size">サイズ</string>
-    <string name="caches_filter_type">タイプ</string>
-    <string name="caches_filter_track">トラッカブルあり</string>
-    <string name="caches_filter_clear">フィルタをクリア</string>
-    <string name="caches_filter_modified">座標の更新あり</string>
-    <string name="caches_filter_offline_log">オフラインログあり</string>
-    <string name="caches_filter_origin">出典</string>
-    <string name="caches_filter_distance">距離</string>
-    <string name="caches_filter_personal_note">パーソナルノートあり</string>
-    <string name="caches_filter_popularity">お気に入り</string>
-    <string name="caches_filter_popularity_ratio">お気に入り [%]</string>
-    <string name="caches_filter_personal_data">個人データ</string>
-    <string name="caches_filter_rating">評価あり</string>
-    <string name="caches_filter_own_rating">評価済み</string>
-    <string name="caches_filter_multi_listing">複数のWebサイトで登録</string>
-    <string name="caches_filter_own_waypoint">ユーザー定義ウェイポイントあり</string>
-    <string name="caches_filter_missing_gcvote">未評価の発見したキャッシュ</string>
-    <string name="caches_filter_lists">リストに保存</string>
-    <string name="caches_filter_empty">(未定義)</string>
     <string name="caches_removing_from_history">履歴から削除中…</string>
     <string name="caches_clear_offlinelogs">すべてのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
@@ -1079,7 +1059,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">一年以上前</string>
     <string name="cache_premium">プレミアム会員</string>
-    <string name="cache_attributes">属性</string>
     <string name="cache_inventory">目録</string>
     <string name="cache_log_images_title">ログの添付画像</string>
     <string name="cache_log_image_default_title">写真</string>
@@ -1200,27 +1179,13 @@
     <string name="ignore_confirm_title">ご注意ください</string>
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
-    <string name="cache_stored">保存済み</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
-    <string name="cache_never_found">一度も発見されてない</string>
-    <string name="cache_found_last_30_days">過去30日間に発見された</string>
     <string name="cache_status_archived">アーカイブ済み</string>
     <string name="cache_status_disabled">一時停止中</string>
     <string name="cache_status_active">有効</string>
     <string name="cache_status_premium">プレミアム会員のみ</string>
-    <string name="cache_status_not_premium">すべての会員用</string>
-    <string name="cache_status_stored">保存済み</string>
-    <string name="cache_status_not_stored">未保存</string>
-    <string name="cache_status_stored_lasteighthours">過去8時間以内</string>
-    <string name="cache_status_stored_lasttwentyfourhours">過去24時間以内</string>
-    <string name="cache_status_stored_lastsevendays">過去7日以内</string>
-    <string name="cache_status_stored_lastthirtydays">過去30日以内</string>
-    <string name="cache_status_stored_morethaneighthours">過去8時間以前</string>
-    <string name="cache_status_stored_morethantwentyfourhours">過去24時間以前</string>
-    <string name="cache_status_stored_morethansevendays">過去7日以前</string>
-    <string name="cache_status_stored_morethanthirtydays">過去30日以前</string>
     <string name="cache_geocode">GCコード</string>
     <string name="cache_name">キャッシュ名</string>
     <string name="cache_name_set">キャッシュ名を設定</string>
@@ -1232,7 +1197,6 @@
     <string name="cache_distance">距離</string>
     <string name="cache_difficulty">難易度</string>
     <string name="cache_terrain">地形</string>
-    <string name="cache_difficulty_terrain">難易度/地形</string>
     <string name="cache_rating">評価</string>
     <string name="cache_own_rating">あなたの評価</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
@@ -1241,9 +1205,7 @@
     <string name="cache_hidden">設置日</string>
     <string name="cache_event">イベント日付</string>
     <string name="cache_location">所在地</string>
-    <string name="cache_location_country">国</string>
     <string name="cache_coordinates">座標</string>
-    <string name="cache_calculator">座標計算</string>
     <string name="cache_coordinates_original">オリジナル座標</string>
     <string name="cache_spoiler_images_title">スポイラー画像</string>
     <string name="cache_log_types">ログタイプ</string>
@@ -1843,7 +1805,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="favorite_points">
         <item quantity="other">お気に入り %s </item>
     </plurals>
-    <string name="more_than_percent_favorite_points">お気に入り &gt; %d%%</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo ショートカット</string>
     <string name="create_shortcut">ショートカットを作成</string>
@@ -1931,7 +1892,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_clear_individual_route">個別ルート削除</string>
     <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
     <string name="map_individual_route_cleared">個別ルートを削除しました</string>
-    <string name="save_sorted_route">保存</string>
     <string name="sorted_route_saved">個別ルートを保存しました</string>
     <string name="load_individual_route_error">個別ルートの読み込みに失敗しました</string>
     <string name="route_item_not_yet_loaded">ルートアイテムがまだ読み込まれていません</string>

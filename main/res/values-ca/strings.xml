@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">a escala</string>
     <string name="log_image_info_notscaled">no a escala</string>
     <string name="log_image_titleprefix">Imatge</string>
-    <string name="datetime_clear_button">Esborra</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- translation -->
     <string name="translate">Tradueix</string>
@@ -399,25 +398,6 @@
     <string name="caches_map_locus_export">Exporta al Locus</string>
     <string name="caches_filter_menuitem">Filtre</string>
     <string name="caches_filter_title">Filtra per</string>
-    <string name="caches_filter_size">Mida</string>
-    <string name="caches_filter_type">Tipus</string>
-    <string name="caches_filter_track">Amb traçables</string>
-    <string name="caches_filter_clear">Neteja els filtres</string>
-    <string name="caches_filter_modified">Amb les coordenades modificades</string>
-    <string name="caches_filter_offline_log">Amb registre fora de línia</string>
-    <string name="caches_filter_origin">Origen</string>
-    <string name="caches_filter_distance">Distància</string>
-    <string name="caches_filter_personal_note">Amb una nota personal</string>
-    <string name="caches_filter_popularity">Preferits</string>
-    <string name="caches_filter_popularity_ratio">Preferits [%]</string>
-    <string name="caches_filter_personal_data">Amb dades personals</string>
-    <string name="caches_filter_rating">Amb puntuació</string>
-    <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
-    <string name="caches_filter_multi_listing">Multi llista amb diferents estats</string>
-    <string name="caches_filter_own_waypoint">Amb fites definides per l\'usuari</string>
-    <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
-    <string name="caches_filter_lists">Assignat a una llista</string>
-    <string name="caches_filter_empty">(buit)</string>
     <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
@@ -1095,7 +1075,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributs</string>
     <string name="cache_inventory">Inventari</string>
     <string name="cache_log_images_title">Imatges del registre</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1217,27 +1196,13 @@
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
-    <string name="cache_stored">Desat</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
-    <string name="cache_never_found">Mai s\'ha trobat</string>
-    <string name="cache_found_last_30_days">Trobat en els darrers 30 dies</string>
     <string name="cache_status_archived">Arxivat</string>
     <string name="cache_status_disabled">Desactivat</string>
     <string name="cache_status_active">Actiu</string>
     <string name="cache_status_premium">Només per membres Premium</string>
-    <string name="cache_status_not_premium">Per a tots els membres</string>
-    <string name="cache_status_stored">Desat</string>
-    <string name="cache_status_not_stored">No desat</string>
-    <string name="cache_status_stored_lasteighthours">En les darreres vuit hores</string>
-    <string name="cache_status_stored_lasttwentyfourhours">En les darreres vint-i-quatre hores</string>
-    <string name="cache_status_stored_lastsevendays">En les darreres set dies</string>
-    <string name="cache_status_stored_lastthirtydays">En els darrers trenta dies</string>
-    <string name="cache_status_stored_morethaneighthours">Fa més de vuit hores</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Fa més de vint-i-quatre hores</string>
-    <string name="cache_status_stored_morethansevendays">Fa més de set dies</string>
-    <string name="cache_status_stored_morethanthirtydays">Fa més de trenta dies</string>
     <string name="cache_geocode">Geocodi</string>
     <string name="cache_name">Nom</string>
     <string name="cache_name_set">Definiu el nom del catxé</string>
@@ -1249,7 +1214,6 @@
     <string name="cache_distance">Distància</string>
     <string name="cache_difficulty">Dificultat</string>
     <string name="cache_terrain">Terreny</string>
-    <string name="cache_difficulty_terrain">Dificultat / Terreny</string>
     <string name="cache_rating">Puntuació</string>
     <string name="cache_own_rating">La vostra valoració</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1258,9 +1222,7 @@
     <string name="cache_hidden">Amagat</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Ubicació</string>
-    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenades</string>
-    <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenades originals</string>
     <string name="cache_spoiler_images_title">Imatges d\'ajuda</string>
     <string name="cache_log_types">Tipus de registre</string>
@@ -1871,7 +1833,6 @@
         <item quantity="one">%s preferit</item>
         <item quantity="other">%s preferits</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% preferits</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
     <string name="create_shortcut">Crea una drecera</string>
@@ -1972,7 +1933,6 @@
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
     <string name="map_clear_individual_route_confirm">Voleu eliminar tots els catxés / waypoints de la vostra ruta individual?</string>
     <string name="map_individual_route_cleared">Ruta individual esborrada</string>
-    <string name="save_sorted_route">Desa</string>
     <string name="sorted_route_saved">Ruta individual desada</string>
     <string name="load_individual_route_error">Error en carregar la ruta individual</string>
     <string name="route_item_not_yet_loaded">La ruta encara no s\'ha carregat</string>

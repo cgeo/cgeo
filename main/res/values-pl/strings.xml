@@ -178,7 +178,6 @@
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
-    <string name="datetime_clear_button">Wyczyść</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- translation -->
     <string name="translate">Tłumacz</string>
@@ -393,25 +392,6 @@
     <string name="caches_copy_all">Skopiuj wszystkie</string>
     <string name="caches_map_locus_export">Eksportuj do Locus</string>
     <string name="caches_filter_title">Filtruj według</string>
-    <string name="caches_filter_size">Rozmiar</string>
-    <string name="caches_filter_type">Typ</string>
-    <string name="caches_filter_track">Z przedmiotami podróżnymi</string>
-    <string name="caches_filter_clear">Usuń filtr</string>
-    <string name="caches_filter_modified">Zmiany współrzędnych</string>
-    <string name="caches_filter_offline_log">Z wpisami offline</string>
-    <string name="caches_filter_origin">Źródło</string>
-    <string name="caches_filter_distance">Odległość</string>
-    <string name="caches_filter_personal_note">Zawiera notatkę</string>
-    <string name="caches_filter_popularity">Ulubione</string>
-    <string name="caches_filter_popularity_ratio">Ulubione [%]</string>
-    <string name="caches_filter_personal_data">Z osobistymi informacjami</string>
-    <string name="caches_filter_rating">Z oceną</string>
-    <string name="caches_filter_own_rating">Z własną oceną</string>
-    <string name="caches_filter_multi_listing">Wielokrotne wyświetlanie z różnym stanem</string>
-    <string name="caches_filter_own_waypoint">Z punktami orientacyjnymi użytkownika</string>
-    <string name="caches_filter_missing_gcvote">Znaleziono skrzynki bez głosów</string>
-    <string name="caches_filter_lists">Przypisane do listy</string>
-    <string name="caches_filter_empty">(pusty)</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
@@ -1049,7 +1029,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">ponad rok temu</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atrybuty</string>
     <string name="cache_inventory">Inwentarz</string>
     <string name="cache_log_images_title">Zdjęcie z wpisu</string>
     <string name="cache_log_image_default_title">Zdjęcie</string>
@@ -1168,27 +1147,13 @@
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Przechowywany</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
-    <string name="cache_never_found">Nigdy nie znaleziona</string>
-    <string name="cache_found_last_30_days">Znalezione przez ostatnie 30 dni</string>
     <string name="cache_status_archived">Zarchiwizowana</string>
     <string name="cache_status_disabled">Niedostępna</string>
     <string name="cache_status_active">Aktywna</string>
     <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
-    <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
-    <string name="cache_status_stored">Zapisano</string>
-    <string name="cache_status_not_stored">Nie zapisano</string>
-    <string name="cache_status_stored_lasteighthours">W ciągu ostatnich ośmiu godzin</string>
-    <string name="cache_status_stored_lasttwentyfourhours">W ciągu ostatnich dwudziestu czterech godzin</string>
-    <string name="cache_status_stored_lastsevendays">W ciągu ostatnich siedmiu dni</string>
-    <string name="cache_status_stored_lastthirtydays">W ciągu ostatnich trzydziestu dni</string>
-    <string name="cache_status_stored_morethaneighthours">Przed ostatnimi ośmioma godzinami</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Przed ostatnimi dwudziestoma czterema godzinami</string>
-    <string name="cache_status_stored_morethansevendays">Przed ostatnimi siedmioma dniami</string>
-    <string name="cache_status_stored_morethanthirtydays">Przed ostatnimi trzydziestoma dniami</string>
     <string name="cache_geocode">Kod skrzynki</string>
     <string name="cache_name">Nazwa</string>
     <string name="cache_name_set">Ustaw nazwę skrzynki</string>
@@ -1208,9 +1173,7 @@
     <string name="cache_hidden">Ukryta</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Położenie</string>
-    <string name="cache_location_country">Kraj</string>
     <string name="cache_coordinates">Współrzędne</string>
-    <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Oryginalne współrzędne</string>
     <string name="cache_spoiler_images_title">Zdjęcia spoiler</string>
     <string name="cache_log_types">Rodzaj wpisu</string>
@@ -1829,7 +1792,6 @@
         <item quantity="many">%s ulubionych</item>
         <item quantity="other">%s ulubionych</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% ulubionych</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
     <string name="create_shortcut">Utwórz skrót</string>
@@ -1942,7 +1904,6 @@
     <string name="map_clear_individual_route">Wyczyść indywidualną trasę</string>
     <string name="map_clear_individual_route_confirm">Czy chcesz usunąć wszystkie skrzynki/punkty trasy z Twojej drogi?</string>
     <string name="map_individual_route_cleared">Indywidualna trasa wyczyszczona</string>
-    <string name="save_sorted_route">Zapisz</string>
     <string name="sorted_route_saved">Indywidualna trasa zapisana</string>
     <string name="load_individual_route_error">Błąd ładowania indywidualnej trasy</string>
     <string name="route_item_not_yet_loaded">Nie załadowano jeszcze elementu trasy</string>
