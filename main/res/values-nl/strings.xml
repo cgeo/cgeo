@@ -395,7 +395,7 @@
     <string name="caches_map_locus_export">Exporteer naar Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter op</string>
-    <string name="caches_filter_size">Grootte</string>
+    <string name="caches_filter_size">Formaat</string>
     <string name="caches_filter_type">Type</string>
     <string name="caches_filter_track">Met trackables</string>
     <string name="caches_filter_clear">Maak filters leeg</string>
@@ -404,8 +404,8 @@
     <string name="caches_filter_origin">Oorsprong</string>
     <string name="caches_filter_distance">Afstand</string>
     <string name="caches_filter_personal_note">Met privé cachenotitie</string>
-    <string name="caches_filter_popularity">Favorieten</string>
-    <string name="caches_filter_popularity_ratio">Favorieten [%]</string>
+    <string name="caches_filter_popularity">Populariteit</string>
+    <string name="caches_filter_popularity_ratio">Populariteit [%]</string>
     <string name="caches_filter_personal_data">Met persoonlijke gegevens</string>
     <string name="caches_filter_rating">Met rating</string>
     <string name="caches_filter_own_rating">Met eigen rating</string>
