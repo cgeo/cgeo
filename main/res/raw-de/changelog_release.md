@@ -1,23 +1,24 @@
-## Bugfix Release
+## Bugfix-Release
 
 ### Design
-- Remove transition animation when opening cache details
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- User font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
+- Übergangsanimation beim Öffnen von Caches entfernt
+- Schriftgröße für Texteingabefelder vergrößert
+- Schriftgröße für einige Kompass-Elemente vergrößert
+- Benutze Schrift mit höherem Kontrast im Wegpunkt-Tab
+- Häkchen im schnellen Offline-Log wieder sichtbar machen
+- Schriftgröße für Koordinateneingabe vergrößert
+- Respect system font size settings also on older Android versions (5,6 and 7)
 
 ### Cache-Details
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- Fehlender Cache-Titel, wenn der Cache über Geocode oder Link geöffnet wurde (Änderung auf der Webseite)
+- Fehlende Cache-Beschreibung bei einigen Caches korrigiert
 
 ### Sonstiges
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- Premium-Caches erneut in den Suchergebnissen der Basismitglieder anzeigen
+- Weitere Erstellung von benutzerdefinierten Caches möglich, nachdem benutzerdefinierte Caches aus einer GPX hinzugefügt wurden
+- Verwende gebräuchlichere englische Abkürzung für traditionelle Cache im Cachetyp-Filter
 
-## Feature Release 2021.08.15:
+## Feature-Version 2021.08.15:
 
 ### Erweitertes Filtersystem
 - Einführung eines neuen Filtersystems in c:geo, unterstützt flexible, kombinierbare und speicherbare Filter
