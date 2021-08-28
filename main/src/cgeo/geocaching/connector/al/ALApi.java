@@ -92,7 +92,7 @@ final class ALApi {
         Log.d("_AL Radius: " + (int) radius);
         final Parameters params = new Parameters("skip", "0");
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
-        params.add("take", "500");
+        params.add("take", "100");
         params.add("radiusMeters", String.valueOf((int) radius));
         params.add("origin.latitude", String.valueOf(latcenter));
         params.add("origin.longitude", String.valueOf(loncenter));
@@ -115,7 +115,7 @@ final class ALApi {
             return Collections.emptyList();
         }
         final Parameters params = new Parameters("skip", "0");
-        params.add("take", "200");
+        params.add("take", "100");
         params.add("radiusMeters", "" + (distanceInKm * 1000));
         params.add("origin.latitude", String.valueOf(center.getLatitude()));
         params.add("origin.longitude", String.valueOf(center.getLongitude()));
