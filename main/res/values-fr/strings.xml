@@ -401,7 +401,7 @@
     <string name="caches_filter_clear">Supprimer les filtres</string>
     <string name="caches_filter_modified">Avec les coordonnées modifiées</string>
     <string name="caches_filter_offline_log">Avec visite hors-ligne</string>
-    <string name="caches_filter_origin">Site web d\'origine</string>
+    <string name="caches_filter_origin">Origine</string>
     <string name="caches_filter_distance">Distance</string>
     <string name="caches_filter_personal_note">Avec une note personnelle</string>
     <string name="caches_filter_popularity">Favoris [nombre]</string>
@@ -1235,7 +1235,7 @@
     <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Membres Premium seulement</string>
     <string name="cache_status_not_premium">Pour tous les membres</string>
-    <string name="cache_status_stored">Enregistrée</string>
+    <string name="cache_status_stored">Enregistrées</string>
     <string name="cache_status_not_stored">Non enregistrée</string>
     <string name="cache_status_stored_lasteighthours">Au cours des huit dernières heures</string>
     <string name="cache_status_stored_lasttwentyfourhours">Au cours des dernières vingt-quatre heures</string>
