@@ -114,6 +114,7 @@
     <string name="log_oc_team_comment">Ang kumento ng OC Team</string>
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
+    <string name="datetime_clear_button">Malinaw</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -289,13 +290,13 @@
     <string name="caches_copy_all">Kopyahin lahat</string>
     <string name="caches_map_locus_export">Ang mga lokus ay I-eksport</string>
     <string name="caches_filter_title">Ang pagsasala ayon sa</string>
-    <string name="caches_filter_size">Ang Sukat</string>
-    <string name="caches_filter_type">Uri</string>
+    <string name="caches_filter_size">Sukat</string>
+    <string name="caches_filter_type">Ang klase</string>
     <string name="caches_filter_track">Na may pagsusubaybay</string>
     <string name="caches_filter_clear">Malinaw ang mga pagsasala</string>
     <string name="caches_filter_modified">May mga pinasadyang mga koordinado</string>
     <string name="caches_filter_offline_log">May mga log kapag offline</string>
-    <string name="caches_filter_origin">Pinagmulan</string>
+    <string name="caches_filter_origin">Ang pinagmulan</string>
     <string name="caches_filter_distance">Distansya</string>
     <string name="caches_filter_personal_note">May mga personal na tala</string>
     <string name="caches_filter_popularity">Ang mga paborito</string>
@@ -674,6 +675,7 @@
     <string name="ignore_confirm_title">Maging maingat ka</string>
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
+    <string name="cache_stored">Inimbak</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
@@ -683,7 +685,7 @@
     <string name="cache_status_disabled">Ang hindi umiiral</string>
     <string name="cache_status_premium">Ang premium na mga miyembro lamang</string>
     <string name="cache_status_not_premium">Ang akses sa Lahat ng mga Miyembro</string>
-    <string name="cache_status_stored">Ang nakaimbak</string>
+    <string name="cache_status_stored">Inimbak</string>
     <string name="cache_status_not_stored">Ang hindi nakaimbak</string>
     <string name="cache_geocode">Ang Kodigo sa Geo</string>
     <string name="cache_name">Ang pangalan</string>
@@ -1209,6 +1211,7 @@
     <!-- individual routes -->
     <string name="map_clear_manual_targets">Manuelle Ziele löschen</string>
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
+    <string name="save_sorted_route">I-seyb</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->

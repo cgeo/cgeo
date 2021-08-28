@@ -149,6 +149,7 @@
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
     <string name="log_image_titleprefix">Імідж</string>
+    <string name="datetime_clear_button">Чистий</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
     <string name="translate_to_english">Переклад англійською мовою</string>
@@ -356,7 +357,7 @@
     <string name="caches_filter_distance">Відстань</string>
     <string name="caches_filter_personal_note">З персональною приміткою</string>
     <string name="caches_filter_popularity">Улюблене</string>
-    <string name="caches_filter_popularity_ratio">Улюблені [%]</string>
+    <string name="caches_filter_popularity_ratio">Вибране [%]</string>
     <string name="caches_filter_personal_data">З персональними даними</string>
     <string name="caches_filter_rating">З рейтингом</string>
     <string name="caches_filter_own_rating">З власним рейтингом</string>
@@ -874,7 +875,7 @@
     <string name="ignore_confirm_title">Будьте обережні</string>
     <string name="ignore_confirm_message">Ігнорування кешу означає, що цей кеш ніколи не буде використовуватися знову під час завантаження даних із схованки. м.Ви зможете знову побачити кеш не ігноруючи його на сайті.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">зберігається</string>
+    <string name="cache_stored">Збережений</string>
     <string name="cache_status_offline_log">Зберегти у журнал</string>
     <string name="cache_status_found">Знайдено</string>
     <string name="cache_not_status_found">Не знайдено</string>
@@ -885,7 +886,7 @@
     <string name="cache_status_active">активний</string>
     <string name="cache_status_premium">Тільки Преміум Учасники</string>
     <string name="cache_status_not_premium">Доступ до всіх учасників</string>
-    <string name="cache_status_stored">зберігається</string>
+    <string name="cache_status_stored">Збережений</string>
     <string name="cache_status_not_stored">Не збережено</string>
     <string name="cache_status_stored_lasteighthours">За останні вісім годин</string>
     <string name="cache_status_stored_lasttwentyfourhours">За останні двадцять чотири години</string>

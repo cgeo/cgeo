@@ -155,6 +155,7 @@
     <string name="log_problem_archive_text">Этот пользователь сообщил, что тайник должен быть заархивирован. Сообщество добровольцев было уведомлено.</string>
     <string name="log_image_scale_option_noscaling">Без масштабирования</string>
     <string name="log_image_titleprefix">Фотография</string>
+    <string name="datetime_clear_button">Очистить</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перевести на %s</string>
     <string name="translate_to_english">Перевести на английский</string>
@@ -359,8 +360,8 @@
     <string name="caches_filter_clear">Очистить фильтры</string>
     <string name="caches_filter_modified">С измененными координатами</string>
     <string name="caches_filter_offline_log">С сохраненными записями</string>
-    <string name="caches_filter_origin">Происхождение</string>
-    <string name="caches_filter_distance">Расстоянию</string>
+    <string name="caches_filter_origin">Родина</string>
+    <string name="caches_filter_distance">Расстояние</string>
     <string name="caches_filter_personal_note">С личными записями</string>
     <string name="caches_filter_popularity">Рекомендации</string>
     <string name="caches_filter_popularity_ratio">Рекомендации [%]</string>
@@ -991,7 +992,7 @@
     <string name="ignore_confirm_title">Внимание</string>
     <string name="ignore_confirm_message">Игнорирование тайника означает, что этот тайник не будет загружаться с geocaching.com. Вы сможете его увидеть, только удалив игнорирование на сайте.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">Сохранено</string>
+    <string name="cache_stored">Сохраненные</string>
     <string name="cache_status_offline_log">Сохранена запись</string>
     <string name="cache_status_found">Найден</string>
     <string name="cache_not_status_found">Не найден</string>
@@ -1002,7 +1003,7 @@
     <string name="cache_status_active">Активный</string>
     <string name="cache_status_premium">Только для Премиум участников</string>
     <string name="cache_status_not_premium">Доступно всем участникам</string>
-    <string name="cache_status_stored">Сохранен</string>
+    <string name="cache_status_stored">Сохраненные</string>
     <string name="cache_status_not_stored">Не сохранен</string>
     <string name="cache_status_stored_lasteighthours">За последние 8 часов</string>
     <string name="cache_status_stored_lasttwentyfourhours">За последние 24 часа</string>

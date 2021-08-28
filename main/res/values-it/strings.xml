@@ -181,7 +181,7 @@
     <string name="log_image_scale_option_noscaling">Nessun ridimensionamento</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nRidotto/Compresso:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Immagine</string>
-    <string name="datetime_clear_button">Resetta</string>
+    <string name="datetime_clear_button">Azzera</string>
     <string name="datetime_nodateset_display">Nessuna data impostata</string>
     <!-- translation -->
     <string name="translate">Traduci</string>
@@ -1224,7 +1224,7 @@
     <string name="ignore_confirm_title">Stai attento</string>
     <string name="ignore_confirm_message">Ignorando una cache significa che questo cache non si ripresenterà quando si caricano dati da geocaching.com. Sarai in grado di vederlo nuovamente solo agendo da sito Web (unignore).</string>
     <string name="cache_status">Stato</string>
-    <string name="cache_stored">Salvato</string>
+    <string name="cache_stored">Salvati</string>
     <string name="cache_status_offline_log">Log salvato</string>
     <string name="cache_status_found">Trovato</string>
     <string name="cache_not_status_found">Non trovato</string>
@@ -1235,7 +1235,7 @@
     <string name="cache_status_active">Attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
     <string name="cache_status_not_premium">Per tutti gli utenti</string>
-    <string name="cache_status_stored">Salvato</string>
+    <string name="cache_status_stored">Salvati</string>
     <string name="cache_status_not_stored">Non salvato</string>
     <string name="cache_status_stored_lasteighthours">Nelle ultime otto ore</string>
     <string name="cache_status_stored_lasttwentyfourhours">Nelle ultime 24 ore</string>

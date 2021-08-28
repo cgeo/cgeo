@@ -132,6 +132,7 @@
     <string name="log_problem_other_label">Drugo</string>
     <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
+    <string name="datetime_clear_button">Počisti</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
@@ -302,8 +303,8 @@
     <string name="caches_copy_all">Kopiraj vse</string>
     <string name="caches_map_locus_export">Izvozi v Locus</string>
     <string name="caches_filter_title">Filtriraj po</string>
-    <string name="caches_filter_size">Velikosti</string>
-    <string name="caches_filter_type">Tipu</string>
+    <string name="caches_filter_size">Velikost</string>
+    <string name="caches_filter_type">Tip</string>
     <string name="caches_filter_track">S sledljivčki</string>
     <string name="caches_filter_clear">Počisti filtre</string>
     <string name="caches_filter_modified">S spremenjenimi koordinatami</string>
@@ -311,8 +312,8 @@
     <string name="caches_filter_origin">Vir</string>
     <string name="caches_filter_distance">Razdalja</string>
     <string name="caches_filter_personal_note">Z osebnim zapisom</string>
-    <string name="caches_filter_popularity">Favoriti</string>
-    <string name="caches_filter_popularity_ratio">Favoriti [%]</string>
+    <string name="caches_filter_popularity">Številu favoritov</string>
+    <string name="caches_filter_popularity_ratio">Številu favoritov [%]</string>
     <string name="caches_filter_personal_data">Z osebnim zapisom</string>
     <string name="caches_filter_rating">Z oceno</string>
     <string name="caches_filter_own_rating">Z lastno oceno</string>
@@ -632,6 +633,7 @@
     <string name="cache_menu_challenge_checker">Poišči Challenge-Checker</string>
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
+    <string name="cache_stored">Shranjeni</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
@@ -641,7 +643,7 @@
     <string name="cache_status_disabled">Onemogočen</string>
     <string name="cache_status_premium">Samo za Premium člane</string>
     <string name="cache_status_not_premium">Za vse člane</string>
-    <string name="cache_status_stored">Shranjen</string>
+    <string name="cache_status_stored">Shranjeni</string>
     <string name="cache_status_not_stored">Ni shranjen</string>
     <string name="cache_geocode">Geo koda</string>
     <string name="cache_name">Ime</string>
@@ -1119,6 +1121,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Shrani</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->

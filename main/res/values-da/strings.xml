@@ -178,6 +178,7 @@
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaleret/Komprimeret:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Billede</string>
+    <string name="datetime_clear_button">Fjern</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
     <string name="translate_to_english">Oversæt til engelsk</string>
@@ -388,7 +389,7 @@
     <string name="caches_filter_clear">Nulstil filtre</string>
     <string name="caches_filter_modified">Med ændret position</string>
     <string name="caches_filter_offline_log">Med offline log</string>
-    <string name="caches_filter_origin">Kilde</string>
+    <string name="caches_filter_origin">Oprindelsessted</string>
     <string name="caches_filter_distance">Afstand</string>
     <string name="caches_filter_personal_note">Med personlig note</string>
     <string name="caches_filter_popularity">Favoritter</string>
@@ -1033,7 +1034,7 @@
     <string name="ignore_confirm_title">Vær forsigtig</string>
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Gemt</string>
+    <string name="cache_stored">Gemte</string>
     <string name="cache_status_offline_log">Log gemt</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
@@ -1044,7 +1045,7 @@
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun premium-medlemmer</string>
     <string name="cache_status_not_premium">Adgang for alle medlemmer</string>
-    <string name="cache_status_stored">Gemt</string>
+    <string name="cache_status_stored">Gemte</string>
     <string name="cache_status_not_stored">Ikke gemt</string>
     <string name="cache_status_stored_lasteighthours">Indenfor sidste 8 timer</string>
     <string name="cache_status_stored_lasttwentyfourhours">Indenfor sidste døgn</string>

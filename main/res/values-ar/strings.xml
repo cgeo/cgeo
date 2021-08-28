@@ -122,6 +122,7 @@
     <string name="log_oc_team_comment">تعليق فريق OC</string>
     <string name="log_your_saved_log">سجلك المحفوظ</string>
     <string name="log_empty_logbook">دفتر هذه المخبئ فارغ.</string>
+    <string name="datetime_clear_button">مسح</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">ترجمة إلى %s</string>
     <string name="translate_to_english">ترجمة إلى الإنجليزية</string>
@@ -661,6 +662,7 @@
     <string name="ignore_confirm_title">انتبه</string>
     <string name="ignore_confirm_message">تجاهل المخبئ يعني أن هذا المخبئ لن يظهر مرة أخرى عند تحميل البيانات من geocaching.com. يمكنك رؤية المخبئ مرة أخرى فقط عندما تقوم بإلغاء تجاهل المخبئ على الموقع.</string>
     <string name="cache_status">الوضع</string>
+    <string name="cache_stored">تم التخزين</string>
     <string name="cache_status_offline_log">تسجيل الزيارة محفوظ</string>
     <string name="cache_status_found">تم العثور عليه</string>
     <string name="cache_not_status_found">لم يتم العثور عليه</string>
@@ -670,7 +672,7 @@
     <string name="cache_status_disabled">معطل</string>
     <string name="cache_status_premium">أعضاء برميوم فقط</string>
     <string name="cache_status_not_premium">لكافة الأعضاء</string>
-    <string name="cache_status_stored">تم تخزينه</string>
+    <string name="cache_status_stored">تم التخزين</string>
     <string name="cache_status_not_stored">لم يتم تخزينه</string>
     <string name="cache_geocode">كود المخبئ</string>
     <string name="cache_name">الاسم</string>
@@ -1162,6 +1164,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">حفظ</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->

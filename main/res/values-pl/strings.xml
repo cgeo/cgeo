@@ -400,7 +400,7 @@
     <string name="caches_filter_clear">Usuń filtr</string>
     <string name="caches_filter_modified">Zmiany współrzędnych</string>
     <string name="caches_filter_offline_log">Z wpisami offline</string>
-    <string name="caches_filter_origin">Źródło</string>
+    <string name="caches_filter_origin">Pochodzenie</string>
     <string name="caches_filter_distance">Odległość</string>
     <string name="caches_filter_personal_note">Zawiera notatkę</string>
     <string name="caches_filter_popularity">Ulubione</string>
@@ -1179,7 +1179,7 @@
     <string name="ignore_confirm_title">Ostrożnie</string>
     <string name="ignore_confirm_message">Zignorowanie tej skrzynki oznacza, że nie pojawi się ona ponownie podczas ładowania danych z geocaching.com. Będziesz w stanie widzieć skrzynkę ponownie jedynie kiedy usuniesz ignorowanie na stronie.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Przechowywany</string>
+    <string name="cache_stored">Zapisane</string>
     <string name="cache_status_offline_log">Zapamiętany wpis</string>
     <string name="cache_status_found">Znaleziona</string>
     <string name="cache_not_status_found">Nie znaleziono</string>
@@ -1190,7 +1190,7 @@
     <string name="cache_status_active">Aktywna</string>
     <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
     <string name="cache_status_not_premium">Dostępna dla wszystkich użytkowników</string>
-    <string name="cache_status_stored">Zapisano</string>
+    <string name="cache_status_stored">Zapisane</string>
     <string name="cache_status_not_stored">Nie zapisano</string>
     <string name="cache_status_stored_lasteighthours">W ciągu ostatnich ośmiu godzin</string>
     <string name="cache_status_stored_lasttwentyfourhours">W ciągu ostatnich dwudziestu czterech godzin</string>

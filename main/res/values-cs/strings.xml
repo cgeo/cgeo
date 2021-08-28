@@ -181,7 +181,7 @@
     <string name="log_image_scale_option_noscaling">Bez měřítka</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nZměněná velikost/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázek</string>
-    <string name="datetime_clear_button">Vymazat</string>
+    <string name="datetime_clear_button">Vyčistit</string>
     <string name="datetime_nodateset_display">Není nastavené datum</string>
     <!-- translation -->
     <string name="translate">Přeložit</string>
@@ -403,7 +403,7 @@
     <string name="caches_filter_clear">Vymazat filtry</string>
     <string name="caches_filter_modified">S upravenými souřadnicemi</string>
     <string name="caches_filter_offline_log">S offline logy</string>
-    <string name="caches_filter_origin">Původ keše</string>
+    <string name="caches_filter_origin">Původ</string>
     <string name="caches_filter_distance">Vzdálenost</string>
     <string name="caches_filter_personal_note">S osobní poznámkou</string>
     <string name="caches_filter_popularity">Oblíbenost</string>
@@ -1244,7 +1244,7 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorace kešky znamená, že tato keška nebude nikdy znovu zobrazena při načítání dat z geocaching.com. Jediná možnost, jak kešku znovu zobrazit, je její vyškrtnutí ze seznamu ignorovaných přímo na webu.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uloženo</string>
+    <string name="cache_stored">Uložené</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
     <string name="cache_not_status_found">Nenalezeno</string>

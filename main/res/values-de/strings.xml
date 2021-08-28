@@ -401,7 +401,7 @@
     <string name="caches_filter_clear">Filter zurücksetzen</string>
     <string name="caches_filter_modified">Mit geänderten Koordinaten</string>
     <string name="caches_filter_offline_log">Mit Offline-Log</string>
-    <string name="caches_filter_origin">Herkunft</string>
+    <string name="caches_filter_origin">Ursprungsort</string>
     <string name="caches_filter_distance">Entfernung</string>
     <string name="caches_filter_personal_note">Mit persönlicher Notiz</string>
     <string name="caches_filter_popularity">Favoriten</string>

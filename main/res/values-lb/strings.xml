@@ -149,6 +149,7 @@
     <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
+    <string name="datetime_clear_button">Läschen</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
     <string name="translate_to_english">Iwwersetzen op Englesch</string>
@@ -345,12 +346,10 @@
     <string name="caches_map_locus_export">Op Locus exportéieren</string>
     <string name="caches_filter_title">Filter no</string>
     <string name="caches_filter_size">Gréisst</string>
-    <string name="caches_filter_type">Typ</string>
     <string name="caches_filter_track">Mat Trackables</string>
     <string name="caches_filter_clear">Filteren zrécksetzen</string>
     <string name="caches_filter_modified">Mat modifizéierte Koordinaten</string>
     <string name="caches_filter_offline_log">Mat offline Log</string>
-    <string name="caches_filter_origin">Hierkonft</string>
     <string name="caches_filter_distance">Distanz</string>
     <string name="caches_filter_personal_note">Mat perséinlecher Notiz</string>
     <string name="caches_filter_popularity">Favoritten</string>
@@ -572,6 +571,8 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
+    <string name="cache_stored">Geséchert</string>
+    <string name="cache_status_stored">Geséchert</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -640,7 +641,6 @@
     <string name="number_input_title">Tipp e Wärt tëscht %1$s a %2$s an</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
-    <string name="save_sorted_route">Späicheren</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->

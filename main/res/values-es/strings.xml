@@ -151,6 +151,7 @@
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
     <string name="log_image_titleprefix">Imagen</string>
+    <string name="datetime_clear_button">Limpiar</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
     <string name="translate_to_english">Traducir al inglés</string>
@@ -357,7 +358,7 @@
     <string name="caches_filter_clear">Limpiar filtros</string>
     <string name="caches_filter_modified">Con las coordenadas modificadas</string>
     <string name="caches_filter_offline_log">Con registro sin conexión</string>
-    <string name="caches_filter_origin">Coordenadas originales</string>
+    <string name="caches_filter_origin">Origen</string>
     <string name="caches_filter_distance">Distancia</string>
     <string name="caches_filter_personal_note">Con nota personal</string>
     <string name="caches_filter_popularity">Favoritos</string>
@@ -957,6 +958,7 @@
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
+    <string name="cache_stored">Guardados</string>
     <string name="cache_status_offline_log">Registro guardado</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
@@ -966,7 +968,7 @@
     <string name="cache_status_disabled">Desactivado</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
     <string name="cache_status_not_premium">Acceso a todos los miembros</string>
-    <string name="cache_status_stored">Guardado</string>
+    <string name="cache_status_stored">Guardados</string>
     <string name="cache_status_not_stored">No guardado</string>
     <string name="cache_status_stored_lastthirtydays">En los últimos treinta días</string>
     <string name="cache_status_stored_morethaneighthours">Antes de las últimas ocho horas</string>
@@ -1562,6 +1564,7 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>
+    <string name="save_sorted_route">Guardar</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->

@@ -111,6 +111,7 @@
     <string name="log_empty_logbook">Dagbók þessa kassa er tóm.</string>
     <string name="log_problem_needs_maintenance_label">Þarfnast viðhalds</string>
     <string name="log_problem_other_label">Annað</string>
+    <string name="datetime_clear_button">Hreinsa</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Þýtt að %s</string>
     <string name="translate_to_english">Þýða yfir á ensku</string>
@@ -246,8 +247,8 @@
     <string name="caches_filter_clear">Hreinsa síanir</string>
     <string name="caches_filter_modified">Hefur breytt hnit</string>
     <string name="caches_filter_distance">Fjarlægð</string>
-    <string name="caches_filter_popularity">Eftirlæti</string>
-    <string name="caches_filter_popularity_ratio">Eftirlæti [%]</string>
+    <string name="caches_filter_popularity">Uppáhalds</string>
+    <string name="caches_filter_popularity_ratio">Uppáhalds [%]</string>
     <string name="caches_filter_personal_data">Hefur persónuleg gögn</string>
     <string name="caches_removing_from_history">Fjarlægi af ferli…</string>
     <string name="caches_clear_offlinelogs">Hreinsa „án nets“ færslur</string>
@@ -474,6 +475,7 @@
     <string name="cache_menu_checker">Opna Geochecker</string>
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
+    <string name="cache_stored">Vistað</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
@@ -744,6 +746,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Vista</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">fet</string>
