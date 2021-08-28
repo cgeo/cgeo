@@ -1225,7 +1225,7 @@
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
-    <string name="cache_stored">Desat</string>
+    <string name="cache_stored">Desats</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
@@ -1236,7 +1236,7 @@
     <string name="cache_status_active">Actiu</string>
     <string name="cache_status_premium">Només per membres Premium</string>
     <string name="cache_status_not_premium">Per a tots els membres</string>
-    <string name="cache_status_stored">Desat</string>
+    <string name="cache_status_stored">Desats</string>
     <string name="cache_status_not_stored">No desat</string>
     <string name="cache_status_stored_lasteighthours">En les darreres vuit hores</string>
     <string name="cache_status_stored_lasttwentyfourhours">En les darreres vint-i-quatre hores</string>
