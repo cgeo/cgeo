@@ -410,6 +410,7 @@
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
     <string name="caches_delete_events">Delete past events</string>
+    <string name="caches_upload_bookmarklist">Upload to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -1564,6 +1565,12 @@
     <string name="search_bookmark_list">Bookmark list</string>
     <string name="search_pocket_is_new">new</string>
     <string name="search_pocket_and_bookmark_loading">Loading a list of Pocket Queries and bookmark lists</string>
+    <string name="search_bookmark_loading">Loading bookmark lists</string>
+    <string name="search_bookmark_select">Select bookmark lists</string>
+    <string name="search_bookmark_new">Create new bookmark list</string>
+    <string name="search_bookmark_adding_caches_success">All GC geocaches have been added to the selected bookmark list</string>
+    <string name="search_bookmark_adding_caches_failed">Failed to add caches to bookmark list</string>
+    <string name="search_bookmark_create_new_failed">Failed to create a new bookmark list</string>
 
     <!-- trackable -->
     <string name="trackable">Trackable</string>

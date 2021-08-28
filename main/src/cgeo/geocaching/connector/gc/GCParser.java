@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -988,7 +989,7 @@ public final class GCParser {
     }
 
     /**
-     * Fetches a list of bookmark lists.
+     * Fetches a list of bookmark lists. Shouldn't be called on main tread!
      *
      * @return A non-null list (which might be empty) on success. Null on error.
      */
@@ -1029,7 +1030,66 @@ public final class GCParser {
     }
 
     /**
-     * Fetches a list of pocket queries.
+     * Creates a new bookmark list. Shouldn't be called on main tread!
+     *
+     * @return guid of the new list.
+     */
+    @Nullable
+    public static String createBookmarkList (final String name) {
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("name", name);
+        jo.putObject("type").put("code", "bm");
+
+        try {
+            final String result = Network.getResponseData(Network.postJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists", jo));
+
+            if (StringUtils.isBlank(result)) {
+                Log.e("GCParser.createBookmarkList: No response from server");
+                return null;
+            }
+
+            final String guid = JsonUtils.reader.readTree(result).get("referenceCode").asText();
+
+            if (StringUtils.isBlank(guid)) {
+                Log.e("GCParser.createBookmarkList: Malformed result");
+                return null;
+            }
+
+            return guid;
+
+        } catch (final Exception ignored) {
+            Log.e("GCParser.createBookmarkList: Error while creating new bookmark list");
+            return null;
+        }
+    }
+
+    /**
+     * Creates a new bookmark list. Shouldn't be called on main tread!
+     *
+     * @return successful?
+     */
+    public static boolean addCachesToBookmarkList (final String listGuid, final List<Geocache> geocaches) {
+        final ArrayNode arrayNode = JsonUtils.createArrayNode();
+
+        for (Geocache geocache : geocaches) {
+            if (ConnectorFactory.getConnector(geocache) instanceof GCConnector) {
+                arrayNode.add(new ObjectNode(JsonUtils.factory).put("referenceCode", geocache.getGeocode()));
+            }
+        }
+
+        Log.e(arrayNode.toString());
+
+        try {
+            Network.completeWithSuccess(Network.putJsonRequest("https://www.geocaching.com/api/proxy/web/v1/lists/" + listGuid + "/geocaches", arrayNode));
+            Log.i("GCParser.addCachesToBookmarkList - caches uploaded to GC.com bookmark list");
+            return true;
+        } catch (final Exception ignored) {
+            Log.e("GCParser.uploadPersonalNote - cannot upload caches to GC.com bookmark list", ignored);
+            return false;
+        }
+    }
+
+    /**
+     * Fetches a list of pocket queries. Shouldn't be called on main tread!
      *
      * @return A non-null list (which might be empty) on success. Null on error.
      */
