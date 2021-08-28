@@ -139,6 +139,7 @@
     <string name="log_problem_other_text">Ez a játékos azt jelezte, hogy probléma van a ládával.</string>
     <string name="log_problem_archive_label">Megszüntetendő láda</string>
     <string name="log_problem_archive_text">Ez a játékos azt jelezte, hogy meg kell szüntetni a ládát. A ládaellenőr értesült erről.</string>
+    <string name="datetime_clear_button">Törlés</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Fordítás erre: %s</string>
     <string name="translate_to_english">Fordítás angolra</string>
@@ -331,7 +332,7 @@
     <string name="caches_filter_clear">Szűrés törlése</string>
     <string name="caches_filter_modified">Módosított koordináták</string>
     <string name="caches_filter_offline_log">Offline log</string>
-    <string name="caches_filter_origin">Származás</string>
+    <string name="caches_filter_origin">Indítás helye</string>
     <string name="caches_filter_distance">Távolság</string>
     <string name="caches_filter_personal_note">Személyes megjegyzés</string>
     <string name="caches_filter_popularity">Kedvencek</string>
@@ -755,7 +756,7 @@
     <string name="ignore_confirm_title">Légy óvatos</string>
     <string name="ignore_confirm_message">Egy láda mellőzése azt jelenti, hogy a láda soha többé nem töltődik le a geocaching.com-ról. Csak akkor láthatod ismét ezt a ládát, ha visszavonod a mellőzését a geocaching.com-on.</string>
     <string name="cache_status">Állapot</string>
-    <string name="cache_stored">Elmentve</string>
+    <string name="cache_stored">Mentett</string>
     <string name="cache_status_offline_log">Offline log</string>
     <string name="cache_status_found">Megtaláltam</string>
     <string name="cache_not_status_found">Nem találtam meg</string>
@@ -765,7 +766,7 @@
     <string name="cache_status_disabled">Letiltva</string>
     <string name="cache_status_premium">Csak prémium tagoknak</string>
     <string name="cache_status_not_premium">Minden tag számára</string>
-    <string name="cache_status_stored">Elmentve</string>
+    <string name="cache_status_stored">Mentett</string>
     <string name="cache_status_not_stored">Nincs elmentve</string>
     <string name="cache_status_stored_lasteighthours">Az elmúlt 8 órában</string>
     <string name="cache_status_stored_lasttwentyfourhours">Az elmúlt 24 órában</string>
@@ -1323,6 +1324,7 @@
     <string name="number_input_err_format">Érvénytelen számformátum</string>
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Mentés</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
