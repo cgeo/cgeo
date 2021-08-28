@@ -811,11 +811,6 @@
         </activity>
 
         <activity
-            android:name=".filter.FilterActivity_"
-            android:label="@string/caches_filter_title" >
-        </activity>
-
-        <activity
             android:name=".filters.gui.GeocacheFilterActivity"
             android:label="@string/caches_filter_title" >
         </activity>

@@ -29,8 +29,6 @@ import cgeo.geocaching.export.FieldNoteExport;
 import cgeo.geocaching.export.GpxExport;
 import cgeo.geocaching.export.PersonalNoteExport;
 import cgeo.geocaching.files.GPXImporter;
-import cgeo.geocaching.filter.FilterActivity;
-import cgeo.geocaching.filter.IFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
@@ -150,7 +148,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
-    private static final String STATE_FILTER = "currentFilter";
     private static final String STATE_GEOCACHE_FILTER = "currentGeocacheFilter";
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
     private static final String STATE_LIST_TYPE = "currentListType";
@@ -189,7 +186,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * remember current filter when switching between lists, so it can be re-applied afterwards
      */
-    private IFilter currentFilter = null;
     private GeocacheFilterContext currentCacheFilter = null;
     private IGeocacheFilter currentAddFilterCriteria = null;
     private CacheComparator currentSort = null;
@@ -543,7 +539,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
             // Restore value of members from saved state
-            currentFilter = savedInstanceState.getParcelable(STATE_FILTER);
             currentCacheFilter = savedInstanceState.getParcelable(STATE_GEOCACHE_FILTER);
             currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
@@ -589,7 +584,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         super.onSaveInstanceState(savedInstanceState);
 
         // Save the current Filter
-        savedInstanceState.putParcelable(STATE_FILTER, currentFilter);
         savedInstanceState.putParcelable(STATE_GEOCACHE_FILTER, currentCacheFilter);
         savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
@@ -1002,9 +996,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isNonDefaultList && !preventAskForDeletion && CollectionUtils.isEmpty(cacheList)
             && DataStore.getAllStoredCachesCount(listId) == 0) {
             // ask user, if he wants to delete the now empty list
-            Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty), getString(R.string.list_dialog_do_not_ask_me_again), preventAskForDeletion -> {
-                removeListInternal();
-            }, this::setPreventAskForDeletion);
+            Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty), getString(R.string.list_dialog_do_not_ask_me_again),
+                preventAskForDeletion -> removeListInternal(), this::setPreventAskForDeletion);
         }
     }
 
@@ -1233,7 +1226,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void applyAdapterFilter() {
         final GeocacheFilter filter = currentAddFilterCriteria == null ?
             currentCacheFilter.get() : currentCacheFilter.get().clone().and(currentAddFilterCriteria);
-        adapter.setFilter(currentFilter, filter);
+        adapter.setFilter(filter);
     }
 
     @Override
@@ -1368,10 +1361,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 final Uri uri = data.getData();
                 new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, data.getType(), null);
             }
-        } else if (requestCode == FilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
-            final int[] filterIndex = data.getIntArrayExtra(FilterActivity.EXTRA_FILTER_RESULT);
-            currentFilter = FilterActivity.getFilterFromPosition(filterIndex[0], filterIndex[1]);
-            setFilter();
         } else if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             setAndRefreshFilterForOnlineSearch(data.getParcelableExtra(GeocacheFilterActivity.EXTRA_FILTER_CONTEXT));
         }
