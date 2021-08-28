@@ -536,6 +536,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Is Not Present</string>
     <string name="cache_filter_stringfilter_type_is_present">Is Present</string>
     <string name="cache_filter_stringfilter_type_contains">Contains</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Does not contain</string>
     <string name="cache_filter_stringfilter_type_starts_with">Starts With</string>
     <string name="cache_filter_stringfilter_type_ends_with">Ends With</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
