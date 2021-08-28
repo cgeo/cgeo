@@ -1,7 +1,6 @@
 ## Bugfix Release
 
 ### Design
-- Odstranit animaci přechodu při otevírání kešky
 - Increase font size for text input fields
 - Increase font size for some compass elements
 - Použití barvu písma s vyšším kontrastem na kartě trasové body
