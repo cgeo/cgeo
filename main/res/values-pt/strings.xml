@@ -1224,7 +1224,7 @@
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Armazenada</string>
+    <string name="cache_stored">Armazenadas</string>
     <string name="cache_status_offline_log">Registo gravado</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
@@ -1235,7 +1235,7 @@
     <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
     <string name="cache_status_not_premium">Disponível para todos os membros</string>
-    <string name="cache_status_stored">Armazenada</string>
+    <string name="cache_status_stored">Armazenadas</string>
     <string name="cache_status_not_stored">Não está armazenada</string>
     <string name="cache_status_stored_lasteighthours">Dentro das últimas oito horas</string>
     <string name="cache_status_stored_lasttwentyfourhours">Dentro das últimas vinte e quatro horas</string>
