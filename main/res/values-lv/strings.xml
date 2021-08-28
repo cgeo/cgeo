@@ -149,6 +149,7 @@
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_titleprefix">Attēls</string>
+    <string name="datetime_clear_button">Notīrīt</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot angļu valodā</string>
@@ -346,12 +347,12 @@
     <string name="caches_map_locus_export">Eksportēt uz Locus</string>
     <string name="caches_filter_title">Filtrēt</string>
     <string name="caches_filter_size">Pēc lieluma</string>
-    <string name="caches_filter_type">Pēc tipa</string>
+    <string name="caches_filter_type">Tips</string>
     <string name="caches_filter_track">Ar ceļotājiem</string>
     <string name="caches_filter_clear">Notīrīt filtrus</string>
     <string name="caches_filter_modified">Ar izmainītām koordinātām</string>
     <string name="caches_filter_offline_log">Ar bezsaistes ierakstu</string>
-    <string name="caches_filter_origin">Pēc izcelsmes</string>
+    <string name="caches_filter_origin">Izcelsme</string>
     <string name="caches_filter_distance">Pēc attāluma</string>
     <string name="caches_filter_personal_note">Ar personisku piezīmi</string>
     <string name="caches_filter_popularity">Pēc favorītu daudzuma</string>
@@ -832,7 +833,7 @@
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
-    <string name="cache_stored">Saglabāts</string>
+    <string name="cache_stored">Saglabātie bezsaistē</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
@@ -843,7 +844,7 @@
     <string name="cache_status_active">Aktīvs</string>
     <string name="cache_status_premium">TIkai Premium lietotājiem</string>
     <string name="cache_status_not_premium">Pieejams visiem lietotājiem</string>
-    <string name="cache_status_stored">Saglabāts</string>
+    <string name="cache_status_stored">Saglabātie bezsaistē</string>
     <string name="cache_status_not_stored">Nav saglabāti</string>
     <string name="cache_status_stored_lasteighthours">Pēdējo astoņu stundu laikā</string>
     <string name="cache_status_stored_lasttwentyfourhours">Pēdējo divdesmit četru stundu laikā</string>
@@ -1441,6 +1442,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Saglabāt</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pēda</string>
