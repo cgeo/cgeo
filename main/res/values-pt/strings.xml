@@ -183,7 +183,6 @@
     <string name="log_image_info_scaled">redimensionado</string>
     <string name="log_image_info_notscaled">original</string>
     <string name="log_image_titleprefix">Imagem</string>
-    <string name="datetime_clear_button">Limpar</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- translation -->
     <string name="translate">Traduzir</string>
@@ -398,25 +397,6 @@
     <string name="caches_map_locus_export">Exportar para Locus</string>
     <string name="caches_filter_menuitem">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
-    <string name="caches_filter_size">Tamanho</string>
-    <string name="caches_filter_type">Tipo</string>
-    <string name="caches_filter_track">Com trackables</string>
-    <string name="caches_filter_clear">Limpar filtros</string>
-    <string name="caches_filter_modified">Com coordenadas modificadas</string>
-    <string name="caches_filter_offline_log">Com registo offline</string>
-    <string name="caches_filter_origin">Origem</string>
-    <string name="caches_filter_distance">Distância</string>
-    <string name="caches_filter_personal_note">Com nota pessoal</string>
-    <string name="caches_filter_popularity">Favoritos</string>
-    <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
-    <string name="caches_filter_personal_data">Com informação pessoal</string>
-    <string name="caches_filter_rating">Com avaliação</string>
-    <string name="caches_filter_own_rating">Com avaliação pessoal</string>
-    <string name="caches_filter_multi_listing">Em múltiplas plataformas com registos discrepantes</string>
-    <string name="caches_filter_own_waypoint">Com pontos adicionais definidos pelo utilizador</string>
-    <string name="caches_filter_missing_gcvote">Caches que encontrou por votar</string>
-    <string name="caches_filter_lists">Atribuída a uma lista</string>
-    <string name="caches_filter_empty">(vazio)</string>
     <string name="caches_removing_from_history">A remover do histórico…</string>
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Deseja limpar os registos offline?</string>
@@ -481,6 +461,7 @@
     <string name="cache_filter_location">Localização</string>
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
+    <string name="cache_filter_stored_since">Última actualização de detalhes</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
@@ -501,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Limpar</string>
     <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
+    <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
+    <string name="cache_filter_storage_delete_message">Tem a certeza que quer eliminar esta configuração de filtro?</string>
     <string name="cache_filter_storage_select_clear_title">Seleccionar filtro ou limpar o filtro actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ainda não foi guardado nenhum filtro.</string>
     <string name="cache_filter_storage_save_title">Guardar filtro com nome</string>
@@ -537,6 +520,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Tem TB(s)</string>
     <string name="cache_filter_status_select_label_has_own_vote">Tem o meu voto</string>
     <string name="cache_filter_status_select_label_has_offline_log">Tem Registo Offline</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer as coordenadas tenham sido alteradas ou haja uma localização final válida, preenchida com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
@@ -1094,7 +1078,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">há mais de um ano</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributos</string>
     <string name="cache_inventory">Inventário</string>
     <string name="cache_log_images_title">Imagens do registo</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1216,27 +1199,13 @@
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Armazenada</string>
     <string name="cache_status_offline_log">Registo gravado</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
-    <string name="cache_never_found">Nunca encontrada</string>
-    <string name="cache_found_last_30_days">Encontradas nos últimos 30 dias</string>
     <string name="cache_status_archived">Arquivada</string>
     <string name="cache_status_disabled">Desactivada</string>
     <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
-    <string name="cache_status_not_premium">Disponível para todos os membros</string>
-    <string name="cache_status_stored">Armazenada</string>
-    <string name="cache_status_not_stored">Não está armazenada</string>
-    <string name="cache_status_stored_lasteighthours">Dentro das últimas oito horas</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Dentro das últimas vinte e quatro horas</string>
-    <string name="cache_status_stored_lastsevendays">Dentro dos últimos sete dias</string>
-    <string name="cache_status_stored_lastthirtydays">Dentro dos últimos 30 dias</string>
-    <string name="cache_status_stored_morethaneighthours">Antes das últimas oito horas</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Antes das últimas vinte e quatro horas</string>
-    <string name="cache_status_stored_morethansevendays">Antes dos últimos sete dias</string>
-    <string name="cache_status_stored_morethanthirtydays">Antes dos últimos 30 dias</string>
     <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Definir o nome da cache</string>
@@ -1248,7 +1217,6 @@
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>
-    <string name="cache_difficulty_terrain">Dificuldade / Terreno</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1257,9 +1225,7 @@
     <string name="cache_hidden">Escondida</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Localização</string>
-    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenadas</string>
-    <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originais</string>
     <string name="cache_spoiler_images_title">Imagens spoiler</string>
     <string name="cache_log_types">Tipos de registo</string>
@@ -1386,6 +1352,7 @@
     <string name="map_showc_found">Encontradas</string>
     <string name="map_showc_disabled">Desactivadas</string>
     <string name="map_showc_archived">Arquivadas</string>
+    <string name="map_showc_found_offline">Encontrada (offline)</string>
     <string name="map_showwp_original">Originais</string>
     <string name="map_showwp_parking">Estacionamento</string>
     <string name="map_showwp_visited">Visitados</string>
@@ -1869,7 +1836,6 @@
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favoritos</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
@@ -1970,7 +1936,6 @@
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
-    <string name="save_sorted_route">Guardar</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
     <string name="load_individual_route_error">Erro ao carregar a rota individual</string>
     <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
