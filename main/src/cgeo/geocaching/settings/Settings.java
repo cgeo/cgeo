@@ -86,6 +86,8 @@ public class Settings {
     public static final int COMPACTICON_ON = 1;
     public static final int COMPACTICON_AUTO = 2;
 
+    public static final int DAYS_TO_SECONDS = 24 * 60 * 60;
+
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -1067,16 +1069,20 @@ public class Settings {
     public static boolean mapAutoDownloadsNeedUpdate() {
         final long lastCheck = getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
         if (lastCheck == 0) {
-            setMapAutoDownloadsLastCheck();
+            setMapAutoDownloadsLastCheck(false);
             return false;
         }
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getInt(R.string.pref_mapAutoDownloadsInterval, 30);
-        return (lastCheck + (interval * 24 * 60 * 60)) <= now;
+        final int interval = getMapAutoDownloadsInterval();
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
-    public static void setMapAutoDownloadsLastCheck() {
-        putLong(R.string.pref_mapAutoDownloadsLastCheck, System.currentTimeMillis() / 1000);
+    private static int getMapAutoDownloadsInterval() {
+        return getInt(R.string.pref_mapAutoDownloadsInterval, 30);
+    }
+
+    public static void setMapAutoDownloadsLastCheck(final boolean delay) {
+        putLong(R.string.pref_mapAutoDownloadsLastCheck, calculateNewTimestamp(delay, getMapAutoDownloadsInterval()));
     }
 
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
@@ -1210,16 +1216,20 @@ public class Settings {
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
         final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
         if (lastCheck == 0) {
-            setBrouterAutoTileDownloadsLastCheck();
+            setBrouterAutoTileDownloadsLastCheck(false);
             return false;
         }
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
-        return (lastCheck + (interval * 24 * 60 * 60)) <= now;
+        final int interval = getBrouterAutoTileDownloadsInterval();
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
-    public static void setBrouterAutoTileDownloadsLastCheck() {
-        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, System.currentTimeMillis() / 1000);
+    private static int getBrouterAutoTileDownloadsInterval() {
+        return getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
+    }
+
+    public static void setBrouterAutoTileDownloadsLastCheck(final boolean delay) {
+        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, calculateNewTimestamp(delay, getBrouterAutoTileDownloadsInterval()));
     }
 
     public static String getRoutingProfile() {
@@ -1236,6 +1246,13 @@ public class Settings {
         } else {
             return null;
         }
+    }
+
+    // calculate new "last checked" timestamp - either "now" or "now - interval + delay [3 days at most]
+    // used for update checks for maps & route tiles downloaders
+    private static long calculateNewTimestamp(final boolean delay, final int interval) {
+        // if delay requested: delay by regular interval, but by three days at most
+        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (interval - 3) * DAYS_TO_SECONDS : 0);
     }
 
     public static boolean isBigSmileysEnabled() {

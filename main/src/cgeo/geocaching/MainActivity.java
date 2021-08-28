@@ -451,9 +451,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
-        if (updateCheckAllowed) {
-            Settings.setBrouterAutoTileDownloadsLastCheck();
-        }
+        Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed);
     }
 
     private void checkForMapUpdates() {
@@ -463,9 +461,7 @@ public class MainActivity extends AbstractActionBarActivity {
     }
 
     private void returnFromMapUpdateCheck(final boolean updateCheckAllowed) {
-        if (updateCheckAllowed) {
-            Settings.setMapAutoDownloadsLastCheck();
-        }
+        Settings.setMapAutoDownloadsLastCheck(!updateCheckAllowed);
     }
 
     @Override
