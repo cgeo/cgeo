@@ -7,7 +7,6 @@
 - Use font color with higher contrast in waypoint tab
 - Make quick offline log check mark visible again
 - Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
 
 ### Cache details
 - Fix missing cache title if cache opened via geocode or link (website change)
