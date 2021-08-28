@@ -351,25 +351,6 @@
     <string name="caches_copy_all">Copiar todos</string>
     <string name="caches_map_locus_export">Exportar a Locus</string>
     <string name="caches_filter_title">Filtrar por</string>
-    <string name="caches_filter_size">Tamaño</string>
-    <string name="caches_filter_type">Tipo</string>
-    <string name="caches_filter_track">Con rastreables</string>
-    <string name="caches_filter_clear">Limpiar filtros</string>
-    <string name="caches_filter_modified">Con las coordenadas modificadas</string>
-    <string name="caches_filter_offline_log">Con registro sin conexión</string>
-    <string name="caches_filter_origin">Coordenadas originales</string>
-    <string name="caches_filter_distance">Distancia</string>
-    <string name="caches_filter_personal_note">Con nota personal</string>
-    <string name="caches_filter_popularity">Favoritos</string>
-    <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
-    <string name="caches_filter_personal_data">Con datos personales</string>
-    <string name="caches_filter_rating">Con puntuación</string>
-    <string name="caches_filter_own_rating">Con puntuación propia</string>
-    <string name="caches_filter_multi_listing">Multi ficha con distinto registro</string>
-    <string name="caches_filter_own_waypoint">Con waypoints definidos por el usuario</string>
-    <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
-    <string name="caches_filter_lists">Asignado a una lista</string>
-    <string name="caches_filter_empty">(vacío)</string>
     <string name="caches_removing_from_history">Borrando del historial…</string>
     <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
@@ -851,7 +832,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">hace más de un año</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributos</string>
     <string name="cache_inventory">Inventario</string>
     <string name="cache_log_images_title">Imágenes de registros</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -951,19 +931,9 @@
     <string name="cache_status_offline_log">Registro guardado</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
-    <string name="cache_never_found">Sin encontrar</string>
-    <string name="cache_found_last_30_days">Encontrado en los últimos 30 días</string>
     <string name="cache_status_archived">Archivado</string>
     <string name="cache_status_disabled">Desactivado</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
-    <string name="cache_status_not_premium">Acceso a todos los miembros</string>
-    <string name="cache_status_stored">Guardado</string>
-    <string name="cache_status_not_stored">No guardado</string>
-    <string name="cache_status_stored_lastthirtydays">En los últimos treinta días</string>
-    <string name="cache_status_stored_morethaneighthours">Antes de las últimas ocho horas</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Antes de las últimas veinticuatro horas</string>
-    <string name="cache_status_stored_morethansevendays">Antes de los últimos siete días</string>
-    <string name="cache_status_stored_morethanthirtydays">Antes de los últimos treinta días</string>
     <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nombre</string>
     <string name="cache_name_set">Establecer nombre de caché</string>
@@ -982,9 +952,7 @@
     <string name="cache_hidden">Oculto</string>
     <string name="cache_event">Fecha</string>
     <string name="cache_location">Ubicación</string>
-    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenadas</string>
-    <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originales</string>
     <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
     <string name="cache_log_types">Tipos de registro</string>
@@ -1489,7 +1457,6 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favoritos</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>
