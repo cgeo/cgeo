@@ -461,6 +461,7 @@
     <string name="cache_filter_location">Τοποθεσία</string>
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filter_origin">Προέλευση</string>
+    <string name="cache_filter_stored_since">Τελευταία ενημέρωση λεπτομερειών</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
@@ -481,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
+    <string name="cache_filter_storage_delete_title">Διαγραφή φίλτρου</string>
+    <string name="cache_filter_storage_delete_message">Σίγουρα θέλετε να διαγράψετε αυτό το πρότυπο φίλτρου;</string>
     <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
