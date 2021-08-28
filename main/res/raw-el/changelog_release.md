@@ -1,24 +1,23 @@
-## Bugfix Release
+## Έκδοση Bugfix
 
-### Design
-- Remove transition animation when opening cache
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
+### Σχέδιο
+- Αύξηση μεγέθους γραμματοσειράς για πεδία εισαγωγής κειμένου
+- Αύξηση μεγέθους γραμματοσειράς για μερικά στοιχεία πυξίδας
+- Χρήση χρώματος γραμματοσειράς με υψηλότερη αντίθεση στην καρτέλα σημείου αναφοράς
+- Κάντε πάλι ορατό το σημάδι ελέγχου γρήγορης καταγραφής εκτός σύνδεσης
+- Αύξηση μεγέθους γραμματοσειράς για πεδία συντεταγμένων εισόδου
+- Σεβασμός ρυθμίσεων μεγέθους γραμματοσειράς συστήματος και σε παλαιότερες εκδόσεις Android (5,6 και 7)
 
 ### Λεπτομέρειες κρύπτης
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- Διορθώστε τον ελλείποντα τίτλο της κρύπτης, εάν η κρύπτη ανοίχτηκε μέσω geocode ή συνδέσμου (αλλαγή ιστοσελίδας)
+- Διορθώστε την περιγραφή της κρύπτης που λείπει σε μερικές κρύπτες
 
 ### Άλλο
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- Εμφάνιση premium κρύπτες στα αποτελέσματα αναζήτησης των βασικών μελών
+- Επιδιόρθωση περαιτέρω δημιουργίας κρυπτών που ορίζονται από τον χρήστη αν κάποιος χρήστης ορίζει ότι οι κρύπτες έχουν φορτωθεί μέσω GPX
+- Χρησιμοποιήστε πιο κοινή αγγλική συντομογραφία για παραδοσιακή κρύπτη στο φίλτρο τύπου cache
 
-## Feature Release 2021.08.15:
+## Έκδοση Χαρακτηριστικών 2021.08.15:
 
 ### Προηγμένο σύστημα φιλτραρίσματος
 - Παρουσιάζοντας ένα νέο σύστημα φιλτραρίσματος στο c:geo, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα
