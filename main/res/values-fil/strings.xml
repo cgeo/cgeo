@@ -289,22 +289,6 @@
     <string name="caches_copy_all">Kopyahin lahat</string>
     <string name="caches_map_locus_export">Ang mga lokus ay I-eksport</string>
     <string name="caches_filter_title">Ang pagsasala ayon sa</string>
-    <string name="caches_filter_size">Ang Sukat</string>
-    <string name="caches_filter_type">Uri</string>
-    <string name="caches_filter_track">Na may pagsusubaybay</string>
-    <string name="caches_filter_clear">Malinaw ang mga pagsasala</string>
-    <string name="caches_filter_modified">May mga pinasadyang mga koordinado</string>
-    <string name="caches_filter_offline_log">May mga log kapag offline</string>
-    <string name="caches_filter_origin">Pinagmulan</string>
-    <string name="caches_filter_distance">Distansya</string>
-    <string name="caches_filter_personal_note">May mga personal na tala</string>
-    <string name="caches_filter_popularity">Ang mga paborito</string>
-    <string name="caches_filter_popularity_ratio">Ang mga paborito [%]</string>
-    <string name="caches_filter_personal_data">May mga personal na datus</string>
-    <string name="caches_filter_rating">May ni-rate</string>
-    <string name="caches_filter_own_rating">May sariling ni-rate</string>
-    <string name="caches_filter_multi_listing">Ang maraming listahan na may ibat\'-ibang estado</string>
-    <string name="caches_filter_missing_gcvote">Nakahanap ng cache na hindi binoto</string>
     <string name="caches_removing_from_history">Ang pagtatanggal mula sa Historya&#8230;</string>
     <string name="caches_clear_offlinelogs">Linisin ang mga log kapag offline</string>
     <string name="caches_clear_offlinelogs_message">Gusto mo bang linisin ang mga log kapag offline?</string>
@@ -579,7 +563,6 @@
         <item quantity="other">ang tungkol sa %d sa nakalipas na mga araw</item>
     </plurals>
     <string name="cache_premium">Ang Premyum</string>
-    <string name="cache_attributes">Ang mga katangian</string>
     <string name="cache_inventory">Ang Imbentaryo</string>
     <string name="cache_log_images_title">Ang mga imahe sa log</string>
     <string name="cache_log_image_default_title">Ang Larawan</string>
@@ -668,14 +651,9 @@
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
-    <string name="cache_never_found">Kailanman ay hindi Nakita</string>
-    <string name="cache_found_last_30_days">Nakita nuong huling 30 araw</string>
     <string name="cache_status_archived">Ang naka-archive</string>
     <string name="cache_status_disabled">Ang hindi umiiral</string>
     <string name="cache_status_premium">Ang premium na mga miyembro lamang</string>
-    <string name="cache_status_not_premium">Ang akses sa Lahat ng mga Miyembro</string>
-    <string name="cache_status_stored">Ang nakaimbak</string>
-    <string name="cache_status_not_stored">Ang hindi nakaimbak</string>
     <string name="cache_geocode">Ang Kodigo sa Geo</string>
     <string name="cache_name">Ang pangalan</string>
     <string name="cache_type">Ang klase</string>
@@ -1143,7 +1121,6 @@
         <item quantity="one">%s na paborito</item>
         <item quantity="other">%s na mga paborito</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% mga paborito</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">shortcut sa c:geo</string>
     <string name="create_shortcut">Lumikha ng shortcut</string>
