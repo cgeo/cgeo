@@ -122,6 +122,7 @@
     <string name="log_oc_team_comment">Ang komento ng grupo na OC</string>
     <string name="log_your_saved_log">Ang iyong na-save na log</string>
     <string name="log_empty_logbook">Ang talaang libro ng cathe na ito ay walang laman.</string>
+    <string name="datetime_clear_button">Malinaw</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -295,7 +296,7 @@
     <string name="caches_map_locus_export">I-luwas patungo sa lokus</string>
     <string name="caches_filter_title">Sinala ng</string>
     <string name="caches_filter_size">Sukat</string>
-    <string name="caches_filter_type">Ang uri</string>
+    <string name="caches_filter_type">Uri</string>
     <string name="caches_filter_track">May mga trackable</string>
     <string name="caches_filter_clear">Linisin ang mga salaan</string>
     <string name="caches_filter_modified">May mga binagong mga koordinado</string>
@@ -670,6 +671,7 @@
     <string name="ignore_confirm_title">Mag-ingat</string>
     <string name="ignore_confirm_message">Ang pag-ignore sa cache ay nangangahulugang ang cache na ito hindi na magaganap pa habang nagloload ng datos mula sa geocaching.com. Maaari mo lang makitang muli ang cache sa pag-unignore nito sa website.</string>
     <string name="cache_status">Katayuan</string>
+    <string name="cache_stored">Itago</string>
     <string name="cache_status_offline_log">Naka-save na Log</string>
     <string name="cache_status_found">Nahanap</string>
     <string name="cache_not_status_found">Hindi nahanap</string>
@@ -679,7 +681,7 @@
     <string name="cache_status_disabled">Hindi pinagana</string>
     <string name="cache_status_premium">Mga Premyadong Miyembro lamang</string>
     <string name="cache_status_not_premium">Makaka-access ang Lahat ng mga Miyembro</string>
-    <string name="cache_status_stored">Naka-imbak</string>
+    <string name="cache_status_stored">Itago</string>
     <string name="cache_status_not_stored">Hindi nakaimbak</string>
     <string name="cache_geocode">Ang code ng geo</string>
     <string name="cache_name">Ang pangalan</string>
@@ -1211,6 +1213,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">I-save</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
