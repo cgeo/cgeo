@@ -381,8 +381,8 @@
     <string name="caches_filter_origin">Šaltinis</string>
     <string name="caches_filter_distance">Atstumas</string>
     <string name="caches_filter_personal_note">Su asmenine pastaba</string>
-    <string name="caches_filter_popularity">Kaip mėgiamos</string>
-    <string name="caches_filter_popularity_ratio">Kaip mėgiamos [%]</string>
+    <string name="caches_filter_popularity">Kiek mėgsta</string>
+    <string name="caches_filter_popularity_ratio">Kiek mėgsta [%]</string>
     <string name="caches_filter_personal_data">Su asmeniniais duomenimis</string>
     <string name="caches_filter_rating">Su reitingu</string>
     <string name="caches_filter_own_rating">Su savo reitingu</string>
