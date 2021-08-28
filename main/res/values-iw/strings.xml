@@ -130,6 +130,7 @@
     <string name="log_problem_damaged_label">המיכל פגום</string>
     <string name="log_problem_missing_label">ייתכן והמטמון נעלם</string>
     <string name="log_problem_other_label">אחר</string>
+    <string name="datetime_clear_button">נקה</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">תרגם ל%s</string>
     <string name="translate_to_english">תרגם לאנגלית</string>
@@ -307,12 +308,10 @@
     <string name="caches_map_locus_export">יצא לLocus</string>
     <string name="caches_filter_title">מיין לפי</string>
     <string name="caches_filter_size">גודל</string>
-    <string name="caches_filter_type">סוג</string>
     <string name="caches_filter_track">עם Trackables</string>
     <string name="caches_filter_clear">הסר מסננים</string>
     <string name="caches_filter_modified">נקודות ציון מעודכנות</string>
     <string name="caches_filter_offline_log">עם לוג לא-מקוון</string>
-    <string name="caches_filter_origin">מקור</string>
     <string name="caches_filter_distance">מרחק</string>
     <string name="caches_filter_personal_note">עם הערה אישית</string>
     <string name="caches_filter_popularity">מועדפים</string>
@@ -442,7 +441,9 @@
     <string name="cache_dialog_watchlist_remove_message">Removing cache from your watchlist&#8230;</string>
     <string name="cache_dialog_favorite_add_message">Adding cache to your favorites&#8230;</string>
     <string name="cache_dialog_favorite_remove_message">Removing cache from your favorites&#8230;</string>
+    <string name="cache_stored">מאוחסן</string>
     <string name="cache_found_last_30_days">נמצאו ב30 הימים האחרונים</string>
+    <string name="cache_status_stored">מאוחסן</string>
     <string name="cache_coordinates">נקודות ציון</string>
     <string name="cache_coordinates_original">נקודות ציון מקוריות</string>
     <string name="cache_coordinates_no">למטמון זה אין נקודות ציון.</string>
