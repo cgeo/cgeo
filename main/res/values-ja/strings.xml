@@ -480,7 +480,6 @@
     <string name="cache_filter_location">所在地</string>
     <string name="cache_filter_stored_lists">保存済みリスト</string>
     <string name="cache_filter_origin">公開元</string>
-    <string name="cache_filter_stored_since">保存日時</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
@@ -532,6 +531,7 @@
     <string name="cache_filter_status_select_label_has_trackable">トラッカブルあり</string>
     <string name="cache_filter_status_select_label_has_own_vote">評価済み</string>
     <string name="cache_filter_status_select_label_has_offline_log">オフラインログあり</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">発見(オフラインログ)</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
     <string name="cache_filter_status_active">有効</string>
@@ -1368,7 +1368,7 @@
     <string name="map_showc_found">発見</string>
     <string name="map_showc_disabled">一時停止中</string>
     <string name="map_showc_archived">アーカイブ済み</string>
-    <string name="map_showc_offlinelog">オフラインログ</string>
+    <string name="map_showc_found_offline">発見(オフラインログ)</string>
     <string name="map_showwp_original">オリジナル</string>
     <string name="map_showwp_parking">駐車場</string>
     <string name="map_showwp_visited">訪問済み</string>

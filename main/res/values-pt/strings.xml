@@ -481,7 +481,6 @@
     <string name="cache_filter_location">Localização</string>
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
-    <string name="cache_filter_stored_since">Armazenada desde</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
@@ -763,7 +762,7 @@
     </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
-    <string name="init_backup_summary">Tenha em consideração que esta funcionalidade pode fazer a cópia de segurança de caches, pontos adicionais e configurações, mas não de imagens em caches.\nPara que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para uma localização independente.</string>
+    <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
     <string name="init_restore_title">Restaurar Cópia de Segurança</string>
     <string name="init_backup_caches">caches e pontos adicionais</string>
     <string name="init_backup_program_settings">definições de programa</string>
@@ -1387,7 +1386,6 @@
     <string name="map_showc_found">Encontradas</string>
     <string name="map_showc_disabled">Desactivadas</string>
     <string name="map_showc_archived">Arquivadas</string>
-    <string name="map_showc_offlinelog">Registadas Offline</string>
     <string name="map_showwp_original">Originais</string>
     <string name="map_showwp_parking">Estacionamento</string>
     <string name="map_showwp_visited">Visitados</string>

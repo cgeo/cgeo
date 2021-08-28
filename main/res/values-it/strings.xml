@@ -481,7 +481,6 @@
     <string name="cache_filter_location">Posizione</string>
     <string name="cache_filter_stored_lists">Elenchi Archiviati</string>
     <string name="cache_filter_origin">Origine</string>
-    <string name="cache_filter_stored_since">Salvato dal</string>
     <string name="cache_filtergroup_basic">Base</string>
     <string name="cache_filtergroup_details">Dettagli</string>
     <string name="cache_filtergroup_userspecific">Specifico dell\'utente</string>
@@ -1387,7 +1386,6 @@
     <string name="map_showc_found">Trovati</string>
     <string name="map_showc_disabled">Disabilitato</string>
     <string name="map_showc_archived">Archiviato</string>
-    <string name="map_showc_offlinelog">Registrato Offline</string>
     <string name="map_showwp_original">Originale</string>
     <string name="map_showwp_parking">Parcheggio</string>
     <string name="map_showwp_visited">Visitato</string>

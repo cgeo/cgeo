@@ -1,7 +1,7 @@
  
-### Map
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
+### Mapa
+- Novetat: s'ha afegit Mapy.cz com a font de mapa en línia
+- Novetat: ruta individual: permet configurar un nou inici i invertir la ruta
 
-### Other
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+### Altres
+- Novetat: ompliu automàticament la "cerca per geocodi" si el contingut del porta-retalls es pot analitzar com a geocodi vàlid

@@ -1338,7 +1338,6 @@
     <string name="map_showc_own">Własne</string>
     <string name="map_showc_found">Znalezione</string>
     <string name="map_showc_disabled">Wyłączone</string>
-    <string name="map_showc_offlinelog">Zalogowane offline</string>
     <string name="map_showwp_original">Oryginalne</string>
     <string name="map_showwp_parking">Parking</string>
     <string name="map_showwp_visited">Odwiedzone</string>

@@ -477,7 +477,6 @@
     <string name="cache_filter_location">Miesto</string>
     <string name="cache_filter_stored_lists">Uložené zoznamy</string>
     <string name="cache_filter_origin">Pôvod</string>
-    <string name="cache_filter_stored_since">Uložené od</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
@@ -1400,7 +1399,6 @@
     <string name="map_showc_found">Nájdené</string>
     <string name="map_showc_disabled">Vypnuté</string>
     <string name="map_showc_archived">Archivované</string>
-    <string name="map_showc_offlinelog">Zalogované offline</string>
     <string name="map_showwp_original">Pôvodné</string>
     <string name="map_showwp_parking">Parkovanie</string>
     <string name="map_showwp_visited">Navštívené</string>
