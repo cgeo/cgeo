@@ -70,6 +70,10 @@
                 android:enabled="false"
                 app:showAsAction="never|withText"/>
             <item
+                android:id="@+id/menu_upload_bookmarklist"
+                android:title="@string/caches_upload_bookmarklist"
+                app:showAsAction="ifRoom|withText"/>
+            <item
                 android:id="@+id/menu_upload_modifiedcoords"
                 android:title="@string/caches_upload_modifiedcoords"
                 app:showAsAction="ifRoom|withText"/>
