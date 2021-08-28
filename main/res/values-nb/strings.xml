@@ -389,7 +389,7 @@
     <string name="caches_filter_clear">Nullstill filtre</string>
     <string name="caches_filter_modified">Med korrigerte koordinater</string>
     <string name="caches_filter_offline_log">Med offlinelogg</string>
-    <string name="caches_filter_origin">Opprinnelig posisjon</string>
+    <string name="caches_filter_origin">Start</string>
     <string name="caches_filter_distance">Avstand</string>
     <string name="caches_filter_personal_note">Med personlig notat</string>
     <string name="caches_filter_popularity">Favoritter</string>
