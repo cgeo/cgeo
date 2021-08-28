@@ -118,7 +118,7 @@ public class CgeoApplication extends Application {
      * Enforce a specific language if the user decided so.
      */
     private void initApplicationLocale() {
-        final Configuration config = new Configuration();
+        final Configuration config = getResources().getConfiguration();
         config.locale = Settings.getApplicationLocale();
         final Resources resources = getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
