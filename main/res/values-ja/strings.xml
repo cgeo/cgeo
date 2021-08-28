@@ -400,7 +400,7 @@
     <string name="caches_filter_clear">フィルタをクリア</string>
     <string name="caches_filter_modified">座標の更新あり</string>
     <string name="caches_filter_offline_log">オフラインログあり</string>
-    <string name="caches_filter_origin">出典</string>
+    <string name="caches_filter_origin">出発地</string>
     <string name="caches_filter_distance">距離</string>
     <string name="caches_filter_personal_note">パーソナルノートあり</string>
     <string name="caches_filter_popularity">お気に入り</string>
