@@ -147,6 +147,7 @@
     <string name="log_problem_archive_text">Acest geocacher a raportat că această geocutie ar trebui arhivată. Un examinator din comunitatea de voluntari a fost notificat.</string>
     <string name="log_image_scale_option_noscaling">Fără redimensionare</string>
     <string name="log_image_titleprefix">Imagine</string>
+    <string name="datetime_clear_button">Şterge</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tradu în limba %s</string>
     <string name="translate_to_english">Tradu în limba engleză</string>
@@ -705,6 +706,7 @@
     <string name="ignore_confirm_title">Atenţie</string>
     <string name="ignore_confirm_message">Ignorarea unei geocutii înseamnă că aceasta nu va mai apărea niciodată atunci când se încarcă date de la geocaching.com. Singura modalitate de a o vedea din nou va fi să dezactivezi ignorarea ei cu ajutorul website-ului.</string>
     <string name="cache_status">Stare</string>
+    <string name="cache_stored">Stocate</string>
     <string name="cache_status_offline_log">Jurnal salvat</string>
     <string name="cache_status_found">Găsit</string>
     <string name="cache_not_status_found">Nu a fost găsită</string>
@@ -714,7 +716,7 @@
     <string name="cache_status_disabled">Inactivă</string>
     <string name="cache_status_premium">Doar membrii Premium</string>
     <string name="cache_status_not_premium">Acces pentru toţi membrii</string>
-    <string name="cache_status_stored">Salvată</string>
+    <string name="cache_status_stored">Stocate</string>
     <string name="cache_status_not_stored">Nesalvată</string>
     <string name="cache_geocode">Geocod</string>
     <string name="cache_name">Nume</string>
@@ -1253,6 +1255,7 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
+    <string name="save_sorted_route">Salvează</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_yd">zd</string>
