@@ -179,7 +179,7 @@
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
     <string name="log_image_info">%1$d x %2$d px, %3$s\nZmenená veľkosť/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázok</string>
-    <string name="datetime_clear_button">Vymazať</string>
+    <string name="datetime_clear_button">Vyčistiť</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
     <!-- translation -->
     <string name="translate">Preložiť</string>
@@ -395,17 +395,17 @@
     <string name="caches_map_locus_export">Exportovať do Locus</string>
     <string name="caches_filter_menuitem">Filtrovať</string>
     <string name="caches_filter_title">Filtrovať</string>
-    <string name="caches_filter_size">Veľkosť</string>
+    <string name="caches_filter_size">veľkosti</string>
     <string name="caches_filter_type">Typ</string>
     <string name="caches_filter_track">S trasovateľnými predmetmi</string>
     <string name="caches_filter_clear">Bez filtrovania</string>
     <string name="caches_filter_modified">S upravenými súradnicami</string>
     <string name="caches_filter_offline_log">S offline logmi</string>
     <string name="caches_filter_origin">Pôvod</string>
-    <string name="caches_filter_distance">Vzdialenosť</string>
+    <string name="caches_filter_distance">vzdialenosti</string>
     <string name="caches_filter_personal_note">S osobnou poznámkou</string>
-    <string name="caches_filter_popularity">Obľúbené</string>
-    <string name="caches_filter_popularity_ratio">Obľúbené [%]</string>
+    <string name="caches_filter_popularity">obľúbenosti</string>
+    <string name="caches_filter_popularity_ratio">obľúbenosti [%]</string>
     <string name="caches_filter_personal_data">S osobnými údajmi</string>
     <string name="caches_filter_rating">S hodnotením</string>
     <string name="caches_filter_own_rating">S vlastným hodnotením</string>
@@ -1250,7 +1250,7 @@
     <string name="cache_status_active">Aktívna</string>
     <string name="cache_status_premium">Iba pre platiacich používateľov</string>
     <string name="cache_status_not_premium">Prístup pre všetkých používateľov</string>
-    <string name="cache_status_stored">Uložená</string>
+    <string name="cache_status_stored">Uložené</string>
     <string name="cache_status_not_stored">Neuložená</string>
     <string name="cache_status_stored_lasteighthours">Za posledných 8 hodín</string>
     <string name="cache_status_stored_lasttwentyfourhours">Za posledných 24 hodín</string>
