@@ -486,6 +486,8 @@
     <string name="cache_filter_storage_clear_button">Vyčistit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
     <string name="cache_filter_storage_select_title">Vyberte filtr</string>
+    <string name="cache_filter_storage_delete_title">Odstranit filtr</string>
+    <string name="cache_filter_storage_delete_message">Opravdu chcete odstranit tuto konfiguraci filtru?</string>
     <string name="cache_filter_storage_select_clear_title">Vyberte filtr nebo vymažte aktuální filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatím není uložen žádný filtr.</string>
     <string name="cache_filter_storage_save_title">Uložit filtr s názvem</string>
