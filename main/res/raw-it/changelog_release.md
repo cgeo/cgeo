@@ -1,12 +1,13 @@
 ## Bugfix Release
 
 ### Design
-- Remove transition animation when opening cache details
+- Remove transition animation when opening cache
 - Increase font size for text input fields
 - Increase font size for some compass elements
-- User font color with higher contrast in waypoint tab
+- Use font color with higher contrast in waypoint tab
 - Make quick offline log check mark visible again
 - Increase font size for coordinate input fields
+- Respect system font size settings also on older Android versions (5,6 and 7)
 
 ### Dettagli del cache
 - Fix missing cache title if cache opened via geocode or link (website change)
