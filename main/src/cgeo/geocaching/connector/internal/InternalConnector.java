@@ -129,22 +129,22 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     @Override
     public int getCacheMapMarkerId() {
-        return R.drawable.marker_oc;
+        return R.drawable.marker_other;
     }
 
     @Override
     public int getCacheMapMarkerBackgroundId() {
-        return R.drawable.background_oc;
+        return R.drawable.background_other;
     }
 
     @Override
     public int getCacheMapDotMarkerId() {
-        return R.drawable.dot_marker_oc;
+        return R.drawable.dot_marker_other;
     }
 
     @Override
     public int getCacheMapDotMarkerBackgroundId() {
-        return R.drawable.dot_background_oc;
+        return R.drawable.dot_background_other;
     }
 
     @Override
