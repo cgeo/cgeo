@@ -435,7 +435,6 @@ public final class MapMarkerUtils {
             }
         } else if (cache.hasUserModifiedCoords()) {
             dotIcon = R.drawable.dot_marker_usermodifiedcoords;
-            tintColor = R.color.dotBg_usermodifiedCoords;
         }
 
         if (tintColor == -1) {
