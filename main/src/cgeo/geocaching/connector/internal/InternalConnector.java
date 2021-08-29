@@ -138,6 +138,16 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
     @Override
+    public int getCacheMapDotMarkerId() {
+        return R.drawable.dot_marker_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        return R.drawable.dot_background_oc;
+    }
+
+    @Override
     public boolean supportsNamechange() {
         // this connector supports changing the name of a geocache
         return true;

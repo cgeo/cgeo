@@ -134,6 +134,16 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     }
 
     @Override
+    public int getCacheMapDotMarkerId() {
+        return R.drawable.dot_marker_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        return R.drawable.dot_background_oc;
+    }
+
+    @Override
     @NonNull
     public final List<LogType> getPossibleLogTypes(@NonNull final Geocache cache) {
         if (cache.isEventCache()) {

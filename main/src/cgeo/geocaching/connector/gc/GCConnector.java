@@ -448,6 +448,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public int getCacheMapDotMarkerId() {
+        return R.drawable.dot_marker;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        return R.drawable.dot_background_gc;
+    }
+
+    @Override
     public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
         // login
         final StatusCode status = GCLogin.getInstance().login();

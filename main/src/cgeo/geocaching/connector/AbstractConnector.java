@@ -210,6 +210,16 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public int getCacheMapDotMarkerId() {
+        return R.drawable.dot_marker_other;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        return R.drawable.dot_background_other;
+    }
+
+    @Override
     @NonNull
     public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> logTypes = new ArrayList<>();

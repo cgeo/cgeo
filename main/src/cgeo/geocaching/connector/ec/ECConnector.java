@@ -211,6 +211,24 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public int getCacheMapDotMarkerId() {
+        final String icons = Settings.getECIconSet();
+        if (StringUtils.equals(icons, "1")) {
+            return R.drawable.dot_marker_other;
+        }
+        return R.drawable.dot_marker_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        final String icons = Settings.getECIconSet();
+        if (StringUtils.equals(icons, "1")) {
+            return R.drawable.dot_background_other;
+        }
+        return R.drawable.dot_background_oc;
+    }
+
+    @Override
     @NonNull
     public String getLicenseText(@NonNull final Geocache cache) {
         // NOT TO BE TRANSLATED

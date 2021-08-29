@@ -227,32 +227,17 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final int dotDrw;
         final int dotIcon;
 
-        // Todo: define connector-specific shapes in connector
-        final int dotMarker;
-        if (waypoint.getMapMarkerId() == R.drawable.marker) {
-            dotMarker = R.drawable.dot_background;
-            dotDrw = R.drawable.dot_foreground;
-        } else if (waypoint.getMapMarkerId() == R.drawable.marker_oc) {
-            dotMarker = R.drawable.dot_background_oc;
-            dotDrw = R.drawable.dot_foreground_oc;
-        } else {
-            dotMarker = R.drawable.dot_background_other;
-            dotDrw = R.drawable.dot_foreground_other;
-        }
-
-        final Drawable dotMarkerDrawable = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotMarker, null));
-        DrawableCompat.setTint(dotMarkerDrawable, ResourcesCompat.getColor(res, R.color.dotBg_waypointCircle, null));
-
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
+        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null));
+        DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointCircle, null));
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null));
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
 
         dotIcon = waypoint.getWaypointType().dotMarkerId;
 
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarkerDrawable.getIntrinsicWidth(), dotMarkerDrawable.getIntrinsicHeight());
-        insetsBuilder.withInset(new InsetBuilder(dotMarkerDrawable));
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(dotMarker));
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
         return buildLayerDrawable(insetsBuilder, 2, 2);
@@ -418,7 +403,6 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
-        int dotDrw = -1;
         int dotIcon = -1;
         int tintColor = -1;
         if (cache.isFound()) {
@@ -462,20 +446,8 @@ public final class MapMarkerUtils {
             }
         }
 
-        // Todo: define connector-specific shapes in connector
-        final Drawable dotMarker;
-        if (cache.getMapMarkerId() == R.drawable.marker) {
-            dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background, null));
-            dotDrw = R.drawable.dot_foreground;
-        } else if (cache.getMapMarkerId() == R.drawable.marker_oc) {
-            dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background_oc, null));
-            dotDrw = R.drawable.dot_foreground_oc;
-        } else {
-            dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background_other, null));
-            dotDrw = R.drawable.dot_foreground_other;
-        }
-
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
+        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null));
         if (tintColor != -1) {
             DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
         }

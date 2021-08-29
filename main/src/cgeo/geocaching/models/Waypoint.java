@@ -483,4 +483,12 @@ public class Waypoint implements IWaypoint {
         return ConnectorFactory.getConnector(geocode).getCacheMapMarkerId();
     }
 
+    public int getMapDotMarkerId() {
+        return ConnectorFactory.getConnector(geocode).getCacheMapDotMarkerId();
+    }
+
+    public int getMapDotMarkerBackgroundId() {
+        return ConnectorFactory.getConnector(geocode).getCacheMapDotMarkerBackgroundId();
+    }
+
 }
