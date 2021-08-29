@@ -1,7 +1,6 @@
 ## Bugfix-Release
 
 ### Design
-- Übergangsanimation beim Öffnen von Caches entfernt
 - Schriftgröße für Texteingabefelder vergrößert
 - Schriftgröße für einige Kompass-Elemente vergrößert
 - Benutze Schrift mit höherem Kontrast im Wegpunkt-Tab
