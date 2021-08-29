@@ -1,23 +1,23 @@
-## Bugfix Release
+## Virheenkorjausversio
 
-### Design
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
+### Ulkoasu
+- Lisää tekstin syöttökenttien kirjasimen kokoa
+- Lisää fontin kokoa joillekin kompassin elementeille
+- Käytä kirjasinväriä korkeammalla kontrastilla reittipiste- välilehdessä
+- Tee offline-tilassa tehdyn kirjauksen merkki jälleen näkyväksi
+- Lisää koordinaattien syöttökenttien kirjasimen kokoa
+- Käytetään järjestelmän kirjasinkokoasetuksia myös vanhemmissa Android-versioissa (5,6 ja 7)
 
 ### Kätkön tiedot
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- Korjattiin puuttuva kätkön otsikko, jos kätkö avataan geokoodin tai linkin kautta (verkkosivuston muutos)
+- Korjattiin joidenkin kätköjen puuttuva kätkön kuvaus
 
 ### Muut
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- Näytetään jälleen Premium-kätköt perusjäsenten hakutuloksissa
+- Korjattiin käyttäjän määrittämien kätköjen edelleen luonti jos jotkut niistä on aiemmin ladattu GPX-tiedostosta
+- Otetaan käyttöön yleisempi englanninkielinen lyhenne tradikätkölle kätkötyyppisuodattimessa
 
-## Feature Release 2021.08.15:
+## Ominaisuusversio 2021.08.15:
 
 ### Edistynyt suodatusjärjestelmä
 - Esittelyssä uusi suodatusjärjestelmä c:geoon, joka tukee joustavia, yhdistettävissä olevia ja varastoitavia suodattimia
