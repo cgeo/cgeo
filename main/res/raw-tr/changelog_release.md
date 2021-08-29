@@ -1,7 +1,6 @@
 ## Bugfix Release
 
 ### Design
-- Remove transition animation when opening cache
 - Increase font size for text input fields
 - Increase font size for some compass elements
 - Use font color with higher contrast in waypoint tab
