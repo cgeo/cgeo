@@ -15,6 +15,20 @@ public class StringGeocacheFilterTest {
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void contains() {
         testSingle(c -> c.setName("Testname"), f -> f.getStringFilter().setTextValue("est"), true);
+        testSingle(c -> c.setName("Testname"), f -> f.getStringFilter().setTextValue("eFst"), false);
+    }
+
+    @Test
+    @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
+    public void doesNotContain() {
+        testSingle(c -> c.setName("Testname"), f -> {
+            f.getStringFilter().setTextValue("est");
+            f.getStringFilter().setFilterType(StringFilter.StringFilterType.DOES_NOT_CONTAIN);
+        }, false);
+        testSingle(c -> c.setName("Testname"), f -> {
+            f.getStringFilter().setTextValue("eFst");
+            f.getStringFilter().setFilterType(StringFilter.StringFilterType.DOES_NOT_CONTAIN);
+        }, true);
     }
 
     @Test
@@ -25,7 +39,7 @@ public class StringGeocacheFilterTest {
             f.getStringFilter().setFilterType(StringFilter.StringFilterType.STARTS_WITH);
         }, false);
         testSingle(c -> c.setName("Testname"), f -> {
-            f.getStringFilter().setTextValue("est");
+            f.getStringFilter().setTextValue("name");
             f.getStringFilter().setFilterType(StringFilter.StringFilterType.STARTS_WITH);
         }, false);
         testSingle(c -> c.setName("Testname"), f -> {
