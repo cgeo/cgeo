@@ -18,7 +18,7 @@ import android.app.Activity;
 import android.text.Html;
 import android.text.Spanned;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -62,19 +62,16 @@ public class MapUtils {
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        FilterUtils.updateFilterBar(activity, getActiveMapFilterNames(filterContext));
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext));
     }
 
-    @NonNull
-    private static List<String> getActiveMapFilterNames(final GeocacheFilterContext filterContext) {
-        final List<String> filters = new ArrayList<>();
-
+    @Nullable
+    private static String getActiveMapFilterName(final GeocacheFilterContext filterContext) {
         final GeocacheFilter filter = filterContext.get();
         if (filter.isFiltering()) {
-            filters.add(filter.toUserDisplayableString());
+            return filter.toUserDisplayableString();
         }
-
-        return filters;
+        return null;
     }
 
     // one-time messages to be shown for maps

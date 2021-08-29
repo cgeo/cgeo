@@ -1849,16 +1849,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateFilterBar() {
-        FilterUtils.updateFilterBar(this, getActiveFilterNames());
+        FilterUtils.updateFilterBar(this, getActiveFilterName());
     }
 
-    @NonNull
-    private List<String> getActiveFilterNames() {
-        final List<String> filters = new ArrayList<>();
+    @Nullable
+    private String getActiveFilterName() {
         if (adapter.hasActiveFilter()) {
-            filters.add(adapter.getFilterName());
+            return adapter.getFilterName();
         }
-        return filters;
+        return null;
     }
 
     public static Intent getNearestIntent(final Activity context) {
