@@ -495,6 +495,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Nicht vorhanden</string>
     <string name="cache_filter_stringfilter_type_is_present">Vorhanden</string>
     <string name="cache_filter_stringfilter_type_contains">Enthält</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Enthält nicht</string>
     <string name="cache_filter_stringfilter_type_starts_with">Beginnt mit</string>
     <string name="cache_filter_stringfilter_type_ends_with">Endet mit</string>
     <string name="cache_filter_stringfilter_type_pattern">Muster</string>
