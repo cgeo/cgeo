@@ -7,7 +7,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.downloader.DownloaderUtils;
@@ -70,7 +69,6 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ProgressDialog;
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
@@ -154,7 +152,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private AppCompatActivity activity;
     private MapItemFactory mapItemFactory;
     private final LeastRecentlyUsedSet<Geocache> caches = new LeastRecentlyUsedSet<>(MAX_CACHES + DataStore.getAllCachesCount());
-    private final Progress progress = new Progress();
     private MapSource mapSource;
 
 
@@ -1755,10 +1752,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     @Override
     public void onCacheTap(final IWaypoint waypoint) {
-        final Context context = mapView.getContext();
-
-        progress.show(context, context.getResources().getString(R.string.map_live), context.getResources().getString(R.string.cache_dialog_loading_details), true, null);
-
         if (waypoint == null) {
             return;
         }
@@ -1770,21 +1763,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             if (cache != null) {
                 CGeoMap.markCacheAsDirty(cache.getGeocode());
                 CachePopup.startActivityAllowTarget(activity, cache.getGeocode());
-                return;
             }
-            progress.dismiss();
             return;
         }
 
         if (coordType == CoordinatesType.WAYPOINT && waypoint.getId() >= 0) {
             CGeoMap.markCacheAsDirty(waypoint.getGeocode());
             WaypointPopup.startActivityAllowTarget(getActivity(), waypoint.getId(), waypoint.getGeocode());
-        } else {
-            progress.dismiss();
-            return;
         }
-
-        progress.dismiss();
     }
 
     public WaypointDistanceInfo getClosestDistanceInM(final Geopoint coord) {
