@@ -227,8 +227,35 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final Drawable[] layers = { ResourcesCompat.getDrawable(res, waypoint.getWaypointType().dotMarkerId, null) };
-        return new LayerDrawable(layers);
+        final int dotDrw;
+        final int dotIcon;
+
+        // Todo: define connector-specific shapes in connector
+        final int dotMarker;
+        if (waypoint.getMapMarkerId() == R.drawable.marker) {
+            dotMarker = R.drawable.dot_background;
+            dotDrw = R.drawable.dot_foreground;
+        } else if (waypoint.getMapMarkerId() == R.drawable.marker_oc) {
+            dotMarker = R.drawable.dot_background_oc;
+            dotDrw = R.drawable.dot_foreground_oc;
+        } else {
+            dotMarker = R.drawable.dot_background_other;
+            dotDrw = R.drawable.dot_foreground_other;
+        }
+
+        final Drawable dotMarkerDrawable = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotMarker, null));
+        DrawableCompat.setTint(dotMarkerDrawable, ResourcesCompat.getColor(res, R.color.dotBg_waypointCircle, null));
+
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
+        DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
+
+        dotIcon = waypoint.getWaypointType().dotMarkerId;
+
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarkerDrawable.getIntrinsicWidth(), dotMarkerDrawable.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(dotMarkerDrawable));
+        insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
+        insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
+        return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
     /**
@@ -392,34 +419,42 @@ public final class MapMarkerUtils {
     @NonNull
     public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
         int dotDrw = -1;
+        int dotIcon = -1;
         int tintColor = -1;
         if (cache.isFound()) {
-            dotDrw = R.drawable.dot_found;
+            dotIcon = R.drawable.dot_found;
+            tintColor = R.color.dotBg_found;
         } else if (cache.hasLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
             // logs of type NOTE may have a NA/NM log attached to them
             if (offlineLogType.isFoundLog()) {
-                dotDrw = R.drawable.dot_found_offline;
+                dotIcon = R.drawable.dot_found_offline;
+                tintColor = R.color.dotBg_found;
             } else if (offlineLogType == LogType.DIDNT_FIND_IT) {
-                dotDrw = R.drawable.dot_not_found_offline;
+                dotIcon = R.drawable.dot_not_found_offline;
+                tintColor = R.color.dotBg_notFound;
             } else if (cache.hasWillAttendForFutureEvent()) {
-                dotDrw = R.drawable.dot_marker_calendar;
+                dotIcon = R.drawable.dot_marker_calendar;
+                tintColor = R.color.dotBg_calendar;
             } else if (offlineLogType == LogType.NOTE) {
                 final LogEntry offlineLog = cache.getOfflineLog();
                 if (offlineLog.reportProblem == ReportProblemType.NO_PROBLEM) {
-                    dotDrw = R.drawable.dot_note_offline;
+                    dotIcon = R.drawable.dot_note_offline;
+                    tintColor = R.color.dotBg_offlineLogNote;
                 } else if (offlineLog.reportProblem == ReportProblemType.ARCHIVE) {
-                    dotDrw = R.drawable.dot_marker_archive_offline;
+                    dotIcon = R.drawable.dot_marker_archive_offline;
+                    tintColor = R.color.dotBg_offlineLogArchive;
                 } else {
-                    dotDrw = R.drawable.dot_marker_maintenance_offline;
+                    dotIcon = R.drawable.dot_marker_maintenance_offline;
+                    tintColor = R.color.dotBg_offlineLogMaintanance;
                 }
             }
         } else if (cache.hasUserModifiedCoords()) {
-            dotDrw = R.drawable.dot_marker_usermodifiedcoords;
+            dotIcon = R.drawable.dot_marker_usermodifiedcoords;
+            tintColor = R.color.dotBg_usermodifiedCoords;
         }
 
-        if (dotDrw == -1) {
-            dotDrw = R.drawable.dot_foreground;
+        if (tintColor == -1) {
             if (cache.isArchived() || cache.isDisabled()) {
                 tintColor = R.color.cacheType_disabled;
             } else {
@@ -427,15 +462,30 @@ public final class MapMarkerUtils {
             }
         }
 
-        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background, null));
-        final Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
+        // Todo: define connector-specific shapes in connector
+        final Drawable dotMarker;
+        if (cache.getMapMarkerId() == R.drawable.marker) {
+            dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background, null));
+            dotDrw = R.drawable.dot_foreground;
+        } else if (cache.getMapMarkerId() == R.drawable.marker_oc) {
+            dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background_oc, null));
+            dotDrw = R.drawable.dot_foreground_oc;
+        } else {
+            dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.dot_background_other, null));
+            dotDrw = R.drawable.dot_foreground_other;
+        }
+
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, dotDrw, null));
         if (tintColor != -1) {
-            DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, tintColor, null));
+            DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
         }
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
-        insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
+        insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
+        if (dotIcon != -1) {
+            insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
+        }
         return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 

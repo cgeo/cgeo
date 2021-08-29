@@ -54,4 +54,14 @@
     <color name="cacheType_disabled">#ff90a4ae</color>
     <color name="cacheType_waypoint">#ffffffff</color>
 
+    <color name="dotBg_found">#fffdd835</color>
+    <color name="dotBg_notFound">#ff448AFF</color>
+    <color name="dotBg_calendar">#ffD32F2F</color>
+    <color name="dotBg_usermodifiedCoords">#ff303F9F</color>
+    <color name="dotBg_offlineLogNote">#ff4e342e</color>
+    <color name="dotBg_offlineLogArchive">#ffD32F2F</color>
+    <color name="dotBg_offlineLogMaintanance">#ffC62828</color>
+    <color name="dotBg_waypointCircle">#ffff999</color>
+    <color name="dotBg_waypointBg">#ffffffff</color>
+
 </resources>
