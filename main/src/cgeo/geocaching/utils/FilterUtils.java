@@ -11,11 +11,11 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.app.Activity;
 import android.os.Handler;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -64,13 +64,13 @@ public class FilterUtils {
         return true;
     }
 
-    public static void updateFilterBar(final Activity activity, final Collection<String> filterNames) {
+    public static void updateFilterBar(final Activity activity, @Nullable final String filterName) {
         final View filterView = activity.findViewById(R.id.filter_bar);
-        if (filterNames.isEmpty()) {
+        if (filterName == null) {
             filterView.setVisibility(View.GONE);
         } else {
             final TextView filterTextView = activity.findViewById(R.id.filter_text);
-            filterTextView.setText(TextUtils.join(", ", filterNames));
+            filterTextView.setText(filterName);
             filterView.setVisibility(View.VISIBLE);
         }
     }

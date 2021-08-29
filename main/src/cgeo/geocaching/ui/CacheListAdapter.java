@@ -252,7 +252,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public String getFilterName() {
-        return hasActiveFilter() ? "-" : currentGeocacheFilter.toUserDisplayableString();
+        return !hasActiveFilter() ? "-" : currentGeocacheFilter.toUserDisplayableString();
     }
 
     public int getCheckedCount() {
