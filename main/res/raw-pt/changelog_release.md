@@ -1,6 +1,6 @@
-## Bugfix Release
+## Versão de manutenção (correcção de erros)
 
-### Design
+### Aparência
 - Increase font size for text input fields
 - Increase font size for some compass elements
 - Use font color with higher contrast in waypoint tab
@@ -9,15 +9,15 @@
 - Respect system font size settings also on older Android versions (5,6 and 7)
 
 ### Detalhes da cache
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- Corrige o título da cache em falta se a cache for aberta pelo geocode ou ligação (alteração do site)
+- Corrige a descrição da cache em falta, em algumas caches
 
 ### Outro
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- Mostra novamente as caches premium nos resultados de pesquisa de membros básicos
+- Corrige a criação adicional de caches definidas pelo utilizador, se algumas caches definidas pelo utilizador tiverem sido carregadas via GPX
+- Usa abreviaturas em inglês mais comuns, para as caches tradicionais, no filtro por tipo de cache
 
-## Feature Release 2021.08.15:
+## Versão de Funcionalidades 2021.08.15:
 
 ### Sistema de filtragem avançado
 - Apresentamos um novo sistema de filtragem no c:geo, que suporta filtros flexíveis, combináveis e armazenáveis
