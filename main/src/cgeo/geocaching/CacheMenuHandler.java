@@ -4,6 +4,9 @@ import cgeo.geocaching.activity.INavigationSource;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.apps.navi.NavigationSelectionActionProvider;
 import cgeo.geocaching.calendar.CalendarAdder;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.BookmarkUtils;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
@@ -72,6 +75,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         } else if (menuItem == R.id.menu_caches_around || menuItem == R.id.menu_caches_around_from_popup) {
             activityInterface.cachesAround();
             return true;
+        } else if (menuItem == R.id.menu_upload_bookmarklist) {
+            BookmarkUtils.askAndUploadCachesToBookmarkList(activity, Collections.singletonList(cache));
+            return true;
         } else if (menuItem == R.id.menu_show_in_browser) {
             cache.openInBrowser(activity);
             return true;
@@ -126,6 +132,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         // submenu advanced
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
         menu.findItem(fromPopup ? R.id.menu_caches_around_from_popup : R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
+        menu.findItem(R.id.menu_upload_bookmarklist).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember() && ConnectorFactory.getConnector(cache) instanceof GCConnector);
     }
 
     public static void addMenuItems(final MenuInflater inflater, final Menu menu, final Geocache cache, final boolean fromPopup) {
