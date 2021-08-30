@@ -227,14 +227,23 @@ public final class MapMarkerUtils {
      */
     @NonNull
     public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final int dotIcon;
-
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null));
         DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointCircle, null));
         final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null));
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
 
-        dotIcon = waypoint.getWaypointType().dotMarkerId;
+        final Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getWaypointType().dotMarkerId, null));
+
+        // Tint disabled waypoints
+        String geocode = waypoint.getGeocode();
+        if (StringUtils.isNotBlank(geocode)) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (null != cache) {
+                if (cache.isDisabled() || cache.isArchived()) {
+                    DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
+                }
+            }
+        }
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
@@ -253,7 +262,7 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Build the drawable for a given cache.
+     * Build the drawable for penzlina given cache.
      *
      * @param res           the resources to use
      * @param cache         the cache to build the drawable for
@@ -404,7 +413,14 @@ public final class MapMarkerUtils {
     @NonNull
     public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
         int dotIcon = -1;
-        int tintColor = -1;
+        int tintColor;
+
+        if (cache.isArchived() || cache.isDisabled()) {
+            tintColor = R.color.cacheType_disabled;
+        } else {
+            tintColor = cache.getType().typeColor;
+        }
+
         if (cache.isFound()) {
             dotIcon = R.drawable.dot_found;
             tintColor = R.color.dotBg_found;
@@ -435,14 +451,6 @@ public final class MapMarkerUtils {
             }
         } else if (cache.hasUserModifiedCoords()) {
             dotIcon = R.drawable.dot_marker_usermodifiedcoords;
-        }
-
-        if (tintColor == -1) {
-            if (cache.isArchived() || cache.isDisabled()) {
-                tintColor = R.color.cacheType_disabled;
-            } else {
-                tintColor = cache.getType().typeColor;
-            }
         }
 
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
