@@ -86,41 +86,6 @@ public class TrackablesTest extends AbstractResourceInstrumentationTestCase {
         assertThat(goal).contains("href=\"https://www.geocaching.com/seek/cache_details.aspx?wp=GC3B7PD#\"");
     }
 
-//    // test data adaption necessary
-//    public void testParseSpeedManagerCompressedTrackable() {
-//        final Trackable tbNormal = parseTrackable(R.raw.tb54vjj_no_speedmanager_html);
-//        assertTB54VJJ(tbNormal);
-//        final Trackable tbCompressed = parseTrackable(R.raw.tb54vjj_speedmanager_html);
-//        assertTB54VJJ(tbCompressed);
-//    }
-
-    private static void assertTB54VJJ(final Trackable trackable) {
-        assertThat(trackable).isNotNull();
-        assertThat(trackable.getName()).isEqualTo("Krtek - Der kleine Maulwurf");
-        final String goal = trackable.getGoal();
-        assertThat(goal).isNotNull();
-        assertThat(goal).startsWith("Bei meinem Besitzer auf der Couch");
-        assertThat(goal).endsWith("Geocachern zusammen fotografieren.");
-        assertThat(trackable.getDetails()).isEqualTo("Der kleine Maulwurf in etwas gr&ouml;&szlig;er :-)");
-        assertThat(trackable.getGeocode()).isEqualTo("TB54VJJ");
-        assertThat(trackable.getOrigin()).isEqualTo("Nordrhein-Westfalen, Germany");
-        assertThat(trackable.getOwner()).isEqualTo("Lineflyer");
-        // the icon url is manipulated during compression
-        assertThat(trackable.getIconUrl()).endsWith("www.geocaching.com/images/wpttypes/21.gif");
-        assertThat(trackable.getImage()).endsWith("img.geocaching.com/track/large/d9a475fa-da90-43ec-aec0-92afe26163e1.jpg");
-        assertThat(trackable.getOwnerGuid()).isEqualTo("d11a3e3d-7db0-4d43-87f2-7893238844a6");
-        assertThat(trackable.getSpottedGuid()).isNull();
-        assertThat(trackable.getSpottedType()).isEqualTo(Trackable.SPOTTED_OWNER);
-        assertThat(trackable.getReleased()).isNotNull();
-        assertThat(trackable.getLogDate()).isNull();
-        assertThat(trackable.getLogType()).isNull();
-        assertThat(trackable.getLogGuid()).isNull();
-        assertThat(trackable.getType()).isEqualTo("Travel Bug Dog Tag");
-        final List<LogEntry> logs = trackable.getLogs();
-        assertThat(logs).isNotNull();
-        assertThat(logs).hasSize(10);
-    }
-
     private Trackable parseTrackable(final int trackablePage) {
         final String pageContent = getFileContent(trackablePage);
         return GCParser.parseTrackable(TextUtils.replaceWhitespace(pageContent), null);
