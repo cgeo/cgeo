@@ -1,11 +1,11 @@
 ## Bugfix Release
 
-### Design
+### Dizayn
 - Increase font size for text input fields
 - Increase font size for some compass elements
 - Use font color with higher contrast in waypoint tab
 - Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
+- Koordinat giriş alanlarının yazı boyutunu büyüt
 - Respect system font size settings also on older Android versions (5,6 and 7)
 
 ### Geocache Ayrıntıları
@@ -13,11 +13,11 @@
 - Fix missing cache description on some caches
 
 ### Diğer
-- Show premium caches again in search results of basic members
+- Premium cache'leri ücretsiz üyelerin arama sonuçlarında yine de göster
 - Fix further creation of user defined caches if some user defines caches have been loaded via GPX
 - Use more common English abbreviation for traditional cache in cache type filter
 
-## Feature Release 2021.08.15:
+## Gelecek sürüm 2021.08.15:
 
 ### Gelişmiş filtreleme sistemi
 - c:geo için esnek, birleştirilebilir ve depolanabilir filtreleri destekleyen yeni bir filtreleme sisteminin tanıtılıyor
