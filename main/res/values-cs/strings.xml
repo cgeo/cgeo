@@ -385,6 +385,7 @@
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
     <string name="caches_delete_events">Odstranit staré události</string>
+    <string name="caches_upload_bookmarklist">Nahrát do seznamu záložek</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrát upravené souřadnice pro všechny (vybrané) kešky a přepsat stávající souřadnice na serveru? Tento krok nelze vrátit zpět.</string>
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
@@ -1442,6 +1443,12 @@
     <string name="search_bookmark_list">Seznam záložek</string>
     <string name="search_pocket_is_new">nový</string>
     <string name="search_pocket_and_bookmark_loading">Načítání seznamu Pocket Queries a záložek</string>
+    <string name="search_bookmark_loading">Načítání seznamů záložek</string>
+    <string name="search_bookmark_select">Vybrat seznamy záložek</string>
+    <string name="search_bookmark_new">Vytvořit nový seznam záložek</string>
+    <string name="search_bookmark_adding_caches_success">Všechny GC kešky byly přidány do vybraného seznamu záložek</string>
+    <string name="search_bookmark_adding_caches_failed">Přidání kešek do seznamu záložek se nezdařilo</string>
+    <string name="search_bookmark_create_new_failed">Nový seznam záložek se nepodařilo vytvořit</string>
     <!-- trackable -->
     <string name="trackable">Sledovatelný předmět</string>
     <string name="trackable_details_loading">Načítání detailů…</string>
