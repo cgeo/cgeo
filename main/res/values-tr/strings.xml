@@ -383,6 +383,7 @@
     <string name="caches_remove_all_completely">Hepsini cihazdan sil</string>
     <string name="caches_remove_selected_completely">Seçilenleri cihazdan sil</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
+    <string name="caches_upload_bookmarklist">Yer imi listesine yükle</string>
     <string name="caches_upload_modifiedcoords">Düzenlenmiş koordinatları yükle</string>
     <string name="caches_upload_modifiedcoords_warning">Tüm seçili cache\'ler için değiştirilmiş koordinatları yüklemek ve sunucuda varolan koordinatların üzerine yazmak istiyor musunuz? Bu işlem geri alınamaz.</string>
     <string name="caches_upload_allcoords">Tüm Cache\'lerin koordinatlarını güncelle</string>
@@ -481,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
     <string name="cache_filter_storage_select_title">Filtre seçin</string>
+    <string name="cache_filter_storage_delete_title">Filtreyi sil</string>
+    <string name="cache_filter_storage_delete_message">Gerçekten bu filtre şablonunu silmek istiyor musunuz?</string>
     <string name="cache_filter_storage_select_clear_title">Filtre seçin veya mevcut filtreyi temizleyin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
     <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
@@ -492,6 +495,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Mevcut Değil</string>
     <string name="cache_filter_stringfilter_type_is_present">Mevcut</string>
     <string name="cache_filter_stringfilter_type_contains">Şunu İçeriyorsa</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">İçermez</string>
     <string name="cache_filter_stringfilter_type_starts_with">Şununla Başlıyorsa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Şununla Bitiyorsa</string>
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
@@ -1416,6 +1420,12 @@
     <string name="search_bookmark_list">Yer imi listesi</string>
     <string name="search_pocket_is_new">yeni</string>
     <string name="search_pocket_and_bookmark_loading">Cep sorgusu listesi veya bir yer imi listesi yükleniyor</string>
+    <string name="search_bookmark_loading">Yer imi listeleri yükleniyor</string>
+    <string name="search_bookmark_select">Yer imi listesini seç</string>
+    <string name="search_bookmark_new">Yeni yer imi listesi oluştur</string>
+    <string name="search_bookmark_adding_caches_success">Tüm Geocache\'ler seçili yer imi listesine eklendi</string>
+    <string name="search_bookmark_adding_caches_failed">Yer imi listesine cache ekleme başarısız</string>
+    <string name="search_bookmark_create_new_failed">Yeni yer imi listesi oluşturma başarısız</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Trackable detayları yükleniyor…</string>
