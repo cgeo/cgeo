@@ -436,6 +436,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                 // reset target cache on single mode map
                 targetGeocode = mapOptions.geocode;
             }
+            setTitle();
         } else if (id == R.id.menu_filter) {
             showFilterMenu(null);
         } else if (id == R.id.menu_store_caches) {
