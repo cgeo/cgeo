@@ -3,13 +3,13 @@ package cgeo.geocaching.connector.lc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.enumerations.CacheSize;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.BaseGeocacheFilter;
 import cgeo.geocaching.filters.core.DistanceGeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.OriginGeocacheFilter;
+import cgeo.geocaching.filters.core.TypeGeocacheFilter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import static cgeo.geocaching.enumerations.CacheType.ADVLAB;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -141,6 +142,10 @@ final class LCApi {
         if (df != null) {
             return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 10 : df.getMaxRangeValue().intValue());
         }
+        final TypeGeocacheFilter tf = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
+        if (tf != null && tf.isFiltering() && !tf.getRawValues().contains(ADVLAB)) {
+            return new ArrayList<>();
+        }
 
         //by default, search around current position
         return searchByCenter(Sensors.getInstance().currentGeo().getCoords());
@@ -228,7 +233,7 @@ final class LCApi {
             cache.setCacheId(segments[segments.length - 1]);
             cache.setName(response.get(TITLE).asText());
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
-            cache.setType(CacheType.ADVLAB);
+            cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             cache.setArchived(response.get("IsArchived").asBoolean()); // we get that even in passive mode!
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
@@ -259,7 +264,7 @@ final class LCApi {
             cache.setName(response.get(TITLE).asText());
             cache.setDescription((StringUtils.isNotBlank(ilink) ? "<img src=\"" + ilink + "\" </img><p><p>" : "") + desc);
             cache.setCoords(new Geopoint(location.get(LATITUDE).asText(), location.get(LONGITUDE).asText()));
-            cache.setType(CacheType.ADVLAB);
+            cache.setType(ADVLAB);
             cache.setSize(CacheSize.getById("virtual"));
             // cache.setArchived(response.get("IsArchived").asBoolean()); as soon as we're using active mode
             // cache.setFound(response.get("IsComplete").asBoolean()); as soon as we're using active mode
