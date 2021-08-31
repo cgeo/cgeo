@@ -1,11 +1,22 @@
-<!-- taken (modified) from close-circle-outline / materialdesignicons-google -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="24dp"
     android:width="24dp"
-    android:viewportHeight="24"
+    android:height="24dp"
     android:viewportWidth="24"
-    android:tint="@color/archived_cache_color">
-     <path
-      android:fillColor="#FF000000"
-      android:pathData="M12,20C7.59,20 4,16.41 4,12 4,7.59 7.59,4 12,4c4.41,0 8,3.59 8,8 0,4.41 -3.59,8 -8,8M12,2C6.47,2 2,6.47 2,12 2,17.53 6.47,22 12,22 17.53,22 22,17.53 22,12 22,6.47 17.53,2 12,2M7.01,5.5 L5.5,7.01c3.8889,3.7696 8.056,7.956 11.59,11.49L18.5,17.09C14.5191,13.1432 10.6432,9.206 7.01,5.5Z"/>
+    android:viewportHeight="24">
+  <path
+      android:pathData="M12,12m-12,0a12,12 0,1 1,24 0a12,12 0,1 1,-24 0"
+      android:fillColor="@color/cacheType_disabled"/>
+  <path
+      android:pathData="m19.6877,10.0166s-0.7568,3.8542 -0.854,4.0581c-0.2812,0.2324 -9.059,4.6376 -9.059,4.6376 -0.255,0.085 -0.4395,0.0752 -0.6009,-0.0481 0,0 -3.9743,-4.4616 -4.1223,-4.8398 -0.0599,-0.1892 -0.038,-4.4496 -0.038,-4.4496z"
+      android:strokeWidth="1.02"
+      android:fillColor="#00000000"
+      android:strokeColor="#fff"/>
+  <path
+      android:pathData="m15.1589,5.2035 l5.0959,4.1584c0.1442,0.1923 -0.0601,0.3125 -0.0601,0.3125l-10.0592,4.0863c-0.236,0.1145 -0.4735,0.0341 -0.6009,-0.0721l-4.8795,-4.4949c-0.4327,-0.4928 0.2163,-0.6971 0.2163,-0.6971l9.6268,-3.3171c0.3846,-0.1562 0.661,0.024 0.661,0.024zM20.2127,9.5716 L19.9519,10.431c-0.1831,0.1828 -0.3013,0.2524 -0.3013,0.2524l-9.6145,4.3988c-0.4377,0.1615 -0.661,-0.0481 -0.661,-0.0481l-4.7473,-4.6992c-0.1275,-0.119 -0.1082,-0.2644 -0.1082,-0.2644s-0.0431,-0.3092 -0.0016,-1.2766z"
+      android:fillColor="#fff"/>
+  <path
+      android:pathData="m9.5874,19.0102 l0.2719,-4.712"
+      android:strokeWidth="1.02"
+      android:fillColor="#00000000"
+      android:strokeColor="#fff"/>
 </vector>
