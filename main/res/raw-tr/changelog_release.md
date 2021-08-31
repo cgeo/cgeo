@@ -4,9 +4,9 @@
 - Increase font size for text input fields
 - Increase font size for some compass elements
 - Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
+- Hızlı çevrimdışı kayıt tik işaretini yeniden görünür kıl
 - Koordinat giriş alanlarının yazı boyutunu büyüt
-- Respect system font size settings also on older Android versions (5,6 and 7)
+- Eski Adroid versiyonlarında da sistem yazı tipi boyutunu uygula (5,6 ve 7)
 
 ### Geocache Ayrıntıları
 - Fix missing cache title if cache opened via geocode or link (website change)
