@@ -460,6 +460,7 @@
     <string name="cache_filter_location">所在地</string>
     <string name="cache_filter_stored_lists">保存済みリスト</string>
     <string name="cache_filter_origin">公開元</string>
+    <string name="cache_filter_stored_since">詳細の更新日時</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
@@ -476,6 +477,8 @@
     <string name="cache_filter_storage_delete_button">削除</string>
     <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
+    <string name="cache_filter_storage_delete_title">フィルタの削除</string>
+    <string name="cache_filter_storage_delete_message">このフィルタを削除しますか?</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
     <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
@@ -486,6 +489,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
     <string name="cache_filter_stringfilter_type_is_present">あり</string>
     <string name="cache_filter_stringfilter_type_contains">以下を含む</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">以下を含まない</string>
     <string name="cache_filter_stringfilter_type_starts_with">以下で始まる</string>
     <string name="cache_filter_stringfilter_type_ends_with">以下で終わる</string>
     <string name="cache_filter_stringfilter_type_pattern">パターン</string>
