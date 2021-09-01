@@ -2163,6 +2163,7 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončit</string>
     <string name="back">Zpět</string>
+    <string name="later">Později</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
 </resources>
