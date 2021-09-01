@@ -2096,6 +2096,7 @@
     <string name="done">Terminé</string>
     <string name="finish">Terminer</string>
     <string name="back">Retour</string>
+    <string name="later">Plus tard</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
 </resources>
