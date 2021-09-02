@@ -1,23 +1,23 @@
-## Bugfix Release
+## 버그 수정 릴리스
 
-### Design
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
+### 디자인
+- 텍스트 입력 필드의 글꼴 크기 늘리기
+- 일부 나침반 요소의 글꼴 크기 늘리기
+- 지점 탭에서 대비가 높은 글꼴 색상 사용
+- 빠른 오프라인 로그 확인 표시를 다시 표시
+- 좌표 입력 필드의 글꼴 크기 늘리기
+- 이전 Android 버전(5,6 및 7)에서도 시스템 글꼴 크기 설정을 존중합니다.
 
 ### 캐시 상세정보
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- 지오코드 또는 링크를 통해 캐시를 연 경우 누락된 캐시 제목 수정(웹사이트 변경)
+- 일부 캐시에서 누락된 캐시 설명 수정
 
 ### 추가 사항
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- 기본회원 검색결과에 프리미엄캐시 다시 표시
+- 일부 사용자 정의 캐시가 GPX를 통해 로드된 경우 사용자 정의 캐시의 추가 생성 수정
+- 캐시 유형 필터에서 기존 캐시에 대해 보다 일반적인 영어 약어 사용
 
-## Feature Release 2021.08.15:
+## 기능 릴리스 2021.08.15:
 
 ### 고급 필터링 시스템
 - 유연하고 결합 가능하며 저장 가능한 필터를 지원하는 새로운 필터링 시스템을 c:geo에 소개합니다.
