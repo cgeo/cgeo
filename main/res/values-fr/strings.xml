@@ -328,6 +328,7 @@
     <string name="menu_scan_geo">Scanner un géocode</string>
     <string name="menu_lists_pocket_queries">Listes / Pocket queries</string>
     <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
+    <string name="menu_invert_order">Inverser l’ordre</string>
     <!-- main screen -->
     <string name="live_map_button">Carte</string>
     <string name="caches_nearby_button">Proches</string>
@@ -382,6 +383,7 @@
     <string name="caches_remove_all_completely">Tout supprimer de l\'appareil</string>
     <string name="caches_remove_selected_completely">Supprimer les éléments sélectionnés de l\'appareil</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
+    <string name="caches_upload_bookmarklist">Envoyer vers la liste des favoris</string>
     <string name="caches_upload_modifiedcoords">Envoyer les coordonnées modifiées</string>
     <string name="caches_upload_modifiedcoords_warning">Voulez-vous télécharger les coordonnées modifiées pour toutes les caches (sélectionnées) et écraser les coordonnées existantes sur le serveur ? Cela ne peut pas être annulé.</string>
     <string name="caches_upload_allcoords">Envoyer les coordonnées de toutes les caches</string>
@@ -460,6 +462,7 @@
     <string name="cache_filter_location">Localisation</string>
     <string name="cache_filter_stored_lists">Listes stockées</string>
     <string name="cache_filter_origin">Origine</string>
+    <string name="cache_filter_stored_since">Détails de la dernière mise à jour</string>
     <string name="cache_filtergroup_basic">Basique</string>
     <string name="cache_filtergroup_details">Détails</string>
     <string name="cache_filtergroup_userspecific">Spécifique à l\'utilisateur</string>
@@ -519,6 +522,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Objet voyageur</string>
     <string name="cache_filter_status_select_label_has_own_vote">Avec mes votes</string>
     <string name="cache_filter_status_select_label_has_offline_log">Log hors ligne</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">A un log Trouvé (hors ligne)</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mystery résolue</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">La configuration du filtre affectera les mysteries.\n\nUne mystery est considéré “résolue” si elle a soit, les coordonnées modifiées, soit un point de passage final avec des coordonnées.</string>
     <string name="cache_filter_status_active">Active</string>
@@ -1350,6 +1354,7 @@
     <string name="map_showc_found">Trouvées</string>
     <string name="map_showc_disabled">Désactivées</string>
     <string name="map_showc_archived">Archivées</string>
+    <string name="map_showc_found_offline">Trouvé (hors ligne)</string>
     <string name="map_showwp_original">Originales</string>
     <string name="map_showwp_parking">Stationnement</string>
     <string name="map_showwp_visited">Visitées</string>
@@ -1416,6 +1421,12 @@
     <string name="search_bookmark_list">Liste des favoris</string>
     <string name="search_pocket_is_new">nouveau</string>
     <string name="search_pocket_and_bookmark_loading">Chargement des Pocket Queries et des listes</string>
+    <string name="search_bookmark_loading">Chargement des listes de favoris</string>
+    <string name="search_bookmark_select">Sélectionnez les listes de favoris</string>
+    <string name="search_bookmark_new">Créer une nouvelle liste de favoris</string>
+    <string name="search_bookmark_adding_caches_success">Toutes les géocaches ont été ajoutées à la liste de favoris sélectionnée</string>
+    <string name="search_bookmark_adding_caches_failed">Impossible d\'ajouter les caches à la liste de favoris</string>
+    <string name="search_bookmark_create_new_failed">Impossible de créer une nouvelle liste de favoris</string>
     <!-- trackable -->
     <string name="trackable">Objet voyageur</string>
     <string name="trackable_details_loading">Chargement des détails d\'un objet voyageur…</string>
@@ -1941,6 +1952,8 @@
         <item quantity="other">Itinéraire chargé avec %d points de passage</item>
     </plurals>
     <string name="center_on_route">Centrer sur l\'itinéraire</string>
+    <string name="individual_route_set_as_start_title">Définir comme début d’itinéraire</string>
+    <string name="individual_route_set_as_start_message">Définir cet élément comme début d\'itinéraire et déplacer tous les éléments suivants en haut de l’itinéraire actuel ?</string>
     <!-- individual track -->
     <string name="individual_track">Trace/itinéraire GPX</string>
     <string name="map_load_track">Charger trace/itinéraire GPX</string>
