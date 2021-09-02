@@ -481,20 +481,6 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Conditional expression to choose if we need the orange circle or not.
-     * The orange circle indicate an approximative cache position.
-     *
-     * @param cacheListType
-     *          The cache list currently used
-     * @return
-     *          True if the background circle should be displayed
-     */
-    private static boolean showUnreliableLatLon(@Nullable final CacheListType cacheListType) {
-        // Show only on map
-        return cacheListType == null;
-    }
-
-    /**
      * Conditional expression to choose if we need the UserModifiedCoords flag or not.
      *
      * @param cache
