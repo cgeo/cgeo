@@ -1734,7 +1734,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (isDotMode) {
             item.setMarker(new CacheMarker(0, (Drawable) MapMarkerUtils.createCacheDotMarker(getResources(), cache)));
         } else {
-            item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache));
+            item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache, null));
         }
         return item;
     }

@@ -54,21 +54,6 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Obtain the drawable for a given cache, with background circle.
-     *
-     * @param res
-     *          the resources to use
-     * @param cache
-     *          the cache to build the drawable for
-     * @return
-     *          a drawable representing the current cache status
-     */
-    @NonNull
-    public static CacheMarker getCacheMarker(final Resources res, final Geocache cache) {
-        return getCacheMarker(res, cache, null);
-    }
-
-    /**
      * Obtain the drawable for a given cache.
      * Return a drawable from the cache, if a similar drawable was already generated.
      *
@@ -101,7 +86,7 @@ public final class MapMarkerUtils {
             .append(cache.hasLogOffline())
             .append(!cache.getLists().isEmpty())
             .append(cache.getOfflineLogType())
-            .append(showBackground(cacheListType))
+            .append(showPin(cacheListType))
             .append(showFloppyOverlay(cacheListType))
             .append(assignedMarkers)
             .toHashCode();
@@ -114,6 +99,82 @@ public final class MapMarkerUtils {
             }
             return marker;
         }
+    }
+
+    /**
+     * Build the drawable for penzlina given cache.
+     *
+     * @param res           the resources to use
+     * @param cache         the cache to build the drawable for
+     * @param cacheListType the current CacheListType or Null
+     * @return a drawable representing the current cache status
+     */
+    @NonNull
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers) {
+        final int useEmoji = cache.getAssignedEmoji();
+
+        // marker shape
+        final Drawable marker = ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null);
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
+        if (showPin(cacheListType)) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
+        }
+        insetsBuilder.withInset(new InsetBuilder(marker));
+
+        // cache type background color
+        final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
+        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
+        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
+        insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
+
+        // main icon (usually cache type)
+        final int mainMarkerId = getMainMarkerId(cache, cacheListType);
+        // doubleSize = "Big icons for logged caches" enabled AND no offline log
+        final boolean doubleSize = showBigSmileys(cacheListType) && (mainMarkerId != cache.getType().markerId);
+        if (useEmoji > 0 && !doubleSize) {
+            if (cPaint == null) {
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 0.7f);
+                cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, (int) (markerAvailable / 20), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
+            }
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
+        } else {
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, doubleSize));
+        }
+
+        // overlays
+        // center: archived
+        if (cache.isArchived()) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
+        }
+        // top-right: owned / stored
+        if (cache.isOwner()) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, Gravity.TOP | Gravity.RIGHT));
+            // if not, checked if stored
+        } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
+        }
+        // top-left: will attend / found / not found / offline-logs
+        if (cache.hasWillAttendForFutureEvent() && !doubleSize) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, Gravity.TOP | Gravity.LEFT));
+        } else if (!showBigSmileys(cacheListType)) {
+            final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
+            if (loggedMarkerId != null) {
+                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT));
+            }
+        }
+        // bottom-right: user modified coords
+        if (showUserModifiedCoords(cache)) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
+        }
+        // bottom-left: personal note
+        if (cache.getPersonalNote() != null) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT));
+        }
+        // center-left/center-right: list markers
+        addListMarkers(res, insetsBuilder, assignedMarkers);
+
+        return buildLayerDrawable(insetsBuilder, 11, 10);
     }
 
     /**
@@ -132,9 +193,9 @@ public final class MapMarkerUtils {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
         ArrayList<Integer> assignedMarkers = new ArrayList<>();
-        final String geocode = waypoint.getGeocode();
         boolean cacheIsDisabled = false;
         boolean cacheIsArchived = false;
+        final String geocode = waypoint.getGeocode();
         if (StringUtils.isNotBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (null != cache) {
@@ -190,8 +251,9 @@ public final class MapMarkerUtils {
         if (cacheIsArchived) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
         }
+        // bottom-right: visited
         if (waypoint.isVisited()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_visited, Gravity.CENTER, false));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_visited, Gravity.BOTTOM | Gravity.RIGHT));
         }
 
         addListMarkers(res, insetsBuilder, assignedMarkers);
@@ -200,19 +262,71 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * adds list markers to drawable given by insetsBuilder
+     * Build the drawable for a given cache.
+     *
+     * @param res
+     *          the resources to use
+     * @param cache
+     *          the cache to build the drawable for
+     * @return
+     *          a drawable representing the current cache status
      */
-    private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
-        if (assignedMarkers.size() > 0) {
-            if (lPaint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f);
-                lPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
-            }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
-            if (assignedMarkers.size() > 1) {
-                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
-            }
+    @NonNull
+    public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
+        int dotIcon = -1;
+        int tintColor;
+
+        tintColor = cache.getType().typeColor;
+
+        if (cache.isArchived() || cache.isDisabled()) {
+            tintColor = R.color.cacheType_disabled;
         }
+
+        if (cache.isFound()) {
+            dotIcon = R.drawable.dot_found;
+            tintColor = R.color.dotBg_found;
+        } else if (cache.hasLogOffline()) {
+            final LogType offlineLogType = cache.getOfflineLogType();
+            // logs of type NOTE may have a NA/NM log attached to them
+            if (offlineLogType.isFoundLog()) {
+                dotIcon = R.drawable.dot_found_offline;
+                tintColor = R.color.dotBg_found;
+            } else if (offlineLogType == LogType.DIDNT_FIND_IT) {
+                dotIcon = R.drawable.dot_not_found_offline;
+                tintColor = R.color.dotBg_notFound;
+            } else if (cache.hasWillAttendForFutureEvent()) {
+                dotIcon = R.drawable.dot_marker_calendar;
+                tintColor = R.color.dotBg_calendar;
+            } else if (offlineLogType == LogType.NOTE) {
+                final LogEntry offlineLog = cache.getOfflineLog();
+                if (offlineLog.reportProblem == ReportProblemType.NO_PROBLEM) {
+                    dotIcon = R.drawable.dot_note_offline;
+                    tintColor = R.color.dotBg_offlineLogNote;
+                } else if (offlineLog.reportProblem == ReportProblemType.ARCHIVE) {
+                    dotIcon = R.drawable.dot_marker_archive_offline;
+                    tintColor = R.color.dotBg_offlineLogArchive;
+                } else {
+                    dotIcon = R.drawable.dot_marker_maintenance_offline;
+                    tintColor = R.color.dotBg_offlineLogMaintanance;
+                }
+            }
+        } else if (cache.hasUserModifiedCoords()) {
+            dotIcon = R.drawable.dot_marker_usermodifiedcoords;
+        }
+
+        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null));
+        if (tintColor != -1) {
+            DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
+        }
+
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(dotMarker));
+        insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
+        if (dotIcon != -1) {
+            insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
+        }
+        return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
     /**
@@ -228,7 +342,7 @@ public final class MapMarkerUtils {
     @NonNull
     public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null));
-        DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointCircle, null));
+        DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointOutline, null));
         final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null));
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
 
@@ -259,82 +373,6 @@ public final class MapMarkerUtils {
         synchronized (overlaysCache) {
             overlaysCache.clear();
         }
-    }
-
-    /**
-     * Build the drawable for penzlina given cache.
-     *
-     * @param res           the resources to use
-     * @param cache         the cache to build the drawable for
-     * @param cacheListType the current CacheListType or Null
-     * @return a drawable representing the current cache status
-     */
-    @NonNull
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
-    private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers) {
-        final int useEmoji = cache.getAssignedEmoji();
-
-        final Drawable marker = ResourcesCompat.getDrawable(res, cache.getMapMarkerId(), null);
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
-        if (showBackground(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
-        }
-        insetsBuilder.withInset(new InsetBuilder(marker));
-
-        final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
-        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
-        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
-        insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
-
-        // cache type
-        final int mainMarkerId = getMainMarkerId(cache, cacheListType);
-
-        final boolean doubleSize = showBigSmileys(cacheListType) && mainMarkerId != cache.getType().markerId;
-        if (useEmoji > 0 && !doubleSize) {
-            if (cPaint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 0.7f);
-                cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, (int) (markerAvailable / 20), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
-            }
-            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
-        } else if (doubleSize) {
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true));
-        } else {
-            final Drawable mainIcon = ResourcesCompat.getDrawable(res, mainMarkerId, null);
-            insetsBuilder.withInset(new InsetBuilder(mainIcon, Gravity.CENTER));
-
-        }
-        // archived
-        if (cache.isArchived()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
-        }
-        // own
-        if (cache.isOwner()) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, Gravity.TOP | Gravity.RIGHT));
-            // if not, checked if stored
-        } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
-        }
-        // will attend / found
-        if (cache.hasWillAttendForFutureEvent() && !doubleSize) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, Gravity.TOP | Gravity.LEFT));
-        } else if (!showBigSmileys(cacheListType)) {
-            final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
-            if (loggedMarkerId != null) {
-                insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT));
-            }
-        }
-        // user modified coords
-        if (showUserModifiedCoords(cache)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
-        }
-        // personal note
-        if (cache.getPersonalNote() != null) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_personalnote, Gravity.BOTTOM | Gravity.LEFT));
-        }
-        // list markers
-        addListMarkers(res, insetsBuilder, assignedMarkers);
-
-        return buildLayerDrawable(insetsBuilder, 11, 10);
     }
 
     private static LayerDrawable buildLayerDrawable(final InsetsBuilder insetsBuilder, final int layersInitialCapacity, final int insetsInitialCapacity) {
@@ -397,86 +435,34 @@ public final class MapMarkerUtils {
     }
 
     private static boolean showBigSmileys(final CacheListType cacheListType) {
-        return Settings.isBigSmileysEnabled() && showBackground(cacheListType);
+        return Settings.isBigSmileysEnabled() && showPin(cacheListType);
     }
 
     /**
-     * Build the drawable for a given cache.
-     *
-     * @param res
-     *          the resources to use
-     * @param cache
-     *          the cache to build the drawable for
-     * @return
-     *          a drawable representing the current cache status
+     * adds list markers to drawable given by insetsBuilder
      */
-    @NonNull
-    public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
-        int dotIcon = -1;
-        int tintColor;
-
-        if (cache.isArchived() || cache.isDisabled()) {
-            tintColor = R.color.cacheType_disabled;
-        } else {
-            tintColor = cache.getType().typeColor;
-        }
-
-        if (cache.isFound()) {
-            dotIcon = R.drawable.dot_found;
-            tintColor = R.color.dotBg_found;
-        } else if (cache.hasLogOffline()) {
-            final LogType offlineLogType = cache.getOfflineLogType();
-            // logs of type NOTE may have a NA/NM log attached to them
-            if (offlineLogType.isFoundLog()) {
-                dotIcon = R.drawable.dot_found_offline;
-                tintColor = R.color.dotBg_found;
-            } else if (offlineLogType == LogType.DIDNT_FIND_IT) {
-                dotIcon = R.drawable.dot_not_found_offline;
-                tintColor = R.color.dotBg_notFound;
-            } else if (cache.hasWillAttendForFutureEvent()) {
-                dotIcon = R.drawable.dot_marker_calendar;
-                tintColor = R.color.dotBg_calendar;
-            } else if (offlineLogType == LogType.NOTE) {
-                final LogEntry offlineLog = cache.getOfflineLog();
-                if (offlineLog.reportProblem == ReportProblemType.NO_PROBLEM) {
-                    dotIcon = R.drawable.dot_note_offline;
-                    tintColor = R.color.dotBg_offlineLogNote;
-                } else if (offlineLog.reportProblem == ReportProblemType.ARCHIVE) {
-                    dotIcon = R.drawable.dot_marker_archive_offline;
-                    tintColor = R.color.dotBg_offlineLogArchive;
-                } else {
-                    dotIcon = R.drawable.dot_marker_maintenance_offline;
-                    tintColor = R.color.dotBg_offlineLogMaintanance;
-                }
+    private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
+        if (assignedMarkers.size() > 0) {
+            if (lPaint == null) {
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_LIST_MARKER_DP, 1.2f);
+                lPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
             }
-        } else if (cache.hasUserModifiedCoords()) {
-            dotIcon = R.drawable.dot_marker_usermodifiedcoords;
+            insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(0)), Gravity.CENTER_VERTICAL | Gravity.LEFT));
+            if (assignedMarkers.size() > 1) {
+                insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(lPaint, assignedMarkers.get(1)), Gravity.CENTER_VERTICAL | Gravity.RIGHT));
+            }
         }
-
-        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null));
-        if (tintColor != -1) {
-            DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
-        }
-
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
-        insetsBuilder.withInset(new InsetBuilder(dotMarker));
-        insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
-        if (dotIcon != -1) {
-            insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
-        }
-        return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
     /**
-     * Conditional expression to choose if we need the background circle or not.
+     * Conditional expression to choose if we need the pin on markers (on map).
      *
      * @param cacheListType
      *            The cache list currently used
      * @return
      *         True if the background circle should be displayed
      */
-    private static boolean showBackground(@Nullable final CacheListType cacheListType) {
+    private static boolean showPin(@Nullable final CacheListType cacheListType) {
         return cacheListType == null;
     }
 
