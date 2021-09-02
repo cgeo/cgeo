@@ -1,21 +1,21 @@
-## Bugfix Release
+## Version de maintenance (correction de bugs)
 
-### Design
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
+### Apparence
+- Augmenter la taille de la police pour les champs de saisie de texte
+- Augmenter la taille de la police pour certains éléments de la boussole
+- Utiliser une couleur de police avec contraste élevé dans l'onglet Points de passage
+- Rendre à nouveau visible l'indicateur de log rapide hors-ligne
+- Augmenter la taille de la police pour les champs de saisie de coordonnées
+- Respecter les paramètres systèmes de la taille de police aussi pour les anciennes versions d'Android (5, 6 et 7)
 
 ### Détails de la cache
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- Correction du titre de cache manquant si la cache est ouverte via le géocode ou le lien (changement du site)
+- Correction de la description de cache manquante sur certaines caches
 
 ### Divers
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- Afficher à nouveau les caches premium dans les résultats de recherche des membres basiques
+- Correction de la création des caches définies par l'utilisateur si certaines caches définies par l'utilisateur ont été chargées via GPX
+- Utilisation de plus d'abréviations anglaises courantes pour les caches traditionnelles dans le filtre de type de cache
 
 ## Fonctionnalités de la version 2021.08.15 :
 
