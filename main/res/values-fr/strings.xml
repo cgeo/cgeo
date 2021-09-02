@@ -493,6 +493,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">N\'est pas présent</string>
     <string name="cache_filter_stringfilter_type_is_present">Est présent</string>
     <string name="cache_filter_stringfilter_type_contains">Contient</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Ne contient pas</string>
     <string name="cache_filter_stringfilter_type_starts_with">Commence par</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termine par</string>
     <string name="cache_filter_stringfilter_type_pattern">Motif</string>

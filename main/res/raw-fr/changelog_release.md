@@ -1,7 +1,6 @@
 ## Bugfix Release
 
 ### Design
-- Remove transition animation when opening cache
 - Increase font size for text input fields
 - Increase font size for some compass elements
 - Use font color with higher contrast in waypoint tab
@@ -18,7 +17,7 @@
 - Fix further creation of user defined caches if some user defines caches have been loaded via GPX
 - Use more common English abbreviation for traditional cache in cache type filter
 
-## Feature Release 2021.08.15:
+## Fonctionnalités de la version 2021.08.15 :
 
 ### Système de filtrage avancé
 - Introduire un nouveau système de filtrage à c:geo, prenant en charge des filtres flexibles, combinables et stockables

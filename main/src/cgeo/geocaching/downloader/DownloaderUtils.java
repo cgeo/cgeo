@@ -177,10 +177,10 @@ public class DownloaderUtils {
      * if yes: checks whether updates are available for the type specified
      *      if yes: ask user to download them all
      *              if yes: trigger download(s)
-     * calls callback with user reaction (true=checked for updates / false=user denied check)
+     * calls callback with user reaction (true=checked for updates / false=user delayed check)
      */
     public static void checkForUpdatesAndDownloadAll(final Activity activity, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
-        SimpleDialog.of(activity).setTitle(title).setMessage(info).confirm((dialog, which) -> {
+        SimpleDialog.of(activity).setTitle(title).setMessage(info).setNegativeButton(TextParam.id(R.string.later)).confirm((dialog, which) -> {
             new CheckForDownloadsTask(activity, title, type).execute();
             callback.call(true);
         }, (dialog, w) -> callback.call(false));

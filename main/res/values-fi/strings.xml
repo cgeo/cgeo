@@ -495,6 +495,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Ei ole olemassa</string>
     <string name="cache_filter_stringfilter_type_is_present">On olemassa</string>
     <string name="cache_filter_stringfilter_type_contains">Sisältää</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Ei sisällä</string>
     <string name="cache_filter_stringfilter_type_starts_with">Alkaa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Päättyy</string>
     <string name="cache_filter_stringfilter_type_pattern">Kuvio</string>
