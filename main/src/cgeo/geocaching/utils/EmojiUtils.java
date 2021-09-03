@@ -28,6 +28,7 @@ import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -75,7 +76,7 @@ public class EmojiUtils {
     public static final int SMILEY_LOVE = 0x1f499;
     public static final int SMILEY_MONOCLE = 0x1f453;
     public static final int SPARKLES = 0x2728;
-    
+
 
     private static final EmojiSet[] symbols = {
         // category symbols
@@ -248,7 +249,6 @@ public class EmojiUtils {
         } else if (defaultRes != 0) {
             dialogButtonRight.setVisibility(View.VISIBLE);
             dialogButtonRight.setIconResource(defaultRes);
-            dialogButtonRight.setIconTint(null);
         }
         dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
 
@@ -256,9 +256,6 @@ public class EmojiUtils {
         final MaterialButton dialogButtonLeft = (MaterialButton) customTitle.dialogButtonLeft;
         if (currentValue != 0 && defaultRes != currentValue) {
             dialogButtonLeft.setIconResource(defaultRes == 0 ? R.drawable.ic_menu_reset : defaultRes);
-            if (defaultRes != 0) {
-                dialogButtonLeft.setIconTint(null);
-            }
             dialogButtonLeft.setVisibility(View.VISIBLE);
             dialogButtonLeft.setOnClickListener(v -> {
                 setNewCacheIcon.call(0);
