@@ -1,12 +1,18 @@
-## Version de maintenance (correction de bugs)
+### Fixes
+- "Add to watchlist" / "Remove from watchlist" failing (Website change)
+- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
+- Date in logbook cut off on larger fonts
+- Filtering in live map for more rare cache types returning only few results
+
+## Bugfix Release 2021.08.28
 
 ### Apparence
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
+- Augmenter la taille de la police pour les champs de saisie de texte
+- Augmenter la taille de la police pour certains éléments de la boussole
+- Utiliser une couleur de police avec contraste élevé dans l'onglet Points de passage
+- Rendre à nouveau visible l'indicateur de log rapide hors-ligne
+- Augmenter la taille de la police pour les champs de saisie de coordonnées
+- Respecter les paramètres systèmes de la taille de police aussi pour les anciennes versions d'Android (5, 6 et 7)
 
 ### Détails de la cache
 - Correction du titre de cache manquant si la cache est ouverte via le géocode ou le lien (changement du site)
