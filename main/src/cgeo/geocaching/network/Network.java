@@ -234,6 +234,20 @@ public final class Network {
     }
 
     /**
+     *  DELETE HTTP request with Json POST DATA
+     *
+     * @param uri the URI to request
+     * @param json the json object to add to the POST request
+     * @return a single with the HTTP response, or an IOException
+     */
+    @NonNull
+    public static Single<Response> deleteJsonRequest(final String uri, final ObjectNode json) {
+        final Request request = new Request.Builder().url(uri).delete(RequestBody.create(MEDIA_TYPE_APPLICATION_JSON,
+                json.toString())).build();
+        return RxOkHttpUtils.request(OK_HTTP_CLIENT, request);
+    }
+
+    /**
      *  POST HTTP request with Json POST DATA
      *
      * @param uri the URI to request

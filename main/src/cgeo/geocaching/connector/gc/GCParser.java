@@ -1257,12 +1257,15 @@ public final class GCParser {
 
         final String logContext = "GCParser.addToOrRemoveFromWatchlist(cache = " + cache.getGeocode() + ", add = " + doAdd + ")";
 
-        final String userToken = getUserToken(cache);
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("userToken", userToken).put("Add", doAdd);
-        final String uri = "https://www.geocaching.com/seek/cache_details.aspx/HandleWatchlistAction";
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("geocacheId", cache.getCacheId());
+        final String uri = "https://www.geocaching.com/api/proxy/web/v1/watchlists/" + (doAdd ? "add" : "remove") + "?geocacheId=" + cache.getCacheId();
 
         try {
-            Network.completeWithSuccess(Network.postJsonRequest(uri, jo));
+            if (doAdd) {
+                Network.completeWithSuccess(Network.postJsonRequest(uri, jo));
+            } else {
+                Network.completeWithSuccess(Network.deleteJsonRequest(uri, jo));
+            }
             Log.i(logContext + ": success");
         } catch (final Exception ex) {
             Log.e(logContext + ": error", ex);
@@ -1278,7 +1281,7 @@ public final class GCParser {
 
     /**
      * This method extracts the amount of people watching on a geocache out of the HTMl website passed to it
-     * @param page Page containing the information about howm many people watching on geocache
+     * @param page Page containing the information about how many people watching on geocache
      * @return Number of people watching geocache, -1 when error
      */
     static int getWatchListCount(final String page) {
