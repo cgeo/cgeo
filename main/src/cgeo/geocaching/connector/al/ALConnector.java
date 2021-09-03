@@ -156,7 +156,8 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public boolean isOwner(@NonNull final Geocache cache) {
-        return false;
+        final String user = Settings.getUserName();
+        return StringUtils.isNotEmpty(user) && StringUtils.equalsIgnoreCase(cache.getOwnerDisplayName(), user);
     }
 
     @Override
