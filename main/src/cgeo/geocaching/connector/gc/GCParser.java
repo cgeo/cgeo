@@ -1240,9 +1240,8 @@ public final class GCParser {
 
         final String logContext = "GCParser.addToOrRemoveFromWatchlist(cache = " + cache.getGeocode() + ", add = " + doAdd + ")";
 
-        final String userToken = getUserToken(cache);
-        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("userToken", userToken).put("Add", doAdd);
-        final String uri = "https://www.geocaching.com/seek/cache_details.aspx/HandleWatchlistAction";
+        final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("geocacheId", cache.getCacheId());
+        final String uri = "https://www.geocaching.com/api/proxy/web/v1/watchlists/" + (doAdd ? "add" : "remove") + "?geocacheId=" + cache.getCacheId();
 
         try {
             Network.completeWithSuccess(Network.postJsonRequest(uri, jo));
