@@ -4,6 +4,9 @@
     <!--
     Preferences used in settings are defined as strings here, so we can use them in the preferences.xml
     and in the Java code as constants and avoid code duplication.
+
+    If you add a preference key which stores sensitive data not to be included in settings backup
+    by default, make sure to add the key to Settings.getSensitivePreferenceKeys()
     -->
 
     <string translatable="false" name="preference_screen_main">fakekey_main_screen</string>
