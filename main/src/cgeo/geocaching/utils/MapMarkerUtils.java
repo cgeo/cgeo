@@ -122,23 +122,24 @@ public final class MapMarkerUtils {
         }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
-        // cache type background color
-        final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
-        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
-        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
-        insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
-
-        // main icon (usually cache type)
+        // marker foreground
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
         // doubleSize = "Big icons for logged caches" enabled AND no offline log
         final boolean doubleSize = showBigSmileys(cacheListType) && (mainMarkerId != cache.getType().markerId);
         if (useEmoji > 0 && !doubleSize) {
+            // custom icon
             if (cPaint == null) {
-                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 0.7f);
+                final int markerAvailable = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 1.025f);
                 cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, (int) (markerAvailable / 20), DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER));
         } else {
+            // cache type background color
+            final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
+            final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
+            DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
+            insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
+            // main icon (type icon / custom cache icon)
             insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, doubleSize));
         }
 
