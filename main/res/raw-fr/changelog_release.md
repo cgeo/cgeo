@@ -1,4 +1,10 @@
-## Version de maintenance (correction de bugs)
+### Correctifs
+- "Add to watchlist" / "Remove from watchlist" failing (Website change)
+- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
+- Date in logbook cut off on larger fonts
+- Filtering in live map for more rare cache types returning only few results
+
+## Correction de bugs, version 2021.08.28
 
 ### Apparence
 - Augmenter la taille de la police pour les champs de saisie de texte
