@@ -2110,6 +2110,7 @@
     <string name="done">Tamamlandı</string>
     <string name="finish">Bitir</string>
     <string name="back">Geri</string>
+    <string name="later">Sonra</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tümünü Seç</string>
 </resources>
