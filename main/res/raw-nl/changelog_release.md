@@ -1,4 +1,10 @@
-## Bugfix release
+### Reparaties
+- "Toevoegen aan watchlist" / "Verwijderen van watchlist" fout (Website wijziging)
+- "Toevoegen aan favoriet" / "Verwijderen uit favoriet" knoppen niet getoond na "gevonden" log
+- Datum in het journaal is op grotere lettertypen afgesneden
+- Filteren op de live kaart voor meer zeldzame cache types gaf slechts enkele resultaten
+
+## Bugfix Release 2021.08.28
 
 ### Ontwerp
 - Vergroot lettergrootte voor tekstinvoervelden
