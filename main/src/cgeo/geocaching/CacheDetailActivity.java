@@ -1538,9 +1538,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // Add/remove to Favorites is only possible if the cache has been found
             if (!cache.isFound()) {
-                binding.addToFavpoint.setEnabled(false);
                 binding.addToFavpoint.setVisibility(View.GONE);
-                binding.removeFromFavpoint.setEnabled(false);
                 binding.removeFromFavpoint.setVisibility(View.GONE);
             }
         }
