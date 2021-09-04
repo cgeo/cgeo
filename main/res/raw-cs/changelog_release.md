@@ -1,10 +1,10 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Opravy
+- "Přidat do sledovaných" / "Odebrat se sledovaných" selhání (změna na webu)
+- "Přidat do oblíbených" / "Odebrat z oblíbených" tlačítka se nezobrazí po zaznamenaném „nálezu“
+- Datum v logbooku u větších písmen oříznuto
+- Filtrování v živé mapě pro více neobvyklých typů kešek vrací pouze několik výsledků
 
-## Bugfix Release 2021.08.28
+## Oprava chyb vydání 2021.08.28
 
 ### Vzhled
 - Zvětšena velikost písma pro pole pro zadávání textu
