@@ -1,8 +1,8 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Reparaties
+- "Toevoegen aan watchlist" / "Verwijderen van watchlist" fout (Website wijziging)
+- "Toevoegen aan favoriet" / "Verwijderen uit favoriet" knoppen niet getoond na "gevonden" log
+- Datum in het journaal is op grotere lettertypen afgesneden
+- Filteren op de live kaart voor meer zeldzame cache types gaf slechts enkele resultaten
 
 ## Bugfix Release 2021.08.28
 
