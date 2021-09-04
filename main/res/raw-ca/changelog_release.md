@@ -1,29 +1,29 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Correccions
+- Error en "Afegeix a la llista de seguiment" / "Elimina de la llista de seguiment" (canvi de lloc web)
+- Els botons "Afegeix als preferits" / "Elimina dels preferits" no apareixen després del registre "trobat"
+- Data del registre tallada en tipus de lletra més grans
+- El filtrat al mapa en temps real per obtenir tipus de catxés més rars proporciona pocs resultats
 
-## Bugfix Release 2021.08.28
+## Versió de correcció d'errors 2021.08.28
 
-### Design
-- Increase font size for text input fields
-- Increase font size for some compass elements
-- Use font color with higher contrast in waypoint tab
-- Make quick offline log check mark visible again
-- Increase font size for coordinate input fields
-- Respect system font size settings also on older Android versions (5,6 and 7)
+### Disseny
+- Augmentada la mida de la lletra per als camps d’entrada de text
+- Augmentada la mida de la lletra per a alguns elements de la brúixola
+- Utilitzat el color de la lletra amb un contrast més alt a la pestanya waypoint
+- Tornat a fer visible la marca de verificació del registre fora de línia
+- Augmentada la mida del tipus de lletra per als camps d’entrada de coordenades
+- Respectada la configuració de la mida del tipus de lletra del sistema també en versions anteriors d'Android (5,6 i 7)
 
 ### Detalls del catxé
-- Fix missing cache title if cache opened via geocode or link (website change)
-- Fix missing cache description on some caches
+- Corregit el títol del catxé que faltava si s'obria mitjançant un geocodi o un enllaç (canvi de lloc web)
+- Corregiu la descripció del catxé que faltava en alguns catxés
 
 ### Altres
-- Show premium caches again in search results of basic members
-- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
-- Use more common English abbreviation for traditional cache in cache type filter
+- Mostra de nou els catxés premium als resultats de cerca de membres bàsics
+- Corregit la creació de catxés definides per l'usuari si alguns usuaris defineixen que s'han carregat catxés mitjançant GPX
+- Utilitzada una abreviatura més comuna en anglès per el catxé tradicional al filtre de tipus de catxés
 
-## Feature Release 2021.08.15:
+## Versió de funcions 2021.08.15:
 
 ### Sistema de filtratge avançat
 - Presentació d’un nou sistema de filtratge a C:geo, que admet filtres flexibles, combinables i emmagatzemables
