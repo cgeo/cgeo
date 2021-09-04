@@ -168,8 +168,8 @@
     <string name="log_problem_none">Aucun problème</string>
     <string name="log_problem_needs_maintenance_label">Nécessite une maintenance</string>
     <string name="log_problem_needs_maintenance_text">Ce géocacheur a signalé qu’il y a un problème avec cette cache.</string>
-    <string name="log_problem_log_full_label">Le journal de visites est plein</string>
-    <string name="log_problem_log_full_text">Ce géocacheur a signalé que le journal de visites est plein.</string>
+    <string name="log_problem_log_full_label">Le carnet de visites est plein</string>
+    <string name="log_problem_log_full_text">Ce géocacheur a signalé que le carnet de visites est plein.</string>
     <string name="log_problem_damaged_label">Le conteneur est abîmé</string>
     <string name="log_problem_damaged_text">Ce géocacheur a signalé que le conteneur est abîmé.</string>
     <string name="log_problem_missing_label">La cache peut être absente</string>
