@@ -1,10 +1,10 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Fehlerbehebungen
+- "Zur Watchlist hinzufügen" / "Aus der Watchlist entfernen" fehlgeschlagen (Website-Änderung)
+- "Zu Favoriten hinzufügen" / "Aus Favoriten entfernen" Buttons nicht angezeigt nach dem "Gefunden"-Log
+- Datum im Logbuch bei größeren Schriften abgeschnitten
+- Filtern in der Live-Karte ergab für seltenere Cache-Typen zu wenig Ergebnisse
 
-## Bugfix Release 2021.08.28
+## Bugfix-Release 2021.08.28
 
 ### Design
 - Schriftgröße für Texteingabefelder vergrößert
