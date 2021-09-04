@@ -1,4 +1,10 @@
-## Bugfix Release
+### Düzeltmeler
+- ''Takip listesine ekle'' / ''Takip listesinde çıkar'' hatası (Web sitesi değişikliği)
+- ''Favorilere ekle'' / ''Favorilerimden çıkar'' seçenekleri ''Buldum'' kaydı girildikten sonra gösterilmiyor
+- Date in logbook cut off on larger fonts
+- Filtering in live map for more rare cache types returning only few results
+
+## Bugfix Release 2021.08.28
 
 ### Dizayn
 - Increase font size for text input fields
