@@ -1,8 +1,8 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Διορθώσεις
+- H "Προσθήκη στη λίστα παρακολούθησης" ή η "Αφαίρεση από τη λίστα παρακολούθησης" απέτυχε (αλλαγή ιστοσελίδας)
+- Το "Προσθήκη στα αγαπημένα" / "Αφαίρεση από τα αγαπημένα" κουμπί δεν εμφανίζεται μετά την καταγραφή "Βρέθηκε"
+- Η Ημερομηνία στο ημερολόγιο χάνεται σε μεγαλύτερες γραμματοσειρές
+- Το Φιλτρο σε ζωντανό χάρτη για πιο σπάνιους τύπους κρυπτών επιστρέφει ελάχιστα αποτελέσματα
 
 ## Bugfix Release 2021.08.28
 
