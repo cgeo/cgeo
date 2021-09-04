@@ -1,6 +1,6 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
+### Düzeltmeler
+- ''Takip listesine ekle'' / ''Takip listesinde çıkar'' hatası (Web sitesi değişikliği)
+- ''Favorilere ekle'' / ''Favorilerimden çıkar'' seçenekleri ''Buldum'' kaydı girildikten sonra gösterilmiyor
 - Date in logbook cut off on larger fonts
 - Filtering in live map for more rare cache types returning only few results
 
