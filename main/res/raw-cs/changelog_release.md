@@ -1,4 +1,10 @@
-## Vydání opravy chyb
+### Opravy
+- "Přidat do sledovaných" / "Odebrat se sledovaných" selhání (změna na webu)
+- "Přidat do oblíbených" / "Odebrat z oblíbených" tlačítka se nezobrazí po zaznamenaném „nálezu“
+- Datum v logbooku u větších písmen oříznuto
+- Filtrování v živé mapě pro více neobvyklých typů kešek vrací pouze několik výsledků
+
+## Oprava chyb vydání 2021.08.28
 
 ### Vzhled
 - Zvětšena velikost písma pro pole pro zadávání textu
