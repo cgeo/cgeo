@@ -1,4 +1,10 @@
-## Virheenkorjausversio
+### Fixes
+- "Add to watchlist" / "Remove from watchlist" failing (Website change)
+- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
+- Date in logbook cut off on larger fonts
+- Filtering in live map for more rare cache types returning only few results
+
+## Bugfix Release 2021.08.28
 
 ### Ulkoasu
 - Lisää tekstin syöttökenttien kirjasimen kokoa
