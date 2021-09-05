@@ -3,5 +3,9 @@
 - Novo: Adicionado Mapy.cz como fonte de mapa online
 - Novo: Rota individual - Permite definir um novo início e inverter a rota
 
-### Outro
-- Novo: Preenche automaticamente o campo 'pesquisar por código GC' se o conteúdo na área de transferência puder ser interpretado como um código GC válido
+### Cache details
+- Fix: Detect if current user is owner for lab adventures
+
+### Other
+- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+- Change: Hide sensitive data in "view settings"
