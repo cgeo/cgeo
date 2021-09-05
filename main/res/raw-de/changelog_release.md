@@ -1,4 +1,10 @@
-## Bugfix-Release
+### Fehlerbehebungen
+- "Zur Watchlist hinzufügen" / "Aus der Watchlist entfernen" fehlgeschlagen (Website-Änderung)
+- "Zu Favoriten hinzufügen" / "Aus Favoriten entfernen" Buttons nicht angezeigt nach dem "Gefunden"-Log
+- Datum im Logbuch bei größeren Schriften abgeschnitten
+- Filtern in der Live-Karte ergab für seltenere Cache-Typen zu wenig Ergebnisse
+
+## Bugfix-Release 2021.08.28
 
 ### Design
 - Schriftgröße für Texteingabefelder vergrößert
