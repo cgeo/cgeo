@@ -31,6 +31,7 @@ import androidx.annotation.NonNull;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -92,6 +93,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         private HashMap<String, Integer> mapFirstPosition;
         private HashMap<String, Integer> mapSection;
         private String[] sections;
+        private final HashSet<String> sensitiveKeys = Settings.getSensitivePreferenceKeys(getContext());
 
         SettingsAdapter(final Activity activity) {
             super(activity, 0, items);
@@ -116,6 +118,7 @@ public class ViewSettingsActivity extends AbstractActivity {
             }
         }
 
+        @NonNull
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
             if (null == convertView) {
@@ -124,7 +127,7 @@ public class ViewSettingsActivity extends AbstractActivity {
 
             final KeyValue keyValue = items.get(position);
             ((TextView) v.findViewById(R.id.title)).setText(keyValue.key);
-            ((TextView) v.findViewById(R.id.detail)).setText(keyValue.value);
+            ((TextView) v.findViewById(R.id.detail)).setText(sensitiveKeys.contains(keyValue.key) ? "******" : keyValue.value);
 
             final MaterialButton buttonDelete = v.findViewById(R.id.button_right);
             buttonDelete.setIconResource(R.drawable.ic_menu_delete);

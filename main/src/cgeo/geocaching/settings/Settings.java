@@ -56,6 +56,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -1887,6 +1888,26 @@ public class Settings {
 
     public static int getListInitialLoadLimit() {
         return getInt(R.string.pref_list_initial_load_limit, getKeyInt(R.integer.list_load_limit_default));
+    }
+
+    /** return a list of preference keys containing sensitive data */
+    public static HashSet<String> getSensitivePreferenceKeys(final Context context) {
+        final HashSet<String> sensitiveKeys = new HashSet<>();
+        Collections.addAll(sensitiveKeys,
+            context.getString(R.string.pref_username), context.getString(R.string.pref_password),
+            context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
+            context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
+            context.getString(R.string.pref_twitter), context.getString(R.string.pref_temp_twitter_token_secret), context.getString(R.string.pref_temp_twitter_token_public), context.getString(R.string.pref_twitter_token_secret), context.getString(R.string.pref_twitter_token_public),
+            context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
+            context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
+            context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
+            context.getString(R.string.pref_ocus_tokensecret), context.getString(R.string.pref_ocus_tokenpublic), context.getString(R.string.pref_temp_ocus_token_secret), context.getString(R.string.pref_temp_ocus_token_public),
+            context.getString(R.string.pref_ocro_tokensecret), context.getString(R.string.pref_ocro_tokenpublic), context.getString(R.string.pref_temp_ocro_token_secret), context.getString(R.string.pref_temp_ocro_token_public),
+            context.getString(R.string.pref_ocuk2_tokensecret), context.getString(R.string.pref_ocuk2_tokenpublic), context.getString(R.string.pref_temp_ocuk2_token_secret), context.getString(R.string.pref_temp_ocuk2_token_public),
+            context.getString(R.string.pref_su_tokensecret), context.getString(R.string.pref_su_tokenpublic), context.getString(R.string.pref_temp_su_token_secret), context.getString(R.string.pref_temp_su_token_public),
+            context.getString(R.string.pref_fakekey_geokrety_authorization)
+        );
+        return sensitiveKeys;
     }
 
 }
