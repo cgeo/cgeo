@@ -34,7 +34,7 @@ public enum CacheType {
     PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.string.ape_short, R.drawable.type_ape, "9", R.color.cacheType_special),
     GCHQ("gchq", "Geocaching HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.string.gchq_short, R.drawable.type_hq, "3773", R.color.cacheType_special),
     GCHQ_CELEBRATION("gchqceleb", "Geocaching HQ Celebration", "af820035-787a-47af-b52b-becc8b0c0c88", R.string.gchqceleb, R.string.gchqceleb_short, R.drawable.type_specialevent, "3774", R.color.cacheType_event),
-    GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.string.gps_short, R.drawable.type_event, "1304", R.color.cacheType_event),
+    GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.string.gps_short, R.drawable.type_maze, "1304", R.color.cacheType_special),
     BLOCK_PARTY("block", "Geocaching HQ Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.string.block_short, R.drawable.type_specialevent, "4738", R.color.cacheType_event),
     LOCATIONLESS("locationless", "Locationless (Reverse) Cache", "8f6dd7bc-ff39-4997-bd2e-225a0d2adf9d", R.string.locationless, R.string.locationless_short, R.drawable.type_locationless, "12", R.color.cacheType_unknown), // icon missing
     ADVLAB("advlab", "Lab Cache", "", R.string.advlab, R.string.advlab_short, R.drawable.type_advlab, "", R.color.cacheType_lab), // pattern "Lab Cache" is used by https://gcutils.de/lab2gpx/
