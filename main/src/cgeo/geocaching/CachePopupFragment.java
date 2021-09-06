@@ -17,6 +17,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -25,7 +26,6 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -136,8 +136,9 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return false;
             });
 
-            final LinearLayout layout = view.findViewById(R.id.details_list);
-            details = new CacheDetailsCreator(getActivity(), layout);
+            final TextView title = view.findViewById(R.id.title);
+            title.setText(TextUtils.coloredCacheText(cache, cache.getName()));
+            details = new CacheDetailsCreator(getActivity(), view.findViewById(R.id.details_list));
 
             addCacheDetails(false);
 

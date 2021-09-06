@@ -22,6 +22,16 @@
             android:layout_height="wrap_content"
             android:orientation="vertical" >
 
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorText"
+                android:textSize="@dimen/textSize_headingPrimary"
+                android:gravity="center">
+            </TextView>
+            <View style="@style/separator_horizontal" />
+
             <LinearLayout
                 android:id="@+id/details_list"
                 android:layout_width="fill_parent"
