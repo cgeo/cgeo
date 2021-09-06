@@ -122,7 +122,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     protected final void addCacheDetails(final boolean showGeocode) {
         assert cache != null;
 
-        details.add(R.string.cache_name, TextUtils.coloredCacheText(cache, cache.getName()));
+//        details.add(R.string.cache_name, TextUtils.coloredCacheText(cache, cache.getName()));
 
         // cache type
         final String cacheType = cache.getType().getL10n();
