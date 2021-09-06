@@ -81,7 +81,8 @@ public final class MapMarkerUtils {
             .append(cache.isFound())
             .append(cache.isDNF())
             .append(cache.hasWillAttendForFutureEvent())
-            .append(showUserModifiedCoords(cache))
+            .append(cache.hasUserModifiedCoords())
+            .append(cache.hasFinalDefined())
             .append(cache.getPersonalNote())
             .append(cache.hasLogOffline())
             .append(!cache.getLists().isEmpty())
@@ -164,9 +165,11 @@ public final class MapMarkerUtils {
                 insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT));
             }
         }
-        // bottom-right: user modified coords
-        if (showUserModifiedCoords(cache)) {
+        // bottom-right: user modified coords / final waypoint defined
+        if (cache.hasUserModifiedCoords()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
+        } else if (cache.hasFinalDefined()) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT));
         }
         // bottom-left: personal note
         if (cache.getPersonalNote() != null) {
@@ -277,12 +280,13 @@ public final class MapMarkerUtils {
         int dotIcon = -1;
         int tintColor;
 
+        // Background color: Cache type color / disabled
         tintColor = cache.getType().typeColor;
-
         if (cache.isArchived() || cache.isDisabled()) {
             tintColor = R.color.cacheType_disabled;
         }
 
+        // Overlay icon: 1. Found, 2. Offline Log, 3. Modified Coordinates, 4. Has Final Waypoint
         if (cache.isFound()) {
             dotIcon = R.drawable.dot_found;
             tintColor = R.color.dotBg_found;
@@ -313,13 +317,13 @@ public final class MapMarkerUtils {
             }
         } else if (cache.hasUserModifiedCoords()) {
             dotIcon = R.drawable.dot_marker_usermodifiedcoords;
+        } else if (cache.hasFinalDefined()) {
+            dotIcon = R.drawable.dot_marker_hasfinal;
         }
 
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
         final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null));
-        if (tintColor != -1) {
-            DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
-        }
+        DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
