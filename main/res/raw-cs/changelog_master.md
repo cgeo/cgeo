@@ -7,5 +7,6 @@
 - Oprava: Zjištění, zda je aktuální uživatel vlastníkem Adventure Lab kešek
 
 ### Ostatní
-- Novinka: Automaticky předvyplní hledání podle geokódu, pokud je obsah schránky rozpoznán jako platný geokód
-- Změna: Skrýt citlivá data v "nastavení zobrazení"
+- Novinka: Povoleno nahrávání kešek do záložek (pouze pro prémiové členy GC)
+- Novinka: Automatické předvyplnění hledání podle geokódu, pokud je obsah schránky rozpoznán jako platný geokód
+- Změna: Skrytí citlivých dat v "nastavení zobrazení"
