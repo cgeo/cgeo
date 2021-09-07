@@ -1396,7 +1396,7 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Rechercher par Adresse</string>
     <string name="search_geo">Code de la cache</string>
-    <string name="search_geo_button">Rechercher la cache</string>
+    <string name="search_geo_button">Rechercher par géocode</string>
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
     <string name="search_kw">Mots-clés</string>
     <string name="search_kw_prefill">Mot-clé</string>
@@ -1984,7 +1984,7 @@
     <string name="routingmode_bike">À vélo</string>
     <string name="routingmode_car">En voiture</string>
     <!-- view settings -->
-    <string name="view_settings">Afficher les paramètres</string>
+    <string name="view_settings">Paramètres d\'affichage</string>
     <string name="delete_setting">Supprimer le paramètre</string>
     <string name="delete_setting_warning">Supprimer la clé \"%s\" des paramètres?\n\nCette opération ne peut pas être annulée.</string>
     <string name="edit_setting">Modifier le paramètre \"%s\"</string>
