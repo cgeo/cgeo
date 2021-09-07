@@ -7,5 +7,6 @@
 - Korjaa: Tunnista jos nykyinen käyttäjä on Adventure Labin omistaja
 
 ### Muu
-- Uusi: 'Etsi geokoodin avulla' täytetään automaattisesti, jos leikepöydän sisältö voidaan jäsentää kelvolliseksi geokoodiksi
+- Uusi: Salli kätköjen lataaminen kirjanmerkkiluetteloon (saatavilla vain GC Premium-jäsenille)
+- Uusi: automaattisesti esitäytetään 'geokoodauksen haku', jos leikepöydän sisältö voidaan jäsentää kelvolliseksi geokoodaukseksi
 - Muutos: Piilota arkaluontoiset "näytä asetukset" -kohdassa
