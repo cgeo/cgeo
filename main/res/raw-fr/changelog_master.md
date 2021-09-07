@@ -1,11 +1,12 @@
  
 ### Carte
-- Nouveau : Ajout de Mapy.cz comme source de carte en ligne
-- Nouveau: Itinéraire individuel : Permettre la configuration d'un nouveau départ et inverser la route
+- Nouveauté : Ajout de Mapy.cz comme source de carte en ligne
+- Nouveauté : Itinéraire personnel : permet de définir un nouveau départ et d'inverser la route
 
-### Cache details
-- Fix: Detect if current user is owner for lab adventures
+### Détails de la cache
+- Corrigé : Détecter si l'utilisateur courant est propriétaire de lab adventures
 
-### Other
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Change: Hide sensitive data in "view settings"
+### Divers
+- Nouveauté : Autoriser l'ajout des caches dans les listes de favoris (disponible uniquement pour les membres Geocaching premium)
+- Nouveauté : Préremplir "Rechercher par géocode" lorsque le presse-papiers contient un géocode valide
+- Modification : Masquer les données sensibles dans "Paramètres d'affichage"
