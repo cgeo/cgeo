@@ -20,7 +20,12 @@ import cgeo.geocaching.utils.TextUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.DownloadManager;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -86,6 +91,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         public void onBindViewHolder(final ViewHolder holder, final int position) {
             final Download offlineMap = activity.getQueries().get(position);
             holder.binding.label.setText(offlineMap.getName());
+            holder.binding.progressHorizontal.setVisibility(View.GONE);
             if (offlineMap.getIsDir()) {
                 holder.binding.info.setText(R.string.downloadmap_directory);
                 holder.binding.action.setImageResource(R.drawable.ic_menu_folder);
@@ -103,14 +109,43 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                     + Formatter.SEPARATOR + offlineMap.getTypeAsString());
                 holder.binding.action.setImageResource(offlineMap.getIconRes());
                 holder.binding.getRoot().setOnClickListener(v -> {
-                    // return to caller with URL chosen
-                    final Intent intent = new Intent();
-                    intent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, offlineMap.getUri());
-                    intent.putExtra(DownloaderUtils.RESULT_SIZE_INFO, offlineMap.getSizeInfo());
-                    intent.putExtra(DownloaderUtils.RESULT_DATE, offlineMap.getDateInfo());
-                    intent.putExtra(DownloaderUtils.RESULT_TYPEID, offlineMap.getType().id);
-                    setResult(RESULT_OK, intent);
-                    finish();
+
+                    if (offlineMap.getUri() != null) {
+                        DownloaderUtils.triggerDownload(DownloadSelectorActivity.this, R.string.downloadmap_title,
+                                offlineMap.getType().id, offlineMap.getUri(), "", offlineMap.getSizeInfo(), null,
+                                id -> {
+                                    final DownloadManager manager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
+                                    if (manager == null) {
+                                        return;
+                                    }
+                                    holder.binding.progressHorizontal.show();
+                                    final Thread thread = new Thread(() -> {
+                                        while (!Thread.currentThread().isInterrupted()) {
+                                            final DownloadManager.Query q = new DownloadManager.Query();
+                                            q.setFilterById(id);
+                                            final Cursor cursor = manager.query(q);
+                                            cursor.moveToFirst();
+                                            final int bytesDownloaded = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
+                                            final int bytesTotal = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
+                                            final int progress = (int) ((bytesDownloaded * 100L) / bytesTotal);
+
+                                            runOnUiThread(() -> holder.binding.progressHorizontal.setProgressCompat(progress, true));
+                                            cursor.close();
+                                        }
+                                    });
+                                    thread.start();
+                                    final BroadcastReceiver onComplete = new BroadcastReceiver() {
+                                        public void onReceive(final Context context, final Intent intent) {
+                                            if (intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1) == id) {
+                                                holder.binding.progressHorizontal.hide();
+                                                unregisterReceiver(this);
+                                                thread.interrupt();
+                                            }
+                                        }
+                                    };
+                                    registerReceiver(onComplete, new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
+                                });
+                    }
                 });
             }
         }
