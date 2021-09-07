@@ -7,5 +7,6 @@
 - Oplossing: Detecteren of de huidige gebruiker eigenaar is van lab avonturen
 
 ### Overig
-- Nieuw: vul automatisch 'zoeken op geocode' in als klembord inhoud kan worden verwerkt als geldige geocode
-- Verandering: Verberg gevoelige gegevens in "weergave instellingen"
+- New: Allow upload of caches to bookmark list (only available for GC premium members)
+- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+- Change: Hide sensitive data in "view settings"
