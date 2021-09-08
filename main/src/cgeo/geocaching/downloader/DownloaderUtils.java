@@ -44,9 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DownloaderUtils {
 
-    public static final int REQUEST_CODE = 47131;
     public static final String RESULT_CHOSEN_URL = "chosenUrl";
-    public static final String RESULT_SIZE_INFO = "sizeInfo";
     public static final String RESULT_DATE = "dateInfo";
     public static final String RESULT_TYPEID = "typeId";
 
@@ -56,7 +54,7 @@ public class DownloaderUtils {
 
     public static boolean onOptionsItemSelected(final Activity activity, final int id) {
         if (id == R.id.menu_download_offlinemap) {
-            activity.startActivityForResult(new Intent(activity, DownloadSelectorActivity.class), REQUEST_CODE);
+            activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
             return true;
         }
         return false;
