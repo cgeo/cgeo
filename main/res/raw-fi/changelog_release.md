@@ -1,10 +1,10 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Korjaukset
+- "Lisää seurantalistaan" / "Poista seurantalistalta" -toimintojen epäonnistuminen (verkkosivuston muutos)
+- "Lisää suosikiksi" / "Poista suosikeista" -painikkeet eivät näy "Löytyi"-lokin jälkeen
+- Päivämäärä lokikirjassa katkeaa suuremmilla fonteilla
+- Harvinaisempien kätkötyyppien suodatus palauttaa vain muutamia tuloksia
 
-## Bugfix Release 2021.08.28
+## Virheenkorjausversio 2021.08.28
 
 ### Ulkoasu
 - Lisää tekstin syöttökenttien kirjasimen kokoa
