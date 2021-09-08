@@ -1,8 +1,8 @@
 ### Correctifs
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+- "Ajouter à la liste de suivi" / "Supprimer de la liste de suivi" en erreur (modification du site)
+- Les boutons "Ajouter aux favoris" / "Supprimer des favoris" n'apparaissaient plus après l'envoi d'un log "Trouvé"
+- La date dans le carnet de visites était tronquée pour les polices de grande taille
+- Filtrage sur la carte temps réel pour les types de caches rares retournant peu de résultats
 
 ## Correction de bugs, version 2021.08.28
 
