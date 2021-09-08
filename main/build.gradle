@@ -190,6 +190,10 @@ android {
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
+
+        // analyze all dependency modules in parallel and produce a single report
+        // including issues from the app and all of its dependencies
+        checkDependencies true
     }
 
     packagingOptions {
@@ -639,5 +643,5 @@ tasks.register('checkstyle', Checkstyle) {
 }
 
 tasks.named('check') {
-    dependsOn tasks.named('checkstyle')
+    mustRunAfter tasks.named('checkstyle')
 }
