@@ -2,6 +2,7 @@
 ### Harita
 - Yeni: Mapy.cz çevrimiçi harita kaynağı olarak eklendi
 - Yeni: Özgün rota: Rotalara yeni başlangıç ekleme ve tersine çevirme özelliği
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Geocache ayrıntıları
 - Fix: Detect if current user is owner for lab adventures
