@@ -2,6 +2,7 @@
 ### Mapa
 - Novetat: s'ha afegit Mapy.cz com a font de mapa en línia
 - Novetat: ruta individual: permet configurar un nou inici i invertir la ruta
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache details
 - Fix: Detect if current user is owner for lab adventures
