@@ -2,6 +2,7 @@
 ### Karta
 - Nyhet: Mapy.cz tillagd som online-kartkälla
 - Nyhet: Individuell navigering: Tillåt en ny start punkt och omvändning av rutten
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache details
 - Fix: Detect if current user is owner for lab adventures
