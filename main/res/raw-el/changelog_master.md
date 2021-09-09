@@ -2,6 +2,7 @@
 ### Χάρτης
 - Νέο: Προστέθηκε το Mapy.cz ως πηγή online χάρτη
 - Νέο: Μεμονωμένη διαδρομή: Να επιτρέπεται η ρύθμιση μιας νέας αρχής και η αντιστροφή της διαδρομής
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache details
 - Fix: Detect if current user is owner for lab adventures
