@@ -2,6 +2,7 @@
 ### Karte
 - Neu: Mapy.cz als Online-Kartenquelle hinzugefügt
 - Neu: Individuelle Route: Setzen eines neuen Startpunkts und Umdrehen der Route ergänzt
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache details
 - Fix: Detect if current user is owner for lab adventures
