@@ -50,4 +50,12 @@
         tools:text="info"
         android:maxLines="2" />
 
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:visibility="gone"
+        android:id="@+id/progress_horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/action"
+        android:indeterminate="true" />
+
 </RelativeLayout>

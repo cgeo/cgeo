@@ -13,7 +13,6 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.su.SuConnector;
-import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -865,10 +864,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return;
         }
         if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-
-        if (DownloaderUtils.onActivityResult(this, requestCode, resultCode, data)) {
             return;
         }
 

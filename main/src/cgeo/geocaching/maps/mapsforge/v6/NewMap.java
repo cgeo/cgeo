@@ -1627,7 +1627,6 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
-        DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {
