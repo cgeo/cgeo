@@ -2,6 +2,7 @@
 ### Mappa
 - Nuovo: È stata aggiunta Mapy.cz come fonte della mappa online
 - Nuovo: Percorso personalizzato: Consente di impostare un nuovo inizio e invertire il percorso
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache details
 - Fix: Detect if current user is owner for lab adventures
