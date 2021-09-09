@@ -2,6 +2,7 @@
 ### Mapa
 - Novo: Adicionado Mapy.cz como fonte de mapa online
 - Novo: Rota individual - Permite definir um novo início e inverter a rota
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache details
 - Fix: Detect if current user is owner for lab adventures
