@@ -2,6 +2,7 @@
 ### Mapa
 - Novinka: Přidány Mapy.cz jako online zdroj map
 - Novinka: Individuální trasa: Povoluje nastavení nového začátku a otočení směru trasy
+- Novinka: Nyní lze spustit více stahování offline map najednou
 
 ### Detaily kešky
 - Oprava: Zjištění, zda je aktuální uživatel vlastníkem Adventure Lab kešek
