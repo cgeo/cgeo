@@ -2,7 +2,7 @@
 ### Kaart
 - Nieuw: Toegevoegd Mapy.cz als online kaartbron
 - Nieuw: Individuele route: Toestaan een nieuw begin in te stellen en de route om te keren
-- New: Multiple offline map downloads can now be triggered at once
+- Nieuw: Meerdere offline kaart downloads kunnen nu in één keer worden geactiveerd
 
 ### Cache details
 - Oplossing: Detecteren of de huidige gebruiker eigenaar is van lab avonturen
