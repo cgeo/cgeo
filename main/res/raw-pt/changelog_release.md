@@ -1,10 +1,10 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### Correcções
+- Falha em "Adicionar à lista de observação" / "Remover da lista de observação" (alteração no sítio web)
+- Os botões "Adicionar aos favoritos" / "Remover dos favoritos" não são exibidos após o registo de "encontrado"
+- Data cortada no livro de registos, em fontes maiores
+- No mapa ao vivo, filtrar por tipos de cache mais raros retorna apenas alguns resultados
 
-## Bugfix Release 2021.08.28
+## Versão de Correcção de Erros 2021.08.28
 
 ### Aparência
 - Increase font size for text input fields
