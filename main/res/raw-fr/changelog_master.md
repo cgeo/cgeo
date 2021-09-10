@@ -2,7 +2,7 @@
 ### Carte
 - Nouveauté : Ajout de Mapy.cz comme source de carte en ligne
 - Nouveauté : Itinéraire personnel : permet de définir un nouveau départ et d'inverser la route
-- Nouveauté : Plusieurs téléchargements de cartes hors-ligne peuvent maintenant être déclenchés simultanément
+- Nouveau : Il est maintenant possible de lancer le téléchargement de plusieurs cartes hors-ligne en une seule fois
 
 ### Détails de la cache
 - Corrigé : Détecter si l'utilisateur courant est propriétaire de lab adventures
