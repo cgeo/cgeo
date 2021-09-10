@@ -4,10 +4,10 @@
 - Novo: Rota individual - Permite definir um novo início e inverter a rota
 - New: Multiple offline map downloads can now be triggered at once
 
-### Cache details
-- Fix: Detect if current user is owner for lab adventures
+### Detalhes da cache
+- Correcção: Detecta se o utilizador actual é o proprietário de Adventure Labs
 
-### Other
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Change: Hide sensitive data in "view settings"
+### Outro
+- Novo: Permitir o envio de caches para a lista de marcadores (disponível apenas para membros premium)
+- Novo: Preenche automaticamente o campo 'pesquisar por código GC' se o conteúdo na área de transferência puder ser interpretado como um código GC válido
+- Alteração: Ocultar dados confidenciais em "Definições de visualização"
