@@ -45,20 +45,17 @@ public final class LocalizationUtils {
     }
 
     public static String getStringWithFallback(@StringRes final int resId, final String fallback, final Object ... params) {
-        if (APPLICATION_CONTEXT == null) {
-            return "(NoCtx)" + (fallback == null ? "" : fallback) + "[" + StringUtils.join(params, ";") + "]";
+        if ((APPLICATION_CONTEXT == null || resId == 0) && fallback == null) {
+            return "(NoCtx/NoResId/NoFallback)[" + StringUtils.join(params, ";") + "]";
         }
         try {
-            if (resId == 0) {
-                if (fallback == null) {
-                    return "--";
-                }
+            if (resId == 0 || APPLICATION_CONTEXT == null) {
                 return String.format(fallback, params);
             }
             return APPLICATION_CONTEXT.getString(resId, params);
         } catch (IllegalFormatException | Resources.NotFoundException e) {
             Log.w("Problem trying to format '" + resId + "/" + fallback + "' with [" + StringUtils.join(params, ";") + "]", e);
-            return "(noformat)" + fallback;
+            return (fallback == null ? "" : fallback) + ":" + StringUtils.join(params, ";");
         }
     }
 
