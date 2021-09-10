@@ -2,7 +2,7 @@
 ### Kartta
 - Uusi: Lisätty Mapy.cz -onlinekarttalähde
 - Uusi: Yksittäinen reitti: Salli uuden aloituspisteen määritys ja reitin kääntäminen
-- New: Multiple offline map downloads can now be triggered at once
+- Uusi: Useita offline-karttoja voidaan nyt ladata kerralla
 
 ### Kätkön tiedot
 - Korjaa: Tunnista jos nykyinen käyttäjä on Adventure Labin omistaja
