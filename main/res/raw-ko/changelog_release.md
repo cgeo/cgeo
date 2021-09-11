@@ -1,10 +1,10 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
+### 수정
+- "관심 목록에 추가" / "관심 목록에서 제거" 실패했음(웹사이트 변경)
+- "호감점수 추가" / "호감점수 제거" 버튼이 "찾음" 로그 이후에 표시되지 않음
+- 큰 폰트에서 잘린 로그북의 날짜
+- 적은 수의 결과만 반환하는 더 희귀한 캐시 유형에 대한 라이브 맵 필터링
 
-## Bugfix Release 2021.08.28
+## 버그 수정 릴리스 2021.08.28
 
 ### 디자인
 - 텍스트 입력 필드의 글꼴 크기 늘리기
