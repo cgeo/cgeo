@@ -149,7 +149,6 @@
     <string name="log_problem_archive_text">Dëse Geocacher huet gemellt datt dëse Cache archivéiert misst ginn. Ee Reviewer gouf benoriichtegt.</string>
     <string name="log_image_scale_option_noscaling">Keng Skaléierung</string>
     <string name="log_image_titleprefix">Bild</string>
-    <string name="datetime_clear_button">Läschen</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Iwwersetzen op %s</string>
     <string name="translate_to_english">Iwwersetzen op Englesch</string>
@@ -345,23 +344,6 @@
     <string name="caches_copy_all">Alles kopéieren</string>
     <string name="caches_map_locus_export">Op Locus exportéieren</string>
     <string name="caches_filter_title">Filter no</string>
-    <string name="caches_filter_size">Gréisst</string>
-    <string name="caches_filter_track">Mat Trackables</string>
-    <string name="caches_filter_clear">Filteren zrécksetzen</string>
-    <string name="caches_filter_modified">Mat modifizéierte Koordinaten</string>
-    <string name="caches_filter_offline_log">Mat offline Log</string>
-    <string name="caches_filter_distance">Distanz</string>
-    <string name="caches_filter_personal_note">Mat perséinlecher Notiz</string>
-    <string name="caches_filter_popularity">Favoritten</string>
-    <string name="caches_filter_popularity_ratio">Favoritten [%]</string>
-    <string name="caches_filter_personal_data">Mat perséinlechen Daten</string>
-    <string name="caches_filter_rating">Mat Bewäertung</string>
-    <string name="caches_filter_own_rating">Mat eegener Bewäertung</string>
-    <string name="caches_filter_multi_listing">Heefeg opgelëscht mat ënnerschiddlechem Status</string>
-    <string name="caches_filter_own_waypoint">Mat notzerdefinéierten Waypoints</string>
-    <string name="caches_filter_missing_gcvote">Entdeckten Cachen ouni Bewäertung</string>
-    <string name="caches_filter_lists">Enger Lëscht zougewisen</string>
-    <string name="caches_filter_empty">(eidel)</string>
     <string name="caches_removing_from_history">Aus dem Historique läschen…</string>
     <string name="caches_clear_offlinelogs">Offline Logs läschen</string>
     <string name="caches_clear_offlinelogs_message">Sollen d\'Offline-Logs geläscht ginn?</string>
@@ -452,8 +434,7 @@
     <string name="settings_category_social">Sozial Netzwierker</string>
     <string name="settings_category_logging_other">Aner Logging Optiounen</string>
     <string name="settings_goto_url_button">méi …</string>
-    <string name="settings_activate_gc">Aktivéieren</string>
-    <string name="settings_activate_ec">Aktivéieren</string>
+    <string name="settings_service_activate">Aktivéieren</string>
     <string name="settings_gc_legal_note">Mam benotzen vun de Servicer vu geocaching.com, akzeptéiers du d\'Benotzungsbedéngungen vu Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Login mat Facebook oder Google</string>
     <string name="settings_info_facebook_login">c:geo kann sech net iwwert den Facebook oder Google-Konto bei Geocaching.com umellen. Et gëtt awer eng einfach Léisung…</string>
@@ -462,30 +443,22 @@
     <string name="settings_gc_description">c:geo erlaben op Geocaching.com zouzegräifen, fir Cachen ze sichen.</string>
     <string name="settings_ec_description">c:geo erlaben op Extremcaching.com zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
     <string name="settings_su_description">c:geo erlaben op Geocaching.com zouzegräifen, fir Cachen ze sichen.</string>
-    <string name="settings_activate_oc">Aktivéieren</string>
     <string name="init_summary_oc_de">Lued Caches vun opencaching.de</string>
     <string name="init_oc_de_description">c:geo erlaben op opencaching.de zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_pl">Aktivéieren</string>
     <string name="init_summary_oc_pl">Cachen vun opencaching.pl lueden</string>
     <string name="init_oc_pl_description">c:geo erlaben op opencaching.pl zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_nl">Aktivéieren</string>
     <string name="init_summary_oc_nl">Cachen vun opencaching.nl lueden</string>
     <string name="init_oc_nl_description">c:geo erlaben op opencaching.nl zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_us">Aktivéieren</string>
     <string name="init_summary_oc_us">Cachen vun opencaching.us lueden</string>
     <string name="init_oc_us_description">c:geo erlaben op opencaching.us zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_ro">Aktivéieren</string>
     <string name="init_summary_oc_ro">Cachen vun opencaching.ro lueden</string>
     <string name="init_oc_ro_description">c:geo erlaben op opencaching.ro zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
-    <string name="settings_activate_oc_uk">Aktivéieren</string>
     <string name="init_summary_oc_uk">Cachen vun opencaching.uk lueden</string>
     <string name="init_oc_uk_description">c:geo erlaben op opencaching.uk zouzegräifen, fir Cachen ze sichen an d\'Cachen déi du fonnt hues ofzeruffen/ze filteren.</string>
     <string name="init_summary_su">Cachen vu Geocaching.su lueden</string>
-    <string name="settings_activate_su">Aktivéieren</string>
     <string name="init_gcvote_password_description">Fir ee Cache bewäerten ze kënnen, folleg d\'Uleedung op GCVote.com a tipp däin GCVote-Passwort hei.</string>
     <string name="err_vote_send_rating">Feeler beim Verschécken vun der Bewäertung.</string>
     <string name="vote_sent">Bewäertung erfollegräich verschéckt</string>
-    <string name="settings_activate_twitter">Aktivéieren</string>
     <string name="init_login_popup">Umellen</string>
     <string name="init_login_popup_working">Umeldung…</string>
     <string name="init_login_popup_ok">Umellen OK</string>
@@ -571,8 +544,6 @@
     <!-- auth geokrety -->
     <!-- cache -->
     <!-- days remaining -->
-    <string name="cache_stored">Geséchert</string>
-    <string name="cache_status_stored">Geséchert</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
@@ -620,12 +591,10 @@
         <item quantity="one">%s Favoritt</item>
         <item quantity="other">%s Favoritten</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% Favoritten</string>
     <!-- shortcuts -->
     <string name="send">Schécken</string>
     <string name="confirm_report_problem_title">Problem mellen</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivéieren</string>
     <string name="do_not_ask_me_again">Fro mech net nach emol</string>
     <string name="list_list_headline">Lëschten:</string>
     <!-- calendar adder -->
