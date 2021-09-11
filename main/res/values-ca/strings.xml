@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">El catxé ha de ser arxivat</string>
     <string name="log_problem_archive_text">Aquest geocatxer va informar que aquest catxé hauria de ser arxivat. Un revisor ha estat avisat.</string>
     <string name="log_image_scale_option_noscaling">Sense escala</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nEscalat/Comprimit:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">a escala</string>
+    <string name="log_image_info_notscaled">no a escala</string>
     <string name="log_image_titleprefix">Imatge</string>
-    <string name="datetime_clear_button">Esborra</string>
     <string name="datetime_nodateset_display">No hi ha data fixada</string>
     <!-- translation -->
     <string name="translate">Tradueix</string>
@@ -328,6 +329,7 @@
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
     <string name="menu_lists_pocket_queries">Llistes / pocket queries</string>
     <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
+    <string name="menu_invert_order">Inverteix l’ordre</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Propers</string>
@@ -396,25 +398,6 @@
     <string name="caches_map_locus_export">Exporta al Locus</string>
     <string name="caches_filter_menuitem">Filtre</string>
     <string name="caches_filter_title">Filtra per</string>
-    <string name="caches_filter_size">Mida</string>
-    <string name="caches_filter_type">Tipus</string>
-    <string name="caches_filter_track">Amb traçables</string>
-    <string name="caches_filter_clear">Neteja els filtres</string>
-    <string name="caches_filter_modified">Amb les coordenades modificades</string>
-    <string name="caches_filter_offline_log">Amb registre fora de línia</string>
-    <string name="caches_filter_origin">Origen</string>
-    <string name="caches_filter_distance">Distància</string>
-    <string name="caches_filter_personal_note">Amb una nota personal</string>
-    <string name="caches_filter_popularity">Preferits</string>
-    <string name="caches_filter_popularity_ratio">Preferits [%]</string>
-    <string name="caches_filter_personal_data">Amb dades personals</string>
-    <string name="caches_filter_rating">Amb puntuació</string>
-    <string name="caches_filter_own_rating">Amb puntuació pròpia</string>
-    <string name="caches_filter_multi_listing">Multi llista amb diferents estats</string>
-    <string name="caches_filter_own_waypoint">Amb fites definides per l\'usuari</string>
-    <string name="caches_filter_missing_gcvote">Cerca catxés no votats</string>
-    <string name="caches_filter_lists">Assignat a una llista</string>
-    <string name="caches_filter_empty">(buit)</string>
     <string name="caches_removing_from_history">S\'està eliminant de l\'historial…</string>
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
@@ -479,7 +462,6 @@
     <string name="cache_filter_location">Ubicació</string>
     <string name="cache_filter_stored_lists">Llistes emmagatzemades</string>
     <string name="cache_filter_origin">Origen</string>
-    <string name="cache_filter_stored_since">Desat des de</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
     <string name="cache_filtergroup_userspecific">Específic de l\'usuari</string>
@@ -647,9 +629,7 @@
     <string name="settings_category_social">Xarxes socials</string>
     <string name="settings_category_logging_other">Altres opcions de registre</string>
     <string name="settings_goto_url_button">més…</string>
-    <string name="settings_activate_gc">Activa</string>
-    <string name="settings_activate_ec">Activa</string>
-    <string name="settings_activate_lc">Activa</string>
+    <string name="settings_service_activate">Activa</string>
     <string name="settings_gc_legal_note">Amb l\'ús del servei de geocaching.com, estàs acceptant les condicions d\'ús de Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Inicieu sessió amb Facebook o Google</string>
     <string name="settings_info_facebook_login">No podeu fer que el c:geo es connecti a geocaching.com amb el compte de Facebook o Google. Però hi ha una manera fàcil de solucionar-ho…</string>
@@ -660,30 +640,22 @@
     <string name="settings_su_description">Autoritza c:geo a geocaching.su per buscar catxés.</string>
     <string name="settings_lc_description">Incloeu les Adventure Lab catxé al mapa.\n\n(disponible només per a membres premium de \"Geocaching.com\". Requereix un servei \"Geocaching.com\" activat.)\n\nPer canviar aquesta configuració, cal reiniciar.</string>
     <string name="lc_default_description">Es tracta d’un Adventure Lab catxé de geocaching.com. Les aventures només es poden jugar amb l’aplicació Groundspeak Adventure Lab. Toqueu la icona Adventure Lab de la pàgina \"Detalls\" per obrir/instal·lar l\'aplicació Adventure Lab per a aquesta aventura des d\'allà.\nSi no voleu veure les Adventure Lab al vostre mapa i fer cerques, podeu desactivar-les mitjançant el menu \"Configuració\"- Serveis - Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Activa</string>
     <string name="init_summary_oc_de">Carregar catxés des de opencaching.de</string>
     <string name="init_oc_de_description">Autoritza al c:geo a opencaching.de per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
-    <string name="settings_activate_oc_pl">Activa</string>
     <string name="init_summary_oc_pl">Carregar catxés des de opencaching.pl</string>
     <string name="init_oc_pl_description">Autoritza al c:geo a  buscar catxés i accedir/filtrar els teus catxés trobats de opencaching.pl.</string>
-    <string name="settings_activate_oc_nl">Activa</string>
     <string name="init_summary_oc_nl">Carregar catxés des de opencaching.nl</string>
     <string name="init_oc_nl_description">Autoritza al c:geo a opencaching.pl per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
-    <string name="settings_activate_oc_us">Activa</string>
     <string name="init_summary_oc_us">Carregar catxés des de opencaching.us</string>
     <string name="init_oc_us_description">Autoritza al c:geo a opencaching.us per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
-    <string name="settings_activate_oc_ro">Activa</string>
     <string name="init_summary_oc_ro">Carregar catxés des de opencaching.ro</string>
     <string name="init_oc_ro_description">Autoritza al c:geo a opencaching.ro per buscar catxés i accedir/filtrar els teus catxés trobats.</string>
-    <string name="settings_activate_oc_uk">Activa</string>
     <string name="init_summary_oc_uk">Carrega geoamagatalls des d\'opencache.uk</string>
     <string name="init_oc_uk_description">Autoritza al c:geo amb opencache.uk a buscar geoamagatalls i accedir/filtrar els teus geoamagatalls trobats.</string>
     <string name="init_summary_su">Carregar catxés des de Geocaching.su</string>
-    <string name="settings_activate_su">Activa</string>
     <string name="init_gcvote_password_description">Per poder puntuar un catxé, cal seguir les instruccions a GCVote.com i introduir aquí la contrasenya del GCVote.</string>
     <string name="err_vote_send_rating">S\'ha produït un error en enviar el missatge</string>
     <string name="vote_sent">Votació enviada correctament</string>
-    <string name="settings_activate_twitter">Activa</string>
     <string name="init_login_popup">Accés</string>
     <string name="init_login_popup_working">S\'està accedint…</string>
     <string name="init_login_popup_ok">Accés correcte</string>
@@ -1103,7 +1075,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">fa un any</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributs</string>
     <string name="cache_inventory">Inventari</string>
     <string name="cache_log_images_title">Imatges del registre</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1225,27 +1196,13 @@
     <string name="ignore_confirm_title">Aneu amb compte</string>
     <string name="ignore_confirm_message">Al ignorar un catxé , farà que aquest catxé no torni a aparèixer a les càrregues de dades de geocaching.com. Només serà capaç de veure\'l  designorant-ho a la pàgina web.</string>
     <string name="cache_status">Estat</string>
-    <string name="cache_stored">Desats</string>
     <string name="cache_status_offline_log">Registre desat</string>
     <string name="cache_status_found">Trobat</string>
     <string name="cache_not_status_found">No s\'ha trobat</string>
-    <string name="cache_never_found">Mai s\'ha trobat</string>
-    <string name="cache_found_last_30_days">Trobat en els darrers 30 dies</string>
     <string name="cache_status_archived">Arxivat</string>
     <string name="cache_status_disabled">Desactivat</string>
     <string name="cache_status_active">Actiu</string>
     <string name="cache_status_premium">Només per membres Premium</string>
-    <string name="cache_status_not_premium">Per a tots els membres</string>
-    <string name="cache_status_stored">Desats</string>
-    <string name="cache_status_not_stored">No desat</string>
-    <string name="cache_status_stored_lasteighthours">En les darreres vuit hores</string>
-    <string name="cache_status_stored_lasttwentyfourhours">En les darreres vint-i-quatre hores</string>
-    <string name="cache_status_stored_lastsevendays">En les darreres set dies</string>
-    <string name="cache_status_stored_lastthirtydays">En els darrers trenta dies</string>
-    <string name="cache_status_stored_morethaneighthours">Fa més de vuit hores</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Fa més de vint-i-quatre hores</string>
-    <string name="cache_status_stored_morethansevendays">Fa més de set dies</string>
-    <string name="cache_status_stored_morethanthirtydays">Fa més de trenta dies</string>
     <string name="cache_geocode">Geocodi</string>
     <string name="cache_name">Nom</string>
     <string name="cache_name_set">Definiu el nom del catxé</string>
@@ -1257,7 +1214,6 @@
     <string name="cache_distance">Distància</string>
     <string name="cache_difficulty">Dificultat</string>
     <string name="cache_terrain">Terreny</string>
-    <string name="cache_difficulty_terrain">Dificultat / Terreny</string>
     <string name="cache_rating">Puntuació</string>
     <string name="cache_own_rating">La vostra valoració</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1266,9 +1222,7 @@
     <string name="cache_hidden">Amagat</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Ubicació</string>
-    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenades</string>
-    <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenades originals</string>
     <string name="cache_spoiler_images_title">Imatges d\'ajuda</string>
     <string name="cache_log_types">Tipus de registre</string>
@@ -1395,7 +1349,6 @@
     <string name="map_showc_found">Trobat</string>
     <string name="map_showc_disabled">Desactivat</string>
     <string name="map_showc_archived">Arxivat</string>
-    <string name="map_showc_offlinelog">Registrat fora de línia</string>
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Aparcament</string>
     <string name="map_showwp_visited">Visitat</string>
@@ -1438,6 +1391,7 @@
     <string name="search_address_button">Cerca per l\'adreça</string>
     <string name="search_geo">Codi del catxé</string>
     <string name="search_geo_button">Cerca pel codi del catxé</string>
+    <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
     <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
@@ -1879,7 +1833,6 @@
         <item quantity="one">%s preferit</item>
         <item quantity="other">%s preferits</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% preferits</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
     <string name="create_shortcut">Crea una drecera</string>
@@ -1889,7 +1842,6 @@
     <string name="confirm_report_problem_title">Informa d’un problema</string>
     <string name="confirm_report_problem_message">Voleu informar \'%s\'. Esteu segur?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Activa</string>
     <string name="init_summary_geokrety">Habilitar traçables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autorizar c:geo a GeoKrety.org per registrar traçables.</string>
     <string name="init_geokrety_userid">Usuari: %s</string>
@@ -1981,7 +1933,6 @@
     <string name="map_clear_individual_route">Esborra la ruta individual</string>
     <string name="map_clear_individual_route_confirm">Voleu eliminar tots els catxés / waypoints de la vostra ruta individual?</string>
     <string name="map_individual_route_cleared">Ruta individual esborrada</string>
-    <string name="save_sorted_route">Desa</string>
     <string name="sorted_route_saved">Ruta individual desada</string>
     <string name="load_individual_route_error">Error en carregar la ruta individual</string>
     <string name="route_item_not_yet_loaded">La ruta encara no s\'ha carregat</string>
@@ -1990,6 +1941,8 @@
         <item quantity="other">Ruta carregada amb %d punts de ruta</item>
     </plurals>
     <string name="center_on_route">Centre de la ruta</string>
+    <string name="individual_route_set_as_start_title">Estableix com a inici de ruta</string>
+    <string name="individual_route_set_as_start_message">Voleu definir aquest element com a inici de ruta i moure tots els elements posteriors a la part superior de la ruta actual?</string>
     <!-- individual track -->
     <string name="individual_track">GPX track/ruta</string>
     <string name="map_load_track">Carrega track/ruta del GPX</string>
