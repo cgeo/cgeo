@@ -149,7 +149,6 @@
     <string name="log_problem_archive_text">Šis slēpņotājs ziņoja, ka slēpni vēlams arhivēt. Paziņojums nosūtīts brīvprātīgajam recenzentam.</string>
     <string name="log_image_scale_option_noscaling">Bez mēroga</string>
     <string name="log_image_titleprefix">Attēls</string>
-    <string name="datetime_clear_button">Notīrīt</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Tulkot uz %s valodu</string>
     <string name="translate_to_english">Tulkot angļu valodā</string>
@@ -346,25 +345,6 @@
     <string name="caches_copy_all">Kopēt visu</string>
     <string name="caches_map_locus_export">Eksportēt uz Locus</string>
     <string name="caches_filter_title">Filtrēt</string>
-    <string name="caches_filter_size">Pēc lieluma</string>
-    <string name="caches_filter_type">Tips</string>
-    <string name="caches_filter_track">Ar ceļotājiem</string>
-    <string name="caches_filter_clear">Notīrīt filtrus</string>
-    <string name="caches_filter_modified">Ar izmainītām koordinātām</string>
-    <string name="caches_filter_offline_log">Ar bezsaistes ierakstu</string>
-    <string name="caches_filter_origin">Izcelsme</string>
-    <string name="caches_filter_distance">Pēc attāluma</string>
-    <string name="caches_filter_personal_note">Ar personisku piezīmi</string>
-    <string name="caches_filter_popularity">Pēc favorītu daudzuma</string>
-    <string name="caches_filter_popularity_ratio">Pēc favorītu [%]</string>
-    <string name="caches_filter_personal_data">Ar personīgiem datiem</string>
-    <string name="caches_filter_rating">Ar reitingu</string>
-    <string name="caches_filter_own_rating">Ar paša vērtējumu</string>
-    <string name="caches_filter_multi_listing">Vairākos saitos ar dažādiem statusiem</string>
-    <string name="caches_filter_own_waypoint">Ar lietotāja definētiem starpposmiem</string>
-    <string name="caches_filter_missing_gcvote">Atrastie slēpņi bez vērtējuma</string>
-    <string name="caches_filter_lists">Piešķirts sarakstam</string>
-    <string name="caches_filter_empty">(tukšs)</string>
     <string name="caches_removing_from_history">Dzēš no vēstures…</string>
     <string name="caches_clear_offlinelogs">Notīrīt bezsaistes ierakstus</string>
     <string name="caches_clear_offlinelogs_message">Vai izdzēst bezsaistes ierakstus?</string>
@@ -457,8 +437,7 @@
     <string name="settings_category_social">Sociālie mēdiji</string>
     <string name="settings_category_logging_other">Citi pierakstīšanās iestatījumi</string>
     <string name="settings_goto_url_button">vairāk…</string>
-    <string name="settings_activate_gc">Aktivizēt</string>
-    <string name="settings_activate_ec">Aktivizēt</string>
+    <string name="settings_service_activate">Aktivizēt</string>
     <string name="settings_gc_legal_note">Izmantojot geocaching.com pakalpojumu, jūs piekrītat Groundspeak lietošanas noteikumiem.</string>
     <string name="settings_info_facebook_login_title">Ienākt izmantojot Facebook vai Google</string>
     <string name="settings_info_facebook_login">Nevar veikt c:geo pieteikšanos geocaching.com ar savu Facebook vai Google kontu. Bet tam ir vienkāršs risinājums…</string>
@@ -467,30 +446,22 @@
     <string name="settings_gc_description">Autorizējies c:geo ar geocaching.com profilu, lai meklētu slēpņus.</string>
     <string name="settings_ec_description">Atļaut c:geo un extremcaching.com meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
     <string name="settings_su_description">Autorizējies c:geo ar geocaching.com profilu lai meklētu slēpņus.</string>
-    <string name="settings_activate_oc">Aktivizēt</string>
     <string name="init_summary_oc_de">Ielādēt slēpņus no opencaching.de</string>
     <string name="init_oc_de_description">Atļaut c:geo un opencaching.de meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
-    <string name="settings_activate_oc_pl">Aktivizēt</string>
     <string name="init_summary_oc_pl">Ielādēt slēpņus no opencaching.pl</string>
     <string name="init_oc_pl_description">Atļaut c:geo un opencaching.pl meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
-    <string name="settings_activate_oc_nl">Aktivizēt</string>
     <string name="init_summary_oc_nl">Ielādēt slēpņus no opencaching.nl</string>
     <string name="init_oc_nl_description">Atļaut c:geo un opencaching.nl meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
-    <string name="settings_activate_oc_us">Aktivizēt</string>
     <string name="init_summary_oc_us">Ielādēt slēpņus no opencaching.us</string>
     <string name="init_oc_us_description">Atļaut c:geo un opencaching.us meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
-    <string name="settings_activate_oc_ro">Aktivizēt</string>
     <string name="init_summary_oc_ro">Ielādēt slēpņus no opencaching.ro</string>
     <string name="init_oc_ro_description">Atļaut c:geo un opencaching.ro meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
-    <string name="settings_activate_oc_uk">Aktivizēt</string>
     <string name="init_summary_oc_uk">Ielādēt slēpņus no opencache.uk</string>
     <string name="init_oc_uk_description">Atļaut c:geo un opencaching.us meklēt slēpņus un piekļūt/filtrēt tavus atrastos slēpņus.</string>
     <string name="init_summary_su">Ielādēt slēpņus no Geocaching.su</string>
-    <string name="settings_activate_su">Aktivizēt</string>
     <string name="init_gcvote_password_description">Lai spētu novērtēt slēpni, tev jāseko instrukcijām GCVote.com mājas lapā un jāievada sava GCVote parole šeit.</string>
     <string name="err_vote_send_rating">Ir notikusi kļūme sūtot vērtējumu.</string>
     <string name="vote_sent">Novērtējums ir sekmīgi nosūtīts</string>
-    <string name="settings_activate_twitter">Aktivizēt</string>
     <string name="init_login_popup">Pieteikšanās</string>
     <string name="init_login_popup_working">Piesakās sistēmā…</string>
     <string name="init_login_popup_ok">Pieteikšanās izpildīta veiksmīgi</string>
@@ -735,7 +706,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">vairāk nekā pirms gada</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atribūti</string>
     <string name="cache_inventory">Krājumi</string>
     <string name="cache_log_images_title">Apmeklējuma attēli</string>
     <string name="cache_log_image_default_title">Attēls</string>
@@ -833,27 +803,13 @@
     <string name="ignore_confirm_title">Esi uzmanīgs</string>
     <string name="ignore_confirm_message">Ignorēt slēpni nozīmē, ka šis slēpnis nekad netiks lejupieladēts no geocaching.com. Jūs varēsiet atkal redzēt slēpni tikai, ja izņemsiet to no ignorēto slēpņu saraksta mājaslapā.</string>
     <string name="cache_status">Statuss</string>
-    <string name="cache_stored">Saglabātie bezsaistē</string>
     <string name="cache_status_offline_log">Apmeklējums ieraksts saglabāts</string>
     <string name="cache_status_found">Atrasts</string>
     <string name="cache_not_status_found">Nav atrasts</string>
-    <string name="cache_never_found">Nekad nav atrasts</string>
-    <string name="cache_found_last_30_days">Atrastie pēdējo 30 dienu laikā</string>
     <string name="cache_status_archived">Arhivēts</string>
     <string name="cache_status_disabled">Atspējots</string>
     <string name="cache_status_active">Aktīvs</string>
     <string name="cache_status_premium">TIkai Premium lietotājiem</string>
-    <string name="cache_status_not_premium">Pieejams visiem lietotājiem</string>
-    <string name="cache_status_stored">Saglabātie bezsaistē</string>
-    <string name="cache_status_not_stored">Nav saglabāti</string>
-    <string name="cache_status_stored_lasteighthours">Pēdējo astoņu stundu laikā</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Pēdējo divdesmit četru stundu laikā</string>
-    <string name="cache_status_stored_lastsevendays">Pēdējo septiņu dienu laikā</string>
-    <string name="cache_status_stored_lastthirtydays">Pēdējo trīsdesmit dienu laikā</string>
-    <string name="cache_status_stored_morethaneighthours">Pirms vairāk kā astoņām stundām</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Pirms vairāk kā divdesmit četrām stundām</string>
-    <string name="cache_status_stored_morethansevendays">Pirms vairāk kā septiņām dienām</string>
-    <string name="cache_status_stored_morethanthirtydays">Pirms vairāl kā trīsdesmit dienām</string>
     <string name="cache_geocode">Geo kods</string>
     <string name="cache_name">Nosaukums</string>
     <string name="cache_name_set">Iestatīt slēpņa nosaukumu</string>
@@ -870,9 +826,7 @@
     <string name="cache_hidden">Paslēpts</string>
     <string name="cache_event">Datums</string>
     <string name="cache_location">Atrašanās vieta</string>
-    <string name="cache_location_country">Valsts</string>
     <string name="cache_coordinates">Koordinātas</string>
-    <string name="cache_calculator">Kalkulators</string>
     <string name="cache_coordinates_original">Sākotnējās koordinātas</string>
     <string name="cache_spoiler_images_title">\"Spoiler\" bilde (-es)</string>
     <string name="cache_log_types">Reģistrēto ierakstu tipi</string>
@@ -1377,7 +1331,6 @@ importēti %1$d slēpņi no %2$s</item>
         <item quantity="one">%s izlases</item>
         <item quantity="other">%s favorīti</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favorīti</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo saīsne</string>
     <string name="create_shortcut">Izveidot saīsni</string>
@@ -1386,7 +1339,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="confirm_report_problem_title">Ziņot par problēmu</string>
     <string name="confirm_report_problem_message">Tu šobrīd ziņo par \'%s\'. Vai esi drošs?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivizēt</string>
     <string name="init_summary_geokrety">Iespējot ceļotājus no Geokrety.org</string>
     <string name="init_geokrety_description">Autorizē c:geo ar GeoKrety.org, lai reģistrētu GeoKrety ceļotāju.</string>
     <string name="init_geokrety_userid">Lietotāja ID: %s</string>
@@ -1442,7 +1394,6 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
-    <string name="save_sorted_route">Saglabāt</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">pēda</string>
