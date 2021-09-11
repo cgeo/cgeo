@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">A geocache deve ser arquivada</string>
     <string name="log_problem_archive_text">Este geocacher reportou que esta geocache deve ser arquivada. Um revisor voluntário da comunidade foi notificado.</string>
     <string name="log_image_scale_option_noscaling">Original</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\\nDimensionada/Comprimida:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">redimensionado</string>
+    <string name="log_image_info_notscaled">original</string>
     <string name="log_image_titleprefix">Imagem</string>
-    <string name="datetime_clear_button">Limpar</string>
     <string name="datetime_nodateset_display">Sem data definida</string>
     <!-- translation -->
     <string name="translate">Traduzir</string>
@@ -327,6 +328,7 @@
     <string name="menu_scan_geo">Ler código GC</string>
     <string name="menu_lists_pocket_queries">Listas / pocket queries</string>
     <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
+    <string name="menu_invert_order">Inverter ordem</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Por perto</string>
@@ -381,6 +383,7 @@
     <string name="caches_remove_all_completely">Eliminar todas do dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar seleccionadas do dispositivo</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
+    <string name="caches_upload_bookmarklist">Carregar para a lista de favoritos</string>
     <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">Quer carregar as coordenadas modificadas para todas as caches (seleccionadas) e substituir as coordenadas existentes no servidor? Isto não pode ser anulado.</string>
     <string name="caches_upload_allcoords">Carregar todas as coord. memorizadas</string>
@@ -395,25 +398,6 @@
     <string name="caches_map_locus_export">Exportar para Locus</string>
     <string name="caches_filter_menuitem">Filtrar</string>
     <string name="caches_filter_title">Filtrar por</string>
-    <string name="caches_filter_size">Tamanho</string>
-    <string name="caches_filter_type">Tipo</string>
-    <string name="caches_filter_track">Com trackables</string>
-    <string name="caches_filter_clear">Limpar filtros</string>
-    <string name="caches_filter_modified">Com coordenadas modificadas</string>
-    <string name="caches_filter_offline_log">Com registo offline</string>
-    <string name="caches_filter_origin">Origem</string>
-    <string name="caches_filter_distance">Distância</string>
-    <string name="caches_filter_personal_note">Com nota pessoal</string>
-    <string name="caches_filter_popularity">Favoritos</string>
-    <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
-    <string name="caches_filter_personal_data">Com informação pessoal</string>
-    <string name="caches_filter_rating">Com avaliação</string>
-    <string name="caches_filter_own_rating">Com avaliação pessoal</string>
-    <string name="caches_filter_multi_listing">Em múltiplas plataformas com registos discrepantes</string>
-    <string name="caches_filter_own_waypoint">Com pontos adicionais definidos pelo utilizador</string>
-    <string name="caches_filter_missing_gcvote">Caches que encontrou por votar</string>
-    <string name="caches_filter_lists">Atribuída a uma lista</string>
-    <string name="caches_filter_empty">(vazio)</string>
     <string name="caches_removing_from_history">A remover do histórico…</string>
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Deseja limpar os registos offline?</string>
@@ -478,7 +462,7 @@
     <string name="cache_filter_location">Localização</string>
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
-    <string name="cache_filter_stored_since">Armazenada desde</string>
+    <string name="cache_filter_stored_since">Última actualização de detalhes</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
@@ -499,6 +483,8 @@
     <string name="cache_filter_storage_clear_button">Limpar</string>
     <string name="cache_filter_storage_load_delete_title">Carregar ou eliminar um filtro existente</string>
     <string name="cache_filter_storage_select_title">Seleccionar filtro</string>
+    <string name="cache_filter_storage_delete_title">Eliminar filtro</string>
+    <string name="cache_filter_storage_delete_message">Tem a certeza que quer eliminar esta configuração de filtro?</string>
     <string name="cache_filter_storage_select_clear_title">Seleccionar filtro ou limpar o filtro actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ainda não foi guardado nenhum filtro.</string>
     <string name="cache_filter_storage_save_title">Guardar filtro com nome</string>
@@ -510,6 +496,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Não está presente</string>
     <string name="cache_filter_stringfilter_type_is_present">Está presente</string>
     <string name="cache_filter_stringfilter_type_contains">Contém</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Não contém</string>
     <string name="cache_filter_stringfilter_type_starts_with">Começa por</string>
     <string name="cache_filter_stringfilter_type_ends_with">Termina com</string>
     <string name="cache_filter_stringfilter_type_pattern">Modelo</string>
@@ -535,6 +522,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Tem TB(s)</string>
     <string name="cache_filter_status_select_label_has_own_vote">Tem o meu voto</string>
     <string name="cache_filter_status_select_label_has_offline_log">Tem Registo Offline</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer as coordenadas tenham sido alteradas ou haja uma localização final válida, preenchida com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
@@ -646,9 +634,7 @@
     <string name="settings_category_social">Redes sociais</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
     <string name="settings_goto_url_button">mais …</string>
-    <string name="settings_activate_gc">Activar</string>
-    <string name="settings_activate_ec">Activar</string>
-    <string name="settings_activate_lc">Activar</string>
+    <string name="settings_service_activate">Activar</string>
     <string name="settings_gc_legal_note">Ao usar o serviço de geocaching.com, está a aceitar os Termos de Utilização da Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Início de Sessão com:\nFacebook ou Google</string>
     <string name="settings_info_facebook_login">Não consegue que o c:geo inicie a sessão em geocaching.com com a sua conta do Facebook ou Google. Mas existe uma solução simples…</string>
@@ -659,30 +645,22 @@
     <string name="settings_su_description">Autorize o c:geo a pesquisar caches em geocaching.su.</string>
     <string name="settings_lc_description">Incluir caches Adventure Lab no mapa.\n\n(Disponível apenas para membros premium \"Geocaching.com\". Requer o serviço \"Geocaching.com\" activado.)\n\nA alteração desta definição requer o reinício da aplicação.</string>
     <string name="lc_default_description">Esta é uma geocache Adventure Lab (do serviço \'geocaching.com\'). As aventuras apenas podem ser jogadas dentro da aplicação Adventure Lab da Groundspeak. Toque no ícone Adventure Lab na página \"Detalhes\" para abrir/instalar a aplicação Adventure Lab para prosseguir com a aventura na mesma.\nSe não deseja ver as geocaches Adventure Lab no mapa e na pesquisa, pode desactiva-las em \"Definições\" - \"Serviços\" - \"Adventure Lab (geocaching.com)\"</string>
-    <string name="settings_activate_oc">Activar</string>
     <string name="init_summary_oc_de">Carregar caches a partir de \'opencaching.de\'</string>
     <string name="init_oc_de_description">Autoriza o c:geo em opencaching.de para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_pl">Activar</string>
     <string name="init_summary_oc_pl">Carregar caches a partir de \'opencaching.pl\'</string>
     <string name="init_oc_pl_description">Autoriza o c:geo em opencaching.pl para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_nl">Activar</string>
     <string name="init_summary_oc_nl">Carregar caches a partir de \'opencaching.nl\'</string>
     <string name="init_oc_nl_description">Autoriza o c:geo em opencaching.nl para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_us">Activar</string>
     <string name="init_summary_oc_us">Carregar caches a partir de \'opencaching.us\'</string>
     <string name="init_oc_us_description">Autoriza o c:geo em opencaching.us para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_ro">Activar</string>
     <string name="init_summary_oc_ro">Carregar caches a partir de \'opencaching.ro\'</string>
     <string name="init_oc_ro_description">Autoriza o c:geo em opencaching.ro para pesquisar por geocaches e aceder/filtrar às suas geocaches encontradas.</string>
-    <string name="settings_activate_oc_uk">Activar</string>
     <string name="init_summary_oc_uk">Carregar caches a partir de \'opencaching.uk\'</string>
     <string name="init_oc_uk_description">Autoriza o c:geo em opencache.uk a pesquisar por geocaches e a aceder/filtrar as suas caches encontradas.</string>
     <string name="init_summary_su">Carregar caches a partir de \'geocaching.su\'</string>
-    <string name="settings_activate_su">Activar</string>
     <string name="init_gcvote_password_description">Para poder classificar uma cache, tem que seguir as instruções em GCVote.com e inserir a sua palavra-passe do GCVote aqui.</string>
     <string name="err_vote_send_rating">Erro ao enviar a avaliação.</string>
     <string name="vote_sent">Votação enviada com sucesso</string>
-    <string name="settings_activate_twitter">Activar</string>
     <string name="init_login_popup">Início de sessão</string>
     <string name="init_login_popup_working">A iniciar a sessão…</string>
     <string name="init_login_popup_ok">Sessão iniciada</string>
@@ -1102,7 +1080,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">há mais de um ano</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributos</string>
     <string name="cache_inventory">Inventário</string>
     <string name="cache_log_images_title">Imagens do registo</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1224,27 +1201,13 @@
     <string name="ignore_confirm_title">Tenha Cuidado</string>
     <string name="ignore_confirm_message">Ignorar uma geocache significa que a mesma deixa de constar da informação fornecida a partir de geocaching.com. Só será capaz de ver novamente a geocache deixando de ignora-la no sítio web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Armazenadas</string>
     <string name="cache_status_offline_log">Registo gravado</string>
     <string name="cache_status_found">Encontrada</string>
     <string name="cache_not_status_found">Não encontrado</string>
-    <string name="cache_never_found">Nunca encontrada</string>
-    <string name="cache_found_last_30_days">Encontradas nos últimos 30 dias</string>
     <string name="cache_status_archived">Arquivada</string>
     <string name="cache_status_disabled">Desactivada</string>
     <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
-    <string name="cache_status_not_premium">Disponível para todos os membros</string>
-    <string name="cache_status_stored">Armazenadas</string>
-    <string name="cache_status_not_stored">Não está armazenada</string>
-    <string name="cache_status_stored_lasteighthours">Dentro das últimas oito horas</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Dentro das últimas vinte e quatro horas</string>
-    <string name="cache_status_stored_lastsevendays">Dentro dos últimos sete dias</string>
-    <string name="cache_status_stored_lastthirtydays">Dentro dos últimos 30 dias</string>
-    <string name="cache_status_stored_morethaneighthours">Antes das últimas oito horas</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Antes das últimas vinte e quatro horas</string>
-    <string name="cache_status_stored_morethansevendays">Antes dos últimos sete dias</string>
-    <string name="cache_status_stored_morethanthirtydays">Antes dos últimos 30 dias</string>
     <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Definir o nome da cache</string>
@@ -1256,7 +1219,6 @@
     <string name="cache_distance">Distância</string>
     <string name="cache_difficulty">Dificuldade</string>
     <string name="cache_terrain">Terreno</string>
-    <string name="cache_difficulty_terrain">Dificuldade / Terreno</string>
     <string name="cache_rating">Avaliação</string>
     <string name="cache_own_rating">A sua avaliação</string>
     <string name="cache_rating_of_new">%1$.1f de %2$d</string>
@@ -1265,9 +1227,7 @@
     <string name="cache_hidden">Escondida</string>
     <string name="cache_event">Data</string>
     <string name="cache_location">Localização</string>
-    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenadas</string>
-    <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originais</string>
     <string name="cache_spoiler_images_title">Imagens spoiler</string>
     <string name="cache_log_types">Tipos de registo</string>
@@ -1394,7 +1354,7 @@
     <string name="map_showc_found">Encontradas</string>
     <string name="map_showc_disabled">Desactivadas</string>
     <string name="map_showc_archived">Arquivadas</string>
-    <string name="map_showc_offlinelog">Registadas Offline</string>
+    <string name="map_showc_found_offline">Encontrada (offline)</string>
     <string name="map_showwp_original">Originais</string>
     <string name="map_showwp_parking">Estacionamento</string>
     <string name="map_showwp_visited">Visitados</string>
@@ -1437,6 +1397,7 @@
     <string name="search_address_button">Pesquisar por endereço</string>
     <string name="search_geo">Código GC</string>
     <string name="search_geo_button">Pesquisar por código GC</string>
+    <string name="search_geocode_from_clipboard">O Geocode foi colado da área de transferência.</string>
     <string name="search_kw">Palavras-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
@@ -1460,6 +1421,12 @@
     <string name="search_bookmark_list">Lista de marcadores</string>
     <string name="search_pocket_is_new">novo</string>
     <string name="search_pocket_and_bookmark_loading">A carregar uma lista de Pocket Queries e lista de marcadores</string>
+    <string name="search_bookmark_loading">A carregar marcadores</string>
+    <string name="search_bookmark_select">Seleccionar listas de marcadores</string>
+    <string name="search_bookmark_new">Criar nova lista de marcadores</string>
+    <string name="search_bookmark_adding_caches_success">Todas as geocaches foram adicionadas à lista de marcadores seleccionada</string>
+    <string name="search_bookmark_adding_caches_failed">Falha ao adicionar cache à lista de marcadores</string>
+    <string name="search_bookmark_create_new_failed">Falha ao criar uma nova lista de marcadores</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">A carregar detalhes do trackable…</string>
@@ -1877,7 +1844,6 @@
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favoritos</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atalho c:geo</string>
     <string name="create_shortcut">Criar atalho</string>
@@ -1887,7 +1853,6 @@
     <string name="confirm_report_problem_title">Relatar Problema</string>
     <string name="confirm_report_problem_message">Pretende reportar que \'%s\'. Tem a certeza?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Activar</string>
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">ID de utilizador: %s</string>
@@ -1979,7 +1944,6 @@
     <string name="map_clear_individual_route">Limpar rota individual</string>
     <string name="map_clear_individual_route_confirm">Deseja remover todos(as) os pontos adicionais/ as caches da sua rota individual?</string>
     <string name="map_individual_route_cleared">Rota individual limpa</string>
-    <string name="save_sorted_route">Guardar</string>
     <string name="sorted_route_saved">Rota individual guardada</string>
     <string name="load_individual_route_error">Erro ao carregar a rota individual</string>
     <string name="route_item_not_yet_loaded">A rota ainda não está carregada</string>
@@ -1988,6 +1952,8 @@
         <item quantity="other">Rota carregada com %d pontos de rota</item>
     </plurals>
     <string name="center_on_route">Centrar na rota</string>
+    <string name="individual_route_set_as_start_title">Definir como início da rota</string>
+    <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
     <!-- individual track -->
     <string name="individual_track">Percurso/rota GPX</string>
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
@@ -2141,6 +2107,7 @@ do mapa e dos temas?</string>
     <string name="done">Concluído</string>
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
+    <string name="later">Mais tarde</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
 </resources>
