@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">Cache zou moeten worden gearchiveerd</string>
     <string name="log_problem_archive_text">Deze geocacher heeft gemeld dat deze geocache zou moeten worden gearchiveerd. Een reviewer is hiervan op de hoogte gesteld.</string>
     <string name="log_image_scale_option_noscaling">Niet schalen</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nGeschaald/gecomprimeerd:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">geschaald</string>
+    <string name="log_image_info_notscaled">niet geschaald</string>
     <string name="log_image_titleprefix">Afbeelding</string>
-    <string name="datetime_clear_button">Wissen</string>
     <string name="datetime_nodateset_display">Geen datum ingesteld</string>
     <!-- translation -->
     <string name="translate">Vertalen</string>
@@ -327,6 +328,7 @@
     <string name="menu_scan_geo">Scan geocode</string>
     <string name="menu_lists_pocket_queries">Lijsten / pocket queries</string>
     <string name="menu_scan_description">c:geo kan geocodes scannen die als QR code weergegeven zijn. De noodzakelijke app is niet geïnstalleerd. Wil je Google Play openen om de app te installeren?</string>
+    <string name="menu_invert_order">Volgorde omkeren</string>
     <!-- main screen -->
     <string name="live_map_button">Live kaart</string>
     <string name="caches_nearby_button">Dichtbij</string>
@@ -381,6 +383,7 @@
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
+    <string name="caches_upload_bookmarklist">Uploaden naar bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
@@ -395,25 +398,6 @@
     <string name="caches_map_locus_export">Exporteer naar Locus</string>
     <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filter op</string>
-    <string name="caches_filter_size">Formaat</string>
-    <string name="caches_filter_type">Type</string>
-    <string name="caches_filter_track">Met trackables</string>
-    <string name="caches_filter_clear">Maak filters leeg</string>
-    <string name="caches_filter_modified">Met aangepaste coordinaten</string>
-    <string name="caches_filter_offline_log">Met offline log</string>
-    <string name="caches_filter_origin">Oorsprong</string>
-    <string name="caches_filter_distance">Afstand</string>
-    <string name="caches_filter_personal_note">Met privé cachenotitie</string>
-    <string name="caches_filter_popularity">Populariteit</string>
-    <string name="caches_filter_popularity_ratio">Populariteit [%]</string>
-    <string name="caches_filter_personal_data">Met persoonlijke gegevens</string>
-    <string name="caches_filter_rating">Met rating</string>
-    <string name="caches_filter_own_rating">Met eigen rating</string>
-    <string name="caches_filter_multi_listing">Meerdere listings met verschillende status</string>
-    <string name="caches_filter_own_waypoint">Met gebruiker gedefinieerde waypoints</string>
-    <string name="caches_filter_missing_gcvote">Gevonden caches niet gestemd</string>
-    <string name="caches_filter_lists">Toegewezen aan een lijst</string>
-    <string name="caches_filter_empty">(leeg)</string>
     <string name="caches_removing_from_history">Verwijderen uit geschiedenis…</string>
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
@@ -478,7 +462,7 @@
     <string name="cache_filter_location">Locatie</string>
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
-    <string name="cache_filter_stored_since">Opgeslagen sinds</string>
+    <string name="cache_filter_stored_since">Laatste details update</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
@@ -499,6 +483,8 @@
     <string name="cache_filter_storage_clear_button">Wissen</string>
     <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
     <string name="cache_filter_storage_select_title">Filter selecteren</string>
+    <string name="cache_filter_storage_delete_title">Filter verwijderen</string>
+    <string name="cache_filter_storage_delete_message">Weet je zeker dat je dit filtersjabloon wilt verwijderen?</string>
     <string name="cache_filter_storage_select_clear_title">Selecteer filter of wis huidige filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Er zijn nog geen filters opgeslagen.</string>
     <string name="cache_filter_storage_save_title">Filter opslaan met naam</string>
@@ -510,6 +496,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Is niet aanwezig</string>
     <string name="cache_filter_stringfilter_type_is_present">is aanwezig</string>
     <string name="cache_filter_stringfilter_type_contains">Bevat</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Bevat niet</string>
     <string name="cache_filter_stringfilter_type_starts_with">Begint met</string>
     <string name="cache_filter_stringfilter_type_ends_with">Eindigt met</string>
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
@@ -535,6 +522,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Heeft Trackable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Heeft eigen stem</string>
     <string name="cache_filter_status_select_label_has_offline_log">Heeft offline log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
@@ -646,9 +634,7 @@
     <string name="settings_category_social">Sociale media</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
     <string name="settings_goto_url_button">meer…</string>
-    <string name="settings_activate_gc">Activeren</string>
-    <string name="settings_activate_ec">Activeren</string>
-    <string name="settings_activate_lc">Activeren</string>
+    <string name="settings_service_activate">Activeren</string>
     <string name="settings_gc_legal_note">Met het gebruik van de dienst van geocaching.com, accepteert u de gebruiksvoorwaarden van Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Log in met Facebook of Google</string>
     <string name="settings_info_facebook_login">Het is niet mogelijk om c:geo te laten inloggen op geocaching.com met je Facebook of Google account. Maar er is een eenvoudige workaround…</string>
@@ -659,30 +645,22 @@
     <string name="settings_su_description">Autoriseer c:geo met geocaching.su om caches te zoeken.</string>
     <string name="settings_lc_description">Adventure Lab caches op de kaart tonen.\n\n(Alleen beschikbaar voor \"Geocaching.com\" premium leden. Vereist een geactiveerde \"Geocaching.com\" service.)\n\nWijzigen van deze instelling vereist een herstart.</string>
     <string name="lc_default_description">Dit is een geocaching.com Adventure Lab Cache. Avonturen kunnen alleen worden gespeeld met de Groundspeak Adventure Lab App. Klik op het Adventure Lab pictogram op de \"Details\" pagina om de Adventure Lab App te openen/installeren voor dit avontuur.\nAls je geen Adventure Lab caches op je kaart en zoekopdracht wilt zien kan je ze deactiveren via het menu \"instellingen\" - Diensten - Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Activeren</string>
     <string name="init_summary_oc_de">Laad caches van opencaching.de</string>
     <string name="init_oc_de_description">c:geo authoriseren met opencaching.de om naar caches te zoeken en het filteren van gevonden caches.</string>
-    <string name="settings_activate_oc_pl">Activeren</string>
     <string name="init_summary_oc_pl">Laad caches van opencaching.pl</string>
     <string name="init_oc_pl_description">c:geo authoriseren met opencaching.pl om naar caches te zoeken en het filteren van gevonden caches.</string>
-    <string name="settings_activate_oc_nl">Activeren</string>
     <string name="init_summary_oc_nl">Laad caches van opencaching.nl</string>
     <string name="init_oc_nl_description">c:geo Autoriseren met opencaching.nl naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
-    <string name="settings_activate_oc_us">Activeren</string>
     <string name="init_summary_oc_us">Laad caches van opencaching.us</string>
     <string name="init_oc_us_description">c:geo Autoriseren met opencaching.us naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
-    <string name="settings_activate_oc_ro">Activeren</string>
     <string name="init_summary_oc_ro">Laad caches van opencaching.ro</string>
     <string name="init_oc_ro_description">c:geo Autoriseren met opencaching.ro naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
-    <string name="settings_activate_oc_uk">Activeren</string>
     <string name="init_summary_oc_uk">Laad caches van opencaching.uk</string>
     <string name="init_oc_uk_description">Autoriseer c:geo met opencache.uk om naar caches te zoeken en je gevonden caches te benaderen/filteren.</string>
     <string name="init_summary_su">Laad caches van Geocaching.su</string>
-    <string name="settings_activate_su">Activeer</string>
     <string name="init_gcvote_password_description">Om een cache te kunnen beoordelen, volg de instructies op GCVote.com en geef hier uw GCVote wachtwoord op.</string>
     <string name="err_vote_send_rating">Fout bij verzenden beoordeling.</string>
     <string name="vote_sent">Stem succesvol verzonden</string>
-    <string name="settings_activate_twitter">Activeren</string>
     <string name="init_login_popup">Inloggen</string>
     <string name="init_login_popup_working">Inloggen op Geocaching.com…</string>
     <string name="init_login_popup_ok">Ingelogd</string>
@@ -1102,7 +1080,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">meer dan een jaar geleden</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Attributen</string>
     <string name="cache_inventory">Inventaris</string>
     <string name="cache_log_images_title">Logafbeelding</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1224,27 +1201,13 @@
     <string name="ignore_confirm_title">Wees voorzichtig</string>
     <string name="ignore_confirm_message">Een cache negeren betekent dat deze cache nooit meer geladen zal worden van geocaching.com. Je kunt deze cache alleen weer zichtbaar maken door dit te annuleren op geocaching.com.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Opgeslagen</string>
     <string name="cache_status_offline_log">Log opgeslagen</string>
     <string name="cache_status_found">Gevonden</string>
     <string name="cache_not_status_found">Niet gevonden</string>
-    <string name="cache_never_found">Nooit gevonden</string>
-    <string name="cache_found_last_30_days">Gevonden tijdens de laatste 30 dagen</string>
     <string name="cache_status_archived">Gearchiveerd</string>
     <string name="cache_status_disabled">Uitgeschakeld</string>
     <string name="cache_status_active">Actief</string>
     <string name="cache_status_premium">Alleen voor premium leden</string>
-    <string name="cache_status_not_premium">Toegang voor alle leden</string>
-    <string name="cache_status_stored">Opgeslagen</string>
-    <string name="cache_status_not_stored">Niet opgeslagen</string>
-    <string name="cache_status_stored_lasteighthours">Binnen de afgelopen acht uur</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Binnen de afgelopen 24 uur</string>
-    <string name="cache_status_stored_lastsevendays">Binnen de afgelopen zeven dagen</string>
-    <string name="cache_status_stored_lastthirtydays">Binnen de afgelopen dertig dagen</string>
-    <string name="cache_status_stored_morethaneighthours">Vóór de afgelopen acht uur</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Vóór de afgelopen 24 uur</string>
-    <string name="cache_status_stored_morethansevendays">Vóór de afgelopen zeven dagen</string>
-    <string name="cache_status_stored_morethanthirtydays">Vóór de afgelopen dertig dagen</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Naam</string>
     <string name="cache_name_set">Cachenaam instellen</string>
@@ -1256,7 +1219,6 @@
     <string name="cache_distance">Afstand</string>
     <string name="cache_difficulty">Moeilijkheid</string>
     <string name="cache_terrain">Terrein</string>
-    <string name="cache_difficulty_terrain">Moeilijkheidsgraad / Terrein</string>
     <string name="cache_rating">Waardering</string>
     <string name="cache_own_rating">Eigen waardering</string>
     <string name="cache_rating_of_new">%1$.1f van %2$d</string>
@@ -1265,9 +1227,7 @@
     <string name="cache_hidden">Verstopt</string>
     <string name="cache_event">Datum</string>
     <string name="cache_location">Locatie</string>
-    <string name="cache_location_country">Land</string>
     <string name="cache_coordinates">Coördinaten</string>
-    <string name="cache_calculator">Rekenmachine</string>
     <string name="cache_coordinates_original">Originele coordinaten</string>
     <string name="cache_spoiler_images_title">Spoiler afbeeldingen</string>
     <string name="cache_log_types">Log types</string>
@@ -1394,7 +1354,7 @@
     <string name="map_showc_found">Gevonden</string>
     <string name="map_showc_disabled">Uitgeschakeld</string>
     <string name="map_showc_archived">Gearchiveerd</string>
-    <string name="map_showc_offlinelog">Offline gelogd</string>
+    <string name="map_showc_found_offline">Gevonden (offline)</string>
     <string name="map_showwp_original">Origineel</string>
     <string name="map_showwp_parking">Parkeerplaats</string>
     <string name="map_showwp_visited">Bezocht</string>
@@ -1437,6 +1397,7 @@
     <string name="search_address_button">Zoeken op adres</string>
     <string name="search_geo">Geocode</string>
     <string name="search_geo_button">Zoeken op geocode</string>
+    <string name="search_geocode_from_clipboard">Geocode is geplakt van klembord.</string>
     <string name="search_kw">Trefwoorden</string>
     <string name="search_kw_prefill">Trefwoord</string>
     <string name="search_kw_button">Zoeken op trefwoord</string>
@@ -1460,6 +1421,12 @@
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
     <string name="search_pocket_and_bookmark_loading">Laden van een lijst van Pocket Queries en bladwijzerlijsten</string>
+    <string name="search_bookmark_loading">Bladwijzerlijsten laden</string>
+    <string name="search_bookmark_select">Selecteer bladwijzerlijsten</string>
+    <string name="search_bookmark_new">Nieuwe bladwijzerlijst aanmaken</string>
+    <string name="search_bookmark_adding_caches_success">Alle GC geocaches zijn toegevoegd aan de geselecteerde bookmarklijst</string>
+    <string name="search_bookmark_adding_caches_failed">Toevoegen van caches aan bladwijzerlijst is mislukt</string>
+    <string name="search_bookmark_create_new_failed">Het maken van een nieuwe bladwijzerlijst is mislukt</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Bezig met laden van trackable details…</string>
@@ -1877,7 +1844,6 @@
         <item quantity="one">%s favoriet</item>
         <item quantity="other">%s favorieten</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d %% favorieten</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
     <string name="create_shortcut">Maak snelkoppeling</string>
@@ -1887,7 +1853,6 @@
     <string name="confirm_report_problem_title">Probleem melden</string>
     <string name="confirm_report_problem_message">Je wilt \'%s\' melden. Weet je het zeker?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Activeren</string>
     <string name="init_summary_geokrety">Trackables van GeoKrety.org inschakelen</string>
     <string name="init_geokrety_description">C:geo autoriseren om op GeoKrety.org GeoKrety trackables te loggen.</string>
     <string name="init_geokrety_userid">Gebruikers-id: %s</string>
@@ -1979,7 +1944,6 @@
     <string name="map_clear_individual_route">Individuele route wissen</string>
     <string name="map_clear_individual_route_confirm">Wil je alle caches/waypoints van je individuele route verwijderen?</string>
     <string name="map_individual_route_cleared">Individuele route gewist</string>
-    <string name="save_sorted_route">Opslaan</string>
     <string name="sorted_route_saved">Individuele route opgeslagen</string>
     <string name="load_individual_route_error">Fout bij laden individuele route</string>
     <string name="route_item_not_yet_loaded">Route item nog niet geladen</string>
@@ -1988,6 +1952,8 @@
         <item quantity="other">Route geladen met %d routepunten</item>
     </plurals>
     <string name="center_on_route">Centreer op route</string>
+    <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
+    <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <!-- individual track -->
     <string name="individual_track">GPX spoor/route</string>
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
@@ -2145,6 +2111,7 @@
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
+    <string name="later">Later</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
 </resources>
