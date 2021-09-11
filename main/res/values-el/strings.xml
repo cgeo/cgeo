@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">Η κρύπτη πρέπει να αρχειοθετηθεί</string>
     <string name="log_problem_archive_text">Ο παίκτης ανέφερε ότι αυτή η κρύπτη πρέπει να αρχειοθετηθεί. Έχει ενημερωθεί ο εθελοντής διαχειριστής για αυτό.</string>
     <string name="log_image_scale_option_noscaling">Χωρίς κλιμάκωση</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">Υπό κλίμακα</string>
+    <string name="log_image_info_notscaled">χωρίς κλιμάκωση</string>
     <string name="log_image_titleprefix">Εικόνα</string>
-    <string name="datetime_clear_button">Kαθαρισμός</string>
     <string name="datetime_nodateset_display">Δεν έχει οριστεί ημερομηνία</string>
     <!-- translation -->
     <string name="translate">Μετάφραση</string>
@@ -327,6 +328,7 @@
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
     <string name="menu_lists_pocket_queries">Λίστες / pocket queries</string>
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
+    <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
     <string name="live_map_button">Live Χάρτης</string>
     <string name="caches_nearby_button">Σε κοντινή απόσταση</string>
@@ -381,6 +383,7 @@
     <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
     <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
+    <string name="caches_upload_bookmarklist">Μεταφόρτωση στη λίστα σελιδοδεικτών</string>
     <string name="caches_upload_modifiedcoords">Μεταφόρτωση τροποποιημένων συντεταγμένων</string>
     <string name="caches_upload_modifiedcoords_warning">Θέλετε να ανεβάσετε τροποποιημένες συντεταγμένες για όλες τις (επιλεγμένες) κρύπτες και να αντικαταστήσετε τις υπάρχουσες συντεταγμένες στον server; Αυτό δεν μπορεί να αναιρεθεί.</string>
     <string name="caches_upload_allcoords">Μεταφόρτωση συντεταγμένων για όλες τις κρύπτες</string>
@@ -395,25 +398,6 @@
     <string name="caches_map_locus_export">Εξαγωγή στο Locus</string>
     <string name="caches_filter_menuitem">Φίλτρο</string>
     <string name="caches_filter_title">Φιλτράρισμα κατά</string>
-    <string name="caches_filter_size">Μέγεθος</string>
-    <string name="caches_filter_type">Τύπος</string>
-    <string name="caches_filter_track">Με Ανιχνεύσιμα</string>
-    <string name="caches_filter_clear">Καθαρισμός φίλτρων</string>
-    <string name="caches_filter_modified">Με τροποποιημένες συντεταγμένες</string>
-    <string name="caches_filter_offline_log">Με καταγραφή εκτός σύνδεσης</string>
-    <string name="caches_filter_origin">Προέλευση</string>
-    <string name="caches_filter_distance">Απόσταση</string>
-    <string name="caches_filter_personal_note">Με προσωπική σημείωση</string>
-    <string name="caches_filter_popularity">Αγαπημένα</string>
-    <string name="caches_filter_popularity_ratio">Αγαπημένα [%]</string>
-    <string name="caches_filter_personal_data">Με προσωπικά στοιχεία</string>
-    <string name="caches_filter_rating">Με βαθμολογία</string>
-    <string name="caches_filter_own_rating">Με τη δική μου βαθμολογία</string>
-    <string name="caches_filter_multi_listing">Πολλαπλή καταχώριση με διαφορετική κατάσταση</string>
-    <string name="caches_filter_own_waypoint">Με σημεία διαδρομής ορισμένα από το χρήστη</string>
-    <string name="caches_filter_missing_gcvote">Οι κρύπτες που βρέθηκαν δεν έχουν αξιολογηθεί</string>
-    <string name="caches_filter_lists">Κατανεμημένες σε μια λίστα</string>
-    <string name="caches_filter_empty">(κενό)</string>
     <string name="caches_removing_from_history">Κατάργηση από το ιστορικό…</string>
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
@@ -478,7 +462,7 @@
     <string name="cache_filter_location">Τοποθεσία</string>
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filter_origin">Προέλευση</string>
-    <string name="cache_filter_stored_since">Αποθηκεύτηκε από</string>
+    <string name="cache_filter_stored_since">Τελευταία ενημέρωση λεπτομερειών</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
@@ -499,6 +483,8 @@
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
     <string name="cache_filter_storage_select_title">Επιλογή φίλτρου</string>
+    <string name="cache_filter_storage_delete_title">Διαγραφή φίλτρου</string>
+    <string name="cache_filter_storage_delete_message">Σίγουρα θέλετε να διαγράψετε αυτό το πρότυπο φίλτρου;</string>
     <string name="cache_filter_storage_select_clear_title">Επιλογή φίλτρου ή διαγραφή τρέχοντος φίλτρου</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Κανένα φίλτρο δεν έχει αποθηκευτεί ακόμα.</string>
     <string name="cache_filter_storage_save_title">Αποθήκευση φίλτρου με όνομα</string>
@@ -510,6 +496,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Δεν Είναι Παρόν</string>
     <string name="cache_filter_stringfilter_type_is_present">Είναι Παρόν</string>
     <string name="cache_filter_stringfilter_type_contains">Περιέχει</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Δεν περιέχει</string>
     <string name="cache_filter_stringfilter_type_starts_with">Ξεκινάει με</string>
     <string name="cache_filter_stringfilter_type_ends_with">Τελειώνει σε</string>
     <string name="cache_filter_stringfilter_type_pattern">Μοτίβο</string>
@@ -535,6 +522,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Έχει Ανιχνεύσιμο</string>
     <string name="cache_filter_status_select_label_has_own_vote">Εχει ψηφιστεί</string>
     <string name="cache_filter_status_select_label_has_offline_log">Εχει καταγραφή εκτός σύνδεσης</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Εχει καταγραφή εκτός σύνδεσης</string>
     <string name="cache_filter_status_select_label_solved_mystery">Λύμένο Μυστήριο</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Αυτή η ρύθμιση φίλτρου θα επηρεάσει μόνο κρυπτες γριφου.\n\n Ένας γρίφος θεωρείται «λυμένος» αν έχει αλλάγμενες συντεταγμένες ή ένα έγκυρο τελικό σημείο με συμπληρωμένο συντεταγμένες.</string>
     <string name="cache_filter_status_active">Ενεργή</string>
@@ -646,9 +634,7 @@
     <string name="settings_category_social">Κοινωνικά δίκτυα</string>
     <string name="settings_category_logging_other">Εμφάνιση περισσότερων επιλογών καταγραφής</string>
     <string name="settings_goto_url_button">περισσότερα…</string>
-    <string name="settings_activate_gc">Ενεργοποίηση</string>
-    <string name="settings_activate_ec">Ενεργοποίηση</string>
-    <string name="settings_activate_lc">Ενεργοποίηση</string>
+    <string name="settings_service_activate">Ενεργοποίηση</string>
     <string name="settings_gc_legal_note">Με την χρήση του geocaching.com, αποδέχεστε τους όρους χρήσης της Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Σύνδεση με χρήση Facebook ή Google</string>
     <string name="settings_info_facebook_login">Δεν μπορείτε να συνδεθείτε με το c:geo στο geocaching.com μέσω του λογαριασμού σας στο Facebook ή στο Google. Αλλά υπάρχει μια απλή λύση…</string>
@@ -659,30 +645,22 @@
     <string name="settings_su_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.su.</string>
     <string name="settings_lc_description">Συμπεριλάβετε κρύπτες Adventure Lab στο χάρτη.\n\n(Διαθέσιμο μόνο στα premium μέλη του \"Geocaching.com\". Απαιτεί μια ενεργοποιημένη υπηρεσία \"Geocaching.com\".)\n\nΗ αλλαγή αυτής της ρύθμισης απαιτεί επανεκκίνηση.</string>
     <string name="lc_default_description">Αυτή είναι μία Adventure Lab Cache. Αυτές μπορούν να παιχτούν μόνο με το Groundspeak Adventure Lab App. Πατήστε στο εικονίδιο του Adventure Lab στη σελίδα \"Λεπτομέρειες\" για να ανοίξετε/εγκαταστήσετε την εφαρμογή αυτή.\nΑν δεν θέλετε να βλέπετε κρύπτες Adenture Lab στο χάρτη και την αναζήτησή σας, μπορείτε να τις απενεργοποιήσετε, χρησιμοποιώντας το μενού \"Ρυθμίσεις\" - Υπηρεσίες - Geocaching - Adventure Lab</string>
-    <string name="settings_activate_oc">Ενεργοποίηση</string>
     <string name="init_summary_oc_de">Φόρτωση κρυπτών από opencaching.de</string>
     <string name="init_oc_de_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.de, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_pl">Ενεργοποίηση</string>
     <string name="init_summary_oc_pl">Φόρτωση κρυπτών από opencaching.pl</string>
     <string name="init_oc_pl_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.pl, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_nl">Ενεργοποίηση</string>
     <string name="init_summary_oc_nl">Φόρτωση κρυπτών από opencaching.nl</string>
     <string name="init_oc_nl_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.nl, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_us">Ενεργοποίηση</string>
     <string name="init_summary_oc_us">Φόρτωση κρυπτών από opencaching.us</string>
     <string name="init_oc_us_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.us, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_ro">Ενεργοποίηση</string>
     <string name="init_summary_oc_ro">Φόρτωση κρυπτών από opencaching.ro</string>
     <string name="init_oc_ro_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το opencaching.de, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
-    <string name="settings_activate_oc_uk">Ενεργοποίηση</string>
     <string name="init_summary_oc_uk">Φόρτωση κρυπτών από opencaching.uk</string>
     <string name="init_oc_uk_description">Επιτρέψτε στο c:geo να λαμβάνει δεδομένα κρυπτών από το geocaching.uk, και να έχει πρόσβαση στις κρύπτες που έχετε βρει.</string>
     <string name="init_summary_su">Φόρτωση κρυπτών από Geocaching.su</string>
-    <string name="settings_activate_su">Ενεργοποίηση</string>
     <string name="init_gcvote_password_description">Για να είστε σε θέση να αξιολογήσετε μια κρύπτη, θα πρέπει να ακολουθήσετε τις οδηγίες στο GCVote.com και να εισάγετε εδώ τον κωδικό πρόσβασής σας GCVote.</string>
     <string name="err_vote_send_rating">Σφάλμα κατά την αποστολή της βαθμολογίας.</string>
     <string name="vote_sent">Η ψήφος δόθηκε επιτυχώς</string>
-    <string name="settings_activate_twitter">Ενεργοποίηση</string>
     <string name="init_login_popup">Σύνδεση</string>
     <string name="init_login_popup_working">Συνδέεται με…</string>
     <string name="init_login_popup_ok">Επιτυχής σύνδεση</string>
@@ -1102,7 +1080,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">πάνω από ένα χρόνο πριν</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Ιδιότητες</string>
     <string name="cache_inventory">Απόθεμα</string>
     <string name="cache_log_images_title">Αρχείο καταγραφής εικόνων</string>
     <string name="cache_log_image_default_title">Φωτογραφία</string>
@@ -1224,27 +1201,13 @@
     <string name="ignore_confirm_title">Προσοχή</string>
     <string name="ignore_confirm_message">Αγνοώντας μια κρύπτη σημαίνει ότι αυτή η κρύπτη δεν θα εμφανιστεί πάλι κατά τη φόρτωση δεδομένων από το geocaching.com. Θα είστε σε θέση να δείτε και πάλι την κρύπτη μόνο αφού αφαιρέσετε την επιλογή αγνόησης στην ιστοσελίδα.</string>
     <string name="cache_status">Κατάσταση</string>
-    <string name="cache_stored">Αποθηκευμένα</string>
     <string name="cache_status_offline_log">Αποθηκευμένο αρχείο καταγραφής</string>
     <string name="cache_status_found">Βρέθηκε</string>
     <string name="cache_not_status_found">Δεν βρέθηκε</string>
-    <string name="cache_never_found">Δεν βρέθηκε ποτέ</string>
-    <string name="cache_found_last_30_days">Βρέθηκαν τις τελευταίες 30 ημέρες</string>
     <string name="cache_status_archived">Αρχειοθετημένη</string>
     <string name="cache_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_status_active">Ενεργή</string>
     <string name="cache_status_premium">Μόνο για Premium μέλη</string>
-    <string name="cache_status_not_premium">Πρόσβαση από όλα τα μέλη</string>
-    <string name="cache_status_stored">Αποθηκευμένα</string>
-    <string name="cache_status_not_stored">Μη αποθηκευμένες</string>
-    <string name="cache_status_stored_lasteighthours">Μέσα στις τελευταίες οκτώ ώρες</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Μέσα στις τελευταίες εικοσιτέσερεις ώρες</string>
-    <string name="cache_status_stored_lastsevendays">Μέσα στις τελευταίες επτά ημέρες</string>
-    <string name="cache_status_stored_lastthirtydays">Μέσα στις τελευταίες τριάντα μέρες</string>
-    <string name="cache_status_stored_morethaneighthours">Πρίν τις τελευταίες οκτώ ώρες</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Πρίν τις τελευταίες εικοσιτέσερεις ώρες</string>
-    <string name="cache_status_stored_morethansevendays">Πρίν τις τελευταίες επτά ημέρες</string>
-    <string name="cache_status_stored_morethanthirtydays">Πρίν τις τελευταίες τριάντα ημέρες</string>
     <string name="cache_geocode">Κωδικός κρύπτης</string>
     <string name="cache_name">Όνομα</string>
     <string name="cache_name_set">Τέθηκε όνομα κρύπτης</string>
@@ -1256,7 +1219,6 @@
     <string name="cache_distance">Απόσταση</string>
     <string name="cache_difficulty">Δυσκολία</string>
     <string name="cache_terrain">Έδαφος</string>
-    <string name="cache_difficulty_terrain">Δυσκολία / Έδαφος</string>
     <string name="cache_rating">Βαθμολογία</string>
     <string name="cache_own_rating">Η βαθμολογία σας</string>
     <string name="cache_rating_of_new">%1$.1f από %2$d</string>
@@ -1265,9 +1227,7 @@
     <string name="cache_hidden">Κρυμμένη</string>
     <string name="cache_event">Ημερομηνία</string>
     <string name="cache_location">Τοποθεσία</string>
-    <string name="cache_location_country">Χώρα</string>
     <string name="cache_coordinates">Συντεταγμένες</string>
-    <string name="cache_calculator">Αριθμομηχανή</string>
     <string name="cache_coordinates_original">Αρχικές Συντεταγμένες</string>
     <string name="cache_spoiler_images_title">Εικόνες spoiler</string>
     <string name="cache_log_types">Τύποι αρχείων καταγραφής</string>
@@ -1394,7 +1354,7 @@
     <string name="map_showc_found">Βρέθηκε</string>
     <string name="map_showc_disabled">Απενεργοποιημένη</string>
     <string name="map_showc_archived">Αρχειοθετημένη</string>
-    <string name="map_showc_offlinelog">Καταχώρηση Χωρίς Σύνδεση</string>
+    <string name="map_showc_found_offline">Βρέθηκε (offline)</string>
     <string name="map_showwp_original">Αρχική</string>
     <string name="map_showwp_parking">Πάρκινγκ</string>
     <string name="map_showwp_visited">Επίσκεψη</string>
@@ -1437,6 +1397,7 @@
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
     <string name="search_geo_button">Αναζήτηση με γεωκωδικό</string>
+    <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
     <string name="search_kw">Λέξεις-κλειδιά</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
@@ -1460,6 +1421,12 @@
     <string name="search_bookmark_list">Λίστα σελιδοδεικτών</string>
     <string name="search_pocket_is_new">νέο</string>
     <string name="search_pocket_and_bookmark_loading">Φόρτωση λίστας Pocket Queries και σελιδοδεικτών</string>
+    <string name="search_bookmark_loading">Φόρτωση λιστών σελιδοδεικτών</string>
+    <string name="search_bookmark_select">Επιλέξτε λίστες σελιδοδεικτών</string>
+    <string name="search_bookmark_new">Δημιουργία νέας λίστας σελιδοδεικτών</string>
+    <string name="search_bookmark_adding_caches_success">Όλες οι κρύπτες GC έχουν προστεθεί στην επιλεγμένη λίστα σελιδοδεικτών</string>
+    <string name="search_bookmark_adding_caches_failed">Αποτυχία προσθήκης κρυπτών στη λίστα σελιδοδεικτών</string>
+    <string name="search_bookmark_create_new_failed">Αποτυχία δημιουργίας νέας λίστας σελιδοδεικτών</string>
     <!-- trackable -->
     <string name="trackable">Ανιχνεύσιμο</string>
     <string name="trackable_details_loading">Φορτώνει τις λεπτομέρειες του ανιχνεύσιμου…</string>
@@ -1877,7 +1844,6 @@
         <item quantity="one">%s αγαπημένο</item>
         <item quantity="other">%s αγαπημένα</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; Αγαπημένα %d%%</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Συντόμευση c:geo</string>
     <string name="create_shortcut">Δημιουργία συντόμευσης</string>
@@ -1887,7 +1853,6 @@
     <string name="confirm_report_problem_title">Αναφορά προβλήματος</string>
     <string name="confirm_report_problem_message">Θέλετε να αναφέρετε %s. Είστε σίγουρος;</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Ενεργοποίηση</string>
     <string name="init_summary_geokrety">Ενεργοποιείστε ανιχνεύσιμα από το GeoKrety.org</string>
     <string name="init_geokrety_description">Εξουσιοδοτείστε το c:geo να καταγράφει τα ανιχνεύσιμα GeoKrety στο GeoKrety.org.</string>
     <string name="init_geokrety_userid">Ταυτότητα χρήστη: %s</string>
@@ -1979,7 +1944,6 @@
     <string name="map_clear_individual_route">Εκκαθάριση μεμονωμένης διαδρομής</string>
     <string name="map_clear_individual_route_confirm">Θέλετε να απομακρύνετε όλες τις κρύπτες/ενδιάμεσα σημεία από την μεμονωμένη διαδρομή;</string>
     <string name="map_individual_route_cleared">Έγινε εκκαθάριση της μεμονωμένης διαδρομής</string>
-    <string name="save_sorted_route">Αποθήκευση</string>
     <string name="sorted_route_saved">Έγινε αποθήκευση της μεμονωμένης διαδρομής</string>
     <string name="load_individual_route_error">Σφάλμα κατά την φόρτωση της μεμονωμένης διαδρομής</string>
     <string name="route_item_not_yet_loaded">route_item_not_yet_loaded</string>
@@ -1988,6 +1952,8 @@
         <item quantity="other">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
     </plurals>
     <string name="center_on_route">Κέντρο στη διαδρομή</string>
+    <string name="individual_route_set_as_start_title">Ορισμός ως Εναρξη διαδρομής</string>
+    <string name="individual_route_set_as_start_message">Να οριστεί αυτό το στοιχείο ως αρχή δρομολόγησης και να μετακινηθούν όλα τα επόμενα στοιχεία προς την κορυφή της τρέχουσας διαδρομής;</string>
     <!-- individual track -->
     <string name="individual_track">GPX διαδρομή</string>
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
@@ -2141,6 +2107,7 @@
     <string name="done">Ολοκληρώθηκε</string>
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="back">Πίσω</string>
+    <string name="later">Αργότερα</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
 </resources>
