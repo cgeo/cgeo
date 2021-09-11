@@ -177,9 +177,7 @@
     <string name="log_problem_archive_label">Skrýša by mala byť archivovaná</string>
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nZmenená veľkosť/Komprimované:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Obrázok</string>
-    <string name="datetime_clear_button">Vyčistiť</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
     <!-- translation -->
     <string name="translate">Preložiť</string>
@@ -395,25 +393,6 @@
     <string name="caches_map_locus_export">Exportovať do Locus</string>
     <string name="caches_filter_menuitem">Filtrovať</string>
     <string name="caches_filter_title">Filtrovať</string>
-    <string name="caches_filter_size">veľkosti</string>
-    <string name="caches_filter_type">Typ</string>
-    <string name="caches_filter_track">S trasovateľnými predmetmi</string>
-    <string name="caches_filter_clear">Bez filtrovania</string>
-    <string name="caches_filter_modified">S upravenými súradnicami</string>
-    <string name="caches_filter_offline_log">S offline logmi</string>
-    <string name="caches_filter_origin">Pôvod</string>
-    <string name="caches_filter_distance">vzdialenosti</string>
-    <string name="caches_filter_personal_note">S osobnou poznámkou</string>
-    <string name="caches_filter_popularity">obľúbenosti</string>
-    <string name="caches_filter_popularity_ratio">obľúbenosti [%]</string>
-    <string name="caches_filter_personal_data">S osobnými údajmi</string>
-    <string name="caches_filter_rating">S hodnotením</string>
-    <string name="caches_filter_own_rating">S vlastným hodnotením</string>
-    <string name="caches_filter_multi_listing">Viacnásobne zobrazená s rôznym statusom</string>
-    <string name="caches_filter_own_waypoint">S vlastnými bodmi trasy</string>
-    <string name="caches_filter_missing_gcvote">Nájdené skrýše bez GCvote hlasov</string>
-    <string name="caches_filter_lists">Zaradené do zoznamu</string>
-    <string name="caches_filter_empty">(prázdny)</string>
     <string name="caches_removing_from_history">Odstraňovanie z histórie…</string>
     <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
@@ -478,7 +457,6 @@
     <string name="cache_filter_location">Miesto</string>
     <string name="cache_filter_stored_lists">Uložené zoznamy</string>
     <string name="cache_filter_origin">Pôvod</string>
-    <string name="cache_filter_stored_since">Uložené od</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
@@ -647,9 +625,7 @@
     <string name="settings_category_social">Sociálne médiá</string>
     <string name="settings_category_logging_other">Ďalšie možnosti logovania</string>
     <string name="settings_goto_url_button">viac…</string>
-    <string name="settings_activate_gc">Aktivovať</string>
-    <string name="settings_activate_ec">Aktivovať</string>
-    <string name="settings_activate_lc">Aktivovať</string>
+    <string name="settings_service_activate">Aktivovať</string>
     <string name="settings_gc_legal_note">Používaním služieb geocaching.com akceptujete podmienky používania Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Prihlásenie cez Facebook alebo Google</string>
     <string name="settings_info_facebook_login">V aplikácii c:geo nie je možné prihlasovať sa na geocaching.com cez konto Facebooku alebo Google. Ale je tu jednoduché riešenie…</string>
@@ -660,30 +636,22 @@
     <string name="settings_su_description">Autorizovať c:geo pre hľadanie skrýš s geocaching.su.</string>
     <string name="settings_lc_description">Zahrnúť do mapy Adventure Lab kešky.\n\n(K dispozícii len prémiovým členom \"Geocaching.com\". Vyžaduje aktivovanú službu \"Geocaching.com\".)\n\nZmena tohto nastavenia vyžaduje reštart aplikácie.</string>
     <string name="lc_default_description">Toto je Adventure Lab keška z geocaching.com. Adventúry možno hrať len s aplikáciou Adventure Lab od spoločnosti Groundspeak. Ťuknutím na ikonu Adventure Lab na stránke \"Podrobnosti\" otvoríte/nainštalujete aplikáciu Adventure Lab App pre túto adventúru odtiaľto.\nAk nechcete vidieť a vyhľadávať kešky Adenture Lab na svojej mape, môžete to deaktivovať cez ponuku \"Nastavenie\" menu – Služby – Geocaching.com Adventure Lab.</string>
-    <string name="settings_activate_oc">Aktivovať</string>
     <string name="init_summary_oc_de">Načítať skrýše z opencaching.de</string>
     <string name="init_oc_de_description">Autorizovať c:geo pre opencaching.de na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
-    <string name="settings_activate_oc_pl">Aktivovať</string>
     <string name="init_summary_oc_pl">Načítať skrýše z opencaching.pl</string>
     <string name="init_oc_pl_description">Autorizovať c:geo pre opencaching.pl na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
-    <string name="settings_activate_oc_nl">Aktivovať</string>
     <string name="init_summary_oc_nl">Načítať skrýše z opencaching.nl</string>
     <string name="init_oc_nl_description">Autorizovať c:geo pre opencaching.nl na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
-    <string name="settings_activate_oc_us">Aktivovať</string>
     <string name="init_summary_oc_us">Načítať skrýše z opencaching.us</string>
     <string name="init_oc_us_description">Autorizovať c:geo pre opencaching.us na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
-    <string name="settings_activate_oc_ro">Aktivovať</string>
     <string name="init_summary_oc_ro">Načítať skrýše z opencaching.ro</string>
     <string name="init_oc_ro_description">Autorizovať c:geo pre opencaching.ro na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
-    <string name="settings_activate_oc_uk">Aktivovať</string>
     <string name="init_summary_oc_uk">Načítať skrýše z opencache.uk</string>
     <string name="init_oc_uk_description">Autorizovať c:geo pre opencache.uk na vyhľadávanie, zobrazenie a filtrovanie nájdených skrýš.</string>
     <string name="init_summary_su">Načítať skrýše z Geocaching.su</string>
-    <string name="settings_activate_su">Aktivovať</string>
     <string name="init_gcvote_password_description">Ak chcete hodnotiť skrýše, postupujte podľa pokynov na GCVote.com a potom sem zadajte svoje GCVote heslo.</string>
     <string name="err_vote_send_rating">Chyba pri odosielaní hodnotenia.</string>
     <string name="vote_sent">Hlasovanie úspešne odoslané</string>
-    <string name="settings_activate_twitter">Aktivovať</string>
     <string name="init_login_popup">Prihlasovanie</string>
     <string name="init_login_popup_working">Prihlasovanie…</string>
     <string name="init_login_popup_ok">Prihlásenie úspešné</string>
@@ -1118,7 +1086,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">pred viac ako rokom</string>
     <string name="cache_premium">Platený účet</string>
-    <string name="cache_attributes">Atribúty</string>
     <string name="cache_inventory">Obsah</string>
     <string name="cache_log_images_title">Obrázky z logov</string>
     <string name="cache_log_image_default_title">Fotografia</string>
@@ -1239,27 +1206,13 @@
     <string name="ignore_confirm_title">Buď opatrný</string>
     <string name="ignore_confirm_message">Ignorovanie skrýše znamená, že údaje o skrýši sa viac nebudú zobrazovať pri sťahovaní dát z geocaching.com. Túto skrýšu budete môcť vidieť, keď ju zrušíte ignorovanie na webe.</string>
     <string name="cache_status">Stav</string>
-    <string name="cache_stored">Uložené</string>
     <string name="cache_status_offline_log">Uložený log</string>
     <string name="cache_status_found">Nájdená</string>
     <string name="cache_not_status_found">Nenájdená</string>
-    <string name="cache_never_found">Doteraz nenájdená</string>
-    <string name="cache_found_last_30_days">Nálezy za posledných 30 dní</string>
     <string name="cache_status_archived">Archivovaná</string>
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktívna</string>
     <string name="cache_status_premium">Iba pre platiacich používateľov</string>
-    <string name="cache_status_not_premium">Prístup pre všetkých používateľov</string>
-    <string name="cache_status_stored">Uložené</string>
-    <string name="cache_status_not_stored">Neuložená</string>
-    <string name="cache_status_stored_lasteighthours">Za posledných 8 hodín</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Za posledných 24 hodín</string>
-    <string name="cache_status_stored_lastsevendays">Za posledných 7 dní</string>
-    <string name="cache_status_stored_lastthirtydays">Za posledných 30 dní</string>
-    <string name="cache_status_stored_morethaneighthours">Pred poslednými 8 hodinami</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Pred poslednými 24 hodinami</string>
-    <string name="cache_status_stored_morethansevendays">Pred poslednými 7 dňami</string>
-    <string name="cache_status_stored_morethanthirtydays">Pred poslednými 30 dňami</string>
     <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Názov</string>
     <string name="cache_name_set">Nastaviť názov kešky</string>
@@ -1271,7 +1224,6 @@
     <string name="cache_distance">Vzdialenosť</string>
     <string name="cache_difficulty">Náročnosť</string>
     <string name="cache_terrain">Terén</string>
-    <string name="cache_difficulty_terrain">Náročnosť/Terén</string>
     <string name="cache_rating">Hodnotenie</string>
     <string name="cache_own_rating">Vlastné hodnotenie</string>
     <string name="cache_rating_of_new">%1$.1f z %2$d</string>
@@ -1280,9 +1232,7 @@
     <string name="cache_hidden">Skrytá</string>
     <string name="cache_event">Dátum</string>
     <string name="cache_location">Miesto</string>
-    <string name="cache_location_country">Krajina</string>
     <string name="cache_coordinates">Súradnice</string>
-    <string name="cache_calculator">Kalkulačka</string>
     <string name="cache_coordinates_original">Pôvodné súradnice</string>
     <string name="cache_spoiler_images_title">Obrázky s nápovedou</string>
     <string name="cache_log_types">Typy záznamov</string>
@@ -1411,7 +1361,6 @@
     <string name="map_showc_found">Nájdené</string>
     <string name="map_showc_disabled">Vypnuté</string>
     <string name="map_showc_archived">Archivované</string>
-    <string name="map_showc_offlinelog">Zalogované offline</string>
     <string name="map_showwp_original">Pôvodné</string>
     <string name="map_showwp_parking">Parkovanie</string>
     <string name="map_showwp_visited">Navštívené</string>
@@ -1908,7 +1857,6 @@
         <item quantity="many">%s obľúbených</item>
         <item quantity="other">%s obľúbených</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d %% obľúbených</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>
     <string name="create_shortcut">Vytvoriť odkaz</string>
@@ -1918,7 +1866,6 @@
     <string name="confirm_report_problem_title">Nahlásiť problém</string>
     <string name="confirm_report_problem_message">Naozaj chcete nahlásiť „%s“?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivovať</string>
     <string name="init_summary_geokrety">Povoliť trasovateľné predmety z GeoKrety.org</string>
     <string name="init_geokrety_description">Autorizovať c:geo na GeoKrety.org, aby ste mohli zalogovať trasovateľné predmety GeoKrety.</string>
     <string name="init_geokrety_userid">ID používateľa: %s</string>
@@ -2022,7 +1969,6 @@
     <string name="map_clear_individual_route">Vymazať individuálnu trasu</string>
     <string name="map_clear_individual_route_confirm">Chcete zo svojej indiviulduálnej trasy odstrániť všetky kešky/body trasy?</string>
     <string name="map_individual_route_cleared">Individuálna trasa vymazaná</string>
-    <string name="save_sorted_route">Uložiť</string>
     <string name="sorted_route_saved">Individuálna trasa uložená</string>
     <string name="load_individual_route_error">Chyba pri načítavaní individuálnej trasy</string>
     <string name="route_item_not_yet_loaded">Položka trasy zatiaľ nie je načítaná</string>
