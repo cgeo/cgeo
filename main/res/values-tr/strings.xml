@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">Geocache arşivlenmeli</string>
     <string name="log_problem_archive_text">Bu Geocacher kutunun arşivlenmesi gerektiğini bildirdi. Bununla ilgili olarak Gönüllü Denetçi bilgilendirilecek.</string>
     <string name="log_image_scale_option_noscaling">Ölçeklendirme yok</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nÖlçeklenmiş/Sıkıştırılmış:\n%4$d x %5$d px, ~ %6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">ölçekli</string>
+    <string name="log_image_info_notscaled">ölçeksiz</string>
     <string name="log_image_titleprefix">Resim</string>
-    <string name="datetime_clear_button">Temizle</string>
     <string name="datetime_nodateset_display">Tarih ayarlanmadı</string>
     <!-- translation -->
     <string name="translate">Çeviri</string>
@@ -327,6 +328,7 @@
     <string name="menu_scan_geo">Geocode tara</string>
     <string name="menu_lists_pocket_queries">Listeler / cep sorguları</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
+    <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
     <string name="live_map_button">Canlı harita</string>
     <string name="caches_nearby_button">Yakınlarda</string>
@@ -381,6 +383,7 @@
     <string name="caches_remove_all_completely">Hepsini cihazdan sil</string>
     <string name="caches_remove_selected_completely">Seçilenleri cihazdan sil</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
+    <string name="caches_upload_bookmarklist">Yer imi listesine yükle</string>
     <string name="caches_upload_modifiedcoords">Düzenlenmiş koordinatları yükle</string>
     <string name="caches_upload_modifiedcoords_warning">Tüm seçili cache\'ler için değiştirilmiş koordinatları yüklemek ve sunucuda varolan koordinatların üzerine yazmak istiyor musunuz? Bu işlem geri alınamaz.</string>
     <string name="caches_upload_allcoords">Tüm Cache\'lerin koordinatlarını güncelle</string>
@@ -395,25 +398,6 @@
     <string name="caches_map_locus_export">Locus\'a aktarma</string>
     <string name="caches_filter_menuitem">Filtre</string>
     <string name="caches_filter_title">Filtreleme</string>
-    <string name="caches_filter_size">Boyut</string>
-    <string name="caches_filter_type">Tür</string>
-    <string name="caches_filter_track">Trackable bulunan</string>
-    <string name="caches_filter_clear">Filtreleri temizle</string>
-    <string name="caches_filter_modified">Değiştirilmiş koordinatlar ile</string>
-    <string name="caches_filter_offline_log">Çevrimdışı kayıt ile</string>
-    <string name="caches_filter_origin">Başlangıç noktası</string>
-    <string name="caches_filter_distance">Mesafe</string>
-    <string name="caches_filter_personal_note">Kişisel not ile</string>
-    <string name="caches_filter_popularity">Favoriler</string>
-    <string name="caches_filter_popularity_ratio">Favoriler [%]</string>
-    <string name="caches_filter_personal_data">Kişisel verilerle</string>
-    <string name="caches_filter_rating">Puanlama ile</string>
-    <string name="caches_filter_own_rating">Kendi puanlandırmam ile</string>
-    <string name="caches_filter_multi_listing">Farklı durumdaki çoklu listeleme</string>
-    <string name="caches_filter_own_waypoint">Kullanıcı tanımlı ara noktalar ile</string>
-    <string name="caches_filter_missing_gcvote">Bulunan Geocache\'ler için oy verilmedi</string>
-    <string name="caches_filter_lists">Bir listeye eklenmişler</string>
-    <string name="caches_filter_empty">(boş)</string>
     <string name="caches_removing_from_history">Geçmişten kaldırılıyor…</string>
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
@@ -478,7 +462,6 @@
     <string name="cache_filter_location">Konum</string>
     <string name="cache_filter_stored_lists">Saklanan Listeler</string>
     <string name="cache_filter_origin">Orijin</string>
-    <string name="cache_filter_stored_since">Depolandığı tarih</string>
     <string name="cache_filtergroup_basic">Temel</string>
     <string name="cache_filtergroup_details">Detaylar</string>
     <string name="cache_filtergroup_userspecific">Kullanıcıya özgün</string>
@@ -499,6 +482,8 @@
     <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
     <string name="cache_filter_storage_select_title">Filtre seçin</string>
+    <string name="cache_filter_storage_delete_title">Filtreyi sil</string>
+    <string name="cache_filter_storage_delete_message">Gerçekten bu filtre şablonunu silmek istiyor musunuz?</string>
     <string name="cache_filter_storage_select_clear_title">Filtre seçin veya mevcut filtreyi temizleyin</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Henüz bir filtre kaydedilmedi.</string>
     <string name="cache_filter_storage_save_title">Filtreyi isimlendirerek sakla</string>
@@ -510,6 +495,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Mevcut Değil</string>
     <string name="cache_filter_stringfilter_type_is_present">Mevcut</string>
     <string name="cache_filter_stringfilter_type_contains">Şunu İçeriyorsa</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">İçermez</string>
     <string name="cache_filter_stringfilter_type_starts_with">Şununla Başlıyorsa</string>
     <string name="cache_filter_stringfilter_type_ends_with">Şununla Bitiyorsa</string>
     <string name="cache_filter_stringfilter_type_pattern">Patern</string>
@@ -535,6 +521,7 @@
     <string name="cache_filter_status_select_label_has_trackable">İçinde TB Olan</string>
     <string name="cache_filter_status_select_label_has_own_vote">Puanlama Girilmiş</string>
     <string name="cache_filter_status_select_label_has_offline_log">Çevrimdışı Kayıt Girilmiş</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Çevrımdışı Buldum Kaydı Olan</string>
     <string name="cache_filter_status_select_label_solved_mystery">Çözülmüş Gizemli</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Bu filtre ayarı sadece Gizemli cache\'ler için çalışır.\n\nEğer bir Gizemli cache\'in koordinatları değiştirilmişse veya geçerli bir yol noktasına koordinat girilmişse \'Çözülmüş\' olarak kabul edilir.</string>
     <string name="cache_filter_status_active">Aktif</string>
@@ -646,9 +633,7 @@
     <string name="settings_category_social">Sosyal medya</string>
     <string name="settings_category_logging_other">Diğer Kayıt Seçenekleri</string>
     <string name="settings_goto_url_button">daha fazla …</string>
-    <string name="settings_activate_gc">Etkinleştir</string>
-    <string name="settings_activate_ec">Etkinleştir</string>
-    <string name="settings_activate_lc">Etkinleştir</string>
+    <string name="settings_service_activate">Etkinleştir</string>
     <string name="settings_gc_legal_note">Geocaching.com hizmetini kullanmak için Groundspeak kullanım şartlarını kabul edin.</string>
     <string name="settings_info_facebook_login_title">Facebook/Google ile giriş yapın</string>
     <string name="settings_info_facebook_login">Facebook veya Google hesabınızla geocaching.com\'a c:geo girişi yapamazsınız. Ancak basit bir çözüm var…</string>
@@ -659,30 +644,22 @@
     <string name="settings_su_description">c:geo\'yu Geocache\'leri aramak için geocaching.su ile yetkilendirin.</string>
     <string name="settings_lc_description">Adventure Lab cache\'leri de haritaya dahil et.\n\n(\"Geocaching.com\" ücretli üyeliği sahiplerine özeldir. \"Geocaching.com\" hizmeti c:geo\'da yetkilendirilmelidir.)\n\nBu ayarın değiştirilmesi yeniden başlatma gerektirir.</string>
     <string name="lc_default_description">Bu bir geocaching.com Adventure Lab Cache\'dir. Adventure\'lar sadece Groundspeak Adventure Lab uygulamasıyla oynanabilir. Adventure Lab uygulamasını açmak/kurmak için \'\'Detaylar\'\' sayfasındaki Adventure Lab ikonuna tıklayın.\nEğer haritanızda ve aramalarınızda Adventure Lab cache\'leri görmek istemiyorsanız \'\'Ayarlar\'\' üzerinden bu özelliği kapatabilirsiniz. Ayarlar-Servisler-Geocaching.com Adventure Lab</string>
-    <string name="settings_activate_oc">Etkinleştir</string>
     <string name="init_summary_oc_de">opencaching.de üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_de_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencachin.de ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_pl">Etkinleştir</string>
     <string name="init_summary_oc_pl">opencaching.pl üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_pl_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.pl ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_nl">Etkinleştir</string>
     <string name="init_summary_oc_nl">opencaching.nl üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_nl_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.nl ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_us">Etkinleştir</string>
     <string name="init_summary_oc_us">opencaching.us üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_us_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.us ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_ro">Etkinleştir</string>
     <string name="init_summary_oc_ro">opencaching.ro üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_ro_description">Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencaching.ro ile c:geo\'yu yetkilendirin.</string>
-    <string name="settings_activate_oc_uk">Etkinleştir</string>
     <string name="init_summary_oc_uk">opencache.uk üzerinden Geocache\'leri yükle</string>
     <string name="init_oc_uk_description">c:geo\'yu Geocache\'leri aramak için ve bulduğunuz Geocache\'lere erişmek/filtrelemek için opencache.uk ile yetkilendirin.</string>
     <string name="init_summary_su">Geocaching.su üzerinden Geocache\'leri yükle</string>
-    <string name="settings_activate_su">Etkinleştir</string>
     <string name="init_gcvote_password_description">Bir Geocache\'i derecelendirmek için GCVote.com\'daki talimatları takip etmeniz ve buraya GCVote şifrenizi girmeniz gereklidir.</string>
     <string name="err_vote_send_rating">Puan gönderilirken hata oluştu.</string>
     <string name="vote_sent">Puanlama başarıyla gönderildi</string>
-    <string name="settings_activate_twitter">Etkinleştir</string>
     <string name="init_login_popup">Oturum açma</string>
     <string name="init_login_popup_working">Oturum açılıyor…</string>
     <string name="init_login_popup_ok">Oturum açıldı</string>
@@ -1102,7 +1079,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">bir yıldan uzun süre önce</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Özellikler</string>
     <string name="cache_inventory">Envanter</string>
     <string name="cache_log_images_title">Kayıt görselleri</string>
     <string name="cache_log_image_default_title">Görsel</string>
@@ -1224,27 +1200,13 @@
     <string name="ignore_confirm_title">Dikkatli ol</string>
     <string name="ignore_confirm_message">Bir Geocache yok sayılırsa, geocaching.com\'tan veri yüklerken bir daha asla görüntülenmeyecektir. Sadece web sitesinde yok sayılmayı iptal ederek bu Geocache\'i tekrar görebilirsiniz.</string>
     <string name="cache_status">Durum</string>
-    <string name="cache_stored">Kaydedilmiş</string>
     <string name="cache_status_offline_log">Saklanan Kayıt</string>
     <string name="cache_status_found">Bulundu</string>
     <string name="cache_not_status_found">Bulunmadı</string>
-    <string name="cache_never_found">Hiçbir bulunmadı</string>
-    <string name="cache_found_last_30_days">Son 30 gün içerisinde bulunanlar</string>
     <string name="cache_status_archived">Arşivlendi</string>
     <string name="cache_status_disabled">Devredışı</string>
     <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Sadece Premium üyeler</string>
-    <string name="cache_status_not_premium">Tüm Üyelere Erişim</string>
-    <string name="cache_status_stored">Kaydedilmiş</string>
-    <string name="cache_status_not_stored">Kaydedilmemiş</string>
-    <string name="cache_status_stored_lasteighthours">Son sekiz saat içinde</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Son yirmi dört saat içinde</string>
-    <string name="cache_status_stored_lastsevendays">Son yedi gün içinde</string>
-    <string name="cache_status_stored_lastthirtydays">Son otuz gün içinde</string>
-    <string name="cache_status_stored_morethaneighthours">Son sekiz saatten önce</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Son yirmi dört saatten önce</string>
-    <string name="cache_status_stored_morethansevendays">Son yedi günden önce</string>
-    <string name="cache_status_stored_morethanthirtydays">Son otuz günden önce</string>
     <string name="cache_geocode">Geo kodu</string>
     <string name="cache_name">İsim</string>
     <string name="cache_name_set">Cache ismi ayarla</string>
@@ -1256,7 +1218,6 @@
     <string name="cache_distance">Mesafe</string>
     <string name="cache_difficulty">Zorluk</string>
     <string name="cache_terrain">Arazi</string>
-    <string name="cache_difficulty_terrain">Zorluk / Arazi</string>
     <string name="cache_rating">Puanlama</string>
     <string name="cache_own_rating">Puanlamanız</string>
     <string name="cache_rating_of_new">%1$.1f/%2$d</string>
@@ -1265,9 +1226,7 @@
     <string name="cache_hidden">Yerleştirilme</string>
     <string name="cache_event">Saklanma Tarihi</string>
     <string name="cache_location">Konum</string>
-    <string name="cache_location_country">Ülke</string>
     <string name="cache_coordinates">Koordinatlar</string>
-    <string name="cache_calculator">Hesap Makinesi</string>
     <string name="cache_coordinates_original">Orjinal koordinatlar</string>
     <string name="cache_spoiler_images_title">İpucu görselleri</string>
     <string name="cache_log_types">Kayıt türleri</string>
@@ -1394,7 +1353,7 @@
     <string name="map_showc_found">Bulduğum</string>
     <string name="map_showc_disabled">Devredışı</string>
     <string name="map_showc_archived">Arşivlendi</string>
-    <string name="map_showc_offlinelog">Çevrimdışı Kaydedildi</string>
+    <string name="map_showc_found_offline">Buldum (Çevrimdışı)</string>
     <string name="map_showwp_original">Orijinal</string>
     <string name="map_showwp_parking">Park alanı</string>
     <string name="map_showwp_visited">Ziyaret edildi</string>
@@ -1437,6 +1396,7 @@
     <string name="search_address_button">Adrese göre ara</string>
     <string name="search_geo">Geo kod</string>
     <string name="search_geo_button">Geo koduna göre ara</string>
+    <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
     <string name="search_kw">Anahtar kelimeler</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
@@ -1460,6 +1420,12 @@
     <string name="search_bookmark_list">Yer imi listesi</string>
     <string name="search_pocket_is_new">yeni</string>
     <string name="search_pocket_and_bookmark_loading">Cep sorgusu listesi veya bir yer imi listesi yükleniyor</string>
+    <string name="search_bookmark_loading">Yer imi listeleri yükleniyor</string>
+    <string name="search_bookmark_select">Yer imi listesini seç</string>
+    <string name="search_bookmark_new">Yeni yer imi listesi oluştur</string>
+    <string name="search_bookmark_adding_caches_success">Tüm Geocache\'ler seçili yer imi listesine eklendi</string>
+    <string name="search_bookmark_adding_caches_failed">Yer imi listesine cache ekleme başarısız</string>
+    <string name="search_bookmark_create_new_failed">Yeni yer imi listesi oluşturma başarısız</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Trackable detayları yükleniyor…</string>
@@ -1877,7 +1843,6 @@
         <item quantity="one">%s favori</item>
         <item quantity="other">%s favori</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favori</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo kısayolu</string>
     <string name="create_shortcut">Kısayol oluştur</string>
@@ -1887,7 +1852,6 @@
     <string name="confirm_report_problem_title">Sorun bildir</string>
     <string name="confirm_report_problem_message">Bunu bildirmek istiyorsunuz: \'%s\'. Emin misiniz?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Etkinleştir</string>
     <string name="init_summary_geokrety">Trackable\'ları GeoKrety.org\'da aktifleştirin</string>
     <string name="init_geokrety_description">c:geo\'yu GeoKrety trackable\'larını kayıt edebilmek için GeoKrety.org ile yetkilendir.</string>
     <string name="init_geokrety_userid">Kullanıcı adı:%s</string>
@@ -1979,7 +1943,6 @@
     <string name="map_clear_individual_route">Özel rotayı temizle</string>
     <string name="map_clear_individual_route_confirm">Özel rotanızdan tüm cache/yol noktalarını kaldırmak istediğinize emin misiniz?</string>
     <string name="map_individual_route_cleared">Özel rota temizlendi</string>
-    <string name="save_sorted_route">Kaydet</string>
     <string name="sorted_route_saved">Özel rota kaydedildi</string>
     <string name="load_individual_route_error">Özel rota yüklenirken hata oluştu</string>
     <string name="route_item_not_yet_loaded">Rota henüz yüklenmedi</string>
@@ -1988,6 +1951,8 @@
         <item quantity="other">Rota %d rota noktasıyla yüklendi</item>
     </plurals>
     <string name="center_on_route">Rotaya göre ortala</string>
+    <string name="individual_route_set_as_start_title">Rota başlangıcı olarak ayarla</string>
+    <string name="individual_route_set_as_start_message">Bu öğeyi rota başlangıcı olarak ayarlanıp, sonraki tüm öğeler mevcut rotanın üstüne taşınsın mı?</string>
     <!-- individual track -->
     <string name="individual_track">GPX yol/rota</string>
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>
@@ -2145,6 +2110,7 @@
     <string name="done">Tamamlandı</string>
     <string name="finish">Bitir</string>
     <string name="back">Geri</string>
+    <string name="later">Sonra</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tümünü Seç</string>
 </resources>
