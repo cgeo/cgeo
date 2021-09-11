@@ -56,6 +56,8 @@ final class ALApi {
     private static final String LATITUDE  = "Latitude";
     private static final String TITLE     = "Title";
 
+    private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
+
     private ALApi() {
         // utility class with static methods
     }
@@ -89,35 +91,26 @@ final class ALApi {
         final double loncenter = (lon1 + lon2) / 2;
         final Geopoint gp1 = new Geopoint(lat1, lon1);
         final Geopoint gp2 = new Geopoint(lat2, lon2);
-        final double radius = gp1.distanceTo(gp2) * 500; // we get diameter in km, need radius in m
-        Log.d("_AL Radius: " + (int) radius);
-        final Parameters params = new Parameters("skip", "0");
-        final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
-        params.add("take", "100");
-        params.add("radiusMeters", String.valueOf((int) radius));
-        params.add("origin.latitude", String.valueOf(latcenter));
-        params.add("origin.longitude", String.valueOf(loncenter));
-        try {
-            final Response response = apiRequest("SearchV3", params, headers).blockingGet();
-            return importCachesFromJSON(response);
-        } catch (final Exception ignored) {
-            return Collections.emptyList();
-        }
+        final int radius = (int) (gp1.distanceTo(gp2) * 500); // we get diameter in km, need radius in m
+        Log.d("_AL Radius: " + radius);
+
+        final Geopoint center = new Geopoint(latcenter, loncenter);
+        return searchByCenter(center, radius);
     }
 
     @NonNull
     protected static Collection<Geocache> searchByCenter(final Geopoint center) {
-        return searchByCenter(center, 10);
+        return searchByCenter(center, DEFAULT_RADIUS);
     }
 
     @NonNull
-    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInKm) {
+    private static Collection<Geocache> searchByCenter(final Geopoint center, final int distanceInMeters) {
         if (!Settings.isGCPremiumMember() || CONSUMER_KEY.isEmpty()) {
             return Collections.emptyList();
         }
         final Parameters params = new Parameters("skip", "0");
         params.add("take", "100");
-        params.add("radiusMeters", "" + (distanceInKm * 1000));
+        params.add("radiusMeters", "" + distanceInMeters);
         params.add("origin.latitude", String.valueOf(center.getLatitude()));
         params.add("origin.longitude", String.valueOf(center.getLongitude()));
         final Parameters headers = new Parameters(CONSUMER_HEADER, CONSUMER_KEY);
@@ -140,7 +133,7 @@ final class ALApi {
         }
         final DistanceGeocacheFilter df = GeocacheFilter.findInChain(filters, DistanceGeocacheFilter.class);
         if (df != null) {
-            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? 10 : df.getMaxRangeValue().intValue());
+            return searchByCenter(df.getEffectiveCoordinate(), df.getMaxRangeValue() == null ? DEFAULT_RADIUS : df.getMaxRangeValue().intValue() * 1000);
         }
         final TypeGeocacheFilter tf = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
         if (tf != null && tf.isFiltering() && !tf.getRawValues().contains(ADVLAB)) {
