@@ -1,58 +1,16 @@
-### Fixes
-- "Add to watchlist" / "Remove from watchlist" failing (Website change)
-- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
-- Date in logbook cut off on larger fonts
-- Filtering in live map for more rare cache types returning only few results
-
-## Bugfix Release 2021.08.28
-
-### 디자인
-- 텍스트 입력 필드의 글꼴 크기 늘리기
-- 일부 나침반 요소의 글꼴 크기 늘리기
-- 지점 탭에서 대비가 높은 글꼴 색상 사용
-- 빠른 오프라인 로그 확인 표시를 다시 표시
-- 좌표 입력 필드의 글꼴 크기 늘리기
-- 이전 Android 버전(5,6 및 7)에서도 시스템 글꼴 크기 설정을 존중합니다.
-
-### 캐시 상세정보
-- 지오코드 또는 링크를 통해 캐시를 연 경우 누락된 캐시 제목 수정(웹사이트 변경)
-- 일부 캐시에서 누락된 캐시 설명 수정
-
-### 추가 사항
-- 기본회원 검색결과에 프리미엄캐시 다시 표시
-- 일부 사용자 정의 캐시가 GPX를 통해 로드된 경우 사용자 정의 캐시의 추가 생성 수정
-- 캐시 유형 필터에서 기존 캐시에 대해 보다 일반적인 영어 약어 사용
-
-## 기능 릴리스 2021.08.15:
-
-### 고급 필터링 시스템
-- 유연하고 결합 가능하며 저장 가능한 필터를 지원하는 새로운 필터링 시스템을 c:geo에 소개합니다.
-- 캐시 목록과 지도보기 모두에서 사용 가능
-- 새로운 "필터로 검색" 기능
-
 ### 지도
-- 신규: 목록에서 맵을 표시하는 동안 사용자 정의 캐시 생성시: 사용자가 현재 목록에 새 캐시를 저장하도록 제안 (사용자 정의 캐시의 기본 목록 대신)
-- 신규: 지도 빠른 설정에서 "소유"및 "찾음" 필터 분리
-- 변경: 팝업 세부 정보에 캐시 이름 추가
+- New: Added Mapy.cz as online map source
+- New: Individual route: Allow setting a new start and reversing the route
+- New: Multiple offline map downloads can now be triggered at once
 
 ### 캐시 상세정보
-- 신규: 구글 번역 인앱 번역 팝업 사용
-- 신규: 긴 클릭을 통해 캐시 세부 사항 팝업에서 할당 된 아이콘 변경 허용 (저장된 캐시 만 해당)
-
-### 다운로더
-- 변경: 이제 다운로드가 백그라운드에서 완전히 이루어지며 알림이 표시됩니다.
-- 변경: 성공적으로 다운로드된 파일은 동일한 이름을 가진 기존 파일을 자동으로 덮어 씁니다.
-- 변경: 지도에 아직 설치되지 않은 특정 테마가 필요한 경우 c:geo는 해당 테마도 자동으로 다운로드하여 설치합니다.
+- Fix: Detect if current user is owner for lab adventures
+- New: Added some more emoijis for use as individual cache icon
+- New: Support adding caches to bookmark lists (PM only)
 
 ### 추가 사항
-- 변경: Android에서 제공하는 최신 구성 요소를 사용할 수 있도록 내부 기술 측면 c:geo 테마를 완전히 재 작업했습니다. 이것은 몇 가지 부작용이 있을 것이며 일부는 의도하지 않은 것입니다. [GitHub 페이지](https://www.github.com/cgeo/cgeo/issues) 또는 지원팀에 문의하여 오류나 결함을 신고 해주세요.
-- 신규: 시스템에서 주간 / 야간 모드 지원 (옵션)
-- 신규: geocaching.com에서 북마크 목록 다운로드 - 메인 메뉴의 "목록/포켓 쿼리" 참조
-- 신규: geocaching.su에 대한 기능 무시
-- 변경: 더 이상 유지 관리되지 않는 RMAPS 탐색 앱 제거
-- 수정: 개인 메모에서 이름은 같지만 좌표가 다른 지점 추출
-- 수정: 공식을 사용하여 지점에 대한 사용자 메모를 추출하는 버그
-- 수정: 완료된 공식의 좌표 대신 공식을 PN으로 내보내기
-- 수정: 백업 재설치 및 복원 후 오프라인지도 및 테마 폴더가 잘못됨
-- 수정: 트랙/경로를 업데이트 할 수 없었음
-- 수정: 라이트 테마의 다운로더에 대한 테마 오류
+- New: Allow upload of caches to bookmark list (only available for GC premium members)
+- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+- Fix: Some fixes for UI and for filtering
+- Change: Hide sensitive data in "view settings"
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
