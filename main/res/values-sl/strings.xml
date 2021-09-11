@@ -132,7 +132,6 @@
     <string name="log_problem_other_label">Drugo</string>
     <string name="log_problem_archive_label">Zaklad naj se arhivira</string>
     <string name="log_image_scale_option_noscaling">Brez povečave</string>
-    <string name="datetime_clear_button">Počisti</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Prevedi v: %s</string>
     <string name="translate_to_english">Prevedi v: angleščino</string>
@@ -303,20 +302,6 @@
     <string name="caches_copy_all">Kopiraj vse</string>
     <string name="caches_map_locus_export">Izvozi v Locus</string>
     <string name="caches_filter_title">Filtriraj po</string>
-    <string name="caches_filter_size">Velikost</string>
-    <string name="caches_filter_type">Tip</string>
-    <string name="caches_filter_track">S sledljivčki</string>
-    <string name="caches_filter_clear">Počisti filtre</string>
-    <string name="caches_filter_modified">S spremenjenimi koordinatami</string>
-    <string name="caches_filter_offline_log">Z offline zapisom</string>
-    <string name="caches_filter_origin">Vir</string>
-    <string name="caches_filter_distance">Razdalja</string>
-    <string name="caches_filter_personal_note">Z osebnim zapisom</string>
-    <string name="caches_filter_popularity">Številu favoritov</string>
-    <string name="caches_filter_popularity_ratio">Številu favoritov [%]</string>
-    <string name="caches_filter_personal_data">Z osebnim zapisom</string>
-    <string name="caches_filter_rating">Z oceno</string>
-    <string name="caches_filter_own_rating">Z lastno oceno</string>
     <string name="caches_removing_from_history">Brišem iz zgodovine…</string>
     <string name="caches_clear_offlinelogs">Izbriši shranjene zapise</string>
     <string name="caches_clear_offlinelogs_message">Ali želite izbrisati zapise brez povezave?</string>
@@ -385,29 +370,20 @@
     <string name="settings_category_social">Socialni vtičniki</string>
     <string name="settings_category_logging_other">Druge možnosti zapisa</string>
     <string name="settings_goto_url_button">več …</string>
-    <string name="settings_activate_gc">Aktiviraj</string>
-    <string name="settings_activate_ec">Aktiviraj</string>
+    <string name="settings_service_activate">Aktiviraj</string>
     <string name="settings_gc_legal_note">Za uporabo storitev Geocaching.com se morate strinjati s pogoji uporabe podjetja Groundspeak.</string>
     <string name="settings_authorize">Poveži c:geo</string>
-    <string name="settings_activate_oc">Aktiviraj</string>
     <string name="init_summary_oc_de">Naloži zaklade iz opencaching.de</string>
     <string name="init_oc_de_description">Poveži c:geo z opencaching.de za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="settings_activate_oc_pl">Aktiviraj</string>
     <string name="init_summary_oc_pl">Naloži zaklade iz opencaching.de</string>
     <string name="init_oc_pl_description">Poveži c:geo z opencaching.pl za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="settings_activate_oc_nl">Aktiviraj</string>
     <string name="init_summary_oc_nl">Naloži zaklade iz opencaching.nl</string>
     <string name="init_oc_nl_description">Poveži c:geo z opencaching.nl za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="settings_activate_oc_us">Aktiviraj</string>
     <string name="init_summary_oc_us">Naloži zaklade iz opencaching.us</string>
     <string name="init_oc_us_description">Poveži c:geo z opencaching.us za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="settings_activate_oc_ro">Aktiviraj</string>
     <string name="init_summary_oc_ro">Naloži zaklade iz opencaching.ro</string>
     <string name="init_oc_ro_description">Poveži c:geo z opencaching.ro za iskanje zakladov in dostop in filter najdenih zakladov.</string>
-    <string name="settings_activate_oc_uk">Aktiviraj</string>
     <string name="init_summary_oc_uk">Naloži zaklade iz opencache.uk</string>
-    <string name="settings_activate_su">Aktiviraj</string>
-    <string name="settings_activate_twitter">Aktiviraj</string>
     <string name="init_login_popup">Prijava</string>
     <string name="init_login_popup_working">Prijavljanje…</string>
     <string name="init_login_popup_ok">Prijava uspešna</string>
@@ -563,7 +539,6 @@
     <string name="cache_offline_stored">Shranjeno na napravi</string>
     <string name="cache_offline_not_ready">Ni na voljo brez povezave</string>
     <string name="cache_offline_time_mins_few">nekaj minut nazaj</string>
-    <string name="cache_attributes">Atributi</string>
     <string name="cache_inventory">Inventar</string>
     <string name="cache_log_images_title">Slike</string>
     <string name="cache_log_image_default_title">Slika</string>
@@ -633,18 +608,12 @@
     <string name="cache_menu_challenge_checker">Poišči Challenge-Checker</string>
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
-    <string name="cache_stored">Shranjeni</string>
     <string name="cache_status_offline_log">Shranjen zapis</string>
     <string name="cache_status_found">Najden</string>
     <string name="cache_not_status_found">Ni najden</string>
-    <string name="cache_never_found">Še ni najden</string>
-    <string name="cache_found_last_30_days">Najdbe zadnjih 30 dni</string>
     <string name="cache_status_archived">Arhiviran</string>
     <string name="cache_status_disabled">Onemogočen</string>
     <string name="cache_status_premium">Samo za Premium člane</string>
-    <string name="cache_status_not_premium">Za vse člane</string>
-    <string name="cache_status_stored">Shranjeni</string>
-    <string name="cache_status_not_stored">Ni shranjen</string>
     <string name="cache_geocode">Geo koda</string>
     <string name="cache_name">Ime</string>
     <string name="cache_type">Tip</string>
@@ -660,7 +629,6 @@
     <string name="cache_event">Datum</string>
     <string name="cache_location">Lokacija</string>
     <string name="cache_coordinates">Koordinate</string>
-    <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Originalne koordiante</string>
     <string name="cache_spoiler_images_title">Spoiler slike</string>
     <string name="cache_log_types">Tipi zapisov</string>
@@ -1108,7 +1076,6 @@
     <string name="confirm_log_title">Posebna vrsta dnevniškega zapisa</string>
     <string name="confirm_log_message">Poslali boste zapis \'%s\'. Ali ste prepričani?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktiviraj</string>
     <string name="command_copy_caches_progress">Kopiranje zakladov v seznam %1s</string>
     <string name="command_unique_list_result">Izbriši zaklade iz ostalih seznamov</string>
     <string name="caches_refresh_all_warning">To dejanje lahko povzroči veliko mrežnega prometa - prenosa podatkov. Ali ste prepričani, da želite osvežiti vse zaklade?</string>
@@ -1121,7 +1088,6 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
-    <string name="save_sorted_route">Shrani</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
