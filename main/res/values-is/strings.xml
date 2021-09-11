@@ -111,7 +111,6 @@
     <string name="log_empty_logbook">Dagbók þessa kassa er tóm.</string>
     <string name="log_problem_needs_maintenance_label">Þarfnast viðhalds</string>
     <string name="log_problem_other_label">Annað</string>
-    <string name="datetime_clear_button">Hreinsa</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Þýtt að %s</string>
     <string name="translate_to_english">Þýða yfir á ensku</string>
@@ -241,15 +240,6 @@
     <string name="caches_copy_all">Afrita alla</string>
     <string name="caches_map_locus_export">Flytja út í Locus</string>
     <string name="caches_filter_title">Sía eftir</string>
-    <string name="caches_filter_size">Stærð</string>
-    <string name="caches_filter_type">Tegund</string>
-    <string name="caches_filter_track">Með ferðagripum</string>
-    <string name="caches_filter_clear">Hreinsa síanir</string>
-    <string name="caches_filter_modified">Hefur breytt hnit</string>
-    <string name="caches_filter_distance">Fjarlægð</string>
-    <string name="caches_filter_popularity">Uppáhalds</string>
-    <string name="caches_filter_popularity_ratio">Uppáhalds [%]</string>
-    <string name="caches_filter_personal_data">Hefur persónuleg gögn</string>
     <string name="caches_removing_from_history">Fjarlægi af ferli…</string>
     <string name="caches_clear_offlinelogs">Hreinsa „án nets“ færslur</string>
     <string name="caches_clear_offlinelogs_message">Viltu hreinsa „án nets“ færslurnar?</string>
@@ -298,29 +288,20 @@
     <string name="settings_category_browser">Vafri</string>
     <string name="settings_category_social">Samfélagsmiðlar</string>
     <string name="settings_goto_url_button">meira &#8230;</string>
-    <string name="settings_activate_gc">Virkja</string>
-    <string name="settings_activate_ec">Virkja</string>
+    <string name="settings_service_activate">Virkja</string>
     <string name="settings_gc_legal_note">Með því að nota þjónustu geocaching.com, samþykkir þú notkunarskilmála Groundspeak.</string>
     <string name="settings_authorize">Veita c:geo umboð</string>
     <string name="settings_gc_description">Veita c:geo aðgang að geocaching.com til að leita að kössum.</string>
     <string name="settings_ec_description">Veita c:geo aðgang að extremcaching.com til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>
     <string name="settings_su_description">Veita c:geo aðgang að geocaching.su til að leita að kössum.</string>
-    <string name="settings_activate_oc">Virkja</string>
     <string name="init_summary_oc_de">Hlaða niður kössum frá opencaching.de</string>
-    <string name="settings_activate_oc_pl">Virkja</string>
     <string name="init_summary_oc_pl">Hlaða niður kössum frá opencaching.pl</string>
-    <string name="settings_activate_oc_nl">Virkja</string>
     <string name="init_summary_oc_nl">Hlaða niður kössum frá opencaching.nl</string>
-    <string name="settings_activate_oc_us">Virkja</string>
     <string name="init_summary_oc_us">Hlaða niður kössum frá opencaching.us</string>
-    <string name="settings_activate_oc_ro">Virkja</string>
     <string name="init_summary_oc_ro">Hlaða niður kössum frá opencaching.ro</string>
-    <string name="settings_activate_oc_uk">Virkja</string>
     <string name="init_summary_oc_uk">Hlaða niður kössum frá opencache.uk</string>
     <string name="init_oc_uk_description">Veita c:geo aðgang að opencache.uk til að leita að kössum og skoða/sía þá kassa sem þú hefur fundið.</string>
     <string name="init_summary_su">Hlaða niður kössum frá Geocaching.su</string>
-    <string name="settings_activate_su">Virkja</string>
-    <string name="settings_activate_twitter">Virkja</string>
     <string name="init_login_popup">Skrá inn</string>
     <string name="init_login_popup_working">Innskráning í gangi…</string>
     <string name="init_login_popup_ok">Innskráning tókst</string>
@@ -475,18 +456,12 @@
     <string name="cache_menu_checker">Opna Geochecker</string>
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
-    <string name="cache_stored">Vistað</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>
     <string name="cache_status_found">Fundið</string>
     <string name="cache_not_status_found">Ekki fundinn</string>
-    <string name="cache_never_found">Aldrei fundinn</string>
-    <string name="cache_found_last_30_days">Fundinn síðustu 30 daga</string>
     <string name="cache_status_archived">Vistað</string>
     <string name="cache_status_disabled">Óvirkt</string>
     <string name="cache_status_premium">Aðeins fyrir Premium Members</string>
-    <string name="cache_status_not_premium">Aðgangur fyrir alla meðlimi</string>
-    <string name="cache_status_stored">Vistað</string>
-    <string name="cache_status_not_stored">Ekki vistað</string>
     <string name="cache_geocode">Geokóði</string>
     <string name="cache_name">Nafn</string>
     <string name="cache_type">Tegund</string>
@@ -746,7 +721,6 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
-    <string name="save_sorted_route">Vista</string>
     <!-- individual track -->
     <!-- distance units -->
     <string name="unit_ft">fet</string>
