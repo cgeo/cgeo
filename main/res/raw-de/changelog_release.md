@@ -1,58 +1,16 @@
-### Fehlerbehebungen
-- "Zur Watchlist hinzufügen" / "Aus der Watchlist entfernen" fehlgeschlagen (Website-Änderung)
-- "Zu Favoriten hinzufügen" / "Aus Favoriten entfernen" Buttons nicht angezeigt nach dem "Gefunden"-Log
-- Datum im Logbuch bei größeren Schriften abgeschnitten
-- Filtern in der Live-Karte ergab für seltenere Cache-Typen zu wenig Ergebnisse
-
-## Bugfix-Release 2021.08.28
-
-### Design
-- Schriftgröße für Texteingabefelder vergrößert
-- Schriftgröße für einige Kompass-Elemente vergrößert
-- Benutze Schrift mit höherem Kontrast im Wegpunkt-Tab
-- Häkchen im schnellen Offline-Log wieder sichtbar machen
-- Schriftgröße für Koordinateneingabe vergrößert
-- Systemeinstellungen für die Schriftgröße auch bei älteren Android-Versionen (5,6 und 7) berücksichtigen
-
-### Cache-Details
-- Fehlender Cache-Titel, wenn der Cache über Geocode oder Link geöffnet wurde (Änderung auf der Webseite)
-- Fehlende Cache-Beschreibung bei einigen Caches korrigiert
-
-### Sonstiges
-- Premium-Caches erneut in den Suchergebnissen der Basismitglieder anzeigen
-- Weitere Erstellung von benutzerdefinierten Caches möglich, nachdem benutzerdefinierte Caches aus einer GPX hinzugefügt wurden
-- Verwende gebräuchlichere englische Abkürzung für traditionelle Cache im Cachetyp-Filter
-
-## Feature-Version 2021.08.15:
-
-### Erweitertes Filtersystem
-- Einführung eines neuen Filtersystems in c:geo, unterstützt flexible, kombinierbare und speicherbare Filter
-- Verfügbar sowohl in Cachelisten als auch in der Karte
-- Neue "Suche mit Filter"-Funktion
-
 ### Karte
-- Neu: Beim Erstellen eines benutzerdefinierten Caches während die Karte für eine Liste angezeigt wird: Biete dem Nutzer an den neuen Cache in der aktuellen Liste (statt in der Standardliste für benutzerdefinierte Caches) zu speichern
-- Neu: Separate Filter in den Schnelleinstellungen der Karte für "Eigene" und "Gefundene" Caches
-- Änderung: Zeige zusätzlich den Cache-Namen in den Popup auf der Karte
+- New: Added Mapy.cz as online map source
+- New: Individual route: Allow setting a new start and reversing the route
+- New: Multiple offline map downloads can now be triggered at once
 
 ### Cache-Details
-- Neu: Benutze Google Übersetzungs-Popup in der App
-- Neu: Erlaube das Ändern des zugewiesenen Symbols im Popup der Cache-Details durch langes Klicken (nur gespeicherte Caches)
-
-### Downloader
-- Änderung: Downloads werden nun komplett im Hintergrund durchgeführt, eine Benachrichtigung wird angezeigt
-- Änderung: Erfolgreich heruntergeladene Dateien überschreiben Dateien mit demselben Namen
-- Änderung: Wenn eine Karte ein bestimmtes Kartendesign benötigt, wird dieses bei Bedarf automatisch heruntergeladen
+- Fix: Detect if current user is owner for lab adventures
+- New: Added some more emoijis for use as individual cache icon
+- New: Support adding caches to bookmark lists (PM only)
 
 ### Sonstiges
-- Änderung: Wir haben interne technische Aspekte der graphischen Oberfläche von c:geo komplett überarbeitet, um einige modernere Komponenten von Android nutzen zu können. Dies wird einige Nebenwirkungen haben, von denen einige unbeabsichtigt sind. Bitte berichte Fehler oder Unschönheiten entweder auf unserer [GitHub-Seite](https://www.github.com/cgeo/cgeo/issues) oder über unseren Support.
-- Neu: Verwende Tag/Nacht-Modus des Systems (optional)
-- Neu: Lesezeichenlisten von geocaching.com herunterladen - siehe "Listen / Pocket-Queries" im Hauptmenü
-- Neu: Ignorier-Funktion für geocaching.su
-- Änderung: Nicht mehr gepflegte RMAPS-Navigations-App entfernt
-- Korrektur: Wegpunkt mit gleichem Namen, aber unterschiedliche Koordinaten aus der persönlichen Notiz extrahieren
-- Korrektur: Fehler beim Extrahieren der Benutzernotiz für Wegpunkt mit Formel
-- Korrektur: Exportiere Formel zu PN statt Koordinaten für abgeschlossene Formel
-- Korrektur: Offline-Karte und Theme-Ordner nach Neuinstallation und Wiederherstellung der Sicherung fehlerhaft
-- Fix: Track/Route kann nicht aktualisiert werden
-- Korrektur: Fehler im Theme für Downloader des hellen Theme
+- New: Allow upload of caches to bookmark list (only available for GC premium members)
+- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+- Fix: Some fixes for UI and for filtering
+- Change: Hide sensitive data in "view settings"
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
