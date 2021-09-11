@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">要アーカイブ</string>
     <string name="log_problem_archive_text">このジオキャッシャーがキャッシュがアーカイブされるべきと報告しました。コミュニティのボランティアレビューアーに通知されました</string>
     <string name="log_image_scale_option_noscaling">実サイズ</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\n縮小/圧縮:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">拡大縮小済み</string>
+    <string name="log_image_info_notscaled">元の解像度</string>
     <string name="log_image_titleprefix">画像</string>
-    <string name="datetime_clear_button">削除</string>
     <string name="datetime_nodateset_display">未設定</string>
     <!-- translation -->
     <string name="translate">翻訳</string>
@@ -327,6 +328,7 @@
     <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_lists_pocket_queries">リスト/ポケット・クエリ</string>
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
+    <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
     <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
@@ -394,25 +396,6 @@
     <string name="caches_map_locus_export">Locusにエクスポート</string>
     <string name="caches_filter_menuitem">フィルタ</string>
     <string name="caches_filter_title">フィルタ</string>
-    <string name="caches_filter_size">サイズ</string>
-    <string name="caches_filter_type">タイプ</string>
-    <string name="caches_filter_track">トラッカブルあり</string>
-    <string name="caches_filter_clear">フィルタをクリア</string>
-    <string name="caches_filter_modified">座標の更新あり</string>
-    <string name="caches_filter_offline_log">オフラインログあり</string>
-    <string name="caches_filter_origin">出発地</string>
-    <string name="caches_filter_distance">距離</string>
-    <string name="caches_filter_personal_note">パーソナルノートあり</string>
-    <string name="caches_filter_popularity">お気に入り</string>
-    <string name="caches_filter_popularity_ratio">お気に入り [%]</string>
-    <string name="caches_filter_personal_data">個人データ</string>
-    <string name="caches_filter_rating">評価あり</string>
-    <string name="caches_filter_own_rating">評価済み</string>
-    <string name="caches_filter_multi_listing">複数のWebサイトで登録</string>
-    <string name="caches_filter_own_waypoint">ユーザー定義ウェイポイントあり</string>
-    <string name="caches_filter_missing_gcvote">未評価の発見したキャッシュ</string>
-    <string name="caches_filter_lists">リストに保存</string>
-    <string name="caches_filter_empty">(未定義)</string>
     <string name="caches_removing_from_history">履歴から削除中…</string>
     <string name="caches_clear_offlinelogs">すべてのオフラインログを削除</string>
     <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
@@ -477,7 +460,7 @@
     <string name="cache_filter_location">所在地</string>
     <string name="cache_filter_stored_lists">保存済みリスト</string>
     <string name="cache_filter_origin">公開元</string>
-    <string name="cache_filter_stored_since">保存日時</string>
+    <string name="cache_filter_stored_since">詳細の更新日時</string>
     <string name="cache_filtergroup_basic">基本</string>
     <string name="cache_filtergroup_details">詳細</string>
     <string name="cache_filtergroup_userspecific">ユーザー固有</string>
@@ -494,6 +477,8 @@
     <string name="cache_filter_storage_delete_button">削除</string>
     <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
+    <string name="cache_filter_storage_delete_title">フィルタの削除</string>
+    <string name="cache_filter_storage_delete_message">このフィルタを削除しますか?</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">フィルタは保存されていません</string>
     <string name="cache_filter_storage_save_title">名前を付けてフィルタを保存</string>
     <string name="cache_filter_storage_save_confirm_title">フィルタの上書き保存</string>
@@ -504,6 +489,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">なし</string>
     <string name="cache_filter_stringfilter_type_is_present">あり</string>
     <string name="cache_filter_stringfilter_type_contains">以下を含む</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">以下を含まない</string>
     <string name="cache_filter_stringfilter_type_starts_with">以下で始まる</string>
     <string name="cache_filter_stringfilter_type_ends_with">以下で終わる</string>
     <string name="cache_filter_stringfilter_type_pattern">パターン</string>
@@ -529,6 +515,7 @@
     <string name="cache_filter_status_select_label_has_trackable">トラッカブルあり</string>
     <string name="cache_filter_status_select_label_has_own_vote">評価済み</string>
     <string name="cache_filter_status_select_label_has_offline_log">オフラインログあり</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">発見(オフラインログ)</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
     <string name="cache_filter_status_active">有効</string>
@@ -638,9 +625,7 @@
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
     <string name="settings_goto_url_button">詳細…</string>
-    <string name="settings_activate_gc">有効化</string>
-    <string name="settings_activate_ec">有効化</string>
-    <string name="settings_activate_lc">有効化</string>
+    <string name="settings_service_activate">有効化</string>
     <string name="settings_gc_legal_note">Geocaching.comを使うにはGroundspeak利用規約に同意している必要があります</string>
     <string name="settings_info_facebook_login_title">FacebookやGoogleのアカウントでのログインについて</string>
     <string name="settings_info_facebook_login">c:geoからFacebookやGoogleのアカウントでgeocaching.comにログインすることはできません。 しかし回避策はあります…</string>
@@ -651,30 +636,22 @@
     <string name="settings_su_description">c:geoをgeocaching.suで認証してキャッシュを検索できるようにします</string>
     <string name="settings_lc_description">アドベンチャー・ラボ・キャッシュを地図に含めます\n\n(Geocaching.comのプレミアム会員である必要があります。Geocaching.comサービスを有効化してください)\n\nc:geoの再起動が必要です</string>
     <string name="lc_default_description">これはgeocaching.comのアドベンチャー・ラボ・キャッシュです。アドベンチャーはGroundspeakの Adventure Labアプリでのみプレイできます。 「詳細」ページのアドベンチャー・ラボ アイコンをタップすると、Adventure Labアプリを開いたりインストールしたりできます。\nアドベンチャー・ラボ・キャッシュを地図や検索に表示したくない場合は「設定」&gt;「サービス 」&gt;「ジオキャッシングサイト」&gt;「Geocaching.com Adventure Lab」で無効化できます。</string>
-    <string name="settings_activate_oc">有効化</string>
     <string name="init_summary_oc_de">opencaching.deからキャッシュを読み込み</string>
     <string name="init_oc_de_description">c:geoをopencaching.deで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_pl">有効化</string>
     <string name="init_summary_oc_pl">opencaching.plからキャッシュを読み込み</string>
     <string name="init_oc_pl_description">c:geoをopencaching.plで認証してキャッシュを検索したり見つけたキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_nl">有効化</string>
     <string name="init_summary_oc_nl">opencaching.nlからキャッシュを読み込み</string>
     <string name="init_oc_nl_description">c:geoをopencaching.nlで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_us">有効化</string>
     <string name="init_summary_oc_us">opencaching.usからキャッシュを読み込み</string>
     <string name="init_oc_us_description">c:geoをopencaching.usで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_ro">有効化</string>
     <string name="init_summary_oc_ro">opencaching.roからキャッシュを読み込み</string>
     <string name="init_oc_ro_description">c:geoをopencaching.roで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
-    <string name="settings_activate_oc_uk">有効化</string>
     <string name="init_summary_oc_uk">opencache.ukからキャッシュを読み込み</string>
     <string name="init_oc_uk_description">c:geoをopencache.ukで認証してキャッシュを検索したり発見したキャッシュにアクセス/フィルタリングできるようにします</string>
     <string name="init_summary_su">Geocaching.suからキャッシュを読み込み</string>
-    <string name="settings_activate_su">有効化</string>
     <string name="init_gcvote_password_description">キャッシュを評価するにはGCVote.comに登録してGCVoteのパスワードを入力してください</string>
     <string name="err_vote_send_rating">評価を送信中にエラーが発生しました</string>
     <string name="vote_sent">評価は正常に送信されました</string>
-    <string name="settings_activate_twitter">有効化</string>
     <string name="init_login_popup">ログイン</string>
     <string name="init_login_popup_working">ログイン中…</string>
     <string name="init_login_popup_ok">ログイン完了</string>
@@ -1086,7 +1063,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">一年以上前</string>
     <string name="cache_premium">プレミアム会員</string>
-    <string name="cache_attributes">属性</string>
     <string name="cache_inventory">目録</string>
     <string name="cache_log_images_title">ログの添付画像</string>
     <string name="cache_log_image_default_title">写真</string>
@@ -1207,27 +1183,13 @@
     <string name="ignore_confirm_title">ご注意ください</string>
     <string name="ignore_confirm_message">キャッシュを無視にするとgeocaching.com からデータを読み込んでも表示されないことになります。Webサイト上から無視を解除しないとキャッシュを参照することができません</string>
     <string name="cache_status">状態</string>
-    <string name="cache_stored">保存済み</string>
     <string name="cache_status_offline_log">保存済みのログ</string>
     <string name="cache_status_found">発見</string>
     <string name="cache_not_status_found">未発見</string>
-    <string name="cache_never_found">一度も発見されてない</string>
-    <string name="cache_found_last_30_days">過去30日間に発見された</string>
     <string name="cache_status_archived">アーカイブ済み</string>
     <string name="cache_status_disabled">一時停止中</string>
     <string name="cache_status_active">有効</string>
     <string name="cache_status_premium">プレミアム会員のみ</string>
-    <string name="cache_status_not_premium">すべての会員用</string>
-    <string name="cache_status_stored">保存済み</string>
-    <string name="cache_status_not_stored">未保存</string>
-    <string name="cache_status_stored_lasteighthours">過去8時間以内</string>
-    <string name="cache_status_stored_lasttwentyfourhours">過去24時間以内</string>
-    <string name="cache_status_stored_lastsevendays">過去7日以内</string>
-    <string name="cache_status_stored_lastthirtydays">過去30日以内</string>
-    <string name="cache_status_stored_morethaneighthours">過去8時間以前</string>
-    <string name="cache_status_stored_morethantwentyfourhours">過去24時間以前</string>
-    <string name="cache_status_stored_morethansevendays">過去7日以前</string>
-    <string name="cache_status_stored_morethanthirtydays">過去30日以前</string>
     <string name="cache_geocode">GCコード</string>
     <string name="cache_name">キャッシュ名</string>
     <string name="cache_name_set">キャッシュ名を設定</string>
@@ -1239,7 +1201,6 @@
     <string name="cache_distance">距離</string>
     <string name="cache_difficulty">難易度</string>
     <string name="cache_terrain">地形</string>
-    <string name="cache_difficulty_terrain">難易度/地形</string>
     <string name="cache_rating">評価</string>
     <string name="cache_own_rating">あなたの評価</string>
     <string name="cache_rating_of_new">%1$.1f / %2$d</string>
@@ -1248,9 +1209,7 @@
     <string name="cache_hidden">設置日</string>
     <string name="cache_event">イベント日付</string>
     <string name="cache_location">所在地</string>
-    <string name="cache_location_country">国</string>
     <string name="cache_coordinates">座標</string>
-    <string name="cache_calculator">座標計算</string>
     <string name="cache_coordinates_original">オリジナル座標</string>
     <string name="cache_spoiler_images_title">スポイラー画像</string>
     <string name="cache_log_types">ログタイプ</string>
@@ -1375,7 +1334,7 @@
     <string name="map_showc_found">発見</string>
     <string name="map_showc_disabled">一時停止中</string>
     <string name="map_showc_archived">アーカイブ済み</string>
-    <string name="map_showc_offlinelog">オフラインログ</string>
+    <string name="map_showc_found_offline">発見(オフラインログ)</string>
     <string name="map_showwp_original">オリジナル</string>
     <string name="map_showwp_parking">駐車場</string>
     <string name="map_showwp_visited">訪問済み</string>
@@ -1850,7 +1809,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="favorite_points">
         <item quantity="other">お気に入り %s </item>
     </plurals>
-    <string name="more_than_percent_favorite_points">お気に入り &gt; %d%%</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo ショートカット</string>
     <string name="create_shortcut">ショートカットを作成</string>
@@ -1860,7 +1818,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="confirm_report_problem_title">問題を報告</string>
     <string name="confirm_report_problem_message">「%s」を報告します。よろしいですか?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">有効化</string>
     <string name="init_summary_geokrety">GeoKrety.orgからトラッカブルを有効にする</string>
     <string name="init_geokrety_description">GeoKrety.orgでc:geoを認証してGeoKretyトラッカブルをログに記録します</string>
     <string name="init_geokrety_userid">ユーザーID: %s</string>
@@ -1939,7 +1896,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="map_clear_individual_route">個別ルート削除</string>
     <string name="map_clear_individual_route_confirm">個別ルートからすべての地点を削除しますか?</string>
     <string name="map_individual_route_cleared">個別ルートを削除しました</string>
-    <string name="save_sorted_route">保存</string>
     <string name="sorted_route_saved">個別ルートを保存しました</string>
     <string name="load_individual_route_error">個別ルートの読み込みに失敗しました</string>
     <string name="route_item_not_yet_loaded">ルートアイテムがまだ読み込まれていません</string>
@@ -1947,6 +1903,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
         <item quantity="other">ルート(%dルート地点)を読み込みました</item>
     </plurals>
     <string name="center_on_route">ルートの中心に移動</string>
+    <string name="individual_route_set_as_start_title">ルート開始点にする</string>
+    <string name="individual_route_set_as_start_message">この場所をルートの開始点にして後続の場所を繰り上げますか?</string>
     <!-- individual track -->
     <string name="individual_track">GPXトラック/ルート</string>
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>
