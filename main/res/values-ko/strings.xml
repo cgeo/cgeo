@@ -179,9 +179,10 @@
     <string name="log_problem_archive_label">캐시를 영구보관해야 함</string>
     <string name="log_problem_archive_text">이 지오캐셔가 이 캐시는 영구보관해야 한다고 신고했습니다. 커뮤니티 자원봉자자가 통지했습니다.</string>
     <string name="log_image_scale_option_noscaling">스케일링 없음</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nScaled/Compressed:\n%4$d x %5$d px, ~%6$s</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">배율</string>
+    <string name="log_image_info_notscaled">배율 아님</string>
     <string name="log_image_titleprefix">이미지</string>
-    <string name="datetime_clear_button">지우기</string>
     <string name="datetime_nodateset_display">설정된 날짜 없음</string>
     <!-- translation -->
     <string name="translate">번역</string>
@@ -327,6 +328,7 @@
     <string name="menu_scan_geo">지오코드 스캔</string>
     <string name="menu_lists_pocket_queries">목록 / 포켓 쿼리</string>
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
+    <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
     <string name="live_map_button">라이브 지도</string>
     <string name="caches_nearby_button">인근 캐시</string>
@@ -380,6 +382,7 @@
     <string name="caches_remove_all_completely">장치에서 모두 삭제</string>
     <string name="caches_remove_selected_completely">장치에서 선택한 것을 삭제</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
+    <string name="caches_upload_bookmarklist">북마크 목록에 업로드</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
     <string name="caches_upload_modifiedcoords_warning">모든 (선택된) 캐시에 대해 수정 된 좌표를 업로드하고 서버의 기존 좌표를 덮어 쓰시겠습니까? 취소 할 수 없습니다.</string>
     <string name="caches_upload_allcoords">모든 캐시에 대한 좌표 업로드하기</string>
@@ -394,25 +397,6 @@
     <string name="caches_map_locus_export">Locus로 내보내기</string>
     <string name="caches_filter_menuitem">필터</string>
     <string name="caches_filter_title">필터링 기준</string>
-    <string name="caches_filter_size">크기</string>
-    <string name="caches_filter_type">유형</string>
-    <string name="caches_filter_track">추적아이템 있는 것</string>
-    <string name="caches_filter_clear">필터 지우기</string>
-    <string name="caches_filter_modified">수정된 좌표가 있는 것</string>
-    <string name="caches_filter_offline_log">오프라인 로그가 있는 것</string>
-    <string name="caches_filter_origin">출발지</string>
-    <string name="caches_filter_distance">거리</string>
-    <string name="caches_filter_personal_note">개인 메모가 있는 것</string>
-    <string name="caches_filter_popularity">호감점수</string>
-    <string name="caches_filter_popularity_ratio">호감점수 [%]</string>
-    <string name="caches_filter_personal_data">개인 데이터가 있는 것</string>
-    <string name="caches_filter_rating">평점이 있는 것</string>
-    <string name="caches_filter_own_rating">자신이 평가 한 것</string>
-    <string name="caches_filter_multi_listing">여러 서비스에 동시에 올려진 것</string>
-    <string name="caches_filter_own_waypoint">사용자 정의 지점을 사용하기</string>
-    <string name="caches_filter_missing_gcvote">투표하지 않은 캐시 찾기</string>
-    <string name="caches_filter_lists">목록에 할당</string>
-    <string name="caches_filter_empty">(없음)</string>
     <string name="caches_removing_from_history">이전 기록에서 제거중…</string>
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
@@ -477,7 +461,7 @@
     <string name="cache_filter_location">위치</string>
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
-    <string name="cache_filter_stored_since">이후 저장</string>
+    <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
@@ -497,6 +481,8 @@
     <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
     <string name="cache_filter_storage_select_title">필터 선택</string>
+    <string name="cache_filter_storage_delete_title">필터 삭제</string>
+    <string name="cache_filter_storage_delete_message">이 필터 구성을 삭제하시겠습니까?</string>
     <string name="cache_filter_storage_select_clear_title">필터 선택 또는 현재 필터 지우기</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">아직 저장된 필터가 없습니다.</string>
     <string name="cache_filter_storage_save_title">이름으로 필터 저장</string>
@@ -508,6 +494,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">존재하지 않음</string>
     <string name="cache_filter_stringfilter_type_is_present">있음</string>
     <string name="cache_filter_stringfilter_type_contains">포함</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">포함하지 않음</string>
     <string name="cache_filter_stringfilter_type_starts_with">다음으로 시작</string>
     <string name="cache_filter_stringfilter_type_ends_with">다음으로 끝남</string>
     <string name="cache_filter_stringfilter_type_pattern">패턴</string>
@@ -533,6 +520,7 @@
     <string name="cache_filter_status_select_label_has_trackable">추적아이템 있음</string>
     <string name="cache_filter_status_select_label_has_own_vote">나의 투표 있음</string>
     <string name="cache_filter_status_select_label_has_offline_log">오프라인 로그 있음</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
@@ -644,9 +632,7 @@
     <string name="settings_category_social">SNS</string>
     <string name="settings_category_logging_other">기타 로그 옵션</string>
     <string name="settings_goto_url_button">더보기…</string>
-    <string name="settings_activate_gc">활성화</string>
-    <string name="settings_activate_ec">활성화</string>
-    <string name="settings_activate_lc">활성화</string>
+    <string name="settings_service_activate">활성화</string>
     <string name="settings_gc_legal_note">geocaching.com 서비스를 사용하시면, 그라운드스픽사의 사용약관에 동의하시는 것입니다.</string>
     <string name="settings_info_facebook_login_title">페이스북 또는 구글을 사용하여 로그인</string>
     <string name="settings_info_facebook_login">c:geo 에서 페이스북 또는 구글 계정으로 geocaching.com에 로그인할 수 없습니다. 하지만, 간단한 편법이 있습니다…</string>
@@ -657,30 +643,22 @@
     <string name="settings_su_description">캐시 검색을 위하여 geocaching.su에 c:geo를 인증하기</string>
     <string name="settings_lc_description">지도에 어드벤처 랩 캐시를 포함합니다.\n\n( \"Geocaching.com\"프리미엄 회원에게만 제공됩니다. 활성화된 \"Geocaching.com\"서비스가 필요합니다.)\n\n이 설정을 변경하려면 다시 시작해야합니다.</string>
     <string name="lc_default_description">이것은 geocaching.com 어드벤처 랩 캐시입니다. 어드벤처는 그라운드스픽 어드벤처 랩 앱에서만 플레이 할 수 있습니다. \"상세 정보\"페이지에서 어드벤처 랩 아이콘을 눌러 이 어드벤처를 위한 어드벤처 랩 앱을 열거나 설치합니다.\n지도 및 검색에서 어드벤처 랩 캐시를 보고 싶지 않은 경우 \"설정\"메뉴-서비스-Geocaching.com 어드벤처 랩을 사용하여 비활성화 할 수 있습니다.</string>
-    <string name="settings_activate_oc">활성화</string>
     <string name="init_summary_oc_de">Opencaching.de 에서 캐시 불러오기</string>
     <string name="init_oc_de_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.de에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_pl">활성화</string>
     <string name="init_summary_oc_pl">Opencaching.pl 에서 캐시 불러오기</string>
     <string name="init_oc_pl_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.pl에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_nl">활성화</string>
     <string name="init_summary_oc_nl">Opencaching.nl 에서 캐시 불러오기</string>
     <string name="init_oc_nl_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.nl에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_us">활성화</string>
     <string name="init_summary_oc_us">Opencaching.us 에서 캐시 불러오기</string>
     <string name="init_oc_us_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.us에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_ro">활성화</string>
     <string name="init_summary_oc_ro">Opencaching.ro 에서 캐시 불러오기</string>
     <string name="init_oc_ro_description">캐시 검색과 찾은 캐시 접근을 위하여 opencaching.ro에 c:geo를 인증하기</string>
-    <string name="settings_activate_oc_uk">활성화</string>
     <string name="init_summary_oc_uk">Opencache.uk 에서 캐시 불러오기</string>
     <string name="init_oc_uk_description">캐시 검색과 찾은 캐시 접근을 위하여 opencache.uk에 c:geo를 인증하기</string>
     <string name="init_summary_su">Geocaching.su 에서 캐시 불러오기</string>
-    <string name="settings_activate_su">활성화</string>
     <string name="init_gcvote_password_description">캐시를 평가하려면, GCVote.com의 지시사항에 따른 후, GCVOte의 비밀번호를 여기 입력하세요.</string>
     <string name="err_vote_send_rating">등급을 보내는 중 오류가 발생했습니다.</string>
     <string name="vote_sent">투표가 성공적으로 송신됨</string>
-    <string name="settings_activate_twitter">활성화</string>
     <string name="init_login_popup">로그인</string>
     <string name="init_login_popup_working">로그인 중…</string>
     <string name="init_login_popup_ok">로그인 OK</string>
@@ -1092,7 +1070,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">1년 이상 이전</string>
     <string name="cache_premium">프리미엄</string>
-    <string name="cache_attributes">속성</string>
     <string name="cache_inventory">보관함</string>
     <string name="cache_log_images_title">로그 사진</string>
     <string name="cache_log_image_default_title">사진</string>
@@ -1214,27 +1191,13 @@
     <string name="ignore_confirm_title">조심하세요</string>
     <string name="ignore_confirm_message">캐시를 제외시키는 것은 geocaching.com에서 데이터를 불러올 때 다시는 나타나지 않는다는 뜻입니다. 웹사이트에서 제외를 취소시켜야만 캐시를 다시 볼 수 있습니다.</string>
     <string name="cache_status">상태</string>
-    <string name="cache_stored">저장된 캐시</string>
     <string name="cache_status_offline_log">저장된 로그</string>
     <string name="cache_status_found">찾음</string>
     <string name="cache_not_status_found">찾지 못함</string>
-    <string name="cache_never_found">찾지 못함</string>
-    <string name="cache_found_last_30_days">최근 30일간 찾은 캐시</string>
     <string name="cache_status_archived">영구보관됨</string>
     <string name="cache_status_disabled">일시정지됨</string>
     <string name="cache_status_active">활성</string>
     <string name="cache_status_premium">프리미엄 회원 전용</string>
-    <string name="cache_status_not_premium">모든 회원 접근가능</string>
-    <string name="cache_status_stored">저장된 캐시</string>
-    <string name="cache_status_not_stored">저장되지 않음</string>
-    <string name="cache_status_stored_lasteighthours">지난 8 시간 이내</string>
-    <string name="cache_status_stored_lasttwentyfourhours">지난 24 시간 이내</string>
-    <string name="cache_status_stored_lastsevendays">지난 7 일 이내</string>
-    <string name="cache_status_stored_lastthirtydays">지난 30 일 이내</string>
-    <string name="cache_status_stored_morethaneighthours">지난 8 시간 전에</string>
-    <string name="cache_status_stored_morethantwentyfourhours">지난 24 시간 전에</string>
-    <string name="cache_status_stored_morethansevendays">지난 7 일 전에</string>
-    <string name="cache_status_stored_morethanthirtydays">지난 30 일 전에</string>
     <string name="cache_geocode">지오코드</string>
     <string name="cache_name">제목</string>
     <string name="cache_name_set">캐시 이름 설정</string>
@@ -1246,7 +1209,6 @@
     <string name="cache_distance">거리</string>
     <string name="cache_difficulty">난이도</string>
     <string name="cache_terrain">지형등급</string>
-    <string name="cache_difficulty_terrain">난이도 / 지형</string>
     <string name="cache_rating">평점</string>
     <string name="cache_own_rating">당신의 평가</string>
     <string name="cache_rating_of_new">%1$.1f 중 %2$d</string>
@@ -1255,9 +1217,7 @@
     <string name="cache_hidden">숨긴 날짜</string>
     <string name="cache_event">날짜</string>
     <string name="cache_location">위치</string>
-    <string name="cache_location_country">나라</string>
     <string name="cache_coordinates">좌표</string>
-    <string name="cache_calculator">계산기</string>
     <string name="cache_coordinates_original">원래 좌표</string>
     <string name="cache_spoiler_images_title">스포일러 사진</string>
     <string name="cache_log_types">로그 유형</string>
@@ -1383,7 +1343,7 @@
     <string name="map_showc_found">찾음</string>
     <string name="map_showc_disabled">일시정지됨</string>
     <string name="map_showc_archived">영구보관됨</string>
-    <string name="map_showc_offlinelog">오프라인으로 로그됨</string>
+    <string name="map_showc_found_offline">찾음 (오프라인)</string>
     <string name="map_showwp_original">원본</string>
     <string name="map_showwp_parking">주차</string>
     <string name="map_showwp_visited">방문했음</string>
@@ -1426,6 +1386,7 @@
     <string name="search_address_button">주소로 검색</string>
     <string name="search_geo">지오코드</string>
     <string name="search_geo_button">지오코드로 검색</string>
+    <string name="search_geocode_from_clipboard">클립보드에서 GC코드를 붙여넣었습니다.</string>
     <string name="search_kw">키워드</string>
     <string name="search_kw_prefill">키워드</string>
     <string name="search_kw_button">키워드로 검색</string>
@@ -1449,6 +1410,12 @@
     <string name="search_bookmark_list">북마크 목록</string>
     <string name="search_pocket_is_new">새로운</string>
     <string name="search_pocket_and_bookmark_loading">포켓 쿼리 및 북마크 목록 로드</string>
+    <string name="search_bookmark_loading">북마크 목록 로드 중</string>
+    <string name="search_bookmark_select">북마크 목록 선택</string>
+    <string name="search_bookmark_new">새 북마크 목록 만들기</string>
+    <string name="search_bookmark_adding_caches_success">선택한 북마크 목록에 모든 GC 지오캐시가 추가되었습니다.</string>
+    <string name="search_bookmark_adding_caches_failed">북마크 목록에 캐시를 추가하지 못했습니다.</string>
+    <string name="search_bookmark_create_new_failed">새 북마크 목록을 만들기 실패했습니다.</string>
     <!-- trackable -->
     <string name="trackable">추적아이템</string>
     <string name="trackable_details_loading">추적아이템 정보 불러오는 중…</string>
@@ -1859,7 +1826,6 @@
     <plurals name="favorite_points">
         <item quantity="other">%s 호감점수</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt;%d%% 호감점수</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>
     <string name="create_shortcut">바로가기 만들기</string>
@@ -1869,7 +1835,6 @@
     <string name="confirm_report_problem_title">문제점 신고</string>
     <string name="confirm_report_problem_message">정말 \'%s\'를 신고하시겠습니까?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">활성화</string>
     <string name="init_summary_geokrety">GeoKrety.org에서 추적아이템 활성화</string>
     <string name="init_geokrety_description">GeoKrety 추적아이템을 로그하려면 GeoKrety.org에서 c:geo를 인증하세요.</string>
     <string name="init_geokrety_userid">사용자 ID : %s</string>
@@ -1955,7 +1920,6 @@
     <string name="map_clear_individual_route">개인 경로 지우기</string>
     <string name="map_clear_individual_route_confirm">개별 경로에서 모든 캐시/지점을 제거 하시겠습니까?</string>
     <string name="map_individual_route_cleared">개인 경로 지웠음</string>
-    <string name="save_sorted_route">저장</string>
     <string name="sorted_route_saved">개인 경로가 저장되었습니다.</string>
     <string name="load_individual_route_error">개인 경로를 로드하는 중에 오류가 발생했습니다.</string>
     <string name="route_item_not_yet_loaded">경로 항목이 아직 로드되지 않았습니다.</string>
@@ -1963,6 +1927,8 @@
         <item quantity="other">경로는 %d 개의 경로점이 로드되었습니다.</item>
     </plurals>
     <string name="center_on_route">경로 중심</string>
+    <string name="individual_route_set_as_start_title">경로 시작 위치로 지정</string>
+    <string name="individual_route_set_as_start_message">이 항목을 경로 시작으로 설정하고 이후의 모든 항목을 현재 경로의 맨 위로 이동하시겠습니까?</string>
     <!-- individual track -->
     <string name="individual_track">GPX 트랙/경로</string>
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
@@ -2119,6 +2085,7 @@
     <string name="done">완료</string>
     <string name="finish">마침</string>
     <string name="back">뒤로가기</string>
+    <string name="later">나중에</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">모두 선택</string>
 </resources>
