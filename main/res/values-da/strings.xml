@@ -176,9 +176,7 @@
     <string name="log_problem_archive_label">Geocache bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacher rapporterede, at geocachen skal arkiveres. En frivillig reviewer er blevet underrettet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
-    <string name="log_image_info">%1$d x %2$d px, %3$s\nSkaleret/Komprimeret:\n%4$d x %5$d px, ~%6$s</string>
     <string name="log_image_titleprefix">Billede</string>
-    <string name="datetime_clear_button">Fjern</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Oversæt til %s</string>
     <string name="translate_to_english">Oversæt til engelsk</string>
@@ -383,25 +381,6 @@
     <string name="caches_copy_all">Kopiér alle</string>
     <string name="caches_map_locus_export">Eksportér til Locus</string>
     <string name="caches_filter_title">Filtrér efter</string>
-    <string name="caches_filter_size">Størrelse</string>
-    <string name="caches_filter_type">Type</string>
-    <string name="caches_filter_track">Med Trackables</string>
-    <string name="caches_filter_clear">Nulstil filtre</string>
-    <string name="caches_filter_modified">Med ændret position</string>
-    <string name="caches_filter_offline_log">Med offline log</string>
-    <string name="caches_filter_origin">Oprindelsessted</string>
-    <string name="caches_filter_distance">Afstand</string>
-    <string name="caches_filter_personal_note">Med personlig note</string>
-    <string name="caches_filter_popularity">Favoritter</string>
-    <string name="caches_filter_popularity_ratio">Favoritter [%]</string>
-    <string name="caches_filter_personal_data">Med personlige data</string>
-    <string name="caches_filter_rating">Med vurdering</string>
-    <string name="caches_filter_own_rating">Med egen vurdering</string>
-    <string name="caches_filter_multi_listing">Flere lister med forskellige tilstand</string>
-    <string name="caches_filter_own_waypoint">Med brugerdefinerede rutepunkter</string>
-    <string name="caches_filter_missing_gcvote">Fundne cacher er ikke bedømt</string>
-    <string name="caches_filter_lists">Tildelt til liste</string>
-    <string name="caches_filter_empty">(tom)</string>
     <string name="caches_removing_from_history">Fjerner fra historik…</string>
     <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
@@ -577,8 +556,7 @@
     <string name="settings_category_social">Sociale medier</string>
     <string name="settings_category_logging_other">Andre logningsmuligheder</string>
     <string name="settings_goto_url_button">mere…</string>
-    <string name="settings_activate_gc">Aktivér</string>
-    <string name="settings_activate_ec">Aktivér</string>
+    <string name="settings_service_activate">Aktivér</string>
     <string name="settings_gc_legal_note">Når du bruger tjenesten geocaching.com, accepterer du Groundspeaks brugsvilkår.</string>
     <string name="settings_info_facebook_login_title">Log ind med Facebook eller Google</string>
     <string name="settings_info_facebook_login">Gennem c:geo kan du ikke logge ind på geocaching.com med din Facebook- eller Google-konto. Men der er en nem løsning…</string>
@@ -587,30 +565,22 @@
     <string name="settings_gc_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.com.</string>
     <string name="settings_ec_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på extremcaching.com.</string>
     <string name="settings_su_description">Giv tilladelse til at c:geo søger efter cacher på geocaching.su.</string>
-    <string name="settings_activate_oc">Aktivér</string>
     <string name="init_summary_oc_de">Indlæs cacher fra opencaching.de</string>
     <string name="init_oc_de_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.de.</string>
-    <string name="settings_activate_oc_pl">Aktivér</string>
     <string name="init_summary_oc_pl">Indlæs cacher fra opencaching.pl</string>
     <string name="init_oc_pl_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.pl.</string>
-    <string name="settings_activate_oc_nl">Aktivér</string>
     <string name="init_summary_oc_nl">Indlæs cacher fra opencaching.nl</string>
     <string name="init_oc_nl_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.nl.</string>
-    <string name="settings_activate_oc_us">Aktivér</string>
     <string name="init_summary_oc_us">Indlæs cacher fra opencaching.us</string>
     <string name="init_oc_us_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.us.</string>
-    <string name="settings_activate_oc_ro">Aktivér</string>
     <string name="init_summary_oc_ro">Indlæs cacher fra opencaching.ro</string>
     <string name="init_oc_ro_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencaching.ro.</string>
-    <string name="settings_activate_oc_uk">Aktivér</string>
     <string name="init_summary_oc_uk">Indlæs cacher fra opencache.uk</string>
     <string name="init_oc_uk_description">Giv c:geo tilladelse til at søge efter cacher samt tilgå og filtrere dine fundne cacher på opencache.uk.</string>
     <string name="init_summary_su">Indlæs cacher fra Geocaching.su</string>
-    <string name="settings_activate_su">Aktivér</string>
     <string name="init_gcvote_password_description">For at kunne bedømme en cache skal du følge instruktionerne på GCVote.com og angive dit password til GCVote her.</string>
     <string name="err_vote_send_rating">Fejl under afsendelse af bedømmelse.</string>
     <string name="vote_sent">Bedømmelse blev afsendt</string>
-    <string name="settings_activate_twitter">Aktivér</string>
     <string name="init_login_popup">Login</string>
     <string name="init_login_popup_working">Logger ind…</string>
     <string name="init_login_popup_ok">Login OK</string>
@@ -925,7 +895,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">over et år siden</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Attributter</string>
     <string name="cache_inventory">Inventar</string>
     <string name="cache_log_images_title">Logbeskedbilleder</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -1034,27 +1003,13 @@
     <string name="ignore_confirm_title">Vær forsigtig</string>
     <string name="ignore_confirm_message">Hvis du vælger at ignorere denne cache, vil den ikke længere blive vist, når der hentes data fra geocaching.com. Cachen vil kun blive vist, hvis du på websiden vælger, at den ikke længere skal ignoreres.</string>
     <string name="cache_status">Status</string>
-    <string name="cache_stored">Gemte</string>
     <string name="cache_status_offline_log">Log gemt</string>
     <string name="cache_status_found">Fundet</string>
     <string name="cache_not_status_found">Ikke fundet</string>
-    <string name="cache_never_found">Aldrig fundet</string>
-    <string name="cache_found_last_30_days">Fundet indenfor de sidste 30 dage</string>
     <string name="cache_status_archived">Arkiveret</string>
     <string name="cache_status_disabled">Deaktiveret</string>
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun premium-medlemmer</string>
-    <string name="cache_status_not_premium">Adgang for alle medlemmer</string>
-    <string name="cache_status_stored">Gemte</string>
-    <string name="cache_status_not_stored">Ikke gemt</string>
-    <string name="cache_status_stored_lasteighthours">Indenfor sidste 8 timer</string>
-    <string name="cache_status_stored_lasttwentyfourhours">Indenfor sidste døgn</string>
-    <string name="cache_status_stored_lastsevendays">Indenfor sidste uge</string>
-    <string name="cache_status_stored_lastthirtydays">Indenfor sidste måned</string>
-    <string name="cache_status_stored_morethaneighthours">Mere end 8 timer siden</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Mere end et døgn siden</string>
-    <string name="cache_status_stored_morethansevendays">Mere end en uge siden</string>
-    <string name="cache_status_stored_morethanthirtydays">Mere end en måned siden</string>
     <string name="cache_geocode">geo code</string>
     <string name="cache_name">Navn</string>
     <string name="cache_name_set">Angiv cachenavn</string>
@@ -1074,9 +1029,7 @@
     <string name="cache_hidden">Gemt</string>
     <string name="cache_event">Dato</string>
     <string name="cache_location">Lokation</string>
-    <string name="cache_location_country">Land</string>
     <string name="cache_coordinates">Koordinater</string>
-    <string name="cache_calculator">Lommeregner</string>
     <string name="cache_coordinates_original">Oprindelig position</string>
     <string name="cache_spoiler_images_title">Spoiler-billeder</string>
     <string name="cache_log_types">Logbeskedtyper</string>
@@ -1620,7 +1573,6 @@
         <item quantity="one">%s favorit</item>
         <item quantity="other">%s favoritter</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favoritter</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genvej</string>
     <string name="create_shortcut">Opret genvej</string>
@@ -1630,7 +1582,6 @@
     <string name="confirm_report_problem_title">Rapportér et problem</string>
     <string name="confirm_report_problem_message">Du er ved at rapportere \'%s\'. Er du sikker?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktivér</string>
     <string name="init_summary_geokrety">Aktivér trackables fra GeoKrety.org</string>
     <string name="init_geokrety_description">Autorisér c:geo til at logge GeoKrety trackables på GeoKrety.org.</string>
     <string name="init_geokrety_userid">Brugerid: %s</string>
@@ -1703,7 +1654,6 @@
     <string name="map_clear_individual_route">Ryd individuel rute</string>
     <string name="map_clear_individual_route_confirm">Vil du fjerne alle cacher/rutepunkter fra din individuelle rute?</string>
     <string name="map_individual_route_cleared">Individuel rute ryddet</string>
-    <string name="save_sorted_route">Gem</string>
     <string name="sorted_route_saved">Individuel rute gemt</string>
     <string name="load_individual_route_error">Fejl ved indlæsning af individuel rute</string>
     <string name="route_item_not_yet_loaded">Rute element endnu ikke indlæst</string>
