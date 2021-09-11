@@ -114,7 +114,6 @@
     <string name="log_oc_team_comment">Ang kumento ng OC Team</string>
     <string name="log_your_saved_log">Ang iyong nai-save na log</string>
     <string name="log_empty_logbook">Ang logbook ng cache ay walang laman.</string>
-    <string name="datetime_clear_button">Malinaw</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Isalin sa %s</string>
     <string name="translate_to_english">Isalin sa Ingles</string>
@@ -290,22 +289,6 @@
     <string name="caches_copy_all">Kopyahin lahat</string>
     <string name="caches_map_locus_export">Ang mga lokus ay I-eksport</string>
     <string name="caches_filter_title">Ang pagsasala ayon sa</string>
-    <string name="caches_filter_size">Sukat</string>
-    <string name="caches_filter_type">Ang klase</string>
-    <string name="caches_filter_track">Na may pagsusubaybay</string>
-    <string name="caches_filter_clear">Malinaw ang mga pagsasala</string>
-    <string name="caches_filter_modified">May mga pinasadyang mga koordinado</string>
-    <string name="caches_filter_offline_log">May mga log kapag offline</string>
-    <string name="caches_filter_origin">Ang pinagmulan</string>
-    <string name="caches_filter_distance">Distansya</string>
-    <string name="caches_filter_personal_note">May mga personal na tala</string>
-    <string name="caches_filter_popularity">Ang mga paborito</string>
-    <string name="caches_filter_popularity_ratio">Ang mga paborito [%]</string>
-    <string name="caches_filter_personal_data">May mga personal na datus</string>
-    <string name="caches_filter_rating">May ni-rate</string>
-    <string name="caches_filter_own_rating">May sariling ni-rate</string>
-    <string name="caches_filter_multi_listing">Ang maraming listahan na may ibat\'-ibang estado</string>
-    <string name="caches_filter_missing_gcvote">Nakahanap ng cache na hindi binoto</string>
     <string name="caches_removing_from_history">Ang pagtatanggal mula sa Historya&#8230;</string>
     <string name="caches_clear_offlinelogs">Linisin ang mga log kapag offline</string>
     <string name="caches_clear_offlinelogs_message">Gusto mo bang linisin ang mga log kapag offline?</string>
@@ -371,35 +354,26 @@
     <string name="settings_category_social">Ang panlipunan na media</string>
     <string name="settings_category_logging_other">Ang iba pang mga pag pipilian sa pag-login</string>
     <string name="settings_goto_url_button">ang marami&#8230;</string>
-    <string name="settings_activate_gc">Ang Isaaktibo</string>
-    <string name="settings_activate_ec">Isaaktibo</string>
+    <string name="settings_service_activate">Ang Isaaktibo</string>
     <string name="settings_gc_legal_note">Sa paggamit ng serbisyo ng geocaching.com, tinanggap mo ang mga termino sa paggamit ng Groundspeak.</string>
     <string name="settings_authorize">Mag-autorisa c;geo</string>
     <string name="settings_gc_description">Ang pagpahintulot c:geo sa geocaching.com para mag hanap ng caches.</string>
     <string name="settings_ec_description">Ang pagpahintulot c:geo may extremcaching.com na humanap para sa caches at maka access/filter na nakita sa caches.</string>
     <string name="settings_su_description">Ang pagpahintulot c:geo may geocaching.su para humanap ng caches.</string>
-    <string name="settings_activate_oc">I-activate</string>
     <string name="init_summary_oc_de">Mag-load ng caches mula sa opencaching.de</string>
     <string name="init_oc_de_description">Mag-autorisa sa c;geo kasama ang opencaching.de upang mag hanap sa mga cache at pag-akses/salain ang iyong natagpuan na mga cache.</string>
-    <string name="settings_activate_oc_pl">Isaaktibo</string>
     <string name="init_summary_oc_pl">Mag load ng cache mula sa opencaching.pl</string>
     <string name="init_oc_pl_description">Pahintulotan ang c;geo kasama ang apencaching.pl sa paghanap ng mga cache at akses/salain ang iyong nakitang mga cache.</string>
-    <string name="settings_activate_oc_nl">Gawing Aktibo</string>
     <string name="init_summary_oc_nl">Mag load ng caches mula sa opencaching.nl</string>
     <string name="init_oc_nl_description">Pahintulotan ang c:geo kasama ang opencaching.nl para sa paghanap ng mga cache at akses/salain ang iyong nakitang mga cache.</string>
-    <string name="settings_activate_oc_us">Isaaktibo</string>
     <string name="init_summary_oc_us">Mag load caches mula sa opencaching.us</string>
     <string name="init_oc_us_description">Pahintulotan ang c;geo kasama ang opencaching.us upang hanapin ang mga cache at akses/salain ang iyong nakitang mga cache.</string>
-    <string name="settings_activate_oc_ro">Isaaktibo</string>
     <string name="init_summary_oc_ro">Mag-load ng caches mula sa opencaching.ro</string>
     <string name="init_oc_ro_description">Pahintolutan ang c;geo kasama ang opencaching.ro para sa pag hanap ng mga cache at akses/salain ang iyong mga nakitang cache.</string>
-    <string name="settings_activate_oc_uk">Gawing Aktibo</string>
     <string name="init_summary_oc_uk">Mag-load ng caches mula sa opencache.uk</string>
     <string name="init_oc_uk_description">Pahintulot c:geo may opencache.uk para mag hanap ng cache at access/filter para sa iyong caches.</string>
     <string name="init_summary_su">Mag-load ng caches mula sa Geocaching.su</string>
-    <string name="settings_activate_su">Gawing Aktibo</string>
     <string name="init_gcvote_password_description">Para mai-rate ang cache, kinakailangan mo sumunod sa mga tagubilin ng Gcvote.com at ipasok ang iyong GCvote password dito.</string>
-    <string name="settings_activate_twitter">Gawing Aktibo</string>
     <string name="init_login_popup">Mag-login</string>
     <string name="init_login_popup_working">Naglo-login sa&#8230;</string>
     <string name="init_login_popup_ok">OK mag-login</string>
@@ -589,7 +563,6 @@
         <item quantity="other">ang tungkol sa %d sa nakalipas na mga araw</item>
     </plurals>
     <string name="cache_premium">Ang Premyum</string>
-    <string name="cache_attributes">Ang mga katangian</string>
     <string name="cache_inventory">Ang Imbentaryo</string>
     <string name="cache_log_images_title">Ang mga imahe sa log</string>
     <string name="cache_log_image_default_title">Ang Larawan</string>
@@ -675,18 +648,12 @@
     <string name="ignore_confirm_title">Maging maingat ka</string>
     <string name="ignore_confirm_message">Sa hindi-pagpansin sa cache ay nangangahulugan na ang cache na ito ay hindi naganap habang naglo-load ang datus mula sa geocaching.com. Ikaw ay magagawa lang makita ang cache muli sa pamamagitan ng hindi pagbalewala dito sa websayt.</string>
     <string name="cache_status">Ang estado</string>
-    <string name="cache_stored">Inimbak</string>
     <string name="cache_status_offline_log">Ang Log ay Nai-seyb</string>
     <string name="cache_status_found">Ang nakita</string>
     <string name="cache_not_status_found">Ang hindi Nakita</string>
-    <string name="cache_never_found">Kailanman ay hindi Nakita</string>
-    <string name="cache_found_last_30_days">Nakita nuong huling 30 araw</string>
     <string name="cache_status_archived">Ang naka-archive</string>
     <string name="cache_status_disabled">Ang hindi umiiral</string>
     <string name="cache_status_premium">Ang premium na mga miyembro lamang</string>
-    <string name="cache_status_not_premium">Ang akses sa Lahat ng mga Miyembro</string>
-    <string name="cache_status_stored">Inimbak</string>
-    <string name="cache_status_not_stored">Ang hindi nakaimbak</string>
     <string name="cache_geocode">Ang Kodigo sa Geo</string>
     <string name="cache_name">Ang pangalan</string>
     <string name="cache_type">Ang klase</string>
@@ -1154,7 +1121,6 @@
         <item quantity="one">%s na paborito</item>
         <item quantity="other">%s na mga paborito</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% mga paborito</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">shortcut sa c:geo</string>
     <string name="create_shortcut">Lumikha ng shortcut</string>
@@ -1162,7 +1128,6 @@
     <string name="confirm_log_title">Espesyal na uri ng log</string>
     <string name="confirm_log_message">Gusto mong mag-log sa \'%s\'. Sigurado ka ba?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktebahin</string>
     <string name="init_summary_geokrety">Paganahin ang mga trackable mula sa GeoKrety.org</string>
     <string name="init_geokrety_description">Awtorisahan ang c:geo kasama ang GeoKrety.org para makapag-log sa mga trackable ng GeoKrety.</string>
     <string name="init_geokrety_userid">Id ng Gumagamit: %s</string>
@@ -1211,7 +1176,6 @@
     <!-- individual routes -->
     <string name="map_clear_manual_targets">Manuelle Ziele löschen</string>
     <string name="map_manual_targets_cleared">Manuelle Ziele gelöscht</string>
-    <string name="save_sorted_route">I-seyb</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
