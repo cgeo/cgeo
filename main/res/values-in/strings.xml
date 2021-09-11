@@ -117,7 +117,6 @@
     <string name="log_oc_team_comment">Komentar Tim OC</string>
     <string name="log_your_saved_log">Log anda disimpan</string>
     <string name="log_empty_logbook">Buku catatan dalam cache ini kosong.</string>
-    <string name="datetime_clear_button">Bersihkan</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Terjemahkan ke %s</string>
     <string name="translate_to_english">Terjemahkan ke Bahasa Inggris</string>
@@ -286,22 +285,6 @@
     <string name="caches_copy_all">Salin semua</string>
     <string name="caches_map_locus_export">Ekspor ke lokus</string>
     <string name="caches_filter_title">Filter menurut</string>
-    <string name="caches_filter_size">Ukuran</string>
-    <string name="caches_filter_type">Jenis</string>
-    <string name="caches_filter_track">Dengan yang bisa dilacak</string>
-    <string name="caches_filter_clear">Hapus filter</string>
-    <string name="caches_filter_modified">Dengan koordinat yang dimodifikasi</string>
-    <string name="caches_filter_offline_log">Dengan offline log</string>
-    <string name="caches_filter_origin">Asal</string>
-    <string name="caches_filter_distance">Jarak</string>
-    <string name="caches_filter_personal_note">Dengan catatan pribadi</string>
-    <string name="caches_filter_popularity">Favorit</string>
-    <string name="caches_filter_popularity_ratio">Favorit [%]</string>
-    <string name="caches_filter_personal_data">Dengan catatan pribadi</string>
-    <string name="caches_filter_rating">Dengan rating</string>
-    <string name="caches_filter_own_rating">Dengan penilaian sendiri</string>
-    <string name="caches_filter_multi_listing">Multi listing dengan keadaan berbeda</string>
-    <string name="caches_filter_missing_gcvote">Cache ditemukan tidak memilih</string>
     <string name="caches_removing_from_history">Menghapus dari riwayat&#8230;</string>
     <string name="caches_clear_offlinelogs">Hapus log offline</string>
     <string name="caches_clear_offlinelogs_message">Apakah anda ingin menghapus log offline?</string>
@@ -367,35 +350,26 @@
     <string name="settings_category_social">Media sosial</string>
     <string name="settings_category_logging_other">Pilihan login lainnya</string>
     <string name="settings_goto_url_button">lebih banyak &#8230;</string>
-    <string name="settings_activate_gc">Aktifkan</string>
-    <string name="settings_activate_ec">Aktifkan</string>
+    <string name="settings_service_activate">Aktifkan</string>
     <string name="settings_gc_legal_note">Dengan menggunakan layanan dari geocaching.com, anda menerima Syarat Penggunaan Groundspeak.</string>
     <string name="settings_authorize">Mengizinkan c:geo</string>
     <string name="settings_gc_description">Otorisasi c:geo dengan geocaching.com untuk mencari cache.</string>
     <string name="settings_ec_description">Otorisasi c:geo dengan extremcaching.com untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="settings_su_description">Otorisasi c:geo dengan geocaching.su untuk mencari cache.</string>
-    <string name="settings_activate_oc">Aktifkan</string>
     <string name="init_summary_oc_de">Muat cache dari opencaching.de</string>
     <string name="init_oc_de_description">Mengizinkan c:geo dengan opencaching.de untuk mencari cache dan akses/filter cache yang anda temukan.</string>
-    <string name="settings_activate_oc_pl">Aktifkan</string>
     <string name="init_summary_oc_pl">Muat cache dari opencaching.pl</string>
     <string name="init_oc_pl_description">Mengizinkan c:geo dengan opencaching.pl untuk mencari cache dan akses/filter cache yang anda temukan.</string>
-    <string name="settings_activate_oc_nl">Aktifkan</string>
     <string name="init_summary_oc_nl">Muat cache dari opencaching.nl</string>
     <string name="init_oc_nl_description">Mengizinkan c:geo dengan opencaching.nl untuk mencari cache dan akses/filter cache yang anda temukan.</string>
-    <string name="settings_activate_oc_us">Aktifkan</string>
     <string name="init_summary_oc_us">Muat cache dari opencaching.us</string>
     <string name="init_oc_us_description">Otorisasi c:geo dengan opencaching.kami untuk mencari cache dan akses/filter anda menemukan cache.</string>
-    <string name="settings_activate_oc_ro">Mengaktifkan</string>
     <string name="init_summary_oc_ro">Muat cache dari opencaching.ro</string>
     <string name="init_oc_ro_description">Mengizinkan c:geo dengan opencaching.ro untuk mencari cache dan akses/filter anda menemukan cache.</string>
-    <string name="settings_activate_oc_uk">Aktifkan</string>
     <string name="init_summary_oc_uk">Muat cache dari opencache.uk</string>
     <string name="init_oc_uk_description">Otorisasi c:geo dengan opencache.uk untuk mencari cache dan akses/filter cache yang anda temukan.</string>
     <string name="init_summary_su">Muat cache dari Geocaching.su</string>
-    <string name="settings_activate_su">Aktifkan</string>
     <string name="init_gcvote_password_description">Untuk bisa menilai sebuah cache, anda perlu mengikuti petunjuk di GCVote.com dan masukkan kata sandi GCVote anda di sini.</string>
-    <string name="settings_activate_twitter">Aktifkan</string>
     <string name="init_login_popup_working">Sedang masuk&#8230;</string>
     <string name="init_login_popup_ok">Masuk Ok</string>
     <string name="init_login_popup_failed">Gagal masuk</string>
@@ -576,7 +550,6 @@
         <item quantity="other">sekitar %d hari yang lalu</item>
     </plurals>
     <string name="cache_premium">Meningkatkan</string>
-    <string name="cache_attributes">Atribut</string>
     <string name="cache_inventory">Persediaan</string>
     <string name="cache_log_images_title">Gambar log</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -657,18 +630,12 @@
     <string name="cache_menu_ignore">Mengabaikan cache</string>
     <string name="ignore_confirm_title">Berhati-hati</string>
     <string name="ignore_confirm_message">Mengabaikan cache berarti bahwa cache ini tidak akan pernah muncul lagi ketika memuat data dari geocaching.com. Anda hanya akan dapat melihat cache lagi dengan membatalkan abaian pada situs tersebut.</string>
-    <string name="cache_stored">Disimpan</string>
     <string name="cache_status_offline_log">Log disimpan</string>
     <string name="cache_status_found">Ditemukan</string>
     <string name="cache_not_status_found">Tidak ditemukan</string>
-    <string name="cache_never_found">Tidak Pernah Ditemukan</string>
-    <string name="cache_found_last_30_days">Berdasarkan 30 hari terakhir</string>
     <string name="cache_status_archived">Diarsipkan</string>
     <string name="cache_status_disabled">Cacat</string>
     <string name="cache_status_premium">Anggota Premium saja</string>
-    <string name="cache_status_not_premium">Semua Akses Anggota</string>
-    <string name="cache_status_stored">Disimpan</string>
-    <string name="cache_status_not_stored">Tidak disimpan</string>
     <string name="cache_geocode">Kode geo</string>
     <string name="cache_name">Nama</string>
     <string name="cache_type">Jenis</string>
@@ -684,7 +651,6 @@
     <string name="cache_event">Tanggal</string>
     <string name="cache_location">Lokasi</string>
     <string name="cache_coordinates">Koordinat</string>
-    <string name="cache_calculator">Kalkulator</string>
     <string name="cache_coordinates_original">Koordinat Asli</string>
     <string name="cache_spoiler_images_title">Gambar spoiler</string>
     <string name="cache_log_types">Tipe log</string>
@@ -1134,7 +1100,6 @@
     <plurals name="favorite_points">
         <item quantity="other">%s favorit</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favorit</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c: jalan pintas geo</string>
     <string name="create_shortcut">Buat jalan pintas</string>
@@ -1142,7 +1107,6 @@
     <string name="confirm_log_title">Jenis log khusus</string>
     <string name="confirm_log_message">Anda ingin log \'%s\'. Apakah anda yakin?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Aktifkan</string>
     <string name="init_summary_geokrety">Mengaktifkan yang bisa dilacak dari GeoKrety.org</string>
     <string name="init_geokrety_description">Otorisasi c: geo dengan GeoKrety.org untuk catatan GeoKrety yang bisa dilacak.</string>
     <string name="init_geokrety_userid">Id pengguna: %s</string>
@@ -1184,7 +1148,6 @@
     <!-- number input -->
     <!-- notification / channel texts -->
     <!-- individual routes -->
-    <string name="save_sorted_route">Simpan</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
