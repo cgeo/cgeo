@@ -149,7 +149,6 @@
     <string name="log_problem_archive_text">Цей геокешер повідомив, що цей геокеш повинен бути заархівований. Повідомлено громадського рецензента-волонтера.</string>
     <string name="log_image_scale_option_noscaling">Відсутність масштабування</string>
     <string name="log_image_titleprefix">Імідж</string>
-    <string name="datetime_clear_button">Чистий</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Перекласти на %s</string>
     <string name="translate_to_english">Переклад англійською мовою</string>
@@ -347,25 +346,6 @@
     <string name="caches_copy_all">Скопіювати все</string>
     <string name="caches_map_locus_export">Експорт в Locus</string>
     <string name="caches_filter_title">Фільтрувати за</string>
-    <string name="caches_filter_size">Розмір</string>
-    <string name="caches_filter_type">Тип</string>
-    <string name="caches_filter_track">З трекерами</string>
-    <string name="caches_filter_clear">Очистити фільтри</string>
-    <string name="caches_filter_modified">Вивантажити змінені координати</string>
-    <string name="caches_filter_offline_log">З журналом оффлайн</string>
-    <string name="caches_filter_origin">Оригінальний</string>
-    <string name="caches_filter_distance">Відстань</string>
-    <string name="caches_filter_personal_note">З персональною приміткою</string>
-    <string name="caches_filter_popularity">Улюблене</string>
-    <string name="caches_filter_popularity_ratio">Вибране [%]</string>
-    <string name="caches_filter_personal_data">З персональними даними</string>
-    <string name="caches_filter_rating">З рейтингом</string>
-    <string name="caches_filter_own_rating">З власним рейтингом</string>
-    <string name="caches_filter_multi_listing">Багатоканальний список з іншим станом</string>
-    <string name="caches_filter_own_waypoint">З визначеними користувачем точками</string>
-    <string name="caches_filter_missing_gcvote">Знайдені кеші не проголосовані</string>
-    <string name="caches_filter_lists">присвоєний списку</string>
-    <string name="caches_filter_empty">(порожній)</string>
     <string name="caches_removing_from_history">Видалення з історії…</string>
     <string name="caches_clear_offlinelogs">очистити офлайн-списки</string>
     <string name="caches_clear_offlinelogs_message">Ви хочете очистити журнали офлайн?</string>
@@ -457,8 +437,7 @@
     <string name="settings_category_social">Соціальні медіа</string>
     <string name="settings_category_logging_other">Інші параметри ведення журналу</string>
     <string name="settings_goto_url_button">більше …</string>
-    <string name="settings_activate_gc">Активувати</string>
-    <string name="settings_activate_ec">Активувати</string>
+    <string name="settings_service_activate">Активувати</string>
     <string name="settings_gc_legal_note">Використовуючи сервіс geocaching.com, ви приймаєте умови використання Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Увійти через Facebook або Google</string>
     <string name="settings_info_facebook_login">Ви не можете зробити c: geo вхід на geocaching.com за допомогою свого облікового запису Facebook або Google. Але є просте обхідне рішення…</string>
@@ -467,30 +446,22 @@
     <string name="settings_gc_description">Авторизуйте c:geo з geocaching.com для пошуку кешів.</string>
     <string name="settings_ec_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
     <string name="settings_su_description">Авторизуйте c:geo з geocaching.com для пошуку кешів.</string>
-    <string name="settings_activate_oc">Активувати</string>
     <string name="init_summary_oc_de">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_de_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
-    <string name="settings_activate_oc_pl">Активувати</string>
     <string name="init_summary_oc_pl">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_pl_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
-    <string name="settings_activate_oc_nl">Активувати</string>
     <string name="init_summary_oc_nl">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_nl_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
-    <string name="settings_activate_oc_us">Активувати</string>
     <string name="init_summary_oc_us">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_us_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
-    <string name="settings_activate_oc_ro">Активувати</string>
     <string name="init_summary_oc_ro">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_ro_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
-    <string name="settings_activate_oc_uk">Активувати</string>
     <string name="init_summary_oc_uk">Завантажте кеші з opencaching.de</string>
     <string name="init_oc_uk_description">Авторизуйте c:geo з extremcaching.com для пошуку схованок та доступу/фільтрування ваших знайдених кешів.</string>
     <string name="init_summary_su">Завантажте кеші з opencaching.de</string>
-    <string name="settings_activate_su">Активувати</string>
     <string name="init_gcvote_password_description">Щоб мати можливість оцінити кеш, вам необхідно дотримуватися інструкцій в GCVote.com та ввести свій пароль до GCVote тут.</string>
     <string name="err_vote_send_rating">Помилка надсилання повідомлення.</string>
     <string name="vote_sent">Голосування успішно відправлено</string>
-    <string name="settings_activate_twitter">Активувати</string>
     <string name="init_login_popup">логін</string>
     <string name="init_login_popup_working">вхід в систему…</string>
     <string name="init_login_popup_ok">Логін добре</string>
@@ -767,7 +738,6 @@
     <string name="cache_offline_time_mins_few">кілька хвилин тому</string>
     <string name="cache_offline_about_time_year">більше року тому</string>
     <string name="cache_premium">Преміум</string>
-    <string name="cache_attributes">атрибути</string>
     <string name="cache_inventory">Інвентар</string>
     <string name="cache_log_images_title">журнальні зображення</string>
     <string name="cache_log_image_default_title">Фото</string>
@@ -875,27 +845,13 @@
     <string name="ignore_confirm_title">Будьте обережні</string>
     <string name="ignore_confirm_message">Ігнорування кешу означає, що цей кеш ніколи не буде використовуватися знову під час завантаження даних із схованки. м.Ви зможете знову побачити кеш не ігноруючи його на сайті.</string>
     <string name="cache_status">Статус</string>
-    <string name="cache_stored">Збережений</string>
     <string name="cache_status_offline_log">Зберегти у журнал</string>
     <string name="cache_status_found">Знайдено</string>
     <string name="cache_not_status_found">Не знайдено</string>
-    <string name="cache_never_found">Ніколи не знайдено</string>
-    <string name="cache_found_last_30_days">Знайдено за останні 30 днів</string>
     <string name="cache_status_archived">Архівний</string>
     <string name="cache_status_disabled">Робити нездатним</string>
     <string name="cache_status_active">активний</string>
     <string name="cache_status_premium">Тільки Преміум Учасники</string>
-    <string name="cache_status_not_premium">Доступ до всіх учасників</string>
-    <string name="cache_status_stored">Збережений</string>
-    <string name="cache_status_not_stored">Не збережено</string>
-    <string name="cache_status_stored_lasteighthours">За останні вісім годин</string>
-    <string name="cache_status_stored_lasttwentyfourhours">За останні двадцять чотири години</string>
-    <string name="cache_status_stored_lastsevendays">За останні сім днів</string>
-    <string name="cache_status_stored_lastthirtydays">За останні тридцять днів</string>
-    <string name="cache_status_stored_morethaneighthours">За останні вісім годин</string>
-    <string name="cache_status_stored_morethantwentyfourhours">За останні двадцять чотири години</string>
-    <string name="cache_status_stored_morethansevendays">За останні сім днів</string>
-    <string name="cache_status_stored_morethanthirtydays">За останні тридцять днів</string>
     <string name="cache_geocode">гео код</string>
     <string name="cache_name">Ім’я</string>
     <string name="cache_name_set">Встановити ім\'я кеша</string>
@@ -913,9 +869,7 @@
     <string name="cache_hidden">Прихований</string>
     <string name="cache_event">Дата</string>
     <string name="cache_location">Розташування</string>
-    <string name="cache_location_country">Країна</string>
     <string name="cache_coordinates">Координати</string>
-    <string name="cache_calculator">Калькулятор</string>
     <string name="cache_coordinates_original">Оригінальні координати</string>
     <string name="cache_spoiler_images_title">Зображення спойлера</string>
     <string name="cache_log_types">Типи журналiв</string>
@@ -1444,7 +1398,6 @@
     <string name="tts_oclock">%s годин</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Скопійовано в буфер обміну</string>
-    <string name="more_than_percent_favorite_points">&gt; %d%% улюблені</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">ярлик c:geo</string>
     <string name="create_shortcut">Створити ярлик</string>
@@ -1454,7 +1407,6 @@
     <string name="confirm_report_problem_title">Повідомити про проблему</string>
     <string name="confirm_report_problem_message">Ви бажаєте увійти \'%s. Ви впевнені?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Активувати</string>
     <string name="init_summary_geokrety">Увімкнути відстеження з GeoKrety.org</string>
     <string name="init_geokrety_description">Авторизуйте c:geo з GeoKrety.org та записи GeoKrety відстежувань.</string>
     <string name="init_geokrety_userid">ID користувача: %s</string>
@@ -1509,7 +1461,6 @@
     <string name="map_clear_individual_route">Експорт за окремим маршрутом</string>
     <string name="map_clear_individual_route_confirm">Чи хочете ви вилучити всі кешування/шляхові точки з вашого маршруту?</string>
     <string name="map_individual_route_cleared">Індивідуальний маршрут очищено</string>
-    <string name="save_sorted_route">Зберегти</string>
     <string name="sorted_route_saved">Окремий маршрут збережено</string>
     <string name="load_individual_route_error">Помилка при завантаженні окремого маршруту</string>
     <string name="route_item_not_yet_loaded">Елемент маршруту ще не завантажений</string>
