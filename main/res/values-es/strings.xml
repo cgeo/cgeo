@@ -151,7 +151,6 @@
     <string name="log_problem_archive_text">Este geocacher informó de que este caché debería ser archivado. Se ha notificado a un revisor voluntario de la comunidad.</string>
     <string name="log_image_scale_option_noscaling">Sin redimensionar</string>
     <string name="log_image_titleprefix">Imagen</string>
-    <string name="datetime_clear_button">Limpiar</string>
     <!-- translation -->
     <string name="translate_to_sys_lang">Traducir al %s</string>
     <string name="translate_to_english">Traducir al inglés</string>
@@ -352,25 +351,6 @@
     <string name="caches_copy_all">Copiar todos</string>
     <string name="caches_map_locus_export">Exportar a Locus</string>
     <string name="caches_filter_title">Filtrar por</string>
-    <string name="caches_filter_size">Tamaño</string>
-    <string name="caches_filter_type">Tipo</string>
-    <string name="caches_filter_track">Con rastreables</string>
-    <string name="caches_filter_clear">Limpiar filtros</string>
-    <string name="caches_filter_modified">Con las coordenadas modificadas</string>
-    <string name="caches_filter_offline_log">Con registro sin conexión</string>
-    <string name="caches_filter_origin">Origen</string>
-    <string name="caches_filter_distance">Distancia</string>
-    <string name="caches_filter_personal_note">Con nota personal</string>
-    <string name="caches_filter_popularity">Favoritos</string>
-    <string name="caches_filter_popularity_ratio">Favoritos [%]</string>
-    <string name="caches_filter_personal_data">Con datos personales</string>
-    <string name="caches_filter_rating">Con puntuación</string>
-    <string name="caches_filter_own_rating">Con puntuación propia</string>
-    <string name="caches_filter_multi_listing">Multi ficha con distinto registro</string>
-    <string name="caches_filter_own_waypoint">Con waypoints definidos por el usuario</string>
-    <string name="caches_filter_missing_gcvote">Cachés encontrados no votados</string>
-    <string name="caches_filter_lists">Asignado a una lista</string>
-    <string name="caches_filter_empty">(vacío)</string>
     <string name="caches_removing_from_history">Borrando del historial…</string>
     <string name="caches_clear_offlinelogs">Borrar registros sin conexión</string>
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
@@ -503,8 +483,7 @@
     <string name="settings_category_social">Redes sociales</string>
     <string name="settings_category_logging_other">Otras opciones de registro</string>
     <string name="settings_goto_url_button">más …</string>
-    <string name="settings_activate_gc">Activar</string>
-    <string name="settings_activate_ec">Activar</string>
+    <string name="settings_service_activate">Activar</string>
     <string name="settings_gc_legal_note">Usando el servicio de geocaching.com, usted acepta los términos de uso de Groundspeak.</string>
     <string name="settings_info_facebook_login_title">Iniciar sesión usando Facebook o Google</string>
     <string name="settings_info_facebook_login">c:geo no puede iniciar sesión en geocaching.com con tu cuenta de Facebook o Google. Sin embargo, hay una solución simple…</string>
@@ -513,30 +492,22 @@
     <string name="settings_gc_description">Autorizar a c:geo en geocaching.com para buscar cachés.</string>
     <string name="settings_ec_description">Autorizar que c:geo pueda usar extremcaching.com para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
     <string name="settings_su_description">Autorizar a c:geo en geocaching.su para buscar cachés.</string>
-    <string name="settings_activate_oc">Activar</string>
     <string name="init_summary_oc_de">Carga cachés de opencaching.de</string>
     <string name="init_oc_de_description">Autorizar que c:geo pueda usar opencaching.de para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
-    <string name="settings_activate_oc_pl">Activar</string>
     <string name="init_summary_oc_pl">Carga cachés de opencaching.pl</string>
     <string name="init_oc_pl_description">Autorizar que c:geo pueda usar opencaching.pl para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
-    <string name="settings_activate_oc_nl">Activar</string>
     <string name="init_summary_oc_nl">Carga cachés de opencaching.nl</string>
     <string name="init_oc_nl_description">Autorizar que c:geo pueda usar opencaching.nl para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
-    <string name="settings_activate_oc_us">Activar</string>
     <string name="init_summary_oc_us">Carga cachés de opencaching.us</string>
     <string name="init_oc_us_description">Autorizar que c:geo pueda usar opencaching.us para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
-    <string name="settings_activate_oc_ro">Activar</string>
     <string name="init_summary_oc_ro">Carga cachés de opencaching.ro</string>
     <string name="init_oc_ro_description">Autorizar que c:geo pueda usar opencaching.ro para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
-    <string name="settings_activate_oc_uk">Activar</string>
     <string name="init_summary_oc_uk">Carga cachés de opencaching.uk</string>
     <string name="init_oc_uk_description">Autorizar que c:geo pueda usar opencache.uk para buscar cachés y acceder a / filtrar tus cachés encontrados.</string>
     <string name="init_summary_su">Carga cachés de Geocaching.su</string>
-    <string name="settings_activate_su">Activar</string>
     <string name="init_gcvote_password_description">Para poder calificar un caché, tienes que seguir las instrucciones en GCVote.com e introducir tu contraseña de GCVote aquí.</string>
     <string name="err_vote_send_rating">Error al enviar la calificación.</string>
     <string name="vote_sent">Voto enviado con éxito</string>
-    <string name="settings_activate_twitter">Activar</string>
     <string name="init_login_popup">Acceso</string>
     <string name="init_login_popup_working">Accediendo a Geocaching.com…</string>
     <string name="init_login_popup_ok">Acceso conseguido</string>
@@ -861,7 +832,6 @@
     </plurals>
     <string name="cache_offline_about_time_year">hace más de un año</string>
     <string name="cache_premium">Premium</string>
-    <string name="cache_attributes">Atributos</string>
     <string name="cache_inventory">Inventario</string>
     <string name="cache_log_images_title">Imágenes de registros</string>
     <string name="cache_log_image_default_title">Foto</string>
@@ -958,23 +928,12 @@
     <string name="ignore_confirm_title">Ten cuidado</string>
     <string name="ignore_confirm_message">Ignorar un caché significa que este caché no aparecerá más cuando cargues datos de geocaching.com. Sólo podrás verlo de nuevo si dejas de ignorarlo desde la página web.</string>
     <string name="cache_status">Estado</string>
-    <string name="cache_stored">Guardados</string>
     <string name="cache_status_offline_log">Registro guardado</string>
     <string name="cache_status_found">Encontrado</string>
     <string name="cache_not_status_found">No encontrado</string>
-    <string name="cache_never_found">Sin encontrar</string>
-    <string name="cache_found_last_30_days">Encontrado en los últimos 30 días</string>
     <string name="cache_status_archived">Archivado</string>
     <string name="cache_status_disabled">Desactivado</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
-    <string name="cache_status_not_premium">Acceso a todos los miembros</string>
-    <string name="cache_status_stored">Guardados</string>
-    <string name="cache_status_not_stored">No guardado</string>
-    <string name="cache_status_stored_lastthirtydays">En los últimos treinta días</string>
-    <string name="cache_status_stored_morethaneighthours">Antes de las últimas ocho horas</string>
-    <string name="cache_status_stored_morethantwentyfourhours">Antes de las últimas veinticuatro horas</string>
-    <string name="cache_status_stored_morethansevendays">Antes de los últimos siete días</string>
-    <string name="cache_status_stored_morethanthirtydays">Antes de los últimos treinta días</string>
     <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nombre</string>
     <string name="cache_name_set">Establecer nombre de caché</string>
@@ -993,9 +952,7 @@
     <string name="cache_hidden">Oculto</string>
     <string name="cache_event">Fecha</string>
     <string name="cache_location">Ubicación</string>
-    <string name="cache_location_country">País</string>
     <string name="cache_coordinates">Coordenadas</string>
-    <string name="cache_calculator">Calculadora</string>
     <string name="cache_coordinates_original">Coordenadas originales</string>
     <string name="cache_spoiler_images_title">Imágenes reveladoras</string>
     <string name="cache_log_types">Tipos de registro</string>
@@ -1500,7 +1457,6 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">%s favorito</item>
         <item quantity="other">%s favoritos</item>
     </plurals>
-    <string name="more_than_percent_favorite_points">&gt; %d%% favoritos</string>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>
@@ -1510,7 +1466,6 @@ Nombre de archivo:%2$s</string>
     <string name="confirm_report_problem_title">Reportar problema</string>
     <string name="confirm_report_problem_message">Vas a reportar \'%s\'. ¿Estás seguro?</string>
     <!-- Geokrety -->
-    <string name="settings_activate_geokrety">Activar</string>
     <string name="init_summary_geokrety">Habilitar rastreables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autorizar a c:geo en GeoKrety.org para registrar rastreables.</string>
     <string name="init_geokrety_userid">Usuario: %s</string>
@@ -1564,7 +1519,6 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_clear_individual_route_confirm">¿Quieres eliminar todos los cachés /waypoints de tu ruta individual?</string>
-    <string name="save_sorted_route">Guardar</string>
     <!-- individual track -->
     <!-- distance units -->
     <!-- switch settings -->
