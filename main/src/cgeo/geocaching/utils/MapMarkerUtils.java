@@ -472,19 +472,6 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Conditional expression to choose if we need the UserModifiedCoords flag or not.
-     *
-     * @param cache
-     *            The cache currently used
-     * @return
-     *         True if the UserModifiedCoords flag should be displayed
-     */
-    private static boolean showUserModifiedCoords(final Geocache cache) {
-
-        return cache.hasUserModifiedCoords() || cache.hasFinalDefined();
-    }
-
-    /**
      * Conditional expression to choose if we need the floppy overlay or not.
      *
      * @param cacheListType
