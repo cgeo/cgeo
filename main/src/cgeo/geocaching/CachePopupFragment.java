@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.Progress;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.databinding.PopupBinding;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.list.StoredList;
@@ -41,6 +42,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotification {
     private final Progress progress = new Progress();
+    private PopupBinding binding;
 
     public static DialogFragment newInstance(final String geocode) {
 
@@ -104,7 +106,8 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
 
     @Override
     public View onCreateView(final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
-        final View v = inflater.inflate(R.layout.popup, container, false);
+        binding = PopupBinding.inflate(getLayoutInflater(), container, false);
+        final View v = binding.getRoot();
         initCustomActionBar(v);
         return v;
     }
@@ -118,9 +121,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 proximityNotification.setTextNotifications(getContext());
             }
 
-            final View view = getView();
-            assert view != null;
-            final Toolbar toolbar = view.findViewById(R.id.toolbar);
+            final Toolbar toolbar = binding.toolbar.toolbar;
             toolbar.setTitle(geocode);
             toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
             toolbar.setLongClickable(true);
@@ -136,16 +137,15 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 return false;
             });
 
-            final TextView title = view.findViewById(R.id.title);
-            title.setText(TextUtils.coloredCacheText(cache, cache.getName()));
-            details = new CacheDetailsCreator(getActivity(), view.findViewById(R.id.details_list));
+            binding.title.setText(TextUtils.coloredCacheText(cache, cache.getName()));
+            details = new CacheDetailsCreator(getActivity(), binding.detailsList);
 
             addCacheDetails(false);
 
             // offline use
-            CacheDetailActivity.updateOfflineBox(view, cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
+            CacheDetailActivity.updateOfflineBox(binding.getRoot(), cache, res, new RefreshCacheClickListener(), new DropCacheClickListener(), new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
 
-            CacheDetailActivity.updateCacheLists(view, cache, res);
+            CacheDetailActivity.updateCacheLists(binding.getRoot(), cache, res);
 
         } catch (final Exception e) {
             Log.e("CachePopupFragment.init", e);
@@ -217,7 +217,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                 DataStore.saveLists(Collections.singletonList(cache), listIds);
                 CacheDetailActivity.updateOfflineBox(getView(), cache, res,
                         new RefreshCacheClickListener(), new DropCacheClickListener(),
-                        new StoreCacheClickListener(), new ShowHintClickListener(getView()), null, new StoreCacheClickListener());
+                        new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
                 CacheDetailActivity.updateCacheLists(getView(), cache, res);
             } else {
                 final StoreCacheHandler storeCacheHandler = new StoreCacheHandler(CachePopupFragment.this, R.string.cache_dialog_offline_save_message);
@@ -229,7 +229,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
                     if (view != null) {
                         CacheDetailActivity.updateOfflineBox(view, cache, res,
                                 new RefreshCacheClickListener(), new DropCacheClickListener(),
-                                new StoreCacheClickListener(), new ShowHintClickListener(view), null, new StoreCacheClickListener());
+                                new StoreCacheClickListener(), new ShowHintClickListener(binding), null, new StoreCacheClickListener());
                         CacheDetailActivity.updateCacheLists(view, cache, res);
                     }
                 });
@@ -271,16 +271,16 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     }
 
     private static class ShowHintClickListener implements View.OnClickListener {
-        private final View anchorView;
+        private final PopupBinding binding;
 
-        ShowHintClickListener (final View view) {
-            anchorView = view;
+        ShowHintClickListener (final PopupBinding binding) {
+            this.binding = binding;
         }
 
         @Override
         public void onClick(final View view) {
-            final TextView offlineHintText = (TextView) anchorView.findViewById(R.id.offline_hint_text);
-            final View offlineHintSeparator = anchorView.findViewById(R.id.offline_hint_separator);
+            final TextView offlineHintText = binding.offlineHintText;
+            final View offlineHintSeparator = binding.offlineHintSeparator;
             if (offlineHintText.getVisibility() == View.VISIBLE) {
                 offlineHintText.setVisibility(View.GONE);
                 offlineHintSeparator.setVisibility(View.GONE);

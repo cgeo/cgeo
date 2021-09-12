@@ -16,7 +16,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TextUtils;
 
 import android.app.Activity;
 import android.content.DialogInterface;
@@ -121,8 +120,6 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
 
     protected final void addCacheDetails(final boolean showGeocode) {
         assert cache != null;
-
-//        details.add(R.string.cache_name, TextUtils.coloredCacheText(cache, cache.getName()));
 
         // cache type
         final String cacheType = cache.getType().getL10n();
