@@ -4,24 +4,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="@string/preference_screen_ocde"
     android:title="@string/init_oc" >
-    <PreferenceCategory android:title="@string/settings_settings"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_settings" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorOCActive"
-            android:summary="@string/init_summary_oc_de"
+            app:summary="@string/init_summary_oc_de"
             android:title="@string/settings_activate_oc" />
-        <cgeo.geocaching.settings.TextPreference
+        <Preference
             android:dependency="@string/pref_connectorOCActive"
-            android:layout="@layout/text_preference"
-            android:text="@string/init_oc_de_description" />
+            app:summary="@string/init_oc_de_description" />
         <cgeo.geocaching.settings.OAuthPreference
             android:dependency="@string/pref_connectorOCActive"
             android:key="@string/pref_fakekey_ocde_authorization" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_information" >
         <Preference
             android:key="@string/pref_fakekey_ocde_website"
             android:title="@string/settings_open_website" />

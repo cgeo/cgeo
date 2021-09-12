@@ -8,13 +8,13 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.DialogPreference;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.preference.DialogPreference;
 
 import java.util.List;
 
@@ -44,6 +44,8 @@ public class TemplateTextPreference extends DialogPreference {
         setDialogLayoutResource(R.layout.template_preference_dialog);
     }
 
+    /*
+
     @Override
     protected void onBindDialogView(final View view) {
         settingsActivity = (SettingsActivity) this.getContext();
@@ -72,10 +74,14 @@ public class TemplateTextPreference extends DialogPreference {
         super.onBindDialogView(view);
     }
 
+    */
+
     private void insertSignatureTemplate(final LogTemplate template) {
         final String insertText = "[" + template.getTemplateString() + "]";
         ActivityMixin.insertAtPosition(editText, insertText, true);
     }
+
+    /*
 
     @Override
     protected void onDialogClosed(final boolean positiveResult) {
@@ -87,9 +93,11 @@ public class TemplateTextPreference extends DialogPreference {
         super.onDialogClosed(positiveResult);
     }
 
+
+     */
     @Override
-    protected void onSetInitialValue(final boolean restorePersistedValue, final Object defaultValue) {
-        if (restorePersistedValue) {
+    protected void onSetInitialValue(final Object defaultValue) {
+        if (defaultValue == null) {
             // Restore existing state
             initialValue = this.getPersistedString(DEFAULT_VALUE);
         } else {

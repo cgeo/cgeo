@@ -5,19 +5,16 @@
     android:key="@string/preference_screen_lc"
     android:title="@string/settings_title_lc" >
 
-    <PreferenceCategory android:title="@string/settings_settings"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_settings" >
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_connectorLCActive"
             android:title="@string/settings_activate_lc" />
-        <cgeo.geocaching.settings.TextPreference
-            android:layout="@layout/text_preference"
-            android:text="@string/settings_lc_description" />
+        <Preference
+            app:summary="@string/settings_lc_description" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_information" >
         <Preference
             android:key="@string/pref_fakekey_lc_website"
             android:title="@string/settings_open_website" />

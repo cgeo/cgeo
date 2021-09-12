@@ -1,24 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="?attr/settings_arrow"
-    android:title="@string/settings_title_navigation"
-    android:summary="@string/settings_summary_navigation" >
+    android:summary="@string/settings_summary_navigation"
+    android:title="@string/settings_title_navigation">
 
-    <PreferenceCategory android:title="@string/settings_title_offline_routing" android:summary="@string/settings_summary_offline_routing"
-        android:layout="@layout/preference_category">
+    <PreferenceCategory
+        android:summary="@string/settings_summary_offline_routing"
+        android:title="@string/settings_title_offline_routing">
         <Preference
-            android:selectable="false"
             android:key="@string/pref_fakekey_brouterDistanceThresholdTitle"
+            android:selectable="false"
             android:summary="@string/init_brouterThreshold_description"
             android:title="@string/init_brouterThreshold" />
         <cgeo.geocaching.settings.ProximityPreference
-            android:key="@string/pref_brouterDistanceThreshold"
-            app:min="1"
-            app:max="@integer/brouter_threshold_max"
             android:defaultValue="@integer/brouter_threshold_default"
-            app:highRes="false" />
+            android:key="@string/pref_brouterDistanceThreshold"
+            app:highRes="false"
+            app:max="@integer/brouter_threshold_max"
+            app:min="1" />
 
         <CheckBoxPreference
             android:defaultValue="false"
@@ -33,28 +33,28 @@
             android:title="@string/init_useInternalRouting" />
 
         <Preference
+            android:dependency="@string/pref_useInternalRouting"
             android:key="@string/pref_persistablefolder_routingtiles"
-            android:title="@string/init_brouter_directory_description"
-            android:dependency="@string/pref_useInternalRouting" />
+            android:title="@string/init_brouter_directory_description" />
 
         <CheckBoxPreference
             android:defaultValue="false"
+            android:dependency="@string/pref_useInternalRouting"
             android:key="@string/pref_brouterAutoTileDownloads"
             android:summary="@string/init_brouterAutoTileDownloads_description"
-            android:dependency="@string/pref_useInternalRouting"
             android:title="@string/init_autoDownloads" />
 
         <Preference
+            android:dependency="@string/pref_brouterAutoTileDownloads"
             android:selectable="false"
             android:summary="@string/init_updateinterval_description"
-            android:title="@string/init_updateinterval_title"
-            android:dependency="@string/pref_brouterAutoTileDownloads" />
+            android:title="@string/init_updateinterval_title" />
         <cgeo.geocaching.settings.SeekbarPreference
-            android:key="@string/pref_brouterAutoTileDownloadsInterval"
-            app:min="0"
-            app:max="@integer/brouter_updateinterval_max"
             android:defaultValue="@integer/brouter_updateinterval_default"
-            android:dependency="@string/pref_brouterAutoTileDownloads" />
+            android:dependency="@string/pref_brouterAutoTileDownloads"
+            android:key="@string/pref_brouterAutoTileDownloadsInterval"
+            app:max="@integer/brouter_updateinterval_max"
+            app:min="0" />
 
         <ListPreference
             android:dialogTitle="@string/init_brouterProfileWalk"
@@ -72,11 +72,8 @@
 
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/init_default_navigation_tool"
-        android:layout="@layout/preference_category" >
-        <cgeo.geocaching.settings.TextPreference
-            android:layout="@layout/text_preference"
-            android:text="@string/init_default_navigation_tool_description" />
+    <PreferenceCategory android:title="@string/init_default_navigation_tool">
+        <Preference app:summary="@string/init_default_navigation_tool_description" />
         <ListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/init_default_navigation_tool_select"
@@ -85,11 +82,8 @@
         <!-- default value is NavigationAppFactory.NavigationAppsEnum.COMPASS -->
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/init_secondary_navigation_tool"
-        android:layout="@layout/preference_category" >
-        <cgeo.geocaching.settings.TextPreference
-            android:layout="@layout/text_preference"
-            android:text="@string/init_default_navigation_tool_2_description" />
+    <PreferenceCategory android:title="@string/init_secondary_navigation_tool">
+        <Preference app:summary="@string/init_default_navigation_tool_2_description" />
         <ListPreference
             android:defaultValue="2"
             android:dialogTitle="@string/init_default_navigation_tool_select"
@@ -98,11 +92,8 @@
         <!-- default value is NavigationAppFactory.NavigationAppsEnum.INTERNAL_MAP -->
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_title_navigation_menu"
-        android:layout="@layout/preference_category" >
-        <cgeo.geocaching.settings.TextPreference
-            android:layout="@layout/text_preference"
-            android:text="@string/init_navigation_menu_description" />
+    <PreferenceCategory android:title="@string/settings_title_navigation_menu">
+        <Preference app:summary="@string/init_navigation_menu_description" />
 
         <!-- Navigation Navigation -->
         <Preference

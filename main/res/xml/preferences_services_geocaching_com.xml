@@ -1,12 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="@string/preference_screen_gc"
-    android:title="@string/settings_title_gc" >
+    android:title="@string/settings_title_gc">
 
-    <PreferenceCategory android:title="@string/settings_settings"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_settings">
         <cgeo.geocaching.settings.CheckBoxWithPopupPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorGCActive"
@@ -15,20 +13,19 @@
             app:title="@string/settings_title_gc"
             app:url="@string/settings_gc_legal_note_url"
             app:urlButton="@string/settings_goto_url_button" />
-        <cgeo.geocaching.settings.TextPreference
+        <Preference
             android:dependency="@string/pref_connectorGCActive"
-            android:layout="@layout/text_preference"
-            android:text="@string/settings_gc_description" />
+            app:summary="@string/settings_gc_description" />
 
         <cgeo.geocaching.settings.CredentialsPreference
             android:dependency="@string/pref_connectorGCActive"
-            android:summary="@string/auth_unconnected"
-            android:key="@string/pref_fakekey_gc_authorization" />
+            android:key="@string/pref_fakekey_gc_authorization"
+            app:summary="@string/auth_unconnected" />
 
         <PreferenceScreen
             android:dependency="@string/pref_connectorGCActive"
             android:key="@string/preference_screen_basicmembers"
-            android:title="@string/settings_title_basicmembers" >
+            android:title="@string/settings_title_basicmembers">
             <CheckBoxPreference
                 android:defaultValue="true"
                 android:key="@string/pref_loaddirectionimg"
@@ -37,9 +34,9 @@
         </PreferenceScreen>
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information"
-        android:layout="@layout/preference_category" >
-        <cgeo.geocaching.settings.InfoPreference
+    <PreferenceCategory android:title="@string/settings_information">
+        <Preference
+            android:icon="?attr/settings_info_icon"
             android:text="@string/settings_info_facebook_login"
             android:title="@string/settings_info_facebook_login_title"
             app:url="@string/settings_facebook_login_url"

@@ -5,24 +5,21 @@
     android:key="@string/preference_screen_ocus"
     android:title="@string/init_oc_us" >
 
-    <PreferenceCategory android:title="@string/settings_settings"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_settings" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorOCUSActive"
             android:summary="@string/init_summary_oc_us"
             android:title="@string/settings_activate_oc_us" />
-        <cgeo.geocaching.settings.TextPreference
+        <Preference
             android:dependency="@string/pref_connectorOCUSActive"
-            android:layout="@layout/text_preference"
-            android:text="@string/init_oc_us_description" />
+            app:summary="@string/init_oc_us_description" />
         <cgeo.geocaching.settings.OAuthPreference
             android:dependency="@string/pref_connectorOCUSActive"
             android:key="@string/pref_fakekey_ocus_authorization" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_information" >
         <Preference
             android:key="@string/pref_fakekey_ocus_website"
             android:title="@string/settings_open_website" />

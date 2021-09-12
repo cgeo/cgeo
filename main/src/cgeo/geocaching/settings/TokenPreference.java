@@ -54,7 +54,7 @@ public class TokenPreference extends AbstractClickablePreference {
 
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
-        activity.setAuthTitle(tokenMapping.prefKeyId);
+        //activity.setAuthTitle(tokenMapping.prefKeyId);
         return preference -> {
             if (tokenMapping.authActivity != null) {
                 final Intent authIntent = new Intent(preference.getContext(),

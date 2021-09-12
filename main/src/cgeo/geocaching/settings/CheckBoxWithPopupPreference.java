@@ -5,10 +5,10 @@ import cgeo.geocaching.ui.UrlPopup;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.CheckBoxPreference;
 import android.util.AttributeSet;
-import android.view.View;
-import android.view.ViewGroup;
+
+import androidx.preference.CheckBoxPreference;
+import androidx.preference.PreferenceViewHolder;
 
 public class CheckBoxWithPopupPreference extends CheckBoxPreference {
 
@@ -39,9 +39,10 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
         }
 
         // Array need to be ordered. See: http://stackoverflow.com/a/19092511/944936
-        final TypedArray types = context.obtainStyledAttributes(attrs, new int[] {
-                R.attr.text, R.attr.title, R.attr.url, R.attr.urlButton },
-                defStyle, 0);
+        final TypedArray types = context.obtainStyledAttributes(
+            attrs,
+            new int[]{R.attr.text, R.attr.title, R.attr.url, R.attr.urlButton},
+            defStyle, 0);
 
         text = types.getString(0);
         title = types.getString(1);
@@ -52,7 +53,7 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
     }
 
     @Override
-    protected View onCreateView(final ViewGroup parent) {
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
 
         if (baseOnPrefChangeListener == null) {
             baseOnPrefChangeListener = getOnPreferenceChangeListener();
@@ -69,8 +70,6 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
             new UrlPopup(preference.getContext()).show(title, text, url, urlButton);
             return true;
         });
-
-        return super.onCreateView(parent);
     }
 
 }
