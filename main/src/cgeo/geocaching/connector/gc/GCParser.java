@@ -19,9 +19,9 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
+import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
-import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.Network;
@@ -994,7 +994,7 @@ public final class GCParser {
      * @return A non-null list (which might be empty) on success. Null on error.
      */
     @Nullable
-    public static List<PocketQuery> searchBookmarkLists () {
+    public static List<GCList> searchBookmarkLists () {
         final Parameters params = new Parameters();
         params.add("skip", "0");
         params.add("take", "100");
@@ -1008,7 +1008,7 @@ public final class GCParser {
 
         try {
             final JsonNode json = JsonUtils.reader.readTree(page).get("data");
-            final List<PocketQuery> list = new ArrayList<>();
+            final List<GCList> list = new ArrayList<>();
 
             for (Iterator<JsonNode> it = json.elements(); it.hasNext(); ) {
                 final JsonNode row = it.next();
@@ -1018,7 +1018,7 @@ public final class GCParser {
                 final int count = row.get("count").asInt();
                 final Date date = DATE_JSON.parse(row.get("lastUpdateUtc").asText());
 
-                final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, date.getTime(), -1, true);
+                final GCList pocketQuery = new GCList(guid, name, count, true, date.getTime(), -1, true);
                 list.add(pocketQuery);
             }
 
@@ -1094,7 +1094,7 @@ public final class GCParser {
      * @return A non-null list (which might be empty) on success. Null on error.
      */
     @Nullable
-    public static List<PocketQuery> searchPocketQueries () {
+    public static List<GCList> searchPocketQueries () {
         final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchPocketQueryList: No data from server");
@@ -1103,8 +1103,8 @@ public final class GCParser {
 
         try {
             final Document document = Jsoup.parse(page);
-            final Map<String, PocketQuery> downloadablePocketQueries = getDownloadablePocketQueries(document);
-            final List<PocketQuery> list = new ArrayList<>(downloadablePocketQueries.values());
+            final Map<String, GCList> downloadablePocketQueries = getDownloadablePocketQueries(document);
+            final List<GCList> list = new ArrayList<>(downloadablePocketQueries.values());
 
             final Elements rows = document.select("#pqRepeater tr:has(td)");
             for (final Element row : rows) {
@@ -1116,7 +1116,7 @@ public final class GCParser {
                 final String guid = uri.getQueryParameter("guid");
                 if (!downloadablePocketQueries.containsKey(guid)) {
                     final String name = link.attr("title");
-                    final PocketQuery pocketQuery = new PocketQuery(guid, name, -1, false, 0, -1, false);
+                    final GCList pocketQuery = new GCList(guid, name, -1, false, 0, -1, false);
                     list.add(pocketQuery);
                 }
             }
@@ -1136,8 +1136,8 @@ public final class GCParser {
      * @return Map with downloadable PQs keyed by guid
      */
     @NonNull
-    private static Map<String, PocketQuery> getDownloadablePocketQueries(final Document document) throws Exception {
-        final Map<String, PocketQuery> downloadablePocketQueries = new HashMap<>();
+    private static Map<String, GCList> getDownloadablePocketQueries(final Document document) throws Exception {
+        final Map<String, GCList> downloadablePocketQueries = new HashMap<>();
 
         final Elements rows = document.select("#uxOfflinePQTable tr:has(td)");
         for (final Element row : rows) {
@@ -1177,7 +1177,7 @@ public final class GCParser {
                 }
             }
 
-            final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, lastGeneration, daysRemaining, false);
+            final GCList pocketQuery = new GCList(guid, name, count, true, lastGeneration, daysRemaining, false);
             downloadablePocketQueries.put(guid, pocketQuery);
         }
 

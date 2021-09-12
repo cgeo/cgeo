@@ -3,8 +3,8 @@ package cgeo.geocaching.connector.gc;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -31,14 +31,14 @@ public class BookmarkUtils {
     }
 
     private static void loadAndAskForSelection(final Context context, final List<Geocache> geocaches, final ProgressDialog waitDialog) {
-        final List<PocketQuery> lists = new ArrayList<>();
+        final List<GCList> lists = new ArrayList<>();
 
         // add "<create new list>" PseudoList
-        lists.add(0, new PocketQuery(NEW_LIST_GUID, PseudoList.NEW_LIST.getTitleAndCount(), 0, false, 0, 0, false));
+        lists.add(0, new GCList(NEW_LIST_GUID, PseudoList.NEW_LIST.getTitleAndCount(), 0, false, 0, 0, false));
 
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
 
-            final List<PocketQuery> bmLists = GCParser.searchBookmarkLists();
+            final List<GCList> bmLists = GCParser.searchBookmarkLists();
             if (bmLists == null) {
                 ActivityMixin.showToast(context, context.getString(R.string.err_read_bookmark_list));
                 return;
@@ -58,7 +58,7 @@ public class BookmarkUtils {
         });
     }
 
-    private static void processSelection(final Context context, final List<Geocache> geocaches, final PocketQuery selection) {
+    private static void processSelection(final Context context, final List<Geocache> geocaches, final GCList selection) {
         if (selection.getGuid().equals(NEW_LIST_GUID)) {
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_new).input(-1, null, null, null,
                     name -> AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
