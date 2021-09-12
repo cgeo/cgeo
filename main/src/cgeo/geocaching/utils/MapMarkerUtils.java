@@ -2,6 +2,7 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
@@ -369,6 +370,41 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
         return buildLayerDrawable(insetsBuilder, 2, 2);
+    }
+
+    /**
+     * Provide the LayerDrawable representing the cache type icon
+     *
+     * @param res   Android Resources
+     * @param type  CacheType to get the icon for
+     * @return  Layered Drawable
+     */
+    public static Drawable getCacheTypeMarker(final Resources res, final CacheType type) {
+        final int hashcode = new HashCodeBuilder().append(type).toHashCode();
+
+        synchronized (overlaysCache) {
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createCacheTypeMarker(res, type));
+                overlaysCache.put(hashcode, marker);
+            }
+            return marker.getDrawable();
+        }
+    }
+
+    /**
+     * Build the layered drawable for a cache type icon using a background color + foreground icon
+     *
+     * @param res   Android Resources
+     * @param type  CacheType to get the icon for
+     * @return  Layered Drawable
+     */
+    public static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type) {
+        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null));
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, type.typeColor, null));
+        insetsBuilder.withInset(new InsetBuilder(type.markerId));
+        return buildLayerDrawable(insetsBuilder, 2, 0);
     }
 
     /**
