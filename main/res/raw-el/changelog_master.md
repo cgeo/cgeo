@@ -2,12 +2,12 @@
 ### Χάρτης
 - Νέο: Προστέθηκε το Mapy.cz ως πηγή online χάρτη
 - Νέο: Μεμονωμένη διαδρομή: Να επιτρέπεται η ρύθμιση μιας νέας αρχής και η αντιστροφή της διαδρομής
-- New: Multiple offline map downloads can now be triggered at once
+- Νέα: Οι πολλαπλές λήψεις χαρτών εκτός σύνδεσης μπορούν τώρα να ενεργοποιηθούν ταυτόχρονα
 
-### Cache details
-- Fix: Detect if current user is owner for lab adventures
+### Λεπτομέρειες κρύπτης
+- Διόρθωση: Ανίχνευση αν ο τρέχων χρήστης είναι ιδιοκτήτης για τις περιπέτειες εργαστηρίου
 
-### Other
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Change: Hide sensitive data in "view settings"
+### Άλλο
+- Νέα: Να επιτρέπεται η μεταφόρτωση κρυπτών στη λίστα σελιδοδεικτών (μόνο για τα premium μέλη της GC)
+- Νέο: Αυτόματη προσυμπλήρωση στην 'Αναζήτηση με γεωκωδικό' αν το περιεχόμενο του προχείρου μπορεί να αναλυθεί ως έγκυρος γεωκωδικός
+- Αλλαγή: Απόκρυψη ευαίσθητων δεδομένων σε "ρυθμίσεις προβολής"
