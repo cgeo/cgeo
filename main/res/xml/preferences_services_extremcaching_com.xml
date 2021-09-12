@@ -9,7 +9,7 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorECActive"
-            android:title="@string/settings_activate_ec" />
+            android:title="@string/settings_service_activate" />
         <Preference
             android:dependency="@string/pref_connectorECActive"
             app:summary="@string/settings_ec_description" />

@@ -8,7 +8,7 @@
         <cgeo.geocaching.settings.CheckBoxWithPopupPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorGCActive"
-            android:title="@string/settings_activate_gc"
+            android:title="@string/settings_service_activate"
             app:text="@string/settings_gc_legal_note"
             app:title="@string/settings_title_gc"
             app:url="@string/settings_gc_legal_note_url"

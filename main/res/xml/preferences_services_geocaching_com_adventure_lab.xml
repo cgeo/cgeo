@@ -8,15 +8,15 @@
     <PreferenceCategory android:title="@string/settings_settings" >
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/pref_connectorLCActive"
-            android:title="@string/settings_activate_lc" />
+            android:key="@string/preference_screen_lc"
+            android:title="@string/settings_title_lc" />
         <Preference
             app:summary="@string/settings_lc_description" />
     </PreferenceCategory>
 
     <PreferenceCategory android:title="@string/settings_information" >
         <Preference
-            android:key="@string/pref_fakekey_lc_website"
+            android:key="@string/pref_fakekey_al_website"
             android:title="@string/settings_open_website" />
         <cgeo.geocaching.settings.CapabilitiesPreference
             android:title="@string/settings_features"

@@ -10,7 +10,7 @@
             android:defaultValue="false"
             android:key="@string/pref_connectorGeokretyActive"
             android:summary="@string/init_summary_geokrety"
-            android:title="@string/settings_activate_geokrety" />
+            android:title="@string/settings_service_activate" />
         <Preference
             android:dependency="@string/pref_connectorGeokretyActive"
             app:summary="@string/init_geokrety_description" />
