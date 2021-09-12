@@ -9,7 +9,7 @@
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_twitter"
-            android:title="@string/settings_activate_twitter" />
+            android:title="@string/settings_service_activate" />
         <Preference
             android:dependency="@string/pref_twitter"
             app:summary="@string/about_twitter" />

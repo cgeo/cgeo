@@ -10,7 +10,7 @@
             android:defaultValue="false"
             android:key="@string/pref_connectorSUActive"
             android:summary="@string/init_summary_su"
-            android:title="@string/settings_activate_su" />
+            android:title="@string/settings_service_activate" />
         <Preference
             android:dependency="@string/pref_connectorSUActive"
             app:summary="@string/settings_su_description" />

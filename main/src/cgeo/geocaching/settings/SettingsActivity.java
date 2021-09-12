@@ -104,10 +104,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             return;
         }
 
-        if (DownloaderUtils.onActivityResult(this, requestCode, resultCode, data)) {
-            return;
-        }
-
         if (resultCode != RESULT_OK) {
             return;
         }
