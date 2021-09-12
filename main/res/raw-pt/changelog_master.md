@@ -2,7 +2,7 @@
 ### Mapa
 - Novo: Adicionado Mapy.cz como fonte de mapa online
 - Novo: Rota individual - Permite definir um novo início e inverter a rota
-- New: Multiple offline map downloads can now be triggered at once
+- Novo: Agora podem ser feitas várias transferências de mapas offline de uma só vez
 
 ### Detalhes da cache
 - Correcção: Detecta se o utilizador actual é o proprietário de Adventure Labs
