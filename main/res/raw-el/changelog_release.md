@@ -1,16 +1,16 @@
 ### Χάρτης
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Νέο: Προστέθηκε το Mapy.cz ως πηγή online χάρτη
+- Νέο: Μεμονωμένη διαδρομή: Να επιτρέπεται η ρύθμιση μιας νέας αρχής και η αντιστροφή της διαδρομής
+- Νέα: Οι πολλαπλές λήψεις χαρτών εκτός σύνδεσης μπορούν τώρα να ενεργοποιηθούν ταυτόχρονα
 
 ### Λεπτομέρειες κρύπτης
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
+- Διόρθωση: Ανίχνευση αν ο τρέχων χρήστης είναι ιδιοκτήτης για τις περιπέτειες εργαστηρίων
+- Νέα: Προστέθηκαν μερικά ακόμα emoijis για χρήση ως ατομικό εικονίδιο cache
+- Νέο: Υποστήριξη προσθήκης κρυπτών στις λίστες σελιδοδεικτών (μόνο PM)
 
 ### Άλλο
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Νέα: Να επιτρέπεται η μεταφόρτωση κρυπτών στη λίστα σελιδοδεικτών (μόνο για τα premium μέλη της GC)
+- Νέο: Αυτόματη προσυμπλήρωση στην 'Αναζήτηση με γεωκωδικό' αν το περιεχόμενο του προχείρου μπορεί να αναλυθεί ως έγκυρος γεωκωδικός
+- Διόρθωση: Μερικές διορθώσεις για User Interface και για φιλτράρισμα
+- Αλλαγή: Απόκρυψη ευαίσθητων δεδομένων σε "ρυθμίσεις προβολής"
+- Αλλαγή: To πρόθεμα Προσωρινής Αποθήκευσης για τα εργαστήρια περιπέτειας είναι τώρα "AL" αντί για "LC" (η οποία είναι ήδη σε χρήση για Extremcaching)
