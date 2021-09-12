@@ -130,7 +130,6 @@ public class Geocache implements IWaypoint {
      */
     private String location = null;
     private UncertainProperty<Geopoint> coords = new UncertainProperty<>(null);
-    private boolean reliableLatLon = false;
     private final PersonalNote personalNote = new PersonalNote();
     /**
      * lazy initialized
@@ -228,7 +227,6 @@ public class Geocache implements IWaypoint {
             detailed = true;
             detailedUpdate = other.detailedUpdate;
             // boolean values must be enumerated here. Other types are assigned outside this if-statement
-            reliableLatLon = other.reliableLatLon;
             finalDefined = other.finalDefined;
 
             if (StringUtils.isBlank(getHint())) {
@@ -372,10 +370,6 @@ public class Geocache implements IWaypoint {
             userModifiedCoords = true;
         }
 
-        if (!reliableLatLon) {
-            reliableLatLon = other.reliableLatLon;
-        }
-
         if (!preventWaypointsFromNote) {
             preventWaypointsFromNote = other.preventWaypointsFromNote;
         }
@@ -427,7 +421,6 @@ public class Geocache implements IWaypoint {
                 difficulty == other.difficulty &&
                 terrain == other.terrain &&
                 UncertainProperty.equalValues(coords, other.coords) &&
-                reliableLatLon == other.reliableLatLon &&
                 Objects.equals(disabled, other.disabled) &&
                 Objects.equals(archived, other.archived) &&
                 Objects.equals(lists, other.lists) &&
@@ -1080,17 +1073,6 @@ public class Geocache implements IWaypoint {
      */
     public void setCoords(final Geopoint coords, final int zoomlevel) {
         this.coords = new UncertainProperty<>(coords, zoomlevel);
-    }
-
-    /**
-     * @return true if the coordinates are from the cache details page and the user has been logged in
-     */
-    public boolean isReliableLatLon() {
-        return getConnector().isReliableLatLon(reliableLatLon);
-    }
-
-    public void setReliableLatLon(final boolean reliableLatLon) {
-        this.reliableLatLon = reliableLatLon;
     }
 
     public void setShortDescription(final String shortdesc) {
@@ -1960,7 +1942,8 @@ public class Geocache implements IWaypoint {
         }
     }
 
-    public static SearchResult searchByGeocode(final String geocode, final String guid, final boolean forceReload, final DisposableHandler handler) {
+    @Nullable
+    public static SearchResult searchByGeocode(@Nullable final String geocode, @Nullable final String guid, final boolean forceReload, @Nullable final DisposableHandler handler) {
         if (StringUtils.isBlank(geocode) && StringUtils.isBlank(guid)) {
             Log.e("Geocache.searchByGeocode: No geocode nor guid given");
             return null;

@@ -2,7 +2,6 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -19,7 +18,7 @@ import android.app.Activity;
 import android.text.Html;
 import android.text.Spanned;
 
-import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -33,13 +32,7 @@ public class MapUtils {
     }
 
     // filter waypoints from owned caches or certain wp types if requested.
-    public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext, final boolean checkCacheFilters) {
-        final boolean excludeMine = checkCacheFilters && Settings.isExcludeMyCaches();
-        final boolean excludeFound = checkCacheFilters && Settings.isExcludeFound();
-        final boolean excludeDisabled = checkCacheFilters && Settings.isExcludeDisabledCaches();
-        final boolean excludeArchived = checkCacheFilters && Settings.isExcludeArchivedCaches();
-        final boolean excludeOfflineLog = checkCacheFilters && Settings.isExcludeOfflineLog();
-        final CacheType filterCacheType = checkCacheFilters ? null : (Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType());
+    public static void filter(final Set<Waypoint> waypoints, final GeocacheFilterContext filterContext) {
 
         final GeocacheFilter filter = filterContext.get();
 
@@ -51,7 +44,7 @@ public class MapUtils {
         for (final Waypoint wp : waypoints) {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
-            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, filterCacheType) ||
+            if (cache == null ||
                 !filter.filter(cache) ||
                 (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
                 (excludeWpParking && wpt == WaypointType.PARKING) ||
@@ -64,56 +57,21 @@ public class MapUtils {
 
     /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
     public static void filter(final Collection<Geocache> caches, final GeocacheFilterContext filterContext) {
-
         final GeocacheFilter filter = filterContext.get();
         filter.filterList(caches);
-
-
-        final boolean excludeMine = Settings.isExcludeMyCaches();
-        final boolean excludeFound = Settings.isExcludeFound();
-        final boolean excludeDisabled = Settings.isExcludeDisabledCaches();
-        final boolean excludeArchived = Settings.isExcludeArchivedCaches();
-        final boolean excludeOfflineLog = Settings.isExcludeOfflineLog();
-
-        final CacheType filterCacheType = Settings.getCacheType() == null ? CacheType.ALL : Settings.getCacheType();
-
-        // filtering required?
-        if (!excludeMine && !excludeFound && !excludeDisabled && !excludeArchived && !excludeOfflineLog && filterCacheType.equals(CacheType.ALL)) {
-            return;
-        }
-        final List<Geocache> removeList = new ArrayList<>();
-        for (final Geocache cache : caches) {
-            if (!filterCache(cache, excludeMine, excludeFound, excludeDisabled, excludeArchived, excludeOfflineLog, filterCacheType)) {
-                removeList.add(cache);
-            }
-        }
-        caches.removeAll(removeList);
-    }
-
-    private static boolean filterCache(final Geocache cache, final boolean excludeMine, final boolean excludeFound, final boolean excludeDisabled, final boolean excludeArchived, final boolean excludeOfflineLog, final CacheType globalType) {
-        return cache != null && (!excludeFound || !cache.isFound()) && (!excludeMine || !cache.isOwner()) && (!excludeDisabled || !cache.isDisabled()) && (!excludeArchived || !cache.isArchived()) &&
-            (!excludeOfflineLog || !cache.hasLogOffline()) &&
-            (globalType == null || globalType.equals(CacheType.ALL) || globalType.equals(cache.getType()));
-
     }
 
     public static void updateFilterBar(final Activity activity, final GeocacheFilterContext filterContext) {
-        FilterUtils.updateFilterBar(activity, getActiveMapFilterNames(filterContext));
+        FilterUtils.updateFilterBar(activity, getActiveMapFilterName(filterContext));
     }
 
-    @NonNull
-    private static List<String> getActiveMapFilterNames(final GeocacheFilterContext filterContext) {
-        final List<String> filters = new ArrayList<>();
-        if (Settings.getCacheType() != CacheType.ALL) {
-            filters.add(Settings.getCacheType().getL10n());
-        }
-
+    @Nullable
+    private static String getActiveMapFilterName(final GeocacheFilterContext filterContext) {
         final GeocacheFilter filter = filterContext.get();
         if (filter.isFiltering()) {
-            filters.add(filter.toUserDisplayableString());
+            return filter.toUserDisplayableString();
         }
-
-        return filters;
+        return null;
     }
 
     // one-time messages to be shown for maps

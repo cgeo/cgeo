@@ -15,7 +15,6 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
@@ -126,20 +125,8 @@ class GCWebAPI {
         }
 
         /** filters for given cache types. Works for V1 */
-        public WebApiSearch addCacheTypes(final CacheType ... ct) {
-            cacheTypes.addAll(CollectionStream.of(ct).filter(type -> type != CacheType.ALL).toList());
-            return this;
-        }
-
-        /** filters for given cache types. Works for V1 */
         public WebApiSearch addCacheTypes(final Collection<CacheType> ct) {
             cacheTypes.addAll(CollectionStream.of(ct).filter(type -> type != CacheType.ALL).toList());
-            return this;
-        }
-
-        /** filters for given cache sizes. Works for V1 */
-        public WebApiSearch addCacheSizes(final CacheSize ... cs) {
-            cacheSizes.addAll(Arrays.asList(cs));
             return this;
         }
 
@@ -787,7 +774,6 @@ class GCWebAPI {
 
                 final Geocache c = new Geocache();
                 c.setDetailed(false);
-                c.setReliableLatLon(true);
                 c.setGeocode(r.code);
                 c.setName(r.name);
                 if (r.userCorrectedCoordinates != null) {
@@ -885,12 +871,7 @@ class GCWebAPI {
     }
 
     static SearchResult searchMap(@NonNull final Viewport viewport) {
-        return searchCaches (new WebApiSearch()
-            .setBox(viewport)
-            .addCacheTypes(Settings.getCacheType())
-            .setStatusOwn(Settings.isGCPremiumMember() && Settings.isExcludeMyCaches() ? false : null)
-            .setStatusFound(Settings.isGCPremiumMember() && Settings.isExcludeFound() ? false : null), false
-        );
+        return searchCaches(new WebApiSearch().setBox(viewport), false);
     }
 
 

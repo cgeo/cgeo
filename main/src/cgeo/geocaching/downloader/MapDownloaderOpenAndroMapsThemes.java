@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.MatcherWrapper;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -22,15 +23,16 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
     }
 
     @Override
-    protected void analyzePage(final Uri uri, final List<Download> list, final String page) {
+    protected void analyzePage(final Uri uri, final List<Download> list, final @NonNull String page) {
         final Download file = checkUpdateFor(page, CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl), "Elevate.zip");
         if (file != null) {
             list.add(file);
         }
     }
 
+    @Nullable
     @Override
-    protected Download checkUpdateFor(final String page, final String remoteUrl, final String remoteFilename) {
+    protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
         final MatcherWrapper matchDate = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE, page);
         if (matchDate.find()) {
             final String date = "20" + matchDate.group(3) + "-" + matchDate.group(2) + "-" + matchDate.group(1);

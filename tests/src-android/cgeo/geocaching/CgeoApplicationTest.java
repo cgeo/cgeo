@@ -5,7 +5,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.GCParser;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
@@ -24,8 +23,9 @@ import cgeo.geocaching.test.mock.MockedCache;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.test.Compare;
 
-import android.test.suitebuilder.annotation.MediumTest;
-import android.test.suitebuilder.annotation.SmallTest;
+import androidx.annotation.Nullable;
+import androidx.test.filters.MediumTest;
+import androidx.test.filters.SmallTest;
 
 import java.util.GregorianCalendar;
 
@@ -52,7 +52,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link GCParser#searchTrackable(String, String, String)}
      */
     @MediumTest
-    public static void testSearchTrackableNotExisting() {
+    public void testSearchTrackableNotExisting() {
         final Trackable tb = GCParser.searchTrackable("123456", null, null);
         assertThat(tb).isNull();
     }
@@ -61,7 +61,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link GCParser#searchTrackable(String, String, String)}
      */
     @MediumTest
-    public static void testSearchTrackable() {
+    public void testSearchTrackable() {
         final Trackable tb = GCParser.searchTrackable("TB2J1VZ", null, null);
         assertThat(tb).isNotNull();
         // fix data
@@ -92,11 +92,11 @@ public class CgeoApplicationTest extends CGeoTestCase {
         for (final LogEntry log : tb.getLogs()) {
             assertThat(log.date).isGreaterThan(0);
             assertThat(log.author).isNotEmpty();
-            if (log.getType() == LogType.PLACED_IT || log.getType() == LogType.RETRIEVED_IT) {
+            if (log.logType == LogType.PLACED_IT || log.logType == LogType.RETRIEVED_IT) {
                 assertThat(log.cacheName).isNotEmpty();
                 assertThat(log.cacheGuid).isNotEmpty();
             } else {
-                assertThat(log.getType()).isNotEqualTo(LogType.UNKNOWN);
+                assertThat(log.logType).isNotEqualTo(LogType.UNKNOWN);
             }
         }
     }
@@ -106,7 +106,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Other parameters are not fully covered in this test case, as we already have {@link CgeoApplicationTest#testSearchTrackable()}
      */
     @MediumTest
-    public static void testSearchTrackableSpottedLogState() {
+    public void testSearchTrackableSpottedLogState() {
         final Trackable tb = GCParser.searchTrackable("TB4BPQK", null, null);
         assertThat(tb).isNotNull();
         // some very basic constant data
@@ -125,7 +125,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
         final LogEntry lastLog = tb.getLogs().get(0);
         assertThat(lastLog.author).isEqualTo("cachertimsi");
         assertThat(lastLog.date).isEqualTo(new GregorianCalendar(2013, 11 - 1, 5).getTimeInMillis());
-        assertThat(lastLog.getType()).isEqualTo(LogType.RETRIEVED_IT);
+        assertThat(lastLog.logType).isEqualTo(LogType.RETRIEVED_IT);
         assertThat(lastLog.cacheName).isEqualTo("TB / Coin Hotel Fehmarn");
         assertThat(lastLog.cacheGuid).isEqualTo("e93eeddd-a3f0-4bf1-a056-6acc1c5dff1f");
         assertThat(lastLog.serviceLogId).isEqualTo("817608e9-850d-428a-9318-442a14b7b631");
@@ -135,8 +135,8 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
-    @MediumTest
-    public static Geocache testSearchByGeocode(final String geocode) {
+    @Nullable
+    public Geocache searchByGeocode(final String geocode) {
         final SearchResult search = Geocache.searchByGeocode(geocode, null, true, null);
         assertThat(search).isNotNull();
         if (Settings.isGCPremiumMember() || search.getError() == StatusCode.NO_ERROR || search.getError() == StatusCode.PREMIUM_ONLY) {
@@ -151,7 +151,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
-    public static void testSearchByGeocodeNotExisting() {
+    public void testSearchByGeocodeNotExisting() {
         final SearchResult search = Geocache.searchByGeocode("GC123456", null, true, null);
         assertThat(search).isNotNull();
         assertThat(search.getError()).isEqualTo(StatusCode.CACHE_NOT_FOUND);
@@ -179,7 +179,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link Geocache#searchByGeocode(String, String, boolean, DisposableHandler)}
      */
     @MediumTest
-    public static void testSearchByGeocodeNotLoggedIn() {
+    public void testSearchByGeocodeNotLoggedIn() {
         withMockedLoginDo(() -> {
             // non premium cache
             MockedCache cache = new GC3FJ5F();
@@ -227,12 +227,12 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link GCParser#searchByCoords(Geopoint, CacheType)}
+     * Test {@link #searchByCoords(Geopoint)}
      */
     @MediumTest
-    public static void testSearchByCoords() {
+    public void testSearchByCoords() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"), CacheType.MYSTERY);
+            final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"));
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
             assertThat(search.getGeocodes()).contains("GC1HBMY");
@@ -240,28 +240,28 @@ public class CgeoApplicationTest extends CGeoTestCase {
     }
 
     /**
-     * Test {@link GCParser#searchByOwner(String, CacheType)}
+     * Test {@link #searchByOwner(String)}
      */
     @MediumTest
-    public static void testSearchByOwner() {
+    public void testSearchByOwner() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByOwner("Lineflyer", CacheType.EARTH);
+            final SearchResult search = GCParser.searchByOwner("Lineflyer");
             assertThat(search).isNotNull();
-            assertThat(search.getGeocodes()).hasSize(6);
+            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
             assertThat(search.getGeocodes()).contains("GC7J99X");
         });
     }
 
     /**
-     * Test {@link GCParser#searchByUsername(String, CacheType)}
+     * Test {@link #searchByUsername(String)}
      */
     @MediumTest
-    public static void testSearchByUsername() {
+    public void testSearchByUsername() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByUsername("blafoo", CacheType.WEBCAM);
+            final SearchResult search = GCParser.searchByUsername("blafoo");
             assertThat(search).isNotNull();
-            assertThat(search.getTotalCountGC()).isEqualTo(10);
-            assertThat(search.getGeocodes()).contains("GCP0A9");
+            // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.
+            assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
         });
     }
 
@@ -269,47 +269,36 @@ public class CgeoApplicationTest extends CGeoTestCase {
      * Test {@link ConnectorFactory#searchByViewport(Viewport)}
      */
     @MediumTest
-    public static void testSearchByViewport() {
+    public void testSearchByViewport() {
         withMockedFilters(() -> {
-            // backup user settings
-            final CacheType cacheType = Settings.getCacheType();
 
-            try {
-                // set up settings required for test
-                Settings.setCacheType(CacheType.ALL);
+            final GC3FJ5F mockedCache = new GC3FJ5F();
+            deleteCacheFromDB(mockedCache.getGeocode());
 
-                final GC3FJ5F mockedCache = new GC3FJ5F();
-                deleteCacheFromDB(mockedCache.getGeocode());
+            final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
 
-                final Viewport viewport = new Viewport(mockedCache, 0.003, 0.003);
+            // check coords
+            final SearchResult search = ConnectorFactory.searchByViewport(viewport);
+            assertThat(search).isNotNull();
+            assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
+            final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
+            assert parsedCache != null;
+            assertThat(parsedCache).isNotNull();
+            assertThat(mockedCache.getCoords()).isEqualTo(parsedCache.getCoords());
 
-                // check coords
-                final SearchResult search = ConnectorFactory.searchByViewport(viewport);
-                assertThat(search).isNotNull();
-                assertThat(search.getGeocodes()).contains(mockedCache.getGeocode());
-                final Geocache parsedCache = DataStore.loadCache(mockedCache.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
-                assert parsedCache != null;
-                assertThat(parsedCache).isNotNull();
-
-                assertThat(mockedCache.getCoords().equals(parsedCache.getCoords()));
-                assertThat(parsedCache.isReliableLatLon()).isEqualTo(true);
-
-            } finally {
-                // restore user settings
-                Settings.setCacheType(cacheType);
-            }
         });
     }
 
     /**
      * Test cache parsing. Esp. useful after a GC.com update
      */
-    public static void testSearchByGeocodeBasis() {
+    @MediumTest
+    public void testSearchByGeocodeBasis() {
         for (final MockedCache mockedCache : MockedCache.MOCKED_CACHES) {
             final String oldUser = mockedCache.getMockedDataUser();
             try {
                 mockedCache.setMockedDataUser(Settings.getUserName());
-                final Geocache parsedCache = CgeoApplicationTest.testSearchByGeocode(mockedCache.getGeocode());
+                final Geocache parsedCache = new CgeoApplicationTest().searchByGeocode(mockedCache.getGeocode());
                 Compare.assertCompareCaches(mockedCache, parsedCache, true);
             } finally {
                 mockedCache.setMockedDataUser(oldUser);
@@ -320,19 +309,20 @@ public class CgeoApplicationTest extends CGeoTestCase {
     /**
      * Caches that are good test cases
      */
-    public static void testSearchByGeocodeSpecialties() {
-        final Geocache gcv2r9 = CgeoApplicationTest.testSearchByGeocode("GCV2R9");
+    @MediumTest
+    public void testSearchByGeocodeSpecialties() {
+        final Geocache gcv2r9 = new CgeoApplicationTest().searchByGeocode("GCV2R9");
         assertThat(gcv2r9).isNotNull();
         assertThat(gcv2r9.getLocation()).isEqualTo("California, United States");
 
-        final Geocache gc1zxez = CgeoApplicationTest.testSearchByGeocode("GC1ZXEZ");
+        final Geocache gc1zxez = new CgeoApplicationTest().searchByGeocode("GC1ZXEZ");
         assertThat(gc1zxez).isNotNull();
         assertThat(gc1zxez.getOwnerUserId()).isEqualTo("Ms.Marple/Mr.Stringer");
         assertThat(gc1zxez.getOwnerGuid()).isEqualTo("b66a625c-0266-43a7-9e7c-efecb9b2929a");
     }
 
     /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
-    private static void deleteCacheFromDBAndLogout(final String geocode) {
+    private void deleteCacheFromDBAndLogout(final String geocode) {
         deleteCacheFromDB(geocode);
 
         GCLogin.getInstance().logout();
@@ -340,5 +330,4 @@ public class CgeoApplicationTest extends CGeoTestCase {
         TestSettings.setLogin(new Credentials("c:geo", "c:geo"));
         Settings.setGCMemberStatus(GCMemberState.BASIC);
     }
-
 }

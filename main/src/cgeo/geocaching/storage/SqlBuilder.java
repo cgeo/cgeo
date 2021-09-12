@@ -223,7 +223,7 @@ public class SqlBuilder {
      */
     public static String createLikeExpression(final String escapedPattern) {
         if (escapedPattern == null) {
-            return "IS NULL";
+            return " IS NULL";
         }
         return " LIKE '" + escapedPattern + "' ESCAPE '\\'";
     }

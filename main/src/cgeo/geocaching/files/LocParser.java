@@ -55,12 +55,10 @@ public final class LocParser extends FileParser {
         final Map<String, Geocache> cidCoords = parseLoc(fileContent);
 
         for (final Geocache cache : caches) {
-            if (!cache.isReliableLatLon()) {
-                final Geocache coord = cidCoords.get(cache.getGeocode());
-                // Archived caches will not have any coordinates
-                if (coord != null) {
-                    copyCoordToCache(coord, cache);
-                }
+            final Geocache coord = cidCoords.get(cache.getGeocode());
+            // Archived caches will not have any coordinates
+            if (coord != null) {
+                copyCoordToCache(coord, cache);
             }
         }
     }
@@ -97,7 +95,6 @@ public final class LocParser extends FileParser {
                         case "coord":
                             currentCache.setCoords(new Geopoint(Double.parseDouble(xpp.getAttributeValue(null, "lat")),
                                     Double.parseDouble(xpp.getAttributeValue(null, "lon"))));
-                            currentCache.setReliableLatLon(true);
                             break;
                         case "container":
                             if (xpp.next() == XmlPullParser.TEXT) {
@@ -136,7 +133,6 @@ public final class LocParser extends FileParser {
         cache.setTerrain(coord.getTerrain());
         cache.setSize(coord.getSize());
         cache.setGeocode(coord.getGeocode());
-        cache.setReliableLatLon(true);
         if (StringUtils.isBlank(cache.getName())) {
             cache.setName(coord.getName());
         }

@@ -187,13 +187,6 @@ android {
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
-
-        // deactivate this rule only on CI
-        // see https://github.com/cgeo/cgeo/issues/9224
-        // Resource IDs will be non-final in Android Gradle Plugin version 5.0
-        if (isContinuousIntegrationServer()) {
-            disable 'NonConstantResourceId'
-        }
     }
 
     packagingOptions {
@@ -302,13 +295,13 @@ dependencies {
 
     // SpotBugs (successor of FindBugs)
     implementation 'net.jcip:jcip-annotations:1.0'
-    implementation 'com.github.spotbugs:spotbugs-annotations:4.2.3'
+    implementation 'com.github.spotbugs:spotbugs-annotations:4.3.0'
 
     // GeographicLib
-    implementation 'net.sf.geographiclib:GeographicLib-Java:1.51'
+    implementation 'net.sf.geographiclib:GeographicLib-Java:1.52'
 
     // Jackson XML processing
-    def jacksonVersion = '2.12.3'
+    def jacksonVersion = '2.12.4'
     implementation "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
     implementation "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
@@ -366,20 +359,20 @@ dependencies {
     configurations.all*.exclude module: "play-services-measurement"
 
     // Support Library Design
-    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'com.google.android.material:material:1.4.0'
 
     // ProcessPhoenix, reliable process restart
     // implementation 'com.jakewharton:process-phoenix:2.0.0'
 
     // RxJava
-    implementation 'io.reactivex.rxjava3:rxjava:3.0.12'
+    implementation 'io.reactivex.rxjava3:rxjava:3.0.13'
     implementation "io.reactivex.rxjava3:rxandroid:3.0.0"
 
     // Support Library AppCompat
     implementation 'androidx.appcompat:appcompat:1.3.0'
 
     // Support Library core (used for eg. HtmlCompat)
-    implementation 'androidx.core:core:1.5.0'
+    implementation 'androidx.core:core:1.6.0'
 
     // Support Library ExifInterface
     implementation 'androidx.exifinterface:exifinterface:1.3.2'
@@ -388,7 +381,7 @@ dependencies {
     implementation 'androidx.gridlayout:gridlayout:1.0.0'
 
     // Support Library RecyclerView
-    implementation 'androidx.recyclerview:recyclerview:1.2.0'
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Support Annotations. use same version for the main app and the test app
     def annotationVersion = '1.2.0'
@@ -396,8 +389,8 @@ dependencies {
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // Testing Support Libraries
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
 
     // Drag n drop for listview
     implementation 'asia.ivity.android:drag-sort-listview:1.0'

@@ -5,7 +5,6 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.maps.AbstractMap;
@@ -249,7 +248,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
-        DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     @Override

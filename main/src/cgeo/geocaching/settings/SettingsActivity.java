@@ -8,12 +8,11 @@ import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.su.SuConnector;
-import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
@@ -286,8 +285,8 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         setWebsite(R.string.pref_fakekey_ec_website, ECConnector.getInstance().getHost());
         getPreference(R.string.preference_screen_ec).setSummary(getServiceSummary(Settings.isECConnectorActive()));
 
-        getPreference(R.string.pref_connectorLCActive).setOnPreferenceChangeListener(this);
-        setWebsite(R.string.pref_fakekey_lc_website, LCConnector.getInstance().getHost());
+        getPreference(R.string.pref_connectorALActive).setOnPreferenceChangeListener(this);
+        setWebsite(R.string.pref_fakekey_al_website, ALConnector.getInstance().getHost());
         initLCServicePreference(Settings.isGCConnectorActive());
 
         getPreference(R.string.pref_connectorSUActive).setOnPreferenceChangeListener(this);
@@ -309,9 +308,9 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
 
     private void initLCServicePreference(final boolean gcConnectorActive) {
         final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
-        getPreference(R.string.preference_screen_lc).setSummary(getLcServiceSummary(Settings.isLCConnectorActive(), gcConnectorActive));
+        getPreference(R.string.preference_screen_lc).setSummary(getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
         if (isActiveGCPM) {
-            getPreference(R.string.pref_connectorLCActive).setEnabled(true);
+            getPreference(R.string.pref_connectorALActive).setEnabled(true);
         }
     }
 
@@ -868,10 +867,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             return;
         }
 
-        if (DownloaderUtils.onActivityResult(this, requestCode, resultCode, data)) {
-            return;
-        }
-
         if (resultCode != RESULT_OK) {
             return;
         }
@@ -969,7 +964,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 || isPreference(preference, R.string.pref_connectorOCUKActive)
                 || isPreference(preference, R.string.pref_connectorGCActive)
                 || isPreference(preference, R.string.pref_connectorECActive)
-                || isPreference(preference, R.string.pref_connectorLCActive)
+                || isPreference(preference, R.string.pref_connectorALActive)
                 || isPreference(preference, R.string.pref_connectorSUActive)) {
             // update summary
             final boolean boolVal = (Boolean) value;
@@ -982,7 +977,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                 initLCServicePreference(boolVal);
             } else if (isPreference(preference, R.string.pref_connectorECActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_ec)).setSummary(summary);
-            } else if (isPreference(preference, R.string.pref_connectorLCActive)) {
+            } else if (isPreference(preference, R.string.pref_connectorALActive)) {
                 preference.getPreferenceManager().findPreference(getKey(R.string.preference_screen_lc)).setSummary(getLcServiceSummary(boolVal, Settings.isGCConnectorActive()));
                 setResult(RESTART_NEEDED);
             } else if (isPreference(preference, R.string.pref_connectorSUActive)) {

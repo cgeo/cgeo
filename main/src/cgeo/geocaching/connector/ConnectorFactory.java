@@ -2,6 +2,7 @@ package cgeo.geocaching.connector;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByCenter;
@@ -16,7 +17,6 @@ import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.ge.GeopeitusConnector;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
@@ -33,7 +33,6 @@ import cgeo.geocaching.connector.trackable.TravelBugConnector;
 import cgeo.geocaching.connector.trackable.UnknownTrackableConnector;
 import cgeo.geocaching.connector.unknown.UnknownConnector;
 import cgeo.geocaching.connector.wm.WaymarkingConnector;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
@@ -65,12 +64,13 @@ public final class ConnectorFactory {
     @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector> asList(
             GCConnector.getInstance(),
             ECConnector.getInstance(),
-            LCConnector.getInstance(),
+            ALConnector.getInstance(),
             new OCDEConnector(),
             new OCCZConnector(),
             new OCApiLiveConnector("opencache.uk", "opencache.uk", false, "OK", "CC BY-NC-SA 2.5",
                     R.string.oc_uk2_okapi_consumer_key, R.string.oc_uk2_okapi_consumer_secret,
-                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK"), new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", false, "OS", "OC.NO"),
+                    R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK"),
+            new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", false, "OS", "OC.NO"),
             new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", false, "OB", "CC BY-SA 3.0",
                     R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
                     R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current, "OC.NL"),
@@ -389,11 +389,6 @@ public final class ConnectorFactory {
      */
     @NonNull
     public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        //shortcut: no need to search any server for "user-defined" caches
-        if (Settings.getCacheType() != null && Settings.getCacheType().equals(CacheType.USER_DEFINED)) {
-            return new SearchResult();
-        }
-
         return SearchResult.parallelCombineActive(searchByViewPortConns, connector -> connector.searchByViewport(viewport));
     }
 

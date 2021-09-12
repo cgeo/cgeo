@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.HashMap;
 import java.util.Locale;
@@ -29,17 +30,17 @@ public enum CacheType {
     WEBCAM("webcam", "Webcam Cache", "31d2ae3c-c358-4b5f-8dcd-2185bf472d3d", R.string.webcam, R.string.webcam_short, R.drawable.type_webcam, "11", R.drawable.dot_virtual),
     VIRTUAL("virtual", "Virtual Cache", "294d4360-ac86-4c83-84dd-8113ef678d7e", R.string.virtual, R.string.virtual_short, R.drawable.type_virtual, "4", R.drawable.dot_virtual),
     WHERIGO("wherigo", "Wherigo Cache", "0544fa55-772d-4e5c-96a9-36a51ebcf5c9", R.string.wherigo, R.string.wherigo_short, R.drawable.type_wherigo, "1858", R.drawable.dot_mystery),
-    COMMUN_CELEBRATION("communceleb", "Community Celebration Event", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.communceleb, R.string.communceleb_short, R.drawable.type_event, "3653", R.drawable.dot_event), // icon missing
-    PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.string.ape_short, R.drawable.type_ape, "9", R.drawable.dot_traditional),
-    GCHQ("gchq", "Geocaching HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.string.gchq_short, R.drawable.type_hq, "3773", R.drawable.dot_traditional),
-    GCHQ_CELEBRATION("gchqceleb", "Geocaching HQ Celebration", "af820035-787a-47af-b52b-becc8b0c0c88", R.string.gchqceleb, R.string.gchqceleb_short, R.drawable.type_hq, "3774", R.drawable.dot_event), // icon missing
-    GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.string.gps_short, R.drawable.type_event, "1304", R.drawable.dot_event), // icon missing
-    BLOCK_PARTY("block", "Geocaching HQ Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.string.block_short, R.drawable.type_event, "4738", R.drawable.dot_event), // icon missing
-    LOCATIONLESS("locationless", "Locationless (Reverse) Cache", "8f6dd7bc-ff39-4997-bd2e-225a0d2adf9d", R.string.locationless, R.string.locationless_short, R.drawable.type_virtual, "12", R.drawable.dot_virtual), // icon missing
+    COMMUN_CELEBRATION("communceleb", "Community Celebration Event", "3ea6533d-bb52-42fe-b2d2-79a3424d4728", R.string.communceleb, R.string.communceleb_short, R.drawable.type_specialevent, "3653", R.drawable.dot_event), // icon missing
+    PROJECT_APE("ape", "Project Ape Cache", "2555690d-b2bc-4b55-b5ac-0cb704c0b768", R.string.ape, R.string.ape_short, R.drawable.type_ape, "9", R.drawable.dot_specialgc),
+    GCHQ("gchq", "Geocaching HQ", "416f2494-dc17-4b6a-9bab-1a29dd292d8c", R.string.gchq, R.string.gchq_short, R.drawable.type_hq, "3773", R.drawable.dot_specialgc),
+    GCHQ_CELEBRATION("gchqceleb", "Geocaching HQ Celebration", "af820035-787a-47af-b52b-becc8b0c0c88", R.string.gchqceleb, R.string.gchqceleb_short, R.drawable.type_specialevent, "3774", R.drawable.dot_event), // icon missing
+    GPS_EXHIBIT("gps", "GPS Adventures Exhibit", "72e69af2-7986-4990-afd9-bc16cbbb4ce3", R.string.gps, R.string.gps_short, R.drawable.type_event, "1304", R.drawable.dot_specialgc), // icon missing
+    BLOCK_PARTY("block", "Geocaching HQ Block Party", "bc2f3df2-1aab-4601-b2ff-b5091f6c02e3", R.string.block, R.string.block_short, R.drawable.type_specialevent, "4738", R.drawable.dot_event), // icon missing
+    LOCATIONLESS("locationless", "Locationless (Reverse) Cache", "8f6dd7bc-ff39-4997-bd2e-225a0d2adf9d", R.string.locationless, R.string.locationless_short, R.drawable.type_locationless, "12", R.drawable.dot_unknown), // icon missing
     ADVLAB("advlab", "Lab Cache", "", R.string.advlab, R.string.advlab_short, R.drawable.type_advlab, "", R.drawable.dot_advlab), // pattern "Lab Cache" is used by https://gcutils.de/lab2gpx/
 
     // insert other official cache types before USER_DEFINED and UNKNOWN
-    USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.string.userdefined_short, R.drawable.type_cgeo, "", R.drawable.dot_virtual),
+    USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.string.userdefined_short, R.drawable.type_cgeo, "", R.drawable.dot_cgeo),
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.string.unknown_short, R.drawable.type_unknown, "", R.drawable.dot_unknown),
     /** No real cache type -> filter */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.string.all_types_short, R.drawable.type_unknown, "", R.drawable.dot_unknown);
@@ -120,7 +121,7 @@ public enum CacheType {
     }
 
     @NonNull
-    public static CacheType getByPattern(final String pattern) {
+    public static CacheType getByPattern(@Nullable final String pattern) {
         final CacheType result = pattern != null ? FIND_BY_PATTERN.get(pattern.toLowerCase(Locale.US).trim()) : null;
         if (result != null) {
             return result;
@@ -129,7 +130,7 @@ public enum CacheType {
     }
 
     @NonNull
-    public static CacheType getByGuid(final String guid) {
+    public static CacheType getByGuid(@Nullable final String guid) {
         final CacheType result = guid != null ? FIND_BY_GUID.get(guid) : null;
         if (result == null) {
             return UNKNOWN;
@@ -138,7 +139,7 @@ public enum CacheType {
     }
 
     @NonNull
-    public static CacheType getByWaypointType(final String typeNumber) {
+    public static CacheType getByWaypointType(@Nullable final String typeNumber) {
         final CacheType result = typeNumber != null ? FIND_BY_WPT_TYPE.get(typeNumber) : null;
         if (result == null) {
             // earthcaches don't use their numeric ID on search result pages, but a literal "earthcache". therefore have a fallback

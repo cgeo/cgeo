@@ -22,6 +22,7 @@ public class StringFilter {
         IS_PRESENT(R.string.cache_filter_stringfilter_type_is_present),
         IS_NOT_PRESENT(R.string.cache_filter_stringfilter_type_is_not_present),
         CONTAINS(R.string.cache_filter_stringfilter_type_contains),
+        DOES_NOT_CONTAIN(R.string.cache_filter_stringfilter_type_does_not_contain),
         STARTS_WITH(R.string.cache_filter_stringfilter_type_starts_with),
         ENDS_WITH(R.string.cache_filter_stringfilter_type_ends_with),
         PATTERN(R.string.cache_filter_stringfilter_type_pattern);
@@ -108,6 +109,8 @@ public class StringFilter {
         switch (this.filterType) {
             case CONTAINS:
                 return matchGcValue.contains(matchTextValue);
+            case DOES_NOT_CONTAIN:
+                return !matchGcValue.contains(matchTextValue);
             case STARTS_WITH:
                 return matchGcValue.startsWith(matchTextValue);
             case ENDS_WITH:
@@ -173,6 +176,10 @@ public class StringFilter {
 
             switch (this.filterType) {
                 case CONTAINS:
+                    matchTextValue = "%" + matchTextValue + "%";
+                    break;
+                case DOES_NOT_CONTAIN:
+                    sb.append(" NOT");
                     matchTextValue = "%" + matchTextValue + "%";
                     break;
                 case STARTS_WITH:

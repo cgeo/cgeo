@@ -138,4 +138,10 @@
         <item name="android:windowActivityTransitions">false</item>
     </style>
 
+    <!-- theme for installation wizard activity -->
+
+    <style name="NoActionbarTheme" parent="cgeo">
+        <item name="windowActionBar">false</item>
+    </style>
+
 </resources>

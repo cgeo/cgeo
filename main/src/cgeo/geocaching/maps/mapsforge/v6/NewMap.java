@@ -13,12 +13,10 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.connector.gc.GCMap;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -370,8 +368,10 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             if (mapOptions.isLiveEnabled) {
+                itemMapLive.setIcon(R.drawable.ic_menu_refresh);
                 itemMapLive.setTitle(res.getString(R.string.map_live_disable));
             } else {
+                itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
                 itemMapLive.setTitle(res.getString(R.string.map_live_enable));
             }
             itemMapLive.setVisible(mapOptions.coords == null || mapOptions.mapMode == MapMode.LIVE);
@@ -435,6 +435,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                 // reset target cache on single mode map
                 targetGeocode = mapOptions.geocode;
             }
+            setTitle();
         } else if (id == R.id.menu_filter) {
             showFilterMenu(null);
         } else if (id == R.id.menu_store_caches) {
@@ -1472,8 +1473,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             if (item.getType() == CoordinatesType.CACHE) {
                 final Geocache cache = DataStore.loadCache(item.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
-                    final RequestDetailsThread requestDetailsThread = new RequestDetailsThread(cache, this);
-                    requestDetailsThread.start();
+                    popupGeocodes.add(cache.getGeocode());
+                    CachePopup.startActivityAllowTarget(this, cache.getGeocode());
                     return;
                 }
                 return;
@@ -1541,42 +1542,6 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     private void savePrefs() {
         Settings.setMapZoom(this.mapMode, mapView.getMapZoomLevel());
         Settings.setMapCenter(new MapsforgeGeoPoint(mapView.getModel().mapViewPosition.getCenter()));
-    }
-
-    private static class RequestDetailsThread extends Thread {
-
-        @NonNull
-        private final Geocache cache;
-        @NonNull
-        private final WeakReference<NewMap> mapRef;
-
-        RequestDetailsThread(@NonNull final Geocache cache, @NonNull final NewMap map) {
-            this.cache = cache;
-            this.mapRef = new WeakReference<>(map);
-        }
-
-        public boolean requestRequired() {
-            return CacheType.UNKNOWN == cache.getType() || cache.getDifficulty() == 0;
-        }
-
-        @Override
-        public void run() {
-            final NewMap map = this.mapRef.get();
-            if (map == null) {
-                return;
-            }
-            if (requestRequired()) {
-                try {
-                    /* final SearchResult search = */
-                    GCMap.searchByGeocodes(Collections.singleton(cache.getGeocode()));
-                } catch (final Exception ex) {
-                    Log.w("Error requesting cache popup info", ex);
-                    ActivityMixin.showToast(map, R.string.err_request_popup_info);
-                }
-            }
-            map.popupGeocodes.add(cache.getGeocode());
-            CachePopup.startActivityAllowTarget(map, cache.getGeocode());
-        }
     }
 
     /**
@@ -1662,7 +1627,6 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         this.trackUtils.onActivityResult(requestCode, resultCode, data);
         this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
-        DownloaderUtils.onActivityResult(this, requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {

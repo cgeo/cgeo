@@ -4,11 +4,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.DisplayMetrics;
 
 import androidx.core.content.res.ResourcesCompat;
+
+import java.util.Objects;
 
 public class CompactIconModeUtils {
 
@@ -18,12 +19,11 @@ public class CompactIconModeUtils {
         // utility class
     }
 
-
     public static void setCompactIconModeThreshold(final Resources resources) {
         // cache density metrics
-        final Bitmap marker = ((BitmapDrawable) ResourcesCompat.getDrawable(resources, R.drawable.marker, null)).getBitmap();
+        final Drawable marker = Objects.requireNonNull(ResourcesCompat.getDrawable(resources, R.drawable.marker, null));
         final DisplayMetrics displayMetrics = resources.getDisplayMetrics();
-        compactIconModeThreshold = (int) ((displayMetrics.heightPixels / marker.getHeight()) * (displayMetrics.widthPixels / marker.getWidth()) / 4f);
+        compactIconModeThreshold = (int) ((displayMetrics.heightPixels / marker.getIntrinsicHeight()) * (displayMetrics.widthPixels / marker.getIntrinsicWidth()) / 4f);
     }
 
     public static boolean forceCompactIconMode(final int size) {

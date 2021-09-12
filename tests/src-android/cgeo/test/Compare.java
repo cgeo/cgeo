@@ -6,6 +6,8 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.TextUtils;
 
+import androidx.annotation.Nullable;
+
 import java.util.Date;
 
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +15,7 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public abstract class Compare {
 
-    public static void assertCompareCaches(final Geocache expected, final Geocache actual, final boolean all) {
+    public static void assertCompareCaches(final Geocache expected, @Nullable final Geocache actual, final boolean all) {
         final String geocode = expected.getGeocode();
         final String cacheStr = "Cache " + geocode + ": ";
         assertThat(actual).isNotNull();
@@ -35,7 +37,6 @@ public abstract class Compare {
 
         if (all) {
             assertThat(actual.getCoords()).as(cacheStr + "coords").isEqualTo(expected.getCoords());
-            assertThat(actual.isReliableLatLon()).as(cacheStr + "reliable latlon").isTrue();
             assertThat(actual.isOwner()).as(cacheStr + "owning status").isEqualTo(expected.isOwner());
             assertThat(actual.getOwnerUserId()).as(cacheStr + "owner user id").isEqualTo(expected.getOwnerUserId());
             assertThat(StringUtils.equals(expected.getHint(), actual.getHint()) || StringUtils.equals(expected.getHint(), CryptUtils.rot13(actual.getHint()))).isTrue();

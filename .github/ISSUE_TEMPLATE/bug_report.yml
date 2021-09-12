@@ -1,0 +1,97 @@
+name: 1. 🐞 Bug Report
+description: Report a bug or problem with c:geo direclty to our GitHub tracker
+# title: ""
+labels: [Bug, Unverified]
+# assignees: 
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report!
+  - type: textarea
+    id: summary
+    attributes:
+      label: Describe your problem!
+      description: Provide a summarized description of what the bug/problem is, that you found.
+      placeholder: "
+        Examples:\n 
+        c:geo crashes when I click on...\n
+        I cannot use the function...
+        "
+    validations:
+      required: true
+  - type: textarea
+    id: description
+    attributes:
+      label: How to reproduce?
+      description: Describe step-by-step how to reproduce the described problem.
+      placeholder: "
+      Example:\n
+      1. Click on xyz\n
+      2. Open menu abc\n
+      3. ...
+      "
+    validations:
+      required: true
+  - type: textarea
+    id: actual_result
+    attributes:
+      label: Actual result after these steps?
+      description: Describe what actually happens after the steps above (wrong behavior).
+      placeholder: "
+      Examples:\n
+      The app crashes\n
+      Its showing the value xy\n
+      Nothing happens
+      "
+    validations:
+      required: false
+  - type: textarea
+    id: expected_result
+    attributes:
+      label: Expected result after these steps?
+      description: Describe what you expected to happen instead (correct behavior).
+      placeholder: "
+      Examples:\n
+      The app does not crash\n
+      Its showing the value ab\n
+      The dialog is shown
+      "
+    validations:
+      required: false
+  - type: dropdown
+    id: reproducible
+    attributes:
+      label: Reproducible
+      description: Is the problem reproducible using the steps above?
+      options:
+        - "Yes"
+        - "No"
+        - "Unclear"
+    validations:
+      required: true
+      multiple: false
+  - type: input
+    id: version
+    attributes:
+      label: c:geo Version
+      description: What version of c:geo are you using? You will find it in c:geo Menu -> About c:geo.
+      placeholder: 2021.07.15
+    validations:
+      required: true
+  - type: textarea
+    id: sysinfo
+    attributes:
+      label: System information
+      description: (optional) Providing your system information might be helpful in many cases.
+      placeholder: Copy and paste it from c:geo Menu -> About c:geo -> Swipe right to System
+      render: text
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Information
+      description: (optional) You may include screenshots, links to logfiles, reference to other similar issues, projects, sources, etc. 
+    validations:
+      required: false

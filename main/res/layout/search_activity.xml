@@ -51,7 +51,9 @@
                 android:text="@string/search_geo" />
         </RelativeLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/geocode_input_layout"
+            style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/geocode"
                 style="@style/textinput_embedded"

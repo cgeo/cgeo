@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.connector.gc.GCMemberState;
-import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
@@ -57,6 +56,7 @@ import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -86,6 +86,8 @@ public class Settings {
     public static final int COMPACTICON_OFF = 0;
     public static final int COMPACTICON_ON = 1;
     public static final int COMPACTICON_AUTO = 2;
+
+    public static final int DAYS_TO_SECONDS = 24 * 60 * 60;
 
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
@@ -237,7 +239,6 @@ public class Settings {
             e.putBoolean(getKey(R.string.pref_units_imperial), prefsV0.getInt(getKey(R.string.pref_units_imperial), 1) != 1);
             e.putBoolean(getKey(R.string.old_pref_skin), prefsV0.getInt(getKey(R.string.old_pref_skin), 0) != 0);
             e.putInt(getKey(R.string.pref_lastusedlist), prefsV0.getInt(getKey(R.string.pref_lastusedlist), StoredList.STANDARD_LIST_ID));
-            e.putString(getKey(R.string.pref_cachetype), prefsV0.getString(getKey(R.string.pref_cachetype), CacheType.ALL.id));
             e.putString(getKey(R.string.pref_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_twitter_token_secret), null));
             e.putString(getKey(R.string.pref_twitter_token_public), prefsV0.getString(getKey(R.string.pref_twitter_token_public), null));
             e.putInt(getKey(R.string.pref_version), prefsV0.getInt(getKey(R.string.pref_version), 0));
@@ -368,7 +369,6 @@ public class Settings {
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.FOUND, !legacyExcludeFound);
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.DISABLED, !getBooleanDirect("excludedisabled", false));
             legacyGlobalSettings.put(GeocacheFilter.QuickFilter.ARCHIVED, !getBooleanDirect("excludearchived", false));
-            legacyGlobalSettings.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, !getBooleanDirect("excludeofflinelog", false));
 
             final GeocacheFilterContext liveFilterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
             GeocacheFilter liveFilter = liveFilterContext.get();
@@ -581,8 +581,8 @@ public class Settings {
         return getBoolean(R.string.pref_connectorECActive, false);
     }
 
-    public static boolean isLCConnectorActive() {
-        return getBoolean(R.string.pref_connectorLCActive, true);
+    public static boolean isALConnectorActive() {
+        return getBoolean(R.string.pref_connectorALActive, true);
     }
 
     public static boolean isSUConnectorActive() {
@@ -665,18 +665,6 @@ public class Settings {
 
     public static boolean useLowPowerMode() {
         return getBoolean(R.string.pref_lowpowermode, false);
-    }
-
-    /**
-     * @param cacheType
-     *            The cache type used for future filtering
-     */
-    public static void setCacheType(final CacheType cacheType) {
-        if (cacheType == null) {
-            remove(R.string.pref_cachetype);
-        } else {
-            putString(R.string.pref_cachetype, cacheType.id);
-        }
     }
 
     public static int getLastDisplayedList() {
@@ -786,32 +774,6 @@ public class Settings {
 
     public static boolean isShowAddress() {
         return getBoolean(R.string.pref_showaddress, true);
-    }
-
-    @Deprecated
-    public static boolean isExcludeMyCaches() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeFound() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeOfflineLog() {
-        return false; //prepare for later removal
-    }
-
-
-    @Deprecated
-    public static boolean isExcludeDisabledCaches() {
-        return false; //prepare for later removal
-    }
-
-    @Deprecated
-    public static boolean isExcludeArchivedCaches() {
-        return false; //prepare for later removal
     }
 
     public static boolean isExcludeWpOriginal() {
@@ -1108,16 +1070,20 @@ public class Settings {
     public static boolean mapAutoDownloadsNeedUpdate() {
         final long lastCheck = getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
         if (lastCheck == 0) {
-            setMapAutoDownloadsLastCheck();
+            setMapAutoDownloadsLastCheck(false);
             return false;
         }
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getInt(R.string.pref_mapAutoDownloadsInterval, 30);
-        return (lastCheck + (interval * 24 * 60 * 60)) <= now;
+        final int interval = getMapAutoDownloadsInterval();
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
-    public static void setMapAutoDownloadsLastCheck() {
-        putLong(R.string.pref_mapAutoDownloadsLastCheck, System.currentTimeMillis() / 1000);
+    private static int getMapAutoDownloadsInterval() {
+        return getInt(R.string.pref_mapAutoDownloadsInterval, 30);
+    }
+
+    public static void setMapAutoDownloadsLastCheck(final boolean delay) {
+        putLong(R.string.pref_mapAutoDownloadsLastCheck, calculateNewTimestamp(delay, getMapAutoDownloadsInterval()));
     }
 
     public static void setPqShowDownloadableOnly(final boolean showDownloadableOnly) {
@@ -1223,17 +1189,6 @@ public class Settings {
     }
 
     /**
-     * @return always return ALL for now.
-     *
-     * TODO: Should be removed completely in the near future.
-     */
-    @Deprecated
-    @NonNull
-    public static CacheType getCacheType() {
-        return CacheType.ALL;
-    }
-
-    /**
      * The threshold for the showing of child waypoints
      */
     public static int getWayPointsThreshold() {
@@ -1262,16 +1217,20 @@ public class Settings {
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
         final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
         if (lastCheck == 0) {
-            setBrouterAutoTileDownloadsLastCheck();
+            setBrouterAutoTileDownloadsLastCheck(false);
             return false;
         }
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
-        return (lastCheck + (interval * 24 * 60 * 60)) <= now;
+        final int interval = getBrouterAutoTileDownloadsInterval();
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
-    public static void setBrouterAutoTileDownloadsLastCheck() {
-        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, System.currentTimeMillis() / 1000);
+    private static int getBrouterAutoTileDownloadsInterval() {
+        return getInt(R.string.pref_brouterAutoTileDownloadsInterval, 30);
+    }
+
+    public static void setBrouterAutoTileDownloadsLastCheck(final boolean delay) {
+        putLong(R.string.pref_brouterAutoTileDownloadsLastCheck, calculateNewTimestamp(delay, getBrouterAutoTileDownloadsInterval()));
     }
 
     public static String getRoutingProfile() {
@@ -1288,6 +1247,13 @@ public class Settings {
         } else {
             return null;
         }
+    }
+
+    // calculate new "last checked" timestamp - either "now" or "now - interval + delay [3 days at most]
+    // used for update checks for maps & route tiles downloaders
+    private static long calculateNewTimestamp(final boolean delay, final int interval) {
+        // if delay requested: delay by regular interval, but by three days at most
+        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (interval - 3) * DAYS_TO_SECONDS : 0);
     }
 
     public static boolean isBigSmileysEnabled() {
@@ -1922,6 +1888,26 @@ public class Settings {
 
     public static int getListInitialLoadLimit() {
         return getInt(R.string.pref_list_initial_load_limit, getKeyInt(R.integer.list_load_limit_default));
+    }
+
+    /** return a list of preference keys containing sensitive data */
+    public static HashSet<String> getSensitivePreferenceKeys(final Context context) {
+        final HashSet<String> sensitiveKeys = new HashSet<>();
+        Collections.addAll(sensitiveKeys,
+            context.getString(R.string.pref_username), context.getString(R.string.pref_password),
+            context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
+            context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
+            context.getString(R.string.pref_twitter), context.getString(R.string.pref_temp_twitter_token_secret), context.getString(R.string.pref_temp_twitter_token_public), context.getString(R.string.pref_twitter_token_secret), context.getString(R.string.pref_twitter_token_public),
+            context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
+            context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
+            context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
+            context.getString(R.string.pref_ocus_tokensecret), context.getString(R.string.pref_ocus_tokenpublic), context.getString(R.string.pref_temp_ocus_token_secret), context.getString(R.string.pref_temp_ocus_token_public),
+            context.getString(R.string.pref_ocro_tokensecret), context.getString(R.string.pref_ocro_tokenpublic), context.getString(R.string.pref_temp_ocro_token_secret), context.getString(R.string.pref_temp_ocro_token_public),
+            context.getString(R.string.pref_ocuk2_tokensecret), context.getString(R.string.pref_ocuk2_tokenpublic), context.getString(R.string.pref_temp_ocuk2_token_secret), context.getString(R.string.pref_temp_ocuk2_token_public),
+            context.getString(R.string.pref_su_tokensecret), context.getString(R.string.pref_su_tokenpublic), context.getString(R.string.pref_temp_su_token_secret), context.getString(R.string.pref_temp_su_token_public),
+            context.getString(R.string.pref_fakekey_geokrety_authorization)
+        );
+        return sensitiveKeys;
     }
 
 }

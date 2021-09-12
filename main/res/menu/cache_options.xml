@@ -168,6 +168,11 @@
                 android:visible="false">
             </item>
             <item
+                android:id="@+id/menu_upload_bookmarklist"
+                android:title="@string/caches_upload_bookmarklist"
+                android:visible="false">
+            </item>
+            <item
                 android:id="@+id/menu_set_cache_icon"
                 android:title="@string/cache_menu_set_cache_icon"
                 android:visible="false">

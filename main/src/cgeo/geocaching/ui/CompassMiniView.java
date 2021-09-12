@@ -7,14 +7,15 @@ import cgeo.geocaching.utils.AngleUtils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.PaintFlagsDrawFilter;
+import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 
 public final class CompassMiniView extends View {
     private Geopoint targetCoords = null;
@@ -63,7 +64,15 @@ public final class CompassMiniView extends View {
         super.onAttachedToWindow();
         if (instances++ == 0) {
             final int drawable = isInEditMode() || !Settings.isLightSkin(getContext()) ? R.drawable.compass_arrow_mini_white : R.drawable.compass_arrow_mini_black;
-            compassArrow = BitmapFactory.decodeResource(getResources(), drawable);
+            final Drawable temp = ResourcesCompat.getDrawable(getResources(), drawable, null);
+            try {
+                compassArrow = Bitmap.createBitmap(temp.getIntrinsicWidth(), temp.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+                final Canvas canvas = new Canvas(compassArrow);
+                temp.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+                temp.draw(canvas);
+            } catch (OutOfMemoryError e) {
+                throw new IllegalStateException();
+            }
             compassArrowWidth = compassArrow.getWidth();
             compassArrowHeight = compassArrow.getWidth();
         }

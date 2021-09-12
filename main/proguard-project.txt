@@ -96,6 +96,9 @@
 -dontwarn okhttp3.OkHttpClient$Builder
 # OkHttp platform used only on JVM and when Conscrypt dependency is available.
 -dontnote okhttp3.internal.platform.**
+# R8 missing, probaly fixed in next OkHttp release,
+# see https://github.com/square/okhttp/pull/6792
+-dontwarn org.conscrypt.ConscryptHostnameVerifier
 
 # Play Services -----------------------------------------------------------------------------------
 
@@ -112,10 +115,6 @@
 
 # used in tests
 -keepclassmembers public class * extends io.reactivex.rxjava3.core.Observable { public ** blockingFirst(); }
-
-# ViewPager Indicator -----------------------------------------------------------------------------
--dontnote com.viewpagerindicator.TitlePageIndicator
--dontnote com.viewpagerindicator.TabPageIndicator
 
 # Unsorted ----------------------------------------------------------------------------------------
 

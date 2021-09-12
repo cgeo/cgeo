@@ -1,0 +1,49 @@
+name: 2. ⭐ Feature Request
+description: Suggest an idea for a new function in c:geo directly to our GitHub tracker 
+# title: ""
+labels: [Feature Request, Unverified]
+# assignees: 
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to submit your idea!
+  - type: textarea
+    id: summary
+    attributes:
+      label: Tell us your idea!
+      description: A clear and detailed description of the function you are missing/would like to see in c:geo.
+      placeholder: "
+        Examples:\n 
+        There is no possibility to...\n
+        I'm always frustrated when...\n
+        It would be easier to use if
+        "
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: What solution would you suggest?
+      description: Describe your sugggested solution and the way it should be implemented.
+      placeholder: "
+      Examples:\n
+      There should be a new menu item xyz in menu abc, which performs [...]\n
+      Change the existing function to include [...]
+      "
+    validations:
+      required: false
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Is there an alternative?
+      description: (optional) Describe alternative solutions and/or workarounds you have considered already or are already available.
+    validations:
+      required: false
+  - type: textarea
+    id: context
+    attributes:
+      label: Additional Information
+      description: (optional) Add any other context, screenshots, sketches, process flows, links and other references related to your feature request.
+    validations:
+      required: false

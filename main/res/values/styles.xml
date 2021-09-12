@@ -60,7 +60,6 @@
 
     <style name="alertDialogTitleTextStyle" parent="MaterialAlertDialog.MaterialComponents.Title.Text">
         <item name="android:textSize">@dimen/textSize_headingPrimary</item>
-        <item name="android:textColor">@color/colorTextHeadline</item>
         <item name="android:textStyle">bold</item>
     </style>
 

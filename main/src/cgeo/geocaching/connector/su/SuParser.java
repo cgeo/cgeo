@@ -122,7 +122,6 @@ public class SuParser {
     @NonNull
     public static Geocache parseCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
-        cache.setReliableLatLon(true);
         final JsonNode data = response.get("data");
 
         parseCoreCache((ObjectNode) data, cache);
@@ -287,7 +286,6 @@ public class SuParser {
     @NonNull
     private static Geocache parseSmallCache(final ObjectNode response) {
         final Geocache cache = new Geocache();
-        cache.setReliableLatLon(true);
         parseCoreCache(response, cache);
         DataStore.saveCache(cache, EnumSet.of(SaveFlag.CACHE));
         return cache;

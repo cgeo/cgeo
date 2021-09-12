@@ -42,7 +42,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
 
-    private static int colorAccent;
     private static boolean isShowCircles;
     private static boolean isAutotargetIndividualRoute;
     private static boolean showAutotargetIndividualRoute;
@@ -53,7 +52,6 @@ public class MapSettingsUtils {
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
     public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
-        colorAccent = activity.getResources().getColor(R.color.colorAccent);
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
         showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
@@ -64,7 +62,7 @@ public class MapSettingsUtils {
         final ArrayList<SettingsCheckboxModel> allCbs = new ArrayList<>();
 
         final SettingsCheckboxModel foundCb = createCb(allCbs, R.string.map_showc_found, ImageParam.id(R.drawable.marker_found), quickFilter.get(GeocacheFilter.QuickFilter.FOUND), f -> quickFilter.put(GeocacheFilter.QuickFilter.FOUND, f), false);
-        final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_offlinelog, R.drawable.marker_found_offline, quickFilter.get(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG), f -> quickFilter.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_LOG, f), false);
+        final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_found_offline, R.drawable.marker_found_offline, quickFilter.get(GeocacheFilter.QuickFilter.HAS_OFFLINE_FOUND_LOG), f -> quickFilter.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_FOUND_LOG, f), false);
         final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, ImageParam.id(R.drawable.marker_own), quickFilter.get(GeocacheFilter.QuickFilter.OWNED), f -> quickFilter.put(GeocacheFilter.QuickFilter.OWNED, f), false);
         final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled,  R.drawable.map_status_disabled, quickFilter.get(GeocacheFilter.QuickFilter.DISABLED), f -> quickFilter.put(GeocacheFilter.QuickFilter.DISABLED, f), false);
         final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
@@ -105,7 +103,6 @@ public class MapSettingsUtils {
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
 
         final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
-        final ArrayList<ButtonChoiceModel<RoutingMode>> routingChoices = new ArrayList<>();
         for (RoutingMode mode : RoutingMode.values()) {
             routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
         }

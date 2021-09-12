@@ -3,16 +3,14 @@ package cgeo.geocaching.ui.dialog;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.BottomsheetDialogWithActionbarBinding;
 import cgeo.geocaching.databinding.DialogTextCheckboxBinding;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -23,9 +21,12 @@ import android.util.Pair;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -36,9 +37,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.util.Consumer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
@@ -48,6 +46,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * Helper class providing methods when constructing custom Dialogs.
@@ -207,6 +206,46 @@ public final class Dialogs {
         }
     }
 
+    /**
+     * Show a select dialog with additional delete item button
+     */
+    public static <T> void selectItemDialogWithAdditionalDeleteButton(final Context context, final @StringRes int title, @NonNull final List<T> items, @NotNull final Func1<T, TextParam> displayMapper, final Action1<T> onSelectListener, final Action1<T> onDeleteListener) {
+        final AlertDialog.Builder builder = Dialogs.newBuilder(context).setTitle(title);
+        final AlertDialog[] dialog = new AlertDialog[] { null };
+
+        final ListAdapter adapter = new ArrayAdapter<T>(context, R.layout.select_or_delete_item, android.R.id.text1, items) {
+            public View getView(final int position, final View convertView, final ViewGroup parent) {
+                //Use super class to create the View.
+                final View v = super.getView(position, convertView, parent);
+
+                // set text
+                final TextView tv = v.findViewById(android.R.id.text1);
+                displayMapper.call(getItem(position)).applyTo(tv);
+
+                // register delete listener
+                final View deleteButton = v.findViewById(R.id.delete);
+                deleteButton.setOnClickListener(v1 -> {
+                    onDeleteListener.call(items.get(position));
+
+                    // dismiss dialog
+                    if (dialog[0] != null) {
+                        dialog[0].dismiss();
+                    }
+                });
+                return v;
+            }
+        };
+
+        builder.setSingleChoiceItems(adapter, -1, (d, pos) -> {
+            d.dismiss();
+            onSelectListener.call(items.get(pos));
+        });
+
+        dialog[0] = builder.create();
+        dialog[0].show();
+
+    }
+
 
     /**
      * Move the cursor to the end of the input field.
@@ -223,31 +262,6 @@ public final class Dialogs {
         if (dialog.isShowing()) {
             dialog.dismiss();
         }
-    }
-
-    public static void selectGlobalTypeFilter(final Activity activity, final Action1<CacheType> okayListener) {
-        final List<CacheType> cacheTypes = new ArrayList<>();
-
-        //first add the most used types
-        cacheTypes.add(CacheType.ALL);
-        cacheTypes.add(CacheType.TRADITIONAL);
-        cacheTypes.add(CacheType.MULTI);
-        cacheTypes.add(CacheType.MYSTERY);
-
-        // then add all other cache types sorted alphabetically
-        final List<CacheType> sorted = new ArrayList<>(Arrays.asList(CacheType.values()));
-        sorted.removeAll(cacheTypes);
-        Collections.sort(sorted, (left, right) -> TextUtils.COLLATOR.compare(left.getL10n(), right.getL10n()));
-        cacheTypes.addAll(sorted);
-
-        final int checkedItem = Math.max(0, cacheTypes.indexOf(Settings.getCacheType()));
-
-        SimpleDialog.of(activity).setTitle(R.string.menu_filter)
-            .selectSingle(cacheTypes, (ct, i) -> TextParam.text(ct.getL10n()), checkedItem, true, (item, position) -> {
-            final CacheType cacheType = cacheTypes.get(position);
-            Settings.setCacheType(cacheType);
-            okayListener.call(cacheType);
-        });
     }
 
     private static BottomSheetDialog bottomSheetDialog(final Context context, final View contentView) {

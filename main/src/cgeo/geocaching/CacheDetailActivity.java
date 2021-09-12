@@ -13,14 +13,14 @@ import cgeo.geocaching.command.AbstractCommand;
 import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
+import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.IVotingCapability;
-import cgeo.geocaching.connector.capability.IgnoreCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.PgcChallengeCheckerCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.connector.lc.LCConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
@@ -687,8 +687,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 menuItemGCVote.setVisible(((IVotingCapability) connector).supportsVoting(cache));
                 menuItemGCVote.setEnabled(Settings.isRatingWanted() && Settings.isGCVoteLoginValid());
             }
-            if (connector instanceof IgnoreCapability) {
-                menu.findItem(R.id.menu_ignore).setVisible(((IgnoreCapability) connector).canIgnoreCache(cache));
+            if (connector instanceof IIgnoreCapability) {
+                menu.findItem(R.id.menu_ignore).setVisible(((IIgnoreCapability) connector).canIgnoreCache(cache));
             }
             menu.findItem(R.id.menu_set_cache_icon).setVisible(cache.isOffline());
             menu.findItem(R.id.menu_advanced).setVisible(cache.getCoords() != null);
@@ -773,7 +773,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     private void ignoreCache() {
         SimpleDialog.of(this).setTitle(R.string.ignore_confirm_title).setMessage(R.string.ignore_confirm_message).confirm((dialog, which) -> {
-            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IgnoreCapability) ConnectorFactory.getConnector(cache)).ignoreCache(cache));
+            AndroidRxUtils.networkScheduler.scheduleDirect(() -> ((IIgnoreCapability) ConnectorFactory.getConnector(cache)).addToIgnorelist(cache));
             // For consistency, remove also the local cache immediately from memory cache and database
             if (cache.isOffline()) {
                 dropCache();
@@ -1656,7 +1656,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // extra description
             final String geocode = cache.getGeocode();
-            boolean hasExtraDescription = LCConnector.getInstance().canHandle(geocode); // could be generalized, but currently it's only LC
+            boolean hasExtraDescription = ALConnector.getInstance().canHandle(geocode); // could be generalized, but currently it's only AL
             if (hasExtraDescription) {
                 final IConnector conn = ConnectorFactory.getConnector(geocode);
                 if (conn != null) {
@@ -1746,6 +1746,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                     ImagesActivity.startActivity(activity, cache.getGeocode(), cache.getSpoilers());
                 });
+
+                // if there is only a listing background image without other additional pictures, change the text to better explain the content.
+                if (cache.getSpoilers().size() == 1 && getString(R.string.cache_image_background).equals(cache.getSpoilers().get(0).title)) {
+                    binding.hintSpoilerlink.setText(R.string.cache_image_background);
+                } else {
+                    binding.hintSpoilerlink.setText(R.string.cache_menu_spoilers);
+                }
             } else {
                 binding.hintSpoilerlink.setVisibility(View.GONE);
                 binding.hintSpoilerlink.setClickable(true);

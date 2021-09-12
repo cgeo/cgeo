@@ -28,12 +28,12 @@ import android.view.View;
 import android.widget.CheckBox;
 import android.widget.TextView;
 import android.widget.Toast;
-import static android.app.Activity.RESULT_OK;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.util.Consumer;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -44,9 +44,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class DownloaderUtils {
 
-    public static final int REQUEST_CODE = 47131;
     public static final String RESULT_CHOSEN_URL = "chosenUrl";
-    public static final String RESULT_SIZE_INFO = "sizeInfo";
     public static final String RESULT_DATE = "dateInfo";
     public static final String RESULT_TYPEID = "typeId";
 
@@ -56,34 +54,22 @@ public class DownloaderUtils {
 
     public static boolean onOptionsItemSelected(final Activity activity, final int id) {
         if (id == R.id.menu_download_offlinemap) {
-            activity.startActivityForResult(new Intent(activity, DownloadSelectorActivity.class), REQUEST_CODE);
+            activity.startActivity(new Intent(activity, DownloadSelectorActivity.class));
             return true;
         }
         return false;
     }
 
-    public static boolean onActivityResult(final Activity activity, final int requestCode, final int resultCode, final Intent data) {
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK) {
-            // trigger download manager for downloading the requested file
-            final Uri uri = data.getParcelableExtra(RESULT_CHOSEN_URL);
-            final String sizeInfo = data.getStringExtra(RESULT_SIZE_INFO);
-            final long date = data.getLongExtra(RESULT_DATE, 0);
-            final int type = data.getIntExtra(RESULT_TYPEID, Download.DownloadType.DEFAULT);
-            if (null != uri) {
-                triggerDownload(activity, R.string.downloadmap_title, type, uri, "", sizeInfo, date, null);
-            }
-            return true;
-        }
-        return false;
-    }
-
-    public static void triggerDownload(final Activity activity, @StringRes final int title, final int type, final Uri uri, final String additionalInfo, final String sizeInfo, final long date, final Runnable callback) {
+    private static String getFilenameFromUri(final Uri uri) {
         String temp = uri.getLastPathSegment();
-        if (null == temp) {
+        if (temp == null) {
             temp = "default.map";
         }
-        final String filename = temp;
+        return temp;
+    }
 
+    public static void triggerDownload(final Activity activity, @StringRes final int title, final int type, final Uri uri, final String additionalInfo, final String sizeInfo, @Nullable final Runnable dialogDismissedCallback, @Nullable final Consumer<Long> downloadStartedCallback) {
+        final String filename = getFilenameFromUri(uri);
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(title);
         final View layout = View.inflate(activity, R.layout.downloader_confirmation, null);
@@ -96,7 +82,10 @@ public class DownloaderUtils {
                 final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
                 final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
                 if (null != downloadManager) {
-                    addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
+                    final long id = addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
+                    if (downloadStartedCallback != null) {
+                        downloadStartedCallback.accept(id);
+                    }
 
                     // check for required extra files (e. g.: map theme)
                     final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
@@ -112,30 +101,32 @@ public class DownloaderUtils {
                     ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
                 }
                 dialog.dismiss();
-                if (callback != null) {
-                    callback.run();
+                if (dialogDismissedCallback != null) {
+                    dialogDismissedCallback.run();
                 }
             })
             .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
                 dialog.dismiss();
-                if (callback != null) {
-                    callback.run();
+                if (dialogDismissedCallback != null) {
+                    dialogDismissedCallback.run();
                 }
             })
             .create()
             .show();
     }
 
-    private static void addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
+    private static long addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
         final DownloadManager.Request request = new DownloadManager.Request(uri)
             .setTitle(filename)
             .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
             .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, filename)
+            .setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, filename)
             .setAllowedOverMetered(allowMeteredNetwork)
             .setAllowedOverRoaming(allowMeteredNetwork);
         Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
-        PendingDownload.add(downloadManager.enqueue(request), filename, uri.toString(), System.currentTimeMillis(), type);
+        final long id = downloadManager.enqueue(request);
+        PendingDownload.add(id, filename, uri.toString(), System.currentTimeMillis(), type);
+        return id;
     }
 
     public static class DownloadDescriptor {
@@ -177,10 +168,10 @@ public class DownloaderUtils {
      * if yes: checks whether updates are available for the type specified
      *      if yes: ask user to download them all
      *              if yes: trigger download(s)
-     * calls callback with user reaction (true=checked for updates / false=user denied check)
+     * calls callback with user reaction (true=checked for updates / false=user delayed check)
      */
     public static void checkForUpdatesAndDownloadAll(final Activity activity, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
-        SimpleDialog.of(activity).setTitle(title).setMessage(info).confirm((dialog, which) -> {
+        SimpleDialog.of(activity).setTitle(title).setMessage(info).setNegativeButton(TextParam.id(R.string.later)).confirm((dialog, which) -> {
             new CheckForDownloadsTask(activity, title, type).execute();
             callback.call(true);
         }, (dialog, w) -> callback.call(false));

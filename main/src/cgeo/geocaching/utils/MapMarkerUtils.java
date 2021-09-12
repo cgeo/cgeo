@@ -5,7 +5,9 @@ import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
@@ -83,7 +85,6 @@ public final class MapMarkerUtils {
         final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
             .append(cache.getAssignedEmoji())
-            .append(cache.isReliableLatLon())
             .append(cache.getType().id)
             .append(cache.isDisabled())
             .append(cache.isArchived())
@@ -193,8 +194,9 @@ public final class MapMarkerUtils {
     private static void addListMarkers(final Resources res, final InsetsBuilder insetsBuilder, final ArrayList<Integer> assignedMarkers) {
         if (assignedMarkers.size() > 0) {
             if (lPaint == null) {
-                final Pair<Integer, Integer> temp = DisplayUtils.getDrawableDimensions(res, R.drawable.dot_black);
-                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (temp.first * 1.2), (int) (temp.second * 1.2));
+                final Drawable marker = ResourcesCompat.getDrawable(res, R.drawable.dot_black, null);
+                assert marker != null;
+                final Pair<Integer, Integer> markerDimensions = new Pair<>((int) (marker.getIntrinsicWidth() * 1.2), (int) (marker.getIntrinsicHeight() * 1.2));
                 final int markerAvailable = markerDimensions.first;
                 lPaint = new EmojiUtils.EmojiPaint(res, markerDimensions, markerAvailable, 0, DisplayUtils.calculateMaxFontsize(10, 5, 100, markerAvailable));
             }
@@ -250,10 +252,6 @@ public final class MapMarkerUtils {
         // Show the background circle only on map
         if (showBackground(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(marker));
-        }
-        // reliable or not
-        if (!cache.isReliableLatLon() && showUnreliableLatLon(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_notreliable));
         }
         // cache type
         final int mainMarkerId = getMainMarkerId(cache, cacheListType);
@@ -334,6 +332,15 @@ public final class MapMarkerUtils {
             // if not, perhaps logged offline
         } else if (cache.hasLogOffline()) {
             final LogType offlineLogType = cache.getOfflineLogType();
+            // logs of type NOTE may have a NA/NM log attached to them
+            if (offlineLogType == LogType.NOTE) {
+                final LogEntry offlineLog = cache.getOfflineLog();
+                if (offlineLog.reportProblem == ReportProblemType.ARCHIVE) {
+                    return R.drawable.marker_archive;
+                } else if (offlineLog.reportProblem != ReportProblemType.NO_PROBLEM) {
+                    return R.drawable.marker_maintenance;
+                }
+            }
             return offlineLogType == null ? R.drawable.marker_found_offline : offlineLogType.getOfflineLogOverlay();
             // an offline log is more important than a DNF
         } else if (cache.isDNF()) {
