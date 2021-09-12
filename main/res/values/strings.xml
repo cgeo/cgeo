@@ -1518,6 +1518,8 @@
     <string name="map_language">Map language</string>
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>
+    <string name="map_live_disabled">Live mode disabled</string>
+    <string name="map_live_disabled_hint">Live mode is disabled. You will only see stored caches. Use the menu to enable live mode.</string>
     <string name="map_as_list">Show as list</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>

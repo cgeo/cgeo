@@ -330,7 +330,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
-        MapUtils.showMapOneTimeMessages(this);
+        MapUtils.showMapOneTimeMessages(this, mapMode);
     }
 
     private void postZoomToViewport(final Viewport viewport) {

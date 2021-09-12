@@ -604,7 +604,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         AndroidBeam.disable(activity);
 
-        MapUtils.showMapOneTimeMessages(activity);
+        MapUtils.showMapOneTimeMessages(activity, mapOptions.mapMode);
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
