@@ -10,6 +10,8 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import androidx.preference.PreferenceViewHolder;
+
 
 public class BackupSeekbarPreference extends SeekbarPreference {
 
@@ -41,19 +43,15 @@ public class BackupSeekbarPreference extends SeekbarPreference {
     }
 
     @Override
-    protected View onCreateView(final ViewGroup parent) {
-        final View v = super.onCreateView(parent);
-        valueView = v.findViewById(R.id.preference_seekbar_value_view);
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
+        valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);
         valueView.setSingleLine(false);
         final LayoutParams params = (LayoutParams) valueView.getLayoutParams();
         params.weight = 3.0f;
         valueView.setMinLines(2);
         valueView.setOnClickListener(null);
 
-        seekBar = v.findViewById(R.id.preference_seekbar);
-
-        return v;
-
+        seekBar = (SeekBar) holder.findViewById(R.id.preference_seekbar);
     }
 
     public void setValue(final int value) {

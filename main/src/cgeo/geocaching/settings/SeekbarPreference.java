@@ -7,17 +7,17 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.Preference;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.core.util.Consumer;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 
@@ -96,6 +96,7 @@ public class SeekbarPreference extends Preference {
 
     /**
      * Get unit-label for progress value.
+     *
      * @return string for the unit label
      */
     protected String getUnitString() {
@@ -105,6 +106,7 @@ public class SeekbarPreference extends Preference {
     /**
      * hasDecimals is parameter from SeekbarPreference, but can be overwritten.
      * So use useDecimals instead of member
+     *
      * @return hasDecimals
      */
     protected boolean useDecimals() {
@@ -142,12 +144,11 @@ public class SeekbarPreference extends Preference {
     }
 
     @Override
-    protected View onCreateView(final ViewGroup parent) {
-        final View v = super.onCreateView(parent);
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
 
         // get views
-        final SeekBar seekBar = v.findViewById(R.id.preference_seekbar);
-        valueView = v.findViewById(R.id.preference_seekbar_value_view);
+        final SeekBar seekBar = (SeekBar) holder.findViewById(R.id.preference_seekbar);
+        valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);
 
         // init seekbar
         seekBar.setMax(maxProgress);
@@ -159,7 +160,7 @@ public class SeekbarPreference extends Preference {
 
         // set label (if given)
         if (null != label && !label.isEmpty()) {
-            final TextView labelView = v.findViewById(R.id.preference_seekbar_label_view);
+            final TextView labelView = (TextView) holder.findViewById(R.id.preference_seekbar_label_view);
             labelView.setVisibility(View.VISIBLE);
             labelView.setText(label);
         }
@@ -171,10 +172,12 @@ public class SeekbarPreference extends Preference {
                     valueView.setText(getValueString(progress));
                 }
             }
+
             @Override
             public void onStartTrackingTouch(final SeekBar seekBar) {
                 // abstract method needs to be implemented, but is not used here
             }
+
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
                 if (atLeastMin(seekBar, seekBar.getProgress())) {
@@ -211,7 +214,5 @@ public class SeekbarPreference extends Preference {
             };
             SimpleDialog.of((Activity) context).setTitle(TextParam.text(title)).input(inputType, defaultValue, null, getUnitString(), listener);
         });
-
-        return v;
     }
 }

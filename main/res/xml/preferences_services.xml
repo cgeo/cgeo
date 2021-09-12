@@ -5,8 +5,7 @@
     app:icon="?attr/settings_cloud"
     app:title="@string/settings_title_services"
     app:key="@string/preference_screen_services" >
-    <PreferenceCategory android:title="@string/settings_category_geocaching_platform"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_category_geocaching_platform" >
 
         <!-- Geocaching.com -->
         <Preference
@@ -59,8 +58,7 @@
             app:title="@string/init_su" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_category_geocaching_additionals"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_category_geocaching_additionals" >
 
         <!-- Gcvote.com -->
         <Preference
@@ -78,8 +76,7 @@
             app:title="@string/init_sendToCgeo" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_category_social"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_category_social" >
 
         <!-- Twitter -->
         <Preference
@@ -87,8 +84,7 @@
             app:title="@string/init_twitter" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_category_browser"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_category_browser" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_nativeUa"

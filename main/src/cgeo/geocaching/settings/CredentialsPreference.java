@@ -3,14 +3,12 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.ui.AvatarUtils;
-import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.network.HtmlImage;
 
 import android.content.Context;
 import android.content.Intent;
@@ -22,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
+import androidx.preference.PreferenceViewHolder;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -31,8 +30,6 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     private LayoutInflater inflater;
     private final CredentialActivityMapping credentialsMapping;
-    private ViewGroup parentView;
-    private View preferenceView;
 
     private enum CredentialActivityMapping {
         GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
@@ -86,7 +83,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity settingsActivity) {
-        settingsActivity.setAuthTitle(credentialsMapping.prefKeyId);
+        //settingsActivity.setAuthTitle(credentialsMapping.prefKeyId);
         return preference -> {
             final Intent checkIntent = new Intent(preference.getContext(), credentialsMapping.getAuthActivity());
 
@@ -100,41 +97,29 @@ public class CredentialsPreference extends AbstractClickablePreference {
     }
 
     @Override
-    protected View onCreateView(final ViewGroup parent) {
-        this.parentView = parent;
-        this.preferenceView = super.onCreateView(parent);
-        resetAvatarImage();
-        return this.preferenceView;
-
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
+        addInfoIcon(holder);
     }
 
-    public void resetAvatarImage() {
-        final LinearLayout avatarFrame = this.preferenceView.findViewById(android.R.id.widget_frame);
-        if (avatarFrame == null) {
+    /**
+     * Display avatar image if present
+     */
+    private void addInfoIcon(final PreferenceViewHolder holder) {
+        final String avatarUrl = Settings.getAvatarUrl(credentialsMapping.getConnector());
+        if (StringUtils.isEmpty(avatarUrl)) {
             return;
         }
 
-        if (credentialsMapping.getConnector() instanceof IAvatar) {
-            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                () -> AvatarUtils.getAvatar((IAvatar) credentialsMapping.getConnector()),
-                img -> {
-                    if (img != null) {
-                        final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, this.parentView, false);
-                        iconView.setImageDrawable(img);
+        //final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, holder, false);
+        final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+        //iconView.setImageDrawable(imgGetter.getDrawable(avatarUrl));
 
-                        avatarFrame.removeAllViews();
-                        avatarFrame.addView(iconView);
-                        avatarFrame.setVisibility(View.VISIBLE);
+        final LinearLayout frame = (LinearLayout) holder.findViewById(android.R.id.widget_frame);
+        frame.setVisibility(View.VISIBLE);
+        //frame.addView(iconView);
 
-                        final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
-                        avatarFrame.setLayoutParams(param);
-                    } else {
-                        avatarFrame.setVisibility(View.GONE);
-                    }
-                });
-        } else {
-            avatarFrame.setVisibility(View.GONE);
-        }
+        final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
+        frame.setLayoutParams(param);
     }
 
     @Override
@@ -148,10 +133,6 @@ public class CredentialsPreference extends AbstractClickablePreference {
             Cookies.clearCookies();
         }
         Settings.setCredentials(credentialsMapping.getConnector(), Credentials.EMPTY);
-
-        if (credentialsMapping.getConnector() instanceof IAvatar) {
-            AvatarUtils.changeAvatar((IAvatar) credentialsMapping.getConnector(), StringUtils.EMPTY);
-            resetAvatarImage();
-        }
+        Settings.setAvatarUrl(credentialsMapping.getConnector(), StringUtils.EMPTY);
     }
 }

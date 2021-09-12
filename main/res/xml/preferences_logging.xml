@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="?attr/settings_pen"
-    android:title="@string/settings_title_logging"
-    android:summary="@string/settings_summary_logging" >
+    android:summary="@string/settings_summary_logging"
+    android:title="@string/settings_title_logging">
 
-    <PreferenceCategory android:title="@string/init_signature"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/init_signature">
         <cgeo.geocaching.settings.TemplateTextPreference
             android:key="@string/pref_signature"
             android:title="@string/init_signature" />
@@ -17,8 +15,7 @@
             android:title="@string/init_sigautoinsert" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_category_logging_other"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_category_logging_other">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_trackautovisit"

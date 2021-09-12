@@ -1,27 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="@string/preference_screen_twitter"
-    android:title="@string/init_twitter" >
+    android:title="@string/init_twitter">
 
-    <PreferenceCategory android:title="@string/settings_settings"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory
+        app:title="@string/settings_settings">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_twitter"
             android:title="@string/settings_activate_twitter" />
-        <cgeo.geocaching.settings.TextPreference
+        <Preference
             android:dependency="@string/pref_twitter"
-            android:layout="@layout/text_preference"
-            android:text="@string/about_twitter" />
+            app:summary="@string/about_twitter" />
         <cgeo.geocaching.settings.OAuthPreference
             android:dependency="@string/pref_twitter"
             android:key="@string/pref_fakekey_twitter_authorization" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_advanced"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory
+        app:title="@string/settings_advanced">
         <cgeo.geocaching.settings.TemplateTextPreference
             android:defaultValue="I found [NAME] ([URL])."
             android:dependency="@string/pref_twitter"

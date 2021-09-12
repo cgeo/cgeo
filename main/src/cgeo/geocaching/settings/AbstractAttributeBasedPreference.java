@@ -2,10 +2,10 @@ package cgeo.geocaching.settings;
 
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.preference.Preference;
 import android.util.AttributeSet;
 
 import androidx.annotation.Nullable;
+import androidx.preference.Preference;
 
 /**
  * Base class for preferences which evaluate their XML attributes for further processing.

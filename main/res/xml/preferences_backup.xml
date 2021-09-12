@@ -1,45 +1,43 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<PreferenceScreen
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="?attr/settings_backup"
-    android:title="@string/settings_title_backup"
     android:key="@string/preference_screen_backup"
-    android:summary="@string/settings_summary_backup" >
+    android:summary="@string/settings_summary_backup"
+    android:title="@string/settings_title_backup">
 
-    <PreferenceCategory android:title="@string/init_backup_title"
-        android:layout="@layout/preference_category"
-        android:summary="@string/init_backup_summary">
+    <PreferenceCategory
+        android:summary="@string/init_backup_summary"
+        android:title="@string/init_backup_title">
         <Preference
             android:selectable="false"
             android:summary="@string/init_backup_history_length_summary"
             android:title="@string/init_backup_history_length_title" />
         <cgeo.geocaching.settings.BackupSeekbarPreference
+            android:defaultValue="@integer/backup_history_length_default"
             android:key="@string/pref_backups_backup_history_length"
-            app:min="0"
-            app:max="@integer/backup_history_length_max"
             app:hasDecimals="false"
-            android:defaultValue="@integer/backup_history_length_default" />
+            app:max="@integer/backup_history_length_max"
+            app:min="0" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_backup_logins"
-            android:title="@string/init_backup_logins"
-            android:summary="@string/init_backup_logins_summary" />
+            android:summary="@string/init_backup_logins_summary"
+            android:title="@string/init_backup_logins" />
         <Preference
             android:key="@string/pref_fakekey_preference_backup"
-            android:title="@string/init_backup_now"
-            android:layout="@layout/preference_button" />
+            android:layout="@layout/preference_button"
+            android:title="@string/init_backup_now" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/init_restore_title"
-        android:layout="@layout/preference_category">
+    <PreferenceCategory android:title="@string/init_restore_title">
         <Preference
             android:key="@string/pref_fakekey_preference_restore"
-            android:title="@string/init_backup_start_restore"
-            android:layout="@layout/preference_button" />
+            android:layout="@layout/preference_button"
+            android:title="@string/init_backup_start_restore" />
         <Preference
             android:key="@string/pref_fakekey_preference_restore_dirselect"
-            android:title="@string/init_backup_restore_different_backup"
-            android:layout="@layout/preference_button" />
+            android:layout="@layout/preference_button"
+            android:title="@string/init_backup_restore_different_backup" />
     </PreferenceCategory>
 </PreferenceScreen>

@@ -13,7 +13,6 @@ import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
-import android.preference.DialogPreference;
 import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -27,6 +26,9 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.preference.DialogPreference;
+import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 
@@ -83,13 +85,15 @@ public class ColorpickerPreference extends DialogPreference {
     }
 
     @Override
-    protected void onBindView(final View view) {
-        super.onBindView(view);
-        final ImageView colorView = view.findViewById(R.id.colorpicker_item);
+    public void onBindViewHolder(PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
+        final ImageView colorView = (ImageView) holder.findViewById(R.id.colorpicker_item);
         if (colorView != null) {
             setViewColor(colorView, color, false);
         }
     }
+
+    /*
 
     @Override
     protected void onBindDialogView(final View v) {
@@ -231,6 +235,8 @@ public class ColorpickerPreference extends DialogPreference {
             color = originalColor;
         }
     }
+
+     */
 
     private void initColorSchemeGrid() {
         final LayoutInflater inflater = LayoutInflater.from(getContext());

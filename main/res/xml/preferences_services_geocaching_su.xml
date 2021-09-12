@@ -5,25 +5,22 @@
     android:key="@string/preference_screen_su"
     android:title="@string/init_su" >
 
-    <PreferenceCategory android:title="@string/settings_settings"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_settings" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorSUActive"
             android:summary="@string/init_summary_su"
             android:title="@string/settings_activate_su" />
-        <cgeo.geocaching.settings.TextPreference
+        <Preference
             android:dependency="@string/pref_connectorSUActive"
-            android:layout="@layout/text_preference"
-            android:text="@string/settings_su_description" />
+            app:summary="@string/settings_su_description" />
         <cgeo.geocaching.settings.OAuthPreference
             android:dependency="@string/pref_connectorSUActive"
-            android:summary="@string/auth_unconnected"
+            app:summary="@string/auth_unconnected"
             android:key="@string/pref_fakekey_su_authorization" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information"
-        android:layout="@layout/preference_category" >
+    <PreferenceCategory android:title="@string/settings_information" >
         <Preference
             android:key="@string/pref_fakekey_su_website"
             android:title="@string/settings_open_website" />
