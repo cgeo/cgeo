@@ -7,7 +7,7 @@
     tools:context=".connector.gc.PocketQueryListActivity" >
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/pocketquery_list"
+        android:id="@+id/gclist"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_margin="0dip"
@@ -15,6 +15,6 @@
         android:dividerHeight="1dip"
         android:padding="0dip"
         android:scrollbarStyle="outsideOverlay"
-        tools:listitem="@layout/pocketquery_item" />
+        tools:listitem="@layout/gclist_item" />
 
 </LinearLayout>

@@ -4,8 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.PocketQuery;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.extension.PocketQueryHistory;
 
@@ -342,7 +342,7 @@ public final class Formatter {
     }
 
     @NonNull
-    public static String formatPocketQueryInfo(final PocketQuery pocketQuery) {
+    public static String formatPocketQueryInfo(final GCList pocketQuery) {
         if (!pocketQuery.isDownloadable()) {
             return StringUtils.EMPTY;
         }

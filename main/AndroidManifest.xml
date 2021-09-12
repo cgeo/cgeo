@@ -899,6 +899,15 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
         </activity>
+        <activity
+            android:name="cgeo.geocaching.connector.gc.BookmarkListActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/search_bookmark_list"
+            android:parentActivityName="cgeo.geocaching.MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="cgeo.geocaching.MainActivity" />
+        </activity>
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
         <activity
             android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"

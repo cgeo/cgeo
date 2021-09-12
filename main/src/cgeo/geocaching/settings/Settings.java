@@ -1094,6 +1094,14 @@ public class Settings {
         return getBoolean(R.string.pref_pqShowDownloadableOnly, false);
     }
 
+    public static void setBookmarklistsShowNewOnly(final boolean showNewOnly) {
+        putBoolean(R.string.pref_bookmarklistsShowNewOnly, showNewOnly);
+    }
+
+    public static boolean getBookmarklistsShowNewOnly() {
+        return getBoolean(R.string.pref_bookmarklistsShowNewOnly, false);
+    }
+
     public static void setAnyCoordinates(final Geopoint coords) {
         if (coords != null) {
             putFloat(R.string.pref_anylatitude, (float) coords.getLatitude());

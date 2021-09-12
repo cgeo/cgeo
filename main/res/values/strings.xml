@@ -345,7 +345,8 @@
     <string name="menu_history">History</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
-    <string name="menu_lists_pocket_queries">Lists / pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Bookmark lists</string>
     <string name="menu_scan_description">c:geo can scan geocodes which are printed as QR code. The necessary app is not installed. Do you want to open Google Play to install it?</string>
     <string name="menu_invert_order">Invert order</string>
 
@@ -1565,7 +1566,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bookmark list</string>
     <string name="search_pocket_is_new">new</string>
-    <string name="search_pocket_and_bookmark_loading">Loading a list of Pocket Queries and bookmark lists</string>
+    <string name="search_pocket_loading">Loading pocket queries</string>
     <string name="search_bookmark_loading">Loading bookmark lists</string>
     <string name="search_bookmark_select">Select bookmark lists</string>
     <string name="search_bookmark_new">Create new bookmark list</string>

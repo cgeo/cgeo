@@ -5,6 +5,7 @@ import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
@@ -554,7 +555,9 @@ public class MainActivity extends AbstractActionBarActivity {
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
-        menu.findItem(R.id.menu_pocket_queries).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+        final boolean isPremiumActive = Settings.isGCConnectorActive() && Settings.isGCPremiumMember();
+        menu.findItem(R.id.menu_pocket_queries).setVisible(isPremiumActive);
+        menu.findItem(R.id.menu_bookmarklists).setVisible(isPremiumActive);
         menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
         return true;
     }
@@ -583,6 +586,10 @@ public class MainActivity extends AbstractActionBarActivity {
         } else if (id == R.id.menu_pocket_queries) {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, PocketQueryListActivity.class));
+            }
+        } else if (id == R.id.menu_bookmarklists) {
+            if (Settings.isGCPremiumMember()) {
+                startActivity(new Intent(this, BookmarkListActivity.class));
             }
         } else if (id == R.id.menu_update_routingdata) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, this::returnFromTileUpdateCheck);

@@ -1,6 +1,6 @@
 package cgeo.geocaching.storage.extension;
 
-import cgeo.geocaching.models.PocketQuery;
+import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.storage.DataStore;
 
 
@@ -21,7 +21,7 @@ public class PocketQueryHistory extends DataStore.DBExtension {
      * @param pocketQuery the list / pocket query which should be checked
      * @return true if the list has changed since the last download. Otherwise false.
      */
-    public static boolean isNew(final PocketQuery pocketQuery) {
+    public static boolean isNew(final GCList pocketQuery) {
         final DataStore.DBExtension lastDownload = load(type, pocketQuery.getGuid());
 
         if (!pocketQuery.isDownloadable()) {
@@ -37,7 +37,7 @@ public class PocketQueryHistory extends DataStore.DBExtension {
         return pocketQuery.getLastGenerationTime() > lastDownload.getLong1();
     }
 
-    public static void updateLastDownload(final PocketQuery pocketQuery) {
+    public static void updateLastDownload(final GCList pocketQuery) {
         removeAll(type, pocketQuery.getGuid());
         add(type, pocketQuery.getGuid(), pocketQuery.getLastGenerationTime(), 0, 0, 0, "", "", "", "");
     }

@@ -2,7 +2,7 @@ package cgeo.geocaching.models;
 
 import android.net.Uri;
 
-public final class PocketQuery {
+public final class GCList {
 
     private final String guid;
     private final int caches;
@@ -12,7 +12,7 @@ public final class PocketQuery {
     private final int daysRemaining;
     private final boolean bookmarkList;
 
-    public PocketQuery(final String guid, final String name, final int caches, final boolean downloadable, final long lastGenerationTime, final int daysRemaining, final boolean bookmarkList) {
+    public GCList(final String guid, final String name, final int caches, final boolean downloadable, final long lastGenerationTime, final int daysRemaining, final boolean bookmarkList) {
         this.guid = guid;
         this.name = name;
         this.caches = caches;
