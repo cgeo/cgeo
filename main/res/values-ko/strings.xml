@@ -326,7 +326,6 @@
     <string name="menu_history">지난 기록</string>
     <string name="menu_filter">필터</string>
     <string name="menu_scan_geo">지오코드 스캔</string>
-    <string name="menu_lists_pocket_queries">목록 / 포켓 쿼리</string>
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
     <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
@@ -1409,7 +1408,6 @@
     <string name="search_pocket_title">포켓쿼리</string>
     <string name="search_bookmark_list">북마크 목록</string>
     <string name="search_pocket_is_new">새로운</string>
-    <string name="search_pocket_and_bookmark_loading">포켓 쿼리 및 북마크 목록 로드</string>
     <string name="search_bookmark_loading">북마크 목록 로드 중</string>
     <string name="search_bookmark_select">북마크 목록 선택</string>
     <string name="search_bookmark_new">새 북마크 목록 만들기</string>
