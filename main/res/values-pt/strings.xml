@@ -383,6 +383,7 @@
     <string name="caches_remove_all_completely">Eliminar todas do dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar seleccionadas do dispositivo</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
+    <string name="caches_upload_bookmarklist">Carregar para a lista de favoritos</string>
     <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">Quer carregar as coordenadas modificadas para todas as caches (seleccionadas) e substituir as coordenadas existentes no servidor? Isto não pode ser anulado.</string>
     <string name="caches_upload_allcoords">Carregar todas as coord. memorizadas</string>
@@ -1420,6 +1421,12 @@
     <string name="search_bookmark_list">Lista de marcadores</string>
     <string name="search_pocket_is_new">novo</string>
     <string name="search_pocket_and_bookmark_loading">A carregar uma lista de Pocket Queries e lista de marcadores</string>
+    <string name="search_bookmark_loading">A carregar marcadores</string>
+    <string name="search_bookmark_select">Seleccionar listas de marcadores</string>
+    <string name="search_bookmark_new">Criar nova lista de marcadores</string>
+    <string name="search_bookmark_adding_caches_success">Todas as geocaches foram adicionadas à lista de marcadores seleccionada</string>
+    <string name="search_bookmark_adding_caches_failed">Falha ao adicionar cache à lista de marcadores</string>
+    <string name="search_bookmark_create_new_failed">Falha ao criar uma nova lista de marcadores</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">A carregar detalhes do trackable…</string>
@@ -2100,6 +2107,7 @@ do mapa e dos temas?</string>
     <string name="done">Concluído</string>
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
+    <string name="later">Mais tarde</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
 </resources>

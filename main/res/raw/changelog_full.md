@@ -5,21 +5,42 @@ This changelog contains all changes which are not intermediate developing steps.
 
 ## Next release (branch `release`)
 
-### Map
-- Fix: Theming error in downloader (light theme only)
-- Fix: Selected track/route file did not get persisted
 
-### Other
-- Fix: Fix copy coordinate via long click on waypoint coordinates
-- Fix: Extract waypoint with same name but different coordinates from personal note
-- Fix: Bug in extracting user note for waypoint with formula
-- Fix: Export formula to PN instead of coordinates for completed formula
-- Fix: Offline map and themes folder incorrect after re-install and restore of backup
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2021.09.08 Bugfix release
+
+### Fixes
+- "Add to watchlist" / "Remove from watchlist" failing (Website change)
+- "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
+- Date in logbook cut off on larger fonts
+- Filtering in live map for more rare cache types returning only few results
 
 
 <!-- --------------------------------------------------------------------------------- --->
 
-## Current development (branch `master`)
+## 2021.08.28 Bugfix release
+
+### Design
+- Increase font size for text input fields
+- Increase font size for some compass elements
+- Use font color with higher contrast in waypoint tab
+- Make quick offline log check mark visible again
+- Increase font size for coordinate input fields
+- Respect system font size settings also on older Android versions (5,6 and 7)
+
+### Cache details
+- Fix missing cache title if cache opened via geocode or link (website change)
+- Fix missing cache description on some caches
+
+### Other
+- Show premium caches again in search results of basic members
+- Fix further creation of user defined caches if some user defines caches have been loaded via GPX
+- Use more common English abbreviation for traditional cache in cache type filter
+
+<!-- --------------------------------------------------------------------------------- --->
+
+## 2021.08.15 Feature release
 
 ### Advanced filtering system (experimental)
 - Introducing a new filtering system to c:geo, supporting flexible, combinable and storable filters
@@ -63,7 +84,7 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
-## 2021.05.20
+## 2021.05.20 Feature release
 
 ### Geocaching Services
 - New: Added connector for Adventure Lab Caches - Shows starting coords of Adventure Labs with basic info on map and searches (PM-only). Use the link on the cache details page to start the Adventure Lab app to play the Adventure.

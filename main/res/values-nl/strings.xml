@@ -383,6 +383,7 @@
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
+    <string name="caches_upload_bookmarklist">Uploaden naar bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
@@ -495,6 +496,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Is niet aanwezig</string>
     <string name="cache_filter_stringfilter_type_is_present">is aanwezig</string>
     <string name="cache_filter_stringfilter_type_contains">Bevat</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Bevat niet</string>
     <string name="cache_filter_stringfilter_type_starts_with">Begint met</string>
     <string name="cache_filter_stringfilter_type_ends_with">Eindigt met</string>
     <string name="cache_filter_stringfilter_type_pattern">Patroon</string>
@@ -1419,6 +1421,12 @@
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
     <string name="search_pocket_and_bookmark_loading">Laden van een lijst van Pocket Queries en bladwijzerlijsten</string>
+    <string name="search_bookmark_loading">Bladwijzerlijsten laden</string>
+    <string name="search_bookmark_select">Selecteer bladwijzerlijsten</string>
+    <string name="search_bookmark_new">Nieuwe bladwijzerlijst aanmaken</string>
+    <string name="search_bookmark_adding_caches_success">Alle GC geocaches zijn toegevoegd aan de geselecteerde bookmarklijst</string>
+    <string name="search_bookmark_adding_caches_failed">Toevoegen van caches aan bladwijzerlijst is mislukt</string>
+    <string name="search_bookmark_create_new_failed">Het maken van een nieuwe bladwijzerlijst is mislukt</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Bezig met laden van trackable details…</string>
@@ -2103,6 +2111,7 @@
     <string name="done">Voltooid</string>
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
+    <string name="later">Later</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
 </resources>

@@ -383,6 +383,7 @@
     <string name="caches_remove_all_completely">Poista kaikki laitteesta</string>
     <string name="caches_remove_selected_completely">Poista valittu laitteesta</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
+    <string name="caches_upload_bookmarklist">Lataa kirjanmerkkilistalle</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
     <string name="caches_upload_modifiedcoords_warning">Haluatko lähettää muokatut koordinaatit kaikille (valituille) kätköille ja tallentaa ne palvelimella olevien koordinaattien päälle? Toimintoa ei voi peruuttaa.</string>
     <string name="caches_upload_allcoords">Lähetä kaikkien kätköjen koordinaatit</string>
@@ -1420,6 +1421,12 @@
     <string name="search_bookmark_list">Kirjanmerkit</string>
     <string name="search_pocket_is_new">uusi</string>
     <string name="search_pocket_and_bookmark_loading">Ladataan luetteloa Pocket Queries- ja kirjanmerkkilistoista</string>
+    <string name="search_bookmark_loading">Ladataan kirjanmerkkilistoja</string>
+    <string name="search_bookmark_select">Valitse kirjanmerkkilistat</string>
+    <string name="search_bookmark_new">Luo uusi kirjanmerkkilista</string>
+    <string name="search_bookmark_adding_caches_success">Kaikki GC-geokätköt on lisätty valittuun kirjanmerkkiluetteloon</string>
+    <string name="search_bookmark_adding_caches_failed">Kätköjen lisääminen kirjanmerkkilistalle epäonnistui</string>
+    <string name="search_bookmark_create_new_failed">Uuden kirjanmerkkilistan luominen epäonnistui</string>
     <!-- trackable -->
     <string name="trackable">Reissaaja</string>
     <string name="trackable_details_loading">Ladataan reissaajan tietoja…</string>
@@ -2104,6 +2111,7 @@
     <string name="done">Valmis</string>
     <string name="finish">Valmis</string>
     <string name="back">Takaisin</string>
+    <string name="later">Myöhemmin</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
 </resources>
