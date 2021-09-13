@@ -1,13 +1,10 @@
- 
-### 지도
-- 신규: Mapy.cz를 온라인 지도 소스로 추가했습니다.
-- 신규: 개인 경로: 새로운 출발점 설정 및 경로 역전 허용
-- 신규: 이제 여러 오프라인 지도 다운로드를 한 번에 실행할 수 있습니다.
+### Map
+- New: Complete rework of all cache icons
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
 
-### 캐시 상세정보
-- 수정: 현재 사용자가 어드벤처 랩의 소유자인지 감지
+### Cache lists
+- New: Complete rework of all cache icons
 
-### 추가 사항
-- 신규: 북마크 목록에 캐시 업로드 허용(GC 프리미엄 회원만 사용 가능)
-- 신규: 클립보드 콘텐츠를 유효한 GC코드로 파싱할 수 있는 경우 'GC코드로 검색'을 자동으로 미리 채움
-- 변경: "보기 설정"에서 민감한 정보 숨기기
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
