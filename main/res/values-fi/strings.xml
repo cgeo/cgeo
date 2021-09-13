@@ -326,7 +326,8 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Suodatin</string>
     <string name="menu_scan_geo">Skannaa geokoodi</string>
-    <string name="menu_lists_pocket_queries">Listat / pocket queryt</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Kirjanmerkkilistat</string>
     <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
     <string name="menu_invert_order">Käännä järjestys</string>
     <!-- main screen -->
@@ -1420,7 +1421,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Kirjanmerkit</string>
     <string name="search_pocket_is_new">uusi</string>
-    <string name="search_pocket_and_bookmark_loading">Ladataan luetteloa Pocket Queries- ja kirjanmerkkilistoista</string>
+    <string name="search_pocket_loading">Ladataan Pocket Queryja</string>
     <string name="search_bookmark_loading">Ladataan kirjanmerkkilistoja</string>
     <string name="search_bookmark_select">Valitse kirjanmerkkilistat</string>
     <string name="search_bookmark_new">Luo uusi kirjanmerkkilista</string>
