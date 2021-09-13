@@ -1,13 +1,10 @@
- 
 ### Map
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- New: Complete rework of all cache icons
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
 
-### Cache details
-- Fix: Detect if current user is owner for lab adventures
+### Cache lists
+- New: Complete rework of all cache icons
 
 ### Other
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Change: Hide sensitive data in "view settings"
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
