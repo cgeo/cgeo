@@ -11,6 +11,6 @@
 ### Divers
 - New: Allow upload of caches to bookmark list (only available for GC premium members)
 - New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
+- Correction : Corrections de l'interface utilisateur et des filtres
 - Change: Hide sensitive data in "view settings"
 - Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
