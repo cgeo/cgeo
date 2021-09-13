@@ -98,7 +98,9 @@
 -dontnote okhttp3.internal.platform.**
 # R8 missing, probaly fixed in next OkHttp release,
 # see https://github.com/square/okhttp/pull/6792
--dontwarn org.conscrypt.ConscryptHostnameVerifier
+-dontwarn org.bouncycastle.jsse.**
+-dontwarn org.conscrypt.*
+-dontwarn org.openjsse.**
 
 # Play Services -----------------------------------------------------------------------------------
 
