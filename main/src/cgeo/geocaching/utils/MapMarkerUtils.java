@@ -267,6 +267,41 @@ public final class MapMarkerUtils {
     }
 
     /**
+     * Obtain the drawable for a given cache.
+     * Return a drawable from the cache, if a similar drawable was already generated.
+     *
+     * cacheListType should be Null if the requesting activity is Map.
+     *
+     * @param res
+     *          the resources to use
+     * @param cache
+     *          the cache to build the drawable for
+     * @return
+     *          a drawable representing the current cache status
+     */
+    @NonNull
+    public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
+        final int hashcode = new HashCodeBuilder()
+            .append(cache.getType().id)
+            .append(cache.isDisabled())
+            .append(cache.isArchived())
+            .append(cache.hasLogOffline())
+            .append(cache.getOfflineLogType())
+            .append(cache.hasUserModifiedCoords())
+            .append(cache.hasFinalDefined())
+            .toHashCode();
+
+        synchronized (overlaysCache) {
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createCacheDotMarker(res, cache));
+                overlaysCache.put(hashcode, marker);
+            }
+            return marker;
+        }
+    }
+
+    /**
      * Build the drawable for a given cache.
      *
      * @param res
@@ -277,7 +312,7 @@ public final class MapMarkerUtils {
      *          a drawable representing the current cache status
      */
     @NonNull
-    public static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
+    private static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
         int dotIcon = -1;
         int tintColor;
 
@@ -336,6 +371,47 @@ public final class MapMarkerUtils {
     }
 
     /**
+     * Obtain the drawable for a given waypoint.
+     * Return a drawable from the cache, if a similar drawable was already generated.
+     *
+     * @param res
+     *          the resources to use
+     * @param waypoint
+     *          the waypoint to build the drawable for
+     * @return
+     *          a drawable representing the current waypoint status
+     */
+    @NonNull
+    public static CacheMarker getWaypointDotMarker(final Resources res, final Waypoint waypoint) {
+        boolean cacheIsDisabled = false;
+        boolean cacheIsArchived = false;
+        final String geocode = waypoint.getGeocode();
+        if (StringUtils.isNotBlank(geocode)) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            if (null != cache) {
+                cacheIsDisabled = cache.isDisabled();
+                cacheIsArchived = cache.isArchived();
+            }
+        }
+        final int hashcode = new HashCodeBuilder()
+            .append(waypoint.getMapDotMarkerId())
+            .append(waypoint.getWaypointType().dotMarkerId)
+            .append(waypoint.getMapMarkerId())
+            .append(cacheIsDisabled)
+            .append(cacheIsArchived)
+            .toHashCode();
+
+        synchronized (overlaysCache) {
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createWaypointDotMarker(res, waypoint));
+                overlaysCache.put(hashcode, marker);
+            }
+            return marker;
+        }
+    }
+
+    /**
      * Build the drawable for a given waypoint.
      *
      * @param res
@@ -346,7 +422,7 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    public static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
+    private static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null));
         DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointOutline, null));
         final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null));
@@ -399,7 +475,7 @@ public final class MapMarkerUtils {
      * @param type  CacheType to get the icon for
      * @return  Layered Drawable
      */
-    public static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type) {
+    private static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type) {
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, type.typeColor, null));

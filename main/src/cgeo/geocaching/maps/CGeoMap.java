@@ -1732,7 +1732,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private CachesOverlayItemImpl getCacheItem(final Geocache cache, final boolean isDotMode) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(cache, cache.applyDistanceRule());
         if (isDotMode) {
-            item.setMarker(new CacheMarker(0, (Drawable) MapMarkerUtils.createCacheDotMarker(getResources(), cache)));
+            item.setMarker(MapMarkerUtils.getCacheDotMarker(getResources(), cache));
         } else {
             item.setMarker(MapMarkerUtils.getCacheMarker(getResources(), cache, null));
         }
@@ -1742,7 +1742,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private CachesOverlayItemImpl getWaypointItem(final Waypoint waypoint, final boolean isDotMode) {
         final CachesOverlayItemImpl item = mapItemFactory.getCachesOverlayItem(waypoint, waypoint.getWaypointType().applyDistanceRule());
         if (isDotMode) {
-            item.setMarker(new CacheMarker(0, (Drawable) MapMarkerUtils.createWaypointDotMarker(getResources(), waypoint)));
+            item.setMarker(MapMarkerUtils.getWaypointDotMarker(getResources(), waypoint));
         } else {
             item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint));
         }
