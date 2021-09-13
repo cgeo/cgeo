@@ -326,7 +326,6 @@
     <string name="menu_history">Cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scansiona geocode</string>
-    <string name="menu_lists_pocket_queries">Liste / pocket query</string>
     <string name="menu_scan_description">c:geo può eseguire una scansione di geocodes stampati oppure di immagini QR code. L\'applicazione necessaria non è installata. Desideri aprire Google Play per installarla?</string>
     <string name="menu_invert_order">Inverti ordine</string>
     <!-- main screen -->
@@ -1413,7 +1412,6 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista segnalibri</string>
     <string name="search_pocket_is_new">nuovo</string>
-    <string name="search_pocket_and_bookmark_loading">Caricamento di un elenco di Pocket Queries e liste di segnalibri</string>
     <!-- trackable -->
     <string name="trackable">Oggetto Trackable</string>
     <string name="trackable_details_loading">Caricamento dettagli Trackable…</string>
