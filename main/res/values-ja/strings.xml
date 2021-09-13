@@ -326,7 +326,6 @@
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
-    <string name="menu_lists_pocket_queries">リスト/ポケット・クエリ</string>
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
@@ -1398,7 +1397,6 @@
     <string name="search_pocket_title">ポケット・クエリ</string>
     <string name="search_bookmark_list">ブックマークリスト</string>
     <string name="search_pocket_is_new">新着</string>
-    <string name="search_pocket_and_bookmark_loading">ポケット・クエリのリストとブックマークリストの読み込み中</string>
     <!-- trackable -->
     <string name="trackable">トラッカブル</string>
     <string name="trackable_details_loading">トラッカブルの詳細を読み込み中…</string>
