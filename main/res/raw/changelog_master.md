@@ -5,3 +5,6 @@
 
 ### Cache lists
 - New: Complete rework of all cache icons
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
