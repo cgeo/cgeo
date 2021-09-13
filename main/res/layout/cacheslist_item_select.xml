@@ -8,17 +8,21 @@
     tools:context=".maps.mapsforge.v6.NewMap" >
 
     <!-- cache name and icon -->
+    <!-- first TextView gets the size of a cache marker as minimum height -->
 
     <TextView
         android:id="@+id/text"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:minHeight="36dp"
         android:layout_gravity="left"
         android:layout_marginRight="3dip"
+        android:layout_marginLeft="3dip"
         android:ellipsize="end"
         android:lines="1"
         android:paddingRight="3dip"
         android:paddingTop="5dip"
+        android:drawablePadding="3dip"
         android:scrollHorizontally="true"
         android:textIsSelectable="false"
         android:textSize="@dimen/textSize_listsPrimary"
@@ -35,7 +39,7 @@
         android:layout_alignParentBottom="true"
         android:layout_gravity="left"
         android:layout_marginRight="3dip"
-        android:layout_marginLeft="3dip"
+        android:layout_marginLeft="43dip"
         android:layout_marginTop="30dip"
         android:ellipsize="end"
         android:lines="1"

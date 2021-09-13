@@ -382,9 +382,9 @@ public abstract class AbstractCachesOverlay {
         final Geopoint target = cache.getCoords();
         final Bitmap marker;
         if (isDotMode) {
-            marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.createCacheDotMarker(CgeoApplication.getInstance().getResources(), cache));
+            marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheDotMarker(CgeoApplication.getInstance().getResources(), cache).getDrawable());
         } else {
-            marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache).getDrawable());
+            marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, null).getDrawable());
         }
         return new GeoitemLayer(cache.getGeoitemRef(), cache.applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
     }
@@ -394,7 +394,7 @@ public abstract class AbstractCachesOverlay {
         if (target != null && target.isValid()) {
             final Bitmap marker;
             if (isDotMode) {
-                marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.createWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint));
+                marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint).getDrawable());
             } else {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint).getDrawable());
             }

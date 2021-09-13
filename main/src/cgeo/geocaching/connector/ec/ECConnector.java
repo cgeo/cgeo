@@ -193,12 +193,39 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public int getCacheMapMarkerId(final boolean disabled) {
+    public int getCacheMapMarkerId() {
         final String icons = Settings.getECIconSet();
         if (StringUtils.equals(icons, "1")) {
-            return disabled ? R.drawable.marker_disabled_other : R.drawable.marker_other;
+            return R.drawable.marker_other;
         }
-        return disabled ? R.drawable.marker_disabled_oc : R.drawable.marker_oc;
+        return R.drawable.marker_oc;
+    }
+
+    @Override
+    public int getCacheMapMarkerBackgroundId() {
+        final String icons = Settings.getECIconSet();
+        if (StringUtils.equals(icons, "1")) {
+            return R.drawable.background_other;
+        }
+        return R.drawable.background_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerId() {
+        final String icons = Settings.getECIconSet();
+        if (StringUtils.equals(icons, "1")) {
+            return R.drawable.dot_marker_other;
+        }
+        return R.drawable.dot_marker_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        final String icons = Settings.getECIconSet();
+        if (StringUtils.equals(icons, "1")) {
+            return R.drawable.dot_background_other;
+        }
+        return R.drawable.dot_background_oc;
     }
 
     @Override

@@ -53,6 +53,7 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -305,7 +306,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             if (viewport != null) {
                 postZoomToViewport(viewport);
             }
-        } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
+        } else if (StringUtils.isNotEmpty(mapOptions.geocode) && mapOptions.mapMode != MapMode.COORDS) {
             final Viewport viewport = DataStore.getBounds(mapOptions.geocode, Settings.getZoomIncludingWaypoints());
 
             if (viewport != null) {
@@ -794,9 +795,13 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         if (mapOptions.searchResult != null) {
             this.caches = new CachesBundle(this, mapOptions.searchResult, this.mapView, this.mapHandlers);
         } else if (StringUtils.isNotEmpty(mapOptions.geocode)) {
-            this.caches = new CachesBundle(this, mapOptions.geocode, this.mapView, this.mapHandlers);
+            if (mapOptions.mapMode == MapMode.COORDS && mapOptions.coords != null) {
+                this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers, mapOptions.geocode);
+            } else {
+                this.caches = new CachesBundle(this, mapOptions.geocode, this.mapView, this.mapHandlers);
+            }
         } else if (mapOptions.coords != null) {
-            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers);
+            this.caches = new CachesBundle(this, mapOptions.coords, mapOptions.waypointType, this.mapView, this.mapHandlers, null);
         } else {
             caches = new CachesBundle(this, this.mapView, this.mapHandlers);
         }
@@ -1406,12 +1411,18 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                         if (cache != null && item.getType() == CoordinatesType.CACHE) {
                             tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
                         } else {
-                            tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
+                            Waypoint waypoint = null;
                             if (item.getType() == CoordinatesType.WAYPOINT) {
+                                waypoint = DataStore.loadWaypoint(item.getId());
                                 text.append(Formatter.SEPARATOR).append(shortgeocode);
                                 if (cache != null) {
                                     text.append(Formatter.SEPARATOR).append(cache.getName());
                                 }
+                            }
+                            if (waypoint != null) {
+                                tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, waypoint).getDrawable(), null, null, null);
+                            } else {
+                                tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
                             }
                         }
                     } else {

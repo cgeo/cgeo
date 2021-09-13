@@ -124,8 +124,23 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     }
 
     @Override
-    public int getCacheMapMarkerId(final boolean disabled) {
-        return disabled ? R.drawable.marker_disabled_oc : R.drawable.marker_oc;
+    public int getCacheMapMarkerId() {
+        return R.drawable.marker_oc;
+    }
+
+    @Override
+    public int getCacheMapMarkerBackgroundId() {
+        return R.drawable.background_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerId() {
+        return R.drawable.dot_marker_oc;
+    }
+
+    @Override
+    public int getCacheMapDotMarkerBackgroundId() {
+        return R.drawable.dot_background_oc;
     }
 
     @Override
