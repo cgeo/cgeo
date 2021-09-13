@@ -321,7 +321,6 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
-    <string name="menu_lists_pocket_queries">Listy / pocket queries</string>
     <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa online</string>
@@ -1360,7 +1359,6 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista zakładek</string>
     <string name="search_pocket_is_new">nowy</string>
-    <string name="search_pocket_and_bookmark_loading">Wczytywanie listy Pocket Queries i list zakładek</string>
     <!-- trackable -->
     <string name="trackable">Przedmiot podróżny</string>
     <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
