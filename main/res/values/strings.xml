@@ -827,7 +827,9 @@
     <string name="init_bigSmileysOnMap">Big icons</string>
     <string name="init_summary_bigSmileysOnMap">If enabled, symbols like the \'found smiley\' or the \'corrected coordinates\' marker will be shown enlarged on the map instead of the cache type icon (requires restart).</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
-    <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note</string>
+    <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note.</string>
+    <string name="init_prevent_cache_note_merge">Overwrite Personal Cache Note</string>
+    <string name="init_summary_prevent_cache_note_merge">If this setting is enabled c:geo will delete the locally stored note permanently and replace it by the personal note on the server. No merging will be done.</string>
     <string name="init_customtabs_as_browser">Use Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">External websites will be displayed without leaving c:geo (only possible if Chrome is installed)</string>
     <string name="init_save_log_img">Save Images</string>

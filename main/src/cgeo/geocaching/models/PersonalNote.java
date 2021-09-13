@@ -1,8 +1,12 @@
 package cgeo.geocaching.models;
 
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
+
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
+
 
 
 public class PersonalNote {
@@ -29,6 +33,10 @@ public class PersonalNote {
 
     public final void gatherMissingDataFrom(final PersonalNote other) {
         // don't use StringUtils.isBlank here. Otherwise we cannot recognize a note which was deleted on GC
+        if (Settings.isPersonalCacheNoteMergeDisabled()) {
+            Log.d("running with personal note merging disabled");
+            return;
+        }
         if (note == null) {
             note = other.note;
         } else if (other.note != null && fromProvider && !other.fromProvider) {
