@@ -1,13 +1,10 @@
- 
-### Mapa
-- Novo: Adicionado Mapy.cz como fonte de mapa online
-- Novo: Rota individual - Permite definir um novo início e inverter a rota
-- Novo: Agora podem ser feitas várias transferências de mapas offline de uma só vez
+### Map
+- New: Complete rework of all cache icons
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
 
-### Detalhes da cache
-- Correcção: Detecta se o utilizador actual é o proprietário de Adventure Labs
+### Cache lists
+- New: Complete rework of all cache icons
 
-### Outro
-- Novo: Permitir o envio de caches para a lista de marcadores (disponível apenas para membros premium)
-- Novo: Preenche automaticamente o campo 'pesquisar por código GC' se o conteúdo na área de transferência puder ser interpretado como um código GC válido
-- Alteração: Ocultar dados confidenciais em "Definições de visualização"
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
