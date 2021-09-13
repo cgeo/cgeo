@@ -74,6 +74,7 @@
     <string translatable="false" name="pref_friendlogswanted">friendlogswanted</string>
     <string translatable="false" name="pref_opendetailslastpage">opendetailslastpage</string>
     <string translatable="false" name="pref_global_wp_extraction_disable">globalWpExtractionDisable</string>
+    <string translatable="false" name="pref_personal_cache_note_merge_disable">personalCacheNoteMergeDisable</string>
     <string translatable="false" name="pref_excludeWpOriginal">excludeWpOriginal</string>
     <string translatable="false" name="pref_excludeWpParking">excludeWpParking</string>
     <string translatable="false" name="pref_excludeWpVisited">excludeWpVisited</string>

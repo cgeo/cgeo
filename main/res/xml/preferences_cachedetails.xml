@@ -31,6 +31,12 @@
         app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="false"
+        android:key="@string/pref_personal_cache_note_merge_disable"
+        android:title="@string/init_prevent_cache_note_merge"
+        android:summary="@string/init_summary_prevent_cache_note_merge"
+        app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="false"
         android:key="@string/pref_customtabs_as_browser"
         android:title="@string/init_customtabs_as_browser"
         android:summary="@string/init_summary_customtabs_as_browser"
