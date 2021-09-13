@@ -455,13 +455,13 @@ public final class MapMarkerUtils {
      * @param type  CacheType to get the icon for
      * @return  Layered Drawable
      */
-    public static Drawable getCacheTypeMarker(final Resources res, final CacheType type) {
+    public static Drawable getCacheTypeMarker(final Resources res, final CacheType type, final boolean isDisabled) {
         final int hashcode = new HashCodeBuilder().append(type).toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createCacheTypeMarker(res, type));
+                marker = new CacheMarker(hashcode, createCacheTypeMarker(res, type, isDisabled));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
@@ -475,10 +475,10 @@ public final class MapMarkerUtils {
      * @param type  CacheType to get the icon for
      * @return  Layered Drawable
      */
-    private static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type) {
+    private static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type, final boolean isDisabled) {
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
-        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, type.typeColor, null));
+        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, isDisabled ? R.color.cacheType_disabled : type.typeColor, null));
         insetsBuilder.withInset(new InsetBuilder(type.markerId));
         return buildLayerDrawable(insetsBuilder, 2, 0);
     }
