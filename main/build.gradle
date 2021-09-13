@@ -149,7 +149,6 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
-            jni.srcDirs = []
         }
         // local unit tests, which can be executed without a device
         test {
