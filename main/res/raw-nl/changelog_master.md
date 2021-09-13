@@ -1,13 +1,10 @@
- 
-### Kaart
-- Nieuw: Toegevoegd Mapy.cz als online kaartbron
-- Nieuw: Individuele route: Toestaan een nieuw begin in te stellen en de route om te keren
-- Nieuw: Meerdere offline kaart downloads kunnen nu in één keer worden geactiveerd
+### Map
+- New: Complete rework of all cache icons
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
 
-### Cache details
-- Oplossing: Detecteren of de huidige gebruiker eigenaar is van lab avonturen
+### Cache lists
+- New: Complete rework of all cache icons
 
-### Overig
-- Nieuw: Sta het uploaden van caches naar de lijst met favorieten toe (alleen beschikbaar voor GC premium leden)
-- Nieuw: vul automatisch 'zoeken op geocode' in als klembord inhoud kan worden verwerkt als geldige geocode
-- Verandering: Verberg gevoelige gegevens in "weergave instellingen"
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
