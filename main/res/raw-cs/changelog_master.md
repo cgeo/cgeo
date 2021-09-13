@@ -1,13 +1,10 @@
- 
-### Mapa
-- Novinka: Přidány Mapy.cz jako online zdroj map
-- Novinka: Individuální trasa: Povoluje nastavení nového začátku a otočení směru trasy
-- Novinka: Nyní lze spustit více stahování offline map najednou
+### Map
+- New: Complete rework of all cache icons
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
 
-### Detaily kešky
-- Oprava: Zjištění, zda je aktuální uživatel vlastníkem Adventure Lab kešek
+### Cache lists
+- New: Complete rework of all cache icons
 
-### Ostatní
-- Novinka: Povoleno nahrávání kešek do záložek (pouze pro prémiové členy GC)
-- Novinka: Automatické předvyplnění hledání podle geokódu, pokud je obsah schránky rozpoznán jako platný geokód
-- Změna: Skrytí citlivých dat v "nastavení zobrazení"
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
