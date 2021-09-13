@@ -179,7 +179,7 @@ public final class MapMarkerUtils {
         // center-left/center-right: list markers
         addListMarkers(res, insetsBuilder, assignedMarkers);
 
-        return buildLayerDrawable(insetsBuilder, 11, 10);
+        return buildLayerDrawable(insetsBuilder, 15, 13);
     }
 
     /**
@@ -263,7 +263,7 @@ public final class MapMarkerUtils {
 
         addListMarkers(res, insetsBuilder, assignedMarkers);
 
-        return buildLayerDrawable(insetsBuilder, 2, 2);
+        return buildLayerDrawable(insetsBuilder, 7, 7);
     }
 
     /**
@@ -367,7 +367,7 @@ public final class MapMarkerUtils {
         if (dotIcon != -1) {
             insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
         }
-        return buildLayerDrawable(insetsBuilder, 2, 2);
+        return buildLayerDrawable(insetsBuilder, 3, 3);
     }
 
     /**
@@ -445,7 +445,7 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(dotMarker));
         insetsBuilder.withInset(new InsetBuilder(dotBackground, Gravity.CENTER));
         insetsBuilder.withInset(new InsetBuilder(dotIcon, Gravity.CENTER));
-        return buildLayerDrawable(insetsBuilder, 2, 2);
+        return buildLayerDrawable(insetsBuilder, 3, 3);
     }
 
     /**
@@ -479,8 +479,9 @@ public final class MapMarkerUtils {
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null));
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, isDisabled ? R.color.cacheType_disabled : type.typeColor, null));
-        insetsBuilder.withInset(new InsetBuilder(type.markerId));
-        return buildLayerDrawable(insetsBuilder, 2, 0);
+        insetsBuilder.withInset(new InsetBuilder(background));
+        insetsBuilder.withInset(new InsetBuilder(type.markerId, Gravity.CENTER));
+        return buildLayerDrawable(insetsBuilder, 2, 2);
     }
 
     /**
