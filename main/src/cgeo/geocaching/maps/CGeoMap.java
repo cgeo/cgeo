@@ -70,7 +70,6 @@ import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ProgressDialog;
 import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;

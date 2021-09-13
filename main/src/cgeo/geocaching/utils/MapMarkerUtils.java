@@ -434,10 +434,8 @@ public final class MapMarkerUtils {
         final String geocode = waypoint.getGeocode();
         if (StringUtils.isNotBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            if (null != cache) {
-                if (cache.isDisabled() || cache.isArchived()) {
-                    DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
-                }
+            if (cache != null && (cache.isDisabled() || cache.isArchived())) {
+                DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
         }
 
