@@ -1,10 +1,10 @@
-### Map
-- New: Complete rework of all cache icons
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
+### Mapa
+- Novinka: Dokončeno přepracování všech ikon kešek
+- Oprava: Zobrazí kruhy vzdálenosti pro uživatelem definované kešky (pokud jsou kruhy povoleny)
+- Oprava: Zviditelněn název kešky ve vyskakovacím okně keška/trasový bod
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Seznamy kešek
+- Novinka: Dokončeno přepracování všech ikon kešek
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+### Ostatní
+- Změna: Oddělené seznamy záložek a pocket queries (pouze pro geocaching.com PM)
