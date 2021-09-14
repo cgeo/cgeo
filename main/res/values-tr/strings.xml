@@ -326,6 +326,8 @@
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
+    <string name="menu_lists_pocket_queries">Sorgulama kayıtları</string>
+    <string name="menu_lists_bookmarklists">Yer imi listeleri</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
     <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
@@ -1418,6 +1420,7 @@
     <string name="search_pocket_title">Sorgulama Kaydı</string>
     <string name="search_bookmark_list">Yer imi listesi</string>
     <string name="search_pocket_is_new">yeni</string>
+    <string name="search_pocket_loading">Sorgulama kayırları yükleniyor</string>
     <string name="search_bookmark_loading">Yer imi listeleri yükleniyor</string>
     <string name="search_bookmark_select">Yer imi listesini seç</string>
     <string name="search_bookmark_new">Yeni yer imi listesi oluştur</string>
