@@ -326,6 +326,8 @@
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Bladwijzerlijsten</string>
     <string name="menu_scan_description">c:geo kan geocodes scannen die als QR code weergegeven zijn. De noodzakelijke app is niet geïnstalleerd. Wil je Google Play openen om de app te installeren?</string>
     <string name="menu_invert_order">Volgorde omkeren</string>
     <!-- main screen -->
@@ -1419,6 +1421,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
+    <string name="search_pocket_loading">Pocket queries laden</string>
     <string name="search_bookmark_loading">Bladwijzerlijsten laden</string>
     <string name="search_bookmark_select">Selecteer bladwijzerlijsten</string>
     <string name="search_bookmark_new">Nieuwe bladwijzerlijst aanmaken</string>
