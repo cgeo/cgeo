@@ -1,10 +1,10 @@
-### Map
-- New: Complete rework of all cache icons
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
+### Kaart
+- Nieuw: Complete herziening van alle cache pictogrammen
+- Oplossing: Toon afstandscirkels voor door de gebruiker gedefinieerde caches (als cirkels zijn ingeschakeld)
+- Oplossing: Maak de titel van de cache zichtbaarder in de cache / waypoint popup
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Cache lijsten
+- Nieuw: Complete herziening van alle cache pictogrammen
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+### Overig
+- Wijziging: Gescheiden bladwijzerlijsten en pocket queries (alleen geocaching.com PM)
