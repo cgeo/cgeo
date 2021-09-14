@@ -326,6 +326,8 @@
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Seznamy záložek</string>
     <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
@@ -1441,6 +1443,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
     <string name="search_pocket_is_new">nový</string>
+    <string name="search_pocket_loading">Načítání pocket queries</string>
     <string name="search_bookmark_loading">Načítání seznamů záložek</string>
     <string name="search_bookmark_select">Vybrat seznamy záložek</string>
     <string name="search_bookmark_new">Vytvořit nový seznam záložek</string>
