@@ -1,10 +1,10 @@
-### Map
-- New: Complete rework of all cache icons
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
+### Χάρτης
+- Νέα: Πλήρης επανεργασία όλων των εικονιδίων cache
+- Fix: Εμφάνιση κύκλων απόστασης για κρύπτες που καθορίζονται από το χρήστη (αν οι κύκλοι είναι ενεργοποιημένοι)
+- Διόρθωση: Κάντε τον τίτλο της κρύπτης πιο ορατό στην θέση / αναδυόμενο σημείο
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Λίστες κρυπτών
+- Νέα: Πλήρης επανεργασία όλων των εικονιδίων cache
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+### Άλλο
+- Αλλαγή: Διαχωρισμένες λίστες σελιδοδεικτών και pocket queries (geocaching.com μόνο μμ)
