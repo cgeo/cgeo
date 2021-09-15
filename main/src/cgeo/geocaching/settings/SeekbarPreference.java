@@ -145,7 +145,7 @@ public class SeekbarPreference extends Preference {
 
     @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
-
+        super.onBindViewHolder(holder);
         // get views
         final SeekBar seekBar = (SeekBar) holder.findViewById(R.id.preference_seekbar);
         valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);

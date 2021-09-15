@@ -10,7 +10,7 @@
             android:key="@string/pref_connectorGCActive"
             android:title="@string/settings_service_activate"
             app:text="@string/settings_gc_legal_note"
-            app:title="@string/settings_title_gc"
+            app:popupTitle="@string/settings_title_gc"
             app:url="@string/settings_gc_legal_note_url"
             app:urlButton="@string/settings_goto_url_button" />
         <Preference

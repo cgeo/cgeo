@@ -1,6 +1,8 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.MapProviderFactory;
+import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.settings.ColorpickerPreference;
 import cgeo.geocaching.settings.DialogPrefFragCompat;
 import cgeo.geocaching.settings.TemplateTextPreference;
@@ -8,13 +10,19 @@ import cgeo.geocaching.settings.TemplateTextPreference;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
+import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import java.util.Collection;
+
 public class PreferenceMapFragment extends PreferenceFragmentCompat {
+    private ListPreference pref_map_sources;
+
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences_map, rootKey);
+        pref_map_sources = (ListPreference) findPreference(getString(R.string.pref_mapsource));
     }
 
     @Override
@@ -32,6 +40,24 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
         } else {
             super.onDisplayPreferenceDialog(preference);
         }
+    }
+
+    /**
+     * Fill the choice list for map sources.
+     */
+    private void initMapSourcePreference() {
+        final Collection<MapSource> mapSources = MapProviderFactory.getMapSources();
+        final CharSequence[] entries = new CharSequence[mapSources.size()];
+        final CharSequence[] values = new CharSequence[mapSources.size()];
+        int idx = 0;
+        for (MapSource mapSource : MapProviderFactory.getMapSources()) {
+            entries[idx] = mapSource.getName();
+            values[idx] = mapSource.getId();
+            idx++;
+        }
+        pref_map_sources.setEntries(entries);
+        pref_map_sources.setEntryValues(values);
+        //pref_map_sources.setOnPreferenceChangeListener(getC);
     }
 
 }

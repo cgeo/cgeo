@@ -41,7 +41,7 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
         // Array need to be ordered. See: http://stackoverflow.com/a/19092511/944936
         final TypedArray types = context.obtainStyledAttributes(
             attrs,
-            new int[]{R.attr.text, R.attr.title, R.attr.url, R.attr.urlButton},
+            new int[]{R.attr.text, R.attr.popupTitle, R.attr.url, R.attr.urlButton},
             defStyle, 0);
 
         text = types.getString(0);
@@ -54,16 +54,10 @@ public class CheckBoxWithPopupPreference extends CheckBoxPreference {
 
     @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
-
-        if (baseOnPrefChangeListener == null) {
-            baseOnPrefChangeListener = getOnPreferenceChangeListener();
-        }
+        super.onBindViewHolder(holder);
 
         // show dialog when checkbox enabled
         setOnPreferenceChangeListener((preference, newValue) -> {
-            if (baseOnPrefChangeListener != null) {
-                baseOnPrefChangeListener.onPreferenceChange(preference, newValue);
-            }
             if (!(Boolean) newValue) {
                 return true;
             }
