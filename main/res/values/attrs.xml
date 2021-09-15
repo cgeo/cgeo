@@ -45,6 +45,7 @@
 
     <!-- attributes for custom made preferences -->
     <attr name="text" format="string" />
+    <attr name="popupTitle" format="string" />
     <attr name="url" format="string" />
     <attr name="urlButton" format="string" />
     <attr name="connector" format="string" />

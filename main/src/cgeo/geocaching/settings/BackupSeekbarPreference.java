@@ -44,6 +44,7 @@ public class BackupSeekbarPreference extends SeekbarPreference {
 
     @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
         valueView = (TextView) holder.findViewById(R.id.preference_seekbar_value_view);
         valueView.setSingleLine(false);
         final LayoutParams params = (LayoutParams) valueView.getLayoutParams();

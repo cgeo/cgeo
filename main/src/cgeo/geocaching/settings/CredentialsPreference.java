@@ -98,6 +98,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
+        super.onBindViewHolder(holder);
         addInfoIcon(holder);
     }
 
