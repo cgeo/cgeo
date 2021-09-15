@@ -1,10 +1,10 @@
-### Map
-- New: Complete rework of all cache icons
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
+### Carte
+- Nouveau : Refonte complète des icônes de cache
+- Correction : Afficher les cercles de distance pour les caches personnalisées (si l'affichage est activé)
+- Correction : Le titre de la cache a plus de visibilité dans la popup de cache ou point de passage
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Listes de caches
+- Nouveau : Refonte complète des icônes de cache
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+### Divers
+- Changement : Les listes de favoris et pocket queries sont séparées (Membre premium Géocaching uniquement)
