@@ -283,6 +283,7 @@ public final class MapMarkerUtils {
     public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
         final int hashcode = new HashCodeBuilder()
             .append(cache.getType().id)
+            .append(cache.isFound())
             .append(cache.isDisabled())
             .append(cache.isArchived())
             .append(cache.hasLogOffline())
