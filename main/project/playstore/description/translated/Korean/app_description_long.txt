@@ -2,7 +2,7 @@ c:geo는 geocaching.com의 오픈 소스이며 모든 기능을 갖춘 항상 �
 
 주요 특징:
 - 실황 지도에서 캐시 보기
-- 구글 지도 또는 OpenStreetMap 사용
+- Use Google Maps or OpenStreetMap
 -다양한 기준으로 캐시 검색
 -찾기를 온라인 또는 오프라인으로 로그하기
 - 전기기구에 캐시 정보 저장
