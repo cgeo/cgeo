@@ -213,7 +213,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         @Override
         public void setContent() {
             final Activity activity = getActivity();
-            if (activity == null) {
+            if (activity == null || binding == null) {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
