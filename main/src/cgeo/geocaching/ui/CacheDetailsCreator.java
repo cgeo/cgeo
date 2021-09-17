@@ -15,9 +15,12 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -226,5 +229,68 @@ public final class CacheDetailsCreator {
         final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString).right;
         view.setId(R.id.date);
         return view;
+    }
+
+    public void addLatestLogs(final Geocache cache) {
+        List<LogEntry> logs = cache.getLogs();
+        if (logs.size() == 0) { return; }
+
+        Context context = parentView.getContext();
+
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+        final TextView nameView = layout.findViewById(R.id.name);
+        nameView.setText(res.getString(R.string.cache_latest_logs));
+        final LinearLayout markers = layout.findViewById(R.id.linearlayout);
+
+        int smileySize = 48;
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
+        lp.setMargins(0, 0, 5, 0);
+
+        int i = 0;
+        while (i < logs.size() && markers.getChildCount() < 8) {
+            int marker = -1;
+            LogType lt = logs.get(i++).logType;
+            switch (lt) {
+                case FOUND_IT:
+                case ATTENDED:
+                case WEBCAM_PHOTO_TAKEN:
+                    marker = R.drawable.marker_found;
+                    break;
+                case DIDNT_FIND_IT:
+                    marker = R.drawable.marker_not_found_offline;
+                    break;
+                case NOTE:
+                    marker = R.drawable.marker_note;
+                    break;
+                case NEEDS_ARCHIVE:
+                case NEEDS_MAINTENANCE:
+                    marker = R.drawable.marker_maintenance;
+                    break;
+                case TEMP_DISABLE_LISTING:
+                case ARCHIVE:
+                    marker = R.drawable.marker_archive;
+                    break;
+                case WILL_ATTEND:
+                    marker = R.drawable.marker_calendar;
+                    break;
+                case OWNER_MAINTENANCE:
+                case ENABLE_LISTING:
+                    marker = R.drawable.marker_owner_maintenance;
+                    break;
+                case UPDATE_COORDINATES:
+                    marker = R.drawable.marker_usermodifiedcoords;
+                    break;
+            }
+
+            if (marker != -1) {
+                ImageView logMarker = new ImageView(context);
+                logMarker.setLayoutParams(lp);
+                logMarker.setBackgroundResource(marker);
+                markers.addView(logMarker);
+            }
+        }
+        if (markers.getChildCount() > 0) {
+            parentView.addView(layout);
+        }
     }
 }

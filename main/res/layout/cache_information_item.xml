@@ -67,4 +67,12 @@
         tools:text="additional text"
         tools:visibility="visible"/>
 
+    <LinearLayout
+        android:id="@+id/linearlayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/name"
+        android:gravity="bottom"
+        android:orientation="horizontal" />
+
 </RelativeLayout>

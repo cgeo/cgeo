@@ -153,6 +153,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             }
         }
 
+        // Latest logs
+        details.addLatestLogs(cache);
+
         // more details
         final View view = getView();
         assert view != null;
