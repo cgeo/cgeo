@@ -2,7 +2,7 @@ c:geo is een open source, feature-rijk, altijd klaar-om-te-gebruiken cliënt voo
 
 Belangrijkste functies:
 - Bekijk caches op een Live-map
-- Gebruik Google Maps of OpenStreetMaps
+- Use Google Maps or OpenStreetMap
 - Zoek caches op basis van verschillende criteria
 - Log je vondsten online of offline
 - Sla de cache-gegevens op je apparaat op
