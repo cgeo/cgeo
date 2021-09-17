@@ -1,16 +1,16 @@
 ### Kartta
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Uusi: Lisätty Mapy.cz -onlinekarttalähde
+- Uusi: Yksittäinen reitti: Salli uuden aloituspisteen määritys ja reitin kääntäminen
+- Uusi: Useita offline-karttoja voidaan nyt ladata kerralla
 
 ### Kätkön tiedot
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
+- Korjaa: Tunnista jos nykyinen käyttäjä on Adventure Labin omistaja
+- Uusi: Lisätty joitakin emojeita käytettäväksi kätkön kuvakkeena
+- Uusi: Tuki kätköjen lisäämiselle kirjanmerkkiluetteloihin (vain PM)
 
 ### Muut
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Uusi: Salli kätköjen lataaminen kirjanmerkkiluetteloon (saatavilla vain GC Premium-jäsenille)
+- Uusi: automaattisesti esitäytetään 'geokoodauksen haku', jos leikepöydän sisältö voidaan jäsentää kelvolliseksi geokoodaukseksi
+- Korjaa: Joitakin korjauksia käyttöliittymään ja suodatukseen
+- Muutos: Piilota arkaluontoiset "näytä asetukset" -kohdassa
+- Muutos: Kätkön etuliite Adventure Labeille on nyt muuttunut "AL":iksi "LC"stä (joka on jo käytössä Extremcaching:ssa)
