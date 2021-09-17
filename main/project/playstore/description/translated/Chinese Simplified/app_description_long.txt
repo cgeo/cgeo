@@ -2,7 +2,7 @@ c:geo是geocaching.com的一个非官方客户端，它不仅开源、全能、�
 
 主要功能：
 - 在实时地图上查看藏点
-- 支持Google Maps或OpenStreetMaps
+- Use Google Maps or OpenStreetMap
 - 使用各种条件搜索藏点
 - 在线或离线记录你找到的藏点
 - 将藏点信息保存到设备上
