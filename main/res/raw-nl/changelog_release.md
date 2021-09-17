@@ -1,16 +1,16 @@
 ### Kaart
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Nieuw: Toegevoegd Mapy.cz als online kaartbron
+- Nieuw: Individuele route: Toestaan een nieuw begin in te stellen en de route om te keren
+- Nieuw: Meerdere offline kaart downloads kunnen nu in één keer worden geactiveerd
 
 ### Cache details
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
+- Oplossing: Detecteren of de huidige gebruiker eigenaar is van lab avonturen
+- Nieuw: Meer emoijis toegevoegd voor gebruik als individueel cache-pictogram
+- Nieuw: Ondersteuning bij het toevoegen van caches aan bladwijzerlijsten (alleen PM)
 
 ### Overig
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Nieuw: Sta het uploaden van caches naar de lijst met favorieten toe (alleen beschikbaar voor GC premium leden)
+- Nieuw: vul automatisch 'zoeken op geocode' in als klembord inhoud kan worden verwerkt als geldige geocode
+- Oplossing: Enkele oplossingen voor UI en voor het filteren
+- Wijziging: Verberg gevoelige gegevens in "weergave instellingen"
+- Wijziging: Cache prefix voor avontuurlijke labs is nu "AL" in plaats van "LC" (deze is al in gebruik voor Extremcaching)

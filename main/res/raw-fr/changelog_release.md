@@ -1,16 +1,16 @@
 ### Carte
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Nouveau : Ajout de Mapy.cz comme source de carte en ligne
+- Nouveau : Itinéraire personnel : permet de définir un nouveau départ et d'inverser la route
+- Nouveau : Il est maintenant possible de lancer le téléchargement de plusieurs cartes hors-ligne en une seule fois
 
 ### Détails de la cache
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
+- Correction : Détection de l'utilisateur connecté lorsqu'il est propriétaire de lab caches
+- Nouveau : Ajout de quelques émojis supplémentaires utilisable comme icône de cache
+- Nouveau : Prise en charge de l'ajout de caches aux listes de favoris (Membres premium uniquement)
 
 ### Divers
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Nouveau : Prise en charge de l'ajout de caches aux listes de favoris (Membres premium uniquement)
+- Nouveau : Préremplir automatiquement "Rechercher par géocode" lorsque le presse-papiers contient un géocode valide
+- Correction : Corrections de l'interface utilisateur et des filtres
+- Modifié : Masquer les données sensibles dans "Paramètres d'affichage"
+- Changement : Le préfixe de cache pour les labs cache est maintenant "AL" au lieu de "LC" (qui est déjà utilisé pour Extremcaching)

@@ -1,6 +1,6 @@
 ### Harita
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
+- Yeni: Mapy.cz çevrimiçi harita kaynağı olarak eklendi
+- Yeni: Özgün rota: Rotalara yeni başlangıç ekleme ve tersine çevirme özelliği
 - New: Multiple offline map downloads can now be triggered at once
 
 ### Geocache Ayrıntıları
@@ -10,7 +10,7 @@
 
 ### Diğer
 - New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+- Yeni: Kopyalama pananosundan bir Geokod ayrıştırılabiliyorsa 'Geokoduna göre ara' seçeneği otomatik olarak doldurulur
 - Fix: Some fixes for UI and for filtering
 - Change: Hide sensitive data in "view settings"
 - Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)

@@ -1,16 +1,16 @@
 ### Mapa
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Novinka: Přidány Mapy.cz jako zdroj online map
+- Novinka: Individuální trasa: Povoluje nastavení nového začátku a otočení směru trasy
+- Novinka: Nyní můžete stahovat několik offline map současně
 
 ### Detaily kešky
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
+- Oprava: Zjištění, zda je aktuální uživatel vlastníkem Adventure Lab kešek
+- Novinka: Přidány nějaké další emoji k použití jako vlastní ikony kešky
+- Novinka: Podpora přidávání kešek do seznamu záložek (pouze PM)
 
 ### Ostatní
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Novinka: Povoleno nahrávání kešek do seznamu záložek (pouze pro prémiové členy GC)
+- Novinka: Automaticky předvyplní hledání podle geokódu, pokud je obsah schránky rozpoznán jako platný geokód
+- Oprava: Různé opravy uživatelského rozhraní a filtrování
+- Změna: Skrytí citlivých dat v "nastavení zobrazení"
+- Změna: Předpona Adventure Lab kešek je nyní "AL" namísto "LC" (která se již používá pro Extremcaching)
