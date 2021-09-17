@@ -2,7 +2,7 @@ c: geo és un client no oficial de codi obert, amb funcions completes per geocac
 
 Característiques principals:
 - Veure catxés en un mapa en viu
-- Utilitzeu Google Maps o OpenStreetMaps
+- Use Google Maps or OpenStreetMap
 - Cerqueu catxés segons diversos criteris
 - Registreu les vostres troballes en línia o fora de línia
 - Emmagatzemeu informació de catxés al dispositiu
