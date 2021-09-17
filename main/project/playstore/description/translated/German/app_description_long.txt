@@ -2,7 +2,7 @@ c:geo ist eine umfangreiche, jederzeit einsatzbereite open-source Geocaching-Anw
 
 Hauptmerkmale:
 - Suche nach Caches auf einer Live-Karte
-- Karten von Google Maps oder OpenStreetMap
+- Use Google Maps or OpenStreetMap
 - Suche nach Caches anhand diverser Kriterien
 - Logge deine Funde online oder offline
 - Speichere Caches auf deinem Gerät
