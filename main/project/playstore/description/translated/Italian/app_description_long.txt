@@ -2,7 +2,7 @@ c:geo è un client non ufficiale per geocaching.com open source, pienamente funz
 
 Caratteristiche principali:
 - Visualizza le cache su una Mappa Live
-- Usa Google Maps o OpenStreetMaps
+- Use Google Maps or OpenStreetMap
 - Cerca cache secondo vari criteri
 - Registra i tuoi ritrovamenti online o offline
 - Memorizza informazioni sul cache nel tuo dispositivo
