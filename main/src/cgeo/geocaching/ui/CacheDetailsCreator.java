@@ -232,9 +232,6 @@ public final class CacheDetailsCreator {
     }
 
     public void addLatestLogs(final Geocache cache) {
-        List<LogEntry> logs = cache.getLogs();
-        if (logs.size() == 0) { return; }
-
         Context context = parentView.getContext();
 
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
@@ -246,6 +243,7 @@ public final class CacheDetailsCreator {
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
         lp.setMargins(0, 0, 5, 0);
 
+        List<LogEntry> logs = cache.getLogs();
         int i = 0;
         while (i < logs.size() && markers.getChildCount() < 8) {
             int marker = -1;
