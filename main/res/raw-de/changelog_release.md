@@ -1,15 +1,15 @@
 ### Karte
 - Neu: Mapy.cz als Online-Kartenquelle hinzugefügt
 - Neu: Individuelle Route: Setzen eines neuen Startpunkts und Umdrehen der Route ergänzt
-- New: Multiple offline map downloads can now be triggered at once
+- Neu: Mehrere Offline-Kartendownloads können jetzt gleichzeitig ausgelöst werden
 
 ### Cache-Details
 - Korrektur: Erkennen, ob der aktuelle Benutzer Eigentümer des Lab Adventures ist
 - Neu: Weitere Emoijis zur Verwendung als individuelles Cache-Symbol hinzugefügt
-- New: Support adding caches to bookmark lists (PM only)
+- Neu: Unterstützung des Hinzufügens von Caches zu Lesezeichenlisten (nur PM)
 
 ### Sonstiges
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
+- Neu: Erlaube das Hinzufügen von Caches zu Lesezeichenlisten (nur verfügbar für GC-Premium-Mitglieder)
 - Neu: "Suche nach Geocode" übernimmt automatisch den Geocode aus Zwischenablage
 - Korrektur: Einige Korrekturen für Benutzeroberfläche und Filter
 - Änderung: Vertrauliche Daten in "Einstellungen anzeigen" ausblenden
