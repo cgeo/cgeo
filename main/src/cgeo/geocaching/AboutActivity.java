@@ -291,7 +291,8 @@ public class AboutActivity extends TabbedViewPagerActivity {
         public void setContent() {
             binding.getRoot().setVisibility(View.VISIBLE);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
-            binding.licenseText.setText(getRawResourceString(R.raw.license));
+            final Markwon markwon = Markwon.create(getActivity());
+            markwon.setMarkdown(binding.licenseText, getRawResourceString(R.raw.license));
         }
 
         private String getRawResourceString(@SuppressWarnings("SameParameterValue") @RawRes final int resourceId) {
