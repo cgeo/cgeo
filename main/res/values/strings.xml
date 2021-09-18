@@ -410,7 +410,7 @@
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
     <string name="caches_delete_events">Delete past events</string>
-    <string name="caches_upload_bookmarklist">Upload to bookmark list</string>
+    <string name="caches_upload_bookmarklist">Add to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
