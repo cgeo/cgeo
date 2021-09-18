@@ -1,16 +1,16 @@
 ### Mappa
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Nuovo: Aggiunto Mapy.cz come fonte della mappa online
+- Nuovo: Percorso individuale: Consente di impostare un nuovo inizio e di invertire il percorso
+- Nuovo: Download di mappe offline multiple attivabili contemporaneamente
 
 ### Dettagli del cache
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
+- Corretto: Rileva se l'utente attuale è proprietario dell'Adventure Lab
+- Nuovo: Aggiunti alcuni altri emoji da usare come icona personale del cache
+- Nuovo: Supporto per l'aggiunta di cache ai segnalibri (solo per Membri Premium)
 
 ### Altro
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Nuovo: Upload di cache nell'elenco di segnalibri (disponibile soltanto per i Membri Premium)
+- Nuovo: Compilazione automatica del campo 'cerca per geocode' se gli appunti contengono un geocode valido
+- Corrtto: alcune correzioni nell'interfaccia utente e il filtro
+- Modifica: Possibilità di nascondere i dati sensibili in "visualizza impostazioni"
+- Cambio: Il prefisso del cache per gli Adventure Lab è ora "AL" invece di "LC" (che è già in uso per Extremcaching)
