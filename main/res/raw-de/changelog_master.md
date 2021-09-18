@@ -1,10 +1,10 @@
-### Map
-- New: Complete rework of all cache icons
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
+### Karte
+- Neu: Komplette Überarbeitung aller Cache-Symbole
+- Korrektur: Zeige Entfernungskreise für benutzerdefinierte Caches (wenn Kreise aktiviert sind)
+- Korrektur: Cache-Titel im Cache / Wegpunkt-Popup sichtbarer
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Cachelisten
+- Neu: Komplette Überarbeitung aller Cache-Symbole
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+### Sonstiges
+- Änderung: Lesezeichenlisten und Pocket-Queries getrennt (nur geocaching.com PM)
