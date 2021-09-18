@@ -326,6 +326,8 @@
     <string name="menu_history">Cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scansiona geocode</string>
+    <string name="menu_lists_pocket_queries">Query tascabili</string>
+    <string name="menu_lists_bookmarklists">Elenchi di segnalibri</string>
     <string name="menu_scan_description">c:geo può eseguire una scansione di geocodes stampati oppure di immagini QR code. L\'applicazione necessaria non è installata. Desideri aprire Google Play per installarla?</string>
     <string name="menu_invert_order">Inverti ordine</string>
     <!-- main screen -->
@@ -382,6 +384,7 @@
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
+    <string name="caches_upload_bookmarklist">Carica sulla lista dei segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
@@ -460,6 +463,7 @@
     <string name="cache_filter_location">Posizione</string>
     <string name="cache_filter_stored_lists">Elenchi Archiviati</string>
     <string name="cache_filter_origin">Origine</string>
+    <string name="cache_filter_stored_since">Ultimo aggiornamento dei dettagli</string>
     <string name="cache_filtergroup_basic">Base</string>
     <string name="cache_filtergroup_details">Dettagli</string>
     <string name="cache_filtergroup_userspecific">Specifico dell\'utente</string>
@@ -480,6 +484,8 @@
     <string name="cache_filter_storage_clear_button">Azzera</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
     <string name="cache_filter_storage_select_title">Seleziona filtro</string>
+    <string name="cache_filter_storage_delete_title">Elimina filtro</string>
+    <string name="cache_filter_storage_delete_message">Vuoi davvero eliminare questa configurazione del filtro?</string>
     <string name="cache_filter_storage_select_clear_title">Seleziona filtro o azzera filtro corrente</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Nessun filtro è ancora stato memorizzato.</string>
     <string name="cache_filter_storage_save_title">Salva filtro con nome</string>
@@ -491,6 +497,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Non è Presente</string>
     <string name="cache_filter_stringfilter_type_is_present">È Presente</string>
     <string name="cache_filter_stringfilter_type_contains">Contiene</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Non contiene</string>
     <string name="cache_filter_stringfilter_type_starts_with">Inizia con</string>
     <string name="cache_filter_stringfilter_type_ends_with">Finisce con</string>
     <string name="cache_filter_stringfilter_type_pattern">Pattern</string>
@@ -516,6 +523,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Contiene un Trackable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Ha Il Voto Proprio</string>
     <string name="cache_filter_status_select_label_has_offline_log">Ha un Log Offline</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Ha un Log \"Trovato\" Offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistery Risolto</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro riguarderà solo i cache mistery.\n\n Un mistery è considerato \'risolto\' se ha cambiato coordinate o sono state inserite le coordinate di un waypoint finale.</string>
     <string name="cache_filter_status_active">Attivo</string>
@@ -1347,6 +1355,7 @@
     <string name="map_showc_found">Trovati</string>
     <string name="map_showc_disabled">Disabilitato</string>
     <string name="map_showc_archived">Archiviato</string>
+    <string name="map_showc_found_offline">Trovato (offline)</string>
     <string name="map_showwp_original">Originale</string>
     <string name="map_showwp_parking">Parcheggio</string>
     <string name="map_showwp_visited">Visitato</string>
@@ -1412,6 +1421,13 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista segnalibri</string>
     <string name="search_pocket_is_new">nuovo</string>
+    <string name="search_pocket_loading">Caricamento delle query tascabili</string>
+    <string name="search_bookmark_loading">Caricamento elenchi segnalibri</string>
+    <string name="search_bookmark_select">Seleziona liste di segnalibri</string>
+    <string name="search_bookmark_new">Crea un nuovo elenco di segnalibri</string>
+    <string name="search_bookmark_adding_caches_success">Tutte i geocache GC sono stati aggiunti all\'elenco dei segnalibri selezionato</string>
+    <string name="search_bookmark_adding_caches_failed">Impossibile aggiungere cache alla lista dei segnalibri</string>
+    <string name="search_bookmark_create_new_failed">Creazione di un nuovo elenco di segnalibri non riuscita</string>
     <!-- trackable -->
     <string name="trackable">Oggetto Trackable</string>
     <string name="trackable_details_loading">Caricamento dettagli Trackable…</string>
@@ -2096,6 +2112,7 @@
     <string name="done">Fatto</string>
     <string name="finish">Fine</string>
     <string name="back">Indietro</string>
+    <string name="later">Dopo</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
 </resources>
