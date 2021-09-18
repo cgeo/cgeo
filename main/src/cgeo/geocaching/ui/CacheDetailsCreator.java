@@ -17,6 +17,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -232,22 +233,22 @@ public final class CacheDetailsCreator {
     }
 
     public void addLatestLogs(final Geocache cache) {
-        Context context = parentView.getContext();
+        final Context context = parentView.getContext();
 
         final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
         final TextView nameView = layout.findViewById(R.id.name);
         nameView.setText(res.getString(R.string.cache_latest_logs));
         final LinearLayout markers = layout.findViewById(R.id.linearlayout);
 
-        int smileySize = 48;
+        final int smileySize = (int)(context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary)*1.2);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
         lp.setMargins(0, 0, 5, 0);
 
-        List<LogEntry> logs = cache.getLogs();
+        final List<LogEntry> logs = cache.getLogs();
         int i = 0;
         while (i < logs.size() && markers.getChildCount() < 8) {
-            int marker = -1;
-            LogType lt = logs.get(i++).logType;
+            final int marker;
+            final LogType lt = logs.get(i++).logType;
             switch (lt) {
                 case FOUND_IT:
                 case ATTENDED:
@@ -278,14 +279,13 @@ public final class CacheDetailsCreator {
                 case UPDATE_COORDINATES:
                     marker = R.drawable.marker_usermodifiedcoords;
                     break;
+                default:
+                    continue;
             }
-
-            if (marker != -1) {
-                ImageView logMarker = new ImageView(context);
-                logMarker.setLayoutParams(lp);
-                logMarker.setBackgroundResource(marker);
-                markers.addView(logMarker);
-            }
+            final ImageView logMarker = new ImageView(context);
+            logMarker.setLayoutParams(lp);
+            logMarker.setBackgroundResource(marker);
+            markers.addView(logMarker);
         }
         if (markers.getChildCount() > 0) {
             parentView.addView(layout);
