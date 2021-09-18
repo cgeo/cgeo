@@ -1535,6 +1535,7 @@
     <string name="map_settings_cache_filter_too_complex_message">The current cache filter is too complex to apply additional options here. Usually this means that the cache filter contains NOT or OR expressions instead of simple AND logic.</string>
 
     <!-- search -->
+    <string name="geo_search_label">Search geocaches nearby</string>
     <string name="search_bar_hint">Search caches/trackables</string>
     <string name="search_bar_desc">Caches (geo code, keyword), Trackables (TB code)</string>
     <string name="search_coordinates">Coordinates</string>
