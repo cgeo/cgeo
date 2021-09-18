@@ -17,7 +17,6 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -240,8 +239,8 @@ public final class CacheDetailsCreator {
         nameView.setText(res.getString(R.string.cache_latest_logs));
         final LinearLayout markers = layout.findViewById(R.id.linearlayout);
 
-        final int smileySize = (int)(context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary)*1.2);
-        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
+        final int smileySize = (int)(context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
+        final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
         lp.setMargins(0, 0, 5, 0);
 
         final List<LogEntry> logs = cache.getLogs();
