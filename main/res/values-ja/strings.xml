@@ -918,7 +918,7 @@
     <string name="init_maplines_title">地図の線表示の設定</string>
     <string name="init_map_other">そのほか</string>
     <string name="init_map_osm_multithreaded">マルチスレッド(OSM)</string>
-    <string name="init_summary_map_osm_multithreaded">OpenStreetMap地図をレンダリングするためにマルチスレッドを使用する</string>
+    <string name="init_summary_map_osm_multithreaded">OpenStreetMapをレンダリングするためにマルチスレッドを使用する</string>
     <string name="localstorage_migrate_title">ローカルファイルの移行</string>
     <string name="localstorage_migrate_status_major">バージョン %1$d</string>
     <!-- proximity notification -->
