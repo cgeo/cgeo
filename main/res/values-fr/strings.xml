@@ -1132,10 +1132,10 @@
     <string name="cache_dialog_loading_details">Chargement des détails…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
     <string name="cache_dialog_loading_details_status_details">Analyse</string>
-    <string name="cache_dialog_loading_details_status_spoilers">Images indices</string>
+    <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indices</string>
     <string name="cache_dialog_loading_details_status_logs">Chargement des visites</string>
     <string name="cache_dialog_loading_details_status_waypoints">Traitement des points de passage</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
+    <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
     <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
     <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
     <string name="cache_dialog_offline_save_title">Hors-ligne</string>
