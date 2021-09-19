@@ -381,7 +381,6 @@
     <string name="caches_remove_all_completely">장치에서 모두 삭제</string>
     <string name="caches_remove_selected_completely">장치에서 선택한 것을 삭제</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
-    <string name="caches_upload_bookmarklist">북마크 목록에 업로드</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
     <string name="caches_upload_modifiedcoords_warning">모든 (선택된) 캐시에 대해 수정 된 좌표를 업로드하고 서버의 기존 좌표를 덮어 쓰시겠습니까? 취소 할 수 없습니다.</string>
     <string name="caches_upload_allcoords">모든 캐시에 대한 좌표 업로드하기</string>
