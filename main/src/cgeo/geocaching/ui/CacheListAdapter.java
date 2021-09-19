@@ -126,7 +126,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         checkSpecialSortOrder();
         buildFastScrollIndex();
         DistanceComparator.updateGlobalGps(coords);
-        TargetDistanceComparator.setTargetCoords(targetCoords);
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -184,8 +183,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (cacheComparator == null && series) {
             return NameComparator.INSTANCE;
         }
-        if (cacheComparator == null && isDistanceToTargetAvailable()) {
-            return TargetDistanceComparator.INSTANCE;
+        if (cacheComparator == null && targetCoords != null) {
+            return new TargetDistanceComparator(targetCoords);
         }
         if (cacheComparator == null) {
             return DistanceComparator.INSTANCE;
@@ -691,8 +690,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         return eventsOnly;
     }
 
-    public boolean isDistanceToTargetAvailable() {
-        return targetCoords != null;
+    public Geopoint getTargetCoords() {
+        return targetCoords;
     }
 
     // methods for section indexer

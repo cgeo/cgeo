@@ -715,7 +715,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
         sortProvider.setIsEventsOnly(adapter.isEventsOnly());
-        sortProvider.setDistanceToTargetAvailable(adapter.isDistanceToTargetAvailable());
+        sortProvider.setTargetCoords(adapter.getTargetCoords());
         sortProvider.setClickListener(selectedComparator -> {
             final CacheComparator oldComparator = adapter.getCacheComparator();
             // selecting the same sorting twice will toggle the order
