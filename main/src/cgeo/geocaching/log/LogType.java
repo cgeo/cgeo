@@ -19,35 +19,40 @@ import org.apache.commons.lang3.StringUtils;
  */
 public enum LogType {
 
-    FOUND_IT(2, "2", "Found it", "Found it", R.string.log_found, R.drawable.mark_green, R.drawable.marker_found_offline),
+    // user logs
+    FOUND_IT(2, "2", "Found it", "Found it", R.string.log_found, R.drawable.mark_green, R.drawable.marker_found, R.drawable.marker_found_offline),
     DIDNT_FIND_IT(3, "3", "Didn't find it", "Didn't find it", R.string.log_dnf, R.drawable.mark_red, R.drawable.marker_not_found_offline),
     NOTE(4, "4", "Write note", "Comment", R.string.log_note, R.drawable.mark_gray, R.drawable.marker_note),
-    PUBLISH_LISTING(1003, "24", "Publish Listing", "", R.string.log_published, R.drawable.mark_green_more),
-    ENABLE_LISTING(23, "23", "Enable Listing", "Ready to search", R.string.log_enabled, R.drawable.mark_green_more),
-    ARCHIVE(5, "5", "Archive", "Archived", R.string.log_archived, R.drawable.mark_red_more, R.drawable.marker_archive),
-    UNARCHIVE(12, "12", "Unarchive", "", R.string.log_unarchived, R.drawable.mark_green_more),
-    TEMP_DISABLE_LISTING(22, "22", "Temporarily Disable Listing", "Temporarily unavailable", R.string.log_disabled, R.drawable.mark_red_more),
-    NEEDS_ARCHIVE(7, "7", "Needs Archived", "", R.string.log_needs_archived, R.drawable.mark_red, R.drawable.marker_archive),
+    ATTENDED(10, "10", "Attended", "Attended", R.string.log_attended, R.drawable.mark_green, R.drawable.marker_found, R.drawable.marker_found_offline),
+    WEBCAM_PHOTO_TAKEN(11, "11", "Webcam Photo Taken", "", R.string.log_webcam, R.drawable.mark_green, R.drawable.marker_found, R.drawable.marker_found_offline),
     WILL_ATTEND(9, "9", "Will Attend", "Will attend", R.string.log_attend, R.drawable.mark_gray, R.drawable.marker_calendar),
-    ATTENDED(10, "10", "Attended", "Attended", R.string.log_attended, R.drawable.mark_green, R.drawable.marker_found_offline),
+    NEEDS_MAINTENANCE(45, "45", "Needs Maintenance", "Needs maintenance", R.string.log_maintenance_needed, R.drawable.mark_red, R.drawable.marker_maintenance),
+    NEEDS_ARCHIVE(7, "7", "Needs Archived", "", R.string.log_needs_archived, R.drawable.mark_red, R.drawable.marker_archive),
+    // owner logs
+    ANNOUNCEMENT(74, "74", "Announcement", "", R.string.log_announcement, R.drawable.mark_gray, R.drawable.marker_announcement),
+    TEMP_DISABLE_LISTING(22, "22", "Temporarily Disable Listing", "Temporarily unavailable", R.string.log_disabled, R.drawable.mark_red_more, R.drawable.marker_disable),
+    ENABLE_LISTING(23, "23", "Enable Listing", "Ready to search", R.string.log_enabled, R.drawable.mark_green_more, R.drawable.marker_visited),
+    OWNER_MAINTENANCE(46, "46", "Owner Maintenance", "", R.string.log_maintained, R.drawable.mark_green_more, R.drawable.marker_owner_maintenance),
+    UPDATE_COORDINATES(47, "47", "Update Coordinates", "Moved", R.string.log_update, R.drawable.mark_green_more, R.drawable.marker_update_coordinates),
+    ARCHIVE(5, "5", "Archive", "Archived", R.string.log_archived, R.drawable.mark_red_more, R.drawable.marker_archive),
+    // reviewer logs
+    PUBLISH_LISTING(1003, "24", "Publish Listing", "", R.string.log_published, R.drawable.mark_blue, R.drawable.marker_publish),
+    POST_REVIEWER_NOTE(18, "18", "Post Reviewer Note", "", R.string.log_reviewer, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
+    SUBMIT_FOR_REVIEW(76, "76", "submit for review", "", R.string.log_submit_for_review, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
+    RETRACT(25, "25", "Retract Listing", "", R.string.log_retractlisting, R.drawable.mark_blue, R.drawable.marker_retract),
+    UNARCHIVE(12, "12", "Unarchive", "", R.string.log_unarchived, R.drawable.mark_blue, R.drawable.marker_publish),
+    OC_TEAM_COMMENT(83, null, "X1", "OC Team comment", R.string.log_oc_team_comment, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
+    // trackable logs
     RETRIEVED_IT(13, "13", "Retrieved it", "", R.string.log_retrieved, R.drawable.mark_green_more),
     PLACED_IT(14, "14", "placed it", "", R.string.log_placed, R.drawable.mark_green_more),
     GRABBED_IT(19, "19", "grabbed it", "", R.string.log_grabbed, R.drawable.mark_green_more),
-    NEEDS_MAINTENANCE(45, "45", "Needs Maintenance", "Needs maintenance", R.string.log_maintenance_needed, R.drawable.mark_red, R.drawable.marker_maintenance),
-    OWNER_MAINTENANCE(46, "46", "Owner Maintenance", "", R.string.log_maintained, R.drawable.mark_green_more, R.drawable.marker_owner_maintenance),
-    UPDATE_COORDINATES(47, "47", "Update Coordinates", "Moved", R.string.log_update, R.drawable.marker_owner_maintenance),
     DISCOVERED_IT(48, "48", "Discovered It", "", R.string.log_discovered, R.drawable.mark_green),
-    POST_REVIEWER_NOTE(18, "18", "Post Reviewer Note", "", R.string.log_reviewer),
-    SUBMIT_FOR_REVIEW(76, "76", "submit for review", "", R.string.log_submit_for_review),
     VISIT(1001, "75", "visit", "", R.string.log_tb_visit, R.drawable.mark_green),
-    WEBCAM_PHOTO_TAKEN(11, "11", "Webcam Photo Taken", "", R.string.log_webcam, R.drawable.mark_green, R.drawable.marker_found_offline),
-    ANNOUNCEMENT(74, "74", "Announcement", "", R.string.log_announcement),
     MOVE_COLLECTION(69, "69", "unused_collection", "", R.string.log_movecollection),
     MOVE_INVENTORY(70, "70", "unused_inventory", "", R.string.log_moveinventory),
-    RETRACT(25, "25", "Retract Listing", "", R.string.log_retractlisting),
     MARKED_MISSING(16, "16", "marked missing", "", R.string.log_marked_missing, R.drawable.mark_red),
-    OC_TEAM_COMMENT(83, null, "X1", "OC Team comment", R.string.log_oc_team_comment),
-    UNKNOWN(0, "unknown", "", "", R.string.err_unknown, R.drawable.mark_red); // LogType not initialized yet
+    // other
+    UNKNOWN(0, "unknown", "", "", R.string.err_unknown, R.drawable.mark_red, R.drawable.marker_unknown_offline); // LogType not initialized yet
 
     public final int id;
     @Nullable
@@ -61,25 +66,32 @@ public enum LogType {
     /**
      * Drawable ID for a small overlay image for this log type.
      */
-    public final int overlayId;
+    public final int offlineOverlayId;
+    public final int onlineOverlayId;
 
     private static final Map<String, LogType> FIND_BY_ICONNAME = new HashMap<>();
     private static final Map<String, LogType> FIND_BY_TYPE = new HashMap<>();
 
     LogType(final int id, @Nullable final String iconName, @NonNull final String type, @NonNull final String ocType,
-            final int stringId, final int markerId, final int overlayId) {
+            final int stringId, final int markerId, final int onlineOverlayId, final int offlineOverlayId) {
         this.id = id;
         this.iconName = iconName;
         this.type = type;
         this.ocType = ocType;
         this.stringId = stringId;
         this.markerId = markerId;
-        this.overlayId = overlayId;
+        this.onlineOverlayId = onlineOverlayId;
+        this.offlineOverlayId = offlineOverlayId;
+    }
+
+    LogType(final int id, final String iconName, final String type, final String ocType, final int stringId,
+            final int markerId, final int onlineOverlayId) {
+        this(id, iconName, type, ocType, stringId, markerId, onlineOverlayId, onlineOverlayId);
     }
 
     LogType(final int id, final String iconName, final String type, final String ocType, final int stringId,
             final int markerId) {
-        this(id, iconName, type, ocType, stringId, markerId, 0);
+        this(id, iconName, type, ocType, stringId, markerId, 0, 0);
     }
 
     LogType(final int id, final String iconName, final String type, final String ocType, final int stringId) {
@@ -170,10 +182,20 @@ public enum LogType {
      * get the overlay image ID for showing the offline log type
      */
     public int getOfflineLogOverlay() {
-        if (overlayId != 0) {
-            return overlayId;
+        if (offlineOverlayId != 0) {
+            return offlineOverlayId;
         }
-        return R.drawable.marker_unknown_offline;
+        return UNKNOWN.onlineOverlayId;
+    }
+
+    /**
+     * get the overlay image ID for showing the offline log type
+     */
+    public int getLogOverlay() {
+        if (onlineOverlayId != 0) {
+            return onlineOverlayId;
+        }
+        return UNKNOWN.onlineOverlayId;
     }
 
     /**
