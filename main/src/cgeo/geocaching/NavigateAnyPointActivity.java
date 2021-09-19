@@ -38,8 +38,9 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
 
         InternalConnector.assertHistoryCacheExists(this);
 
+        // check if "geo" action is requested
+        boolean geoActionRequested = false;
         if (getIntent() != null) {
-            // check if "geo" action is requested
             GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
             IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
             if (geo != null && !GeoPointDto.isEmpty(geo)) {
@@ -47,10 +48,12 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                     + ", lon=" + geo.getLongitude() + ", name=" + geo.getName()
                     + " form " + getIntent().getDataString());
                 selectTargetType(this, geo.getLatitude(), geo.getLongitude(), geo.getName());
-
-                CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-                finish();
+                geoActionRequested = true;
             }
+        }
+        if (!geoActionRequested) {
+            CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
+            finish();
         }
     }
 
