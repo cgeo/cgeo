@@ -71,7 +71,7 @@ public abstract class UserClickListener implements View.OnClickListener {
     }
 
     public static OnClickListener forUser(final Trackable trackable, final String userName, final String userGuid) {
-        return new UserClickListener(new UAContext(userName, userName, userGuid)) {
+        return new UserClickListener(new UAContext(userName, userName, userGuid, null)) {
 
             @Override
             @NonNull
@@ -82,7 +82,7 @@ public abstract class UserClickListener implements View.OnClickListener {
     }
 
     public static UserClickListener forUser(final Geocache cache, final String userName, final String userId, final String userGuid) {
-        return new UserClickListener(new UAContext(userName, userId, userGuid)) {
+        return new UserClickListener(new UAContext(userName, userId, userGuid, cache.getGeocode())) {
 
             @Override
             @NonNull
