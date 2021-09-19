@@ -384,7 +384,6 @@
     <string name="caches_remove_all_completely">Hepsini cihazdan sil</string>
     <string name="caches_remove_selected_completely">Seçilenleri cihazdan sil</string>
     <string name="caches_delete_events">Geçmiş etkinlikleri sil</string>
-    <string name="caches_upload_bookmarklist">Yer imi listesine yükle</string>
     <string name="caches_upload_modifiedcoords">Düzenlenmiş koordinatları yükle</string>
     <string name="caches_upload_modifiedcoords_warning">Tüm seçili cache\'ler için değiştirilmiş koordinatları yüklemek ve sunucuda varolan koordinatların üzerine yazmak istiyor musunuz? Bu işlem geri alınamaz.</string>
     <string name="caches_upload_allcoords">Tüm Cache\'lerin koordinatlarını güncelle</string>
