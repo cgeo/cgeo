@@ -384,7 +384,7 @@
     <string name="caches_remove_all_completely">Poista kaikki laitteesta</string>
     <string name="caches_remove_selected_completely">Poista valittu laitteesta</string>
     <string name="caches_delete_events">Poista aiemmat tapahtumat</string>
-    <string name="caches_upload_bookmarklist">Lataa kirjanmerkkilistalle</string>
+    <string name="caches_upload_bookmarklist">Lisää kirjanmerkkilistaan</string>
     <string name="caches_upload_modifiedcoords">Lähetä muutetut koordinaatit</string>
     <string name="caches_upload_modifiedcoords_warning">Haluatko lähettää muokatut koordinaatit kaikille (valituille) kätköille ja tallentaa ne palvelimella olevien koordinaattien päälle? Toimintoa ei voi peruuttaa.</string>
     <string name="caches_upload_allcoords">Lähetä kaikkien kätköjen koordinaatit</string>
