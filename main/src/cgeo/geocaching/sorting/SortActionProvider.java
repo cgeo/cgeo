@@ -39,6 +39,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     // Used to change menu Filter label
     private boolean isEventsOnly = false;
+    private boolean distanceToTargetAvailable = false;
 
     private static final class ComparatorEntry {
         private final String name;
@@ -99,7 +100,10 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     private void registerComparators() {
         registry.clear();
-        register(R.string.caches_sort_distance, DistanceComparator.class, () -> DistanceComparator.DISTANCE_TO_GLOBAL_GPS);
+        if (distanceToTargetAvailable) {
+            register(R.string.caches_sort_distance_target, TargetDistanceComparator.class, () -> TargetDistanceComparator.INSTANCE);
+        }
+        register(R.string.caches_sort_distance, DistanceComparator.class, () -> DistanceComparator.INSTANCE);
         if (isEventsOnly) {
             register(R.string.caches_sort_eventdate, EventDateComparator.class);
         } else {
@@ -170,5 +174,9 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     public void setIsEventsOnly(final boolean isEventsOnly) {
         this.isEventsOnly = isEventsOnly;
+    }
+
+    public void setDistanceToTargetAvailable(final boolean distanceToTargetAvailable) {
+        this.distanceToTargetAvailable = distanceToTargetAvailable;
     }
 }

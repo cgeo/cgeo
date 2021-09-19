@@ -162,6 +162,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private CacheListType type = null;
     private Geopoint coords = null;
+    private Geopoint targetCoords = null;
     private SearchResult search = null;
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
     private final List<Geocache> cacheList = new ArrayList<>();
@@ -520,6 +521,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (extras != null) {
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
+            targetCoords = extras.getParcelable(Intents.EXTRA_COORDS);
         } else {
             extras = new Bundle();
         }
@@ -713,6 +715,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
         sortProvider.setIsEventsOnly(adapter.isEventsOnly());
+        sortProvider.setDistanceToTargetAvailable(adapter.isDistanceToTargetAvailable());
         sortProvider.setClickListener(selectedComparator -> {
             final CacheComparator oldComparator = adapter.getCacheComparator();
             // selecting the same sorting twice will toggle the order
@@ -1256,7 +1259,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final ListView listView = getListView();
         registerForContextMenu(listView);
 
-        adapter = new CacheListAdapter(this, cacheList, type);
+        adapter = new CacheListAdapter(this, cacheList, type, targetCoords);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
         applyAdapterFilter();
         adapter.setComparator(this.currentSort);
