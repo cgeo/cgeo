@@ -9,6 +9,7 @@ import android.content.Intent;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
 import java.lang.ref.WeakReference;
@@ -24,12 +25,14 @@ public class UserAction {
         public final String displayName;
         public final String userName;
         public final String userGUID;
+        public final String geocode;
         public WeakReference<Context> contextRef;
 
-        public UAContext(@NonNull final String displayName, @NonNull final String userName, @NonNull final String userGUID) {
+        public UAContext(@NonNull final String displayName, @NonNull final String userName, @NonNull final String userGUID, @Nullable final String geocode) {
             this.displayName = displayName;
             this.userName = userName;
             this.userGUID = userGUID;
+            this.geocode = geocode;
         }
 
         public void startActivity(final Intent intent) {
