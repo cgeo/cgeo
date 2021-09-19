@@ -90,6 +90,7 @@ public final class GCParser {
 
     @NonNull
     private static final SynchronizedDateFormat DATE_JSON = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", TimeZone.getTimeZone("UTC"), Locale.US); // 2009-03-28T18:30:31.497Z
+    private static final SynchronizedDateFormat DATE_JSON_SHORT = new SynchronizedDateFormat("yyyy-MM-dd'T'HH:mm:ss'Z'", TimeZone.getTimeZone("UTC"), Locale.US); // 2009-03-28T18:30:31Z
 
     @NonNull
     private static final ImmutablePair<StatusCode, Geocache> UNKNOWN_PARSE_ERROR = ImmutablePair.of(StatusCode.UNKNOWN_ERROR, null);
@@ -1016,7 +1017,15 @@ public final class GCParser {
                 final String name = row.get("name").asText();
                 final String guid = row.get("referenceCode").asText();
                 final int count = row.get("count").asInt();
-                final Date date = DATE_JSON.parse(row.get("lastUpdateUtc").asText());
+                Date date;
+                final String lastUpdateUtc = row.get("lastUpdateUtc").asText();
+                try {
+                    date = DATE_JSON.parse(lastUpdateUtc);
+                } catch (ParseException e) {
+                    // if parsing with fractions of seconds failed, try short form
+                    date = DATE_JSON_SHORT.parse(lastUpdateUtc);
+                    Log.d("parsing bookmark list: fallback needed for '" + lastUpdateUtc + "'");
+                }
 
                 final PocketQuery pocketQuery = new PocketQuery(guid, name, count, true, date.getTime(), -1, true);
                 list.add(pocketQuery);
