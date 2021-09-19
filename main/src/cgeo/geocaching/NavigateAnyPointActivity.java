@@ -11,6 +11,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+
 import de.k3b.geo.api.GeoPointDto;
 import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
@@ -41,8 +42,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
         // check if "geo" action is requested
         boolean geoActionRequested = false;
         if (getIntent() != null) {
-            GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
-            IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
+            final GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
+            final IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
             if (geo != null && !GeoPointDto.isEmpty(geo)) {
                 Log.i("Received a geo intent: lat=" + geo.getLatitude()
                     + ", lon=" + geo.getLongitude() + ", name=" + geo.getName()

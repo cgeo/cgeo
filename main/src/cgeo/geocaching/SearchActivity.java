@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
+
 import de.k3b.geo.api.GeoPointDto;
 import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
@@ -91,8 +92,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         // called from external app via
         // * intent action view with geo: uri
         // * click on http(s)-Link to internet map service (google-maps, openstreetmap, yandex or here)
-        GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
-        IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
+        final GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
+        final IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
         if (geo != null) {
             String name = geo.getName();
             if (name != null && name.trim().length() == 0) {
@@ -329,7 +330,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         findByAddressFn(addressSearchText);
     }
 
-    private void findByAddressFn(String addressSearchText) {
+    private void findByAddressFn(final String addressSearchText) {
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
         addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addressSearchText);
         startActivity(addressesIntent);
