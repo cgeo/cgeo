@@ -9,18 +9,14 @@ import cgeo.geocaching.storage.SqlBuilder;
 import androidx.annotation.NonNull;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * sorts caches by distance to given position
  *
  */
-public class DistanceComparator extends AbstractCacheComparator {
+public abstract class AbstractDistanceComparator extends AbstractCacheComparator {
 
-    private Geopoint coords;
-
-    private static AtomicLong gpsPosVersion = new AtomicLong(0);
-    public static final DistanceComparator DISTANCE_TO_GLOBAL_GPS = new DistanceComparator(Geopoint.ZERO);
+    protected Geopoint coords = Geopoint.ZERO; // will be overwritten
 
     @Override
     protected void beforeSort(final List<Geocache> list) {
@@ -31,17 +27,6 @@ public class DistanceComparator extends AbstractCacheComparator {
                 cache.setDistance(coords.distanceTo(cache.getCoords()));
             }
         }
-    }
-
-    public static void updateGlobalGps(final Geopoint gpsPosition) {
-        if (gpsPosition != null) {
-            DISTANCE_TO_GLOBAL_GPS.coords = gpsPosition;
-            gpsPosVersion.incrementAndGet();
-        }
-    }
-
-    public DistanceComparator(final Geopoint coords) {
-        this.coords = coords == null ? Geopoint.ZERO : coords;
     }
 
     @Override
@@ -61,7 +46,6 @@ public class DistanceComparator extends AbstractCacheComparator {
 
     @Override
     public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
-        //sql.addOrder(DataStore.getCoordDiffExpression(coords, sql.getMainTableId()), sortDesc);
         sql.addOrder(DataStore.getSqlDistanceSquare(sql.getMainTableId(), coords), sortDesc);
     }
 
