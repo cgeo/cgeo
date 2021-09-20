@@ -1,5 +1,5 @@
 ### Λεπτομέρειες κρύπτης
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- Νέο: Όταν πατήσετε το όνομα ιδιοκτήτη, το άνοιγμα στο κέντρο μηνυμάτων θα προγεμίσει το κείμενο με το όνομα κρύπτης (geocaching.com μόνο)
 
 ### Άλλο
-- Fix: Some fixes for bookmark lists (downloading & current status)
+- Διόρθωση: Μερικές διορθώσεις για λίστες σελιδοδεικτών (λήψη & τρέχουσα κατάσταση)
