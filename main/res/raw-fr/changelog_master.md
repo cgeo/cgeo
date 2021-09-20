@@ -2,7 +2,7 @@
 - Nouveau : Refonte complète des icônes de cache
 - Correction : Afficher les cercles de distance pour les caches personnalisées (si l'affichage est activé)
 - Correction : Le titre de la cache a plus de visibilité dans la popup de cache ou point de passage
-- Fix: Show warning in live map when live mode is disabled
+- Corrigé : Affichage d'une alerte sur la carte quand le mode temps réel est désactivé
 
 ### Listes de caches
 - Nouveau : Refonte complète des icônes de cache
