@@ -36,11 +36,11 @@ public enum LogType {
     UPDATE_COORDINATES(47, "47", "Update Coordinates", "Moved", R.string.log_update, R.drawable.mark_green_more, R.drawable.marker_update_coordinates),
     ARCHIVE(5, "5", "Archive", "Archived", R.string.log_archived, R.drawable.mark_red_more, R.drawable.marker_archive),
     // reviewer logs
-    PUBLISH_LISTING(1003, "24", "Publish Listing", "", R.string.log_published, R.drawable.mark_blue, R.drawable.marker_publish),
+    PUBLISH_LISTING(1003, "24", "Publish Listing", "", R.string.log_published, R.drawable.mark_green_more, R.drawable.marker_publish),
     POST_REVIEWER_NOTE(18, "18", "Post Reviewer Note", "", R.string.log_reviewer, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
     SUBMIT_FOR_REVIEW(76, "76", "submit for review", "", R.string.log_submit_for_review, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
-    RETRACT(25, "25", "Retract Listing", "", R.string.log_retractlisting, R.drawable.mark_blue, R.drawable.marker_retract),
-    UNARCHIVE(12, "12", "Unarchive", "", R.string.log_unarchived, R.drawable.mark_blue, R.drawable.marker_publish),
+    RETRACT(25, "25", "Retract Listing", "", R.string.log_retractlisting, R.drawable.mark_red_more, R.drawable.marker_retract),
+    UNARCHIVE(12, "12", "Unarchive", "", R.string.log_unarchived, R.drawable.mark_green_more, R.drawable.marker_publish),
     OC_TEAM_COMMENT(83, null, "X1", "OC Team comment", R.string.log_oc_team_comment, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
     // trackable logs
     RETRIEVED_IT(13, "13", "Retrieved it", "", R.string.log_retrieved, R.drawable.mark_green_more),
