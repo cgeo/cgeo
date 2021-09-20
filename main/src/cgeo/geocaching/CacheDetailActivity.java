@@ -699,7 +699,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::notifyDataSetChanged)) {
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::notifyDataSetChanged, false)) {
             return true;
         }
 
