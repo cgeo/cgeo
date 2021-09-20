@@ -104,7 +104,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         if (targetCoords != null) {
             register(R.string.caches_sort_distance_target, TargetDistanceComparator.class, () -> new TargetDistanceComparator(targetCoords));
         }
-        register(R.string.caches_sort_distance, DistanceComparator.class, () -> DistanceComparator.INSTANCE);
+        register(R.string.caches_sort_distance, GlobalGPSDistanceConparator.class, () -> GlobalGPSDistanceConparator.INSTANCE);
         if (isEventsOnly) {
             register(R.string.caches_sort_eventdate, EventDateComparator.class);
         } else {

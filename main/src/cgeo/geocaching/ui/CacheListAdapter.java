@@ -12,8 +12,8 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
-import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.EventDateComparator;
+import cgeo.geocaching.sorting.GlobalGPSDistanceConparator;
 import cgeo.geocaching.sorting.NameComparator;
 import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
@@ -125,7 +125,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
         buildFastScrollIndex();
-        DistanceComparator.updateGlobalGps(coords);
+        GlobalGPSDistanceConparator.updateGlobalGps(coords);
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -187,7 +187,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return new TargetDistanceComparator(targetCoords);
         }
         if (cacheComparator == null) {
-            return DistanceComparator.INSTANCE;
+            return GlobalGPSDistanceConparator.INSTANCE;
         }
         return cacheComparator;
     }
@@ -338,8 +338,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return;
         }
         final List<Geocache> oldList = new ArrayList<>(list);
-        DistanceComparator.updateGlobalGps(coords);
-        DistanceComparator.INSTANCE.sort(list, inverseSort);
+        GlobalGPSDistanceConparator.updateGlobalGps(coords);
+        GlobalGPSDistanceConparator.INSTANCE.sort(list, inverseSort);
 
         // avoid an update if the list has not changed due to location update
         if (list.equals(oldList)) {
@@ -351,7 +351,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     private boolean isSortedByDistance() {
         final CacheComparator comparator = getCacheComparator();
-        return comparator == null || comparator instanceof DistanceComparator;
+        return comparator == null || comparator instanceof GlobalGPSDistanceConparator;
     }
 
     public void setActualHeading(final float direction) {
