@@ -12,9 +12,10 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
-import cgeo.geocaching.sorting.DistanceComparator;
 import cgeo.geocaching.sorting.EventDateComparator;
+import cgeo.geocaching.sorting.GlobalGPSDistanceConparator;
 import cgeo.geocaching.sorting.NameComparator;
+import cgeo.geocaching.sorting.TargetDistanceComparator;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
@@ -37,6 +38,7 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
@@ -57,6 +59,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private LayoutInflater inflater = null;
     private static CacheComparator cacheComparator = null;
     private Geopoint coords;
+    private Geopoint targetCoords;
     private float azimuth = 0;
     private long lastSort = 0L;
     private boolean selectMode = false;
@@ -112,17 +115,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
     }
 
-    public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType) {
+    public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType, final @Nullable Geopoint targetCoords) {
         super(activity, 0, list);
         final GeoData currentGeo = Sensors.getInstance().currentGeo();
         coords = currentGeo.getCoords();
+        this.targetCoords = targetCoords;
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
         buildFastScrollIndex();
-
-        DistanceComparator.updateGlobalGps(Sensors.getInstance().currentGeo().getCoords());
+        GlobalGPSDistanceConparator.updateGlobalGps(coords);
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -180,8 +183,11 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         if (cacheComparator == null && series) {
             return NameComparator.INSTANCE;
         }
+        if (cacheComparator == null && targetCoords != null) {
+            return new TargetDistanceComparator(targetCoords);
+        }
         if (cacheComparator == null) {
-            return DistanceComparator.DISTANCE_TO_GLOBAL_GPS;
+            return GlobalGPSDistanceConparator.INSTANCE;
         }
         return cacheComparator;
     }
@@ -332,8 +338,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             return;
         }
         final List<Geocache> oldList = new ArrayList<>(list);
-        DistanceComparator.updateGlobalGps(coords);
-        DistanceComparator.DISTANCE_TO_GLOBAL_GPS.sort(list, inverseSort);
+        GlobalGPSDistanceConparator.updateGlobalGps(coords);
+        GlobalGPSDistanceConparator.INSTANCE.sort(list, inverseSort);
 
         // avoid an update if the list has not changed due to location update
         if (list.equals(oldList)) {
@@ -345,7 +351,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     private boolean isSortedByDistance() {
         final CacheComparator comparator = getCacheComparator();
-        return comparator == null || comparator instanceof DistanceComparator;
+        return comparator == null || comparator instanceof GlobalGPSDistanceConparator;
     }
 
     public void setActualHeading(final float direction) {
@@ -682,6 +688,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     public boolean isEventsOnly() {
         return eventsOnly;
+    }
+
+    public Geopoint getTargetCoords() {
+        return targetCoords;
     }
 
     // methods for section indexer
