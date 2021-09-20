@@ -53,7 +53,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache, @Nullable final Runnable notifyDataSetChanged) {
+    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache, @Nullable final Runnable notifyDataSetChanged, final boolean fromPopup) {
         final Activity activity;
         if (activityInterface instanceof Activity) {
             activity = (Activity) activityInterface;
@@ -67,7 +67,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             return true;
         } else if (menuItem == R.id.menu_navigate) {
             final NavigationSelectionActionProvider navigationProvider = (NavigationSelectionActionProvider) MenuItemCompat.getActionProvider(item);
-            if (navigationProvider == null) {
+            if (navigationProvider == null || fromPopup) {
                 activityInterface.showNavigationMenu();
                 return true;
             }
