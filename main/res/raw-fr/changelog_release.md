@@ -1,5 +1,5 @@
 ### Détails de la cache
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- Nouveauté : En cliquant sur le nom du propriétaire, le centre de messagerie s’ouvrira avec le nom de la cache pré-rempli (geocaching.com uniquement)
 
 ### Divers
-- Fix: Some fixes for bookmark lists (downloading & current status)
+- Correction : Quelques corrections pour les listes de favoris (téléchargement & statut actuel)
