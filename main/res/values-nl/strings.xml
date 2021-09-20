@@ -1123,6 +1123,7 @@
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Verberg bezochte waypoints</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint gekopieerd van klembord naar deze cache.\n\nOriginele waypoint verwijderen?</string>
     <string name="cache_hint">Hint</string>

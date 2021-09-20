@@ -27,6 +27,7 @@ import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
+import cgeo.geocaching.databinding.CachedetailWaypointsCheckboxBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
@@ -140,6 +141,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -160,6 +162,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -1940,6 +1943,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
         private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
         private Geocache cache;
+        private boolean hideVisitedWaypoints = false;
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
             createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
@@ -1978,6 +1982,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // sort waypoints: PP, Sx, FI, OWN
             final List<Waypoint> sortedWaypoints = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = sortedWaypoints.iterator();
+            while (waypointIterator.hasNext()) {
+                final Waypoint waypointInIterator = waypointIterator.next();
+                if (waypointInIterator.isVisited() && hideVisitedWaypoints) {
+                    waypointIterator.remove();
+                }
+            }
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
@@ -2006,6 +2017,17 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (v.getHeaderViewsCount() < 1) {
                 final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
                 v.addHeaderView(headerBinding.getRoot());
+
+                final CachedetailWaypointsCheckboxBinding checkboxBinding = CachedetailWaypointsCheckboxBinding.inflate(getLayoutInflater(), v, false);
+                v.addHeaderView(checkboxBinding.getRoot());
+
+                checkboxBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                        hideVisitedWaypoints = !hideVisitedWaypoints;
+                        setContent();
+                    }
+                });
 
                 headerBinding.addWaypoint.setOnClickListener(v2 -> {
                     activity.ensureSaved();
