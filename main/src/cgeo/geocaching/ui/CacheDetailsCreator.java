@@ -246,45 +246,11 @@ public final class CacheDetailsCreator {
         final List<LogEntry> logs = cache.getLogs();
         int i = 0;
         while (i < logs.size() && markers.getChildCount() < 8) {
-            final int marker;
-            final LogType lt = logs.get(i++).logType;
-            switch (lt) {
-                case FOUND_IT:
-                case ATTENDED:
-                case WEBCAM_PHOTO_TAKEN:
-                    marker = R.drawable.marker_found;
-                    break;
-                case DIDNT_FIND_IT:
-                    marker = R.drawable.marker_not_found_offline;
-                    break;
-                case NOTE:
-                    marker = R.drawable.marker_note;
-                    break;
-                case NEEDS_ARCHIVE:
-                case NEEDS_MAINTENANCE:
-                    marker = R.drawable.marker_maintenance;
-                    break;
-                case TEMP_DISABLE_LISTING:
-                case ARCHIVE:
-                    marker = R.drawable.marker_archive;
-                    break;
-                case WILL_ATTEND:
-                    marker = R.drawable.marker_calendar;
-                    break;
-                case OWNER_MAINTENANCE:
-                case ENABLE_LISTING:
-                    marker = R.drawable.marker_owner_maintenance;
-                    break;
-                case UPDATE_COORDINATES:
-                    marker = R.drawable.marker_usermodifiedcoords;
-                    break;
-                default:
-                    continue;
-            }
-            final ImageView logMarker = new ImageView(context);
-            logMarker.setLayoutParams(lp);
-            logMarker.setBackgroundResource(marker);
-            markers.addView(logMarker);
+            final int marker = logs.get(i++).logType.getLogOverlay();
+            final ImageView logIcon = new ImageView(context);
+            logIcon.setLayoutParams(lp);
+            logIcon.setBackgroundResource(marker);
+            markers.addView(logIcon);
         }
         if (markers.getChildCount() > 0) {
             parentView.addView(layout);
