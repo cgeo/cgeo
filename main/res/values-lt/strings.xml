@@ -379,7 +379,6 @@
     <string name="caches_remove_all_completely">Pašalinti viską iš įrenginio</string>
     <string name="caches_remove_selected_completely">Pašalinti pasirinktus iš įrenginio</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
-    <string name="caches_upload_bookmarklist">Įkelti į žymių sąrašą</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Ar norite įkelti pakeistas koordinates visoms (pasirinktoms) slėptuvėms ir pakeisti koordinates serveryje? To negalima anuliuoti.</string>
     <string name="caches_upload_allcoords">Įkelti koordinates visoms slėptuvėms</string>
