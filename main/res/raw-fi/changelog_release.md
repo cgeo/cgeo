@@ -7,7 +7,7 @@
 - Korjaa: Tunnista jos nykyinen käyttäjä on Adventure Labin omistaja
 - Uusi: Lisätty joitakin emojeita käytettäväksi kätkön kuvakkeena
 - Uusi: Tuki kätköjen lisäämiselle kirjanmerkkiluetteloihin (vain PM)
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- Uusi: Kun napautat omistajan nimeä, avaaminen viestikeskuksessa sisällyttää viestiin tekstin, jossa on kätkön nimi (vain geocaching.com)
 
 ### Muut
 - Uusi: Salli kätköjen lataaminen kirjanmerkkiluetteloon (saatavilla vain GC Premium-jäsenille)
