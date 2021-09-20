@@ -382,7 +382,6 @@
     <string name="caches_remove_all_completely">デバイスからすべてのキャッシュを削除</string>
     <string name="caches_remove_selected_completely">デバイスから選択したキャッシュを削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
-    <string name="caches_upload_bookmarklist">ブックマークリストに追加</string>
     <string name="caches_upload_modifiedcoords">修正された座標をアップロード</string>
     <string name="caches_upload_modifiedcoords_warning">すべての(選択した)キャッシュの修正された座標をアップロードしますか? サーバー上の座標は上書きしされ、元に戻すことはできません</string>
     <string name="caches_upload_allcoords">すべてのキャッシュの座標をアップロード</string>
