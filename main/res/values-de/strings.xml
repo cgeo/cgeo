@@ -383,7 +383,6 @@
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
-    <string name="caches_upload_bookmarklist">In Lesezeichenliste hochladen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_upload_modifiedcoords_warning">Möchtest du modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
