@@ -384,6 +384,7 @@
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
+    <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
@@ -1374,6 +1375,8 @@
     <string name="map_language">Kaart taal</string>
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
+    <string name="map_live_disabled">Live modus uitgeschakeld</string>
+    <string name="map_live_disabled_hint">Live modus is uitgeschakeld. Je ziet alleen opgeslagen caches. Gebruik het menu om live modus in te schakelen.</string>
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
