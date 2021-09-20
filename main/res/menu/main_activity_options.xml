@@ -25,7 +25,7 @@
     </item>
     <item
         android:id="@+id/menu_bookmarklists"
-        android:icon="@drawable/ic_menu_pocket_query"
+        android:icon="@drawable/ic_menu_bookmarks"
         android:title="@string/menu_lists_bookmarklists"
         android:visible="false"
         app:showAsAction="ifRoom">

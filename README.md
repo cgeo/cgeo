@@ -10,7 +10,6 @@ It does not require a web browser or exports - just download and start right awa
 
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature.
 It would be bad for you to have implemented something great but we can't include it because it doesn't fit the existing architecture and code.
-You might also want to chat with the developers on channel [#cgeo](https://webchat.freenode.net/#cgeo) on the freenode IRC network.
 
 ### Starting points for contribution
 
@@ -126,6 +125,9 @@ You can create several profiles for a physical device attached via USB, as well 
 
 c:geo is distributed under the [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
+This product includes software developed by the c:geo team and contributors as well as parts developed elsewhere.
+See the references in main/res/values/strings_not_translatable.xml for details (or "about: contributors" page in the app).
+
 ## Contact
 
 - Website: https://www.cgeo.org/
@@ -134,4 +136,3 @@ c:geo is distributed under the [Apache License, Version 2.0](https://www.apache.
 - Facebook: https://www.facebook.com/android.geocaching
 - Google Play: https://play.google.com/store/apps/details?id=cgeo.geocaching
 - Live status: https://status.cgeo.org/
-- Developer chat: [#cgeo on freenode.net](https://webchat.freenode.net/#cgeo)

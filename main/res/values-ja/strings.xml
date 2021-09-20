@@ -382,6 +382,7 @@
     <string name="caches_remove_all_completely">デバイスからすべてのキャッシュを削除</string>
     <string name="caches_remove_selected_completely">デバイスから選択したキャッシュを削除</string>
     <string name="caches_delete_events">過去のイベントを削除</string>
+    <string name="caches_upload_bookmarklist">ブックマークリストに追加</string>
     <string name="caches_upload_modifiedcoords">修正された座標をアップロード</string>
     <string name="caches_upload_modifiedcoords_warning">すべての(選択した)キャッシュの修正された座標をアップロードしますか? サーバー上の座標は上書きしされ、元に戻すことはできません</string>
     <string name="caches_upload_allcoords">すべてのキャッシュの座標をアップロード</string>
@@ -916,7 +917,7 @@
     <string name="init_maplines_title">地図の線表示の設定</string>
     <string name="init_map_other">そのほか</string>
     <string name="init_map_osm_multithreaded">マルチスレッド(OSM)</string>
-    <string name="init_summary_map_osm_multithreaded">OpenStreetMap地図をレンダリングするためにマルチスレッドを使用する</string>
+    <string name="init_summary_map_osm_multithreaded">OpenStreetMapをレンダリングするためにマルチスレッドを使用する</string>
     <string name="localstorage_migrate_title">ローカルファイルの移行</string>
     <string name="localstorage_migrate_status_major">バージョン %1$d</string>
     <!-- proximity notification -->
@@ -1377,6 +1378,7 @@
     <string name="search_address_button">住所で検索</string>
     <string name="search_geo">GCコード</string>
     <string name="search_geo_button">GCコードで検索</string>
+    <string name="search_geocode_from_clipboard">クリップボードから貼り付けられました</string>
     <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
     <string name="search_kw_button">キーワードで検索</string>
@@ -1399,6 +1401,12 @@
     <string name="search_bookmark_list">ブックマークリスト</string>
     <string name="search_pocket_is_new">新着</string>
     <string name="search_pocket_and_bookmark_loading">ポケット・クエリのリストとブックマークリストの読み込み中</string>
+    <string name="search_bookmark_loading">ブックマークリストの読み込み中…</string>
+    <string name="search_bookmark_select">ブックマークリストの選択</string>
+    <string name="search_bookmark_new">新しいブックマークリストを作成</string>
+    <string name="search_bookmark_adding_caches_success">すべてのキャッシュが選択したブックマークリストに追加されました</string>
+    <string name="search_bookmark_adding_caches_failed">ブックマークリストに追加できませんでした</string>
+    <string name="search_bookmark_create_new_failed">新しいブックマークリストを作成できませんでした</string>
     <!-- trackable -->
     <string name="trackable">トラッカブル</string>
     <string name="trackable_details_loading">トラッカブルの詳細を読み込み中…</string>
@@ -2056,6 +2064,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="done">完了</string>
     <string name="finish">終了</string>
     <string name="back">戻る</string>
+    <string name="later">後で</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
 </resources>

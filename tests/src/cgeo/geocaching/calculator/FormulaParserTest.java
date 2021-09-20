@@ -112,7 +112,7 @@ public class FormulaParserTest {
     public void testParseFullCoordinatesWithNoValidFormula() {
         try {
             final FormulaParser formulaParser = new FormulaParser();
-            formulaParser.parse(WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N  AB° 48.[B+C-A^2  E (B%C)°  38!.(D+F)2 | a = 2) test");
+            formulaParser.parse(WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N  AB° 48.[B+C-A^2  E (B%C)°  38#.(D+F)2 | a = 2) test");
             failBecauseExceptionWasNotThrown(FormulaParser.ParseException.class);
         } catch (final FormulaParser.ParseException e) {
             // expected

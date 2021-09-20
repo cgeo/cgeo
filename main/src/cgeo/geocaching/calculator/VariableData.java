@@ -2,6 +2,7 @@ package cgeo.geocaching.calculator;
 
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.calc.Calculator;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.models.CalcState.ERROR_STRING;
 
@@ -104,7 +105,7 @@ public final class VariableData implements JSONAble, Serializable {
             }
 
             try {
-                setCachedValue(new CalculationUtils(expression).eval());
+                setCachedValue(Calculator.eval(expression));
             } catch (final Exception e) {
                 setCachedValue(Double.NaN);
             }

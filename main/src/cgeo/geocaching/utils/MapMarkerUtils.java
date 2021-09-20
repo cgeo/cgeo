@@ -135,6 +135,9 @@ public final class MapMarkerUtils {
                 cPaint = new EmojiUtils.EmojiPaint(res, new Pair<>(markerAvailable, markerAvailable), markerAvailable, 0, DisplayUtils.calculateMaxFontsize(35, 10, 100, markerAvailable));
             }
             insetsBuilder.withInset(new InsetBuilder(EmojiUtils.getEmojiDrawable(cPaint, useEmoji), Gravity.CENTER | Gravity.CENTER));
+        } else if (doubleSize) {
+            // main icon (type icon / custom cache icon)
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, true));
         } else {
             // cache type background color
             final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
@@ -142,7 +145,7 @@ public final class MapMarkerUtils {
             DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
             insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
             // main icon (type icon / custom cache icon)
-            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, doubleSize));
+            insetsBuilder.withInset(new InsetBuilder(mainMarkerId, Gravity.CENTER, false));
         }
 
         // overlays
@@ -283,6 +286,7 @@ public final class MapMarkerUtils {
     public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
         final int hashcode = new HashCodeBuilder()
             .append(cache.getType().id)
+            .append(cache.isFound())
             .append(cache.isDisabled())
             .append(cache.isArchived())
             .append(cache.hasLogOffline())

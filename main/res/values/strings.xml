@@ -411,7 +411,7 @@
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
     <string name="caches_delete_events">Delete past events</string>
-    <string name="caches_upload_bookmarklist">Upload to bookmark list</string>
+    <string name="caches_upload_bookmarklist">Add to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -1520,6 +1520,8 @@
     <string name="map_language">Map language</string>
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>
+    <string name="map_live_disabled">Live mode disabled</string>
+    <string name="map_live_disabled_hint">Live mode is disabled. You will only see stored caches. Use the menu to enable live mode.</string>
     <string name="map_as_list">Show as list</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
