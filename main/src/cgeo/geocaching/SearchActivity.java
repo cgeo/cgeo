@@ -24,10 +24,6 @@ import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
-import de.k3b.geo.api.GeoPointDto;
-import de.k3b.geo.api.IGeoPointInfo;
-import de.k3b.geo.io.GeoUri;
-
 import android.app.Activity;
 import android.app.SearchManager;
 import android.content.Intent;
@@ -43,6 +39,10 @@ import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+
+import de.k3b.geo.api.GeoPointDto;
+import de.k3b.geo.api.IGeoPointInfo;
+import de.k3b.geo.io.GeoUri;
 
 import java.util.Locale;
 
