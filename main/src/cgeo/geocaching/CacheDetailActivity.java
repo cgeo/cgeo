@@ -1966,6 +1966,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return sortedWaypoints2;
         }
 
+        private boolean hasVisitedWayPoints() {
+            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
+            while (waypointIterator.hasNext()) {
+                final Waypoint waypointInIterator = waypointIterator.next();
+                if (waypointInIterator.isVisited()) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
         @Override
         public CachedetailWaypointsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             return CachedetailWaypointsPageBinding.inflate(inflater, container, false);
@@ -2023,23 +2035,25 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
                 v.addHeaderView(headerBinding.getRoot());
 
-                final CachedetailWaypointsCheckboxBinding checkboxBinding = CachedetailWaypointsCheckboxBinding.inflate(getLayoutInflater(), v, false);
-                v.addHeaderView(checkboxBinding.getRoot());
+                if (hasVisitedWayPoints()) {
+                    final CachedetailWaypointsCheckboxBinding checkboxBinding = CachedetailWaypointsCheckboxBinding.inflate(getLayoutInflater(), v, false);
+                    v.addHeaderView(checkboxBinding.getRoot());
 
-                checkboxBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                        hideVisitedWaypoints = isChecked;
+                    checkboxBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                        @Override
+                        public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                            hideVisitedWaypoints = isChecked;
 
-                        List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
-                        Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+                            final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
+                            Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
 
-                        adapter.clear();
-                        adapter.addAll(sortedWaypoints2);
-                        adapter.notifyDataSetChanged();
-                        activity.reinitializePage(Page.WAYPOINTS.id);
-                    }
-                });
+                            adapter.clear();
+                            adapter.addAll(sortedWaypoints2);
+                            adapter.notifyDataSetChanged();
+                            activity.reinitializePage(Page.WAYPOINTS.id);
+                        }
+                    });
+                }
 
                 headerBinding.addWaypoint.setOnClickListener(v2 -> {
                     activity.ensureSaved();
