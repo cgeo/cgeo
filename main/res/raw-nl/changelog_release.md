@@ -1,5 +1,5 @@
 ### Cache details
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- Nieuw: Wanneer je op de naam van de eigenaar tikt, zal het openen in het berichtcentrum de tekst vooraf invullen met de naam van de cache (alleen geocaching.com)
 
 ### Overig
-- Fix: Some fixes for bookmark lists (downloading & current status)
+- Oplossing: Enkele correcties voor bladwijzerlijsten (downloaden & huidige status)
