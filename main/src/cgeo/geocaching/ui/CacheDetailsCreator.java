@@ -239,7 +239,7 @@ public final class CacheDetailsCreator {
         nameView.setText(res.getString(R.string.cache_latest_logs));
         final LinearLayout markers = layout.findViewById(R.id.linearlayout);
 
-        final int smileySize = (int)(context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
+        final int smileySize = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
         final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
         lp.setMargins(0, 0, 5, 0);
 
