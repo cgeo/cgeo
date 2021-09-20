@@ -1216,6 +1216,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.addContextMenu(valueView);
             }
 
+            // Latest logs
+            details.addLatestLogs(cache);
+
             // cache attributes
             updateAttributesIcons(activity);
             updateAttributesText();
