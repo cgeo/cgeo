@@ -1954,6 +1954,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
         }
 
+        private List<Waypoint> createSortedWaypointList() {
+            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
+            while (waypointIterator.hasNext()) {
+                final Waypoint waypointInIterator = waypointIterator.next();
+                if (waypointInIterator.isVisited() && hideVisitedWaypoints) {
+                    waypointIterator.remove();
+                }
+            }
+            return sortedWaypoints2;
+        }
+
         @Override
         public CachedetailWaypointsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             return CachedetailWaypointsPageBinding.inflate(inflater, container, false);
@@ -1981,14 +1993,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setClickable(true);
 
             // sort waypoints: PP, Sx, FI, OWN
-            final List<Waypoint> sortedWaypoints = new ArrayList<>(cache.getWaypoints());
-            final Iterator<Waypoint> waypointIterator = sortedWaypoints.iterator();
-            while (waypointIterator.hasNext()) {
-                final Waypoint waypointInIterator = waypointIterator.next();
-                if (waypointInIterator.isVisited() && hideVisitedWaypoints) {
-                    waypointIterator.remove();
-                }
-            }
+            final List<Waypoint> sortedWaypoints = createSortedWaypointList();
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
@@ -2026,16 +2031,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
                         hideVisitedWaypoints = isChecked;
 
-                        final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
-                        final Iterator<Waypoint> waypointIterator2 = sortedWaypoints2.iterator();
-                        while (waypointIterator2.hasNext()) {
-                            final Waypoint waypointInIterator = waypointIterator2.next();
-                            if (waypointInIterator.isVisited() && hideVisitedWaypoints) {
-                                waypointIterator2.remove();
-                            }
-                        }
+                        List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
                         Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
-                        //ActivityMixin.showShortToast(activity, "Aantal : " + sortedWaypoints.size());
 
                         adapter.clear();
                         adapter.addAll(sortedWaypoints2);
