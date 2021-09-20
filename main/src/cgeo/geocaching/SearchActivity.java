@@ -40,11 +40,11 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Locale;
+
 import de.k3b.geo.api.GeoPointDto;
 import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
-
-import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 

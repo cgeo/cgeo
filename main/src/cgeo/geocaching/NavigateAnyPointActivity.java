@@ -25,11 +25,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
+import java.util.ArrayList;
+
 import de.k3b.geo.api.GeoPointDto;
 import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
-
-import java.util.ArrayList;
 
 public class NavigateAnyPointActivity extends AbstractActionBarActivity {
     @Override
