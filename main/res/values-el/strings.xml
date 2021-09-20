@@ -384,6 +384,7 @@
     <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
     <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
+    <string name="caches_upload_bookmarklist">Προσθ. στις Λίστες Σελιδοδεικτών</string>
     <string name="caches_upload_modifiedcoords">Μεταφόρτωση τροποποιημένων συντεταγμένων</string>
     <string name="caches_upload_modifiedcoords_warning">Θέλετε να ανεβάσετε τροποποιημένες συντεταγμένες για όλες τις (επιλεγμένες) κρύπτες και να αντικαταστήσετε τις υπάρχουσες συντεταγμένες στον server; Αυτό δεν μπορεί να αναιρεθεί.</string>
     <string name="caches_upload_allcoords">Μεταφόρτωση συντεταγμένων για όλες τις κρύπτες</string>
@@ -1128,6 +1129,7 @@
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
     <string name="cache_logs">Ημερολόγιο</string>
+    <string name="cache_latest_logs">Πρόσφατα αρχεία καταγραφής</string>
     <string name="cache_logs_friends_and_own">Καταγραφές φίλων και δικές σας</string>
     <string name="cache_dialog_loading_details">Φορτώνει τις λεπτομέρειες της κρύπτης…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Φόρτωση σελίδας</string>
@@ -1374,6 +1376,8 @@
     <string name="map_language">Γλώσσα χάρτη</string>
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
+    <string name="map_live_disabled">Η ζωντανή λειτουργία απενεργοποιήθηκε</string>
+    <string name="map_live_disabled_hint">Η ζωντανή λειτουργία είναι απενεργοποιημένη. Θα δείτε αποθηκευμένες κρύπτες μόνο. Χρησιμοποιήστε το μενού για να ενεργοποιήσετε τη ζωντανή λειτουργία.</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
