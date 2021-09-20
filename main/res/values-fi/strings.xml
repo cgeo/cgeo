@@ -1375,6 +1375,8 @@
     <string name="map_language">Kartan kieli</string>
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
+    <string name="map_live_disabled">Live-tila pois käytöstä</string>
+    <string name="map_live_disabled_hint">Live-tila ei ole käytössä. Näet vain tallennetut kätköt. Ota live-tila käyttöön valikossa.</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
