@@ -2024,8 +2024,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 checkboxBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                        hideVisitedWaypoints = !hideVisitedWaypoints;
-                        setContent();
+                        hideVisitedWaypoints = isChecked;
+
+                        final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
+                        final Iterator<Waypoint> waypointIterator2 = sortedWaypoints2.iterator();
+                        while (waypointIterator2.hasNext()) {
+                            final Waypoint waypointInIterator = waypointIterator2.next();
+                            if (waypointInIterator.isVisited() && hideVisitedWaypoints) {
+                                waypointIterator2.remove();
+                            }
+                        }
+                        Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+                        //ActivityMixin.showShortToast(activity, "Aantal : " + sortedWaypoints.size());
+
+                        adapter.clear();
+                        adapter.addAll(sortedWaypoints2);
+                        adapter.notifyDataSetChanged();
+                        activity.reinitializePage(Page.WAYPOINTS.id);
                     }
                 });
 
