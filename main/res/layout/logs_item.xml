@@ -4,28 +4,9 @@
     android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="right"
-        android:orientation="horizontal">
-
-        <TextView
-            android:id="@+id/author"
-            style="@style/logitem_author"
-            android:layout_alignParentLeft="true"
-            android:text="test" />
-
-        <ImageView
-            android:id="@+id/log_icon"
-            android:layout_width="@dimen/textSize_headingSecondary"
-            android:layout_height="@dimen/textSize_headingSecondary"
-            android:layout_gravity="center"
-            android:layout_marginLeft="@dimen/actionbar_separator_width"
-            android:layout_marginRight="@dimen/actionbar_separator_width"
-            android:layout_alignParentRight="true"/>
-
-    </RelativeLayout>
+    <TextView
+        android:id="@+id/author"
+        style="@style/logitem_author"/>
 
     <RelativeLayout
         android:layout_width="match_parent"

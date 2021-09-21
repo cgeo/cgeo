@@ -14,6 +14,7 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -24,6 +25,7 @@ import java.util.Map.Entry;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
+import org.w3c.dom.Text;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
     private static final String BUNDLE_ALLLOGS = "alllogs";
@@ -103,9 +105,21 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }
 
-                countview1 = new TextView(getActivity());
+                LinearLayout countview = new LinearLayout(getActivity());
+                TextView tv = new TextView(getActivity());
+                tv.setText(res.getString(R.string.cache_log_types) + ": ");
+                countview.addView(tv);
+                for (final Entry<LogType, Integer> pair : sortedLogCounts) {
+                    tv = new TextView(getActivity());
+                    tv.setText(pair.getValue().toString()+" ");
+                    tv.setCompoundDrawablesWithIntrinsicBounds(pair.getKey().getLogOverlay(), 0, 0, 0);
+                    tv.setCompoundDrawablePadding(2);
+                    countview.addView(tv);
+                }
+                binding.getRoot().addHeaderView(countview, null, false);
+                /*countview1 = new TextView(getActivity());
                 countview1.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
-                binding.getRoot().addHeaderView(countview1, null, false);
+                binding.getRoot().addHeaderView(countview1, null, false);*/
             }
         }
     }
