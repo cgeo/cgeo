@@ -2,7 +2,7 @@ c:geo ir open source, pilnvērtīgs un vienmēr gatavs lietošanai neoficiāls g
 
 Galvenās funkcijas:
 - Apskatīt slēpņus tiešsaistes kartē
-- Izmantot Google Maps vai OpenStreetMaps karstes
+- Use Google Maps or OpenStreetMap
 - Meklēt slēpņus pēc dažādiem kritērijiem
 - Reģistrēt savu apmeklējumu tiešsaistē vai saglabāt bezsaistē vēlākai reģistrēšanai
 - Saglabāt bezsaistē slēpņa informāciju savā ierīcē
