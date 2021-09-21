@@ -1,7 +1,7 @@
 c:geo je neoficiální klient pro geocaching.com. Je to plně vybavená aplikace s otevřeným zdrojovým kódem a je vám vždy k dispozici, kdykoliv se chystáte do terénu. Nabízí základní podporu pro další geocachingové platformy (například Opencaching). Nevyžaduje webový prohlížeč ani export - stačí jej nainstalovat a můžete začít ihned.
 
 Hlavní funkce:
-- Zobrazení kešek na aktivní mapě
+- Zobrazení kešek na živé mapě
 - Používání Map Google nebo OpenStreetMaps
 - Hledání kešek podle různých kritérií
 - Logování nálezů online nebo offline
@@ -13,7 +13,7 @@ Hlavní funkce:
 - Funkce offline kešování včetně offline map
 
 c:geo je snadno použitelný, ale výkonný geocachingový klient s množstvím dalších funkcí. Stačí mít existující konto na geocaching.com anebo jiné geocachingové platformě (například Opencaching).
-Hledejte kešky pomocí aktivní mapy nebo pomocí jedné z mnoha vyhledávacích funkcí.
+Hledejte kešky pomocí živé mapy nebo pomocí jedné z mnoha vyhledávacích funkcí.
 
 Navigujte se ke kešce nebo trasovému bodu pomocí zabudovaného kompasu, mapy anebo souřadnic prostřednictvím externích aplikací (např. Radar, Navigace Google, StreetView, Locus, Navigon, Sygic a mnohé další).
 
