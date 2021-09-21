@@ -1,18 +1,18 @@
 ### Mapa
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- Novetat: s'ha afegit Mapy.cz com a font de mapa en línia
+- Novetat: ruta individual: permet configurar un nou inici i invertir la ruta
+- Novetat: ara es poden activar diverses baixades de mapes fora de línia alhora
 
 ### Detalls del catxé
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- Solució: detectar si l'usuari actual és propietari d'aventures de laboratori
+- Novetat: s'han afegit alguns emojis més per utilitzar-los com a icona de catxé individual
+- Novetat: ajuda a afegir catxés a les llistes de marcadors (només PM)
+- Novetat: En tocar el nom del propietari, s'obrirà el centre de missatges amb el nom del catxé (només geocaching.com)
 
 ### Altres
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Fix: Some fixes for bookmark lists (downloading & current status)
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Novetat: Permet penjar catxés a la llista de marcadors (només disponible per a membres premium de GC)
+- Novetat: Omplir automàticament la "cerca per geocodi" si el contingut del porta-retalls es pot analitzar com a geocodi vàlid
+- Solució: algunes correccions per a la IU i per al filtratge
+- Solució: algunes correccions per a llistes de marcadors (descàrrega & estat actual)
+- Canvi: Amaga les dades sensibles a la "configuració de visualització"
+- Canvi: El prefix de catxé per els adventure labs ara és "AL" en lloc de "LC" (que ja s'utilitza per a Extremcaching)
