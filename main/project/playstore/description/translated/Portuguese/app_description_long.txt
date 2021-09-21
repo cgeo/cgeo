@@ -2,7 +2,7 @@ O c:geo é uma aplicação de código aberto, repleta de funcionalidades e pront
 
 Principais funcionalidades:
 - Ver caches num Mapa (em tempo real)
-- Usar o Google Maps ou o OpenStreetMaps
+- Use Google Maps or OpenStreetMap
 - Pesquisar por caches com diferentes critérios
 - Registar as caches que encontra, tanto em modo online como offline
 - Armazenar a informação de caches no seu dispositivo

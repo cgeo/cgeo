@@ -2,7 +2,7 @@ c:geo 是套開源 功能齊全 完整度高的 非官方 geocaching.com 客戶�
 
 主要功能：
 - 在即時地圖上瀏覽 caches.
-- 可使用 Google 地圖 或 OpenStreet地圖
+- Use Google Maps or OpenStreetMap
 - 使用多種標的搜尋 caches.
 - 可線上或離線記錄你的發現.
 - 將 cache 資訊儲存在裝置上.

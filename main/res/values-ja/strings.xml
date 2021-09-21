@@ -326,7 +326,8 @@
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
-    <string name="menu_lists_pocket_queries">リスト/ポケット・クエリ</string>
+    <string name="menu_lists_pocket_queries">ポケット・クエリ</string>
+    <string name="menu_lists_bookmarklists">ブックマークリスト</string>
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
@@ -357,6 +358,7 @@
     <string name="caches_on_map">地図で表示</string>
     <string name="caches_sort">並び替え</string>
     <string name="caches_sort_distance">距離</string>
+    <string name="caches_sort_distance_target">目的地までの距離</string>
     <string name="caches_sort_difficulty">難易度</string>
     <string name="caches_sort_terrain">地形</string>
     <string name="caches_sort_size">サイズ</string>
@@ -1111,6 +1113,7 @@
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントはありません</string>
     <string name="cache_logs">ログブック</string>
+    <string name="cache_latest_logs">最近のログ</string>
     <string name="cache_logs_friends_and_own">ジオ友達/自分のログ</string>
     <string name="cache_dialog_loading_details">キャッシュの詳細を読み込み中…</string>
     <string name="cache_dialog_loading_details_status_loadpage">ページを読み込み中</string>
@@ -1354,6 +1357,8 @@
     <string name="map_language">地図の言語</string>
     <string name="map_live_enable">オンラインで取得</string>
     <string name="map_live_disable">保存済みキャッシュのみ</string>
+    <string name="map_live_disabled">オンラインではありません</string>
+    <string name="map_live_disabled_hint">保存済みキャッシュのみ表示されるオフラインモードです。オンラインで取得するにはメニューから変更してください。</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索</string>
@@ -1399,7 +1404,7 @@
     <string name="search_pocket_title">ポケット・クエリ</string>
     <string name="search_bookmark_list">ブックマークリスト</string>
     <string name="search_pocket_is_new">新着</string>
-    <string name="search_pocket_and_bookmark_loading">ポケット・クエリのリストとブックマークリストの読み込み中</string>
+    <string name="search_pocket_loading">ポケット・クエリの読み込み中…</string>
     <string name="search_bookmark_loading">ブックマークリストの読み込み中…</string>
     <string name="search_bookmark_select">ブックマークリストの選択</string>
     <string name="search_bookmark_new">新しいブックマークリストを作成</string>
