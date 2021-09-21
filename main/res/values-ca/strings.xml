@@ -384,6 +384,7 @@
     <string name="caches_remove_all_completely">Elimina tot del dispositiu</string>
     <string name="caches_remove_selected_completely">Esborra la selecció del dispositiu</string>
     <string name="caches_delete_events">Elimina trobades passades</string>
+    <string name="caches_upload_bookmarklist">Afegeix a la llista de marcadors</string>
     <string name="caches_upload_modifiedcoords">Coordenades modificades</string>
     <string name="caches_upload_modifiedcoords_warning">Vols modificar les coordenades de tots els catxés seleccionats i sobreescriure les existents al servidor? No podràs desfer-ho.</string>
     <string name="caches_upload_allcoords">Pujar les coordenades de tots els catxés</string>
@@ -462,6 +463,7 @@
     <string name="cache_filter_location">Ubicació</string>
     <string name="cache_filter_stored_lists">Llistes emmagatzemades</string>
     <string name="cache_filter_origin">Origen</string>
+    <string name="cache_filter_stored_since">Última actualització de detalls</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
     <string name="cache_filtergroup_userspecific">Específic de l\'usuari</string>
@@ -482,6 +484,8 @@
     <string name="cache_filter_storage_clear_button">Esborra</string>
     <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
     <string name="cache_filter_storage_select_title">Seleccioneu Filtre</string>
+    <string name="cache_filter_storage_delete_title">Esborrar el filtre</string>
+    <string name="cache_filter_storage_delete_message">Confirmes que vols suprimir aquesta configuració del filtre?</string>
     <string name="cache_filter_storage_select_clear_title">Seleccioneu el filtre o esborreu el filtre actual</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Encara no s’emmagatzema cap filtre.</string>
     <string name="cache_filter_storage_save_title">Desa el filtre amb el nom</string>
@@ -493,6 +497,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">No està present</string>
     <string name="cache_filter_stringfilter_type_is_present">És present</string>
     <string name="cache_filter_stringfilter_type_contains">Conté</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">No conté</string>
     <string name="cache_filter_stringfilter_type_starts_with">Comença amb</string>
     <string name="cache_filter_stringfilter_type_ends_with">Acaba amb</string>
     <string name="cache_filter_stringfilter_type_pattern">Patró</string>
@@ -518,6 +523,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Té un Traçable</string>
     <string name="cache_filter_status_select_label_has_own_vote">Té Vot Propi</string>
     <string name="cache_filter_status_select_label_has_offline_log">Té Registre fora de línia</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Té Registre \"Trobat\" Fora de línia</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misteri Resolt</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Aquest paràmetre de filtre només afectarà els catxés misteri.\n\nUn misteri es considera \"resolt\" si ha canviat les coordenades o bé ha completat un punt de ruta final vàlid.</string>
     <string name="cache_filter_status_active">Actiu</string>
@@ -1349,6 +1355,7 @@
     <string name="map_showc_found">Trobat</string>
     <string name="map_showc_disabled">Desactivat</string>
     <string name="map_showc_archived">Arxivat</string>
+    <string name="map_showc_found_offline">Trobat (fora de línia)</string>
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Aparcament</string>
     <string name="map_showwp_visited">Visitat</string>
@@ -1415,6 +1422,12 @@
     <string name="search_bookmark_list">Llista de marcadors</string>
     <string name="search_pocket_is_new">nou</string>
     <string name="search_pocket_and_bookmark_loading">S\'està carregant una llista de Pocket Queries i llistes de marcadors</string>
+    <string name="search_bookmark_loading">S\'estan carregant les llistes de marcadors</string>
+    <string name="search_bookmark_select">Seleccioneu llistes de marcadors</string>
+    <string name="search_bookmark_new">Creeu una llista de marcadors nova</string>
+    <string name="search_bookmark_adding_caches_success">Tots els geocatxés de GC s\'han afegit a la llista de marcadors seleccionada</string>
+    <string name="search_bookmark_adding_caches_failed">No s\'han pogut afegir catxés a la llista de marcadors</string>
+    <string name="search_bookmark_create_new_failed">No s\'ha pogut crear una llista nova de marcadors</string>
     <!-- trackable -->
     <string name="trackable">Traçable</string>
     <string name="trackable_details_loading">Carregant les dades del traçable…</string>
@@ -2095,6 +2108,7 @@
     <string name="done">Fet</string>
     <string name="finish">Acabar</string>
     <string name="back">Enrere</string>
+    <string name="later">Més tard</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
 </resources>
