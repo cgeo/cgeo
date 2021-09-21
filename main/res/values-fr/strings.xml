@@ -326,7 +326,8 @@
     <string name="menu_history">Historique</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Scanner un géocode</string>
-    <string name="menu_lists_pocket_queries">Listes / Pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Listes de favoris</string>
     <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
     <string name="menu_invert_order">Inverser l’ordre</string>
     <!-- main screen -->
@@ -850,7 +851,7 @@
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
     <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
-    <string name="init_offlinelogs_homescreen">Afficher les logs hors ligne</string>
+    <string name="init_offlinelogs_homescreen">Afficher les visites hors ligne</string>
     <string name="init_summary_offlinelogs_homescreen">Un compteur de visites hors ligne (p. ex. \"+ 1\") sera affiché à côté de votre compteur en ligne sur l\'écran d\'accueil, si vous avez des visites qui n\'ont pas encore été chargées.</string>
     <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_summary_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
@@ -1128,6 +1129,7 @@
     <string name="cache_hint">Indice</string>
     <string name="cache_hint_not_available">Aucun indice disponible</string>
     <string name="cache_logs">Carnet de visites</string>
+    <string name="cache_latest_logs">Visites récentes</string>
     <string name="cache_logs_friends_and_own">Vous / Amis</string>
     <string name="cache_dialog_loading_details">Chargement des détails…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
@@ -1374,6 +1376,8 @@
     <string name="map_language">Langue de la carte</string>
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
+    <string name="map_live_disabled">Carte temps réel désactivée</string>
+    <string name="map_live_disabled_hint">La carte temps réel est désactivée. Seules les caches enregistrées seront affichées. Utilisez le menu pour activer le temps réel.</string>
     <string name="map_as_list">Lister les caches</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
@@ -1420,7 +1424,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Liste des favoris</string>
     <string name="search_pocket_is_new">nouveau</string>
-    <string name="search_pocket_and_bookmark_loading">Chargement des Pocket Queries et des listes</string>
+    <string name="search_pocket_loading">Chargement des pocket queries</string>
     <string name="search_bookmark_loading">Chargement des listes de favoris</string>
     <string name="search_bookmark_select">Sélectionnez les listes de favoris</string>
     <string name="search_bookmark_new">Créer une nouvelle liste de favoris</string>
