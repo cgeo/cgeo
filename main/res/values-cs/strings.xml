@@ -275,7 +275,7 @@
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
     <string name="warn_notloggedin_title">Offline režim</string>
     <string name="warn_notloggedin_short">Nejste přihlášeni. Živá mapa bude zobrazovat pouze kešky uložené v místním úložišti. Klepněte zde pro více informací.</string>
-    <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
+    <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Živá mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="err_read_bookmark_list">Chyba při čtení seznamů záložek.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
@@ -326,11 +326,12 @@
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>
-    <string name="menu_lists_pocket_queries">Seznamy / Pocket Queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Seznamy záložek</string>
     <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
-    <string name="live_map_button">Aktivní mapa</string>
+    <string name="live_map_button">Živá mapa</string>
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
@@ -360,6 +361,7 @@
     <string name="caches_on_map">Zobrazit na mapě</string>
     <string name="caches_sort">Řazení</string>
     <string name="caches_sort_distance">Vzdálenost</string>
+    <string name="caches_sort_distance_target">Vzdálenost k cíli</string>
     <string name="caches_sort_difficulty">Obtížnost</string>
     <string name="caches_sort_terrain">Terén</string>
     <string name="caches_sort_size">Velikost</string>
@@ -468,7 +470,7 @@
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
-    <string name="cache_filter_contexttype_live_title">Live filtr</string>
+    <string name="cache_filter_contexttype_live_title">Živý filtr</string>
     <string name="cache_filter_contexttype_offline_title">Offline filtr</string>
     <string name="cache_filter_contexttype_transient_title">Filtr</string>
     <string name="cache_filter_include">Zahrnout</string>
@@ -919,7 +921,7 @@
     <string name="feature_watch_list">Sledované</string>
     <string name="feature_own_coordinates">Ukládání modifikovaných souřadnic</string>
     <string name="feature_search_keyword">Hledat podle klíčového slova</string>
-    <string name="feature_search_live_map">Aktivní mapa</string>
+    <string name="feature_search_live_map">Živá mapa</string>
     <string name="feature_search_center">Hledat podle pozice</string>
     <string name="feature_search_geocode">Hledat podle geokódu</string>
     <string name="feature_search_owner">Hledat podle vlastníka</string>
@@ -1148,6 +1150,7 @@
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_latest_logs">Poslední logy</string>
     <string name="cache_logs_friends_and_own">Moje logy a logy přátel</string>
     <string name="cache_dialog_loading_details">Načítání detailů kešky…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Načítání stránky</string>
@@ -1367,7 +1370,7 @@
     <string name="visit_tweet">Oznámit nález na Twitteru</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Aktivní mapa</string>
+    <string name="map_live">Živá mapa</string>
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
@@ -1394,8 +1397,10 @@
     <string name="map_theme_select">Styl mapy…</string>
     <string name="map_theme_options">Možnosti vzhledu</string>
     <string name="map_language">Jazyk mapy</string>
-    <string name="map_live_enable">Povolit aktivní mapu</string>
-    <string name="map_live_disable">Zakázat aktivní mapu</string>
+    <string name="map_live_enable">Povolit živou mapu</string>
+    <string name="map_live_disable">Zakázat živou mapu</string>
+    <string name="map_live_disabled">Živý režim zakázán</string>
+    <string name="map_live_disabled_hint">Živý režim je zakázán. Zobrazí se pouze uložené kešky. Použijte menu pro povolení živého režimu.</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
@@ -1442,7 +1447,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
     <string name="search_pocket_is_new">nový</string>
-    <string name="search_pocket_and_bookmark_loading">Načítání seznamu Pocket Queries a záložek</string>
+    <string name="search_pocket_loading">Načítání pocket queries</string>
     <string name="search_bookmark_loading">Načítání seznamů záložek</string>
     <string name="search_bookmark_select">Vybrat seznamy záložek</string>
     <string name="search_bookmark_new">Vytvořit nový seznam záložek</string>
@@ -1603,8 +1608,8 @@
     <string name="attribute_stealth_no">Není třeba dávat pozor</string>
     <string name="attribute_firstaid_yes">Potřebuje údržbu</string>
     <string name="attribute_firstaid_no">Nepotřebuje údržbu</string>
-    <string name="attribute_cow_yes">Pozor na domácí zvířata</string>
-    <string name="attribute_cow_no">Žádná domácí zvířata</string>
+    <string name="attribute_cow_yes">Pozor na hospodářská zvířata</string>
+    <string name="attribute_cow_no">Žádná hospodářská zvířata</string>
     <string name="attribute_field_puzzle_yes">Hádanka v terénu</string>
     <string name="attribute_field_puzzle_no">Žádná hádanka v terénu</string>
     <string name="attribute_nightcache_yes">Noční keška</string>
@@ -1826,7 +1831,7 @@
     <string name="status_new_nightly" tools:ignore="UnusedResources">K dispozici je nové noční sestavení.\nKlepnutím nainstalujete.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">K dispozici je nový kandidát na vydání.\nKlepnutím nainstalujete.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy v c:geo.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy s Aktivní mapou.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy s živou mapou.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com není v tuto chvíli (plně) k dispozici.\nV c:geo se mohou vyskytnout různé problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi sytému Android. Tato verze c:geo již není kompatibilní s vaším zařízením a může selhávat nebo se chovat neočekávaně!\nKlepněte na tuto zprávu pro další informace.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používáte verzi c:geo, která se zdá být starší než jeden rok. Některé funkce již nemusí fungovat kvůli změnám na webu nebo jiným technickým změnám. Přečtěte si prosím naše FAQ na téma jak aktualizovat na nejnovější verzi.</string>

@@ -326,7 +326,8 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Suodatin</string>
     <string name="menu_scan_geo">Skannaa geokoodi</string>
-    <string name="menu_lists_pocket_queries">Listat / pocket queryt</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Kirjanmerkkilistat</string>
     <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
     <string name="menu_invert_order">Käännä järjestys</string>
     <!-- main screen -->
@@ -1374,6 +1375,8 @@
     <string name="map_language">Kartan kieli</string>
     <string name="map_live_enable">Aktivoi Live</string>
     <string name="map_live_disable">Poista live</string>
+    <string name="map_live_disabled">Live-tila pois käytöstä</string>
+    <string name="map_live_disabled_hint">Live-tila ei ole käytössä. Näet vain tallennetut kätköt. Ota live-tila käyttöön valikossa.</string>
     <string name="map_as_list">Näytä luettelona</string>
     <string name="map_select_multiple_items">Valitse kohde</string>
     <string name="map_routing">Reititys</string>
@@ -1420,7 +1423,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Kirjanmerkit</string>
     <string name="search_pocket_is_new">uusi</string>
-    <string name="search_pocket_and_bookmark_loading">Ladataan luetteloa Pocket Queries- ja kirjanmerkkilistoista</string>
+    <string name="search_pocket_loading">Ladataan Pocket Queryja</string>
     <string name="search_bookmark_loading">Ladataan kirjanmerkkilistoja</string>
     <string name="search_bookmark_select">Valitse kirjanmerkkilistat</string>
     <string name="search_bookmark_new">Luo uusi kirjanmerkkilista</string>
@@ -2021,7 +2024,7 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>

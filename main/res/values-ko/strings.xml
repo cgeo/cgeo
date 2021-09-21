@@ -326,7 +326,8 @@
     <string name="menu_history">지난 기록</string>
     <string name="menu_filter">필터</string>
     <string name="menu_scan_geo">지오코드 스캔</string>
-    <string name="menu_lists_pocket_queries">목록 / 포켓 쿼리</string>
+    <string name="menu_lists_pocket_queries">포켓쿼리</string>
+    <string name="menu_lists_bookmarklists">북마크 목록</string>
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
     <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
@@ -357,6 +358,7 @@
     <string name="caches_on_map">지도에 표시</string>
     <string name="caches_sort">정렬</string>
     <string name="caches_sort_distance">거리</string>
+    <string name="caches_sort_distance_target">도착지 남은 거리</string>
     <string name="caches_sort_difficulty">난이도</string>
     <string name="caches_sort_terrain">지형난이도</string>
     <string name="caches_sort_size">크기</string>
@@ -382,6 +384,7 @@
     <string name="caches_remove_all_completely">장치에서 모두 삭제</string>
     <string name="caches_remove_selected_completely">장치에서 선택한 것을 삭제</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
+    <string name="caches_upload_bookmarklist">북마크 목록에 추가</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
     <string name="caches_upload_modifiedcoords_warning">모든 (선택된) 캐시에 대해 수정 된 좌표를 업로드하고 서버의 기존 좌표를 덮어 쓰시겠습니까? 취소 할 수 없습니다.</string>
     <string name="caches_upload_allcoords">모든 캐시에 대한 좌표 업로드하기</string>
@@ -1117,6 +1120,7 @@
     <string name="cache_hint">힌트</string>
     <string name="cache_hint_not_available">힌트가 없습니다.</string>
     <string name="cache_logs">방명록</string>
+    <string name="cache_latest_logs">최근 로그</string>
     <string name="cache_logs_friends_and_own">친구/내 로그</string>
     <string name="cache_dialog_loading_details">캐시 정보 불러오는 중…</string>
     <string name="cache_dialog_loading_details_status_loadpage">페이지 불러오는 중</string>
@@ -1362,6 +1366,8 @@
     <string name="map_language">지도 언어</string>
     <string name="map_live_enable">라이브 활성화</string>
     <string name="map_live_disable">라이브 비활성화</string>
+    <string name="map_live_disabled">라이브 모드 비활성화됨</string>
+    <string name="map_live_disabled_hint">라이브 모드가 비활성화되었습니다. 저장된 캐시만 표시됩니다. 메뉴를 사용하여 라이브 모드를 활성화합니다.</string>
     <string name="map_as_list">목록으로 보기</string>
     <string name="map_select_multiple_items">항목 선택</string>
     <string name="map_routing">길찾기</string>
@@ -1408,7 +1414,7 @@
     <string name="search_pocket_title">포켓쿼리</string>
     <string name="search_bookmark_list">북마크 목록</string>
     <string name="search_pocket_is_new">새로운</string>
-    <string name="search_pocket_and_bookmark_loading">포켓 쿼리 및 북마크 목록 로드</string>
+    <string name="search_pocket_loading">포켓 쿼리 로드중</string>
     <string name="search_bookmark_loading">북마크 목록 로드 중</string>
     <string name="search_bookmark_select">북마크 목록 선택</string>
     <string name="search_bookmark_new">새 북마크 목록 만들기</string>

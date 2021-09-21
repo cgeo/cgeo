@@ -326,7 +326,6 @@
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_filter">Filtrera</string>
     <string name="menu_scan_geo">Scanna geokod</string>
-    <string name="menu_lists_pocket_queries">Listor / Pocket Queries</string>
     <string name="menu_scan_description">c:geo kan skanna geocoder som skrivits som QR-koder. Den nödvändiga appen är inte installerad. Vill du öppna Google Play för att installera den?</string>
     <string name="menu_invert_order">Omvänd sortering</string>
     <!-- main screen -->
@@ -1413,7 +1412,6 @@
     <string name="search_pocket_title">Pocket query</string>
     <string name="search_bookmark_list">Bokmärkeslista</string>
     <string name="search_pocket_is_new">ny</string>
-    <string name="search_pocket_and_bookmark_loading">Laddar en lista med Pocket Queries och bokmärkeslistor</string>
     <!-- trackable -->
     <string name="trackable">Trackable</string>
     <string name="trackable_details_loading">Laddar detaljer om trackable…</string>

@@ -326,7 +326,8 @@
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
-    <string name="menu_lists_pocket_queries">Λίστες / pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket Queries</string>
+    <string name="menu_lists_bookmarklists">Λίστα σελιδοδεικτών</string>
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
@@ -383,6 +384,7 @@
     <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
     <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
+    <string name="caches_upload_bookmarklist">Προσθ. στις Λίστες Σελιδοδεικτών</string>
     <string name="caches_upload_modifiedcoords">Μεταφόρτωση τροποποιημένων συντεταγμένων</string>
     <string name="caches_upload_modifiedcoords_warning">Θέλετε να ανεβάσετε τροποποιημένες συντεταγμένες για όλες τις (επιλεγμένες) κρύπτες και να αντικαταστήσετε τις υπάρχουσες συντεταγμένες στον server; Αυτό δεν μπορεί να αναιρεθεί.</string>
     <string name="caches_upload_allcoords">Μεταφόρτωση συντεταγμένων για όλες τις κρύπτες</string>
@@ -1127,6 +1129,7 @@
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
     <string name="cache_logs">Ημερολόγιο</string>
+    <string name="cache_latest_logs">Πρόσφατα αρχεία καταγραφής</string>
     <string name="cache_logs_friends_and_own">Καταγραφές φίλων και δικές σας</string>
     <string name="cache_dialog_loading_details">Φορτώνει τις λεπτομέρειες της κρύπτης…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Φόρτωση σελίδας</string>
@@ -1373,6 +1376,8 @@
     <string name="map_language">Γλώσσα χάρτη</string>
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
+    <string name="map_live_disabled">Η ζωντανή λειτουργία απενεργοποιήθηκε</string>
+    <string name="map_live_disabled_hint">Η ζωντανή λειτουργία είναι απενεργοποιημένη. Θα δείτε αποθηκευμένες κρύπτες μόνο. Χρησιμοποιήστε το μενού για να ενεργοποιήσετε τη ζωντανή λειτουργία.</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
@@ -1419,7 +1424,7 @@
     <string name="search_pocket_title">Προσωπική Αναζήτηση</string>
     <string name="search_bookmark_list">Λίστα σελιδοδεικτών</string>
     <string name="search_pocket_is_new">νέο</string>
-    <string name="search_pocket_and_bookmark_loading">Φόρτωση λίστας Pocket Queries και σελιδοδεικτών</string>
+    <string name="search_pocket_loading">Φόρτωση των Pocket Queries</string>
     <string name="search_bookmark_loading">Φόρτωση λιστών σελιδοδεικτών</string>
     <string name="search_bookmark_select">Επιλέξτε λίστες σελιδοδεικτών</string>
     <string name="search_bookmark_new">Δημιουργία νέας λίστας σελιδοδεικτών</string>

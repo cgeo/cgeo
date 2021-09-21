@@ -320,7 +320,6 @@
     <string name="menu_history">Istorija</string>
     <string name="menu_filter">Filtras</string>
     <string name="menu_scan_geo">Skenuoti geo kodą</string>
-    <string name="menu_lists_pocket_queries">Sąrašai / kišeninės užklausos</string>
     <string name="menu_scan_description">c:geo negali nuskaityti QR kodų. Reikalinga programa neįdiegta. Ar norite atidaryti Google Play ir ją įdiegti?</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
