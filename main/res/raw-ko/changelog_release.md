@@ -1,18 +1,18 @@
 ### 지도
-- New: Added Mapy.cz as online map source
-- New: Individual route: Allow setting a new start and reversing the route
-- New: Multiple offline map downloads can now be triggered at once
+- 신규: Mapy.cz를 온라인 지도 소스로 추가했습니다.
+- 신규: 개인 경로: 새로운 출발점 설정 및 경로 역전 허용
+- 신규: 이제 여러 오프라인 지도 다운로드를 한 번에 실행할 수 있습니다.
 
 ### 캐시 상세정보
-- Fix: Detect if current user is owner for lab adventures
-- New: Added some more emoijis for use as individual cache icon
-- New: Support adding caches to bookmark lists (PM only)
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- 수정: 현재 사용자가 어드벤처 랩의 소유자인지 감지
+- 신규: 개별 캐시 아이콘으로 사용할 이모지를 추가했습니다.
+- 신규: 북마크 목록에 캐시 추가 지원 (프리미엄 회원만)
+- 신규: 소유자 이름을 누를 때 메시지 센터에서 열면 캐시 이름으로 텍스트가 미리 채워집니다. (geocaching.com만)
 
 ### 추가 사항
-- New: Allow upload of caches to bookmark list (only available for GC premium members)
-- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
-- Fix: Some fixes for UI and for filtering
-- Fix: Some fixes for bookmark lists (downloading & current status)
-- Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- 신규: 북마크 목록에 캐시 업로드 허용(GC 프리미엄 회원만 사용 가능)
+- 신규: 클립보드 콘텐츠를 유효한 GC코드로 파싱할 수 있는 경우 'GC코드로 검색'을 자동으로 미리 채움
+- 수정: UI 및 필터링에 대한 일부 수정
+- 수정: 북마크 목록에 대한 일부 수정(다운로드 및 현재 상태)
+- 변경: "보기 설정"에서 민감한 정보 숨기기
+- 변경: 어드벤처 랩 캐시 접두사는 이제 "LC" 대신 "AL"입니다. (이미 Extremcaching에 사용 중임)
