@@ -326,7 +326,8 @@
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
-    <string name="menu_lists_pocket_queries">Listeler / cep sorguları</string>
+    <string name="menu_lists_pocket_queries">Sorgulama kayıtları</string>
+    <string name="menu_lists_bookmarklists">Yer imi listeleri</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
     <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
@@ -588,7 +589,7 @@
     <string name="contribution_infrastructure">altyapı</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Bir sorun bildir</string>
+    <string name="debug_user_error_report_title">Sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <string name="debug_current_downloads">Mevcut indirmeler</string>
@@ -1418,7 +1419,7 @@
     <string name="search_pocket_title">Sorgulama Kaydı</string>
     <string name="search_bookmark_list">Yer imi listesi</string>
     <string name="search_pocket_is_new">yeni</string>
-    <string name="search_pocket_and_bookmark_loading">Cep sorgusu listesi veya bir yer imi listesi yükleniyor</string>
+    <string name="search_pocket_loading">Sorgulama kayırları yükleniyor</string>
     <string name="search_bookmark_loading">Yer imi listeleri yükleniyor</string>
     <string name="search_bookmark_select">Yer imi listesini seç</string>
     <string name="search_bookmark_new">Yeni yer imi listesi oluştur</string>
