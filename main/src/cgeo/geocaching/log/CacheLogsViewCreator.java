@@ -33,7 +33,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     private static final String BUNDLE_ALLLOGS = "alllogs";
 
     private final Resources res = CgeoApplication.getInstance().getResources();
-    private TextView countview1 = null;
+    private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
@@ -107,26 +107,23 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }
 
-                LinearLayout countview = new LinearLayout(getActivity());
+                countview1 = new LinearLayout(getActivity());
                 TextView logtypes = new TextView(getActivity());
                 logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
-                countview.addView(logtypes);
+                countview1.addView(logtypes);
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
                     final TextView tv = new TextView(getActivity());
                     tv.setText(pair.getValue().toString());
                     tv.setCompoundDrawablesWithIntrinsicBounds(pair.getKey().getLogOverlay(), 0, 0, 0);
                     tv.setCompoundDrawablePadding(4);
-                    tv.setPadding(0,0, 5, 0);
+                    tv.setPadding(0,0, 10, 0);
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     tv.setOnClickListener(v -> {
                         tv.performLongClick();
                     });
-                    countview.addView(tv);
+                    countview1.addView(tv);
                 }
-                binding.getRoot().addHeaderView(countview, null, false);
-                /*countview1 = new TextView(getActivity());
-                countview1.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
-                binding.getRoot().addHeaderView(countview1, null, false);*/
+                binding.getRoot().addHeaderView(countview1, null, false);
             }
         }
     }
