@@ -324,7 +324,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private Geopoint loadGpFromSavedState() {
-        Geopoint gpret = Sensors.getInstance().currentGeo().getCoords();
+        Geopoint gpret = null;
         final List<ButtonData> buttons = savedState.buttons;
 
         switch (savedState.format) {
@@ -367,6 +367,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     replaceNonNumericByZero("" + buttons.get(16).inputVal + buttons.get(17).inputVal),
                     replaceNonNumericByZero("" + buttons.get(20).inputVal + buttons.get(21).inputVal + buttons.get(22).inputVal));
                 break;
+            default:
+                gpret = Sensors.getInstance().currentGeo().getCoords();
         }
         return gpret;
     }
