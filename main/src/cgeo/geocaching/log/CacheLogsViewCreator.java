@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.widget.TooltipCompat;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -106,14 +108,19 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                 }
 
                 LinearLayout countview = new LinearLayout(getActivity());
-                TextView tv = new TextView(getActivity());
-                tv.setText(res.getString(R.string.cache_log_types) + ": ");
-                countview.addView(tv);
+                TextView logtypes = new TextView(getActivity());
+                logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
+                countview.addView(logtypes);
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
-                    tv = new TextView(getActivity());
-                    tv.setText(pair.getValue().toString()+" ");
+                    final TextView tv = new TextView(getActivity());
+                    tv.setText(pair.getValue().toString());
                     tv.setCompoundDrawablesWithIntrinsicBounds(pair.getKey().getLogOverlay(), 0, 0, 0);
-                    tv.setCompoundDrawablePadding(2);
+                    tv.setCompoundDrawablePadding(4);
+                    tv.setPadding(0,0, 5, 0);
+                    TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
+                    tv.setOnClickListener(v -> {
+                        tv.performLongClick();
+                    });
                     countview.addView(tv);
                 }
                 binding.getRoot().addHeaderView(countview, null, false);

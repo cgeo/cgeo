@@ -504,9 +504,9 @@
         <item name="android:layout_gravity">right</item>
         <item name="android:ellipsize">none</item>
         <item name="android:gravity">left</item>
-        <item name="android:lines">1</item>
+        <item name="android:maxLines">3</item>
         <item name="android:scrollHorizontally">true</item>
-        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">3</item>
         <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
         <item name="android:textColor">@color/colorTextHint</item>
     </style>

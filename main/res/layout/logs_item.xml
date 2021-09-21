@@ -34,7 +34,7 @@
 
                 <TextView
                     android:id="@+id/type"
-                    style="@style/logitem_property"/>
+                    style="@style/logitem_property" />
 
                 <TextView
                     android:id="@+id/count_or_location"

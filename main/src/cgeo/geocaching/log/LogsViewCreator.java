@@ -26,6 +26,7 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
@@ -87,7 +88,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
         holder.binding.type.setText(log.logType.getL10n());
         holder.binding.type.setCompoundDrawablesWithIntrinsicBounds(log.logType.getLogOverlay(), 0, 0, 0);
-        holder.binding.type.setCompoundDrawablePadding(3);
+        holder.binding.type.setCompoundDrawablePadding(4);
 
         holder.binding.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
