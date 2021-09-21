@@ -326,7 +326,8 @@
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
-    <string name="menu_lists_pocket_queries">Listen / Pocket-Queries</string>
+    <string name="menu_lists_pocket_queries">Pocket-Queries</string>
+    <string name="menu_lists_bookmarklists">Lesezeichenliste</string>
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
@@ -358,6 +359,7 @@
     <string name="caches_on_map">Zeige auf Karte</string>
     <string name="caches_sort">Sortierung</string>
     <string name="caches_sort_distance">Entfernung</string>
+    <string name="caches_sort_distance_target">Entfernung zum Ziel</string>
     <string name="caches_sort_difficulty">Schwierigkeit</string>
     <string name="caches_sort_terrain">Gelände</string>
     <string name="caches_sort_size">Größe</string>
@@ -383,6 +385,7 @@
     <string name="caches_remove_all_completely">Alle vom Gerät löschen</string>
     <string name="caches_remove_selected_completely">Ausgewählte vom Gerät löschen</string>
     <string name="caches_delete_events">Vergangene Events löschen</string>
+    <string name="caches_upload_bookmarklist">Zu Lesezeichenliste hinzufügen</string>
     <string name="caches_upload_modifiedcoords">Geänderte Koordinaten hochladen</string>
     <string name="caches_upload_modifiedcoords_warning">Möchtest du modifizierte Koordinaten für alle (ausgewählten) Caches hochladen und die vorhandenen Koordinaten auf dem Server überschreiben? Dies kann nicht rückgängig gemacht werden.</string>
     <string name="caches_upload_allcoords">Koordinaten für alle Caches hochladen</string>
@@ -1127,6 +1130,7 @@
     <string name="cache_hint">Hinweis</string>
     <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
     <string name="cache_logs">Logbuch</string>
+    <string name="cache_latest_logs">Neueste Logs</string>
     <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
     <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
@@ -1373,6 +1377,8 @@
     <string name="map_language">Sprache der Karte</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
+    <string name="map_live_disabled">Aktualisierung ist ausgeschaltet</string>
+    <string name="map_live_disabled_hint">Aktualisierung ist ausgeschaltet. Du wirst nur gespeicherte Caches sehen. Nutze das Menü, um die Aktualisierung einzuschalten.</string>
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
@@ -1419,7 +1425,7 @@
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
     <string name="search_pocket_is_new">neu</string>
-    <string name="search_pocket_and_bookmark_loading">Lade eine Liste von Pocket-Queries und Lesezeichenlisten</string>
+    <string name="search_pocket_loading">Lade Pocket-Queries</string>
     <string name="search_bookmark_loading">Lesezeichenlisten werden geladen</string>
     <string name="search_bookmark_select">Lesezeichenliste auswählen</string>
     <string name="search_bookmark_new">Neue Lesezeichenliste erstellen</string>
