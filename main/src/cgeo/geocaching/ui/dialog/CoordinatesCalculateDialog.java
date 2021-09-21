@@ -369,6 +369,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 break;
             default:
                 gpret = Sensors.getInstance().currentGeo().getCoords();
+                break;
         }
         return gpret;
     }
