@@ -87,6 +87,8 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
         holder.binding.type.setText(log.logType.getL10n());
 
+        holder.binding.logIcon.setImageResource(log.logType.getLogOverlay());
+
         holder.binding.author.setText(StringEscapeUtils.unescapeHtml4(log.author));
 
         fillCountOrLocation(holder, log);
