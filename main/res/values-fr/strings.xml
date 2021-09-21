@@ -850,7 +850,7 @@
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
     <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
-    <string name="init_offlinelogs_homescreen">Afficher les logs hors ligne</string>
+    <string name="init_offlinelogs_homescreen">Afficher les visites hors ligne</string>
     <string name="init_summary_offlinelogs_homescreen">Un compteur de visites hors ligne (p. ex. \"+ 1\") sera affiché à côté de votre compteur en ligne sur l\'écran d\'accueil, si vous avez des visites qui n\'ont pas encore été chargées.</string>
     <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_summary_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
