@@ -383,6 +383,7 @@
     <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
     <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
+    <string name="caches_upload_bookmarklist">Προσθ. στις Λίστες Σελιδοδεικτών</string>
     <string name="caches_upload_modifiedcoords">Μεταφόρτωση τροποποιημένων συντεταγμένων</string>
     <string name="caches_upload_modifiedcoords_warning">Θέλετε να ανεβάσετε τροποποιημένες συντεταγμένες για όλες τις (επιλεγμένες) κρύπτες και να αντικαταστήσετε τις υπάρχουσες συντεταγμένες στον server; Αυτό δεν μπορεί να αναιρεθεί.</string>
     <string name="caches_upload_allcoords">Μεταφόρτωση συντεταγμένων για όλες τις κρύπτες</string>
