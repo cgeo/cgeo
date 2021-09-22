@@ -319,61 +319,6 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         return ccd;
     }
 
-    private String replaceNonNumericByZero(final String str) {
-        return str.replaceAll("[^0-9]", "0");
-    }
-
-    private Geopoint loadGpFromSavedState() {
-        Geopoint gpret = null;
-        final List<ButtonData> buttons = savedState.buttons;
-
-        switch (savedState.format) {
-            case Min:
-                // N 00 01 ° 02 03 . 08 09 10
-                // E 11 12 13 ° 14 15 . 20 21 22
-                gpret = new Geopoint(
-                    "" + savedState.latHemisphere,
-                    replaceNonNumericByZero("" + buttons.get(0).inputVal + buttons.get(1).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(2).inputVal + buttons.get(3).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(8).inputVal + buttons.get(9).inputVal + buttons.get(10).inputVal),
-                    "" + savedState.lonHemisphere,
-                    replaceNonNumericByZero("" + buttons.get(11).inputVal + buttons.get(12).inputVal + buttons.get(13).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(14).inputVal + buttons.get(15).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(20).inputVal + buttons.get(21).inputVal + buttons.get(22).inputVal));
-                break;
-            case Deg:
-                // N 00 01 . 06 07 08 09 10
-                // E 11 12 13 . 18 19 20 21 22
-                gpret = new Geopoint(
-                    "" + savedState.latHemisphere,
-                    replaceNonNumericByZero("" + buttons.get(0).inputVal + buttons.get(1).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(6).inputVal + buttons.get(7).inputVal + buttons.get(8).inputVal + buttons.get(9).inputVal + buttons.get(10).inputVal),
-                    "" + savedState.lonHemisphere,
-                    replaceNonNumericByZero("" + buttons.get(11).inputVal + buttons.get(12).inputVal + buttons.get(13).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(18).inputVal + buttons.get(19).inputVal + buttons.get(20).inputVal + buttons.get(21).inputVal + buttons.get(22).inputVal));
-                break;
-            case Sec:
-                // N 00 01 ° 02 03 ' 04 05 . 08 09 10
-                // E 11 12 13 ° 14 15 ' 16 17 . 20 21 22
-                gpret = new Geopoint(
-                    "" + savedState.latHemisphere,
-                    replaceNonNumericByZero("" + buttons.get(0).inputVal + buttons.get(1).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(2).inputVal + buttons.get(3).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(4).inputVal + buttons.get(5).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(8).inputVal + buttons.get(9).inputVal + buttons.get(10).inputVal),
-                    "" + savedState.lonHemisphere,
-                    replaceNonNumericByZero("" + buttons.get(11).inputVal + buttons.get(12).inputVal + buttons.get(13).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(14).inputVal + buttons.get(15).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(16).inputVal + buttons.get(17).inputVal),
-                    replaceNonNumericByZero("" + buttons.get(20).inputVal + buttons.get(21).inputVal + buttons.get(22).inputVal));
-                break;
-            default:
-                gpret = Sensors.getInstance().currentGeo().getCoords();
-                break;
-        }
-        return gpret;
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -385,7 +330,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (gp == null) {
             gp = Sensors.getInstance().currentGeo().getCoords();
             if (savedState != null) {
-                gp = loadGpFromSavedState();
+                gp = new Geopoint(savedState.plainLat, savedState.plainLon);
             }
         }
         if (savedInstanceState != null) {
