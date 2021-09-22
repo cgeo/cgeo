@@ -14,6 +14,18 @@ import androidx.preference.PreferenceViewHolder;
 // https://www.joehxblog.com/how-to-add-a-long-click-to-an-androidx-preference/
 abstract class AbstractClickablePreference extends Preference {
 
+    private final SettingsActivity activity;
+
+    AbstractClickablePreference(final Context context, final AttributeSet attrs) {
+        super(context, attrs);
+        activity = (SettingsActivity) context;
+    }
+
+    AbstractClickablePreference(final Context context, final AttributeSet attrs, final int defStyle) {
+        super(context, attrs, defStyle);
+        activity = (SettingsActivity) context;
+    }
+
     private final View.OnLongClickListener longClickListener = v -> {
         if (!isAuthorized()) {
             return false;
@@ -33,17 +45,11 @@ abstract class AbstractClickablePreference extends Preference {
         return true;
     };
 
-    AbstractClickablePreference(final Context context, final AttributeSet attrs) {
-        super(context, attrs);
-    }
-
-    AbstractClickablePreference(final Context context, final AttributeSet attrs, final int defStyle) {
-        super(context, attrs, defStyle);
-    }
-
     @Override
     public void onBindViewHolder(final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
+
+        setOnPreferenceClickListener(getOnPreferenceClickListener(activity));
 
         final View itemView = holder.itemView;
         itemView.setOnLongClickListener(this.longClickListener);
