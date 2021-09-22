@@ -20,7 +20,6 @@ import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.connector.oc.OCApiConnector.ApiSupport;
 import cgeo.geocaching.connector.oc.OCApiLiveConnector;
 import cgeo.geocaching.connector.oc.OCCZConnector;
-import cgeo.geocaching.connector.oc.OCConnector;
 import cgeo.geocaching.connector.oc.OCDEConnector;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.connector.tc.TerraCachingConnector;
@@ -70,7 +69,6 @@ public final class ConnectorFactory {
             new OCApiLiveConnector("opencache.uk", "opencache.uk", false, "OK", "CC BY-NC-SA 2.5",
                     R.string.oc_uk2_okapi_consumer_key, R.string.oc_uk2_okapi_consumer_secret,
                     R.string.pref_connectorOCUKActive, R.string.pref_ocuk2_tokenpublic, R.string.pref_ocuk2_tokensecret, ApiSupport.current, "OC.UK"),
-            new OCConnector("OpenCaching.NO/SE", "www.opencaching.se", false, "OS", "OC.NO"),
             new OCApiLiveConnector("opencaching.nl", "www.opencaching.nl", false, "OB", "CC BY-SA 3.0",
                     R.string.oc_nl_okapi_consumer_key, R.string.oc_nl_okapi_consumer_secret,
                     R.string.pref_connectorOCNLActive, R.string.pref_ocnl_tokenpublic, R.string.pref_ocnl_tokensecret, ApiSupport.current, "OC.NL"),
