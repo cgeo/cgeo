@@ -359,6 +359,7 @@
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
     <string name="caches_sort_distance">Distância</string>
+    <string name="caches_sort_distance_target">Distância para o destino</string>
     <string name="caches_sort_difficulty">Dificuldade</string>
     <string name="caches_sort_terrain">Terreno</string>
     <string name="caches_sort_size">Tamanho</string>
@@ -384,6 +385,7 @@
     <string name="caches_remove_all_completely">Eliminar todas do dispositivo</string>
     <string name="caches_remove_selected_completely">Eliminar seleccionadas do dispositivo</string>
     <string name="caches_delete_events">Eliminar eventos passados</string>
+    <string name="caches_upload_bookmarklist">Adicionar aos marcadores</string>
     <string name="caches_upload_modifiedcoords">Carregar as coordenadas modificadas</string>
     <string name="caches_upload_modifiedcoords_warning">Quer carregar as coordenadas modificadas para todas as caches (seleccionadas) e substituir as coordenadas existentes no servidor? Isto não pode ser anulado.</string>
     <string name="caches_upload_allcoords">Carregar todas as coord. memorizadas</string>
@@ -1128,6 +1130,7 @@
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
     <string name="cache_logs">Todos os registos</string>
+    <string name="cache_latest_logs">Registos recentes</string>
     <string name="cache_logs_friends_and_own">Registos: Amigos/Meus</string>
     <string name="cache_dialog_loading_details">A carregar os detalhes da cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">A carregar a página</string>
@@ -1374,6 +1377,8 @@
     <string name="map_language">Idioma do mapa</string>
     <string name="map_live_enable">Activar em tempo real</string>
     <string name="map_live_disable">Desactivar em tempo real</string>
+    <string name="map_live_disabled">Mapa em tempo real desligado</string>
+    <string name="map_live_disabled_hint">O mapa em tempo real está desactivado. Só irá ver as caches armazenadas. Use o menu para activar o mapa em tempo real.</string>
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar item</string>
     <string name="map_routing">Encaminhamento</string>
