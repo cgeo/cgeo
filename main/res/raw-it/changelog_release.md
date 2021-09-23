@@ -1,5 +1,5 @@
 ### Dettagli del cache
-- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+- Nuovo: Quando si tocca il nome del proprietario, nel centro messaggi verrà inserito in automatico il nome del cache (solo su geocaching.com)
 
 ### Altro
-- Fix: Some fixes for bookmark lists (downloading & current status)
+- Corretto: Alcune correzioni per i segnalibri (scaricamento & stato attuale)
