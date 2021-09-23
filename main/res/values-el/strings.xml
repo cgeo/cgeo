@@ -359,6 +359,7 @@
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
     <string name="caches_sort_distance">Απόσταση</string>
+    <string name="caches_sort_distance_target">Απόσταση από τον στόχο</string>
     <string name="caches_sort_difficulty">Δυσκολία</string>
     <string name="caches_sort_terrain">Έδαφος</string>
     <string name="caches_sort_size">Μέγεθος</string>
