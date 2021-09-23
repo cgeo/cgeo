@@ -359,6 +359,7 @@
     <string name="caches_on_map">Visualizza sulla mappa</string>
     <string name="caches_sort">Ordina</string>
     <string name="caches_sort_distance">Distanza</string>
+    <string name="caches_sort_distance_target">Distanza dalla destinazione</string>
     <string name="caches_sort_difficulty">Difficoltà</string>
     <string name="caches_sort_terrain">Terreno</string>
     <string name="caches_sort_size">Dimensione</string>
@@ -384,6 +385,7 @@
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
+    <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
@@ -1128,6 +1130,7 @@
     <string name="cache_hint">Aiuto (spoiler)</string>
     <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_latest_logs">Log recenti</string>
     <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
     <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
@@ -1374,6 +1377,8 @@
     <string name="map_language">Lingua della mappa</string>
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
+    <string name="map_live_disabled">Mappa Live disabilitata</string>
+    <string name="map_live_disabled_hint">La modalità Mappa live è disabilitata. Vedrai solo i cache salvati. Usa il menu per abilitare la Mappa Live.</string>
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Percorso</string>
