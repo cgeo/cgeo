@@ -2,7 +2,7 @@ c:geo açık kaynak kodlu, çok çeşitli özelliklere sahip, çalışmaya her z
 
 Temel özellikler:
 -Cache'leri canlı haritada görüntüleyin
-- Use Google Maps or OpenStreetMap
+- Google Haritaları veya OpenStreetMap kullanın
 -Değişik kriterlere göre cache'leri arayın
 -Bulmalarınızı çevrimiçi veya çevrimdışı kaydedin
 -Cache bilgilerinizi cihazınıza kaydedin
