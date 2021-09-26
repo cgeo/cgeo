@@ -1130,7 +1130,7 @@
     <string name="cache_hint">Hinweis</string>
     <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
     <string name="cache_logs">Logbuch</string>
-    <string name="cache_latest_logs">Neueste Logs</string>
+    <string name="cache_latest_logs">Letzte Logs</string>
     <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
     <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
