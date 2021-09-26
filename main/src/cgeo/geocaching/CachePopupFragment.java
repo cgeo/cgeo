@@ -127,7 +127,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
             toolbar.setLongClickable(true);
             toolbar.setOnLongClickListener(v -> {
                 if (cache.isOffline()) {
-                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache.getType().markerId, newCacheIcon -> {
+                    EmojiUtils.selectEmojiPopup(CachePopupFragment.this.requireContext(), cache.getAssignedEmoji(), cache, newCacheIcon -> {
                         cache.setAssignedEmoji(newCacheIcon);
                         toolbar.setLogo(MapMarkerUtils.getCacheMarker(getResources(), cache, CacheListType.MAP).getDrawable());
                         DataStore.saveCache(cache, LoadFlags.SAVE_ALL);

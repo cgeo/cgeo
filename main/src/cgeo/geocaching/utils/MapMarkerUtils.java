@@ -458,7 +458,7 @@ public final class MapMarkerUtils {
      * @return  Layered Drawable
      */
     public static Drawable getCacheTypeMarker(final Resources res, final CacheType type, final boolean isDisabled) {
-        final int hashcode = new HashCodeBuilder().append(type).toHashCode();
+        final int hashcode = new HashCodeBuilder().append(type).append(isDisabled).toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -484,6 +484,13 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(background));
         insetsBuilder.withInset(new InsetBuilder(type.markerId, Gravity.CENTER));
         return buildLayerDrawable(insetsBuilder, 2, 2);
+    }
+
+    public static Drawable getCacheMarkerWithoutOverlays(final Resources res, final Geocache cache) {
+        final Geocache tempCache = new Geocache();
+        tempCache.setType(cache.getType());
+        tempCache.setGeocode(cache.getGeocode());
+        return getCacheMarker(res, tempCache, CacheListType.OFFLINE).getDrawable();
     }
 
     /**
