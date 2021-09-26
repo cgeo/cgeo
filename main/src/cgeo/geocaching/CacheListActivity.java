@@ -995,9 +995,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
-            EmojiUtils.selectEmojiPopup(this, markerId, 0, this::setListMarker);
+            EmojiUtils.selectEmojiPopup(this, markerId, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, -1, 0, this::setCacheIcons);
+            EmojiUtils.selectEmojiPopup(this, -1, null, this::setCacheIcons);
         } else if (menuItem == R.id.menu_set_askfordeletion) {
             setPreventAskForDeletion(false);
         } else {

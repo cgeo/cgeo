@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.DialogTitleButtonButtonBinding;
 import cgeo.geocaching.databinding.EmojiselectorBinding;
 import cgeo.geocaching.maps.CacheMarker;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.extension.EmojiLRU;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.ViewUtils;
@@ -31,8 +32,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -154,7 +155,7 @@ public class EmojiUtils {
         // utility class
     }
 
-    public static void selectEmojiPopup(final Context context, final int currentValue, @DrawableRes final int defaultRes, final Action1<Integer> setNewCacheIcon) {
+    public static void selectEmojiPopup(final Context context, final int currentValue, @Nullable final Geocache cache, final Action1<Integer> setNewCacheIcon) {
 
         // fill dynamic EmojiSet
         prefillCustomCircles(0);
@@ -245,16 +246,24 @@ public class EmojiUtils {
             dialogButtonRight.setVisibility(View.VISIBLE);
             dialogButtonRight.setIcon(getEmojiDrawable(ViewUtils.dpToPixel(wantedEmojiSizeInDp), currentValue));
             dialogButtonRight.setIconTint(null);
-        } else if (defaultRes != 0) {
+        } else if (cache != null) {
             dialogButtonRight.setVisibility(View.VISIBLE);
-            dialogButtonRight.setIconResource(defaultRes);
+            // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
+            dialogButtonRight.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarkerWithoutOverlays(context.getResources(), cache))));
+            dialogButtonRight.setIconTint(null);
         }
         dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
 
         // left button displays default value (if different from current value)
         final MaterialButton dialogButtonLeft = (MaterialButton) customTitle.dialogButtonLeft;
-        if (currentValue != 0 && defaultRes != currentValue) {
-            dialogButtonLeft.setIconResource(defaultRes == 0 ? R.drawable.ic_menu_reset : defaultRes);
+        if (currentValue != 0) {
+            if (cache == null) {
+                dialogButtonLeft.setIconResource(R.drawable.ic_menu_reset);
+            } else {
+                // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
+                dialogButtonLeft.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarkerWithoutOverlays(context.getResources(), cache))));
+                dialogButtonRight.setIconTint(null);
+            }
             dialogButtonLeft.setVisibility(View.VISIBLE);
             dialogButtonLeft.setOnClickListener(v -> {
                 setNewCacheIcon.call(0);

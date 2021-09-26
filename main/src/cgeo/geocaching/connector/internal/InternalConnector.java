@@ -17,6 +17,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -292,9 +293,10 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         titleViewBinding.dialogTitleTitle.setText(R.string.create_internal_cache);
         final MaterialButton dialogButton = (MaterialButton) titleViewBinding.dialogButtonRight;
         dialogButton.setVisibility(View.VISIBLE);
-        dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
+        // This cross-converting solves a tinting issue described in #11715. Sorry, it is ugly but the only possibility we have found so far.
+        dialogButton.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable())));
         dialogButton.setIconTint(null);
-        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache.getType().markerId, assignedEmoji -> {
+        dialogButton.setOnClickListener(v -> EmojiUtils.selectEmojiPopup(context, temporaryCache.getAssignedEmoji(), temporaryCache, assignedEmoji -> {
             temporaryCache.setAssignedEmoji(assignedEmoji);
             dialogButton.setIcon(MapMarkerUtils.getCacheMarker(context.getResources(), temporaryCache, CacheListType.OFFLINE).getDrawable());
         }));
