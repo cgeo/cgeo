@@ -47,13 +47,28 @@ public class CalculatorTest {
     }
 
     @Test
-    public void variables() {
+    public void variableCalculations() {
         assertThat(eval("AA / 2 + B", "A", 4, "B", 5)).isEqualTo(27d);
         assertThat(eval("sqrt(A*B) * C", "A", 4, "B", 4, "C", 10)).isEqualTo(40d);
         assertThat(eval("AB + A + B", "AB", 14, "B", 4, "A", 3)).isEqualTo(41d);
         assertThat(eval("$A$B + A + B", "AB", 14, "B", 4, "A", 3)).isEqualTo(41d);
         assertThat(eval("$AB + A + $B", "AB", 14, "B", 4, "A", 3)).isEqualTo(21d);
         assertThat(eval("$AB(A+$B*2)$B", "AB", 14, "B", 4, "A", 3)).isEqualTo(14114d);
+    }
+
+    @Test
+    public void variableParsing() {
+        assertThat(Calculator.compile("A").getNeededVariables()).containsExactlyInAnyOrder("A");
+        assertThat(Calculator.compile("AB").getNeededVariables()).containsExactlyInAnyOrder("A", "B");
+        assertThat(Calculator.compile("AB").getNeededVariables()).containsExactlyInAnyOrder("A", "B");
+        assertThat(Calculator.compile("ABa").getNeededVariables()).containsExactlyInAnyOrder("A", "B", "a");
+        assertThat(Calculator.compile("AB1").getNeededVariables()).containsExactlyInAnyOrder("A", "B");
+        assertThat(Calculator.compile("$AB1").getNeededVariables()).containsExactlyInAnyOrder("AB1");
+        assertThat(Calculator.compile("$AB(1)").getNeededVariables()).containsExactlyInAnyOrder("AB");
+        assertThatThrownBy(() -> eval("$"))
+            .isInstanceOf(CalculatorException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+        assertThatThrownBy(() -> eval("$1"))
+            .isInstanceOf(CalculatorException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
     }
 
     @Test
@@ -65,6 +80,18 @@ public class CalculatorTest {
         assertThat(eval("length(A)", "A", "test")).isEqualTo(4d);
         assertThat(eval("length(AA)", "A", "test")).isEqualTo(8d);
         assertThat(eval("length(A'def'123)", "A", "test")).isEqualTo(10d);
+    }
+
+    @Test
+    public void stringsAndStartEndTokens() {
+        assertThat(Calculator.compile("' '").evaluate(null)).isEqualTo(" ");
+        assertThat(Calculator.compile("''").evaluate(null)).isEqualTo("");
+        assertThat(Calculator.compile("''''").evaluate(null)).isEqualTo("'");
+        assertThat(Calculator.compile("''''''").evaluate(null)).isEqualTo("''");
+        assertThatThrownBy(() -> eval("'''''"))
+            .isInstanceOf(CalculatorException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("'");
+        assertThat(Calculator.compile("'''test'''").evaluate(null)).isEqualTo("'test'");
+
     }
 
     @Test
@@ -117,7 +144,7 @@ public class CalculatorTest {
         assertThat(eval("ichecksum(888)")).isEqualTo(6);
         assertThat(eval("ichecksum(-888.234)")).isEqualTo(6);
         assertThat(eval("lettervalue('Test123')")).isEqualTo(20 + 5 + 19 + 20 + 1 + 2 + 3);
-        assertThat(eval("lettervalue(-888.123)")).isEqualTo(24);
+        assertThat(eval("lettervalue(-888.123)")).isEqualTo(30);
     }
 
     @Test

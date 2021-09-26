@@ -58,8 +58,12 @@ public class CalculatorException extends IllegalArgumentException {
         this.functionContext = "Function '" + function + "'"; // internationalize later
     }
 
-    public void setParsingContext(final char parsedChar, final int parsedPos) {
-        this.parsingContext = "(while parsing '" + parsedChar + "' at position " + parsedPos + ")"; //internationalize later
+    public void setParsingContext(final int parsedChar, final int parsedPos) {
+        if (parsedChar <= 0 && parsedPos < 0) {
+            this.parsingContext = null;
+        } else {
+            this.parsingContext = "(near '" + (parsedChar <= 0 ? ' ' : (char) parsedChar) + "' at position " + parsedPos + ")"; //internationalize later
+        }
     }
 
     public void setEvaluationContext(final String context) {

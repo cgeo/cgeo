@@ -3,6 +3,7 @@ package cgeo.geocaching.ui.recyclerview;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 
+import android.annotation.SuppressLint;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -210,6 +212,12 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
             this.notifyItemChanged(srcIdx);
             this.notifyItemChanged(trgIdx);
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    public void sortItems(final Comparator<T> comparator) {
+        Collections.sort(this.itemList, comparator);
+        this.notifyDataSetChanged();
     }
 
     public void addItems(final Collection<T> items) {

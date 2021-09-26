@@ -136,6 +136,11 @@ public class CalculatorMap {
         }
     }
 
+    public void clear() {
+        calculatorStateMap.clear();
+
+    }
+
     /** Mimics method of same name in {@link Map} interface. Same as {@link #getVars} */
     @NonNull
     public Set<String> keySet() {
@@ -148,6 +153,11 @@ public class CalculatorMap {
         return calculatorStateMap.keySet();
     }
 
+
+    public boolean containsKey(final String var) {
+        return calculatorStateMap.containsKey(var);
+    }
+
     /** returns a state of a var existing in this instance */
     @Nullable
     public CalculatorState get(final String var) {
@@ -157,6 +167,14 @@ public class CalculatorMap {
     /** returns number of vars in this instance */
     public int size() {
         return calculatorStateMap.size();
+    }
+
+    public String createNonContainedKey(final String prefix) {
+        int idx = 1;
+        while (containsKey(prefix + idx)) {
+            idx++;
+        }
+        return prefix + idx;
     }
 
 
