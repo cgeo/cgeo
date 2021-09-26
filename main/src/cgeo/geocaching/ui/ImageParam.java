@@ -9,6 +9,7 @@ import android.widget.ImageView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.Objects;
@@ -16,7 +17,7 @@ import java.util.Objects;
 /**
  * Encapsulates an image object to be set to an ImageView.
  *
- * Supports setting this text from id or emoji
+ * Supports setting this text from id, drawable or emoji
  *
  * Class is supposed to be used in parameters for View/Dialog helper methods dealing with images
  */
@@ -25,26 +26,35 @@ public class ImageParam {
     @DrawableRes
     private final int drawableId;
     private final int emojiSymbol;
-    //if needed, then this can be extended e.g. with Drawable, Icon or Bitmap
+    private final Drawable drawable;
+    //if needed, then this can be extended e.g. with Icon or Bitmap
 
 
-    /** create from drawable resource id*/
+    /** create from drawable resource id */
     public static ImageParam id(@DrawableRes final int drawableId) {
-        return new ImageParam(drawableId, -1);
+        return new ImageParam(drawableId, -1, null);
     }
 
     /** create from emoji code */
     public static ImageParam emoji(final int emojiSymbol) {
-        return new ImageParam(-1, emojiSymbol);
+        return new ImageParam(-1, emojiSymbol, null);
     }
 
-    private ImageParam(@DrawableRes final int drawableId, final int emojiSymbol) {
+    /** create from emoji code */
+    public static ImageParam drawable(final Drawable drawable) {
+        return new ImageParam(-1, -1, drawable);
+    }
+
+    private ImageParam(@DrawableRes final int drawableId, final int emojiSymbol, @Nullable final Drawable drawable) {
         this.drawableId = drawableId;
         this.emojiSymbol = emojiSymbol;
+        this.drawable = drawable;
     }
 
     public void apply(final ImageView view) {
-        if (this.drawableId > 0) {
+        if (this.drawable != null) {
+            view.setImageDrawable(this.drawable);
+        } else if (this.drawableId > 0) {
             view.setImageResource(this.drawableId);
         } else if (this.emojiSymbol > 0) {
             final Pair<Integer, Integer> viewSize = ViewUtils.getViewSize(view);
@@ -55,6 +65,9 @@ public class ImageParam {
 
     @NonNull
     public Drawable getAsDrawable(final Context context, final int sizeInDp) {
+        if (this.drawable != null) {
+            return this.drawable;
+        }
         Drawable result = null;
         if (this.drawableId > 0) {
             result = ResourcesCompat.getDrawable(context.getResources(), drawableId, context.getTheme());
