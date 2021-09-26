@@ -1247,6 +1247,7 @@
     <string name="cache_images">Images</string>
     <string name="cache_advanced">Advanced</string>
     <string name="cache_waypoints">Waypoints</string>
+    <string name="cache_variables">Variables</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
     <string name="cache_waypoints_add">Add waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Add current location</string>

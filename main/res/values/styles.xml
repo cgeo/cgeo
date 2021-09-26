@@ -133,6 +133,8 @@
     <!-- buttons -->
 
     <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">6dip</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>

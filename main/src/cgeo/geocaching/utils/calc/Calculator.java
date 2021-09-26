@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
@@ -55,8 +54,6 @@ public final class Calculator {
 
     //Caches last used compiled expressions for performance reasons
     private static final LeastRecentlyUsedMap<String, Pair<Calculator, CalculatorException>> CALCULATION_CACHE = new LeastRecentlyUsedMap.LruCache<>(500);
-
-    private static final Map<String, Func1<Object[], Object>> FUNCTIONS = new HashMap<>();
 
     private final String expression;
 
@@ -113,21 +110,6 @@ public final class Calculator {
         return new CalcNode(id, children, (objs, vars) -> function.call(CalculatorUtils.toNumericArray(objs), vars));
     }
 
-    private static void addFunction(final String name, final Func1<Object[], Object> function) {
-        FUNCTIONS.put(name.toLowerCase(Locale.US), function);
-    }
-
-    private static void addNumericFunction(final String name, final Func1<Number[], Number> numericFunction) {
-        addFunction(name, params -> numericFunction.call(CalculatorUtils.toNumericArray(params)));
-    }
-
-    private static void addNumericSingleValueFunction(final String name, final Func1<Number[], Number> numericFunction) {
-        addFunction(name, params -> {
-            CalculatorUtils.checkParameters(params, 1, 1);
-            return numericFunction.call(CalculatorUtils.toNumericArray(params));
-        });
-    }
-
     static {
         for (int i = 'a'; i <= 'z'; i++) {
             CHARS.add(i);
@@ -141,22 +123,6 @@ public final class Calculator {
         CHARS_DIGITS.addAll(CHARS);
         CHARS_DIGITS.addAll(NUMBERS);
         NUMBERS.add((int) '.');
-
-        addNumericSingleValueFunction("sqrt", p -> Math.sqrt(p[0].doubleValue()));
-        addNumericSingleValueFunction("sin", p -> Math.sin(Math.toRadians(p[0].doubleValue())));
-        addNumericSingleValueFunction("cos", p -> Math.cos(Math.toRadians(p[0].doubleValue())));
-        addNumericSingleValueFunction("tan", p -> Math.tan(Math.toRadians(p[0].doubleValue())));
-        addNumericSingleValueFunction("abs", p -> Math.abs(p[0].doubleValue()));
-        addNumericSingleValueFunction("round", p -> Math.round(p[0].doubleValue()));
-
-        addNumericFunction("random", CalculatorUtils::random);
-        addFunction("length", p -> p[0].toString().length());
-        addFunction("rot13", p -> CalculatorUtils.rot(new Object[]{p[0], 13}));
-        addFunction("rot", CalculatorUtils::rot);
-
-        addNumericFunction("checksum", p -> CalculatorUtils.checksum(p, false));
-        addNumericFunction("ichecksum", p -> CalculatorUtils.checksum(p, true));
-        addFunction("lettervalue", CalculatorUtils::letterValue);
     }
 
     public static Calculator compile(final String expression) {
@@ -187,7 +153,7 @@ public final class Calculator {
             return calc;
         } catch (CalculatorException ce) {
             ce.setExpression(expression);
-            ce.setParsingContext((char) calc.ch, calc.pos);
+            ce.setParsingContext(calc.ch, calc.pos);
             throw ce;
         }
     }
@@ -260,7 +226,7 @@ public final class Calculator {
     }
 
     private void compile() {
-        if (expression == null) {
+        if (StringUtils.isBlank(expression)) {
             throw new CalculatorException(EMPTY_FORMULA);
         }
         nextChar();
@@ -359,8 +325,6 @@ public final class Calculator {
         boolean foundEnd = false;
         eat('\'');
         while (ch != -1) {
-            sb.append((char) ch);
-            nextChar();
             if (ch == '\'') {
                 nextChar();
                 if (ch != '\'') {
@@ -368,6 +332,8 @@ public final class Calculator {
                     break;
                 }
             }
+            sb.append((char) ch);
+            nextChar();
         }
         if (!foundEnd) {
             throw new CalculatorException(UNEXPECTED_TOKEN, "'");
@@ -421,11 +387,12 @@ public final class Calculator {
         if (!eat('$')) {
             throw new CalculatorException(UNEXPECTED_TOKEN, '$');
         }
+        //first char MUST be an alpha
         if (!CHARS.contains(ch)) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, "alpha varname");
+            throw new CalculatorException(UNEXPECTED_TOKEN, "alpha");
         }
         final StringBuilder sb = new StringBuilder();
-        while (CHARS.contains(ch)) {
+        while (CHARS_DIGITS.contains(ch)) {
             sb.append((char) ch);
             nextChar();
         }
@@ -464,7 +431,7 @@ public final class Calculator {
         }
         final String functionParsed = sbFunction.toString();
 
-        if (ch == '(' && FUNCTIONS.containsKey(functionParsed)) { //function
+        if (ch == '(' && CalculatorFunction.findByName(functionParsed) != null) { //function
             return parseFunction(functionParsed);
         }
 
@@ -525,7 +492,7 @@ public final class Calculator {
         return new CalcNode("f:" + functionName, params.toArray(new CalcNode[0]),
             (n, v) -> {
                 try {
-                    return Objects.requireNonNull(FUNCTIONS.get(functionName)).call(n);
+                    return Objects.requireNonNull(CalculatorFunction.findByName(functionName)).execute(n);
                 } catch (CalculatorException ce) {
                     ce.setExpression(expression);
                     ce.setFunction(functionName);

@@ -188,6 +188,8 @@ public class Geocache implements IWaypoint {
 
     private Handler changeNotificationHandler = null;
 
+    private CacheVariables variables;
+
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
     }
@@ -2197,5 +2199,12 @@ public class Geocache implements IWaypoint {
 
     public int getAssignedEmoji() {
         return assignedEmoji;
+    }
+
+    public CacheVariables getVariables() {
+        if (variables == null) {
+            variables = new CacheVariables(this.geocode);
+        }
+        return variables;
     }
 }

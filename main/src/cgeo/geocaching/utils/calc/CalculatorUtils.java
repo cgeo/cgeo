@@ -48,9 +48,8 @@ public class CalculatorUtils {
         return RANDOM.nextInt(max - min) + min;
     }
 
-    public static Number checksum(final Number[] params, final boolean iterative) {
-        checkParameters(params, 1, 1);
-        int result = Math.abs(params[0].intValue());
+    public static Number checksum(final Number param, final boolean iterative) {
+        int result = Math.abs(param.intValue());
         do {
             int cs = 0;
             while (result > 0) {
@@ -62,9 +61,7 @@ public class CalculatorUtils {
         return result;
     }
 
-    public static Object letterValue(final Object[] params) {
-        checkParameters(params, 1, 1);
-        final String value = params[0] instanceof Number ? String.valueOf(((Number) params[0]).intValue()) : params[0].toString();
+    public static int letterValue(final String value) {
         int lv = 0;
         for (char c : value.toCharArray()) {
             if (c >= 'a' && c <= 'z') {
@@ -80,10 +77,8 @@ public class CalculatorUtils {
         return lv;
     }
 
-    public static Object rot(final Object[] params) {
-        checkParameters(params, 1, 2);
-        final String value = params[0] instanceof Number ? String.valueOf(((Number) params[0]).intValue()) : params[0].toString();
-        int rot = params.length > 1 && params[1] instanceof Number ? ((Number) params[1]).intValue() : 13;
+    public static String rot(final String value, final int rotParam) {
+        int rot = rotParam;
         while (rot < 0) {
             rot += 26;
         }
