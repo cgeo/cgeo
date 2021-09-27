@@ -50,6 +50,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -197,8 +198,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             setTitle(res.getString(R.string.waypoint_edit_title));
         }
 
-        binding.buttonLatitude.setOnClickListener(new CoordDialogListener());
-        binding.buttonLongitude.setOnClickListener(new CoordDialogListener());
+        binding.buttonLatLongitude.setOnClickListener(new CoordDialogListener());
 
         final List<String> wayPointTypes = new ArrayList<>();
         for (final WaypointType wpt : WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL) {
@@ -393,7 +393,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         public void onClick(final View view) {
             Geopoint gp = null;
             try {
-                gp = new Geopoint(binding.buttonLatitude.getText().toString(), binding.buttonLongitude.getText().toString());
+                final String[] latlonText = binding.buttonLatLongitude.getText().toString().split("\n");
+                gp = new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1]));
             } catch (final Geopoint.ParseException ignored) {
                 // button text is blank when creating new waypoint
             }
@@ -405,7 +406,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     showCoordinateOptionsDialog(view, geopoint, cache);
                 }
             });
-
         }
 
         private void showCoordinateOptionsDialog(final View view, final Geopoint geopoint, final Geocache cache) {
@@ -433,18 +433,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             coordsDialog.setCancelable(true);
             coordsDialog.show(getSupportFragmentManager(), "wpeditdialog");
         }
-
     }
 
     @Override
-    public void updateCoordinates(final Geopoint gp) {
+    public void updateCoordinates(@Nullable final Geopoint gp) {
         if (gp != null) {
-            binding.buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-            binding.buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+            binding.buttonLatLongitude.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
             setProjectionEnabled(true);
         } else {
-            binding.buttonLatitude.setText(R.string.waypoint_latitude_null);
-            binding.buttonLongitude.setText(R.string.waypoint_longitude_null);
+            binding.buttonLatLongitude.setText(String.format("%s%n%s", getResources().getString(R.string.waypoint_latitude_null), getResources().getString(R.string.waypoint_longitude_null)));
             setProjectionEnabled(false);
         }
     }
@@ -510,9 +507,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 && !lonText.equals(getResources().getString(R.string.waypoint_longitude_null));
     }
 
+    @Nullable
     private ActivityData getActivityData() {
-        final String latText = binding.buttonLatitude.getText().toString();
-        final String lonText = binding.buttonLongitude.getText().toString();
+        final String[] latlonText = binding.buttonLatLongitude.getText().toString().split("\n");
+        final String latText = StringUtils.trim(latlonText[0]);
+        final String lonText = StringUtils.trim(latlonText[1]);
         Geopoint coords = null;
         if (coordsTextsValid(latText, lonText)) {
             try {

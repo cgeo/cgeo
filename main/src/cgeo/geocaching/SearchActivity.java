@@ -174,8 +174,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void init() {
-        binding.buttonLatitude.setOnClickListener(v -> updateCoordinates());
-        binding.buttonLongitude.setOnClickListener(v -> updateCoordinates());
+        binding.buttonLatLongitude.setOnClickListener(v -> updateCoordinates());
 
         binding.searchCoordinates.setOnClickListener(arg0 -> findByCoordsFn());
 
@@ -246,9 +245,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     @Override
-    public void updateCoordinates(final Geopoint gp) {
-        binding.buttonLatitude.setText(gp.format(GeopointFormatter.Format.LAT_DECMINUTE));
-        binding.buttonLongitude.setText(gp.format(GeopointFormatter.Format.LON_DECMINUTE));
+    public void updateCoordinates(@NonNull final Geopoint gp) {
+        binding.buttonLatLongitude.setText(String.format("%s%n%s", gp.format(GeopointFormatter.Format.LAT_DECMINUTE), gp.format(GeopointFormatter.Format.LON_DECMINUTE)));
     }
 
     @Override
@@ -259,25 +257,25 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     private void findByCoordsFn() {
         String[] latlonText = getCoordText();
 
-        if (StringUtils.isEmpty(latlonText[0]) || StringUtils.isEmpty(latlonText[1])) {
+        if (latlonText.length < 2) {
             final Geopoint gp = Sensors.getInstance().currentGeo().getCoords();
-            updateCoordinates(gp);
-            latlonText = getCoordText();
+            if (gp.isValid()) {
+                updateCoordinates(gp);
+                latlonText = getCoordText();
+            } else {
+                return;
+            }
         }
 
         try {
-            CacheListActivity.startActivityCoordinates(this, new Geopoint(latlonText[0], latlonText[1]), null);
+            CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1])), null);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
     }
 
     private String[] getCoordText() {
-
-        return new String[] {
-            StringUtils.trim(binding.buttonLatitude.getText().toString()),
-            StringUtils.trim(binding.buttonLongitude.getText().toString())
-         };
+        return binding.buttonLatLongitude.getText().toString().split("\n");
     }
 
     private void findByKeywordFn() {
@@ -322,7 +320,6 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
     private void findByFilterFn() {
         GeocacheFilterActivity.selectFilter(this, new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE), null, false);
-
     }
 
     @Override
