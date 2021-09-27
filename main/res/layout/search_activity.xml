@@ -78,14 +78,9 @@
         </RelativeLayout>
 
         <Button
-            android:id="@+id/buttonLatitude"
-            style="@style/button_full"
-            android:hint="@string/latitude" />
-
-        <Button
-            android:id="@+id/buttonLongitude"
-            style="@style/button_full"
-            android:hint="@string/longitude" />
+            android:id="@+id/buttonLatLongitude"
+            style="@style/button_full_double"
+            android:hint="@string/latlongitude" />
 
         <Button
             android:id="@+id/search_coordinates"

@@ -45,7 +45,7 @@
     <string translatable="false" name="map_source_osm_cyclosm">CyclOSM</string>
     <string translatable="false" name="map_source_mapy_cz">Mapy.cz</string>
 
-    <!-- calendar adder -->
+    <!-- edit waypoint -->
     <string translatable="false" name="waypoint_latitude_null">N/S --° --.---</string>
     <string translatable="false" name="waypoint_longitude_null">E/W --° --.---</string>
 
