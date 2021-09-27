@@ -383,6 +383,7 @@
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
+    <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
