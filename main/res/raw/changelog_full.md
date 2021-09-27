@@ -8,6 +8,33 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2021.09.27 Feature release
+
+### Map
+- New: Added Mapy.cz as online map source
+- New: Individual route: Allow setting a new start and reversing the route
+- New: Multiple offline map downloads can now be triggered at once
+- New: Add "Has offline found log" to status filter  & change quick settings mapping
+
+### Cache details
+- Fix: Detect if current user is owner for lab adventures
+- New: Added some more emoijis for use as individual cache icon
+- New: Support adding caches to bookmark lists (PM only)
+- New: When tapping on owner name, opening in message center will prefill the text with cache's name (geocaching.com only)
+
+### Other
+- New: Allow upload of caches to bookmark list (only available for GC premium members)
+- New: Automatically prefill 'search by geocode' if clipboard content can be parsed as valid geocode
+- New: Added delay option to update check
+- New: Added more emojis to emoji selector
+- Fix: Some fixes for UI and for filtering
+- Fix: Some fixes for bookmark lists (downloading & current status)
+- Change: Hide sensitive data in "view settings"
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Change: AL connector returns 100 results at a time (instead of 200)
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2021.09.08 Bugfix release
 
 ### Fixes
@@ -15,7 +42,6 @@ This changelog contains all changes which are not intermediate developing steps.
 - "Add to favorite" / "Remove from favorite" buttons not shown after "found" log
 - Date in logbook cut off on larger fonts
 - Filtering in live map for more rare cache types returning only few results
-
 
 <!-- --------------------------------------------------------------------------------- --->
 
