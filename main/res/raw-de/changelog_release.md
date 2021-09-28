@@ -15,4 +15,4 @@
 - Korrektur: Einige Korrekturen für Benutzeroberfläche und Filter
 - Korrektur: Einige Korrekturen für Lesezeichenlisten (Aktueller Status & herunterladen)
 - Änderung: Vertrauliche Daten in "Einstellungen anzeigen" ausblenden
-- Änderung: Cache-Präfix für Labcaches ist jetzt "AL" statt "LC" (welches bereits für Extremcaching verwendet wird)
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Terracaching)
