@@ -15,4 +15,4 @@
 - Solució: algunes correccions per a la IU i per al filtratge
 - Solució: algunes correccions per a llistes de marcadors (descàrrega & estat actual)
 - Canvi: Amaga les dades sensibles a la "configuració de visualització"
-- Canvi: El prefix de catxé per els adventure labs ara és "AL" en lloc de "LC" (que ja s'utilitza per a Extremcaching)
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Terracaching)
