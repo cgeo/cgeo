@@ -7,7 +7,7 @@
 - Correction : Détection de l'utilisateur connecté lorsqu'il est propriétaire de lab caches
 - Nouveau : Ajout de quelques émojis supplémentaires utilisable comme icône de cache
 - Nouveau : Prise en charge de l'ajout de caches aux listes de favoris (Membres premium uniquement)
-- Nouveauté : En cliquant sur le nom du propriétaire, le centre de messagerie s’ouvrira avec le nom de la cache pré-rempli (geocaching.com uniquement)
+- Nouveau : En cliquant sur le nom du propriétaire, le centre de messagerie s’ouvrira avec le nom de la cache pré-rempli (geocaching.com uniquement)
 
 ### Divers
 - Nouveau : Prise en charge de l'ajout de caches aux listes de favoris (Membres premium uniquement)
