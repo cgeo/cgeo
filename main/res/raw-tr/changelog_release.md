@@ -15,4 +15,4 @@
 - Fix: Some fixes for UI and for filtering
 - Fix: Some fixes for bookmark lists (downloading & current status)
 - Change: Hide sensitive data in "view settings"
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Extremcaching)
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Terracaching)
