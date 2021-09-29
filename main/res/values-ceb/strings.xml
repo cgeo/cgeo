@@ -257,7 +257,6 @@
     <string name="caches_sort_favorites">Mga paborito</string>
     <string name="caches_sort_favorites_ratio">Mga paborito [%]</string>
     <string name="caches_sort_name">Pangalan</string>
-    <string name="caches_sort_geocode">Geo kodigo</string>
     <string name="caches_sort_rating">Grado</string>
     <string name="caches_sort_vote">Botar (Kaugalingon na Grado)</string>
     <string name="caches_sort_inventory">Ihap sa imbentaryo</string>
@@ -556,7 +555,6 @@
     <string name="cache_favpoint_not_on">Ang kini nga cache kay usa sa imong dili paborito.</string>
     <string name="cache_list_select_last">Kinalasang pili-anan</string>
     <string name="cache_images">Mga imahe</string>
-    <string name="cache_waypoints_add">Magdugang og Waypoint</string>
     <string name="cache_hint">Timaan</string>
     <string name="cache_hint_not_available">Walay timaan nga anaa</string>
     <string name="cache_logs_friends_and_own">Mga Higala/Kaugalingon nga Log</string>
@@ -615,7 +613,6 @@
     <string name="cache_status_archived">Ge-arkibo</string>
     <string name="cache_status_disabled">Wala gipagana</string>
     <string name="cache_status_premium">Premium nga myembro lamang</string>
-    <string name="cache_geocode">Code sa Geo</string>
     <string name="cache_name">Pangalan</string>
     <string name="cache_type">Matang</string>
     <string name="cache_size">Gidak-on</string>
@@ -717,14 +714,10 @@
     <string name="map_as_list">Ipakita ang ingulon na lista</string>
     <string name="map_select_multiple_items">Pagselek ug aytem</string>
     <!-- search -->
-    <string name="search_bar_desc">Mga cache (geo code, keyword), Trackable (TB code)</string>
     <string name="search_coordinates">Mga koordinate</string>
     <string name="search_coordinates_button">Pangitaa sa pamaagi na koordinate</string>
     <string name="search_address">Lugar</string>
     <string name="search_address_button">Pangitaa sa pamaagi ng lugar</string>
-    <string name="search_geo">Code sa Geo</string>
-    <string name="search_geo_button">Pangitaa pinaagi sa geo code</string>
-    <string name="search_kw">Mga importanteng letra</string>
     <string name="search_kw_prefill">Importanteng letra</string>
     <string name="search_kw_button">Pagpangita pinaagi sa keyword</string>
     <string name="search_hbu_prefill">Tag-iya</string>
