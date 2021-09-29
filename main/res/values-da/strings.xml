@@ -349,7 +349,6 @@
     <string name="caches_sort_favorites">Favoritter</string>
     <string name="caches_sort_favorites_ratio">Favoritter [%]</string>
     <string name="caches_sort_name">Navn</string>
-    <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Vurdering</string>
     <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
@@ -932,7 +931,6 @@
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
     <string name="cache_waypoints">Rutepunkter</string>
-    <string name="cache_waypoints_add">Tilføj rutepunkt</string>
     <string name="cache_waypoints_add_currentLocation">Tilføj nuværende position</string>
     <string name="cache_waypoints_add_fromclipboard">Tilføj fra udklipsholder</string>
     <string name="cache_waypoints_remove_original_waypoint">Rutepunkt kopieret fra udklipsholder til denne cache.\n\nFjern originalt rutepunkt?</string>
@@ -1010,10 +1008,7 @@
     <string name="cache_status_disabled">Deaktiveret</string>
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun premium-medlemmer</string>
-    <string name="cache_geocode">geo code</string>
     <string name="cache_name">Navn</string>
-    <string name="cache_name_set">Angiv cachenavn</string>
-    <string name="cache_name_updated">Cachenavn opdateret</string>
     <string name="cache_description_set">Angiv cache beskrivelse</string>
     <string name="cache_description_updated">Cache beskrivelse opdateret</string>
     <string name="cache_type">Type</string>
@@ -1160,14 +1155,10 @@
     <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
     <!-- search -->
-    <string name="search_bar_desc">Cacher (geokode, nøgleord), Trackables (TB-kode)</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Søg fra koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søg adresse</string>
-    <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Søg geocode</string>
-    <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
     <string name="search_kw_button">Søg efter nøgleord</string>
     <string name="search_hbu">Udlagt af</string>

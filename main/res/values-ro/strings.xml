@@ -302,7 +302,6 @@
     <string name="caches_sort_favorites">Favorite</string>
     <string name="caches_sort_favorites_ratio">Favorite [%]</string>
     <string name="caches_sort_name">Nume</string>
-    <string name="caches_sort_geocode">Geo Cod</string>
     <string name="caches_sort_rating">Voturi</string>
     <string name="caches_sort_vote">Vot (propriul vot)</string>
     <string name="caches_sort_inventory">Total inventar</string>
@@ -619,7 +618,6 @@
     <string name="cache_list_select_last">Ultima selecţie</string>
     <string name="cache_images">Imagini</string>
     <string name="cache_waypoints">Puncte</string>
-    <string name="cache_waypoints_add">Adaugă punct</string>
     <string name="cache_hint">Indiciu</string>
     <string name="cache_hint_not_available">Fără indiciu</string>
     <string name="cache_logs">Jurnal</string>
@@ -684,7 +682,6 @@
     <string name="cache_status_archived">Arhivată</string>
     <string name="cache_status_disabled">Inactivă</string>
     <string name="cache_status_premium">Doar membrii Premium</string>
-    <string name="cache_geocode">Geocod</string>
     <string name="cache_name">Nume</string>
     <string name="cache_type">Tip</string>
     <string name="cache_size">Dimensiune</string>
@@ -786,14 +783,10 @@
     <string name="map_as_list">Arată ca lista</string>
     <string name="map_select_multiple_items">Selectează un element</string>
     <!-- search -->
-    <string name="search_bar_desc">Geocutii (geocod, cuvânt cheie), Obiecte călătoare (cod TB)</string>
     <string name="search_coordinates">Coordonate</string>
     <string name="search_coordinates_button">Caută după coordonate</string>
     <string name="search_address">Adresă</string>
     <string name="search_address_button">Caută după adresă</string>
-    <string name="search_geo">Geo cod</string>
-    <string name="search_geo_button">Caută după cod GC</string>
-    <string name="search_kw">Cuvinte cheie</string>
     <string name="search_kw_prefill">Cuvânt cheie</string>
     <string name="search_kw_button">Caută după cuvânt cheie</string>
     <string name="search_hbu_prefill">Proprietar</string>

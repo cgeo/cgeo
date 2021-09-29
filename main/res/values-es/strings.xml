@@ -321,7 +321,6 @@
     <string name="caches_sort_favorites">Favoritos</string>
     <string name="caches_sort_favorites_ratio">Favoritos [%]</string>
     <string name="caches_sort_name">Nombre</string>
-    <string name="caches_sort_geocode">Código GC</string>
     <string name="caches_sort_rating">Valoración</string>
     <string name="caches_sort_vote">Votos (valoración propia)</string>
     <string name="caches_sort_inventory">Número de rastreables</string>
@@ -865,7 +864,6 @@
     <string name="cache_favpoint_not_on">Este caché no es uno de tus favoritos.</string>
     <string name="cache_list_select_last">Última selección</string>
     <string name="cache_images">Imágenes</string>
-    <string name="cache_waypoints_add">Añadir waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Añadir ubicación actual</string>
     <string name="cache_waypoints_add_fromclipboard">Añadir desde el portapapeles</string>
     <string name="cache_hint">Pista</string>
@@ -934,10 +932,7 @@
     <string name="cache_status_archived">Archivado</string>
     <string name="cache_status_disabled">Desactivado</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
-    <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nombre</string>
-    <string name="cache_name_set">Establecer nombre de caché</string>
-    <string name="cache_name_updated">Nombre de caché actualizado</string>
     <string name="cache_description_updated">Descripción del caché actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamaño</string>
@@ -1072,14 +1067,10 @@
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <!-- search -->
-    <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Buscar por coordenadas</string>
     <string name="search_address">Dirección</string>
     <string name="search_address_button">Buscar por dirección</string>
-    <string name="search_geo">Código GC</string>
-    <string name="search_geo_button">Buscar por código</string>
-    <string name="search_kw">Palabras clave</string>
     <string name="search_kw_prefill">Palabra clave</string>
     <string name="search_kw_button">Buscar por palabra clave</string>
     <string name="search_hbu_prefill">Propietario</string>

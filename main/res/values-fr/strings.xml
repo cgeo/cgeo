@@ -11,6 +11,7 @@
     <string name="about">À propos de c:geo</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="latlongitude">Latitude\nLongitude</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Paramètres c:geo</string>
     <!-- caches -->
@@ -359,13 +360,14 @@
     <string name="caches_on_map">Afficher sur la carte</string>
     <string name="caches_sort">Trier</string>
     <string name="caches_sort_distance">Distance</string>
+    <string name="caches_sort_distance_target">Distance jusqu\'à la cible</string>
     <string name="caches_sort_difficulty">Difficulté</string>
     <string name="caches_sort_terrain">Terrain</string>
     <string name="caches_sort_size">Taille</string>
     <string name="caches_sort_favorites">Favoris [nombre]</string>
     <string name="caches_sort_favorites_ratio">Favoris [%]</string>
     <string name="caches_sort_name">Nom</string>
-    <string name="caches_sort_geocode">Code</string>
+    <string name="caches_sort_geocode">Géocode</string>
     <string name="caches_sort_rating">Évaluation</string>
     <string name="caches_sort_vote">Votre évaluation personnelle</string>
     <string name="caches_sort_inventory">Nombre d\'objets dans l\'inventaire</string>
@@ -1394,22 +1396,22 @@
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
     <!-- search -->
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
-    <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
+    <string name="search_bar_desc">Caches (géocode, mot-clef), Objets voyageurs (Code TB)</string>
     <string name="search_coordinates">Coordonnées</string>
     <string name="search_coordinates_button">Rechercher par Coordonnées</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Rechercher par Adresse</string>
-    <string name="search_geo">Code de la cache</string>
+    <string name="search_geo">Géocode</string>
     <string name="search_geo_button">Rechercher par géocode</string>
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
-    <string name="search_kw">Mots-clés</string>
+    <string name="search_kw">Mot-clef</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
     <string name="search_hbu">Cachée par</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_filter">Filtrer</string>
-    <string name="search_filter_button">Rechercher à l\'aide de filtres</string>
+    <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
     <string name="search_filter_temporary_user_information_title">Nouveau système de filtrage</string>
     <string name="search_filter_temporary_user_information">c:geo a introduit un nouveau système de filtrage qui supporte les filtres flexibles, combinables et stockables. \n\nLe filtre global peut désormais être modifié directement dans les listes de caches et la carte live.</string>
@@ -1799,7 +1801,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo sur Google Play</a></string>
     <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
-    <string name="github_title">suivi de bugs</string>
+    <string name="github_title">Suivi des bugs</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez pour l\'installer.</string>

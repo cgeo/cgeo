@@ -11,6 +11,7 @@
     <string name="about">c:geo에 대해</string>
     <string name="latitude">위도</string>
     <string name="longitude">경도</string>
+    <string name="latlongitude">위도\n경도</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo 설정</string>
     <!-- caches -->
@@ -1204,7 +1205,7 @@
     <string name="cache_geocode">지오코드</string>
     <string name="cache_name">제목</string>
     <string name="cache_name_set">캐시 이름 설정</string>
-    <string name="cache_name_updated">캐시 이름 업데이트했음</string>
+    <string name="cache_name_updated">캐시 이름이 업데이트되었습니다.</string>
     <string name="cache_description_set">캐시 설명 설정</string>
     <string name="cache_description_updated">캐시 설명이 업데이트되었습니다.</string>
     <string name="cache_type">유형</string>

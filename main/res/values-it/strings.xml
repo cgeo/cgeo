@@ -359,13 +359,13 @@
     <string name="caches_on_map">Visualizza sulla mappa</string>
     <string name="caches_sort">Ordina</string>
     <string name="caches_sort_distance">Distanza</string>
+    <string name="caches_sort_distance_target">Distanza dalla destinazione</string>
     <string name="caches_sort_difficulty">Difficoltà</string>
     <string name="caches_sort_terrain">Terreno</string>
     <string name="caches_sort_size">Dimensione</string>
     <string name="caches_sort_favorites">Preferiti</string>
     <string name="caches_sort_favorites_ratio">Preferiti [%]</string>
     <string name="caches_sort_name">Nome</string>
-    <string name="caches_sort_geocode">Codice geo</string>
     <string name="caches_sort_rating">Voto</string>
     <string name="caches_sort_vote">Il tuo voto</string>
     <string name="caches_sort_inventory">Oggetti trackables</string>
@@ -384,6 +384,7 @@
     <string name="caches_remove_all_completely">Elimina tutto dal dispositivo</string>
     <string name="caches_remove_selected_completely">Elimina selezionati dal dispositivo</string>
     <string name="caches_delete_events">Cancella eventi passati</string>
+    <string name="caches_upload_bookmarklist">Aggiungi ai segnalibri</string>
     <string name="caches_upload_modifiedcoords">Carica coordinate modificate</string>
     <string name="caches_upload_modifiedcoords_warning">Vuoi caricare le coordinate modificate per tutti i cache (selezionate) e sovrascrivere le coordinate esistenti sul server? Questo non può essere annullato.</string>
     <string name="caches_upload_allcoords">Carica le coordinate per tutti i cache</string>
@@ -1121,13 +1122,13 @@
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
-    <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copiato dagli appunti su questo cache.\n\nRimuovere il waypoint originale?</string>
     <string name="cache_hint">Aiuto (spoiler)</string>
     <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_latest_logs">Log recenti</string>
     <string name="cache_logs_friends_and_own">Log tuoi e degli amici</string>
     <string name="cache_dialog_loading_details">Caricamento dettagli del cache…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Caricamento pagina</string>
@@ -1208,10 +1209,7 @@
     <string name="cache_status_disabled">Non attivo</string>
     <string name="cache_status_active">Attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
-    <string name="cache_geocode">Codice geo</string>
     <string name="cache_name">Nome</string>
-    <string name="cache_name_set">Imposta cachename</string>
-    <string name="cache_name_updated">Cachename aggiornato</string>
     <string name="cache_description_set">Imposta descrizione cache</string>
     <string name="cache_description_updated">Descrizione cache aggiornata</string>
     <string name="cache_type">Tipo</string>
@@ -1374,6 +1372,8 @@
     <string name="map_language">Lingua della mappa</string>
     <string name="map_live_enable">Attiva live</string>
     <string name="map_live_disable">Disattiva live</string>
+    <string name="map_live_disabled">Mappa Live disabilitata</string>
+    <string name="map_live_disabled_hint">La modalità Mappa live è disabilitata. Vedrai solo i cache salvati. Usa il menu per abilitare la Mappa Live.</string>
     <string name="map_as_list">Mostra lista dei cache</string>
     <string name="map_select_multiple_items">Seleziona elemento</string>
     <string name="map_routing">Percorso</string>
@@ -1390,22 +1390,17 @@
     <string name="map_settings_cache_filter_too_complex_message">Il filtro cache attuale è troppo complesso per applicare opzioni aggiuntive qui. Di solito questo significa che il filtro cache contiene espressioni NOT oppure OR invece di semplice logica AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Cerca caches/trackables</string>
-    <string name="search_bar_desc">Cache (geo code, parole chiave), oggetti Trackables (TB-code)</string>
     <string name="search_coordinates">Coordinate</string>
     <string name="search_coordinates_button">Cerca per coordinate</string>
     <string name="search_address">Indirizzo</string>
     <string name="search_address_button">Cerca per indirizzo</string>
-    <string name="search_geo">Codice geo</string>
-    <string name="search_geo_button">Cerca per geo code</string>
     <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
-    <string name="search_kw">Parole chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
     <string name="search_filter">Filtro</string>
-    <string name="search_filter_button">Cerca con Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_filter_temporary_user_information_title">Nuovo filtro framework</string>
     <string name="search_filter_temporary_user_information">c:geo ha introdotto un nuovo sistema di filtri, per supportare filtri flessibili, combinabili e salvabili. \n\nIl filtro globale può da ora in poi essere modificato direttamente negli elenchi di cache e nella mappa.</string>

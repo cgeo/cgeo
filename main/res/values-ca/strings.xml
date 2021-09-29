@@ -367,7 +367,6 @@
     <string name="caches_sort_favorites">Preferits</string>
     <string name="caches_sort_favorites_ratio">Preferits [%]</string>
     <string name="caches_sort_name">Nom</string>
-    <string name="caches_sort_geocode">Codi del catxé</string>
     <string name="caches_sort_rating">Puntuació</string>
     <string name="caches_sort_vote">Vota (valoració pròpia)</string>
     <string name="caches_sort_inventory">Recompte d\'inventari</string>
@@ -1124,7 +1123,6 @@
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punts de ruta (%d)</string>
-    <string name="cache_waypoints_add">Afegeix una fita</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
     <string name="cache_waypoints_remove_original_waypoint">El punt de ruta s\'ha copiat del porta-retalls a aquest catxé. \n\nVoleu suprimir el punt de ruta original?</string>
@@ -1212,10 +1210,7 @@
     <string name="cache_status_disabled">Desactivat</string>
     <string name="cache_status_active">Actiu</string>
     <string name="cache_status_premium">Només per membres Premium</string>
-    <string name="cache_geocode">Geocodi</string>
     <string name="cache_name">Nom</string>
-    <string name="cache_name_set">Definiu el nom del catxé</string>
-    <string name="cache_name_updated">S\'ha actualitzat el nom del catxé</string>
     <string name="cache_description_set">Defineix la descripció del catxé</string>
     <string name="cache_description_updated">S\'ha actualitzat la descripció del catxé</string>
     <string name="cache_type">Tipus</string>
@@ -1396,22 +1391,17 @@
     <string name="map_settings_cache_filter_too_complex_message">El filtre del catxé  actual és massa complex per aplicar opcions addicionals aquí. Normalment, això significa que el filtre de catxé conté expressions NOT o OR en lloc del simple i lògic AND </string>
     <!-- search -->
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
-    <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_coordinates_button">Cerca per coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_address_button">Cerca per l\'adreça</string>
-    <string name="search_geo">Codi del catxé</string>
-    <string name="search_geo_button">Cerca pel codi del catxé</string>
     <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
-    <string name="search_kw">Paraules clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
     <string name="search_hbu">Amagat per</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
     <string name="search_filter">Filtre</string>
-    <string name="search_filter_button">Cerca per Filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_filter_temporary_user_information_title">Nou marc de filtre</string>
     <string name="search_filter_temporary_user_information">El C:geo ha introduït un nou sistema de filtratge que admet filtres flexibles, combinables i emmagatzemables. \n\nEl filtre global es pot canviar a partir d\'ara directament a les llistes de catxés i al mapa actiu.</string>

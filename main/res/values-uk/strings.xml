@@ -318,7 +318,6 @@
     <string name="caches_sort_favorites">Улюблене</string>
     <string name="caches_sort_favorites_ratio">Вибране [%]</string>
     <string name="caches_sort_name">Ім’я</string>
-    <string name="caches_sort_geocode">Geo код</string>
     <string name="caches_sort_rating">Рейтинг</string>
     <string name="caches_sort_vote">Голосування (власна оцінка)</string>
     <string name="caches_sort_inventory">Кількість речей</string>
@@ -775,7 +774,6 @@
     <string name="cache_list_select_last">останній відбір</string>
     <string name="cache_images">зображення</string>
     <string name="cache_waypoints">шляхові точки</string>
-    <string name="cache_waypoints_add">додати шляхову точку</string>
     <string name="cache_waypoints_add_currentLocation">додати поточне місцезнаходження</string>
     <string name="cache_waypoints_add_fromclipboard">додати з буфера обміну</string>
     <string name="cache_waypoints_remove_original_waypoint">Точку шляху скопійовано з буфера обміну в цей кеш. \n\n Вилучити оригінальну точку маршруту?</string>
@@ -852,10 +850,7 @@
     <string name="cache_status_disabled">Робити нездатним</string>
     <string name="cache_status_active">активний</string>
     <string name="cache_status_premium">Тільки Преміум Учасники</string>
-    <string name="cache_geocode">гео код</string>
     <string name="cache_name">Ім’я</string>
-    <string name="cache_name_set">Встановити ім\'я кеша</string>
-    <string name="cache_name_updated">Ім\'я кешу оновлено</string>
     <string name="cache_type">Тип</string>
     <string name="cache_size">Розмір</string>
     <string name="cache_distance">Відстань</string>
@@ -996,14 +991,10 @@
     <string name="map_gm_autorotation_disable">Відключити автоповорот карти?\n\nМожете знову включити її в меню обертання карти</string>
     <string name="quick_settings">Швидкі налаштування</string>
     <!-- search -->
-    <string name="search_bar_desc">Кеші (гео-код, ключове слово), трекбежі (TB код)</string>
     <string name="search_coordinates">Координати</string>
     <string name="search_coordinates_button">Пошук за координатами</string>
     <string name="search_address">Адреса</string>
     <string name="search_address_button">Пошук адреси</string>
-    <string name="search_geo">Geo код</string>
-    <string name="search_geo_button">Пошук за гео-кодом</string>
-    <string name="search_kw">Ключові слова</string>
     <string name="search_kw_prefill">Ключове слово</string>
     <string name="search_kw_button">пошук за ключовим словом</string>
     <string name="search_hbu">прихований</string>
