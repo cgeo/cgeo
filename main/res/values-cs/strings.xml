@@ -11,6 +11,7 @@
     <string name="about">O aplikaci</string>
     <string name="latitude">Zeměpisná šířka</string>
     <string name="longitude">Zeměpisná délka</string>
+    <string name="latlongitude">Zeměpisná šířka\nZeměpisná délka</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Nastavení c:geo</string>
     <!-- caches -->
@@ -1231,7 +1232,7 @@
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
-    <string name="cache_geocode">GC kód</string>
+    <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Název</string>
     <string name="cache_name_set">Nastavit název kešky</string>
     <string name="cache_name_updated">Název kešky byl aktualizován</string>
@@ -1417,7 +1418,7 @@
     <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
-    <string name="search_bar_desc">Kešky (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
+    <string name="search_bar_desc">Kešky (geokód, klíčové slovo), sledovatelné předměty (kód TB)</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
@@ -1425,7 +1426,7 @@
     <string name="search_geo">Geokód</string>
     <string name="search_geo_button">Hledat podle geokódu</string>
     <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
-    <string name="search_kw">Klíčová slova</string>
+    <string name="search_kw">Klíčové slovo</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
     <string name="search_kw_button">Hledat podle klíčového slova</string>
     <string name="search_hbu">Ukryl</string>
