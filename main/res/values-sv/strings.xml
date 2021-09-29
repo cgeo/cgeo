@@ -363,7 +363,6 @@
     <string name="caches_sort_favorites">Favoriter</string>
     <string name="caches_sort_favorites_ratio">Favoriter [%]</string>
     <string name="caches_sort_name">Namn</string>
-    <string name="caches_sort_geocode">Geo kod</string>
     <string name="caches_sort_rating">Betyg (GC-vote)</string>
     <string name="caches_sort_vote">Betyg (eget)</string>
     <string name="caches_sort_inventory">Antal trackable</string>
@@ -1114,7 +1113,6 @@
     <string name="cache_advanced">Avancerat</string>
     <string name="cache_waypoints">Punkter</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
-    <string name="cache_waypoints_add">Lägg till punkt</string>
     <string name="cache_waypoints_add_currentLocation">Lägg till nuvarande plats</string>
     <string name="cache_waypoints_add_fromclipboard">Lägg till från urklipp</string>
     <string name="cache_waypoints_remove_original_waypoint">Vägpunkt kopierad från urklipp till denna cache.\n\nTa bort ursprungliga vägpunkten?</string>
@@ -1201,10 +1199,7 @@
     <string name="cache_status_disabled">Inaktiverad</string>
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Enbart för Premium medlemmar</string>
-    <string name="cache_geocode">GC-kod</string>
     <string name="cache_name">Namn</string>
-    <string name="cache_name_set">Ställ in cachennamn</string>
-    <string name="cache_name_updated">Cachename uppdaterad</string>
     <string name="cache_description_set">Ange cachebeskrivning</string>
     <string name="cache_description_updated">Cachens beskrivning uppdaterad</string>
     <string name="cache_type">Typ</string>
@@ -1382,22 +1377,17 @@
     <string name="map_settings_cache_filter_too_complex_message">Det aktuella cachefiltret är för komplext för att lägga till ytterligare alternativ här. Vanligtvis innebär detta att cache-filtret innehåller NOT eller OR uttryck istället för enkel logik med AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
-    <string name="search_bar_desc">Cache (GC-kod, nyckelord), Trackable (TB-kod)</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Sök med koordinater</string>
     <string name="search_address">Adress</string>
     <string name="search_address_button">Sök med adress</string>
-    <string name="search_geo">Geo kod</string>
-    <string name="search_geo_button">Sök med geo kod</string>
     <string name="search_geocode_from_clipboard">Geocode klistrades in från urklipp.</string>
-    <string name="search_kw">Nyckelord</string>
     <string name="search_kw_prefill">Nyckelord</string>
     <string name="search_kw_button">Sök med nyckelord</string>
     <string name="search_hbu">Gömd av</string>
     <string name="search_hbu_prefill">Ägare</string>
     <string name="search_hbu_button">Sök baserat på ägare</string>
     <string name="search_filter">Filtrera</string>
-    <string name="search_filter_button">Sök med filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
     <string name="search_filter_temporary_user_information_title">Nytt ramverk för filter</string>
     <string name="search_filter_temporary_user_information">c:geo har infört ett nytt filtreringssystem som stöder flexibla, kombinerbara och lagringsbara filter. \n\nDet globala filtret kan från och med nu ändras direkt i cachelistor och live-kartan.</string>

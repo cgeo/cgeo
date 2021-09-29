@@ -11,6 +11,7 @@
     <string name="about">Over c:geo</string>
     <string name="latitude">Breedtegraad</string>
     <string name="longitude">Lengtegraad</string>
+    <string name="latlongitude">Breedtegraad\nLengtegraad</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Instellingen</string>
     <!-- caches -->
@@ -1396,15 +1397,15 @@
     <string name="map_settings_cache_filter_too_complex_message">Het huidige cachefilter is te complex om hier extra opties op toe te passen. Meestal betekent dit dat het cachefilter NIET of OF uitdrukkingen bevat in plaats van eenvoudige EN logica.</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/trackables zoeken</string>
-    <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
+    <string name="search_bar_desc">Caches (geocode, trefwoord), Trackables (TB-code)</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
     <string name="search_address">Adres</string>
     <string name="search_address_button">Zoeken op adres</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Zoeken op geocode</string>
+    <string name="search_geo_button">Zoek op geocode</string>
     <string name="search_geocode_from_clipboard">Geocode is geplakt van klembord.</string>
-    <string name="search_kw">Trefwoorden</string>
+    <string name="search_kw">Trefwoord</string>
     <string name="search_kw_prefill">Trefwoord</string>
     <string name="search_kw_button">Zoeken op trefwoord</string>
     <string name="search_hbu">Verborgen door</string>

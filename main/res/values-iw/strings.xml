@@ -282,7 +282,6 @@
     <string name="caches_sort_favorites">מועדפים</string>
     <string name="caches_sort_favorites_ratio">[%] מועדפים</string>
     <string name="caches_sort_name">שם</string>
-    <string name="caches_sort_geocode">קוד מטמון</string>
     <string name="caches_sort_rating">דירוג</string>
     <string name="caches_sort_vote">הצבעה (דירוג שלך)</string>
     <string name="caches_sort_inventory">ספירת מלאי</string>

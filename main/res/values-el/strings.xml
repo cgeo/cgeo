@@ -11,6 +11,7 @@
     <string name="about">Σχετικά με το c:geo</string>
     <string name="latitude">Γεωγραφικό πλάτος</string>
     <string name="longitude">Γεωγραφικό μήκος</string>
+    <string name="latlongitude">Πλάτος\nΜήκος</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Ρυθμίσεις c:geo</string>
     <!-- caches -->
@@ -359,6 +360,7 @@
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
     <string name="caches_sort_distance">Απόσταση</string>
+    <string name="caches_sort_distance_target">Απόσταση από τον στόχο</string>
     <string name="caches_sort_difficulty">Δυσκολία</string>
     <string name="caches_sort_terrain">Έδαφος</string>
     <string name="caches_sort_size">Μέγεθος</string>
@@ -1122,7 +1124,7 @@
     <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
-    <string name="cache_waypoints_add">Προσθήκη Σημείου Αναφοράς</string>
+    <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
     <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
@@ -1210,10 +1212,10 @@
     <string name="cache_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_status_active">Ενεργή</string>
     <string name="cache_status_premium">Μόνο για Premium μέλη</string>
-    <string name="cache_geocode">Κωδικός κρύπτης</string>
+    <string name="cache_geocode">Γεωκωδικός</string>
     <string name="cache_name">Όνομα</string>
-    <string name="cache_name_set">Τέθηκε όνομα κρύπτης</string>
-    <string name="cache_name_updated">Το όνομα κρύπτης άλλαξε</string>
+    <string name="cache_name_set">Ορισμός ονόματος κρύπτης</string>
+    <string name="cache_name_updated">Ενημερώθηκε το όνομα κρύπτης</string>
     <string name="cache_description_set">Περιγραφή κρύπτης</string>
     <string name="cache_description_updated">Η περιγραφή της κρύπτης ενημερώθηκε</string>
     <string name="cache_type">Τύπος</string>
@@ -1400,16 +1402,15 @@
     <string name="search_address">Διεύθυνση</string>
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
-    <string name="search_geo_button">Αναζήτηση με γεωκωδικό</string>
+    <string name="search_geo_button">Αναζήτηση ανά γεωκωδικό</string>
     <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
-    <string name="search_kw">Λέξεις-κλειδιά</string>
+    <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_hbu_prefill">Ιδιοκτήτης</string>
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο</string>
-    <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_filter_temporary_user_information_title">Πλαίσιο νέου φίλτρου</string>
     <string name="search_filter_temporary_user_information">Το c:geo εισήγαγε ένα νέο σύστημα φιλτραρίσματος, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα. \n\nΤο καθολικό φίλτρο μπορεί από τώρα και στο εξής να αλλάξει απευθείας στις λίστες κρυπτών και στον ζωντανό χάρτη.</string>

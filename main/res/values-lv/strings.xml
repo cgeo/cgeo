@@ -316,7 +316,6 @@
     <string name="caches_sort_favorites">Pēc favorītu daudzuma</string>
     <string name="caches_sort_favorites_ratio">Pēc favorītu [%]</string>
     <string name="caches_sort_name">Vēc nosaukuma</string>
-    <string name="caches_sort_geocode">Pēc Geo code</string>
     <string name="caches_sort_rating">Pēc vērtējuma</string>
     <string name="caches_sort_vote">Balsojums (paša vērtējums)</string>
     <string name="caches_sort_inventory">Pēc krājumu skaita</string>
@@ -737,7 +736,6 @@
     <string name="cache_list_select_last">Iepriekšējā atlase</string>
     <string name="cache_images">Attēli</string>
     <string name="cache_waypoints">Starpposmi</string>
-    <string name="cache_waypoints_add">Pievienot Starpposmu</string>
     <string name="cache_waypoints_add_currentLocation">Pievienot pašreizējo atrašanās vietu</string>
     <string name="cache_waypoints_add_fromclipboard">Pievienot no starpliktuves (clipboard)</string>
     <string name="cache_hint">Mājiens</string>
@@ -810,10 +808,7 @@
     <string name="cache_status_disabled">Atspējots</string>
     <string name="cache_status_active">Aktīvs</string>
     <string name="cache_status_premium">TIkai Premium lietotājiem</string>
-    <string name="cache_geocode">Geo kods</string>
     <string name="cache_name">Nosaukums</string>
-    <string name="cache_name_set">Iestatīt slēpņa nosaukumu</string>
-    <string name="cache_name_updated">Slēpņa nosaukums atjaunināts</string>
     <string name="cache_type">Tips</string>
     <string name="cache_size">Izmērs</string>
     <string name="cache_distance">Attālums</string>
@@ -946,14 +941,10 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="map_as_list">Parādīt kā sarakstu</string>
     <string name="map_select_multiple_items">Izvēlēties lietu</string>
     <!-- search -->
-    <string name="search_bar_desc">Slēpņi (GC kods, atslēgas vārds), Ceļotāji (TB kods)</string>
     <string name="search_coordinates">Koordinātas</string>
     <string name="search_coordinates_button">Meklēt pēc koordinātām</string>
     <string name="search_address">Adrese</string>
     <string name="search_address_button">Meklēt pēc adreses</string>
-    <string name="search_geo">Geo kods</string>
-    <string name="search_geo_button">Meklēt pēc geo koda</string>
-    <string name="search_kw">Atslēgvārdi</string>
     <string name="search_kw_prefill">Atslēgvārds</string>
     <string name="search_kw_button">Meklēt pēc atslēgvārda</string>
     <string name="search_hbu_prefill">Īpašnieks</string>

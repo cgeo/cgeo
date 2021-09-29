@@ -279,7 +279,6 @@
     <string name="caches_sort_favorites">Številu favoritov</string>
     <string name="caches_sort_favorites_ratio">Številu favoritov [%]</string>
     <string name="caches_sort_name">Imenu</string>
-    <string name="caches_sort_geocode">Geo kodi</string>
     <string name="caches_sort_rating">Glasovih</string>
     <string name="caches_sort_vote">Mojih glasovih</string>
     <string name="caches_sort_inventory">Številu sledljivčkov</string>
@@ -559,7 +558,6 @@
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
-    <string name="cache_waypoints_add">Dodaj točko</string>
     <string name="cache_hint">Namig</string>
     <string name="cache_logs">Dnevnik zapisov</string>
     <string name="cache_logs_friends_and_own">Lastni/prijateljevi zapisi</string>
@@ -614,7 +612,6 @@
     <string name="cache_status_archived">Arhiviran</string>
     <string name="cache_status_disabled">Onemogočen</string>
     <string name="cache_status_premium">Samo za Premium člane</string>
-    <string name="cache_geocode">Geo koda</string>
     <string name="cache_name">Ime</string>
     <string name="cache_type">Tip</string>
     <string name="cache_size">Velikost</string>
@@ -714,14 +711,10 @@
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <!-- search -->
-    <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
     <string name="search_address">Naslov</string>
     <string name="search_address_button">Iskanje po naslovu</string>
-    <string name="search_geo">Geo koda</string>
-    <string name="search_geo_button">Iskanje po geo kodi</string>
-    <string name="search_kw">Ključne besede</string>
     <string name="search_kw_prefill">Ključna beseda</string>
     <string name="search_kw_button">Iskanje po ključnih besedah</string>
     <string name="search_hbu_prefill">Lastnik</string>

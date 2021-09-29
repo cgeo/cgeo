@@ -359,7 +359,6 @@
     <string name="caches_sort_favorites">Kiek mėgsta</string>
     <string name="caches_sort_favorites_ratio">Kiek mėgsta [%]</string>
     <string name="caches_sort_name">Pavadinimas</string>
-    <string name="caches_sort_geocode">Geo kodas</string>
     <string name="caches_sort_rating">Reitingas</string>
     <string name="caches_sort_vote">Balsai (savas reitingas)</string>
     <string name="caches_sort_inventory">Inventoriaus kiekis</string>
@@ -1069,7 +1068,6 @@
     <string name="cache_images">Vaizdai</string>
     <string name="cache_advanced">Išplėstiniai</string>
     <string name="cache_waypoints">Papildomi taškai</string>
-    <string name="cache_waypoints_add">Pridėti papildomą tašką</string>
     <string name="cache_waypoints_add_currentLocation">Pridėti dabartinę vietą</string>
     <string name="cache_waypoints_add_fromclipboard">Pridėti iš iškarpinės</string>
     <string name="cache_waypoints_remove_original_waypoint">Papildomas taškas nukopijuotas iš iškarpinės į šią slėptuvę.\n\nPašalinti pradinį tašką?</string>
@@ -1153,10 +1151,7 @@
     <string name="cache_status_disabled">Išjungta</string>
     <string name="cache_status_active">Aktyvus</string>
     <string name="cache_status_premium">Tik Premium nariams</string>
-    <string name="cache_geocode">Geo kodas</string>
     <string name="cache_name">Pavadinimas</string>
-    <string name="cache_name_set">Nustatykite slėptuvės pavadinimą</string>
-    <string name="cache_name_updated">Atnaujintas slėptuvės pavadinimas</string>
     <string name="cache_description_set">Slėptuvės aprašymas</string>
     <string name="cache_description_updated">Slėptuvės aprašymas atnaujintas</string>
     <string name="cache_type">Tipas</string>
@@ -1320,21 +1315,16 @@
     <string name="map_show_waypoints_title">Rodyti tarpinius taškus:</string>
     <string name="map_show_other_title">Rodyti kitus:</string>
     <!-- search -->
-    <string name="search_bar_desc">Slėptuvės (geo kodas, raktažodis), Keliauninkai (TB kodas)</string>
     <string name="search_coordinates">Koordinatės</string>
     <string name="search_coordinates_button">Paieška pagal koordinates</string>
     <string name="search_address">Adresas</string>
     <string name="search_address_button">Paieška pagal adresą</string>
-    <string name="search_geo">Geo kodas</string>
-    <string name="search_geo_button">Paieška pagal geo kodą</string>
-    <string name="search_kw">Raktiniai žodžiai</string>
     <string name="search_kw_prefill">Raktinis žodis</string>
     <string name="search_kw_button">Paieška pagal raktinį žodžį</string>
     <string name="search_hbu">Paslėpė</string>
     <string name="search_hbu_prefill">Savininkas</string>
     <string name="search_hbu_button">Paieška pagal savininko vardą</string>
     <string name="search_filter">Filtras</string>
-    <string name="search_filter_button">Paieškos filtras</string>
     <string name="search_tb">Keliauninkas</string>
     <string name="search_tb_hint">Keliauninko identifikavimas</string>
     <string name="search_tb_button">Ieškoti keliauninko</string>

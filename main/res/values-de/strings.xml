@@ -11,6 +11,7 @@
     <string name="about">Über c:geo</string>
     <string name="latitude">Breitengrad</string>
     <string name="longitude">Längengrad</string>
+    <string name="latlongitude">Breite\nLänge</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Einstellungen</string>
     <!-- caches -->
@@ -1131,7 +1132,7 @@
     <string name="cache_hint">Hinweis</string>
     <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
     <string name="cache_logs">Logbuch</string>
-    <string name="cache_latest_logs">Neueste Logs</string>
+    <string name="cache_latest_logs">Letzte Logs</string>
     <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
     <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
@@ -1214,8 +1215,8 @@
     <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
-    <string name="cache_name_set">Cachename festlegen</string>
-    <string name="cache_name_updated">Cachename aktualisiert</string>
+    <string name="cache_name_set">Cache-Name festlegen</string>
+    <string name="cache_name_updated">Cache-Name aktualisiert</string>
     <string name="cache_description_set">Cachebeschreibung bearbeiten</string>
     <string name="cache_description_updated">Cachebeschreibung aktualisiert</string>
     <string name="cache_type">Typ</string>
@@ -1402,9 +1403,9 @@
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Suche mit Adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Suche mit Geocode</string>
+    <string name="search_geo_button">Suche nach Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
-    <string name="search_kw">Stichworte</string>
+    <string name="search_kw">Stichwort</string>
     <string name="search_kw_prefill">Stichwörter</string>
     <string name="search_kw_button">Suche mit Stichwörtern</string>
     <string name="search_hbu">Versteckt von</string>
