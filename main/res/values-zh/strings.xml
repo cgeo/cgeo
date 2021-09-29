@@ -320,7 +320,6 @@
     <string name="caches_sort_favorites">已被标记为喜爱</string>
     <string name="caches_sort_favorites_ratio">收藏 [%]</string>
     <string name="caches_sort_name">应用名</string>
-    <string name="caches_sort_geocode">Geo 节点</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票 (个人评级)</string>
     <string name="caches_sort_inventory">库存计数</string>
@@ -715,7 +714,6 @@
     <!-- cache -->
     <!-- days remaining -->
     <string name="cache_menu_maps_directions">谷歌地图指引</string>
-    <string name="cache_geocode">地理编码</string>
     <!-- coordinate calculator hints -->
     <!-- gpx -->
     <!-- import -->
