@@ -15,4 +15,4 @@
 - Oprava: Různé opravy uživatelského rozhraní a filtrování
 - Oprava: Některé opravy seznamů záložek (stahování & aktuální stav)
 - Změna: Skrytí citlivých dat v "nastavení zobrazení"
-- Změna: Předpona Adventure Lab kešek je nyní "AL" namísto "LC" (která se již používá pro Extremcaching)
+- Změna: Předpona Adventure Lab kešek je nyní "AL" namísto "LC" (která se již používá pro Terracaching)
