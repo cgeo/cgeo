@@ -15,4 +15,4 @@
 - Correção: Algumas correções à interface do utilizador e para a filtragem
 - Correcção: Algumas correcções para as listas de marcadores (transferir & estado actual)
 - Alteração: Ocultar dados confidenciais em "Definições de visualização"
-- Alteração: O prefixo de cache para as Adventure Labs agora é "AL" em vez de "LC" (que já está em uso para Extremcaching)
+- Alteração: O prefixo de cache para as Adventure Labs agora é "AL" em vez de "LC" (que já está em uso para Terracaching)

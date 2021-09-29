@@ -15,4 +15,4 @@
 - Corrtto: alcune correzioni nell'interfaccia utente e il filtro
 - Corretto: Alcune correzioni per i segnalibri (scaricamento & stato attuale)
 - Modifica: I dati sensibili in "visualizza impostazioni" vengono nascosti
-- Cambio: Il prefisso del cache per gli Adventure Lab è ora "AL" invece di "LC" (che è già in uso per Extremcaching)
+- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Terracaching)
