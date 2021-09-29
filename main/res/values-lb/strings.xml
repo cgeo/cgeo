@@ -316,7 +316,6 @@
     <string name="caches_sort_favorites">Favoritten</string>
     <string name="caches_sort_favorites_ratio">Favoritten [%]</string>
     <string name="caches_sort_name">Numm</string>
-    <string name="caches_sort_geocode">Geo Code</string>
     <string name="caches_sort_rating">Bewäertung</string>
     <string name="caches_sort_vote">Eege Bewäertung</string>
     <string name="caches_sort_inventory">Zieler vum Inventaire</string>
