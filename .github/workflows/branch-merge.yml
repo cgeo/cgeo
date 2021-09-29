@@ -9,7 +9,7 @@ on:
   #  - cron: '0 0 * * *'
 
 env:
-  REPO: https://cgeo:${{secrets.ACTION_SECRET}}@github.com/cgeo/cgeo.git
+  REPO: https://${{secrets.ACTION_SECRET}}@github.com/cgeo/cgeo.git
   RELEASE_BRANCH: release
   MASTER_BRANCH: master
 
