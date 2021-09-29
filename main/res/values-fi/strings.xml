@@ -366,7 +366,6 @@
     <string name="caches_sort_favorites">Suosikit</string>
     <string name="caches_sort_favorites_ratio">Suosikit [%]</string>
     <string name="caches_sort_name">Nimi</string>
-    <string name="caches_sort_geocode">Geokoodi</string>
     <string name="caches_sort_rating">Arviointi</string>
     <string name="caches_sort_vote">Äänet (oma arviointi)</string>
     <string name="caches_sort_inventory">Kätköjen määrä</string>
@@ -1123,7 +1122,6 @@
     <string name="cache_advanced">Lisäasetukset</string>
     <string name="cache_waypoints">Reittipisteet</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Reittipisteet (%d)</string>
-    <string name="cache_waypoints_add">Lisää reittipiste</string>
     <string name="cache_waypoints_add_currentLocation">Lisää nykyinen sijainti</string>
     <string name="cache_waypoints_add_fromclipboard">Liitä leikepöydältä</string>
     <string name="cache_waypoints_remove_original_waypoint">Reittipiste on nyt liitetty tähän kätköön leikepöydältä. \n\nPoistetaanko alkuperäinen reittipiste?</string>
@@ -1211,10 +1209,7 @@
     <string name="cache_status_disabled">Ei käytössä</string>
     <string name="cache_status_active">Aktiivinen</string>
     <string name="cache_status_premium">Vain Premium-jäsenille</string>
-    <string name="cache_geocode">Kätkökoodi</string>
     <string name="cache_name">Nimi</string>
-    <string name="cache_name_set">Aseta kätkön nimi</string>
-    <string name="cache_name_updated">Kätkön nimi päivitetty</string>
     <string name="cache_description_set">Aseta kätkön kuvaus</string>
     <string name="cache_description_updated">Kätkön kuvaus päivitetty</string>
     <string name="cache_type">Tyyppi</string>
@@ -1395,22 +1390,17 @@
     <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
-    <string name="search_bar_desc">Kätköt (GC-koodi, avainsana), reissaajat (TB-koodi)</string>
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_coordinates_button">Hae koordinaattien avulla</string>
     <string name="search_address">Osoite</string>
     <string name="search_address_button">Etsi osoitteella</string>
-    <string name="search_geo">GC-koodi</string>
-    <string name="search_geo_button">Hae GC-koodilla</string>
     <string name="search_geocode_from_clipboard">Geokoodi liitettiin leikepöydältä.</string>
-    <string name="search_kw">Hakusanat</string>
     <string name="search_kw_prefill">Hakusana</string>
     <string name="search_kw_button">Hae hakusanalla</string>
     <string name="search_hbu">Piilottanut</string>
     <string name="search_hbu_prefill">Omistaja</string>
     <string name="search_hbu_button">Hae omistajan nimellä</string>
     <string name="search_filter">Suodata</string>
-    <string name="search_filter_button">Etsi suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
     <string name="search_filter_temporary_user_information_title">Uusi suodatinkehys</string>
     <string name="search_filter_temporary_user_information">c:geo on ottanut käyttöön uuden suodatusjärjestelmän, joka tukee joustavia, yhdistettäviä ja tallennettavia suodattimia. \n\nLöydät globaalin suodattimen nyt kätkölistojen sekä (live-)kartan yläreunan suodatinnapin kautta.</string>
