@@ -323,7 +323,6 @@
     <string name="caches_sort_favorites">Рекомендации</string>
     <string name="caches_sort_favorites_ratio">Рекомендации [%]</string>
     <string name="caches_sort_name">Название</string>
-    <string name="caches_sort_geocode">Гео код</string>
     <string name="caches_sort_rating">Рейтинг</string>
     <string name="caches_sort_vote">Собственный рейтинг</string>
     <string name="caches_sort_inventory">Количество призов</string>
@@ -889,7 +888,6 @@
     <string name="cache_images">Изображения</string>
     <string name="cache_advanced">Продвинутые</string>
     <string name="cache_waypoints">Путевые точки</string>
-    <string name="cache_waypoints_add">Добавить точку</string>
     <string name="cache_waypoints_add_currentLocation">Добавить текущее местоположение</string>
     <string name="cache_waypoints_add_fromclipboard">Добавить из буфера обмена</string>
     <string name="cache_waypoints_remove_original_waypoint">Точка скопирована из буфера обмена в этот тайник.\n\nУдалить исходную точку?</string>
@@ -969,10 +967,7 @@
     <string name="cache_status_disabled">Вне игры</string>
     <string name="cache_status_active">Активный</string>
     <string name="cache_status_premium">Только для Премиум участников</string>
-    <string name="cache_geocode">Код тайника</string>
     <string name="cache_name">Название</string>
-    <string name="cache_name_set">Задать имя тайника</string>
-    <string name="cache_name_updated">Имя тайника обновлено</string>
     <string name="cache_description_set">Установить описание тайника</string>
     <string name="cache_description_updated">Описание тайника обновлено</string>
     <string name="cache_type">Тип</string>
@@ -1125,14 +1120,10 @@
     <string name="quick_settings">Быстрые настройки</string>
     <string name="quick_settings_info">Некоторые настройки карты (настройки карты, скрытие, навигация) были перемещены в новое окно \"Быстрые настройки\"\nВы можете открыть это окно, используя иконку по центру внизу карты.</string>
     <!-- search -->
-    <string name="search_bar_desc">Тайники (геокод, название), код трекабла</string>
     <string name="search_coordinates">Координаты</string>
     <string name="search_coordinates_button">Поиск по координатам</string>
     <string name="search_address">Адрес</string>
     <string name="search_address_button">Поиск по адресу</string>
-    <string name="search_geo">Код тайника</string>
-    <string name="search_geo_button">Поиск по коду</string>
-    <string name="search_kw">Ключевые слова</string>
     <string name="search_kw_prefill">Ключевое слово</string>
     <string name="search_kw_button">Искать по ключевым словам</string>
     <string name="search_hbu">Создан</string>
