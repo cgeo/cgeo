@@ -15,4 +15,4 @@
 - 수정: UI 및 필터링에 대한 일부 수정
 - 수정: 북마크 목록에 대한 일부 수정(다운로드 및 현재 상태)
 - 변경: "보기 설정"에서 민감한 정보 숨기기
-- Change: Cache prefix for adventure labs is now "AL" instead of "LC" (which is already in use for Terracaching)
+- 변경: 어드벤처 랩 캐시 접두사는 이제 "LC" 대신 "AL"입니다. (이미 Terracaching에 사용 중임)
