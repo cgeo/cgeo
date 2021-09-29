@@ -359,7 +359,6 @@
     <string name="caches_sort_favorites">obľúbenosti</string>
     <string name="caches_sort_favorites_ratio">obľúbenosti [%]</string>
     <string name="caches_sort_name">názvu</string>
-    <string name="caches_sort_geocode">geokódu</string>
     <string name="caches_sort_rating">hodnotenia</string>
     <string name="caches_sort_vote">vlastného hodnotenia</string>
     <string name="caches_sort_inventory">počtu položiek v skrýši</string>
@@ -1125,7 +1124,6 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Rozšírené</string>
     <string name="cache_waypoints">Body trasy</string>
-    <string name="cache_waypoints_add">Pridať bod</string>
     <string name="cache_waypoints_add_currentLocation">Pridať aktuálne miesto</string>
     <string name="cache_waypoints_add_fromclipboard">Pridať zo schránky</string>
     <string name="cache_waypoints_remove_original_waypoint">Bod trasy bol skopírovaný zo schránky do tejto kešky.\n\nOdstrániť pôvodný bod trasy?</string>
@@ -1212,10 +1210,7 @@
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktívna</string>
     <string name="cache_status_premium">Iba pre platiacich používateľov</string>
-    <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Názov</string>
-    <string name="cache_name_set">Nastaviť názov kešky</string>
-    <string name="cache_name_updated">Názov kešky aktualizovaný</string>
     <string name="cache_description_set">Nastaviť popis kešky</string>
     <string name="cache_description_updated">Popis kešky aktualizovaný</string>
     <string name="cache_type">Typ</string>
@@ -1395,21 +1390,16 @@
     <string name="map_settings_cache_filter_too_complex_message">Aktuálny filter kešiek je príliš zložitý na to, aby sa tu dali použiť ďalšie možnosti. Zvyčajne to znamená, že filter kešiek obsahuje výrazy NOT alebo OR namiesto jednoduchého logického výrazu AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Hľadať kešky/trackovacie predmety</string>
-    <string name="search_bar_desc">Skrýše (geokód, kľúčové slovo), trasovateľné predmety (TB-kód)</string>
     <string name="search_coordinates">Súradnice</string>
     <string name="search_coordinates_button">Hľadať podľa súradníc</string>
     <string name="search_address">Adresa</string>
     <string name="search_address_button">Hľadať podľa adresy</string>
-    <string name="search_geo">Geokód</string>
-    <string name="search_geo_button">Hľadať podľa geokódu</string>
-    <string name="search_kw">Kľúčové slová</string>
     <string name="search_kw_prefill">Kľúčové slovo</string>
     <string name="search_kw_button">Hľadať podľa kľúčových slov</string>
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hľadať podľa vlastníka</string>
     <string name="search_filter">Filtrovať</string>
-    <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_filter_temporary_user_information_title">Pracovný rámec nového filtra</string>
     <string name="search_filter_temporary_user_information">Aplikácia c:geo predstavuje nový systém filtrovania s podporou flexibilných a kombinovateľných filtrov, ktoré možno ukladať.\n\nGlobálny filter je možné odteraz zmeniť priamo v zoznamoch kešiek a na aktívnej mape.</string>
