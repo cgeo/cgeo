@@ -42,6 +42,7 @@
 
     <!-- buttons -->
     <dimen name="textSize_buttonsPrimary">@dimen/textSize_detailsSecondary</dimen>
+    <dimen name="textSize_buttonsDouble">@dimen/textSize_detailsPrimary</dimen>
 
     <!-- compass -->
     <dimen name="textSize_compassTargeting">26sp</dimen>

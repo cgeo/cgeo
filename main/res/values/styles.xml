@@ -151,6 +151,12 @@
         <item name="android:layout_marginBottom">5dip</item>
     </style>
 
+    <style name="button_full_double" parent="button_full">
+        <item name="android:lines">2</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:textSize">@dimen/textSize_buttonsDouble</item>
+    </style>
+
     <style name="button_full_spinner" parent="button_full">
         <item name="icon">@drawable/outline_arrow_drop_down_24</item>
         <item name="iconGravity">textEnd</item>

@@ -293,6 +293,8 @@ public final class SystemInformation {
         ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(size);
 
         body.append("\n- Screen resolution: ").append(size.x).append("x").append(size.y).append("px (").append(config.screenWidthDp).append("x").append(config.screenHeightDp).append("dp)");
+        body.append("\n- Pixel density: ").append(context.getResources().getDisplayMetrics().scaledDensity);
+        body.append("\n- System font scale: ").append(android.provider.Settings.System.getFloat(context.getContentResolver(), android.provider.Settings.System.FONT_SCALE, 1f)).append(" / used scale: ").append(config.fontScale);
     }
 
     private static String versionInfoToString(final int actualVersion, final int expectedVersion) {

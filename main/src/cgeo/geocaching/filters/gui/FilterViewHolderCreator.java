@@ -20,6 +20,7 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.app.Activity;
 
@@ -66,7 +67,8 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                             CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
                         .setValueDisplayTextGetter(CacheType::getShortL10n)
-                        .setValueDrawableGetter(ct -> ImageParam.id(ct.markerId)) , 2, null);
+                        .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct, false))),
+                        2, null);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(

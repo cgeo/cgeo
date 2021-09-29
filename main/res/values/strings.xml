@@ -14,6 +14,7 @@
     <string name="about">About c:geo</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="latlongitude">Latitude\nLongitude</string>
 
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Settings</string>
@@ -393,7 +394,7 @@
     <string name="caches_sort_favorites">Favorites</string>
     <string name="caches_sort_favorites_ratio">Favorites [%]</string>
     <string name="caches_sort_name">Name</string>
-    <string name="caches_sort_geocode">Geo Code</string>
+    <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Rating</string>
     <string name="caches_sort_vote">Vote (Own Rating)</string>
     <string name="caches_sort_inventory">Count of Inventory</string>
@@ -1247,7 +1248,7 @@
     <string name="cache_advanced">Advanced</string>
     <string name="cache_waypoints">Waypoints</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
-    <string name="cache_waypoints_add">Add Waypoint</string>
+    <string name="cache_waypoints_add">Add waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Add current location</string>
     <string name="cache_waypoints_hide_visited_waypoints">Hide visited Waypoints</string>
     <string name="cache_waypoints_add_fromclipboard">Add from clipboard</string>
@@ -1336,10 +1337,10 @@
     <string name="cache_status_disabled">Disabled</string>
     <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Premium Members only</string>
-    <string name="cache_geocode">Geo code</string>
+    <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
-    <string name="cache_name_set">Set cachename</string>
-    <string name="cache_name_updated">Cachename updated</string>
+    <string name="cache_name_set">Set cache name</string>
+    <string name="cache_name_updated">Cache name updated</string>
     <string name="cache_description_set">Set cache description</string>
     <string name="cache_description_updated">Cache description updated</string>
     <string name="cache_type">Type</string>
@@ -1541,22 +1542,22 @@
 
     <!-- search -->
     <string name="search_bar_hint">Search caches/trackables</string>
-    <string name="search_bar_desc">Caches (geo code, keyword), Trackables (TB code)</string>
+    <string name="search_bar_desc">Caches (geocode, keyword), Trackables (TB code)</string>
     <string name="search_coordinates">Coordinates</string>
     <string name="search_coordinates_button">Search by coordinates</string>
     <string name="search_address">Address</string>
     <string name="search_address_button">Search by address</string>
-    <string name="search_geo">Geo code</string>
-    <string name="search_geo_button">Search by geo code</string>
+    <string name="search_geo">Geocode</string>
+    <string name="search_geo_button">Search by geocode</string>
     <string name="search_geocode_from_clipboard">Geocode was pasted from clipboard.</string>
-    <string name="search_kw">Keywords</string>
+    <string name="search_kw">Keyword</string>
     <string name="search_kw_prefill">Keyword</string>
     <string name="search_kw_button">Search by keyword</string>
     <string name="search_hbu">Hidden by</string>
     <string name="search_hbu_prefill">Owner</string>
     <string name="search_hbu_button">Search by owner name</string>
     <string name="search_filter">Filter</string>
-    <string name="search_filter_button">Search by Filter</string>
+    <string name="search_filter_button">Search by filter</string>
     <string name="search_filter_info_message" formatted="false">**Search by filter** searches caches on all active online services (e.g. geocaching.com) using a provided filter. However, search capabilities of these services are usually more limited than filter capabilities of c:geo.\n\n- All services only support AND filters (no OR filters and no filter inversion).\n- The more basic filters like **cache type** or **cache size** are supported by all services. More complicated filters are often not supported or have some restrictions e.g. **favorites** or **hidden date**.\n- A detailed list on supported filters per service can be found [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters not supported by the online service will be applied by c:geo on the received results.</string>
     <string name="search_filter_temporary_user_information_title">New filter framework</string>
     <string name="search_filter_temporary_user_information">c:geo has introduced a new filtering system, supporting flexible, combinable and storable filters. \n\nThe global filter can from now on be changed directly in cache lists and the live map.</string>
