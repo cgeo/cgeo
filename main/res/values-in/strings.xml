@@ -262,7 +262,6 @@
     <string name="caches_sort_favorites">Favorit</string>
     <string name="caches_sort_favorites_ratio">Favorit [%]</string>
     <string name="caches_sort_name">Nama</string>
-    <string name="caches_sort_geocode">Kode Geo</string>
     <string name="caches_sort_rating">Peringkat</string>
     <string name="caches_sort_vote">Vote (Rating sendiri)</string>
     <string name="caches_sort_inventory">Jumlah persedian</string>
@@ -573,7 +572,6 @@
     <string name="cache_list_select_last">Pilihan terakhir</string>
     <string name="cache_images">Gambar</string>
     <string name="cache_waypoints">Titik arah</string>
-    <string name="cache_waypoints_add">Tambahkan titik arah</string>
     <string name="cache_hint">Petunjuk</string>
     <string name="cache_hint_not_available">Tidak ada petunjuk yang tersedia</string>
     <string name="cache_logs">Buku harian kapal</string>
@@ -636,7 +634,6 @@
     <string name="cache_status_archived">Diarsipkan</string>
     <string name="cache_status_disabled">Cacat</string>
     <string name="cache_status_premium">Anggota Premium saja</string>
-    <string name="cache_geocode">Kode geo</string>
     <string name="cache_name">Nama</string>
     <string name="cache_type">Jenis</string>
     <string name="cache_size">Ukuran</string>
@@ -740,14 +737,10 @@
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
     <!-- search -->
-    <string name="search_bar_desc">Cache (geo kode, kata kunci), Trackables (TB kode)</string>
     <string name="search_coordinates">Koordinat</string>
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
     <string name="search_address">Alamat</string>
     <string name="search_address_button">Cari berdasarkan alamat</string>
-    <string name="search_geo">Kode Geo</string>
-    <string name="search_geo_button">Cari berdasarkan kode geo</string>
-    <string name="search_kw">Kata kunci</string>
     <string name="search_kw_prefill">Kata kunci</string>
     <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
     <string name="search_hbu_prefill">Pemilik</string>
