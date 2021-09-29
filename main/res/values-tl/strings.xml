@@ -271,7 +271,6 @@
     <string name="caches_sort_favorites">Ang mga paborito</string>
     <string name="caches_sort_favorites_ratio">Ang mga paborito [%]</string>
     <string name="caches_sort_name">Ang pangalan</string>
-    <string name="caches_sort_geocode">Ang code ng geo</string>
     <string name="caches_sort_rating">Marka</string>
     <string name="caches_sort_vote">Boto (sariling Marka)</string>
     <string name="caches_sort_inventory">Bilang ng imbentaryo</string>
@@ -586,7 +585,6 @@
     <string name="cache_list_select_last">Ang huling pilian</string>
     <string name="cache_images">Mga imahe</string>
     <string name="cache_waypoints">Mga waypoint</string>
-    <string name="cache_waypoints_add">Magdagdag ng waypoint</string>
     <string name="cache_hint">Pahiwatig</string>
     <string name="cache_hint_not_available">Walang magagamit na pahiwatig</string>
     <string name="cache_logs">Talaan ng aklat</string>
@@ -650,7 +648,6 @@
     <string name="cache_status_archived">Naka-archive</string>
     <string name="cache_status_disabled">Hindi pinagana</string>
     <string name="cache_status_premium">Mga Premyadong Miyembro lamang</string>
-    <string name="cache_geocode">Ang code ng geo</string>
     <string name="cache_name">Ang pangalan</string>
     <string name="cache_type">Uri</string>
     <string name="cache_size">Laki</string>
@@ -754,14 +751,10 @@
     <string name="map_as_list">Ipakita bilang listahan</string>
     <string name="map_select_multiple_items">Pumili ng aytem</string>
     <!-- search -->
-    <string name="search_bar_desc">Ang mga cache na (geo na code, Keyboard), Mga trackable (TB na code)</string>
     <string name="search_coordinates">Ang mga koordinado</string>
     <string name="search_coordinates_button">Maghanap sa pamamagitan ng mga koordinado</string>
     <string name="search_address">Ang Address</string>
     <string name="search_address_button">Sinaliksik sa pamamagitan ng address</string>
-    <string name="search_geo">Ang code ng geo</string>
-    <string name="search_geo_button">Sinaliksik sa pamamagitan ng geo code</string>
-    <string name="search_kw">Mga Keyword</string>
     <string name="search_kw_prefill">Mga Keyword</string>
     <string name="search_kw_button">Sinaliksik sa pamamagitan ng keyword</string>
     <string name="search_hbu_prefill">Ang may-ari</string>
