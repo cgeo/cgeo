@@ -4,8 +4,6 @@ import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.StringRes;
 
-import java.util.Map;
-
 public class CalculatorException extends IllegalArgumentException {
 
     public enum ErrorType {
@@ -14,6 +12,8 @@ public class CalculatorException extends IllegalArgumentException {
         WRONG_PARAMETER_COUNT(0, "Wrong parameter count, expected min=%1$s, max=%2$s, got %3$s"),
         WRONG_TYPE(0, "Wrong value type, expected '%1$s', got '%2$s' of type '%3$s'"),
         MISSING_VARIABLE_VALUE(0, "Value missing for variable(s): %1$s"),
+        CYCLIC_DEPENDENCY(0, "Cyclic dependency between variables: %1$s"),
+        EMPTY_FORMULA(0, "Empty formula"),
         OTHER(0, "Problem during evaluation: '%1$s'");
 
         @StringRes
@@ -34,11 +34,11 @@ public class CalculatorException extends IllegalArgumentException {
     private String expression;
     private String functionContext;
     private String parsingContext;
-    private Map<String, Object> evaluationVars;
+    private String evaluationContext;
 
     public CalculatorException(final Throwable cause, final ErrorType errorType, final Object ... errorParams) {
-        super("[" + errorType + "]" + LocalizationUtils.getStringWithFallback(errorType.messageResId, errorType.messageFallback, errorParams), cause);
-        this.localizedMessage = LocalizationUtils.getStringWithFallback(errorType.messageResId, errorType.messageFallback, errorParams);
+        super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
+        this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
         this.errorType = errorType;
     }
 
@@ -62,8 +62,8 @@ public class CalculatorException extends IllegalArgumentException {
         this.parsingContext = "(while parsing '" + parsedChar + "' at position " + parsedPos + ")"; //internationalize later
     }
 
-    public void setEvaluationContext(final Map<String, Object> vars) {
-        this.evaluationVars = vars;
+    public void setEvaluationContext(final String context) {
+        this.evaluationContext = context;
     }
 
     public String getUserDisplayableString() {
@@ -73,7 +73,11 @@ public class CalculatorException extends IllegalArgumentException {
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "/" + functionContext + "/" + parsingContext + "[" + expression + ": " + evaluationVars + "]";
+        return super.getMessage() + "/" + functionContext + "/" + parsingContext + "[" + expression + ": " + evaluationContext + "]";
+    }
+
+    public static String getUserDisplayableMessage(final ErrorType errorType, final Object ... errorParams) {
+        return LocalizationUtils.getStringWithFallback(errorType.messageResId, errorType.messageFallback, errorParams);
     }
 
 
