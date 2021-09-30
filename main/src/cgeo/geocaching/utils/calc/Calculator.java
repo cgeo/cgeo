@@ -1,9 +1,10 @@
 package cgeo.geocaching.utils.calc;
 
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
-import cgeo.geocaching.utils.functions.Action2;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
+import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.EMPTY_FORMULA;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.MISSING_VARIABLE_VALUE;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.OTHER;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.UNEXPECTED_TOKEN;
@@ -17,6 +18,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -48,6 +50,7 @@ public final class Calculator {
     public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*!";
 
     private static final Set<Integer> CHARS = new HashSet<>();
+    private static final Set<Integer> CHARS_DIGITS = new HashSet<>();
     private static final Set<Integer> NUMBERS = new HashSet<>();
 
     //Caches last used compiled expressions for performance reasons
@@ -60,6 +63,8 @@ public final class Calculator {
     //needed only during parsing
     private int pos = -1;
     private int ch;
+    private int markedPos = -1;
+    private int markedCh = ch;
 
     //stores compiled expression
     private CalcNode compiledExpression;
@@ -68,16 +73,16 @@ public final class Calculator {
     private static class CalcNode {
 
         public final String id;
-        public final Func2<Object[], Map<String, Object>, Object> function;
+        public final Func2<Object[], Func1<String, Object>, Object> function;
         public final CalcNode[] children;
 
-        public final Action2<Set<String>, Set<String>> neededVars;
+        public final Action1<Set<String>> neededVars;
 
-        CalcNode(final String id, final CalcNode[] children, final Func2<Object[], Map<String, Object>, Object> function) {
+        CalcNode(final String id, final CalcNode[] children, final Func2<Object[], Func1<String, Object>, Object> function) {
             this(id, children, function, null);
         }
 
-        CalcNode(final String id, final CalcNode[] children, final Func2<Object[], Map<String, Object>, Object> function, final Action2<Set<String>, Set<String>> neededVars) {
+        CalcNode(final String id, final CalcNode[] children, final Func2<Object[], Func1<String, Object>, Object> function, final Action1<Set<String>> neededVars) {
 
             this.id = id;
             this.children = children == null ? new CalcNode[0] : children;
@@ -85,7 +90,7 @@ public final class Calculator {
             this.neededVars = neededVars;
         }
 
-        public Object eval(final Map<String, Object> variables) {
+        public Object eval(final Func1<String, Object> variables) {
             final Object[] childValues = new Object[children.length];
             for (int i = 0; i < children.length; i++) {
                 childValues[i] = children[i].eval(variables);
@@ -94,17 +99,17 @@ public final class Calculator {
         }
 
         //calculates the variable names needed by this function
-        public void calculateNeededVariables(final Set<String> providedVars, final Set<String> result) {
+        public void calculateNeededVariables(final Set<String> result) {
             if (this.neededVars != null) {
-                this.neededVars.call(providedVars, result);
+                this.neededVars.call(result);
             }
             for (CalcNode child : children) {
-                child.calculateNeededVariables(providedVars, result);
+                child.calculateNeededVariables(result);
             }
         }
     }
 
-    private CalcNode createNumeric(final String id, final CalcNode[] children, final Func2<Number[], Map<String, Object>, Object> function) {
+    private CalcNode createNumeric(final String id, final CalcNode[] children, final Func2<Number[], Func1<String, Object>, Object> function) {
         return new CalcNode(id, children, (objs, vars) -> function.call(CalculatorUtils.toNumericArray(objs), vars));
     }
 
@@ -133,6 +138,8 @@ public final class Calculator {
         for (int i = '0'; i <= '9'; i++) {
             NUMBERS.add(i);
         }
+        CHARS_DIGITS.addAll(CHARS);
+        CHARS_DIGITS.addAll(NUMBERS);
         NUMBERS.add((int) '.');
 
         addNumericSingleValueFunction("sqrt", p -> Math.sqrt(p[0].doubleValue()));
@@ -144,6 +151,8 @@ public final class Calculator {
 
         addNumericFunction("random", CalculatorUtils::random);
         addFunction("length", p -> p[0].toString().length());
+        addFunction("rot13", p -> CalculatorUtils.rot(new Object[]{p[0], 13}));
+        addFunction("rot", CalculatorUtils::rot);
 
         addNumericFunction("checksum", p -> CalculatorUtils.checksum(p, false));
         addNumericFunction("ichecksum", p -> CalculatorUtils.checksum(p, true));
@@ -195,11 +204,11 @@ public final class Calculator {
         return expression;
     }
 
-    protected char getCurrentChar() {
+    protected char currChar() {
         return (char) ch;
     }
 
-    protected int getCurrentPos() {
+    protected int currPos() {
         return pos;
     }
 
@@ -211,31 +220,49 @@ public final class Calculator {
         for (int i = 0; i < vars.length - 1; i += 2) {
             varMap.put(vars[i].toString(), vars[i + 1]);
         }
-        return eval(varMap);
+        return eval(varMap::get);
     }
 
-    public double eval(final Map<String, Object> vars) {
+    public double eval(final Func1<String, Object> vars) {
         final Object result = evaluate(vars);
         return result instanceof Number ? ((Number) result).doubleValue() : 0d;
     }
 
-    public Object evaluate(final Map<String, Object> vars) {
+
+    public Object evaluate(final Func1<String, Object> vars) {
         try {
-            return compiledExpression.eval(vars == null ? Collections.emptyMap() : vars);
+            return compiledExpression.eval(vars == null ? x -> null : vars);
         } catch (CalculatorException ce) {
             ce.setExpression(expression);
-            ce.setEvaluationContext(vars);
+            ce.setEvaluationContext(calculateEvaluationContext(vars));
             throw ce;
         }
     }
 
-    public Set<String> getNeededVariables(final Set<String> providedVariables) {
+    private String calculateEvaluationContext(final Func1<String, Object> vars) {
+        try {
+            final Set<String> neededVars = new HashSet<>();
+            compiledExpression.calculateNeededVariables(neededVars);
+            final List<String> list = new ArrayList<>();
+            for (String v : neededVars) {
+                list.add(v + "=" + vars.call(v));
+            }
+            return StringUtils.join(list, ",");
+        } catch (Exception e) {
+            return "Exc: " + e.toString();
+        }
+    }
+
+    public Set<String> getNeededVariables() {
         final Set<String> result = new HashSet<>();
-        compiledExpression.calculateNeededVariables(providedVariables, result);
+        compiledExpression.calculateNeededVariables(result);
         return result;
     }
 
     private void compile() {
+        if (expression == null) {
+            throw new CalculatorException(EMPTY_FORMULA);
+        }
         nextChar();
         final CalcNode x = parseExpression();
         if (pos < expression.length()) {
@@ -246,6 +273,16 @@ public final class Calculator {
 
     private void nextChar() {
         ch = (++pos < expression.length()) ? expression.charAt(pos) : -1;
+    }
+
+    private void mark() {
+        markedCh = ch;
+        markedPos = pos;
+    }
+
+    private void reset() {
+        ch = markedCh;
+        pos = markedPos;
     }
 
     private boolean eat(final int charToEat) {
@@ -259,14 +296,6 @@ public final class Calculator {
         return false;
     }
 
-    /**
-     * Grammar:
-     *
-     * expression = term | expression `+` term | expression `-` term
-     * term = factor | term `*` factor | term `/` factor
-     * factor = `+` factor | `-` factor | `(` expression `)`
-     *        | number | functionName factor | factor `^` factor
-     */
     private CalcNode parseExpression() {
         CalcNode x = parseTerm();
         for (;;) {
@@ -359,8 +388,10 @@ public final class Calculator {
                 }
             } else if (ch == '\'') {
                 nodes.add(parseString());
+            } else if (ch == '$') {
+                nodes.add(parseExplicitVariable());
             } else if (CHARS.contains(ch)) {
-                nodes.add(parseAlphaBlock());
+                nodes.add(parseAlphaNumericBlock());
             } else if (NUMBERS.contains(ch)) {
                 nodes.add(parseNumberBlock());
             } else {
@@ -386,7 +417,13 @@ public final class Calculator {
         return createNumeric("literal-num", null, (o, v) -> value);
     }
 
-    private CalcNode parseAlphaBlock() {
+    private CalcNode parseExplicitVariable() {
+        if (!eat('$')) {
+            throw new CalculatorException(UNEXPECTED_TOKEN, '$');
+        }
+        if (!CHARS.contains(ch)) {
+            throw new CalculatorException(UNEXPECTED_TOKEN, "alpha varname");
+        }
         final StringBuilder sb = new StringBuilder();
         while (CHARS.contains(ch)) {
             sb.append((char) ch);
@@ -394,43 +431,81 @@ public final class Calculator {
         }
         final String parsed = sb.toString();
 
-        if (ch == '(' && FUNCTIONS.containsKey(parsed)) { //function
-            return parseFunction(parsed);
+        return new CalcNode("var", null, (objs, vars) -> {
+            final Object value = vars.call(parsed);
+            if (value != null) {
+                return value;
+            }
+            throw createMissingVarsException(vars);
+        }, result -> result.add(parsed));
+
+    }
+
+    private CalcNode parseAlphaNumericBlock() {
+        if (!CHARS.contains(ch)) {
+            throw new CalculatorException(UNEXPECTED_TOKEN, "alpha");
+        }
+        //An alphanumeric block may either be a function (name) or a block of single-letter variables
+        final StringBuilder sbFunction = new StringBuilder();
+        final StringBuilder sbSingleLetterVars = new StringBuilder();
+        boolean firstAlphaBlock = true;
+        while (CHARS_DIGITS.contains(ch)) {
+            sbFunction.append((char) ch);
+            if (!CHARS.contains(ch)) {
+                firstAlphaBlock = false;
+            }
+            if (firstAlphaBlock) {
+                sbSingleLetterVars.append((char) ch);
+            }
+            nextChar();
+            if (firstAlphaBlock) {
+                mark();
+            }
+        }
+        final String functionParsed = sbFunction.toString();
+
+        if (ch == '(' && FUNCTIONS.containsKey(functionParsed)) { //function
+            return parseFunction(functionParsed);
         }
 
+        //not a function -> reset to first parsed alphablock and use this solely
+        reset();
+        return parseSingleLetterVariableBlock(sbSingleLetterVars.toString());
+    }
+
+    @NonNull
+    private CalcNode parseSingleLetterVariableBlock(final String varBlock) {
 
         return new CalcNode("varblock", null, (objs, vars) -> {
-            if (vars.containsKey(parsed)) {
-                return vars.get(parsed);
-            }
-            final Object[] varValues = new Object[parsed.length()];
+            final Object[] varValues = new Object[varBlock.length()];
             int i = 0;
-            for (char l : parsed.toCharArray()) {
-                if (!vars.containsKey("" + l)) {
-                    //find out ALL variable values missing for this calculation for a better error message
-                    final Set<String> missingVars = this.getNeededVariables(vars.keySet());
-                    for (Map.Entry<String, Object> var : vars.entrySet()) {
-                        if (var.getValue() != null) {
-                            missingVars.remove(var.getKey());
-                        }
-                    }
-                    final List<String> missingVarsOrdered = new ArrayList<>(missingVars);
-                    Collections.sort(missingVarsOrdered);
-                    throw new CalculatorException(MISSING_VARIABLE_VALUE, StringUtils.join(missingVarsOrdered, ", "));
+            for (char l : varBlock.toCharArray()) {
+                final Object value = vars.call("" + l);
+                if (value == null) {
+                    throw createMissingVarsException(vars);
                 }
-                varValues[i++] = vars.get("" + l);
+                varValues[i++] = value;
             }
             return CalculatorUtils.concat(varValues);
-        }, (providedVars, result) -> {
-            if (providedVars.contains(parsed)) {
-                result.add(parsed);
-            } else {
-                for (char l : parsed.toCharArray()) {
-                    result.add("" + l);
-                }
+        }, result -> {
+            for (char l : varBlock.toCharArray()) {
+                result.add("" + l);
             }
-
         });
+    }
+
+    private CalculatorException createMissingVarsException(final Func1<String, Object> providedVars) {
+        //find out ALL variable values missing for this calculation for a better error message
+        final Set<String> missingVars = this.getNeededVariables();
+        final Iterator<String> it = missingVars.iterator();
+        while (it.hasNext()) {
+            if (providedVars.call(it.next()) != null) {
+                it.remove();
+            }
+        }
+        final List<String> missingVarsOrdered = new ArrayList<>(missingVars);
+        Collections.sort(missingVarsOrdered);
+        return new CalculatorException(MISSING_VARIABLE_VALUE, StringUtils.join(missingVarsOrdered, ", "));
     }
 
     //this method assumes that functionName is already parsed and ensured, and that ch is on opening parenthesis
@@ -446,7 +521,6 @@ public final class Calculator {
                 throw new CalculatorException(UNEXPECTED_TOKEN, "; or )");
             }
         }
-
 
         return new CalcNode("f:" + functionName, params.toArray(new CalcNode[0]),
             (n, v) -> {

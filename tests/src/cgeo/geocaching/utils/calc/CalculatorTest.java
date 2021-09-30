@@ -5,13 +5,6 @@ import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.UNEXPECTE
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_PARAMETER_COUNT;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
 
-import android.util.Pair;
-
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import org.junit.Test;
@@ -25,8 +18,8 @@ public class CalculatorTest {
         return Calculator.eval(expression, vars);
     }
 
-    private static Set<String> neededVars(final String expression, final String ... providedVars) {
-        return Calculator.compile(expression).getNeededVariables(new HashSet<>(Arrays.asList(providedVars)));
+    private static Set<String> neededVars(final String expression) {
+        return Calculator.compile(expression).getNeededVariables();
     }
 
     @Test
@@ -57,7 +50,10 @@ public class CalculatorTest {
     public void variables() {
         assertThat(eval("AA / 2 + B", "A", 4, "B", 5)).isEqualTo(27d);
         assertThat(eval("sqrt(A*B) * C", "A", 4, "B", 4, "C", 10)).isEqualTo(40d);
-        assertThat(eval("AB + A + B", "AB", 14, "B", 4, "A", 1)).isEqualTo(19d);
+        assertThat(eval("AB + A + B", "AB", 14, "B", 4, "A", 3)).isEqualTo(41d);
+        assertThat(eval("$A$B + A + B", "AB", 14, "B", 4, "A", 3)).isEqualTo(41d);
+        assertThat(eval("$AB + A + $B", "AB", 14, "B", 4, "A", 3)).isEqualTo(21d);
+        assertThat(eval("$AB(A+$B*2)$B", "AB", 14, "B", 4, "A", 3)).isEqualTo(14114d);
     }
 
     @Test
@@ -76,6 +72,10 @@ public class CalculatorTest {
         assertThat(eval("random(1)")).isEqualTo(0);
         assertThat(eval("random()")).isBetween(0d, 9d);
         assertThat(eval("random(1;0)")).isEqualTo(0d);
+        assertThat(Calculator.compile("rot13('abc')").evaluate(null)).isEqualTo("nop");
+        assertThat(Calculator.compile("rot13(rot('aBc'; -13))").evaluate(null)).isEqualTo("aBc");
+        assertThat(Calculator.compile("rot('abc'; 1)").evaluate(null)).isEqualTo("bcd");
+        assertThat(eval("rot1(a)", "r", 1d, "o", 2d, "t", 3d, "a", 4d)).isEqualTo(12314d);
     }
 
     @Test
@@ -122,28 +122,11 @@ public class CalculatorTest {
 
     @Test
     public void neededVariables() {
-        assertThat(neededVars("abcdef", "abc", "d")).containsExactlyInAnyOrder("a", "b", "c", "d", "e", "f");
-        assertThat(neededVars("abcdef", "abc", "d")).containsExactlyInAnyOrder("a", "b", "c", "d", "e", "f");
-        assertThat(neededVars("abcdef", "abcdef", "a", "b", "c", "d", "e", "f")).containsExactlyInAnyOrder("abcdef");
+        assertThat(neededVars("abcdef")).containsExactlyInAnyOrder("a", "b", "c", "d", "e", "f");
+        assertThat(neededVars("abcdef")).containsExactlyInAnyOrder("a", "b", "c", "d", "e", "f");
+        assertThat(neededVars("$abcdef")).containsExactlyInAnyOrder("abcdef");
         assertThat(neededVars("Test123one")).containsExactlyInAnyOrder("T", "e", "s", "t", "o", "n");
-        assertThat(neededVars("Test123one", "one")).containsExactlyInAnyOrder("T", "e", "s", "t", "one");
+        assertThat(neededVars("Test123$one")).containsExactlyInAnyOrder("T", "e", "s", "t", "one");
     }
-
-    @Test
-    public void calcOrderAndCycles() {
-        final Map<String, Calculator> calcMap = new HashMap<>();
-        calcMap.put("b", Calculator.compile("a-1"));
-        calcMap.put("a", Calculator.compile("5+3"));
-        calcMap.put("c", Calculator.compile("a+b+d"));
-        calcMap.put("d", Calculator.compile("a+b-c"));
-
-        final Pair<List<String>, Map<String, Set<String>>> result = CalculatorUtils.getCalcOrderAndCycles(calcMap);
-
-        assertThat(result.first).containsExactly("a", "b");
-        assertThat(result.second).containsKeys("c", "d");
-        assertThat(result.second.get("c")).containsExactly("d");
-        assertThat(result.second.get("d")).containsExactly("c");
-    }
-
 
 }

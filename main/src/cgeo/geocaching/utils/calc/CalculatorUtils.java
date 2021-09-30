@@ -3,14 +3,7 @@ package cgeo.geocaching.utils.calc;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_PARAMETER_COUNT;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
 
-import android.util.Pair;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Random;
-import java.util.Set;
 
 /**
  * Holds implementations for functions in calculator
@@ -87,6 +80,33 @@ public class CalculatorUtils {
         return lv;
     }
 
+    public static Object rot(final Object[] params) {
+        checkParameters(params, 1, 2);
+        final String value = params[0] instanceof Number ? String.valueOf(((Number) params[0]).intValue()) : params[0].toString();
+        int rot = params.length > 1 && params[1] instanceof Number ? ((Number) params[1]).intValue() : 13;
+        while (rot < 0) {
+            rot += 26;
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (char c : value.toCharArray()) {
+            if (c >= 'a' && c <= 'z') {
+                int newC = c + rot;
+                if (newC > 'z') {
+                    newC -= 26;
+                }
+                sb.append((char) newC);
+            } else if (c >= 'A' && c <= 'Z') {
+                int newC = c + rot;
+                if (newC > 'Z') {
+                    newC -= 26;
+                }
+                sb.append((char) newC);
+            } else {
+                sb.append(c);
+            }
+        }
+        return sb.toString();
+    }
 
     public static boolean isInteger(final Number n) {
         return Math.abs(Math.round(n.doubleValue()) - n.doubleValue()) < 0.000000001d;
@@ -115,30 +135,4 @@ public class CalculatorUtils {
         return value == null ? "null" : value.getClass().getSimpleName();
     }
 
-    public static Pair<List<String>, Map<String, Set<String>>> getCalcOrderAndCycles(final Map<String, Calculator> calculations) {
-        final Map<String, Set<String>> graph = new HashMap<>();
-        for (Map.Entry<String, Calculator> cal : calculations.entrySet()) {
-            graph.put(cal.getKey(), cal.getValue().getNeededVariables(calculations.keySet()));
-        }
-        final List<String> calcOrder = new ArrayList<>();
-        String emptyNode;
-        do {
-            emptyNode = null;
-            for (Map.Entry<String, Set<String>> node : graph.entrySet()) {
-                if (node.getValue().isEmpty()) {
-                    emptyNode = node.getKey();
-                    break;
-                }
-            }
-            if (emptyNode != null) {
-                calcOrder.add(emptyNode);
-                graph.remove(emptyNode);
-                for (Map.Entry<String, Set<String>> node : graph.entrySet()) {
-                    node.getValue().remove(emptyNode);
-                }
-            }
-        } while (emptyNode != null);
-
-        return new Pair<>(calcOrder, graph);
-    }
 }
