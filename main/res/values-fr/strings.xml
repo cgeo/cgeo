@@ -1396,7 +1396,7 @@
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
     <!-- search -->
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
-    <string name="search_bar_desc">Caches (géocode, mot-clef), Objets voyageurs (Code TB)</string>
+    <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (Code TB)</string>
     <string name="search_coordinates">Coordonnées</string>
     <string name="search_coordinates_button">Rechercher par Coordonnées</string>
     <string name="search_address">Adresse</string>
@@ -1404,7 +1404,7 @@
     <string name="search_geo">Géocode</string>
     <string name="search_geo_button">Rechercher par géocode</string>
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
-    <string name="search_kw">Mot-clef</string>
+    <string name="search_kw">Mot-clé</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
     <string name="search_hbu">Cachée par</string>
