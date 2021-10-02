@@ -1,11 +1,15 @@
 ### Kaart
 - Nieuw: Complete herziening van alle cache pictogrammen
-- Oplossing: Toon afstandscirkels voor door de gebruiker gedefinieerde caches (als cirkels zijn ingeschakeld)
-- Oplossing: Maak de titel van de cache zichtbaarder in de cache / waypoint popup
-- Oplossing: Toon waarschuwing in live kaart wanneer live modus is uitgeschakeld
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
 
 ### Cache lijsten
 - Nieuw: Complete herziening van alle cache pictogrammen
 
-### Overig
-- Wijziging: Gescheiden bladwijzerlijsten en pocket queries (alleen geocaching.com PM)
+### Cache details
+- New: Show icons for last logs
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
