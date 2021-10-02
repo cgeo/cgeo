@@ -1,6 +1,7 @@
 package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
@@ -8,9 +9,11 @@ import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.text.Html;
 import android.view.LayoutInflater;
@@ -86,6 +89,9 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
         /**
          * show a selection of all parking places and the cache itself, when using the navigation for driving
+         *
+         * todo: generalize GeoItem selector dialogs (currently implemented in NewMap, NavigateAnyPointActivity and GoogleNavigationApp)
+         *          check usage of R.layout.cacheslist_item_select
          */
         private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
@@ -100,8 +106,11 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
                     final IWaypoint item = getItem(position);
                     tv.setText(item.getName());
 
-                    final int icon = item instanceof Waypoint ? item.getWaypointType().markerId : ((Geocache) item).getType().markerId;
-                    tv.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
+                    final Drawable icon = item instanceof Waypoint ?
+                            MapMarkerUtils.getWaypointMarker(context.getResources(), (Waypoint) item).getDrawable() :
+                            MapMarkerUtils.getCacheMarker(context.getResources(), (Geocache) item, CacheListType.MAP).getDrawable();
+
+                    tv.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
 
                     final TextView infoView = (TextView) view.findViewById(R.id.info);
                     if (item instanceof Waypoint) {

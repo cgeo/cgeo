@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
@@ -11,6 +12,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.app.Activity;
@@ -89,6 +91,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
         items.add(DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_CACHE_OR_DB));
         items.addAll(DataStore.loadUDCSorted());
 
+        // todo: generalize GeoItem selector dialogs (currently implemented in NewMap, NavigateAnyPointActivity and GoogleNavigationApp)
+        //         check usage of R.layout.cacheslist_item_select
         final LayoutInflater inflater = LayoutInflater.from(context);
         final ListAdapter adapter = new ArrayAdapter<Geocache>(context, R.layout.cacheslist_item_select, items) {
             @NonNull
@@ -103,7 +107,7 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                 title.setText(item == null ? "<" + context.getString(R.string.create_internal_cache_short) + ">" : item.getName());
 
                 if (null != item) {
-                    title.setCompoundDrawablesWithIntrinsicBounds(item.getType().markerId, 0, 0, 0);
+                    title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), item, CacheListType.MAP).getDrawable(), null, null, null);
                     detail.setText(item.getShortGeocode());
                 } else {
                     detail.setText(context.getString(R.string.create_internal_cache));
