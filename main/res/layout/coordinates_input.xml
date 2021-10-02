@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<merge xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:importantForAutofill="noExcludeDescendants">
+    android:importantForAutofill="noExcludeDescendants"
+    android:orientation="vertical">
 
     <Spinner
         android:id="@+id/spinnerCoordinateFormats"
@@ -13,166 +14,33 @@
         android:layout_marginRight="10dp"
         tools:listitem="@android:layout/simple_spinner_item" />
 
-    <TableLayout
-        android:id="@+id/coordTable"
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:shrinkColumns="1,3,5,7"
-        android:stretchColumns="0,1,3,5,7">
+    <LinearLayout
+        android:id="@+id/latLonFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
 
-        <TableRow android:id="@+id/latRow"
-            android:layout_margin="6dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:orientation="horizontal">
+            <include android:id="@+id/latitudeBundle" layout="@layout/coordinates_input_single" />
+        </LinearLayout>
 
-            <Button
-                android:id="@+id/ButtonLat"
-                style="@style/button_letter" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginBottom="8dp"
+            android:orientation="horizontal">
+            <include android:id="@+id/longitudeBundle" layout="@layout/coordinates_input_single" />
+        </LinearLayout>
 
-            <EditText
-                android:id="@+id/EditTextLatDeg"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="right"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_degrees"
-                android:selectAllOnFocus="true" />
-
-            <TextView
-                android:id="@+id/LatSeparator1"
-                android:text="°"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:layout_marginRight="1dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/EditTextLatMin"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="right"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_minutes"
-                android:selectAllOnFocus="true" />
-
-            <TextView
-                android:id="@+id/LatSeparator2"
-                android:text=","
-                android:textSize="@dimen/textSize_inputCoords"
-                android:layout_marginRight="1dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/EditTextLatSec"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="left"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_seconds"
-                android:selectAllOnFocus="true" />
-
-            <TextView
-                android:id="@+id/LatSeparator3"
-                android:text=","
-                android:textSize="@dimen/textSize_inputCoords"
-                android:layout_marginRight="1dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/EditTextLatSecFrac"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="left"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_fraction"
-                android:selectAllOnFocus="true" />
-            <TextView
-                android:id="@+id/LatPaddingRight"
-                android:text=" "
-                android:layout_width="8dp"
-                tools:ignore="HardcodedText" />
-
-            </TableRow>
-
-        <TableRow android:id="@+id/lonRow"
-            android:layout_margin="6dp">
-
-            <Button
-                android:id="@+id/ButtonLon"
-                style="@style/button_letter" />
-
-            <EditText
-                android:id="@+id/EditTextLonDeg"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="right"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_degrees"
-                android:selectAllOnFocus="true" />
-
-            <TextView
-                android:id="@+id/LonSeparator1"
-                android:text="°"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:layout_marginRight="1dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/EditTextLonMin"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="right"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_minutes"
-                android:selectAllOnFocus="true" />
-
-            <TextView
-                android:id="@+id/LonSeparator2"
-                android:text=","
-                android:textSize="@dimen/textSize_inputCoords"
-                android:layout_marginRight="1dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/EditTextLonSec"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="left"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_seconds"
-                android:selectAllOnFocus="true" />
-
-            <TextView
-                android:id="@+id/LonSeparator3"
-                android:text=","
-                android:textSize="@dimen/textSize_inputCoords"
-                android:layout_marginRight="1dp"
-                tools:ignore="HardcodedText" />
-
-            <EditText
-                android:id="@+id/EditTextLonSecFrac"
-                style="@style/edittext_full"
-                android:layout_marginLeft="2dp"
-                android:layout_marginRight="2dp"
-                android:gravity="left"
-                android:inputType="number"
-                android:textSize="@dimen/textSize_inputCoords"
-                android:hint="@string/cc_hint_fraction"
-                android:selectAllOnFocus="true" />
-        </TableRow>
-    </TableLayout>
+    </LinearLayout>
 
     <com.google.android.material.textfield.TextInputLayout android:id="@+id/latitudeFrame" style="@style/textinput_edittext_singleline">
         <EditText
@@ -190,4 +58,4 @@
             android:hint="@string/longitude" />
     </com.google.android.material.textfield.TextInputLayout>
 
-</merge>
+</LinearLayout>

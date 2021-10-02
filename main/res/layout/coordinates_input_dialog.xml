@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <include layout="@layout/actionbar_popup" />
-        <include layout="@layout/coordinates_input" />
+        <include android:id="@+id/actionbar" layout="@layout/actionbar_popup" />
+        <include android:id="@+id/input" layout="@layout/coordinates_input" />
 
         <Button
             android:id="@+id/current"
