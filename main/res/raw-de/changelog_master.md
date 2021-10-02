@@ -1,11 +1,15 @@
 ### Karte
 - Neu: Komplette Überarbeitung aller Cache-Symbole
-- Korrektur: Zeige Entfernungskreise für benutzerdefinierte Caches (wenn Kreise aktiviert sind)
-- Korrektur: Cache-Titel im Cache / Wegpunkt-Popup sichtbarer
-- Korrektur: Warnung in der Live-Karte anzeigen, wenn der Live-Modus deaktiviert ist
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
 
 ### Cachelisten
 - Neu: Komplette Überarbeitung aller Cache-Symbole
 
-### Sonstiges
-- Änderung: Lesezeichenlisten und Pocket-Queries getrennt (nur geocaching.com PM)
+### Cache details
+- New: Show icons for last logs
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
