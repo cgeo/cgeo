@@ -1,3 +1,7 @@
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### Mapa
 - Novetat: s'ha afegit Mapy.cz com a font de mapa en línia
 - Novetat: ruta individual: permet configurar un nou inici i invertir la ruta
