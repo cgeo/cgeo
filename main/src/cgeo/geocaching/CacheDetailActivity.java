@@ -643,7 +643,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
-        CacheMenuHandler.initNavigationMenuItems(menu, this, cache);
+        CacheMenuHandler.initDefaultNavigationMenuItem(menu, this);
         return true;
     }
 
