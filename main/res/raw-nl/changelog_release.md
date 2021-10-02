@@ -1,3 +1,7 @@
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### Kaart
 - Nieuw: Toegevoegd Mapy.cz als online kaartbron
 - Nieuw: Individuele route: Toestaan een nieuw begin in te stellen en de route om te keren
