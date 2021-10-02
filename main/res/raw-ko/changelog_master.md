@@ -1,11 +1,15 @@
 ### 지도
 - 신규: 모든 캐시 아이콘의 완전한 재작업
-- 수정: 사용자 정의 캐시에 대한 거리 원 표시(원이 활성화된 경우)
-- 수정: 캐시/지점 팝업에서 캐시 제목이 더 잘 보이도록 합니다.
-- 수정: 라이브 모드가 비활성화된 경우 라이브 지도에 경고 표시
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
 
 ### 캐시 목록
 - 신규: 모든 캐시 아이콘의 완전한 재작업
 
-### 추가 사항
-- 변경: 북마크 목록 및 포켓 쿼리 분리 (geocaching.com 프리미엄 회원님만)
+### Cache details
+- New: Show icons for last logs
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
