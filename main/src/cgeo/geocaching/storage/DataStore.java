@@ -1812,8 +1812,30 @@ public class DataStore {
 
     /**
      * Remove obsolete cache directories in c:geo private storage.
+     * Also removes caches marked as "to be deleted" immediately (ignoring 72h grace period!)
      */
     public static void removeObsoleteGeocacheDataDirectories() {
+        // force-remove caches marked as "to be deleted", ignoring 72h grace period
+        try {
+            final Set<String> geocodes = new HashSet<>();
+            queryToColl(dbTableCaches,
+                new String[]{"geocode"},
+                "geocode NOT IN (SELECT DISTINCT (geocode) FROM " + dbTableCachesLists + ")",
+                null,
+                null,
+                null,
+                geocodes,
+                GET_STRING_0);
+            final Set<String> withoutOfflineLogs = exceptCachesWithOfflineLog(geocodes);
+            Log.d("forced database clean: removing " + withoutOfflineLogs.size() + " geocaches ignoring grace period");
+            removeCaches(withoutOfflineLogs, LoadFlags.REMOVE_ALL);
+
+            deleteOrphanedRecords();
+        } catch (final Exception e) {
+            Log.w("DataStore.clean", e);
+        }
+
+        // remove orphaned files/folders
         final File[] files = LocalStorage.getGeocacheDataDirectory().listFiles();
         if (ArrayUtils.isNotEmpty(files)) {
             final SQLiteStatement select = PreparedStatement.CHECK_IF_PRESENT.getStatement();
