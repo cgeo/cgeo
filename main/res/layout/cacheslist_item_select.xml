@@ -42,7 +42,6 @@
         android:layout_marginLeft="43dip"
         android:layout_marginTop="30dip"
         android:ellipsize="end"
-        android:lines="1"
         android:paddingBottom="5dip"
         android:paddingRight="3dip"
         android:scrollHorizontally="true"
@@ -50,6 +49,6 @@
         android:textSize="@dimen/textSize_listsSecondary"
         android:textColor="@color/colorText_listsSecondary"
         tools:text="geocode"
-        android:maxLines="1" />
+        android:maxLines="3" />
 
 </RelativeLayout>
