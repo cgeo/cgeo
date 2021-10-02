@@ -1,3 +1,7 @@
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### 지도
 - 신규: Mapy.cz를 온라인 지도 소스로 추가했습니다.
 - 신규: 개인 경로: 새로운 출발점 설정 및 경로 역전 허용
