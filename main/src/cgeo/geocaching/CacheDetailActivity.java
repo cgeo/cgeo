@@ -1652,7 +1652,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(activity, cache.getShortDescription(), binding.description, null);
+                loadDescription(activity, cache.getShortDescription(), false, binding.description, null);
             }
 
             // long description
@@ -1788,7 +1788,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.loading.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
-            loadDescription(activity, longDescription, binding.description, binding.loading);
+            loadDescription(activity, longDescription, true, binding.description, binding.loading);
 
             if (cache.supportsDescriptionchange()) {
                 binding.description.setOnClickListener(v -> {
@@ -1820,7 +1820,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * @param loadingIndicatorView
          *            the loading indicator view, will be hidden when completed
          */
-        private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
+        private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final boolean isLongDescription, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
                 final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
@@ -1829,10 +1829,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     fixRelativeLinks(description);
                     fixTextColor(description, R.color.colorBackground);
 
+                    // check if short description is contained in long description
+                    boolean longDescriptionContainsShortDescription = false;
+                    final String shortDescription = cache.getShortDescription();
+                    if (StringUtils.isNotBlank(shortDescription)) {
+                        final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
+                        // allow up to 200 characters of HTML formatting
+                        if (index >= 0 && index < 200) {
+                            longDescriptionContainsShortDescription = true;
+                        }
+                    }
+
                     try {
-                        if (descriptionView.getText().length() == 0) {
+                        if (descriptionView.getText().length() == 0 || (longDescriptionContainsShortDescription && isLongDescription)) {
                             descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                        } else {
+                        } else if (!longDescriptionContainsShortDescription) {
                             descriptionView.append("\n");
                             descriptionView.append(description);
                         }
@@ -1846,8 +1857,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     descriptionView.setVisibility(View.VISIBLE);
                     activity.addContextMenu(descriptionView);
-                    // TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
-                    //activity.potentiallyHideShortDescription();
                 }
                 if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
@@ -1904,29 +1913,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
     }
-
-    /**
-     * Hide the short description, if it is contained somewhere at the start of the long description.
-     */
-    /** TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
-    public void potentiallyHideShortDescription() {
-        final View shortView = findViewById(R.id.description);
-        if (shortView == null) {
-            return;
-        }
-        if (shortView.getVisibility() == View.GONE) {
-            return;
-        }
-        final String shortDescription = cache.getShortDescription();
-        if (StringUtils.isNotBlank(shortDescription)) {
-            final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
-            // allow up to 200 characters of HTML formatting
-            if (index >= 0 && index < 200) {
-                shortView.setVisibility(View.GONE);
-            }
-        }
-    }
-    */
 
     private void ensureSaved() {
         if (!cache.isOffline()) {
