@@ -1,3 +1,7 @@
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### Kartta
 - Uusi: Lisätty Mapy.cz -onlinekarttalähde
 - Uusi: Yksittäinen reitti: Salli uuden aloituspisteen määritys ja reitin kääntäminen
