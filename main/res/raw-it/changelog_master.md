@@ -1,11 +1,15 @@
 ### Mappa
 - Nuovo: Rielaborazione completa di tutte le icone della cache
-- Correzione: Mostra i cerchi di distanza per le cache definite dall'utente (se i cerchi sono abilitati)
-- Correzione: Rendi il titolo della cache più visibile nel popup della cache / del waypoint
-- Corretto: Mostra gli avvisi nella mappa live quando la modalità live è disabilitata
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
 
 ### Elenchi di cache
 - Nuovo: Rielaborazione completa di tutte le icone della cache
 
-### Altro
-- Modifica: Elenco di segnalibri separato e query tascabili (solo PM di geocaching.com)
+### Cache details
+- New: Show icons for last logs
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
