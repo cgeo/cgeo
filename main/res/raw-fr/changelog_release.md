@@ -1,3 +1,7 @@
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## Fonctionnalités de la version 2021.09.27
+
 ### Carte
 - Nouveau : Ajout de Mapy.cz comme source de carte en ligne
 - Nouveau : Itinéraire personnel : permet de définir un nouveau départ et d'inverser la route
