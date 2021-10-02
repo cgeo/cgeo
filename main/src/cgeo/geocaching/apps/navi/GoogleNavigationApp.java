@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.Log;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+import android.text.Html;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -104,7 +105,7 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
                     final TextView infoView = (TextView) view.findViewById(R.id.info);
                     if (item instanceof Waypoint) {
-                        infoView.setText(((Waypoint) item).getNote());
+                        infoView.setText(Html.fromHtml(((Waypoint) item).getNote()));
                     } else {
                         infoView.setText(item.getGeocode());
                     }
