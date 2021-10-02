@@ -1,11 +1,15 @@
 ### Χάρτης
 - Νέα: Πλήρης επανεργασία όλων των εικονιδίων cache
-- Fix: Εμφάνιση κύκλων απόστασης για κρύπτες που καθορίζονται από το χρήστη (αν οι κύκλοι είναι ενεργοποιημένοι)
-- Διόρθωση: Κάντε τον τίτλο της κρύπτης πιο ορατό στην θέση / αναδυόμενο σημείο
-- Διόρθωση: Εμφάνιση προειδοποίησης στο ζωντανό χάρτη όταν η ζωντανή λειτουργία είναι απενεργοποιημένη
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
 
 ### Λίστες κρυπτών
 - Νέα: Πλήρης επανεργασία όλων των εικονιδίων cache
 
-### Άλλο
-- Αλλαγή: Διαχωρισμένες λίστες σελιδοδεικτών και pocket queries (geocaching.com μόνο μμ)
+### Cache details
+- New: Show icons for last logs
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
