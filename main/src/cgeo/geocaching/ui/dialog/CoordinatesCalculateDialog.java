@@ -328,7 +328,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         variableBank = new ArrayList<>();
         gp = getArguments().getParcelable(GEOPOINT_ARG);
         if (gp == null) {
-            gp = Sensors.getInstance().currentGeo().getCoords();
+            if (savedState != null) {
+                gp = new Geopoint(savedState.plainLat, savedState.plainLon);
+            } else {
+                gp = Sensors.getInstance().currentGeo().getCoords();
+            }
         }
         if (savedInstanceState != null) {
             if (savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
