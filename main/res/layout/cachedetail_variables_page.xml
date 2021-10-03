@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_viewroot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_marginTop="10dip"
+    android:nestedScrollingEnabled="true"
+    android:fastScrollEnabled="false"
+    android:scrollbarStyle="outsideOverlay"
+    tools:context=".VariablesViewPageFragment">
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" >
+
+        <TextView
+            android:id="@+id/variables_experimental_warning"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/textSize_headingSecondary"
+            android:background="@drawable/mark_orange"
+            tools:text="Experimental Feature\n* point one\n* point two"
+            />
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/variables_add"
+                style="@style/button"
+                android:layout_margin="6dp"
+                android:minWidth="2dp"
+                app:icon="@drawable/ic_menu_add" />
+            <Button
+                android:id="@+id/variables_addmulti"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                android:text="A - E"
+                app:icon="@drawable/ic_menu_add" />
+
+            <Button
+                android:id="@+id/variables_addscan"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                android:text="Scan"
+                app:icon="@drawable/ic_menu_add" />
+
+            <Button
+                android:id="@+id/variables_addmissing"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                android:text="Missing"
+                app:icon="@drawable/ic_menu_add" />
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <Button
+                android:id="@+id/variables_sort"
+                style="@style/button_icon"
+                app:icon="@drawable/ic_menu_sort_alphabetically"
+                android:layout_alignParentLeft="true"/>
+
+            <Button
+                android:id="@+id/variables_clear"
+                style="@style/button_icon"
+                app:icon="@drawable/ic_menu_delete"
+                android:layout_toRightOf="@+id/variables_sort"/>
+
+            <Button
+                android:id="@+id/variables_info"
+                style="@style/button"
+                android:text="Syntax"
+                android:layout_marginRight="6dp"
+                app:icon="@drawable/settings_info"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/filter_storage_options_line"
+            style="@style/separator_horizontal"
+            android:layout_marginTop="3dp" />
+
+
+        <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+       work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.recyclerview.widget.RecyclerView
+
+                android:id="@+id/variables_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clipToPadding="false"
+                android:footerDividersEnabled="false"
+                android:headerDividersEnabled="false"
+                android:nestedScrollingEnabled="false"
+                android:orientation="vertical"
+                android:paddingHorizontal="4dip"
+                android:scrollbars="none"
+                tools:ignore="NestedScrolling"
+                tools:listitem="@layout/variables_list_item">
+
+            </androidx.recyclerview.widget.RecyclerView>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</ScrollView>

@@ -979,7 +979,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
-        IMAGES(R.string.cache_images);
+        IMAGES(R.string.cache_images),
+        VARIABLES(R.string.cache_variables),
+        ;
 
         private final int titleStringId;
         public final long id;
@@ -1913,7 +1915,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    private void ensureSaved() {
+    protected void ensureSaved() {
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
             cache.getLists().add(StoredList.STANDARD_LIST_ID);
@@ -2481,6 +2483,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     protected long[] getOrderedPages() {
         final ArrayList<Long> pages = new ArrayList<>();
+        if (Settings.isDebug()) {
+            pages.add(Page.VARIABLES.id);
+        }
         pages.add(Page.WAYPOINTS.id);
         pages.add(Page.DETAILS.id);
         pages.add(Page.DESCRIPTION.id);
@@ -2523,6 +2528,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new InventoryViewCreator();
         } else if (pageId == Page.IMAGES.id) {
             return new ImagesViewCreator();
+        } else if (pageId == Page.VARIABLES.id) {
+            return new VariablesViewPageFragment();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     };

@@ -15,4 +15,4 @@
 - Korjaa: Joitakin korjauksia käyttöliittymään ja suodatukseen
 - Korjaa: Joitakin korjauksia kirjanmerkkilistalle (lataaminen & nykyinen tila)
 - Muutos: Piilota arkaluontoiset "näytä asetukset" -kohdassa
-- Muutos: Kätkön etuliite Adventure Labeille on nyt muuttunut "AL":iksi "LC"stä (joka on jo käytössä Terracaching:ssa)
+- Muutos: Kätkön etuliite Adventure Labeille on nyt muuttunut "AL":iksi "LC"stä (joka on jo käytössä Extremcaching:ssa)

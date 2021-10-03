@@ -1391,6 +1391,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
             Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
+            // todo: generalize GeoItem selector dialogs (currently implemented in NewMap, NavigateAnyPointActivity and GoogleNavigationApp)
+            //         check usage of R.layout.cacheslist_item_select
             final LayoutInflater inflater = LayoutInflater.from(this);
             final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
                 @NonNull

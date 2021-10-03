@@ -15,4 +15,4 @@
 - Correction : Corrections de l'interface utilisateur et des filtres
 - Correction : Quelques corrections pour les listes de favoris (téléchargement & statut actuel)
 - Modification : Masquer les données sensibles via "Paramètres d'affichage"
-- Modification : Le préfixe de cache pour les labs cache est maintenant "AL" au lieu de "LC" (qui est déjà utilisé pour Terracaching Extremcaching)
+- Modification : Le préfixe de cache pour les labs cache est maintenant "AL" au lieu de "LC" (qui est déjà utilisé pour Extremcaching)

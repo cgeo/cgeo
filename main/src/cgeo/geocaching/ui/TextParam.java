@@ -114,13 +114,25 @@ public class TextParam {
      * * Calls {@link #adjust(TextView)} on the textview
      */
     public void applyTo(@Nullable final TextView view) {
+        applyTo(view, false);
+    }
+
+    /**
+     * Applies the current settings of this TextParam to a textview.
+     * Parameter forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
+     * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
+     * * Sets text returned by {@link #getText(Co ntext)}
+     * * Calls {@link #adjust(TextView, boolean)} on the textview
+     */
+    public void applyTo(@Nullable final TextView view, final boolean forceNoMovement) {
+
         if (view == null) {
             return;
         }
         final CharSequence tcs = getText(view.getContext());
         if (tcs != null) {
             view.setText(tcs);
-            adjust(view);
+            adjust(view, forceNoMovement);
         }
     }
 
@@ -169,7 +181,16 @@ public class TextParam {
 
     /** Adjusts TextView properties other than the text itself so it conforms to this TextParam (e.g. MovementMethod) */
     public void adjust(final TextView view) {
-        if (useHtml || linkifyMask != 0 || useMarkdown || useMovement) {
+        adjust(view, false);
+    }
+
+    /**
+     * Adjusts TextView properties other than the text itself so it conforms to this TextParam (e.g. MovementMethod)
+     * Parameter forceNoMovement allows to force not setting a movement method even if other params suggest. This is important
+     * if TextParam is used in a context where resulting TextView needs to remain clickable by itself
+     */
+    public void adjust(final TextView view, final boolean forceNoMovement) {
+        if (!forceNoMovement && (useHtml || linkifyMask != 0 || useMarkdown)) {
             view.setMovementMethod(LinkMovementMethod.getInstance());
         }
         if (image != null || imageSizeInDp > 0) {

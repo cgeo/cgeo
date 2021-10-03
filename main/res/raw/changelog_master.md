@@ -14,6 +14,7 @@
 - Fix: Allow HTML in navigation targets' description
 - Fix: Filter short description when already contained in long description
 - Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
+- New: Added variable / calculator tab (experimental, activate debug mode to see it)
 
 ### Other
 - Change: Separated bookmark lists and pocket queries (geocaching.com PM only)

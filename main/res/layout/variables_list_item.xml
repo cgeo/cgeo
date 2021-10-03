@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/variable_list_item"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="0dip"
+    android:paddingTop="1dip"
+    android:paddingRight="0dip"
+    android:paddingBottom="0dip"
+    tools:context=".VariablesViewPageFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+                android:id="@+id/variable_name"
+            style="@style/button"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:layout_margin="6dp"
+            android:gravity="center"
+            android:maxLines="4"
+            android:ellipsize="none"
+            android:lines="4"
+            android:singleLine="false"
+            android:textAllCaps="false"
+            tools:text="ABC"/>
+
+        <LinearLayout
+            android:id="@+id/variable_item_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/variable_function"
+                    style="@style/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:minWidth="2dp"
+                    android:layout_marginTop="6dp"
+                    app:icon="@drawable/ic_menu_function" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/variable_formula"
+                    style="@style/textinput_edittext"
+                    android:gravity="center"
+                    android:layout_width="0dp"
+                    android:layout_weight="1">
+
+                    <EditText style="@style/textinput_embedded"
+                        tools:ignore="LabelFor" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/variable_result"
+                    style="@style/text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:maxLines="3"
+                    android:textSize="@dimen/textSize_detailsPrimary"
+                    tools:text="= formula result\n line2\n line3" />
+
+                <Button
+                    android:id="@+id/variable_delete"
+                    style="@style/button_icon"
+                    android:layout_gravity="center"
+                    android:layout_margin="6dp"
+                    android:scaleType="centerInside"
+                    app:icon="@drawable/ic_menu_delete"
+                    tools:src="@drawable/ic_menu_delete" />
+            </LinearLayout>
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <View
+        style="@style/separator_horizontal"
+        android:layout_marginTop="1dp" />
+
+</LinearLayout>
