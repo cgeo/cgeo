@@ -14,6 +14,7 @@
 ### Cache details
 - New: Show icons for last logs
 - New: Show icons for log entries in log tab
+- New: Option to hide visited waypoints on waypoints tab
 - Fix: Allow HTML in navigation targets' description
 - Fix: Filter short description when already contained in long description
 - Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
