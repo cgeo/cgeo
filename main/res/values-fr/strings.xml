@@ -1123,6 +1123,7 @@
     <string name="cache_images">Images</string>
     <string name="cache_advanced">Avancé</string>
     <string name="cache_waypoints">Points de passage</string>
+    <string name="cache_variables">Calculateur</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Points de passage (%d)</string>
     <string name="cache_waypoints_add">Ajouter un point de passage</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
