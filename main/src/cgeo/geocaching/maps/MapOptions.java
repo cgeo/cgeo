@@ -80,10 +80,9 @@ public class MapOptions {
         isLiveEnabled = Settings.isLiveMap();
     }
 
-    public MapOptions(final Geopoint coords, final WaypointType type, final String title) {
+    public MapOptions(final Geopoint coords, final WaypointType type) {
         this.coords = coords;
         this.waypointType = type;
-        this.title = title;
         mapMode = MapMode.COORDS;
         isLiveEnabled = false;
     }

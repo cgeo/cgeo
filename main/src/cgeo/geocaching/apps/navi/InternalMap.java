@@ -33,12 +33,12 @@ class InternalMap extends AbstractPointNavigationApp {
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Geopoint coords) {
-        DefaultMap.startActivityCoords(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), coords, WaypointType.WAYPOINT, null);
+        DefaultMap.startActivityCoords(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), coords, WaypointType.WAYPOINT);
     }
 
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {
-        DefaultMap.startActivityCoords(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
+        DefaultMap.startActivityCoords(context, cls != null ? cls : Settings.getMapProvider().getMapClass(), waypoint);
     }
 
     @Override
