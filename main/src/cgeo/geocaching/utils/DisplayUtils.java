@@ -5,17 +5,11 @@ import cgeo.geocaching.CgeoApplication;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.text.Layout;
 import android.text.StaticLayout;
 import android.text.TextPaint;
 import android.util.DisplayMetrics;
 import android.view.WindowManager;
-
-import androidx.annotation.ColorRes;
-import androidx.annotation.DrawableRes;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
 public class DisplayUtils {
 
@@ -54,14 +48,6 @@ public class DisplayUtils {
     public static int getPxFromDp(final Resources res, final int size, final float scaleFactor) {
         final float conversionFactor = (float) res.getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         return (int) (size * conversionFactor * scaleFactor);
-    }
-
-    public static Drawable getTintedDrawable(final Resources res, @DrawableRes final int menuRes, @ColorRes final int tintColor) {
-        final int textColor = res.getColor(tintColor);
-
-        final Drawable menuDrawable = ResourcesCompat.getDrawable(res, menuRes, null);
-        DrawableCompat.setTint(menuDrawable, textColor);
-        return menuDrawable;
     }
 
     /**
