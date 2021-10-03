@@ -2047,22 +2047,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     }
                 });
 
-                headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
-                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                        Settings.setHideVisitedWaypoints(isChecked);
-
-                        final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
-                            Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
-
-                        adapter.clear();
-                        adapter.addAll(sortedWaypoints2);
-                        adapter.notifyDataSetChanged();
-                        activity.reinitializePage(Page.WAYPOINTS.id);
-                   }
-                });
-
                 // read waypoint from clipboard
                 setClipboardButtonVisibility(headerBinding.addWaypointFromclipboard);
                 headerBinding.addWaypointFromclipboard.setOnClickListener(v2 -> {
