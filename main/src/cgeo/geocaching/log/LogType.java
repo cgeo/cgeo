@@ -43,14 +43,14 @@ public enum LogType {
     UNARCHIVE(12, "12", "Unarchive", "", R.string.log_unarchived, R.drawable.mark_green_more, R.drawable.marker_publish),
     OC_TEAM_COMMENT(83, null, "X1", "OC Team comment", R.string.log_oc_team_comment, R.drawable.mark_blue, R.drawable.marker_reviewer_note),
     // trackable logs
-    RETRIEVED_IT(13, "13", "Retrieved it", "", R.string.log_retrieved, R.drawable.mark_green_more),
-    PLACED_IT(14, "14", "placed it", "", R.string.log_placed, R.drawable.mark_green_more),
-    GRABBED_IT(19, "19", "grabbed it", "", R.string.log_grabbed, R.drawable.mark_green_more),
-    DISCOVERED_IT(48, "48", "Discovered It", "", R.string.log_discovered, R.drawable.mark_green),
-    VISIT(1001, "75", "visit", "", R.string.log_tb_visit, R.drawable.mark_green),
-    MOVE_COLLECTION(69, "69", "unused_collection", "", R.string.log_movecollection),
-    MOVE_INVENTORY(70, "70", "unused_inventory", "", R.string.log_moveinventory),
-    MARKED_MISSING(16, "16", "marked missing", "", R.string.log_marked_missing, R.drawable.mark_red),
+    RETRIEVED_IT(13, "13", "Retrieved it", "", R.string.log_retrieved, R.drawable.mark_green_more, R.drawable.tb_retrieve),
+    PLACED_IT(14, "14", "placed it", "", R.string.log_placed, R.drawable.mark_green_more, R.drawable.tb_drop),
+    GRABBED_IT(19, "19", "grabbed it", "", R.string.log_grabbed, R.drawable.mark_green_more, R.drawable.tb_grab),
+    DISCOVERED_IT(48, "48", "Discovered It", "", R.string.log_discovered, R.drawable.mark_green, R.drawable.tb_discover),
+    VISIT(1001, "75", "visit", "", R.string.log_tb_visit, R.drawable.mark_green,  R.drawable.tb_visit),
+    MOVE_COLLECTION(69, "69", "unused_collection", "", R.string.log_movecollection, R.drawable.mark_gray, R.drawable.tb_collection),
+    MOVE_INVENTORY(70, "70", "unused_inventory", "", R.string.log_moveinventory, R.drawable.mark_gray, R.drawable.tb_inventory),
+    MARKED_MISSING(16, "16", "marked missing", "", R.string.log_marked_missing, R.drawable.mark_red, R.drawable.marker_archive),
     // other
     UNKNOWN(0, "unknown", "", "", R.string.err_unknown, R.drawable.mark_red, R.drawable.marker_unknown_offline); // LogType not initialized yet
 
