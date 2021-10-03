@@ -141,7 +141,8 @@ public final class MapMarkerUtils {
         } else {
             // cache type background color
             final int tintColor = (cache.isArchived() || cache.isDisabled()) ? R.color.cacheType_disabled : cache.getType().typeColor;
-            final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null));
+            // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
+            final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
             DrawableCompat.setTint(background, ResourcesCompat.getColor(res, tintColor, null));
             insetsBuilder.withInset(new InsetBuilder(background, Gravity.CENTER));
             // main icon (type icon / custom cache icon)
@@ -252,6 +253,8 @@ public final class MapMarkerUtils {
 
         final Drawable mainMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId, null));
         if (cacheIsDisabled || cacheIsArchived) {
+            // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
+            mainMarker.mutate();
             DrawableCompat.setTint(mainMarker, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
         }
         insetsBuilder.withInset(new InsetBuilder(mainMarker, Gravity.CENTER));
@@ -362,7 +365,8 @@ public final class MapMarkerUtils {
         }
 
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null));
+        // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerBackgroundId(), null)).mutate();
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, tintColor, null));
 
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, dotMarker.getIntrinsicWidth(), dotMarker.getIntrinsicHeight());
@@ -439,6 +443,8 @@ public final class MapMarkerUtils {
         if (StringUtils.isNotBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             if (cache != null && (cache.isDisabled() || cache.isArchived())) {
+                // make drawable mutatable before setting a tint, as otherwise it will change the background for all markers (on Android 7-9)!
+                dotIcon.mutate();
                 DrawableCompat.setTint(dotIcon, ResourcesCompat.getColor(res, R.color.cacheType_disabled, null));
             }
         }
@@ -478,7 +484,8 @@ public final class MapMarkerUtils {
      * @return  Layered Drawable
      */
     private static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type, final boolean isDisabled) {
-        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null));
+        // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
+        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null)).mutate();
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, isDisabled ? R.color.cacheType_disabled : type.typeColor, null));
         insetsBuilder.withInset(new InsetBuilder(background));
