@@ -142,7 +142,12 @@ public class DateTimeEditor {
                 if (resetButton != null) {
                     dateUnset[0] = false;
                 }
-                date.setTimeInMillis(timestamp - TimeZone.getDefault().getRawOffset());
+
+                final Calendar newDate = Calendar.getInstance();
+                newDate.setTimeInMillis(timestamp - TimeZone.getDefault().getRawOffset());
+
+                // only update the date, but keep the previous time
+                date.set(newDate.get(Calendar.YEAR), newDate.get(Calendar.MONTH), newDate.get(Calendar.DAY_OF_MONTH));
                 triggerChange();
             });
             dateDialog.show(fragmentManager, "date_dialog");
