@@ -153,7 +153,6 @@ public class CalculatorMap {
         return calculatorStateMap.keySet();
     }
 
-
     public boolean containsKey(final String var) {
         return calculatorStateMap.containsKey(var);
     }
@@ -176,7 +175,6 @@ public class CalculatorMap {
         }
         return prefix + idx;
     }
-
 
     private void setFormula(final String var, final String formula) {
         final CalculatorState state = Objects.requireNonNull(get(var));

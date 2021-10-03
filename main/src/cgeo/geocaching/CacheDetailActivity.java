@@ -1915,7 +1915,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-
     protected void ensureSaved() {
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
@@ -2046,6 +2045,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         adapter.notifyDataSetChanged();
                         activity.reinitializePage(Page.WAYPOINTS.id);
                     }
+                });
+
+                headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
+                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                        Settings.setHideVisitedWaypoints(isChecked);
+
+                        final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
+                            Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+
+                        adapter.clear();
+                        adapter.addAll(sortedWaypoints2);
+                        adapter.notifyDataSetChanged();
+                        activity.reinitializePage(Page.WAYPOINTS.id);
+                   }
                 });
 
                 // read waypoint from clipboard

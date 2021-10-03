@@ -30,5 +30,6 @@
         android:id="@+id/hide_visited_waypoints"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/cache_waypoints_hide_visited_waypoints" />
+        android:text="@string/cache_waypoints_hide_visited_waypoints"
+        tools:context=".CacheDetailActivity$WaypointsViewCreator" />
 </LinearLayout>
