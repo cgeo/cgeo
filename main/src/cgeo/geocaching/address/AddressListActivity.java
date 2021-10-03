@@ -63,7 +63,7 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
 
     @Override
     public void onClickMapIcon(@NonNull final Address address) {
-        DefaultMap.startActivityGeoCode(this, new Geopoint(address.getLatitude(), address.getLongitude()));
+        DefaultMap.startActivityInitialCoords(this, new Geopoint(address.getLatitude(), address.getLongitude()));
         finish();
     }
 }

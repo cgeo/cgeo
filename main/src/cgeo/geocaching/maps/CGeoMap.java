@@ -1446,6 +1446,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
         final Waypoint waypoint = new Waypoint("some place", mapOptions.waypointType != null ? mapOptions.waypointType : WaypointType.WAYPOINT, false);
         waypoint.setCoords(coords);
+        waypoint.setGeocode(mapOptions.geocode);
 
         final CachesOverlayItemImpl item = getWaypointItem(waypoint, Settings.getCompactIconMode() == Settings.COMPACTICON_ON);
         mapView.updateItems(Collections.singletonList(item));
