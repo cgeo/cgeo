@@ -269,6 +269,9 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         // map settings popup
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
+        // individual route popup
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> individualRouteUtils.showPopup(findViewById(R.id.map_individualroute_popup), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget, this::centerOnPosition, this::setTarget));
+
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
         spinner.setVisibility(View.GONE);
@@ -400,7 +403,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            this.individualRouteUtils.onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            this.individualRouteUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);

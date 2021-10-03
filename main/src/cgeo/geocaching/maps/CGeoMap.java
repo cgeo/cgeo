@@ -570,6 +570,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
             MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
+        // individual route popup
+        activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
+            getIndividualRouteUtils().showPopup(activity.findViewById(R.id.map_individualroute_popup), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget, this::centerOnPosition, this::setTarget));
+
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
             return;
@@ -766,7 +770,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            getIndividualRouteUtils().onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            getIndividualRouteUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
