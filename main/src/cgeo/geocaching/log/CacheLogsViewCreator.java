@@ -108,7 +108,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                 }
 
                 countview1 = new LinearLayout(getActivity());
-                TextView logtypes = new TextView(getActivity());
+                final TextView logtypes = new TextView(getActivity());
                 logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
                 countview1.addView(logtypes);
                 for (final Entry<LogType, Integer> pair : sortedLogCounts) {
