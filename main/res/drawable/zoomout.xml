@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/white_bcg"/>
+    <item
+        android:drawable="@drawable/zoomout_fg"
+        android:top="3dp"
+        android:bottom="3dp"
+        android:left="3dp"
+        android:right="3dp"
+        android:gravity="center"/>
+</layer-list>

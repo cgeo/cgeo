@@ -137,6 +137,7 @@ import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
+import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -278,6 +279,15 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         mapView.setClickable(true);
         mapView.getMapScaleBar().setVisible(true);
         mapView.setBuiltInZoomControls(true);
+
+        // style zoom controls
+        final MapZoomControls zoomControls = mapView.getMapZoomControls();
+        zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
+        zoomControls.setZoomInResource(R.drawable.zoomin);
+        zoomControls.setZoomOutResource(R.drawable.zoomout);
+        final int padding = ViewUtils.dpToPixel(10.0f);
+        zoomControls.setPadding(padding, padding, padding, padding);
+        zoomControls.setAutoHide(false);
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
