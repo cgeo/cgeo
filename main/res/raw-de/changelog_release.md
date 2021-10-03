@@ -1,3 +1,4 @@
+- Fix: Fix some time zone issues when changing log date
 - Korrektur: Starte sekundäre Navigation beim langen Tippen der Kompassrose im Karten-Popup
 
 ## 2021.09.27 Feature-Release
