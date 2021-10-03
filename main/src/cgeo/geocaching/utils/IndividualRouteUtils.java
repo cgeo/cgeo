@@ -19,6 +19,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.View;
+
+import androidx.appcompat.widget.PopupMenu;
 
 public class IndividualRouteUtils {
 
@@ -45,19 +48,39 @@ public class IndividualRouteUtils {
     }
 
     /**
-     * Enable/disable track related menu entries
+     * Shows a popup menu for individual route related items
      *
-     * @param menu menu to be configured
      */
-    public void onPrepareOptionsMenu(final Menu menu, final IndividualRoute route, final boolean targetIsSet) {
-        final boolean isVisible = route != null && route.getNumSegments() > 0;
+    public void showPopup(final View anchor, final IndividualRoute individualRoute, final boolean isTargetSet, final Route.CenterOnPosition centerOnPosition, final Action2<Geopoint, String> setTarget) {
+        final PopupMenu p = new PopupMenu(anchor.getContext(), anchor);
+        final Menu menu = p.getMenu();
+        p.getMenuInflater().inflate(R.menu.individual_route, menu);
+
+        final boolean isVisible = isVisible(individualRoute);
+        anchor.setVisibility(isVisible ? View.VISIBLE : View.GONE);
         menu.findItem(R.id.menu_sort_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_center_on_route).setVisible(isVisible);
         menu.findItem(R.id.menu_export_individual_route).setVisible(isVisible);
         menu.findItem(R.id.menu_export_individual_route_as_track).setVisible(isVisible);
         menu.findItem(R.id.menu_clear_individual_route).setVisible(isVisible);
-        menu.findItem(R.id.menu_clear_targets).setVisible(targetIsSet || Settings.isAutotargetIndividualRoute());
+        menu.findItem(R.id.menu_clear_targets).setVisible(isTargetSet || Settings.isAutotargetIndividualRoute());
         menu.findItem(R.id.menu_autotarget_individual_route).setVisible(true).setChecked(Settings.isAutotargetIndividualRoute());
+
+        p.setOnMenuItemClickListener(item -> onOptionsItemSelected(item.getItemId(), individualRoute, centerOnPosition, setTarget));
+        p.show();
+    }
+
+    private boolean isVisible(final IndividualRoute route) {
+        return route != null && route.getNumSegments() > 0;
+    }
+
+    /**
+     * Enable/disable individual route related button (and overflow menu entries, if required)
+     *
+     * @param menu menu to be configured
+     */
+    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final boolean targetIsSet) {
+        anchor.setVisibility(isVisible(route) ? View.VISIBLE : View.GONE);
     }
 
     /**
@@ -107,7 +130,6 @@ public class IndividualRouteUtils {
     }
 
     private void startIndividualRouteFileSelector() {
-
         fileSelector.selectFile(null, PersistableFolder.GPX.getUri());
     }
 
