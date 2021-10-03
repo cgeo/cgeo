@@ -1,3 +1,8 @@
+- Fix: Fix some time zone issues when changing log date
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### Mappa
 - Nuovo: Aggiunto Mapy.cz come fonte della mappa online
 - Nuovo: Percorso individuale: Consente di impostare un nuovo inizio e di invertire il percorso
