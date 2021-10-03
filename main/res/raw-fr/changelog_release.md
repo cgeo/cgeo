@@ -1,3 +1,8 @@
+- Fix: Fix some time zone issues when changing log date
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## Fonctionnalités de la version 2021.09.27
+
 ### Carte
 - Nouveau : Ajout de Mapy.cz comme source de carte en ligne
 - Nouveau : Itinéraire personnel : permet de définir un nouveau départ et d'inverser la route
@@ -15,4 +20,4 @@
 - Correction : Corrections de l'interface utilisateur et des filtres
 - Correction : Quelques corrections pour les listes de favoris (téléchargement & statut actuel)
 - Modification : Masquer les données sensibles via "Paramètres d'affichage"
-- Modification : Le préfixe de cache pour les labs cache est maintenant "AL" au lieu de "LC" (qui est déjà utilisé pour Extremcaching)
+- Modification : Le préfixe de cache pour les labs cache est maintenant "AL" au lieu de "LC" (qui est déjà utilisé pour Terracaching)

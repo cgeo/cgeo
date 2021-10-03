@@ -1,3 +1,8 @@
+- Fix: Fix some time zone issues when changing log date
+- Korjaa: Aloita toissijainen navigointi kompassin pitkällä napautuksell ponnahdusikkunassa
+
+## 2021.09.27 Ominaisuusversio
+
 ### Kartta
 - Uusi: Lisätty Mapy.cz -onlinekarttalähde
 - Uusi: Yksittäinen reitti: Salli uuden aloituspisteen määritys ja reitin kääntäminen
@@ -15,4 +20,4 @@
 - Korjaa: Joitakin korjauksia käyttöliittymään ja suodatukseen
 - Korjaa: Joitakin korjauksia kirjanmerkkilistalle (lataaminen & nykyinen tila)
 - Muutos: Piilota arkaluontoiset "näytä asetukset" -kohdassa
-- Muutos: Kätkön etuliite Adventure Labeille on nyt muuttunut "AL":iksi "LC"stä (joka on jo käytössä Extremcaching:ssa)
+- Muutos: Kätkön etuliite Adventure Labeille on nyt muuttunut "AL":iksi "LC"stä (joka on jo käytössä Terracaching:ssa)

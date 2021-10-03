@@ -328,7 +328,7 @@
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
     <string name="menu_lists_pocket_queries">Pocket-Queries</string>
-    <string name="menu_lists_bookmarklists">Lesezeichenliste</string>
+    <string name="menu_lists_bookmarklists">Lesezeichenlisten</string>
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->

@@ -1,11 +1,23 @@
 ### Mapa
 - Novetat: Reelaboració completa de totes les icones de catxés
-- Solució: Mostra cercles de distància pels catxés definits per l'usuari (si els cercles estan activats)
-- Solució: Fet que el títol del catxé sigui més visible a la finestra emergent de catxé / waypoint
-- Solució: Mostra l'avís al mapa en viu quan el mode en viu està desactivat
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
+- Fix: Allow HTML in navigation targets' description
+- Change: Adapted zoom controls for OSM maps for better consistency across maps
 
 ### Llistes de catxés
 - Novetat: Reelaboració completa de totes les icones de catxé
 
-### Altres
-- Canvi: Llistes d'adreces d'interès i pocket queries separades (només PM)
+### Cache details
+- New: Show icons for last logs
+- New: Show icons for log entries in log tab
+- Fix: Allow HTML in navigation targets' description
+- Fix: Filter short description when already contained in long description
+- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
+- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+- New: Force-delete caches marked as "to-be-deleted" when using maintenance function

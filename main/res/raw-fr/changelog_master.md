@@ -1,11 +1,23 @@
 ### Carte
 - Nouveau : Refonte complète des icônes de cache
-- Correction : Afficher les cercles de distance pour les caches personnalisées (si l'affichage est activé)
-- Correction : Le titre de la cache a plus de visibilité dans la popup de cache ou point de passage
-- Corrigé : Affichage d'une alerte sur la carte quand le mode temps réel est désactivé
+- New: Show icons for last logs in cache popup
+- Fix: Show distance circles for user-defined caches (if circles are enabled)
+- Fix: Make cache title more visible in cache / waypoint popup
+- Fix: Show warning in live map when live mode is disabled
+- Fix: Allow HTML in navigation targets' description
+- Change: Adapted zoom controls for OSM maps for better consistency across maps
 
 ### Listes de caches
 - Nouveau : Refonte complète des icônes de cache
 
-### Divers
-- Changement : Les listes de favoris et pocket queries sont séparées (Membre premium Géocaching uniquement)
+### Cache details
+- New: Show icons for last logs
+- New: Show icons for log entries in log tab
+- Fix: Allow HTML in navigation targets' description
+- Fix: Filter short description when already contained in long description
+- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
+- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+
+### Other
+- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
+- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
