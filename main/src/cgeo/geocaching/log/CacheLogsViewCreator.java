@@ -118,9 +118,6 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     tv.setCompoundDrawablePadding(4);
                     tv.setPadding(0,0, 10, 0);
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
-                    tv.setOnClickListener(v -> {
-                        tv.performLongClick();
-                    });
                     countview1.addView(tv);
                 }
                 binding.getRoot().addHeaderView(countview1, null, false);
