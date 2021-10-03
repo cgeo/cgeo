@@ -25,9 +25,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
-import org.w3c.dom.Text;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
     private static final String BUNDLE_ALLLOGS = "alllogs";
@@ -116,7 +114,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     tv.setText(pair.getValue().toString());
                     tv.setCompoundDrawablesWithIntrinsicBounds(pair.getKey().getLogOverlay(), 0, 0, 0);
                     tv.setCompoundDrawablePadding(4);
-                    tv.setPadding(0,0, 10, 0);
+                    tv.setPadding(0, 0, 10, 0);
                     TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
                     countview1.addView(tv);
                 }

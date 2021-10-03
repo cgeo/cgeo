@@ -26,7 +26,6 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
