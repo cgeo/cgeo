@@ -1615,6 +1615,17 @@ public class Settings {
         return getBoolean(R.string.pref_fieldNoteExportOnlyNew, false);
     }
 
+    /**
+     * Remember the stata of the "hide visited waypoints"-checkbox in the waypoints overview dialog
+     */
+    public static void setHideVisitedWaypoints(final boolean hideVisitedWaypoints) {
+        putBoolean(R.string.pref_hideVisitedWaypoints, hideVisitedWaypoints);
+    }
+
+    public static boolean getHideVisitedWaypoints() {
+        return getBoolean(R.string.pref_hideVisitedWaypoints, false);
+    }
+
     public static String getECIconSet() {
         return getString(R.string.pref_ec_icons, "1");
     }

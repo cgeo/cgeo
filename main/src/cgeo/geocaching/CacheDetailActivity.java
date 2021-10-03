@@ -27,7 +27,6 @@ import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
-import cgeo.geocaching.databinding.CachedetailWaypointsCheckboxBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
@@ -1932,7 +1931,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
         private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
         private Geocache cache;
-        private boolean hideVisitedWaypoints = false;
+        //private boolean hideVisitedWaypoints = Settings.getHideVisitedWaypoints();
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
             createFromClipboard.setVisibility(Waypoint.hasClipboardWaypoint() >= 0 ? View.VISIBLE : View.GONE);
@@ -1948,23 +1947,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
             while (waypointIterator.hasNext()) {
                 final Waypoint waypointInIterator = waypointIterator.next();
-                if (waypointInIterator.isVisited() && hideVisitedWaypoints) {
+                if (waypointInIterator.isVisited() && Settings.getHideVisitedWaypoints()) {
                     waypointIterator.remove();
                 }
             }
             return sortedWaypoints2;
-        }
-
-        private boolean hasVisitedWayPoints() {
-            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
-            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
-            while (waypointIterator.hasNext()) {
-                final Waypoint waypointInIterator = waypointIterator.next();
-                if (waypointInIterator.isVisited()) {
-                    return true;
-                }
-            }
-            return false;
         }
 
         @Override
@@ -2024,26 +2011,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
                 v.addHeaderView(headerBinding.getRoot());
 
-                if (hasVisitedWayPoints()) {
-                    final CachedetailWaypointsCheckboxBinding checkboxBinding = CachedetailWaypointsCheckboxBinding.inflate(getLayoutInflater(), v, false);
-                    v.addHeaderView(checkboxBinding.getRoot());
-
-                    checkboxBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                        @Override
-                        public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                            hideVisitedWaypoints = isChecked;
-
-                            final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
-                            Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
-
-                            adapter.clear();
-                            adapter.addAll(sortedWaypoints2);
-                            adapter.notifyDataSetChanged();
-                            activity.reinitializePage(Page.WAYPOINTS.id);
-                        }
-                    });
-                }
-
                 headerBinding.addWaypoint.setOnClickListener(v2 -> {
                     activity.ensureSaved();
                     EditWaypointActivity.startActivityAddWaypoint(activity, cache);
@@ -2061,6 +2028,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         activity.reinitializePage(Page.WAYPOINTS.id);
                         ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added));
                     }
+                });
+
+                headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
+                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                        Settings.setHideVisitedWaypoints(isChecked);
+
+                        final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
+                            Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+
+                        adapter.clear();
+                        adapter.addAll(sortedWaypoints2);
+                        adapter.notifyDataSetChanged();
+                        activity.reinitializePage(Page.WAYPOINTS.id);
+                   }
                 });
 
                 // read waypoint from clipboard
