@@ -1,3 +1,8 @@
+- Fix: Fix some time zone issues when changing log date
+- Korjaa: Aloita toissijainen navigointi kompassin pitkällä napautuksell ponnahdusikkunassa
+
+## 2021.09.27 Ominaisuusversio
+
 ### Kartta
 - Uusi: Lisätty Mapy.cz -onlinekarttalähde
 - Uusi: Yksittäinen reitti: Salli uuden aloituspisteen määritys ja reitin kääntäminen

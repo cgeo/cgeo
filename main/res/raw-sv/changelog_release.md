@@ -1,3 +1,8 @@
+- Fix: Fix some time zone issues when changing log date
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### Karta
 - New: Added Mapy.cz as online map source
 - New: Individual route: Allow setting a new start and reversing the route

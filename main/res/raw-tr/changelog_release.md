@@ -1,3 +1,8 @@
+- Fix: Fix some time zone issues when changing log date
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+## 2021.09.27 Feature release
+
 ### Harita
 - Yeni: Mapy.cz çevrimiçi harita kaynağı olarak eklendi
 - Yeni: Özgün rota: Rotalara yeni başlangıç ekleme ve tersine çevirme özelliği
