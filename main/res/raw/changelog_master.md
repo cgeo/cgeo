@@ -6,6 +6,7 @@
 - Fix: Show warning in live map when live mode is disabled
 - Fix: Allow HTML in navigation targets' description
 - Change: Adapted zoom controls for OSM maps for better consistency across maps
+- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
 
 ### Cache lists
 - New: Complete rework of all cache icons
