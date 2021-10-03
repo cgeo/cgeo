@@ -1,3 +1,4 @@
+- Oprava: Opraveny některé problémy s časovým pásmem při změně data logu
 - Oprava: Spuštění sekundární navigace dlouhým klepnutím na růžici kompasu ve vyskakovacím okně
 
 ## 2021.09.27 Funkční vydání
