@@ -140,6 +140,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -160,6 +161,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -1942,6 +1944,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
         }
 
+        private List<Waypoint> createSortedWaypointList() {
+            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
+            while (waypointIterator.hasNext()) {
+                final Waypoint waypointInIterator = waypointIterator.next();
+                if (waypointInIterator.isVisited() && Settings.getHideVisitedWaypoints()) {
+                    waypointIterator.remove();
+                }
+            }
+            return sortedWaypoints2;
+        }
+
         @Override
         public CachedetailWaypointsPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
             return CachedetailWaypointsPageBinding.inflate(inflater, container, false);
@@ -1969,7 +1983,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setClickable(true);
 
             // sort waypoints: PP, Sx, FI, OWN
-            final List<Waypoint> sortedWaypoints = new ArrayList<>(cache.getWaypoints());
+            final List<Waypoint> sortedWaypoints = createSortedWaypointList();
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
@@ -2017,6 +2031,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added));
                     }
                 });
+
+                headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
+                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                        Settings.setHideVisitedWaypoints(isChecked);
+
+                        final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
+                        Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+
+                        adapter.clear();
+                        adapter.addAll(sortedWaypoints2);
+                        adapter.notifyDataSetChanged();
+                        activity.reinitializePage(Page.WAYPOINTS.id);
+                    }
+                });
+
 
                 // read waypoint from clipboard
                 setClipboardButtonVisibility(headerBinding.addWaypointFromclipboard);
