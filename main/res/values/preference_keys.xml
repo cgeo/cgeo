@@ -193,6 +193,7 @@
     <string translatable="false" name="pref_fieldNoteExportDate">fieldnoteExportDate</string>
     <string translatable="false" name="pref_fieldNoteExportUpload">fieldnoteExportUpload</string>
     <string translatable="false" name="pref_fieldNoteExportOnlyNew">fieldnoteExportOnlyNew</string>
+    <string translatable="false" name="pref_hideVisitedWaypoints">hideVisitedWaypoints</string>
     <string translatable="false" name="pref_navigation_menu_compass">navigationCompass</string>
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
