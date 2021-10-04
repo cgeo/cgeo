@@ -565,11 +565,11 @@ public final class FileUtils {
     }
 
     public static String getChangelogMaster(final Context context) {
-        return getRawResourceAsString(context, R.raw.changelog_master);
+        return getRawResourceAsString(context, R.raw.changelog_base);
     }
 
     public static String getChangelogRelease(final Context context) {
-        return getRawResourceAsString(context, R.raw.changelog_release);
+        return getRawResourceAsString(context, R.raw.changelog_bugfix);
     }
 
 }
