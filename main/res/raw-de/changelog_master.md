@@ -5,14 +5,16 @@
 - Korrektur: Cache-Titel im Cache- / Wegpunkt-Popup sind nun sichtbarer
 - Korrektur: Warnung in der Live-Karte anzeigen, wenn der Live-Modus deaktiviert ist
 - Korrektur: Erlaube HTML in Beschreibungen bei Auswahl Navigationsziele
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
+- Änderung: Zoom-Steuerung für OSM-Karten angepasst für eine bessere Konsistenz über Karten hinweg
+- Änderung: Die meisten Menüoptionen für individuelle Routen wurden für einen schnelleren Zugriff auf den neuen Schnellzugriffsbutton am unteren Bildschirmrand verschoben. (Wird nur angezeigt, wenn eine individuelle Route geladen / erzeugt wurde.)
 
 ### Cachelisten
 - Neu: Komplette Überarbeitung aller Cache-Symbole
 
 ### Cache-Details
 - Neu: Symbole für letzte Logs anzeigen
-- New: Show icons for log entries in log tab
+- Neu: Symbole für Logeinträge im Log-Tab anzeigen
+- New: Option to hide visited waypoints on waypoints tab
 - Fix: Allow HTML in navigation targets' description
 - Fix: Filter short description when already contained in long description
 - Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
