@@ -10,6 +10,7 @@ import cgeo.geocaching.databinding.AboutSystemPageBinding;
 import cgeo.geocaching.databinding.AboutVersionPageBinding;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -219,15 +220,17 @@ public class AboutActivity extends TabbedViewPagerActivity {
             binding.getRoot().setVisibility(View.VISIBLE);
             final Markwon markwon = Markwon.create(activity);
 
-            final String changelogMaster = FileUtils.getChangelogMaster(activity);
-            if (StringUtils.isNotBlank(changelogMaster)) {
-                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogMaster);
+            final String changelogBase = FileUtils.getChangelogMaster(activity);
+            final String changelogBugfix = FileUtils.getChangelogRelease(activity);
+            if (BranchDetectionHelper.FROM_BRANCH_RELEASE == 1) {
+                // we are on release branch
+                markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## Next bugfix release\n\n") +  changelogBugfix);
+                markwon.setMarkdown(binding.changelogRelease, "## " + BranchDetectionHelper.FEATURE_VERSION_NAME + "\n\n" + changelogBase);
             } else {
-                binding.changelogMaster.setVisibility(View.GONE);
+                // we are on a non-release branch
+                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogBase);
+                markwon.setMarkdown(binding.changelogRelease, changelogBugfix);
             }
-
-            final String versionRelease = FileUtils.getRawResourceAsString(activity, R.raw.version_release).trim();
-            markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(activity));
             binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
         }
     }
