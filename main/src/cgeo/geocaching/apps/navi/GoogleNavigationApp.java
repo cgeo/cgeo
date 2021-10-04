@@ -1,27 +1,22 @@
 package cgeo.geocaching.apps.navi;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.text.Html;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -90,36 +85,13 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
         /**
          * show a selection of all parking places and the cache itself, when using the navigation for driving
          *
-         * todo: generalize GeoItem selector dialogs (currently implemented in NewMap, NavigateAnyPointActivity and GoogleNavigationApp)
-         *          check usage of R.layout.cacheslist_item_select
          */
         private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
-            final LayoutInflater inflater = LayoutInflater.from(themeContext);
             final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-
-                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
-                    final TextView tv = (TextView) view.findViewById(R.id.text);
-
-                    final IWaypoint item = getItem(position);
-                    tv.setText(item.getName());
-
-                    final Drawable icon = item instanceof Waypoint ?
-                            MapMarkerUtils.getWaypointMarker(context.getResources(), (Waypoint) item).getDrawable() :
-                            MapMarkerUtils.getCacheMarker(context.getResources(), (Geocache) item, CacheListType.MAP).getDrawable();
-
-                    tv.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
-
-                    final TextView infoView = (TextView) view.findViewById(R.id.info);
-                    if (item instanceof Waypoint) {
-                        infoView.setText(Html.fromHtml(((Waypoint) item).getNote()));
-                    } else {
-                        infoView.setText(item.getGeocode());
-                    }
-
-                    return view;
+                    return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position), convertView, parent);
                 }
             };
 

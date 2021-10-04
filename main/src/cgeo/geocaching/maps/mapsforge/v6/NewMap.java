@@ -16,7 +16,6 @@ import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -53,7 +52,6 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -62,6 +60,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -74,7 +73,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
@@ -97,7 +95,6 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -1391,50 +1388,11 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
             Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
-            // todo: generalize GeoItem selector dialogs (currently implemented in NewMap, NavigateAnyPointActivity and GoogleNavigationApp)
-            //         check usage of R.layout.cacheslist_item_select
-            final LayoutInflater inflater = LayoutInflater.from(this);
             final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
                 @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-
-                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
-                    final TextView tv = (TextView) view.findViewById(R.id.text);
-
-                    final GeoitemRef item = getItem(position);
-                    tv.setText(item.getName());
-
-                    final StringBuilder text = new StringBuilder(item.getShortItemCode());
-                    final String geocode = item.getGeocode();
-                    final String shortgeocode = item.getShortGeocode();
-                    if (StringUtils.isNotEmpty(geocode)) {
-                        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                        if (cache != null && item.getType() == CoordinatesType.CACHE) {
-                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
-                        } else {
-                            Waypoint waypoint = null;
-                            if (item.getType() == CoordinatesType.WAYPOINT) {
-                                waypoint = DataStore.loadWaypoint(item.getId());
-                                text.append(Formatter.SEPARATOR).append(shortgeocode);
-                                if (cache != null) {
-                                    text.append(Formatter.SEPARATOR).append(cache.getName());
-                                }
-                            }
-                            if (waypoint != null) {
-                                tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, waypoint).getDrawable(), null, null, null);
-                            } else {
-                                tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
-                            }
-                        }
-                    } else {
-                        tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
-                    }
-
-                    final TextView infoView = (TextView) view.findViewById(R.id.info);
-                    infoView.setText(text.toString());
-
-                    return view;
+                    return GeoItemSelectorUtils.createGeoItemView(NewMap.this, getItem(position), convertView, parent);
                 }
             };
 
