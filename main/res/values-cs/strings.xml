@@ -1148,6 +1148,7 @@
     <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Skrýt navštívené trasové body</string>
     <string name="cache_waypoints_remove_original_waypoint">Trasový bod zkopírován ze schránky do této kešky.\n\nOdstranit původní trasový bod?</string>
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
