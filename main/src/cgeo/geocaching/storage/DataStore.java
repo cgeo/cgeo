@@ -4610,24 +4610,24 @@ public class DataStore {
 
     @NonNull
     public static String[] getSuggestions(final String table, final String column, final String input) {
-        return getSuggestions(table, column, input, null);
+        return getSuggestions(table, column, column, input, null);
     }
 
     @NonNull
-    public static String[] getSuggestions(final String table, final String column, final String input, final Func1<String, String[]> processor) {
+    public static String[] getSuggestions(final String table, final String columnSearchValue, final String columnReturnValue, final String input, final Func1<String, String[]> processor) {
 
         try {
-            final Cursor cursor = database.rawQuery("SELECT DISTINCT " + column
+            final Cursor cursor = database.rawQuery("SELECT DISTINCT " + columnReturnValue
                     + " FROM " + table
-                    + " WHERE " + column + " LIKE ?"
-                    + " ORDER BY " + column + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
+                    + " WHERE " + columnSearchValue + " LIKE ?"
+                    + " ORDER BY " + columnSearchValue + " COLLATE NOCASE ASC;", new String[] { getSuggestionArgument(input) });
             final Collection<String> coll = cursorToColl(cursor, new LinkedList<>(), GET_STRING_0);
             if (processor == null) {
                 return coll.toArray(new String[0]);
             }
             return processAndSortSuggestions(coll, input, processor).toArray(new String[0]);
         } catch (final RuntimeException e) {
-            Log.e("cannot get suggestions from " + table + "->" + column + " for input '" + input + "'", e);
+            Log.e("cannot get suggestions from " + table + "->" + columnSearchValue + " for input '" + input + "'", e);
             return ArrayUtils.EMPTY_STRING_ARRAY;
         }
     }
@@ -4662,14 +4662,17 @@ public class DataStore {
         return getSuggestions(dbTableCaches, "geocode", input);
     }
 
+    /**
+     * @return geocodes (!) where the cache name is matching
+     */
     @NonNull
     public static String[] getSuggestionsKeyword(final String input) {
-        return getSuggestions(dbTableCaches, "name", input);
+        return getSuggestions(dbTableCaches, "name", "geocode", input, null);
     }
 
     @NonNull
     public static String[] getSuggestionsLocation(final String input) {
-        return getSuggestions(dbTableCaches, "location", input, s -> s.split(","));
+        return getSuggestions(dbTableCaches, "location", "location", input, s -> s.split(","));
     }
 
     /**
