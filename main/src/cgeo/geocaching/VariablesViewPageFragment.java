@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.calc.CalculatorFunction;
 import cgeo.geocaching.utils.calc.CalculatorMap;
+import cgeo.geocaching.utils.calc.Value;
 import cgeo.geocaching.utils.functions.Action2;
 
 import android.annotation.SuppressLint;
@@ -29,6 +30,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -44,6 +47,9 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
     private static final String INVISIBLE_VAR_PREFIX = "_";
     private static final Pattern VARNAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
+
+    private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
+        "\\s(([a-zA-Z0-9]{1,4}|[0-9.]{1,10})((\\s*[-+/:*(),°]+ *)([a-zA-Z0-9]{1,4}|[0-9.]{1,10}]))+)\\s");
 
     private CacheDetailActivity activity;
 
@@ -93,8 +99,9 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
                 this.binding.variableResult.setText(calculatorState.getError());
                 this.binding.variableResult.setTextColor(Color.RED);
             } else {
-                this.binding.variableResult.setText("=" + calculatorState.getResult());
-                this.binding.variableResult.setTextColor(Color.WHITE);
+                final Value result = calculatorState.getResult();
+                this.binding.variableResult.setText("= " + (result == null ? "?" : result.toUserDisplayableString()));
+                this.binding.variableResult.setTextColor(ContextCompat.getColor(this.binding.getRoot().getContext(), R.color.colorText));
             }
         }
 
@@ -240,8 +247,12 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             hasUnsavedChanges = true;
         }
 
-        public void addVariable(final String var, final String formula) {
-            removeVarIfPresent(var);
+        public void addVariable(final String newVar, final String formula) {
+            final String var = newVar == null ? variables.getMap().createNonContainedKey(INVISIBLE_VAR_PREFIX) : newVar;
+
+            if (newVar != null) {
+                removeVarIfPresent(var);
+            }
 
             variables.getMap().put(var, formula);
             addItem(0, variables.getMap().get(var));
@@ -363,7 +374,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
                 }
             }
         });
-        binding.variablesAddscan.setOnClickListener(d -> showNotImplementedMessage());
+        binding.variablesAddscan.setOnClickListener(d -> scanCache());
         binding.variablesAddmissing.setOnClickListener(d -> adapter.addAllMissing());
 
         binding.variablesSort.setOnClickListener(d -> adapter.sortVariables());
@@ -373,11 +384,6 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             this.getContext(), "https://github.com/cgeo/cgeo/wiki/Calculator-Formula-Syntax", false));
 
         return binding;
-    }
-
-    private void showNotImplementedMessage() {
-        SimpleDialog.of(getActivity()).setTitle(TextParam.text("Not implemented yet")).setMessage(TextParam.text("Not implemented yet"))
-            .show();
     }
 
     @Override
@@ -409,6 +415,25 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             adapter.variables.persistState();
             adapter.resetUnsavedChanges();
         }
+    }
+
+    private void scanCache() {
+        final List<String> patterns = scanText(activity.getCache().getDescription());
+        SimpleDialog.of(activity).setTitle(TextParam.text("Choose found pattern"))
+            .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
+                for (String s : set) {
+                    adapter.addVariable(null, s);
+                }
+            });
+    }
+
+    private static List<String> scanText(final String text) {
+        final List<String> result = new ArrayList<>();
+        final Matcher m = TEXT_SCAN_PATTERN.matcher(text);
+        while (m.find()) {
+            result.add(m.group(1));
+        }
+        return result;
     }
 
     @Override

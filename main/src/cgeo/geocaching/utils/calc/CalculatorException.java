@@ -9,7 +9,7 @@ public class CalculatorException extends IllegalArgumentException {
     public enum ErrorType {
         //internationalize later
         UNEXPECTED_TOKEN(0, "Invalid formula, expected '%1$s'"),
-        WRONG_PARAMETER_COUNT(0, "Wrong parameter count, expected min=%1$s, max=%2$s, got %3$s"),
+        WRONG_PARAMETER_COUNT(0, "Wrong parameter count, expected %1$s-%2$s, got %3$s"),
         WRONG_TYPE(0, "Wrong value type, expected '%1$s', got '%2$s' of type '%3$s'"),
         MISSING_VARIABLE_VALUE(0, "Value missing for variable(s): %1$s"),
         CYCLIC_DEPENDENCY(0, "Cyclic dependency between variables: %1$s"),
@@ -62,7 +62,7 @@ public class CalculatorException extends IllegalArgumentException {
         if (parsedChar <= 0 && parsedPos < 0) {
             this.parsingContext = null;
         } else {
-            this.parsingContext = "(near '" + (parsedChar <= 0 ? ' ' : (char) parsedChar) + "' at position " + parsedPos + ")"; //internationalize later
+            this.parsingContext = "(near '" + (parsedChar <= 0 ? ' ' : (char) parsedChar) + "', pos:" + parsedPos + ")"; //internationalize later
         }
     }
 

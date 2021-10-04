@@ -48,7 +48,7 @@ public class CalculatorMap {
         private String error;
 
         private State state = State.OK;
-        private Object result;
+        private Value result;
 
         private final Set<String> needs = new HashSet<>();
         private final Set<String> isNeededBy = new HashSet<>();
@@ -89,7 +89,7 @@ public class CalculatorMap {
 
         /** If State is {@link OK} returns the calculated value for the formula. null otherwise */
         @Nullable
-        public Object getResult() {
+        public Value getResult() {
             return result;
         }
     }

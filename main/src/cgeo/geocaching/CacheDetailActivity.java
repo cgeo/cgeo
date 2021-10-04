@@ -2485,7 +2485,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     protected long[] getOrderedPages() {
         final ArrayList<Long> pages = new ArrayList<>();
-        if (Settings.isDebug()) {
+        if (BuildConfig.BUILD_TYPE.equals("debug") || BuildConfig.BUILD_TYPE.equals("nightly")) {
             pages.add(Page.VARIABLES.id);
         }
         pages.add(Page.WAYPOINTS.id);
