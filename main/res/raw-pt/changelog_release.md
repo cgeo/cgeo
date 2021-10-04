@@ -1,7 +1,7 @@
-- Fix: Fix some time zone issues when changing log date
-- Fix: Start secondary navigation on long tap of compass rose in popup
+- Correcção: Corrigidos alguns problemas no fuso horário ao alterar a data do registo
+- Correcção: Iniciar o segundo método de navegação ao realizar um toque longo na rosa dos ventos (pop-up)
 
-## 2021.09.27 Feature release
+## 2021.09.27 - Versão de funcionalidades
 
 ### Mapa
 - Novo: Mapy.cz adicionado como fonte de mapa online
