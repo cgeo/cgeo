@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
@@ -10,14 +9,14 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -91,28 +90,26 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
         items.add(DataStore.loadCache(InternalConnector.GEOCODE_HISTORY_CACHE, LoadFlags.LOAD_CACHE_OR_DB));
         items.addAll(DataStore.loadUDCSorted());
 
-        // todo: generalize GeoItem selector dialogs (currently implemented in NewMap, NavigateAnyPointActivity and GoogleNavigationApp)
-        //         check usage of R.layout.cacheslist_item_select
-        final LayoutInflater inflater = LayoutInflater.from(context);
         final ListAdapter adapter = new ArrayAdapter<Geocache>(context, R.layout.cacheslist_item_select, items) {
+            @SuppressLint("SetTextI18n")
             @NonNull
             @Override
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                final Geocache cache = getItem(position);
 
-                final View view = convertView == null ? inflater.inflate(R.layout.twotexts_twobuttons_item, parent, false) : convertView;
-                final TextView title = (TextView) view.findViewById(R.id.title);
-                final TextView detail = (TextView) view.findViewById(R.id.detail);
+                if (cache == null) { // special case: we want to display a "<New cache>" item on top
+                    final View view = GeoItemSelectorUtils.getOrCreateView(context, convertView, parent);
 
-                final Geocache item = getItem(position);
-                title.setText(item == null ? "<" + context.getString(R.string.create_internal_cache_short) + ">" : item.getName());
+                    final TextView title = (TextView) view.findViewById(R.id.title);
+                    title.setText("<" + context.getString(R.string.create_internal_cache_short) + ">");
 
-                if (null != item) {
-                    title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(context.getResources(), item, CacheListType.MAP).getDrawable(), null, null, null);
-                    detail.setText(item.getShortGeocode());
-                } else {
+                    final TextView detail = (TextView) view.findViewById(R.id.detail);
                     detail.setText(context.getString(R.string.create_internal_cache));
+
+                    return view;
                 }
-                return view;
+
+                return GeoItemSelectorUtils.createGeocacheItemView(context, cache, convertView, parent);
             }
         };
 

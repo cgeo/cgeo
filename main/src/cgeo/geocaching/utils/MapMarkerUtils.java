@@ -204,14 +204,11 @@ public final class MapMarkerUtils {
         ArrayList<Integer> assignedMarkers = new ArrayList<>();
         boolean cacheIsDisabled = false;
         boolean cacheIsArchived = false;
-        final String geocode = waypoint.getGeocode();
-        if (StringUtils.isNotBlank(geocode)) {
-            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-            if (null != cache) {
-                assignedMarkers = getAssignedMarkers(cache);
-                cacheIsDisabled = cache.isDisabled();
-                cacheIsArchived = cache.isArchived();
-            }
+        final Geocache cache = waypoint.getParentGeocache();
+        if (null != cache) {
+            assignedMarkers = getAssignedMarkers(cache);
+            cacheIsDisabled = cache.isDisabled();
+            cacheIsArchived = cache.isArchived();
         }
         final int hashcode = new HashCodeBuilder()
             .append(waypoint.isVisited())
