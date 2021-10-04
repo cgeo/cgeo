@@ -13,6 +13,7 @@ import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.search.AutoCompleteAdapter;
+import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -178,12 +179,15 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
 
         binding.searchCoordinates.setOnClickListener(arg0 -> findByCoordsFn());
 
-        setSearchAction(binding.address, binding.searchAddress, this::findByAddressFn, null);
-        setSearchAction(binding.geocode, binding.displayGeocode, this::findByGeocodeFn, DataStore::getSuggestionsGeocode);
-        setSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
-        setSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
-        setSearchAction(null, binding.searchFilter, this::findByFilterFn, null);
-        setSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
+        // standard searches
+        setBasicSearchAction(binding.address, binding.searchAddress, this::findByAddressFn, null);
+        setBasicSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
+        setBasicSearchAction(null, binding.searchFilter, this::findByFilterFn, null);
+        setBasicSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
+
+        // geocache searches
+        setGeocacheSearchAction(binding.geocode, binding.displayGeocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode);
+        setGeocacheSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
 
         binding.geocode.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
@@ -228,14 +232,27 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }, 500);
     }
 
-    private static void setSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
+    private void setBasicSearchAction(final AutoCompleteTextView editText, final Button button, @NonNull final Runnable runnable, @Nullable final Func1<String, String[]> suggestionFunction) {
         if (editText != null) {
             EditUtils.setActionListener(editText, runnable);
+            if (suggestionFunction != null) {
+                editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
+            }
         }
         button.setOnClickListener(arg0 -> runnable.run());
-        if (suggestionFunction != null) {
-            editText.setAdapter(new AutoCompleteAdapter(editText.getContext(), android.R.layout.simple_dropdown_item_1line, suggestionFunction));
-        }
+    }
+
+    private void setGeocacheSearchAction(@NonNull final AutoCompleteTextView editText, @NonNull final Button button, @NonNull final Runnable runnable, @NonNull final Func1<String, String[]> suggestionFunction) {
+        EditUtils.setActionListener(editText, runnable);
+        editText.setAdapter(new GeocacheAutoCompleteAdapter(editText.getContext(), suggestionFunction));
+        editText.setOnItemClickListener((parent, view, position, id) -> {
+            final String geocode = (String) parent.getItemAtPosition(position);
+            // as we directly start the cache details activity on item selection,
+            // reset the edit text to not confuse the user and to provide a better workflow.
+            editText.setText("");
+            findByGeocodeFn(geocode);
+        });
+        button.setOnClickListener(arg0 -> runnable.run());
     }
 
     private void updateCoordinates() {
@@ -279,7 +296,7 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
     }
 
     private void findByKeywordFn() {
-        // find caches by coordinates
+        // find caches by keyword
         final String keyText = StringUtils.trim(binding.keyword.getText().toString());
 
         if (StringUtils.isBlank(keyText)) {
@@ -332,8 +349,8 @@ public class SearchActivity extends AbstractActionBarActivity implements Coordin
         }
     }
 
-    private void findByGeocodeFn() {
-        final String geocodeText = StringUtils.trimToEmpty(binding.geocode.getText().toString());
+    private void findByGeocodeFn(final String geocode) {
+        final String geocodeText = StringUtils.trimToEmpty(geocode);
 
         if (StringUtils.isBlank(geocodeText) || geocodeText.equalsIgnoreCase("GC")) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_gccode).show();
