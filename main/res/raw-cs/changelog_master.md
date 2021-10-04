@@ -5,18 +5,20 @@
 - Oprava: Zviditelněn název kešky ve vyskakovacím okně kešky/trasového bodu
 - Oprava: Zobrazí varování v živé mapě, když je živý režim zakázán
 - Oprava: Povoleno HTML v popisu cílů navigace
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
+- Změna: Upravené ovládání přiblížení pro mapy OSM pro lepší konzistenci napříč mapami
+- Změna: Přesun většiny možností nabídky pro individuální trasy, do samostatného tlačítka rychlého přístupu ve spodní části pro rychlejší přístup. (Zobrazuje se pouze při načítání / vytváření individuální trasy.)
 
 ### Seznamy kešek
 - Novinka: Dokončeno přepracování všech ikon kešek
 
 ### Detaily kešky
 - Novinka: Zobrazit ikony pro poslední logy
-- New: Show icons for log entries in log tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+- Novinka: Zobrazí ikony pro logy na kartě logů
+- Novinka: Možnost skrýt navštívené trasové body na kartě Trasové body
+- Oprava: Povoleno HTML v popisu cílů navigace
+- Oprava: Odfiltrujte krátký popis, pokud je již obsažen v dlouhém popisu
+- Oprava: Dialogové okno „Zadání souřadnic“ bylo přepracované tak, aby za určitých podmínek umožňovalo lepší využití zobrazení
+- Novinka: Přidána karta proměnná / kalkulačka (experimentální, pro zobrazení aktivujte režim ladění)
 
 ### Ostatní
 - Změna: Oddělené seznamy záložek a pocket queries (pouze pro geocaching.com PM)
