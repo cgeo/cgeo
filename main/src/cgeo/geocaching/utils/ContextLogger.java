@@ -31,6 +31,7 @@ public class ContextLogger implements Closeable {
     private final String contextString;
 
     private final boolean doLog;
+    private final boolean forceLog;
     private final Log.LogLevel logLevel;
     private boolean hasLogged = false;
 
@@ -38,13 +39,27 @@ public class ContextLogger implements Closeable {
         this(Log.LogLevel.VERBOSE, context, params);
     }
 
+    public ContextLogger(final boolean forceInfo, final String context, final Object ... params) {
+        this(Log.LogLevel.INFO, forceInfo, context, params);
+    }
+
     public ContextLogger(final Log.LogLevel logLevel, final String context, final Object ... params) {
+        this(logLevel, false, context, params);
+    }
+
+    private ContextLogger(final Log.LogLevel logLevel, final boolean forceInfo, final String context, final Object ... params) {
+
         this.startTime = System.currentTimeMillis();
         this.logLevel = logLevel;
-        this.doLog = Log.isEnabled(logLevel);
+        this.forceLog = forceInfo;
+        this.doLog = Log.isEnabled(logLevel) || forceLog;
         if (this.doLog) {
             this.contextString = String.format(context, params) + ":";
-            Log.log(logLevel, contextString + "START");
+            if (this.forceLog) {
+                Log.iForce(contextString + "START");
+            } else {
+                Log.log(logLevel, contextString + "START");
+            }
         } else {
             this.contextString = null;
         }
@@ -55,7 +70,7 @@ public class ContextLogger implements Closeable {
     }
 
     public <T> String  toStringLimited(final Collection<T> collection, final int limit) {
-        return toStringLimited(collection, limit, o -> String.valueOf(o));
+        return toStringLimited(collection, limit, String::valueOf);
     }
 
     public <T> String  toStringLimited(final Collection<T> collection, final int limit, final Func1<T, String> mapper) {
@@ -94,9 +109,17 @@ public class ContextLogger implements Closeable {
             final String logMsg = this.contextString + "END (" + (System.currentTimeMillis() - startTime) + "ms)" + message.toString() +
                     (this.exception == null ? "" : "EXC:" + exception.getClass().getName() + "[" + exception.getMessage() + "]");
             if (this.exception == null) {
-                Log.log(logLevel, logMsg);
+                if (this.forceLog) {
+                    Log.iForce(logMsg);
+                } else {
+                    Log.log(logLevel, logMsg);
+                }
             } else {
-                Log.log(logLevel, logMsg, this.exception);
+                if (this.forceLog) {
+                    Log.w(logMsg, this.exception);
+                } else {
+                    Log.log(logLevel, logMsg, this.exception);
+                }
             }
         }
     }

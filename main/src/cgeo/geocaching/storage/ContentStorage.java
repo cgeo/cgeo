@@ -97,14 +97,20 @@ public class ContentStorage {
     }
 
     private ContentStorage() {
-        this.context = CgeoApplication.getInstance().getApplicationContext();
-        this.documentAccessor = new DocumentContentAccessor(this.context);
-        this.fileAccessor = new FileContentAccessor(this.context);
-        this.documentAccessor.refreshUriPermissionCache();
-        try {
-            reevaluateFolderDefaults();
-        } catch (RuntimeException ex) {
-            Log.e("ContentStorage: problem in initializing default folders", ex);
+        try (ContextLogger cLog = new ContextLogger(true, "ContentStore-Initialization")) {
+
+
+            this.context = CgeoApplication.getInstance().getApplicationContext();
+            this.documentAccessor = new DocumentContentAccessor(this.context);
+            this.fileAccessor = new FileContentAccessor(this.context);
+            this.documentAccessor.refreshUriPermissionCache();
+            cLog.add("UriCache");
+            try {
+                reevaluateFolderDefaults();
+            } catch (RuntimeException ex) {
+                Log.e("ContentStorage: problem in initializing default folders", ex);
+            }
+            cLog.add("reevalFolderDefaults");
         }
     }
 
