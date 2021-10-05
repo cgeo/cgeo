@@ -46,7 +46,7 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class Calculator {
 
-    public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*!";
+    public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*:!";
 
     private static final Set<Integer> CHARS = new HashSet<>();
     private static final Set<Integer> CHARS_DIGITS = new HashSet<>();
@@ -282,7 +282,7 @@ public final class Calculator {
         for (;;) {
             if (eat('*')) {
                 x = createNumeric("*", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
-            } else if (eat('/')) {
+            } else if (eat('/') || eat(':')) {
                 x = createNumeric("/", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
             } else if (eat('%')) {
                 x = createNumeric("%", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) % nums.getAsDouble(1)));
