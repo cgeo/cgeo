@@ -97,32 +97,12 @@ public class ContentStorage {
     }
 
     private ContentStorage() {
-        try (ContextLogger cLog = new ContextLogger(true, "ContentStore-Initialization")) {
-
-
+        try (ContextLogger ignored = new ContextLogger(true, "ContentStorage.init")) {
             this.context = CgeoApplication.getInstance().getApplicationContext();
             this.documentAccessor = new DocumentContentAccessor(this.context);
             this.fileAccessor = new FileContentAccessor(this.context);
             this.documentAccessor.refreshUriPermissionCache();
-            cLog.add("UriCache");
-            try {
-                reevaluateFolderDefaults();
-            } catch (RuntimeException ex) {
-                Log.e("ContentStorage: problem in initializing default folders", ex);
-            }
-            cLog.add("reevalFolderDefaults");
-        }
-    }
-
-    public void reevaluateFolderDefaults() {
-        for (PersistableFolder folder : PersistableFolder.values()) {
-            //(re)sets default folders and ensures that it is definitely accessible
-            folder.setDefaultFolder(getAccessibleDefaultFolder(folder.getDefaultCandidates(), folder.needsWrite(), folder.name()));
-            //for folders pointing to default: create if not existing
-            if (!folder.isUserDefined()) {
-                ensureFolder(folder.getDefaultFolder(), folder.needsWrite());
-            }
-        }
+         }
     }
 
     /** checks if folder is available and can be used, creates it if need be. */
@@ -490,7 +470,7 @@ public class ContentStorage {
         documentAccessor.releaseOutdatedUriPermissions();
         ensureFolder(folder);
         //in case this shifts other default folders (e.g. when MAPS-folder is changed then default THEME folder might need new creation)
-        reevaluateFolderDefaults();
+        PersistableFolder.reevaluateDefaultFolders();
     }
 
     public void setPersistedDocumentUri(final PersistableUri persistedDocUi, final Uri uri) {
@@ -560,7 +540,7 @@ public class ContentStorage {
         }
     }
 
-    private Folder getAccessibleDefaultFolder(final Folder[] candidates, final boolean needsWrite, final String fallbackName) {
+    protected Folder getAccessibleDefaultFolder(final Folder[] candidates, final boolean needsWrite, final String fallbackName) {
 
         for (Folder candidate : candidates) {
             //candidate is ok if it is either directly accessible or based on another public folder (which will become accessible later)

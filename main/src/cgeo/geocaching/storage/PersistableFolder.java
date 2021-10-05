@@ -3,6 +3,7 @@ package cgeo.geocaching.storage;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ContextLogger;
 import static cgeo.geocaching.storage.Folder.CGEO_PRIVATE_FILES;
 import static cgeo.geocaching.storage.Folder.LEGACY_CGEO_PUBLIC_ROOT;
 
@@ -61,6 +62,7 @@ public enum PersistableFolder {
 
     private Folder userDefinedFolder;
     private Folder defaultFolder;
+    private boolean defaultFolderInitialized;
 
     private final WeakHashMap<Object, List<Consumer<PersistableFolder>>> changeListeners = new WeakHashMap<>();
 
@@ -80,13 +82,17 @@ public enum PersistableFolder {
         this.needsWrite = true;
 
         this.defaultFolderCandidates = defaultFolderCandidates;
-        this.defaultFolder = this.defaultFolderCandidates.length == 0 ? null : this.defaultFolderCandidates[0];
+        this.defaultFolder = this.defaultFolderCandidates[0];
+        this.defaultFolderInitialized = false;
+        registerForIndirectChange(this.defaultFolder);
 
         //read current user-defined location from settings.
         this.userDefinedFolder = Folder.fromConfig(Settings.getPersistableFolder(this));
+    }
 
+    private void registerForIndirectChange(final Folder folder) {
         //if this PersistableFolder's value is based on another PersistableFolder, then we have to notify on  indirect change
-        final PersistableFolder rootPersistableFolder = defaultFolder.getRootPersistableFolder();
+        final PersistableFolder rootPersistableFolder = folder.getRootPersistableFolder();
         if (rootPersistableFolder != null) {
             rootPersistableFolder.registerChangeListener(this, pf -> notifyChanged());
         }
@@ -112,7 +118,7 @@ public enum PersistableFolder {
 
     /** The folder this {@link PersistableFolder} currently points to */
     public Folder getFolder() {
-        return this.userDefinedFolder == null ? this.defaultFolder : this.userDefinedFolder;
+        return this.userDefinedFolder == null ? getDefaultFolder() : this.userDefinedFolder;
     }
 
     /** The (FolderType-specific) Uri this {@link PersistableFolder} currently points to */
@@ -124,8 +130,27 @@ public enum PersistableFolder {
         return ContentStorage.get().getUriForFolder(folder);
     }
 
+    public void reevaluateDefaultFolder() {
+        this.defaultFolder = ContentStorage.get().getAccessibleDefaultFolder(this.defaultFolderCandidates, needsWrite(), name());
+        defaultFolderInitialized = true;
+        registerForIndirectChange(this.defaultFolder);
+    }
+
     public Folder getDefaultFolder() {
+        if (!defaultFolderInitialized) {
+            reevaluateDefaultFolder();
+            defaultFolderInitialized = true;
+        }
         return this.defaultFolder;
+    }
+
+    /** reevaluate folder defaults. Careful, this might run several seconds! */
+    public static void reevaluateDefaultFolders() {
+        try (ContextLogger ignored = new ContextLogger(true, "PersistableFolder.reevaluateDefaultFolders")) {
+            for (PersistableFolder folder : PersistableFolder.values()) {
+                folder.reevaluateDefaultFolder();
+            }
+        }
     }
 
     public boolean isUserDefined() {
@@ -139,16 +164,7 @@ public enum PersistableFolder {
         notifyChanged();
     }
 
-    /** Sets a new default location (never null!). Should be called ONLY by {@link ContentStorage} */
-    protected void setDefaultFolder(@NonNull final Folder defaultFolder) {
-        this.defaultFolder = defaultFolder;
-    }
-
-    protected Folder[] getDefaultCandidates() {
-        return this.defaultFolderCandidates;
-    }
-
-    /** Returns an internationalized ID for this folder (e.g. "GPX" or "Offline Maps"). Does not return the actual value/path (see {@link #toUserDisplayableValue()} for that) */
+   /** Returns an internationalized ID for this folder (e.g. "GPX" or "Offline Maps"). Does not return the actual value/path (see {@link #toUserDisplayableValue()} for that) */
     @NonNull
     public String toUserDisplayableName() {
         if (this.nameKeyId == 0 || CgeoApplication.getInstance() == null) {
