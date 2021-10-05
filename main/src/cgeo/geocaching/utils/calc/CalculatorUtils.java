@@ -1,6 +1,5 @@
 package cgeo.geocaching.utils.calc;
 
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_PARAMETER_COUNT;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
 
 import java.util.Random;
@@ -16,40 +15,39 @@ public class CalculatorUtils {
         //no instance
     }
 
-    public static Object concat(final Object[] values) {
-        checkParameters(values, 1, -1);
+    public static Value concat(final ValueList values) {
+        values.checkCount(1, -1);
 
-        if (values.length == 1) {
-            return values[0];
+        if (values.size() == 1) {
+            return values.get(0);
         }
 
         boolean containsString = false;
         final StringBuilder sb = new StringBuilder();
-        for (Object v : values) {
-            if (v instanceof Number) {
-                if (isInteger((Number) v)) {
-                    sb.append(((Number) v).intValue());
+        for (Value v : values) {
+            if (v.isDouble()) {
+                if (v.isInteger()) {
+                    sb.append(v.getAsInt());
                 } else {
-                    throw new CalculatorException(WRONG_TYPE, "integer", ((Number) v).doubleValue(), CalculatorUtils.getValueType(v));
+                    throw new CalculatorException(WRONG_TYPE, "integer", v, v.getType());
                 }
             } else {
                 containsString = true;
                 sb.append(v.toString());
             }
         }
-        return containsString ? sb.toString() : Double.parseDouble(sb.toString());
+        return Value.of(containsString ? sb.toString() : Double.parseDouble(sb.toString()));
     }
 
 
-    public static Number random(final Number[] params) {
-        checkParameters(params, -1, 2);
-        final int max = params.length >= 1 ? params[0].intValue() : 10;
-        final int min = params.length >= 2 ? params[1].intValue() : 0;
-        return RANDOM.nextInt(max - min) + min;
+    public static int random(final int max, final int min) {
+        final int umax = max < 0 ? 10 : max;
+        final int umin = Math.max(min, 0);
+        return RANDOM.nextInt(umax - umin) + umin;
     }
 
-    public static Number checksum(final Number param, final boolean iterative) {
-        int result = Math.abs(param.intValue());
+    public static int checksum(final int value, final boolean iterative) {
+        int result = Math.abs(value);
         do {
             int cs = 0;
             while (result > 0) {
@@ -77,8 +75,8 @@ public class CalculatorUtils {
         return lv;
     }
 
-    public static String rot(final String value, final int rotParam) {
-        int rot = rotParam;
+    public static String rot(final String value, final int rotate) {
+        int rot = rotate == 0 ? 13 : rotate;
         while (rot < 0) {
             rot += 26;
         }
@@ -101,33 +99,6 @@ public class CalculatorUtils {
             }
         }
         return sb.toString();
-    }
-
-    public static boolean isInteger(final Number n) {
-        return Math.abs(Math.round(n.doubleValue()) - n.doubleValue()) < 0.000000001d;
-    }
-
-    public static void checkParameters(final Object[] params, final int minCount, final int maxCount) {
-        if ((minCount > 0 && (params == null || params.length < minCount)) ||
-            (maxCount > 0 && (params != null && params.length > maxCount))) {
-            throw new CalculatorException(WRONG_PARAMETER_COUNT, minCount < 0 ? "-" : "" + minCount, maxCount < 0 ? "-" : "" + maxCount, params == null ? 0 : params.length);
-        }
-
-    }
-
-    public static Number[] toNumericArray(final Object[] objs) {
-        final Number[] numVals = new Number[objs == null ? 0 : objs.length];
-        for (int i = 0; i < numVals.length; i++) {
-            if (!(objs[i] instanceof Number)) {
-                throw new CalculatorException(WRONG_TYPE, "Number", objs[i], CalculatorUtils.getValueType(objs[i]));
-            }
-            numVals[i] = (Number) objs[i];
-        }
-        return numVals;
-    }
-
-    public static String getValueType(final Object value) {
-        return value == null ? "null" : value.getClass().getSimpleName();
     }
 
 }

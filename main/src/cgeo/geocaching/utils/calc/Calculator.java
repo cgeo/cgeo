@@ -70,16 +70,16 @@ public final class Calculator {
     private static class CalcNode {
 
         public final String id;
-        public final Func2<Object[], Func1<String, Object>, Object> function;
+        public final Func2<ValueList, Func1<String, Value>, Value> function;
         public final CalcNode[] children;
 
         public final Action1<Set<String>> neededVars;
 
-        CalcNode(final String id, final CalcNode[] children, final Func2<Object[], Func1<String, Object>, Object> function) {
+        CalcNode(final String id, final CalcNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
             this(id, children, function, null);
         }
 
-        CalcNode(final String id, final CalcNode[] children, final Func2<Object[], Func1<String, Object>, Object> function, final Action1<Set<String>> neededVars) {
+        CalcNode(final String id, final CalcNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function, final Action1<Set<String>> neededVars) {
 
             this.id = id;
             this.children = children == null ? new CalcNode[0] : children;
@@ -87,10 +87,10 @@ public final class Calculator {
             this.neededVars = neededVars;
         }
 
-        public Object eval(final Func1<String, Object> variables) {
-            final Object[] childValues = new Object[children.length];
-            for (int i = 0; i < children.length; i++) {
-                childValues[i] = children[i].eval(variables);
+        public Value eval(final Func1<String, Value> variables) {
+            final ValueList childValues = new ValueList();
+            for (CalcNode child : children) {
+                childValues.add(child.eval(variables));
             }
             return this.function.call(childValues, variables);
         }
@@ -106,8 +106,11 @@ public final class Calculator {
         }
     }
 
-    private CalcNode createNumeric(final String id, final CalcNode[] children, final Func2<Number[], Func1<String, Object>, Object> function) {
-        return new CalcNode(id, children, (objs, vars) -> function.call(CalculatorUtils.toNumericArray(objs), vars));
+    private CalcNode createNumeric(final String id, final CalcNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
+        return new CalcNode(id, children, (objs, vars) -> {
+            objs.checkAllDouble();
+            return function.call(objs, vars);
+        });
     }
 
     static {
@@ -158,8 +161,13 @@ public final class Calculator {
         }
     }
 
+    public static Value evaluate(final String expression, final Object ... vars) {
+        return compile(expression).evaluate(vars);
+    }
+
+
     public static double eval(final String expression, final Object ... vars) {
-        return compile(expression).eval(vars);
+        return evaluate(expression, vars).getAsDouble();
     }
 
     private Calculator(final String expression) {
@@ -178,24 +186,18 @@ public final class Calculator {
         return pos;
     }
 
-    public double eval(final Object ... vars) {
+    public Value evaluate(final Object ... vars) {
         if (vars == null || vars.length == 0) {
-            return eval(Collections.emptyMap());
+            return evaluate(x -> null);
         }
-        final Map<String, Object> varMap = new HashMap<>();
+        final Map<String, Value> varMap = new HashMap<>();
         for (int i = 0; i < vars.length - 1; i += 2) {
-            varMap.put(vars[i].toString(), vars[i + 1]);
+            varMap.put(vars[i].toString(), Value.of(vars[i + 1]));
         }
-        return eval(varMap::get);
+        return evaluate(varMap::get);
     }
 
-    public double eval(final Func1<String, Object> vars) {
-        final Object result = evaluate(vars);
-        return result instanceof Number ? ((Number) result).doubleValue() : 0d;
-    }
-
-
-    public Object evaluate(final Func1<String, Object> vars) {
+    public Value evaluate(final Func1<String, Value> vars) {
         try {
             return compiledExpression.eval(vars == null ? x -> null : vars);
         } catch (CalculatorException ce) {
@@ -205,7 +207,7 @@ public final class Calculator {
         }
     }
 
-    private String calculateEvaluationContext(final Func1<String, Object> vars) {
+    private String calculateEvaluationContext(final Func1<String, Value> vars) {
         try {
             final Set<String> neededVars = new HashSet<>();
             compiledExpression.calculateNeededVariables(neededVars);
@@ -266,9 +268,9 @@ public final class Calculator {
         CalcNode x = parseTerm();
         for (;;) {
             if (eat('+')) {
-                x = createNumeric("+", new CalcNode[]{x, parseTerm()}, (nums, vars) -> nums[0].doubleValue() + nums[1].doubleValue());
+                x = createNumeric("+", new CalcNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
             } else if (eat('-')) {
-                x = createNumeric("-", new CalcNode[]{x, parseTerm()}, (nums, vars) -> nums[0].doubleValue() - nums[1].doubleValue());
+                x = createNumeric("-", new CalcNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
             } else {
                 return x;
             }
@@ -279,11 +281,11 @@ public final class Calculator {
         CalcNode x = parseFactor();
         for (;;) {
             if (eat('*')) {
-                x = createNumeric("*", new CalcNode[]{x, parseFactor()}, (nums, vars) -> nums[0].doubleValue() * nums[1].doubleValue());
+                x = createNumeric("*", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
             } else if (eat('/')) {
-                x = createNumeric("/", new CalcNode[]{x, parseFactor()}, (nums, vars) -> nums[0].doubleValue() / nums[1].doubleValue());
+                x = createNumeric("/", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
             } else if (eat('%')) {
-                x = createNumeric("%", new CalcNode[]{x, parseFactor()}, (nums, vars) -> nums[0].doubleValue() % nums[1].doubleValue());
+                x = createNumeric("%", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) % nums.getAsDouble(1)));
             } else {
                 return x;
             }
@@ -295,26 +297,27 @@ public final class Calculator {
             return parseFactor(); // unary plus
         }
         if (eat('-')) {
-            return createNumeric("-", new CalcNode[]{parseFactor()}, (nums, vars) -> -nums[0].doubleValue());
+            return createNumeric("-", new CalcNode[]{parseFactor()}, (nums, vars) -> Value.of(-nums.getAsDouble(0)));
         }
 
         CalcNode x = parseConcatBlock();
 
         if (eat('!')) {
             x = createNumeric("!", new CalcNode[]{x}, (nums, vars) -> {
-                if (!CalculatorUtils.isInteger(nums[0]) || nums[0].intValue() < 0) {
-                    throw new CalculatorException(WRONG_TYPE, "positive Integer", nums[0].doubleValue(), CalculatorUtils.getValueType(nums[0]));
+                final int facValue = nums.getAsInt(0, 0);
+                if (!nums.get(0).isInteger() || facValue < 0) {
+                    throw new CalculatorException(WRONG_TYPE, "positive Integer", nums.get(0), nums.get(0).getType());
                 }
                 int result = 1;
-                for (int i = 2; i <= nums[0].intValue(); i++) {
+                for (int i = 2; i <= facValue; i++) {
                     result *= i;
                 }
-                return result;
+                return Value.of(result);
             });
         }
 
         if (eat('^')) {
-            x = createNumeric("^", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Math.pow(nums[0].doubleValue(), nums[1].doubleValue()));
+            x = createNumeric("^", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
         }
 
         return x;
@@ -339,7 +342,7 @@ public final class Calculator {
             throw new CalculatorException(UNEXPECTED_TOKEN, "'");
         }
         final String literal = sb.toString();
-        return new CalcNode("string-literal", null, (objs, vars) -> literal);
+        return new CalcNode("string-literal", null, (objs, vars) -> Value.of(literal));
     }
 
 
@@ -375,12 +378,19 @@ public final class Calculator {
 
     private CalcNode parseNumberBlock() {
         final StringBuilder sb = new StringBuilder();
+        boolean foundDecPoint = false;
         while (NUMBERS.contains(ch)) {
+            if (ch == '.') {
+                if (foundDecPoint) {
+                    throw new CalculatorException(UNEXPECTED_TOKEN, "digit");
+                }
+                foundDecPoint = true;
+            }
             sb.append((char) ch);
             nextChar();
         }
         final double value = Double.parseDouble(sb.toString());
-        return createNumeric("literal-num", null, (o, v) -> value);
+        return createNumeric("literal-num", null, (o, v) -> Value.of(value));
     }
 
     private CalcNode parseExplicitVariable() {
@@ -399,7 +409,7 @@ public final class Calculator {
         final String parsed = sb.toString();
 
         return new CalcNode("var", null, (objs, vars) -> {
-            final Object value = vars.call(parsed);
+            final Value value = vars.call(parsed);
             if (value != null) {
                 return value;
             }
@@ -444,14 +454,13 @@ public final class Calculator {
     private CalcNode parseSingleLetterVariableBlock(final String varBlock) {
 
         return new CalcNode("varblock", null, (objs, vars) -> {
-            final Object[] varValues = new Object[varBlock.length()];
-            int i = 0;
+            final ValueList varValues = new ValueList();
             for (char l : varBlock.toCharArray()) {
-                final Object value = vars.call("" + l);
+                final Value value = vars.call("" + l);
                 if (value == null) {
                     throw createMissingVarsException(vars);
                 }
-                varValues[i++] = value;
+                varValues.add(value);
             }
             return CalculatorUtils.concat(varValues);
         }, result -> {
@@ -461,7 +470,7 @@ public final class Calculator {
         });
     }
 
-    private CalculatorException createMissingVarsException(final Func1<String, Object> providedVars) {
+    private CalculatorException createMissingVarsException(final Func1<String, Value> providedVars) {
         //find out ALL variable values missing for this calculation for a better error message
         final Set<String> missingVars = this.getNeededVariables();
         final Iterator<String> it = missingVars.iterator();

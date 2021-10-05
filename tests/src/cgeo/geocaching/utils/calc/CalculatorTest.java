@@ -84,13 +84,13 @@ public class CalculatorTest {
 
     @Test
     public void stringsAndStartEndTokens() {
-        assertThat(Calculator.compile("' '").evaluate(null)).isEqualTo(" ");
-        assertThat(Calculator.compile("''").evaluate(null)).isEqualTo("");
-        assertThat(Calculator.compile("''''").evaluate(null)).isEqualTo("'");
-        assertThat(Calculator.compile("''''''").evaluate(null)).isEqualTo("''");
+        assertThat(Calculator.evaluate("' '").getRaw()).isEqualTo(" ");
+        assertThat(Calculator.evaluate("''").getRaw()).isEqualTo("");
+        assertThat(Calculator.evaluate("''''").getRaw()).isEqualTo("'");
+        assertThat(Calculator.evaluate("''''''").getRaw()).isEqualTo("''");
         assertThatThrownBy(() -> eval("'''''"))
             .isInstanceOf(CalculatorException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("'");
-        assertThat(Calculator.compile("'''test'''").evaluate(null)).isEqualTo("'test'");
+        assertThat(Calculator.evaluate("'''test'''").getRaw()).isEqualTo("'test'");
 
     }
 
@@ -99,9 +99,9 @@ public class CalculatorTest {
         assertThat(eval("random(1)")).isEqualTo(0);
         assertThat(eval("random()")).isBetween(0d, 9d);
         assertThat(eval("random(1;0)")).isEqualTo(0d);
-        assertThat(Calculator.compile("rot13('abc')").evaluate(null)).isEqualTo("nop");
-        assertThat(Calculator.compile("rot13(rot('aBc'; -13))").evaluate(null)).isEqualTo("aBc");
-        assertThat(Calculator.compile("rot('abc'; 1)").evaluate(null)).isEqualTo("bcd");
+        assertThat(Calculator.evaluate("rot13('abc')").getRaw()).isEqualTo("nop");
+        assertThat(Calculator.evaluate("rot13(rot('aBc'; -13))").getRaw()).isEqualTo("aBc");
+        assertThat(Calculator.evaluate("rot('abc'; 1)").getRaw()).isEqualTo("bcd");
         assertThat(eval("rot1(a)", "r", 1d, "o", 2d, "t", 3d, "a", 4d)).isEqualTo(12314d);
     }
 
@@ -132,8 +132,8 @@ public class CalculatorTest {
 
     @Test
     public void incorrectFunctionCall() {
-        assertThatThrownBy(() -> eval("sin('1234')"))
-            .isInstanceOf(CalculatorException.class).hasMessageContaining(WRONG_TYPE.name()).hasMessageContaining("sin").hasMessageContaining("1234");
+        assertThatThrownBy(() -> eval("sin('abc')"))
+            .isInstanceOf(CalculatorException.class).hasMessageContaining(WRONG_TYPE.name()).hasMessageContaining("sin").hasMessageContaining("abc");
         assertThatThrownBy(() -> eval("sin()"))
             .isInstanceOf(CalculatorException.class).hasMessageContaining(WRONG_PARAMETER_COUNT.name()).hasMessageContaining("sin");
     }
@@ -142,6 +142,7 @@ public class CalculatorTest {
     public void advancedFunctions() {
         assertThat(eval("checksum(888)")).isEqualTo(24);
         assertThat(eval("ichecksum(888)")).isEqualTo(6);
+        assertThat(eval("ichecksum(-888)")).isEqualTo(6);
         assertThat(eval("ichecksum(-888.234)")).isEqualTo(6);
         assertThat(eval("lettervalue('Test123')")).isEqualTo(20 + 5 + 19 + 20 + 1 + 2 + 3);
         assertThat(eval("lettervalue(-888.123)")).isEqualTo(30);
