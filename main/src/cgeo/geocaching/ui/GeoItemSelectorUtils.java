@@ -31,8 +31,7 @@ public class GeoItemSelectorUtils {
         //no instance
     }
 
-    public static View createGeocacheItemView(final Context context, final Geocache cache, final View convertView, final ViewGroup parent) {
-        final View view = getOrCreateView(context, convertView, parent);
+    public static View createGeocacheItemView(final Context context, final Geocache cache, final View view) {
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
         setTitleTextStyle(context, tv, cache);
@@ -50,8 +49,7 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createWaypointItemView (final Context context, final Waypoint waypoint, final View convertView, final ViewGroup parent) {
-        final View view = getOrCreateView(context, convertView, parent);
+    public static View createWaypointItemView (final Context context, final Waypoint waypoint, final View view) {
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
         tv.setText(waypoint.getName());
@@ -76,34 +74,32 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createIWaypointItemView(final Context context, final IWaypoint geoObject, final View convertView, final ViewGroup parent) {
+    public static View createIWaypointItemView(final Context context, final IWaypoint geoObject, final View view) {
         if (geoObject instanceof Geocache) {
-            return createGeocacheItemView(context, (Geocache) geoObject, convertView, parent);
+            return createGeocacheItemView(context, (Geocache) geoObject, view);
         }
         if (geoObject instanceof Waypoint) {
-            return createWaypointItemView(context, (Waypoint) geoObject, convertView, parent);
+            return createWaypointItemView(context, (Waypoint) geoObject, view);
         }
         throw new IllegalArgumentException("unsupported IWaypoint type"); // can never happen
     }
 
-    public static View createGeoItemView (final Context context, final GeoitemRef geoitemRef, final View convertView, final ViewGroup parent) {
+    public static View createGeoItemView (final Context context, final GeoitemRef geoitemRef, final View view) {
         if (StringUtils.isNotEmpty(geoitemRef.getGeocode())) {
             if (geoitemRef.getType() == CoordinatesType.CACHE) {
                 final Geocache cache = DataStore.loadCache(geoitemRef.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
-                    return createGeocacheItemView(context, cache, convertView, parent);
+                    return createGeocacheItemView(context, cache, view);
                 }
             } else if (geoitemRef.getType() == CoordinatesType.WAYPOINT) {
                 final Waypoint waypoint = DataStore.loadWaypoint(geoitemRef.getId());
                 if (waypoint != null) {
-                    return createWaypointItemView(context, waypoint, convertView, parent);
+                    return createWaypointItemView(context, waypoint, view);
                 }
             }
         }
 
         // Fallback - neither a cache nor waypoint. should never happen...
-
-        final View view = getOrCreateView(context, convertView, parent);
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
         tv.setText(geoitemRef.getName());

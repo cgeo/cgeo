@@ -109,7 +109,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                     return view;
                 }
 
-                return GeoItemSelectorUtils.createGeocacheItemView(context, cache, convertView, parent);
+                return GeoItemSelectorUtils.createGeocacheItemView(context, cache,
+                        GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
             }
         };
 

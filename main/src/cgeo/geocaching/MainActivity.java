@@ -23,6 +23,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.search.SuggestionsAdapter;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GnssStatusProvider;
@@ -58,6 +59,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
+import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -67,6 +69,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -493,16 +496,26 @@ public class MainActivity extends AbstractActionBarActivity {
         searchItem = menu.findItem(R.id.menu_gosearch);
         searchView = (SearchView) searchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        hideKeyboardOnSearchClick(searchItem);
+        searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
+        searchView.setSubmitButtonEnabled(true);
 
-        // hide other action icons when search is active
+        final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchAutoComplete.setDropDownBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackgroundDialog)));
+
+        hideKeyboardOnSearchClick();
+        hideActionIconsWhenSearchIsActive(menu);
+
+        return true;
+    }
+
+    private void hideActionIconsWhenSearchIsActive(final Menu menu) {
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
             @Override
             public boolean onMenuItemActionExpand(final MenuItem item) {
                 for (int i = 0; i < menu.size(); i++) {
                     if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
-                        menu.getItem(i).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        menu.getItem(i).setVisible(false);
                     }
                 }
                 return true;
@@ -514,11 +527,9 @@ public class MainActivity extends AbstractActionBarActivity {
                 return true;
             }
         });
-
-        return true;
     }
 
-    private void hideKeyboardOnSearchClick(final MenuItem searchItem) {
+    private void hideKeyboardOnSearchClick() {
         searchView.setOnSuggestionListener(new OnSuggestionListener() {
 
             @Override
@@ -546,7 +557,8 @@ public class MainActivity extends AbstractActionBarActivity {
 
             @Override
             public boolean onQueryTextChange(final String s) {
-                return false;
+                ((SuggestionsAdapter) searchView.getSuggestionsAdapter()).changeQuery(s);
+                return true;
             }
         });
     }

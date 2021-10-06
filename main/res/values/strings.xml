@@ -1543,7 +1543,6 @@
 
     <!-- search -->
     <string name="search_bar_hint">Search caches/trackables</string>
-    <string name="search_bar_desc">Caches (geocode, keyword), Trackables (TB code)</string>
     <string name="search_coordinates">Coordinates</string>
     <string name="search_coordinates_button">Search by coordinates</string>
     <string name="search_address">Address</string>
