@@ -1,0 +1,11 @@
+<!-- taken from sync-disabled / material.io -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24"
+    android:tint="?android:textColorPrimary">
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M 9.908 19.778 L 9.908 14.121 L 7.787 16.243 C 6.662 15.118 6.03 13.59 6.029 12 C 6.03 10.41 6.662 8.882 7.787 7.757 C 8.494 7.05 9.357 6.541 10.262 6.272 L 10.262 4.208 C 8.84 4.526 7.483 5.233 6.373 6.343 C 4.873 7.843 4.029 9.879 4.029 12 C 4.029 14.121 4.873 16.157 6.373 17.657 L 4.251 19.778 M 16.272 7.757 C 17.397 8.882 18.029 10.41 18.03 12 C 18.029 13.59 17.397 15.118 16.272 16.243 C 15.565 16.95 14.702 17.459 13.797 17.728 L 13.797 19.792 C 15.218 19.474 16.576 18.767 17.686 17.657 C 19.186 16.157 20.03 14.121 20.03 12 C 20.03 9.879 19.186 7.843 17.686 6.343 L 19.808 4.222 L 14.151 4.222 L 14.151 9.879"/>
+</vector>

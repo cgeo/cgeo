@@ -379,7 +379,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             if (mapOptions.isLiveEnabled) {
-                itemMapLive.setIcon(R.drawable.ic_menu_refresh);
+                itemMapLive.setIcon(R.drawable.ic_menu_sync_enabled);
                 itemMapLive.setTitle(res.getString(R.string.map_live_disable));
             } else {
                 itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
