@@ -78,7 +78,6 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:maxLines="3"
                     android:textSize="@dimen/textSize_detailsPrimary"
                     android:focusable="true"
                     android:textIsSelectable="true"
