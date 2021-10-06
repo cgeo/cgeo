@@ -5,6 +5,7 @@ import cgeo.geocaching.databinding.CachedetailVariablesPageBinding;
 import cgeo.geocaching.databinding.VariablesListItemBinding;
 import cgeo.geocaching.models.CacheVariables;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
@@ -28,12 +29,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
@@ -48,8 +51,8 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     private static final String INVISIBLE_VAR_PREFIX = "_";
     private static final Pattern VARNAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
 
-    private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
-        "\\s(([a-zA-Z0-9]{1,4}|[0-9.]{1,10})((\\s*[-+/:*(),°]+ *)([a-zA-Z0-9]{1,4}|[0-9.]{1,10}]))+)\\s");
+    public static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
+        "[^a-zA-Z0-9](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10})((( *[()] *)*( *[-+/:*] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10}))+( *\\) *)*)[^a-zA-Z0-9]");
 
     private CacheDetailActivity activity;
 
@@ -119,15 +122,29 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         private CacheVariables variables;
         private boolean textListeningActive = true;
         private final RecyclerView recyclerView;
+        private final TextView addMultiButton;
 
         private boolean hasUnsavedChanges = false;
 
 
-        private VariablesListAdapter(final RecyclerView recyclerView) {
+        private VariablesListAdapter(final RecyclerView recyclerView, final TextView addMultiButton) {
             super(new Config(recyclerView)
                 .setNotifyOnPositionChange(true)
                 .setSupportDragDrop(true));
             this.recyclerView = recyclerView;
+            this.addMultiButton = addMultiButton;
+
+            if (this.addMultiButton != null) {
+                this.addMultiButton.setOnClickListener(v -> {
+                    for (int c = getHighestAddMultiChar(); c >= 'A'; c--) {
+                        if (!variables.getMap().containsKey("" + (char) c)) {
+                            addVariable("" + (char) c, "");
+                        }
+                    }
+                    processStructuralChange();
+                });
+                processStructuralChange();
+            }
         }
 
         public void setVariables(@NonNull final CacheVariables variables) {
@@ -225,7 +242,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             final String var = getItem(varPos).getVar();
             variables.getMap().remove(var);
             removeItem(varPos);
-            recalculateVariablesOrder();
+            processStructuralChange();
             hasUnsavedChanges = true;
             notifyItemRangeChanged(0, getItemCount());
         }
@@ -242,7 +259,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
             variables.getMap().put(newVar, oldFormula);
             updateItem(variables.getMap().get(newVar), varPos);
-            recalculateVariablesOrder();
+            processStructuralChange();
             resetResults();
             hasUnsavedChanges = true;
         }
@@ -256,7 +273,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
             variables.getMap().put(var, formula);
             addItem(0, variables.getMap().get(var));
-            recalculateVariablesOrder();
+            processStructuralChange();
             hasUnsavedChanges = true;
             notifyItemRangeChanged(0, getItemCount());
         }
@@ -275,12 +292,13 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
             variables.clear();
             clearList();
+            processStructuralChange();
         }
 
         public void sortVariables() {
             sortItems((v1, v2) -> TextUtils.COLLATOR.compare(v1.getVar(), v2.getVar()));
             hasUnsavedChanges = true;
-            recalculateVariablesOrder();
+            processStructuralChange();
         }
 
         public String createNonContainedVariableName(final String prefix) {
@@ -339,12 +357,36 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         }
 
-        private void recalculateVariablesOrder() {
+        @SuppressLint("SetTextI18n")
+        private void processStructuralChange() {
+            //recalculate variable order
             final List<String> variablesOrder = new ArrayList<>();
             for (CalculatorMap.CalculatorState state : getItems()) {
                 variablesOrder.add(state.getVar());
             }
-            variables.setOrder(variablesOrder);
+            if (variables != null) {
+                variables.setOrder(variablesOrder);
+            }
+
+            //rename addMulti button if necessary
+            if (addMultiButton != null) {
+                addMultiButton.setText("A - " + (char) getHighestAddMultiChar());
+            }
+        }
+
+        private int getHighestAddMultiChar() {
+            if (variables == null || !variables.getVariableSet().contains("A")) {
+                return 'E';
+            }
+            int lowestContChar = 'A';
+            while (lowestContChar <= 'Z' && variables.getVariableSet().contains("" + (char) (lowestContChar + 1))) {
+                lowestContChar++;
+            }
+            int newHighestChar = ((lowestContChar - 'A'  + 1) / 5) * 5 + 'A' + 4;
+            if (newHighestChar >= 'Y') {
+                newHighestChar = 'Z';
+            }
+            return newHighestChar;
         }
     }
 
@@ -352,7 +394,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     @Override
     public CachedetailVariablesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         final CachedetailVariablesPageBinding binding = CachedetailVariablesPageBinding.inflate(inflater, container, false);
-        this.adapter = new VariablesListAdapter(binding.variablesList);
+        this.adapter = new VariablesListAdapter(binding.variablesList, binding.variablesAddmulti);
 
         //Experimental warning
         TextParam.text("**Experimental New Feature** \n" +
@@ -366,14 +408,6 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
         binding.variablesAdd.setOnClickListener(d ->
             adapter.selectVariableName(null, (o, n) -> adapter.addVariable(n, "")));
-        binding.variablesAddmulti.setOnClickListener(d -> {
-            //TODO: enhance logic
-            for (char c : "EDCBA".toCharArray()) {
-                if (!adapter.variables.getMap().getVars().contains("" + c)) {
-                    adapter.addVariable("" + c, "");
-                }
-            }
-        });
         binding.variablesAddscan.setOnClickListener(d -> scanCache());
         binding.variablesAddmissing.setOnClickListener(d -> adapter.addAllMissing());
 
@@ -418,7 +452,14 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     }
 
     private void scanCache() {
-        final List<String> patterns = scanText(activity.getCache().getDescription());
+        final List<String> patterns = new ArrayList<>();
+        final Set<String> patternSet = new HashSet<>();
+        scanText(activity.getCache().getDescription(), patterns, patternSet);
+        scanText(activity.getCache().getHint(), patterns, patternSet);
+        for (Waypoint w : activity.getCache().getWaypoints()) {
+            scanText(w.getNote(), patterns, patternSet);
+        }
+        Collections.sort(patterns, TextUtils.COLLATOR::compare);
         SimpleDialog.of(activity).setTitle(TextParam.text("Choose found pattern"))
             .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
                 for (String s : set) {
@@ -427,13 +468,18 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             });
     }
 
-    private static List<String> scanText(final String text) {
-        final List<String> result = new ArrayList<>();
+    private static void scanText(final String text, final List<String> result, final Set<String> resultSet) {
+        if (text == null) {
+            return;
+        }
         final Matcher m = TEXT_SCAN_PATTERN.matcher(text);
         while (m.find()) {
-            result.add(m.group(1));
+            final String found = m.group(1);
+            if (!resultSet.contains(found)) {
+                result.add(found);
+                resultSet.add(found);
+            }
         }
-        return result;
     }
 
     @Override
