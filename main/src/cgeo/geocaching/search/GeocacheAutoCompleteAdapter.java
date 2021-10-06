@@ -27,7 +27,8 @@ public class GeocacheAutoCompleteAdapter extends AutoCompleteAdapter {
     public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
         final String geocode = getItem(position);
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-        return GeoItemSelectorUtils.createGeocacheItemView(context, cache, convertView, parent);
+        return GeoItemSelectorUtils.createGeocacheItemView(context, cache,
+                GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
     }
 
 

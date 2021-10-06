@@ -91,7 +91,8 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
             final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                    return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position), convertView, parent);
+                    return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position),
+                            GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
                 }
             };
 

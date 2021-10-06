@@ -5,6 +5,7 @@
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
+    android:background="?android:attr/selectableItemBackground"
     tools:context=".maps.mapsforge.v6.NewMap" >
 
     <!-- cache name and icon -->

@@ -1405,7 +1405,8 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                 @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-                    return GeoItemSelectorUtils.createGeoItemView(NewMap.this, getItem(position), convertView, parent);
+                    return GeoItemSelectorUtils.createGeoItemView(NewMap.this, getItem(position),
+                            GeoItemSelectorUtils.getOrCreateView(NewMap.this, convertView, parent));
                 }
             };
 

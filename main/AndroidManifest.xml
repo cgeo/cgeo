@@ -808,12 +808,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <!-- search suggestions for the search bar at the top -->
-        <provider
-            android:name=".search.SuggestionProvider"
-            android:authorities="cgeo.geocaching.search.SuggestionProvider" />
-
         <activity
             android:name="cgeo.geocaching.connector.gc.PocketQueryListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
