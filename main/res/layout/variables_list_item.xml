@@ -78,8 +78,10 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:maxLines="3"
                     android:textSize="@dimen/textSize_detailsPrimary"
+                    android:focusable="true"
+                    android:textIsSelectable="true"
+                    android:selectAllOnFocus="true"
                     tools:text="= formula result\n line2\n line3" />
 
                 <Button
