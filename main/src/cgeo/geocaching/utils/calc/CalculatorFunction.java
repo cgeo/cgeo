@@ -36,7 +36,7 @@ public enum CalculatorFunction {
     ROT13("rot13", 0, "Rotate String characters by 13", "''", 1,
         minMaxParamFunction(1, 1, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), 13)))),
     ROT("rot", 0, "Rotate String characters by parameter", "'';13", 1,
-        minMaxParamFunction(1, 2, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 0))))),
+        minMaxParamFunction(1, 2, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 13))))),
     CHECKSUM(new String[]{"checksum", "cs" }, 0, "Checksum", null, 0,
         singleValueNumericFunction(p -> CalculatorUtils.checksum(p.intValue(), false))),
     ICHECKSUM(new String[]{"ichecksum", "ics" }, 0, "Iterative Checksum", null, 0,

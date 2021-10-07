@@ -15,8 +15,9 @@ public class ValueList implements Iterable<Value> {
 
     private final List<Value> list = new ArrayList<>();
 
-    public void add(final Value ... values) {
+    public ValueList add(final Value ... values) {
         Collections.addAll(list, values);
+        return this;
     }
 
     @NonNull
