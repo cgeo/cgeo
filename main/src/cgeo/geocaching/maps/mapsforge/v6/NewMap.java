@@ -285,8 +285,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
         zoomControls.setZoomInResource(R.drawable.zoomin);
         zoomControls.setZoomOutResource(R.drawable.zoomout);
-        final int padding = ViewUtils.dpToPixel(10.0f);
-        zoomControls.setPadding(padding, padding, padding, padding);
+        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(15.0f), ViewUtils.dpToPixel(20.0f));
         zoomControls.setAutoHide(false);
 
         //make room for map attribution icon button
