@@ -1398,7 +1398,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
-    <string name="search_bar_desc">Kätköt (geokoodi, hakusana), matkaajat (TB-koodi)</string>
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_coordinates_button">Hae koordinaattien avulla</string>
     <string name="search_address">Osoite</string>
