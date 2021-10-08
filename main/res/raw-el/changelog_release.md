@@ -1,7 +1,7 @@
-- Fix: Fix some time zone issues when changing log date
+- Διόρθωση: Διορθώστε κάποια ζητήματα ζώνης ώρας κατά την αλλαγή της ημερομηνίας καταγραφής
 - Fix: Start secondary navigation on long tap of compass rose in popup
 
-## 2021.09.27 Feature release
+## 2021.09.27 Έκδοση χαρακτηριστικών
 
 ### Χάρτης
 - Νέο: Προστέθηκε το Mapy.cz ως πηγή online χάρτη

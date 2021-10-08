@@ -1,4 +1,4 @@
-- Fix: Fix some time zone issues when changing log date
+- Korjaa: Korjaa joitakin aikavyöhykeongelmia, kun muutetaan lokin päivämäärä
 - Korjaa: Aloita toissijainen navigointi kompassin pitkällä napautuksell ponnahdusikkunassa
 
 ## 2021.09.27 Ominaisuusversio
