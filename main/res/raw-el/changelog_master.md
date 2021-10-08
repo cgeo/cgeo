@@ -1,25 +1,25 @@
 ### Χάρτης
 - Νέα: Πλήρης επανεργασία όλων των εικονιδίων cache
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+- Νέα: Εμφάνιση εικονιδίων για τα τελευταία αρχεία καταγραφής στο αναδυόμενο παράθυρο κρύπτης
+- Fix: Εμφάνιση κύκλων απόστασης για κρύπτες που καθορίζονται από το χρήστη (αν οι κύκλοι είναι ενεργοποιημένοι)
+- Διόρθωση: Κάντε τον τίτλο της κρύπτης πιο ορατό στην θέση / αναδυόμενο σημείο
+- Διόρθωση: Εμφάνιση προειδοποίησης στο ζωντανό χάρτη όταν η ζωντανή λειτουργία είναι απενεργοποιημένη
+- Διόρθωση: Να επιτρέπεται η HTML στην περιγραφή των στόχων πλοήγησης
+- Αλλαγή: Προσαρμοσμένοι έλεγχοι εστίασης για χάρτες OSM για καλύτερη συνοχή σε χάρτες
+- Αλλαγή: Μετακινήθηκαν οι περισσότερες επιλογές μενού που σχετίζονται με τη διαδρομή σε ένα ξεχωριστό κουμπί γρήγορης πρόσβασης στο κάτω μέρος για ταχύτερη πρόσβαση. (Εμφανίζονται μόνο όταν μια μεμονωμένη διαδρομή φορτώνεται / δημιουργείται.)
 
 ### Λίστες κρυπτών
 - Νέα: Πλήρης επανεργασία όλων των εικονιδίων cache
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Λεπτομέρειες κρύπτης
+- Νέο: Εμφάνιση εικονιδίων για τα τελευταία αρχεία καταγραφής
+- Νέα: Εμφάνιση εικονιδίων για καταχωρήσεις καταγραφής στην καρτέλα καταγραφής
+- Νέο: Επιλογή απόκρυψης σημείων επίσκεψης στην καρτέλα σημείων
+- Διόρθωση: Να επιτρέπεται η HTML στην περιγραφή των στόχων πλοήγησης
+- Διόρθωση: Φιλτράρισμα σύντομης περιγραφής όταν υπάρχει ήδη σε μεγάλη περιγραφή
+- Διόρθωση: Βελτίωση παράθυρου διαλόγου "συντεταγμένες εισόδου" για καλύτερη χρήση οθόνης σε συγκεκριμένες συνθήκες
+- Νέο: Προσθήκη καρτέλας μεταβλητή/αριθμομηχανή (πειραματική, ενεργοποίηστε λειτουργία εντοπισμού σφαλμάτων για να την δείτε)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
+### Άλλο
+- Αλλαγή: Διαχωρισμένες λίστες σελιδοδεικτών και pocket queries (geocaching.com μόνο μμ)
+- Νέο: Αναγκαστική διαγραφή κρυπτών που επισημαίνονται ως "προς διαγραφή" όταν χρησιμοποιείτε τη λειτουργία συντήρησης
