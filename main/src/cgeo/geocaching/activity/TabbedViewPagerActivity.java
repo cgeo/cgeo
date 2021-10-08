@@ -211,7 +211,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     @SuppressWarnings("rawtypes")
-    protected void reinitializePage(final long pageId) {
+    public void reinitializePage(final long pageId) {
         final TabbedViewPagerFragment fragment = fragmentMap.get(pageId);
         if (fragment != null) {
             fragment.notifyDataSetChanged();

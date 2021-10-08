@@ -2479,6 +2479,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
             return String.format(getString(R.string.waypoints_tabtitle), waypointCount);
+        } else if (pageId == Page.VARIABLES.id) {
+            final int varCount = cache == null ? 0 : cache.getVariables().getVariableList().size();
+            return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         }
         return this.getString(Page.find(pageId).titleStringId);
     }
