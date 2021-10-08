@@ -88,7 +88,7 @@
     <string name="wpnew_original">Původní</string>
     <!-- logs -->
     <string name="log_found">Nález</string>
-    <string name="log_dnf">Nenalezeno</string>
+    <string name="log_dnf">Nenalezená</string>
     <string name="log_note">Poznámka</string>
     <string name="log_published">Zveřejněno</string>
     <string name="log_enabled">Aktivováno</string>
@@ -260,7 +260,7 @@
     <string name="warn_no_cache_coord">Není k dispozici žádná keška se souřadnicemi.</string>
     <string name="warn_no_coordinates">Souřadnice nezískány</string>
     <string name="warn_no_keyword">Nenalezena žádná klíčová slova</string>
-    <string name="warn_no_username">Nenalezeno žádné uživatelské jméno</string>
+    <string name="warn_no_username">Nebylo zadáno žádné uživatelské jméno.</string>
     <string name="warn_no_connector">Tento typ vyhledávání nepodporuje žádná z aktivovaných geocachingových služeb.</string>
     <string name="warn_search_help_title">Potřebuješ pomoct?</string>
     <string name="warn_search_help_address">Zadej adresu nebo název oblasti. Můžeš použít například název ulice „Radlicka 100, Praha, Ceska republika“, název města „Berlín“ nebo název místa „Yellowstone Park“.</string>
@@ -850,7 +850,7 @@
     <string name="init_accuracycirclecolor_summary">Vyberte barvu a neprůhlednost kruhové čáry přesnosti. Kruh přesnosti se používá jako vizuální znázornění přesnosti lokálního signálu.</string>
     <string name="init_accuracycirclefillcolor">Barva výplně kruhu přesnosti</string>
     <string name="init_accuracycirclefillcolor_summary">Vyberte barvu a neprůhlednost pro vyplnění kruhů přesnosti</string>
-    <string name="init_include_found_status">Zahrnout stav „nalezeno“</string>
+    <string name="init_include_found_status">Zahrnout stav „Nalezené“</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
     <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
@@ -1223,7 +1223,7 @@
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
-    <string name="cache_not_status_found">Nenalezeno</string>
+    <string name="cache_not_status_found">Nenalezená</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
@@ -1376,7 +1376,7 @@
     <string name="map_showc_found">Nalezené</string>
     <string name="map_showc_disabled">Deaktivované</string>
     <string name="map_showc_archived">Archivované</string>
-    <string name="map_showc_found_offline">Nalezeno (offline)</string>
+    <string name="map_showc_found_offline">Nalezené (offline)</string>
     <string name="map_showwp_original">Původní</string>
     <string name="map_showwp_parking">Parkování</string>
     <string name="map_showwp_visited">Navštívené</string>
