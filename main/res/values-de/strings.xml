@@ -1397,7 +1397,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Der aktuelle Cache-Filter ist zu komplex, um zusätzliche Optionen anzuwenden. Normalerweise bedeutet dies, dass der Cache-Filter eine Negation oder ODER-Ausdrücke anstelle von einfacher UND-Logik enthält.</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/Trackables suchen</string>
-    <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_coordinates_button">Suche mit Koordinaten</string>
     <string name="search_address">Adresse</string>
