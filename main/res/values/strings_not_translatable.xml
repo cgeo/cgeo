@@ -73,29 +73,31 @@
     <!-- recent contributors, meaning: this year + last year -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
+    <!-- currently listed: contributions 2020-10 to 2021-10 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
     BeckyDTP|https://github.com/BeckyDTP|c|
     bekuno|https://github.com/bekuno|ci|
-    bmuzzin|https://github.com/bmuzzin|c|
     cayacdev|https://github.com/cayacdev|c|
     eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
+    jirkavrba|https://github.com/jirkavrba|c|
     jonas-koeritz|https://github.com/jonas-koeritz|c|
     Lineflyer|https://github.com/Lineflyer|tsdi|
-    Lomanic|https://github.com/Lomanic|c|
     MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
-    murggel|https://github.com/murggel|cd|
+    murggel|https://github.com/murggel|cdg|
     okainov|https://github.com/okainov|c|
     osma|https://github.com/osma|c|
-    Peter Storch|https://github.com/pstorch|c|
+    pet0etie|https://github.com/pet0etie|c|
     Rainer S.|https://github.com/rsudev|c|
     S-Bartfast|https://github.com/S-Bartfast|c|
     SammysHP|https://www.sammyshp.de/|i|
+    Surfoo|https://github.com/Surfoo|c|
     TakoTheDank|https://github.com/TacoTheDank|c|
     UniQP|https://github.com/UniQP|c|
+    ztNFny|https://github.com/ztNFny|cg|
     </string>
 
     <!-- other contributors, meaning: before last year -->
@@ -106,6 +108,7 @@
     Bananeweizen||c|
     bjdupuis||c|
     blafoo||c|
+    bmuzzin|https://github.com/bmuzzin|c|
     campbeb||c|
     capoaira|https://github.com/capoaira|c|
     ControlTheBit||c|
@@ -123,6 +126,7 @@
     Karsten Priegnitz|https://github.com/koem|cg|
     KiwiStone|https://www.geocaching.com/profile/?guid=231070d8-b6f4-4d14-8d5a-b8bdcb19b78e|c|
     lazydays79||c|
+    Lomanic|https://github.com/Lomanic|c|
     marco-dev||c|
     Mathieu Alorent||c|
     Matze2||c|
@@ -130,6 +134,7 @@
     msperkowski|||
     ncorreia||c|
     Pavol Babinčák||c|
+    Peter Storch|https://github.com/pstorch|c|
     Portree Kid|https://github.com/Portree-Kid|c|
     Ray||c|
     RoadRunner-||c|
