@@ -1385,7 +1385,6 @@
     <string name="map_settings_cache_filter_too_complex_message">현재 캐시 필터가 너무 복잡해서 여기에 추가 옵션을 적용할 수 없습니다. 일반적으로 이는 캐시 필터에 단순한 AND 논리 대신 NOT 또는 OR 표현식이 포함되어 있음을 의미합니다.</string>
     <!-- search -->
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
-    <string name="search_bar_desc">캐시(지오코드, 키워드), 추적아이템(TB 코드)</string>
     <string name="search_coordinates">좌표</string>
     <string name="search_coordinates_button">좌표로 검색</string>
     <string name="search_address">주소</string>
