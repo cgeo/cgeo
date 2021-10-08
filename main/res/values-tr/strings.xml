@@ -1395,7 +1395,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Mevcut filtre daha fazla seçenek uygulamak için çok karmaşık. Bu genellikle filtrenin basit VE mantığı yerine DEĞİL veya VEYA içermesiyle alakalıdır.</string>
     <!-- search -->
     <string name="search_bar_hint">Cache/trackable ara</string>
-    <string name="search_bar_desc">Geocache (geokod, anahtar kelime), Trackable (TB kodu)</string>
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>
