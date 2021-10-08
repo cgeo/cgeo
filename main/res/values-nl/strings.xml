@@ -1396,7 +1396,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Het huidige cachefilter is te complex om hier extra opties op toe te passen. Meestal betekent dit dat het cachefilter NIET of OF uitdrukkingen bevat in plaats van eenvoudige EN logica.</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/trackables zoeken</string>
-    <string name="search_bar_desc">Caches (geocode, trefwoord), Trackables (TB-code)</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
     <string name="search_address">Adres</string>
