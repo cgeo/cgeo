@@ -34,25 +34,26 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
-import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
 public class VariablesViewPageFragment extends TabbedViewPagerFragment<CachedetailVariablesPageBinding> {
 
-    private static final String INVISIBLE_VAR_PREFIX = "_";
     private static final Pattern VARNAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
 
     private CacheDetailActivity activity;
 
     private VariablesListAdapter adapter;
+
+    private int previousVarSize = -1;
 
 
     private static class VariableViewHolder extends RecyclerView.ViewHolder {
@@ -67,7 +68,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         public void setData(final CalculatorMap.CalculatorState calculatorState) {
 
             this.varName = calculatorState.getVar();
-            final String displayVarName = this.varName.startsWith(INVISIBLE_VAR_PREFIX) ? "-" : calculatorState.getVar();
+            final String displayVarName = CacheVariables.isVisible(this.varName) ? this.varName : "-";
             this.binding.variableName.setText(displayVarName);
             final int textSize;
             switch (displayVarName.length()) {
@@ -118,46 +119,39 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         private CacheVariables variables;
         private boolean textListeningActive = true;
         private final RecyclerView recyclerView;
-        private final TextView addMultiButton;
+        private final TextView addNextChar;
 
-        private boolean hasUnsavedChanges = false;
+        private final Consumer<CacheVariables> changeCallback;
 
 
-        private VariablesListAdapter(final RecyclerView recyclerView, final TextView addMultiButton) {
+
+        private VariablesListAdapter(final RecyclerView recyclerView, final TextView addMultiButton, final Consumer<CacheVariables> changeCallback) {
             super(new Config(recyclerView)
                 .setNotifyOnPositionChange(true)
                 .setSupportDragDrop(true));
             this.recyclerView = recyclerView;
-            this.addMultiButton = addMultiButton;
+            this.addNextChar = addMultiButton;
+            this.changeCallback = changeCallback;
 
-            if (this.addMultiButton != null) {
-                this.addMultiButton.setOnClickListener(v -> {
-                    for (int c = getHighestAddMultiChar(); c >= 'A'; c--) {
-                        if (!variables.getMap().containsKey("" + (char) c)) {
-                            addVariable("" + (char) c, "");
-                        }
+            if (this.addNextChar != null) {
+                this.addNextChar.setOnClickListener(v -> {
+                    final int nac = getNextAddChar();
+                    if (nac > 0) {
+                        addVariable("" + (char) nac, "");
                     }
-                    processStructuralChange();
+                    processStructuralChangeInView();
                 });
-                processStructuralChange();
+                processStructuralChangeInView();
             }
         }
 
         public void setVariables(@NonNull final CacheVariables variables) {
             this.variables = variables;
-            this.hasUnsavedChanges = false;
             clearList();
-            for (String var : this.variables.getVariables()) {
-                addItem(variables.getMap().get(var));
+            for (String var : this.variables.getVariableList()) {
+                addItem(this.variables.getState(var));
             }
-        }
-
-        public boolean hasUnsavedChanges() {
-            return hasUnsavedChanges;
-        }
-
-        public void resetUnsavedChanges() {
-            this.hasUnsavedChanges = false;
+            processStructuralChangeInView();
         }
 
         private void fillViewHolder(final VariableViewHolder holder, final CalculatorMap.CalculatorState data) {
@@ -236,10 +230,9 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
         private void removeVarAt(final int varPos) {
             final String var = getItem(varPos).getVar();
-            variables.getMap().remove(var);
+            variables.removeVariable(var);
             removeItem(varPos);
-            processStructuralChange();
-            hasUnsavedChanges = true;
+            processStructuralChangeInView();
             notifyItemRangeChanged(0, getItemCount());
         }
 
@@ -249,70 +242,56 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
                 return;
             }
             final String oldFormula = oldState.getFormula();
-            variables.getMap().remove(oldState.getVar());
+            variables.removeVariable(oldState.getVar());
+            removeVarFromViewIfPresent(newVar);
 
-            removeVarIfPresent(newVar);
-
-            variables.getMap().put(newVar, oldFormula);
-            updateItem(variables.getMap().get(newVar), varPos);
-            processStructuralChange();
-            resetResults();
-            hasUnsavedChanges = true;
+            variables.addVariable(newVar, oldFormula, varPos);
+            updateItem(variables.getState(newVar), varPos);
+            processStructuralChangeInView();
+            recalculateResultsInView();
         }
 
         public void addVariable(final String newVar, final String formula) {
-            final String var = newVar == null ? variables.getMap().createNonContainedKey(INVISIBLE_VAR_PREFIX) : newVar;
-
             if (newVar != null) {
-                removeVarIfPresent(var);
+                removeVarFromViewIfPresent(newVar);
             }
-
-            variables.getMap().put(var, formula);
-            addItem(0, variables.getMap().get(var));
-            processStructuralChange();
-            hasUnsavedChanges = true;
+            final String var = variables.addVariable(newVar, formula, 0);
+            addItem(0, variables.getState(var));
+            processStructuralChangeInView();
             notifyItemRangeChanged(0, getItemCount());
         }
 
         public void addAllMissing() {
-            final Set<String> varsMissing = new HashSet<>(variables.getMap().getVars());
-            varsMissing.removeAll(variables.getVariables());
+            final Collection<String> varsMissing = variables.getAllMissingVars();
             for (String var : varsMissing) {
                 addVariable(var, "");
             }
         }
 
         public void clearAllVariables() {
-            if (!variables.getVariables().isEmpty()) {
-                hasUnsavedChanges = true;
-            }
             variables.clear();
             clearList();
-            processStructuralChange();
+            processStructuralChangeInView();
         }
 
         public void sortVariables() {
             sortItems((v1, v2) -> TextUtils.COLLATOR.compare(v1.getVar(), v2.getVar()));
-            hasUnsavedChanges = true;
-            processStructuralChange();
-        }
-
-        public String createNonContainedVariableName(final String prefix) {
-            return variables.getMap().createNonContainedKey(prefix);
+            variables.sortVariables(TextUtils.COLLATOR::compare);
+            processStructuralChangeInView();
         }
 
         public void selectVariableName(final String oldName, final Action2<String, String> callback) {
 
-            final boolean oldNameIsInvisible = oldName == null || oldName.startsWith(INVISIBLE_VAR_PREFIX);
+            final boolean oldNameIsInvisible = !CacheVariables.isVisible(oldName);
             final String nameToShow = oldNameIsInvisible ? "" : oldName;
             SimpleDialog.ofContext(recyclerView.getContext()).setTitle(TextParam.text("Variable Name")).setMessage(TextParam.text("Enter variable name (may be left empty)"))
                 .input(InputType.TYPE_CLASS_TEXT, nameToShow, null, null, s -> StringUtils.isBlank(s) || isValidVarName(s), "[a-zA-Z0-9]", t -> {
                     final boolean newNameIsInvisible = StringUtils.isBlank(t);
-                    if ((oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {
+                    if ((oldName != null && oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {
                         //nothing to do
                         return;
                     }
-                    final String newName = StringUtils.isBlank(t) ? createNonContainedVariableName(INVISIBLE_VAR_PREFIX) : t;
+                    final String newName = StringUtils.isBlank(t) ? null : t;
                     callback.call(oldName, newName);
                 });
         }
@@ -324,16 +303,16 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
         private void changeFormulaFor(final int varPos, final String formula) {
             final String var = getItem(varPos).getVar();
-            variables.getMap().put(var, formula);
-            hasUnsavedChanges = true;
-            resetResults();
+            if (variables.changeVariable(var, formula)) {
+                recalculateResultsInView();
+            }
         }
 
-        private void resetResults() {
+        private void recalculateResultsInView() {
             for (int pos = 0; pos < getItemCount(); pos++) {
                 final VariableViewHolder itemHolder = (VariableViewHolder) this.recyclerView.findViewHolderForLayoutPosition(pos);
                 if (itemHolder != null) {
-                    final CalculatorMap.CalculatorState state = variables.getMap().get(itemHolder.getVar());
+                    final CalculatorMap.CalculatorState state = variables.getState(itemHolder.getVar());
                     if (state != null) {
                         itemHolder.setResult(state);
                     }
@@ -341,48 +320,41 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         }
 
-        private void removeVarIfPresent(final String var) {
-            if (variables.getMap().getVars().contains(var)) {
-                for (int pos = 0; pos < getItemCount(); pos++) {
-                    final VariableViewHolder itemHolder = (VariableViewHolder) this.recyclerView.findViewHolderForLayoutPosition(pos);
-                    if (itemHolder != null && itemHolder.getVar().equals(var)) {
-                        removeVarAt(pos);
-                        break;
-                    }
+        private void removeVarFromViewIfPresent(final String var) {
+            for (int pos = 0; pos < getItemCount(); pos++) {
+                final VariableViewHolder itemHolder = (VariableViewHolder) this.recyclerView.findViewHolderForLayoutPosition(pos);
+                if (itemHolder != null && itemHolder.getVar().equals(var)) {
+                    removeVarAt(pos);
+                    break;
                 }
             }
         }
 
         @SuppressLint("SetTextI18n")
-        private void processStructuralChange() {
-            //recalculate variable order
-            final List<String> variablesOrder = new ArrayList<>();
-            for (CalculatorMap.CalculatorState state : getItems()) {
-                variablesOrder.add(state.getVar());
-            }
-            if (variables != null) {
-                variables.setOrder(variablesOrder);
-            }
+        private void processStructuralChangeInView() {
 
             //rename addMulti button if necessary
-            if (addMultiButton != null) {
-                addMultiButton.setText("A - " + (char) getHighestAddMultiChar());
+            if (addNextChar != null) {
+                final int nac = getNextAddChar();
+
+                addNextChar.setText(nac < 0 ? "-" : "" + (char) getNextAddChar());
             }
+
+            if (changeCallback != null && variables != null) {
+                changeCallback.accept(variables);
+            }
+
         }
 
-        private int getHighestAddMultiChar() {
+        private int getNextAddChar() {
             if (variables == null || !variables.getVariableSet().contains("A")) {
-                return 'E';
+                return 'A';
             }
             int lowestContChar = 'A';
-            while (lowestContChar <= 'Z' && variables.getVariableSet().contains("" + (char) (lowestContChar + 1))) {
+            while (lowestContChar < 'Z' && variables.getVariableSet().contains("" + (char) (lowestContChar + 1))) {
                 lowestContChar++;
             }
-            int newHighestChar = ((lowestContChar - 'A'  + 1) / 5) * 5 + 'A' + 4;
-            if (newHighestChar >= 'Y') {
-                newHighestChar = 'Z';
-            }
-            return newHighestChar;
+            return lowestContChar == 'Z' ? -1 : lowestContChar + 1;
         }
     }
 
@@ -390,7 +362,12 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     @Override
     public CachedetailVariablesPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
         final CachedetailVariablesPageBinding binding = CachedetailVariablesPageBinding.inflate(inflater, container, false);
-        this.adapter = new VariablesListAdapter(binding.variablesList, binding.variablesAddmulti);
+        this.adapter = new VariablesListAdapter(binding.variablesList, binding.variablesAddnextchar, v -> {
+            if (activity != null && (previousVarSize < 0 || previousVarSize != v.getVariableList().size())) {
+                activity.reinitializePage(-1); //this just reinits the title bar, not the variable tab content
+                previousVarSize = v.getVariableList().size();
+            }
+        });
 
         //Experimental warning
         TextParam.text("**Experimental New Feature** \n" +
@@ -438,10 +415,9 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     }
 
     private void checkUnsavedChanges() {
-        if (adapter.hasUnsavedChanges()) {
+        if (adapter.variables != null && adapter.variables.hasUnsavedChanges()) {
             activity.ensureSaved();
-            adapter.variables.persistState();
-            adapter.resetUnsavedChanges();
+            adapter.variables.saveState();
         }
     }
 

@@ -40,13 +40,14 @@
                 android:minWidth="2dp"
                 app:icon="@drawable/ic_menu_add" />
             <Button
-                android:id="@+id/variables_addmulti"
+                android:id="@+id/variables_addnextchar"
                 style="@style/button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="6dp"
-                android:text="A - E"
+                android:text="A"
+                android:minWidth="2dp"
                 app:icon="@drawable/ic_menu_add" />
 
             <Button
