@@ -1,8 +1,17 @@
 package cgeo.geocaching.utils.calc;
 
+import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * Holds implementations for functions in calculator
@@ -10,6 +19,10 @@ import java.util.Random;
 public class CalculatorUtils {
 
     private static final Random RANDOM = new Random(System.currentTimeMillis());
+
+    private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
+        "[^a-zA-Z0-9(](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10})((( *[()] *)*( *[-+/:*] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10}))+( *\\) *)*)[^a-zA-Z0-9)]");
+
 
     private CalculatorUtils() {
         //no instance
@@ -76,7 +89,7 @@ public class CalculatorUtils {
     }
 
     public static String rot(final String value, final int rotate) {
-        int rot = rotate == 0 ? 13 : rotate;
+        int rot = rotate;
         while (rot < 0) {
             rot += 26;
         }
@@ -100,5 +113,32 @@ public class CalculatorUtils {
         }
         return sb.toString();
     }
+
+    public static List<String> scanForFormulas(final Collection<String> texts, final Collection<String> excludeFormulas) {
+        final List<String> patterns = new ArrayList<>();
+        final Set<String> patternsFound = new HashSet<>(excludeFormulas == null ? Collections.emptySet() : excludeFormulas);
+        for (String text : texts) {
+            scanText(text, patterns, patternsFound);
+        }
+        Collections.sort(patterns, TextUtils.COLLATOR::compare);
+        return patterns;
+    }
+
+    private static void scanText(final String text, final List<String> result, final Set<String> resultSet) {
+        if (text == null) {
+            return;
+        }
+        final Matcher m = TEXT_SCAN_PATTERN.matcher(" " + text + " ");
+        int start = 0;
+        while (m.find(start)) {
+            final String found = m.group(1);
+            if (!resultSet.contains(found)) {
+                result.add(found);
+                resultSet.add(found);
+            }
+            start = m.end() - 1; //move one char to left to find patterns only separated by one char
+        }
+    }
+
 
 }

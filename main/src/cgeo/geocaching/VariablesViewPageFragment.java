@@ -13,6 +13,7 @@ import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.calc.CalculatorFunction;
 import cgeo.geocaching.utils.calc.CalculatorMap;
+import cgeo.geocaching.utils.calc.CalculatorUtils;
 import cgeo.geocaching.utils.calc.Value;
 import cgeo.geocaching.utils.functions.Action2;
 
@@ -36,12 +37,10 @@ import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
 import java.util.Set;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -50,9 +49,6 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
     private static final String INVISIBLE_VAR_PREFIX = "_";
     private static final Pattern VARNAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
-
-    public static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
-        "[^a-zA-Z0-9](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10})((( *[()] *)*( *[-+/:*] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10}))+( *\\) *)*)[^a-zA-Z0-9]");
 
     private CacheDetailActivity activity;
 
@@ -399,8 +395,6 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         //Experimental warning
         TextParam.text("**Experimental New Feature** \n" +
             "* Expect disruptive changes in the future\n" +
-            "* Not all features implemented yet\n" +
-            "* No persistence yet\n" +
             "* No internationalization yet\n" +
             "* GUI/UX not finalized\n" +
             "* Not used by other parts of c:geo yet")
@@ -452,34 +446,25 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     }
 
     private void scanCache() {
-        final List<String> patterns = new ArrayList<>();
-        final Set<String> patternSet = new HashSet<>();
-        scanText(activity.getCache().getDescription(), patterns, patternSet);
-        scanText(activity.getCache().getHint(), patterns, patternSet);
+        final List<String> toScan = new ArrayList<>();
+        toScan.add(activity.getCache().getDescription());
+        toScan.add(activity.getCache().getHint());
         for (Waypoint w : activity.getCache().getWaypoints()) {
-            scanText(w.getNote(), patterns, patternSet);
+            toScan.add(w.getNote());
         }
-        Collections.sort(patterns, TextUtils.COLLATOR::compare);
+        final List<String> existingFormulas = new ArrayList<>();
+        for (CalculatorMap.CalculatorState state : adapter.getItems()) {
+            if (state != null && !StringUtils.isBlank(state.getFormula())) {
+                existingFormulas.add(state.getFormula());
+            }
+        }
+        final List<String> patterns = CalculatorUtils.scanForFormulas(toScan, existingFormulas);
         SimpleDialog.of(activity).setTitle(TextParam.text("Choose found pattern"))
             .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
                 for (String s : set) {
                     adapter.addVariable(null, s);
                 }
             });
-    }
-
-    private static void scanText(final String text, final List<String> result, final Set<String> resultSet) {
-        if (text == null) {
-            return;
-        }
-        final Matcher m = TEXT_SCAN_PATTERN.matcher(text);
-        while (m.find()) {
-            final String found = m.group(1);
-            if (!resultSet.contains(found)) {
-                result.add(found);
-                resultSet.add(found);
-            }
-        }
     }
 
     @Override

@@ -26,6 +26,7 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.models.CacheVariables;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Route;
@@ -223,7 +224,7 @@ public class DataStore {
      */
     private static final CacheCache cacheCache = new CacheCache();
     private static volatile SQLiteDatabase database = null;
-    private static final int dbVersion = 97;
+    private static final int dbVersion = 98;
     public static final int customListIdOffset = 10;
 
     /**
@@ -256,7 +257,8 @@ public class DataStore {
         94, // add scale to offline log images
         95, // add table to store custom filters
         96, // add preventAskForDeletion to cg_lists
-        97  // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
+        97, // rename ALC caches' geocodes from "LC" prefix to "AL" prefix
+        98  // add table cg_variables to store cache variables
     ));
 
     @NonNull private static final String dbTableCaches = "cg_caches";
@@ -264,6 +266,7 @@ public class DataStore {
     @NonNull private static final String dbTableCachesLists = "cg_caches_lists";
     @NonNull private static final String dbTableAttributes = "cg_attributes";
     @NonNull private static final String dbTableWaypoints = "cg_waypoints";
+    @NonNull private static final String dbTableVariables = "cg_variables";
     @NonNull private static final String dbTableSpoilers = "cg_spoilers";
     @NonNull private static final String dbTableLogs = "cg_logs";
     @NonNull private static final String dbTableLogCount = "cg_logCount";
@@ -369,6 +372,16 @@ public class DataStore {
             + "org_coords_empty INTEGER DEFAULT 0, "
             + "calc_state TEXT"
             + "); ";
+
+    private static final String dbCreateVariables = ""
+        + "CREATE TABLE IF NOT EXISTS " + dbTableVariables + " ("
+        + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
+        + "geocode TEXT NOT NULL, "
+        + "varname TEXT, "
+        + "varorder INTEGER DEFAULT 0, "
+        + "formula TEXT"
+        + "); ";
+
     private static final String dbCreateSpoilers = ""
             + "CREATE TABLE IF NOT EXISTS " + dbTableSpoilers + " ("
             + "_id INTEGER PRIMARY KEY AUTOINCREMENT, "
@@ -978,6 +991,7 @@ public class DataStore {
             db.execSQL(dbCreateCachesLists);
             db.execSQL(dbCreateAttributes);
             db.execSQL(dbCreateWaypoints);
+            db.execSQL(dbCreateVariables);
             db.execSQL(dbCreateSpoilers);
             db.execSQL(dbCreateLogs);
             db.execSQL(dbCreateLogCount);
@@ -1022,6 +1036,9 @@ public class DataStore {
             db.execSQL("CREATE INDEX IF NOT EXISTS in_lists_geo ON " + dbTableCachesLists + " (geocode)");
             if (currentVersion >= 82) {
                 db.execSQL("CREATE INDEX IF NOT EXISTS in_extension_key ON " + dbTableExtension + " (_key)");
+            }
+            if (currentVersion >= 98) {
+                db.execSQL("CREATE INDEX IF NOT EXISTS in_vars_geo ON " + dbTableVariables + " (geocode)");
             }
         }
 
@@ -1624,6 +1641,17 @@ public class DataStore {
                             onUpgradeError(e, 97);
                         }
                     }
+
+                    //create table for variable storage
+                    if (oldVersion < 98) {
+                        try {
+                            db.execSQL(dbCreateVariables);
+                            createIndices(db, 98);
+                        } catch (final SQLException e) {
+                            onUpgradeError(e, 98);
+                        }
+                    }
+
                 }
 
                 //at the very end of onUpgrade: rewrite downgradeable versions in database
@@ -1716,6 +1744,7 @@ public class DataStore {
             db.execSQL("DROP TABLE IF EXISTS " + dbTableCachesLists);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableAttributes);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableWaypoints);
+            db.execSQL("DROP TABLE IF EXISTS " + dbTableVariables);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableSpoilers);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogs);
             db.execSQL("DROP TABLE IF EXISTS " + dbTableLogCount);
@@ -2990,6 +3019,51 @@ public class DataStore {
         return waypoint;
     }
 
+    /** method should solely be used by class {@Link CacheVariables} */
+    @NonNull
+    public static List<CacheVariables.CacheVariableDbRow> loadVariables(final String geocode) {
+        if (StringUtils.isBlank(geocode)) {
+            return Collections.emptyList();
+        }
+
+        return queryToColl(dbTableVariables, new String[]{"_id", "varname", "varorder", "formula"},
+            "geocode = ?", new String[]{geocode}, null, null, new ArrayList<CacheVariables.CacheVariableDbRow>(),
+            c -> new CacheVariables.CacheVariableDbRow(
+                c.getLong(0), c.getString(1), c.getInt(2), c.getString(3)));
+    }
+
+    /** method should solely be used by class {@Link CacheVariables} */
+    public static void upsertVariables(final String geocode, final List<CacheVariables.CacheVariableDbRow> variables) {
+        init();
+        database.beginTransaction();
+        try {
+            final Set<Long> idsToRemain = new HashSet<>();
+            for (CacheVariables.CacheVariableDbRow row : variables) {
+                final ContentValues cv = new ContentValues();
+                cv.put("geocode", geocode);
+                cv.put("varname", row.varname);
+                cv.put("varorder", row.varorder);
+                cv.put("formula", row.formula);
+                final boolean updated = row.id >= 0 &&
+                    database.update(dbTableVariables, cv, "geocode = ? and _id = ?", new String[]{geocode, "" + row.id}) > 0;
+                if (updated) {
+                    idsToRemain.add(row.id);
+                } else {
+                    final long newId = database.insert(dbTableVariables, null, cv);
+                    if (newId < 0) {
+                        throw new SQLiteException("Exception on inserting row in table " + dbTableVariables);
+                    }
+                    idsToRemain.add(newId);
+                }
+            }
+            database.delete(dbTableVariables, "geocode = ? AND _id NOT IN (" + StringUtils.join(idsToRemain, ",") + ")", new String[]{geocode});
+            database.setTransactionSuccessful();
+        } finally {
+            database.endTransaction();
+        }
+    }
+
+
     @Nullable
     private static List<Image> loadSpoilers(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
@@ -3635,6 +3709,9 @@ public class DataStore {
         Log.d("Database clean: removing non-existing caches from waypoints");
         database.delete(dbTableWaypoints, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
 
+        Log.d("Database clean: removing non-existing caches from variables");
+        database.delete(dbTableVariables, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
+
         Log.d("Database clean: removing non-existing caches from trackables");
         database.delete(dbTableTrackables, "geocode NOT IN (SELECT geocode FROM " + dbTableCaches + ")", null);
 
@@ -3731,6 +3808,7 @@ public class DataStore {
                     wayPointClause += " AND type <> 'own'";
                 }
                 database.delete(dbTableWaypoints, wayPointClause, null);
+                database.delete(dbTableVariables, baseWhereClause, null);
                 database.delete(dbTableTrackables, baseWhereClause, null);
                 database.setTransactionSuccessful();
             } finally {
