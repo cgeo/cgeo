@@ -1398,7 +1398,6 @@
     <string name="map_settings_cache_filter_too_complex_message">O filtro de cache actual é muito complexo para se aplicarem aqui as opções adicionais. Geralmente, isso significa que o filtro de cache contém expressões do tipo \"NOT\" (não) ou \"OR\" (ou) em vez de expressões simples lógicas do tipo \"AND\" (e).</string>
     <!-- search -->
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
-    <string name="search_bar_desc">Caches (código GC, palavra-chave), Trackables (código TB)</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Pesquisar por coordenadas</string>
     <string name="search_address">Endereço</string>
