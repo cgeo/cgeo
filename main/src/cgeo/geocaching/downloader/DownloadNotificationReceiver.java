@@ -1,6 +1,7 @@
 package cgeo.geocaching.downloader;
 
 import cgeo.geocaching.Intents;
+import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.utils.Log;
@@ -47,7 +48,7 @@ class DownloadNotificationReceiver extends BroadcastReceiver {
                             case DownloadManager.STATUS_FAILED:
                                 PendingDownload.remove(pendingDownload);
                                 final int error = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_REASON));
-                                ActivityMixin.showToast(context, "map download failed with error #" + error);
+                                ActivityMixin.showToast(context, String.format(context.getString(R.string.download_error), error));
                                 Log.d("download #" + pendingDownload + " failed with error #" + error);
                                 // remove file from system's download manager, which will also delete the broken file from storage
                                 downloadManager.remove(pendingDownload);

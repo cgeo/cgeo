@@ -2272,6 +2272,7 @@
     <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates found for:\n%1$s\n\nDo you want to update?%2$s</string>
     <string name="download_warning">This may take quite some time and can lead to significant costs, depending on your network connection.</string>
+    <string name="download_error">Download failed with error #%d</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
     <string name="downloadmap_onedirup">(one level up)</string>
