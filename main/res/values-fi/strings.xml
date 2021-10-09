@@ -2032,6 +2032,7 @@
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
+    <string name="download_error">Lataus epäonnistui virheellä #%d</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
     <string name="downloadmap_onedirup">(yksi taso ylös)</string>
