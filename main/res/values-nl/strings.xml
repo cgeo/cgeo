@@ -1123,10 +1123,12 @@
     <string name="cache_images">Afbeeldingen</string>
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
+    <string name="cache_variables">Variabelen</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Bezochte waypoints verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint gekopieerd van klembord naar deze cache.\n\nOriginele waypoint verwijderen?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Geen hint beschikbaar</string>
@@ -2030,6 +2032,7 @@
     <string name="download_confirmation">%1$sBestand downloaden \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates gevonden voor:\n%1$s\n\nWil je bijwerken?%2$s</string>
     <string name="download_warning">Dit kan heel wat tijd in beslag nemen en kan tot aanzienlijke kosten leiden, afhankelijk van uw netwerkverbinding.</string>
+    <string name="download_error">Downloaden is mislukt met fout #%d</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <string name="button_continue">Doorgaan</string>
     <string name="downloadmap_onedirup">(één niveau omhoog)</string>
