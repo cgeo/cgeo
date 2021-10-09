@@ -59,7 +59,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.drawable.ColorDrawable;
 import android.location.Address;
 import android.net.ConnectivityManager;
 import android.os.Bundle;
@@ -69,7 +68,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -498,9 +496,6 @@ public class MainActivity extends AbstractActionBarActivity {
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
         searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
         searchView.setSubmitButtonEnabled(true);
-
-        final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-        searchAutoComplete.setDropDownBackgroundDrawable(new ColorDrawable(getResources().getColor(R.color.colorBackgroundDialog)));
 
         hideKeyboardOnSearchClick();
         hideActionIconsWhenSearchIsActive(menu);
