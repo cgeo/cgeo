@@ -533,14 +533,18 @@ public class MainActivity extends AbstractActionBarActivity {
         searchView.setOnSuggestionListener(new OnSuggestionListener() {
 
             @Override
-            public boolean onSuggestionSelect(final int arg0) {
+            public boolean onSuggestionSelect(final int position) {
                 return false;
             }
 
             @Override
-            public boolean onSuggestionClick(final int arg0) {
-                searchItem.collapseActionView();
-                searchView.setIconified(true);
+            public boolean onSuggestionClick(final int position) {
+                // needs to run delayed, as it will otherwise change the SuggestionAdapter cursor which results in inconsistent datasets (see #11803)
+                searchView.postDelayed(() -> {
+                    searchItem.collapseActionView();
+                    searchView.setIconified(true);
+                }, 1000);
+
                 // return false to invoke standard behavior of launching the intent for the search result
                 return false;
             }
