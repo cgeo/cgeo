@@ -1,7 +1,7 @@
-- Fix: Fix some time zone issues when changing log date
-- Fix: Start secondary navigation on long tap of compass rose in popup
+- Oplossing: Enkele tijdzone problemen opgelost bij het wijzigen van logboek datum
+- Oplossing: Start secundaire navigatie bij lange tik van het kompas in popup
 
-## 2021.09.27 Feature release
+## 2021.09.27 Functie release
 
 ### Kaart
 - Nieuw: Toegevoegd Mapy.cz als online kaartbron
