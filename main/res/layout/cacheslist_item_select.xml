@@ -5,8 +5,8 @@
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="?android:attr/selectableItemBackground"
-    tools:context=".maps.mapsforge.v6.NewMap" >
+    android:background="@color/colorBackgroundDialog"
+    android:foreground="?android:attr/selectableItemBackground" >
 
     <!-- cache name and icon -->
     <!-- first TextView gets the size of a cache marker as minimum height -->
