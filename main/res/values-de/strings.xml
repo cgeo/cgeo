@@ -1128,6 +1128,7 @@
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Besuchte Wegpunkte verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Wegpunkt aus der Zwischenablage in diesen Cache kopiert.\n\nUrsprünglichen Wegpunkt entfernen?</string>
     <string name="cache_hint">Hinweis</string>
     <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
@@ -2031,6 +2032,7 @@
     <string name="download_confirmation">%1$sDatei herunterladen \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates gefunden für:\n%1$s\n\nMöchtest du aktualisieren?%2$s</string>
     <string name="download_warning">Dieser Vorgang kann eine ganze Weile dauern und kann, abhängig von deiner Netzwerkverbindung, zu erheblichen Kosten führen.</string>
+    <string name="download_error">Download fehlgeschlagen mit Fehler #%d</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
     <string name="button_continue">Weiter</string>
     <string name="downloadmap_onedirup">(eine Ebene höher)</string>
