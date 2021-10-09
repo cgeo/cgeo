@@ -2084,6 +2084,7 @@
     <string name="download_confirmation">%1$sStáhnout soubor \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Byly nalezeny aktualizace:\n%1$s\n\nChcete aktualizovat?%2$s</string>
     <string name="download_warning">To může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
+    <string name="download_error">Stažení se nezdařilo s chybou #%d</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
     <string name="downloadmap_onedirup">(o úroveň výš)</string>
