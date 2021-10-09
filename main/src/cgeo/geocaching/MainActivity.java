@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.IAvatar;
@@ -60,6 +61,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 import static android.view.View.GONE;
@@ -97,6 +99,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private boolean restoreMessageShown = false;
+    private boolean keyboardWasActive = false;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
     private final Handler updateUserInfoHandler = new UpdateUserInfoHandler(this);
@@ -461,7 +464,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             searchView = (SearchView) searchItem.getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
-            searchView.setSubmitButtonEnabled(true);
 
             // initialize menu items
             menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
@@ -473,6 +475,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             hideKeyboardOnSearchClick();
             hideActionIconsWhenSearchIsActive(menu);
+            handleDropDownVisibility();
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
@@ -542,6 +545,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             @Override
             public boolean onMenuItemActionExpand(final MenuItem item) {
+                keyboardWasActive = true;
+
                 for (int i = 0; i < menu.size(); i++) {
                     if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
                         menu.getItem(i).setVisible(false);
@@ -592,6 +597,21 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             public boolean onQueryTextChange(final String s) {
                 ((SuggestionsAdapter) searchView.getSuggestionsAdapter()).changeQuery(s);
                 return true;
+            }
+        });
+    }
+
+    private void handleDropDownVisibility() {
+        final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
+        searchAutoComplete.setOnDismissListener(() -> {
+            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
+                if (keyboardWasActive) {
+                    keyboardWasActive = Keyboard.isVisible(this);
+                    searchAutoComplete.showDropDown();
+                } else {
+                    searchItem.collapseActionView();
+                    searchView.setIconified(true);
+                }
             }
         });
     }
