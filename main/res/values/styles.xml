@@ -53,7 +53,7 @@
     <!-- spinner popup formatting -->
 
     <style name="spinnerStyle" parent="Base.Widget.AppCompat.Spinner">
-        <item name="android:popupBackground">@color/colorBackgroundDialog</item>
+        <item name="android:popupBackground">@drawable/spinner_background</item>
     </style>
 
     <!-- alert dialog formatting -->
