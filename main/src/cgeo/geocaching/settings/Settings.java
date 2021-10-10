@@ -1838,17 +1838,16 @@ public class Settings {
     }
 
     private static String[] getLegacyPreferenceKeysFor(final int keyId) {
-        switch (keyId) {
-            case R.string.pref_persistablefolder_offlinemaps:
-                return new String[]{"mapDirectory"};
-            case R.string.pref_persistablefolder_gpx:
-                return new String[]{"gpxExportDir", "gpxImportDir"};
-            case R.string.pref_persistableuri_track:
-                return new String[]{"pref_trackfile"};
-            case R.string.pref_persistablefolder_offlinemapthemes:
-                return new String[]{"renderthemepath"};
-            default:
-                return new String[0];
+        if (keyId == R.string.pref_persistablefolder_offlinemaps) {
+            return new String[]{"mapDirectory"};
+        } else if (keyId == R.string.pref_persistablefolder_gpx) {
+            return new String[]{"gpxExportDir", "gpxImportDir"};
+        } else if (keyId == R.string.pref_persistableuri_track) {
+            return new String[]{"pref_trackfile"};
+        } else if (keyId == R.string.pref_persistablefolder_offlinemapthemes) {
+            return new String[]{"renderthemepath"};
+        } else {
+            return new String[0];
         }
     }
 
