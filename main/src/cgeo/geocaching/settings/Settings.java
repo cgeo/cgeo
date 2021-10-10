@@ -1229,7 +1229,7 @@ public class Settings {
             return false;
         }
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getBrouterAutoTileDownloadsInterval();
+        final long interval = getBrouterAutoTileDownloadsInterval();
         return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
@@ -1261,7 +1261,7 @@ public class Settings {
     // used for update checks for maps & route tiles downloaders
     private static long calculateNewTimestamp(final boolean delay, final int interval) {
         // if delay requested: delay by regular interval, but by three days at most
-        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (interval - 3) * DAYS_TO_SECONDS : 0);
+        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (long) (interval - 3) * DAYS_TO_SECONDS : 0);
     }
 
     public static boolean isBigSmileysEnabled() {
