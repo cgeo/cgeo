@@ -365,8 +365,8 @@ public class ViewUtils {
         }
         //try to get size from layout parameters
         if (view.getLayoutParams() != null) {
-            final int w = view.getLayoutParams().width > 0 ? view.getLayoutParams().width : 0;
-            final int h = view.getLayoutParams().height > 0 ? view.getLayoutParams().height : 0;
+            final int w = Math.max(view.getLayoutParams().width, 0);
+            final int h = Math.max(view.getLayoutParams().height, 0);
             if (w > 0 || h > 0) {
                 return new Pair<>(w, h);
             }

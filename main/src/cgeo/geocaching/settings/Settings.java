@@ -1527,7 +1527,7 @@ public class Settings {
         if (scale < 0) {
             return -1;
         }
-        return scale < 512 ? 512 : scale;
+        return Math.max(scale, 512);
     }
 
     public static void setLogImageScale(final int scale) {
