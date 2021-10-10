@@ -582,7 +582,6 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private static void initDeviceSpecificPreferences() {
         // We have to ensure that those preferences are initialized so that devices with specific default values
         // will get the appropriate ones.
-        Settings.setUseHardwareAcceleration(Settings.useHardwareAcceleration());
         Settings.setUseGooglePlayServices(Settings.useGooglePlayServices());
     }
 
