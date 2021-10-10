@@ -36,14 +36,13 @@
     <style name="materialAlertDialogTheme" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
         <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>
         <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>
+        <item name="android:colorBackground">@color/colorBackgroundDialog</item>
     </style>
 
     <!-- theme for dialogs with compact lists (e. g.: "pick a list" dialogs -->
 
-    <style name="cgeo.compactDialogs" parent="ThemeOverlay.MaterialComponents.MaterialAlertDialog">
+    <style name="cgeo.compactDialogs" parent="materialAlertDialogTheme">
         <item name="android:listPreferredItemHeightSmall">40dp</item>
-        <item name="materialAlertDialogTitleTextStyle">@style/alertDialogTitleTextStyle</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/alertDialogBodyTextStyle</item>
         <item name="android:checkedTextViewStyle">@style/checkboxStyleNoParent</item>
     </style>
 
