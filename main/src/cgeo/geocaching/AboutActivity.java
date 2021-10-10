@@ -224,7 +224,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             final String changelogBugfix = FileUtils.getChangelogRelease(activity);
             if (BranchDetectionHelper.FROM_BRANCH_RELEASE == 1) {
                 // we are on release branch
-                markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## Next bugfix release\n\n") +  changelogBugfix);
+                markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") +  changelogBugfix);
                 markwon.setMarkdown(binding.changelogRelease, "## " + BranchDetectionHelper.FEATURE_VERSION_NAME + "\n\n" + changelogBase);
             } else {
                 // we are on a non-release branch

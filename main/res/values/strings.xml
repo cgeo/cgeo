@@ -312,7 +312,6 @@
     <string name="confirm_unsaved_changes_title">Unsaved changes</string>
     <string name="confirm_discard_changes">Discard unsaved changes?</string>
     <string name="confirm_discard_wp_changes">Discard unsaved waypoint changes?</string>
-    <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
     <string name="undo">Undo</string>
@@ -523,7 +522,6 @@
         <item quantity="other">%1$d items</item>
     </plurals>
 
-    <string name="cache_filter_storage_load_button">Load</string>
     <string name="cache_filter_storage_delete_button">Delete</string>
     <string name="cache_filter_storage_clear_button">Clear</string>
     <string name="cache_filter_storage_load_delete_title">Load or delete an existing filter</string>
@@ -2027,14 +2025,6 @@
         <item quantity="few">%d days ago</item>
         <item quantity="many">%d days ago</item>
         <item quantity="other">%d days ago</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="zero">%s favorites</item>
-        <item quantity="one">%s favorite</item>
-        <item quantity="two">%s favorites</item>
-        <item quantity="few">%s favorites</item>
-        <item quantity="many">%s favorites</item>
-        <item quantity="other">%s favorites</item>
     </plurals>
 
     <!-- shortcuts -->
