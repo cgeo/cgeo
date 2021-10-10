@@ -53,7 +53,7 @@ public class ImageActivityHelper {
     private final Bundle runningIntents = new Bundle();
 
     private static class IntentContextData implements Parcelable {
-        public int requestCode;
+        public final int requestCode;
         public final String fileid;
         public final Uri uri;
         public final boolean callOnFailure;

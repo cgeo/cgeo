@@ -12,8 +12,8 @@ import androidx.core.app.NotificationManagerCompat;
 public abstract class AbstractForegroundIntentService extends IntentService implements IAbstractForgreoundIntentService {
     protected static String logTag = "ForegroundIntentService";
 
-    protected int wakelockTimeout = 10 * 60 * 1000;
-    protected int foregroundNotificationId = Notifications.ID_FOREGROUND_NOTIFICATION;
+    protected final int wakelockTimeout = 10 * 60 * 1000;
+    protected final int foregroundNotificationId = Notifications.ID_FOREGROUND_NOTIFICATION;
 
     protected NotificationCompat.Builder notification;
     protected NotificationManagerCompat notificationManager;

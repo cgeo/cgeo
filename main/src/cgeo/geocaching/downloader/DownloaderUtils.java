@@ -130,9 +130,9 @@ public class DownloaderUtils {
     }
 
     public static class DownloadDescriptor {
-        public String filename;
-        public Uri uri;
-        public int type;
+        public final String filename;
+        public final Uri uri;
+        public final int type;
 
         DownloadDescriptor(final String filename, final Uri uri, final int type) {
             this.filename = filename;
