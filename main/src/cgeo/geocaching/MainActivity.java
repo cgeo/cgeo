@@ -777,65 +777,37 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoFindOnMap(final View v) {
         binding.map.setPressed(true);
         startActivity(DefaultMap.getLiveMapIntent(this));
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoFindNearest(final View v) {
         binding.nearest.setPressed(true);
         startActivity(CacheListActivity.getNearestIntent(this));
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoFindByOffline(final View v) {
         binding.searchOffline.setPressed(true);
         CacheListActivity.startActivityOffline(this);
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoSearch(final View v) {
         binding.advancedButton.setPressed(true);
         startActivity(new Intent(this, SearchActivity.class));
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoPoint(final View v) {
         binding.anyButton.setPressed(true);
         InternalConnector.assertHistoryCacheExists(this);
         CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoFilter(final View v) {
         binding.filterButton.setPressed(true);
         binding.filterButton.performClick();
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
     public void cgeoNavSettings(final View v) {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
