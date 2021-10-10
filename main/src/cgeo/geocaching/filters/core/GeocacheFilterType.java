@@ -67,4 +67,8 @@ public enum GeocacheFilterType {
     public String getUserDisplayableGroup() {
         return LocalizationUtils.getStringWithFallback(this.groupId, null);
     }
+
+    public boolean displayToUser() {
+        return this.groupId != 0;
+    }
 }

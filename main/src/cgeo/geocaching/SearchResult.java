@@ -12,6 +12,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.os.Bundle;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -34,11 +35,15 @@ import org.apache.commons.lang3.StringUtils;
 
 public class SearchResult implements Parcelable {
 
+    public static final String SEARCHSTATE_FINDER = "ss_finder";
+
     private final Set<String> geocodes;
     private final Set<String> filteredGeocodes;
     @NonNull private StatusCode error = StatusCode.NO_ERROR;
     private String url = "";
     private String[] viewstates = null;
+
+    private final Bundle searchContext = new Bundle();
     /**
      * Overall number of search results matching our search on geocaching.com. If this number is higher than 20, we have
      * to fetch multiple pages to get all caches.
@@ -84,6 +89,8 @@ public class SearchResult implements Parcelable {
         url = searchResult.url;
         viewstates = searchResult.viewstates;
         setTotalCountGC(searchResult.getTotalCountGC());
+        searchContext.clear();
+        searchContext.putAll(searchResult.searchContext);
     }
 
     /**
@@ -126,6 +133,8 @@ public class SearchResult implements Parcelable {
             in.readStringArray(viewstates);
         }
         setTotalCountGC(in.readInt());
+        searchContext.clear();
+        searchContext.putAll(in.readBundle(getClass().getClassLoader()));
     }
 
     /**
@@ -150,8 +159,8 @@ public class SearchResult implements Parcelable {
 
     @Override
     public void writeToParcel(final Parcel out, final int flags) {
-        out.writeStringArray(geocodes.toArray(new String[geocodes.size()]));
-        out.writeStringArray(filteredGeocodes.toArray(new String[filteredGeocodes.size()]));
+        out.writeStringArray(geocodes.toArray(new String[0]));
+        out.writeStringArray(filteredGeocodes.toArray(new String[0]));
         out.writeSerializable(error);
         out.writeString(url);
         if (viewstates == null) {
@@ -161,6 +170,7 @@ public class SearchResult implements Parcelable {
             out.writeStringArray(viewstates);
         }
         out.writeInt(getTotalCountGC());
+        out.writeBundle(searchContext);
     }
 
     @Override
@@ -210,6 +220,11 @@ public class SearchResult implements Parcelable {
         System.arraycopy(viewstates, 0, this.viewstates, 0, viewstates.length);
     }
 
+    @NonNull
+    public Bundle getSearchContext() {
+        return searchContext;
+    }
+
     public int getTotalCountGC() {
         return totalCountGC;
     }
@@ -256,6 +271,7 @@ public class SearchResult implements Parcelable {
     public void addAndPutInCache(@NonNull final Collection<Geocache> caches) {
         for (final Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
+            geocache.setSearchContext(searchContext);
         }
         DataStore.saveCaches(caches, EnumSet.of(SaveFlag.CACHE));
     }
@@ -297,6 +313,12 @@ public class SearchResult implements Parcelable {
             setViewstates(other.getViewstates());
             setTotalCountGC(other.getTotalCountGC());
         }
+
+        addSearchContext(other);
+    }
+
+    public void addSearchContext(final SearchResult other) {
+        searchContext.putAll(other.searchContext);
     }
 
     /**

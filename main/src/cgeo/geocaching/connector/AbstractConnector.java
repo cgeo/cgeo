@@ -6,16 +6,14 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
-import cgeo.geocaching.connector.capability.ISearchByFinder;
+import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
-import cgeo.geocaching.connector.capability.ISearchByKeyword;
-import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
@@ -279,11 +277,11 @@ public abstract class AbstractConnector implements IConnector {
     public final Collection<String> getCapabilities() {
         final List<String> list = new ArrayList<>();
         addCapability(list, ISearchByViewPort.class, R.string.feature_search_live_map);
-        addCapability(list, ISearchByKeyword.class, R.string.feature_search_keyword);
-        addCapability(list, ISearchByCenter.class, R.string.feature_search_center);
+        addCapability(list, GeocacheFilterType.NAME, R.string.feature_search_keyword);
+        addCapability(list, GeocacheFilterType.DISTANCE, R.string.feature_search_center);
         addCapability(list, ISearchByGeocode.class, R.string.feature_search_geocode);
-        addCapability(list, ISearchByOwner.class, R.string.feature_search_owner);
-        addCapability(list, ISearchByFinder.class, R.string.feature_search_finder);
+        addCapability(list, GeocacheFilterType.OWNER, R.string.feature_search_owner);
+        addCapability(list, GeocacheFilterType.LOG_ENTRY, R.string.feature_search_finder);
         if (supportsLogging()) {
             list.add(feature(R.string.feature_online_logging));
         }
@@ -306,6 +304,12 @@ public abstract class AbstractConnector implements IConnector {
         }
     }
 
+    private void addCapability(final List<String> capabilities, final GeocacheFilterType filterType, @StringRes final int featureResourceId) {
+        if (this instanceof ISearchByFilter && ((ISearchByFilter) this).getFilterCapabilities().contains(filterType)) {
+            capabilities.add(feature(featureResourceId));
+        }
+    }
+
     private static String feature(@StringRes final int featureResourceId) {
         return CgeoApplication.getInstance().getString(featureResourceId);
     }
@@ -315,8 +319,14 @@ public abstract class AbstractConnector implements IConnector {
     public List<UserAction> getUserActions(final UserAction.UAContext user) {
         final List<UserAction> actions = getDefaultUserActions();
 
-        if (this instanceof ISearchByOwner) {
-            actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.ic_menu_myplaces, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
+        if (this instanceof ISearchByFilter) {
+            final ISearchByFilter sbf = (ISearchByFilter) this;
+            if (sbf.getFilterCapabilities().contains(GeocacheFilterType.OWNER)) {
+                actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.marker_own, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
+            }
+            if (sbf.getFilterCapabilities().contains(GeocacheFilterType.LOG_ENTRY)) {
+                actions.add(new UserAction(R.string.user_menu_view_found, R.drawable.marker_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
+            }
         }
 
         actions.add(new UserAction(R.string.copy_to_clipboard, R.drawable.ic_menu_copy, context -> {

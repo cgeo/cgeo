@@ -39,10 +39,10 @@ import cgeo.geocaching.list.ListNameMemento;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.loaders.AbstractSearchLoader;
-import cgeo.geocaching.loaders.AbstractSearchLoader.CacheListLoaderType;
 import cgeo.geocaching.loaders.CoordsGeocacheListLoader;
 import cgeo.geocaching.loaders.FinderGeocacheListLoader;
 import cgeo.geocaching.loaders.KeywordGeocacheListLoader;
+import cgeo.geocaching.loaders.LiveFilterGeocacheListLoader;
 import cgeo.geocaching.loaders.NextPageGeocacheListLoader;
 import cgeo.geocaching.loaders.NullGeocacheListLoader;
 import cgeo.geocaching.loaders.OfflineGeocacheListLoader;
@@ -118,6 +118,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.util.Consumer;
 import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
@@ -144,6 +145,9 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
+    private static final int CACHE_LOADER_ID = 5; //arbitrary number, but must be fixed
+    private static final String EXTRAS_NEXTPAGE  = "extras_nextpage";
+
     private static final int MAX_LIST_ITEMS = 1000;
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
@@ -152,6 +156,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String STATE_GEOCACHE_FILTER = "currentGeocacheFilter";
     private static final String STATE_INVERSE_SORT = "currentInverseSort";
     private static final String STATE_LIST_TYPE = "currentListType";
+    private static final String STATE_TYPE_PARAMETERS = "currentTypeParameters";
     private static final String STATE_LIST_ID = "currentListId";
     private static final String STATE_MARKER_ID = "currentMarkerId";
     private static final String STATE_PREVENTASKFORDELETION = "preventAskForDeletion";
@@ -161,6 +166,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final String BUNDLE_ACTION_KEY = "afterLoadAction";
 
     private CacheListType type = null;
+    private final Bundle typeParameters = new Bundle();
     private Geopoint coords = null;
     private Geopoint targetCoords = null;
     private SearchResult search = null;
@@ -523,13 +529,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
 
         // get parameters
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
+        typeParameters.clear();
         if (extras != null) {
+            typeParameters.putAll(extras);
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
             targetCoords = extras.getParcelable(Intents.EXTRA_COORDS);
-        } else {
-            extras = new Bundle();
         }
         if (isInvokedFromAttachment()) {
             type = CacheListType.OFFLINE;
@@ -550,6 +556,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             currentCacheFilter = savedInstanceState.getParcelable(STATE_GEOCACHE_FILTER);
             currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
+            typeParameters.clear();
+            typeParameters.putAll(savedInstanceState.getBundle(STATE_TYPE_PARAMETERS));
             listId = savedInstanceState.getInt(STATE_LIST_ID);
             markerId = savedInstanceState.getInt(STATE_MARKER_ID);
             preventAskForDeletion = savedInstanceState.getBoolean(STATE_PREVENTASKFORDELETION);
@@ -568,7 +576,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             initActionBarSpinner();
         }
 
-        currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).initLoader(type.getLoaderId(), extras, this);
+        restartCacheLoader(false, null);
 
         // init
         if (CollectionUtils.isNotEmpty(cacheList)) {
@@ -595,6 +603,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         savedInstanceState.putParcelable(STATE_GEOCACHE_FILTER, currentCacheFilter);
         savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
+        savedInstanceState.putBundle(STATE_TYPE_PARAMETERS, typeParameters);
         savedInstanceState.putInt(STATE_LIST_ID, listId);
         savedInstanceState.putInt(STATE_MARKER_ID, markerId);
         savedInstanceState.putBoolean(STATE_PREVENTASKFORDELETION, preventAskForDeletion);
@@ -1271,8 +1280,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         if (listFooter == null) {
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
-            //listFooter.setClickable(true);
-            //listFooter.setOnClickListener(new MoreCachesListener());
             listFooterLine1 = listFooter.findViewById(R.id.more_caches_1);
             listFooterLine2 = listFooter.findViewById(R.id.more_caches_2);
             listView.addFooterView(listFooter);
@@ -1412,31 +1419,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        final Loader<SearchResult> loader = LoaderManager.getInstance(this).getLoader(type.getLoaderId());
-
-        //reload filter
-        final Bundle extras = new Bundle();
-
-        switch (type) {
-            case KEYWORD:
-                if (loader instanceof KeywordGeocacheListLoader) {
-                    extras.putString(Intents.EXTRA_KEYWORD, ((KeywordGeocacheListLoader) loader).keyword);
-                }
-                break;
-            case COORDINATE:
-            case ADDRESS:
-            case NEAREST:
-                break;
-            case OWNER:
-                if (loader instanceof OwnerGeocacheListLoader) {
-                    extras.putString(Intents.EXTRA_USERNAME, ((OwnerGeocacheListLoader) loader).username);
-                }
-                break;
-            default:
-                //do nothing
-        }
-        LoaderManager.getInstance(this).destroyLoader(type.getLoaderId());
-        currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).restartLoader(type.getLoaderId(), extras, this);
+        restartCacheLoader(false, null);
     }
 
     public void refreshStored(final List<Geocache> caches) {
@@ -1651,10 +1634,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             showProgress(true);
             showFooterLoadingCaches();
 
-            LoaderManager.getInstance(CacheListActivity.this).restartLoader(CacheListLoaderType.NEXT_PAGE.getLoaderId(), null, CacheListActivity.this);
-            // the loader for subsequent pages takes over - therefore the initial loader needs to be destroyed
-            LoaderManager.getInstance(CacheListActivity.this).destroyLoader(type.getLoaderId());
+            restartCacheLoader(true, null);
         }
+    }
+
+    private void restartCacheLoader(final boolean nextPage, final Consumer<Bundle> extrasModifier) {
+        final Bundle extras = new Bundle();
+        extras.putAll(typeParameters);
+        if (extrasModifier != null) {
+            extrasModifier.accept(extras);
+        }
+        extras.putBoolean(EXTRAS_NEXTPAGE, nextPage);
+        LoaderManager.getInstance(CacheListActivity.this).restartLoader(CACHE_LOADER_ID, extras, CacheListActivity.this);
     }
 
     private void hideLoading() {
@@ -1691,16 +1682,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             //do NOT reset filter!
         }
 
-        final Bundle extras = new Bundle();
-        extras.putSerializable(BUNDLE_ACTION_KEY, action);
-
         if (id == PseudoList.HISTORY_LIST.id) {
             type = CacheListType.HISTORY;
             if (previousListType != type) {
                 currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
             }
-            LoaderManager.getInstance(this).destroyLoader(CacheListType.OFFLINE.getLoaderId());
-            currentLoader = (AbstractSearchLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.HISTORY.getLoaderId(), extras, this);
+            restartCacheLoader(false, e -> e.putSerializable(BUNDLE_ACTION_KEY, action));
         } else {
             if (id == PseudoList.ALL_LIST.id) {
                 listId = id;
@@ -1719,9 +1706,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (previousListType != type) {
                 currentCacheFilter = new GeocacheFilterContext(type.filterContextType);
             }
-            LoaderManager.getInstance(this).destroyLoader(CacheListType.HISTORY.getLoaderId());
-            extras.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
-            currentLoader = (OfflineGeocacheListLoader) LoaderManager.getInstance(this).restartLoader(CacheListType.OFFLINE.getLoaderId(), extras, this);
+            restartCacheLoader(false, e -> {
+                e.putSerializable(BUNDLE_ACTION_KEY, action);
+                e.putAll(OfflineGeocacheListLoader.getBundleForList(listId));
+            });
 
             Settings.setLastDisplayedList(listId);
         }
@@ -1973,113 +1961,118 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public Loader<SearchResult> onCreateLoader(final int type, final Bundle extras) {
-        if (type >= CacheListLoaderType.values().length) {
-            throw new IllegalArgumentException("invalid loader type " + type);
+        if (type != CACHE_LOADER_ID || extras == null) {
+            throw new IllegalArgumentException("invalid loader type " + type + " or empty extras: " + extras);
         }
-        final CacheListLoaderType enumType = CacheListLoaderType.values()[type];
+        final boolean isNextPage = extras.getBoolean(EXTRAS_NEXTPAGE, false);
         AbstractSearchLoader loader = null;
         preventAskForDeletion = true;
-        switch (enumType) {
-            case OFFLINE:
-                // open either the requested or the last list
-                if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
-                    listId = extras.getInt(Intents.EXTRA_LIST_ID);
-                } else {
-                    listId = Settings.getLastDisplayedList();
-                }
-                if (listId == PseudoList.ALL_LIST.id) {
-                    title = res.getString(R.string.list_all_lists);
-                    markerId = EmojiUtils.NO_EMOJI;
-                } else if (listId <= StoredList.TEMPORARY_LIST.id) {
-                    listId = StoredList.STANDARD_LIST_ID;
-                    title = res.getString(R.string.stored_caches_button);
-                    markerId = EmojiUtils.NO_EMOJI;
-                } else {
-                    final StoredList list = DataStore.getList(listId);
-                    // list.id may be different if listId was not valid
-                    if (list.id != listId) {
-                        showToast(getString(R.string.list_not_available));
+
+        if (isNextPage) {
+            loader = new NextPageGeocacheListLoader(this, search);
+        } else {
+            switch (this.type) {
+                case OFFLINE:
+                    // open either the requested or the last list
+                    if (extras.containsKey(Intents.EXTRA_LIST_ID)) {
+                        listId = extras.getInt(Intents.EXTRA_LIST_ID);
+                    } else {
+                        listId = Settings.getLastDisplayedList();
                     }
-                    listId = list.id;
-                    title = list.title;
-                    markerId = list.markerId;
-                    preventAskForDeletion = list.preventAskForDeletion;
-                }
+                    if (listId == PseudoList.ALL_LIST.id) {
+                        title = res.getString(R.string.list_all_lists);
+                        markerId = EmojiUtils.NO_EMOJI;
+                    } else if (listId <= StoredList.TEMPORARY_LIST.id) {
+                        listId = StoredList.STANDARD_LIST_ID;
+                        title = res.getString(R.string.stored_caches_button);
+                        markerId = EmojiUtils.NO_EMOJI;
+                    } else {
+                        final StoredList list = DataStore.getList(listId);
+                        // list.id may be different if listId was not valid
+                        if (list.id != listId) {
+                            showToast(getString(R.string.list_not_available));
+                        }
+                        listId = list.id;
+                        title = list.title;
+                        markerId = list.markerId;
+                        preventAskForDeletion = list.preventAskForDeletion;
+                    }
 
-                loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
 
-                break;
-            case HISTORY:
-                title = res.getString(R.string.caches_history);
-                listId = PseudoList.HISTORY_LIST.id;
-                markerId = EmojiUtils.NO_EMOJI;
-                loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, currentInverseSort, offlineListLoadLimit);
-                break;
-            case NEAREST:
-                title = res.getString(R.string.caches_nearby);
-                markerId = EmojiUtils.NO_EMOJI;
-                loader = new CoordsGeocacheListLoader(this, coords);
-                break;
-            case COORDINATE:
-                title = coords.toString();
-                markerId = EmojiUtils.NO_EMOJI;
-                loader = new CoordsGeocacheListLoader(this, coords);
-                break;
-            case KEYWORD:
-                final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
-                markerId = EmojiUtils.NO_EMOJI;
-                title = listNameMemento.rememberTerm(keyword);
-                if (keyword != null) {
-                    loader = new KeywordGeocacheListLoader(this, keyword);
-                }
-                break;
-            case ADDRESS:
-                final String address = extras.getString(Intents.EXTRA_ADDRESS);
-                if (StringUtils.isNotBlank(address)) {
-                    title = listNameMemento.rememberTerm(address);
-                } else {
+                    break;
+                case HISTORY:
+                    title = res.getString(R.string.caches_history);
+                    listId = PseudoList.HISTORY_LIST.id;
+                    markerId = EmojiUtils.NO_EMOJI;
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, currentInverseSort, offlineListLoadLimit);
+                    break;
+                case NEAREST:
+                    title = res.getString(R.string.caches_nearby);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    loader = new CoordsGeocacheListLoader(this, coords);
+                    break;
+                case COORDINATE:
                     title = coords.toString();
-                }
-                markerId = EmojiUtils.NO_EMOJI;
-                loader = new CoordsGeocacheListLoader(this, coords);
-                break;
-            case FINDER:
-                final String username = extras.getString(Intents.EXTRA_USERNAME);
-                title = listNameMemento.rememberTerm(username);
-                markerId = EmojiUtils.NO_EMOJI;
-                if (username != null) {
-                    loader = new FinderGeocacheListLoader(this, username);
-                }
-                break;
-            case SEARCH_FILTER:
-                markerId = EmojiUtils.NO_EMOJI;
-                loader = new SearchFilterGeocacheListLoader(this, currentCacheFilter.get());
-                break;
-            case OWNER:
-                final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
-                title = listNameMemento.rememberTerm(ownerName);
-                markerId = EmojiUtils.NO_EMOJI;
-                if (ownerName != null) {
-                    loader = new OwnerGeocacheListLoader(this, ownerName);
-                }
-                break;
-            case MAP:
-                title = res.getString(R.string.map_map);
-                markerId = EmojiUtils.NO_EMOJI;
-                search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
-                replaceCacheListFromSearch();
-                loadCachesHandler.sendMessage(Message.obtain());
-                loader = new NullGeocacheListLoader(this, search);
-                break;
-            case NEXT_PAGE:
-                loader = new NextPageGeocacheListLoader(this, search);
-                break;
-            case POCKET:
-                final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
-                title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
-                markerId = EmojiUtils.NO_EMOJI;
-                loader = new PocketGeocacheListLoader(this, guid);
-                break;
+                    markerId = EmojiUtils.NO_EMOJI;
+                    loader = new CoordsGeocacheListLoader(this, coords);
+                    break;
+                case KEYWORD:
+                    final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    title = listNameMemento.rememberTerm(keyword);
+                    if (keyword != null) {
+                        loader = new KeywordGeocacheListLoader(this, keyword);
+                    }
+                    break;
+                case ADDRESS:
+                    final String address = extras.getString(Intents.EXTRA_ADDRESS);
+                    if (StringUtils.isNotBlank(address)) {
+                        title = listNameMemento.rememberTerm(address);
+                    } else {
+                        title = coords.toString();
+                    }
+                    markerId = EmojiUtils.NO_EMOJI;
+                    loader = new CoordsGeocacheListLoader(this, coords);
+                    break;
+                case FINDER:
+                    final String username = extras.getString(Intents.EXTRA_USERNAME);
+                    title = listNameMemento.rememberTerm(username);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    if (username != null) {
+                        loader = new FinderGeocacheListLoader(this, username);
+                    }
+                    break;
+                case SEARCH_FILTER:
+                    markerId = EmojiUtils.NO_EMOJI;
+                    loader = new SearchFilterGeocacheListLoader(this, currentCacheFilter.get());
+                    break;
+                case OWNER:
+                    final String ownerName = extras.getString(Intents.EXTRA_USERNAME);
+                    title = listNameMemento.rememberTerm(ownerName);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    if (ownerName != null) {
+                        loader = new OwnerGeocacheListLoader(this, ownerName);
+                    }
+                    break;
+                case MAP:
+                    title = res.getString(R.string.map_map);
+                    markerId = EmojiUtils.NO_EMOJI;
+                    search = (SearchResult) extras.get(Intents.EXTRA_SEARCH);
+                    replaceCacheListFromSearch();
+                    loadCachesHandler.sendMessage(Message.obtain());
+                    loader = new NullGeocacheListLoader(this, search);
+                    break;
+                case POCKET:
+                    final String guid = extras.getString(Intents.EXTRA_POCKET_GUID);
+                    title = listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
+                    markerId = EmojiUtils.NO_EMOJI;
+                    loader = new PocketGeocacheListLoader(this, guid);
+                    break;
+                default:
+                    //can never happen, makes Codacy happy
+                    break;
+            }
         }
         // if there is a title given in the activity start request, use this one instead of the default
         if (extras != null && StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
@@ -2090,11 +2083,19 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             loader.setAfterLoadAction(action);
         }
         if (loader != null) {
-            currentAddFilterCriteria = loader.getAdditionalFilterParameter();
+            if (loader instanceof LiveFilterGeocacheListLoader) {
+                currentAddFilterCriteria = ((LiveFilterGeocacheListLoader) loader).getAdditionalFilterParameter();
+            } else {
+                currentAddFilterCriteria = null;
+            }
         }
         updateTitle();
         showProgress(true);
         showFooterLoadingCaches();
+
+        if (loader == null) {
+            Log.w("LOADER IS NULL!!!");
+        }
 
         return loader;
     }

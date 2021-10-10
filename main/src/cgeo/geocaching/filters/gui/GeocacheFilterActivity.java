@@ -20,6 +20,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
@@ -284,7 +285,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private void initializeFilterAdd() {
-        final List<GeocacheFilterType> filterTypes = new ArrayList<>(Arrays.asList(GeocacheFilterType.values()));
+        final List<GeocacheFilterType> filterTypes = new ArrayList<>(
+            CollectionStream.of(GeocacheFilterType.values()).filter(GeocacheFilterType::displayToUser).toList());
         filterTypes.removeAll(INTERNAL_FILTER_TYPES_SET);
 
         Collections.sort(filterTypes, (left, right) -> TextUtils.COLLATOR.compare(left.getUserDisplayableName(), right.getUserDisplayableName()));

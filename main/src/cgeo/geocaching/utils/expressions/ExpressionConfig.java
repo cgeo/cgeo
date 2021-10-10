@@ -33,11 +33,12 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
         return result == null ? Collections.emptyList() : result;
     }
 
-    public void addToDefaultList(final String ... values) {
+    public ExpressionConfig addToDefaultList(final String ... values) {
         if (get(null) == null) {
             put(null, new ArrayList<>());
         }
         get(null).addAll(Arrays.asList(values));
+        return this;
     }
 
     public void putDefaultList(final List<String> list) {

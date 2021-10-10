@@ -258,7 +258,7 @@ public class CgeoApplicationTest extends CGeoTestCase {
     @MediumTest
     public void testSearchByUsername() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByUsername("blafoo");
+            final SearchResult search = GCParser.searchByUsername("blafoo", null, false);
             assertThat(search).isNotNull();
             // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.
             assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);

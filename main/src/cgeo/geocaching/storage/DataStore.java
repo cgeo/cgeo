@@ -4737,6 +4737,11 @@ public class DataStore {
     }
 
     @NonNull
+    public static String[] getSuggestionsFinderName(final String input) {
+        return getSuggestions(dbTableLogs, "author", input);
+    }
+
+    @NonNull
     public static String[] getSuggestionsTrackableCode(final String input) {
         return getSuggestions(dbTableTrackables, "tbcode", input);
     }

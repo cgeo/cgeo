@@ -1,19 +1,14 @@
 package cgeo.geocaching.loaders;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.filters.core.GeocacheFilter;
-import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
 import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.filters.core.OwnerGeocacheFilter;
-import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-public class OwnerGeocacheListLoader extends AbstractSearchLoader {
+public class OwnerGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @NonNull public final String username;
 
@@ -23,19 +18,14 @@ public class OwnerGeocacheListLoader extends AbstractSearchLoader {
     }
 
     @Override
+    public GeocacheFilterType getFilterType() {
+        return GeocacheFilterType.OWNER;
+    }
+
+    @Override
     public IGeocacheFilter getAdditionalFilterParameter() {
         final OwnerGeocacheFilter ownerFilter = (OwnerGeocacheFilter) GeocacheFilterType.OWNER.create();
         ownerFilter.getStringFilter().setTextValue(username);
         return ownerFilter;
     }
-
-    @Override
-    public SearchResult runSearch() {
-        //use filter search instead of dedicated owner search
-        final GeocacheFilter useFilter = GeocacheFilterContext.getForType(LIVE).and(getAdditionalFilterParameter());
-
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(GeocacheFilterType.OWNER),
-            connector -> connector.searchByFilter(useFilter));
-    }
-
 }

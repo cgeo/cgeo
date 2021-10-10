@@ -35,6 +35,9 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.filters.core.GeocacheFilterType.LOG_ENTRY;
+
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 
@@ -44,6 +47,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import static java.lang.Boolean.FALSE;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ArrayNode;
@@ -127,11 +131,11 @@ public class GCMap {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
 
-            //TODO: quickfix for release. Later, "searchByViewport" should be deprecated as a whole and replaced with "searchByFilter"
-            final GCWebAPI.WebApiSearch search = createSearchForFilter(GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE), null);
-            if (search == null) {
+            final Pair<GCWebAPI.WebApiSearch, SearchResult> searchPair = createSearchForFilter(GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE), null);
+            if (searchPair == null || searchPair.first == null) {
                 return new SearchResult();
             }
+            final GCWebAPI.WebApiSearch search = searchPair.first;
             search.setBox(viewport);
 
             final SearchResult searchResult = GCWebAPI.searchCaches(search, false);
@@ -146,15 +150,18 @@ public class GCMap {
 
     @NonNull
     public static SearchResult searchByFilter(@NonNull final GeocacheFilter filter, final IConnector connector) {
-        final GCWebAPI.WebApiSearch search = createSearchForFilter(filter, connector);
+        final Pair<GCWebAPI.WebApiSearch, SearchResult> search = createSearchForFilter(filter, connector);
         if (search == null) {
             return new SearchResult();
         }
+        if (search.first == null) {
+            return search.second;
+        }
 
-        return GCWebAPI.searchCaches(search, true);
+        return GCWebAPI.searchCaches(search.first, true);
     }
 
-    private static GCWebAPI.WebApiSearch createSearchForFilter(@NonNull final GeocacheFilter filter, final IConnector connector) {
+    private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(@NonNull final GeocacheFilter filter, final IConnector connector) {
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
         search.setPage(200, 0);
@@ -163,10 +170,24 @@ public class GCMap {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
                 return null; //no need to search if connector is filtered out itself
             }
+            //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
+            if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
+                return new Pair<>(null, searchByFinder(((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
+            }
             fillForBasicFilter(baseFilter, search);
         }
-        return search;
+        return new Pair<>(search, null);
 
+    }
+
+    private static SearchResult searchByFinder(final String userName, final GeocacheFilter filter) {
+        final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
+        final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filters, StatusGeocacheFilter.class);
+        final boolean noFoundOwn = statusFilter != null && FALSE.equals(statusFilter.getStatusFound()) && FALSE.equals(statusFilter.getStatusOwned());
+
+        final TypeGeocacheFilter typeFilter = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
+        final CacheType ct = typeFilter != null && typeFilter.getValues().size() == 1 ? typeFilter.getValues().iterator().next() : null;
+        return GCParser.searchByUsername(userName, ct, noFoundOwn);
     }
 
     private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
@@ -220,7 +241,7 @@ public class GCMap {
                 final StatusGeocacheFilter statusFilter = (StatusGeocacheFilter) basicFilter;
                 search.setStatusFound(statusFilter.getStatusFound());
                 search.setStatusOwn(statusFilter.getStatusOwned());
-                search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? Boolean.FALSE : null));
+                search.setStatusEnabled(statusFilter.isExcludeDisabled() ? Boolean.TRUE : (statusFilter.isExcludeActive() ? FALSE : null));
                 break;
             case HIDDEN:
                 final HiddenGeocacheFilter hiddenFilter = (HiddenGeocacheFilter) basicFilter;

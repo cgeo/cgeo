@@ -1,13 +1,14 @@
 package cgeo.geocaching.loaders;
 
-import cgeo.geocaching.SearchResult;
-import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.IGeocacheFilter;
+import cgeo.geocaching.filters.core.LogEntryGeocacheFilter;
 
 import android.app.Activity;
 
 import androidx.annotation.NonNull;
 
-public class FinderGeocacheListLoader extends AbstractSearchLoader {
+public class FinderGeocacheListLoader extends LiveFilterGeocacheListLoader {
 
     @NonNull public final String username;
 
@@ -17,9 +18,14 @@ public class FinderGeocacheListLoader extends AbstractSearchLoader {
     }
 
     @Override
-    public SearchResult runSearch() {
-        return nonEmptyCombineActive(ConnectorFactory.getSearchByFinderConnectors(),
-            connector -> connector.searchByFinder(username));
+    public GeocacheFilterType getFilterType() {
+        return GeocacheFilterType.LOG_ENTRY;
     }
 
+    @Override
+    public IGeocacheFilter getAdditionalFilterParameter() {
+        final LogEntryGeocacheFilter foundByFilter = (LogEntryGeocacheFilter) GeocacheFilterType.LOG_ENTRY.create();
+        foundByFilter.setFoundByUser(username);
+        return foundByFilter;
+    }
 }

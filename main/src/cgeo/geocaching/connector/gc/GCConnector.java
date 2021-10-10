@@ -11,13 +11,9 @@ import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
-import cgeo.geocaching.connector.capability.ISearchByFinder;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
-import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
-import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
@@ -59,7 +55,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -393,10 +389,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         return 2500;
     }
 
-    @Override
-    public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        return GCParser.searchByCoords(center);
-    }
 
     @Override
     public boolean supportsFavoritePoints(@NonNull final Geocache cache) {
@@ -516,11 +508,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByKeyword(@NonNull final String keyword) {
-        return GCParser.searchByKeyword(keyword);
-    }
-
-    @Override
     public int getUsernamePreferenceKey() {
         return R.string.pref_username;
     }
@@ -545,16 +532,6 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         }
         actions.add(new UserAction(R.string.user_menu_send_email, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), "https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
         return actions;
-    }
-
-    @Override
-    public SearchResult searchByOwner(@NonNull final String username) {
-        return GCParser.searchByOwner(username);
-    }
-
-    @Override
-    public SearchResult searchByFinder(@NonNull final String username) {
-        return GCParser.searchByUsername(username);
     }
 
     @Override
