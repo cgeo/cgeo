@@ -1653,13 +1653,7 @@ public class Settings {
     }
 
     public static boolean useHardwareAcceleration() {
-        return outdatedPhoneModelOrSdk() ? HwAccel.hwAccelShouldBeEnabled() :
-                getBoolean(R.string.pref_hardware_acceleration, HwAccel.hwAccelShouldBeEnabled());
-    }
-
-    static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
-        putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
-        storePhoneModelAndSdk();
+        return HwAccel.hwAccelShouldBeEnabled();
     }
 
     private static boolean outdatedPhoneModelOrSdk() {
