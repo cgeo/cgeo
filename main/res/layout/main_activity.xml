@@ -35,6 +35,7 @@
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoFindOnMap"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -65,7 +66,8 @@
                 android:layout_width="0dip"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:onClick="cgeoFindByOffline">
 
                 <TextView
                     android:id="@+id/offline_count"
@@ -93,6 +95,7 @@
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoSearch"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -107,6 +110,7 @@
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoPoint"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
@@ -121,6 +125,7 @@
 
             <LinearLayout
                 style="@style/icon_mainscreen_cell"
+                android:onClick="cgeoFilter"
                 tools:ignore="UseCompoundDrawables">
 
                 <ImageView
