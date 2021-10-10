@@ -51,4 +51,6 @@
         <ignore path="res/values/vpi__colors.xml" />
         <ignore path="res/values-*/strings.xml" />
     </issue>
+
+    <issue id="MissingDefaultResource" severity="informational"/>
 </lint>
