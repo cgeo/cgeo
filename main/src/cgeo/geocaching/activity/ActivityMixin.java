@@ -3,7 +3,6 @@ package cgeo.geocaching.activity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -13,7 +12,6 @@ import android.view.ContextThemeWrapper;
 import android.view.Gravity;
 import android.view.Window;
 import android.view.WindowManager;
-import android.view.WindowManager.LayoutParams;
 import android.widget.EditText;
 import android.widget.Toast;
 
@@ -155,13 +153,6 @@ public final class ActivityMixin {
         if (keepScreenOn) {
             window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         }
-        if (Settings.useHardwareAcceleration()) {
-            enableHardwareAcceleration(window);
-        }
-    }
-
-    private static void enableHardwareAcceleration(final Window window) {
-        window.addFlags(LayoutParams.FLAG_HARDWARE_ACCELERATED);
     }
 
     public static void invalidateOptionsMenu(final Activity activity) {
