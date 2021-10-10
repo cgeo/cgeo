@@ -32,6 +32,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
@@ -229,73 +230,85 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        // don't call the super implementation with the layout argument, as that would set the wrong theme
-        super.onCreate(savedInstanceState);
+        try (ContextLogger cLog = new ContextLogger(true, "MainActivity.onCreate")) {
+           // don't call the super implementation with the layout argument, as that would set the wrong theme
+            super.onCreate(savedInstanceState);
 
-        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+            backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+            cLog.add("bu");
 
-        //check database
-        final String errorMsg = DataStore.initAndCheck(false);
-        if (errorMsg != null) {
-            DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
-        }
-
-        binding = MainActivityBinding.inflate(getLayoutInflater());
-
-        // init BottomNavigationController to add the bottom navigation to the layout
-        setContentView(binding.getRoot());
-
-        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
-            // If we had been open already, start from the last used activity.
-            finish();
-            return;
-        }
-
-        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
-
-        Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
-
-        PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
-            @Override
-            protected void execute() {
-                PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
-                    // TODO: go directly into execute if the device api level is below 26
-                    @Override
-                    public void execute() {
-                        final Sensors sensors = Sensors.getInstance();
-                        sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-                        sensors.setupDirectionObservable();
-
-                        // Attempt to acquire an initial location before any real activity happens.
-                        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
-                    }
-                });
+            //check database
+            final String errorMsg = DataStore.initAndCheck(false);
+            if (errorMsg != null) {
+                DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
             }
-        });
+            cLog.add("ds");
 
-        init();
+            binding = MainActivityBinding.inflate(getLayoutInflater());
 
-        LocalStorage.initGeocacheDataDir();
-        if (LocalStorage.isRunningLowOnDiskSpace()) {
-            SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
+            // init BottomNavigationController to add the bottom navigation to the layout
+            setContentView(binding.getRoot());
+
+            if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+                // If we had been open already, start from the last used activity.
+                finish();
+                return;
+            }
+
+            setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
+
+            Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
+
+            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
+                @Override
+                protected void execute() {
+                    PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
+                        // TODO: go directly into execute if the device api level is below 26
+                        @Override
+                        public void execute() {
+                            final Sensors sensors = Sensors.getInstance();
+                            sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+                            sensors.setupDirectionObservable();
+
+                            // Attempt to acquire an initial location before any real activity happens.
+                            sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+                        }
+                    });
+                }
+            });
+            cLog.add("ph");
+
+            init();
+            cLog.add("init");
+
+            LocalStorage.initGeocacheDataDir();
+            if (LocalStorage.isRunningLowOnDiskSpace()) {
+                SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
+            }
+            cLog.add("ls");
+
+            confirmDebug();
+
+            binding.infoNotloggedin.setOnClickListener(v ->
+                SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+
+            binding.locationArea.setOnClickListener(v -> openNavSettings());
+
+            //do file migrations if necessary
+            LocalStorage.migrateLocalStorage(this);
+            cLog.add("mls");
+
+            //sync map Theme folder
+            RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+            cLog.add("rth");
+
+            // automated update check
+            DownloaderUtils.checkForRoutingTileUpdates(this);
+            cLog.add("rtu");
+
+            DownloaderUtils.checkForMapUpdates(this);
+            cLog.add("mu");
         }
-
-        confirmDebug();
-
-        binding.infoNotloggedin.setOnClickListener(v ->
-            SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
-
-        binding.locationArea.setOnClickListener(v -> openNavSettings());
-
-        //do file migrations if necessary
-        LocalStorage.migrateLocalStorage(this);
-
-        //sync map Theme folder
-        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-
-        // automated update check
-        DownloaderUtils.checkForRoutingTileUpdates(this);
-        DownloaderUtils.checkForMapUpdates(this);
     }
 
     private void init() {
