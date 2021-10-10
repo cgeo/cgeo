@@ -52,7 +52,7 @@ public class InstallWizardActivity extends AppCompatActivity {
         WIZARDMODE_RETURNING(1),
         WIZARDMODE_MIGRATION(2);
 
-        public int id;
+        public final int id;
 
         WizardMode(final int id) {
             this.id = id;

@@ -140,9 +140,9 @@ public class EmojiUtils {
     private static final Map<Integer, EmojiPaint> EMOJI_PAINT_CACHE_PER_SIZE = new HashMap<>();
 
     private static class EmojiSet {
-        public int tabSymbol;
+        public final int tabSymbol;
         public int remaining;
-        public int[] symbols;
+        public final int[] symbols;
 
         EmojiSet(final int tabSymbol, final int[] symbols) {
             this.tabSymbol = tabSymbol;

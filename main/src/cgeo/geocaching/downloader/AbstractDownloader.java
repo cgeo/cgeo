@@ -20,14 +20,14 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 public abstract class AbstractDownloader {
-    public Download.DownloadType offlineMapType;
+    public final Download.DownloadType offlineMapType;
     public Download.DownloadType companionType = null;
-    public Uri mapBase;
-    public String mapSourceName;
+    public final Uri mapBase;
+    public final String mapSourceName;
     public String mapSourceInfo;
-    public String projectUrl;
-    public String likeItUrl;
-    public PersistableFolder targetFolder;
+    public final String projectUrl;
+    public final String likeItUrl;
+    public final PersistableFolder targetFolder;
     public static final String oneDirUp = CgeoApplication.getInstance().getString(R.string.downloadmap_onedirup);
     public String forceExtension = "";
     public boolean useCompanionFiles = true; // store source info (uri etc.) in companion files (true) or use date/timestamp and identical uri only (false)?
