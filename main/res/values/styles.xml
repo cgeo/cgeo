@@ -89,22 +89,6 @@
         <item name="android:textColor">@color/colorText</item>
     </style>
 
-    <style name="action_bar_action" parent="actionBarStyle">
-        <item name="android:layout_width">@dimen/actionbar_height</item>
-        <item name="android:layout_height">@dimen/actionbar_height</item>
-        <item name="android:padding">2dip</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:focusable">true</item>
-        <item name="android:src">@drawable/cgeo_actionbar_squircle</item>
-        <item name="android:tint">@color/colorTextActionBar</item>
-    </style>
-
-    <style name="action_bar_separator">
-        <item name="android:layout_width">@dimen/actionbar_separator_width</item>
-        <item name="android:layout_height">@dimen/actionbar_separator_height</item>
-        <item name="android:background">@color/colorSeparator</item>
-    </style>
-
     <style name="action_bar_title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_height">wrap_content</item>
