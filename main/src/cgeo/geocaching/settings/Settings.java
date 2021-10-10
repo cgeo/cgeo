@@ -1652,10 +1652,6 @@ public class Settings {
         putStringList(R.string.pref_caches_history, history);
     }
 
-    public static boolean useHardwareAcceleration() {
-        return HwAccel.hwAccelShouldBeEnabled();
-    }
-
     private static boolean outdatedPhoneModelOrSdk() {
         return !StringUtils.equals(PHONE_MODEL_AND_SDK, getString(R.string.pref_phone_model_and_sdk, null));
     }
