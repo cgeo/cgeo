@@ -48,8 +48,8 @@ public class MfMapView extends MapView {
         if (getHeight() > 0) {
 
             try {
-                final LatLong low = mercatorFromPixels(center.x, center.y - getHeight() / 2, mapSize);
-                final LatLong high = mercatorFromPixels(center.x, center.y + getHeight() / 2, mapSize);
+                final LatLong low = mercatorFromPixels(center.x, center.y - getHeight() / 2.0, mapSize);
+                final LatLong high = mercatorFromPixels(center.x, center.y + getHeight() / 2.0, mapSize);
 
                 span = Math.abs(high.latitude - low.latitude);
             } catch (final IllegalArgumentException ex) {
@@ -70,8 +70,8 @@ public class MfMapView extends MapView {
 
         if (getWidth() > 0) {
             try {
-                final LatLong low = mercatorFromPixels(center.x - getWidth() / 2, center.y, mapSize);
-                final LatLong high = mercatorFromPixels(center.x + getWidth() / 2, center.y, mapSize);
+                final LatLong low = mercatorFromPixels(center.x - getWidth() / 2.0, center.y, mapSize);
+                final LatLong high = mercatorFromPixels(center.x + getWidth() / 2.0, center.y, mapSize);
 
                 span = Math.abs(high.longitude - low.longitude);
             } catch (final IllegalArgumentException ex) {
