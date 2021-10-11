@@ -218,7 +218,6 @@
     <string name="caches_sort_favorites">Uppáhalds</string>
     <string name="caches_sort_favorites_ratio">Uppáhalds [%]</string>
     <string name="caches_sort_name">Nafn</string>
-    <string name="caches_sort_geocode">Geokóði</string>
     <string name="caches_sort_rating">Einkunnagjöf</string>
     <string name="caches_sort_vote">Gefa einkunn</string>
     <string name="caches_sort_date_hidden">Hvenær komið fyrir</string>
@@ -429,7 +428,6 @@
     <string name="cache_favpoint_not_on">Þessi kassi er ekki einn af þínum uppáhalds.</string>
     <string name="cache_list_select_last">Síðasta val</string>
     <string name="cache_images">Myndir</string>
-    <string name="cache_waypoints_add">Bæta við vegpunkti</string>
     <string name="cache_hint">Vísbending</string>
     <string name="cache_hint_not_available">Engin vísbending í boði</string>
     <string name="cache_logs">Færslubók</string>
@@ -462,7 +460,6 @@
     <string name="cache_status_archived">Vistað</string>
     <string name="cache_status_disabled">Óvirkt</string>
     <string name="cache_status_premium">Aðeins fyrir Premium Members</string>
-    <string name="cache_geocode">Geokóði</string>
     <string name="cache_name">Nafn</string>
     <string name="cache_type">Tegund</string>
     <string name="cache_size">Stærð</string>
@@ -532,13 +529,9 @@
     <string name="map_theme_select">Velja kortaþema</string>
     <string name="map_select_multiple_items">Velja atriði</string>
     <!-- search -->
-    <string name="search_bar_desc">Kassar (geokóði, leitarorð), Ferðalangar (TB kóði)</string>
     <string name="search_coordinates_button">Leita eftir hnitum</string>
     <string name="search_address">Heimilisfang</string>
     <string name="search_address_button">Leita eftir heimilisfangi</string>
-    <string name="search_geo">Geokóði</string>
-    <string name="search_geo_button">Leita eftir geokóða</string>
-    <string name="search_kw">Leitarorð</string>
     <string name="search_kw_prefill">Leitarorð</string>
     <string name="search_kw_button">Leita eftir leitarorðum</string>
     <string name="search_hbu_prefill">Eigandi</string>
@@ -678,10 +671,6 @@
     </plurals>
     <!-- various -->
     <string name="clipboard_copy_ok">Afritað á klemmuspjaldið</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s uppáhalds</item>
-        <item quantity="other">%s uppáhalds</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo flýtileið</string>
     <string name="create_shortcut">Búa til flýtileið</string>
