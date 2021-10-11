@@ -254,7 +254,6 @@
     <string name="err_trackable_no_preference_activity">Atvainojiet, nevaru atrast piemērotus uzstādījumus ekrānam.</string>
     <string name="confirm_unsaved_changes_title">Izmaiņas nav saglabātas</string>
     <string name="confirm_discard_wp_changes">Vai atsaukt Starpposma izmaiņas?</string>
-    <string name="err_request_popup_info">c:Geo neizdevās iegūt slēpņa informāciju.</string>
     <string name="warn_log_load_additional_data">c:geo nevarēja ielādēt papildu datus (ceļotāji/favorītpunkti) ieraksta veikšanai.</string>
     <string name="more_information">Vairāk informācijas</string>
     <string name="undo">Atcelt</string>
@@ -597,9 +596,6 @@
     <string name="init_create_memory_dump">Izveidot atmiņas izrakstu</string>
     <string name="init_memory_dump">Atmiņas izraksts</string>
     <string name="init_memory_dumped">Atmiņas izraksts %s</string>
-    <string name="init_hardware_acceleration_title">Aparatūras paātrināta renderēšana</string>
-    <string name="init_hardware_acceleration_note">Aparatūriska paātrināšana grafiskos elementus uz ekrāna renderē ātrāk. Taču dažās Android ierīcēs šis režīms var radīt kļūdas, un teksti var parādīties izplūduši (īpaši rakstzīmes treknrakstā). Atspējo aparatūras paātrināšanu, ja tas tas notiek tavā ierīcē.</string>
-    <string name="init_hardware_acceleration">Iespējot aparatūras paātrināšanu</string>
     <string name="settings_open_website">Atvērt vietni</string>
     <string name="settings_open_geokretymap_website">Atvērt GeoKretyMap.org mājaslapu</string>
     <string name="settings_settings">Iestatījumi</string>
@@ -1317,11 +1313,6 @@ importēti %1$d slēpņi no %2$s</item>
     </plurals>
     <!-- various -->
     <string name="clipboard_copy_ok">Iekopēts starpliktuvē</string>
-    <plurals name="favorite_points">
-        <item quantity="zero">%s izlases</item>
-        <item quantity="one">%s izlases</item>
-        <item quantity="other">%s favorīti</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo saīsne</string>
     <string name="create_shortcut">Izveidot saīsni</string>
