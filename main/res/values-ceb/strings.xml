@@ -207,7 +207,6 @@
     <string name="err_trackable_no_preference_activity">Pasayloa, dili makakita og usa ka angay nga gusto nga screen.</string>
     <string name="confirm_unsaved_changes_title">Mga kausaban nga wala gi-save</string>
     <string name="confirm_discard_wp_changes">Ipangsalikway ang mga kausaban sa waypoint nga wala gisave?</string>
-    <string name="err_request_popup_info">Napakyas sa pagkuha og impormasyon sa popup nga cache ang c:geo.</string>
     <!-- location service -->
     <string name="loc_last">Ang kinalasan na nahibaloan</string>
     <string name="loc_fused">Nasagol</string>
@@ -449,9 +448,6 @@
     <string name="init_force_orientation_sensor">Gigamit ang sensor sa orientasyon</string>
     <string name="init_create_memory_dump">Paghimo og memory dump</string>
     <string name="init_memory_dumped">Memory dumped sa %s</string>
-    <string name="init_hardware_acceleration_title">Gipaspasan ang paghatag sa hardware</string>
-    <string name="init_hardware_acceleration_note">Ang pagpaspas sa hardware naghatag sa mga graphical nga elemento nga mas paspas sa screen. Apan sa pipila ka mga gamit ang sistema sa pag-operate sa Android adunay mga bug ug pipila ka mga teksto mahimong makita nga hanap (mga bold nga mga karakter). Likay sa hardware acceleration kung kini mahitabo kanimo.</string>
-    <string name="init_hardware_acceleration">Pag-enable sa accelaration sa hardware</string>
     <string name="settings_open_website">Pag-abli og website</string>
     <string name="settings_open_geokretymap_website">Pag-abli sa website sa GeoKrety.org</string>
     <string name="settings_settings">Mga Setting</string>
@@ -1067,10 +1063,6 @@
     <string name="tts_oclock">%s alas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Gikopya ngadtu sa clipboard</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s paborito</item>
-        <item quantity="other">%s mga paborito</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo laktoranan</string>
     <string name="create_shortcut">Maghimo og laktoranan</string>
