@@ -135,12 +135,12 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
                         final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
                         if (count >= 0) {
-                            userFoundCount.append(activity.getString(R.string.user_finds, count));
+                            userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
 
                             if (Settings.isDisplayOfflineLogsHomescreen()) {
                                 final int offlinefounds = DataStore.getFoundsOffline(conn);
                                 if (offlinefounds > 0) {
-                                    userFoundCount.append(" + ").append(activity.getString(R.string.user_finds_offline, offlinefounds));
+                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
                                 }
                             }
                         }
