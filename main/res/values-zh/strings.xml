@@ -261,7 +261,6 @@
     <string name="err_trackable_no_preference_activity">抱歉，找不到合适的首选项屏幕。</string>
     <string name="confirm_unsaved_changes_title">未保存的更改</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
-    <string name="err_request_popup_info">c:geo 获取藏点弹出信息失败。</string>
     <string name="warn_log_load_additional_data">c:geo 无法加载用于记录日志的额外数据 （可追踪物、收藏点）</string>
     <string name="more_information">更多信息</string>
     <string name="undo">撤消</string>
@@ -669,9 +668,6 @@
     <string name="init_memory_dump">内存转存</string>
     <string name="init_memory_dumped">内存转存到 %s</string>
     <string name="init_please_wait">请等待…</string>
-    <string name="init_hardware_acceleration_title">硬件加速渲染</string>
-    <string name="init_hardware_acceleration_note">硬件加速使图形元素在屏幕上变得更快。 然而，在某些设备上，安卓操作系统包含 bug，某些文本可能显得模糊 (尤其是粗体字符)。 如果这发生在您身上，请禁用硬件加速。</string>
-    <string name="init_hardware_acceleration">启用硬件加速</string>
     <string name="settings_open_website">打开网站</string>
     <string name="settings_open_geokretymap_website">打开 GeoKretyMap.org 网站</string>
     <string name="settings_settings">设置</string>
