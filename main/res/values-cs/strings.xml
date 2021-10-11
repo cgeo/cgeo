@@ -297,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
     <string name="confirm_discard_changes">Zahodit neuložené změny?</string>
     <string name="confirm_discard_wp_changes">Zahodit neuložené změny trasových bodů?</string>
-    <string name="err_request_popup_info">c:geo se nepodařilo otevřít informace o kešce.</string>
     <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
     <string name="more_information">Další informace</string>
     <string name="undo">Zpět</string>
@@ -485,7 +484,6 @@
         <item quantity="many">%1$d položek</item>
         <item quantity="other">%1$d položek</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Odstranit</string>
     <string name="cache_filter_storage_clear_button">Vyčistit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
@@ -902,9 +900,6 @@
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
     <string name="init_please_wait">Čekejte prosím…</string>
-    <string name="init_hardware_acceleration_title">Hardwarově akcelerované vykreslování</string>
-    <string name="init_hardware_acceleration_note">S hardwarovou akcelerací se uživatelské rozhraní vykreslí rychleji. Operační systém Android však na některých zařízeních obsahuje chyby a některé části textu mohou být rozmazané (zejména tučné znaky). Pokud zaznamenáváš potíže, vypni hardwarovou akceleraci.</string>
-    <string name="init_hardware_acceleration">Povolit hardwarovou akceleraci</string>
     <string name="settings_open_website">Otevřít webovou stránku</string>
     <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
     <string name="settings_settings">Nastavení</string>
@@ -1148,6 +1143,7 @@
     <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Skrýt navštívené trasové body</string>
     <string name="cache_waypoints_remove_original_waypoint">Trasový bod zkopírován ze schránky do této kešky.\n\nOdstranit původní trasový bod?</string>
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
@@ -1419,7 +1415,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
-    <string name="search_bar_desc">Kešky (geokód, klíčové slovo), sledovatelné předměty (kód TB)</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
@@ -1881,12 +1876,6 @@
         <item quantity="many">před %d dny</item>
         <item quantity="other">před %d dny</item>
     </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s oblíbená</item>
-        <item quantity="few">%s oblíbené</item>
-        <item quantity="many">%s oblíbených</item>
-        <item quantity="other">%s oblíbených</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
     <string name="create_shortcut">Vytvořit zástupce</string>
@@ -2084,6 +2073,7 @@
     <string name="download_confirmation">%1$sStáhnout soubor \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Byly nalezeny aktualizace:\n%1$s\n\nChcete aktualizovat?%2$s</string>
     <string name="download_warning">To může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
+    <string name="download_error">Stažení se nezdařilo s chybou #%d</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
     <string name="downloadmap_onedirup">(o úroveň výš)</string>
