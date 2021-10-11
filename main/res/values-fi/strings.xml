@@ -297,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
     <string name="confirm_discard_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
-    <string name="err_request_popup_info">c:geo ei pystynyt lataamaan kätkön popupin tietoja.</string>
     <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
     <string name="more_information">Lisätietoja</string>
     <string name="undo">Kumoa</string>
@@ -481,7 +480,6 @@
         <item quantity="one">%1$d kohde</item>
         <item quantity="other">%1$d kohdetta</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Lataa</string>
     <string name="cache_filter_storage_delete_button">Poista</string>
     <string name="cache_filter_storage_clear_button">Tyhjennä</string>
     <string name="cache_filter_storage_load_delete_title">Lataa tai poista olemassa oleva suodatin</string>
@@ -898,9 +896,6 @@
     <string name="init_memory_dump">Muistivedos</string>
     <string name="init_memory_dumped">Muistivedos luotu %s</string>
     <string name="init_please_wait">Hetkinen…</string>
-    <string name="init_hardware_acceleration_title">Grafiikan parannus</string>
-    <string name="init_hardware_acceleration_note">Laitteistokiihdytys esittää graafisia elementtejä nopeammin. Kuitenkin jotkut Android-laitteet sisältävät bugin, joka näyttää tekstit epäselvinä (huomattavan lihavoidut merkit). Ota laitteistokiihdytys pois käytöstä, jos tämä tapahtuu sinulle.</string>
-    <string name="init_hardware_acceleration">Mahdollista laitteistokiihdytys</string>
     <string name="settings_open_website">Avaa sivusto</string>
     <string name="settings_open_geokretymap_website">Avaa GeoKretyMap.org nettisivu</string>
     <string name="settings_settings">Asetukset</string>
@@ -1123,10 +1118,12 @@
     <string name="cache_images">Kuvat</string>
     <string name="cache_advanced">Lisäasetukset</string>
     <string name="cache_waypoints">Reittipisteet</string>
+    <string name="cache_variables">Muuttujat</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Reittipisteet (%d)</string>
     <string name="cache_waypoints_add">Lisää reittipiste</string>
     <string name="cache_waypoints_add_currentLocation">Lisää nykyinen sijainti</string>
     <string name="cache_waypoints_add_fromclipboard">Liitä leikepöydältä</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Piilota vieraillut reittipisteet</string>
     <string name="cache_waypoints_remove_original_waypoint">Reittipiste on nyt liitetty tähän kätköön leikepöydältä. \n\nPoistetaanko alkuperäinen reittipiste?</string>
     <string name="cache_hint">Vihje</string>
     <string name="cache_hint_not_available">Ei vihjettä</string>
@@ -1396,7 +1393,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
     <!-- search -->
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
-    <string name="search_bar_desc">Kätköt (geokoodi, hakusana), matkaajat (TB-koodi)</string>
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_coordinates_button">Hae koordinaattien avulla</string>
     <string name="search_address">Osoite</string>
@@ -1846,10 +1842,6 @@
         <item quantity="one">%d päivä sitten</item>
         <item quantity="other">%d päivää sitten</item>
     </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s suosikki</item>
-        <item quantity="other">%s suosikkia</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo pikakuvake</string>
     <string name="create_shortcut">Luo pikakuvake</string>
@@ -2027,10 +2019,11 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
+    <string name="download_error">Lataus epäonnistui virheellä #%d</string>
     <string name="downloadmap_handling">Itse lataus käsitellään taustalla järjestelmäsi latauksenhallinnan kautta. Sinun pitäisi nähdä ilmoitus heti kun lataus alkaa (tämä voi viedä jonkin aikaa).</string>
     <string name="button_continue">Jatka</string>
     <string name="downloadmap_onedirup">(yksi taso ylös)</string>
