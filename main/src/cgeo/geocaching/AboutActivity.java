@@ -222,7 +222,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
             final String changelogBase = FileUtils.getChangelogMaster(activity);
             final String changelogBugfix = FileUtils.getChangelogRelease(activity);
-            if (BranchDetectionHelper.FROM_BRANCH_RELEASE == 1) {
+            if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
                 markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") +  changelogBugfix);
                 markwon.setMarkdown(binding.changelogRelease, "## " + BranchDetectionHelper.FEATURE_VERSION_NAME + "\n\n" + changelogBase);
@@ -455,4 +455,3 @@ public class AboutActivity extends TabbedViewPagerActivity {
     }
 
 }
-
