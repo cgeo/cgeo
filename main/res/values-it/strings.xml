@@ -296,7 +296,6 @@
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
     <string name="confirm_discard_changes">Scartare le modifiche non salvate?</string>
     <string name="confirm_discard_wp_changes">Ignorare i waypoint non salvati?</string>
-    <string name="err_request_popup_info">c:geo non riesce ad ottenere le informazioni popup del cache.</string>
     <string name="warn_log_load_additional_data">c:geo non riesce a caricare dati aggiuntivi (trackables/punti preferiti) per il logging.</string>
     <string name="more_information">Ulterioni informazioni</string>
     <string name="undo">Annulla</string>
@@ -479,7 +478,6 @@
         <item quantity="one">%1$d elemento</item>
         <item quantity="other">%1$d elementi</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Carica</string>
     <string name="cache_filter_storage_delete_button">Elimina</string>
     <string name="cache_filter_storage_clear_button">Azzera</string>
     <string name="cache_filter_storage_load_delete_title">Carica o elimina un filtro esistente</string>
@@ -896,9 +894,6 @@
     <string name="init_memory_dump">Salvataggio memoria</string>
     <string name="init_memory_dumped">Memoria salvata in %s</string>
     <string name="init_please_wait">Attendere prego…</string>
-    <string name="init_hardware_acceleration_title">Rendering grafico con accelerazione hardware</string>
-    <string name="init_hardware_acceleration_note">L\'accelerazione hardware esegue il rendering di elementi grafici sullo schermo più velocemente. Tuttavia su alcuni dispositivi il sistema operativo contiene bug e qualche testo potrebbe apparire sfocato (i caratteri in grassetto in particolare). Disattivare l\'accelerazione hardware in questi casi.</string>
-    <string name="init_hardware_acceleration">Abilita accelerazione hardware</string>
     <string name="settings_open_website">Apri il sito</string>
     <string name="settings_open_geokretymap_website">Apri il sito di GeoKretyMap.org</string>
     <string name="settings_settings">Impostazioni</string>
@@ -1834,10 +1829,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d giorno fa</item>
         <item quantity="other">%d giorni fa</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s preferito</item>
-        <item quantity="other">%s preferiti</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">collegamento a c:geo</string>
