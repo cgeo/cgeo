@@ -296,7 +296,6 @@
     <string name="confirm_unsaved_changes_title">変更が保存されていません</string>
     <string name="confirm_discard_changes">保存せずに終了しますか?</string>
     <string name="confirm_discard_wp_changes">ウェイポイントの変更を破棄しますか?</string>
-    <string name="err_request_popup_info">キャッシュポップアップ情報の取得に失敗しました</string>
     <string name="warn_log_load_additional_data">ログの追加データ(トラッカブル/お気に入りポイント)を読み込めませんでした</string>
     <string name="more_information">詳細…</string>
     <string name="undo">元に戻す</string>
@@ -474,7 +473,6 @@
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$dアイテム</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">読み込み</string>
     <string name="cache_filter_storage_delete_button">削除</string>
     <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
@@ -887,9 +885,6 @@
     <string name="init_memory_dump">メモリ・ダンプ</string>
     <string name="init_memory_dumped">%sへメモリがダンプされた</string>
     <string name="init_please_wait">お待ちください…</string>
-    <string name="init_hardware_acceleration_title">ハードウェアアクセラレーション機能</string>
-    <string name="init_hardware_acceleration_note">ハードウェアアクセラレーション機能は画面表示を高速化します。しかし一部のデバイスではAndroidオペレーティングシステムのバグのせいでテキストの一部分(特に太字の文字)がぼやけて表示されます。これが発生する場合はハードウェアアクセラレーションを無効にしてください</string>
-    <string name="init_hardware_acceleration">ハードウェアアクセラレーションを有効化</string>
     <string name="settings_open_website">Webサイトを開く</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org</string>
     <string name="settings_settings">設定</string>
@@ -1807,9 +1802,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
     <plurals name="days_ago">
         <item quantity="other">%d日前</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="other">お気に入り %s </item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo ショートカット</string>
