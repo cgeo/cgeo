@@ -255,7 +255,6 @@
     <string name="err_trackable_no_preference_activity">Et deet eis Leed, mä mir fannen net dee passende Astellungsmenü.</string>
     <string name="confirm_unsaved_changes_title">Ongespäichert Changementer</string>
     <string name="confirm_discard_wp_changes">Ongespäichert Weepunkter verwerfen?</string>
-    <string name="err_request_popup_info">c:geo huet d\'Informatiounen vum popup Menü net gelueden.</string>
     <string name="warn_log_load_additional_data">c:geo konnt keng zousätzlech Donnéeë (Trackables/Favorit Punkte) fir d\'Loggen lueden.</string>
     <string name="more_information">weider Informatiounen</string>
     <string name="undo">Réckgängeg</string>
@@ -586,10 +585,6 @@
         <item quantity="other">%s Fouss</item>
     </plurals>
     <!-- various -->
-    <plurals name="favorite_points">
-        <item quantity="one">%s Favoritt</item>
-        <item quantity="other">%s Favoritten</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="send">Schécken</string>
     <string name="confirm_report_problem_title">Problem mellen</string>
