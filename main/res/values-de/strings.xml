@@ -11,6 +11,7 @@
     <string name="about">Über c:geo</string>
     <string name="latitude">Breitengrad</string>
     <string name="longitude">Längengrad</string>
+    <string name="latlongitude">Breite\nLänge</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Einstellungen</string>
     <!-- caches -->
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
     <string name="confirm_discard_changes">Ungespeicherte Änderungen verwerfen?</string>
     <string name="confirm_discard_wp_changes">Wegpunktänderungen verwerfen?</string>
-    <string name="err_request_popup_info">c:geo konnte die Cache-Popup Informationen nicht herunterladen.</string>
     <string name="warn_log_load_additional_data">c:geo konnte zusätzliche Daten zum Loggen (Trackables/Favoritenpunkte) nicht laden.</string>
     <string name="more_information">Mehr Informationen</string>
     <string name="undo">Rückgängig</string>
@@ -326,7 +326,8 @@
     <string name="menu_history">Verlauf</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
-    <string name="menu_lists_pocket_queries">Listen / Pocket-Queries</string>
+    <string name="menu_lists_pocket_queries">Pocket-Queries</string>
+    <string name="menu_lists_bookmarklists">Lesezeichenlisten</string>
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
@@ -358,6 +359,7 @@
     <string name="caches_on_map">Zeige auf Karte</string>
     <string name="caches_sort">Sortierung</string>
     <string name="caches_sort_distance">Entfernung</string>
+    <string name="caches_sort_distance_target">Entfernung zum Ziel</string>
     <string name="caches_sort_difficulty">Schwierigkeit</string>
     <string name="caches_sort_terrain">Gelände</string>
     <string name="caches_sort_size">Größe</string>
@@ -478,7 +480,6 @@
         <item quantity="one">%1$d Element</item>
         <item quantity="other">%1$d Elemente</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Löschen</string>
     <string name="cache_filter_storage_clear_button">Leeren</string>
     <string name="cache_filter_storage_load_delete_title">Vorhandenen Filter laden oder löschen</string>
@@ -895,9 +896,6 @@
     <string name="init_memory_dump">Speicherabbild</string>
     <string name="init_memory_dumped">Speicherabbild in %s gespeichert</string>
     <string name="init_please_wait">Bitte warten…</string>
-    <string name="init_hardware_acceleration_title">Hardwarebeschleunigte Darstellung</string>
-    <string name="init_hardware_acceleration_note">Mittels Hardwarebeschleunigung werden grafische Elemente schneller auf den Bildschirm dargestellt. Jedoch enthalten manche Android-Systeme Fehler, die zu verschwommenem Text (meistens bei fettgedruckten Zeichen) führen können. In diesem Fall sollte die Hardwarebeschleunigung deaktiviert werden.</string>
-    <string name="init_hardware_acceleration">Hardwarebeschleunigung aktivieren</string>
     <string name="settings_open_website">Webseite öffnen</string>
     <string name="settings_open_geokretymap_website">Öffne GeoKretyMap.org Webseite</string>
     <string name="settings_settings">Einstellungen</string>
@@ -1120,14 +1118,17 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_advanced">Erweitert</string>
     <string name="cache_waypoints">Wegpunkte</string>
+    <string name="cache_variables">Variablen</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Wegpunkte (%d)</string>
     <string name="cache_waypoints_add">Wegpunkt hinzufügen</string>
     <string name="cache_waypoints_add_currentLocation">Aktuellen Standort hinzufügen</string>
     <string name="cache_waypoints_add_fromclipboard">Aus Zwischenablage einfügen</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Besuchte Wegpunkte verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Wegpunkt aus der Zwischenablage in diesen Cache kopiert.\n\nUrsprünglichen Wegpunkt entfernen?</string>
     <string name="cache_hint">Hinweis</string>
     <string name="cache_hint_not_available">Kein Hinweis verfügbar</string>
     <string name="cache_logs">Logbuch</string>
+    <string name="cache_latest_logs">Letzte Logs</string>
     <string name="cache_logs_friends_and_own">Logbuch (Freunde/Eigene)</string>
     <string name="cache_dialog_loading_details">Lade Cache-Details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Lade Seite</string>
@@ -1210,8 +1211,8 @@
     <string name="cache_status_premium">Nur für Premium-Mitglieder</string>
     <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
-    <string name="cache_name_set">Cachename festlegen</string>
-    <string name="cache_name_updated">Cachename aktualisiert</string>
+    <string name="cache_name_set">Cache-Name festlegen</string>
+    <string name="cache_name_updated">Cache-Name aktualisiert</string>
     <string name="cache_description_set">Cachebeschreibung bearbeiten</string>
     <string name="cache_description_updated">Cachebeschreibung aktualisiert</string>
     <string name="cache_type">Typ</string>
@@ -1374,6 +1375,8 @@
     <string name="map_language">Sprache der Karte</string>
     <string name="map_live_enable">Aktualisierung einschalten</string>
     <string name="map_live_disable">Aktualisierung ausschalten</string>
+    <string name="map_live_disabled">Aktualisierung ist ausgeschaltet</string>
+    <string name="map_live_disabled_hint">Aktualisierung ist ausgeschaltet. Du wirst nur gespeicherte Caches sehen. Nutze das Menü, um die Aktualisierung einzuschalten.</string>
     <string name="map_as_list">Als Liste anzeigen</string>
     <string name="map_select_multiple_items">Element auswählen</string>
     <string name="map_routing">Routing</string>
@@ -1390,15 +1393,14 @@
     <string name="map_settings_cache_filter_too_complex_message">Der aktuelle Cache-Filter ist zu komplex, um zusätzliche Optionen anzuwenden. Normalerweise bedeutet dies, dass der Cache-Filter eine Negation oder ODER-Ausdrücke anstelle von einfacher UND-Logik enthält.</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/Trackables suchen</string>
-    <string name="search_bar_desc">Caches (Geocode, Stichwort), Trackables (TB-Code)</string>
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_coordinates_button">Suche mit Koordinaten</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Suche mit Adresse</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Suche mit Geocode</string>
+    <string name="search_geo_button">Suche nach Geocode</string>
     <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
-    <string name="search_kw">Stichworte</string>
+    <string name="search_kw">Stichwort</string>
     <string name="search_kw_prefill">Stichwörter</string>
     <string name="search_kw_button">Suche mit Stichwörtern</string>
     <string name="search_hbu">Versteckt von</string>
@@ -1420,7 +1422,7 @@
     <string name="search_pocket_title">Pocket-Query</string>
     <string name="search_bookmark_list">Lesezeichenliste</string>
     <string name="search_pocket_is_new">neu</string>
-    <string name="search_pocket_and_bookmark_loading">Lade eine Liste von Pocket-Queries und Lesezeichenlisten</string>
+    <string name="search_pocket_loading">Lade Pocket-Queries</string>
     <string name="search_bookmark_loading">Lesezeichenlisten werden geladen</string>
     <string name="search_bookmark_select">Lesezeichenliste auswählen</string>
     <string name="search_bookmark_new">Neue Lesezeichenliste erstellen</string>
@@ -1840,10 +1842,6 @@
         <item quantity="one">vor %d Tag</item>
         <item quantity="other">vor %d Tagen</item>
     </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s Favorit</item>
-        <item quantity="other">%s Favoriten</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo Shortcut</string>
     <string name="create_shortcut">Shortcut erstellen</string>
@@ -2025,6 +2023,7 @@
     <string name="download_confirmation">%1$sDatei herunterladen \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates gefunden für:\n%1$s\n\nMöchtest du aktualisieren?%2$s</string>
     <string name="download_warning">Dieser Vorgang kann eine ganze Weile dauern und kann, abhängig von deiner Netzwerkverbindung, zu erheblichen Kosten führen.</string>
+    <string name="download_error">Download fehlgeschlagen mit Fehler #%d</string>
     <string name="downloadmap_handling">Das Herunterladen wird vom Download-Manager deines Systems im Hintergrund durchgeführt. Du solltest zu Beginn des Downloads (könnte eine Weile dauern) eine Benachrichtigung sehen.</string>
     <string name="button_continue">Weiter</string>
     <string name="downloadmap_onedirup">(eine Ebene höher)</string>
