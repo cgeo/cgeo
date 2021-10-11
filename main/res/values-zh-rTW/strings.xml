@@ -286,7 +286,6 @@
     <string name="confirm_unsaved_changes_title">未保存更改</string>
     <string name="confirm_discard_changes">放棄所有未儲存的變更。</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
-    <string name="err_request_popup_info">c:geo获取cache信息失败</string>
     <string name="warn_log_load_additional_data">c:geo 無法為登錄載入其它資料(旅行蟲 / 最愛點)</string>
     <string name="more_information">更多資訊</string>
     <string name="undo">復原</string>
@@ -445,7 +444,6 @@
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$d 個項目</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">載入</string>
     <string name="cache_filter_storage_delete_button">刪除</string>
     <string name="cache_filter_storage_load_delete_title">載入或刪除過濾設定</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">無存在的過濾設定</string>
@@ -772,9 +770,6 @@
     <string name="init_memory_dump">記憶體傾印</string>
     <string name="init_memory_dumped">記憶體傾印到%s</string>
     <string name="init_please_wait">請稍候…</string>
-    <string name="init_hardware_acceleration_title">硬體加速渲染</string>
-    <string name="init_hardware_acceleration_note">硬體加速渲染元件會比螢幕還快。在部分的Andriond裝置上，文字顯示發生錯誤。當有這樣的情況時，請關閉硬體加速。</string>
-    <string name="init_hardware_acceleration">啟用硬體加速</string>
     <string name="settings_open_website">開啟網站</string>
     <string name="settings_open_geokretymap_website">開啟GeoKretyMap.org網站</string>
     <string name="settings_settings">設定</string>
@@ -1512,9 +1507,6 @@
     <string name="clipboard_copy_ok">複製到剪貼簿</string>
     <plurals name="days_ago">
         <item quantity="other">%d天前</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="other">%s我的最愛</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo捷徑</string>
