@@ -285,7 +285,6 @@
     <string name="err_trackable_no_preference_activity">Beklager, finner ikke innstilling-skjermen som hører til.</string>
     <string name="confirm_unsaved_changes_title">Ulagrede endringer</string>
     <string name="confirm_discard_wp_changes">Forkaste ulagrede endringer i veipunktene?</string>
-    <string name="err_request_popup_info">c:geo klarte ikke hente cachens popup-info.</string>
     <string name="warn_log_load_additional_data">c:geo kunne ikke laste tilleggsdata (trackables/favorittpoeng) for logging.</string>
     <string name="more_information">Mer informasjon</string>
     <string name="undo">Angre</string>
@@ -440,7 +439,6 @@
     <string name="cache_filter_userdisplay_complex">Avansert</string>
     <string name="cache_filter_userdisplay_none">Ingen</string>
     <string name="cache_filter_userdisplay_not">IKKE</string>
-    <string name="cache_filter_storage_load_button">Last</string>
     <string name="cache_filter_storage_delete_button">Slett</string>
     <string name="cache_filter_stringfilter_matchcase">Skill store og små bokstaver</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Søketekst</string>
@@ -810,9 +808,6 @@
     <string name="init_memory_dump">Minnedump</string>
     <string name="init_memory_dumped">Minne dumpet til %s</string>
     <string name="init_please_wait">Vennligst vent…</string>
-    <string name="init_hardware_acceleration_title">Maskinvareakselerert rendering</string>
-    <string name="init_hardware_acceleration_note">Maskinvare-akselerasjon gjengir grafikkelementer raskere på skjermen. Men på noen Android telefoners operativsystem er det noen feil, og noe av teksten kan komme fram som uklare  Deaktiver maskinvare-akselerasjonen hvis dette skjer med deg.</string>
-    <string name="init_hardware_acceleration">Aktivere maskinvareakselerasjonen</string>
     <string name="settings_open_website">Åpne nettside</string>
     <string name="settings_open_geokretymap_website">Åpne nettsiden til GeoKretyMap.org</string>
     <string name="settings_settings">Innstillinger</string>
@@ -1701,10 +1696,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d dag siden</item>
         <item quantity="other">%d dager siden</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favoritt</item>
-        <item quantity="other">%s favoritter</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo-snartvei</string>
