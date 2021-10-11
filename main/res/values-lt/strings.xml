@@ -290,7 +290,6 @@
     <string name="confirm_unsaved_changes_title">Neįrašyti pakeitimai</string>
     <string name="confirm_discard_changes">Atsisakyti neišsaugotų pakeitimų?</string>
     <string name="confirm_discard_wp_changes">Atsisakyti neišsaugotų papildomų taškų pakeitimų?</string>
-    <string name="err_request_popup_info">c:geo nepavyko gauti slėptuvės iškylančios informacijos.</string>
     <string name="warn_log_load_additional_data">c: geo nepavyko įkelti papildomų duomenų (keliauninkai/mėgstamiausių taškų) registravimui.</string>
     <string name="more_information">Daugiau informacijos</string>
     <string name="undo">Atšaukti</string>
@@ -470,7 +469,6 @@
         <item quantity="many">%1$d elementų</item>
         <item quantity="other">%1$d elementų</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Įkelti</string>
     <string name="cache_filter_storage_delete_button">Ištrinti</string>
     <string name="cache_filter_storage_clear_button">Išvalyti</string>
     <string name="cache_filter_storage_load_delete_title">Įkelkite arba ištrinkite esamą filtrą</string>
@@ -851,9 +849,6 @@
     <string name="init_memory_dump">Atminties turinio failas</string>
     <string name="init_memory_dumped">Atminties turinio failas išsaugotas %s</string>
     <string name="init_please_wait">Prašome palaukti…</string>
-    <string name="init_hardware_acceleration_title">Aparatinis grafikos pateikimo spartinimas</string>
-    <string name="init_hardware_acceleration_note">Aparatinis spartinimas greičiau pateikia grafinius elementus ekrane. Tačiau kai kuriuose įrenginiuose Android operacinėje sistemoje yra klaidų ir kai kuris tekstas gali būti neryškus (ypač paryškinti simboliai). Jeigu taip atsitiktų, išjunkite aparatūros spartinimą.</string>
-    <string name="init_hardware_acceleration">Įjungti aparatinį spartinimą</string>
     <string name="settings_open_website">Atidaryti interneto svetainę</string>
     <string name="settings_open_geokretymap_website">Atidaryti GeoKretyMap.org svetainę</string>
     <string name="settings_settings">Nustatymai</string>
@@ -1751,12 +1746,6 @@
         <item quantity="few">prieš %d dienas</item>
         <item quantity="many">prieš %d dienų</item>
         <item quantity="other">prieš %d dienų</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s mėgiama</item>
-        <item quantity="few">%s mėgiamos</item>
-        <item quantity="many">%s mėgiamų</item>
-        <item quantity="other">%s mėgiamų</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo nuoroda</string>
