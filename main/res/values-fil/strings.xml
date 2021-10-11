@@ -211,7 +211,6 @@
     <string name="err_trackable_no_preference_activity">Patawad, hindi makita ang angkop na prepresensiya para sa iskrin.</string>
     <string name="confirm_unsaved_changes_title">Ang pagbabago ay hindi na-save</string>
     <string name="confirm_discard_wp_changes">Pagtapon ng mga pagbabago sa waypoint na hindi na-save?</string>
-    <string name="err_request_popup_info">c:geo ay nabigo na kunin ang cache na lumabas na impormasyon.</string>
     <!-- location service -->
     <string name="loc_last">Ang huling kakilala</string>
     <string name="loc_fused">Piyus</string>
@@ -266,7 +265,6 @@
     <string name="caches_sort_favorites">Ang mga paborito</string>
     <string name="caches_sort_favorites_ratio">Ang mga paborito [%]</string>
     <string name="caches_sort_name">Pangalan</string>
-    <string name="caches_sort_geocode">Ang Kowd na Geo</string>
     <string name="caches_sort_rating">Ang pagbibigay marka</string>
     <string name="caches_sort_vote">Iboto (Ang Sariling Marka)</string>
     <string name="caches_sort_inventory">Ang bilang ng pag-iimbentaryo</string>
@@ -470,9 +468,6 @@
     <string name="init_create_memory_dump">Ang pagbuo ng tambakan ng memorya</string>
     <string name="init_memory_dump">Ang tambakan ng memorya</string>
     <string name="init_memory_dumped">Ang tambakan ng memorya sa %s</string>
-    <string name="init_hardware_acceleration_title">Pinapabilis ng hardware ang pagsasalin</string>
-    <string name="init_hardware_acceleration_note">Nagbibigay ng mas mabilis na graphical na elemento sa screen. Ngunit ang ilan sa mga aparato naglalaman ng bug ang sistema ng android at ang ilan sa mga teksto ay maaring lumitaw ng malabo (ang naka-bold na letra ay kapansinpansin) kung maari ay wag paganahin ang hardware acceleration kung sa iyo ito ay mangyari.</string>
-    <string name="init_hardware_acceleration">Ang pagpipilian sa hardware ay i-enable</string>
     <string name="settings_open_website">Ang websyt ay buksan</string>
     <string name="settings_open_geokretymap_website">Ang websyt ng GeoKrety ay buksan</string>
     <string name="settings_settings">Ang mga settings</string>
@@ -586,7 +581,6 @@
     <string name="cache_list_select_last">Ang huling pagpipili</string>
     <string name="cache_images">Mga imahe</string>
     <string name="cache_waypoints">Mga waypoint</string>
-    <string name="cache_waypoints_add">Magdagdag ng Waypoint</string>
     <string name="cache_hint">Nag-hint</string>
     <string name="cache_hint_not_available">Walang hint na maaaring magamit</string>
     <string name="cache_logs">Ang Talaan</string>
@@ -654,7 +648,6 @@
     <string name="cache_status_archived">Ang naka-archive</string>
     <string name="cache_status_disabled">Ang hindi umiiral</string>
     <string name="cache_status_premium">Ang premium na mga miyembro lamang</string>
-    <string name="cache_geocode">Ang Kodigo sa Geo</string>
     <string name="cache_name">Ang pangalan</string>
     <string name="cache_type">Ang klase</string>
     <string name="cache_size">Ang laki</string>
@@ -758,14 +751,10 @@
     <string name="map_as_list">Ipakita ang listahan</string>
     <string name="map_select_multiple_items">Pumili ng gamit</string>
     <!-- search -->
-    <string name="search_bar_desc">Ang mga Cache (geo code, keyword), Masubaybayan ang (TB code)</string>
     <string name="search_coordinates">Ang mga Coordinate</string>
     <string name="search_coordinates_button">Ang Magsaliksik sa pamamagitan ng mga Coordinate</string>
     <string name="search_address">Ang Address</string>
     <string name="search_address_button">Magsaliksik sa pamamagitan ng address</string>
-    <string name="search_geo">Ang Geo code</string>
-    <string name="search_geo_button">Ang Magsaliksik sa pamamagitan ng deo code</string>
-    <string name="search_kw">Ang Mga Keyword</string>
     <string name="search_kw_prefill">Ang Keyword</string>
     <string name="search_kw_button">Ang Magsaliksik sa pamamagitan ng keyword</string>
     <string name="search_hbu_prefill">Ang May-ari</string>
@@ -1117,10 +1106,6 @@
     <string name="tts_oclock">%s na oras</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Naikopya sa klipboard</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s na paborito</item>
-        <item quantity="other">%s na mga paborito</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">shortcut sa c:geo</string>
     <string name="create_shortcut">Lumikha ng shortcut</string>
