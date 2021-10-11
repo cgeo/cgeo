@@ -291,7 +291,6 @@
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_changes">Odrzucić niezapisane zmiany?</string>
     <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacyjnego?</string>
-    <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
     <string name="warn_log_load_additional_data">c:geo nie mógł załadować dodatkowych danych (przedmioty podróżne/ulubione) przy logowaniu.</string>
     <string name="more_information">Więcej informacji</string>
     <string name="undo">Cofnij</string>
@@ -460,7 +459,6 @@
         <item quantity="many">%1$d elementów</item>
         <item quantity="other">%1$d elementów</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Wczytaj</string>
     <string name="cache_filter_storage_delete_button">Usuń</string>
     <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
@@ -827,9 +825,6 @@
     <string name="init_memory_dump">Zrzut pamięci</string>
     <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
     <string name="init_please_wait">Proszę czekać…</string>
-    <string name="init_hardware_acceleration_title">Sprzętowa akceleracja renderowania</string>
-    <string name="init_hardware_acceleration_note">Akceleracja sprzętowa renderuje elementy graficzne szybciej na ekranie. Jednakże na niektórych urządzeniach z systemem Android może powodować błędy i część tekstu może być niewyraźna (zwłaszcza pogrubione znaki). Jeśli tak się stanie, należy wyłączyć akcelerację sprzętową.</string>
-    <string name="init_hardware_acceleration">Włącz akcelerację sprzętową</string>
     <string name="settings_open_website">Otwórz stronę</string>
     <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
     <string name="settings_settings">Ustawienia</string>
@@ -1773,12 +1768,6 @@
         <item quantity="few">%d dni temu</item>
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s ulubiony</item>
-        <item quantity="few">%s ulubione</item>
-        <item quantity="many">%s ulubionych</item>
-        <item quantity="other">%s ulubionych</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
