@@ -11,6 +11,7 @@
     <string name="about">Quant al c:geo</string>
     <string name="latitude">Latitud</string>
     <string name="longitude">Longitud</string>
+    <string name="latlongitude">Latitud\nLongitud</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Opcions del c:geo</string>
     <!-- caches -->
@@ -297,7 +298,6 @@
     <string name="confirm_unsaved_changes_title">Canvis sense desar</string>
     <string name="confirm_discard_changes">Voleu descartar els canvis no desats?</string>
     <string name="confirm_discard_wp_changes">Descartar els canvis de punts de ruta sense desar?</string>
-    <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
     <string name="warn_log_load_additional_data">c:geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
     <string name="more_information">Més informació</string>
     <string name="undo">Desfer</string>
@@ -327,7 +327,8 @@
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
-    <string name="menu_lists_pocket_queries">Llistes / pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Llistes de marcadors</string>
     <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
     <string name="menu_invert_order">Inverteix l’ordre</string>
     <!-- main screen -->
@@ -359,13 +360,14 @@
     <string name="caches_on_map">Mostra al mapa</string>
     <string name="caches_sort">Ordena</string>
     <string name="caches_sort_distance">Distància</string>
+    <string name="caches_sort_distance_target">Distància a l\'objectiu</string>
     <string name="caches_sort_difficulty">Dificultat</string>
     <string name="caches_sort_terrain">Terreny</string>
     <string name="caches_sort_size">Mida</string>
     <string name="caches_sort_favorites">Preferits</string>
     <string name="caches_sort_favorites_ratio">Preferits [%]</string>
     <string name="caches_sort_name">Nom</string>
-    <string name="caches_sort_geocode">Codi del catxé</string>
+    <string name="caches_sort_geocode">Geocodi</string>
     <string name="caches_sort_rating">Puntuació</string>
     <string name="caches_sort_vote">Vota (valoració pròpia)</string>
     <string name="caches_sort_inventory">Recompte d\'inventari</string>
@@ -479,7 +481,6 @@
         <item quantity="one">%1$d element</item>
         <item quantity="other">%1$d elements</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Carregar</string>
     <string name="cache_filter_storage_delete_button">Esborra</string>
     <string name="cache_filter_storage_clear_button">Esborra</string>
     <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
@@ -896,9 +897,6 @@
     <string name="init_memory_dump">Buidat de memòria</string>
     <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
     <string name="init_please_wait">Espereu…</string>
-    <string name="init_hardware_acceleration_title">Renderització amb acceleració per maquinari</string>
-    <string name="init_hardware_acceleration_note">L\'acceleració per maquinari renderitza més ràpidament els elements gràfics a la pantalla. Tanmateix, en alguns dispositius Android, el sistema operatiu conté errors i algun text pot aparèixer borrós (caràcters en negreta molt notables). Inhabiliteu l\'acceleració per maquinari si teniu aquest problema.</string>
-    <string name="init_hardware_acceleration">Activa l\'acceleració per maquinari</string>
     <string name="settings_open_website">Obre el lloc web</string>
     <string name="settings_open_geokretymap_website">Obrir la pàgina web de GeoKretyMap.org</string>
     <string name="settings_settings">Configuració</string>
@@ -1122,13 +1120,14 @@
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punts de ruta (%d)</string>
-    <string name="cache_waypoints_add">Afegeix una fita</string>
+    <string name="cache_waypoints_add">Afegeix punt de ruta</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
     <string name="cache_waypoints_remove_original_waypoint">El punt de ruta s\'ha copiat del porta-retalls a aquest catxé. \n\nVoleu suprimir el punt de ruta original?</string>
     <string name="cache_hint">Pista</string>
     <string name="cache_hint_not_available">No hi ha cap pista disponible</string>
     <string name="cache_logs">Llibre de registre</string>
+    <string name="cache_latest_logs">Registres recents</string>
     <string name="cache_logs_friends_and_own">Registres dels amics o propis</string>
     <string name="cache_dialog_loading_details">S\'està carregant els detalls del catxé…</string>
     <string name="cache_dialog_loading_details_status_loadpage">S\'està carregant la pàgina</string>
@@ -1211,8 +1210,8 @@
     <string name="cache_status_premium">Només per membres Premium</string>
     <string name="cache_geocode">Geocodi</string>
     <string name="cache_name">Nom</string>
-    <string name="cache_name_set">Definiu el nom del catxé</string>
-    <string name="cache_name_updated">S\'ha actualitzat el nom del catxé</string>
+    <string name="cache_name_set">Defineix el nom de catxé</string>
+    <string name="cache_name_updated">S\'ha actualitzat el nom de catxé</string>
     <string name="cache_description_set">Defineix la descripció del catxé</string>
     <string name="cache_description_updated">S\'ha actualitzat la descripció del catxé</string>
     <string name="cache_type">Tipus</string>
@@ -1375,6 +1374,8 @@
     <string name="map_language">Idioma del mapa</string>
     <string name="map_live_enable">Activa en viu</string>
     <string name="map_live_disable">Desactiva en viu</string>
+    <string name="map_live_disabled">El mode en viu està desactivat</string>
+    <string name="map_live_disabled_hint">El mode en viu està desactivat. Només veureu catxés emmagatzemats. Utilitzeu el menú per activar el mode en viu.</string>
     <string name="map_as_list">Mostra-ho com una llista</string>
     <string name="map_select_multiple_items">Seleccionar un element</string>
     <string name="map_routing">Encaminament</string>
@@ -1391,22 +1392,21 @@
     <string name="map_settings_cache_filter_too_complex_message">El filtre del catxé  actual és massa complex per aplicar opcions addicionals aquí. Normalment, això significa que el filtre de catxé conté expressions NOT o OR en lloc del simple i lògic AND </string>
     <!-- search -->
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
-    <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_coordinates_button">Cerca per coordenades</string>
     <string name="search_address">Adreça</string>
     <string name="search_address_button">Cerca per l\'adreça</string>
-    <string name="search_geo">Codi del catxé</string>
-    <string name="search_geo_button">Cerca pel codi del catxé</string>
+    <string name="search_geo">Geocodi</string>
+    <string name="search_geo_button">Cerca per geocodi</string>
     <string name="search_geocode_from_clipboard">El geocodi s\'ha enganxat del porta-retalls.</string>
-    <string name="search_kw">Paraules clau</string>
+    <string name="search_kw">Paraula clau</string>
     <string name="search_kw_prefill">Paraula clau</string>
     <string name="search_kw_button">Cerca per paraula clau</string>
     <string name="search_hbu">Amagat per</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
     <string name="search_filter">Filtre</string>
-    <string name="search_filter_button">Cerca per Filtre</string>
+    <string name="search_filter_button">Cerca per filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
     <string name="search_filter_temporary_user_information_title">Nou marc de filtre</string>
     <string name="search_filter_temporary_user_information">El C:geo ha introduït un nou sistema de filtratge que admet filtres flexibles, combinables i emmagatzemables. \n\nEl filtre global es pot canviar a partir d\'ara directament a les llistes de catxés i al mapa actiu.</string>
@@ -1421,7 +1421,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Llista de marcadors</string>
     <string name="search_pocket_is_new">nou</string>
-    <string name="search_pocket_and_bookmark_loading">S\'està carregant una llista de Pocket Queries i llistes de marcadors</string>
+    <string name="search_pocket_loading">S\'estan carregant les pocket queries</string>
     <string name="search_bookmark_loading">S\'estan carregant les llistes de marcadors</string>
     <string name="search_bookmark_select">Seleccioneu llistes de marcadors</string>
     <string name="search_bookmark_new">Creeu una llista de marcadors nova</string>
@@ -1841,10 +1841,6 @@
     <plurals name="days_ago">
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s preferit</item>
-        <item quantity="other">%s preferits</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
