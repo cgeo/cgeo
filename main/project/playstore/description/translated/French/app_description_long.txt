@@ -2,7 +2,7 @@ c:geo est un client open source, non-officiel, complet et prêt à l'emploi pour
 
 Fonctionnalités principales :
 - Voir les caches sur une carte en temps réel
-- Utiliser Google Maps ou OpenStreetMaps
+- Utilisation de Google Maps ou OpenStreetMap
 - Rechercher des caches selon différents critères
 - Enregistrer vos trouvailles en ligne ou hors ligne
 - Enregistrer des informations de cache sur votre appareil
