@@ -211,7 +211,6 @@
     <string name="err_trackable_no_preference_activity">Patawad, hindi makita ang angkop na prepresensiya para sa iskrin.</string>
     <string name="confirm_unsaved_changes_title">Ang pagbabago ay hindi na-save</string>
     <string name="confirm_discard_wp_changes">Pagtapon ng mga pagbabago sa waypoint na hindi na-save?</string>
-    <string name="err_request_popup_info">c:geo ay nabigo na kunin ang cache na lumabas na impormasyon.</string>
     <!-- location service -->
     <string name="loc_last">Ang huling kakilala</string>
     <string name="loc_fused">Piyus</string>
@@ -469,9 +468,6 @@
     <string name="init_create_memory_dump">Ang pagbuo ng tambakan ng memorya</string>
     <string name="init_memory_dump">Ang tambakan ng memorya</string>
     <string name="init_memory_dumped">Ang tambakan ng memorya sa %s</string>
-    <string name="init_hardware_acceleration_title">Pinapabilis ng hardware ang pagsasalin</string>
-    <string name="init_hardware_acceleration_note">Nagbibigay ng mas mabilis na graphical na elemento sa screen. Ngunit ang ilan sa mga aparato naglalaman ng bug ang sistema ng android at ang ilan sa mga teksto ay maaring lumitaw ng malabo (ang naka-bold na letra ay kapansinpansin) kung maari ay wag paganahin ang hardware acceleration kung sa iyo ito ay mangyari.</string>
-    <string name="init_hardware_acceleration">Ang pagpipilian sa hardware ay i-enable</string>
     <string name="settings_open_website">Ang websyt ay buksan</string>
     <string name="settings_open_geokretymap_website">Ang websyt ng GeoKrety ay buksan</string>
     <string name="settings_settings">Ang mga settings</string>
@@ -1110,10 +1106,6 @@
     <string name="tts_oclock">%s na oras</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Naikopya sa klipboard</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s na paborito</item>
-        <item quantity="other">%s na mga paborito</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">shortcut sa c:geo</string>
     <string name="create_shortcut">Lumikha ng shortcut</string>
