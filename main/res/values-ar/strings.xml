@@ -219,7 +219,6 @@
     <string name="err_trackable_no_preference_activity">عذراً لا يمكن العثور على شاشة تفضيل مناسبة.</string>
     <string name="confirm_unsaved_changes_title">تغييرات غير محفوظة</string>
     <string name="confirm_discard_wp_changes">هل تريد تجاهل تغييرات الإحداثية الغير محفوظة؟</string>
-    <string name="err_request_popup_info">c:geo فشل في الحصول على المعلومات المنبثقة للمخبئ.</string>
     <!-- location service -->
     <string name="loc_last">أخر موقع معروف</string>
     <string name="loc_net">الشبكة</string>
@@ -472,9 +471,6 @@
     <string name="init_create_memory_dump">إنشاء تفريغ الذاكرة</string>
     <string name="init_memory_dump">تفريغ الذاكرة</string>
     <string name="init_memory_dumped">الذاكرة ملقاة في %s</string>
-    <string name="init_hardware_acceleration_title">تسريع المعالج للأداء</string>
-    <string name="init_hardware_acceleration_note">تسريع المعالج للأداء يجعل لعناصر المرسومة أسرع على الشاشة. مع ذالك في بعض أجهزة الأندرويد قد تظهر بعض المشاكل في نظام التشغيل و قد تظهر بعض النصوص يصفة غير واضحة (لا سيما الأحرف بالخط العريض). قم بتعطيل تسريع الجهاز إذا حدث هذا لك.</string>
-    <string name="init_hardware_acceleration">تمكين تسريع المعالج</string>
     <string name="settings_open_website">فتح الموقع</string>
     <string name="settings_open_geokretymap_website">فتح موقع GeoKretyMap.org</string>
     <string name="settings_settings">الإعدادات</string>
