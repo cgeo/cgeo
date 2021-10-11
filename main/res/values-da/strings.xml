@@ -287,7 +287,6 @@
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
     <string name="confirm_discard_changes">Vil du kassere ændringer, som ikke er gemt?</string>
     <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
-    <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
     <string name="more_information">Mere information</string>
     <string name="undo">Fortryd</string>
@@ -771,9 +770,6 @@
     <string name="init_memory_dump">Hukommelsesdump</string>
     <string name="init_memory_dumped">Hukommelse dumpet til %s</string>
     <string name="init_please_wait">Vent venligst…</string>
-    <string name="init_hardware_acceleration_title">Hardwareaccelereret grafik</string>
-    <string name="init_hardware_acceleration_note">Med hardwareaccelereret grafik bliver grafiske elementer tegnet hurtigere på skærmen. Dog kan nogle enheders Android-styresystem indeholde fejl, som bevirker at tekster kan fremstå sløret (især fed skrift).  Du kan deaktivere hardwareaccelereret grafik, hvis du oplever dette problem.</string>
-    <string name="init_hardware_acceleration">Aktivér hardwareaccelereret grafik</string>
     <string name="settings_open_website">Åbn websitet</string>
     <string name="settings_open_geokretymap_website">Åbn GeoKretyMap.org hjemmeside</string>
     <string name="settings_settings">Indstillinger</string>
@@ -1560,10 +1556,6 @@
     <string name="tts_oclock">klokken %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopieret til udklipsholder</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorit</item>
-        <item quantity="other">%s favoritter</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genvej</string>
     <string name="create_shortcut">Opret genvej</string>
