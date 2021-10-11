@@ -298,7 +298,6 @@
     <string name="confirm_unsaved_changes_title">Canvis sense desar</string>
     <string name="confirm_discard_changes">Voleu descartar els canvis no desats?</string>
     <string name="confirm_discard_wp_changes">Descartar els canvis de punts de ruta sense desar?</string>
-    <string name="err_request_popup_info">El c:geo no ha pogut obtenir la informació emergent del catxé.</string>
     <string name="warn_log_load_additional_data">c:geo no ha pogut carregar les dades addicionals (trackables/favorit punts) per al registre.</string>
     <string name="more_information">Més informació</string>
     <string name="undo">Desfer</string>
@@ -482,7 +481,6 @@
         <item quantity="one">%1$d element</item>
         <item quantity="other">%1$d elements</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Carregar</string>
     <string name="cache_filter_storage_delete_button">Esborra</string>
     <string name="cache_filter_storage_clear_button">Esborra</string>
     <string name="cache_filter_storage_load_delete_title">Carregueu o suprimiu un filtre existent</string>
@@ -899,9 +897,6 @@
     <string name="init_memory_dump">Buidat de memòria</string>
     <string name="init_memory_dumped">S\'ha creat el buidat de memòria al %s</string>
     <string name="init_please_wait">Espereu…</string>
-    <string name="init_hardware_acceleration_title">Renderització amb acceleració per maquinari</string>
-    <string name="init_hardware_acceleration_note">L\'acceleració per maquinari renderitza més ràpidament els elements gràfics a la pantalla. Tanmateix, en alguns dispositius Android, el sistema operatiu conté errors i algun text pot aparèixer borrós (caràcters en negreta molt notables). Inhabiliteu l\'acceleració per maquinari si teniu aquest problema.</string>
-    <string name="init_hardware_acceleration">Activa l\'acceleració per maquinari</string>
     <string name="settings_open_website">Obre el lloc web</string>
     <string name="settings_open_geokretymap_website">Obrir la pàgina web de GeoKretyMap.org</string>
     <string name="settings_settings">Configuració</string>
@@ -1397,7 +1392,6 @@
     <string name="map_settings_cache_filter_too_complex_message">El filtre del catxé  actual és massa complex per aplicar opcions addicionals aquí. Normalment, això significa que el filtre de catxé conté expressions NOT o OR en lloc del simple i lògic AND </string>
     <!-- search -->
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
-    <string name="search_bar_desc">Catxés (codi del catxé, paraula clau), Traçables (codi TB)</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_coordinates_button">Cerca per coordenades</string>
     <string name="search_address">Adreça</string>
@@ -1847,10 +1841,6 @@
     <plurals name="days_ago">
         <item quantity="one">fa %d dia</item>
         <item quantity="other">fa %d dies</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s preferit</item>
-        <item quantity="other">%s preferits</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Drecera del c:geo</string>
