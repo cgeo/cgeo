@@ -297,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Kaydedilmemiş değişiklikler</string>
     <string name="confirm_discard_changes">Kaydedilmemiş değişiklikler kaldırılsın mı?</string>
     <string name="confirm_discard_wp_changes">Kaydedilmeyen Yol Noktası değişiklikleri silinsin mi?</string>
-    <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
     <string name="warn_log_load_additional_data">c:geo kayıt için ek bilgileri (trackable\'lar/favori puanları) yüklemede başarısız oldu.</string>
     <string name="more_information">Daha fazla bilgi</string>
     <string name="undo">Geri al</string>
@@ -480,7 +479,6 @@
         <item quantity="one">%1$d öğe</item>
         <item quantity="other">%1$d öğe</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
@@ -592,7 +590,7 @@
     <string name="contribution_infrastructure">altyapı</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Sorun bildir</string>
+    <string name="debug_user_error_report_title">Bir sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <string name="debug_current_downloads">Mevcut indirmeler</string>
@@ -897,9 +895,6 @@
     <string name="init_memory_dump">Bellek dökümü</string>
     <string name="init_memory_dumped">Bellek boşaltıldı %s</string>
     <string name="init_please_wait">Lütfen bekleyin…</string>
-    <string name="init_hardware_acceleration_title">Donanım hızlandırmalı sunum</string>
-    <string name="init_hardware_acceleration_note">Donanım hızlanması, grafik ögelerini ekranda daha hızlı hale getirir. Ancak bazı cihazlarda Android işletim sistemi hata içerir ve bazı metinler bulanık görünebilir (özellikle kalın karakterler). Bu gerçekleşirse donanım hızlanmasını devre dışı bırakın.</string>
-    <string name="init_hardware_acceleration">Donanım hızlanmasını aç</string>
     <string name="settings_open_website">İnternet sitesini aç</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org web sitesini aç</string>
     <string name="settings_settings">Ayarlar</string>
@@ -1395,7 +1390,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Mevcut filtre daha fazla seçenek uygulamak için çok karmaşık. Bu genellikle filtrenin basit VE mantığı yerine DEĞİL veya VEYA içermesiyle alakalıdır.</string>
     <!-- search -->
     <string name="search_bar_hint">Cache/trackable ara</string>
-    <string name="search_bar_desc">Geocache (geokod, anahtar kelime), Trackable (TB kodu)</string>
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>
@@ -1844,10 +1838,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d gün önce</item>
         <item quantity="other">%d gün önce</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favori</item>
-        <item quantity="other">%s favori</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo kısayolu</string>
