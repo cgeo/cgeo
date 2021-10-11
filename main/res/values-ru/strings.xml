@@ -260,7 +260,6 @@
     <string name="err_trackable_no_preference_activity">Извините, не удается найти подходящую страницу настроек.</string>
     <string name="confirm_unsaved_changes_title">Несохраненные изменения</string>
     <string name="confirm_discard_wp_changes">Сбросить несохраненные изменения путевых точек?</string>
-    <string name="err_request_popup_info">c:geo не удалось загрузить информацию о тайнике.</string>
     <string name="warn_log_load_additional_data">c:geo не удалось загрузить дополнительные данные (трекаблы/рекомендации) для заметки.</string>
     <string name="more_information">Больше информации</string>
     <string name="undo">Отменить</string>
@@ -668,9 +667,6 @@
     <string name="init_memory_dump">Дамп памяти</string>
     <string name="init_memory_dumped">Состояние памяти сохранено в %s</string>
     <string name="init_please_wait">Пожалуйста, подождите…</string>
-    <string name="init_hardware_acceleration_title">Аппаратное ускорение рендеринга</string>
-    <string name="init_hardware_acceleration_note">Аппаратное ускорение ускоряет отрисовку графических элементов. Однако, на некоторых Android устройствах операционная система содержит ошибки, и текст может стать размытым (особенно жирным шрифтом). Отключите аппаратное ускорение, если это случится.</string>
-    <string name="init_hardware_acceleration">Аппаратное ускорение</string>
     <string name="settings_open_website">Перейти на сайт</string>
     <string name="settings_open_geokretymap_website">Открыть GeoKretyMap.org</string>
     <string name="settings_settings">Настройки</string>
@@ -1540,12 +1536,6 @@
     <string name="tts_oclock">%s часов</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Скопировано в буфер</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s рекомендация</item>
-        <item quantity="few">%s рекомендации</item>
-        <item quantity="many">%s рекомендаций</item>
-        <item quantity="other">%s рекомендаций</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>
