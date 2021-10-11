@@ -291,7 +291,6 @@
     <string name="confirm_unsaved_changes_title">Neuložené zmeny</string>
     <string name="confirm_discard_changes">Zahodiť neuložené zmeny?</string>
     <string name="confirm_discard_wp_changes">Zahodiť neuložené zmeny bodov trasy?</string>
-    <string name="err_request_popup_info">c:geo sa nepodarilo otvoriť informácie o skrýši.</string>
     <string name="warn_log_load_additional_data">Aplikácii c:geo sa nepodarilo načítať ďalšie údaje (trasovateľné predmety/favoritné body) na logovanie.</string>
     <string name="more_information">Ďalšie informácie</string>
     <string name="undo">Späť</string>
@@ -472,7 +471,6 @@
         <item quantity="many">%1$d položiek</item>
         <item quantity="other">%1$d položiek</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Načítať</string>
     <string name="cache_filter_storage_delete_button">Odstrániť</string>
     <string name="cache_filter_storage_clear_button">Vyčistiť</string>
     <string name="cache_filter_storage_load_delete_title">Načítať alebo odstrániť existujúci filter</string>
@@ -883,9 +881,6 @@
     <string name="init_memory_dump">Výpis pamäte</string>
     <string name="init_memory_dumped">Výpis pamäte uložený do %s</string>
     <string name="init_please_wait">Čakajte, prosím…</string>
-    <string name="init_hardware_acceleration_title">Hardvérovo zrýchlené vykresľovanie</string>
-    <string name="init_hardware_acceleration_note">Hardvérové zrýchlenie vykresľuje grafické prvky na obrazovke rýchlejšie. Avšak na niektorých zariadeniach operačný systém Android obsahuje chybu, ktorá spôsobuje neostré vykresľovanie textu (viditeľne hrubšie znaky). Ak sa toto stane, je vhodné zakázať hardvérové zrýchlenie.</string>
-    <string name="init_hardware_acceleration">Povoliť hardvérové zrýchlenie</string>
     <string name="settings_open_website">Otvoriť webovú stránku</string>
     <string name="settings_open_geokretymap_website">Otvoriť stránku GeoKretyMap.org</string>
     <string name="settings_settings">Nastavenia</string>
@@ -1838,12 +1833,6 @@
         <item quantity="few">pred %d dňami</item>
         <item quantity="many">pred %d dňami</item>
         <item quantity="other">pred %d dňami</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s obľúbené</item>
-        <item quantity="few">%s obľúbené</item>
-        <item quantity="many">%s obľúbených</item>
-        <item quantity="other">%s obľúbených</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:Geo odkaz</string>
