@@ -213,7 +213,6 @@
     <string name="err_trackable_no_preference_activity">Maaf, tidak dapat menemukan layar preferensi yang sesuai.</string>
     <string name="confirm_unsaved_changes_title">Perubahan yang belum disimpan</string>
     <string name="confirm_discard_wp_changes">Buang perubahan waypoint yang tidak disimpan?</string>
-    <string name="err_request_popup_info">c: geo gagal mendapatkan info cache popup.</string>
     <!-- location service -->
     <string name="loc_last">Terakhir Diketahui</string>
     <string name="loc_net">Jaringan</string>
@@ -262,7 +261,6 @@
     <string name="caches_sort_favorites">Favorit</string>
     <string name="caches_sort_favorites_ratio">Favorit [%]</string>
     <string name="caches_sort_name">Nama</string>
-    <string name="caches_sort_geocode">Kode Geo</string>
     <string name="caches_sort_rating">Peringkat</string>
     <string name="caches_sort_vote">Vote (Rating sendiri)</string>
     <string name="caches_sort_inventory">Jumlah persedian</string>
@@ -465,9 +463,6 @@
     <string name="init_create_memory_dump">Buat dump memori</string>
     <string name="init_memory_dump">Memori dump</string>
     <string name="init_memory_dumped">Memori dibuang ke %s</string>
-    <string name="init_hardware_acceleration_title">Perangkat keras dipercepat rendering</string>
-    <string name="init_hardware_acceleration_note">Akselerasi perangkat keras membuat elemen grafis lebih cepat di layar. Namun pada beberapa perangkat sistem operasi Android mengandung bug dan beberapa teks mungkin tampak kabur (terutama huruf tebal). Nonaktifkan akselerasi perangkat keras jika ini terjadi pada anda.</string>
-    <string name="init_hardware_acceleration">Mengaktifkan percepatan perangkat keras</string>
     <string name="settings_open_website">Buka situs web</string>
     <string name="settings_open_geokretymap_website">Buka situs web GeoKretyMap.org</string>
     <string name="settings_settings">Pengaturan</string>
@@ -573,7 +568,6 @@
     <string name="cache_list_select_last">Pilihan terakhir</string>
     <string name="cache_images">Gambar</string>
     <string name="cache_waypoints">Titik arah</string>
-    <string name="cache_waypoints_add">Tambahkan titik arah</string>
     <string name="cache_hint">Petunjuk</string>
     <string name="cache_hint_not_available">Tidak ada petunjuk yang tersedia</string>
     <string name="cache_logs">Buku harian kapal</string>
@@ -636,7 +630,6 @@
     <string name="cache_status_archived">Diarsipkan</string>
     <string name="cache_status_disabled">Cacat</string>
     <string name="cache_status_premium">Anggota Premium saja</string>
-    <string name="cache_geocode">Kode geo</string>
     <string name="cache_name">Nama</string>
     <string name="cache_type">Jenis</string>
     <string name="cache_size">Ukuran</string>
@@ -740,14 +733,10 @@
     <string name="map_as_list">Tampilkan daftar</string>
     <string name="map_select_multiple_items">Pilih item</string>
     <!-- search -->
-    <string name="search_bar_desc">Cache (geo kode, kata kunci), Trackables (TB kode)</string>
     <string name="search_coordinates">Koordinat</string>
     <string name="search_coordinates_button">Cari berdasarkan koordinat</string>
     <string name="search_address">Alamat</string>
     <string name="search_address_button">Cari berdasarkan alamat</string>
-    <string name="search_geo">Kode Geo</string>
-    <string name="search_geo_button">Cari berdasarkan kode geo</string>
-    <string name="search_kw">Kata kunci</string>
     <string name="search_kw_prefill">Kata kunci</string>
     <string name="search_kw_button">Pencarian berdasarkan kata kunci</string>
     <string name="search_hbu_prefill">Pemilik</string>
@@ -1097,9 +1086,6 @@
     <string name="tts_oclock">%s jam</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Disalin ke clipboard</string>
-    <plurals name="favorite_points">
-        <item quantity="other">%s favorit</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c: jalan pintas geo</string>
     <string name="create_shortcut">Buat jalan pintas</string>
