@@ -11,6 +11,7 @@
     <string name="about">c:geo hakkında</string>
     <string name="latitude">Enlem</string>
     <string name="longitude">Boylam</string>
+    <string name="latlongitude">Enlem\nBoylam</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Ayarları</string>
     <!-- caches -->
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Kaydedilmemiş değişiklikler</string>
     <string name="confirm_discard_changes">Kaydedilmemiş değişiklikler kaldırılsın mı?</string>
     <string name="confirm_discard_wp_changes">Kaydedilmeyen Yol Noktası değişiklikleri silinsin mi?</string>
-    <string name="err_request_popup_info">c:Geo Geocache açılır pencere bilgisini alamadı.</string>
     <string name="warn_log_load_additional_data">c:geo kayıt için ek bilgileri (trackable\'lar/favori puanları) yüklemede başarısız oldu.</string>
     <string name="more_information">Daha fazla bilgi</string>
     <string name="undo">Geri al</string>
@@ -326,7 +326,8 @@
     <string name="menu_history">Geçmiş</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Geocode tara</string>
-    <string name="menu_lists_pocket_queries">Listeler / cep sorguları</string>
+    <string name="menu_lists_pocket_queries">Sorgulama kayıtları</string>
+    <string name="menu_lists_bookmarklists">Yer imi listeleri</string>
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
     <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
@@ -358,13 +359,14 @@
     <string name="caches_on_map">Haritada göster</string>
     <string name="caches_sort">Sırala</string>
     <string name="caches_sort_distance">Mesafe</string>
+    <string name="caches_sort_distance_target">Hedefe mesafe</string>
     <string name="caches_sort_difficulty">Zorluk</string>
     <string name="caches_sort_terrain">Arazi</string>
     <string name="caches_sort_size">Boyut</string>
     <string name="caches_sort_favorites">Favoriler</string>
     <string name="caches_sort_favorites_ratio">Favoriler [%]</string>
     <string name="caches_sort_name">Ad</string>
-    <string name="caches_sort_geocode">Geo Kodu</string>
+    <string name="caches_sort_geocode">Geokod</string>
     <string name="caches_sort_rating">Puanlama</string>
     <string name="caches_sort_vote">Oy (Puanlamanız)</string>
     <string name="caches_sort_inventory">İçindeki TB Sayısı</string>
@@ -477,7 +479,6 @@
         <item quantity="one">%1$d öğe</item>
         <item quantity="other">%1$d öğe</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Yükle</string>
     <string name="cache_filter_storage_delete_button">Sil</string>
     <string name="cache_filter_storage_clear_button">Temizle</string>
     <string name="cache_filter_storage_load_delete_title">Varolan bir filtreyi yükle veya sil</string>
@@ -894,9 +895,6 @@
     <string name="init_memory_dump">Bellek dökümü</string>
     <string name="init_memory_dumped">Bellek boşaltıldı %s</string>
     <string name="init_please_wait">Lütfen bekleyin…</string>
-    <string name="init_hardware_acceleration_title">Donanım hızlandırmalı sunum</string>
-    <string name="init_hardware_acceleration_note">Donanım hızlanması, grafik ögelerini ekranda daha hızlı hale getirir. Ancak bazı cihazlarda Android işletim sistemi hata içerir ve bazı metinler bulanık görünebilir (özellikle kalın karakterler). Bu gerçekleşirse donanım hızlanmasını devre dışı bırakın.</string>
-    <string name="init_hardware_acceleration">Donanım hızlanmasını aç</string>
     <string name="settings_open_website">İnternet sitesini aç</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org web sitesini aç</string>
     <string name="settings_settings">Ayarlar</string>
@@ -1127,6 +1125,7 @@
     <string name="cache_hint">İpucu</string>
     <string name="cache_hint_not_available">İpucu yok</string>
     <string name="cache_logs">Kayıt defteri</string>
+    <string name="cache_latest_logs">Son kayıtlar</string>
     <string name="cache_logs_friends_and_own">Arkadaşlarımın/Kendimin Kayıtları</string>
     <string name="cache_dialog_loading_details">Geocache ayrıntıları yükleniyor…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Sayfa yükleniyor</string>
@@ -1207,10 +1206,10 @@
     <string name="cache_status_disabled">Devredışı</string>
     <string name="cache_status_active">Aktif</string>
     <string name="cache_status_premium">Sadece Premium üyeler</string>
-    <string name="cache_geocode">Geo kodu</string>
+    <string name="cache_geocode">Geokod</string>
     <string name="cache_name">İsim</string>
-    <string name="cache_name_set">Cache ismi ayarla</string>
-    <string name="cache_name_updated">Cache ismi güncellendi</string>
+    <string name="cache_name_set">Geocache ismini ayarla</string>
+    <string name="cache_name_updated">Geocache ismi güncellendi</string>
     <string name="cache_description_set">Geocache açıklamasını ayarla</string>
     <string name="cache_description_updated">Geocache açıklaması güncellendi</string>
     <string name="cache_type">Tür</string>
@@ -1373,6 +1372,8 @@
     <string name="map_language">Harita dili</string>
     <string name="map_live_enable">Anlık görüntü açık</string>
     <string name="map_live_disable">Anlık görüntü kapalı</string>
+    <string name="map_live_disabled">Canlı mod devredışı</string>
+    <string name="map_live_disabled_hint">Canlı mod devredışı. Sadece kayıtlı Geocache\'leri göreceksiniz. Canlı moda geçmek için menüyü kullanın.</string>
     <string name="map_as_list">Liste olarak göster</string>
     <string name="map_select_multiple_items">Öğe seç</string>
     <string name="map_routing">Yönlendirme</string>
@@ -1389,15 +1390,14 @@
     <string name="map_settings_cache_filter_too_complex_message">Mevcut filtre daha fazla seçenek uygulamak için çok karmaşık. Bu genellikle filtrenin basit VE mantığı yerine DEĞİL veya VEYA içermesiyle alakalıdır.</string>
     <!-- search -->
     <string name="search_bar_hint">Cache/trackable ara</string>
-    <string name="search_bar_desc">Geocache\'ler (geocode, anahtar kelime), Trackable (TB kodu)</string>
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>
     <string name="search_address_button">Adrese göre ara</string>
-    <string name="search_geo">Geo kod</string>
-    <string name="search_geo_button">Geo koduna göre ara</string>
+    <string name="search_geo">Geokod</string>
+    <string name="search_geo_button">Geocode\'a göre ara</string>
     <string name="search_geocode_from_clipboard">Geokod panodan yapıştırıldı.</string>
-    <string name="search_kw">Anahtar kelimeler</string>
+    <string name="search_kw">Anahtar kelime</string>
     <string name="search_kw_prefill">Anahtar kelime</string>
     <string name="search_kw_button">Anahtar kelimeye göre ara</string>
     <string name="search_hbu">Saklayan</string>
@@ -1419,7 +1419,7 @@
     <string name="search_pocket_title">Sorgulama Kaydı</string>
     <string name="search_bookmark_list">Yer imi listesi</string>
     <string name="search_pocket_is_new">yeni</string>
-    <string name="search_pocket_and_bookmark_loading">Cep sorgusu listesi veya bir yer imi listesi yükleniyor</string>
+    <string name="search_pocket_loading">Sorgulama kayırları yükleniyor</string>
     <string name="search_bookmark_loading">Yer imi listeleri yükleniyor</string>
     <string name="search_bookmark_select">Yer imi listesini seç</string>
     <string name="search_bookmark_new">Yeni yer imi listesi oluştur</string>
@@ -1838,10 +1838,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d gün önce</item>
         <item quantity="other">%d gün önce</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favori</item>
-        <item quantity="other">%s favori</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo kısayolu</string>
