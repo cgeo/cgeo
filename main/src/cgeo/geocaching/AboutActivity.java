@@ -220,11 +220,15 @@ public class AboutActivity extends TabbedViewPagerActivity {
             binding.getRoot().setVisibility(View.VISIBLE);
             final Markwon markwon = Markwon.create(activity);
 
-            final String changelogBase = FileUtils.getChangelogMaster(activity);
-            final String changelogBugfix = FileUtils.getChangelogRelease(activity);
+            final String changelogBase = FileUtils.getChangelogMaster(activity).trim();
+            final String changelogBugfix = FileUtils.getChangelogRelease(activity).trim();
             if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
-                markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") +  changelogBugfix);
+                if (StringUtils.isNotEmpty(changelogBugfix)) {
+                    markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") + changelogBugfix);
+                } else {
+                    binding.changelogMaster.setVisibility(View.GONE);
+                }
                 markwon.setMarkdown(binding.changelogRelease, "## " + BranchDetectionHelper.FEATURE_VERSION_NAME + "\n\n" + changelogBase);
             } else {
                 // we are on a non-release branch
