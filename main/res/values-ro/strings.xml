@@ -249,7 +249,6 @@
     <string name="err_trackable_no_preference_activity">Ecranul de configurare adecvat nu a fost găsit.</string>
     <string name="confirm_unsaved_changes_title">Modificări nesalvate</string>
     <string name="confirm_discard_wp_changes">Renunţă la modificările nesalvate de la acest punct?</string>
-    <string name="err_request_popup_info">c:geo nu a reuşit să obţină informaţiile minime despre geocutie.</string>
     <!-- location service -->
     <string name="loc_last">Ultima poziţie cunoscută</string>
     <string name="loc_net">Reţea</string>
@@ -501,9 +500,6 @@
     <string name="init_create_memory_dump">Creează un extras de memorie copie după memoria folosită de aplicaţie</string>
     <string name="init_memory_dump">Extras de memorie</string>
     <string name="init_memory_dumped">Extras de memorie salvat în %s</string>
-    <string name="init_hardware_acceleration_title">Afişare accelerată hardware</string>
-    <string name="init_hardware_acceleration_note">Accelerarea hardware generează şi afişează mai rapid pe ecran elemente grafice. Pe unele dispozitive însă sistemul de operare Android conţine erori şi unele texte pot apărea neclar. (în special literele îngroşate). Dezactivează accelerarea hardware dacă ai această problemă.</string>
-    <string name="init_hardware_acceleration">Activează accelerarea hardware</string>
     <string name="settings_open_website">Intră pe site</string>
     <string name="settings_open_geokretymap_website">Deschide site-ul GeoKretyMap.org</string>
     <string name="settings_settings">Opţiuni</string>
@@ -1149,11 +1145,6 @@
     <string name="tts_oclock">ora %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiat în memoria temporară</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorită</item>
-        <item quantity="few">%s favorite</item>
-        <item quantity="other">%s favorite</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">legătură la c:geo</string>
     <string name="create_shortcut">Crează scurtătură</string>
