@@ -441,8 +441,22 @@
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
-    <string name="user_finds">%d finds</string>
-    <string name="user_finds_offline">%d logged offline</string>
+    <plurals name="user_finds">
+        <item quantity="zero">%d finds</item>
+        <item quantity="one">%d find</item>
+        <item quantity="two">%d finds</item>
+        <item quantity="few">%d finds</item>
+        <item quantity="many">%d finds</item>
+        <item quantity="other">%d finds</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="zero">%d logged offline</item>
+        <item quantity="one">%d logged offline</item>
+        <item quantity="two">%d logged offline</item>
+        <item quantity="few">%d logged offline</item>
+        <item quantity="many">%d logged offline</item>
+        <item quantity="other">%d logged offline</item>
+    </plurals>
 
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>
