@@ -218,7 +218,6 @@
     <string name="err_trackable_no_preference_activity">Paumanhin, hindi mahanap ang angkop na preference screen.</string>
     <string name="confirm_unsaved_changes_title">Hindi naitago ang mga pagbabago</string>
     <string name="confirm_discard_wp_changes">Tanggalin ang mga hindi nai-save na pagbabago?</string>
-    <string name="err_request_popup_info">ang c:geo ay bigong kunin ang cache popup na impormayon.</string>
     <!-- location service -->
     <string name="loc_last">Huling kilala</string>
     <string name="loc_net">Ang network</string>
@@ -471,9 +470,6 @@
     <string name="init_create_memory_dump">Gumawa ng tambakan ng memory</string>
     <string name="init_memory_dump">Tambakan ng memorya</string>
     <string name="init_memory_dumped">Itambak ang memorya sa %s</string>
-    <string name="init_hardware_acceleration_title">Pinabilis ang rendering ng hardware</string>
-    <string name="init_hardware_acceleration_note">Ang pinabilis na hardware ay nagbibigay ng mas mabilis na graphical na elemento sa screen. Gayunpaman sa ilang mga aparato ang Android operating system ay naglalaman ng mga bug at ang ilang mga teksto ay maaaring lumitaw na malabo (kapansin-pansin naka-bold na mga karakter). Huwag paganahin ang pinabilis na hardware kung mangyari ito sa iyo.</string>
-    <string name="init_hardware_acceleration">Gumana ang pinabilis na hardware</string>
     <string name="settings_open_website">Buksan ang website</string>
     <string name="settings_open_geokretymap_website">Magbukas sa Geokretymap.org na website</string>
     <string name="settings_settings">Ang mga setting</string>
@@ -1113,10 +1109,6 @@
     <string name="tts_oclock">%s na alas</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kinopya sa klipbord</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s paborito</item>
-        <item quantity="other">%s mga paborito</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">ang c:geo na shortcut</string>
     <string name="create_shortcut">Lumikha ng malapit na daan</string>

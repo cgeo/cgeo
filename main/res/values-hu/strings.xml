@@ -241,7 +241,6 @@
     <string name="err_trackable_no_preference_activity">Sajnáljuk, de nem található megfelelő beállítási képernyő.</string>
     <string name="confirm_unsaved_changes_title">Nem mentett változtatások</string>
     <string name="confirm_discard_wp_changes">Elveted a nem mentett útpont változtatásokat?</string>
-    <string name="err_request_popup_info">A láda előnézeti adatainak letöltése sikertelen.</string>
     <string name="warn_log_load_additional_data">A c:geo nem tudta betölteni a kiegészítő adatokat (utazók/kedvenc pontok) a logoláshoz.</string>
     <string name="more_information">További információ</string>
     <!-- location service -->
@@ -537,9 +536,6 @@
     <string name="init_create_memory_dump">Memóriatartalom mentése</string>
     <string name="init_memory_dump">Memóriatartalom</string>
     <string name="init_memory_dumped">Memóriatartalom mentve a %s-n</string>
-    <string name="init_hardware_acceleration_title">Megjelenítés hardveres gyorsítással</string>
-    <string name="init_hardware_acceleration_note">Hardveres gyorsítással gyorsabban jelennek meg a grafikus elemek a képernyőn. Azonban néhány készüléken az Android hibákat tartalmaz és némely szöveg homályosan jelenhet meg (főleg a félkövér karakterek). Tiltsd le a hardveres gyorsítást, ha ezt tapasztalod!</string>
-    <string name="init_hardware_acceleration">Hardveres gyorsítás engedélyezése</string>
     <string name="settings_open_website">Weboldal megnyitása</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org megnyitása</string>
     <string name="settings_settings">Beállítások</string>
@@ -1202,10 +1198,6 @@
     <string name="tts_oclock">%s órakor</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kimásolva a vágólapra</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s kedvenc pont</item>
-        <item quantity="other">%s kedvenc pont</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo parancsikon</string>
     <string name="create_shortcut">Parancsikon létrehozása</string>

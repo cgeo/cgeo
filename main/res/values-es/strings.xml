@@ -256,7 +256,6 @@
     <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
     <string name="confirm_discard_changes">¿Quieres descartar los cambios no guardados?</string>
     <string name="confirm_discard_wp_changes">¿Descartar los cambios en waypoints sin guardar?</string>
-    <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
     <string name="warn_log_load_additional_data">c:geo no ha podido cargar datos adicionales (rastreables/puntos favoritos) para el registro.</string>
     <string name="more_information">Más información</string>
     <string name="undo">Deshacer</string>
@@ -683,9 +682,6 @@
     <string name="init_create_memory_dump">Crear volcado de memoria</string>
     <string name="init_memory_dump">Volcado de memoria</string>
     <string name="init_memory_dumped">Memoria volcada a %s</string>
-    <string name="init_hardware_acceleration_title">Renderizado con aceleración por hardware</string>
-    <string name="init_hardware_acceleration_note">La aceleración por hardware renderiza los elementos gráficos en pantalla de manera más rápida. Sin embargo en algunos dispositivos el sistema operativo Android contiene fallos y algunos textos pueden aparecer borrosos (especialmente caracteres en negrita). Inhabilita la aceleración por hardware si ocurriera esto.</string>
-    <string name="init_hardware_acceleration">Habilitar aceleración por hardware</string>
     <string name="settings_open_website">Abrir el sitio web</string>
     <string name="settings_open_geokretymap_website">Abrir el sitio web GeoKretyMap.org</string>
     <string name="settings_settings">Ajustes</string>
@@ -1444,10 +1440,6 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorito</item>
-        <item quantity="other">%s favoritos</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>

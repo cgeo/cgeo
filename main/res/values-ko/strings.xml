@@ -297,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">저장되지 않은 변경사항</string>
     <string name="confirm_discard_changes">저장되지 않은 변경사항을 삭제하시겠습니까?</string>
     <string name="confirm_discard_wp_changes">저장되지 않은 지점 변경을 삭제하시겠습니까?</string>
-    <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
     <string name="more_information">자세한 정보 보기</string>
     <string name="undo">실행취소</string>
@@ -479,7 +478,6 @@
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$d 개 아이템</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
     <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
@@ -896,9 +894,6 @@
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
     <string name="init_please_wait">잠시 기다려 주십시오…</string>
-    <string name="init_hardware_acceleration_title">하드웨어 가속 렌더링</string>
-    <string name="init_hardware_acceleration_note">하드웨어 가속 렌더링를 사용하면 화면이 빨리 그려집니다. 하지만, 일부 안드로이드 OS 기기의 경우 버그가 있고 문자(특히 강조문자)가 흐리게 나타나기도 합니다. 이런 상태가 발생하면 하드웨어 가속을 끄세요.</string>
-    <string name="init_hardware_acceleration">하드웨어 가속 활성화</string>
     <string name="settings_open_website">웹사이트 열기</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org 웹사이트 열기</string>
     <string name="settings_settings">설정</string>
@@ -1385,7 +1380,6 @@
     <string name="map_settings_cache_filter_too_complex_message">현재 캐시 필터가 너무 복잡해서 여기에 추가 옵션을 적용할 수 없습니다. 일반적으로 이는 캐시 필터에 단순한 AND 논리 대신 NOT 또는 OR 표현식이 포함되어 있음을 의미합니다.</string>
     <!-- search -->
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
-    <string name="search_bar_desc">캐시(지오코드, 키워드), 추적아이템(TB 코드)</string>
     <string name="search_coordinates">좌표</string>
     <string name="search_coordinates_button">좌표로 검색</string>
     <string name="search_address">주소</string>
@@ -1828,9 +1822,6 @@
     <string name="clipboard_copy_ok">클립보드에 복사됨</string>
     <plurals name="days_ago">
         <item quantity="other">%d일 전</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="other">%s 호감점수</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>

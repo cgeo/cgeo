@@ -296,7 +296,6 @@
     <string name="confirm_unsaved_changes_title">Osparade ändringar</string>
     <string name="confirm_discard_changes">Ignorera osparade ändringar?</string>
     <string name="confirm_discard_wp_changes">Ignorera osparade ändringar för punkten?</string>
-    <string name="err_request_popup_info">c:geo kunde inte hämta cachens popup-info.</string>
     <string name="warn_log_load_additional_data">c:geo misslyckades med att hämta ytterligare data (trackables/favorit poäng) för loggning.</string>
     <string name="more_information">Mer information</string>
     <string name="undo">Ångra</string>
@@ -474,7 +473,6 @@
         <item quantity="one">%1$d objekt</item>
         <item quantity="other">%1$d objekt</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Ladda</string>
     <string name="cache_filter_storage_delete_button">Ta bort</string>
     <string name="cache_filter_storage_clear_button">Rensa</string>
     <string name="cache_filter_storage_load_delete_title">Ladda eller ta bort ett befintligt filter</string>
@@ -887,9 +885,6 @@
     <string name="init_memory_dump">Minnesdump</string>
     <string name="init_memory_dumped">Minnet sparat till %s</string>
     <string name="init_please_wait">Var god vänta…</string>
-    <string name="init_hardware_acceleration_title">Hårdvaruaccelererad grafik</string>
-    <string name="init_hardware_acceleration_note">Hårdvaruacceleration visar grafik snabbare på skärmen. På vissa enheter har Android buggar som gör att viss text blir suddig (eller som feta bokstäver). Inaktivera hårdvaruacceleration om du upplever detta.</string>
-    <string name="init_hardware_acceleration">Aktivera hårdvaruacceleration</string>
     <string name="settings_open_website">Öppna hemsida</string>
     <string name="settings_open_geokretymap_website">Öppna GeoKretyMap.org hemsida</string>
     <string name="settings_settings">Inställningar</string>
@@ -1814,10 +1809,6 @@
     <plurals name="days_ago">
         <item quantity="one">%d dag sedan</item>
         <item quantity="other">%d dagar sedan</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorit</item>
-        <item quantity="other">%s favoriter</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genväg</string>
