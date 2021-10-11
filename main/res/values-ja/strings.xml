@@ -296,7 +296,6 @@
     <string name="confirm_unsaved_changes_title">変更が保存されていません</string>
     <string name="confirm_discard_changes">保存せずに終了しますか?</string>
     <string name="confirm_discard_wp_changes">ウェイポイントの変更を破棄しますか?</string>
-    <string name="err_request_popup_info">キャッシュポップアップ情報の取得に失敗しました</string>
     <string name="warn_log_load_additional_data">ログの追加データ(トラッカブル/お気に入りポイント)を読み込めませんでした</string>
     <string name="more_information">詳細…</string>
     <string name="undo">元に戻す</string>
@@ -326,7 +325,8 @@
     <string name="menu_history">履歴</string>
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
-    <string name="menu_lists_pocket_queries">リスト/ポケット・クエリ</string>
+    <string name="menu_lists_pocket_queries">ポケット・クエリ</string>
+    <string name="menu_lists_bookmarklists">ブックマークリスト</string>
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
@@ -357,13 +357,13 @@
     <string name="caches_on_map">地図で表示</string>
     <string name="caches_sort">並び替え</string>
     <string name="caches_sort_distance">距離</string>
+    <string name="caches_sort_distance_target">目的地までの距離</string>
     <string name="caches_sort_difficulty">難易度</string>
     <string name="caches_sort_terrain">地形</string>
     <string name="caches_sort_size">サイズ</string>
     <string name="caches_sort_favorites">お気に入り</string>
     <string name="caches_sort_favorites_ratio">お気に入り [%]</string>
     <string name="caches_sort_name">キャッシュ名</string>
-    <string name="caches_sort_geocode">GCコード</string>
     <string name="caches_sort_rating">評価</string>
     <string name="caches_sort_vote">評価済み</string>
     <string name="caches_sort_inventory">目録の数</string>
@@ -473,7 +473,6 @@
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$dアイテム</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">読み込み</string>
     <string name="cache_filter_storage_delete_button">削除</string>
     <string name="cache_filter_storage_clear_button">削除</string>
     <string name="cache_filter_storage_load_delete_title">フィルタの読み込みまたは削除</string>
@@ -886,9 +885,6 @@
     <string name="init_memory_dump">メモリ・ダンプ</string>
     <string name="init_memory_dumped">%sへメモリがダンプされた</string>
     <string name="init_please_wait">お待ちください…</string>
-    <string name="init_hardware_acceleration_title">ハードウェアアクセラレーション機能</string>
-    <string name="init_hardware_acceleration_note">ハードウェアアクセラレーション機能は画面表示を高速化します。しかし一部のデバイスではAndroidオペレーティングシステムのバグのせいでテキストの一部分(特に太字の文字)がぼやけて表示されます。これが発生する場合はハードウェアアクセラレーションを無効にしてください</string>
-    <string name="init_hardware_acceleration">ハードウェアアクセラレーションを有効化</string>
     <string name="settings_open_website">Webサイトを開く</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org</string>
     <string name="settings_settings">設定</string>
@@ -1104,13 +1100,13 @@
     <string name="cache_advanced">追加設定</string>
     <string name="cache_waypoints">ウェイポイント</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
-    <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
     <string name="cache_waypoints_remove_original_waypoint">ウェイポイントをクリップボードからこのキャッシュにコピーしました。\n\n元のウェイポイントを削除しますか?</string>
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントはありません</string>
     <string name="cache_logs">ログブック</string>
+    <string name="cache_latest_logs">最近のログ</string>
     <string name="cache_logs_friends_and_own">ジオ友達/自分のログ</string>
     <string name="cache_dialog_loading_details">キャッシュの詳細を読み込み中…</string>
     <string name="cache_dialog_loading_details_status_loadpage">ページを読み込み中</string>
@@ -1190,10 +1186,7 @@
     <string name="cache_status_disabled">一時停止中</string>
     <string name="cache_status_active">有効</string>
     <string name="cache_status_premium">プレミアム会員のみ</string>
-    <string name="cache_geocode">GCコード</string>
     <string name="cache_name">キャッシュ名</string>
-    <string name="cache_name_set">キャッシュ名を設定</string>
-    <string name="cache_name_updated">キャッシュ名を更新しました</string>
     <string name="cache_description_set">キャッシュの説明を入力</string>
     <string name="cache_description_updated">キャッシュの説明が更新されました</string>
     <string name="cache_type">タイプ</string>
@@ -1354,6 +1347,8 @@
     <string name="map_language">地図の言語</string>
     <string name="map_live_enable">オンラインで取得</string>
     <string name="map_live_disable">保存済みキャッシュのみ</string>
+    <string name="map_live_disabled">オンラインではありません</string>
+    <string name="map_live_disabled_hint">保存済みキャッシュのみ表示されるオフラインモードです。オンラインで取得するにはメニューから変更してください。</string>
     <string name="map_as_list">リスト表示</string>
     <string name="map_select_multiple_items">アイテムを選択</string>
     <string name="map_routing">ルート検索</string>
@@ -1370,22 +1365,17 @@
     <string name="map_settings_cache_filter_too_complex_message">現在のキャッシュフィルタは複雑すぎて、フィルタ条件を適用できません。 通常、単純なAND条件の代わりにNOT(除外)またはOR条件が含まれていることを意味します。</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
-    <string name="search_bar_desc">キャッシュ(GCコード,キーワード), トラッカブル(TBコード)</string>
     <string name="search_coordinates">座標</string>
     <string name="search_coordinates_button">座標で検索</string>
     <string name="search_address">住所</string>
     <string name="search_address_button">住所で検索</string>
-    <string name="search_geo">GCコード</string>
-    <string name="search_geo_button">GCコードで検索</string>
     <string name="search_geocode_from_clipboard">クリップボードから貼り付けられました</string>
-    <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
     <string name="search_kw_button">キーワードで検索</string>
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_filter">フィルタ</string>
-    <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
     <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
@@ -1399,7 +1389,7 @@
     <string name="search_pocket_title">ポケット・クエリ</string>
     <string name="search_bookmark_list">ブックマークリスト</string>
     <string name="search_pocket_is_new">新着</string>
-    <string name="search_pocket_and_bookmark_loading">ポケット・クエリのリストとブックマークリストの読み込み中</string>
+    <string name="search_pocket_loading">ポケット・クエリの読み込み中…</string>
     <string name="search_bookmark_loading">ブックマークリストの読み込み中…</string>
     <string name="search_bookmark_select">ブックマークリストの選択</string>
     <string name="search_bookmark_new">新しいブックマークリストを作成</string>
@@ -1812,9 +1802,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="clipboard_copy_ok">クリップボードにコピーしました</string>
     <plurals name="days_ago">
         <item quantity="other">%d日前</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="other">お気に入り %s </item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo ショートカット</string>
