@@ -320,10 +320,12 @@
     <string name="menu_helpers">Βοηθητικά προγράμματα</string>
     <string name="menu_settings">Ρυθμίσεις</string>
     <string name="menu_backup">Αντίγραφα ασφαλείας / επαναφορά</string>
-    <string name="menu_update">Αναβάθμιση</string>
+    <string name="menu_update">Ενημέρωση δεδομένων εκτός σύνδεσης</string>
     <string name="menu_update_routingdata">Δεδομένα δρομολόγησης</string>
     <string name="menu_update_mapdata">Δεδομένα χάρτη</string>
+    <string name="menu_dashboard">Πίνακας σύνδεσης</string>
     <string name="menu_history">Ιστορικό</string>
+    <string name="menu_history_longstring">Ιστορικό ευρέσεων</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
@@ -336,6 +338,7 @@
     <string name="advanced_search_button">Αναζήτηση</string>
     <string name="stored_caches_button">Αποθηκευμένα</string>
     <string name="any_button">Πήγαινε σε</string>
+    <string name="more_button">Περισσότερα</string>
     <string name="unknown_scan">Δεν βρήκα οποιονδήποτε γεωκωδικό κατά την σάρωση.</string>
     <!-- caches -->
     <string name="caches_no_cache">Καμία κρύπτη εδώ</string>
@@ -668,6 +671,7 @@
     <string name="init_login_popup_failed">Αποτυχία σύνδεσης</string>
     <string name="init_login_popup_failed_reason">Η σύνδεση απέτυχε: %s</string>
     <string name="init_login_popup_not_authorized">Μη εξουσιοδοτημένο</string>
+    <string name="init_login_popup_not_logged_in">Δεν έχετε συνδεθεί</string>
     <string name="init_login_popup_invalid_timestamp">Η τοπική ώρα δεν είναι έγκυρη, ρυθμίστε τη χειροκίνητα</string>
     <string name="init_login_popup_invalid_token">Η εξουσιοδότηση δεν είναι έγκυρη, εκ νέου εξουσιοδότηση</string>
     <string name="init_authorization_credential_username">Όνομα χρήστη</string>
@@ -2108,4 +2112,5 @@
     <string name="later">Αργότερα</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
+    <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>
 </resources>
