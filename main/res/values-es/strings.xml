@@ -279,7 +279,6 @@
     <string name="menu_helpers">Programas útiles</string>
     <string name="menu_settings">Ajustes</string>
     <string name="menu_backup">Copia de seguridad / Restauración</string>
-    <string name="menu_update">Actualizar</string>
     <string name="menu_update_routingdata">Datos de ruta</string>
     <string name="menu_update_mapdata">Datos del mapa</string>
     <string name="menu_history">Historial</string>
