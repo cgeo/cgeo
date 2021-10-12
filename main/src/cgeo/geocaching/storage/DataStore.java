@@ -798,27 +798,29 @@ public class DataStore {
             return null;
         }
 
-        synchronized (DataStore.class) {
-            if (database != null) {
-                return null;
-            }
-            final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
-            try {
-                database = dbHelper.getWritableDatabase();
-            } catch (final Exception e) {
-                Log.e("DataStore.init: unable to open database for R/W", e);
-                final String recreateErrorMsg = recreateDatabase(dbHelper);
-                if (recreateErrorMsg != null) {
-                    //if we land here we could neither open the DB nor could we recreate it and database remains null
-                    //=> failfast here by rethrowing original exception. This might give us better error analysis possibilities
-                    final String msg = "DataStore.init: Unrecoverable problem opening database ('" +
-                        databasePath().getAbsolutePath() + "')(recreate error: " + recreateErrorMsg + ")";
-                    if (force) {
-                        Log.e(msg, e);
-                        throw new RuntimeException(msg, e);
+        try(ContextLogger ignore = new ContextLogger(true, "DataStore.init")) {
+            synchronized (DataStore.class) {
+                if (database != null) {
+                    return null;
+                }
+                final DbHelper dbHelper = new DbHelper(new DBContext(CgeoApplication.getInstance()));
+                try {
+                    database = dbHelper.getWritableDatabase();
+                } catch (final Exception e) {
+                    Log.e("DataStore.init: unable to open database for R/W", e);
+                    final String recreateErrorMsg = recreateDatabase(dbHelper);
+                    if (recreateErrorMsg != null) {
+                        //if we land here we could neither open the DB nor could we recreate it and database remains null
+                        //=> failfast here by rethrowing original exception. This might give us better error analysis possibilities
+                        final String msg = "DataStore.init: Unrecoverable problem opening database ('" +
+                            databasePath().getAbsolutePath() + "')(recreate error: " + recreateErrorMsg + ")";
+                        if (force) {
+                            Log.e(msg, e);
+                            throw new RuntimeException(msg, e);
+                        }
+                        Log.w(msg, e);
+                        return msg + ": " + e.getMessage();
                     }
-                    Log.w(msg, e);
-                    return msg + ": " + e.getMessage();
                 }
             }
         }
