@@ -798,7 +798,7 @@ public class DataStore {
             return null;
         }
 
-        try(ContextLogger ignore = new ContextLogger(true, "DataStore.init")) {
+        try (ContextLogger ignore = new ContextLogger(true, "DataStore.init")) {
             synchronized (DataStore.class) {
                 if (database != null) {
                     return null;
