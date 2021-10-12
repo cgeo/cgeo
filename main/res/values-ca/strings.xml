@@ -321,7 +321,6 @@
     <string name="menu_helpers">Programes d\'utilitat</string>
     <string name="menu_settings">Configuració</string>
     <string name="menu_backup">Còpia de Seguretat / Restaurar</string>
-    <string name="menu_update">Actualització</string>
     <string name="menu_update_routingdata">Dades d\'encaminament</string>
     <string name="menu_update_mapdata">Dades del mapa</string>
     <string name="menu_history">Historial</string>
