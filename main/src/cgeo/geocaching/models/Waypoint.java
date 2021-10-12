@@ -492,7 +492,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public int getMapMarkerId() {
-        return ConnectorFactory.getConnector(geocode).getCacheMapMarkerId();
+        return ConnectorFactory.getConnector(geocode).getWaypointMapMarkerId();
     }
 
     public int getMapDotMarkerId() {
