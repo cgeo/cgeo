@@ -320,10 +320,12 @@
     <string name="menu_helpers">Nützliche Apps</string>
     <string name="menu_settings">Einstellungen</string>
     <string name="menu_backup">Sichern / Wiederherstellen</string>
-    <string name="menu_update">Aktualisieren</string>
+    <string name="menu_update">Offline-Daten aktualisieren</string>
     <string name="menu_update_routingdata">Routingdaten</string>
     <string name="menu_update_mapdata">Kartendaten</string>
+    <string name="menu_dashboard">Login-Dashboard</string>
     <string name="menu_history">Verlauf</string>
+    <string name="menu_history_longstring">Fundhistorie</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Geocode scannen</string>
     <string name="menu_lists_pocket_queries">Pocket-Queries</string>
@@ -336,6 +338,7 @@
     <string name="advanced_search_button">Suche</string>
     <string name="stored_caches_button">Gespeichert</string>
     <string name="any_button">Gehe zu</string>
+    <string name="more_button">Mehr</string>
     <string name="unknown_scan">Konnte keinen Geocode im Scan finden.</string>
     <!-- caches -->
     <string name="caches_no_cache">Kein Cache</string>
@@ -411,6 +414,14 @@
     <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
     <string name="select_icon">Symbol wählen</string>
     <string name="onetime_missing_unicode_info">Deine Android-Version unterstützt keine automatische Erkennung unterstützter Icons - einige Zeichen könnten nicht angezeigt werden</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d Fund</item>
+        <item quantity="other">%d Funde</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d Offline-Log</item>
+        <item quantity="other">%d Offline-Logs</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Listen verwalten</string>
     <string name="list_menu_create">Neue Liste</string>
@@ -668,6 +679,7 @@
     <string name="init_login_popup_failed">Anmeldung fehlgeschlagen</string>
     <string name="init_login_popup_failed_reason">Anmeldung fehlgeschlagen: %s</string>
     <string name="init_login_popup_not_authorized">Nicht autorisiert</string>
+    <string name="init_login_popup_not_logged_in">Nicht angemeldet</string>
     <string name="init_login_popup_invalid_timestamp">Lokale Zeit ungültig, Gerätezeit einstellen</string>
     <string name="init_login_popup_invalid_token">Autorisierung ungültig, erneut autorisieren</string>
     <string name="init_authorization_credential_username">Benutzername</string>
@@ -2113,4 +2125,5 @@
     <string name="later">Später</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
+    <string name="touch_again_to_exit">Zum Beenden nochmal tippen</string>
 </resources>
