@@ -319,7 +319,6 @@
     <string name="menu_helpers">ユーティリティアプリ</string>
     <string name="menu_settings">設定</string>
     <string name="menu_backup">バックアップ/復元</string>
-    <string name="menu_update">更新</string>
     <string name="menu_update_routingdata">ルート検索データ</string>
     <string name="menu_update_mapdata">地図データ</string>
     <string name="menu_history">履歴</string>
