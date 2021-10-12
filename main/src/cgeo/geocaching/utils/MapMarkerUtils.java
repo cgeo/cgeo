@@ -245,7 +245,7 @@ public final class MapMarkerUtils {
 
         final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
-        insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
+        insetsBuilder.withInset(new InsetBuilder(R.drawable.waypoint_marker_pin));
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         final Drawable mainMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId, null));

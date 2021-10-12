@@ -144,6 +144,11 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     }
 
     @Override
+    public int getWaypointMapMarkerId() {
+        return R.drawable.waypoint_marker_oc;
+    };
+
+    @Override
     @NonNull
     public final List<LogType> getPossibleLogTypes(@NonNull final Geocache cache) {
         if (cache.isEventCache()) {
