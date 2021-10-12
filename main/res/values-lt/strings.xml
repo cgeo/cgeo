@@ -313,7 +313,6 @@
     <string name="menu_helpers">Naudingos programos</string>
     <string name="menu_settings">Nustatymai</string>
     <string name="menu_backup">Atsarginė kopija / atkurti</string>
-    <string name="menu_update">Atnaujinti</string>
     <string name="menu_update_routingdata">Maršruto duomenys</string>
     <string name="menu_update_mapdata">Žemėlapio duomenys</string>
     <string name="menu_history">Istorija</string>
