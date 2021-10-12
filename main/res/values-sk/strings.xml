@@ -314,7 +314,6 @@
     <string name="menu_helpers">Pomocné programy</string>
     <string name="menu_settings">Nastavenia</string>
     <string name="menu_backup">Zálohovať/Obnoviť</string>
-    <string name="menu_update">Aktualizácia</string>
     <string name="menu_update_routingdata">Údaje navigácie</string>
     <string name="menu_update_mapdata">Mapové podklady</string>
     <string name="menu_history">História</string>
