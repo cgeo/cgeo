@@ -320,7 +320,6 @@
     <string name="menu_helpers">Outils</string>
     <string name="menu_settings">Paramètres</string>
     <string name="menu_backup">Sauvegarde / Restauration</string>
-    <string name="menu_update">Mise à jour</string>
     <string name="menu_update_routingdata">Données de navigation</string>
     <string name="menu_update_mapdata">Données cartographiques</string>
     <string name="menu_history">Historique</string>
