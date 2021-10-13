@@ -100,11 +100,11 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
                 if (cache == null) { // special case: we want to display a "<New cache>" item on top
                     final View view = GeoItemSelectorUtils.getOrCreateView(context, convertView, parent);
 
-                    final TextView title = (TextView) view.findViewById(R.id.title);
+                    final TextView title = (TextView) view.findViewById(R.id.text);
                     title.setText("<" + context.getString(R.string.create_internal_cache_short) + ">");
 
-                    final TextView detail = (TextView) view.findViewById(R.id.detail);
-                    detail.setText(context.getString(R.string.create_internal_cache));
+                    final TextView info = (TextView) view.findViewById(R.id.info);
+                    info.setText(context.getString(R.string.create_internal_cache));
 
                     return view;
                 }
