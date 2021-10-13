@@ -137,12 +137,13 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
-        if (id == android.R.id.home) {
+        if (id == android.R.id.home && isTaskRoot()) {
             startActivity(new Intent(this, MainActivity.class));
             ActivityMixin.overrideTransitionToFade(this);
             finish();
+            return true;
         }
-        return true;
+        return super.onOptionsItemSelected(item);
     }
 
     @Override
