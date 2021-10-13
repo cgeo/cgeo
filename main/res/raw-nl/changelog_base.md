@@ -13,14 +13,14 @@
 
 ### Cache details
 - Nieuw: Toon pictogrammen voor laatste logs
-- New: Show icons for log entries in log tab
+- Nieuw: Toon pictogrammen voor logboekvermeldingen in het logboektabblad
 - Nieuw: Optie om bezochte waypoints op tabblad waypoints te verbergen
 - Oplossing: Sta HTML toe in de beschrijving van navigatie-doelen
 - Oplossing: Filter de korte beschrijving wanneer deze al in lange beschrijving staat
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+- Oplossing: Dialoogvenster "coördinaten invoer" omgebouwd om beter gebruik onder specifieke omstandigheden weer te geven
+- Nieuw: Variabele / calculator tabblad toegevoegd (experimenteel, activeer debug modus om het te zien)
 
 ### Overig
 - Wijziging: Gescheiden bladwijzerlijsten en pocket queries (alleen geocaching.com PM)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+- Nieuw: Verwijder-geforceerd caches gemarkeerd als "te-verwijderen" bij het gebruik van onderhoudsfunctie
+- Verandering: Altijd hardware acceleratie gebruiken (instelling verwijderd en oud toestel model controle)
