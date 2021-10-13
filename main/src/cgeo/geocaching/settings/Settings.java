@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCConstants;
@@ -1229,7 +1230,7 @@ public class Settings {
             return false;
         }
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getBrouterAutoTileDownloadsInterval();
+        final long interval = getBrouterAutoTileDownloadsInterval();
         return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
@@ -1261,7 +1262,7 @@ public class Settings {
     // used for update checks for maps & route tiles downloaders
     private static long calculateNewTimestamp(final boolean delay, final int interval) {
         // if delay requested: delay by regular interval, but by three days at most
-        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (interval - 3) * DAYS_TO_SECONDS : 0);
+        return (System.currentTimeMillis() / 1000) - (delay && (interval > 3) ? (long) (interval - 3) * DAYS_TO_SECONDS : 0);
     }
 
     public static boolean isBigSmileysEnabled() {
@@ -1527,7 +1528,7 @@ public class Settings {
         if (scale < 0) {
             return -1;
         }
-        return scale < 512 ? 512 : scale;
+        return Math.max(scale, 512);
     }
 
     public static void setLogImageScale(final int scale) {
@@ -1615,6 +1616,17 @@ public class Settings {
         return getBoolean(R.string.pref_fieldNoteExportOnlyNew, false);
     }
 
+    /**
+     * Remember the stata of the "hide visited waypoints"-checkbox in the waypoints overview dialog
+     */
+    public static void setHideVisitedWaypoints(final boolean hideVisitedWaypoints) {
+        putBoolean(R.string.pref_hideVisitedWaypoints, hideVisitedWaypoints);
+    }
+
+    public static boolean getHideVisitedWaypoints() {
+        return getBoolean(R.string.pref_hideVisitedWaypoints, false);
+    }
+
     public static String getECIconSet() {
         return getString(R.string.pref_ec_icons, "1");
     }
@@ -1639,16 +1651,6 @@ public class Settings {
         history.remove(geocode);
         history.add(0, geocode);
         putStringList(R.string.pref_caches_history, history);
-    }
-
-    public static boolean useHardwareAcceleration() {
-        return outdatedPhoneModelOrSdk() ? HwAccel.hwAccelShouldBeEnabled() :
-                getBoolean(R.string.pref_hardware_acceleration, HwAccel.hwAccelShouldBeEnabled());
-    }
-
-    static void setUseHardwareAcceleration(final boolean useHardwareAcceleration) {
-        putBoolean(R.string.pref_hardware_acceleration, useHardwareAcceleration);
-        storePhoneModelAndSdk();
     }
 
     private static boolean outdatedPhoneModelOrSdk() {
@@ -1702,7 +1704,7 @@ public class Settings {
      * @return the avatar url
      */
     @NonNull
-    public static String getAvatarUrl(@NonNull final ICredentials connector) {
+    public static String getAvatarUrl(@NonNull final IAvatar connector) {
         return getString(connector.getAvatarPreferenceKey(), null);
     }
 
@@ -1712,7 +1714,7 @@ public class Settings {
      * @param connector the connector to retrieve the avatar information from
      * @param avatarUrl the avatar url information to store
      */
-    public static void setAvatarUrl(@NonNull final ICredentials connector, final String avatarUrl) {
+    public static void setAvatarUrl(@NonNull final IAvatar connector, final String avatarUrl) {
         putString(connector.getAvatarPreferenceKey(), avatarUrl);
     }
 
@@ -1837,17 +1839,16 @@ public class Settings {
     }
 
     private static String[] getLegacyPreferenceKeysFor(final int keyId) {
-        switch (keyId) {
-            case R.string.pref_persistablefolder_offlinemaps:
-                return new String[]{"mapDirectory"};
-            case R.string.pref_persistablefolder_gpx:
-                return new String[]{"gpxExportDir", "gpxImportDir"};
-            case R.string.pref_persistableuri_track:
-                return new String[]{"pref_trackfile"};
-            case R.string.pref_persistablefolder_offlinemapthemes:
-                return new String[]{"renderthemepath"};
-            default:
-                return new String[0];
+        if (keyId == R.string.pref_persistablefolder_offlinemaps) {
+            return new String[]{"mapDirectory"};
+        } else if (keyId == R.string.pref_persistablefolder_gpx) {
+            return new String[]{"gpxExportDir", "gpxImportDir"};
+        } else if (keyId == R.string.pref_persistableuri_track) {
+            return new String[]{"pref_trackfile"};
+        } else if (keyId == R.string.pref_persistablefolder_offlinemapthemes) {
+            return new String[]{"renderthemepath"};
+        } else {
+            return new String[0];
         }
     }
 

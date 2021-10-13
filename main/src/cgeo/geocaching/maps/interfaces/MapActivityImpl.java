@@ -8,7 +8,6 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -44,8 +43,4 @@ public interface MapActivityImpl extends FilteredActivity {
 
     IndividualRouteUtils getIndividualRouteUtils();
 
-    /**
-     * called from the pseudo actionbar layout
-     */
-    void navigateUp(View view);
 }

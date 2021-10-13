@@ -279,7 +279,6 @@
     <string name="caches_sort_favorites">Številu favoritov</string>
     <string name="caches_sort_favorites_ratio">Številu favoritov [%]</string>
     <string name="caches_sort_name">Imenu</string>
-    <string name="caches_sort_geocode">Geo kodi</string>
     <string name="caches_sort_rating">Glasovih</string>
     <string name="caches_sort_vote">Mojih glasovih</string>
     <string name="caches_sort_inventory">Številu sledljivčkov</string>
@@ -470,9 +469,6 @@
     <string name="init_low_power_mode">Aktiviraj režim nizke porabe</string>
     <string name="init_create_memory_dump">Ustvari Memmory dump</string>
     <string name="init_memory_dumped">Memory dump zapisan v %s</string>
-    <string name="init_hardware_acceleration_title">Strojno pospešeno prikazovanje</string>
-    <string name="init_hardware_acceleration_note">Strojno pospeševanje omogoča hitrejše prikazovanje grafičnih elementov na zaslonu. Vendar imajo nekatere Android naprave s strojno pospešenim prikazovanjem težave, predvsem s prikazovanjem odebeljenega teksta. V primeru težav izključite strojno pospešeno prikazovanje grafičnih elementov.</string>
-    <string name="init_hardware_acceleration">Omogoči strojno pospeševanje</string>
     <string name="settings_open_website">Odpri spletno stran</string>
     <string name="settings_settings">Nastavitve</string>
     <string name="settings_information">Informacije</string>
@@ -559,7 +555,6 @@
     <string name="cache_favpoint_not_on">Zaklad ni na vašem spisku priljubljenih.</string>
     <string name="cache_images">Slike</string>
     <string name="cache_waypoints">Dodatne točke</string>
-    <string name="cache_waypoints_add">Dodaj točko</string>
     <string name="cache_hint">Namig</string>
     <string name="cache_logs">Dnevnik zapisov</string>
     <string name="cache_logs_friends_and_own">Lastni/prijateljevi zapisi</string>
@@ -614,7 +609,6 @@
     <string name="cache_status_archived">Arhiviran</string>
     <string name="cache_status_disabled">Onemogočen</string>
     <string name="cache_status_premium">Samo za Premium člane</string>
-    <string name="cache_geocode">Geo koda</string>
     <string name="cache_name">Ime</string>
     <string name="cache_type">Tip</string>
     <string name="cache_size">Velikost</string>
@@ -714,14 +708,10 @@
     <string name="map_as_list">Pokaži kot seznam</string>
     <string name="map_select_multiple_items">Izberite element</string>
     <!-- search -->
-    <string name="search_bar_desc">Zakladi (geo koda, ključne besede), Sledljivčki (TB koda)</string>
     <string name="search_coordinates">Koordinate</string>
     <string name="search_coordinates_button">Iskanje po koordinatah</string>
     <string name="search_address">Naslov</string>
     <string name="search_address_button">Iskanje po naslovu</string>
-    <string name="search_geo">Geo koda</string>
-    <string name="search_geo_button">Iskanje po geo kodi</string>
-    <string name="search_kw">Ključne besede</string>
     <string name="search_kw_prefill">Ključna beseda</string>
     <string name="search_kw_button">Iskanje po ključnih besedah</string>
     <string name="search_hbu_prefill">Lastnik</string>
@@ -1063,12 +1053,6 @@
     </plurals>
     <!-- various -->
     <string name="clipboard_copy_ok">Skopirano v odložišče</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorit</item>
-        <item quantity="two">%s favorita</item>
-        <item quantity="few">%s favoritov</item>
-        <item quantity="other">%s favoritov</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Bližnjica c:geo</string>
     <string name="create_shortcut">Ustvari bližnjico</string>

@@ -225,11 +225,11 @@ public class CompassActivity extends AbstractActionBarActivity {
         final int id = item.getItemId();
         if (id == R.id.menu_map) {
             if (waypoint != null) {
-                DefaultMap.startActivityCoords(this, waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName());
+                DefaultMap.startActivityCoords(this, waypoint);
             } else if (cache != null) {
                 DefaultMap.startActivityGeoCode(this, cache.getGeocode());
             } else {
-                DefaultMap.startActivityCoords(this, dstCoords, null, null);
+                DefaultMap.startActivityCoords(this, dstCoords);
             }
         } else if (id == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, dstCoords);

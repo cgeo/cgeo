@@ -6,6 +6,7 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.FieldNotesCapability;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
@@ -40,12 +41,10 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
-
-import android.app.Activity;
-import android.os.Handler;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -60,7 +59,7 @@ import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability {
+public class GCConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByNextPage, ISearchByFilter, ISearchByViewPort, ISearchByKeyword, ILogin, ICredentials, ISearchByOwner, ISearchByFinder, FieldNotesCapability, IIgnoreCapability, WatchListCapability, PersonalNoteCapability, SmileyCapability, PgcChallengeCheckerCapability, IFavoriteCapability, IVotingCapability, IAvatar {
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
@@ -458,9 +457,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public boolean login(final Handler handler, @Nullable final Activity fromActivity) {
+    public boolean login() {
         // login
         final StatusCode status = GCLogin.getInstance().login();
+        // update cache counter
+        FoundNumCounter.getAndUpdateFoundNum(this);
 
         return status == StatusCode.NO_ERROR;
     }
@@ -540,7 +541,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final List<UserAction> actions = super.getUserActions(user);
         actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> ShareUtils.openUrl(context.getContext(), "https://www.geocaching.com/p/default.aspx?u=" + Network.encode(context.userName))));
         if (StringUtils.isNotBlank(user.userGUID)) {
-            actions.add(new UserAction(R.string.user_menu_send_message, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), "https://www.geocaching.com/account/messagecenter?recipientId=" + context.userGUID)));
+            actions.add(new UserAction(R.string.user_menu_send_message, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), "https://www.geocaching.com/account/messagecenter?recipientId=" + context.userGUID + (StringUtils.isNotBlank(context.geocode) ? "&gcCode=" + context.geocode : ""))));
         }
         actions.add(new UserAction(R.string.user_menu_send_email, R.drawable.ic_menu_email, context -> ShareUtils.openUrl(context.getContext(), "https://www.geocaching.com/email/?u=" + Network.encode(context.userName))));
         return actions;

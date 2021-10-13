@@ -8,6 +8,7 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.PendingDownload;
@@ -58,6 +59,26 @@ public class DownloaderUtils {
             return true;
         }
         return false;
+    }
+
+    public static void checkForRoutingTileUpdates(final Activity activity) {
+        if (Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
+        }
+    }
+
+    public static void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
+        Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed);
+    }
+
+    public static void checkForMapUpdates(final Activity activity) {
+        if (Settings.isMapAutoDownloads() && Settings.mapAutoDownloadsNeedUpdate()) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, DownloaderUtils::returnFromMapUpdateCheck);
+        }
+    }
+
+    public static void returnFromMapUpdateCheck(final boolean updateCheckAllowed) {
+        Settings.setMapAutoDownloadsLastCheck(!updateCheckAllowed);
     }
 
     private static String getFilenameFromUri(final Uri uri) {
@@ -130,9 +151,9 @@ public class DownloaderUtils {
     }
 
     public static class DownloadDescriptor {
-        public String filename;
-        public Uri uri;
-        public int type;
+        public final String filename;
+        public final Uri uri;
+        public final int type;
 
         DownloadDescriptor(final String filename, final Uri uri, final int type) {
             this.filename = filename;

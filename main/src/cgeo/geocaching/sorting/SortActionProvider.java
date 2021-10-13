@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
@@ -39,6 +40,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     // Used to change menu Filter label
     private boolean isEventsOnly = false;
+    private Geopoint targetCoords = null;
 
     private static final class ComparatorEntry {
         private final String name;
@@ -99,7 +101,10 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     private void registerComparators() {
         registry.clear();
-        register(R.string.caches_sort_distance, DistanceComparator.class, () -> DistanceComparator.DISTANCE_TO_GLOBAL_GPS);
+        if (targetCoords != null) {
+            register(R.string.caches_sort_distance_target, TargetDistanceComparator.class, () -> new TargetDistanceComparator(targetCoords));
+        }
+        register(R.string.caches_sort_distance, GlobalGPSDistanceConparator.class, () -> GlobalGPSDistanceConparator.INSTANCE);
         if (isEventsOnly) {
             register(R.string.caches_sort_eventdate, EventDateComparator.class);
         } else {
@@ -170,5 +175,9 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
 
     public void setIsEventsOnly(final boolean isEventsOnly) {
         this.isEventsOnly = isEventsOnly;
+    }
+
+    public void setTargetCoords(final Geopoint targetCoords) {
+        this.targetCoords = targetCoords;
     }
 }

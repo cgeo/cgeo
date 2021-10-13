@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.list.StoredList;
@@ -10,6 +11,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -80,10 +82,9 @@ public class MapOptions {
         isLiveEnabled = Settings.isLiveMap();
     }
 
-    public MapOptions(final Geopoint coords, final WaypointType type, final String title) {
+    public MapOptions(final Geopoint coords, final WaypointType type) {
         this.coords = coords;
         this.waypointType = type;
-        this.title = title;
         mapMode = MapMode.COORDS;
         isLiveEnabled = false;
     }
@@ -123,4 +124,10 @@ public class MapOptions {
         fromActivity.startActivity(newIntent(fromActivity, cls));
     }
 
+    public void startIntentWithoutTransition(final Activity fromActivity, final Class<?> cls) {
+        startIntent(fromActivity, cls);
+
+        // avoid weired transitions
+        ActivityMixin.overrideTransitionToFade(fromActivity);
+    }
 }

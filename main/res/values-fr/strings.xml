@@ -11,6 +11,7 @@
     <string name="about">À propos de c:geo</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="latlongitude">Latitude\nLongitude</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Paramètres c:geo</string>
     <!-- caches -->
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
     <string name="confirm_discard_changes">Ignorer les modifications non enregistrées ?</string>
     <string name="confirm_discard_wp_changes">Abandonner les points de passage non enregistrés ?</string>
-    <string name="err_request_popup_info">c:geo n\'a pas pu récupérer le contenu du popup de la cache.</string>
     <string name="warn_log_load_additional_data">c:geo n\'a pas réussi à charger les données supplémentaires (objets voyageurs / points de favori) pour loguer.</string>
     <string name="more_information">Plus d\'informations</string>
     <string name="undo">Annuler</string>
@@ -326,7 +326,8 @@
     <string name="menu_history">Historique</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Scanner un géocode</string>
-    <string name="menu_lists_pocket_queries">Listes / Pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Listes de favoris</string>
     <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
     <string name="menu_invert_order">Inverser l’ordre</string>
     <!-- main screen -->
@@ -358,13 +359,14 @@
     <string name="caches_on_map">Afficher sur la carte</string>
     <string name="caches_sort">Trier</string>
     <string name="caches_sort_distance">Distance</string>
+    <string name="caches_sort_distance_target">Distance jusqu\'à la cible</string>
     <string name="caches_sort_difficulty">Difficulté</string>
     <string name="caches_sort_terrain">Terrain</string>
     <string name="caches_sort_size">Taille</string>
     <string name="caches_sort_favorites">Favoris [nombre]</string>
     <string name="caches_sort_favorites_ratio">Favoris [%]</string>
     <string name="caches_sort_name">Nom</string>
-    <string name="caches_sort_geocode">Code</string>
+    <string name="caches_sort_geocode">Géocode</string>
     <string name="caches_sort_rating">Évaluation</string>
     <string name="caches_sort_vote">Votre évaluation personnelle</string>
     <string name="caches_sort_inventory">Nombre d\'objets dans l\'inventaire</string>
@@ -383,7 +385,7 @@
     <string name="caches_remove_all_completely">Tout supprimer de l\'appareil</string>
     <string name="caches_remove_selected_completely">Supprimer les éléments sélectionnés de l\'appareil</string>
     <string name="caches_delete_events">Supprimer les événements précédents</string>
-    <string name="caches_upload_bookmarklist">Envoyer vers la liste des favoris</string>
+    <string name="caches_upload_bookmarklist">Ajouter aux favoris</string>
     <string name="caches_upload_modifiedcoords">Envoyer les coordonnées modifiées</string>
     <string name="caches_upload_modifiedcoords_warning">Voulez-vous télécharger les coordonnées modifiées pour toutes les caches (sélectionnées) et écraser les coordonnées existantes sur le serveur ? Cela ne peut pas être annulé.</string>
     <string name="caches_upload_allcoords">Envoyer les coordonnées de toutes les caches</string>
@@ -478,7 +480,6 @@
         <item quantity="one">%1$d élément</item>
         <item quantity="other">%1$d éléments</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Charger</string>
     <string name="cache_filter_storage_delete_button">Supprimer</string>
     <string name="cache_filter_storage_clear_button">Effacer</string>
     <string name="cache_filter_storage_load_delete_title">Charger ou supprimer un filtre existant</string>
@@ -850,7 +851,7 @@
     <string name="init_trackautovisit">Marquer automatiquement les objets voyageurs comme \"A visité\"</string>
     <string name="init_summary_trackautovisit">Par défaut, positionner les objets voyageurs avec le statut \"A visité\"</string>
     <string name="init_sigautoinsert">Insérer la signature automatiquement</string>
-    <string name="init_offlinelogs_homescreen">Afficher les logs hors ligne</string>
+    <string name="init_offlinelogs_homescreen">Afficher les visites hors ligne</string>
     <string name="init_summary_offlinelogs_homescreen">Un compteur de visites hors ligne (p. ex. \"+ 1\") sera affiché à côté de votre compteur en ligne sur l\'écran d\'accueil, si vous avez des visites qui n\'ont pas encore été chargées.</string>
     <string name="init_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
     <string name="init_summary_loaddirectionimg">Charge la direction de l\'image si nécessaire</string>
@@ -895,9 +896,6 @@
     <string name="init_memory_dump">Image mémoire</string>
     <string name="init_memory_dumped">Mémoire copiée dans %s</string>
     <string name="init_please_wait">Patientez s\'il vous plaît…</string>
-    <string name="init_hardware_acceleration_title">Accélération graphique</string>
-    <string name="init_hardware_acceleration_note">L\'accélération matérielle permet de dessiner les éléments graphiques plus rapidement à l\'écran. Toutefois, sur certains appareils, le système Android contient des erreurs et certains textes peuvent apparaitre flous, notamment les caractères gras. Dans ce cas, il suffit de désactiver l\'accélération graphique.</string>
-    <string name="init_hardware_acceleration">Activer l\'accélération graphique</string>
     <string name="settings_open_website">Ouvrir le site dans un navigateur</string>
     <string name="settings_open_geokretymap_website">Accéder au site GeoKretyMap.org</string>
     <string name="settings_settings">Paramètres</string>
@@ -1120,22 +1118,25 @@
     <string name="cache_images">Images</string>
     <string name="cache_advanced">Avancé</string>
     <string name="cache_waypoints">Points de passage</string>
+    <string name="cache_variables">Calculateur</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Points de passage (%d)</string>
     <string name="cache_waypoints_add">Ajouter un point de passage</string>
     <string name="cache_waypoints_add_currentLocation">Ajouter l\'emplacement actuel</string>
     <string name="cache_waypoints_add_fromclipboard">Ajouter depuis le presse-papiers</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Masquer les points de passage visités</string>
     <string name="cache_waypoints_remove_original_waypoint">Point de passage copié depuis le presse-papiers vers cette cache.\n\nSouhaitez-vous supprimer le point de passage d\'origine ?</string>
     <string name="cache_hint">Indice</string>
     <string name="cache_hint_not_available">Aucun indice disponible</string>
     <string name="cache_logs">Carnet de visites</string>
+    <string name="cache_latest_logs">Visites récentes</string>
     <string name="cache_logs_friends_and_own">Vous / Amis</string>
     <string name="cache_dialog_loading_details">Chargement des détails…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Chargement de la page</string>
     <string name="cache_dialog_loading_details_status_details">Analyse</string>
-    <string name="cache_dialog_loading_details_status_spoilers">Images indices</string>
+    <string name="cache_dialog_loading_details_status_spoilers">Chargement des images indices</string>
     <string name="cache_dialog_loading_details_status_logs">Chargement des visites</string>
     <string name="cache_dialog_loading_details_status_waypoints">Traitement des points de passage</string>
-    <string name="cache_dialog_loading_details_status_gcvote">Votes</string>
+    <string name="cache_dialog_loading_details_status_gcvote">Chargement des votes</string>
     <string name="cache_dialog_loading_details_status_cache">Sauvegarde des données</string>
     <string name="cache_dialog_loading_details_status_render">Préparation de la page</string>
     <string name="cache_dialog_offline_save_title">Hors-ligne</string>
@@ -1374,6 +1375,8 @@
     <string name="map_language">Langue de la carte</string>
     <string name="map_live_enable">Activer Temps réel</string>
     <string name="map_live_disable">Désactiver Temps réel</string>
+    <string name="map_live_disabled">Carte temps réel désactivée</string>
+    <string name="map_live_disabled_hint">La carte temps réel est désactivée. Seules les caches enregistrées seront affichées. Utilisez le menu pour activer le temps réel.</string>
     <string name="map_as_list">Lister les caches</string>
     <string name="map_select_multiple_items">Sélectionner l\'élément</string>
     <string name="map_routing">Calcul de l\'itinéraire</string>
@@ -1390,22 +1393,21 @@
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
     <!-- search -->
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
-    <string name="search_bar_desc">Caches (géocode, mot-clé), Objets voyageurs (code TB)</string>
     <string name="search_coordinates">Coordonnées</string>
     <string name="search_coordinates_button">Rechercher par Coordonnées</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Rechercher par Adresse</string>
-    <string name="search_geo">Code de la cache</string>
+    <string name="search_geo">Géocode</string>
     <string name="search_geo_button">Rechercher par géocode</string>
     <string name="search_geocode_from_clipboard">Le Geocode a été collé depuis le presse-papiers</string>
-    <string name="search_kw">Mots-clés</string>
+    <string name="search_kw">Mot-clé</string>
     <string name="search_kw_prefill">Mot-clé</string>
     <string name="search_kw_button">Rechercher par Mot-clé</string>
     <string name="search_hbu">Cachée par</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
     <string name="search_filter">Filtrer</string>
-    <string name="search_filter_button">Rechercher à l\'aide de filtres</string>
+    <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
     <string name="search_filter_temporary_user_information_title">Nouveau système de filtrage</string>
     <string name="search_filter_temporary_user_information">c:geo a introduit un nouveau système de filtrage qui supporte les filtres flexibles, combinables et stockables. \n\nLe filtre global peut désormais être modifié directement dans les listes de caches et la carte live.</string>
@@ -1420,7 +1422,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Liste des favoris</string>
     <string name="search_pocket_is_new">nouveau</string>
-    <string name="search_pocket_and_bookmark_loading">Chargement des Pocket Queries et des listes</string>
+    <string name="search_pocket_loading">Chargement des pocket queries</string>
     <string name="search_bookmark_loading">Chargement des listes de favoris</string>
     <string name="search_bookmark_select">Sélectionnez les listes de favoris</string>
     <string name="search_bookmark_new">Créer une nouvelle liste de favoris</string>
@@ -1795,7 +1797,7 @@
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href="">c:geo sur Google Play</a></string>
     <string name="about_twitter">Voulez-vous publier un nouveau statut sur Twitter à chaque nouvelle cache découverte sous <b>c:geo</b>?</string>
-    <string name="github_title">suivi de bugs</string>
+    <string name="github_title">Suivi des bugs</string>
     <string name="faq_title">FAQ</string>
     <!-- status (used via string based resource loading) -->
     <string name="status_new_release" tools:ignore="UnusedResources">Une nouvelle version de c:geo est disponible.\nAppuyez pour l\'installer.</string>
@@ -1839,10 +1841,6 @@
     <plurals name="days_ago">
         <item quantity="one">il y a %d jour</item>
         <item quantity="other">il y a %d jours</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favori</item>
-        <item quantity="other">%s favoris</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Raccourci c:geo</string>
@@ -2023,6 +2021,7 @@
     <string name="download_confirmation">%1$s Télécharger le fichier \"%2$s\" ? %3$s</string>
     <string name="download_confirmation_updates">Mise à jour trouvée pour :\n%1$s\n\nVoulez-vous mettre à jour ? %2$s</string>
     <string name="download_warning">Cela peut prendre un certain temps et peut entraîner des coûts significatifs, selon votre connexion réseau.</string>
+    <string name="download_error">Le téléchargement a échoué en raison de l’erreur #%d</string>
     <string name="downloadmap_handling">Le téléchargement lui-même sera géré par le gestionnaire de téléchargement de votre système en arrière-plan. Vous devriez voir une notification dès que le téléchargement a commencé (ce qui peut prendre un certain temps).</string>
     <string name="button_continue">Continuer</string>
     <string name="downloadmap_onedirup">(un niveau supérieur)</string>

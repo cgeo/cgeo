@@ -6,18 +6,17 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IWaypoint;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
-import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
@@ -85,31 +84,15 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
         /**
          * show a selection of all parking places and the cache itself, when using the navigation for driving
+         *
          */
         private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
-            final LayoutInflater inflater = LayoutInflater.from(themeContext);
             final ListAdapter adapter = new ArrayAdapter<IWaypoint>(themeContext, R.layout.cacheslist_item_select, targets) {
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-
-                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
-                    final TextView tv = (TextView) view.findViewById(R.id.text);
-
-                    final IWaypoint item = getItem(position);
-                    tv.setText(item.getName());
-
-                    final int icon = item instanceof Waypoint ? item.getWaypointType().markerId : ((Geocache) item).getType().markerId;
-                    tv.setCompoundDrawablesWithIntrinsicBounds(icon, 0, 0, 0);
-
-                    final TextView infoView = (TextView) view.findViewById(R.id.info);
-                    if (item instanceof Waypoint) {
-                        infoView.setText(((Waypoint) item).getNote());
-                    } else {
-                        infoView.setText(item.getGeocode());
-                    }
-
-                    return view;
+                    return GeoItemSelectorUtils.createIWaypointItemView(context, getItem(position),
+                            GeoItemSelectorUtils.getOrCreateView(context, convertView, parent));
                 }
             };
 

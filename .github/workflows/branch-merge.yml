@@ -1,0 +1,33 @@
+name: Auto-merge branches 
+
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  # It was decided to don't run the workflow automatically for now
+  #schedule:
+  #  - cron: '0 0 * * *'
+
+env:
+  REPO: https://${{secrets.ACTION_SECRET}}@github.com/cgeo/cgeo.git
+  RELEASE_BRANCH: release
+  MASTER_BRANCH: master
+
+jobs:
+  # This workflow contains a single job called "merge-branches"
+  merge-branches:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Clone and setup the repo
+        run: |
+          git clone ${{env.REPO}} -b ${{env.MASTER_BRANCH}} tmp
+          cd tmp
+          git config --local include.path ../.gitconfig
+          git config user.name cgeo branch-merge-bot
+          git config user.email 61464155+cgeo-ci-bot@users.noreply.github.com
+      - name: Merge branches and push 
+        run: | 
+          cd tmp    # path is reseted for every step, therefore we need to set it again 
+          git merge origin/${{env.RELEASE_BRANCH}} -m "merge branch '${{env.RELEASE_BRANCH}}' via workflow"
+          git push

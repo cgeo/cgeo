@@ -19,6 +19,8 @@
     <color name="colorText_listsSecondary">@color/colorTextHint</color>
     <color name="colorTextActionBar">#FFE4E4E4</color>
 
+    <color name="osm_zoomcontrol">#666666</color>
+
     <!-- values needed only until settings activity is based on AppCompatActivity -->
     <color name="settings_colorTextDark">@color/just_white</color>
     <color name="settings_colorTextLight">@color/just_black</color>
@@ -28,8 +30,6 @@
     <color name="settings_colorBackgroundLight">@color/just_white</color>
     <color name="settings_colorDialogBackgroundDark">#FF191919</color>
     <color name="settings_colorDialogBackgroundLight">@color/just_white</color>
-
-
 
     <!-- default colors for map lines -->
 

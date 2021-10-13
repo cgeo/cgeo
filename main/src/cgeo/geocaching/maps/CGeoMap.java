@@ -9,6 +9,7 @@ import cgeo.geocaching.WaypointPopup;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.gc.Tile;
+import cgeo.geocaching.databinding.MapGoogleBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
@@ -564,11 +565,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
         }
 
-        activity.setContentView(mapProvider.getMapLayoutId());
+        // init BottomNavigationController to add the bottom navigation to the layout
+        activity.setContentView(MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot());
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
             MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+
+        // individual route popup
+        activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
+            getIndividualRouteUtils().showPopup(activity.findViewById(R.id.map_individualroute_popup), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget, this::centerOnPosition, this::setTarget));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -579,7 +585,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // set layout
         ActivityMixin.setTheme(activity);
-        getActionBar().setDisplayHomeAsUpEnabled(true);
 
         setTitle();
 
@@ -603,7 +608,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         AndroidBeam.disable(activity);
 
-        MapUtils.showMapOneTimeMessages(activity);
+        MapUtils.showMapOneTimeMessages(activity, mapOptions.mapMode);
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
     }
@@ -750,7 +755,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             if (mapOptions.isLiveEnabled) {
-                itemMapLive.setIcon(R.drawable.ic_menu_refresh);
+                itemMapLive.setIcon(R.drawable.ic_menu_sync_enabled);
                 itemMapLive.setTitle(res.getString(R.string.map_live_disable));
             } else {
                 itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
@@ -766,7 +771,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            getIndividualRouteUtils().onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            getIndividualRouteUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -783,9 +788,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        if (id == android.R.id.home) {
-            ActivityMixin.navigateUp(activity);
-        } else if (id == R.id.menu_map_rotation_off) {
+        if (id == R.id.menu_map_rotation_off) {
             setMapRotation(item, Settings.MAPROTATION_OFF);
         } else if (id == R.id.menu_map_rotation_manual) {
             setMapRotation(item, Settings.MAPROTATION_MANUAL);
@@ -818,20 +821,23 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             //this will never happen, Google does not support mapsforge themes -> do nothing
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
+            ActivityMixin.overrideTransitionToFade(activity);
         } else if (id == R.id.menu_hint) {
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
-        } else if (!HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-            && !getTrackUtils().onOptionsItemSelected(id, tracks)
-            && !getIndividualRouteUtils().onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
-            && !DownloaderUtils.onOptionsItemSelected(activity, id)) {
+        } else if (HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
+                || getTrackUtils().onOptionsItemSelected(id, tracks)
+                || getIndividualRouteUtils().onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
+                || DownloaderUtils.onOptionsItemSelected(activity, id)) {
+            return true;
+        } else {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
                 item.setChecked(true);
                 changeMapSource(mapSource);
             } else {
-                return false;
+                return super.onOptionsItemSelected(item);
             }
         }
         return true;
@@ -1027,7 +1033,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private void mapRestart() {
         mapOptions.mapState = currentMapState();
         activity.finish();
-        mapOptions.startIntent(activity, Settings.getMapProvider().getMapClass());
+        mapOptions.startIntentWithoutTransition(activity, Settings.getMapProvider().getMapClass());
     }
 
     /**
@@ -1446,6 +1452,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         }
         final Waypoint waypoint = new Waypoint("some place", mapOptions.waypointType != null ? mapOptions.waypointType : WaypointType.WAYPOINT, false);
         waypoint.setCoords(coords);
+        waypoint.setGeocode(mapOptions.geocode);
 
         final CachesOverlayItemImpl item = getWaypointItem(waypoint, Settings.getCompactIconMode() == Settings.COMPACTICON_ON);
         mapView.updateItems(Collections.singletonList(item));

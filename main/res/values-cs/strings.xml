@@ -11,6 +11,7 @@
     <string name="about">O aplikaci</string>
     <string name="latitude">Zeměpisná šířka</string>
     <string name="longitude">Zeměpisná délka</string>
+    <string name="latlongitude">Zeměpisná šířka\nZeměpisná délka</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Nastavení c:geo</string>
     <!-- caches -->
@@ -38,14 +39,14 @@
     <string name="userdefined">Uživatelem definovaná keška</string>
     <string name="unknown">Neznámý typ</string>
     <string name="all_types_short">Vše</string>
-    <string name="traditional_short">Trad</string>
+    <string name="traditional_short">Tradička</string>
     <string name="multi_short">Multina</string>
     <string name="mystery_short">Mysterka</string>
     <string name="letterbox_short">Letterbox</string>
     <string name="event_short">Event</string>
     <string name="mega_short">Mega</string>
     <string name="giga_short">Giga</string>
-    <string name="earth_short">Earth</string>
+    <string name="earth_short">Earthka</string>
     <string name="cito_short">CITO</string>
     <string name="webcam_short">Webka</string>
     <string name="virtual_short">Virtuálka</string>
@@ -88,7 +89,7 @@
     <string name="wpnew_original">Původní</string>
     <!-- logs -->
     <string name="log_found">Nález</string>
-    <string name="log_dnf">Nenalezeno</string>
+    <string name="log_dnf">Nenalezená</string>
     <string name="log_note">Poznámka</string>
     <string name="log_published">Zveřejněno</string>
     <string name="log_enabled">Aktivováno</string>
@@ -260,7 +261,7 @@
     <string name="warn_no_cache_coord">Není k dispozici žádná keška se souřadnicemi.</string>
     <string name="warn_no_coordinates">Souřadnice nezískány</string>
     <string name="warn_no_keyword">Nenalezena žádná klíčová slova</string>
-    <string name="warn_no_username">Nenalezeno žádné uživatelské jméno</string>
+    <string name="warn_no_username">Nebylo zadáno žádné uživatelské jméno.</string>
     <string name="warn_no_connector">Tento typ vyhledávání nepodporuje žádná z aktivovaných geocachingových služeb.</string>
     <string name="warn_search_help_title">Potřebuješ pomoct?</string>
     <string name="warn_search_help_address">Zadej adresu nebo název oblasti. Můžeš použít například název ulice „Radlicka 100, Praha, Ceska republika“, název města „Berlín“ nebo název místa „Yellowstone Park“.</string>
@@ -275,7 +276,7 @@
     <string name="warn_invalid_character">Znak musí být písmeno nebo číslice</string>
     <string name="warn_notloggedin_title">Offline režim</string>
     <string name="warn_notloggedin_short">Nejste přihlášeni. Živá mapa bude zobrazovat pouze kešky uložené v místním úložišti. Klepněte zde pro více informací.</string>
-    <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Aktivní mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
+    <string name="warn_notloggedin_long">Nejste přihlášen (zatím). Živá mapa ukazuje jen lokální uložené kešky a online funkce nejsou dostupné.\n\nBuď není k dispozici síťové připojení, nebo je problém se serverem, nebo musíte (znovu) nakonfigurovat potřebné služby geocachingu.\n\nChcete nyní konfigurovat služby?</string>
     <string name="err_read_pocket_query_list">Chyba čtení seznamu Pocket Queries.</string>
     <string name="err_read_bookmark_list">Chyba při čtení seznamů záložek.</string>
     <string name="info_log_posted">Log byl úspěšně odeslán.</string>
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
     <string name="confirm_discard_changes">Zahodit neuložené změny?</string>
     <string name="confirm_discard_wp_changes">Zahodit neuložené změny trasových bodů?</string>
-    <string name="err_request_popup_info">c:geo se nepodařilo otevřít informace o kešce.</string>
     <string name="warn_log_load_additional_data">c:geu se nepodařilo načíst dodatečná data (trackovatelné předměty/oblíbené) k logování.</string>
     <string name="more_information">Další informace</string>
     <string name="undo">Zpět</string>
@@ -326,11 +326,12 @@
     <string name="menu_history">Historie</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_scan_geo">Naskenovat geokód</string>
-    <string name="menu_lists_pocket_queries">Seznamy / Pocket Queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Seznamy záložek</string>
     <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
-    <string name="live_map_button">Aktivní mapa</string>
+    <string name="live_map_button">Živá mapa</string>
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
@@ -360,6 +361,7 @@
     <string name="caches_on_map">Zobrazit na mapě</string>
     <string name="caches_sort">Řazení</string>
     <string name="caches_sort_distance">Vzdálenost</string>
+    <string name="caches_sort_distance_target">Vzdálenost k cíli</string>
     <string name="caches_sort_difficulty">Obtížnost</string>
     <string name="caches_sort_terrain">Terén</string>
     <string name="caches_sort_size">Velikost</string>
@@ -385,7 +387,7 @@
     <string name="caches_remove_all_completely">Odstranit vše ze zařízení</string>
     <string name="caches_remove_selected_completely">Odstranit vybrané ze zařízení</string>
     <string name="caches_delete_events">Odstranit staré události</string>
-    <string name="caches_upload_bookmarklist">Nahrát do seznamu záložek</string>
+    <string name="caches_upload_bookmarklist">Přidat do seznamu záložek</string>
     <string name="caches_upload_modifiedcoords">Nahrát upravené souřadnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrát upravené souřadnice pro všechny (vybrané) kešky a přepsat stávající souřadnice na serveru? Tento krok nelze vrátit zpět.</string>
     <string name="caches_upload_allcoords">Nahrát souřadnice pro všechny kešky</string>
@@ -468,7 +470,7 @@
     <string name="cache_filtergroup_basic">Základní</string>
     <string name="cache_filtergroup_details">Podrobnosti</string>
     <string name="cache_filtergroup_userspecific">Vlastní</string>
-    <string name="cache_filter_contexttype_live_title">Live filtr</string>
+    <string name="cache_filter_contexttype_live_title">Živý filtr</string>
     <string name="cache_filter_contexttype_offline_title">Offline filtr</string>
     <string name="cache_filter_contexttype_transient_title">Filtr</string>
     <string name="cache_filter_include">Zahrnout</string>
@@ -482,7 +484,6 @@
         <item quantity="many">%1$d položek</item>
         <item quantity="other">%1$d položek</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Načíst</string>
     <string name="cache_filter_storage_delete_button">Odstranit</string>
     <string name="cache_filter_storage_clear_button">Vyčistit</string>
     <string name="cache_filter_storage_load_delete_title">Načíst nebo odstranit existující filtr</string>
@@ -850,7 +851,7 @@
     <string name="init_accuracycirclecolor_summary">Vyberte barvu a neprůhlednost kruhové čáry přesnosti. Kruh přesnosti se používá jako vizuální znázornění přesnosti lokálního signálu.</string>
     <string name="init_accuracycirclefillcolor">Barva výplně kruhu přesnosti</string>
     <string name="init_accuracycirclefillcolor_summary">Vyberte barvu a neprůhlednost pro vyplnění kruhů přesnosti</string>
-    <string name="init_include_found_status">Zahrnout stav „nalezeno“</string>
+    <string name="init_include_found_status">Zahrnout stav „Nalezené“</string>
     <string name="init_trackautovisit">Nastavit TB na „Navštíveno“</string>
     <string name="init_summary_trackautovisit">Nastavit sledovatelné předměty na „Navštíveno“ jako výchozí</string>
     <string name="init_sigautoinsert">Vkládat podpis automaticky</string>
@@ -899,9 +900,6 @@
     <string name="init_memory_dump">Výpis stavu paměti</string>
     <string name="init_memory_dumped">Paměť vypsána do %s</string>
     <string name="init_please_wait">Čekejte prosím…</string>
-    <string name="init_hardware_acceleration_title">Hardwarově akcelerované vykreslování</string>
-    <string name="init_hardware_acceleration_note">S hardwarovou akcelerací se uživatelské rozhraní vykreslí rychleji. Operační systém Android však na některých zařízeních obsahuje chyby a některé části textu mohou být rozmazané (zejména tučné znaky). Pokud zaznamenáváš potíže, vypni hardwarovou akceleraci.</string>
-    <string name="init_hardware_acceleration">Povolit hardwarovou akceleraci</string>
     <string name="settings_open_website">Otevřít webovou stránku</string>
     <string name="settings_open_geokretymap_website">Otevřít stránku GeoKretyMap.org</string>
     <string name="settings_settings">Nastavení</string>
@@ -919,7 +917,7 @@
     <string name="feature_watch_list">Sledované</string>
     <string name="feature_own_coordinates">Ukládání modifikovaných souřadnic</string>
     <string name="feature_search_keyword">Hledat podle klíčového slova</string>
-    <string name="feature_search_live_map">Aktivní mapa</string>
+    <string name="feature_search_live_map">Živá mapa</string>
     <string name="feature_search_center">Hledat podle pozice</string>
     <string name="feature_search_geocode">Hledat podle geokódu</string>
     <string name="feature_search_owner">Hledat podle vlastníka</string>
@@ -1140,14 +1138,17 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Pokročilé</string>
     <string name="cache_waypoints">Trasové body</string>
+    <string name="cache_variables">Proměnné</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Trasové body (%d)</string>
     <string name="cache_waypoints_add">Přidat trasový bod</string>
     <string name="cache_waypoints_add_currentLocation">Přidat aktuální polohu</string>
     <string name="cache_waypoints_add_fromclipboard">Přidat ze schránky</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Skrýt navštívené trasové body</string>
     <string name="cache_waypoints_remove_original_waypoint">Trasový bod zkopírován ze schránky do této kešky.\n\nOdstranit původní trasový bod?</string>
     <string name="cache_hint">Nápověda</string>
     <string name="cache_hint_not_available">Nápověda není dostupná</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_latest_logs">Poslední logy</string>
     <string name="cache_logs_friends_and_own">Moje logy a logy přátel</string>
     <string name="cache_dialog_loading_details">Načítání detailů kešky…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Načítání stránky</string>
@@ -1223,12 +1224,12 @@
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
-    <string name="cache_not_status_found">Nenalezeno</string>
+    <string name="cache_not_status_found">Nenalezená</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
     <string name="cache_status_premium">Pouze pro prémiové uživatele</string>
-    <string name="cache_geocode">GC kód</string>
+    <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Název</string>
     <string name="cache_name_set">Nastavit název kešky</string>
     <string name="cache_name_updated">Název kešky byl aktualizován</string>
@@ -1367,7 +1368,7 @@
     <string name="visit_tweet">Oznámit nález na Twitteru</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Aktivní mapa</string>
+    <string name="map_live">Živá mapa</string>
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
@@ -1376,7 +1377,7 @@
     <string name="map_showc_found">Nalezené</string>
     <string name="map_showc_disabled">Deaktivované</string>
     <string name="map_showc_archived">Archivované</string>
-    <string name="map_showc_found_offline">Nalezeno (offline)</string>
+    <string name="map_showc_found_offline">Nalezené (offline)</string>
     <string name="map_showwp_original">Původní</string>
     <string name="map_showwp_parking">Parkování</string>
     <string name="map_showwp_visited">Navštívené</string>
@@ -1394,8 +1395,10 @@
     <string name="map_theme_select">Styl mapy…</string>
     <string name="map_theme_options">Možnosti vzhledu</string>
     <string name="map_language">Jazyk mapy</string>
-    <string name="map_live_enable">Povolit aktivní mapu</string>
-    <string name="map_live_disable">Zakázat aktivní mapu</string>
+    <string name="map_live_enable">Povolit živou mapu</string>
+    <string name="map_live_disable">Zakázat živou mapu</string>
+    <string name="map_live_disabled">Živý režim zakázán</string>
+    <string name="map_live_disabled_hint">Živý režim je zakázán. Zobrazí se pouze uložené kešky. Použijte menu pro povolení živého režimu.</string>
     <string name="map_as_list">Zobrazit jako seznam</string>
     <string name="map_select_multiple_items">Vybrat položku</string>
     <string name="map_routing">Směrování</string>
@@ -1412,7 +1415,6 @@
     <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
-    <string name="search_bar_desc">Kešky (GC-kód, klíčové slovo), sledovatelné předměty (TB-kód)</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
@@ -1420,7 +1422,7 @@
     <string name="search_geo">Geokód</string>
     <string name="search_geo_button">Hledat podle geokódu</string>
     <string name="search_geocode_from_clipboard">Geokód byl vložen ze schránky.</string>
-    <string name="search_kw">Klíčová slova</string>
+    <string name="search_kw">Klíčové slovo</string>
     <string name="search_kw_prefill">Klíčové slovo</string>
     <string name="search_kw_button">Hledat podle klíčového slova</string>
     <string name="search_hbu">Ukryl</string>
@@ -1442,7 +1444,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Seznam záložek</string>
     <string name="search_pocket_is_new">nový</string>
-    <string name="search_pocket_and_bookmark_loading">Načítání seznamu Pocket Queries a záložek</string>
+    <string name="search_pocket_loading">Načítání pocket queries</string>
     <string name="search_bookmark_loading">Načítání seznamů záložek</string>
     <string name="search_bookmark_select">Vybrat seznamy záložek</string>
     <string name="search_bookmark_new">Vytvořit nový seznam záložek</string>
@@ -1603,8 +1605,8 @@
     <string name="attribute_stealth_no">Není třeba dávat pozor</string>
     <string name="attribute_firstaid_yes">Potřebuje údržbu</string>
     <string name="attribute_firstaid_no">Nepotřebuje údržbu</string>
-    <string name="attribute_cow_yes">Pozor na domácí zvířata</string>
-    <string name="attribute_cow_no">Žádná domácí zvířata</string>
+    <string name="attribute_cow_yes">Pozor na hospodářská zvířata</string>
+    <string name="attribute_cow_no">Žádná hospodářská zvířata</string>
     <string name="attribute_field_puzzle_yes">Hádanka v terénu</string>
     <string name="attribute_field_puzzle_no">Žádná hádanka v terénu</string>
     <string name="attribute_nightcache_yes">Noční keška</string>
@@ -1826,7 +1828,7 @@
     <string name="status_new_nightly" tools:ignore="UnusedResources">K dispozici je nové noční sestavení.\nKlepnutím nainstalujete.</string>
     <string name="status_new_rc" tools:ignore="UnusedResources">K dispozici je nový kandidát na vydání.\nKlepnutím nainstalujete.</string>
     <string name="status_geocaching_change" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy v c:geo.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
-    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy s Aktivní mapou.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
+    <string name="status_geocaching_livemap" tools:ignore="UnusedResources">Změny na geocaching.com způsobují problémy s živou mapou.\nJsme si toho vědomi a pracujeme na tom, dejte nám prosím čas!</string>
     <string name="status_geocaching_maintenance" tools:ignore="UnusedResources">geocaching.com není v tuto chvíli (plně) k dispozici.\nV c:geo se mohou vyskytnout různé problémy.</string>
     <string name="status_closeout_warning" tools:ignore="UnusedResources">Vypadá to, že používáte starší verzi sytému Android. Tato verze c:geo již není kompatibilní s vaším zařízením a může selhávat nebo se chovat neočekávaně!\nKlepněte na tuto zprávu pro další informace.</string>
     <string name="status_version_deprecated" tools:ignore="UnusedResources">Používáte verzi c:geo, která se zdá být starší než jeden rok. Některé funkce již nemusí fungovat kvůli změnám na webu nebo jiným technickým změnám. Přečtěte si prosím naše FAQ na téma jak aktualizovat na nejnovější verzi.</string>
@@ -1873,12 +1875,6 @@
         <item quantity="few">před %d dny</item>
         <item quantity="many">před %d dny</item>
         <item quantity="other">před %d dny</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s oblíbená</item>
-        <item quantity="few">%s oblíbené</item>
-        <item quantity="many">%s oblíbených</item>
-        <item quantity="other">%s oblíbených</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo zástupce</string>
@@ -2077,6 +2073,7 @@
     <string name="download_confirmation">%1$sStáhnout soubor \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Byly nalezeny aktualizace:\n%1$s\n\nChcete aktualizovat?%2$s</string>
     <string name="download_warning">To může nějakou dobu trvat a může to vést k významným nákladům v závislosti na vašem síťovém připojení.</string>
+    <string name="download_error">Stažení se nezdařilo s chybou #%d</string>
     <string name="downloadmap_handling">Samotné stahování bude zpracováno na pozadí správcem stahování vašeho systému. Měli byste vidět oznámení, jakmile stahování začne (to může chvíli trvat).</string>
     <string name="button_continue">Pokračovat</string>
     <string name="downloadmap_onedirup">(o úroveň výš)</string>

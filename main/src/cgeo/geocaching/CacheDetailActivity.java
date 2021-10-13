@@ -81,6 +81,7 @@ import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -140,6 +141,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -160,6 +162,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -643,7 +646,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         CacheMenuHandler.addMenuItems(this, menu, cache);
-        CacheMenuHandler.initNavigationMenuItems(menu, this, cache);
+        CacheMenuHandler.initDefaultNavigationMenuItem(menu, this);
         return true;
     }
 
@@ -699,7 +702,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
-        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::notifyDataSetChanged)) {
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::notifyDataSetChanged, false)) {
             return true;
         }
 
@@ -755,7 +758,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_tts_toggle) {
             SpeechService.toggleService(this, cache.getCoords());
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache.getType().markerId, this::setCacheIcon);
+            EmojiUtils.selectEmojiPopup(this, cache.getAssignedEmoji(), cache, this::setCacheIcon);
         } else if (LoggingUI.onMenuItemSelected(item, this, cache, null)) {
             refreshOnResume = true;
         } else {
@@ -977,7 +980,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         LOGSFRIENDS(R.string.cache_logs_friends_and_own),
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
-        IMAGES(R.string.cache_images);
+        IMAGES(R.string.cache_images),
+        VARIABLES(R.string.cache_variables),
+        ;
 
         private final int titleStringId;
         public final long id;
@@ -1215,6 +1220,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 new CoordinatesFormatSwitcher().setView(valueView).setCoordinate(cache.getCoords());
                 activity.addContextMenu(valueView);
             }
+
+            // Latest logs
+            details.addLatestLogs(cache);
 
             // cache attributes
             updateAttributesIcons(activity);
@@ -1646,7 +1654,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // cache short description
             if (StringUtils.isNotBlank(cache.getShortDescription())) {
-                loadDescription(activity, cache.getShortDescription(), binding.description, null);
+                loadDescription(activity, cache.getShortDescription(), false, binding.description, null);
             }
 
             // long description
@@ -1782,7 +1790,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.loading.setVisibility(View.VISIBLE);
 
             final String longDescription = cache.getDescription();
-            loadDescription(activity, longDescription, binding.description, binding.loading);
+            loadDescription(activity, longDescription, true, binding.description, binding.loading);
 
             if (cache.supportsDescriptionchange()) {
                 binding.description.setOnClickListener(v -> {
@@ -1814,7 +1822,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * @param loadingIndicatorView
          *            the loading indicator view, will be hidden when completed
          */
-        private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
+        private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final boolean isLongDescription, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
                 final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
                 final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
@@ -1823,10 +1831,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     fixRelativeLinks(description);
                     fixTextColor(description, R.color.colorBackground);
 
+                    // check if short description is contained in long description
+                    boolean longDescriptionContainsShortDescription = false;
+                    final String shortDescription = cache.getShortDescription();
+                    if (StringUtils.isNotBlank(shortDescription)) {
+                        final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
+                        // allow up to 200 characters of HTML formatting
+                        if (index >= 0 && index < 200) {
+                            longDescriptionContainsShortDescription = true;
+                        }
+                    }
+
                     try {
-                        if (descriptionView.getText().length() == 0) {
+                        if (descriptionView.getText().length() == 0 || (longDescriptionContainsShortDescription && isLongDescription)) {
                             descriptionView.setText(description, TextView.BufferType.SPANNABLE);
-                        } else {
+                        } else if (!longDescriptionContainsShortDescription) {
                             descriptionView.append("\n");
                             descriptionView.append(description);
                         }
@@ -1840,8 +1859,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     descriptionView.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                     descriptionView.setVisibility(View.VISIBLE);
                     activity.addContextMenu(descriptionView);
-                    // TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
-                    //activity.potentiallyHideShortDescription();
                 }
                 if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
@@ -1899,30 +1916,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
-    /**
-     * Hide the short description, if it is contained somewhere at the start of the long description.
-     */
-    /** TODO fix the non working method, see https://github.com/cgeo/cgeo/issues/11455
-    public void potentiallyHideShortDescription() {
-        final View shortView = findViewById(R.id.description);
-        if (shortView == null) {
-            return;
-        }
-        if (shortView.getVisibility() == View.GONE) {
-            return;
-        }
-        final String shortDescription = cache.getShortDescription();
-        if (StringUtils.isNotBlank(shortDescription)) {
-            final int index = StringUtils.indexOf(cache.getDescription(), shortDescription);
-            // allow up to 200 characters of HTML formatting
-            if (index >= 0 && index < 200) {
-                shortView.setVisibility(View.GONE);
-            }
-        }
-    }
-    */
 
-    private void ensureSaved() {
+    protected void ensureSaved() {
         if (!cache.isOffline()) {
             showToast(getString(R.string.info_cache_saved));
             cache.getLists().add(StoredList.STANDARD_LIST_ID);
@@ -1948,6 +1943,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         private void addWaypointAndSort(final List<Waypoint> sortedWaypoints, final Waypoint newWaypoint) {
             sortedWaypoints.add(newWaypoint);
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
+        }
+
+        private List<Waypoint> createSortedWaypointList() {
+            final List<Waypoint> sortedWaypoints2 = new ArrayList<>(cache.getWaypoints());
+            final Iterator<Waypoint> waypointIterator = sortedWaypoints2.iterator();
+            while (waypointIterator.hasNext()) {
+                final Waypoint waypointInIterator = waypointIterator.next();
+                if (waypointInIterator.isVisited() && Settings.getHideVisitedWaypoints()) {
+                    waypointIterator.remove();
+                }
+            }
+            return sortedWaypoints2;
         }
 
         @Override
@@ -1977,7 +1984,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setClickable(true);
 
             // sort waypoints: PP, Sx, FI, OWN
-            final List<Waypoint> sortedWaypoints = new ArrayList<>(cache.getWaypoints());
+            final List<Waypoint> sortedWaypoints = createSortedWaypointList();
             Collections.sort(sortedWaypoints, cache.getWaypointComparator());
 
             final ArrayAdapter<Waypoint> adapter = new ArrayAdapter<Waypoint>(activity, R.layout.waypoint_item, sortedWaypoints) {
@@ -2025,6 +2032,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         ActivityMixin.showShortToast(activity, getString(R.string.waypoint_added));
                     }
                 });
+
+                headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
+                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                    @Override
+                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
+                        Settings.setHideVisitedWaypoints(isChecked);
+
+                        final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
+                        Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+
+                        adapter.clear();
+                        adapter.addAll(sortedWaypoints2);
+                        adapter.notifyDataSetChanged();
+                        activity.reinitializePage(Page.WAYPOINTS.id);
+                    }
+                });
+
 
                 // read waypoint from clipboard
                 setClipboardButtonVisibility(headerBinding.addWaypointFromclipboard);
@@ -2456,12 +2480,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (pageId == Page.WAYPOINTS.id) {
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
             return String.format(getString(R.string.waypoints_tabtitle), waypointCount);
+        } else if (pageId == Page.VARIABLES.id) {
+            final int varCount = cache == null ? 0 : cache.getVariables().getVariableList().size();
+            return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         }
         return this.getString(Page.find(pageId).titleStringId);
     }
 
     protected long[] getOrderedPages() {
         final ArrayList<Long> pages = new ArrayList<>();
+        if (!BranchDetectionHelper.isProductionBuild()) {
+            pages.add(Page.VARIABLES.id);
+        }
         pages.add(Page.WAYPOINTS.id);
         pages.add(Page.DETAILS.id);
         pages.add(Page.DESCRIPTION.id);
@@ -2504,6 +2534,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new InventoryViewCreator();
         } else if (pageId == Page.IMAGES.id) {
             return new ImagesViewCreator();
+        } else if (pageId == Page.VARIABLES.id) {
+            return new VariablesViewPageFragment();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     };

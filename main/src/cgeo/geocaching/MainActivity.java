@@ -1,28 +1,21 @@
 package cgeo.geocaching;
 
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
-import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.gc.BookmarkListActivity;
-import cgeo.geocaching.connector.gc.PocketQueryListActivity;
-import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.helper.UsefulAppsActivity;
-import cgeo.geocaching.list.PseudoList;
-import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
-import cgeo.geocaching.models.Download;
-import cgeo.geocaching.network.Network;
+import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.search.SuggestionsAdapter;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GnssStatusProvider;
@@ -32,34 +25,28 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
-import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
-import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SearchManager;
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.location.Address;
-import android.net.ConnectivityManager;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -67,9 +54,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
@@ -77,7 +66,6 @@ import androidx.appcompat.widget.SearchView.OnSuggestionListener;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
@@ -87,7 +75,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Consumer;
 import org.apache.commons.lang3.StringUtils;
 
-public class MainActivity extends AbstractActionBarActivity {
+public class MainActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_BACKUPUTILS = "backuputils";
 
@@ -101,17 +89,16 @@ public class MainActivity extends AbstractActionBarActivity {
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private boolean restoreMessageShown = false;
-    private ConnectivityChangeReceiver connectivityChangeReceiver;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
     private final Handler updateUserInfoHandler = new UpdateUserInfoHandler(this);
-    private final Handler firstLoginHandler = new FirstLoginHandler(this);
     /**
      * initialization with an empty subscription
      */
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
 
     private BackupUtils backupUtils = null;
+
 
     private static final class UpdateUserInfoHandler extends WeakReferenceHandler<MainActivity> {
 
@@ -127,110 +114,106 @@ public class MainActivity extends AbstractActionBarActivity {
                 final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
                 // Update UI
-                activity.binding.infoArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
+                activity.binding.connectorstatusArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
                     @Override
                     public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
-                        TextView rowView = (TextView) convertView;
-                        if (rowView == null) {
-                            rowView = (TextView) activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
+                        View view = convertView;
+
+                        if (view == null) {
+                            view = activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
                         }
 
                         final ILogin connector = getItem(position);
-                        fillView(rowView, connector);
-                        return rowView;
+                        fillView(view, connector);
+                        return view;
 
                     }
 
-                    private void fillView(final TextView connectorInfo, final ILogin conn) {
-                        boolean offlineFoundsAvailable = false;
+                    private void fillView(final View connectorInfo, final ILogin conn) {
 
-                        final StringBuilder userInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR);
-                        if (conn.isLoggedIn()) {
-                            userInfo.append(conn.getUserName()).append(" ");
-                            if (conn.getCachesFound() >= 0) {
-                                FoundNumCounter.updateFoundNum(conn.getName(), conn.getCachesFound());
-                            }
-                            activity.checkLoggedIn();
-                        }
+                        final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
+                        final StringBuilder userFoundCount = new StringBuilder();
 
-                        final FoundNumCounter f = FoundNumCounter.load(conn.getName());
-                        if (f != null) {
-
-                            userInfo.append('(').append(f.getCounter(false));
+                        final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
+                        if (count >= 0) {
+                            userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
 
                             if (Settings.isDisplayOfflineLogsHomescreen()) {
-                                final int offlinefounds = DataStore.getFoundsOffline(conn.getName());
+                                final int offlinefounds = DataStore.getFoundsOffline(conn);
                                 if (offlinefounds > 0) {
-                                    userInfo.append(" + ").append(offlinefounds);
-
-                                    offlineFoundsAvailable = true;
+                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
                                 }
                             }
-                            userInfo.append(')').append(Formatter.SEPARATOR);
-
-                        } else if (conn.isLoggedIn()) {
-                            userInfo.append(Formatter.SEPARATOR);
                         }
 
-                        userInfo.append(conn.getLoginStatusString());
+                        ((TextView) connectorInfo.findViewById(R.id.item_title)).setText(FoundNumCounter.getNotBlankUserName(conn));
+                        ((TextView) connectorInfo.findViewById(R.id.item_status)).setText(connInfo);
 
-                        connectorInfo.setText(userInfo);
+                        final TextView userInfo = connectorInfo.findViewById(R.id.item_info);
+                        if (userFoundCount.toString().isEmpty()) {
+                            userInfo.setVisibility(View.GONE);
+                        } else {
+                            userInfo.setVisibility(View.VISIBLE);
+                            userInfo.setText(userFoundCount);
+                            userInfo.setOnClickListener(v -> {
+                                activity.startActivity(CacheListActivity.getHistoryIntent(activity));
+                                ActivityMixin.overrideTransitionToFade(activity);
+                                activity.finish();
+                            });
+                        }
+
+                        if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
+                            connectorInfo.findViewById(R.id.item_icon).setVisibility(View.INVISIBLE);
+
+                            // images are cached by the HtmlImage class
+                            final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
+                                    () -> imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)),
+                                    img -> {
+                                        connectorInfo.findViewById(R.id.item_icon).setVisibility(View.VISIBLE);
+                                        ((ImageView) connectorInfo.findViewById(R.id.item_icon)).setImageDrawable(img);
+                                    });
+                        } else {
+                            connectorInfo.findViewById(R.id.item_icon).setVisibility(View.GONE);
+                        }
                         connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
-
-                        if (offlineFoundsAvailable) {
-                            Dialogs.basicOneTimeMessage((Activity) getContext(), OneTimeDialogs.DialogType.EXPLAIN_OFFLINE_FOUND_COUNTER);
-                        }
                     }
                 });
             }
         }
     }
 
-    private final class ConnectivityChangeReceiver extends BroadcastReceiver {
-        private boolean isConnected = Network.isConnected();
+    private class UpdateLocation extends GeoDirHandler {
 
         @Override
-        public void onReceive(final Context context, final Intent intent) {
-            final boolean wasConnected = isConnected;
-            isConnected = Network.isConnected();
-            if (isConnected && !wasConnected) {
-                startBackgroundLogin();
+        @SuppressLint("SetTextI18n")
+        public void updateGeoData(final GeoData geo) {
+
+            binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
+
+            if (geo.getAccuracy() >= 0) {
+                final int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
+                binding.navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
+            } else {
+                binding.navAccuracy.setText(null);
+            }
+
+            final Geopoint currentCoords = geo.getCoords();
+            if (Settings.isShowAddress()) {
+                if (addCoords == null) {
+                    binding.navLocation.setText(R.string.loc_no_addr);
+                }
+                if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
+                    addCoords = currentCoords;
+                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
+                    AndroidRxUtils.bindActivity(MainActivity.this, address)
+                            .subscribeOn(AndroidRxUtils.networkScheduler)
+                            .subscribe(address12 -> binding.navLocation.setText(address12));
+                }
+            } else {
+                binding.navLocation.setText(currentCoords.toString());
             }
         }
-    }
-
-    /**
-     * check if at least one connector has been logged in successfully
-     * and set visibility of warning message accordingly
-     */
-    public void checkLoggedIn() {
-        final ILogin[] activeConnectors = ConnectorFactory.getActiveLiveConnectors();
-        for (final IConnector conn : activeConnectors) {
-            if (((ILogin) conn).isLoggedIn()) {
-                binding.infoNotloggedin.setVisibility(View.INVISIBLE);
-                return;
-            }
-        }
-        binding.infoNotloggedin.setVisibility(View.VISIBLE);
-    }
-
-    private static String formatAddress(final Address address) {
-        final List<String> addressParts = new ArrayList<>();
-
-        final String countryName = address.getCountryName();
-        if (countryName != null) {
-            addressParts.add(countryName);
-        }
-        final String locality = address.getLocality();
-        if (locality != null) {
-            addressParts.add(locality);
-        } else {
-            final String adminArea = address.getAdminArea();
-            if (adminArea != null) {
-                addressParts.add(adminArea);
-            }
-        }
-        return StringUtils.join(addressParts, ", ");
     }
 
     private final Consumer<GnssStatusProvider.Status> satellitesHandler = new Consumer<Status>() {
@@ -245,126 +228,115 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     };
 
-    private static final class FirstLoginHandler extends WeakReferenceHandler<MainActivity> {
+    @Override
+    public void onCreate(final Bundle savedInstanceState) {
+        try (ContextLogger cLog = new ContextLogger(true, "MainActivity.onCreate")) {
+           // don't call the super implementation with the layout argument, as that would set the wrong theme
+            super.onCreate(savedInstanceState);
 
-        FirstLoginHandler(final MainActivity activity) {
-            super(activity);
-        }
+            backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+            cLog.add("bu");
 
-        @Override
-        public void handleMessage(final Message msg) {
-            final MainActivity activity = getReference();
-            if (activity != null) {
-                try {
-                    final StatusCode reason = (StatusCode) msg.obj;
-
-                    if (reason != null && reason != StatusCode.NO_ERROR) { //LoginFailed
-                        activity.showToast(activity.res.getString(reason == StatusCode.MAINTENANCE ? reason.getErrorString() : R.string.err_login_failed_toast));
-                    }
-                } catch (final Exception e) {
-                    Log.w("MainActivity.firstLoginHander", e);
-                }
+            //check database
+            final String errorMsg = DataStore.initAndCheck(false);
+            if (errorMsg != null) {
+                DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
             }
+            cLog.add("ds");
+
+            binding = MainActivityBinding.inflate(getLayoutInflater());
+
+            // init BottomNavigationController to add the bottom navigation to the layout
+            setContentView(binding.getRoot());
+
+            if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+                // If we had been open already, start from the last used activity.
+                finish();
+                return;
+            }
+
+            setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
+
+            Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
+
+            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
+                @Override
+                protected void execute() {
+                    PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
+                        // TODO: go directly into execute if the device api level is below 26
+                        @Override
+                        public void execute() {
+                            final Sensors sensors = Sensors.getInstance();
+                            sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
+                            sensors.setupDirectionObservable();
+
+                            // Attempt to acquire an initial location before any real activity happens.
+                            sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
+                        }
+                    });
+                }
+            });
+            cLog.add("ph");
+
+            init();
+            cLog.add("init");
+
+            LocalStorage.initGeocacheDataDir();
+            if (LocalStorage.isRunningLowOnDiskSpace()) {
+                SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
+            }
+            cLog.add("ls");
+
+            confirmDebug();
+
+            binding.infoNotloggedin.setOnClickListener(v ->
+                SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+
+            binding.locationArea.setOnClickListener(v -> openNavSettings());
+
+            //do file migrations if necessary
+            LocalStorage.migrateLocalStorage(this);
+            cLog.add("mls");
+
+            //sync map Theme folder
+            RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+            cLog.add("rth");
+
+            // automated update check
+            DownloaderUtils.checkForRoutingTileUpdates(this);
+            cLog.add("rtu");
+
+            DownloaderUtils.checkForMapUpdates(this);
+            cLog.add("mu");
         }
     }
 
+    private void init() {
+        if (initialized) {
+            return;
+        }
+
+        initialized = true;
+
+        checkRestore();
+        DataStore.cleanIfNeeded(this);
+    }
+
     @Override
-    public void onCreate(final Bundle savedInstanceState) {
-        /* @todo
-        if (Settings.isTransparentBackground()) {
-            setTheme(R.style.cgeo_main_transparent);
-        }
-        */
-        // don't call the super implementation with the layout argument, as that would set the wrong theme
-        super.onCreate(savedInstanceState);
-
-        backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
-
-        //check database
-        final String errorMsg = DataStore.initAndCheck(false);
-        if (errorMsg != null) {
-            DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
-        }
-
-        // Disable the up navigation for this activity
+    protected void initHomeAsUpIndicator() {
+        // Show c:geo logo for this activity
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-
-        binding = MainActivityBinding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
-            // If we had been open already, start from the last used activity.
-            finish();
-            return;
-        }
-
-        setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
-
-        Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
-
-        final Activity mainActivity = this;
-
-        PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
-            @Override
-            protected void execute() {
-                PermissionHandler.executeIfLocationPermissionGranted(mainActivity, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnCreate) {
-                    // TODO: go directly into execute if the device api level is below 26
-                    @Override
-                    public void execute() {
-                        final Sensors sensors = Sensors.getInstance();
-                        sensors.setupGeoDataObservables(Settings.useGooglePlayServices(), Settings.useLowPowerMode());
-                        sensors.setupDirectionObservable();
-
-                        // Attempt to acquire an initial location before any real activity happens.
-                        sensors.geoDataObservable(true).subscribeOn(AndroidRxUtils.looperCallbacksScheduler).take(1).subscribe();
-                    }
-                });
-            }
-        });
-
-        init();
-
-        checkChangedInstall();
-
-        LocalStorage.initGeocacheDataDir();
-        if (LocalStorage.isRunningLowOnDiskSpace()) {
-            SimpleDialog.of(this).setTitle(R.string.init_low_disk_space).setMessage(R.string.init_low_disk_space_message).show();
-        }
-
-        confirmDebug();
-
-        // infobox "not logged in" with link to service config; display delayed by 10 seconds
-        final Handler handler = new Handler();
-        handler.postDelayed(this::checkLoggedIn, 10000);
-        binding.infoNotloggedin.setOnClickListener(v ->
-            SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
-
-        //do file migrations if necessary
-        LocalStorage.migrateLocalStorage(this);
-
-        //sync map Theme folder
-        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-
-        // reactivate dialogs which are set to show later
-        OneTimeDialogs.nextStatus();
-
-        checkForRoutingTileUpdates();
-        checkForMapUpdates();
     }
 
     @Override
-
     public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
     }
-
-
-
 
     @Override
     public void onRequestPermissionsResult(final int requestCode, @NonNull final String[] permissions, @NonNull final int[] grantResults) {
@@ -388,7 +360,6 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
-    @SuppressWarnings("unused") // in Eclipse, BuildConfig.DEBUG is always true
     private void confirmDebug() {
         if (Settings.isDebug() && !BuildConfig.DEBUG) {
             SimpleDialog.of(this).setTitle(R.string.init_confirm_debug).setMessage(R.string.list_confirm_debug_message).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, whichButton) -> Settings.setDebug(false));
@@ -405,11 +376,11 @@ public class MainActivity extends AbstractActionBarActivity {
     @Override
     public void onResume() {
         super.onResume();
-        final Activity mainActivity = this;
+
         PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
             @Override
             protected void execute() {
-                PermissionHandler.executeIfLocationPermissionGranted(mainActivity, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
+                PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
 
                     @Override
                     public void execute() {
@@ -422,47 +393,7 @@ public class MainActivity extends AbstractActionBarActivity {
         });
 
         updateUserInfoHandler.sendEmptyMessage(-1);
-        startBackgroundLogin();
         init();
-        connectivityChangeReceiver = new ConnectivityChangeReceiver();
-        registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
-    }
-
-    private void startBackgroundLogin() {
-        final boolean mustLogin = ConnectorFactory.mustRelog();
-
-        for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
-            if (mustLogin || !conn.isLoggedIn()) {
-                AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
-                    if (mustLogin) {
-                        // Properly log out from geocaching.com
-                        conn.logout();
-                    }
-                    conn.login(firstLoginHandler, MainActivity.this);
-                    updateUserInfoHandler.sendEmptyMessage(-1);
-                });
-            }
-        }
-    }
-
-    private void checkForRoutingTileUpdates() {
-        if (Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, this::returnFromTileUpdateCheck);
-        }
-    }
-
-    private void returnFromTileUpdateCheck(final boolean updateCheckAllowed) {
-        Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed);
-    }
-
-    private void checkForMapUpdates() {
-        if (Settings.isMapAutoDownloads() && Settings.mapAutoDownloadsNeedUpdate()) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, this::returnFromMapUpdateCheck);
-        }
-    }
-
-    private void returnFromMapUpdateCheck(final boolean updateCheckAllowed) {
-        Settings.setMapAutoDownloadsLastCheck(!updateCheckAllowed);
     }
 
     @Override
@@ -482,7 +413,7 @@ public class MainActivity extends AbstractActionBarActivity {
     public void onPause() {
         initialized = false;
         resumeDisposables.clear();
-        unregisterReceiver(connectivityChangeReceiver);
+
         super.onPause();
     }
 
@@ -493,16 +424,32 @@ public class MainActivity extends AbstractActionBarActivity {
         searchItem = menu.findItem(R.id.menu_gosearch);
         searchView = (SearchView) searchItem.getActionView();
         searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        hideKeyboardOnSearchClick(searchItem);
+        searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
+        searchView.setSubmitButtonEnabled(true);
 
-        // hide other action icons when search is active
+        hideKeyboardOnSearchClick();
+        hideActionIconsWhenSearchIsActive(menu);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(final MenuItem item) {
+        final int id = item.getItemId();
+        if (id == android.R.id.home) {
+            startActivity(new Intent(this, AboutActivity.class));
+        }
+        return true;
+    }
+
+    private void hideActionIconsWhenSearchIsActive(final Menu menu) {
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
             @Override
             public boolean onMenuItemActionExpand(final MenuItem item) {
                 for (int i = 0; i < menu.size(); i++) {
                     if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
-                        menu.getItem(i).setShowAsAction(MenuItem.SHOW_AS_ACTION_NEVER);
+                        menu.getItem(i).setVisible(false);
                     }
                 }
                 return true;
@@ -514,22 +461,24 @@ public class MainActivity extends AbstractActionBarActivity {
                 return true;
             }
         });
-
-        return true;
     }
 
-    private void hideKeyboardOnSearchClick(final MenuItem searchItem) {
+    private void hideKeyboardOnSearchClick() {
         searchView.setOnSuggestionListener(new OnSuggestionListener() {
 
             @Override
-            public boolean onSuggestionSelect(final int arg0) {
+            public boolean onSuggestionSelect(final int position) {
                 return false;
             }
 
             @Override
-            public boolean onSuggestionClick(final int arg0) {
-                searchItem.collapseActionView();
-                searchView.setIconified(true);
+            public boolean onSuggestionClick(final int position) {
+                // needs to run delayed, as it will otherwise change the SuggestionAdapter cursor which results in inconsistent datasets (see #11803)
+                searchView.postDelayed(() -> {
+                    searchItem.collapseActionView();
+                    searchView.setIconified(true);
+                }, 1000);
+
                 // return false to invoke standard behavior of launching the intent for the search result
                 return false;
             }
@@ -546,69 +495,10 @@ public class MainActivity extends AbstractActionBarActivity {
 
             @Override
             public boolean onQueryTextChange(final String s) {
-                return false;
+                ((SuggestionsAdapter) searchView.getSuggestionsAdapter()).changeQuery(s);
+                return true;
             }
         });
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-        super.onPrepareOptionsMenu(menu);
-        menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
-        final boolean isPremiumActive = Settings.isGCConnectorActive() && Settings.isGCPremiumMember();
-        menu.findItem(R.id.menu_pocket_queries).setVisible(isPremiumActive);
-        menu.findItem(R.id.menu_bookmarklists).setVisible(isPremiumActive);
-        menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        final int id = item.getItemId();
-        if (id == android.R.id.home || id == R.id.menu_about) {
-            showAbout(null);
-        } else if (id == R.id.menu_report_problem) {
-            DebugUtils.askUserToReportProblem(this, null);
-        } else if (id == R.id.menu_helpers) {
-            startActivity(new Intent(this, UsefulAppsActivity.class));
-        } else if (id == R.id.menu_wizard) {
-            final Intent wizard = new Intent(this, InstallWizardActivity.class);
-            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
-            startActivity(wizard);
-        } else if (id == R.id.menu_settings) {
-            startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
-        } else if (id == R.id.menu_backup) {
-            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
-        } else if (id == R.id.menu_history) {
-            startActivity(CacheListActivity.getHistoryIntent(this));
-        } else if (id == R.id.menu_scan) {
-            startScannerApplication();
-        } else if (id == R.id.menu_pocket_queries) {
-            if (Settings.isGCPremiumMember()) {
-                startActivity(new Intent(this, PocketQueryListActivity.class));
-            }
-        } else if (id == R.id.menu_bookmarklists) {
-            if (Settings.isGCPremiumMember()) {
-                startActivity(new Intent(this, BookmarkListActivity.class));
-            }
-        } else if (id == R.id.menu_update_routingdata) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, this::returnFromTileUpdateCheck);
-        } else if (id == R.id.menu_update_mapdata) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, this::returnFromMapUpdateCheck);
-        } else {
-            return super.onOptionsItemSelected(item);
-        }
-        return true;
-    }
-
-    private void startScannerApplication() {
-        final IntentIntegrator integrator = new IntentIntegrator(this);
-        // integrator dialog is English only, therefore localize it
-        integrator.setButtonYesByID(android.R.string.yes);
-        integrator.setButtonNoByID(android.R.string.no);
-        integrator.setTitleByID(R.string.menu_scan_geo);
-        integrator.setMessageByID(R.string.menu_scan_description);
-        integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
     }
 
     @Override
@@ -642,65 +532,6 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
-    private void init() {
-        if (initialized) {
-            return;
-        }
-
-        initialized = true;
-
-        binding.map.setClickable(true);
-        binding.map.setOnClickListener(this::cgeoFindOnMap);
-
-        binding.searchOffline.setClickable(true);
-        binding.searchOffline.setOnClickListener(this::cgeoFindByOffline);
-        binding.searchOffline.setOnLongClickListener(v -> {
-            new StoredList.UserInterface(MainActivity.this).promptForListSelection(R.string.list_title, selectedListId -> {
-                if (selectedListId == PseudoList.HISTORY_LIST.id) {
-                    startActivity(CacheListActivity.getHistoryIntent(this));
-                } else {
-                    Settings.setLastDisplayedList(selectedListId);
-                    CacheListActivity.startActivityOffline(MainActivity.this);
-                }
-            }, false, PseudoList.NEW_LIST.id);
-            return true;
-        });
-        binding.searchOffline.setLongClickable(true);
-
-        binding.advancedButton.setClickable(true);
-        binding.advancedButton.setOnClickListener(this::cgeoSearch);
-
-        binding.anyButton.setClickable(true);
-        binding.anyButton.setOnClickListener(this::cgeoPoint);
-
-        binding.filterButton.setClickable(true);
-        binding.filterButton.setOnClickListener(v -> selectGlobalTypeFilter());
-
-        updateCacheCounter();
-
-        checkRestore();
-        DataStore.cleanIfNeeded(this);
-    }
-
-    protected void selectGlobalTypeFilter() {
-        // TODO: remove all legacy code parts related to the old global cache type filter
-        //Dialogs.selectGlobalTypeFilter(this, cacheType -> setFilterTitle());
-
-        SimpleDialog.of(this).setTitle(R.string.search_filter_temporary_user_information_title).setMessage(R.string.search_filter_temporary_user_information).show();
-    }
-
-    public void updateCacheCounter() {
-        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countBubbleCnt1 -> {
-            if (countBubbleCnt1 == 0) {
-                binding.offlineCount.setVisibility(View.GONE);
-            } else {
-                binding.offlineCount.setText(String.format(Locale.getDefault(), "%d", countBubbleCnt1));
-                binding.offlineCount.bringToFront();
-                binding.offlineCount.setVisibility(View.VISIBLE);
-            }
-        }, throwable -> Log.e("Unable to add bubble count", throwable));
-    }
-
     private void checkRestore() {
 
         if (DataStore.isNewlyCreatedDatebase() && !restoreMessageShown) {
@@ -727,136 +558,47 @@ public class MainActivity extends AbstractActionBarActivity {
         }
     }
 
-    private class UpdateLocation extends GeoDirHandler {
+    @Nullable
+    @Override
+    protected Handler getUpdateUserInfoHandler() {
+        return updateUserInfoHandler;
+    }
 
-        @Override
-        @SuppressLint("SetTextI18n")
-        public void updateGeoData(final GeoData geo) {
-            if (!binding.nearest.isClickable()) {
-                binding.nearest.setFocusable(true);
-                binding.nearest.setClickable(true);
-                binding.nearest.setOnClickListener(MainActivity.this::cgeoFindNearest);
-                binding.nearest.setBackgroundResource(R.drawable.main_nearby);
-            }
-
-            binding.navType.setText(res.getString(geo.getLocationProvider().resourceId));
-
-            if (geo.getAccuracy() >= 0) {
-                final int speed = Math.round(geo.getSpeed()) * 60 * 60 / 1000;
-                binding.navAccuracy.setText("±" + Units.getDistanceFromMeters(geo.getAccuracy()) + Formatter.SEPARATOR + Units.getSpeed(speed));
-            } else {
-                binding.navAccuracy.setText(null);
-            }
-
-            final Geopoint currentCoords = geo.getCoords();
-            if (Settings.isShowAddress()) {
-                if (addCoords == null) {
-                    binding.navLocation.setText(R.string.loc_no_addr);
-                }
-                if (addCoords == null || currentCoords.distanceTo(addCoords) > 0.5) {
-                    addCoords = currentCoords;
-                    final Single<String> address = (new AndroidGeocoder(MainActivity.this).getFromLocation(currentCoords)).map(MainActivity::formatAddress).onErrorResumeWith(Single.just(currentCoords.toString()));
-                    AndroidRxUtils.bindActivity(MainActivity.this, address)
-                            .subscribeOn(AndroidRxUtils.networkScheduler)
-                            .subscribe(address12 -> binding.navLocation.setText(address12));
-                }
-            } else {
-                binding.navLocation.setText(currentCoords.toString());
-            }
+    /**
+     * if no connector can log in, set visibility of warning message accordingly
+     */
+    @Override
+    protected void onLoginIssue(final boolean issue) {
+        if (issue) {
+            binding.infoNotloggedinIcon.attributeImage.setImageResource(R.drawable.attribute_wirelessbeacon);
+            binding.infoNotloggedinIcon.attributeStrikethru.setVisibility(View.VISIBLE);
+            binding.infoNotloggedin.setVisibility(View.VISIBLE);
+        } else {
+            binding.infoNotloggedin.setVisibility(View.GONE);
         }
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFindOnMap(final View v) {
-        binding.map.setPressed(true);
-        startActivity(DefaultMap.getLiveMapIntent(this));
+    private static String formatAddress(final Address address) {
+        final List<String> addressParts = new ArrayList<>();
+
+        final String countryName = address.getCountryName();
+        if (countryName != null) {
+            addressParts.add(countryName);
+        }
+        final String locality = address.getLocality();
+        if (locality != null) {
+            addressParts.add(locality);
+        } else {
+            final String adminArea = address.getAdminArea();
+            if (adminArea != null) {
+                addressParts.add(adminArea);
+            }
+        }
+        return StringUtils.join(addressParts, ", ");
     }
 
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFindNearest(final View v) {
-        binding.nearest.setPressed(true);
-        startActivity(CacheListActivity.getNearestIntent(this));
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFindByOffline(final View v) {
-        binding.searchOffline.setPressed(true);
-        CacheListActivity.startActivityOffline(this);
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoSearch(final View v) {
-        binding.advancedButton.setPressed(true);
-        startActivity(new Intent(this, SearchActivity.class));
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoPoint(final View v) {
-        binding.anyButton.setPressed(true);
-        InternalConnector.assertHistoryCacheExists(this);
-        CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoFilter(final View v) {
-        binding.filterButton.setPressed(true);
-        binding.filterButton.performClick();
-    }
-
-    /**
-     * @param v
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void cgeoNavSettings(final View v) {
+    public void openNavSettings() {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
-    }
-
-    private void checkChangedInstall() {
-        // temporary workaround for #4143
-        //TODO: understand and avoid if possible
-        try {
-            final long lastChecksum = Settings.getLastChangelogChecksum();
-            final long checksum = TextUtils.checksum(FileUtils.getChangelogMaster(this) + FileUtils.getChangelogRelease(this));
-            Settings.setLastChangelogChecksum(checksum);
-
-            if (lastChecksum == 0) {
-                // initialize oneTimeMessages after fresh install
-                OneTimeDialogs.initializeOnFreshInstall();
-                // initialize useInternalRouting setting depending on whether BRouter app is installed or not
-                Settings.setUseInternalRouting(!ProcessUtils.isInstalled(getString(R.string.package_brouter)));
-            } else if (lastChecksum != checksum) {
-                // show change log page after update
-                AboutActivity.showChangeLog(this);
-            }
-        } catch (final Exception ex) {
-            Log.e("Error checking/showing changelog!", ex);
-        }
-    }
-
-    /**
-     * @param view
-     *            unused here but needed since this method is referenced from XML layout
-     */
-    public void showAbout(final View view) {
-        startActivity(new Intent(this, AboutActivity.class));
     }
 
     @Override
@@ -868,5 +610,10 @@ public class MainActivity extends AbstractActionBarActivity {
         } else {
             super.onBackPressed();
         }
+    }
+
+    @Override
+    public int getSelectedBottomItemId() {
+        return MENU_NOTHING_SELECTED;
     }
 }

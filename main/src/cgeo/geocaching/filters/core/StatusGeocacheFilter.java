@@ -91,7 +91,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusWatchlist != null && cache.isOnWatchlistRaw() == null) ||
             (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
             (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
-            (statusSolvedMystery != null && cache.getUserModifiedCoordsRaw() == null)) {
+            (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null)) {
             return null;
         }
 

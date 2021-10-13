@@ -14,6 +14,7 @@
     <string name="about">About c:geo</string>
     <string name="latitude">Latitude</string>
     <string name="longitude">Longitude</string>
+    <string name="latlongitude">Latitude\nLongitude</string>
 
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Settings</string>
@@ -311,7 +312,6 @@
     <string name="confirm_unsaved_changes_title">Unsaved changes</string>
     <string name="confirm_discard_changes">Discard unsaved changes?</string>
     <string name="confirm_discard_wp_changes">Discard unsaved waypoint changes?</string>
-    <string name="err_request_popup_info">c:geo failed to get cache popup info.</string>
     <string name="warn_log_load_additional_data">c:geo failed to load additional data (trackables/favorite points) for logging.</string>
     <string name="more_information">More information</string>
     <string name="undo">Undo</string>
@@ -339,10 +339,12 @@
     <string name="menu_helpers">Utility programs</string>
     <string name="menu_settings">Settings</string>
     <string name="menu_backup">Backup / restore</string>
-    <string name="menu_update">Update</string>
+    <string name="menu_update">Update offline data</string>
     <string name="menu_update_routingdata">Routing data</string>
     <string name="menu_update_mapdata">Map data</string>
+    <string name="menu_dashboard">Login dashboard</string>
     <string name="menu_history">History</string>
+    <string name="menu_history_longstring">Finds history</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -356,6 +358,7 @@
     <string name="advanced_search_button">Search</string>
     <string name="stored_caches_button">Stored</string>
     <string name="any_button">Go to</string>
+    <string name="more_button">More</string>
     <string name="unknown_scan">Didn\'t find any geocodes in the scan result.</string>
 
     <!-- caches -->
@@ -386,13 +389,14 @@
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
     <string name="caches_sort_distance">Distance</string>
+    <string name="caches_sort_distance_target">Distance to target</string>
     <string name="caches_sort_difficulty">Difficulty</string>
     <string name="caches_sort_terrain">Terrain</string>
     <string name="caches_sort_size">Size</string>
     <string name="caches_sort_favorites">Favorites</string>
     <string name="caches_sort_favorites_ratio">Favorites [%]</string>
     <string name="caches_sort_name">Name</string>
-    <string name="caches_sort_geocode">Geo Code</string>
+    <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Rating</string>
     <string name="caches_sort_vote">Vote (Own Rating)</string>
     <string name="caches_sort_inventory">Count of Inventory</string>
@@ -411,7 +415,7 @@
     <string name="caches_remove_all_completely">Delete all from device</string>
     <string name="caches_remove_selected_completely">Delete selected from device</string>
     <string name="caches_delete_events">Delete past events</string>
-    <string name="caches_upload_bookmarklist">Upload to bookmark list</string>
+    <string name="caches_upload_bookmarklist">Add to bookmark list</string>
     <string name="caches_upload_modifiedcoords">Upload modified coordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Do you want to upload modified coordinates for all (selected) caches and overwrite the existing coordinates on the server? This cannot be undone.</string>
     <string name="caches_upload_allcoords">Upload coordinates for all caches</string>
@@ -437,6 +441,22 @@
     <string name="caches_askdeletion">Ask for deletion if empty</string>
     <string name="select_icon">Select icon</string>
     <string name="onetime_missing_unicode_info">Your Android version does not support automatic detection of icons supported - some characters may be missing</string>
+    <plurals name="user_finds">
+        <item quantity="zero">%d finds</item>
+        <item quantity="one">%d find</item>
+        <item quantity="two">%d finds</item>
+        <item quantity="few">%d finds</item>
+        <item quantity="many">%d finds</item>
+        <item quantity="other">%d finds</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="zero">%d logged offline</item>
+        <item quantity="one">%d logged offline</item>
+        <item quantity="two">%d logged offline</item>
+        <item quantity="few">%d logged offline</item>
+        <item quantity="many">%d logged offline</item>
+        <item quantity="other">%d logged offline</item>
+    </plurals>
 
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>
@@ -521,7 +541,6 @@
         <item quantity="other">%1$d items</item>
     </plurals>
 
-    <string name="cache_filter_storage_load_button">Load</string>
     <string name="cache_filter_storage_delete_button">Delete</string>
     <string name="cache_filter_storage_clear_button">Clear</string>
     <string name="cache_filter_storage_load_delete_title">Load or delete an existing filter</string>
@@ -736,6 +755,7 @@
     <string name="init_login_popup_failed">Login failed</string>
     <string name="init_login_popup_failed_reason">Login failed: %s</string>
     <string name="init_login_popup_not_authorized">Not authorized</string>
+    <string name="init_login_popup_not_logged_in">Not logged in</string>
     <string name="init_login_popup_invalid_timestamp">Local time invalid, adjust device time</string>
     <string name="init_login_popup_invalid_token">Authorization invalid, re-authorize</string>
     <string name="init_authorization_credential_username">Username</string>
@@ -968,9 +988,6 @@
     <string name="init_memory_dump">Memory dump</string>
     <string name="init_memory_dumped">Memory dumped to %s</string>
     <string name="init_please_wait">Please wait…</string>
-    <string name="init_hardware_acceleration_title">Hardware accelerated rendering</string>
-    <string name="init_hardware_acceleration_note">Hardware acceleration renders graphical elements faster on the screen. However on some devices the Android operating system contains bugs and some text may appear blurred (notably bold characters). Disable hardware acceleration if this happens to you.</string>
-    <string name="init_hardware_acceleration">Enable hardware acceleration</string>
     <string name="settings_open_website">Open website</string>
     <string name="settings_open_geokretymap_website">Open GeoKretyMap.org website</string>
     <string name="settings_settings">Settings</string>
@@ -1245,14 +1262,17 @@
     <string name="cache_images">Images</string>
     <string name="cache_advanced">Advanced</string>
     <string name="cache_waypoints">Waypoints</string>
+    <string name="cache_variables">Variables</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
-    <string name="cache_waypoints_add">Add Waypoint</string>
+    <string name="cache_waypoints_add">Add waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Add current location</string>
     <string name="cache_waypoints_add_fromclipboard">Add from clipboard</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Hide visited waypoints</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copied from clipboard to this cache.\n\nRemove original waypoint?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">No hint available</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_latest_logs">Recent logs</string>
     <string name="cache_logs_friends_and_own">Friends/Own Logs</string>
     <string name="cache_dialog_loading_details">Loading cache details…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Loading page</string>
@@ -1333,10 +1353,10 @@
     <string name="cache_status_disabled">Disabled</string>
     <string name="cache_status_active">Active</string>
     <string name="cache_status_premium">Premium Members only</string>
-    <string name="cache_geocode">Geo code</string>
+    <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Name</string>
-    <string name="cache_name_set">Set cachename</string>
-    <string name="cache_name_updated">Cachename updated</string>
+    <string name="cache_name_set">Set cache name</string>
+    <string name="cache_name_updated">Cache name updated</string>
     <string name="cache_description_set">Set cache description</string>
     <string name="cache_description_updated">Cache description updated</string>
     <string name="cache_type">Type</string>
@@ -1519,6 +1539,8 @@
     <string name="map_language">Map language</string>
     <string name="map_live_enable">Enable live</string>
     <string name="map_live_disable">Disable live</string>
+    <string name="map_live_disabled">Live mode disabled</string>
+    <string name="map_live_disabled_hint">Live mode is disabled. You will only see stored caches. Use the menu to enable live mode.</string>
     <string name="map_as_list">Show as list</string>
     <string name="map_select_multiple_items">Select item</string>
     <string name="map_routing">Routing</string>
@@ -1537,22 +1559,21 @@
     <!-- search -->
     <string name="geo_search_label">Search caches nearby</string>
     <string name="search_bar_hint">Search caches/trackables</string>
-    <string name="search_bar_desc">Caches (geo code, keyword), Trackables (TB code)</string>
     <string name="search_coordinates">Coordinates</string>
     <string name="search_coordinates_button">Search by coordinates</string>
     <string name="search_address">Address</string>
     <string name="search_address_button">Search by address</string>
-    <string name="search_geo">Geo code</string>
-    <string name="search_geo_button">Search by geo code</string>
+    <string name="search_geo">Geocode</string>
+    <string name="search_geo_button">Search by geocode</string>
     <string name="search_geocode_from_clipboard">Geocode was pasted from clipboard.</string>
-    <string name="search_kw">Keywords</string>
+    <string name="search_kw">Keyword</string>
     <string name="search_kw_prefill">Keyword</string>
     <string name="search_kw_button">Search by keyword</string>
     <string name="search_hbu">Hidden by</string>
     <string name="search_hbu_prefill">Owner</string>
     <string name="search_hbu_button">Search by owner name</string>
     <string name="search_filter">Filter</string>
-    <string name="search_filter_button">Search by Filter</string>
+    <string name="search_filter_button">Search by filter</string>
     <string name="search_filter_info_message" formatted="false">**Search by filter** searches caches on all active online services (e.g. geocaching.com) using a provided filter. However, search capabilities of these services are usually more limited than filter capabilities of c:geo.\n\n- All services only support AND filters (no OR filters and no filter inversion).\n- The more basic filters like **cache type** or **cache size** are supported by all services. More complicated filters are often not supported or have some restrictions e.g. **favorites** or **hidden date**.\n- A detailed list on supported filters per service can be found [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters not supported by the online service will be applied by c:geo on the received results.</string>
     <string name="search_filter_temporary_user_information_title">New filter framework</string>
     <string name="search_filter_temporary_user_information">c:geo has introduced a new filtering system, supporting flexible, combinable and storable filters. \n\nThe global filter can from now on be changed directly in cache lists and the live map.</string>
@@ -2026,14 +2047,6 @@
         <item quantity="many">%d days ago</item>
         <item quantity="other">%d days ago</item>
     </plurals>
-    <plurals name="favorite_points">
-        <item quantity="zero">%s favorites</item>
-        <item quantity="one">%s favorite</item>
-        <item quantity="two">%s favorites</item>
-        <item quantity="few">%s favorites</item>
-        <item quantity="many">%s favorites</item>
-        <item quantity="other">%s favorites</item>
-    </plurals>
 
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo shortcut</string>
@@ -2267,6 +2280,7 @@
     <string name="download_confirmation">%1$sDownload file \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates found for:\n%1$s\n\nDo you want to update?%2$s</string>
     <string name="download_warning">This may take quite some time and can lead to significant costs, depending on your network connection.</string>
+    <string name="download_error">Download failed with error #%d</string>
     <string name="downloadmap_handling">The download itself will be handled by your system\'s download manager in the background. You should see a notification as soon as the download started (which may take a while).</string>
     <string name="button_continue">Continue</string>
     <string name="downloadmap_onedirup">(one level up)</string>
@@ -2363,5 +2377,7 @@
 
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Select All</string>
+
+    <string name="touch_again_to_exit">Please touch again to exit</string>
 
 </resources>

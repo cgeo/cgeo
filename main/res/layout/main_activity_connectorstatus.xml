@@ -1,6 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    style="@style/location_current"
-    android:text="@string/init_login_popup_working"
-    tools:context=".MainActivity$1" />
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="7dp"
+    android:layout_margin="3dip">
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/item_icon"
+        style="@style/button_icon"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:clickable="false"
+        android:gravity="left"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/avartar_placeholder" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/item_icon"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_headingPrimary"
+            android:textStyle="bold"
+            tools:text="username" />
+
+        <TextView
+            android:id="@+id/item_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_headingSecondary"
+            tools:text="1234 finds"/>
+
+        <TextView
+            android:id="@+id/item_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:lines="1"
+            android:maxLines="1"
+            android:scrollHorizontally="true"
+            android:text="@string/init_login_popup_working"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_headingSecondary" />
+
+    </LinearLayout>
+</RelativeLayout>

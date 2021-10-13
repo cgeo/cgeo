@@ -153,6 +153,9 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             }
         }
 
+        // Latest logs
+        details.addLatestLogs(cache);
+
         // more details
         final View view = getView();
         assert view != null;
@@ -193,7 +196,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
     public void onCreateOptionsMenu(@NonNull final Menu menu, @NonNull final MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         CacheMenuHandler.addMenuItems(inflater, menu, cache, true);
-        CacheMenuHandler.initNavigationMenuItems(menu, this, cache);
+        CacheMenuHandler.initDefaultNavigationMenuItem(menu, this);
 
         if (requireActivity().getCallingActivity() != null) {
             menu.findItem(R.id.menu_target).setVisible(true);
@@ -206,7 +209,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
             setAsTarget();
             return true;
         }
-        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::init)) {
+        if (CacheMenuHandler.onMenuItemSelected(item, this, cache, this::init, true)) {
             return true;
         }
         if (LoggingUI.onMenuItemSelected(item, getActivity(), cache, dialog -> init())) {
@@ -221,7 +224,7 @@ public abstract class AbstractDialogFragment extends DialogFragment implements C
         super.onPrepareOptionsMenu(menu);
 
         try {
-            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, false);
+            CacheMenuHandler.onPrepareOptionsMenu(menu, cache, true);
             LoggingUI.onPrepareOptionsMenu(menu, cache);
         } catch (final RuntimeException ignored) {
             // nothing

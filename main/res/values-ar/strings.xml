@@ -219,7 +219,6 @@
     <string name="err_trackable_no_preference_activity">عذراً لا يمكن العثور على شاشة تفضيل مناسبة.</string>
     <string name="confirm_unsaved_changes_title">تغييرات غير محفوظة</string>
     <string name="confirm_discard_wp_changes">هل تريد تجاهل تغييرات الإحداثية الغير محفوظة؟</string>
-    <string name="err_request_popup_info">c:geo فشل في الحصول على المعلومات المنبثقة للمخبئ.</string>
     <!-- location service -->
     <string name="loc_last">أخر موقع معروف</string>
     <string name="loc_net">الشبكة</string>
@@ -268,7 +267,6 @@
     <string name="caches_sort_favorites">المفضلات</string>
     <string name="caches_sort_favorites_ratio">المفضلات [%]</string>
     <string name="caches_sort_name">الاسم</string>
-    <string name="caches_sort_geocode">كود المخبئ</string>
     <string name="caches_sort_rating">التقييم</string>
     <string name="caches_sort_vote">التصويت (التقييم الخاص)</string>
     <string name="caches_sort_inventory">حساب المخزون</string>
@@ -473,9 +471,6 @@
     <string name="init_create_memory_dump">إنشاء تفريغ الذاكرة</string>
     <string name="init_memory_dump">تفريغ الذاكرة</string>
     <string name="init_memory_dumped">الذاكرة ملقاة في %s</string>
-    <string name="init_hardware_acceleration_title">تسريع المعالج للأداء</string>
-    <string name="init_hardware_acceleration_note">تسريع المعالج للأداء يجعل لعناصر المرسومة أسرع على الشاشة. مع ذالك في بعض أجهزة الأندرويد قد تظهر بعض المشاكل في نظام التشغيل و قد تظهر بعض النصوص يصفة غير واضحة (لا سيما الأحرف بالخط العريض). قم بتعطيل تسريع الجهاز إذا حدث هذا لك.</string>
-    <string name="init_hardware_acceleration">تمكين تسريع المعالج</string>
     <string name="settings_open_website">فتح الموقع</string>
     <string name="settings_open_geokretymap_website">فتح موقع GeoKretyMap.org</string>
     <string name="settings_settings">الإعدادات</string>
@@ -573,7 +568,6 @@
     <string name="cache_list_select_last">التحديد الأخير</string>
     <string name="cache_images">الصور</string>
     <string name="cache_waypoints">إحدثيات الطريق</string>
-    <string name="cache_waypoints_add">أضف إحداثية طريق</string>
     <string name="cache_hint">تلميح</string>
     <string name="cache_hint_not_available">لا يوجد تليمح متاح</string>
     <string name="cache_logs">دفتر تسجيل الزيارات</string>
@@ -641,7 +635,6 @@
     <string name="cache_status_archived">تم أرشفته</string>
     <string name="cache_status_disabled">معطل</string>
     <string name="cache_status_premium">أعضاء برميوم فقط</string>
-    <string name="cache_geocode">كود المخبئ</string>
     <string name="cache_name">الاسم</string>
     <string name="cache_type">النوع</string>
     <string name="cache_size">الحجم</string>
@@ -745,14 +738,10 @@
     <string name="map_as_list">عرض كقائمة</string>
     <string name="map_select_multiple_items">حدد العنصر</string>
     <!-- search -->
-    <string name="search_bar_desc">المخبآت (كود المخبئ، كلمة مفتاحية)، أمتعة السفر (كود TB)</string>
     <string name="search_coordinates">الإحداثيات</string>
     <string name="search_coordinates_button">البحث بواسطة الإحدثيات</string>
     <string name="search_address">العنوان</string>
     <string name="search_address_button">البحث بواسطة العنوان</string>
-    <string name="search_geo">كود المخبئ</string>
-    <string name="search_geo_button">البحث بواسطة كود المخبئ</string>
-    <string name="search_kw">الكلمات المفتاحية</string>
     <string name="search_kw_prefill">كلمة مفتاحية</string>
     <string name="search_kw_button">البحث بواسطة الكلمة المفتاحية</string>
     <string name="search_hbu_prefill">المالك</string>

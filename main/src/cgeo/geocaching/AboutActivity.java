@@ -10,6 +10,7 @@ import cgeo.geocaching.databinding.AboutSystemPageBinding;
 import cgeo.geocaching.databinding.AboutVersionPageBinding;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -213,21 +214,27 @@ public class AboutActivity extends TabbedViewPagerActivity {
         @Override
         public void setContent() {
             final Activity activity = getActivity();
-            if (activity == null) {
+            if (activity == null || binding == null) {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
             final Markwon markwon = Markwon.create(activity);
 
-            final String changelogMaster = FileUtils.getChangelogMaster(activity);
-            if (StringUtils.isNotBlank(changelogMaster)) {
-                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogMaster);
+            final String changelogBase = FileUtils.getChangelogMaster(activity).trim();
+            final String changelogBugfix = FileUtils.getChangelogRelease(activity).trim();
+            if (BranchDetectionHelper.isProductionBuild()) {
+                // we are on release branch
+                if (StringUtils.isNotEmpty(changelogBugfix)) {
+                    markwon.setMarkdown(binding.changelogMaster, (changelogBugfix.startsWith("##") ? "" : "## " + getString(R.string.about_changelog_next_release) + "\n\n") + changelogBugfix);
+                } else {
+                    binding.changelogMaster.setVisibility(View.GONE);
+                }
+                markwon.setMarkdown(binding.changelogRelease, "## " + BranchDetectionHelper.FEATURE_VERSION_NAME + "\n\n" + changelogBase);
             } else {
-                binding.changelogMaster.setVisibility(View.GONE);
+                // we are on a non-release branch
+                markwon.setMarkdown(binding.changelogMaster, "## " + getString(R.string.about_changelog_nightly_build) + "\n\n" + changelogBase);
+                markwon.setMarkdown(binding.changelogRelease, changelogBugfix);
             }
-
-            final String versionRelease = FileUtils.getRawResourceAsString(activity, R.raw.version_release).trim();
-            markwon.setMarkdown(binding.changelogRelease, "## " + (StringUtils.isNotBlank(versionRelease) ? versionRelease : getString(R.string.about_changelog_next_release)) + "\n\n" + FileUtils.getChangelogRelease(activity));
             binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
         }
     }
@@ -291,7 +298,8 @@ public class AboutActivity extends TabbedViewPagerActivity {
         public void setContent() {
             binding.getRoot().setVisibility(View.VISIBLE);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
-            binding.licenseText.setText(getRawResourceString(R.raw.license));
+            final Markwon markwon = Markwon.create(getActivity());
+            markwon.setMarkdown(binding.licenseText, getRawResourceString(R.raw.license));
         }
 
         private String getRawResourceString(@SuppressWarnings("SameParameterValue") @RawRes final int resourceId) {
@@ -451,4 +459,3 @@ public class AboutActivity extends TabbedViewPagerActivity {
     }
 
 }
-

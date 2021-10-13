@@ -286,7 +286,6 @@
     <string name="confirm_unsaved_changes_title">未保存更改</string>
     <string name="confirm_discard_changes">放棄所有未儲存的變更。</string>
     <string name="confirm_discard_wp_changes">丢弃未保存的航点更改？</string>
-    <string name="err_request_popup_info">c:geo获取cache信息失败</string>
     <string name="warn_log_load_additional_data">c:geo 無法為登錄載入其它資料(旅行蟲 / 最愛點)</string>
     <string name="more_information">更多資訊</string>
     <string name="undo">復原</string>
@@ -350,7 +349,6 @@
     <string name="caches_sort_favorites">已被标记为喜爱</string>
     <string name="caches_sort_favorites_ratio">最愛的[%]</string>
     <string name="caches_sort_name">应用名</string>
-    <string name="caches_sort_geocode">Geo 节点</string>
     <string name="caches_sort_rating">评级</string>
     <string name="caches_sort_vote">投票</string>
     <string name="caches_sort_inventory">存貨數量</string>
@@ -446,7 +444,6 @@
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$d 個項目</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">載入</string>
     <string name="cache_filter_storage_delete_button">刪除</string>
     <string name="cache_filter_storage_load_delete_title">載入或刪除過濾設定</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">無存在的過濾設定</string>
@@ -773,9 +770,6 @@
     <string name="init_memory_dump">記憶體傾印</string>
     <string name="init_memory_dumped">記憶體傾印到%s</string>
     <string name="init_please_wait">請稍候…</string>
-    <string name="init_hardware_acceleration_title">硬體加速渲染</string>
-    <string name="init_hardware_acceleration_note">硬體加速渲染元件會比螢幕還快。在部分的Andriond裝置上，文字顯示發生錯誤。當有這樣的情況時，請關閉硬體加速。</string>
-    <string name="init_hardware_acceleration">啟用硬體加速</string>
     <string name="settings_open_website">開啟網站</string>
     <string name="settings_open_geokretymap_website">開啟GeoKretyMap.org網站</string>
     <string name="settings_settings">設定</string>
@@ -962,7 +956,6 @@
     <string name="cache_images">圖片</string>
     <string name="cache_advanced">進階</string>
     <string name="cache_waypoints">航點</string>
-    <string name="cache_waypoints_add">新增航點</string>
     <string name="cache_waypoints_add_currentLocation">新增目前位置</string>
     <string name="cache_waypoints_add_fromclipboard">從剪貼簿新增</string>
     <string name="cache_waypoints_remove_original_waypoint">從剪貼簿複製到這個cache</string>
@@ -1040,10 +1033,7 @@
     <string name="cache_status_disabled">停用</string>
     <string name="cache_status_active">有效</string>
     <string name="cache_status_premium">僅限高級會員</string>
-    <string name="cache_geocode">Geo code</string>
     <string name="cache_name">名稱</string>
-    <string name="cache_name_set">設置藏寶名稱</string>
-    <string name="cache_name_updated">藏寶名稱更新</string>
     <string name="cache_description_set">設定藏寶描述</string>
     <string name="cache_description_updated">藏寶描述更新</string>
     <string name="cache_type">類型</string>
@@ -1185,20 +1175,15 @@
     <string name="quick_settings">快速設定</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
-    <string name="search_bar_desc">地理藏寶(藏寶號碼, 關鍵字)，旅行蟲(號碼)</string>
     <string name="search_coordinates">座標</string>
     <string name="search_coordinates_button">用座標搜尋</string>
     <string name="search_address">地址</string>
     <string name="search_address_button">使用地址搜尋</string>
-    <string name="search_geo">Geo code</string>
-    <string name="search_geo_button">用geo code搜尋</string>
-    <string name="search_kw">關鍵字</string>
     <string name="search_kw_prefill">關鍵字</string>
     <string name="search_kw_button">用關鍵字搜尋</string>
     <string name="search_hbu">由藏寶</string>
     <string name="search_hbu_prefill">寶主</string>
     <string name="search_hbu_button">用寶主名稱來搜尋</string>
-    <string name="search_filter_button">條件搜尋</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_tb_hint">旅行蟲識別</string>
     <string name="search_tb_button">搜尋旅行蟲</string>
@@ -1522,9 +1507,6 @@
     <string name="clipboard_copy_ok">複製到剪貼簿</string>
     <plurals name="days_ago">
         <item quantity="other">%d天前</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="other">%s我的最愛</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo捷徑</string>

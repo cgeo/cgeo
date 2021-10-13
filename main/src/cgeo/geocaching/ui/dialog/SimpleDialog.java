@@ -5,12 +5,14 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.functions.Action2;
+import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.text.Editable;
+import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Pair;
@@ -31,6 +33,7 @@ import androidx.core.util.Consumer;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Pattern;
 import static java.lang.Boolean.TRUE;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -315,7 +318,7 @@ public class SimpleDialog {
             }
         }
 
-        if (!neutralButtonNeedsSelection && moreListeners.length > 1) {
+        if (!neutralButtonNeedsSelection && moreListeners != null && moreListeners.length > 1) {
             builder.setNeutralButton(getNeutralButton(), (dialog, which) -> moreListeners[1].call(null, -1));
         }
 
@@ -384,6 +387,23 @@ public class SimpleDialog {
      */
 
     public void input(final int inputType, @Nullable final String defaultValue, @Nullable final String label, @Nullable final String suffix, final Consumer<String> okayListener) {
+        input(inputType, defaultValue, label, suffix, StringUtils::isNotBlank, null, okayListener);
+    }
+
+    /**
+     * Use this method to create and display an 'input' dialog using the data defined before using this classes' setters
+     * <p>
+     * An 'input' dialog allows the user to enter a value. It always has a positive action (to end input) and a negative action (to abort)
+     *
+     * @param inputType    input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed
+     * @param defaultValue if non-null, this will be the prefilled value of the input field
+     * @param label        if non-null & non-empty, this will be displayed as a hint within the input field (e.g. to display a hint)
+     * @param suffix       if non-null & non-empty, this will be displayed as a suffix at the end of the input field (e.g. to display units like km/ft)
+     * @param inputChecker if non-null, then ok button will only be clickable if given check is satisfied
+     * @param allowedChars if non-null, then only chars passing this regex pattern will be allowed to enter
+     * @param okayListener provide the select listener called when user entered something and finishes it (called when user clicks on positive button)
+     */
+    public void input(final int inputType, @Nullable final String defaultValue, @Nullable final String label, @Nullable final String suffix, final Func1<String, Boolean> inputChecker, final String allowedChars, final Consumer<String> okayListener) {
 
         final Pair<View, EditText> textField = ViewUtils.createTextField(getContext(), defaultValue, TextParam.text(label), TextParam.text(suffix), inputType, 1, 1);
 
@@ -395,35 +415,48 @@ public class SimpleDialog {
         builder.setNegativeButton(getNegativeButton(), (dialog, whichButton) -> dialog.dismiss());
         final AlertDialog dialog = builder.create();
 
-        textField.second.addTextChangedListener(new TextWatcher() {
+        if (inputChecker != null) {
+            textField.second.addTextChangedListener(new TextWatcher() {
 
-            @Override
-            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                // empty
-            }
+                @Override
+                public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                    // empty
+                }
 
-            @Override
-            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                // empty
-            }
+                @Override
+                public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+                    // empty
+                }
 
-            @Override
-            public void afterTextChanged(final Editable editable) {
-                enableDialogButtonIfNotEmpty(dialog, editable.toString());
-            }
-        });
+                @Override
+                public void afterTextChanged(final Editable editable) {
+                    enableDialogButtonIf(dialog, editable.toString(), inputChecker);
+                }
+            });
+        }
+        if (allowedChars != null) {
+            final Pattern charPattern = Pattern.compile(allowedChars);
+            textField.second.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
+                for (int i = start; i < end; i++) {
+                    if (!charPattern.matcher("" + source.charAt(i)).matches()) {
+                        return "";
+                    }
+                }
+                return null;
+            } });
+        }
         // force keyboard
         Keyboard.show(getContext(), textField.second);
 
         // disable button
         dialog.show();
-        enableDialogButtonIfNotEmpty(dialog, String.valueOf(defaultValue));
+        enableDialogButtonIf(dialog, String.valueOf(defaultValue), inputChecker);
         Dialogs.moveCursorToEnd(textField.second);
         adjustCommons(dialog);
     }
 
-    private static void enableDialogButtonIfNotEmpty(final AlertDialog dialog, final String input) {
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(StringUtils.isNotBlank(input));
+    private static void enableDialogButtonIf(final AlertDialog dialog, final String input, final Func1<String, Boolean> inputChecker) {
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setEnabled(inputChecker == null || inputChecker.call(input));
     }
 
 
@@ -455,8 +488,8 @@ public class SimpleDialog {
             public View getView(final int position, final View convertView, final ViewGroup parent) {
                 //Use super class to create the View.
                 final View v = super.getView(position, convertView, parent);
-                final TextView tv = (TextView) v.findViewById(android.R.id.text1);
-                displayMapper.call(getItem(position), position).applyTo(tv);
+                final TextView tv = v.findViewById(android.R.id.text1);
+                displayMapper.call(getItem(position), position).applyTo(tv, true);
                 return v;
             }
         };

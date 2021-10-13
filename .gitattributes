@@ -12,5 +12,5 @@
 /main/res/raw-*/changelog_release.md merge=ours
 
 # Ignore translated playstore description 
-/main/project/playstore/description/translated/* merge=ours
-/cgeo-contacts/project/playstore/description/translated/* merge=ours
+/main/project/playstore/description/translated/*/*.txt merge=ours
+/cgeo-contacts/project/playstore/description/translated/*/*.txt merge=ours

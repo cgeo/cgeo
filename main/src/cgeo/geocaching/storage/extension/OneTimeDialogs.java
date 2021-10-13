@@ -20,16 +20,14 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         // names must not be changed, as there are database entries depending on it
         // title and text must be set when using the Dialogs.basicOneTimeMessage() function
 
-        // when an one time dialog gets removed/replaced, keep the old one in the enum anyway, so that we can be sure that the same name isn't used again in the future.
-
-        EXPLAIN_OFFLINE_FOUND_COUNTER(R.string.settings_information, R.string.feature_info_offline_counter, DefaultBehavior.SHOW_ALWAYS, 0),
         DATABASE_CONFIRM_OVERWRITE(null, null, DefaultBehavior.SHOW_ALWAYS, 0),
         MAP_QUICK_SETTINGS(R.string.settings_information, R.string.quick_settings_info, DefaultBehavior.SHOW_ONLY_AFTER_UPGRADE, 0),
         MAP_LONG_TAP_DISABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_disabled, DefaultBehavior.SHOW_ALWAYS, R.string.manual_url_mapbehavior),
         MAP_LONG_TAP_ENABLED(R.string.init_longtap_map, R.string.onetime_info_longtap_enabled, DefaultBehavior.SHOW_ALWAYS, R.string.manual_url_mapbehavior),
         MISSING_UNICODE_CHARACTERS(R.string.select_icon, R.string.onetime_missing_unicode_info, DefaultBehavior.SHOW_ALWAYS, 0),
         MAP_THEME_FIX_SLOWNESS(R.string.onetime_mapthemefixslow_title, R.string.onetime_mapthemefixslow_message, DefaultBehavior.SHOW_ALWAYS, R.string.faq_url_settings_themes),
-        MAP_AUTOROTATION_DISABLE(R.string.map_gm_autorotation, R.string.map_gm_autorotation_disable, DefaultBehavior.SHOW_ALWAYS, 0);
+        MAP_AUTOROTATION_DISABLE(R.string.map_gm_autorotation, R.string.map_gm_autorotation_disable, DefaultBehavior.SHOW_ALWAYS, 0),
+        MAP_LIVE_DISABLED(R.string.map_live_disabled, R.string.map_live_disabled_hint, DefaultBehavior.SHOW_ALWAYS, 0);
 
         public final Integer messageTitle;
         public final Integer messageText;

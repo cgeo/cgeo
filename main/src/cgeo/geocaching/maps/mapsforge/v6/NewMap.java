@@ -10,13 +10,13 @@ import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.connector.gc.Tile;
 import cgeo.geocaching.connector.internal.InternalConnector;
+import cgeo.geocaching.databinding.MapMapsforgeV6Binding;
 import cgeo.geocaching.downloader.DownloaderUtils;
-import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.filters.core.GeocacheFilter;
@@ -53,7 +53,6 @@ import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.RouteItem;
 import cgeo.geocaching.models.TrailHistoryElement;
-import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
 import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
@@ -62,6 +61,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -74,7 +74,6 @@ import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
@@ -97,7 +96,6 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -137,6 +135,7 @@ import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.util.Parameters;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.graphics.AndroidResourceBitmap;
+import org.mapsforge.map.android.input.MapZoomControls;
 import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.Layers;
 import org.mapsforge.map.layer.cache.TileCache;
@@ -144,8 +143,7 @@ import org.mapsforge.map.model.common.Observer;
 
 @SuppressLint("ClickableViewAccessibility")
 @SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
-public class NewMap extends AbstractActionBarActivity implements Observer, FilteredActivity {
-
+public class NewMap extends AbstractBottomNavigationActivity implements Observer, FilteredActivity {
     private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
     private static final String STATE_TRACKUTILS = "trackutils";
 
@@ -261,12 +259,17 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         // set layout
         ActivityMixin.setTheme(this);
 
-        setContentView(R.layout.map_mapsforge_v6);
+        // init BottomNavigationController to add the bottom navigation to the layout
+        setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
+
         setTitle();
         this.mapAttribution = findViewById(R.id.map_attribution);
 
         // map settings popup
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+
+        // individual route popup
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> individualRouteUtils.showPopup(findViewById(R.id.map_individualroute_popup), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget, this::centerOnPosition, this::setTarget));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -278,6 +281,14 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         mapView.setClickable(true);
         mapView.getMapScaleBar().setVisible(true);
         mapView.setBuiltInZoomControls(true);
+
+        // style zoom controls
+        final MapZoomControls zoomControls = mapView.getMapZoomControls();
+        zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
+        zoomControls.setZoomInResource(R.drawable.zoomin);
+        zoomControls.setZoomOutResource(R.drawable.zoomout);
+        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(15.0f), ViewUtils.dpToPixel(20.0f));
+        zoomControls.setAutoHide(false);
 
         //make room for map attribution icon button
         final int mapAttPx = Math.round(this.getResources().getDisplayMetrics().density * 30);
@@ -331,7 +342,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
-        MapUtils.showMapOneTimeMessages(this);
+        MapUtils.showMapOneTimeMessages(this, mapMode);
     }
 
     private void postZoomToViewport(final Viewport viewport) {
@@ -353,6 +364,11 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     }
 
     @Override
+    public int getSelectedBottomItemId() {
+        return MENU_MAP;
+    }
+
+    @Override
     public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
         if (mapOptions != null && (mapOptions.isLiveEnabled || mapOptions.isStoredEnabled)) {
@@ -369,7 +385,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
         try {
             final MenuItem itemMapLive = menu.findItem(R.id.menu_map_live);
             if (mapOptions.isLiveEnabled) {
-                itemMapLive.setIcon(R.drawable.ic_menu_refresh);
+                itemMapLive.setIcon(R.drawable.ic_menu_sync_enabled);
                 itemMapLive.setTitle(res.getString(R.string.map_live_disable));
             } else {
                 itemMapLive.setIcon(R.drawable.ic_menu_sync_disabled);
@@ -390,7 +406,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            this.individualRouteUtils.onPrepareOptionsMenu(menu, individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            this.individualRouteUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -413,9 +429,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
-        if (id == android.R.id.home) {
-            ActivityMixin.navigateUp(this);
-        } else if (id == R.id.menu_map_live) {
+        if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.isLiveEnabled) {
                 mapOptions.isStoredEnabled = true;
@@ -449,28 +463,30 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             this.renderThemeHelper.selectMapThemeOptions();
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(this, new SearchResult(caches.getVisibleCacheGeocodes()));
+            ActivityMixin.overrideTransitionToFade(this);
         } else if (id == R.id.menu_hint) {
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
-        } else if (!HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-            && !this.trackUtils.onOptionsItemSelected(id, tracks)
-            && !this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
-            && !DownloaderUtils.onOptionsItemSelected(this, id)) {
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
+                || this.trackUtils.onOptionsItemSelected(id, tracks)
+                || this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
+            return true;
+        } else {
             final String language = MapProviderFactory.getLanguage(id);
+            final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
                 item.setChecked(true);
                 changeLanguage(language);
                 return true;
-            } else {
-                final MapSource mapSource = MapProviderFactory.getMapSource(id);
-                if (mapSource != null) {
-                    item.setChecked(true);
-                    changeMapSource(mapSource);
-                } else {
-                    return false;
-                }
             }
+            if (mapSource != null) {
+                item.setChecked(true);
+                changeMapSource(mapSource);
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
         }
         return true;
     }
@@ -622,7 +638,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
     private void mapRestart() {
         mapOptions.mapState = currentMapState();
         finish();
-        mapOptions.startIntent(this, Settings.getMapProvider().getMapClass());
+        mapOptions.startIntentWithoutTransition(this, Settings.getMapProvider().getMapClass());
     }
 
     /**
@@ -1391,48 +1407,12 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
             final ArrayList<GeoitemRef> sorted = new ArrayList<>(items);
             Collections.sort(sorted, GeoitemRef.NAME_COMPARATOR);
 
-            final LayoutInflater inflater = LayoutInflater.from(this);
             final ListAdapter adapter = new ArrayAdapter<GeoitemRef>(this, R.layout.cacheslist_item_select, sorted) {
                 @NonNull
                 @Override
                 public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-
-                    final View view = convertView == null ? inflater.inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
-                    final TextView tv = (TextView) view.findViewById(R.id.text);
-
-                    final GeoitemRef item = getItem(position);
-                    tv.setText(item.getName());
-
-                    final StringBuilder text = new StringBuilder(item.getShortItemCode());
-                    final String geocode = item.getGeocode();
-                    final String shortgeocode = item.getShortGeocode();
-                    if (StringUtils.isNotEmpty(geocode)) {
-                        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                        if (cache != null && item.getType() == CoordinatesType.CACHE) {
-                            tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getCacheMarker(res, cache, CacheListType.MAP).getDrawable(), null, null, null);
-                        } else {
-                            Waypoint waypoint = null;
-                            if (item.getType() == CoordinatesType.WAYPOINT) {
-                                waypoint = DataStore.loadWaypoint(item.getId());
-                                text.append(Formatter.SEPARATOR).append(shortgeocode);
-                                if (cache != null) {
-                                    text.append(Formatter.SEPARATOR).append(cache.getName());
-                                }
-                            }
-                            if (waypoint != null) {
-                                tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, waypoint).getDrawable(), null, null, null);
-                            } else {
-                                tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
-                            }
-                        }
-                    } else {
-                        tv.setCompoundDrawablesWithIntrinsicBounds(item.getMarkerId(), 0, 0, 0);
-                    }
-
-                    final TextView infoView = (TextView) view.findViewById(R.id.info);
-                    infoView.setText(text.toString());
-
-                    return view;
+                    return GeoItemSelectorUtils.createGeoItemView(NewMap.this, getItem(position),
+                            GeoItemSelectorUtils.getOrCreateView(NewMap.this, convertView, parent));
                 }
             };
 

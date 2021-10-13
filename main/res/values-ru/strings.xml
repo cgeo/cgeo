@@ -260,7 +260,6 @@
     <string name="err_trackable_no_preference_activity">Извините, не удается найти подходящую страницу настроек.</string>
     <string name="confirm_unsaved_changes_title">Несохраненные изменения</string>
     <string name="confirm_discard_wp_changes">Сбросить несохраненные изменения путевых точек?</string>
-    <string name="err_request_popup_info">c:geo не удалось загрузить информацию о тайнике.</string>
     <string name="warn_log_load_additional_data">c:geo не удалось загрузить дополнительные данные (трекаблы/рекомендации) для заметки.</string>
     <string name="more_information">Больше информации</string>
     <string name="undo">Отменить</string>
@@ -323,7 +322,6 @@
     <string name="caches_sort_favorites">Рекомендации</string>
     <string name="caches_sort_favorites_ratio">Рекомендации [%]</string>
     <string name="caches_sort_name">Название</string>
-    <string name="caches_sort_geocode">Гео код</string>
     <string name="caches_sort_rating">Рейтинг</string>
     <string name="caches_sort_vote">Собственный рейтинг</string>
     <string name="caches_sort_inventory">Количество призов</string>
@@ -669,9 +667,6 @@
     <string name="init_memory_dump">Дамп памяти</string>
     <string name="init_memory_dumped">Состояние памяти сохранено в %s</string>
     <string name="init_please_wait">Пожалуйста, подождите…</string>
-    <string name="init_hardware_acceleration_title">Аппаратное ускорение рендеринга</string>
-    <string name="init_hardware_acceleration_note">Аппаратное ускорение ускоряет отрисовку графических элементов. Однако, на некоторых Android устройствах операционная система содержит ошибки, и текст может стать размытым (особенно жирным шрифтом). Отключите аппаратное ускорение, если это случится.</string>
-    <string name="init_hardware_acceleration">Аппаратное ускорение</string>
     <string name="settings_open_website">Перейти на сайт</string>
     <string name="settings_open_geokretymap_website">Открыть GeoKretyMap.org</string>
     <string name="settings_settings">Настройки</string>
@@ -889,7 +884,6 @@
     <string name="cache_images">Изображения</string>
     <string name="cache_advanced">Продвинутые</string>
     <string name="cache_waypoints">Путевые точки</string>
-    <string name="cache_waypoints_add">Добавить точку</string>
     <string name="cache_waypoints_add_currentLocation">Добавить текущее местоположение</string>
     <string name="cache_waypoints_add_fromclipboard">Добавить из буфера обмена</string>
     <string name="cache_waypoints_remove_original_waypoint">Точка скопирована из буфера обмена в этот тайник.\n\nУдалить исходную точку?</string>
@@ -969,10 +963,7 @@
     <string name="cache_status_disabled">Вне игры</string>
     <string name="cache_status_active">Активный</string>
     <string name="cache_status_premium">Только для Премиум участников</string>
-    <string name="cache_geocode">Код тайника</string>
     <string name="cache_name">Название</string>
-    <string name="cache_name_set">Задать имя тайника</string>
-    <string name="cache_name_updated">Имя тайника обновлено</string>
     <string name="cache_description_set">Установить описание тайника</string>
     <string name="cache_description_updated">Описание тайника обновлено</string>
     <string name="cache_type">Тип</string>
@@ -1125,14 +1116,10 @@
     <string name="quick_settings">Быстрые настройки</string>
     <string name="quick_settings_info">Некоторые настройки карты (настройки карты, скрытие, навигация) были перемещены в новое окно \"Быстрые настройки\"\nВы можете открыть это окно, используя иконку по центру внизу карты.</string>
     <!-- search -->
-    <string name="search_bar_desc">Тайники (геокод, название), код трекабла</string>
     <string name="search_coordinates">Координаты</string>
     <string name="search_coordinates_button">Поиск по координатам</string>
     <string name="search_address">Адрес</string>
     <string name="search_address_button">Поиск по адресу</string>
-    <string name="search_geo">Код тайника</string>
-    <string name="search_geo_button">Поиск по коду</string>
-    <string name="search_kw">Ключевые слова</string>
     <string name="search_kw_prefill">Ключевое слово</string>
     <string name="search_kw_button">Искать по ключевым словам</string>
     <string name="search_hbu">Создан</string>
@@ -1549,12 +1536,6 @@
     <string name="tts_oclock">%s часов</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Скопировано в буфер</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s рекомендация</item>
-        <item quantity="few">%s рекомендации</item>
-        <item quantity="many">%s рекомендаций</item>
-        <item quantity="other">%s рекомендаций</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Ярлык c:geo</string>
     <string name="create_shortcut">Создать ярлык</string>

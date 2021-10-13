@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class StoredSinceGeocacheFilter extends NumberRangeGeocacheFilter<Long> {
 
-    private static Long[] range;
+    private static final Long[] range;
     private static final Map<Long, String> labelMap = new HashMap<>();
     private static final Map<Long, String> shortLabelMap = new HashMap<>();
 

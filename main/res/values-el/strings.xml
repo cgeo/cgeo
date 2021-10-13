@@ -11,6 +11,7 @@
     <string name="about">Σχετικά με το c:geo</string>
     <string name="latitude">Γεωγραφικό πλάτος</string>
     <string name="longitude">Γεωγραφικό μήκος</string>
+    <string name="latlongitude">Πλάτος\nΜήκος</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Ρυθμίσεις c:geo</string>
     <!-- caches -->
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Μη αποθηκευμένες αλλαγές</string>
     <string name="confirm_discard_changes">Απόρριψη μη αποθηκευμένων αλλαγών;</string>
     <string name="confirm_discard_wp_changes">Απόρριψη αλλαγών των μη αποθηκευμένων σημείων διαδρομής;</string>
-    <string name="err_request_popup_info">το c:geo απέτυχε να ανακτήσει τις πληροφορίες της κρύπτης.</string>
     <string name="warn_log_load_additional_data">Το c:geo απέτυχε να φορτώσει πρόσθετα δεδομένα (ανιχνεύσιμα/αγαπημένα σημεία) για την καταγραφή.</string>
     <string name="more_information">Περισσότερες πληροφορίες</string>
     <string name="undo">Αναίρεση</string>
@@ -326,7 +326,8 @@
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
-    <string name="menu_lists_pocket_queries">Λίστες / pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket Queries</string>
+    <string name="menu_lists_bookmarklists">Λίστα σελιδοδεικτών</string>
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
@@ -358,6 +359,7 @@
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
     <string name="caches_sort_distance">Απόσταση</string>
+    <string name="caches_sort_distance_target">Απόσταση από τον στόχο</string>
     <string name="caches_sort_difficulty">Δυσκολία</string>
     <string name="caches_sort_terrain">Έδαφος</string>
     <string name="caches_sort_size">Μέγεθος</string>
@@ -383,7 +385,7 @@
     <string name="caches_remove_all_completely">Διαγραφή όλων από τη συσκευή</string>
     <string name="caches_remove_selected_completely">Διαγραφή επιλεγμένων από τη συσκευή</string>
     <string name="caches_delete_events">Διαγραφή πρηγούμενων εκδηλώσεων</string>
-    <string name="caches_upload_bookmarklist">Μεταφόρτωση στη λίστα σελιδοδεικτών</string>
+    <string name="caches_upload_bookmarklist">Προσθ. στις Λίστες Σελιδοδεικτών</string>
     <string name="caches_upload_modifiedcoords">Μεταφόρτωση τροποποιημένων συντεταγμένων</string>
     <string name="caches_upload_modifiedcoords_warning">Θέλετε να ανεβάσετε τροποποιημένες συντεταγμένες για όλες τις (επιλεγμένες) κρύπτες και να αντικαταστήσετε τις υπάρχουσες συντεταγμένες στον server; Αυτό δεν μπορεί να αναιρεθεί.</string>
     <string name="caches_upload_allcoords">Μεταφόρτωση συντεταγμένων για όλες τις κρύπτες</string>
@@ -478,7 +480,6 @@
         <item quantity="one">%1$d αντικείμενο</item>
         <item quantity="other">%1$d αντικείμενα</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Φόρτωση</string>
     <string name="cache_filter_storage_delete_button">Διαγραφή</string>
     <string name="cache_filter_storage_clear_button">Kαθαρισμός</string>
     <string name="cache_filter_storage_load_delete_title">Φόρτωση ή διαγραφή υπάρχοντος φίλτρου</string>
@@ -895,9 +896,6 @@
     <string name="init_memory_dump">Αρχεία σφαλμάτων μνήμης</string>
     <string name="init_memory_dumped">Η καταχώρηση έγινε στην %s</string>
     <string name="init_please_wait">Παρακαλώ περιμένετε…</string>
-    <string name="init_hardware_acceleration_title">Απόδοση με επιτάχυνση του υλικού εξοπλισμού</string>
-    <string name="init_hardware_acceleration_note">Η επιτάχυνση του υλικού επιταχύνει την απεικόνιση στην οθόνη. Ωστόσο, σε κάποιες συσκευές, το λειτουργικό σύστημα Android περιέχει σφάλματα και κάποια κείμενα ενδέχεται να εμφανίζονται θολά (κυρίως bold χαρακτήρες). Εάν σας συμβεί αυτό, απενεργοποιήστε την επιτάχυνση υλικού.</string>
-    <string name="init_hardware_acceleration">Ενεργοποίηση επιτάχυνσης υλικού</string>
     <string name="settings_open_website">Άνοιγμα ιστοσελίδας</string>
     <string name="settings_open_geokretymap_website">Ανοίξτε την ιστοσελίδα GeoKretyMap.org</string>
     <string name="settings_settings">Ρυθμίσεις</string>
@@ -1120,14 +1118,17 @@
     <string name="cache_images">Εικόνες</string>
     <string name="cache_advanced">Προχωρημένα</string>
     <string name="cache_waypoints">Σημεία αναφοράς</string>
+    <string name="cache_variables">Μεταβλητές</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Σημεία πορείας (%d)</string>
-    <string name="cache_waypoints_add">Προσθήκη Σημείου Αναφοράς</string>
+    <string name="cache_waypoints_add">Προσθήκη σημείου αναφοράς</string>
     <string name="cache_waypoints_add_currentLocation">Προσθήκη τρέχουσας τοποθεσίας</string>
     <string name="cache_waypoints_add_fromclipboard">Εισαγωγή από το πρόχειρο</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Απόκρυψη ενδιάμεσων σταθμών που έχει γίνει επίσκεψη</string>
     <string name="cache_waypoints_remove_original_waypoint">Έγινε αντιγραφή του ενδιαμέσου σημείου στην κρύπτη από το πρόχειρο.\n\nΝα γίνει αφαίρεση του αρχικού ενδιάμεσου σημείου;</string>
     <string name="cache_hint">Συμβουλή</string>
     <string name="cache_hint_not_available">Δεν υπάρχει συμβουλή</string>
     <string name="cache_logs">Ημερολόγιο</string>
+    <string name="cache_latest_logs">Πρόσφατα αρχεία καταγραφής</string>
     <string name="cache_logs_friends_and_own">Καταγραφές φίλων και δικές σας</string>
     <string name="cache_dialog_loading_details">Φορτώνει τις λεπτομέρειες της κρύπτης…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Φόρτωση σελίδας</string>
@@ -1208,10 +1209,10 @@
     <string name="cache_status_disabled">Απενεργοποιημένη</string>
     <string name="cache_status_active">Ενεργή</string>
     <string name="cache_status_premium">Μόνο για Premium μέλη</string>
-    <string name="cache_geocode">Κωδικός κρύπτης</string>
+    <string name="cache_geocode">Γεωκωδικός</string>
     <string name="cache_name">Όνομα</string>
-    <string name="cache_name_set">Τέθηκε όνομα κρύπτης</string>
-    <string name="cache_name_updated">Το όνομα κρύπτης άλλαξε</string>
+    <string name="cache_name_set">Ορισμός ονόματος κρύπτης</string>
+    <string name="cache_name_updated">Ενημερώθηκε το όνομα κρύπτης</string>
     <string name="cache_description_set">Περιγραφή κρύπτης</string>
     <string name="cache_description_updated">Η περιγραφή της κρύπτης ενημερώθηκε</string>
     <string name="cache_type">Τύπος</string>
@@ -1374,6 +1375,8 @@
     <string name="map_language">Γλώσσα χάρτη</string>
     <string name="map_live_enable">Ενεργοποίηση live</string>
     <string name="map_live_disable">Απενεργοποίηση live</string>
+    <string name="map_live_disabled">Η ζωντανή λειτουργία απενεργοποιήθηκε</string>
+    <string name="map_live_disabled_hint">Η ζωντανή λειτουργία είναι απενεργοποιημένη. Θα δείτε αποθηκευμένες κρύπτες μόνο. Χρησιμοποιήστε το μενού για να ενεργοποιήσετε τη ζωντανή λειτουργία.</string>
     <string name="map_as_list">Προβολή σε λίστα</string>
     <string name="map_select_multiple_items">Επιλογή στοιχείου</string>
     <string name="map_routing">Δρομολόγηση</string>
@@ -1390,22 +1393,20 @@
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
     <!-- search -->
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
-    <string name="search_bar_desc">Κρύπτες (γεωκωδικός, λέξη-κλειδί), Ανιχνεύσιμα (Κωδικός TB)</string>
     <string name="search_coordinates">Συντεταγμένες</string>
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
     <string name="search_address">Διεύθυνση</string>
     <string name="search_address_button">Αναζήτηση με διεύθυνση</string>
     <string name="search_geo">Γεωκωδικός</string>
-    <string name="search_geo_button">Αναζήτηση με γεωκωδικό</string>
+    <string name="search_geo_button">Αναζήτηση ανά γεωκωδικό</string>
     <string name="search_geocode_from_clipboard">Το Geocode επικολλήθηκε από το πρόχειρο.</string>
-    <string name="search_kw">Λέξεις-κλειδιά</string>
+    <string name="search_kw">Λέξη-κλειδί</string>
     <string name="search_kw_prefill">Λέξη-κλειδί</string>
     <string name="search_kw_button">Αναζήτηση με λέξη-κλειδί</string>
     <string name="search_hbu">Κρύφτηκε από</string>
     <string name="search_hbu_prefill">Ιδιοκτήτης</string>
     <string name="search_hbu_button">Αναζήτηση με το όνομα του ιδιοκτήτη</string>
     <string name="search_filter">Φίλτρο</string>
-    <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_filter_temporary_user_information_title">Πλαίσιο νέου φίλτρου</string>
     <string name="search_filter_temporary_user_information">Το c:geo εισήγαγε ένα νέο σύστημα φιλτραρίσματος, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα. \n\nΤο καθολικό φίλτρο μπορεί από τώρα και στο εξής να αλλάξει απευθείας στις λίστες κρυπτών και στον ζωντανό χάρτη.</string>
@@ -1420,7 +1421,7 @@
     <string name="search_pocket_title">Προσωπική Αναζήτηση</string>
     <string name="search_bookmark_list">Λίστα σελιδοδεικτών</string>
     <string name="search_pocket_is_new">νέο</string>
-    <string name="search_pocket_and_bookmark_loading">Φόρτωση λίστας Pocket Queries και σελιδοδεικτών</string>
+    <string name="search_pocket_loading">Φόρτωση των Pocket Queries</string>
     <string name="search_bookmark_loading">Φόρτωση λιστών σελιδοδεικτών</string>
     <string name="search_bookmark_select">Επιλέξτε λίστες σελιδοδεικτών</string>
     <string name="search_bookmark_new">Δημιουργία νέας λίστας σελιδοδεικτών</string>
@@ -1840,10 +1841,6 @@
         <item quantity="one">%d ημέρα πριν</item>
         <item quantity="other">πριν %d μέρες</item>
     </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s αγαπημένο</item>
-        <item quantity="other">%s αγαπημένα</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Συντόμευση c:geo</string>
     <string name="create_shortcut">Δημιουργία συντόμευσης</string>
@@ -2021,6 +2018,7 @@
     <string name="download_confirmation">%1$sΛήψη αρχείου \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Βρέθηκαν ενημερώσεις για:\n%1$s\n\nΘέλετε να ενημερώσετε?%2$s</string>
     <string name="download_warning">Αυτό μπορεί να πάρει αρκετό χρόνο και μπορεί να οδηγήσει σε σημαντικό κόστος, ανάλογα με τη σύνδεση του δικτύου σας.</string>
+    <string name="download_error">Η λήψη απέτυχε με σφάλμα: #%d</string>
     <string name="downloadmap_handling">Θα γίνει διαχείριση της λήψης στο παρασκήνιο από το πρόγραμμα διαχείρισης λήψεων του συστήματος σας. Πρέπει να δείτε μια ειδοποίηση μόλις ξεκινήσει η λήψη (μπορεί να καθυστερήσει λίγο).</string>
     <string name="button_continue">Συνέχεια</string>
     <string name="downloadmap_onedirup">(ένα επίπεδο πάνω)</string>

@@ -5,7 +5,8 @@
     android:id="@+id/one_cache"
     android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    tools:context=".maps.mapsforge.v6.NewMap" >
+    android:background="@color/colorBackgroundDialog"
+    android:foreground="?android:attr/selectableItemBackground" >
 
     <!-- cache name and icon -->
     <!-- first TextView gets the size of a cache marker as minimum height -->
@@ -42,7 +43,6 @@
         android:layout_marginLeft="43dip"
         android:layout_marginTop="30dip"
         android:ellipsize="end"
-        android:lines="1"
         android:paddingBottom="5dip"
         android:paddingRight="3dip"
         android:scrollHorizontally="true"
@@ -50,6 +50,6 @@
         android:textSize="@dimen/textSize_listsSecondary"
         android:textColor="@color/colorText_listsSecondary"
         tools:text="geocode"
-        android:maxLines="1" />
+        android:maxLines="3" />
 
 </RelativeLayout>

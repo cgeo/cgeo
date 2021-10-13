@@ -20,6 +20,7 @@ import static cgeo.geocaching.R.id.PlainFormat;
 import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
+import static cgeo.geocaching.utils.calc.Calculator.VALID_OPERATOR_PATTERN;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -203,7 +204,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     public static class EquationFilter implements InputFilter {
         @Override
         public CharSequence filter(final CharSequence charSequence, final int i, final int i1, final Spanned spanned, final int i2, final int i3) {
-            return charSequence.toString().replaceAll("[^0-9a-zA-Z \\-+*/%^()]", "").toLowerCase(Locale.getDefault());
+            return charSequence.toString().replaceAll("[^0-9a-zA-Z " + VALID_OPERATOR_PATTERN + "()]", "").toLowerCase(Locale.getDefault());
         }
     }
 
@@ -233,7 +234,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     public static class VariableFilter implements InputFilter {
         @Override
         public CharSequence filter(final CharSequence charSequence, final int i, final int i1, final Spanned spanned, final int i2, final int i3) {
-            return charSequence.toString().replaceAll("[^0-9 \\-+*/%^()]", "");
+            return charSequence.toString().replaceAll("[^0-9 " + VALID_OPERATOR_PATTERN + "()]", "");
         }
     }
 
@@ -327,7 +328,11 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         variableBank = new ArrayList<>();
         gp = getArguments().getParcelable(GEOPOINT_ARG);
         if (gp == null) {
-            gp = Sensors.getInstance().currentGeo().getCoords();
+            if (savedState != null) {
+                gp = new Geopoint(savedState.plainLat, savedState.plainLon);
+            } else {
+                gp = Sensors.getInstance().currentGeo().getCoords();
+            }
         }
         if (savedInstanceState != null) {
             if (savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {

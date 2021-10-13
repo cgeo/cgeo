@@ -9,6 +9,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 
 import android.Manifest;
@@ -59,9 +60,12 @@ public abstract class AbstractLocusApp extends AbstractApp {
     protected AbstractLocusApp(@NonNull final String text, @NonNull final String intent) {
         super(text, intent);
 
-        lv = LocusUtils.INSTANCE.getActiveVersion(CgeoApplication.getInstance());
-        if (lv == null) { // locus not installed
-            Log.w("Couldn't get active Locus version");
+        try (ContextLogger cLog = new ContextLogger(true, "AbstractLocusApp.init (" + this.getClass().getName() + ")")) {
+            lv = LocusUtils.INSTANCE.getActiveVersion(CgeoApplication.getInstance());
+            cLog.add("V:" + lv);
+            if (lv == null) { // locus not installed
+                Log.w("Couldn't get active Locus version");
+            }
         }
     }
 

@@ -9,6 +9,7 @@ import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.DiskCookieStore;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,10 @@ public abstract class AbstractLogin {
      * by the user.
      */
     private int actualCachesFound = -1;
-    private String actualStatus = StringUtils.EMPTY;
+    /**
+     * use "not logged in" as default. Connectors should update there status as soon as they start establishing a connection.
+     */
+    private String actualStatus = LocalizationUtils.getString(R.string.init_login_popup_not_logged_in);
 
     public void setActualCachesFound(final int found) {
         actualCachesFound = found;

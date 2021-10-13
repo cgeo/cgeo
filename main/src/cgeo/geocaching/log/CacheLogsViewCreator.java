@@ -14,7 +14,10 @@ import android.annotation.SuppressLint;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.widget.TooltipCompat;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -22,14 +25,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public class CacheLogsViewCreator extends LogsViewCreator {
     private static final String BUNDLE_ALLLOGS = "alllogs";
 
     private final Resources res = CgeoApplication.getInstance().getResources();
-    private TextView countview1 = null;
+    private LinearLayout countview1 = null;
     private TextView countview2 = null;
 
     public static TabbedViewPagerFragment<LogsPageBinding> newInstance(final boolean allLogs) {
@@ -103,8 +105,19 @@ public class CacheLogsViewCreator extends LogsViewCreator {
                     labels.add(pair.getValue() + "× " + pair.getKey().getL10n());
                 }
 
-                countview1 = new TextView(getActivity());
-                countview1.setText(res.getString(R.string.cache_log_types) + ": " + StringUtils.join(labels, ", "));
+                countview1 = new LinearLayout(getActivity());
+                final TextView logtypes = new TextView(getActivity());
+                logtypes.setText(res.getString(R.string.cache_log_types) + ": ");
+                countview1.addView(logtypes);
+                for (final Entry<LogType, Integer> pair : sortedLogCounts) {
+                    final TextView tv = new TextView(getActivity());
+                    tv.setText(pair.getValue().toString());
+                    tv.setCompoundDrawablesWithIntrinsicBounds(pair.getKey().getLogOverlay(), 0, 0, 0);
+                    tv.setCompoundDrawablePadding(4);
+                    tv.setPadding(0, 0, 10, 0);
+                    TooltipCompat.setTooltipText(tv, pair.getKey().getL10n());
+                    countview1.addView(tv);
+                }
                 binding.getRoot().addHeaderView(countview1, null, false);
             }
         }

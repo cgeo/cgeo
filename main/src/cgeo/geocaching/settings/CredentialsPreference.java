@@ -3,6 +3,7 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -107,21 +108,23 @@ public class CredentialsPreference extends AbstractClickablePreference {
     private View addInfoIcon(final ViewGroup parent) {
         final View preferenceView = super.onCreateView(parent);
 
-        final String avatarUrl = Settings.getAvatarUrl(credentialsMapping.getConnector());
-        if (StringUtils.isEmpty(avatarUrl)) {
-            return preferenceView;
+
+        if (credentialsMapping.getConnector() instanceof IAvatar) {
+            final String avatarUrl = Settings.getAvatarUrl((IAvatar) credentialsMapping.getConnector());
+
+            if (StringUtils.isNotBlank(avatarUrl)) {
+                final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
+                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                iconView.setImageDrawable(imgGetter.getDrawable(avatarUrl));
+
+                final LinearLayout frame = preferenceView.findViewById(android.R.id.widget_frame);
+                frame.setVisibility(View.VISIBLE);
+                frame.addView(iconView);
+
+                final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
+                frame.setLayoutParams(param);
+            }
         }
-
-        final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
-        final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-        iconView.setImageDrawable(imgGetter.getDrawable(avatarUrl));
-
-        final LinearLayout frame = preferenceView.findViewById(android.R.id.widget_frame);
-        frame.setVisibility(View.VISIBLE);
-        frame.addView(iconView);
-
-        final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
-        frame.setLayoutParams(param);
 
         return preferenceView;
     }
@@ -137,6 +140,9 @@ public class CredentialsPreference extends AbstractClickablePreference {
             Cookies.clearCookies();
         }
         Settings.setCredentials(credentialsMapping.getConnector(), Credentials.EMPTY);
-        Settings.setAvatarUrl(credentialsMapping.getConnector(), StringUtils.EMPTY);
+
+        if (credentialsMapping.getConnector() instanceof IAvatar) {
+            Settings.setAvatarUrl((IAvatar) credentialsMapping.getConnector(), StringUtils.EMPTY);
+        }
     }
 }

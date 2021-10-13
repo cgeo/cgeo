@@ -49,7 +49,7 @@
         android:roundIcon="${appIconRound}"
         android:label="@string/app_name"
         android:theme="@style/cgeo"
-        android:hardwareAccelerated="false"
+        android:hardwareAccelerated="true"
         android:usesCleartextTraffic="true"
         android:supportsRtl="true"
         android:largeHeap="true"
@@ -96,7 +96,8 @@
         <activity
             android:name=".SplashActivity"
             android:label="@string/app_name"
-            android:theme="@style/SplashScreenTheme">
+            android:theme="@style/SplashScreenTheme"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -111,11 +112,20 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:label="@string/app_name"
+            android:theme="@style/cgeo"
+            android:windowSoftInputMode="adjustNothing" >
+            <!-- 'adjustNothing' fixes the issue described in #11610 -->
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
+        </activity>
+        <activity
+            android:name=".MoreActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/cgeo"
             android:windowSoftInputMode="stateAlwaysHidden" >
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
         <activity
             android:name=".InstallWizardActivity"
@@ -126,12 +136,12 @@
         </activity>
         <activity
             android:name=".SearchActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
             android:parentActivityName="cgeo.geocaching.MainActivity"
             android:windowSoftInputMode="stateHidden" >
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
             <!-- keyword based search from search widget -->
             <intent-filter>
@@ -311,10 +321,10 @@
         </activity>
         <activity
             android:name=".CacheListActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:exported="true"
             android:label="@string/app_name">
             <!-- don't use fixed parent activity, since we may come from main activity, pocket query activity or search activity -->
+            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
             <!-- intent filter for local gpx files -->
             <intent-filter>
@@ -548,82 +558,6 @@
                 <data android:scheme="https" />
                 <data android:host="opencaching.de" />
                 <data android:host="www.opencaching.de" />
-                <data android:pathPrefix="/OC" />
-                <data android:pathPrefix="/oc" />
-                <data android:pathPrefix="/Oc" />
-                <data android:pathPrefix="/oC" />
-                <data android:pathPrefix="/viewcache.php" />
-            </intent-filter>
-
-            <!-- opencaching.ES -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="opencachingspain.es" />
-                <data android:host="www.opencachingspain.es" />
-                <data android:pathPrefix="/OC" />
-                <data android:pathPrefix="/oc" />
-                <data android:pathPrefix="/Oc" />
-                <data android:pathPrefix="/oC" />
-                <data android:pathPrefix="/viewcache.php" />
-            </intent-filter>
-
-            <!-- opencaching.FR -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="opencaching.fr" />
-                <data android:host="www.opencaching.fr" />
-                <data android:pathPrefix="/OC" />
-                <data android:pathPrefix="/oc" />
-                <data android:pathPrefix="/Oc" />
-                <data android:pathPrefix="/oC" />
-                <data android:pathPrefix="/viewcache.php" />
-            </intent-filter>
-
-            <!-- opencaching.IT -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="opencaching.it" />
-                <data android:host="www.opencaching.it" />
-                <data android:pathPrefix="/OC" />
-                <data android:pathPrefix="/oc" />
-                <data android:pathPrefix="/Oc" />
-                <data android:pathPrefix="/oC" />
-                <data android:pathPrefix="/viewcache.php" />
-            </intent-filter>
-
-            <!-- opencaching.NO -->
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="http" />
-                <data android:scheme="https" />
-                <data android:host="opencaching.no" />
-                <data android:host="www.opencaching.no" />
                 <data android:pathPrefix="/OC" />
                 <data android:pathPrefix="/oc" />
                 <data android:pathPrefix="/Oc" />
@@ -924,12 +858,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
-        <!-- search suggestions for the search bar at the top -->
-        <provider
-            android:name=".search.SuggestionProvider"
-            android:authorities="cgeo.geocaching.search.SuggestionProvider" />
-
         <activity
             android:name="cgeo.geocaching.connector.gc.PocketQueryListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"

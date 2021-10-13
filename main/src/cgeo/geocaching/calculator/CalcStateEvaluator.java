@@ -2,6 +2,7 @@ package cgeo.geocaching.calculator;
 
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.utils.calc.Calculator;
 
 import android.content.Context;
 
@@ -142,7 +143,7 @@ public final class CalcStateEvaluator {
                             String result = "";
 
                             if (closeIndex > openIndex + 1) {
-                                final int resInt = (int) (new CalculationUtils(returnValue.substring(openIndex + 1, closeIndex)).eval());
+                                final int resInt = (int) (Calculator.eval(returnValue.substring(openIndex + 1, closeIndex)));
                                 result = String.valueOf(resInt);
                             }
 

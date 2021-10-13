@@ -11,6 +11,7 @@
     <string name="about">c:geo에 대해</string>
     <string name="latitude">위도</string>
     <string name="longitude">경도</string>
+    <string name="latlongitude">위도\n경도</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo 설정</string>
     <!-- caches -->
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">저장되지 않은 변경사항</string>
     <string name="confirm_discard_changes">저장되지 않은 변경사항을 삭제하시겠습니까?</string>
     <string name="confirm_discard_wp_changes">저장되지 않은 지점 변경을 삭제하시겠습니까?</string>
-    <string name="err_request_popup_info">캐시 팝업 정보를 가져오지 못했습니다.</string>
     <string name="warn_log_load_additional_data">c:geo에서 로그 추가정보(추적아이템/호감점수)를 불러오지 못했습니다.</string>
     <string name="more_information">자세한 정보 보기</string>
     <string name="undo">실행취소</string>
@@ -326,7 +326,8 @@
     <string name="menu_history">지난 기록</string>
     <string name="menu_filter">필터</string>
     <string name="menu_scan_geo">지오코드 스캔</string>
-    <string name="menu_lists_pocket_queries">목록 / 포켓 쿼리</string>
+    <string name="menu_lists_pocket_queries">포켓쿼리</string>
+    <string name="menu_lists_bookmarklists">북마크 목록</string>
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
     <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
@@ -357,6 +358,7 @@
     <string name="caches_on_map">지도에 표시</string>
     <string name="caches_sort">정렬</string>
     <string name="caches_sort_distance">거리</string>
+    <string name="caches_sort_distance_target">도착지 남은 거리</string>
     <string name="caches_sort_difficulty">난이도</string>
     <string name="caches_sort_terrain">지형난이도</string>
     <string name="caches_sort_size">크기</string>
@@ -382,7 +384,7 @@
     <string name="caches_remove_all_completely">장치에서 모두 삭제</string>
     <string name="caches_remove_selected_completely">장치에서 선택한 것을 삭제</string>
     <string name="caches_delete_events">과거의 이벤트 삭제</string>
-    <string name="caches_upload_bookmarklist">북마크 목록에 업로드</string>
+    <string name="caches_upload_bookmarklist">북마크 목록에 추가</string>
     <string name="caches_upload_modifiedcoords">수정 좌표 업로드</string>
     <string name="caches_upload_modifiedcoords_warning">모든 (선택된) 캐시에 대해 수정 된 좌표를 업로드하고 서버의 기존 좌표를 덮어 쓰시겠습니까? 취소 할 수 없습니다.</string>
     <string name="caches_upload_allcoords">모든 캐시에 대한 좌표 업로드하기</string>
@@ -476,7 +478,6 @@
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$d 개 아이템</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">로드</string>
     <string name="cache_filter_storage_delete_button">삭제</string>
     <string name="cache_filter_storage_clear_button">지우기</string>
     <string name="cache_filter_storage_load_delete_title">기존 필터를 로드하거나 삭제하기</string>
@@ -893,9 +894,6 @@
     <string name="init_memory_dump">메모리 덤프</string>
     <string name="init_memory_dumped">%s에 메모리 덤프</string>
     <string name="init_please_wait">잠시 기다려 주십시오…</string>
-    <string name="init_hardware_acceleration_title">하드웨어 가속 렌더링</string>
-    <string name="init_hardware_acceleration_note">하드웨어 가속 렌더링를 사용하면 화면이 빨리 그려집니다. 하지만, 일부 안드로이드 OS 기기의 경우 버그가 있고 문자(특히 강조문자)가 흐리게 나타나기도 합니다. 이런 상태가 발생하면 하드웨어 가속을 끄세요.</string>
-    <string name="init_hardware_acceleration">하드웨어 가속 활성화</string>
     <string name="settings_open_website">웹사이트 열기</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org 웹사이트 열기</string>
     <string name="settings_settings">설정</string>
@@ -1118,6 +1116,7 @@
     <string name="cache_hint">힌트</string>
     <string name="cache_hint_not_available">힌트가 없습니다.</string>
     <string name="cache_logs">방명록</string>
+    <string name="cache_latest_logs">최근 로그</string>
     <string name="cache_logs_friends_and_own">친구/내 로그</string>
     <string name="cache_dialog_loading_details">캐시 정보 불러오는 중…</string>
     <string name="cache_dialog_loading_details_status_loadpage">페이지 불러오는 중</string>
@@ -1201,7 +1200,7 @@
     <string name="cache_geocode">지오코드</string>
     <string name="cache_name">제목</string>
     <string name="cache_name_set">캐시 이름 설정</string>
-    <string name="cache_name_updated">캐시 이름 업데이트했음</string>
+    <string name="cache_name_updated">캐시 이름이 업데이트되었습니다.</string>
     <string name="cache_description_set">캐시 설명 설정</string>
     <string name="cache_description_updated">캐시 설명이 업데이트되었습니다.</string>
     <string name="cache_type">유형</string>
@@ -1363,6 +1362,8 @@
     <string name="map_language">지도 언어</string>
     <string name="map_live_enable">라이브 활성화</string>
     <string name="map_live_disable">라이브 비활성화</string>
+    <string name="map_live_disabled">라이브 모드 비활성화됨</string>
+    <string name="map_live_disabled_hint">라이브 모드가 비활성화되었습니다. 저장된 캐시만 표시됩니다. 메뉴를 사용하여 라이브 모드를 활성화합니다.</string>
     <string name="map_as_list">목록으로 보기</string>
     <string name="map_select_multiple_items">항목 선택</string>
     <string name="map_routing">길찾기</string>
@@ -1379,7 +1380,6 @@
     <string name="map_settings_cache_filter_too_complex_message">현재 캐시 필터가 너무 복잡해서 여기에 추가 옵션을 적용할 수 없습니다. 일반적으로 이는 캐시 필터에 단순한 AND 논리 대신 NOT 또는 OR 표현식이 포함되어 있음을 의미합니다.</string>
     <!-- search -->
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
-    <string name="search_bar_desc">캐시(지오코드, 키워드), 추적아이템(TB 코드)</string>
     <string name="search_coordinates">좌표</string>
     <string name="search_coordinates_button">좌표로 검색</string>
     <string name="search_address">주소</string>
@@ -1409,7 +1409,7 @@
     <string name="search_pocket_title">포켓쿼리</string>
     <string name="search_bookmark_list">북마크 목록</string>
     <string name="search_pocket_is_new">새로운</string>
-    <string name="search_pocket_and_bookmark_loading">포켓 쿼리 및 북마크 목록 로드</string>
+    <string name="search_pocket_loading">포켓 쿼리 로드중</string>
     <string name="search_bookmark_loading">북마크 목록 로드 중</string>
     <string name="search_bookmark_select">북마크 목록 선택</string>
     <string name="search_bookmark_new">새 북마크 목록 만들기</string>
@@ -1822,9 +1822,6 @@
     <string name="clipboard_copy_ok">클립보드에 복사됨</string>
     <plurals name="days_ago">
         <item quantity="other">%d일 전</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="other">%s 호감점수</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo 바로가기</string>

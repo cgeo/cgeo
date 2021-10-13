@@ -256,7 +256,6 @@
     <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
     <string name="confirm_discard_changes">¿Quieres descartar los cambios no guardados?</string>
     <string name="confirm_discard_wp_changes">¿Descartar los cambios en waypoints sin guardar?</string>
-    <string name="err_request_popup_info">c:geo no ha podido obtener la información emergente del caché.</string>
     <string name="warn_log_load_additional_data">c:geo no ha podido cargar datos adicionales (rastreables/puntos favoritos) para el registro.</string>
     <string name="more_information">Más información</string>
     <string name="undo">Deshacer</string>
@@ -321,7 +320,6 @@
     <string name="caches_sort_favorites">Favoritos</string>
     <string name="caches_sort_favorites_ratio">Favoritos [%]</string>
     <string name="caches_sort_name">Nombre</string>
-    <string name="caches_sort_geocode">Código GC</string>
     <string name="caches_sort_rating">Valoración</string>
     <string name="caches_sort_vote">Votos (valoración propia)</string>
     <string name="caches_sort_inventory">Número de rastreables</string>
@@ -684,9 +682,6 @@
     <string name="init_create_memory_dump">Crear volcado de memoria</string>
     <string name="init_memory_dump">Volcado de memoria</string>
     <string name="init_memory_dumped">Memoria volcada a %s</string>
-    <string name="init_hardware_acceleration_title">Renderizado con aceleración por hardware</string>
-    <string name="init_hardware_acceleration_note">La aceleración por hardware renderiza los elementos gráficos en pantalla de manera más rápida. Sin embargo en algunos dispositivos el sistema operativo Android contiene fallos y algunos textos pueden aparecer borrosos (especialmente caracteres en negrita). Inhabilita la aceleración por hardware si ocurriera esto.</string>
-    <string name="init_hardware_acceleration">Habilitar aceleración por hardware</string>
     <string name="settings_open_website">Abrir el sitio web</string>
     <string name="settings_open_geokretymap_website">Abrir el sitio web GeoKretyMap.org</string>
     <string name="settings_settings">Ajustes</string>
@@ -865,7 +860,6 @@
     <string name="cache_favpoint_not_on">Este caché no es uno de tus favoritos.</string>
     <string name="cache_list_select_last">Última selección</string>
     <string name="cache_images">Imágenes</string>
-    <string name="cache_waypoints_add">Añadir waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Añadir ubicación actual</string>
     <string name="cache_waypoints_add_fromclipboard">Añadir desde el portapapeles</string>
     <string name="cache_hint">Pista</string>
@@ -934,10 +928,7 @@
     <string name="cache_status_archived">Archivado</string>
     <string name="cache_status_disabled">Desactivado</string>
     <string name="cache_status_premium">Sólo para miembros Premium</string>
-    <string name="cache_geocode">Código GC</string>
     <string name="cache_name">Nombre</string>
-    <string name="cache_name_set">Establecer nombre de caché</string>
-    <string name="cache_name_updated">Nombre de caché actualizado</string>
     <string name="cache_description_updated">Descripción del caché actualizada</string>
     <string name="cache_type">Tipo</string>
     <string name="cache_size">Tamaño</string>
@@ -1072,14 +1063,10 @@
     <string name="map_as_list">Mostrar como lista</string>
     <string name="map_select_multiple_items">Seleccionar elemento</string>
     <!-- search -->
-    <string name="search_bar_desc">Cachés (Código-GC, palabra clave), Rastreables (Código-TB)</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Buscar por coordenadas</string>
     <string name="search_address">Dirección</string>
     <string name="search_address_button">Buscar por dirección</string>
-    <string name="search_geo">Código GC</string>
-    <string name="search_geo_button">Buscar por código</string>
-    <string name="search_kw">Palabras clave</string>
     <string name="search_kw_prefill">Palabra clave</string>
     <string name="search_kw_button">Buscar por palabra clave</string>
     <string name="search_hbu_prefill">Propietario</string>
@@ -1453,10 +1440,6 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorito</item>
-        <item quantity="other">%s favoritos</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>

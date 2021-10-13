@@ -15,7 +15,6 @@ import cgeo.geocaching.sensors.MagnetometerAndAccelerometerProvider;
 import cgeo.geocaching.sensors.OrientationProvider;
 import cgeo.geocaching.sensors.RotationProvider;
 import cgeo.geocaching.sensors.Sensors;
-import cgeo.geocaching.settings.HwAccel;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
@@ -78,10 +77,7 @@ public final class SystemInformation {
         appendScreenResolution(context, body);
         body.append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendGooglePlayServicesVersion(context, body);
-        body.append("\n- HW acceleration: ").append(Settings.useHardwareAcceleration() ? "enabled" : "disabled")
-            .append(" (").append(Settings.useHardwareAcceleration() == HwAccel.hwAccelShouldBeEnabled() ? "default state" : "manually changed").append(')')
-
-            .append("\n")
+        body.append("\n")
             .append("\nSensor and location:")
             .append("\n-------")
             .append("\n- Low power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
@@ -293,6 +289,8 @@ public final class SystemInformation {
         ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(size);
 
         body.append("\n- Screen resolution: ").append(size.x).append("x").append(size.y).append("px (").append(config.screenWidthDp).append("x").append(config.screenHeightDp).append("dp)");
+        body.append("\n- Pixel density: ").append(context.getResources().getDisplayMetrics().scaledDensity);
+        body.append("\n- System font scale: ").append(android.provider.Settings.System.getFloat(context.getContentResolver(), android.provider.Settings.System.FONT_SCALE, 1f)).append(" / used scale: ").append(config.fontScale);
     }
 
     private static String versionInfoToString(final int actualVersion, final int expectedVersion) {

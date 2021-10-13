@@ -11,6 +11,7 @@
     <string name="about">Over c:geo</string>
     <string name="latitude">Breedtegraad</string>
     <string name="longitude">Lengtegraad</string>
+    <string name="latlongitude">Breedtegraad\nLengtegraad</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Instellingen</string>
     <!-- caches -->
@@ -296,7 +297,6 @@
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
     <string name="confirm_discard_changes">Niet opgeslagen wijzigingen negeren?</string>
     <string name="confirm_discard_wp_changes">Waypoint wijzigingen niet opslaan?</string>
-    <string name="err_request_popup_info">Het is c:geo niet gelukt om de cache popup info te verkrijgen.</string>
     <string name="warn_log_load_additional_data">Het is c:geo niet gelukt aanvullende gegevens (trackables/favoriet punten) te laden voor het loggen.</string>
     <string name="more_information">Meer informatie</string>
     <string name="undo">Ongedaan maken</string>
@@ -326,7 +326,8 @@
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Scan geocode</string>
-    <string name="menu_lists_pocket_queries">Lijsten / pocket queries</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Bladwijzerlijsten</string>
     <string name="menu_scan_description">c:geo kan geocodes scannen die als QR code weergegeven zijn. De noodzakelijke app is niet geïnstalleerd. Wil je Google Play openen om de app te installeren?</string>
     <string name="menu_invert_order">Volgorde omkeren</string>
     <!-- main screen -->
@@ -358,6 +359,7 @@
     <string name="caches_on_map">Toon op kaart</string>
     <string name="caches_sort">Sorteren</string>
     <string name="caches_sort_distance">Afstand</string>
+    <string name="caches_sort_distance_target">Afstand tot doel</string>
     <string name="caches_sort_difficulty">Moeilijkheid</string>
     <string name="caches_sort_terrain">Terrein</string>
     <string name="caches_sort_size">Formaat</string>
@@ -383,7 +385,7 @@
     <string name="caches_remove_all_completely">Alles verwijderen van apparaat</string>
     <string name="caches_remove_selected_completely">Verwijder geselecteerden van apparaat</string>
     <string name="caches_delete_events">Verwijder afgelopen evenementen</string>
-    <string name="caches_upload_bookmarklist">Uploaden naar bladwijzerlijst</string>
+    <string name="caches_upload_bookmarklist">Toevoegen aan bladwijzerlijst</string>
     <string name="caches_upload_modifiedcoords">Upload aangepaste coördinaten</string>
     <string name="caches_upload_modifiedcoords_warning">Wil je aangepaste coördinaten uploaden voor alle (geselecteerde) caches en de bestaande coördinaten op de server overschrijven? Dit kan niet ongedaan worden gemaakt.</string>
     <string name="caches_upload_allcoords">Upload coördinaten voor alle caches</string>
@@ -478,7 +480,6 @@
         <item quantity="one">%1$d item</item>
         <item quantity="other">%1$d items</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Laden</string>
     <string name="cache_filter_storage_delete_button">Verwijderen</string>
     <string name="cache_filter_storage_clear_button">Wissen</string>
     <string name="cache_filter_storage_load_delete_title">Laad of verwijder een bestaand filter</string>
@@ -895,9 +896,6 @@
     <string name="init_memory_dump">Geheugendump</string>
     <string name="init_memory_dumped">Geheugen gedumpt naar %s</string>
     <string name="init_please_wait">Even geduld…</string>
-    <string name="init_hardware_acceleration_title">Hardware acceleratie</string>
-    <string name="init_hardware_acceleration_note">Hardware acceleratie maakt grafische elementen op het scherm sneller. Echter op sommige apparaten bevat het Android besturingssysteem bugs en sommige tekst kan wazig lijken (met name vette karakters). Schakel hardwareacceleratie uit als dit bij u gebeurt.</string>
-    <string name="init_hardware_acceleration">Schakel hardware acceleratie in</string>
     <string name="settings_open_website">Website openen</string>
     <string name="settings_open_geokretymap_website">Open de GeoKretyMap.org website</string>
     <string name="settings_settings">Instellingen</string>
@@ -1120,14 +1118,17 @@
     <string name="cache_images">Afbeeldingen</string>
     <string name="cache_advanced">Geavanceerd</string>
     <string name="cache_waypoints">Waypoints</string>
+    <string name="cache_variables">Variabelen</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">waypoints (%d)</string>
     <string name="cache_waypoints_add">Waypoint toevoegen</string>
     <string name="cache_waypoints_add_currentLocation">Huidige locatie toevoegen</string>
     <string name="cache_waypoints_add_fromclipboard">Toevoegen vanaf klembord</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Bezochte waypoints verbergen</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint gekopieerd van klembord naar deze cache.\n\nOriginele waypoint verwijderen?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Geen hint beschikbaar</string>
     <string name="cache_logs">Logboek</string>
+    <string name="cache_latest_logs">Recente logs</string>
     <string name="cache_logs_friends_and_own">Vrienden/Eigen Logs</string>
     <string name="cache_dialog_loading_details">Cache details laden…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Pagina laden</string>
@@ -1374,6 +1375,8 @@
     <string name="map_language">Kaart taal</string>
     <string name="map_live_enable">Live aanzetten</string>
     <string name="map_live_disable">Live uitzetten</string>
+    <string name="map_live_disabled">Live modus uitgeschakeld</string>
+    <string name="map_live_disabled_hint">Live modus is uitgeschakeld. Je ziet alleen opgeslagen caches. Gebruik het menu om live modus in te schakelen.</string>
     <string name="map_as_list">Laat zien als lijst</string>
     <string name="map_select_multiple_items">Selecteer item</string>
     <string name="map_routing">Routering</string>
@@ -1390,15 +1393,14 @@
     <string name="map_settings_cache_filter_too_complex_message">Het huidige cachefilter is te complex om hier extra opties op toe te passen. Meestal betekent dit dat het cachefilter NIET of OF uitdrukkingen bevat in plaats van eenvoudige EN logica.</string>
     <!-- search -->
     <string name="search_bar_hint">Caches/trackables zoeken</string>
-    <string name="search_bar_desc">Caches (geo code, trefwoord), Trackables (TB-code)</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
     <string name="search_address">Adres</string>
     <string name="search_address_button">Zoeken op adres</string>
     <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Zoeken op geocode</string>
+    <string name="search_geo_button">Zoek op geocode</string>
     <string name="search_geocode_from_clipboard">Geocode is geplakt van klembord.</string>
-    <string name="search_kw">Trefwoorden</string>
+    <string name="search_kw">Trefwoord</string>
     <string name="search_kw_prefill">Trefwoord</string>
     <string name="search_kw_button">Zoeken op trefwoord</string>
     <string name="search_hbu">Verborgen door</string>
@@ -1420,7 +1422,7 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Bladwijzerlijst</string>
     <string name="search_pocket_is_new">nieuw</string>
-    <string name="search_pocket_and_bookmark_loading">Laden van een lijst van Pocket Queries en bladwijzerlijsten</string>
+    <string name="search_pocket_loading">Pocket queries laden</string>
     <string name="search_bookmark_loading">Bladwijzerlijsten laden</string>
     <string name="search_bookmark_select">Selecteer bladwijzerlijsten</string>
     <string name="search_bookmark_new">Nieuwe bladwijzerlijst aanmaken</string>
@@ -1840,10 +1842,6 @@
         <item quantity="one">%d dag geleden</item>
         <item quantity="other">%d dagen geleden</item>
     </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favoriet</item>
-        <item quantity="other">%s favorieten</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo snelkoppeling</string>
     <string name="create_shortcut">Maak snelkoppeling</string>
@@ -2025,6 +2023,7 @@
     <string name="download_confirmation">%1$sBestand downloaden \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Updates gevonden voor:\n%1$s\n\nWil je bijwerken?%2$s</string>
     <string name="download_warning">Dit kan heel wat tijd in beslag nemen en kan tot aanzienlijke kosten leiden, afhankelijk van uw netwerkverbinding.</string>
+    <string name="download_error">Downloaden is mislukt met fout #%d</string>
     <string name="downloadmap_handling">De download zelf wordt afgehandeld door de downloadmanager van je systeem op de achtergrond. Je zou een melding moeten zien zodra de download is gestart (dit kan even duren).</string>
     <string name="button_continue">Doorgaan</string>
     <string name="downloadmap_onedirup">(één niveau omhoog)</string>

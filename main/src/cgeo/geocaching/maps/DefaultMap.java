@@ -33,19 +33,23 @@ public final class DefaultMap {
         return new MapOptions(coords).newIntent(fromActivity, getDefaultMapClass());
     }
 
-    public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type, final String title) {
-        new MapOptions(coords, type, title).startIntent(fromActivity, cls);
-    }
-
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Waypoint waypoint) {
         new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
     }
 
-    public static void startActivityCoords(final Activity fromActivity, final Geopoint coords, final WaypointType type, final String title) {
-        startActivityCoords(fromActivity, getDefaultMapClass(), coords, type, title);
+    public static void startActivityCoords(final Context fromActivity, final Waypoint waypoint) {
+        startActivityCoords(fromActivity, getDefaultMapClass(), waypoint);
     }
 
-    public static void startActivityGeoCode(final Context fromActivity, final Geopoint coords) {
+    public static void startActivityCoords(final Activity fromActivity, final Geopoint coords) {
+        startActivityCoords(fromActivity, getDefaultMapClass(), coords, null);
+    }
+
+    public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type) {
+        new MapOptions(coords, type).startIntent(fromActivity, cls);
+    }
+
+    public static void startActivityInitialCoords(final Context fromActivity, final Geopoint coords) {
         new MapOptions(coords).startIntent(fromActivity, getDefaultMapClass());
     }
 

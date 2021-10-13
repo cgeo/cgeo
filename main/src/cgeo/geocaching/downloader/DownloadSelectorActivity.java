@@ -127,7 +127,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                                             cursor.moveToFirst();
                                             final int bytesDownloaded = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
                                             final int bytesTotal = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
-                                            final int progress = (int) ((bytesDownloaded * 100L) / bytesTotal);
+                                            final int progress = bytesTotal == 0 ? 0 : (int) ((bytesDownloaded * 100L) / bytesTotal);
 
                                             runOnUiThread(() -> holder.binding.progressHorizontal.setProgressCompat(progress, true));
                                             cursor.close();

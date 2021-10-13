@@ -287,7 +287,6 @@
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
     <string name="confirm_discard_changes">Vil du kassere ændringer, som ikke er gemt?</string>
     <string name="confirm_discard_wp_changes">Vil du kassere ændringer, som ikke er gemt?</string>
-    <string name="err_request_popup_info">Det lykkedes ikke c:geo at hente popup-info for cachen.</string>
     <string name="warn_log_load_additional_data">Det lykkedes ikke at hente data (trackables/favorit point) til logbesked.</string>
     <string name="more_information">Mere information</string>
     <string name="undo">Fortryd</string>
@@ -349,7 +348,6 @@
     <string name="caches_sort_favorites">Favoritter</string>
     <string name="caches_sort_favorites_ratio">Favoritter [%]</string>
     <string name="caches_sort_name">Navn</string>
-    <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Vurdering</string>
     <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
@@ -772,9 +770,6 @@
     <string name="init_memory_dump">Hukommelsesdump</string>
     <string name="init_memory_dumped">Hukommelse dumpet til %s</string>
     <string name="init_please_wait">Vent venligst…</string>
-    <string name="init_hardware_acceleration_title">Hardwareaccelereret grafik</string>
-    <string name="init_hardware_acceleration_note">Med hardwareaccelereret grafik bliver grafiske elementer tegnet hurtigere på skærmen. Dog kan nogle enheders Android-styresystem indeholde fejl, som bevirker at tekster kan fremstå sløret (især fed skrift).  Du kan deaktivere hardwareaccelereret grafik, hvis du oplever dette problem.</string>
-    <string name="init_hardware_acceleration">Aktivér hardwareaccelereret grafik</string>
     <string name="settings_open_website">Åbn websitet</string>
     <string name="settings_open_geokretymap_website">Åbn GeoKretyMap.org hjemmeside</string>
     <string name="settings_settings">Indstillinger</string>
@@ -932,7 +927,6 @@
     <string name="cache_list_select_last">Sidste markering</string>
     <string name="cache_images">Billeder</string>
     <string name="cache_waypoints">Rutepunkter</string>
-    <string name="cache_waypoints_add">Tilføj rutepunkt</string>
     <string name="cache_waypoints_add_currentLocation">Tilføj nuværende position</string>
     <string name="cache_waypoints_add_fromclipboard">Tilføj fra udklipsholder</string>
     <string name="cache_waypoints_remove_original_waypoint">Rutepunkt kopieret fra udklipsholder til denne cache.\n\nFjern originalt rutepunkt?</string>
@@ -1010,10 +1004,7 @@
     <string name="cache_status_disabled">Deaktiveret</string>
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun premium-medlemmer</string>
-    <string name="cache_geocode">geo code</string>
     <string name="cache_name">Navn</string>
-    <string name="cache_name_set">Angiv cachenavn</string>
-    <string name="cache_name_updated">Cachenavn opdateret</string>
     <string name="cache_description_set">Angiv cache beskrivelse</string>
     <string name="cache_description_updated">Cache beskrivelse opdateret</string>
     <string name="cache_type">Type</string>
@@ -1160,14 +1151,10 @@
     <string name="map_gm_autorotation_disable">Deaktivér auto-rotation?\n\nAuto-rotation kan aktiveres igen ved hjælp af menupunktet Kortrotation</string>
     <string name="quick_settings_info">Nogle kortindstillinger (kortindstillinger, Skjul, vejvisning) er blevet flyttet til det nye popup-vindue \"Hurtige indstillinger\".\nDu kan åbne dette vindue med ikonet forneden på kortet.</string>
     <!-- search -->
-    <string name="search_bar_desc">Cacher (geokode, nøgleord), Trackables (TB-kode)</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Søg fra koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søg adresse</string>
-    <string name="search_geo">Geocode</string>
-    <string name="search_geo_button">Søg geocode</string>
-    <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
     <string name="search_kw_button">Søg efter nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
@@ -1569,10 +1556,6 @@
     <string name="tts_oclock">klokken %s</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kopieret til udklipsholder</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s favorit</item>
-        <item quantity="other">%s favoritter</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo genvej</string>
     <string name="create_shortcut">Opret genvej</string>

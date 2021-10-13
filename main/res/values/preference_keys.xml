@@ -193,6 +193,7 @@
     <string translatable="false" name="pref_fieldNoteExportDate">fieldnoteExportDate</string>
     <string translatable="false" name="pref_fieldNoteExportUpload">fieldnoteExportUpload</string>
     <string translatable="false" name="pref_fieldNoteExportOnlyNew">fieldnoteExportOnlyNew</string>
+    <string translatable="false" name="pref_hideVisitedWaypoints">hideVisitedWaypoints</string>
     <string translatable="false" name="pref_navigation_menu_compass">navigationCompass</string>
     <string translatable="false" name="pref_navigation_menu_radar">navigationRadar</string>
     <string translatable="false" name="pref_navigation_menu_internal_map">navigationInternalMap</string>
@@ -268,7 +269,6 @@
     <string translatable="false" name="pref_appearance">pref_appearance</string>
     <string translatable="false" name="pref_changelog_last_checksum">changelog_last_checksum</string>
     <string translatable="false" name="pref_caches_history">caches_history</string>
-    <string translatable="false" name="pref_hardware_acceleration">hardware_acceleration2</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>
     <string translatable="false" name="pref_last_cache_log">last_cache_log</string>
     <string translatable="false" name="pref_last_trackable_log">last_trackable_log</string>

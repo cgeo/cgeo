@@ -162,6 +162,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private CacheListType type = null;
     private Geopoint coords = null;
+    private Geopoint targetCoords = null;
     private SearchResult search = null;
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
     private final List<Geocache> cacheList = new ArrayList<>();
@@ -221,6 +222,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private ContentStorageActivityHelper contentStorageActivityHelper = null;
 
     private AbstractSearchLoader currentLoader;
+
+    @Override
+    public int getSelectedBottomItemId() {
+        return type.navigationMenuItem;
+    }
+
+    @Override
+    public void onNavigationItemReselected(@NonNull final MenuItem item) {
+        if (!isTaskRoot()) {
+            finish();
+        }
+    }
 
     private static class LoadCachesHandler extends WeakReferenceHandler<CacheListActivity> {
 
@@ -500,17 +513,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-    public CacheListActivity() {
-        super(true);
-    }
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setTheme();
-
-        setContentView(R.layout.cacheslist_activity);
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
@@ -520,6 +527,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (extras != null) {
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
+            targetCoords = extras.getParcelable(Intents.EXTRA_COORDS);
         } else {
             extras = new Bundle();
         }
@@ -534,8 +542,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         setTitle(title);
-
-
+        setContentView(R.layout.cacheslist_activity);
 
         // Check whether we're recreating a previously destroyed instance
         if (savedInstanceState != null) {
@@ -713,6 +720,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         assert sortProvider != null;  // We set it in the XML file
         sortProvider.setSelection(adapter.getCacheComparator());
         sortProvider.setIsEventsOnly(adapter.isEventsOnly());
+        sortProvider.setTargetCoords(adapter.getTargetCoords());
         sortProvider.setClickListener(selectedComparator -> {
             final CacheComparator oldComparator = adapter.getCacheComparator();
             // selecting the same sorting twice will toggle the order
@@ -992,9 +1000,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_upload_bookmarklist) {
             BookmarkUtils.askAndUploadCachesToBookmarkList(this, adapter.getCheckedOrAllCaches());
         } else if (menuItem == R.id.menu_set_listmarker) {
-            EmojiUtils.selectEmojiPopup(this, markerId, 0, this::setListMarker);
+            EmojiUtils.selectEmojiPopup(this, markerId, null, this::setListMarker);
         } else if (menuItem == R.id.menu_set_cache_icon) {
-            EmojiUtils.selectEmojiPopup(this, -1, 0, this::setCacheIcons);
+            EmojiUtils.selectEmojiPopup(this, -1, null, this::setCacheIcons);
         } else if (menuItem == R.id.menu_set_askfordeletion) {
             setPreventAskForDeletion(false);
         } else {
@@ -1256,7 +1264,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final ListView listView = getListView();
         registerForContextMenu(listView);
 
-        adapter = new CacheListAdapter(this, cacheList, type);
+        adapter = new CacheListAdapter(this, cacheList, type, targetCoords);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
         applyAdapterFilter();
         adapter.setComparator(this.currentSort);
@@ -1787,6 +1795,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // apply filter settings (if there's a filter)
         final SearchResult searchToUse = getFilteredSearch();
         DefaultMap.startActivitySearch(this, searchToUse, title, listId);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void refreshCurrentList() {

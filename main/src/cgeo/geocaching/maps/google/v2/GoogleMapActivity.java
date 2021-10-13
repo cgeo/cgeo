@@ -3,7 +3,7 @@ package cgeo.geocaching.maps.google.v2;
 import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
@@ -39,8 +39,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.commons.lang3.StringUtils;
 
-@SuppressLint("MissingSuperCall") // super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...) TODO: Why is it done like that?
-public class GoogleMapActivity extends AppCompatActivity implements MapActivityImpl, FilteredActivity {
+@SuppressLint("MissingSuperCall") // super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...)
+                                  // TODO: Why is it done like that?
+                                  //       Either merge GoogleMapActivity with CGeoMap
+                                  //       or generify our map handling so that we only have one map activity at all to avoid code duplication
+public class GoogleMapActivity extends AbstractBottomNavigationActivity implements MapActivityImpl, FilteredActivity {
 
     private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
     private static final String STATE_TRACKUTILS = "trackutils";
@@ -72,7 +75,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
     }
 
     @Override
-    protected void onCreate(final Bundle icicle) {
+    public void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
         individualRouteUtils = new IndividualRouteUtils(this, icicle == null ? null : icicle.getBundle(STATE_INDIVIDUAlROUTEUTILS),
             mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute);
@@ -98,7 +101,7 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         mapBase.onPause();
     }
 
@@ -163,11 +166,6 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
     @Override
     public boolean superOnOptionsItemSelected(@NonNull final MenuItem item) {
         return super.onOptionsItemSelected(item);
-    }
-
-    @Override
-    public void navigateUp(final View view) {
-        ActivityMixin.navigateUp(this);
     }
 
     @Override
@@ -265,5 +263,10 @@ public class GoogleMapActivity extends AppCompatActivity implements MapActivityI
         mapBase.getMapOptions().filterContext.set(filter);
         MapUtils.filter(mapBase.getCaches(), mapBase.getMapOptions().filterContext);
         mapBase.refreshMapData(false);
+    }
+
+    @Override
+    public int getSelectedBottomItemId() {
+        return MENU_MAP;
     }
 }

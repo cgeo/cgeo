@@ -10,7 +10,7 @@ public class WaypointUserNoteCombiner {
     private static final String LF_SEPARATOR_LF = "\n" + SEPARATOR + "\n";
     private static final Pattern PATTERN_SEPARATOR_SPLIT = Pattern.compile("\\s*" + LF_SEPARATOR_LF + "\\s*");
 
-    private Waypoint waypoint;
+    private final Waypoint waypoint;
 
     /**
      *

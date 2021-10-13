@@ -1,91 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto" >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="AlwaysShowAction">
 
-    <!-- TODO: use ic_action_search -->
+    <!-- All items should use showAsAction="always",
+    as we don't want to have an overflow menu.
+    For less important items we have a dedicated MoreActivity. -->
+
     <item
         android:id="@+id/menu_gosearch"
         android:icon="@drawable/ic_menu_search"
         android:title="@string/search_bar_hint"
         app:actionViewClass="androidx.appcompat.widget.SearchView"
         app:iconifiedByDefault="true"
-        app:showAsAction="collapseActionView|always"/>
-    <item
-        android:id="@+id/menu_history"
-        android:icon="@drawable/ic_menu_recent_history"
-        android:title="@string/menu_history"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_pocket_queries"
-        android:icon="@drawable/ic_menu_pocket_query"
-        android:title="@string/menu_lists_pocket_queries"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_bookmarklists"
-        android:icon="@drawable/ic_menu_pocket_query"
-        android:title="@string/menu_lists_bookmarklists"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_wizard"
-        android:icon="@drawable/ic_menu_preferences"
-        android:title="@string/wizard"
-        app:showAsAction="never">
-    </item>
-    <item
-        android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_menu_preferences"
-        android:title="@string/menu_settings"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_backup"
-        android:icon="@drawable/ic_menu_rotate"
-        android:title="@string/menu_backup"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:title="@string/menu_update"
-        app:showAsAction="ifRoom">
-        <menu>
-            <item
-                android:id="@+id/menu_update_routingdata"
-                android:title="@string/menu_update_routingdata">
-            </item>
-            <item
-                android:id="@+id/menu_update_mapdata"
-                android:title="@string/menu_update_mapdata">
-            </item>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/menu_helpers"
-        android:icon="@drawable/ic_menu_shopping"
-        android:title="@string/menu_helpers"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_scan"
-        android:icon="@drawable/ic_menu_barcode"
-        android:title="@string/menu_scan_geo"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
-        android:id="@+id/menu_about"
-        android:icon="@drawable/ic_menu_info_details"
-        android:title="@string/menu_about"
-        app:showAsAction="ifRoom">
-    </item>
-
-    <item
-        android:id="@+id/menu_report_problem"
-        android:icon="@drawable/ic_menu_info_details"
-        android:title="@string/debug_user_error_report_title"
-        app:showAsAction="ifRoom">
-    </item>
+        app:showAsAction="collapseActionView|always" />
 
 </menu>

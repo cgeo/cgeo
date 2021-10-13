@@ -21,7 +21,7 @@ import androidx.core.view.MenuItemCompat;
 public class NavigationSelectionActionProvider extends AbstractMenuActionProvider {
 
     private Geocache geocache;
-    private Activity activity;
+    private final Activity activity;
 
     /** Constructor MUST (!) be of type Context, NOT Activity! Otherwise it can't be instantiated by Android infrastructure. See #11251 */
     public NavigationSelectionActionProvider(final Context context) {

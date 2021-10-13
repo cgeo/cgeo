@@ -13,9 +13,9 @@ files:
   - source: /main/project/playstore/description/_source/*.txt
     translation: /main/project/playstore/description/translated/%language%/%original_file_name%
     content_segmentation: 1
-  - source: /main/res/raw/changelog_master.md
+  - source: /main/res/raw/changelog_base.md
     translation: /main/res/raw-%two_letters_code%/%original_file_name%
     content_segmentation: 1
-  - source: /main/res/raw/changelog_release.md
+  - source: /main/res/raw/changelog_bugfix.md
     translation: /main/res/raw-%two_letters_code%/%original_file_name%
     content_segmentation: 1

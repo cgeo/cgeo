@@ -53,7 +53,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     }
 
-    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache, @Nullable final Runnable notifyDataSetChanged) {
+    public static boolean onMenuItemSelected(final MenuItem item, @NonNull final CacheMenuHandler.ActivityInterface activityInterface, final Geocache cache, @Nullable final Runnable notifyDataSetChanged, final boolean fromPopup) {
         final Activity activity;
         if (activityInterface instanceof Activity) {
             activity = (Activity) activityInterface;
@@ -67,7 +67,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             return true;
         } else if (menuItem == R.id.menu_navigate) {
             final NavigationSelectionActionProvider navigationProvider = (NavigationSelectionActionProvider) MenuItemCompat.getActionProvider(item);
-            if (navigationProvider == null) {
+            if (navigationProvider == null || fromPopup) {
                 activityInterface.showNavigationMenu();
                 return true;
             }
@@ -120,6 +120,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(R.id.menu_default_navigation).setVisible(hasCoords);
         menu.findItem(R.id.menu_default_navigation).setTitle(NavigationAppFactory.getDefaultNavigationApplication().getName());
         menu.findItem(R.id.menu_navigate).setVisible(hasCoords);
+        if (!fromPopup) {
+            NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
+        }
         menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
         menu.findItem(R.id.menu_set_found).setVisible(cache.supportsSettingFoundState() && !cache.isFound());
@@ -144,12 +147,11 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         addMenuItems(activity.getMenuInflater(), menu, cache, false);
     }
 
-    public static void initNavigationMenuItems(final Menu menu, final INavigationSource navigationSource, final Geocache cache) {
-        final MenuItem menuItem = menu.findItem(R.id.menu_default_navigation);
-        final NavigationActionProvider navAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(menuItem);
-        if (navAction != null) {
-            navAction.setNavigationSource(navigationSource);
+    public static void initDefaultNavigationMenuItem(final Menu menu, final INavigationSource navigationSource) {
+        final MenuItem defaultNavigationMenuItem = menu.findItem(R.id.menu_default_navigation);
+        final NavigationActionProvider defaultNavAction = (NavigationActionProvider) MenuItemCompat.getActionProvider(defaultNavigationMenuItem);
+        if (defaultNavAction != null) {
+            defaultNavAction.setNavigationSource(navigationSource);
         }
-        NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
     }
 }

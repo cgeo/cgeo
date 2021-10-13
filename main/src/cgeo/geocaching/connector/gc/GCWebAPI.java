@@ -411,13 +411,13 @@ class GCWebAPI {
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class TrackableLog {
         @JsonProperty("logType")
-        TrackableLogType logType;
+        final TrackableLogType logType;
         @JsonProperty("date")
-        String date;
+        final String date;
         @JsonProperty("geocache")
-        Geocache geocache;
+        final Geocache geocache;
         @JsonProperty("referenceCode")
-        String referenceCode;
+        final String referenceCode;
 
         TrackableLog(final String logTypeId, final String date, final String geocode, final String referenceCode) {
             this.logType = new TrackableLogType(logTypeId);
@@ -429,7 +429,7 @@ class GCWebAPI {
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class TrackableLogType {
             @JsonProperty("id")
-            String id;
+            final String id;
 
             TrackableLogType(final String id) {
                 this.id = id;
@@ -439,7 +439,7 @@ class GCWebAPI {
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class Geocache {
             @JsonProperty("gcCode")
-            String geocode;
+            final String geocode;
 
             Geocache(final String geocode) {
                 this.geocode = geocode;
@@ -686,12 +686,12 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class GeocacheLog {
-        Geocache geocache;
-        String logType;
-        boolean ownerIsViewing;
-        String logDate;
-        String logText;
-        boolean usedFavoritePoint;
+        final Geocache geocache;
+        final String logType;
+        final boolean ownerIsViewing;
+        final String logDate;
+        final String logText;
+        final boolean usedFavoritePoint;
 
         GeocacheLog(final String id, final String referenceCode, final double latitude,
                     final double longitude, final boolean favorited, final String logType,
@@ -707,10 +707,10 @@ class GCWebAPI {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class Geocache {
-            String id;
-            String referenceCode;
-            PostedCoordinates postedCoordinates;
-            CallerSpecific callerSpecific;
+            final String id;
+            final String referenceCode;
+            final PostedCoordinates postedCoordinates;
+            final CallerSpecific callerSpecific;
 
             Geocache(final String id, final String referenceCode, final double latitude,
                      final double longitude, final boolean favorited) {

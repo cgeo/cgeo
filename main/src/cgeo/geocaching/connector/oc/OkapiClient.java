@@ -1208,7 +1208,7 @@ final class OkapiClient {
 
         if (!result.isSuccess) {
             final OkapiError error = new OkapiError(result.data);
-            Log.e("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
+            Log.w("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
             return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.getFromOkapiError(error.getResult()));
         }
 

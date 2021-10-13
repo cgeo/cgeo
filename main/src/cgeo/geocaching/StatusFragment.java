@@ -32,7 +32,7 @@ public class StatusFragment extends Fragment {
         statusSubscription.add(AndroidRxUtils.bindFragment(this, StatusUpdater.LATEST_STATUS)
                 .subscribe(status -> {
                     if (status == Status.NO_STATUS) {
-                        statusGroup.setVisibility(View.INVISIBLE);
+                        statusGroup.setVisibility(View.GONE);
                         return;
                     }
 

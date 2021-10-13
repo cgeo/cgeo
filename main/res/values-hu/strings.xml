@@ -241,7 +241,6 @@
     <string name="err_trackable_no_preference_activity">Sajnáljuk, de nem található megfelelő beállítási képernyő.</string>
     <string name="confirm_unsaved_changes_title">Nem mentett változtatások</string>
     <string name="confirm_discard_wp_changes">Elveted a nem mentett útpont változtatásokat?</string>
-    <string name="err_request_popup_info">A láda előnézeti adatainak letöltése sikertelen.</string>
     <string name="warn_log_load_additional_data">A c:geo nem tudta betölteni a kiegészítő adatokat (utazók/kedvenc pontok) a logoláshoz.</string>
     <string name="more_information">További információ</string>
     <!-- location service -->
@@ -297,7 +296,6 @@
     <string name="caches_sort_favorites">Kedvencek</string>
     <string name="caches_sort_favorites_ratio">Kedvencek [%]</string>
     <string name="caches_sort_name">Név</string>
-    <string name="caches_sort_geocode">Geokód</string>
     <string name="caches_sort_rating">Értékelés</string>
     <string name="caches_sort_vote">Saját értékelés</string>
     <string name="caches_sort_inventory">Utazók száma</string>
@@ -538,9 +536,6 @@
     <string name="init_create_memory_dump">Memóriatartalom mentése</string>
     <string name="init_memory_dump">Memóriatartalom</string>
     <string name="init_memory_dumped">Memóriatartalom mentve a %s-n</string>
-    <string name="init_hardware_acceleration_title">Megjelenítés hardveres gyorsítással</string>
-    <string name="init_hardware_acceleration_note">Hardveres gyorsítással gyorsabban jelennek meg a grafikus elemek a képernyőn. Azonban néhány készüléken az Android hibákat tartalmaz és némely szöveg homályosan jelenhet meg (főleg a félkövér karakterek). Tiltsd le a hardveres gyorsítást, ha ezt tapasztalod!</string>
-    <string name="init_hardware_acceleration">Hardveres gyorsítás engedélyezése</string>
     <string name="settings_open_website">Weboldal megnyitása</string>
     <string name="settings_open_geokretymap_website">GeoKretyMap.org megnyitása</string>
     <string name="settings_settings">Beállítások</string>
@@ -670,7 +665,6 @@
     <string name="cache_list_select_last">Utolsó választás</string>
     <string name="cache_images">Képek</string>
     <string name="cache_waypoints">Útpontok</string>
-    <string name="cache_waypoints_add">Útpont hozzáadása</string>
     <string name="cache_hint">Segítség</string>
     <string name="cache_hint_not_available">Nincs segítség megadva</string>
     <string name="cache_logs">Logok</string>
@@ -733,7 +727,6 @@
     <string name="cache_status_archived">Archiválva</string>
     <string name="cache_status_disabled">Letiltva</string>
     <string name="cache_status_premium">Csak prémium tagoknak</string>
-    <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Név</string>
     <string name="cache_type">Típus</string>
     <string name="cache_size">Méret</string>
@@ -840,14 +833,10 @@
     <string name="map_as_list">Mutatás listaként</string>
     <string name="map_select_multiple_items">Elem kiválasztása</string>
     <!-- search -->
-    <string name="search_bar_desc">Ládák (geokód, kulcsszó), utazók (követőkód)</string>
     <string name="search_coordinates">Koordináták</string>
     <string name="search_coordinates_button">Keresés koordinátákkal</string>
     <string name="search_address">Cím</string>
     <string name="search_address_button">Keresés címmel</string>
-    <string name="search_geo">Geokód</string>
-    <string name="search_geo_button">Keresés geokód alapján</string>
-    <string name="search_kw">Kulcsszavak</string>
     <string name="search_kw_prefill">Kulcsszó</string>
     <string name="search_kw_button">Keresés kulcsszóval</string>
     <string name="search_hbu_prefill">Tulajdonos</string>
@@ -1209,10 +1198,6 @@
     <string name="tts_oclock">%s órakor</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Kimásolva a vágólapra</string>
-    <plurals name="favorite_points">
-        <item quantity="one">%s kedvenc pont</item>
-        <item quantity="other">%s kedvenc pont</item>
-    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">c:geo parancsikon</string>
     <string name="create_shortcut">Parancsikon létrehozása</string>

@@ -53,7 +53,7 @@
     <!-- spinner popup formatting -->
 
     <style name="spinnerStyle" parent="Base.Widget.AppCompat.Spinner">
-        <item name="android:popupBackground">@color/colorBackgroundDialog</item>
+        <item name="android:popupBackground">@drawable/spinner_background</item>
     </style>
 
     <!-- alert dialog formatting -->
@@ -89,22 +89,6 @@
         <item name="android:textColor">@color/colorText</item>
     </style>
 
-    <style name="action_bar_action" parent="actionBarStyle">
-        <item name="android:layout_width">@dimen/actionbar_height</item>
-        <item name="android:layout_height">@dimen/actionbar_height</item>
-        <item name="android:padding">2dip</item>
-        <item name="android:scaleType">center</item>
-        <item name="android:focusable">true</item>
-        <item name="android:src">@drawable/cgeo_actionbar_squircle</item>
-        <item name="android:tint">@color/colorTextActionBar</item>
-    </style>
-
-    <style name="action_bar_separator">
-        <item name="android:layout_width">@dimen/actionbar_separator_width</item>
-        <item name="android:layout_height">@dimen/actionbar_separator_height</item>
-        <item name="android:background">@color/colorSeparator</item>
-    </style>
-
     <style name="action_bar_title" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_height">wrap_content</item>
@@ -133,6 +117,8 @@
     <!-- buttons -->
 
     <style name="button" parent="@style/Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:padding">6dip</item>
         <item name="android:lines">1</item>
         <item name="android:singleLine">true</item>
@@ -149,6 +135,12 @@
         <item name="android:layout_marginLeft">6dip</item>
         <item name="android:layout_marginRight">6dip</item>
         <item name="android:layout_marginBottom">5dip</item>
+    </style>
+
+    <style name="button_full_double" parent="button_full">
+        <item name="android:lines">2</item>
+        <item name="android:singleLine">false</item>
+        <item name="android:textSize">@dimen/textSize_buttonsDouble</item>
     </style>
 
     <style name="button_full_spinner" parent="button_full">
@@ -202,6 +194,14 @@
 
     <style name="button_icon" parent="button_icon_accent">
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
+    </style>
+
+    <style name="button_icon_map" parent="button_icon">
+        <item name="android:layout_width">36dp</item>
+        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_margin">3dp</item>
+        <item name="android:padding">3dp</item>
+        <item name="iconTint">@color/osm_zoomcontrol</item>
     </style>
 
     <style name="button_icon_colored" parent="button_icon_accent">
@@ -326,33 +326,6 @@
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
     </style>
 
-    <style name="icon_mainscreen_count">
-        <item name="android:visibility">gone</item>
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:layout_alignParentTop">true</item>
-        <item name="android:layout_centerHorizontal">true</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingTop">2dip</item>
-        <item name="android:paddingBottom">2dip</item>
-        <item name="android:paddingLeft">5dip</item>
-        <item name="android:paddingRight">5dip</item>
-        <item name="android:singleLine">true</item>
-        <item name="android:lines">1</item>
-        <item name="android:ellipsize">marquee</item>
-        <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
-        <item name="android:textColor">@color/just_white</item>
-        <item name="android:background">@drawable/count_bcg</item>
-        <item name="android:text" />
-    </style>
-    <style name="icon_mainscreen_cell_counter">
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:orientation">vertical</item>
-    </style>
     <style name="icon_mainscreen_cell">
         <item name="android:layout_width">0dip</item>
         <item name="android:layout_weight">1</item>
@@ -502,11 +475,11 @@
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_gravity">right</item>
-        <item name="android:ellipsize">none</item>
+        <item name="android:ellipsize">end</item>
         <item name="android:gravity">left</item>
-        <item name="android:lines">1</item>
+        <item name="android:maxLines">1</item>
         <item name="android:scrollHorizontally">true</item>
-        <item name="android:singleLine">true</item>
+        <item name="android:textAlignment">3</item>
         <item name="android:textSize">@dimen/textSize_detailsSecondary</item>
         <item name="android:textColor">@color/colorTextHint</item>
     </style>
@@ -573,6 +546,15 @@
         <item name="android:textColor">@color/colorTextHeadline</item>
     </style>
 
+    <!-- map quick buttons styles -->
+    <style name="map_quickbuttons">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/white_bcg</item>
+        <item name="android:layout_marginLeft">3dp</item>
+        <item name="android:layout_marginRight">3dp</item>
+    </style>
+
     <!-- authorization styles -->
     <style name="authorization_text">
         <item name="android:layout_width">match_parent</item>
@@ -582,6 +564,24 @@
         <item name="android:layout_marginRight">10dip</item>
         <item name="android:gravity">left|center_vertical</item>
         <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+    </style>
+
+    <!-- coordinates input dialog styles -->
+    <style name="edittext_coordinates" parent="edittext_full">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_marginLeft">2dp</item>
+        <item name="android:layout_marginRight">2dp</item>
+        <item name="android:inputType">number</item>
+        <item name="android:textSize">@dimen/textSize_inputCoords</item>
+        <item name="android:selectAllOnFocus">true</item>
+    </style>
+
+    <style name="separator_coordinates">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:textSize">@dimen/textSize_inputCoords</item>
+        <item name="android:layout_marginRight">1dp</item>
+        <item name="android:layout_weight">0.25</item>
     </style>
 
     <!-- installation wizard styles -->

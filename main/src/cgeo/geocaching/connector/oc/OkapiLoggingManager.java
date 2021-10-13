@@ -84,7 +84,7 @@ public class OkapiLoggingManager extends AbstractLoggingManager implements Loade
     @NonNull
     public final LogResult postLog(@NonNull final LogType logType, @NonNull final Calendar date, @NonNull final String log, @Nullable final String logPassword, @NonNull final List<TrackableLog> trackableLogs, @NonNull final ReportProblemType reportProblem) {
         final LogResult result = OkapiClient.postLog(cache, logType, date, log, logPassword, connector, reportProblem);
-        connector.login(null, null);
+        connector.login();
         return result;
     }
 

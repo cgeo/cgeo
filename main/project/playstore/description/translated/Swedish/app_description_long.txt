@@ -2,7 +2,7 @@ c:geo baseras på öppen källkod och är en fullspäckad inofficiell klient fö
 
 Huvudfunktioner:
 - Visa cacher på en Live-karta
-- Använd Google Maps eller OpenStreetMaps
+- Använd Google Maps eller OpenStreetMap
 - Sök efter cacher utifrån olika kriterier
 - Logga dina hittade online eller offline
 - Lagra cache-information på din enhet

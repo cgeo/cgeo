@@ -15,9 +15,12 @@ import cgeo.geocaching.utils.UnknownTagsHandler;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -226,5 +229,31 @@ public final class CacheDetailsCreator {
         final TextView view = add(cache.isEventCache() ? R.string.cache_event : R.string.cache_hidden, dateString).right;
         view.setId(R.id.date);
         return view;
+    }
+
+    public void addLatestLogs(final Geocache cache) {
+        final Context context = parentView.getContext();
+
+        final RelativeLayout layout = (RelativeLayout) activity.getLayoutInflater().inflate(R.layout.cache_information_item, null, false);
+        final TextView nameView = layout.findViewById(R.id.name);
+        nameView.setText(res.getString(R.string.cache_latest_logs));
+        final LinearLayout markers = layout.findViewById(R.id.linearlayout);
+
+        final int smileySize = (int) (context.getResources().getDimensionPixelSize(R.dimen.textSize_detailsPrimary) * 1.2);
+        final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(smileySize, smileySize);
+        lp.setMargins(0, 0, 5, 0);
+
+        final List<LogEntry> logs = cache.getLogs();
+        int i = 0;
+        while (i < logs.size() && markers.getChildCount() < 8) {
+            final int marker = logs.get(i++).logType.getLogOverlay();
+            final ImageView logIcon = new ImageView(context);
+            logIcon.setLayoutParams(lp);
+            logIcon.setBackgroundResource(marker);
+            markers.addView(logIcon);
+        }
+        if (markers.getChildCount() > 0) {
+            parentView.addView(layout);
+        }
     }
 }

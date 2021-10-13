@@ -51,11 +51,6 @@ public final class GoogleMapProvider extends AbstractMapProvider {
     }
 
     @Override
-    public int getMapLayoutId() {
-        return R.layout.map_google;
-    }
-
-    @Override
     public MapItemFactory getMapItemFactory() {
         return mapItemFactory;
     }

@@ -165,28 +165,33 @@ public final class LogTemplateProvider {
                 increment = null == context.logEntry || context.logEntry.logType == LogType.FOUND_IT || context.logEntry.logType == LogType.ATTENDED || context.logEntry.logType == LogType.WEBCAM_PHOTO_TAKEN;
 
                 final Geocache cache = context.getCache();
-                if (cache == null) {
+                if (cache == null || !(ConnectorFactory.getConnector(cache) instanceof ILogin)) {
                     return StringUtils.EMPTY;
                 }
-                int counter;
-                final String onlineNum = getCounter(context, increment);
-                final IConnector connector = ConnectorFactory.getConnector(cache);
+                final ILogin connector = (ILogin) ConnectorFactory.getConnector(cache);
 
-                if (onlineNum.equals(StringUtils.EMPTY)) {
-                    final FoundNumCounter f = FoundNumCounter.load(connector.getName());
-                    if (f == null) {
-                        return StringUtils.EMPTY;
-                    }
-                    counter = f.getCounter(increment);
-                } else {
+                int counter;
+                final String onlineNum = getCounter(context, false); // we increment the counter later on our self in this method.
+
+                if (!onlineNum.equals(StringUtils.EMPTY)) {
                     counter = Integer.parseInt(onlineNum);
+                } else {
+                    counter = FoundNumCounter.getAndUpdateFoundNum(connector);
                 }
-                counter += DataStore.getFoundsOffline(connector.getName());
+
+                if (counter == -1) {
+                    return StringUtils.EMPTY;
+                }
+
+                counter += DataStore.getFoundsOffline(connector);
+
+                if (increment) {
+                    counter += 1;
+                }
                 return String.valueOf(counter);
             }
         });
         templates.add(new LogTemplate("ONLINENUM", R.string.init_signature_template_number_legacy) {
-            // this option can be removed when [number] template checks, if some logs are newer as the cache-log and if it's the case ignores them
 
             @Override
             public String getValue(final LogContext context) {
@@ -315,7 +320,7 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
             if (connector instanceof ILogin) {
-                ((ILogin) connector).login(null, null);
+                ((ILogin) connector).login();
                 current = ((ILogin) connector).getCachesFound();
             }
         }

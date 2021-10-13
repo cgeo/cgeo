@@ -13,6 +13,10 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
@@ -361,8 +365,8 @@ public class ViewUtils {
         }
         //try to get size from layout parameters
         if (view.getLayoutParams() != null) {
-            final int w = view.getLayoutParams().width > 0 ? view.getLayoutParams().width : 0;
-            final int h = view.getLayoutParams().height > 0 ? view.getLayoutParams().height : 0;
+            final int w = Math.max(view.getLayoutParams().width, 0);
+            final int h = Math.max(view.getLayoutParams().height, 0);
             if (w > 0 || h > 0) {
                 return new Pair<>(w, h);
             }
@@ -395,4 +399,22 @@ public class ViewUtils {
         }
     }
 
+    public static Bitmap drawableToBitmap (final Drawable drawable) {
+        final Bitmap bitmap;
+
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        final Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
+        return bitmap;
+    }
+
+    public static BitmapDrawable bitmapToDrawable (final Bitmap bitmap) {
+        return new BitmapDrawable(APP_RESOURCES, bitmap);
+    }
 }

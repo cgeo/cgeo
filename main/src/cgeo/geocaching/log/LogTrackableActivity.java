@@ -19,7 +19,7 @@ import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.network.AndroidBeam;
-import cgeo.geocaching.search.AutoCompleteAdapter;
+import cgeo.geocaching.search.GeocacheAutoCompleteAdapter;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
@@ -33,7 +33,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgress;
 import cgeo.geocaching.utils.Log;
 
-import android.R.layout;
 import android.R.string;
 import android.app.Activity;
 import android.content.Context;
@@ -321,7 +320,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
      * Link the geocodeEditText to the SuggestionsGeocode.
      */
     private void initGeocodeSuggestions() {
-        binding.geocode.setAdapter(new AutoCompleteAdapter(binding.geocode.getContext(), layout.simple_dropdown_item_1line, DataStore::getSuggestionsGeocode));
+        binding.geocode.setAdapter(new GeocacheAutoCompleteAdapter(binding.geocode.getContext(), DataStore::getSuggestionsGeocode));
     }
 
     public void setType(final LogTypeTrackable type) {

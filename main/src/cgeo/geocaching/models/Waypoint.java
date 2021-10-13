@@ -38,6 +38,7 @@ public class Waypoint implements IWaypoint {
 
     private int id = -1;
     private String geocode = "geocode";
+    private Geocache parentCache = null;
     private WaypointType waypointType = WaypointType.WAYPOINT;
     private String prefix = "";
     private String lookup = "";
@@ -204,6 +205,16 @@ public class Waypoint implements IWaypoint {
         return geocode;
     }
 
+    @Nullable
+    public Geocache getParentGeocache() {
+        if (StringUtils.isNotBlank(geocode) && parentCache == null) {
+            // lazy load - only load parent cache if needed to improve performance
+            parentCache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        }
+
+        return parentCache;
+    }
+
     @NonNull
     public String getShortGeocode() {
         return generateShortGeocode(geocode);
@@ -211,6 +222,7 @@ public class Waypoint implements IWaypoint {
 
     public void setGeocode(final String geocode) {
         this.geocode = StringUtils.upperCase(geocode);
+        this.parentCache = null;
     }
 
     @Override

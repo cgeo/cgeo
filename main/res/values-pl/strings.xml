@@ -291,7 +291,6 @@
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
     <string name="confirm_discard_changes">Odrzucić niezapisane zmiany?</string>
     <string name="confirm_discard_wp_changes">Odrzucić niezapisane zmiany punktu nawigacyjnego?</string>
-    <string name="err_request_popup_info">c:geo nie mogło wyświetlić wyskakującego okienka z informacjami o skrzynce.</string>
     <string name="warn_log_load_additional_data">c:geo nie mógł załadować dodatkowych danych (przedmioty podróżne/ulubione) przy logowaniu.</string>
     <string name="more_information">Więcej informacji</string>
     <string name="undo">Cofnij</string>
@@ -321,7 +320,6 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
-    <string name="menu_lists_pocket_queries">Listy / pocket queries</string>
     <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa online</string>
@@ -360,7 +358,6 @@
     <string name="caches_sort_favorites">Ulubione</string>
     <string name="caches_sort_favorites_ratio">Ulubione [%]</string>
     <string name="caches_sort_name">Nazwa</string>
-    <string name="caches_sort_geocode">Kod GC skrzynki</string>
     <string name="caches_sort_rating">Ocena</string>
     <string name="caches_sort_vote">Głosy (Twoja ocena)</string>
     <string name="caches_sort_inventory">Liczebność inwentarza</string>
@@ -462,7 +459,6 @@
         <item quantity="many">%1$d elementów</item>
         <item quantity="other">%1$d elementów</item>
     </plurals>
-    <string name="cache_filter_storage_load_button">Wczytaj</string>
     <string name="cache_filter_storage_delete_button">Usuń</string>
     <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
@@ -829,9 +825,6 @@
     <string name="init_memory_dump">Zrzut pamięci</string>
     <string name="init_memory_dumped">Pamięć zrzucona do %s</string>
     <string name="init_please_wait">Proszę czekać…</string>
-    <string name="init_hardware_acceleration_title">Sprzętowa akceleracja renderowania</string>
-    <string name="init_hardware_acceleration_note">Akceleracja sprzętowa renderuje elementy graficzne szybciej na ekranie. Jednakże na niektórych urządzeniach z systemem Android może powodować błędy i część tekstu może być niewyraźna (zwłaszcza pogrubione znaki). Jeśli tak się stanie, należy wyłączyć akcelerację sprzętową.</string>
-    <string name="init_hardware_acceleration">Włącz akcelerację sprzętową</string>
     <string name="settings_open_website">Otwórz stronę</string>
     <string name="settings_open_geokretymap_website">Otwórz stronę GeoKretyMap.org</string>
     <string name="settings_settings">Ustawienia</string>
@@ -1069,7 +1062,6 @@
     <string name="cache_images">Zdjęcia</string>
     <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
-    <string name="cache_waypoints_add">Dodaj punkt nawigacji</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
     <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacyjny został skopiowany ze schowka do tej skrzynki.\n\nUsunąć oryginalny punkt?</string>
@@ -1154,10 +1146,7 @@
     <string name="cache_status_disabled">Niedostępna</string>
     <string name="cache_status_active">Aktywna</string>
     <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
-    <string name="cache_geocode">Kod skrzynki</string>
     <string name="cache_name">Nazwa</string>
-    <string name="cache_name_set">Ustaw nazwę skrzynki</string>
-    <string name="cache_name_updated">Nazwa skrzynki uaktualniona</string>
     <string name="cache_description_set">Ustaw opis skrytki</string>
     <string name="cache_description_updated">Zaktualizowano opis skrytki</string>
     <string name="cache_type">Typ</string>
@@ -1334,20 +1323,15 @@
     <string name="map_show_other_title">Pokaż inne:</string>
     <!-- search -->
     <string name="search_bar_hint">Szukaj skrytki/przedmioty podróżne</string>
-    <string name="search_bar_desc">Skrzynki (GC-kod, słowo kluczowe), przedmioty podróżne (TB-kod)</string>
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_coordinates_button">Szukaj według współrzędnych</string>
     <string name="search_address">Adres</string>
     <string name="search_address_button">Szukaj według adresu</string>
-    <string name="search_geo">Kod skrzynki</string>
-    <string name="search_geo_button">Szukaj według  kodu skrzynki</string>
-    <string name="search_kw">Słowa kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
     <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
     <string name="search_hbu">Ukryte przez</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
-    <string name="search_filter_button">Szukaj według filtru</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtrów** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
     <string name="search_tb">Przedmioty podróżne</string>
     <string name="search_tb_hint">Identyfikacja przedmiotu podróżnego</string>
@@ -1360,7 +1344,6 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista zakładek</string>
     <string name="search_pocket_is_new">nowy</string>
-    <string name="search_pocket_and_bookmark_loading">Wczytywanie listy Pocket Queries i list zakładek</string>
     <!-- trackable -->
     <string name="trackable">Przedmiot podróżny</string>
     <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
@@ -1785,12 +1768,6 @@
         <item quantity="few">%d dni temu</item>
         <item quantity="many">%d dni temu</item>
         <item quantity="other">%d dni temu</item>
-    </plurals>
-    <plurals name="favorite_points">
-        <item quantity="one">%s ulubiony</item>
-        <item quantity="few">%s ulubione</item>
-        <item quantity="many">%s ulubionych</item>
-        <item quantity="other">%s ulubionych</item>
     </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">skrót do c:geo</string>
