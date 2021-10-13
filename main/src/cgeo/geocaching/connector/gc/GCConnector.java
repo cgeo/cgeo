@@ -457,6 +457,11 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    public int getWaypointMapMarkerId() {
+        return R.drawable.waypoint_marker;
+    };
+
+    @Override
     public boolean login() {
         // login
         final StatusCode status = GCLogin.getInstance().login();

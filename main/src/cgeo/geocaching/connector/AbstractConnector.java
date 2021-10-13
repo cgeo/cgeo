@@ -220,6 +220,11 @@ public abstract class AbstractConnector implements IConnector {
     }
 
     @Override
+    public int getWaypointMapMarkerId() {
+        return R.drawable.waypoint_marker_other;
+    };
+
+    @Override
     @NonNull
     public List<LogType> getPossibleLogTypes(@NonNull final Geocache geocache) {
         final List<LogType> logTypes = new ArrayList<>();

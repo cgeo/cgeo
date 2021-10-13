@@ -79,8 +79,9 @@ public class IndividualRouteUtils {
      *
      * @param menu menu to be configured
      */
-    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final boolean targetIsSet) {
+    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final boolean isTargetSet) {
         anchor.setVisibility(isVisible(route) ? View.VISIBLE : View.GONE);
+        menu.findItem(R.id.menu_clear_targets).setVisible(isTargetSet);
     }
 
     /**
