@@ -1559,10 +1559,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
                     if (handler.isDisposed()) {
                         break;
                     }
-
-                    if (!DataStore.isOffline(geocode, null)) {
-                        Geocache.storeCache(null, geocode, listIds, false, handler);
-                    }
+                    Geocache.storeCache(null, geocode, listIds, false, handler);
                 } catch (final Exception e) {
                     Log.e("CGeoMap.LoadDetails.run", e);
                 } finally {
