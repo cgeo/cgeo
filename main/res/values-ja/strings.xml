@@ -11,6 +11,7 @@
     <string name="about">c:geoについて</string>
     <string name="latitude">緯度</string>
     <string name="longitude">経度</string>
+    <string name="latlongitude">緯度\n経度</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo設定</string>
     <!-- caches -->
@@ -319,9 +320,12 @@
     <string name="menu_helpers">ユーティリティアプリ</string>
     <string name="menu_settings">設定</string>
     <string name="menu_backup">バックアップ/復元</string>
+    <string name="menu_update">オフラインデータを更新</string>
     <string name="menu_update_routingdata">ルート検索データ</string>
     <string name="menu_update_mapdata">地図データ</string>
+    <string name="menu_dashboard">ログインダッシュボード</string>
     <string name="menu_history">履歴</string>
+    <string name="menu_history_longstring">履歴</string>
     <string name="menu_filter">フィルタ</string>
     <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_lists_pocket_queries">ポケット・クエリ</string>
@@ -334,6 +338,7 @@
     <string name="advanced_search_button">検索</string>
     <string name="stored_caches_button">保存済み</string>
     <string name="any_button">移動</string>
+    <string name="more_button">その他</string>
     <string name="unknown_scan">GCコードが見つかりませんでした</string>
     <!-- caches -->
     <string name="caches_no_cache">キャッシュがありません</string>
@@ -564,7 +569,7 @@
     <string name="about_system_write_logcat_success">ログファイル「%1$s」はフォルダ「%2$s」に保存されました</string>
     <string name="about_system_write_logcat_error">ログファイルの書き込みエラー</string>
     <string name="about_system_write_infos_downloadmanager">ダウンロードを表示</string>
-    <string name="changelog_github">すべての変更の一覧</string>
+    <string name="changelog_github">すべての更新履歴</string>
     <string name="about_nutshellmanual">マニュアル</string>
     <string name="about_contributors_carnerodetails">c:geoの父として</string>
     <string name="about_contributors_recent">最近の貢献者</string>
@@ -1101,6 +1106,7 @@
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
+    <string name="cache_waypoints_hide_visited_waypoints">訪問済みウェイポイントを非表示</string>
     <string name="cache_waypoints_remove_original_waypoint">ウェイポイントをクリップボードからこのキャッシュにコピーしました。\n\n元のウェイポイントを削除しますか?</string>
     <string name="cache_hint">ヒント</string>
     <string name="cache_hint_not_available">ヒントはありません</string>
@@ -1185,7 +1191,10 @@
     <string name="cache_status_disabled">一時停止中</string>
     <string name="cache_status_active">有効</string>
     <string name="cache_status_premium">プレミアム会員のみ</string>
+    <string name="cache_geocode">GCコード</string>
     <string name="cache_name">キャッシュ名</string>
+    <string name="cache_name_set">キャッシュ名を設定</string>
+    <string name="cache_name_updated">キャッシュ名を更新しました</string>
     <string name="cache_description_set">キャッシュの説明を入力</string>
     <string name="cache_description_updated">キャッシュの説明が更新されました</string>
     <string name="cache_type">タイプ</string>
@@ -1337,7 +1346,7 @@
     <string name="init_renderthemefolder_synctolocal_dialog_message">地図テーマフォルダをアプリ専用フォルダに常に同期します。ファイルのアクセス速度が向上します。同期する前に、地図テーマフォルダに地図テーマファイル以外の(大きなサイズの)ファイルが含まれてないことを確認してください。\n\n地図テーマフォルダは現在「%1$s」に設定されます。%2$sと%3$sが含まれており、合計サイズは%4$sです。\n\nフォルダを同期しますか?</string>
     <string name="onetime_mapthemefixslow_title">地図テーマ使用時の表示の遅延について</string>
     <string name="onetime_mapthemefixslow_message">zip圧縮されてないテーマファイルでは表示が遅くなる時があります。zip圧縮するかテーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます。</string>
-    <string name="init_hidewp">ウェイポイントを隠す</string>
+    <string name="init_hidewp">ウェイポイントを非表示</string>
     <string name="init_summary_hidewp_original">地図上でウェイポイント(オリジナル)を非表示</string>
     <string name="init_summary_hidewp_parking">地図上でウェイポイント(駐車場)を非表示</string>
     <string name="init_summary_hidewp_visited">地図上で訪問したウェイポイントを非表示</string>
@@ -1368,13 +1377,17 @@
     <string name="search_coordinates_button">座標で検索</string>
     <string name="search_address">住所</string>
     <string name="search_address_button">住所で検索</string>
+    <string name="search_geo">GCコード</string>
+    <string name="search_geo_button">GCコードで検索</string>
     <string name="search_geocode_from_clipboard">クリップボードから貼り付けられました</string>
+    <string name="search_kw">キーワード</string>
     <string name="search_kw_prefill">キーワード</string>
     <string name="search_kw_button">キーワードで検索</string>
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_filter">フィルタ</string>
+    <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
     <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
@@ -1963,6 +1976,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="download_confirmation">%1$sダウンロードファイル: %2$s %3$s</string>
     <string name="download_confirmation_updates">更新が見つかりました:\n%1$s\n\n更新しますか?%2$s</string>
     <string name="download_warning">ネットワーク接続によってはダウンロードに長時間かかり通信料が高額になる場合があります</string>
+    <string name="download_error">ダウンロードできませんでした(エラー#%d)</string>
     <string name="downloadmap_handling">ダウンロードはバックグラウンドでシステムのダウンロードマネージャーによって実行されます。 ダウンロードが開始されるとすぐに通知されます(時間がかかる場合があります)</string>
     <string name="button_continue">続ける</string>
     <string name="downloadmap_onedirup">..</string>
@@ -2052,4 +2066,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="later">後で</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
+    <string name="touch_again_to_exit">終了するにはもう一度タップしてください</string>
 </resources>
