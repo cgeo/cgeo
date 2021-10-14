@@ -129,8 +129,11 @@ android {
         // enable proguard and remove unused code
         minifyEnabled true
 
-        // remove unused resources in addition to unused code
-        shrinkResources true
+        // as it affects the build speed, do not shrink resources for debug builds
+        if (buildType.name != 'debug') {
+            // remove unused resources in addition to unused code
+            shrinkResources true
+        }
 
         // proguard rules
         proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
