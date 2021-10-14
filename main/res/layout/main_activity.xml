@@ -7,68 +7,59 @@
     android:layout_height="fill_parent"
     tools:context=".MainActivity">
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/status"
+        android:name="cgeo.geocaching.StatusFragment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dip"
+        android:layout_marginTop="16dp"
+        tools:layout="@layout/status" />
 
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/info_notloggedin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/location_area"
-        android:layout_alignParentTop="true"
-        android:orientation="vertical">
+        android:layout_marginHorizontal="16dip"
+        android:layout_below="@id/status"
+        android:background="@drawable/helper_bcg"
+        android:visibility="gone">
 
-        <ListView
-            android:id="@+id/connectorstatus_area"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
-            android:orientation="vertical"
-            android:scrollbars="none"
-            tools:layout_height="200dp"
-            tools:listitem="@layout/main_activity_connectorstatus" />
+        <include
+            layout="@layout/attribute_image"
+            android:id="@+id/info_notloggedin_icon"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="4dip" />
 
-        <RelativeLayout
-            android:id="@+id/info_notloggedin"
+        <TextView
+            android:id="@+id/info_notloggedin_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dip"
-            android:layout_marginTop="24dp"
-            android:background="@drawable/helper_bcg"
-            android:visibility="gone"
-            tools:visibility="visible">
+            android:layout_centerVertical="true"
+            android:layout_marginHorizontal="8dp"
+            android:layout_toRightOf="@id/info_notloggedin_icon"
+            android:gravity="center"
+            android:text="@string/warn_notloggedin_short"
+            android:textColor="@color/text_icon"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_detailsPrimary" />
+    </RelativeLayout>
 
-            <include
-                layout="@layout/attribute_image"
-                android:id="@+id/info_notloggedin_icon"
-                android:layout_width="48dp"
-                android:layout_height="48dp"
-                android:layout_alignParentLeft="true"
-                android:layout_centerVertical="true"
-                android:layout_margin="4dip" />
-
-            <TextView
-                android:id="@+id/info_notloggedin_text"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_toRightOf="@id/info_notloggedin_icon"
-                android:layout_marginHorizontal="8dp"
-                android:gravity="center"
-                android:text="@string/warn_notloggedin_short"
-                android:textColor="@color/text_icon"
-                android:textIsSelectable="false"
-                android:textSize="@dimen/textSize_detailsPrimary" />
-
-        </RelativeLayout>
-
-        <fragment
-            android:id="@+id/status"
-            android:name="cgeo.geocaching.StatusFragment"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dip"
-            android:layout_marginTop="24dp"
-            tools:layout="@layout/status" />
-    </LinearLayout>
-
+    <ListView
+        android:id="@+id/connectorstatus_area"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/location_area"
+        android:layout_below="@id/info_notloggedin"
+        android:layout_marginTop="32dp"
+        android:layout_marginBottom="16dp"
+        android:divider="@null"
+        android:orientation="vertical"
+        android:scrollbars="none"
+        tools:listitem="@layout/main_activity_connectorstatus" />
 
     <LinearLayout
         android:id="@+id/location_area"
