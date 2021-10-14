@@ -131,6 +131,11 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
                     private void fillView(final View connectorInfo, final ILogin conn) {
 
+                        final ImageView userAvartar = connectorInfo.findViewById(R.id.item_icon);
+                        final TextView userName = connectorInfo.findViewById(R.id.item_title);
+                        final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
+                        final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
+
                         final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
                         final StringBuilder userFoundCount = new StringBuilder();
 
@@ -146,16 +151,17 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                             }
                         }
 
-                        ((TextView) connectorInfo.findViewById(R.id.item_title)).setText(FoundNumCounter.getNotBlankUserName(conn));
-                        ((TextView) connectorInfo.findViewById(R.id.item_status)).setText(connInfo);
+                        userName.setText(FoundNumCounter.getNotBlankUserName(conn));
 
-                        final TextView userInfo = connectorInfo.findViewById(R.id.item_info);
+                        connectorStatus.setText(connInfo);
+                        connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+
                         if (userFoundCount.toString().isEmpty()) {
-                            userInfo.setVisibility(View.GONE);
+                            userFounds.setVisibility(View.GONE);
                         } else {
-                            userInfo.setVisibility(View.VISIBLE);
-                            userInfo.setText(userFoundCount);
-                            userInfo.setOnClickListener(v -> {
+                            userFounds.setVisibility(View.VISIBLE);
+                            userFounds.setText(userFoundCount);
+                            userFounds.setOnClickListener(v -> {
                                 activity.startActivity(CacheListActivity.getHistoryIntent(activity));
                                 ActivityMixin.overrideTransitionToFade(activity);
                                 activity.finish();
@@ -163,20 +169,19 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                         }
 
                         if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
-                            connectorInfo.findViewById(R.id.item_icon).setVisibility(View.INVISIBLE);
+                            userAvartar.setVisibility(View.INVISIBLE);
 
                             // images are cached by the HtmlImage class
                             final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
                             AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
                                     () -> imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)),
                                     img -> {
-                                        connectorInfo.findViewById(R.id.item_icon).setVisibility(View.VISIBLE);
-                                        ((ImageView) connectorInfo.findViewById(R.id.item_icon)).setImageDrawable(img);
+                                        userAvartar.setVisibility(View.VISIBLE);
+                                        userAvartar.setImageDrawable(img);
                                     });
                         } else {
-                            connectorInfo.findViewById(R.id.item_icon).setVisibility(View.GONE);
+                            userAvartar.setVisibility(View.GONE);
                         }
-                        connectorInfo.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
                     }
                 });
             }
