@@ -320,10 +320,12 @@
     <string name="menu_helpers">Utilitários</string>
     <string name="menu_settings">Definições</string>
     <string name="menu_backup">Cópia de segurança / restauro</string>
-    <string name="menu_update">Actualizar</string>
+    <string name="menu_update">Actualizar dados offline</string>
     <string name="menu_update_routingdata">Dados de encaminhamento</string>
     <string name="menu_update_mapdata">Dados do mapa</string>
+    <string name="menu_dashboard">Painel de entrada</string>
     <string name="menu_history">Histórico</string>
+    <string name="menu_history_longstring">Histórico de Encontradas</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_scan_geo">Ler código GC</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -336,6 +338,7 @@
     <string name="advanced_search_button">Pesquisar</string>
     <string name="stored_caches_button">Armazenadas</string>
     <string name="any_button">Ir para</string>
+    <string name="more_button">Mais</string>
     <string name="unknown_scan">A leitura realizada não determinou qualquer código GC.</string>
     <!-- caches -->
     <string name="caches_no_cache">Nenhuma cache</string>
@@ -668,6 +671,7 @@
     <string name="init_login_popup_failed">Falha no início de sessão</string>
     <string name="init_login_popup_failed_reason">Início de sessão falhou: %s</string>
     <string name="init_login_popup_not_authorized">Não autorizado</string>
+    <string name="init_login_popup_not_logged_in">Sem sessão iniciada</string>
     <string name="init_login_popup_invalid_timestamp">Hora local inválida, altere a hora do aparelho</string>
     <string name="init_login_popup_invalid_token">Autorização inválida, volte a autorizar</string>
     <string name="init_authorization_credential_username">Utilizador</string>
@@ -1123,7 +1127,7 @@
     <string name="cache_waypoints_add">Adicionar ponto adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Oculta pontos adicionais visitados</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Ocultar pontos adicionais visitados</string>
     <string name="cache_waypoints_remove_original_waypoint">Ponto adicional copiado da área de transferência para esta cache.\n\nEliminar o ponto adicional original?</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
@@ -2018,6 +2022,7 @@
     <string name="download_confirmation">%1$sTransferir o ficheiro \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Actualizações encontradas para:\n%1$s\n\nDeseja actualizar?%2$s</string>
     <string name="download_warning">Isso pode demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
+    <string name="download_error">Transferência falhou, com o erro #%d</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
     <string name="downloadmap_onedirup">(um nível acima)</string>
@@ -2108,4 +2113,5 @@ do mapa e dos temas?</string>
     <string name="later">Mais tarde</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
+    <string name="touch_again_to_exit">Por favor, toque novamente para sair</string>
 </resources>

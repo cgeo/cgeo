@@ -314,7 +314,6 @@
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
     <string name="menu_backup">Kopia zapasowa / przywracanie</string>
-    <string name="menu_update">Aktualizuj</string>
     <string name="menu_update_routingdata">Dane nawigowania</string>
     <string name="menu_update_mapdata">Dane mapy</string>
     <string name="menu_history">Historia</string>

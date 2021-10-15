@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Kaart
+- Nieuw: Complete herziening van alle cache pictogrammen
+- Nieuw: Toon pictogrammen voor laatste logs in cache popup
+- Oplossing: Toon afstandscirkels voor door de gebruiker gedefinieerde caches (als cirkels zijn ingeschakeld)
+- Oplossing: Maak de titel van de cache zichtbaarder in de cache / waypoint popup
+- Oplossing: Toon waarschuwing in live kaart wanneer live modus is uitgeschakeld
+- Oplossing: Sta HTML toe in de beschrijving van navigatie-doelen
+- Wijziging: Aangepaste zoombediening voor OSM kaarten voor betere consistentie tussen kaarten
+- Wijziging: Meest individuele route-gerelateerde menu opties verplaatst naar een aparte knop voor snelle toegang onderaan. (Alleen worden weergegeven wanneer een individuele route wordt geladen / aangemaakt.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Cache lijsten
+- Nieuw: Complete herziening van alle cache pictogrammen
 
 ### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+- Nieuw: Toon pictogrammen voor laatste logs
+- Nieuw: Toon pictogrammen voor logboekvermeldingen in het logboektabblad
+- Nieuw: Optie om bezochte waypoints op tabblad waypoints te verbergen
+- Oplossing: Sta HTML toe in de beschrijving van navigatie-doelen
+- Oplossing: Filter de korte beschrijving wanneer deze al in lange beschrijving staat
+- Oplossing: Dialoogvenster "coördinaten invoer" omgebouwd om beter gebruik onder specifieke omstandigheden weer te geven
+- Nieuw: Variabele / calculator tabblad toegevoegd (experimenteel, activeer debug modus om het te zien)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Overig
+- Wijziging: Gescheiden bladwijzerlijsten en pocket queries (alleen geocaching.com PM)
+- Nieuw: Verwijder-geforceerd caches gemarkeerd als "te-verwijderen" bij het gebruik van onderhoudsfunctie
+- Verandering: Altijd hardware acceleratie gebruiken (instelling verwijderd en oud toestel model controle)

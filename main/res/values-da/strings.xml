@@ -310,7 +310,6 @@
     <string name="menu_helpers">Hjælpeprogrammer</string>
     <string name="menu_settings">Indstillinger</string>
     <string name="menu_backup">Backup/gendannelse</string>
-    <string name="menu_update">Opdatér</string>
     <string name="menu_history">Historik</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skan geokode</string>

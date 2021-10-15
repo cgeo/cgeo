@@ -11,6 +11,7 @@
     <string name="about">Info c:geo</string>
     <string name="latitude">Latitudine</string>
     <string name="longitude">Longitudine</string>
+    <string name="latlongitude">Latitudine\nLongitudine</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Impostazioni di c:geo</string>
     <!-- caches -->
@@ -319,10 +320,12 @@
     <string name="menu_helpers">Programmi utili</string>
     <string name="menu_settings">Impostazioni</string>
     <string name="menu_backup">Backup / Ripristino</string>
-    <string name="menu_update">Aggiorna</string>
+    <string name="menu_update">Aggiorna dati offline</string>
     <string name="menu_update_routingdata">Dati di navigazione</string>
     <string name="menu_update_mapdata">Dati mappa</string>
+    <string name="menu_dashboard">Dashboard di accesso</string>
     <string name="menu_history">Cronologia</string>
+    <string name="menu_history_longstring">Trova cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_scan_geo">Scansiona geocode</string>
     <string name="menu_lists_pocket_queries">Query tascabili</string>
@@ -335,6 +338,7 @@
     <string name="advanced_search_button">Cerca</string>
     <string name="stored_caches_button">Salvati</string>
     <string name="any_button">Vai a</string>
+    <string name="more_button">Altro</string>
     <string name="unknown_scan">Nessun geocode trovato nello scan.</string>
     <!-- caches -->
     <string name="caches_no_cache">Non ci sono cache</string>
@@ -365,6 +369,7 @@
     <string name="caches_sort_favorites">Preferiti</string>
     <string name="caches_sort_favorites_ratio">Preferiti [%]</string>
     <string name="caches_sort_name">Nome</string>
+    <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Voto</string>
     <string name="caches_sort_vote">Il tuo voto</string>
     <string name="caches_sort_inventory">Oggetti trackables</string>
@@ -409,6 +414,14 @@
     <string name="caches_askdeletion">Chiedi di eliminare se vuota</string>
     <string name="select_icon">Seleziona icona</string>
     <string name="onetime_missing_unicode_info">La tua versione Android non supporta il rilevamento automatico delle icone supportate - alcuni simboli potrebbero mancare</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d trovato</item>
+        <item quantity="other">%d trovati</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d log offline</item>
+        <item quantity="other">%d log offline</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gestisci liste</string>
     <string name="list_menu_create">Crea nuova lista</string>
@@ -666,6 +679,7 @@
     <string name="init_login_popup_failed">Login fallito.</string>
     <string name="init_login_popup_failed_reason">Accesso non riuscito: %s</string>
     <string name="init_login_popup_not_authorized">Non autorizzato</string>
+    <string name="init_login_popup_not_logged_in">Login non effettuato</string>
     <string name="init_login_popup_invalid_timestamp">Ora locale non valida, regolare l\'orologio del dispositivo</string>
     <string name="init_login_popup_invalid_token">Autorizzazione non valida, ri-autorizzare</string>
     <string name="init_authorization_credential_username">Utente</string>
@@ -1116,9 +1130,12 @@
     <string name="cache_images">Immagini</string>
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
+    <string name="cache_variables">Variabili</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
+    <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Nascondi i waypoint visitati</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copiato dagli appunti su questo cache.\n\nRimuovere il waypoint originale?</string>
     <string name="cache_hint">Aiuto (spoiler)</string>
     <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
@@ -1204,7 +1221,10 @@
     <string name="cache_status_disabled">Non attivo</string>
     <string name="cache_status_active">Attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
+    <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Nome</string>
+    <string name="cache_name_set">Imposta nome cache</string>
+    <string name="cache_name_updated">Nome cache aggiornato</string>
     <string name="cache_description_set">Imposta descrizione cache</string>
     <string name="cache_description_updated">Descrizione cache aggiornata</string>
     <string name="cache_type">Tipo</string>
@@ -1389,13 +1409,17 @@
     <string name="search_coordinates_button">Cerca per coordinate</string>
     <string name="search_address">Indirizzo</string>
     <string name="search_address_button">Cerca per indirizzo</string>
+    <string name="search_geo">Geocode</string>
+    <string name="search_geo_button">Cerca per geocode</string>
     <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
+    <string name="search_kw">Parola chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
     <string name="search_filter">Filtro</string>
+    <string name="search_filter_button">Cerca con filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_filter_temporary_user_information_title">Nuovo filtro framework</string>
     <string name="search_filter_temporary_user_information">c:geo ha introdotto un nuovo sistema di filtri, per supportare filtri flessibili, combinabili e salvabili. \n\nIl filtro globale può da ora in poi essere modificato direttamente negli elenchi di cache e nella mappa.</string>
@@ -2011,6 +2035,7 @@
     <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Aggiornamenti trovati per:\n%1$s\n\nVuoi aggiornare?%2$s</string>
     <string name="download_warning">Questo può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
+    <string name="download_error">Download fallito con errore #%d</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un livello superiore)</string>
@@ -2100,4 +2125,5 @@
     <string name="later">Dopo</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
+    <string name="touch_again_to_exit">Tocca di nuovo per uscire</string>
 </resources>

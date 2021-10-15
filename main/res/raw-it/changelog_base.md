@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Mappa
+- Nuovo: Rielaborazione completa di tutte le icone dei cache
+- Nuovo: Mostra le icone per gli ultimi log nel popup del cache
+- Corretto: Mostra i cerchi di distanza per i cache definiti dall'utente (se i cerchi sono abilitati)
+- Corretto: Il titolo del cache è reso un po' più visibile nel popup del cache/waypoint
+- Corretto: Mostra un avviso nella mappa live quando la modalità live è disabilitata
+- Corretto: Consentito l'HTML nella descrizione degli obiettivi di navigazione
+- Cambiato: Controlli di zoom adattati per le mappe OSM per una maggiore coerenza tra le mappe
+- Modifica: Spostate molte opzioni del menu relativo al percorso personalizzato in un pulsante d'accesso rapido separato per un accesso più veloce. (Mostrato solo quando è caricato / creato un percorso oersonalizzato.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Elenchi di cache
+- Nuovo: Rielaborazione completa di tutte le icone dei cache
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Dettagli del cache
+- Nuovo: Mostra le icone per gli ultimi log
+- Nuovo: Mostra le icone per i log nella relativa scheda
+- Nuovo: Opzione per nascondere i waypoint visitati sulla scheda dei waypoint
+- Corretto: Consentito l'HTML nella descrizione delle destinazioni di navigazione
+- Corretto: Filtra della descrizione breve quando già contenuta nella descrizione lunga
+- Corretto: Finestra "inserisci coordinate" rinnovata per consentire un migliore uso dello schermo in condizioni specifiche
+- Nuovo: Aggiunta la scheda della variabile / calcolatrice (sperimentale, attivare la modalità di debug per vederla)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Altro
+- Modifica: Segnalibri e pocket query separati (solo account Premium di geocaching.com)
+- Nuovo: Forza l'eliminazione di cache contrassegnati come "da eliminare" quando si utilizza la funzione di manutenzione
+- Cambio: Usa sempre l'accelerazione hardware (impostazione rimossa e controllo del vecchio modello del telefono)

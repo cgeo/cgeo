@@ -320,10 +320,12 @@
     <string name="menu_helpers">Apuohjelmat</string>
     <string name="menu_settings">Asetukset</string>
     <string name="menu_backup">Varmuuskopioi / Palauta</string>
-    <string name="menu_update">Päivitä</string>
+    <string name="menu_update">Päivitä offline-tiedot</string>
     <string name="menu_update_routingdata">Reititystiedot</string>
     <string name="menu_update_mapdata">Karttatiedot</string>
+    <string name="menu_dashboard">Kirjautumisnäkymä</string>
     <string name="menu_history">Historia</string>
+    <string name="menu_history_longstring">Löytöhistoria</string>
     <string name="menu_filter">Suodatin</string>
     <string name="menu_scan_geo">Skannaa geokoodi</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -336,6 +338,7 @@
     <string name="advanced_search_button">Hae</string>
     <string name="stored_caches_button">Tallennettu</string>
     <string name="any_button">Siirry</string>
+    <string name="more_button">Lisää</string>
     <string name="unknown_scan">Yhtään geokoodia ei löytynyt haussa.</string>
     <!-- caches -->
     <string name="caches_no_cache">Ei kätköjä</string>
@@ -411,6 +414,14 @@
     <string name="caches_askdeletion">Kysy poistamista, jos tyhjä</string>
     <string name="select_icon">Valitse kuvake</string>
     <string name="onetime_missing_unicode_info">Android-versiosi ei tue tuettujen kuvakkeiden automaattista tunnistamista - joitakin merkkejä voi puuttua</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d löytö</item>
+        <item quantity="other">%d löytöä</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d kirjattu offline-tilassa</item>
+        <item quantity="other">%d kirjattu offline-tilassa</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Hallitse listoja</string>
     <string name="list_menu_create">Luo uusi lista</string>
@@ -668,6 +679,7 @@
     <string name="init_login_popup_failed">Sisäänkirjautuminen epäonnistui</string>
     <string name="init_login_popup_failed_reason">Kirjautuminen epäonnistui: %s</string>
     <string name="init_login_popup_not_authorized">Ei valtuutettu</string>
+    <string name="init_login_popup_not_logged_in">Ei sisäänkirjautuneena</string>
     <string name="init_login_popup_invalid_timestamp">Paikallinen aika virheellinen, tarkista laitteesi aika</string>
     <string name="init_login_popup_invalid_token">Valtuutus epäonnistui, yritä uudestaan</string>
     <string name="init_authorization_credential_username">Käyttäjätunnus</string>
@@ -2019,7 +2031,7 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
@@ -2113,4 +2125,5 @@
     <string name="later">Myöhemmin</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
+    <string name="touch_again_to_exit">Ole hyvä ja kosketa uudelleen poistuaksesi</string>
 </resources>

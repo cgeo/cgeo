@@ -319,7 +319,6 @@
     <string name="menu_helpers">Tilläggsprogram</string>
     <string name="menu_settings">Inställningar</string>
     <string name="menu_backup">Säkerhetskopiera/återställa</string>
-    <string name="menu_update">Uppdatera</string>
     <string name="menu_update_routingdata">Ruttberäkningsdata</string>
     <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_history">Hittade cacher</string>

@@ -309,7 +309,6 @@
     <string name="menu_helpers">客户端程序</string>
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
-    <string name="menu_update">Update（更新）</string>
     <string name="menu_update_routingdata">路線規劃資料</string>
     <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
