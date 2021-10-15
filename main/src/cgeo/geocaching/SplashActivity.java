@@ -18,7 +18,7 @@ class SplashActivity extends AppCompatActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        try (ContextLogger cLog = new ContextLogger(true, "SplashActivity.onCreate")) {
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "SplashActivity.onCreate")) {
             // don't call the super implementation with the layout argument, as that would set the wrong theme
             super.onCreate(savedInstanceState);
 

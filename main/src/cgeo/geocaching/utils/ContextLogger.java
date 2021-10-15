@@ -54,7 +54,7 @@ public class ContextLogger implements Closeable {
         this.forceLog = forceInfo;
         this.doLog = Log.isEnabled(logLevel) || forceLog;
         if (this.doLog) {
-            this.contextString = String.format(context, params) + ":";
+            this.contextString = "[CtxLog]" + String.format(context, params) + ":";
             if (this.forceLog) {
                 Log.iForce(contextString + "START");
             } else {

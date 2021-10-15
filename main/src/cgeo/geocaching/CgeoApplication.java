@@ -4,6 +4,7 @@ import cgeo.geocaching.network.Cookies;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.OOMDumpingUncaughtExceptionHandler;
 
@@ -40,28 +41,30 @@ public class CgeoApplication extends Application {
 
     @Override
     public void onCreate() {
-        super.onCreate();
+        try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "CGeoApplication.onCreate")) {
+            super.onCreate();
 
-        OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
+            OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
 
-        Settings.setAppThemeAutomatically(this);
+            Settings.setAppThemeAutomatically(this);
 
-        if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
-            fixUserManagerMemoryLeak();
+            if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.O) {
+                fixUserManagerMemoryLeak();
+            }
+
+            showOverflowMenu();
+
+            initApplicationLocale();
+
+            // initialize cgeo notification channels
+            NotificationChannels.createNotificationChannels(this);
+
+            // ensure initialization of lists
+            DataStore.getLists();
+
+            // Restore cookies
+            Cookies.restoreCookies();
         }
-
-        showOverflowMenu();
-
-        initApplicationLocale();
-
-        // initialize cgeo notification channels
-        NotificationChannels.createNotificationChannels(this);
-
-        // ensure initialization of lists
-        DataStore.getLists();
-
-        // Restore cookies
-        Cookies.restoreCookies();
     }
 
     /**
