@@ -414,6 +414,14 @@
     <string name="caches_askdeletion">Perguntar se pretende eliminar, caso esteja vazia</string>
     <string name="select_icon">Seleccionar ícone</string>
     <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d encontrada</item>
+        <item quantity="other">%d encontradas</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d registada offline</item>
+        <item quantity="other">%d registadas offline</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
     <string name="list_menu_create">Criar nova lista</string>
