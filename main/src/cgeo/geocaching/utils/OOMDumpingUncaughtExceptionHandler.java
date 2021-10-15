@@ -22,9 +22,11 @@ public final class OOMDumpingUncaughtExceptionHandler {
                 return;
             }
 
-            // If debug is enabled, log the exception
+            //ALWAYS log uncaught exceptions
+            Log.w("UncaughtException", ex);
+
+            // If debug is enabled, check more advanced stuff
             if (Log.isDebug()) {
-                Log.w("UncaughtException", ex);
                 Throwable exx = ex;
                 while (exx.getCause() != null) {
                     exx = exx.getCause();

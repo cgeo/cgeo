@@ -230,7 +230,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
-        try (ContextLogger cLog = new ContextLogger(true, "MainActivity.onCreate")) {
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
            // don't call the super implementation with the layout argument, as that would set the wrong theme
             super.onCreate(savedInstanceState);
 
@@ -309,6 +309,11 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
         }
+
+        if (Log.isEnabled(Log.LogLevel.DEBUG)) {
+            binding.getRoot().post(() -> Log.d("Post after MainActivity.onCreate"));
+        }
+
     }
 
     private void init() {
@@ -375,25 +380,34 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public void onResume() {
-        super.onResume();
+        try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onResume")) {
 
-        PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
-            @Override
-            protected void execute() {
-                PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
+            super.onResume();
 
-                    @Override
-                    public void execute() {
-                        resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
-                        resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
+            PermissionHandler.requestStoragePermission(this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityStorage) {
+                @Override
+                protected void execute() {
+                    PermissionHandler.executeIfLocationPermissionGranted(MainActivity.this, new PermissionGrantedCallback(PermissionRequestContext.MainActivityOnResume) {
 
-                    }
-                });
-            }
-        });
+                        @Override
+                        public void execute() {
+                            resumeDisposables.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA | GeoDirHandler.LOW_POWER));
+                            resumeDisposables.add(Sensors.getInstance().gpsStatusObservable().observeOn(AndroidSchedulers.mainThread()).subscribe(satellitesHandler));
 
-        updateUserInfoHandler.sendEmptyMessage(-1);
-        init();
+                        }
+                    });
+                }
+            });
+
+            updateUserInfoHandler.sendEmptyMessage(-1);
+            cLog.add("perm");
+
+            init();
+        }
+
+        if (Log.isEnabled(Log.LogLevel.DEBUG)) {
+            binding.getRoot().post(() -> Log.d("Post after MainActivity.onResume"));
+        }
     }
 
     @Override
@@ -419,16 +433,23 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.main_activity_options, menu);
-        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-        searchItem = menu.findItem(R.id.menu_gosearch);
-        searchView = (SearchView) searchItem.getActionView();
-        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-        searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
-        searchView.setSubmitButtonEnabled(true);
+        try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreateOptionsMenu")) {
 
-        hideKeyboardOnSearchClick();
-        hideActionIconsWhenSearchIsActive(menu);
+            getMenuInflater().inflate(R.menu.main_activity_options, menu);
+            final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+            searchItem = menu.findItem(R.id.menu_gosearch);
+            searchView = (SearchView) searchItem.getActionView();
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
+            searchView.setSubmitButtonEnabled(true);
+
+            hideKeyboardOnSearchClick();
+            hideActionIconsWhenSearchIsActive(menu);
+        }
+
+        if (Log.isEnabled(Log.LogLevel.DEBUG)) {
+            binding.getRoot().post(() -> Log.d("Post after MainActivity.onCreateOptionsMenu"));
+        }
 
         return true;
     }

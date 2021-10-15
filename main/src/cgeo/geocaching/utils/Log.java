@@ -50,7 +50,7 @@ public final class Log {
     private static LogLevel minLogLevel = LogLevel.WARN;
     private static boolean logThrowExceptionOnError = false;
     private static LogLevel minLogAddCallerInfo = LogLevel.NONE;
-    private static int addCallerInfoMaxDepth = 4;
+    private static int addCallerInfoMaxDepth = 8;
     private static PrintWriter logFileWriter = null;
 
     private static final boolean[] SETTING_DO_LOGGING = new boolean[LogLevel.values().length];
@@ -155,10 +155,12 @@ public final class Log {
     }
 
     private static void adjustSettings() {
-        setLevel(SETTING_DO_LOGGING, isDebug() && minLogLevel.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel);
-        setLevel(SETTING_ADD_CLASSINFO, minLogAddCallerInfo);
+        final LogLevel minDoLogging = isDebug() && minLogLevel.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogLevel;
+        final LogLevel minAddCallerInfo = isDebug() && minLogAddCallerInfo.ordinal() > LogLevel.DEBUG.ordinal() ? LogLevel.DEBUG : minLogAddCallerInfo;
+        setLevel(SETTING_DO_LOGGING, minDoLogging);
+        setLevel(SETTING_ADD_CLASSINFO, minAddCallerInfo);
         settingThrowExceptionOnError = logThrowExceptionOnError || isDebug;
-        android.util.Log.i(TAG, "[Log] Logging set: minLevel=" + minLogLevel + ", minAddCallerInfo=" + minLogAddCallerInfo +
+        android.util.Log.i(TAG, "[Log] Logging set: minLevel=" + minDoLogging + ", minAddCallerInfo=" + minAddCallerInfo +
                 ", addCallerInfoMaxDepth=" + addCallerInfoMaxDepth + ", throwOnError=" + logThrowExceptionOnError);
     }
 
