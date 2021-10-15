@@ -27,19 +27,9 @@
         android:visible="false">
     </item>
     <item
-        android:id="@+id/menu_about"
-        android:icon="@drawable/ic_menu_info_details"
-        android:title="@string/menu_about">
-    </item>
-    <item
         android:id="@+id/menu_wizard"
         android:icon="@drawable/ic_menu_preferences"
         android:title="@string/wizard">
-    </item>
-    <item
-        android:id="@+id/menu_settings"
-        android:icon="@drawable/ic_menu_preferences"
-        android:title="@string/menu_settings">
     </item>
     <item
         android:id="@+id/menu_backup"

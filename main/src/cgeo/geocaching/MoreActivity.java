@@ -58,7 +58,7 @@ public class MoreActivity extends AbstractBottomNavigationActivity {
 
         final PopupMenu p = new PopupMenu(this, null);
         final Menu menu = p.getMenu();
-        getMenuInflater().inflate(R.menu.bottom_navigation_more, menu);
+        getMenuInflater().inflate(R.menu.more_activity_popup, menu);
 
         // initialize menu items
         menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
@@ -118,6 +118,12 @@ public class MoreActivity extends AbstractBottomNavigationActivity {
                 }
             }
         }, 250); // menuItems might not be available if executed too early
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.more_activity_overflow, menu);
+        return true;
     }
 
     @Override
