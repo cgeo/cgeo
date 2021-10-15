@@ -126,11 +126,11 @@ android {
     }
 
     buildTypes.all { buildType ->
-        // enable proguard and remove unused code
-        minifyEnabled true
-
-        // as it affects the build speed, do not shrink resources for debug builds
+        // as it affects the build speed, do skip some steps for debug builds
         if (buildType.name != 'debug') {
+            // enable proguard and remove unused code
+            minifyEnabled true
+
             // remove unused resources in addition to unused code
             shrinkResources true
         }
