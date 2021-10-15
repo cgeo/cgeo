@@ -105,9 +105,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
                 if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
                     // images are cached by the HtmlImage class
                     final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                    final int scaledSize = (int) getResources().getDimension(R.dimen.toolbarAvatarSize);
                     AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
                             () -> imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)),
-                            img -> setHomeAsUpIndicator(Bitmap.createScaledBitmap(img.getBitmap(), ViewUtils.dpToPixel(24), ViewUtils.dpToPixel(24), true)));
+                            img -> setHomeAsUpIndicator(Bitmap.createScaledBitmap(img.getBitmap(), scaledSize, scaledSize, true)));
 
                     return;
                 }

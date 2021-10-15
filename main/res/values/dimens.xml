@@ -25,6 +25,8 @@
     <dimen name="textSize_toolbarPrimary">20dp</dimen>
     <dimen name="textSize_toolbarSecondary">18dp</dimen>
 
+    <dimen name="toolbarAvatarSize">36dp</dimen>
+
     <!-- headings (not toolbar) -->
     <dimen name="textSize_headingPrimary">20sp</dimen>
     <dimen name="textSize_headingSecondary">18sp</dimen>
