@@ -11,6 +11,7 @@
     <string name="about">Info c:geo</string>
     <string name="latitude">Latitudine</string>
     <string name="longitude">Longitudine</string>
+    <string name="latlongitude">Latitudine\nLongitudine</string>
     <!-- actionbar -->
     <string name="settings_titlebar">Impostazioni di c:geo</string>
     <!-- caches -->
@@ -365,6 +366,7 @@
     <string name="caches_sort_favorites">Preferiti</string>
     <string name="caches_sort_favorites_ratio">Preferiti [%]</string>
     <string name="caches_sort_name">Nome</string>
+    <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Voto</string>
     <string name="caches_sort_vote">Il tuo voto</string>
     <string name="caches_sort_inventory">Oggetti trackables</string>
@@ -1116,9 +1118,12 @@
     <string name="cache_images">Immagini</string>
     <string name="cache_advanced">Avanzate</string>
     <string name="cache_waypoints">Waypoint</string>
+    <string name="cache_variables">Variabili</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Waypoints (%d)</string>
+    <string name="cache_waypoints_add">Aggiungi waypoint</string>
     <string name="cache_waypoints_add_currentLocation">Aggiungi posizione corrente</string>
     <string name="cache_waypoints_add_fromclipboard">Aggiungi dagli appunti</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Nascondi i waypoint visitati</string>
     <string name="cache_waypoints_remove_original_waypoint">Waypoint copiato dagli appunti su questo cache.\n\nRimuovere il waypoint originale?</string>
     <string name="cache_hint">Aiuto (spoiler)</string>
     <string name="cache_hint_not_available">Nessun aiuto disponibile</string>
@@ -1204,7 +1209,10 @@
     <string name="cache_status_disabled">Non attivo</string>
     <string name="cache_status_active">Attivo</string>
     <string name="cache_status_premium">Solo per utenti Premium</string>
+    <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Nome</string>
+    <string name="cache_name_set">Imposta nome cache</string>
+    <string name="cache_name_updated">Nome cache aggiornato</string>
     <string name="cache_description_set">Imposta descrizione cache</string>
     <string name="cache_description_updated">Descrizione cache aggiornata</string>
     <string name="cache_type">Tipo</string>
@@ -1389,13 +1397,17 @@
     <string name="search_coordinates_button">Cerca per coordinate</string>
     <string name="search_address">Indirizzo</string>
     <string name="search_address_button">Cerca per indirizzo</string>
+    <string name="search_geo">Geocode</string>
+    <string name="search_geo_button">Cerca per geocode</string>
     <string name="search_geocode_from_clipboard">Il Geocode è stato copiato dagli appunti.</string>
+    <string name="search_kw">Parola chiave</string>
     <string name="search_kw_prefill">Parola chiave</string>
     <string name="search_kw_button">Cerca per parola chiave</string>
     <string name="search_hbu">Nascosto da</string>
     <string name="search_hbu_prefill">Proprietario</string>
     <string name="search_hbu_button">Cerca per proprietario</string>
     <string name="search_filter">Filtro</string>
+    <string name="search_filter_button">Cerca con filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
     <string name="search_filter_temporary_user_information_title">Nuovo filtro framework</string>
     <string name="search_filter_temporary_user_information">c:geo ha introdotto un nuovo sistema di filtri, per supportare filtri flessibili, combinabili e salvabili. \n\nIl filtro globale può da ora in poi essere modificato direttamente negli elenchi di cache e nella mappa.</string>
@@ -2011,6 +2023,7 @@
     <string name="download_confirmation">%1$sScarica il file \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Aggiornamenti trovati per:\n%1$s\n\nVuoi aggiornare?%2$s</string>
     <string name="download_warning">Questo può richiedere un bel po\' di tempo e comportare costi significativi, a seconda della connessione di rete.</string>
+    <string name="download_error">Download fallito con errore #%d</string>
     <string name="downloadmap_handling">Il download sarà gestito dal gestore di download del tuo sistema in background. Dovresti vedere una notifica non appena il download è iniziato (che potrebbe richiedere un po\' di tempo).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un livello superiore)</string>

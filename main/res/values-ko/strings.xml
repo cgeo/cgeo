@@ -1108,10 +1108,12 @@
     <string name="cache_images">사진</string>
     <string name="cache_advanced">고급</string>
     <string name="cache_waypoints">지점</string>
+    <string name="cache_variables">변수</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">지점 (%d)</string>
     <string name="cache_waypoints_add">지점 추가</string>
     <string name="cache_waypoints_add_currentLocation">현재 위치 추가</string>
     <string name="cache_waypoints_add_fromclipboard">클립보드에서 붙여넣기</string>
+    <string name="cache_waypoints_hide_visited_waypoints">방문한 지점 숨기기</string>
     <string name="cache_waypoints_remove_original_waypoint">지점이 클립보드에서 이 캐시로 복사되었습니다.\n\n원래 지점을 삭제 하시겠습니까?</string>
     <string name="cache_hint">힌트</string>
     <string name="cache_hint_not_available">힌트가 없습니다.</string>
@@ -1996,6 +1998,7 @@
     <string name="download_confirmation">%1$s다운로드 파일 \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">발견 된 업데이트:\n%1$s\n\n업데이트 하시겠습니까?%2$s</string>
     <string name="download_warning">이 작업은 상당한 시간이 소요될 수 있으며 네트워크 연결에 따라 상당한 비용이 발생할 수 있습니다.</string>
+    <string name="download_error">오류 #%d로 인해 다운로드에 실패했습니다.</string>
     <string name="downloadmap_handling">다운로드 자체는 백그라운드에서 시스템의 다운로드 관리자에 의해 처리됩니다. 다운로드가 시작되자마자 알림이 표시됩니다 (시간이 걸릴 수 있음).</string>
     <string name="button_continue">계속</string>
     <string name="downloadmap_onedirup">(한 단계 위로)</string>

@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Mapa
+- Novo: Reformulação completa de todos os ícones de cache
+- Novo: Mostra ícones para os últimos registos na janela pop-up da cache
+- Correcção: Mostra círculos de distância para caches definidas pelo utilizador (se os círculos estiverem activados)
+- Correcção: Torna o título da cache mais visível na janela pop-up de caches / pontos adicionais
+- Correcção: Mostra um aviso no mapa em tempo real quando este estiver desactivado
+- Correcção: Permite HTML na descrição dos destinos de navegação
+- Alteração: Controles de ampliação adaptados para mapas OSM para uma melhor consistência entre os mapas
+- Alteração: Movidas as opções de menu relacionadas com a rota individual para um botão separado, na parte inferior, para um acesso mais rápido. (Só é exibido quando uma rota individual é carregada / criada.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Listas de caches
+- Novo: Reformulação completa de todos os ícones de cache
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Detalhes da cache
+- Novo: Mostra ícones para os últimos registos
+- Novo: Mostra ícones para entradas de registo no separador de registo
+- Novo: Opção para ocultar os pontos adicionais visitados no separador 'Pontos Adicionais'
+- Correcção: Permite HTML na descrição dos destinos de navegação
+- Correcção: Filtra a descrição abreviada, quando já consta na descrição longa
+- Correcção: Refeita a caixa de diálogo de "Entrada de Coordenadas" para permitir uma melhor exibição em condições específicas
+- Novo: Adicionado um separador variável / calculadora (experimental, active o modo de depuração para vê-la)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Outro
+- Alteração: Listas de marcadores e pocket queries separadas (apenas MP de geocaching.com)
+- Novo: Forçar a eliminação de caches marcadas como "para serem eliminadas" quando utiliza a função de manutenção
+- Alteração: Usar sempre a aceleração de hardware (configuração removida e verificação de modelo do telefone antigo)

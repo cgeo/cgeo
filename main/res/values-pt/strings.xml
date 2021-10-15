@@ -1123,7 +1123,7 @@
     <string name="cache_waypoints_add">Adicionar ponto adicional</string>
     <string name="cache_waypoints_add_currentLocation">Adicionar a localização actual</string>
     <string name="cache_waypoints_add_fromclipboard">Adicionar da área de transferência</string>
-    <string name="cache_waypoints_hide_visited_waypoints">Oculta pontos adicionais visitados</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Ocultar pontos adicionais visitados</string>
     <string name="cache_waypoints_remove_original_waypoint">Ponto adicional copiado da área de transferência para esta cache.\n\nEliminar o ponto adicional original?</string>
     <string name="cache_hint">Dica</string>
     <string name="cache_hint_not_available">Nenhuma dica disponível</string>
@@ -2018,6 +2018,7 @@
     <string name="download_confirmation">%1$sTransferir o ficheiro \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Actualizações encontradas para:\n%1$s\n\nDeseja actualizar?%2$s</string>
     <string name="download_warning">Isso pode demorar algum tempo e levar a custos significativos, dependendo da sua ligação à rede.</string>
+    <string name="download_error">Transferência falhou, com o erro #%d</string>
     <string name="downloadmap_handling">A transferência será processada pelo gestor de transferências do seu sistema em segundo plano. Verá uma notificação assim que a transferência começar (que pode demorar um pouco).</string>
     <string name="button_continue">Continuar</string>
     <string name="downloadmap_onedirup">(um nível acima)</string>
