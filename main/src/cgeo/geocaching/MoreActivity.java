@@ -143,8 +143,7 @@ public class MoreActivity extends AbstractBottomNavigationActivity {
             startActivity(new Intent(this, AboutActivity.class));
         } else if (id == R.id.menu_dashboard) {
             startActivity(new Intent(this, MainActivity.class));
-            ActivityMixin.overrideTransitionToFade(this);
-            finish();
+            ActivityMixin.finishWithFadeTransition(this);
         } else if (id == R.id.menu_report_problem) {
             DebugUtils.askUserToReportProblem(this, null);
         } else if (id == R.id.menu_helpers) {
@@ -159,8 +158,7 @@ public class MoreActivity extends AbstractBottomNavigationActivity {
             SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
         } else if (id == R.id.menu_history) {
             startActivity(CacheListActivity.getHistoryIntent(this));
-            ActivityMixin.overrideTransitionToFade(this);
-            finish();
+            ActivityMixin.finishWithFadeTransition(this);
         } else if (id == R.id.menu_goto) {
             InternalConnector.assertHistoryCacheExists(this);
             CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);

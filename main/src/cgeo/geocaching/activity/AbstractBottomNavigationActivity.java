@@ -10,6 +10,8 @@ import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
+import cgeo.geocaching.list.PseudoList;
+import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
@@ -77,6 +79,9 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         updateSelectedItemId();
         // add item selected listener only after item selection has been updated, as it would otherwise directly call the listener
         ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(this);
+        // long click event listeners
+        findViewById(R.id.page_list).setOnLongClickListener(view -> onListsLongClicked());
+        // will be called if c:geo cannot log in
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
 
         initHomeAsUpIndicator();
@@ -135,13 +140,25 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
     }
 
+    private boolean onListsLongClicked() {
+        new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
+            if (selectedListId == PseudoList.HISTORY_LIST.id) {
+                startActivity(CacheListActivity.getHistoryIntent(this));
+            } else {
+                Settings.setLastDisplayedList(selectedListId);
+                CacheListActivity.startActivityOffline(this);
+            }
+            ActivityMixin.finishWithFadeTransition(this);
+        }, false, PseudoList.NEW_LIST.id);
+        return true;
+    }
+
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int id = item.getItemId();
         if (id == android.R.id.home && isTaskRoot()) {
             startActivity(new Intent(this, MainActivity.class));
-            ActivityMixin.overrideTransitionToFade(this);
-            finish();
+            ActivityMixin.finishWithFadeTransition(this);
             return true;
         }
         return super.onOptionsItemSelected(item);
@@ -241,9 +258,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }
         // avoid weired transitions
-        ActivityMixin.overrideTransitionToFade(this);
-
-        finish();
+        ActivityMixin.finishWithFadeTransition(this);
         return true;
     }
 

@@ -217,7 +217,18 @@ public final class ActivityMixin {
         return true;
     }
 
+    /**
+     * should be used after calling {@link Activity#startActivity(Intent)} when coming from or going to a BottomNavigationActivity
+     */
     public static void overrideTransitionToFade(final Activity activity) {
         activity.overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    }
+
+    /**
+     * should be used after calling {@link Activity#startActivity(Intent)} when switching between two BottomNavigationActivities
+     */
+    public static void finishWithFadeTransition(final Activity activity) {
+        overrideTransitionToFade(activity);
+        activity.finish();
     }
 }
