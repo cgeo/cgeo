@@ -230,8 +230,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onNavigationItemReselected(@NonNull final MenuItem item) {
-        if (!isTaskRoot()) {
-            finish();
+        if (item.getItemId() == MENU_SEARCH) {
+            onNavigationItemSelectedIgnoreReselected(item);
         }
     }
 
