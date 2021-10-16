@@ -157,8 +157,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                             userInfo.setText(userFoundCount);
                             userInfo.setOnClickListener(v -> {
                                 activity.startActivity(CacheListActivity.getHistoryIntent(activity));
-                                ActivityMixin.overrideTransitionToFade(activity);
-                                activity.finish();
+                                ActivityMixin.finishWithFadeTransition(activity);
                             });
                         }
 
