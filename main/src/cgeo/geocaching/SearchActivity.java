@@ -176,6 +176,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         if (keywordSearch) { // keyword fallback, if desired by caller
             CacheListActivity.startActivityKeyword(this, query.trim());
+            ActivityMixin.finishWithFadeTransition(this);
             return true;
         }
 
@@ -294,7 +295,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         try {
             CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1])), null);
-            ActivityMixin.overrideTransitionToFade(this);
+            ActivityMixin.finishWithFadeTransition(this);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
@@ -314,7 +315,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         }
 
         CacheListActivity.startActivityKeyword(this, keyText);
-        ActivityMixin.overrideTransitionToFade(this);
+        ActivityMixin.finishWithFadeTransition(this);
     }
 
     private void findByAddressFn() {
@@ -328,6 +329,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
         addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
         startActivity(addressesIntent);
+        ActivityMixin.finishWithFadeTransition(this);
     }
 
     private void findByOwnerFn() {
@@ -343,7 +345,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         }
 
         CacheListActivity.startActivityOwner(this, usernameText);
-        ActivityMixin.overrideTransitionToFade(this);
+        ActivityMixin.finishWithFadeTransition(this);
     }
 
     private void findByFilterFn() {
@@ -355,7 +357,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             CacheListActivity.startActivityFilter(this);
-            ActivityMixin.overrideTransitionToFade(this);
+            ActivityMixin.finishWithFadeTransition(this);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }

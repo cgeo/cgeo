@@ -243,6 +243,11 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             onNavigationItemReselected(item);
             return true;
         }
+        return onNavigationItemSelectedIgnoreReselected(item);
+    }
+
+    public boolean onNavigationItemSelectedIgnoreReselected(final @NonNull MenuItem item) {
+        final int id = item.getItemId();
 
         if (id == MENU_MAP) {
             startActivity(DefaultMap.getLiveMapIntent(this));

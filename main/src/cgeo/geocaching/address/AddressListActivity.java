@@ -3,7 +3,8 @@ package cgeo.geocaching.address;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
-import cgeo.geocaching.activity.AbstractActionBarActivity;
+import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
@@ -12,6 +13,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import android.app.ProgressDialog;
 import android.location.Address;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,7 +23,7 @@ import java.util.ArrayList;
 import io.reactivex.rxjava3.core.Observable;
 import org.apache.commons.lang3.StringUtils;
 
-public class AddressListActivity extends AbstractActionBarActivity implements AddressClickListener {
+public class AddressListActivity extends AbstractBottomNavigationActivity implements AddressClickListener {
 
     @NonNull
     private final ArrayList<Address> addresses = new ArrayList<>();
@@ -58,12 +60,24 @@ public class AddressListActivity extends AbstractActionBarActivity implements Ad
     @Override
     public void onClickAddress(@NonNull final Address address) {
         CacheListActivity.startActivityAddress(this, new Geopoint(address.getLatitude(), address.getLongitude()), StringUtils.defaultString(address.getAddressLine(0)));
-        finish();
+        ActivityMixin.finishWithFadeTransition(this);
     }
 
     @Override
     public void onClickMapIcon(@NonNull final Address address) {
         DefaultMap.startActivityInitialCoords(this, new Geopoint(address.getLatitude(), address.getLongitude()));
-        finish();
+        ActivityMixin.finishWithFadeTransition(this);
+    }
+
+    @Override
+    public int getSelectedBottomItemId() {
+        return MENU_SEARCH;
+    }
+
+    @Override
+    public void onNavigationItemReselected(@NonNull final MenuItem item) {
+        if (item.getItemId() == MENU_SEARCH) {
+            onNavigationItemSelectedIgnoreReselected(item);
+        }
     }
 }
