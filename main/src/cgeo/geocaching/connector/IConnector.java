@@ -233,12 +233,6 @@ public interface IConnector {
     int getCacheMapDotMarkerBackgroundId();
 
     /**
-     * Return the marker id of the waypoints for this connector. Similar to getMapMarkerId, but smaller in size.
-     * on the map.
-     */
-    int getWaypointMapMarkerId();
-
-    /**
      * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filtered further during the
      * actual logging activity.
      *
