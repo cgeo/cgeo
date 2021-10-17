@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.text.method.LinkMovementMethod;
 import android.text.util.Linkify;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.core.text.HtmlCompat;
@@ -137,7 +139,9 @@ public class TextParam {
     }
 
     /** creates text (CharSequence) to assign to a TextView according to this TextParam settings */
-    public CharSequence getText(@Nullable final Context context) {
+    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    public CharSequence getText(@Nullable final Context ctx) {
+        final Context context = ctx == null && CgeoApplication.getInstance() != null ? CgeoApplication.getInstance().getApplicationContext() : ctx;
         CharSequence text;
         if (this.textId > 0 && context != null) {
             text = context.getResources().getText(this.textId);
@@ -207,6 +211,13 @@ public class TextParam {
             view.setCompoundDrawablePadding(ViewUtils.dpToPixel(10));
         }
 
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        final CharSequence cs = this.getText(null);
+        return cs == null ? "-" : cs.toString();
     }
 
 }

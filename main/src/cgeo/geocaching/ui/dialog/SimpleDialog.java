@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
@@ -23,15 +24,19 @@ import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
 import static java.lang.Boolean.TRUE;
@@ -282,6 +287,26 @@ public class SimpleDialog {
      */
     @SafeVarargs
     public final <T> void selectSingle(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final boolean showChoice, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
+        selectSingleGrouped(items, displayMapper, preselect, showChoice, null, null, onSelectListener, moreListeners);
+    }
+
+    /**
+     * Use this method to create and display a 'select single' dialog using the data defined before using this classes' setters
+     * <p>
+     * A 'select single' dialog allows the user to select exactly one value out of a given list of choices
+     *
+     * @param items            the list of items to select from
+     * @param displayMapper    mapper to get the display value for each of the items
+     * @param preselect        index of the item to preselect. If this is not a valid index (e.g. -1), no value will be preselected
+     * @param showChoice       if true, then items are shown with radio buttons to see the chosen value, and buttons must be used to end dialog.
+     *                         If false, then no radio buttons and dialog buttons are displayed and clicking an item ends the dialog
+     * @param groupMapper      if not null, will display grouped display
+     * @param onSelectListener is called when user made a selection (if showChoice=true then after clicking positive button; otherwise after clicking an item)
+     * @param moreListeners    Provide up to two more listeners to define actions for 'negative' and 'neutral' button.
+     */
+    @SafeVarargs
+    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final boolean showChoice, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
         applyCommons(builder);
@@ -291,12 +316,19 @@ public class SimpleDialog {
 
         final int[] selectedPos = {preselectPos};
 
+        final Pair<List<TextParam>, Func1<Integer, Integer>> groupedValues = createGroupedDisplayValues(items, displayMapper, groupMapper, groupDisplayMapper);
+
         // Maybe select_dialog_singlechoice_material / select_dialog_item_material instead ?
         // NOT android.R.layout.select_dialog_item -> makes font size too big
-        final ListAdapter adapter = createListAdapter(items, displayMapper, showChoice ? android.R.layout.simple_list_item_single_choice : android.R.layout.simple_list_item_1);
+        final ListAdapter adapter = createListAdapter(groupedValues.first, showChoice);
 
         //use "setsinglechoiceItems", because otherwise the dialog will close always after selecting an item
-        builder.setSingleChoiceItems(adapter, preselectPos, (dialog, pos) -> {
+        builder.setSingleChoiceItems(adapter, preselectPos, (dialog, clickpos) -> {
+            final Integer pos = groupedValues.second.call(clickpos);
+            if (pos == null) {
+                return;
+            }
+
             enableDisableButtons((AlertDialog) dialog, true);
             if (!showChoice) {
                 dialog.dismiss();
@@ -479,8 +511,12 @@ public class SimpleDialog {
 
 
     @NotNull
-    private <T> ListAdapter createListAdapter(@NotNull final List<T> items, @NotNull final Func2<T, Integer, TextParam> displayMapper, @LayoutRes final int itemLayout) {
-        return new ArrayAdapter<T>(
+    private ListAdapter createListAdapter(@NotNull final List<TextParam> items, final boolean showChoice) {
+
+        //final int itemLayout = showChoice ? android.R.layout.simple_list_item_single_choice : android.R.layout.simple_list_item_1;
+        final int itemLayout = showChoice ? R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
+
+        return new ArrayAdapter<TextParam>(
             getContext(),
             itemLayout,
             android.R.id.text1,
@@ -489,10 +525,58 @@ public class SimpleDialog {
                 //Use super class to create the View.
                 final View v = super.getView(position, convertView, parent);
                 final TextView tv = v.findViewById(android.R.id.text1);
-                displayMapper.call(getItem(position), position).applyTo(tv, true);
+                items.get(position).applyTo(tv, true);
                 return v;
             }
         };
     }
+
+    /** creates a group-including and group-styled list of elements along with a mapping from visual list to value indexes */
+    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    private static <T, G> Pair<List<TextParam>, Func1<Integer, Integer>> createGroupedDisplayValues(final List<T> items, @NotNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper) {
+
+        final Map<G, List<Pair<Integer, TextParam>>> groupedMapList = new HashMap<>();
+        final List<TextParam> singleList = new ArrayList<>();
+        int pos = 0;
+        for (T value : items) {
+            final G group = groupMapper == null ? null : groupMapper.call(value, pos);
+            List<Pair<Integer, TextParam>> groupList = groupedMapList.get(group);
+            if (groupList == null) {
+                groupList = new ArrayList<>();
+                groupedMapList.put(group, groupList);
+            }
+            final TextParam valueTextParam = displayMapper.call(value, pos);
+            groupList.add(new Pair<>(pos, valueTextParam));
+            singleList.add(valueTextParam);
+            pos++;
+        }
+
+        if (groupedMapList.size() <= 1) {
+            //no items at all or only only group (the later is far more likely) -> don't use groups at all
+            return new Pair<>(groupedMapList.isEmpty() ? Collections.emptyList() : singleList, idx -> idx);
+        }
+
+        //sort groups by their display name
+        final List<G> groupList = new ArrayList<>(groupedMapList.keySet());
+        TextUtils.sortListLocaleAware(groupList, g -> g == null || groupDisplayMapper == null ? "--" : groupDisplayMapper.call(g).toString());
+
+        //construct result
+        final List<TextParam> result = new ArrayList<>();
+        final Map<Integer, Integer> indexMap = new HashMap<>();
+        for (G group : groupList) {
+
+            //group name
+            result.add(group == null || groupDisplayMapper == null ? TextParam.text("--") : groupDisplayMapper.call(group));
+
+            //group items
+            for (Pair<Integer, TextParam> valuePair : Objects.requireNonNull(groupedMapList.get(group))) {
+                indexMap.put(result.size(), valuePair.first);
+                result.add(valuePair.second);
+            }
+        }
+
+        return new Pair<>(result, indexMap::get);
+    }
+
 
 }
