@@ -6,14 +6,12 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogType;
@@ -34,7 +32,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByCenter, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials {
+public class ECConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort, ILogin, ICredentials {
 
     @NonNull
     private static final String CACHE_URL = "https://extremcaching.com/index.php/output-2/";
@@ -119,15 +117,6 @@ public class ECConnector extends AbstractConnector implements ISearchByGeocode, 
         final SearchResult searchResult = new SearchResult(caches);
         return searchResult.putInCacheAndLoadRating();
     }
-
-    @Override
-    @NonNull
-    public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        final Collection<Geocache> caches = ECApi.searchByCenter(center);
-        final SearchResult searchResult = new SearchResult(caches);
-        return searchResult.putInCacheAndLoadRating();
-    }
-
 
     @NonNull
     @Override

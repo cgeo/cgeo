@@ -5,12 +5,8 @@ import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.al.ALConnector;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.capability.ILogin;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
-import cgeo.geocaching.connector.capability.ISearchByFinder;
-import cgeo.geocaching.connector.capability.ISearchByKeyword;
 import cgeo.geocaching.connector.capability.ISearchByNextPage;
-import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.ga.GeocachingAustraliaConnector;
@@ -104,19 +100,7 @@ public final class ConnectorFactory {
     private static final Collection<ISearchByViewPort> searchByViewPortConns = getMatchingConnectors(ISearchByViewPort.class);
 
     @NonNull
-    private static final Collection<ISearchByCenter> searchByCenterConns = getMatchingConnectors(ISearchByCenter.class);
-
-    @NonNull
     private static final Collection<ISearchByNextPage> searchByNextPageConns = getMatchingConnectors(ISearchByNextPage.class);
-
-    @NonNull
-    private static final Collection<ISearchByKeyword> searchByKeywordConns = getMatchingConnectors(ISearchByKeyword.class);
-
-    @NonNull
-    private static final Collection<ISearchByOwner> SEARCH_BY_OWNER_CONNECTORS = getMatchingConnectors(ISearchByOwner.class);
-
-    @NonNull
-    private static final Collection<ISearchByFinder> SEARCH_BY_FINDER_CONNECTORS = getMatchingConnectors(ISearchByFinder.class);
 
     @NonNull
     private static final Map<GeocacheFilterType, Collection<ISearchByFilter>> SEARCH_BY_FILTER_CONNECTOR_MAP = new HashMap<>();
@@ -161,28 +145,8 @@ public final class ConnectorFactory {
     }
 
     @NonNull
-    public static Collection<ISearchByCenter> getSearchByCenterConnectors() {
-        return searchByCenterConns;
-    }
-
-    @NonNull
     public static Collection<ISearchByNextPage> getSearchByNextPageConnectors() {
         return searchByNextPageConns;
-    }
-
-    @NonNull
-    public static Collection<ISearchByKeyword> getSearchByKeywordConnectors() {
-        return searchByKeywordConns;
-    }
-
-    @NonNull
-    public static Collection<ISearchByOwner> getSearchByOwnerConnectors() {
-        return SEARCH_BY_OWNER_CONNECTORS;
-    }
-
-    @NonNull
-    public static Collection<ISearchByFinder> getSearchByFinderConnectors() {
-        return SEARCH_BY_FINDER_CONNECTORS;
     }
 
     @NonNull

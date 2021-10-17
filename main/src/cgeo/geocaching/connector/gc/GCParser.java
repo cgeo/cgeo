@@ -865,6 +865,7 @@ public final class GCParser {
             Log.w("GCParser.searchByNextPage: No cache parsed");
             return search;
         }
+        searchResult.addSearchContext(search);
 
         // search results don't need to be filtered so load GCVote ratings here
         GCVote.loadRatings(new ArrayList<>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
@@ -880,8 +881,21 @@ public final class GCParser {
 
     @Nullable
     private static SearchResult searchByAny(final Parameters params) {
+        return searchByAny(params, null, false);
+    }
 
+    private static SearchResult searchByAny(final Parameters params, @Nullable final CacheType ct, final boolean noOwnFound) {
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
+
+        if (ct != null) {
+            //this will limit results to specific cache type
+            params.put("cFilter", ct.guid);
+        }
+        if (noOwnFound) {
+            //this will lead to skip own and found caches in result
+            params.put("ex", "1");
+        }
+
         final String page = GCLogin.getInstance().getRequestLogged(uri, params);
 
         if (StringUtils.isBlank(page)) {
@@ -918,7 +932,7 @@ public final class GCParser {
         return searchByAny(params);
     }
 
-    public static SearchResult searchByUsername(final String userName) {
+    public static SearchResult searchByUsername(final String userName, @Nullable final CacheType ct, final boolean noOwnFound) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -926,7 +940,11 @@ public final class GCParser {
 
         final Parameters params = new Parameters("ul", escapePlus(userName));
 
-        return searchByAny(params);
+        final SearchResult sr = searchByAny(params, ct, noOwnFound);
+        if (sr != null) {
+            sr.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, userName);
+        }
+        return sr;
     }
 
     public static SearchResult searchByPocketQuery(final String pocketGuid) {

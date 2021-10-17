@@ -1,5 +1,6 @@
 package cgeo.geocaching.connector.oc;
 
+import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ImageResult;
@@ -276,7 +277,7 @@ final class OkapiClient {
     }
 
     @NonNull
-    public static List<Geocache> getCachesByFilter(@NonNull final GeocacheFilter filter, @NonNull final OCApiConnector connector) {
+    public static SearchResult getCachesByFilter(@NonNull final GeocacheFilter filter, @NonNull final OCApiConnector connector) {
         //fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
@@ -284,15 +285,24 @@ final class OkapiClient {
         //search around current position by default
         fillSearchParameterCenter(valueMap, params, null);
 
+        String finder = null;
+
         for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
-                return new ArrayList<>(); //no need to search if connector is filtered out itself
+                return new SearchResult(); //no need to search if connector is filtered out itself
+            }
+            if (baseFilter instanceof LogEntryGeocacheFilter) {
+                finder = ((LogEntryGeocacheFilter) baseFilter).getFoundByUser();
             }
             fillForBasicFilter(baseFilter, params, valueMap, connector);
         }
 
         //do the search
-        return requestCaches(connector, params, valueMap, true);
+        final SearchResult result = new SearchResult(requestCaches(connector, params, valueMap, true));
+        if (finder != null) {
+            result.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, finder);
+        }
+        return result;
 
     }
 

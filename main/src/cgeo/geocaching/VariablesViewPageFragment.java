@@ -415,7 +415,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     }
 
     private void checkUnsavedChanges() {
-        if (adapter.variables != null && adapter.variables.hasUnsavedChanges()) {
+        if (adapter != null && adapter.variables != null && adapter.variables.hasUnsavedChanges()) {
             activity.ensureSaved();
             adapter.variables.saveState();
         }

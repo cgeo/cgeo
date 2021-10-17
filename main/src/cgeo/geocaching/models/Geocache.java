@@ -8,7 +8,6 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.ILoggingManager;
 import cgeo.geocaching.connector.capability.IFavoriteCapability;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.WatchListCapability;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -56,6 +55,7 @@ import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
@@ -95,6 +95,8 @@ import org.apache.commons.lang3.StringUtils;
  * Internal representation of a "cache"
  */
 public class Geocache implements IWaypoint {
+
+    public static final String SEARCHCONTEXT_FINDER = "sc_finder";
 
     private long updated = 0;
     private long detailedUpdate = 0;
@@ -189,6 +191,9 @@ public class Geocache implements IWaypoint {
     private Handler changeNotificationHandler = null;
 
     private CacheVariables variables;
+
+    //transient field, used for online search by finder only
+    private Bundle searchContext;
 
     public void setChangeNotificationHandler(final Handler newNotificationHandler) {
         changeNotificationHandler = newNotificationHandler;
@@ -379,6 +384,9 @@ public class Geocache implements IWaypoint {
         if (assignedEmoji == 0) {
             assignedEmoji = other.assignedEmoji;
         }
+        if (searchContext == null) {
+            searchContext = other.searchContext;
+        }
 
         this.eventTimeMinutes = null; // will be recalculated if/when necessary
         return isEqualTo(other);
@@ -452,7 +460,8 @@ public class Geocache implements IWaypoint {
                 Objects.equals(inventory, other.inventory) &&
                 Objects.equals(logCounts, other.logCounts) &&
                 Objects.equals(hasLogOffline, other.hasLogOffline) &&
-                finalDefined == other.finalDefined;
+                finalDefined == other.finalDefined &&
+                searchContext == other.searchContext;
     }
 
     public boolean hasTrackables() {
@@ -819,10 +828,6 @@ public class Geocache implements IWaypoint {
 
     public String getPersonalNote() {
         return this.personalNote.getNote();
-    }
-
-    public boolean supportsCachesAround() {
-        return getConnector() instanceof ISearchByCenter;
     }
 
     public boolean supportsNamechange() {
@@ -2206,5 +2211,15 @@ public class Geocache implements IWaypoint {
             variables = new CacheVariables(this.geocode);
         }
         return variables;
+    }
+
+    /** used for online search metainfos (e.g. finder) */
+    public Bundle getSearchContext() {
+        return searchContext;
+    }
+
+    /** used for online search metainfos (e.g. finder) */
+    public void setSearchContext(final Bundle searchContext) {
+        this.searchContext = searchContext;
     }
 }

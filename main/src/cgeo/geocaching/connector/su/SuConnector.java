@@ -11,11 +11,8 @@ import cgeo.geocaching.connector.capability.IFavoriteCapability;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.IOAuthCapability;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
-import cgeo.geocaching.connector.capability.ISearchByKeyword;
-import cgeo.geocaching.connector.capability.ISearchByOwner;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.IVotingCapability;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
@@ -24,7 +21,6 @@ import cgeo.geocaching.connector.oc.OCApiConnector.OAuthLevel;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LogEntry;
@@ -45,7 +41,7 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class SuConnector extends AbstractConnector implements ISearchByCenter, ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByKeyword, ISearchByOwner, ISearchByFilter, IFavoriteCapability, IVotingCapability, IIgnoreCapability {
+public class SuConnector extends AbstractConnector implements ISearchByGeocode, ISearchByViewPort, ILogin, IOAuthCapability, WatchListCapability, PersonalNoteCapability, ISearchByFilter, IFavoriteCapability, IVotingCapability, IIgnoreCapability {
 
     private static final CharSequence PREFIX_MULTISTEP_VIRTUAL = "MV";
     private static final CharSequence PREFIX_TRADITIONAL = "TR";
@@ -248,22 +244,6 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         }
     }
 
-    @Override
-    @NonNull
-    public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        try {
-            return new SearchResult(SuApi.searchByCenter(center, 20, this));
-        } catch (final SuApi.NotAuthorizedException e) {
-            return new SearchResult(StatusCode.NOT_LOGGED_IN);
-        } catch (final SuApi.ConnectionErrorException e) {
-            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
-        } catch (final Exception e) {
-            Log.e("SuConnector.searchByCenter failed: ", e);
-            return new SearchResult(StatusCode.UNKNOWN_ERROR);
-        }
-
-    }
-
     @NonNull
     @Override
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
@@ -373,34 +353,6 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         return 9500;
     }
 
-    @Override
-    public SearchResult searchByKeyword(@NonNull final String keyword) {
-        try {
-            return new SearchResult(SuApi.searchByKeyword(keyword, this));
-        } catch (final SuApi.NotAuthorizedException e) {
-            return new SearchResult(StatusCode.NOT_LOGGED_IN);
-        } catch (final SuApi.ConnectionErrorException e) {
-            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
-        } catch (final Exception e) {
-            Log.e("SuConnector.searchByKeyword failed: ", e);
-            return new SearchResult(StatusCode.UNKNOWN_ERROR);
-        }
-    }
-
-    @Override
-    public SearchResult searchByOwner(@NonNull final String owner) {
-        try {
-            return new SearchResult(SuApi.searchByOwner(owner, this));
-        } catch (final SuApi.NotAuthorizedException e) {
-            return new SearchResult(StatusCode.NOT_LOGGED_IN);
-        } catch (final SuApi.ConnectionErrorException e) {
-            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
-        } catch (final Exception e) {
-            Log.e("SuConnector.searchByOwner failed: ", e);
-            return new SearchResult(StatusCode.UNKNOWN_ERROR);
-        }
-    }
-
     /**
      * Add the cache to favorites
      *
@@ -506,8 +458,8 @@ public class SuConnector extends AbstractConnector implements ISearchByCenter, I
         SuApi.setIgnoreState(cache, true);
         return true;
     }
-    
-    
+
+
     @Override
     public boolean canRemoveFromIgnoreCache(@NonNull final Geocache cache) {
         return true;

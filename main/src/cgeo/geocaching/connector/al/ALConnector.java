@@ -4,13 +4,11 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.AbstractConnector;
-import cgeo.geocaching.connector.capability.ISearchByCenter;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
 import cgeo.geocaching.connector.capability.ISearchByGeocode;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
-import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
@@ -27,7 +25,7 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
-public class ALConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByCenter, ISearchByViewPort {
+public class ALConnector extends AbstractConnector implements ISearchByGeocode, ISearchByFilter, ISearchByViewPort {
 
     @NonNull
     private static final String CACHE_URL = "https://adventurelab.page.link/";
@@ -130,16 +128,6 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
         searchResult.setTotalCountGC(caches.size());
         return searchResult.putInCacheAndLoadRating();
     }
-
-    @Override
-    @NonNull
-    public SearchResult searchByCenter(@NonNull final Geopoint center) {
-        final Collection<Geocache> caches = ALApi.searchByCenter(center);
-        final SearchResult searchResult = new SearchResult(caches);
-        searchResult.setTotalCountGC(caches.size());
-        return searchResult.putInCacheAndLoadRating();
-    }
-
 
     @NonNull
     @Override

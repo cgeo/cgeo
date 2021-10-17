@@ -134,7 +134,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         menu.findItem(fromPopup ? R.id.menu_share_from_popup : R.id.menu_share).setVisible(!InternalConnector.getInstance().canHandle(cache.getGeocode()));
         // submenu advanced
         menu.findItem(R.id.menu_calendar).setVisible(cache.canBeAddedToCalendar());
-        menu.findItem(fromPopup ? R.id.menu_caches_around_from_popup : R.id.menu_caches_around).setVisible(hasCoords && cache.supportsCachesAround());
+        menu.findItem(fromPopup ? R.id.menu_caches_around_from_popup : R.id.menu_caches_around).setVisible(hasCoords);
         menu.findItem(R.id.menu_upload_bookmarklist).setVisible(Settings.isGCConnectorActive() && Settings.isGCPremiumMember() && ConnectorFactory.getConnector(cache) instanceof GCConnector);
     }
 

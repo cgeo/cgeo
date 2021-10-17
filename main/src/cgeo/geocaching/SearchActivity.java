@@ -191,6 +191,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         // standard searches
         setBasicSearchAction(binding.address, binding.searchAddress, this::findByAddressFn, null);
         setBasicSearchAction(binding.owner, binding.searchOwner, this::findByOwnerFn, DataStore::getSuggestionsOwnerName);
+        setBasicSearchAction(binding.finder, binding.searchFinder, this::findByFinderFn, DataStore::getSuggestionsFinderName);
         setBasicSearchAction(null, binding.searchFilter, this::findByFilterFn, null);
         setBasicSearchAction(binding.trackable, binding.displayTrackable, this::findTrackableFn, DataStore::getSuggestionsTrackableCode);
 
@@ -345,6 +346,22 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         }
 
         CacheListActivity.startActivityOwner(this, usernameText);
+        ActivityMixin.finishWithFadeTransition(this);
+    }
+
+    private void findByFinderFn() {
+        findByFinderFn(binding.finder.getText().toString());
+    }
+
+    private void findByFinderFn(final String userName) {
+        final String usernameText = StringUtils.trimToEmpty(userName);
+
+        if (StringUtils.isBlank(usernameText)) {
+            SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_user).show();
+            return;
+        }
+
+        CacheListActivity.startActivityFinder(this, usernameText);
         ActivityMixin.finishWithFadeTransition(this);
     }
 

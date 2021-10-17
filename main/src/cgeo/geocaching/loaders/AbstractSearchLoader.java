@@ -4,7 +4,6 @@ import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.filters.core.IGeocacheFilter;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -19,25 +18,6 @@ import io.reactivex.rxjava3.functions.Function;
 
 public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult> {
 
-
-    public enum CacheListLoaderType {
-        OFFLINE,
-        POCKET,
-        HISTORY,
-        NEAREST,
-        COORDINATE,
-        KEYWORD,
-        ADDRESS,
-        FINDER,
-        SEARCH_FILTER,
-        OWNER,
-        MAP,
-        NEXT_PAGE;
-
-        public int getLoaderId() {
-            return ordinal();
-        }
-    }
 
     private final WeakReference<Activity> activityRef;
     private SearchResult search;
@@ -134,7 +114,4 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
         this.afterLoadAction = afterLoadAction;
     }
 
-    public IGeocacheFilter getAdditionalFilterParameter() {
-        return null;
-    }
 }

@@ -130,6 +130,10 @@ public class FilterViewHolderCreator {
                 break;
         }
 
+        if (result == null) {
+            return null;
+        }
+
         result.init(type, activity);
         if (filter != null) {
             fillViewFrom(result, filter);

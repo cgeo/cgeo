@@ -155,6 +155,28 @@
             <View style="@style/separator_horizontal" />
             <TextView
                 style="@style/separator_horizontal_headline"
+                android:text="@string/search_finder" />
+        </RelativeLayout>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
+            <AutoCompleteTextView
+                android:id="@+id/finder"
+                style="@style/textinput_embedded"
+                android:hint="@string/search_finder_prefill"
+                android:imeOptions="actionGo" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Button
+            android:id="@+id/search_finder"
+            style="@style/button_full"
+            android:text="@string/search_finder_button" />
+        <!-- ** -->
+
+
+        <RelativeLayout style="@style/separator_horizontal_layout" >
+            <View style="@style/separator_horizontal" />
+            <TextView
+                style="@style/separator_horizontal_headline"
                 android:text="@string/search_tb" />
         </RelativeLayout>
 
