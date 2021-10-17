@@ -428,9 +428,9 @@ public final class MapMarkerUtils {
      */
     @NonNull
     private static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
-        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null));
+        final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerId(), null)).mutate();
         DrawableCompat.setTint(dotMarker, ResourcesCompat.getColor(res, R.color.dotBg_waypointOutline, null));
-        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null));
+        final Drawable dotBackground = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getMapDotMarkerBackgroundId(), null)).mutate();
         DrawableCompat.setTint(dotBackground, ResourcesCompat.getColor(res, R.color.dotBg_waypointBg, null));
 
         final Drawable dotIcon = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.getWaypointType().dotMarkerId, null));
