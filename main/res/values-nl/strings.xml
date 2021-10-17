@@ -1418,6 +1418,9 @@
     <string name="search_hbu">Verborgen door</string>
     <string name="search_hbu_prefill">Eigenaar</string>
     <string name="search_hbu_button">Zoeken op eigenaar</string>
+    <string name="search_finder">Gevonden door</string>
+    <string name="search_finder_prefill">Vinder</string>
+    <string name="search_finder_button">Zoek op vindernaam</string>
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Zoeken op filter</string>
     <string name="search_filter_info_message" formatted="false">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
@@ -1478,6 +1481,7 @@
     <!-- user -->
     <string name="user_menu_title">Over</string>
     <string name="user_menu_view_hidden">Caches verstopt</string>
+    <string name="user_menu_view_found">Gevonden caches</string>
     <string name="user_menu_open_browser">Open profiel in browser</string>
     <string name="user_menu_send_message">Verstuur bericht</string>
     <string name="user_menu_send_email">E-mail verzenden</string>
