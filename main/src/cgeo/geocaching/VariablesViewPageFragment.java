@@ -192,7 +192,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             viewHolder.binding.variableFunction.setOnClickListener(d -> {
                 final List<CalculatorFunction> functions = CalculatorFunction.valuesAsUserDisplaySortedList();
                 SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
-                    .selectSingle(functions, (f, i) -> getFunctionDisplayString(f), -1, false, (f, i) -> {
+                    .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, false, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
                         final String newFormula = f.getFunctionInsertString();
                         final EditText editText = viewHolder.binding.variableFormula.getEditText();
                         editText.setText(newFormula);
@@ -219,8 +219,13 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
         private static TextParam getFunctionDisplayString(final CalculatorFunction f) {
             return
-                TextParam.text("**" + f.getUserDisplayableString() + "** (`" + StringUtils.join(f.getNames(), ",") + "`)")
+                TextParam.text("-   *" + f.getUserDisplayableString() + "* (`" + StringUtils.join(f.getNames(), ",") + "`)")
                     .setMarkdown(true);
+        }
+
+        private static TextParam getFunctionGroupDisplayString(final CalculatorFunction.CalculatorGroup g) {
+            return
+                TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
         }
 
         @Override

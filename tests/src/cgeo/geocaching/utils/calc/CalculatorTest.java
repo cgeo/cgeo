@@ -157,4 +157,14 @@ public class CalculatorTest {
         assertThat(neededVars("Test123$one")).containsExactlyInAnyOrder("T", "e", "s", "t", "one");
     }
 
+    @Test
+    public void value() {
+        assertThat(Value.of(345).getAsInt()).isEqualTo(345);
+        assertThat(Value.of("345").getAsInt()).isEqualTo(345);
+        assertThat(Value.of(345).isInteger()).isTrue();
+        assertThat(Value.of("345").isInteger()).isTrue();
+        assertThat(Value.of("345b").isInteger()).isFalse();
+        assertThat(Value.of("abcd").isInteger()).isFalse();
+    }
+
 }

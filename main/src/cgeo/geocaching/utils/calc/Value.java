@@ -70,7 +70,7 @@ public class Value {
                 asInteger = ((Number) raw).intValue();
             } else {
                 final double d = getAsDouble();
-                if (Math.abs(Math.round(d) - d) < DOUBLE_DELTA) {
+                if (isDouble() && (Math.abs(Math.round(d) - d) < DOUBLE_DELTA)) {
                     asInteger = (int) Math.round(d);
                 } else {
                     asInteger = Integer.MIN_VALUE;

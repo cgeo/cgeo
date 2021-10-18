@@ -14,6 +14,14 @@ public class CalculatorUtilsTest {
     }
 
     @Test
+    public void substring() {
+        assertThat(CalculatorUtils.substring("test", 1, 2)).isEqualTo("es");
+        assertThat(CalculatorUtils.substring(null, 1, 2)).isEqualTo("");
+        assertThat(CalculatorUtils.substring("t", 1, 2)).isEqualTo("");
+        assertThat(CalculatorUtils.substring("te", 1, 2)).isEqualTo("e");
+    }
+
+    @Test
     public void checksum() {
         assertThat(CalculatorUtils.checksum(255, false)).isEqualTo(12);
         assertThat(CalculatorUtils.checksum(255, true)).isEqualTo(3);
