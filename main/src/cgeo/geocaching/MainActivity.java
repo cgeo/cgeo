@@ -108,81 +108,83 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
         @Override
         public void handleMessage(final Message msg) {
-            final MainActivity activity = getReference();
-            if (activity != null) {
-                // Get active connectors with login status
-                final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
+            try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.UpdateUserInfoHandler.handleMessage")) {
+                final MainActivity activity = getReference();
+                if (activity != null) {
+                    // Get active connectors with login status
+                    final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
 
-                // Update UI
-                activity.binding.connectorstatusArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
-                    @Override
-                    public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
-                        View view = convertView;
+                    // Update UI
+                    activity.binding.connectorstatusArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
+                        @Override
+                        public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
+                            View view = convertView;
 
-                        if (view == null) {
-                            view = activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
+                            if (view == null) {
+                                view = activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
+                            }
+
+                            final ILogin connector = getItem(position);
+                            fillView(view, connector);
+                            return view;
+
                         }
 
-                        final ILogin connector = getItem(position);
-                        fillView(view, connector);
-                        return view;
+                        private void fillView(final View connectorInfo, final ILogin conn) {
 
-                    }
+                            final ImageView userAvartar = connectorInfo.findViewById(R.id.item_icon);
+                            final TextView userName = connectorInfo.findViewById(R.id.item_title);
+                            final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
+                            final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
 
-                    private void fillView(final View connectorInfo, final ILogin conn) {
+                            final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
+                            final StringBuilder userFoundCount = new StringBuilder();
 
-                        final ImageView userAvartar = connectorInfo.findViewById(R.id.item_icon);
-                        final TextView userName = connectorInfo.findViewById(R.id.item_title);
-                        final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
-                        final TextView connectorStatus = connectorInfo.findViewById(R.id.item_status);
+                            final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
+                            if (count >= 0) {
+                                userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
 
-                        final StringBuilder connInfo = new StringBuilder(conn.getNameAbbreviated()).append(Formatter.SEPARATOR).append(conn.getLoginStatusString());
-                        final StringBuilder userFoundCount = new StringBuilder();
-
-                        final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
-                        if (count >= 0) {
-                            userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
-
-                            if (Settings.isDisplayOfflineLogsHomescreen()) {
-                                final int offlinefounds = DataStore.getFoundsOffline(conn);
-                                if (offlinefounds > 0) {
-                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
+                                if (Settings.isDisplayOfflineLogsHomescreen()) {
+                                    final int offlinefounds = DataStore.getFoundsOffline(conn);
+                                    if (offlinefounds > 0) {
+                                        userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
+                                    }
                                 }
                             }
-                        }
 
-                        userName.setText(FoundNumCounter.getNotBlankUserName(conn));
+                            userName.setText(FoundNumCounter.getNotBlankUserName(conn));
 
-                        connectorStatus.setText(connInfo);
-                        connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
+                            connectorStatus.setText(connInfo);
+                            connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
-                        if (userFoundCount.toString().isEmpty()) {
-                            userFounds.setVisibility(View.GONE);
-                        } else {
-                            userFounds.setVisibility(View.VISIBLE);
-                            userFounds.setText(userFoundCount);
-                            userFounds.setOnClickListener(v -> {
-                                activity.startActivity(CacheListActivity.getHistoryIntent(activity));
-                                ActivityMixin.finishWithFadeTransition(activity);
-                            });
-                        }
+                            if (userFoundCount.toString().isEmpty()) {
+                                userFounds.setVisibility(View.GONE);
+                            } else {
+                                userFounds.setVisibility(View.VISIBLE);
+                                userFounds.setText(userFoundCount);
+                                userFounds.setOnClickListener(v -> {
+                                    activity.startActivity(CacheListActivity.getHistoryIntent(activity));
+                                    ActivityMixin.finishWithFadeTransition(activity);
+                                });
+                            }
 
-                        if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
-                            userAvartar.setVisibility(View.INVISIBLE);
+                            if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
+                                userAvartar.setVisibility(View.INVISIBLE);
 
-                            // images are cached by the HtmlImage class
-                            final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-                            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
+                                // images are cached by the HtmlImage class
+                                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
+                                AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
                                     () -> imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)),
                                     img -> {
                                         userAvartar.setVisibility(View.VISIBLE);
                                         userAvartar.setImageDrawable(img);
                                     });
-                        } else {
-                            userAvartar.setVisibility(View.GONE);
+                            } else {
+                                userAvartar.setVisibility(View.GONE);
+                            }
                         }
-                    }
-                });
+                    });
+                }
             }
         }
     }
