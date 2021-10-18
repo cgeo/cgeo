@@ -15,6 +15,7 @@ import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.os.Build;
+import android.os.Looper;
 import android.os.UserManager;
 import android.view.ViewConfiguration;
 
@@ -64,6 +65,8 @@ public class CgeoApplication extends Application {
 
             // Restore cookies
             Cookies.restoreCookies();
+
+            LooperLogger.startLogging(Looper.getMainLooper());
         }
     }
 
