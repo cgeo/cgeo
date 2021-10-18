@@ -917,7 +917,7 @@
     <string name="feature_search_center">Rechercher autour</string>
     <string name="feature_search_geocode">Rechercher ce code</string>
     <string name="feature_search_owner">Rechercher par Propriétaire</string>
-    <string name="feature_search_finder">Rechercher par Découvreur</string>
+    <string name="feature_search_finder">Rechercher par découvreur</string>
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
     <string name="init_maplines_title">Personnalisation des traits de la carte</string>
