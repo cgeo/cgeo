@@ -1,28 +1,19 @@
 package cgeo.geocaching.ui;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.ui.dialog.Dialogs;
-import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
-import android.content.DialogInterface;
-import android.graphics.Typeface;
-import android.text.SpannableStringBuilder;
-import android.text.style.StyleSpan;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Checkable;
 import android.widget.Spinner;
 import android.widget.TextView;
-import static android.text.Spanned.SPAN_INCLUSIVE_EXCLUSIVE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -30,8 +21,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Represents a standard CGeo Spinner item where user can select one of multiple values.
@@ -311,10 +300,8 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
     }
 
     private int getPositionFor(final T value, final int defaultValue) {
-        if (valuesToPosition.containsKey(value)) {
-            return valuesToPosition.get(value);
-        }
-        return defaultValue;
+        final Integer pos = valuesToPosition.get(value);
+        return pos == null ? defaultValue : pos;
     }
 
     /** displays data for selection in alert dialog. Used for textview-representation */
@@ -326,76 +313,18 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
             set(values.get(newPos));
         } else {
 
-            final AlertDialog.Builder alert = Dialogs.newBuilder(spinnerView.getContext());
+            final SimpleDialog sd = SimpleDialog.ofContext(spinnerView.getContext());
             if (this.textDialogTitle != null) {
-                alert.setTitle(this.textDialogTitle);
+                sd.setTitle(TextParam.text(this.textDialogTitle));
             }
 
-            final ImmutablePair<List<? extends CharSequence>, Map<Integer, Integer>> groupedData = createGroupedDisplayValues();
-
-            if (this.textHideSelectionMarker) {
-                //we cannot use alert.setItems() here, because this would lead to dialog closing if user selects "group" names!
-                final ArrayAdapter<CharSequence> adapter = new ArrayAdapter<>(spinnerView.getContext(),
-                    R.layout.select_dialog_item_material);
-                adapter.addAll(groupedData.left);
-                alert.setSingleChoiceItems(adapter, -1, (dialog, pos) -> handleItemSelection(groupedData, dialog, pos));
-            } else {
-                alert.setSingleChoiceItems(groupedData.left.toArray(new CharSequence[0]), getPositionFor(selectedItem, -1),
-                    (dialog, pos) -> handleItemSelection(groupedData, dialog, pos));
-            }
-            alert.create().show();
+            sd.selectSingleGrouped(values,
+                (v, i) -> TextParam.text((this.textGroupMapper == null ? "" : "   ") + displayMapper.call(v)),
+                getPositionFor(selectedItem, -1), !this.textHideSelectionMarker,
+                (v, i) -> this.textGroupMapper == null ? null : this.textGroupMapper.call(v),
+                s -> TextParam.text("**" + s + "**").setMarkdown(true), (dialog, pos) -> set(values.get(pos)));
         }
     }
 
-    private void handleItemSelection(final ImmutablePair<List<? extends CharSequence>, Map<Integer, Integer>> groupedData, final DialogInterface dialog, final int pos) {
-        final int realPos = groupedData.right == null ? pos : (groupedData.right.containsKey(pos) ? groupedData.right.get(pos) : -1);
-        if (realPos >= 0) {
-            set(values.get(realPos));
-            dialog.dismiss();
-        }
-    }
-
-    /** creates a group-including and group-styled list of elements along with a mapping from visual list to value indexes */
-    private ImmutablePair<List<? extends CharSequence>, Map<Integer, Integer>> createGroupedDisplayValues() {
-        final Map<String, List<ImmutablePair<Integer, String>>> groupedMapList = new HashMap<>();
-        int pos = 0;
-        for (T value : this.values) {
-            final String group = this.textGroupMapper == null ? null : this.textGroupMapper.call(value);
-            List<ImmutablePair<Integer, String>> groupList = groupedMapList.get(group);
-            if (groupList == null) {
-                groupList = new ArrayList<>();
-                groupedMapList.put(group, groupList);
-            }
-            groupList.add(new ImmutablePair<>(pos, displayValues.get(pos)));
-            pos++;
-        }
-
-        if (groupedMapList.size() <= 1) {
-            //no items at all or only only group (the later is far more likely) -> don't use groups at all
-            return new ImmutablePair<>(groupedMapList.isEmpty() ? Collections.emptyList() : this.displayValues, null);
-        }
-
-        //sort groups
-        final List<String> groupNameList = CollectionStream.of(groupedMapList.keySet()).map(s -> s == null ? "--" : s).toList();
-        TextUtils.sortListLocaleAware(groupNameList);
-
-        //construct result
-        final List<CharSequence> result = new ArrayList<>();
-        final Map<Integer, Integer> indexMap = new HashMap<>();
-        for (String group : groupNameList) {
-
-            //group name
-            final SpannableStringBuilder ssb = new SpannableStringBuilder();
-            ssb.append(group, new StyleSpan(Typeface.BOLD), SPAN_INCLUSIVE_EXCLUSIVE);
-            result.add(ssb);
-
-            for (ImmutablePair<Integer, String> valuePair : Objects.requireNonNull(TextUtils.sortListLocaleAware(groupedMapList.get(group), e -> e.right))) {
-                indexMap.put(result.size(), valuePair.left);
-                result.add("   " + valuePair.right);
-            }
-        }
-
-        return new ImmutablePair<>(result, indexMap);
-    }
 
 }
