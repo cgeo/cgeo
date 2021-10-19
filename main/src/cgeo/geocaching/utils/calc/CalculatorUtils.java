@@ -52,11 +52,23 @@ public class CalculatorUtils {
         return Value.of(containsString ? sb.toString() : Double.parseDouble(sb.toString()));
     }
 
-
     public static int random(final int max, final int min) {
         final int umax = max < 0 ? 10 : max;
         final int umin = Math.max(min, 0);
         return RANDOM.nextInt(umax - umin) + umin;
+    }
+
+    public static String substring(final String value, final int start, final int length) {
+        if (value == null || start >= value.length()) {
+            return "";
+        }
+        final int s = Math.max(0, start);
+        return value.substring(s, Math.min(Math.max(s + length, s), value.length()));
+    }
+
+    public static int valueChecksum(final Value value, final boolean iterative) {
+        final int cs = value.isInteger() ? checksum(value.getAsInt(), false) : letterValue(value.getAsString());
+        return iterative ? checksum(cs, true) : cs;
     }
 
     public static int checksum(final int value, final boolean iterative) {

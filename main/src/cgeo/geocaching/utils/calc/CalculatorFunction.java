@@ -16,37 +16,63 @@ import java.util.Map;
 
 public enum CalculatorFunction {
 
-    SQRT("sqrt", 0, "Square Root", null, 0,
+    SQRT("sqrt", CalculatorGroup.SIMPLE_NUMERIC, 0, "Square Root", null, 0,
         singleValueNumericFunction(Math::sqrt)),
-    SIN("sin", 0, "Sinus", null, 0,
+    SIN("sin", CalculatorGroup.SIMPLE_NUMERIC, 0, "Sinus", null, 0,
         singleValueNumericFunction(p -> Math.sin(Math.toRadians(p)))),
-    COS("cos", 0, "Cosinus", null, 0,
+    COS("cos", CalculatorGroup.SIMPLE_NUMERIC, 0, "Cosinus", null, 0,
         singleValueNumericFunction(p -> Math.cos(Math.toRadians(p)))),
-    TAN("tan", 0, "Tangens", null, 0,
+    TAN("tan", CalculatorGroup.SIMPLE_NUMERIC, 0, "Tangens", null, 0,
         singleValueNumericFunction(p -> Math.tan(Math.toRadians(p)))),
-    ABS("abs", 0, "Absolute Value", null, 0,
+    ABS("abs", CalculatorGroup.SIMPLE_NUMERIC, 0, "Absolute Value", null, 0,
         singleValueNumericFunction(Math::round)),
-    ROUND("round", 0, "Round", null, 0,
+    ROUND("round", CalculatorGroup.SIMPLE_NUMERIC, 0, "Round", null, 0,
         singleValueNumericFunction(Math::round)),
 
-    RANDOM("random", 0, "Random Integer Number", null, 0, p -> Value.of(CalculatorUtils.random(p.getAsInt(0, -1), p.getAsInt(1, -1)))),
+    RANDOM("random", CalculatorGroup.COMPLEX_NUMERIC, 0, "Random Integer Number", null, 0, p -> Value.of(CalculatorUtils.random(p.getAsInt(0, -1), p.getAsInt(1, -1)))),
 
-    LENGTH("length", 0, "String Length", "''", 1,
+    LENGTH("length", CalculatorGroup.SIMPLE_STRING, 0, "String Length", "''", 1,
         singleValueStringFunction(String::length)),
-    ROT13("rot13", 0, "Rotate String characters by 13", "''", 1,
+    SUBSTRING(new String[]{"substring", "sub"}, CalculatorGroup.SIMPLE_STRING, 0, "Substring", "'';0;1", 1,
+        minMaxParamFunction(1, 3, p -> CalculatorUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
+
+
+    ROT13("rot13", CalculatorGroup.COMPLEX_STRING, 0, "Rotate String characters by 13", "''", 1,
         minMaxParamFunction(1, 1, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), 13)))),
-    ROT("rot", 0, "Rotate String characters by parameter", "'';13", 1,
+    ROT("rot", CalculatorGroup.COMPLEX_STRING, 0, "Rotate String characters by parameter", "'';13", 1,
         minMaxParamFunction(1, 2, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 13))))),
-    CHECKSUM(new String[]{"checksum", "cs" }, 0, "Checksum", null, 0,
-        singleValueNumericFunction(p -> CalculatorUtils.checksum(p.intValue(), false))),
-    ICHECKSUM(new String[]{"ichecksum", "ics" }, 0, "Iterative Checksum", null, 0,
-        singleValueNumericFunction(p -> CalculatorUtils.checksum(p.intValue(), true))),
-    LETTERVALUE(new String[]{"lettervalue", "lv" }, 0, "Letter Value", "''", 1,
+    CHECKSUM(new String[]{"checksum", "cs" }, CalculatorGroup.COMPLEX_NUMERIC, 0, "Checksum", null, 0,
+        minMaxParamFunction(1, 1,  p -> CalculatorUtils.valueChecksum(p.get(0), false))),
+    ICHECKSUM(new String[]{"ichecksum", "ics" }, CalculatorGroup.COMPLEX_NUMERIC, 0, "Iterative Checksum", null, 0,
+        minMaxParamFunction(1, 1,  p -> CalculatorUtils.valueChecksum(p.get(0), true))),
+    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv" }, CalculatorGroup.COMPLEX_STRING, 0, "Letter Value", "''", 1,
         singleValueStringFunction(CalculatorUtils::letterValue));
+
+    public enum CalculatorGroup {
+        SIMPLE_NUMERIC(0, "Simple Numeric"),
+        COMPLEX_NUMERIC(0, "Complex Numeric"),
+        SIMPLE_STRING(0, "Simple String"),
+        COMPLEX_STRING(0, "Complex String");
+
+        @StringRes
+        private final int resId;
+        private final String resFallback;
+
+        CalculatorGroup(@StringRes final int resId, final String resFallback) {
+            this.resId = resId;
+            this.resFallback = resFallback;
+        }
+
+        public String getUserDisplayableString() {
+            return LocalizationUtils.getStringWithFallback(this.resId, this.resFallback);
+        }
+    }
 
 
     private final String[] names;
-    private final Func1<ValueList, Value> function;
+    private final Func1<ValueList, Object> function;
+
+    private final CalculatorGroup group;
 
     @StringRes
     private final int resId;
@@ -65,12 +91,13 @@ public enum CalculatorFunction {
         }
     }
 
-    CalculatorFunction(final String name, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Value> function) {
-        this(new String[]{name}, resId, resFallback, insertPattern, insertIndex, function);
+    CalculatorFunction(final String name, final CalculatorGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Object> function) {
+        this(new String[]{name}, group, resId, resFallback, insertPattern, insertIndex, function);
     }
 
-    CalculatorFunction(final String[] names, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Value> function) {
+    CalculatorFunction(final String[] names, final CalculatorGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Object> function) {
         this.names = names;
+        this.group = group;
         this.function = function;
         this.resId = resId;
         this.resFallback = resFallback;
@@ -98,8 +125,13 @@ public enum CalculatorFunction {
         return getMainName().length() + 1 + Math.max(insertIndex, 0);
     }
 
+    public CalculatorGroup getGroup() {
+        return group;
+    }
+
     public Value execute(final ValueList params) throws CalculatorException {
-        return function.call(params);
+        final Object result = function.call(params);
+        return result instanceof Value ? (Value) result : Value.of(result);
     }
 
     @Nullable
@@ -113,7 +145,7 @@ public enum CalculatorFunction {
         return list;
     }
 
-    private static Func1<ValueList, Value> singleValueNumericFunction(final Func1<Double, Number> numericFunction) {
+    private static Func1<ValueList, Object> singleValueNumericFunction(final Func1<Double, Number> numericFunction) {
         return params -> {
             params.checkCount(1, 1);
             params.checkAllDouble();
@@ -121,14 +153,14 @@ public enum CalculatorFunction {
         };
     }
 
-    private static Func1<ValueList, Value> minMaxParamFunction(final int min, final int max, final Func1<ValueList, Value> function) {
+    private static Func1<ValueList, Object> minMaxParamFunction(final int min, final int max, final Func1<ValueList, Object> function) {
         return params -> {
             params.checkCount(min, max);
             return function.call(params);
         };
     }
 
-    private static Func1<ValueList, Value> singleValueStringFunction(final Func1<String, Object> stringFunction) {
+    private static Func1<ValueList, Object> singleValueStringFunction(final Func1<String, Object> stringFunction) {
         return params -> {
             params.checkCount(1, 1);
             return Value.of(stringFunction.call(params.get(0).getAsString()));
