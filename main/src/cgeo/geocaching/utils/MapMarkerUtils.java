@@ -334,8 +334,8 @@ public final class MapMarkerUtils {
             final LogType offlineLogType = cache.getOfflineLogType();
             // logs of type NOTE may have a NA/NM log attached to them
             if (offlineLogType.isFoundLog()) {
-                dotIcon = R.drawable.dot_found_offline;
-                tintColor = R.color.dotBg_found;
+                dotIcon = R.drawable.dot_found;
+                tintColor = R.color.dotBg_foundOffline;
             } else if (offlineLogType == LogType.DIDNT_FIND_IT) {
                 dotIcon = R.drawable.dot_not_found_offline;
                 tintColor = R.color.dotBg_notFound;
@@ -357,8 +357,6 @@ public final class MapMarkerUtils {
             }
         } else if (cache.hasUserModifiedCoords()) {
             dotIcon = R.drawable.dot_marker_usermodifiedcoords;
-        } else if (cache.hasFinalDefined()) {
-            dotIcon = R.drawable.dot_marker_hasfinal;
         }
 
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
