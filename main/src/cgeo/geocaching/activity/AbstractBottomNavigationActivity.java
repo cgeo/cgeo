@@ -40,6 +40,8 @@ import androidx.core.graphics.drawable.RoundedBitmapDrawable;
 import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.util.Consumer;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.google.android.material.navigation.NavigationBarView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -68,6 +70,11 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     private final ConnectivityChangeReceiver connectivityChangeReceiver = new ConnectivityChangeReceiver();
     private final Handler loginHandler = new Handler();
+
+    private static final AtomicInteger LOGINS_IN_PROGRESS = new AtomicInteger(0);
+
+    private static final HtmlImage AVATAR_IMAGE_GETTER = new HtmlImage(HtmlImage.SHARED, false, false, false);
+
 
     @Override
     public void setContentView(final View contentView) {
@@ -108,11 +115,14 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             // Show user avatar in ActionBar
             for (ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
                 if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
-                    // images are cached by the HtmlImage class
-                    final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
                     final int scaledSize = (int) getResources().getDimension(R.dimen.toolbarAvatarSize);
                     AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                            () -> imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)),
+                            () -> {
+                                //we need to use a static global HtmlImageGetter, HTMLImage-caching does not work if instance is recreated
+                                synchronized (AVATAR_IMAGE_GETTER) {
+                                    return AVATAR_IMAGE_GETTER.getDrawable(Settings.getAvatarUrl((IAvatar) conn));
+                                }
+                            },
                             img -> setHomeAsUpIndicator(Bitmap.createScaledBitmap(img.getBitmap(), scaledSize, scaledSize, true)));
 
                     return;
@@ -326,9 +336,20 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     }
 
     private static void startBackgroundLogin(@Nullable final Handler updateUserInfoHandler) {
+
+        final ILogin[] loginConns = ConnectorFactory.getActiveLiveConnectors();
+
+        //ensure that login is not done while another login is still in progress
+        synchronized (LOGINS_IN_PROGRESS) {
+            if (LOGINS_IN_PROGRESS.get() > 0) {
+                return;
+            }
+            LOGINS_IN_PROGRESS.set(loginConns.length);
+        }
+
         final boolean mustLogin = ConnectorFactory.mustRelog();
 
-        for (final ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
+        for (final ILogin conn : loginConns) {
             if (mustLogin || !conn.isLoggedIn()) {
                 AndroidRxUtils.networkScheduler.scheduleDirect(() -> {
                     if (mustLogin) {
@@ -336,6 +357,8 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
                         conn.logout();
                     }
                     conn.login();
+
+                    LOGINS_IN_PROGRESS.addAndGet(-1);
 
                     if (updateUserInfoHandler != null) {
                         updateUserInfoHandler.sendEmptyMessage(-1);

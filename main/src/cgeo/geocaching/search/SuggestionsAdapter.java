@@ -21,7 +21,8 @@ import org.apache.commons.lang3.StringUtils;
 public class SuggestionsAdapter extends CursorAdapter {
 
     public SuggestionsAdapter(final Context context) {
-        super(context, query(""), 0);
+        //initialize with empty cursor to reduce long startup time problem (see #11227)
+        super(context, new SearchSuggestionCursor(), 0);
     }
 
     @Override
