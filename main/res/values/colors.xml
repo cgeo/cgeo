@@ -55,6 +55,7 @@
     <color name="cacheType_waypoint">#ffffffff</color>
 
     <color name="dotBg_found">#fffdd835</color>
+    <color name="dotBg_foundOffline">#ffF57C00</color>
     <color name="dotBg_notFound">#ff448AFF</color>
     <color name="dotBg_calendar">#ffD32F2F</color>
     <color name="dotBg_usermodifiedCoords">#ff303F9F</color>
