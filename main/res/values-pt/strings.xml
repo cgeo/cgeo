@@ -862,7 +862,7 @@
     <string name="init_default_navigation_tool_2_description">Aqui pode seleccionar o seu segundo instrumento de navegação preferido. Active-o com um toque longo no ícone de navegação, ao lado do título da cache.</string>
     <string name="init_navigation_menu_description">Aqui pode seleccionar, de entre os modos de navegação disponíveis, quais serão mostrados no menu de navegação para uma cache ou um ponto adicional. As opções a cinzento não estão instaladas neste dispositivo.</string>
     <string name="init_debug_title">Informação de depuração</string>
-    <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e só é recomendado se for solicitado o envio do registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
+    <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e apenas é recomendada caso lhe seja solicitado que envie um registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
     <string name="init_debug">Activar depuração</string>
     <string name="init_dbonsdcard_title">Localização da base de dados</string>
     <string name="init_dbonsdcard_note">Pode armazenar a base de dados c:geo internamente no sistema, ou dentro de uma pasta no armazenamento do utilizador. Recomendamos activar esta opção apenas se precisar, com regularidade, de aceder manualmente ao seu ficheiro da base de dados.</string>

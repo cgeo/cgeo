@@ -1117,10 +1117,12 @@
     <string name="cache_images">Görseller</string>
     <string name="cache_advanced">Gelişmiş</string>
     <string name="cache_waypoints">Yol noktaları</string>
+    <string name="cache_variables">Değişkenler</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Yol noktaları (%d)</string>
     <string name="cache_waypoints_add">Yol noktası ekle</string>
     <string name="cache_waypoints_add_currentLocation">Mevcut konumu ekle</string>
     <string name="cache_waypoints_add_fromclipboard">Panodan ekle</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Ziyaret edilen yol noktalarını gizle</string>
     <string name="cache_waypoints_remove_original_waypoint">Yol noktası panodan bu cache\'e kopyalandı.\n\nOrijinal yol noktası kaldırılsın mı?</string>
     <string name="cache_hint">İpucu</string>
     <string name="cache_hint_not_available">İpucu yok</string>
@@ -2020,6 +2022,7 @@
     <string name="download_confirmation">%1$s\"%2$s\" dosyasını indiriyor musunuz?%3$s</string>
     <string name="download_confirmation_updates">Şunlar için güncellemeler bulundu:\n%1$s\n\nGüncellemeyi istiyor musunuz?%2$s</string>
     <string name="download_warning">Bu ağ bağlantınıza bağlı olarak uzun sürebilir ve tarifenize belirli ücretler yansıyabilir.</string>
+    <string name="download_error">#%d hatasıyla indirme başarısız oldu</string>
     <string name="downloadmap_handling">İndirme, sisteminizin indirme yöneticisiyle arka planda çalışacaktır. İndirme başladığında bildirim göreceksiniz (biraz sürebilir).</string>
     <string name="button_continue">Devam et</string>
     <string name="downloadmap_onedirup">(bir seviye yukarı)</string>

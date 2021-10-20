@@ -1119,10 +1119,12 @@
     <string name="cache_images">Imatges</string>
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
+    <string name="cache_variables">Variables</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punts de ruta (%d)</string>
     <string name="cache_waypoints_add">Afegeix punt de ruta</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Amaga punts ruta visitats</string>
     <string name="cache_waypoints_remove_original_waypoint">El punt de ruta s\'ha copiat del porta-retalls a aquest catxé. \n\nVoleu suprimir el punt de ruta original?</string>
     <string name="cache_hint">Pista</string>
     <string name="cache_hint_not_available">No hi ha cap pista disponible</string>
@@ -2018,6 +2020,7 @@
     <string name="download_confirmation">%1$sBaixeu el fitxer \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">S\'han trobat actualitzacions de:\n%1$s\n\nVoleu actualitzar?%2$s</string>
     <string name="download_warning">Això pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.</string>
+    <string name="download_error">La descàrrega ha fallat amb l\'error #%d</string>
     <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un nivell més alt)</string>

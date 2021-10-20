@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Skrzynka</string>
     <string name="detail">Szczegóły</string>
@@ -10,6 +11,7 @@
     <string name="about">O c:geo</string>
     <string name="latitude">Szerokość geograficzna</string>
     <string name="longitude">Długość geograficzna</string>
+    <string name="latlongitude">Szerokość\nDługość geograficzna</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Ustawienia</string>
     <!-- caches -->
@@ -37,6 +39,7 @@
     <string name="userdefined">Skrzynka zdefiniowana przez użytkownika</string>
     <string name="unknown">Nietypowa</string>
     <string name="all_types_short">Wszystkie</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Zagadkowa</string>
     <string name="letterbox_short">Letterbox</string>
@@ -177,6 +180,9 @@
     <string name="log_problem_archive_label">Cache powinien zostać archiwizowany</string>
     <string name="log_problem_archive_text">Ten geocacher poinformował, że ten cache powinien być archiwizowany. Recenzent został powiadomiony.</string>
     <string name="log_image_scale_option_noscaling">Brak skalowania</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">skalowane</string>
+    <string name="log_image_info_notscaled">nie skalowane</string>
     <string name="log_image_titleprefix">Zdjęcie</string>
     <string name="datetime_nodateset_display">Nie ustawiono daty</string>
     <!-- translation -->
@@ -320,7 +326,10 @@
     <string name="menu_history">Historia</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Listy zakładek</string>
     <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
+    <string name="menu_invert_order">Odwróć kolejność</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa online</string>
     <string name="caches_nearby_button">Najbliższe</string>
@@ -352,12 +361,14 @@
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
     <string name="caches_sort_distance">Odległość</string>
+    <string name="caches_sort_distance_target">Odległość do celu</string>
     <string name="caches_sort_difficulty">Trudność</string>
     <string name="caches_sort_terrain">Teren</string>
     <string name="caches_sort_size">Rozmiar</string>
     <string name="caches_sort_favorites">Ulubione</string>
     <string name="caches_sort_favorites_ratio">Ulubione [%]</string>
     <string name="caches_sort_name">Nazwa</string>
+    <string name="caches_sort_geocode">Geokod</string>
     <string name="caches_sort_rating">Ocena</string>
     <string name="caches_sort_vote">Głosy (Twoja ocena)</string>
     <string name="caches_sort_inventory">Liczebność inwentarza</string>
@@ -376,6 +387,7 @@
     <string name="caches_remove_all_completely">Usuń wszystkie z urządzenia</string>
     <string name="caches_remove_selected_completely">Usuń wybrane z urządzenia</string>
     <string name="caches_delete_events">Usuń minione wydarzenia</string>
+    <string name="caches_upload_bookmarklist">Dodaj do listy zakładek</string>
     <string name="caches_upload_modifiedcoords">Prześlij nowe współrzędne</string>
     <string name="caches_upload_modifiedcoords_warning">Czy chcesz przesłać nowe współrzędne dla wszystkich (zaznaczonych) skrzynek i nadpisać istniejące współrzędne na serwerze? Ta operacja nie może zostać cofnięta.</string>
     <string name="caches_upload_allcoords">Prześlij współrzędne dla wszystkich skrzynek</string>
@@ -388,6 +400,7 @@
     <string name="caches_copy_selected">Skopiuj zaznaczone</string>
     <string name="caches_copy_all">Skopiuj wszystkie</string>
     <string name="caches_map_locus_export">Eksportuj do Locus</string>
+    <string name="caches_filter_menuitem">Filtr</string>
     <string name="caches_filter_title">Filtruj według</string>
     <string name="caches_removing_from_history">Usuwam z Historii…</string>
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
@@ -397,6 +410,7 @@
     <string name="caches_reset_cache_icons_title">Zresetuj ikony skrytek</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
+    <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
     <!-- caches lists -->
@@ -415,6 +429,7 @@
     <string name="list_dialog_remove_title">Usuń listę</string>
     <string name="list_dialog_remove_description">Czy na pewno chcesz usunąć aktualną listę skrzynek? Wszystkie skrzynki na tej liście zostaną przeniesione do listy \"Zapisane\".</string>
     <string name="list_dialog_remove_nowempty">Lista jest pusta. Czy chcesz usunąć aktualną listę?</string>
+    <string name="list_dialog_do_not_ask_me_again">Nie pytaj ponownie o tę listę</string>
     <string name="list_dialog_remove">Usuń</string>
     <string name="list_dialog_rename_title">Zmień nazwę listy</string>
     <string name="list_dialog_rename">Zmień nazwę</string>
@@ -438,6 +453,8 @@
     <string name="cache_filter_owner">Właściciel skrytki</string>
     <string name="cache_filter_difficulty">Trudność</string>
     <string name="cache_filter_terrain">Teren</string>
+    <string name="cache_filter_difficulty_terrain">Trudność / Teren</string>
+    <string name="cache_filter_rating">Ocena</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Atrybuty skrytki</string>
     <string name="cache_filter_favorites">Ulubione</string>
@@ -446,13 +463,21 @@
     <string name="cache_filter_logs_count">Liczba wpisów</string>
     <string name="cache_filter_last_found">Data ostatniego znalezienia</string>
     <string name="cache_filter_log_entry">Wpis dziennika</string>
+    <string name="cache_filter_location">Lokalizacja</string>
+    <string name="cache_filter_stored_lists">Zapisane listy</string>
+    <string name="cache_filter_origin">Współrzędne początkowe</string>
+    <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
     <string name="cache_filtergroup_basic">Podstawowy</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
     <string name="cache_filtergroup_userspecific">Własny</string>
+    <string name="cache_filter_contexttype_live_title">Filtr na żywo</string>
+    <string name="cache_filter_contexttype_offline_title">Filtr offline</string>
+    <string name="cache_filter_contexttype_transient_title">Filtr</string>
     <string name="cache_filter_include">Dołącz</string>
     <string name="cache_filter_exclude">Wyklucz</string>
     <string name="cache_filter_userdisplay_complex">Złożone</string>
     <string name="cache_filter_userdisplay_none">Brak</string>
+    <string name="cache_filter_userdisplay_not">NIE</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="one">%1$d element</item>
         <item quantity="few">%1$d elementy</item>
@@ -460,29 +485,77 @@
         <item quantity="other">%1$d elementów</item>
     </plurals>
     <string name="cache_filter_storage_delete_button">Usuń</string>
+    <string name="cache_filter_storage_clear_button">Wyczyść</string>
     <string name="cache_filter_storage_load_delete_title">Wczytaj lub usuń istniejący filtr</string>
+    <string name="cache_filter_storage_select_title">Wybierz filtr</string>
+    <string name="cache_filter_storage_delete_title">Usuń filtr</string>
+    <string name="cache_filter_storage_delete_message">Czy na pewno chcesz usunąć tę konfigurację filtra?</string>
+    <string name="cache_filter_storage_select_clear_title">Wybierz filtr lub wyczyść bieżący filtr</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Żaden filtr nie jest jeszcze przechowywany.</string>
     <string name="cache_filter_storage_save_title">Zapisz filtr pod nazwą</string>
     <string name="cache_filter_storage_save_confirm_title">Nadpisz zapisany filtr</string>
     <string name="cache_filter_storage_save_confirm_message">Filtr o nazwie \'%s\' i innej konfiguracji już istnieje. Nadpisać go?</string>
     <string name="cache_filter_stringfilter_matchcase">Dopasuj wielkość liter</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Wyszukaj tekst</string>
     <string name="cache_filter_stringfilter_info">Z opcją \'Wzorzec\', użyj wieloznacznika * i ?. * reprezentuje brak, jeden lub wiele znaków, ? reprezentuje pojedynczy znak. Przykładowo: wzorzec \'H?mburg*\' będzie pasował do np. \'Homburg\' lub \'Hamburg w nocy\', ale nie \'Dzień w Hamburg\' lub \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_is_not_present">Nie jest obecny</string>
     <string name="cache_filter_stringfilter_type_is_present">Jest obecny</string>
     <string name="cache_filter_stringfilter_type_contains">Zawiera</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Nie zawiera</string>
     <string name="cache_filter_stringfilter_type_starts_with">Zaczyna się od</string>
     <string name="cache_filter_stringfilter_type_ends_with">Kończy się na</string>
     <string name="cache_filter_stringfilter_type_pattern">Wzorzec</string>
     <string name="cache_filter_datefilter_label_from">Od:</string>
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Zaznacz wszystkie</string>
+    <string name="cache_filter_checkboxlist_add_items">Dodaj więcej elementów</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Dodaj wszystkie elementy</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">Dodaj elementy</string>
     <string name="cache_filter_favorites_absolute">Bezwzględne</string>
     <string name="cache_filter_favorites_percentage">Procent</string>
+    <string name="cache_filter_distance_coordinates">Współrzędne</string>
     <string name="cache_filter_distance_use_current_position">Użyj bieżącej lokalizacji</string>
     <string name="cache_filter_status_select_all">Wszystkie</string>
+    <string name="cache_filter_status_select_yes">Tak</string>
+    <string name="cache_filter_status_select_no">Nie</string>
+    <string name="cache_filter_status_select_label_found">Znaleziona</string>
+    <string name="cache_filter_status_select_label_owned">Własna</string>
+    <string name="cache_filter_status_select_label_stored">Zapisana</string>
+    <string name="cache_filter_status_select_label_favorite">Własne ulubione</string>
+    <string name="cache_filter_status_select_label_watchlist">Na liście obserwowanych</string>
+    <string name="cache_filter_status_select_label_premium">Premium</string>
+    <string name="cache_filter_status_select_label_has_trackable">Ma przedmiot podróżny</string>
+    <string name="cache_filter_status_select_label_has_own_vote">Ma własny głos</string>
+    <string name="cache_filter_status_select_label_has_offline_log">Ma wpis offline</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Ma dziennik offline</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe.\n\n Zagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt nawigacji ma wpisane współrzędne.</string>
+    <string name="cache_filter_status_active">Aktywna</string>
+    <string name="cache_filter_status_disabled">Wyłączona</string>
+    <string name="cache_filter_status_archived">Zarchiwizowana</string>
     <string name="cache_filter_status_exclude_active">Wyklucz aktywne</string>
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
+    <string name="cache_filter_log_entry_foundby">Znaleziona przez</string>
+    <string name="cache_filter_log_entry_logtext">Tekst dziennika</string>
+    <string name="cache_filter_stored_since_notstored">Nieprzechowywane</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 godzin</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0h</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 godzin</item>
+        <item>24 godziny</item>
+        <item>7 dni</item>
+        <item>30 dni</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8h</item>
+        <item>24h</item>
+        <item>7d</item>
+        <item>30d</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max">początek czasu</string>
+    <string name="cache_filter_stored_since_stored_max_short">maks</string>
     <!-- about -->
     <string name="about_version">Wersja</string>
     <string name="about_changelog">Zmiany</string>
@@ -519,6 +592,7 @@
     <string name="contribution_tester">Testerzy</string>
     <string name="contribution_support">wsparcie</string>
     <string name="contribution_documentation">dokumentacja</string>
+    <string name="contribution_infrastructure">infrastruktura</string>
     <string name="contribution_projectleader">lider projektu open source</string>
     <string name="contribution_graphics">grafika</string>
     <string name="debug_user_error_report_title">Zgłoś problem</string>
@@ -603,6 +677,7 @@
     <string name="init_authorization_credential_username">Nazwa użytkownia</string>
     <string name="init_authorization_credential_password">Hasło</string>
     <string name="settings_service_active">Aktywna</string>
+    <string name="settings_service_active_unavailable">Aktywne/Niedostępne</string>
     <string name="settings_navigation_disabled">Wygląda, że ta aplikacja nie jest zainstalowana</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
@@ -988,6 +1063,7 @@
     </plurals>
     <string name="last_day_available">dostępne ostatni dzień</string>
     <string name="cache_offline_refresh">Odśwież</string>
+    <string name="cache_offline_drop">Usuń z listy</string>
     <string name="cache_delete_userdefined_waypoints">Usuń punkty zdefiniowane przez użytkownika</string>
     <string name="cache_delete_userdefined_waypoints_confirm">Czy usunąć wszystkie zdefiniowane punkty użytkownika dla tej skrytki?\n\nPunkty zostaną zostaną natychmiast usunięte, nie można tego cofnąć.</string>
     <string name="cache_delete_userdefined_waypoints_note">Uwaga: Włączono \"Punkty orientacyjne z notatki\". Jeśli masz współrzędne w notatce rozpoznane przez c:geo, punkty orientacyjne zostaną dla nich automatycznie odtworzone. Możesz to wyłączyć w oknie dialogowym edycji notatki.</string>
@@ -1062,12 +1138,17 @@
     <string name="cache_images">Zdjęcia</string>
     <string name="cache_advanced">Zaawansowane</string>
     <string name="cache_waypoints">Punkty nawigacji</string>
+    <string name="cache_variables">Zmienne</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punkty nawigacji (%d)</string>
+    <string name="cache_waypoints_add">Dodaj punkt nawigacyjny</string>
     <string name="cache_waypoints_add_currentLocation">Dodaj bieżącą lokalizację</string>
     <string name="cache_waypoints_add_fromclipboard">Dodaj ze schowka</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Ukryj odwiedzone punkty nawigacji</string>
     <string name="cache_waypoints_remove_original_waypoint">Punkt nawigacyjny został skopiowany ze schowka do tej skrzynki.\n\nUsunąć oryginalny punkt?</string>
     <string name="cache_hint">Wskazówka</string>
     <string name="cache_hint_not_available">Brak podpowiedzi</string>
     <string name="cache_logs">Dziennik</string>
+    <string name="cache_latest_logs">Najnowsze logi</string>
     <string name="cache_logs_friends_and_own">Wpisy przyjaciół/własne</string>
     <string name="cache_dialog_loading_details">Ładuję szczegóły skrzynki…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Ładuję stronę</string>
@@ -1093,6 +1174,7 @@
     <string name="cache_dialog_favorite_remove_title">Ulubione</string>
     <string name="cache_dialog_favorite_remove_message">Usuwam skrzynkę z listy ulubionych…</string>
     <string name="cache_menu_navigate">Nawiguj</string>
+    <string name="cache_menu_target">Ustaw jako cel</string>
     <string name="cache_menu_navigation_drive">Nawigacja (samochodowa)</string>
     <string name="cache_menu_navigation_drive_select_target">Wybierz cel</string>
     <string name="cache_menu_navigation_walk">Nawigacja (pieszo)</string>
@@ -1107,6 +1189,7 @@
     <string name="cache_menu_map_ext">Inne aplikacje zewnętrzne</string>
     <string name="cache_menu_streetview">Street View</string>
     <string name="cache_menu_browser">Otwórz w przeglądarce</string>
+    <string name="no_browser_found">Nie znaleziono przeglądarki</string>
     <string name="cache_menu_open_with">Otwórz za pomocą…</string>
     <string name="cache_menu_visit">Wpisz wizytę</string>
     <string name="cache_log_too_long">c:geo nie mógł przesłać twojego logu, jest zbyt długi. Ale dziękujemy za próbę zapisu tak rozległego logu ;-)</string>
@@ -1146,7 +1229,10 @@
     <string name="cache_status_disabled">Niedostępna</string>
     <string name="cache_status_active">Aktywna</string>
     <string name="cache_status_premium">Tylko dla użytkowników Premium</string>
+    <string name="cache_geocode">Geokod</string>
     <string name="cache_name">Nazwa</string>
+    <string name="cache_name_set">Ustaw nazwę skrytki</string>
+    <string name="cache_name_updated">Zaktualizowano nazwę skrytki</string>
     <string name="cache_description_set">Ustaw opis skrytki</string>
     <string name="cache_description_updated">Zaktualizowano opis skrytki</string>
     <string name="cache_type">Typ</string>
@@ -1290,6 +1376,8 @@
     <string name="map_showc_own">Własne</string>
     <string name="map_showc_found">Znalezione</string>
     <string name="map_showc_disabled">Wyłączone</string>
+    <string name="map_showc_archived">Zarchiwizowane</string>
+    <string name="map_showc_found_offline">Znaleziono (offline)</string>
     <string name="map_showwp_original">Oryginalne</string>
     <string name="map_showwp_parking">Parking</string>
     <string name="map_showwp_visited">Odwiedzone</string>
@@ -1309,6 +1397,8 @@
     <string name="map_language">Język mapy</string>
     <string name="map_live_enable">Włącz online</string>
     <string name="map_live_disable">Wyłącz online</string>
+    <string name="map_live_disabled">Tryb „na żywo” wyłączony</string>
+    <string name="map_live_disabled_hint">Tryb „na żywo” jest wyłączony. Będziesz widzieć tylko zapisane skrytki. Użyj menu aby włączyć tryb „na żywo”.</string>
     <string name="map_as_list">Pokaż w postaci listy</string>
     <string name="map_select_multiple_items">Wybierz element</string>
     <string name="map_routing">Wyznaczanie trasy</string>
@@ -1321,18 +1411,28 @@
     <string name="map_show_caches_title">Pokaż skrytki:</string>
     <string name="map_show_waypoints_title">Pokaż punkty nawigacji:</string>
     <string name="map_show_other_title">Pokaż inne:</string>
+    <string name="map_settings_cache_filter_too_complex_title">Filtr skrytek jest zbyt złożony</string>
+    <string name="map_settings_cache_filter_too_complex_message">Obecny filtr skrytek jest zbyt skomplikowany, aby zastosować dodatkowe opcje. Zazwyczaj oznacza to, że filtr skrytek zawiera wyrażenia NOT lub OR zamiast prostej logiki AND.</string>
     <!-- search -->
     <string name="search_bar_hint">Szukaj skrytki/przedmioty podróżne</string>
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_coordinates_button">Szukaj według współrzędnych</string>
     <string name="search_address">Adres</string>
     <string name="search_address_button">Szukaj według adresu</string>
+    <string name="search_geo">Geokod</string>
+    <string name="search_geo_button">Szukaj po geokodzie</string>
+    <string name="search_geocode_from_clipboard">Geokod został wklejony ze schowka.</string>
+    <string name="search_kw">Słowo kluczowe</string>
     <string name="search_kw_prefill">Słowo kluczowe</string>
     <string name="search_kw_button">Szukaj wg słowa kluczowego</string>
     <string name="search_hbu">Ukryte przez</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
+    <string name="search_filter">Filtr</string>
+    <string name="search_filter_button">Szukaj według filtru</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtrów** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
+    <string name="search_filter_temporary_user_information_title">Nowe filtrowanie</string>
+    <string name="search_filter_temporary_user_information">c:geo wprowadził nowy system filtrowania, wspierając elastyczne, kombinowane i przechowywane filtry. \n\nGlobalny filtr można od teraz zmienić bezpośrednio na listach skrytek i mapie na żywo.</string>
     <string name="search_tb">Przedmioty podróżne</string>
     <string name="search_tb_hint">Identyfikacja przedmiotu podróżnego</string>
     <string name="search_tb_button">Szukaj przedmiotów podróżnych</string>
@@ -1344,6 +1444,13 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Lista zakładek</string>
     <string name="search_pocket_is_new">nowy</string>
+    <string name="search_pocket_loading">Wczytuję pocket queries</string>
+    <string name="search_bookmark_loading">Wczytywanie list zakładek</string>
+    <string name="search_bookmark_select">Wybierz listy zakładek</string>
+    <string name="search_bookmark_new">Utwórz nową listę zakładek</string>
+    <string name="search_bookmark_adding_caches_success">Wszystkie skrytki GC zostały dodane do wybranej listy zakładek</string>
+    <string name="search_bookmark_adding_caches_failed">Nie udało się dodać skrytek do listy zakładek</string>
+    <string name="search_bookmark_create_new_failed">Nie udało się utworzyć nowej listy zakładek</string>
     <!-- trackable -->
     <string name="trackable">Przedmiot podróżny</string>
     <string name="trackable_details_loading">Ładuje szczegóły przedmiotu podróżnego…</string>
@@ -1891,6 +1998,8 @@
         <item quantity="other">Trasa załadowana z %d punktami trasy</item>
     </plurals>
     <string name="center_on_route">Wyśrodkuj na trasie</string>
+    <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
+    <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
     <!-- individual track -->
     <string name="individual_track">Ścieżka/trasa GPX</string>
     <string name="map_load_track">Załaduj ścieżkę/trasę z GPX</string>
@@ -1964,6 +2073,7 @@
     <string name="download_confirmation">%1$sPobrać plik \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Znaleziono aktualizacje dla:\n%1$s\n\nCzy chcesz zaktualizować?%2$s</string>
     <string name="download_warning">Może to zająć trochę czasu i może prowadzić do znacznych kosztów, w zależności od Twojego połączenia z siecią.</string>
+    <string name="download_error">Nieudane pobieranie (błąd #%d)</string>
     <string name="downloadmap_handling">Pobieranie będzie obsługiwane w tle przez systemowego menedżera pobierania. Powiadomienie powinno pojawić się zaraz po rozpoczęciu pobieranie (co może chwilę potrwać).</string>
     <string name="button_continue">Kontynuuj</string>
     <string name="downloadmap_onedirup">(jeden poziom w górę)</string>
@@ -2050,5 +2160,7 @@
     <string name="done">Zrobione</string>
     <string name="finish">Zakończ</string>
     <string name="back">Wstecz</string>
+    <string name="later">Później</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
 </resources>
