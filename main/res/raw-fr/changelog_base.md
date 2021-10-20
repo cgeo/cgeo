@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Carte
+- Nouveau : Refonte complète de toutes les icônes des cache
+- Nouveau: Affichage des icônes des derniers logs dans la fenêtre pop-up de cache
+- Correction : Affichage des cercles de distance pour les caches personnalisées (si l'affichage des cercles est activé)
+- Correction : Rendre le titre de la cache plus visible dans la popup des caches / waypoints
+- Correction : Affichage d'un avertissement dans la carte temps réel lorsque le mode temps-réel est désactivé
+- Correction : Autorisation du HTML dans la description des cibles de navigation
+- Changement : Adaptation des contrôles de zoom pour les cartes OSM pour une meilleure cohérence entre les cartes
+- Changement: Déplacement de la plupart des options de menu relatives aux routes individuelles vers un bouton d'accès rapide séparé en bas pour un accès plus rapide. (Ne s'affiche que lorsqu'un itinéraire individuel est chargé/créé.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Listes de caches
+- Nouveau : Refonte complète de toutes les icônes des caches
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Détails de la cache
+- Nouveau : Affichage des icônes des derniers logs
+- Nouveau : Affichage des icônes des entrées de log dans l'onglet des logs
+- Nouveau : Option permettant de masquer les waypoints visités dans l'onglet waypoints
+- Correction : Autoriser le HTML dans la description des cibles de navigation
+- Correction : Filtrage de la description courte quand elle est déjà contenue dans la description longue
+- Correction : Refonte de la boîte de dialogue "Saisie de Coordonnées" pour permettre une meilleure utilisation de l'affichage dans des conditions spécifiques
+- Nouveau : Ajout d'un onglet variable / calculateur (expérimental, activer le mode de débogage pour le voir)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Divers
+- Changement : Séparation de la liste de signets et des pocket queries (pour les Membres Premium uniquement)
+- Nouveau : Suppression forcées des caches marquées comme "à supprimer" lors de l'exécution de la fonction de maintenance
+- Changement : Toujours utiliser l'accélération matérielle (suppression de l'option de réglage et de vérification des anciens modèles de téléphones)
