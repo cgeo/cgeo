@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Mapa
+- Novetat: Reelaboració completa de totes les icones de catxés
+- Novetat: Mostra les icones dels darrers registres a la finestra emergent del catxé
+- Solució: Mostra cercles de distància pels catxés definits per l'usuari (si els cercles estan activats)
+- Solució: Fet que el títol del catxé sigui més visible a la finestra emergent de catxé / waypoint
+- Solució: Mostra l'avís al mapa en viu quan el mode en viu està desactivat
+- Solució: Permetre HTML a la descripció dels objectius de navegació
+- Canvi: controls de zoom adaptats per a mapes OSM per a una millor consistència entre mapes
+- Canvi: S'ha mogut la majoria de les opcions de menú relacionades amb la ruta a un botó d'accés ràpid separat a la part inferior per obtenir un accés més ràpid. (Només es mostra quan es carrega / crea una ruta individual.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Llistes de catxés
+- Novetat: Reelaboració completa de totes les icones de catxé
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Detalls del catxé
+- Novetat: Mostra les icones dels darrers registres
+- Novetat: Mostra les icones de les entrades de registre a la pestanya de registre
+- Novetat: opció per amagar els punts de ruta visitats a la pestanya de waypoints
+- Solució: Permetre HTML a la descripció dels objectius de navegació
+- Solució: Filtreu la descripció breu quan ja es troba a la descripció llarga
+- Solució: Diàleg "Entrada de coordenades" refactoritzat per permetre un millor ús de la pantalla en condicions específiques
+- Novetat: S'ha afegit la pestanya variable / calculadora (experimental, activeu el mode de depuració per veure-la)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Altres
+- Canvi: Llistes d'adreces d'interès i pocket queries separades (només PM)
+- Novetat: Elimineu forçadament els catxés marcats com a "a suprimir" quan s'utilitza la funció de manteniment
+- Canvi: Utilitzem sempre l'acceleració de maquinari (configuració eliminada i comprovació del model de telèfon anterior)
