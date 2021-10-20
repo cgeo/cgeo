@@ -321,9 +321,12 @@
     <string name="menu_helpers">Programes d\'utilitat</string>
     <string name="menu_settings">Configuració</string>
     <string name="menu_backup">Còpia de Seguretat / Restaurar</string>
+    <string name="menu_update">Actualitzeu les dades fora de línia</string>
     <string name="menu_update_routingdata">Dades d\'encaminament</string>
     <string name="menu_update_mapdata">Dades del mapa</string>
+    <string name="menu_dashboard">Tauler d\'inici de sessió</string>
     <string name="menu_history">Historial</string>
+    <string name="menu_history_longstring">Historial de trobats</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Escaneja un codi de catxé</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -336,6 +339,7 @@
     <string name="advanced_search_button">Cerca</string>
     <string name="stored_caches_button">Desats</string>
     <string name="any_button">Vés a</string>
+    <string name="more_button">Més</string>
     <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
     <!-- caches -->
     <string name="caches_no_cache">Aquí no hi ha catxés</string>
@@ -411,6 +415,14 @@
     <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
     <string name="select_icon">Selecciona icona</string>
     <string name="onetime_missing_unicode_info">La vostra versió d\'Android no admet la detecció automàtica d\'icones compatibles, és possible que faltin alguns caràcters</string>
+    <plurals name="user_finds">
+        <item quantity="one">Trobat %d</item>
+        <item quantity="other">Trobats %d</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d registrat fora de línia</item>
+        <item quantity="other">%d registrats fora de línia</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gestiona llistes</string>
     <string name="list_menu_create">Crea una llista nova</string>
@@ -668,6 +680,7 @@
     <string name="init_login_popup_failed">S\'ha produït un error al accedir</string>
     <string name="init_login_popup_failed_reason">L\'inici de sessió ha fallat: %s</string>
     <string name="init_login_popup_not_authorized">La connexió no ha estat autoritzada</string>
+    <string name="init_login_popup_not_logged_in">No estàs registrat</string>
     <string name="init_login_popup_invalid_timestamp">L\'hora local és incorrecta, ajusta l\'hora del teu dispositiu</string>
     <string name="init_login_popup_invalid_token">L\'autorització no és vàlida, torneu a autoritzar</string>
     <string name="init_authorization_credential_username">Nom d\'usuari</string>
@@ -1118,10 +1131,12 @@
     <string name="cache_images">Imatges</string>
     <string name="cache_advanced">Avançat</string>
     <string name="cache_waypoints">Fites</string>
+    <string name="cache_variables">Variables</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Punts de ruta (%d)</string>
     <string name="cache_waypoints_add">Afegeix punt de ruta</string>
     <string name="cache_waypoints_add_currentLocation">Afegiu la ubicació actual</string>
     <string name="cache_waypoints_add_fromclipboard">Afegeix des del porta-retalls</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Amaga punts ruta visitats</string>
     <string name="cache_waypoints_remove_original_waypoint">El punt de ruta s\'ha copiat del porta-retalls a aquest catxé. \n\nVoleu suprimir el punt de ruta original?</string>
     <string name="cache_hint">Pista</string>
     <string name="cache_hint_not_available">No hi ha cap pista disponible</string>
@@ -1404,6 +1419,9 @@
     <string name="search_hbu">Amagat per</string>
     <string name="search_hbu_prefill">Propietari</string>
     <string name="search_hbu_button">Cerca pel nom del propietari</string>
+    <string name="search_finder">Trobat per</string>
+    <string name="search_finder_prefill">Cercador</string>
+    <string name="search_finder_button">Cerca pel nom del cercador</string>
     <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Cerca per filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
@@ -1464,6 +1482,7 @@
     <!-- user -->
     <string name="user_menu_title">Quant a</string>
     <string name="user_menu_view_hidden">Catxés amagats</string>
+    <string name="user_menu_view_found">Catxés trobats</string>
     <string name="user_menu_open_browser">Obre el perfil al navegador</string>
     <string name="user_menu_send_message">Envia un missatge</string>
     <string name="user_menu_send_email">Envia un correu electrònic</string>
@@ -2017,6 +2036,7 @@
     <string name="download_confirmation">%1$sBaixeu el fitxer \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">S\'han trobat actualitzacions de:\n%1$s\n\nVoleu actualitzar?%2$s</string>
     <string name="download_warning">Això pot trigar força temps i pot comportar costos importants, segons la vostra connexió de xarxa.</string>
+    <string name="download_error">La descàrrega ha fallat amb l\'error #%d</string>
     <string name="downloadmap_handling">El gestor de descàrregues del vostre sistema gestionarà la descàrrega en segon pla. Hauríeu de veure una notificació tan aviat com hagi començat la baixada (pot trigar una estona).</string>
     <string name="button_continue">Continua</string>
     <string name="downloadmap_onedirup">(un nivell més alt)</string>
@@ -2106,4 +2126,5 @@
     <string name="later">Més tard</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
+    <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
 </resources>
