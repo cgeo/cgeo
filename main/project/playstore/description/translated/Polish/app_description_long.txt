@@ -2,7 +2,7 @@ c: geo jest otwartym, w pełni funkcjonalnym, zawsze gotowym do użycia nieoficj
 
 Główne funkcje:
 - Przeglądaj skrzynki na mapie na żywo
-- Use Google Maps or OpenStreetMap
+- Używaj Map Google lub OpenStreetMap
 - Wyszukaj skrzynki według różnych kryteriów
 - Zaloguj swoje znaleziska online lub offline
 - Przechowuj informacje o skrzynkach na swoim urządzeniu

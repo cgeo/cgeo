@@ -414,6 +414,14 @@
     <string name="caches_askdeletion">Perguntar se pretende eliminar, caso esteja vazia</string>
     <string name="select_icon">Seleccionar ícone</string>
     <string name="onetime_missing_unicode_info">A sua versão do Android não suporta a detecção automática de ícones suportados - alguns caracteres podem estar em falta</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d encontrada</item>
+        <item quantity="other">%d encontradas</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d registada offline</item>
+        <item quantity="other">%d registadas offline</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
     <string name="list_menu_create">Criar nova lista</string>
@@ -866,7 +874,7 @@
     <string name="init_default_navigation_tool_2_description">Aqui pode seleccionar o seu segundo instrumento de navegação preferido. Active-o com um toque longo no ícone de navegação, ao lado do título da cache.</string>
     <string name="init_navigation_menu_description">Aqui pode seleccionar, de entre os modos de navegação disponíveis, quais serão mostrados no menu de navegação para uma cache ou um ponto adicional. As opções a cinzento não estão instaladas neste dispositivo.</string>
     <string name="init_debug_title">Informação de depuração</string>
-    <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e só é recomendado se for solicitado o envio do registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
+    <string name="init_debug_note">O c:geo pode gerar um grande volume de informação de depuração. A activação desta definição afectará a estabilidade do c:geo e apenas é recomendada caso lhe seja solicitado que envie um registo para os programadores. Por favor, mantenha o registo de depuração desactivado durante o uso normal do c:geo!</string>
     <string name="init_debug">Activar depuração</string>
     <string name="init_dbonsdcard_title">Localização da base de dados</string>
     <string name="init_dbonsdcard_note">Pode armazenar a base de dados c:geo internamente no sistema, ou dentro de uma pasta no armazenamento do utilizador. Recomendamos activar esta opção apenas se precisar, com regularidade, de aceder manualmente ao seu ficheiro da base de dados.</string>
@@ -1410,6 +1418,9 @@
     <string name="search_hbu">Escondidas por</string>
     <string name="search_hbu_prefill">Proprietário</string>
     <string name="search_hbu_button">Pesquisar pelo nome do proprietário</string>
+    <string name="search_finder">Encontrada por</string>
+    <string name="search_finder_prefill">Quem encontrou</string>
+    <string name="search_finder_button">Pesquisa por quem encontrou</string>
     <string name="search_filter">Filtrar</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
@@ -1470,6 +1481,7 @@
     <!-- user -->
     <string name="user_menu_title">Sobre</string>
     <string name="user_menu_view_hidden">Caches escondidas</string>
+    <string name="user_menu_view_found">Caches encontradas</string>
     <string name="user_menu_open_browser">Abrir perfil no browser</string>
     <string name="user_menu_send_message">Enviar mensagem</string>
     <string name="user_menu_send_email">Enviar e-mail</string>

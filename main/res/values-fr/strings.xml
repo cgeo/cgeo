@@ -320,9 +320,12 @@
     <string name="menu_helpers">Outils</string>
     <string name="menu_settings">Paramètres</string>
     <string name="menu_backup">Sauvegarde / Restauration</string>
+    <string name="menu_update">Mettre à jour les données hors ligne</string>
     <string name="menu_update_routingdata">Données de navigation</string>
     <string name="menu_update_mapdata">Données cartographiques</string>
+    <string name="menu_dashboard">Tableau de bord de connexion</string>
     <string name="menu_history">Historique</string>
+    <string name="menu_history_longstring">Historique des trouvailles</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_scan_geo">Scanner un géocode</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -335,6 +338,7 @@
     <string name="advanced_search_button">Recherche</string>
     <string name="stored_caches_button">Enregistrées</string>
     <string name="any_button">Aller à</string>
+    <string name="more_button">Plus</string>
     <string name="unknown_scan">Le scan ne contient aucun géocode.</string>
     <!-- caches -->
     <string name="caches_no_cache">Aucune cache</string>
@@ -410,6 +414,14 @@
     <string name="caches_askdeletion">Demande de suppression si vide</string>
     <string name="select_icon">Sélectionnez l\'icône</string>
     <string name="onetime_missing_unicode_info">Votre version d\'Android ne prend pas en charge la détection automatique des icônes - certains caractères peuvent manquer</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d trouvée</item>
+        <item quantity="other">%d trouvées</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d loguée hors ligne</item>
+        <item quantity="other">%d loguées hors ligne</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gérer les listes</string>
     <string name="list_menu_create">Nouvelle liste</string>
@@ -667,6 +679,7 @@
     <string name="init_login_popup_failed">Erreur de connexion</string>
     <string name="init_login_popup_failed_reason">La connexion a échoué : %s</string>
     <string name="init_login_popup_not_authorized">Non autorisé</string>
+    <string name="init_login_popup_not_logged_in">Non connecté</string>
     <string name="init_login_popup_invalid_timestamp">Heure locale invalide, réglez votre appareil</string>
     <string name="init_login_popup_invalid_token">Autorisation non valide, ré-autoriser</string>
     <string name="init_authorization_credential_username">Nom d\'utilisateur</string>
@@ -916,7 +929,7 @@
     <string name="feature_search_center">Rechercher autour</string>
     <string name="feature_search_geocode">Rechercher ce code</string>
     <string name="feature_search_owner">Rechercher par Propriétaire</string>
-    <string name="feature_search_finder">Rechercher par Découvreur</string>
+    <string name="feature_search_finder">Rechercher par découvreur</string>
     <string name="feature_favorite">Ajout de la cache à vos favoris</string>
     <string name="feature_voting">Évaluer les caches</string>
     <string name="init_maplines_title">Personnalisation des traits de la carte</string>
@@ -1405,6 +1418,9 @@
     <string name="search_hbu">Cachée par</string>
     <string name="search_hbu_prefill">Nom d\'utilisateur</string>
     <string name="search_hbu_button">Rechercher par Propriétaire</string>
+    <string name="search_finder">Trouvée par</string>
+    <string name="search_finder_prefill">Découvreur</string>
+    <string name="search_finder_button">Rechercher par nom du découvreur</string>
     <string name="search_filter">Filtrer</string>
     <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
@@ -1465,6 +1481,7 @@
     <!-- user -->
     <string name="user_menu_title">À propos de</string>
     <string name="user_menu_view_hidden">Caches cachées</string>
+    <string name="user_menu_view_found">Caches trouvées</string>
     <string name="user_menu_open_browser">Ouvrir le profil dans un navigateur</string>
     <string name="user_menu_send_message">Envoyer un message</string>
     <string name="user_menu_send_email">Envoyer un courriel</string>
@@ -2110,4 +2127,5 @@
     <string name="later">Plus tard</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
+    <string name="touch_again_to_exit">Appuyez à nouveau pour quitter</string>
 </resources>

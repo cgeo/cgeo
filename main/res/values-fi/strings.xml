@@ -1418,6 +1418,9 @@
     <string name="search_hbu">Piilottanut</string>
     <string name="search_hbu_prefill">Omistaja</string>
     <string name="search_hbu_button">Hae omistajan nimellä</string>
+    <string name="search_finder">Löytänyt</string>
+    <string name="search_finder_prefill">Löytäjä</string>
+    <string name="search_finder_button">Etsi löytäjän mukaan</string>
     <string name="search_filter">Suodata</string>
     <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
@@ -1478,6 +1481,7 @@
     <!-- user -->
     <string name="user_menu_title">Tietoja</string>
     <string name="user_menu_view_hidden">Kätköjä piilotettu</string>
+    <string name="user_menu_view_found">Kätköjä löydetty</string>
     <string name="user_menu_open_browser">Avaa profiili selaimessa</string>
     <string name="user_menu_send_message">Lähetä viesti</string>
     <string name="user_menu_send_email">Lähetä sähköposti</string>

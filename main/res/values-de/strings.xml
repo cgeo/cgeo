@@ -926,8 +926,8 @@
     <string name="feature_own_coordinates">Modifizierte Cache-Koordinaten</string>
     <string name="feature_search_keyword">Stichwortsuche</string>
     <string name="feature_search_live_map">Live-Karte</string>
-    <string name="feature_search_center">Suche mit Koordinaten</string>
-    <string name="feature_search_geocode">Suche mit Geocode</string>
+    <string name="feature_search_center">Suche nach Koordinaten</string>
+    <string name="feature_search_geocode">Suche nach Geocode</string>
     <string name="feature_search_owner">Suche nach Besitzer</string>
     <string name="feature_search_finder">Suche nach Finder</string>
     <string name="feature_favorite">Cache zu Favoriten hinzufügen</string>
@@ -1406,7 +1406,7 @@
     <!-- search -->
     <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_coordinates">Koordinaten</string>
-    <string name="search_coordinates_button">Suche mit Koordinaten</string>
+    <string name="search_coordinates_button">Suche nach Koordinaten</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Suche mit Adresse</string>
     <string name="search_geo">Geocode</string>
@@ -1414,10 +1414,13 @@
     <string name="search_geocode_from_clipboard">Geocode aus der Zwischenablage eingefügt.</string>
     <string name="search_kw">Stichwort</string>
     <string name="search_kw_prefill">Stichwörter</string>
-    <string name="search_kw_button">Suche mit Stichwörtern</string>
+    <string name="search_kw_button">Suche nach Stichwörtern</string>
     <string name="search_hbu">Versteckt von</string>
     <string name="search_hbu_prefill">Besitzer</string>
-    <string name="search_hbu_button">Suche mit Besitzername</string>
+    <string name="search_hbu_button">Suche nach Besitzername</string>
+    <string name="search_finder">Gefunden von</string>
+    <string name="search_finder_prefill">Finder</string>
+    <string name="search_finder_button">Suche nach Finder</string>
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Suchen mit Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
@@ -1478,6 +1481,7 @@
     <!-- user -->
     <string name="user_menu_title">Über</string>
     <string name="user_menu_view_hidden">Versteckte Caches</string>
+    <string name="user_menu_view_found">Gefundene Caches</string>
     <string name="user_menu_open_browser">Profil im Browser öffnen</string>
     <string name="user_menu_send_message">Nachricht senden</string>
     <string name="user_menu_send_email">E-Mail senden</string>
