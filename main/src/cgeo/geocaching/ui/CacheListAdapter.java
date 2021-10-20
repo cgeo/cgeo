@@ -11,12 +11,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.sorting.CacheComparator;
-import cgeo.geocaching.sorting.EventDateComparator;
-import cgeo.geocaching.sorting.GlobalGPSDistanceConparator;
-import cgeo.geocaching.sorting.NameComparator;
-import cgeo.geocaching.sorting.TargetDistanceComparator;
-import cgeo.geocaching.sorting.VisitComparator;
+import cgeo.geocaching.sorting.GeocacheSortContext;
+import cgeo.geocaching.sorting.GlobalGPSDistanceComparator;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -38,7 +34,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
@@ -57,11 +52,10 @@ import org.apache.commons.lang3.StringUtils;
 public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionIndexer {
 
     private LayoutInflater inflater = null;
-    private static CacheComparator cacheComparator = null;
+    private final GeocacheSortContext sortContext;
     private Geopoint coords;
-    private Geopoint targetCoords;
     private float azimuth = 0;
-    private long lastSort = 0L;
+    private long lastGlobalGPSUpdate = 0L;
     private boolean selectMode = false;
     private GeocacheFilter currentGeocacheFilter = null;
     private List<Geocache> originalList = null;
@@ -75,19 +69,14 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private final Resources res;
     /** Resulting list of caches */
     private final List<Geocache> list;
-    private boolean eventsOnly;
-    private boolean inverseSort = false;
-    /**
-     * {@code true} if the caches in this list are a complete series and should be sorted by name instead of distance
-     */
-    private boolean series = false;
+
 
     private static final int SWIPE_MIN_DISTANCE = 60;
     private static final int SWIPE_MAX_OFF_PATH = 100;
     /**
      * time in milliseconds after which the list may be resorted due to position updates
      */
-    private static final int PAUSE_BETWEEN_LIST_SORT = 1000;
+    private static final int PAUSE_BETWEEN_GLOBAL_GPS_UPDATE = 1000;
 
     /**
      * automatically order cache series by name, if they all have a common suffix or prefix at least these many
@@ -115,17 +104,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
     }
 
-    public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType, final @Nullable Geopoint targetCoords) {
+    public CacheListAdapter(final Activity activity, final List<Geocache> list, final CacheListType cacheListType, final GeocacheSortContext sortContext) {
         super(activity, 0, list);
         final GeoData currentGeo = Sensors.getInstance().currentGeo();
         coords = currentGeo.getCoords();
-        this.targetCoords = targetCoords;
+        this.sortContext = sortContext;
         this.res = activity.getResources();
         this.list = list;
         this.cacheListType = cacheListType;
         checkSpecialSortOrder();
         buildFastScrollIndex();
-        GlobalGPSDistanceConparator.updateGlobalGps(coords);
+        GlobalGPSDistanceComparator.updateGlobalGps(coords);
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -134,62 +123,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     public void setCurrentListTitle(final String currentListTitle) {
         this.currentListTitle = currentListTitle;
-    }
-
-    /**
-     * change the sort order
-     *
-     */
-    public void setComparator(final CacheComparator comparator) {
-        cacheComparator = comparator;
-        forceSort();
-    }
-
-    public void resetInverseSort() {
-        inverseSort = false;
-    }
-
-    public void toggleInverseSort() {
-        inverseSort = !inverseSort;
-    }
-
-    /**
-     * Set the inverseSort order.
-     *
-     * @param inverseSort
-     *          True if sort is inverted
-     */
-    public void setInverseSort(final boolean inverseSort) {
-        this.inverseSort = inverseSort;
-    }
-
-    /**
-     * Obtain the current inverseSort order.
-     *
-     * @return
-     *          True if sort is inverted
-     */
-    public boolean getInverseSort() {
-        return inverseSort;
-    }
-
-    public CacheComparator getCacheComparator() {
-        if (isHistory()) {
-            return VisitComparator.singleton;
-        }
-        if (cacheComparator == null && eventsOnly) {
-            return EventDateComparator.INSTANCE;
-        }
-        if (cacheComparator == null && series) {
-            return NameComparator.INSTANCE;
-        }
-        if (cacheComparator == null && targetCoords != null) {
-            return new TargetDistanceComparator(targetCoords);
-        }
-        if (cacheComparator == null) {
-            return GlobalGPSDistanceConparator.INSTANCE;
-        }
-        return cacheComparator;
     }
 
     private boolean isHistory() {
@@ -303,18 +236,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
 
         if (isSortedByDistance()) {
-            lastSort = 0;
-            updateSortByDistance();
-        } else {
-            getCacheComparator().sort(list, inverseSort);
+            checkUpdateGlobalGPS(true);
         }
+
+        sortContext.getComparator().sort(list);
 
         notifyDataSetChanged();
     }
 
     public void setActualCoordinates(@NonNull final Geopoint coords) {
         this.coords = coords;
-        updateSortByDistance();
+        checkUpdateGlobalGPS(false);
 
         for (final DistanceView distance : distances) {
             distance.update(coords);
@@ -324,34 +256,21 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
     }
 
-    private void updateSortByDistance() {
-        if (CollectionUtils.isEmpty(list)) {
-            return;
-        }
-        if ((System.currentTimeMillis() - lastSort) <= PAUSE_BETWEEN_LIST_SORT) {
-            return;
-        }
-        if (!isSortedByDistance()) {
+    private void checkUpdateGlobalGPS(final boolean force) {
+        if (!force && (System.currentTimeMillis() - lastGlobalGPSUpdate) <= PAUSE_BETWEEN_GLOBAL_GPS_UPDATE) {
             return;
         }
         if (coords == null) {
             return;
         }
-        final List<Geocache> oldList = new ArrayList<>(list);
-        GlobalGPSDistanceConparator.updateGlobalGps(coords);
-        GlobalGPSDistanceConparator.INSTANCE.sort(list, inverseSort);
+        GlobalGPSDistanceComparator.updateGlobalGps(coords);
 
-        // avoid an update if the list has not changed due to location update
-        if (list.equals(oldList)) {
-            return;
-        }
         notifyDataSetChanged();
-        lastSort = System.currentTimeMillis();
+        lastGlobalGPSUpdate = System.currentTimeMillis();
     }
 
     private boolean isSortedByDistance() {
-        final CacheComparator comparator = getCacheComparator();
-        return comparator == null || comparator instanceof GlobalGPSDistanceConparator;
+        return sortContext.getType() == GeocacheSortContext.SortType.DISTANCE;
     }
 
     public void setActualHeading(final float direction) {
@@ -651,20 +570,21 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     private void checkEvents() {
-        eventsOnly = !list.isEmpty();
+        boolean eventsOnly = !list.isEmpty();
         for (final Geocache cache : list) {
             if (!cache.isEventCache()) {
                 eventsOnly = false;
-                return;
+                break;
             }
         }
+        sortContext.setEventList(eventsOnly);
     }
 
     /**
      * detect whether all caches in this list belong to a series with similar names
      */
     private void checkSeries() {
-        series = false;
+        boolean series = false;
         if (list.size() < 3 || list.size() > 50) {
             return;
         }
@@ -684,14 +604,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 series = true;
             }
         }
-    }
-
-    public boolean isEventsOnly() {
-        return eventsOnly;
-    }
-
-    public Geopoint getTargetCoords() {
-        return targetCoords;
+        sortContext.setSeriesList(series);
     }
 
     // methods for section indexer
@@ -736,7 +649,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     @NonNull
     private String getComparable(final int position) {
         try {
-            return getCacheComparator().getSortableSection(list.get(position));
+            return sortContext.getComparator().getSortableSection(list.get(position));
         } catch (NullPointerException e) {
             return " ";
         }

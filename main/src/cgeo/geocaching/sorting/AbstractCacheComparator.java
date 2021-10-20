@@ -66,11 +66,6 @@ abstract class AbstractCacheComparator implements CacheComparator {
      */
     protected abstract int compareCaches(Geocache cache1, Geocache cache2);
 
-    @Override
-    public boolean isAutoManaged() {
-        return false;
-    }
-
     /** Can optinally be overridden to perform preparation (e.g. caching of values) before sort of a list via {@link #sort(List)} */
     protected void beforeSort(final List<Geocache> list) {
         //by default, do nothing
@@ -82,9 +77,9 @@ abstract class AbstractCacheComparator implements CacheComparator {
     }
 
     /** Sorts the given list of caches using this comparator. Respects implementations of {@link #beforeSort(List)} and{@link #afterSort(List)} */
-    public void sort(final List<Geocache> list, final boolean inverse) {
+    public void sort(final List<Geocache> list) {
         beforeSort(list);
-        Collections.sort(list, inverse ? new InverseComparator(this) : this);
+        Collections.sort(list, this);
         afterSort(list);
     }
 

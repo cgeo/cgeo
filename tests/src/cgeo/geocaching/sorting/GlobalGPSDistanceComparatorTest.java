@@ -9,7 +9,7 @@ import java.util.List;
 
 import org.junit.Test;
 
-public class GlobalGPSDistanceConparatorTest {
+public class GlobalGPSDistanceComparatorTest {
 
     @Test
     public void testCompareCaches() {
@@ -21,7 +21,7 @@ public class GlobalGPSDistanceConparatorTest {
             }
             caches.add(cache);
         }
-        Collections.sort(caches, new GlobalGPSDistanceConparator());
+        Collections.sort(caches, new GlobalGPSDistanceComparator());
     }
 
 }

@@ -66,7 +66,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.sorting.CacheComparator;
+import cgeo.geocaching.sorting.GeocacheSortContext;
 import cgeo.geocaching.sorting.SortActionProvider;
 import cgeo.geocaching.sorting.VisitComparator;
 import cgeo.geocaching.storage.ContentStorage;
@@ -154,7 +154,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
 
     private static final String STATE_GEOCACHE_FILTER = "currentGeocacheFilter";
-    private static final String STATE_INVERSE_SORT = "currentInverseSort";
+    private static final String STATE_SORT_CONTEXT = "currentSortContext";
     private static final String STATE_LIST_TYPE = "currentListType";
     private static final String STATE_TYPE_PARAMETERS = "currentTypeParameters";
     private static final String STATE_LIST_ID = "currentListId";
@@ -168,7 +168,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private CacheListType type = null;
     private final Bundle typeParameters = new Bundle();
     private Geopoint coords = null;
-    private Geopoint targetCoords = null;
+    private final GeocacheSortContext sortContext = new GeocacheSortContext();
     private SearchResult search = null;
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
     private final List<Geocache> cacheList = new ArrayList<>();
@@ -196,10 +196,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      */
     private GeocacheFilterContext currentCacheFilter = null;
     private IGeocacheFilter currentAddFilterCriteria = null;
-    private CacheComparator currentSort = null;
-    private boolean currentInverseSort = false;
-
-    private SortActionProvider sortProvider;
 
     private final GeoDirHandler geoDirHandler = new GeoDirHandler() {
 
@@ -535,7 +531,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             typeParameters.putAll(extras);
             type = Intents.getListType(getIntent());
             coords = extras.getParcelable(Intents.EXTRA_COORDS);
-            targetCoords = extras.getParcelable(Intents.EXTRA_COORDS);
+            sortContext.setTargetCoords(extras.getParcelable(Intents.EXTRA_COORDS));
         }
         if (isInvokedFromAttachment()) {
             type = CacheListType.OFFLINE;
@@ -554,7 +550,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (savedInstanceState != null) {
             // Restore value of members from saved state
             currentCacheFilter = savedInstanceState.getParcelable(STATE_GEOCACHE_FILTER);
-            currentInverseSort = savedInstanceState.getBoolean(STATE_INVERSE_SORT);
+            sortContext.loadFromBundle(savedInstanceState.getBundle(STATE_SORT_CONTEXT));
             type = CacheListType.values()[savedInstanceState.getInt(STATE_LIST_TYPE, type.ordinal())];
             typeParameters.clear();
             typeParameters.putAll(savedInstanceState.getBundle(STATE_TYPE_PARAMETERS));
@@ -603,7 +599,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // Save the current Filter
         savedInstanceState.putParcelable(STATE_GEOCACHE_FILTER, currentCacheFilter);
-        savedInstanceState.putBoolean(STATE_INVERSE_SORT, adapter.getInverseSort());
+        savedInstanceState.putBundle(STATE_SORT_CONTEXT, sortContext.saveToBundle());
         savedInstanceState.putInt(STATE_LIST_TYPE, type.ordinal());
         savedInstanceState.putBundle(STATE_TYPE_PARAMETERS, typeParameters);
         savedInstanceState.putInt(STATE_LIST_ID, listId);
@@ -727,22 +723,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.cache_list_options, menu);
 
-        sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
+        final SortActionProvider sortProvider = (SortActionProvider) MenuItemCompat.getActionProvider(menu.findItem(R.id.menu_sort));
         assert sortProvider != null;  // We set it in the XML file
-        sortProvider.setSelection(adapter.getCacheComparator());
-        sortProvider.setIsEventsOnly(adapter.isEventsOnly());
-        sortProvider.setTargetCoords(adapter.getTargetCoords());
-        sortProvider.setClickListener(selectedComparator -> {
-            final CacheComparator oldComparator = adapter.getCacheComparator();
-            // selecting the same sorting twice will toggle the order
-            if (selectedComparator != null && oldComparator != null && selectedComparator.getClass().equals(oldComparator.getClass())) {
-                adapter.toggleInverseSort();
-            } else {
-                // always reset the inversion for a new sorting criteria
-                adapter.resetInverseSort();
-            }
-            this.currentSort = selectedComparator;
-            setComparator(selectedComparator);
+        sortProvider.setSortContext(sortContext);
+        sortProvider.setClickListener(type -> {
+            sortContext.setAndToggle(type);
+            adapter.forceSort();
         });
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
@@ -1079,16 +1065,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         return FilterUtils.openFilterList(this, currentCacheFilter);
     }
 
-    private void setComparator(final CacheComparator comparator) {
-        adapter.setComparator(comparator);
-        sortProvider.setSelection(adapter.getCacheComparator());
-        currentInverseSort = adapter.getInverseSort();
-
-        //for Offline Lists, SORT is done via SQL select and must be redone on comparator change
-        if (type.isStoredInDatabase) {
-            refreshCurrentList();
-        }
-    }
 
     @Override
     public void onCreateContextMenu(final ContextMenu menu, final View view, final ContextMenu.ContextMenuInfo info) {
@@ -1272,13 +1248,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void initAdapter() {
+
+        refreshSortListContext();
         final ListView listView = getListView();
         registerForContextMenu(listView);
 
-        adapter = new CacheListAdapter(this, cacheList, type, targetCoords);
+        adapter = new CacheListAdapter(this, cacheList, type, sortContext);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
         applyAdapterFilter();
-        adapter.setComparator(this.currentSort);
 
         if (listFooter == null) {
             listFooter = getLayoutInflater().inflate(R.layout.cacheslist_footer, listView, false);
@@ -1288,7 +1265,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         setListAdapter(adapter);
 
-        adapter.setInverseSort(currentInverseSort);
         adapter.forceSort();
 
         listView.setOnScrollListener(new FastScrollListener(listView));
@@ -1678,10 +1654,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (id != listId) {
             //reset load limit
             offlineListLoadLimit = getOfflineListInitialLoadLimit();
-            //reset selected sort (this way, default sort algorithms will be applied again e.g. for event lists and power trails)
-            currentSort = null;
-            currentInverseSort = false;
-            //do NOT reset filter!
         }
 
         if (id == PseudoList.HISTORY_LIST.id) {
@@ -2000,14 +1972,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         preventAskForDeletion = list.preventAskForDeletion;
                     }
 
-                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), adapter.getCacheComparator(), currentInverseSort, offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, listId, currentCacheFilter.get(), sortContext.getComparator(), false, offlineListLoadLimit);
 
                     break;
                 case HISTORY:
                     title = res.getString(R.string.caches_history);
                     listId = PseudoList.HISTORY_LIST.id;
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, currentInverseSort, offlineListLoadLimit);
+                    loader = new OfflineGeocacheListLoader(this, coords, PseudoList.HISTORY_LIST.id, currentCacheFilter.get(), VisitComparator.singleton, sortContext.isInverse(), offlineListLoadLimit);
                     break;
                 case NEAREST:
                     title = res.getString(R.string.caches_nearby);
@@ -2077,10 +2049,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         }
         // if there is a title given in the activity start request, use this one instead of the default
-        if (extras != null && StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
+        if (StringUtils.isNotBlank(extras.getString(Intents.EXTRA_TITLE))) {
             title = extras.getString(Intents.EXTRA_TITLE);
         }
-        if (loader != null && extras != null && extras.getSerializable(BUNDLE_ACTION_KEY) != null) {
+        if (loader != null && extras.getSerializable(BUNDLE_ACTION_KEY) != null) {
             final AfterLoadAction action = (AfterLoadAction) extras.getSerializable(BUNDLE_ACTION_KEY);
             loader.setAfterLoadAction(action);
         }
@@ -2099,6 +2071,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             Log.w("LOADER IS NULL!!!");
         }
 
+        currentLoader = loader;
         return loader;
     }
 
@@ -2196,5 +2169,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     public static int getOfflineListLimitIncrease() {
         return 100;
+    }
+
+    private void refreshSortListContext() {
+        if (type == CacheListType.OFFLINE) {
+            sortContext.setListContext(type, listId);
+        } else {
+            sortContext.setListContext(type);
+        }
     }
 }

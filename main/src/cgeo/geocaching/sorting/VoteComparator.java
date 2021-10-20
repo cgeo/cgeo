@@ -25,6 +25,6 @@ class VoteComparator extends AbstractCacheComparator {
 
     @Override
     public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
-        sql.addOrder(sql.getMainTableId() + ".myvote", sortDesc);
+        sql.addOrder(sql.getMainTableId() + ".myvote", !sortDesc);
     }
 }

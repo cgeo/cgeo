@@ -24,6 +24,6 @@ class InventoryComparator extends AbstractCacheComparator {
 
     @Override
     public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
-        sql.addOrder(sql.getMainTableId() + ".inventoryunknown", sortDesc);
+        sql.addOrder(sql.getMainTableId() + ".inventoryunknown", !sortDesc);
     }
 }

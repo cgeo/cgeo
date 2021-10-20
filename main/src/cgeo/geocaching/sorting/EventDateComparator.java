@@ -22,9 +22,4 @@ public class EventDateComparator extends DateComparator {
         return Integer.compare(left, right);
     }
 
-    @Override
-    public boolean isAutoManaged() {
-        return true;
-    }
-
 }

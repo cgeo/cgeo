@@ -1893,6 +1893,20 @@ public class Settings {
         putStringDirect(getKey(R.string.pref_cache_filter_config) + "." + type, config);
     }
 
+    /** Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}! */
+    public static String getSortConfig(final String sortContextKey) {
+        return getStringDirect(getKey(R.string.pref_cache_sort_config) + "." + sortContextKey, null);
+    }
+
+    /** Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}! */
+    public static void setSortConfig(final String sortContextKey, final String sortConfig) {
+        if (sortConfig == null) {
+            removeDirect(getKey(R.string.pref_cache_sort_config) + "." + sortContextKey);
+        } else {
+            putStringDirect(getKey(R.string.pref_cache_sort_config) + "." + sortContextKey, sortConfig);
+        }
+    }
+
     public static int getListInitialLoadLimit() {
         return getInt(R.string.pref_list_initial_load_limit, getKeyInt(R.integer.list_load_limit_default));
     }

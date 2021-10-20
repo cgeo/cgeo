@@ -388,6 +388,7 @@
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>
     <string name="caches_sort">Sort</string>
+    <string name="caches_sort_automatic">Automatic (%s)</string>
     <string name="caches_sort_distance">Distance</string>
     <string name="caches_sort_distance_target">Distance to target</string>
     <string name="caches_sort_difficulty">Difficulty</string>

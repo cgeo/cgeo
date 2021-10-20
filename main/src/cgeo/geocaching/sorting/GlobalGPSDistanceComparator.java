@@ -8,10 +8,10 @@ import java.util.concurrent.atomic.AtomicLong;
  * sorts caches by distance to given GPS position
  *
  */
-public class GlobalGPSDistanceConparator extends AbstractDistanceComparator {
+public class GlobalGPSDistanceComparator extends AbstractDistanceComparator {
 
     private static final AtomicLong gpsPosVersion = new AtomicLong(0);
-    public static final GlobalGPSDistanceConparator INSTANCE = new GlobalGPSDistanceConparator();
+    public static final GlobalGPSDistanceComparator INSTANCE = new GlobalGPSDistanceComparator();
 
     public static void updateGlobalGps(final Geopoint gpsPosition) {
         if (gpsPosition != null) {
