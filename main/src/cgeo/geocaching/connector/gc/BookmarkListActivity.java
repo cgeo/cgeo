@@ -9,7 +9,7 @@ import java.util.List;
 
 public class BookmarkListActivity extends AbstractListActivity {
 
-    BookmarkListActivity() {
+    public BookmarkListActivity() {
         title = R.string.menu_lists_bookmarklists;
         progressInfo = R.string.search_bookmark_list;
         errorReadingList = R.string.err_read_bookmark_list;

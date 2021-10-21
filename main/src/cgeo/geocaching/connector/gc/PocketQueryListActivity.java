@@ -8,7 +8,7 @@ import java.util.List;
 
 public class PocketQueryListActivity extends AbstractListActivity {
 
-    PocketQueryListActivity() {
+    public PocketQueryListActivity() {
         title = R.string.menu_lists_pocket_queries;
         progressInfo = R.string.search_pocket_loading;
         errorReadingList = R.string.err_read_pocket_query_list;
