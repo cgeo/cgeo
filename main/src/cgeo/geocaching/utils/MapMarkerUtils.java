@@ -1,21 +1,5 @@
 package cgeo.geocaching.utils;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.enumerations.CacheListType;
-import cgeo.geocaching.enumerations.CacheType;
-import cgeo.geocaching.enumerations.LoadFlags;
-import cgeo.geocaching.enumerations.WaypointType;
-import cgeo.geocaching.list.StoredList;
-import cgeo.geocaching.log.LogEntry;
-import cgeo.geocaching.log.LogType;
-import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.maps.CacheMarker;
-import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.builders.InsetBuilder;
-import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
 
@@ -32,14 +16,31 @@ import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.core.graphics.drawable.DrawableCompat;
 
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
+import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.CacheListType;
+import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.WaypointType;
+import cgeo.geocaching.list.StoredList;
+import cgeo.geocaching.log.LogEntry;
+import cgeo.geocaching.log.LogType;
+import cgeo.geocaching.log.ReportProblemType;
+import cgeo.geocaching.maps.CacheMarker;
+import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.builders.InsetBuilder;
+import cgeo.geocaching.utils.builders.InsetsBuilder;
 
 public final class MapMarkerUtils {
 
@@ -285,7 +286,8 @@ public final class MapMarkerUtils {
     @NonNull
     public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
         final int hashcode = new HashCodeBuilder()
-            .append(cache.getType().id)
+            .append(cache.getType().typeColor)
+            .append(cache.getMapDotMarkerId())
             .append(cache.isFound())
             .append(cache.isDisabled())
             .append(cache.isArchived())
@@ -398,8 +400,7 @@ public final class MapMarkerUtils {
         }
         final int hashcode = new HashCodeBuilder()
             .append(waypoint.getMapDotMarkerId())
-            .append(waypoint.getWaypointType().dotMarkerId)
-            .append(waypoint.getMapMarkerId())
+            .append(waypoint.getWaypointType())
             .append(cacheIsDisabled)
             .append(cacheIsArchived)
             .toHashCode();
