@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.net.Uri;
 
@@ -16,6 +17,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Objects;
 import java.util.Properties;
+import static java.lang.Boolean.TRUE;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -336,15 +338,21 @@ public final class Log {
     private static String getCallerInfo(final int maxDepth) {
         final String logClassName = Log.class.getName();
         final String contextLoggerClassname = ContextLogger.class.getName();
+
+        return stackTraceToShortString(new RuntimeException().getStackTrace(), maxDepth, st ->
+            !st.getClassName().equals(logClassName) && !st.getClassName().equals(contextLoggerClassname));
+    }
+
+    public static String stackTraceToShortString(final StackTraceElement[] stackTraceElements, final int maxDepth, final Func1<StackTraceElement, Boolean> filter) {
         final StringBuilder sb = new StringBuilder();
         int cnt = 0;
-        for (final StackTraceElement st : new RuntimeException().getStackTrace()) {
-            if (!st.getClassName().equals(logClassName) && !st.getClassName().equals(contextLoggerClassname)) {
+        for (final StackTraceElement st : stackTraceElements) {
+            if (filter == null || TRUE.equals(filter.call(st))) {
                 if (sb.length() > 0) {
                     sb.append("/");
                 }
                 sb.append(stackTraceElementToString(st));
-                if (++cnt >= maxDepth) {
+                if (maxDepth > 0 && ++cnt >= maxDepth) {
                     break;
                 }
             }
