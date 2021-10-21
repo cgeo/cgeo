@@ -9,7 +9,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
