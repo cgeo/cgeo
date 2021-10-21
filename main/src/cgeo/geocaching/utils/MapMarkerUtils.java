@@ -1,30 +1,5 @@
 package cgeo.geocaching.utils;
 
-import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
-import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
-
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
-import android.os.Build;
-import android.util.Pair;
-import android.util.SparseArray;
-import android.view.Gravity;
-
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -41,6 +16,30 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
+import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
+import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
+
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.LayerDrawable;
+import android.os.Build;
+import android.util.Pair;
+import android.util.SparseArray;
+import android.view.Gravity;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.content.res.ResourcesCompat;
+import androidx.core.graphics.drawable.DrawableCompat;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 public final class MapMarkerUtils {
 
