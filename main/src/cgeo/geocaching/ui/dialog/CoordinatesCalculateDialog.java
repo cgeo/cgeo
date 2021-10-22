@@ -329,11 +329,17 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         gp = getArguments().getParcelable(GEOPOINT_ARG);
         if (gp == null) {
             if (savedState != null) {
-                gp = new Geopoint(savedState.plainLat, savedState.plainLon);
+                try {
+                    gp = new Geopoint(savedState.plainLat, savedState.plainLon);
+                } catch (final Geopoint.ParseException ignored) {
+                    // gathering from one of the other formats?
+                    gp = Sensors.getInstance().currentGeo().getCoords();
+                }
             } else {
                 gp = Sensors.getInstance().currentGeo().getCoords();
             }
         }
+
         if (savedInstanceState != null) {
             if (savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
                 gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
