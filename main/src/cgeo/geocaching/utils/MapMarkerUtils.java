@@ -357,6 +357,8 @@ public final class MapMarkerUtils {
             }
         } else if (cache.hasUserModifiedCoords()) {
             dotIcon = R.drawable.dot_marker_usermodifiedcoords;
+        } else if (cache.hasFinalDefined()) {
+            dotIcon = R.drawable.dot_marker_hasfinal;
         }
 
         final Drawable dotMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapDotMarkerId(), null));
