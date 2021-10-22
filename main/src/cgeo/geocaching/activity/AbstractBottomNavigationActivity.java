@@ -16,8 +16,10 @@ import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -42,6 +44,7 @@ import androidx.core.util.Consumer;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationBarView;
 import org.apache.commons.lang3.StringUtils;
 
@@ -106,6 +109,18 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         } else {
             ((NavigationBarView) wrapper.activityBottomNavigation).removeBadge(MENU_MORE);
         }
+    }
+
+    public void updateCacheCounter() {
+        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
+            if (countOfflineCaches > 0) {
+                final BadgeDrawable badge = ((NavigationBarView) wrapper.activityBottomNavigation).getOrCreateBadge(MENU_LIST);
+                badge.setNumber(countOfflineCaches);
+                badge.setBackgroundColor(getResources().getColor(R.color.colorAccent));
+            } else {
+                ((NavigationBarView) wrapper.activityBottomNavigation).removeBadge(MENU_LIST);
+            }
+        }, throwable -> Log.e("Unable to add bubble count", throwable));
     }
 
     protected void initHomeAsUpIndicator() {
@@ -193,6 +208,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         super.onResume();
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+        updateCacheCounter();
     }
 
     @Override
