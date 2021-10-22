@@ -9,7 +9,6 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
 
@@ -30,14 +29,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         OWNED(R.string.cache_filter_status_select_label_owned, "owned", ImageParam.id(R.drawable.marker_own)),
         FOUND(R.string.cache_filter_status_select_label_found, "found", ImageParam.id(R.drawable.marker_found)),
         STORED(R.string.cache_filter_status_select_label_stored, "stored", ImageParam.id(R.drawable.marker_stored)),
-        FAVORITE(R.string.cache_filter_status_select_label_favorite, "favorite", ImageParam.emoji(EmojiUtils.SMILEY_LOVE)),
-        WATCHLIST(R.string.cache_filter_status_select_label_watchlist, "watchlist", ImageParam.emoji(EmojiUtils.SMILEY_MONOCLE)),
-        PREMIUM(R.string.cache_filter_status_select_label_premium, "premium", ImageParam.emoji(EmojiUtils.SPARKLES)),
+        FAVORITE(R.string.cache_filter_status_select_label_favorite, "favorite", ImageParam.id(R.drawable.filter_favorite)),
+        WATCHLIST(R.string.cache_filter_status_select_label_watchlist, "watchlist", ImageParam.id(R.drawable.filter_watchlist)),
+        PREMIUM(R.string.cache_filter_status_select_label_premium, "premium", ImageParam.id(R.drawable.filter_premium)),
         HAS_TRACKABLE(R.string.cache_filter_status_select_label_has_trackable, "has_trackable", ImageParam.id(R.drawable.trackable_all)),
-        HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.star_accent_color)),
+        HAS_OWN_VOTE(R.string.cache_filter_status_select_label_has_own_vote, "has_own_vote", ImageParam.id(R.drawable.filter_voted)),
         HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_note)),
         HAS_OFFLINE_FOUND_LOG(R.string.cache_filter_status_select_label_has_offline_found_log, "has_offline_found_log", ImageParam.id(R.drawable.marker_found_offline)),
-        SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.waypoint_puzzle), R.string.cache_filter_status_select_infotext_solved_mystery);
+        SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.marker_usermodifiedcoords), R.string.cache_filter_status_select_infotext_solved_mystery);
 
         @StringRes public final int labelId;
         public final String yesFlag;
