@@ -6,11 +6,16 @@ import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.connector.gc.BookmarkListActivity;
+import cgeo.geocaching.connector.gc.PocketQueryListActivity;
+import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -64,6 +69,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.SearchView.OnQueryTextListener;
 import androidx.appcompat.widget.SearchView.OnSuggestionListener;
+import androidx.core.view.MenuCompat;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -246,6 +252,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
            // don't call the super implementation with the layout argument, as that would set the wrong theme
             super.onCreate(savedInstanceState);
+
+            setTitle(R.string.app_name);
 
             backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
             cLog.add("bu");
@@ -449,12 +457,21 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreateOptionsMenu")) {
 
             getMenuInflater().inflate(R.menu.main_activity_options, menu);
+            MenuCompat.setGroupDividerEnabled(menu, true);
             final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
             searchItem = menu.findItem(R.id.menu_gosearch);
             searchView = (SearchView) searchItem.getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
             searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
             searchView.setSubmitButtonEnabled(true);
+
+            // initialize menu items
+            menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
+            menu.findItem(R.id.menu_update_routingdata).setEnabled(Settings.useInternalRouting());
+
+            final boolean isPremiumActive = Settings.isGCConnectorActive() && Settings.isGCPremiumMember();
+            menu.findItem(R.id.menu_pocket_queries).setVisible(isPremiumActive);
+            menu.findItem(R.id.menu_bookmarklists).setVisible(isPremiumActive);
 
             hideKeyboardOnSearchClick();
             hideActionIconsWhenSearchIsActive(menu);
@@ -472,8 +489,54 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         final int id = item.getItemId();
         if (id == android.R.id.home) {
             startActivity(new Intent(this, AboutActivity.class));
+        } else if (id == R.id.menu_about) {
+            startActivity(new Intent(this, AboutActivity.class));
+        } else if (id == R.id.menu_report_problem) {
+            DebugUtils.askUserToReportProblem(this, null);
+        } else if (id == R.id.menu_helpers) {
+            startActivity(new Intent(this, UsefulAppsActivity.class));
+        } else if (id == R.id.menu_wizard) {
+            final Intent wizard = new Intent(this, InstallWizardActivity.class);
+            wizard.putExtra(InstallWizardActivity.BUNDLE_MODE, InstallWizardActivity.needsFolderMigration() ? InstallWizardActivity.WizardMode.WIZARDMODE_MIGRATION.id : InstallWizardActivity.WizardMode.WIZARDMODE_RETURNING.id);
+            startActivity(wizard);
+        } else if (id == R.id.menu_settings) {
+            startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
+        } else if (id == R.id.menu_backup) {
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+        } else if (id == R.id.menu_history) {
+            startActivity(CacheListActivity.getHistoryIntent(this));
+            ActivityMixin.finishWithFadeTransition(this);
+        } else if (id == R.id.menu_goto) {
+            InternalConnector.assertHistoryCacheExists(this);
+            CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
+        } else if (id == R.id.menu_scan) {
+            startScannerApplication();
+        } else if (id == R.id.menu_pocket_queries) {
+            if (Settings.isGCPremiumMember()) {
+                startActivity(new Intent(this, PocketQueryListActivity.class));
+            }
+        } else if (id == R.id.menu_bookmarklists) {
+            if (Settings.isGCPremiumMember()) {
+                startActivity(new Intent(this, BookmarkListActivity.class));
+            }
+        } else if (id == R.id.menu_update_routingdata) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, DownloaderUtils::returnFromTileUpdateCheck);
+        } else if (id == R.id.menu_update_mapdata) {
+            DownloaderUtils.checkForUpdatesAndDownloadAll(this, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, DownloaderUtils::returnFromMapUpdateCheck);
+        } else {
+            return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void startScannerApplication() {
+        final IntentIntegrator integrator = new IntentIntegrator(this);
+        // integrator dialog is English only, therefore localize it
+        integrator.setButtonYesByID(android.R.string.yes);
+        integrator.setButtonNoByID(android.R.string.no);
+        integrator.setTitleByID(R.string.menu_scan_geo);
+        integrator.setMessageByID(R.string.menu_scan_description);
+        integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
     }
 
     private void hideActionIconsWhenSearchIsActive(final Menu menu) {
@@ -648,6 +711,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public int getSelectedBottomItemId() {
-        return MENU_NOTHING_SELECTED;
+        return MENU_HOME;
     }
 }

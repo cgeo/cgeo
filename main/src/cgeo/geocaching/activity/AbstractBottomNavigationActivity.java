@@ -2,7 +2,6 @@ package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.MainActivity;
-import cgeo.geocaching.MoreActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
@@ -56,7 +55,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     public static final @IdRes
     int MENU_NEARBY = R.id.page_nearby;
     public static final @IdRes
-    int MENU_MORE = R.id.page_more;
+    int MENU_HOME = R.id.page_home;
     public static final @IdRes
     int MENU_NOTHING_SELECTED = 0;
     public static final @IdRes
@@ -102,9 +101,9 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     protected void onLoginIssue(final boolean issue) {
         if (issue) {
-            ((NavigationBarView) wrapper.activityBottomNavigation).getOrCreateBadge(MENU_MORE);
+            ((NavigationBarView) wrapper.activityBottomNavigation).getOrCreateBadge(MENU_HOME);
         } else {
-            ((NavigationBarView) wrapper.activityBottomNavigation).removeBadge(MENU_MORE);
+            ((NavigationBarView) wrapper.activityBottomNavigation).removeBadge(MENU_HOME);
         }
     }
 
@@ -267,8 +266,8 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             startActivity(new Intent(this, SearchActivity.class));
         } else if (id == MENU_NEARBY) {
             startActivity(CacheListActivity.getNearestIntent(this));
-        } else if (id == MENU_MORE) {
-            startActivity(new Intent(this, MoreActivity.class));
+        } else if (id == MENU_HOME) {
+            startActivity(new Intent(this, MainActivity.class));
         } else {
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }

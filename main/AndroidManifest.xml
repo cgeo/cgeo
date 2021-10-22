@@ -120,14 +120,6 @@
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
         </activity>
         <activity
-            android:name=".MoreActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/cgeo"
-            android:windowSoftInputMode="stateAlwaysHidden" >
-            <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
-        </activity>
-        <activity
             android:name=".InstallWizardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
