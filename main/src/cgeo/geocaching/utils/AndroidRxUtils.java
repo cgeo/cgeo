@@ -72,6 +72,10 @@ public class AndroidRxUtils {
         });
     }
 
+    public static Disposable runPeriodically(final Scheduler scheduler, final Runnable runnable, final long initialDelayInMs, final long periodInMs) {
+        return scheduler.createWorker().schedulePeriodically(runnable, initialDelayInMs, periodInMs, TimeUnit.MILLISECONDS);
+    }
+
     public static <T> Observable<T> bindActivity(final Activity activity, final Observable<T> source) {
         final WeakReference<Activity> activityRef = new WeakReference<>(activity);
         return source.observeOn(AndroidSchedulers.mainThread()).takeWhile(t -> {
