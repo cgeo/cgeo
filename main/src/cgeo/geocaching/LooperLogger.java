@@ -6,17 +6,17 @@ import cgeo.geocaching.utils.Log;
 import android.os.Looper;
 
 import java.text.Format;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
-
-import org.apache.commons.lang3.time.FastDateFormat;
 
 /** Helper class, gaining and logging statistics about a looper */
 public class LooperLogger {
 
-    private static final Format DATE_FORMATTER = FastDateFormat.getInstance("hh:mm:ss.SSS");
+    private static final Format DATE_FORMATTER = new SimpleDateFormat("HH:mm:ss.SSS", Locale.US);
 
     private long totalTime = 0;
     private long currStartTime = 0;
@@ -40,6 +40,7 @@ public class LooperLogger {
                     Log.stackTraceToShortString(looper.getThread().getStackTrace(), 0, null));
             }
         }, 0, 200);
+        Log.iForce("LooperLogger: started for Thread: " + looper.getThread().getName());
     }
 
     private LooperLogger() {
