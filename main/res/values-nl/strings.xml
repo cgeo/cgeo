@@ -338,7 +338,6 @@
     <string name="advanced_search_button">Zoeken</string>
     <string name="stored_caches_button">Opgeslagen</string>
     <string name="any_button">Ga naar</string>
-    <string name="more_button">Meer</string>
     <string name="unknown_scan">De gescande afbeelding bevat geen geocode.</string>
     <!-- caches -->
     <string name="caches_no_cache">Geen caches</string>
