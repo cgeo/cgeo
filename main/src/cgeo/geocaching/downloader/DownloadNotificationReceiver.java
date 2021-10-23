@@ -15,7 +15,7 @@ import android.net.Uri;
 
 import androidx.core.content.ContextCompat;
 
-class DownloadNotificationReceiver extends BroadcastReceiver {
+public class DownloadNotificationReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(final Context context, final Intent intent) {
