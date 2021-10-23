@@ -333,12 +333,12 @@
     <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
+    <string name="home_button">ホーム</string>
     <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
     <string name="advanced_search_button">検索</string>
     <string name="stored_caches_button">保存済み</string>
     <string name="any_button">移動</string>
-    <string name="more_button">その他</string>
     <string name="unknown_scan">GCコードが見つかりませんでした</string>
     <!-- caches -->
     <string name="caches_no_cache">キャッシュがありません</string>
@@ -368,6 +368,7 @@
     <string name="caches_sort_favorites">お気に入り</string>
     <string name="caches_sort_favorites_ratio">お気に入り [%]</string>
     <string name="caches_sort_name">キャッシュ名</string>
+    <string name="caches_sort_geocode">GCコード</string>
     <string name="caches_sort_rating">評価</string>
     <string name="caches_sort_vote">評価済み</string>
     <string name="caches_sort_inventory">目録の数</string>
@@ -411,6 +412,12 @@
     <string name="caches_askdeletion">空の時に削除確認する</string>
     <string name="select_icon">アイコンの選択</string>
     <string name="onetime_missing_unicode_info">お使いのAndroidバージョンは、アイコンの自動検出をサポートしていません。一部の文字が欠落している可能性があります</string>
+    <plurals name="user_finds">
+        <item quantity="other">発見(%d)</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="other">オフラインログ(%d)</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">リストを管理</string>
     <string name="list_menu_create">新しいリストを作成</string>
@@ -661,6 +668,7 @@
     <string name="init_login_popup_failed">ログイン失敗</string>
     <string name="init_login_popup_failed_reason">ログインに失敗しました: %s</string>
     <string name="init_login_popup_not_authorized">認証できませんでした</string>
+    <string name="init_login_popup_not_logged_in">ログインしていません</string>
     <string name="init_login_popup_invalid_timestamp">デバイスの時刻が正しくありません。時刻の設定をしてください</string>
     <string name="init_login_popup_invalid_token">認証できませんでした。再度認証してください</string>
     <string name="init_authorization_credential_username">ユーザー名</string>
@@ -1101,9 +1109,10 @@
     <string name="cache_favpoint_not_on">お気に入りに入っていません</string>
     <string name="cache_list_select_last">前回の選択</string>
     <string name="cache_images">画像</string>
-    <string name="cache_advanced">追加設定</string>
+    <string name="cache_advanced">その他</string>
     <string name="cache_waypoints">ウェイポイント</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
+    <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
     <string name="cache_waypoints_hide_visited_waypoints">訪問済みウェイポイントを非表示</string>
@@ -1386,9 +1395,12 @@
     <string name="search_hbu">設置したオーナー名</string>
     <string name="search_hbu_prefill">オーナー名</string>
     <string name="search_hbu_button">オーナー名で検索</string>
+    <string name="search_finder">発見したユーザー名</string>
+    <string name="search_finder_prefill">ユーザー名</string>
+    <string name="search_finder_button">発見したユーザー名で検索</string>
     <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
-    <string name="search_filter_info_message" formatted="false">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
+    <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
     <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
@@ -1445,6 +1457,7 @@
     <!-- user -->
     <string name="user_menu_title">ユーザー名:</string>
     <string name="user_menu_view_hidden">隠したキャッシュ</string>
+    <string name="user_menu_view_found">発見したキャッシュ</string>
     <string name="user_menu_open_browser">ブラウザでプロフィールを開く</string>
     <string name="user_menu_send_message">メッセージを送信</string>
     <string name="user_menu_send_email">メールを送る</string>
@@ -2066,5 +2079,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="later">後で</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
-    <string name="touch_again_to_exit">終了するにはもう一度タップしてください</string>
+    <string name="touch_again_to_exit">もう一度「戻る」を押すと終了します</string>
 </resources>
