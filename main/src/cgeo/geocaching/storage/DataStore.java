@@ -3541,7 +3541,7 @@ public class DataStore {
                 sqlBuilder.setLimit(limit);
             }
 
-            Log.w("SQL: [" + sqlBuilder.getSql() + "]");
+            Log.d("SQL: [" + sqlBuilder.getSql() + "]");
             cLog.add("Sel:" + sqlBuilder.getSql());
 
             return cursorToColl(database.rawQuery(sqlBuilder.getSql(), sqlBuilder.getSqlWhereArgsArray()), new HashSet<>(), GET_STRING_0);

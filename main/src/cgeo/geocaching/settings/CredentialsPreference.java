@@ -9,7 +9,8 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.network.HtmlImage;
+import cgeo.geocaching.ui.AvatarUtils;
+import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.content.Context;
 import android.content.Intent;
@@ -30,6 +31,8 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     private LayoutInflater inflater;
     private final CredentialActivityMapping credentialsMapping;
+    private ViewGroup parentView;
+    private View preferenceView;
 
     private enum CredentialActivityMapping {
         GEOCACHING(R.string.pref_fakekey_gc_authorization, GCAuthorizationActivity.class, GCConnector.getInstance()),
@@ -98,35 +101,40 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     @Override
     protected View onCreateView(final ViewGroup parent) {
-        super.onCreateView(parent);
-        return addInfoIcon(parent);
+        this.parentView = parent;
+        this.preferenceView = super.onCreateView(parent);
+        resetAvatarImage();
+        return this.preferenceView;
+
     }
 
-    /**
-     * Display avatar image if present
-     */
-    private View addInfoIcon(final ViewGroup parent) {
-        final View preferenceView = super.onCreateView(parent);
-
-
-        if (credentialsMapping.getConnector() instanceof IAvatar) {
-            final String avatarUrl = Settings.getAvatarUrl((IAvatar) credentialsMapping.getConnector());
-
-            if (StringUtils.isNotBlank(avatarUrl)) {
-                final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, parent, false);
-                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-                iconView.setImageDrawable(imgGetter.getDrawable(avatarUrl));
-
-                final LinearLayout frame = preferenceView.findViewById(android.R.id.widget_frame);
-                frame.setVisibility(View.VISIBLE);
-                frame.addView(iconView);
-
-                final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
-                frame.setLayoutParams(param);
-            }
+    public void resetAvatarImage() {
+        final LinearLayout avatarFrame = this.preferenceView.findViewById(android.R.id.widget_frame);
+        if (avatarFrame == null) {
+            return;
         }
 
-        return preferenceView;
+        if (credentialsMapping.getConnector() instanceof IAvatar) {
+            AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
+                () -> AvatarUtils.getAvatar((IAvatar) credentialsMapping.getConnector()),
+                img -> {
+                    if (img != null) {
+                        final ImageView iconView = (ImageView) inflater.inflate(R.layout.preference_info_icon, this.parentView, false);
+                        iconView.setImageDrawable(img);
+
+                        avatarFrame.removeAllViews();
+                        avatarFrame.addView(iconView);
+                        avatarFrame.setVisibility(View.VISIBLE);
+
+                        final LinearLayout.LayoutParams param = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT, 1.5f);
+                        avatarFrame.setLayoutParams(param);
+                    } else {
+                        avatarFrame.setVisibility(View.GONE);
+                    }
+                });
+        } else {
+            avatarFrame.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -142,7 +150,8 @@ public class CredentialsPreference extends AbstractClickablePreference {
         Settings.setCredentials(credentialsMapping.getConnector(), Credentials.EMPTY);
 
         if (credentialsMapping.getConnector() instanceof IAvatar) {
-            Settings.setAvatarUrl((IAvatar) credentialsMapping.getConnector(), StringUtils.EMPTY);
+            AvatarUtils.changeAvatar((IAvatar) credentialsMapping.getConnector(), StringUtils.EMPTY);
+            resetAvatarImage();
         }
     }
 }

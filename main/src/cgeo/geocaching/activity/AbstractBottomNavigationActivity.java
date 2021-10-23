@@ -12,9 +12,9 @@ import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -42,7 +42,6 @@ import androidx.core.util.Consumer;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.google.android.material.navigation.NavigationBarView;
-import org.apache.commons.lang3.StringUtils;
 
 
 public abstract class AbstractBottomNavigationActivity extends AbstractActionBarActivity implements NavigationBarView.OnItemSelectedListener {
@@ -71,9 +70,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     private final Handler loginHandler = new Handler();
 
     private static final AtomicInteger LOGINS_IN_PROGRESS = new AtomicInteger(0);
-
-    private static final HtmlImage AVATAR_IMAGE_GETTER = new HtmlImage(HtmlImage.SHARED, false, false, false);
-
 
     @Override
     public void setContentView(final View contentView) {
@@ -113,16 +109,15 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
             // Show user avatar in ActionBar
             for (ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
-                if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
+                if (conn instanceof IAvatar) {
                     final int scaledSize = (int) getResources().getDimension(R.dimen.toolbarAvatarSize);
                     AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                            () -> {
-                                //we need to use a static global HtmlImageGetter, HTMLImage-caching does not work if instance is recreated
-                                synchronized (AVATAR_IMAGE_GETTER) {
-                                    return AVATAR_IMAGE_GETTER.getDrawable(Settings.getAvatarUrl((IAvatar) conn));
+                            () -> AvatarUtils.getAvatar((IAvatar) conn),
+                            img -> {
+                                if (img != null) {
+                                    setHomeAsUpIndicator(Bitmap.createScaledBitmap(img.getBitmap(), scaledSize, scaledSize, true));
                                 }
-                            },
-                            img -> setHomeAsUpIndicator(Bitmap.createScaledBitmap(img.getBitmap(), scaledSize, scaledSize, true)));
+                            });
 
                     return;
                 }
