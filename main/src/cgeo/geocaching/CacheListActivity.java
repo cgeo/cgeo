@@ -589,7 +589,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         if (isInvokedFromAttachment()) {
-            listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
+            if (extras != null && !StringUtils.isBlank(extras.getString(Intents.EXTRA_NAME))) {
+                listNameMemento.rememberTerm(extras.getString(Intents.EXTRA_NAME));
+            }
             importGpxAttachement();
         }
     }
