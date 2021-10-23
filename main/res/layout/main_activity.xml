@@ -71,6 +71,21 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/offline_counter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:maxLines="1"
+            android:textIsSelectable="false"
+            android:textSize="@dimen/textSize_listsPrimary"
+            android:visibility="gone"
+            tools:text="1234 caches stored offline"/>
+        <View style="@style/separator_horizontal" />
+
+        <TextView
             android:id="@+id/nav_location"
             style="@style/location_current"
             android:textIsSelectable="false"

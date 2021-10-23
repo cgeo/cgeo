@@ -346,6 +346,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
         checkRestore();
         DataStore.cleanIfNeeded(this);
+        updateCacheCounter();
     }
 
     @Override
@@ -537,6 +538,16 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         integrator.setTitleByID(R.string.menu_scan_geo);
         integrator.setMessageByID(R.string.menu_scan_description);
         integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
+    }
+
+    public void updateCacheCounter() {
+        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
+            final TextView counter = findViewById(R.id.offline_counter);
+            counter.setVisibility(countOfflineCaches > 0 ? View.VISIBLE : View.GONE);
+            if (countOfflineCaches > 0) {
+                counter.setText(getResources().getQuantityString(R.plurals.caches_stored_offline, countOfflineCaches, countOfflineCaches));
+            }
+        }, throwable -> Log.e("Unable to add bubble count", throwable));
     }
 
     private void hideActionIconsWhenSearchIsActive(final Menu menu) {

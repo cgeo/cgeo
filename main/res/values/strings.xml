@@ -457,6 +457,14 @@
         <item quantity="many">%d logged offline</item>
         <item quantity="other">%d logged offline</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="zero">%d caches stored offline</item>
+        <item quantity="one">%d cache stored offline</item>
+        <item quantity="two">%d caches stored offline</item>
+        <item quantity="few">%d caches stored offline</item>
+        <item quantity="many">%d caches stored offline</item>
+        <item quantity="other">%d caches stored offline</item>
+    </plurals>
 
     <!-- caches lists -->
     <string name="menu_lists">Manage lists</string>
