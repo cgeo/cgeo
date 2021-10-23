@@ -333,12 +333,12 @@
     <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
     <string name="menu_invert_order">Käännä järjestys</string>
     <!-- main screen -->
+    <string name="home_button">Etusivu</string>
     <string name="live_map_button">Live-kartta</string>
     <string name="caches_nearby_button">Lähistöllä</string>
     <string name="advanced_search_button">Hae</string>
     <string name="stored_caches_button">Tallennettu</string>
     <string name="any_button">Siirry</string>
-    <string name="more_button">Lisää</string>
     <string name="unknown_scan">Yhtään geokoodia ei löytynyt haussa.</string>
     <!-- caches -->
     <string name="caches_no_cache">Ei kätköjä</string>
