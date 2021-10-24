@@ -16,7 +16,6 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
@@ -31,6 +30,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
+import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -62,6 +62,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -168,7 +169,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                     userName.setText(p.second);
                                     final String userFoundCount = p.first.toString();
                                     if (userFoundCount.isEmpty()) {
-                                        userFounds.setVisibility(View.GONE);
+                                        userFounds.setVisibility(GONE);
                                     } else {
                                         userFounds.setVisibility(View.VISIBLE);
                                         userFounds.setText(userFoundCount);
@@ -181,19 +182,21 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
                             final ImageView userAvartar = connectorInfo.findViewById(R.id.item_icon);
 
-                            if (conn instanceof IAvatar && StringUtils.isNotBlank(Settings.getAvatarUrl((IAvatar) conn))) {
+                            if (conn instanceof IAvatar) {
                                 userAvartar.setVisibility(View.INVISIBLE);
 
-                                // images are cached by the HtmlImage class
-                                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
                                 AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                                    () -> imgGetter.getDrawable(Settings.getAvatarUrl((IAvatar) conn)),
+                                    () -> AvatarUtils.getAvatar((IAvatar) conn),
                                     img -> {
-                                        userAvartar.setVisibility(View.VISIBLE);
-                                        userAvartar.setImageDrawable(img);
+                                        if (img == null) {
+                                            userAvartar.setVisibility(GONE);
+                                        } else {
+                                            userAvartar.setVisibility(View.VISIBLE);
+                                            userAvartar.setImageDrawable(img);
+                                        }
                                     });
                             } else {
-                                userAvartar.setVisibility(View.GONE);
+                                userAvartar.setVisibility(GONE);
                             }
                         }
                     });
@@ -671,7 +674,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             binding.infoNotloggedinIcon.attributeStrikethru.setVisibility(View.VISIBLE);
             binding.infoNotloggedin.setVisibility(View.VISIBLE);
         } else {
-            binding.infoNotloggedin.setVisibility(View.GONE);
+            binding.infoNotloggedin.setVisibility(GONE);
         }
     }
 

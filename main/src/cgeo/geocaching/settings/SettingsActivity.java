@@ -9,6 +9,7 @@ import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.al.ALConnector;
+import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -833,6 +834,14 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
                         : R.string.settings_authorize));
     }
 
+    private void resetAvatarImage(final int prefKeyId, @NonNull final ICredentials connector) {
+        final Preference pref = getPreference(prefKeyId);
+        if (pref instanceof CredentialsPreference && connector instanceof IAvatar) {
+                ((CredentialsPreference) pref).resetAvatarImage();
+        }
+
+    }
+
     private void setConnectedUsernameTitle(final int prefKeyId, @NonNull final ICredentials connector) {
         final Credentials credentials = Settings.getCredentials(connector);
 
@@ -892,6 +901,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
             case R.string.pref_fakekey_gc_authorization:
                 setAuthTitle(requestCode, GCConnector.getInstance());
                 setConnectedUsernameTitle(requestCode, GCConnector.getInstance());
+                resetAvatarImage(requestCode, GCConnector.getInstance());
                 redrawScreen(R.string.preference_screen_gc);
                 initBasicMemberPreferences();
                 initLCServicePreference(Settings.isGCConnectorActive());

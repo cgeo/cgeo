@@ -35,6 +35,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
@@ -1698,18 +1699,15 @@ public class Settings {
     }
 
     /**
-     * Get avatar URL by connector.
-     *
-     * @param connector the connector to retrieve the avatar information from
-     * @return the avatar url
+     * Get avatar URL by connector. Should SOLELY be used by class {@link AvatarUtils}!
      */
-    @NonNull
+    @Nullable
     public static String getAvatarUrl(@NonNull final IAvatar connector) {
         return getString(connector.getAvatarPreferenceKey(), null);
     }
 
     /**
-     * Set avatar URL by connector.
+     * Set avatar URL by connector. Should SOLELY be used by class {@link AvatarUtils}!
      *
      * @param connector the connector to retrieve the avatar information from
      * @param avatarUrl the avatar url information to store
