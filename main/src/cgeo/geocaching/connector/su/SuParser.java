@@ -16,6 +16,7 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import android.content.res.Resources;
 
@@ -111,7 +112,7 @@ public class SuParser {
 
         if (!(data.has(USER_FOUNDS) && data.has(USER_NAME))) {
             // Either server issue or wrong response - looks suspicious, we need to retry logging in later
-            return new UserInfo(StringUtils.EMPTY, 0, UserInfo.UserInfoStatus.FAILED);
+            return new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfo.UserInfoStatus.FAILED);
         }
         final int finds = data.get(USER_FOUNDS).asInt();
         final String name = data.get(USER_NAME).asText();

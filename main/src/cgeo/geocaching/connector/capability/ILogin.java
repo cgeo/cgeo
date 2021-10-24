@@ -7,6 +7,8 @@ import android.os.Handler;
 
 public interface ILogin extends IConnector {
 
+    int UNKNOWN_FINDS = -1;
+
     /**
      * Contacts the server the connector belongs to and verifies/establishes authentication and retrieves information
      * about the current user (Name, found caches) if applicable.

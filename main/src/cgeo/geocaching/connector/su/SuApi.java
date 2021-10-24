@@ -27,6 +27,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import android.util.Base64;
 import static android.util.Base64.DEFAULT;
@@ -63,7 +64,7 @@ public class SuApi {
         final JSONResult result = getRequest(connector, SuApiEndpoint.USER, params);
 
         if (!result.isSuccess) {
-            return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.FAILED);
+            return new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.FAILED);
         }
 
         return SuParser.parseUser(result.data);

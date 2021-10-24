@@ -54,6 +54,7 @@ import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.SynchronizedDateFormat;
+import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
@@ -1219,7 +1220,7 @@ final class OkapiClient {
         if (!result.isSuccess) {
             final OkapiError error = new OkapiError(result.data);
             Log.w("OkapiClient.getUserInfo: error getting user info: '" + error.getMessage() + "'");
-            return new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.getFromOkapiError(error.getResult()));
+            return new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.getFromOkapiError(error.getResult()));
         }
 
         final ObjectNode data = result.data;

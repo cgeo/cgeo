@@ -36,7 +36,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     private final int isActivePrefKeyId;
     private final int tokenPublicPrefKeyId;
     private final int tokenSecretPrefKeyId;
-    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
+    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED);
 
     public OCApiLiveConnector(final String name, final String host, final boolean https, final String prefix, final String licenseString, @StringRes final int cKResId, @StringRes final int cSResId, final int isActivePrefKeyId, final int tokenPublicPrefKeyId, final int tokenSecretPrefKeyId, final ApiSupport apiSupport, @NonNull final String abbreviation) {
         super(name, host, https, prefix, CryptUtils.rot13(CgeoApplication.getInstance().getString(cKResId)), licenseString, apiSupport, abbreviation);
@@ -138,7 +138,7 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
         if (supportsPersonalization()) {
             userInfo = OkapiClient.getUserInfo(this);
         } else {
-            userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_SUPPORTED);
+            userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_SUPPORTED);
         }
         // update cache counter
         FoundNumCounter.getAndUpdateFoundNum(this);

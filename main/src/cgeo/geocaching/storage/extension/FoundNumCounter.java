@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.LocalizationUtils;
+import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import androidx.annotation.Nullable;
 
@@ -58,7 +59,7 @@ public class FoundNumCounter extends DataStore.DBExtension {
     public static int getAndUpdateFoundNum(final ILogin conn) {
         int current = conn.getCachesFound();
 
-        if (current < 0) { // try getting cached information, if the counter is zero
+        if (current == UNKNOWN_FINDS) { // try getting cached information, if counter is unknown
             final FoundNumCounter f = FoundNumCounter.load(conn.getName());
             if (f != null) {
                 current = (int) f.getLong1();
