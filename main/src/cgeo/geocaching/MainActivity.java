@@ -126,12 +126,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                     activity.binding.connectorstatusArea.setAdapter(new ArrayAdapter<ILogin>(activity, R.layout.main_activity_connectorstatus, loginConns) {
                         @Override
                         public View getView(final int position, final View convertView, @NonNull final android.view.ViewGroup parent) {
-                            View view = convertView;
-
-                            if (view == null) {
-                                view = activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
-                            }
-
+                            // do NOT use convertView, as it gets filled asynchronously, which may lead to the wrong view being filled
+                            final View view = activity.getLayoutInflater().inflate(R.layout.main_activity_connectorstatus, parent, false);
                             final ILogin connector = getItem(position);
                             fillView(view, connector);
                             return view;
