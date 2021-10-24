@@ -9,7 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 
 /* Receives a download URL via "mf-v4-map" scheme, e. g. from openandromaps.org */
-class MapDownloaderReceiverSchemeMap extends AbstractActivity {
+public class MapDownloaderReceiverSchemeMap extends AbstractActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
