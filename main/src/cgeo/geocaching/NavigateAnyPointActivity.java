@@ -12,7 +12,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.MatcherWrapper;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -27,18 +26,13 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLDecoder;
 import java.util.ArrayList;
-import java.util.regex.Pattern;
 
-import org.apache.commons.lang3.StringUtils;
+import de.k3b.geo.api.GeoPointDto;
+import de.k3b.geo.api.IGeoPointInfo;
+import de.k3b.geo.io.GeoUri;
 
 public class NavigateAnyPointActivity extends AbstractActionBarActivity {
-    private static final Pattern PATTERN_COORDS_NAME = Pattern.compile("^geo:0,0\\?q=([-]?[0-9]{1,2}\\.[0-9]{1,15}),([-]?[0-9]{1,3}\\.[0-9]{1,15})(\\((.*)\\))?$");
-    private static final Pattern PATTERN_COORDS = Pattern.compile("^geo:([-]?[0-9]{1,2}\\.[0-9]{1,15}),([-]?[0-9]{1,3}\\.[0-9]{1,15})$");
-    private static final Pattern PATTERN_COORDS_ZOOM = Pattern.compile("^geo:([-]?[0-9]{1,2}\\.[0-9]{1,15}),([-]?[0-9]{1,3}\\.[0-9]{1,15})\\?z=([1-9]|1[0-9]|2[0-3])$");
-
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,35 +42,17 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
 
         // check if "geo" action is requested
         boolean geoActionRequested = false;
-        final String data = getIntent().getDataString();
-        if (StringUtils.isNotBlank(data)) {
-            MatcherWrapper match = new MatcherWrapper(PATTERN_COORDS, data);
-            if (match.find()) {
-                Log.i("Received a geo intent: lat=" + match.group(1) + ", lon=" + match.group(2));
-                selectTargetType(this, Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), null);
+        if (getIntent() != null) {
+            final GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
+            final IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
+            if (geo != null && !GeoPointDto.isEmpty(geo)) {
+                Log.i("Received a geo intent: lat=" + geo.getLatitude()
+                    + ", lon=" + geo.getLongitude() + ", name=" + geo.getName()
+                    + " form " + getIntent().getDataString());
+                selectTargetType(this, geo.getLatitude(), geo.getLongitude(), geo.getName());
                 geoActionRequested = true;
-            } else {
-                match = new MatcherWrapper(PATTERN_COORDS_NAME, data);
-                if (match.find()) {
-                    Log.i("Received a geo intent: lat=" + match.group(1) + ", lon=" + match.group(2) + ", name=" + match.group(4));
-                    try {
-                        selectTargetType(this, Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), URLDecoder.decode(match.group(4), "UTF-8"));
-                    } catch (UnsupportedEncodingException e) {
-                        // try without URL decoding as fallback
-                        selectTargetType(this, Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), match.group(4));
-                    }
-                    geoActionRequested = true;
-                } else {
-                    match = new MatcherWrapper(PATTERN_COORDS_ZOOM, data);
-                    if (match.find()) {
-                        Log.i("Received a geo intent: lat=" + match.group(1) + ", lon=" + match.group(2) + ", zoom=" + match.group(3) + " (zoom level being ignored currently)");
-                        selectTargetType(this, Double.parseDouble(match.group(1)), Double.parseDouble(match.group(2)), null);
-                        geoActionRequested = true;
-                    }
-                }
             }
         }
-
         if (!geoActionRequested) {
             CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
             finish();

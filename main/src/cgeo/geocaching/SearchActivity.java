@@ -23,6 +23,7 @@ import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
@@ -42,6 +43,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.Locale;
+
+import de.k3b.geo.api.GeoPointDto;
+import de.k3b.geo.api.IGeoPointInfo;
+import de.k3b.geo.io.GeoUri;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -84,6 +89,28 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
             finish();
 
             return;
+        }
+
+        // called from external app via
+        // * intent action view with geo: uri
+        // * click on http(s)-Link to internet map service (google-maps, openstreetmap, yandex or here)
+        final GeoUri parser = new GeoUri(GeoUri.OPT_DEFAULT);
+        final IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
+        if (geo != null) {
+            String name = geo.getName();
+            if (name != null && name.trim().length() == 0) {
+                name = null;
+            }
+            Log.i("Received a geo intent: lat=" + geo.getLatitude() + ", lon=" + geo.getLongitude() + ", name=" + name
+                + " form " + getIntent().getDataString());
+            if (!GeoPointDto.isEmpty(geo)) {
+                // non-fuzzy-geo that already has lat/lon => search via lat/lon
+                CacheListActivity.startActivityCoordinates(this, new Geopoint(geo.getLatitude(), geo.getLongitude()), name);
+            } else if (name != null) {
+                // fuzzy geo with seach-query and without lat/lon => search via address
+                findByAddressFn(name);
+            }
+            finish();
         }
 
         setTheme();
@@ -320,15 +347,19 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     }
 
     private void findByAddressFn() {
-        final String addText = StringUtils.trim(binding.address.getText().toString());
+        final String addressSearchText = StringUtils.trim(binding.address.getText().toString());
 
-        if (StringUtils.isBlank(addText)) {
+        if (StringUtils.isBlank(addressSearchText)) {
             SimpleDialog.of(this).setTitle(R.string.warn_search_help_title).setMessage(R.string.warn_search_help_address).show();
             return;
         }
 
+        findByAddressFn(addressSearchText);
+    }
+
+    private void findByAddressFn(final String addressSearchText) {
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
-        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addText);
+        addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addressSearchText);
         startActivity(addressesIntent);
         ActivityMixin.finishWithFadeTransition(this);
     }
