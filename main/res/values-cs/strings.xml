@@ -1430,6 +1430,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtr kešek je příliš složitý</string>
     <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
     <!-- search -->
+    <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
