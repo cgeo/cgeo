@@ -333,12 +333,12 @@
     <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
+    <string name="home_button">Domů</string>
     <string name="live_map_button">Živá mapa</string>
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
     <string name="any_button">Přejít</string>
-    <string name="more_button">Více</string>
     <string name="unknown_scan">Ve výsledku skenu nenalezen žádný geokód.</string>
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>

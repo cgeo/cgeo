@@ -339,7 +339,6 @@
     <string name="advanced_search_button">Cerca</string>
     <string name="stored_caches_button">Desats</string>
     <string name="any_button">Vés a</string>
-    <string name="more_button">Més</string>
     <string name="unknown_scan">No s\'ha trobat cap geocodi en el resultat de l\'exploració.</string>
     <!-- caches -->
     <string name="caches_no_cache">Aquí no hi ha catxés</string>

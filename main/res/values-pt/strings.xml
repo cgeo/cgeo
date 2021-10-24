@@ -338,7 +338,6 @@
     <string name="advanced_search_button">Pesquisar</string>
     <string name="stored_caches_button">Armazenadas</string>
     <string name="any_button">Ir para</string>
-    <string name="more_button">Mais</string>
     <string name="unknown_scan">A leitura realizada não determinou qualquer código GC.</string>
     <!-- caches -->
     <string name="caches_no_cache">Nenhuma cache</string>

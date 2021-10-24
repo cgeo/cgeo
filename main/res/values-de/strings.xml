@@ -338,7 +338,6 @@
     <string name="advanced_search_button">Suche</string>
     <string name="stored_caches_button">Gespeichert</string>
     <string name="any_button">Gehe zu</string>
-    <string name="more_button">Mehr</string>
     <string name="unknown_scan">Konnte keinen Geocode im Scan finden.</string>
     <!-- caches -->
     <string name="caches_no_cache">Kein Cache</string>
