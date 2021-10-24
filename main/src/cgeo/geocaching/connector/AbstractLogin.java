@@ -10,6 +10,7 @@ import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.DiskCookieStore;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.LocalizationUtils;
+import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ public abstract class AbstractLogin {
      * Number of caches found. An unknown number is signaled by the value -1, while 0 really indicates zero caches found
      * by the user.
      */
-    private int actualCachesFound = -1;
+    private int actualCachesFound = UNKNOWN_FINDS;
     /**
      * use "not logged in" as default. Connectors should update there status as soon as they start establishing a connection.
      */

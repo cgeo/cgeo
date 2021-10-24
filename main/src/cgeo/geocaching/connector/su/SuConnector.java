@@ -56,7 +56,7 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
     // all IDs are unique at SU
     private static final CharSequence PREFIX_GENERAL = "SU";
 
-    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.NOT_RETRIEVED);
+    private UserInfo userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.NOT_RETRIEVED);
 
     private SuConnector() {
         // singleton
@@ -99,10 +99,10 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
             try {
                 userInfo = SuApi.getUserInfo(this);
             } catch (final SuApi.SuApiException e) {
-                userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfoStatus.FAILED);
+                userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfoStatus.FAILED);
             }
         } else {
-            userInfo = new UserInfo(StringUtils.EMPTY, 0, UserInfo.UserInfoStatus.NOT_SUPPORTED);
+            userInfo = new UserInfo(StringUtils.EMPTY, UNKNOWN_FINDS, UserInfo.UserInfoStatus.NOT_SUPPORTED);
         }
         // update cache counter
         FoundNumCounter.getAndUpdateFoundNum(this);
