@@ -365,6 +365,7 @@
     <string name="caches_sort_favorites">お気に入り</string>
     <string name="caches_sort_favorites_ratio">お気に入り [%]</string>
     <string name="caches_sort_name">キャッシュ名</string>
+    <string name="caches_sort_geocode">GCコード</string>
     <string name="caches_sort_rating">評価</string>
     <string name="caches_sort_vote">評価済み</string>
     <string name="caches_sort_inventory">目録の数</string>
@@ -1098,9 +1099,10 @@
     <string name="cache_favpoint_not_on">お気に入りに入っていません</string>
     <string name="cache_list_select_last">前回の選択</string>
     <string name="cache_images">画像</string>
-    <string name="cache_advanced">追加設定</string>
+    <string name="cache_advanced">その他</string>
     <string name="cache_waypoints">ウェイポイント</string>
     <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">ウェイポイント(%d)</string>
+    <string name="cache_waypoints_add">ウェイポイントを追加</string>
     <string name="cache_waypoints_add_currentLocation">現在地を追加</string>
     <string name="cache_waypoints_add_fromclipboard">クリップボードから追加</string>
     <string name="cache_waypoints_hide_visited_waypoints">訪問済みウェイポイントを非表示</string>
@@ -1385,7 +1387,7 @@
     <string name="search_hbu_button">オーナー名で検索</string>
     <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
-    <string name="search_filter_info_message" formatted="false">**フィルターで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
+    <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
     <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
     <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
