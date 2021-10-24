@@ -1404,6 +1404,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtro cache troppo complesso</string>
     <string name="map_settings_cache_filter_too_complex_message">Il filtro cache attuale è troppo complesso per applicare opzioni aggiuntive qui. Di solito questo significa che il filtro cache contiene espressioni NOT oppure OR invece di semplice logica AND.</string>
     <!-- search -->
+    <string name="geo_search_label">Cerca cache nelle vicinanze</string>
     <string name="search_bar_hint">Cerca caches/trackables</string>
     <string name="search_coordinates">Coordinate</string>
     <string name="search_coordinates_button">Cerca per coordinate</string>

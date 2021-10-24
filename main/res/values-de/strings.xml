@@ -333,6 +333,7 @@
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
+    <string name="home_button">Hauptseite</string>
     <string name="live_map_button">Live-Karte</string>
     <string name="caches_nearby_button">In der Nähe</string>
     <string name="advanced_search_button">Suche</string>
@@ -1403,6 +1404,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Cache-Filter zu komplex</string>
     <string name="map_settings_cache_filter_too_complex_message">Der aktuelle Cache-Filter ist zu komplex, um zusätzliche Optionen anzuwenden. Normalerweise bedeutet dies, dass der Cache-Filter eine Negation oder ODER-Ausdrücke anstelle von einfacher UND-Logik enthält.</string>
     <!-- search -->
+    <string name="geo_search_label">Caches in der Nähe suchen</string>
     <string name="search_bar_hint">Caches/Trackables suchen</string>
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_coordinates_button">Suche nach Koordinaten</string>
