@@ -147,6 +147,46 @@
 		        <category android:name="android.intent.category.DEFAULT"/>
 		    </intent-filter>
 
+            <!-- "Search geocaches nearby" from other app form geo-uri with mimeType=null -->
+            <intent-filter android:label="@string/geo_search_label" android:icon="${appIcon}" android:roundIcon="${appIconRound}">
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="geo" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <!-- "Search geocaches nearby" from other app from geo-uri with mimeType set -->
+            <intent-filter android:label="@string/geo_search_label" android:icon="${appIcon}" android:roundIcon="${appIconRound}">
+                <action android:name="android.intent.action.VIEW" />
+                <data android:scheme="geo" />
+                <data android:mimeType="*/*" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+            <!-- "Search geocaches nearby" where location comes from click on http(s) link to internet map service
+                (google-maps, openstreetmap, yandex, here)  -->
+            <intent-filter android:label="@string/geo_search_label" android:icon="${appIcon}" android:roundIcon="${appIconRound}">
+                <data android:scheme="http" />
+                <data android:scheme="https" />
+                <data android:host="maps.google.com" />
+                <data android:host="maps.google.de" />
+                <data android:host="www.openstreetmap.org" />
+                <data android:host="openstreetmap.org" />
+
+                <data android:host="maps.yandex.ru"  />
+                <data android:host="maps.yandex.com" />
+
+                <data android:host="here.com" />
+                <data android:host="www.here.com" />
+                <data android:host="share.here.com" />
+                <data android:host="goto.here.com" />
+                <data android:host="go.here.com" />
+                <data android:host="wego.here.com" />
+
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+            </intent-filter>
+
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
