@@ -332,6 +332,7 @@
     <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
     <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
+    <string name="home_button">Ana Sayfa</string>
     <string name="live_map_button">Canlı harita</string>
     <string name="caches_nearby_button">Yakınlarda</string>
     <string name="advanced_search_button">Ara</string>
@@ -1401,6 +1402,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtre çok karmaşık</string>
     <string name="map_settings_cache_filter_too_complex_message">Mevcut filtre daha fazla seçenek uygulamak için çok karmaşık. Bu genellikle filtrenin basit VE mantığı yerine DEĞİL veya VEYA içermesiyle alakalıdır.</string>
     <!-- search -->
+    <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
