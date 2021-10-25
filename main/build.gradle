@@ -341,7 +341,7 @@ dependencies {
 
     // Mapsforge Snapshot from eddiemuc's GitHub' repository (via https://jitpack.io/#eddiemuc/mapsforge)
     def mapsforgeSource = 'com.github.eddiemuc.mapsforge'
-    def mapsforgeVersion = 'ebb99c8338' // fix for #10128
+    def mapsforgeVersion = '0.15.0' // fix for #10128
 
     implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
