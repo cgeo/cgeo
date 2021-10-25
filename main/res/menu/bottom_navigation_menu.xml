@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <!-- WARNING: Bottom navigation menu can hold only five items max! -->
+    <!-- WARNING: Bottom navigation menu can hold only five items max, otherwise it will crash! -->
     <item
         android:id="@+id/page_home"
         android:enabled="true"
         android:icon="@drawable/ic_menu_home"
         android:title="@string/home_button" />
     <item
-        android:id="@+id/page_map"
-        android:enabled="true"
-        android:icon="@drawable/ic_menu_mapmode"
-        android:title="@string/live_map_button" />
-    <item
         android:id="@+id/page_list"
         android:enabled="true"
         android:icon="@drawable/ic_menu_list"
         android:title="@string/stored_caches_button" />
+    <item
+        android:id="@+id/page_map"
+        android:enabled="true"
+        android:icon="@drawable/ic_menu_mapmode"
+        android:title="@string/live_map_button" />
     <item
         android:id="@+id/page_search"
         android:enabled="true"
