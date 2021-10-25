@@ -259,7 +259,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         // set layout
         ActivityMixin.setTheme(this);
 
-        // init BottomNavigationController to add the bottom navigation to the layout
+        // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
         setContentView(MapMapsforgeV6Binding.inflate(getLayoutInflater()).getRoot());
 
         setTitle();

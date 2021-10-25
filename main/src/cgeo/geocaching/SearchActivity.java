@@ -47,7 +47,6 @@ import java.util.Locale;
 import de.k3b.geo.api.GeoPointDto;
 import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class SearchActivity extends AbstractBottomNavigationActivity implements CoordinatesInputDialog.CoordinateUpdate {
@@ -116,7 +115,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         setTheme();
         binding = SearchActivityBinding.inflate(getLayoutInflater());
 
-        // init BottomNavigationController to add the bottom navigation to the layout
+        // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
         setContentView(binding.getRoot());
 
         // set title in code, as the activity needs a hard coded title due to the intent filters
