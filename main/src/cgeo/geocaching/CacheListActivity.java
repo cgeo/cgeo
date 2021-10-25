@@ -76,6 +76,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -104,7 +105,6 @@ import android.os.Handler;
 import android.os.Message;
 import android.view.ContextMenu;
 import android.view.ContextMenu.ContextMenuInfo;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -784,6 +784,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
 
+        ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
+
         final boolean isHistory = type == CacheListType.HISTORY;
         final boolean isOffline = type == CacheListType.OFFLINE;
         final boolean isEmpty = cacheList.isEmpty();
@@ -1263,12 +1265,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    public boolean onKeyDown(final int keyCode, final KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK && adapter.isSelectMode()) {
+    public void onBackPressed() {
+        if (adapter.isSelectMode()) {
             adapter.setSelectMode(false);
-            return true;
+            invalidateOptionsMenu(); // update select mode icon
+        } else {
+            super.onBackPressed();
         }
-        return super.onKeyDown(keyCode, event);
     }
 
     private void initAdapter() {

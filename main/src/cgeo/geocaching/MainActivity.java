@@ -176,23 +176,24 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                     }
                                 });
 
-                            final ImageView userAvartar = connectorInfo.findViewById(R.id.item_icon);
+                            final ImageView userAvatar = connectorInfo.findViewById(R.id.item_icon);
 
                             if (conn instanceof IAvatar) {
-                                userAvartar.setVisibility(View.INVISIBLE);
+                                // already reserve space, so that other content does not jump as soon as avatar is loaded
+                                userAvatar.setVisibility(View.INVISIBLE);
 
                                 AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
                                     () -> AvatarUtils.getAvatar((IAvatar) conn),
                                     img -> {
+                                        userAvatar.setVisibility(View.VISIBLE);
                                         if (img == null) {
-                                            userAvartar.setVisibility(GONE);
+                                            userAvatar.setImageResource(R.drawable.avartar_placeholder);
                                         } else {
-                                            userAvartar.setVisibility(View.VISIBLE);
-                                            userAvartar.setImageDrawable(img);
+                                            userAvatar.setImageDrawable(img);
                                         }
                                     });
                             } else {
-                                userAvartar.setVisibility(GONE);
+                                userAvatar.setVisibility(GONE);
                             }
                         }
                     });
@@ -252,7 +253,20 @@ public class MainActivity extends AbstractBottomNavigationActivity {
            // don't call the super implementation with the layout argument, as that would set the wrong theme
             super.onCreate(savedInstanceState);
 
+            binding = MainActivityBinding.inflate(getLayoutInflater());
+
+            // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
+            setContentView(binding.getRoot());
+
             setTitle(R.string.app_name);
+
+            // Show c:geo logo for this activity
+            final ActionBar actionBar = getSupportActionBar();
+            if (actionBar != null) {
+                actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
+                actionBar.setDisplayHomeAsUpEnabled(true);
+            }
+            cLog.add("setview");
 
             backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
             cLog.add("bu");
@@ -263,11 +277,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                 DebugUtils.askUserToReportProblem(this, "Fatal DB error: " + errorMsg);
             }
             cLog.add("ds");
-
-            binding = MainActivityBinding.inflate(getLayoutInflater());
-
-            // init BottomNavigationController to add the bottom navigation to the layout
-            setContentView(binding.getRoot());
 
             if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
                 // If we had been open already, start from the last used activity.
@@ -345,16 +354,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
         checkRestore();
         DataStore.cleanIfNeeded(this);
-    }
-
-    @Override
-    protected void initHomeAsUpIndicator() {
-        // Show c:geo logo for this activity
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null) {
-            actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
     }
 
     @Override

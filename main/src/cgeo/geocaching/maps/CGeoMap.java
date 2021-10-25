@@ -565,7 +565,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             this.lastNavTarget = mapOptions.mapState.getLastNavTarget();
         }
 
-        // init BottomNavigationController to add the bottom navigation to the layout
+        // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
         activity.setContentView(MapGoogleBinding.inflate(activity.getLayoutInflater()).getRoot());
 
         // map settings popup

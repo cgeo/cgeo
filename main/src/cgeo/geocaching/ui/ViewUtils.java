@@ -340,7 +340,9 @@ public class ViewUtils {
         int extendTo = 0;
 
         //RULES to extend AS ALWAYS are decoded here. See rules of Android in {@link androidx.appcompat.view.ActionBarPolicy#getMaxActionButtons}
-        if (width >= 360) {
+        if (width >= 410) {
+            extendTo = 4;
+        } else if (width >= 360) {
             extendTo = 3;
         }
 

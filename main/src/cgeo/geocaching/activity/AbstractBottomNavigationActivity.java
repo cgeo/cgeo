@@ -6,7 +6,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
 import cgeo.geocaching.list.PseudoList;
@@ -14,16 +13,12 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.AvatarUtils;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.graphics.Bitmap;
-import android.graphics.drawable.Drawable;
 import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.view.MenuItem;
@@ -33,10 +28,6 @@ import android.widget.Toast;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.RoundedBitmapDrawable;
-import androidx.core.graphics.drawable.RoundedBitmapDrawableFactory;
 import androidx.core.util.Consumer;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -85,8 +76,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         findViewById(R.id.page_list).setOnLongClickListener(view -> onListsLongClicked());
         // will be called if c:geo cannot log in
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
-
-        initHomeAsUpIndicator();
     }
 
     @Nullable
@@ -103,47 +92,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
     }
 
-    protected void initHomeAsUpIndicator() {
-        // if not is task root, we display the regular back button instead
-        if (isTaskRoot()) {
-
-            // Show user avatar in ActionBar
-            for (ILogin conn : ConnectorFactory.getActiveLiveConnectors()) {
-                if (conn instanceof IAvatar) {
-                    final int scaledSize = (int) getResources().getDimension(R.dimen.toolbarAvatarSize);
-                    AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                            () -> AvatarUtils.getAvatar((IAvatar) conn),
-                            img -> {
-                                if (img != null) {
-                                    setHomeAsUpIndicator(Bitmap.createScaledBitmap(img.getBitmap(), scaledSize, scaledSize, true));
-                                }
-                            });
-
-                    return;
-                }
-            }
-
-            // no user avatar found
-            final Drawable drawable = ContextCompat.getDrawable(this, R.drawable.avartar_placeholder);
-
-            if (drawable != null) {
-                setHomeAsUpIndicator(ViewUtils.drawableToBitmap(drawable));
-            }
-        }
-    }
-
-    private void setHomeAsUpIndicator(final Bitmap bitmap) {
-        final ActionBar actionBar = getSupportActionBar();
-
-        if (actionBar != null) {
-            final RoundedBitmapDrawable drawable = RoundedBitmapDrawableFactory.create(getResources(), bitmap);
-            drawable.setCircular(true);
-
-            actionBar.setHomeAsUpIndicator(drawable);
-            actionBar.setDisplayHomeAsUpEnabled(true);
-        }
-    }
-
     private boolean onListsLongClicked() {
         new StoredList.UserInterface(this).promptForListSelection(R.string.list_title, selectedListId -> {
             if (selectedListId == PseudoList.HISTORY_LIST.id) {
@@ -155,17 +103,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             ActivityMixin.finishWithFadeTransition(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(final MenuItem item) {
-        final int id = item.getItemId();
-        if (id == android.R.id.home && isTaskRoot()) {
-            startActivity(new Intent(this, MainActivity.class));
-            ActivityMixin.finishWithFadeTransition(this);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     @Override
