@@ -333,6 +333,7 @@
     <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <string name="menu_invert_order">Inverter ordem</string>
     <!-- main screen -->
+    <string name="home_button">Página inicial</string>
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Por perto</string>
     <string name="advanced_search_button">Pesquisar</string>
@@ -1403,6 +1404,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtro de cache muito complexo</string>
     <string name="map_settings_cache_filter_too_complex_message">O filtro de cache actual é muito complexo para se aplicarem aqui as opções adicionais. Geralmente, isso significa que o filtro de cache contém expressões do tipo \"NOT\" (não) ou \"OR\" (ou) em vez de expressões simples lógicas do tipo \"AND\" (e).</string>
     <!-- search -->
+    <string name="geo_search_label">Procurar caches próximas</string>
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Pesquisar por coordenadas</string>
