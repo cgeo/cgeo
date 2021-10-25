@@ -320,9 +320,12 @@
     <string name="menu_helpers">보조 프로그램</string>
     <string name="menu_settings">설정</string>
     <string name="menu_backup">백업 / 복원</string>
+    <string name="menu_update">오프라인 데이터 업데이트</string>
     <string name="menu_update_routingdata">라우팅 데이터</string>
     <string name="menu_update_mapdata">지도 데이터</string>
+    <string name="menu_dashboard">대시보드 로그인</string>
     <string name="menu_history">지난 기록</string>
+    <string name="menu_history_longstring">찾음 역사</string>
     <string name="menu_filter">필터</string>
     <string name="menu_scan_geo">지오코드 스캔</string>
     <string name="menu_lists_pocket_queries">포켓쿼리</string>
@@ -330,6 +333,7 @@
     <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
     <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
+    <string name="home_button">홈</string>
     <string name="live_map_button">라이브 지도</string>
     <string name="caches_nearby_button">인근 캐시</string>
     <string name="advanced_search_button">검색</string>
@@ -409,6 +413,12 @@
     <string name="caches_askdeletion">비어 있으면 삭제 요청</string>
     <string name="select_icon">아이콘 선택</string>
     <string name="onetime_missing_unicode_info">안드로이드 버전은 지원되는 아이콘 자동 감지를 지원하지 않습니다. 일부 문자가 누락 될 수 있습니다.</string>
+    <plurals name="user_finds">
+        <item quantity="other">%d개 찾음</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="other">%d개 오프라인으로 로그됨</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">목록 관리</string>
     <string name="list_menu_create">새 목록 만들기</string>
@@ -665,6 +675,7 @@
     <string name="init_login_popup_failed">로그인 실패!</string>
     <string name="init_login_popup_failed_reason">로그인 실패: %s</string>
     <string name="init_login_popup_not_authorized">권한이 없습니다.</string>
+    <string name="init_login_popup_not_logged_in">로그인하지 않았습니다</string>
     <string name="init_login_popup_invalid_timestamp">시간이 맞지 않습니다. 기기의 시간을 조정하세요.</string>
     <string name="init_login_popup_invalid_token">인증이 틀림. 다시 인증하세요.</string>
     <string name="init_authorization_credential_username">사용자명</string>
@@ -1380,6 +1391,7 @@
     <string name="map_settings_cache_filter_too_complex_title">캐시 필터가 너무 복잡함</string>
     <string name="map_settings_cache_filter_too_complex_message">현재 캐시 필터가 너무 복잡해서 여기에 추가 옵션을 적용할 수 없습니다. 일반적으로 이는 캐시 필터에 단순한 AND 논리 대신 NOT 또는 OR 표현식이 포함되어 있음을 의미합니다.</string>
     <!-- search -->
+    <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
     <string name="search_coordinates">좌표</string>
     <string name="search_coordinates_button">좌표로 검색</string>
@@ -1394,6 +1406,9 @@
     <string name="search_hbu">숨겨진 사용자</string>
     <string name="search_hbu_prefill">소유주</string>
     <string name="search_hbu_button">소유주로 검색</string>
+    <string name="search_finder">찾은 사용자</string>
+    <string name="search_finder_prefill">찾은 사용자</string>
+    <string name="search_finder_button">찾은 사용자명으로 검색</string>
     <string name="search_filter">필터</string>
     <string name="search_filter_button">필터로 검색</string>
     <string name="search_filter_info_message" formatted="false">**필터로 검색**은 제공된 필터를 사용하여 모든 활성 온라인 서비스 (예: geocaching.com)에서 캐시를 검색합니다. 그러나 이러한 서비스의 검색 기능은 일반적으로 c:geo의 필터 기능보다 더 제한적입니다.\n\n- 모든 서비스는 AND 필터 만 지원합니다 (OR 필터 및 필터 반전 없음).\n- **캐시 유형** 또는 **캐시 크기**와 같은보다 기본적인 필터는 모든 서비스에서 지원됩니다. 더 복잡한 필터는 종종 지원되지 않거나 일부 제한이 있습니다 (예: **호감점수** 또는 **설치한 날짜**).\n- 서비스별로 지원되는 필터에 대한 자세한 목록은 [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)에서 확인할 수 있습니다.\n\n온라인 서비스에서 지원하지 않는 필터는 수신된 결과에 c:geo에 의해 적용됩니다.</string>
@@ -1454,6 +1469,7 @@
     <!-- user -->
     <string name="user_menu_title">소개</string>
     <string name="user_menu_view_hidden">숨긴 캐시</string>
+    <string name="user_menu_view_found">찾은 캐시</string>
     <string name="user_menu_open_browser">브라우저에서 회원정보 열기</string>
     <string name="user_menu_send_message">메시지 보내기</string>
     <string name="user_menu_send_email">이메일 보내기</string>
@@ -2087,4 +2103,5 @@
     <string name="later">나중에</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">모두 선택</string>
+    <string name="touch_again_to_exit">종료하려면 다시 누르십시오</string>
 </resources>
