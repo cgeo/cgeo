@@ -86,7 +86,7 @@ public final class MapMarkerUtils {
             .append(cache.hasFinalDefined())
             .append(cache.getPersonalNote())
             .append(cache.hasLogOffline())
-            .append(!cache.getLists().isEmpty())
+            .append(cache.getLists().isEmpty())
             .append(cache.getOfflineLogType())
             .append(showPin(cacheListType))
             .append(showFloppyOverlay(cacheListType))
@@ -285,7 +285,8 @@ public final class MapMarkerUtils {
     @NonNull
     public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
         final int hashcode = new HashCodeBuilder()
-            .append(cache.getType().id)
+            .append(cache.getType().typeColor)
+            .append(cache.getMapDotMarkerId())
             .append(cache.isFound())
             .append(cache.isDisabled())
             .append(cache.isArchived())
@@ -400,8 +401,7 @@ public final class MapMarkerUtils {
         }
         final int hashcode = new HashCodeBuilder()
             .append(waypoint.getMapDotMarkerId())
-            .append(waypoint.getWaypointType().dotMarkerId)
-            .append(waypoint.getMapMarkerId())
+            .append(waypoint.getWaypointType())
             .append(cacheIsDisabled)
             .append(cacheIsArchived)
             .toHashCode();
