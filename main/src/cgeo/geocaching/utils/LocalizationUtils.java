@@ -50,9 +50,9 @@ public final class LocalizationUtils {
         }
         try {
             if (resId == 0 || APPLICATION_CONTEXT == null) {
-                return String.format(fallback, params);
+                return params != null && params.length > 0 ? String.format(fallback, params) : fallback;
             }
-            return APPLICATION_CONTEXT.getString(resId, params);
+            return params != null && params.length > 0 ? APPLICATION_CONTEXT.getString(resId, params) : APPLICATION_CONTEXT.getString(resId);
         } catch (IllegalFormatException | Resources.NotFoundException e) {
             Log.w("Problem trying to format '" + resId + "/" + fallback + "' with [" + StringUtils.join(params, ";") + "]", e);
             return (fallback == null ? "" : fallback) + ":" + StringUtils.join(params, ";");

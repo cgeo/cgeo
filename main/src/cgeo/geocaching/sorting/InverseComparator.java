@@ -4,6 +4,7 @@ import cgeo.geocaching.models.Geocache;
 
 import androidx.annotation.NonNull;
 
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -24,17 +25,12 @@ public class InverseComparator implements CacheComparator {
     }
 
     @Override
-    public boolean isAutoManaged() {
-        return originalComparator.isAutoManaged();
-    }
-
-    @Override
     public String getSortableSection(@NonNull final Geocache cache) {
         return originalComparator.getSortableSection(cache);
     }
 
     @Override
-    public void sort(final List<Geocache> list, final boolean inverse) {
-        this.originalComparator.sort(list, inverse);
+    public void sort(final List<Geocache> list) {
+        Collections.sort(list, this);
     }
 }

@@ -254,6 +254,7 @@
     <string translatable="false" name="pref_temp_su_token_secret">su-temp-token-secret</string>
     <string translatable="false" name="pref_temp_su_token_public">su-temp-token-public</string>
     <string translatable="false" name="pref_cache_filter_config">cache_filter_config</string>
+    <string translatable="false" name="pref_cache_sort_config">cache_sort_config</string>
 
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string translatable="false" name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>

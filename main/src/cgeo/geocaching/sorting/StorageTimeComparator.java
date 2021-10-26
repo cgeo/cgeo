@@ -10,6 +10,8 @@ class StorageTimeComparator extends AbstractCacheComparator {
 
     @Override
     protected int compareCaches(final Geocache cache1, final Geocache cache2) {
+        //Note: this comparator sorts by "time of last update" (low to high)
+        // -> which is transferred in GUI to "storage time" (high to low)
         return Long.compare(cache1.getUpdated(), cache2.getUpdated());
     }
 
