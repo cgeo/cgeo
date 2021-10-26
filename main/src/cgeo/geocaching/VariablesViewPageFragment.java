@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.CachedetailVariablesPageBinding;
 import cgeo.geocaching.databinding.VariablesListItemBinding;
@@ -18,7 +19,6 @@ import cgeo.geocaching.utils.calc.Value;
 import cgeo.geocaching.utils.functions.Action2;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -28,7 +28,6 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -198,16 +197,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
                         editText.setText(newFormula);
                         changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
                         editText.setSelection(f.getFunctionInsertCursorPosition());
-                        editText.requestFocus();
-                        //trigger show soft keyboard
-                        editText.postDelayed(
-                            () -> {
-                                final InputMethodManager keyboard = (InputMethodManager) parent.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                                if (keyboard != null) {
-                                    keyboard.showSoftInput(editText, 0);
-                                }
-                            }
-                            , 200);
+                        Keyboard.show(parent.getContext(), editText);
                     });
             });
 
