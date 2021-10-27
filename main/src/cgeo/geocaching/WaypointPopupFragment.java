@@ -11,6 +11,7 @@ import cgeo.geocaching.speech.SpeechService;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.os.Bundle;
@@ -79,7 +80,7 @@ public class WaypointPopupFragment extends AbstractDialogFragmentWithProximityNo
         try {
             final String wpCode = waypoint.getPrefix() + waypoint.getShortGeocode().substring(2);
             binding.toolbar.toolbar.setTitle(wpCode);
-            binding.toolbar.toolbar.setLogo(ResourcesCompat.getDrawable(getResources(), waypoint.getWaypointType().markerId, null));
+            binding.toolbar.toolbar.setLogo(MapMarkerUtils.getWaypointMarker(res, waypoint, false).getDrawable());
 
             binding.title.setText(TextUtils.coloredCacheText(cache, cache.getName()));
             details = new CacheDetailsCreator(getActivity(), binding.waypointDetailsList);

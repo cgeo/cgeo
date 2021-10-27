@@ -58,7 +58,7 @@ public class GeoItemSelectorUtils {
         final TextView tv = (TextView) view.findViewById(R.id.text);
         tv.setText(waypoint.getName());
 
-        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint).getDrawable(), null, null, null);
+        tv.setCompoundDrawablesRelativeWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(context.getResources(), waypoint, false).getDrawable(), null, null, null);
 
         final StringBuilder text = new StringBuilder(waypoint.getShortGeocode());
         final Geocache parentCache = waypoint.getParentGeocache();

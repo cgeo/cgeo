@@ -91,6 +91,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
@@ -2163,19 +2164,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         private void setWaypointIcon(final CacheDetailActivity activity, final TextView nameView, final Waypoint wpt) {
-            final WaypointType waypointType = wpt.getWaypointType();
-            final Drawable icon;
-            if (wpt.isVisited()) {
-                final LayerDrawable ld = new LayerDrawable(new Drawable[] {
-                    ResourcesCompat.getDrawable(activity.res, waypointType.markerId, null),
-                    ResourcesCompat.getDrawable(activity.res, R.drawable.tick, null) });
-                ld.setLayerInset(0, 0, 0, visitedInset, visitedInset);
-                ld.setLayerInset(1, visitedInset, visitedInset, 0, 0);
-                icon = ld;
-            } else {
-                icon = ResourcesCompat.getDrawable(activity.res, waypointType.markerId, null);
-            }
-            nameView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
+            nameView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false).getDrawable(), null, null, null);
         }
     }
 
