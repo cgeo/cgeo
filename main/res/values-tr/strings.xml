@@ -360,6 +360,7 @@
     <string name="caches_history">Geçmiş</string>
     <string name="caches_on_map">Haritada göster</string>
     <string name="caches_sort">Sırala</string>
+    <string name="caches_sort_automatic">Otomatik (%s)</string>
     <string name="caches_sort_distance">Mesafe</string>
     <string name="caches_sort_distance_target">Hedefe mesafe</string>
     <string name="caches_sort_difficulty">Zorluk</string>
