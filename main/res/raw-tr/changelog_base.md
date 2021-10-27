@@ -2,7 +2,7 @@
 - Yeni: Geocache ikonları üzerinde yeniden çalışma tamamlandı
 - New: Show icons for last logs in cache popup
 - Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
+- Düzeltme: Geocache / yol noktası açılır penceresinde Geocache adını daha görünür yap
 - Fix: Show warning in live map when live mode is disabled
 - Fix: Allow HTML in navigation targets' description
 - Change: Adapted zoom controls for OSM maps for better consistency across maps
