@@ -154,7 +154,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -2103,7 +2102,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // title
             holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : getString(R.string.waypoint));
-            setWaypointIcon(activity, holder.binding.name, wpt);
+            holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false).getDrawable());
 
             // visited
             /* @todo
@@ -2161,10 +2160,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.openContextMenu(v);
                 return true;
             });
-        }
-
-        private void setWaypointIcon(final CacheDetailActivity activity, final TextView nameView, final Waypoint wpt) {
-            nameView.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false).getDrawable(), null, null, null);
         }
     }
 
