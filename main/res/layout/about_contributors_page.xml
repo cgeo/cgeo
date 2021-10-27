@@ -13,9 +13,9 @@
         android:orientation="vertical" >
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/contributors_carnero"
                 android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
@@ -28,9 +28,9 @@
             android:text="@string/about_contributors_carnerodetails" />
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/about_contributors_recent"
                 android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
@@ -43,9 +43,9 @@
             android:text="@string/contributors_recent" />
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/about_contributors_specialthanks"
                 android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
@@ -58,9 +58,9 @@
             android:text="@string/about_contributors_specialthanksdetails" />
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/about_contributors_other"
                 android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>
@@ -73,9 +73,9 @@
             android:text="@string/contributors_other" />
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/about_components"
                 android:textSize="@dimen/textSize_headingPrimary" />
         </RelativeLayout>

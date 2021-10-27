@@ -47,7 +47,6 @@ import java.util.Locale;
 import de.k3b.geo.api.GeoPointDto;
 import de.k3b.geo.api.IGeoPointInfo;
 import de.k3b.geo.io.GeoUri;
-
 import org.apache.commons.lang3.StringUtils;
 
 public class SearchActivity extends AbstractBottomNavigationActivity implements CoordinatesInputDialog.CoordinateUpdate {

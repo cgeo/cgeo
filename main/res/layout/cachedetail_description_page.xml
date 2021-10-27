@@ -54,10 +54,10 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout">
-                <View style="@style/separator_horizontal" />
+                <View style="@style/separator_horizontal_heading" />
                 <TextView
                     android:id="@+id/extra_description_title"
-                    style="@style/separator_horizontal_headline" />
+                    style="@style/separator_horizontal_heading_text" />
             </RelativeLayout>
 
             <TextView
@@ -82,10 +82,10 @@
 
             <RelativeLayout style="@style/separator_horizontal_layout">
 
-                <View style="@style/separator_horizontal" />
+                <View style="@style/separator_horizontal_heading" />
 
                 <TextView
-                    style="@style/separator_horizontal_headline"
+                    style="@style/separator_horizontal_heading_text"
                     android:text="@string/cache_hint" />
             </RelativeLayout>
 
@@ -124,10 +124,10 @@
 
             <RelativeLayout style="@style/separator_horizontal_layout">
 
-                <View style="@style/separator_horizontal" />
+                <View style="@style/separator_horizontal_heading" />
 
                 <TextView
-                    style="@style/separator_horizontal_headline"
+                    style="@style/separator_horizontal_heading_text"
                     android:text="@string/cache_personal_note" />
             </RelativeLayout>
 
