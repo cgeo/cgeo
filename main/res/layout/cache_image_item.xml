@@ -9,11 +9,10 @@
         android:id="@+id/titleLayout"
         style="@style/separator_horizontal_layout">
 
-        <View style="@style/separator_horizontal" />
-
+        <View style="@style/separator_horizontal_heading" />
         <TextView
             android:id="@+id/title"
-            style="@style/separator_horizontal_headline"
+            style="@style/separator_horizontal_heading_text"
             android:text="@string/log_image"
             tools:text="image title"/>
     </RelativeLayout>

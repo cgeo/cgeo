@@ -357,7 +357,7 @@
     <!-- separators -->
     <style name="separator_horizontal">
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:layout_height">3dip</item>
+        <item name="android:layout_height">1dip</item>
         <item name="android:layout_centerInParent">true</item>
         <item name="android:background">@color/colorSeparator</item>
     </style>
@@ -376,7 +376,14 @@
         <item name="android:layout_marginBottom">2dip</item>
     </style>
 
-    <style name="separator_horizontal_headline">
+    <style name="separator_horizontal_heading">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">3dip</item>
+        <item name="android:layout_centerInParent">true</item>
+        <item name="android:background">@color/colorSeparator</item>
+    </style>
+
+    <style name="separator_horizontal_heading_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_alignParentLeft">true</item>

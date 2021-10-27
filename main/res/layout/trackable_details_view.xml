@@ -28,8 +28,8 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal" />
-                <TextView style="@style/separator_horizontal_headline" android:text="@string/trackable_goal" />
+                <View style="@style/separator_horizontal_heading" />
+                <TextView style="@style/separator_horizontal_heading_text" android:text="@string/trackable_goal" />
             </RelativeLayout>
 
             <TextView
@@ -54,8 +54,8 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal" />
-                <TextView style="@style/separator_horizontal_headline" android:text="@string/trackable_details" />
+                <View style="@style/separator_horizontal_heading" />
+                <TextView style="@style/separator_horizontal_heading_text" android:text="@string/trackable_details" />
             </RelativeLayout>
 
             <TextView
@@ -80,8 +80,8 @@
             tools:visibility="visible">
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-                <View style="@style/separator_horizontal" />
-                <TextView style="@style/separator_horizontal_headline" android:text="@string/trackable_image" />
+                <View style="@style/separator_horizontal_heading" />
+                <TextView style="@style/separator_horizontal_heading_text" android:text="@string/trackable_image" />
             </RelativeLayout>
 
             <LinearLayout

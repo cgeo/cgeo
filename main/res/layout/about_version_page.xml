@@ -62,8 +62,8 @@
         </FrameLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
-            <TextView style="@style/separator_horizontal_headline" android:text="@string/about_version" />
+            <View style="@style/separator_horizontal_heading" />
+            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_version" />
         </RelativeLayout>
 
         <TextView
@@ -93,8 +93,8 @@
             tools:visibility="visible"/>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
-            <TextView style="@style/separator_horizontal_headline" android:text="@string/about_donate" />
+            <View style="@style/separator_horizontal_heading" />
+            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_donate" />
         </RelativeLayout>
 
         <LinearLayout
@@ -114,8 +114,8 @@
         </LinearLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
-            <TextView style="@style/separator_horizontal_headline" android:text="@string/about_help" />
+            <View style="@style/separator_horizontal_heading" />
+            <TextView style="@style/separator_horizontal_heading_text" android:text="@string/about_help" />
         </RelativeLayout>
 
         <TableLayout

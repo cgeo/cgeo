@@ -70,7 +70,6 @@
             </RelativeLayout>
 
             <RelativeLayout style="@style/separator_horizontal_layout" >
-
                 <View style="@style/separator_horizontal" />
             </RelativeLayout>
 

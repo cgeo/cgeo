@@ -14,9 +14,9 @@
         android:orientation="vertical" >
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_filter" />
         </RelativeLayout>
 
@@ -45,9 +45,9 @@
         </RelativeLayout>
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_geo" />
         </RelativeLayout>
 
@@ -71,9 +71,9 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_coordinates" />
         </RelativeLayout>
 
@@ -89,9 +89,9 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_address" />
         </RelativeLayout>
 
@@ -110,9 +110,9 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_kw" />
         </RelativeLayout>
 
@@ -131,9 +131,9 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_hbu" />
         </RelativeLayout>
 
@@ -152,9 +152,9 @@
         <!-- ** -->
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_finder" />
         </RelativeLayout>
 
@@ -174,9 +174,9 @@
 
 
         <RelativeLayout style="@style/separator_horizontal_layout" >
-            <View style="@style/separator_horizontal" />
+            <View style="@style/separator_horizontal_heading" />
             <TextView
-                style="@style/separator_horizontal_headline"
+                style="@style/separator_horizontal_heading_text"
                 android:text="@string/search_tb" />
         </RelativeLayout>
 
