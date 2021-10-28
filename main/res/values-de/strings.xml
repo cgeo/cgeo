@@ -333,7 +333,7 @@
     <string name="menu_scan_description">c:geo kann Geocodes scannen, die als QR-Code abgebildet sind. Die dafür notwendige App ist nicht installiert. Möchtest du Google Play öffnen, um sie zu installieren?</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
-    <string name="home_button">Startseite</string>
+    <string name="home_button">Start</string>
     <string name="live_map_button">Live-Karte</string>
     <string name="caches_nearby_button">In der Nähe</string>
     <string name="advanced_search_button">Suche</string>
