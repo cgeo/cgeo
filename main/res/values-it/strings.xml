@@ -361,6 +361,7 @@
     <string name="caches_history">Cronologia</string>
     <string name="caches_on_map">Visualizza sulla mappa</string>
     <string name="caches_sort">Ordina</string>
+    <string name="caches_sort_automatic">Automatico (%s)</string>
     <string name="caches_sort_distance">Distanza</string>
     <string name="caches_sort_distance_target">Distanza dalla destinazione</string>
     <string name="caches_sort_difficulty">Difficoltà</string>

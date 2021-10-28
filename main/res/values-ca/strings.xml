@@ -334,6 +334,7 @@
     <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
     <string name="menu_invert_order">Inverteix l’ordre</string>
     <!-- main screen -->
+    <string name="home_button">Pàgina principal</string>
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Propers</string>
     <string name="advanced_search_button">Cerca</string>
@@ -361,6 +362,7 @@
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
     <string name="caches_sort">Ordena</string>
+    <string name="caches_sort_automatic">Automàtic (%s)</string>
     <string name="caches_sort_distance">Distància</string>
     <string name="caches_sort_distance_target">Distància a l\'objectiu</string>
     <string name="caches_sort_difficulty">Dificultat</string>
@@ -1404,6 +1406,7 @@
     <string name="map_settings_cache_filter_too_complex_title">El filtre de catxé és massa complex</string>
     <string name="map_settings_cache_filter_too_complex_message">El filtre del catxé  actual és massa complex per aplicar opcions addicionals aquí. Normalment, això significa que el filtre de catxé conté expressions NOT o OR en lloc del simple i lògic AND </string>
     <!-- search -->
+    <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_coordinates_button">Cerca per coordenades</string>

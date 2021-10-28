@@ -1,19 +1,19 @@
-c:geo is an open source, full-featured, always ready-to-go unofficial client for geocaching.com and offers basic support for other geocaching platforms (such as Opencaching). It does not require a web browser or exports - just install it and start right away.
+c:geo este un client neoficial, open source, cu toate funcțiile și mereu gata de pornire pentru geocaching.com și oferă suport de bază pentru alte platforme de geocaching (cum ar fi Opencaching). Nu necesită browser web sau exporturi - doar instalează-l și poți începe imediat.
 
-Main features:
-- View caches on a Live Map
+Funcții principale:
+- Vizualizare geocutii pe o Hartă Live
 - Use Google Maps or OpenStreetMap
-- Search for caches by various criteria
-- Log your finds online or offline
-- Store cache information on your device
-- Create and manage waypoints
-- Navigate using compass, map, or other apps
-- Import/Export GPX files
-- Full support for trackables
-- Offline caching functions including offline maps
+- Căutare de geocutii în funcție de criterii diverse
+- Însemnări de jurnale online sau offline
+- Salvarea locală a informațiilor unei cutii pe dispozitivul dumneavoastră
+- Creare și administrare de Puncte Intermediare (waypoints)
+- Navigare folosind busola, harta sau alte aplicații
+- Import / Export de fișiere GPX
+Suport integral pentru obiecte călătoare (trackables)
+- Funcții de geocaching offline inclusiv hărți offline
 
-c:geo is a simple to use but powerful geocaching client with a lot of additional features. All you need to get started is an existing account on geocaching.com or another geocaching platform (like Opencaching).
-Find caches using the live map or by using one of the many search functions.
+c:geo este un client geocaching simplu de folosit dar foarte performant și cu multiple funcții suplimentare. Tot ce ai nevoie pentru a începe este un cont existent pe geocaching.com sau pe o altă platformă de geocaching (cum ar fi opencaching).
+Găsește cache-uri folosind Harta Live sau una din multiplele opțiuni de căutare.
 
 Navigate to a cache or a waypoint of a cache with the built-in compass function, the map or hand over the coordinates to various external apps (e.g. Radar, Google Navigation, StreetView, Locus, Navigon, Sygic and many more).
 

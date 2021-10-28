@@ -363,6 +363,7 @@
     <string name="caches_history">Historie</string>
     <string name="caches_on_map">Zobrazit na mapě</string>
     <string name="caches_sort">Řazení</string>
+    <string name="caches_sort_automatic">Automaticky (%s)</string>
     <string name="caches_sort_distance">Vzdálenost</string>
     <string name="caches_sort_distance_target">Vzdálenost k cíli</string>
     <string name="caches_sort_difficulty">Obtížnost</string>

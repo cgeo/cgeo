@@ -1404,6 +1404,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Kätkösuodatin liian monimutkainen</string>
     <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
     <!-- search -->
+    <string name="geo_search_label">Etsi kätköjä lähistöllä</string>
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
     <string name="search_coordinates">Koordinaatit</string>
     <string name="search_coordinates_button">Hae koordinaattien avulla</string>
