@@ -78,18 +78,16 @@ public class FilterUtils {
     /** filterView must exist */
     public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
         final View filterView = activity.findViewById(R.id.filter_bar);
-        filterView.setOnLongClickListener(v -> filteredActivity.showFilterList(null));
+        filterView.setOnClickListener(v -> filteredActivity.showFilterMenu());
+        filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
     }
 
     public static void initializeFilterMenu(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
 
-        new Handler().post(new Runnable() {
-            @Override
-            public void run() {
-                final View filterView = activity.findViewById(R.id.menu_filter);
-                if (filterView != null) {
-                    filterView.setOnLongClickListener(v -> filteredActivity.showFilterList(null));
-                }
+        new Handler().post(() -> {
+            final View filterView = activity.findViewById(R.id.menu_filter);
+            if (filterView != null) {
+                filterView.setOnLongClickListener(v -> filteredActivity.showSavedFilterList());
             }
         });
     }

@@ -111,7 +111,6 @@ import android.view.View;
 import android.widget.AdapterView.AdapterContextMenuInfo;
 import android.widget.ListView;
 import android.widget.TextView;
-import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -729,6 +728,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         sortProvider.setClickListener(type -> {
             sortContext.setAndToggle(type);
             adapter.forceSort();
+            updateSortBar();
         });
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
@@ -946,7 +946,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.invertSelection();
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_filter) {
-            showFilterMenu(null);
+            showFilterMenu();
         } else if (menuItem == R.id.menu_import_web) {
             importWeb();
         } else if (menuItem == R.id.menu_export_gpx) {
@@ -1055,7 +1055,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * called from the filter bar view
      */
     @Override
-    public void showFilterMenu(final View view) {
+    public void showFilterMenu() {
         GeocacheFilterActivity.selectFilter(this, currentCacheFilter, adapter.getFilteredList(), !resultIsOfflineAndLimited());
     }
 
@@ -1063,7 +1063,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * called from the filter bar view
      */
     @Override
-    public boolean showFilterList(final View view) {
+    public boolean showSavedFilterList() {
         return FilterUtils.openFilterList(this, currentCacheFilter);
     }
 
@@ -1269,6 +1269,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         setListAdapter(adapter);
 
         adapter.forceSort();
+        updateSortBar();
 
         listView.setOnScrollListener(new FastScrollListener(listView));
     }
@@ -1278,6 +1279,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         adapter.reFilter();
         adapter.checkSpecialSortOrder();
         adapter.forceSort();
+        updateSortBar();
     }
 
     private void showFooterLoadingCaches() {
@@ -1329,7 +1331,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void setViewGone(final View view) {
-        view.setVisibility(GONE);
+        view.setVisibility(View.GONE);
         view.setOnClickListener(null);
         view.setClickable(false);
     }
@@ -1339,6 +1341,25 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         view.setText(text);
         view.setClickable(clickListener != null);
         view.setOnClickListener(clickListener);
+    }
+
+    private void updateSortBar() {
+        //set the following constants will create different layouts for the sort field, see discussion in #11991
+        final int sortBarId = R.id.sort_bar_2;
+        final int sortTextId = R.id.sort_text_2;
+        final boolean showSort = false;
+
+        final View sortView = this.findViewById(sortBarId);
+        final GeocacheSortContext.SortType st = sortContext.getType();
+        if (st == null || GeocacheSortContext.SortType.AUTO.equals(st)) {
+            sortView.setVisibility(View.GONE);
+        } else {
+            final TextView filterTextView = findViewById(sortTextId);
+            filterTextView.setText(sortContext.getSortName());
+            if (showSort) {
+                sortView.setVisibility(View.VISIBLE);
+            }
+        }
     }
 
     private void importGpxSelectFiles() {
@@ -1631,10 +1652,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void hideLoading() {
         final ListView list = getListView();
-        if (list.getVisibility() == GONE) {
+        if (list.getVisibility() == View.GONE) {
             list.setVisibility(View.VISIBLE);
             final View loading = findViewById(R.id.loading);
-            loading.setVisibility(GONE);
+            loading.setVisibility(View.GONE);
         }
     }
 

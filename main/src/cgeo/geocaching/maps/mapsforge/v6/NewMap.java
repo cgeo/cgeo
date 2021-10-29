@@ -452,7 +452,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             }
             setTitle();
         } else if (id == R.id.menu_filter) {
-            showFilterMenu(null);
+            showFilterMenu();
         } else if (id == R.id.menu_store_caches) {
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
@@ -597,13 +597,13 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
      * @param view Not used here, required by layout
      */
     @Override
-    public void showFilterMenu(final View view) {
+    public void showFilterMenu() {
         FilterUtils.openFilterActivity(this, mapOptions.filterContext,
             new SearchResult(caches.getVisibleCacheGeocodes()).getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
     }
 
     @Override
-    public boolean showFilterList(final View view) {
+    public boolean showSavedFilterList() {
         return FilterUtils.openFilterList(this, mapOptions.filterContext);
     }
 

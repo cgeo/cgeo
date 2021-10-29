@@ -795,7 +795,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_map_rotation_auto) {
             setMapRotation(item, Settings.MAPROTATION_AUTO);
         } else if (id == R.id.menu_filter) {
-            getMapActivity().showFilterMenu(null);
+            getMapActivity().showFilterMenu();
         } else if (id == R.id.menu_map_live) {
             mapOptions.isLiveEnabled = !mapOptions.isLiveEnabled;
             if (mapOptions.mapMode == MapMode.LIVE) {
