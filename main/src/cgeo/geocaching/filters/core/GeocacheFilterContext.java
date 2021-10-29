@@ -46,6 +46,7 @@ public class GeocacheFilterContext implements Parcelable {
         }
     }
 
+    @NonNull
     public GeocacheFilter get() {
         if (type == FilterType.TRANSIENT) {
             return filter;
@@ -61,6 +62,7 @@ public class GeocacheFilterContext implements Parcelable {
         }
     }
 
+    @NonNull
     public static GeocacheFilter getForType(final FilterType type) {
         if (type == FilterType.TRANSIENT) {
             return GeocacheFilter.createEmpty();

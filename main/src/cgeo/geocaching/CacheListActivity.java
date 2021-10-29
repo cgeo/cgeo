@@ -1832,8 +1832,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Nullable
     private String getActiveFilterName() {
-        if (adapter.hasActiveFilter()) {
-            return adapter.getFilterName();
+        if (currentCacheFilter.get().isFiltering()) {
+            return currentCacheFilter.get().toUserDisplayableString();
         }
         return null;
     }

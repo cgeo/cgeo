@@ -190,10 +190,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         return currentGeocacheFilter != null && currentGeocacheFilter.isFiltering();
     }
 
-    public String getFilterName() {
-        return !hasActiveFilter() ? "-" : currentGeocacheFilter.toUserDisplayableString();
-    }
-
     public int getCheckedCount() {
         int checked = 0;
         for (final Geocache cache : list) {
