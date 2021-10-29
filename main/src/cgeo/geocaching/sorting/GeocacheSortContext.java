@@ -30,7 +30,8 @@ public class GeocacheSortContext {
     private static final String STATE_TARGET_COORD = "s_targetcoord";
     private static final String STATE_EVENTLIST = "s_eventlist";
     private static final String STATE_SERIESLIST = "s_serieslist";
-    private static final String STATE_HISTORYLIST = "s_historylist";
+    private static final String STATE_LISTCONTEXT = "s_listcontext";
+    private static final String STATE_LISTCONTEXTPARAM = "s_listcontextparameter";
 
     private SortType currentType = SortType.AUTO;
     private boolean currentIsInverse = false;
@@ -39,11 +40,10 @@ public class GeocacheSortContext {
     private Geopoint targetCoords;
     private boolean isEventList;
     private boolean isSeriesList;
-    private boolean isHistoryList;
 
     //list context. If set, it is used to load/persist sort context for it
     private CacheListType listContextType = null;
-    private Object[] listContextTypeParams = null;
+    private String listContextTypeParam = null;
 
     public enum SortType {
         AUTO(R.string.caches_sort_automatic, false, null),
@@ -166,14 +166,6 @@ public class GeocacheSortContext {
         isSeriesList = seriesList;
     }
 
-    public boolean isHistoryList() {
-        return isHistoryList;
-    }
-
-    public void setHistoryList(final boolean historyList) {
-        isHistoryList = historyList;
-    }
-
     /** Saves to bundle (for state handling in activity lifecycle */
     public Bundle saveToBundle() {
         final Bundle b = new Bundle();
@@ -182,7 +174,8 @@ public class GeocacheSortContext {
         b.putParcelable(STATE_TARGET_COORD, targetCoords);
         b.putBoolean(STATE_EVENTLIST, isEventList);
         b.putBoolean(STATE_SERIESLIST, isSeriesList);
-        b.putBoolean(STATE_HISTORYLIST, isHistoryList);
+        b.putInt(STATE_LISTCONTEXT, listContextType == null ? -1 : listContextType.ordinal());
+        b.putString(STATE_LISTCONTEXTPARAM, listContextTypeParam);
         return b;
     }
 
@@ -194,20 +187,22 @@ public class GeocacheSortContext {
         targetCoords = b.containsKey(STATE_TARGET_COORD) ? b.getParcelable(STATE_TARGET_COORD) : null;
         isEventList = b.getBoolean(STATE_EVENTLIST);
         isSeriesList = b.getBoolean(STATE_SERIESLIST);
-        isHistoryList = b.getBoolean(STATE_HISTORYLIST);
+
+        listContextType = b.getInt(STATE_LISTCONTEXT, -1) < 0 ? null : CacheListType.values()[b.getInt(STATE_LISTCONTEXT)];
+        listContextTypeParam = b.getString(STATE_LISTCONTEXTPARAM);
     }
 
     /** Sets sort context depending on a list context. This list context is used to load/persist current sort state in it */
-    public void setListContext(final CacheListType listType, final Object ... listTypeParams) {
+    public void setListContext(final CacheListType listType, final String listContextTypeParam) {
         this.listContextType = listType;
-        this.listContextTypeParams = listTypeParams;
+        this.listContextTypeParam = listContextTypeParam;
 
         if (listType == null) {
             return;
         }
 
         //try to load sort context from persistence
-        final String sortConfig = Settings.getSortConfig(createListContextKey(listType, listTypeParams));
+        final String sortConfig = Settings.getSortConfig(createListContextKey(listType, listContextTypeParam));
         if (sortConfig == null) {
             this.currentIsInverse = false;
             this.currentType = SortType.AUTO;
@@ -223,17 +218,15 @@ public class GeocacheSortContext {
             return;
         }
 
-        Settings.setSortConfig(createListContextKey(this.listContextType, this.listContextTypeParams),
+        Settings.setSortConfig(createListContextKey(this.listContextType, this.listContextTypeParam),
             this.currentType.name() + "-" + this.currentIsInverse);
     }
 
 
-    private static String createListContextKey(final CacheListType listType, final Object ... listTypeParams) {
+    private static String createListContextKey(final CacheListType listType, final String listContextTypeParam) {
         final StringBuilder sb = new StringBuilder(listType == null ? "null" : listType.name());
-        if (listTypeParams != null) {
-            for (Object p : listTypeParams) {
-                sb.append("-").append(p);
-            }
+        if (listContextTypeParam != null) {
+            sb.append("-").append(listContextTypeParam);
         }
         return sb.toString();
     }
@@ -264,7 +257,7 @@ public class GeocacheSortContext {
     }
 
     private SortType getAutoType() {
-        if (isHistoryList) {
+        if (CacheListType.HISTORY.equals(listContextType)) {
             return SortType.LOGGED_DATE;
         }
         if (isEventList) {

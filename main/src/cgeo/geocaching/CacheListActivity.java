@@ -2176,9 +2176,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void refreshSortListContext() {
         if (type == CacheListType.OFFLINE) {
-            sortContext.setListContext(type, listId);
+            sortContext.setListContext(type, "" + listId);
         } else {
-            sortContext.setListContext(type);
+            sortContext.setListContext(type, null);
         }
     }
 }
