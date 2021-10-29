@@ -191,7 +191,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             viewHolder.binding.variableFunction.setOnClickListener(d -> {
                 final List<CalculatorFunction> functions = CalculatorFunction.valuesAsUserDisplaySortedList();
                 SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
-                    .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, false, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
+                    .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, true, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
                         final String newFormula = f.getFunctionInsertString();
                         final EditText editText = viewHolder.binding.variableFormula.getEditText();
                         editText.setText(newFormula);
@@ -208,9 +208,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         }
 
         private static TextParam getFunctionDisplayString(final CalculatorFunction f) {
-            return
-                TextParam.text("-   *" + f.getUserDisplayableString() + "* (`" + StringUtils.join(f.getNames(), ",") + "`)")
-                    .setMarkdown(true);
+            return TextParam.text(f.getUserDisplayableString());
         }
 
         private static TextParam getFunctionGroupDisplayString(final CalculatorFunction.CalculatorGroup g) {
@@ -378,7 +376,12 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         binding.variablesAddmissing.setOnClickListener(d -> adapter.addAllMissing());
 
         binding.variablesSort.setOnClickListener(d -> adapter.sortVariables());
-        binding.variablesClear.setOnClickListener(d -> adapter.clearAllVariables());
+        binding.variablesClear.setOnClickListener(d -> {
+            if (!adapter.variables.getVariableList().isEmpty()) {
+                SimpleDialog.of(activity).setTitle(TextParam.text("Delete all"))
+                    .setMessage(TextParam.text("Really delete all variables?")).confirm((dd, i) -> adapter.clearAllVariables());
+            }
+        });
 
         binding.variablesInfo.setOnClickListener(d -> ShareUtils.openUrl(
             this.getContext(), "https://github.com/cgeo/cgeo/wiki/Calculator-Formula-Syntax", false));

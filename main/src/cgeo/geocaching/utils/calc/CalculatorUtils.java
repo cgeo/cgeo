@@ -23,6 +23,10 @@ public class CalculatorUtils {
     private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
         "[^a-zA-Z0-9(](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10})((( *[()] *)*( *[-+/:*] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10}))+( *\\) *)*)[^a-zA-Z0-9)]");
 
+    private static final Pattern[] TEXT_SCAN_FALSE_POSITIVE_PATTERNS = new Pattern[] {
+        Pattern.compile("^[0-9]+[:/.,][0-9]+([:/.,][0-9]+)?$"), // dates or times
+        Pattern.compile("^[a-z]+:[0-9]+$") // URL endings
+    };
 
     private CalculatorUtils() {
         //no instance
@@ -144,12 +148,21 @@ public class CalculatorUtils {
         int start = 0;
         while (m.find(start)) {
             final String found = m.group(1);
-            if (!resultSet.contains(found)) {
+            if (!resultSet.contains(found) && checkCandidate(found)) {
                 result.add(found);
                 resultSet.add(found);
             }
             start = m.end() - 1; //move one char to left to find patterns only separated by one char
         }
+    }
+
+    private static boolean checkCandidate(final String candidate) {
+        for (Pattern p : TEXT_SCAN_FALSE_POSITIVE_PATTERNS) {
+            if (p.matcher(candidate).matches()) {
+                return false;
+            }
+        }
+        return true;
     }
 
 

@@ -57,6 +57,13 @@ public class CalculatorUtilsTest {
         //from cache GC86KMW
         assertScanFormula("1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5    E 009°10*b-1,c:4-a+5",
             "2*a", "(c+20*b):2+5", "10*b-1", "c:4-a+5");
+
+        //DON't find dates, times and URLs
+        assertScanFormula("13:00");
+        assertScanFormula("13:00:00");
+        assertScanFormula("2021/11");
+        assertScanFormula("2021/11/5");
+        assertScanFormula("www.cgeo.com:443");
     }
 
     private void assertScanFormula(final String textToScan, final String ... expectedFinds) {
