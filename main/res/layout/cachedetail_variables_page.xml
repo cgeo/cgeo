@@ -27,6 +27,15 @@
             tools:text="Experimental Feature\n* point one\n* point two"
             />
 
+        <TextView
+            android:id="@+id/variables_explanation"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:textSize="@dimen/textSize_headingSecondary"
+            android:text="Use this page to note down values and do calculations necessary for this cache. Tap 'Help' for more information."
+            />
+
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -67,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="6dp"
-                android:text="Missing"
+                android:text="Missing Variables"
                 app:icon="@drawable/ic_menu_add" />
         </LinearLayout>
 
@@ -91,7 +100,7 @@
             <Button
                 android:id="@+id/variables_info"
                 style="@style/button"
-                android:text="Syntax"
+                android:text="Help"
                 android:layout_marginRight="6dp"
                 app:icon="@drawable/settings_info"
                 android:layout_alignParentRight="true"/>

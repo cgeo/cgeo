@@ -17,6 +17,7 @@ import android.text.InputFilter;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Pair;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -320,7 +321,7 @@ public class SimpleDialog {
 
         // Maybe select_dialog_singlechoice_material / select_dialog_item_material instead ?
         // NOT android.R.layout.select_dialog_item -> makes font size too big
-        final ListAdapter adapter = createListAdapter(groupedValues.first, showChoice);
+        final ListAdapter adapter = createListAdapter(groupedValues.first, showChoice, groupedValues.second);
 
         //use "setsinglechoiceItems", because otherwise the dialog will close always after selecting an item
         builder.setSingleChoiceItems(adapter, preselectPos, (dialog, clickpos) -> {
@@ -511,21 +512,27 @@ public class SimpleDialog {
 
 
     @NotNull
-    private ListAdapter createListAdapter(@NotNull final List<TextParam> items, final boolean showChoice) {
+    private ListAdapter createListAdapter(@NotNull final List<TextParam> items, final boolean showChoice, final Func1<Integer, Integer> groupMapper) {
 
-        //final int itemLayout = showChoice ? android.R.layout.simple_list_item_single_choice : android.R.layout.simple_list_item_1;
-        final int itemLayout = showChoice ? R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
+        final LayoutInflater inflater = LayoutInflater.from(getContext());
 
         return new ArrayAdapter<TextParam>(
             getContext(),
-            itemLayout,
-            android.R.id.text1,
+            0, //itemLayout,
+            0, // android.R.id.text1,
             items) {
             public View getView(final int position, final View convertView, final ViewGroup parent) {
-                //Use super class to create the View.
-                final View v = super.getView(position, convertView, parent);
+
+                final boolean isGroupHeading = groupMapper != null && groupMapper.call(position) == null;
+                final int itemLayout = showChoice && !isGroupHeading ?
+                    R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
+                //or android.R.layout.simple_list_item_single_choice : android.R.layout.simple_list_item_1;
+
+                final View v = convertView != null ? convertView : inflater.inflate(itemLayout, parent, false);
+
                 final TextView tv = v.findViewById(android.R.id.text1);
                 items.get(position).applyTo(tv, true);
+
                 return v;
             }
         };

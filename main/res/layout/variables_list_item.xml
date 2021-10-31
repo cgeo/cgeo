@@ -51,7 +51,7 @@
                     android:gravity="center"
                     android:minWidth="2dp"
                     android:layout_marginTop="6dp"
-                    app:icon="@drawable/ic_menu_function" />
+                    android:text="⋯" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/variable_formula"
