@@ -30,7 +30,6 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -249,12 +248,12 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     }
 
     @Override
-    public void showFilterMenu(final View view) {
+    public void showFilterMenu() {
         FilterUtils.openFilterActivity(this, mapBase.getFilterContext(), mapBase.getCaches());
     }
 
     @Override
-    public boolean showFilterList(final View view) {
+    public boolean showSavedFilterList() {
         return FilterUtils.openFilterList(this, mapBase.getFilterContext());
     }
 

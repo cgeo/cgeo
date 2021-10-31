@@ -6,7 +6,7 @@
     android:orientation="vertical"
     tools:context=".maps.google.v2.GoogleMapProvider" >
 
-    <include layout="@layout/filter_bar" />
+    <include layout="@layout/filter_sort_bar" />
 
     <RelativeLayout
         android:layout_width="fill_parent"

@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/filter_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/sort_bar"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:ignore="UseCompoundDrawables"
+            tools:visibility="visible"> <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->
+
+            <ImageView
+                style="@style/image_small_prepend_text"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_menu_filter" />
+
+            <TextView
+                android:id="@+id/filter_text"
+                style="@style/text_label"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/textSize_detailsSecondary"
+                tools:text="currently active filter" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sort_bar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:ignore="UseCompoundDrawables"
+            tools:visibility="visible"> <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->
+
+            <ImageView
+                style="@style/image_small_prepend_text"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_menu_sort_alphabetically" />
+
+            <TextView
+                android:id="@+id/sort_text"
+                style="@style/text_label"
+                android:layout_gravity="center_vertical"
+                android:paddingRight="6dp"
+                android:text="@string/caches_sort_difficulty"
+                android:textSize="@dimen/textSize_detailsSecondary"
+                tools:text="currently active sort" />
+        </LinearLayout>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/sort_bar_2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:visibility="gone"
+        tools:ignore="UseCompoundDrawables"
+        tools:visibility="visible"> <!-- This cannot be done with a compound drawable as there is no easy way to set the size of the image in XML -->
+
+        <ImageView
+            style="@style/image_small_prepend_text"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_menu_sort_alphabetically" />
+
+        <TextView
+            android:id="@+id/sort_text_2"
+            style="@style/text_label"
+            android:layout_gravity="center_vertical"
+            android:paddingRight="6dp"
+            android:text="@string/caches_sort_difficulty"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            tools:text="currently active sort" />
+    </LinearLayout>
+</LinearLayout>

@@ -231,6 +231,10 @@ public class GeocacheSortContext {
         return sb.toString();
     }
 
+    public String getSortName() {
+        return getNameFor(this.currentType, this.currentIsInverse);
+    }
+
     private String getNameFor(final SortType type, final boolean inverted) {
         if (type == SortType.AUTO) {
             return LocalizationUtils.getString(SortType.AUTO.resId, getNameFor(getAutoType(), inverted));
