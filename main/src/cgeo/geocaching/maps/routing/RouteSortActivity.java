@@ -100,7 +100,7 @@ public class RouteSortActivity extends AbstractActionBarActivity {
                             assert data instanceof Waypoint;
                             final Geocache cache = DataStore.loadCache(data.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
                             detail.setText(data.getGeocode() + Formatter.SEPARATOR + cache.getName());
-                            title.setCompoundDrawablesWithIntrinsicBounds(data.getWaypointType().markerId, 0, 0, 0);
+                            title.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointMarker(res, (Waypoint) data, false).getDrawable(), null, null, null);
                             break;
                         case COORDS:
                             // title.setText("Coordinates");

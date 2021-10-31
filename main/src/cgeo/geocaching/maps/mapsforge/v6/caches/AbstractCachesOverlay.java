@@ -396,7 +396,7 @@ public abstract class AbstractCachesOverlay {
             if (isDotMode) {
                 marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointDotMarker(CgeoApplication.getInstance().getResources(), waypoint).getDrawable());
             } else {
-                marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint).getDrawable());
+                marker = AndroidGraphicFactory.convertToBitmap(MapMarkerUtils.getWaypointMarker(CgeoApplication.getInstance().getResources(), waypoint, false).getDrawable());
             }
             return new GeoitemLayer(waypoint.getGeoitemRef(), waypoint.getWaypointType().applyDistanceRule(), tapHandler, new LatLong(target.getLatitude(), target.getLongitude()), marker, 0, -marker.getHeight() / 2);
         }

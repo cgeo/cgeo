@@ -12,33 +12,28 @@
     android:paddingTop="9dp"
     tools:context=".CacheDetailActivity$WaypointsViewCreator$1" >
 
-    <RelativeLayout
+    <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:descendantFocusability="blocksDescendants"
         android:orientation="horizontal" >
 
         <ImageView
-            android:id="@+id/wpDefaultNavigation"
-            android:layout_width="@dimen/buttonSize_iconButton"
-            android:layout_height="@dimen/buttonSize_iconButton"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="false"
-            android:layout_gravity="right"
-            android:background="?android:attr/selectableItemBackgroundBorderless"
-            android:clickable="true"
-            android:focusable="true"
-            android:longClickable="true"
-            android:scaleType="centerInside"
-            android:src="@drawable/ic_menu_compass" />
+            android:id="@+id/text_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="5dip"
+            android:layout_marginRight="4dip"
+            android:scaleType="fitXY"
+            android:gravity="left|top"
+            android:visibility="visible"
+            tools:visibility="visible" />
 
         <LinearLayout
-            android:layout_toLeftOf="@id/wpDefaultNavigation"
-            android:layout_width="fill_parent"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
-            android:descendantFocusability="blocksDescendants"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_weight="2">
 
             <TextView
                 android:id="@+id/name"
@@ -54,7 +49,6 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="left"
-                android:layout_marginLeft="12dp"
                 android:ellipsize="end"
                 android:focusable="false"
                 android:lines="1"
@@ -65,71 +59,83 @@
                 tools:visiblity="visible"
                 tools:text="Info"
                 android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/coordinates"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:lines="1"
+                android:scrollHorizontally="true"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:textColor="@color/colorText_listsPrimary"
+                android:visibility="gone"
+                tools:visiblity="visible"
+                tools:text="1.2.3.4.5N 6.7.8.9.10S"
+                android:maxLines="1" />
+
+            <TextView
+                android:id="@+id/calculated_coordinates"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:layout_marginLeft="12dp"
+                android:ellipsize="end"
+                android:focusable="false"
+                android:lines="1"
+                android:maxLines="1"
+                android:scrollHorizontally="true"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:textColor="@color/colorText_listsPrimary"
+                android:visibility="gone"
+                android:text="@string/waypoint_calculated_coordinates"
+                tools:visiblity="visible" />
+
+            <TextView
+                android:id="@+id/note"
+                android:autoLink="web|map"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:focusable="false"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:textColor="@color/colorText_listsPrimary"
+                android:visibility="gone"
+                tools:visiblity="visible"
+                tools:text="Note"/>
+
+            <TextView
+                android:id="@+id/user_note"
+                android:autoLink="web|map"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:focusable="false"
+                android:textSize="@dimen/textSize_listsSecondary"
+                android:textColor="@color/colorText_listsPrimary"
+                android:visibility="gone"
+                tools:visiblity="visible"
+                tools:text="User Note"/>
         </LinearLayout>
-    </RelativeLayout>
 
-    <TextView
-        android:id="@+id/coordinates"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="12dp"
-        android:ellipsize="end"
-        android:focusable="false"
-        android:lines="1"
-        android:scrollHorizontally="true"
-        android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsPrimary"
-        android:visibility="gone"
-        tools:visiblity="visible"
-        tools:text="1.2.3.4.5N 6.7.8.9.10S"
-        android:maxLines="1" />
-
-    <TextView
-        android:id="@+id/calculated_coordinates"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="left"
-        android:layout_marginLeft="12dp"
-        android:ellipsize="end"
-        android:focusable="false"
-        android:lines="1"
-        android:maxLines="1"
-        android:scrollHorizontally="true"
-        android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsPrimary"
-        android:visibility="gone"
-        android:text="@string/waypoint_calculated_coordinates"
-        tools:visiblity="visible" />
-
-    <TextView
-        android:id="@+id/note"
-        android:autoLink="web|map"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:focusable="false"
-        android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsPrimary"
-        android:visibility="gone"
-        tools:visiblity="visible"
-        tools:text="Note"/>
-
-    <TextView
-        android:id="@+id/user_note"
-        android:autoLink="web|map"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="12dp"
-        android:focusable="false"
-        android:textSize="@dimen/textSize_listsSecondary"
-        android:textColor="@color/colorText_listsPrimary"
-        android:visibility="gone"
-        tools:visiblity="visible"
-        tools:text="User Note"/>
+        <ImageView
+            android:id="@+id/wpDefaultNavigation"
+            android:layout_width="@dimen/buttonSize_iconButton"
+            android:layout_height="@dimen/buttonSize_iconButton"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="false"
+            android:layout_gravity="right"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true"
+            android:longClickable="true"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_menu_compass" />
+    </LinearLayout>
 
     <View
         style="@style/separator_horizontal"
         android:layout_marginTop="9dp" />
-
 </LinearLayout>
