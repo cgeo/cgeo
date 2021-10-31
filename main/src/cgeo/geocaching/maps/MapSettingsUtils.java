@@ -68,7 +68,7 @@ public class MapSettingsUtils {
         final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
         final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, R.drawable.waypoint_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
         final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, R.drawable.waypoint_pkg, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
-        final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.tick, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
+        final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
         final SettingsCheckboxModel trackCb = !PersistableUri.TRACK.hasValue() ? null : createCb(allCbs, R.string.map_show_track, R.drawable.map_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true);
         final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, isShowCircles, Settings::setShowCircles, false);
 
