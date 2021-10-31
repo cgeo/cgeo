@@ -1,7 +1,10 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.ui.ViewUtils;
+
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 
@@ -33,4 +36,15 @@ public class Keyboard {
             keyboard.showSoftInput(view, 0);
         }, 50);
     }
+
+    public static boolean isVisible(@NonNull final Activity activity) {
+        final Rect visibleBounds = new Rect();
+        final View root = activity.findViewById(android.R.id.content);
+        root.getWindowVisibleDisplayFrame(visibleBounds);
+
+        final int heightDiff = root.getHeight() - visibleBounds.height();
+        final int marginOfError = ViewUtils.dpToPixel(50);
+        return heightDiff > marginOfError;
+    }
+
 }
