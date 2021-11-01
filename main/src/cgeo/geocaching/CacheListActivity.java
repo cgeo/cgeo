@@ -1344,21 +1344,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateSortBar() {
-        //set the following constants will create different layouts for the sort field, see discussion in #11991
-        final int sortBarId = R.id.sort_bar_2;
-        final int sortTextId = R.id.sort_text_2;
-        final boolean showSort = false;
-
-        final View sortView = this.findViewById(sortBarId);
+        final View sortView = this.findViewById(R.id.sort_bar);
         final GeocacheSortContext.SortType st = sortContext.getType();
-        if (st == null || GeocacheSortContext.SortType.AUTO.equals(st)) {
+        if (st == null || GeocacheSortContext.SortType.AUTO.equals(st) || CacheListType.HISTORY.equals(type)) {
             sortView.setVisibility(View.GONE);
         } else {
-            final TextView filterTextView = findViewById(sortTextId);
+            final TextView filterTextView = findViewById(R.id.sort_text);
             filterTextView.setText(sortContext.getSortName());
-            if (showSort) {
-                sortView.setVisibility(View.VISIBLE);
-            }
+            sortView.setVisibility(View.VISIBLE);
         }
     }
 
