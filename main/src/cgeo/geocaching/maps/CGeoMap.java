@@ -1750,7 +1750,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (isDotMode) {
             item.setMarker(MapMarkerUtils.getWaypointDotMarker(getResources(), waypoint));
         } else {
-            item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint));
+            item.setMarker(MapMarkerUtils.getWaypointMarker(getResources(), waypoint, true));
         }
         return item;
     }

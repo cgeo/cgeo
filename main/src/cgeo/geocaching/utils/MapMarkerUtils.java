@@ -198,7 +198,7 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint) {
+    public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint, final boolean showPin) {
         final WaypointType waypointType = waypoint.getWaypointType();
         final String id = null == waypointType ? WaypointType.WAYPOINT.id : waypointType.id;
         ArrayList<Integer> assignedMarkers = new ArrayList<>();
@@ -217,12 +217,13 @@ public final class MapMarkerUtils {
             .append(assignedMarkers)
             .append(cacheIsDisabled)
             .append(cacheIsArchived)
+            .append(showPin)
             .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers, cacheIsDisabled, cacheIsArchived));
+                marker = new CacheMarker(hashcode, createWaypointMarker(res, waypoint, assignedMarkers, cacheIsDisabled, cacheIsArchived, showPin));
                 overlaysCache.put(hashcode, marker);
             }
             return marker;
@@ -240,12 +241,14 @@ public final class MapMarkerUtils {
      *          a drawable representing the current waypoint status
      */
     @NonNull
-    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived) {
+    private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived, final boolean showPin) {
         final WaypointType waypointType = waypoint.getWaypointType();
 
         final Drawable marker = ResourcesCompat.getDrawable(res, waypoint.getMapMarkerId(), null);
         final InsetsBuilder insetsBuilder = new InsetsBuilder(res, marker.getIntrinsicWidth(), marker.getIntrinsicHeight());
-        insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
+        if (showPin) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_pin));
+        }
         insetsBuilder.withInset(new InsetBuilder(marker));
 
         final Drawable mainMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, null == waypointType ? WaypointType.WAYPOINT.markerId : waypoint.getWaypointType().markerId, null));

@@ -91,6 +91,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SimpleDisposableHandler;
@@ -111,8 +112,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.graphics.Typeface;
-import android.graphics.drawable.Drawable;
-import android.graphics.drawable.LayerDrawable;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -153,7 +152,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.view.ActionMode;
 import androidx.appcompat.widget.TooltipCompat;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.FragmentManager;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
@@ -1933,7 +1931,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     public static class WaypointsViewCreator extends TabbedViewPagerFragment<CachedetailWaypointsPageBinding> {
-        private final int visitedInset = (int) (6.6f * CgeoApplication.getInstance().getResources().getDisplayMetrics().density + 0.5f);
         private Geocache cache;
 
         private void setClipboardButtonVisibility(final Button createFromClipboard) {
@@ -2102,7 +2099,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // title
             holder.binding.name.setText(StringUtils.isNotBlank(wpt.getName()) ? StringEscapeUtils.unescapeHtml4(wpt.getName()) : coordinates != null ? coordinates.toString() : getString(R.string.waypoint));
-            setWaypointIcon(activity, holder.binding.name, wpt);
+            holder.binding.textIcon.setImageDrawable(MapMarkerUtils.getWaypointMarker(activity.res, wpt, false).getDrawable());
 
             // visited
             /* @todo
@@ -2160,22 +2157,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 activity.openContextMenu(v);
                 return true;
             });
-        }
-
-        private void setWaypointIcon(final CacheDetailActivity activity, final TextView nameView, final Waypoint wpt) {
-            final WaypointType waypointType = wpt.getWaypointType();
-            final Drawable icon;
-            if (wpt.isVisited()) {
-                final LayerDrawable ld = new LayerDrawable(new Drawable[] {
-                    ResourcesCompat.getDrawable(activity.res, waypointType.markerId, null),
-                    ResourcesCompat.getDrawable(activity.res, R.drawable.tick, null) });
-                ld.setLayerInset(0, 0, 0, visitedInset, visitedInset);
-                ld.setLayerInset(1, visitedInset, visitedInset, 0, 0);
-                icon = ld;
-            } else {
-                icon = ResourcesCompat.getDrawable(activity.res, waypointType.markerId, null);
-            }
-            nameView.setCompoundDrawablesWithIntrinsicBounds(icon, null, null, null);
         }
     }
 
