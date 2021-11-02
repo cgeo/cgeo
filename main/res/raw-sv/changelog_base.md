@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Karta
+- Nytt: Fullständig omarbetning av alla cache-ikoner
+- Nytt: Visa ikoner för senaste loggar i cache popup
+- Fix: Visa distanscirklar för användardefinierade cacher (om cirklar är aktiverade)
+- Fix: Gör cachens titel mer synlig i cache / waypoint popup
+- Fix: Visa varning i livekartan när live-läget är inaktiverat
+- Fix: Tillåt HTML i navigationsmålens beskrivning
+- Ändrat: Anpassade zoomkontroller för OSM-kartor för bättre konsistens över kartor
+- Ändrat: Flyttade de flesta enskilda ruttrelaterade menyalternativ till en separat snabbåtkomstknapp längst ner för snabbare åtkomst. (Visas endast när en enskild rutt laddas/skapas.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Cache listor
+- Nytt: Fullständig omarbetning av alla cache-ikoner
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Cachedetaljer
+- Nytt: Visa ikoner för senaste loggar
+- Nytt: Visa ikoner för loggposter i loggfliken
+- Nytt: Alternativ för att dölja besökta waypoints på waypoint-fliken
+- Fix: Tillåt HTML i navigationsmålens beskrivning
+- Fix: Filtrera den korta beskrivningen när den redan finns i den långa beskrivningen
+- Fix: Refactored "coordinates input" dialog för att möjliggöra bättre visningsanvändning i specifika förhållanden
+- Nytt: Lagt till variabel / kalkylator flik (experimentell, aktivera felsökningsläge för att se det)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Övrigt
+- Ändrat: Separerade bokmärkeslistor och "Pocket queries" (endast geocaching.com PM)
+- Nyhet: Tvinga borttag av cacher som är markerade med "to-be-deleted" när du använder underhållsfunktionen
+- Ändrat: Använd alltid hårdvaruacceleration (borttagna inställningar och gamla telefonmodellkontroll)
