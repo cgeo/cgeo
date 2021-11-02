@@ -25,15 +25,15 @@
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
-        app:tabTextColor="@color/colorTextActionBar"
-        app:tabSelectedTextColor="@color/colorAccent"
-        app:tabIndicatorColor="@color/colorAccent"
-        app:tabPaddingStart="36sp"
-        app:tabPaddingEnd="36sp"
-        app:tabMode="scrollable"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/colorBackground"
         android:textSize="@dimen/textSize_detailsPrimary"
-        android:background="@color/colorBackgroundActionBar" />
+        app:tabMaxWidth="0dp"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="@color/colorAccent"
+        app:tabSelectedTextColor="@color/colorAccent"
+        app:tabTextColor="@color/colorTextActionBar" />
 
 </LinearLayout>
