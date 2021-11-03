@@ -192,15 +192,15 @@
                     android:id="@+id/add_to_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:icon="@drawable/ic_menu_add"
                     android:visibility="gone"
-                    tools:visibility="visible"/>
+                    app:icon="@drawable/ic_menu_watch"
+                    tools:visibility="visible" />
 
                 <Button
                     android:id="@+id/remove_from_watchlist"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:icon="@drawable/ic_menu_remove"
+                    app:icon="@drawable/ic_menu_watch_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>
@@ -373,7 +373,7 @@
                     android:id="@+id/add_to_favpoint"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:icon="@drawable/ic_menu_add"
+                    app:icon="@drawable/ic_menu_favorite"
                     android:visibility="gone"
                     tools:visibility="visible"/>
 
@@ -381,7 +381,7 @@
                     android:id="@+id/remove_from_favpoint"
                     style="@style/button_icon"
                     android:layout_alignParentRight="true"
-                    app:icon="@drawable/ic_menu_remove"
+                    app:icon="@drawable/ic_menu_favorite_remove"
                     android:visibility="gone" />
             </RelativeLayout>
         </LinearLayout>

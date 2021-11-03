@@ -1,0 +1,16 @@
+<!-- taken (modified) from sunglasses / materialdesignicons-community -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="M2.27,3 L1,4.27 19.73,23 21,21.73"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m7.0002,17h-3c-1.62,0 -3.04,-1.26 -3.24,-2.86l-0.5,-2.99c-0.11,-0.85 0.13,-1.65 0.65,-2.23 0.52,-0.58 1.28,-0.92 2.09,-0.92h3.4257c0.83,0 4.8624,4.5695 4.4824,4.8495l-0.4781,1.5205c-0.36,1.45 -1.87,2.63 -3.43,2.63z"/>
+  <path
+      android:fillColor="#FF000000"
+      android:pathData="m15,8c-0.84,0 -1.5905,0.3509 -2.0605,0.9609 -0.12,0.15 -0.2188,0.3083 -0.2988,0.4883 -0.42,-0.09 -0.861,-0.09 -1.291,0 -0.08,-0.18 -0.1791,-0.3383 -0.2891,-0.4883 -0.2723,-0.3461 -0.6334,-0.6053 -1.0449,-0.7676l8.8066,8.8066h1.1777c1.61,0 3.0405,-1.2603 3.2305,-2.8203l0.5098,-3.0703c0.1,-0.81 -0.1404,-1.6095 -0.6504,-2.1895 -0.52,-0.58 -1.2798,-0.9199 -2.0898,-0.9199h-6z"/>
+</vector>
