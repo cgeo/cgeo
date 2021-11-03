@@ -216,8 +216,8 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
         final List<UserAction> actions = super.getUserActions(user);
         // caches stored before parsing the UserId will not have the field set, so we must check for correct existence here
         if (NumberUtils.isDigits(user.userName)) {
-            actions.add(new UserAction(R.string.user_menu_open_browser, context -> ShareUtils.openUrl(context.getContext(), getSchemeAndHost() + "/viewprofile.php?userid=" + Network.encode(context.userName))));
-            actions.add(new UserAction(R.string.user_menu_send_message, context -> ShareUtils.openUrl(context.getContext(), getSchemeAndHost() + "/mailto.php?userid=" + Network.encode(context.userName))));
+            actions.add(new UserAction(R.string.user_menu_open_browser, R.drawable.ic_menu_face, context -> ShareUtils.openUrl(context.getContext(), getSchemeAndHost() + "/viewprofile.php?userid=" + Network.encode(context.userName))));
+            actions.add(new UserAction(R.string.user_menu_send_message, R.drawable.ic_menu_message, context -> ShareUtils.openUrl(context.getContext(), getSchemeAndHost() + "/mailto.php?userid=" + Network.encode(context.userName))));
         }
         return actions;
     }

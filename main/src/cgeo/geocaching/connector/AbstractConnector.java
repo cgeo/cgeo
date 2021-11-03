@@ -322,10 +322,10 @@ public abstract class AbstractConnector implements IConnector {
         if (this instanceof ISearchByFilter) {
             final ISearchByFilter sbf = (ISearchByFilter) this;
             if (sbf.getFilterCapabilities().contains(GeocacheFilterType.OWNER)) {
-                actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.marker_own, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
+                actions.add(new UserAction(R.string.user_menu_view_hidden, R.drawable.ic_menu_owned, context -> CacheListActivity.startActivityOwner(context.getContext(), context.userName)));
             }
             if (sbf.getFilterCapabilities().contains(GeocacheFilterType.LOG_ENTRY)) {
-                actions.add(new UserAction(R.string.user_menu_view_found, R.drawable.marker_found, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
+                actions.add(new UserAction(R.string.user_menu_view_found, R.drawable.ic_menu_emoticons, context -> CacheListActivity.startActivityFinder(context.getContext(), context.userName)));
             }
         }
 
@@ -343,7 +343,7 @@ public abstract class AbstractConnector implements IConnector {
     public static List<UserAction> getDefaultUserActions() {
         final List<UserAction> actions = new ArrayList<>();
         if (ContactsAddon.isAvailable()) {
-            actions.add(new UserAction(R.string.user_menu_open_contact, context -> ContactsAddon.openContactCard(context.getContext(), context.userName)));
+            actions.add(new UserAction(R.string.user_menu_open_contact, R.drawable.ic_menu_contactcard, context -> ContactsAddon.openContactCard(context.getContext(), context.userName)));
         }
 
         return actions;
