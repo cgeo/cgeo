@@ -1,11 +1,10 @@
-<!-- taken from clock-outline / materialdesignicons-google -->
+<!-- taken from https://fonts.google.com/icons?selected=Material%20Icons%3Ahistory%3A -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:height="24dp"
     android:width="24dp"
-    android:viewportHeight="24"
+    android:height="24dp"
     android:viewportWidth="24"
-    android:tint="?android:textColorPrimary">
-     <path
-      android:fillColor="#FF000000"
-      android:pathData="M12,20A8,8 0,0 0,20 12A8,8 0,0 0,12 4A8,8 0,0 0,4 12A8,8 0,0 0,12 20M12,2A10,10 0,0 1,22 12A10,10 0,0 1,12 22C6.47,22 2,17.5 2,12A10,10 0,0 1,12 2M12.5,7V12.25L17,14.92L16.25,16.15L11,13V7H12.5Z"/>
+    android:viewportHeight="24">
+  <path
+      android:pathData="M13,3c-4.97,0 -9,4.03 -9,9L1,12l3.89,3.89 0.07,0.14L9,12L6,12c0,-3.87 3.13,-7 7,-7s7,3.13 7,7 -3.13,7 -7,7c-1.93,0 -3.68,-0.79 -4.94,-2.06l-1.42,1.42C8.27,19.99 10.51,21 13,21c4.97,0 9,-4.03 9,-9s-4.03,-9 -9,-9zM12,8v5l4.28,2.54 0.72,-1.21 -3.5,-2.08L13.5,8L12,8z"
+      android:fillColor="#000000"/>
 </vector>
