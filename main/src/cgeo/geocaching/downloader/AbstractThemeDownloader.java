@@ -13,7 +13,7 @@ import androidx.annotation.StringRes;
 
 abstract class AbstractThemeDownloader extends AbstractDownloader {
 
-    public static final int ICONRES_THEME = R.drawable.ic_menu_theme;
+    public static final int ICONRES_THEME = R.drawable.downloader_theme;
 
     AbstractThemeDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl) {
         super(offlineMapType, mapBase, mapSourceName, mapSourceInfo, projectUrl, likeItUrl, PersistableFolder.OFFLINE_MAP_THEMES);

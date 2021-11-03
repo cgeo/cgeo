@@ -1,8 +1,10 @@
-<!-- taken from camera-outline / materialdesignicons-google -->
+<!-- taken from https://fonts.google.com/icons?selected=Material%20Icons%3Aimage%3A -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="20dp"
-    android:height="14dp"
-    android:viewportHeight="14"
+    android:width="24dp"
+    android:height="24dp"
     android:viewportWidth="24"
-    android:tint="?android:textColorPrimary">
-    <path android:fillColor="#FF000000" android:pathData="m 10,4.75 c -1.3764363,0 -2.5,1.1235637 -2.5,2.5 0,1.3764363 1.1235637,2.5 2.5,2.5 1.376436,0 2.5,-1.1235637 2.5,-2.5 0,-1.3764363 -1.123564,-2.5 -2.5,-2.5 z m 0,0.7226562 c 0.986279,0 1.777344,0.7910647 1.777344,1.7773438 0,0.9862791 -0.791065,1.7773438 -1.777344,1.7773438 C 9.0137209,9.0273438 8.2226562,8.2362791 8.2226562,7.25 8.2226562,6.2637209 9.0137209,5.4726562 10,5.4726562 Z M 14.699633,3.5 13.915,3.500127 13,2.500127 7,2.5 6.085,3.5 H 4.5 c -0.5522848,0 -1,0.447715 -1,1 v 6 c 0,0.552285 0.4477152,0.999994 1,1 l 11,1.27e-4 c 0.552284,6e-6 1,-0.447715 1,-1 v -6 C 16.5,3.947842 16.052284,3.5 15.5,3.5 m -2.700367,7 H 4.5 v -6 h 2.025 l 0.915,-1 5.12,1.27e-4 0.915,1 H 15.5 v 6"  /></vector>
+    android:viewportHeight="24">
+  <path
+      android:pathData="M21,19V5c0,-1.1 -0.9,-2 -2,-2H5c-1.1,0 -2,0.9 -2,2v14c0,1.1 0.9,2 2,2h14c1.1,0 2,-0.9 2,-2zM8.5,13.5l2.5,3.01L14.5,12l4.5,6H5l3.5,-4.5z"
+      android:fillColor="#000000"/>
+</vector>

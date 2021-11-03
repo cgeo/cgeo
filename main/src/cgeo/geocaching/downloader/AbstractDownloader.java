@@ -33,7 +33,7 @@ public abstract class AbstractDownloader {
     public boolean useCompanionFiles = true; // store source info (uri etc.) in companion files (true) or use date/timestamp and identical uri only (false)?
     @DrawableRes public int iconRes = R.drawable.ic_menu_save;
 
-    public static final int ICONRES_FOLDER = R.drawable.ic_menu_folder;
+    public static final int ICONRES_FOLDER = R.drawable.downloader_folder;
 
     AbstractDownloader(final Download.DownloadType offlineMapType, final @StringRes int mapBase, final @StringRes int mapSourceName, final @StringRes int mapSourceInfo, final @StringRes int projectUrl, final @StringRes int likeItUrl, final PersistableFolder targetFolder) {
         this.offlineMapType = offlineMapType;

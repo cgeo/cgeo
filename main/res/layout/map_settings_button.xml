@@ -7,7 +7,7 @@
     android:layout_alignParentBottom="true">
 
     <LinearLayout android:id="@+id/container_settings" style="@style/map_quickbuttons" android:layout_centerHorizontal="true">
-        <Button android:id="@+id/map_settings_popup" style="@style/button_icon_map" app:icon="@drawable/map_quick_settings" />
+        <Button android:id="@+id/map_settings_popup" style="@style/button_icon_map" app:icon="@drawable/ic_menu_preferences" />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/container_individualroute" style="@style/map_quickbuttons" android:layout_toRightOf="@id/container_settings" android:visibility="gone">

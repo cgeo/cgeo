@@ -26,7 +26,6 @@
     </item>
     <item
         android:id="@+id/menu_calendar"
-        android:icon="@drawable/ic_menu_my_calendar"
         android:title="@string/cache_menu_event"
         android:visible="false"
         app:showAsAction="ifRoom">

@@ -32,7 +32,7 @@
         <Button
             android:id="@+id/like_it"
 	        style="@style/button_icon"
-            app:icon="@drawable/ic_menu_heart"
+            app:icon="@drawable/downloader_favorite"
             android:layout_alignParentRight="true"
             android:text="@null"/>
 
