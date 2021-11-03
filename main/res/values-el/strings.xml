@@ -333,6 +333,7 @@
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
+    <string name="home_button">Αρχική</string>
     <string name="live_map_button">Live Χάρτης</string>
     <string name="caches_nearby_button">Σε κοντινή απόσταση</string>
     <string name="advanced_search_button">Αναζήτηση</string>
@@ -360,6 +361,7 @@
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
+    <string name="caches_sort_automatic">Αυτόματα (%s)</string>
     <string name="caches_sort_distance">Απόσταση</string>
     <string name="caches_sort_distance_target">Απόσταση από τον στόχο</string>
     <string name="caches_sort_difficulty">Δυσκολία</string>
@@ -1395,6 +1397,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
     <!-- search -->
+    <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
     <string name="search_coordinates">Συντεταγμένες</string>
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
