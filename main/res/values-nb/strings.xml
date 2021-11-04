@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Cache</string>
     <string name="detail">Detaljer</string>
@@ -174,6 +175,8 @@
     <string name="log_problem_archive_label">Cachen bør arkiveres</string>
     <string name="log_problem_archive_text">Denne geocacheren rapporterte at geocachen bør arkiveres. En frivillig kontrollør blir varslet.</string>
     <string name="log_image_scale_option_noscaling">Ingen skalering</string>
+    <string name="log_image_info_scaled">skalert</string>
+    <string name="log_image_info_notscaled">ikke skalert</string>
     <string name="log_image_titleprefix">Bilde</string>
     <string name="datetime_nodateset_display">Ingen dato angitt</string>
     <!-- translation -->
@@ -187,6 +190,7 @@
     <string name="err_captcha">Captcha kreves. Se vår <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for veiledning.</string>
     <string name="err_server">Klarte ikke å koble til Geocaching.com (server eller tilkobling nede?)</string>
     <string name="err_server_ec">Får ikke kontakt med Extremcaching.com. Nettstedet kan være nede eller Internettilkoblingen fungerer ikke.</string>
+    <string name="err_server_lc">Klarte ikke koble til land.geocaching.com. Nettsiden er nede eller din internettforbindelse virker ikke.</string>
     <string name="err_server_su">Får ikke kontakt med Geocaching.su. Nettstedet kan være nede eller Internettilkoblingen din fungerer ikke.</string>
     <string name="err_server_gk">Får ikke kontakt med GeoKrety.org. Nettstedet kan være nede eller Internett-tilkoblingen din fungerer ikke.</string>
     <string name="err_login">Ingen innloggingsopplysninger lagret</string>
@@ -314,6 +318,7 @@
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skann GC-kode</string>
     <string name="menu_scan_description">c:geo kan skanne GC-koder fra QR-koder. Den nødvendige appen er ikke installert. Vil du åpne Google Play for å installere den?</string>
+    <string name="menu_invert_order">Omvendt rekkefølge</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kart</string>
     <string name="caches_nearby_button">I nærheten</string>
@@ -341,6 +346,7 @@
     <string name="caches_on_map">Vis på kartet</string>
     <string name="caches_sort">Rekkefølge</string>
     <string name="caches_sort_distance">Avstand</string>
+    <string name="caches_sort_distance_target">Avstand til mål</string>
     <string name="caches_sort_difficulty">Vanskelighet</string>
     <string name="caches_sort_terrain">Terreng</string>
     <string name="caches_sort_size">Størrelse</string>
@@ -422,6 +428,7 @@
     <string name="cache_filter_owner">Cacheeier</string>
     <string name="cache_filter_difficulty">Vankelighetsgrad</string>
     <string name="cache_filter_terrain">Terrenggrad</string>
+    <string name="cache_filter_rating">Rangering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cacheattributter</string>
     <string name="cache_filter_favorites">Favoritter</string>
@@ -434,15 +441,19 @@
     <string name="cache_filtergroup_basic">Enkel</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Brukerspesifikk</string>
+    <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_include">Inkluder</string>
     <string name="cache_filter_exclude">Ekskluder</string>
     <string name="cache_filter_userdisplay_complex">Avansert</string>
     <string name="cache_filter_userdisplay_none">Ingen</string>
     <string name="cache_filter_userdisplay_not">IKKE</string>
     <string name="cache_filter_storage_delete_button">Slett</string>
+    <string name="cache_filter_storage_clear_button">Tøm</string>
+    <string name="cache_filter_storage_delete_title">Slett filter</string>
     <string name="cache_filter_stringfilter_matchcase">Skill store og små bokstaver</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Søketekst</string>
     <string name="cache_filter_stringfilter_type_contains">Inneholder</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Inneholder ikke</string>
     <string name="cache_filter_stringfilter_type_starts_with">Starter med</string>
     <string name="cache_filter_stringfilter_type_ends_with">Slutter med</string>
     <string name="cache_filter_stringfilter_type_pattern">Mønster</string>
@@ -453,6 +464,7 @@
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Legg til elementer</string>
     <string name="cache_filter_favorites_absolute">Absolutt</string>
     <string name="cache_filter_favorites_percentage">Prosent</string>
+    <string name="cache_filter_distance_coordinates">Koordinater</string>
     <string name="cache_filter_distance_use_current_position">Bruk gjeldende posisjon</string>
     <string name="cache_filter_status_select_all">Alle</string>
     <string name="cache_filter_status_select_yes">Ja</string>
@@ -460,13 +472,17 @@
     <string name="cache_filter_status_select_label_found">Funnet</string>
     <string name="cache_filter_status_select_label_owned">Egen</string>
     <string name="cache_filter_status_select_label_stored">Lagret</string>
+    <string name="cache_filter_status_select_label_watchlist">I overvåkningslisten</string>
     <string name="cache_filter_status_select_label_premium">Premium</string>
     <string name="cache_filter_status_select_label_has_trackable">Har sporbare</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Løste mysteries</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktivert</string>
     <string name="cache_filter_status_archived">Arkivert</string>
     <string name="cache_filter_status_exclude_active">Ekskluder aktive</string>
     <string name="cache_filter_status_exclude_disabled">Ekskluder deaktiverte</string>
+    <string name="cache_filter_log_entry_foundby">Funnet av</string>
+    <string name="cache_filter_log_entry_logtext">Loggtekst</string>
     <string name="cache_filter_stored_since_notstored">Ikke lagret</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 timer</string>
@@ -1026,12 +1042,16 @@
     <string name="cache_images">Bilder</string>
     <string name="cache_advanced">Avansert</string>
     <string name="cache_waypoints">Veipunkter</string>
+    <string name="cache_variables">Variabler</string>
+    <string name="cache_waypoints_add">Legg til veipunkt</string>
     <string name="cache_waypoints_add_currentLocation">Bruk min plassering</string>
     <string name="cache_waypoints_add_fromclipboard">Fra utklippstavlen</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Skjul besøkte veipunkter</string>
     <string name="cache_waypoints_remove_original_waypoint">Veipunkt kopiert fra utklippstavlen til denne cachen.\n\nFjern opprinnelige veipunkt?</string>
     <string name="cache_hint">Hint</string>
     <string name="cache_hint_not_available">Ingen hint tilgjengelig</string>
     <string name="cache_logs">Loggbok</string>
+    <string name="cache_latest_logs">Nylige logger</string>
     <string name="cache_logs_friends_and_own">Venners/egne logger</string>
     <string name="cache_dialog_loading_details">Laster cachens detaljer…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Laster siden</string>
@@ -1057,6 +1077,7 @@
     <string name="cache_dialog_favorite_remove_title">Favoritt</string>
     <string name="cache_dialog_favorite_remove_message">Fjerner cachen fra dine favoritter…</string>
     <string name="cache_menu_navigate">Navigér</string>
+    <string name="cache_menu_target">Sett som mål</string>
     <string name="cache_menu_navigation_drive">Navigasjon (kjøring)</string>
     <string name="cache_menu_navigation_drive_select_target">Velg mål</string>
     <string name="cache_menu_navigation_walk">Navigasjon (gående)</string>
@@ -1071,6 +1092,7 @@
     <string name="cache_menu_map_ext">Andre eksterne apper</string>
     <string name="cache_menu_streetview">Gatevisning</string>
     <string name="cache_menu_browser">Åpne i nettleseren</string>
+    <string name="no_browser_found">Ingen nettleser funnet</string>
     <string name="cache_menu_open_with">Åpne med…</string>
     <string name="cache_menu_visit">Logg funn</string>
     <string name="cache_log_too_long">c:geo kunne ikke sende inn loggen din fordi den er for lang. Men takk for forsøket med å skrive en så omfattende logg ;-)</string>
@@ -1098,6 +1120,7 @@
     <string name="cache_menu_challenge_checker">Søk etter utfordringssjekkere</string>
     <string name="cache_menu_ignore">Ignorer cache</string>
     <string name="cache_log_menu_decrypt">Dekryptering/Kryptering</string>
+    <string name="cache_log_menu_popup_title">Logg av %s</string>
     <string name="ignore_confirm_title">Vær forsiktig</string>
     <string name="ignore_confirm_message">Hvis du ignorerer en cache, betyr det at den aldri vil bli med blant data som hentes fra geocaching.com igjen. Du må fjerne den fra ignoreringslista på nettsiden for å kunne hente den på nytt.</string>
     <string name="cache_status">Status</string>
@@ -1108,7 +1131,10 @@
     <string name="cache_status_disabled">Deaktivert</string>
     <string name="cache_status_active">Aktiv</string>
     <string name="cache_status_premium">Kun for premium-medlemmer</string>
+    <string name="cache_geocode">Geocode</string>
     <string name="cache_name">Navn</string>
+    <string name="cache_name_set">Angi cachenavn</string>
+    <string name="cache_name_updated">Cachenavnet er oppdatert</string>
     <string name="cache_description_set">Angi cachebeskrivelse</string>
     <string name="cache_description_updated">Cache-beskrivelse oppdatert</string>
     <string name="cache_type">Type</string>
@@ -1272,6 +1298,8 @@
     <string name="search_coordinates_button">Søk med koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søk med adresse</string>
+    <string name="search_geo">Geocode</string>
+    <string name="search_kw">Nøkkelord</string>
     <string name="search_kw_prefill">Nøkkelord</string>
     <string name="search_kw_button">Søk med nøkkelord</string>
     <string name="search_hbu">Utplassert av</string>
@@ -1288,6 +1316,11 @@
     <string name="search_own_caches">Søk egne cacher</string>
     <string name="search_pocket_title">Utvalgsspørring</string>
     <string name="search_pocket_is_new">ny</string>
+    <string name="search_bookmark_loading">Laster bokmerkelister</string>
+    <string name="search_bookmark_select">Velg bokmerkeliste</string>
+    <string name="search_bookmark_new">Lag ny bokmerkeliste</string>
+    <string name="search_bookmark_adding_caches_failed">Kunne ikke legge cacher til i bokmerkeliste</string>
+    <string name="search_bookmark_create_new_failed">Klarte ikke opprette ny bokmerkeliste</string>
     <!-- trackable -->
     <string name="trackable">Sporbar (TB eller coin)</string>
     <string name="trackable_details_loading">Laster detaljene til den sporbare…</string>
@@ -1847,6 +1880,8 @@
     <string name="localfile_cannot_handle">Feil under lesing av fil eller c:geo kan ikke åpne denne filtypen.</string>
     <!-- ReceiveDownloadActivity -->
     <string name="receivedownload_intenttitle">Motta fil</string>
+    <string name="receivedownload_amount_copied">%s kopiert</string>
+    <string name="receivedownload_cancelled">Filoverføring avbrutt</string>
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Last ned offlinekart</string>
     <string name="download_title">Last ned fil</string>
