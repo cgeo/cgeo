@@ -1,4 +1,4 @@
-### Map
+### Kart
 - New: Complete rework of all cache icons
 - New: Show icons for last logs in cache popup
 - Fix: Show distance circles for user-defined caches (if circles are enabled)
