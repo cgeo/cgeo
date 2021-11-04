@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">確定</string>
     <!-- basics -->
     <string name="cache">高速缓存</string>
     <string name="detail">详细资料</string>
@@ -49,6 +50,7 @@
     <string name="virtual_short">虛擬型藏寶</string>
     <string name="wherigo_short">wherigo藏寶</string>
     <string name="communceleb_short">社群</string>
+    <string name="ape_short">APE</string>
     <string name="gchq_short">地理藏寶總部</string>
     <string name="locationless_short">Locationless</string>
     <string name="advlab_short">進階實驗型藏寶</string>
@@ -315,6 +317,7 @@
     <string name="menu_filter">滤镜</string>
     <string name="menu_scan_geo">掃描geocode</string>
     <string name="menu_scan_description">c:geo可讀取用QR code顯示的geocacode。 但需要的app未安裝，是否要開啟Google play來安裝必要的app?</string>
+    <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
     <string name="live_map_button">線上即時地圖</string>
     <string name="caches_nearby_button">鄰近的</string>
@@ -379,6 +382,7 @@
     <string name="caches_copy_selected">复制所选项</string>
     <string name="caches_copy_all">全部复制</string>
     <string name="caches_map_locus_export">輸出至Locas app</string>
+    <string name="caches_filter_menuitem">篩選</string>
     <string name="caches_filter_title">篩選條件：</string>
     <string name="caches_removing_from_history">正在從歷史記錄中刪除…</string>
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
@@ -388,6 +392,7 @@
     <string name="caches_reset_cache_icons_title">重設cache圖示</string>
     <string name="caches_make_list_unique">使列表唯一</string>
     <string name="caches_set_listmarker">設定清單標記</string>
+    <string name="caches_askdeletion">要求刪除</string>
     <string name="select_icon">選擇圖示</string>
     <string name="onetime_missing_unicode_info">你的andriod版本沒有支援自動偵測圖示，部分的字元遺失。</string>
     <!-- caches lists -->
@@ -406,6 +411,7 @@
     <string name="list_dialog_remove_title">删除此列表</string>
     <string name="list_dialog_remove_description">是否要移除這個列表? 所有在這個列表的cache將會被設為\"已儲存\"。</string>
     <string name="list_dialog_remove_nowempty">空的列表。是否要移除現在著個列表?</string>
+    <string name="list_dialog_do_not_ask_me_again">不要再詢問這個列表</string>
     <string name="list_dialog_remove">移除</string>
     <string name="list_dialog_rename_title">重命名列表</string>
     <string name="list_dialog_rename">重命名</string>
@@ -425,6 +431,8 @@
     <string name="cache_filter_owner">寶主</string>
     <string name="cache_filter_difficulty">困難度</string>
     <string name="cache_filter_terrain">地形難度</string>
+    <string name="cache_filter_difficulty_terrain">藏寶難度/地形難度</string>
+    <string name="cache_filter_rating">評分</string>
     <string name="cache_filter_status">狀態</string>
     <string name="cache_filter_attributes">藏寶的屬性</string>
     <string name="cache_filter_favorites">我的最愛</string>
@@ -433,22 +441,33 @@
     <string name="cache_filter_logs_count">日誌的數量</string>
     <string name="cache_filter_last_found">最後找到的日期</string>
     <string name="cache_filter_log_entry">輸入日誌</string>
+    <string name="cache_filter_location">位置</string>
+    <string name="cache_filter_stored_lists">以儲存的列表</string>
+    <string name="cache_filter_origin">原點</string>
     <string name="cache_filtergroup_basic">基礎</string>
     <string name="cache_filtergroup_details">詳細資料</string>
     <string name="cache_filtergroup_userspecific">使用者自訂</string>
+    <string name="cache_filter_contexttype_live_title">線上篩選</string>
+    <string name="cache_filter_contexttype_offline_title">離線篩選</string>
+    <string name="cache_filter_contexttype_transient_title">篩選</string>
     <string name="cache_filter_include">包含</string>
     <string name="cache_filter_exclude">排除</string>
     <string name="cache_filter_userdisplay_complex">複雜</string>
     <string name="cache_filter_userdisplay_none">無</string>
+    <string name="cache_filter_userdisplay_not">否</string>
     <plurals name="cache_filter_userdisplay_multi_item">
         <item quantity="other">%1$d 個項目</item>
     </plurals>
     <string name="cache_filter_storage_delete_button">刪除</string>
+    <string name="cache_filter_storage_clear_button">清除</string>
     <string name="cache_filter_storage_load_delete_title">載入或刪除過濾設定</string>
+    <string name="cache_filter_storage_select_title">選擇篩選器</string>
+    <string name="cache_filter_storage_select_clear_title">刪除現在的篩選或設定新的篩選</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">無存在的過濾設定</string>
     <string name="cache_filter_storage_save_title">存儲過濾設定</string>
     <string name="cache_filter_storage_save_confirm_title">複寫並儲存過濾設定</string>
     <string name="cache_filter_stringfilter_matchcase">符合案例</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">搜尋文字</string>
     <string name="cache_filter_stringfilter_type_is_not_present">不存在</string>
     <string name="cache_filter_stringfilter_type_is_present">現任</string>
     <string name="cache_filter_stringfilter_type_contains">包含</string>
@@ -458,13 +477,45 @@
     <string name="cache_filter_datefilter_label_from">來自：</string>
     <string name="cache_filter_datefilter_label_to">至:</string>
     <string name="cache_filter_checkboxlist_selectallnone">選擇全部</string>
+    <string name="cache_filter_checkboxlist_add_items">新增更多項目</string>
+    <string name="cache_filter_checkboxlist_add_all_items">新增所有項目</string>
+    <string name="cache_filter_checkboxlist_add_items_dialog_title">新增項目</string>
     <string name="cache_filter_favorites_absolute">絕對</string>
     <string name="cache_filter_favorites_percentage">百分比</string>
+    <string name="cache_filter_distance_coordinates">座標</string>
     <string name="cache_filter_distance_use_current_position">使用目前位置</string>
     <string name="cache_filter_status_select_all">全部類型</string>
+    <string name="cache_filter_status_select_yes">是</string>
+    <string name="cache_filter_status_select_no">否</string>
+    <string name="cache_filter_status_select_label_found">已找到</string>
+    <string name="cache_filter_status_select_label_owned">擁有的</string>
+    <string name="cache_filter_status_select_label_stored">已儲存:</string>
+    <string name="cache_filter_status_select_label_premium">尊榮會員</string>
+    <string name="cache_filter_status_select_label_has_trackable">有旅行蟲</string>
+    <string name="cache_filter_status_active">有效的</string>
+    <string name="cache_filter_status_disabled">已停用</string>
+    <string name="cache_filter_status_archived">已封存</string>
     <string name="cache_filter_status_exclude_active">排除仍活躍的</string>
     <string name="cache_filter_status_exclude_disabled">排除關閉的</string>
     <string name="cache_filter_status_exclude_archived">排除歸檔的</string>
+    <string name="cache_filter_log_entry_foundby">由發現</string>
+    <string name="cache_filter_log_entry_logtext">日誌文字</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero">0 小时</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0小時</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8小時</item>
+        <item>24 小時</item>
+        <item>7 天</item>
+        <item>30天</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8小時</item>
+        <item>24小時</item>
+        <item>7天</item>
+        <item>30天</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max_short">最大的</string>
     <!-- about -->
     <string name="about_version">版本</string>
     <string name="about_changelog">更新日誌</string>
@@ -898,6 +949,7 @@
     </plurals>
     <string name="last_day_available">已終止下載靜態地圖</string>
     <string name="cache_offline_refresh">重新整理</string>
+    <string name="cache_offline_drop">從清單中移除</string>
     <string name="cache_delete_userdefined_waypoints">移除使用者定義航點</string>
     <string name="cache_delete_userdefined_waypoints_confirm">要移除這個cache裡的使用者定義航點(全部)?\n\n航點會被馬上移除並無法回復。</string>
     <string name="cache_delete_userdefined_waypoints_success">使用者定義的航點已刪除。</string>
@@ -983,6 +1035,7 @@
     <string name="cache_dialog_favorite_remove_title">我的最愛</string>
     <string name="cache_dialog_favorite_remove_message">從你的最愛裡移除cache</string>
     <string name="cache_menu_navigate">瀏覽</string>
+    <string name="cache_menu_target">設定成目標</string>
     <string name="cache_menu_navigation_drive">導航(開車)</string>
     <string name="cache_menu_navigation_drive_select_target">選擇目標</string>
     <string name="cache_menu_navigation_walk">導航(步行)</string>
@@ -1155,6 +1208,14 @@
     <string name="map_view_map">地圖檢視</string>
     <string name="map_rotation">旋轉地圖</string>
     <string name="map_dot_mode">使用羅盤的圖示</string>
+    <string name="map_show_circles">圓圈</string>
+    <string name="map_showc_own">自己的</string>
+    <string name="map_showc_found">已找到</string>
+    <string name="map_showc_disabled">已停用</string>
+    <string name="map_showc_archived">已封存</string>
+    <string name="map_showwp_original">原始的</string>
+    <string name="map_showwp_parking">停車</string>
+    <string name="map_showwp_visited">已訪問</string>
     <string name="onetime_mapthemefixslow_title">修正過慢的地圖渲染。</string>
     <string name="onetime_mapthemefixslow_message">使用位解壓縮過的地圖主題將會使減弱地圖瀏覽的效能。你可以解壓縮地圖主題來得到較佳的瀏覽品質、速度。</string>
     <string name="init_hidewp">隱藏航點</string>
@@ -1172,6 +1233,8 @@
     <string name="map_routing_activate_title">打開路徑</string>
     <string name="map_gm_autorotation">自動旋轉地圖</string>
     <string name="quick_settings">快速設定</string>
+    <string name="map_show_caches_title">顯示寶藏:</string>
+    <string name="map_show_other_title">顯示其他</string>
     <!-- search -->
     <string name="search_bar_hint">搜尋藏寶或旅行蟲</string>
     <string name="search_coordinates">座標</string>
@@ -1183,6 +1246,7 @@
     <string name="search_hbu">由藏寶</string>
     <string name="search_hbu_prefill">寶主</string>
     <string name="search_hbu_button">用寶主名稱來搜尋</string>
+    <string name="search_filter">篩選</string>
     <string name="search_tb">旅行蟲</string>
     <string name="search_tb_hint">旅行蟲識別</string>
     <string name="search_tb_button">搜尋旅行蟲</string>
@@ -1644,6 +1708,7 @@
     <string name="wizard">組態設定精靈</string>
     <string name="wizard_welcome_title">歡迎使用c:geo</string>
     <string name="wizard_migration_title">c:geo目錄合併</string>
+    <string name="wizard_intro">只需要幾個步驟就可安裝、設定c:ego。需要幫您設定嗎？</string>
     <string name="wizard_intro_returning">歡迎回到組態設定精靈。你的c:geo設定還未完成，需要幫你完成設定嗎?只需要幾個步驟。</string>
     <string name="wizard_permissions_title">設定應用程式權限</string>
     <string name="wizard_permissions_folder_title">設定資料夾：%s</string>
@@ -1651,6 +1716,7 @@
     <string name="wizard_platforms_gc">geocaching.com</string>
     <string name="wizard_welcome_advanced">進階設定</string>
     <string name="wizard_advanced_offlinemaps_label">離線地圖</string>
+    <string name="wizard_advanced_routing_label">開啟離線導航</string>
     <string name="wizard_advanced_restore_label">還原</string>
     <string name="status_not_ok">錯誤</string>
     <string name="wizard_status_title">配置狀態:</string>
@@ -1668,4 +1734,5 @@
     <string name="finish">完成</string>
     <string name="back">後方</string>
     <!-- ChipChoiceGroup -->
+    <string name="chipchoicegroup_selectall">選擇全部</string>
 </resources>
