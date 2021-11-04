@@ -396,7 +396,7 @@ dependencies {
     implementation 'androidx.recyclerview:recyclerview:1.2.1'
 
     // Support Annotations. use same version for the main app and the test app
-    def annotationVersion = '1.2.0'
+    def annotationVersion = '1.3.0'
     implementation "androidx.annotation:annotation:$annotationVersion"
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
