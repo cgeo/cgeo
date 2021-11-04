@@ -408,7 +408,7 @@ dependencies {
     implementation 'asia.ivity.android:drag-sort-listview:1.0'
 
     // needed for chrome custom tabs
-    implementation 'androidx.browser:browser:1.3.0'
+    implementation 'androidx.browser:browser:1.4.0'
 
     // Zxing barcode reader integration
     implementation 'com.google.zxing:android-integration:3.3.0'
