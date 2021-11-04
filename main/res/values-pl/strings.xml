@@ -320,9 +320,12 @@
     <string name="menu_helpers">Przydatne programy</string>
     <string name="menu_settings">Ustawienia</string>
     <string name="menu_backup">Kopia zapasowa / przywracanie</string>
+    <string name="menu_update">Aktualizuj dane offline</string>
     <string name="menu_update_routingdata">Dane nawigowania</string>
     <string name="menu_update_mapdata">Dane mapy</string>
+    <string name="menu_dashboard">Panel logowania</string>
     <string name="menu_history">Historia</string>
+    <string name="menu_history_longstring">Historia znalezień</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_scan_geo">Zeskanuj geokod</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -330,6 +333,7 @@
     <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
     <string name="menu_invert_order">Odwróć kolejność</string>
     <!-- main screen -->
+    <string name="home_button">Strona główna</string>
     <string name="live_map_button">Mapa online</string>
     <string name="caches_nearby_button">Najbliższe</string>
     <string name="advanced_search_button">Szukaj</string>
@@ -359,6 +363,7 @@
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
+    <string name="caches_sort_automatic">Automatyczne (%s)</string>
     <string name="caches_sort_distance">Odległość</string>
     <string name="caches_sort_distance_target">Odległość do celu</string>
     <string name="caches_sort_difficulty">Trudność</string>
@@ -412,6 +417,18 @@
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
     <string name="select_icon">Wybierz ikonę</string>
     <string name="onetime_missing_unicode_info">Twoja wersja Androida nie obsługuje automatycznego wykrywania obsługiwanych ikon - może brakować niektórych znaków</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d znalezienie</item>
+        <item quantity="few">%d znalezienia</item>
+        <item quantity="many">%d znalezień</item>
+        <item quantity="other">%d znalezień</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d zalogowanie offline</item>
+        <item quantity="few">%d zalogowania offline</item>
+        <item quantity="many">%d zalogowań offline</item>
+        <item quantity="other">%d zalogowań offline</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
     <string name="list_menu_create">Utwórz nową listę</string>
@@ -537,6 +554,7 @@
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
     <string name="cache_filter_log_entry_foundby">Znaleziona przez</string>
     <string name="cache_filter_log_entry_logtext">Tekst dziennika</string>
+    <string name="cache_filter_stored_since_notstored">Nieprzechowywane</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 godzin</string>
     <string name="cache_filter_stored_since_stored_zero_short">0h</string>
@@ -670,6 +688,7 @@
     <string name="init_login_popup_failed">Logowanie nie powiodło się</string>
     <string name="init_login_popup_failed_reason">Logowanie nieudane: %s</string>
     <string name="init_login_popup_not_authorized">Brak autoryzacji</string>
+    <string name="init_login_popup_not_logged_in">Nie zalogowano w</string>
     <string name="init_login_popup_invalid_timestamp">Czas lokalny nieprawidłowy, ustaw właściwy czas urządzenia</string>
     <string name="init_login_popup_invalid_token">Autoryzacja nieprawidłowa, spróbuj ponownie</string>
     <string name="init_authorization_credential_username">Nazwa użytkownia</string>
@@ -1412,6 +1431,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtr skrytek jest zbyt złożony</string>
     <string name="map_settings_cache_filter_too_complex_message">Obecny filtr skrytek jest zbyt skomplikowany, aby zastosować dodatkowe opcje. Zazwyczaj oznacza to, że filtr skrytek zawiera wyrażenia NOT lub OR zamiast prostej logiki AND.</string>
     <!-- search -->
+    <string name="geo_search_label">Szukaj skrytek w pobliżu</string>
     <string name="search_bar_hint">Szukaj skrytki/przedmioty podróżne</string>
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_coordinates_button">Szukaj według współrzędnych</string>
@@ -1426,6 +1446,9 @@
     <string name="search_hbu">Ukryte przez</string>
     <string name="search_hbu_prefill">Właściciel</string>
     <string name="search_hbu_button">Szukaj według właściciela</string>
+    <string name="search_finder">Znalezione przez</string>
+    <string name="search_finder_prefill">Znalazca</string>
+    <string name="search_finder_button">Szukaj według znalazcy</string>
     <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Szukaj według filtru</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtrów** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
@@ -1486,6 +1509,7 @@
     <!-- user -->
     <string name="user_menu_title">O użytkowniku</string>
     <string name="user_menu_view_hidden">Schowane skrzynki</string>
+    <string name="user_menu_view_found">Znalezione skrytki</string>
     <string name="user_menu_open_browser">Otwórz profil w przeglądarce</string>
     <string name="user_menu_send_message">Wyślij wiadomość</string>
     <string name="user_menu_send_email">Wyślij e-mail</string>
@@ -2161,4 +2185,5 @@
     <string name="later">Później</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
+    <string name="touch_again_to_exit">Proszę dotknąć ponownie, aby wyjść</string>
 </resources>
