@@ -63,8 +63,7 @@ public final class CompassMiniView extends View {
     public void onAttachedToWindow() {
         super.onAttachedToWindow();
         if (instances++ == 0) {
-            final int drawable = isInEditMode() || !Settings.isLightSkin(getContext()) ? R.drawable.compass_arrow_mini_white : R.drawable.compass_arrow_mini_black;
-            final Drawable temp = ResourcesCompat.getDrawable(getResources(), drawable, null);
+            final Drawable temp = ResourcesCompat.getDrawable(getResources(), R.drawable.compass_arrow_mini, null);
             try {
                 compassArrow = Bitmap.createBitmap(temp.getIntrinsicWidth(), temp.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
                 final Canvas canvas = new Canvas(compassArrow);
