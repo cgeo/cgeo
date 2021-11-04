@@ -425,6 +425,7 @@
     <string name="settings_info_themes_title">Info di Peta Tema</string>
     <string name="init_mapsource_select">Pilih Sumber Peta</string>
     <string name="init_dataDir_note">Anda dapat memilih untuk menyimpan data tambahan untuk geocaches (spoiler, log gambar, &#8230;) pada penyimpanan eksternal anda atau (kartu SD eksternal yang ditiru sebenarnya tergantung pada perangkat anda).</string>
+    <string name="init_maptrail">Tampilkan Jejak</string>
     <string name="init_include_found_status">Termasuk \"Ditemukan\" status</string>
     <string name="init_trackautovisit">Kunjungi TBs</string>
     <string name="init_summary_trackautovisit">Setel trackables ke \"Visited\" secara default</string>
@@ -528,7 +529,13 @@
     <string name="err_auth_geokrety_bad_password">Nama pengguna/Kata sandi anda sepertinya tidak cocok.</string>
     <string name="err_auth_geokrety_unknown">%1$s dikembalikan: %2$s.</string>
     <!-- cache -->
+    <plurals name="cache_counts">
+        <item quantity="other">%1$d cache</item>
+    </plurals>
     <!-- days remaining -->
+    <plurals name="days_remaining">
+        <item quantity="other">%1$d hari tersisa</item>
+    </plurals>
     <string name="last_day_available">tersedia dihari terakhir</string>
     <string name="cache_offline_refresh">Segarkan</string>
     <string name="cache_offline_store">Toko</string>
@@ -831,6 +838,9 @@
     <string name="export_confirm_message">Untuk Path: %1$s\nNama Berkas: %2$s</string>
     <string name="export_persnotes">Catatan pribadi</string>
     <string name="export_persnotes_uploading">Mengunggah catatan pribadi %1$d</string>
+    <plurals name="export_persnotes_upload_success">
+        <item quantity="other">Mengupload %1$d notes dengan sukses</item>
+    </plurals>
     <!-- GC attributes -->
     <string name="attribute_dogs_yes">Anjing peliharaan diizinkan</string>
     <string name="attribute_dogs_no">Anjing peliharaan tidak diizinkan</string>
@@ -1142,6 +1152,7 @@
     <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
+    <string name="map_trail_show">Tampilkan jejak</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
