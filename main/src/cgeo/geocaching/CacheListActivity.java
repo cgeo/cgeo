@@ -730,6 +730,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.forceSort();
             updateSortBar();
         });
+        this.findViewById(R.id.sort_bar).setOnClickListener(v -> menu.performIdentifierAction(R.id.menu_sort, 0));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
