@@ -1,15 +1,24 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.UrlPopup;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceViewHolder;
+
+import org.apache.commons.lang3.StringUtils;
 
 // https://www.joehxblog.com/how-to-add-a-long-click-to-an-androidx-preference/
 abstract class AbstractClickablePreference extends Preference {
