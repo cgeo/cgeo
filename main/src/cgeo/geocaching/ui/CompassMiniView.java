@@ -2,7 +2,6 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
 
 import android.content.Context;
