@@ -709,7 +709,7 @@
     <string name="init_friends_and_own_logs_wanted">Afficher vos visites / visites amis</string>
     <string name="init_summary_friends_and_own_logs_wanted">Afficher une page de carnet supplémentaire avec vos visites et celles de vos amis</string>
     <string name="init_openlastdetailspage">Afficher les détails à la dernière page ouverte</string>
-    <string name="init_summary_openlastdetailspage">A l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
+    <string name="init_summary_openlastdetailspage">À l\'ouverture des détails d\'une cache afficher le dernier onglet consulté</string>
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
     <string name="init_select_language">Sélectionner la langue</string>

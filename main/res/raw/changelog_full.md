@@ -8,6 +8,14 @@ This changelog contains all changes which are not intermediate developing steps.
 
 <!-- --------------------------------------------------------------------------------- --->
 
+## 2021.10.08 Bugfix release
+
+### Fixes
+- Fix: Fix some time zone issues when changing log date
+- Fix: Start secondary navigation on long tap of compass rose in popup
+
+<!-- --------------------------------------------------------------------------------- --->
+
 ## 2021.09.27 Feature release
 
 ### Map

@@ -333,6 +333,7 @@
     <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
+    <string name="home_button">Αρχική</string>
     <string name="live_map_button">Live Χάρτης</string>
     <string name="caches_nearby_button">Σε κοντινή απόσταση</string>
     <string name="advanced_search_button">Αναζήτηση</string>
@@ -360,6 +361,7 @@
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
+    <string name="caches_sort_automatic">Αυτόματα (%s)</string>
     <string name="caches_sort_distance">Απόσταση</string>
     <string name="caches_sort_distance_target">Απόσταση από τον στόχο</string>
     <string name="caches_sort_difficulty">Δυσκολία</string>
@@ -413,6 +415,10 @@
     <string name="caches_askdeletion">Ερώτηση για διαγραφή αν είναι κενό</string>
     <string name="select_icon">Επιλέξτε εικονίδιο</string>
     <string name="onetime_missing_unicode_info">Η έκδοση Android σας δεν υποστηρίζει την αυτόματη ανίχνευση εικονιδίων που υποστηρίζονται - ορισμένοι χαρακτήρες μπορεί να λείπουν</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d εύρεση</item>
+        <item quantity="other">%d ευρέσεις</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Διαχείριση λιστών</string>
     <string name="list_menu_create">Δημιουργία νέας λίστας</string>
@@ -1395,6 +1401,7 @@
     <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
     <!-- search -->
+    <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
     <string name="search_coordinates">Συντεταγμένες</string>
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
@@ -1413,6 +1420,7 @@
     <string name="search_finder_prefill">Το βρήκε</string>
     <string name="search_finder_button">Αναζήτηση με το όνομα του παίκτη</string>
     <string name="search_filter">Φίλτρο</string>
+    <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
     <string name="search_filter_temporary_user_information_title">Πλαίσιο νέου φίλτρου</string>
     <string name="search_filter_temporary_user_information">Το c:geo εισήγαγε ένα νέο σύστημα φιλτραρίσματος, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα. \n\nΤο καθολικό φίλτρο μπορεί από τώρα και στο εξής να αλλάξει απευθείας στις λίστες κρυπτών και στον ζωντανό χάρτη.</string>
