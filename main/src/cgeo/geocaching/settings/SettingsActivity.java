@@ -5,14 +5,26 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
+import android.widget.BaseAdapter;
+import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceScreen;
+
+import org.apache.commons.lang3.StringUtils;
+
+import java.util.Locale;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.capability.ICredentials;
+import cgeo.geocaching.connector.ec.ECConnector;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -108,11 +120,91 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             return;
         }
 
-        switch (requestCode) {
-            // TODO: Reimplement for Fragment based logic
-            default:
-                throw new IllegalArgumentException();
+        if (requestCode == R.string.pref_fakekey_dataDir) {
+            getPreference(R.string.pref_fakekey_dataDir).setSummary(Settings.getExternalPrivateCgeoDirectory());
+        } else if (requestCode == R.string.pref_fakekey_ocde_authorization
+            || requestCode == R.string.pref_fakekey_ocpl_authorization
+            || requestCode == R.string.pref_fakekey_ocnl_authorization
+            || requestCode == R.string.pref_fakekey_ocus_authorization
+            || requestCode == R.string.pref_fakekey_ocro_authorization
+            || requestCode == R.string.pref_fakekey_ocuk_authorization) {
+            final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
+            if (key != null) {
+                setOCAuthTitle(key);
+                setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
+                redrawScreen(key.prefScreenId);
+            } else {
+                setConnectedTitle(requestCode, false);
+            }
+        } else if (requestCode == R.string.pref_fakekey_gc_authorization) {
+            setAuthTitle(requestCode, GCConnector.getInstance());
+            setConnectedUsernameTitle(requestCode, GCConnector.getInstance());
+            redrawScreen(R.string.preference_screen_gc);
+            initBasicMemberPreferences();
+            initLCServicePreference(Settings.isGCConnectorActive());
+        } else if (requestCode == R.string.pref_fakekey_ec_authorization) {
+            setAuthTitle(requestCode, ECConnector.getInstance());
+            setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
+            redrawScreen(R.string.preference_screen_ec);
+        } else if (requestCode == R.string.pref_fakekey_gcvote_authorization) {
+            setAuthTitle(requestCode, GCVote.getInstance());
+            setConnectedUsernameTitle(requestCode, GCVote.getInstance());
+            redrawScreen(R.string.init_gcvote);
+        } else if (requestCode == R.string.pref_fakekey_twitter_authorization) {
+            setTwitterAuthTitle();
+            setConnectedTitle(requestCode, Settings.hasTwitterAuthorization());
+            redrawScreen(R.string.preference_screen_twitter);
+        } else if (requestCode == R.string.pref_fakekey_geokrety_authorization) {
+            setGeokretyAuthTitle();
+            setConnectedTitle(requestCode, Settings.hasGeokretyAuthorization());
+            redrawScreen(R.string.preference_screen_geokrety);
+        } else if (requestCode == R.string.pref_fakekey_su_authorization) {
+            setSuAuthTitle();
+            setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
+            redrawScreen(R.string.preference_screen_su);
+        } else {
+            throw new IllegalArgumentException();
         }
+    }
+
+    /**
+     * Refresh a preference screen. Has no effect when called for a preference, that is not actually a preference
+     * screen.
+     *
+     * @param key
+     *            Key of a preference screen.
+     */
+    private void redrawScreen(final int key) {
+        final Preference preference = getPreference(key);
+        redrawScreen(preference);
+    }
+
+    private static void redrawScreen(final Preference preference) {
+        if (!(preference instanceof PreferenceScreen)) {
+            return;
+        }
+        final PreferenceScreen screen = (PreferenceScreen) preference;
+        final ListAdapter adapter = screen.getRootAdapter();
+        if (adapter instanceof BaseAdapter) {
+            ((BaseAdapter) adapter).notifyDataSetChanged();
+        }
+    }
+
+    private void initLCServicePreference(final boolean gcConnectorActive) {
+        final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
+        getPreference(R.string.preference_screen_lc).setSummary(getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
+        if (isActiveGCPM) {
+            getPreference(R.string.pref_connectorALActive).setEnabled(true);
+        }
+    }
+
+    void initBasicMemberPreferences() {
+        getPreference(R.string.preference_screen_basicmembers)
+            .setEnabled(!Settings.isGCPremiumMember());
+        getPreference(R.string.pref_loaddirectionimg)
+            .setEnabled(!Settings.isGCPremiumMember());
+
+        redrawScreen(R.string.preference_screen_services);
     }
 
     @Override
@@ -130,5 +222,88 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             .addToBackStack(null)
             .commit();
         return true;
+    }
+
+    public void setAuthTitle(final int prefKeyId) {
+        if (prefKeyId == R.string.pref_fakekey_gc_authorization) {
+            setAuthTitle(prefKeyId, GCConnector.getInstance());
+            setConnectedUsernameTitle(prefKeyId, GCConnector.getInstance());
+        } else if (prefKeyId == R.string.pref_fakekey_ocde_authorization
+            || prefKeyId == R.string.pref_fakekey_ocpl_authorization
+            || prefKeyId == R.string.pref_fakekey_ocnl_authorization
+            || prefKeyId == R.string.pref_fakekey_ocus_authorization
+            || prefKeyId == R.string.pref_fakekey_ocro_authorization
+            || prefKeyId == R.string.pref_fakekey_ocuk_authorization) {
+            final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
+            if (key != null) {
+                setOCAuthTitle(key);
+                setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
+            } else {
+                setConnectedTitle(prefKeyId, false);
+            }
+        } else if (prefKeyId == R.string.pref_fakekey_ec_authorization) {
+            setAuthTitle(prefKeyId, ECConnector.getInstance());
+            setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
+        } else if (prefKeyId == R.string.pref_fakekey_su_authorization) {
+            setSuAuthTitle();
+            setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
+        } else if (prefKeyId == R.string.pref_fakekey_gcvote_authorization) {
+            setAuthTitle(prefKeyId, GCVote.getInstance());
+            setConnectedUsernameTitle(prefKeyId, GCVote.getInstance());
+        } else if (prefKeyId == R.string.pref_fakekey_twitter_authorization) {
+            // Moved to Fragment: setTwitterAuthTitle
+            setConnectedTitle(prefKeyId, Settings.hasTwitterAuthorization());
+        } else if (prefKeyId == R.string.pref_fakekey_geokrety_authorization) {
+            setGeokretyAuthTitle();
+            setConnectedTitle(prefKeyId, Settings.hasGeokretyAuthorization());
+        } else {
+            Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
+        }
+    }
+
+    private void setOCAuthTitle(final OCPreferenceKeys key) {
+        getPreference(key.authPrefId)
+            .setTitle(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId)
+                ? R.string.settings_reauthorize
+                : R.string.settings_authorize));
+    }
+
+    private void setSuAuthTitle() {
+        getPreference(R.string.pref_fakekey_su_authorization)
+            .setTitle(getString(Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret)
+                ? R.string.settings_reauthorize
+                : R.string.settings_authorize));
+    }
+
+    private void setGeokretyAuthTitle() {
+        getPreference(R.string.pref_fakekey_geokrety_authorization)
+            .setTitle(getString(Settings.hasGeokretyAuthorization()
+                ? R.string.settings_reauthorize
+                : R.string.settings_authorize));
+    }
+
+    private void setAuthTitle(final int prefKeyId, @NonNull final ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        getPreference(prefKeyId)
+            .setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                ? R.string.settings_reauthorize
+                : R.string.settings_authorize));
+    }
+
+    private void setConnectedUsernameTitle(final int prefKeyId, @NonNull final ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        getPreference(prefKeyId)
+            .setSummary(credentials.isValid()
+                ? getString(R.string.auth_connected_as, credentials.getUserName())
+                : getString(R.string.auth_unconnected));
+    }
+
+    private void setConnectedTitle(final int prefKeyId, final boolean hasToken) {
+        getPreference(prefKeyId)
+            .setSummary(getString(hasToken
+                ? R.string.auth_connected
+                : R.string.auth_unconnected));
     }
 }

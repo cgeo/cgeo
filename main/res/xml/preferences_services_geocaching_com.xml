@@ -36,6 +36,7 @@
 
     <PreferenceCategory android:title="@string/settings_information">
         <Preference
+            android:key="@string/pref_gc_fb_login_hint"
             android:icon="?attr/settings_info_icon"
             android:text="@string/settings_info_facebook_login"
             android:title="@string/settings_info_facebook_login_title"
