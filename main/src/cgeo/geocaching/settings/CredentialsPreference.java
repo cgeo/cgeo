@@ -83,7 +83,7 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity settingsActivity) {
-        //settingsActivity.setAuthTitle(credentialsMapping.prefKeyId);
+        settingsActivity.setAuthTitle(credentialsMapping.prefKeyId);
         return preference -> {
             final Intent checkIntent = new Intent(preference.getContext(), credentialsMapping.getAuthActivity());
 

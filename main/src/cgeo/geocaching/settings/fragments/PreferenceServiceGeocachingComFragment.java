@@ -2,10 +2,12 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -28,7 +30,18 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
             return true;
         });
 
-        // TODO: Dialog for "Login using Facbook or Google"
-
+        // Facebook Login Hint
+        Preference login_facebook = findPreference(getString(R.string.pref_gc_fb_login_hint));
+        login_facebook.setOnPreferenceClickListener(preference -> {
+            final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
+            // TODO: Open Intent to c:geo website
+            builder.setMessage(R.string.settings_info_facebook_login)
+                .setIcon(android.R.drawable.ic_dialog_info)
+                .setTitle(R.string.settings_info_facebook_login_title)
+                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                .setNegativeButton(R.string.more_information, (dialog, id) -> dialog.cancel());
+            builder.create().show();
+            return true;
+        });
     }
 }

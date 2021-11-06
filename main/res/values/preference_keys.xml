@@ -320,6 +320,7 @@
     <string translatable="false" name="pref_value_theme_light">LIGHT</string>
     <string translatable="false" name="pref_value_theme_dark">DARK</string>
     <string translatable="false" name="pref_value_theme_system_default">SYSTEM_DEFAULT</string>
+    <string name="pref_gc_fb_login_hint">gc_fb_login_hint</string>
     <string-array name="pref_theme_values">
         <item>@string/pref_value_theme_system_default</item>
         <item>@string/pref_value_theme_light</item>
