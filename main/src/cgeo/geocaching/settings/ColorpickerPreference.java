@@ -27,12 +27,14 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.preference.DialogPreference;
+import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 
-public class ColorpickerPreference extends DialogPreference {
+public class ColorpickerPreference extends MultiSelectListPreference {
+
+    // TODO
 
     private int colorScheme = 0;                    // currently selected color scheme
     private int color = 0xffff0000;                 // currently selected color (incl. opaqueness)
@@ -93,9 +95,7 @@ public class ColorpickerPreference extends DialogPreference {
         }
     }
 
-    /*
-
-    @Override
+    /*@Override
     protected void onBindDialogView(final View v) {
         super.onBindDialogView(v);
         if (null != v) {
@@ -234,9 +234,7 @@ public class ColorpickerPreference extends DialogPreference {
         } else {
             color = originalColor;
         }
-    }
-
-     */
+    }*/
 
     private void initColorSchemeGrid() {
         final LayoutInflater inflater = LayoutInflater.from(getContext());

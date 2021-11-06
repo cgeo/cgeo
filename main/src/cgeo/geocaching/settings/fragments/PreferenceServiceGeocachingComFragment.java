@@ -1,12 +1,17 @@
 package cgeo.geocaching.settings.fragments;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.settings.Credentials;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
@@ -17,6 +22,10 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_geocaching_com, rootKey);
+
+        setAuthTitle(R.string.pref_fakekey_gc_authorization, GCConnector.getInstance());
+        setConnectedUsernameTitle(R.string.pref_fakekey_gc_authorization, GCConnector.getInstance());
+        initBasicMemberPreferences();
 
         // Authentication Preference
         // pref_fakekey_gc_authorization
@@ -43,5 +52,30 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
             builder.create().show();
             return true;
         });
+    }
+
+    void initBasicMemberPreferences() {
+        findPreference(getString((R.string.preference_screen_basicmembers)))
+            .setEnabled(!Settings.isGCPremiumMember());
+        findPreference(getString((R.string.pref_loaddirectionimg)))
+            .setEnabled(!Settings.isGCPremiumMember());
+    }
+
+    private void setConnectedUsernameTitle(final int prefKeyId, @NonNull final ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        findPreference(getString(prefKeyId))
+            .setSummary(credentials.isValid()
+                ? getString(R.string.auth_connected_as, credentials.getUserName())
+                : getString(R.string.auth_unconnected));
+    }
+
+    private void setAuthTitle(final int prefKeyId, @NonNull final ICredentials connector) {
+        final Credentials credentials = Settings.getCredentials(connector);
+
+        findPreference(getString(prefKeyId))
+            .setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw())
+                ? R.string.settings_reauthorize
+                : R.string.settings_authorize));
     }
 }

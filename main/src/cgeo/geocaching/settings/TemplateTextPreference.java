@@ -14,13 +14,15 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import androidx.appcompat.app.AlertDialog;
-import androidx.preference.DialogPreference;
+import androidx.preference.EditTextPreference;
 
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class TemplateTextPreference extends DialogPreference {
+public class TemplateTextPreference extends EditTextPreference {
+
+    // TODO
 
     /**
      * default value, if none is given in the preference XML.
@@ -44,12 +46,11 @@ public class TemplateTextPreference extends DialogPreference {
         setDialogLayoutResource(R.layout.template_preference_dialog);
     }
 
-    /*
-
-    @Override
+    /*@Override
     protected void onBindDialogView(final View view) {
         settingsActivity = (SettingsActivity) this.getContext();
 
+        // TODO: replace with android id
         editText = view.findViewById(R.id.signature_dialog_text);
         editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
         Dialogs.moveCursorToEnd(editText);
@@ -91,10 +92,9 @@ public class TemplateTextPreference extends DialogPreference {
             callChangeListener(text);
         }
         super.onDialogClosed(positiveResult);
-    }
+    }*/
 
 
-     */
     @Override
     protected void onSetInitialValue(final Object defaultValue) {
         if (defaultValue == null) {

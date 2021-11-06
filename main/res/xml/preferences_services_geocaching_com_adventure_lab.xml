@@ -8,8 +8,8 @@
     <PreferenceCategory android:title="@string/settings_settings" >
         <CheckBoxPreference
             android:defaultValue="true"
-            android:key="@string/preference_screen_lc"
-            android:title="@string/settings_title_lc" />
+            android:key="@string/pref_connectorALActive"
+            android:title="@string/settings_service_activate" />
         <Preference
             app:summary="@string/settings_lc_description" />
     </PreferenceCategory>
