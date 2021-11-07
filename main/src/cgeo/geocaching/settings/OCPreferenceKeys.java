@@ -61,15 +61,15 @@ public enum OCPreferenceKeys {
         FIND_BY_ISACTIVE_KEY = Collections.unmodifiableMap(byIsactiveKey);
     }
 
-    static boolean isOCPreference(final String prefKey) {
+    public static boolean isOCPreference(final String prefKey) {
         return FIND_BY_ISACTIVE_KEY.containsKey(prefKey);
     }
 
-    static OCPreferenceKeys getByAuthId(final int authPrefId) {
+    public static OCPreferenceKeys getByAuthId(final int authPrefId) {
         return FIND_BY_AUTH_PREF_ID.get(authPrefId);
     }
 
-    static OCPreferenceKeys getByKey(final String prefKey) {
+    public static OCPreferenceKeys getByKey(final String prefKey) {
         return FIND_BY_ISACTIVE_KEY.get(prefKey);
     }
 

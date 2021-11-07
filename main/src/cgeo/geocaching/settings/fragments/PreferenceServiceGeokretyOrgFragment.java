@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -33,5 +34,10 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
+
+        // TODO
+        findPreference(getString(R.string.pref_fakekey_geokrety_authorization))
+            .setTitle(getString(
+                Settings.hasGeokretyAuthorization() ? R.string.settings_reauthorize : R.string.settings_authorize));
     }
 }
