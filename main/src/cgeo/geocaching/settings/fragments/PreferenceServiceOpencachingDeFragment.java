@@ -3,10 +3,13 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.settings.OCPreferenceKeys;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ShareUtils;
 
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -25,5 +28,14 @@ public class PreferenceServiceOpencachingDeFragment extends PreferenceFragmentCo
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
+
+        // TODO
+        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(R.string.pref_fakekey_ocde_authorization);
+        if (key != null) {
+            findPreference(getString(key.authPrefId)).setTitle(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId) ? R.string.settings_reauthorize : R.string.settings_authorize));
+            findPreference(getString(R.string.pref_fakekey_ocde_authorization)).setSummary(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId) ? R.string.auth_connected : R.string.auth_unconnected));
+        } else {
+            findPreference(getString(R.string.pref_fakekey_ocde_authorization)).setSummary(getString(R.string.auth_unconnected));
+        }
     }
 }

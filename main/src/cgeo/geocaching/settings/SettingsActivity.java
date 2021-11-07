@@ -5,25 +5,17 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceScreen;
-
-import org.apache.commons.lang3.StringUtils;
 
 import java.util.Locale;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
-import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
@@ -120,20 +112,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             return;
         }
 
-        if (requestCode == R.string.pref_fakekey_ocde_authorization
-            || requestCode == R.string.pref_fakekey_ocpl_authorization
-            || requestCode == R.string.pref_fakekey_ocnl_authorization
-            || requestCode == R.string.pref_fakekey_ocus_authorization
-            || requestCode == R.string.pref_fakekey_ocro_authorization
-            || requestCode == R.string.pref_fakekey_ocuk_authorization) {
-            final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(requestCode);
-            if (key != null) {
-                setOCAuthTitle(key);
-                setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
-            } else {
-                setConnectedTitle(requestCode, false);
-            }
-        } else if (requestCode == R.string.pref_fakekey_ec_authorization) {
+        if (requestCode == R.string.pref_fakekey_ec_authorization) {
             setAuthTitle(requestCode, ECConnector.getInstance());
             setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
         } else if (requestCode == R.string.pref_fakekey_gcvote_authorization) {
@@ -142,12 +121,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         } else if (requestCode == R.string.pref_fakekey_twitter_authorization) {
             setConnectedTitle(requestCode, Settings.hasTwitterAuthorization());
         } else if (requestCode == R.string.pref_fakekey_geokrety_authorization) {
-            setGeokretyAuthTitle();
             setConnectedTitle(requestCode, Settings.hasGeokretyAuthorization());
         } else if (requestCode == R.string.pref_fakekey_su_authorization) {
             setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
-        } else {
-            throw new IllegalArgumentException();
         }
     }
 
@@ -169,23 +145,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     }
 
     public void setAuthTitle(final int prefKeyId) {
-        if (prefKeyId == R.string.pref_fakekey_gc_authorization) {
-            setAuthTitle(prefKeyId, GCConnector.getInstance());
-            setConnectedUsernameTitle(prefKeyId, GCConnector.getInstance());
-        } else if (prefKeyId == R.string.pref_fakekey_ocde_authorization
-            || prefKeyId == R.string.pref_fakekey_ocpl_authorization
-            || prefKeyId == R.string.pref_fakekey_ocnl_authorization
-            || prefKeyId == R.string.pref_fakekey_ocus_authorization
-            || prefKeyId == R.string.pref_fakekey_ocro_authorization
-            || prefKeyId == R.string.pref_fakekey_ocuk_authorization) {
-            final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
-            if (key != null) {
-                setOCAuthTitle(key);
-                setConnectedTitle(prefKeyId, Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId));
-            } else {
-                setConnectedTitle(prefKeyId, false);
-            }
-        } else if (prefKeyId == R.string.pref_fakekey_ec_authorization) {
+        if (prefKeyId == R.string.pref_fakekey_ec_authorization) {
             setAuthTitle(prefKeyId, ECConnector.getInstance());
             setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
         } else if (prefKeyId == R.string.pref_fakekey_gcvote_authorization) {
@@ -195,19 +155,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             // Moved to Fragment: setTwitterAuthTitle
             setConnectedTitle(prefKeyId, Settings.hasTwitterAuthorization());
         } else if (prefKeyId == R.string.pref_fakekey_geokrety_authorization) {
-            setGeokretyAuthTitle();
             setConnectedTitle(prefKeyId, Settings.hasGeokretyAuthorization());
         } else {
             Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
         }
-    }
-
-    private void setOCAuthTitle(final OCPreferenceKeys key) {
-        //getPreference(key.authPrefId).setTitle(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId) ? R.string.settings_reauthorize : R.string.settings_authorize));
-    }
-
-    private void setGeokretyAuthTitle() {
-        //getPreference(R.string.pref_fakekey_geokrety_authorization).setTitle(getString(Settings.hasGeokretyAuthorization() ? R.string.settings_reauthorize : R.string.settings_authorize));
     }
 
     private void setAuthTitle(final int prefKeyId, @NonNull final ICredentials connector) {

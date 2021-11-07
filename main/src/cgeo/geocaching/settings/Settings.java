@@ -825,7 +825,7 @@ public class Settings {
         return getBoolean(R.string.pref_connectorGeokretyActive, false);
     }
 
-    static boolean hasGeokretyAuthorization() {
+    public static boolean hasGeokretyAuthorization() {
         return StringUtils.isNotBlank(getGeokretySecId());
     }
 

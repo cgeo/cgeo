@@ -28,7 +28,10 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         initBasicMemberPreferences();
 
         // Authentication Preference
-        // pref_fakekey_gc_authorization
+        final GCConnector connector = GCConnector.getInstance();
+        final Credentials credentials = Settings.getCredentials(connector);
+        findPreference(getString(R.string.pref_fakekey_gc_authorization)).setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw()) ? R.string.settings_reauthorize : R.string.settings_authorize));
+        findPreference(getString(R.string.pref_fakekey_gc_authorization)).setSummary(credentials.isValid() ? getString(R.string.auth_connected_as, credentials.getUserName()) : getString(R.string.auth_unconnected));
 
         // Open website Preference
         Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
