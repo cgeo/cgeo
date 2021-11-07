@@ -277,16 +277,6 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
-        templates.add(new LogTemplate("LOG", R.string.init_signature_template_log) {
-            @Override
-            public String getValue(final LogContext context) {
-                final LogEntry logEntry = context.getLogEntry();
-                if (logEntry != null) {
-                    return logEntry.getDisplayText();
-                }
-                return StringUtils.EMPTY;
-            }
-        });
         templates.add(new LogTemplate("TYPE",  R.string.init_signature_template_type) {
             @Override
             public String getValue(final LogContext context) {
@@ -345,6 +335,25 @@ public final class LogTemplateProvider {
                     return "invalid signature template";
                 }
                 return applyTemplates(nestedTemplate, context);
+            }
+        });
+        return templates;
+    }
+
+    /**
+     * @return all user-facing templates, including the log text template
+     */
+    @NonNull
+    public static List<LogTemplate> getTemplatesWithLogText() {
+        final List<LogTemplate> templates = getTemplatesWithoutSignature();
+        templates.add(new LogTemplate("LOG", R.string.init_signature_template_log) {
+            @Override
+            public String getValue(final LogContext context) {
+                final LogEntry logEntry = context.getLogEntry();
+                if (logEntry != null) {
+                    return logEntry.getDisplayText();
+                }
+                return StringUtils.EMPTY;
             }
         });
         return templates;
