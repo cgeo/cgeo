@@ -19,7 +19,9 @@
     <color name="colorText_listsSecondary">@color/colorTextHint</color>
     <color name="colorTextActionBar">#FFE4E4E4</color>
 
-    <color name="osm_zoomcontrol">#666666</color>
+    <color name="osm_zoomcontrol">#FF666666</color>
+    <color name="osm_zoomcontrolbackground">#C0FFFFFF</color>
+    <color name="osm_zoomcontroldivider">#C0666666</color>
 
     <!-- values needed only until settings activity is based on AppCompatActivity -->
     <color name="settings_colorTextDark">@color/just_white</color>
