@@ -196,14 +196,6 @@
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
     </style>
 
-    <style name="button_icon_map" parent="button_icon">
-        <item name="android:layout_width">36dp</item>
-        <item name="android:layout_height">36dp</item>
-        <item name="android:layout_margin">3dp</item>
-        <item name="android:padding">3dp</item>
-        <item name="iconTint">@color/osm_zoomcontrol</item>
-    </style>
-
     <style name="button_icon_colored" parent="button_icon_accent">
         <!-- display icon as colored image, without reverting all colors to tint color -->
         <item name="iconTint">#FFFFFFFF</item>
@@ -500,12 +492,15 @@
     </style>
 
     <!-- map quick buttons styles -->
-    <style name="map_quickbuttons">
-        <item name="android:layout_width">wrap_content</item>
-        <item name="android:layout_height">wrap_content</item>
+    <style name="map_quicksettingsbutton">
+        <item name="android:layout_width">38dp</item>
+        <item name="android:layout_height">38dp</item>
+        <item name="android:gravity">bottom</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:padding">8dp</item>
         <item name="android:background">@drawable/white_bcg</item>
-        <item name="android:layout_marginLeft">3dp</item>
-        <item name="android:layout_marginRight">3dp</item>
+        <item name="android:tint">@color/osm_zoomcontrol</item>
     </style>
 
     <!-- authorization styles -->
