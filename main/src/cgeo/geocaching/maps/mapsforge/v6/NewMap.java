@@ -285,9 +285,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         // style zoom controls
         final MapZoomControls zoomControls = mapView.getMapZoomControls();
         zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
-        zoomControls.setZoomInResource(R.drawable.zoomin);
-        zoomControls.setZoomOutResource(R.drawable.zoomout);
-        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(15.0f), ViewUtils.dpToPixel(20.0f));
+        zoomControls.setZoomInResource(R.drawable.map_zoomin);
+        zoomControls.setZoomOutResource(R.drawable.map_zoomout);
+        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(13.0f), ViewUtils.dpToPixel(18.0f));
         zoomControls.setAutoHide(false);
 
         //make room for map attribution icon button
@@ -593,9 +593,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
     }
 
-    /**
-     * @param view Not used here, required by layout
-     */
     @Override
     public void showFilterMenu() {
         FilterUtils.openFilterActivity(this, mapOptions.filterContext,
