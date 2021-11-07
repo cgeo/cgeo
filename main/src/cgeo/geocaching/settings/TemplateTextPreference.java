@@ -56,7 +56,7 @@ public class TemplateTextPreference extends DialogPreference {
         button.setOnClickListener(button1 -> {
             final AlertDialog.Builder alert = Dialogs.newBuilder(TemplateTextPreference.this.getContext());
             alert.setTitle(R.string.init_signature_template_button);
-            final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
+            final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithLogText();
             final String[] items = new String[templates.size()];
             for (int i = 0; i < templates.size(); i++) {
                 items[i] = settingsActivity.getString(templates.get(i).getResourceId());
