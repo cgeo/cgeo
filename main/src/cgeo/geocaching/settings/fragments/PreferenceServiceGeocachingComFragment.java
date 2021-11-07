@@ -43,12 +43,14 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         Preference login_facebook = findPreference(getString(R.string.pref_gc_fb_login_hint));
         login_facebook.setOnPreferenceClickListener(preference -> {
             final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
-            // TODO: Open Intent to c:geo website
             builder.setMessage(R.string.settings_info_facebook_login)
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .setTitle(R.string.settings_info_facebook_login_title)
                 .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .setNegativeButton(R.string.more_information, (dialog, id) -> dialog.cancel());
+                .setNegativeButton(R.string.more_information,
+                    (dialog, id) -> {
+                        ShareUtils.openUrl(getContext(), getString(R.string.settings_facebook_login_url));
+                });
             builder.create().show();
             return true;
         });
