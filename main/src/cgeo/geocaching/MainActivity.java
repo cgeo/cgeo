@@ -2,7 +2,6 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.address.AndroidGeocoder;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.IAvatar;
@@ -32,6 +31,7 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.ui.AvatarUtils;
+import cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -99,7 +99,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     private Geopoint addCoords = null;
     private boolean initialized = false;
     private boolean restoreMessageShown = false;
-    private boolean keyboardWasActive = false;
 
     private final UpdateLocation locationUpdater = new UpdateLocation();
     private final Handler updateUserInfoHandler = new UpdateUserInfoHandler(this);
@@ -545,8 +544,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             @Override
             public boolean onMenuItemActionExpand(final MenuItem item) {
-                keyboardWasActive = true;
-
                 for (int i = 0; i < menu.size(); i++) {
                     if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
                         menu.getItem(i).setVisible(false);
@@ -605,14 +602,18 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
         searchAutoComplete.setOnDismissListener(() -> {
             if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                if (keyboardWasActive) {
-                    keyboardWasActive = Keyboard.isVisible(this);
-                    searchAutoComplete.showDropDown();
-                } else {
-                    searchItem.collapseActionView();
-                    searchView.setIconified(true);
-                }
+                searchAutoComplete.showDropDown();
             }
+        });
+        final RelativeLayoutWithInterceptTouchEventPossibility activityViewroot = findViewById(R.id.activity_viewroot);
+        activityViewroot.setOnInterceptTouchEventListener(ev -> {
+            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
+                searchItem.collapseActionView();
+                searchView.setIconified(true);
+                return true; // intercept touch event to do not trigger an unwanted action
+            }
+            // In general, we don't want to intercept touch events...
+            return false;
         });
     }
 
