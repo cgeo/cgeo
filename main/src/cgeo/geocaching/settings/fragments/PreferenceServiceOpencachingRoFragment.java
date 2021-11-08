@@ -35,4 +35,10 @@ public class PreferenceServiceOpencachingRoFragment extends PreferenceFragmentCo
             findPreference(getString(R.string.pref_fakekey_ocro_authorization)).setSummary(getString(R.string.auth_unconnected));
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.init_oc_ro);
+    }
 }

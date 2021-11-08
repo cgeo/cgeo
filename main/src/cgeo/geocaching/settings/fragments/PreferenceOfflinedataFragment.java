@@ -15,4 +15,10 @@ public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
         // TODO
         findPreference(getString(R.string.pref_fakekey_dataDir)).setSummary(Settings.getExternalPrivateCgeoDirectory());
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_offlinedata);
+    }
 }

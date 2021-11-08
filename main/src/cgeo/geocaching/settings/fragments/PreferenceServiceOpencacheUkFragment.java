@@ -35,4 +35,10 @@ public class PreferenceServiceOpencacheUkFragment extends PreferenceFragmentComp
             findPreference(getString(R.string.pref_fakekey_ocuk_authorization)).setSummary(getString(R.string.auth_unconnected));
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.init_oc_uk);
+    }
 }

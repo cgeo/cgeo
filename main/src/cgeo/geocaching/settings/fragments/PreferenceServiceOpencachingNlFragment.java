@@ -35,4 +35,10 @@ public class PreferenceServiceOpencachingNlFragment extends PreferenceFragmentCo
             findPreference(getString(R.string.pref_fakekey_ocnl_authorization)).setSummary(getString(R.string.auth_unconnected));
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.init_oc_nl);
+    }
 }

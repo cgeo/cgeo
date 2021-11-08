@@ -65,6 +65,12 @@ public class PreferenceBackupFragment extends PreferenceFragmentCompat {
 
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_backup);
+    }
+
     public boolean getBackupLoginData() {
         return sharedPrefs != null && sharedPrefs.getBoolean(getString(R.string.pref_backup_logins), false);
     }

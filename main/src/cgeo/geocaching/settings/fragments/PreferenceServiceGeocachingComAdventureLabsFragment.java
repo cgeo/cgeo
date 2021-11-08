@@ -32,6 +32,12 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
         initLCServicePreference(Settings.isGCConnectorActive());
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_lc);
+    }
+
     private void initLCServicePreference(final boolean gcConnectorActive) {
         final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
         findPreference(getString((R.string.preference_screen_lc))).setSummary(

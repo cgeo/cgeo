@@ -48,4 +48,10 @@ public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
         languagePref.setEntries(entries);
         languagePref.setEntryValues(entryValues);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_appearance);
+    }
 }

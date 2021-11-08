@@ -16,6 +16,12 @@ public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCo
         setPreferencesFromResource(R.xml.preferences_navigation_navigation, rootKey);
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_navigation_menu);
+    }
+
     /**
      * Fill the choice list for default navigation tools.
      */

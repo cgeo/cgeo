@@ -82,8 +82,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        final Intent intent = getIntent();
-        openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN, 0));
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
@@ -97,10 +95,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         // Save current activity title so we can set it again after a configuration change
         savedInstanceState.putCharSequence(TITLE_TAG, title);
-    }
-
-    private void openInitialScreen(final int initialScreen) {
-        // TODO: Reimplement for Fragment based logic
     }
 
     @Override

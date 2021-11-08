@@ -11,4 +11,10 @@ public class PreferenceCachedetailsFragment extends PreferenceFragmentCompat {
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences_cachedetails, rootKey);
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_cachedetails);
+    }
 }

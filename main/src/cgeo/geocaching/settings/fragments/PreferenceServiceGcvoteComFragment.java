@@ -17,12 +17,18 @@ public class PreferenceServiceGcvoteComFragment extends PreferenceFragmentCompat
         setPreferencesFromResource(R.xml.preferences_services_gcvote_com, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
+        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gcvote_website));
         String urlOrHost = GCVote.getWebsite();
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.init_gcvote);
     }
 }
