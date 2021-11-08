@@ -280,7 +280,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             }
             cLog.add("ds");
 
-            if ((getIntent().getFlags() & Intent.FLAG_ACTIVITY_BROUGHT_TO_FRONT) != 0) {
+            if (!isTaskRoot()) {
                 // If we had been open already, start from the last used activity.
                 finish();
                 return;
