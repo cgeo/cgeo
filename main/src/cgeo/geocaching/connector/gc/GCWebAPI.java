@@ -8,6 +8,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
@@ -854,7 +855,7 @@ class GCWebAPI {
             if (c.getCoords() != null) {
                 final float newDistance = search.getOrigin().distanceTo(c.getCoords());
                 for (Geocache emptyC : emptyCoordCaches) {
-                    emptyC.setDistance((newDistance + lastDistance) / 2);
+                    emptyC.setDistance(Units.generateSmartRoundedAverageDistance(newDistance, lastDistance));
                 }
                 emptyCoordCaches.clear();
                 lastDistance = newDistance;
