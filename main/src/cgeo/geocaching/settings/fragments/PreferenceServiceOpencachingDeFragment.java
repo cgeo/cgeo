@@ -1,19 +1,16 @@
 package cgeo.geocaching.settings.fragments;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.connector.gc.GCConnector;
-import cgeo.geocaching.settings.OCPreferenceKeys;
-import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.ShareUtils;
-
-import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.annotation.Nullable;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import org.apache.commons.lang3.StringUtils;
+
+import cgeo.geocaching.R;
+import cgeo.geocaching.settings.OCPreferenceKeys;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.ShareUtils;
 
 public class PreferenceServiceOpencachingDeFragment extends PreferenceFragmentCompat {
     @Override

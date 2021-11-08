@@ -13,6 +13,8 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
         setPreferencesFromResource(R.xml.preferences_navigation, rootKey);
+
+        // TODO: Logic for ProximityDistance needs to be reimplemented
     }
 
     private void initNavigationMenuPreferences() {

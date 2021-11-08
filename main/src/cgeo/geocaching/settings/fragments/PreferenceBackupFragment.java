@@ -1,7 +1,6 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
@@ -12,6 +11,7 @@ import androidx.preference.CheckBoxPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceManager;
+import androidx.preference.SeekBarPreference;
 
 public class PreferenceBackupFragment extends PreferenceFragmentCompat {
     public static final String STATE_BACKUPUTILS = "backuputils";
@@ -56,10 +56,10 @@ public class PreferenceBackupFragment extends PreferenceFragmentCompat {
         // TODO
         //onPreferenceChange(findPreference(getString(R.string.pref_fakekey_preference_restore)));
 
-        final BackupSeekbarPreference keepOld = (BackupSeekbarPreference) findPreference(getString(R.string.pref_backups_backup_history_length));
+        final SeekBarPreference keepOld = (SeekBarPreference) findPreference(getString(R.string.pref_backups_backup_history_length));
 
         keepOld.setOnPreferenceChangeListener((preference, value) -> {
-            backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value);
+            backupUtils.deleteBackupHistoryDialog((SeekBarPreference) preference, (int) value);
             return true;
         });
 

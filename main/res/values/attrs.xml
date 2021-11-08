@@ -56,14 +56,6 @@
         <attr name="defaultColor" format="color" />
     </declare-styleable>
 
-    <!-- attributes for SeekbarPreference -->
-    <declare-styleable name="SeekbarPreference">
-        <attr name="min" format="integer" />
-        <attr name="max" format="integer" />
-        <attr name="label" format="string" />
-        <attr name="hasDecimals" format="boolean" />
-    </declare-styleable>
-
     <!-- custom attributes for ProximityPreference -->
     <declare-styleable name="ProximityPreference">
         <attr name="highRes" format="boolean" />

@@ -2,7 +2,6 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ec.ECConnector;
-import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;

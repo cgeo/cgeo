@@ -9,16 +9,14 @@
     <PreferenceCategory
         android:summary="@string/init_backup_summary"
         android:title="@string/init_backup_title">
-        <Preference
-            android:selectable="false"
-            android:summary="@string/init_backup_history_length_summary"
-            android:title="@string/init_backup_history_length_title" />
-        <cgeo.geocaching.settings.BackupSeekbarPreference
+        <SeekBarPreference
             android:defaultValue="@integer/backup_history_length_default"
             android:key="@string/pref_backups_backup_history_length"
-            app:hasDecimals="false"
-            app:max="@integer/backup_history_length_max"
-            app:min="0" />
+            android:max="@integer/backup_history_length_max"
+            android:min="0"
+            android:summary="@string/init_backup_history_length_summary"
+            android:title="@string/init_backup_history_length_title"
+            app:showSeekBarValue="true" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_backup_logins"
