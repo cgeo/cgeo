@@ -18,6 +18,7 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.settings.fragments.PreferencesFragment;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ApplicationSettings;
@@ -36,6 +37,7 @@ import cgeo.geocaching.utils.Log;
  */
 public class SettingsActivity extends AppCompatActivity implements PreferenceFragmentCompat.OnPreferenceStartFragmentCallback {
 
+    private static final String TITLE_TAG = "preferencesActivityTitle";
     private static final String INTENT_OPEN_SCREEN = "OPEN_SCREEN";
     public static final int NO_RESTART_NEEDED = 1;
     public static final int RESTART_NEEDED = 2;
@@ -44,8 +46,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     public static final String STATE_BACKUPUTILS = "backuputils";
 
     private BackupUtils backupUtils = null;
-
     private ContentStorageActivityHelper contentStorageHelper = null;
+    private CharSequence title;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -65,6 +67,21 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         setContentView(R.layout.layout_settings);
 
+        if (savedInstanceState == null) {
+            getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.settings_fragment_root, new PreferencesFragment())
+                .commit();
+        } else {
+            title = savedInstanceState.getCharSequence(TITLE_TAG);
+        }
+        getSupportFragmentManager().addOnBackStackChangedListener(() -> {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+                setTitle(R.string.settings_titlebar);
+            }
+        });
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         final Intent intent = getIntent();
         openInitialScreen(intent.getIntExtra(INTENT_OPEN_SCREEN, 0));
         AndroidBeam.disable(this);
@@ -77,6 +94,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         super.onSaveInstanceState(savedInstanceState);
         savedInstanceState.putBundle(STATE_CSAH, contentStorageHelper.getState());
         savedInstanceState.putBundle(STATE_BACKUPUTILS, backupUtils.getState());
+
+        // Save current activity title so we can set it again after a configuration change
+        savedInstanceState.putCharSequence(TITLE_TAG, title);
     }
 
     private void openInitialScreen(final int initialScreen) {
@@ -127,12 +147,21 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     }
 
     @Override
+    public boolean onSupportNavigateUp() {
+        if (getSupportFragmentManager().popBackStackImmediate()) {
+            return true;
+        }
+        return super.onSupportNavigateUp();
+    }
+
+
+    @Override
     public boolean onPreferenceStartFragment(final PreferenceFragmentCompat caller, final androidx.preference.Preference pref) {
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
-        final Fragment fragment = getSupportFragmentManager().getFragmentFactory().instantiate(
-            getClassLoader(),
-            pref.getFragment());
+        final Fragment fragment = getSupportFragmentManager()
+            .getFragmentFactory()
+            .instantiate(getClassLoader(), pref.getFragment());
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, 0);
         // Replace the existing Fragment with the new Fragment
@@ -140,6 +169,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             .replace(R.id.settings_fragment_root, fragment)
             .addToBackStack(null)
             .commit();
+        title = pref.getTitle();
         return true;
     }
 
