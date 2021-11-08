@@ -132,7 +132,12 @@ public class GeocacheFilter implements Cloneable {
 
     @NonNull
     public static GeocacheFilter createEmpty() {
-        return new GeocacheFilter(null, false, false, null);
+        return createEmpty(false);
+    }
+
+    @NonNull
+    public static GeocacheFilter createEmpty(final boolean openInAdvancedMode) {
+        return new GeocacheFilter(null, openInAdvancedMode, false, null);
     }
 
     @NonNull
