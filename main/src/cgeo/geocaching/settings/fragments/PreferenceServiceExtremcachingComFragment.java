@@ -18,12 +18,18 @@ public class PreferenceServiceExtremcachingComFragment extends PreferenceFragmen
         setPreferencesFromResource(R.xml.preferences_services_extremcaching_com, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
+        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ec_website));
         String urlOrHost = ECConnector.getInstance().getHost();
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_ec);
     }
 }

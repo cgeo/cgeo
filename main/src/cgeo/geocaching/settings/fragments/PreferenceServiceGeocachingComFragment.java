@@ -58,6 +58,12 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         });
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_gc);
+    }
+
     void initBasicMemberPreferences() {
         findPreference(getString((R.string.preference_screen_basicmembers)))
             .setEnabled(!Settings.isGCPremiumMember());

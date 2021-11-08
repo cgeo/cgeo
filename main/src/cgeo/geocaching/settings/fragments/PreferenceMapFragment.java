@@ -26,6 +26,12 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_map);
+    }
+
+    @Override
     public void onDisplayPreferenceDialog(Preference preference) {
         if (preference instanceof ColorpickerPreference || preference instanceof TemplateTextPreference) {
             DialogFragment dialogFragment = DialogPrefFragCompat.newInstance(preference.getKey());

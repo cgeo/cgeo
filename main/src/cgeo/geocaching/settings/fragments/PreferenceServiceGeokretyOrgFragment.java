@@ -39,4 +39,10 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
             .setTitle(getString(
                 Settings.hasGeokretyAuthorization() ? R.string.settings_reauthorize : R.string.settings_authorize));
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.init_geokrety);
+    }
 }

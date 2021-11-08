@@ -17,6 +17,12 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
         // TODO: Logic for ProximityDistance needs to be reimplemented
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        getActivity().setTitle(R.string.settings_title_navigation);
+    }
+
     private void initNavigationMenuPreferences() {
         for (final NavigationAppFactory.NavigationAppsEnum appEnum : NavigationAppFactory.NavigationAppsEnum.values()) {
             final Preference preference = findPreference(getString(appEnum.preferenceKey));
