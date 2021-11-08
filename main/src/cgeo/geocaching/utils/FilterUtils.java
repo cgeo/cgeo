@@ -50,7 +50,7 @@ public class FilterUtils {
                         (f, pos) -> filteredActivity.refreshWithFilter(f),
                         (f, pos) -> {
                         },
-                        (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty())
+                        (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
                     );
             } else {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
