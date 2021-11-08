@@ -26,6 +26,26 @@ public class Units {
         }
     }
 
+    public static float generateSmartRoundedAverageDistance(final float newDistance, final float lastDistance) {
+        final float scaleFactor;
+        if (Settings.useImperialUnits()) { // the rounded values should be user displayable. Therefore, use a different scaling factor for imperial units.
+            scaleFactor = 10 / IConversion.MILES_TO_KILOMETER; // use 0.1 mi scale
+        } else {
+            scaleFactor = 1000; // use 1m scale
+        }
+        final float originalDelta = scaleFactor * (newDistance - lastDistance);
+        float delta = originalDelta;
+        while (delta >= 10) {
+            delta /= 10;
+        }
+        final float roundingFactor = originalDelta / delta; // depending on the delta, generate the best suitable rounding factor
+
+        final float average = scaleFactor * (newDistance + lastDistance) / 2;
+        final float roundedValue = (Math.round(average / roundingFactor)) * roundingFactor;
+
+        return roundedValue / scaleFactor;
+    }
+
     public static String getDistanceFromKilometers(final Float distanceKilometers) {
         if (distanceKilometers == null) {
             return "?";
