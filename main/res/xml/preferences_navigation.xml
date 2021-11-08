@@ -8,17 +8,14 @@
     <PreferenceCategory
         android:summary="@string/settings_summary_offline_routing"
         android:title="@string/settings_title_offline_routing">
-        <Preference
-            android:key="@string/pref_fakekey_brouterDistanceThresholdTitle"
-            android:selectable="false"
+        <SeekBarPreference
             android:summary="@string/init_brouterThreshold_description"
-            android:title="@string/init_brouterThreshold" />
-        <cgeo.geocaching.settings.ProximityPreference
+            android:title="@string/init_brouterThreshold"
             android:defaultValue="@integer/brouter_threshold_default"
             android:key="@string/pref_brouterDistanceThreshold"
-            app:highRes="false"
-            app:max="@integer/brouter_threshold_max"
-            app:min="1" />
+            android:max="@integer/brouter_threshold_max"
+            android:min="1"
+            app:showSeekBarValue="true"/>
 
         <CheckBoxPreference
             android:defaultValue="false"
@@ -44,17 +41,15 @@
             android:summary="@string/init_brouterAutoTileDownloads_description"
             android:title="@string/init_autoDownloads" />
 
-        <Preference
-            android:dependency="@string/pref_brouterAutoTileDownloads"
-            android:selectable="false"
+        <SeekBarPreference
             android:summary="@string/init_updateinterval_description"
-            android:title="@string/init_updateinterval_title" />
-        <cgeo.geocaching.settings.SeekbarPreference
+            android:title="@string/init_updateinterval_title"
             android:defaultValue="@integer/brouter_updateinterval_default"
             android:dependency="@string/pref_brouterAutoTileDownloads"
             android:key="@string/pref_brouterAutoTileDownloadsInterval"
-            app:max="@integer/brouter_updateinterval_max"
-            app:min="0" />
+            android:max="@integer/brouter_updateinterval_max"
+            android:min="0"
+            app:showSeekBarValue="true"/>
 
         <ListPreference
             android:dialogTitle="@string/init_brouterProfileWalk"

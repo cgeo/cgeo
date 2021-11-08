@@ -1,7 +1,6 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.ShareUtils;
 

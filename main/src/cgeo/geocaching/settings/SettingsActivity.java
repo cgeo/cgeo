@@ -4,7 +4,6 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-import android.preference.PreferenceActivity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,7 +25,7 @@ import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
 
 /**
- * A {@link PreferenceActivity} that presents a set of application settings. On
+ * An {@link AppCompatActivity} that presents a set of application settings. On
  * handset devices, settings are presented as a single list. On tablets,
  * settings are split by category, with category headers shown to the left of
  * the list of settings.

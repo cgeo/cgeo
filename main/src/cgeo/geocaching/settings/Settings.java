@@ -47,12 +47,12 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.content.res.Configuration;
 import android.os.Build;
-import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
+import androidx.preference.PreferenceManager;
 
 import java.io.File;
 import java.io.FileFilter;
