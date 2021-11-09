@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import org.apache.commons.lang3.StringUtils;
+
 /** Class to retrieve Avatar images from. This class handles e.g. in-memory image caching */
 public class AvatarUtils {
 
@@ -31,7 +33,7 @@ public class AvatarUtils {
             return null;
         }
         final String url = Settings.getAvatarUrl(avatar);
-        if (url == null) {
+        if (StringUtils.isBlank(url)) {
             return null;
         }
         synchronized (HTML_IMAGE) {
