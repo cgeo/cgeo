@@ -40,6 +40,7 @@ import androidx.core.content.ContextCompat;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Locale;
 
@@ -158,6 +159,11 @@ public final class SystemInformation {
             body.append("\n- ").append(filterType.name()).append(": ");
             final GeocacheFilter filter = new GeocacheFilterContext(filterType).get();
             body.append(filter.toUserDisplayableString()).append(" (").append(filter.toConfig()).append(")");
+        }
+        final Collection<GeocacheFilter> storedFilters = GeocacheFilter.Storage.getStoredFilters();
+        body.append("\n\nStored Filters (#").append(storedFilters.size()).append("):");
+        for (GeocacheFilter storedFilter : storedFilters) {
+            body.append("\n- ").append(storedFilter.getName()).append(": ").append(storedFilter.toConfig()).append(")");
         }
     }
 
