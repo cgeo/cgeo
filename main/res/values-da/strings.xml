@@ -311,7 +311,7 @@
     <string name="loc_trying">Bestemmer position</string>
     <string name="loc_no_addr">Ukendt adresse</string>
     <string name="loc_gps_disabled">GPS deaktiveret</string>
-    <string name="menu_centerposition">Centrer på min position</string>
+    <string name="menu_centerposition">Centrér på min position</string>
     <!-- standard menu -->
     <string name="menu_about">Om c:geo</string>
     <string name="menu_helpers">Hjælpeprogrammer</string>
