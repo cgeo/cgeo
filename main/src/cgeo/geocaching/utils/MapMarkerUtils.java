@@ -171,9 +171,9 @@ public final class MapMarkerUtils {
             }
         }
         // bottom-right: user modified coords / final waypoint defined
-        if (cache.hasUserModifiedCoords()) {
+        if (cache.hasUserModifiedCoords() && !doubleSize) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
-        } else if (cache.hasFinalDefined()) {
+        } else if (cache.hasFinalDefined() && !cache.hasUserModifiedCoords()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT));
         }
         // bottom-left: personal note
@@ -537,6 +537,9 @@ public final class MapMarkerUtils {
             final Integer offlineLogType = getMarkerIdIfLogged(cache);
             if (offlineLogType != null) {
                 return offlineLogType;
+            }
+            if (cache.hasUserModifiedCoords()) {
+                return R.drawable.marker_usermodifiedcoords;
             }
         }
         return cache.getType().markerId;
