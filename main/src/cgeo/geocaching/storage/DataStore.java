@@ -756,7 +756,7 @@ public class DataStore {
             delete(filter.getName());
             final ContentValues values = new ContentValues();
             values.put("name", filter.getName());
-            values.put("treeconfig", filter.getTreeConfig());
+            values.put("treeconfig", filter.toConfig());
             return (int) database.insert(dbTableFilters, null, values);
         }
 

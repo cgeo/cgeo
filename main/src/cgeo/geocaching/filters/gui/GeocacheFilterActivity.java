@@ -48,7 +48,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -118,7 +117,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         this.binding.filterBasicAdvanced.setOnCheckedChangeListener((v, c) -> {
             if (c) {
-                switchToAdvanced();
+                switchToAdvanced(true);
             } else if (isBasicPossibleWithoutLoss()) {
                 switchToBasic();
             } else {
@@ -274,13 +273,12 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
             }
         }
 
-        //set basic/advanced switch
+
+        //set basic/advanced switch -> AFTER list is re-layouted
         if (!forceAdvanced && !setAdvanced && isBasicPossibleWithoutLoss()) {
-            this.binding.filterBasicAdvanced.setChecked(false);
             switchToBasic();
         } else {
-            this.binding.filterBasicAdvanced.setChecked(true);
-            switchToAdvanced();
+            switchToAdvanced(false);
         }
     }
 
@@ -375,8 +373,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
     private boolean isBasicPossibleWithoutLoss() {
-        if (!StringUtils.isBlank(binding.filterStorageName.getText()) ||
-            this.inverseFilterCheckbox.isChecked() ||
+        if (this.inverseFilterCheckbox.isChecked() ||
             this.andOrFilterCheckbox.isChecked() ||
             this.includeInconclusiveFilterCheckbox.isChecked()) {
             return false;
@@ -395,83 +392,92 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         return true;
     }
 
-    private void switchToAdvanced() {
-        this.binding.filterBasicAdvanced.setChecked(true);
-        this.binding.filterStorageOptions.setVisibility(View.VISIBLE);
-        this.binding.filterStorageOptionsLine.setVisibility(View.VISIBLE);
-        this.binding.filterPropsCheckboxes.setVisibility(View.VISIBLE);
-        this.binding.filterPropsCheckboxesLine.setVisibility(View.VISIBLE);
-        this.binding.filterAdditem.setVisibility(View.VISIBLE);
+    private void switchToAdvanced(final boolean removeNonFiltering) {
+        //this method needs the view synchronized with the adapter
+        // -> enqueue action at the end of GUI queue to ensure all waiting events are processed
+        this.binding.filterList.postDelayed(() -> {
+            this.binding.filterBasicAdvanced.setChecked(true);
+            this.binding.filterStorageOptions.setVisibility(View.VISIBLE);
+            this.binding.filterStorageOptionsLine.setVisibility(View.VISIBLE);
+            this.binding.filterPropsCheckboxes.setVisibility(View.VISIBLE);
+            this.binding.filterPropsCheckboxesLine.setVisibility(View.VISIBLE);
+            this.binding.filterAdditem.setVisibility(View.VISIBLE);
 
-        // start with the highest index, as we will remove all filters which are not actively filtering
-        for (int pos = filterListAdapter.getItemCount() - 1; pos >= 0; pos--) {
-            final ItemHolder itemHolder = (ItemHolder) this.binding.filterList.findViewHolderForLayoutPosition(pos);
-            if (itemHolder != null) {
-                if (!itemHolder.getFilterViewHolder().createFilterFromView().isFiltering()) {
-                    this.filterListAdapter.removeItem(pos);
-                    continue;
-                }
-                itemHolder.setControlsEnabled(true);
-                if (itemHolder.getFilterViewHolder().isOf(StatusFilterViewHolder.class)) {
-                    itemHolder.getFilterViewHolder().castTo(StatusFilterViewHolder.class).setSimpleView(false);
+            // start with the highest index, as we might remove filters which are not actively filtering
+            for (int pos = filterListAdapter.getItemCount() - 1; pos >= 0; pos--) {
+                final ItemHolder itemHolder = (ItemHolder) this.binding.filterList.findViewHolderForLayoutPosition(pos);
+                if (itemHolder != null) {
+                    //if wanted, remove nonfiltering filters
+                    if (removeNonFiltering && !itemHolder.getFilterViewHolder().createFilterFromView().isFiltering()) {
+                        this.filterListAdapter.removeItem(pos);
+                        continue;
+                    }
+                    itemHolder.setControlsEnabled(true);
+                    if (itemHolder.getFilterViewHolder().isOf(StatusFilterViewHolder.class)) {
+                        itemHolder.getFilterViewHolder().castTo(StatusFilterViewHolder.class).setSimpleView(false);
+                    }
                 }
             }
-        }
-        adjustFilterEmptyView();
+            adjustFilterEmptyView();
+        }, 0);
 
     }
 
     private void switchToBasic() {
-        this.binding.filterBasicAdvanced.setChecked(false);
-        this.binding.filterStorageName.setText("");
-        this.inverseFilterCheckbox.setChecked(false);
-        this.andOrFilterCheckbox.setChecked(false);
-        this.includeInconclusiveFilterCheckbox.setChecked(false);
+        //this method needs the view synchronized with the adapter
+        // -> enqueue action at the end of GUI queue to ensure all waiting events are processed
+        this.binding.filterList.postDelayed(() -> {
+            this.binding.filterBasicAdvanced.setChecked(false);
+            this.binding.filterStorageName.setText("");
+            this.inverseFilterCheckbox.setChecked(false);
+            this.andOrFilterCheckbox.setChecked(false);
+            this.includeInconclusiveFilterCheckbox.setChecked(false);
 
-        this.binding.filterStorageOptions.setVisibility(View.GONE);
-        this.binding.filterStorageOptionsLine.setVisibility(View.GONE);
-        this.binding.filterPropsCheckboxes.setVisibility(View.GONE);
-        this.binding.filterPropsCheckboxesLine.setVisibility(View.GONE);
-        this.binding.filterAdditem.setVisibility(View.GONE);
+            this.binding.filterStorageOptions.setVisibility(View.GONE);
+            this.binding.filterStorageOptionsLine.setVisibility(View.GONE);
+            this.binding.filterPropsCheckboxes.setVisibility(View.GONE);
+            this.binding.filterPropsCheckboxesLine.setVisibility(View.GONE);
+            this.binding.filterAdditem.setVisibility(View.GONE);
 
-        for (int pos = 0; pos < filterListAdapter.getItemCount(); pos++) {
-            final ItemHolder itemHolder = (ItemHolder) this.binding.filterList.findViewHolderForLayoutPosition(pos);
-            if (itemHolder != null) {
-                itemHolder.setControlsEnabled(false);
+            for (int pos = 0; pos < filterListAdapter.getItemCount(); pos++) {
+                final ItemHolder itemHolder = (ItemHolder) this.binding.filterList.findViewHolderForLayoutPosition(pos);
+                if (itemHolder != null) {
+                    itemHolder.setControlsEnabled(false);
+                }
             }
-        }
 
-        int startPos = 0;
-        for (GeocacheFilterType type : BASIC_FILTER_TYPES) {
-            boolean found = false;
-            for (int pos = startPos; pos < this.filterListAdapter.getItemCount(); pos++) {
-                final IFilterViewHolder<?> fvh = this.filterListAdapter.getItem(pos);
-                if (fvh.getType() == type) {
-                    if (pos > startPos) {
-                        final IFilterViewHolder<?> item = this.filterListAdapter.removeItem(pos);
-                        this.filterListAdapter.addItem(startPos, item);
+            int startPos = 0;
+            for (GeocacheFilterType type : BASIC_FILTER_TYPES) {
+                boolean found = false;
+                for (int pos = startPos; pos < this.filterListAdapter.getItemCount(); pos++) {
+                    final IFilterViewHolder<?> fvh = this.filterListAdapter.getItem(pos);
+                    if (fvh.getType() == type) {
+                        if (pos > startPos) {
+                            final IFilterViewHolder<?> item = this.filterListAdapter.removeItem(pos);
+                            this.filterListAdapter.addItem(startPos, item);
+                        }
+                        final IFilterViewHolder<?> item = this.filterListAdapter.getItem(startPos);
+                        if (item.isOf(StatusFilterViewHolder.class)) {
+                            item.castTo(StatusFilterViewHolder.class).setSimpleView(true);
+                        }
+                        found = true;
+                        break;
                     }
-                    final IFilterViewHolder<?> item = this.filterListAdapter.getItem(startPos);
+                }
+                if (!found) {
+                    final IFilterViewHolder<?> item = FilterViewHolderCreator.createFor(type, this);
                     if (item.isOf(StatusFilterViewHolder.class)) {
                         item.castTo(StatusFilterViewHolder.class).setSimpleView(true);
                     }
-                    found = true;
-                    break;
+                    this.filterListAdapter.addItem(startPos, item);
                 }
+                startPos++;
             }
-            if (!found) {
-                final IFilterViewHolder<?> item = FilterViewHolderCreator.createFor(type, this);
-                if (item.isOf(StatusFilterViewHolder.class)) {
-                    item.castTo(StatusFilterViewHolder.class).setSimpleView(true);
-                }
-                this.filterListAdapter.addItem(startPos, item);
+            while (this.filterListAdapter.getItemCount() > BASIC_FILTER_TYPES.length) {
+                this.filterListAdapter.removeItem(this.filterListAdapter.getItemCount() - 1);
             }
-            startPos++;
-        }
-        while (this.filterListAdapter.getItemCount() > BASIC_FILTER_TYPES.length) {
-            this.filterListAdapter.removeItem(this.filterListAdapter.getItemCount() - 1);
-        }
-        adjustFilterEmptyView();
+            adjustFilterEmptyView();
+        }, 0);
     }
 
     private boolean isAdvancedView() {

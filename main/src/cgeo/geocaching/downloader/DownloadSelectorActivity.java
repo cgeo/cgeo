@@ -125,9 +125,16 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                                             q.setFilterById(id);
                                             final Cursor cursor = manager.query(q);
                                             cursor.moveToFirst();
-                                            final int bytesDownloaded = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR));
-                                            final int bytesTotal = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES));
-                                            final int progress = bytesTotal == 0 ? 0 : (int) ((bytesDownloaded * 100L) / bytesTotal);
+                                            final int bytesDownloadedPos = cursor.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+                                            final int bytesTotalPos = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+                                            final int progress;
+                                            if (bytesDownloadedPos >= 0 && bytesTotalPos >= 0) {
+                                                final int bytesDownloaded = cursor.getInt(bytesDownloadedPos);
+                                                final int bytesTotal = cursor.getInt(bytesTotalPos);
+                                                progress = bytesTotal == 0 ? 0 : (int) ((bytesDownloaded * 100L) / bytesTotal);
+                                            } else {
+                                                progress = 0;
+                                            }
 
                                             runOnUiThread(() -> holder.binding.progressHorizontal.setProgressCompat(progress, true));
                                             cursor.close();
