@@ -54,6 +54,34 @@ public class CalculatorTest {
         assertThat(eval("$A$B + A + B", "AB", 14, "B", 4, "A", 3)).isEqualTo(41d);
         assertThat(eval("$AB + A + $B", "AB", 14, "B", 4, "A", 3)).isEqualTo(21d);
         assertThat(eval("$AB(A+$B*2)$B", "AB", 14, "B", 4, "A", 3)).isEqualTo(14114d);
+
+        assertThat(eval("A$A$AB", "A", 1, "AB", 2)).isEqualTo(112);
+        assertThat(eval("-A$A$AB", "A", 1, "AB", 2)).isEqualTo(-112);
+        assertThat(eval("-A$A$AB", "A", 0, "AB", 2)).isEqualTo(-2);
+        assertThatThrownBy(() -> eval("AA$", "A", 1))
+            .isInstanceOf(CalculatorException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+
+        assertThat(eval("-A", "A", 1)).isEqualTo(-1);
+        assertThat(eval("A", "A", -1)).isEqualTo(-1);
+        assertThat(Calculator.evaluate("AA", "A", -1).getAsString()).isEqualTo("-1-1");
+    }
+
+    @Test
+    public void variablesWithDecimals() {
+
+        assertThat(eval("3.14A5", "A", 1)).isEqualTo(3.1415d);
+        assertThat(eval("3.A4A5", "A", 1)).isEqualTo(3.1415d);
+        assertThat(eval("A.(A+1)(A+10)", "A", 1)).isEqualTo(1.211d);
+        assertThat(eval("-A.(A+1)(A+10)", "A", 1)).isEqualTo(-1.211d);
+
+        assertThat(eval("A15B", "A", 3.14, "B", 92)).isEqualTo(3.141592d);
+        assertThat(Calculator.evaluate("AA", "A", 1.2).getAsString()).isEqualTo("1.21.2");
+
+        assertThat(eval("A.A", "A", 1)).isEqualTo(1.1d);
+        assertThat(Calculator.evaluate("A.A.A", "A", 1).getAsString()).isEqualTo("1.1.1");
+        assertThat(Calculator.evaluate("...", "A", 1).getAsString()).isEqualTo("...");
+        assertThat(eval(".12")).isEqualTo(.12d);
+
     }
 
     @Test

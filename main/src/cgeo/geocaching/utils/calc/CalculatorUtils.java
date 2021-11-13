@@ -1,7 +1,6 @@
 package cgeo.geocaching.utils.calc;
 
 import cgeo.geocaching.utils.TextUtils;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -39,21 +38,11 @@ public class CalculatorUtils {
             return values.get(0);
         }
 
-        boolean containsString = false;
         final StringBuilder sb = new StringBuilder();
         for (Value v : values) {
-            if (v.isDouble()) {
-                if (v.isInteger()) {
-                    sb.append(v.getAsInt());
-                } else {
-                    throw new CalculatorException(WRONG_TYPE, "integer", v, v.getType());
-                }
-            } else {
-                containsString = true;
-                sb.append(v.toString());
-            }
+            sb.append(v.getAsString());
         }
-        return Value.of(containsString ? sb.toString() : Double.parseDouble(sb.toString()));
+        return Value.of(sb.toString());
     }
 
     public static int random(final int max, final int min) {
