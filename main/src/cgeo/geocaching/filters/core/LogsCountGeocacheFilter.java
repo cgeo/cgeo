@@ -39,7 +39,7 @@ public  class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer>
         }
 
         final Map<LogType, Integer> logCounts = cache.getLogCounts();
-        if (logCounts.isEmpty() && !cache.inDatabase()) {
+        if (logCounts.isEmpty()) {
             return null;
         }
 
@@ -73,7 +73,7 @@ public  class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer>
         final String newTableId = sqlBuilder.getNewTableId();
         sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + ".geocode = " + newTableId + ".geocode");
         addRangeToSqlBuilder(sqlBuilder,
-            "CASE WHEN " + newTableId + ".log_count IS NULL THEN 0 ELSE " + newTableId + ".log_count END");
+            "CASE WHEN " + newTableId + ".log_count IS NULL THEN -1 ELSE " + newTableId + ".log_count END");
     }
 
     private String getGroupClause(final String tid) {
@@ -91,7 +91,7 @@ public  class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer>
     @Override
     public void setConfig(final ExpressionConfig config) {
         super.setConfig(config);
-        logType = config.getFirstValue(CONFIG_KEY_LOGTYPE, FOUND_IT, s -> EnumUtils.getEnum(LogType.class, s, FOUND_IT));
+        logType = config.getFirstValue(CONFIG_KEY_LOGTYPE, null, s -> EnumUtils.getEnum(LogType.class, s, null));
     }
 
     @Override
