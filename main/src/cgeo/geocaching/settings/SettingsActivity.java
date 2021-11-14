@@ -330,7 +330,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
     private void setWebsite(final int preferenceKey, final String urlOrHost) {
         final Preference preference = getPreference(preferenceKey);
         preference.setOnPreferenceClickListener(preference1 -> {
-            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
+            final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "https://" + urlOrHost;
             ShareUtils.openUrl(SettingsActivity.this, url);
             return true;
         });

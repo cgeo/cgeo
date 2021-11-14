@@ -44,7 +44,7 @@ public class WaymarkingConnector extends AbstractConnector {
     @Override
     @NonNull
     protected String getCacheUrlPrefix() {
-        return "http://" + getHost() + "/waymarks/";
+        return "https://" + getHost() + "/waymarks/";
     }
 
     @Override
