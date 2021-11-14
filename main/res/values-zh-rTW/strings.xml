@@ -670,8 +670,6 @@
     <string name="init_brouterProfileCar">\"汽車\"的簡介</string>
     <string name="brouter_recalculating">在背景重新計算路線</string>
     <string name="init_summary_brouterShowBothDistances">如果路線啟動了，除了計算出的路線長度外，還會顯示直線距離。</string>
-    <string name="init_bigSmileysOnMap">對已登錄的cache用大圖示顯示</string>
-    <string name="init_summary_bigSmileysOnMap">如果啟用大型圖式，將會在地圖上顯示已登錄的寶藏，而不是寶藏的類型圖式(必需重新啟動)</string>
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
     <string name="init_summary_global_wp_extraction_disable">關閉所有來自個人寶藏筆記的航點資訊，但還是可以在個別寶藏中的個人寶藏筆記下方的勾選框開啟它</string>
     <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
