@@ -791,7 +791,7 @@
     <string name="init_select_language">Select language</string>
     <string name="init_summary_select_language">Select in-app language (requires restart)\n</string>
     <string name="init_use_default_language">Use default language</string>
-    <string name="init_showwaypoints">Show Waypoints</string>
+    <string name="init_showwaypoints">Show waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
     <string name="init_zoomincludingwaypoints">Zoom includes waypoints</string>
     <string name="init_zoomincludingwaypoints_description">If mapping a single cache: Should zoom be adjusted to include all its waypoints?</string>
@@ -1230,8 +1230,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">Allow waypoints from note</string>
     <string name="cache_personal_note_edit">Edit</string>
-    <string name="cache_personal_note_storewaypoints">Add/Update Waypoints</string>
-    <string name="cache_personal_note_removewaypoints">Remove Waypoints</string>
+    <string name="cache_personal_note_storewaypoints">Add/Update waypoints</string>
+    <string name="cache_personal_note_removewaypoints">Remove waypoints</string>
     <string name="cache_personal_note_removedwaypoints">Waypoints removed</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No waypoints found to remove</string>
     <string name="cache_personal_note_storewaypoints_success">Waypoints were added to personal note</string>
