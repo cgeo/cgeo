@@ -20,12 +20,7 @@ public interface IFilterViewHolder<T extends IGeocacheFilter> {
 
     T createFilterFromView();
 
-    default <H extends IFilterViewHolder<?>> boolean  isOf(final Class<H> clazz) {
-        return clazz.isAssignableFrom(this.getClass());
-    }
+    void setAdvancedMode(boolean isAdvanced);
 
-    @SuppressWarnings("unchecked")
-    default <H extends IFilterViewHolder<?>> H castTo(final Class<H> clazz) {
-        return (H) this;
-    }
+    boolean canBeSwitchedToBasicLossless();
 }

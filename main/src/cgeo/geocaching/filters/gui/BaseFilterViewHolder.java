@@ -60,4 +60,15 @@ public abstract class BaseFilterViewHolder<T extends IGeocacheFilter> implements
        return LayoutInflater.from(ViewUtils.wrap(getActivity())).inflate(layoutId, getRoot(), false);
     }
 
+    @Override
+    public void setAdvancedMode(final boolean isAdvanced) {
+        //do nothing by default
+    }
+
+    @Override
+    public boolean canBeSwitchedToBasicLossless() {
+        //by default this is always possible
+        return true;
+    }
+
 }
