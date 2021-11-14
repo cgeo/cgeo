@@ -39,7 +39,8 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     private final List<ButtonToggleGroup> advancedGroups = new ArrayList<>();
     private final List<View> advancedGroupViews = new ArrayList<>();
 
-    public boolean canBeSimplifiedLossless() {
+    @Override
+    public boolean canBeSwitchedToBasicLossless() {
         for (ButtonToggleGroup group : advancedGroups) {
             if (getFromGroup(group) != null) {
                 return false;
@@ -48,7 +49,12 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         return true;
     }
 
-    public void setSimpleView(final boolean simpleView) {
+    @Override
+    public void setAdvancedMode(final boolean isAdvanced) {
+        setSimpleView(!isAdvanced);
+    }
+
+    private void setSimpleView(final boolean simpleView) {
         this.simpleView = simpleView;
         for (View advancedView : advancedGroupViews) {
             advancedView.setVisibility(simpleView ? View.GONE : View.VISIBLE);
