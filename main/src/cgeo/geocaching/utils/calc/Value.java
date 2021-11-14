@@ -4,7 +4,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.text.DecimalFormat;
+import java.text.DecimalFormatSymbols;
 import java.text.Format;
+import java.util.Locale;
 
 /** Encapsulates a single value for handling in {@link cgeo.geocaching.utils.calc.Calculator}. Provides e.g. type conversions. */
 public class Value {
@@ -12,7 +14,7 @@ public class Value {
     public static final Value EMPTY = Value.of(null);
 
     private static final double DOUBLE_DELTA = 0.000000001d;
-    private static final Format DOUBLE_TO_STRING_FORMAT = new DecimalFormat("#.######");
+    private static final Format DOUBLE_TO_STRING_FORMAT = new DecimalFormat("#.######", DecimalFormatSymbols.getInstance(Locale.US));
 
 
     private final Object raw;

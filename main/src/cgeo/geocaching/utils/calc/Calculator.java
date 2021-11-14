@@ -357,6 +357,9 @@ public final class Calculator {
                 }
             } else if (ch == '\'') {
                 nodes.add(parseString());
+            } else if (ch == '.') {
+                nodes.add(new CalcNode("decimal-point", null, (objs, vars) -> Value.of(".")));
+                nextChar();
             } else if (ch == '$') {
                 nodes.add(parseExplicitVariable());
             } else if (CHARS.contains(ch)) {
@@ -379,15 +382,24 @@ public final class Calculator {
     private CalcNode parseNumberBlock() {
         final StringBuilder sb = new StringBuilder();
         boolean foundDecPoint = false;
+        boolean lastFoundIsDec = false;
         while (NUMBERS.contains(ch)) {
             if (ch == '.') {
                 if (foundDecPoint) {
                     throw new CalculatorException(UNEXPECTED_TOKEN, "digit");
                 }
                 foundDecPoint = true;
+                lastFoundIsDec = true;
+                mark();
+            } else {
+                lastFoundIsDec = false;
             }
             sb.append((char) ch);
             nextChar();
+        }
+        //if the last found char was a ., then don't eat it
+        if (lastFoundIsDec) {
+            reset();
         }
         final double value = Double.parseDouble(sb.toString());
         return createNumeric("literal-num", null, (o, v) -> Value.of(value));
