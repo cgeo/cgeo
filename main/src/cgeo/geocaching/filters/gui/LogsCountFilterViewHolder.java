@@ -52,7 +52,7 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
     }
 
     private void resetSliderScale() {
-        slider.setScale(-0.2f, 1000.2f, f -> {
+        slider.setScale(0f, 1000.2f, f -> {
             if (f <= 0) {
                 return "0";
             }
@@ -61,7 +61,7 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
             }
             return "" + Math.round(f);
         }, 6);
-        slider.setRange(-0.2f, 1000.2f);
+        slider.setRange(0f, 1000.2f);
     }
 
 
