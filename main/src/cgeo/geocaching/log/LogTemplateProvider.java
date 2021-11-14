@@ -344,8 +344,8 @@ public final class LogTemplateProvider {
      * @return all user-facing templates, including the log text template
      */
     @NonNull
-    public static List<LogTemplate> getTemplatesWithLogText() {
-        final List<LogTemplate> templates = getTemplatesWithoutSignature();
+    public static List<LogTemplate> getTemplatesWithSignatureAndLogText() {
+        final List<LogTemplate> templates = getTemplatesWithSignature();
         templates.add(new LogTemplate("LOG", R.string.init_signature_template_log) {
             @Override
             public String getValue(final LogContext context) {
@@ -361,7 +361,7 @@ public final class LogTemplateProvider {
 
     @NonNull
     private static List<LogTemplate> getAllTemplates() {
-        final List<LogTemplate> templates = getTemplatesWithSignature();
+        final List<LogTemplate> templates = getTemplatesWithSignatureAndLogText();
         templates.add(new LogTemplate("NUMBER$NOINC", -1 /* Never user facing */) {
             @Override
             public String getValue(final LogContext context) {
