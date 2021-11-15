@@ -498,7 +498,6 @@
     <string name="init_select_language">Izvēlieties valodu</string>
     <string name="init_summary_select_language">Izvēlēties aplikācijas valodu (nepieciešama restartēšana)\n</string>
     <string name="init_use_default_language">Lietot noklusējuma valodu</string>
-    <string name="init_showwaypoints">Rādīt starpposmus</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
     <string name="init_zoomincludingwaypoints_description">Ja kartējat vienu slēpni: vai pietuvinājumu pielāgot tā, lai iekļautu visus starpposmus?</string>
@@ -506,8 +505,6 @@
     <string name="init_brouterShowBothDistances">Rādīt taisnvirziena distanci</string>
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
-    <string name="init_bigSmileysOnMap">Lielas ikonas atrastiem slēpņiem</string>
-    <string name="init_summary_bigSmileysOnMap">Ja tās tiek aktivizētas, kartē atrastajiem slēpņiem parādīsies lielās emocijzīmes slēpņu veidu ikonu vietā (nepieciešama restartēšana).</string>
     <string name="init_global_wp_extraction_disable">Atslēgt starpposmu izvilkšanu</string>
     <string name="init_save_log_img">Saglabāt attēlus</string>
     <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
@@ -706,7 +703,6 @@
     <string name="cache_log_image_default_title">Attēls</string>
     <string name="cache_personal_note">Personiska piezīme</string>
     <string name="cache_personal_note_edit">Rediģēt</string>
-    <string name="cache_personal_note_removewaypoints">Noņemt ceļa punktus</string>
     <string name="cache_personal_note_storewaypoints_success">Ceļa punkti tika pievienoti personiskajai piezīmei</string>
     <string name="cache_personal_note_storewaypoints_failed">Izmēra ierobežojumu dēļ ceļa punkti netika saglabāti piezīmē (maksimālais personiskās piezīmes izmērs. %1$d)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">Nav atrasti saglabājami ceļa punkti</string>
