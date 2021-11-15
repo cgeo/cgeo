@@ -155,7 +155,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
         }
         // top-right: owned / stored
-        if (cache.isOwner()) {
+        if (cache.isOwner() && mainMarkerId != R.drawable.marker_own) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, Gravity.TOP | Gravity.RIGHT));
             // if not, checked if stored
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
@@ -537,6 +537,8 @@ public final class MapMarkerUtils {
             final Integer offlineLogType = getMarkerIdIfLogged(cache);
             if (offlineLogType != null) {
                 return offlineLogType;
+            } else if (cache.isOwner()) {
+                return R.drawable.marker_own;
             } else if (cache.hasUserModifiedCoords()) {
                 return R.drawable.marker_usermodifiedcoords;
             }
