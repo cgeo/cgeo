@@ -29,7 +29,7 @@ class GoogleMapsDirectionApp extends AbstractPointNavigationApp {
         try {
             final GeoData geo = Sensors.getInstance().currentGeo();
             context.startActivity(new Intent(Intent.ACTION_VIEW, Uri
-                    .parse("http://maps.google.com/maps?f=d&saddr="
+                    .parse("https://maps.google.com/maps?f=d&saddr="
                             + geo.getCoords().getLatitude() + "," + geo.getCoords().getLongitude() + "&daddr="
                             + coords.getLatitude() + "," + coords.getLongitude())));
 

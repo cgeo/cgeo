@@ -106,7 +106,7 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
             }
             return builder.substring(1);
         }
-        final Builder builder = HttpUrl.parse("http://dummy.cgeo.org/").newBuilder();
+        final Builder builder = HttpUrl.parse("https://dummy.cgeo.org/").newBuilder();
         for (final ImmutablePair<String, String> nameValuePair : this) {
             builder.addQueryParameter(nameValuePair.left, nameValuePair.right);
         }
