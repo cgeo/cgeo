@@ -637,7 +637,6 @@
     <string name="init_select_language">Vælg sprog</string>
     <string name="init_summary_select_language">Vælg sproget i appen (kræver genstart)\n</string>
     <string name="init_use_default_language">Brug standardsprog</string>
-    <string name="init_showwaypoints">Vis rutepunkter</string>
     <string name="init_showwaypoint_description">Hvis der vises færre end dette antal cacher på kortet, vil de tilhørende rutepunkter også blive vist.</string>
     <string name="init_zoomincludingwaypoints">Medtag alle rutepunkter i zoom</string>
     <string name="init_zoomincludingwaypoints_description">Når kortet viser én cache: Skal kortudsnittet justeres så alle rutepunkter er synlige?</string>
@@ -648,8 +647,6 @@
     <string name="init_brouterProfileCar">\"Bil\" profil</string>
     <string name="brouter_recalculating">Genberegner ruten i baggrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Hvis navigation er aktiv, vises afstand i lige linje sammen men beregnet rutelængde.</string>
-    <string name="init_bigSmileysOnMap">Vis smileys for loggede cacher</string>
-    <string name="init_summary_bigSmileysOnMap">Hvis aktiveret vil loggede caches blive vist på kortet med smileys i stedet for cache-ikonet (kræver genstart).</string>
     <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
     <string name="init_summary_global_wp_extraction_disable">Deaktivér ekstraktion af rutepunkter personlige cachenoter. Dette kan stadig aktiveres for individuelle cacher ved at deaktivere afkrydsningsfeltet under den personlige cache-note</string>
     <string name="init_summary_customtabs_as_browser">Eksterne hjemmesider vil blive i c:geo-appen (kun muligt, hvis Chrome er installeret)</string>
@@ -916,8 +913,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Undgå rutepunkter fra note</string>
     <string name="cache_menu_allowWaypointExtraction">Tillad rutepunkter fra note</string>
     <string name="cache_personal_note_edit">Redigér</string>
-    <string name="cache_personal_note_storewaypoints">Tilføj/opdatér rutepunkter</string>
-    <string name="cache_personal_note_removewaypoints">Fjern rutepunkter</string>
     <string name="cache_personal_note_storewaypoints_success">Rutepunkter blev tilføjet til personlig note</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Rutepunkter blev tilføjet til noten, men er blevet forkortet (største personlig notestørrelse: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Rutepunkter kunne ikke gemmes i noten på grund af størrelsesgrænser (største personlig notestørrelse: %1$d)</string>
