@@ -715,7 +715,7 @@
     <string name="init_select_language">Taal selecteren</string>
     <string name="init_summary_select_language">In-app taal selecteren (vereist herstart)\n</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
-    <string name="init_showwaypoints">Laat waypoints zien in map</string>
+    <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
     <string name="init_zoomincludingwaypoints">Zoom bevat waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wanneer een enkele cache wordt getoond: Moet zoom worden aangepast om alle waypoints te bevatten?</string>
@@ -733,8 +733,8 @@
     <string name="init_summary_brouterShowBothDistances">Als routering actief is: Toon de afstand hemelsbreed naast de afstand van de berekende route.</string>
     <string name="init_useInternalRouting">Interne routering gebruiken</string>
     <string name="init_summary_useInternalRouting">c:geo interne routering gebruiken om automatische routering, data downloaden en andere functies te kunnen gebruiken</string>
-    <string name="init_bigSmileysOnMap">Grote pictogrammen voor gelogde caches</string>
-    <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen grote emoticons worden getoond voor gelogde caches op de kaart in plaats van het cache type icoon (vereist herstart).</string>
+    <string name="init_bigSmileysOnMap">Grote pictogrammen</string>
+    <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen symbolen zoals de \'smiley\' of de \'gecorrigeerde coördinaten\'-indicator worden getoond op de kaart in plaats van het cachetype icoon (herstart vereist).</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_customtabs_as_browser">Gebruik Chrome WebView</string>
