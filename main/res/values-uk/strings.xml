@@ -506,8 +506,6 @@
     <string name="init_brouterShowBothDistances">Показати пряму відстань</string>
     <string name="brouter_recalculating">Переобчислення маршруту у фоновому режимі…</string>
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
-    <string name="init_bigSmileysOnMap">Великі іконки для журналювальних схованок</string>
-    <string name="init_summary_bigSmileysOnMap">Якщо увімкнено, то великі смайли будуть показані для журнальованих кешів на мапі замість значка кешу (потребує перезапуску).</string>
     <string name="init_global_wp_extraction_disable">відключити спосіб вилучення</string>
     <string name="init_summary_global_wp_extraction_disable">Глобально вимкнути видобуток шляхових точок з особистих схованок. Воно може бути увімкнено для окремих кеш, вимикаючи прапорець під особистою приміткою кешу</string>
     <string name="init_summary_customtabs_as_browser">Зовнішні веб-сайти будуть відображатися без залишення c:geo (лише при встановленні Chrome)</string>

@@ -720,8 +720,6 @@
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_summary_useInternalRouting">Utiliser le routage interne de c:geo pour pouvoir utiliser le téléchargement automatique des données de routage et d\'autres fonctions</string>
-    <string name="init_bigSmileysOnMap">Gros icônes pour les caches trouvées</string>
-    <string name="init_summary_bigSmileysOnMap">Si activé, de gros émoticônes seront affichés sur la carte pour les caches loguées (plutôt que les icônes type de cache). Un redémarrage de c:geo est nécessaire pour prise en compte.</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>

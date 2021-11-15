@@ -506,8 +506,6 @@
     <string name="init_brouterShowBothDistances">Rādīt taisnvirziena distanci</string>
     <string name="brouter_recalculating">Pārrēķina maršrutu fonā…</string>
     <string name="init_summary_brouterShowBothDistances">Ja maršruta plānošana ir aktīva: Paplildus aprēķinātajam maršruta garumam, rādīt lineāro attālumu.</string>
-    <string name="init_bigSmileysOnMap">Lielas ikonas atrastiem slēpņiem</string>
-    <string name="init_summary_bigSmileysOnMap">Ja tās tiek aktivizētas, kartē atrastajiem slēpņiem parādīsies lielās emocijzīmes slēpņu veidu ikonu vietā (nepieciešama restartēšana).</string>
     <string name="init_global_wp_extraction_disable">Atslēgt starpposmu izvilkšanu</string>
     <string name="init_save_log_img">Saglabāt attēlus</string>
     <string name="init_summary_save_log_img">Saglabāt attēlus no ierakstiem</string>
