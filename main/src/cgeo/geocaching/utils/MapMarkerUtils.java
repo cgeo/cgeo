@@ -162,7 +162,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
         }
         // top-left: will attend / found / not found / offline-logs
-        if (cache.hasWillAttendForFutureEvent() && !doubleSize) {
+        if (cache.hasWillAttendForFutureEvent() && mainMarkerId != R.drawable.marker_calendar) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, Gravity.TOP | Gravity.LEFT));
         } else if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
@@ -171,7 +171,7 @@ public final class MapMarkerUtils {
             }
         }
         // bottom-right: user modified coords / final waypoint defined
-        if (cache.hasUserModifiedCoords() && !doubleSize) {
+        if (cache.hasUserModifiedCoords() && mainMarkerId != R.drawable.marker_usermodifiedcoords) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_usermodifiedcoords, Gravity.BOTTOM | Gravity.RIGHT));
         } else if (cache.hasFinalDefined() && !cache.hasUserModifiedCoords()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_hasfinal, Gravity.BOTTOM | Gravity.RIGHT));
@@ -537,8 +537,7 @@ public final class MapMarkerUtils {
             final Integer offlineLogType = getMarkerIdIfLogged(cache);
             if (offlineLogType != null) {
                 return offlineLogType;
-            }
-            if (cache.hasUserModifiedCoords()) {
+            } else if (cache.hasUserModifiedCoords()) {
                 return R.drawable.marker_usermodifiedcoords;
             }
         }
