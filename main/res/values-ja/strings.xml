@@ -703,7 +703,6 @@
     <string name="init_select_language">言語の選択</string>
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
-    <string name="init_showwaypoints">地図でウェイポイントの表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
     <string name="init_zoomincludingwaypoints_description">1つだけキャッシュを表示している場合にすべてのウェイポイントが表示されるようにズーム</string>
@@ -721,8 +720,6 @@
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
     <string name="init_useInternalRouting">c:geoルート検索を使用する</string>
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
-    <string name="init_bigSmileysOnMap">大きなスマイルアイコン</string>
-    <string name="init_summary_bigSmileysOnMap">ログを書いたことを示すスマイルアイコンをキャッシュタイプアイコンの代わりに表示\n(c:geoの再起動が必要)</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
@@ -1078,8 +1075,6 @@
     <string name="cache_menu_preventWaypointsFromNote">ノートからウェイポイント抽出しない</string>
     <string name="cache_menu_allowWaypointExtraction">ノートからウェイポイント抽出する</string>
     <string name="cache_personal_note_edit">編集</string>
-    <string name="cache_personal_note_storewaypoints">ウェイポイント追加/更新</string>
-    <string name="cache_personal_note_removewaypoints">ウェイポイント削除</string>
     <string name="cache_personal_note_removedwaypoints">ウェイポイントを削除しました</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">削除するウェイポイントが見つかりません</string>
     <string name="cache_personal_note_storewaypoints_success">パーソナルノートにウェイポイントが追加されました</string>
