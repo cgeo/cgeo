@@ -14,12 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceOpencacheUkFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_opencache_uk, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ocuk_website));
-        String urlOrHost = OCPreferenceKeys.OC_UK.authParams.host;
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ocuk_website));
+        final String urlOrHost = OCPreferenceKeys.OC_UK.authParams.host;
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);

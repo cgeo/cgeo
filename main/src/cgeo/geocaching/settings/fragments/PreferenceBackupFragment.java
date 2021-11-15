@@ -19,11 +19,11 @@ public class PreferenceBackupFragment extends PreferenceFragmentCompat {
     private SharedPreferences sharedPrefs;
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_backup, rootKey);
 
         sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
-        BackupUtils backupUtils = new BackupUtils(getActivity(), savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+        final BackupUtils backupUtils = new BackupUtils(getActivity(), savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
 
         final Preference backup = findPreference(getString(R.string.pref_fakekey_preference_backup));
         backup.setOnPreferenceClickListener(preference -> {

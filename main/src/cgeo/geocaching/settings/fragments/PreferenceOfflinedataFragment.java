@@ -9,7 +9,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_offlinedata, rootKey);
 
         // TODO

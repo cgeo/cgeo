@@ -17,12 +17,12 @@ import androidx.preference.PreferenceFragmentCompat;
 import java.util.Collection;
 
 public class PreferenceMapFragment extends PreferenceFragmentCompat {
-    private ListPreference pref_map_sources;
+    private ListPreference prefMapSources;
 
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_map, rootKey);
-        pref_map_sources = (ListPreference) findPreference(getString(R.string.pref_mapsource));
+        prefMapSources = (ListPreference) findPreference(getString(R.string.pref_mapsource));
     }
 
     @Override
@@ -32,9 +32,9 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
     }
 
     @Override
-    public void onDisplayPreferenceDialog(Preference preference) {
+    public void onDisplayPreferenceDialog(final Preference preference) {
         if (preference instanceof ColorpickerPreference || preference instanceof TemplateTextPreference) {
-            DialogFragment dialogFragment = DialogPrefFragCompat.newInstance(preference.getKey());
+            final DialogFragment dialogFragment = DialogPrefFragCompat.newInstance(preference.getKey());
             // FIXME: Don't use setTargetFragment
             // Instead of using a target fragment to pass results, the fragment requesting a result should use
             // FragmentManager.setFragmentResultListener(String, LifecycleOwner, FragmentResultListener) to register a
@@ -61,8 +61,8 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
             values[idx] = mapSource.getId();
             idx++;
         }
-        pref_map_sources.setEntries(entries);
-        pref_map_sources.setEntryValues(values);
+        prefMapSources.setEntries(entries);
+        prefMapSources.setEntryValues(values);
         //pref_map_sources.setOnPreferenceChangeListener(getC);
     }
 

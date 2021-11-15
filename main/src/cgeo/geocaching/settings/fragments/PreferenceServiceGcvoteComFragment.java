@@ -13,12 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceGcvoteComFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_gcvote_com, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gcvote_website));
-        String urlOrHost = GCVote.getWebsite();
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gcvote_website));
+        final String urlOrHost = GCVote.getWebsite();
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);

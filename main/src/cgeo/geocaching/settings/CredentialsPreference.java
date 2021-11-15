@@ -9,7 +9,6 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.network.Cookies;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
@@ -18,7 +17,6 @@ import android.content.Intent;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 

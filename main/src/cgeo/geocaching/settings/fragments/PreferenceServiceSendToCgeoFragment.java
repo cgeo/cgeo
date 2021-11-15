@@ -12,12 +12,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceSendToCgeoFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_send_to_cgeo, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_sendtocgeo_website));
-        String urlOrHost = "send2.cgeo.org";
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_sendtocgeo_website));
+        final String urlOrHost = "send2.cgeo.org";
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);

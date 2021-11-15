@@ -14,12 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceGeocachingSuFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_geocaching_su, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_su_website));
-        String urlOrHost = SuConnector.getInstance().getHost();
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_su_website));
+        final String urlOrHost = SuConnector.getInstance().getHost();
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
@@ -27,7 +27,7 @@ public class PreferenceServiceGeocachingSuFragment extends PreferenceFragmentCom
         });
 
         // TODO
-        Preference auth = findPreference(getString(R.string.pref_fakekey_su_authorization));
+        final Preference auth = findPreference(getString(R.string.pref_fakekey_su_authorization));
         if (auth != null) {
             auth.setTitle(
                 getString(Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret)
@@ -35,7 +35,7 @@ public class PreferenceServiceGeocachingSuFragment extends PreferenceFragmentCom
         }
 
         // TODO
-        Preference username = findPreference(getString(R.string.pref_fakekey_su_authorization));
+        final Preference username = findPreference(getString(R.string.pref_fakekey_su_authorization));
         if (username != null) {
             username.setSummary(
                 getString(Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret)

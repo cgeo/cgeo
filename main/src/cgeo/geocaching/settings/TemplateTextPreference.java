@@ -2,21 +2,14 @@ package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
-import cgeo.geocaching.ui.dialog.Dialogs;
 
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.util.AttributeSet;
-import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.preference.EditTextPreference;
-
-import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 

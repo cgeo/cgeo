@@ -8,7 +8,7 @@ import androidx.preference.PreferenceDialogFragmentCompat;
 // See: https://stackoverflow.com/a/45524893/4730773
 
 public class DialogPrefFragCompat extends PreferenceDialogFragmentCompat {
-    public static DialogPrefFragCompat newInstance(String key) {
+    public static DialogPrefFragCompat newInstance(final String key) {
         final DialogPrefFragCompat fragment = new DialogPrefFragCompat();
         final Bundle bundle = new Bundle(1);
         bundle.putString(ARG_KEY, key);
@@ -17,7 +17,7 @@ public class DialogPrefFragCompat extends PreferenceDialogFragmentCompat {
     }
 
     @Override
-    public void onDialogClosed(boolean positiveResult) {
+    public void onDialogClosed(final boolean positiveResult) {
         if (positiveResult) {
             // do things
         }
