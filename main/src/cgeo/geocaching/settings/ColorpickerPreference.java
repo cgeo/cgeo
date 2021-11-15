@@ -1,31 +1,23 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.DisplayUtils;
 
-// need to use non-androidX AlertDialog until we migrate to preferenceFragment
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Bundle;
-import android.text.InputType;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.preference.MultiSelectListPreference;
 import androidx.preference.PreferenceViewHolder;
@@ -87,7 +79,7 @@ public class ColorpickerPreference extends MultiSelectListPreference {
     }
 
     @Override
-    public void onBindViewHolder(PreferenceViewHolder holder) {
+    public void onBindViewHolder(final PreferenceViewHolder holder) {
         super.onBindViewHolder(holder);
         final ImageView colorView = (ImageView) holder.findViewById(R.id.colorpicker_item);
         if (colorView != null) {

@@ -13,12 +13,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_geokrety_org, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_geokrety_website));
-        String urlOrHost = "https://geokrety.org";
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_geokrety_website));
+        final String urlOrHost = "https://geokrety.org";
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
@@ -26,8 +26,8 @@ public class PreferenceServiceGeokretyOrgFragment extends PreferenceFragmentComp
         });
 
         // Open website Map Preference
-        Preference openWebsite2 = findPreference(getString(R.string.pref_fakekey_geokretymap_website));
-        String urlOrHost2 = "https://geokretymap.org";
+        final Preference openWebsite2 = findPreference(getString(R.string.pref_fakekey_geokretymap_website));
+        final String urlOrHost2 = "https://geokretymap.org";
         openWebsite2.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost2, "http") ? urlOrHost2 : "http://" + urlOrHost2;
             ShareUtils.openUrl(getContext(), url);

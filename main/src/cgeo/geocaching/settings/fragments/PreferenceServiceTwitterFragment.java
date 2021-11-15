@@ -9,7 +9,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 public class PreferenceServiceTwitterFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_twitter, rootKey);
 
         findPreference(getString(R.string.pref_fakekey_twitter_authorization))

@@ -14,12 +14,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceExtremcachingComFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_extremcaching_com, rootKey);
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ec_website));
-        String urlOrHost = ECConnector.getInstance().getHost();
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_ec_website));
+        final String urlOrHost = ECConnector.getInstance().getHost();
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);

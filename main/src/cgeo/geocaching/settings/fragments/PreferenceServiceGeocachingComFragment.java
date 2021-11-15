@@ -19,7 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services_geocaching_com, rootKey);
 
         setAuthTitle(R.string.pref_fakekey_gc_authorization, GCConnector.getInstance());
@@ -33,8 +33,8 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         findPreference(getString(R.string.pref_fakekey_gc_authorization)).setSummary(credentials.isValid() ? getString(R.string.auth_connected_as, credentials.getUserName()) : getString(R.string.auth_unconnected));
 
         // Open website Preference
-        Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
-        String urlOrHost = GCConnector.getInstance().getHost();
+        final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_gc_website));
+        final String urlOrHost = GCConnector.getInstance().getHost();
         openWebsite.setOnPreferenceClickListener(preference -> {
             final String url = StringUtils.startsWith(urlOrHost, "http") ? urlOrHost : "http://" + urlOrHost;
             ShareUtils.openUrl(getContext(), url);
@@ -42,8 +42,8 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         });
 
         // Facebook Login Hint
-        Preference login_facebook = findPreference(getString(R.string.pref_gc_fb_login_hint));
-        login_facebook.setOnPreferenceClickListener(preference -> {
+        final Preference loginFacebook = findPreference(getString(R.string.pref_gc_fb_login_hint));
+        loginFacebook.setOnPreferenceClickListener(preference -> {
             final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
             builder.setMessage(R.string.settings_info_facebook_login)
                 .setIcon(android.R.drawable.ic_dialog_info)

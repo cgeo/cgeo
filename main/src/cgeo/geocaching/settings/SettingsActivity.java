@@ -1,17 +1,5 @@
 package cgeo.geocaching.settings;
 
-import android.app.backup.BackupManager;
-import android.content.Context;
-import android.content.Intent;
-import android.os.Bundle;
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.preference.PreferenceFragmentCompat;
-
-import java.util.Locale;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.ec.ECConnector;
@@ -24,6 +12,18 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
+
+import android.app.backup.BackupManager;
+import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.preference.PreferenceFragmentCompat;
+
+import java.util.Locale;
 
 /**
  * An {@link AppCompatActivity} that presents a set of application settings. On

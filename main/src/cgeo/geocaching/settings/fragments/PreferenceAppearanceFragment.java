@@ -16,7 +16,7 @@ import java.util.Locale;
 
 public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_appearence, rootKey);
 
         final Preference themePref = findPreference(getString(R.string.pref_theme_setting));

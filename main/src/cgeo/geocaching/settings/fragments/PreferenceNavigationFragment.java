@@ -11,7 +11,7 @@ import androidx.preference.PreferenceFragmentCompat;
 
 public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
     @Override
-    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+    public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_navigation, rootKey);
 
         // TODO: Logic for ProximityDistance needs to be reimplemented
