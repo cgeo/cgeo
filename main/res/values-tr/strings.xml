@@ -713,7 +713,6 @@
     <string name="init_select_language">Dil seçin</string>
     <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
-    <string name="init_showwaypoints">Yol Noktalarını Göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
     <string name="init_zoomincludingwaypoints">Yakınlaştırmada yol noktalarını da göster</string>
     <string name="init_zoomincludingwaypoints_description">Eğer tek bir Geocache haritalanıyorsa: harita yakınlaştırması tüm yol noktalarını da içine almalı mıdır?</string>
@@ -731,8 +730,6 @@
     <string name="init_summary_brouterShowBothDistances">Yönlendirme aktif ise: hesaplanan rota mesafesine ek olarak düz mesafeyi göster.</string>
     <string name="init_useInternalRouting">Dahili rotalamayı kullan</string>
     <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
-    <string name="init_bigSmileysOnMap">Geocache\'ler için büyük simgeler</string>
-    <string name="init_summary_bigSmileysOnMap">Eğer etkinleştirilirse, haritada kayıt girilmiş cacheler için kutu tipi ikon yerine büyük ifadeler gösterilecek (yeniden başlatma gerekir).</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
     <string name="init_summary_global_wp_extraction_disable">Kişisel Geocache notlarından yol noktası çıkarmayı genel olarak devre dışı bırakın. Belirli Geocache\'ler için kişisel notlarınız altındaki onay kutusu devre dışı bırakılarak yine de etkinleştirilebilir</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
@@ -1096,8 +1093,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Nottan yol noktası alınmasını engelle</string>
     <string name="cache_menu_allowWaypointExtraction">Nottan yol noktası alınmasına izin ver</string>
     <string name="cache_personal_note_edit">Düzenle</string>
-    <string name="cache_personal_note_storewaypoints">Yol Noktaları Ekleme/Güncelleme</string>
-    <string name="cache_personal_note_removewaypoints">Yol noktalarını kaldır</string>
     <string name="cache_personal_note_removedwaypoints">Yol noktası kaldırıldı</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Kaldırılacak yol noktası bulunamadı</string>
     <string name="cache_personal_note_storewaypoints_success">Kişisel nokta ara noktalar eklendi</string>

@@ -498,7 +498,6 @@
     <string name="init_select_language">Виберіть мову</string>
     <string name="init_summary_select_language">Оберіть мову програм (потрібен перезапуск)\n</string>
     <string name="init_use_default_language">Мова за замовчуванням</string>
-    <string name="init_showwaypoints">Показати точки маршруту</string>
     <string name="init_showwaypoint_description">Якщо на карті відображається менше заданої кількості схованок, то додатково відображаються їхні шляхові точки.</string>
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
     <string name="init_zoomincludingwaypoints_description">Якщо натискання на один кеш: чи слід коригувати масштабування, щоб включити всі його шляхові точки?</string>
@@ -506,8 +505,6 @@
     <string name="init_brouterShowBothDistances">Показати пряму відстань</string>
     <string name="brouter_recalculating">Переобчислення маршруту у фоновому режимі…</string>
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
-    <string name="init_bigSmileysOnMap">Великі іконки для журналювальних схованок</string>
-    <string name="init_summary_bigSmileysOnMap">Якщо увімкнено, то великі смайли будуть показані для журнальованих кешів на мапі замість значка кешу (потребує перезапуску).</string>
     <string name="init_global_wp_extraction_disable">відключити спосіб вилучення</string>
     <string name="init_summary_global_wp_extraction_disable">Глобально вимкнути видобуток шляхових точок з особистих схованок. Воно може бути увімкнено для окремих кеш, вимикаючи прапорець під особистою приміткою кешу</string>
     <string name="init_summary_customtabs_as_browser">Зовнішні веб-сайти будуть відображатися без залишення c:geo (лише при встановленні Chrome)</string>
@@ -740,8 +737,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Prevent waypoints from note</string>
     <string name="cache_menu_allowWaypointExtraction">дозволити шляхові точки з примітки</string>
     <string name="cache_personal_note_edit">редагувати</string>
-    <string name="cache_personal_note_storewaypoints">Додати/оновити точки шляху</string>
-    <string name="cache_personal_note_removewaypoints">видалити шляхові точки</string>
     <string name="cache_personal_note_storewaypoints_success">Точки було додано до особистої нотатки</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Шляхові точки були додані до нотатки, але їх потрібно було скоротити (максимальний розмір особистих нотаток: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Маршрути не можуть бути збережені в нотатці через обмеження розміру (максимальний розмір особистих нотаток: %1$d)</string>

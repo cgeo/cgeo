@@ -716,7 +716,6 @@
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
-    <string name="init_showwaypoints">Mostra les fites</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
     <string name="init_zoomincludingwaypoints_description">Si fiqueu al mapa un catxé: s\'ha d\'ajustar el zoom per incloure tots els seus punts de ruta?</string>
@@ -734,8 +733,6 @@
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
     <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
     <string name="init_summary_useInternalRouting">Utilitzeu l’encaminament intern per poder utilitzar la descàrrega automàtica de dades d’encaminament i altres funcions</string>
-    <string name="init_bigSmileysOnMap">Icones grans per catxes registrats</string>
-    <string name="init_summary_bigSmileysOnMap">Si està activat, es mostraran emoticones grans al mapa pels catxés registrats en lloc de la icona del tipus de catxe (cal reiniciar-lo).</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
@@ -1099,8 +1096,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Eviteu punts de ruta de les notes</string>
     <string name="cache_menu_allowWaypointExtraction">Permetre punts de ruta de la nota</string>
     <string name="cache_personal_note_edit">Edita</string>
-    <string name="cache_personal_note_storewaypoints">Afegeix / actualitza punts de ruta</string>
-    <string name="cache_personal_note_removewaypoints">Elimina els punts de ruta</string>
     <string name="cache_personal_note_removedwaypoints">S\'han eliminat els punts de ruta</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No s\'ha trobat cap punt de ruta per eliminar</string>
     <string name="cache_personal_note_storewaypoints_success">Es van afegir punts de ruta a la nota personal</string>

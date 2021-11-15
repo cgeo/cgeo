@@ -715,7 +715,6 @@
     <string name="init_select_language">Valitse kieli</string>
     <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
-    <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
@@ -733,8 +732,8 @@
     <string name="init_summary_brouterShowBothDistances">Jos reititys on aktiivisena: Näytä suora etäisyys lasketun reitin etäisyyden lisäksi.</string>
     <string name="init_useInternalRouting">Käytä sisäistä reititystä</string>
     <string name="init_summary_useInternalRouting">Käytä c:geon sisäistä reititystä käyttääksesi automaattista reititystietojen lataamista ja muita toimintoja</string>
-    <string name="init_bigSmileysOnMap">Isot kuvakkeet kirjatuille kätköille</string>
-    <string name="init_summary_bigSmileysOnMap">Jos käytössä, kirjattujen kätköjen kohdalla näytetään isot hymiöt kätkötyyppikuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
+    <string name="init_bigSmileysOnMap">Isot kuvakkeet</string>
+    <string name="init_summary_bigSmileysOnMap">Jos käytössä, symbolit kuten \'löytöhymiö\' tai \'korjatut koordinaatit\' -merkki näytetään isona kartalla kätkötyypin kuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
     <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
@@ -1098,8 +1097,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
     <string name="cache_menu_allowWaypointExtraction">Salli muistiinpanoista luodut reittipisteet</string>
     <string name="cache_personal_note_edit">Muokkaa</string>
-    <string name="cache_personal_note_storewaypoints">Lisää/Päivitä Reittipisteet</string>
-    <string name="cache_personal_note_removewaypoints">Poista Reittipisteet</string>
     <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Poistettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>

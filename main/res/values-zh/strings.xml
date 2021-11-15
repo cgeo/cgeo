@@ -518,7 +518,6 @@
     <string name="init_select_language">选择语言</string>
     <string name="init_summary_select_language">选择应用内语言 (需要重启)\n</string>
     <string name="init_use_default_language">使用默认语言</string>
-    <string name="init_showwaypoints">显示航点</string>
     <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
     <string name="init_zoomincludingwaypoints">缩放包括航点</string>
     <string name="init_zoomincludingwaypoints_description">如果在地图上显示单个藏点：是否应调整缩放以包括其所有航点？</string>
@@ -528,8 +527,6 @@
     <string name="brouter_recalculating">在后台重新计算路径</string>
     <string name="init_summary_brouterShowBothDistances">如果路径是活动的：除了显示计算的路径长度外，还显示直线距离。</string>
     <string name="init_useInternalRouting">使用内部路线规划</string>
-    <string name="init_bigSmileysOnMap">已记录藏点的大图标</string>
-    <string name="init_summary_bigSmileysOnMap">如果启用，将会在地图上为已记录藏点显示大表情，而不是藏点类型的图标 (需要重启)。</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
     <string name="init_summary_global_wp_extraction_disable">全局禁用从个人藏点笔记中提取的航点。对于单个藏点，仍然可以通过取消选择个人藏点笔记下面的复选框来启用。</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>

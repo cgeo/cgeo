@@ -386,7 +386,6 @@
     <string name="init_summary_openlastdetailspage">Ablihi ang mga detalye sa katapusang gigamit nga panid</string>
     <string name="init_address">Pagpakita sa Address</string>
     <string name="init_summary_address">Ipakita ang address imbis nga coordinate sa main nga screen</string>
-    <string name="init_showwaypoints">Ipakita ang Waypoints</string>
     <string name="init_showwaypoint_description">Kung mas ubos kay sa gihatag nga kantidad sa mga caches nga gipakita sa mapa, ang ilang mga waypoint gipakita usab.</string>
     <string name="init_save_log_img">I-save ang mga Imahe</string>
     <string name="init_summary_save_log_img">I-save ang mga Imahe nga gikan sa Logs</string>

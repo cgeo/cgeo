@@ -640,7 +640,6 @@
     <string name="init_select_language">Velg språk</string>
     <string name="init_summary_select_language">Velg språk i appen (krever omstart)\n</string>
     <string name="init_use_default_language">Bruk standard språk</string>
-    <string name="init_showwaypoints">Vis veipunkter</string>
     <string name="init_showwaypoint_description">Hvis færre enn et gitt antall cacher vises på kartet, vil veipunktene som hører til også vises.</string>
     <string name="init_zoomincludingwaypoints">Kartutsnitt inkluderer veipunkter</string>
     <string name="init_zoomincludingwaypoints_description">Ved visning av en enkelt cache: Skal kartutsnittet justeres slik at alle veipunktene blir synlig?</string>
@@ -654,8 +653,6 @@
     <string name="brouter_recalculating">Beregner rute i bakgrunnen…</string>
     <string name="init_summary_brouterShowBothDistances">Om routing er aktiv: Vis distanse i rett linje i tillegg til den utregnede rutelengden.</string>
     <string name="init_useInternalRouting">Bruk intern ruting</string>
-    <string name="init_bigSmileysOnMap">Store ikoner for loggede cacher</string>
-    <string name="init_summary_bigSmileysOnMap">Hvis aktivert, vises store uttrykksikoner for loggede cacher på kartet i stedet for ikon av cachetype (krever omstart).</string>
     <string name="init_global_wp_extraction_disable">Deaktiver uthenting av veipunkt</string>
     <string name="init_summary_global_wp_extraction_disable">Globalt deaktivere uthenting av veipunkt fra personlige cachenotater. Dette kan fortsatt aktiveres for enkeltcacher ved å deaktivere avmerkingsboksen under det personlige cachenotatet</string>
     <string name="init_customtabs_as_browser">Bruk Chrome WebView</string>
@@ -1009,8 +1006,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Hindre veipunkter fra notat</string>
     <string name="cache_menu_allowWaypointExtraction">Tillat veipunkter fra notat</string>
     <string name="cache_personal_note_edit">Rediger</string>
-    <string name="cache_personal_note_storewaypoints">Legg til/oppdater veipunkter</string>
-    <string name="cache_personal_note_removewaypoints">Fjern veipunkter</string>
     <string name="cache_personal_note_removedwaypoints">Veipunkter fjernet</string>
     <string name="cache_personal_note_storewaypoints_success">Veipunkter ble lagt til personlig notat</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Veipunkter ble lagt til notat, men måtte forkortes (maksimal personlig notat-størrelse: %1$d)</string>

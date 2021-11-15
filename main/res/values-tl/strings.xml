@@ -404,7 +404,6 @@
     <string name="init_summary_openlastdetailspage">Buksan ang mga detalye sa huling ginamit na pahina</string>
     <string name="init_address">Ipakita ang address</string>
     <string name="init_summary_address">Ipakita ang address sa halip na mga koordinate sa pangunahing screen</string>
-    <string name="init_showwaypoints">Ipakita ang mga waypoint</string>
     <string name="init_showwaypoint_description">Kapang kulang sa nasabing halaga ng mga cache ay ipapakita sa mapa, ang kanilang waypoint ay idaragdag sa pagpapakita.</string>
     <string name="init_save_log_img">I-save ang mga imahe</string>
     <string name="init_summary_save_log_img">I-save ang mga imahe mula sa mga naka-log</string>

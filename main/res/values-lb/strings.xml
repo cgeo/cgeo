@@ -492,7 +492,6 @@
     <string name="init_summary_openlastdetailspage">Detailer opmaachen un der leschter Säit déi besicht gouf</string>
     <string name="init_address">Adress uweisen</string>
     <string name="init_summary_address">Adress uweisen amplaz vun den Koordinaten op mengem Bildschierm</string>
-    <string name="init_showwaypoints">Waypoints uweisen</string>
     <string name="init_showwaypoint_description">Falls manner Cachen op der Kaart ugewisen ginn als annoncéiert, da ginn d\'Waypoints zousätzlech ugewisen.</string>
     <string name="init_zoomincludingwaypoints">Zoom beinhalt Waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Wann eng Kaart fir een eenzelen Cache opgemaach gëtt: Soll de Zoom esou agestallt ginn, datt all Waypoints ugewisen ginn?</string>

@@ -458,7 +458,6 @@
     <string name="init_summary_openlastdetailspage">Arată detaliile de pe ultima pagină afişată</string>
     <string name="init_address">Arată adresa</string>
     <string name="init_summary_address">Arată adresa în locul coordonatelor pe ecranul principal</string>
-    <string name="init_showwaypoints">Arată puncte</string>
     <string name="init_showwaypoint_description">Dacă sunt afişate mai puţine cutii decât acest număr, afişează şi punctele adiţionale.</string>
     <string name="init_save_log_img">Salvează imagini</string>
     <string name="init_summary_save_log_img">Salvează imaginile din însemnări</string>

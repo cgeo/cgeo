@@ -723,7 +723,6 @@
     <string name="init_select_language">Wybierz język</string>
     <string name="init_summary_select_language">Wybierz język aplikacji (wymaga ponownego uruchomienia)\n</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
-    <string name="init_showwaypoints">Pokaż punkty nawigacji na mapie</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
@@ -741,8 +740,6 @@
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
     <string name="init_useInternalRouting">Użyj wewnętrznej nawigacji</string>
     <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych routingu i innych funkcji</string>
-    <string name="init_bigSmileysOnMap">Duże ikony dla zalogowanych skrzynek</string>
-    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, duże ikony będą wyświetlane dla zalogowanych skrzynek zamiast ikon typu skrzynki (wymaga ponownego uruchomienia).</string>
     <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
     <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
@@ -1122,8 +1119,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
-    <string name="cache_personal_note_storewaypoints">Dodaj/aktualizuj punkty nawigacyjne</string>
-    <string name="cache_personal_note_removewaypoints">Usuń punkty nawigacyjne</string>
     <string name="cache_personal_note_removedwaypoints">Punkty nawigacji usunięte</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nie znaleziono punktów nawigacji do usunięcia</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty drogi zostały dodane do notatki osobistej</string>

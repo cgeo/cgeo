@@ -397,7 +397,6 @@
     <string name="init_summary_openlastdetailspage">Buka rincian dengan halaman terakhir yang di gunakan</string>
     <string name="init_address">Tampilkan Alamat</string>
     <string name="init_summary_address">Tampilkan alamat alternatif dari koordinat pada layar utama</string>
-    <string name="init_showwaypoints">Tampilkan Titik arah</string>
     <string name="init_showwaypoint_description">Jika kurang dari jumlah cache yang diberikan ditampilkan di peta, titik arah mereka ditunjukkan juga.</string>
     <string name="init_save_log_img">Simpan gambar</string>
     <string name="init_summary_save_log_img">Simpan Gambar dari log</string>

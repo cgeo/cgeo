@@ -666,7 +666,6 @@
     <string name="init_summary_address">Pagrindiniame ekrane vietoje koordinačių rodyti adresą</string>
     <string name="init_select_language">Pasirinkite kalbą</string>
     <string name="init_use_default_language">Naudokite numatytąją kalbą</string>
-    <string name="init_showwaypoints">Rodyti papildomus taškus</string>
     <string name="init_showwaypoint_description">Jei rodomų slėptuvių mažiau nei nurodytas kiekis, žemėlapyje bus rodomi jų papildomi taškai.</string>
     <string name="init_zoomincludingwaypoints">Priartinimas su papildomais taškais</string>
     <string name="init_brouterThreshold">Apskaičiuoti maršrutą</string>
@@ -674,8 +673,6 @@
     <string name="init_autoDownloads">Automatinis siuntimas</string>
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone…</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
-    <string name="init_bigSmileysOnMap">Didelės užregistruotų slėptuvių piktogramos</string>
-    <string name="init_summary_bigSmileysOnMap">Jei įjungta, užregistruotoms slėptuvėms žemėlapyje vietoj slėptuvės tipo piktogramos bus rodomos didelės šypsenėlės (reikia iš naujo paleisti).</string>
     <string name="init_global_wp_extraction_disable">Išjungti papildomų tašku išskleidimą</string>
     <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti papildomų taškų išskleidimą iš asmeninių slėptuvių užrašų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių užrašų</string>
     <string name="init_customtabs_as_browser">Naudokite Chrome WebView</string>
@@ -1030,8 +1027,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Neleisti papildomų taškų iš užrašų</string>
     <string name="cache_menu_allowWaypointExtraction">Leisti papildomus taškus iš užrašų</string>
     <string name="cache_personal_note_edit">Redaguoti</string>
-    <string name="cache_personal_note_storewaypoints">Pridėti/atnaujinti papildomus taškus</string>
-    <string name="cache_personal_note_removewaypoints">Pašalinti papildomus taškus</string>
     <string name="cache_personal_note_removedwaypoints">Kelio taškai pašalinti</string>
     <string name="cache_personal_note_storewaypoints_success">Papildomi taškai pridėti prie asmeninių užrašų</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Papildomi taškai pridėti prie užrašų, tačiau buvo sutrumpinti (maksimalus asmeninių užrašų ilgis: %1$d)</string>
