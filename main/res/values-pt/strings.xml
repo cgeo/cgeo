@@ -715,7 +715,6 @@
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
-    <string name="init_showwaypoints">Mostrar Pontos Adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
     <string name="init_zoomincludingwaypoints">Zoom incl. pontos adicionais</string>
     <string name="init_zoomincludingwaypoints_description">Ao visualizar o mapa a partir de uma cache (função \"mostrar no mapa\"): O zoom do mapa deve ser ajustado para incluir todos os pontos adicionais dessa cache?</string>
@@ -733,8 +732,6 @@
     <string name="init_summary_brouterShowBothDistances">Se a navegação estiver activa: Mostra a distância em linha recta além do comprimento da rota.</string>
     <string name="init_useInternalRouting">Usar encaminhamento interno</string>
     <string name="init_summary_useInternalRouting">Use o encaminhamento interno do c:geo para poder usar o descarregamento automático dos dados de encaminhamento e outras funções</string>
-    <string name="init_bigSmileysOnMap">Grandes ícones nas caches registadas</string>
-    <string name="init_summary_bigSmileysOnMap">Se activado, as caches registadas serão mostradas no mapa por grandes emoticons, ao invés dos ícones do tipo de cache (requer reinício).</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
@@ -1098,8 +1095,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Prevenir pontos adicionais de notas</string>
     <string name="cache_menu_allowWaypointExtraction">Permitir pontos adicionais de notas</string>
     <string name="cache_personal_note_edit">Editar</string>
-    <string name="cache_personal_note_storewaypoints">Adicionar/Actualizar Pontos adicionais</string>
-    <string name="cache_personal_note_removewaypoints">Eliminar Pontos adicionais</string>
     <string name="cache_personal_note_removedwaypoints">Pontos adicionais removidos</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Não foi encontrado nenhum ponto adicional para remover</string>
     <string name="cache_personal_note_storewaypoints_success">Os Pontos Adicionais foram adicionados à nota pessoal</string>
