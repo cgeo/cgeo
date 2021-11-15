@@ -710,7 +710,6 @@
     <string name="init_select_language">언어 선택</string>
     <string name="init_summary_select_language">앱 언어 선택 (다시 시작해야 함)\n</string>
     <string name="init_use_default_language">기본 언어 사용</string>
-    <string name="init_showwaypoints">웨이포인트 보기</string>
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_zoomincludingwaypoints">확대에는 지점이 포함됩니다</string>
     <string name="init_zoomincludingwaypoints_description">단일 캐시를 보는 경우: 모든 지점을 포함하도록 확대를 조정해야합니까?</string>
@@ -728,8 +727,6 @@
     <string name="init_summary_brouterShowBothDistances">라우팅이 활성화 된 경우 : 계산된 경로 길이 외에 직선 거리를 표시합니다.</string>
     <string name="init_useInternalRouting">내부 라우팅 사용</string>
     <string name="init_summary_useInternalRouting">c:geo 내부 라우팅을 사용하여 자동 라우팅 데이터 다운로드 및 기타 기능을 사용하십시오.</string>
-    <string name="init_bigSmileysOnMap">로그 된 캐시를 위한 큰 아이콘</string>
-    <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 대신 지도에 로그 된 캐시에 대해 큰 이모티콘이 표시됩니다 (다시 시작해야 함).</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
@@ -1085,8 +1082,6 @@
     <string name="cache_menu_preventWaypointsFromNote">지점이 메모에서 방지하기</string>
     <string name="cache_menu_allowWaypointExtraction">지점이 메모에서 허락하기</string>
     <string name="cache_personal_note_edit">편집</string>
-    <string name="cache_personal_note_storewaypoints">지점 추가/업데이트</string>
-    <string name="cache_personal_note_removewaypoints">지점 제거</string>
     <string name="cache_personal_note_removedwaypoints">지점이 삭제되었습니다.</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">삭제할 지점이 없습니다.</string>
     <string name="cache_personal_note_storewaypoints_success">개인 메모에 지점이 추가되었습니다.</string>
