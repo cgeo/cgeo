@@ -513,7 +513,6 @@
     <string name="init_select_language">Выбрать язык</string>
     <string name="init_summary_select_language">Выберите язык приложения (требуется перезапуск)\n</string>
     <string name="init_use_default_language">Использовать язык по умолчанию</string>
-    <string name="init_showwaypoints">Показ путевых точек</string>
     <string name="init_showwaypoint_description">Если на карте меньше заданного числа тайников, то их этапы будут показаны автоматически.</string>
     <string name="init_zoomincludingwaypoints">Увеличение вместе с точками</string>
     <string name="init_zoomincludingwaypoints_description">При показе одиночного тайника масштаб будет таким, чтобы вместить все точки тайника</string>
@@ -521,8 +520,6 @@
     <string name="init_brouterShowBothDistances">Показать расстояние по прямой</string>
     <string name="brouter_recalculating">Пересчет маршрута в фоновом режиме…</string>
     <string name="init_summary_brouterShowBothDistances">Если навигация активна: показать прямое расстояние в дополнение к рассчитанной длине маршрута.</string>
-    <string name="init_bigSmileysOnMap">Большие иконки для отмеченных тайников</string>
-    <string name="init_summary_bigSmileysOnMap">Если включено, то для отмеченных тайников будут использоваться иконки-смайлики (вместо маленького смайлика в углу). Необходим перезапуск приложения.</string>
     <string name="init_global_wp_extraction_disable">Не создавать точки из текста заметки</string>
     <string name="init_summary_global_wp_extraction_disable">Отключить извлечение путевых точек из персональных заметок тайника. Эта настройка может быть изменена для каждого конкретного тайника снятием чекбокса под персональной заметкой</string>
     <string name="init_save_log_img">Сохранять изображения</string>
@@ -851,8 +848,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Не создавать точки из текста</string>
     <string name="cache_menu_allowWaypointExtraction">Создавать точки из текста</string>
     <string name="cache_personal_note_edit">Редактировать</string>
-    <string name="cache_personal_note_storewaypoints">Добавить/Обновить путевые точки</string>
-    <string name="cache_personal_note_removewaypoints">Удалить путевые точки</string>
     <string name="cache_personal_note_removedwaypoints">Путевые точки удалены</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Нет точек для удаления</string>
     <string name="cache_personal_note_storewaypoints_success">Путевые точки были добавлены в личную заметку</string>
