@@ -459,7 +459,6 @@
     <string name="init_summary_openlastdetailspage">Utoljára használt oldaltípus megnyitása belépéskor</string>
     <string name="init_address">Cím mutatása a főablakban</string>
     <string name="init_summary_address">Cím mutatása a főablakban</string>
-    <string name="init_showwaypoints">Útpontok mutatása élő térképen</string>
     <string name="init_showwaypoint_description">Maximum ennyi útpontot mutasson</string>
     <string name="init_brouterThreshold">Útvonaltervezés</string>
     <string name="init_brouterShowBothDistances">Légvonalbeli távolság mutatása</string>
