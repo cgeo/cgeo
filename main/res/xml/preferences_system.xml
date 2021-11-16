@@ -6,64 +6,79 @@
 
     <PreferenceCategory
         android:key="@string/pref_group_localfilesystem"
-        android:title="@string/init_local_file_system">
+        android:title="@string/init_local_file_system"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_persistablefolder_basedir"
-            android:title="@string/init_base_directory_description" />
+            android:title="@string/init_base_directory_description"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_testdir"
-            android:title="Directory for Unit Tests. This setting is only needed for development and only visible in Debug mode" />
+            android:title="Directory for Unit Tests. This setting is only needed for development and only visible in Debug mode"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:summary="@string/init_location_note"
-        android:title="@string/init_location">
+        android:title="@string/init_location"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_googleplayservices"
-            android:title="@string/init_location_googleplayservices" />
+            android:title="@string/init_location_googleplayservices"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:summary="@string/init_low_power_note"
-        android:title="@string/init_low_power">
+        android:title="@string/init_low_power"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_lowpowermode"
-            android:title="@string/init_low_power_mode" />
+            android:title="@string/init_low_power_mode"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:summary="@string/init_force_orientation_sensor_note"
-        android:title="@string/init_force_orientation_sensor_title">
+        android:title="@string/init_force_orientation_sensor_title"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_force_orientation_sensor"
-            android:title="@string/init_force_orientation_sensor" />
+            android:title="@string/init_force_orientation_sensor"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:summary="@string/init_debug_note"
-        android:title="@string/init_debug_title">
+        android:title="@string/init_debug_title"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_debug"
-            android:title="@string/init_debug" />
+            android:title="@string/init_debug"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_generate_logcat"
             android:layout="@layout/preference_button"
-            android:title="@string/about_system_write_logcat" />
+            android:title="@string/about_system_write_logcat"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_memory_dump"
             android:layout="@layout/preference_button"
-            android:title="@string/init_create_memory_dump" />
+            android:title="@string/init_create_memory_dump"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_generate_infos_downloadmanager"
             android:layout="@layout/preference_button"
-            android:title="@string/about_system_write_infos_downloadmanager" />
+            android:title="@string/about_system_write_infos_downloadmanager"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_view_settings"
             android:layout="@layout/preference_button"
-            android:title="@string/view_settings" />
+            android:title="@string/view_settings"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

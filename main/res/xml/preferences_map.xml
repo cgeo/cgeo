@@ -5,29 +5,35 @@
     android:summary="@string/settings_summary_map"
     android:title="@string/settings_title_map">
 
-    <PreferenceCategory android:title="@string/settings_title_map_data">
+    <PreferenceCategory
+        android:title="@string/settings_title_map_data"
+        app:iconSpaceReserved="false">
         <ListPreference
             android:defaultValue="0"
             android:dialogTitle="@string/init_mapsource_select"
             android:key="@string/pref_mapsource"
-            android:title="@string/init_mapsource_select" />
+            android:title="@string/init_mapsource_select"
+            app:iconSpaceReserved="false" />
         <Preference
             android:icon="?attr/settings_info_icon"
             android:text="@string/settings_info_offline_maps"
             android:title="@string/settings_info_offline_maps_title"
             app:url="@string/manual_url_settings_offline_maps"
-            app:urlButton="@string/settings_goto_url_button" />
+            app:urlButton="@string/settings_goto_url_button"
+            app:iconSpaceReserved="false" />
         <Preference
             android:icon="?attr/settings_map_icon"
             android:text="@string/downloadmap_info"
             android:title="@string/downloadmap_title"
-            app:urlButton="@string/downloadmap_choose" />
+            app:urlButton="@string/downloadmap_choose"
+            app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_mapAutoDownloads"
             android:summary="@string/init_mapAutoDownloads_description"
-            android:title="@string/init_autoDownloads" />
+            android:title="@string/init_autoDownloads"
+            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_updateinterval_description"
             android:title="@string/init_updateinterval_title"
@@ -36,35 +42,43 @@
             android:key="@string/pref_mapAutoDownloadsInterval"
             android:max="@integer/map_updateinterval_max"
             android:min="0"
-            app:showSeekBarValue="true" />
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
 
         <Preference
             android:key="@string/pref_persistablefolder_offlinemaps"
-            android:title="@string/init_map_directory_description" />
+            android:title="@string/init_map_directory_description"
+            app:iconSpaceReserved="false" />
         <Preference
             android:icon="?attr/settings_info_icon"
             android:text="@string/settings_info_themes"
             android:title="@string/settings_info_themes_title"
             app:url="@string/faq_url_settings_themes"
-            app:urlButton="@string/settings_goto_url_button" />
+            app:urlButton="@string/settings_goto_url_button"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapthemes"
-            android:title="@string/init_rendertheme_folder" />
+            android:title="@string/init_rendertheme_folder"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_renderthemefolder_synctolocal"
             android:summary="@string/init_summary_renderthemefolder_synctolocal"
-            android:title="@string/init_renderthemefolder_synctolocal" />
+            android:title="@string/init_renderthemefolder_synctolocal"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_maprotation_manual"
             android:entries="@array/maprotation"
             android:entryValues="@array/maprotationValues"
             android:key="@string/pref_mapRotation"
             android:summary="%s"
-            android:title="@string/settings_title_map_rotation" />
+            android:title="@string/settings_title_map_rotation"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_title_waypoints">
+    <PreferenceCategory
+        android:title="@string/settings_title_waypoints"
+        app:iconSpaceReserved="false">
         <SeekBarPreference
             android:summary="@string/init_showwaypoint_description"
             android:title="@string/init_showwaypoints"
@@ -72,32 +86,40 @@
             android:key="@string/pref_showwaypointsthreshold"
             android:max="@integer/waypoint_threshold_max"
             android:min="0"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_excludeWpOriginal"
             android:summary="@string/init_summary_hidewp_original"
-            android:title="@string/init_hidewp" />
+            android:title="@string/init_hidewp"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_excludeWpParking"
-            android:summary="@string/init_summary_hidewp_parking" />
+            android:summary="@string/init_summary_hidewp_parking"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_excludeWpVisited"
-            android:summary="@string/init_summary_hidewp_visited" />
+            android:summary="@string/init_summary_hidewp_visited"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_zoomincludingwaypoints"
             android:summary="@string/init_zoomincludingwaypoints_description"
-            android:title="@string/init_zoomincludingwaypoints" />
+            android:title="@string/init_zoomincludingwaypoints"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
-    <PreferenceCategory android:title="@string/settings_title_map_content">
+    <PreferenceCategory
+        android:title="@string/settings_title_map_content"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_maptrail"
             android:summary="@string/init_summary_maptrail"
-            android:title="@string/init_maptrail" />
+            android:title="@string/init_maptrail"
+            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_maptrail_length_summary"
             android:title="@string/init_maptrail_length"
@@ -105,23 +127,30 @@
             android:key="@string/pref_maptrail_length"
             android:max="@integer/historytrack_length_max"
             android:min="100"
-            app:showSeekBarValue="true" />
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_bigSmileysOnMap"
             android:summary="@string/init_summary_bigSmileysOnMap"
-            android:title="@string/init_bigSmileysOnMap" />
+            android:title="@string/init_bigSmileysOnMap"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_title_map_behavior">
+    <PreferenceCategory
+        android:title="@string/settings_title_map_behavior"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_longTapOnMapActivated"
             android:summary="@string/init_summary_longtap_map"
-            android:title="@string/init_longtap_map" />
+            android:title="@string/init_longtap_map"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_title_proximityNotification">
+    <PreferenceCategory
+        android:title="@string/settings_title_proximityNotification"
+        app:iconSpaceReserved="false">
         <SeekBarPreference
             android:defaultValue="@integer/proximitynotification_far_default"
             android:key="@string/pref_proximityDistanceFar"
@@ -129,7 +158,8 @@
             android:title="@string/far_distance"
             android:max="@integer/proximitynotification_distance_max"
             android:min="1"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
         <SeekBarPreference
             android:defaultValue="@integer/proximitynotification_near_default"
             android:key="@string/pref_proximityDistanceNear"
@@ -137,27 +167,33 @@
             android:title="@string/near_distance"
             android:max="@integer/proximitynotification_distance_max"
             android:min="1"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_proximityNotificationGeneral"
             android:summary="@string/init_summary_proximityNotificationGeneral"
-            android:title="@string/init_proximityNotificationGeneral" />
+            android:title="@string/init_proximityNotificationGeneral"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_proximityNotificationSpecific"
             android:summary="@string/init_summary_proximityNotificationSpecific"
-            android:title="@string/init_proximityNotificationSpecific" />
+            android:title="@string/init_proximityNotificationSpecific"
+            app:iconSpaceReserved="false" />
         <ListPreference
             android:defaultValue="@string/pref_value_pn_tone_only"
             android:entries="@array/proximity_notification_types"
             android:entryValues="@array/proximity_notification_values"
             android:key="@string/pref_proximityNotificationType"
             android:summary="%s"
-            android:title="@string/init_proximity_notification_type" />
+            android:title="@string/init_proximity_notification_type"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/init_maplines_title">
+    <PreferenceCategory
+        android:title="@string/init_maplines_title"
+        app:iconSpaceReserved="false">
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:dependency="@string/pref_maptrail"
@@ -165,26 +201,30 @@
             android:summary="@string/init_trailcolor_summary"
             android:title="@string/init_trailcolor"
             app:defaultColor="@color/default_trailcolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
         <Preference
             android:dependency="@string/pref_maptrail"
             android:selectable="false"
             android:summary="@string/init_trailwidth_summary"
-            android:title="@string/init_trailwidth" />
+            android:title="@string/init_trailwidth"
+            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:defaultValue="@integer/default_trailwidth"
             android:dependency="@string/pref_maptrail"
             android:key="@string/pref_mapline_trailwidth"
             android:max="100"
             android:min="0"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_directioncolor"
             android:summary="@string/init_directioncolor_summary"
             android:title="@string/init_directioncolor"
             app:defaultColor="@color/default_directioncolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_directionwidth_summary"
             android:title="@string/init_directionwidth"
@@ -192,14 +232,16 @@
             android:key="@string/pref_mapline_directionwidth"
             android:max="100"
             android:min="0"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_routecolor"
             android:summary="@string/init_routecolor_summary"
             android:title="@string/init_routecolor"
             app:defaultColor="@color/default_routecolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_routewidth_summary"
             android:title="@string/init_routewidth"
@@ -207,14 +249,16 @@
             android:key="@string/pref_mapline_routewidth"
             android:max="100"
             android:min="0"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_trackcolor"
             android:summary="@string/init_trackcolor_summary"
             android:title="@string/init_trackcolor"
             app:defaultColor="@color/default_trackcolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_trackwidth_summary"
             android:title="@string/init_trackwidth"
@@ -222,40 +266,48 @@
             android:key="@string/pref_mapline_trackwidth"
             android:max="100"
             android:min="0"
-            app:showSeekBarValue="true"/>
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false"/>
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_circlecolor"
             android:summary="@string/init_circlecolor_summary"
             android:title="@string/init_circlecolor"
             app:defaultColor="@color/default_circlecolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_circlefillcolor"
             android:summary="@string/init_circlefillcolor_summary"
             android:title="@string/init_circlefillcolor"
             app:defaultColor="@color/default_circlefillcolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
 
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_accuracycirclecolor"
             android:summary="@string/init_accuracycirclecolor_summary"
             android:title="@string/init_accuracycirclecolor"
             app:defaultColor="@color/default_accuracycirclecolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.ColorpickerPreference
             android:key="@string/pref_mapline_accuracycirclefillcolor"
             android:summary="@string/init_accuracycirclefillcolor_summary"
             android:title="@string/init_accuracycirclefillcolor"
             app:defaultColor="@color/default_accuracycirclefillcolor"
-            app:showOpaquenessSlider="true" />
+            app:showOpaquenessSlider="true"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/init_map_other">
+    <PreferenceCategory
+        android:title="@string/init_map_other"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_map_osm_multithreaded"
             android:summary="@string/init_summary_map_osm_multithreaded"
-            android:title="@string/init_map_osm_multithreaded" />
+            android:title="@string/init_map_osm_multithreaded"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

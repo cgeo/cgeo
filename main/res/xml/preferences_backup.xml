@@ -8,7 +8,8 @@
 
     <PreferenceCategory
         android:summary="@string/init_backup_summary"
-        android:title="@string/init_backup_title">
+        android:title="@string/init_backup_title"
+        app:iconSpaceReserved="false">
         <SeekBarPreference
             android:defaultValue="@integer/backup_history_length_default"
             android:key="@string/pref_backups_backup_history_length"
@@ -16,26 +17,33 @@
             android:min="0"
             android:summary="@string/init_backup_history_length_summary"
             android:title="@string/init_backup_history_length_title"
-            app:showSeekBarValue="true" />
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_backup_logins"
             android:summary="@string/init_backup_logins_summary"
-            android:title="@string/init_backup_logins" />
+            android:title="@string/init_backup_logins"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_preference_backup"
             android:layout="@layout/preference_button"
-            android:title="@string/init_backup_now" />
+            android:title="@string/init_backup_now"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/init_restore_title">
+    <PreferenceCategory
+        android:title="@string/init_restore_title"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_preference_restore"
             android:layout="@layout/preference_button"
-            android:title="@string/init_backup_start_restore" />
+            android:title="@string/init_backup_start_restore"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_preference_restore_dirselect"
             android:layout="@layout/preference_button"
-            android:title="@string/init_backup_restore_different_backup" />
+            android:title="@string/init_backup_restore_different_backup"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
