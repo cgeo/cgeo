@@ -8,17 +8,20 @@
         android:defaultValue="false"
         android:key="@string/pref_logimages"
         android:summary="@string/init_summary_save_log_img"
-        android:title="@string/init_save_log_img" />
+        android:title="@string/init_save_log_img"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="@string/pref_choose_list"
         android:summary="@string/init_summary_choose_list"
-        android:title="@string/init_choose_list" />
+        android:title="@string/init_choose_list"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="@string/pref_showListsInCacheList"
         android:summary="@string/init_summary_listdisplay"
-        android:title="@string/init_listdisplay" />
+        android:title="@string/init_listdisplay"
+        app:iconSpaceReserved="false" />
 
     <SeekBarPreference
         android:defaultValue="@integer/list_load_limit_default"
@@ -27,12 +30,16 @@
         android:key="@string/pref_list_initial_load_limit"
         android:max="@integer/list_load_limit_max"
         android:min="0"
-        app:showSeekBarValue="true"/>
+        app:showSeekBarValue="true"
+        app:iconSpaceReserved="false"/>
 
-    <PreferenceCategory android:title="@string/settings_title_gpx">
+    <PreferenceCategory
+        android:title="@string/settings_title_gpx"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_persistablefolder_gpx"
-            android:title="@string/init_gpx_importexportdir" />
+            android:title="@string/init_gpx_importexportdir"
+            app:iconSpaceReserved="false" />
         <!--
                     <Preference
                         android:key="@string/pref_gpxExportDir"
@@ -44,28 +51,34 @@
 
     <PreferenceCategory
         android:summary="@string/init_dbonsdcard_note"
-        android:title="@string/init_dbonsdcard_title">
+        android:title="@string/init_dbonsdcard_title"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_dbonsdcard"
-            android:title="@string/init_dbonsdcard" />
+            android:title="@string/init_dbonsdcard"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:summary="@string/init_dataDir_note"
-        android:title="@string/settings_title_data_dir">
+        android:title="@string/settings_title_data_dir"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_dataDir"
-            android:title="@string/init_dataDir" />
+            android:title="@string/init_dataDir"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
         android:summary="@string/init_maintenance_directories_note"
-        android:title="@string/init_maintenance">
+        android:title="@string/init_maintenance"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_preference_maintenance_directories"
             android:layout="@layout/preference_button"
-            android:title="@string/init_maintenance_directories" />
+            android:title="@string/init_maintenance_directories"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

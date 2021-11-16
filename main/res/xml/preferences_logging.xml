@@ -5,31 +5,40 @@
     android:summary="@string/settings_summary_logging"
     android:title="@string/settings_title_logging">
 
-    <PreferenceCategory android:title="@string/init_signature">
+    <PreferenceCategory
+        android:title="@string/init_signature"
+        app:iconSpaceReserved="false">
         <cgeo.geocaching.settings.TemplateTextPreference
             android:key="@string/pref_signature"
-            android:title="@string/init_signature" />
+            android:title="@string/init_signature"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_sigautoinsert"
-            android:title="@string/init_sigautoinsert" />
+            android:title="@string/init_sigautoinsert"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_category_logging_other">
+    <PreferenceCategory
+        android:title="@string/settings_category_logging_other"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_trackautovisit"
             android:summary="@string/init_summary_trackautovisit"
-            android:title="@string/init_trackautovisit" />
+            android:title="@string/init_trackautovisit"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_log_offline"
             android:summary="@string/init_summary_log_offline"
-            android:title="@string/init_log_offline" />
+            android:title="@string/init_log_offline"
+            app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_offlinelogs_homescreen"
             android:summary="@string/init_summary_offlinelogs_homescreen"
-            android:title="@string/init_offlinelogs_homescreen" />
+            android:title="@string/init_offlinelogs_homescreen"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
