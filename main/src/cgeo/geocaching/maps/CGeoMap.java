@@ -649,7 +649,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            getTrackUtils().loadTracks(this::setTracks);
+            getTrackUtils().loadTracks(this::setTracks, false);
         } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
         }

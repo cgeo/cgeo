@@ -33,7 +33,7 @@ public class TrackUtils {
         this.fileSelector = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH))
         .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_PERSISTED, PersistableUri.class, uri -> {
             if (uri != null && this.updateTracks != null) {
-                loadTracks(this.updateTracks);
+                loadTracks(this.updateTracks, true);
             }
         });
     }
@@ -56,7 +56,6 @@ public class TrackUtils {
 
     /**
      * Check if selected menu entry is for "load track" or hide/unhide track
-     * @param activity calling activity
      * @param id menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
@@ -97,10 +96,10 @@ public class TrackUtils {
         return fileSelector.onActivityResult(requestCode, resultCode, data);
     }
 
-    public void loadTracks(final Route.UpdateRoute updateRoute) {
+    public void loadTracks(final Route.UpdateRoute updateRoute, final boolean resetVisibilitySetting) {
         final Uri uri = PersistableUri.TRACK.getUri();
         if (null != uri) {
-            GPXTrackOrRouteImporter.doImport(activity, PersistableUri.TRACK.getUri(), updateRoute);
+            GPXTrackOrRouteImporter.doImport(activity, PersistableUri.TRACK.getUri(), updateRoute, resetVisibilitySetting);
         }
         ActivityMixin.invalidateOptionsMenu(activity);
     }
