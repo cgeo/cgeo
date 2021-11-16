@@ -733,9 +733,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            this.trackUtils.loadTracks(this::setTracks);
+            this.trackUtils.loadTracks(this::setTracks, false);
         } else if (null != trackLayer) {
             trackLayer.updateRoute(tracks);
+            trackLayer.setHidden(Settings.isHideTrack());
         }
     }
 

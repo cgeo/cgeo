@@ -2,6 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -26,7 +27,7 @@ public class GPXTrackOrRouteImporter {
     private GPXTrackOrRouteImporter() {
     }
 
-    public static void doImport(final Context context, final Uri uri, final Route.UpdateRoute callback) {
+    public static void doImport(final Context context, final Uri uri, final Route.UpdateRoute callback, final boolean resetVisibilitySetting) {
         final AtomicBoolean success = new AtomicBoolean(false);
         Toast.makeText(context, R.string.map_load_track_wait, Toast.LENGTH_SHORT).show();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
@@ -36,6 +37,9 @@ public class GPXTrackOrRouteImporter {
                 if (success.get()) {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                         try {
+                            if (resetVisibilitySetting) {
+                                Settings.setHideTrack(false);
+                            }
                             callback.updateRoute(value);
                         } catch (final Throwable t) {
                             //
