@@ -1,5 +1,5 @@
 ### Mapa
-- Novetat: Reelaboració completa de totes les icones de catxés
+- Novetat: Reelaboració completa de totes les icones de catxé
 - Novetat: Mostra les icones dels darrers registres a la finestra emergent del catxé
 - Solució: Mostra cercles de distància pels catxés definits per l'usuari (si els cercles estan activats)
 - Solució: Fet que el títol del catxé sigui més visible a la finestra emergent de catxé / waypoint
