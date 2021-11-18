@@ -1,10 +1,11 @@
 ### Mapa
-- Novetat: Reelaboració completa de totes les icones de catxés
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Novetat: Mostra les icones dels darrers registres a la finestra emergent del catxé
 - Solució: Mostra cercles de distància pels catxés definits per l'usuari (si els cercles estan activats)
 - Solució: Fet que el títol del catxé sigui més visible a la finestra emergent de catxé / waypoint
 - Solució: Mostra l'avís al mapa en viu quan el mode en viu està desactivat
-- Solució: Permetre HTML a la descripció dels objectius de navegació
+- Fix: Allow HTML in navigation targets' description
 - Canvi: controls de zoom adaptats per a mapes OSM per a una millor consistència entre mapes
 - Canvi: S'ha mogut la majoria de les opcions de menú relacionades amb la ruta a un botó d'accés ràpid separat a la part inferior per obtenir un accés més ràpid. (Només es mostra quan es carrega / crea una ruta individual.)
 
