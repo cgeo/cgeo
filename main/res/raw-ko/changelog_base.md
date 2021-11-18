@@ -1,10 +1,11 @@
 ### 지도
-- 신규: 모든 캐시 아이콘의 완전한 재작업
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - 신규: 캐시 팝업에 마지막 로그에 대한 아이콘 표시
 - 수정: 사용자 정의 캐시에 대한 거리 원 표시(원이 활성화된 경우)
 - 수정: 캐시/지점 팝업에서 캐시 제목이 더 잘 보이도록 합니다.
 - 수정: 라이브 모드가 비활성화된 경우 라이브 지도에 경고 표시
-- 수정: 탐색 대상의 설명에서 HTML 허용
+- Fix: Allow HTML in navigation targets' description
 - 변경 사항: 지도 간 일관성 향상을 위해 OSM 지도에 대한 확대/축소 컨트롤을 조정했습니다.
 - 변경: 더 빠른 접근을 위해 대부분의 개별 경로 관련 메뉴 옵션을 하단의 별도의 빠른 접근 버튼으로 이동했습니다. (개별 경로가 로드/생성될 때만 표시됩니다.)
 
