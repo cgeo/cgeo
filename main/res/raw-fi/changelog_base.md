@@ -1,10 +1,11 @@
 ### Kartta
-- Uusi: Teimme uudet kuvakkeet kaikille kätköille
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Uusi: Näytä viimeisten kirjausten lokikuvakkeet kätköponnahdusikkunassa
 - Korjaa: Näytä etäisyysympyrät käyttäjän määrittelemille kätköille (jos ympyrät ovat käytössä)
 - Korjaa: Tee kätkön otsikosta näkyvämpi kätkön / reittipisteen ponnahdusikkunassa
 - Korjaa: Näytä varoitus live-kartassa, kun live-tila on poistettu käytöstä
-- Korjaa: Salli HTML navigointikohteiden kuvauksessa
+- Fix: Allow HTML in navigation targets' description
 - Muutos: Zoomauksen hallinta adaptoitiin OSM-karttojen johdonmukaisuuden parantamiseksi karttojen välillä
 - Muutos: Muutettu suurin osa yksittäiseen reittiin liittyviä valinnoista erilliseen pikakäyttöpainikkeen ikkunan alaosaan nopeamman pääsyn takaamiseksi. (Näytetään vain, kun yksittäinen reitti on ladattu / luotu.)
 
