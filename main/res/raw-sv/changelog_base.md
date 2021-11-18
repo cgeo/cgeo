@@ -1,10 +1,11 @@
 ### Karta
-- Nytt: Fullständig omarbetning av alla cache-ikoner
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Nytt: Visa ikoner för senaste loggar i cache popup
 - Fix: Visa distanscirklar för användardefinierade cacher (om cirklar är aktiverade)
 - Fix: Gör cachens titel mer synlig i cache / waypoint popup
 - Fix: Visa varning i livekartan när live-läget är inaktiverat
-- Fix: Tillåt HTML i navigationsmålens beskrivning
+- Fix: Allow HTML in navigation targets' description
 - Ändrat: Anpassade zoomkontroller för OSM-kartor för bättre konsistens över kartor
 - Ändrat: Flyttade de flesta enskilda ruttrelaterade menyalternativ till en separat snabbåtkomstknapp längst ner för snabbare åtkomst. (Visas endast när en enskild rutt laddas/skapas.)
 
