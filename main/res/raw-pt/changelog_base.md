@@ -1,10 +1,11 @@
 ### Mapa
-- Novo: Reformulação completa de todos os ícones de cache
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Novo: Mostra ícones para os últimos registos na janela pop-up da cache
 - Correcção: Mostra círculos de distância para caches definidas pelo utilizador (se os círculos estiverem activados)
 - Correcção: Torna o título da cache mais visível na janela pop-up de caches / pontos adicionais
 - Correcção: Mostra um aviso no mapa em tempo real quando este estiver desactivado
-- Correcção: Permite HTML na descrição dos destinos de navegação
+- Fix: Allow HTML in navigation targets' description
 - Alteração: Controles de ampliação adaptados para mapas OSM para uma melhor consistência entre os mapas
 - Alteração: Movidas as opções de menu relacionadas com a rota individual para um botão separado, na parte inferior, para um acesso mais rápido. (Só é exibido quando uma rota individual é carregada / criada.)
 

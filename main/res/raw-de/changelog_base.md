@@ -1,10 +1,11 @@
 ### Karte
-- Neu: Komplette Überarbeitung aller Cache-Symbole
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Neu: Symbole für die letzten Logs im Cache Popup anzeigen
 - Korrektur: Zeige Entfernungskreise für benutzerdefinierte Caches (wenn Kreise aktiviert sind)
 - Korrektur: Cache-Titel im Cache- / Wegpunkt-Popup sind nun sichtbarer
 - Korrektur: Warnung in der Live-Karte anzeigen, wenn der Live-Modus deaktiviert ist
-- Korrektur: Erlaube HTML in Beschreibungen von Navigationszielen
+- Fix: Allow HTML in navigation targets' description
 - Änderung: Zoom-Steuerung für OSM-Karten angepasst für eine bessere Konsistenz über Karten hinweg
 - Änderung: Die meisten Menüoptionen für individuelle Routen wurden für einen schnelleren Zugriff auf den neuen Schnellzugriffsbutton am unteren Bildschirmrand verschoben. (Wird nur angezeigt, wenn eine individuelle Route geladen / erzeugt wurde.)
 

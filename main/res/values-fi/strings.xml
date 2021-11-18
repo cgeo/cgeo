@@ -715,6 +715,7 @@
     <string name="init_select_language">Valitse kieli</string>
     <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
+    <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
     <string name="init_zoomincludingwaypoints">Zoomaus sisältää reittipisteet</string>
     <string name="init_zoomincludingwaypoints_description">Jos yksittäinen kätkö näytetään kartalla, säädetäänkö zoomaus näyttämään kaikki sen reittipisteet?</string>
@@ -1097,6 +1098,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Estä muistiinpanoista luodut reittipisteet</string>
     <string name="cache_menu_allowWaypointExtraction">Salli muistiinpanoista luodut reittipisteet</string>
     <string name="cache_personal_note_edit">Muokkaa</string>
+    <string name="cache_personal_note_storewaypoints">Lisää/päivitä reittipisteet</string>
+    <string name="cache_personal_note_removewaypoints">Poista reittipisteet</string>
     <string name="cache_personal_note_removedwaypoints">Reittipisteet poistettu</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Poistettavia reittipisteitä ei löytynyt</string>
     <string name="cache_personal_note_storewaypoints_success">Reittipisteet lisättiin henkilökohtaiseen muistiinpanoon</string>

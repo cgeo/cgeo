@@ -1,10 +1,11 @@
 ### Mapa
-- Novinka: Dokončeno přepracování všech ikon kešek
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Novinka: Zobrazit ikony pro poslední logy ve vyskakovacím okně kešky
 - Oprava: Zobrazí kruhy vzdálenosti pro uživatelem definované kešky (pokud jsou kruhy povoleny)
 - Oprava: Zviditelněn název kešky ve vyskakovacím okně kešky/trasového bodu
 - Oprava: Zobrazí varování v živé mapě, když je živý režim zakázán
-- Oprava: Povoleno HTML v popisu cílů navigace
+- Fix: Allow HTML in navigation targets' description
 - Změna: Upravené ovládání přiblížení pro mapy OSM pro lepší konzistenci napříč mapami
 - Změna: Přesun většiny možností nabídky pro individuální trasy, do samostatného tlačítka rychlého přístupu ve spodní části pro rychlejší přístup. (Zobrazuje se pouze při načítání / vytváření individuální trasy.)
 

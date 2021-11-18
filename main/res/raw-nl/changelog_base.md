@@ -1,10 +1,11 @@
 ### Kaart
-- Nieuw: Complete herziening van alle cache pictogrammen
+- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- New: Complete rework of all cache icons
 - Nieuw: Toon pictogrammen voor laatste logs in cache popup
 - Oplossing: Toon afstandscirkels voor door de gebruiker gedefinieerde caches (als cirkels zijn ingeschakeld)
 - Oplossing: Maak de titel van de cache zichtbaarder in de cache / waypoint popup
 - Oplossing: Toon waarschuwing in live kaart wanneer live modus is uitgeschakeld
-- Oplossing: Sta HTML toe in de beschrijving van navigatie-doelen
+- Fix: Allow HTML in navigation targets' description
 - Wijziging: Aangepaste zoombediening voor OSM kaarten voor betere consistentie tussen kaarten
 - Wijziging: Meest individuele route-gerelateerde menu opties verplaatst naar een aparte knop voor snelle toegang onderaan. (Alleen worden weergegeven wanneer een individuele route wordt geladen / aangemaakt.)
 
