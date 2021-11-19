@@ -1,5 +1,6 @@
 ### Kaart
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Oplossing: Bij het laden van GPX-bestanden die meerdere sporen bevatten, deze weergeven als gescheiden niet-verbonden sporen
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Nieuw: Toon pictogrammen voor laatste logs in cache popup
 - Oplossing: Toon afstandscirkels voor door de gebruiker gedefinieerde caches (als cirkels zijn ingeschakeld)
