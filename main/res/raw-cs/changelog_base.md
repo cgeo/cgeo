@@ -1,5 +1,6 @@
 ### Mapa
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Oprava: Při načítání souborů GPX obsahujících více stop se zobrazí jako samostatné, nespojené stopy
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Novinka: Zobrazit ikony pro poslední logy ve vyskakovacím okně kešky
 - Oprava: Zobrazí kruhy vzdálenosti pro uživatelem definované kešky (pokud jsou kruhy povoleny)
