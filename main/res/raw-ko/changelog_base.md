@@ -1,5 +1,6 @@
 ### 지도
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - 신규: 캐시 팝업에 마지막 로그에 대한 아이콘 표시
 - 수정: 사용자 정의 캐시에 대한 거리 원 표시(원이 활성화된 경우)
