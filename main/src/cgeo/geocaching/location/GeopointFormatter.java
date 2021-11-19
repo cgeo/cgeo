@@ -70,7 +70,13 @@ public class GeopointFormatter {
         LON_DECMINSEC,
 
         /** Example: "32U E 549996 N 5600860" */
-        UTM
+        UTM,
+
+        /** Example: N48+12.345+E11+12.345 **/
+        GEOCHECKERCOM,
+
+        /** Example: N5536498E01305095 **/
+        GEOCHECKORG
     }
 
     /**
@@ -156,6 +162,16 @@ public class GeopointFormatter {
             case UTM: {
                 return UTMPoint.latLong2UTM(gp).toString();
             }
+
+            case GEOCHECKERCOM:
+                return String.format((Locale) null, "%c%d+%02d.%03d+%c%d+%02d.%03d",
+                    gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
+                    gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
+
+            case GEOCHECKORG:
+                return String.format((Locale) null, "%c%02d%02d%03d%c%03d%02d%03d",
+                    gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
+                    gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
 
         }
         throw new IllegalStateException(); // cannot happen, if switch case is enum complete
