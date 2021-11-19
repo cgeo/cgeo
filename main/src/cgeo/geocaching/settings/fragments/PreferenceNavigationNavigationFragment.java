@@ -1,19 +1,20 @@
 package cgeo.geocaching.settings.fragments;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.apps.navi.NavigationAppFactory;
-
 import android.os.Bundle;
 
-import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import java.util.List;
+import cgeo.geocaching.R;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+import cgeo.geocaching.settings.Settings;
 
 public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_navigation_navigation, rootKey);
+
+        initNavigationMenuPreferences();
     }
 
     @Override
@@ -22,25 +23,15 @@ public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCo
         getActivity().setTitle(R.string.settings_title_navigation_menu);
     }
 
-    /**
-     * Fill the choice list for default navigation tools.
-     */
-    private void initDefaultNavigationPreferences() {
-
-        final List<NavigationAppFactory.NavigationAppsEnum> apps = NavigationAppFactory.getInstalledDefaultNavigationApps();
-
-        final CharSequence[] entries = new CharSequence[apps.size()];
-        final CharSequence[] values = new CharSequence[apps.size()];
-        for (int i = 0; i < apps.size(); ++i) {
-            entries[i] = apps.get(i).toString();
-            values[i] = String.valueOf(apps.get(i).id);
+    private void initNavigationMenuPreferences() {
+        for (final NavigationAppFactory.NavigationAppsEnum appEnum : NavigationAppFactory.NavigationAppsEnum.values()) {
+            final Preference preference = findPreference(getString(appEnum.preferenceKey));
+            if (appEnum.app.isInstalled()) {
+                preference.setEnabled(true);
+            } else {
+                preference.setSummary(R.string.settings_navigation_disabled);
+            }
         }
-
-        final ListPreference defaultNavigationTool = (ListPreference) findPreference(getString(R.string.pref_defaultNavigationTool));
-        defaultNavigationTool.setEntries(entries);
-        defaultNavigationTool.setEntryValues(values);
-        final ListPreference defaultNavigationTool2 = (ListPreference) findPreference(getString(R.string.pref_defaultNavigationTool2));
-        defaultNavigationTool2.setEntries(entries);
-        defaultNavigationTool2.setEntryValues(values);
+        //redrawScreen(R.string.preference_screen_navigation_menu);
     }
 }
