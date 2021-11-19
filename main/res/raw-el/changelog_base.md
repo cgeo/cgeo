@@ -1,5 +1,6 @@
 ### Χάρτης
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Νέα: Εμφάνιση εικονιδίων για τα τελευταία αρχεία καταγραφής στο αναδυόμενο παράθυρο κρύπτης
 - Fix: Εμφάνιση κύκλων απόστασης για κρύπτες που καθορίζονται από το χρήστη (αν οι κύκλοι είναι ενεργοποιημένοι)
