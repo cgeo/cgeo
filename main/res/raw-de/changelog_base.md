@@ -1,5 +1,6 @@
 ### Karte
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Neu: Symbole für die letzten Logs im Cache Popup anzeigen
 - Korrektur: Zeige Entfernungskreise für benutzerdefinierte Caches (wenn Kreise aktiviert sind)
