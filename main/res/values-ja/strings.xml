@@ -703,6 +703,7 @@
     <string name="init_select_language">言語の選択</string>
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
+    <string name="init_showwaypoints">ウェイポイントを表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
     <string name="init_zoomincludingwaypoints_description">1つだけキャッシュを表示している場合にすべてのウェイポイントが表示されるようにズーム</string>
@@ -1075,6 +1076,8 @@
     <string name="cache_menu_preventWaypointsFromNote">ノートからウェイポイント抽出しない</string>
     <string name="cache_menu_allowWaypointExtraction">ノートからウェイポイント抽出する</string>
     <string name="cache_personal_note_edit">編集</string>
+    <string name="cache_personal_note_storewaypoints">ウェイポイントの追加/更新</string>
+    <string name="cache_personal_note_removewaypoints">ウェイポイントを削除</string>
     <string name="cache_personal_note_removedwaypoints">ウェイポイントを削除しました</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">削除するウェイポイントが見つかりません</string>
     <string name="cache_personal_note_storewaypoints_success">パーソナルノートにウェイポイントが追加されました</string>
