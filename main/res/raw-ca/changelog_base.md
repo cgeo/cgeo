@@ -1,5 +1,6 @@
 ### Mapa
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Novetat: Mostra les icones dels darrers registres a la finestra emergent del catxé
 - Solució: Mostra cercles de distància pels catxés definits per l'usuari (si els cercles estan activats)
