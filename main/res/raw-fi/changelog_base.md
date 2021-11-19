@@ -1,5 +1,6 @@
 ### Kartta
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Uusi: Näytä viimeisten kirjausten lokikuvakkeet kätköponnahdusikkunassa
 - Korjaa: Näytä etäisyysympyrät käyttäjän määrittelemille kätköille (jos ympyrät ovat käytössä)
