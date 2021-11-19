@@ -1,5 +1,6 @@
 ### Mapa
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
+- Change: Automatically enable track display on loading a GPX track file
 - New: Complete rework of all cache icons
 - Novo: Mostra ícones para os últimos registos na janela pop-up da cache
 - Correcção: Mostra círculos de distância para caches definidas pelo utilizador (se os círculos estiverem activados)
