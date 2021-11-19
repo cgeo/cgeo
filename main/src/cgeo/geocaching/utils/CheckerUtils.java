@@ -19,7 +19,6 @@ public final class CheckerUtils {
     private static GeoChecker[] CHECKERS = {
         new GeoChecker("certitudes.org/certitude?"),
         new GeoChecker("gc-apps.com/checker/"),
-        new GeoChecker("gccounter.com/gcchecker.php?"),
         new GeoChecker("geocheck.org/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
         new GeoChecker("geochecker.com/index.php?", "&lastcoords=", GeopointFormatter.Format.GEOCHECKERCOM),
         new GeoChecker("geochecker.gps-cache.de/check.aspx?"),
