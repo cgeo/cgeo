@@ -714,7 +714,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             updateSortBar();
             refreshCurrentList();
         });
-        this.findViewById(R.id.sort_bar).setOnClickListener(v -> menu.performIdentifierAction(R.id.menu_sort, 0));
+
+        final View sortView = this.findViewById(R.id.sort_bar);
+        sortView.setOnClickListener(v -> menu.performIdentifierAction(R.id.menu_sort, 0));
+        sortView.setOnLongClickListener(v -> sortProvider.onSortTypeSelection(sortContext.getType()));
 
         ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
