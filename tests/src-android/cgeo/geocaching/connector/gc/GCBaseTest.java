@@ -20,7 +20,7 @@ public class GCBaseTest extends TestCase {
         final Set<String> geocodes = new HashSet<>();
         geocodes.add(mockedCache.getGeocode());
 
-        final SearchResult result = GCMap.searchByGeocodes(geocodes);
+        final SearchResult result = GCMap.searchByGeocodes(GCConnector.getInstance(), geocodes);
         final Geocache parsedCache = result.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_ONLY);
 
         Compare.assertCompareCaches(mockedCache, parsedCache, false);

@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.LoadFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
@@ -11,6 +10,8 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Func1;
+import cgeo.geocaching.utils.functions.Func2;
 
 import android.os.Bundle;
 import android.os.Parcel;
@@ -18,6 +19,7 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -37,18 +39,18 @@ public class SearchResult implements Parcelable {
 
     public static final String SEARCHSTATE_FINDER = "ss_finder";
 
-    private final Set<String> geocodes;
-    private final Set<String> filteredGeocodes;
-    @NonNull private StatusCode error = StatusCode.NO_ERROR;
-    private String url = "";
-    private String[] viewstates = null;
+    public static final String CON_TOTALCOUNT = "con_totalcount";
+    public static final String CON_URL = "con_url";
+    public static final String CON_ERROR = "con_error";
+
+    private final Set<String> geocodes = Collections.synchronizedSet(new HashSet<>());
+    private final Set<String> filteredGeocodes = Collections.synchronizedSet(new HashSet<>());
 
     private final Bundle searchContext = new Bundle();
-    /**
-     * Overall number of search results matching our search on geocaching.com. If this number is higher than 20, we have
-     * to fetch multiple pages to get all caches.
-     */
-    private int totalCountGC = 0;
+
+    //A bundle of bundles where connectors can store specific context values
+    private final Bundle connectorContext = new Bundle();
+
 
     public static final Parcelable.Creator<SearchResult> CREATOR = new Parcelable.Creator<SearchResult>() {
         @Override
@@ -72,9 +74,9 @@ public class SearchResult implements Parcelable {
     /**
      * Build a new empty search result with an error status.
      */
-    public SearchResult(@NonNull final StatusCode statusCode) {
+    public SearchResult(@NonNull final IConnector con, @NonNull final StatusCode statusCode) {
         this();
-        error = statusCode;
+        setError(con, statusCode);
     }
 
     /**
@@ -83,14 +85,12 @@ public class SearchResult implements Parcelable {
      * @param searchResult the original search result, which cannot be null
      */
     public SearchResult(final SearchResult searchResult) {
-        geocodes = new HashSet<>(searchResult.geocodes);
-        filteredGeocodes = new HashSet<>(searchResult.filteredGeocodes);
-        error = searchResult.error;
-        url = searchResult.url;
-        viewstates = searchResult.viewstates;
-        setTotalCountGC(searchResult.getTotalCountGC());
-        searchContext.clear();
+        geocodes.clear();
+        geocodes.addAll(searchResult.geocodes);
+        filteredGeocodes.clear();
+        filteredGeocodes.addAll(searchResult.filteredGeocodes);
         searchContext.putAll(searchResult.searchContext);
+        connectorContext.putAll(searchResult.connectorContext);
     }
 
     /**
@@ -102,11 +102,11 @@ public class SearchResult implements Parcelable {
      *            the total number of caches matching that search on geocaching.com (as we always get only the next 20
      *            from a web page)
      */
-    public SearchResult(final Collection<String> geocodes, final int totalCountGC) {
-        this.geocodes = new HashSet<>(geocodes.size());
+    public SearchResult(final IConnector con, final Collection<String> geocodes, final int totalCountGC) {
+        this.geocodes.clear();
         this.geocodes.addAll(geocodes);
-        this.filteredGeocodes = new HashSet<>();
-        this.setTotalCountGC(totalCountGC);
+        this.filteredGeocodes.clear();
+        this.setTotalCount(con, totalCountGC);
     }
 
     /**
@@ -115,26 +115,18 @@ public class SearchResult implements Parcelable {
      * @param geocodes a non-null set of geocodes
      */
     public SearchResult(final Set<String> geocodes) {
-        this(geocodes, geocodes.size());
+        this(null, geocodes, geocodes.size());
     }
 
     public SearchResult(final Parcel in) {
         final ArrayList<String> list = new ArrayList<>();
         in.readStringList(list);
-        geocodes = new HashSet<>(list);
+        geocodes.addAll(list);
         final ArrayList<String> filteredList = new ArrayList<>();
         in.readStringList(filteredList);
-        filteredGeocodes = new HashSet<>(filteredList);
-        error = (StatusCode) in.readSerializable();
-        url = in.readString();
-        final int length = in.readInt();
-        if (length >= 0) {
-            viewstates = new String[length];
-            in.readStringArray(viewstates);
-        }
-        setTotalCountGC(in.readInt());
-        searchContext.clear();
+        filteredGeocodes.addAll(filteredList);
         searchContext.putAll(in.readBundle(getClass().getClassLoader()));
+        connectorContext.putAll(in.readBundle(getClass().getClassLoader()));
     }
 
     /**
@@ -161,16 +153,8 @@ public class SearchResult implements Parcelable {
     public void writeToParcel(final Parcel out, final int flags) {
         out.writeStringArray(geocodes.toArray(new String[0]));
         out.writeStringArray(filteredGeocodes.toArray(new String[0]));
-        out.writeSerializable(error);
-        out.writeString(url);
-        if (viewstates == null) {
-            out.writeInt(-1);
-        } else {
-            out.writeInt(viewstates.length);
-            out.writeStringArray(viewstates);
-        }
-        out.writeInt(getTotalCountGC());
         out.writeBundle(searchContext);
+        out.writeBundle(connectorContext);
     }
 
     @Override
@@ -189,48 +173,90 @@ public class SearchResult implements Parcelable {
 
     @NonNull
     public StatusCode getError() {
-        return error;
+        final List<StatusCode> l = getAllFromContext(b -> StatusCode.values()[b.getInt(CON_ERROR)]);
+        for (StatusCode sc : l) {
+            if (!StatusCode.NO_ERROR.equals(sc)) {
+                return sc;
+            }
+        }
+        return StatusCode.NO_ERROR;
     }
 
-    public void setError(@NonNull final StatusCode error) {
-        this.error = error;
+    public void setError(final IConnector con, @NonNull final StatusCode error) {
+        setToContext(con, b -> b.putInt(CON_ERROR, error.ordinal()));
     }
 
     public String getUrl() {
-        return url;
+        return StringUtils.join("/", getAllFromContext(bb -> bb.getString(CON_URL)));
     }
 
-    public void setUrl(final String url) {
-        this.url = url;
+    public void setUrl(final IConnector con, final String url) {
+        setToContext(con, b -> b.putString(CON_URL, url));
     }
 
-    public String[] getViewstates() {
-        return viewstates;
+    public int getTotalCount() {
+        return reduceToContext(bb -> bb.getInt(CON_TOTALCOUNT), 0, (i1, i2) -> i1 + i2);
     }
 
-    public void setViewstates(final String[] viewstates) {
-        if (GCLogin.isEmpty(viewstates)) {
-            return;
+    public void setTotalCount(final IConnector con, final int totalCountGC) {
+        setToContext(con, b -> b.putInt(CON_TOTALCOUNT, totalCountGC));
+    }
+
+
+    public Bundle getConnectorContext(@Nullable final IConnector con) {
+        return getConnectorContext(con == null ? "null" : con.getName());
+    }
+
+    private Bundle getConnectorContext(@NonNull final String conKey) {
+        Bundle b;
+        synchronized (this.connectorContext) {
+            b = this.connectorContext.getBundle(conKey);
+            if (b == null) {
+                b = new Bundle();
+                this.connectorContext.putBundle(conKey, b);
+            }
         }
-        // lazy initialization of viewstates
-        if (this.viewstates == null) {
-            this.viewstates = new String[viewstates.length];
-        }
+        return b;
+    }
 
-        System.arraycopy(viewstates, 0, this.viewstates, 0, viewstates.length);
+    public <T> T getFromContext(@Nullable final IConnector con, final Func1<Bundle, T> getter) {
+        synchronized (this.connectorContext) {
+            final Bundle b = getConnectorContext(con);
+            return getter.call(b);
+        }
+    }
+
+    private <T> T reduceToContext(final Func1<Bundle, T> getter, final T initial, final Func2<T, T, T> reducer) {
+        T result = initial;
+        for (T v : getAllFromContext(getter)) {
+            result = reducer.call(result, v);
+        }
+        return result;
+    }
+
+    private <T> List<T> getAllFromContext(final Func1<Bundle, T> getter) {
+        final List<T> result = new ArrayList<>();
+        synchronized (this.connectorContext) {
+            for (String key : this.connectorContext.keySet()) {
+                final Bundle b = this.connectorContext.getBundle(key);
+                final T value = getter.call(b);
+                if (value != null) {
+                    result.add(value);
+                }
+            }
+        }
+        return result;
+    }
+
+    public void setToContext(@NonNull final IConnector con, final Consumer<Bundle> setter) {
+        synchronized (this.connectorContext) {
+            setter.accept(getConnectorContext(con));
+        }
     }
 
     @NonNull
     public Bundle getSearchContext() {
         return searchContext;
-    }
-
-    public int getTotalCountGC() {
-        return totalCountGC;
-    }
-
-    public void setTotalCountGC(final int totalCountGC) {
-        this.totalCountGC = totalCountGC;
     }
 
     public SearchResult putInCacheAndLoadRating() {
@@ -303,34 +329,37 @@ public class SearchResult implements Parcelable {
         }
         addGeocodes(other.geocodes);
         addFilteredGeocodes(other.filteredGeocodes);
-        if (StringUtils.isBlank(url)) {
-            url = other.url;
-        }
-        // copy the GC total search results number to be able to use "More caches" button
-        // take over the larger number in order to make "more caches" work in case of cache filters (see #10567)
-        //   (otherwise a low find count of e.g. LabCaches under 20 will lead to "no more caches" shown if it is added "first")
-        if (getTotalCountGC() < other.getTotalCountGC()) {
-            setViewstates(other.getViewstates());
-            setTotalCountGC(other.getTotalCountGC());
+        addSearchContext(other);
+        for (Geocache cache : DataStore.loadCaches(other.geocodes, LoadFlags.LOAD_CACHE_ONLY)) {
+            cache.setSearchContext(this.searchContext);
         }
 
-        addSearchContext(other);
+
+        synchronized (this.connectorContext) {
+            for (String keyOther : other.connectorContext.keySet()) {
+                getConnectorContext(keyOther).putAll(other.connectorContext.getBundle(keyOther));
+            }
+        }
     }
 
     public void addSearchContext(final SearchResult other) {
         searchContext.putAll(other.searchContext);
     }
 
-    /**
-     * execute the given connector request in parallel on all active connectors
-     *
-     * @param connectors
-     *            connectors to be considered in request
-     * @param func
-     *            connector request
-     */
-    public static <C extends IConnector> SearchResult parallelCombineActive(final Collection<C> connectors,
-                                                                            final Function<C, SearchResult> func) {
+    public static <C extends IConnector> SearchResult parallelCombineActive(
+        final Collection<C> connectors, final Function<C, SearchResult> func) {
+        return parallelCombineActive(null, connectors, func);
+    }
+
+        /**
+         * execute the given connector request in parallel on all active connectors
+         *
+         * @param initial optional initial SearchResult. If given, new results are added to this, otherwise a new one is created
+         * @param connectors connectors to be considered in request
+         * @param func connector request
+         */
+    public static <C extends IConnector> SearchResult parallelCombineActive(
+        @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
         return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {
             if (!connector.isActive()) {
                 return Maybe.empty();
@@ -343,7 +372,7 @@ public class SearchResult implements Parcelable {
                     return null;
                 }
             }).subscribeOn(AndroidRxUtils.networkScheduler);
-        }).reduce(new SearchResult(), (searchResult, searchResult2) -> {
+        }).reduce(initial == null ? new SearchResult() : initial, (searchResult, searchResult2) -> {
             searchResult.addSearchResult(searchResult2);
             return searchResult;
         }).blockingGet();

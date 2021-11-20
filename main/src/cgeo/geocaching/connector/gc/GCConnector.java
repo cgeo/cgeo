@@ -42,6 +42,8 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
@@ -90,8 +92,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     /**
      * Indicates whether voting is possible for this cache for this type of log entry
      *
-     * @param cache
-     * @param logType
+     * @param cache cache to check
+     * @param logType log type to check
      */
     @Override
     public boolean canVote(@NonNull final Geocache cache, @NonNull final LogType logType) {
@@ -101,7 +103,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     /**
      * Indicates whether voting is possible for this cache in general
      *
-     * @param cache
+     * @param cache cache to check
      */
     @Override
     public boolean supportsVoting(@NonNull final Geocache cache) {
@@ -244,16 +246,16 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
                 } else {
                     search.addGeocode(geocode);
                 }
-                search.setError(StatusCode.NO_ERROR);
+                search.setError(this, StatusCode.NO_ERROR);
                 return search;
             }
 
             Log.e("GCConnector.searchByGeocode: No data from server");
-            search.setError(StatusCode.CACHE_NOT_FOUND);
+            search.setError(this, StatusCode.CACHE_NOT_FOUND);
             return search;
         }
 
-        final SearchResult searchResult = GCParser.parseCache(page, handler);
+        final SearchResult searchResult = GCParser.parseCache(this, page, handler);
 
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCConnector.searchByGeocode: No cache parsed");
@@ -265,14 +267,14 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
-    public SearchResult searchByNextPage(final SearchResult search) {
-        return GCParser.searchByNextPage(search);
+    public SearchResult searchByNextPage(final Bundle context) {
+        return GCParser.searchByNextPage(this, context);
     }
 
     @Override
     @NonNull
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
-        return GCMap.searchByViewport(viewport);
+        return GCMap.searchByViewport(this, viewport);
     }
 
     @NonNull

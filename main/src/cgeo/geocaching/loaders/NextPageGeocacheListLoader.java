@@ -15,8 +15,8 @@ public class NextPageGeocacheListLoader extends AbstractSearchLoader {
 
     @Override
     public SearchResult runSearch() {
-        return SearchResult.parallelCombineActive(ConnectorFactory.getSearchByNextPageConnectors(),
-                connector -> connector.searchByNextPage(search));
+        return SearchResult.parallelCombineActive(search, ConnectorFactory.getSearchByNextPageConnectors(),
+                connector -> connector.searchByNextPage(search.getConnectorContext(connector)));
     }
 
 }

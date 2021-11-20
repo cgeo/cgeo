@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.CGeoTestCase;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.GCParser;
@@ -226,39 +227,30 @@ public class CgeoApplicationTest extends CGeoTestCase {
         runnable.run();
     }
 
-    /**
-     * Test {@link #searchByCoords(Geopoint)}
-     */
     @MediumTest
     public void testSearchByCoords() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByCoords(new Geopoint("N 50° 06.654 E 008° 39.777"));
+            final SearchResult search = GCParser.searchByCoords(GCConnector.getInstance(), new Geopoint("N 50° 06.654 E 008° 39.777"));
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
             assertThat(search.getGeocodes()).contains("GC1HBMY");
         });
     }
 
-    /**
-     * Test {@link #searchByOwner(String)}
-     */
     @MediumTest
     public void testSearchByOwner() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByOwner("Lineflyer");
+            final SearchResult search = GCParser.searchByOwner(GCConnector.getInstance(), "Lineflyer");
             assertThat(search).isNotNull();
             assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);
             assertThat(search.getGeocodes()).contains("GC7J99X");
         });
     }
 
-    /**
-     * Test {@link #searchByUsername(String)}
-     */
     @MediumTest
     public void testSearchByUsername() {
         withMockedFilters(() -> {
-            final SearchResult search = GCParser.searchByUsername("blafoo", null, false);
+            final SearchResult search = GCParser.searchByUsername(GCConnector.getInstance(), "blafoo", null, false);
             assertThat(search).isNotNull();
             // we cannot check for a specific geocode, as we cannot know which caches 'blafoo' has recently found.
             assertThat(search.getGeocodes().size()).isGreaterThanOrEqualTo(20);

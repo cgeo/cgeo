@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheSize;
 import cgeo.geocaching.enumerations.CacheType;
@@ -37,6 +38,7 @@ import cgeo.geocaching.utils.SynchronizedDateFormat;
 import cgeo.geocaching.utils.TextUtils;
 
 import android.net.Uri;
+import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -82,6 +84,8 @@ public final class GCParser {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
+    private static final String SEARCH_CONTEXT_VIEWSTATE = "sc_gc_viewstate";
+
     @NonNull
     private static final SynchronizedDateFormat DATE_TB_IN_1 = new SynchronizedDateFormat("EEEEE, dd MMMMM yyyy", Locale.ENGLISH); // Saturday, 28 March 2009
 
@@ -100,7 +104,7 @@ public final class GCParser {
     }
 
     @Nullable
-    private static SearchResult parseSearch(final String url, final String pageContent) {
+    private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
             return null;
@@ -109,8 +113,8 @@ public final class GCParser {
         String page = pageContent;
 
         final SearchResult searchResult = new SearchResult();
-        searchResult.setUrl(url);
-        searchResult.setViewstates(GCLogin.getViewstates(page));
+        searchResult.setUrl(con, url);
+        searchResult.setToContext(con, b -> b.putStringArray(SEARCH_CONTEXT_VIEWSTATE, GCLogin.getViewstates(pageContent)));
 
         if (!page.contains("SearchResultsTable")) {
             // there are no results. aborting here avoids a wrong error log in the next parsing step
@@ -277,7 +281,7 @@ public final class GCParser {
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (result != null) {
-                searchResult.setTotalCountGC(Integer.parseInt(result));
+                searchResult.setTotalCount(con, Integer.parseInt(result));
             }
         } catch (final NumberFormatException e) {
             Log.w("GCParser.parseSearch: Failed to parse cache count", e);
@@ -293,7 +297,7 @@ public final class GCParser {
                 final Parameters params = new Parameters(
                         "__EVENTTARGET", "",
                         "__EVENTARGUMENT", "");
-                GCLogin.putViewstates(params, searchResult.getViewstates());
+                GCLogin.putViewstates(params, searchResult.getFromContext(con, b -> b.getStringArray(SEARCH_CONTEXT_VIEWSTATE)));
                 for (final String cid : cids) {
                     params.put("CID", cid);
                 }
@@ -311,7 +315,7 @@ public final class GCParser {
 
                     if (StringUtils.contains(coordinates, "You have not agreed to the license agreement. The license agreement is required before you can start downloading GPX or LOC files from Geocaching.com")) {
                         Log.i("User has not agreed to the license agreement. Can't download .loc file.");
-                        searchResult.setError(StatusCode.UNAPPROVED_LICENSE);
+                        searchResult.setError(con, StatusCode.UNAPPROVED_LICENSE);
                         return searchResult;
                     }
 
@@ -333,11 +337,11 @@ public final class GCParser {
     }
 
     @Nullable
-    static SearchResult parseCache(final String page, final DisposableHandler handler) {
+    static SearchResult parseCache(final IConnector con, final String page, final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
         // attention: parseCacheFromText already stores implicitly through searchResult.addCache
         if (parsed.left != StatusCode.NO_ERROR) {
-            final SearchResult result = new SearchResult(parsed.left);
+            final SearchResult result = new SearchResult(con, parsed.left);
 
             if (parsed.left == StatusCode.PREMIUM_ONLY) {
                 result.addAndPutInCache(Collections.singletonList(parsed.right));
@@ -365,9 +369,9 @@ public final class GCParser {
     }
 
     @NonNull
-    static SearchResult parseAndSaveCacheFromText(@Nullable final String page, @Nullable final DisposableHandler handler) {
+    static SearchResult parseAndSaveCacheFromText(final IConnector con, @Nullable final String page, @Nullable final DisposableHandler handler) {
         final ImmutablePair<StatusCode, Geocache> parsed = parseCacheFromText(page, handler);
-        final SearchResult result = new SearchResult(parsed.left);
+        final SearchResult result = new SearchResult(con, parsed.left);
         if (parsed.left == StatusCode.NO_ERROR) {
             result.addAndPutInCache(Collections.singletonList(parsed.right));
             DataStore.saveLogs(parsed.right.getGeocode(), getLogs(parseUserToken(page), Logs.ALL).blockingIterable(), true);
@@ -827,21 +831,21 @@ public final class GCParser {
     }
 
     @Nullable
-    public static SearchResult searchByNextPage(final SearchResult search) {
-        if (search == null) {
+    public static SearchResult searchByNextPage(final IConnector con, final Bundle context) {
+        if (context == null) {
             return null;
         }
 
-        final String url = search.getUrl();
+        final String url = context.getString(SearchResult.CON_URL);
         if (StringUtils.isBlank(url)) {
             Log.e("GCParser.searchByNextPage: No url found");
-            return search;
+            return new SearchResult(con, StatusCode.UNKNOWN_ERROR);
         }
 
-        final String[] viewstates = search.getViewstates();
+        final String[] viewstates = context.getStringArray(SEARCH_CONTEXT_VIEWSTATE);
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.searchByNextPage: No viewstate given");
-            return search;
+            return new SearchResult(con, StatusCode.NO_LOGIN_INFO_STORED);
         }
 
         final Parameters params = new Parameters(
@@ -852,39 +856,32 @@ public final class GCParser {
         final String page = GCLogin.getInstance().postRequestLogged(url, params);
         if (!GCLogin.getInstance().getLoginStatus(page)) {
             Log.e("GCParser.postLogTrackable: Can not log in geocaching");
-            return search;
+            return new SearchResult(con, StatusCode.WRONG_LOGIN_DATA);
         }
 
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchByNextPage: No data from server");
-            return search;
+            return new SearchResult(con, StatusCode.CONNECTION_FAILED);
         }
 
-        final SearchResult searchResult = parseSearch(url, page);
+        final SearchResult searchResult = parseSearch(con, url, page);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByNextPage: No cache parsed");
-            return search;
+            return new SearchResult(con, StatusCode.CONNECTION_FAILED);
         }
-        searchResult.addSearchContext(search);
 
         // search results don't need to be filtered so load GCVote ratings here
         GCVote.loadRatings(new ArrayList<>(searchResult.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB)));
 
-        // save to application
-        search.setError(searchResult.getError());
-        search.setViewstates(searchResult.getViewstates());
-        for (final String geocode : searchResult.getGeocodes()) {
-            search.addGeocode(geocode);
-        }
-        return search;
+        return searchResult;
     }
 
     @Nullable
-    private static SearchResult searchByAny(final Parameters params) {
-        return searchByAny(params, null, false);
+    private static SearchResult searchByAny(final IConnector con, final Parameters params) {
+        return searchByAny(con, params, null, false);
     }
 
-    private static SearchResult searchByAny(final Parameters params, @Nullable final CacheType ct, final boolean noOwnFound) {
+    private static SearchResult searchByAny(final IConnector con, final Parameters params, @Nullable final CacheType ct, final boolean noOwnFound) {
         final String uri = "https://www.geocaching.com/seek/nearest.aspx";
 
         if (ct != null) {
@@ -904,7 +901,7 @@ public final class GCParser {
         }
 
         final String fullUri = uri + "?" + params;
-        final SearchResult searchResult = parseSearch(fullUri, page);
+        final SearchResult searchResult = parseSearch(con, fullUri, page);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByAny: No cache parsed");
             return searchResult;
@@ -917,22 +914,22 @@ public final class GCParser {
         return search;
     }
 
-    public static SearchResult searchByCoords(@NonNull final Geopoint coords) {
+    public static SearchResult searchByCoords(final IConnector con, @NonNull final Geopoint coords) {
         final Parameters params = new Parameters("lat", Double.toString(coords.getLatitude()), "lng", Double.toString(coords.getLongitude()));
-        return searchByAny(params);
+        return searchByAny(con, params);
     }
 
-    static SearchResult searchByKeyword(@NonNull final String keyword) {
+    static SearchResult searchByKeyword(final IConnector con, @NonNull final String keyword) {
         if (StringUtils.isBlank(keyword)) {
             Log.e("GCParser.searchByKeyword: No keyword given");
             return null;
         }
 
         final Parameters params = new Parameters("key", keyword);
-        return searchByAny(params);
+        return searchByAny(con, params);
     }
 
-    public static SearchResult searchByUsername(final String userName, @Nullable final CacheType ct, final boolean noOwnFound) {
+    public static SearchResult searchByUsername(final IConnector con, final String userName, @Nullable final CacheType ct, final boolean noOwnFound) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByUsername: No user name given");
             return null;
@@ -940,14 +937,14 @@ public final class GCParser {
 
         final Parameters params = new Parameters("ul", escapePlus(userName));
 
-        final SearchResult sr = searchByAny(params, ct, noOwnFound);
+        final SearchResult sr = searchByAny(con, params, ct, noOwnFound);
         if (sr != null) {
             sr.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, userName);
         }
         return sr;
     }
 
-    public static SearchResult searchByPocketQuery(final String pocketGuid) {
+    public static SearchResult searchByPocketQuery(final IConnector con, final String pocketGuid) {
         if (StringUtils.isBlank(pocketGuid)) {
             Log.e("GCParser.searchByPocket: No guid name given");
             return null;
@@ -955,17 +952,17 @@ public final class GCParser {
 
         final Parameters params = new Parameters("pq", pocketGuid);
 
-        return searchByAny(params);
+        return searchByAny(con, params);
     }
 
-    public static SearchResult searchByOwner(final String userName) {
+    public static SearchResult searchByOwner(final IConnector con, final String userName) {
         if (StringUtils.isBlank(userName)) {
             Log.e("GCParser.searchByOwner: No user name given");
             return null;
         }
 
         final Parameters params = new Parameters("u", escapePlus(userName));
-        return searchByAny(params);
+        return searchByAny(con, params);
     }
 
     /**

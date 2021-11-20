@@ -216,11 +216,11 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         try {
             cache = SuApi.searchByGeocode(geocode);
         } catch (final SuApi.CacheNotFoundException e) {
-            return new SearchResult(StatusCode.CACHE_NOT_FOUND);
+            return new SearchResult(this, StatusCode.CACHE_NOT_FOUND);
         } catch (final SuApi.NotAuthorizedException e) {
-            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+            return new SearchResult(this, StatusCode.NOT_LOGGED_IN);
         } catch (final SuApi.ConnectionErrorException e) {
-            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+            return new SearchResult(this, StatusCode.CONNECTION_FAILED_SU);
         } catch (final Exception e) {
             Log.e("SuConnector.searchByGeocode failed: ", e);
             return null;
@@ -235,12 +235,12 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         try {
             return new SearchResult(SuApi.searchByBBox(viewport, this));
         } catch (final SuApi.NotAuthorizedException e) {
-            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+            return new SearchResult(this, StatusCode.NOT_LOGGED_IN);
         } catch (final SuApi.ConnectionErrorException e) {
-            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+            return new SearchResult(this, StatusCode.CONNECTION_FAILED_SU);
         } catch (final Exception e) {
             Log.e("SuConnector.searchByViewport failed: ", e);
-            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+            return new SearchResult(this, StatusCode.UNKNOWN_ERROR);
         }
     }
 
@@ -256,12 +256,12 @@ public class SuConnector extends AbstractConnector implements ISearchByGeocode, 
         try {
             return new SearchResult(SuApi.searchByFilter(filter, this));
         } catch (final SuApi.NotAuthorizedException e) {
-            return new SearchResult(StatusCode.NOT_LOGGED_IN);
+            return new SearchResult(this, StatusCode.NOT_LOGGED_IN);
         } catch (final SuApi.ConnectionErrorException e) {
-            return new SearchResult(StatusCode.CONNECTION_FAILED_SU);
+            return new SearchResult(this, StatusCode.CONNECTION_FAILED_SU);
         } catch (final Exception e) {
             Log.e("SuConnector.searchByFilter failed: ", e);
-            return new SearchResult(StatusCode.UNKNOWN_ERROR);
+            return new SearchResult(this, StatusCode.UNKNOWN_ERROR);
         }
     }
 

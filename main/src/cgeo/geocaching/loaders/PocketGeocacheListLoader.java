@@ -1,6 +1,7 @@
 package cgeo.geocaching.loaders;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCParser;
 import cgeo.geocaching.settings.Settings;
 
@@ -18,7 +19,7 @@ public class PocketGeocacheListLoader extends AbstractSearchLoader {
     public SearchResult runSearch() {
 
         if (Settings.isGCConnectorActive()) {
-            return GCParser.searchByPocketQuery(guid);
+            return GCParser.searchByPocketQuery(GCConnector.getInstance(), guid);
         }
 
         return new SearchResult();

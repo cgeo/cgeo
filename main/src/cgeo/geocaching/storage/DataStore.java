@@ -4586,7 +4586,7 @@ public class DataStore {
     @NonNull
     public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final int listId, final GeocacheFilter filter, final CacheComparator sort, final boolean sortInverse, final int limit) {
         final Set<String> geocodes = loadBatchOfStoredGeocodes(coords, listId, filter, sort, sortInverse, limit);
-        return new SearchResult(geocodes, getAllStoredCachesCount(listId));
+        return new SearchResult(null, geocodes, getAllStoredCachesCount(listId));
     }
 
     public static boolean saveWaypoint(final int id, final String geocode, final Waypoint waypoint) {
