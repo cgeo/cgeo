@@ -15,6 +15,7 @@ import cgeo.geocaching.storage.extension.PendingDownload;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Log;
@@ -312,7 +313,7 @@ public class DownloaderUtils {
                                         .setAllowedOverMetered(allowMeteredNetwork)
                                         .setAllowedOverRoaming(allowMeteredNetwork);
                                     Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
-                                    PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id);
+                                    AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
                                 }
                                 ActivityMixin.showShortToast(activity, R.string.download_started);
                             } else {
