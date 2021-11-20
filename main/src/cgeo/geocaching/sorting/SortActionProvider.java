@@ -72,7 +72,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     @Override
     public boolean onMenuItemClick(final MenuItem item) {
         final GeocacheSortContext.SortType selected = GeocacheSortContext.SortType.values()[item.getItemId()];
-        onClickListener.call(selected);
+        onSortTypeSelection(selected);
         return true;
     }
 
@@ -80,4 +80,8 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         this.onClickListener = onClickListener;
     }
 
+    public boolean onSortTypeSelection(final GeocacheSortContext.SortType type) {
+        onClickListener.call(type);
+        return true;
+    }
  }
