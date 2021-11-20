@@ -13,12 +13,16 @@ import static cgeo.geocaching.utils.SettingsUtils.getType;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.text.Editable;
 import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
+import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -27,6 +31,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -47,9 +52,12 @@ import org.xmlpull.v1.XmlPullParserException;
 public class ViewSettingsActivity extends AbstractActivity {
 
     private ArrayAdapter<KeyValue> debugAdapter;
-    private ArrayList<KeyValue> items;
+    private ArrayList<KeyValue> filteredItems;
+    private ArrayList<KeyValue> allItems;
     private SharedPreferences prefs;
     private boolean editMode = false;
+    private boolean searchMode = false;
+    private TextWatcher searchWatcher = null;
 
     private static class KeyValue {
         public final String key;
@@ -68,8 +76,15 @@ public class ViewSettingsActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setTheme();
         setTitle(getString(R.string.view_settings));
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            ab.setCustomView(R.layout.view_settings_toolbar);
+            ab.setDisplayShowCustomEnabled(true);
+            final View v = ab.getCustomView();
+            ((TextView) v.findViewById(R.id.title)).setText(R.string.view_settings);
+        }
 
-        items = new ArrayList<>();
+        allItems = new ArrayList<>();
         prefs = getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
         final Map<String, ?> keys = prefs.getAll();
         for (Map.Entry<String, ?> entry : keys.entrySet()) {
@@ -77,10 +92,12 @@ public class ViewSettingsActivity extends AbstractActivity {
             final String key = entry.getKey();
             final SettingsUtils.SettingsType type = getType(value);
             if (value != null) { // should not happen, but...
-                items.add(new KeyValue(key, value.toString(), type));
+                allItems.add(new KeyValue(key, value.toString(), type));
             }
         }
-        Collections.sort(items, (o1, o2) -> o1.key.compareTo(o2.key));
+        Collections.sort(allItems, (o1, o2) -> o1.key.compareTo(o2.key));
+        filteredItems = new ArrayList<>();
+        filteredItems.addAll(allItems);
 
         debugAdapter = new SettingsAdapter(this);
         final ListView list = new ListView(this);
@@ -96,13 +113,13 @@ public class ViewSettingsActivity extends AbstractActivity {
         private final HashSet<String> sensitiveKeys = Settings.getSensitivePreferenceKeys(getContext());
 
         SettingsAdapter(final Activity activity) {
-            super(activity, 0, items);
+            super(activity, 0, filteredItems);
             buildFastScrollIndex();
         }
 
         private void buildFastScrollIndex() {
             mapFirstPosition = new LinkedHashMap<>();
-            for (int x = 0; x < items.size(); x++) {
+            for (int x = 0; x < filteredItems.size(); x++) {
                 final String comparable = getComparable(x);
                 if (!mapFirstPosition.containsKey(comparable)) {
                     mapFirstPosition.put(comparable, x);
@@ -118,6 +135,42 @@ public class ViewSettingsActivity extends AbstractActivity {
             }
         }
 
+        @Override
+        @NonNull
+        public Filter getFilter() {
+            return new Filter() {
+
+                @SuppressWarnings("unchecked")
+                @Override
+                protected void publishResults(final CharSequence constraint, final FilterResults results) {
+                    filteredItems.clear();
+                    filteredItems.addAll((ArrayList<KeyValue>) results.values);
+                    notifyDataSetChanged();
+                }
+
+                @Override
+                protected FilterResults performFiltering(final CharSequence constraint) {
+                    ArrayList<KeyValue> filtered = new ArrayList<>();
+                    if (StringUtils.isBlank(constraint)) {
+                        filtered = allItems;
+                    } else {
+                        final String check = constraint.toString().toLowerCase().trim();
+                        final int max = allItems.size();
+                        for (int i = 0; i < max; i++) {
+                            final KeyValue data = allItems.get(i);
+                            if (StringUtils.contains(data.key, check) || StringUtils.contains(data.value, check)) {
+                                filtered.add(data);
+                            }
+                        }
+                    }
+                    final FilterResults results = new FilterResults();
+                    results.count = filtered.size();
+                    results.values = filtered;
+                    return results;
+                }
+            };
+        }
+
         @NonNull
         public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
             View v = convertView;
@@ -125,7 +178,7 @@ public class ViewSettingsActivity extends AbstractActivity {
                 v = getLayoutInflater().inflate(R.layout.twotexts_twobuttons_item, parent, false);
             }
 
-            final KeyValue keyValue = items.get(position);
+            final KeyValue keyValue = filteredItems.get(position);
             ((TextView) v.findViewById(R.id.title)).setText(keyValue.key);
             ((TextView) v.findViewById(R.id.detail)).setText(sensitiveKeys.contains(keyValue.key) ? "******" : keyValue.value);
 
@@ -159,7 +212,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         @NonNull
         private String getComparable(final int position) {
             try {
-                return items.get(position).key.substring(0, 1).toUpperCase(Locale.US);
+                return filteredItems.get(position).key.substring(0, 1).toUpperCase(Locale.US);
             } catch (NullPointerException e) {
                 return " ";
             }
@@ -173,7 +226,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     }
 
     private void deleteItem(final int position) {
-        final KeyValue keyValue = items.get(position);
+        final KeyValue keyValue = filteredItems.get(position);
         final String key = keyValue.key;
         SimpleDialog.of(this).setTitle(R.string.delete_setting).setMessage(R.string.delete_setting_warning, key).confirm((dialog, which) -> {
             final SharedPreferences.Editor editor = prefs.edit();
@@ -184,7 +237,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     }
 
     private void editItem(final int position) {
-        final KeyValue keyValue = items.get(position);
+        final KeyValue keyValue = filteredItems.get(position);
         final String key = keyValue.key;
         final SettingsUtils.SettingsType type = keyValue.type;
 
@@ -263,8 +316,8 @@ public class ViewSettingsActivity extends AbstractActivity {
     }
 
     private int findItem(final String key) {
-        for (int i = 0; i < items.size(); i++) {
-            if (StringUtils.equals(items.get(i).key, key)) {
+        for (int i = 0; i < filteredItems.size(); i++) {
+            if (StringUtils.equals(filteredItems.get(i).key, key)) {
                 return i;
             }
         }
@@ -273,13 +326,47 @@ public class ViewSettingsActivity extends AbstractActivity {
 
     // position at which a new item would have to be inserted
     private int findPosition(final String key) {
-        final int size = items.size();
+        final int size = filteredItems.size();
         for (int i = 0; i < size; i++) {
-            if (items.get(i).key.compareTo(key) >= 0) {
+            if (filteredItems.get(i).key.compareTo(key) >= 0) {
                 return i;
             }
         }
         return size;
+    }
+
+    private void toggleSearch() {
+        final ActionBar ab = getSupportActionBar();
+        if (ab != null) {
+            searchMode = !searchMode;
+            invalidateOptionsMenuCompatible();
+
+            final View v = ab.getCustomView();
+            final EditText et = v.findViewById(R.id.filter);
+            if (searchMode) {
+                et.setVisibility(View.VISIBLE);
+                et.requestFocus();
+                searchWatcher = new TextWatcher() {
+                    @Override
+                    public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+                        // nothing to do
+                    }
+                    @Override
+                    public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                        debugAdapter.getFilter().filter(s);
+                    }
+                    @Override
+                    public void afterTextChanged(final Editable s) {
+                        // nothing to do
+                    }
+                };
+                et.addTextChangedListener(searchWatcher);
+            } else {
+                et.setVisibility(View.GONE);
+                et.removeTextChangedListener(searchWatcher);
+                debugAdapter.getFilter().filter("");
+            }
+        }
     }
 
     @Override
@@ -291,9 +378,17 @@ public class ViewSettingsActivity extends AbstractActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+        menu.findItem(R.id.menu_gosearch).setIcon(searchMode ? R.drawable.ic_menu_search_off : R.drawable.ic_menu_search);
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
-        if (itemId == R.id.view_settings_edit && !editMode) {
+        if (itemId == R.id.menu_gosearch) {
+            toggleSearch();
+        } else if (itemId == R.id.view_settings_edit && !editMode) {
             SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
                 editMode = true;
                 invalidateOptionsMenu();
