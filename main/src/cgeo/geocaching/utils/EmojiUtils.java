@@ -57,6 +57,10 @@ public class EmojiUtils {
     private static final int CUSTOM_SET_SIZE_PER_OPACITY = COLOR_VALUES * COLOR_VALUES * COLOR_VALUES;
     private static final int CUSTOM_SET_SIZE = CUSTOM_SET_SIZE_PER_OPACITY * OPACITY_VALUES;
 
+    // internal consts for plain numbers
+    private static final int NUMBER_START = 0x30;
+    private static final int NUMBER_END = 0x39;
+
     // Unicode custom glyph area needed/supported by this class
     private static final int CUSTOM_ICONS_START = 0xe000;
     private static final int CUSTOM_ICONS_END = CUSTOM_ICONS_START + CUSTOM_SET_SIZE - 1; // max. possible value by Unicode definition: 0xf8ff;
@@ -90,7 +94,8 @@ public class EmojiUtils {
             /* warning */       0x26a0, 0x26d4, 0x1f6ab, 0x1f6b3, 0x1f6d1, 0x2622,
             /* av-symbol */     0x1f505, 0x1f506,
             /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757,
-            /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3
+            /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3,
+            /* numbers */       NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
         }),
         // category custom symbols - will be filled dynamically below; has to be at position CUSTOM_GLYPHS_ID within EmojiSet[]
         new EmojiSet(CUSTOM_ICONS_START_CIRCLES + 18 + CUSTOM_SET_SIZE_PER_OPACITY, new int[CUSTOM_SET_SIZE_PER_OPACITY]),    // "18" to pick red circle instead of black
@@ -407,7 +412,12 @@ public class EmojiUtils {
         } else {
             final String text = getEmojiAsString(emoji);
             final TextPaint tPaint = new TextPaint();
-            tPaint.setTextSize(paint.fontsize);
+            if (emoji > NUMBER_END || emoji < NUMBER_START) {
+                tPaint.setTextSize(paint.fontsize);
+            } else {
+                // increase display size of numbers
+                tPaint.setTextSize(paint.fontsize * 1.4f);
+            }
             final StaticLayout lsLayout = new StaticLayout(text, tPaint, paint.availableSize, Layout.Alignment.ALIGN_CENTER, 1, 0, false);
             canvas.translate((int) ((paint.bitmapDimensions.first - lsLayout.getWidth()) / 2), (int) ((paint.bitmapDimensions.second - lsLayout.getHeight()) / 2) - paint.offsetTop);
             lsLayout.draw(canvas);
