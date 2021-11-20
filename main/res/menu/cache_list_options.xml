@@ -91,6 +91,10 @@
                 android:title="@string/caches_clear_offlinelogs"
                 android:enabled="false"
                 app:showAsAction="never|withText"/>
+            <item
+                android:id="@+id/menu_show_attributes"
+                android:title="@string/caches_show_attributes"
+                app:showAsAction="never"/>
             <item android:id="@+id/menu_set_cache_icon"
                 android:title="@string/caches_set_cache_icon"
                 android:enabled="false"

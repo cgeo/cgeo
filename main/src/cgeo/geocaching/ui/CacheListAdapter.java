@@ -3,6 +3,7 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CacheslistItemBinding;
+import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
@@ -13,6 +14,7 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.GeocacheSortContext;
 import cgeo.geocaching.sorting.GlobalGPSDistanceComparator;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -21,8 +23,10 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
+import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -30,10 +34,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
+import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
@@ -43,6 +50,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -237,6 +245,69 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             }
         }
         notifyDataSetChanged();
+    }
+
+    public void showAttributes() {
+        // collect attributes and counters
+        final Map<String, Integer> attributes = new HashMap<>();
+        final int max = list.size();
+        for (int i = 0; i < max; i++) {
+            final Geocache cache = list.get(i);
+            for (String attr : cache.getAttributes()) {
+                final Integer count = attributes.get(attr);
+                if (count == null) {
+                    attributes.put(attr, 1);
+                } else {
+                    attributes.put(attr, count + 1);
+                }
+            }
+        }
+
+        // display result
+        final ArrayList<Pair<String, Integer>> attrlist = new ArrayList<>();
+        for (Map.Entry<String, Integer> entry : attributes.entrySet()) {
+            attrlist.add(new Pair<>(entry.getKey(), entry.getValue()));
+        }
+
+        final Context context = getContext();
+        final AlertDialog.Builder alertDialog = Dialogs.newBuilder(context);
+        final View convertView = (View) LayoutInflater.from(context).inflate(R.layout.generic_listview, null);
+        alertDialog.setView(convertView);
+        alertDialog.setTitle(R.string.cache_filter_attributes);
+        final ListView lv = (ListView) convertView.findViewById(R.id.listView1);
+        final AttributeAdapter adapter = new AttributeAdapter(context, attrlist);
+        lv.setAdapter(adapter);
+        alertDialog.show();
+    }
+
+
+    private static class AttributeAdapter extends ArrayAdapter<Pair<String, Integer>> {
+
+        private final ArrayList<Pair<String, Integer>> objects;
+
+        AttributeAdapter(final Context context, final ArrayList<Pair<String, Integer>> objects) {
+            super(context, R.layout.cachelist_attributeoverview, objects);
+            this.objects = objects;
+        }
+
+        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+
+            View v = convertView;
+            if (v == null) {
+                final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                v = inflater.inflate(R.layout.cachelist_attributeoverview, null);
+            }
+
+            final Pair<String, Integer> i = objects.get(position);
+            if (i != null) {
+                final CacheAttribute attr = CacheAttribute.getByName(i.first);
+                assert attr != null;
+                ((ImageView) v.findViewById(R.id.attribute_icon)).setImageResource(attr.drawableId);
+                ((TextView) v.findViewById(R.id.attribute_counter)).setText(i.second.toString()); // boxing needed to use value as Integer, not as resource id
+                ((TextView) v.findViewById(R.id.attribute_description)).setText(attr.stringIdYes);
+            }
+            return v;
+        }
     }
 
     public void forceSort() {

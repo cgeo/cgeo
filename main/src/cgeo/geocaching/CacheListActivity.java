@@ -982,6 +982,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_clear_offline_logs) {
             clearOfflineLogs();
             invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_show_attributes) {
+            adapter.showAttributes();
         } else if (menuItem == R.id.menu_cache_list_app) {
             if (cacheToShow()) {
                 CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList), this, getFilteredSearch());
