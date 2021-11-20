@@ -59,7 +59,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
      */
     private static final Pattern PATTERN_GK_CODE = Pattern.compile("GK[0-9A-F]{4,}");
     private static final Pattern PATTERN_GK_CODE_EXTENDED = Pattern.compile("(GK[0-9A-F]{4,})|([1-9A-NP-Z]{6})");
-    private static final String HOST = "geokrety.org";
+    private static final String HOST = "new-theme.staging.geokrety.org";
     public static final String URL = "https://" + HOST;
     private static final String URLPROXY = "https://api." + HOST;
 
@@ -286,6 +286,11 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         if (StringUtils.isNumeric(gkId)) {
             return geocode(Integer.parseInt(gkId));
         }
+
+        // TODO: https://geokrety.org/<lang>/geokrety/GKB65C
+        // GKv2 aka `new-theme` url format
+        // See https://new-theme.staging.geokrety.org/
+
         // https://api.geokrety.org/gk/38545
         // https://api.geokrety.org/gk/38545/details
         String gkapiId = StringUtils.substringAfterLast(url, "api.geokrety.org/gk/");

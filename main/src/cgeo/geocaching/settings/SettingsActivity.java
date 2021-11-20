@@ -299,7 +299,7 @@ public class SettingsActivity extends PreferenceActivity implements Preference.O
         getPreference(R.string.preference_screen_gcvote).setSummary(getServiceSummary(Settings.isRatingWanted()));
 
         getPreference(R.string.pref_connectorGeokretyActive).setOnPreferenceChangeListener(this);
-        setWebsite(R.string.pref_fakekey_geokrety_website, "https://geokrety.org");
+        setWebsite(R.string.pref_fakekey_geokrety_website, "https://new-theme.staging.geokrety.org");
         setWebsite(R.string.pref_fakekey_geokretymap_website, "https://geokretymap.org");
         getPreference(R.string.preference_screen_geokrety).setSummary(getServiceSummary(Settings.isGeokretyConnectorActive()));
 
