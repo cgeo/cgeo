@@ -38,7 +38,7 @@ public class TrackableTest extends TestCase {
 
     public static void testGeokretUrl() {
         final Trackable geokret = createTrackable("GK82A2");
-        assertThat(geokret.getUrl()).isEqualTo("https://geokrety.org/konkret.php?id=33442");
+        assertThat(geokret.getUrl()).isEqualTo("https://new-theme.staging.geokrety.org/konkret.php?id=33442");
     }
 
     public static void testLoggable() {
