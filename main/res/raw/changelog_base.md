@@ -25,4 +25,5 @@
 ### Other
 - Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
 - New: Force-delete caches marked as "to-be-deleted" when using maintenance function
+- New: Make Settings => View Settings filterable
 - Change: Always use hardware acceleration (removed setting and old phone model check)
