@@ -715,6 +715,7 @@
     <string name="init_select_language">Sélectionner la langue</string>
     <string name="init_summary_select_language">Sélectionnez la langue de l\'application (nécessite un redémarrage)\n</string>
     <string name="init_use_default_language">Utiliser la langue par défaut</string>
+    <string name="init_showwaypoints">Afficher les points de passage</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points de passage sont affichés en plus sur la carte.</string>
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
@@ -732,6 +733,8 @@
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_summary_useInternalRouting">Utiliser le routage interne de c:geo pour pouvoir utiliser le téléchargement automatique des données de routage et d\'autres fonctions</string>
+    <string name="init_bigSmileysOnMap">Grands icônes</string>
+    <string name="init_summary_bigSmileysOnMap">Si activé, les icônes comme « smiley trouvé » seront affichés en grande taille sur la carte à la place de l\'icône type de cache (nécessite un redémarrage).</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
@@ -1095,6 +1098,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Empêcher les points de passage depuis la note</string>
     <string name="cache_menu_allowWaypointExtraction">Autoriser les points de passage depuis la note</string>
     <string name="cache_personal_note_edit">Modifier</string>
+    <string name="cache_personal_note_storewaypoints">Ajouter / Mettre à jour les points de passage</string>
+    <string name="cache_personal_note_removewaypoints">Supprimer les points de passage</string>
     <string name="cache_personal_note_removedwaypoints">Points de passage supprimés</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Aucun point de passage à supprimer</string>
     <string name="cache_personal_note_storewaypoints_success">Les points de passage ont été ajoutés à la note personnelle</string>
