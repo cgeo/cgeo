@@ -27,7 +27,6 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.log.OfflineLogEntry;
 import cgeo.geocaching.log.ReportProblemType;
-import cgeo.geocaching.models.CacheVariables;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Route;
@@ -54,6 +53,7 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
+import cgeo.geocaching.utils.calc.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;
@@ -3024,28 +3024,29 @@ public class DataStore {
 
     /** method should solely be used by class {@Link CacheVariables} */
     @NonNull
-    public static List<CacheVariables.CacheVariableDbRow> loadVariables(final String geocode) {
+    public static List<VariableList.VariableEntry> loadVariables(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             return Collections.emptyList();
         }
 
-        return queryToColl(dbTableVariables, new String[]{"_id", "varname", "varorder", "formula"},
-            "geocode = ?", new String[]{geocode}, null, null, new ArrayList<CacheVariables.CacheVariableDbRow>(),
-            c -> new CacheVariables.CacheVariableDbRow(
-                c.getLong(0), c.getString(1), c.getInt(2), c.getString(3)));
+        return queryToColl(dbTableVariables, new String[]{"_id", "varname", "formula"},
+            "geocode = ?", new String[]{geocode}, "varorder", null, new ArrayList<VariableList.VariableEntry>(),
+            c -> new VariableList.VariableEntry(
+                c.getLong(0), c.getString(1), c.getString(2)));
     }
 
     /** method should solely be used by class {@Link CacheVariables} */
-    public static void upsertVariables(final String geocode, final List<CacheVariables.CacheVariableDbRow> variables) {
+    public static void upsertVariables(final String geocode, final List<VariableList.VariableEntry> variables) {
         init();
         database.beginTransaction();
         try {
             final Set<Long> idsToRemain = new HashSet<>();
-            for (CacheVariables.CacheVariableDbRow row : variables) {
+            int varidx = 0;
+            for (VariableList.VariableEntry row : variables) {
                 final ContentValues cv = new ContentValues();
                 cv.put("geocode", geocode);
                 cv.put("varname", row.varname);
-                cv.put("varorder", row.varorder);
+                cv.put("varorder", varidx++);
                 cv.put("formula", row.formula);
                 final boolean updated = row.id >= 0 &&
                     database.update(dbTableVariables, cv, "geocode = ? and _id = ?", new String[]{geocode, "" + row.id}) > 0;

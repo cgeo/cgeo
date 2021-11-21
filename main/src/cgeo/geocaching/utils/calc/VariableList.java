@@ -1,9 +1,6 @@
-package cgeo.geocaching.models;
+package cgeo.geocaching.utils.calc;
 
-import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.calc.CalculatorMap;
-import cgeo.geocaching.utils.calc.Value;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,47 +17,26 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 /** Stores cache variables including view state (e.g. ordering). Also handles persistence (load-from/store-to DB) */
-public class CacheVariables {
+public class VariableList {
 
     private static final char INVISIBLE_VAR_PREFIX = '_';
-
-    private final String geocode;
-    private final boolean doPersist;
-
 
     private final CalculatorMap calculatorMap = new CalculatorMap();
     private final List<String> variableList = new ArrayList<>();
     private final Map<String, Long> variablesSet = new HashMap<>();
 
-    private boolean hasUnsavedChanges = false;
+    private boolean wasModified = false;
 
-    public static class CacheVariableDbRow {
+    public static class VariableEntry {
         public final long id;
         public final String varname;
-        public final int varorder;
         public final String formula;
 
-        public CacheVariableDbRow(final long id, final String varname, final int varorder, final String formula) {
+        public VariableEntry(final long id, final String varname, final String formula) {
             this.id = id;
             this.varname = varname;
-            this.varorder = varorder;
             this.formula = formula;
         }
-    }
-
-    public CacheVariables(final String geocode) {
-        this(geocode, true);
-    }
-
-    /** Constructor for usage in JUNit-tests (to prevent actual persisting to DB) */
-    protected CacheVariables(@NonNull final String geocode, final boolean doPersist) {
-        this.geocode = geocode;
-        this.doPersist = doPersist;
-        loadState();
-    }
-
-    public String getGeocode() {
-        return geocode;
     }
 
     @Nullable
@@ -72,6 +48,14 @@ public class CacheVariables {
     @Nullable
     public CalculatorMap.CalculatorState getState(final String var) {
         return calculatorMap.get(var);
+    }
+
+    public int size() {
+        return variableList.size();
+    }
+
+    public boolean isEmpty() {
+        return size() == 0;
     }
 
     public List<String> getVariableList() {
@@ -89,7 +73,7 @@ public class CacheVariables {
         calculatorMap.clear();
         variableList.clear();
         variablesSet.clear();
-        hasUnsavedChanges = true;
+        wasModified = true;
     }
 
     /**
@@ -110,17 +94,18 @@ public class CacheVariables {
         calculatorMap.put(varname, formula);
         variableList.add(pos, varname);
         variablesSet.put(varname, null);
-        hasUnsavedChanges = true;
+        wasModified = true;
         return varname;
     }
 
     /** returns true if there actually was a change (var is contained and formula is different), false otherwise */
     public boolean changeVariable(final String var, final String formula) {
-        if (!variablesSet.containsKey(var) || Objects.equals(calculatorMap.get(var).getFormula(), formula)) {
+        if (!variablesSet.containsKey(var) ||
+            Objects.equals(Objects.requireNonNull(calculatorMap.get(var)).getFormula(), formula)) {
             return false;
         }
         calculatorMap.put(var, formula);
-        hasUnsavedChanges = true;
+        wasModified = true;
         return true;
     }
 
@@ -137,13 +122,13 @@ public class CacheVariables {
         variableList.remove(idx);
         calculatorMap.remove(var);
         variablesSet.remove(var);
-        hasUnsavedChanges = true;
+        wasModified = true;
         return idx;
     }
 
     public void sortVariables(final Comparator<String> comp) {
         Collections.sort(variableList, comp);
-        hasUnsavedChanges = true;
+        wasModified = true;
     }
 
 
@@ -156,39 +141,47 @@ public class CacheVariables {
         return varsMissing;
     }
 
-    private void loadState() {
+    public void setEntries(final List<VariableEntry> vars) {
         clear();
-        if (doPersist) {
-            final List<CacheVariableDbRow> rows = DataStore.loadVariables(this.geocode);
-            Collections.sort(rows, (r1, r2) -> Integer.compare(r1.varorder, r2.varorder));
-            for (CacheVariableDbRow row : rows) {
-                if (this.variablesSet.containsKey(row.varname)) {
-                    //must be a database error, ignore duplicate variable
-                    continue;
-                }
-                calculatorMap.put(row.varname, row.formula);
-                this.variableList.add(row.varname);
-                this.variablesSet.put(row.varname, row.id);
+        for (VariableEntry entry : vars) {
+            if (this.variablesSet.containsKey(entry.varname)) {
+                //must be a database error, ignore duplicate variable
+                continue;
             }
+            calculatorMap.put(entry.varname, entry.formula);
+            this.variableList.add(entry.varname);
+            this.variablesSet.put(entry.varname, entry.id);
         }
-        hasUnsavedChanges = false;
+        wasModified = false;
     }
 
-    public boolean hasUnsavedChanges() {
-        return hasUnsavedChanges;
+    public boolean wasModified() {
+        return wasModified;
     }
 
-    public void saveState() {
-        final List<CacheVariableDbRow> rows = new ArrayList<>();
-        int idx = 0;
+    public void resetModified() {
+        wasModified = false;
+    }
+
+    public List<VariableEntry> getEntries() {
+        final List<VariableEntry> rows = new ArrayList<>();
         for (String v : this.variableList) {
-            rows.add(new CacheVariableDbRow(
+            rows.add(new VariableEntry(
                 this.variablesSet.get(v) == null ? -1 : Objects.requireNonNull(this.variablesSet.get(v)),
-                v, idx++, Objects.requireNonNull(this.calculatorMap.get(v)).getFormula()));
+                v, Objects.requireNonNull(this.calculatorMap.get(v)).getFormula()));
         }
-        if (doPersist) {
-            DataStore.upsertVariables(this.geocode, rows);
+        return rows;
+    }
+
+    @Nullable
+    public Character getLowestMissingChar() {
+        if (!getVariableSet().contains("A")) {
+            return 'A';
         }
-        hasUnsavedChanges = false;
+        int lowestContChar = 'A';
+        while (lowestContChar < 'Z' && getVariableSet().contains("" + (char) (lowestContChar + 1))) {
+            lowestContChar++;
+        }
+        return lowestContChar == 'Z' ? null : (char) (lowestContChar + 1);
     }
 }

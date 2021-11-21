@@ -2462,7 +2462,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final int waypointCount = cache == null ? 0 : cache.getWaypoints().size();
             return String.format(getString(R.string.waypoints_tabtitle), waypointCount);
         } else if (pageId == Page.VARIABLES.id) {
-            final int varCount = cache == null ? 0 : cache.getVariables().getVariableList().size();
+            final int varCount = cache == null ? 0 : cache.getVariables().size();
             return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         }
         return this.getString(Page.find(pageId).titleStringId);
