@@ -5,7 +5,8 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:descendantFocusability="blocksDescendants">
-    <TextView android:id="@android:id/title"
+    <com.google.android.material.button.MaterialButton
+        android:id="@android:id/title"
         style="@style/button_full"
         android:layout_marginLeft="18dp"
         android:layout_marginRight="18dp"
