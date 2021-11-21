@@ -22,7 +22,9 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_map, rootKey);
-        prefMapSources = (ListPreference) findPreference(getString(R.string.pref_mapsource));
+        prefMapSources = findPreference(getString(R.string.pref_mapsource));
+
+        initMapSourcePreference();
     }
 
     @Override
