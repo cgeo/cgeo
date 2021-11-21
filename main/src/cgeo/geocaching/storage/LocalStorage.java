@@ -46,6 +46,7 @@ public final class LocalStorage {
     private static final String GEOCACHE_DATA_DIR_NAME = "GeocacheData";
     private static final String OFFLINE_LOG_IMAGES_DIR_NAME = "OfflineLogImages";
     private static final String MAP_THEME_INTERNAL_DIR_NAME = "MapThemeData";
+    private static final String MAPSFORGE_SVG_CACHE_DIR_NAME = "mapsforge-svg-cache";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     //Legacy directory names which should NO LONGER BE OF USE
@@ -60,7 +61,7 @@ public final class LocalStorage {
     private static File externalPrivateCgeoDirectory;
     private static File externalPublicCgeoDirectory;
 
-    private static final int LOCALSTORAGE_VERSION = 2;
+    private static final int LOCALSTORAGE_VERSION = 3;
 
 
     private LocalStorage() {
@@ -189,6 +190,13 @@ public final class LocalStorage {
     @NonNull
     public static File getMapThemeInternalSyncDir() {
         final File dir =  new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
+        dir.mkdirs();
+        return dir;
+    }
+
+    @NonNull
+    public static File getMapsforgeSvgCacheDir() {
+        final File dir =  new File(getInternalCgeoDirectory(), MAPSFORGE_SVG_CACHE_DIR_NAME);
         dir.mkdirs();
         return dir;
     }
@@ -457,6 +465,13 @@ public final class LocalStorage {
             if (currentVersion < 2) {
                 setMigratedVersion(2, "InternalThemeDirMigration");
                 FileUtils.deleteDirectory(new File(getGeocacheDataDirectory("shared"), MAP_THEME_INTERNAL_DIR_NAME));
+            }
+
+            //delete theme files from outdated internal theme file dir
+            if (currentVersion < 3) {
+                setMigratedVersion(3, "Move Mapsforge SVG Cache Dir");
+                FileUtils.deleteFilesWithPrefix(getInternalCgeoDirectory(), "svg-");
+                FileUtils.deleteFilesWithPrefix(new File(getInternalCgeoDirectory(), "files"), "svg-");
             }
 
             return 0;
