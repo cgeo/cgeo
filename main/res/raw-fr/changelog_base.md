@@ -1,12 +1,12 @@
 ### Carte
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- Change: Automatically enable track display on loading a GPX track file
-- New: Complete rework of all cache icons
+- Correction : Lors du chargement de fichiers GPX contenant plusieurs traces, les afficher en tant que traces indépendantes
+- Modification : Activer automatiquement l'affichage du parcours lors du chargement d'un fichier de suivi GPX
+- Nouveau : Refonte complète de toutes les icônes des caches
 - Nouveau: Affichage des icônes des derniers logs dans la fenêtre pop-up de cache
 - Correction : Affichage des cercles de distance pour les caches personnalisées (si l'affichage des cercles est activé)
 - Correction : Rendre le titre de la cache plus visible dans la popup des caches / waypoints
 - Correction : Affichage d'un avertissement dans la carte temps réel lorsque le mode temps-réel est désactivé
-- Fix: Allow HTML in navigation targets' description
+- Correction : Autoriser le HTML dans la description des cibles de navigation
 - Changement : Adaptation des contrôles de zoom pour les cartes OSM pour une meilleure cohérence entre les cartes
 - Changement: Déplacement de la plupart des options de menu relatives aux routes individuelles vers un bouton d'accès rapide séparé en bas pour un accès plus rapide. (Ne s'affiche que lorsqu'un itinéraire individuel est chargé/créé.)
 
