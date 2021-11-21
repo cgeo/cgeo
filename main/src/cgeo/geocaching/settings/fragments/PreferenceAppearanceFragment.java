@@ -4,6 +4,7 @@ import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
@@ -11,6 +12,8 @@ import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
     @Override
@@ -40,6 +43,12 @@ public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
 
         languagePref.setEntries(entries);
         languagePref.setEntryValues(entryValues);
+        languagePref.setOnPreferenceChangeListener((preference, newValue) -> {
+            Settings.putUserLanguage(newValue.toString());
+            setLanguageSummary(languagePref, newValue.toString());
+            return true;
+        });
+        setLanguageSummary(languagePref, Settings.getUserLanguage());
     }
 
     @Override
@@ -47,4 +56,10 @@ public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
         super.onResume();
         getActivity().setTitle(R.string.settings_title_appearance);
     }
+
+    private void setLanguageSummary(final ListPreference languagePref, final String newValue) {
+        final Locale locale = Settings.getApplicationLocale();
+        languagePref.setSummary(StringUtils.isBlank(newValue) ? getString(R.string.init_use_default_language) : locale.getDisplayLanguage(locale));
+    }
+
 }
