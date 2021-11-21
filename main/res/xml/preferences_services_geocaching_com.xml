@@ -46,11 +46,8 @@
         app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_gc_fb_login_hint"
-            android:icon="?attr/settings_info_icon"
-            android:text="@string/settings_info_facebook_login"
             android:title="@string/settings_info_facebook_login_title"
-            app:url="@string/settings_facebook_login_url"
-            app:urlButton="@string/settings_goto_url_button"
+            android:text="@string/settings_info_facebook_login"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_gc_website"

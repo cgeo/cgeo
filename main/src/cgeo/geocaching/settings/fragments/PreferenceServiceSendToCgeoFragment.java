@@ -2,7 +2,9 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.utils.ShareUtils;
+import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
@@ -28,6 +30,8 @@ public class PreferenceServiceSendToCgeoFragment extends PreferenceFragmentCompa
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.init_sendToCgeo);
+        final Activity activity = getActivity();
+        activity.setTitle(R.string.init_sendToCgeo);
+        setPrefClick(this, R.string.pref_fakekey_sendtocgeo_info, () -> ShareUtils.openUrl(activity, activity.getString(R.string.settings_send2cgeo_url)));
     }
 }

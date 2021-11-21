@@ -1,12 +1,17 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.downloader.DownloadSelectorActivity;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.settings.ColorpickerPreference;
 import cgeo.geocaching.settings.DialogPrefFragCompat;
 import cgeo.geocaching.settings.TemplateTextPreference;
+import cgeo.geocaching.utils.ShareUtils;
+import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.DialogFragment;
@@ -30,7 +35,11 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_map);
+        final Activity activity = getActivity();
+        activity.setTitle(R.string.settings_title_map);
+        setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
+        setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
+        setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
     }
 
     @Override
