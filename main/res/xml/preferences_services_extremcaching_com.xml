@@ -5,21 +5,28 @@
     android:key="@string/preference_screen_ec"
     android:title="@string/settings_title_ec" >
 
-    <PreferenceCategory android:title="@string/settings_settings">
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false">
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorECActive"
-            android:title="@string/settings_service_activate" />
+            android:title="@string/settings_service_activate"
+            app:iconSpaceReserved="false" />
         <Preference
             android:dependency="@string/pref_connectorECActive"
-            app:summary="@string/settings_ec_description" />
+            app:summary="@string/settings_ec_description"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.CredentialsPreference
             android:dependency="@string/pref_connectorECActive"
             android:summary="@string/auth_unconnected"
-            android:key="@string/pref_fakekey_ec_authorization" />
+            android:key="@string/pref_fakekey_ec_authorization"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_title_appearance" >
+    <PreferenceCategory
+        android:title="@string/settings_title_appearance"
+        app:iconSpaceReserved="false" >
         <ListPreference
             android:defaultValue="1"
             android:dependency="@string/pref_connectorECActive"
@@ -27,15 +34,20 @@
             android:entries="@array/ECIcons"
             android:entryValues="@array/ECIconsValues"
             android:key="@string/pref_ec_icons"
-            android:title="@string/init_ec_icons" />
+            android:title="@string/init_ec_icons"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information"  >
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false">
         <Preference
             android:key="@string/pref_fakekey_ec_website"
-            android:title="@string/settings_open_website" />
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.CapabilitiesPreference
             android:title="@string/settings_features"
-            app:connector="EC" />
+            app:connector="EC"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

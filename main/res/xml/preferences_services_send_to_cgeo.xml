@@ -5,25 +5,34 @@
     android:key="@string/preference_screen_sendtocgeo"
     android:title="@string/init_sendToCgeo" >
 
-    <PreferenceCategory android:title="@string/settings_settings" >
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
         <EditTextPreference
             android:dialogTitle="@string/init_sendToCgeo_name"
             android:imeOptions="actionDone"
             android:key="@string/pref_webDeviceName"
             android:singleLine="true"
-            android:title="@string/init_sendToCgeo_name" />
-        <cgeo.geocaching.settings.RegisterSend2CgeoPreference android:title="@string/init_sendToCgeo_register" />
+            android:title="@string/init_sendToCgeo_name"
+            app:iconSpaceReserved="false" />
+        <cgeo.geocaching.settings.RegisterSend2CgeoPreference
+            android:title="@string/init_sendToCgeo_register"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information" >
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
         <Preference
             android:text="@string/init_sendToCgeo_description"
             android:title="@string/settings_info_send2cgeo_title"
             android:icon="?attr/settings_info_icon"
             app:url="@string/settings_send2cgeo_url"
-            app:urlButton="@string/settings_goto_url_button" />
+            app:urlButton="@string/settings_goto_url_button"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_sendtocgeo_website"
-            android:title="@string/settings_open_website" />
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

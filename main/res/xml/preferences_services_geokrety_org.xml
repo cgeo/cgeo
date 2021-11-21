@@ -5,26 +5,35 @@
     android:key="@string/preference_screen_geokrety"
     android:title="@string/init_geokrety" >
 
-    <PreferenceCategory android:title="@string/settings_settings" >
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorGeokretyActive"
             android:summary="@string/init_summary_geokrety"
-            android:title="@string/settings_service_activate" />
+            android:title="@string/settings_service_activate"
+            app:iconSpaceReserved="false" />
         <Preference
             android:dependency="@string/pref_connectorGeokretyActive"
-            app:summary="@string/init_geokrety_description" />
+            app:summary="@string/init_geokrety_description"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.TokenPreference
             android:dependency="@string/pref_connectorGeokretyActive"
-            android:key="@string/pref_fakekey_geokrety_authorization" />
+            android:key="@string/pref_fakekey_geokrety_authorization"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information" >
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
         <Preference
             android:key="@string/pref_fakekey_geokrety_website"
-            android:title="@string/settings_open_website" />
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_geokretymap_website"
-            android:title="@string/settings_open_geokretymap_website" />
+            android:title="@string/settings_open_geokretymap_website"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
