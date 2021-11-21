@@ -1,13 +1,13 @@
 package cgeo.geocaching.settings.fragments;
 
+import cgeo.geocaching.R;
+import cgeo.geocaching.apps.navi.NavigationAppFactory;
+
 import android.os.Bundle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
-import cgeo.geocaching.R;
-import cgeo.geocaching.apps.navi.NavigationAppFactory;
-import cgeo.geocaching.settings.Settings;
 
 public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCompat {
     @Override
