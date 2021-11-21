@@ -330,7 +330,7 @@ dependencies {
 
     // Mapsforge Snapshot from cgeo's GitHub repository (via https://jitpack.io/#cgeo/mapsforge)
     def mapsforgeSource = 'com.github.cgeo.mapsforge'
-    def mapsforgeVersion = '6635457623' // fix for #10128
+    def mapsforgeVersion = '91fa6e6254' // fix for #10128 + fix for #12145
 
     implementation "$mapsforgeSource:mapsforge-core:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map:$mapsforgeVersion"
