@@ -1,14 +1,5 @@
 package cgeo.geocaching.settings.fragments;
 
-import android.os.Bundle;
-
-import androidx.annotation.StringRes;
-import androidx.preference.ListPreference;
-import androidx.preference.PreferenceFragmentCompat;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
 import cgeo.geocaching.brouter.BRouterConstants;
@@ -18,6 +9,16 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ProcessUtils;
+
+import android.os.Bundle;
+
+import androidx.annotation.StringRes;
+import androidx.preference.ListPreference;
+import androidx.preference.PreferenceFragmentCompat;
+
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
     @Override
