@@ -23,12 +23,7 @@ public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
         themePref.setOnPreferenceChangeListener((Preference preference, Object newValue) -> {
             final Settings.DarkModeSetting darkTheme = Settings.DarkModeSetting.valueOf((String) newValue);
             Settings.setAppTheme(darkTheme);
-
-            // simulate previous view stack hierarchy
-            startActivity(new Intent(getActivity(), SettingsActivity.class));
-            //(R.string.pref_appearance, this);
-            getActivity().finish();
-
+            requireActivity().recreate();
             return true;
         });
 
