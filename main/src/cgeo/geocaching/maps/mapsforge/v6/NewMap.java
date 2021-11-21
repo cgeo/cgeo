@@ -60,6 +60,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.ui.GeoItemSelectorUtils;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -224,6 +225,7 @@ public class NewMap extends AbstractActionBarActivity implements Observer, Filte
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
+        AndroidGraphicFactory.INSTANCE.setSvgCacheDir(LocalStorage.getMapsforgeSvgCacheDir());
 
         MapsforgeMapProvider.getInstance().updateOfflineMaps();
 
