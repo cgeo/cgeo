@@ -1560,6 +1560,7 @@
     <!-- search -->
     <string name="geo_search_label">Search caches nearby</string>
     <string name="search_bar_hint">Search caches/trackables</string>
+    <string name="search_bar_hint_settings">Search settings</string>
     <string name="search_coordinates">Coordinates</string>
     <string name="search_coordinates_button">Search by coordinates</string>
     <string name="search_address">Address</string>

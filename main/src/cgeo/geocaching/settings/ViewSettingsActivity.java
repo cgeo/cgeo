@@ -13,15 +13,12 @@ import static cgeo.geocaching.utils.SettingsUtils.getType;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.Filter;
 import android.widget.ListView;
 import android.widget.RadioButton;
@@ -31,7 +28,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.SearchView;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -56,8 +53,10 @@ public class ViewSettingsActivity extends AbstractActivity {
     private ArrayList<KeyValue> allItems;
     private SharedPreferences prefs;
     private boolean editMode = false;
-    private boolean searchMode = false;
-    private TextWatcher searchWatcher = null;
+    private SearchView searchView = null;
+    private MenuItem menuSearch = null;
+    private MenuItem menuEdit = null;
+    private MenuItem menuAdd = null;
 
     private static class KeyValue {
         public final String key;
@@ -76,13 +75,6 @@ public class ViewSettingsActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setTheme();
         setTitle(getString(R.string.view_settings));
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            ab.setCustomView(R.layout.view_settings_toolbar);
-            ab.setDisplayShowCustomEnabled(true);
-            final View v = ab.getCustomView();
-            ((TextView) v.findViewById(R.id.title)).setText(R.string.view_settings);
-        }
 
         allItems = new ArrayList<>();
         prefs = getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
@@ -158,7 +150,7 @@ public class ViewSettingsActivity extends AbstractActivity {
                         final int max = allItems.size();
                         for (int i = 0; i < max; i++) {
                             final KeyValue data = allItems.get(i);
-                            if (StringUtils.contains(data.key, check) || StringUtils.contains(data.value, check)) {
+                            if (StringUtils.containsIgnoreCase(data.key, check) || StringUtils.containsIgnoreCase(data.value, check)) {
                                 filtered.add(data);
                             }
                         }
@@ -335,63 +327,46 @@ public class ViewSettingsActivity extends AbstractActivity {
         return size;
     }
 
-    private void toggleSearch() {
-        final ActionBar ab = getSupportActionBar();
-        if (ab != null) {
-            searchMode = !searchMode;
-            invalidateOptionsMenuCompatible();
-
-            final View v = ab.getCustomView();
-            final EditText et = v.findViewById(R.id.filter);
-            if (searchMode) {
-                et.setVisibility(View.VISIBLE);
-                et.requestFocus();
-                searchWatcher = new TextWatcher() {
-                    @Override
-                    public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                        // nothing to do
-                    }
-                    @Override
-                    public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                        debugAdapter.getFilter().filter(s);
-                    }
-                    @Override
-                    public void afterTextChanged(final Editable s) {
-                        // nothing to do
-                    }
-                };
-                et.addTextChangedListener(searchWatcher);
-            } else {
-                et.setVisibility(View.GONE);
-                et.removeTextChangedListener(searchWatcher);
-                debugAdapter.getFilter().filter("");
-            }
+    private void updateMenuButtons() {
+        if (menuEdit != null && menuAdd != null) {
+            menuEdit.setVisible(!editMode);
+            menuAdd.setVisible(editMode);
         }
     }
 
     @Override
     public boolean onCreateOptionsMenu(final Menu menu) {
         getMenuInflater().inflate(R.menu.view_settings, menu);
-        menu.findItem(R.id.view_settings_edit).setVisible(!editMode);
-        menu.findItem(R.id.view_settings_add).setVisible(editMode);
-        return true;
-    }
+        menuEdit = menu.findItem(R.id.view_settings_edit);
+        menuAdd = menu.findItem(R.id.view_settings_add);
+        updateMenuButtons();
 
-    @Override
-    public boolean onPrepareOptionsMenu(final Menu menu) {
-        menu.findItem(R.id.menu_gosearch).setIcon(searchMode ? R.drawable.ic_menu_search_off : R.drawable.ic_menu_search);
-        return super.onPrepareOptionsMenu(menu);
+        // prepare search in action bar
+        menuSearch = menu.findItem(R.id.menu_gosearch);
+        searchView = (SearchView) menuSearch.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String s) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String s) {
+                debugAdapter.getFilter().filter(s);
+                return true;
+            }
+        });
+
+        return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
-        if (itemId == R.id.menu_gosearch) {
-            toggleSearch();
-        } else if (itemId == R.id.view_settings_edit && !editMode) {
+        if (itemId == R.id.view_settings_edit && !editMode) {
             SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
                 editMode = true;
-                invalidateOptionsMenu();
+                updateMenuButtons();
                 debugAdapter.notifyDataSetChanged();
             });
         } else if (itemId == R.id.view_settings_add && editMode) {
@@ -401,4 +376,17 @@ public class ViewSettingsActivity extends AbstractActivity {
         }
         return true;
     }
+
+    @Override
+    public void onBackPressed() {
+        // back may exit the app instead of closing the search action bar
+        if (searchView != null && !searchView.isIconified()) {
+            searchView.setIconified(true);
+            menuSearch.collapseActionView();
+            debugAdapter.getFilter().filter("");
+        } else {
+            super.onBackPressed();
+        }
+    }
+
 }
