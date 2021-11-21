@@ -3,9 +3,7 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.settings.SettingsActivity;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
