@@ -5,27 +5,36 @@
     android:key="@string/preference_screen_su"
     android:title="@string/init_su" >
 
-    <PreferenceCategory android:title="@string/settings_settings" >
+    <PreferenceCategory
+        android:title="@string/settings_settings"
+        app:iconSpaceReserved="false" >
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_connectorSUActive"
             android:summary="@string/init_summary_su"
-            android:title="@string/settings_service_activate" />
+            android:title="@string/settings_service_activate"
+            app:iconSpaceReserved="false" />
         <Preference
             android:dependency="@string/pref_connectorSUActive"
-            app:summary="@string/settings_su_description" />
+            app:summary="@string/settings_su_description"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.OAuthPreference
             android:dependency="@string/pref_connectorSUActive"
             app:summary="@string/auth_unconnected"
-            android:key="@string/pref_fakekey_su_authorization" />
+            android:key="@string/pref_fakekey_su_authorization"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
-    <PreferenceCategory android:title="@string/settings_information" >
+    <PreferenceCategory
+        android:title="@string/settings_information"
+        app:iconSpaceReserved="false" >
         <Preference
             android:key="@string/pref_fakekey_su_website"
-            android:title="@string/settings_open_website" />
+            android:title="@string/settings_open_website"
+            app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.CapabilitiesPreference
             android:title="@string/settings_features"
-            app:connector="SU" />
+            app:connector="SU"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>
