@@ -2,6 +2,10 @@ package cgeo.geocaching.utils;
 
 import android.content.SharedPreferences;
 
+import androidx.annotation.StringRes;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -100,6 +104,16 @@ public class SettingsUtils {
                 break;
             default:
                 throw new XmlPullParserException("unknown type");
+        }
+    }
+
+    public static void setPrefClick(final PreferenceFragmentCompat preferenceFragment, @StringRes final int res, final Runnable action) {
+        final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(res));
+        if (preference != null) {
+            preference.setOnPreferenceClickListener(p -> {
+                action.run();
+                return true;
+            });
         }
     }
 }
