@@ -2,8 +2,10 @@ package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 
 import android.util.Patterns;
 
@@ -16,7 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.text.StringEscapeUtils;
 
 public final class CheckerUtils {
-    private static GeoChecker[] CHECKERS = {
+    private static final GeoChecker[] CHECKERS = {
         new GeoChecker("certitudes.org/certitude?"),
         new GeoChecker("gc-apps.com/checker/"),
         new GeoChecker("geocheck.org/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
@@ -39,7 +41,13 @@ public final class CheckerUtils {
             for (final GeoChecker checker : CHECKERS) {
                 if (StringUtils.containsIgnoreCase(url, checker.getUrlPattern())) {
                     if (checker.getCoordinateFormat() != null) {
-                        url = url + checker.getUrlCoordinateParam() + cache.getCoords().format(checker.getCoordinateFormat());
+                        final Geopoint coordinateToCheck;
+                        if (!cache.hasUserModifiedCoords() && cache.hasFinalDefined()) {
+                            coordinateToCheck = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords).getCoords();
+                        } else {
+                            coordinateToCheck = cache.getCoords();
+                        }
+                        url = url + checker.getUrlCoordinateParam() + coordinateToCheck.format(checker.getCoordinateFormat());
                     }
                     return StringEscapeUtils.unescapeHtml4(url);
                 }
@@ -53,15 +61,15 @@ public final class CheckerUtils {
     }
 
     public static class GeoChecker {
-        private String urlPattern;
+        private final String urlPattern;
         private String urlCoordinateParam = "";
         private GeopointFormatter.Format coordinateFormat = null;
 
-        public GeoChecker(String urlPattern) {
+        public GeoChecker(final String urlPattern) {
             this.urlPattern = urlPattern;
         }
 
-        public GeoChecker(String urlPattern, String coordinateParam, GeopointFormatter.Format coordinateFormat) {
+        public GeoChecker(final String urlPattern, final String coordinateParam, final GeopointFormatter.Format coordinateFormat) {
             this.urlPattern = urlPattern;
             this.urlCoordinateParam = coordinateParam;
             this.coordinateFormat = coordinateFormat;
