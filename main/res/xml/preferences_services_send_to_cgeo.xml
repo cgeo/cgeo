@@ -24,11 +24,9 @@
         android:title="@string/settings_information"
         app:iconSpaceReserved="false" >
         <Preference
-            android:text="@string/init_sendToCgeo_description"
+            android:key="@string/pref_fakekey_sendtocgeo_info"
             android:title="@string/settings_info_send2cgeo_title"
-            android:icon="?attr/settings_info_icon"
-            app:url="@string/settings_send2cgeo_url"
-            app:urlButton="@string/settings_goto_url_button"
+            android:text="@string/init_sendToCgeo_description"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_sendtocgeo_website"

@@ -15,17 +15,14 @@
             android:title="@string/init_mapsource_select"
             app:iconSpaceReserved="false" />
         <Preference
-            android:icon="?attr/settings_info_icon"
-            android:text="@string/settings_info_offline_maps"
+            android:key="@string/pref_fakekey_info_offline_maps"
             android:title="@string/settings_info_offline_maps_title"
-            app:url="@string/manual_url_settings_offline_maps"
-            app:urlButton="@string/settings_goto_url_button"
+            android:text="@string/settings_info_offline_maps"
             app:iconSpaceReserved="false" />
         <Preference
-            android:icon="?attr/settings_map_icon"
-            android:text="@string/downloadmap_info"
+            android:key="@string/pref_fakekey_start_downloader"
             android:title="@string/downloadmap_title"
-            app:urlButton="@string/downloadmap_choose"
+            android:text="@string/downloadmap_info"
             app:iconSpaceReserved="false" />
 
         <CheckBoxPreference
@@ -50,11 +47,9 @@
             android:title="@string/init_map_directory_description"
             app:iconSpaceReserved="false" />
         <Preference
-            android:icon="?attr/settings_info_icon"
+            android:key="@string/pref_fakekey_info_offline_mapthemes"
             android:text="@string/settings_info_themes"
             android:title="@string/settings_info_themes_title"
-            app:url="@string/faq_url_settings_themes"
-            app:urlButton="@string/settings_goto_url_button"
             app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_persistablefolder_offlinemapthemes"

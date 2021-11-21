@@ -263,7 +263,13 @@
     <string translatable="false" name="pref_fakekey_gcvote_website">fakekey_gcvote_website</string>
     <string translatable="false" name="pref_fakekey_geokrety_website">fakekey_geokrety_website</string>
     <string translatable="false" name="pref_fakekey_geokretymap_website">fakekey_geokretymap_website</string>
+    <string translatable="false" name="pref_fakekey_sendtocgeo_info">fakekey_sendtocgeo_info</string>
     <string translatable="false" name="pref_fakekey_sendtocgeo_website">fakekey_sendtocgeo_website</string>
+
+    <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
+    <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
+    <string translatable="false" name="pref_fakekey_info_offline_mapthemes">fakekey_info_offline_mapthemes</string>
+
     <string translatable="false" name="pref_twitter_cache_message">twitter_cache_message</string>
     <string translatable="false" name="pref_twitter_trackable_message">twitter_trackable_message</string>
     <string translatable="false" name="pref_ec_icons">ec_icons</string>

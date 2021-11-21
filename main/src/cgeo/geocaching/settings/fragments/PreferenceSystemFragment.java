@@ -1,18 +1,14 @@
 package cgeo.geocaching.settings.fragments;
 
-import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
-
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.utils.DebugUtils;
+import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 public class PreferenceSystemFragment extends PreferenceFragmentCompat {
