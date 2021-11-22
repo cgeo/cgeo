@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.R;
+
 import android.content.SharedPreferences;
 
 import androidx.annotation.StringRes;
@@ -116,4 +118,16 @@ public class SettingsUtils {
             });
         }
     }
+
+    public static void setPrefSummary(final PreferenceFragmentCompat preferenceFragment, @StringRes final int res, final String summary) {
+        final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(res));
+        if (preference != null) {
+            preference.setSummary(summary);
+        }
+    }
+
+    public static void setPrefSummaryActiveStatus(final PreferenceFragmentCompat preferenceFragment, @StringRes final int resConnector, final boolean isActive) {
+        setPrefSummary(preferenceFragment, resConnector, isActive ? preferenceFragment.getString(R.string.settings_service_active) : "");
+    }
+
 }
