@@ -1407,6 +1407,7 @@
     <!-- search -->
     <string name="geo_search_label">Procurar caches próximas</string>
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
+    <string name="search_bar_hint_settings">Definições de pesquisa</string>
     <string name="search_coordinates">Coordenadas</string>
     <string name="search_coordinates_button">Pesquisar por coordenadas</string>
     <string name="search_address">Endereço</string>
