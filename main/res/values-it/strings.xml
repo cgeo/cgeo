@@ -715,6 +715,7 @@
     <string name="init_select_language">Seleziona lingua</string>
     <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
+    <string name="init_showwaypoints">Mostra i waypoint</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
@@ -732,6 +733,8 @@
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
+    <string name="init_bigSmileysOnMap">Icone grandi</string>
+    <string name="init_summary_bigSmileysOnMap">Se abilitato, i simboli come \'smile trovato\' o \'coordinate corrette\' verranno mostrati ingranditi sulla mappa invece dell\'icona tipo cache (richiede il riavvio).</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
@@ -1095,6 +1098,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
     <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
     <string name="cache_personal_note_edit">Modifica</string>
+    <string name="cache_personal_note_storewaypoints">Aggiungi/Aggiorna i waypoint</string>
+    <string name="cache_personal_note_removewaypoints">Rimuovi i waypoint</string>
     <string name="cache_personal_note_removedwaypoints">Waypoints rimossi</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nessun waypoint trovato da rimuovere</string>
     <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>
