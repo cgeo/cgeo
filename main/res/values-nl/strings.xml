@@ -1407,6 +1407,7 @@
     <!-- search -->
     <string name="geo_search_label">Zoek caches in de omgeving</string>
     <string name="search_bar_hint">Caches/trackables zoeken</string>
+    <string name="search_bar_hint_settings">Zoekinstellingen</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
     <string name="search_address">Adres</string>
