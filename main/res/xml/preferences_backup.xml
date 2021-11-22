@@ -7,9 +7,9 @@
     android:title="@string/settings_title_backup">
 
     <PreferenceCategory
-        android:summary="@string/init_backup_summary"
         android:title="@string/init_backup_title"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_backup_summary" app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:defaultValue="@integer/backup_history_length_default"
             android:key="@string/pref_backups_backup_history_length"
