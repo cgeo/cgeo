@@ -178,7 +178,7 @@ import org.apache.commons.text.StringEscapeUtils;
 /**
  * Activity to handle all single-cache-stuff.
  *
- * e.g. details, description, logs, waypoints, inventory...
+ * e.g. details, description, logs, waypoints, inventory, variables...
  */
 public class CacheDetailActivity extends TabbedViewPagerActivity
         implements CacheMenuHandler.ActivityInterface, INavigationSource, AndroidBeam.ActivitySharingInterface, EditNoteDialogListener {
