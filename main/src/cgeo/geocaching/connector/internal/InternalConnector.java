@@ -177,11 +177,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
             } else {
                 search.addGeocode(geocode);
             }
-            search.setError(StatusCode.NO_ERROR);
+            search.setError(this, StatusCode.NO_ERROR);
             return search;
         }
 
-        search.setError(StatusCode.CACHE_NOT_FOUND);
+        search.setError(this, StatusCode.CACHE_NOT_FOUND);
         return search;
     }
 

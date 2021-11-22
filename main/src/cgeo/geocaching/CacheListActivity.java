@@ -1302,7 +1302,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         final int listSize = search == null ? cacheList.size() : search.getCount();
-        final int totalListSize = search == null ? listSize : Math.max(0, search.getTotalCountGC());
+        //TODO Eddie: this logic has to change!
+        final int totalListSize = search == null ? listSize : Math.max(0, search.getTotalCount());
 
         final boolean enableMore = !type.isStoredInDatabase && listSize < MAX_LIST_ITEMS && (search == null || (listSize > 0 && listSize < totalListSize));
 
@@ -2154,7 +2155,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return getCacheNumberString(getResources(), 0);
         }
 
-        final int totalCount = type.isStoredInDatabase ? search.getTotalCountGC() : search.getCount();
+        final int totalCount = type.isStoredInDatabase ? search.getTotalCount() : search.getCount();
 
         final StringBuilder result = new StringBuilder();
         final boolean isFiltered = adapter.hasActiveFilter() && adapter.getCount() != totalCount;
@@ -2171,7 +2172,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean resultIsOfflineAndLimited() {
-        return type.isStoredInDatabase && offlineListLoadLimit > 0 && search.getTotalCountGC() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
+        return type.isStoredInDatabase && offlineListLoadLimit > 0 && search.getTotalCount() > offlineListLoadLimit && search.getCount() == offlineListLoadLimit;
     }
 
     /**

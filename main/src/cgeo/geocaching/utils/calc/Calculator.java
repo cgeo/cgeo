@@ -34,7 +34,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * Since then, various additions made the evaluation algorithm a bit more complex. The following features were added:
  *
- * * Operators '%' and '!'.
+ * * Operators '%' and also '!'.
  * * Ability to evaluate functions, e.g.  'sqrt', 'cos', 'sin' and 'tan' .
  * * Support for variables (insertion of values)
  * * Class now also supports precompilation of expressions and reuse of this compile generate for other variable values

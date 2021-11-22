@@ -59,7 +59,7 @@ public class GCMap {
         // utility class
     }
 
-    public static SearchResult searchByGeocodes(final Set<String> geocodes) {
+    public static SearchResult searchByGeocodes(final IConnector con, final Set<String> geocodes) {
         final SearchResult result = new SearchResult();
 
         final Set<String> filteredGeocodes = GCConnector.getInstance().handledGeocodes(geocodes);
@@ -115,7 +115,7 @@ public class GCMap {
             }
             result.addAndPutInCache(caches);
         } catch (ParserException | ParseException | IOException | NumberFormatException ignored) {
-            result.setError(StatusCode.UNKNOWN_ERROR);
+            result.setError(con, StatusCode.UNKNOWN_ERROR);
         }
         return result;
     }
@@ -127,11 +127,11 @@ public class GCMap {
      *            Area to search
      */
     @NonNull
-    public static SearchResult searchByViewport(@NonNull final Viewport viewport) {
+    public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
 
-            final Pair<GCWebAPI.WebApiSearch, SearchResult> searchPair = createSearchForFilter(GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE), null);
+            final Pair<GCWebAPI.WebApiSearch, SearchResult> searchPair = createSearchForFilter(GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE), con);
             if (searchPair == null || searchPair.first == null) {
                 return new SearchResult();
             }
@@ -141,7 +141,7 @@ public class GCMap {
             final SearchResult searchResult = GCWebAPI.searchCaches(search, false);
 
             if (Settings.isDebug()) {
-                    searchResult.setUrl(viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+                    searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
             }
             cLog.add("returning " + searchResult.getCount() + " caches");
             return searchResult;
@@ -172,7 +172,7 @@ public class GCMap {
             }
             //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
             if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
-                return new Pair<>(null, searchByFinder(((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
+                return new Pair<>(null, searchByFinder(connector, ((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
             }
             fillForBasicFilter(baseFilter, search);
         }
@@ -180,14 +180,14 @@ public class GCMap {
 
     }
 
-    private static SearchResult searchByFinder(final String userName, final GeocacheFilter filter) {
+    private static SearchResult searchByFinder(final IConnector con, final String userName, final GeocacheFilter filter) {
         final List<BaseGeocacheFilter> filters = filter.getAndChainIfPossible();
         final StatusGeocacheFilter statusFilter = GeocacheFilter.findInChain(filters, StatusGeocacheFilter.class);
         final boolean noFoundOwn = statusFilter != null && FALSE.equals(statusFilter.getStatusFound()) && FALSE.equals(statusFilter.getStatusOwned());
 
         final TypeGeocacheFilter typeFilter = GeocacheFilter.findInChain(filters, TypeGeocacheFilter.class);
         final CacheType ct = typeFilter != null && typeFilter.getValues().size() == 1 ? typeFilter.getValues().iterator().next() : null;
-        return GCParser.searchByUsername(userName, ct, noFoundOwn);
+        return GCParser.searchByUsername(con, userName, ct, noFoundOwn);
     }
 
     private static void fillForBasicFilter(@NonNull final BaseGeocacheFilter basicFilter, final GCWebAPI.WebApiSearch search) {
