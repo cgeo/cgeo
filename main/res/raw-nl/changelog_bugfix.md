@@ -1,0 +1,2 @@
+- Oplossen: Mapsforge's cache bestanden: Opschonen en nieuwe (zichtbaar) locatie
+- Fix: Freizeitkarte map bestanden: Gebruik 'laatste' map in de downloader als workaround voor tijdelijke server fouten
