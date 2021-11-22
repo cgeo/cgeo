@@ -1433,6 +1433,7 @@
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
+    <string name="search_bar_hint_settings">Nastavení vyhledávání</string>
     <string name="search_coordinates">Souřadnice</string>
     <string name="search_coordinates_button">Hledat podle souřadnic</string>
     <string name="search_address">Adresa</string>
