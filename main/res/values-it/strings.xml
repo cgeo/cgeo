@@ -720,6 +720,8 @@
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
+    <string name="init_bigSmileysOnMap">Icone grandi</string>
+    <string name="init_summary_bigSmileysOnMap">Se abilitato, i simboli come \'smile trovato\' o \'coordinate corrette\' verranno mostrati ingranditi sulla mappa invece dell\'icona tipo cache (richiede il riavvio).</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
