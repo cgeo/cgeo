@@ -50,9 +50,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_dbonsdcard_note"
         android:title="@string/init_dbonsdcard_title"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_dbonsdcard_note" app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_dbonsdcard"
@@ -61,9 +61,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_dataDir_note"
         android:title="@string/settings_title_data_dir"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_dataDir_note" app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_dataDir"
             android:title="@string/init_dataDir"
@@ -71,9 +71,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_maintenance_directories_note"
         android:title="@string/init_maintenance"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_maintenance_directories_note" app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_preference_maintenance_directories"
             android:layout="@layout/preference_button"

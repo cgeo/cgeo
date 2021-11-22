@@ -6,9 +6,9 @@
     android:title="@string/settings_title_navigation">
 
     <PreferenceCategory
-        android:summary="@string/settings_summary_offline_routing"
         android:title="@string/settings_title_offline_routing"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/settings_summary_offline_routing" app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_brouterThreshold_description"
             android:title="@string/init_brouterThreshold"

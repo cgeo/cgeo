@@ -19,9 +19,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_location_note"
         android:title="@string/init_location"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_location_note" app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="true"
             android:key="@string/pref_googleplayservices"
@@ -30,9 +30,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_low_power_note"
         android:title="@string/init_low_power"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_low_power_note" app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_lowpowermode"
@@ -41,9 +41,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_force_orientation_sensor_note"
         android:title="@string/init_force_orientation_sensor_title"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_force_orientation_sensor_note" app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_force_orientation_sensor"
@@ -52,9 +52,9 @@
     </PreferenceCategory>
 
     <PreferenceCategory
-        android:summary="@string/init_debug_note"
         android:title="@string/init_debug_title"
         app:iconSpaceReserved="false">
+        <Preference android:summary="@string/init_debug_note" app:iconSpaceReserved="false" />
         <CheckBoxPreference
             android:defaultValue="false"
             android:key="@string/pref_debug"
