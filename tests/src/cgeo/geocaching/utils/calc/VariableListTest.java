@@ -89,6 +89,18 @@ public class VariableListTest {
         assertVariableList(cv, "c", "f:b", "b", "f:a",  "a", "f:1");
     }
 
+    @Test
+    public void nextChar() {
+        final VariableList cv = createTestInstance();
+        assertThat(cv.getLowestMissingChar()).isEqualTo('A');
+        cv.addVariable("A", "", 0);
+        assertThat(cv.getLowestMissingChar()).isEqualTo('B');
+        cv.addVariable("B", "", 0);
+        assertThat(cv.getLowestMissingChar()).isEqualTo('C');
+        cv.removeVariable("A");
+        cv.addVariable("A", "", 0);
+    }
+
 
 
 
