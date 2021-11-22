@@ -1,0 +1,2 @@
+- Fix: Mapsforge's cache files: Cleanup and new (visible) location
+- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
