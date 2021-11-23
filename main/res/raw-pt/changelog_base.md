@@ -5,5 +5,8 @@
 - Correcção: Ao carregar ficheiros GPX que contém vários percursos, mostra-os em separado, não ligados
 - Alteração: Activa automaticamente a exibição do percurso ao carregar um ficheiro de percurso GPX
 
+### Cache list
+- New: Option to select next 20 caches
+
 ### Outro
-- Novo: Fazer Definições => Visualizar Definições filtráveis
+- New: Make Settings => View Settings filterable
