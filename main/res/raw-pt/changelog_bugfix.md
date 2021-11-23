@@ -1,2 +1,2 @@
-- Correcção: Ficheiros de cache do Mapsforge: limpeza e um local novo (visível)
+- Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
 - Correcção: ficheiros de mapa do Freizeitkart: Utilize a pasta 'recentes' no gestor de transferências como solução alternativa para erros temporários do servidor
