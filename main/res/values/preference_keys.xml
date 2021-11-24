@@ -7,6 +7,10 @@
 
     If you add a preference key which stores sensitive data not to be included in settings backup
     by default, make sure to add the key to Settings.getSensitivePreferenceKeys()
+
+    If a preference key is no longer actively used, you can and should remove it.
+    If a preference key is no longer actively used, but you still need the string for migration,
+    add "old_" as prefix to the variable name (but leave the value unchanged).
     -->
 
     <string translatable="false" name="preference_screen_main">fakekey_main_screen</string>
@@ -166,7 +170,7 @@
     <string translatable="false" name="pref_usecompass">usecompass</string>
     <string translatable="false" name="pref_mapfile">mfmapfile</string>
     <string translatable="false" name="pref_mapdownloader_source">mapdownloader_source</string>
-    <string translatable="false" name="pref_mapAutoDownloads">mapAutoDownloads</string>
+    <string translatable="false" name="old_pref_mapAutoDownloads">mapAutoDownloads</string>
     <string translatable="false" name="pref_mapAutoDownloadsInterval">mapAutoDownloadsInterval</string>
     <string translatable="false" name="pref_mapAutoDownloadsLastCheck">mapAutoDownloadsLastCheck</string>
     <string translatable="false" name="pref_autotarget_individualroute">autotarget_individualroute</string>

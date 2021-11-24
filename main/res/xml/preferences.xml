@@ -576,23 +576,15 @@
                 android:text="@string/downloadmap_info"
                 android:title="@string/downloadmap_title"
                 app:urlButton="@string/downloadmap_choose" />
-
-            <CheckBoxPreference
-                android:defaultValue="false"
-                android:key="@string/pref_mapAutoDownloads"
-                android:summary="@string/init_mapAutoDownloads_description"
-                android:title="@string/init_autoDownloads" />
             <Preference
                 android:selectable="false"
                 android:summary="@string/init_updateinterval_description"
-                android:title="@string/init_updateinterval_title"
-                android:dependency="@string/pref_mapAutoDownloads" />
+                android:title="@string/init_updateinterval_title" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapAutoDownloadsInterval"
                 app:min="0"
                 app:max="@integer/map_updateinterval_max"
-                android:defaultValue="@integer/map_updateinterval_default"
-                android:dependency="@string/pref_mapAutoDownloads" />
+                android:defaultValue="@integer/map_updateinterval_default" />
 
             <Preference
                 android:key="@string/pref_persistablefolder_offlinemaps"
@@ -984,14 +976,12 @@
             <Preference
                 android:selectable="false"
                 android:summary="@string/init_updateinterval_description"
-                android:title="@string/init_updateinterval_title"
-                android:dependency="@string/pref_brouterAutoTileDownloads" />
+                android:title="@string/init_updateinterval_title" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_brouterAutoTileDownloadsInterval"
                 app:min="0"
                 app:max="@integer/brouter_updateinterval_max"
-                android:defaultValue="@integer/brouter_updateinterval_default"
-                android:dependency="@string/pref_brouterAutoTileDownloads" />
+                android:defaultValue="@integer/brouter_updateinterval_default" />
 
             <ListPreference
                 android:dialogTitle="@string/init_brouterProfileWalk"

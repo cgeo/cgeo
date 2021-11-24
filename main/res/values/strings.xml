@@ -801,7 +801,6 @@
     <string name="init_brouterShowBothDistances">Show straight distance</string>
     <string name="init_autoDownloads">Automatic download</string>
     <string name="init_brouterAutoTileDownloads_description">Automatically offer to download missing routing tile data.</string>
-    <string name="init_mapAutoDownloads_description">Automatically check for update of map and theme files. (Valid only for files you have downloaded with the integrated downloader.)</string>
     <string name="init_brouterProfileWalk">\"Walk\" profile</string>
     <string name="init_brouterProfileBike">\"Bike\" profile</string>
     <string name="init_brouterProfileCar">\"Car\" profile</string>
@@ -909,7 +908,8 @@
     <string name="init_map_directory_description">Folder with offline maps</string>
     <string name="init_brouter_directory_description">Folder with BRouter routing data</string>
     <string name="init_updateinterval_title">Update interval</string>
-    <string name="init_updateinterval_description">Reminds you every x days for an update check</string>
+    <string name="init_updateinterval_description">Reminds you every x days for an update check (valid only for files you have downloaded from within c:geo), 0=off</string>
+
     <string name="init_gpx_importexportdir">GPX Folder</string>
     <string name="init_dataDir">Select data folder</string>
     <string name="init_dataDir_note">You may choose to store the additional data for geocaches (spoilers, log images, …) on your external storage (emulated or real external SD card depending on your device).</string>
