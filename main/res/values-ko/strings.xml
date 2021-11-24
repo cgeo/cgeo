@@ -360,6 +360,7 @@
     <string name="caches_history">지난 기록</string>
     <string name="caches_on_map">지도에 표시</string>
     <string name="caches_sort">정렬</string>
+    <string name="caches_sort_automatic">자동 (%s)</string>
     <string name="caches_sort_distance">거리</string>
     <string name="caches_sort_distance_target">도착지 남은 거리</string>
     <string name="caches_sort_difficulty">난이도</string>
@@ -379,6 +380,7 @@
     <string name="caches_sort_storage">기기에 저장된 데이터</string>
     <string name="caches_sort_eventdate">이벤트 날짜</string>
     <string name="caches_select_mode">선택 모드</string>
+    <string name="caches_select_next">다음 20개 캐시 선택</string>
     <string name="caches_select_mode_exit">선택 모드 나오기</string>
     <string name="caches_select_invert">선택 반전</string>
     <string name="caches_nearby">인근 캐시</string>
@@ -710,6 +712,7 @@
     <string name="init_select_language">언어 선택</string>
     <string name="init_summary_select_language">앱 언어 선택 (다시 시작해야 함)\n</string>
     <string name="init_use_default_language">기본 언어 사용</string>
+    <string name="init_showwaypoints">지점 보기</string>
     <string name="init_showwaypoint_description">지도에 지정한 캐시 이하만 보일 경우, 웨이포인트를 추가로 표시합니다.</string>
     <string name="init_zoomincludingwaypoints">확대에는 지점이 포함됩니다</string>
     <string name="init_zoomincludingwaypoints_description">단일 캐시를 보는 경우: 모든 지점을 포함하도록 확대를 조정해야합니까?</string>
@@ -727,6 +730,8 @@
     <string name="init_summary_brouterShowBothDistances">라우팅이 활성화 된 경우 : 계산된 경로 길이 외에 직선 거리를 표시합니다.</string>
     <string name="init_useInternalRouting">내부 라우팅 사용</string>
     <string name="init_summary_useInternalRouting">c:geo 내부 라우팅을 사용하여 자동 라우팅 데이터 다운로드 및 기타 기능을 사용하십시오.</string>
+    <string name="init_bigSmileysOnMap">큰 아이콘</string>
+    <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 \'찾음 스마일리\' 또는 \'수정된 좌표\' 마커와 같은 기호가 지도에서 확대되어 표시됩니다(다시 시작해야 함).</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
     <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
@@ -1082,6 +1087,8 @@
     <string name="cache_menu_preventWaypointsFromNote">지점이 메모에서 방지하기</string>
     <string name="cache_menu_allowWaypointExtraction">지점이 메모에서 허락하기</string>
     <string name="cache_personal_note_edit">편집</string>
+    <string name="cache_personal_note_storewaypoints">지점 추가/업데이트</string>
+    <string name="cache_personal_note_removewaypoints">지점 제거</string>
     <string name="cache_personal_note_removedwaypoints">지점이 삭제되었습니다.</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">삭제할 지점이 없습니다.</string>
     <string name="cache_personal_note_storewaypoints_success">개인 메모에 지점이 추가되었습니다.</string>
@@ -1388,6 +1395,7 @@
     <!-- search -->
     <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
+    <string name="search_bar_hint_settings">설정 검색</string>
     <string name="search_coordinates">좌표</string>
     <string name="search_coordinates_button">좌표로 검색</string>
     <string name="search_address">주소</string>
