@@ -1,2 +1,2 @@
-- Fix: Mapsforge's cache files: Cleanup and new (visible) location
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
+- 수정: Mapsforge의 캐시 파일: 정리 및 새(보이는) 위치
+- 수정: Freizeitkarte 지도 파일: 임시 서버 오류에 대한 해결 방법으로 다운로더의 '최신' 폴더 사용
