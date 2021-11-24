@@ -63,7 +63,7 @@ public class DownloaderUtils {
     }
 
     public static void checkForRoutingTileUpdates(final Activity activity) {
-        if (Settings.useInternalRouting() && Settings.isBrouterAutoTileDownloads() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
+        if (Settings.useInternalRouting() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
         }
     }
@@ -73,7 +73,7 @@ public class DownloaderUtils {
     }
 
     public static void checkForMapUpdates(final Activity activity) {
-        if (Settings.isMapAutoDownloads() && Settings.mapAutoDownloadsNeedUpdate()) {
+        if (Settings.mapAutoDownloadsNeedUpdate()) {
             DownloaderUtils.checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, DownloaderUtils::returnFromMapUpdateCheck);
         }
     }

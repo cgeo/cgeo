@@ -193,7 +193,7 @@ public class Settings {
     }
 
     public static int getExpectedVersion() {
-        return 8;
+        return 9;
     }
 
     private static void migrateSettings() {
@@ -385,6 +385,25 @@ public class Settings {
             }
 
             setActualVersion(8);
+        }
+
+        if (currentVersion < 9) {
+            final Editor e = sharedPrefs.edit();
+
+            final boolean isMapAutoDownloads = sharedPrefs.getBoolean(getKey(R.string.old_pref_mapAutoDownloads), false);
+            if (!isMapAutoDownloads) {
+                e.putInt(getKey(R.string.pref_mapAutoDownloadsInterval), 0);
+            }
+            e.remove(getKey(R.string.old_pref_mapAutoDownloads)); // key no longer in use, will fall back to default on downgrade
+
+            final boolean isRoutingTileAutoDownloads = sharedPrefs.getBoolean(getKey(R.string.pref_brouterAutoTileDownloads), false);
+            if (!isRoutingTileAutoDownloads) {
+                e.putInt(getKey(R.string.pref_brouterAutoTileDownloadsInterval), 0);
+            }
+            // bRouterAutoTileDownloads key is still in use, do NOT remove it
+
+            e.apply();
+            setActualVersion(9);
         }
     }
 
@@ -1065,18 +1084,20 @@ public class Settings {
         return getInt(R.string.pref_mapdownloader_source, Download.DownloadType.DOWNLOADTYPE_MAP_MAPSFORGE.id);
     }
 
-    public static boolean isMapAutoDownloads() {
-        return getBoolean(R.string.pref_mapAutoDownloads, false);
-    }
-
     public static boolean mapAutoDownloadsNeedUpdate() {
+        // update check disabled?
+        final int interval = getMapAutoDownloadsInterval();
+        if (interval < 1) {
+            return false;
+        }
+        // initialization on first run
         final long lastCheck = getLong(R.string.pref_mapAutoDownloadsLastCheck, 0);
         if (lastCheck == 0) {
             setMapAutoDownloadsLastCheck(false);
             return false;
         }
+        // check if interval is completed
         final long now = System.currentTimeMillis() / 1000;
-        final int interval = getMapAutoDownloadsInterval();
         return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
@@ -1225,13 +1246,19 @@ public class Settings {
     }
 
     public static boolean brouterAutoTileDownloadsNeedUpdate() {
+        // update check disabled?
+        final long interval = getBrouterAutoTileDownloadsInterval();
+        if (interval < 1) {
+            return false;
+        }
+        // initialization on first run
         final long lastCheck = getLong(R.string.pref_brouterAutoTileDownloadsLastCheck, 0);
         if (lastCheck == 0) {
             setBrouterAutoTileDownloadsLastCheck(false);
             return false;
         }
+        // check if interval is completed
         final long now = System.currentTimeMillis() / 1000;
-        final long interval = getBrouterAutoTileDownloadsInterval();
         return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
     }
 
