@@ -1,2 +1,2 @@
-- Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
+- Διόρθωση: αρχεία κρυπτών του Mapsforge: Καθαρισμός και νέα θέση (ξεχωριστός φάκελος)
+- Διόρθωση: Αρχεία χάρτη Freizeitkarte: Χρησιμοποιήστε το φάκελο 'latest' στο downloader ως λύση για προσωρινά σφάλματα διακομιστή
