@@ -190,7 +190,7 @@ public class Geocache implements IWaypoint {
 
     private Handler changeNotificationHandler = null;
 
-    private CacheVariables variables;
+    private CacheVariableList variables;
 
     //transient field, used for online search by finder only
     private Bundle searchContext;
@@ -2206,9 +2206,9 @@ public class Geocache implements IWaypoint {
         return assignedEmoji;
     }
 
-    public CacheVariables getVariables() {
+    public CacheVariableList getVariables() {
         if (variables == null) {
-            variables = new CacheVariables(this.geocode);
+            variables = new CacheVariableList(this.geocode);
         }
         return variables;
     }
