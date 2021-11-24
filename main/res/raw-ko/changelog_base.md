@@ -1,12 +1,12 @@
-### General
-- Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
+### 일반
+- 변경: c:geo에서 가장 많이 사용되는 화면에 직접 액세스할 수 있는 하단 탐색 도입, 이전 메인 화면 교체
 
 ### 지도
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- Change: Automatically enable track display on loading a GPX track file
+- 수정: 여러 트랙이 포함된 GPX 파일을 로드할 때 별도의 연결되지 않은 트랙으로 표시됨
+- 변경: GPX 트랙 파일을 로드할 때 자동으로 트랙 표시 활성화
 
-### Cache list
-- New: Option to select next 20 caches
+### 캐시 목록
+- 신규: 다음 20개 캐시를 선택하는 옵션
 
 ### 추가 사항
-- New: Make Settings => View Settings filterable
+- 신규: 설정 만들기 => 필터링 가능한 보기 설정
