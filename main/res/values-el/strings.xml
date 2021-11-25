@@ -381,6 +381,7 @@
     <string name="caches_sort_storage">Ημερομηνία αποθήκευσης στη συσκευή</string>
     <string name="caches_sort_eventdate">Ημερομηνία εκδήλωσης</string>
     <string name="caches_select_mode">Επιλογή</string>
+    <string name="caches_select_next">Επιλογή των επόμενων 20 κρυπτών</string>
     <string name="caches_select_mode_exit">Έξοδος από τη λειτουργία επιλογής</string>
     <string name="caches_select_invert">Αντιστροφή επιλογής</string>
     <string name="caches_nearby">Σε κοντινή απόσταση</string>
@@ -711,6 +712,7 @@
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
     <string name="init_summary_select_language">Επιλλέξτε γλώσσα στην εφαρμογή (Χρειάζεται επανεκκίνηση)\n</string>
     <string name="init_use_default_language">Χρήση προεπιλεγμένης Γλώσσας</string>
+    <string name="init_showwaypoints">Εμφάνιση σημείων διαδρομής</string>
     <string name="init_showwaypoint_description">Αν εμφανίζονται στον χάρτη λιγότερες από τις δεδομένες κρύπτες, εμφανίζονται επιπλέον και τα σημεία τους.</string>
     <string name="init_zoomincludingwaypoints">Το επίπεδο εστίασης περιλαμβάνει τα waypoints</string>
     <string name="init_zoomincludingwaypoints_description">Εάν προβάλλεται μια κρύπτη: Να γίνει ρύθμιση του επιπέδου μεγέθυνσης ώστε να περιλαμβάνονται όλα τα πρόσθετα σημεία;</string>
@@ -728,6 +730,8 @@
     <string name="init_summary_brouterShowBothDistances">Αν η δρομολόγηση είναι ενεργή: Εμφάνιση ευθείας απόστασης επιπλέον του υπολογισμένου μήκους διαδρομής.</string>
     <string name="init_useInternalRouting">Χρήση εσωτερικής δρομολόγησης</string>
     <string name="init_summary_useInternalRouting">Χρησιμοποιήστε την εσωτερική δρομολόγηση του c:geo για να μπορείτε να χρησιμοποιήσετε την αυτόματη δρομολόγηση δεδομένων λήψης και ενημέρωσης</string>
+    <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια</string>
+    <string name="init_summary_bigSmileysOnMap">Αν ενεργοποιηθεί, σύμβολα όπως το σημάδι \'βρέθηκε smiley\' ή το σημάδι \'διορθωμένες συντεταγμένες\' θα εμφανιστούν διευρυμένα στο χάρτη αντί του εικονιδίου τύπου κρύπτης (απαιτείται επανεκκίνηση).</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
     <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
@@ -1091,6 +1095,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Εξαίρεση δημιουργίας waypoints από σημειώσεις</string>
     <string name="cache_menu_allowWaypointExtraction">Δημιουργία waypoints από σημειώσεις</string>
     <string name="cache_personal_note_edit">Επεξεργασία</string>
+    <string name="cache_personal_note_storewaypoints">Προσθήκη/Ενημέρωση σημείων διαδρομής</string>
+    <string name="cache_personal_note_removewaypoints">Αφαίρεση σημείων διαδρομής</string>
     <string name="cache_personal_note_removedwaypoints">Τα σημεία αφαιρέθηκαν</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Δεν βρέθηκαν σημεία αναφοράς για αφαίρεση</string>
     <string name="cache_personal_note_storewaypoints_success">Τα σημεία προστέθηκαν στην προσωπική σημείωση</string>
@@ -1398,6 +1404,7 @@
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
+    <string name="search_bar_hint_settings">Ρυθμίσεις αναζήτησης</string>
     <string name="search_coordinates">Συντεταγμένες</string>
     <string name="search_coordinates_button">Αναζήτηση με συντεταγμένες</string>
     <string name="search_address">Διεύθυνση</string>
