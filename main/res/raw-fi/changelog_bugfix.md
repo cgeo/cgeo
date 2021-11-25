@@ -1,0 +1,2 @@
+- Korjaa: Mapsforgen välimuistitiedostot: Puhdistus ja uusi sijainti (erillinen kansio)
+- Korjaus: Freizeitkarte karttatiedostot: Käytä 'latest' kansiota lataajan ratkaisuna väliaikaisille palvelimen virheille
