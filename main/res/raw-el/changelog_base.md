@@ -1,12 +1,12 @@
-### General
-- Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
+### Γενικά
+- Αλλαγή: Εισαγωγή κάτω πλοήγηση για άμεση πρόσβαση στις πιο χρησιμοποιούμενες οθόνες c:geo, αντικαθιστώντας την παλαιά οθόνη
 
 ### Χάρτης
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- Change: Automatically enable track display on loading a GPX track file
+- Διόρθωση: Κατά τη φόρτωση αρχείων GPX που περιέχουν πολλαπλές διαδρομές να εμφανίζονται ως ξεχωριστές, αποσυνδεδεμένες διαδρομές
+- Αλλαγή: Αυτόματη ενεργοποίηση οθόνης ίχνους κατά τη φόρτωση αρχείου διαδρομής GPX
 
-### Cache list
-- New: Option to select next 20 caches
+### Λίστα κρυπτών
+- Νέο: Επιλογή, για να επιλέξετε τις επόμενες 20 κρύπτες
 
 ### Άλλο
-- New: Make Settings => View Settings filterable
+- Νέο: Κάντε τις ρυθμίσεις => Δείτε Ρυθμίσεις φιλτραρίσματος
