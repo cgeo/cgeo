@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.AttributesGridAdapter;
 import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CacheslistItemBinding;
@@ -45,6 +46,7 @@ import androidx.core.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -263,51 +265,33 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             }
         }
 
-        // display result
-        final ArrayList<Pair<String, Integer>> attrlist = new ArrayList<>();
-        for (Map.Entry<String, Integer> entry : attributes.entrySet()) {
-            attrlist.add(new Pair<>(entry.getKey(), entry.getValue()));
+        // traverse by category and attribute order
+        final ArrayList<String> a = new ArrayList<>();
+        final StringBuilder text = new StringBuilder();
+        for (int categoryId : CacheAttribute.getOrderedCategoryIdList()) {
+            for (CacheAttribute attr : CacheAttribute.values()) {
+                if (attr.group == categoryId) {
+                    for (Boolean enabled : Arrays.asList(false, true)) {
+                        final String key = attr.getValue(enabled);
+                        final Integer value = attributes.get(key);
+                        if (value != null && value > 0) {
+                            a.add(key);
+                            text.append('\n').append(attr.getL10n(enabled)).append(": ").append(value);
+                        }
+                    }
+                }
+            }
         }
 
         final Context context = getContext();
         final AlertDialog.Builder alertDialog = Dialogs.newBuilder(context);
-        final View convertView = (View) LayoutInflater.from(context).inflate(R.layout.generic_listview, null);
-        alertDialog.setView(convertView);
         alertDialog.setTitle(R.string.cache_filter_attributes);
-        final ListView lv = (ListView) convertView.findViewById(R.id.listView1);
-        final AttributeAdapter adapter = new AttributeAdapter(context, attrlist);
-        lv.setAdapter(adapter);
+
+        final View v = LayoutInflater.from(context).inflate(R.layout.cachelist_attributeoverview, null);
+        alertDialog.setView (v);
+        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, a));
+        ((TextView) v.findViewById(R.id.attributes_text)).setText(text);
         alertDialog.show();
-    }
-
-
-    private static class AttributeAdapter extends ArrayAdapter<Pair<String, Integer>> {
-
-        private final ArrayList<Pair<String, Integer>> objects;
-
-        AttributeAdapter(final Context context, final ArrayList<Pair<String, Integer>> objects) {
-            super(context, R.layout.cachelist_attributeoverview, objects);
-            this.objects = objects;
-        }
-
-        public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
-
-            View v = convertView;
-            if (v == null) {
-                final LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-                v = inflater.inflate(R.layout.cachelist_attributeoverview, null);
-            }
-
-            final Pair<String, Integer> i = objects.get(position);
-            if (i != null) {
-                final CacheAttribute attr = CacheAttribute.getByName(i.first);
-                assert attr != null;
-                ((ImageView) v.findViewById(R.id.attribute_icon)).setImageResource(attr.drawableId);
-                ((TextView) v.findViewById(R.id.attribute_counter)).setText(i.second.toString()); // boxing needed to use value as Integer, not as resource id
-                ((TextView) v.findViewById(R.id.attribute_description)).setText(attr.stringIdYes);
-            }
-            return v;
-        }
     }
 
     public void forceSort() {

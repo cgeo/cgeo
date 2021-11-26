@@ -29,6 +29,13 @@ public class AttributesGridAdapter extends BaseAdapter {
         inflater = LayoutInflater.from(context);
     }
 
+    public AttributesGridAdapter(final Activity context, final List<String> attributesList) {
+        this.context = context;
+        resources = context.getResources();
+        attributes = attributesList;
+        inflater = LayoutInflater.from(context);
+    }
+
     @Override
     public int getCount() {
         return attributes.size();
