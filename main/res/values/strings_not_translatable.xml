@@ -234,6 +234,7 @@
     <string translatable="false" name="helper_where_you_go_title">WhereYouGo</string>
     <string translatable="false" name="helper_chirpwolf">Chirp Wolf</string>
     <string translatable="false" name="helper_alc">Adventure Lab</string>
+    <string translatable="false" name="helper_gcwizard">GC Wizard</string>
 
     <!-- fileprovider -->
     <string translatable="false" name="file_provider_authority">org.cgeo.fileprovider</string>
@@ -256,6 +257,7 @@
     <string translatable="false" name="package_gpslocker">com.silentlexx.gpslock</string>
     <string translatable="false" name="package_locus">menion.android.locus</string>
     <string translatable="false" name="package_alc">com.groundspeak.react.adventures</string>
+    <string translatable="false" name="package_gcwizward">de.sman42.gc_wizard</string>
 
 
     <!-- map server & other download urls -->
