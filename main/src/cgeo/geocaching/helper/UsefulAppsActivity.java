@@ -24,6 +24,7 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
             new HelperApp(R.string.helper_chirpwolf, R.string.helper_chirpwolf_description, R.drawable.helper_chirpwolf, R.string.package_chirpwolf),
             new HelperApp(R.string.helper_locus_title, R.string.helper_locus_description, R.drawable.helper_locus, R.string.package_locus),
             new HelperApp(R.string.helper_alc, R.string.helper_alc_description, R.drawable.helper_alc, R.string.package_alc),
+            new HelperApp(R.string.helper_gcwizard, R.string.helper_gcwizard_description, R.drawable.helper_gcwizard, R.string.package_gcwizward),
     };
 
     @Override
