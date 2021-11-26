@@ -12,7 +12,7 @@
 - Yeni: Geocache ikonları üzerinde yeniden çalışma tamamlandı
 
 ### Geocache Ayrıntıları
-- New: Show icons for last logs
+- Yeni: Son kayıtlar için simge göster
 - New: Show icons for log entries in log tab
 - New: Option to hide visited waypoints on waypoints tab
 - Fix: Allow HTML in navigation targets' description
