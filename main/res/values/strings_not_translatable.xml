@@ -231,7 +231,6 @@
     <string translatable="false" name="helper_gpsstatus_title">GPS Status &amp; Toolbox</string>
     <string translatable="false" name="helper_bluetoothgps_title">Bluetooth GPS</string>
     <string translatable="false" name="helper_gps_locker_title">GPS Locker</string>
-    <string translatable="false" name="helper_barcode_title">Barcode Scanner</string>
     <string translatable="false" name="helper_where_you_go_title">WhereYouGo</string>
     <string translatable="false" name="helper_chirpwolf">Chirp Wolf</string>
     <string translatable="false" name="helper_alc">Adventure Lab</string>
@@ -255,7 +254,6 @@
     <string translatable="false" name="package_gpsstatus">com.eclipsim.gpsstatus2</string>
     <string translatable="false" name="package_bluetoothgps">googoo.android.btgps</string>
     <string translatable="false" name="package_gpslocker">com.silentlexx.gpslock</string>
-    <string translatable="false" name="package_barcode_scanner">com.google.zxing.client.android</string>
     <string translatable="false" name="package_locus">menion.android.locus</string>
     <string translatable="false" name="package_alc">com.groundspeak.react.adventures</string>
 
