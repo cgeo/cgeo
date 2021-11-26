@@ -1686,8 +1686,6 @@
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">If you download translation packages in the Google Translate app, then you can easily translate cache descriptions in c:geo by a long tap on the cache description text (without an Internet connection).</string>
     <string name="helper_where_you_go_description">WhereYouGo allows playing and searching geocaches of type Wherigo. c:geo can automatically trigger the download of cartridges within this app.</string>
-    <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouter provides offline routing. If it is installed and has the necessary files downloaded, c:geo will automatically show a route to the cache on the internal map.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf allows you to read the data from ANT+/Garmin chirp tags, which is needed for ANT+/chirp geocaches.</string>
     <string name="helper_alc_description">Adventure Lab Player app for your phone or tablet.</string>
     <string name="helper_gcwizard_description">GC Wizard contains numerous tools for simple cryptography, geographic and scientific calculations as well as hundreds of sets of various symbols.</string>
