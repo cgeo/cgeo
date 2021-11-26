@@ -21,7 +21,6 @@ public final class UsefulAppsActivity extends AbstractActionBarActivity {
             new HelperApp(R.string.helper_gpsstatus_title, R.string.helper_gpsstatus_description, R.drawable.helper_gpsstatus, R.string.package_gpsstatus),
             new HelperApp(R.string.helper_bluetoothgps_title, R.string.helper_bluetoothgps_description, R.drawable.helper_bluetoothgps, R.string.package_bluetoothgps),
             new HelperApp(R.string.helper_gps_locker_title, R.string.helper_gps_locker_description, R.drawable.helper_gps_locker, R.string.package_gpslocker),
-            new HelperApp(R.string.helper_barcode_title, R.string.helper_barcode_description, R.drawable.helper_barcode, R.string.package_barcode_scanner),
             new HelperApp(R.string.helper_chirpwolf, R.string.helper_chirpwolf_description, R.drawable.helper_chirpwolf, R.string.package_chirpwolf),
             new HelperApp(R.string.helper_locus_title, R.string.helper_locus_description, R.drawable.helper_locus, R.string.package_locus),
             new HelperApp(R.string.helper_alc, R.string.helper_alc_description, R.drawable.helper_alc, R.string.package_alc),
