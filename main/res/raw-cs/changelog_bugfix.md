@@ -1,2 +1,2 @@
-- Oprava: Soubory kešek na Mapsforge - čištění a nové (viditelné) umístění
+- Oprava: Soubory kešek pro Mapsforge: Čištění a nové umístění (samostatná složka)
 - Oprava: Mapové soubory Freizeitkarte - Použijte "nejnovější" složku v downloaderu jako řešení pro dočasné chyby serveru
