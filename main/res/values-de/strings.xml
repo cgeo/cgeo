@@ -381,6 +381,7 @@
     <string name="caches_sort_storage">Speicherdatum</string>
     <string name="caches_sort_eventdate">Event-Datum</string>
     <string name="caches_select_mode">Auswahlmodus</string>
+    <string name="caches_select_next">Nächste 20 Caches auswählen</string>
     <string name="caches_select_mode_exit">Auswahlmodus beenden</string>
     <string name="caches_select_invert">Auswahl invertieren</string>
     <string name="caches_nearby">In der Nähe</string>
@@ -724,7 +725,6 @@
     <string name="init_brouterShowBothDistances">Zeige Entfernung in Luftlinie</string>
     <string name="init_autoDownloads">Automatisch herunterladen</string>
     <string name="init_brouterAutoTileDownloads_description">Fehlende Routingdaten automatisch zum Herunterladen anbieten.</string>
-    <string name="init_mapAutoDownloads_description">Automatisch auf Updates für Karten und Kartendesigns prüfen. (Betrifft nur Dateien, die mit dem integrierten Downloader geladen wurden.)</string>
     <string name="init_brouterProfileWalk">\"Laufen\"-Profil</string>
     <string name="init_brouterProfileBike">\"Fahrrad\"-Profil</string>
     <string name="init_brouterProfileCar">\"Auto\"-Profil</string>
@@ -828,7 +828,6 @@
     <string name="init_map_directory_description">Ordner mit Offline-Karten</string>
     <string name="init_brouter_directory_description">Ordner mit BRouter Routingdaten</string>
     <string name="init_updateinterval_title">Aktualisierungsintervall</string>
-    <string name="init_updateinterval_description">Erinnert dich alle x Tage an eine Update-Prüfung</string>
     <string name="init_gpx_importexportdir">GPX-Ordner</string>
     <string name="init_dataDir">Datenordner wählen</string>
     <string name="init_dataDir_note">Du kannst auswählen, ob du die zusätzlichen Daten für Geocaches (z. B. Spoiler- und Logbilder) auf deinem externen Speicher (emulierte oder echte SD-Karte, gerätespezifisch) speichern möchtest.</string>
@@ -1407,6 +1406,7 @@
     <!-- search -->
     <string name="geo_search_label">Caches in der Nähe suchen</string>
     <string name="search_bar_hint">Caches/Trackables suchen</string>
+    <string name="search_bar_hint_settings">Sucheinstellungen</string>
     <string name="search_coordinates">Koordinaten</string>
     <string name="search_coordinates_button">Suche nach Koordinaten</string>
     <string name="search_address">Adresse</string>
