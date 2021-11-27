@@ -694,7 +694,6 @@
     <string name="init_brouterShowBothDistances">Zobraziť priamu vzdialenosť</string>
     <string name="init_autoDownloads">Automaticky prevziať</string>
     <string name="init_brouterAutoTileDownloads_description">Automatická ponuka prevziať chýbajúce údaje pre oblasť navigácie.</string>
-    <string name="init_mapAutoDownloads_description">Automaticky kontrolovať aktualizáciu máp a súborom témy. (Platí len pre súbory, ktoré ste prevzali zabudovaným nástrojom na prevzatie.)</string>
     <string name="init_brouterProfileWalk">Profil \"Chôdza\"</string>
     <string name="init_brouterProfileBike">Profil \"Bicykel\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
@@ -796,7 +795,6 @@
     <string name="init_map_directory_description">Priečinok s offline mapami</string>
     <string name="init_brouter_directory_description">Priečinok s údajmi navigácie BRouter</string>
     <string name="init_updateinterval_title">Interval aktualizácie</string>
-    <string name="init_updateinterval_description">Pripomenúť každých x dní kontrolu aktualizácie</string>
     <string name="init_gpx_importexportdir">Priečinok GPX</string>
     <string name="init_dataDir">Vyberte priečinok s údajmi</string>
     <string name="init_dataDir_note">Môžete zvoliť ukladanie ďalších údajov k skrýšam (spoilery, obrázky z logov…) do externej pamäte (emulovaná alebo skutočná externá SD karta, závisí to od zariadenia).</string>
