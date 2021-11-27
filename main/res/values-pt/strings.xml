@@ -725,7 +725,6 @@
     <string name="init_brouterShowBothDistances">Mostrar distância em linha recta</string>
     <string name="init_autoDownloads">Transferência automática</string>
     <string name="init_brouterAutoTileDownloads_description">Oferecer automaticamente a transferência de dados dos blocos para encaminhamento em falta.</string>
-    <string name="init_mapAutoDownloads_description">Verificar automaticamente por actualizações dos ficheiros do mapa e dos temas. (Válido apenas para os ficheiros que tenha transferido com o gestor de transferências integrado.)</string>
     <string name="init_brouterProfileWalk">Perfil \"Caminhar\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Carro\"</string>
@@ -829,7 +828,6 @@
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_brouter_directory_description">Pasta com dados de encaminhamento do BRouter</string>
     <string name="init_updateinterval_title">Intervalo de actualização</string>
-    <string name="init_updateinterval_description">Lembra-o a cada x dias para verificar por actualizações</string>
     <string name="init_gpx_importexportdir">Pasta GPX</string>
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
