@@ -715,6 +715,7 @@
     <string name="init_select_language">Seleziona lingua</string>
     <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
+    <string name="init_showwaypoints">Mostra i waypoint</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
     <string name="init_zoomincludingwaypoints">Zoom compreso i waypoint</string>
     <string name="init_zoomincludingwaypoints_description">Con mappatura di un singolo cache: lo zoom deve essere regolato per includere tutti i waypoint?</string>
@@ -723,7 +724,6 @@
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="init_autoDownloads">Download automatico</string>
     <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
-    <string name="init_mapAutoDownloads_description">Controlla automaticamente l\'aggiornamento dei file di mappa e tema. (Valido solo per i file scaricati con il sistema di download integrato.)</string>
     <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
     <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
     <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
@@ -732,6 +732,8 @@
     <string name="init_summary_brouterShowBothDistances">Se il routing è attivo: mostra la distanza oltre alla lunghezza del percorso calcolata.</string>
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
+    <string name="init_bigSmileysOnMap">Icone grandi</string>
+    <string name="init_summary_bigSmileysOnMap">Se abilitato, i simboli come \'smile trovato\' o \'coordinate corrette\' verranno mostrati ingranditi sulla mappa invece dell\'icona tipo cache (richiede il riavvio).</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
     <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
@@ -825,7 +827,6 @@
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_brouter_directory_description">Cartella con i dati di navigazione di BRouter</string>
     <string name="init_updateinterval_title">Intervallo di aggiornamento</string>
-    <string name="init_updateinterval_description">Ti ricorda ogni x giorni di controllare gli aggiornamenti</string>
     <string name="init_gpx_importexportdir">Cartella GPX</string>
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
@@ -1095,6 +1096,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Impedisci waypoint dalle note</string>
     <string name="cache_menu_allowWaypointExtraction">Consenti waypoint dalle note</string>
     <string name="cache_personal_note_edit">Modifica</string>
+    <string name="cache_personal_note_storewaypoints">Aggiungi/Aggiorna i waypoint</string>
+    <string name="cache_personal_note_removewaypoints">Rimuovi i waypoint</string>
     <string name="cache_personal_note_removedwaypoints">Waypoints rimossi</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nessun waypoint trovato da rimuovere</string>
     <string name="cache_personal_note_storewaypoints_success">I waypoint sono stati aggiunti alla nota personale</string>

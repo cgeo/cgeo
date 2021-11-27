@@ -380,6 +380,7 @@
     <string name="caches_sort_storage">Cihaza kaydedilen tarih</string>
     <string name="caches_sort_eventdate">Etkinlik tarihi</string>
     <string name="caches_select_mode">Seçim modu</string>
+    <string name="caches_select_next">Sonraki 20 Geocache\'i seç</string>
     <string name="caches_select_mode_exit">Seçim modundan çıkın</string>
     <string name="caches_select_invert">Seçimi tersine çevir</string>
     <string name="caches_nearby">Yakınlarda</string>
@@ -722,7 +723,6 @@
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="init_autoDownloads">Otomatik indirme</string>
     <string name="init_brouterAutoTileDownloads_description">Eksik olan rotalama deseni dosyasını otomatik olarak indirmeyi teklif et.</string>
-    <string name="init_mapAutoDownloads_description">Harita ve tema dosyalarının güncellemesini otomatik olarak kontrol eder. (Sadece dahili indirme yöneticisiyle indirdiğiniz dosyalar için geçerlidir.)</string>
     <string name="init_brouterProfileWalk">Yürüme</string>
     <string name="init_brouterProfileBike">Bisiklet</string>
     <string name="init_brouterProfileCar">Araba</string>
@@ -825,7 +825,6 @@
     <string name="init_map_directory_description">Çevrim dışı haritalar klasörü</string>
     <string name="init_brouter_directory_description">BRouter yönlendirme verisi içeren klasör</string>
     <string name="init_updateinterval_title">Güncelleme sıklığı</string>
-    <string name="init_updateinterval_description">Her x günde bir güncelleme kontrolü yapmanızı hatırlatacak</string>
     <string name="init_gpx_importexportdir">GPX Dizini</string>
     <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
@@ -1404,6 +1403,7 @@
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
+    <string name="search_bar_hint_settings">Arama ayarları</string>
     <string name="search_coordinates">Koordinatlar</string>
     <string name="search_coordinates_button">Koordinatlara göre ara</string>
     <string name="search_address">Adres</string>

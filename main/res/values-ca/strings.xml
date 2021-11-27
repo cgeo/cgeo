@@ -724,7 +724,6 @@
     <string name="init_brouterShowBothDistances">Mostra la distància en línia recta</string>
     <string name="init_autoDownloads">Descàrrega automàtica</string>
     <string name="init_brouterAutoTileDownloads_description">Oferiu automàticament la baixada de dades d’encaminament que falten.</string>
-    <string name="init_mapAutoDownloads_description">Comproveu automàticament si hi ha actualitzacions de fitxers de mapes i temes. (Vàlid només per als fitxers que heu descarregat amb el programa de descàrrega integrat.)</string>
     <string name="init_brouterProfileWalk">Perfil \"A peu\"</string>
     <string name="init_brouterProfileBike">Perfil \"Bicicleta\"</string>
     <string name="init_brouterProfileCar">Perfil \"Cotxe\"</string>
@@ -826,7 +825,6 @@
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
     <string name="init_brouter_directory_description">Carpeta amb dades d’encaminament BRouter</string>
     <string name="init_updateinterval_title">Interval d\'actualització</string>
-    <string name="init_updateinterval_description">Us recorda cada x dies per comprovar les actualitzacions</string>
     <string name="init_gpx_importexportdir">Carpeta GPX</string>
     <string name="init_dataDir">Selecciona la carpeta de dades</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>

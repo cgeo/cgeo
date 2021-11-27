@@ -723,7 +723,6 @@
     <string name="init_brouterShowBothDistances">Visa rakt avstånd</string>
     <string name="init_autoDownloads">Automatisk nedladdning</string>
     <string name="init_brouterAutoTileDownloads_description">Erbjuder automatiskt att ladda ner saknade routing-data.</string>
-    <string name="init_mapAutoDownloads_description">Sök automatiskt efter uppdatering av kart- och temafiler. (Giltigt endast för filer du har hämtat med den integrerade nedladdaren.)</string>
     <string name="init_brouterProfileWalk">\"Promenad\" profil</string>
     <string name="init_brouterProfileBike">\"Cykel\" profil</string>
     <string name="init_brouterProfileCar">\"Bil\" profil</string>
@@ -825,7 +824,6 @@
     <string name="init_map_directory_description">Mapp med offline-kartor</string>
     <string name="init_brouter_directory_description">Mapp med BRouter navigeringsdata</string>
     <string name="init_updateinterval_title">Uppdateringsintervall</string>
-    <string name="init_updateinterval_description">Påminner dig var x:e dag för en uppdateringskontroll</string>
     <string name="init_gpx_importexportdir">GPX mapp</string>
     <string name="init_dataDir">Välj datamapp</string>
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
