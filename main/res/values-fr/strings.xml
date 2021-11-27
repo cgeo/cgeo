@@ -724,7 +724,6 @@
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="init_autoDownloads">Téléchargement automatique</string>
     <string name="init_brouterAutoTileDownloads_description">Propose automatiquement de télécharger les données des tuiles de routage manquantes.</string>
-    <string name="init_mapAutoDownloads_description">Vérifier automatiquement la mise à jour des données cartographiques et des thèmes. (Valable uniquement pour les fichiers que vous avez téléchargés avec le téléchargeur intégré.)</string>
     <string name="init_brouterProfileWalk">Profil \"Marche\"</string>
     <string name="init_brouterProfileBike">Profil \"Vélo\"</string>
     <string name="init_brouterProfileCar">Profil \"Voiture\"</string>
@@ -828,7 +827,6 @@
     <string name="init_map_directory_description">Dossier des cartes hors ligne</string>
     <string name="init_brouter_directory_description">Dossier avec données de routage BRouter</string>
     <string name="init_updateinterval_title">Intervalle de mise à jour</string>
-    <string name="init_updateinterval_description">Vous rappelle tous les x jours de vérifier les mises à jour</string>
     <string name="init_gpx_importexportdir">Dossier GPX</string>
     <string name="init_dataDir">Sélectionnez un dossier de données</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
