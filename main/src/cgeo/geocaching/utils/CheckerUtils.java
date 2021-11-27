@@ -47,7 +47,9 @@ public final class CheckerUtils {
                         } else {
                             coordinateToCheck = cache.getCoords();
                         }
-                        url = url + checker.getUrlCoordinateParam() + coordinateToCheck.format(checker.getCoordinateFormat());
+                        if (coordinateToCheck != null) {
+                            url = url + checker.getUrlCoordinateParam() + coordinateToCheck.format(checker.getCoordinateFormat());
+                        }
                     }
                     return StringEscapeUtils.unescapeHtml4(url);
                 }
