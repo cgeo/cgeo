@@ -381,6 +381,7 @@
     <string name="caches_sort_storage">Datum opgeslagen op apparaat</string>
     <string name="caches_sort_eventdate">Event datum</string>
     <string name="caches_select_mode">Selectie modus</string>
+    <string name="caches_select_next">Selecteer volgende 20 caches</string>
     <string name="caches_select_mode_exit">Selectie modus beëindigen</string>
     <string name="caches_select_invert">Selectie omkeren</string>
     <string name="caches_nearby">Nabij</string>
@@ -724,7 +725,6 @@
     <string name="init_brouterShowBothDistances">Toon de hemelsbrede afstand</string>
     <string name="init_autoDownloads">Automatische download</string>
     <string name="init_brouterAutoTileDownloads_description">Automatisch aanbieden om ontbrekende routering tegel gegevens te downloaden.</string>
-    <string name="init_mapAutoDownloads_description">Automatisch controleren op updates van kaart en thema bestanden (alleen geldig voor bestanden die je hebt gedownload met de geïntegreerde downloader).</string>
     <string name="init_brouterProfileWalk">\"Wandelen\" profiel</string>
     <string name="init_brouterProfileBike">\"Fiets\" profiel</string>
     <string name="init_brouterProfileCar">\"Auto\" profiel</string>
@@ -828,7 +828,6 @@
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_brouter_directory_description">Map met BRouter routering data</string>
     <string name="init_updateinterval_title">Update interval</string>
-    <string name="init_updateinterval_description">Herinnert je om de x dagen voor een update controle</string>
     <string name="init_gpx_importexportdir">GPX map</string>
     <string name="init_dataDir">Gegevensmap selecteren</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
@@ -1407,6 +1406,7 @@
     <!-- search -->
     <string name="geo_search_label">Zoek caches in de omgeving</string>
     <string name="search_bar_hint">Caches/trackables zoeken</string>
+    <string name="search_bar_hint_settings">Zoekinstellingen</string>
     <string name="search_coordinates">Coördinaten</string>
     <string name="search_coordinates_button">Zoeken op coördinaten</string>
     <string name="search_address">Adres</string>
