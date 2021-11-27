@@ -721,7 +721,6 @@
     <string name="init_brouterShowBothDistances">Εμφάνιση ευθείας απόστασης</string>
     <string name="init_autoDownloads">Αυτόματη λήψη</string>
     <string name="init_brouterAutoTileDownloads_description">Αυτόματη προσφορά για λήψη δεδομένων δρομολόγησης που λείπουν.</string>
-    <string name="init_mapAutoDownloads_description">Αυτόματος έλεγχος για ενημέρωση των αρχείων χάρτη και θέματος. (Ισχύει μόνο για αρχεία που έχετε κατεβάσει με τον ενσωματωμένο downloader.)</string>
     <string name="init_brouterProfileWalk">Προφίλ \"περπάτημα\"</string>
     <string name="init_brouterProfileBike">Προφίλ \"ποδήλατο\"</string>
     <string name="init_brouterProfileCar">Προφίλ \"Αυτοκίνητο\"</string>
@@ -825,7 +824,6 @@
     <string name="init_map_directory_description">Κατάλογος χαρτών εκτός σύνδεσης</string>
     <string name="init_brouter_directory_description">Φάκελος με δεδομένα δρομολόγησης BRouter</string>
     <string name="init_updateinterval_title">Διάστημα μεταξύ ενημερώσεων</string>
-    <string name="init_updateinterval_description">Σας υπενθυμίζει κάθε x ημέρες για έλεγχο ενημερώσεων</string>
     <string name="init_gpx_importexportdir">Φάκελος GPX</string>
     <string name="init_dataDir">Επιλέξτε φάκελο</string>
     <string name="init_dataDir_note">Μπορείτε να επιλέξετε την αποθήκευση των πρόσθετων δεδομένων των κρυπτών (σπόιλερ, καταγραφές, εικόνες, …) σε εξωτερική συσκευή αποθήκευσης ( πραγματική ή μη εξωτερική κάρτα SD ανάλογα με τη συσκευή σας).</string>
