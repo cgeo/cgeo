@@ -725,7 +725,6 @@
     <string name="init_brouterShowBothDistances">Näytä suora etäisyys</string>
     <string name="init_autoDownloads">Automaattinen lataus</string>
     <string name="init_brouterAutoTileDownloads_description">Tarjoa automaattisesti puuttuvien reititystietojen laattojen latausta.</string>
-    <string name="init_mapAutoDownloads_description">Tarkista automaattisesti kartta- ja teematiedostojen päivitys. (Pätee vain tiedostoille, jotka olet ladannut sisäisen latauksen avulla.)</string>
     <string name="init_brouterProfileWalk">\"Kävely\"-profiili</string>
     <string name="init_brouterProfileBike">\"Pyöräily\"-profiili</string>
     <string name="init_brouterProfileCar">\"Autoilu\"-profiili</string>
@@ -829,7 +828,6 @@
     <string name="init_map_directory_description">Offline-kartat sisältävä kansio</string>
     <string name="init_brouter_directory_description">Kansio, joka sisältää BRouterin reititystiedot</string>
     <string name="init_updateinterval_title">Päivitysväli</string>
-    <string name="init_updateinterval_description">Muistuttaa sinua joka x päivä tarkastamaan päivitykset</string>
     <string name="init_gpx_importexportdir">GPX-kansio</string>
     <string name="init_dataDir">Valitse datakansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
