@@ -723,7 +723,6 @@
     <string name="init_brouterShowBothDistances">Düz mesafeyi göster</string>
     <string name="init_autoDownloads">Otomatik indirme</string>
     <string name="init_brouterAutoTileDownloads_description">Eksik olan rotalama deseni dosyasını otomatik olarak indirmeyi teklif et.</string>
-    <string name="init_mapAutoDownloads_description">Harita ve tema dosyalarının güncellemesini otomatik olarak kontrol eder. (Sadece dahili indirme yöneticisiyle indirdiğiniz dosyalar için geçerlidir.)</string>
     <string name="init_brouterProfileWalk">Yürüme</string>
     <string name="init_brouterProfileBike">Bisiklet</string>
     <string name="init_brouterProfileCar">Araba</string>
@@ -826,7 +825,6 @@
     <string name="init_map_directory_description">Çevrim dışı haritalar klasörü</string>
     <string name="init_brouter_directory_description">BRouter yönlendirme verisi içeren klasör</string>
     <string name="init_updateinterval_title">Güncelleme sıklığı</string>
-    <string name="init_updateinterval_description">Her x günde bir güncelleme kontrolü yapmanızı hatırlatacak</string>
     <string name="init_gpx_importexportdir">GPX Dizini</string>
     <string name="init_dataDir">Data klasörünü seç</string>
     <string name="init_dataDir_note">Geocache için ek verileri (ipucu görselleri, kayıt görselleri, …) harici deponuzda saklamak isteyebilirsiniz. (Cihazınıza bağlı benzetilmiş veya gerçek harici hafıza kartı).</string>
