@@ -39,11 +39,6 @@
         android:icon="@drawable/ic_external_link"
         android:title="@string/menu_helpers">
     </item>
-    <item
-        android:id="@+id/menu_scan"
-        android:icon="@drawable/ic_menu_barcode"
-        android:title="@string/menu_scan_geo">
-    </item>
 
     <group android:id="@+id/menu_group_settings">
         <item

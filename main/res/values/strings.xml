@@ -346,10 +346,8 @@
     <string name="menu_history">History</string>
     <string name="menu_history_longstring">Finds history</string>
     <string name="menu_filter">Filter</string>
-    <string name="menu_scan_geo">Scan geocode</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bookmark lists</string>
-    <string name="menu_scan_description">c:geo can scan geocodes which are printed as QR code. The necessary app is not installed. Do you want to open Google Play to install it?</string>
     <string name="menu_invert_order">Invert order</string>
 
     <!-- main screen -->
