@@ -10,3 +10,4 @@
 
 ### Άλλο
 - Νέο: Κάντε τις ρυθμίσεις => Δείτε Ρυθμίσεις φιλτραρίσματος
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
