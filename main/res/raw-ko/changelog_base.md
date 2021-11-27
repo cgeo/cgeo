@@ -10,3 +10,4 @@
 
 ### 추가 사항
 - 신규: 설정 만들기 => 필터링 가능한 보기 설정
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
