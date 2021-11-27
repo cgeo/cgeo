@@ -712,7 +712,6 @@
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="init_autoDownloads">更新確認の通知</string>
     <string name="init_brouterAutoTileDownloads_description">ルート検索データの更新を確認するように定期的に通知します</string>
-    <string name="init_mapAutoDownloads_description">地図とテーマファイルの更新を確認するように定期的に通知します</string>
     <string name="init_brouterProfileWalk">「徒歩」プロファイル</string>
     <string name="init_brouterProfileBike">「自転車」プロファイル</string>
     <string name="init_brouterProfileCar">「自動車」プロファイル</string>
@@ -814,7 +813,6 @@
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_brouter_directory_description">ルート検索データ(Brouter互換)フォルダ</string>
     <string name="init_updateinterval_title">通知間隔</string>
-    <string name="init_updateinterval_description">更新確認の通知間隔(日)</string>
     <string name="init_gpx_importexportdir">GPXフォルダ</string>
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
