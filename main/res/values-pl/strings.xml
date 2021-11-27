@@ -731,7 +731,6 @@
     <string name="init_brouterShowBothDistances">Pokaż odległość w linii prostej</string>
     <string name="init_autoDownloads">Automatyczne pobieranie</string>
     <string name="init_brouterAutoTileDownloads_description">Automatycznie zaoferuj pobieranie brakujących danych kafelków dla nawigacji.</string>
-    <string name="init_mapAutoDownloads_description">Automatycznie sprawdzaj aktualizację plików map i motywów. (Działa tylko z plikami, które pobrałeś ze zintegrowanym pobieraniem.)</string>
     <string name="init_brouterProfileWalk">Profil „Pieszo”</string>
     <string name="init_brouterProfileBike">Profil „Rower”</string>
     <string name="init_brouterProfileCar">Profil „Samochód”</string>
@@ -833,7 +832,6 @@
     <string name="init_map_directory_description">Folder z mapami offline</string>
     <string name="init_brouter_directory_description">Folder z danymi nawigacji BRouter</string>
     <string name="init_updateinterval_title">Częstotliwość odświeżania</string>
-    <string name="init_updateinterval_description">Przypomina o sprawdzaniu aktualizacji co x dni</string>
     <string name="init_gpx_importexportdir">Folder z plikami GPX</string>
     <string name="init_dataDir">Wybierz folder</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
