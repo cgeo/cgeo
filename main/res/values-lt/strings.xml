@@ -764,7 +764,6 @@
     <string name="init_map_directory_description">Katalogas su išsaugotais žemėlapiais</string>
     <string name="init_brouter_directory_description">Aplankas su BRouter maršruto duomenimis</string>
     <string name="init_updateinterval_title">Atnaujinimo intervalas</string>
-    <string name="init_updateinterval_description">Primena jums kas x dienų, kad patikrintumėte atnaujinimą</string>
     <string name="init_gpx_importexportdir">GPX aplankas</string>
     <string name="init_dataDir">Pasirinkti duomenų aplanką</string>
     <string name="init_dataDir_note">Galite pasirinkti saugoti papildomus slėptuvių duomenis (užuominas, įrašų vaizdus, …) išorinėje atmintyje (pseudo ar tikroje išorinėje SD kortelėje, priklausomai nuo jūsų įrenginio).</string>
