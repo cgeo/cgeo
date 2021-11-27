@@ -715,6 +715,7 @@
     <string name="init_select_language">Sélectionner la langue</string>
     <string name="init_summary_select_language">Sélectionnez la langue de l\'application (nécessite un redémarrage)\n</string>
     <string name="init_use_default_language">Utiliser la langue par défaut</string>
+    <string name="init_showwaypoints">Afficher les points de passage</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points de passage sont affichés en plus sur la carte.</string>
     <string name="init_zoomincludingwaypoints">Le zoom inclut les points de passage</string>
     <string name="init_zoomincludingwaypoints_description">S\'il n\'y a qu\'une seule cache sur la carte : le zoom doit-il être ajusté pour inclure tous ses points de passage ?</string>
@@ -723,7 +724,6 @@
     <string name="init_brouterShowBothDistances">Afficher la distance à vol d\'oiseau</string>
     <string name="init_autoDownloads">Téléchargement automatique</string>
     <string name="init_brouterAutoTileDownloads_description">Propose automatiquement de télécharger les données des tuiles de routage manquantes.</string>
-    <string name="init_mapAutoDownloads_description">Vérifier automatiquement la mise à jour des données cartographiques et des thèmes. (Valable uniquement pour les fichiers que vous avez téléchargés avec le téléchargeur intégré.)</string>
     <string name="init_brouterProfileWalk">Profil \"Marche\"</string>
     <string name="init_brouterProfileBike">Profil \"Vélo\"</string>
     <string name="init_brouterProfileCar">Profil \"Voiture\"</string>
@@ -732,6 +732,8 @@
     <string name="init_summary_brouterShowBothDistances">Lorsque la navigation est en cours : Afficher la distance à vol d\'oiseau en plus de la distance calculée pour l\'itinéraire.</string>
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_summary_useInternalRouting">Utiliser le routage interne de c:geo pour pouvoir utiliser le téléchargement automatique des données de routage et d\'autres fonctions</string>
+    <string name="init_bigSmileysOnMap">Grands icônes</string>
+    <string name="init_summary_bigSmileysOnMap">Si activé, les icônes comme « smiley trouvé » seront affichés en grande taille sur la carte à la place de l\'icône type de cache (nécessite un redémarrage).</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
     <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
@@ -825,7 +827,6 @@
     <string name="init_map_directory_description">Dossier des cartes hors ligne</string>
     <string name="init_brouter_directory_description">Dossier avec données de routage BRouter</string>
     <string name="init_updateinterval_title">Intervalle de mise à jour</string>
-    <string name="init_updateinterval_description">Vous rappelle tous les x jours de vérifier les mises à jour</string>
     <string name="init_gpx_importexportdir">Dossier GPX</string>
     <string name="init_dataDir">Sélectionnez un dossier de données</string>
     <string name="init_dataDir_note">Vous pouvez enregistrer les données supplémentaires des géocaches (spoiler, images issues des journaux, …) sur le stockage externe (carte externe SD réelle ou émulée selon votre matériel).</string>
@@ -1095,6 +1096,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Empêcher les points de passage depuis la note</string>
     <string name="cache_menu_allowWaypointExtraction">Autoriser les points de passage depuis la note</string>
     <string name="cache_personal_note_edit">Modifier</string>
+    <string name="cache_personal_note_storewaypoints">Ajouter / Mettre à jour les points de passage</string>
+    <string name="cache_personal_note_removewaypoints">Supprimer les points de passage</string>
     <string name="cache_personal_note_removedwaypoints">Points de passage supprimés</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Aucun point de passage à supprimer</string>
     <string name="cache_personal_note_storewaypoints_success">Les points de passage ont été ajoutés à la note personnelle</string>
