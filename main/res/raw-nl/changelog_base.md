@@ -10,3 +10,4 @@
 
 ### Overig
 - Nieuw: Maak instellingen => Weergave instellingen filterbaar
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
