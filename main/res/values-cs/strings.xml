@@ -733,7 +733,6 @@
     <string name="init_brouterShowBothDistances">Zobrazit přímou vzdálenost</string>
     <string name="init_autoDownloads">Automatické stahování</string>
     <string name="init_brouterAutoTileDownloads_description">Automaticky nabídnout stažení chybějících dat pro směrování.</string>
-    <string name="init_mapAutoDownloads_description">Automaticky kontrolovat aktualizace map a souborů s motivy (platí pouze pro soubory, které jste si stáhli pomocí integrovaného správce stahování.)</string>
     <string name="init_brouterProfileWalk">Profil \"Chůze\"</string>
     <string name="init_brouterProfileBike">Profil \"Kolo\"</string>
     <string name="init_brouterProfileCar">Profil \"Auto\"</string>
@@ -837,7 +836,7 @@
     <string name="init_map_directory_description">Složka s offline mapami</string>
     <string name="init_brouter_directory_description">Složka s daty pro naviagaci BRouter</string>
     <string name="init_updateinterval_title">Interval aktualizace</string>
-    <string name="init_updateinterval_description">Každých x dní vám připomene kontrolu aktualizací</string>
+    <string name="init_updateinterval_description">Každých x dní vám připomíná kontrolu aktualizací (platí pouze pro soubory, které jste stáhli prostřednictvím c:geo), 0=vypnuto</string>
     <string name="init_gpx_importexportdir">Složka pro GPX</string>
     <string name="init_dataDir">Vybrat složku s údaji</string>
     <string name="init_dataDir_note">Můžete se rozhodnout k uložení dalších dat pro kešky (nápovědy, obrázky, …) na externí úložiště (emulované nebo skutečné externí SD kartu ve vašem zařízení).</string>
