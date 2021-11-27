@@ -10,3 +10,4 @@
 
 ### Outro
 - Novo: Pôr Configurações => Visualizar configurações filtráveis
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
