@@ -721,7 +721,6 @@
     <string name="init_brouterShowBothDistances">직선 거리 보기</string>
     <string name="init_autoDownloads">자동 다운로드</string>
     <string name="init_brouterAutoTileDownloads_description">누락 된 라우팅 타일 데이터를 자동으로 다운로드하도록 제안합니다.</string>
-    <string name="init_mapAutoDownloads_description">지도 및 테마 파일 업데이트를 자동으로 확인합니다. (통합 다운로더로 다운로드 한 파일에만 유효합니다.)</string>
     <string name="init_brouterProfileWalk">\"걷기\" 프로필</string>
     <string name="init_brouterProfileBike">\"자전거\" 프로필</string>
     <string name="init_brouterProfileCar">\"자동차\" 프로필</string>
@@ -825,7 +824,6 @@
     <string name="init_map_directory_description">오프라인 지도 폴더</string>
     <string name="init_brouter_directory_description">BRouter 라우팅 데이터가 있는 폴더</string>
     <string name="init_updateinterval_title">업데이트 간격</string>
-    <string name="init_updateinterval_description">업데이트 확인을 위해 X 일마다 알림</string>
     <string name="init_gpx_importexportdir">GPX 폴더</string>
     <string name="init_dataDir">데이터 폴더 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
