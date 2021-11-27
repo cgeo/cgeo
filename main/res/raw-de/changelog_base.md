@@ -1,27 +1,13 @@
+### Allgemein
+- Änderung: Navigation am unteren Bildschirmrand für direkten Zugriff auf die meistgenutzten Bereiche von c:geo, ersetzt den bisherigen Startbildschirm
+
 ### Karte
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- New: Complete rework of all cache icons
-- Neu: Symbole für die letzten Logs im Cache Popup anzeigen
-- Korrektur: Zeige Entfernungskreise für benutzerdefinierte Caches (wenn Kreise aktiviert sind)
-- Korrektur: Cache-Titel im Cache- / Wegpunkt-Popup sind nun sichtbarer
-- Korrektur: Warnung in der Live-Karte anzeigen, wenn der Live-Modus deaktiviert ist
-- Fix: Allow HTML in navigation targets' description
-- Änderung: Zoom-Steuerung für OSM-Karten angepasst für eine bessere Konsistenz über Karten hinweg
-- Änderung: Die meisten Menüoptionen für individuelle Routen wurden für einen schnelleren Zugriff auf den neuen Schnellzugriffsbutton am unteren Bildschirmrand verschoben. (Wird nur angezeigt, wenn eine individuelle Route geladen / erzeugt wurde.)
+- Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt
+- Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
 
-### Cachelisten
-- Neu: Komplette Überarbeitung aller Cache-Symbole
-
-### Cache-Details
-- Neu: Symbole für letzte Logs anzeigen
-- Neu: Symbole für Logeinträge im Log-Tab anzeigen
-- Neu: Option zum Ausblenden der besuchten Wegpunkte auf dem Wegpunkt-Tab
-- Korrektur: Erlaube HTML in Beschreibungen von Navigationszielen
-- Korrektur: Blende Kurzbeschreibung aus, wenn bereits in Langbeschreibung enthalten
-- Korrektur: Koordinateneingabe neu gestaltet für bessere Anzeige in besonderen Konstellationen
-- Neu: Variable / Rechner Tab hinzugefügt (experimentell, Debug-Modus aktivieren, um es zu sehen)
+### Cacheliste
+- Neu: Option zum Auswählen der nächsten 20 Caches
 
 ### Sonstiges
-- Änderung: Lesezeichenlisten und Pocket-Queries getrennt (nur geocaching.com PM)
-- Neu: Wartungsfunktion erweitert, um als "gelöscht" markierte Caches endgültig zu löschen
-- Änderung: Hardwarebeschleunigung immer verwenden (Einstellung und Überprüfung alter Smartphone-Modelle entfernt)
+- Neu: Übersicht der Einstellungen ist nun filterbar
+- Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
