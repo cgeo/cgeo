@@ -724,7 +724,6 @@
     <string name="init_brouterShowBothDistances">Mostra distanza</string>
     <string name="init_autoDownloads">Download automatico</string>
     <string name="init_brouterAutoTileDownloads_description">Proponi automaticamente per scaricare i dati dei riquadri di mappa mancanti nel routing.</string>
-    <string name="init_mapAutoDownloads_description">Controlla automaticamente l\'aggiornamento dei file di mappa e tema. (Valido solo per i file scaricati con il sistema di download integrato.)</string>
     <string name="init_brouterProfileWalk">Profilo \"Camminata\"</string>
     <string name="init_brouterProfileBike">Profilo \"Bici\"</string>
     <string name="init_brouterProfileCar">Profilo \"Automobile\"</string>
@@ -828,7 +827,6 @@
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_brouter_directory_description">Cartella con i dati di navigazione di BRouter</string>
     <string name="init_updateinterval_title">Intervallo di aggiornamento</string>
-    <string name="init_updateinterval_description">Ti ricorda ogni x giorni di controllare gli aggiornamenti</string>
     <string name="init_gpx_importexportdir">Cartella GPX</string>
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
