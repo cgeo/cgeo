@@ -509,8 +509,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_goto) {
             InternalConnector.assertHistoryCacheExists(this);
             CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
-        } else if (id == R.id.menu_scan) {
-            startScannerApplication();
         } else if (id == R.id.menu_pocket_queries) {
             if (Settings.isGCPremiumMember()) {
                 startActivity(new Intent(this, PocketQueryListActivity.class));
@@ -527,16 +525,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             return super.onOptionsItemSelected(item);
         }
         return true;
-    }
-
-    private void startScannerApplication() {
-        final IntentIntegrator integrator = new IntentIntegrator(this);
-        // integrator dialog is English only, therefore localize it
-        integrator.setButtonYesByID(android.R.string.yes);
-        integrator.setButtonNoByID(android.R.string.no);
-        integrator.setTitleByID(R.string.menu_scan_geo);
-        integrator.setMessageByID(R.string.menu_scan_description);
-        integrator.initiateScan(IntentIntegrator.QR_CODE_TYPES);
     }
 
     private void hideActionIconsWhenSearchIsActive(final Menu menu) {
