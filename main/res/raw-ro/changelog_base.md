@@ -10,3 +10,4 @@
 
 ### Other
 - New: Make Settings => View Settings filterable
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
