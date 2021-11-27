@@ -703,6 +703,7 @@
     <string name="init_select_language">言語の選択</string>
     <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
+    <string name="init_showwaypoints">ウェイポイントを表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
     <string name="init_zoomincludingwaypoints">ウェイポイントを表示するようにズーム</string>
     <string name="init_zoomincludingwaypoints_description">1つだけキャッシュを表示している場合にすべてのウェイポイントが表示されるようにズーム</string>
@@ -711,7 +712,6 @@
     <string name="init_brouterShowBothDistances">直線距離を表示</string>
     <string name="init_autoDownloads">更新確認の通知</string>
     <string name="init_brouterAutoTileDownloads_description">ルート検索データの更新を確認するように定期的に通知します</string>
-    <string name="init_mapAutoDownloads_description">地図とテーマファイルの更新を確認するように定期的に通知します</string>
     <string name="init_brouterProfileWalk">「徒歩」プロファイル</string>
     <string name="init_brouterProfileBike">「自転車」プロファイル</string>
     <string name="init_brouterProfileCar">「自動車」プロファイル</string>
@@ -813,7 +813,6 @@
     <string name="init_map_directory_description">オフライン地図フォルダ</string>
     <string name="init_brouter_directory_description">ルート検索データ(Brouter互換)フォルダ</string>
     <string name="init_updateinterval_title">通知間隔</string>
-    <string name="init_updateinterval_description">更新確認の通知間隔(日)</string>
     <string name="init_gpx_importexportdir">GPXフォルダ</string>
     <string name="init_dataDir">データフォルダを選択</string>
     <string name="init_dataDir_note">ジオキャッシュ(スポイラー画像、ログの画像など)の追加データを外部ストレージ(お使いのデバイスに応じてエミュレートまたは実際の外部 SD カード)に格納することができます</string>
@@ -1075,6 +1074,8 @@
     <string name="cache_menu_preventWaypointsFromNote">ノートからウェイポイント抽出しない</string>
     <string name="cache_menu_allowWaypointExtraction">ノートからウェイポイント抽出する</string>
     <string name="cache_personal_note_edit">編集</string>
+    <string name="cache_personal_note_storewaypoints">ウェイポイントの追加/更新</string>
+    <string name="cache_personal_note_removewaypoints">ウェイポイントを削除</string>
     <string name="cache_personal_note_removedwaypoints">ウェイポイントを削除しました</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">削除するウェイポイントが見つかりません</string>
     <string name="cache_personal_note_storewaypoints_success">パーソナルノートにウェイポイントが追加されました</string>
