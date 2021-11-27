@@ -10,3 +10,4 @@
 
 ### Ostatní
 - Novinka: Provést nastavení => Zobrazit filtrovatelné nastavení
+- Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
