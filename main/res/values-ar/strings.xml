@@ -236,8 +236,6 @@
     <string name="menu_settings">الإعدادات</string>
     <string name="menu_history">التأريخ</string>
     <string name="menu_filter">فلتر</string>
-    <string name="menu_scan_geo">نسخ الكود المخبئ</string>
-    <string name="menu_scan_description">c:geo يمكنه نسخ كود المخبآت التي على كل كود QR. التطبيق المطلوب ليس مثبة. هل تريد فتح متجر جوجل لتقوم بتثبيته؟</string>
     <!-- main screen -->
     <string name="live_map_button">خريطة على نات</string>
     <string name="caches_nearby_button">قريب</string>
@@ -812,12 +810,9 @@
     <string name="helper_locus_description">تطبيق الملاحة في الهواء الطلق لهاتفك أو الكمبيوتر اللوحي. و عرض خرائط topo في وضع عدم اتصال، و تعقب مسارك و مطارة على الأخرين و الدليل الصوتي و أكثر من ذالك.</string>
     <string name="helper_gpsstatus_description">يمكنك استخدام الرادار في هذا التطبيق بالاشتراك مع c:geo. و سوف يوفر لك معلومات أخرى متعلقة GPS.</string>
     <string name="helper_bluetoothgps_description">يتيح لك استخدام مستقبل GPS خارجي للحصول على بيانات مواقع أكثر دقة، و يمكنك من توفير استهلاك بطاريتك.</string>
-    <string name="helper_barcode_description">هناك مواقع و برامج تjتيح عرض كود المخبئ مثل كود QR، مثل هذا التطبيق. و بهذا c:geo يمكنه قراءة كود المخبئ مباشرة من شاشة حاسوبك.</string>
     <string name="helper_google_translate_title">ترجمة جوجل</string>
     <string name="helper_google_translate_description">إذا قمت بتحميل حزم الترجمة في تطبيق ترجمة جوجل،عندها يمكنك ترجمة تفاصيل المخبئ في c:geo و ذالك من خلال الضغط مطولاً على نص وصف المخبئ (بدون الاتصال بالانترنات).</string>
     <string name="helper_where_you_go_description">WhereYouGo تتيج تشغيل و البحث عن المخبىت من نوع Wherigo. و c:geo يمكنه أن يقوم إلى التحميل التلقائي للخراطيش داخل هذا التطبيق.</string>
-    <string name="helper_brouter_title">BRouter التنقل في وضع عدم الاتصال</string>
-    <string name="helper_brouter_description">BRouter يوفر التوجيه في وضع عدم الاتصال. إذا كان مثبت و قد تم تحميل الملفات اللازمة، c:geo سيقوم تلقائياً بإظهار الطريق إلى المخبئ على الخريطة الداخلية.</string>
     <!-- export -->
     <string name="export">تصدير</string>
     <string name="export_progress">تصدير: %1$s</string>
@@ -1060,6 +1055,7 @@
     <string name="attribute_survey_marker_no">ليس بالقرب من علامة مسح الأرض</string>
     <string name="attribute_offset_cache_yes">مخبئ تم إزاحته</string>
     <string name="attribute_offset_cache_no">لا يوجد مخبئ تم إزاحته</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">لجعل geocaching أسهل، لجعل المستخدمين أكثر كسلاً.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
