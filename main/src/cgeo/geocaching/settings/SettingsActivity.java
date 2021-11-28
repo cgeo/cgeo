@@ -6,6 +6,11 @@ import cgeo.geocaching.connector.ec.ECConnector;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.settings.fragments.PreferenceBackupFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceGeokretyOrgFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment;
+import cgeo.geocaching.settings.fragments.PreferenceServicesFragment;
 import cgeo.geocaching.settings.fragments.PreferencesFragment;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -68,10 +73,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         setContentView(R.layout.layout_settings);
 
         if (savedInstanceState == null) {
-            getSupportFragmentManager()
-                .beginTransaction()
-                .replace(R.id.settings_fragment_root, new PreferencesFragment())
-                .commit();
+            openRequestedFragment();
         } else {
             title = savedInstanceState.getCharSequence(TITLE_TAG);
         }
@@ -85,6 +87,31 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
+    }
+
+    /**
+     * This method sets the fragment which is used upon opening the settings. This may be the user directly or a
+     * requesting Intent.
+     */
+    private void openRequestedFragment() {
+        final Intent intent = getIntent();
+        final int fragmentId = intent.getIntExtra(INTENT_OPEN_SCREEN, -1);
+        Fragment preferenceFragment = new PreferencesFragment();
+        if (fragmentId == R.string.preference_screen_services) {
+            preferenceFragment = new PreferenceServicesFragment();
+        } else if (fragmentId == R.string.preference_screen_sendtocgeo) {
+            preferenceFragment = new PreferenceServiceSendToCgeoFragment();
+        } else if (fragmentId == R.string.preference_screen_backup) {
+            preferenceFragment = new PreferenceBackupFragment();
+        } else if (fragmentId == R.string.preference_screen_geokrety) {
+            preferenceFragment = new PreferenceServiceGeokretyOrgFragment();
+        } else if (fragmentId == R.string.preference_screen_gc) {
+            preferenceFragment = new PreferenceServiceGeocachingComFragment();
+        }
+        getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.settings_fragment_root, preferenceFragment)
+            .commit();
     }
 
     @Override
