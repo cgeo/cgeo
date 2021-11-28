@@ -9,6 +9,8 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ProcessUtils;
+import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
+
 
 import android.os.Bundle;
 
@@ -35,6 +37,7 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.settings_title_navigation);
+        initPublicFolders(this);
     }
 
     /**

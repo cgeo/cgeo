@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.storage.PersistableFolder;
 
 import android.content.SharedPreferences;
 
@@ -128,6 +129,16 @@ public class SettingsUtils {
 
     public static void setPrefSummaryActiveStatus(final PreferenceFragmentCompat preferenceFragment, @StringRes final int resConnector, final boolean isActive) {
         setPrefSummary(preferenceFragment, resConnector, isActive ? preferenceFragment.getString(R.string.settings_service_active) : "");
+    }
+
+    public static void initPublicFolders(final PreferenceFragmentCompat preferenceFragment) {
+        for (PersistableFolder folder : PersistableFolder.values()) {
+            final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(folder.getPrefKeyId()));
+            if (preference == null) {
+                continue;
+            }
+            preference.setSummary(folder.toUserDisplayableValue());
+        }
     }
 
 }
