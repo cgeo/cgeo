@@ -245,8 +245,6 @@
     <string name="menu_backup">גיבוי / שחזור</string>
     <string name="menu_history">היסטוריה</string>
     <string name="menu_filter">מסנן</string>
-    <string name="menu_scan_geo">סריקת geocode</string>
-    <string name="menu_scan_description">c:geo מסוגל לסרוק geocodes אשר מודפסים כקוד QR. היישום הדרוש אינו מותקן. האם ברצונך לפתוח את Google Play כדי להתקין אותו?</string>
     <!-- main screen -->
     <string name="live_map_button">מפה</string>
     <string name="caches_nearby_button">בסמוך</string>
@@ -469,6 +467,7 @@
     <string name="export_fieldnotes_creating">Creating Field Notes&#8230;</string>
     <!-- GC attributes -->
     <string name="attribute_no_gps_yes">Without GPS (letterboxes, compass juggling, &#8230;)</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <!-- status (used via string based resource loading) -->
