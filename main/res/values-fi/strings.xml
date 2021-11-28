@@ -327,10 +327,8 @@
     <string name="menu_history">Historia</string>
     <string name="menu_history_longstring">Löytöhistoria</string>
     <string name="menu_filter">Suodatin</string>
-    <string name="menu_scan_geo">Skannaa geokoodi</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Kirjanmerkkilistat</string>
-    <string name="menu_scan_description">c:geo voi skannata geokoodeja jotka on tulostettu QR-koodeiksi. Tähän tarvittavaa sovellusta ei ole asennettuna. Haluatko avata Google Play:n asentaaksesi sen?</string>
     <string name="menu_invert_order">Käännä järjestys</string>
     <!-- main screen -->
     <string name="home_button">Etusivu</string>
@@ -1520,12 +1518,9 @@
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
     <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
-    <string name="helper_barcode_description">Greasemonkey komentosarjan ja sivuston avulla pystyy lukemaan viiva- ja geokoodeja. Tämän sovelluksen avulla c:geo lukee viiva- ja geokoodeja.</string>
     <string name="helper_google_translate_title">Google-kääntäjä</string>
     <string name="helper_google_translate_description">Jos lataat käännöspaketteja Google Translate -sovellukseen, voit helposti kääntää kätkökuvaukset c:geossa painamalla pitkään kätkökuvauksen tekstiä (ilman Internet-yhteyttä).</string>
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
-    <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouter tarjoaa offline-reitityksen. Jos se on asennettuna ja tarvittavat tiedostot ladattuna, c:geo näyttää kartalla reitin kätkölle automaattisesti.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
     <string name="helper_alc_description">Adventure Lab -sovellus puhelimeesi tai tablettiisi.</string>
     <!-- export -->
@@ -1805,6 +1800,7 @@
     <string name="attribute_historic_no">Ei hylättyä rakennetta / Ei raunioita</string>
     <string name="attribute_blind_people_yes">Soveltuu sokeille</string>
     <string name="attribute_blind_people_no">Ei sovellu sokeille</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
