@@ -327,10 +327,8 @@
     <string name="menu_history">지난 기록</string>
     <string name="menu_history_longstring">찾음 역사</string>
     <string name="menu_filter">필터</string>
-    <string name="menu_scan_geo">지오코드 스캔</string>
     <string name="menu_lists_pocket_queries">포켓쿼리</string>
     <string name="menu_lists_bookmarklists">북마크 목록</string>
-    <string name="menu_scan_description">QR코드에 인쇄된 지오코드를 스캔할 수 있으나 적절한 앱이 없습니다. 구글플레이에서 설치하시겠습니까?</string>
     <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
     <string name="home_button">홈</string>
@@ -1507,12 +1505,9 @@
     <string name="helper_gpsstatus_description">c:geo와 함께 이 어플에서 레이다를 사용할 수있습니다. GPS 와 관련된 다양한 정보를 볼 수 있습니다.</string>
     <string name="helper_bluetoothgps_description">외부 GPS 수신기를 이용하여 좀더 정확한 위치 데이터를 잡을 수 있고, 기기의 배터리를 절약할 수 있습니다.</string>
     <string name="helper_gps_locker_description">GPS Locker는 다른 응용으로 전환하거나, 화면을 끈 상태에서도 GPS 신호를 활성으로 유지합니다.</string>
-    <string name="helper_barcode_description">지오코드를 바코드로 표시해주는 웹사이트와 Greasemonkey 스크립트가 있습니다. 이 앱을 사용하면 c:geo는 컴퓨터 화면서 지오코드를 직접 읽어들일 수 있습니다.</string>
     <string name="helper_google_translate_title">구글 번역</string>
     <string name="helper_google_translate_description">구글 번역(Google Translate)앱을 다운로드 받으면 c:geo에서 캐시 설명을 쉽게 번역할 수 있습니다. 캐시 설명문을 길게 누르시면 됩니다.(인터넷 연결 필요없음)</string>
     <string name="helper_where_you_go_description">WhereYouGo를 사용하면 Wherigo 유형의 지오캐시를 검색하고 즐길 수 있습니다. c:geo는 자동적으로 카트리지를 다운로드 받습니다.</string>
-    <string name="helper_brouter_title">BRouter 오프라인 내비게이션</string>
-    <string name="helper_brouter_description">BRouter는 오프라인 길찾기를 제공합니다. 설치하고 필요한 파일을 받으면 c:geo가 자동적으로 캐시로 가는 길을 보여줍니다.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf를 사용하면 ANT+/처프 지오캐시에 필요한 ANT+/Garmin 처프 태그에서 데이터를 읽을 수 있습니다.</string>
     <string name="helper_alc_description">휴대폰 또는 태블릿 용 어드벤처 랩 앱</string>
     <!-- export -->
@@ -1791,6 +1786,7 @@
     <string name="attribute_historic_no">버려진 구조물 / 유적 아님</string>
     <string name="attribute_blind_people_yes">장애: 장님</string>
     <string name="attribute_blind_people_no">장애 아님: 장님</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">지오캐싱을 쉽게, 사용자를 편하게</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
