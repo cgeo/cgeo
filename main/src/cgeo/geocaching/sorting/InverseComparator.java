@@ -1,6 +1,7 @@
 package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.storage.SqlBuilder;
 
 import androidx.annotation.NonNull;
 
@@ -32,5 +33,10 @@ public class InverseComparator implements CacheComparator {
     @Override
     public void sort(final List<Geocache> list) {
         Collections.sort(list, this);
+    }
+
+    @Override
+    public void addSortToSql(final SqlBuilder sql, final boolean sortDesc) {
+        originalComparator.addSortToSql(sql, !sortDesc);
     }
 }

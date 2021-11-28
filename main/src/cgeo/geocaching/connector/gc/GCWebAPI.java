@@ -1,6 +1,7 @@
 package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.SearchResult;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheSize;
@@ -115,6 +116,14 @@ class GCWebAPI {
             this.sort = sort;
             this.sortAsc = sortAsc;
             return this;
+        }
+
+        public int getTake() {
+            return take;
+        }
+
+        public int getSkip() {
+            return skip;
         }
 
         public SortType getSort() {
@@ -762,10 +771,11 @@ class GCWebAPI {
         return getAPI("/web/v1/geocache/" + StringUtils.lowerCase(geocode), CacheDetails.class);
     }
 
-    static SearchResult searchCaches(final WebApiSearch search, final boolean includeGcVote) {
+    static SearchResult searchCaches(final IConnector con, final WebApiSearch search, final boolean includeGcVote) {
         final SearchResult result = new SearchResult();
 
         final MapSearchResultSet mapSearchResultSet = search.execute();
+        result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
         final List<Geocache> foundCaches = new ArrayList<>();
 
         if (mapSearchResultSet.results != null) {
@@ -870,11 +880,6 @@ class GCWebAPI {
             }
         }
     }
-
-    static SearchResult searchMap(@NonNull final Viewport viewport) {
-        return searchCaches(new WebApiSearch().setBox(viewport), false);
-    }
-
 
     @NonNull
     static ImmutablePair<StatusCode, String> postLog(final Geocache geocache,

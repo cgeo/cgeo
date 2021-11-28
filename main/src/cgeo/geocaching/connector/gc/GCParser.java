@@ -105,7 +105,7 @@ public final class GCParser {
 
     @Nullable
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent) {
+    private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent, final int alreadyTaken) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
             return null;
@@ -116,6 +116,7 @@ public final class GCParser {
         final SearchResult searchResult = new SearchResult();
         searchResult.setUrl(con, url);
         searchResult.setToContext(con, b -> b.putStringArray(SEARCH_CONTEXT_VIEWSTATE, GCLogin.getViewstates(pageContent)));
+        searchResult.setToContext(con, b -> b.putBoolean(GCConnector.SEARCH_CONTEXT_LEGACY_PAGING, true));
 
         if (!page.contains("SearchResultsTable")) {
             // there are no results. aborting here avoids a wrong error log in the next parsing step
@@ -277,12 +278,13 @@ public final class GCParser {
             caches.add(cache);
         }
         searchResult.addAndPutInCache(caches);
+        searchResult.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, alreadyTaken + caches.size()));
 
         // total caches found
         try {
             final String result = TextUtils.getMatch(page, GCConstants.PATTERN_SEARCH_TOTALCOUNT, false, 1, null, true);
             if (result != null) {
-                searchResult.setTotalCount(con, Integer.parseInt(result));
+                searchResult.setLeftToFetch(con, Integer.parseInt(result) - caches.size() - alreadyTaken);
             }
         } catch (final NumberFormatException e) {
             Log.w("GCParser.parseSearch: Failed to parse cache count", e);
@@ -865,7 +867,7 @@ public final class GCParser {
             return new SearchResult(con, StatusCode.CONNECTION_FAILED);
         }
 
-        final SearchResult searchResult = parseSearch(con, url, page);
+        final SearchResult searchResult = parseSearch(con, url, page, context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0));
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByNextPage: No cache parsed");
             return new SearchResult(con, StatusCode.CONNECTION_FAILED);
@@ -902,7 +904,7 @@ public final class GCParser {
         }
 
         final String fullUri = uri + "?" + params;
-        final SearchResult searchResult = parseSearch(con, fullUri, page);
+        final SearchResult searchResult = parseSearch(con, fullUri, page, 0);
         if (searchResult == null || CollectionUtils.isEmpty(searchResult.getGeocodes())) {
             Log.w("GCParser.searchByAny: No cache parsed");
             return searchResult;

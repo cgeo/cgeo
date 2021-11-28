@@ -39,7 +39,7 @@ public class SearchResult implements Parcelable {
 
     public static final String SEARCHSTATE_FINDER = "ss_finder";
 
-    public static final String CON_TOTALCOUNT = "con_totalcount";
+    public static final String CON_LEFT_TO_FETCH = "con_lefttofetch";
     public static final String CON_URL = "con_url";
     public static final String CON_ERROR = "con_error";
 
@@ -98,15 +98,15 @@ public class SearchResult implements Parcelable {
      *
      * @param geocodes
      *            a non-null collection of geocodes
-     * @param totalCountGC
+     * @param totalCount
      *            the total number of caches matching that search on geocaching.com (as we always get only the next 20
      *            from a web page)
      */
-    public SearchResult(final IConnector con, final Collection<String> geocodes, final int totalCountGC) {
+    public SearchResult(final IConnector con, final Collection<String> geocodes, final int totalCount) {
         this.geocodes.clear();
         this.geocodes.addAll(geocodes);
         this.filteredGeocodes.clear();
-        this.setTotalCount(con, totalCountGC);
+        this.setLeftToFetch(con, Math.max(0, totalCount - geocodes.size()));
     }
 
     /**
@@ -195,13 +195,13 @@ public class SearchResult implements Parcelable {
     }
 
     public int getTotalCount() {
-        return reduceToContext(bb -> bb.getInt(CON_TOTALCOUNT), 0, (i1, i2) -> i1 + i2);
+        //this returns the total ACHIEVABLE count by adding the returned total count differences to the
+        return reduceToContext(bb -> bb.getInt(CON_LEFT_TO_FETCH, 0), getCount(), (i1, i2) -> i1 + i2);
     }
 
-    public void setTotalCount(final IConnector con, final int totalCountGC) {
-        setToContext(con, b -> b.putInt(CON_TOTALCOUNT, totalCountGC));
+    public void setLeftToFetch(final IConnector con, final int leftToFetch) {
+        setToContext(con, b -> b.putInt(CON_LEFT_TO_FETCH, leftToFetch));
     }
-
 
     public Bundle getConnectorContext(@Nullable final IConnector con) {
         return getConnectorContext(con == null ? "null" : con.getName());

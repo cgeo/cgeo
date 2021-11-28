@@ -147,7 +147,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private static final int CACHE_LOADER_ID = 5; //arbitrary number, but must be fixed
     private static final String EXTRAS_NEXTPAGE  = "extras_nextpage";
 
-    private static final int MAX_LIST_ITEMS = 1000;
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
     private static final int REQUEST_CODE_IMPORT_PQ = 3;
@@ -170,7 +169,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private final GeocacheSortContext sortContext = new GeocacheSortContext();
     private SearchResult search = null;
     /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
-    private final List<Geocache> cacheList = new ArrayList<>();
+    //private final List<Geocache> cacheList = new ArrayList<>();
     private CacheListAdapter adapter = null;
     private View listFooter = null;
     private TextView listFooterLine1 = null;
@@ -257,10 +256,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         try {
             updateAdapter();
 
-            updateTitle();
-
-            showFooterMoreCaches();
-
             if (search != null && search.getError() == StatusCode.UNAPPROVED_LICENSE) {
                 showLicenseConfirmationDialog();
             } else if (search != null && search.getError() != StatusCode.NO_ERROR) {
@@ -314,7 +309,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     /**
-     * Loads the caches and fills the {@link #cacheList} according to {@link #search} content.
+     * Loads the caches and fills the adapter according to {@link #search} content.
      *
      * If {@link #search} is {@code null}, this does nothing.
      */
@@ -322,16 +317,15 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void replaceCacheListFromSearch() {
         if (search != null) {
             runOnUiThread(() -> {
-                cacheList.clear();
+
 
                 // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
                 // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
                 final Set<Geocache> cachesFromSearchResult = search.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-
-                cacheList.addAll(cachesFromSearchResult);
-                adapter.reFilter();
-                updateTitle();
-                showFooterMoreCaches();
+                final LastPositionHelper lph = new LastPositionHelper(this);
+                adapter.setList(cachesFromSearchResult);
+                updateGui();
+                lph.setLastListPosition();
             });
         }
     }
@@ -405,9 +399,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         @Override
                         protected void onPostExecute(final Set<Geocache> result) {
                             if (CollectionUtils.isNotEmpty(result)) {
-                                final List<Geocache> cacheList = activity.cacheList;
-                                cacheList.clear();
-                                cacheList.addAll(result);
+                                activity.adapter.setList(result);
                             }
                             activity.setFilter();
                             activity.setAdapterCurrentCoordinates(false);
@@ -572,16 +564,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
         restartCacheLoader(false, null);
-
-        // init
-        if (CollectionUtils.isNotEmpty(cacheList)) {
-            // currentLoader can be null if this activity is created from a map, as onCreateLoader() will return null.
-            if (currentLoader != null && currentLoader.isStarted()) {
-                showFooterLoadingCaches();
-            } else {
-                showFooterMoreCaches();
-            }
-        }
+        refreshListFooter();
 
         if (isInvokedFromAttachment()) {
             if (extras != null && !StringUtils.isBlank(extras.getString(Intents.EXTRA_NAME))) {
@@ -647,7 +630,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void onConfigurationChanged(@NonNull final Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
         if (currentLoader != null && currentLoader.isLoading()) {
-            showFooterLoadingCaches();
+            refreshListFooter();
         }
     }
 
@@ -729,10 +712,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             sortContext.setAndToggle(type);
             adapter.forceSort();
             updateSortBar();
+            refreshCurrentList();
         });
         this.findViewById(R.id.sort_bar).setOnClickListener(v -> menu.performIdentifierAction(R.id.menu_sort, 0));
 
-        ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(cacheList), CacheListActivity.this, getFilteredSearch()));
+        ListNavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_cache_list_app_provider), app -> app.invoke(CacheListAppUtils.filterCoords(adapter.getList()), CacheListActivity.this, getFilteredSearch()));
         FilterUtils.initializeFilterMenu(this, this);
 
         return true;
@@ -775,7 +759,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         final boolean isHistory = type == CacheListType.HISTORY;
         final boolean isOffline = type == CacheListType.OFFLINE;
-        final boolean isEmpty = cacheList.isEmpty();
+        final boolean isEmpty = adapter.isEmpty();
         final boolean isConcrete = isConcreteList();
         final boolean isNonDefaultList = isConcrete && listId != StoredList.STANDARD_LIST_ID;
         final List<CacheListApp> listNavigationApps = CacheListApps.getActiveApps();
@@ -986,7 +970,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             adapter.showAttributes();
         } else if (menuItem == R.id.menu_cache_list_app) {
             if (cacheToShow()) {
-                CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(cacheList), this, getFilteredSearch());
+                CacheListApps.getActiveApps().get(0).invoke(CacheListAppUtils.filterCoords(adapter.getList()), this, getFilteredSearch());
             }
         } else if (menuItem == R.id.menu_make_list_unique) {
             new MakeListUniqueCommand(this, listId) {
@@ -1020,7 +1004,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final boolean isNonDefaultList = isConcreteList() && listId != StoredList.STANDARD_LIST_ID;
         // Check local cacheList first, and Datastore only if needed (because of filtered lists)
         // Checking is done in this order for performance reasons
-        if (isNonDefaultList && !preventAskForDeletion && CollectionUtils.isEmpty(cacheList)
+        if (isNonDefaultList && !preventAskForDeletion && adapter.isEmpty()
             && DataStore.getAllStoredCachesCount(listId) == 0) {
             // ask user, if he wants to delete the now empty list
             Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty), getString(R.string.list_dialog_do_not_ask_me_again),
@@ -1029,7 +1013,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private boolean cacheToShow() {
-        if (search == null || CollectionUtils.isEmpty(cacheList)) {
+        if (search == null || adapter.isEmpty()) {
             showToast(res.getString(R.string.warn_no_cache_coord));
             return false;
         }
@@ -1262,7 +1246,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         final ListView listView = getListView();
         registerForContextMenu(listView);
 
-        adapter = new CacheListAdapter(this, cacheList, type, sortContext);
+        adapter = new CacheListAdapter(this, adapter == null ? new ArrayList<>() : adapter.getList(), type, sortContext);
         adapter.setStoredLists(Settings.showListsInCacheList() ? StoredList.UserInterface.getMenuLists(true, PseudoList.NEW_LIST.id) : null);
         applyAdapterFilter();
 
@@ -1281,42 +1265,52 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     private void updateAdapter() {
+        final LastPositionHelper lph = new LastPositionHelper(this);
         adapter.notifyDataSetChanged();
         adapter.reFilter();
         adapter.checkSpecialSortOrder();
         adapter.forceSort();
-        updateSortBar();
+        updateGui();
+        lph.setLastListPosition();
     }
 
-    private void showFooterLoadingCaches() {
-        // no footer for offline lists
-        if (listFooter == null) {
-            return;
-        }
-        setView(listFooterLine1, res.getString(R.string.caches_more_caches_loading), null);
-        setViewGone(listFooterLine2);
+    private void updateGui() {
+        updateSortBar();
+        updateTitle();
+        refreshListFooter();
+    }
+
+    private void refreshListFooter() {
+        refreshListFooter(false);
     }
 
     @SuppressLint("SetTextI18n")
-    private void showFooterMoreCaches() {
+    private void refreshListFooter(final boolean cachesAreLoading) {
         if (listFooter == null) {
             return;
         }
 
-        final int listSize = search == null ? cacheList.size() : search.getCount();
-        //TODO Eddie: this logic has to change!
-        final int totalListSize = search == null ? listSize : Math.max(0, search.getTotalCount());
-
-        final boolean enableMore = !type.isStoredInDatabase && listSize < MAX_LIST_ITEMS && (search == null || (listSize > 0 && listSize < totalListSize));
-
-        if (enableMore) {
+        if (cachesAreLoading) {
+            setView(listFooterLine1, res.getString(R.string.caches_more_caches_loading), null);
             setViewGone(listFooterLine2);
-            setView(listFooterLine1, res.getString(R.string.caches_more_caches) + (listSize > 0 ? " (" + res.getString(R.string.caches_more_caches_currently) + ": " + listSize + ")" : ""), new MoreCachesListener());
-        } else if (!type.isStoredInDatabase && type != CacheListType.SEARCH_FILTER) {
+            return;
+        }
+
+        final int unfilteredListSize = search == null ? adapter.getOriginalListCount() : search.getCount();
+        final int totalAchievableListSize = search == null ? unfilteredListSize : Math.max(0, search.getTotalCount());
+        final boolean moreToShow = unfilteredListSize > 0 && totalAchievableListSize > unfilteredListSize;
+
+        if (moreToShow && type.isOnline) {
             setViewGone(listFooterLine2);
-            setView(listFooterLine1, res.getString(CollectionUtils.isEmpty(cacheList) ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
-        } else if (resultIsOfflineAndLimited()) {
-            final int missingCaches = totalListSize - offlineListLoadLimit;
+            setView(listFooterLine1, res.getString(R.string.caches_more_caches) + " (" + res.getString(R.string.caches_more_caches_currently) + ": " + unfilteredListSize + ")", v -> {
+                showProgress(true);
+                restartCacheLoader(true, null);
+            });
+        } else if (type.isOnline) {
+            setViewGone(listFooterLine2);
+            setView(listFooterLine1, res.getString(adapter.isEmpty() ? R.string.caches_no_cache : R.string.caches_more_caches_no), null);
+        } else if (moreToShow && type.isStoredInDatabase) {
+            final int missingCaches = totalAchievableListSize - unfilteredListSize;
             if (missingCaches > getOfflineListLimitIncrease()) {
                 setView(listFooterLine1, res.getString(R.string.caches_more_caches_next_x, getOfflineListLimitIncrease()), v -> {
                     if (offlineListLoadLimit >= 0) {
@@ -1327,7 +1321,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             } else {
                 setViewGone(listFooterLine1);
             }
-            setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalListSize), v -> {
+            setView(listFooterLine2, res.getString(R.string.caches_more_caches_remaining, missingCaches, totalAchievableListSize), v -> {
                 offlineListLoadLimit = 0;
                 refreshCurrentList();
             });
@@ -1629,17 +1623,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         });
     }
 
-    private class MoreCachesListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View arg0) {
-            showProgress(true);
-            showFooterLoadingCaches();
-
-            restartCacheLoader(true, null);
-        }
-    }
-
     private void restartCacheLoader(final boolean nextPage, final Consumer<Bundle> extrasModifier) {
         final Bundle extras = new Bundle();
         extras.putAll(typeParameters);
@@ -1715,7 +1698,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         initAdapter();
         setFilter();
         showProgress(true);
-        showFooterLoadingCaches();
+        refreshListFooter();
         adapter.setSelectMode(false);
         invalidateOptionsMenuCompatible();
     }
@@ -1763,7 +1746,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void removeList() {
         // if there are no caches on this list, don't bother the user with questions.
         // there is no harm in deleting the list, he could recreate it easily
-        if (CollectionUtils.isEmpty(cacheList)) {
+        if (adapter.isEmpty()) {
             removeListInternal();
             return;
         }
@@ -2089,7 +2072,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
         updateTitle();
         showProgress(true);
-        showFooterLoadingCaches();
+        refreshListFooter();
 
         if (loader == null) {
             Log.w("LOADER IS NULL!!!");
@@ -2104,13 +2087,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // The database search was moved into the UI call intentionally. If this is done before the runOnUIThread,
         // then we have 2 sets of caches in memory. This can lead to OOM for huge cache lists.
         if (searchIn != null) {
-            cacheList.clear();
             final Set<Geocache> cachesFromSearchResult = searchIn.getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB);
-            cacheList.addAll(cachesFromSearchResult);
+            final LastPositionHelper lph = new LastPositionHelper(this);
+            adapter.setList(cachesFromSearchResult);
             search = searchIn;
-            updateAdapter();
-            updateTitle();
-            showFooterMoreCaches();
+            updateGui();
+            lph.setLastListPosition();
         }
         showProgress(false);
         hideLoading();
