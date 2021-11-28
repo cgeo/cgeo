@@ -318,8 +318,6 @@
     <string name="menu_update_mapdata">Mapové podklady</string>
     <string name="menu_history">História</string>
     <string name="menu_filter">Filter</string>
-    <string name="menu_scan_geo">Nasnímať geokód</string>
-    <string name="menu_scan_description">c:geo dokáže skenovať geokódy, ak sú vo forme QR kódu. Potrebná aplikácia nie je nainštalovaná. Chcete otvoriť Google Play a nainštalovať ju?</string>
     <!-- main screen -->
     <string name="live_map_button">Aktívna mapa</string>
     <string name="caches_nearby_button">V okolí</string>
@@ -1474,12 +1472,9 @@
     <string name="helper_gpsstatus_description">Radar z tejto aplikácie môžete použiť v c:geo. Poskytuje tiež mnoho iných informácií súvisiacich s GPS.</string>
     <string name="helper_bluetoothgps_description">Umožňuje použitie externého GPS zariadenia pre lepší príjem, presnejšie umiestnenie a zníži využitie batérie vášho telefónu.</string>
     <string name="helper_gps_locker_description">Zámok GPS udržiava signál GPS aktívny pri prechádzaní medzi aplikáciami a pri zhasnutej obrazovke zariadenia.</string>
-    <string name="helper_barcode_description">Existujú Greasemonkey skripty a stránky, ktoré geokód zobrazujú ako čiarový kód. S touto aplikáciou môže c:geo načítať geokód priamo z obrazovky vášho PC.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Ak prevezmete balíky prekladov v aplikácii Google Translate, môžete ľahko preložiť popisy skrýš v c:geo dlhým kliknutím na text s popisom skrýše (aj bez pripojenia k internetu).</string>
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
-    <string name="helper_brouter_title">Offline navigácia BRouter</string>
-    <string name="helper_brouter_description">BRouter poskytuje offline navigáciu. Ak je nainštalovaný a má stiahnuté potrebné súbory, c:geo automaticky zobrazí cestu ku skrýši na internej mape.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umožňuje čítať údaje z chirp tagov ANT+/Garmin, ktoré sú potrebné pre kešky ANT+/chirp.</string>
     <string name="helper_alc_description">Aplikácia Adventure Lab pre váš telefón alebo tablet.</string>
     <!-- export -->
@@ -1761,6 +1756,7 @@
     <string name="attribute_historic_no">Nie je zrúcanina/ruina</string>
     <string name="attribute_blind_people_yes">Postihnutí: zrakovo</string>
     <string name="attribute_blind_people_no">Nie postihnutí: zrakovo</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
