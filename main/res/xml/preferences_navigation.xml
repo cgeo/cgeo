@@ -51,7 +51,6 @@
             android:summary="@string/init_updateinterval_description"
             android:title="@string/init_updateinterval_title"
             android:defaultValue="@integer/brouter_updateinterval_default"
-            android:dependency="@string/pref_brouterAutoTileDownloads"
             android:key="@string/pref_brouterAutoTileDownloadsInterval"
             android:max="@integer/brouter_updateinterval_max"
             android:min="0"
