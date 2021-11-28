@@ -49,6 +49,7 @@ import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
@@ -821,10 +822,34 @@ public class DataStore {
                         Log.w(msg, e);
                         return msg + ": " + e.getMessage();
                     }
+                } finally {
+                    Log.iForce("[DB] DB initialized: " + getDatabaseSystemInformation());
                 }
             }
         }
         return null;
+    }
+
+    public static String getDatabaseSystemInformation() {
+        if (database == null) {
+            return "<not initialized>";
+        }
+        final int actualVersion = getActualDBVersion();
+        final int expectedVersion = getExpectedDBVersion();
+        final String versionString = actualVersion + (actualVersion == expectedVersion ? "" : "[Expected v" + expectedVersion + "]");
+
+        final File dbFile = DataStore.databasePath();
+        final String dbPathString = dbFile.toString() + (dbFile.toString().equals(database.getPath()) ? "" : "[DBInstance: " + database.getPath() + "]");
+
+        return "Path: " + dbPathString +
+            ", V:" + versionString +
+            ", Size:" + Formatter.formatBytes(dbFile.length()) + " on " +
+            (Settings.isDbOnSDCard() ? "user storage" : "system internal storage") +
+            ", WAL-enabled: " + database.isWriteAheadLoggingEnabled() +
+            ", IntegrityOk: " + database.isDatabaseIntegrityOk() +
+            ", ReadOnly: " + database.isReadOnly() +
+            ", Page Size: " + database.getPageSize() +
+            ", Max Size: " + Formatter.formatBytes(database.getMaximumSize());
     }
 
     /**
