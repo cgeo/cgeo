@@ -1972,6 +1972,14 @@
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">No handicap: Blind</string>
 
+    <!-- cache attribute categories -->
+    <string name="cat_tools">Tools required</string>
+    <string name="cat_type">Type</string>
+    <string name="cat_location">Cache location</string>
+    <string name="cat_duration">Distance / Duration</string>
+    <string name="cat_surrounding">Around the cache</string>
+    <string name="cat_transport">Transport</string>
+
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
