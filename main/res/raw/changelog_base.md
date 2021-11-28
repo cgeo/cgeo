@@ -8,6 +8,9 @@
 ### Cache list
 - New: Option to select next 20 caches
 
+### Cache details
+- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+
 ### Other
 - New: Make Settings => View Settings filterable
 - New: Added GC Wizard to useful apps list
