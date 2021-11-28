@@ -226,8 +226,6 @@
     <string name="menu_settings">Ang mga settings</string>
     <string name="menu_history">Historya</string>
     <string name="menu_filter">Pagsasala</string>
-    <string name="menu_scan_geo">I-iskan ang geokowd</string>
-    <string name="menu_scan_description">ang c:geo ay pwedeng iiskan ang mga geocode na na-imprinta bilang QR kowd. Ang mga kinakailangang aplikasyon ay hindi na-install. Gusto mo bang buksan ang Google Play para iinstall ito?</string>
     <!-- main screen -->
     <string name="live_map_button">Ang mapa na live</string>
     <string name="caches_nearby_button">Malapit sa</string>
@@ -825,11 +823,9 @@
     <string name="helper_locus_description">Panglabas na app sa nabigasyon para sa iyong telepono o tablet. Tingnan ang mga mapang topo sa offline, subaybayan ang iyong ruta, maghanap ng mga geocache, gumamit ng isang gabay sa tunog at makakagawa ng mas higit pa.</string>
     <string name="helper_gpsstatus_description">Pwede kang gumamit ng radar sa aplikasyong ito kaugnay ng c:geo. Ito rin ay naghahandog ng marami pang ibang impormasyon na may kaugnayan sa GPS.</string>
     <string name="helper_bluetoothgps_description">Pinapayagan kang gumamit ng tagatanggap ng GPS na pangeksternal para makakuha ng mas wastong datos sa lokasyon, at maaaring makapagtira sa baterya ng iyong device.</string>
-    <string name="helper_barcode_description">Mayroong mga script na Greasemonkey at mga websayt na kung saan nagpapagana sa pagdispley ng mga geocode bilang mga barcode. Sa app na ito, ang c:geo ay maaaring makakabasa ng direktahan sa mga geocode na iyan mula sa iskren ng iyong kompyuter.</string>
     <string name="helper_google_translate_title">Ang agsasalin ng Google</string>
     <string name="helper_google_translate_description">Kung kkaw ay nagdadownload sa mga package ng pagsasalin sa app na Google Translate, pagkatapos ikaw ay maaaring madaling makapagsalin sa mga deskripsyon ng c:geo sa pag-tap ng mataas sa teksto ng deskripsyon sa cache (na walang koneksyon sa Internet).</string>
     <string name="helper_where_you_go_description">Ang WhereYouGo ay nagpapahintulot ng paglalaro at pagsasaliksik sa mga geocache ng klaseng Wherigo. Ang c:geo ay maaring makapag-gatilyo ng awtomatiko sa pagda-download ng mga cartridge sa loob ng app na ito.</string>
-    <string name="helper_brouter_description">BRouter nagbibigay ng offline routing. Kung ito ay naka insatala at kinakailangan na ang file ay ma-download, c:geo ay awtomatikong magpapakita ng ruta papunta sa cache mula sa internal na mapa.</string>
     <!-- export -->
     <string name="export">Ang magluwas</string>
     <string name="export_progress">Ang magluwas: %1$s</string>
@@ -1067,6 +1063,7 @@
     <string name="attribute_survey_marker_yes">Malapit sa isang Survey Marker</string>
     <string name="attribute_survey_marker_no">Hindi malapit sa Survey Marker</string>
     <string name="attribute_offset_cache_no">Walang Offset cache</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Upang gawing mas madali ang geocaching, upang gawin ang gumagamit na mas tamad.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
