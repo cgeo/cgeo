@@ -285,8 +285,6 @@
     <string name="menu_backup">Резервная копия / восстановление</string>
     <string name="menu_history">История</string>
     <string name="menu_filter">Фильтр</string>
-    <string name="menu_scan_geo">Сканировать геокод</string>
-    <string name="menu_scan_description">c:geo может сканировать геокоды которые напечатаны как QR код. Необходимое приложение не установлено. Вы хотите открыть Google Play, чтобы установить его?</string>
     <!-- main screen -->
     <string name="live_map_button">Карта</string>
     <string name="caches_nearby_button">Рядом</string>
@@ -1198,12 +1196,9 @@
     <string name="helper_gpsstatus_description">Вы можете использовать радар этого приложения вместе с c:geo. Также приложение предлагает много другой информации, связанной с GPS.</string>
     <string name="helper_bluetoothgps_description">Позволяет использовать внешний GPS приемник, чтобы получить более точную информацию о местоположении и сэкономить заряд батареи вашего устройства.</string>
     <string name="helper_gps_locker_description">GPS Locker сохраняет GPS активным при переключении между приложениями и при выключении экрана устройства.</string>
-    <string name="helper_barcode_description">Набор Greasemonkey скриптов, позволяющих отображать геокоды как штрих-коды. С этим приложением, c:geo может распознавать такие геокоды напрямую с экрана вашего компьютера.</string>
     <string name="helper_google_translate_title">Переводчик Google</string>
     <string name="helper_google_translate_description">Если вы загрузите переводческие пакеты в Переводчике Google, тогда вы сможете переводить описания тайников в c:geo длинным касанием описания тайника (работает оффлайн).</string>
     <string name="helper_where_you_go_description">WhereYouGo позволяет играть и искать тайники типа Wherigo. c:geo будет автоматически загружать картриджи с помощью этого приложения.</string>
-    <string name="helper_brouter_title">Оффлайновая навигация BRouter</string>
-    <string name="helper_brouter_description">BRouter предоставляет оффлайновую навигацию. Если он установлен и загружены необходимые файлы, с:geo автоматически покажет маршрут к тайнику на внутренней карте.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf позволяет вам читать данные из ANT+/Garmin chirp тегов, что необходимо для ANT+/chirp тайников.</string>
     <!-- export -->
     <string name="share_export">Поделиться / Экспорт</string>
@@ -1476,6 +1471,7 @@
     <string name="attribute_historic_no">Не заброшка или руины</string>
     <string name="attribute_blind_people_yes">Подходит для слепых</string>
     <string name="attribute_blind_people_no">Не подходит для слепых</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
