@@ -328,10 +328,8 @@
     <string name="menu_history">Historial</string>
     <string name="menu_history_longstring">Historial de trobats</string>
     <string name="menu_filter">Filtre</string>
-    <string name="menu_scan_geo">Escaneja un codi de catxé</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Llistes de marcadors</string>
-    <string name="menu_scan_description">El c:geo pot escanejar els codis de catxés impresos com a codis QR. L\'aplicació necessària no està instal·lada. Voleu obrir Google Play per instal·lar-la?</string>
     <string name="menu_invert_order">Inverteix l’ordre</string>
     <!-- main screen -->
     <string name="home_button">Pàgina principal</string>
@@ -1514,12 +1512,9 @@
     <string name="helper_gpsstatus_description">Podeu utilitzar el radar en aquesta aplicació conjuntament amb el c:geo. També ofereix moltes altres informacions relacionades amb el GPS.</string>
     <string name="helper_bluetoothgps_description">Permet utilitzar un receptor GPS extern per obtenir dades de localització més precises i estalviar bateria del dispositiu.</string>
     <string name="helper_gps_locker_description">GPS Locker manté el senyal GPS actiu quan canvieu d’aplicació i quan la pantalla del dispositiu està apagada.</string>
-    <string name="helper_barcode_description">Hi ha scripts de Greasemonkey i llocs web que permeten mostrar els codis dels catxés com a codis de barres. Amb aquesta aplicació el c:geo pot llegir directament els codis dels catxés des de l\'ordinador.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Si descarregueu paquets de traducció a l\'app Google Translate, llavors podeu traduir fàcilment les descripcions dels catxés al c:geo tocant uns segons sobre el text de la descripció del catxé (sense connexió a Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permet jugar i buscar catxés de tipus Wherigo. El c:geo pot descarregar automàticament els cartutxos dins d\'aquest aplicació.</string>
-    <string name="helper_brouter_title">Navegació fora de línia BRouter</string>
-    <string name="helper_brouter_description">BRouter proporciona enrutament fora de línia. Si s\'instal·la i té els arxius necessaris descarregats, c:geo automàticament mostrarà una ruta a l\'amagatall al mapa intern.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf us permet llegir les dades de les etiquetes ANT + / Garmin, que són necessàries per a catxés ANT + / chirp.</string>
     <string name="helper_alc_description">Aplicació Adventure Lab Player per al telèfon o la tauleta.</string>
     <!-- export -->
@@ -1800,6 +1795,7 @@
     <string name="attribute_historic_no">No Estructura abandonada /  No Ruïna</string>
     <string name="attribute_blind_people_yes">Adequat a persones invidents</string>
     <string name="attribute_blind_people_no">No adequat a persones invidents</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
