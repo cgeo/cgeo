@@ -5,6 +5,7 @@ import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.CacheslistItemBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.list.AbstractList;
@@ -27,7 +28,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Paint;
-import android.util.Pair;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -35,8 +35,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
-import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.SectionIndexer;
 import android.widget.TextView;
 
@@ -250,6 +248,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     }
 
     public void showAttributes() {
+        final Context context = getContext();
+
         // collect attributes and counters
         final Map<String, Integer> attributes = new HashMap<>();
         final int max = list.size();
@@ -268,13 +268,18 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         // traverse by category and attribute order
         final ArrayList<String> a = new ArrayList<>();
         final StringBuilder text = new StringBuilder();
-        for (int categoryId : CacheAttribute.getOrderedCategoryIdList()) {
+        int lastCategoryId = -1;
+        for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
             for (CacheAttribute attr : CacheAttribute.values()) {
-                if (attr.group == categoryId) {
+                if (attr.categoryId == categoryId) {
                     for (Boolean enabled : Arrays.asList(false, true)) {
                         final String key = attr.getValue(enabled);
                         final Integer value = attributes.get(key);
                         if (value != null && value > 0) {
+                            if (lastCategoryId != categoryId) {
+                                text.append("\n\n").append(CacheAttributeCategory.getNameById(context, categoryId));
+                                lastCategoryId = categoryId;
+                            }
                             a.add(key);
                             text.append('\n').append(attr.getL10n(enabled)).append(": ").append(value);
                         }
@@ -283,7 +288,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             }
         }
 
-        final Context context = getContext();
         final AlertDialog.Builder alertDialog = Dialogs.newBuilder(context);
         alertDialog.setTitle(R.string.cache_filter_attributes);
 
