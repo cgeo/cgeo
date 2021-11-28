@@ -228,7 +228,6 @@
     <string name="menu_helpers">Program utilitas</string>
     <string name="menu_settings">Pengaturan</string>
     <string name="menu_history">Riwayat</string>
-    <string name="menu_scan_description">c: geo dapat memindai geocodes yang tercetak sebagai QR code. Aplikasi yang diperlukan tidak terpasang Apakah Anda ingin membuka Google Play untuk menginstalnya?</string>
     <!-- main screen -->
     <string name="live_map_button">Peta online</string>
     <string name="caches_nearby_button">Dekat</string>
@@ -814,12 +813,9 @@
     <string name="helper_locus_description">Aplikasi navigasi luar ruang untuk ponsel anda atau tablet. Lihat peta topo offline, melacak rute anda, geocaches, menggunakan panduan suara dan melakukan bahkan lebih.</string>
     <string name="helper_gpsstatus_description">Anda dapat menggunakan radar di aplikasi ini bersamaan dengan c:geo. Ini juga menawarkan banyak informasi terkait GPS lainnya.</string>
     <string name="helper_bluetoothgps_description">Memungkinkan Anda untuk menggunakan penerima GPS eksternal untuk mendapatkan data lokasi yang lebih tepat, dan dapat menghemat baterai perangkat Anda.</string>
-    <string name="helper_barcode_description">Ada script Greasemonkey dan situs web yang memungkinkan tampilan geocodes sebagai barcode. Dengan aplikasi ini, c:geo dapat membaca geocode tersebut secara langsung dari layar komputer Anda.</string>
     <string name="helper_google_translate_title">Google Terjemahan</string>
     <string name="helper_google_translate_description">Jika Anda mendownload paket terjemahan di aplikasi Google Terjemahan, Anda dapat dengan mudah menerjemahkan deskripsi cache di c:geo dengan ketukan panjang pada teks deskripsi cache (tanpa koneksi internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo memungkinkan bermain dan mencari geocaches dari tipe Wherigo. c:geo secara otomatis dapat memicu download kartrid dalam aplikasi ini.</string>
-    <string name="helper_brouter_title">Navigasi BRouter Offline</string>
-    <string name="helper_brouter_description">BRouter menyediakan routing diluar jaringan offline. Jika sudah diinstal dan berkas yang diperlukan di-download, c:geo akan otomatis menunjukkan rute ke cache pada peta internal.</string>
     <!-- export -->
     <string name="export">Ekspor</string>
     <string name="export_progress">Ekspor: %1$s</string>
@@ -1063,6 +1059,7 @@
     <string name="attribute_survey_marker_no">Tidak di dekat Penanda Survei</string>
     <string name="attribute_offset_cache_yes">Cache offset</string>
     <string name="attribute_offset_cache_no">Tidak ada tembolok offset</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Untuk membuat geocaching lebih mudah, untuk membuat pengguna malas.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
