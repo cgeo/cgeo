@@ -11,11 +11,11 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ProcessUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
-
 import android.os.Bundle;
 
 import androidx.annotation.StringRes;
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.ArrayList;
@@ -38,6 +38,30 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
         super.onResume();
         getActivity().setTitle(R.string.settings_title_navigation);
         initPublicFolders(this);
+
+        final Preference tool1 = findPreference(getString(R.string.pref_defaultNavigationTool));
+        assert tool1 != null;
+        setToolSummary(tool1, Settings.getDefaultNavigationTool());
+        tool1.setOnPreferenceChangeListener((preference, newValue) -> {
+            setToolSummary(tool1, Integer.parseInt((String) newValue));
+            return true;
+        });
+
+        final Preference tool2 = findPreference(getString(R.string.pref_defaultNavigationTool2));
+        assert tool2 != null;
+        setToolSummary(tool2, Settings.getDefaultNavigationTool2());
+        tool2.setOnPreferenceChangeListener((preference, newValue) -> {
+            setToolSummary(tool2, Integer.parseInt((String) newValue));
+            return true;
+        });
+    }
+
+    private void setToolSummary(final Preference preference, final int value) {
+        try {
+            preference.setSummary(NavigationAppFactory.getNavigationAppForId(value).getName());
+        } catch (Exception ignore) {
+            preference.setSummary("");
+        }
     }
 
     /**

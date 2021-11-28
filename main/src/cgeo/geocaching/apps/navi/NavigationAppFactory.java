@@ -334,7 +334,7 @@ public final class NavigationAppFactory {
     }
 
     @NonNull
-    private static App getNavigationAppForId(final int navigationAppId) {
+    public static App getNavigationAppForId(final int navigationAppId) {
         final List<NavigationAppsEnum> installedNavigationApps = getInstalledNavigationApps();
 
         for (final NavigationAppsEnum navigationApp : installedNavigationApps) {
