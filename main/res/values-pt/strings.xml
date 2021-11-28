@@ -327,10 +327,8 @@
     <string name="menu_history">Histórico</string>
     <string name="menu_history_longstring">Histórico de Encontradas</string>
     <string name="menu_filter">Filtro</string>
-    <string name="menu_scan_geo">Ler código GC</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listas de marcadores</string>
-    <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <string name="menu_invert_order">Inverter ordem</string>
     <!-- main screen -->
     <string name="home_button">Página inicial</string>
@@ -1520,12 +1518,9 @@
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
-    <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler esses códigos GC directamente do ecrã do seu computador.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das caches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar as geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
-    <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">O BRouter fornece cálculo de percursos offline. Caso esteja instalado e tenha os ficheiros necessários descarregados, o c:geo exibirá automaticamente uma rota para a cache no mapa interno.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <string name="helper_alc_description">A aplicação Adventure Lab para o seu telemóvel ou tablet.</string>
     <!-- export -->
@@ -1805,6 +1800,7 @@
     <string name="attribute_historic_no">Não é uma estrutura abandonada ou ruína</string>
     <string name="attribute_blind_people_yes">Adequa-se a pessoas cegas</string>
     <string name="attribute_blind_people_no">Não é adequada a pessoas cegas</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
