@@ -3,100 +3,120 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:key="@string/preference_screen_navigation_menu"
-    android:title="@string/settings_title_navigation_menu" >
+    android:title="@string/settings_title_navigation_menu"
+    app:iconSpaceReserved="false">
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_compass"
-        android:title="@string/compass_title" />
+        android:title="@string/compass_title"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_radar"
-        android:title="@string/cache_menu_radar" />
+        android:title="@string/cache_menu_radar"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_internal_map"
-        android:title="@string/cache_menu_map" />
+        android:title="@string/cache_menu_map"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_locus"
-        android:title="@string/caches_map_locus" />
+        android:title="@string/caches_map_locus"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_maps"
-        android:title="@string/cache_menu_map_ext" />
+        android:title="@string/cache_menu_map_ext"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_navigation"
-        android:title="@string/cache_menu_navigation_drive" />
+        android:title="@string/cache_menu_navigation_drive"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_streetview"
-        android:title="@string/cache_menu_streetview" />
+        android:title="@string/cache_menu_streetview"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_oruxmaps"
-        android:title="@string/cache_menu_oruxmaps_online" />
+        android:title="@string/cache_menu_oruxmaps_online"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_oruxmaps_offline"
-        android:title="@string/cache_menu_oruxmaps_offline" />
+        android:title="@string/cache_menu_oruxmaps_offline"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_sygic_walking"
-        android:title="@string/cache_menu_sygic_walk" />
+        android:title="@string/cache_menu_sygic_walk"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_sygic_driving"
-        android:title="@string/cache_menu_sygic_drive" />
+        android:title="@string/cache_menu_sygic_drive"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_osmand"
-        android:title="@string/cache_menu_osmand" />
+        android:title="@string/cache_menu_osmand"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_walk"
-        android:title="@string/cache_menu_navigation_walk" />
+        android:title="@string/cache_menu_navigation_walk"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_transit"
-        android:title="@string/cache_menu_navigation_transit" />
+        android:title="@string/cache_menu_navigation_transit"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_bike"
-        android:title="@string/cache_menu_navigation_bike" />
+        android:title="@string/cache_menu_navigation_bike"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_google_maps_directions"
-        android:title="@string/cache_menu_maps_directions" />
+        android:title="@string/cache_menu_maps_directions"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_where_you_go"
-        android:title="@string/cache_menu_whereyougo" />
+        android:title="@string/cache_menu_whereyougo"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_pebble"
-        android:title="@string/cache_menu_pebble" />
+        android:title="@string/cache_menu_pebble"
+        app:iconSpaceReserved="false" />
     <CheckBoxPreference
         android:defaultValue="true"
         android:enabled="false"
         android:key="@string/pref_navigation_menu_mapswithme"
-        android:title="@string/cache_menu_mapswithme" />
+        android:title="@string/cache_menu_mapswithme"
+        app:iconSpaceReserved="false" />
 </PreferenceScreen>
