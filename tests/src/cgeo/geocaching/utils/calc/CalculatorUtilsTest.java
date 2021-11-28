@@ -9,11 +9,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 public class CalculatorUtilsTest {
 
     @Test
-    public void concat() {
-        assertThat(CalculatorUtils.concat(new ValueList().add(Value.of("a"), Value.of("b"))).getRaw()).isEqualTo("ab");
-    }
-
-    @Test
     public void substring() {
         assertThat(CalculatorUtils.substring("test", 1, 2)).isEqualTo("es");
         assertThat(CalculatorUtils.substring(null, 1, 2)).isEqualTo("");

@@ -15,6 +15,7 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -88,11 +89,7 @@ public final class Calculator {
         }
 
         public Value eval(final Func1<String, Value> variables) {
-            final ValueList childValues = new ValueList();
-            for (CalcNode child : children) {
-                childValues.add(child.eval(variables));
-            }
-            return this.function.call(childValues, variables);
+            return this.function.call(toValueList(children, variables), variables);
         }
 
         //calculates the variable names needed by this function
@@ -103,6 +100,22 @@ public final class Calculator {
             for (CalcNode child : children) {
                 child.calculateNeededVariables(result);
             }
+        }
+
+        public static ValueList toValueList(final CalcNode[] nodes, final Func1<String, Value> variables) {
+            final ValueList childValues = new ValueList();
+            for (CalcNode child : nodes) {
+                childValues.add(child.eval(variables));
+            }
+            return childValues;
+        }
+
+        public static ValueList toValueList(final Collection<CalcNode> nodes, final Func1<String, Value> variables) {
+            final ValueList childValues = new ValueList();
+            for (CalcNode child : nodes) {
+                childValues.add(child.eval(variables));
+            }
+            return childValues;
         }
     }
 
@@ -125,7 +138,6 @@ public final class Calculator {
         }
         CHARS_DIGITS.addAll(CHARS);
         CHARS_DIGITS.addAll(NUMBERS);
-        NUMBERS.add((int) '.');
     }
 
     public static Calculator compile(final String expression) {
@@ -348,6 +360,7 @@ public final class Calculator {
 
     private CalcNode parseConcatBlock() {
         final List<CalcNode> nodes = new ArrayList<>();
+        boolean isConstantValue = true;
         while (true) {
             if (ch == '(') {
                 nextChar();
@@ -355,17 +368,24 @@ public final class Calculator {
                 if (!eat(')')) {
                     throw new CalculatorException(UNEXPECTED_TOKEN, ")");
                 }
+                isConstantValue = false;
             } else if (ch == '\'') {
                 nodes.add(parseString());
+            } else if (ch == '_') {
+                nodes.add(createSingleValueNode("overflow", "_"));
+                nextChar();
             } else if (ch == '.') {
-                nodes.add(new CalcNode("decimal-point", null, (objs, vars) -> Value.of(".")));
+                nodes.add(createSingleValueNode("decimal-point", "."));
                 nextChar();
             } else if (ch == '$') {
                 nodes.add(parseExplicitVariable());
+                isConstantValue = false;
             } else if (CHARS.contains(ch)) {
                 nodes.add(parseAlphaNumericBlock());
+                isConstantValue = false;
             } else if (NUMBERS.contains(ch)) {
-                nodes.add(parseNumberBlock());
+                nodes.add(createSingleValueNode("digit", "" + ((char) ch)));
+                nextChar();
             } else {
                 break;
             }
@@ -376,33 +396,14 @@ public final class Calculator {
         if (nodes.size() == 1) {
             return nodes.get(0);
         }
-        return new CalcNode("concat", nodes.toArray(new CalcNode[0]), (objs, vars) -> CalculatorUtils.concat(objs));
+        if (isConstantValue) {
+            return createSingleValueNode("constant-concat", concat(CalcNode.toValueList(nodes, k -> null)));
+        }
+        return new CalcNode("concat", nodes.toArray(new CalcNode[0]), (objs, vars) -> concat(objs));
     }
 
-    private CalcNode parseNumberBlock() {
-        final StringBuilder sb = new StringBuilder();
-        boolean foundDecPoint = false;
-        boolean lastFoundIsDec = false;
-        while (NUMBERS.contains(ch)) {
-            if (ch == '.') {
-                if (foundDecPoint) {
-                    throw new CalculatorException(UNEXPECTED_TOKEN, "digit");
-                }
-                foundDecPoint = true;
-                lastFoundIsDec = true;
-                mark();
-            } else {
-                lastFoundIsDec = false;
-            }
-            sb.append((char) ch);
-            nextChar();
-        }
-        //if the last found char was a ., then don't eat it
-        if (lastFoundIsDec) {
-            reset();
-        }
-        final double value = Double.parseDouble(sb.toString());
-        return createNumeric("literal-num", null, (o, v) -> Value.of(value));
+    private static CalcNode createSingleValueNode(final String nodeId, final Object value) {
+        return new CalcNode(nodeId, null, (objs, vars) -> Value.of(value));
     }
 
     private CalcNode parseExplicitVariable() {
@@ -474,7 +475,7 @@ public final class Calculator {
                 }
                 varValues.add(value);
             }
-            return CalculatorUtils.concat(varValues);
+            return concat(varValues);
         }, result -> {
             for (char l : varBlock.toCharArray()) {
                 result.add("" + l);
@@ -528,5 +529,36 @@ public final class Calculator {
             });
 
     }
+
+    /** concats values calculator-internally. Takes care of the spillover character _ */
+    private static Value concat(final ValueList values) {
+        values.checkCount(1, -1);
+
+        if (values.size() == 1) {
+            return values.get(0);
+        }
+
+        int overflowCount = 0;
+        final StringBuilder sb = new StringBuilder();
+        boolean firstNonoverflowFound = false;
+        for (Value v : values) {
+            if ("_".equals(v.getAsString())) {
+                overflowCount++;
+            } else {
+
+                final String strValue = v.getAsString();
+                if (overflowCount > 0 && firstNonoverflowFound && !(".".equals(strValue))) {
+                    for (int i = 0; i < overflowCount - strValue.length() + 1; i++) {
+                        sb.append("0");
+                    }
+                }
+                overflowCount = 0;
+                firstNonoverflowFound = true;
+                sb.append(strValue);
+            }
+        }
+        return Value.of(sb.toString());
+    }
+
 
 }

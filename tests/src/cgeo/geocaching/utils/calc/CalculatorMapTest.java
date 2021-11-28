@@ -128,7 +128,7 @@ public class CalculatorMapTest {
                 fail("no var to assert");
             } else if (prop instanceof Double) {
                 assertThat(state.getResult()).isNotNull();
-                assertThat(state.getResult().getRaw()).as(assertAs + "result " + prop).isEqualTo(prop);
+                assertThat(state.getResult().getAsDouble()).as(assertAs + "result " + prop).isEqualTo(prop);
                 assertThat(state.getState()).as(assertAs + "state OK").isEqualTo(OK);
                 assertThat(state.getError()).as(assertAs + "no error").isNull();
             } else if (prop instanceof CalculatorMap.State) {
