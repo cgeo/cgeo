@@ -55,7 +55,7 @@ public enum CacheAttribute {
     JEEPS(CacheAttributeCategory.CAT_TRANSPORT.categoryId, 35, -1, "jeeps", R.drawable.attribute_jeeps, R.string.attribute_jeeps_yes, R.string.attribute_jeeps_no),
     SNOWMOBILES(CacheAttributeCategory.CAT_TRANSPORT.categoryId, 36, -1, "snowmobiles", R.drawable.attribute_snowmobiles, R.string.attribute_snowmobiles_yes, R.string.attribute_snowmobiles_no),
     HORSES(CacheAttributeCategory.CAT_TRANSPORT.categoryId, 37, -1, "horses", R.drawable.attribute_horses, R.string.attribute_horses_yes, R.string.attribute_horses_no),
-    CAMPFIRES(CacheAttributeCategory.CAT_DURATION.categoryId, 38, -1, "campfires", R.drawable.attribute_campfires, R.string.attribute_campfires_yes, R.string.attribute_campfires_no),
+    CAMPFIRES(CacheAttributeCategory.CAT_SURROUNDINGS.categoryId, 38, -1, "campfires", R.drawable.attribute_campfires, R.string.attribute_campfires_yes, R.string.attribute_campfires_no),
     THORN(CacheAttributeCategory.CAT_SURROUNDINGS.categoryId, 39, 63, "thorn", R.drawable.attribute_thorn, R.string.attribute_thorn_yes, R.string.attribute_thorn_no),
     STEALTH(CacheAttributeCategory.CAT_LOCATION.categoryId, 40, 74, "stealth", R.drawable.attribute_stealth, R.string.attribute_stealth_yes, R.string.attribute_stealth_no),
     STROLLER(CacheAttributeCategory.CAT_TRANSPORT.categoryId, 41, -1, "stroller", R.drawable.attribute_stroller, R.string.attribute_stroller_yes, R.string.attribute_stroller_no),

@@ -2,6 +2,7 @@ package cgeo.geocaching.filters.gui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
 import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.TextParam;
@@ -75,12 +76,16 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         final ChipGroup cg = new ChipGroup(getActivity());
         cg.setChipSpacing(dpToPixel(10));
 
-        for (CacheAttribute ca: CacheAttribute.values()) {
-            final View view = createAttributeIcon(ca);
-            view.setOnClickListener(v -> toggleAttributeIcon(ca));
-            this.attributeViews.put(ca, view);
-            this.attributeState.put(ca, null);
-            cg.addView(view);
+        for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
+            for (CacheAttribute ca : CacheAttribute.values()) {
+                if (ca.categoryId == categoryId) {
+                    final View view = createAttributeIcon(ca);
+                    view.setOnClickListener(v -> toggleAttributeIcon(ca));
+                    this.attributeViews.put(ca, view);
+                    this.attributeState.put(ca, null);
+                    cg.addView(view);
+                }
+            }
         }
 
         final LinearLayout ll = new LinearLayout(getActivity());
