@@ -185,7 +185,6 @@
     <string name="menu_settings">Stillingar</string>
     <string name="menu_history">Saga</string>
     <string name="menu_filter">Sía</string>
-    <string name="menu_scan_geo">Skanna geokóða</string>
     <!-- main screen -->
     <string name="live_map_button">Virkt kort</string>
     <string name="caches_nearby_button">Í nánd</string>
@@ -575,7 +574,6 @@
     <string name="helper_sendtocgeo_description">Senda í c:geo er viðbót í vafra <strong>fyrir tölvuna þína</strong>. Þegar þú ert að skoða geocaching.com, getur þú sent kassa í snjallsímann þinn beint úr netvafranum þínum.</string>
     <string name="helper_gpsstatus_description">Þú getur notað radarinn í þessu forriti samhliða c:geo. Forritið bíður einnig upp á mikið af öðrum GPS tengdum upplýsingum.</string>
     <string name="helper_bluetoothgps_description">Leyfir þér að nota utanáliggjandi GPS móttakara til þess að fá nákvæmari staðsetningarupplýsingar, og getur sparað rafhlöðuna í tækinu þínu.</string>
-    <string name="helper_brouter_title">BRouter leiðarlýsing án nets</string>
     <!-- export -->
     <string name="export">Flytja út</string>
     <string name="export_failed">Útflutningur tókst ekki</string>
@@ -644,6 +642,7 @@
     <string name="attribute_food_yes">Matur nálægt</string>
     <string name="attribute_food_no">Enginn matur nálægt</string>
     <string name="attribute_no_gps_no">Með GPS</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Aðstoð</string>
