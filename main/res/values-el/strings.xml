@@ -327,10 +327,8 @@
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_history_longstring">Ιστορικό ευρέσεων</string>
     <string name="menu_filter">Φίλτρο</string>
-    <string name="menu_scan_geo">Σάρωση γεωκωδικού</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
     <string name="menu_lists_bookmarklists">Λίστα σελιδοδεικτών</string>
-    <string name="menu_scan_description">Το c:Geo μπορεί να ανιχνεύσει γεωκωδικούς που εκτυπώνονται ως κωδικός QR. Η απαραίτητη εφαρμογή δεν είναι εγκατεστημένη. Θέλετε να ανοίξετε το Google Play για να το εγκαταστήσετε;</string>
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
     <string name="home_button">Αρχική</string>
@@ -409,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Καθαρισμός αρχείων καταγραφών εκτός σύνδεσης</string>
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
+    <string name="caches_show_attributes">Εμφάνιση επισκόπησης ιδιοτήτων</string>
     <string name="caches_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
     <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίων κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
@@ -1517,14 +1516,12 @@
     <string name="helper_gpsstatus_description">Μπορείτε να χρησιμοποιήσετε το ραντάρ σε αυτήν την εφαρμογή σε συνδυασμό με το c:geo. Προσφέρει επίσης πολλές άλλες πληροφορίες που σχετίζονται με GPS.</string>
     <string name="helper_bluetoothgps_description">Σας επιτρέπει να χρησιμοποιήσετε έναν εξωτερικό δέκτη GPS για να πάρετε πιο ακριβή δεδομένα τοποθεσίας, και να κάνετε οικονομία στη μπαταρία της συσκευής σας.</string>
     <string name="helper_gps_locker_description">Το κλείδωμα GPS διατηρεί το σήμα του GPS ενεργό όταν εναλλάσσονται οι εφαρμογές ή όταν η οθόνη της συσκευής είναι σβηστή.</string>
-    <string name="helper_barcode_description">Υπάρχουν σενάρια και ιστοσελίδες Greasemonkey που επιτρέπουν να εμφανίζονται οι γεωκωδικοί ως γραμμωτοί κώδικες. Με αυτή την εφαρμογή το c:geo μπορεί να διαβάζει τέτοιους γεωκωδικούς κατευθείαν από την οθόνη του υπολογιστή σας.</string>
     <string name="helper_google_translate_title">Μετάφραση Google</string>
     <string name="helper_google_translate_description">Αν κατεβάσετε πακέτα μετάφρασης στην εφαρμογή Google Translate, τότε μπορείτε να μεταφράσετε εύκολα περιγραφές κρυπτών στο c:geo, με ένα παρατεταμένο πάτημα στην περιγραφής της κρύπτης (χωρίς σύνδεση στο Internet).</string>
     <string name="helper_where_you_go_description">Το WhereYouGo επιτρέπει την αναζήτηση κρυπτών του τύπου Wherigo, Το c:geo αυτόματα ενεργοποιεί τη φόρτωση των cartridges μέσα στην εφαρμογή.</string>
-    <string name="helper_brouter_title">Πλοήγηση εκτός σύνδεσης με BRouter</string>
-    <string name="helper_brouter_description">Το BRouter παρέχει δρομολόγηση εκτός σύνδεσης. Εάν έχει εγκατασταθεί και έχετε κατεβάσει τα απαραίτητα αρχεία, το c:geo θα εμφανίσει στον χάρτη μια διαδρομή προς την κρύπτη.</string>
     <string name="helper_chirpwolf_description">Το Chirp Wolf σας επιτρέπει να διαβάσετε δεδομένα από ANT+/Garmin chirp ταμπέλες, οι οποιες χρειάζονται για κρύπτες ANT+/chirp.</string>
     <string name="helper_alc_description">Adventure Lab Player app για το τηλέφωνο ή το tablet σας.</string>
+    <string name="helper_gcwizard_description">GC Wizard περιέχει πολλά εργαλεία για απλή κρυπτογραφία, γεωδαιτικούς και επιστημονικούς υπολογισμούς, καθώς και εκατοντάδες σύνολα διαφόρων συμβόλων.</string>
     <!-- export -->
     <string name="share_export">Κοινοποίηση / Εξαγωγή</string>
     <string name="export">Εξαγωγή</string>
@@ -1802,6 +1799,13 @@
     <string name="attribute_historic_no">Μη εγκαταλελειμμένο κτίριο / Μη ερείπιο</string>
     <string name="attribute_blind_people_yes">Αναπηρία: Τυφλός</string>
     <string name="attribute_blind_people_no">Όχι αναπηρία: Τυφλός</string>
+    <!-- cache attribute categories -->
+    <string name="cat_tools">Απαιτούνται εργαλεία</string>
+    <string name="cat_type">Τύπος</string>
+    <string name="cat_location">Τοποθεσία κρύπτης</string>
+    <string name="cat_duration">Απόσταση / Διάρκεια</string>
+    <string name="cat_surrounding">Γύρω από την κρύπτη</string>
+    <string name="cat_transport">Συγκοινωνία</string>
     <!-- next things -->
     <string name="quote">Για να γίνουν οι γεωκρύπτες πιο εύκολες και οι χρήστες πιο τεμπέληδες.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
