@@ -283,8 +283,6 @@
     <string name="menu_update_mapdata">Datos del mapa</string>
     <string name="menu_history">Historial</string>
     <string name="menu_filter">Filtro</string>
-    <string name="menu_scan_geo">Escánear geocódigo</string>
-    <string name="menu_scan_description">c:geo puede escanear geocódigos que están impresos como códigos QR. La aplicación necesaria no está instalada. ¿Quiere abrir Google Play para instalarla?</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Cercanos</string>
@@ -1139,12 +1137,9 @@
     <string name="helper_gpsstatus_description">Puedes usar el radar de esta aplicación con c:geo. Además ofrece un montón de información relacionada con el GPS.</string>
     <string name="helper_bluetoothgps_description">Te permite usar un GPS externo para tener mejor señal, más precisa y ahorrar batería en tu dispositivo.</string>
     <string name="helper_gps_locker_description">GPS Locker mantiene activa la señal GPS al cambiar entre aplicaciones y cuando la pantalla de tu dispositivo está apagada.</string>
-    <string name="helper_barcode_description">Hay scripts de Greasemonkey y sitios web que permiten mostrar geocódigos como códigos de barras. Con esta app, c:geo puede leer esos geocódigos directamente desde la pantalla de tu PC.</string>
     <string name="helper_google_translate_title">Traductor de Google</string>
     <string name="helper_google_translate_description">Si descargas paquetes de idiomas en la app Traductor de Google, puedes traducir las descripciones de los cachés en c:geo pulsando de forma larga en el texto del caché (sin conexión a internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo te permite ejecutar y buscar cachés de tipo Wherigo. c:geo puede iniciar directamente la descarga de los cartuchos a esta aplicación.</string>
-    <string name="helper_brouter_title">Navegación sin conexión BRouter</string>
-    <string name="helper_brouter_description">BRouter proporciona enrutamiento sin conexión. Si está instalado y tiene los archivos necesarios descargados, c:geo mostrará de manera automática una ruta hasta el caché en el mapa interno.</string>
     <!-- export -->
     <string name="export">Exportar</string>
     <string name="export_progress">Exportar: %1$s</string>
@@ -1396,6 +1391,7 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_survey_marker_no">No cerca de un punto geodésico</string>
     <string name="attribute_offset_cache_yes">Caché offset</string>
     <string name="attribute_offset_cache_no">No es caché offset</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
