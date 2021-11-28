@@ -25,17 +25,10 @@
             android:text="@string/downloadmap_info"
             app:iconSpaceReserved="false" />
 
-        <CheckBoxPreference
-            android:defaultValue="false"
-            android:key="@string/pref_mapAutoDownloads"
-            android:summary="@string/init_mapAutoDownloads_description"
-            android:title="@string/init_autoDownloads"
-            app:iconSpaceReserved="false" />
         <SeekBarPreference
             android:summary="@string/init_updateinterval_description"
             android:title="@string/init_updateinterval_title"
             android:defaultValue="@integer/map_updateinterval_default"
-            android:dependency="@string/pref_mapAutoDownloads"
             android:key="@string/pref_mapAutoDownloadsInterval"
             android:max="@integer/map_updateinterval_max"
             android:min="0"
