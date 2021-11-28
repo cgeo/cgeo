@@ -242,8 +242,6 @@
     <string name="menu_settings">Nastavitve</string>
     <string name="menu_history">Zgodovina</string>
     <string name="menu_filter">Filtriraj</string>
-    <string name="menu_scan_geo">Skeniraj geo-kodo</string>
-    <string name="menu_scan_description">c:geo lahko skenira GC kodo, ki je izpisana kot QR koda. Za to potrebujete aplikacijo, ki ni nameščena. Ali jo želite odpreti v Google Play in jo namestiti?</string>
     <!-- main screen -->
     <string name="live_map_button">Zemljevid</string>
     <string name="caches_nearby_button">V bližini</string>
@@ -774,11 +772,9 @@
     <string name="helper_sendtocgeo_description">Send to c:geo je razširitev za vaš brskalnik <strong>na vašem računalniku</strong>. Ko brskate na geocaching.com, lahko iz spletne strani pošljete zaklad direktno na vašo napravo s klikom na gumb znotraj brskalnika.</string>
     <string name="helper_gpsstatus_description">Aplikacija GPS Status vam omogoča prikaz radarja in uporabljate jo lahko z aplikacijo c:geo. Omogoča tudi prikaz veliko drugih informacij povezanih z GPS in njihovimi orodji.</string>
     <string name="helper_bluetoothgps_description">Omogoča vam uporabo zunanjega GPS sprejemnika, ki ga povežete z vašo napravo preko Bluetooth. Na ta način lahko varčujete z baterijo in dobite bolj natančen sprejem.</string>
-    <string name="helper_barcode_description">Aplikacija omogoča skeniranje črtnih kod.</string>
     <string name="helper_google_translate_title">Prevajalnik Google</string>
     <string name="helper_google_translate_description">Če prenesete pakete prevodov znotraj Google Translate aplikacije, lahko prevajate opise zakladov v c:geo tudi brez povezave z dolgim pritiskom na tekst.</string>
     <string name="helper_where_you_go_description">WhereYouGo omogoča igranje in iskanje geocaches vrste Wherigo. c:Geo lahko samodejno sprožijo prenos kartuš v to app.</string>
-    <string name="helper_brouter_title">BRouter Offline navigacija</string>
     <!-- export -->
     <string name="export">Izvozi</string>
     <string name="export_progress">Izvozi: %1$s</string>
@@ -1019,6 +1015,7 @@
     <string name="attribute_survey_marker_no">Ni blizu Survey Marker</string>
     <string name="attribute_offset_cache_yes">Offset zaklad</string>
     <string name="attribute_offset_cache_no">Ni Offset zaklad</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Za lažji geocaching in bolj lene zakladolovce.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
