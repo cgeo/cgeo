@@ -327,10 +327,8 @@
     <string name="menu_history">Cronologia</string>
     <string name="menu_history_longstring">Trova cronologia</string>
     <string name="menu_filter">Filtri</string>
-    <string name="menu_scan_geo">Scansiona geocode</string>
     <string name="menu_lists_pocket_queries">Query tascabili</string>
     <string name="menu_lists_bookmarklists">Elenchi di segnalibri</string>
-    <string name="menu_scan_description">c:geo può eseguire una scansione di geocodes stampati oppure di immagini QR code. L\'applicazione necessaria non è installata. Desideri aprire Google Play per installarla?</string>
     <string name="menu_invert_order">Inverti ordine</string>
     <!-- main screen -->
     <string name="home_button">Home</string>
@@ -1518,12 +1516,9 @@
     <string name="helper_gpsstatus_description">Puoi usare il radar di questa applicazione con c:geo. Offre inoltre molte informazioni addizionali legate al GPS.</string>
     <string name="helper_bluetoothgps_description">Permette di utilizzare un GPS esterno, garantendo maggiore precisione, migliore ricezione e prolungando la durata della batteria del tuo dispositivo.</string>
     <string name="helper_gps_locker_description">Il blocco GPS mantiene attivo il segnale GPS quando si passa tra le applicazioni e quando lo schermo del dispositivo è spento.</string>
-    <string name="helper_barcode_description">Ci sono script Greasemonkey e siti web che consentono di visualizzare un geocode come codice a barre. Con questa app c:geo può leggere il geocode direttamente dallo schermo del tuo computer.</string>
     <string name="helper_google_translate_title">Google Traduttore</string>
     <string name="helper_google_translate_description">Se si scaricano anche le lingue offline dell\'applicazione Google Traduttore, puoi facilmente tradurre le descrizioni dei cache in c:geo toccando e tenendo premuto sul testo (senza bisogno di una connessione Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permette di giocare e cercare geocache di tipo Wherigo. c:geo può automaticamente scaricare le schede tramite questa app.</string>
-    <string name="helper_brouter_title">BRouter Navigazione Offline</string>
-    <string name="helper_brouter_description">BRouter fornisce il routing non in linea. Se è installato e ha scaricato i file necessari, c:geo mostrerà automaticamente un percorso per il cache sulla mappa interna.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
     <string name="helper_alc_description">App per Adventure Lab per il tuo telefono o tablet.</string>
     <!-- export -->
@@ -1803,6 +1798,7 @@
     <string name="attribute_historic_no">Nessuna struttura abbandonata / Nessuna rovina</string>
     <string name="attribute_blind_people_yes">Handicap: adatto ai ciechi</string>
     <string name="attribute_blind_people_no">Handicap: non adatto ai ciechi</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
