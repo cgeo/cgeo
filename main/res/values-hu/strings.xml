@@ -261,8 +261,6 @@
     <string name="menu_backup">Biztonsági mentés / Visszaállítás</string>
     <string name="menu_history">Előzmények</string>
     <string name="menu_filter">Szűrés</string>
-    <string name="menu_scan_geo">Geokód szkennelése</string>
-    <string name="menu_scan_description">A c:geo QR formátumú geokódokat is be tud olvasni, de az ehhez szükséges alkalmazás nincs telepítve. Meg szeretnéd nyitni a Google Play-t, hogy telepítsd?</string>
     <!-- main screen -->
     <string name="live_map_button">Élő térkép</string>
     <string name="caches_nearby_button">A közelben</string>
@@ -906,12 +904,9 @@
     <string name="helper_gpsstatus_description">A programban található radart a c:geo-hoz is használhatod. Sok egyéb GPS-szel kapcsolatos információt is megmutat.</string>
     <string name="helper_bluetoothgps_description">Ez a program külső GPS vevők használatát teszi lehetővé, amelyek segítségével jobb vételt és pontosabb koordinátákat kaphatsz. Külső GPS használatával a telefonod akkumulátora is tovább bírja.</string>
     <string name="helper_gps_locker_description">A GPS Locker stabil GPS-jelről gondoskodik alkalmazások közötti váltáskor és készüléked képernyőjének kikapcsolása után is.</string>
-    <string name="helper_barcode_description">Léteznek olyan Greasemonkey szkriptek és weboldalak, melyek segítségével egy geokód megjeleníthető vonalkódként. Ezzel az app-pal a c:geo közvetlenül a számítógéped képernyőjéről tudja beolvasni ezeket a geokódokat.</string>
     <string name="helper_google_translate_title">Google Fordító</string>
     <string name="helper_google_translate_description">A Google Fordító alkalmazáshoz letöltött fordítócsomagokkal könnyedén lefordíthatod a c:geo ládaleírásait, ha hosszan tartva megnyomod a ládaleírás szövegét. (Internet kapcsolat nélkül is működik.)</string>
     <string name="helper_where_you_go_description">A WhereYouGo lehetővé teszi Wherigo ládák keresését és játszását. A c:geo képes automatikusan elindítani a cartridge fájlok létöltését a programon belül.</string>
-    <string name="helper_brouter_title">BRouter offline navigáció</string>
-    <string name="helper_brouter_description">A BRouter egy offline útvonaltervező. A c:geo automatikusan megmutatja az utat a ládához a belső térképen, ha telepítetted és letöltötted a szükséges fájlokat.</string>
     <!-- export -->
     <string name="export">Exportálás</string>
     <string name="export_progress">Exportálás: %1$s</string>
@@ -1163,6 +1158,7 @@
     <string name="attribute_survey_marker_no">Nem felmérési hely közelében</string>
     <string name="attribute_offset_cache_yes">Offset láda</string>
     <string name="attribute_offset_cache_no">Nem offset láda</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Az egyszerűbb ládázásért, a lustább játékosokért.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
