@@ -138,36 +138,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     }
 
     @Override
-    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-        if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
-            return;
-        }
-
-        if (resultCode != RESULT_OK) {
-            return;
-        }
-
-        if (requestCode == R.string.pref_fakekey_ec_authorization) {
-            setAuthTitle(requestCode, ECConnector.getInstance());
-            setConnectedUsernameTitle(requestCode, ECConnector.getInstance());
-        } else if (requestCode == R.string.pref_fakekey_gcvote_authorization) {
-            setAuthTitle(requestCode, GCVote.getInstance());
-            setConnectedUsernameTitle(requestCode, GCVote.getInstance());
-        } else if (requestCode == R.string.pref_fakekey_twitter_authorization) {
-            setConnectedTitle(requestCode, Settings.hasTwitterAuthorization());
-        } else if (requestCode == R.string.pref_fakekey_geokrety_authorization) {
-            setConnectedTitle(requestCode, Settings.hasGeokretyAuthorization());
-        } else if (requestCode == R.string.pref_fakekey_su_authorization) {
-            setConnectedTitle(requestCode, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
-        }
-    }
-
-    @Override
     public boolean onSupportNavigateUp() {
         if (getSupportFragmentManager().popBackStackImmediate()) {
             return true;
@@ -192,38 +162,5 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             .commit();
         title = pref.getTitle();
         return true;
-    }
-
-    public void setAuthTitle(final int prefKeyId) {
-        if (prefKeyId == R.string.pref_fakekey_ec_authorization) {
-            setAuthTitle(prefKeyId, ECConnector.getInstance());
-            setConnectedUsernameTitle(prefKeyId, ECConnector.getInstance());
-        } else if (prefKeyId == R.string.pref_fakekey_gcvote_authorization) {
-            setAuthTitle(prefKeyId, GCVote.getInstance());
-            setConnectedUsernameTitle(prefKeyId, GCVote.getInstance());
-        } else if (prefKeyId == R.string.pref_fakekey_twitter_authorization) {
-            // Moved to Fragment: setTwitterAuthTitle
-            setConnectedTitle(prefKeyId, Settings.hasTwitterAuthorization());
-        } else if (prefKeyId == R.string.pref_fakekey_geokrety_authorization) {
-            setConnectedTitle(prefKeyId, Settings.hasGeokretyAuthorization());
-        } else {
-            Log.e(String.format(Locale.ENGLISH, "Invalid key %d in SettingsActivity.setTitle()", prefKeyId));
-        }
-    }
-
-    private void setAuthTitle(final int prefKeyId, @NonNull final ICredentials connector) {
-        final Credentials credentials = Settings.getCredentials(connector);
-
-        //getPreference(prefKeyId).setTitle(getString(StringUtils.isNotBlank(credentials.getUsernameRaw()) ? R.string.settings_reauthorize : R.string.settings_authorize));
-    }
-
-    private void setConnectedUsernameTitle(final int prefKeyId, @NonNull final ICredentials connector) {
-        final Credentials credentials = Settings.getCredentials(connector);
-
-        //getPreference(prefKeyId).setSummary(credentials.isValid() ? getString(R.string.auth_connected_as, credentials.getUserName()) : getString(R.string.auth_unconnected));
-    }
-
-    private void setConnectedTitle(final int prefKeyId, final boolean hasToken) {
-        //getPreference(prefKeyId).setSummary(getString(hasToken ? R.string.auth_connected : R.string.auth_unconnected));
     }
 }
