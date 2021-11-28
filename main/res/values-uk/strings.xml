@@ -280,8 +280,6 @@
     <string name="menu_backup">Резервна копія / Відновлення</string>
     <string name="menu_history">Історія</string>
     <string name="menu_filter">Фільтр</string>
-    <string name="menu_scan_geo">Сканувати геокод</string>
-    <string name="menu_scan_description">c:geo можна сканувати гео-коди, які надруковані як QR-код. Не встановлено потрібне додатку. Відкрити Google Play, щоб встановити його?</string>
     <!-- main screen -->
     <string name="live_map_button">Жива мапа</string>
     <string name="caches_nearby_button">Неподалік</string>
@@ -1073,12 +1071,9 @@
     <string name="helper_gpsstatus_description">Ви можете використовувати радар у цьому додатку спільно з c: geo. Він також пропонує багато іншої інформації, пов\'язаної з GPS.</string>
     <string name="helper_bluetoothgps_description">Дозволяє використовувати зовнішній приймач GPS для отримання більш точних даних про місцезнаходження та може заощадити акумулятор вашого пристрою.</string>
     <string name="helper_gps_locker_description">GPS Locker підтримує активний сигнал GPS під час перемикання між програмами та коли екран вашого пристрою вимкнений.</string>
-    <string name="helper_barcode_description">Існують сценарії та веб-сайти Greasemonkey, які дозволяють відображати геокоди як штрих-коди. За допомогою цієї програми c: geo може зчитувати такі геокоди безпосередньо з екрану вашого комп’ютера.</string>
     <string name="helper_google_translate_title">Перекладач Google</string>
     <string name="helper_google_translate_description">Якщо ви завантажите пакети перекладів у додатку Google Translate після цього ви можете легко перекладати описи кешу в c:geo довгим натисканням на текст опису кешу (без підключення до Інтернету).</string>
     <string name="helper_where_you_go_description">Тут Ви можете грати та шукати схованки типу Wherigo. c:geo може автоматично запустити завантаження картриджів у цьому додатку.</string>
-    <string name="helper_brouter_title">Автономна навігація BRouter</string>
-    <string name="helper_brouter_description">BRouter забезпечує маршрутизацію в режимі офлайн. Якщо він встановлений, і має необхідні файли c:geo буде автоматично відображатися маршрут до кешу на внутрішньому карті.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf дозволяє вам читати дані від тегів чітких даних ANT+/Garmin chirp тегів, які потрібні для ANT+/chirp geocaches.</string>
     <!-- export -->
     <string name="export">Експорт</string>
@@ -1352,6 +1347,7 @@
     <string name="attribute_historic_no">Немає покинутих споруд / без руїн</string>
     <string name="attribute_blind_people_yes">Гандикап: Сліпий</string>
     <string name="attribute_blind_people_no">Немає handicap: Сліпий</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Для того, щоб зробити геокешинг легшим, потрібно робити користувачів ледачим.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
