@@ -221,8 +221,6 @@
     <string name="menu_helpers">Ang utility nga mga programa</string>
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang mga niaagi</string>
-    <string name="menu_scan_geo">I-scan ang geocode</string>
-    <string name="menu_scan_description">ang c:geo kay makahimo sa pag-scan sa mga geocode nga giimprinta nga QR code. Ang gikinahanglan nga app wala ma-instalan. Gusto ka bang moabli sa Google Play aron ma-instalan kini?</string>
     <!-- main screen -->
     <string name="live_map_button">Buhi nga mapa</string>
     <string name="caches_nearby_button">Sa duol</string>
@@ -779,12 +777,9 @@
     <string name="helper_locus_description">Gawas sa nabigasyon app para sa imung cellphone ug tablet.. Tan-awa ang mga topo na mapa, sunda ang imung rota, pangitaa ang mga geocache, mugamit ug sundaanan sa tingof ug magbuhat ug lain pa.</string>
     <string name="helper_gpsstatus_description">Pwede nimu gamiton ang radar sa aplikasyon ng conjuctionsa c:geo.  Silay ay nagtanyag ng daghan pang GPS na kaugalingong impormasyon</string>
     <string name="helper_bluetoothgps_description">Gisugtan ka na mugamit ug external GPS receiver para makuha paglaing nindot na lokasyong data, ug pwedeng makahabilin ug baterya sa imung device.</string>
-    <string name="helper_barcode_description">Naay mga Greasemonkey skript at website para paganahon sa pagpakita ug geocodes na ga ingon sa barcode. Sa app na ito, ang c:geo kay makabasa parehas sa geocodes diretso gikan sa screen sa imung kompyuter.</string>
     <string name="helper_google_translate_title">Gi translate sa google</string>
     <string name="helper_google_translate_description">Kung nagdowload ka ug pakahe na translation sa Google Translate app, kahuman ani dali na lang kaayu mag-translate ug pahulagway sa c:geo sa paggamit ug pagpislit ug dugay sa cache ng paghulagway na teksto (bisag walay internet koneksyon).</string>
     <string name="helper_where_you_go_description">Ang WhereYouGO kay magtugot og pagdula og pagpangita sa geocaches sa Wherigo na tipo. ang c:geo kay awtomatikong mo kablit sa mga bala sa download sa sulod ani nga app.</string>
-    <string name="helper_brouter_title">Offline na BRouter na Nabigasyon</string>
-    <string name="helper_brouter_description">BRouter kay naghatag ug offline nga kadaugan. Kung kana ma install ug naay gikinahanglan nga mga files nga gi download, ang c:geo kay awtomatikalong magpakita ug usa ka ruta sa cache adto sa pangsulod na mapa.</string>
     <!-- export -->
     <string name="export">I-export</string>
     <string name="export_progress">I-export: %1$s</string>
@@ -1026,6 +1021,7 @@
     <string name="attribute_survey_marker_no">Dili dool sa marka sa surbe</string>
     <string name="attribute_offset_cache_yes">Timbang nga cache</string>
     <string name="attribute_offset_cache_no">Dili timbang nga cache</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Para mas sayun ang geocaching, maghimo og lazier nga manggagamit.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
