@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="3dip" >
+    android:layout_marginBottom="3dip">
 
     <TextView
         android:id="@+id/name"
         android:layout_width="100sp"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="false"
-        android:layout_centerVertical="false"
         android:layout_gravity="left|top"
         android:layout_marginRight="8dip"
         android:ellipsize="end"
@@ -24,56 +23,70 @@
         android:textColor="@color/colorTextHint"
         tools:text="property"/>
 
-    <TextView
-        android:id="@+id/value"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_height="wrap_content"
-        android:layout_centerVertical="false"
-        android:layout_marginRight="5dip"
-        android:layout_toRightOf="@+id/name"
-        android:gravity="center_vertical"
-        android:textSize="@dimen/textSize_detailsPrimary"
-        android:textIsSelectable="false"
-        android:textColor="@color/colorText"
-        tools:text="value"/>
-
-    <RatingBar
-        android:id="@+id/stars"
-        style="@style/cacheRatingBar"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_gravity="center_horizontal"
-        android:layout_toRightOf="@+id/value"
-        android:baselineAligned="false"
-        android:gravity="center_vertical"
-        android:numStars="5"
-        android:visibility="gone"
-        tools:rating="2"
-        tools:visibility="visible"/>
+        android:orientation="horizontal"
+        android:layout_toRightOf="@id/name">
 
-    <TextView
-        android:id="@+id/addition"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="false"
-        android:layout_marginLeft="5dip"
-        android:layout_toRightOf="@+id/stars"
-        android:gravity="center_vertical"
-        android:textIsSelectable="false"
-        android:maxLines="1"
-        android:visibility="gone"
-        android:textColor="@color/colorText"
-        tools:text="additional text"
-        tools:visibility="visible"/>
+        <TextView
+            android:id="@+id/value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textSize="@dimen/textSize_detailsPrimary"
+            android:textIsSelectable="false"
+            android:textColor="@color/colorText"
+            android:visibility="gone"
+            tools:text="value"/>
 
-    <LinearLayout
-        android:id="@+id/linearlayout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/name"
-        android:gravity="bottom"
-        android:paddingTop="3dp"
-        android:orientation="horizontal" />
+        <RatingBar
+            android:id="@+id/stars"
+            style="@style/cacheRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:baselineAligned="true"
+            android:gravity="center_vertical"
+            android:numStars="5"
+            android:visibility="gone"
+            tools:rating="2"
+            tools:visibility="visible"
+            tools:ignore="MissingConstraints"/>
 
+        <TextView
+            android:id="@+id/addition"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:textIsSelectable="false"
+            android:maxLines="1"
+            android:visibility="gone"
+            android:textColor="@color/colorText"
+            tools:text="additional text"
+            tools:visibility="visible"
+            tools:ignore="MissingConstraints"/>
+
+        <LinearLayout
+            android:id="@+id/linearlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="bottom|left"
+            android:paddingTop="3dp"
+            android:orientation="horizontal"
+            android:visibility="gone"
+            tools:ignore="MissingConstraints"/>
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:flow_wrapMode="chain"
+            app:flow_horizontalStyle="packed"
+            app:flow_horizontalBias="0"
+            app:flow_horizontalGap="5dip"
+            app:constraint_referenced_ids="value, stars, addition, linearlayout" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </RelativeLayout>

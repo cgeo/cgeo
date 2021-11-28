@@ -60,6 +60,9 @@ public final class CacheDetailsCreator {
     public ImmutablePair<RelativeLayout, TextView> add(final int nameId, final CharSequence value) {
         final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
         nameValue.getRight().setText(value);
+        if (StringUtils.isNotBlank(value)) {
+            nameValue.getRight().setVisibility(View.VISIBLE);
+        }
         return nameValue;
     }
 
@@ -75,6 +78,9 @@ public final class CacheDetailsCreator {
         final ImmutablePair<RelativeLayout, TextView> nameValue = createNameValueLine(nameId);
         final TextView valueView = nameValue.getRight();
         valueView.setText(HtmlCompat.fromHtml(value.toString(), HtmlCompat.FROM_HTML_MODE_LEGACY, new SmileyImage(geocode, valueView), new UnknownTagsHandler()), TextView.BufferType.SPANNABLE);
+        if (StringUtils.isNotBlank(value)) {
+            nameValue.getRight().setVisibility(View.VISIBLE);
+        }
         return nameValue;
     }
 
@@ -99,6 +105,7 @@ public final class CacheDetailsCreator {
 
         nameView.setText(activity.getString(nameId));
         valueView.setText(String.format(Locale.getDefault(), activity.getString(R.string.cache_rating_of_new), value, max));
+        valueView.setVisibility(View.VISIBLE);
 
         final RatingBar layoutStars = layout.findViewById(R.id.stars);
         layoutStars.setNumStars(max);
@@ -254,6 +261,7 @@ public final class CacheDetailsCreator {
         }
         if (markers.getChildCount() > 0) {
             parentView.addView(layout);
+            markers.setVisibility(View.VISIBLE);
         }
     }
 }
