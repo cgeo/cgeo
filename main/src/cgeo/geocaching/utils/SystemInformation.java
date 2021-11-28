@@ -139,11 +139,7 @@ public final class SystemInformation {
     }
 
     private static void appendDatabase(@NonNull final StringBuilder body) {
-        final File dbFile = DataStore.databasePath();
-        body.append("\n- Database: ").append(dbFile)
-                .append(" (").append(versionInfoToString(DataStore.getActualDBVersion(), DataStore.getExpectedDBVersion()))
-                .append(", Size:").append(Formatter.formatBytes(dbFile.length())).append(") on ")
-                .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
+        body.append("\n- Database: ").append(DataStore.getDatabaseSystemInformation());
     }
 
     private static void appendSettings(@NonNull final StringBuilder body) {
