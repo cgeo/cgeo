@@ -30,6 +30,7 @@ import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsPageBinding;
 import cgeo.geocaching.enumerations.CacheAttribute;
+import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
@@ -158,8 +159,10 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -1223,8 +1226,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             details.addLatestLogs(cache);
 
             // cache attributes
-            updateAttributesIcons(activity);
-            updateAttributesText();
+            updateAttributes(activity);
             binding.attributesBox.setVisibility(cache.getAttributes().isEmpty() ? View.GONE : View.VISIBLE);
 
             updateOfflineBox(binding.getRoot(), cache, activity.res, new RefreshCacheClickListener(), new DropCacheClickListener(),
@@ -1262,49 +1264,50 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        private void updateAttributesIcons(final Activity activity) {
+        private void updateAttributes(final Activity activity) {
             final List<String> attributes = cache.getAttributes();
             if (!CacheAttribute.hasRecognizedAttributeIcon(attributes)) {
                 binding.attributesGrid.setVisibility(View.GONE);
                 return;
             }
-            binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, cache));
+            final HashSet<String> attributesSet = new HashSet<>(attributes);
+            // traverse by category and attribute order
+            final ArrayList<String> a = new ArrayList<>();
+            final StringBuilder text = new StringBuilder();
+            int lastCategoryId = -1;
+            for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
+                for (CacheAttribute attr : CacheAttribute.values()) {
+                    if (attr.categoryId == categoryId) {
+                        for (Boolean enabled : Arrays.asList(false, true)) {
+                            final String key = attr.getValue(enabled);
+                            if (attributesSet.contains(key)) {
+                                if (lastCategoryId != categoryId) {
+                                    if (lastCategoryId != -1) {
+                                        text.append("\n\n");
+                                    }
+                                    text.append(CacheAttributeCategory.getNameById(activity, categoryId));
+                                    lastCategoryId = categoryId;
+                                }
+                                a.add(key);
+                                text.append('\n').append(attr.getL10n(enabled));
+                            }
+                        }
+                    }
+                }
+            }
+
+            binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, a));
             binding.attributesGrid.setVisibility(View.VISIBLE);
             binding.attributesGrid.setOnItemClickListener((parent, view, position, id) -> toggleAttributesView());
+
+            binding.attributesText.setText(text);
+            binding.attributesText.setVisibility(View.GONE);
+            binding.attributesText.setOnClickListener(v -> toggleAttributesView());
         }
 
         protected void toggleAttributesView() {
             binding.attributesText.setVisibility(binding.attributesText.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
             binding.attributesGrid.setVisibility(binding.attributesGrid.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
-        }
-
-        private void updateAttributesText() {
-            final List<String> attributes = cache.getAttributes();
-            if (attributes.isEmpty()) {
-                binding.attributesText.setVisibility(View.GONE);
-                return;
-            }
-            final StringBuilder text = new StringBuilder();
-            for (final String attributeName : attributes) {
-                final boolean enabled = CacheAttribute.isEnabled(attributeName);
-                // search for a translation of the attribute
-                final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
-                String attributeNameL10n = attributeName;
-                if (attrib != null) {
-                    attributeNameL10n = attrib.getL10n(enabled);
-                }
-                if (text.length() > 0) {
-                    text.append('\n');
-                }
-                text.append(attributeNameL10n);
-            }
-            binding.attributesText.setText(text);
-            if (binding.attributesGrid.getVisibility() == View.VISIBLE) {
-                binding.attributesText.setVisibility(View.GONE);
-                binding.attributesText.setOnClickListener(v -> toggleAttributesView());
-            } else {
-                binding.attributesText.setVisibility(View.VISIBLE);
-            }
         }
 
         private class StoreCacheClickListener implements View.OnClickListener, View.OnLongClickListener {
