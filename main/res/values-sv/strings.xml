@@ -327,10 +327,8 @@
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_history_longstring">\"Hittat\" historik</string>
     <string name="menu_filter">Filtrera</string>
-    <string name="menu_scan_geo">Scanna geokod</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bokmärkeslista</string>
-    <string name="menu_scan_description">c:geo kan skanna geocoder som skrivits som QR-koder. Den nödvändiga appen är inte installerad. Vill du öppna Google Play för att installera den?</string>
     <string name="menu_invert_order">Omvänd sortering</string>
     <!-- main screen -->
     <string name="home_button">Hem</string>
@@ -1513,12 +1511,9 @@
     <string name="helper_gpsstatus_description">Erbjuder många GPS-relaterade funktioner. Radar-funktionen i detta program kan användas i c:geo.</string>
     <string name="helper_bluetoothgps_description">Gör det möjligt att använda en extern GPS enhet för att få mer exakt position och även spara på enhetens batteri.</string>
     <string name="helper_gps_locker_description">GPS Locker håller GPS-signalen aktiv när du växlar mellan applikationer och när enhetens skärm är avstängd.</string>
-    <string name="helper_barcode_description">Det finns Greasemonkey-script och hemsidor som visar GC-koder som streckkoder/QR-koder. Med den här appen kan c:geo scanna in GC-koden direkt från skärmen på din dator.</string>
     <string name="helper_google_translate_title">Google Översätt</string>
     <string name="helper_google_translate_description">Om du hämtar översättningspaket i Google Translate appen, kan du enkelt översätta cachebeskrivningar i c:geo med en lång tryckning på cache-beskrivningstexten (även utan Internet-anslutning).</string>
     <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
-    <string name="helper_brouter_title">BRouter Offline-navigering</string>
-    <string name="helper_brouter_description">BRouter tillhandahåller offline-navigering. Om det är installerat och de nödvändiga filerna har laddats ned kommer c:geo automatiskt visa en rutt till cachen på den interna kartan.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf låter dig läsa data från ANT+/Garmin chirp tags, vilket behövs för ANT+/chirp geocacher.</string>
     <string name="helper_alc_description">Adventure Lab-appen för din telefon eller surfplatta.</string>
     <!-- export -->
@@ -1798,6 +1793,7 @@
     <string name="attribute_historic_no">Ingen övergiven struktur eller ruin</string>
     <string name="attribute_blind_people_yes">Handikapp: Blind</string>
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
