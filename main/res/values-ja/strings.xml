@@ -327,10 +327,8 @@
     <string name="menu_history">履歴</string>
     <string name="menu_history_longstring">履歴</string>
     <string name="menu_filter">フィルタ</string>
-    <string name="menu_scan_geo">QRコードスキャン</string>
     <string name="menu_lists_pocket_queries">ポケット・クエリ</string>
     <string name="menu_lists_bookmarklists">ブックマークリスト</string>
-    <string name="menu_scan_description">QRコード化したGCコードをスキャンするためのアプリがインストールされていません。Google Playストアからインストールしますか?</string>
     <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
     <string name="home_button">ホーム</string>
@@ -1489,13 +1487,10 @@
     <string name="helper_gpsstatus_description">c:geoでこのアプリのレーダーを利用することができます。またGPSに関するたくさんの情報が得られます</string>
     <string name="helper_bluetoothgps_description">外部GPS受信機を利用することができます。より正確な位置情報を得られたりデバイスのバッテリ消費が少なくなるかもしれません</string>
     <string name="helper_gps_locker_description">GPS Lockerはアプリケーションを切り替えるときやデバイスの画面がオフのときにGPS信号をアクティブのままにします</string>
-    <string name="helper_barcode_description">GCコードをQRコードで表示するGreasemonkeyスクリプトやWebサイトがあります。このアプリを使えばパソコンの画面から直接GCコードを読み込むことができます</string>
     <string name="helper_google_translate_title">Google 翻訳</string>
     <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
-    <string name="helper_brouter_title">BRouter Offline Navigation</string>
-    <string name="helper_brouter_description">BRouterはオフライン用のルート検索エンジンです。インストール後に必要なファイルをダウンロードするなどのセットアップが必要です。c:geoで地図にキャッシュなどへのルートを表示できるようになります</string>
     <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
     <string name="helper_alc_description">スマホやタブレット用のアドベンチャー・ラボのアプリ</string>
     <!-- export -->
@@ -1774,6 +1769,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_historic_no">放棄された構造物/廃墟ではない</string>
     <string name="attribute_blind_people_yes">視覚障がい者に対応</string>
     <string name="attribute_blind_people_no">視覚障がい者に非対応</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
