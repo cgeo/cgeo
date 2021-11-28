@@ -280,8 +280,6 @@
     <string name="menu_settings">Setări</string>
     <string name="menu_history">Istoric</string>
     <string name="menu_filter">Filtru</string>
-    <string name="menu_scan_geo">Scanează geocod</string>
-    <string name="menu_scan_description">c:geo poate scana geocoduri tipărite sub formă de cod QR. Aplicaţia necesară nu este instalată. Doreşti să deschizi Google Play pentru a o instala?</string>
     <!-- main screen -->
     <string name="live_map_button">Harta</string>
     <string name="caches_nearby_button">În apropiere</string>
@@ -879,11 +877,8 @@
     <string name="helper_locus_description">Aplicaţie de navigare pentru telefon sau tabletă. Vezi hărţi salvate, urmăreşte-ţi traseul, caută geocutii, foloseşte ghidare vocală şi multe altele.</string>
     <string name="helper_gpsstatus_description">Poţi folosi ecranul Radar din această aplicaţie împreună cu c:geo. Oferă şi multe alte informaţii legate de GPS.</string>
     <string name="helper_bluetoothgps_description">Permite utilizarea unui GPS extern pentru informaţii de poziţie mai precise, totodată conservă din autonomia bateriei dispozitivului tău.</string>
-    <string name="helper_barcode_description">Există aplicaţii GreaseMonkey şi site-uri care pot afişa geocoduri sub formă de coduri de bare. Cu aceasta aplicaţie, c:geo poate citi aceste geocoduri direct de pe ecranul calculatorului.</string>
     <string name="helper_google_translate_description">Dacă ai descărcat pachete cu traduceri în aplicaţia Google Translate atunci poţi traduce descrierile geocutiilor în c:geo apăsând prelungit pe textul descrierii (chiar şi fără conexiune internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo este o aplicaţie pentru a juca aventuri de tip Wherigo. c:geo poate declanşa automat descărcarea cartuşului în această aplicaţie.</string>
-    <string name="helper_brouter_title">Navigare independentă cu BRouter</string>
-    <string name="helper_brouter_description">BRouter oferă servicii de dirijare offline. În cazul în care această aplicaţie este instalată şi au fost descărcate în ea fişierele necesare, c:geo poate să arate traseul pe harta sa proprie.</string>
     <!-- export -->
     <string name="export">Exportă</string>
     <string name="export_exportedto">exportat către</string>
@@ -1129,6 +1124,7 @@
     <string name="attribute_survey_marker_no">Nu ete marcaj topografic</string>
     <string name="attribute_offset_cache_yes">Cutie decalată</string>
     <string name="attribute_offset_cache_no">Nu este geocutie decalată</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Pentru geocaching mai uşor, pentru căutători mai leneşi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
