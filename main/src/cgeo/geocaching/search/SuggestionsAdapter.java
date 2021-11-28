@@ -49,8 +49,6 @@ public class SuggestionsAdapter extends CursorAdapter {
 
     public void changeQuery(@NonNull final String searchTerm) {
         changeCursor(query(searchTerm));
-        //the following line would get new DB cursor asynchronous to GUI thread. Not used currently (see discussion in #11227)
-        //AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> query(searchTerm), this::changeCursor);
     }
 
     private static Cursor query(@NonNull final String searchTerm) {

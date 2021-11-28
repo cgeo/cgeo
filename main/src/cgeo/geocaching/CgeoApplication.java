@@ -42,8 +42,7 @@ public class CgeoApplication extends Application {
 
     @Override
     public void onCreate() {
-        Log.iForce("---------------- CGeoApplication: startup -------------");
-        try (ContextLogger ignore = new ContextLogger(true, "CGeoApplication.onCreate")) {
+        try (ContextLogger ignore = new ContextLogger(Log.LogLevel.DEBUG, "CGeoApplication.onCreate")) {
             super.onCreate();
 
             OOMDumpingUncaughtExceptionHandler.installUncaughtExceptionHandler();
