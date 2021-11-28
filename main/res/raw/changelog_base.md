@@ -7,6 +7,7 @@
 
 ### Cache list
 - New: Option to select next 20 caches
+- New: Attributes overview (see Manage Caches => Attributes overview)
 
 ### Cache details
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
