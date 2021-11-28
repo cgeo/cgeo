@@ -315,8 +315,6 @@
     <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
     <string name="menu_filter">滤镜</string>
-    <string name="menu_scan_geo">掃描geocode</string>
-    <string name="menu_scan_description">c:geo可讀取用QR code顯示的geocacode。 但需要的app未安裝，是否要開啟Google play來安裝必要的app?</string>
     <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
     <string name="live_map_button">線上即時地圖</string>
@@ -1530,6 +1528,7 @@
     <string name="attribute_military_area_no">不是軍事訓練地區</string>
     <string name="attribute_historic_yes">廢墟</string>
     <string name="attribute_historic_no">無廢墟</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">支援</string>
