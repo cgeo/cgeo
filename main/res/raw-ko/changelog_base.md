@@ -7,7 +7,14 @@
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션
+- New: Attributes overview (see Manage Caches => Attributes overview)
+
+### 캐시 상세정보
+- New: Pass current cache coordinates to geochecker (if supported by geochecker)
 
 ### 추가 사항
-- 신규: 설정 만들기 => 필터링 가능한 보기 설정
+- New: Make Settings => View Settings filterable
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0

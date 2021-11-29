@@ -321,9 +321,7 @@
     <string name="menu_update_mapdata">Kortdata</string>
     <string name="menu_history">Historik</string>
     <string name="menu_filter">Filter</string>
-    <string name="menu_scan_geo">Skan geokode</string>
     <string name="menu_lists_bookmarklists">Bogmærkelister</string>
-    <string name="menu_scan_description">c:geo kan skanne geokoder, som er printet som QR koder. Den nødvendige app er ikke installeret. Vil du åbne Google Play for at installere den?</string>
     <string name="menu_invert_order">Omvendt rækkefølge</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kort</string>
@@ -1253,12 +1251,9 @@
     <string name="helper_gpsstatus_description">Du kan bruger radaren i denne app sammen med c:geo. Appen giver desuden en mængde GPS-relateret information.</string>
     <string name="helper_bluetoothgps_description">Giver dig mulighed for at bruge en ekstern GPS-modtager som giver en mere præcis positionsbestemmelse og kan forlænge batteritiden på din enhed.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS modtageren aktiv, når du skifter mellem applikationer og når enhedens skærm er slukket.</string>
-    <string name="helper_barcode_description">Denne app kan skanne og afkode stregkoder med indlejrede geokoder.</string>
     <string name="helper_google_translate_title">Google Oversæt</string>
     <string name="helper_google_translate_description">Hvis du har downloadet oversættelsespakker til Google Oversæt appen, kan du let oversætte cachebeskrivelser i c:geo ved at trykke lang tid på teksten (kræver ikke Internetforbindelse).</string>
     <string name="helper_where_you_go_description">WhereYouGo giver mulighed for at afspille og søge efter geocacher af typen Wherigo. c:geo kan automatisk starte download af cartridges i denne app.</string>
-    <string name="helper_brouter_title">BRouter offline navigation</string>
-    <string name="helper_brouter_description">BRouter kan udføre offline navigation. Hvis BRouter er installeret og de nødvendige datafiler er downloaded, så kan c:geo automatisk vise en rute til cachen på det interne kort.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf lader dig læse data fra ANT+/Garmin Chirp tags, som bruges til caches med \"trådløs beacon\"-attribut.</string>
     <!-- export -->
     <string name="export">Eksportér</string>
@@ -1529,6 +1524,7 @@
     <string name="attribute_video_surveil_yes">Området er videoovervåget</string>
     <string name="attribute_video_surveil_no">Området er ikke videoovervåget</string>
     <string name="attribute_trackables_yes">Egnet til at indeholde trackables</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Gør geocaching nemmere, gør brugere mere dovne.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

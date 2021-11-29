@@ -280,8 +280,6 @@
     <string name="menu_backup">Sécheren / Restauréieren</string>
     <string name="menu_history">Historique</string>
     <string name="menu_filter">Filter</string>
-    <string name="menu_scan_geo">Geocode scannen</string>
-    <string name="menu_scan_description">c:geo kann Geocodes scannen, déi als QR-Code ofgebillt sinn. Déi dofir noutwenneg App ass net installéiert. Wëlls du Google Play opmaachen, fir se ze installéieren?</string>
     <!-- main screen -->
     <string name="live_map_button">Live Kaart</string>
     <string name="caches_nearby_button">Nobäi</string>
@@ -557,6 +555,7 @@
     <!-- helpers -->
     <!-- export -->
     <!-- GC attributes -->
+    <!-- cache attribute categories -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Hëllef</string>

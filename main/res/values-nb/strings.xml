@@ -315,8 +315,6 @@
     <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_history">Historikk</string>
     <string name="menu_filter">Filter</string>
-    <string name="menu_scan_geo">Skann GC-kode</string>
-    <string name="menu_scan_description">c:geo kan skanne GC-koder fra QR-koder. Den nødvendige appen er ikke installert. Vil du åpne Google Play for å installere den?</string>
     <string name="menu_invert_order">Omvendt rekkefølge</string>
     <!-- main screen -->
     <string name="live_map_button">Live-kart</string>
@@ -1388,12 +1386,9 @@
     <string name="helper_gpsstatus_description">Du kan bruke radaren i denne appen sammen med c:geo. Den gir mye GPS-relatert informasjon.</string>
     <string name="helper_bluetoothgps_description">Lar deg bruke ekstern GPS-mottaker for å få mer nøyaktig posisjon og kan spare batteri på enheten.</string>
     <string name="helper_gps_locker_description">GPS Locker holder GPS-signalet aktivt når du skifter mellom apper og når skjermen er av.</string>
-    <string name="helper_barcode_description">Det finnes Greasemonkey-script og nettsider som viser GC-koder som strekkoder eller QR-koder. Med denne appen kan du skanne kodene rett fra skjermen på din datamaskin.</string>
     <string name="helper_google_translate_title">Google Oversetter</string>
     <string name="helper_google_translate_description">Hvis du laster ned oversettelsespakker i Google Oversetter-appen kan du enkelt oversette cachebeskrivelsen i c:geo ved å trykke lenge på teksten (uten å ha tilgang til Internett).</string>
     <string name="helper_where_you_go_description">Med WhereYouGo kan du lete etter Wherigo-geocacher. C:geo kan automatisk laste ned Wherigo-kassetter for deg.</string>
-    <string name="helper_brouter_title">BRouter Offline-navigasjon</string>
-    <string name="helper_brouter_description">BRouter tilbyr frakoblet navigering. Hvis den er installert og de nødvendige filene er lastet ned, vil c:geo automatisk vise en rute til cachen på kartet.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf lar deg lese av data fra ANT+/Garmin chirp-tagger, som er nødvendig for ANT+/chirp geocacher.</string>
     <!-- export -->
     <string name="share_export">Del / Eksporter</string>
@@ -1672,6 +1667,7 @@
     <string name="attribute_historic_no">Ikke forlatt bygning / ruin</string>
     <string name="attribute_blind_people_yes">Handikap: Blind</string>
     <string name="attribute_blind_people_no">Ikke handicap: Blind</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">For å gjøre geocaching enklere og brukerne latere.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

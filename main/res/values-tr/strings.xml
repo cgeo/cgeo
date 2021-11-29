@@ -326,10 +326,8 @@
     <string name="menu_history">Geçmiş</string>
     <string name="menu_history_longstring">Bulma geçmişi</string>
     <string name="menu_filter">Filtre</string>
-    <string name="menu_scan_geo">Geocode tara</string>
     <string name="menu_lists_pocket_queries">Sorgulama kayıtları</string>
     <string name="menu_lists_bookmarklists">Yer imi listeleri</string>
-    <string name="menu_scan_description">c:geo, QR kodu olarak basılan geokodları tarayabilir. Gerekli uygulama yüklenmedi. Yüklemek için Google Play\'i açmak ister misiniz?</string>
     <string name="menu_invert_order">Sırayı tersine çevir</string>
     <!-- main screen -->
     <string name="home_button">Ana Sayfa</string>
@@ -1517,12 +1515,9 @@
     <string name="helper_gpsstatus_description">Radarı bu uygulama içinde c:geo ile birlikte kullanabilirsiniz. Ayrıca size diğer GPS\'lerle alakalı çok fazla bilgi sunar.</string>
     <string name="helper_bluetoothgps_description">Daha kesin konum bilgisi almak için harici bir GPS alıcısı kullanmanıza izin verir ve cihaz pilini daha idareli kullanır.</string>
     <string name="helper_gps_locker_description">GPS Klilidi siz diğer applikasyonları kullanırken veya cihazınızın ekranı kilitliyken GPS sinyalini açık tutar.</string>
-    <string name="helper_barcode_description">Geokodların barkod olarak görüntülenmesini sağlayan Greasemonkey komut dosyaları ve internet siteleri var. Bu uygulamayla (c:geo) bu tür geokodları doğrudan bilgisayarınızda görüntüleyebilirsiniz.</string>
     <string name="helper_google_translate_title">Google çeviri</string>
     <string name="helper_google_translate_description">Google çeviri uygulamasından çeviri paketi indirirseniz, Geocache açıklama metnine basılı tutarak (internet bağlantısı olmadan) c:geo\'daki Geocache açıklamalarını kolaylıkla çevirebilirsiniz.</string>
     <string name="helper_where_you_go_description">WhereYouGo Wherigo türündeki Geocache\'leri bulmanızı sağlar. c:geo otomatik olarak kartuşların bu uygulama üzerinden indirilmesini tetikler.</string>
-    <string name="helper_brouter_title">BRouter çevrimdışı navigasyon</string>
-    <string name="helper_brouter_description">BRouter çevrimdışı yönlendirme sağlar. Kurulup, gerekli dosyalar indirilmişse, c:geo dahili harita üzerinde otomatik olarak Geocache\'e bir rota gösterir.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf etiketlerden veri okur, ANT+/Garmin chirp etiketli kutuları bulmanız için gereklidir.</string>
     <string name="helper_alc_description">Telefonunuz ve tabletiniz için Adventure Lab uygulaması.</string>
     <!-- export -->
@@ -1802,6 +1797,7 @@
     <string name="attribute_historic_no">Terkedilmiş yapı/harabe yok</string>
     <string name="attribute_blind_people_yes">Görme engelli için uygun değil</string>
     <string name="attribute_blind_people_no">Görme engelli için uygun</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

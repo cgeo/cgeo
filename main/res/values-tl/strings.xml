@@ -235,8 +235,6 @@
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang kasaysayan</string>
     <string name="menu_filter">Ang salaan</string>
-    <string name="menu_scan_geo">I-scan ang geocode</string>
-    <string name="menu_scan_description">ang c:gep ay kayang mag-iskan ng ngeocodes kung saan naisulat bilang QR na code. Ang kinakaialngan na app ay hindi na-isntall. Gusto mo bang buksan ang google play para ma-install ito?</string>
     <!-- main screen -->
     <string name="live_map_button">Ang buhay na mapa</string>
     <string name="caches_nearby_button">Kalapit</string>
@@ -821,12 +819,9 @@
     <string name="helper_locus_description">Ang panlabas na nabigasyon na app para sa iyong smartphone at tablet. Tingnan ang topo na mapa sa offline, hanapin ang iyong ruta, hanapin ang geocache, gumamit ng boses na marka at ng marami pang iba.</string>
     <string name="helper_gpsstatus_description">Maaari mong gamitin ang radar sa aplikasyong ito kasabay ng c:geo. Ito rin ay mga nag-aalok ng maraming uri ng GPS kaugnay sa impormasyon.</string>
     <string name="helper_bluetoothgps_description">Pinapayagan kang gumamit ng panlabas na GPS na tagatanggap para makakuha ng madaming wastong lokasyon ng datos, at itoy pwedeng pamalit sa baterya ng iyong aparato.</string>
-    <string name="helper_barcode_description">May mga Greasemonkey na mga iskrip at mga website na nagbibigay-daan sa pagpapakita ng mga geocode bilang mga barcode. Gamit ang app na ito, c:geo maaaring basahin ang naturang mga geocode nang direkta mula sa screen ng iyong kompyuter.</string>
     <string name="helper_google_translate_title">Ang pagsasalin ng google</string>
     <string name="helper_google_translate_description">Kung ikaw ay nag-download ng pakite ng pagsasalin ng google na aplikasyon,magiging madali na ang iyong pagsasalin ng cache na paglalarawan sa c:geo sa pamamagitan ng mahabang paghanap ng paglalarawan na teksto ( ng walang koneksiyon sa internet).</string>
     <string name="helper_where_you_go_description">Saankapupunta ay payagan mong maglaro at magsaliksik ng geocache sa uri na Wherigo. c:geo awtomatikong maghuhudyat ang di-nownload na cartridges sa aplikasyon na ito.</string>
-    <string name="helper_brouter_title">Ang brouter ay oplayn sa nabigasyon</string>
-    <string name="helper_brouter_description">Ang brouter ay nagbibigay ng saradong linya sa routing. Kapag natapos ang pag-instol at ito ay kinakailangan sa mga payl na-naidownload, c:geo ay otomatikong lalabas ang ruta sa cache sa panloob na mapa.</string>
     <!-- export -->
     <string name="export">I-luwas</string>
     <string name="export_progress">Pagluwas ng: %1$s</string>
@@ -1069,6 +1064,7 @@
     <string name="attribute_survey_marker_no">Walang malapit na pagsisiyasat na panada</string>
     <string name="attribute_offset_cache_yes">Ang hindi ginalaw na cache</string>
     <string name="attribute_offset_cache_no">Walang ginalaw na cache</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Para magkaroon ng madaling geocaching, para magkaroon ng kasinungalingan gumagamit.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

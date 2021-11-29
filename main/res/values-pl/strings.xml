@@ -327,10 +327,8 @@
     <string name="menu_history">Historia</string>
     <string name="menu_history_longstring">Historia znalezień</string>
     <string name="menu_filter">Filtruj</string>
-    <string name="menu_scan_geo">Zeskanuj geokod</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listy zakładek</string>
-    <string name="menu_scan_description">c:geo może skanować geokody, które są wydrukowane jako kody QR. Wymagana aplikacja nie jest zainstalowana. Czy chcesz otworzyć Google Play i ją zainstalować?</string>
     <string name="menu_invert_order">Odwróć kolejność</string>
     <!-- main screen -->
     <string name="home_button">Strona główna</string>
@@ -1539,12 +1537,9 @@
     <string name="helper_gpsstatus_description">Można wywołać radar bezpośrednio z aplikacji c:geo. Oferuje on również wiele informacji związanych z GPS.</string>
     <string name="helper_bluetoothgps_description">Umożliwia korzystanie z zewnętrznego odbiornika sygnału GPS, w celu uzyskania bardziej precyzyjnej lokalizacji i zaoszczędzenia baterii telefonu.</string>
     <string name="helper_gps_locker_description">GPS Locker utrzymuje aktywny sygnał GPS podczas przełączania się pomiędzy aplikacjami oraz gdy ekran twojego urządzenia jest wyłączony.</string>
-    <string name="helper_barcode_description">Istnieją skrypty i strony WWW, które umożliwiają wyświetlanie GC-kodu jako kodu kreskowego. Z tym programem c:geo może czytać te GC-kody bezpośrednio z ekranu Twojego komputera.</string>
     <string name="helper_google_translate_title">Tłumacz Google</string>
     <string name="helper_google_translate_description">Jeśli pobierzesz paczki tłumaczeń w aplikacji Google Tłumacz, będziesz mógł łatwo tłumaczyć opisy skrzynek przytrzymując na nich palcem chwilę dłużej (bez połączenia z internetem).</string>
     <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
-    <string name="helper_brouter_title">BRouter Nawigacja Offline</string>
-    <string name="helper_brouter_description">BRouter pozwala na nawigację offline. Jeśli jest zainstalowany i niezbędne pliki zostały pobrane, c:geo automatycznie pokaże trasę do skrzynki na wewnętrznej mapie.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
     <string name="helper_alc_description">Aplikacja Adventure Lab dla twojego telefonu lub tabletu.</string>
     <!-- export -->
@@ -1826,6 +1821,7 @@
     <string name="attribute_historic_no">Brak opuszczonej budowli / Brak ruin</string>
     <string name="attribute_blind_people_yes">Odpowiedni dla osób niewidomych</string>
     <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

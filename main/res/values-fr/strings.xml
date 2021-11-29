@@ -327,10 +327,8 @@
     <string name="menu_history">Historique</string>
     <string name="menu_history_longstring">Historique des trouvailles</string>
     <string name="menu_filter">Filtre</string>
-    <string name="menu_scan_geo">Scanner un géocode</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listes de favoris</string>
-    <string name="menu_scan_description">c:geo peut scanner des QR codes contenant des géocodes. L\'application permettant de le faire n\'est pas installée. Voulez-vous ouvrir Google Play Store pour l\'installer ?</string>
     <string name="menu_invert_order">Inverser l’ordre</string>
     <!-- main screen -->
     <string name="home_button">Accueil</string>
@@ -1518,12 +1516,9 @@
     <string name="helper_gpsstatus_description">Vous pouvez utiliser le radar de cette application dans c:geo. Il gère des informations supplémentaires relatives au GPS.</string>
     <string name="helper_bluetoothgps_description">Vous permet d\'utiliser un GPS externe pour une localisation plus précise tout en économisant la batterie de votre appareil Android.</string>
     <string name="helper_gps_locker_description">Le verrouillage GPS conserve le signal GPS actif lors du basculement entre les applications ou si l\'écran de votre appareil s\'éteint.</string>
-    <string name="helper_barcode_description">Il existe des programmes et des sites web permettant de générer un QR code contenant un géocode. En installant cette application, vous pourrez lire des QR codes et ouvrir les caches correspondantes dans c:geo.</string>
     <string name="helper_google_translate_title">Google Traduction</string>
     <string name="helper_google_translate_description">Si vous téléchargez des modules de traduction dans l\'application Google Traduction, vous pourrez facilement traduire les descriptions des caches dans c:geo par un appui long sur le texte de la description (même sans connexion Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permet de rechercher et de jouer avec les caches de type Wherigo. c:geo peut automatiquement lancer le téléchargement de cartouches utilisables ensuite dans l\'application WhereYouGo.</string>
-    <string name="helper_brouter_title">Navigation BRouter hors-ligne</string>
-    <string name="helper_brouter_description">BRouter permet la navigation hors ligne. Lorsque BRouter est installé et les fichiers nécessaires téléchargés, c:geo vous indiquera sur la carte l\'itinéraire vers la cache.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vous permet de lire les données des balises ANT+/Garmin chirp, ce qui est nécessaire pour les géocaches ANT+/chirp.</string>
     <string name="helper_alc_description">Application Adventure Lab pour votre téléphone ou tablette.</string>
     <!-- export -->
@@ -1803,6 +1798,7 @@
     <string name="attribute_historic_no">Aucun bâtiment abandonné ou ruine</string>
     <string name="attribute_blind_people_yes">Handicap : non-voyant</string>
     <string name="attribute_blind_people_no">Pas de handicap : aveugle</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Pour faciliter le géocaching.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

@@ -327,10 +327,8 @@
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_history_longstring">Gevonden geschiedenis</string>
     <string name="menu_filter">Filter</string>
-    <string name="menu_scan_geo">Scan geocode</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bladwijzerlijsten</string>
-    <string name="menu_scan_description">c:geo kan geocodes scannen die als QR code weergegeven zijn. De noodzakelijke app is niet geïnstalleerd. Wil je Google Play openen om de app te installeren?</string>
     <string name="menu_invert_order">Volgorde omkeren</string>
     <!-- main screen -->
     <string name="home_button">Thuis</string>
@@ -1520,12 +1518,9 @@
     <string name="helper_gpsstatus_description">De radar van deze applicatie kan gebruikt worden samen met c:geo. Het bied ook vele andere GPS gerelateerde informatie.</string>
     <string name="helper_bluetoothgps_description">Maakt het mogelijk om een externe GPS ontvanger te gebruiken voor betere ontvangst, betere locatiebepaling en kan gebruik van de telefoonbatterij verminderen.</string>
     <string name="helper_gps_locker_description">GPS Locker houdt het GPS signaal actief bij het schakelen tussen apps en wanneer het scherm van je apparaat is uitgeschakeld.</string>
-    <string name="helper_barcode_description">Er zijn Greasemonkey scripts en websites beschikbaar die een geocode als barcode weergeven. Met deze applicatie kan c:geo deze geocode direct van het computerscherm lezen.</string>
     <string name="helper_google_translate_title">Google Translate</string>
     <string name="helper_google_translate_description">Als je vertaal pakketten in de Google Translate app download, kan je eenvoudig een cache omschrijving vertalen in c:geo door een lange tik op deze omschrijvingstekst (zonder een internet verbinding).</string>
     <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
-    <string name="helper_brouter_title">BRouter Offline navigatie</string>
-    <string name="helper_brouter_description">BRouter biedt off line routering. Als het is geïnstalleerd en de benodigde bestanden gedownload heeft, zal c:geo een route naar de cache automatisch tonen op de interne kaart.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <string name="helper_alc_description">Adventure Lab Player app voor je telefoon of tablet.</string>
     <!-- export -->
@@ -1805,6 +1800,7 @@
     <string name="attribute_historic_no">Geen verlaten gebouw / ruïne</string>
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">Geen handicap: Blind</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

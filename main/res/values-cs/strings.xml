@@ -327,10 +327,8 @@
     <string name="menu_history">Historie</string>
     <string name="menu_history_longstring">Historie nálezů</string>
     <string name="menu_filter">Filtr</string>
-    <string name="menu_scan_geo">Naskenovat geokód</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Seznamy záložek</string>
-    <string name="menu_scan_description">C:geo může skenovat geokódy, které jsou vytištěné jako QR kód. K tomu nezbytná aplikace však není nainstalována. Chceš přejít na Google Play a nainstalovat ji?</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
     <string name="home_button">Domů</string>
@@ -1547,14 +1545,12 @@
     <string name="helper_gpsstatus_description">Můžeš použít radar z této aplikace pro c:geo. Také podporuje další funkce spojené s používáním GPS.</string>
     <string name="helper_bluetoothgps_description">Umožňuje použít externí GPS přijímač pro přesnější lokalizaci a možná tak i ušetřit nějakou energii.</string>
     <string name="helper_gps_locker_description">GPS Locker udržuje GPS signál aktivní při přepínání aplikací a při vypnutí obrazovky vašeho zařízení.</string>
-    <string name="helper_barcode_description">Jsou zde skripty Greasemonkey a stránky, které ti umožní zobrazit geokód jako čárový kód. S touto aplikací může c:geo přečíst daný geokód přímo z tvého displeje.</string>
     <string name="helper_google_translate_title">Překladač Google</string>
     <string name="helper_google_translate_description">Pokud si v aplikaci Překladač Google stáhneš překladový balíček, můžeš jednoduše překládat popisy kešek v c:geo dlouhým podržením textu (a to bez připojení k Internetu).</string>
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hledání kešek typu Wherigo. S touto aplikací může c:geo automaticky stahovat údaje potřebné pro hru.</string>
-    <string name="helper_brouter_title">BRouter offline navigace</string>
-    <string name="helper_brouter_description">Aplikace BRouter poskytuje offline navigaci. Je-li nainstalována a jsou-li nezbytné soubory stažené, c:geo automaticky zobrazí cestu ke kešce na interní mapě.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf vám umožňuje číst data z ANT+/Garmin chirp tagů, což je potřeba pro ANT+/chirp kešky.</string>
     <string name="helper_alc_description">Aplikace Adventure Lab pro váš telefon nebo tablet.</string>
+    <string name="helper_gcwizard_description">Průvodce GC Wizard obsahuje řadu nástrojů pro jednoduché kryptografické, geodetické a vědecké výpočty a stovky sad různých symbolů.</string>
     <!-- export -->
     <string name="share_export">Sdílet / Exportovat</string>
     <string name="export">Export</string>
@@ -1834,6 +1830,7 @@
     <string name="attribute_historic_no">Není opuštěnou budovou / Zříceninou</string>
     <string name="attribute_blind_people_yes">Postižení: Zrakové</string>
     <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

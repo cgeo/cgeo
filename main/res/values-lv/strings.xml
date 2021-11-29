@@ -279,8 +279,6 @@
     <string name="menu_backup">Dublēt / atjaunot</string>
     <string name="menu_history">Vēsture</string>
     <string name="menu_filter">Filtrēt</string>
-    <string name="menu_scan_geo">Skenēt Geo code</string>
-    <string name="menu_scan_description">c:geo var skenēt ģeokodus, kuri tiek drukāti kā QR kods. Nav instalēta nepieciešamā aplikācija. Vai vēlaties atvērt Google Play (Google veikalu), lai to instalētu?</string>
     <!-- main screen -->
     <string name="live_map_button">Karte</string>
     <string name="caches_nearby_button">Tuvumā</string>
@@ -1010,12 +1008,9 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="helper_locus_description">Āra navigācijas aplikācija tālrunim vai planšetei. Ļauj skatīt bezsaistes topogrāfiskās kartes, izsekot maršrutu, meklēt slēpņus, lietot balss ceļvedi un darīt vēl daudz ko citu.</string>
     <string name="helper_gpsstatus_description">Iespējams izmantot radaru kopā ar c:geo. Tas parāda arī citu ar GPS saistītu informāciju.</string>
     <string name="helper_bluetoothgps_description">Lai iegūtu precīzāku atrašanās vietas datus, ļauj izmantot ārējo GPS uztvērēju, tas var ietaupīt ierīces akumulatoru.</string>
-    <string name="helper_barcode_description">Šie ir Greasemonkey skripti un tīmekļa vietnes, kas ļauj parādīt ģeokodus kā svītrkodus. Ar šo aplikāciju c:geo var lasīt šādu ģeokodus tieši no datora ekrāna.</string>
     <string name="helper_google_translate_title">Google tulkotājs</string>
     <string name="helper_google_translate_description">Ja ir lejupielādētas tulkojuma pakotnes Google Translate aplikācijā, tad slēpņu aprakstus vari viegli tulkot c:geo paturot uz slēpņa apraksta teksta (bez interneta pieslēguma).</string>
     <string name="helper_where_you_go_description">WhereYouGo ļauj spēlēt un meklēt Wherigo tipa slēpņus. c:geo automātiski ļauj lejupielādēt kārtridžus caur šo aplikāciju.</string>
-    <string name="helper_brouter_title">BRouter bezsaistes navigācija</string>
-    <string name="helper_brouter_description">BRouter piedāvā bezsaistes maršrutēšanu. Ja BRouter ir instalēts un ir lejupielādēti nepieciešamie faili, c:geo automātiski parādīs maršrutu uz slēpni savā kartē.</string>
     <!-- export -->
     <string name="export">Eksportēt</string>
     <string name="export_progress">Eksportē: %1$s</string>
@@ -1267,6 +1262,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_survey_marker_no">Nav tuvumā ģeodēziskajai zīmei</string>
     <string name="attribute_offset_cache_yes">Offset slēpnis</string>
     <string name="attribute_offset_cache_no">Nav offset slēpnis</string>
+    <!-- cache attribute categories -->
     <!-- next things -->
     <string name="quote">Lai padarītu slēpņošanu vieglāku un slēpņotāju slinkāku.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

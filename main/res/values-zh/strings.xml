@@ -285,8 +285,6 @@
     <string name="menu_backup">备份 / 还原</string>
     <string name="menu_history">历史</string>
     <string name="menu_filter">过滤器</string>
-    <string name="menu_scan_geo">扫描地理编码</string>
-    <string name="menu_scan_description">c:geo 可以扫描以二维码打印的地理编码。 未安装必要的应用程序，您想要打开 Google Play 来安装吗？</string>
     <!-- main screen -->
     <string name="live_map_button">实时地图</string>
     <string name="caches_nearby_button">附近</string>
@@ -721,13 +719,13 @@
     <!-- device orientation types -->
     <!-- license -->
     <!-- helpers -->
-    <string name="helper_barcode_description">有 Greasemonkey 脚本和网站可以将地理编码显示为条形码。通过这个应用，c:geo 可以直接从您的电脑屏幕上读取这些地理编码。</string>
     <!-- export -->
     <string name="export_modifiedcoords">更改后的坐标</string>
     <string name="export_modifiedcoords_uploading">%1$d已上传</string>
     <string name="export_modifiedcoords_success">上传成功</string>
     <string name="export_modifiedcoords_error">上传失败</string>
     <!-- GC attributes -->
+    <!-- cache attribute categories -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <!-- status (used via string based resource loading) -->
