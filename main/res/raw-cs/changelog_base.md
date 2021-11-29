@@ -7,7 +7,7 @@
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
-- New: Attributes overview (see Manage Caches => Attributes overview)
+- Novinka: Přehled atributů (viz Správa kešek => Přehled atributů)
 
 ### Detaily kešky
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
