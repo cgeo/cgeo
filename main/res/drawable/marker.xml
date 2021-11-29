@@ -6,6 +6,6 @@
   <path
       android:pathData="M4,18a14,14 0,1 0,28 0a14,14 0,1 0,-28 0z"
       android:strokeWidth=".75"
-      android:fillColor="#fff"
-      android:strokeColor="#383838"/>
+      android:fillColor="@color/cacheMarker_background"
+      android:strokeColor="@color/cacheMarker_border"/>
 </vector>

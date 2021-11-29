@@ -67,7 +67,7 @@ public class FilterViewHolderCreator {
                         .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
                             CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
                         .setValueDisplayTextGetter(CacheType::getShortL10n)
-                        .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct, false))),
+                        .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
                         2, null);
                 break;
             case SIZE:
