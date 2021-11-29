@@ -407,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Verwijderen offline logs</string>
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
+    <string name="caches_show_attributes">Toon attribuut overzicht</string>
     <string name="caches_set_cache_icon">Cachepictogrammen instellen</string>
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
@@ -826,6 +827,7 @@
     <string name="init_map_directory_description">Map met offline kaarten</string>
     <string name="init_brouter_directory_description">Map met BRouter routering data</string>
     <string name="init_updateinterval_title">Update interval</string>
+    <string name="init_updateinterval_description">Herinnert je om de x dagen voor een update controle (alleen geldig voor bestanden die je hebt gedownload binnen c:geo), 0=uit</string>
     <string name="init_gpx_importexportdir">GPX map</string>
     <string name="init_dataDir">Gegevensmap selecteren</string>
     <string name="init_dataDir_note">Je kunt de extra gegevens voor geocaches (spoilers, log afbeeldingen, …) opslaan op je externe opslag (geëmuleerde of echte externe SD kaart afhankelijk van uw apparaat).</string>
@@ -1523,6 +1525,7 @@
     <string name="helper_where_you_go_description">Met WhereYouGo kan je spelen en geocaches zoeken van het type Wherigo. c:geo kan automatisch cartridges downloaden binnen deze app.</string>
     <string name="helper_chirpwolf_description">Met Chirp Wolf kun je de gegevens lezen van ANT+/Garmin chirp tags, wat nodig is voor ANT+/chirp geocaches.</string>
     <string name="helper_alc_description">Adventure Lab Player app voor je telefoon of tablet.</string>
+    <string name="helper_gcwizard_description">GC Wizard bevat talloze hulpmiddelen voor eenvoudige cryptografie, geodetische en wetenschappelijke berekeningen en honderden sets van verschillende symbolen.</string>
     <!-- export -->
     <string name="share_export">Delen / Exporteren</string>
     <string name="export">Exporteren</string>
@@ -1801,6 +1804,12 @@
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">Geen handicap: Blind</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Gereedschap benodigd</string>
+    <string name="cat_type">Type</string>
+    <string name="cat_location">Cachelocatie</string>
+    <string name="cat_duration">Afstand / Duur</string>
+    <string name="cat_surrounding">Rondom de cache</string>
+    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
