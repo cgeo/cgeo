@@ -2,6 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.ViewUtils;
 
 import android.app.Activity;
 import android.content.res.Resources;
@@ -65,16 +67,18 @@ public class AttributesGridAdapter extends BaseAdapter {
     }
 
     private void drawAttribute(final FrameLayout attributeLayout, final String attributeName) {
-        final ImageView imageView = (ImageView) attributeLayout.findViewById(R.id.attribute_image);
-        final ImageView strikeThrough = (ImageView) attributeLayout.findViewById(R.id.attribute_strikethru);
+        final ImageView imageView = attributeLayout.findViewById(R.id.attribute_image);
+        final ImageView strikeThrough = attributeLayout.findViewById(R.id.attribute_strikethru);
 
         strikeThrough.setVisibility(CacheAttribute.isEnabled(attributeName) ? View.INVISIBLE : View.VISIBLE);
 
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
+            ViewUtils.setTooltip(imageView, TextParam.text(attrib.getL10n(CacheAttribute.isEnabled(attributeName))));
         } else {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute_unknown, null));
+            ViewUtils.setTooltip(imageView, TextParam.text(context.getString(R.string.attribute_unknown)));
         }
     }
 

@@ -1971,6 +1971,7 @@
     <string name="attribute_historic_no">No abandoned structure / No ruin</string>
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">No handicap: Blind</string>
+    <string name="attribute_unknown">Unknown attribute</string>
 
     <!-- cache attribute categories -->
     <string name="cat_tools">Tools required</string>
