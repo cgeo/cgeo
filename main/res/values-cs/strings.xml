@@ -409,6 +409,7 @@
     <string name="caches_clear_offlinelogs">Vymazat offline logy</string>
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
+    <string name="caches_show_attributes">Zobrazit přehled atributů</string>
     <string name="caches_set_cache_icon">Nastavit ikony kešky</string>
     <string name="caches_reset_cache_icons_title">Obnovit ikony kešek</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
@@ -1831,6 +1832,12 @@
     <string name="attribute_blind_people_yes">Postižení: Zrakové</string>
     <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Potřebné nástroje</string>
+    <string name="cat_type">Typ</string>
+    <string name="cat_location">Umístění kešky</string>
+    <string name="cat_duration">Vzdálenost / Doba trvání</string>
+    <string name="cat_surrounding">Kolem kešky</string>
+    <string name="cat_transport">Doprava</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
