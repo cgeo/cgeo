@@ -570,8 +570,8 @@ public class GCLogin extends AbstractLogin {
 
             Log.w("Working as guest.");
             return data;
-        } catch (final Exception ignored) {
-            // FIXME: propagate the exception instead
+        } catch (final Exception e) {
+            Log.e("Exception in GCLogin.getRequestLogged", e);
             return null;
         }
     }

@@ -241,19 +241,8 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
         final String page = GCParser.requestHtmlPage(geocode, guid, "y");
 
         if (StringUtils.isEmpty(page)) {
-            final SearchResult search = new SearchResult();
-            if (DataStore.isThere(geocode, guid, false)) {
-                if (StringUtils.isBlank(geocode) && StringUtils.isNotBlank(guid)) {
-                    Log.i("Loading old cache from cache.");
-                    search.addGeocode(DataStore.getGeocodeForGuid(guid));
-                } else {
-                    search.addGeocode(geocode);
-                }
-                search.setError(StatusCode.NO_ERROR);
-                return search;
-            }
-
             Log.e("GCConnector.searchByGeocode: No data from server");
+            final SearchResult search = new SearchResult();
             search.setError(StatusCode.CACHE_NOT_FOUND);
             return search;
         }
