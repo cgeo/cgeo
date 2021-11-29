@@ -58,7 +58,9 @@ import static cgeo.geocaching.connector.capability.ILogin.UNKNOWN_FINDS;
 
 import android.annotation.SuppressLint;
 import android.net.Uri;
+import android.os.Bundle;
 import android.util.Base64;
+import android.util.Pair;
 import static android.util.Base64.DEFAULT;
 
 import androidx.annotation.NonNull;
@@ -102,11 +104,17 @@ import org.apache.commons.lang3.StringUtils;
  */
 final class OkapiClient {
 
+    private static final int SEARCH_LOAD_INITIAL = 200;
+    private static final int SEARCH_LOAD_NEXTPAGE = 50;
+
     private static final String PARAMETER_LOGCOUNT_KEY = "lpc";
     private static final String PARAMETER_LOGCOUNT_VALUE = "all";
 
     private static final String PARAMETER_LOG_FIELDS_KEY = "log_fields";
     private static final String PARAMETER_LOG_FIELDS_VALUE = "uuid|date|user|type|comment|images|internal_id";
+
+    private static final String SEARCH_CONTEXT_FILTER = "sc_oc_filter";
+    private static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_oc_took_total";
 
     private static final char SEPARATOR = '|';
     private static final String SEPARATOR_STRING = Character.toString(SEPARATOR);
@@ -278,11 +286,36 @@ final class OkapiClient {
     }
 
     @NonNull
-    public static SearchResult getCachesByFilter(@NonNull final GeocacheFilter filter, @NonNull final OCApiConnector connector) {
+    public static SearchResult getCachesByFilter(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter) {
+        return retrieveCaches(connector, filter, SEARCH_LOAD_INITIAL, 0);
+    }
+
+    @NonNull
+    public static SearchResult getCachesByNextPage(@NonNull final OCApiConnector connector, @NonNull final Bundle context) {
+
+        final String filterConfig = context.getString(SEARCH_CONTEXT_FILTER);
+        if (filterConfig == null) {
+            return new SearchResult();
+        }
+        final GeocacheFilter filter = GeocacheFilter.createFromConfig(filterConfig);
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+        if (origin != null && !origin.allowsCachesOf(connector)) {
+            return new SearchResult();
+        }
+        final int alreadyTook = context.getInt(SEARCH_CONTEXT_TOOK_TOTAL, 0);
+
+        return retrieveCaches(connector, filter, SEARCH_LOAD_NEXTPAGE, alreadyTook);
+    }
+
+    @NonNull
+    private static SearchResult retrieveCaches(@NonNull final OCApiConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
+
+
         //fill in the defaults
         final Parameters params = new Parameters("search_method", METHOD_SEARCH_ALL);
         final Map<String, String> valueMap = new LinkedHashMap<>();
-        valueMap.put("limit", "200");
+        valueMap.put("limit", "" + take);
+        valueMap.put("offset", "" + skip);
         //search around current position by default
         fillSearchParameterCenter(valueMap, params, null);
 
@@ -299,7 +332,14 @@ final class OkapiClient {
         }
 
         //do the search
-        final SearchResult result = new SearchResult(requestCaches(connector, params, valueMap, true));
+        final Pair<List<Geocache>, Boolean> rawResult = requestCachesWithMore(connector, params, valueMap, true);
+        final SearchResult result = new SearchResult(rawResult.first);
+
+        //store metainfo needed for later for paging
+        result.setLeftToFetch(connector, rawResult.second ? 1 : 0);
+        result.setToContext(connector, b -> b.putString(SEARCH_CONTEXT_FILTER, filter.toConfig()));
+        result.setToContext(connector, b -> b.putInt(SEARCH_CONTEXT_TOOK_TOTAL, skip + rawResult.first.size()));
+
         if (finder != null) {
             result.getSearchContext().putString(Geocache.SEARCHCONTEXT_FINDER, finder);
         }
@@ -442,6 +482,11 @@ final class OkapiClient {
     /** pass 'null' as value for 'my' to exclude the legacy global application of own/filtered/disabled/archived-flags */
     @NonNull
     private static List<Geocache> requestCaches(@NonNull final OCApiConnector connector, @NonNull final Parameters params, @NonNull final Map<String, String> valueMap, final boolean forFilterSearch) {
+        return requestCachesWithMore(connector, params, valueMap, forFilterSearch).first;
+    }
+
+    @NonNull
+    private static Pair<List<Geocache>, Boolean> requestCachesWithMore(@NonNull final OCApiConnector connector, @NonNull final Parameters params, @NonNull final Map<String, String> valueMap, final boolean forFilterSearch) {
 
         if (!forFilterSearch) {
             addFilterParams(valueMap);
@@ -455,14 +500,14 @@ final class OkapiClient {
             params.add("search_params", JsonUtils.writer.writeValueAsString(valueMap));
         } catch (final JsonProcessingException e) {
             Log.e("requestCaches", e);
-            return Collections.emptyList();
+            return new Pair(Collections.emptyList(), false);
         }
         addRetrieveParams(params, connector);
 
         final ObjectNode data = getRequest(connector, OkapiService.SERVICE_SEARCH_AND_RETRIEVE, params).data;
 
         if (data == null) {
-            return Collections.emptyList();
+            return new Pair(Collections.emptyList(), false);
         }
 
         return parseCaches(data);
@@ -619,13 +664,17 @@ final class OkapiClient {
         return false;
     }
 
+    /** returns list of parsed geocaches (left) and a floag indicating whether there are more results on serer (right) */
     @NonNull
-    private static List<Geocache> parseCaches(final ObjectNode response) {
+    private static Pair<List<Geocache>, Boolean> parseCaches(final ObjectNode response) {
         try {
+            final JsonNode moreNode = response.path("more");
+            final boolean more = moreNode != null && moreNode.isBoolean() && moreNode.asBoolean();
+
             // Check for empty result
             final JsonNode results = response.path("results");
             if (!results.isObject()) {
-                return Collections.emptyList();
+                return new Pair(Collections.emptyList(), more);
             }
 
             // Get and iterate result list
@@ -633,11 +682,11 @@ final class OkapiClient {
             for (final JsonNode cache: results) {
                 caches.add(parseSmallCache((ObjectNode) cache));
             }
-            return caches;
+            return new Pair(caches, more);
         } catch (ClassCastException | NullPointerException e) {
             Log.e("OkapiClient.parseCachesResult", e);
         }
-        return Collections.emptyList();
+        return new Pair(Collections.emptyList(), false);
     }
 
     @NonNull

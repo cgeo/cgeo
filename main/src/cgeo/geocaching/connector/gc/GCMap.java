@@ -37,9 +37,11 @@ import cgeo.geocaching.utils.JsonUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.filters.core.GeocacheFilterType.LOG_ENTRY;
 
+import android.os.Bundle;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.io.IOException;
 import java.text.ParseException;
@@ -55,6 +57,10 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.apache.commons.lang3.StringUtils;
 
 public class GCMap {
+
+    private static final int SEARCH_LOAD_INITIAL = 200;
+    private static final int SEARCH_LOAD_NEXTPAGE = 50;
+
     private GCMap() {
         // utility class
     }
@@ -131,14 +137,14 @@ public class GCMap {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "GCMap.searchByViewport")) {
             cLog.add("vp:" + viewport);
 
-            final Pair<GCWebAPI.WebApiSearch, SearchResult> searchPair = createSearchForFilter(GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE), con);
+            final Pair<GCWebAPI.WebApiSearch, SearchResult> searchPair = createSearchForFilter(con, GeocacheFilterContext.getForType(GeocacheFilterContext.FilterType.LIVE));
             if (searchPair == null || searchPair.first == null) {
                 return new SearchResult();
             }
             final GCWebAPI.WebApiSearch search = searchPair.first;
             search.setBox(viewport);
 
-            final SearchResult searchResult = GCWebAPI.searchCaches(search, false);
+            final SearchResult searchResult = GCWebAPI.searchCaches(con, search, false);
 
             if (Settings.isDebug()) {
                     searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
@@ -149,27 +155,53 @@ public class GCMap {
     }
 
     @NonNull
-    public static SearchResult searchByFilter(@NonNull final GeocacheFilter filter, final IConnector connector) {
-        final Pair<GCWebAPI.WebApiSearch, SearchResult> search = createSearchForFilter(filter, connector);
+    public static SearchResult searchByFilter(@NonNull final IConnector con, @NonNull final GeocacheFilter filter) {
+        return searchByFilter(con, filter, SEARCH_LOAD_INITIAL, 0);
+    }
+
+    @Nullable
+    public static SearchResult searchByNextPage(final IConnector con, final Bundle context, final GeocacheFilter filter) {
+        final int alreadyTook = context.getInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, 0);
+        return searchByFilter(con, filter, SEARCH_LOAD_NEXTPAGE, alreadyTook);
+    }
+
+    private static SearchResult searchByFilter(final IConnector con, @NonNull final GeocacheFilter filter, final int take, final int alreadyTook) {
+
+        final Pair<GCWebAPI.WebApiSearch, SearchResult> search = createSearchForFilter(con, filter, take, alreadyTook);
         if (search == null) {
             return new SearchResult();
         }
         if (search.first == null) {
+            //this happens for legacy searches (e.g. by finder). Make sure filter is set there too for origin filtering
+            search.second.setToContext(con, b -> b.putString(GCConnector.SEARCH_CONTEXT_FILTER, filter.toConfig()));
             return search.second;
         }
 
-        return GCWebAPI.searchCaches(search.first, true);
+        final SearchResult sr = GCWebAPI.searchCaches(con, search.first, true);
+        sr.setToContext(con, b -> b.putString(GCConnector.SEARCH_CONTEXT_FILTER, filter.toConfig()));
+        sr.setToContext(con, b -> b.putInt(GCConnector.SEARCH_CONTEXT_TOOK_TOTAL, take + alreadyTook));
+        return sr;
     }
 
-    private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(@NonNull final GeocacheFilter filter, final IConnector connector) {
+
+
+    private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
+        return createSearchForFilter(connector, filter, 200, 0);
+    }
+
+    private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter, final int take, final int skip) {
+
         final GCWebAPI.WebApiSearch search = new GCWebAPI.WebApiSearch();
         search.setOrigin(Sensors.getInstance().currentGeo().getCoords());
-        search.setPage(200, 0);
+        search.setPage(take, skip);
+
+        //special case: if origin filter is present and excludes GCConnector, then skip search
+        final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+        if (origin != null && !origin.allowsCachesOf(connector)) {
+            return null;
+        }
 
         for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
-            if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
-                return null; //no need to search if connector is filtered out itself
-            }
             //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
             if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
                 return new Pair<>(null, searchByFinder(connector, ((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));

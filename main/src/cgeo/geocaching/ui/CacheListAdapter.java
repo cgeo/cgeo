@@ -45,6 +45,7 @@ import androidx.core.content.ContextCompat;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -118,11 +119,27 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         coords = currentGeo.getCoords();
         this.sortContext = sortContext;
         this.res = activity.getResources();
-        this.list = list;
         this.cacheListType = cacheListType;
+        this.list = list;
         checkSpecialSortOrder();
         buildFastScrollIndex();
         GlobalGPSDistanceComparator.updateGlobalGps(coords);
+    }
+
+    public List<Geocache> getList() {
+        return list;
+    }
+
+    public void setList(final Collection<Geocache> list) {
+        this.list.clear();
+        this.list.addAll(list);
+        this.originalList = null;
+
+        reFilter();
+        checkSpecialSortOrder();
+        forceSort();
+
+        notifyDataSetChanged();
     }
 
     public void setStoredLists(final List<AbstractList> storedLists) {
@@ -147,26 +164,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         return null;
     }
     /**
-     * Called when a new page of caches was loaded.
+     * Refilter list of caches (e.g. after new caches were added to the list after reload)
      */
     public void reFilter() {
-        if (hasActiveFilter()) {
-            // Back up the list again
-            originalList = new ArrayList<>(list);
-
-            performFiltering();
-        }
+        //simply reapply the existing filter
+        setFilter(this.currentGeocacheFilter);
     }
 
     /**
-     * Called after a user action on the filter menu.
+     * Apply a new filter to the adapter (e.g. after filter was changed by user in menu)
      */
     public void setFilter(final GeocacheFilter advancedFilter) {
-
-        GeocacheFilter gcFilter = null;
-        if (advancedFilter != null) {
-            gcFilter = advancedFilter;
-         }
 
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
@@ -180,7 +188,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             list.addAll(originalList);
         }
 
-        currentGeocacheFilter = gcFilter;
+        currentGeocacheFilter = advancedFilter;
 
         performFiltering();
 
@@ -206,6 +214,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             }
         }
         return checked;
+    }
+
+    public int getOriginalListCount() {
+        return originalList == null ? list.size() : originalList.size();
     }
 
     public void setSelectMode(final boolean selectMode) {

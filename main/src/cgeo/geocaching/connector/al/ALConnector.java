@@ -125,7 +125,6 @@ public class ALConnector extends AbstractConnector implements ISearchByGeocode, 
     public SearchResult searchByViewport(@NonNull final Viewport viewport) {
         final Collection<Geocache> caches = ALApi.searchByBBox(viewport);
         final SearchResult searchResult = new SearchResult(caches);
-        searchResult.setTotalCount(this, caches.size());
         return searchResult.putInCacheAndLoadRating();
     }
 

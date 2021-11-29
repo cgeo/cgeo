@@ -25,6 +25,7 @@ import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterType;
+import cgeo.geocaching.filters.core.OriginGeocacheFilter;
 import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -61,6 +62,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     private static final float MIN_RATING = 1;
     private static final float MAX_RATING = 5;
+
+    public static final String SEARCH_CONTEXT_LEGACY_PAGING = "sc_gc_legacy_paging";
+    public static final String SEARCH_CONTEXT_FILTER = "sc_gc_filter";
+    public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
 
     @NonNull
     private static final String CACHE_URL_SHORT = "https://coord.info/";
@@ -268,7 +273,26 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
 
     @Override
     public SearchResult searchByNextPage(final Bundle context) {
-        return GCParser.searchByNextPage(this, context);
+        final String filterConfig = context.getString(SEARCH_CONTEXT_FILTER);
+        GeocacheFilter filter = null;
+        if (filterConfig != null) {
+            filter = GeocacheFilter.createFromConfig(filterConfig);
+            final OriginGeocacheFilter origin = GeocacheFilter.findInChain(filter.getAndChainIfPossible(), OriginGeocacheFilter.class);
+            if (origin != null && !origin.allowsCachesOf(this)) {
+                return new SearchResult();
+            }
+        }
+
+        if (context.getBoolean(SEARCH_CONTEXT_LEGACY_PAGING)) {
+            return GCParser.searchByNextPage(this, context);
+        }
+
+        if (filter == null) {
+            //non-legacy-nextpage needs a filter to proceed. If none is there then return empty result
+            return new SearchResult();
+        }
+
+        return GCMap.searchByNextPage(this, context, filter);
     }
 
     @Override
@@ -291,7 +315,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @NonNull
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
-        return GCMap.searchByFilter(filter, this);
+        return GCMap.searchByFilter(this, filter);
     }
 
     @Override

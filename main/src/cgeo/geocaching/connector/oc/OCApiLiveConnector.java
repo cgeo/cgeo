@@ -8,6 +8,7 @@ import cgeo.geocaching.connector.UserInfo.UserInfoStatus;
 import cgeo.geocaching.connector.capability.IIgnoreCapability;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.connector.capability.ISearchByFilter;
+import cgeo.geocaching.connector.capability.ISearchByNextPage;
 import cgeo.geocaching.connector.capability.ISearchByViewPort;
 import cgeo.geocaching.connector.capability.PersonalNoteCapability;
 import cgeo.geocaching.connector.capability.WatchListCapability;
@@ -22,6 +23,8 @@ import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.Log;
 
+import android.os.Bundle;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.StringRes;
 
@@ -30,7 +33,7 @@ import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, WatchListCapability, IIgnoreCapability, PersonalNoteCapability {
+public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewPort, ILogin, ISearchByFilter, ISearchByNextPage, WatchListCapability, IIgnoreCapability, PersonalNoteCapability {
 
     private final String cS;
     private final int isActivePrefKeyId;
@@ -186,8 +189,15 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @NonNull
     @Override
     public SearchResult searchByFilter(@NonNull final GeocacheFilter filter) {
-        return OkapiClient.getCachesByFilter(filter, this);
+        return OkapiClient.getCachesByFilter(this, filter);
     }
+
+    @NonNull
+    @Override
+    public SearchResult searchByNextPage(final Bundle context) {
+        return OkapiClient.getCachesByNextPage(this, context);
+    }
+
 
     @Override
     public boolean isSearchForMyCaches(final String username) {
