@@ -56,6 +56,13 @@ public class SimpleDisposableHandler extends DisposableHandler {
         }
     }
 
+    protected final void showToast(final String msg) {
+        final AbstractActivity activity = activityRef.get();
+        if (activity != null) {
+            activity.showToast(msg);
+        }
+    }
+
     protected final void dismissProgress() {
         final Progress progressDialog = progressDialogRef.get();
         if (progressDialog != null) {

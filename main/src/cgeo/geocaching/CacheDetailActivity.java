@@ -2651,6 +2651,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         public void handleRegularMessage(final Message msg) {
             if (msg.what == UPDATE_LOAD_PROGRESS_DETAIL && msg.obj instanceof String) {
                 updateStatusMsg(R.string.cache_dialog_refresh_message, (String) msg.obj);
+            } else if (msg.what == UPDATE_SHOW_STATUS_TOAST && msg.obj instanceof String) {
+                showToast((String) msg.obj);
             } else {
                 notifyDataSetChanged(activityRef);
             }
