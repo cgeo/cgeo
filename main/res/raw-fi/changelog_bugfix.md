@@ -1,2 +1,4 @@
 - Korjaa: Mapsforgen välimuistitiedostot: Puhdistus ja uusi sijainti (erillinen kansio)
 - Korjaus: Freizeitkarte karttatiedostot: Käytä 'latest' kansiota lataajan ratkaisuna väliaikaisille palvelimen virheille
+- Fix: Avoid null pointer exception in about pages
+- Fix: Enable wrapping for stars in cache popup
