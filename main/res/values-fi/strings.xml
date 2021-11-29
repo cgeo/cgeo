@@ -407,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Poista offline-lokit</string>
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
+    <string name="caches_show_attributes">Näytä attribuuttien yleisnäkymä</string>
     <string name="caches_set_cache_icon">Aseta kätkön kuvakkeet</string>
     <string name="caches_reset_cache_icons_title">Nollaa kätkön kuvakkeet</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
@@ -826,6 +827,7 @@
     <string name="init_map_directory_description">Offline-kartat sisältävä kansio</string>
     <string name="init_brouter_directory_description">Kansio, joka sisältää BRouterin reititystiedot</string>
     <string name="init_updateinterval_title">Päivitysväli</string>
+    <string name="init_updateinterval_description">Muistuttaa päivityksen tarkistuksesta joka x päivä (voimassa vain tiedostoille, jotka olet ladannut c:geon kautta), 0=pois päältä</string>
     <string name="init_gpx_importexportdir">GPX-kansio</string>
     <string name="init_dataDir">Valitse datakansio</string>
     <string name="init_dataDir_note">Voit valita geokätköjen lisätietojen (spoilerit, lokien kuvat, …) tallentamisen ulkoiseen muistiin (emuloitu tai aito ulkoinen SD-kortti, riippuen laitteestasi).</string>
@@ -1523,6 +1525,7 @@
     <string name="helper_where_you_go_description">WhereYouGo-sovelluksen avulla pystyy pelaamaan ja etsimään Wherigo-kätköjä. c:geo osaa ladata suoraan Wherigo-kasetit tämän sovelluksen avulla.</string>
     <string name="helper_chirpwolf_description">Chirp Wolfin avulla voit lukea ANT+/Garmin chirp -tageja, joita tarvitaan ANT+/chirp -geokätköihin.</string>
     <string name="helper_alc_description">Adventure Lab -sovellus puhelimeesi tai tablettiisi.</string>
+    <string name="helper_gcwizard_description">GC Wizard sisältää lukuisia työkaluja yksinkertaisiin salauksiin, geodeettiset ja tieteelliset laskelmat sekä satoja eri symbolisarjoja.</string>
     <!-- export -->
     <string name="share_export">Jaa / Vie</string>
     <string name="export">Vienti</string>
@@ -1801,6 +1804,12 @@
     <string name="attribute_blind_people_yes">Soveltuu sokeille</string>
     <string name="attribute_blind_people_no">Ei sovellu sokeille</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Työkaluja tarvitaan</string>
+    <string name="cat_type">Tyyppi</string>
+    <string name="cat_location">Kätkön sijainti</string>
+    <string name="cat_duration">Etäisyys / Kesto</string>
+    <string name="cat_surrounding">Kätkön ympärillä</string>
+    <string name="cat_transport">Siirtyminen</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
