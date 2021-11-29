@@ -1004,7 +1004,6 @@
     <string name="cache_menu_preventWaypointsFromNote">Hindre veipunkter fra notat</string>
     <string name="cache_menu_allowWaypointExtraction">Tillat veipunkter fra notat</string>
     <string name="cache_personal_note_edit">Rediger</string>
-    <string name="cache_personal_note_removedwaypoints">Veipunkter fjernet</string>
     <string name="cache_personal_note_storewaypoints_success">Veipunkter ble lagt til personlig notat</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Veipunkter ble lagt til notat, men måtte forkortes (maksimal personlig notat-størrelse: %1$d)</string>
     <string name="cache_personal_note_storewaypoints_failed">Veipunkter kan ikke lagres i notat på grunn av størrelsesbegrensningene (maksimal personlig notat-størrelse: %1$d)</string>
