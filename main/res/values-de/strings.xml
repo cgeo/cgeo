@@ -407,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Offline-Logs löschen</string>
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
+    <string name="caches_show_attributes">Attributübersicht anzeigen</string>
     <string name="caches_set_cache_icon">Cache-Symbole wählen</string>
     <string name="caches_reset_cache_icons_title">Cache-Symbole zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
@@ -1524,6 +1525,7 @@
     <string name="helper_where_you_go_description">Mit WhereYouGo kannst du Caches vom Typ Wherigo suchen. c:geo kann das Herunterladen von Cartridges in WhereYouGo automatisch starten.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf ermöglicht es, die Daten von ANT+/Garmin Chirp Tags zu lesen, die für ANT+/Chirp Geocaches benötigt werden.</string>
     <string name="helper_alc_description">Adventure Lab-Player für dein Telefon oder Tablet.</string>
+    <string name="helper_gcwizard_description">GC Wizard enthält zahlreiche Werkzeuge für einfache Kryptographie, geodätische und wissenschaftliche Berechnungen sowie Hunderte von verschiedenen Symbolen.</string>
     <!-- export -->
     <string name="share_export">Teilen / Exportieren</string>
     <string name="export">Exportieren</string>
@@ -1802,6 +1804,12 @@
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">Kein Handicap: Blind</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Werkzeuge erforderlich</string>
+    <string name="cat_type">Typ</string>
+    <string name="cat_location">Cache-Ort</string>
+    <string name="cat_duration">Distanz / Dauer</string>
+    <string name="cat_surrounding">Umgebung des Caches</string>
+    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
