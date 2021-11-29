@@ -1,2 +1,4 @@
 - Oplossen: Mapsforge's cache bestanden: Opschonen en nieuwe locatie (aparte map)
 - Fix: Freizeitkarte map bestanden: Gebruik 'laatste' map in de downloader als workaround voor tijdelijke server fouten
+- Fix: Avoid null pointer exception in about pages
+- Fix: Enable wrapping for stars in cache popup
