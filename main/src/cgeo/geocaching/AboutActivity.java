@@ -160,7 +160,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         @Override
         public void setContent() {
             final AboutActivity activity = (AboutActivity) getActivity();
-            if (activity == null) {
+            if (activity == null || binding == null) {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
@@ -254,7 +254,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         @Override
         public void setContent() {
             final AboutActivity activity = (AboutActivity) getActivity();
-            if (activity == null) {
+            if (activity == null || binding == null) {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
@@ -296,6 +296,10 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
         @Override
         public void setContent() {
+            if (binding == null || getActivity() == null) {
+                return;
+            }
+
             binding.getRoot().setVisibility(View.VISIBLE);
             setClickListener(binding.license, "https://www.apache.org/licenses/LICENSE-2.0.html");
             final Markwon markwon = Markwon.create(getActivity());
@@ -334,7 +338,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
         @Override
         public void setContent() {
             final Activity activity = getActivity();
-            if (activity == null) {
+            if (activity == null || binding == null) {
                 return;
             }
             binding.getRoot().setVisibility(View.VISIBLE);
