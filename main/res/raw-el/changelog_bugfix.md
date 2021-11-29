@@ -1,2 +1,4 @@
 - Διόρθωση: αρχεία κρυπτών του Mapsforge: Καθαρισμός και νέα θέση (ξεχωριστός φάκελος)
 - Διόρθωση: Αρχεία χάρτη Freizeitkarte: Χρησιμοποιήστε το φάκελο 'latest' στο downloader ως λύση για προσωρινά σφάλματα διακομιστή
+- Fix: Avoid null pointer exception in about pages
+- Fix: Enable wrapping for stars in cache popup
