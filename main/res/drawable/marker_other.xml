@@ -5,7 +5,7 @@
     android:viewportHeight="36">
   <path
       android:pathData="m34.165,18.0001 l-8.0825,14.0002l-16.1651,0l-8.0825,-14.0002 8.0825,-14.0002l16.1651,0z"
-      android:strokeWidth="0.75000286"
-      android:fillColor="#fff"
-      android:strokeColor="#383838"/>
+      android:strokeWidth=".75"
+      android:fillColor="@color/cacheMarker_background"
+      android:strokeColor="@color/cacheMarker_border"/>
 </vector>
