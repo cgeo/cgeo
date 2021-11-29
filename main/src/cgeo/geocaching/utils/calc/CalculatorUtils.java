@@ -31,20 +31,6 @@ public class CalculatorUtils {
         //no instance
     }
 
-    public static Value concat(final ValueList values) {
-        values.checkCount(1, -1);
-
-        if (values.size() == 1) {
-            return values.get(0);
-        }
-
-        final StringBuilder sb = new StringBuilder();
-        for (Value v : values) {
-            sb.append(v.getAsString());
-        }
-        return Value.of(sb.toString());
-    }
-
     public static int random(final int max, final int min) {
         final int umax = max < 0 ? 10 : max;
         final int umin = Math.max(min, 0);

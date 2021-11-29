@@ -195,4 +195,26 @@ public class CalculatorTest {
         assertThat(Value.of("abcd").isInteger()).isFalse();
     }
 
+    @Test
+    public void overflow() {
+        assertThat(eval("A8.A2", "A", 10)).isEqualTo(108.102d);
+        assertThat(eval("_A8._A2", "A", 10)).isEqualTo(108.102d);
+        assertThat(eval("_A8._A2", "A", 8)).isEqualTo(88.082d);
+        assertThat(eval("8._1_A2", "A", 8)).isEqualTo(8.01082d);
+        assertThat(eval("8.A__A2", "A", 14)).isEqualTo(8.140142d);
+        assertThat(eval("_A._A", "A", 143)).isEqualTo(143.143d);
+        assertThat(eval("_A._A", "A", 14)).isEqualTo(14.14d);
+        assertThat(eval("_A._A", "A", 1)).isEqualTo(1.01d);
+
+        //handling of _ on more strange positions
+        assertThat(eval("5._1")).isEqualTo(5.01d);
+        assertThat(eval("5._12")).as("number should not spill over to _").isEqualTo(5.012d);
+        assertThat(eval("5._(8+1)")).as("expression results should spill over").isEqualTo(5.09d);
+        assertThat(eval("5._(8+5)")).as("expression results should spill over").isEqualTo(5.13d);
+        assertThat(eval("5_.12")).as("_ before . should have no effect").isEqualTo(5.12d);
+        assertThat(Calculator.evaluate("_5.12").getAsString()).as("_ at start should be removed").isEqualTo("5.12");
+        assertThat(Calculator.evaluate("5.12_").getAsString()).as("_ at end should be removed").isEqualTo("5.12");
+
+    }
+
 }
