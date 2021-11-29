@@ -1283,13 +1283,13 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                             if (attributesSet.contains(key)) {
                                 if (lastCategoryId != categoryId) {
                                     if (lastCategoryId != -1) {
-                                        text.append("\n\n");
+                                        text.append("<br /><br />");
                                     }
-                                    text.append(CacheAttributeCategory.getNameById(activity, categoryId));
+                                    text.append("<u>").append(CacheAttributeCategory.getNameById(activity, categoryId)).append("</u>");
                                     lastCategoryId = categoryId;
                                 }
                                 a.add(key);
-                                text.append('\n').append(attr.getL10n(enabled));
+                                text.append("<br />").append(attr.getL10n(enabled));
                             }
                         }
                     }
@@ -1300,7 +1300,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.attributesGrid.setVisibility(View.VISIBLE);
             binding.attributesGrid.setOnItemClickListener((parent, view, position, id) -> toggleAttributesView());
 
-            binding.attributesText.setText(text);
+            binding.attributesText.setText(HtmlCompat.fromHtml(text.toString(), 0));
             binding.attributesText.setVisibility(View.GONE);
             binding.attributesText.setOnClickListener(v -> toggleAttributesView());
         }
