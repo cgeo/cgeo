@@ -37,7 +37,6 @@
             android:textSize="@dimen/textSize_detailsPrimary"
             android:textIsSelectable="false"
             android:textColor="@color/colorText"
-            android:visibility="gone"
             tools:text="value"/>
 
         <RatingBar
@@ -74,7 +73,6 @@
             android:gravity="bottom|left"
             android:paddingTop="3dp"
             android:orientation="horizontal"
-            android:visibility="gone"
             tools:ignore="MissingConstraints"/>
 
         <androidx.constraintlayout.helper.widget.Flow
