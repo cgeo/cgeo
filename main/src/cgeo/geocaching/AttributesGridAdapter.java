@@ -76,9 +76,11 @@ public class AttributesGridAdapter extends BaseAdapter {
         if (attrib != null) {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
             ViewUtils.setTooltip(imageView, TextParam.text(attrib.getL10n(CacheAttribute.isEnabled(attributeName))));
+            imageView.setContentDescription(attrib.getL10n(CacheAttribute.isEnabled(attributeName)));
         } else {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute_unknown, null));
             ViewUtils.setTooltip(imageView, TextParam.text(context.getString(R.string.attribute_unknown)));
+            imageView.setContentDescription(context.getString(R.string.attribute_unknown));
         }
     }
 

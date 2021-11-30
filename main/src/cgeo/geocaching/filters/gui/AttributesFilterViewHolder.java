@@ -58,14 +58,17 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
             icon.setColorFilter(Color.argb(150, 200, 200, 200));
             strikeThrough.setVisibility(View.INVISIBLE);
             setTooltip(v, TextParam.text(ca.getL10n(true)));
+            icon.setContentDescription(ca.getL10n(true));
         } else if (state) {
             icon.clearColorFilter();
             strikeThrough.setVisibility(View.INVISIBLE);
             setTooltip(v, TextParam.text(ca.getL10n(true)));
+            icon.setContentDescription(ca.getL10n(true));
         } else {
             icon.clearColorFilter();
             strikeThrough.setVisibility(View.VISIBLE);
             setTooltip(v, TextParam.text(ca.getL10n(false)));
+            icon.setContentDescription(ca.getL10n(false));
         }
     }
 
