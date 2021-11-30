@@ -303,8 +303,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             private void addWaypointIcon(final int position, final View view) {
                 final TextView label = (TextView) view.findViewById(android.R.id.text1);
-                Drawable icon = ResourcesCompat.getDrawable(res, POSSIBLE_WAYPOINT_TYPES.get(position).dotMarkerId, null);
-                icon.setBounds(0, 0, (int)(label.getLineHeight() * 1.5), (int)(label.getLineHeight() * 1.5));
+                final Drawable icon = ResourcesCompat.getDrawable(res, POSSIBLE_WAYPOINT_TYPES.get(position).dotMarkerId, null);
+                icon.setBounds(0, 0, (int) (label.getLineHeight() * 1.5), (int) (label.getLineHeight() * 1.5));
                 label.setCompoundDrawables(icon, null, null, null);
             }
         };
