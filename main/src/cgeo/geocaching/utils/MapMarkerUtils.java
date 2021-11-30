@@ -14,15 +14,12 @@ import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.builders.InsetBuilder;
 import cgeo.geocaching.utils.builders.InsetsBuilder;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_CACHE_MARKER_DP;
 import static cgeo.geocaching.utils.DisplayUtils.SIZE_LIST_MARKER_DP;
 
 import android.content.res.Resources;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.LayerDrawable;
 import android.os.Build;
@@ -505,12 +502,12 @@ public final class MapMarkerUtils {
         // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, cache.getType().typeColor, null));
-        LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, ResourcesCompat.getDrawable(res, cache.getType().markerId, null) });
+        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, ResourcesCompat.getDrawable(res, cache.getType().markerId, null) });
 
         // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 27.02*23.4dp). Drawable must be square!
-        int diffWidth = background.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 27.02f, 1);
-        int offsetLeftTop = diffWidth - diffWidth/2;
-        int offsetRightBottom = diffWidth - offsetLeftTop;
+        final int diffWidth = background.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 27.02f, 1);
+        final int offsetLeftTop = diffWidth - diffWidth / 2;
+        final int offsetRightBottom = diffWidth - offsetLeftTop;
         layerDrawable.setLayerInset(0, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
         layerDrawable.setLayerInset(1, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
         return layerDrawable;
