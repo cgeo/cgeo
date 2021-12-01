@@ -1,2 +1,4 @@
-- Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
+- Fix: Mapsforges cachefiler: Rensa och ny plats (separat mapp)
+- Fix: Freizeitkarte kartfiler: Använd mappen "senaste" i nerladdaren som lösning för temporära serverfel
+- Fix: Avoid null pointer exception in about pages
+- Fix: Enable wrapping for stars in cache popup

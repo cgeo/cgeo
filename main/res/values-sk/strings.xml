@@ -2,6 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- fixes -->
     <!-- This entry shall solve a bug with material.io Date picker, see https://github.com/material-components/material-components-android/issues/1346 -->
+    <string name="mtrl_picker_confirm" tools:override="true">OK</string>
     <!-- basics -->
     <string name="cache">Keška</string>
     <string name="detail">Detail</string>
@@ -10,6 +11,7 @@
     <string name="about">O aplikácii</string>
     <string name="latitude">Zemepisná šírka</string>
     <string name="longitude">Zemepisná dĺžka</string>
+    <string name="latlongitude">Zemepisná šírka\nZemepisná dĺžka</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Nastavenia</string>
     <!-- caches -->
@@ -37,6 +39,7 @@
     <string name="userdefined">Používateľom definovaná keška</string>
     <string name="unknown">Neznámy typ</string>
     <string name="all_types_short">Všetko</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mysterka</string>
     <string name="letterbox_short">Letterbox</string>
@@ -177,6 +180,9 @@
     <string name="log_problem_archive_label">Skrýša by mala byť archivovaná</string>
     <string name="log_problem_archive_text">Tento kešer nahlásil, že keška by mala byť archivovaná. Dobrovoľný reviewer komunity dostal oznámenie.</string>
     <string name="log_image_scale_option_noscaling">Bez zmeny mierky</string>
+    <string name="log_image_info2">%1$s\n%2$d x %3$d px\n~%4$s</string>
+    <string name="log_image_info_scaled">zmenená veľkosť</string>
+    <string name="log_image_info_notscaled">nezmenená veľkosť</string>
     <string name="log_image_titleprefix">Obrázok</string>
     <string name="datetime_nodateset_display">Dátum nie je nastavený</string>
     <!-- translation -->
@@ -320,7 +326,10 @@
     <string name="menu_history">História</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Nasnímať geokód</string>
+    <string name="menu_lists_pocket_queries">Pocket queries</string>
+    <string name="menu_lists_bookmarklists">Záložky</string>
     <string name="menu_scan_description">c:geo dokáže skenovať geokódy, ak sú vo forme QR kódu. Potrebná aplikácia nie je nainštalovaná. Chcete otvoriť Google Play a nainštalovať ju?</string>
+    <string name="menu_invert_order">Prevrátiť poradie</string>
     <!-- main screen -->
     <string name="live_map_button">Aktívna mapa</string>
     <string name="caches_nearby_button">V okolí</string>
@@ -352,12 +361,14 @@
     <string name="caches_on_map">Zobraziť na mape</string>
     <string name="caches_sort">Zoradiť</string>
     <string name="caches_sort_distance">vzdialenosti</string>
+    <string name="caches_sort_distance_target">Vzdialenosť do cieľa</string>
     <string name="caches_sort_difficulty">náročnosti</string>
     <string name="caches_sort_terrain">terénu</string>
     <string name="caches_sort_size">veľkosti</string>
     <string name="caches_sort_favorites">obľúbenosti</string>
     <string name="caches_sort_favorites_ratio">obľúbenosti [%]</string>
     <string name="caches_sort_name">názvu</string>
+    <string name="caches_sort_geocode">Geokód</string>
     <string name="caches_sort_rating">hodnotenia</string>
     <string name="caches_sort_vote">vlastného hodnotenia</string>
     <string name="caches_sort_inventory">počtu položiek v skrýši</string>
@@ -376,6 +387,7 @@
     <string name="caches_remove_all_completely">Odstrániť všetko zo zariadenia</string>
     <string name="caches_remove_selected_completely">Odstrániť zvolené zo zariadenia</string>
     <string name="caches_delete_events">Odstrániť minulé Eventy</string>
+    <string name="caches_upload_bookmarklist">Pridať do záložiek</string>
     <string name="caches_upload_modifiedcoords">Nahrať upravené súradnice</string>
     <string name="caches_upload_modifiedcoords_warning">Chcete nahrať upravené súradnice pre všetky (vybrané) kešky a prepísať existujúce súradnice na serveri? Tento úkon nie je možné vrátiť.</string>
     <string name="caches_upload_allcoords">Nahrať súradnice pre všetky kešky</string>
@@ -454,6 +466,7 @@
     <string name="cache_filter_location">Miesto</string>
     <string name="cache_filter_stored_lists">Uložené zoznamy</string>
     <string name="cache_filter_origin">Pôvod</string>
+    <string name="cache_filter_stored_since">Posledná aktualizácia podrobností</string>
     <string name="cache_filtergroup_basic">Základné</string>
     <string name="cache_filtergroup_details">Detaily</string>
     <string name="cache_filtergroup_userspecific">Vlastné</string>
@@ -475,6 +488,8 @@
     <string name="cache_filter_storage_clear_button">Vyčistiť</string>
     <string name="cache_filter_storage_load_delete_title">Načítať alebo odstrániť existujúci filter</string>
     <string name="cache_filter_storage_select_title">Vyberte filter</string>
+    <string name="cache_filter_storage_delete_title">Odstrániť filter</string>
+    <string name="cache_filter_storage_delete_message">Naozaj chcete odstrániť túto konfiguráciu filtra?</string>
     <string name="cache_filter_storage_select_clear_title">Vyberte filter alebo vymažte aktuálny filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Zatiaľ nie je uložený žiadny filter.</string>
     <string name="cache_filter_storage_save_title">Uložiť filter s názvom</string>
@@ -486,6 +501,7 @@
     <string name="cache_filter_stringfilter_type_is_not_present">Nie je prítomné</string>
     <string name="cache_filter_stringfilter_type_is_present">Je prítomné</string>
     <string name="cache_filter_stringfilter_type_contains">Obsahuje</string>
+    <string name="cache_filter_stringfilter_type_does_not_contain">Neobsahuje</string>
     <string name="cache_filter_stringfilter_type_starts_with">Začína na</string>
     <string name="cache_filter_stringfilter_type_ends_with">Končí na</string>
     <string name="cache_filter_stringfilter_type_pattern">Vzor</string>
@@ -493,6 +509,7 @@
     <string name="cache_filter_datefilter_label_to">Do:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Vybrať všetko</string>
     <string name="cache_filter_checkboxlist_add_items">Pridať ďalšie položky</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Pridať všetky položky</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Pridať položky</string>
     <string name="cache_filter_favorites_absolute">Absolútne</string>
     <string name="cache_filter_favorites_percentage">Percentuálne</string>
@@ -510,6 +527,7 @@
     <string name="cache_filter_status_select_label_has_trackable">Má trasovateľný predmet</string>
     <string name="cache_filter_status_select_label_has_own_vote">Má vlastný hlas</string>
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
+    <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log Nájdené</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyriešená mysterka</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavenie filtra sa týka len mysteriek.\n\nMysterka sa považuje za „vyriešenú“, ak má zmenené súradnice alebo vyplnený finálny bod trasy so súradnicami.</string>
     <string name="cache_filter_status_active">Aktívna</string>
@@ -659,6 +677,7 @@
     <string name="init_authorization_credential_username">Používateľské meno</string>
     <string name="init_authorization_credential_password">Heslo</string>
     <string name="settings_service_active">Aktívne</string>
+    <string name="settings_service_active_unavailable">Aktívne/Nedostupné</string>
     <string name="settings_navigation_disabled">Táto aplikácia zrejme nie je nainštalovaná</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Zástupné znaky (napríklad [NAME]) sa pri použití šablóny vyplnia určeným textom.</string>
@@ -1117,12 +1136,17 @@
     <string name="cache_images">Obrázky</string>
     <string name="cache_advanced">Rozšírené</string>
     <string name="cache_waypoints">Body trasy</string>
+    <string name="cache_variables">Premenné</string>
+    <string name="waypoints_tabtitle" tools:ignore="PluralsCandidate">Body trasy (%d)</string>
+    <string name="cache_waypoints_add">Pridať bod trasy</string>
     <string name="cache_waypoints_add_currentLocation">Pridať aktuálne miesto</string>
     <string name="cache_waypoints_add_fromclipboard">Pridať zo schránky</string>
+    <string name="cache_waypoints_hide_visited_waypoints">Skryť navštívené body trasy</string>
     <string name="cache_waypoints_remove_original_waypoint">Bod trasy bol skopírovaný zo schránky do tejto kešky.\n\nOdstrániť pôvodný bod trasy?</string>
     <string name="cache_hint">Nápoveda</string>
     <string name="cache_hint_not_available">Žiadna nápoveda</string>
     <string name="cache_logs">Logbook</string>
+    <string name="cache_latest_logs">Posledné logy</string>
     <string name="cache_logs_friends_and_own">Logy priateľov/vlastné</string>
     <string name="cache_dialog_loading_details">Načítanie detailov skrýše…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Načítanie stránky</string>
@@ -1203,7 +1227,10 @@
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktívna</string>
     <string name="cache_status_premium">Iba pre platiacich používateľov</string>
+    <string name="cache_geocode">Geokód</string>
     <string name="cache_name">Názov</string>
+    <string name="cache_name_set">Nastaviť názov kešky</string>
+    <string name="cache_name_updated">Názov kešky aktualizovaný</string>
     <string name="cache_description_set">Nastaviť popis kešky</string>
     <string name="cache_description_updated">Popis kešky aktualizovaný</string>
     <string name="cache_type">Typ</string>
@@ -1348,6 +1375,7 @@
     <string name="map_showc_found">Nájdené</string>
     <string name="map_showc_disabled">Vypnuté</string>
     <string name="map_showc_archived">Archivované</string>
+    <string name="map_showc_found_offline">Nájdené (offline)</string>
     <string name="map_showwp_original">Pôvodné</string>
     <string name="map_showwp_parking">Parkovanie</string>
     <string name="map_showwp_visited">Navštívené</string>
@@ -1367,6 +1395,8 @@
     <string name="map_language">Jazyk mapy</string>
     <string name="map_live_enable">Povoliť aktívnu mapu</string>
     <string name="map_live_disable">Zakázať aktívnu mapu</string>
+    <string name="map_live_disabled">Aktívny režim zakázaný</string>
+    <string name="map_live_disabled_hint">Aktívny režim je zakázaný. Uvidíte len uložené kešky. Aktívny režim zapnete pomocou ponuky.</string>
     <string name="map_as_list">Zobraziť ako zoznam</string>
     <string name="map_select_multiple_items">Vybrať položku</string>
     <string name="map_routing">Navigácia</string>
@@ -1387,12 +1417,17 @@
     <string name="search_coordinates_button">Hľadať podľa súradníc</string>
     <string name="search_address">Adresa</string>
     <string name="search_address_button">Hľadať podľa adresy</string>
+    <string name="search_geo">Geokód</string>
+    <string name="search_geo_button">Hľadať podľa geokódu</string>
+    <string name="search_geocode_from_clipboard">Geokód bol vložený zo schránky.</string>
+    <string name="search_kw">Kľúčové slovo</string>
     <string name="search_kw_prefill">Kľúčové slovo</string>
     <string name="search_kw_button">Hľadať podľa kľúčových slov</string>
     <string name="search_hbu">Ukryl</string>
     <string name="search_hbu_prefill">Vlastník</string>
     <string name="search_hbu_button">Hľadať podľa vlastníka</string>
     <string name="search_filter">Filtrovať</string>
+    <string name="search_filter_button">Hľadať podľa filtra</string>
     <string name="search_filter_info_message" formatted="false">Funkcia **Hľadať podľa filtra** vyhľadáva kešky na všetkých aktívnych online službách pomocou stanoveného filtra. Možnosti vyhľadávania týchto služieb sú však zvyčajne obmedzenejšie než možnosti filtra v aplikácii c:geo.\n\nVšetky služby podporujú filtre AND (žiadne filtre OR a ani opačný výber bez filtra).\n– Základnejšie filtre, ako sú napríklad **typ kešky** alebo **veľkosť kešky** sú podporované všetkými službami. Zložitejšie filtre často nie sú podporované, prípadne majú nejaké obmedzenia, napr. **obľúbené** alebo **dátum skrytia**.\n– Podrobný zoznam filtrov podporovaných jednotlivými službami nájdete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltre nepodporované online službou sa aplikáciou c:geo použijú na prijaté výsledky.</string>
     <string name="search_filter_temporary_user_information_title">Pracovný rámec nového filtra</string>
     <string name="search_filter_temporary_user_information">Aplikácia c:geo predstavuje nový systém filtrovania s podporou flexibilných a kombinovateľných filtrov, ktoré možno ukladať.\n\nGlobálny filter je možné odteraz zmeniť priamo v zoznamoch kešiek a na aktívnej mape.</string>
@@ -1407,6 +1442,13 @@
     <string name="search_pocket_title">Pocket Query</string>
     <string name="search_bookmark_list">Zoznam záložiek</string>
     <string name="search_pocket_is_new">nové</string>
+    <string name="search_pocket_loading">Načítavajú sa pocket query</string>
+    <string name="search_bookmark_loading">Načítavajú sa záložky</string>
+    <string name="search_bookmark_select">Vybrať zoznam záložeik</string>
+    <string name="search_bookmark_new">Vytvoriť nový zoznam záložiek</string>
+    <string name="search_bookmark_adding_caches_success">Všetky kešky GC boli pridané do zvoleného zoznamu záložiek</string>
+    <string name="search_bookmark_adding_caches_failed">Nepodarilo sa pridať kešky do zoznamu záložiek</string>
+    <string name="search_bookmark_create_new_failed">Nepodarilo sa vytvoriť nový zoznam záložiek</string>
     <!-- trackable -->
     <string name="trackable">Trasovateľné predmety</string>
     <string name="trackable_details_loading">Načítanie detailov trasovateľných predmetov…</string>
@@ -1954,6 +1996,8 @@
         <item quantity="other">Trasa načítaná s %d bodmi trasy</item>
     </plurals>
     <string name="center_on_route">Vycentrovať na trasu</string>
+    <string name="individual_route_set_as_start_title">Nastaviť ako začiatok trasy</string>
+    <string name="individual_route_set_as_start_message">Nastaviť túto položku ako začiatok trasy a presunúť všetky následné položky navrch aktuálnej trasy?</string>
     <!-- individual track -->
     <string name="individual_track">GPX stopa/trasa</string>
     <string name="map_load_track">Načítať stopu/trasu z GPX</string>
@@ -2027,6 +2071,7 @@
     <string name="download_confirmation">%1$sPrevziať súbor \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Našli sa aktualizácie pre \n%1$s\n\nChcete aktualizovať?%2$s</string>
     <string name="download_warning">Môže to nejakú dobu trvať a môžu byť účtované veľké poplatky v závislosti od sieťového pripojenia.</string>
+    <string name="download_error">Nepodarilo sa prevziať, chyba #%d</string>
     <string name="downloadmap_handling">Samotné prevzatie bude spracované systémovým správcom preberania na pozadí. Keď sa začne preberať, uvidíte upozornenie. Prevzatie môže nejakú dobu trvať.</string>
     <string name="button_continue">Ďalej</string>
     <string name="downloadmap_onedirup">(o úroveň vyššie)</string>
@@ -2113,6 +2158,7 @@
     <string name="done">Hotovo</string>
     <string name="finish">Dokončiť</string>
     <string name="back">Späť</string>
+    <string name="later">Neskôr</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
 </resources>

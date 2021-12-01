@@ -1,2 +1,4 @@
-- Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
+- Oprava: Súbory kešiek pre Mapsforge – čistenie a nové umiestnenie (samostatný priečinok)
+- Oprava: Mapové súbory Freizeitkarte - použitie "najnovšieho" priečinka pri preberaní ako riešenia pre dočasné chyby servera
+- Oprava: Odstránenie výnimky nulového ukazovateľa na stránke s informáciami
+- Oprava: Povolenie zalamovania hviezd v kontextovom okne kešky
