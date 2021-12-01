@@ -1,2 +1,4 @@
 - Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
 - Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
+- Corrigé : Erreur "null pointer exception" dans les pages À propos
+- Fix: Enable wrapping for stars in cache popup

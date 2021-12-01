@@ -7,14 +7,14 @@
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
-- New: Attributes overview (see Manage Caches => Attributes overview)
+- Nieuw: Attributen overzicht (zie Beheer Caches => Attributen overzicht)
 
 ### Cache details
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- Nieuw: Geef huidige cache coördinaten door aan de geochecker (indien ondersteund door geochecker)
 
 ### Overig
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Nieuw: Maak instellingen => Weergave instellingen filterbaar
+- Nieuw: GC Wizard aan de lijst met nuttige apps toegevoegd
+- Wijziging: barcode scanner verwijderd van handige apps lijst en van het hoofdscherm
+- Verandering: BRouter verwijderd uit de lijst met nuttige apps (je kunt nog steeds zowel externe als interne navigatie gebruiken)
+- Oplossing: Vermijd herhaalde update controles voor kaarten/routing tegels met interval=0

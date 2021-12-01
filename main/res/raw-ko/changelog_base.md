@@ -7,14 +7,14 @@
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션
-- New: Attributes overview (see Manage Caches => Attributes overview)
+- 신규: 속성 개요(캐시 관리 => 속성 개요 참조)
 
 ### 캐시 상세정보
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
 
 ### 추가 사항
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- 신규: 설정 만들기 => 필터링 가능한 보기 설정
+- 신규: 유용한 앱 목록에 GC Wizard 추가
+- 변경: 유용한 앱 목록 및 메인 화면에서 바코드 스캐너 제거
+- 변경: 유용한 앱 목록에서 BRouter를 제거했습니다(외부 및 내부 탐색 모두 계속 사용할 수 있음).
+- 수정: 간격이 0인 맵/라우팅 타일에 대한 반복적인 업데이트 확인을 피합니다.

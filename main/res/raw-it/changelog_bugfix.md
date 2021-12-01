@@ -1,2 +1,4 @@
-- Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
+- Corretto: File cache di Mapsforge: Pulizia e nuova posizione (cartella separata)
+- Corretto: File mappa Freizeitkarte: Usa la cartella 'latest' nel downloader come soluzione per errori temporanei del server
+- Risolto: Evita l'eccezione del puntatore nullo nelle pagine di informazioni
+- Risolto: Abilita l'avvolgimento per le stelle nel popup del cache

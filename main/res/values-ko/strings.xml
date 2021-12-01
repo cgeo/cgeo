@@ -406,6 +406,7 @@
     <string name="caches_clear_offlinelogs">오프라인 로그 삭제</string>
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
+    <string name="caches_show_attributes">속성 개요 표시</string>
     <string name="caches_set_cache_icon">캐시 아이콘 설정</string>
     <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
@@ -822,6 +823,7 @@
     <string name="init_map_directory_description">오프라인 지도 폴더</string>
     <string name="init_brouter_directory_description">BRouter 라우팅 데이터가 있는 폴더</string>
     <string name="init_updateinterval_title">업데이트 간격</string>
+    <string name="init_updateinterval_description">업데이트 확인을 위해 x일마다 알림 (c:geo 내에서 다운로드한 파일에만 유효) 0=해제</string>
     <string name="init_gpx_importexportdir">GPX 폴더</string>
     <string name="init_dataDir">데이터 폴더 선택</string>
     <string name="init_dataDir_note">지오캐시 관련 추가자료(스포일러, 로그 사진…) 를 외부 저장장치(장치에 따라 에뮬레이션 또는 진짜 외부 SD 카드) 에 저장하도록 선택할 수 있습니다.</string>
@@ -1510,6 +1512,7 @@
     <string name="helper_where_you_go_description">WhereYouGo를 사용하면 Wherigo 유형의 지오캐시를 검색하고 즐길 수 있습니다. c:geo는 자동적으로 카트리지를 다운로드 받습니다.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf를 사용하면 ANT+/처프 지오캐시에 필요한 ANT+/Garmin 처프 태그에서 데이터를 읽을 수 있습니다.</string>
     <string name="helper_alc_description">휴대폰 또는 태블릿 용 어드벤처 랩 앱</string>
+    <string name="helper_gcwizard_description">GC Wizard에는 수백 가지의 다양한 기호 집합뿐만 아니라 간단한 암호화, 측지학 및 과학적 계산을 위한 수많은 도구가 포함되어 있습니다.</string>
     <!-- export -->
     <string name="share_export">공유 / 내보내기</string>
     <string name="export">내보내기</string>
@@ -1787,6 +1790,12 @@
     <string name="attribute_blind_people_yes">장애: 장님</string>
     <string name="attribute_blind_people_no">장애 아님: 장님</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">도구 필요</string>
+    <string name="cat_type">유형</string>
+    <string name="cat_location">캐시 위치</string>
+    <string name="cat_duration">거리 / 시간</string>
+    <string name="cat_surrounding">캐시 주변</string>
+    <string name="cat_transport">교통</string>
     <!-- next things -->
     <string name="quote">지오캐싱을 쉽게, 사용자를 편하게</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
