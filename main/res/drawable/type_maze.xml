@@ -1,82 +1,68 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="22dp"
-    android:height="22dp"
-    android:viewportWidth="24"
-    android:viewportHeight="24">
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
   <path
-      android:pathData="m9.2842,14.7179a3.84,3.84 0,1 1,2.7154 1.1247"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"
+      android:pathData="m15.5106,20.4914a3.52,3.52 0,1 1,2.4891 1.031"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m14.4487,6.0897a6.4,6.4 127.6554,0 1,3.4637 3.4637"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"
+      android:pathData="m20.2447,12.5822a5.8667,5.8667 0,0 1,3.175 3.175"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m18.3996,12.0025a6.4,6.4 121.1663,0 1,-0.4872 2.4491"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"
+      android:pathData="m23.8663,18.0023a5.8667,5.8667 74.8465,0 1,-0.4466 2.245"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m14.4487,17.9153a6.4,6.4 0,0 1,-8.3621 -3.4637"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"
+      android:pathData="m20.2447,23.4224a5.8667,5.8667 0,0 1,-7.6652 -3.175"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m6.0868,9.5534a6.4,6.4 0,0 1,3.4637 -3.4637"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"
+      android:pathData="m12.5796,15.7573a5.8667,5.8667 0,0 1,3.175 -3.175"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="m15.4284,3.7245a8.96,8.96 125.8952,1 1,-3.4288 -0.682"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"
+      android:pathData="m21.1427,10.4142a8.2133,8.2133 0,1 1,-3.1431 -0.6252"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"
       android:strokeLineCap="square"/>
   <path
-      android:pathData="M11.9996,5.6025L11.9996,8.1625"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M17.9996,12.1356L17.9996,14.4823"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M15.4284,3.7245L14.4487,6.0897"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M21.1427,10.4142L20.2447,12.5822"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M18.3996,12.0025L15.8396,12.0025"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M23.8663,18.0023L21.5196,18.0023"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M18.3353,18.3382L16.525,16.5279"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M23.8073,23.81L22.148,22.1506"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M15.4284,20.2809L14.4487,17.9153"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M21.1427,25.5908L20.2447,23.4224"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M11.9996,18.4025L11.9996,15.8425"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M17.9996,23.869L17.9996,21.5223"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M5.5996,12.0025L8.1596,12.0025"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M12.133,18.0023L14.4796,18.0023"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
-      android:pathData="M5.6639,5.6668L7.4742,7.4771"
-      android:strokeWidth="1.28"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:pathData="M12.1919,12.1946L13.8513,13.854"
+      android:strokeWidth="1.15"
+      android:strokeColor="@color/cacheMarker_icon"/>
 </vector>

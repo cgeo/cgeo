@@ -254,7 +254,7 @@ public class EmojiUtils {
         } else if (cache != null) {
             dialogButtonRight.setVisibility(View.VISIBLE);
             // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
-            dialogButtonRight.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarkerWithoutOverlays(context.getResources(), cache))));
+            dialogButtonRight.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheTypeMarker(context.getResources(), cache))));
             dialogButtonRight.setIconTint(null);
         }
         dialogButtonRight.setOnClickListener(v -> dialog.dismiss());
@@ -266,7 +266,7 @@ public class EmojiUtils {
                 dialogButtonLeft.setIconResource(R.drawable.ic_menu_reset);
             } else {
                 // This cross-converting solves a tinting issue described in #11616. Sorry, it is ugly but the only possibility we have found so far.
-                dialogButtonLeft.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheMarkerWithoutOverlays(context.getResources(), cache))));
+                dialogButtonLeft.setIcon(ViewUtils.bitmapToDrawable(ViewUtils.drawableToBitmap(MapMarkerUtils.getCacheTypeMarker(context.getResources(), cache))));
                 dialogButtonLeft.setIconTint(null);
             }
             dialogButtonLeft.setVisibility(View.VISIBLE);

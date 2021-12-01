@@ -36,6 +36,7 @@ import static cgeo.geocaching.models.Waypoint.getDefaultWaypointName;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -52,6 +53,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.core.text.HtmlCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -301,7 +303,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             private void addWaypointIcon(final int position, final View view) {
                 final TextView label = (TextView) view.findViewById(android.R.id.text1);
-                label.setCompoundDrawablesWithIntrinsicBounds(POSSIBLE_WAYPOINT_TYPES.get(position).markerId, 0, 0, 0);
+                final Drawable icon = ResourcesCompat.getDrawable(res, POSSIBLE_WAYPOINT_TYPES.get(position).dotMarkerId, null);
+                icon.setBounds(0, 0, (int) (label.getLineHeight() * 1.5), (int) (label.getLineHeight() * 1.5));
+                label.setCompoundDrawables(icon, null, null, null);
             }
         };
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

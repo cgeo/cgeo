@@ -5,21 +5,19 @@
     android:viewportHeight="23.4">
   <path
       android:pathData="m23.4,11.7a11.7,11.7 0,0 1,-11.7 11.7,11.7 11.7,0 0,1 -11.7,-11.7 11.7,11.7 0,0 1,11.7 -11.7,11.7 11.7,0 0,1 11.7,11.7z"
-      android:fillColor="#90a4ae"/>
+      android:fillColor="@color/cacheType_disabled"/>
   <path
       android:pathData="m19.6877,10.0166s-0.7568,3.8542 -0.854,4.0581c-0.2812,0.2324 -9.059,4.6376 -9.059,4.6376 -0.255,0.085 -0.4395,0.0752 -0.6009,-0.0481 0,0 -3.9743,-4.4616 -4.1223,-4.8398 -0.0599,-0.1892 -0.038,-4.4496 -0.038,-4.4496z"
       android:strokeWidth="1.02"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
       android:pathData="m15.1589,5.2035 l5.0959,4.1584c0.1442,0.1923 -0.0601,0.3125 -0.0601,0.3125l-10.0592,4.0863c-0.236,0.1145 -0.4735,0.0341 -0.6009,-0.0721l-4.8795,-4.4949c-0.4327,-0.4928 0.2163,-0.6971 0.2163,-0.6971l9.6268,-3.3171c0.3846,-0.1562 0.661,0.024 0.661,0.024zM20.2127,9.5716 L19.9519,10.431c-0.1831,0.1828 -0.3013,0.2524 -0.3013,0.2524l-9.6145,4.3988c-0.4377,0.1615 -0.661,-0.0481 -0.661,-0.0481l-4.7473,-4.6992c-0.1275,-0.119 -0.1082,-0.2644 -0.1082,-0.2644s-0.0431,-0.3092 -0.0016,-1.2766z"
-      android:fillColor="#fff"/>
+      android:fillColor="@color/cacheMarker_icon"/>
   <path
       android:pathData="m9.5874,19.0102 l0.2719,-4.712"
       android:strokeWidth="1.02"
-      android:fillColor="#00000000"
-      android:strokeColor="#fff"/>
+      android:strokeColor="@color/cacheMarker_icon"/>
   <path
       android:pathData="m18.842,2.4355 l-7.1426,7.1426 -7.123,-7.123a11.7,11.7 0,0 0,-2.1211 2.1211l7.123,7.123 -7.123,7.123a11.7,11.7 0,0 0,2.1211 2.1211l7.123,-7.123 7.125,7.125a11.7,11.7 0,0 0,2.1211 -2.1211l-7.125,-7.125 7.1426,-7.1426a11.7,11.7 0,0 0,-2.1211 -2.1211z"
-      android:fillColor="#b71c1c"/>
+      android:fillColor="@color/cacheMarker_archived"/>
 </vector>

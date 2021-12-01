@@ -13,8 +13,8 @@ import android.view.WindowManager;
 
 public class DisplayUtils {
 
-    public static final int SIZE_LIST_MARKER_DP = 12;  // size of a list marker in dp
-    public static final int SIZE_CACHE_MARKER_DP = 22; // size of a cache type marker in dp
+    public static final float SIZE_LIST_MARKER_DP = 12f;  // size of a list marker in dp
+    public static final float SIZE_CACHE_MARKER_DP = 22f; // size of a cache type marker in dp
 
     private DisplayUtils() {
         // Utility class, do not instantiate
@@ -45,7 +45,7 @@ public class DisplayUtils {
         return (int) (screenWidthDp / columnWidthDp + 0.5);
     }
 
-    public static int getPxFromDp(final Resources res, final int size, final float scaleFactor) {
+    public static int getPxFromDp(final Resources res, final float size, final float scaleFactor) {
         final float conversionFactor = (float) res.getDisplayMetrics().densityDpi / DisplayMetrics.DENSITY_DEFAULT;
         return (int) (size * conversionFactor * scaleFactor);
     }

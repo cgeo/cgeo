@@ -5,5 +5,5 @@
     android:viewportHeight="24">
   <path
       android:pathData="M13.6,7.5L13.3333,6.1667L7.3333,6.1667L7.3333,17.5L8.6667,17.5L8.6667,12.8333L12.4,12.8333L12.6667,14.1667L17.3333,14.1667L17.3333,7.5L13.6,7.5Z"
-      android:fillColor="#fff"/>
+      android:fillColor="@color/cacheMarker_icon"/>
 </vector>

@@ -460,16 +460,16 @@ public final class MapMarkerUtils {
      * Provide the LayerDrawable representing the cache type icon
      *
      * @param res   Android Resources
-     * @param type  CacheType to get the icon for
+     * @param cache Geocache to get the icon for
      * @return  Layered Drawable
      */
-    public static Drawable getCacheTypeMarker(final Resources res, final CacheType type, final boolean isDisabled) {
-        final int hashcode = new HashCodeBuilder().append(type).append(isDisabled).toHashCode();
+    public static Drawable getCacheTypeMarker(final Resources res, final Geocache cache) {
+        final int hashcode = new HashCodeBuilder().append(cache.getMapMarkerId()).append(cache.getType().id).toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
             if (marker == null) {
-                marker = new CacheMarker(hashcode, createCacheTypeMarker(res, type, isDisabled));
+                marker = new CacheMarker(hashcode, createCacheTypeMarker(res, cache));
                 overlaysCache.put(hashcode, marker);
             }
             return marker.getDrawable();
@@ -477,27 +477,40 @@ public final class MapMarkerUtils {
     }
 
     /**
-     * Build the layered drawable for a cache type icon using a background color + foreground icon
+     * Create a cache from a cache type to select the proper background shape
      *
      * @param res   Android Resources
      * @param type  CacheType to get the icon for
      * @return  Layered Drawable
      */
-    private static LayerDrawable createCacheTypeMarker(final Resources res, final CacheType type, final boolean isDisabled) {
-        // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
-        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.background_gc, null)).mutate();
-        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
-        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, isDisabled ? R.color.cacheType_disabled : type.typeColor, null));
-        insetsBuilder.withInset(new InsetBuilder(background));
-        insetsBuilder.withInset(new InsetBuilder(type.markerId, Gravity.CENTER));
-        return buildLayerDrawable(insetsBuilder, 2, 2);
+    public static Drawable getCacheTypeMarker(final Resources res, final CacheType type) {
+        final Geocache tempCache = new Geocache();
+        tempCache.setType(type);
+        // user-defined should always use the hexagonal icon
+        tempCache.setGeocode(type == CacheType.USER_DEFINED ? "ZZ1" : "GC1");
+        return getCacheTypeMarker(res, tempCache);
     }
 
-    public static Drawable getCacheMarkerWithoutOverlays(final Resources res, final Geocache cache) {
-        final Geocache tempCache = new Geocache();
-        tempCache.setType(cache.getType());
-        tempCache.setGeocode(cache.getGeocode());
-        return getCacheMarker(res, tempCache, CacheListType.OFFLINE).getDrawable();
+    /**
+     * Build the layered drawable for a cache type icon using a background color + foreground icon
+     *
+     * @param res   Android Resources
+     * @param cache Geocache to get the icon for
+     * @return  Layered Drawable
+     */
+    private static Drawable createCacheTypeMarker(final Resources res, final Geocache cache) {
+        // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
+        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
+        DrawableCompat.setTint(background, ResourcesCompat.getColor(res, cache.getType().typeColor, null));
+        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, ResourcesCompat.getDrawable(res, cache.getType().markerId, null) });
+
+        // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 27.02*23.4dp). Drawable must be square!
+        final int diffWidth = background.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 27.02f, 1);
+        final int offsetLeftTop = diffWidth - diffWidth / 2;
+        final int offsetRightBottom = diffWidth - offsetLeftTop;
+        layerDrawable.setLayerInset(0, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
+        layerDrawable.setLayerInset(1, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
+        return layerDrawable;
     }
 
     /**

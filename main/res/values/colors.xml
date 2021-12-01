@@ -44,6 +44,11 @@
     <color name="default_accuracycirclecolor">#66000000</color>
     <color name="default_accuracycirclefillcolor">#08000000</color>
 
+    <color name="cacheMarker_icon">#ffffffff</color>
+    <color name="cacheMarker_background">#ffffffff</color>
+    <color name="cacheMarker_border">#ff383838</color>
+    <color name="cacheMarker_archived">#ffb71c1c</color>
+
     <color name="cacheType_lab">#ff7b1fa2</color>
     <color name="cacheType_virtual">#ff0288d1</color>
     <color name="cacheType_mystery">#ff303f9f</color>
