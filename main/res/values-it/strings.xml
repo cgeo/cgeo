@@ -379,6 +379,7 @@
     <string name="caches_sort_storage">Data salvataggio</string>
     <string name="caches_sort_eventdate">Data Evento</string>
     <string name="caches_select_mode">Modo Selezione</string>
+    <string name="caches_select_next">Seleziona i prossimi 20 cache</string>
     <string name="caches_select_mode_exit">Esci dal modo Selezione</string>
     <string name="caches_select_invert">Inverti selezione</string>
     <string name="caches_nearby">Qui vicino</string>
@@ -406,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Cancella i log offline</string>
     <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
     <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
+    <string name="caches_show_attributes">Mostra la panoramica degli attributi</string>
     <string name="caches_set_cache_icon">Imposta icone cache</string>
     <string name="caches_reset_cache_icons_title">Reimposta icone cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
@@ -825,6 +827,7 @@
     <string name="init_map_directory_description">Cartella con le mappe offline</string>
     <string name="init_brouter_directory_description">Cartella con i dati di navigazione di BRouter</string>
     <string name="init_updateinterval_title">Intervallo di aggiornamento</string>
+    <string name="init_updateinterval_description">Ti ricorda ogni x giorni di controllarr gli aggiornamenti (valido solo per i file che hai scaricato tramite c:geo), 0=OFF</string>
     <string name="init_gpx_importexportdir">Cartella GPX</string>
     <string name="init_dataDir">Seleziona cartella dati</string>
     <string name="init_dataDir_note">È possibile memorizzare i dati aggiuntivi delle cache (spoiler, immagini log, …) su uno storage esterno (scheda SD reale o simulata a seconda del dispositivo).</string>
@@ -1403,6 +1406,7 @@
     <!-- search -->
     <string name="geo_search_label">Cerca cache nelle vicinanze</string>
     <string name="search_bar_hint">Cerca caches/trackables</string>
+    <string name="search_bar_hint_settings">Impostazioni di ricerca</string>
     <string name="search_coordinates">Coordinate</string>
     <string name="search_coordinates_button">Cerca per coordinate</string>
     <string name="search_address">Indirizzo</string>
@@ -1521,6 +1525,7 @@
     <string name="helper_where_you_go_description">WhereYouGo permette di giocare e cercare geocache di tipo Wherigo. c:geo può automaticamente scaricare le schede tramite questa app.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf consente di leggere i dati dei tag di chirp ANT+/Garmin, che sono necessari per le geocache ANT+/chirp.</string>
     <string name="helper_alc_description">App per Adventure Lab per il tuo telefono o tablet.</string>
+    <string name="helper_gcwizard_description">GC Wizard contiene numerosi strumenti per la crittografia semplice, calcoli geodetici e scientifici e centinaia di insiemi di vari simboli.</string>
     <!-- export -->
     <string name="share_export">Condividi / Esporta</string>
     <string name="export">Esportazione</string>
@@ -1798,7 +1803,14 @@
     <string name="attribute_historic_no">Nessuna struttura abbandonata / Nessuna rovina</string>
     <string name="attribute_blind_people_yes">Handicap: adatto ai ciechi</string>
     <string name="attribute_blind_people_no">Handicap: non adatto ai ciechi</string>
+    <string name="attribute_unknown">Attributo sconosciuto</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Strumenti necessari</string>
+    <string name="cat_type">Tipo</string>
+    <string name="cat_location">Posizione del cache</string>
+    <string name="cat_duration">Distanza / Durata</string>
+    <string name="cat_surrounding">Intorno al cache</string>
+    <string name="cat_transport">Trasporto</string>
     <!-- next things -->
     <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
