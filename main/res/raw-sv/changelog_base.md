@@ -1,13 +1,13 @@
-### General
-- Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
+### Allmänt
+- Ändring: Introducerar bottennavigering för direkt åtkomst till c:geo's mest använda skärmar, ersätter den gamla huvudskärmen
 
 ### Karta
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- Change: Automatically enable track display on loading a GPX track file
+- Fix: Vid inläsning av GPX-filer med flera spår visas dem som separat, oanslutna spår
+- Ändring: Aktivera automatiskt spårvisning vid inläsning av en GPX-spårfil
 
-### Cache list
-- New: Option to select next 20 caches
-- New: Attributes overview (see Manage Caches => Attributes overview)
+### Cachelista
+- Nyhet: Alternativ för att välja nästa 20 cacher
+- Nytt: Attribut-översikt (se Hantera cacher => Attribut-översikt)
 
 ### Cachedetaljer
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
