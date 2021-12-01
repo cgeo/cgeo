@@ -2300,7 +2300,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     final int viewId = view1.getId();
                     if (viewId == R.id.value) { // coordinates, gc-code, name
                         clickedItemText = ((TextView) view1).getText();
-                        final CharSequence itemTitle = ((TextView) ((View) view1.getParent()).findViewById(R.id.name)).getText();
+                        final CharSequence itemTitle = ((TextView) ((View) view1.getParent().getParent()).findViewById(R.id.name)).getText();
                         if (itemTitle.equals(res.getText(R.string.cache_coordinates))) {
                             clickedItemText = GeopointFormatter.reformatForClipboard(clickedItemText);
                         }
