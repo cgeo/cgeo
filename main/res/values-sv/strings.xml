@@ -379,6 +379,7 @@
     <string name="caches_sort_storage">Tid för sparandet i enheten</string>
     <string name="caches_sort_eventdate">Eventdatum</string>
     <string name="caches_select_mode">Markeringsläge</string>
+    <string name="caches_select_next">Välj nästa 20 cacher</string>
     <string name="caches_select_mode_exit">Avsluta markeringsläge</string>
     <string name="caches_select_invert">Invertera valda</string>
     <string name="caches_nearby">Nära</string>
@@ -406,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Rensa offline loggar</string>
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
+    <string name="caches_show_attributes">Visa attributöversikt</string>
     <string name="caches_set_cache_icon">Ange cache-ikon</string>
     <string name="caches_reset_cache_icons_title">Återställ cache-ikoner</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
@@ -713,6 +715,7 @@
     <string name="init_select_language">Välj språk</string>
     <string name="init_summary_select_language">Välj språk i appen (kräver omstart)\n</string>
     <string name="init_use_default_language">Använd standardspråk</string>
+    <string name="init_showwaypoints">Visa vägpunkter</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
     <string name="init_zoomincludingwaypoints">Zooma inkluderar vägpunkter</string>
     <string name="init_zoomincludingwaypoints_description">Om kartläggning av en enda cache: Bör zoom justeras för att inkludera alla dess vägpunkter?</string>
@@ -729,6 +732,8 @@
     <string name="init_summary_brouterShowBothDistances">Om rutten är aktiv: Visa den raka sträckan utöver den beräknade ruttlängden.</string>
     <string name="init_useInternalRouting">Använd intern navigering</string>
     <string name="init_summary_useInternalRouting">Använd c:geos interna routing för att kunna använda automatisk hämtning av routingsdata och andra funktioner</string>
+    <string name="init_bigSmileysOnMap">Stora ikoner</string>
+    <string name="init_summary_bigSmileysOnMap">Om aktiverad, kommer symboler som \'funna smiley\' eller \'korrigerade koordinater\' markören visas förstorade på kartan istället för ikonen för cachetypen (kräver omstart).</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
     <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen</string>
     <string name="init_customtabs_as_browser">Använd Chrome WebView</string>
@@ -1091,6 +1096,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Förhindra vägpunkter från anteckning</string>
     <string name="cache_menu_allowWaypointExtraction">Tillåt vägpunkter från anteckning</string>
     <string name="cache_personal_note_edit">Redigera</string>
+    <string name="cache_personal_note_storewaypoints">Lägg till/ändra punkter</string>
+    <string name="cache_personal_note_removewaypoints">Ta bort punkter</string>
     <string name="cache_personal_note_removedwaypoints">Waypoints borttagna</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Inga waypoints att ta bort hittades</string>
     <string name="cache_personal_note_storewaypoints_success">Punkterna är tillagda i personlig anteckning</string>
@@ -1398,6 +1405,7 @@
     <!-- search -->
     <string name="geo_search_label">Sök cacher i närheten</string>
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
+    <string name="search_bar_hint_settings">Sökinställningar</string>
     <string name="search_coordinates">Koordinater</string>
     <string name="search_coordinates_button">Sök med koordinater</string>
     <string name="search_address">Adress</string>
@@ -1516,6 +1524,7 @@
     <string name="helper_where_you_go_description">Appen WhereYouGo gör att du kan spela och leta efter cacher av typen Wherigo. c:geo kan påbörja nedladdningar av spelfiler, s.k. cartridges, i denna app.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf låter dig läsa data från ANT+/Garmin chirp tags, vilket behövs för ANT+/chirp geocacher.</string>
     <string name="helper_alc_description">Adventure Lab-appen för din telefon eller surfplatta.</string>
+    <string name="helper_gcwizard_description">GC Wizard innehåller många verktyg för enkel kryptografi, geodetiska och vetenskapliga beräkningar samt hundratals uppsättningar av olika symboler.</string>
     <!-- export -->
     <string name="share_export">Dela / Exportera</string>
     <string name="export">Exportera</string>
@@ -1793,7 +1802,14 @@
     <string name="attribute_historic_no">Ingen övergiven struktur eller ruin</string>
     <string name="attribute_blind_people_yes">Handikapp: Blind</string>
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
+    <string name="attribute_unknown">Okänt attribut</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Verktyg krävs</string>
+    <string name="cat_type">Typ</string>
+    <string name="cat_location">Cache-plats</string>
+    <string name="cat_duration">Avstånd / varaktighet</string>
+    <string name="cat_surrounding">Runt cachen</string>
+    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
