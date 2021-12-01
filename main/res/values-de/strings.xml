@@ -1803,6 +1803,7 @@
     <string name="attribute_historic_no">Kein verlassenes Bauwerk / Ruine</string>
     <string name="attribute_blind_people_yes">Handicap: Blind</string>
     <string name="attribute_blind_people_no">Kein Handicap: Blind</string>
+    <string name="attribute_unknown">Unbekanntes Attribut</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Werkzeuge erforderlich</string>
     <string name="cat_type">Typ</string>
