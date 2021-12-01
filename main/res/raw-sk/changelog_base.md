@@ -1,20 +1,20 @@
-### General
-- Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
+### Všeobecné
+- Zmena: Zavádza sa navigácia naspodku na priamy prístup k najpoužívanejším obrazovkám, nahrádza sa stará hlavná obrazovka
 
-### Map
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- Change: Automatically enable track display on loading a GPX track file
+### Mapa
+- Oprava: Pri načítaní súborov GPX obsahujúcich viac trás ich zobrazuje samostatne, neprepojené trasy
+- Zmena: Automaticky aktivované zobrazenie stopy pri načítaní súboru GPX so stopou
 
-### Cache list
-- New: Option to select next 20 caches
+### Zoznam kešiek
+- Nové: Možnosť vybrať ďalších 20 kešiek
 - New: Attributes overview (see Manage Caches => Attributes overview)
 
-### Cache details
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+### Detaily kešky
+- Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
 
-### Other
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+### Iné
+- Nové: Urobiť nastavenia => Zobraziť nastavenia filtrovateľné
+- Nové: Do zoznamu užitočných aplikácií pridané GC Wizard
+- Zmena: Zo zoznamu užitočných aplikácií a z hlavnej obrazovky odstránený skener čiarových kódov
+- Zmena: Zo zoznamu užitočných aplikácií odstránený BRouter (naďalej môžete používať externú aj internú navigáciu)
+- Oprava: Odstránenie opakovaných kontrol aktualizácie pre dlaždice mapy/trasovania s intervalom=0
