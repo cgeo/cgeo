@@ -272,6 +272,7 @@
 
     <string translatable="false" name="pref_twitter_cache_message">twitter_cache_message</string>
     <string translatable="false" name="pref_twitter_trackable_message">twitter_trackable_message</string>
+    <string translatable="false" name="pref_gc_fb_login_hint">gc_fb_login_hint</string>
     <string translatable="false" name="pref_ec_icons">ec_icons</string>
     <string translatable="false" name="pref_memory_dump">memory_dump</string>
     <string translatable="false" name="pref_generate_logcat">generate_logcat</string>
@@ -322,11 +323,10 @@
     <!-- theme preferences -->
     <string translatable="false" name="old_pref_skin">skin</string>
 
-    <string translatable="false" name="pref_theme_setting" >theme_setting</string>
+    <string translatable="false" name="pref_theme_setting">theme_setting</string>
     <string translatable="false" name="pref_value_theme_light">LIGHT</string>
     <string translatable="false" name="pref_value_theme_dark">DARK</string>
     <string translatable="false" name="pref_value_theme_system_default">SYSTEM_DEFAULT</string>
-    <string name="pref_gc_fb_login_hint">gc_fb_login_hint</string>
     <string-array name="pref_theme_values">
         <item>@string/pref_value_theme_system_default</item>
         <item>@string/pref_value_theme_light</item>
