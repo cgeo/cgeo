@@ -621,7 +621,9 @@ tasks.whenTaskAdded { theTask ->
 apply plugin: 'checkstyle'
 
 checkstyle {
-    // assign the checkstyle version explicitly here and in .idea/checkstyle-idea.xml
+    // assign the checkstyle version explicitly here
+    // and in AndroidStudio Settings (.idea/checkstyle-idea.xml)
+    // and align it with codacy (https://github.com/codacy/codacy-checkstyle)
     toolVersion = '8.44'
 
     configDirectory = rootProject.projectDir
