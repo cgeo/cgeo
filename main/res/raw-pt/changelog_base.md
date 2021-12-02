@@ -7,14 +7,14 @@
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
-- New: Attributes overview (see Manage Caches => Attributes overview)
+- Novo: Visão geral de atributos (ver Gerir Caches => Visão geral de atributos)
 
 ### Detalhes da cache
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
 
 ### Outro
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Novo: Fazer Definições => Visualizar Definições filtráveis
+- Novo: Assistente de GC adicionado à lista de aplicações úteis
+- Alteração: Scanner de código de barras removido da lista de aplicações úteis e do ecrã principal
+- Alteração: Remoção do BRouter da lista de aplicações úteis (ainda pode usar a navegação externa e interna)
+- Correcção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
