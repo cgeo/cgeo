@@ -4,6 +4,8 @@ import android.os.Bundle;
 
 import androidx.preference.PreferenceDialogFragmentCompat;
 
+import org.apache.commons.lang3.NotImplementedException;
+
 // This is required for the CustomDialog to show correctly (Colorpicker for example)
 // See: https://stackoverflow.com/a/45524893/4730773
 
@@ -20,6 +22,7 @@ public class DialogPrefFragCompat extends PreferenceDialogFragmentCompat {
     public void onDialogClosed(final boolean positiveResult) {
         if (positiveResult) {
             // do things
+            throw new NotImplementedException("Colorpicker not implemented");
         }
     }
 }
