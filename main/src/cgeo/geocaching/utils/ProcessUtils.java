@@ -41,7 +41,7 @@ public final class ProcessUtils {
 
     public static List<ResolveInfo> getInstalledBrowsers(final Context context) {
         // We're using "https://example.com" as we only want to query for web browsers, not c:geo or other apps
-        final Intent browserIntent = new Intent("android.intent.action.VIEW", Uri.parse("https://example.com"));
+        final Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://example.com"));
         return context.getPackageManager().queryIntentActivities(browserIntent, PackageManager.MATCH_DEFAULT_ONLY);
     }
 
