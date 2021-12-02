@@ -15,7 +15,6 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import android.content.Context;
 import android.content.Intent;
 import android.util.AttributeSet;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -29,7 +28,6 @@ public class CredentialsPreference extends AbstractClickablePreference {
 
     private static final int NO_KEY = -1;
 
-    private LayoutInflater inflater;
     private final CredentialActivityMapping credentialsMapping;
 
     private LinearLayout avatarFrame;
@@ -71,22 +69,15 @@ public class CredentialsPreference extends AbstractClickablePreference {
     public CredentialsPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
         this.credentialsMapping = getAuthorization();
-        init(context);
     }
 
     public CredentialsPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         this.credentialsMapping = getAuthorization();
-        init(context);
-    }
-
-    private void init(final Context context) {
-        inflater = LayoutInflater.from(context);
     }
 
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity settingsActivity) {
-        settingsActivity.setAuthTitle(credentialsMapping.prefKeyId);
         return preference -> {
             final Intent checkIntent = new Intent(preference.getContext(), credentialsMapping.getAuthActivity());
 

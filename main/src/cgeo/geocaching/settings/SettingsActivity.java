@@ -1,9 +1,6 @@
 package cgeo.geocaching.settings;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.connector.capability.ICredentials;
-import cgeo.geocaching.connector.ec.ECConnector;
-import cgeo.geocaching.gcvote.GCVote;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.settings.fragments.PreferenceBackupFragment;
@@ -27,8 +24,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
-
-import java.util.Locale;
 
 /**
  * An {@link AppCompatActivity} that presents a set of application settings. On
