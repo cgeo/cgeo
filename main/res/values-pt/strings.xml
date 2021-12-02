@@ -407,6 +407,7 @@
     <string name="caches_clear_offlinelogs">Limpar registos offline</string>
     <string name="caches_clear_offlinelogs_message">Deseja limpar os registos offline?</string>
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
+    <string name="caches_show_attributes">Mostrar visão geral de atributos</string>
     <string name="caches_set_cache_icon">Definir ícones de geocaches</string>
     <string name="caches_reset_cache_icons_title">Repor ícones de geocaches</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
@@ -1523,6 +1524,7 @@
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar as geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
     <string name="helper_chirpwolf_description">A aplicação Chirp Wolf permite que leia os dados de tags chirp ANT +/Garmin, que será necessária na realização de geocaches ANT+/chirp.</string>
     <string name="helper_alc_description">A aplicação Adventure Lab para o seu telemóvel ou tablet.</string>
+    <string name="helper_gcwizard_description">O Assistente de GC contém inúmeras ferramentas para cálculos criptográficos, geodésicos e científicos simples, bem como centenas de conjuntos de vários símbolos.</string>
     <!-- export -->
     <string name="share_export">Partilhar / Exportar</string>
     <string name="export">Exportar</string>
@@ -1801,6 +1803,12 @@
     <string name="attribute_blind_people_yes">Adequa-se a pessoas cegas</string>
     <string name="attribute_blind_people_no">Não é adequada a pessoas cegas</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Ferramentas necessárias</string>
+    <string name="cat_type">Tipo</string>
+    <string name="cat_location">Localização da cache</string>
+    <string name="cat_duration">Distância / Duração</string>
+    <string name="cat_surrounding">Em redor da cache</string>
+    <string name="cat_transport">Transporte</string>
     <!-- next things -->
     <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
