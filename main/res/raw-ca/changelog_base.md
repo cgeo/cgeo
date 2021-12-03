@@ -1,5 +1,6 @@
 ### General
 - Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Mapa
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
