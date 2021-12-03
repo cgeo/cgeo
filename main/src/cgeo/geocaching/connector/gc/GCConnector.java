@@ -442,7 +442,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return coordinfoUrl;
         }
         // expanded geocaching.com URLs
-        final String geocachingcomUrl = TextUtils.getMatch(url, Pattern.compile("geocache/"+GCConstants.GEOCODE_PATTERN, Pattern.CASE_INSENSITIVE), false, "");
+        final String geocachingcomUrl = TextUtils.getMatch(url, Pattern.compile("geocaching.com/geocache/"+GCConstants.GEOCODE_PATTERN, Pattern.CASE_INSENSITIVE), false, "");
         if (canHandle(geocachingcomUrl)) {
             return geocachingcomUrl;
         }
