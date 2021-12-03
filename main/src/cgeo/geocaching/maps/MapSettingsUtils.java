@@ -2,6 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.MapSettingsDialogBinding;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.maps.routing.Routing;
@@ -15,6 +16,7 @@ import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.IndividualRouteUtils;
+import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
@@ -66,8 +68,8 @@ public class MapSettingsUtils {
         final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, ImageParam.id(R.drawable.marker_own), quickFilter.get(GeocacheFilter.QuickFilter.OWNED), f -> quickFilter.put(GeocacheFilter.QuickFilter.OWNED, f), false);
         final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled,  R.drawable.map_status_disabled, quickFilter.get(GeocacheFilter.QuickFilter.DISABLED), f -> quickFilter.put(GeocacheFilter.QuickFilter.DISABLED, f), false);
         final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
-        final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, R.drawable.waypoint_waypoint, Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
-        final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, R.drawable.waypoint_pkg, Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
+        final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.ORIGINAL)), Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
+        final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.PARKING)), Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
         final SettingsCheckboxModel wbVisitedCb = createCb(allCbs, R.string.map_showwp_visited, R.drawable.marker_visited, Settings.isExcludeWpVisited(), Settings::setExcludeWpVisited, true);
         final SettingsCheckboxModel trackCb = !PersistableUri.TRACK.hasValue() ? null : createCb(allCbs, R.string.map_show_track, R.drawable.map_hidetrack, Settings.isHideTrack(), Settings::setHideTrack, true);
         final SettingsCheckboxModel circlesCb = createCb(allCbs, R.string.map_show_circles, R.drawable.map_circle, isShowCircles, Settings::setShowCircles, false);
