@@ -514,6 +514,45 @@ public final class MapMarkerUtils {
     }
 
     /**
+     * Create a waypoint marker without background - basically the zoomed in waypoint icon
+     *
+     * @param res   Android Resources
+     * @param waypoint  Waypoint to get the icon for
+     * @return  Layered Drawable
+     */
+    public static Drawable getWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
+        final int hashcode = new HashCodeBuilder().append(waypoint.markerId).toHashCode();
+
+        synchronized (overlaysCache) {
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createWaypointTypeMarker(res, waypoint));
+                overlaysCache.put(hashcode, marker);
+            }
+            return marker.getDrawable();
+        }
+    }
+
+    /**
+     * Build the layered drawable for a waypoint marker without background - basically the zoomed in waypoint icon
+     *
+     * @param res   Android Resources
+     * @param waypoint Waypoint to get the icon for
+     * @return  Layered Drawable
+     */
+    private static Drawable createWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
+        final Drawable waypointMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.markerId, null)).mutate();
+        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { waypointMarker });
+
+        // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 17.25dp). Drawable must be square!
+        final int diffWidth = waypointMarker.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 17.25f, 1);
+        final int offsetLeftTop = diffWidth - diffWidth / 2;
+        final int offsetRightBottom = diffWidth - offsetLeftTop;
+        layerDrawable.setLayerInset(0, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
+        return layerDrawable;
+    }
+
+    /**
      * Clear the cache of drawable items.
      */
     public static void clearCachedItems() {
