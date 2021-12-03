@@ -32,6 +32,5 @@ public class PreferenceNavigationNavigationFragment extends PreferenceFragmentCo
                 preference.setSummary(R.string.settings_navigation_disabled);
             }
         }
-        //redrawScreen(R.string.preference_screen_navigation_menu);
     }
 }

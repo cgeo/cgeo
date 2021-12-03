@@ -2,7 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.OCPreferenceKeys;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -25,20 +25,14 @@ public class PreferenceServiceOpencachingRoFragment extends PreferenceFragmentCo
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
-
-        // TODO
-        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(R.string.pref_fakekey_ocro_authorization);
-        if (key != null) {
-            findPreference(getString(key.authPrefId)).setTitle(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId) ? R.string.settings_reauthorize : R.string.settings_authorize));
-            findPreference(getString(R.string.pref_fakekey_ocro_authorization)).setSummary(getString(Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId) ? R.string.auth_connected : R.string.auth_unconnected));
-        } else {
-            findPreference(getString(R.string.pref_fakekey_ocro_authorization)).setSummary(getString(R.string.auth_unconnected));
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.init_oc_ro);
+
+        // Update authentication preference
+        SettingsUtils.updateOpenCachingAuthPreference(this, R.string.pref_fakekey_ocro_authorization);
     }
 }

@@ -12,6 +12,7 @@
             android:defaultValue="0"
             android:dialogTitle="@string/init_mapsource_select"
             android:key="@string/pref_mapsource"
+            android:summary="%s"
             android:title="@string/init_mapsource_select"
             app:iconSpaceReserved="false" />
         <Preference
