@@ -382,6 +382,15 @@ public final class ConnectorFactory {
         return null;
     }
 
+    /**
+     * Checks if text can be interpreted as a geocode, either directly or by extracting one
+     * @param text  String containing a geocode (or not)
+     * @return true if a geocode is found
+     */
+    public static boolean containsGeocode(@Nullable final String text) {
+        return (getGeocodeFromURL(text) != null || getGeocodeFromText(text) != null);
+    }
+
     @NonNull
     public static Collection<TrackableConnector> getTrackableConnectors() {
         return TRACKABLE_CONNECTORS;

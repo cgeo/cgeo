@@ -12,6 +12,13 @@
         app:iconifiedByDefault="true"
         app:showAsAction="collapseActionView|always" />
     <item
+        android:id="@+id/menu_paste_search"
+        android:icon="@drawable/ic_menu_paste_search"
+        android:title="@string/menu_search_clipboard"
+        android:visible="false"
+        app:showAsAction="always">
+    </item>
+    <item
         android:id="@+id/menu_history"
         android:icon="@drawable/ic_menu_recent_history"
         android:title="@string/menu_history_longstring"

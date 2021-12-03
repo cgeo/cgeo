@@ -53,6 +53,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     private SearchActivityBinding binding;
 
     private static final String GOOGLE_NOW_SEARCH_ACTION = "com.google.android.gms.actions.SEARCH_ACTION";
+    public static final String ACTION_CLIPBOARD = "clipboard";
 
     @Override
     public final void onCreate(final Bundle savedInstanceState) {
@@ -80,6 +81,22 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
             final boolean keywordSearch = intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true);
 
             if (instantSearch(query, keywordSearch)) {
+                setResult(RESULT_OK);
+            } else {
+                // send intent back so query string is known
+                setResult(RESULT_CANCELED, intent);
+            }
+            finish();
+
+            return;
+        }
+
+        // search query, from search toolbar or from google now
+        if (ACTION_CLIPBOARD.equals(intent.getAction())) {
+            hideKeyboard();
+            final String query = intent.getStringExtra(SearchManager.QUERY);
+
+            if (instantSearch(query, false, true)) {
                 setResult(RESULT_OK);
             } else {
                 // send intent back so query string is known
@@ -142,6 +159,10 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         return MENU_SEARCH;
     }
 
+    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch) {
+        return instantSearch(nonTrimmedQuery, keywordSearch, false);
+    }
+
     /**
      * Performs a search for query either as geocode, trackable code or keyword
      *
@@ -151,7 +172,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
      *            Set to true if keyword search should be performed if query isn't GC or TB
      * @return true if a search was performed, else false
      */
-    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch) {
+    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch, final boolean clipboardSearch) {
         final String query = StringUtils.trim(nonTrimmedQuery);
 
         // first check if this was a scanned URL
@@ -160,6 +181,10 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         // otherwise see if this is a pure geocode
         if (StringUtils.isEmpty(geocode)) {
             geocode = StringUtils.upperCase(StringUtils.trim(query));
+        }
+
+        if (clipboardSearch) {
+            geocode = ConnectorFactory.getGeocodeFromText(query);
         }
 
         final IConnector connector = ConnectorFactory.getConnector(geocode);
@@ -242,14 +267,14 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         binding.geocodeInputLayout.postDelayed(() -> {
             final String clipboardText = ClipboardUtils.getText();
 
-            String geocode;
+            String geocode = "";
 
             if (ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode) {
                 geocode = clipboardText;
             } else {
                 geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
             }
-            if (geocode != null && !geocode.isEmpty()) {
+            if (!geocode.isEmpty()) {
                 binding.geocode.setText(geocode);
                 binding.geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
 

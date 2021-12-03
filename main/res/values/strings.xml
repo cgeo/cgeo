@@ -344,6 +344,7 @@
     <string name="menu_update_mapdata">Map data</string>
     <string name="menu_dashboard">Login dashboard</string>
     <string name="menu_history">History</string>
+    <string name="menu_search_clipboard">Load geocode from clipboard</string>
     <string name="menu_history_longstring">Finds history</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
