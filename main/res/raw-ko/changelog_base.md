@@ -1,5 +1,6 @@
 ### 일반
 - 변경: c:geo에서 가장 많이 사용되는 화면에 직접 액세스할 수 있는 하단 탐색 도입, 이전 메인 화면 교체
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### 지도
 - 수정: 여러 트랙이 포함된 GPX 파일을 로드할 때 별도의 연결되지 않은 트랙으로 표시됨
