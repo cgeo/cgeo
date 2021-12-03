@@ -1,5 +1,6 @@
 ### Geral
 - Alteração: Introdução da barra inferior com acesso directo às funções mais utilizadas do c:geo, substituindo o antigo ecrã principal
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Mapa
 - Correcção: Ao carregar ficheiros GPX que contém vários percursos, mostra-os em separado, não ligados
