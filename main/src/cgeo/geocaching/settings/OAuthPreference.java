@@ -75,7 +75,6 @@ public class OAuthPreference extends AbstractClickablePreference {
 
     @Override
     protected OnPreferenceClickListener getOnPreferenceClickListener(final SettingsActivity activity) {
-        //activity.setAuthTitle(oAuthMapping.prefKeyId);
         return preference -> {
             if (oAuthMapping.authActivity != null && oAuthMapping.authParams != null) {
                 final Intent authIntent = new Intent(preference.getContext(),

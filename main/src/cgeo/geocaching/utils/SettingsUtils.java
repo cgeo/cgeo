@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.OCPreferenceKeys;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -144,6 +145,24 @@ public class SettingsUtils {
 
     public static void setPrefSummaryActiveStatus(final PreferenceFragmentCompat preferenceFragment, @StringRes final int resConnector, final boolean isActive) {
         setPrefSummary(preferenceFragment, resConnector, isActive ? preferenceFragment.getString(R.string.settings_service_active) : "");
+    }
+
+    public static void setAuthTitle(final PreferenceFragmentCompat preferenceFragment, final int prefKeyId, final boolean authorized) {
+        final Preference preference = preferenceFragment.findPreference(preferenceFragment.getString(prefKeyId));
+        if (preference != null) {
+            preference.setTitle(authorized ? R.string.settings_reauthorize : R.string.settings_authorize);
+        }
+    }
+
+    public static void updateOAuthPreference(final PreferenceFragmentCompat preferenceFragment, final int prefKeyId, final boolean authorized) {
+        setAuthTitle(preferenceFragment, prefKeyId, authorized);
+        setPrefSummary(preferenceFragment, prefKeyId, preferenceFragment.getString(authorized ? R.string.auth_connected : R.string.auth_unconnected));
+    }
+
+    public static void updateOpenCachingAuthPreference(final PreferenceFragmentCompat preferenceFragment, final int prefKeyId) {
+        final OCPreferenceKeys key = OCPreferenceKeys.getByAuthId(prefKeyId);
+        final boolean authorized = key != null && Settings.hasOAuthAuthorization(key.publicTokenPrefId, key.privateTokenPrefId);
+        updateOAuthPreference(preferenceFragment, prefKeyId, authorized);
     }
 
     public static void initPublicFolders(final PreferenceFragmentCompat preferenceFragment, final ContentStorageActivityHelper csah) {

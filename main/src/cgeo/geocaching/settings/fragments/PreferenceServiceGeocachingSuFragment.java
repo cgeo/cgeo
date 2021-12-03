@@ -3,6 +3,7 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.su.SuConnector;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 
 import android.os.Bundle;
@@ -25,27 +26,14 @@ public class PreferenceServiceGeocachingSuFragment extends PreferenceFragmentCom
             ShareUtils.openUrl(getContext(), url);
             return true;
         });
-
-        // TODO
-        final Preference auth = findPreference(getString(R.string.pref_fakekey_su_authorization));
-        if (auth != null) {
-            auth.setTitle(
-                getString(Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret)
-                    ? R.string.settings_reauthorize : R.string.settings_authorize));
-        }
-
-        // TODO
-        final Preference username = findPreference(getString(R.string.pref_fakekey_su_authorization));
-        if (username != null) {
-            username.setSummary(
-                getString(Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret)
-                    ? R.string.auth_connected : R.string.auth_unconnected));
-        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.init_su);
+
+        // Update authentication preference
+        SettingsUtils.updateOAuthPreference(this, R.string.pref_fakekey_su_authorization, Settings.hasOAuthAuthorization(R.string.pref_su_tokenpublic, R.string.pref_su_tokensecret));
     }
 }

@@ -4,7 +4,9 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
@@ -67,7 +69,30 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
         }
         prefMapSources.setEntries(entries);
         prefMapSources.setEntryValues(values);
-        //pref_map_sources.setOnPreferenceChangeListener(getC);
-    }
+        prefMapSources.setOnPreferenceChangeListener((preference, newValue) -> {
+            final String newMapSource = (String) newValue;
 
+            // reset the cached map source
+            MapSource mapSource;
+            try {
+                mapSource = MapProviderFactory.getMapSource(newMapSource);
+            } catch (final NumberFormatException e) {
+                Log.e("PreferenceMapFragment.onMapSourcesChange: bad source id '" + newMapSource + "'", e);
+                mapSource = null;
+            }
+            // If there is no corresponding map source (because some map sources were
+            // removed from the device since) then use the first one available.
+            if (mapSource == null) {
+                mapSource = MapProviderFactory.getAnyMapSource();
+                if (mapSource == null) {
+                    // There are no map source. There is little we can do here, except log an error and
+                    // return to avoid triggering a null pointer exception.
+                    Log.e("PreferenceMapFragment.onMapSourcesChange: no map source available");
+                    return true;
+                }
+            }
+            Settings.setMapSource(mapSource);
+            return true;
+        });
+    }
 }
