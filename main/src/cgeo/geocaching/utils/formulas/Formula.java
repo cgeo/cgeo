@@ -1,14 +1,14 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.EMPTY_FORMULA;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.MISSING_VARIABLE_VALUE;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.OTHER;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.UNEXPECTED_TOKEN;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.EMPTY_FORMULA;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.UNEXPECTED_TOKEN;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
 
 import android.util.Pair;
 
@@ -28,7 +28,7 @@ import java.util.Set;
 import org.apache.commons.lang3.StringUtils;
 
 /**
- * Calculator util class to help parse and evaluate calculation formulas.
+ * This class represents a Formula which is parsed from a String variable.
  *
  * The originally rather simple evaluation algorithm was derived from the work of user 'Boann' and released to the public domain on Stack Overflow:
  * https://stackoverflow.com/questions/3422673/evaluating-a-math-expression-given-in-string-form
@@ -45,7 +45,7 @@ import org.apache.commons.lang3.StringUtils;
  * * Localizable, user-displayable error message handling was added.
  *
  */
-public final class Calculator {
+public final class Formula {
 
     public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*:!";
 
@@ -54,36 +54,73 @@ public final class Calculator {
     private static final Set<Integer> NUMBERS = new HashSet<>();
 
     //Caches last used compiled expressions for performance reasons
-    private static final LeastRecentlyUsedMap<String, Pair<Calculator, CalculatorException>> CALCULATION_CACHE = new LeastRecentlyUsedMap.LruCache<>(500);
+    private static final LeastRecentlyUsedMap<String, Pair<Formula, FormulaException>> FORMULA_CACHE = new LeastRecentlyUsedMap.LruCache<>(500);
 
-    private final String expression;
+    //effectively final (assigned final after compilation)
+    private String expression;
+    private FormulaNode compiledExpression;
+    private final Set<String> neededVars = new HashSet<>();
+    private final Set<String> neededVarsReadOnly = Collections.unmodifiableSet(neededVars);
 
-    //needed only during parsing
+
+    //needed only during parsing/compilation
     private int pos = -1;
     private int ch;
+    private int level;
+    private String rawExpression; //the expression as given to compiler (includes e.g. chars before startPos and after stopChars)
+    private Func1<Character, Boolean> stopChecker;
+
     private int markedPos = -1;
     private int markedCh = ch;
+    private int markedLevel;
 
-    //stores compiled expression
-    private CalcNode compiledExpression;
+    public static class StopCharSet {
 
+        public static final StopCharSet EMPTY = createFor(null);
 
-    private static class CalcNode {
+        private final Set<Character> stopCharSet;
+        private final String stopCharString;
+
+        private StopCharSet(final String stopCharString) {
+            this.stopCharString = stopCharString == null ? "" : stopCharString;
+            this.stopCharSet = new HashSet<>();
+            if (stopCharString != null) {
+                for (char stopChar : stopCharString.toCharArray()) {
+                    this.stopCharSet.add(stopChar);
+                }
+            }
+        }
+
+        public static StopCharSet createFor(final String stopChars) {
+            return new StopCharSet(stopChars);
+        }
+
+        public String getKey() {
+            return stopCharString;
+        }
+
+        public boolean contains(final char c) {
+            return stopCharSet.contains(c);
+        }
+
+    }
+
+    private static class FormulaNode {
 
         public final String id;
         public final Func2<ValueList, Func1<String, Value>, Value> function;
-        public final CalcNode[] children;
+        public final FormulaNode[] children;
 
         public final Action1<Set<String>> neededVars;
 
-        CalcNode(final String id, final CalcNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
+        FormulaNode(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
             this(id, children, function, null);
         }
 
-        CalcNode(final String id, final CalcNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function, final Action1<Set<String>> neededVars) {
+        FormulaNode(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function, final Action1<Set<String>> neededVars) {
 
             this.id = id;
-            this.children = children == null ? new CalcNode[0] : children;
+            this.children = children == null ? new FormulaNode[0] : children;
             this.function = function;
             this.neededVars = neededVars;
         }
@@ -97,30 +134,30 @@ public final class Calculator {
             if (this.neededVars != null) {
                 this.neededVars.call(result);
             }
-            for (CalcNode child : children) {
+            for (FormulaNode child : children) {
                 child.calculateNeededVariables(result);
             }
         }
 
-        public static ValueList toValueList(final CalcNode[] nodes, final Func1<String, Value> variables) {
+        public static ValueList toValueList(final FormulaNode[] nodes, final Func1<String, Value> variables) {
             final ValueList childValues = new ValueList();
-            for (CalcNode child : nodes) {
+            for (FormulaNode child : nodes) {
                 childValues.add(child.eval(variables));
             }
             return childValues;
         }
 
-        public static ValueList toValueList(final Collection<CalcNode> nodes, final Func1<String, Value> variables) {
+        public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables) {
             final ValueList childValues = new ValueList();
-            for (CalcNode child : nodes) {
+            for (FormulaNode child : nodes) {
                 childValues.add(child.eval(variables));
             }
             return childValues;
         }
     }
 
-    private CalcNode createNumeric(final String id, final CalcNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
-        return new CalcNode(id, children, (objs, vars) -> {
+    private FormulaNode createNumeric(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
+        return new FormulaNode(id, children, (objs, vars) -> {
             objs.checkAllDouble();
             return function.call(objs, vars);
         });
@@ -140,8 +177,14 @@ public final class Calculator {
         CHARS_DIGITS.addAll(NUMBERS);
     }
 
-    public static Calculator compile(final String expression) {
-        final Pair<Calculator, CalculatorException> entry = CALCULATION_CACHE.get(expression);
+    public static Formula compile(final String expression) {
+        return compile(expression, 0, null);
+    }
+
+    public static Formula compile(final String expression, final int startPos, final StopCharSet stopChars) {
+        final StopCharSet stopCharSet = stopChars == null ? StopCharSet.EMPTY : stopChars;
+        final String cacheKey = expression + "-" + startPos + "-" + stopCharSet.getKey();
+        final Pair<Formula, FormulaException> entry = FORMULA_CACHE.get(cacheKey);
         if (entry != null) {
             //found an entry, return it (either exception or compiled calculator
             if (entry.first != null) {
@@ -152,23 +195,23 @@ public final class Calculator {
 
         //no entry found. Compile expression, put it into cache and return it
         try {
-            final Calculator c = compileInternal(expression);
-            CALCULATION_CACHE.put(expression, new Pair<>(c, null));
+            final Formula c =  compileInternal(expression, startPos, stopCharSet::contains);
+            FORMULA_CACHE.put(cacheKey, new Pair<>(c, null));
             return c;
-        } catch (CalculatorException ce) {
-            CALCULATION_CACHE.put(expression, new Pair<>(null, ce));
+        } catch (FormulaException ce) {
+            FORMULA_CACHE.put(cacheKey, new Pair<>(null, ce));
             throw ce;
         }
     }
 
-    private static Calculator compileInternal(final String expression) {
-        final Calculator calc = new Calculator(expression);
+    private static Formula compileInternal(final String expression, final int startPos, final Func1<Character, Boolean> stopChecker) {
+        final Formula f = new Formula();
         try {
-            calc.compile();
-            return calc;
-        } catch (CalculatorException ce) {
+            f.doCompile(expression, startPos, stopChecker);
+            return f;
+        } catch (FormulaException ce) {
             ce.setExpression(expression);
-            ce.setParsingContext(calc.ch, calc.pos);
+            ce.setParsingContext(f.ch, f.pos);
             throw ce;
         }
     }
@@ -182,8 +225,8 @@ public final class Calculator {
         return evaluate(expression, vars).getAsDouble();
     }
 
-    private Calculator(final String expression) {
-        this.expression = expression;
+    private Formula()  {
+        //do nothing
     }
 
     public String getExpression() {
@@ -199,20 +242,24 @@ public final class Calculator {
     }
 
     public Value evaluate(final Object ... vars) {
+        return evaluate(toVarProvider(vars));
+    }
+
+    public static Func1<String, Value> toVarProvider(final Object ... vars) {
         if (vars == null || vars.length == 0) {
-            return evaluate(x -> null);
+            return x -> null;
         }
         final Map<String, Value> varMap = new HashMap<>();
         for (int i = 0; i < vars.length - 1; i += 2) {
             varMap.put(vars[i].toString(), Value.of(vars[i + 1]));
         }
-        return evaluate(varMap::get);
+        return varMap::get;
     }
 
     public Value evaluate(final Func1<String, Value> vars) {
         try {
             return compiledExpression.eval(vars == null ? x -> null : vars);
-        } catch (CalculatorException ce) {
+        } catch (FormulaException ce) {
             ce.setExpression(expression);
             ce.setEvaluationContext(calculateEvaluationContext(vars));
             throw ce;
@@ -234,35 +281,46 @@ public final class Calculator {
     }
 
     public Set<String> getNeededVariables() {
-        final Set<String> result = new HashSet<>();
-        compiledExpression.calculateNeededVariables(result);
-        return result;
+        return neededVarsReadOnly;
     }
 
-    private void compile() {
-        if (StringUtils.isBlank(expression)) {
-            throw new CalculatorException(EMPTY_FORMULA);
+    protected void doCompile(final String rawExpression, final int startPos, final Func1<Character, Boolean> stopChecker) throws FormulaException {
+        this.rawExpression = rawExpression;
+        this.stopChecker = stopChecker;
+        this.level = 0;
+        this.pos = startPos - 1; //important to set before the EMPTY_FORMULA check: generates better error message for MultiFormulas
+        if (StringUtils.isBlank(rawExpression) || startPos >= rawExpression.length()) {
+            throw new FormulaException(EMPTY_FORMULA);
         }
         nextChar();
-        final CalcNode x = parseExpression();
-        if (pos < expression.length()) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, "EOF");
+        final FormulaNode x = parseExpression();
+        if (ch > -1) {
+            throw new FormulaException(UNEXPECTED_TOKEN, "EOF");
         }
+        this.expression = rawExpression.substring(startPos, pos);
         this.compiledExpression = x;
+        this.neededVars.clear();
+        this.compiledExpression.calculateNeededVariables(this.neededVars);
     }
 
     private void nextChar() {
-        ch = (++pos < expression.length()) ? expression.charAt(pos) : -1;
+        ch = (++pos < rawExpression.length()) ? rawExpression.charAt(pos) : -1;
+        if (level == 0 && stopChecker != null && stopChecker.call((char) ch)) {
+            //stop parsing
+            ch = -1;
+        }
     }
 
     private void mark() {
         markedCh = ch;
         markedPos = pos;
+        markedLevel = level;
     }
 
     private void reset() {
         ch = markedCh;
         pos = markedPos;
+        level = markedLevel;
     }
 
     private boolean eat(final int charToEat) {
@@ -276,49 +334,49 @@ public final class Calculator {
         return false;
     }
 
-    private CalcNode parseExpression() {
-        CalcNode x = parseTerm();
+    private FormulaNode parseExpression() {
+        FormulaNode x = parseTerm();
         for (;;) {
             if (eat('+')) {
-                x = createNumeric("+", new CalcNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
+                x = createNumeric("+", new FormulaNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
             } else if (eat('-')) {
-                x = createNumeric("-", new CalcNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
+                x = createNumeric("-", new FormulaNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
             } else {
                 return x;
             }
         }
     }
 
-    private CalcNode parseTerm() {
-        CalcNode x = parseFactor();
+    private FormulaNode parseTerm() {
+        FormulaNode x = parseFactor();
         for (;;) {
             if (eat('*')) {
-                x = createNumeric("*", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
+                x = createNumeric("*", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
             } else if (eat('/') || eat(':')) {
-                x = createNumeric("/", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
+                x = createNumeric("/", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
             } else if (eat('%')) {
-                x = createNumeric("%", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) % nums.getAsDouble(1)));
+                x = createNumeric("%", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) % nums.getAsDouble(1)));
             } else {
                 return x;
             }
         }
     }
 
-    private CalcNode parseFactor() {
+    private FormulaNode parseFactor() {
         if (eat('+')) {
             return parseFactor(); // unary plus
         }
         if (eat('-')) {
-            return createNumeric("-", new CalcNode[]{parseFactor()}, (nums, vars) -> Value.of(-nums.getAsDouble(0)));
+            return createNumeric("-", new FormulaNode[]{parseFactor()}, (nums, vars) -> Value.of(-nums.getAsDouble(0)));
         }
 
-        CalcNode x = parseConcatBlock();
+        FormulaNode x = parseConcatBlock();
 
         if (eat('!')) {
-            x = createNumeric("!", new CalcNode[]{x}, (nums, vars) -> {
+            x = createNumeric("!", new FormulaNode[]{x}, (nums, vars) -> {
                 final int facValue = nums.getAsInt(0, 0);
                 if (!nums.get(0).isInteger() || facValue < 0) {
-                    throw new CalculatorException(WRONG_TYPE, "positive Integer", nums.get(0), nums.get(0).getType());
+                    throw new FormulaException(WRONG_TYPE, "positive Integer", nums.get(0), nums.get(0).getType());
                 }
                 int result = 1;
                 for (int i = 2; i <= facValue; i++) {
@@ -329,13 +387,13 @@ public final class Calculator {
         }
 
         if (eat('^')) {
-            x = createNumeric("^", new CalcNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
+            x = createNumeric("^", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
         }
 
         return x;
     }
 
-    private CalcNode parseString() {
+    private FormulaNode parseString() {
         final StringBuilder sb = new StringBuilder();
         boolean foundEnd = false;
         eat('\'');
@@ -351,26 +409,30 @@ public final class Calculator {
             nextChar();
         }
         if (!foundEnd) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, "'");
+            throw new FormulaException(UNEXPECTED_TOKEN, "'");
         }
         final String literal = sb.toString();
-        return new CalcNode("string-literal", null, (objs, vars) -> Value.of(literal));
+        return new FormulaNode("string-literal", null, (objs, vars) -> Value.of(literal));
     }
 
 
-    private CalcNode parseConcatBlock() {
-        final List<CalcNode> nodes = new ArrayList<>();
+    private FormulaNode parseConcatBlock() {
+        final List<FormulaNode> nodes = new ArrayList<>();
         boolean isConstantValue = true;
         while (true) {
             if (ch == '(') {
                 nextChar();
+                this.level++;
                 nodes.add(parseExpression());
+                this.level--;
                 if (!eat(')')) {
-                    throw new CalculatorException(UNEXPECTED_TOKEN, ")");
+                    throw new FormulaException(UNEXPECTED_TOKEN, ")");
                 }
                 isConstantValue = false;
             } else if (ch == '\'') {
+                level++;
                 nodes.add(parseString());
+                level--;
             } else if (ch == '_') {
                 nodes.add(createSingleValueNode("overflow", "_"));
                 nextChar();
@@ -391,28 +453,28 @@ public final class Calculator {
             }
         }
         if (nodes.isEmpty()) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, "alphanumeric, ( or '");
+            throw new FormulaException(UNEXPECTED_TOKEN, "alphanumeric, ( or '");
         }
         if (nodes.size() == 1) {
             return nodes.get(0);
         }
         if (isConstantValue) {
-            return createSingleValueNode("constant-concat", concat(CalcNode.toValueList(nodes, k -> null)));
+            return createSingleValueNode("constant-concat", concat(FormulaNode.toValueList(nodes, k -> null)));
         }
-        return new CalcNode("concat", nodes.toArray(new CalcNode[0]), (objs, vars) -> concat(objs));
+        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars) -> concat(objs));
     }
 
-    private static CalcNode createSingleValueNode(final String nodeId, final Object value) {
-        return new CalcNode(nodeId, null, (objs, vars) -> Value.of(value));
+    private static FormulaNode createSingleValueNode(final String nodeId, final Object value) {
+        return new FormulaNode(nodeId, null, (objs, vars) -> Value.of(value));
     }
 
-    private CalcNode parseExplicitVariable() {
+    private FormulaNode parseExplicitVariable() {
         if (!eat('$')) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, '$');
+            throw new FormulaException(UNEXPECTED_TOKEN, '$');
         }
         //first char MUST be an alpha
         if (!CHARS.contains(ch)) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, "alpha");
+            throw new FormulaException(UNEXPECTED_TOKEN, "alpha");
         }
         final StringBuilder sb = new StringBuilder();
         while (CHARS_DIGITS.contains(ch)) {
@@ -421,7 +483,7 @@ public final class Calculator {
         }
         final String parsed = sb.toString();
 
-        return new CalcNode("var", null, (objs, vars) -> {
+        return new FormulaNode("var", null, (objs, vars) -> {
             final Value value = vars.call(parsed);
             if (value != null) {
                 return value;
@@ -431,9 +493,9 @@ public final class Calculator {
 
     }
 
-    private CalcNode parseAlphaNumericBlock() {
+    private FormulaNode parseAlphaNumericBlock() {
         if (!CHARS.contains(ch)) {
-            throw new CalculatorException(UNEXPECTED_TOKEN, "alpha");
+            throw new FormulaException(UNEXPECTED_TOKEN, "alpha");
         }
         //An alphanumeric block may either be a function (name) or a block of single-letter variables
         final StringBuilder sbFunction = new StringBuilder();
@@ -454,7 +516,7 @@ public final class Calculator {
         }
         final String functionParsed = sbFunction.toString();
 
-        if (ch == '(' && CalculatorFunction.findByName(functionParsed) != null) { //function
+        if (ch == '(' && FormulaFunction.findByName(functionParsed) != null) { //function
             return parseFunction(functionParsed);
         }
 
@@ -464,9 +526,9 @@ public final class Calculator {
     }
 
     @NonNull
-    private CalcNode parseSingleLetterVariableBlock(final String varBlock) {
+    private FormulaNode parseSingleLetterVariableBlock(final String varBlock) {
 
-        return new CalcNode("varblock", null, (objs, vars) -> {
+        return new FormulaNode("varblock", null, (objs, vars) -> {
             final ValueList varValues = new ValueList();
             for (char l : varBlock.toCharArray()) {
                 final Value value = vars.call("" + l);
@@ -483,9 +545,9 @@ public final class Calculator {
         });
     }
 
-    private CalculatorException createMissingVarsException(final Func1<String, Value> providedVars) {
-        //find out ALL variable values missing for this calculation for a better error message
-        final Set<String> missingVars = this.getNeededVariables();
+    private FormulaException createMissingVarsException(final Func1<String, Value> providedVars) {
+        //find out ALL variable values missing for this formula for a better error message
+        final Set<String> missingVars = new HashSet<>(this.getNeededVariables());
         final Iterator<String> it = missingVars.iterator();
         while (it.hasNext()) {
             if (providedVars.call(it.next()) != null) {
@@ -494,33 +556,33 @@ public final class Calculator {
         }
         final List<String> missingVarsOrdered = new ArrayList<>(missingVars);
         Collections.sort(missingVarsOrdered);
-        return new CalculatorException(MISSING_VARIABLE_VALUE, StringUtils.join(missingVarsOrdered, ", "));
+        return new FormulaException(MISSING_VARIABLE_VALUE, StringUtils.join(missingVarsOrdered, ", "));
     }
 
     //this method assumes that functionName is already parsed and ensured, and that ch is on opening parenthesis
     @NonNull
-    private CalcNode parseFunction(final String functionName) {
+    private FormulaNode parseFunction(final String functionName) {
         nextChar();
-        final List<CalcNode> params = new ArrayList<>();
+        final List<FormulaNode> params = new ArrayList<>();
         if (!eat(')')) {
             do {
                 params.add(parseExpression());
             } while (eat(';'));
             if (!eat(')')) {
-                throw new CalculatorException(UNEXPECTED_TOKEN, "; or )");
+                throw new FormulaException(UNEXPECTED_TOKEN, "; or )");
             }
         }
 
-        return new CalcNode("f:" + functionName, params.toArray(new CalcNode[0]),
+        return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
             (n, v) -> {
                 try {
-                    return Objects.requireNonNull(CalculatorFunction.findByName(functionName)).execute(n);
-                } catch (CalculatorException ce) {
+                    return Objects.requireNonNull(FormulaFunction.findByName(functionName)).execute(n);
+                } catch (FormulaException ce) {
                     ce.setExpression(expression);
                     ce.setFunction(functionName);
                     throw ce;
                 } catch (RuntimeException re) {
-                    final CalculatorException ce = new CalculatorException(re, OTHER, re.getMessage());
+                    final FormulaException ce = new FormulaException(re, OTHER, re.getMessage());
                     ce.setExpression(expression);
                     ce.setFunction(functionName);
                     throw ce;
@@ -530,7 +592,7 @@ public final class Calculator {
 
     }
 
-    /** concats values calculator-internally. Takes care of the spillover character _ */
+    /** concats values Formula-internally. Takes care of the spillover character _ */
     private static Value concat(final ValueList values) {
         values.checkCount(1, -1);
 

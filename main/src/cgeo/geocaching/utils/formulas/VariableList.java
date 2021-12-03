@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.TextUtils;
 
@@ -16,12 +16,17 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-/** Stores cache variables including view state (e.g. ordering). Also handles persistence (load-from/store-to DB) */
+/**
+ * Encapsulates a {@link VariableMap} but adds semantic of a list to it
+ * (e.g. it includes and maintains ordering).
+ *
+ * It also maintains modification state and provides hooks for loading and saving a Variable Lists state e.g. for persistence (load-from/store-to DB)
+ */
 public class VariableList {
 
     private static final char INVISIBLE_VAR_PREFIX = '_';
 
-    private final CalculatorMap calculatorMap = new CalculatorMap();
+    private final VariableMap variableMap = new VariableMap();
     private final List<String> variableList = new ArrayList<>();
     private final Map<String, Long> variablesSet = new HashMap<>();
 
@@ -41,13 +46,13 @@ public class VariableList {
 
     @Nullable
     public Value getValue(final String var) {
-        final CalculatorMap.CalculatorState state = getState(var);
+        final VariableMap.VariableState state = getState(var);
         return state == null ? null : state.getResult();
     }
 
     @Nullable
-    public CalculatorMap.CalculatorState getState(final String var) {
-        return calculatorMap.get(var);
+    public VariableMap.VariableState getState(final String var) {
+        return variableMap.get(var);
     }
 
     public int size() {
@@ -70,7 +75,7 @@ public class VariableList {
         if (variableList.isEmpty()) {
             return;
         }
-        calculatorMap.clear();
+        variableMap.clear();
         variableList.clear();
         variablesSet.clear();
         wasModified = true;
@@ -83,7 +88,7 @@ public class VariableList {
     @NonNull
     public String addVariable(@Nullable  final String var, @Nullable final String formula, final int ppos) {
         int pos = Math.min(variableList.size(), Math.max(0, ppos));
-        final String varname = var == null ? calculatorMap.createNonContainedKey("" + INVISIBLE_VAR_PREFIX) : var;
+        final String varname = var == null ? variableMap.createNonContainedKey("" + INVISIBLE_VAR_PREFIX) : var;
         if (variablesSet.containsKey(varname)) {
             final int removeIdx = removeVariable(varname);
 
@@ -91,7 +96,7 @@ public class VariableList {
                 pos--;
             }
         }
-        calculatorMap.put(varname, formula);
+        variableMap.put(varname, formula);
         variableList.add(pos, varname);
         variablesSet.put(varname, null);
         wasModified = true;
@@ -101,10 +106,10 @@ public class VariableList {
     /** returns true if there actually was a change (var is contained and formula is different), false otherwise */
     public boolean changeVariable(final String var, final String formula) {
         if (!variablesSet.containsKey(var) ||
-            Objects.equals(Objects.requireNonNull(calculatorMap.get(var)).getFormula(), formula)) {
+            Objects.equals(Objects.requireNonNull(variableMap.get(var)).getFormulaString(), formula)) {
             return false;
         }
-        calculatorMap.put(var, formula);
+        variableMap.put(var, formula);
         wasModified = true;
         return true;
     }
@@ -120,7 +125,7 @@ public class VariableList {
         }
         final int idx = variableList.indexOf(var);
         variableList.remove(idx);
-        calculatorMap.remove(var);
+        variableMap.remove(var);
         variablesSet.remove(var);
         wasModified = true;
         return idx;
@@ -135,7 +140,7 @@ public class VariableList {
     /** gets an alphabetically sorted list of all vars missing in any var for calculation */
     @NonNull
     public List<String> getAllMissingVars() {
-        final List<String> varsMissing = new ArrayList<>(calculatorMap.getVars());
+        final List<String> varsMissing = new ArrayList<>(variableMap.getVars());
         varsMissing.removeAll(variableList);
         TextUtils.sortListLocaleAware(varsMissing);
         return varsMissing;
@@ -148,7 +153,7 @@ public class VariableList {
                 //must be a database error, ignore duplicate variable
                 continue;
             }
-            calculatorMap.put(entry.varname, entry.formula);
+            variableMap.put(entry.varname, entry.formula);
             this.variableList.add(entry.varname);
             this.variablesSet.put(entry.varname, entry.id);
         }
@@ -168,7 +173,7 @@ public class VariableList {
         for (String v : this.variableList) {
             rows.add(new VariableEntry(
                 this.variablesSet.get(v) == null ? -1 : Objects.requireNonNull(this.variablesSet.get(v)),
-                v, Objects.requireNonNull(this.calculatorMap.get(v)).getFormula()));
+                v, Objects.requireNonNull(this.variableMap.get(v)).getFormulaString()));
         }
         return rows;
     }

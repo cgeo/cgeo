@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -14,21 +14,21 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * A CalculatorMap instance manages a set of {@link Calculator}s which are assigned to a variable each.
+ * A VariableMap instance manages a set of {@link Formula}s which are assigned to a variable each.
  *
- * It allows adding, changing and removing such variable-calculatorformula assignments and recalculates all variable values
- * on each change. It also detects errors such as cyclic dependencies and provides appropriate error messages using {@link CalculatorException}s
+ * It allows adding, changing and removing such variable-formula assignments and recalculates all variable values
+ * on each change. It also detects errors such as cyclic dependencies and provides appropriate error messages using {@link FormulaException}s
  * internationalized error message capacities.
  *
- * CalculatorMap automatically adds/removes and maintains empty state entries for all variables where existing formulas have a dependency to but are
+ * VariableMap automatically adds/removes and maintains empty state entries for all variables where existing formulas have a dependency to but are
  * not themself added to the map by the user.
  *
  * The method names and semantics of this class are loosely related to the Java {@link Map} interface. However, this class does NOT implement the exact semantics
  * of this interface.
  */
-public class CalculatorMap {
+public class VariableMap {
 
-    private final Map<String, CalculatorState> calculatorStateMap = new HashMap<>();
+    private final Map<String, VariableState> variableStateMap = new HashMap<>();
 
     /** State of a variable */
     public enum State {
@@ -40,10 +40,10 @@ public class CalculatorMap {
         CYCLE }
 
     /** Represents one variable-forumula assignment including its current state (e.g. current variable value or error state) */
-    public static class CalculatorState {
+    public static class VariableState {
         private final String var;
-        private String formula;
-        private Calculator calculator;
+        private String formulaString;
+        private Formula formula;
 
         private String error;
 
@@ -53,7 +53,7 @@ public class CalculatorMap {
         private final Set<String> needs = new HashSet<>();
         private final Set<String> isNeededBy = new HashSet<>();
 
-        private CalculatorState(final String var) {
+        private VariableState(final String var) {
             this.var = var;
         }
 
@@ -63,10 +63,10 @@ public class CalculatorMap {
             return var;
         }
 
-        /** Returns currently assigned Formula. May be null if this is an empty state */
+        /** Returns currently assigned Formula string. May be null if this is an empty state */
         @Nullable
-        public String getFormula() {
-            return formula;
+        public String getFormulaString() {
+            return formulaString;
         }
 
         /** returns state of this state */
@@ -75,19 +75,19 @@ public class CalculatorMap {
             return state;
         }
 
-        /** The Formula calculator. May be null if Formula is invalid / not parseable */
+        /** The Formula assigned to this var. May be null if Formula is invalid / not parseable */
         @Nullable
-        public Calculator getCalculator() {
-            return calculator;
+        public Formula getFormula() {
+            return formula;
         }
 
-        /** If State is {@link ERROR} or {@link CYCLE}, returns a user-displayable reason for this state. null otherwise */
+        /** If State is {@link State#ERROR} or {@link State#CYCLE}, returns a user-displayable reason for this state. null otherwise */
         @Nullable
         public String getError() {
             return error;
         }
 
-        /** If State is {@link OK} returns the calculated value for the formula. null otherwise */
+        /** If State is {@link State#OK} returns the calculated value for the formula. null otherwise */
         @Nullable
         public Value getResult() {
             return result;
@@ -103,10 +103,10 @@ public class CalculatorMap {
      */
     public void put(@NonNull final String var, @Nullable final String formula) {
         Objects.requireNonNull(var);
-        CalculatorState state = calculatorStateMap.get(var);
+        VariableState state = variableStateMap.get(var);
         if (state == null) {
-            state = new CalculatorState(var);
-            calculatorStateMap.put(var, state);
+            state = new VariableState(var);
+            variableStateMap.put(var, state);
         } else if (Objects.equals(formula, state.formula)) {
             //nothing to do
             return;
@@ -123,7 +123,7 @@ public class CalculatorMap {
      * This will be the case if another variable's formula depends on the removed variable.
      */
     public void remove(@NonNull final String var) {
-        final CalculatorState state = calculatorStateMap.get(var);
+        final VariableState state = variableStateMap.get(var);
         if (state == null) {
             return;
         }
@@ -132,12 +132,12 @@ public class CalculatorMap {
         recalculate(var);
 
         if (state.isNeededBy.isEmpty()) {
-            calculatorStateMap.remove(var);
+            variableStateMap.remove(var);
         }
     }
 
     public void clear() {
-        calculatorStateMap.clear();
+        variableStateMap.clear();
 
     }
 
@@ -150,23 +150,23 @@ public class CalculatorMap {
     /** returns a set of all vars currently present in this map. This includes vars with empty state (created due to existing dependencies) */
     @NonNull
     public Set<String> getVars() {
-        return calculatorStateMap.keySet();
+        return variableStateMap.keySet();
     }
 
 
     public boolean containsKey(final String var) {
-        return calculatorStateMap.containsKey(var);
+        return variableStateMap.containsKey(var);
     }
 
     /** returns a state of a var existing in this instance */
     @Nullable
-    public CalculatorState get(final String var) {
-        return calculatorStateMap.get(var);
+    public VariableState get(final String var) {
+        return variableStateMap.get(var);
     }
 
     /** returns number of vars in this instance */
     public int size() {
-        return calculatorStateMap.size();
+        return variableStateMap.size();
     }
 
     public String createNonContainedKey(final String prefix) {
@@ -178,41 +178,41 @@ public class CalculatorMap {
     }
 
 
-    private void setFormula(final String var, final String formula) {
-        final CalculatorState state = Objects.requireNonNull(get(var));
-        state.formula = formula;
+    private void setFormula(final String var, final String formulaString) {
+        final VariableState state = Objects.requireNonNull(get(var));
+        state.formulaString = formulaString;
         state.error = null;
         state.state = State.OK;
-        state.calculator = null;
+        state.formula = null;
         state.result = null;
         try {
-            state.calculator = Calculator.compile(formula);
-        } catch (CalculatorException ce) {
+            state.formula = Formula.compile(formulaString);
+        } catch (FormulaException ce) {
             state.state = State.ERROR;
             state.error = ce.getUserDisplayableString();
         }
     }
 
     private void recalculateDependencies(final String var) {
-        final CalculatorState state = Objects.requireNonNull(get(var));
+        final VariableState state = Objects.requireNonNull(get(var));
         final Set<String> newNeeds;
-        if (state.calculator == null) {
+        if (state.formula == null) {
             newNeeds = Collections.emptySet();
         } else {
-            newNeeds = state.calculator.getNeededVariables();
+            newNeeds = state.formula.getNeededVariables();
         }
         for (String v : state.needs) {
             if (!newNeeds.contains(v)) {
-                final CalculatorState neededState = Objects.requireNonNull(get(v));
+                final VariableState neededState = Objects.requireNonNull(get(v));
                 neededState.isNeededBy.remove(var);
                 if (neededState.isNeededBy.isEmpty() && neededState.formula == null) {
-                    calculatorStateMap.remove(v);
+                    variableStateMap.remove(v);
                 }
             }
         }
         for (String v : newNeeds) {
             if (!state.needs.contains(v)) {
-                CalculatorState neededState = get(v);
+                VariableState neededState = get(v);
                 if (neededState == null) {
                     put(v, null);
                     neededState = Objects.requireNonNull(get(v));
@@ -225,7 +225,7 @@ public class CalculatorMap {
     }
 
     private void recalculate(final String var) {
-        final CalculatorState state = Objects.requireNonNull(get(var));
+        final VariableState state = Objects.requireNonNull(get(var));
         state.state = State.OK;
         final List<List<String>> cyclesFound = new ArrayList<>();
         recalculate(state, var, true, new LinkedList<>(), cyclesFound);
@@ -235,10 +235,10 @@ public class CalculatorMap {
             for (List<String> cycle : cyclesFound) {
                 int idx = 0;
                 for (String cv : cycle) {
-                    final CalculatorState s = Objects.requireNonNull(get(cv));
+                    final VariableState s = Objects.requireNonNull(get(cv));
                     s.state = State.CYCLE;
                     s.result = null;
-                    s.error = CalculatorException.getUserDisplayableMessage(CalculatorException.ErrorType.CYCLIC_DEPENDENCY, getCyclicString(cycle, idx++));
+                    s.error = FormulaException.getUserDisplayableMessage(FormulaException.ErrorType.CYCLIC_DEPENDENCY, getCyclicString(cycle, idx++));
                     markError.addAll(s.isNeededBy);
                 }
             }
@@ -256,7 +256,7 @@ public class CalculatorMap {
         return sb.toString();
     }
 
-    private void recalculate(final CalculatorState state, final String var, final boolean start, final LinkedList<String> treePath, final List<List<String>> cyclesFound) {
+    private void recalculate(final VariableState state, final String var, final boolean start, final LinkedList<String> treePath, final List<List<String>> cyclesFound) {
         if (!start && var.equals(state.var)) {
             //new CYCLE found!
             cyclesFound.add(new ArrayList<>(treePath));
@@ -272,19 +272,19 @@ public class CalculatorMap {
         }
     }
 
-    private boolean recalculateSingle(final CalculatorState state, final boolean forceError) {
+    private boolean recalculateSingle(final VariableState state, final boolean forceError) {
 
-        if (state.calculator == null) {
+        if (state.formula == null) {
             state.state = State.ERROR;
             if (state.error == null) {
-                state.error = CalculatorException.getUserDisplayableMessage(CalculatorException.ErrorType.OTHER, "-");
+                state.error = FormulaException.getUserDisplayableMessage(FormulaException.ErrorType.OTHER, "-");
             }
             state.result = null;
         } else {
 
             boolean hasCycleDep = false;
             for (String n : state.needs) {
-                final CalculatorState cs = Objects.requireNonNull(get(n));
+                final VariableState cs = Objects.requireNonNull(get(n));
                 if (cs.state == State.CYCLE) {
                     hasCycleDep = true;
                     break;
@@ -294,16 +294,16 @@ public class CalculatorMap {
                 return true;
             }
             try {
-                state.result = state.calculator.evaluate(
-                    v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null); //may throw CalculatorException
+                state.result = state.formula.evaluate(
+                    v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null); //may throw FormulaException
                 if (forceError) {
                     state.state = State.ERROR;
-                    state.error = CalculatorException.getUserDisplayableMessage(CalculatorException.ErrorType.OTHER, "-");
+                    state.error = FormulaException.getUserDisplayableMessage(FormulaException.ErrorType.OTHER, "-");
                 } else {
                     state.state = State.OK;
                     state.error = null;
                 }
-            } catch (CalculatorException ce) {
+            } catch (FormulaException ce) {
                 state.result = null;
                 state.state = State.ERROR;
                 state.error = ce.getUserDisplayableString();
@@ -313,7 +313,7 @@ public class CalculatorMap {
     }
 
     private void markError(final String var) {
-        final CalculatorState state = Objects.requireNonNull(get(var));
+        final VariableState state = Objects.requireNonNull(get(var));
         if (state.state == State.CYCLE) {
             return;
         }

@@ -8,8 +8,8 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.calc.CalculatorMap;
-import cgeo.geocaching.utils.calc.CalculatorUtils;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
+import cgeo.geocaching.utils.formulas.VariableMap;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -128,12 +128,12 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             toScan.add(w.getNote());
         }
         final List<String> existingFormulas = new ArrayList<>();
-        for (CalculatorMap.CalculatorState state : adapter.getItems()) {
-            if (state != null && !StringUtils.isBlank(state.getFormula())) {
-                existingFormulas.add(state.getFormula());
+        for (VariableMap.VariableState state : adapter.getItems()) {
+            if (state != null && !StringUtils.isBlank(state.getFormulaString())) {
+                existingFormulas.add(state.getFormulaString());
             }
         }
-        final List<String> patterns = CalculatorUtils.scanForFormulas(toScan, existingFormulas);
+        final List<String> patterns = FormulaUtils.scanForFormulas(toScan, existingFormulas);
         SimpleDialog.of(activity).setTitle(TextParam.text("Choose found pattern"))
             .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
                 for (String s : set) {

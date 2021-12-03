@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.TextUtils;
 
@@ -13,9 +13,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Holds implementations for functions in calculator
+ * Holds implementations for functions in Formula
  */
-public class CalculatorUtils {
+public class FormulaUtils {
 
     private static final Random RANDOM = new Random(System.currentTimeMillis());
 
@@ -27,7 +27,7 @@ public class CalculatorUtils {
         Pattern.compile("^[a-z]+:[0-9]+$") // URL endings
     };
 
-    private CalculatorUtils() {
+    private FormulaUtils() {
         //no instance
     }
 

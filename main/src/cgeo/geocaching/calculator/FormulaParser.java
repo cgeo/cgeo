@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.MatcherWrapper;
-import cgeo.geocaching.utils.calc.Calculator;
+import cgeo.geocaching.utils.formulas.Formula;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -32,7 +32,7 @@ public final class FormulaParser {
     public  static final String WPC_DELIM_STRING = "|";
     public  static final String WPC_DELIM_PATTERN_STRING = "\\|";
 
-    private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + Calculator.VALID_OPERATOR_PATTERN + "A-Z\\d]+";
+    private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + Formula.VALID_OPERATOR_PATTERN + "A-Z\\d]+";
     private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(" + COORD_FORMULA_PATTERN_STRING + "), (" + COORD_FORMULA_PATTERN_STRING + ")");
     private static final Pattern PATTERN_BAD_BLANK_DOT = Pattern.compile("(" + COORD_FORMULA_PATTERN_STRING + ")\\. (" + COORD_FORMULA_PATTERN_STRING + ")");
 

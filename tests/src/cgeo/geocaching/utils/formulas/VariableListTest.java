@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -112,7 +112,7 @@ public class VariableListTest {
         String currentVar = null;
         for (String p : expectedParams) {
             if (p.startsWith("f:")) {
-                assertThat(Objects.requireNonNull(cv.getState(currentVar)).getFormula()).as("Formula for var '" + currentVar + "'").isEqualTo(p.substring(2));
+                assertThat(Objects.requireNonNull(cv.getState(currentVar)).getFormulaString()).as("Formula for var '" + currentVar + "'").isEqualTo(p.substring(2));
             } else if (p.startsWith("m:")) {
                 missingVars.add(p.substring(2));
             } else {

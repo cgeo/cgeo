@@ -20,7 +20,7 @@ import static cgeo.geocaching.R.id.PlainFormat;
 import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
 import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
-import static cgeo.geocaching.utils.calc.Calculator.VALID_OPERATOR_PATTERN;
+import static cgeo.geocaching.utils.formulas.Formula.VALID_OPERATOR_PATTERN;
 
 import android.app.Dialog;
 import android.os.Bundle;

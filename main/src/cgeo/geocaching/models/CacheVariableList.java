@@ -1,7 +1,7 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.calc.VariableList;
+import cgeo.geocaching.utils.formulas.VariableList;
 
 import androidx.annotation.NonNull;
 
