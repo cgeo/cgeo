@@ -1,5 +1,6 @@
 ### General
 - Cambiado: Introducción a la navegación inferior para acceder directamente a las pantallas de c:geo's más usadas, reemplazando la vieja pantalla principal
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Mapa
 - Corregido: Al cargar archivos GPX que contienen múltiples pistas las muestran como separadas, sin conexión
