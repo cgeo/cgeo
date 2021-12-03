@@ -42,6 +42,7 @@ import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.os.Bundle;
 
@@ -83,7 +84,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      * Pattern for GC codes
      */
     @NonNull
-    private static final Pattern PATTERN_GC_CODE = Pattern.compile("GC[0-9A-Z&&[^ILOSU]]+", Pattern.CASE_INSENSITIVE);
+    private static final Pattern PATTERN_GC_CODE = Pattern.compile(GCConstants.GEOCODE_PATTERN, Pattern.CASE_INSENSITIVE);
 
     private GCConnector() {
         // singleton
@@ -435,16 +436,15 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     @Nullable
     public String getGeocodeFromUrl(@NonNull final String url) {
-        final String noQueryString = StringUtils.substringBefore(url, "?");
         // coord.info URLs
-        final String afterCoord = StringUtils.substringAfterLast(noQueryString, "coord.info/");
-        if (canHandle(afterCoord)) {
-            return afterCoord;
+        final String coordinfoUrl = TextUtils.getMatch(url, Pattern.compile("coord.info/"+GCConstants.GEOCODE_PATTERN, Pattern.CASE_INSENSITIVE), false, "");
+        if (canHandle(coordinfoUrl)) {
+            return coordinfoUrl;
         }
         // expanded geocaching.com URLs
-        final String afterGeocache = StringUtils.substringBetween(noQueryString, "/geocache/", "_");
-        if (afterGeocache != null && canHandle(afterGeocache)) {
-            return afterGeocache;
+        final String geocachingcomUrl = TextUtils.getMatch(url, Pattern.compile("geocache/"+GCConstants.GEOCODE_PATTERN, Pattern.CASE_INSENSITIVE), false, "");
+        if (canHandle(geocachingcomUrl)) {
+            return geocachingcomUrl;
         }
         return null;
     }
