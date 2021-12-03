@@ -6,6 +6,7 @@ import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -37,7 +38,7 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
     public void onResume() {
         super.onResume();
         getActivity().setTitle(R.string.settings_title_navigation);
-        initPublicFolders(this);
+        initPublicFolders(this, ((SettingsActivity) getActivity()).getCsah());
 
         final Preference tool1 = findPreference(getString(R.string.pref_defaultNavigationTool));
         assert tool1 != null;

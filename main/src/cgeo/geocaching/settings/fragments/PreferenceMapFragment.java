@@ -6,8 +6,10 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.settings.ColorpickerPreference;
 import cgeo.geocaching.settings.DialogPrefFragCompat;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.TemplateTextPreference;
 import cgeo.geocaching.utils.ShareUtils;
+
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
@@ -42,7 +44,7 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
 
-        initPublicFolders(this);
+        initPublicFolders(this, ((SettingsActivity) getActivity()).getCsah());
     }
 
     @Override
