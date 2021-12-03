@@ -14,6 +14,7 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
 import android.app.backup.BackupManager;
 import android.content.Context;
@@ -24,6 +25,8 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.preference.PreferenceFragmentCompat;
+
+import java.util.List;
 
 /**
  * An {@link AppCompatActivity} that presents a set of application settings. On
@@ -59,7 +62,14 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         this.contentStorageHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CSAH))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder -> {
-                //getPreference(folder.getPrefKeyId()).setSummary(folder.toUserDisplayableValue());
+
+                final List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                for (Fragment f : fragments) {
+                    if (f instanceof PreferenceFragmentCompat) {
+                        initPublicFolders((PreferenceFragmentCompat) f, contentStorageHelper);
+                    }
+                }
+
                 if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
                     RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
                 }
@@ -158,4 +168,24 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         title = pref.getTitle();
         return true;
     }
+
+    public ContentStorageActivityHelper getCsah() {
+        return contentStorageHelper;
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        /* @todo - still needed here?
+        if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
+        */
+
+    }
+
 }
