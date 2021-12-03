@@ -151,6 +151,12 @@ public abstract class AbstractConnector implements IConnector {
         return null;
     }
 
+    @Override
+    @Nullable
+    public String getGeocodeFromText(@NonNull final String text) {
+        return null;
+    }
+
     @NonNull
     protected abstract String getCacheUrlPrefix();
 

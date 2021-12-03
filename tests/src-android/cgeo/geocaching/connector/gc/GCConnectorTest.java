@@ -110,7 +110,22 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
 
         // uppercase is managed in ConnectorFactory
         assertThat(GCConnector.getInstance().getGeocodeFromUrl("http://coord.info/gc77")).isEqualTo("gc77");
+    }
 
+    public static void testGetGeocodeFromText() {
+        // Matching a geocode in text
+        assertThat(GCConnector.getInstance().getGeocodeFromText("https://coord.info/GC123 tset")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("GC123asddd")).isNull();
+        assertThat(GCConnector.getInstance().getGeocodeFromText("Text GC123")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("GC123")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("GC123 Text")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("asdf GC123 asdf")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("Bla GC123tset")).isNull();
+        assertThat(GCConnector.getInstance().getGeocodeFromText("I can't find GC123 do you have a hint?")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("Check out GC123.")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("CheckoutGC123.")).isNull();
+        assertThat(GCConnector.getInstance().getGeocodeFromText(">GC123<")).isEqualTo("GC123");
+        assertThat(GCConnector.getInstance().getGeocodeFromText("Do you have a hint for GC123?")).isEqualTo("GC123");
     }
 
     public static void testHandledGeocodes() {

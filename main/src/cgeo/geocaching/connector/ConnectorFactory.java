@@ -368,6 +368,20 @@ public final class ConnectorFactory {
         return null;
     }
 
+    @Nullable
+    public static String getGeocodeFromText(@Nullable final String text) {
+        if (text == null) {
+            return null;
+        }
+        for (final IConnector connector : CONNECTORS) {
+            final String geocode = connector.getGeocodeFromText(text);
+            if (StringUtils.isNotBlank(geocode)) {
+                return StringUtils.upperCase(geocode);
+            }
+        }
+        return null;
+    }
+
     @NonNull
     public static Collection<TrackableConnector> getTrackableConnectors() {
         return TRACKABLE_CONNECTORS;

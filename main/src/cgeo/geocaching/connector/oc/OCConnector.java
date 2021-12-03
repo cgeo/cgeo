@@ -5,11 +5,13 @@ import cgeo.geocaching.connector.AbstractConnector;
 import cgeo.geocaching.connector.UserAction;
 import cgeo.geocaching.connector.capability.Smiley;
 import cgeo.geocaching.connector.capability.SmileyCapability;
+import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.log.LogEntry;
 import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.TextUtils;
 
 import android.net.Uri;
 
@@ -176,6 +178,15 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
         // host.tld/viewcache.php?wp=geocode
         final String secondLevel = path.startsWith("/viewcache.php") ? uri.getQueryParameter("wp") : "";
         return (secondLevel != null && canHandle(secondLevel)) ? secondLevel : super.getGeocodeFromUrl(url);
+    }
+
+    @Override
+    @Nullable
+    public String getGeocodeFromText(@NonNull final String text) {
+        // Text containing a Geocode
+        final String geocodeInText = TextUtils.getMatch(text, Pattern.compile("((https?://|)(www.|)opencach[^\\s/$.?#].[^\\s]*)", Pattern.CASE_INSENSITIVE), false, "");
+        String a = getGeocodeFromUrl(geocodeInText);
+        return a;
     }
 
     @Override

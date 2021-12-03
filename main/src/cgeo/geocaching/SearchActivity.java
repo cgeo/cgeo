@@ -240,10 +240,17 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
      */
     private void handlePotentialClipboardGeocode() {
         binding.geocodeInputLayout.postDelayed(() -> {
-            final String potentialGeocode = ClipboardUtils.getText();
+            final String clipboardText = ClipboardUtils.getText();
 
-            if (ConnectorFactory.getConnector(potentialGeocode) instanceof ISearchByGeocode) {
-                binding.geocode.setText(potentialGeocode);
+            String geocode;
+
+            if (ConnectorFactory.getConnector(clipboardText) instanceof ISearchByGeocode) {
+                geocode = clipboardText;
+            } else {
+                geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
+            }
+            if (geocode != null && !geocode.isEmpty()) {
+                binding.geocode.setText(geocode);
                 binding.geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
 
                 // clear hint if text input get changed

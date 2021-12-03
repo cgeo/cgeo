@@ -450,6 +450,17 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @Nullable
+    public String getGeocodeFromText(@NonNull final String text) {
+        // Text containing a Geocode
+        final String geocodeInText = TextUtils.getMatch(text, Pattern.compile(GCConstants.GEOCODE_PATTERN, Pattern.CASE_INSENSITIVE), false, "");
+        if (canHandle(geocodeInText)) {
+            return geocodeInText;
+        }
+        return null;
+    }
+
+    @Override
     public boolean isActive() {
         return Settings.isGCConnectorActive();
     }

@@ -3,6 +3,7 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.connector.IConnector;
+import cgeo.geocaching.connector.gc.GCConnector;
 
 import java.util.Set;
 
@@ -31,6 +32,16 @@ public class OCConnectorTest extends TestCase {
         final IConnector connector = ConnectorFactory.getConnector("OC0028");
         assertThat(connector.getGeocodeFromUrl("http://opencaching.de/OC0028")).isEqualTo("OC0028");
         assertThat(connector.getGeocodeFromUrl("http://www.opencaching.de/OC0028")).isEqualTo("OC0028");
+    }
+
+    public static void testGetGeocodeFromTextDe() throws Exception {
+        final IConnector connector = ConnectorFactory.getConnector("OC0028");
+        assertThat(connector.getGeocodeFromText("Bla http://www.opencaching.de/OC0028 Test")).isEqualTo("OC0028");
+    }
+
+    public static void testGetGeocodeFromTextUk() throws Exception {
+        final IConnector connector = ConnectorFactory.getConnector("OK04F8");
+        assertThat(connector.getGeocodeFromText("Bla https://opencache.uk/viewcache.php?wp=OK04F8 Test")).isEqualTo("OK04F8");
     }
 
     public static void testGetGeocodeFromInternalId() {
