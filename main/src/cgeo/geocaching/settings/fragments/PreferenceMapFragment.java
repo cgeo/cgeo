@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.settings.ColorpickerPreference;
 import cgeo.geocaching.settings.DialogPrefFragCompat;
 import cgeo.geocaching.settings.TemplateTextPreference;
 import cgeo.geocaching.utils.ShareUtils;
@@ -47,7 +46,7 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
 
     @Override
     public void onDisplayPreferenceDialog(final Preference preference) {
-        if (preference instanceof ColorpickerPreference || preference instanceof TemplateTextPreference) {
+        if (preference instanceof TemplateTextPreference) {
             final DialogFragment dialogFragment = DialogPrefFragCompat.newInstance(preference.getKey());
             // FIXME: Don't use setTargetFragment
             // Instead of using a target fragment to pass results, the fragment requesting a result should use
