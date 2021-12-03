@@ -36,7 +36,7 @@ public final class GCConstants {
     static final Pattern PATTERN_HINT = Pattern.compile("<div id=\"div_hint\"[^>]*>(.*?)</div>", Pattern.DOTALL);
     static final Pattern PATTERN_DESC = Pattern.compile("<span id=\"ctl00_ContentBody_LongDescription\">(.*?)</span>\\s*</div>\\s*<(p|div) id=\"ctl00_ContentBody", Pattern.DOTALL);
     static final Pattern PATTERN_SHORTDESC = Pattern.compile("<span id=\"ctl00_ContentBody_ShortDescription\">(.*?)</span>\\s*</div>", Pattern.DOTALL);
-    static final Pattern PATTERN_GEOCODE = Pattern.compile("class=\"CoordInfoCode\">"+GEOCODE_PATTERN+"</span>");
+    static final Pattern PATTERN_GEOCODE = Pattern.compile("class=\"CoordInfoCode\">" + GEOCODE_PATTERN + "</span>");
     static final Pattern PATTERN_GUID = Pattern.compile(Pattern.quote("&wid=") + "([0-9a-z\\-]+)" + Pattern.quote("&"));
     static final Pattern PATTERN_SIZE = Pattern.compile("/icons/container/([a-z_]+)\\.");
     static final Pattern PATTERN_LATLON = Pattern.compile("<span id=\"uxLatLon\"[^>]*>(.*?)</span>");

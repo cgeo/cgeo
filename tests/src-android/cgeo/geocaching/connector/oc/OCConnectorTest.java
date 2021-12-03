@@ -3,7 +3,6 @@ package cgeo.geocaching.connector.oc;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.ConnectorFactoryTest;
 import cgeo.geocaching.connector.IConnector;
-import cgeo.geocaching.connector.gc.GCConnector;
 
 import java.util.Set;
 
