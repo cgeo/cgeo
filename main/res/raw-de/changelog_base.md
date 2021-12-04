@@ -1,5 +1,6 @@
 ### Allgemein
 - Änderung: Navigation am unteren Bildschirmrand für direkten Zugriff auf die meistgenutzten Bereiche von c:geo, ersetzt den bisherigen Startbildschirm
+- Einstellungen technisch komplett überarbeitet, um sie an aktuelle Android-Spezifikationen anzupassen (in Arbeit, bitte Geduld)
 
 ### Karte
 - Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt

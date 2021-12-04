@@ -1,5 +1,6 @@
 ### Všeobecné
 - Zmena: Zavádza sa navigácia naspodku na priamy prístup k najpoužívanejším obrazovkám, nahrádza sa stará hlavná obrazovka
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Mapa
 - Oprava: Pri načítaní súborov GPX obsahujúcich viac trás ich zobrazuje samostatne, neprepojené trasy

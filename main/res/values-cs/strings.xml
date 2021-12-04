@@ -1831,6 +1831,7 @@
     <string name="attribute_historic_no">Není opuštěnou budovou / Zříceninou</string>
     <string name="attribute_blind_people_yes">Postižení: Zrakové</string>
     <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
+    <string name="attribute_unknown">Neznámý atribut</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Potřebné nástroje</string>
     <string name="cat_type">Typ</string>

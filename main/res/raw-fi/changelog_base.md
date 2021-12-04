@@ -1,5 +1,6 @@
 ### Yleiset
 - Muutos: Esitellään alhaalla sijaitseva navigaatio c:geon useimmin käytettyihin toimintoon pääsemiseksi, korvaten vanhan päävalikon
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Kartta
 - Korjaus: ladatessa useita polkuja sisältäviä GPX-tiedostoja näytetään ne erillisinä, yhdistämättöminä kappaleina

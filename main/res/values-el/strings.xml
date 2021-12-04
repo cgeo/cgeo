@@ -1799,6 +1799,7 @@
     <string name="attribute_historic_no">Μη εγκαταλελειμμένο κτίριο / Μη ερείπιο</string>
     <string name="attribute_blind_people_yes">Αναπηρία: Τυφλός</string>
     <string name="attribute_blind_people_no">Όχι αναπηρία: Τυφλός</string>
+    <string name="attribute_unknown">Άγνωστο χαρακτηριστικό</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Απαιτούνται εργαλεία</string>
     <string name="cat_type">Τύπος</string>

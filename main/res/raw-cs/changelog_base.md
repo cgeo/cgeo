@@ -1,5 +1,6 @@
 ### Obecné
 - Změna: Představujeme spodní navigaci pro přímý přístup k nejpoužívanějším obrazovkám c:geo, která nahrazuje starou hlavní obrazovku
+- Přepracování nastavení na aktuální specifikace systému Android (právě probíhá, mějte prosím trpělivost)
 
 ### Mapa
 - Oprava: Při načítání souborů GPX obsahujících více stop se zobrazí jako samostatné, nespojené stopy

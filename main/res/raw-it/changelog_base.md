@@ -1,5 +1,6 @@
 ### Generale
 - Cambio: Introduzione della funzione di navigazione nella parte inferiore per l'accesso diretto alle schermate più utilizzate di c:geo, sostituendo il vecchio schermo principale
+- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Mappa
 - Corretto: Caricando file GPX contenenti più tracce, queste vengono visualizzate come tracce separate non collegate tra loro
