@@ -56,47 +56,29 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     public static final String ACTION_CLIPBOARD = "clipboard";
 
     @Override
+    @SuppressWarnings("PMD.NPathComplexity") // split up would not help readability
     public final void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         final Intent intent = getIntent();
 
-        // search suggestion for a cache
         if (Intents.ACTION_GEOCACHE.equals(intent.getAction())) {
+            // search suggestion for a cache
             CacheDetailActivity.startActivity(this, intent.getStringExtra(SearchManager.QUERY));
             finish();
             return;
-        }
-
-        // search suggestion for a trackable
-        if (Intents.ACTION_TRACKABLE.equals(intent.getAction())) {
+        } else if (Intents.ACTION_TRACKABLE.equals(intent.getAction())) {
+            // search suggestion for a trackable
             TrackableActivity.startActivity(this, null, intent.getStringExtra(SearchManager.QUERY), null, null, TrackableBrand.UNKNOWN.getId());
             finish();
             return;
-        }
-
-        // search query, from search toolbar or from google now
-        if (Intent.ACTION_SEARCH.equals(intent.getAction()) || GOOGLE_NOW_SEARCH_ACTION.equals(intent.getAction())) {
+        } else if (Intent.ACTION_SEARCH.equals(intent.getAction()) || GOOGLE_NOW_SEARCH_ACTION.equals(intent.getAction()) || ACTION_CLIPBOARD.equals(intent.getAction())) {
+            // search query, from search toolbar or from google now
             hideKeyboard();
             final String query = intent.getStringExtra(SearchManager.QUERY);
-            final boolean keywordSearch = intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true);
+            final boolean isClipboardSearch = ACTION_CLIPBOARD.equals(intent.getAction());
+            final boolean keywordSearch = (!isClipboardSearch && intent.getBooleanExtra(Intents.EXTRA_KEYWORD_SEARCH, true));
 
-            if (instantSearch(query, keywordSearch)) {
-                setResult(RESULT_OK);
-            } else {
-                // send intent back so query string is known
-                setResult(RESULT_CANCELED, intent);
-            }
-            finish();
-
-            return;
-        }
-
-        // search query, from search toolbar or from google now
-        if (ACTION_CLIPBOARD.equals(intent.getAction())) {
-            hideKeyboard();
-            final String query = intent.getStringExtra(SearchManager.QUERY);
-
-            if (instantSearch(query, false, true)) {
+            if (instantSearch(query, keywordSearch, isClipboardSearch)) {
                 setResult(RESULT_OK);
             } else {
                 // send intent back so query string is known
@@ -159,10 +141,6 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         return MENU_SEARCH;
     }
 
-    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch) {
-        return instantSearch(nonTrimmedQuery, keywordSearch, false);
-    }
-
     /**
      * Performs a search for query either as geocode, trackable code or keyword
      *
@@ -170,38 +148,96 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
      *            String to search for
      * @param keywordSearch
      *            Set to true if keyword search should be performed if query isn't GC or TB
+     * @param isClipboardSearch
+     *            Set to true if search should try to extract a geocode from the search string
      * @return true if a search was performed, else false
      */
-    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch, final boolean clipboardSearch) {
+    private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch, final boolean isClipboardSearch) {
         final String query = StringUtils.trim(nonTrimmedQuery);
+
+        // try to interpret query as geocode
+        if (instantSearchGeocache(query, isClipboardSearch)) {
+            return true;
+        }
+
+        // try to interpret query as geocode
+        if (instantSearchTrackable(query, keywordSearch)) {
+            return true;
+        }
+
+        // keyword fallback, if desired by caller
+        if (keywordSearch) {
+            CacheListActivity.startActivityKeyword(this, query);
+            ActivityMixin.finishWithFadeTransition(this);
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * try to interpret query as a geocode
+     *
+     * @param query
+     *            Trimmed string to search for
+     * @param isClipboardSearch
+     *            Set to true if search should try to extract a geocode from the search string
+     * @return  true if geocache was found
+     */
+    private boolean instantSearchGeocache(final String query, final Boolean isClipboardSearch) {
+        IConnector connector = null;
 
         // first check if this was a scanned URL
         String geocode = ConnectorFactory.getGeocodeFromURL(query);
+        if (!StringUtils.isEmpty(geocode)) {
+            connector = ConnectorFactory.getConnector(geocode);
+        }
 
         // otherwise see if this is a pure geocode
-        if (StringUtils.isEmpty(geocode)) {
-            geocode = StringUtils.upperCase(StringUtils.trim(query));
+        if (!(connector instanceof ISearchByGeocode)) {
+            geocode = StringUtils.upperCase(query);
+            connector = ConnectorFactory.getConnector(geocode);
         }
 
-        if (clipboardSearch) {
+        // otherwise try to extract a geocode from text
+        if (!(connector instanceof ISearchByGeocode) && isClipboardSearch) {
             geocode = ConnectorFactory.getGeocodeFromText(query);
+            connector = ConnectorFactory.getConnector(geocode);
         }
 
-        final IConnector connector = ConnectorFactory.getConnector(geocode);
+        // Finally if a geocache was found load it
         if (connector instanceof ISearchByGeocode && geocode != null) {
             CacheDetailActivity.startActivity(this, geocode.toUpperCase(Locale.US));
             return true;
         }
 
-        // Check if the query is a TB code
-        TrackableBrand trackableBrand = ConnectorFactory.getTrackableConnector(geocode).getBrand();
+        return false;
+    }
 
-        // check if the query contains a TB code
+    /**
+     * try to interpret query as trackable
+     *
+     * @param query
+     *            Trimmed string to search for
+     * @param keywordSearch
+     *            Set to true if keyword search should be performed if query isn't GC or TB
+     * @return  true if trackable was found
+     */
+    private boolean instantSearchTrackable(final String query, final Boolean keywordSearch) {
+        String trackableCode = "";
+
+        // Check if the query is a TB code
+        TrackableBrand trackableBrand = ConnectorFactory.getTrackableConnector(query).getBrand();
+        if (trackableBrand != TrackableBrand.UNKNOWN) {
+            trackableCode = query;
+        }
+
+        // otherwise check if the query contains a TB code
         if (trackableBrand == TrackableBrand.UNKNOWN) {
             final String tbCode = ConnectorFactory.getTrackableFromURL(query);
             if (StringUtils.isNotBlank(tbCode)) {
                 trackableBrand = ConnectorFactory.getTrackableConnector(tbCode).getBrand();
-                geocode = tbCode;
+                trackableCode = tbCode;
             }
         }
 
@@ -210,24 +246,19 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
             final TrackableTrackingCode tbTrackingCode = ConnectorFactory.getTrackableTrackingCodeFromURL(query);
             if (!tbTrackingCode.isEmpty()) {
                 trackableBrand = tbTrackingCode.brand;
-                geocode = tbTrackingCode.trackingCode;
+                trackableCode = tbTrackingCode.trackingCode;
             }
         }
 
-        if (trackableBrand != TrackableBrand.UNKNOWN && geocode != null) {
+        // Finally if a trackable was found load it
+        if (trackableBrand != TrackableBrand.UNKNOWN && !StringUtils.isEmpty(trackableCode)) {
             final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode.toUpperCase(Locale.US));
+            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableCode.toUpperCase(Locale.US));
             trackablesIntent.putExtra(Intents.EXTRA_BRAND, trackableBrand.getId());
             if (keywordSearch) { // keyword fallback, if desired by caller
-                trackablesIntent.putExtra(Intents.EXTRA_KEYWORD, query.trim());
+                trackablesIntent.putExtra(Intents.EXTRA_KEYWORD, query);
             }
             startActivity(trackablesIntent);
-            return true;
-        }
-
-        if (keywordSearch) { // keyword fallback, if desired by caller
-            CacheListActivity.startActivityKeyword(this, query.trim());
-            ActivityMixin.finishWithFadeTransition(this);
             return true;
         }
 
