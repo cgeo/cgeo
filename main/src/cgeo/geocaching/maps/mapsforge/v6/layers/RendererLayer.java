@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import org.mapsforge.core.graphics.GraphicFactory;
+import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.Layer;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
@@ -15,7 +16,7 @@ public class RendererLayer implements ITileLayer {
 
     public RendererLayer(final TileCache tileCache, final MapFile mapDataStore, final IMapViewPosition mapViewPosition, final boolean isTransparent, final boolean renderLabels, final boolean cacheLabels, final GraphicFactory graphicFactory) {
         this.mapDataStore = mapDataStore;
-        tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory);
+        tileLayer = new TileRendererLayer(tileCache, mapDataStore, mapViewPosition, isTransparent, renderLabels, cacheLabels, graphicFactory, HillShadingLayer.getHillsRenderConfig());
     }
 
     @Override

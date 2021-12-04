@@ -2282,4 +2282,12 @@ public class Settings {
         return getBoolean(R.string.pref_rot13_hint, true);
     }
 
+    public static double getMapShadingScale() {
+        return ((double) getInt(R.string.pref_mapShadingScale, 100)) / 100;
+    }
+
+    public static double getMapShadingLinearity() {
+        return ((double) getInt(R.string.pref_mapShadingLinearity, 5)) / 100;
+    }
+
 }

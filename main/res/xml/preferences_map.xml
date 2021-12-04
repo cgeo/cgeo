@@ -70,6 +70,29 @@
             android:summary="%s"
             android:title="@string/settings_title_map_rotation"
             app:iconSpaceReserved="false" />
+        <Preference
+            android:key="@string/pref_persistablefolder_offlinemapshading"
+            android:title="@string/init_mapshading_folder"
+            android:enabled="false"
+            app:iconSpaceReserved="false" />
+        <SeekBarPreference
+            android:summary="@string/init_mapShadingLinearity_description"
+            android:title="@string/init_mapShadingLinearity_title"
+            android:defaultValue="5"
+            android:key="@string/pref_mapShadingLinearity"
+            android:max="100"
+            android:min="0"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
+        <SeekBarPreference
+            android:summary="@string/init_mapShadingScale_description"
+            android:title="@string/init_mapShadingScale_title"
+            android:defaultValue="120"
+            android:key="@string/pref_mapShadingScale"
+            android:max="300"
+            android:min="0"
+            app:showSeekBarValue="true"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
