@@ -1789,6 +1789,7 @@
     <string name="attribute_historic_no">버려진 구조물 / 유적 아님</string>
     <string name="attribute_blind_people_yes">장애: 장님</string>
     <string name="attribute_blind_people_no">장애 아님: 장님</string>
+    <string name="attribute_unknown">알 수 없는 속성</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">도구 필요</string>
     <string name="cat_type">유형</string>
