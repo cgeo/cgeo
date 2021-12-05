@@ -4,6 +4,7 @@ import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
+import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
@@ -39,7 +40,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
-import androidx.preference.SeekBarPreference;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -316,7 +316,7 @@ public class BackupUtils {
         }
     }
 
-    public void deleteBackupHistoryDialog(final SeekBarPreference preference, final int newValue) {
+    public void deleteBackupHistoryDialog(final BackupSeekbarPreference preference, final int newValue) {
         final List<ContentStorage.FileInformation> dirs = getDirsToRemove(newValue + 1);
 
         if (dirs != null) {
