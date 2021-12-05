@@ -9,7 +9,6 @@ import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -32,13 +31,14 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
     @Override
     public void onResume() {
         super.onResume();
-        final Activity activity = getActivity();
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        assert activity != null;
         activity.setTitle(R.string.settings_title_map);
         setPrefClick(this, R.string.pref_fakekey_info_offline_maps, () -> ShareUtils.openUrl(activity, activity.getString(R.string.manual_url_settings_offline_maps)));
         setPrefClick(this, R.string.pref_fakekey_start_downloader, () -> activity.startActivity(new Intent(activity, DownloadSelectorActivity.class)));
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
 
-        initPublicFolders(this, ((SettingsActivity) getActivity()).getCsah());
+        initPublicFolders(this, activity.getCsah());
     }
 
     /**
