@@ -22,7 +22,9 @@ public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
     @Override
     public void onResume() {
         super.onResume();
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        assert activity != null;
         getActivity().setTitle(R.string.settings_title_offlinedata);
-        initPublicFolders(this, ((SettingsActivity) getActivity()).getCsah());
+        initPublicFolders(this, activity.getCsah());
     }
 }
