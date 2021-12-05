@@ -15,7 +15,7 @@ import java.util.regex.Pattern;
 
 public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
 
-    private static final Pattern PATTERN_LAST_UPDATED_DATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9]\\.[0-9]<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
+    private static final Pattern PATTERN_LAST_UPDATED_DATE = Pattern.compile("<a href=\"https:\\/\\/www\\.openandromaps\\.org\\/wp-content\\/users\\/tobias\\/version\\.txt\">[0-9]\\.[0-9](\\.[0-9])?<\\/a><\\/strong>, ([0-9]{1,2})\\.([0-9]{1,2})\\.([0-9]{2}) ");
     private static final MapDownloaderOpenAndroMapsThemes INSTANCE = new MapDownloaderOpenAndroMapsThemes();
 
     private MapDownloaderOpenAndroMapsThemes() {
@@ -35,7 +35,7 @@ public class MapDownloaderOpenAndroMapsThemes extends AbstractThemeDownloader {
     protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
         final MatcherWrapper matchDate = new MatcherWrapper(PATTERN_LAST_UPDATED_DATE, page);
         if (matchDate.find()) {
-            final String date = "20" + matchDate.group(3) + "-" + matchDate.group(2) + "-" + matchDate.group(1);
+            final String date = "20" + matchDate.group(4) + "-" + matchDate.group(3) + "-" + matchDate.group(2);
             return new Download("Elevate", Uri.parse(CgeoApplication.getInstance().getString(R.string.mapserver_openandromaps_themes_downloadurl) + "Elevate.zip"), false, date, "", offlineMapType, iconRes);
         }
         return null;
