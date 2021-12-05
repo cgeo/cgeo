@@ -2,3 +2,4 @@
 - Korrektur: Freizeitkarten-Kartendateien: Verwende den 'latest' Ordner im Downloader als Workaround für temporäre Server-Fehler
 - Korrektur: Vermeide Absturz auf "Über c:geo"-Seiten
 - Korrektur: Aktiviere Umbruch für Sterne im Cachepopup
+- Korrektur: Fehlermeldung anzeigen, wenn ein Cache während des Aktualisierens nicht gefunden werden konnte
