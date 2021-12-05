@@ -305,7 +305,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         final View v = LayoutInflater.from(context).inflate(R.layout.cachelist_attributeoverview, null);
         alertDialog.setView (v);
-        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, a));
+        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, a, null));
         ((TextView) v.findViewById(R.id.attributes_text)).setText(text);
         alertDialog.show();
     }

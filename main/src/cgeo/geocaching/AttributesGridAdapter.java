@@ -23,19 +23,22 @@ public class AttributesGridAdapter extends BaseAdapter {
     private final Resources resources;
     private final List<String> attributes;
     private final LayoutInflater inflater;
+    private final Runnable onClickListener;
 
     public AttributesGridAdapter(final Activity context, final Geocache cache) {
         this.context = context;
         resources = context.getResources();
         attributes = cache.getAttributes();
         inflater = LayoutInflater.from(context);
+        onClickListener = null;
     }
 
-    public AttributesGridAdapter(final Activity context, final List<String> attributesList) {
+    public AttributesGridAdapter(final Activity context, final List<String> attributesList, final Runnable onClickListener) {
         this.context = context;
         resources = context.getResources();
         attributes = attributesList;
         inflater = LayoutInflater.from(context);
+        this.onClickListener = onClickListener;
     }
 
     @Override
@@ -76,6 +79,9 @@ public class AttributesGridAdapter extends BaseAdapter {
         if (attrib != null) {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
             ViewUtils.setTooltip(imageView, TextParam.text(attrib.getL10n(CacheAttribute.isEnabled(attributeName))));
+            if (onClickListener != null) {
+                imageView.setOnClickListener(v -> onClickListener.run());
+            }
             imageView.setContentDescription(attrib.getL10n(CacheAttribute.isEnabled(attributeName)));
         } else {
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, R.drawable.attribute_unknown, null));
