@@ -3,7 +3,6 @@ package cgeo.geocaching.settings.fragments;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
-
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
 import android.os.Bundle;

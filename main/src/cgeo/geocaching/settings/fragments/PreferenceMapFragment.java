@@ -4,11 +4,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
-import cgeo.geocaching.settings.DialogPrefFragCompat;
 import cgeo.geocaching.settings.SettingsActivity;
-import cgeo.geocaching.settings.TemplateTextPreference;
 import cgeo.geocaching.utils.ShareUtils;
-
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
@@ -16,9 +13,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.fragment.app.DialogFragment;
 import androidx.preference.ListPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Collection;
@@ -44,23 +39,6 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
 
         initPublicFolders(this, ((SettingsActivity) getActivity()).getCsah());
-    }
-
-    @Override
-    public void onDisplayPreferenceDialog(final Preference preference) {
-        if (preference instanceof TemplateTextPreference) {
-            final DialogFragment dialogFragment = DialogPrefFragCompat.newInstance(preference.getKey());
-            // FIXME: Don't use setTargetFragment
-            // Instead of using a target fragment to pass results, the fragment requesting a result should use
-            // FragmentManager.setFragmentResultListener(String, LifecycleOwner, FragmentResultListener) to register a
-            // FragmentResultListener with a requestKey using its parent fragment manager. The fragment delivering a
-            // result should then call FragmentManager.setFragmentResult(String, Bundle) using the same requestKey.
-            // Consider using setArguments to pass the requestKey if you need to support dynamic request keys.
-            dialogFragment.setTargetFragment(this, 0);
-            dialogFragment.show(getParentFragmentManager(), null);
-        } else {
-            super.onDisplayPreferenceDialog(preference);
-        }
     }
 
     /**

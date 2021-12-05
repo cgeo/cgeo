@@ -7,24 +7,15 @@
     android:padding="8dp"
     tools:context=".settings.TemplateTextPreference" >
 
-    <EditText
-        android:id="@android:id/edit"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="top|left"
-        android:inputType="textMultiLine|textCapSentences"
-        android:minLines="3"
-        android:hint="@string/init_signature"
-        android:autofillHints="@string/init_signature"/>
-
-    <!-- @todo needs to get default button styling applied (button_full) as soon as preferences are migrated to PreferenceFragments etc. -->
-    <Button
-        android:id="@+id/signature_templates"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="right"
-        android:paddingTop="8dp"
-        android:text="@string/init_signature_template_button" />
+    <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+        <EditText
+            android:id="@+id/edit"
+            style="@style/textinput_embedded"
+            android:inputType="textMultiLine|textCapSentences"
+            android:minLines="3"
+            android:hint="@string/init_signature"
+            android:autofillHints="@string/init_signature"/>
+    </com.google.android.material.textfield.TextInputLayout>
 
     <TextView
         android:layout_width="match_parent"
