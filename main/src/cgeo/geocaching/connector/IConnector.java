@@ -165,6 +165,13 @@ public interface IConnector {
     String getGeocodeFromUrl(@NonNull String url);
 
     /**
+     * extract a geocode from the given Text, if this connector can handle that text somehow
+     *
+     */
+    @Nullable
+    String getGeocodeFromText(@NonNull String text);
+
+    /**
      * enable/disable uploading modified coordinates to website
      *
      * @return true, when uploading is possible

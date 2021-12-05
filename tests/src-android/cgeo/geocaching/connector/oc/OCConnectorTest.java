@@ -33,6 +33,16 @@ public class OCConnectorTest extends TestCase {
         assertThat(connector.getGeocodeFromUrl("http://www.opencaching.de/OC0028")).isEqualTo("OC0028");
     }
 
+    public static void testGetGeocodeFromTextDe() throws Exception {
+        final IConnector connector = ConnectorFactory.getConnector("OC0028");
+        assertThat(connector.getGeocodeFromText("Bla http://www.opencaching.de/OC0028 Test")).isEqualTo("OC0028");
+    }
+
+    public static void testGetGeocodeFromTextUk() throws Exception {
+        final IConnector connector = ConnectorFactory.getConnector("OK04F8");
+        assertThat(connector.getGeocodeFromText("Bla https://opencache.uk/viewcache.php?wp=OK04F8 Test")).isEqualTo("OK04F8");
+    }
+
     public static void testGetGeocodeFromInternalId() {
         final IConnector connector = ConnectorFactory.getConnector("OC0028");
         assertThat(connector.getGeocodeFromUrl("http://www.opencaching.de/viewcache.php?cacheid=151223")).isEqualTo("OCBBFE");

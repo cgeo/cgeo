@@ -38,6 +38,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -503,6 +504,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
         } else if (id == R.id.menu_backup) {
             SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+        } else if (id == R.id.menu_paste_search) {
+            startActivity(new Intent(this, SearchActivity.class).setAction(SearchActivity.ACTION_CLIPBOARD).putExtra(SearchManager.QUERY, ClipboardUtils.getText()));
         } else if (id == R.id.menu_history) {
             startActivity(CacheListActivity.getHistoryIntent(this));
             ActivityMixin.finishWithFadeTransition(this);
@@ -533,7 +536,9 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             @Override
             public boolean onMenuItemActionExpand(final MenuItem item) {
                 for (int i = 0; i < menu.size(); i++) {
-                    if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
+                    if (menu.getItem(i).getItemId() == R.id.menu_paste_search && ConnectorFactory.containsGeocode(ClipboardUtils.getText())) {
+                        menu.getItem(i).setVisible(true);
+                    } else if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
                         menu.getItem(i).setVisible(false);
                     }
                 }

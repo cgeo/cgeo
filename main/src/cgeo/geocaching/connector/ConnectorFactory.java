@@ -368,6 +368,29 @@ public final class ConnectorFactory {
         return null;
     }
 
+    @Nullable
+    public static String getGeocodeFromText(@Nullable final String text) {
+        if (text == null) {
+            return null;
+        }
+        for (final IConnector connector : CONNECTORS) {
+            final String geocode = connector.getGeocodeFromText(text);
+            if (StringUtils.isNotBlank(geocode)) {
+                return StringUtils.upperCase(geocode);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Checks if text can be interpreted as a geocode, either directly or by extracting one
+     * @param text  String containing a geocode (or not)
+     * @return true if a geocode is found
+     */
+    public static boolean containsGeocode(@Nullable final String text) {
+        return (getGeocodeFromURL(text) != null || getGeocodeFromText(text) != null);
+    }
+
     @NonNull
     public static Collection<TrackableConnector> getTrackableConnectors() {
         return TRACKABLE_CONNECTORS;
