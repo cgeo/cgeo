@@ -2,3 +2,4 @@
 - Corretto: File mappa Freizeitkarte: Usa la cartella 'latest' nel downloader come soluzione per errori temporanei del server
 - Risolto: Evita l'eccezione del puntatore nullo nelle pagine di informazioni
 - Risolto: Abilita l'avvolgimento per le stelle nel popup del cache
+- Fix: Display error message if a cache could not be found while trying to refresh it
