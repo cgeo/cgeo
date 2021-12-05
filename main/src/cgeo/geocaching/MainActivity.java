@@ -65,7 +65,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
-import static android.view.View.GONE;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -168,7 +167,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                     userName.setText(p.second);
                                     final String userFoundCount = p.first.toString();
                                     if (userFoundCount.isEmpty()) {
-                                        userFounds.setVisibility(GONE);
+                                        userFounds.setVisibility(View.GONE);
                                     } else {
                                         userFounds.setVisibility(View.VISIBLE);
                                         userFounds.setText(userFoundCount);
@@ -196,7 +195,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                         }
                                     });
                             } else {
-                                userAvatar.setVisibility(GONE);
+                                userAvatar.setVisibility(View.GONE);
                             }
                         }
                     });
@@ -357,6 +356,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
         checkRestore();
         DataStore.cleanIfNeeded(this);
+        updateCacheCounter();
     }
 
     @Override
@@ -530,6 +530,16 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         return true;
     }
 
+    public void updateCacheCounter() {
+        AndroidRxUtils.bindActivity(this, DataStore.getAllCachesCountObservable()).subscribe(countOfflineCaches -> {
+            final TextView counter = findViewById(R.id.offline_counter);
+            counter.setVisibility(countOfflineCaches > 0 ? View.VISIBLE : View.GONE);
+            if (countOfflineCaches > 0) {
+                counter.setText(getResources().getQuantityString(R.plurals.caches_stored_offline, countOfflineCaches, countOfflineCaches));
+            }
+        }, throwable -> Log.e("Unable to add bubble count", throwable));
+    }
+
     private void hideActionIconsWhenSearchIsActive(final Menu menu) {
         searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
 
@@ -683,7 +693,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             binding.infoNotloggedinIcon.attributeStrikethru.setVisibility(View.VISIBLE);
             binding.infoNotloggedin.setVisibility(View.VISIBLE);
         } else {
-            binding.infoNotloggedin.setVisibility(GONE);
+            binding.infoNotloggedin.setVisibility(View.GONE);
         }
     }
 

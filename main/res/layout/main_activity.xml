@@ -72,6 +72,13 @@
         android:orientation="vertical">
 
         <TextView
+            android:id="@+id/offline_counter"
+            style="@style/location_current"
+            android:visibility="gone"
+            tools:text="1234 caches stored offline"/>
+        <View style="@style/separator_horizontal" />
+
+        <TextView
             android:id="@+id/nav_location"
             style="@style/location_current"
             android:textIsSelectable="false"
