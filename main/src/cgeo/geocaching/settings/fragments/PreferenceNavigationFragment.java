@@ -118,6 +118,10 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
         pref.setEntries(entries);
         pref.setEntryValues(values);
         pref.setSummary(current);
+        pref.setOnPreferenceChangeListener((preference, newValue) -> {
+            preference.setSummary(newValue.toString());
+            return true;
+        });
         if (current != null) {
             for (int i = 0; i < entries.length; i++) {
                 if (current.contentEquals(entries[i])) {
