@@ -2,3 +2,4 @@
 - 수정: Freizeitkarte 지도 파일: 임시 서버 오류에 대한 해결 방법으로 다운로더의 '최신' 폴더 사용
 - 수정: 정보 페이지에서 널 포인터 예외 방지
 - 수정: 캐시 팝업에서 별 줄 바꿈 활성화
+- Fix: Display error message if a cache could not be found while trying to refresh it
