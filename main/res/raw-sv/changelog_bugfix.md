@@ -2,3 +2,4 @@
 - Fix: Freizeitkarte kartfiler: Använd mappen "senaste" i nerladdaren som lösning för temporära serverfel
 - Fix: Avoid null pointer exception in about pages
 - Fix: Enable wrapping for stars in cache popup
+- Fix: Display error message if a cache could not be found while trying to refresh it
