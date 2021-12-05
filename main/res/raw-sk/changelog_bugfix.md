@@ -2,3 +2,4 @@
 - Oprava: Mapové súbory Freizeitkarte - použitie "najnovšieho" priečinka pri preberaní ako riešenia pre dočasné chyby servera
 - Oprava: Odstránenie výnimky nulového ukazovateľa na stránke s informáciami
 - Oprava: Povolenie zalamovania hviezd v kontextovom okne kešky
+- Fix: Display error message if a cache could not be found while trying to refresh it

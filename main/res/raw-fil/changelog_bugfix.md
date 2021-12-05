@@ -2,3 +2,4 @@
 - Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
 - Fix: Avoid null pointer exception in about pages
 - Fix: Enable wrapping for stars in cache popup
+- Fix: Display error message if a cache could not be found while trying to refresh it

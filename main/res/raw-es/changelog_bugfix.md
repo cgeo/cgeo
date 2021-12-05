@@ -2,3 +2,4 @@
 - Corregido: archivos de mapa de Freizeitkarte: Usar la carpeta 'latest' en el descargador como solución para los errores temporales del servidor
 - Corregido: Evitar excepción del puntero nulo en las páginas
 - Corregido: Habilitar envoltura de estrellas en la ventana emergente de caché
+- Fix: Display error message if a cache could not be found while trying to refresh it

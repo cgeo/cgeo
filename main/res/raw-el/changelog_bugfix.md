@@ -2,3 +2,4 @@
 - Διόρθωση: Αρχεία χάρτη Freizeitkarte: Χρησιμοποιήστε το φάκελο 'latest' στο downloader ως λύση για προσωρινά σφάλματα διακομιστή
 - Fix: Avoid null pointer exception in about pages
 - Διόρθωση: Ενεργοποίηση αναδίπλωσης για αστέρια στην κρύπτη
+- Fix: Display error message if a cache could not be found while trying to refresh it
