@@ -7,10 +7,10 @@ import cgeo.geocaching.databinding.VariableListViewBinding;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.TextUtils;
-import cgeo.geocaching.utils.calc.CalculatorFunction;
-import cgeo.geocaching.utils.calc.CalculatorMap;
-import cgeo.geocaching.utils.calc.Value;
-import cgeo.geocaching.utils.calc.VariableList;
+import cgeo.geocaching.utils.formulas.FormulaFunction;
+import cgeo.geocaching.utils.formulas.Value;
+import cgeo.geocaching.utils.formulas.VariableList;
+import cgeo.geocaching.utils.formulas.VariableMap;
 import cgeo.geocaching.utils.functions.Action2;
 
 import android.annotation.SuppressLint;
@@ -56,9 +56,9 @@ public class VariableListView extends LinearLayout {
             binding = VariableListItemBinding.bind(rowView);
         }
 
-        private void setData(final CalculatorMap.CalculatorState calculatorState, final boolean isAdvanced) {
+        private void setData(final VariableMap.VariableState variableState, final boolean isAdvanced) {
 
-            this.varName = calculatorState.getVar();
+            this.varName = variableState.getVar();
             final String displayVarName = VariableList.isVisible(this.varName) ? this.varName : "-";
             this.binding.variableName.setText(displayVarName);
             final int textSize;
@@ -76,9 +76,9 @@ public class VariableListView extends LinearLayout {
             this.binding.variableName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
 
             final EditText formula = Objects.requireNonNull(this.binding.variableFormula.getEditText());
-            formula.setText(calculatorState.getFormula());
+            formula.setText(variableState.getFormulaString());
 
-            setResult(calculatorState);
+            setResult(variableState);
 
             this.binding.variableDelete.setVisibility(isAdvanced ? VISIBLE : GONE);
             this.binding.variableResult.setVisibility(isAdvanced ? VISIBLE : GONE);
@@ -86,14 +86,14 @@ public class VariableListView extends LinearLayout {
         }
 
         @SuppressLint("SetTextI18n")
-        public void setResult(final CalculatorMap.CalculatorState calculatorState) {
+        public void setResult(final VariableMap.VariableState variableState) {
 
-            final boolean isError = calculatorState.getError() != null;
+            final boolean isError = variableState.getError() != null;
             if (isError) {
-                this.binding.variableResult.setText(calculatorState.getError());
+                this.binding.variableResult.setText(variableState.getError());
                 this.binding.variableResult.setTextColor(Color.RED);
             } else {
-                final Value result = calculatorState.getResult();
+                final Value result = variableState.getResult();
                 this.binding.variableResult.setText("= " + (result == null ? "?" : result.toUserDisplayableString()));
                 this.binding.variableResult.setTextColor(ContextCompat.getColor(this.binding.getRoot().getContext(), R.color.colorText));
             }
@@ -108,7 +108,7 @@ public class VariableListView extends LinearLayout {
         }
     }
 
-    public static final class VariablesListAdapter extends ManagedListAdapter<CalculatorMap.CalculatorState, VariableViewHolder> {
+    public static final class VariablesListAdapter extends ManagedListAdapter<VariableMap.VariableState, VariableViewHolder> {
 
         private boolean isAdvancedView = true;
         private VariableList variables;
@@ -141,7 +141,7 @@ public class VariableListView extends LinearLayout {
             return this.variables;
         }
 
-        private void fillViewHolder(final VariableViewHolder holder, final CalculatorMap.CalculatorState data) {
+        private void fillViewHolder(final VariableViewHolder holder, final VariableMap.VariableState data) {
             if (holder == null) {
                 return;
             }
@@ -177,7 +177,7 @@ public class VariableListView extends LinearLayout {
             });
 
             viewHolder.binding.variableFunction.setOnClickListener(d -> {
-                final List<CalculatorFunction> functions = CalculatorFunction.valuesAsUserDisplaySortedList();
+                final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
                 SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
                     .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, true, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
                         final String newFormula = f.getFunctionInsertString();
@@ -195,11 +195,11 @@ public class VariableListView extends LinearLayout {
             return viewHolder;
         }
 
-        private static TextParam getFunctionDisplayString(final CalculatorFunction f) {
+        private static TextParam getFunctionDisplayString(final FormulaFunction f) {
             return TextParam.text(f.getUserDisplayableString());
         }
 
-        private static TextParam getFunctionGroupDisplayString(final CalculatorFunction.CalculatorGroup g) {
+        private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {
             return
                 TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
         }
@@ -218,11 +218,11 @@ public class VariableListView extends LinearLayout {
         }
 
         private void changeVarAt(final int varPos, final String newVar) {
-            final CalculatorMap.CalculatorState oldState = getItem(varPos);
+            final VariableMap.VariableState oldState = getItem(varPos);
             if (Objects.equals(oldState.getVar(), newVar)) {
                 return;
             }
-            final String oldFormula = oldState.getFormula();
+            final String oldFormula = oldState.getFormulaString();
             variables.removeVariable(oldState.getVar());
             removeVarFromViewIfPresent(newVar);
 
@@ -293,7 +293,7 @@ public class VariableListView extends LinearLayout {
             for (int pos = 0; pos < getItemCount(); pos++) {
                 final VariableViewHolder itemHolder = (VariableViewHolder) this.recyclerView.findViewHolderForLayoutPosition(pos);
                 if (itemHolder != null) {
-                    final CalculatorMap.CalculatorState state = variables.getState(itemHolder.getVar());
+                    final VariableMap.VariableState state = variables.getState(itemHolder.getVar());
                     if (state != null) {
                         itemHolder.setResult(state);
                     }

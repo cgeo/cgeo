@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -14,41 +14,42 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public enum CalculatorFunction {
+/** Maintains all functions available in {@link Formula}'s */
+public enum FormulaFunction {
 
-    SQRT("sqrt", CalculatorGroup.SIMPLE_NUMERIC, 0, "Square Root", null, 0,
+    SQRT("sqrt", FunctionGroup.SIMPLE_NUMERIC, 0, "Square Root", null, 0,
         singleValueNumericFunction(Math::sqrt)),
-    SIN("sin", CalculatorGroup.SIMPLE_NUMERIC, 0, "Sinus", null, 0,
+    SIN("sin", FunctionGroup.SIMPLE_NUMERIC, 0, "Sinus", null, 0,
         singleValueNumericFunction(p -> Math.sin(Math.toRadians(p)))),
-    COS("cos", CalculatorGroup.SIMPLE_NUMERIC, 0, "Cosinus", null, 0,
+    COS("cos", FunctionGroup.SIMPLE_NUMERIC, 0, "Cosinus", null, 0,
         singleValueNumericFunction(p -> Math.cos(Math.toRadians(p)))),
-    TAN("tan", CalculatorGroup.SIMPLE_NUMERIC, 0, "Tangens", null, 0,
+    TAN("tan", FunctionGroup.SIMPLE_NUMERIC, 0, "Tangens", null, 0,
         singleValueNumericFunction(p -> Math.tan(Math.toRadians(p)))),
-    ABS("abs", CalculatorGroup.SIMPLE_NUMERIC, 0, "Absolute Value", null, 0,
+    ABS("abs", FunctionGroup.SIMPLE_NUMERIC, 0, "Absolute Value", null, 0,
         singleValueNumericFunction(Math::round)),
-    ROUND("round", CalculatorGroup.SIMPLE_NUMERIC, 0, "Round", null, 0,
+    ROUND("round", FunctionGroup.SIMPLE_NUMERIC, 0, "Round", null, 0,
         singleValueNumericFunction(Math::round)),
 
-    RANDOM("random", CalculatorGroup.COMPLEX_NUMERIC, 0, "Random Integer Number", null, 0, p -> Value.of(CalculatorUtils.random(p.getAsInt(0, -1), p.getAsInt(1, -1)))),
+    RANDOM("random", FunctionGroup.COMPLEX_NUMERIC, 0, "Random Integer Number", null, 0, p -> Value.of(FormulaUtils.random(p.getAsInt(0, -1), p.getAsInt(1, -1)))),
 
-    LENGTH("length", CalculatorGroup.SIMPLE_STRING, 0, "String Length", "''", 1,
+    LENGTH("length", FunctionGroup.SIMPLE_STRING, 0, "String Length", "''", 1,
         singleValueStringFunction(String::length)),
-    SUBSTRING(new String[]{"substring", "sub"}, CalculatorGroup.SIMPLE_STRING, 0, "Substring", "'';0;1", 1,
-        minMaxParamFunction(1, 3, p -> CalculatorUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
+    SUBSTRING(new String[]{"substring", "sub"}, FunctionGroup.SIMPLE_STRING, 0, "Substring", "'';0;1", 1,
+        minMaxParamFunction(1, 3, p -> FormulaUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
 
 
-    ROT13("rot13", CalculatorGroup.COMPLEX_STRING, 0, "Rotate characters by 13", "''", 1,
-        minMaxParamFunction(1, 1, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), 13)))),
-    ROT("rot", CalculatorGroup.COMPLEX_STRING, 0, "Rotate characters by x", "'';13", 1,
-        minMaxParamFunction(1, 2, p -> Value.of(CalculatorUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 13))))),
-    CHECKSUM(new String[]{"checksum", "cs" }, CalculatorGroup.COMPLEX_NUMERIC, 0, "Checksum", null, 0,
-        minMaxParamFunction(1, 1,  p -> CalculatorUtils.valueChecksum(p.get(0), false))),
-    ICHECKSUM(new String[]{"ichecksum", "ics" }, CalculatorGroup.COMPLEX_NUMERIC, 0, "Iterative Checksum", null, 0,
-        minMaxParamFunction(1, 1,  p -> CalculatorUtils.valueChecksum(p.get(0), true))),
-    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv" }, CalculatorGroup.COMPLEX_STRING, 0, "Letter Value", "''", 1,
-        singleValueStringFunction(CalculatorUtils::letterValue));
+    ROT13("rot13", FunctionGroup.COMPLEX_STRING, 0, "Rotate characters by 13", "''", 1,
+        minMaxParamFunction(1, 1, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), 13)))),
+    ROT("rot", FunctionGroup.COMPLEX_STRING, 0, "Rotate characters by x", "'';13", 1,
+        minMaxParamFunction(1, 2, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 13))))),
+    CHECKSUM(new String[]{"checksum", "cs" }, FunctionGroup.COMPLEX_NUMERIC, 0, "Checksum", null, 0,
+        minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), false))),
+    ICHECKSUM(new String[]{"ichecksum", "ics" }, FunctionGroup.COMPLEX_NUMERIC, 0, "Iterative Checksum", null, 0,
+        minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), true))),
+    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv" }, FunctionGroup.COMPLEX_STRING, 0, "Letter Value", "''", 1,
+        singleValueStringFunction(FormulaUtils::letterValue));
 
-    public enum CalculatorGroup {
+    public enum FunctionGroup {
         SIMPLE_NUMERIC(0, "Simple Numeric"),
         COMPLEX_NUMERIC(0, "Complex Numeric"),
         SIMPLE_STRING(0, "Simple String"),
@@ -58,7 +59,7 @@ public enum CalculatorFunction {
         private final int resId;
         private final String resFallback;
 
-        CalculatorGroup(@StringRes final int resId, final String resFallback) {
+        FunctionGroup(@StringRes final int resId, final String resFallback) {
             this.resId = resId;
             this.resFallback = resFallback;
         }
@@ -72,7 +73,7 @@ public enum CalculatorFunction {
     private final String[] names;
     private final Func1<ValueList, Object> function;
 
-    private final CalculatorGroup group;
+    private final FunctionGroup group;
 
     @StringRes
     private final int resId;
@@ -81,21 +82,21 @@ public enum CalculatorFunction {
     private final String insertPattern;
     private final int insertIndex;
 
-    private static final Map<String, CalculatorFunction> FUNC_BY_NAME = new HashMap<>();
+    private static final Map<String, FormulaFunction> FUNC_BY_NAME = new HashMap<>();
 
     static {
-        for (final CalculatorFunction cf : values()) {
+        for (final FormulaFunction cf : values()) {
             for (String name : cf.names) {
                 FUNC_BY_NAME.put(name, cf);
             }
         }
     }
 
-    CalculatorFunction(final String name, final CalculatorGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Object> function) {
+    FormulaFunction(final String name, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Object> function) {
         this(new String[]{name}, group, resId, resFallback, insertPattern, insertIndex, function);
     }
 
-    CalculatorFunction(final String[] names, final CalculatorGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Object> function) {
+    FormulaFunction(final String[] names, final FunctionGroup group, @StringRes final int resId, final String resFallback, final String insertPattern, final int insertIndex, final Func1<ValueList, Object> function) {
         this.names = names;
         this.group = group;
         this.function = function;
@@ -125,22 +126,22 @@ public enum CalculatorFunction {
         return getMainName().length() + 1 + Math.max(insertIndex, 0);
     }
 
-    public CalculatorGroup getGroup() {
+    public FunctionGroup getGroup() {
         return group;
     }
 
-    public Value execute(final ValueList params) throws CalculatorException {
+    public Value execute(final ValueList params) throws FormulaException {
         final Object result = function.call(params);
         return result instanceof Value ? (Value) result : Value.of(result);
     }
 
     @Nullable
-    public static CalculatorFunction findByName(final String name) {
+    public static FormulaFunction findByName(final String name) {
         return name == null ? null : FUNC_BY_NAME.get(name);
     }
 
-    public static List<CalculatorFunction> valuesAsUserDisplaySortedList() {
-        final List<CalculatorFunction> list = new ArrayList<>(Arrays.asList(values()));
+    public static List<FormulaFunction> valuesAsUserDisplaySortedList() {
+        final List<FormulaFunction> list = new ArrayList<>(Arrays.asList(values()));
         Collections.sort(list, (f1, f2) -> TextUtils.COLLATOR.compare(f1.getUserDisplayableString(), f2.getUserDisplayableString()));
         return list;
     }

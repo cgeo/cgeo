@@ -53,7 +53,7 @@ import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.Version;
-import cgeo.geocaching.utils.calc.VariableList;
+import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.settings.Settings.getMaximumMapTrailLength;
 import static cgeo.geocaching.storage.DataStore.DBExtensionType.DBEXTENSION_INVALID;

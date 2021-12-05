@@ -1,10 +1,10 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.StringRes;
 
-public class CalculatorException extends IllegalArgumentException {
+public class FormulaException extends IllegalArgumentException {
 
     public enum ErrorType {
         //internationalize later
@@ -36,13 +36,13 @@ public class CalculatorException extends IllegalArgumentException {
     private String parsingContext;
     private String evaluationContext;
 
-    public CalculatorException(final Throwable cause, final ErrorType errorType, final Object ... errorParams) {
+    public FormulaException(final Throwable cause, final ErrorType errorType, final Object ... errorParams) {
         super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
         this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
         this.errorType = errorType;
     }
 
-    public CalculatorException(final ErrorType errorType, final Object ...errorParams) {
+    public FormulaException(final ErrorType errorType, final Object ...errorParams) {
         this(null, errorType, errorParams);
     }
 

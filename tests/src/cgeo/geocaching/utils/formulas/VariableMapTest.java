@@ -1,8 +1,8 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
-import static cgeo.geocaching.utils.calc.CalculatorMap.State.CYCLE;
-import static cgeo.geocaching.utils.calc.CalculatorMap.State.ERROR;
-import static cgeo.geocaching.utils.calc.CalculatorMap.State.OK;
+import static cgeo.geocaching.utils.formulas.VariableMap.State.CYCLE;
+import static cgeo.geocaching.utils.formulas.VariableMap.State.ERROR;
+import static cgeo.geocaching.utils.formulas.VariableMap.State.OK;
 
 import java.util.HashSet;
 import java.util.Objects;
@@ -12,10 +12,10 @@ import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.fail;
 
-public class CalculatorMapTest {
+public class VariableMapTest {
 
-    private CalculatorMap createTestMap() {
-        final CalculatorMap cMap = new CalculatorMap();
+    private VariableMap createTestMap() {
+        final VariableMap cMap = new VariableMap();
         assertCalculatorMap(cMap);
         cMap.put("A", "2");
         assertCalculatorMap(cMap, "A", 2d);
@@ -29,7 +29,7 @@ public class CalculatorMapTest {
 
     @Test
     public void simpleRemove() {
-        final CalculatorMap cMap = createTestMap();
+        final VariableMap cMap = createTestMap();
         cMap.remove("A");
         assertCalculatorMap(cMap, "A", ERROR, "B", ERROR, "C", ERROR, "D", ERROR);
         cMap.put("A", "2");
@@ -38,7 +38,7 @@ public class CalculatorMapTest {
 
     @Test
     public void cycleSimple() {
-        final CalculatorMap cMap = createTestMap();
+        final VariableMap cMap = createTestMap();
         cMap.put("A", "D");
         assertCalculatorMap(cMap, "A", CYCLE, "e:A->D",
             "B", CYCLE, "e:B->A->D->B",
@@ -51,7 +51,7 @@ public class CalculatorMapTest {
 
     @Test
     public void cycleComplex() {
-        final CalculatorMap cMap = new CalculatorMap();
+        final VariableMap cMap = new VariableMap();
         cMap.put("D", "B+C");
         cMap.put("B", "A+3");
         cMap.put("A", "1");
@@ -66,7 +66,7 @@ public class CalculatorMapTest {
 
     @Test
     public void cycleTwoCycles() {
-        final CalculatorMap cMap = new CalculatorMap();
+        final VariableMap cMap = new VariableMap();
         cMap.put("A", "B");
         cMap.put("B", "A+2");
         cMap.put("C", "B");
@@ -83,14 +83,14 @@ public class CalculatorMapTest {
 
     @Test
     public void cycleSelf() {
-        final CalculatorMap cMap = new CalculatorMap();
+        final VariableMap cMap = new VariableMap();
         cMap.put("A", "A+2");
         assertCalculatorMap(cMap, "A", CYCLE, "e:A->A");
     }
 
     @Test
     public void autoAddRemove() {
-        final CalculatorMap cMap = new CalculatorMap();
+        final VariableMap cMap = new VariableMap();
         cMap.put("D", "A+B");
         assertCalculatorMap(cMap, "A", ERROR, "B", ERROR, "D", ERROR);
 
@@ -107,9 +107,9 @@ public class CalculatorMapTest {
         assertThat(cMap.size()).isEqualTo(0);
     }
 
-    private void assertCalculatorMap(final CalculatorMap cMap, final Object... propertiesToAssert) {
+    private void assertCalculatorMap(final VariableMap cMap, final Object... propertiesToAssert) {
         String var = null;
-        CalculatorMap.CalculatorState state = null;
+        VariableMap.VariableState state = null;
         String assertAs = null;
         final Set<String> allVarSet = new HashSet<>();
         for (Object prop : propertiesToAssert) {
@@ -131,7 +131,7 @@ public class CalculatorMapTest {
                 assertThat(state.getResult().getAsDouble()).as(assertAs + "result " + prop).isEqualTo(prop);
                 assertThat(state.getState()).as(assertAs + "state OK").isEqualTo(OK);
                 assertThat(state.getError()).as(assertAs + "no error").isNull();
-            } else if (prop instanceof CalculatorMap.State) {
+            } else if (prop instanceof VariableMap.State) {
                 assertThat(state.getState()).as(assertAs + "state " + prop).isEqualTo(prop);
                 if (OK.equals(prop)) {
                     assertThat(state.getResult()).isNotNull();

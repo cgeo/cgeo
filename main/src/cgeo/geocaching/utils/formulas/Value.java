@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -8,7 +8,7 @@ import java.text.DecimalFormatSymbols;
 import java.text.Format;
 import java.util.Locale;
 
-/** Encapsulates a single value for handling in {@link cgeo.geocaching.utils.calc.Calculator}. Provides e.g. type conversions. */
+/** Encapsulates a single value for handling in {@link Formula}. Provides e.g. type conversions. */
 public class Value {
 
     public static final Value EMPTY = Value.of(null);

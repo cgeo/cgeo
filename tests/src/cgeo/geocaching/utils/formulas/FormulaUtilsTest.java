@@ -1,4 +1,4 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
 import java.util.Collections;
 import java.util.List;
@@ -6,38 +6,38 @@ import java.util.List;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class CalculatorUtilsTest {
+public class FormulaUtilsTest {
 
     @Test
     public void substring() {
-        assertThat(CalculatorUtils.substring("test", 1, 2)).isEqualTo("es");
-        assertThat(CalculatorUtils.substring(null, 1, 2)).isEqualTo("");
-        assertThat(CalculatorUtils.substring("t", 1, 2)).isEqualTo("");
-        assertThat(CalculatorUtils.substring("te", 1, 2)).isEqualTo("e");
+        assertThat(FormulaUtils.substring("test", 1, 2)).isEqualTo("es");
+        assertThat(FormulaUtils.substring(null, 1, 2)).isEqualTo("");
+        assertThat(FormulaUtils.substring("t", 1, 2)).isEqualTo("");
+        assertThat(FormulaUtils.substring("te", 1, 2)).isEqualTo("e");
     }
 
     @Test
     public void checksum() {
-        assertThat(CalculatorUtils.checksum(255, false)).isEqualTo(12);
-        assertThat(CalculatorUtils.checksum(255, true)).isEqualTo(3);
-        assertThat(CalculatorUtils.checksum(-255, false)).isEqualTo(12);
-        assertThat(CalculatorUtils.checksum(0, false)).isEqualTo(0);
+        assertThat(FormulaUtils.checksum(255, false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(255, true)).isEqualTo(3);
+        assertThat(FormulaUtils.checksum(-255, false)).isEqualTo(12);
+        assertThat(FormulaUtils.checksum(0, false)).isEqualTo(0);
     }
 
     @Test
     public void letterValue() {
-        assertThat(CalculatorUtils.letterValue("abc")).isEqualTo(6);
-        assertThat(CalculatorUtils.letterValue("ABC")).isEqualTo(6);
-        assertThat(CalculatorUtils.letterValue("")).isEqualTo(0);
-        assertThat(CalculatorUtils.letterValue("1234")).isEqualTo(10);
+        assertThat(FormulaUtils.letterValue("abc")).isEqualTo(6);
+        assertThat(FormulaUtils.letterValue("ABC")).isEqualTo(6);
+        assertThat(FormulaUtils.letterValue("")).isEqualTo(0);
+        assertThat(FormulaUtils.letterValue("1234")).isEqualTo(10);
     }
 
     @Test
     public void rot() {
-        assertThat(CalculatorUtils.rot("abc", 1)).isEqualTo("bcd");
-        assertThat(CalculatorUtils.rot("abc", 0)).isEqualTo("abc");
-        assertThat(CalculatorUtils.rot("abc", -25)).isEqualTo("bcd");
-        assertThat(CalculatorUtils.rot("ab1c2", 1)).isEqualTo("bc1d2");
+        assertThat(FormulaUtils.rot("abc", 1)).isEqualTo("bcd");
+        assertThat(FormulaUtils.rot("abc", 0)).isEqualTo("abc");
+        assertThat(FormulaUtils.rot("abc", -25)).isEqualTo("bcd");
+        assertThat(FormulaUtils.rot("ab1c2", 1)).isEqualTo("bc1d2");
     }
 
     @Test
@@ -62,7 +62,7 @@ public class CalculatorUtilsTest {
     }
 
     private void assertScanFormula(final String textToScan, final String ... expectedFinds) {
-        final List<String> result = CalculatorUtils.scanForFormulas(Collections.singleton(textToScan), null);
+        final List<String> result = FormulaUtils.scanForFormulas(Collections.singleton(textToScan), null);
         if (expectedFinds == null || expectedFinds.length == 0) {
             assertThat(result).as("Scan: '" + textToScan + "'").isEmpty();
         } else {

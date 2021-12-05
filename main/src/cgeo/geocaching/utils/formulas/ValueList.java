@@ -1,7 +1,7 @@
-package cgeo.geocaching.utils.calc;
+package cgeo.geocaching.utils.formulas;
 
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_PARAMETER_COUNT;
-import static cgeo.geocaching.utils.calc.CalculatorException.ErrorType.WRONG_TYPE;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_PARAMETER_COUNT;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
 
 import androidx.annotation.NonNull;
 
@@ -10,7 +10,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/** Encapsulates a list of {@link cgeo.geocaching.utils.calc.Value}'s for handling as parameter lists in {@link cgeo.geocaching.utils.calc.Calculator} */
+/** Encapsulates a list of {@link cgeo.geocaching.utils.formulas.Value}'s for handling as parameter lists in {@link Formula} */
 public class ValueList implements Iterable<Value> {
 
     private final List<Value> list = new ArrayList<>();
@@ -59,7 +59,7 @@ public class ValueList implements Iterable<Value> {
     public void checkAllDouble() {
         for (Value v : list) {
             if (!v.isDouble()) {
-                throw new CalculatorException(WRONG_TYPE, "Number", v.toUserDisplayableString(), v.getType());
+                throw new FormulaException(WRONG_TYPE, "Number", v.toUserDisplayableString(), v.getType());
             }
         }
     }
@@ -67,7 +67,7 @@ public class ValueList implements Iterable<Value> {
     public void checkCount(final int minCount, final int maxCount) {
         if ((minCount > 0 && (size() < minCount)) ||
             (maxCount > 0 && (size() > maxCount))) {
-            throw new CalculatorException(WRONG_PARAMETER_COUNT, minCount < 0 ? "*" : "" + minCount, maxCount < 0 ? "*" : "" + maxCount, size());
+            throw new FormulaException(WRONG_PARAMETER_COUNT, minCount < 0 ? "*" : "" + minCount, maxCount < 0 ? "*" : "" + maxCount, size());
         }
 
     }
