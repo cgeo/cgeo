@@ -23,15 +23,16 @@
         android:title="@string/init_listdisplay"
         app:iconSpaceReserved="false" />
 
-    <SeekBarPreference
-        android:defaultValue="@integer/list_load_limit_default"
-        android:summary="@string/init_summary_list_initial_load_limit"
+    <Preference
         android:title="@string/init_list_initial_load_limit"
-        android:key="@string/pref_list_initial_load_limit"
-        android:max="@integer/list_load_limit_max"
-        android:min="0"
-        app:showSeekBarValue="true"
+        android:summary="@string/init_summary_list_initial_load_limit"
         app:iconSpaceReserved="false"/>
+    <cgeo.geocaching.settings.SeekbarPreference
+        android:key="@string/pref_list_initial_load_limit"
+        android:defaultValue="@integer/list_load_limit_default"
+        app:min="0"
+        app:max="@integer/list_load_limit_max"
+        app:iconSpaceReserved="false" />
 
     <PreferenceCategory
         android:title="@string/settings_title_gpx"
