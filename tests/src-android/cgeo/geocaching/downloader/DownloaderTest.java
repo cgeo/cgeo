@@ -86,11 +86,11 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         assertThat(count(list, false)).isBetween(54, 64);
 
         // check one named entry
-        final Download d = findByName(list, "Scandinavia_SouthWest");
+        final Download d = findByName(list, "Scandinavia-SouthWest");
         assertThat(d).isNotNull();
         final String sizeInfoString = d.getSizeInfo(); // 1.7 GB
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(1.6F, 1.8F);
+        assertThat(sizeInfoFloat).isBetween(1.6F, 2.0F);
     }
 
     public static void testOpenAndroMapsThemes() {

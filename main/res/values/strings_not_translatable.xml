@@ -267,7 +267,7 @@
     <string translatable="false" name="mapserver_mapsforge_projecturl">https://github.com/mapsforge/mapsforge</string>
 
     <string translatable="false" name="mapserver_openandromaps_name">OpenAndroMaps</string>
-    <string translatable="false" name="mapserver_openandromaps_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/mapsV4/</string>
+    <string translatable="false" name="mapserver_openandromaps_downloadurl">https://ftp.gwdg.de/pub/misc/openstreetmap/openandromaps/mapsV5/</string>
     <string translatable="false" name="mapserver_openandromaps_likeiturl">https://www.openandromaps.org/projektkosten</string>
     <string translatable="false" name="mapserver_openandromaps_projecturl">https://www.openandromaps.org/</string>
 
