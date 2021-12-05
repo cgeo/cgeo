@@ -1,15 +1,14 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.BackupSeekbarPreference;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
-import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.SeekBarPreference;
 
 public class PreferenceBackupFragment extends PreferenceFragmentCompat {
     public static final String STATE_BACKUPUTILS = "backuputils";
@@ -20,20 +19,17 @@ public class PreferenceBackupFragment extends PreferenceFragmentCompat {
 
         final BackupUtils backupUtils = new BackupUtils(getActivity(), savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
 
-        final Preference backup = findPreference(getString(R.string.pref_fakekey_preference_backup));
-        backup.setOnPreferenceClickListener(preference -> {
+        findPreference(getString(R.string.pref_fakekey_preference_backup)).setOnPreferenceClickListener(preference -> {
             backupUtils.backup(this::updateSummary);
             return true;
         });
 
-        final Preference restore = findPreference(getString(R.string.pref_fakekey_preference_restore));
-        restore.setOnPreferenceClickListener(preference -> {
+        findPreference(getString(R.string.pref_fakekey_preference_restore)).setOnPreferenceClickListener(preference -> {
             backupUtils.restore(BackupUtils.newestBackupFolder());
             return true;
         });
 
-        final Preference restoreFromDir = findPreference(getString(R.string.pref_fakekey_preference_restore_dirselect));
-        restoreFromDir.setOnPreferenceClickListener(preference -> {
+        findPreference(getString(R.string.pref_fakekey_preference_restore_dirselect)).setOnPreferenceClickListener(preference -> {
             backupUtils.selectBackupDirIntent();
             return true;
         });
@@ -49,10 +45,8 @@ public class PreferenceBackupFragment extends PreferenceFragmentCompat {
 
         updateSummary();
 
-        final SeekBarPreference keepOld = (SeekBarPreference) findPreference(getString(R.string.pref_backups_backup_history_length));
-
-        keepOld.setOnPreferenceChangeListener((preference, value) -> {
-            backupUtils.deleteBackupHistoryDialog((SeekBarPreference) preference, (int) value);
+        findPreference(getString(R.string.pref_backups_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
+            backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value);
             return true;
         });
 
