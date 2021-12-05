@@ -2,3 +2,4 @@
 - Oprava: Mapové soubory Freizeitkarte - Použijte "nejnovější" složku v downloaderu jako řešení pro dočasné chyby serveru
 - Oprava: Zamezeno zobrazení prázdného obsahu na stránkách "O c:geo"
 - Oprava: Povoleno stránkování hvězdiček ve vyskakovacím okně kešky
+- Oprava: Zobrazí chybovou zprávu, pokud se nepodařilo najít mezipaměť při pokusu o obnovení
