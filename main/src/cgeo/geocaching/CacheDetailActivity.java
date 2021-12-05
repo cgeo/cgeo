@@ -1296,9 +1296,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 }
             }
 
-            binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, a));
+            binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, a, () -> toggleAttributesView()));
             binding.attributesGrid.setVisibility(View.VISIBLE);
-            binding.attributesGrid.setOnItemClickListener((parent, view, position, id) -> toggleAttributesView());
 
             binding.attributesText.setText(HtmlCompat.fromHtml(text.toString(), 0));
             binding.attributesText.setVisibility(View.GONE);
