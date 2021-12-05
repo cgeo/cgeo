@@ -20,6 +20,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
 
     public static final int DONE = -1000;
     protected static final int UPDATE_LOAD_PROGRESS_DETAIL = 42186;
+    protected static final int UPDATE_SHOW_STATUS_TOAST = 42187;
     private final CompositeDisposable disposables = new CompositeDisposable();
 
     protected DisposableHandler(final Looper serviceLooper) {
@@ -130,6 +131,12 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     public static void sendLoadProgressDetail(@Nullable final Handler handler, @StringRes final int resourceId) {
         if (handler != null) {
             handler.obtainMessage(UPDATE_LOAD_PROGRESS_DETAIL, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
+        }
+    }
+
+    public static void sendShowStatusToast(@Nullable final Handler handler, @StringRes final int resourceId) {
+        if (handler != null) {
+            handler.obtainMessage(UPDATE_SHOW_STATUS_TOAST, CgeoApplication.getInstance().getString(resourceId)).sendToTarget();
         }
     }
 }

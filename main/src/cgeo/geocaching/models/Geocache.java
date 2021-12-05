@@ -23,6 +23,7 @@ import cgeo.geocaching.enumerations.CoordinatesType;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.LoadFlags.RemoveFlag;
 import cgeo.geocaching.enumerations.LoadFlags.SaveFlag;
+import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
@@ -1872,12 +1873,18 @@ public class Geocache implements IWaypoint {
                 if (origCache.isOffline() || StringUtils.isBlank(origCache.getDescription())) {
                     final SearchResult search = searchByGeocode(origCache.getGeocode(), null, false, handler);
                     cache = search != null ? search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB) : origCache;
+                    if (search != null && search.getError() != StatusCode.NO_ERROR) {
+                        DisposableHandler.sendShowStatusToast(handler, search.getError().getErrorString());
+                    }
                 } else {
                     cache = origCache;
                 }
             } else if (StringUtils.isNotBlank(geocode)) {
                 final SearchResult search = searchByGeocode(geocode, null, forceRedownload, handler);
                 cache = search != null ? search.getFirstCacheFromResult(LoadFlags.LOAD_CACHE_OR_DB) : null;
+                if (search != null && search.getError() != StatusCode.NO_ERROR) {
+                    DisposableHandler.sendShowStatusToast(handler, search.getError().getErrorString());
+                }
             } else {
                 cache = null;
             }
