@@ -305,7 +305,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
             } else {
                 geocode = ConnectorFactory.getGeocodeFromText(clipboardText);
             }
-            if (!geocode.isEmpty()) {
+            if (!StringUtils.isEmpty(geocode)) {
                 binding.geocode.setText(geocode);
                 binding.geocodeInputLayout.setHelperText(getString(R.string.search_geocode_from_clipboard));
 
