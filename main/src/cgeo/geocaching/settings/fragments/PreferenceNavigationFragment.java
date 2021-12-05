@@ -30,15 +30,15 @@ public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
 
         initDefaultNavigationPreferences();
         initOfflineRoutingPreferences();
-
-        // TODO: Logic for ProximityDistance needs to be reimplemented
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        getActivity().setTitle(R.string.settings_title_navigation);
-        initPublicFolders(this, ((SettingsActivity) getActivity()).getCsah());
+        final SettingsActivity activity = (SettingsActivity) getActivity();
+        assert activity != null;
+        activity.setTitle(R.string.settings_title_navigation);
+        initPublicFolders(this, activity.getCsah());
 
         final Preference tool1 = findPreference(getString(R.string.pref_defaultNavigationTool));
         assert tool1 != null;
