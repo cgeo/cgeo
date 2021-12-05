@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.InstallWizardActivity;
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
@@ -531,6 +532,9 @@ public class BackupUtils {
             dialog.dismiss();
             consumer.accept(stringBuilder.toString());
         });
+        if (activityContext instanceof MainActivity) {
+            ((MainActivity) activityContext).updateCacheCounter();
+        }
     }
 
     private void backupInternal(final Runnable runAfterwards) {
