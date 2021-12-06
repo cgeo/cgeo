@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Dados do mapa</string>
     <string name="menu_dashboard">Painel de entrada</string>
     <string name="menu_history">Histórico</string>
+    <string name="menu_search_clipboard">Carregar geo-código da área de transferência</string>
     <string name="menu_history_longstring">Histórico de Encontradas</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -337,7 +338,7 @@
     <string name="advanced_search_button">Pesquisar</string>
     <string name="stored_caches_button">Armazenadas</string>
     <string name="any_button">Ir para</string>
-    <string name="unknown_scan">A leitura realizada não determinou qualquer código GC.</string>
+    <string name="unknown_scan">O resultado da leitura não contém qualquer geo-código.</string>
     <!-- caches -->
     <string name="caches_no_cache">Nenhuma cache</string>
     <string name="caches_more_caches">Carregar mais caches</string>
@@ -368,7 +369,7 @@
     <string name="caches_sort_favorites">Favoritos</string>
     <string name="caches_sort_favorites_ratio">Favoritos [%]</string>
     <string name="caches_sort_name">Nome</string>
-    <string name="caches_sort_geocode">Código GC</string>
+    <string name="caches_sort_geocode">Geo-código</string>
     <string name="caches_sort_rating">Avaliação</string>
     <string name="caches_sort_vote">Votos (avaliação própria)</string>
     <string name="caches_sort_inventory">Nº de itens no Inventário</string>
@@ -827,6 +828,7 @@
     <string name="init_map_directory_description">Pasta com mapas offline</string>
     <string name="init_brouter_directory_description">Pasta com dados de encaminhamento do BRouter</string>
     <string name="init_updateinterval_title">Intervalo de actualização</string>
+    <string name="init_updateinterval_description">Lembra a cada x dias para verificar por actualizações (válido apenas para ficheiros transferidos a partir do c:geo), 0=off</string>
     <string name="init_gpx_importexportdir">Pasta GPX</string>
     <string name="init_dataDir">Seleccionar pasta de dados</string>
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
@@ -926,7 +928,7 @@
     <string name="feature_search_keyword">Pesquisa por palavra-chave</string>
     <string name="feature_search_live_map">Mapa em tempo real</string>
     <string name="feature_search_center">Pesquisa por posição</string>
-    <string name="feature_search_geocode">Pesquisa por código GC</string>
+    <string name="feature_search_geocode">Pesquisa por geo-código</string>
     <string name="feature_search_owner">Pesquisa por proprietário</string>
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
@@ -1220,7 +1222,7 @@
     <string name="cache_status_disabled">Desactivada</string>
     <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
-    <string name="cache_geocode">Código GC</string>
+    <string name="cache_geocode">Geo-código</string>
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Definir nome da cache</string>
     <string name="cache_name_updated">Nome da cache actualizado</string>
@@ -1410,9 +1412,9 @@
     <string name="search_coordinates_button">Pesquisar por coordenadas</string>
     <string name="search_address">Endereço</string>
     <string name="search_address_button">Pesquisar por endereço</string>
-    <string name="search_geo">Código GC</string>
-    <string name="search_geo_button">Pesquisar por código GC</string>
-    <string name="search_geocode_from_clipboard">O Geocode foi colado da área de transferência.</string>
+    <string name="search_geo">Geo-código</string>
+    <string name="search_geo_button">Pesquisar por geo-código</string>
+    <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
@@ -1802,6 +1804,7 @@
     <string name="attribute_historic_no">Não é uma estrutura abandonada ou ruína</string>
     <string name="attribute_blind_people_yes">Adequa-se a pessoas cegas</string>
     <string name="attribute_blind_people_no">Não é adequada a pessoas cegas</string>
+    <string name="attribute_unknown">Atributo desconhecido</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Ferramentas necessárias</string>
     <string name="cat_type">Tipo</string>
@@ -1876,8 +1879,8 @@
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">ID de utilizador: %s</string>
-    <string name="trackable_title_log_without_geocode">Código GC não definido</string>
-    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
+    <string name="trackable_title_log_without_geocode">Geo-código não definido</string>
+    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adiciona-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
