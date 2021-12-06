@@ -325,10 +325,10 @@
     <string name="menu_update_mapdata">Dados do mapa</string>
     <string name="menu_history">Histórico</string>
     <string name="menu_filter">Filtro</string>
-    <string name="menu_scan_geo">Ler código GC</string>
+    <string name="menu_scan_geo">Leitura de geo-código</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listas de marcadores</string>
-    <string name="menu_scan_description">O c:geo pode interpretar um código QR impresso que contenha \"geo-códigos\" (GCxxxxx). A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
+    <string name="menu_scan_description">O c:geo pode ler geo-códigos impressos em códigos QR. A aplicação necessária não está instalada. Deseja abrir o Google Play para a instalar?</string>
     <string name="menu_invert_order">Inverter ordem</string>
     <!-- main screen -->
     <string name="live_map_button">Mapa</string>
@@ -336,7 +336,7 @@
     <string name="advanced_search_button">Pesquisar</string>
     <string name="stored_caches_button">Armazenadas</string>
     <string name="any_button">Ir para</string>
-    <string name="unknown_scan">A leitura realizada não determinou qualquer código GC.</string>
+    <string name="unknown_scan">O resultado da leitura não contém qualquer geo-código.</string>
     <!-- caches -->
     <string name="caches_no_cache">Nenhuma cache</string>
     <string name="caches_more_caches">Carregar mais caches</string>
@@ -366,7 +366,7 @@
     <string name="caches_sort_favorites">Favoritos</string>
     <string name="caches_sort_favorites_ratio">Favoritos [%]</string>
     <string name="caches_sort_name">Nome</string>
-    <string name="caches_sort_geocode">Código GC</string>
+    <string name="caches_sort_geocode">Geo-código</string>
     <string name="caches_sort_rating">Avaliação</string>
     <string name="caches_sort_vote">Votos (avaliação própria)</string>
     <string name="caches_sort_inventory">Nº de itens no Inventário</string>
@@ -915,7 +915,7 @@
     <string name="feature_search_keyword">Pesquisa por palavra-chave</string>
     <string name="feature_search_live_map">Mapa em tempo real</string>
     <string name="feature_search_center">Pesquisa por posição</string>
-    <string name="feature_search_geocode">Pesquisa por código GC</string>
+    <string name="feature_search_geocode">Pesquisa por geo-código</string>
     <string name="feature_search_owner">Pesquisa por proprietário</string>
     <string name="feature_search_finder">Pesquisa por quem encontrou</string>
     <string name="feature_favorite">Adicionar a cache aos favoritos</string>
@@ -1209,7 +1209,7 @@
     <string name="cache_status_disabled">Desactivada</string>
     <string name="cache_status_active">Activa</string>
     <string name="cache_status_premium">Apenas membros premium</string>
-    <string name="cache_geocode">Código GC</string>
+    <string name="cache_geocode">Geo-código</string>
     <string name="cache_name">Nome</string>
     <string name="cache_name_set">Definir nome da cache</string>
     <string name="cache_name_updated">Nome da cache actualizado</string>
@@ -1397,9 +1397,9 @@
     <string name="search_coordinates_button">Pesquisar por coordenadas</string>
     <string name="search_address">Endereço</string>
     <string name="search_address_button">Pesquisar por endereço</string>
-    <string name="search_geo">Código GC</string>
-    <string name="search_geo_button">Pesquisar por código GC</string>
-    <string name="search_geocode_from_clipboard">O Geocode foi colado da área de transferência.</string>
+    <string name="search_geo">Geo-código</string>
+    <string name="search_geo_button">Pesquisar por geo-código</string>
+    <string name="search_geocode_from_clipboard">O geo-código foi colado da área de transferência.</string>
     <string name="search_kw">Palavra-chave</string>
     <string name="search_kw_prefill">Palavra-chave</string>
     <string name="search_kw_button">Pesquisar por palavra-chave</string>
@@ -1502,7 +1502,7 @@
     <string name="helper_gpsstatus_description">Pode usar o radar desta aplicação em conjunto com o c:geo. Também disponibiliza uma série de outras informações relacionadas com o GPS.</string>
     <string name="helper_bluetoothgps_description">Permite utilizar um GPS externo, para uma melhor recepção, localização mais precisa e permite poupar a bateria do seu telemóvel.</string>
     <string name="helper_gps_locker_description">GPS Locker mantém o sinal de GPS activo quando alterna entre aplicações e quando o ecrã do seu dispositivo está desligado.</string>
-    <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar códigos GC num código de barras. Com esta aplicação o c:geo consegue ler esses códigos GC directamente do ecrã do seu computador.</string>
+    <string name="helper_barcode_description">Existem scripts Greasemonkey e sítios web que permitem mostrar geo-códigos na forma de código de barras. Com esta aplicação o c:geo consegue ler esses geo-códigos directamente do ecrã do seu computador.</string>
     <string name="helper_google_translate_title">Google Tradutor</string>
     <string name="helper_google_translate_description">Se fizer a transferência dos pacotes de tradução na aplicação Google Tradutor, poderá traduzir com facilidade as descrições das caches no c:geo, ao tocar sem soltar sobre o texto da descrição da cache (mesmo sem uma ligação à Internet).</string>
     <string name="helper_where_you_go_description">WhereYouGo permite jogar e procurar as geocaches do tipo Wherigo. O c:geo pode iniciar automaticamente a transferência dos cartuchos nessa aplicação.</string>
@@ -1854,8 +1854,8 @@
     <string name="init_summary_geokrety">Permite o acesso a trackables de GeoKrety.org</string>
     <string name="init_geokrety_description">Autoriza o c:geo em GeoKrety.org para registo de trackables GeoKrety.</string>
     <string name="init_geokrety_userid">ID de utilizador: %s</string>
-    <string name="trackable_title_log_without_geocode">Código GC não definido</string>
-    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Código GC. É aconselhado a definir um. Quer adiciona-lo agora?</string>
+    <string name="trackable_title_log_without_geocode">Geo-código não definido</string>
+    <string name="trackable_log_without_geocode">Está prestes a enviar um registo sem um Geo-código. É aconselhado a definir um. Quer adiciona-lo agora?</string>
     <string name="do_not_ask_me_again">Não perguntar novamente</string>
     <string name="geokrety_parsing_failed">Falha ao analisar a resposta de GeoKrety.</string>
     <string name="command_move_caches_progress">Movendo as caches para a lista %1s</string>
