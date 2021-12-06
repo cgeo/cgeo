@@ -14,8 +14,9 @@
 - Nuevo: Pasar las coordenadas del caché actual al geochecker (si es soportado por el geochecker)
 
 ### Otro
-- Nuevo: Hacer Ajustes => Ver Configuración filtrable
-- Nuevo: Añadido asistente GC a la lista de aplicaciones útiles
-- Cambiado: Se ha eliminado el escáner de código de barras de la lista de aplicaciones útiles y de la pantalla principal
-- Cambio: BRouter eliminado de la lista de aplicaciones útiles (todavía puede utilizar la navegación externa e interna)
-- Corregido: Evitar comprobaciones repetidas de actualización para mapas/azulejos de ruta con interval=0
+- New: Quick-load geocodes from clipboard text in mainscreen search
+- New: Make Settings => View Settings filterable
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
