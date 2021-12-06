@@ -2,4 +2,4 @@
 - Correcção: ficheiros de mapa do Freizeitkart: Utilize a pasta 'recentes' no gestor de transferências como solução alternativa para erros temporários do servidor
 - Correcção: Evitar erro de excepção de ponteiro nulo nas páginas "Sobre"
 - Correcção: Permitir a mudança da classificação (estrelas) na janela pop-up da cache
-- Fix: Display error message if a cache could not be found while trying to refresh it
+- Correcção: Exibe mensagem de erro se uma cache não puder ser encontrada quando se tenta actualizá-la
