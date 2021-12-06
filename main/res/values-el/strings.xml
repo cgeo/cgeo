@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Δεδομένα χάρτη</string>
     <string name="menu_dashboard">Πίνακας σύνδεσης</string>
     <string name="menu_history">Ιστορικό</string>
+    <string name="menu_search_clipboard">Φόρτωση γεωκωδικού από το πρόχειρο</string>
     <string name="menu_history_longstring">Ιστορικό ευρέσεων</string>
     <string name="menu_filter">Φίλτρο</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
