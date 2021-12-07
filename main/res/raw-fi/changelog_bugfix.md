@@ -1,5 +1,5 @@
 - Korjaa: Mapsforgen välimuistitiedostot: Puhdistus ja uusi sijainti (erillinen kansio)
 - Korjaus: Freizeitkarte karttatiedostot: Käytä 'latest' kansiota lataajan ratkaisuna väliaikaisille palvelimen virheille
-- Fix: Avoid null pointer exception in about pages
-- Fix: Enable wrapping for stars in cache popup
-- Fix: Display error message if a cache could not be found while trying to refresh it
+- Korjaus: Vältä null pointer exception tietoja-sivulla
+- Korjaus: Ota käyttöön rivinvaihto tähdille kätkön ponnahdusikkunassa
+- Korjaa: Näytä virheviesti jos kätköä ei löydy yritettäessä päivittää sitä
