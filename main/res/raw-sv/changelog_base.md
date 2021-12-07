@@ -14,6 +14,7 @@
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
 
 ### Övrigt
+- New: Quick-load geocodes from clipboard text in mainscreen search
 - New: Make Settings => View Settings filterable
 - New: Added GC Wizard to useful apps list
 - Change: Removed barcode scanner from useful apps list and from mainscreen

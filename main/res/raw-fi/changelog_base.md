@@ -1,6 +1,6 @@
 ### Yleiset
 - Muutos: Esitellään alhaalla sijaitseva navigaatio c:geon useimmin käytettyihin toimintoon pääsemiseksi, korvaten vanhan päävalikon
-- Refactored settings to current Android specifications (work in progress, please be patient)
+- Muodostettiin asetukset uudelleen (työn alla, pyydämme kärsivällisyyttä)
 
 ### Kartta
 - Korjaus: ladatessa useita polkuja sisältäviä GPX-tiedostoja näytetään ne erillisinä, yhdistämättöminä kappaleina
@@ -8,14 +8,15 @@
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
-- New: Attributes overview (see Manage Caches => Attributes overview)
+- Uutta: Attribuuttien yleisnäkymä (ks. Hallitse kätköjä => Attribuuttien yleisnäkymä)
 
 ### Kätkön tiedot
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
 
 ### Muu
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
+- Uusi: Tee asetukset => Näytä asetukset suodatettavaksi
+- Uusi: Lisätty GC Wizard hyödyllisten sovellusten luetteloon
+- Muutos: Poistettiin viivakoodiskanneri hyödyllisten sovellusten listalta ja päävalikosta
+- Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
+- Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0

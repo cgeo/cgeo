@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Karttatiedot</string>
     <string name="menu_dashboard">Kirjautumisnäkymä</string>
     <string name="menu_history">Historia</string>
+    <string name="menu_search_clipboard">Lataa geokoodi leikepöydältä</string>
     <string name="menu_history_longstring">Löytöhistoria</string>
     <string name="menu_filter">Suodatin</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -1803,6 +1804,7 @@
     <string name="attribute_historic_no">Ei hylättyä rakennetta / Ei raunioita</string>
     <string name="attribute_blind_people_yes">Soveltuu sokeille</string>
     <string name="attribute_blind_people_no">Ei sovellu sokeille</string>
+    <string name="attribute_unknown">Tuntematon attribuutti</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Työkaluja tarvitaan</string>
     <string name="cat_type">Tyyppi</string>

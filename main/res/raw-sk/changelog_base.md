@@ -14,8 +14,9 @@
 - Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
 
 ### Iné
-- Nové: Urobiť nastavenia => Zobraziť nastavenia filtrovateľné
-- Nové: Do zoznamu užitočných aplikácií pridané GC Wizard
-- Zmena: Zo zoznamu užitočných aplikácií a z hlavnej obrazovky odstránený skener čiarových kódov
-- Zmena: Zo zoznamu užitočných aplikácií odstránený BRouter (naďalej môžete používať externú aj internú navigáciu)
-- Oprava: Odstránenie opakovaných kontrol aktualizácie pre dlaždice mapy/trasovania s intervalom=0
+- New: Quick-load geocodes from clipboard text in mainscreen search
+- New: Make Settings => View Settings filterable
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0

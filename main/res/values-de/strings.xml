@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Kartendaten</string>
     <string name="menu_dashboard">Login-Dashboard</string>
     <string name="menu_history">Verlauf</string>
+    <string name="menu_search_clipboard">Geocode aus der Zwischenablage laden</string>
     <string name="menu_history_longstring">Fundhistorie</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket-Queries</string>

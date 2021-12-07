@@ -14,6 +14,7 @@
 - Neu: Aktuelle Cache-Koordinaten an Geochecker übergeben (falls vom Geochecker unterstützt)
 
 ### Sonstiges
+- Neu: Übernahme von Geocodes aus der Zwischenablage in Suche auf dem Startbildschirm
 - Neu: Übersicht der Einstellungen ist nun filterbar
 - Neu: GC Wizard zur Liste der nützlichen Apps hinzugefügt
 - Änderung: Barcode-Scanner aus der Liste der nützlichen Apps und aus dem Hauptbildschirm entfernt

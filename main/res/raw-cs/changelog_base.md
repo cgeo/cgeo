@@ -14,8 +14,9 @@
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
 
 ### Ostatní
-- Novinka: Provést nastavení => Zobrazit filtrovatelné nastavení
-- Novinka: Průvodce GC Wizard přidán do seznamu užitečných aplikací
-- Změna: Čtečka čárových kódů odebrána ze seznamu užitečných aplikací i z hlavní obrazovky
-- Změna: BRouter odebrán ze seznamu užitečných aplikací (stále můžete používat externí i interní navigaci)
-- Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
+- New: Quick-load geocodes from clipboard text in mainscreen search
+- New: Make Settings => View Settings filterable
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
