@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Kaartgegevens</string>
     <string name="menu_dashboard">Login dashboard</string>
     <string name="menu_history">Geschiedenis</string>
+    <string name="menu_search_clipboard">Geocode van klembord laden</string>
     <string name="menu_history_longstring">Gevonden geschiedenis</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
