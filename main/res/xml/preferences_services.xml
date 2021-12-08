@@ -2,7 +2,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:icon="?attr/settings_cloud"
+    app:icon="@drawable/settings_cloud"
     app:title="@string/settings_title_services"
     app:key="@string/preference_screen_services">
     <PreferenceCategory

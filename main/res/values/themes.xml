@@ -72,19 +72,6 @@
         <item name="android:colorBackground">@color/settings_colorBackgroundDark</item>
         <item name="android:dialogTheme">@style/settings.DialogTheme</item>
         <item name="android:alertDialogTheme">@style/settings.DialogTheme</item>
-
-        <!-- icon resources - can be moved (without suffix "_white") to drawables-night when based on AppCompatActivity -->
-        <item name="settings_cloud">@drawable/settings_cloud_white</item>
-        <item name="settings_details">@drawable/settings_details_white</item>
-        <item name="settings_eye">@drawable/settings_eye_white</item>
-        <item name="settings_map">@drawable/settings_map_white</item>
-        <item name="settings_arrow">@drawable/settings_arrow_white</item>
-        <item name="settings_nut">@drawable/settings_nut_white</item>
-        <item name="settings_pen">@drawable/settings_pen_white</item>
-        <item name="settings_sdcard">@drawable/settings_sdcard_white</item>
-        <item name="settings_backup">@drawable/settings_backup_white</item>
-        <item name="settings_info_icon">@drawable/settings_info_icon_white</item>
-        <item name="settings_map_icon">@drawable/settings_map_white</item>
     </style>
 
     <style name="settings.light" parent="cgeo">
@@ -93,19 +80,6 @@
         <item name="android:colorBackground">@color/settings_colorBackgroundLight</item>
         <item name="android:dialogTheme">@style/settings.DialogTheme.light</item>
         <item name="android:alertDialogTheme">@style/settings.DialogTheme.light</item>
-
-        <!-- icon resources - can be moved (without suffix "_black") to drawables when based on AppCompatActivity -->
-        <item name="settings_cloud">@drawable/settings_cloud_black</item>
-        <item name="settings_details">@drawable/settings_details_black</item>
-        <item name="settings_eye">@drawable/settings_eye_black</item>
-        <item name="settings_map">@drawable/settings_map_black</item>
-        <item name="settings_arrow">@drawable/settings_arrow_black</item>
-        <item name="settings_nut">@drawable/settings_nut_black</item>
-        <item name="settings_pen">@drawable/settings_pen_black</item>
-        <item name="settings_sdcard">@drawable/settings_sdcard_black</item>
-        <item name="settings_backup">@drawable/settings_backup_black</item>
-        <item name="settings_info_icon">@drawable/settings_info_icon_black</item>
-        <item name="settings_map_icon">@drawable/settings_map_black</item>
     </style>
 
     <style name="settings.DialogTheme" parent="@style/Theme.AppCompat.Dialog.Alert">
