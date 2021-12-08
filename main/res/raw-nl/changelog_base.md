@@ -20,3 +20,4 @@
 - Wijziging: barcode scanner verwijderd van handige apps lijst en van het hoofdscherm
 - Wijziging: BRouter verwijderd uit de lijst met nuttige apps (je kunt nog steeds zowel externe als interne navigatie gebruiken)
 - Oplossing: Vermijd herhaalde update controles voor kaarten/routing tegels met interval=0
+- Oplossing: Optimaliseer ondersteuning voor automatisch invullen van wachtwoorden van externe wachtwoord apps in instellingen
