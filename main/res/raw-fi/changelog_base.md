@@ -20,3 +20,4 @@
 - Muutos: Poistettiin viivakoodiskanneri hyödyllisten sovellusten listalta ja päävalikosta
 - Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
 - Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
