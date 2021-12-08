@@ -3,3 +3,5 @@
 - Correcção: Evitar erro de excepção de ponteiro nulo nas páginas "Sobre"
 - Correcção: Permitir a mudança da classificação (estrelas) na janela pop-up da cache
 - Correcção: Exibe mensagem de erro se uma cache não puder ser encontrada quando se tenta actualizá-la
+- Correcção: Mostra o browser predefinido de sistema na selecção de aplicações quando utilizada a opção "Abrir no browser" numa cache
+- Correcção: Adaptar o gestor de transferências para usar a nova página de tema e os novos mapas v5 para o OpenAndroMaps
