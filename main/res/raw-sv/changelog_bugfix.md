@@ -3,3 +3,5 @@
 - Fix: Avoid null pointer exception in about pages
 - Fix: Enable wrapping for stars in cache popup
 - Fix: Display error message if a cache could not be found while trying to refresh it
+- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
+- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
