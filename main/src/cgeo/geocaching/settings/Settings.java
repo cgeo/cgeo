@@ -1958,4 +1958,18 @@ public class Settings {
         return sensitiveKeys;
     }
 
+    public static void putLogTemplate(final String preferenceBaseName, final String title, final String text) {
+        putStringDirect(preferenceBaseName + ".Title", title);
+        putStringDirect(preferenceBaseName, text);
+    }
+
+    public static ImmutablePair<String, String> getLogTemplate(final String preferenceBaseName) {
+        return new ImmutablePair<>(getStringDirect(preferenceBaseName + ".Title", ""), getStringDirect(preferenceBaseName, ""));
+    }
+
+    public static String getLogTemplatePreview(final String preferenceBaseName) {
+        final ImmutablePair<String, String> template = getLogTemplate(preferenceBaseName);
+        return template.getKey() + ": " + template.getValue();
+    }
+
 }

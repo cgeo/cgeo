@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings;
 
+import static cgeo.geocaching.utils.LocalizationUtils.getString;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.log.LogTemplateProvider;
@@ -21,6 +23,7 @@ import androidx.preference.PreferenceViewHolder;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TemplateTextPreference extends Preference {
 
@@ -30,6 +33,7 @@ public class TemplateTextPreference extends Preference {
     private static final String DEFAULT_VALUE = StringUtils.EMPTY;
     private SettingsActivity settingsActivity;
     private EditText editText;
+    private EditText editTitle;
     private String initialValue;
 
     public TemplateTextPreference(final Context context, final AttributeSet attrs) {
@@ -46,35 +50,60 @@ public class TemplateTextPreference extends Preference {
         final Preference pref = findPreferenceInHierarchy(getKey());
         if (pref != null) {
             pref.setOnPreferenceClickListener(preference -> {
-                editSignature();
+                editTemplate();
                 return false;
             });
         }
     }
 
-    private void editSignature() {
+    private void editTemplate() {
         settingsActivity = (SettingsActivity) this.getContext();
 
+        final boolean isSignature = this.getKey().equals(getString(R.string.pref_signature));
+
+        final ImmutablePair<String, String> template = Settings.getLogTemplate(this.getKey());
+
         final View v = LayoutInflater.from(getContext()).inflate(R.layout.template_preference_dialog, null);
+        editTitle = v.findViewById(R.id.title);
+        if (isSignature) {
+            editTitle.setText(R.string.init_signature);
+            editTitle.setEnabled(false);
+        } else {
+            editTitle.setText(template.getKey());
+        }
         editText = v.findViewById(R.id.edit);
-        editText.setText(getPersistedString(initialValue != null ? initialValue : StringUtils.EMPTY));
+        editText.setText(template.getValue());
         Dialogs.moveCursorToEnd(editText);
 
         final AlertDialog dialog = Dialogs.newBuilder(getContext())
             .setView(v)
-            .setPositiveButton(android.R.string.ok, (dialog1, which) -> {
-                final String text = editText.getText().toString();
-                persistString(text);
-                callChangeListener(text);
-            })
+            .setPositiveButton(android.R.string.ok, null)
             .setNeutralButton(R.string.init_signature_template_button, null)
             .show();
 
         // override onClick listener to prevent closing dialog on pressing the "default" button
+        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(v2 -> {
+            final String newTitle = editTitle.getText().toString();
+            final String newText = editText.getText().toString();
+            // check that for log templates both title and text are filled
+            if (!isSignature && StringUtils.isEmpty(newTitle) && !StringUtils.isEmpty(newText)) {
+                editTitle.setError(getString(R.string.init_log_template_missing_error));
+            } else if (!isSignature && !StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
+                editText.setError(getString(R.string.init_log_template_missing_error));
+            } else {
+                if (isSignature) {
+                    persistString(newText);
+                } else {
+                    Settings.putLogTemplate(this.getKey(), newTitle, newText);
+                }
+                callChangeListener(newText);
+                dialog.dismiss();
+            }
+        });
         dialog.getButton(DialogInterface.BUTTON_NEUTRAL).setOnClickListener(v2 -> {
             final AlertDialog.Builder templateBuilder = Dialogs.newBuilder(TemplateTextPreference.this.getContext());
             templateBuilder.setTitle(R.string.init_signature_template_button);
-            final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithSignatureAndLogText();
+            final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
             final String[] items = new String[templates.size()];
             for (int i = 0; i < templates.size(); i++) {
                 items[i] = settingsActivity.getString(templates.get(i).getResourceId());

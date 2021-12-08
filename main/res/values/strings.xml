@@ -774,8 +774,14 @@
     <string name="settings_service_active_unavailable">Active/Unavailable</string>
     <string name="settings_navigation_disabled">This app seems not to be installed</string>
     <string name="init_signature">Signature</string>
+    <string name="init_template_title">Template Title</string>
+    <string name="init_template_text">Template Text</string>
+    <string name="init_log_template">Log Template</string>
+    <string name="init_log_templates">Log Templates</string>
+    <string name="init_log_template_prefix">Template:\u0020</string>
+    <string name="init_log_template_missing_error">Both template title and text need to be provided.</string>
     <string name="init_template_help">Placeholder strings - like [NAME] - are filled with the designated text when the template is used.</string>
-    <string name="init_signature_template_button">Insert Template</string>
+    <string name="init_signature_template_button">Insert Placeholder</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Time</string>
     <string name="init_signature_template_datetime">Date &amp; Time</string>
