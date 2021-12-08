@@ -1,6 +1,6 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:icon="?attr/settings_nut"
+    android:icon="@drawable/settings_nut"
     android:summary="@string/settings_summary_system"
     android:title="@string/settings_title_system">
 
