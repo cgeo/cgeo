@@ -20,3 +20,4 @@
 - Alteração: Scanner de código de barras removido da lista de aplicações úteis e do ecrã principal
 - Alteração: Remoção do BRouter da lista de aplicações úteis (ainda pode usar a navegação externa e interna)
 - Correção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
