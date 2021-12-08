@@ -985,6 +985,8 @@
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stores images and other files related to a cache in a dedicated folder. In some cases (e.g. when importing/exporting the database) this folder may contain obsolete files that can be deleted here.</string>
     <string name="init_maintenance_directories">Delete orphaned files</string>
+    <string name="init_maintenance_start">Maintenance started</string>
+    <string name="init_maintenance_finished">Maintenance finished</string>
     <string name="init_location">Geolocation</string>
     <string name="init_location_note">On devices equipped with Google Play Services, c:geo can automatically use a better geolocation provider. However, this prevents the use of an external BlueTooth GPS receiver.</string>
     <string name="init_location_googleplayservices">Use Google Play Services</string>
