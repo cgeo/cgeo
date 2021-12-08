@@ -3,3 +3,5 @@
 - Oprava: Zamezeno zobrazení prázdného obsahu na stránkách "O c:geo"
 - Oprava: Povoleno stránkování hvězdiček ve vyskakovacím okně kešky
 - Oprava: Zobrazí chybovou zprávu, pokud se nepodařilo najít mezipaměť při pokusu o obnovení
+- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
+- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
