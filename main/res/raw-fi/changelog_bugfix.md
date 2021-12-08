@@ -3,3 +3,5 @@
 - Korjaus: Vältä null pointer exception tietoja-sivulla
 - Korjaus: Ota käyttöön rivinvaihto tähdille kätkön ponnahdusikkunassa
 - Korjaa: Näytä virheviesti jos kätköä ei löydy yritettäessä päivittää sitä
+- Korjaa: Näytä järjestelmän oletusselain sovelluksen valinnassa, kun käytät kätkön valikossa 'Avaa selaimessa'
+- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
