@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Provides all the available templates for logging.
@@ -80,11 +81,17 @@ public final class LogTemplateProvider {
     public abstract static class LogTemplate {
         private final String template;
         @StringRes
-        private final int resourceId;
+        private int resourceId = 0;
+        private String name = "";
 
         protected LogTemplate(final String template, @StringRes final int resourceId) {
             this.template = template;
             this.resourceId = resourceId;
+        }
+
+        protected LogTemplate(final String template, final String name) {
+            this.template = template;
+            this.name = name;
         }
 
         public abstract String getValue(LogContext context);
@@ -96,6 +103,10 @@ public final class LogTemplateProvider {
 
         public final int getItemId() {
             return template.hashCode();
+        }
+
+        public final String getName() {
+            return name;
         }
 
         public final String getTemplateString() {
@@ -337,6 +348,20 @@ public final class LogTemplateProvider {
                 return applyTemplates(nestedTemplate, context);
             }
         });
+        for (int i = 1; i <= 5; i++) {
+            final ImmutablePair<String, String> template = Settings.getLogTemplate("pref_logTemplate" + i);
+            if (!template.getKey().isEmpty()) {
+                templates.add(new LogTemplate("TEMPLATE", template.getKey()) {
+                    @Override
+                    public String getValue(final LogContext context) {
+                        if (StringUtils.contains(template.getValue(), "TEMPLATE")) {
+                            return "invalid template";
+                        }
+                        return applyTemplates(template.getValue(), context);
+                    }
+                });
+            }
+        }
         return templates;
     }
 

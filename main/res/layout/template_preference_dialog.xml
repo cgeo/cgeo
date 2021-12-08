@@ -9,12 +9,21 @@
 
     <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
         <EditText
+            android:id="@+id/title"
+            style="@style/textinput_embedded"
+            android:inputType="textEmailSubject"
+            android:autofillHints="@string/init_template_title"
+            android:hint="@string/init_template_title" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+        <EditText
             android:id="@+id/edit"
             style="@style/textinput_embedded"
             android:inputType="textMultiLine|textCapSentences"
             android:minLines="3"
-            android:hint="@string/init_signature"
-            android:autofillHints="@string/init_signature"/>
+            android:hint="@string/init_template_text"
+            android:autofillHints="@string/init_template_text"/>
     </com.google.android.material.textfield.TextInputLayout>
 
     <TextView

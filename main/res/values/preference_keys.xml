@@ -82,6 +82,11 @@
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_plainLogs">plainLogs</string>
     <string translatable="false" name="pref_signature">signature</string>
+    <string translatable="false" name="pref_logTemplate1">pref_logTemplate1</string>
+    <string translatable="false" name="pref_logTemplate2">pref_logTemplate2</string>
+    <string translatable="false" name="pref_logTemplate3">pref_logTemplate3</string>
+    <string translatable="false" name="pref_logTemplate4">pref_logTemplate4</string>
+    <string translatable="false" name="pref_logTemplate5">pref_logTemplate5</string>
     <string translatable="false" name="pref_sigautoinsert">sigautoinsert</string>
     <string translatable="false" name="pref_offlinelogs_homescreen">offlinelogs_homescreen</string>
     <string translatable="false" name="pref_trackautovisit">trackautovisit</string>
