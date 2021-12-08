@@ -19,7 +19,6 @@ import cgeo.geocaching.ui.EditButton;
 import static cgeo.geocaching.R.id.PlainFormat;
 import static cgeo.geocaching.R.id.coordTable;
 import static cgeo.geocaching.models.CalcState.ERROR_CHAR;
-import static cgeo.geocaching.ui.dialog.CoordinatesInputDialog.GEOPOINT_ARG;
 import static cgeo.geocaching.utils.formulas.Formula.VALID_OPERATOR_PATTERN;
 
 import android.app.Dialog;
@@ -72,6 +71,9 @@ import org.apache.commons.lang3.StringUtils;
  *                 All 'freeVariables' must have a lower-case name.
  */
 public class CoordinatesCalculateDialog extends DialogFragment implements ClickCompleteCallback, LongClickCompleteCallback {
+
+
+    private static final String GEOPOINT_ARG = "gp_arg";
 
     /** Character used to represent a "blanked-out" CoordinateButton */
     private static final String PLACE_HOLDER = "~";

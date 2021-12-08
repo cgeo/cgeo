@@ -102,9 +102,6 @@ public class VariableListTest {
     }
 
 
-
-
-
     /** expectedParams syntax: pure string = expected var, prefix with f: to assert formula, prefix with m: to assert missing vars */
     private void assertVariableList(final VariableList cv, final String ... expectedParams) {
         final List<String> vars = new ArrayList<>();
@@ -120,8 +117,10 @@ public class VariableListTest {
                 vars.add(p);
             }
         }
-        assertThat(cv.getVariableList()).containsExactlyElementsOf(vars);
-        assertThat(cv.getVariableSet()).containsExactlyInAnyOrderElementsOf(vars);
+        assertThat(cv.asList()).containsExactlyElementsOf(vars);
+        assertThat(cv.asSet()).containsExactlyInAnyOrderElementsOf(vars);
         assertThat(cv.getAllMissingVars()).containsExactlyInAnyOrderElementsOf(missingVars);
     }
+
+
 }

@@ -38,6 +38,14 @@
             android:visibility="gone" />
 
         <Button
+            android:id="@+id/calculate_global"
+            style="@style/button_full"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Calculate Coordinates (Global)"
+            android:visibility="gone" />
+
+        <Button
             android:id="@+id/clipboard"
             style="@style/button_full"
             android:layout_width="fill_parent"

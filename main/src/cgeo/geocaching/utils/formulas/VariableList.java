@@ -50,6 +50,10 @@ public class VariableList {
         return state == null ? null : state.getResult();
     }
 
+    public boolean contains(final String var) {
+        return variablesSet.containsKey(var);
+    }
+
     @Nullable
     public VariableMap.VariableState getState(final String var) {
         return variableMap.get(var);
@@ -63,11 +67,11 @@ public class VariableList {
         return size() == 0;
     }
 
-    public List<String> getVariableList() {
+    public List<String> asList() {
         return variableList;
     }
 
-    public Set<String> getVariableSet() {
+    public Set<String> asSet() {
         return variablesSet.keySet();
     }
 
@@ -180,13 +184,14 @@ public class VariableList {
 
     @Nullable
     public Character getLowestMissingChar() {
-        if (!getVariableSet().contains("A")) {
+        if (!asSet().contains("A")) {
             return 'A';
         }
         int lowestContChar = 'A';
-        while (lowestContChar < 'Z' && getVariableSet().contains("" + (char) (lowestContChar + 1))) {
+        while (lowestContChar < 'Z' && asSet().contains("" + (char) (lowestContChar + 1))) {
             lowestContChar++;
         }
         return lowestContChar == 'Z' ? null : (char) (lowestContChar + 1);
     }
+
 }

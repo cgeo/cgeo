@@ -61,6 +61,7 @@
                     android:layout_weight="1">
 
                     <EditText style="@style/textinput_embedded"
+                        android:id="@+id/variable_formula_text"
                         tools:ignore="LabelFor" />
 
                 </com.google.android.material.textfield.TextInputLayout>

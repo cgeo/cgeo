@@ -18,6 +18,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
 import android.view.ContextThemeWrapper;
@@ -41,6 +43,7 @@ import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
+import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -418,5 +421,23 @@ public class ViewUtils {
 
     public static BitmapDrawable bitmapToDrawable (final Bitmap bitmap) {
         return new BitmapDrawable(APP_RESOURCES, bitmap);
+    }
+
+    public static TextWatcher createSimpleWatcher(final Consumer<Editable> callback) {
+        return  new TextWatcher() {
+            @Override
+            public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
+                // Intentionally left empty
+            }
+            @Override
+            public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
+                // Intentionally left empty
+            }
+            @Override
+            public void afterTextChanged(final Editable s) {
+                callback.accept(s);
+            }
+        };
+
     }
 }

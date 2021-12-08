@@ -231,6 +231,37 @@ public class FormulaTest {
         assertThat(eval("5_.12")).as("_ before . should have no effect").isEqualTo(5.12d);
         assertThat(Formula.evaluate("_5.12").getAsString()).as("_ at start should be removed").isEqualTo("5.12");
         assertThat(Formula.evaluate("5.12_").getAsString()).as("_ at end should be removed").isEqualTo("5.12");
+    }
+
+    @Test
+    public void evaluateToString() {
+        assertThat(Formula.compile("A.B").evaluateToString(Formula.toVarProvider("A", 1, "B", 2))).isEqualTo("1.2");
+        assertThat(Formula.compile("A(A+B)B").evaluateToString(Formula.toVarProvider("A", 1, "B", 2))).isEqualTo("132");
+        assertThat(Formula.compile("A.B").evaluateToString(Formula.toVarProvider("A", 1))).isEqualTo("1._");
+        assertThat(Formula.compile("A*5").evaluateToString(Formula.toVarProvider("A", "eddie"))).isEqualTo("eddie * 5");
+        assertThat(Formula.compile("(A*4+(3+4))").evaluateToString(Formula.toVarProvider("A", 2)))
+            .isEqualTo("15");
+        assertThat(Formula.compile("(A*4+(3+4))").evaluateToString(Formula.toVarProvider("A", "e")))
+            .isEqualTo("(e * 4 + 7)");
+        assertThat(Formula.compile("123(4*3)B_A(A*4+(3+4))").evaluateToString(Formula.toVarProvider("A", "eddie")))
+            .isEqualTo("12312_eddie(eddie * 4 + 7)");
+    }
+
+    @Test
+    public void efficientFormulaNodeTrees() {
+        assertThat(Formula.compile("13.123").toDebugString(null, false, true))
+            .as("constant value should be in one node").isEqualTo("13.123{}");
+        assertThat(Formula.compile("13.123(4+5)").toDebugString(null, false, true))
+            .as("constant value should be in one node").isEqualTo("13.1239{}");
+        assertThat(Formula.compile("13.123 + length('abc')").toDebugString(null, false, true))
+            .as("constant value should be in one node").isEqualTo("16.123{}");
+
+        assertThat(Formula.compile("A + (length('abc') + 3)").toDebugString(null, false, true))
+            .as("constant parts should be in one subnode").isEqualTo("_ + 6{_{}6{}}");
+
+        assertThat(Formula.compile("12A.456B8901").toDebugString(null, false, true))
+            .as("decimals should be stored as efficiently as possible").isEqualTo("12_.456_8901{12{}_{}.456{}_{}8901{}}");
+
 
     }
 
