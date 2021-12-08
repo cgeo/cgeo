@@ -75,6 +75,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         super.onCreate(savedInstanceState);
         setTheme();
         setTitle(getString(R.string.view_settings));
+        setUpNavigationEnabled(true);
 
         allItems = new ArrayList<>();
         prefs = getSharedPreferences(ApplicationSettings.getPreferencesName(), MODE_PRIVATE);
@@ -363,7 +364,9 @@ public class ViewSettingsActivity extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
-        if (itemId == R.id.view_settings_edit && !editMode) {
+        if (itemId == android.R.id.home) {
+            finish();
+        } else if (itemId == R.id.view_settings_edit && !editMode) {
             SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
                 editMode = true;
                 updateMenuButtons();
