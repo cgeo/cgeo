@@ -3,3 +3,5 @@
 - 수정: 정보 페이지에서 널 포인터 예외 방지
 - 수정: 캐시 팝업에서 별 줄 바꿈 활성화
 - Fix: Display error message if a cache could not be found while trying to refresh it
+- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
+- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
