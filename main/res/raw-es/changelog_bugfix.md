@@ -3,3 +3,5 @@
 - Corregido: Evitar excepción del puntero nulo en las páginas
 - Corregido: Habilitar envoltura de estrellas en la ventana emergente de caché
 - Fix: Display error message if a cache could not be found while trying to refresh it
+- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
+- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
