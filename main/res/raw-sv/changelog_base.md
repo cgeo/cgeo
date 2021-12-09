@@ -1,9 +1,9 @@
 ### Allmänt
-- Ändring: Introducerar bottennavigering för direkt åtkomst till c:geo's mest använda skärmar, ersätter den gamla huvudskärmen
-- Refactored settings to current Android specifications (work in progress, please be patient)
+- Ändring: Introduktion av bottennavigering för direkt åtkomst till c:geo's mest använda skärmar, ersätter den gamla huvudskärmen
+- Omkonstruerade inställningar till senaste Android-specifikationer (arbete pågår, ha tålamod)
 
 ### Karta
-- Fix: Vid inläsning av GPX-filer med flera spår visas dem som separat, oanslutna spår
+- Fix: Vid inläsning av GPX-filer med flera spår visas de som separata, oanslutna spår
 - Ändring: Aktivera automatiskt spårvisning vid inläsning av en GPX-spårfil
 
 ### Cachelista
