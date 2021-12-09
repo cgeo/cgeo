@@ -3,3 +3,5 @@
 - Corrigé : Erreur "null pointer exception" dans les pages À propos
 - Fix: Enable wrapping for stars in cache popup
 - Corrigé : message d'erreur indiquant qu'une cache n'a pu être trouvée suite à son rafraîchissement
+- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
+- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
