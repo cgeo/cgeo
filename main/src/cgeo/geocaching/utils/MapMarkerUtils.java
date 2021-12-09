@@ -162,9 +162,7 @@ public final class MapMarkerUtils {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
         }
         // top-left: will attend / found / not found / offline-logs
-        if (cache.hasWillAttendForFutureEvent() && mainMarkerId != R.drawable.marker_calendar) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_calendar, Gravity.TOP | Gravity.LEFT));
-        } else if (!showBigSmileys(cacheListType)) {
+        if (!showBigSmileys(cacheListType)) {
             final Integer loggedMarkerId = getMarkerIdIfLogged(cache);
             if (loggedMarkerId != null) {
                 insetsBuilder.withInset(new InsetBuilder(loggedMarkerId, Gravity.TOP | Gravity.LEFT));
