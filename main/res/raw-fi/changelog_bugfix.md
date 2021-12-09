@@ -4,4 +4,4 @@
 - Korjaus: Ota käyttöön rivinvaihto tähdille kätkön ponnahdusikkunassa
 - Korjaa: Näytä virheviesti jos kätköä ei löydy yritettäessä päivittää sitä
 - Korjaa: Näytä järjestelmän oletusselain sovelluksen valinnassa, kun käytät kätkön valikossa 'Avaa selaimessa'
-- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
+- Korjaa: Adaptoi lataaja käyttämään uutta OpenAndroMapsin teemasivua ja niiden uusia v5-karttoja
