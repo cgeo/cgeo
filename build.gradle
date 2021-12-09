@@ -112,7 +112,7 @@ allprojects {
 
                 // force this version because of conflict to our resolutionStrategy from lint-gradle
                 // TODO check necessity after every gradle update (gradlew :main:lintBasicDebug)
-                force 'com.android.tools.build:aapt2-proto:4.2.2-7147631'
+                force 'com.android.tools.build:aapt2-proto:7.0.4-7396180'
             }
         }
     }
