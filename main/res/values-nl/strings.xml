@@ -424,6 +424,10 @@
         <item quantity="one">%d offline gelogd</item>
         <item quantity="other">%d offline gelogd</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache opgeslagen</item>
+        <item quantity="other">%d caches opgeslagen</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Lijsten beheren</string>
     <string name="list_menu_create">Maak nieuwe lijst</string>
