@@ -5,12 +5,18 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
+import android.app.ProgressDialog;
 import android.os.Bundle;
 
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+
+import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
@@ -33,8 +39,24 @@ public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
             return oldValue != Settings.isDbOnSDCard();
         });
 
-        // TODO
-        findPreference(getString(R.string.pref_fakekey_dataDir)).setSummary(Settings.getExternalPrivateCgeoDirectory());
+        final Preference dataDirPreference = findPreference(getString(R.string.pref_fakekey_dataDir));
+        dataDirPreference.setSummary(Settings.getExternalPrivateCgeoDirectory());
+        if (LocalStorage.getAvailableExternalPrivateCgeoDirectories().size() < 2) {
+            dataDirPreference.setEnabled(false);
+        } else {
+            final AtomicLong usedBytes = new AtomicLong();
+            dataDirPreference.setOnPreferenceClickListener(preference -> {
+                final ProgressDialog progress = ProgressDialog.show(getActivity(), getString(R.string.calculate_dataDir_title), getString(R.string.calculate_dataDir), true, false);
+                AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
+                    // calculate disk usage
+                    usedBytes.set(FileUtils.getSize(LocalStorage.getExternalPrivateCgeoDirectory()));
+                }, () -> {
+                    progress.dismiss();
+                    SettingsUtils.showExtCgeoDirChooser(this, usedBytes.get());
+                });
+                return true;
+            });
+        }
     }
 
     @Override
