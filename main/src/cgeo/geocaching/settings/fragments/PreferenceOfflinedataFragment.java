@@ -6,7 +6,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
+import cgeo.geocaching.utils.SettingsUtils;
 
 import android.os.Bundle;
 
@@ -27,6 +27,12 @@ public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
             return true;
         });
 
+        findPreference(getString(R.string.pref_dbonsdcard)).setOnPreferenceClickListener(preference -> {
+            final boolean oldValue = Settings.isDbOnSDCard();
+            DataStore.moveDatabase(getActivity());
+            return oldValue != Settings.isDbOnSDCard();
+        });
+
         // TODO
         findPreference(getString(R.string.pref_fakekey_dataDir)).setSummary(Settings.getExternalPrivateCgeoDirectory());
     }
@@ -37,6 +43,6 @@ public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
         final SettingsActivity activity = (SettingsActivity) getActivity();
         assert activity != null;
         getActivity().setTitle(R.string.settings_title_offlinedata);
-        initPublicFolders(this, activity.getCsah());
+        SettingsUtils.initPublicFolders(this, activity.getCsah());
     }
 }
