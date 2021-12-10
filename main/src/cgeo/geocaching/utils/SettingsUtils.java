@@ -1,18 +1,32 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
+import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
+import android.app.Activity;
 import android.content.SharedPreferences;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
+import androidx.appcompat.app.AlertDialog;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlPullParserException;
 
 public class SettingsUtils {
@@ -144,6 +158,74 @@ public class SettingsUtils {
             });
             preference.setSummary(folder.toUserDisplayableValue());
         }
+    }
+
+    /**
+     * Shows a list of available mount points.
+     */
+    public static void showExtCgeoDirChooser(final PreferenceFragmentCompat fragment, final long usedBytes) {
+        final List<File> extDirs = LocalStorage.getAvailableExternalPrivateCgeoDirectories();
+        final String currentExtDir = LocalStorage.getExternalPrivateCgeoDirectory().getAbsolutePath();
+        final List<CharSequence> directories = new ArrayList<>();
+        final List<Long> freeSpaces = new ArrayList<>();
+        int selectedDirIndex = -1;
+        for (final File dir : extDirs) {
+            if (StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                selectedDirIndex = directories.size();
+            }
+            final long freeSpace = FileUtils.getFreeDiskSpace(dir);
+            freeSpaces.add(freeSpace);
+            directories.add(dir.getAbsolutePath());
+        }
+
+        final SettingsActivity activity = (SettingsActivity) fragment.getActivity();
+        assert activity != null;
+
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+        builder.setTitle(activity.getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
+        builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(activity,
+            android.R.layout.simple_list_item_single_choice,
+            formatDirectoryNames(activity, directories, freeSpaces)) {
+            @Override
+            public boolean areAllItemsEnabled() {
+                return false;
+            }
+
+            @SuppressWarnings("null")
+            @NonNull
+            @Override
+            public View getView(final int position, @Nullable final View convertView, @NonNull final ViewGroup parent) {
+                final View view = super.getView(position, convertView, parent);
+                view.setEnabled(isEnabled(position));
+                return view;
+            }
+
+            @Override
+            public boolean isEnabled(final int position) {
+                return usedBytes < freeSpaces.get(position);
+            }
+        }, selectedDirIndex, (dialog, itemId) -> {
+            SimpleDialog.of(activity).setTitle(R.string.confirm_data_dir_move_title).setMessage(R.string.confirm_data_dir_move).confirm((dialog1, which) -> {
+                final File dir = extDirs.get(itemId);
+                if (!StringUtils.equals(currentExtDir, dir.getAbsolutePath())) {
+                    LocalStorage.changeExternalPrivateCgeoDir(activity, dir.getAbsolutePath());
+                }
+                Settings.setExternalPrivateCgeoDirectory(dir.getAbsolutePath());
+                setPrefSummary(fragment, R.string.pref_fakekey_dataDir, dir.getAbsolutePath());
+            });
+            dialog.dismiss();
+        });
+        builder.setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.cancel());
+        builder.create().show();
+    }
+
+    private static List<CharSequence> formatDirectoryNames(final Activity activity, final List<CharSequence> directories, final List<Long> freeSpaces) {
+        final List<CharSequence> truncated = Formatter.truncateCommonSubdir(directories);
+        final List<CharSequence> formatted = new ArrayList<>(truncated.size());
+        for (int i = 0; i < truncated.size(); i++) {
+            formatted.add(activity.getString(R.string.settings_data_dir_item, truncated.get(i), Formatter.formatBytes(freeSpaces.get(i))));
+        }
+        return formatted;
     }
 
 }
