@@ -2,4 +2,6 @@
 - Fix: Freizeitkarte map bestanden: Gebruik 'laatste' map in de downloader als workaround voor tijdelijke server fouten
 - Oplossing: Vermijd de null pointer exceptie in Over pagina's
 - Oplossing: Inwikkeling voor sterren in cachepop-up inschakelen
-- Fix: Display error message if a cache could not be found while trying to refresh it
+- Oplossing: Toon een foutmelding als een cache niet gevonden kan worden tijdens het vernieuwen
+- Oplossing: Toon systeem standaard browser in app selectie bij 'Open in browser' voor een cache
+- Oplossing: Downloader aanpassen om nieuwe thema pagina en nieuwe v5 kaarten voor OpenAndroMaps te gebruiken

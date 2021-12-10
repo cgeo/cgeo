@@ -424,6 +424,10 @@
         <item quantity="one">%d kirjattu offline-tilassa</item>
         <item quantity="other">%d kirjattu offline-tilassa</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d kätkö tallennettu</item>
+        <item quantity="other">%d kätköä tallennettu</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Hallitse listoja</string>
     <string name="list_menu_create">Luo uusi lista</string>
