@@ -698,7 +698,6 @@
     <string name="settings_navigation_disabled">Zdá se, že tato aplikace není nainstalována</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Zástupné řetězce - podobně jako [NAME] - jsou vyplněny označeným textem při použití šablony.</string>
-    <string name="init_signature_template_button">Vložit šablonu</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Čas</string>
     <string name="init_signature_template_datetime">Datum a čas</string>
