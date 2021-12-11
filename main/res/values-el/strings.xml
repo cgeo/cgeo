@@ -686,8 +686,14 @@
     <string name="settings_service_active_unavailable">Ενεργό/Μη Διαθέσιμο</string>
     <string name="settings_navigation_disabled">Αυτή η εφαρμογή δεν είναι εγκατεστημένη</string>
     <string name="init_signature">Υπογραφή</string>
+    <string name="init_template_title">Τίτλος Προτύπου</string>
+    <string name="init_template_text">Κείμενο Προτύπου</string>
+    <string name="init_log_template">Πρότυπο Καταγραφής</string>
+    <string name="init_log_templates">Πρότυπα Καταγραφής</string>
+    <string name="init_log_template_prefix">Πρότυπο:\u0020</string>
+    <string name="init_log_template_missing_error">Πρέπει να παρέχονται τόσο ο τίτλος όσο και το κείμενο.</string>
     <string name="init_template_help">Οι τοποθετούμενες συμβολοσειρές - όπως [NAME] - συμπληρώνονται με το καθορισμένο κείμενο όταν χρησιμοποιείται το πρότυπο.</string>
-    <string name="init_signature_template_button">Εισαγωγή προτύπου</string>
+    <string name="init_signature_template_button">Δώστε θέση</string>
     <string name="init_signature_template_date">Ημερομηνία</string>
     <string name="init_signature_template_time">Ώρα</string>
     <string name="init_signature_template_datetime">Ημερομηνία &amp; Ώρα</string>
@@ -892,6 +898,8 @@
     <string name="init_maintenance">Συντήρηση</string>
     <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
     <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
+    <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
+    <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
     <string name="init_location">Γεωτοποθεσία</string>
     <string name="init_location_note">Σε συσκευές που διαθέτουν υπηρεσίες Google Play, το c:geo μπορεί να χρησιμοποιήσει αυτόματα ένα καλύτερο πάροχο γεωτοποθεσίας. Ωστόσο, αυτό εμποδίζει τη χρήση ενός εξωτερικού δέκτη BlueTooth GPS.</string>
     <string name="init_location_googleplayservices">Χρησιμοποιείστε τις υπηρεσίες Google Play</string>
