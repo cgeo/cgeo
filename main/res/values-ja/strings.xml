@@ -676,7 +676,6 @@
     <string name="settings_navigation_disabled">未インストール</string>
     <string name="init_signature">署名</string>
     <string name="init_template_help">[NAME] のようなプレースホルダは、テンプレート機能で指定された文字列に置換されます。</string>
-    <string name="init_signature_template_button">テンプレートを挿入</string>
     <string name="init_signature_template_date">日付</string>
     <string name="init_signature_template_time">時刻</string>
     <string name="init_signature_template_datetime">日付と時刻</string>
