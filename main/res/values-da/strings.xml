@@ -610,7 +610,6 @@
     <string name="settings_navigation_disabled">Denne app er muligvis ikke installeret</string>
     <string name="init_signature">Signatur</string>
     <string name="init_template_help">Pladsholderstrenge - som [NAME] - udfyldes med den angivne tekst, når skabelonen bruges.</string>
-    <string name="init_signature_template_button">Indsæt skabelon</string>
     <string name="init_signature_template_date">Dato</string>
     <string name="init_signature_template_time">Tidspunkt</string>
     <string name="init_signature_template_datetime">Dato &amp; tidspunkt</string>
