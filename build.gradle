@@ -7,7 +7,7 @@ buildscript {
         // these dependencies are used by gradle plugins, not by our projects
 
         // Android gradle plugin
-        classpath 'com.android.tools.build:gradle:4.2.2'
+        classpath 'com.android.tools.build:gradle:7.0.4'
 
         // un-mocking of portable Android classes
         classpath 'com.github.bjoernq:unmockplugin:0.7.9'
@@ -112,7 +112,7 @@ allprojects {
 
                 // force this version because of conflict to our resolutionStrategy from lint-gradle
                 // TODO check necessity after every gradle update (gradlew :main:lintBasicDebug)
-                force 'com.android.tools.build:aapt2-proto:4.2.2-7147631'
+                force 'com.android.tools.build:aapt2-proto:7.0.4-7396180'
             }
         }
     }
