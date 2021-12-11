@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.log.LogTemplateProvider;
 import cgeo.geocaching.log.LogTemplateProvider.LogTemplate;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 
 import android.content.Context;
 import android.content.DialogInterface;
@@ -20,8 +21,8 @@ import androidx.preference.PreferenceViewHolder;
 
 import java.util.List;
 
+import com.google.android.material.textfield.TextInputLayout;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TemplateTextPreference extends Preference {
 
@@ -29,10 +30,13 @@ public class TemplateTextPreference extends Preference {
      * default value, if none is given in the preference XML.
      */
     private static final String DEFAULT_VALUE = StringUtils.EMPTY;
-    private SettingsActivity settingsActivity;
     private EditText editText;
     private EditText editTitle;
     private String initialValue;
+
+    public TemplateTextPreference(final Context context) {
+        super(context);
+    }
 
     public TemplateTextPreference(final Context context, final AttributeSet attrs) {
         super(context, attrs);
@@ -48,29 +52,41 @@ public class TemplateTextPreference extends Preference {
         final Preference pref = findPreferenceInHierarchy(getKey());
         if (pref != null) {
             pref.setOnPreferenceClickListener(preference -> {
-                editTemplate();
+                launchEditTemplateDialog();
                 return false;
             });
         }
+        final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
+        if (!isSignature) {
+            holder.itemView.setOnLongClickListener(v -> {
+                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove).confirm((dialog, which) -> {
+                    Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), null, null));
+                    callChangeListener(null);
+                });
+                return true;
+            });
+
+        }
     }
 
-    private void editTemplate() {
-        settingsActivity = (SettingsActivity) this.getContext();
-
-        final boolean isSignature = this.getKey().equals(settingsActivity.getString(R.string.pref_signature));
-
-        final ImmutablePair<String, String> template = Settings.getLogTemplate(this.getKey());
+    public void launchEditTemplateDialog() {
+        final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
 
         final View v = LayoutInflater.from(getContext()).inflate(R.layout.template_preference_dialog, null);
+        final TextInputLayout titleLayout = v.findViewById(R.id.titleLayout);
         editTitle = v.findViewById(R.id.title);
-        if (isSignature) {
-            editTitle.setText(R.string.init_signature);
-            editTitle.setEnabled(false);
-        } else {
-            editTitle.setText(template.getKey());
-        }
         editText = v.findViewById(R.id.edit);
-        editText.setText(template.getValue());
+
+        if (isSignature) {
+            editText.setText(Settings.getSignature());
+        } else {
+            titleLayout.setVisibility(View.VISIBLE);
+            final Settings.PrefLogTemplate template = Settings.getLogTemplate(this.getKey());
+            if (template != null) { // can be null if template contains no value
+                editTitle.setText(template.getTitle());
+                editText.setText(template.getText());
+            }
+        }
         Dialogs.moveCursorToEnd(editText);
 
         final AlertDialog dialog = Dialogs.newBuilder(getContext())
@@ -85,14 +101,14 @@ public class TemplateTextPreference extends Preference {
             final String newText = editText.getText().toString();
             // check that for log templates both title and text are filled
             if (!isSignature && StringUtils.isEmpty(newTitle) && !StringUtils.isEmpty(newText)) {
-                editTitle.setError(settingsActivity.getString(R.string.init_log_template_missing_error));
+                editTitle.setError(getContext().getString(R.string.init_log_template_missing_error));
             } else if (!isSignature && !StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
-                editText.setError(settingsActivity.getString(R.string.init_log_template_missing_error));
+                editText.setError(getContext().getString(R.string.init_log_template_missing_error));
             } else {
                 if (isSignature) {
                     persistString(newText);
                 } else {
-                    Settings.putLogTemplate(this.getKey(), newTitle, newText);
+                    Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), newTitle, newText));
                 }
                 callChangeListener(newText);
                 dialog.dismiss();
@@ -104,7 +120,7 @@ public class TemplateTextPreference extends Preference {
             final List<LogTemplate> templates = LogTemplateProvider.getTemplatesWithoutSignature();
             final String[] items = new String[templates.size()];
             for (int i = 0; i < templates.size(); i++) {
-                items[i] = settingsActivity.getString(templates.get(i).getResourceId());
+                items[i] = getContext().getString(templates.get(i).getResourceId());
             }
             templateBuilder.setItems(items, (dialog3, position) -> {
                 dialog3.dismiss();

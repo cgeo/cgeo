@@ -163,6 +163,41 @@ public class Settings {
         }
     }
 
+    public static class PrefLogTemplate {
+        private final @NonNull String key;
+        private final String title;
+        private final String text;
+
+        public PrefLogTemplate(final @NonNull String key, final String title, final String text) {
+            this.key = key;
+            this.title = title;
+            this.text = text;
+        }
+
+        public PrefLogTemplate(final int templateId, final String title, final String text) {
+            this(Settings.getKey(R.string.pref_logTemplate_prefix) + templateId, title, text);
+        }
+
+
+
+        @NonNull
+        public String getKey() {
+            return key;
+        }
+
+        public int getId() {
+            return Integer.parseInt(key.substring(Settings.getKey(R.string.pref_logTemplate_prefix).length()));
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getText() {
+            return text;
+        }
+    }
+
     //NO_APPLICATION_MODE will be true if Settings is used in context of local unit tests
     private static final boolean NO_APPLICATION_MODE = CgeoApplication.getInstance() == null;
 

@@ -7,7 +7,10 @@
     android:padding="8dp"
     tools:context=".settings.TemplateTextPreference" >
 
-    <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/titleLayout"
+        android:visibility="gone"
+        style="@style/textinput_edittext">
         <EditText
             android:id="@+id/title"
             style="@style/textinput_embedded"
