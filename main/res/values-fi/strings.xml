@@ -695,7 +695,6 @@
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
     <string name="init_template_help">Paikanpitäjämerkit - kuten [NAME] - täytetään määritetyllä tekstillä, kun mallia käytetään.</string>
-    <string name="init_signature_template_button">Lisää malli</string>
     <string name="init_signature_template_date">Päivämäärä</string>
     <string name="init_signature_template_time">Aika</string>
     <string name="init_signature_template_datetime">Päivämäärä &amp; aika</string>
