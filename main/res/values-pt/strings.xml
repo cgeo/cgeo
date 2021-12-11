@@ -424,6 +424,10 @@
         <item quantity="one">%d registada offline</item>
         <item quantity="other">%d registadas offline</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache armazenada</item>
+        <item quantity="other">%d caches armazenadas</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
     <string name="list_menu_create">Criar nova lista</string>
@@ -690,8 +694,14 @@
     <string name="settings_service_active_unavailable">Activo/Indisponível</string>
     <string name="settings_navigation_disabled">Parece que esta aplicação não está instalada</string>
     <string name="init_signature">Assinatura</string>
+    <string name="init_template_title">Título do Modelo</string>
+    <string name="init_template_text">Texto do Modelo</string>
+    <string name="init_log_template">Modelo de Registo</string>
+    <string name="init_log_templates">Modelos de Registo</string>
+    <string name="init_log_template_prefix">Modelo:\u0020</string>
+    <string name="init_log_template_missing_error">O título e o texto do modelo precisam ser fornecidos.</string>
     <string name="init_template_help">As etiquetas de espaço reservado - como [NAME] - são preenchidas com texto aonde o modelo for usado.</string>
-    <string name="init_signature_template_button">Inserir modelo</string>
+    <string name="init_signature_template_button">Inserir Espaço Reservado</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_datetime">Data &amp; Hora</string>
@@ -896,6 +906,8 @@
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
+    <string name="init_maintenance_start">Manutenção iniciada</string>
+    <string name="init_maintenance_finished">Manutenção concluída</string>
     <string name="init_location">Geolocalização</string>
     <string name="init_location_note">Em dispositivos equipados com Serviços do Google Play, o c:geo pode utilizar automaticamente um melhor fornecedor de geolocalização. No entanto, isso impede a utilização de um receptor GPS Bluetooth externo.</string>
     <string name="init_location_googleplayservices">Utilizar Serviços do Google Play</string>
