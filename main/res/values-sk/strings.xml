@@ -697,7 +697,6 @@
     <string name="settings_navigation_disabled">Táto aplikácia zrejme nie je nainštalovaná</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Zástupné znaky (napríklad [NAME]) sa pri použití šablóny vyplnia určeným textom.</string>
-    <string name="init_signature_template_button">Vložiť šablónu</string>
     <string name="init_signature_template_date">Dátum</string>
     <string name="init_signature_template_time">Čas</string>
     <string name="init_signature_template_datetime">Dátum a čas</string>
