@@ -682,7 +682,6 @@
     <string name="settings_navigation_disabled">Esta app no se encuentra instalada</string>
     <string name="init_signature">Firma</string>
     <string name="init_template_help">Las cadenas del marcador de posición - como [NAME] - se rellenan con el texto designado cuando se utiliza la plantilla.</string>
-    <string name="init_signature_template_button">Insertar plantilla</string>
     <string name="init_signature_template_date">Fecha</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_datetime">Fecha &amp; hora</string>
