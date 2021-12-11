@@ -640,7 +640,6 @@
     <string name="settings_service_active_unavailable">Aktyvus/Nepasiekiamas</string>
     <string name="settings_navigation_disabled">Panašu, kad ši programa nėra įdiegta</string>
     <string name="init_signature">Parašas</string>
-    <string name="init_signature_template_button">Įterpti šabloną</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Laikas</string>
     <string name="init_signature_template_datetime">Data ir laikas</string>
