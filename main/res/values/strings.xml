@@ -709,6 +709,7 @@
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Map Content</string>
     <string name="settings_title_map_behavior">Map behavior</string>
+    <string name="settings_title_map_style">Map style</string>
     <string name="settings_title_data_dir">Geocache data folder</string>
     <string name="settings_title_data_dir_usage">Geocache data folder (%1$s used)</string>
     <string name="calculate_dataDir_title">Geocache data usage</string>
