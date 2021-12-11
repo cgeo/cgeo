@@ -687,7 +687,6 @@
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
-    <string name="init_signature_template_button">Şablon Ekle</string>
     <string name="init_signature_template_date">Tarih</string>
     <string name="init_signature_template_time">Saat</string>
     <string name="init_signature_template_datetime">Tarih &amp; Saat</string>
