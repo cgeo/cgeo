@@ -468,7 +468,6 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Dës App schéngt net installéiert ze sinn</string>
     <string name="init_signature">Ënnerschrëft</string>
-    <string name="init_signature_template_button">Virlag afügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zäit</string>
     <string name="init_signature_template_datetime">Datum &amp; Zäit</string>
