@@ -6,6 +6,8 @@
 It also offers basic support for other geocaching platforms.
 It does not require a web browser or exports - just download and start right away.
 
+TESTING CI - DO NOT MERGE2
+
 ## Want to contribute?
 
 Perfect! Please **tell us in the [issue tracker](https://github.com/cgeo/cgeo/issues) before hacking** on your great new feature.
