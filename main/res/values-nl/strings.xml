@@ -695,7 +695,6 @@
     <string name="settings_navigation_disabled">Deze app lijkt niet geïnstalleerd te zijn</string>
     <string name="init_signature">Handtekening</string>
     <string name="init_template_help">Sjabloonvelden - zoals [NAME] - worden gevuld met de betreffende tekst wanneer het sjabloon wordt gebruikt.</string>
-    <string name="init_signature_template_button">Voeg template toe</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tijd</string>
     <string name="init_signature_template_datetime">Datum &amp; tijd</string>
