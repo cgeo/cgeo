@@ -689,7 +689,6 @@
     <string name="settings_navigation_disabled">Aquesta aplicació no s\'ha instal·lat.</string>
     <string name="init_signature">Signatura</string>
     <string name="init_template_help">Les cadenes de marcador de posició, com ara [NAME], s’omplen amb el text designat quan s’utilitza la plantilla.</string>
-    <string name="init_signature_template_button">Insereix una plantilla</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_datetime">Data i hora</string>
