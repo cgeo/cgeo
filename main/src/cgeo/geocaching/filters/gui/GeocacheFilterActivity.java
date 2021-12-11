@@ -89,7 +89,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setThemeAndContentView(R.layout.cache_filter_activity);
-        binding = CacheFilterActivityBinding.bind(findViewById(R.id.activity_viewroot));
+        binding = CacheFilterActivityBinding.bind(findViewById(R.id.cachefilter_activity_viewroot));
 
         binding.filterPropsCheckboxes.removeAllViews();
         this.andOrFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_and_or), R.drawable.ic_menu_logic);

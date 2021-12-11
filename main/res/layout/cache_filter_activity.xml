@@ -2,12 +2,12 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/activity_viewroot"
+    android:id="@+id/cachefilter_activity_viewroot"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:orientation="vertical"
     android:layout_marginTop="10dip"
-    tools:context=".filter.FilterActivity" >
+    tools:context=".filters.gui.GeocacheFilterActivity" >
 
     <LinearLayout
         android:layout_width="fill_parent"
