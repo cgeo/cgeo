@@ -231,4 +231,11 @@ public final class ActivityMixin {
         overrideTransitionToFade(activity);
         activity.finish();
     }
+
+    public static void setDisplayHomeAsUpEnabled(final AppCompatActivity activity, final boolean enabled) {
+        final ActionBar actionbar = activity.getSupportActionBar();
+        if (actionbar != null) {
+            actionbar.setDisplayHomeAsUpEnabled(enabled);
+        }
+    }
 }

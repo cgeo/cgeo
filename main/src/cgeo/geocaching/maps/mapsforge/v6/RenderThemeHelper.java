@@ -25,11 +25,11 @@ import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
-import android.preference.PreferenceManager;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.util.Consumer;
+import androidx.preference.PreferenceManager;
 
 import java.io.File;
 import java.io.IOException;
@@ -48,7 +48,6 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.android.rendertheme.ContentRenderTheme;
 import org.mapsforge.map.android.rendertheme.ContentResolverResourceProvider;
-import org.mapsforge.map.android.util.AndroidUtil;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.renderer.TileRendererLayer;
 import org.mapsforge.map.model.DisplayModel;
@@ -70,7 +69,7 @@ import org.mapsforge.map.rendertheme.ZipXmlThemeResourceProvider;
  * Note: this class is an attempt to bundle all large parts of this code were simply moved from class
  * NewMap and might need refactoring.
  */
-public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPreferences.OnSharedPreferenceChangeListener {
+public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
     private static final PersistableFolder MAP_THEMES_FOLDER = PersistableFolder.OFFLINE_MAP_THEMES;
     private static final File MAP_THEMES_INTERNAL_FOLDER = LocalStorage.getMapThemeInternalSyncDir();
@@ -120,7 +119,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
     public RenderThemeHelper(final Activity activity) {
         this.activity = activity;
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
-        this.sharedPreferences.registerOnSharedPreferenceChangeListener(this);
     }
 
     public void reapplyMapTheme(final ITileLayer tileLayer, final TileCache tileCache) {
@@ -254,7 +252,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         final Intent intent = new Intent(activity, RenderThemeSettings.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         if (themeStyleMenu != null) {
-            intent.putExtra(RenderThemeSettings.RENDERTHEME_MENU, themeStyleMenu);
+            intent.putExtra(RenderThemeSettingsFragment.RENDERTHEME_MENU, themeStyleMenu);
         }
         activity.startActivity(intent);
     }
@@ -292,27 +290,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback, SharedPref
         }
 
         return result;
-    }
-
-    /**
-     * Callback handling for theme settings upon new Map Theme selection.
-     * Note: code was copied 1:1 in February 2021 from NewMap and might need refactoring.
-     * Apparently a restart of NewMap activity is needed when the "mapStype" setting in theme settings is changed. Don't know why though.
-     */
-    @Override
-    public void onSharedPreferenceChanged(final SharedPreferences sharedPreferences, final String s) {
-        if (StringUtils.equals(s, prefThemeOptionMapStyle)) {
-            AndroidUtil.restartActivity(activity);
-        }
-    }
-
-    /**
-     * Please call this method upon destroy of related activity to clean up ressources
-     */
-    public void onDestroy() {
-        if (this.sharedPreferences != null) {
-            this.sharedPreferences.unregisterOnSharedPreferenceChangeListener(this);
-        }
     }
 
     /**

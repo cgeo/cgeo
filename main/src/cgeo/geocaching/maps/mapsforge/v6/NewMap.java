@@ -941,10 +941,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     @Override
     protected void onDestroy() {
         Log.d("NewMap: onDestroy");
-        if (this.renderThemeHelper != null) {
-            this.renderThemeHelper.onDestroy();
-            this.renderThemeHelper = null;
-        }
         this.tileCache.destroy();
         this.mapView.getModel().mapViewPosition.destroy();
         this.mapView.destroy();
