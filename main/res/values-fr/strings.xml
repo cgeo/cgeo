@@ -689,7 +689,6 @@
     <string name="settings_navigation_disabled">Cette application ne semble ne pas être installée</string>
     <string name="init_signature">Signature</string>
     <string name="init_template_help">Les balises de remplacement - comme [NAME] - sont renseignées avec le texte présent dans le modèle utilisé.</string>
-    <string name="init_signature_template_button">Ajouter un signet</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Heure</string>
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
