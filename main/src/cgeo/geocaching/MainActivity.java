@@ -608,7 +608,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                 searchAutoComplete.showDropDown();
             }
         });
-        final RelativeLayoutWithInterceptTouchEventPossibility activityViewroot = findViewById(R.id.activity_viewroot);
+        final RelativeLayoutWithInterceptTouchEventPossibility activityViewroot = findViewById(R.id.bottomnavigation_activity_viewroot);
         activityViewroot.setOnInterceptTouchEventListener(ev -> {
             if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
                 searchItem.collapseActionView();
