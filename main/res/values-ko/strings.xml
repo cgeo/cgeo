@@ -686,7 +686,6 @@
     <string name="settings_navigation_disabled">이 앱이 설치되어 있지 않음</string>
     <string name="init_signature">서명</string>
     <string name="init_template_help">[NAME]과 같은 자리 표시 자 문자열은 템플릿을 사용할 때 지정된 텍스트로 채워집니다.</string>
-    <string name="init_signature_template_button"> 템플릿 삽입</string>
     <string name="init_signature_template_date">날짜</string>
     <string name="init_signature_template_time">시간</string>
     <string name="init_signature_template_datetime">날짜 및 시간</string>
