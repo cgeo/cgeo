@@ -690,7 +690,6 @@
     <string name="settings_navigation_disabled">Appen verkar inte vara installerad</string>
     <string name="init_signature">Signatur</string>
     <string name="init_template_help">Platshållare strängar - som [NAME] - fylls med den angivna texten när mallen används.</string>
-    <string name="init_signature_template_button">Infoga makro</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tid</string>
     <string name="init_signature_template_datetime">Datum &amp; Tid</string>
