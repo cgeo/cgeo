@@ -1,17 +1,21 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Locale;
 import java.util.Map;
 
+import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
 
@@ -42,9 +46,11 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
     }
 
     private void createRenderthemeMenu() {
+        final Activity activity = getActivity();
+
         this.renderthemeMenu.removeAll();
 
-        this.baseLayerPreference = new ListPreference(getActivity());
+        this.baseLayerPreference = new ListPreference(activity);
         baseLayerPreference.setTitle(R.string.settings_title_map_style);
 
         // the id of the setting is the id of the stylemenu, that allows this
@@ -89,6 +95,14 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         });
         renderthemeMenu.addPreference(baseLayerPreference);
 
+        // additional theme info
+        if (isElevateTheme()) {
+            final Preference info = new Preference(activity);
+            info.setSummary(R.string.maptheme_elevate_categoryinfo);
+            info.setIconSpaceReserved(false);
+            renderthemeMenu.addPreference(info);
+        }
+
         String selection = baseLayerPreference.getValue();
         // need to check that the selection stored is actually a valid getLayer in the current rendertheme.
         if (selection == null || !renderthemeOptions.getLayers().containsKey(selection)) {
@@ -98,7 +112,7 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         baseLayerPreference.setSummary(renderthemeOptions.getLayer(selection).getTitle(language));
 
         for (final XmlRenderThemeStyleLayer overlay : this.renderthemeOptions.getLayer(selection).getOverlays()) {
-            final CheckBoxPreference checkbox = new CheckBoxPreference(getActivity());
+            final CheckBoxPreference checkbox = new CheckBoxPreference(activity);
             checkbox.setKey(overlay.getId());
             checkbox.setPersistent(true);
             checkbox.setTitle(overlay.getTitle(language));
@@ -111,4 +125,8 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         }
     }
 
+    private boolean isElevateTheme() {
+        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
+        return StringUtils.containsIgnoreCase(selectedMapRenderTheme, "elevate") || StringUtils.containsIgnoreCase(selectedMapRenderTheme, "elements");
+    }
 }
