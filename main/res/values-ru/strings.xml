@@ -486,7 +486,6 @@
     <string name="settings_service_active">Активен</string>
     <string name="settings_navigation_disabled">Это приложение не установлено</string>
     <string name="init_signature">Подпись</string>
-    <string name="init_signature_template_button">Вставить шаблон</string>
     <string name="init_signature_template_date">Дата</string>
     <string name="init_signature_template_time">Время</string>
     <string name="init_signature_template_datetime">Дата и время</string>
