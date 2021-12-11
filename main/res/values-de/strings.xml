@@ -691,7 +691,6 @@
     <string name="settings_navigation_disabled">Diese App scheint nicht installiert zu sein</string>
     <string name="init_signature">Signatur</string>
     <string name="init_template_help">Platzhalter - wie [NAME] - werden mit dem entsprechenden Text gefüllt, wenn die Vorlage genutzt wird.</string>
-    <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zeit</string>
     <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
