@@ -696,7 +696,6 @@
     <string name="settings_navigation_disabled">Wygląda, że ta aplikacja nie jest zainstalowana</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
-    <string name="init_signature_template_button">Wstaw szablon</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
     <string name="init_signature_template_datetime">Data &amp; Czas</string>
