@@ -2,6 +2,6 @@
 - Corretto: File mappa Freizeitkarte: Usa la cartella 'latest' nel downloader come soluzione per errori temporanei del server
 - Risolto: Evita l'eccezione del puntatore nullo nelle pagine di informazioni
 - Risolto: Abilita l'avvolgimento per le stelle nel popup del cache
-- Fix: Display error message if a cache could not be found while trying to refresh it
-- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
-- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
+- Corretto: visualizza il messaggio di errore se non è stato trovato un cache durante il tentativo di aggiornarne le informazioni
+- Risolto: Mostra browser predefinito di sistema nella selezione delle app usando 'Apri nel browser' per una cache
+- Risolto: Adatta il downloader per usare la pagina del nuovo tema per le nuove OpenAndroMaps v5
