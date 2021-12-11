@@ -11,7 +11,7 @@ import org.apache.tools.ant.filters.ReplaceTokens
 apply plugin: 'com.android.application'
 
 /*
- * https://github.com/KeepSafe/dexcount-gradle-3plugin
+ * https://github.com/KeepSafe/dexcount-gradle-plugin
  * dex counting can take several seconds, therefore do this only on the CI server
  */
 if (isContinuousIntegrationServer()) {
