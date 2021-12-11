@@ -471,7 +471,6 @@
     <string name="settings_service_active">активний</string>
     <string name="settings_navigation_disabled">Здається, цей додаток не встановлено</string>
     <string name="init_signature">підпис</string>
-    <string name="init_signature_template_button">вставити шаблон</string>
     <string name="init_signature_template_date">дата</string>
     <string name="init_signature_template_time">Час</string>
     <string name="init_signature_template_datetime">Дата &amp; Час</string>
