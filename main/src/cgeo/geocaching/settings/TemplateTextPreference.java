@@ -1,7 +1,5 @@
 package cgeo.geocaching.settings;
 
-import static cgeo.geocaching.utils.LocalizationUtils.getString;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.log.LogTemplateProvider;
@@ -59,7 +57,7 @@ public class TemplateTextPreference extends Preference {
     private void editTemplate() {
         settingsActivity = (SettingsActivity) this.getContext();
 
-        final boolean isSignature = this.getKey().equals(getString(R.string.pref_signature));
+        final boolean isSignature = this.getKey().equals(settingsActivity.getString(R.string.pref_signature));
 
         final ImmutablePair<String, String> template = Settings.getLogTemplate(this.getKey());
 
@@ -87,9 +85,9 @@ public class TemplateTextPreference extends Preference {
             final String newText = editText.getText().toString();
             // check that for log templates both title and text are filled
             if (!isSignature && StringUtils.isEmpty(newTitle) && !StringUtils.isEmpty(newText)) {
-                editTitle.setError(getString(R.string.init_log_template_missing_error));
+                editTitle.setError(settingsActivity.getString(R.string.init_log_template_missing_error));
             } else if (!isSignature && !StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
-                editText.setError(getString(R.string.init_log_template_missing_error));
+                editText.setError(settingsActivity.getString(R.string.init_log_template_missing_error));
             } else {
                 if (isSignature) {
                     persistString(newText);
