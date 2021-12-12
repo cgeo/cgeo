@@ -633,6 +633,7 @@
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
+    <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -2084,6 +2085,7 @@ do mapa e dos temas?</string>
     <string name="mapserver_hylly_info">Mapas detalhados para a Finlândia, requer um dos temas de mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
+    <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
