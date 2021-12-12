@@ -625,6 +625,7 @@
     <string name="settings_title_waypoints">Σημεία αναφοράς</string>
     <string name="settings_title_map_content">Περιεχόμενα Χάρτη</string>
     <string name="settings_title_map_behavior">Συμπεριφορά χάρτη</string>
+    <string name="settings_title_map_style">Στυλ χάρτη</string>
     <string name="settings_title_data_dir">Χρήση δεδομένων της κρύπτης</string>
     <string name="settings_title_data_dir_usage">Κατάλογος δεδομένων κρύπτης (%1$s χρησιμοποιείται)</string>
     <string name="calculate_dataDir_title">Χρήση δεδομένων της κρύπτης</string>
@@ -2076,6 +2077,7 @@
     <string name="mapserver_hylly_info">Λεπτομερείς χάρτες για τη Φινλανδία, απαιτούν ένα από τα θέματα χάρτη \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Hylly\"</string>
     <string name="brouter_info">Offline υπηρεσία δρομολόγησης</string>
+    <string name="maptheme_elevate_categoryinfo">Σχετικό για: [A] Περιοχή, [P] POI, [R] Διαδρομές, [W] Τρόποι</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>
