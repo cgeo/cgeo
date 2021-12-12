@@ -721,6 +721,8 @@
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
     <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
     <string name="init_summary_useInternalRouting">Utilitzeu l’encaminament intern per poder utilitzar la descàrrega automàtica de dades d’encaminament i altres funcions</string>
+    <string name="init_bigSmileysOnMap">Icones grans</string>
+    <string name="init_summary_bigSmileysOnMap">Si està activat, els símbols com \"trobat\" o el marcador de \"coordenades corregides\" es mostraran ampliats al mapa en lloc de la icona de tipus de catxé (cal reiniciar).</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
