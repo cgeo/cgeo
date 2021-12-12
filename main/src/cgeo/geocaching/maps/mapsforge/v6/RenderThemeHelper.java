@@ -57,6 +57,7 @@ import org.mapsforge.map.rendertheme.XmlRenderTheme;
 import org.mapsforge.map.rendertheme.XmlRenderThemeMenuCallback;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
+import org.mapsforge.map.rendertheme.XmlThemeResourceProvider;
 import org.mapsforge.map.rendertheme.ZipRenderTheme;
 import org.mapsforge.map.rendertheme.ZipXmlThemeResourceProvider;
 
@@ -100,6 +101,9 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     private static String cachedZipProviderFilename = null;
     private static ZipXmlThemeResourceProvider cachedZipProvider = null;
 
+    // cache most recent resource provider
+    private XmlThemeResourceProvider resourceProvider = null;
+
     private static MapThemeFolderSynchronizer syncTask = null;
 
     private static class ThemeData {
@@ -113,6 +117,22 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
             this.userDisplayableName = userDisplayableName;
             this.fileInfo = fileInfo;
             this.containingFolder = containingFolder;
+        }
+    }
+
+    public enum RenderThemeType {
+        RTT_NONE("", new String[]{}),
+        RTT_ELEVATE("", new String[]{"elevate", "elements"}),
+        RTT_FZK_BASE("freizeitkarte-v5", new String[]{"freizeitkarte"}),
+        RTT_FZK_OUTDOOR_CONTRAST("fzk-outdoor-contrast-v5", new String[]{"fzk-outdoor-contrast"}),
+        RTT_FZK_OUTDOOR_SOFT("fzk-outdoor-soft-v5", new String[]{"fzk-outdoor-soft"});
+
+        public final String relPath;
+        public final String[] searchPaths;
+
+        RenderThemeType(final String relPath, final String[] searchPaths) {
+            this.relPath = relPath;
+            this.searchPaths = searchPaths;
         }
     }
 
@@ -202,6 +222,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme = cachedZipProvider == null ? null : new ZipRenderTheme(themeIdTokens[1], cachedZipProvider, this);
                 }
             }
+            resourceProvider = xmlRenderTheme == null ? null : xmlRenderTheme.getResourceProvider();
         } catch (Exception ex) {
             Log.w("Problem loading Theme [" + theme.id + "]'" + theme.fileInfo.uri + "'", ex);
             xmlRenderTheme = null;
@@ -578,6 +599,22 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
             callback.accept(false);
         }
         return true;
+    }
+
+    public XmlThemeResourceProvider getResourceProvider() {
+        return resourceProvider;
+    }
+
+    public static RenderThemeType getRenderThemeType() {
+        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
+        for (RenderThemeHelper.RenderThemeType rtt : RenderThemeHelper.RenderThemeType.values()) {
+            for (String searchPath : rtt.searchPaths) {
+                if (StringUtils.containsIgnoreCase(selectedMapRenderTheme, searchPath)) {
+                    return rtt;
+                }
+            }
+        }
+        return RenderThemeType.RTT_NONE;
     }
 
 }
