@@ -15,10 +15,10 @@
 
 ### Overig
 - Nieuw: Snel laden van geocodes uit klembordtekst uit hoofdscherm zoekactie
-- New: Added support for 5 log templates
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Nieuw: Ondersteuning toegevoegd voor 5 log-sjablonen
+- Nieuw: Maak instellingen => Weergave instellingen filterbaar
+- Nieuw: GC Wizard aan de lijst met nuttige apps toegevoegd
+- Wijziging: barcode scanner verwijderd van handige apps lijst en van het hoofdscherm
+- Wijziging: BRouter verwijderd uit de lijst met nuttige apps (je kunt nog steeds zowel externe als interne navigatie gebruiken)
+- Oplossing: Vermijd herhaalde update controles voor kaarten/routering tegels met interval=0
+- Oplossing: Optimaliseer ondersteuning voor automatisch invullen van wachtwoorden van externe wachtwoord apps in instellingen
