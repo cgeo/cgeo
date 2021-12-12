@@ -633,6 +633,7 @@
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Kaartinhoud</string>
     <string name="settings_title_map_behavior">Kaart gedrag</string>
+    <string name="settings_title_map_style">Kaartstijl</string>
     <string name="settings_title_data_dir">Geocache gegevensmap</string>
     <string name="settings_title_data_dir_usage">Geocache gegevensmap (%1$s in gebruik)</string>
     <string name="calculate_dataDir_title">Geocache dataverbruik</string>
@@ -694,7 +695,14 @@
     <string name="settings_service_active_unavailable">Actief/niet beschikbaar</string>
     <string name="settings_navigation_disabled">Deze app lijkt niet geïnstalleerd te zijn</string>
     <string name="init_signature">Handtekening</string>
+    <string name="init_template_title">Sjabloontitel</string>
+    <string name="init_template_text">Sjabloontekst</string>
+    <string name="init_log_template">Logsjabloon</string>
+    <string name="init_log_templates">Logsjablonen</string>
+    <string name="init_log_template_prefix">Sjabloon:\u0020</string>
+    <string name="init_log_template_missing_error">Zowel sjabloontitel als tekst moeten worden verstrekt.</string>
     <string name="init_template_help">Sjabloonvelden - zoals [NAME] - worden gevuld met de betreffende tekst wanneer het sjabloon wordt gebruikt.</string>
+    <string name="init_signature_template_button">Plaatshouder invoegen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tijd</string>
     <string name="init_signature_template_datetime">Datum &amp; tijd</string>
@@ -899,6 +907,8 @@
     <string name="init_maintenance">Onderhoud</string>
     <string name="init_maintenance_directories_note">c:geo slaat afbeeldingen en andere bestanden die gerelateerd zijn aan een cache op in een specifieke map. In sommige gevallen (bijv. wanneer de database wordt geïmporteerd/geëxporteerd) kan deze map verouderde bestanden bevatten die hier kunnen worden verwijderd.</string>
     <string name="init_maintenance_directories">Verweesde bestanden verwijderen</string>
+    <string name="init_maintenance_start">Onderhoud gestart</string>
+    <string name="init_maintenance_finished">Onderhoud voltooid</string>
     <string name="init_location">Geolocatie</string>
     <string name="init_location_note">Op apparaten uitgerust met Google Play-Services, kan c:geo automatisch een betere geolocation provider gebruiken. Dit voorkomt echter het gebruik van een externe BlueTooth GPS-ontvanger.</string>
     <string name="init_location_googleplayservices">Gebruik Google Play Services</string>
@@ -2079,6 +2089,7 @@
     <string name="mapserver_hylly_info">Gedetailleerde kaarten voor Finland, vereisen één van de \"Hylly\" kaart thema\'s</string>
     <string name="mapserver_hylly_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Hylly\" kaarten</string>
     <string name="brouter_info">Offline routering service</string>
+    <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
