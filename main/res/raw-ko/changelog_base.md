@@ -14,11 +14,11 @@
 - 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
 
 ### 추가 사항
-- New: Quick-load geocodes from clipboard text in mainscreen search
-- New: Added support for 5 log templates
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
+- 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드
+- 신규: 5개의 로그 템플릿 지원 추가
+- 신규: 설정 만들기 => 필터링 가능한 보기 설정
+- 신규: 유용한 앱 목록에 GC Wizard 추가
+- 변경: 유용한 앱 목록 및 메인 화면에서 바코드 스캐너 제거
+- 변경: 유용한 앱 목록에서 BRouter를 제거했습니다(외부 및 내부 탐색 모두 계속 사용할 수 있음).
+- 수정: 간격이 0인 맵/라우팅 타일에 대한 반복적인 업데이트 확인을 피합니다.
+- 수정: 설정에서 외부 비밀번호 저장소 앱의 비밀번호 자동 완성 지원 최적화
