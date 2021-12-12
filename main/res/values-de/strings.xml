@@ -424,6 +424,10 @@
         <item quantity="one">%d Offline-Log</item>
         <item quantity="other">%d Offline-Logs</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d Cache gespeichert</item>
+        <item quantity="other">%d Caches gespeichert</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Listen verwalten</string>
     <string name="list_menu_create">Neue Liste</string>
@@ -629,6 +633,7 @@
     <string name="settings_title_waypoints">Wegpunkte</string>
     <string name="settings_title_map_content">Karteninhalt</string>
     <string name="settings_title_map_behavior">Kartenverhalten</string>
+    <string name="settings_title_map_style">Kartenstil</string>
     <string name="settings_title_data_dir">Geocache-Datenordner</string>
     <string name="settings_title_data_dir_usage">Geocache-Datenordner (%1$s genutzt)</string>
     <string name="calculate_dataDir_title">Geocache-Datennutzung</string>
@@ -690,7 +695,14 @@
     <string name="settings_service_active_unavailable">Aktiv/Nicht nutzbar</string>
     <string name="settings_navigation_disabled">Diese App scheint nicht installiert zu sein</string>
     <string name="init_signature">Signatur</string>
+    <string name="init_template_title">Vorlagentitel</string>
+    <string name="init_template_text">Vorlagentext</string>
+    <string name="init_log_template">Log-Vorlage</string>
+    <string name="init_log_templates">Log-Vorlagen</string>
+    <string name="init_log_template_prefix">Vorlage:\u0020</string>
+    <string name="init_log_template_missing_error">Sowohl der Vorlagentitel als auch der Text müssen angegeben werden.</string>
     <string name="init_template_help">Platzhalter - wie [NAME] - werden mit dem entsprechenden Text gefüllt, wenn die Vorlage genutzt wird.</string>
+    <string name="init_signature_template_button">Platzhalter einfügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zeit</string>
     <string name="init_signature_template_datetime">Datum &amp; Zeit</string>
@@ -895,6 +907,8 @@
     <string name="init_maintenance">Wartung</string>
     <string name="init_maintenance_directories_note">c:geo speichert Bilder und weitere Dateien zu einem Cache in einem separaten Ordner. In manchen Fällen (z. B. bei Sichern und Wiederherstellen der Datenbank) kann dieser Ordner unnötige Daten enthalten, die hier gelöscht werden können.</string>
     <string name="init_maintenance_directories">Verwaiste Daten löschen</string>
+    <string name="init_maintenance_start">Wartung gestartet</string>
+    <string name="init_maintenance_finished">Wartung beendet</string>
     <string name="init_location">Positionierung</string>
     <string name="init_location_note">Auf Geräten mit Google Play-Diensten kann c:geo automatisch eine bessere Positions-Bestimmung nutzen. Allerdings kann dann kein externer Bluetooth GPS-Empfänger verwendet werden. Weiterhin kann damit ein Energiesparmodus ohne GPS genutzt werden, wenn hohe Genauigkeit nicht unbedingt erforderlich ist.</string>
     <string name="init_location_googleplayservices">Google Play-Dienst nutzen</string>
@@ -2075,6 +2089,7 @@
     <string name="mapserver_hylly_info">Detaillierte Karten für Finnland, benötigen eines der \"Hylly\" Kartendesigns</string>
     <string name="mapserver_hylly_themes_info">Detailliertes Kartendesign, passend für \"Hylly\"-Karten</string>
     <string name="brouter_info">Offline Routing-Dienst</string>
+    <string name="maptheme_elevate_categoryinfo">Relevant für: [A] Flächen, [P] Symbole, [R] Routen, [W] Wege</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
