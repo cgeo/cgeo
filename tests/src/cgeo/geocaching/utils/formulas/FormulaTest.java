@@ -5,6 +5,7 @@ import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.UNEXPECT
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_PARAMETER_COUNT;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
 
+import java.util.Locale;
 import java.util.Set;
 
 import org.junit.Test;
@@ -263,6 +264,24 @@ public class FormulaTest {
             .as("decimals should be stored as efficiently as possible").isEqualTo("12_.456_8901{12{}_{}.456{}_{}8901{}}");
 
 
+    }
+
+    @Test
+    public void unusualCharacter() {
+        assertThat(eval("(3+5) * (4+7)")).isEqualTo(88d);
+        assertThat(eval("(3[5])")).isEqualTo(35d);
+        assertThat(eval("42•2")).isEqualTo(84d);
+        assertThat(eval("42÷2")).isEqualTo(21d);
+        assertThat(eval("42:2")).isEqualTo(21d);
+        assertThat(eval("42—2")).isEqualTo(40d);
+        assertThat(eval("—2")).isEqualTo(-2d);
+    }
+
+    @Test
+    public void checkFormatter() {
+        final char c = 'E';
+        final double d = 9.1324567934d;
+        assertThat(String.format(Locale.US, "%c%09.5f°", c, d)).isEqualTo("E009.13246°");
     }
 
 }

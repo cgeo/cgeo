@@ -193,7 +193,7 @@ public final class Formula {
             boolean hasError = false;
             for (FormulaNode child : children) {
                 final Object v = child.evalToString(variables);
-                if (v instanceof  Value) {
+                if (v instanceof Value) {
                     childValues.add((Value) v);
                 } else {
                     hasError = true;
@@ -430,7 +430,7 @@ public final class Formula {
         for (;;) {
             if (eat('+')) {
                 x = createNumeric("+", new FormulaNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
-            } else if (eat('-')) {
+            } else if (eat('-') || eat('—')) { //those are two different chars
                 x = createNumeric("-", new FormulaNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
             } else {
                 return x;
@@ -441,9 +441,9 @@ public final class Formula {
     private FormulaNode parseTerm() {
         FormulaNode x = parseFactor();
         for (;;) {
-            if (eat('*')) {
+            if (eat('*') || eat('•')) {
                 x = createNumeric("*", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
-            } else if (eat('/') || eat(':')) {
+            } else if (eat('/') || eat(':') || eat('÷')) {
                 x = createNumeric("/", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
             } else if (eat('%')) {
                 x = createNumeric("%", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) % nums.getAsDouble(1)));
@@ -457,7 +457,7 @@ public final class Formula {
         if (eat('+')) {
             return parseFactor(); // unary plus
         }
-        if (eat('-')) {
+        if (eat('-') || eat('—')) { // those are two different chars!
             return createNumeric("-", new FormulaNode[]{parseFactor()}, (nums, vars) -> Value.of(-nums.getAsDouble(0)));
         }
 
@@ -519,13 +519,14 @@ public final class Formula {
     private FormulaNode parseConcatBlock() {
         final List<FormulaNode> nodes = new ArrayList<>();
         while (true) {
-            if (ch == '(') {
+            if (ch == '(' || ch == '[') {
+                final char expectedClosingChar = (ch == '(' ? ')' : ']');
                 nextChar();
                 this.level++;
                 nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v) -> o.get(0), (o, v) -> "(" + o.get(0) + ")"));
                 this.level--;
-                if (!eat(')')) {
-                    throw new FormulaException(UNEXPECTED_TOKEN, ")");
+                if (!eat(expectedClosingChar)) {
+                    throw new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
                 }
             } else if (ch == '\'') {
                 level++;

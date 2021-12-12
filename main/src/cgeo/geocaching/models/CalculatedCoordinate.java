@@ -104,7 +104,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public String toConfig() {
-        return (type == null ? type.name() : "") + "::" + latitudePattern.getExpression() + "::" + longitudePattern.getExpression();
+        return (type != null ? type.name() : "") + "::" + latitudePattern.getExpression() + "::" + longitudePattern.getExpression();
     }
 
     @Override
