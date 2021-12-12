@@ -5,3 +5,4 @@
 - Correcção: Exibe mensagem de erro se uma cache não puder ser encontrada quando se tenta actualizá-la
 - Correcção: Mostra o browser predefinido de sistema na selecção de aplicações quando utilizada a opção "Abrir no browser" numa cache
 - Correcção: Adaptar o gestor de transferências para usar a nova página de tema e os novos mapas v5 para o OpenAndroMaps
+- Fix: On changing a path setting don't ask user for copy or move if old path has no files
