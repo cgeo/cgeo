@@ -1,7 +1,8 @@
-- Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
-- Fix: Avoid null pointer exception in about pages
-- Fix: Enable wrapping for stars in cache popup
-- Fix: Display error message if a cache could not be found while trying to refresh it
-- Fix: Show system default browser in app selection when using 'Open in browser' for a cache
-- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
+- Correcció: fitxers de catxé de Mapsforge: neteja i ubicació nova (carpeta separada)
+- Correcció: fitxers de mapes Freizeitkarte: utilitzeu la carpeta "última" del programa de descàrrega com a solució alternativa per als errors temporals del servidor
+- Correcció: eviteu l'excepció de punter nul a les pàgines
+- Correcció: Habiliteu l'embolcall d'estrelles a la finestra emergent del catxé
+- Correcció: Mostra un missatge d'error si no s'ha trobat un catxé mentre s'intenta actualitzar
+- Correcció: Mostra el navegador predeterminat del sistema a la selecció d'aplicacions quan s'utilitza "Obre al navegador" per a un catxé
+- Correcció: Adaptat el programa de descàrrega per utilitzar una pàgina de tema nova i mapes nous v5 per a OpenAndroMaps
+- Fix: On changing a path setting don't ask user for copy or move if old path has no files
