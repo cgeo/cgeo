@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Mapové podklady</string>
     <string name="menu_dashboard">Prihlasovací panel</string>
     <string name="menu_history">História</string>
+    <string name="menu_search_clipboard">Načítať geokód zo schránky</string>
     <string name="menu_history_longstring">História nálezov</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -427,6 +428,12 @@
         <item quantity="few">%d zalogované offline</item>
         <item quantity="many">%d zalogovaných offline</item>
         <item quantity="other">%d zalogovaných offline</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d keška uložená</item>
+        <item quantity="few">%d kešky uložené</item>
+        <item quantity="many">%d kešiek uložených</item>
+        <item quantity="other">%d kešiek uložených</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Spravovať zoznamy</string>
@@ -635,6 +642,7 @@
     <string name="settings_title_waypoints">Body trasy</string>
     <string name="settings_title_map_content">Obsah máp</string>
     <string name="settings_title_map_behavior">Nastavenie správania mapy</string>
+    <string name="settings_title_map_style">Štýl mapy</string>
     <string name="settings_title_data_dir">Priečinok s údajmi o keškách</string>
     <string name="settings_title_data_dir_usage">Priečinok údajov o keškách (využité %1$s)</string>
     <string name="calculate_dataDir_title">Využitie údajov skrýš</string>
@@ -696,7 +704,14 @@
     <string name="settings_service_active_unavailable">Aktívne/Nedostupné</string>
     <string name="settings_navigation_disabled">Táto aplikácia zrejme nie je nainštalovaná</string>
     <string name="init_signature">Podpis</string>
+    <string name="init_template_title">Názov šablóny</string>
+    <string name="init_template_text">Text šablóny</string>
+    <string name="init_log_template">Šablóna logu</string>
+    <string name="init_log_templates">Šablóny logu</string>
+    <string name="init_log_template_prefix">Šablóna:\u0020</string>
+    <string name="init_log_template_missing_error">Je potrebné uviesť názov aj text šablóny.</string>
     <string name="init_template_help">Zástupné znaky (napríklad [NAME]) sa pri použití šablóny vyplnia určeným textom.</string>
+    <string name="init_signature_template_button">Vložiť zástupný znak</string>
     <string name="init_signature_template_date">Dátum</string>
     <string name="init_signature_template_time">Čas</string>
     <string name="init_signature_template_datetime">Dátum a čas</string>
@@ -899,6 +914,8 @@
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">Aplikácia c:geo ukladá obrázky a ďalšie súbory týkajúce sa kešky vo vyhradenom priečinku. V niektorých prípadoch (napríklad pri importe/exporte databázy) tento priečinok môže obsahovať neaktuálne súbory, ktoré môžete odstrániť tu.</string>
     <string name="init_maintenance_directories">Odstrániť osirelé súbory</string>
+    <string name="init_maintenance_start">Údržba spustená</string>
+    <string name="init_maintenance_finished">Údržba dokončená</string>
     <string name="init_location">Geolokácia</string>
     <string name="init_location_note">Na zariadeniach vybavených službami Google Play môže c:geo automaticky používať lepšiu možnosť geolokácie. Táto možnosť ale zabraňuje používaniu externého bluetooth GPS prijímača. Zároveň, v móde s nízkou spotrebou môže byť zabránené použitiu GPS keď nie je nutná vysoká presnosť zamerania.</string>
     <string name="init_location_googleplayservices">Používanie služieb Google Play</string>
