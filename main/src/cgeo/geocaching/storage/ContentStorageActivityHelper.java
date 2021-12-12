@@ -411,9 +411,21 @@ public class ContentStorageActivityHelper {
 
     private void continuePersistableFolderSelectionCheckFoldersAreEqual(final PersistableFolder folder, final Uri targetUri, final int flags, final CopyChoice copyChoice, final SelectAction action) {
         final Folder before = folder.getFolder();
-        if (copyChoice == CopyChoice.ASK_IF_DIFFERENT && before != null && !FolderUtils.get().foldersAreEqual(before, Folder.fromDocumentUri(targetUri))) {
+        boolean askUserForCopyMove =
+            copyChoice == CopyChoice.ASK_IF_DIFFERENT && before != null && !FolderUtils.get().foldersAreEqual(before, Folder.fromDocumentUri(targetUri));
+        FolderUtils.FolderInfo folderInfoBeforeRaw = null;
 
-            final ImmutableTriple<String, String, String> folderInfo = getInternationalizedFolderInfoStrings(before);
+        if (askUserForCopyMove) {
+            folderInfoBeforeRaw = FolderUtils.get().getFolderInfo(before, -1);
+            //suppress asking user to copy/move if source has 0 files
+            if (folderInfoBeforeRaw.fileCount == 0 && folderInfoBeforeRaw.resultIsIncomplete) {
+                askUserForCopyMove = false;
+            }
+        }
+
+        if (askUserForCopyMove) {
+
+            final ImmutableTriple<String, String, String> folderInfo = folderInfoBeforeRaw.getUserDisplayableFolderInfoStrings();
 
             final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
             final View dialogView = LayoutInflater.from(dialog.getContext()).inflate(R.layout.folder_selection_dialog, null);
