@@ -12,6 +12,8 @@ import cgeo.geocaching.location.DistanceParser;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalcState;
+import cgeo.geocaching.models.CalculatedCoordinate;
+import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.SmileyImage;
@@ -23,6 +25,7 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.dialog.CoordinatesCalculateGlobalDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -67,7 +70,7 @@ import org.androidannotations.annotations.InstanceState;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
-public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState, CoordinatesCalculateGlobalDialog.CalculatedCoordinateUpdate {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -105,9 +108,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     /**
      * State the Coordinate Calculator was last left in.
      */
-    private String calcStateJson;
+    private String calcStateString;
 
     private final Handler loadWaypointHandler = new LoadWaypointHandler(this);
+
+
 
     private static final class LoadWaypointHandler extends WeakReferenceHandler<EditWaypointActivity> {
         LoadWaypointHandler(final EditWaypointActivity activity) {
@@ -132,7 +137,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.lookup = waypoint.getLookup();
                     activity.own = waypoint.isUserDefined();
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
-                    activity.calcStateJson = waypoint.getCalcStateJson();
+                    activity.calcStateString = waypoint.getCalcStateJson();
 
                     if (activity.initViews) {
                         activity.binding.wptVisitedCheckbox.setChecked(waypoint.isVisited());
@@ -212,9 +217,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         if (savedInstanceState != null) {
             initViews = false;
-            calcStateJson = savedInstanceState.getString(CALC_STATE_JSON);
+            calcStateString = savedInstanceState.getString(CALC_STATE_JSON);
         } else {
-            calcStateJson = null;
+            calcStateString = null;
         }
 
         if (geocode != null) {
@@ -368,7 +373,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     return;
                 }
 
-                calcStateJson = waypoint.getCalcStateJson();
+                calcStateString = waypoint.getCalcStateJson();
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
                 Log.e("EditWaypointActivity.loadWaypoint.run", e);
@@ -430,9 +435,16 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         }
 
         private void showCoordinatesInputDialog(final Geopoint geopoint, final Geocache cache) {
-            final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(cache, geopoint);
-            coordsDialog.setCancelable(true);
-            coordsDialog.show(getSupportFragmentManager(), "wpeditdialog");
+            final CoordinateInputData cid = new CoordinateInputData();
+            cid.setGeopoint(geopoint);
+            if (cache != null) {
+                cid.setGeocode(cache.getGeocode());
+            }
+            cid.setNotes(getUserNotes().getText().toString());
+            final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateString);
+            cid.setCalculatedCoordinate(cc);
+
+            CoordinatesInputDialog.show(getSupportFragmentManager(), cid);
         }
     }
 
@@ -444,6 +456,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         } else {
             binding.buttonLatLongitude.setText(String.format("%s%n%s", getResources().getString(R.string.waypoint_latitude_null), getResources().getString(R.string.waypoint_longitude_null)));
             setProjectionEnabled(false);
+        }
+    }
+
+    @Override
+    public void updateCalculatedCoordinates(final CoordinateInputData coordinateInputData) {
+        updateCoordinates(coordinateInputData.getGeopoint());
+        getUserNotes().setText(coordinateInputData.getNotes());
+
+        this.calcStateString = null;
+        if (coordinateInputData.getCalculatedCoordinate() != null) {
+            this.calcStateString = coordinateInputData.getCalculatedCoordinate().toConfig();
         }
     }
 
@@ -464,15 +487,15 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void saveCalculatorState(final CalcState calcState) {
-        this.calcStateJson = null;
+        this.calcStateString = null;
         if (calcState != null && calcState.equations.size() > 0) {
-            this.calcStateJson = calcState.toJSON().toString();
+            this.calcStateString = calcState.toJSON().toString();
         }
     }
 
     @Override
     public CalcState fetchCalculatorState() {
-        return CalcState.fromJSON(calcStateJson);
+        return CalculatedCoordinate.isValidConfig(calcStateString) ? null : CalcState.fromJSON(calcStateString);
     }
 
     /**
@@ -481,7 +504,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putString(CALC_STATE_JSON, calcStateJson);
+        outState.putString(CALC_STATE_JSON, calcStateString);
     }
 
     private WaypointType getSelectedWaypointType() {
@@ -562,7 +585,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         currentState.userNoteText = binding.userNote.getText().toString().trim();
         currentState.type = getSelectedWaypointType();
         currentState.visited = binding.wptVisitedCheckbox.isChecked();
-        currentState.calcStateJson = calcStateJson;
+        currentState.calcStateJson = calcStateString;
 
         return currentState;
     }

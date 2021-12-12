@@ -2,11 +2,9 @@ package cgeo.geocaching.ui;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
-import cgeo.geocaching.databinding.VariableListItemBinding;
 import cgeo.geocaching.databinding.VariableListViewBinding;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaFunction;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -16,9 +14,7 @@ import cgeo.geocaching.utils.functions.Action2;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
-import android.text.Editable;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -27,14 +23,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -43,26 +44,12 @@ import org.apache.commons.lang3.StringUtils;
 
 public class VariableListView extends LinearLayout {
 
-    private static final Pattern VARNAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
+    public enum DisplayType {
 
-    private VariablesListAdapter adapter;
-
-    private static class VariableViewHolder extends RecyclerView.ViewHolder {
-        private final VariableListItemBinding binding;
-        private String varName;
-
-        VariableViewHolder(final View rowView) {
-            super(rowView);
-            binding = VariableListItemBinding.bind(rowView);
-        }
-
-        private void setData(final VariableMap.VariableState variableState, final boolean isAdvanced) {
-
-            this.varName = variableState.getVar();
-            final String displayVarName = VariableList.isVisible(this.varName) ? this.varName : "-";
-            this.binding.variableName.setText(displayVarName);
+        ADVANCED(R.layout.variable_list_item_advanced, (tv, vn) -> {
+            tv.setText(vn);
             final int textSize;
-            switch (displayVarName.length()) {
+            switch (vn.length()) {
                 case 1:
                     textSize = 40;
                     break;
@@ -73,48 +60,109 @@ public class VariableListView extends LinearLayout {
                     textSize = 14;
                     break;
             }
-            this.binding.variableName.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+            tv.setTextSize(TypedValue.COMPLEX_UNIT_DIP, textSize);
+        }),
+        MINIMALISTIC(R.layout.variable_list_item_minimalistic, null);
 
-            final EditText formula = Objects.requireNonNull(this.binding.variableFormula.getEditText());
-            formula.setText(variableState.getFormulaString());
+        @LayoutRes
+        public final int listItemLayout;
+        private final Action2<TextView, String> varNameSetter;
+
+        DisplayType(@LayoutRes final int listItemLayout, final Action2<TextView, String> varNameSetter) {
+            this.listItemLayout = listItemLayout;
+            this.varNameSetter = varNameSetter;
+        }
+
+        void setVariableName(final TextView tv, final String text) {
+            setText(tv, text, varNameSetter);
+        }
+
+        private static void setText(final TextView tv, final String text, final Action2<TextView, String> setter) {
+            if (tv == null) {
+                return;
+            }
+            final String txt = text == null ? "" : text;
+            if (setter != null) {
+                setter.call(tv, txt);
+            } else {
+                tv.setText(txt);
+            }
+        }
+    }
+
+    private static final Pattern VARNAME_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9]*$");
+
+    private VariablesListAdapter adapter;
+
+    private static class VariableViewHolder extends RecyclerView.ViewHolder {
+
+        private final DisplayType displayType;
+        private final TextView viewVariableName;
+        private final TextView viewVariableFormulaText;
+        private final TextView viewVariableResult;
+        private final View viewButtonFunction;
+        private final View viewButtonDelete;
+
+
+        //private final VariableListItemBinding binding;
+        private String varName;
+
+        VariableViewHolder(final View rowView, final DisplayType displayType) {
+            super(rowView);
+            this.displayType = displayType;
+            this.viewVariableName = rowView.findViewById(R.id.variable_name);
+            this.viewVariableFormulaText = rowView.findViewById(R.id.variable_formula_text);
+            this.viewVariableResult = rowView.findViewById(R.id.variable_result);
+            this.viewButtonDelete = rowView.findViewById(R.id.variable_delete);
+            this.viewButtonFunction = rowView.findViewById(R.id.variable_function);
+            //binding = VariableListItemBinding.bind(rowView);
+        }
+
+        private void setData(final VariableMap.VariableState variableState) {
+
+            this.varName = variableState.getVar();
+            final String displayVarName = VariableList.isVisible(this.varName) ? this.varName : "-";
+            this.displayType.setVariableName(this.viewVariableName, displayVarName);
+
+            if (this.viewVariableFormulaText != null) {
+                this.viewVariableFormulaText.setText(variableState.getFormulaString());
+            }
 
             setResult(variableState);
-
-            this.binding.variableDelete.setVisibility(isAdvanced ? VISIBLE : GONE);
-            this.binding.variableResult.setVisibility(isAdvanced ? VISIBLE : GONE);
-            this.binding.variableFunction.setVisibility(isAdvanced ? VISIBLE : GONE);
         }
 
         @SuppressLint("SetTextI18n")
         public void setResult(final VariableMap.VariableState variableState) {
 
+            if (viewVariableResult == null) {
+                return;
+            }
             final boolean isError = variableState.getError() != null;
             if (isError) {
-                this.binding.variableResult.setText(variableState.getError());
-                this.binding.variableResult.setTextColor(Color.RED);
+                viewVariableResult.setText(variableState.getError());
+                viewVariableResult.setTextColor(Color.RED);
             } else {
                 final Value result = variableState.getResult();
-                this.binding.variableResult.setText("= " + (result == null ? "?" : result.toUserDisplayableString()));
-                this.binding.variableResult.setTextColor(ContextCompat.getColor(this.binding.getRoot().getContext(), R.color.colorText));
+                viewVariableResult.setText("= " + (result == null ? "?" : result.toUserDisplayableString()));
+                viewVariableResult.setTextColor(ContextCompat.getColor(viewVariableResult.getContext(), R.color.colorText));
             }
         }
 
         public String getVar() {
             return this.varName;
         }
-
-        public String getFormula() {
-            return Objects.requireNonNull(this.binding.variableFormula.getEditText()).getText().toString();
-        }
     }
 
     public static final class VariablesListAdapter extends ManagedListAdapter<VariableMap.VariableState, VariableViewHolder> {
 
-        private boolean isAdvancedView = true;
+        private DisplayType displayType = DisplayType.ADVANCED;
+        private int displayColumns = 1;
+
         private VariableList variables;
         private boolean textListeningActive = true;
         private final RecyclerView recyclerView;
 
+        private Action2<String, CharSequence> varChangeCallback;
         private Consumer<VariableList> changeCallback;
 
         private VariablesListAdapter(final RecyclerView recyclerView) {
@@ -128,16 +176,20 @@ public class VariableListView extends LinearLayout {
             this.changeCallback = changeCallback;
         }
 
+        public void setVarChangeCallback(final Action2<String, CharSequence> varChangeCallback) {
+            this.varChangeCallback = varChangeCallback;
+        }
+
         public void setVariableList(@NonNull final VariableList variables) {
             this.variables = variables;
             clearList();
-            for (String var : this.variables.getVariableList()) {
+            for (String var : this.variables.asList()) {
                 addItem(this.variables.getState(var));
             }
             callCallback();
         }
 
-        public VariableList getVariableList() {
+        public VariableList getVariables() {
             return this.variables;
         }
 
@@ -146,52 +198,52 @@ public class VariableListView extends LinearLayout {
                 return;
             }
             textListeningActive = false;
-            holder.setData(data, this.isAdvancedView);
+            holder.setData(data);
             textListeningActive = true;
         }
 
         @NonNull
         @Override
         public VariableViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
-            final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.variable_list_item, parent, false);
-            final VariableViewHolder viewHolder = new VariableViewHolder(view);
-            viewHolder.binding.variableDelete.setOnClickListener(v -> removeVarAt(viewHolder.getBindingAdapterPosition()));
+            final View view = LayoutInflater.from(parent.getContext()).inflate(displayType.listItemLayout, parent, false);
+            final VariableViewHolder viewHolder = new VariableViewHolder(view, displayType);
+            if (viewHolder.viewButtonDelete != null) {
+                viewHolder.viewButtonDelete.setOnClickListener(v -> removeVarAt(viewHolder.getBindingAdapterPosition()));
+            }
 
-            Objects.requireNonNull(viewHolder.binding.variableFormula.getEditText()).addTextChangedListener(new TextWatcher() {
-                @Override
-                public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                    //empty on purpose
-                }
-
-                @Override
-                public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                    //empty on purpose
-                }
-
-                @Override
-                public void afterTextChanged(final Editable s) {
+            if (viewHolder.viewVariableFormulaText != null) {
+                viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s ->  {
                     if (textListeningActive) {
                         changeFormulaFor(viewHolder.getBindingAdapterPosition(), s.toString());
+                        if (this.varChangeCallback != null) {
+                            this.varChangeCallback.call(viewHolder.getVar(), s);
+                        }
                     }
-                }
-            });
+                }));
+            }
 
-            viewHolder.binding.variableFunction.setOnClickListener(d -> {
-                final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
-                SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
-                    .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, true, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
-                        final String newFormula = f.getFunctionInsertString();
-                        final EditText editText = viewHolder.binding.variableFormula.getEditText();
-                        editText.setText(newFormula);
-                        changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
-                        editText.setSelection(f.getFunctionInsertCursorPosition());
-                        Keyboard.show(parent.getContext(), editText);
-                    });
-            });
+            if (viewHolder.viewButtonFunction != null) {
+                viewHolder.viewButtonFunction.setOnClickListener(d -> {
+                    final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
+                    SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
+                        .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, true, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
+                            final String newFormula = f.getFunctionInsertString();
+                            if (viewHolder.viewVariableFormulaText != null) {
+                                viewHolder.viewVariableFormulaText.setText(newFormula);
+                                changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
+                                if (viewHolder.viewVariableFormulaText instanceof EditText) {
+                                    ((EditText) viewHolder.viewVariableFormulaText).setSelection(f.getFunctionInsertCursorPosition());
+                                }
+                                Keyboard.show(parent.getContext(), viewHolder.viewVariableFormulaText);
+                            }
+                        });
+                });
+            }
 
-            viewHolder.binding.variableName.setOnClickListener((d ->
-                selectVariableName(viewHolder.getVar(), (o, n) -> changeVarAt(viewHolder.getBindingAdapterPosition(), n))));
-
+            if (viewHolder.viewVariableName != null) {
+                viewHolder.viewVariableName.setOnClickListener((d ->
+                    selectVariableName(viewHolder.getVar(), (o, n) -> changeVarAt(viewHolder.getBindingAdapterPosition(), n))));
+            }
             return viewHolder;
         }
 
@@ -224,7 +276,7 @@ public class VariableListView extends LinearLayout {
             }
             final String oldFormula = oldState.getFormulaString();
             variables.removeVariable(oldState.getVar());
-            removeVarFromViewIfPresent(newVar);
+            removeVariable(newVar);
 
             variables.addVariable(newVar, oldFormula, varPos);
             updateItem(variables.getState(newVar), varPos);
@@ -234,12 +286,16 @@ public class VariableListView extends LinearLayout {
 
         public void addVariable(final String newVar, final String formula) {
             if (newVar != null) {
-                removeVarFromViewIfPresent(newVar);
+                removeVariable(newVar);
             }
             final String var = variables.addVariable(newVar, formula, 0);
             addItem(0, variables.getState(var));
             callCallback();
             notifyItemRangeChanged(0, getItemCount());
+        }
+
+        public boolean containsVariable(final String var) {
+            return variables.contains(var);
         }
 
         public void addAllMissing() {
@@ -255,9 +311,14 @@ public class VariableListView extends LinearLayout {
             callCallback();
         }
 
-        public void sortVariables() {
-            sortItems((v1, v2) -> TextUtils.COLLATOR.compare(v1.getVar(), v2.getVar()));
-            variables.sortVariables(TextUtils.COLLATOR::compare);
+        public void sortVariables(final Comparator<String> comparator) {
+            if (comparator == null) {
+                return;
+            }
+            sortItems((v1, v2) -> comparator.compare(v1.getVar(), v2.getVar()));
+            if (variables != null) {
+                variables.sortVariables(comparator);
+            }
             callCallback();
         }
 
@@ -301,7 +362,7 @@ public class VariableListView extends LinearLayout {
             }
         }
 
-        private void removeVarFromViewIfPresent(final String var) {
+        public void removeVariable(final String var) {
             for (int pos = 0; pos < getItemCount(); pos++) {
                 final VariableViewHolder itemHolder = (VariableViewHolder) this.recyclerView.findViewHolderForLayoutPosition(pos);
                 if (itemHolder != null && itemHolder.getVar().equals(var)) {
@@ -311,16 +372,32 @@ public class VariableListView extends LinearLayout {
             }
         }
 
-        public void setAdvancedView(final boolean isAdvancedView) {
-            if (isAdvancedView == this.isAdvancedView) {
+        public void setDisplay(final DisplayType displayType, final int displayColumns) {
+            final DisplayType dtUsed = displayType == null ? DisplayType.ADVANCED : displayType;
+            final int dcUsed = Math.max(1, displayColumns);
+            if (dtUsed.equals(this.displayType) && dcUsed == this.displayColumns) {
                 return;
             }
-            this.isAdvancedView = isAdvancedView;
-            notifyItemRangeChanged(0, this.getItemCount());
+            this.displayType = dtUsed;
+            this.displayColumns = dcUsed;
+
+            if (this.displayColumns == 1) {
+                this.recyclerView.setLayoutManager(new LinearLayoutManager(this.recyclerView.getContext()));
+            } else {
+                this.recyclerView.setLayoutManager(new GridLayoutManager(this.recyclerView.getContext(), this.displayColumns));
+            }
+
+            //make sure the view is completely recreated
+            this.recyclerView.getRecycledViewPool().clear();
+            this.recyclerView.invalidate();
         }
 
-        public boolean getAdvancedView() {
-            return this.isAdvancedView;
+        public DisplayType getDisplayType() {
+            return this.displayType;
+        }
+
+        public int getDisplayColumns() {
+            return this.displayColumns;
         }
 
         private void callCallback() {

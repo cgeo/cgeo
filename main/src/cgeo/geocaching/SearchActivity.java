@@ -355,9 +355,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     }
 
     private void updateCoordinates() {
-        final CoordinatesInputDialog coordsDialog = CoordinatesInputDialog.getInstance(null, null);
-        coordsDialog.setCancelable(true);
-        coordsDialog.show(getSupportFragmentManager(), "wpedit_dialog");
+        CoordinatesInputDialog.show(getSupportFragmentManager(), null, null);
     }
 
     @Override

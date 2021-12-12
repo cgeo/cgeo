@@ -4,14 +4,18 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActivity;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.CoordinatesInputDialogBinding;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalcState;
+import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
@@ -42,6 +46,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 
 import java.lang.ref.WeakReference;
 import java.util.Arrays;
@@ -52,6 +57,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesInputDialog extends DialogFragment {
 
+    private CoordinateInputData inputData;
     private Geopoint gp;
     private Geopoint cacheCoords;
 
@@ -81,8 +87,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     private CoordInputFormatEnum currentFormat = null;
     private List<EditText> orderedInputs;
 
-    public static final String GEOPOINT_ARG = "GEOPOINT";
-    private static final String CACHECOORDS_ARG = "CACHECOORDS";
+    private static final String INPUT_DATA_ARG = "arg_input_data";
 
     private FragmentActivity myContext;
 
@@ -91,34 +96,43 @@ public class CoordinatesInputDialog extends DialogFragment {
         return Sensors.getInstance().currentGeo().getCoords();
     }
 
-    public static CoordinatesInputDialog getInstance(@Nullable final Geocache cache, @Nullable final Geopoint gp) {
+    public static void show(final FragmentManager mgr, @Nullable final Geocache cache, @Nullable final Geopoint gp) {
+        final CoordinateInputData cid = new CoordinateInputData();
+        cid.setGeopoint(gp);
+        if (cache != null) {
+            cid.setGeocode(cache.getGeocode());
+        }
+        show(mgr, cid);
+    }
+
+    public static void show(final FragmentManager mgr, final CoordinateInputData inputData) {
 
         final Bundle args = new Bundle();
-
-        if (gp != null) {
-            args.putParcelable(GEOPOINT_ARG, gp);
-        }
-
-        if (cache != null) {
-            args.putParcelable(CACHECOORDS_ARG, cache.getCoords());
-        }
+        args.putParcelable(INPUT_DATA_ARG, inputData);
 
         final CoordinatesInputDialog cid = new CoordinatesInputDialog();
         cid.setArguments(args);
-        return cid;
+        cid.setCancelable(true);
+        cid.show(mgr, "coord_input_dialog");
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        gp = getArguments().getParcelable(GEOPOINT_ARG);
+
+        final CoordinateInputData cid = savedInstanceState != null && savedInstanceState.containsKey(INPUT_DATA_ARG) ?
+            savedInstanceState.getParcelable(INPUT_DATA_ARG) :
+            (getArguments() == null ? null : getArguments().getParcelable(INPUT_DATA_ARG));
+        inputData = cid == null ? new CoordinateInputData() : cid;
+        gp = inputData.getGeopoint();
         if (gp == null && !supportsNullCoordinates()) {
             gp = currentCoords();
         }
-        cacheCoords = getArguments().getParcelable(CACHECOORDS_ARG);
 
-        if (savedInstanceState != null && savedInstanceState.getParcelable(GEOPOINT_ARG) != null) {
-            gp = savedInstanceState.getParcelable(GEOPOINT_ARG);
+        final String geocode = inputData.getGeocode();
+        if (geocode != null) {
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+            cacheCoords = cache == null ? null : cache.getCoords();
         }
     }
 
@@ -136,8 +150,8 @@ public class CoordinatesInputDialog extends DialogFragment {
     @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        // TODO: if current input is not committed in gp, read the current input into gp
-        outState.putParcelable(GEOPOINT_ARG, gp);
+        inputData.setGeopoint(gp);
+        outState.putParcelable(INPUT_DATA_ARG, inputData);
     }
 
     @Override
@@ -224,6 +238,15 @@ public class CoordinatesInputDialog extends DialogFragment {
             bCalculate.setVisibility(View.VISIBLE);
         }
 
+        if (!BranchDetectionHelper.isProductionBuild() && inputData.getGeocode() != null) {
+            binding.calculateGlobal.setVisibility(View.VISIBLE);
+            binding.calculateGlobal.setOnClickListener(vv -> {
+                inputData.setGeopoint(gp);
+                CoordinatesCalculateGlobalDialog.show(myContext.getSupportFragmentManager(), inputData);
+                dismiss();
+            });
+        }
+
         if (supportsNullCoordinates()) {
             binding.clear.setOnClickListener(new ClearCoordinatesListener());
             binding.clear.setVisibility(View.VISIBLE);
@@ -285,6 +308,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // not now
     private void updateGUI() {
         if (gp != null) {
             bLat.setText(String.valueOf(gp.getLatDir()));
@@ -350,6 +374,9 @@ public class CoordinatesInputDialog extends DialogFragment {
                 bCalculate.setTypeface(null, Typeface.ITALIC);
             }
         }
+
+        binding.calculateGlobal.setTypeface(null, inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled() ?
+            Typeface.ITALIC : Typeface.NORMAL);
     }
 
     private void setSize(final EditText someEditText) {

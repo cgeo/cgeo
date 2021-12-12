@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableMap;
 
@@ -52,7 +53,11 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             "* Not used by other parts of c:geo yet")
             .setMarkdown(true).applyTo(binding.variablesExperimentalWarning);
         binding.variablesExperimentalWarning.setOnClickListener(d -> {
-            adapter.setAdvancedView(!adapter.getAdvancedView());
+            if (adapter.getDisplayType() == VariableListView.DisplayType.MINIMALISTIC) {
+                adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);
+            } else {
+                adapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
+            }
         });
 
         binding.variablesAdd.setOnClickListener(d ->
@@ -60,9 +65,9 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         binding.variablesAddscan.setOnClickListener(d -> scanCache());
         binding.variablesAddmissing.setOnClickListener(d -> adapter.addAllMissing());
 
-        binding.variablesSort.setOnClickListener(d -> adapter.sortVariables());
+        binding.variablesSort.setOnClickListener(d -> adapter.sortVariables(TextUtils.COLLATOR::compare));
         binding.variablesClear.setOnClickListener(d -> {
-            if (!adapter.getVariableList().isEmpty()) {
+            if (!adapter.getVariables().isEmpty()) {
                 SimpleDialog.of(activity).setTitle(TextParam.text("Delete all"))
                     .setMessage(TextParam.text("Really delete all variables?")).confirm((dd, i) -> adapter.clearAllVariables());
             }
@@ -70,7 +75,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
         binding.variablesAddnextchar.setText(getAddNextCharText());
         binding.variablesAddnextchar.setOnClickListener(d -> {
-            final Character lmc = adapter.getVariableList().getLowestMissingChar();
+            final Character lmc = adapter.getVariables().getLowestMissingChar();
             if (lmc != null) {
                 adapter.addVariable("" + lmc, null);
             }
@@ -83,10 +88,10 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
     }
 
     private String getAddNextCharText() {
-        if (adapter == null || adapter.getVariableList() == null) {
+        if (adapter == null || adapter.getVariables() == null) {
             return "-";
         }
-        final Character lmc = adapter.getVariableList().getLowestMissingChar();
+        final Character lmc = adapter.getVariables().getLowestMissingChar();
         return lmc == null ? "-" : "" + lmc;
     }
 

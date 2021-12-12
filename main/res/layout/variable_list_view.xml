@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_viewroot"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginTop="10dip"
     android:nestedScrollingEnabled="true"
@@ -22,7 +22,7 @@
 
                 android:id="@+id/variables_list"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:clipToPadding="false"
                 android:footerDividersEnabled="false"
                 android:headerDividersEnabled="false"
@@ -31,7 +31,7 @@
                 android:paddingHorizontal="4dip"
                 android:scrollbars="none"
                 tools:ignore="NestedScrolling"
-                tools:listitem="@layout/variable_list_item">
+                tools:listitem="@layout/variable_list_item_advanced">
 
             </androidx.recyclerview.widget.RecyclerView>
         </RelativeLayout>

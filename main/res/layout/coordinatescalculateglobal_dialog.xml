@@ -1,0 +1,118 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.dialog.CoordinatesCalculateDialog">
+
+    <include android:id="@+id/toolbarWrapper" layout="@layout/actionbar_popup" />
+
+    <ScrollView
+        android:id="@+id/scroller"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
+
+
+        <LinearLayout
+            android:id="@+id/scroller_child"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:importantForAutofill="noExcludeDescendants">
+
+            <TextView
+                android:id="@+id/variables_experimental_warning"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/textSize_headingSecondary"
+                android:background="@drawable/mark_orange"
+                android:text="Experimental! Only Plain supported, no auto-add/remove of variables yet, no update of coords when vars are changed elsewhere yet"
+                />
+
+            <include
+                layout="@layout/coordinates_calculate" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <Button
+                    android:id="@+id/variables_sort"
+                    style="@style/button_icon"
+                    app:icon="@drawable/ic_menu_sort_alphabetically"
+                    android:layout_alignParentLeft="true"/>
+
+                <Button
+                    android:id="@+id/variables_addmissing"
+                    style="@style/button"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:layout_margin="6dp"
+                    android:layout_toRightOf="@+id/variables_sort"
+                    android:text="Missing Variables"
+                    app:icon="@drawable/ic_menu_add" />
+
+
+            </RelativeLayout>
+
+
+            <cgeo.geocaching.ui.VariableListView
+                android:id="@+id/variable_list"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/latRes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/edittext_dialog"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+
+                android:gravity="right"
+                android:textAlignment="gravity"/>
+
+            <TextView
+                android:id="@+id/lonRes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                style="@style/edittext_dialog"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:clickable="false"
+
+                android:paddingRight="16dp"
+                android:gravity="end"
+                android:textAlignment="gravity"/>
+
+            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+                <EditText
+                    android:id="@+id/notes_text"
+                    style="@style/textinput_embedded"
+                    android:textSize="@dimen/textSize_detailsPrimary"
+                    android:singleLine="false"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:inputType="textMultiLine|textCapSentences"
+                    android:hint="@string/waypointcalc_notes_prompt" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/done"
+                style="@style/button_full"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/waypoint_done" />
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

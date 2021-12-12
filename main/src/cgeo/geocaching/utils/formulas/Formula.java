@@ -49,6 +49,8 @@ public final class Formula {
 
     public static final String VALID_OPERATOR_PATTERN = "+\\-*/%^*:!";
 
+    private static final Value OVERFLOW_VALUE = Value.of("");
+
     private static final Set<Integer> CHARS = new HashSet<>();
     private static final Set<Integer> CHARS_DIGITS = new HashSet<>();
     private static final Set<Integer> NUMBERS = new HashSet<>();
@@ -59,8 +61,6 @@ public final class Formula {
     //effectively final (assigned final after compilation)
     private String expression;
     private FormulaNode compiledExpression;
-    private final Set<String> neededVars = new HashSet<>();
-    private final Set<String> neededVarsReadOnly = Collections.unmodifiableSet(neededVars);
 
 
     //needed only during parsing/compilation
@@ -107,39 +107,120 @@ public final class Formula {
 
     private static class FormulaNode {
 
-        public final String id;
-        public final Func2<ValueList, Func1<String, Value>, Value> function;
-        public final FormulaNode[] children;
+        private static final FormulaNode[] FORMULA_NODE_EMPTY_ARRAY = new FormulaNode[0];
 
-        public final Action1<Set<String>> neededVars;
+        private final String id;
+        private Func2<ValueList, Func1<String, Value>, Value> function;
+        private final Func2<ValueList, Func1<String, Value>, String> functionToString;
+        private FormulaNode[] children;
 
-        FormulaNode(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
-            this(id, children, function, null);
+        public final Set<String> neededVars;
+
+        FormulaNode(final String id, final FormulaNode[] children,
+                    final Func2<ValueList, Func1<String, Value>, Value> function,
+                    final Func2<ValueList, Func1<String, Value>, String> functionToString) {
+            this(id, children, function, functionToString, null);
         }
 
-        FormulaNode(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function, final Action1<Set<String>> neededVars) {
+        FormulaNode(final String id, final FormulaNode[] children,
+                    final Func2<ValueList, Func1<String, Value>, Value> function,
+                    final Func2<ValueList, Func1<String, Value>, String> functionToString,
+                    final Action1<Set<String>> explicitelyNeeded) {
 
             this.id = id;
-            this.children = children == null ? new FormulaNode[0] : children;
+            this.children = children == null ? FORMULA_NODE_EMPTY_ARRAY : children;
             this.function = function;
-            this.neededVars = neededVars;
-        }
+            this.functionToString = functionToString;
+            this.neededVars = Collections.unmodifiableSet(calculateNeededVars(explicitelyNeeded, children));
 
-        public Value eval(final Func1<String, Value> variables) {
-            return this.function.call(toValueList(children, variables), variables);
-        }
-
-        //calculates the variable names needed by this function
-        public void calculateNeededVariables(final Set<String> result) {
-            if (this.neededVars != null) {
-                this.neededVars.call(result);
+            if (this.neededVars.isEmpty()) {
+                //this means that function is constant!
+                this.function = createConstantFunction();
+                this.children = FORMULA_NODE_EMPTY_ARRAY;
             }
+        }
+
+        public String getId() {
+            return this.id;
+        }
+
+        public Set<String> getNeededVars() {
+            return neededVars;
+        }
+
+        private static Set<String> calculateNeededVars(final Action1<Set<String>> explicitlyNeeded, final FormulaNode[] children) {
+            final Set<String> neededVars = new HashSet<>();
+            if (explicitlyNeeded != null) {
+                explicitlyNeeded.call(neededVars);
+            }
+
+            if (children != null) {
+                for (FormulaNode child : children) {
+                    neededVars.addAll(child.neededVars);
+                }
+            }
+            return neededVars;
+        }
+
+        private Func2<ValueList, Func1<String, Value>, Value> createConstantFunction() {
+            Value result = null;
+            FormulaException resultException = null;
+            try {
+                result = eval(y -> null);
+            } catch (FormulaException fe) {
+                resultException = fe;
+            }
+            final Value finalResult = result;
+            final FormulaException finalResultException = resultException;
+            return (objs, vars) -> {
+                if (finalResultException != null) {
+                    throw finalResultException;
+                }
+                return finalResult;
+            };
+        }
+
+        public Value eval(final Func1<String, Value> variables) throws FormulaException {
+            final ValueList childValues = new ValueList();
             for (FormulaNode child : children) {
-                child.calculateNeededVariables(result);
+                childValues.add(child.eval(variables));
             }
+            return this.function.call(childValues, variables);
         }
 
-        public static ValueList toValueList(final FormulaNode[] nodes, final Func1<String, Value> variables) {
+        public Object evalToString(final Func1<String, Value> variables) {
+            final ValueList childValues = new ValueList();
+            boolean hasError = false;
+            for (FormulaNode child : children) {
+                final Object v = child.evalToString(variables);
+                if (v instanceof  Value) {
+                    childValues.add((Value) v);
+                } else {
+                    hasError = true;
+                    childValues.add(Value.of(v));
+                }
+            }
+            if (!hasError) {
+                try {
+                    return this.function.call(childValues, variables);
+                } catch (FormulaException fe) {
+                    //do nothing
+                }
+            }
+
+            //we had an error in the chain -> produce a String using the error function
+            if (this.functionToString != null) {
+                return this.functionToString.call(childValues, variables);
+            }
+
+            //default "functionToString"
+            if (childValues.size() > 0) {
+                return StringUtils.join(childValues, "");
+            }
+            return "_";
+         }
+
+         public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables) {
             final ValueList childValues = new ValueList();
             for (FormulaNode child : nodes) {
                 childValues.add(child.eval(variables));
@@ -147,12 +228,21 @@ public final class Formula {
             return childValues;
         }
 
-        public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables) {
-            final ValueList childValues = new ValueList();
-            for (FormulaNode child : nodes) {
-                childValues.add(child.eval(variables));
+        /** for test/debug purposes only! */
+        public String toDebugString(final Func1<String, Value> variables, final boolean includeId, final boolean recursive) {
+            final StringBuilder sb = new StringBuilder();
+            if (includeId) {
+                sb.append("[").append(getId()).append("]");
             }
-            return childValues;
+            sb.append(evalToString(variables));
+            if (recursive) {
+                sb.append("{");
+                for (FormulaNode child : children) {
+                    sb.append(child.toDebugString(variables, includeId, recursive));
+                }
+                sb.append("}");
+            }
+            return sb.toString();
         }
     }
 
@@ -160,7 +250,7 @@ public final class Formula {
         return new FormulaNode(id, children, (objs, vars) -> {
             objs.checkAllDouble();
             return function.call(objs, vars);
-        });
+        }, (objs, vars) -> StringUtils.join(objs, " " + id + " "));
     }
 
     static {
@@ -175,6 +265,7 @@ public final class Formula {
         }
         CHARS_DIGITS.addAll(CHARS);
         CHARS_DIGITS.addAll(NUMBERS);
+        NUMBERS.add((int) '.');
     }
 
     public static Formula compile(final String expression) {
@@ -256,7 +347,7 @@ public final class Formula {
         return varMap::get;
     }
 
-    public Value evaluate(final Func1<String, Value> vars) {
+    public Value evaluate(final Func1<String, Value> vars) throws FormulaException {
         try {
             return compiledExpression.eval(vars == null ? x -> null : vars);
         } catch (FormulaException ce) {
@@ -266,12 +357,14 @@ public final class Formula {
         }
     }
 
+    public String evaluateToString(final Func1<String, Value> vars) {
+        return compiledExpression.evalToString(vars == null ? x -> null : vars).toString();
+    }
+
     private String calculateEvaluationContext(final Func1<String, Value> vars) {
         try {
-            final Set<String> neededVars = new HashSet<>();
-            compiledExpression.calculateNeededVariables(neededVars);
             final List<String> list = new ArrayList<>();
-            for (String v : neededVars) {
+            for (String v : compiledExpression.getNeededVars()) {
                 list.add(v + "=" + vars.call(v));
             }
             return StringUtils.join(list, ",");
@@ -281,7 +374,7 @@ public final class Formula {
     }
 
     public Set<String> getNeededVariables() {
-        return neededVarsReadOnly;
+        return compiledExpression.getNeededVars();
     }
 
     protected void doCompile(final String rawExpression, final int startPos, final Func1<Character, Boolean> stopChecker) throws FormulaException {
@@ -299,8 +392,6 @@ public final class Formula {
         }
         this.expression = rawExpression.substring(startPos, pos);
         this.compiledExpression = x;
-        this.neededVars.clear();
-        this.compiledExpression.calculateNeededVariables(this.neededVars);
     }
 
     private void nextChar() {
@@ -393,6 +484,16 @@ public final class Formula {
         return x;
     }
 
+    private FormulaNode parseNumber() {
+        final StringBuilder sb = new StringBuilder();
+        while (NUMBERS.contains(ch)) {
+            sb.append((char) ch);
+            nextChar();
+        }
+        return createSingleValueNode("number", sb.toString());
+
+    }
+
     private FormulaNode parseString() {
         final StringBuilder sb = new StringBuilder();
         boolean foundEnd = false;
@@ -411,43 +512,39 @@ public final class Formula {
         if (!foundEnd) {
             throw new FormulaException(UNEXPECTED_TOKEN, "'");
         }
-        final String literal = sb.toString();
-        return new FormulaNode("string-literal", null, (objs, vars) -> Value.of(literal));
+        return createSingleValueNode("string-literal", sb.toString());
     }
 
 
     private FormulaNode parseConcatBlock() {
         final List<FormulaNode> nodes = new ArrayList<>();
-        boolean isConstantValue = true;
         while (true) {
             if (ch == '(') {
                 nextChar();
                 this.level++;
-                nodes.add(parseExpression());
+                nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v) -> o.get(0), (o, v) -> "(" + o.get(0) + ")"));
                 this.level--;
                 if (!eat(')')) {
                     throw new FormulaException(UNEXPECTED_TOKEN, ")");
                 }
-                isConstantValue = false;
             } else if (ch == '\'') {
                 level++;
                 nodes.add(parseString());
                 level--;
             } else if (ch == '_') {
-                nodes.add(createSingleValueNode("overflow", "_"));
+                nodes.add(createSingleValueNode("overflow", OVERFLOW_VALUE));
                 nextChar();
-            } else if (ch == '.') {
-                nodes.add(createSingleValueNode("decimal-point", "."));
-                nextChar();
+                //constant numbers directly after overflow shall not spill over -> thus create special node for first number digit
+                if (NUMBERS.contains(ch)) {
+                    nodes.add(createSingleValueNode("digit", "" + (char) ch));
+                    nextChar();
+                }
             } else if (ch == '$') {
                 nodes.add(parseExplicitVariable());
-                isConstantValue = false;
             } else if (CHARS.contains(ch)) {
                 nodes.add(parseAlphaNumericBlock());
-                isConstantValue = false;
             } else if (NUMBERS.contains(ch)) {
-                nodes.add(createSingleValueNode("digit", "" + ((char) ch)));
-                nextChar();
+                nodes.add(parseNumber());
             } else {
                 break;
             }
@@ -458,14 +555,12 @@ public final class Formula {
         if (nodes.size() == 1) {
             return nodes.get(0);
         }
-        if (isConstantValue) {
-            return createSingleValueNode("constant-concat", concat(FormulaNode.toValueList(nodes, k -> null)));
-        }
-        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars) -> concat(objs));
+        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars) -> concat(objs), null);
     }
 
     private static FormulaNode createSingleValueNode(final String nodeId, final Object value) {
-        return new FormulaNode(nodeId, null, (objs, vars) -> Value.of(value));
+        return new FormulaNode(nodeId, null, (objs, vars) ->
+            value instanceof Value ? (Value) value : Value.of(value), null);
     }
 
     private FormulaNode parseExplicitVariable() {
@@ -489,6 +584,12 @@ public final class Formula {
                 return value;
             }
             throw createMissingVarsException(vars);
+        }, (objs, vars) -> {
+            final Value value = vars.call(parsed);
+            if (value != null) {
+                return value.getAsString();
+            }
+            return "_";
         }, result -> result.add(parsed));
 
     }
@@ -538,6 +639,13 @@ public final class Formula {
                 varValues.add(value);
             }
             return concat(varValues);
+        }, (objs, vars) -> {
+            final ValueList varValues = new ValueList();
+            for (char l : varBlock.toCharArray()) {
+                final Value value = vars.call("" + l);
+                varValues.add(value == null ? Value.of("_") : value);
+            }
+            return concat(varValues).getAsString();
         }, result -> {
             for (char l : varBlock.toCharArray()) {
                 result.add("" + l);
@@ -588,13 +696,21 @@ public final class Formula {
                     throw ce;
 
                 }
-            });
+            },
+            (n, v) -> functionName + "(" + StringUtils.join(n, ","));
 
+    }
+
+    /** for test/debug purposes only! */
+    public String toDebugString(final Func1<String, Value> variables, final boolean includeId, final boolean recursive) {
+        return compiledExpression.toDebugString(variables == null ? x -> null : variables, includeId, recursive);
     }
 
     /** concats values Formula-internally. Takes care of the spillover character _ */
     private static Value concat(final ValueList values) {
-        values.checkCount(1, -1);
+        if (values.size() == 0) {
+            return Value.of("");
+        }
 
         if (values.size() == 1) {
             return values.get(0);
@@ -604,7 +720,7 @@ public final class Formula {
         final StringBuilder sb = new StringBuilder();
         boolean firstNonoverflowFound = false;
         for (Value v : values) {
-            if ("_".equals(v.getAsString())) {
+            if (OVERFLOW_VALUE == v) {
                 overflowCount++;
             } else {
 

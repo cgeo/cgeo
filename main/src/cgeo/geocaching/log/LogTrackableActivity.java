@@ -377,9 +377,7 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
     private class CoordinatesListener implements View.OnClickListener {
         @Override
         public void onClick(final View arg0) {
-            final CoordinatesInputDialog coordinatesDialog = CoordinatesInputDialog.getInstance(geocache, geopoint);
-            coordinatesDialog.setCancelable(true);
-            coordinatesDialog.show(getSupportFragmentManager(), "coordinates_dialog");
+            CoordinatesInputDialog.show(getSupportFragmentManager(), geocache, geopoint);
         }
     }
 
