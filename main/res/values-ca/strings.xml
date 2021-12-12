@@ -326,6 +326,7 @@
     <string name="menu_update_mapdata">Dades del mapa</string>
     <string name="menu_dashboard">Tauler d\'inici de sessió</string>
     <string name="menu_history">Historial</string>
+    <string name="menu_search_clipboard">Carrega el Geocodi des del porta-retalls</string>
     <string name="menu_history_longstring">Historial de trobats</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -380,6 +381,7 @@
     <string name="caches_sort_storage">Data d\'emmagatzemat al dispositiu</string>
     <string name="caches_sort_eventdate">Data de la trobada</string>
     <string name="caches_select_mode">Mode seleccionar</string>
+    <string name="caches_select_next">Seleccioneu els 20 catxés següents</string>
     <string name="caches_select_mode_exit">Surt del mode seleccionar</string>
     <string name="caches_select_invert">Inverteix la selecció</string>
     <string name="caches_nearby">Propers</string>
@@ -407,6 +409,7 @@
     <string name="caches_clear_offlinelogs">Neteja els registres fora de línea</string>
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
+    <string name="caches_show_attributes">Mostra la visió general d\'atributs</string>
     <string name="caches_set_cache_icon">Definiu les icones dels catxés</string>
     <string name="caches_reset_cache_icons_title">Restableix les icones de catxés</string>
     <string name="caches_make_list_unique">Fer llista única</string>
@@ -421,6 +424,10 @@
     <plurals name="user_finds_offline">
         <item quantity="one">%d registrat fora de línia</item>
         <item quantity="other">%d registrats fora de línia</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d catxé emmagatzemat</item>
+        <item quantity="other">%d catxés emmagatzemats</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gestiona llistes</string>
@@ -713,6 +720,7 @@
     <string name="init_select_language">Seleccionar idioma</string>
     <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
+    <string name="init_showwaypoints">Mostra punts de referència</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
     <string name="init_zoomincludingwaypoints">El zoom inclou punts de pas</string>
     <string name="init_zoomincludingwaypoints_description">Si fiqueu al mapa un catxé: s\'ha d\'ajustar el zoom per incloure tots els seus punts de ruta?</string>
@@ -729,6 +737,8 @@
     <string name="init_summary_brouterShowBothDistances">Si la ruta està actiu: mostreu la distància en línia recta a més de la longitud de la ruta.</string>
     <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
     <string name="init_summary_useInternalRouting">Utilitzeu l’encaminament intern per poder utilitzar la descàrrega automàtica de dades d’encaminament i altres funcions</string>
+    <string name="init_bigSmileysOnMap">Icones grans</string>
+    <string name="init_summary_bigSmileysOnMap">Si està activat, els símbols com \"trobat\" o el marcador de \"coordenades corregides\" es mostraran ampliats al mapa en lloc de la icona de tipus de catxé (cal reiniciar).</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
     <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
@@ -822,6 +832,7 @@
     <string name="init_map_directory_description">Carpeta amb mapes fora de línia</string>
     <string name="init_brouter_directory_description">Carpeta amb dades d’encaminament BRouter</string>
     <string name="init_updateinterval_title">Interval d\'actualització</string>
+    <string name="init_updateinterval_description">Et recorda cada x dies per a una comprovació d\'actualització (vàlid només per als fitxers que hagis baixat des de c:geo), 0=desactivat</string>
     <string name="init_gpx_importexportdir">Carpeta GPX</string>
     <string name="init_dataDir">Selecciona la carpeta de dades</string>
     <string name="init_dataDir_note">Podeu triar emmagatzemar les dades addicionals per als geoamagatalls (pistes, registre d\'imatges, …) en l\'emmagatzematge extern (targeta SD externa emulada o real, en funció del dispositiu).</string>
@@ -1091,6 +1102,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Eviteu punts de ruta de les notes</string>
     <string name="cache_menu_allowWaypointExtraction">Permetre punts de ruta de la nota</string>
     <string name="cache_personal_note_edit">Edita</string>
+    <string name="cache_personal_note_storewaypoints">Afegeix /Actualitza punts de ruta</string>
+    <string name="cache_personal_note_removewaypoints">Elimina els punts de ruta</string>
     <string name="cache_personal_note_removedwaypoints">S\'han eliminat els punts de ruta</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No s\'ha trobat cap punt de ruta per eliminar</string>
     <string name="cache_personal_note_storewaypoints_success">Es van afegir punts de ruta a la nota personal</string>
@@ -1398,6 +1411,7 @@
     <!-- search -->
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
+    <string name="search_bar_hint_settings">Configuració de cerca</string>
     <string name="search_coordinates">Coordenades</string>
     <string name="search_coordinates_button">Cerca per coordenades</string>
     <string name="search_address">Adreça</string>
@@ -1516,6 +1530,7 @@
     <string name="helper_where_you_go_description">WhereYouGo permet jugar i buscar catxés de tipus Wherigo. El c:geo pot descarregar automàticament els cartutxos dins d\'aquest aplicació.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf us permet llegir les dades de les etiquetes ANT + / Garmin, que són necessàries per a catxés ANT + / chirp.</string>
     <string name="helper_alc_description">Aplicació Adventure Lab Player per al telèfon o la tauleta.</string>
+    <string name="helper_gcwizard_description">GC Wizard conté nombroses eines per a la criptografia senzilla, càlculs geodèsics i científics, així com centenars de conjunts de símbols diversos.</string>
     <!-- export -->
     <string name="share_export">Comparteix / Exporta</string>
     <string name="export">Exporta</string>
@@ -1794,7 +1809,14 @@
     <string name="attribute_historic_no">No Estructura abandonada /  No Ruïna</string>
     <string name="attribute_blind_people_yes">Adequat a persones invidents</string>
     <string name="attribute_blind_people_no">No adequat a persones invidents</string>
+    <string name="attribute_unknown">Atribut desconegut</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Eines necessàries</string>
+    <string name="cat_type">Tipus</string>
+    <string name="cat_location">Ubicació del catxé</string>
+    <string name="cat_duration">Distància / Durada</string>
+    <string name="cat_surrounding">Al voltant del catxé</string>
+    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
