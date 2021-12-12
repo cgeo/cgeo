@@ -1,7 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -15,7 +14,6 @@ import androidx.preference.PreferenceFragmentCompat;
 import java.util.Locale;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleLayer;
 import org.mapsforge.map.rendertheme.XmlRenderThemeStyleMenu;
 
@@ -96,7 +94,7 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         renderthemeMenu.addPreference(baseLayerPreference);
 
         // additional theme info
-        if (isElevateTheme()) {
+        if (RenderThemeHelper.getRenderThemeType() == RenderThemeHelper.RenderThemeType.RTT_ELEVATE) {
             final Preference info = new Preference(activity);
             info.setSummary(R.string.maptheme_elevate_categoryinfo);
             info.setIconSpaceReserved(false);
@@ -125,8 +123,4 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         }
     }
 
-    private boolean isElevateTheme() {
-        final String selectedMapRenderTheme = Settings.getSelectedMapRenderTheme();
-        return StringUtils.containsIgnoreCase(selectedMapRenderTheme, "elevate") || StringUtils.containsIgnoreCase(selectedMapRenderTheme, "elements");
-    }
 }

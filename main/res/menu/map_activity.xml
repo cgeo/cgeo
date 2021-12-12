@@ -107,6 +107,10 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_theme_legend"
+        android:title="@string/map_theme_legend">
+    </item>
+    <item
         android:id="@+id/menu_select_language"
         android:title="@string/map_language"
         android:visible="false"
@@ -174,5 +178,4 @@
         android:icon="@drawable/ic_menu_list"
         android:title="@string/map_as_list">
     </item>
-
 </menu>
