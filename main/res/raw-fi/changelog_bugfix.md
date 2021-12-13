@@ -5,3 +5,4 @@
 - Korjaa: Näytä virheviesti jos kätköä ei löydy yritettäessä päivittää sitä
 - Korjaa: Näytä järjestelmän oletusselain sovelluksen valinnassa, kun käytät kätkön valikossa 'Avaa selaimessa'
 - Korjaa: Adaptoi lataaja käyttämään uutta OpenAndroMapsin teemasivua ja niiden uusia v5-karttoja
+- Fix: On changing a path setting don't ask user for copy or move if old path has no files

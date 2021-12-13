@@ -5,3 +5,4 @@
 - Korrektur: Fehlermeldung anzeigen, wenn ein Cache während des Aktualisierens nicht gefunden werden konnte
 - Korrektur: Zeige Standardbrowser im Auswahldialog bei "Im Browser öffnen" für einen Cache
 - Korrektur: Verwende neue Adresse für OpenAndroMaps Karten und Kartendesigns
+- Fix: On changing a path setting don't ask user for copy or move if old path has no files
