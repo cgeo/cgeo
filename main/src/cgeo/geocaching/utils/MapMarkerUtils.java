@@ -724,22 +724,20 @@ public final class MapMarkerUtils {
         insetsBuilder.withInset(new InsetBuilder(background));
 
         final String packageName = CgeoApplication.getInstance().getPackageName();
-
-        Map<String, Integer> dt = new HashMap<>();
-        dt.put("d", (int) difficulty * 10);
-        dt.put("t", (int) terrain * 10);
-
-        for (Map.Entry<String, Integer> p: dt.entrySet()) {
-            if (p.getValue() >= 10) {
-                final int tintColor = ResourcesCompat.getColor(res, res.getIdentifier("marker_rating_" + p.getValue(), "color", packageName), null);
-                final Drawable segment = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + p.getKey() + "_" + p.getValue(), "drawable", packageName), null));
-                DrawableCompat.setTint(segment, tintColor);
-                insetsBuilder.withInset(new InsetBuilder(segment));
-            }
-        }
+        insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty)));
+        insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain)));
 
         insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg));
         return buildLayerDrawable(insetsBuilder, 4, 0);
+    }
+
+    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating) {
+        // ensure that rating is an integer between 0 and 50 in steps of 5
+        final int r = Math.max(0, Math.min((int) (Math.round(rating * 2) / 2) * 10, 50));
+        final int tintColor = ResourcesCompat.getColor(res, res.getIdentifier("marker_rating_" + r, "color", packageName), null);
+        final Drawable segment = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null));
+        DrawableCompat.setTint(segment, tintColor);
+        return segment;
     }
 
 }
