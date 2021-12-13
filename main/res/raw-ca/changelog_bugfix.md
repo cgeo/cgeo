@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Correcció: fitxers de catxé de Mapsforge: neteja i ubicació nova (carpeta separada)
 - Correcció: fitxers de mapes Freizeitkarte: utilitzeu la carpeta "última" del programa de descàrrega com a solució alternativa per als errors temporals del servidor
 - Correcció: eviteu l'excepció de punter nul a les pàgines
