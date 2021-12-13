@@ -230,8 +230,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     @Override
     public void onNavigationItemReselected(@NonNull final MenuItem item) {
-        if (item.getItemId() == MENU_SEARCH) {
-            onNavigationItemSelectedIgnoreReselected(item);
+        if (item.getItemId() == MENU_SEARCH || item.getItemId() == MENU_MAP) {
+            ActivityMixin.finishWithFadeTransition(this);
         }
     }
 
@@ -572,6 +572,24 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
             importGpxAttachement();
         }
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        // switching between nearby/offline via bottom navigation.
+        // CacheListActivity is the only one which is used for multiple totally different tasks.
+        // TODO: maybe someone has a better idea instead of closing and reopening the activity with the new intent...
+        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) != 0) {
+            startActivity(intent);
+            ActivityMixin.finishWithFadeTransition(this);
+        } else {
+            super.onNewIntent(intent);
+        }
+    }
+
+    @Override
+    protected boolean isTopLevelBottomNavActivity() {
+        return true; // always show bottom nav as specified in CacheListType
     }
 
     @Override
@@ -1783,10 +1801,14 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         lph.setLastListPosition();
     }
 
-    public static void startActivityOffline(final Context context) {
+    public static Intent getActivityOfflineIntent(final Context context) {
         final Intent cachesIntent = new Intent(context, CacheListActivity.class);
         Intents.putListType(cachesIntent, CacheListType.OFFLINE);
-        context.startActivity(cachesIntent);
+        return cachesIntent;
+    }
+
+    public static void startActivityOffline(final Context context) {
+        context.startActivity(getActivityOfflineIntent(context));
     }
 
     public static void startActivityOwner(final Context context, final String userName) {

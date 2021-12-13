@@ -173,7 +173,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                         userFounds.setText(userFoundCount);
                                         userFounds.setOnClickListener(v -> {
                                             activity.startActivity(CacheListActivity.getHistoryIntent(activity));
-                                            ActivityMixin.finishWithFadeTransition(activity);
+                                            ActivityMixin.overrideTransitionToFade(activity);
                                         });
                                     }
                                 });
@@ -508,7 +508,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             startActivity(new Intent(this, SearchActivity.class).setAction(SearchActivity.ACTION_CLIPBOARD).putExtra(SearchManager.QUERY, ClipboardUtils.getText()));
         } else if (id == R.id.menu_history) {
             startActivity(CacheListActivity.getHistoryIntent(this));
-            ActivityMixin.finishWithFadeTransition(this);
+            ActivityMixin.overrideTransitionToFade(this);
         } else if (id == R.id.menu_goto) {
             InternalConnector.assertHistoryCacheExists(this);
             CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
@@ -537,7 +537,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             if (countOfflineCaches > 0) {
                 counter.setText(getResources().getQuantityString(R.plurals.caches_stored_offline, countOfflineCaches, countOfflineCaches));
             }
-        }, throwable -> Log.e("Unable to add bubble count", throwable));
+        }, throwable -> Log.e("Unable to add cache count", throwable));
     }
 
     private void hideActionIconsWhenSearchIsActive(final Menu menu) {
