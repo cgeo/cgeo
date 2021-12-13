@@ -4,7 +4,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.downloader.DownloadSelectorActivity;
 import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.utils.MapMarkerUtils;
+import cgeo.geocaching.utils.SettingsUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
@@ -39,6 +42,16 @@ public class PreferenceMapFragment extends PreferenceFragmentCompat {
         setPrefClick(this, R.string.pref_fakekey_info_offline_mapthemes, () -> ShareUtils.openUrl(activity, activity.getString(R.string.faq_url_settings_themes)));
 
         initPublicFolders(this, activity.getCsah());
+
+        // Clear icon cache when modifying settings that influence icon appearance
+        findPreference(getString(R.string.pref_dtMarkerOnCacheIcon)).setOnPreferenceChangeListener((preference, newValue) -> {
+            MapMarkerUtils.clearCachedItems();
+            return true;
+        });
+        findPreference(getString(R.string.pref_bigSmileysOnMap)).setOnPreferenceChangeListener((preference, newValue) -> {
+            MapMarkerUtils.clearCachedItems();
+            return true;
+        });
     }
 
     /**
