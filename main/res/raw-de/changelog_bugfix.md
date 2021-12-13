@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Korrektur: Mapsforge's Cache-Dateien: Säuberung und neuer Speicherort (separater Ordner)
 - Korrektur: Freizeitkarten-Kartendateien: Verwende den 'latest' Ordner im Downloader als Workaround für temporäre Server-Fehler
 - Korrektur: Vermeide Absturz auf "Über c:geo"-Seiten
@@ -5,3 +7,4 @@
 - Korrektur: Fehlermeldung anzeigen, wenn ein Cache während des Aktualisierens nicht gefunden werden konnte
 - Korrektur: Zeige Standardbrowser im Auswahldialog bei "Im Browser öffnen" für einen Cache
 - Korrektur: Verwende neue Adresse für OpenAndroMaps Karten und Kartendesigns
+- Fix: On changing a path setting don't ask user for copy or move if old path has no files
