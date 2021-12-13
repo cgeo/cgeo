@@ -126,6 +126,12 @@
             android:summary="@string/init_summary_bigSmileysOnMap"
             android:title="@string/init_bigSmileysOnMap"
             app:iconSpaceReserved="false" />
+        <CheckBoxPreference
+            android:defaultValue="false"
+            android:key="@string/pref_dtMarkerOnCacheIcon"
+            android:summary="@string/init_summary_dtMarkerOnCacheIcon"
+            android:title="@string/init_dtMarkerOnCacheIcon"
+            app:iconSpaceReserved="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
