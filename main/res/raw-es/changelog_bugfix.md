@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Corregido: Archivos de caché de Mapsforge: Limpieza y nueva ubicación (carpeta separada)
 - Corregido: archivos de mapa de Freizeitkarte: Usar la carpeta 'latest' en el descargador como solución para los errores temporales del servidor
 - Corregido: Evitar excepción del puntero nulo en las páginas
