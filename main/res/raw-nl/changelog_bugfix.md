@@ -5,4 +5,4 @@
 - Oplossing: Toon een foutmelding als een cache niet gevonden kan worden tijdens het vernieuwen
 - Oplossing: Toon systeem standaard browser in app selectie bij 'Open in browser' voor een cache
 - Oplossing: Downloader aanpassen om nieuwe thema pagina en nieuwe v5 kaarten voor OpenAndroMaps te gebruiken
-- Fix: On changing a path setting don't ask user for copy or move if old path has no files
+- Oplossing: Bij het wijzigen van een pad wijzigt, vraag dan de gebruiker niet om te kopiëren of verplaats als het oude pad geen bestanden heeft
