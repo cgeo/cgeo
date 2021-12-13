@@ -94,8 +94,8 @@ public final class MapMarkerUtils {
             .append(showPin(cacheListType))
             .append(showFloppyOverlay(cacheListType))
             .append(assignedMarkers)
-            .append(cache.getTerrain())
-            .append(cache.getDifficulty())
+            .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
+            .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
             .toHashCode();
 
         synchronized (overlaysCache) {
