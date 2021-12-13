@@ -544,8 +544,8 @@ public final class MapMarkerUtils {
         final Drawable waypointMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.markerId, null)).mutate();
         final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { waypointMarker });
 
-        // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 17.25dp). Drawable must be square!
-        final int diffWidth = waypointMarker.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 17.25f, 1);
+        // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 17,25dp). Drawable must be square!
+        final int diffWidth = waypointMarker.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 19f, 1);
         final int offsetLeftTop = diffWidth - diffWidth / 2;
         final int offsetRightBottom = diffWidth - offsetLeftTop;
         layerDrawable.setLayerInset(0, -offsetLeftTop, -offsetLeftTop, -offsetRightBottom, -offsetRightBottom);
