@@ -1,4 +1,4 @@
-## 2021-12-13 Bugfix release
+## 2021.12.13 Bugfix release
 
 - Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
 - Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
