@@ -28,6 +28,7 @@ import android.widget.Toast;
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -46,8 +47,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     int MENU_NEARBY = R.id.page_nearby;
     public static final @IdRes
     int MENU_HOME = R.id.page_home;
-    public static final @IdRes
-    int MENU_NOTHING_SELECTED = 0;
     public static final @IdRes
     int MENU_HIDE_BOTTOM_NAVIGATION = -1;
 
@@ -68,14 +67,22 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         wrapper.activityContent.addView(contentView);
         super.setContentView(wrapper.getRoot());
 
+        // Don't show back button for top-level activity in bottom navigation context
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null && isTopLevelBottomNavActivity()) {
+            actionBar.setDisplayHomeAsUpEnabled(false);
+        }
+
         // --- other initialization --- //
         updateSelectedItemId();
-        // add item selected listener only after item selection has been updated, as it would otherwise directly call the listener
-        ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(this);
         // long click event listeners
         findViewById(R.id.page_list).setOnLongClickListener(view -> onListsLongClicked());
         // will be called if c:geo cannot log in
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
+    }
+
+    protected boolean isTopLevelBottomNavActivity() {
+        return (getIntent().getFlags() & Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) != 0 || isTaskRoot();
     }
 
     @Nullable
@@ -98,9 +105,9 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
                 startActivity(CacheListActivity.getHistoryIntent(this));
             } else {
                 Settings.setLastDisplayedList(selectedListId);
-                CacheListActivity.startActivityOffline(this);
+                startActivity(CacheListActivity.getActivityOfflineIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
             }
-            ActivityMixin.finishWithFadeTransition(this);
+            ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
         return true;
     }
@@ -122,8 +129,16 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     @Override
     protected void onResume() {
         super.onResume();
+        updateSelectedItemId();
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
+    }
+
+    @Override
+    protected void onNewIntent(final Intent intent) {
+        super.onNewIntent(intent);
+        // avoid weired transitions
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     @Override
@@ -136,6 +151,8 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     public void onBackPressed() {
         if (!isTaskRoot() || doubleBackToExitPressedOnce) {
             super.onBackPressed();
+            // avoid weired transitions
+            ActivityMixin.overrideTransitionToFade(this);
             return;
         }
 
@@ -144,26 +161,21 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
-    /**
-     * WARNING: This triggers {@link AbstractBottomNavigationActivity#onNavigationItemSelected} while changing the current selection.
-     */
     private void updateSelectedItemId() {
-        final int menuId = getSelectedBottomItemId();
-        final MenuItem workaroundItem = ((NavigationBarView) wrapper.activityBottomNavigation).getMenu().getItem(0);
+        // unregister listener as it would otherwise directly trigger the listener
+        ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(null);
 
-        // According to material design guidelines, bottom navigation activities always should be top-level.
-        // Therefore hiding the bottom navigation to not confuse the users.
-        if (menuId == MENU_HIDE_BOTTOM_NAVIGATION || !isTaskRoot()) {
+        final int menuId = getSelectedBottomItemId();
+
+        if (menuId == MENU_HIDE_BOTTOM_NAVIGATION || !isTopLevelBottomNavActivity()) {
             wrapper.activityBottomNavigation.setVisibility(View.GONE);
-        } else if (menuId == MENU_NOTHING_SELECTED) {
-            wrapper.activityBottomNavigation.setVisibility(View.VISIBLE);
-            ((NavigationBarView) wrapper.activityBottomNavigation).setSelectedItemId(workaroundItem.getItemId());
-            workaroundItem.setCheckable(false);
         } else {
             wrapper.activityBottomNavigation.setVisibility(View.VISIBLE);
             ((NavigationBarView) wrapper.activityBottomNavigation).setSelectedItemId(menuId);
-            workaroundItem.setCheckable(true);
         }
+
+        // re-register the listener
+        ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(this);
     }
 
     /**
@@ -182,6 +194,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
         if (id == getSelectedBottomItemId()) {
             onNavigationItemReselected(item);
+            ActivityMixin.overrideTransitionToFade(this);
             return true;
         }
         return onNavigationItemSelectedIgnoreReselected(item);
@@ -191,20 +204,20 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         final int id = item.getItemId();
 
         if (id == MENU_MAP) {
-            startActivity(DefaultMap.getLiveMapIntent(this));
+            startActivity(DefaultMap.getLiveMapIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         } else if (id == MENU_LIST) {
-            CacheListActivity.startActivityOffline(this);
+            startActivity(CacheListActivity.getActivityOfflineIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         } else if (id == MENU_SEARCH) {
-            startActivity(new Intent(this, SearchActivity.class));
+            startActivity(new Intent(this, SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         } else if (id == MENU_NEARBY) {
-            startActivity(CacheListActivity.getNearestIntent(this));
+            startActivity(CacheListActivity.getNearestIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         } else if (id == MENU_HOME) {
-            startActivity(new Intent(this, MainActivity.class));
+            startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); // the different behaviour for MainActivity is intended
         } else {
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }
         // avoid weired transitions
-        ActivityMixin.finishWithFadeTransition(this);
+        ActivityMixin.overrideTransitionToFade(this);
         return true;
     }
 

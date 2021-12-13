@@ -168,7 +168,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         // keyword fallback, if desired by caller
         if (keywordSearch) {
             CacheListActivity.startActivityKeyword(this, query);
-            ActivityMixin.finishWithFadeTransition(this);
+            ActivityMixin.overrideTransitionToFade(this);
             return true;
         }
 
@@ -383,7 +383,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         try {
             CacheListActivity.startActivityCoordinates(this, new Geopoint(StringUtils.trim(latlonText[0]), StringUtils.trim(latlonText[1])), null);
-            ActivityMixin.finishWithFadeTransition(this);
+            ActivityMixin.overrideTransitionToFade(this);
         } catch (final Geopoint.ParseException e) {
             showToast(res.getString(e.resource));
         }
@@ -403,7 +403,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         }
 
         CacheListActivity.startActivityKeyword(this, keyText);
-        ActivityMixin.finishWithFadeTransition(this);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void findByAddressFn() {
@@ -421,7 +421,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         final Intent addressesIntent = new Intent(this, AddressListActivity.class);
         addressesIntent.putExtra(Intents.EXTRA_KEYWORD, addressSearchText);
         startActivity(addressesIntent);
-        ActivityMixin.finishWithFadeTransition(this);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void findByOwnerFn() {
@@ -437,7 +437,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         }
 
         CacheListActivity.startActivityOwner(this, usernameText);
-        ActivityMixin.finishWithFadeTransition(this);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void findByFinderFn() {
@@ -453,7 +453,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         }
 
         CacheListActivity.startActivityFinder(this, usernameText);
-        ActivityMixin.finishWithFadeTransition(this);
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     private void findByFilterFn() {
@@ -465,7 +465,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         if (requestCode == GeocacheFilterActivity.REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
             CacheListActivity.startActivityFilter(this);
-            ActivityMixin.finishWithFadeTransition(this);
+            ActivityMixin.overrideTransitionToFade(this);
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
