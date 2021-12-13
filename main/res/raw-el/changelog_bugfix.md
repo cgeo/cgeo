@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Διόρθωση: αρχεία κρυπτών του Mapsforge: Καθαρισμός και νέα θέση (ξεχωριστός φάκελος)
 - Διόρθωση: Αρχεία χάρτη Freizeitkarte: Χρησιμοποιήστε το φάκελο 'latest' στο downloader ως λύση για προσωρινά σφάλματα διακομιστή
 - Διόρθωση: Avoid null pointer exception in about pages
