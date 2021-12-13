@@ -222,6 +222,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
             final String changelogBase = FileUtils.getChangelogMaster(activity).trim();
             final String changelogBugfix = FileUtils.getChangelogRelease(activity).trim();
+            Log.e("build info: bt=" + BuildConfig.BUILD_TYPE + ", pb=" + BranchDetectionHelper.isProductionBuild() + ", start(cl)=" + changelogBugfix.substring(0,5) + ", sw##=" + changelogBugfix.startsWith("##"));
             if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
                 if (StringUtils.isNotEmpty(changelogBugfix)) {
