@@ -445,7 +445,7 @@
     <string name="cache_filter_name">Nome da cache</string>
     <string name="cache_filter_type">Tipo de Cache</string>
     <string name="cache_filter_size">Tamanho da cache</string>
-    <string name="cache_filter_personalnote">Nota pessoal</string>
+    <string name="cache_filter_personalnote">Nota Pessoal</string>
     <string name="cache_filter_description">Descrição da Cache</string>
     <string name="cache_filter_offlinelog">Registo Offline</string>
     <string name="cache_filter_owner">Proprietário da cache</string>
