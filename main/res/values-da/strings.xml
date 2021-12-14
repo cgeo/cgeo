@@ -645,7 +645,6 @@
     <string name="brouter_recalculating">Genberegner ruten i baggrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Hvis navigation er aktiv, vises afstand i lige linje sammen men beregnet rutelængde.</string>
     <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
-    <string name="init_summary_global_wp_extraction_disable">Deaktivér ekstraktion af rutepunkter personlige cachenoter. Dette kan stadig aktiveres for individuelle cacher ved at deaktivere afkrydsningsfeltet under den personlige cache-note</string>
     <string name="init_summary_customtabs_as_browser">Eksterne hjemmesider vil blive i c:geo-appen (kun muligt, hvis Chrome er installeret)</string>
     <string name="init_save_log_img">Lagring af billeder</string>
     <string name="init_summary_save_log_img">Gem billeder fra logbeskeder</string>
