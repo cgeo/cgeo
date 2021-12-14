@@ -718,7 +718,6 @@
     <string name="init_useInternalRouting">c:geoルート検索を使用する</string>
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
-    <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
     <string name="init_summary_customtabs_as_browser">外部Webサイトがc:geo内で表示されます(Chromeのインストールが必要です)</string>
     <string name="init_save_log_img">画像保存</string>
