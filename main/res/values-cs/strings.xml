@@ -742,7 +742,6 @@
     <string name="init_bigSmileysOnMap">Velké ikony</string>
     <string name="init_summary_bigSmileysOnMap">Pokud je tato funkce povolena, budou se symboly jako \"nalezený smajlík\" nebo značka \"opravené souřadnice\" zobrazovat na mapě zvětšené, namísto ikony typu keše (vyžaduje restart).</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
-    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
     <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
