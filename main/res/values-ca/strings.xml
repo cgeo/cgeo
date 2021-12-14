@@ -740,7 +740,6 @@
     <string name="init_bigSmileysOnMap">Icones grans</string>
     <string name="init_summary_bigSmileysOnMap">Si està activat, els símbols com \"trobat\" o el marcador de \"coordenades corregides\" es mostraran ampliats al mapa en lloc de la icona de tipus de catxé (cal reiniciar).</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
-    <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de notes personals de catxés. Encara es pot habilitar per a catxés individuals desactivant la casella de selecció situada a sota de la nota personal del catxé</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
     <string name="init_save_log_img">Desa les imatges</string>
