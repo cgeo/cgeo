@@ -747,7 +747,6 @@
     <string name="init_bigSmileysOnMap">Grote pictogrammen</string>
     <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen symbolen zoals de \'smiley\' of de \'gecorrigeerde coördinaten\'-indicator worden getoond op de kaart in plaats van het cachetype icoon (herstart vereist).</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
-    <string name="init_summary_global_wp_extraction_disable">Schakel standaard waypoint extractie uit vanuit persoonlijke cachenotities. Dit kan nog steeds ingeschakeld worden per cache door het selectievakje uit te schakelen onder de persoonlijke cachenotitie</string>
     <string name="init_customtabs_as_browser">Gebruik Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externe websites worden weergegeven zonder c:geo te verlaten (alleen mogelijk als Chrome is geïnstalleerd)</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
