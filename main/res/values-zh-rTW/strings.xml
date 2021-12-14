@@ -665,7 +665,6 @@
     <string name="brouter_recalculating">在背景重新計算路線</string>
     <string name="init_summary_brouterShowBothDistances">如果路線啟動了，除了計算出的路線長度外，還會顯示直線距離。</string>
     <string name="init_global_wp_extraction_disable">關閉輸出航點</string>
-    <string name="init_summary_global_wp_extraction_disable">關閉所有來自個人寶藏筆記的航點資訊，但還是可以在個別寶藏中的個人寶藏筆記下方的勾選框開啟它</string>
     <string name="init_customtabs_as_browser">使用Google Chrome瀏覽。</string>
     <string name="init_summary_customtabs_as_browser">在不離開c：geo的情況下將顯示外部網站（僅在安裝了Chrome的情況下才可能顯示）</string>
     <string name="init_save_log_img">儲存照片</string>
