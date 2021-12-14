@@ -726,7 +726,6 @@
     <string name="init_bigSmileysOnMap">Iconos grandes</string>
     <string name="init_summary_bigSmileysOnMap">Si está activado, símbolos como la \"sonrisa encontrada\" o el marcador de \"coordenadas corregidas\" se mostrarán ampliados en el mapa en lugar del icono del tipo de caché (requiere reiniciar).</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracción de waypoint</string>
-    <string name="init_summary_global_wp_extraction_disable">Deshabilita globalmente la extracción de waypoints de notas personales de caché. Todavía se puede habilitar para cachés individuales desactivando la casilla de verificación debajo de la nota personal del caché</string>
     <string name="init_customtabs_as_browser">Usar Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Los sitios web externos se mostrarán sin salir de c:geo (sólo es posible si Chrome está instalado)</string>
     <string name="init_save_log_img">Guardar imágenes</string>
