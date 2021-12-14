@@ -734,7 +734,6 @@
     <string name="init_bigSmileysOnMap">Stora ikoner</string>
     <string name="init_summary_bigSmileysOnMap">Om aktiverad, kommer symboler som \'funna smiley\' eller \'korrigerade koordinater\' markören visas förstorade på kartan istället för ikonen för cachetypen (kräver omstart).</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
-    <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen</string>
     <string name="init_customtabs_as_browser">Använd Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externa webbplatser kommer att visas utan att lämna c:geo (endast möjligt om Chrome är installerad)</string>
     <string name="init_save_log_img">Loggbilder</string>
