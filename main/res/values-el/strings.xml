@@ -739,7 +739,9 @@
     <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια</string>
     <string name="init_summary_bigSmileysOnMap">Αν ενεργοποιηθεί, σύμβολα όπως το σημάδι \'βρέθηκε smiley\' ή το σημάδι \'διορθωμένες συντεταγμένες\' θα εμφανιστούν διευρυμένα στο χάρτη αντί του εικονιδίου τύπου κρύπτης (απαιτείται επανεκκίνηση).</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
-    <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
+    <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης.</string>
+    <string name="init_prevent_cache_note_merge">Αντικατάσταση Προσωπικής Σημείωσης Κρύπτης</string>
+    <string name="init_summary_prevent_cache_note_merge">Αν αυτή η ρύθμιση είναι ενεργοποιημένη το c:geo θα διαγράψει την τοπικά αποθηκευμένη σημείωση μόνιμα και θα την αντικαταστήσει με την προσωπική σημείωση στο διακομιστή. Δεν θα γίνει συγχώνευση.</string>
     <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">Η προβολή των εξωτερικών ιστοσελίδων θα γίνεται χωρίς έξοδο από το c:geo (αυτό είναι δυνατόν μόνο εάν είναι εγκατεστημένο το Chrome)</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
