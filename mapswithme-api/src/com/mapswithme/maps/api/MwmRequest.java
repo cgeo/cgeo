@@ -1,10 +1,11 @@
 package com.mapswithme.maps.api;
 
-import android.annotation.SuppressLint;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
+
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,8 +16,10 @@ import java.util.Locale;
 public class MwmRequest {
 
   // **
-  private List<MWMPoint> mPoints    = new ArrayList<MWMPoint>();
+  private List<MWMPoint> mPoints    = new ArrayList<>();
+  @Nullable
   private PendingIntent  mPendingIntent;
+  @Nullable
   private String         mTitle;
   private double         mZoomLevel = 1;
   private boolean        mReturnOnBalloonClick;
@@ -29,7 +32,7 @@ public class MwmRequest {
     return this;
   }
 
-  public MwmRequest setTitle(final String title) {
+  public MwmRequest setTitle(@Nullable final String title) {
     mTitle = title;
     return this;
   }
@@ -49,7 +52,7 @@ public class MwmRequest {
   }
 
   public MwmRequest setPoints(final Collection<MWMPoint> points) {
-    mPoints = new ArrayList<MWMPoint>(points);
+    mPoints = new ArrayList<>(points);
     return this;
   }
 
@@ -63,7 +66,7 @@ public class MwmRequest {
     return this;
   }
 
-  public MwmRequest setPendingIntent(final PendingIntent pi) {
+  public MwmRequest setPendingIntent(@Nullable final PendingIntent pi) {
     mPendingIntent = pi;
     return this;
   }
@@ -85,8 +88,9 @@ public class MwmRequest {
 
     final boolean hasIntent = mPendingIntent != null;
     mwmIntent.putExtra(Const.EXTRA_HAS_PENDING_INTENT, hasIntent);
-    if (hasIntent)
-      mwmIntent.putExtra(Const.EXTRA_CALLER_PENDING_INTENT, mPendingIntent);
+    if (hasIntent) {
+        mwmIntent.putExtra(Const.EXTRA_CALLER_PENDING_INTENT, mPendingIntent);
+    }
 
     addCommonExtras(context, mwmIntent);
 
@@ -104,7 +108,7 @@ public class MwmRequest {
 
   // Below are utilities from MapsWithMeApi because we are not "Feature Envy"
 
-  private static StringBuilder createMwmUrl(final Context context, final String title, final double zoomLevel, final List<MWMPoint> points) {
+  private static StringBuilder createMwmUrl(final Context context, @Nullable final String title, final double zoomLevel, final List<MWMPoint> points) {
     final StringBuilder urlBuilder = new StringBuilder("mapswithme://map?");
     // version
     urlBuilder.append("v=").append(Const.API_VERSION).append("&");
@@ -133,7 +137,7 @@ public class MwmRequest {
     return Const.CALLBACK_PREFIX + context.getPackageName();
   }
 
-  @SuppressLint("NewApi")
+  @SuppressWarnings("UnusedReturnValue")
   private static Intent addCommonExtras(final Context context, final Intent intent) {
     intent.putExtra(Const.EXTRA_CALLER_APP_INFO, context.getApplicationInfo());
     intent.putExtra(Const.EXTRA_API_VERSION, Const.API_VERSION);
@@ -141,9 +145,11 @@ public class MwmRequest {
     return intent;
   }
 
-  private static StringBuilder appendIfNotNull(final StringBuilder builder, final String key, final String value) {
-    if (value != null)
-      builder.append(key).append("=").append(Uri.encode(value)).append("&");
+  @SuppressWarnings("UnusedReturnValue")
+  private static StringBuilder appendIfNotNull(final StringBuilder builder, final String key, @Nullable final String value) {
+    if (value != null) {
+        builder.append(key).append("=").append(Uri.encode(value)).append("&");
+    }
 
     return builder;
   }
@@ -151,5 +157,4 @@ public class MwmRequest {
   private static boolean isValidZoomLevel(final double zoom) {
     return zoom >= MapsWithMeApi.ZOOM_MIN && zoom <= MapsWithMeApi.ZOOM_MAX;
   }
-
 }

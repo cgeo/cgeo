@@ -25,7 +25,11 @@ package com.mapswithme.maps.api;
 import android.content.Context;
 import android.content.Intent;
 
+import androidx.annotation.Nullable;
+
+@SuppressWarnings("JavaDoc")
 public class MWMResponse {
+  @Nullable
   private MWMPoint mPoint;
   private double   mZoomLevel;
 
@@ -33,10 +37,18 @@ public class MWMResponse {
    *
    * @return point, for which user requested more information in MapsWithMe application.
    */
-  public MWMPoint getPoint()     { return mPoint; }
-  public boolean  hasPoint()     { return mPoint != null; }
-  public double   getZoomLevel() { return mZoomLevel; }
+  @Nullable
+  public MWMPoint getPoint() {
+      return mPoint;
+  }
+  public boolean  hasPoint() {
+      return mPoint != null;
+  }
+  public double getZoomLevel() {
+      return mZoomLevel;
+  }
 
+  @SuppressWarnings("NullableProblems")
   @Override
   public String toString() {
     return "MWMResponse [SelectedPoint=" + mPoint + "]";
@@ -49,7 +61,7 @@ public class MWMResponse {
    * @param intent
    * @return
    */
-  public static MWMResponse extractFromIntent(final Context context, final Intent intent) {
+  public static MWMResponse extractFromIntent(@SuppressWarnings("unused") final Context context, final Intent intent) {
     final MWMResponse response = new MWMResponse();
     // parse point
     final double lat = intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_POINT_LAT, INVALID_LL);
@@ -60,10 +72,11 @@ public class MWMResponse {
     // parse additional info
     response.mZoomLevel = intent.getDoubleExtra(Const.EXTRA_MWM_RESPONSE_ZOOM, 9);
 
-    if (lat != INVALID_LL && lon != INVALID_LL)
-      response.mPoint = new MWMPoint(lat, lon, name, id);
-    else
-      response.mPoint = null;
+    if (lat != INVALID_LL && lon != INVALID_LL) {
+        response.mPoint = new MWMPoint(lat, lon, name, id);
+    } else {
+        response.mPoint = null;
+    }
 
     return response;
   }

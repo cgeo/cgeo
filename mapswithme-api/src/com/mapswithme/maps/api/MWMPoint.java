@@ -22,6 +22,8 @@
 ******************************************************************************/
 package com.mapswithme.maps.api;
 
+import androidx.annotation.Nullable;
+
 import java.io.Serializable;
 import java.util.Objects;
 
@@ -30,12 +32,14 @@ import java.util.Objects;
  * Has its <code>equals()</code> and <code>hashCode()</code> methods overloaded
  * so could be used in Hash(Map/Set/etc) classes.
  */
+@SuppressWarnings("JavaDoc")
 public final class MWMPoint implements Serializable {
   private static final long serialVersionUID = 1L;
 
   private final double mLat;
   private final double mLon;
   private final String mName;
+  @Nullable
   private String mId;
   private Style mStyle;
 
@@ -43,14 +47,14 @@ public final class MWMPoint implements Serializable {
     this(lat, lon, name, null);
   }
 
-  public MWMPoint(final double lat, final double lon, final String name, final String id) {
+  public MWMPoint(final double lat, final double lon, final String name, @Nullable final String id) {
     this.mLat = lat;
     this.mLon = lon;
     this.mName = name;
     this.mId = id;
   }
 
-  public MWMPoint(final double lat, final double lon, final String name, final String id, final Style style) {
+  public MWMPoint(final double lat, final double lon, final String name, @Nullable final String id, final Style style) {
     this.mLat = lat;
     this.mLon = lon;
     this.mName = name;
@@ -58,12 +62,24 @@ public final class MWMPoint implements Serializable {
     this.mStyle = style;
   }
 
-  public double getLat()       { return mLat;   }
-  public double getLon()       { return mLon;   }
-  public String getName()      { return mName;  }
-  public String getId()        { return mId;    }
-  public Style  getStyle()     { return mStyle; }
+  public double getLat() {
+      return mLat;
+  }
+  public double getLon() {
+      return mLon;
+  }
+  public String getName() {
+      return mName;
+  }
+  @Nullable
+  public String getId() {
+      return mId;
+  }
+  public Style getStyle() {
+      return mStyle;
+  }
 
+  @Nullable
   public String getStyleForUrl() {
       return mStyle == null ? null : mStyle.getName();
   }
@@ -114,17 +130,22 @@ public final class MWMPoint implements Serializable {
    */
   @Override
   public boolean equals(final Object obj) {
-    if (this == obj)
-      return true;
-    if (obj == null)
-      return false;
-    if (getClass() != obj.getClass())
-      return false;
+    if (this == obj) {
+        return true;
+    }
+    if (obj == null) {
+        return false;
+    }
+    if (getClass() != obj.getClass()) {
+        return false;
+    }
     final MWMPoint other = (MWMPoint) obj;
-    if (Double.doubleToLongBits(mLat) != Double.doubleToLongBits(other.mLat))
-      return false;
-    if (Double.doubleToLongBits(mLon) != Double.doubleToLongBits(other.mLon))
-      return false;
+    if (Double.doubleToLongBits(mLat) != Double.doubleToLongBits(other.mLat)) {
+        return false;
+    }
+    if (Double.doubleToLongBits(mLon) != Double.doubleToLongBits(other.mLon)) {
+        return false;
+    }
 
     return Objects.equals(mName, other.mName);
   }
@@ -142,7 +163,7 @@ public final class MWMPoint implements Serializable {
     PlacemarkGreen("placemark-green"),
     PlacemarkOrange("placemark-orange");
 
-    private String name;
+    private final String name;
 
     Style(final String name) {
       this.name = name;
