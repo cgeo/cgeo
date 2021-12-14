@@ -2,16 +2,17 @@ package cgeo.geocaching.ui.dialog;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
-import cgeo.geocaching.databinding.CoordinatesCalculateBinding;
 import cgeo.geocaching.databinding.CoordinatescalculateglobalDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.CacheVariableList;
 import cgeo.geocaching.models.CalculatedCoordinate;
+import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -21,18 +22,18 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.Arrays;
 import java.util.Objects;
 
 /**
@@ -50,6 +51,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
     private VariableListView.VariablesListAdapter varListAdapter;
 
     private CoordinatescalculateglobalDialogBinding binding;
+
+    private final TextSpinner<CalculatedCoordinateType> displayType = new TextSpinner<>();
 
     // Interface used by the coordinate calculator to callback activity with dialog result.
     public interface CalculatedCoordinateUpdate {
@@ -145,8 +148,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
     public View onCreateView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
 
         binding = CoordinatescalculateglobalDialogBinding.inflate(inflater, container, false);
-        final CoordinatesCalculateBinding bindingCoords = CoordinatesCalculateBinding.bind(binding.getRoot());
-        bindingCoords.coordTable.setVisibility(View.GONE);
+        binding.NonPlainFormat.setVisibility(View.GONE);
 
         //handle dialog title
         final Dialog dialog = getDialog();
@@ -171,13 +173,12 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             binding.done.setVisibility(View.GONE);
         }
 
-        final Spinner spinner = bindingCoords.spinnerCoordinateFormats;
-        final ArrayAdapter<CharSequence> spinnerAdapter =
-                ArrayAdapter.createFromResource(getActivity(),
-                        R.array.waypoint_coordinate_formats,
-                        android.R.layout.simple_spinner_item);
-        spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(spinnerAdapter);
+        displayType.setSpinner(binding.spinnerCoordinateFormats)
+            .setValues(Arrays.asList(CalculatedCoordinateType.values()))
+            .setDisplayMapper(t -> t.toUserDisplayableString())
+            .set(calcCoord.getType())
+            .setChangeListener(t -> refreshType(false));
+        refreshType(true);
 
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
@@ -199,21 +200,56 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
 
         binding.notesText.setText(notes);
 
-        bindingCoords.PlainLat.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
-        bindingCoords.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+        binding.PlainLat.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLatitudePattern(s.toString());
             updateView();
         }));
-        bindingCoords.PlainLat.setText(calcCoord.getLatitudePattern());
+        binding.PlainLat.setText(calcCoord.getLatitudePattern());
 
-        bindingCoords.PlainLon.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
-        bindingCoords.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
+        binding.PlainLon.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        binding.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLongitudePattern(s.toString());
             updateView();
         }));
-        bindingCoords.PlainLon.setText(calcCoord.getLongitudePattern());
+        binding.PlainLon.setText(calcCoord.getLongitudePattern());
+
+        binding.NonPlainFormat.setChangeListener(p -> {
+            calcCoord.setLatitudePattern(p.first);
+            calcCoord.setLongitudePattern(p.second);
+            updateView();
+        });
 
         return binding.getRoot();
+    }
+
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    private void refreshType(final boolean initialLoad) {
+        final CalculatedCoordinateType newType = displayType.get();
+        if (!initialLoad && calcCoord.getType() == newType) {
+            return;
+        }
+        calcCoord.setType(newType);
+
+        Geopoint currentGp = null;
+        if (calcCoord != null) {
+            currentGp = calcCoord.calculateGeopoint(varList::getValue);
+        }
+        if (currentGp == null) {
+            currentGp = geopoint;
+        }
+        binding.PlainFormat.setVisibility(newType == CalculatedCoordinateType.PLAIN ? View.VISIBLE : View.GONE);
+        binding.NonPlainFormat.setVisibility(newType != CalculatedCoordinateType.PLAIN ? View.VISIBLE : View.GONE);
+
+        if (newType == CalculatedCoordinateType.PLAIN) {
+            final Pair<String, String> coords = binding.NonPlainFormat.getPlain();
+            binding.PlainLat.setText(coords.first);
+            binding.PlainLon.setText(coords.second);
+        } else {
+            binding.NonPlainFormat.setData(newType,
+                initialLoad ? calcCoord.getLatitudePattern() : null, initialLoad ? calcCoord.getLongitudePattern() : null, currentGp);
+        }
+
     }
 
     private void updateView() {
