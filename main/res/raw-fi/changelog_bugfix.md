@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Korjaa: Mapsforgen välimuistitiedostot: Puhdistus ja uusi sijainti (erillinen kansio)
 - Korjaus: Freizeitkarte karttatiedostot: Käytä 'latest' kansiota lataajan ratkaisuna väliaikaisille palvelimen virheille
 - Korjaus: Vältä null pointer exception tietoja-sivulla
