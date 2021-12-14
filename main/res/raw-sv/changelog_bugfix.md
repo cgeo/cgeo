@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Fix: Mapsforges cachefiler: Rensa och ny plats (separat mapp)
 - Fix: Freizeitkarte kartfiler: Använd mappen "senaste" i nerladdaren som lösning för temporära serverfel
 - Fix: Avoid null pointer exception in about pages
