@@ -742,7 +742,6 @@
     <string name="init_bigSmileysOnMap">큰 아이콘</string>
     <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 \'찾음 스마일리\' 또는 \'수정된 좌표\' 마커와 같은 기호가 지도에서 확대되어 표시됩니다(다시 시작해야 함).</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
-    <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
     <string name="init_summary_customtabs_as_browser">c:geo를 떠나지 않고 외부 웹 사이트가 표시됩니다 (그롬이 설치된 경우에만 가능).</string>
     <string name="init_save_log_img">사진 저장하기</string>
