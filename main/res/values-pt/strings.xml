@@ -462,7 +462,7 @@
     <string name="cache_filter_name">Nome da cache</string>
     <string name="cache_filter_type">Tipo de Cache</string>
     <string name="cache_filter_size">Tamanho da cache</string>
-    <string name="cache_filter_personalnote">Nota pessoal</string>
+    <string name="cache_filter_personalnote">Nota Pessoal</string>
     <string name="cache_filter_description">Descrição da Cache</string>
     <string name="cache_filter_offlinelog">Registo Offline</string>
     <string name="cache_filter_owner">Proprietário da cache</string>
@@ -747,7 +747,9 @@
     <string name="init_bigSmileysOnMap">Ícones grandes</string>
     <string name="init_summary_bigSmileysOnMap">Se activado, os símbolos como o \'sorriso encontrado\' ou o marcador \'coordenadas corrigidas\' aparecerão ampliados no mapa ao invés do ícone do tipo de cache (requer reinicialização).</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
-    <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
+    <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
+    <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
+    <string name="init_summary_prevent_cache_note_merge">Se esta definição estiver activada, o c:geo irá eliminar permanentemente a nota armazenada localmente e substituí-la pela nota pessoal no servidor. A junção das duas não será feita.</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
     <string name="init_save_log_img">Guardar imagens</string>
