@@ -671,7 +671,6 @@
     <string name="brouter_recalculating">Perskaičiuojamas maršrutas fone…</string>
     <string name="init_summary_brouterShowBothDistances">Jei maršrutas aktyvus: Rodyti tiesų atstumą, be apskaičiuoto maršruto ilgio.</string>
     <string name="init_global_wp_extraction_disable">Išjungti papildomų tašku išskleidimą</string>
-    <string name="init_summary_global_wp_extraction_disable">Visiškai išjungti papildomų taškų išskleidimą iš asmeninių slėptuvių užrašų. Jį galima įjungti pasirinktoms slėptuvėms, atžymint varnelę po asmeninių slėptuvių užrašų</string>
     <string name="init_customtabs_as_browser">Naudokite Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Išorinės svetainės bus rodomos neišeinant iš c:geo (galima tik tada, jei įdiegta Chrome)</string>
     <string name="init_save_log_img">Išsaugoti vaizdus</string>
