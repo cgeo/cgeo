@@ -29,7 +29,9 @@ import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.net.Uri;
 
+import androidx.annotation.Nullable;
 
+@SuppressWarnings("JavaDoc")
 public final class MapsWithMeApi {
 
   /**
@@ -47,7 +49,7 @@ public final class MapsWithMeApi {
 
   public static void showMapsWithMeUrl(final Activity caller, final PendingIntent pendingIntent, final double zoomLevel, final String url) {
     final Uri uri = Uri.parse(url);
-    final String latlon[] = uri.getQueryParameter("ll").split(",");
+    final String[] latlon = uri.getQueryParameter("ll").split(",");
     final double lat = Double.parseDouble(latlon[0]);
     final double lon = Double.parseDouble(latlon[1]);
     final String name = uri.getQueryParameter("n");
@@ -64,8 +66,9 @@ public final class MapsWithMeApi {
       final ActivityInfo aInfo = caller.getPackageManager().resolveActivity(mwmIntent, 0).activityInfo;
       mwmIntent.setClassName(aInfo.packageName, aInfo.name);
       caller.startActivity(mwmIntent);
-    } else
-      (new DownloadMapsWithMeDialog(caller)).show();
+    } else {
+        (new DownloadMapsWithMeDialog(caller)).show();
+    }
   }
 
   /**
@@ -77,7 +80,7 @@ public final class MapsWithMeApi {
    * @param name
    */
   public static void showPointOnMap(final Activity caller, final double lat, final double lon, final String name) {
-    showPointsOnMap(caller, (String) null, (PendingIntent) null, new MWMPoint(lat, lon, name));
+    showPointsOnMap(caller, null, (PendingIntent) null, new MWMPoint(lat, lon, name));
   }
 
   /**
@@ -90,8 +93,9 @@ public final class MapsWithMeApi {
    * @param name
    * @param zoomLevel
    */
+  @SuppressWarnings("unused")
   public static void showPointOnMap(final Activity caller, final double lat, final double lon, final String name, final double zoomLevel) {
-    showPointsOnMap(caller, (String) null, zoomLevel, (PendingIntent) null, new MWMPoint(lat, lon, name));
+    showPointsOnMap(caller, null, zoomLevel, null, new MWMPoint(lat, lon, name));
   }
 
   /**
@@ -114,11 +118,11 @@ public final class MapsWithMeApi {
    * @param pendingIntent
    * @param points
    */
-  public static void showPointsOnMap(final Activity caller, final String title, final PendingIntent pendingIntent, final MWMPoint... points) {
+  public static void showPointsOnMap(final Activity caller, @Nullable final String title, @Nullable final PendingIntent pendingIntent, final MWMPoint... points) {
     showPointsOnMap(caller, title, -1, pendingIntent, points);
   }
 
-  private static void showPointsOnMap(final Activity caller, final String title, final double zoomLevel, final PendingIntent pendingIntent, final MWMPoint... points) {
+  private static void showPointsOnMap(final Activity caller, @Nullable final String title, final double zoomLevel, @Nullable final PendingIntent pendingIntent, final MWMPoint... points) {
     final MwmRequest request = new MwmRequest()
                                     .setTitle(title)
                                     .setZoomLevel(zoomLevel)

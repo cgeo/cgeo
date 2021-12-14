@@ -1,26 +1,35 @@
-apply plugin: 'android-library'
+apply plugin: 'com.android.library'
 
 android {
 
-  // Define these properties in the gradle.properties file in the root project folder
-  compileSdkVersion 28
+    compileSdkVersion 30
 
-  defaultConfig {
-    minSdkVersion 21
-    targetSdkVersion 28
-  }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
-  sourceSets.main {
-    manifest.srcFile 'AndroidManifest.xml'
-    java.srcDirs = ['src']
-    res.srcDirs = ['res']
-  }
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 30
+    }
 
-  lintOptions {
-    // generally we accept lint errors when building
-    abortOnError false
+    sourceSets.main {
+        manifest.srcFile 'AndroidManifest.xml'
+        java.srcDirs = ['src']
+        res.srcDirs = ['res']
+    }
 
-    // abort release builds in case of FATAL errors
-    checkReleaseBuilds true
-  }
+    lintOptions {
+        // generally we accept lint errors when building
+        abortOnError false
+
+        // abort release builds in case of FATAL errors
+        checkReleaseBuilds true
+    }
+
+    dependencies {
+        // Android annotations
+        implementation 'androidx.annotation:annotation:1.3.0'
+    }
 }
