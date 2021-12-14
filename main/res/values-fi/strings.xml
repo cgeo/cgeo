@@ -739,7 +739,6 @@
     <string name="init_bigSmileysOnMap">Isot kuvakkeet</string>
     <string name="init_summary_bigSmileysOnMap">Jos käytössä, symbolit kuten \'löytöhymiö\' tai \'korjatut koordinaatit\' -merkki näytetään isona kartalla kätkötyypin kuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
-    <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
     <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
     <string name="init_summary_customtabs_as_browser">Ulkoiset sivustot näytetään poistumatta c:geosta (mahdollista vain, jos Chrome on asennettu)</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
