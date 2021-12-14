@@ -754,7 +754,6 @@
     <string name="init_useInternalRouting">Použiť internú navigáciu</string>
     <string name="init_summary_useInternalRouting">Použitie internej navigácie c:geo, aby bolo možné využívať automatické preberanie údajov navigácie a ďalšie funkcie</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
-    <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške</string>
     <string name="init_customtabs_as_browser">Použiť Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externé webové stránky sa budú zobrazovať bez opustenia c:geo (možné len vtedy, ak je nainštalované Chrome)</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
