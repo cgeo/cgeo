@@ -1,3 +1,5 @@
+## 2021.12.13 Bugfix release
+
 - Oprava: Súbory kešiek pre Mapsforge – čistenie a nové umiestnenie (samostatný priečinok)
 - Oprava: Mapové súbory Freizeitkarte - použitie "najnovšieho" priečinka pri preberaní ako riešenia pre dočasné chyby servera
 - Oprava: Odstránenie výnimky nulového ukazovateľa na stránke s informáciami
