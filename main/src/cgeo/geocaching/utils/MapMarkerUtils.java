@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
@@ -91,6 +92,8 @@ public final class MapMarkerUtils {
             .append(showPin(cacheListType))
             .append(showFloppyOverlay(cacheListType))
             .append(assignedMarkers)
+            .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
+            .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
             .toHashCode();
 
         synchronized (overlaysCache) {
@@ -154,12 +157,15 @@ public final class MapMarkerUtils {
         if (cache.isArchived()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
         }
-        // top-right: owned / stored
-        if (cache.isOwner() && mainMarkerId != R.drawable.marker_own) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_own, Gravity.TOP | Gravity.RIGHT));
-            // if not, checked if stored
+        // top-right: DT marker / stored
+        if (Settings.isDTMarkerEnabled()) {
+            insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain()), Gravity.TOP | Gravity.RIGHT));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
+        }
+        // top-center: stored (if DT marker enabled)
+        if (Settings.isDTMarkerEnabled() && !cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
         }
         // top-left: will attend / found / not found / offline-logs
         if (!showBigSmileys(cacheListType)) {
@@ -181,7 +187,7 @@ public final class MapMarkerUtils {
         // center-left/center-right: list markers
         addListMarkers(res, insetsBuilder, assignedMarkers);
 
-        return buildLayerDrawable(insetsBuilder, 15, 13);
+        return buildLayerDrawable(insetsBuilder, 12, 13);
     }
 
     /**
@@ -587,8 +593,6 @@ public final class MapMarkerUtils {
             final Integer offlineLogType = getMarkerIdIfLogged(cache);
             if (offlineLogType != null) {
                 return offlineLogType;
-            } else if (cache.isOwner()) {
-                return R.drawable.marker_own;
             } else if (cache.hasUserModifiedCoords()) {
                 return R.drawable.marker_usermodifiedcoords;
             }
@@ -598,7 +602,9 @@ public final class MapMarkerUtils {
 
     @Nullable
     private static Integer getMarkerIdIfLogged(final Geocache cache) {
-        if (cache.isFound()) {
+        if (cache.isOwner()) {
+            return R.drawable.marker_own;
+        } else if (cache.isFound()) {
             return R.drawable.marker_found;
             // if not, perhaps logged offline
         } else if (cache.hasLogOffline()) {
@@ -695,6 +701,38 @@ public final class MapMarkerUtils {
             }
         }
         return result;
+    }
+
+    public static Drawable getDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
+        final int hashcode = new HashCodeBuilder().append(difficulty).append(terrain).toHashCode();
+
+        synchronized (overlaysCache) {
+            CacheMarker marker = overlaysCache.get(hashcode);
+            if (marker == null) {
+                marker = new CacheMarker(hashcode, createDTRatingMarker(res, difficulty, terrain));
+                overlaysCache.put(hashcode, marker);
+            }
+            return marker.getDrawable();
+        }
+    }
+
+    private static LayerDrawable createDTRatingMarker(final Resources res, final float difficulty, final float terrain) {
+        final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, R.drawable.marker_rating_bg, null));
+        final InsetsBuilder insetsBuilder = new InsetsBuilder(res, background.getIntrinsicWidth(), background.getIntrinsicHeight());
+        insetsBuilder.withInset(new InsetBuilder(background));
+
+        final String packageName = CgeoApplication.getInstance().getPackageName();
+        insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "d", difficulty)));
+        insetsBuilder.withInset(new InsetBuilder(getDTRatingMarkerSection(res, packageName, "t", terrain)));
+
+        insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_rating_fg));
+        return buildLayerDrawable(insetsBuilder, 4, 0);
+    }
+
+    private static Drawable getDTRatingMarkerSection(final Resources res, final String packageName, final String ratingLetter, final float rating) {
+        // ensure that rating is an integer between 0 and 50 in steps of 5
+        final int r = Math.max(0, Math.min((int) (Math.round(rating * 2) / 2) * 10, 50));
+        return DrawableCompat.wrap(ResourcesCompat.getDrawable(res, res.getIdentifier("marker_rating_" + ratingLetter + "_" + r, "drawable", packageName), null));
     }
 
 }

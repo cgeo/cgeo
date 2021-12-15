@@ -825,7 +825,9 @@
     <string name="init_useInternalRouting">Use internal routing</string>
     <string name="init_summary_useInternalRouting">Use c:geo internal routing to be able to use automatic routing data downloading and other functions</string>
     <string name="init_bigSmileysOnMap">Big icons</string>
-    <string name="init_summary_bigSmileysOnMap">If enabled, symbols like the \'found smiley\' or the \'corrected coordinates\' marker will be shown enlarged on the map instead of the cache type icon (requires restart).</string>
+    <string name="init_summary_bigSmileysOnMap">If enabled, symbols like the \'found smiley\' or the \'corrected coordinates\' marker will be shown enlarged on the map instead of the cache type icon.</string>
+    <string name="init_dtMarkerOnCacheIcon">D/T rating on cache icons</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Show an marker for the Difficulty (left) and Terrain (right) ratings on cache markers in upper-right corner ("stored" marker is moved to middle).</string>
     <string name="init_global_wp_extraction_disable">Disable waypoint extraction</string>
     <string name="init_summary_global_wp_extraction_disable">Globally disable waypoint extraction from personal cache notes. It can still be enabled for individual caches by deactivating the checkbox below the personal cache note.</string>
     <string name="init_prevent_cache_note_merge">Overwrite Personal Cache Note</string>

@@ -1976,4 +1976,8 @@ public class Settings {
         return template.getKey() + ": " + template.getValue();
     }
 
+    public static boolean isDTMarkerEnabled() {
+        return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
+    }
+
 }
