@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.VariableListViewBinding;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaFunction;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -15,6 +16,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.InputType;
+import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.ContextThemeWrapper;
@@ -28,7 +30,6 @@ import android.widget.TextView;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -139,12 +140,15 @@ public class VariableListView extends LinearLayout {
             }
             final boolean isError = variableState.getError() != null;
             if (isError) {
-                viewVariableResult.setText(variableState.getError());
-                viewVariableResult.setTextColor(Color.RED);
+                final CharSequence errorText = TextUtils.setSpan(variableState.getError(), new ForegroundColorSpan(Color.RED));
+                if (variableState.getResultAsCharSequence() != null) {
+                    viewVariableResult.setText(TextUtils.concat(variableState.getResultAsCharSequence(), " | ", errorText));
+                } else {
+                    viewVariableResult.setText(errorText);
+                }
             } else {
                 final Value result = variableState.getResult();
                 viewVariableResult.setText("= " + (result == null ? "?" : result.toUserDisplayableString()));
-                viewVariableResult.setTextColor(ContextCompat.getColor(viewVariableResult.getContext(), R.color.colorText));
             }
         }
 

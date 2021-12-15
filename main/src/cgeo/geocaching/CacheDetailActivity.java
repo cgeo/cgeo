@@ -2088,6 +2088,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             activity.addContextMenu(coordinatesView);
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
+            holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
 
             // info
             final String waypointInfo = Formatter.formatWaypointInfo(wpt);

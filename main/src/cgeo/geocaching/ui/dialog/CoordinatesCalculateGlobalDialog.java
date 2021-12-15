@@ -20,8 +20,10 @@ import cgeo.geocaching.utils.formulas.VariableList;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -54,11 +56,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
 
     private final TextSpinner<CalculatedCoordinateType> displayType = new TextSpinner<>();
 
-    // Interface used by the coordinate calculator to callback activity with dialog result.
-    public interface CalculatedCoordinateUpdate {
-        void updateCalculatedCoordinates(CoordinateInputData coordinateInputData);
-    }
-
     private CoordinateInputData createFromDialog() {
         final CoordinateInputData cid = new CoordinateInputData();
         cid.setGeocode(geocode);
@@ -69,10 +66,11 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
     }
 
     private void saveAndFinishDialog () {
+        ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
 
         final Activity activity = requireActivity();
-        if (activity instanceof CalculatedCoordinateUpdate) {
-            ((CalculatedCoordinateUpdate) activity).updateCalculatedCoordinates(createFromDialog());
+        if (activity instanceof CoordinatesInputDialog.CoordinateUpdate) {
+            ((CoordinatesInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
         }
         dismiss();
     }
@@ -101,10 +99,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         geopoint = inputData.getGeopoint();
         calcCoord = inputData.getCalculatedCoordinate();
         notes = inputData.getNotes();
-
-        if (!calcCoord.isFilled()) {
-            calcCoord.setFrom(geopoint);
-        }
 
         //(re)load variable list as necessary
         final String oldGeocode = geocode;
@@ -160,7 +154,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             binding.done.setOnClickListener(view -> saveAndFinishDialog());
         } else {
             final Toolbar toolbar = binding.toolbarWrapper.toolbar;
-            toolbar.setTitle(R.string.cache_coordinates);
+            toolbar.setTitle("Calculate Coordinate");
             toolbar.inflateMenu(R.menu.menu_ok_cancel);
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.menu_item_save) {
@@ -173,12 +167,18 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             binding.done.setVisibility(View.GONE);
         }
 
+        binding.convertToPlain.setOnClickListener(v -> {
+            final CoordinateInputData cid = createFromDialog();
+            cid.setCalculatedCoordinate(null);
+            CoordinatesInputDialog.show(this.getActivity().getSupportFragmentManager(), cid);
+            dismiss();
+        });
+
         displayType.setSpinner(binding.spinnerCoordinateFormats)
             .setValues(Arrays.asList(CalculatedCoordinateType.values()))
             .setDisplayMapper(t -> t.toUserDisplayableString())
             .set(calcCoord.getType())
             .setChangeListener(t -> refreshType(false));
-        refreshType(true);
 
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
@@ -220,6 +220,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             updateView();
         });
 
+        refreshType(true);
+
         return binding.getRoot();
     }
 
@@ -242,20 +244,32 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         binding.NonPlainFormat.setVisibility(newType != CalculatedCoordinateType.PLAIN ? View.VISIBLE : View.GONE);
 
         if (newType == CalculatedCoordinateType.PLAIN) {
-            final Pair<String, String> coords = binding.NonPlainFormat.getPlain();
-            binding.PlainLat.setText(coords.first);
-            binding.PlainLon.setText(coords.second);
+            if (initialLoad) {
+                binding.PlainLat.setText(calcCoord.getLatitudePattern() == null ? "" : calcCoord.getLatitudePattern());
+                binding.PlainLon.setText(calcCoord.getLongitudePattern() == null ? "" : calcCoord.getLongitudePattern());
+            } else {
+                final Pair<String, String> coords = binding.NonPlainFormat.getPlain();
+                binding.PlainLat.setText(coords.first);
+                binding.PlainLon.setText(coords.second);
+            }
         } else {
             binding.NonPlainFormat.setData(newType,
                 initialLoad ? calcCoord.getLatitudePattern() : null, initialLoad ? calcCoord.getLongitudePattern() : null, currentGp);
         }
-
     }
 
     private void updateView() {
         //update the displayed coordinate texts
-        binding.latRes.setText(calcCoord.getLatitudeString(varList::getValue));
-        binding.lonRes.setText(calcCoord.getLongitudeString(varList::getValue));
+        final Pair<Double, Double> gpData = calcCoord.calculateGeopointData(varList::getValue);
+        binding.latRes.setText(TextUtils.concat(calcCoord.getLatitudeString(varList::getValue), " ", getStatusText(gpData.first != null)));
+        binding.lonRes.setText(TextUtils.concat(calcCoord.getLongitudeString(varList::getValue), " ", getStatusText(gpData.second != null)));
+    }
+
+    private CharSequence getStatusText(final boolean positive) {
+        if (positive) {
+            return TextUtils.setSpan("✓", new ForegroundColorSpan(Color.GREEN));
+        }
+        return TextUtils.setSpan("✖", new ForegroundColorSpan(Color.RED));
     }
 
     @Override
@@ -280,7 +294,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
      */
     @Override
     public void dismiss() {
-        ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
         if (varList instanceof CacheVariableList) {
             ((CacheVariableList) varList).saveState();
         }

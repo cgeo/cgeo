@@ -280,6 +280,10 @@ public class Waypoint implements IWaypoint {
         return waypointType == WaypointType.FINAL && coords != null;
     }
 
+    public boolean isCalculated() {
+        return CalculatedCoordinate.isValidConfig(calcStateJson);
+    }
+
     @Override
     public CoordinatesType getCoordType() {
         return CoordinatesType.WAYPOINT;

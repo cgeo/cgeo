@@ -8,13 +8,13 @@ public class FormulaException extends IllegalArgumentException {
 
     public enum ErrorType {
         //internationalize later
-        UNEXPECTED_TOKEN(0, "Invalid formula, expected '%1$s'"),
+        UNEXPECTED_TOKEN(0, "Syntax error, expected '%1$s'"),
         WRONG_PARAMETER_COUNT(0, "Wrong parameter count, expected %1$s-%2$s, got %3$s"),
-        WRONG_TYPE(0, "Wrong value type, expected '%1$s', got '%2$s' of type '%3$s'"),
-        MISSING_VARIABLE_VALUE(0, "Value missing for variable(s): %1$s"),
-        CYCLIC_DEPENDENCY(0, "Cyclic dependency between variables: %1$s"),
-        EMPTY_FORMULA(0, "Empty formula"),
-        OTHER(0, "Problem during evaluation: '%1$s'");
+        WRONG_TYPE(0, "Wrong type, expected '%1$s', got '%2$s' of type '%3$s'"),
+        MISSING_VARIABLE_VALUE(0, "Value missing: %1$s"),
+        CYCLIC_DEPENDENCY(0, "Cycle: %1$s"),
+        EMPTY_FORMULA(0, "Empty Formula"),
+        OTHER(0, "Error: '%1$s'");
 
         @StringRes
         public final int messageResId;

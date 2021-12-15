@@ -14,8 +14,6 @@
         android:layout_height="match_parent"
         android:fillViewport="true">
 
-
-
         <LinearLayout
             android:id="@+id/scroller_child"
             android:layout_width="match_parent"
@@ -30,7 +28,7 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/textSize_headingSecondary"
                 android:background="@drawable/mark_orange"
-                android:text="Experimental! Only Plain supported, no auto-add/remove of variables yet, no update of coords when vars are changed elsewhere yet"
+                android:text="Experimental! No auto-add of variables yet, no update of coords when vars are changed elsewhere yet"
                 />
 
             <Spinner
@@ -144,6 +142,13 @@
                     android:inputType="textMultiLine|textCapSentences"
                     android:hint="@string/waypointcalc_notes_prompt" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <Button
+                android:id="@+id/convert_to_plain"
+                style="@style/button_full"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Convert to plain coordinate" />
 
             <Button
                 android:id="@+id/done"
