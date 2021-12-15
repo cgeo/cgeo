@@ -1,10 +1,10 @@
 ### General
 - Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
-- Refactored settings to current Android specifications (work in progress, please be patient)
 
 ### Map
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
 - Change: Automatically enable track display on loading a GPX track file
+- New: D/T symbols for cache icons (optional)
 
 ### Cache list
 - New: Option to select next 20 caches
@@ -22,3 +22,4 @@
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
 - Fix: Optimize support to autofill passwords from external password store apps in settings
+- Refactored settings to meet current Android specifications
