@@ -468,7 +468,6 @@
     <string name="settings_service_active">Aktiv</string>
     <string name="settings_navigation_disabled">Dës App schéngt net installéiert ze sinn</string>
     <string name="init_signature">Ënnerschrëft</string>
-    <string name="init_signature_template_button">Virlag afügen</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Zäit</string>
     <string name="init_signature_template_datetime">Datum &amp; Zäit</string>
@@ -497,7 +496,6 @@
     <string name="init_brouterShowBothDistances">Entfernung an der Loftlinn uweisen</string>
     <string name="brouter_recalculating">Wee gëtt am Hannergrond nei berechent…</string>
     <string name="init_summary_brouterShowBothDistances">Wann d\'Navigatioun aktiv ass: D\'Entfernung an der Loftlinn gëtt nieft der Längt vum berechenten Wee ugewisen.</string>
-    <string name="init_summary_global_wp_extraction_disable">Entpaken vun de Waypoints aus perséinlechen Cachenotizen desaktivéieren. D\'Optioun ka weiderhin individuell fir aner Cachen aktivéiert ginn, andeems de Krop ënnert de perséinlechen Cachenotizen geklickt gëtt</string>
     <string name="init_save_log_img">Biller späicheren</string>
     <string name="init_summary_save_log_img">Biller vun de Logs späicheren</string>
     <string name="init_units">Imperial Eenheeten</string>
