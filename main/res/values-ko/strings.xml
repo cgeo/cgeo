@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">지도 데이터</string>
     <string name="menu_dashboard">대시보드 로그인</string>
     <string name="menu_history">지난 기록</string>
+    <string name="menu_search_clipboard">클립보드에서 지오코드 로드</string>
     <string name="menu_history_longstring">찾음 역사</string>
     <string name="menu_filter">필터</string>
     <string name="menu_lists_pocket_queries">포켓쿼리</string>
@@ -419,6 +420,9 @@
     </plurals>
     <plurals name="user_finds_offline">
         <item quantity="other">%d개 오프라인으로 로그됨</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="other">%d개 캐시가 저장되었습니다.</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">목록 관리</string>
@@ -624,6 +628,7 @@
     <string name="settings_title_waypoints">지점</string>
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
+    <string name="settings_title_map_style">지도 스타일</string>
     <string name="settings_title_data_dir">지오캐시 데이터 폴더</string>
     <string name="settings_title_data_dir_usage">지오캐시 데이터 폴더 (%1$s 사용)</string>
     <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
@@ -685,8 +690,14 @@
     <string name="settings_service_active_unavailable">활성/사용할 수 없음</string>
     <string name="settings_navigation_disabled">이 앱이 설치되어 있지 않음</string>
     <string name="init_signature">서명</string>
+    <string name="init_template_title">템플릿 제목</string>
+    <string name="init_template_text">템플릿 내용</string>
+    <string name="init_log_template">로그 템플릿</string>
+    <string name="init_log_templates">로그 템플릿</string>
+    <string name="init_log_template_prefix">템플릿:\u0020</string>
+    <string name="init_log_template_missing_error">템플릿 제목과 내용을 모두 제공해야 합니다.</string>
     <string name="init_template_help">[NAME]과 같은 자리 표시 자 문자열은 템플릿을 사용할 때 지정된 텍스트로 채워집니다.</string>
-    <string name="init_signature_template_button"> 템플릿 삽입</string>
+    <string name="init_signature_template_button">자리 표시자 삽입</string>
     <string name="init_signature_template_date">날짜</string>
     <string name="init_signature_template_time">시간</string>
     <string name="init_signature_template_datetime">날짜 및 시간</string>
@@ -729,9 +740,7 @@
     <string name="init_useInternalRouting">내부 라우팅 사용</string>
     <string name="init_summary_useInternalRouting">c:geo 내부 라우팅을 사용하여 자동 라우팅 데이터 다운로드 및 기타 기능을 사용하십시오.</string>
     <string name="init_bigSmileysOnMap">큰 아이콘</string>
-    <string name="init_summary_bigSmileysOnMap">활성화하면 캐시 유형 아이콘 \'찾음 스마일리\' 또는 \'수정된 좌표\' 마커와 같은 기호가 지도에서 확대되어 표시됩니다(다시 시작해야 함).</string>
     <string name="init_global_wp_extraction_disable">지점 추출 비활성화</string>
-    <string name="init_summary_global_wp_extraction_disable">모든 개인 캐시 노트에서 지점 추출을 비활성화합니다. 개인 캐시 노트 아래의 확인란을 비활성화하여 개별 캐시에 대해 활성화 할 수 있습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
     <string name="init_summary_customtabs_as_browser">c:geo를 떠나지 않고 외부 웹 사이트가 표시됩니다 (그롬이 설치된 경우에만 가능).</string>
     <string name="init_save_log_img">사진 저장하기</string>
@@ -891,6 +900,8 @@
     <string name="init_maintenance">유지보수</string>
     <string name="init_maintenance_directories_note">c:geo는 캐시와 관련된 이미지 및 기타 파일을 전용 폴더에 저장합니다. 경우에 따라 (예: 데이터베이스 가져 오기 / 내보내기)이 폴더에 여기에서 삭제할 수 있는 오래된 파일이 포함될 수 있습니다.</string>
     <string name="init_maintenance_directories">쓰이지 않는 파일 삭제하기</string>
+    <string name="init_maintenance_start">유지 보수 시작됨</string>
+    <string name="init_maintenance_finished">유지 보수 완료</string>
     <string name="init_location">위치 정보</string>
     <string name="init_location_note">구글플레이 서비스를 장착한 기기의 경우, c:geo는 자동적으로 더 나은 위치정보 제공자를 사용합니다. 하지만, 이렇게 하면 외부 블루투스 GPS 수신기를 사용할 수 없습니다.</string>
     <string name="init_location_googleplayservices">구글 플레이 서비스 사용하기</string>
@@ -2048,6 +2059,7 @@
     <string name="mapserver_hylly_info">핀란드의 상세지도, \"Hylly\"지도 테마 중 하나 필요합니다.</string>
     <string name="mapserver_hylly_themes_info">\"Hylly\"지도를 위해 제작 된 상세한지도 테마</string>
     <string name="brouter_info">오프라인 라우팅 서비스</string>
+    <string name="maptheme_elevate_categoryinfo">관련 항목: [A] 지역, [P] 관심 지점, [R] 경로, [W] 길</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
     <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
