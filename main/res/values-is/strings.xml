@@ -309,7 +309,6 @@
     <string name="init_authorization_credential_password">Lykilorð</string>
     <string name="settings_navigation_disabled">Það lítur út fyrir að þetta app sé ekki uppsett</string>
     <string name="init_signature">Undirskrift</string>
-    <string name="init_signature_template_button">Setja inn sniðmát</string>
     <string name="init_signature_template_date">Dagsetning</string>
     <string name="init_signature_template_time">Tími</string>
     <string name="init_signature_template_datetime">Dagsetning og tími</string>
