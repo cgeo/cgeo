@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:padding="4dip"
     tools:context=".EditWaypointActivity">
@@ -16,6 +16,7 @@
         <Button
             android:id="@+id/buttonLatLongitude"
             style="@style/button_full_double"
+            app:icon="@drawable/ic_menu_calculate"
             android:freezesText="true"
             android:hint="@string/latlongitude" />
 

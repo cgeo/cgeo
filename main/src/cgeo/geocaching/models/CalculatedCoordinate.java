@@ -1,13 +1,13 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.location.Geopoint;
-import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.utils.formulas.DegreeFormula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Pair;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -85,14 +85,6 @@ public class CalculatedCoordinate implements Parcelable {
         this.longitudePattern = other.longitudePattern;
     }
 
-    public void setFrom(final Geopoint gp) {
-        if (gp == null) {
-            return;
-        }
-        setLatitudePattern(GeopointFormatter.format(GeopointFormatter.Format.LAT_DECMINUTE, gp));
-        setLongitudePattern(GeopointFormatter.format(GeopointFormatter.Format.LON_DECMINUTE, gp));
-    }
-
     public void setFromConfig(final String config) {
         if (config == null) {
             return;
@@ -133,12 +125,12 @@ public class CalculatedCoordinate implements Parcelable {
         return state;
     }
 
-    public String getLatitudeString(final Func1<String, Value> varMap) {
-        return latitudePattern.evaluateToString(varMap);
+    public CharSequence getLatitudeString(final Func1<String, Value> varMap) {
+        return latitudePattern.evaluateToCharSequence(varMap);
     }
 
-    public String getLongitudeString(final Func1<String, Value> varMap) {
-        return longitudePattern.evaluateToString(varMap);
+    public CharSequence getLongitudeString(final Func1<String, Value> varMap) {
+        return longitudePattern.evaluateToCharSequence(varMap);
     }
 
     public Set<String> getNeededVars() {
@@ -150,12 +142,12 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public Geopoint calculateGeopoint(final Func1<String, Value> varMap) {
-        final Double lat = latitudePattern.evaluate(varMap);
-        final Double lon = longitudePattern.evaluate(varMap);
-        if (lat == null || lon == null) {
-            return null;
-        }
-        return new Geopoint(lat, lon);
+        final Pair<Double, Double> data = calculateGeopointData(varMap);
+        return data.first == null || data.second == null ? null : new Geopoint(data.first, data.second);
+    }
+
+    public Pair<Double, Double> calculateGeopointData(final Func1<String, Value> varMap) {
+        return new Pair<>(latitudePattern.evaluate(varMap), longitudePattern.evaluate(varMap));
     }
 
     @Override

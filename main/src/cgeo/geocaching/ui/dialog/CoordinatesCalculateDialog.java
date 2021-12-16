@@ -162,7 +162,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (areCurrentCoordinatesValid()) {
             ((CoordinatesInputDialog.CoordinateUpdate) requireActivity()).updateCoordinates(gp);
         } else {
-            ((CoordinatesInputDialog.CoordinateUpdate) requireActivity()).updateCoordinates(null);
+            ((CoordinatesInputDialog.CoordinateUpdate) requireActivity()).updateCoordinates((Geopoint) null);
         }
         close();
     }

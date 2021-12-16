@@ -28,12 +28,12 @@ public class Value {
         return new Value(value);
     }
 
-    private Value(final Object raw) {
+    protected Value(final Object raw) {
         this.raw = raw;
     }
 
     @Nullable
-    public Object getRaw() {
+    protected Object getRaw() {
         return raw;
     }
 
@@ -58,10 +58,14 @@ public class Value {
             } else if (raw instanceof Number && !(raw instanceof Integer)) {
                 asString = DOUBLE_TO_STRING_FORMAT.format(((Number) raw).doubleValue());
             } else {
-                asString = raw.toString();
+                asString = raw instanceof String ? (String) raw : raw.toString();
             }
         }
         return asString;
+    }
+
+    public CharSequence getAsCharSequence() {
+        return raw instanceof CharSequence ? (CharSequence) raw : getAsString();
     }
 
     public int getAsInt() {

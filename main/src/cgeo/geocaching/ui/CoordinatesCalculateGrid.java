@@ -41,6 +41,9 @@ public class CoordinatesCalculateGrid extends GridLayout {
     private static final Map<CalculatedCoordinateType, Func1<Geopoint, String>> LAT_CONVERTERS = new HashMap<>();
     private static final Map<CalculatedCoordinateType, Func1<Geopoint, String>> LON_CONVERTERS = new HashMap<>();
 
+    private static final Set<Integer> SIGNIFICANT_CHARS = new HashSet<>();
+    private static final Set<Integer> SPACE_CHARS = new HashSet<>();
+
     static {
         final Locale locale = Locale.US;
         final char decSep = '.';
@@ -62,6 +65,20 @@ public class CoordinatesCalculateGrid extends GridLayout {
             String.format(Locale.getDefault(), "%c %02d°%02d'%02d%c%03d\"", gp.getLatDir(), gp.getDMSLatDeg(), gp.getDMSLatMin(), gp.getDMSLatSec(), decSep, gp.getDMSLatSecFrac()));
         LON_CONVERTERS.put(CalculatedCoordinateType.DEGREE_MINUTE_SEC, gp ->
             String.format(Locale.getDefault(), "%c%03d°%02d'%02d%c%03d\"", gp.getLonDir(), gp.getDMSLonDeg(), gp.getDMSLonMin(), gp.getDMSLonSec(), decSep, gp.getDMSLonSecFrac()));
+
+        for (int c = 'A'; c <= 'Z'; c++) {
+            SIGNIFICANT_CHARS.add(c);
+        }
+        for (int c = '0'; c <= '9'; c++) {
+            SIGNIFICANT_CHARS.add(c);
+        }
+        SIGNIFICANT_CHARS.add((int) '_');
+        SPACE_CHARS.add((int) '°');
+        SPACE_CHARS.add((int) '.');
+        SPACE_CHARS.add((int) '\'');
+        SPACE_CHARS.add((int) '"');
+        SIGNIFICANT_CHARS.addAll(SPACE_CHARS);
+        SPACE_CHARS.add((int) ' '); //SPACE is a space  char but NOT a significant char!
     }
 
 
@@ -97,6 +114,7 @@ public class CoordinatesCalculateGrid extends GridLayout {
         if (this.type != CalculatedCoordinateType.PLAIN) {
             recreate(type, latPattern, lonPattern, gp);
         }
+        callChangeListener();
     }
 
     public Pair<String, String> getPlain() {
@@ -160,9 +178,18 @@ public class CoordinatesCalculateGrid extends GridLayout {
 
 
         //set default digits from given geopoint (if any)
-        applyPatternsFor(type, gp);
+        final boolean gpSuccess = applyPatternsFor(type, gp);
         //set pattern (if a valid pattern is given)
-        applyPatterns(latPattern, lonPattern);
+        final boolean patternSuccess = applyPatterns(latPattern, lonPattern);
+
+        if (!patternSuccess) {
+            //in case of non-success, reapply previous patterns for a consistent view
+            if (gpSuccess) {
+                applyPatternsFor(type, gp);
+            } else {
+                applyPatternsFor(type, Geopoint.ZERO);
+            }
+        }
 
         this.setVisibility(VISIBLE);
         changeListenerActive = true;
@@ -220,18 +247,32 @@ public class CoordinatesCalculateGrid extends GridLayout {
         }
         for (int row = 0; row < 2; row++) {
             final String rowPattern = row == 0 ? latPattern : lonPattern;
-            final int[] pos = new int[] { -1 };
-            if (applyHemisphere(row, rowPattern, pos)) {
+            final int[] pos = new int[] { -1, -1 };
+            if (!applyHemisphere(row, rowPattern, pos)) {
                 return false;
             }
             for (int col = 1; col < this.getColumnCount(); col++) {
                 final View v = this.getChildAt(row * getColumnCount() + col);
-                if (v instanceof SingleCharButton) {
-                    final char c = nextSignificantChar(rowPattern, pos);
-                    if (c == '#') {
+                if (v instanceof Space) {
+                    continue;
+                }
+                char c = nextSignificantChar(rowPattern, pos);
+                if (c == '#') {
+                    return false;
+                }
+                if (v instanceof SingleCharButton) { // actual tappable button
+                    //ignore spaces for this
+                    if (c == ' ') {
+                        c = nextSignificantChar(rowPattern, pos);
+                    }
+                    if (SPACE_CHARS.contains((int) c)) {
                         return false;
                     }
                     ((SingleCharButton) v).setChar(c);
+                } else { // text view inbetween tappable buttons (contains ., °, ', " for decoration)
+                    if (!SPACE_CHARS.contains((int) c) || (c != ' ' && c != ((TextView) v).getText().charAt(0))) {
+                        return false;
+                    }
                 }
             }
             if (nextSignificantChar(rowPattern, pos) != '#') {
@@ -247,33 +288,36 @@ public class CoordinatesCalculateGrid extends GridLayout {
         switch (row) {
             case 0:
                 if (hem != 'N' && hem != 'S') {
-                    return true;
+                    return false;
                 }
                 break;
             case 1:
             default:
                 if (hem != 'E' && hem != 'W' && hem != 'O') {
-                    return true;
+                    return false;
                 }
                 break;
         }
         ((TextView) this.getChildAt(row * getColumnCount())).setText(hem + "");
-        return false;
+        return true;
     }
 
-    private char nextSignificantChar(final String pattern, final int[] pos) {
+    /** returns next char relevant for pattern parsing. For conjective spaces, only one is returned */
+    private static char nextSignificantChar(final String pattern, final int[] pos) {
         if (pattern == null) {
             return '#';
         }
+        final int prevChar = pos[1];
         while (true) {
             final char c = nextChar(pattern, pos);
-            if ((c >= 'A' && c <= 'Z') || (c >= '0' && c <= '9') || (c == '_') || (c == '#')) {
+            if (SIGNIFICANT_CHARS.contains((int) c) || (c == '#') || (c == ' ' && prevChar != ' ')) {
+                pos[1] = c;
                 return c;
             }
         }
     }
 
-    private char nextChar(final String pattern, final int[] pos) {
+    private static char nextChar(final String pattern, final int[] pos) {
         return (++pos[0] < pattern.length()) ? pattern.charAt(pos[0]) : '#';
     }
 

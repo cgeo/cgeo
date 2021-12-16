@@ -9,6 +9,8 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.CalcState;
+import cgeo.geocaching.models.CalculatedCoordinate;
+import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
@@ -107,13 +109,18 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     public static void show(final FragmentManager mgr, final CoordinateInputData inputData) {
 
+        if (inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled()) {
+            CoordinatesCalculateGlobalDialog.show(mgr, inputData);
+            return;
+        }
+
         final Bundle args = new Bundle();
         args.putParcelable(INPUT_DATA_ARG, inputData);
 
-        final CoordinatesInputDialog cid = new CoordinatesInputDialog();
-        cid.setArguments(args);
-        cid.setCancelable(true);
-        cid.show(mgr, "coord_input_dialog");
+        final CoordinatesInputDialog ciDialog = new CoordinatesInputDialog();
+        ciDialog.setArguments(args);
+        ciDialog.setCancelable(true);
+        ciDialog.show(mgr, "coord_input_dialog");
     }
 
     @Override
@@ -242,6 +249,15 @@ public class CoordinatesInputDialog extends DialogFragment {
             binding.calculateGlobal.setVisibility(View.VISIBLE);
             binding.calculateGlobal.setOnClickListener(vv -> {
                 inputData.setGeopoint(gp);
+                final CalculatedCoordinate cc = new CalculatedCoordinate();
+                cc.setType(
+                    CalculatedCoordinateType.values()[binding.input.spinnerCoordinateFormats.getSelectedItemPosition()]);
+                if (cc.getType() == CalculatedCoordinateType.PLAIN) {
+                    //in case of PLAIn we can take over the text input into calc coord dialog
+                    cc.setLatitudePattern(eLat.getText().toString());
+                    cc.setLongitudePattern(eLon.getText().toString());
+                }
+                inputData.setCalculatedCoordinate(cc);
                 CoordinatesCalculateGlobalDialog.show(myContext.getSupportFragmentManager(), inputData);
                 dismiss();
             });
@@ -391,6 +407,8 @@ public class CoordinatesInputDialog extends DialogFragment {
     private static String addZeros(final int value, final int len) {
         return StringUtils.leftPad(Integer.toString(value), len, '0');
     }
+
+
 
     private static class ButtonClickListener implements View.OnClickListener {
 
@@ -646,7 +664,9 @@ public class CoordinatesInputDialog extends DialogFragment {
         if (!areCurrentCoordinatesValid(true)) {
             return;
         }
-        ((CoordinateUpdate) requireActivity()).updateCoordinates(gp);
+        inputData.setCalculatedCoordinate(null);
+        inputData.setGeopoint(gp);
+        ((CoordinateUpdate) requireActivity()).updateCoordinates(inputData);
         dismiss();
     }
 
@@ -654,7 +674,9 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         @Override
         public void onClick(final View v) {
-            ((CoordinateUpdate) getActivity()).updateCoordinates(null);
+            inputData.setCalculatedCoordinate(null);
+            inputData.setGeopoint(null);
+            ((CoordinateUpdate) getActivity()).updateCoordinates(inputData);
             dismiss();
         }
     }
@@ -662,6 +684,10 @@ public class CoordinatesInputDialog extends DialogFragment {
     public interface CoordinateUpdate {
         void updateCoordinates(Geopoint gp);
         boolean supportsNullCoordinates();
+
+        default void updateCoordinates(CoordinateInputData coordinateInputData) {
+            updateCoordinates(coordinateInputData.getGeopoint());
+        }
     }
 
     // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.

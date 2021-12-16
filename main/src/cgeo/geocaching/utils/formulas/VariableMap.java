@@ -48,6 +48,7 @@ public class VariableMap {
         private String error;
 
         private State state = State.OK;
+        private CharSequence resultAsCharSequence;
         private Value result;
 
         private final Set<String> needs = new HashSet<>();
@@ -91,6 +92,12 @@ public class VariableMap {
         @Nullable
         public Value getResult() {
             return result;
+        }
+
+        /** If State is {@link State#OK} or {@link State#ERROR} with compiled Formula, returns the calculated value as a (formatted) CharSequence. null otherwise */
+        @Nullable
+        public CharSequence getResultAsCharSequence() {
+            return resultAsCharSequence;
         }
     }
 
@@ -274,14 +281,15 @@ public class VariableMap {
 
     private boolean recalculateSingle(final VariableState state, final boolean forceError) {
 
+        state.result = null;
+        state.resultAsCharSequence = null;
+
         if (state.formula == null) {
             state.state = State.ERROR;
             if (state.error == null) {
                 state.error = FormulaException.getUserDisplayableMessage(FormulaException.ErrorType.OTHER, "-");
             }
-            state.result = null;
         } else {
-
             boolean hasCycleDep = false;
             for (String n : state.needs) {
                 final VariableState cs = Objects.requireNonNull(get(n));
@@ -296,6 +304,7 @@ public class VariableMap {
             try {
                 state.result = state.formula.evaluate(
                     v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null); //may throw FormulaException
+                state.resultAsCharSequence = state.result.toString();
                 if (forceError) {
                     state.state = State.ERROR;
                     state.error = FormulaException.getUserDisplayableMessage(FormulaException.ErrorType.OTHER, "-");
@@ -305,6 +314,7 @@ public class VariableMap {
                 }
             } catch (FormulaException ce) {
                 state.result = null;
+                state.resultAsCharSequence = state.formula.evaluateToCharSequence(v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null);
                 state.state = State.ERROR;
                 state.error = ce.getUserDisplayableString();
             }
@@ -318,6 +328,7 @@ public class VariableMap {
             return;
         }
         state.result = null;
+        state.resultAsCharSequence = null;
         recalculateSingle(state, true);
         for (String n : state.isNeededBy) {
             markError(n);

@@ -25,7 +25,6 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.WeakReferenceHandler;
-import cgeo.geocaching.ui.dialog.CoordinatesCalculateGlobalDialog;
 import cgeo.geocaching.ui.dialog.CoordinatesInputDialog;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -63,6 +62,7 @@ import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
+import com.google.android.material.button.MaterialButton;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
@@ -70,7 +70,7 @@ import org.androidannotations.annotations.InstanceState;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
-public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState, CoordinatesCalculateGlobalDialog.CalculatedCoordinateUpdate {
+public class EditWaypointActivity extends AbstractActionBarActivity implements CoordinatesInputDialog.CoordinateUpdate, CoordinatesInputDialog.CalculateState {
 
     public static final int SUCCESS = 0;
     public static final int UPLOAD_START = 1;
@@ -290,7 +290,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private void initializeWaypointTypeSelector() {
-        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[POSSIBLE_WAYPOINT_TYPES.size()])) {
+        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[0])) {
             @Override
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 final View view = super.getView(position, convertView, parent);
@@ -306,7 +306,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
 
             private void addWaypointIcon(final int position, final View view) {
-                final TextView label = (TextView) view.findViewById(android.R.id.text1);
+                final TextView label = view.findViewById(android.R.id.text1);
                 label.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointTypeMarker(res, POSSIBLE_WAYPOINT_TYPES.get(position)), null, null, null);
             }
         };
@@ -457,17 +457,18 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             binding.buttonLatLongitude.setText(String.format("%s%n%s", getResources().getString(R.string.waypoint_latitude_null), getResources().getString(R.string.waypoint_longitude_null)));
             setProjectionEnabled(false);
         }
+        ((MaterialButton) binding.buttonLatLongitude).setIconResource(CalculatedCoordinate.isValidConfig(calcStateString) ? R.drawable.ic_menu_calculate : 0);
     }
 
     @Override
-    public void updateCalculatedCoordinates(final CoordinateInputData coordinateInputData) {
-        updateCoordinates(coordinateInputData.getGeopoint());
+    public void updateCoordinates(final CoordinateInputData coordinateInputData) {
         getUserNotes().setText(coordinateInputData.getNotes());
 
         this.calcStateString = null;
         if (coordinateInputData.getCalculatedCoordinate() != null) {
             this.calcStateString = coordinateInputData.getCalculatedCoordinate().toConfig();
         }
+        updateCoordinates(coordinateInputData.getGeopoint());
     }
 
     @Override

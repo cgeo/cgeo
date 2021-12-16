@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
@@ -20,6 +21,7 @@ import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -31,6 +33,7 @@ import java.util.zip.CRC32;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -526,4 +529,85 @@ public final class TextUtils {
         }
         return pattern;
     }
+
+    /** convenience forward to {@link android.text.TextUtils#concat(java.lang.CharSequence...)} */
+    public static CharSequence concat(final CharSequence ... cs) {
+        return android.text.TextUtils.concat(cs);
+    }
+
+    public static <T> CharSequence join(final Iterable<T> it, final Func1<T, CharSequence> getter, final CharSequence delim) {
+        return join(it.iterator(), getter, delim);
+    }
+
+    public static <T> CharSequence join(final Iterator<T> it, final Func1<T, CharSequence> getter, final CharSequence delim) {
+        final List<CharSequence> list = new ArrayList<>();
+        boolean first = true;
+        while (it.hasNext()) {
+            final T item = it.next();
+            final CharSequence cs = getter.call(item);
+            if (cs != null) {
+                if (!first) {
+                    list.add(delim);
+                }
+                list.add(cs);
+                first = false;
+            }
+        }
+
+        return concat(list.toArray(new CharSequence[0]));
+    }
+
+    /** Convenience method to apply a span to a Charsequence */
+    public static CharSequence setSpan(final CharSequence cs, final Object span) {
+        return setSpan(cs, span, -1, -1, 0);
+    }
+
+    /**
+     * Convenience method to apply a span to a CharSequence. See {@link Spannable#setSpan(Object, int, int, int)} for details.
+     *
+     * @param cs CharSequence to apply span to
+     * @param span the span to use. Usually a class implementing {@link android.text.style.CharacterStyle}, e.g. {@link ForegroundColorSpan}
+     * @param start start index to add span. if <0 then 0 is used
+     * @param end end index to add span. if <0 then cs.length() is used. if end<start, then no span is applied
+     * @param priority span priority. Values > 255 will be set to 255
+     * @return CharSequence with span applied
+     */
+    public static CharSequence setSpan(final CharSequence cs, final Object span, final int start, final int end, final int priority) {
+        if (cs == null || cs.length() == 0 || span == null) {
+            return cs;
+        }
+        final Spannable sp;
+        if (cs instanceof Spannable) {
+            sp = (Spannable) cs;
+        } else {
+            sp = new SpannableString(cs);
+        }
+        final int startToUse = Math.min(cs.length(), Math.max(0, start));
+        final int endToUse = end < 0 ? cs.length() : Math.min(cs.length(), Math.max(end, startToUse));
+        if (endToUse <= startToUse) {
+            return cs;
+        }
+
+        int spanFlags = Spannable.SPAN_EXCLUSIVE_EXCLUSIVE;
+        spanFlags |= (Math.min(255, Math.max(0, priority)) << Spannable.SPAN_PRIORITY_SHIFT) & Spannable.SPAN_PRIORITY;
+        sp.setSpan(span, startToUse, endToUse, spanFlags);
+        return sp;
+    }
+
+    public static List<ImmutableTriple<Object, Integer, Integer>> parseSpans(final CharSequence cs) {
+        if (!(cs instanceof Spannable) || cs.length() == 0) {
+            return Collections.emptyList();
+        }
+        final Object[] spans = ((Spannable) cs).getSpans(0, cs.length(), Object.class);
+        if (spans.length == 0) {
+            return Collections.emptyList();
+        }
+        final List<ImmutableTriple<Object, Integer, Integer>> result = new ArrayList<>(spans.length);
+        for (Object span : spans) {
+            result.add(new ImmutableTriple<>(span, ((Spannable) cs).getSpanStart(span), ((Spannable) cs).getSpanEnd(span)));
+        }
+        return result;
+    }
+
+
 }

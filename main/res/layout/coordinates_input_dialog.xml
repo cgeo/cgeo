@@ -42,7 +42,7 @@
             style="@style/button_full"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="Calculate Coordinates (Global)"
+            android:text="NEW Calculate Coordinates"
             android:visibility="gone" />
 
         <Button

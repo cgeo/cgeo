@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.util.Pair;
@@ -105,6 +106,7 @@ public class DegreeFormula {
         }
     }
 
+    @SuppressWarnings("unchecked")
     private Set<String> calculatedNeededVars() {
         final Set<String> result = new HashSet<>();
         for (Object node : nodes) {
@@ -133,39 +135,45 @@ public class DegreeFormula {
     }
 
 
-    @SuppressWarnings("unchecked")
     public String evaluateToString(final Func1<String, Value> varMap) {
-        final StringBuilder sb = new StringBuilder();
+        return evaluateToCharSequence(varMap).toString();
+    }
+
+    @SuppressWarnings("unchecked")
+    public CharSequence evaluateToCharSequence(final Func1<String, Value> varMap) {
+
+        final List<CharSequence> css = new ArrayList<>();
         for (Object o : nodes) {
             if (o instanceof Character) {
-                sb.append(o);
+                css.add("" + o);
             } else if (o instanceof String) {
-                sb.append(o);
+                css.add(TextUtils.setSpan((String) o, Formula.createWarningSpan(), -1, -1, 1));
             } else {
                 final Pair<Formula, Integer> p = (Pair<Formula, Integer>) o;
-                sb.append(p.first.evaluateToString(varMap));
+                css.add(p.first.evaluateToCharSequence(varMap));
                 switch (p.second) {
                     case 1:
-                        sb.append("°");
+                        css.add("°");
                         break;
                     case 60:
-                        sb.append("'");
+                        css.add("'");
                         break;
                     case 360:
-                        sb.append("''");
+                        css.add("\"");
                         break;
                     default:
                         break;
                 }
             }
         }
-        return sb.toString();
+        return TextUtils.join(css, c -> c, "");
     }
 
     @SuppressWarnings("unchecked")
     public Double evaluate(final Func1<String, Value> varMap) {
         int sign = 1;
         double result = 0d;
+        boolean foundAny = false;
         for (Object o : nodes) {
             if (o instanceof Character) {
                 if (NEG_CHARS.contains(o)) {
@@ -174,6 +182,7 @@ public class DegreeFormula {
             } else if (o instanceof String) {
                 return null;
             } else {
+                foundAny = true;
                 final Pair<Formula, Integer> p = (Pair<Formula, Integer>) o;
                 try {
                     result += p.first.evaluate(varMap).getAsDouble() / p.second;
@@ -182,7 +191,7 @@ public class DegreeFormula {
                 }
             }
         }
-        return result * sign;
+        return foundAny ? result * sign : null;
     }
 
     private int nextChar() {
