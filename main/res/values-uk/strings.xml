@@ -471,7 +471,6 @@
     <string name="settings_service_active">активний</string>
     <string name="settings_navigation_disabled">Здається, цей додаток не встановлено</string>
     <string name="init_signature">підпис</string>
-    <string name="init_signature_template_button">вставити шаблон</string>
     <string name="init_signature_template_date">дата</string>
     <string name="init_signature_template_time">Час</string>
     <string name="init_signature_template_datetime">Дата &amp; Час</string>
@@ -504,7 +503,6 @@
     <string name="brouter_recalculating">Переобчислення маршруту у фоновому режимі…</string>
     <string name="init_summary_brouterShowBothDistances">Якщо маршрут активний: відображення прямої відстані в додаток до розрахункової довжини маршруту.</string>
     <string name="init_global_wp_extraction_disable">відключити спосіб вилучення</string>
-    <string name="init_summary_global_wp_extraction_disable">Глобально вимкнути видобуток шляхових точок з особистих схованок. Воно може бути увімкнено для окремих кеш, вимикаючи прапорець під особистою приміткою кешу</string>
     <string name="init_summary_customtabs_as_browser">Зовнішні веб-сайти будуть відображатися без залишення c:geo (лише при встановленні Chrome)</string>
     <string name="init_save_log_img">Зберегти зображення</string>
     <string name="init_summary_save_log_img">Зберегти зображення з логів</string>
