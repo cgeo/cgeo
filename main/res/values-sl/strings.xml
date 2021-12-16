@@ -392,7 +392,6 @@
     <string name="init_authorization_credential_password">Geslo</string>
     <string name="settings_service_active">Aktivno</string>
     <string name="init_signature">Podpis</string>
-    <string name="init_signature_template_button">Vnesi predlogo</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Ura</string>
     <string name="init_signature_template_datetime">Datum in ura</string>
