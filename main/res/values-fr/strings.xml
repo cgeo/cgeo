@@ -689,7 +689,6 @@
     <string name="settings_navigation_disabled">Cette application ne semble ne pas être installée</string>
     <string name="init_signature">Signature</string>
     <string name="init_template_help">Les balises de remplacement - comme [NAME] - sont renseignées avec le texte présent dans le modèle utilisé.</string>
-    <string name="init_signature_template_button">Ajouter un signet</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Heure</string>
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
@@ -732,9 +731,7 @@
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_summary_useInternalRouting">Utiliser le routage interne de c:geo pour pouvoir utiliser le téléchargement automatique des données de routage et d\'autres fonctions</string>
     <string name="init_bigSmileysOnMap">Grands icônes</string>
-    <string name="init_summary_bigSmileysOnMap">Si activé, les icônes comme « smiley trouvé » seront affichés en grande taille sur la carte à la place de l\'icône type de cache (nécessite un redémarrage).</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
-    <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction de points de passage à partir de notes personnelles du cache. Il peut toujours être activé pour chaque cache en désactivant la case à cocher sous les notes personnelles de cache</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Les sites web externes seront affichés sans quitter c:geo (uniquement possible si Chrome est installé)</string>
     <string name="init_save_log_img">Enregistrer les images</string>
