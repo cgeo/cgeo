@@ -383,7 +383,6 @@
     <string name="settings_service_active">Gawing Aktibo</string>
     <string name="settings_navigation_disabled">Ang aplikasyong ito ay mukhang hindi na install</string>
     <string name="init_signature">Ang Perma</string>
-    <string name="init_signature_template_button">Ipasok ang Template</string>
     <string name="init_signature_template_date">Ang petsa</string>
     <string name="init_signature_template_time">Ang Oras</string>
     <string name="init_signature_template_datetime">Ang Petsa &amp; at Oras</string>
