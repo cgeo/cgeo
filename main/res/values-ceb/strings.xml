@@ -367,7 +367,6 @@
     <string name="settings_service_active">Pag-aktibo</string>
     <string name="settings_navigation_disabled">Ang kini nga app kay dili daw ma-instalar</string>
     <string name="init_signature">Pirma</string>
-    <string name="init_signature_template_button">Pagsal-ot og Template</string>
     <string name="init_signature_template_date">Pitsa</string>
     <string name="init_signature_template_time">Oras</string>
     <string name="init_signature_template_datetime">Pitsa &amp; Oras</string>
