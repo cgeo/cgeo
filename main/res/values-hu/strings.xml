@@ -437,7 +437,6 @@
     <string name="settings_service_active">Aktív</string>
     <string name="settings_navigation_disabled">Ez az alkalmazás nincs telepítve.</string>
     <string name="init_signature">Aláírás</string>
-    <string name="init_signature_template_button">Sablon beillesztése</string>
     <string name="init_signature_template_date">Dátum</string>
     <string name="init_signature_template_time">Idő</string>
     <string name="init_signature_template_datetime">Dátum &amp; Idő</string>
