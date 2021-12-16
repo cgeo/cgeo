@@ -385,7 +385,6 @@
     <string name="settings_service_active">Gawing aktibo</string>
     <string name="settings_navigation_disabled">Ang app na ito ay mukhang hindi na-install</string>
     <string name="init_signature">Pirma</string>
-    <string name="init_signature_template_button">Magsingit ng template</string>
     <string name="init_signature_template_date">Petsa</string>
     <string name="init_signature_template_time">Oras</string>
     <string name="init_signature_template_datetime">Petsa &amp; oras</string>
