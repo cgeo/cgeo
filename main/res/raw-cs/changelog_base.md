@@ -1,10 +1,10 @@
 ### Obecné
 - Změna: Představujeme spodní navigaci pro přímý přístup k nejpoužívanějším obrazovkám c:geo, která nahrazuje starou hlavní obrazovku
-- Přepracování nastavení na aktuální specifikace systému Android (právě probíhá, mějte prosím trpělivost)
 
 ### Mapa
 - Oprava: Při načítání souborů GPX obsahujících více stop se zobrazí jako samostatné, nespojené stopy
 - Změna: Automatické zapnutí zobrazení trasy při načtení trasy že souboru GPX
+- Novinka: Symboly O/T pro ikony kešek (volitelné)
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
@@ -14,10 +14,12 @@
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
 
 ### Ostatní
-- New: Quick-load geocodes from clipboard text in mainscreen search
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Novinka: Rychlé načítání geokódů z textu ve schránce při vyhledávání na hlavní obrazovce
+- Novinka: Přidána podpora pro 5 šablon logu
+- Novinka: Provést nastavení => Zobrazit filtrovatelné nastavení
+- Novinka: Průvodce GC Wizard přidán do seznamu užitečných aplikací
+- Změna: Čtečka čárových kódů odebrána ze seznamu užitečných aplikací i z hlavní obrazovky
+- Změna: BRouter odebrán ze seznamu užitečných aplikací (stále můžete používat externí i interní navigaci)
+- Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
+- Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
+- Přepracováno nastavení pro splnění aktuálních specifikací systému Android

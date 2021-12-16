@@ -471,7 +471,6 @@
     <string name="settings_service_active">Aktīvs</string>
     <string name="settings_navigation_disabled">Šo aplikāciju, šķiet, nevar uzinstalēt</string>
     <string name="init_signature">Paraksts</string>
-    <string name="init_signature_template_button">Ievietot sagatavi</string>
     <string name="init_signature_template_date">Datums</string>
     <string name="init_signature_template_time">Laiks</string>
     <string name="init_signature_template_datetime">Datums &amp; laiks</string>

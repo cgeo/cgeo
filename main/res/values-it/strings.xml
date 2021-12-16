@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Dati mappa</string>
     <string name="menu_dashboard">Dashboard di accesso</string>
     <string name="menu_history">Cronologia</string>
+    <string name="menu_search_clipboard">Carica il geocode dagli appunti</string>
     <string name="menu_history_longstring">Trova cronologia</string>
     <string name="menu_filter">Filtri</string>
     <string name="menu_lists_pocket_queries">Query tascabili</string>
@@ -422,6 +423,10 @@
     <plurals name="user_finds_offline">
         <item quantity="one">%d log offline</item>
         <item quantity="other">%d log offline</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache memorizzato</item>
+        <item quantity="other">%d cache memorizzati</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gestisci liste</string>
@@ -689,8 +694,14 @@
     <string name="settings_service_active_unavailable">Attivo/non disponibile</string>
     <string name="settings_navigation_disabled">Questa applicazione non sembra essere installata</string>
     <string name="init_signature">Firma</string>
+    <string name="init_template_title">Titolo del modello</string>
+    <string name="init_template_text">Testo del modello</string>
+    <string name="init_log_template">Modello Di Log</string>
+    <string name="init_log_templates">Modelli Di Log</string>
+    <string name="init_log_template_prefix">Modello:\u0020</string>
+    <string name="init_log_template_missing_error">Sia il titolo del modello che il testo devono essere forniti.</string>
     <string name="init_template_help">Le stringhe segnaposto - come [NAME] - sono riempite con il testo designato quando viene utilizzato il modello.</string>
-    <string name="init_signature_template_button">Stringhe speciali</string>
+    <string name="init_signature_template_button">Inserire segnaposto</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
     <string name="init_signature_template_datetime">Data e Ora</string>
@@ -733,9 +744,7 @@
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
     <string name="init_bigSmileysOnMap">Icone grandi</string>
-    <string name="init_summary_bigSmileysOnMap">Se abilitato, i simboli come \'smile trovato\' o \'coordinate corrette\' verranno mostrati ingranditi sulla mappa invece dell\'icona tipo cache (richiede il riavvio).</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
-    <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">I siti web esterni saranno visualizzati senza lasciare c:geo (possibile solo se Chrome è installato)</string>
     <string name="init_save_log_img">Salva immagini</string>
@@ -895,6 +904,8 @@
     <string name="init_maintenance">Manutenzione</string>
     <string name="init_maintenance_directories_note">c:geo memorizza immagini e altri file relativi a un cache in una cartella dedicata. In alcuni casi (ad es. quando importa/esporta il database) questa cartella può contenere file obsoleti che possono essere cancellati qui.</string>
     <string name="init_maintenance_directories">Elimina file orfani</string>
+    <string name="init_maintenance_start">Manutenzione avviata</string>
+    <string name="init_maintenance_finished">Manutenzione terminata</string>
     <string name="init_location">Geolocalizzazione</string>
     <string name="init_location_note">Su dispositivi con servizi Google Play, c:geo può utilizzare automaticamente un fornitore migliore di geolocalizzazione. Tuttavia, questo impedisce l\'uso di un ricevitore GPS BlueTooth esterno.</string>
     <string name="init_location_googleplayservices">Usa i servizi Google Play</string>

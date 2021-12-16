@@ -379,7 +379,6 @@
     <string name="settings_service_active">Aktif</string>
     <string name="settings_navigation_disabled">Aplikasi ini sepertinya tidak bisa dipasang</string>
     <string name="init_signature">Tanda tangan</string>
-    <string name="init_signature_template_button">Memasukkan Template</string>
     <string name="init_signature_template_date">Tanggal</string>
     <string name="init_signature_template_time">Waktu</string>
     <string name="init_signature_template_datetime">Tanggal &amp; Waktu</string>

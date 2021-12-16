@@ -633,6 +633,7 @@
     <string name="settings_title_waypoints">Reittipisteet</string>
     <string name="settings_title_map_content">Kartan sisältö</string>
     <string name="settings_title_map_behavior">Kartan käyttäytyminen</string>
+    <string name="settings_title_map_style">Kartan tyyli</string>
     <string name="settings_title_data_dir">Kätködatan sisältävä kansio</string>
     <string name="settings_title_data_dir_usage">Kätködatan kansio (%1$s käytetty)</string>
     <string name="calculate_dataDir_title">Geokätköjen käyttämä tila</string>
@@ -694,8 +695,14 @@
     <string name="settings_service_active_unavailable">Aktiivinen/Ei saatavilla</string>
     <string name="settings_navigation_disabled">Tämä ohjelma ei näyttäisi olevan asennettu</string>
     <string name="init_signature">Allekirjoitus</string>
+    <string name="init_template_title">Mallin nimi</string>
+    <string name="init_template_text">Mallin teksti</string>
+    <string name="init_log_template">Lokimalli</string>
+    <string name="init_log_templates">Lokimallit</string>
+    <string name="init_log_template_prefix">Malli:\u0020</string>
+    <string name="init_log_template_missing_error">Sekä mallin otsikko että teksti on annettava.</string>
     <string name="init_template_help">Paikanpitäjämerkit - kuten [NAME] - täytetään määritetyllä tekstillä, kun mallia käytetään.</string>
-    <string name="init_signature_template_button">Lisää malli</string>
+    <string name="init_signature_template_button">Aseta paikanpitäjämerkki</string>
     <string name="init_signature_template_date">Päivämäärä</string>
     <string name="init_signature_template_time">Aika</string>
     <string name="init_signature_template_datetime">Päivämäärä &amp; aika</string>
@@ -739,8 +746,12 @@
     <string name="init_summary_useInternalRouting">Käytä c:geon sisäistä reititystä käyttääksesi automaattista reititystietojen lataamista ja muita toimintoja</string>
     <string name="init_bigSmileysOnMap">Isot kuvakkeet</string>
     <string name="init_summary_bigSmileysOnMap">Jos käytössä, symbolit kuten \'löytöhymiö\' tai \'korjatut koordinaatit\' -merkki näytetään isona kartalla kätkötyypin kuvakkeen sijaan (vaatii uudelleenkäynnistyksen).</string>
+    <string name="init_dtMarkerOnCacheIcon">D/T arvio kätkön kuvakkeissa</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Näytä merkki vaikeustasosta (vasemmalla) ja maastosta (oikealla) kätkön kuvakkeen oikeassa yläkulmassa (\"tallennettu\"-merkki siirretään keskelle).</string>
     <string name="init_global_wp_extraction_disable">Poista reittipisteen nouto käytöstä</string>
-    <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruutusta</string>
+    <string name="init_summary_global_wp_extraction_disable">Poista käytöstä reittipisteen poiminta kaikista henkilökohtaisista kätkömuistiinpanoista. Poiminta voidaan silti ottaa käyttöön yksittäisille kätköille poistamalla valinta henkilökohtaisen kätkömuistiinpanon alapuolella olevasta valintaruudusta.</string>
+    <string name="init_prevent_cache_note_merge">Korvaa henkilökohtainen muistiinpano</string>
+    <string name="init_summary_prevent_cache_note_merge">Jos tämä asetus on käytössä, c:geo poistaa paikallisesti tallennetun muistiinpanon pysyvästi ja korvaa sen henkilökohtaisella muistiinpanolla palvelimella. Yhdistämistä ei tehdä.</string>
     <string name="init_customtabs_as_browser">Käytä Chrome WebViewiä</string>
     <string name="init_summary_customtabs_as_browser">Ulkoiset sivustot näytetään poistumatta c:geosta (mahdollista vain, jos Chrome on asennettu)</string>
     <string name="init_save_log_img">Tallenna kuvat</string>
@@ -900,6 +911,8 @@
     <string name="init_maintenance">Ylläpito</string>
     <string name="init_maintenance_directories_note">c:geo tallentaa kätköihin liittyvät kuvat sekä muut tiedostot erilliseen kansioon. Joissain tapauksissa (kuten tietokannan tuonti/vienti) tämä polku saattaa sisältää vanhentuneita tiedostoja, ja ne voidaan poistaa tässä.</string>
     <string name="init_maintenance_directories">Poista orpotiedostot</string>
+    <string name="init_maintenance_start">Huolto aloitettu</string>
+    <string name="init_maintenance_finished">Huolto suoritettu</string>
     <string name="init_location">Paikkatieto</string>
     <string name="init_location_note">Laitteissa joissa on Google Play Palvelut, c:geo voi automaattisesti käyttää paremman paikkatiedon tuottajaa. Tämä kuitenkin estää ulkoisen BlueTooth GPS -vastaanottimen käytön.</string>
     <string name="init_location_googleplayservices">Käytä Google Play Palveluita</string>
@@ -2080,6 +2093,7 @@
     <string name="mapserver_hylly_info">Yksityiskohtaiset kartat Suomea varten, vaativat yhden \"Hylly\" karttateemoista</string>
     <string name="mapserver_hylly_themes_info">Yksityiskohtainen karttateema, rakennettu \"Hylly\" karttoja varten</string>
     <string name="brouter_info">Offline-reitityspalvelu</string>
+    <string name="maptheme_elevate_categoryinfo">Liittyy: [A] Alueet, [P] POI, [R] Reitit, [W] Tiet</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>

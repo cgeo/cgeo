@@ -625,6 +625,7 @@
     <string name="settings_title_waypoints">Σημεία αναφοράς</string>
     <string name="settings_title_map_content">Περιεχόμενα Χάρτη</string>
     <string name="settings_title_map_behavior">Συμπεριφορά χάρτη</string>
+    <string name="settings_title_map_style">Στυλ χάρτη</string>
     <string name="settings_title_data_dir">Χρήση δεδομένων της κρύπτης</string>
     <string name="settings_title_data_dir_usage">Κατάλογος δεδομένων κρύπτης (%1$s χρησιμοποιείται)</string>
     <string name="calculate_dataDir_title">Χρήση δεδομένων της κρύπτης</string>
@@ -686,8 +687,14 @@
     <string name="settings_service_active_unavailable">Ενεργό/Μη Διαθέσιμο</string>
     <string name="settings_navigation_disabled">Αυτή η εφαρμογή δεν είναι εγκατεστημένη</string>
     <string name="init_signature">Υπογραφή</string>
+    <string name="init_template_title">Τίτλος Προτύπου</string>
+    <string name="init_template_text">Κείμενο Προτύπου</string>
+    <string name="init_log_template">Πρότυπο Καταγραφής</string>
+    <string name="init_log_templates">Πρότυπα Καταγραφής</string>
+    <string name="init_log_template_prefix">Πρότυπο:\u0020</string>
+    <string name="init_log_template_missing_error">Πρέπει να παρέχονται τόσο ο τίτλος όσο και το κείμενο.</string>
     <string name="init_template_help">Οι τοποθετούμενες συμβολοσειρές - όπως [NAME] - συμπληρώνονται με το καθορισμένο κείμενο όταν χρησιμοποιείται το πρότυπο.</string>
-    <string name="init_signature_template_button">Εισαγωγή προτύπου</string>
+    <string name="init_signature_template_button">Δώστε θέση</string>
     <string name="init_signature_template_date">Ημερομηνία</string>
     <string name="init_signature_template_time">Ώρα</string>
     <string name="init_signature_template_datetime">Ημερομηνία &amp; Ώρα</string>
@@ -730,9 +737,10 @@
     <string name="init_useInternalRouting">Χρήση εσωτερικής δρομολόγησης</string>
     <string name="init_summary_useInternalRouting">Χρησιμοποιήστε την εσωτερική δρομολόγηση του c:geo για να μπορείτε να χρησιμοποιήσετε την αυτόματη δρομολόγηση δεδομένων λήψης και ενημέρωσης</string>
     <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια</string>
-    <string name="init_summary_bigSmileysOnMap">Αν ενεργοποιηθεί, σύμβολα όπως το σημάδι \'βρέθηκε smiley\' ή το σημάδι \'διορθωμένες συντεταγμένες\' θα εμφανιστούν διευρυμένα στο χάρτη αντί του εικονιδίου τύπου κρύπτης (απαιτείται επανεκκίνηση).</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
-    <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης</string>
+    <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης.</string>
+    <string name="init_prevent_cache_note_merge">Αντικατάσταση Προσωπικής Σημείωσης Κρύπτης</string>
+    <string name="init_summary_prevent_cache_note_merge">Αν αυτή η ρύθμιση είναι ενεργοποιημένη το c:geo θα διαγράψει την τοπικά αποθηκευμένη σημείωση μόνιμα και θα την αντικαταστήσει με την προσωπική σημείωση στο διακομιστή. Δεν θα γίνει συγχώνευση.</string>
     <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">Η προβολή των εξωτερικών ιστοσελίδων θα γίνεται χωρίς έξοδο από το c:geo (αυτό είναι δυνατόν μόνο εάν είναι εγκατεστημένο το Chrome)</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
@@ -892,6 +900,8 @@
     <string name="init_maintenance">Συντήρηση</string>
     <string name="init_maintenance_directories_note">Το c:geo αποθηκεύει εικόνες, εικόνες από καταχωρήσεις και άλλα αρχεία σχετικά με μια κρύπτη σε ξεχωριστό κατάλογο. Σε μερικές περιπτώσεις (όπως εισαγωγής/εξαγωγής της βάσης δεδομένων) ο κατάλογος αυτός μπορεί να περιέχει παρωχημένα αρχεία, τα οποία μπορούν να διαγραφούν εδώ.</string>
     <string name="init_maintenance_directories">Διαγραφή ορφανών αρχείων</string>
+    <string name="init_maintenance_start">Η συντήρηση ξεκίνησε</string>
+    <string name="init_maintenance_finished">Η συντήρηση ολοκληρώθηκε</string>
     <string name="init_location">Γεωτοποθεσία</string>
     <string name="init_location_note">Σε συσκευές που διαθέτουν υπηρεσίες Google Play, το c:geo μπορεί να χρησιμοποιήσει αυτόματα ένα καλύτερο πάροχο γεωτοποθεσίας. Ωστόσο, αυτό εμποδίζει τη χρήση ενός εξωτερικού δέκτη BlueTooth GPS.</string>
     <string name="init_location_googleplayservices">Χρησιμοποιείστε τις υπηρεσίες Google Play</string>
@@ -2068,6 +2078,7 @@
     <string name="mapserver_hylly_info">Λεπτομερείς χάρτες για τη Φινλανδία, απαιτούν ένα από τα θέματα χάρτη \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Hylly\"</string>
     <string name="brouter_info">Offline υπηρεσία δρομολόγησης</string>
+    <string name="maptheme_elevate_categoryinfo">Σχετικό για: [A] Περιοχή, [P] POI, [R] Διαδρομές, [W] Τρόποι</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>

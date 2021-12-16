@@ -696,7 +696,6 @@
     <string name="settings_navigation_disabled">Wygląda, że ta aplikacja nie jest zainstalowana</string>
     <string name="init_signature">Podpis</string>
     <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
-    <string name="init_signature_template_button">Wstaw szablon</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
     <string name="init_signature_template_datetime">Data &amp; Czas</string>
@@ -738,7 +737,6 @@
     <string name="init_useInternalRouting">Użyj wewnętrznej nawigacji</string>
     <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych routingu i innych funkcji</string>
     <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
-    <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek w skrytce. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki</string>
     <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
     <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko, jeśli jest zainstalowany Chrome)</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>

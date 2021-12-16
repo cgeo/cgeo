@@ -1,10 +1,10 @@
 ### Allgemein
 - Änderung: Navigation am unteren Bildschirmrand für direkten Zugriff auf die meistgenutzten Bereiche von c:geo, ersetzt den bisherigen Startbildschirm
-- Einstellungen technisch komplett überarbeitet, um sie an aktuelle Android-Spezifikationen anzupassen (in Arbeit, bitte Geduld)
 
 ### Karte
 - Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
+- New: D/T symbols for cache icons (optional)
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
@@ -15,9 +15,11 @@
 
 ### Sonstiges
 - Neu: Übernahme von Geocodes aus der Zwischenablage in Suche auf dem Startbildschirm
+- Neu: Unterstützung für 5 Log-Vorlagen hinzugefügt
 - Neu: Übersicht der Einstellungen ist nun filterbar
 - Neu: GC Wizard zur Liste der nützlichen Apps hinzugefügt
 - Änderung: Barcode-Scanner aus der Liste der nützlichen Apps und aus dem Hauptbildschirm entfernt
 - Änderung: BRouter aus Liste nützlicher Apps entfernt (du kannst weiterhin sowohl die externe als auch die interne Navigation verwenden)
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
 - Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort--Apps in den Einstellungen
+- Refactored settings to meet current Android specifications

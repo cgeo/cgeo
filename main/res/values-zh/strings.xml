@@ -491,7 +491,6 @@
     <string name="settings_navigation_disabled">这个应用似乎没有被安装</string>
     <string name="init_signature">签名</string>
     <string name="init_template_help">占位符字符串 - 就像 [NAME] 一样 - 在使用模板时会被指定的文本填充。</string>
-    <string name="init_signature_template_button">插入模板</string>
     <string name="init_signature_template_date">日期</string>
     <string name="init_signature_template_time">时间</string>
     <string name="init_signature_template_datetime">日期和时间</string>
@@ -526,7 +525,6 @@
     <string name="init_summary_brouterShowBothDistances">如果路径是活动的：除了显示计算的路径长度外，还显示直线距离。</string>
     <string name="init_useInternalRouting">使用内部路线规划</string>
     <string name="init_global_wp_extraction_disable">禁用航点提取功能</string>
-    <string name="init_summary_global_wp_extraction_disable">全局禁用从个人藏点笔记中提取的航点。对于单个藏点，仍然可以通过取消选择个人藏点笔记下面的复选框来启用。</string>
     <string name="init_summary_customtabs_as_browser">将会显示外部网站而不离开 c:geo (只有安装 Chrome 时才可能)</string>
     <string name="init_save_log_img">保存图片</string>
     <string name="init_summary_save_log_img">保存日志中的图片</string>

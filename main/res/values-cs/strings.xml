@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Mapové podklady</string>
     <string name="menu_dashboard">Přihlášení</string>
     <string name="menu_history">Historie</string>
+    <string name="menu_search_clipboard">Načíst geokód ze schránky</string>
     <string name="menu_history_longstring">Historie nálezů</string>
     <string name="menu_filter">Filtr</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -428,6 +429,12 @@
         <item quantity="few">%d zaznamenáno offline</item>
         <item quantity="many">%d zaznamenáno offline</item>
         <item quantity="other">%d zaznamenány offline</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d keška uložena</item>
+        <item quantity="few">%d kešky uloženy</item>
+        <item quantity="many">%d kešek uloženo</item>
+        <item quantity="other">%d kešek uloženo</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Spravovat seznamy</string>
@@ -636,6 +643,7 @@
     <string name="settings_title_waypoints">Trasové body</string>
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_map_behavior">Chování mapy</string>
+    <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -697,8 +705,14 @@
     <string name="settings_service_active_unavailable">Aktivní/Nedostupná</string>
     <string name="settings_navigation_disabled">Zdá se, že tato aplikace není nainstalována</string>
     <string name="init_signature">Podpis</string>
+    <string name="init_template_title">Název šablony</string>
+    <string name="init_template_text">Text šablony</string>
+    <string name="init_log_template">Šablona logu</string>
+    <string name="init_log_templates">Šablony logu</string>
+    <string name="init_log_template_prefix">Šablona:\u0020</string>
+    <string name="init_log_template_missing_error">Je třeba uvést název i text šablony.</string>
     <string name="init_template_help">Zástupné řetězce - podobně jako [NAME] - jsou vyplněny označeným textem při použití šablony.</string>
-    <string name="init_signature_template_button">Vložit šablonu</string>
+    <string name="init_signature_template_button">Vložit zástupný znak</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Čas</string>
     <string name="init_signature_template_datetime">Datum a čas</string>
@@ -741,9 +755,13 @@
     <string name="init_useInternalRouting">Použít interní směrování</string>
     <string name="init_summary_useInternalRouting">Použít interní směrování c:geo, aby bylo možné používat automatické stahování a další funkce</string>
     <string name="init_bigSmileysOnMap">Velké ikony</string>
-    <string name="init_summary_bigSmileysOnMap">Pokud je tato funkce povolena, budou se symboly jako \"nalezený smajlík\" nebo značka \"opravené souřadnice\" zobrazovat na mapě zvětšené, namísto ikony typu keše (vyžaduje restart).</string>
+    <string name="init_summary_bigSmileysOnMap">Pokud je tato funkce povolena, budou se symboly jako \"nalezený smajlík\" nebo značka \"opravené souřadnice\" zobrazovat na mapě zvětšené, namísto ikony typu kešky.</string>
+    <string name="init_dtMarkerOnCacheIcon">Hodnocení O/T na ikonách kešky</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Zobrazit značku pro hodnocení obtížnosti (vlevo) a terénu (vpravo) na značkách kešky v pravém horním rohu (značka „uložená“ se přesune doprostřed).</string>
     <string name="init_global_wp_extraction_disable">Zakázat extrakci trasových bodů</string>
-    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky</string>
+    <string name="init_summary_global_wp_extraction_disable">Globálně deaktivovat extrakci trasových bodů z osobních poznámek kešky. Pro jednotlivé kešky je možno i nadále aktivovat zrušením zaškrtávacího políčka pod osobní poznámkou kešky.</string>
+    <string name="init_prevent_cache_note_merge">Přepsat osobní poznámku ke kešce</string>
+    <string name="init_summary_prevent_cache_note_merge">Pokud je toto nastavení povoleno, c:geo trvale odstraní uloženou poznámku a nahradí ji osobní poznámkou ze serveru. K žádnému sloučení nedojde.</string>
     <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
@@ -903,6 +921,8 @@
     <string name="init_maintenance">Údržba</string>
     <string name="init_maintenance_directories_note">c:geo ukládá obrázky a další soubory související s keškami do vyhrazené složky. V některých případech (např. při importu/exportu databáze) může tato složka obsahovat zastaralé soubory, které lze odstranit.</string>
     <string name="init_maintenance_directories">Odstranit osamocené soubory</string>
+    <string name="init_maintenance_start">Údržba zahájena</string>
+    <string name="init_maintenance_finished">Údržba dokončena</string>
     <string name="init_location">Geolokace</string>
     <string name="init_location_note">Na zařízeních s nainstalovanými Službami Google Play může c:geo automaticky vybírat nejvhodnější metodu pro určování polohy. Nebude však možné používat externí Bluetooth GPS přijímač.</string>
     <string name="init_location_googleplayservices">Používaní služeb Google Play</string>
@@ -2129,6 +2149,7 @@
     <string name="mapserver_hylly_info">Podrobné mapy Finska vyžadují jeden z motivů mapy „Hylly“</string>
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
+    <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>

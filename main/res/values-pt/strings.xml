@@ -424,6 +424,10 @@
         <item quantity="one">%d registada offline</item>
         <item quantity="other">%d registadas offline</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache armazenada</item>
+        <item quantity="other">%d caches armazenadas</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gerir listas</string>
     <string name="list_menu_create">Criar nova lista</string>
@@ -458,7 +462,7 @@
     <string name="cache_filter_name">Nome da cache</string>
     <string name="cache_filter_type">Tipo de Cache</string>
     <string name="cache_filter_size">Tamanho da cache</string>
-    <string name="cache_filter_personalnote">Nota pessoal</string>
+    <string name="cache_filter_personalnote">Nota Pessoal</string>
     <string name="cache_filter_description">Descrição da Cache</string>
     <string name="cache_filter_offlinelog">Registo Offline</string>
     <string name="cache_filter_owner">Proprietário da cache</string>
@@ -629,6 +633,7 @@
     <string name="settings_title_waypoints">Pontos adicionais</string>
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
+    <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -690,8 +695,14 @@
     <string name="settings_service_active_unavailable">Activo/Indisponível</string>
     <string name="settings_navigation_disabled">Parece que esta aplicação não está instalada</string>
     <string name="init_signature">Assinatura</string>
+    <string name="init_template_title">Título do Modelo</string>
+    <string name="init_template_text">Texto do Modelo</string>
+    <string name="init_log_template">Modelo de Registo</string>
+    <string name="init_log_templates">Modelos de Registo</string>
+    <string name="init_log_template_prefix">Modelo:\u0020</string>
+    <string name="init_log_template_missing_error">O título e o texto do modelo precisam ser fornecidos.</string>
     <string name="init_template_help">As etiquetas de espaço reservado - como [NAME] - são preenchidas com texto aonde o modelo for usado.</string>
-    <string name="init_signature_template_button">Inserir modelo</string>
+    <string name="init_signature_template_button">Inserir Espaço Reservado</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_datetime">Data &amp; Hora</string>
@@ -734,9 +745,13 @@
     <string name="init_useInternalRouting">Usar encaminhamento interno</string>
     <string name="init_summary_useInternalRouting">Use o encaminhamento interno do c:geo para poder usar o descarregamento automático dos dados de encaminhamento e outras funções</string>
     <string name="init_bigSmileysOnMap">Ícones grandes</string>
-    <string name="init_summary_bigSmileysOnMap">Se activado, os símbolos como o \'sorriso encontrado\' ou o marcador \'coordenadas corrigidas\' aparecerão ampliados no mapa ao invés do ícone do tipo de cache (requer reinicialização).</string>
+    <string name="init_summary_bigSmileysOnMap">Se activado, os símbolos como o \'sorriso encontrado\' ou o marcador \'coordenadas corrigidas\' aparecerão ampliados no mapa em vez do ícone do tipo de cache.</string>
+    <string name="init_dtMarkerOnCacheIcon">Classificação D/T nos ícones de cache</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Mostrar um marcador para as classificações Dificuldade (esquerda) e Terreno (direita) nos marcadores das caches no canto superior direito (marcador \"armazenado\" é movido para o meio).</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracção de waypoints</string>
-    <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal</string>
+    <string name="init_summary_global_wp_extraction_disable">Desactiva totalmente a extracção de pontos adicionais a partir das notas pessoais em caches. Ainda assim, a funcionalidade pode ser activada individualmente numa cache, desmarcando o visto abaixo da sua nota pessoal.</string>
+    <string name="init_prevent_cache_note_merge">Substituir a Nota Pessoal</string>
+    <string name="init_summary_prevent_cache_note_merge">Se esta definição estiver activada, o c:geo irá eliminar permanentemente a nota armazenada localmente e substituí-la pela nota pessoal no servidor. A junção das duas não será feita.</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
     <string name="init_save_log_img">Guardar imagens</string>
@@ -896,6 +911,8 @@
     <string name="init_maintenance">Manutenção</string>
     <string name="init_maintenance_directories_note">O c:geo armazena imagens e outros ficheiros relacionados com uma cache numa pasta dedicada. Em alguns casos (por exemplo, ao importar/exportar a base de dados) esta pasta pode conter ficheiros obsoletos, que podem ser apagados aqui.</string>
     <string name="init_maintenance_directories">Apagar ficheiros obsoletos</string>
+    <string name="init_maintenance_start">Manutenção iniciada</string>
+    <string name="init_maintenance_finished">Manutenção concluída</string>
     <string name="init_location">Geolocalização</string>
     <string name="init_location_note">Em dispositivos equipados com Serviços do Google Play, o c:geo pode utilizar automaticamente um melhor fornecedor de geolocalização. No entanto, isso impede a utilização de um receptor GPS Bluetooth externo.</string>
     <string name="init_location_googleplayservices">Utilizar Serviços do Google Play</string>
@@ -2072,6 +2089,7 @@ do mapa e dos temas?</string>
     <string name="mapserver_hylly_info">Mapas detalhados para a Finlândia, requer um dos temas de mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
+    <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>

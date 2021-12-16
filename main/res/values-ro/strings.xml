@@ -439,7 +439,6 @@
     <string name="settings_service_active">Activ</string>
     <string name="settings_navigation_disabled">Această aplicaţie pare să nu fie instalată</string>
     <string name="init_signature">Semnătură</string>
-    <string name="init_signature_template_button">Introdu şablon</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Ora</string>
     <string name="init_signature_template_datetime">Data şi ora</string>
