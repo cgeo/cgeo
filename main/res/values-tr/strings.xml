@@ -687,7 +687,6 @@
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
-    <string name="init_signature_template_button">Şablon Ekle</string>
     <string name="init_signature_template_date">Tarih</string>
     <string name="init_signature_template_time">Saat</string>
     <string name="init_signature_template_datetime">Tarih &amp; Saat</string>
@@ -731,7 +730,6 @@
     <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
     <string name="init_bigSmileysOnMap">Büyük simgeler</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
-    <string name="init_summary_global_wp_extraction_disable">Kişisel Geocache notlarından yol noktası çıkarmayı genel olarak devre dışı bırakın. Belirli Geocache\'ler için kişisel notlarınız altındaki onay kutusu devre dışı bırakılarak yine de etkinleştirilebilir</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
     <string name="init_summary_customtabs_as_browser">Harici siteler c:geo\'dan ayrılmadan gösterilecek (sadece Chrome yüklenmişse çalışır)</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
