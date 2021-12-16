@@ -385,7 +385,6 @@
     <string name="settings_service_active">مفعل</string>
     <string name="settings_navigation_disabled">يبدو أن هذا التطبيق غير مثبت</string>
     <string name="init_signature">التوقيع</string>
-    <string name="init_signature_template_button">إدراج قالب</string>
     <string name="init_signature_template_date">التاريخ</string>
     <string name="init_signature_template_time">الوقت</string>
     <string name="init_signature_template_datetime">التاريخ &amp; الوقت</string>
