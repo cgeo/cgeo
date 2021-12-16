@@ -374,7 +374,6 @@
     <string name="settings_service_active">פעיל</string>
     <string name="settings_navigation_disabled">אפליקציה זו אינה מותקנת</string>
     <string name="init_signature">חתימה</string>
-    <string name="init_signature_template_button">הוסף תבנית</string>
     <string name="init_signature_template_date">תאריך</string>
     <string name="init_signature_template_time">שעה</string>
     <string name="init_signature_template_datetime">תאריך&amp; שעה</string>
