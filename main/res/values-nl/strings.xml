@@ -745,7 +745,6 @@
     <string name="init_useInternalRouting">Interne routering gebruiken</string>
     <string name="init_summary_useInternalRouting">c:geo interne routering gebruiken om automatische routering, data downloaden en andere functies te kunnen gebruiken</string>
     <string name="init_bigSmileysOnMap">Grote pictogrammen</string>
-    <string name="init_summary_bigSmileysOnMap">Indien ingeschakeld zullen symbolen zoals de \'smiley\' of de \'gecorrigeerde coördinaten\'-indicator worden getoond op de kaart in plaats van het cachetype icoon (herstart vereist).</string>
     <string name="init_global_wp_extraction_disable">Waypoint extractie uitschakelen</string>
     <string name="init_summary_global_wp_extraction_disable">Schakel algemene waypoint extractie uit van persoonlijke cache notities. Het kan nog steeds geactiveerd worden voor individuele caches door het vakje te deactiveren onder de persoonlijke cache notitie.</string>
     <string name="init_prevent_cache_note_merge">Overschrijf persoonlijke cache notitie</string>
