@@ -91,7 +91,7 @@ public class CalcState implements Serializable {
         try {
             return new CalcState(new JSONObject(json));
         } catch (final JSONException e) {
-            Log.e("Unable to read calculator state information", e);
+            Log.d("Unable to read calculator state information", e);
         }
         return null;
     }
