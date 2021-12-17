@@ -435,12 +435,14 @@ public class WaypointParser {
         if (null != calcStateJson) {
             final CalcState calcState = CalcState.fromJSON(calcStateJson);
 
-            final String formulaString = getParseableFormulaString(calcState);
-            if (!formulaString.isEmpty()) {
-                sb.append(formulaString);
-                final String variableString = getParseableVariablesString(calcState);
-                if (!variableString.isEmpty()) {
-                    sb.append(FormulaParser.WPC_DELIM + variableString);
+            if (calcState != null) {
+                final String formulaString = getParseableFormulaString(calcState);
+                if (!formulaString.isEmpty()) {
+                    sb.append(formulaString);
+                    final String variableString = getParseableVariablesString(calcState);
+                    if (!variableString.isEmpty()) {
+                        sb.append(FormulaParser.WPC_DELIM + variableString);
+                    }
                 }
             }
         }
