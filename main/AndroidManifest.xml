@@ -226,7 +226,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/auth_twitter"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -431,7 +432,8 @@
         <activity
             android:name="cgeo.geocaching.log.LogTrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/trackable_touch" >
+            android:label="@string/trackable_touch"
+            android:exported="false">
 
             <!-- GeoKrety.org QRCode-->
             <intent-filter>
@@ -456,7 +458,8 @@
         <activity
             android:name=".CacheDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:exported="false">
             <intent-filter>
                 <action android:name="wikitudeapi.arcallback" />
 
@@ -652,7 +655,8 @@
         <activity
             android:name="cgeo.geocaching.TrackableActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/app_name" >
+            android:label="@string/app_name"
+            android:exported="false">
 
             <!-- TravelBug URL via coord.info redirection -->
             <intent-filter>
@@ -743,7 +747,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -759,7 +764,8 @@
         <activity
             android:name=".CreateShortcutActivity"
             android:label="@string/cgeo_shortcut"
-            android:parentActivityName="cgeo.geocaching.MainActivity" >
+            android:parentActivityName="cgeo.geocaching.MainActivity"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.CREATE_SHORTCUT" />
 
@@ -782,7 +788,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -795,7 +802,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -808,7 +816,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -821,7 +830,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -839,7 +849,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"
             android:launchMode="singleTask"
-            android:windowSoftInputMode="stateHidden" >
+            android:windowSoftInputMode="stateHidden"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
 
@@ -895,7 +906,8 @@
         </provider>
 
         <!-- Receiver for downloaded (map) files -->
-        <receiver android:name=".downloader.DownloadNotificationReceiver">
+        <receiver android:name=".downloader.DownloadNotificationReceiver"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
             </intent-filter>
