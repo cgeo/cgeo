@@ -149,7 +149,10 @@
         <menu>
             <item
                 android:id="@+id/menu_import_pq"
-                android:title="@string/pq_download_and_import"/>
+                android:title="@string/menu_lists_pocket_queries"/>
+            <item
+                android:id="@+id/menu_bookmarklists"
+                android:title="@string/menu_lists_bookmarklists"/>
             <item
                 android:id="@+id/menu_import_gpx"
                 android:title="@string/gpx_import_title"/>
