@@ -26,6 +26,7 @@
     <Preference
         android:title="@string/init_list_initial_load_limit"
         android:summary="@string/init_summary_list_initial_load_limit"
+        app:allowDividerBelow="false"
         app:iconSpaceReserved="false"/>
     <cgeo.geocaching.settings.SeekbarPreference
         android:key="@string/pref_list_initial_load_limit"
