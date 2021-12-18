@@ -22,4 +22,6 @@
 - Modifica: Rimosso BRouter dall'elenco delle app utili (puoi ancora usare sia la navigazione esterna che interna)
 - Corretto: Evita i controlli ripetuti degli aggiornamenti per mappe/routing con intervallo=0
 - Corretto: ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
+- Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
