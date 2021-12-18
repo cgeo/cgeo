@@ -22,4 +22,6 @@
 - Alteração: Remoção do BRouter da lista de aplicações úteis (ainda pode usar a navegação externa e interna)
 - Correcção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
 - Correcção: Optimizado o suporte a aplicações externas de auto-preenchimento de palavras-passe nas definições
-- Definições redesenhadas para atender às especificações actuais do Android
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
