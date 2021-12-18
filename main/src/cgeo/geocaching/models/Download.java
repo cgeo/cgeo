@@ -107,6 +107,7 @@ public class Download {
         @StringRes final int typeNameResId;
         public static final int DEFAULT = DOWNLOADTYPE_MAP_MAPSFORGE.id;
         private static final ArrayList<DownloadTypeDescriptor> offlineMapTypes = new ArrayList<>();
+        private static final ArrayList<DownloadTypeDescriptor> offlineMapThemeTypes = new ArrayList<>();
         private static final ArrayList<DownloadTypeDescriptor> downloadTypes = new ArrayList<>();
 
         DownloadType(final int id, @StringRes final int typeNameResId) {
@@ -117,6 +118,13 @@ public class Download {
         public static ArrayList<DownloadTypeDescriptor> getOfflineMapTypes() {
             buildTypelist();
             return offlineMapTypes;
+        }
+
+        public static ArrayList<DownloadTypeDescriptor> getOfflineAllMapRelatedTypes() {
+            buildTypelist();
+            final ArrayList<DownloadTypeDescriptor> mapRelatedTypes = new ArrayList<>(offlineMapTypes);
+            mapRelatedTypes.addAll(offlineMapThemeTypes);
+            return mapRelatedTypes;
         }
 
         @Nullable
@@ -136,19 +144,23 @@ public class Download {
 
         private static void buildTypelist() {
             if (offlineMapTypes.size() == 0) {
-                // only those entries which should be visible in the offline maps download selector
-                // themes which are references as companionType shall not be listed here
+                // put all bundled map theme file types here - they will not be shown in the maps download selector
+                offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
+                offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
+                offlineMapThemeTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_HYLLY, MapDownloaderHyllyThemes.getInstance(), R.string.mapserver_hylly_themes_name));
+
+                // put all file types that should be listed in the downloader here
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_MAPSFORGE, MapDownloaderMapsforge.getInstance(), R.string.mapserver_mapsforge_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_OPENANDROMAPS, MapDownloaderOpenAndroMaps.getInstance(), R.string.mapserver_openandromaps_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_FREIZEITKARTE, MapDownloaderFreizeitkarte.getInstance(), R.string.mapserver_freizeitkarte_name));
                 offlineMapTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_MAP_HYLLY, MapDownloaderHylly.getInstance(), R.string.mapserver_hylly_name));
 
                 // all other download types
-                downloadTypes.addAll(offlineMapTypes);
-                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_OPENANDROMAPS, MapDownloaderOpenAndroMapsThemes.getInstance(), R.string.mapserver_openandromaps_themes_name));
-                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_FREIZEITKARTE, MapDownloaderFreizeitkarteThemes.getInstance(), R.string.mapserver_freizeitkarte_themes_name));
-                downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_THEME_HYLLY, MapDownloaderHyllyThemes.getInstance(), R.string.mapserver_hylly_themes_name));
                 downloadTypes.add(new DownloadTypeDescriptor(DOWNLOADTYPE_BROUTER_TILES, BRouterTileDownloader.getInstance(), R.string.brouter_name));
+
+                // adding maps and map themes to download types for completeness
+                downloadTypes.addAll(offlineMapTypes);
+                downloadTypes.addAll(offlineMapThemeTypes);
             }
         }
 

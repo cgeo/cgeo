@@ -200,7 +200,7 @@ public class DownloaderUtils {
             final List<Download> result = new ArrayList<>();
             final ArrayList<CompanionFileUtils.DownloadedFileData> existingFiles = new ArrayList<>();
             if (currentType.equals(Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED)) {
-                final ArrayList<Download.DownloadTypeDescriptor> typeDescriptors =  Download.DownloadType.getOfflineMapTypes();
+                final ArrayList<Download.DownloadTypeDescriptor> typeDescriptors =  Download.DownloadType.getOfflineAllMapRelatedTypes();
                 for (Download.DownloadTypeDescriptor typeDescriptor : typeDescriptors) {
                     existingFiles.addAll(CompanionFileUtils.availableOfflineMaps(typeDescriptor.type));
                 }

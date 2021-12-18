@@ -329,7 +329,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
         adapter.notifyDataSetChanged();
 
         current = spinnerData.get(position).instance;
-        installedOfflineMaps = CompanionFileUtils.availableOfflineMaps();
+        installedOfflineMaps = CompanionFileUtils.availableOfflineMapRelatedFiles();
 
         binding.downloaderInfo.setVisibility(StringUtils.isNotBlank(current.mapSourceInfo) ? View.VISIBLE : View.GONE);
         binding.downloaderInfo.setText(current.mapSourceInfo);
