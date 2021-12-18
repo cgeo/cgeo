@@ -28,6 +28,7 @@
         <Preference
             android:summary="@string/init_updateinterval_description"
             android:title="@string/init_updateinterval_title"
+            app:allowDividerBelow="false"
             app:iconSpaceReserved="false"/>
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_mapAutoDownloadsInterval"
@@ -71,6 +72,7 @@
         <Preference
             android:summary="@string/init_showwaypoint_description"
             android:title="@string/init_showwaypoints"
+            app:allowDividerBelow="false"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_showwaypointsthreshold"
@@ -113,6 +115,7 @@
         <Preference
             android:title="@string/init_maptrail_length"
             android:summary="@string/init_maptrail_length_summary"
+            app:allowDividerBelow="false"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:key="@string/pref_maptrail_length"
@@ -147,6 +150,7 @@
 
     <PreferenceCategory
         android:title="@string/settings_title_proximityNotification"
+        app:allowDividerBelow="false"
         app:iconSpaceReserved="false">
         <cgeo.geocaching.settings.ProximityPreference
             android:key="@string/pref_proximityDistanceFar"
@@ -202,6 +206,7 @@
             android:dependency="@string/pref_maptrail"
             android:title="@string/init_trailwidth"
             android:summary="@string/init_trailwidth_summary"
+            app:allowDividerBelow="false"
             app:iconSpaceReserved="false" />
         <cgeo.geocaching.settings.SeekbarPreference
             android:dependency="@string/pref_maptrail"
@@ -222,6 +227,7 @@
             <Preference
                 android:title="@string/init_directionwidth"
                 android:summary="@string/init_directionwidth_summary"
+                app:allowDividerBelow="false"
                 app:iconSpaceReserved="false" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapline_directionwidth"
@@ -242,6 +248,7 @@
             <Preference
                 android:title="@string/init_routewidth"
                 android:summary="@string/init_routewidth_summary"
+                app:allowDividerBelow="false"
                 app:iconSpaceReserved="false" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapline_routewidth"
@@ -262,6 +269,7 @@
             <Preference
                 android:title="@string/init_trackwidth"
                 android:summary="@string/init_trackwidth_summary"
+                app:allowDividerBelow="false"
                 app:iconSpaceReserved="false" />
             <cgeo.geocaching.settings.SeekbarPreference
                 android:key="@string/pref_mapline_trackwidth"
