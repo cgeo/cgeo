@@ -22,4 +22,6 @@
 - 변경: 유용한 앱 목록에서 BRouter를 제거했습니다(외부 및 내부 탐색 모두 계속 사용할 수 있음).
 - 수정: 간격이 0인 맵/라우팅 타일에 대한 반복적인 업데이트 확인을 피합니다.
 - 수정: 설정에서 외부 비밀번호 저장소 앱의 비밀번호 자동 완성 지원 최적화
+- Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
