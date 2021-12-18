@@ -47,11 +47,13 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     @Nullable
     @Override
     protected Download checkUpdateFor(final @NonNull String page, final String remoteUrl, final String remoteFilename) {
+        // another change between v4 and v5 OAM: "_" in filenames got replaced by "-"
+        final String remoteFilenameNew = remoteFilename.replace("_", "-");
         final MatcherWrapper matchMap = new MatcherWrapper(PATTERN_MAP, page);
         while (matchMap.find()) {
             final String filename = matchMap.group(1);
-            if (filename.equals(remoteFilename)) {
-                return new Download(matchMap.group(2), Uri.parse(remoteUrl + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(3))), Formatter.formatBytes(Long.parseLong(matchMap.group(4))), offlineMapType, iconRes);
+            if (filename.equals(remoteFilenameNew)) {
+                return new Download(matchMap.group(2), Uri.parse(getUpdatedPath(remoteUrl) + "/" + filename), false, CalendarUtils.yearMonthDay(CalendarUtils.parseDayMonthYearUS(matchMap.group(3))), Formatter.formatBytes(Long.parseLong(matchMap.group(4))), offlineMapType, iconRes);
             }
         }
         return null;
@@ -66,6 +68,24 @@ public class MapDownloaderOpenAndroMaps extends AbstractMapDownloader {
     @Override
     public DownloaderUtils.DownloadDescriptor getExtrafile(final Activity activity) {
         return getExtrafile(THEME_FILES, activity.getString(R.string.mapserver_openandromaps_themes_downloadurl), Download.DownloadType.DOWNLOADTYPE_THEME_OPENANDROMAPS);
+    }
+
+    @Override
+    protected String getUpdatePageUrl(final String downloadPageUrl) {
+        return getUpdatedPath(downloadPageUrl);
+    }
+
+    /**
+     * Return an updated path string, reflecting folder structure changes between
+     * OAM v4 maps and OAM v5 maps
+     * - last segment in path is now completely lower-case
+     * - "mapsV4" part has changed to "mapsV5"
+     *
+     * @param oldPath folder name (without trailing '/', and without filename)
+     */
+    private String getUpdatedPath(final String oldPath) {
+        final int lastSegmentStart = oldPath.lastIndexOf('/');
+        return oldPath.substring(0, lastSegmentStart).replace("mapsV4", "mapsV5") + oldPath.substring(lastSegmentStart).toLowerCase();
     }
 
     @NonNull
