@@ -22,4 +22,6 @@
 - Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
 - Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
 - Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
-- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
