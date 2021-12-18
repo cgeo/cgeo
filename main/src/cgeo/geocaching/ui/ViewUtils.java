@@ -17,7 +17,6 @@ import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
@@ -43,6 +42,7 @@ import static android.view.MenuItem.SHOW_AS_ACTION_ALWAYS;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.util.Consumer;
 
 import java.util.ArrayList;
@@ -76,9 +76,7 @@ public class ViewUtils {
     }
 
     public static void setTooltip(final View view, final TextParam text) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            view.setTooltipText(text.getText(view.getContext()));
-        }
+        TooltipCompat.setTooltipText(view, text.getText(view.getContext()));
     }
 
     /** Sets enabled/disabled flag for given view and all nested child views recursively */
