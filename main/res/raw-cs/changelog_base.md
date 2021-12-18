@@ -22,4 +22,6 @@
 - Změna: BRouter odebrán ze seznamu užitečných aplikací (stále můžete používat externí i interní navigaci)
 - Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
 - Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
+- Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
 - Přepracováno nastavení pro splnění aktuálních specifikací systému Android
+- Aktualizováno MapsWithMe API
