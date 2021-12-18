@@ -1,6 +1,5 @@
 package cgeo.geocaching.connector.gc;
 
-import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -8,9 +7,9 @@ import cgeo.geocaching.models.GCList;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.Intents.EXTRA_PQ_LIST_IMPORT;
 
 import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -56,15 +55,11 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
 
         final Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            startDownload = false;
-            filteredList = extras.getBoolean(Intents.EXTRA_PQ_LIST_IMPORT);
-            if (filteredList) {
-                fixed = true;
-            }
+            startDownload = !extras.getBoolean(EXTRA_PQ_LIST_IMPORT, false);
         } else {
             startDownload = true;
-            filteredList = getFiltersetting();
         }
+        filteredList = getFiltersetting();
 
         final AbstractListAdapter adapter = new AbstractListAdapter(this);
         final RecyclerView view = RecyclerViewProvider.provideRecyclerView(this, R.id.gclist, true, true);
@@ -130,12 +125,6 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
         filteredList = !switchCompat.isChecked();
         setFiltersetting(filteredList);
         fillAdapter(adapter);
-    }
-
-    public static void startSubActivity(final Activity fromActivity, final int requestCode) {
-        final Intent intent = new Intent(fromActivity, PocketQueryListActivity.class);
-        intent.putExtra(Intents.EXTRA_PQ_LIST_IMPORT, true);
-        fromActivity.startActivityForResult(intent, requestCode);
     }
 
     public List<GCList> getQueries() {

@@ -18,6 +18,7 @@ import cgeo.geocaching.command.MoveToListAndRemoveFromOthersCommand;
 import cgeo.geocaching.command.MoveToListCommand;
 import cgeo.geocaching.command.RenameListCommand;
 import cgeo.geocaching.command.SetCacheIconCommand;
+import cgeo.geocaching.connector.gc.BookmarkListActivity;
 import cgeo.geocaching.connector.gc.BookmarkUtils;
 import cgeo.geocaching.connector.gc.GCMemberState;
 import cgeo.geocaching.connector.gc.PocketQueryListActivity;
@@ -149,7 +150,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
-    private static final int REQUEST_CODE_IMPORT_PQ = 3;
+    private static final int REQUEST_CODE_IMPORT_PQ = 10003;
+    private static final int REQUEST_CODE_IMPORT_BOOKMARK = 10004;
 
     private static final String STATE_GEOCACHE_FILTER = "currentGeocacheFilter";
     private static final String STATE_SORT_CONTEXT = "currentSortContext";
@@ -835,6 +837,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             // Import submenu
             setVisible(menu, R.id.menu_import, isOffline && listId != PseudoList.ALL_LIST.id);
             setEnabled(menu, R.id.menu_import_pq, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
+            setEnabled(menu, R.id.menu_bookmarklists, Settings.isGCConnectorActive() && Settings.isGCPremiumMember());
 
             // Export
             setVisibleEnabled(menu, R.id.menu_export, isHistory || isOffline, !isEmpty);
@@ -932,7 +935,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             deleteCaches(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_pq) {
-            importPq();
+            startListSelection(REQUEST_CODE_IMPORT_PQ);
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_bookmarklists) {
+            startListSelection(REQUEST_CODE_IMPORT_BOOKMARK);
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_import_gpx) {
             importGpxSelectFiles();
@@ -1016,6 +1022,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    public void startListSelection(final int requestCode) {
+        final Intent intent = new Intent(this, requestCode == REQUEST_CODE_IMPORT_PQ ? PocketQueryListActivity.class : BookmarkListActivity.class);
+        intent.putExtra(Intents.EXTRA_PQ_LIST_IMPORT, true);
+        startActivityForResult(intent, requestCode);
     }
 
     private void checkIfEmptyAndRemoveAfterConfirm() {
@@ -1385,12 +1397,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
     }
 
-
-
-    private void importPq() {
-        PocketQueryListActivity.startSubActivity(this, REQUEST_CODE_IMPORT_PQ);
-    }
-
     @Override
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -1399,7 +1405,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             return;
         }
 
-        if (requestCode == REQUEST_CODE_IMPORT_PQ && resultCode == Activity.RESULT_OK) {
+        if ((requestCode == REQUEST_CODE_IMPORT_PQ || requestCode == REQUEST_CODE_IMPORT_BOOKMARK) && resultCode == Activity.RESULT_OK) {
             if (data != null) {
                 final Uri uri = data.getData();
                 new GPXImporter(this, listId, importGpxAttachementFinishedHandler).importGPX(uri, data.getType(), null);
