@@ -22,4 +22,6 @@
 - Änderung: BRouter aus Liste nützlicher Apps entfernt (du kannst weiterhin sowohl die externe als auch die interne Navigation verwenden)
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
 - Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort--Apps in den Einstellungen
+- Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
