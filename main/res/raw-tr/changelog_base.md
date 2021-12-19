@@ -9,6 +9,8 @@
 ### Geocache listesi
 - Yeni: Sonraki 20 Geocache'i seçebilme seçeneği
 - New: Attributes overview (see Manage Caches => Attributes overview)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Geocache Ayrıntıları
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
