@@ -9,6 +9,8 @@
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
 - Novo: Visão geral de atributos (ver Gerir Caches => Visão geral de atributos)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Detalhes da cache
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
