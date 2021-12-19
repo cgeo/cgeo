@@ -1,3 +1,6 @@
+- Fix: Enable upgrading from OpenAndroMaps v4 to v5
+- Fix: Enable checks for map theme updates
+
 ## 2021.12.13 Bugfix release
 
 - Oplossen: Mapsforge's cache bestanden: Opschonen en nieuwe locatie (aparte map)
