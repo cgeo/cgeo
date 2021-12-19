@@ -1,3 +1,6 @@
+- Oprava: Povolena aktualizace z OpenAndroMaps v4 na v5
+- Oprava: Povolena kontrola aktualizací motivů mapy
+
 ## 2021.12.13 Vydání opravy chyb
 
 - Oprava: Soubory kešek pro Mapsforge: Čištění a nové umístění (samostatná složka)
