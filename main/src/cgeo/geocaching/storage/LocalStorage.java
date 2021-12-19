@@ -427,6 +427,7 @@ public final class LocalStorage {
         private void setMigratedVersion(final int version, final String currentMigrateVersionTitle) {
             this.currentMigrateVersion = version;
             this.currentMigrateVersionTitle = currentMigrateVersionTitle;
+            Log.d("MigrateLocalStorage to " + version + ": " + currentMigrateVersionTitle);
             displayProgress(null);
         }
 
@@ -439,6 +440,16 @@ public final class LocalStorage {
 
         @Override
         protected Integer doInBackgroundInternal(final Void[] params) {
+            try {
+                return doMigration();
+            } catch (RuntimeException re) {
+                Log.e("LocalStorage: Exception during Migration to v" + finalVersion + ", stays in v" + currentMigrateVersion , re);
+                return currentMigrateVersion;
+            }
+
+        }
+
+        private int doMigration() {
 
             //move Offline Log Images from legacy directory to GeocacheData directories
             if (currentVersion < 1) {
@@ -474,11 +485,12 @@ public final class LocalStorage {
                 FileUtils.deleteFilesWithPrefix(new File(getInternalCgeoDirectory(), "files"), "svg-");
             }
 
-            return 0;
+            return finalVersion;
          }
 
         protected void onPostExecuteInternal(final Integer result) {
-            Settings.setLocalStorageVersion(finalVersion);
+            Log.iForce("LocalStorage: migrated to v" + result);
+            Settings.setLocalStorageVersion(result);
         }
 
     }
