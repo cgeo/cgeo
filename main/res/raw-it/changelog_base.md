@@ -9,6 +9,8 @@
 ### Elenco dei cache
 - Nuovo: Opzione per selezionare i 20 cache succesivi
 - Novità: Panoramica degli attributi (vedi Gestisci i Cache => Panoramica degli attributi)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Dettagli del cache
 - Nuovo: Passa le coordinate correnti del cache a geochecker (se supportato da geochecker)
