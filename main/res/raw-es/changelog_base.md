@@ -9,6 +9,8 @@
 ### Lista de cachés
 - Nuevo: opción para seleccionar los siguientes 20 cachés
 - Nuevo: Resumen de atributos (ver Gestión de cachés => Resumen de atributos)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Detalles del caché
 - Nuevo: Pasar las coordenadas del caché actual al geochecker (si es soportado por el geochecker)
