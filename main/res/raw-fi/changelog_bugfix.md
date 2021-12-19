@@ -1,3 +1,6 @@
+- Fix: Enable upgrading from OpenAndroMaps v4 to v5
+- Fix: Enable checks for map theme updates
+
 ## 2021.12.13 Viankorjausversio
 
 - Korjaa: Mapsforgen välimuistitiedostot: Puhdistus ja uusi sijainti (erillinen kansio)
