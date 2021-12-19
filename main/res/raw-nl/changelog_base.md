@@ -9,6 +9,8 @@
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
 - Nieuw: Attributen overzicht (zie Beheer Caches => Attributen overzicht)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Cache details
 - Nieuw: Geef huidige cache coördinaten door aan de geochecker (indien ondersteund door geochecker)
