@@ -9,6 +9,8 @@
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
 - Novetat: Visió general dels atributs (vegeu Gestió de catxé => visió general dels atributs)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Detalls del catxé
 - Nou: Passeu les coordenades actuals del catxé al geochecker (si és compatible amb el geochecker)
