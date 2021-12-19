@@ -9,6 +9,8 @@
 ### Zoznam kešiek
 - Nové: Možnosť vybrať ďalších 20 kešiek
 - New: Attributes overview (see Manage Caches => Attributes overview)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Detaily kešky
 - Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
