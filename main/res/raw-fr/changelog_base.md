@@ -9,6 +9,8 @@
 ### Cache list
 - New: Option to select next 20 caches
 - New: Attributes overview (see Manage Caches => Attributes overview)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Détails de la cache
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
