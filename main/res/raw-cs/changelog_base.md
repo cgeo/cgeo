@@ -9,6 +9,8 @@
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
 - Novinka: Přehled atributů (viz Správa kešek => Přehled atributů)
+- Novinka: Přidána možnost importu ze seznamu záložek (pouze GC prémium)
+- Novinka: Invertované řazení při dlouhém kliknutí na řádek řazení
 
 ### Detaily kešky
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
