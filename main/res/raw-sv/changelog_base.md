@@ -9,6 +9,8 @@
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher
 - Nytt: Attribut-översikt (se Hantera cacher => Attribut-översikt)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Cachedetaljer
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
