@@ -69,11 +69,11 @@ public class CompanionFileUtils {
     }
 
     /**
-     * returns a list of downloaded offline maps from all sources which are still available in the local filesystem
+     * returns a list of downloaded offline map related files from all sources which are still available in the local filesystem
      */
-    public static ArrayList<DownloadedFileData> availableOfflineMaps() {
+    public static ArrayList<DownloadedFileData> availableOfflineMapRelatedFiles() {
         final ArrayList<DownloadedFileData> result = new ArrayList<>();
-        for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineMapTypes()) {
+        for (Download.DownloadTypeDescriptor type : Download.DownloadType.getOfflineAllMapRelatedTypes()) {
             result.addAll(availableOfflineMaps(type.type));
         }
         return result;
