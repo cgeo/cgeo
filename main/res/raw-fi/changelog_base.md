@@ -9,6 +9,8 @@
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
 - Uutta: Attribuuttien yleisnäkymä (ks. Hallitse kätköjä => Attribuuttien yleisnäkymä)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Kätkön tiedot
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
@@ -22,6 +24,6 @@
 - Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
 - Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
 - Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Korjaus: Ota käyttöön vihjeet järjestelmille, jotka käyttävät vanhempaa kuin Androidin versio 8
+- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
+- Päivitetty MapsWithMe API
