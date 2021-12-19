@@ -1,3 +1,6 @@
+- Fix: Enable upgrading from OpenAndroMaps v4 to v5
+- Fix: Enable checks for map theme updates
+
 ## 2021.12.13 Bugfix release
 
 - 수정: Mapsforge의 캐시 파일: 정리 및 새 위치(별도 폴더)
