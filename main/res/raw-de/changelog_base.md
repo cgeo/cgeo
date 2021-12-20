@@ -4,13 +4,13 @@
 ### Karte
 - Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
-- New: D/T symbols for cache icons (optional)
+- Neu: D/T-Symbole für Cache-Symbole (optional)
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
 - Neu: Übersicht der Attribute (siehe Caches verwalten => Attributübersicht)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
+- Neu: Import von Lesezeichenlisten hinzufügen (nur GC Premium)
+- Neu: Sortierreihenfolge beim langen Klick auf Sortierleiste umkehren
 
 ### Cache-Details
 - Neu: Aktuelle Cache-Koordinaten an Geochecker übergeben (falls vom Geochecker unterstützt)
@@ -24,6 +24,6 @@
 - Änderung: BRouter aus Liste nützlicher Apps entfernt (du kannst weiterhin sowohl die externe als auch die interne Navigation verwenden)
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
 - Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort--Apps in den Einstellungen
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Korrektur: Aktiviere Tooltips für Systeme, die unter Android-Versionen kleiner 8 laufen
+- Einstellungsmenüs geändert, um den aktuellen Android-Spezifikationen zu entsprechen
+- MapsWithMe API aktualisiert
