@@ -1,5 +1,8 @@
-- Fix: Enable upgrading from OpenAndroMaps v4 to v5
-- Fix: Enable checks for map theme updates
+## 2021.12.19-RC
+
+- Korjaus: Ota käyttöön päivittäminen OpenAndroMaps v4 - v5
+- Korjaus: Ota käyttöön karttateemojen päivitysten tarkistukset
+- Korjaus: Ohita kansioiden siirto poikkeustilanteessa
 
 ## 2021.12.13 Viankorjausversio
 
