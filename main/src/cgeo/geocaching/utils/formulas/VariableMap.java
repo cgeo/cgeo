@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -13,6 +14,8 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * A VariableMap instance manages a set of {@link Formula}s which are assigned to a variable each.
  *
@@ -21,7 +24,7 @@ import java.util.Set;
  * internationalized error message capacities.
  *
  * VariableMap automatically adds/removes and maintains empty state entries for all variables where existing formulas have a dependency to but are
- * not themself added to the map by the user.
+ * not themself added to the map by the user. Those state can be detected by having null as FormulaString.
  *
  * The method names and semantics of this class are loosely related to the Java {@link Map} interface. However, this class does NOT implement the exact semantics
  * of this interface.
@@ -114,7 +117,7 @@ public class VariableMap {
         if (state == null) {
             state = new VariableState(var);
             variableStateMap.put(var, state);
-        } else if (Objects.equals(formula, state.formula)) {
+        } else if (Objects.equals(formula, state.formulaString)) {
             //nothing to do
             return;
         }
@@ -165,6 +168,26 @@ public class VariableMap {
         return variableStateMap.containsKey(var);
     }
 
+    /**
+     * Returns true if (and only if) given var is either NOT present in the map OR
+     * has an empty formula and is not needed by any other var
+     */
+    public boolean isEmptyAndNotNeeded(final String var) {
+        final VariableState state = get(var);
+        return state == null || (StringUtils.isBlank(state.getFormulaString()) && state.isNeededBy.isEmpty());
+    }
+
+    /** Returns all variables in this map which have a null state (e.g. are not explicitely created but only as dependencies of other vars */
+    public Set<String> getNullEntries() {
+        final Set<String> result = new HashSet<>();
+        for (Map.Entry<String, VariableState> entry : variableStateMap.entrySet()) {
+            if (entry.getValue().formulaString == null) {
+                result.add(entry.getKey());
+            }
+        }
+        return result;
+    }
+
     /** returns a state of a var existing in this instance */
     @Nullable
     public VariableState get(final String var) {
@@ -182,6 +205,30 @@ public class VariableMap {
             idx++;
         }
         return prefix + idx;
+    }
+
+    /** Calculates a set of all variables which are needed (directly or indirectly) to calculate the given vars */
+    public Set<String> calculateDependentVariables(final Collection<String> variables) {
+        final Set<String> result = new HashSet<>();
+        if (variables != null) {
+            for (String v : variables) {
+                calculateDependentVariablesInternal(result, v);
+            }
+        }
+        return result;
+    }
+
+    private void calculateDependentVariablesInternal(final Set<String> result, final String var) {
+        if (result.contains(var)) {
+            return;
+        }
+        result.add(var);
+        final VariableState state = get(var);
+        if (state != null) {
+            for (String dep : state.needs) {
+                calculateDependentVariablesInternal(result, dep);
+            }
+        }
     }
 
 
@@ -212,7 +259,7 @@ public class VariableMap {
             if (!newNeeds.contains(v)) {
                 final VariableState neededState = Objects.requireNonNull(get(v));
                 neededState.isNeededBy.remove(var);
-                if (neededState.isNeededBy.isEmpty() && neededState.formula == null) {
+                if (neededState.isNeededBy.isEmpty() && neededState.formulaString == null) {
                     variableStateMap.remove(v);
                 }
             }

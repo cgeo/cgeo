@@ -4,6 +4,8 @@ import static cgeo.geocaching.utils.formulas.VariableMap.State.CYCLE;
 import static cgeo.geocaching.utils.formulas.VariableMap.State.ERROR;
 import static cgeo.geocaching.utils.formulas.VariableMap.State.OK;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
@@ -105,6 +107,61 @@ public class VariableMapTest {
         cMap.remove("D");
         assertCalculatorMap(cMap);
         assertThat(cMap.size()).isEqualTo(0);
+    }
+
+    @Test
+    public void autoAddRemove2() {
+        final VariableMap cMap = new VariableMap();
+        cMap.put("A", "B");
+        cMap.put("B", ""); //empty/invalid on purpose
+        assertCalculatorMap(cMap, "A", ERROR, "B", ERROR);
+
+        cMap.remove("A");
+        assertCalculatorMap(cMap, "B", ERROR);
+    }
+
+    @Test
+    public void calculateDependants() {
+        final VariableMap cMap = new VariableMap();
+        assertThat(cMap.calculateDependentVariables(null)).isEmpty();
+        assertThat(cMap.calculateDependentVariables(Arrays.asList("A", "B"))).containsExactlyInAnyOrder("A", "B");
+
+        cMap.put("A", "B");
+        cMap.put("B", "C");
+        cMap.put("D", "E");
+        cMap.put("E", "F");
+        assertThat(cMap.calculateDependentVariables(null)).isEmpty();
+        assertThat(cMap.calculateDependentVariables(Collections.singletonList("A"))).containsExactlyInAnyOrder("A", "B", "C");
+        assertThat(cMap.calculateDependentVariables(Arrays.asList("A", "B"))).containsExactlyInAnyOrder("A", "B", "C");
+        assertThat(cMap.calculateDependentVariables(Arrays.asList("A", "D"))).containsExactlyInAnyOrder("A", "B", "C", "D", "E", "F");
+        assertThat(cMap.calculateDependentVariables(Arrays.asList("A", "E"))).containsExactlyInAnyOrder("A", "B", "C", "E", "F");
+    }
+
+    @Test
+    public void isEmptyOrNotNeeded() {
+        final VariableMap cMap = new VariableMap();
+        assertThat(cMap.isEmptyAndNotNeeded("A")).isTrue();
+
+        cMap.put("A", "B");
+        cMap.put("C", "");
+        assertThat(cMap.isEmptyAndNotNeeded("A")).isFalse();
+        assertThat(cMap.isEmptyAndNotNeeded("B")).isFalse();
+        assertThat(cMap.isEmptyAndNotNeeded("C")).isTrue();
+        cMap.put("B", "C");
+        assertThat(cMap.isEmptyAndNotNeeded("C")).isFalse();
+    }
+
+    @Test
+    public void getNullEntries() {
+        final VariableMap cMap = new VariableMap();
+        assertThat(cMap.getNullEntries()).isEmpty();
+
+        cMap.put("A", "B");
+        assertThat(cMap.getNullEntries()).containsExactlyInAnyOrder("B");
+        cMap.put("B", "C");
+        assertThat(cMap.getNullEntries()).containsExactlyInAnyOrder("C");
+        cMap.put("D", "E");
+        assertThat(cMap.getNullEntries()).containsExactlyInAnyOrder("C", "E");
     }
 
     private void assertCalculatorMap(final VariableMap cMap, final Object... propertiesToAssert) {

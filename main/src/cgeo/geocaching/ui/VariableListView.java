@@ -31,14 +31,15 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
@@ -98,19 +99,19 @@ public class VariableListView extends LinearLayout {
     private static class VariableViewHolder extends RecyclerView.ViewHolder {
 
         private final DisplayType displayType;
+        private final View viewVariableListItem;
         private final TextView viewVariableName;
         private final TextView viewVariableFormulaText;
         private final TextView viewVariableResult;
         private final View viewButtonFunction;
         private final View viewButtonDelete;
 
-
-        //private final VariableListItemBinding binding;
         private String varName;
 
         VariableViewHolder(final View rowView, final DisplayType displayType) {
             super(rowView);
             this.displayType = displayType;
+            this.viewVariableListItem = rowView.findViewById(R.id.variable_list_item);
             this.viewVariableName = rowView.findViewById(R.id.variable_name);
             this.viewVariableFormulaText = rowView.findViewById(R.id.variable_formula_text);
             this.viewVariableResult = rowView.findViewById(R.id.variable_result);
@@ -119,7 +120,7 @@ public class VariableListView extends LinearLayout {
             //binding = VariableListItemBinding.bind(rowView);
         }
 
-        private void setData(final VariableMap.VariableState variableState) {
+        private void setData(final VariableMap.VariableState variableState, final Set<String> visibleVars) {
 
             this.varName = variableState.getVar();
             final String displayVarName = VariableList.isVisible(this.varName) ? this.varName : "-";
@@ -127,6 +128,11 @@ public class VariableListView extends LinearLayout {
 
             if (this.viewVariableFormulaText != null) {
                 this.viewVariableFormulaText.setText(variableState.getFormulaString());
+            }
+
+            if (this.viewVariableListItem != null) {
+                final boolean isVisible = visibleVars.isEmpty() || visibleVars.contains(this.varName);
+                this.viewVariableListItem.setVisibility(isVisible ? VISIBLE : GONE);
             }
 
             setResult(variableState);
@@ -166,6 +172,8 @@ public class VariableListView extends LinearLayout {
         private boolean textListeningActive = true;
         private final RecyclerView recyclerView;
 
+        private final Set<String> visibleVariables = new HashSet<>();
+
         private Action2<String, CharSequence> varChangeCallback;
         private Consumer<VariableList> changeCallback;
 
@@ -174,6 +182,7 @@ public class VariableListView extends LinearLayout {
                 .setNotifyOnPositionChange(true)
                 .setSupportDragDrop(true));
             this.recyclerView = recyclerView;
+            setDisplay(DisplayType.ADVANCED, 1);
         }
 
         public void setChangeCallback(final Consumer<VariableList> changeCallback) {
@@ -193,6 +202,43 @@ public class VariableListView extends LinearLayout {
             callCallback();
         }
 
+        public void setVisibleVariablesAndDependent(final Collection<String> neededVars) {
+            setVisibleVariables(this.variables.getDependentVariables(neededVars));
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        public void addVisibleVariables(final Collection<String> newVars) {
+            //this is a costly operation
+            //Thus check whether new and old set contains same elements (e.g. no change)
+            if (this.visibleVariables.isEmpty() || this.visibleVariables.containsAll(newVars)) {
+                return;
+            }
+
+            this.visibleVariables.addAll(newVars);
+            this.notifyDataSetChanged();
+        }
+
+        @SuppressLint("NotifyDataSetChanged")
+        public void setVisibleVariables(@NonNull final Collection<String> newVisibleVariables) {
+            //this is a costly operation
+            //Thus check whether new and old set contains same elements (e.g. no change)
+            if (newVisibleVariables.size() == this.visibleVariables.size() &&
+                this.visibleVariables.containsAll(newVisibleVariables)) {
+                return;
+            }
+            this.visibleVariables.clear();
+            this.visibleVariables.addAll(newVisibleVariables);
+            this.notifyDataSetChanged();
+        }
+
+        public void ensureVariables(final Collection<String> variables) {
+            for (String v : variables) {
+                if (!containsVariable(v)) {
+                    addVariable(v, "");
+                }
+            }
+        }
+
         public VariableList getVariables() {
             return this.variables;
         }
@@ -202,7 +248,7 @@ public class VariableListView extends LinearLayout {
                 return;
             }
             textListeningActive = false;
-            holder.setData(data);
+            holder.setData(data, this.visibleVariables);
             textListeningActive = true;
         }
 
@@ -292,8 +338,10 @@ public class VariableListView extends LinearLayout {
             if (newVar != null) {
                 removeVariable(newVar);
             }
-            final String var = variables.addVariable(newVar, formula, 0);
-            addItem(0, variables.getState(var));
+            final int pos = variables.getSortedPos(newVar);
+
+            final String var = variables.addVariable(newVar, formula, pos);
+            addItem(pos, variables.getState(var));
             callCallback();
             notifyItemRangeChanged(0, getItemCount());
         }
@@ -302,11 +350,11 @@ public class VariableListView extends LinearLayout {
             return variables.contains(var);
         }
 
-        public void addAllMissing() {
-            final Collection<String> varsMissing = variables.getAllMissingVars();
-            for (String var : varsMissing) {
-                addVariable(var, "");
-            }
+        public void tidyUp(final Collection<String> neededVars) {
+            this.variables.tidyUp(neededVars);
+            this.setVisibleVariablesAndDependent(neededVars);
+            setVariableList(this.variables);
+
         }
 
         public void clearAllVariables() {
@@ -385,15 +433,17 @@ public class VariableListView extends LinearLayout {
             this.displayType = dtUsed;
             this.displayColumns = dcUsed;
 
-            if (this.displayColumns == 1) {
-                this.recyclerView.setLayoutManager(new LinearLayoutManager(this.recyclerView.getContext()));
-            } else {
-                this.recyclerView.setLayoutManager(new GridLayoutManager(this.recyclerView.getContext(), this.displayColumns));
-            }
+            this.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(this.displayColumns, StaggeredGridLayoutManager.VERTICAL));
 
+            invalidateView();
+
+        }
+
+        private void invalidateView() {
             //make sure the view is completely recreated
             this.recyclerView.getRecycledViewPool().clear();
             this.recyclerView.invalidate();
+            //this.recyclerView.setAdapter(this); //seems to be necessary to really force redraw
         }
 
         public DisplayType getDisplayType() {

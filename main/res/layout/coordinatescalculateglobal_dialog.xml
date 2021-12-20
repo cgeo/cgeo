@@ -78,21 +78,13 @@
                 >
 
                 <Button
-                    android:id="@+id/variables_sort"
-                    style="@style/button_icon"
-                    app:icon="@drawable/ic_menu_sort_alphabetically"
-                    android:layout_alignParentLeft="true"/>
-
-                <Button
-                    android:id="@+id/variables_addmissing"
+                    android:id="@+id/variables_tidyup"
                     style="@style/button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_margin="6dp"
-                    android:layout_toRightOf="@+id/variables_sort"
-                    android:text="Missing Variables"
-                    app:icon="@drawable/ic_menu_add" />
+                    android:text="Tidy Up"/>
 
 
             </RelativeLayout>
