@@ -9,8 +9,8 @@
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
 - Uutta: Attribuuttien yleisnäkymä (ks. Hallitse kätköjä => Attribuuttien yleisnäkymä)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
+- Uusi: Lisää tuonti kirjanmerkkiluetteloista (vain GC-premium)
+- Uusi: Käänteinen lajittelujärjestys pitkällä lajittelupalkin napautuksella
 
 ### Kätkön tiedot
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
