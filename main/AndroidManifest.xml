@@ -115,6 +115,7 @@
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/cgeo"
+            android:launchMode="singleTop"
             android:windowSoftInputMode="adjustNothing" >
             <!-- 'adjustNothing' fixes the issue described in #11610 -->
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->

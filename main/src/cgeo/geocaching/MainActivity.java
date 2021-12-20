@@ -280,12 +280,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             }
             cLog.add("ds");
 
-            if (!isTaskRoot()) {
-                // If we had been open already, start from the last used activity.
-                finish();
-                return;
-            }
-
             setDefaultKeyMode(DEFAULT_KEYS_SEARCH_LOCAL); // type to search
 
             Log.i("Starting " + getPackageName() + ' ' + Version.getVersionCode(this) + " a.k.a " + Version.getVersionName(this));
