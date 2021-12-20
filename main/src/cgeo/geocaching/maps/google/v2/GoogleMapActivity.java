@@ -4,11 +4,13 @@ import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
@@ -267,5 +269,13 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     @Override
     public int getSelectedBottomItemId() {
         return MENU_MAP;
+    }
+
+    @Override
+    public void onNavigationItemReselected(@NonNull final MenuItem item) {
+        if (item.getItemId() == MENU_MAP && !mapBase.getMapOptions().isLiveEnabled && !mapBase.getMapOptions().isStoredEnabled) {
+            startActivity(DefaultMap.getLiveMapIntent(this));
+            ActivityMixin.finishWithFadeTransition(this);
+        }
     }
 }
