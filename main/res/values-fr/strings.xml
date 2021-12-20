@@ -423,6 +423,10 @@
         <item quantity="one">%d loguée hors ligne</item>
         <item quantity="other">%d loguées hors ligne</item>
     </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache enregistrée</item>
+        <item quantity="other">%d caches enregistrées</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gérer les listes</string>
     <string name="list_menu_create">Nouvelle liste</string>
