@@ -1,5 +1,8 @@
+## 2021.12.19-RC
+
 - Διόρθωση: Ενεργοποίηση αναβάθμισης από το OpenAndroMaps v4 σε v5
 - Διόρθωση: Ενεργοποίηση ελέγχων για ενημερώσεις θεμάτων χάρτη
+- Fix: Skip folder migration on exception
 
 ## 2021.12.13 Bugfix release
 
