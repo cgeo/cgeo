@@ -1,5 +1,8 @@
+## 2021.12.19-RC
+
 - Oprava: Povolena aktualizace z OpenAndroMaps v4 na v5
 - Oprava: Povolena kontrola aktualizací motivů mapy
+- Oprava: Přeskočit migraci složek při výjimce
 
 ## 2021.12.13 Vydání opravy chyb
 
