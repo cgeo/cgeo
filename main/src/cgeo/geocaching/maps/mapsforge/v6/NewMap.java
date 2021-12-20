@@ -26,6 +26,7 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -368,6 +369,14 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     @Override
     public int getSelectedBottomItemId() {
         return MENU_MAP;
+    }
+
+    @Override
+    public void onNavigationItemReselected(@NonNull final MenuItem item) {
+        if (item.getItemId() == MENU_MAP && !mapOptions.isLiveEnabled && !mapOptions.isStoredEnabled) {
+            startActivity(DefaultMap.getLiveMapIntent(this));
+            ActivityMixin.finishWithFadeTransition(this);
+        }
     }
 
     @Override
