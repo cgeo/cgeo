@@ -1,5 +1,8 @@
-- Fix: Enable upgrading from OpenAndroMaps v4 to v5
-- Fix: Enable checks for map theme updates
+## 2021.12.19-RC
+
+- Oplossing: Upgraden van OpenAndroMaps v4 naar v5 mogelijk maken
+- Oplossing: Schakel controles in voor kaart thema updates
+- Fix: Mappenmigratie overslaan bij exceptie
 
 ## 2021.12.13 Bugfix release
 
