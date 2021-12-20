@@ -590,11 +590,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    protected boolean isTopLevelBottomNavActivity() {
-        return true; // always show bottom nav as specified in CacheListType
-    }
-
-    @Override
     public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);

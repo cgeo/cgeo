@@ -67,9 +67,9 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         wrapper.activityContent.addView(contentView);
         super.setContentView(wrapper.getRoot());
 
-        // Don't show back button for top-level activity in bottom navigation context
+        // Don't show back button for bottom navigation activities (although they can have a backstack as well)
         final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null && isTopLevelBottomNavActivity()) {
+        if (actionBar != null && getSelectedBottomItemId() != MENU_HIDE_BOTTOM_NAVIGATION) {
             actionBar.setDisplayHomeAsUpEnabled(false);
         }
 
@@ -79,10 +79,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         findViewById(R.id.page_list).setOnLongClickListener(view -> onListsLongClicked());
         // will be called if c:geo cannot log in
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
-    }
-
-    protected boolean isTopLevelBottomNavActivity() {
-        return (getIntent().getFlags() & Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) != 0 || isTaskRoot();
     }
 
     @Nullable
@@ -153,12 +149,15 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             super.onBackPressed();
             // avoid weired transitions
             ActivityMixin.overrideTransitionToFade(this);
-            return;
+        } else if (this instanceof MainActivity) {
+            this.doubleBackToExitPressedOnce = true;
+            Toast.makeText(this, R.string.touch_again_to_exit, Toast.LENGTH_SHORT).show();
+            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+        } else {
+            startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            // avoid weired transitions
+            ActivityMixin.finishWithFadeTransition(this);
         }
-
-        this.doubleBackToExitPressedOnce = true;
-        Toast.makeText(this, R.string.touch_again_to_exit, Toast.LENGTH_SHORT).show();
-        new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
     }
 
     private void updateSelectedItemId() {
@@ -167,7 +166,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
         final int menuId = getSelectedBottomItemId();
 
-        if (menuId == MENU_HIDE_BOTTOM_NAVIGATION || !isTopLevelBottomNavActivity()) {
+        if (menuId == MENU_HIDE_BOTTOM_NAVIGATION) {
             wrapper.activityBottomNavigation.setVisibility(View.GONE);
         } else {
             wrapper.activityBottomNavigation.setVisibility(View.VISIBLE);
@@ -197,25 +196,29 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             ActivityMixin.overrideTransitionToFade(this);
             return true;
         }
-        return onNavigationItemSelectedIgnoreReselected(item);
+        return onNavigationItemSelectedDefaultBehaviour(item);
     }
 
-    public boolean onNavigationItemSelectedIgnoreReselected(final @NonNull MenuItem item) {
+    public boolean onNavigationItemSelectedDefaultBehaviour(final @NonNull MenuItem item) {
         final int id = item.getItemId();
+        final Intent launchIntent;
 
         if (id == MENU_MAP) {
-            startActivity(DefaultMap.getLiveMapIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            launchIntent = DefaultMap.getLiveMapIntent(this);
         } else if (id == MENU_LIST) {
-            startActivity(CacheListActivity.getActivityOfflineIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            launchIntent = CacheListActivity.getActivityOfflineIntent(this);
         } else if (id == MENU_SEARCH) {
-            startActivity(new Intent(this, SearchActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            launchIntent = new Intent(this, SearchActivity.class);
         } else if (id == MENU_NEARBY) {
-            startActivity(CacheListActivity.getNearestIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+            launchIntent = CacheListActivity.getNearestIntent(this);
         } else if (id == MENU_HOME) {
-            startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)); // the different behaviour for MainActivity is intended
+            launchIntent = new Intent(this, MainActivity.class);
         } else {
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }
+
+        // launch the default behaviour (restore activity if an instance does already exist)
+        startActivity(launchIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
         // avoid weired transitions
         ActivityMixin.overrideTransitionToFade(this);
         return true;
