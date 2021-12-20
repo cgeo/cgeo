@@ -364,9 +364,7 @@ public class ViewSettingsActivity extends AbstractActivity {
     @Override
     public boolean onOptionsItemSelected(final MenuItem item) {
         final int itemId = item.getItemId();
-        if (itemId == android.R.id.home) {
-            finish();
-        } else if (itemId == R.id.view_settings_edit && !editMode) {
+        if (itemId == R.id.view_settings_edit && !editMode) {
             SimpleDialog.of(this).setTitle(R.string.activate_editmode_title).setMessage(R.string.activate_editmode_warning).confirm((dialog, which) -> {
                 editMode = true;
                 updateMenuButtons();
@@ -375,7 +373,7 @@ public class ViewSettingsActivity extends AbstractActivity {
         } else if (itemId == R.id.view_settings_add && editMode) {
             addItem();
         } else {
-            return false;
+            return super.onOptionsItemSelected(item);
         }
         return true;
     }

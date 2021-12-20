@@ -132,7 +132,6 @@
             android:exported="true"
             android:label="@string/app_name"
             android:launchMode="singleTop"
-            android:parentActivityName="cgeo.geocaching.MainActivity"
             android:windowSoftInputMode="stateHidden" >
             <!-- don't add configChanges="orientation|screenSize" as we use different base layouts depending on the device orientation -->
 
@@ -187,10 +186,6 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
             </intent-filter>
-
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cgeo.geocaching.MainActivity" />
             <meta-data
                 android:name="android.app.searchable"
                 android:resource="@xml/searchable" />
@@ -854,29 +849,17 @@
         <activity
             android:name="cgeo.geocaching.connector.gc.PocketQueryListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/search_pocket_title"
-            android:parentActivityName="cgeo.geocaching.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cgeo.geocaching.MainActivity" />
+            android:label="@string/search_pocket_title">
         </activity>
         <activity
             android:name="cgeo.geocaching.connector.gc.BookmarkListActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/search_bookmark_list"
-            android:parentActivityName="cgeo.geocaching.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cgeo.geocaching.MainActivity" />
+            android:label="@string/search_bookmark_list">
         </activity>
         <activity android:name=".downloader.DownloadConfirmationActivity" android:exported="false" />
         <activity
             android:name="cgeo.geocaching.downloader.DownloadSelectorActivity"
-            android:label="@string/download_title"
-            android:parentActivityName="cgeo.geocaching.MainActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="cgeo.geocaching.MainActivity" />
+            android:label="@string/download_title">
         </activity>
         <activity
             android:name=".downloader.MapDownloaderReceiverSchemeMap"

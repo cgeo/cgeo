@@ -29,7 +29,6 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -376,14 +375,4 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
             new MapListTask(this, current.mapBase, "").execute();
         }
     }
-
-    @Override
-    public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        // close the downloader on pressing the back arrow
-        if (item.getItemId() == android.R.id.home) {
-            finish();
-        }
-        return true;
-    }
-
 }
