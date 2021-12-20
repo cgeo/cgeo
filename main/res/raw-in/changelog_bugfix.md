@@ -1,5 +1,8 @@
+## 2021.12.19-RC
+
 - Fix: Enable upgrading from OpenAndroMaps v4 to v5
 - Fix: Enable checks for map theme updates
+- Fix: Skip folder migration on exception
 
 ## 2021.12.13 Bugfix release
 
