@@ -47,9 +47,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         //Experimental warning
         TextParam.text("**Experimental New Feature** \n" +
             "* Expect disruptive changes in the future\n" +
-            "* No internationalization yet\n" +
-            "* GUI/UX not finalized\n" +
-            "* Not used by other parts of c:geo yet")
+            "* No internationalization yet")
             .setMarkdown(true).applyTo(binding.variablesExperimentalWarning);
         binding.variablesExperimentalWarning.setOnClickListener(d -> {
             if (adapter.getDisplayType() == VariableListView.DisplayType.MINIMALISTIC) {
@@ -72,7 +70,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             adapter.tidyUp(null);
         });
 
-        binding.variablesClear.setOnClickListener(d -> {
+        binding.variablesDeleteall.setOnClickListener(d -> {
             binding.variables.clearFocus();
             if (!adapter.getVariables().isEmpty()) {
                 SimpleDialog.of(activity).setTitle(TextParam.text("Delete all"))

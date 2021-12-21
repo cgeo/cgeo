@@ -75,6 +75,11 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         if (activity instanceof CoordinatesInputDialog.CoordinateUpdate) {
             ((CoordinatesInputDialog.CoordinateUpdate) activity).updateCoordinates(createFromDialog());
         }
+
+        //save changes to the var list
+        if (varList instanceof CacheVariableList) {
+            ((CacheVariableList) varList).saveState();
+        }
         dismiss();
     }
 
@@ -287,21 +292,4 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-    }
-
-    /**
-     * This method displays a reminder about saving the calculator state then closes both this dialog as well as the 'CoordinateInputDialog'
-     *
-     * Note that clicking the back arrow on the device does not run this method so in that case the user will be returned to the 'CoordinateInputDialog'.
-     */
-    @Override
-    public void dismiss() {
-        if (varList instanceof CacheVariableList) {
-            ((CacheVariableList) varList).saveState();
-        }
-        super.dismiss();
-    }
 }

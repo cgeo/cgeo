@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="6dp"
-                android:text="Scan"
+                android:text="Scan Listing"
                 app:icon="@drawable/ic_menu_add" />
 
 
@@ -81,24 +81,24 @@
             <Button
                 android:id="@+id/variables_tidyup"
                 style="@style/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:gravity="center"
                 android:layout_margin="6dp"
+                app:icon="@drawable/ic_menu_auto_fix_high"
                 android:text="Tidy Up"/>
 
             <Button
-                android:id="@+id/variables_clear"
-                style="@style/button_icon"
+                android:id="@+id/variables_deleteall"
+                style="@style/button"
                 android:layout_gravity="center_horizontal"
+                android:text="Delete All"
                 app:icon="@drawable/ic_menu_delete"/>
 
             <Button
                 android:id="@+id/variables_info"
                 style="@style/button"
                 android:text="Help"
-                android:layout_marginRight="6dp"
+                android:layout_margin="6dp"
                 android:layout_gravity="center_horizontal"
                 app:icon="@drawable/settings_info" />
         </LinearLayout>

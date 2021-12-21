@@ -648,6 +648,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         final Handler finishHandler = new FinishWaypointSaveHandler(this, currentState.coords);
 
+        //if this was a calculated waypoint, then variable state may have changed -> save this
+        cache.getVariables().saveState();
+
         AndroidRxUtils.computationScheduler.scheduleDirect(() -> saveWaypointInBackground(currentState, finishHandler));
     }
 
@@ -729,6 +732,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
     @Override
     public void finish() {
+        //if this was a calculated waypoint, then reset variable state (in case of edit cancellation)
+        cache.getVariables().reloadLastSavedState();
+
         Dialogs.dismiss(waitDialog);
         super.finish();
     }

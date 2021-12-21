@@ -9,6 +9,9 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -134,18 +137,19 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public Set<String> getNeededVars() {
-        //TODO optimize by caching
         final Set<String> neededVars = new HashSet<>();
         neededVars.addAll(latitudePattern.getNeededVars());
         neededVars.addAll(longitudePattern.getNeededVars());
         return neededVars;
     }
 
+    @Nullable
     public Geopoint calculateGeopoint(final Func1<String, Value> varMap) {
         final Pair<Double, Double> data = calculateGeopointData(varMap);
         return data.first == null || data.second == null ? null : new Geopoint(data.first, data.second);
     }
 
+    @NonNull
     public Pair<Double, Double> calculateGeopointData(final Func1<String, Value> varMap) {
         return new Pair<>(latitudePattern.evaluate(varMap), longitudePattern.evaluate(varMap));
     }
