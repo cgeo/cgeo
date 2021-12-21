@@ -2009,6 +2009,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             v.setAdapter(adapter);
             v.setOnScrollListener(new FastScrollListener(v));
 
+            //register for changes of variableslist -> calculated waypoints may have changed
+            cache.getVariables().addChangeListener(this, s -> adapter.notifyDataSetChanged());
+
             if (v.getHeaderViewsCount() < 1) {
                 final CachedetailWaypointsHeaderBinding headerBinding = CachedetailWaypointsHeaderBinding.inflate(getLayoutInflater(), v, false);
                 v.addHeaderView(headerBinding.getRoot());
@@ -2074,6 +2077,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final ClipboardManager cliboardManager = (ClipboardManager) activity.getSystemService(CLIPBOARD_SERVICE);
                 cliboardManager.addPrimaryClipChangedListener(() -> setClipboardButtonVisibility(headerBinding.addWaypointFromclipboard));
             }
+        }
+
+        @Override
+        public void onDestroy() {
+            super.onDestroy();
+            cache.getVariables().removeChangeListener(this);
         }
 
         protected void fillViewHolder(final CacheDetailActivity activity, final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {

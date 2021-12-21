@@ -28,7 +28,7 @@
                 android:layout_gravity="center"
                 android:textSize="@dimen/textSize_headingSecondary"
                 android:background="@drawable/mark_orange"
-                android:text="Experimental! No auto-add of variables yet, no update of coords when vars are changed elsewhere yet"
+                android:text="Experimental New Feature"
                 />
 
             <Spinner
@@ -84,6 +84,7 @@
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:layout_margin="6dp"
+                    app:icon="@drawable/ic_menu_auto_fix_high"
                     android:text="Tidy Up"/>
 
 
