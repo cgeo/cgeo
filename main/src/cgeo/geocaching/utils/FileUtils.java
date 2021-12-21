@@ -243,10 +243,16 @@ public final class FileUtils {
     }
 
     public static void deleteFilesWithFilter(@NonNull final File directory, @NonNull final FilenameFilter filter) {
-        final File[] filesToDelete = directory.listFiles(filter);
-        if (filesToDelete == null) {
+        if (!directory.isDirectory()) {
+            Log.d("FileUtils.deleteFilesWithFilter: trying to delete FilesWithFilter for non-directory: " + directory);
             return;
         }
+        final File[] filesToDelete = directory.listFiles(filter);
+        if (filesToDelete == null) {
+            Log.d("FileUtils.deleteFilesWithFilter: directory list returned null: " + directory);
+            return;
+        }
+        Log.d("Trying to delete " + filesToDelete.length + " files from dir: " + directory);
         for (final File file : filesToDelete) {
             try {
                 if (!delete(file)) {
