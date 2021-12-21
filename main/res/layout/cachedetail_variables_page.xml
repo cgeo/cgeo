@@ -69,42 +69,39 @@
                 android:text="Scan"
                 app:icon="@drawable/ic_menu_add" />
 
-            <Button
-                android:id="@+id/variables_addmissing"
-                style="@style/button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="center"
-                android:layout_margin="6dp"
-                android:text="Missing Variables"
-                app:icon="@drawable/ic_menu_add" />
+
         </LinearLayout>
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
             >
 
             <Button
-                android:id="@+id/variables_sort"
-                style="@style/button_icon"
-                app:icon="@drawable/ic_menu_sort_alphabetically"
-                android:layout_alignParentLeft="true"/>
+                android:id="@+id/variables_tidyup"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center"
+                android:layout_margin="6dp"
+                android:text="Tidy Up"/>
 
             <Button
                 android:id="@+id/variables_clear"
                 style="@style/button_icon"
-                app:icon="@drawable/ic_menu_delete"
-                android:layout_toRightOf="@+id/variables_sort"/>
+                android:layout_gravity="center_horizontal"
+                app:icon="@drawable/ic_menu_delete"/>
 
             <Button
                 android:id="@+id/variables_info"
                 style="@style/button"
                 android:text="Help"
                 android:layout_marginRight="6dp"
-                app:icon="@drawable/settings_info"
-                android:layout_alignParentRight="true"/>
-        </RelativeLayout>
+                android:layout_gravity="center_horizontal"
+                app:icon="@drawable/settings_info" />
+        </LinearLayout>
 
         <View
             android:id="@+id/filter_storage_options_line"

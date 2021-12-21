@@ -31,6 +31,7 @@
     <EditText
         android:id="@+id/variable_formula_text"
         android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
+        android:inputType="text|textNoSuggestions"
         android:layout_weight="1"/>
 </LinearLayout>

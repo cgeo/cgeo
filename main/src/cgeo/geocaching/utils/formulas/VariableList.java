@@ -6,9 +6,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -85,10 +87,25 @@ public class VariableList {
         wasModified = true;
     }
 
+    public int getSortedPos(final String var) {
+        int idx = 0;
+        while (idx < variableList.size() && variableList.get(idx).compareTo(var) < 0) {
+            idx++;
+        }
+        return idx;
+    }
+
+    @NonNull
+    public String addVariable(@Nullable  final String var, @Nullable final String formula) {
+        return addVariable(var, formula, 0);
+    }
+
+
+
     /**
-     * puts a new variable into the cache. If same var already exists it is overridden.
-     * If varname given is 'null', a nonvisible var name (starting with NONVISIBLE_PREFIX) is created and returned
-     */
+         * puts a new variable into the cache. If same var already exists it is overridden.
+         * If varname given is 'null', a nonvisible var name (starting with NONVISIBLE_PREFIX) is created and returned
+         */
     @NonNull
     public String addVariable(@Nullable  final String var, @Nullable final String formula, final int ppos) {
         int pos = Math.min(variableList.size(), Math.max(0, ppos));
@@ -140,14 +157,45 @@ public class VariableList {
         wasModified = true;
     }
 
+    /**
+     * Tidies up this variable list. This means doing the following things:
+     * * remove empty entries without dependency of any other var (or from varsToKeep list)
+     * * add empty entries for all missing vars
+     * * sorts vars alphabetically
+     */
+    public void tidyUp(final Collection<String> varsNeeded) {
 
-    /** gets an alphabetically sorted list of all vars missing in any var for calculation */
-    @NonNull
-    public List<String> getAllMissingVars() {
-        final List<String> varsMissing = new ArrayList<>(variableMap.getVars());
-        varsMissing.removeAll(variableList);
-        TextUtils.sortListLocaleAware(varsMissing);
-        return varsMissing;
+        final Collection<String> varsNeededNonNull = varsNeeded == null ? Collections.emptySet() : varsNeeded;
+
+        //1. add all missing vars if any
+        for (String v : varsNeededNonNull) {
+            if (!contains(v)) {
+                addVariable(v, "");
+            }
+        }
+
+        //2. remove empty vars which are not needed by anyone
+        final Set<String> toRemove = new HashSet<>();
+        for (String v : variableMap.getVars()) {
+            if (!varsNeededNonNull.contains(v) && variableMap.isEmptyAndNotNeeded(v)) {
+                toRemove.add(v);
+            }
+        }
+        for (String tr : toRemove) {
+            removeVariable(tr);
+        }
+
+        //3. add empty entries for all vars still missing
+        for (String nullVar : variableMap.getNullEntries()) {
+            addVariable(nullVar, "");
+        }
+
+        //4. sort variables
+        sortVariables(TextUtils.COLLATOR::compare);
+    }
+
+    public Set<String> getDependentVariables(final Collection<String> variables) {
+        return variableMap.calculateDependentVariables(variables);
     }
 
     public void setEntries(final List<VariableEntry> vars) {

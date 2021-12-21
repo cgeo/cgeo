@@ -36,7 +36,10 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.Objects;
+import java.util.Set;
 
 /**
  * Dialog to manage calculation of a coordinate
@@ -170,39 +173,33 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         binding.convertToPlain.setOnClickListener(v -> {
             final CoordinateInputData cid = createFromDialog();
             cid.setCalculatedCoordinate(null);
-            CoordinatesInputDialog.show(this.getActivity().getSupportFragmentManager(), cid);
+            CoordinatesInputDialog.show(this.requireActivity().getSupportFragmentManager(), cid);
             dismiss();
         });
 
         displayType.setSpinner(binding.spinnerCoordinateFormats)
             .setValues(Arrays.asList(CalculatedCoordinateType.values()))
-            .setDisplayMapper(t -> t.toUserDisplayableString())
+            .setDisplayMapper(CalculatedCoordinateType::toUserDisplayableString)
             .set(calcCoord.getType())
             .setChangeListener(t -> refreshType(false));
 
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
         varListAdapter.setVarChangeCallback((v, s) -> {
-            //varsAlwaysToKeep.add(v);
+            checkAddVariables(Collections.singletonList(v));
             updateView();
         });
         varListAdapter.setVariableList(varList);
+        varListAdapter.setVisibleVariablesAndDependent(calcCoord.getNeededVars());
 
-        binding.variablesAddmissing.setOnClickListener(v -> {
-            varListAdapter.addAllMissing();
-            for (String var : calcCoord.getNeededVars()) {
-                if (!varListAdapter.containsVariable(var)) {
-                    varListAdapter.addVariable(var, "");
-                }
-            }
-        });
-        binding.variablesSort.setOnClickListener(v -> varListAdapter.sortVariables(TextUtils.COLLATOR::compare));
+        binding.variablesTidyup.setOnClickListener(v -> varListAdapter.tidyUp(calcCoord.getNeededVars()));
 
         binding.notesText.setText(notes);
 
         binding.PlainLat.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLatitudePattern(s.toString());
+            checkAddVariables(calcCoord.getNeededVars());
             updateView();
         }));
         binding.PlainLat.setText(calcCoord.getLatitudePattern());
@@ -210,6 +207,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         binding.PlainLon.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLongitudePattern(s.toString());
+            checkAddVariables(calcCoord.getNeededVars());
             updateView();
         }));
         binding.PlainLon.setText(calcCoord.getLongitudePattern());
@@ -217,12 +215,19 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         binding.NonPlainFormat.setChangeListener(p -> {
             calcCoord.setLatitudePattern(p.first);
             calcCoord.setLongitudePattern(p.second);
+            checkAddVariables(calcCoord.getNeededVars());
             updateView();
         });
 
         refreshType(true);
 
         return binding.getRoot();
+    }
+
+    private void checkAddVariables(final Collection<String> vars) {
+        final Set<String> neededVars = varListAdapter.getVariables().getDependentVariables(vars);
+        varListAdapter.ensureVariables(neededVars);
+        varListAdapter.addVisibleVariables(neededVars);
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability

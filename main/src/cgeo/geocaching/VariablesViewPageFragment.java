@@ -8,7 +8,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ShareUtils;
-import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableMap;
 
@@ -60,13 +59,21 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         });
 
-        binding.variablesAdd.setOnClickListener(d ->
-            adapter.selectVariableName(null, (o, n) -> adapter.addVariable(n, "")));
-        binding.variablesAddscan.setOnClickListener(d -> scanCache());
-        binding.variablesAddmissing.setOnClickListener(d -> adapter.addAllMissing());
+        binding.variablesAdd.setOnClickListener(d -> {
+            binding.variables.clearFocus();
+            adapter.selectVariableName(null, (o, n) -> adapter.addVariable(n, ""));
+        });
+        binding.variablesAddscan.setOnClickListener(d -> {
+            binding.variables.clearFocus();
+            scanCache();
+        });
+        binding.variablesTidyup.setOnClickListener(d -> {
+            binding.variables.clearFocus();
+            adapter.tidyUp(null);
+        });
 
-        binding.variablesSort.setOnClickListener(d -> adapter.sortVariables(TextUtils.COLLATOR::compare));
         binding.variablesClear.setOnClickListener(d -> {
+            binding.variables.clearFocus();
             if (!adapter.getVariables().isEmpty()) {
                 SimpleDialog.of(activity).setTitle(TextParam.text("Delete all"))
                     .setMessage(TextParam.text("Really delete all variables?")).confirm((dd, i) -> adapter.clearAllVariables());

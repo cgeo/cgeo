@@ -59,6 +59,18 @@ public class FormulaUtilsTest {
         assertScanFormula("2021/11");
         assertScanFormula("2021/11/5");
         assertScanFormula("www.cgeo.com:443");
+
+        //find many basic calculations
+        assertScanFormula("a * b", "a * b");
+        assertScanFormula("a / b", "a / b");
+        assertScanFormula("a : b", "a : b");
+        assertScanFormula("a + b", "a + b");
+
+        assertThat("a x b".replaceAll(" x ", " * ")).isEqualTo("a * b");
+
+        //find x as multiply
+        assertScanFormula("a x b", "a * b");
+
     }
 
     private void assertScanFormula(final String textToScan, final String ... expectedFinds) {

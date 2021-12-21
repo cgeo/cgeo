@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils.formulas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 
@@ -43,7 +44,7 @@ public class VariableListTest {
         assertVariableList(cv, "a", "f:1", "b", "f:a", "c", "f:b");
 
         cv.removeVariable("a");
-        assertVariableList(cv, "b", "f:a", "c", "f:b", "m:a");
+        assertVariableList(cv, "b", "f:a", "c", "f:b");
     }
 
     @Test
@@ -93,25 +94,39 @@ public class VariableListTest {
     public void nextChar() {
         final VariableList cv = createTestInstance();
         assertThat(cv.getLowestMissingChar()).isEqualTo('A');
-        cv.addVariable("A", "", 0);
+        cv.addVariable("A", "");
         assertThat(cv.getLowestMissingChar()).isEqualTo('B');
-        cv.addVariable("B", "", 0);
+        cv.addVariable("B", "");
         assertThat(cv.getLowestMissingChar()).isEqualTo('C');
         cv.removeVariable("A");
-        cv.addVariable("A", "", 0);
+        cv.addVariable("A", "");
+    }
+
+    @Test
+    public void tidyUp() {
+        final VariableList cv = createTestInstance();
+        cv.addVariable("B", "C");
+        cv.addVariable("A", "B");
+        cv.addVariable("E", "F");
+        cv.addVariable("D", "");
+        cv.addVariable("F", "G");
+
+        cv.tidyUp(Arrays.asList("A", "K"));
+
+        //D is removed (empty and no uses), C, G and K are added with empty formulas, list is sorted
+        assertVariableList(cv,
+            "A", "f:B", "B", "f:C", "C", "f:", "E", "f:F", "F", "f:G", "G", "f:", "K", "f:");
+
     }
 
 
-    /** expectedParams syntax: pure string = expected var, prefix with f: to assert formula, prefix with m: to assert missing vars */
+    /** expectedParams syntax: pure string = expected var, prefix with f: to assert formula */
     private void assertVariableList(final VariableList cv, final String ... expectedParams) {
         final List<String> vars = new ArrayList<>();
-        final List<String> missingVars = new ArrayList<>();
         String currentVar = null;
         for (String p : expectedParams) {
             if (p.startsWith("f:")) {
                 assertThat(Objects.requireNonNull(cv.getState(currentVar)).getFormulaString()).as("Formula for var '" + currentVar + "'").isEqualTo(p.substring(2));
-            } else if (p.startsWith("m:")) {
-                missingVars.add(p.substring(2));
             } else {
                 currentVar = p;
                 vars.add(p);
@@ -119,7 +134,6 @@ public class VariableListTest {
         }
         assertThat(cv.asList()).containsExactlyElementsOf(vars);
         assertThat(cv.asSet()).containsExactlyInAnyOrderElementsOf(vars);
-        assertThat(cv.getAllMissingVars()).containsExactlyInAnyOrderElementsOf(missingVars);
     }
 
 
