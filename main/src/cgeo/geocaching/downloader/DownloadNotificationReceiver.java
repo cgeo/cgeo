@@ -31,32 +31,41 @@ public class DownloadNotificationReceiver extends BroadcastReceiver {
                     query.setFilterById(pendingDownload);
                     final Cursor cursor = downloadManager.query(query);
                     if (cursor.moveToFirst()) {
-                        final int status = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS));
-                        switch (status) {
-                            case DownloadManager.STATUS_SUCCESSFUL:
-                                PendingDownload.remove(pendingDownload);
-                                final Intent copyFileIntent = new Intent(context, ReceiveDownloadService.class);
-                                final Uri uri = downloadManager.getUriForDownloadedFile(pendingDownload);
-                                copyFileIntent.setData(uri);
-                                copyFileIntent.putExtra(Intents.EXTRA_FILENAME, p.getFilename());
-                                copyFileIntent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
-                                copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, p.getDate());
-                                copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
-                                ContextCompat.startForegroundService(context, copyFileIntent);
-                                Log.d("download #" + pendingDownload + " successful");
-                                break;
-                            case DownloadManager.STATUS_FAILED:
-                                PendingDownload.remove(pendingDownload);
-                                final int error = cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_REASON));
-                                ActivityMixin.showToast(context, String.format(context.getString(R.string.download_error), error));
-                                Log.d("download #" + pendingDownload + " failed with error #" + error);
-                                // remove file from system's download manager, which will also delete the broken file from storage
-                                downloadManager.remove(pendingDownload);
-                                break;
-                            default:
-                                // ignore unknown state by logging silently
-                                Log.d("download #" + pendingDownload + ": unknown state #" + status);
-                                break;
+                        try {
+                            final int status = cursor.getInt(cursor.getColumnIndexOrThrow(DownloadManager.COLUMN_STATUS));
+                            switch (status) {
+                                case DownloadManager.STATUS_SUCCESSFUL:
+                                    PendingDownload.remove(pendingDownload);
+                                    final Intent copyFileIntent = new Intent(context, ReceiveDownloadService.class);
+                                    final Uri uri = downloadManager.getUriForDownloadedFile(pendingDownload);
+                                    copyFileIntent.setData(uri);
+                                    copyFileIntent.putExtra(Intents.EXTRA_FILENAME, p.getFilename());
+                                    copyFileIntent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, p.getRemoteUrl());
+                                    copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, p.getDate());
+                                    copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, p.getOfflineMapTypeId());
+                                    ContextCompat.startForegroundService(context, copyFileIntent);
+                                    Log.d("download #" + pendingDownload + " successful");
+                                    break;
+                                case DownloadManager.STATUS_FAILED:
+                                    PendingDownload.remove(pendingDownload);
+                                    final int idx = cursor.getColumnIndex(DownloadManager.COLUMN_REASON);
+                                    if (idx >= 0) {
+                                        final int error = cursor.getInt(idx);
+                                        ActivityMixin.showToast(context, String.format(context.getString(R.string.download_error), error));
+                                        Log.d("download #" + pendingDownload + " failed with error #" + error);
+                                    } else {
+                                        Log.e("download #" + pendingDownload + " failed with unknown error");
+                                    }
+                                    // remove file from system's download manager, which will also delete the broken file from storage
+                                    downloadManager.remove(pendingDownload);
+                                    break;
+                                default:
+                                    // ignore unknown state by logging silently
+                                    Log.d("download #" + pendingDownload + ": unknown state #" + status);
+                                    break;
+                            }
+                        } catch (final IllegalArgumentException e) {
+                            Log.e("no download state", e);
                         }
                     }
                 }

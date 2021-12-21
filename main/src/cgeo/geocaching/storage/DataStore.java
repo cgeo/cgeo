@@ -2800,7 +2800,9 @@ public class DataStore {
                         if (logIndex < 0) {
                             logIndex = cursor.getColumnIndex("log");
                         }
-                        cache.setHasLogOffline(!cursor.isNull(logIndex));
+                        if (logIndex >= 0) {
+                            cache.setHasLogOffline(!cursor.isNull(logIndex));
+                        }
                     }
                     cache.addStorageLocation(StorageLocation.DATABASE);
                     cacheCache.putCacheInCache(cache);
@@ -3004,22 +3006,27 @@ public class DataStore {
 
     @NonNull
     private static Waypoint createWaypointFromDatabaseContent(final Cursor cursor) {
-        final String name = cursor.getString(cursor.getColumnIndex("name"));
-        final WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndex("type")));
-        final boolean own = cursor.getInt(cursor.getColumnIndex("own")) != 0;
-        final Waypoint waypoint = new Waypoint(name, type, own);
-        waypoint.setVisited(cursor.getInt(cursor.getColumnIndex("visited")) != 0);
-        waypoint.setId(cursor.getInt(cursor.getColumnIndex("_id")));
-        waypoint.setGeocode(cursor.getString(cursor.getColumnIndex("geocode")));
-        waypoint.setPrefix(cursor.getString(cursor.getColumnIndex("prefix")));
-        waypoint.setLookup(cursor.getString(cursor.getColumnIndex("lookup")));
-        waypoint.setCoords(getCoords(cursor, cursor.getColumnIndex("latitude"), cursor.getColumnIndex("longitude")));
-        waypoint.setNote(cursor.getString(cursor.getColumnIndex("note")));
-        waypoint.setUserNote(cursor.getString(cursor.getColumnIndex("user_note")));
-        waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndex("org_coords_empty")) != 0);
-        waypoint.setCalcStateJson(cursor.getString(cursor.getColumnIndex("calc_state")));
+        try {
+            final String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            final WaypointType type = WaypointType.findById(cursor.getString(cursor.getColumnIndexOrThrow("type")));
+            final boolean own = cursor.getInt(cursor.getColumnIndexOrThrow("own")) != 0;
+            final Waypoint waypoint = new Waypoint(name, type, own);
+            waypoint.setVisited(cursor.getInt(cursor.getColumnIndexOrThrow("visited")) != 0);
+            waypoint.setId(cursor.getInt(cursor.getColumnIndexOrThrow("_id")));
+            waypoint.setGeocode(cursor.getString(cursor.getColumnIndexOrThrow("geocode")));
+            waypoint.setPrefix(cursor.getString(cursor.getColumnIndexOrThrow("prefix")));
+            waypoint.setLookup(cursor.getString(cursor.getColumnIndexOrThrow("lookup")));
+            waypoint.setCoords(getCoords(cursor, cursor.getColumnIndexOrThrow("latitude"), cursor.getColumnIndexOrThrow("longitude")));
+            waypoint.setNote(cursor.getString(cursor.getColumnIndexOrThrow("note")));
+            waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));
+            waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
+            waypoint.setCalcStateJson(cursor.getString(cursor.getColumnIndexOrThrow("calc_state")));
 
-        return waypoint;
+            return waypoint;
+        } catch (final IllegalArgumentException e) {
+            Log.e("error in createWaypointFromDatabaseContent", e);
+            throw new IllegalStateException("colum not found in database");
+        }
     }
 
     /** method should solely be used by class {@Link CacheVariables} */
@@ -3396,11 +3403,11 @@ public class DataStore {
     @NonNull
     private static Trackable createTrackableFromDatabaseContent(final Cursor cursor) {
         final Trackable trackable = new Trackable();
-        trackable.setGeocode(cursor.getString(cursor.getColumnIndex("tbcode")));
-        trackable.setGuid(cursor.getString(cursor.getColumnIndex("guid")));
-        trackable.setName(cursor.getString(cursor.getColumnIndex("title")));
-        trackable.setOwner(cursor.getString(cursor.getColumnIndex("owner")));
-        final String released = cursor.getString(cursor.getColumnIndex("released"));
+        trackable.setGeocode(cursor.getString(cursor.getColumnIndexOrThrow("tbcode")));
+        trackable.setGuid(cursor.getString(cursor.getColumnIndexOrThrow("guid")));
+        trackable.setName(cursor.getString(cursor.getColumnIndexOrThrow("title")));
+        trackable.setOwner(cursor.getString(cursor.getColumnIndexOrThrow("owner")));
+        final String released = cursor.getString(cursor.getColumnIndexOrThrow("released"));
         if (released != null) {
             try {
                 final long releaseMilliSeconds = Long.parseLong(released);
@@ -3409,9 +3416,9 @@ public class DataStore {
                 Log.e("createTrackableFromDatabaseContent", e);
             }
         }
-        trackable.setGoal(cursor.getString(cursor.getColumnIndex("goal")));
-        trackable.setDetails(cursor.getString(cursor.getColumnIndex("description")));
-        final String logDate = cursor.getString(cursor.getColumnIndex("log_date"));
+        trackable.setGoal(cursor.getString(cursor.getColumnIndexOrThrow("goal")));
+        trackable.setDetails(cursor.getString(cursor.getColumnIndexOrThrow("description")));
+        final String logDate = cursor.getString(cursor.getColumnIndexOrThrow("log_date"));
         if (logDate != null) {
             try {
                 final long logDateMillis = Long.parseLong(logDate);
@@ -3420,8 +3427,8 @@ public class DataStore {
                 Log.e("createTrackableFromDatabaseContent", e);
             }
         }
-        trackable.setLogType(LogType.getById(cursor.getInt(cursor.getColumnIndex("log_type"))));
-        trackable.setLogGuid(cursor.getString(cursor.getColumnIndex("log_guid")));
+        trackable.setLogType(LogType.getById(cursor.getInt(cursor.getColumnIndexOrThrow("log_type"))));
+        trackable.setLogGuid(cursor.getString(cursor.getColumnIndexOrThrow("log_guid")));
         trackable.setLogs(loadLogs(trackable.getGeocode()));
         return trackable;
     }
@@ -3894,11 +3901,11 @@ public class DataStore {
 
     @NonNull
     private static List<StoredList> getListsFromCursor(final Cursor cursor) {
-        final int indexId = cursor.getColumnIndex("_id");
-        final int indexTitle = cursor.getColumnIndex("title");
-        final int indexEmoji = cursor.getColumnIndex("emoji");
-        final int indexCount = cursor.getColumnIndex("count");
-        final int indexPreventAskForDeletion = cursor.getColumnIndex(FIELD_LISTS_PREVENTASKFORDELETION);
+        final int indexId = cursor.getColumnIndexOrThrow("_id");
+        final int indexTitle = cursor.getColumnIndexOrThrow("title");
+        final int indexEmoji = cursor.getColumnIndexOrThrow("emoji");
+        final int indexCount = cursor.getColumnIndexOrThrow("count");
+        final int indexPreventAskForDeletion = cursor.getColumnIndexOrThrow(FIELD_LISTS_PREVENTASKFORDELETION);
         return cursorToColl(cursor, new ArrayList<>(), cursor1 -> {
             final int count = indexCount != -1 ? cursor1.getInt(indexCount) : 0;
             return new StoredList(cursor1.getInt(indexId) + customListIdOffset, cursor1.getString(indexTitle), cursor1.getInt(indexEmoji), indexPreventAskForDeletion >= 0 && cursor1.getInt(indexPreventAskForDeletion) != 0, count);
@@ -4299,7 +4306,7 @@ public class DataStore {
     }
 
     private static @NonNull String fetchLocation(final Cursor cursor) {
-        final String location = cursor.getString(cursor.getColumnIndex("location"));
+        final String location = cursor.getString(cursor.getColumnIndexOrThrow("location"));
 
         return location == null ? "" : location;
     }
@@ -4580,7 +4587,7 @@ public class DataStore {
     }
 
     @NonNull
-    public static SearchResult getBatchOfStoredCaches(final Geopoint coords, final int listId) {
+    public static SearchResult getBatchOfStoredCaches(@Nullable final Geopoint coords, final int listId) {
         return getBatchOfStoredCaches(coords, listId, null, null, false, -1);
     }
 
@@ -4800,13 +4807,13 @@ public class DataStore {
             if (cursor.moveToLast()) {
                 do {
                     statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
-                    statement.bindLong      (2, cursor.getLong(cursor.getColumnIndex("date")));  // updated
+                    statement.bindLong      (2, cursor.getLong(cursor.getColumnIndexOrThrow("date")));  // updated
                     statement.bindString    (3, "waypoint");                         // type
                     statement.bindString    (4, "00");                               // prefix
                     statement.bindString    (5, "---");                              // lookup
                     statement.bindString    (6, context.getString(R.string.wp_waypoint) + " " + sequence);     // name
-                    statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndex("latitude")));
-                    statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndex("longitude")));
+                    statement.bindDouble    (7, cursor.getDouble(cursor.getColumnIndexOrThrow("latitude")));
+                    statement.bindDouble    (8, cursor.getDouble(cursor.getColumnIndexOrThrow("longitude")));
                     statement.bindString    (9, "");                                 // note
                     statement.bindLong      (10, 1);                                 // own
                     statement.bindLong      (11, 0);                                 // visited
