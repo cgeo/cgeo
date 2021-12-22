@@ -482,8 +482,9 @@ public final class LocalStorage {
             //delete theme files from outdated internal theme file dir
             if (currentVersion < 3) {
                 setMigratedVersion(3, "Move Mapsforge SVG Cache Dir");
-                FileUtils.deleteFilesWithPrefix(getInternalCgeoDirectory(), "svg-");
-                FileUtils.deleteFilesWithPrefix(new File(getInternalCgeoDirectory(), "files"), "svg-");
+                //emergency fix for #12340: SKIP actual migration
+                //FileUtils.deleteFilesWithPrefix(getInternalCgeoDirectory(), "svg-");
+                //FileUtils.deleteFilesWithPrefix(new File(getInternalCgeoDirectory(), "files"), "svg-");
             }
 
             return finalVersion;
