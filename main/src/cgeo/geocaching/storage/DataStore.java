@@ -3025,7 +3025,7 @@ public class DataStore {
             return waypoint;
         } catch (final IllegalArgumentException e) {
             Log.e("error in createWaypointFromDatabaseContent", e);
-            throw new IllegalStateException("colum not found in database");
+            throw new IllegalStateException("column not found in database");
         }
     }
 
