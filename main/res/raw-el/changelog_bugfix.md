@@ -1,8 +1,8 @@
-## 2021.12.19-RC
+## 2021.12.24 Bugfix release
 
 - Διόρθωση: Ενεργοποίηση αναβάθμισης από το OpenAndroMaps v4 σε v5
 - Διόρθωση: Ενεργοποίηση ελέγχων για ενημερώσεις θεμάτων χάρτη
-- Fix: Skip folder migration on exception
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
 
 ## 2021.12.13 Bugfix release
 
