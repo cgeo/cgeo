@@ -9,6 +9,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AsyncTaskWithProgressText;
+import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.EnvironmentUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -440,7 +441,7 @@ public final class LocalStorage {
 
         @Override
         protected Integer doInBackgroundInternal(final Void[] params) {
-            try {
+            try (ContextLogger ignore = new ContextLogger(true, "LocalStorage: perform Migration from " + currentMigrateVersion + " to " + finalVersion)) {
                 return doMigration();
             } catch (RuntimeException re) {
                 Log.e("LocalStorage: Exception during Migration to v" + finalVersion + ", stays in v" + currentMigrateVersion , re);
