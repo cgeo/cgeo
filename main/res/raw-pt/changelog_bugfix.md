@@ -1,8 +1,8 @@
-## 2021.12.19-RC
+## 2021.12.24 Bugfix release
 
 - Correcção: Permitir a actualização a partir de OpenAndroMaps v4 para v5
 - Correcção: Activar verificações de actualizações do tema no mapa
-- Correcção: Ignorar a migração de pastas em caso de excepção
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
 
 ## 2021.12.13 Pacote de correcção de erros
 
