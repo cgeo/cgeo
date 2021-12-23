@@ -1,8 +1,8 @@
-## 2021.12.19-RC
+## 2021.12.24 Bugfix release
 
 - Korrektur: Aktiviere das Upgrade von OpenAndroMaps v4 auf v5
 - Korrektur: Überprüfungen auf Aktualisierung von Kartendesigns aktivieren
-- Korrektur: Ordnermigration bei Fehlern überspringen
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
 
 ## 2021.12.13 Bugfix release
 
