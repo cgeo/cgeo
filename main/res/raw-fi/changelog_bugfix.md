@@ -1,8 +1,8 @@
-## 2021.12.19-RC
+## 2021.12.24 Bugfix release
 
 - Korjaus: Ota käyttöön päivittäminen OpenAndroMaps v4 - v5
 - Korjaus: Ota käyttöön karttateemojen päivitysten tarkistukset
-- Korjaus: Ohita kansioiden siirto poikkeustilanteessa
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
 
 ## 2021.12.13 Viankorjausversio
 
