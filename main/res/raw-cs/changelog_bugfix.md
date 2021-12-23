@@ -1,8 +1,8 @@
-## 2021.12.19-RC
+## 2021.12.24 Bugfix release
 
 - Oprava: Povolena aktualizace z OpenAndroMaps v4 na v5
 - Oprava: Povolena kontrola aktualizací motivů mapy
-- Oprava: Přeskočit migraci složek při výjimce
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
 
 ## 2021.12.13 Vydání opravy chyb
 
