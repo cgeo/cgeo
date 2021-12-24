@@ -1,3 +1,9 @@
+## 2021.12.24 Pacote de correcção de erros
+
+- Correcção: Permitir a actualização a partir de OpenAndroMaps v4 para v5
+- Correcção: Activar verificações de actualizações do tema no mapa
+- Correcção: Ignorar a limpeza de cache do Mapsforge devido a problemas sob certas condições
+
 ## 2021.12.13 Pacote de correcção de erros
 
 - Correcção: ficheiros de cache do Mapsforge: limpeza e novo local (pasta separada)
