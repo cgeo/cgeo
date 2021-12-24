@@ -2,7 +2,7 @@
 
 - Korrektur: Aktiviere das Upgrade von OpenAndroMaps v4 auf v5
 - Korrektur: Überprüfungen auf Aktualisierung von Kartendesigns aktivieren
-- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+- Korrektur: Bereinigung des Mapsforge-Cacheverzeichnisses zurückgenommen, da es unter bestimmten Bedingungen Probleme gab
 
 ## 2021.12.13 Bugfix release
 
