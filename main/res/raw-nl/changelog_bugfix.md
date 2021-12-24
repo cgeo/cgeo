@@ -1,5 +1,11 @@
 ## 2021.12.13 Bugfix release
 
+- Oplossing: Upgraden van OpenAndroMaps v4 naar v5 mogelijk maken
+- Oplossing: Schakel controles in voor kaart thema updates
+- Oplossing: Skip Mapsforge cache opschoning vanwege problemen onder bepaalde omstandigheden
+
+## 2021.12.13 Bugfix release
+
 - Oplossen: Mapsforge's cache bestanden: Opschonen en nieuwe locatie (aparte map)
 - Fix: Freizeitkarte map bestanden: Gebruik 'laatste' map in de downloader als workaround voor tijdelijke server fouten
 - Oplossing: Vermijd de null pointer exceptie in Over pagina's
