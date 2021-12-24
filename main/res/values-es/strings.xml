@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Datos del mapa</string>
     <string name="menu_dashboard">Iniciar sesión en el dashboard</string>
     <string name="menu_history">Historial</string>
+    <string name="menu_search_clipboard">Cargar geocódigo desde el portapapeles</string>
     <string name="menu_history_longstring">Historial de búsqueda</string>
     <string name="menu_filter">Filtro</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
@@ -415,6 +416,18 @@
     <string name="caches_askdeletion">Solicitar borrado si está vacío</string>
     <string name="select_icon">Seleccionar icono</string>
     <string name="onetime_missing_unicode_info">Tu versión de Android no es compatible con la detección automática de iconos - puede que falten algunos caracteres</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d encontrados</item>
+        <item quantity="other">%d encontrados</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d registrados sin conexión</item>
+        <item quantity="other">%d registrado sin conexión</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d caché almacenado</item>
+        <item quantity="other">%d cachés almacenados</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gestionar listas</string>
     <string name="list_menu_create">Crear nueva lista</string>
@@ -620,6 +633,7 @@
     <string name="settings_title_waypoints">Waypoints</string>
     <string name="settings_title_map_content">Contenido del mapa</string>
     <string name="settings_title_map_behavior">Comportamiento del mapa</string>
+    <string name="settings_title_map_style">Estilo de mapa</string>
     <string name="settings_title_data_dir">Carpeta de datos Geocache</string>
     <string name="settings_title_data_dir_usage">Carpeta de datos Geocache (%1$s usado)</string>
     <string name="calculate_dataDir_title">Uso de datos de los cachés</string>
@@ -681,7 +695,14 @@
     <string name="settings_service_active_unavailable">Activo/No disponible</string>
     <string name="settings_navigation_disabled">Esta app no se encuentra instalada</string>
     <string name="init_signature">Firma</string>
+    <string name="init_template_title">Título de la plantilla</string>
+    <string name="init_template_text">Texto de plantilla</string>
+    <string name="init_log_template">Plantilla de registro</string>
+    <string name="init_log_templates">Plantillas de registro</string>
+    <string name="init_log_template_prefix">Plantilla:\u0020</string>
+    <string name="init_log_template_missing_error">Es necesario proporcionar tanto el título de la plantilla como el texto.</string>
     <string name="init_template_help">Las cadenas del marcador de posición - como [NAME] - se rellenan con el texto designado cuando se utiliza la plantilla.</string>
+    <string name="init_signature_template_button">Añadir marcador de posición</string>
     <string name="init_signature_template_date">Fecha</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_datetime">Fecha &amp; hora</string>
@@ -724,7 +745,13 @@
     <string name="init_useInternalRouting">Utilizar el enrutamiento interno</string>
     <string name="init_summary_useInternalRouting">Utilizar el enrutamiento interno de c:geo para poder usar la descarga automática de datos de enrutamiento y otras funciones</string>
     <string name="init_bigSmileysOnMap">Iconos grandes</string>
+    <string name="init_summary_bigSmileysOnMap">Si está activado, se mostrarán en el mapa símbolos como la \"sonrisa encontrada\" o el marcador de \"coordenadas corregidas\" en lugar del icono del tipo de caché.</string>
+    <string name="init_dtMarkerOnCacheIcon">Valoración D/T en iconos de caché</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Mostrar un marcador para las valoraciones de Dificultad (izquierda) y Terreno (derecha) en los marcadores de caché en la esquina superior derecha (el marcador \"almacenado\" se mueve al medio).</string>
     <string name="init_global_wp_extraction_disable">Desactivar extracción de waypoint</string>
+    <string name="init_summary_global_wp_extraction_disable">Deshabilita la extracción global de waypoints de las notas personales de caché. Todavía se puede habilitar para cachés individuales desactivando la casilla de verificación debajo de la nota personal de caché.</string>
+    <string name="init_prevent_cache_note_merge">Sobrescribir nota de caché personal</string>
+    <string name="init_summary_prevent_cache_note_merge">Si esta opción está activada, c:geo eliminará permanentemente la nota almacenada localmente y la reemplazará por la nota personal en el servidor. No se hará ninguna fusión.</string>
     <string name="init_customtabs_as_browser">Usar Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Los sitios web externos se mostrarán sin salir de c:geo (sólo es posible si Chrome está instalado)</string>
     <string name="init_save_log_img">Guardar imágenes</string>
@@ -884,6 +911,8 @@
     <string name="init_maintenance">Mantenimiento</string>
     <string name="init_maintenance_directories_note">c:geo almacena imágenes y otros archivos relacionados con un caché en una carpeta dedicada. En algunos casos (al importar/exportar la base de datos) esta carpeta puede contener archivos obsoletos que se pueden eliminar aquí.</string>
     <string name="init_maintenance_directories">Eliminar archivos huérfanos</string>
+    <string name="init_maintenance_start">Mantenimiento iniciado</string>
+    <string name="init_maintenance_finished">Mantenimiento finalizado</string>
     <string name="init_location">Geolocalización</string>
     <string name="init_location_note">En dispositivos equipados con los servicios Google Play, c:geo puede usar el mejor proveedor de geolocalización de manera automática. Sin embargo, esto impide el uso de un receptor externo de GPS por Bluetooth.</string>
     <string name="init_location_googleplayservices">Usar servicios de Google Play</string>
@@ -1002,6 +1031,14 @@
     <string name="folder_move_finished_dialog_message">El contenido de la carpeta %1$s fue copiado a %2$s.\n\n%3$s de %4$s y %5$s de %6$s fueron procesados.</string>
     <string name="folder_copy_move_finished_dialog_message_failure">La operación falló con el código %1$s mientras se procesaba el archivo %2$s.</string>
     <string name="folder_move_finished_dialog_tap">Pulse \'ok\' para finalizar el cambio de carpeta.</string>
+    <plurals name="file_count">
+        <item quantity="one">archivo %1$d</item>
+        <item quantity="other">archivos %1$d</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">Carpeta %1$d</item>
+        <item quantity="other">Carpetas %1$d</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Comprobar autenticación</string>
@@ -1785,6 +1822,7 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_historic_no">No hay estructura abandonada / No hay ruinas</string>
     <string name="attribute_blind_people_yes">Adecuado a personas invidentes</string>
     <string name="attribute_blind_people_no">No adecuado a personas invidentes</string>
+    <string name="attribute_unknown">Atributo desconocido</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Requiere herramientas</string>
     <string name="cat_type">Tipo</string>
@@ -1843,6 +1881,10 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
+    <plurals name="days_ago">
+        <item quantity="one">hace %d día</item>
+        <item quantity="other">hace %d días</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>
@@ -1946,6 +1988,10 @@ Nombre de archivo:%2$s</string>
     <string name="sorted_route_saved">Ruta individual guardada</string>
     <string name="load_individual_route_error">Error al cargar la ruta individual</string>
     <string name="route_item_not_yet_loaded">Los elementos de ruta aún no se han cargado</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Ruta cargada con %d punto de ruta</item>
+        <item quantity="other">Ruta cargada con %d puntos de ruta</item>
+    </plurals>
     <string name="center_on_route">Centrar en la ruta</string>
     <string name="individual_route_set_as_start_title">Establecer como inicio de ruta</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
@@ -1954,6 +2000,10 @@ Nombre de archivo:%2$s</string>
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
     <string name="map_load_track_wait">Cargando pista/ruta en segundo plano…</string>
     <string name="map_load_track_confirm">¿Sobrescribir pista/ruta existente?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Pista/ruta cargada (%d punto de seguimiento)</item>
+        <item quantity="other">Pista/ruta cargada (%d puntos de seguimiento)</item>
+    </plurals>
     <string name="load_track_error">Error al cargar pista/ruta</string>
     <string name="map_unload_track">Descargar pista/ruta</string>
     <string name="center_on_track">Centrar en la pista/ruta</string>
@@ -2039,6 +2089,7 @@ Nombre de archivo:%2$s</string>
     <string name="mapserver_hylly_info">Mapas detallados para Finlandia, requieren uno de los temas del mapa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema detallado del mapa, construido para mapas \"Hylly\"</string>
     <string name="brouter_info">Servicio de ruta sin conexión</string>
+    <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rutas, [W] Vías</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Borrar historial de ruta</string>
     <string name="map_trailhistory_cleared">historial de ruta borrado</string>
