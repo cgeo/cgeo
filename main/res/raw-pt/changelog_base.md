@@ -9,6 +9,8 @@
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
 - Novo: Visão geral de atributos (ver Gerir Caches => Visão geral de atributos)
+- Novo: Adicionar importação de listas de favoritos (apenas membros premium GC)
+- Novo: Inverter a ordenação com um toque sem soltar na barra de ordenação
 
 ### Detalhes da cache
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
@@ -22,4 +24,6 @@
 - Alteração: Remoção do BRouter da lista de aplicações úteis (ainda pode usar a navegação externa e interna)
 - Correcção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
 - Correcção: Optimizado o suporte a aplicações externas de auto-preenchimento de palavras-passe nas definições
+- Correcção: Activação das dicas de contexto (tooltips) em sistemas Android inferiores à versão 8
 - Definições redesenhadas para atender às especificações actuais do Android
+- Actualizada a API de MapsWithMe

@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Données cartographiques</string>
     <string name="menu_dashboard">Tableau de bord de connexion</string>
     <string name="menu_history">Historique</string>
+    <string name="menu_search_clipboard">Charger le géocode du presse-papiers</string>
     <string name="menu_history_longstring">Historique des trouvailles</string>
     <string name="menu_filter">Filtre</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -421,6 +422,10 @@
     <plurals name="user_finds_offline">
         <item quantity="one">%d loguée hors ligne</item>
         <item quantity="other">%d loguées hors ligne</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache enregistrée</item>
+        <item quantity="other">%d caches enregistrées</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Gérer les listes</string>
@@ -627,6 +632,7 @@
     <string name="settings_title_waypoints">Points de passage</string>
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
+    <string name="settings_title_map_style">Style de carte</string>
     <string name="settings_title_data_dir">Dossier de données des Geocaches</string>
     <string name="settings_title_data_dir_usage">Dossier de stockage des géocaches (actuellement %1$s)</string>
     <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>
@@ -688,7 +694,14 @@
     <string name="settings_service_active_unavailable">Active / Indisponible</string>
     <string name="settings_navigation_disabled">Cette application ne semble ne pas être installée</string>
     <string name="init_signature">Signature</string>
+    <string name="init_template_title">Titre du modèle</string>
+    <string name="init_template_text">Texte du modèle</string>
+    <string name="init_log_template">Modèle de log</string>
+    <string name="init_log_templates">Modèles de log</string>
+    <string name="init_log_template_prefix">Modèle :\u0020</string>
+    <string name="init_log_template_missing_error">Vous devez saisir le titre et le texte du modèle.</string>
     <string name="init_template_help">Les balises de remplacement - comme [NAME] - sont renseignées avec le texte présent dans le modèle utilisé.</string>
+    <string name="init_signature_template_button">Insérer un champ dynamique</string>
     <string name="init_signature_template_date">Date</string>
     <string name="init_signature_template_time">Heure</string>
     <string name="init_signature_template_datetime">Date &amp; Heure</string>
@@ -731,7 +744,12 @@
     <string name="init_useInternalRouting">Utiliser le calcul d\'itinéraire interne</string>
     <string name="init_summary_useInternalRouting">Utiliser le routage interne de c:geo pour pouvoir utiliser le téléchargement automatique des données de routage et d\'autres fonctions</string>
     <string name="init_bigSmileysOnMap">Grands icônes</string>
+    <string name="init_summary_bigSmileysOnMap">Lorsqu\'actif, des icônes de grande taille comme « smiley trouvé » ou « coordonnées modifiées » sont affichés à la place de l\'icône « type de cache ».</string>
+    <string name="init_dtMarkerOnCacheIcon">Notation D/T sur les icônes de cache</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Afficher des icônes pour la Difficulté (à gauche) et pour le Terrain (à droite) dans le coin supérieur droit de la cache (l\'indicateur \"Enregistré\" est alors placé au milieu).</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
+    <string name="init_prevent_cache_note_merge">Remplacer la note personnelle de la cache</string>
+    <string name="init_summary_prevent_cache_note_merge">Si ce paramètre est activé, c:geo supprimera définitivement la note stockée localement et la remplacera par la note personnelle sur le serveur. Aucune fusion ne sera effectuée.</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Les sites web externes seront affichés sans quitter c:geo (uniquement possible si Chrome est installé)</string>
     <string name="init_save_log_img">Enregistrer les images</string>
@@ -891,6 +909,8 @@
     <string name="init_maintenance">Maintenance</string>
     <string name="init_maintenance_directories_note">c:geo stocke les images et d\'autres fichiers associés à une cache dans un dossier dédié. Dans certains cas (comme l\'importation/exportation de la base de données), ce dossier peut contenir des fichiers obsolètes qui peuvent être supprimés ici.</string>
     <string name="init_maintenance_directories">Supprimer les fichiers orphelins</string>
+    <string name="init_maintenance_start">Début de la maintenance</string>
+    <string name="init_maintenance_finished">Maintenance terminée</string>
     <string name="init_location">Géolocalisation</string>
     <string name="init_location_note">Sur les appareils équipés des services Google Play, c:geo peut automatiquement utiliser un meilleur fournisseur de données de géolocalisation. Cependant, cela empêche l\'utilisation d\'un appareil GPS externe BlueTooth.</string>
     <string name="init_location_googleplayservices">Utiliser les services Google Play</string>
@@ -1798,6 +1818,7 @@
     <string name="attribute_historic_no">Aucun bâtiment abandonné ou ruine</string>
     <string name="attribute_blind_people_yes">Handicap : non-voyant</string>
     <string name="attribute_blind_people_no">Pas de handicap : aveugle</string>
+    <string name="attribute_unknown">Attribut inconnu</string>
     <!-- cache attribute categories -->
     <string name="cat_tools">Outils requis</string>
     <string name="cat_type">Type</string>
@@ -2066,6 +2087,7 @@
     <string name="mapserver_hylly_info">Cartes détaillées pour la Finlande, nécessite l\'un des thèmes de carte \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Thème de carte détaillé et optimisé pour les cartes \"Hylly\"</string>
     <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
+    <string name="maptheme_elevate_categoryinfo">Pertinent pour : [A] Zones, [P] POI, [R] Itinéraires, [W] Voies</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
     <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>

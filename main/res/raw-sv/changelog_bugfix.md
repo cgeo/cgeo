@@ -1,3 +1,9 @@
+## 2021.12.24 Bugfix release
+
+- Fix: Enable upgrading from OpenAndroMaps v4 to v5
+- Fix: Enable checks for map theme updates
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+
 ## 2021.12.13 Bugfix release
 
 - Fix: Mapsforges cachefiler: Rensa och ny plats (separat mapp)

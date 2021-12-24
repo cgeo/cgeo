@@ -9,6 +9,8 @@
 ### Cache list
 - New: Option to select next 20 caches
 - New: Attributes overview (see Manage Caches => Attributes overview)
+- New: Add import from bookmark lists (GC premium only)
+- New: Invert sort-order on long click on sort bar
 
 ### Détails de la cache
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
@@ -22,4 +24,6 @@
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
 - Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
+- Updated MapsWithMe API

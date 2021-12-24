@@ -1,3 +1,9 @@
+## 2021.12.24 Bugfix release
+
+- Korjaus: Ota käyttöön päivittäminen OpenAndroMaps v4 - v5
+- Korjaus: Ota käyttöön karttateemojen päivitysten tarkistukset
+- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+
 ## 2021.12.13 Viankorjausversio
 
 - Korjaa: Mapsforgen välimuistitiedostot: Puhdistus ja uusi sijainti (erillinen kansio)
