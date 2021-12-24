@@ -745,7 +745,13 @@
     <string name="init_useInternalRouting">Internes Routing verwenden</string>
     <string name="init_summary_useInternalRouting">Verwende das c:geo-interne Routing, um Routingdaten automatisch herunterzuladen oder andere Funktionen nutzen zu können</string>
     <string name="init_bigSmileysOnMap">Große Symbole</string>
+    <string name="init_summary_bigSmileysOnMap">Wenn aktiviert, werden Symbole wie \'Gefunden\' oder \'Korrigierte Koordination\' auf der Karte vergrößert anstelle des Cache-Typ-Symbols angezeigt.</string>
+    <string name="init_dtMarkerOnCacheIcon">D/T-Bewertung in Cache-Symbolen</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Zeige eine Markierung für die Schwierigkeitswertung (links) und die Geländewertung (rechts) von Caches in der oberen rechten Ecke (\"Gespeichert\"-Markierung wird in die Mitte verschoben).</string>
     <string name="init_global_wp_extraction_disable">Wegpunkte nicht auslesen</string>
+    <string name="init_summary_global_wp_extraction_disable">Deaktiviere global das Auslesen von Wegpunkten aus den persönlichen Cachenotizen. Es kann dann weiterhin individuell bei Caches aktiviert werden, indem der Haken unter dem Eingabefeld herausgenommen wird.</string>
+    <string name="init_prevent_cache_note_merge">Persönliche Cache-Notiz überschreiben</string>
+    <string name="init_summary_prevent_cache_note_merge">Wenn diese Einstellung aktiviert ist, wird c:geo die lokal gespeicherte Notiz dauerhaft löschen und durch die persönliche Notiz auf dem Server ersetzen. Es wird keine Zusammenführung der Versionen geben.</string>
     <string name="init_customtabs_as_browser">Chrome WebView verwenden</string>
     <string name="init_summary_customtabs_as_browser">Externe Websites werden angezeigt, ohne c:geo zu verlassen (nur möglich, wenn Chrome installiert ist)</string>
     <string name="init_save_log_img">Logbilder</string>
