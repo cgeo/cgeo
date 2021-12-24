@@ -634,6 +634,7 @@
     <string name="settings_title_waypoints">Punts de ruta</string>
     <string name="settings_title_map_content">Contingut del mapa</string>
     <string name="settings_title_map_behavior">Comportament del mapa</string>
+    <string name="settings_title_map_style">Estil de mapa</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -695,7 +696,14 @@
     <string name="settings_service_active_unavailable">Actiu/No disponible</string>
     <string name="settings_navigation_disabled">Aquesta aplicació no s\'ha instal·lat.</string>
     <string name="init_signature">Signatura</string>
+    <string name="init_template_title">Títol de la plantilla</string>
+    <string name="init_template_text">Text de la plantilla</string>
+    <string name="init_log_template">Plantilla de registre</string>
+    <string name="init_log_templates">Plantilles de registre</string>
+    <string name="init_log_template_prefix">Plantilla:\u0020</string>
+    <string name="init_log_template_missing_error">Cal proporcionar tant el títol com el text de la plantilla.</string>
     <string name="init_template_help">Les cadenes de marcador de posició, com ara [NAME], s’omplen amb el text designat quan s’utilitza la plantilla.</string>
+    <string name="init_signature_template_button">Insereix un marcador de posició</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Hora</string>
     <string name="init_signature_template_datetime">Data i hora</string>
@@ -738,7 +746,13 @@
     <string name="init_useInternalRouting">Utilitzeu l’encaminament intern</string>
     <string name="init_summary_useInternalRouting">Utilitzeu l’encaminament intern per poder utilitzar la descàrrega automàtica de dades d’encaminament i altres funcions</string>
     <string name="init_bigSmileysOnMap">Icones grans</string>
+    <string name="init_summary_bigSmileysOnMap">Si està activat, els símbols de \'\" trobat\" o el marcador de \"coordenades corregides\" es mostraran ampliats al mapa en lloc de la icona de tipus de catxé.</string>
+    <string name="init_dtMarkerOnCacheIcon">Classificació D/T a les icones del catxé</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Mostra un marcador per a les classificacions de Dificultat (esquerra) i Terreny (dreta) als marcadors de catxé a la cantonada superior dreta (el marcador \"emmagatzemat\" es mou al centre).</string>
     <string name="init_global_wp_extraction_disable">Desactiva l\'extracció de punts de ruta</string>
+    <string name="init_summary_global_wp_extraction_disable">Desactiveu l\'extracció global de punts de ruta de les notes personals de catxés. Encara es pot activar per a catxés individuals desactivant la casella de selecció que hi ha a sota de la nota personal del catxé.</string>
+    <string name="init_prevent_cache_note_merge">Sobreescriu la nota personal del catxé</string>
+    <string name="init_summary_prevent_cache_note_merge">Si aquesta configuració està activada, c:geo suprimirà la nota emmagatzemada localment de manera permanent i la substituirà per la nota personal al servidor. No es farà cap fusió.</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
     <string name="init_save_log_img">Desa les imatges</string>
@@ -898,6 +912,8 @@
     <string name="init_maintenance">Manteniment</string>
     <string name="init_maintenance_directories_note">C: geo emmagatzema imatges i altres fitxers relacionats amb catxés en una carpeta dedicada. En alguns casos (per exemple, quan s’importa / exporta la base de dades), aquesta carpeta pot contenir fitxers obsolets que es poden suprimir aquí.</string>
     <string name="init_maintenance_directories">Suprimeix els arxius orfes</string>
+    <string name="init_maintenance_start">S\'ha iniciat el manteniment</string>
+    <string name="init_maintenance_finished">Manteniment acabat</string>
     <string name="init_location">Geolocalització</string>
     <string name="init_location_note">En dispositius equipats amb Google Play el c:geo pot utilitzar automàticament un proveïdor de geolocalització millor. Tanmateix, això evita l\'ús d\'un receptor GPS BlueTooth extern.</string>
     <string name="init_location_googleplayservices">Utilitza els serveis de Google Play</string>
@@ -2074,6 +2090,7 @@
     <string name="mapserver_hylly_info">Els mapes detallats de Finlàndia requereixen un dels temes de mapes \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema detallat del mapa, creat per als mapes \"Hylly\"</string>
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
+    <string name="maptheme_elevate_categoryinfo">Rellevant per a: [A] Àrees, [P] POI, [R] Rutes, [W] Camins</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
