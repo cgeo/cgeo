@@ -1,10 +1,10 @@
-## 2021.12.24 Bugfix release
+## 2021.12.24 Vydanie opravy chyby
 
-- Fix: Enable upgrading from OpenAndroMaps v4 to v5
-- Fix: Enable checks for map theme updates
-- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+- Oprava: Umožňuje aktualizáciu OpenAndroMaps v4 na v5
+- Oprava: Umožňuje overovať aktualizácie mapových motívov
+- Oprava: Preskočenie čistenia vyrovnávacej památe z dôvodu problémov za určitých podmienok
 
-## 2021.12.13 Bugfix release
+## 2021.12.13 Vydanie opravy chyby
 
 - Oprava: Súbory kešiek pre Mapsforge – čistenie a nové umiestnenie (samostatný priečinok)
 - Oprava: Mapové súbory Freizeitkarte - použitie "najnovšieho" priečinka pri preberaní ako riešenia pre dočasné chyby servera
@@ -13,4 +13,4 @@
 - Oprava: Zobrazenie hlásenia o chybe, ak nemožno nájsť kešku počas pokusu o jej obnovenie
 - Oprava: Zobrazenie systémom predvoleného prehliadača vo voľbe aplikácie pri použití položky "Otvoriť v prehliadači" pre kešku
 - Oprava: Prispôsobenie preberania súborov na použitie novej stránky motívov a nových máp v5 pre OpenAndroidMaps
-- Fix: On changing a path setting don't ask user for copy or move if old path has no files
+- Oprava: Pri zmene nastavenia umiestnenia sa nepýtať použivateľa na kopírovanie ani premiestnenie, ak v starom umiestnení nie sú žiadne súbory
