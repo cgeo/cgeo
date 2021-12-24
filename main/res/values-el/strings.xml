@@ -737,6 +737,9 @@
     <string name="init_useInternalRouting">Χρήση εσωτερικής δρομολόγησης</string>
     <string name="init_summary_useInternalRouting">Χρησιμοποιήστε την εσωτερική δρομολόγηση του c:geo για να μπορείτε να χρησιμοποιήσετε την αυτόματη δρομολόγηση δεδομένων λήψης και ενημέρωσης</string>
     <string name="init_bigSmileysOnMap">Μεγάλα εικονίδια</string>
+    <string name="init_summary_bigSmileysOnMap">Αν ενεργοποιηθεί, σύμβολα όπως το smiley \'Βρέθηκε \' ή το smiley \'Διορθωμένες συντεταγμένες\' θα εμφανιστούν μεγαλύτερα στο χάρτη αντί του εικονιδίου τύπου κρύπτης (απαιτείται επανεκκίνηση).</string>
+    <string name="init_dtMarkerOnCacheIcon">Δ/Ε στο εικονίδιο κρύπτης</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Εμφάνιση ενός δείκτη για τις βαθμολογίες Δυσκολίας (αριστερά) και Εδάφους (δεξιά) σε δείκτες κρυπτών στην επάνω δεξιά γωνία ενώ ο δείκτης \"Αποθηκευμένη\" μετακινείται στη μέση.</string>
     <string name="init_global_wp_extraction_disable">Απενεργοποίηση εξαγωγής των σημείων ενδιαφέροντος</string>
     <string name="init_summary_global_wp_extraction_disable">Απενεργοποιήστε παντού την εξαγωγή σημείου διαδρομής από προσωπικές σημειώσεις κρυπτών. Μπορεί όμως να ενεργοποιηθεί για μεμονωμένες κρύπτες απενεργοποιώντας το πλαίσιο ελέγχου κάτω από την προσωπική σημείωση της κρύπτης.</string>
     <string name="init_prevent_cache_note_merge">Αντικατάσταση Προσωπικής Σημείωσης Κρύπτης</string>
