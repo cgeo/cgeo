@@ -9,6 +9,8 @@
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
 - Novinka: Přehled atributů (viz Správa kešek => Přehled atributů)
+- Novinka: Přidána možnost importu ze seznamu záložek (pouze GC prémium)
+- Novinka: Invertované řazení při dlouhém kliknutí na řádek řazení
 
 ### Detaily kešky
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
@@ -22,4 +24,6 @@
 - Změna: BRouter odebrán ze seznamu užitečných aplikací (stále můžete používat externí i interní navigaci)
 - Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
 - Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
+- Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
 - Přepracováno nastavení pro splnění aktuálních specifikací systému Android
+- Aktualizováno MapsWithMe API
