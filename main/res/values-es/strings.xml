@@ -1001,6 +1001,14 @@
     <string name="folder_move_finished_dialog_message">El contenido de la carpeta %1$s fue copiado a %2$s.\n\n%3$s de %4$s y %5$s de %6$s fueron procesados.</string>
     <string name="folder_copy_move_finished_dialog_message_failure">La operación falló con el código %1$s mientras se procesaba el archivo %2$s.</string>
     <string name="folder_move_finished_dialog_tap">Pulse \'ok\' para finalizar el cambio de carpeta.</string>
+    <plurals name="file_count">
+        <item quantity="one">archivo %1$d</item>
+        <item quantity="other">archivos %1$d</item>
+    </plurals>
+    <plurals name="folder_count">
+        <item quantity="one">Carpeta %1$d</item>
+        <item quantity="other">Carpetas %1$d</item>
+    </plurals>
     <!-- auth generic -->
     <string name="auth_authorize">Autorizar c:geo</string>
     <string name="auth_check">Comprobar autenticación</string>
@@ -1831,6 +1839,10 @@ Nombre de archivo:%2$s</string>
     <string name="tts_oclock">%s en punto</string>
     <!-- various -->
     <string name="clipboard_copy_ok">Copiado al portapapeles</string>
+    <plurals name="days_ago">
+        <item quantity="one">hace %d día</item>
+        <item quantity="other">hace %d días</item>
+    </plurals>
     <!-- shortcuts -->
     <string name="cgeo_shortcut">Atajo de c:geo</string>
     <string name="create_shortcut">Crear atajo</string>
@@ -1934,6 +1946,10 @@ Nombre de archivo:%2$s</string>
     <string name="sorted_route_saved">Ruta individual guardada</string>
     <string name="load_individual_route_error">Error al cargar la ruta individual</string>
     <string name="route_item_not_yet_loaded">Los elementos de ruta aún no se han cargado</string>
+    <plurals name="individual_route_loaded">
+        <item quantity="one">Ruta cargada con %d punto de ruta</item>
+        <item quantity="other">Ruta cargada con %d puntos de ruta</item>
+    </plurals>
     <string name="center_on_route">Centrar en la ruta</string>
     <string name="individual_route_set_as_start_title">Establecer como inicio de ruta</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
@@ -1942,6 +1958,10 @@ Nombre de archivo:%2$s</string>
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
     <string name="map_load_track_wait">Cargando pista/ruta en segundo plano…</string>
     <string name="map_load_track_confirm">¿Sobrescribir pista/ruta existente?</string>
+    <plurals name="load_track_success">
+        <item quantity="one">Pista/ruta cargada (%d punto de seguimiento)</item>
+        <item quantity="other">Pista/ruta cargada (%d puntos de seguimiento)</item>
+    </plurals>
     <string name="load_track_error">Error al cargar pista/ruta</string>
     <string name="map_unload_track">Descargar pista/ruta</string>
     <string name="center_on_track">Centrar en la pista/ruta</string>
