@@ -753,7 +753,13 @@
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
     <string name="init_useInternalRouting">Použiť internú navigáciu</string>
     <string name="init_summary_useInternalRouting">Použitie internej navigácie c:geo, aby bolo možné využívať automatické preberanie údajov navigácie a ďalšie funkcie</string>
+    <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
+    <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
+    <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške.</string>
+    <string name="init_prevent_cache_note_merge">Prepísať osobnú poznámku ku keške</string>
+    <string name="init_summary_prevent_cache_note_merge">Ak je toto nastavenie aktivované, c:geo natrvalo odstráni uloženú poznámku a nahradí ju osobnou poznámkou zo servera. Neurobí sa žiadne zlúčenie.</string>
     <string name="init_customtabs_as_browser">Použiť Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externé webové stránky sa budú zobrazovať bez opustenia c:geo (možné len vtedy, ak je nainštalované Chrome)</string>
     <string name="init_save_log_img">Ukladať obrázky</string>
@@ -2134,6 +2140,7 @@
     <string name="mapserver_hylly_info">Podrobné mapy pre Fínsko, vyžaduje jednu z mapových tém \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Podrobná mapová téma, zabudovaná pre mapy \"Hylly\"</string>
     <string name="brouter_info">Služba offline navigácie</string>
+    <string name="maptheme_elevate_categoryinfo">Týka sa: [A] Oblasti, [P] POI, [R] Trasy, [W] Spôsoby</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazať históriu trasy</string>
     <string name="map_trailhistory_cleared">História trasy vymazaná</string>
