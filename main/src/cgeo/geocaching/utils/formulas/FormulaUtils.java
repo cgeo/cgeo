@@ -7,7 +7,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Random;
+import java.util.Locale;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -16,8 +16,6 @@ import java.util.regex.Pattern;
  * Holds implementations for functions in Formula
  */
 public class FormulaUtils {
-
-    private static final Random RANDOM = new Random(System.currentTimeMillis());
 
     private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
         "[^a-zA-Z0-9(](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10})((( *[()] *)*( *[-+/:*x] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10}))+( *\\) *)*)[^a-zA-Z0-9)]");
@@ -31,10 +29,12 @@ public class FormulaUtils {
         //no instance
     }
 
-    public static int random(final int max, final int min) {
-        final int umax = max < 0 ? 10 : max;
-        final int umin = Math.max(min, 0);
-        return RANDOM.nextInt(umax - umin) + umin;
+    public static double round(final double value, final int digits) {
+        if (digits <= 0) {
+            return Math.round(value);
+        }
+        final double factor = Math.pow(10, digits);
+        return Math.round(value * factor) / factor;
     }
 
     public static String substring(final String value, final int start, final int length) {
@@ -43,6 +43,13 @@ public class FormulaUtils {
         }
         final int s = Math.max(0, start);
         return value.substring(s, Math.min(Math.max(s + length, s), value.length()));
+    }
+
+    public static Value ifFunction(final ValueList values) {
+        if (values.getAsDouble(0) >= 0.9d || Boolean.parseBoolean(values.getAsString(0, ""))) {
+            return values.get(1);
+        }
+        return values.size() > 2 ? values.get(2) : Value.of(0);
     }
 
     public static int valueChecksum(final Value value, final boolean iterative) {
@@ -144,5 +151,102 @@ public class FormulaUtils {
         return true;
     }
 
+    public static int roman(final String value) {
+        int result = 0;
+        int lastDigit = -1;
+        char last = '-';
+        for (char current : value.toUpperCase(Locale.US).toCharArray()) {
+            final int currentDigit = romanDigit(current);
+            if (last != '-') {
+                if (currentDigit <= lastDigit) {
+                    result += lastDigit;
+                } else {
+                    result -= lastDigit;
+                }
+            }
+            last = currentDigit < 0 ? '-' : current;
+            lastDigit = currentDigit;
+        }
+        if (last != '-') {
+            result += lastDigit;
+        }
+        return result;
+    }
+
+    private static int romanDigit(final char c) {
+        //I=1, V=5, X=10, L=50, C=100, D=500, M=1000
+        switch (c) {
+            case 'I':
+                return  1;
+            case 'V':
+                return 5;
+            case 'X':
+                return 10;
+            case 'L':
+                return 50;
+            case 'C':
+                return 100;
+            case 'D':
+                return 500;
+            case 'M':
+                return 1000;
+            default:
+                return -1;
+        }
+    }
+
+    public static int vanity(final String value) {
+        int result = 0;
+        for (char c : value.toUpperCase(Locale.US).toCharArray()) {
+            result = result * 10 + vanityDigit(c);
+        }
+        return result;
+    }
+
+    private static int vanityDigit(final char c) {
+        switch (c) {
+            case '.':
+            case ',':
+            case '?':
+            case '!':
+                return 1;
+            case 'A':
+            case 'B':
+            case 'C':
+                return 2;
+            case 'D':
+            case 'E':
+            case 'F':
+                return 3;
+            case 'G':
+            case 'H':
+            case 'I':
+                return 4;
+            case 'J':
+            case 'K':
+            case 'L':
+                return 5;
+            case 'M':
+            case 'N':
+            case 'O':
+                return 6;
+            case 'P':
+            case 'Q':
+            case 'R':
+            case 'S':
+                return 7;
+            case 'T':
+            case 'U':
+            case 'V':
+                return 8;
+            case 'W':
+            case 'X':
+            case 'Y':
+            case 'Z':
+                return 9;
+            default:
+                return 0;
+        }
+    }
 
 }

@@ -28,15 +28,15 @@ public enum FormulaFunction {
     ABS("abs", FunctionGroup.SIMPLE_NUMERIC, 0, "Absolute Value", null, 0,
         singleValueNumericFunction(Math::round)),
     ROUND("round", FunctionGroup.SIMPLE_NUMERIC, 0, "Round", null, 0,
-        singleValueNumericFunction(Math::round)),
+        p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), p.getAsInt(1, 0)))),
 
-    RANDOM("random", FunctionGroup.COMPLEX_NUMERIC, 0, "Random Integer Number", null, 0, p -> Value.of(FormulaUtils.random(p.getAsInt(0, -1), p.getAsInt(1, -1)))),
+    IF("if", FunctionGroup.COMPLEX_NUMERIC, 0, "If", null, 0,
+        minMaxParamFunction(2, 3, FormulaUtils::ifFunction)),
 
     LENGTH("length", FunctionGroup.SIMPLE_STRING, 0, "String Length", "''", 1,
         singleValueStringFunction(String::length)),
     SUBSTRING(new String[]{"substring", "sub"}, FunctionGroup.SIMPLE_STRING, 0, "Substring", "'';0;1", 1,
         minMaxParamFunction(1, 3, p -> FormulaUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
-
 
     ROT13("rot13", FunctionGroup.COMPLEX_STRING, 0, "Rotate characters by 13", "''", 1,
         minMaxParamFunction(1, 1, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), 13)))),
@@ -47,7 +47,11 @@ public enum FormulaFunction {
     ICHECKSUM(new String[]{"ichecksum", "ics" }, FunctionGroup.COMPLEX_NUMERIC, 0, "Iterative Checksum", null, 0,
         minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), true))),
     LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv" }, FunctionGroup.COMPLEX_STRING, 0, "Letter Value", "''", 1,
-        singleValueStringFunction(FormulaUtils::letterValue));
+        singleValueStringFunction(FormulaUtils::letterValue)),
+    ROMAN("roman", FunctionGroup.COMPLEX_STRING, 0, "Roman", "''", 1,
+        singleValueStringFunction(FormulaUtils::roman)),
+    VANITY(new String[]{ "vanity", "vanitycode", "vc" }, FunctionGroup.COMPLEX_STRING, 0, "Roman", "''", 1,
+          singleValueStringFunction(FormulaUtils::vanity));
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(0, "Simple Numeric"),
