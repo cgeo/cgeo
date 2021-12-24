@@ -1,8 +1,8 @@
-## 2021.12.24 Bugfix release
+## 2021.12.13 Bugfix release
 
 - Oplossing: Upgraden van OpenAndroMaps v4 naar v5 mogelijk maken
 - Oplossing: Schakel controles in voor kaart thema updates
-- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+- Oplossing: Skip Mapsforge cache opschoning vanwege problemen onder bepaalde omstandigheden
 
 ## 2021.12.13 Bugfix release
 
