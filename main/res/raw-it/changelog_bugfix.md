@@ -1,8 +1,8 @@
-## 2021.12.24 Bugfix release
+## 2021.12.24 Release di risoluzione dei bug
 
-- Fix: Enable upgrading from OpenAndroMaps v4 to v5
-- Fix: Enable checks for map theme updates
-- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+- Corretto: abilita l'aggiornamento da OpenAndroMaps v4 a v5
+- Corretto: abilita i controlli per gli aggiornamenti del tema della mappa
+- Correzione: Salta la pulizia della cache di Mapsforge a causa di problemi sotto certe condizioni
 
 ## 2021.12.13 Bugfix release
 
@@ -13,4 +13,4 @@
 - Corretto: visualizza il messaggio di errore se non è stato trovato un cache durante il tentativo di aggiornarne le informazioni
 - Risolto: Mostra browser predefinito di sistema nella selezione delle app usando 'Apri nel browser' per una cache
 - Risolto: Adatta il downloader per usare la pagina del nuovo tema per le nuove OpenAndroMaps v5
-- Fix: On changing a path setting don't ask user for copy or move if old path has no files
+- Corretto: quando si cambia l'impostazione di percorso non viene chiesto all'utente di copiare o spostare file se il vecchio percorso non ne ha
