@@ -13,7 +13,7 @@
 - New: Invert sort-order on long click on sort bar
 
 ### Cache details
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- Nyt: Indsæt aktuelle cachekoordinater i geochecker (hvis cachen har en geochecker)
 
 ### Other
 - New: Quick-load geocodes from clipboard text in mainscreen search
