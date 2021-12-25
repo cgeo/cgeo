@@ -633,6 +633,7 @@
     <string name="settings_title_waypoints">Waypoint</string>
     <string name="settings_title_map_content">Contenuto Mappa</string>
     <string name="settings_title_map_behavior">Comportamento mappa</string>
+    <string name="settings_title_map_style">Stile della mappa</string>
     <string name="settings_title_data_dir">Cartella dati geocache</string>
     <string name="settings_title_data_dir_usage">Cartella dati geocache (%1$s utilizzata)</string>
     <string name="calculate_dataDir_title">Dati Geocache usati</string>
@@ -744,7 +745,13 @@
     <string name="init_useInternalRouting">Usa navigatore integrato</string>
     <string name="init_summary_useInternalRouting">Usa il routing interno c:geo per poter utilizzare il download automatico dei dati di routing e altre funzioni</string>
     <string name="init_bigSmileysOnMap">Icone grandi</string>
+    <string name="init_summary_bigSmileysOnMap">Se abilitato, i simboli come \'trovato\' o \'coordinate corrette\' verranno mostrati ingranditi sulla mappa invece dell\'icona tipo cache (richiede il riavvio).</string>
+    <string name="init_dtMarkerOnCacheIcon">Livello D/T sulle icone della cache</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Mostra un marcatore per le classificazioni di Difficoltà (sinistra) e Terreno (destra) sui marcatori della cache nell\'angolo in alto a destra (il marcatore \"memorizzato\" è spostato al centro).</string>
     <string name="init_global_wp_extraction_disable">Disabilita estrazione waypoint</string>
+    <string name="init_summary_global_wp_extraction_disable">Disabilita globalmente l\'estrazione dei waypoint dalle note personali del cache. Può ancora essere abilitata per i singoli cache disattivando la casella sotto la nota personale del cache.</string>
+    <string name="init_prevent_cache_note_merge">Sovrascrivi Nota Personale cache</string>
+    <string name="init_summary_prevent_cache_note_merge">Se questa impostazione è abilitata, c:geo eliminerà definitivamente la nota memorizzata localmente e la sostituirà con la nota personale sul server. Nessuna fusione sarà fatta.</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">I siti web esterni saranno visualizzati senza lasciare c:geo (possibile solo se Chrome è installato)</string>
     <string name="init_save_log_img">Salva immagini</string>
@@ -2086,6 +2093,7 @@
     <string name="mapserver_hylly_info">Le mappe dettagliate per la Finlandia, richiedono uno dei temi mappa \"Hylly\"</string>
     <string name="mapserver_hylly_themes_info">Tema mappa dettagliato, creato per le mappe \"Hylly\"</string>
     <string name="brouter_info">Servizio di navigazione offline</string>
+    <string name="maptheme_elevate_categoryinfo">Rilevante per: [A] Aree, [P] POI, [R] Percorsi, [W] Vie</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
