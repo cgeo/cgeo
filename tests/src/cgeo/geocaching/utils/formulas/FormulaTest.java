@@ -133,9 +133,8 @@ public class FormulaTest {
 
     @Test
     public void functions() {
-        assertThat(eval("random(1)")).isEqualTo(0);
-        assertThat(eval("random()")).isBetween(0d, 9d);
-        assertThat(eval("random(1;0)")).isEqualTo(0d);
+        assertThat(eval("round(1.2)")).isEqualTo(1);
+        assertThat(eval("round(1.2345;3)")).isEqualTo(1.235d);
         assertThat(Formula.evaluate("rot13('abc')").getRaw()).isEqualTo("nop");
         assertThat(Formula.evaluate("rot13(rot('aBc'; -13))").getRaw()).isEqualTo("aBc");
         assertThat(Formula.evaluate("rot('abc'; 1)").getRaw()).isEqualTo("bcd");
@@ -303,14 +302,36 @@ public class FormulaTest {
     }
 
     @Test
-    public void unusualCharacter() {
+    public void unusualCharacters() {
         assertThat(eval("(3+5) * (4+7)")).isEqualTo(88d);
-        assertThat(eval("(3[5])")).isEqualTo(35d);
         assertThat(eval("42•2")).isEqualTo(84d);
         assertThat(eval("42÷2")).isEqualTo(21d);
         assertThat(eval("42:2")).isEqualTo(21d);
         assertThat(eval("42—2")).isEqualTo(40d);
         assertThat(eval("—2")).isEqualTo(-2d);
+    }
+
+    @Test
+    public void comparison() {
+        assertThat(eval("3==3")).isEqualTo(1d);
+        assertThat(eval("3<>4")).isEqualTo(1d);
+        assertThat(eval("3<4")).isEqualTo(1d);
+        assertThat(eval("3<=4")).isEqualTo(1d);
+        assertThat(eval("3>=4")).isEqualTo(0d);
+        assertThat(eval("4>=4")).isEqualTo(1d);
+        assertThat(eval("(3+5) > (4+7)")).isEqualTo(0d);
+        assertThat(eval("(3+5) < (4+7)")).isEqualTo(1d);
+
+        assertThatThrownBy(() -> eval("3>>4"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining(">");
+        assertThatThrownBy(() -> eval("3<<4"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("<");
+        assertThatThrownBy(() -> eval("3=>4"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining(">");
+
+        assertThat(eval("if(3>4;1;2)")).isEqualTo(2d);
+        assertThat(eval("if(3<4;1;2)")).isEqualTo(1d);
+
     }
 
     @Test

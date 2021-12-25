@@ -491,19 +491,75 @@ public final class Formula {
     }
 
     private FormulaNode parseExpression() {
-        FormulaNode x = parseTerm();
+        return parseRelationalEquality();
+    }
+
+    private FormulaNode parseRelationalEquality() {
+        final FormulaNode x = parsePlusMinus();
+        if (ch == '<' || ch == '>' || ch == '=') {
+            //handle <, >, <=, >=, ==, <>
+            final int firstChar = ch;
+            nextChar();
+            final boolean nextIsEqual = eat('=');
+            final boolean nextIsGreaterThan = eat('>');
+            if (firstChar == '=' && !nextIsEqual) {
+                throw new FormulaException(UNEXPECTED_TOKEN, "=");
+            }
+            if (nextIsGreaterThan && (nextIsEqual || firstChar != '<')) {
+                throw new FormulaException(UNEXPECTED_TOKEN, "not >");
+            }
+
+            final FormulaNode y = parsePlusMinus();
+
+            switch (firstChar) {
+                case '<':
+                    if (nextIsEqual) {
+                        return createNumeric("<=", new FormulaNode[]{x, y}, createCompareFunction((o1, o2) -> o1.compareTo(o2) <= 0));
+                    } else if (nextIsGreaterThan) {
+                        return createNumeric("<>", new FormulaNode[]{x, y}, createCompareFunction((o1, o2) -> o1.compareTo(o2) != 0));
+                    } else {
+                        return createNumeric("<", new FormulaNode[]{x, y}, createCompareFunction((o1, o2) -> o1.compareTo(o2) < 0));
+                    }
+                case '>':
+                    if (!nextIsEqual) {
+                        return createNumeric(">", new FormulaNode[]{x, y}, createCompareFunction((o1, o2) -> o1.compareTo(o2) > 0));
+                    } else {
+                        return createNumeric(">=", new FormulaNode[]{x, y}, createCompareFunction((o1, o2) -> o1.compareTo(o2) >= 0));
+                    }
+                case '=':
+                default:
+                    return createNumeric("==", new FormulaNode[]{x, y}, createCompareFunction((o1, o2) -> o1.compareTo(o2) == 0));
+            }
+        }
+        return x;
+    }
+
+    private <T> Func2<ValueList, Func1<String, Value>, Value> createCompareFunction(final Func2<Comparable<T>, Comparable<T>, Boolean> compare) {
+        return (nums, vars) -> {
+            final boolean useString = !nums.get(0).isDouble() || !nums.get(1).isDouble();
+            final Comparable<T> o1 = (Comparable<T>) (useString ? nums.getAsString(0, "") : nums.getAsDouble(0));
+            final Comparable<T> o2 = (Comparable<T>) (useString ? nums.getAsString(1, "") : nums.getAsDouble(1));
+            return Value.of(compare.call(o1, o2) ? 1 : 0);
+        };
+
+    }
+
+
+    private FormulaNode parsePlusMinus() {
+
+        FormulaNode x = parseMultiplyDivision();
         for (;;) {
             if (eat('+')) {
-                x = createNumeric("+", new FormulaNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
+                x = createNumeric("+", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
             } else if (eat('-') || eat('—')) { //those are two different chars
-                x = createNumeric("-", new FormulaNode[]{x, parseTerm()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
+                x = createNumeric("-", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
             } else {
                 return x;
             }
         }
     }
 
-    private FormulaNode parseTerm() {
+    private FormulaNode parseMultiplyDivision() {
         FormulaNode x = parseFactor();
         for (;;) {
             if (eat('*') || eat('•')) {
@@ -584,8 +640,8 @@ public final class Formula {
     private FormulaNode parseConcatBlock() {
         final List<FormulaNode> nodes = new ArrayList<>();
         while (true) {
-            if (ch == '(' || ch == '[') {
-                final char expectedClosingChar = (ch == '(' ? ')' : ']');
+            if (ch == '(') {
+                final char expectedClosingChar = ')';
                 nextChar();
                 this.level++;
                 nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v) -> o.get(0),

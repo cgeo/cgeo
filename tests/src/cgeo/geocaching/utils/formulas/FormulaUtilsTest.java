@@ -41,6 +41,30 @@ public class FormulaUtilsTest {
     }
 
     @Test
+    public void roman() {
+        //I=1, V=5, X=10, L=50, C=100, D=500, M=1000
+        assertThat(FormulaUtils.roman("")).isEqualTo(0);
+        assertThat(FormulaUtils.roman("I")).isEqualTo(1);
+        assertThat(FormulaUtils.roman("V")).isEqualTo(5);
+        assertThat(FormulaUtils.roman("VIII")).isEqualTo(8);
+        assertThat(FormulaUtils.roman("VII I")).isEqualTo(8);
+        assertThat(FormulaUtils.roman("VI IV")).isEqualTo(10);
+        assertThat(FormulaUtils.roman("IV")).isEqualTo(4);
+        assertThat(FormulaUtils.roman("MDCLXVI")).isEqualTo(1666);
+        assertThat(FormulaUtils.roman("mmmDDDcccLLLxxxVVViii")).isEqualTo(1666 * 3);
+        assertThat(FormulaUtils.roman("MCD")).isEqualTo(1400);
+    }
+
+    @Test
+    public void vanity() {
+        assertThat(FormulaUtils.vanity("")).isEqualTo(0);
+        assertThat(FormulaUtils.vanity("A")).isEqualTo(2);
+        assertThat(FormulaUtils.vanity("AD")).isEqualTo(23);
+        assertThat(FormulaUtils.vanity("ABCDEF")).isEqualTo(222333);
+        assertThat(FormulaUtils.vanity("ghijkl")).isEqualTo(444555);
+    }
+
+    @Test
     public void scanForFormulas() {
         assertScanFormula("a+b", "a+b");
         assertScanFormula("(a+b)", "(a+b)");
