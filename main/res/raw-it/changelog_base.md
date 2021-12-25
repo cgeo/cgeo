@@ -4,13 +4,13 @@
 ### Mappa
 - Corretto: Caricando file GPX contenenti più tracce, queste vengono visualizzate come tracce separate non collegate tra loro
 - Cambiato: Visualizzazione automatica della traccia al caricamento di un file GPX
-- New: D/T symbols for cache icons (optional)
+- Novità: Simboli D/T per le icone della cache (facoltativo)
 
 ### Elenco dei cache
 - Nuovo: Opzione per selezionare i 20 cache succesivi
 - Novità: Panoramica degli attributi (vedi Gestisci i Cache => Panoramica degli attributi)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
+- Nuovo: Aggiunta importazione da liste di segnalibri (solo utenti premium GC)
+- Nuovo: Inverti ordinamento con un tocco prolungato sulla barra di ordinamento
 
 ### Dettagli del cache
 - Nuovo: Passa le coordinate correnti del cache a geochecker (se supportato da geochecker)
@@ -24,6 +24,6 @@
 - Modifica: Rimosso BRouter dall'elenco delle app utili (puoi ancora usare sia la navigazione esterna che interna)
 - Corretto: Evita i controlli ripetuti degli aggiornamenti per mappe/routing con intervallo=0
 - Corretto: ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Corretto: Abilita suggerimenti per sistemi in esecuzione su Android sotto la versione 8
+- Impostazioni ripristinate per soddisfare le specifiche correnti di Android
+- API di MapsWithMe aggiornata
