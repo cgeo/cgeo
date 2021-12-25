@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Kartdata</string>
     <string name="menu_dashboard">Inloggningspanel</string>
     <string name="menu_history">Hittade cacher</string>
+    <string name="menu_search_clipboard">Ladda geocode från urklipp</string>
     <string name="menu_history_longstring">\"Hittat\" historik</string>
     <string name="menu_filter">Filtrera</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -422,6 +423,10 @@
     <plurals name="user_finds_offline">
         <item quantity="one">%d loggad offline</item>
         <item quantity="other">%d loggade offline</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cacher sparade</item>
+        <item quantity="other">%d cacher sparade</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Hantera listor</string>
@@ -628,6 +633,7 @@
     <string name="settings_title_waypoints">Vägpunkter</string>
     <string name="settings_title_map_content">Kartinnehåll</string>
     <string name="settings_title_map_behavior">Kart-beteende</string>
+    <string name="settings_title_map_style">Utseende på karta</string>
     <string name="settings_title_data_dir">Geocache-datamapp</string>
     <string name="settings_title_data_dir_usage">Geocache-datamapp (%1$s används)</string>
     <string name="calculate_dataDir_title">Användning av geocache-data katalog</string>
@@ -689,6 +695,12 @@
     <string name="settings_service_active_unavailable">Aktiv/ej tillgänglig</string>
     <string name="settings_navigation_disabled">Appen verkar inte vara installerad</string>
     <string name="init_signature">Signatur</string>
+    <string name="init_template_title">Mallens namn</string>
+    <string name="init_template_text">Malltext</string>
+    <string name="init_log_template">Loggmall</string>
+    <string name="init_log_templates">Loggmallar</string>
+    <string name="init_log_template_prefix">Mall:\u0020</string>
+    <string name="init_log_template_missing_error">Både mallens namn och text måste anges.</string>
     <string name="init_template_help">Platshållare strängar - som [NAME] - fylls med den angivna texten när mallen används.</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tid</string>
@@ -733,6 +745,9 @@
     <string name="init_summary_useInternalRouting">Använd c:geos interna routing för att kunna använda automatisk hämtning av routingsdata och andra funktioner</string>
     <string name="init_bigSmileysOnMap">Stora ikoner</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
+    <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen.</string>
+    <string name="init_prevent_cache_note_merge">Skriv över personlig cacheanteckning</string>
+    <string name="init_summary_prevent_cache_note_merge">Om denna inställning är aktiverad kommer c:geo att ta bort den lokalt lagrade anteckningen permanent och ersätta den med den personliga anteckningen på servern. Ingen sammanslagning kommer att göras.</string>
     <string name="init_customtabs_as_browser">Använd Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externa webbplatser kommer att visas utan att lämna c:geo (endast möjligt om Chrome är installerad)</string>
     <string name="init_save_log_img">Loggbilder</string>
@@ -824,6 +839,7 @@
     <string name="init_map_directory_description">Mapp med offline-kartor</string>
     <string name="init_brouter_directory_description">Mapp med BRouter navigeringsdata</string>
     <string name="init_updateinterval_title">Uppdateringsintervall</string>
+    <string name="init_updateinterval_description">Påminner dig var x dag för en uppdateringskontroll (gäller endast för filer du har hämtat inifrån c:geo), 0=inaktiverat</string>
     <string name="init_gpx_importexportdir">GPX mapp</string>
     <string name="init_dataDir">Välj datamapp</string>
     <string name="init_dataDir_note">Du kan välja att lagra ytterligare data för geocacher (spoilers, loggbilder, …) på din externa lagringsenhet (emulerat eller verkligt externt SD-kort beroende på din enhet).</string>
@@ -891,6 +907,8 @@
     <string name="init_maintenance">Underhåll</string>
     <string name="init_maintenance_directories_note">c:geo lagrar bilder och andra filer relaterade till en cache i en särskild mapp. I vissa fall (t.ex. vid import/export av databasen) kan denna mapp innehålla föråldrade filer som kan tas bort här.</string>
     <string name="init_maintenance_directories">Ta bort överblivna filer</string>
+    <string name="init_maintenance_start">Underhåll startat</string>
+    <string name="init_maintenance_finished">Underhåll avslutat</string>
     <string name="init_location">Geolokalisering</string>
     <string name="init_location_note">På enheter utrustade med Google Play-tjänster kan c:geo automatiskt använda en bättre tjänst för positionering. Detta hindrar emellertid användningen av en extern Bluetooth GPS-mottagare.</string>
     <string name="init_location_googleplayservices">Använd Google Play-tjänster</string>
@@ -2066,6 +2084,7 @@
     <string name="mapserver_hylly_info">Detaljerade kartor för Finland, kräver ett av \"Hylly\" kartteman</string>
     <string name="mapserver_hylly_themes_info">Detaljerat karttema, byggt för \"Hylly\" kartor</string>
     <string name="brouter_info">Offline rutt-tjänst</string>
+    <string name="maptheme_elevate_categoryinfo">Relevant för: [A] Områden, [P] POI, [R] Rutter, [W] vägar</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Rensa historikspår</string>
     <string name="map_trailhistory_cleared">Historikspåret rensat</string>
