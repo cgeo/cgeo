@@ -8,7 +8,7 @@
 
 - Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
 - Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
-- Fix: Avoid null pointer exception in about pages
+- Fix: Undgå null-pointer exception på Om-siderne
 - Fix: Enable wrapping for stars in cache popup
 - Fix: Display error message if a cache could not be found while trying to refresh it
 - Fix: Show system default browser in app selection when using 'Open in browser' for a cache
