@@ -4,7 +4,7 @@
 ### Karte
 - Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
-- Neu: D/T-Symbole für Cache-Symbole (optional)
+- Neu: D/T-Markierungen für Cache-Symbole (optional)
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
