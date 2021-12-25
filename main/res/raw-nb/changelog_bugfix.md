@@ -8,8 +8,8 @@
 
 - Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
 - Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
-- Fix: Avoid null pointer exception in about pages
-- Fix: Enable wrapping for stars in cache popup
+- Fiks: Unngår nullpekerfeil på Om-sidene
+- Fiks: Aktiverer linjedeling av stjerner på pop-up for cacher
 - Fix: Display error message if a cache could not be found while trying to refresh it
 - Fix: Show system default browser in app selection when using 'Open in browser' for a cache
 - Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
