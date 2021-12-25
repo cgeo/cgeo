@@ -1,4 +1,4 @@
-c:geo ist eine umfangreiche, jederzeit einsatzbereite open-source Geocaching-Anwendung für geocaching.com (inoffiziell) und enthält auch grundlegenen Support für andere Geocaching-Plattformen (z.B. Opencaching). Sie benötigt keinen Browser oder Exporte - einfach herunterladen und direkt starten.
+c:geo ist eine umfangreiche, jederzeit einsatzbereite quelloffene Geocaching-Anwendung für geocaching.com (inoffiziell) und enthält auch grundlegenen Support für andere Geocaching-Plattformen (z.B. Opencaching). Sie benötigt keinen Browser oder Exporte - einfach herunterladen und direkt starten.
 
 Hauptmerkmale:
 - Suche nach Caches auf einer Live-Karte

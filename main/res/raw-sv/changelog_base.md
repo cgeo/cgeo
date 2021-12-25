@@ -9,21 +9,21 @@
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher
 - Nytt: Attribut-översikt (se Hantera cacher => Attribut-översikt)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
+- Nyhet: Lägg till import från bokmärkeslistor (endast GC premium)
+- Nytt: Invertera sorteringsordning med långklick på sorteringsfältet
 
 ### Cachedetaljer
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- Nyhet: Skicka aktuella cachekoordinater till geochecker (om detta stöds av geochecker)
 
 ### Övrigt
-- New: Quick-load geocodes from clipboard text in mainscreen search
-- New: Added support for 5 log templates
-- New: Make Settings => View Settings filterable
-- New: Added GC Wizard to useful apps list
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Nyhet: Snabbladda geokoder från urklipp i huvudskärmens sökfält
+- Nytt: Stöd för 5 loggmallar
+- Nyhet: Gör inställningar => Visa filtrerbara inställningar
+- Nyhet: Lagt till GC-guiden till listan över användbara appar
+- Förändring: Tog bort streckkodsläsare från listan över användbara appar och från huvudskärmen
+- Förändring: Tog bort BRouter från listan över användbara appar (du kan fortfarande använda både extern och intern navigering)
+- Fix: Undvik upprepade uppdateringskontroller för kartor/ruttfiler med intervall=0
+- Fix: Optimera stöd för autoifyllnad av lösenord från externa lösenords-appar i inställningar
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API
