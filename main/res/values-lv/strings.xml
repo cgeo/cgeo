@@ -1376,7 +1376,11 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- view settings -->
     <!-- HandleLocalFilesActivity -->
     <!-- ReceiveDownloadActivity -->
+    <string name="receivedownload_amount_copied">%s nokopēts</string>
     <!-- Download map preference and menu entry -->
+    <string name="downloadmap_themefile">Tēmas fails</string>
+    <string name="downloadmap_tilefile">maršrutēšanas datu fails</string>
+    <string name="downloadmap_download">lejupielāde</string>
     <!-- history track -->
     <string name="map_trail_show">Rādīt pārvietojumu</string>
     <!-- history track export -->
