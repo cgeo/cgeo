@@ -35,6 +35,13 @@
     <string name="locationless">Тайник без координат (обратный)</string>
     <string name="userdefined">Пользовательский тайник</string>
     <string name="unknown">Неизвестный тип</string>
+    <string name="all_types_short">Все</string>
+    <string name="multi_short">Мульти</string>
+    <string name="mystery_short">Мистика</string>
+    <string name="mega_short">Мега</string>
+    <string name="giga_short">Гига</string>
+    <string name="webcam_short">Веб-камера</string>
+    <string name="virtual_short">Виртуальный</string>
     <!-- cache sizes -->
     <string name="cache_size_micro">Микро</string>
     <string name="cache_size_small">Маленький</string>
@@ -156,6 +163,7 @@
     <string name="log_image_scale_option_noscaling">Без масштабирования</string>
     <string name="log_image_titleprefix">Фотография</string>
     <!-- translation -->
+    <string name="translate">Переводить</string>
     <string name="translate_to_sys_lang">Перевести на %s</string>
     <string name="translate_to_english">Перевести на английский</string>
     <string name="translate_length_warning">Перевод может произойти неисправно из-за большого количество текста.</string>
@@ -350,6 +358,7 @@
     <string name="caches_copy_selected">Скопировать выбранное</string>
     <string name="caches_copy_all">Копировать все</string>
     <string name="caches_map_locus_export">Экспорт в Locus</string>
+    <string name="caches_filter_menuitem">Фильтр</string>
     <string name="caches_filter_title">Фильтровать по</string>
     <string name="caches_removing_from_history">Очистка истории…</string>
     <string name="caches_clear_offlinelogs">Удалить сохраненные записи</string>
@@ -381,6 +390,29 @@
     <string name="list_dialog_rename">Переименовать</string>
     <string name="list_not_available">Этот список больше недоступен, переключаюсь на список по умолчанию</string>
     <!-- caches lists filter -->
+    <string name="cache_filter_location">Место</string>
+    <string name="cache_filter_contexttype_transient_title">Фильтр</string>
+    <string name="cache_filter_favorites_percentage">Процент</string>
+    <string name="cache_filter_distance_coordinates">Координаты</string>
+    <string name="cache_filter_status_select_all">Все</string>
+    <string name="cache_filter_status_select_no">Нет</string>
+    <string name="cache_filter_status_select_label_found">Найден</string>
+    <string name="cache_filter_status_active">Активный</string>
+    <string name="cache_filter_stored_since_notstored_short">-</string>
+    <string name="cache_filter_stored_since_stored_zero_short">0ч</string>
+    <string-array name="cache_filter_stored_since_stored_values_label">
+        <item>8 hours</item>
+        <item>24 часа</item>
+        <item>7 дней</item>
+        <item>30 days</item>
+    </string-array>
+    <string-array name="cache_filter_stored_since_stored_values_label_short">
+        <item>8ч</item>
+        <item>24ч</item>
+        <item>7дн</item>
+        <item>30дн</item>
+    </string-array>
+    <string name="cache_filter_stored_since_stored_max_short">макс</string>
     <!-- about -->
     <string name="about_version">Версия</string>
     <string name="about_changelog">Изменения</string>
@@ -1097,6 +1129,7 @@
     <string name="map_view_map">Тип карты</string>
     <string name="map_rotation">Вращение карты</string>
     <string name="map_dot_mode">Маленькие иконки</string>
+    <string name="map_showc_found">Найден</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Включить синхронизацию папок темы</string>
     <string name="init_hidewp">Скрыть точки</string>
     <string name="init_summary_hidewp_original">Скрыть оригинальные точки на карте</string>
@@ -1130,6 +1163,7 @@
     <string name="search_address_result">Найденные места</string>
     <string name="search_own_caches">Искать мои тайники</string>
     <string name="search_pocket_title">Выборка</string>
+    <string name="search_pocket_is_new">новые</string>
     <!-- trackable -->
     <string name="trackable">Трекабл</string>
     <string name="trackable_details_loading">Загрузка деталей трекабла…</string>
