@@ -11,6 +11,7 @@
     <string name="about">Apie c:geo</string>
     <string name="latitude">Platuma</string>
     <string name="longitude">Ilguma</string>
+    <string name="latlongitude">Platuma\nIlguma</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Nustatymai</string>
     <!-- caches -->
@@ -319,6 +320,7 @@
     <string name="menu_history">Istorija</string>
     <string name="menu_filter">Filtras</string>
     <string name="menu_scan_geo">Skenuoti geo kodą</string>
+    <string name="menu_lists_bookmarklists">Žymių sąrašai</string>
     <string name="menu_scan_description">c:geo negali nuskaityti QR kodų. Reikalinga programa neįdiegta. Ar norite atidaryti Google Play ir ją įdiegti?</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
@@ -352,12 +354,14 @@
     <string name="caches_on_map">Rodyti žemėlapyje</string>
     <string name="caches_sort">Rūšiuoti</string>
     <string name="caches_sort_distance">Atstumas</string>
+    <string name="caches_sort_distance_target">Atstumas iki tikslo</string>
     <string name="caches_sort_difficulty">Sudėtingumas</string>
     <string name="caches_sort_terrain">Vietovė</string>
     <string name="caches_sort_size">Dydis</string>
     <string name="caches_sort_favorites">Kiek mėgsta</string>
     <string name="caches_sort_favorites_ratio">Kiek mėgsta [%]</string>
     <string name="caches_sort_name">Pavadinimas</string>
+    <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Reitingas</string>
     <string name="caches_sort_vote">Balsai (savas reitingas)</string>
     <string name="caches_sort_inventory">Inventoriaus kiekis</string>
@@ -376,6 +380,7 @@
     <string name="caches_remove_all_completely">Pašalinti viską iš įrenginio</string>
     <string name="caches_remove_selected_completely">Pašalinti pasirinktus iš įrenginio</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
+    <string name="caches_upload_bookmarklist">Pridėti į žymių sąrašą</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Ar norite įkelti pakeistas koordinates visoms (pasirinktoms) slėptuvėms ir pakeisti koordinates serveryje? To negalima anuliuoti.</string>
     <string name="caches_upload_allcoords">Įkelti koordinates visoms slėptuvėms</string>
@@ -1409,7 +1414,7 @@
     <string name="helper_barcode_description">Egzistuoja Greasemonkey įskiepiai ir svetainės, kurios  geo kodus paverčia brūkšniniu kodu. Su šia programa c:geo gali nuskaityti tokius kodus tiesiai iš kompiuterio ekrano.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsiųsti kasetes.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
     <string name="helper_brouter_title">BROuter navigacija neprisijungus</string>
     <string name="helper_brouter_description">BRouter suteikia maršrutizavimą be interneto. Jei jis yra įdiegtas ir atsisiųsti reikalingi failai, c:geo automatiškai žemėlapyje rodys maršrutą į slėptuvę.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp slėptuvėms.</string>
