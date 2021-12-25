@@ -1,5 +1,7 @@
-commit_message: "[skip ci]"
-append_commit_message: true
+pull_request_title: "Translations from Crowdin"
+pull_request_labels: ["Translation"]
+commit_message: "%language% translation for %original_file_name% [skip ci]"
+append_commit_message: false
 files:
   - source: /main/res/values/strings.xml
     translation: /main/res/values-%two_letters_code%/%original_file_name%
