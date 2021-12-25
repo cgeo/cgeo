@@ -1,7 +1,7 @@
 ### General
 - Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
 
-### Map
+### Mapa
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
 - Change: Automatically enable track display on loading a GPX track file
 - New: D/T symbols for cache icons (optional)
@@ -12,10 +12,10 @@
 - New: Add import from bookmark lists (GC premium only)
 - New: Invert sort-order on long click on sort bar
 
-### Cache details
+### Szczegóły skrytki
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
 
-### Other
+### Inne
 - New: Quick-load geocodes from clipboard text in mainscreen search
 - New: Added support for 5 log templates
 - New: Make Settings => View Settings filterable
