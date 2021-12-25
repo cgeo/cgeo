@@ -413,6 +413,7 @@
     <string name="settings_info_themes_title">Pahibalo sa mga tema sa mapa</string>
     <string name="init_mapsource_select">Pagpili og kakuhaan sa mapa</string>
     <string name="init_dataDir_note">Pwede ka makapili kung asa nimo itago ang mga napun-ang data para sa mga geocache (spoilers, log na mga imahe, …) sa imong panggawas na tagu-anan (na-emulate o tinuod na panggawas na SD kard depende sa imong debays).</string>
+    <string name="init_maptrail">Ipakita ang dalan</string>
     <string name="init_include_found_status">Apili ang \"Found\" na kahimtang</string>
     <string name="init_trackautovisit">Bisitaha ang TBs</string>
     <string name="init_summary_trackautovisit">I-set and trackables og \"Nibisita\" sa default</string>
@@ -1124,6 +1125,7 @@
     <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
+    <string name="map_trail_show">Ipakita ang agianan</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
