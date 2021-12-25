@@ -1,4 +1,4 @@
-### General
+### Generelt
 - Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
 
 ### Kart
@@ -6,16 +6,16 @@
 - Change: Automatically enable track display on loading a GPX track file
 - New: D/T symbols for cache icons (optional)
 
-### Cache list
-- New: Option to select next 20 caches
+### Cacheliste
+- Nytt: Valg for å merke neste 20 cacher
 - New: Attributes overview (see Manage Caches => Attributes overview)
 - New: Add import from bookmark lists (GC premium only)
 - New: Invert sort-order on long click on sort bar
 
-### Cache details
+### Cachedetaljer
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
 
-### Other
+### Annet
 - New: Quick-load geocodes from clipboard text in mainscreen search
 - New: Added support for 5 log templates
 - New: Make Settings => View Settings filterable
