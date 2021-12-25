@@ -432,6 +432,7 @@
     <string name="settings_info_themes_title">معلومات عن ثيمات الخريطة</string>
     <string name="init_mapsource_select">اختر مصدر الخريطة</string>
     <string name="init_dataDir_note">قد تختار تخزين بيانات إضافية في العلبة المخبئة (المفشي، ألبوم الصور، &#8230;) في تخزينك الخارجي (تضمينها داخل التخزين أو في بطاقة ذاكرة خارجية اعتماداً على جهازك).</string>
+    <string name="init_maptrail">عرض الأثر</string>
     <string name="init_summary_maptrail">عند التفعيل (و GPS قيد التشغيل) c:geo يحفظ سجل حركاتك كمسار ويعرضها على الخريطة.</string>
     <string name="init_include_found_status">تضمين حالة \"تم العثور عليها\"</string>
     <string name="init_trackautovisit">زيارة TBs</string>
@@ -1125,6 +1126,7 @@
     <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <!-- history track -->
+    <string name="map_trail_show">عرض الأثر</string>
     <!-- history track export -->
     <!-- individual route export -->
     <!-- install wizard -->
