@@ -1,10 +1,10 @@
-## 2021.12.24 Bugfix release
+## 2021.12.24 Version de maintenance
 
-- Fix: Enable upgrading from OpenAndroMaps v4 to v5
-- Fix: Enable checks for map theme updates
+- Corrigé : Mise à jour d'OpenAndroMaps v4 vers v5
+- Corrigé : Vérification des mises à jour pour les thèmes de carte
 - Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
 
-## 2021.12.13 Bugfix release
+## 2021.12.13 Version de maintenance
 
 - Fix: Mapsforge's cache files: Cleanup and new location (separate folder)
 - Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors

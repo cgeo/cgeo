@@ -1,4 +1,4 @@
-## 2021.12.13 Bugfix release
+## 2021.12.24 Bugfix release
 
 - Oplossing: Upgraden van OpenAndroMaps v4 naar v5 mogelijk maken
 - Oplossing: Schakel controles in voor kaart thema updates
