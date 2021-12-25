@@ -498,6 +498,7 @@
     <string name="cache_filter_status_exclude_archived">排除歸檔的</string>
     <string name="cache_filter_log_entry_foundby">由發現</string>
     <string name="cache_filter_log_entry_logtext">日誌文字</string>
+    <string name="cache_filter_stored_since_notstored">未儲存</string>
     <string name="cache_filter_stored_since_notstored_short">-</string>
     <string name="cache_filter_stored_since_stored_zero">0 小时</string>
     <string name="cache_filter_stored_since_stored_zero_short">0小時</string>
