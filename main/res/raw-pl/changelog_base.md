@@ -1,26 +1,26 @@
-### Map
-- New: Complete rework of all cache icons
-- New: Show icons for last logs in cache popup
-- Fix: Show distance circles for user-defined caches (if circles are enabled)
-- Fix: Make cache title more visible in cache / waypoint popup
-- Fix: Show warning in live map when live mode is disabled
-- Fix: Allow HTML in navigation targets' description
-- Change: Adapted zoom controls for OSM maps for better consistency across maps
-- Change: Moved most individual route-related menu options to a separate quick access button at the bottom for faster access. (Only being displayed when an individual route is loaded / created.)
+### Mapa
+- Nowość: Całkiem nowe ikony dla wszystkich skrytek
+- Nowość: Pokaż ikony dla ostatnich logów w oknie podręcznym
+- Poprawka: Pokaż okręgi dystansowe dla skrytek zdefiniowanych przez użytkownika (jeśli są włączone)
+- Poprawka: Tytuł skrytki bardziej widoczny w wyskakującym oknie
+- Poprawka: Pokaż ostrzeżenie na mapie na żywo gdy tryb na żywo jest wyłączony
+- Poprawka: Zezwalaj na HTML w opisie celów nawigacyjnych
+- Zmiana: Dostosowane ustawienia powiększenia map OSM dla większej spójności między mapami
+- Zmiana: Przeniesiono większość indywidualnych opcji menu związanych z trasą do oddzielnego przycisku szybkiego dostępu u dołu dla szybszego dostępu. (Wyświetlone tylko wtedy, gdy indywidualna trasa jest załadowana / utworzona.)
 
-### Cache lists
-- New: Complete rework of all cache icons
+### Listy skrytek
+- Nowość: Całkiem nowe ikony dla wszystkich skrytek
 
-### Cache details
-- New: Show icons for last logs
-- New: Show icons for log entries in log tab
-- New: Option to hide visited waypoints on waypoints tab
-- Fix: Allow HTML in navigation targets' description
-- Fix: Filter short description when already contained in long description
-- Fix: Refactored "coordinates input" dialog to allow for better display usage in specific conditions
-- New: Added variable / calculator tab (experimental, activate debug mode to see it)
+### Szczegóły skrytki
+- Nowość: Pokaż ikony dla ostatnich logów
+- Nowość: Pokaż ikony dla wpisów dziennika w karcie dziennika
+- Nowość: Opcja ukrycia odwiedzonych punktów w zakładce Punkty nawigacyjne
+- Poprawka: Zezwalaj na HTML w opisie celów nawigacyjnych
+- Poprawka: Filtruj krótki opis, gdy jest już zawarty w długim opisie
+- Poprawka: Przebudowano okno dialogowe "współrzędne wejściowe", aby umożliwić lepsze użycie wyświetlacza w określonych warunkach
+- Nowość: Dodano zakładkę zmiennej/kalkulator (eksperymentalnie, aktywuj tryb debugowania, aby ją zobaczyć)
 
-### Other
-- Change: Separated bookmark lists and pocket queries (geocaching.com PM only)
-- New: Force-delete caches marked as "to-be-deleted" when using maintenance function
-- Change: Always use hardware acceleration (removed setting and old phone model check)
+### Inne
+- Zmiana: Oddzielne listy zakładek i pocket queries (tylko dla użytkowników premium geocaching.com)
+- Nowość: Wymuś usunięcie skrytek oznaczonych jako "do usunięcia" podczas korzystania z funkcji konserwacji
+- Zmiana: Zawsze używaj przyspieszenia sprzętowego (usunięto ustawienie i kontrolę modelu starego telefonu)
