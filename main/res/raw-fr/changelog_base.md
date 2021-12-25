@@ -1,19 +1,19 @@
-### General
+### Général
 - Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
 
 ### Carte
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
 - Change: Automatically enable track display on loading a GPX track file
-- New: D/T symbols for cache icons (optional)
+- Nouveauté : symboles D/T pour les icônes de cache (optionnel)
 
-### Cache list
-- New: Option to select next 20 caches
+### Liste des caches
+- Nouveau : Option pour sélectionner les 20 caches suivantes
 - New: Attributes overview (see Manage Caches => Attributes overview)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
+- Nouveauté : Ajout de l'import des signets (requiert un compte GC premium)
+- Nouveauté : Inverser le tri lors d'un clic long sur la barre de tri
 
 ### Détails de la cache
-- New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- Nouveauté : Envoyer les coordonnées de la cache à geochecker
 
 ### Divers
 - New: Quick-load geocodes from clipboard text in mainscreen search
@@ -23,7 +23,7 @@
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Correction : Optimisation de la prise en charge du remplissage automatique des mots de passe à partir des applications de stockage de mots de passe externes dans les paramètres
 - Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Refonte des paramètres pour s'adapter aux nouvelles spécifications d'Android
+- Mise à jour de l'API MapsWithMe
