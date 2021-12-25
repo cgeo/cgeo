@@ -325,6 +325,7 @@
     <string name="menu_update_mapdata">Dane mapy</string>
     <string name="menu_dashboard">Panel logowania</string>
     <string name="menu_history">Historia</string>
+    <string name="menu_search_clipboard">Wczytaj geokod ze schowka</string>
     <string name="menu_history_longstring">Historia znalezień</string>
     <string name="menu_filter">Filtruj</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
@@ -381,6 +382,7 @@
     <string name="caches_sort_storage">Data zapisania w urządzeniu</string>
     <string name="caches_sort_eventdate">Data wydarzenia</string>
     <string name="caches_select_mode">Tryb wyboru</string>
+    <string name="caches_select_next">Wybierz następne 20 skrytek</string>
     <string name="caches_select_mode_exit">Wyjście z trybu wyboru</string>
     <string name="caches_select_invert">Odwróć zaznaczenie</string>
     <string name="caches_nearby">Najbliższe</string>
@@ -408,6 +410,7 @@
     <string name="caches_clear_offlinelogs">Usuń wpisy offline</string>
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
+    <string name="caches_show_attributes">Pokaż przegląd atrybutów</string>
     <string name="caches_set_cache_icon">Ustaw ikony skrytek</string>
     <string name="caches_reset_cache_icons_title">Zresetuj ikony skrytek</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
@@ -426,6 +429,12 @@
         <item quantity="few">%d zalogowania offline</item>
         <item quantity="many">%d zalogowań offline</item>
         <item quantity="other">%d zalogowań offline</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d skrytka zapisana</item>
+        <item quantity="few">%d skrytki zapisane</item>
+        <item quantity="many">%d skrytek zapisanych</item>
+        <item quantity="other">%d skrytek zapisanych</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Zarządzaj listami</string>
@@ -634,6 +643,7 @@
     <string name="settings_title_waypoints">Punkty nawigacji</string>
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
+    <string name="settings_title_map_style">Styl mapy</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
     <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
@@ -695,7 +705,14 @@
     <string name="settings_service_active_unavailable">Aktywne/Niedostępne</string>
     <string name="settings_navigation_disabled">Wygląda, że ta aplikacja nie jest zainstalowana</string>
     <string name="init_signature">Podpis</string>
+    <string name="init_template_title">Tytuł szablonu</string>
+    <string name="init_template_text">Tekst szablonu</string>
+    <string name="init_log_template">Szablon dziennika</string>
+    <string name="init_log_templates">Szablony dzienników</string>
+    <string name="init_log_template_prefix">Szablon:\u0020</string>
+    <string name="init_log_template_missing_error">Należy podać zarówno tytuł szablonu, jak i tekst.</string>
     <string name="init_template_help">Ciągi zastępcze - takie jak [NAME] - są wypełnione wskazanym tekstem, gdy szablon jest używany.</string>
+    <string name="init_signature_template_button">Wstaw tekst zastępczy</string>
     <string name="init_signature_template_date">Data</string>
     <string name="init_signature_template_time">Czas</string>
     <string name="init_signature_template_datetime">Data &amp; Czas</string>
@@ -720,6 +737,7 @@
     <string name="init_select_language">Wybierz język</string>
     <string name="init_summary_select_language">Wybierz język aplikacji (wymaga ponownego uruchomienia)\n</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
+    <string name="init_showwaypoints">Pokaż punkty nawigacyjne</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
     <string name="init_zoomincludingwaypoints">Powiększenie obejmuje punkty nawigacji</string>
     <string name="init_zoomincludingwaypoints_description">Podczas mapowania pojedynczej skrzynki: czy powiększenie powinno uwzględniać wszystkie jej punkty nawigacji?</string>
@@ -736,7 +754,14 @@
     <string name="init_summary_brouterShowBothDistances">Jeśli wytyczanie trasy jest aktywne: Oprócz wyliczonej długości trasy pokazuj także odległość w linii prostej.</string>
     <string name="init_useInternalRouting">Użyj wewnętrznej nawigacji</string>
     <string name="init_summary_useInternalRouting">Użyj wewnętrznego routingu c:geo, aby móc korzystać z automatycznego pobierania danych routingu i innych funkcji</string>
+    <string name="init_bigSmileysOnMap">Duże ikony</string>
+    <string name="init_summary_bigSmileysOnMap">Jeśli włączone, symbole takie jak \'uśmiechnięta buźka znalezienia\' lub \'skorygowane współrzędne\' będą wyświetlane na mapie w wersji powiększonej zamiast ikony typu skrytki.</string>
+    <string name="init_dtMarkerOnCacheIcon">Ocena D/T na ikonach skrytek</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Pokaż znaczniki dla trudności (po lewej) i terenu (po prawej) w znacznikach skrytki w prawym górnym rogu (znacznik „zapisania” jest przeniesiony na środek).</string>
     <string name="init_global_wp_extraction_disable">Wyłącz ekstrakcję punktu trasy</string>
+    <string name="init_summary_global_wp_extraction_disable">Globalnie wyłącz wyodrębnianie punktów nawigacyjnych z osobistych notatek skrytek. Nadal można je włączyć dla poszczególnych skrytek dezaktywując pole wyboru poniżej osobistej notatki skrytki.</string>
+    <string name="init_prevent_cache_note_merge">Nadpisz osobistą notatkę skrytki</string>
+    <string name="init_summary_prevent_cache_note_merge">Jeśli to ustawienie jest włączone, c:geo usunie lokalnie zapisaną notatkę i zastąpi ją notatką osobistą z serwera. Scalanie nie zostanie wykonane.</string>
     <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
     <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko, jeśli jest zainstalowany Chrome)</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
@@ -828,6 +853,7 @@
     <string name="init_map_directory_description">Folder z mapami offline</string>
     <string name="init_brouter_directory_description">Folder z danymi nawigacji BRouter</string>
     <string name="init_updateinterval_title">Częstotliwość odświeżania</string>
+    <string name="init_updateinterval_description">Przypomina o sprawdzaniu aktualizacji co x dni (ważne tylko dla plików pobranych z c:geo), 0 = wyłączone</string>
     <string name="init_gpx_importexportdir">Folder z plikami GPX</string>
     <string name="init_dataDir">Wybierz folder</string>
     <string name="init_dataDir_note">Możesz zdecydować się na przechowywanie dodatkowych danych dla skrzynek (spoilers, zdjęcia z wpisu) na Twoim zewnętrznym urządzeniu (emulowana lub rzeczywista karta SD zależnie od urządzenia).</string>
@@ -895,6 +921,8 @@
     <string name="init_maintenance">Konserwacja</string>
     <string name="init_maintenance_directories_note">c:geo przechowuje zdjęcia i inne pliki związane ze skrytką w oddzielnym folderze. W niektórych przypadkach (np. podczas importu/eksportu bazy danych) ten folder może zawierać nieaktualne pliki, które mogą być usunięte tutaj.</string>
     <string name="init_maintenance_directories">Usuń nieaktualne pliki</string>
+    <string name="init_maintenance_start">Konserwacja rozpoczęta</string>
+    <string name="init_maintenance_finished">Konserwacja zakończona</string>
     <string name="init_location">Geolokalizacja</string>
     <string name="init_location_note">Na urządzeniach wyposażonych w Usługi Google Play, c:geo może automatycznie używać dokładniejszego źródła geolokalizacji. Jednakże to przeszkadza w użyciu zewnętrznego odbiornika GPS BlueTooth.</string>
     <string name="init_location_googleplayservices">Użyj usług Google Play</string>
@@ -1113,6 +1141,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Zapobiegaj punktom nawigacji z notatki</string>
     <string name="cache_menu_allowWaypointExtraction">Zezwalaj na punkty nawigacji z notatki</string>
     <string name="cache_personal_note_edit">Edytuj</string>
+    <string name="cache_personal_note_storewaypoints">Dodaj/aktualizuj punkty nawigacyjne</string>
+    <string name="cache_personal_note_removewaypoints">Usuń punkty nawigacyjne</string>
     <string name="cache_personal_note_removedwaypoints">Punkty nawigacji usunięte</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">Nie znaleziono punktów nawigacji do usunięcia</string>
     <string name="cache_personal_note_storewaypoints_success">Punkty drogi zostały dodane do notatki osobistej</string>
@@ -1422,6 +1452,7 @@
     <!-- search -->
     <string name="geo_search_label">Szukaj skrytek w pobliżu</string>
     <string name="search_bar_hint">Szukaj skrytki/przedmioty podróżne</string>
+    <string name="search_bar_hint_settings">Ustawienia wyszukiwania</string>
     <string name="search_coordinates">Współrzędne</string>
     <string name="search_coordinates_button">Szukaj według współrzędnych</string>
     <string name="search_address">Adres</string>
@@ -1540,6 +1571,7 @@
     <string name="helper_where_you_go_description">WhereYouGo pozwala na poszukiwanie skrzynek typu Wherigo. c:geo może automatycznie pobierać kardridże dzięki tej aplikacji.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umożliwia odczyt danych z tagów ANT+/Garmin chirp, które są potrzebne w przypadku skrytek ANT +/chirp.</string>
     <string name="helper_alc_description">Aplikacja Adventure Lab dla twojego telefonu lub tabletu.</string>
+    <string name="helper_gcwizard_description">Kreator GC zawiera wiele narzędzi do prostych obliczeń kryptograficznych, geodezyjnych i naukowych, jak również setki zestawów różnych symboli.</string>
     <!-- export -->
     <string name="share_export">Udostępnij / Eksport</string>
     <string name="export">Eksport</string>
@@ -1819,7 +1851,14 @@
     <string name="attribute_historic_no">Brak opuszczonej budowli / Brak ruin</string>
     <string name="attribute_blind_people_yes">Odpowiedni dla osób niewidomych</string>
     <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
+    <string name="attribute_unknown">Nieznany atrybut</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Wymagane narzędzia</string>
+    <string name="cat_type">Typ</string>
+    <string name="cat_location">Lokalizacja skrytki</string>
+    <string name="cat_duration">Odległość / Czas trwania</string>
+    <string name="cat_surrounding">Otoczenie skrytki</string>
+    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2110,6 +2149,7 @@
     <string name="mapserver_hylly_info">Szczegółowe mapy dla Finlandii wymagają jednego z tematów mapy „Hylly”</string>
     <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, zbudowany dla map „Hylly”</string>
     <string name="brouter_info">Usługa nawigacji offline</string>
+    <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
