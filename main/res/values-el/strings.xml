@@ -420,6 +420,14 @@
         <item quantity="one">%d εύρεση</item>
         <item quantity="other">%d ευρέσεις</item>
     </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%dΚαταχώρηση Χωρίς Σύνδεση</item>
+        <item quantity="other">%d Καταχωρήσεις εκτός σύνδεσης</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d κρύπτη αποθηκεύτηκε</item>
+        <item quantity="other">%d κρύπτες αποθηκεύτηκαν</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Διαχείριση λιστών</string>
     <string name="list_menu_create">Δημιουργία νέας λίστας</string>
