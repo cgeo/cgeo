@@ -2,7 +2,7 @@ c:geo er en opensource, uofficiel klient til geocaching.com med et fuldt sæt fa
 
 De vigtigste funktioner er:
 - Se caches på et opdateret kort
-- Use Google Maps or OpenStreetMap
+- Brug Google Maps eller OpenStreetMap
 - Find caches ud fra diverse kriterier
 - Log dine fund online eller offline
 - Gem cache-data på din smartphone/tablet
