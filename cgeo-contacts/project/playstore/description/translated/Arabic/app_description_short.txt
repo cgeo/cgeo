@@ -1,1 +1,1 @@
-This is a contacts plugin for c:geo
+هذا هو ملحق جهات اتصال لـ c:geo
