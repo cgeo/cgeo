@@ -11,6 +11,7 @@
     <string name="about">Om c:geo</string>
     <string name="latitude">Breddegrad</string>
     <string name="longitude">Længdegrad</string>
+    <string name="latlongitude">Breddegrad\nlængdegrad</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo indstillinger</string>
     <!-- caches -->
@@ -323,6 +324,7 @@
     <string name="menu_history">Historik</string>
     <string name="menu_filter">Filter</string>
     <string name="menu_scan_geo">Skan geokode</string>
+    <string name="menu_lists_pocket_queries">Pocket Queries</string>
     <string name="menu_lists_bookmarklists">Bogmærkelister</string>
     <string name="menu_scan_description">c:geo kan skanne geokoder, som er printet som QR koder. Den nødvendige app er ikke installeret. Vil du åbne Google Play for at installere den?</string>
     <string name="menu_invert_order">Omvendt rækkefølge</string>
@@ -355,6 +357,7 @@
     <string name="caches_on_map">Vis på kort</string>
     <string name="caches_sort">Sortér</string>
     <string name="caches_sort_distance">Afstand</string>
+    <string name="caches_sort_distance_target">Afstand til målet</string>
     <string name="caches_sort_difficulty">Sværhedsgrad</string>
     <string name="caches_sort_terrain">Terræn</string>
     <string name="caches_sort_size">Størrelse</string>
@@ -392,6 +395,7 @@
     <string name="caches_copy_selected">Kopiér valgte</string>
     <string name="caches_copy_all">Kopiér alle</string>
     <string name="caches_map_locus_export">Eksportér til Locus</string>
+    <string name="caches_filter_menuitem">Filter</string>
     <string name="caches_filter_title">Filtrér efter</string>
     <string name="caches_removing_from_history">Fjerner fra historik…</string>
     <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
@@ -451,6 +455,7 @@
     <string name="cache_filtergroup_basic">Basal</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Brugerspecifik</string>
+    <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_include">Medtag</string>
     <string name="cache_filter_exclude">Udelad</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
@@ -458,6 +463,7 @@
     <string name="cache_filter_userdisplay_not">IKKE</string>
     <string name="cache_filter_storage_delete_button">Slet</string>
     <string name="cache_filter_storage_load_delete_title">Indlæs eller slet et eksisterende filter</string>
+    <string name="cache_filter_storage_delete_title">Slet filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filtre er gemt endnu.</string>
     <string name="cache_filter_storage_save_title">Gem filter med navn</string>
     <string name="cache_filter_storage_save_confirm_title">Gem filter, overskriv</string>
@@ -468,9 +474,17 @@
     <string name="cache_filter_stringfilter_type_pattern">Mønster</string>
     <string name="cache_filter_datefilter_label_from">Fra:</string>
     <string name="cache_filter_datefilter_label_to">Til:</string>
+    <string name="cache_filter_distance_use_current_position">Brug aktuel position</string>
+    <string name="cache_filter_status_select_all">Alle</string>
     <string name="cache_filter_status_select_yes">Ja</string>
     <string name="cache_filter_status_select_no">Nej</string>
+    <string name="cache_filter_status_select_label_found">Fundne</string>
+    <string name="cache_filter_status_select_label_owned">Egne</string>
+    <string name="cache_filter_status_select_label_stored">Gemte</string>
+    <string name="cache_filter_status_select_label_has_trackable">Har Trackables</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Offline Fundet-log findes</string>
+    <string name="cache_filter_status_select_label_solved_mystery">Løst Mystery</string>
+    <string name="cache_filter_status_select_infotext_solved_mystery">Denne filterindstilling vil kun påvirke mystery caches.\n\n En mystery-cache betragtes som \'løst\', hvis det enten har ændret koordinater eller et gyldigt sidste waypoint med udfyldte koordinater.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiveret</string>
     <string name="cache_filter_status_archived">Lukket</string>
@@ -665,6 +679,11 @@
     <string name="init_livelist">Vis retning til cacher i lister</string>
     <string name="init_summary_livelist">Vis kompasretningen til caches i en liste</string>
     <!-- app theme -->
+    <string-array name="settings_theme_entries">
+        <item>System Default</item>
+        <item>Lys</item>
+        <item>Mørk</item>
+    </string-array>
     <!-- backup / restore -->
     <string name="init_backup_title">Opret Sikkerhedskopi</string>
     <string name="init_backup_summary">Bemærk venligst, at denne funktion kan sikkerhedskopiere caches, waypoints &amp; indstillinger, men ikke cachebilleder. \nFor at kunne gendanne data hvis du mister din telefon, skal backupfilerne kopieres til en uafhængig placering.</string>
@@ -1692,6 +1711,9 @@
     <string name="yes">Ja</string>
     <string name="no">Nej</string>
     <string name="show_all">Vis alle</string>
+    <string name="routingmode_walk">Til fods</string>
+    <string name="routingmode_bike">Cykel</string>
+    <string name="routingmode_car">Bil</string>
     <!-- view settings -->
     <string name="view_settings">Se indstillinger</string>
     <string name="delete_setting">Slet indstilling</string>
@@ -1720,6 +1742,7 @@
     <string name="downloadmap_checkforupdates_button">Søg efter opdateringer</string>
     <string name="downloadmap_available_updates">Tilgængelige opdateringer</string>
     <string name="downloadmap_no_updates_found">Ingen nye kort opdateringer fundet</string>
+    <string name="downloadmap_directory">mappe</string>
     <string name="downloadmap_mapfile">Kortfil</string>
     <string name="downloadmap_checking_for_updates">Søger efter kort opdateringer…</string>
     <!-- history track -->
