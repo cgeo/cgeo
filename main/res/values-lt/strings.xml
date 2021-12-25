@@ -11,6 +11,7 @@
     <string name="about">Apie c:geo</string>
     <string name="latitude">Platuma</string>
     <string name="longitude">Ilguma</string>
+    <string name="latlongitude">Platuma\nIlguma</string>
     <!-- actionbar -->
     <string name="settings_titlebar">c:geo Nustatymai</string>
     <!-- caches -->
@@ -317,6 +318,7 @@
     <string name="menu_update_mapdata">Žemėlapio duomenys</string>
     <string name="menu_history">Istorija</string>
     <string name="menu_filter">Filtras</string>
+    <string name="menu_lists_bookmarklists">Žymių sąrašai</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
     <string name="live_map_button">Žemėlapis</string>
@@ -349,12 +351,14 @@
     <string name="caches_on_map">Rodyti žemėlapyje</string>
     <string name="caches_sort">Rūšiuoti</string>
     <string name="caches_sort_distance">Atstumas</string>
+    <string name="caches_sort_distance_target">Atstumas iki tikslo</string>
     <string name="caches_sort_difficulty">Sudėtingumas</string>
     <string name="caches_sort_terrain">Vietovė</string>
     <string name="caches_sort_size">Dydis</string>
     <string name="caches_sort_favorites">Kiek mėgsta</string>
     <string name="caches_sort_favorites_ratio">Kiek mėgsta [%]</string>
     <string name="caches_sort_name">Pavadinimas</string>
+    <string name="caches_sort_geocode">Geocode</string>
     <string name="caches_sort_rating">Reitingas</string>
     <string name="caches_sort_vote">Balsai (savas reitingas)</string>
     <string name="caches_sort_inventory">Inventoriaus kiekis</string>
@@ -373,6 +377,7 @@
     <string name="caches_remove_all_completely">Pašalinti viską iš įrenginio</string>
     <string name="caches_remove_selected_completely">Pašalinti pasirinktus iš įrenginio</string>
     <string name="caches_delete_events">Ištrinti praeities įvykius</string>
+    <string name="caches_upload_bookmarklist">Pridėti į žymių sąrašą</string>
     <string name="caches_upload_modifiedcoords">Įkelti pakeistas koordinates</string>
     <string name="caches_upload_modifiedcoords_warning">Ar norite įkelti pakeistas koordinates visoms (pasirinktoms) slėptuvėms ir pakeisti koordinates serveryje? To negalima anuliuoti.</string>
     <string name="caches_upload_allcoords">Įkelti koordinates visoms slėptuvėms</string>
