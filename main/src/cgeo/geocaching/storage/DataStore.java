@@ -124,6 +124,7 @@ public class DataStore {
     // some fields names which are referenced multiple times
     // name scheme is "FIELD_" + table name without prefix + "_" + field name
     private static final String FIELD_LISTS_PREVENTASKFORDELETION = "preventAskForDeletion";
+    private static double def;
 
     public enum DBRestoreResult {
         RESTORE_SUCCESSFUL(R.string.init_restore_success),
@@ -3014,7 +3015,7 @@ public class DataStore {
             type = WaypointType.findById(cursor.getString(cursor.getColumnIndexOrThrow("type")));
             own = cursor.getInt(cursor.getColumnIndexOrThrow("own")) != 0;
         } catch (final IllegalArgumentException e) {
-            Log.e("error in createWaypointFromDatabaseContent", e);
+            Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
             throw new IllegalStateException("column not found in database");
         }
         final Waypoint waypoint = new Waypoint(name, type, own);
@@ -3030,7 +3031,7 @@ public class DataStore {
             waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
             waypoint.setCalcStateJson(cursor.getString(cursor.getColumnIndexOrThrow("calc_state")));
         } catch (final IllegalArgumentException e) {
-            Log.e("error in createWaypointFromDatabaseContent", e);
+            Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }
 
         return waypoint;
@@ -3415,41 +3416,36 @@ public class DataStore {
             trackable.setGuid(cursor.getString(cursor.getColumnIndexOrThrow("guid")));
             trackable.setName(cursor.getString(cursor.getColumnIndexOrThrow("title")));
             trackable.setOwner(cursor.getString(cursor.getColumnIndexOrThrow("owner")));
-            String released = null;
-            int idx = cursor.getColumnIndex("released");
-            if (idx >= 0) {
-                released = cursor.getString(idx);
-            }
-            if (released != null) {
-                try {
-                    final long releaseMilliSeconds = Long.parseLong(released);
-                    trackable.setReleased(new Date(releaseMilliSeconds));
-                } catch (final NumberFormatException e) {
-                    Log.e("createTrackableFromDatabaseContent", e);
-                }
-            }
+            trackable.setReleased(getDate(cursor, "released"));
             trackable.setGoal(cursor.getString(cursor.getColumnIndexOrThrow("goal")));
             trackable.setDetails(cursor.getString(cursor.getColumnIndexOrThrow("description")));
-            String logDate = null;
-            idx = cursor.getColumnIndex("log_date");
-            if (idx >= 0) {
-                logDate = cursor.getString(idx);
-            }
-            if (logDate != null) {
-                try {
-                    final long logDateMillis = Long.parseLong(logDate);
-                    trackable.setLogDate(new Date(logDateMillis));
-                } catch (final NumberFormatException e) {
-                    Log.e("createTrackableFromDatabaseContent", e);
-                }
-            }
+            trackable.setLogDate(getDate(cursor, "log_date"));
             trackable.setLogType(LogType.getById(cursor.getInt(cursor.getColumnIndexOrThrow("log_type"))));
             trackable.setLogGuid(cursor.getString(cursor.getColumnIndexOrThrow("log_guid")));
             trackable.setLogs(loadLogs(trackable.getGeocode()));
         } catch (final IllegalArgumentException e) {
-            Log.e("error in createTrackableFromDatabaseContent", e);
+            Log.e("IllegalArgumentException in createTrackableFromDatabaseContent", e);
         }
         return trackable;
+    }
+
+    @Nullable
+    private static Date getDate(Cursor cursor, String column) {
+        String sDate = null;
+        Date oDate = null;
+        final int idx = cursor.getColumnIndex(column);
+        if (idx >= 0) {
+            sDate = cursor.getString(idx);
+        }
+        if (sDate != null) {
+            try {
+                final long logDateMillis = Long.parseLong(sDate);
+                oDate = new Date(logDateMillis);
+            } catch (final NumberFormatException e) {
+                Log.e("createTrackableFromDatabaseContent", e);
+            }
+        }
+        return oDate;
     }
 
     /**
@@ -4829,24 +4825,20 @@ public class DataStore {
             int sequence = 1;
             if (cursor.moveToLast()) {
                 do {
-                    try {
-                        statement.bindString(1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
-                        statement.bindLong(2, cursor.getLong(cursor.getColumnIndexOrThrow("date")));  // updated
-                        statement.bindString(3, "waypoint");                         // type
-                        statement.bindString(4, "00");                               // prefix
-                        statement.bindString(5, "---");                              // lookup
-                        statement.bindString(6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
-                        statement.bindDouble(7, cursor.getDouble(cursor.getColumnIndexOrThrow("latitude")));
-                        statement.bindDouble(8, cursor.getDouble(cursor.getColumnIndexOrThrow("longitude")));
-                        statement.bindString(9, "");                                 // note
-                        statement.bindLong(10, 1);                                 // own
-                        statement.bindLong(11, 0);                                 // visited
-                        statement.bindString(12, "");                                // user note
-                        statement.bindLong(13, 0);                                 // org_coords_empty
-                        statement.bindNull(14);                                          // calc_state
-                    } catch (final IllegalArgumentException e) {
-                        Log.e("IllegalArgumentException in migrateGotoHistory", e);
-                    }
+                    statement.bindString(1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
+                    statement.bindLong(3, getLongDate(cursor));                        // updated
+                    statement.bindString(3, "waypoint");                         // type
+                    statement.bindString(4, "00");                               // prefix
+                    statement.bindString(5, "---");                              // lookup
+                    statement.bindString(6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
+                    statement.bindDouble(7, getDouble(cursor, "latitude"));   // latitude
+                    statement.bindDouble(8, getDouble(cursor, "longitude"));  // longitude
+                    statement.bindString(9, "");                                 // note
+                    statement.bindLong(10, 1);                                 // own
+                    statement.bindLong(11, 0);                                 // visited
+                    statement.bindString(12, "");                                // user note
+                    statement.bindLong(13, 0);                                 // org_coords_empty
+                    statement.bindNull(14);                                          // calc_state
                     statement.executeInsert();
                     sequence++;
                 } while (cursor.moveToPrevious());
@@ -4855,6 +4847,26 @@ public class DataStore {
 
         // clear old history
         database.execSQL("DELETE FROM " + dbTableSearchDestinationHistory);
+    }
+
+    private static double getDouble(Cursor cursor, String rowName) {
+        try {
+            return cursor.getDouble(cursor.getColumnIndexOrThrow(rowName));
+        } catch (final IllegalArgumentException e) {
+            Log.e("Table row " + rowName + " not found", e);
+        }
+        // use default
+        return 0;
+    }
+
+    private static long getLongDate(Cursor cursor) {
+        try {
+            return cursor.getLong(cursor.getColumnIndexOrThrow("date"));
+        } catch (final IllegalArgumentException e) {
+            Log.e("Table row " + "date" + " not found", e);
+        }
+        // use default
+        return 0;
     }
 
     /**
