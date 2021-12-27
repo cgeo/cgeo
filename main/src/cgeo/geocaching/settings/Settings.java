@@ -177,7 +177,7 @@ public class Settings {
         private final String text;
 
         @JsonCreator
-        public PrefLogTemplate(@JsonProperty("key") String key, @JsonProperty("title") String title, @JsonProperty("text") String text) {
+        public PrefLogTemplate(@JsonProperty("key") final String key, @JsonProperty("title") final String title, @JsonProperty("text") final String text) {
             this.key = key;
             this.title = title;
             this.text = text;
@@ -197,11 +197,17 @@ public class Settings {
         }
 
         @Override
-        public boolean equals(Object obj) {
-            if (getClass() != obj.getClass())
+        public boolean equals(final Object o) {
+            if (getClass() != o.getClass()) {
                 return false;
-            PrefLogTemplate o = (PrefLogTemplate) obj;
-            return o.getKey().equals(this.getKey());
+            }
+            final PrefLogTemplate p = (PrefLogTemplate) o;
+            return p.getKey().equals(this.getKey());
+        }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode();
         }
     }
 
@@ -2005,8 +2011,8 @@ public class Settings {
     }
 
     public static void putLogTemplate(final PrefLogTemplate template) {
-        List<PrefLogTemplate> templates = getLogTemplates();
-        int templateIndex = templates.indexOf(template);
+        final List<PrefLogTemplate> templates = getLogTemplates();
+        final int templateIndex = templates.indexOf(template);
         if (templateIndex == -1 && template.getText() == null) {
             return;
         } else if (templateIndex > -1 && template.getText() == null) {
@@ -2019,7 +2025,7 @@ public class Settings {
         try {
             putString(R.string.pref_logTemplates, MAPPER.writeValueAsString(templates));
         } catch (JsonProcessingException e) {
-            Log.e("Failure writing log templates: "+e.getMessage());
+            Log.e("Failure writing log templates: " + e.getMessage());
         }
     }
 
@@ -2035,13 +2041,12 @@ public class Settings {
 
     @Nullable
     public static List<PrefLogTemplate> getLogTemplates() {
-        List<PrefLogTemplate> templates = null;
         try {
-            templates = MAPPER.readValue(getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>(){});
+            return MAPPER.readValue(getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>() { });
         } catch (JsonProcessingException e) {
-            Log.e("Failure parsing log templates: "+e.getMessage());
+            Log.e("Failure parsing log templates: " + e.getMessage());
+            return new ArrayList<>();
         }
-        return templates;
     }
 
     public static boolean isDTMarkerEnabled() {
