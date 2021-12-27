@@ -337,7 +337,8 @@ public final class LogTemplateProvider {
     @NonNull
     public static List<LogTemplate> getTemplatesWithSignature() {
         final List<LogTemplate> templates = getTemplatesWithoutSignature();
-        templates.add(new LogTemplate("SIGNATURE", R.string.init_signature) {
+        int index = 0;
+        templates.add(index++, new LogTemplate("SIGNATURE", R.string.init_signature) {
             @Override
             public String getValue(final LogContext context) {
                 final String nestedTemplate = Settings.getSignature();
@@ -348,7 +349,7 @@ public final class LogTemplateProvider {
             }
         });
         for (Settings.PrefLogTemplate template : Settings.getLogTemplates()) {
-            templates.add(new LogTemplate("TEMPLATE"+template.getKey(), template.getTitle()) {
+            templates.add(index++, new LogTemplate("TEMPLATE"+template.getKey(), template.getTitle()) {
                 @Override
                 public String getValue(final LogContext context) {
                     if (StringUtils.contains(template.getText(), "TEMPLATE"+template.getKey())) {
