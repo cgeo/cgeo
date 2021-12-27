@@ -14,11 +14,11 @@ require composite
 require sed
 
 # directory for icons
-ICONDIR="./drawable-mdpi"
+ICONDIR="./drawable-xhdpi"
 # size of the image itself (inside border)
-IMGSIZE=32
+IMGSIZE=64
 # size of the whole icon
-ICONSIZE=48
+ICONSIZE=96
 # distance of border from edge of icon
 BDIST=2
 # thickness of border
@@ -44,11 +44,12 @@ BNDIST=$((ICONSIZE - BDIST))
 
 # create border
 echo "drawing border"
-convert -size ${ICONSIZE}x${ICONSIZE} xc:none -fill ${BCOL} -strokewidth 1 \
-    -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
-    -strokewidth ${BSTROKE} -stroke ${FCOL} \
-    -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
-    border.png
+#convert -size ${ICONSIZE}x${ICONSIZE} xc:none -fill ${BCOL} -strokewidth 1 \
+#    -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
+#    -strokewidth ${BSTROKE} -stroke ${FCOL} \
+#    -draw "roundrectangle ${BDIST},${BDIST} ${BNDIST},${BNDIST} ${BROUND},${BROUND}" \
+#    border.png
+convert -size ${ICONSIZE}x${ICONSIZE} xc:none border.png
 
 # create strike-thru bar as overlay for _no images
 echo "drawing ${SFNAME}"
