@@ -3429,7 +3429,7 @@ public class DataStore {
     }
 
     @Nullable
-    private static Date getDate(Cursor cursor, String column) {
+    private static Date getDate(final Cursor cursor, final String column) {
         String sDate = null;
         Date oDate = null;
         final int idx = cursor.getColumnIndex(column);
@@ -4848,7 +4848,7 @@ public class DataStore {
         database.execSQL("DELETE FROM " + dbTableSearchDestinationHistory);
     }
 
-    private static double getDouble(Cursor cursor, String rowName) {
+    private static double getDouble(final Cursor cursor, final String rowName) {
         try {
             return cursor.getDouble(cursor.getColumnIndexOrThrow(rowName));
         } catch (final IllegalArgumentException e) {
@@ -4858,7 +4858,7 @@ public class DataStore {
         return 0;
     }
 
-    private static long getLongDate(Cursor cursor) {
+    private static long getLongDate(final Cursor cursor) {
         try {
             return cursor.getLong(cursor.getColumnIndexOrThrow("date"));
         } catch (final IllegalArgumentException e) {
