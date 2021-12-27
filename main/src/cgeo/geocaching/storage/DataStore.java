@@ -124,7 +124,6 @@ public class DataStore {
     // some fields names which are referenced multiple times
     // name scheme is "FIELD_" + table name without prefix + "_" + field name
     private static final String FIELD_LISTS_PREVENTASKFORDELETION = "preventAskForDeletion";
-    private static double def;
 
     public enum DBRestoreResult {
         RESTORE_SUCCESSFUL(R.string.init_restore_success),
@@ -4825,20 +4824,20 @@ public class DataStore {
             int sequence = 1;
             if (cursor.moveToLast()) {
                 do {
-                    statement.bindString(1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
-                    statement.bindLong(3, getLongDate(cursor));                        // updated
-                    statement.bindString(3, "waypoint");                         // type
-                    statement.bindString(4, "00");                               // prefix
-                    statement.bindString(5, "---");                              // lookup
-                    statement.bindString(6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
-                    statement.bindDouble(7, getDouble(cursor, "latitude"));   // latitude
-                    statement.bindDouble(8, getDouble(cursor, "longitude"));  // longitude
-                    statement.bindString(9, "");                                 // note
-                    statement.bindLong(10, 1);                                 // own
-                    statement.bindLong(11, 0);                                 // visited
-                    statement.bindString(12, "");                                // user note
-                    statement.bindLong(13, 0);                                 // org_coords_empty
-                    statement.bindNull(14);                                          // calc_state
+                    statement.bindString    (1, InternalConnector.GEOCODE_HISTORY_CACHE);  // geocode
+                    statement.bindLong      (2, getLongDate(cursor));                      // updated
+                    statement.bindString    (3, "waypoint");                         // type
+                    statement.bindString    (4, "00");                               // prefix
+                    statement.bindString    (5, "---");                              // lookup
+                    statement.bindString    (6, context.getString(R.string.wp_waypoint) + " " + sequence);      // name
+                    statement.bindDouble    (7, getDouble(cursor, "latitude"));      // latitude
+                    statement.bindDouble    (8, getDouble(cursor, "longitude"));     // longitude
+                    statement.bindString    (9, "");                                 // note
+                    statement.bindLong      (10, 1);                                 // own
+                    statement.bindLong      (11, 0);                                 // visited
+                    statement.bindString    (12, "");                                // user note
+                    statement.bindLong      (13, 0);                                 // org_coords_empty
+                    statement.bindNull      (14);                                    // calc_state
                     statement.executeInsert();
                     sequence++;
                 } while (cursor.moveToPrevious());
@@ -4853,9 +4852,9 @@ public class DataStore {
         try {
             return cursor.getDouble(cursor.getColumnIndexOrThrow(rowName));
         } catch (final IllegalArgumentException e) {
-            Log.e("Table row " + rowName + " not found", e);
+            Log.e("Table row '" + rowName + "' not found", e);
         }
-        // use default
+        // set default
         return 0;
     }
 
@@ -4863,9 +4862,9 @@ public class DataStore {
         try {
             return cursor.getLong(cursor.getColumnIndexOrThrow("date"));
         } catch (final IllegalArgumentException e) {
-            Log.e("Table row " + "date" + " not found", e);
+            Log.e("Table row 'date' not found", e);
         }
-        // use default
+        // set default
         return 0;
     }
 
