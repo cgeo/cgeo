@@ -348,10 +348,10 @@ public final class LogTemplateProvider {
             }
         });
         for (Settings.PrefLogTemplate template : Settings.getLogTemplates()) {
-            templates.add(new LogTemplate("TEMPLATE", template.getTitle()) {
+            templates.add(new LogTemplate("TEMPLATE"+template.getKey(), template.getTitle()) {
                 @Override
                 public String getValue(final LogContext context) {
-                    if (StringUtils.contains(template.getText(), "TEMPLATE")) {
+                    if (StringUtils.contains(template.getText(), "TEMPLATE"+template.getKey())) {
                         return "invalid template";
                     }
                     return applyTemplates(template.getText(), context);

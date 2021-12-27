@@ -1,5 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
+import static java.util.UUID.randomUUID;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TemplateTextPreference;
@@ -51,13 +53,14 @@ public class PreferenceLoggingFragment extends PreferenceFragmentCompat {
         preference.setLayoutResource(R.layout.preference_button);
         preference.setIconSpaceReserved(false);
         preference.setOnPreferenceClickListener(pref -> {
-            createLogTemplatePreference(new Settings.PrefLogTemplate(Settings.getLogTemplateHighestId() + 1, "", "")).launchEditTemplateDialog();
+            createLogTemplatePreference(new Settings.PrefLogTemplate(randomUUID().toString(), "", "")).launchEditTemplateDialog();
             return true;
         });
         return preference;
     }
 
     private TemplateTextPreference createLogTemplatePreference(final Settings.PrefLogTemplate template) {
+
         final TemplateTextPreference preference = new TemplateTextPreference(requireContext());
         preference.setKey(template.getKey());
         preference.setTitle(template.getTitle());

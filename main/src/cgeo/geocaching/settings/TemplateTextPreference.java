@@ -59,7 +59,7 @@ public class TemplateTextPreference extends Preference {
         final boolean isSignature = getKey().equals(getContext().getString(R.string.pref_signature));
         if (!isSignature) {
             holder.itemView.setOnLongClickListener(v -> {
-                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove).confirm((dialog, which) -> {
+                SimpleDialog.ofContext(getContext()).setTitle(R.string.init_log_template).setMessage(R.string.init_log_template_remove_confirm).confirm((dialog, which) -> {
                     Settings.putLogTemplate(new Settings.PrefLogTemplate(getKey(), null, null));
                     callChangeListener(null);
                 });
@@ -104,6 +104,9 @@ public class TemplateTextPreference extends Preference {
                 editTitle.setError(getContext().getString(R.string.init_log_template_missing_error));
             } else if (!isSignature && !StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
                 editText.setError(getContext().getString(R.string.init_log_template_missing_error));
+            } else if (StringUtils.isEmpty(newTitle) && StringUtils.isEmpty(newText)) {
+                // don't save empty templates
+                dialog.dismiss();
             } else {
                 if (isSignature) {
                     persistString(newText);
@@ -122,14 +125,13 @@ public class TemplateTextPreference extends Preference {
             for (int i = 0; i < templates.size(); i++) {
                 items[i] = getContext().getString(templates.get(i).getResourceId());
             }
-            templateBuilder.setItems(items, (dialog3, position) -> {
-                dialog3.dismiss();
+            templateBuilder.setItems(items, (selectionDialog, position) -> {
+                selectionDialog.dismiss();
                 final String insertText = "[" + templates.get(position).getTemplateString() + "]";
                 ActivityMixin.insertAtPosition(editText, insertText, true);
             });
             templateBuilder.create().show();
         });
-
     }
 
     @Override

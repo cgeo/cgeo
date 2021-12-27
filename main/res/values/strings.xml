@@ -779,7 +779,7 @@
     <string name="init_template_text">Template Text</string>
     <string name="init_log_template">Log Template</string>
     <string name="init_log_template_addnew">Add a new template</string>
-    <string name="init_log_template_remove">Do you really want to remove the template?</string>
+    <string name="init_log_template_remove_confirm">Do you really want to remove the template?</string>
     <string name="init_log_templates">Log Templates</string>
     <string name="init_log_template_prefix">Template:\u0020</string>
     <string name="init_log_template_missing_error">Both template title and text need to be provided.</string>
