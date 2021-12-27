@@ -1277,7 +1277,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             int lastCategoryId = -1;
             for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
                 for (CacheAttribute attr : CacheAttribute.values()) {
-                    if (attr.categoryId == categoryId) {
+                    if (attr.category.categoryId == categoryId) {
                         for (Boolean enabled : Arrays.asList(false, true)) {
                             final String key = attr.getValue(enabled);
                             if (attributesSet.contains(key)) {

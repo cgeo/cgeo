@@ -283,7 +283,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         int lastCategoryId = -1;
         for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
             for (CacheAttribute attr : CacheAttribute.values()) {
-                if (attr.categoryId == categoryId) {
+                if (attr.category.categoryId == categoryId) {
                     for (Boolean enabled : Arrays.asList(false, true)) {
                         final String key = attr.getValue(enabled);
                         final Integer value = attributes.get(key);

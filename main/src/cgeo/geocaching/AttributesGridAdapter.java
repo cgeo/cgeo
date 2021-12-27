@@ -71,12 +71,14 @@ public class AttributesGridAdapter extends BaseAdapter {
 
     private void drawAttribute(final FrameLayout attributeLayout, final String attributeName) {
         final ImageView imageView = attributeLayout.findViewById(R.id.attribute_image);
+        final ImageView background = attributeLayout.findViewById(R.id.attribute_background);
         final ImageView strikeThrough = attributeLayout.findViewById(R.id.attribute_strikethru);
 
         strikeThrough.setVisibility(CacheAttribute.isEnabled(attributeName) ? View.INVISIBLE : View.VISIBLE);
 
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
+            background.setImageTintList(CacheAttribute.isEnabled(attributeName) ? attrib.category.getCategoryColorList() : attrib.category.getCategoryColorNegativeList());
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
             ViewUtils.setTooltip(imageView, TextParam.text(attrib.getL10n(CacheAttribute.isEnabled(attributeName))));
             if (onClickListener != null) {
