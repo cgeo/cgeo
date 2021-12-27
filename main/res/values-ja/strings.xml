@@ -275,7 +275,7 @@
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
-    <string name="warn_notloggedin_short">ログインしていません。地図にはローカルに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
+    <string name="warn_notloggedin_short">ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリのリストの読み取りエラー</string>
     <string name="err_read_bookmark_list">ブックマークリストの読み取りエラー</string>
@@ -711,6 +711,8 @@
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
     <string name="init_useInternalRouting">c:geoルート検索を使用する</string>
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
+    <string name="init_bigSmileysOnMap">大きなアイコン</string>
+    <string name="init_summary_bigSmileysOnMap">有効にした場合、発見を表すスマイルマークや座標が修正されたことを表す旗マークなどのマーカーがキャッシュの種類アイコンの代わりにマップ上に拡大表示されます。c:geoの再起動が必要です</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
