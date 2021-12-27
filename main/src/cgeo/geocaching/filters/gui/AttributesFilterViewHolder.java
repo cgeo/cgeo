@@ -81,7 +81,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
         for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
             for (CacheAttribute ca : CacheAttribute.values()) {
-                if (ca.categoryId == categoryId) {
+                if (ca.category.categoryId == categoryId) {
                     final View view = createAttributeIcon(ca);
                     view.setOnClickListener(v -> toggleAttributeIcon(ca));
                     this.attributeViews.put(ca, view);

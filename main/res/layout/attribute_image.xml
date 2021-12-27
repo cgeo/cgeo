@@ -6,6 +6,12 @@
     android:layout_height="32dp">
 
     <ImageView
+        android:id="@+id/attribute_background"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/attribute__background" />
+
+    <ImageView
         android:id="@+id/attribute_image"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,5 +23,11 @@
         android:layout_height="match_parent"
         android:src="@drawable/attribute__strikethru"
         android:visibility="invisible" />
+
+    <ImageView
+        android:id="@+id/attribute_border"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/attribute__border" />
 
 </FrameLayout>
