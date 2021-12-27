@@ -10,6 +10,8 @@ public class BRouterConstants {
 
     public static final String BROUTER_TILE_FILEEXTENSION = ".rd5";
 
+    public static final String PROFILE_PARAMTERKEY = "internal_routing_profile";
+
     private BRouterConstants() {
         // utility class
     }
