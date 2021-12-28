@@ -1,8 +1,10 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.brouter.BRouterConstants;
 import cgeo.geocaching.models.Download;
+import cgeo.geocaching.network.Network;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -13,6 +15,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -61,6 +65,22 @@ public class BRouterTileDownloader extends AbstractDownloader {
     @NonNull
     public static BRouterTileDownloader getInstance() {
         return INSTANCE;
+    }
+
+    // used for area tile checking, see MapUtils
+    public HashMap<String, Download> getAvailableTiles() {
+        final HashMap<String, Download> tiles = new HashMap<>();
+
+        final String url = CgeoApplication.getInstance().getString(R.string.brouter_downloadurl);
+        final String page = Network.getResponseData(Network.getRequest(url));
+        final List<Download> list = new ArrayList<>();
+        if (page != null) {
+            analyzePage(Uri.parse(url), list, page);
+        }
+        for (Download download : list) {
+            tiles.put(download.getName(), download);
+        }
+        return tiles;
     }
 
 }

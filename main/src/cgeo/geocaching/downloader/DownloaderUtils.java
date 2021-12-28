@@ -137,6 +137,49 @@ public class DownloaderUtils {
             .show();
     }
 
+    public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads) {
+        String updates = "";
+        for (Download download : downloads) {
+            updates += (StringUtils.isNotBlank(updates) ? ", " : "") + download.getName() + (StringUtils.isNotBlank(download.getSizeInfo()) ? " (" + download.getSizeInfo() + ")" : "");
+        }
+
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+        builder.setTitle(title);
+        final View layout = View.inflate(builder.getContext(), R.layout.downloader_confirmation, null);
+        builder.setView(layout);
+        final TextView downloadInfo = layout.findViewById(R.id.download_info);
+        downloadInfo.setText(String.format(activity.getString(confirmation), updates, "\n\n" + activity.getString(R.string.download_warning)));
+
+        builder
+            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
+
+                final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+                if (null != downloadManager) {
+                    for (Download download : downloads) {
+                        final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
+                            .setTitle(download.getName())
+                            .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
+                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
+                            .setAllowedOverMetered(allowMeteredNetwork)
+                            .setAllowedOverRoaming(allowMeteredNetwork);
+                        Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
+                        AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                    }
+                    ActivityMixin.showShortToast(activity, R.string.download_started);
+                } else {
+                    ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
+                }
+                dialog.dismiss();
+            })
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                dialog.dismiss();
+            })
+            .create()
+            .show();
+    }
+
     private static long addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
         final DownloadManager.Request request = new DownloadManager.Request(uri)
             .setTitle(filename)
@@ -286,46 +329,7 @@ public class DownloaderUtils {
                 if (result.size() == 0) {
                     Toast.makeText(activity, R.string.no_updates_found, Toast.LENGTH_SHORT).show();
                 } else {
-                    String updates = "";
-                    for (Download download : result) {
-                        updates += (StringUtils.isNotBlank(updates) ? ", " : "") + download.getName() + (StringUtils.isNotBlank(download.getSizeInfo()) ? " (" + download.getSizeInfo() + ")" : "");
-                    }
-
-                    final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-                    builder.setTitle(R.string.updates_check);
-                    final View layout = View.inflate(builder.getContext(), R.layout.downloader_confirmation, null);
-                    builder.setView(layout);
-                    final TextView downloadInfo = layout.findViewById(R.id.download_info);
-                    downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation_updates), updates, "\n\n" + activity.getString(R.string.download_warning)));
-
-                    builder
-                        .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                            final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
-
-                            final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
-                            if (null != downloadManager) {
-                                for (Download download : result) {
-                                    final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
-                                        .setTitle(download.getName())
-                                        .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
-                                        .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                                        .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
-                                        .setAllowedOverMetered(allowMeteredNetwork)
-                                        .setAllowedOverRoaming(allowMeteredNetwork);
-                                    Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
-                                    AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
-                                }
-                                ActivityMixin.showShortToast(activity, R.string.download_started);
-                            } else {
-                                ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
-                            }
-                            dialog.dismiss();
-                        })
-                        .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                            dialog.dismiss();
-                        })
-                        .create()
-                        .show();
+                    triggerDownloads(activity, R.string.updates_check, R.string.download_confirmation_updates, result);
                 }
             }
         }
