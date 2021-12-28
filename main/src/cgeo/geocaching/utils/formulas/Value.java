@@ -7,6 +7,9 @@ import java.text.DecimalFormat;
 import java.text.DecimalFormatSymbols;
 import java.text.Format;
 import java.util.Locale;
+import java.util.Objects;
+
+import org.apache.commons.lang3.StringUtils;
 
 /** Encapsulates a single value for handling in {@link Formula}. Provides e.g. type conversions. */
 public class Value {
@@ -68,6 +71,11 @@ public class Value {
         return raw instanceof CharSequence ? (CharSequence) raw : getAsString();
     }
 
+    public boolean getAsBoolean() {
+        //value is boolean if it is either numeric and > 0 or non-numeric and non-empty as a string
+        return isDouble() ? getAsDouble() > 0d + DOUBLE_DELTA : !StringUtils.isBlank(getAsString());
+    }
+
     public int getAsInt() {
         if (asInteger == null) {
             if (raw instanceof Integer) {
@@ -92,7 +100,7 @@ public class Value {
                 asDouble = ((Number) raw).doubleValue();
             } else {
                 try {
-                    asDouble = Double.parseDouble(getAsString());
+                    asDouble = Double.parseDouble(getAsString().replaceAll(",", "."));
                 } catch (NumberFormatException nfe) {
                     asDouble = Double.NaN;
                 }
@@ -105,14 +113,30 @@ public class Value {
         return getAsString();
     }
 
-    @NonNull
-    @Override
-    public String toString() {
-        return getAsString();
-    }
-
     public String getType() {
         return raw == null ? "null" : raw.getClass().getSimpleName();
     }
 
+    @Override
+    public boolean equals(@Nullable final Object obj) {
+        if (! (obj instanceof Value)) {
+            return false;
+        }
+        final Value other = (Value) obj;
+        if (other.isDouble() && this.isDouble()) {
+            return Math.abs(other.getAsDouble() - this.getAsDouble()) < DOUBLE_DELTA;
+        }
+        return Objects.equals(getAsString(), other.getAsString());
+    }
+
+    @Override
+    public int hashCode() {
+        return isDouble() ? (int) Math.round(getAsDouble()) : getAsString().hashCode();
+    }
+
+    @Override
+    @NonNull
+    public String toString() {
+        return getAsString();
+    }
 }

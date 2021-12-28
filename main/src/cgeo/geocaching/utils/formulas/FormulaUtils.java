@@ -46,10 +46,14 @@ public class FormulaUtils {
     }
 
     public static Value ifFunction(final ValueList values) {
-        if (values.getAsDouble(0) >= 0.9d || Boolean.parseBoolean(values.getAsString(0, ""))) {
-            return values.get(1);
+        final int ifConditionCount = values.size() / 2;
+        final boolean hasElse = values.size() % 2 == 1;
+        for (int i = 0; i < ifConditionCount; i++) {
+            if (values.get(i * 2).getAsBoolean()) {
+                return values.get(i * 2 + 1);
+            }
         }
-        return values.size() > 2 ? values.get(2) : Value.of(0);
+        return hasElse ? values.get(values.size() - 1) : Value.of(0);
     }
 
     public static int valueChecksum(final Value value, final boolean iterative) {

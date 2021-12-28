@@ -20,4 +20,15 @@ public class CalculatedCoordinateTest {
         assertThat(gp.getLatitude()).isEqualTo(48.20575, offset(1e-8));
         assertThat(gp.getLongitude()).isEqualTo(13.14455, offset(1e-8));
     }
+
+    @Test
+    public void northSouthEastWest() {
+        CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig("PLAIN::N48.123::W13.456");
+        assertThat(cc.calculateGeopoint(null).getLatitude()).isEqualTo(48.123);
+        assertThat(cc.calculateGeopoint(null).getLongitude()).isEqualTo(-13.456);
+
+        cc = CalculatedCoordinate.createFromConfig("PLAIN::S48.123::E13.456");
+        assertThat(cc.calculateGeopoint(null).getLatitude()).isEqualTo(-48.123);
+        assertThat(cc.calculateGeopoint(null).getLongitude()).isEqualTo(13.456);
+    }
 }

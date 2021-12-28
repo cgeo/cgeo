@@ -31,7 +31,7 @@ public enum FormulaFunction {
         p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), p.getAsInt(1, 0)))),
 
     IF("if", FunctionGroup.COMPLEX_NUMERIC, 0, "If", null, 0,
-        minMaxParamFunction(2, 3, FormulaUtils::ifFunction)),
+        minMaxParamFunction(2, -1, FormulaUtils::ifFunction)),
 
     LENGTH("length", FunctionGroup.SIMPLE_STRING, 0, "String Length", "''", 1,
         singleValueStringFunction(String::length)),
