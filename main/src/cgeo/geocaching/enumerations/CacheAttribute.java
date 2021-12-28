@@ -2,12 +2,15 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -230,6 +233,17 @@ public enum CacheAttribute {
         return FIND_BY_OCACODE.get(ocAcode);
     }
 
+    @Nullable
+    public static List<CacheAttribute> getByCategory(final CacheAttributeCategory category) {
+        final List<CacheAttribute> attributes = new ArrayList<>();
+        for (CacheAttribute attr : CacheAttribute.values()) {
+            if (attr.category == category) {
+                attributes.add(attr);
+            }
+        }
+        return attributes;
+    }
+
     @NonNull
     public static String trimAttributeName(@Nullable final String attributeName) {
         if (attributeName == null) {
@@ -255,8 +269,36 @@ public enum CacheAttribute {
     /**
      * get the value of this attribute for the given activation state, e.g. "dogs_yes" or "wheelchair_no".
      */
-    public String getValue(final boolean active) {
-        return rawName + (active ? INTERNAL_YES : INTERNAL_NO);
+    public String getValue(final Boolean active) {
+        if (active == null) {
+            return rawName;
+        } else {
+            return rawName + (active ? INTERNAL_YES : INTERNAL_NO);
+        }
+    }
+
+    /**
+     * Filter the list of attributes based on the associated connector
+     */
+    public static List<CacheAttribute> getAttributesByCategoryAndConnector(final CacheAttributeCategory cac) {
+        final boolean showGc = Settings.isAttributeFilterSourcesGC();
+        final boolean showOc = Settings.isAttributeFilterSourcesOkapi();
+
+        final List<CacheAttribute> filteredAttributes = new ArrayList<>();
+        final List<CacheAttribute> unfilteredAttributes;
+        if (cac == null) {
+            unfilteredAttributes = Arrays.asList(CacheAttribute.values());
+        } else {
+            unfilteredAttributes = getByCategory(cac);
+        }
+        for (CacheAttribute ca : unfilteredAttributes) {
+            if (showGc && ca.gcid > -1 && ca.gcid < 100) {
+                filteredAttributes.add(ca);
+            } else if (showOc && ca.ocacode > -1) {
+                filteredAttributes.add(ca);
+            }
+        }
+        return filteredAttributes;
     }
 
 }

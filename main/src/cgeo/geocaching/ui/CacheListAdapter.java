@@ -40,6 +40,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -263,45 +264,53 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         // collect attributes and counters
         final Map<String, Integer> attributes = new HashMap<>();
+        CacheAttribute ca;
         final int max = list.size();
         for (int i = 0; i < max; i++) {
-            final Geocache cache = list.get(i);
-            for (String attr : cache.getAttributes()) {
-                final Integer count = attributes.get(attr);
-                if (count == null) {
-                    attributes.put(attr, 1);
+            for (String attr : list.get(i).getAttributes()) {
+                // OC attributes are always positive, to count them with GC attributes append "_yes"
+                final String attrVal;
+                ca = CacheAttribute.getByName(attr);
+                if (attr.equals(ca.rawName)) {
+                    attrVal = ca.getValue(true);
                 } else {
-                    attributes.put(attr, count + 1);
+                    attrVal = attr;
+                }
+                final Integer count = attributes.get(attrVal);
+                if (count == null) {
+                    attributes.put(attrVal, 1);
+                } else {
+                    attributes.put(attrVal, count + 1);
                 }
             }
         }
 
         // traverse by category and attribute order
-        final ArrayList<String> a = new ArrayList<>();
-        final StringBuilder text = new StringBuilder();
+        final ArrayList<String> orderedAttributeNames = new ArrayList<>();
+        final StringBuilder attributesText = new StringBuilder();
         CacheAttributeCategory lastCategory = null;
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-            for (CacheAttribute attr : CacheAttribute.values()) {
-                if (attr.category == category) {
-                    for (Boolean enabled : Arrays.asList(false, true)) {
-                        final String key = attr.getValue(enabled);
-                        final Integer value = attributes.get(key);
-                        if (value != null && value > 0) {
-                            if (lastCategory != category) {
-                                text.append("\n\n").append(category.getName(context));
-                                lastCategory = category;
-                            }
-                            a.add(key);
-                            text.append('\n').append(attr.getL10n(enabled)).append(": ").append(value);
+            for (CacheAttribute attr : CacheAttribute.getByCategory(category)) {
+                for (Boolean enabled : Arrays.asList(false, true)) {
+                    final String key = attr.getValue(enabled);
+                    final Integer value = attributes.get(key);
+                    if (value != null && value > 0) {
+                        if (lastCategory != category) {
+                            attributesText.append("<h5>").append(category.getName(context)).append("</h5>");
+                            lastCategory = category;
+                        } else {
+                            attributesText.append("<br />");
                         }
+                        orderedAttributeNames.add(key);
+                        attributesText.append(attr.getL10n(enabled)).append(": ").append(value);
                     }
                 }
             }
         }
 
         final View v = LayoutInflater.from(context).inflate(R.layout.cachelist_attributeoverview, null);
-        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, a, null));
-        ((TextView) v.findViewById(R.id.attributes_text)).setText(text);
+        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, orderedAttributeNames, null));
+        ((TextView) v.findViewById(R.id.attributes_text)).setText(HtmlCompat.fromHtml(attributesText.toString(), 0));
         Dialogs.bottomSheetDialogWithActionbar(context, v, R.string.cache_filter_attributes).show();
     }
 

@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.TextParam;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
@@ -17,11 +18,11 @@ import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import androidx.core.content.res.ResourcesCompat;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.google.android.material.button.MaterialButton;
@@ -31,9 +32,9 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
     private final Map<CacheAttribute, View> attributeViews = new HashMap<>();
     private final Map<CacheAttribute, Boolean> attributeState = new HashMap<>();
+    private ChipGroup cg = null;
     private ButtonToggleGroup inverse;
     final ColorStateList fadedIconTint = ColorStateList.valueOf(ResourcesCompat.getColor(CgeoApplication.getInstance().getResources(), R.color.attribute_filter_disabled, null));
-
 
     private void toggleAttributeIcon(final CacheAttribute ca) {
         final Boolean state = getAttributeIconState(ca);
@@ -80,62 +81,91 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
      @Override
      public View createView() {
+         final LinearLayout ll = new LinearLayout(getActivity());
+         ll.setOrientation(LinearLayout.VERTICAL);
 
-        final ChipGroup cg = new ChipGroup(getActivity());
+         inverse = new ButtonToggleGroup(getActivity());
+         inverse.addButtons(R.string.cache_filter_include, R.string.cache_filter_exclude);
+
+         final ButtonToggleGroup sources = new ButtonToggleGroup(getActivity());
+         sources.setSingleSelection(false);
+         sources.addButtons(R.string.attribute_source_gc, R.string.attribute_source_oc);
+         sources.setCheckedButtonByIndex(0, Settings.isAttributeFilterSourcesGC());
+         sources.setCheckedButtonByIndex(1, Settings.isAttributeFilterSourcesOkapi());
+         sources.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
+             int newVal = 0;
+             for (Integer checkedIndex : ((ButtonToggleGroup) group).getCheckedButtonIndexes()) {
+                 newVal += checkedIndex + 1;
+             }
+             Settings.setAttributeFilterSources(newVal);
+             drawAttributeChip(ll);
+         });
+
+         final LayoutInflater inflater = LayoutInflater.from(getActivity());
+         final MaterialButton clear = (MaterialButton) inflater.inflate(R.layout.button_icon_view, ll, false);
+         clear.setIconResource(R.drawable.ic_menu_clear_playlist);
+         clear.setOnClickListener(v -> {
+             for (CacheAttribute ca : attributeViews.keySet()) {
+                 setAttributeState(ca, null);
+             }
+         });
+
+         final LinearLayout toolbar = new LinearLayout(getActivity());
+         toolbar.addView(inverse);
+         final LinearLayout.LayoutParams spacerlp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+         toolbar.addView(new View(getActivity()), spacerlp);
+         toolbar.addView(sources);
+         toolbar.addView(new View(getActivity()), spacerlp);
+         toolbar.addView(clear);
+
+         final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+         llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
+         ll.addView(toolbar, llp);
+
+         drawAttributeChip(ll);
+
+         return ll;
+    }
+
+    private void drawAttributeChip(final LinearLayout ll) {
+        // save current attribute selection state and remove current list
+        final AttributesGeocacheFilter selectedAttributes = createFilterFromView();
+        ll.removeView(cg);
+
+        // draw new list
+        cg = new ChipGroup(getActivity());
         cg.setChipSpacing(dpToPixel(10));
 
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-            for (CacheAttribute ca : CacheAttribute.values()) {
-                if (ca.category == category) {
-                    final View view = createAttributeIcon(ca);
-                    view.setOnClickListener(v -> toggleAttributeIcon(ca));
-                    this.attributeViews.put(ca, view);
-                    this.attributeState.put(ca, null);
-                    cg.addView(view);
-                    setAttributeState(ca, null);
-                }
+            for (CacheAttribute ca : CacheAttribute.getAttributesByCategoryAndConnector(category)) {
+                final View view = createAttributeIcon(ca);
+                view.setOnClickListener(v -> toggleAttributeIcon(ca));
+                this.attributeViews.put(ca, view);
+                this.attributeState.put(ca, null);
+                cg.addView(view);
+                setAttributeState(ca, null);
             }
         }
 
-        final LinearLayout ll = new LinearLayout(getActivity());
-        ll.setOrientation(LinearLayout.VERTICAL);
-
-        inverse = new ButtonToggleGroup(getActivity());
-        inverse.addButtons(R.string.cache_filter_include, R.string.cache_filter_exclude);
-
-        final LayoutInflater inflater = LayoutInflater.from(getActivity());
-        final MaterialButton clear = (MaterialButton) inflater.inflate(R.layout.button_icon_view, ll, false);
-        clear.setIconResource(R.drawable.ic_menu_clear_playlist);
-        clear.setOnClickListener(v -> {
-            for (CacheAttribute ca : attributeViews.keySet()) {
-                setAttributeState(ca, null);
-            }
-        });
-
-        final RelativeLayout relLayout = new RelativeLayout(getActivity());
-        RelativeLayout.LayoutParams relp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        relp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-        relLayout.addView(inverse, relp);
-        relp = new RelativeLayout.LayoutParams(dpToPixel(40), dpToPixel(40));
-        relp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-        relLayout.addView(clear, relp);
-
-        LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-        llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
-        ll.addView(relLayout, llp);
-
-         llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
+        final LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(5), 0, dpToPixel(20));
         ll.addView(cg, llp);
 
-        return ll;
+        // restore statellp
+        setViewFromFilter(selectedAttributes);
     }
 
 
     @Override
     public void setViewFromFilter(final AttributesGeocacheFilter filter) {
+        final List<CacheAttribute> activeAttributes = CacheAttribute.getAttributesByCategoryAndConnector(null);
         for (Map.Entry<CacheAttribute, Boolean> entry : filter.getAttributes().entrySet()) {
-            setAttributeState(entry.getKey(), entry.getValue());
+            if (activeAttributes.contains(entry.getKey())) {
+                setAttributeState(entry.getKey(), entry.getValue());
+            } else {
+                // if attribute is not visible reset it
+                this.attributeState.put(entry.getKey(), null);
+            }
         }
         inverse.setCheckedButtonByIndex(filter.isInverse() ? 1 : 0, true);
     }

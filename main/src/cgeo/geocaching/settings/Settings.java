@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -2051,4 +2053,39 @@ public class Settings {
     public static boolean isDTMarkerEnabled() {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
+
+    private static int getAttributeFilterSources() {
+        int setting = getInt(R.string.pref_attributeFilterSources, 0);
+        if (setting == 0) {
+            // guess a reasonable default value based on enabled connectors
+            boolean gc = false;
+            boolean okapi = false;
+            final List<IConnector> activeConnectors = ConnectorFactory.getActiveConnectors();
+            for (final IConnector conn : activeConnectors) {
+                if ("GC".equals(conn.getNameAbbreviated()) || "AL".equals(conn.getNameAbbreviated())) {
+                    gc = true;
+                } else {
+                    okapi = true;
+                }
+            }
+            setting = 3 - (!gc ? 1 : 0) + (!okapi ? 2 : 0);
+        }
+        return setting;
+    }
+
+    public static boolean isAttributeFilterSourcesGC() {
+        return getAttributeFilterSources() != 2;
+    }
+
+    public static boolean isAttributeFilterSourcesOkapi() {
+        return getAttributeFilterSources() >= 2;
+    }
+
+    /**
+     * For which connectors should attributes be shown: 1 GC, 2 Okapi, 3 Both
+     */
+    public static void setAttributeFilterSources(final int value) {
+        putInt(R.string.pref_attributeFilterSources, value);
+    }
+
 }
