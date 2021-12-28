@@ -4,6 +4,8 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory.NavigationAppsEnum;
 import cgeo.geocaching.brouter.BRouterConstants;
+import cgeo.geocaching.connector.ConnectorFactory;
+import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.IAvatar;
 import cgeo.geocaching.connector.capability.ICredentials;
 import cgeo.geocaching.connector.gc.GCConnector;
@@ -1981,7 +1983,32 @@ public class Settings {
     }
 
     public static int getAttributeFilterSources() {
-        return getInt(R.string.pref_attributeFilterSources, -1);
+        int setting = getInt(R.string.pref_attributeFilterSources, -1);
+        if (setting > -1) {
+            return setting;
+        } else {
+            boolean gcAttributes = false;
+            boolean ocAttributes = false;
+            final List<IConnector> activeConnectors = ConnectorFactory.getActiveConnectors();
+            for (final IConnector conn : activeConnectors) {
+                if ("GC".equals(conn.getNameAbbreviated()) || "AL".equals(conn.getNameAbbreviated())) {
+                    gcAttributes = true;
+                } else {
+                    ocAttributes = true;
+                }
+            }
+            if (gcAttributes && !ocAttributes) {
+                return 1;
+            } else if (!gcAttributes && ocAttributes) {
+                return 2;
+            } else {
+                return 0;
+            }
+        }
+    }
+
+    public static void setAttributeFilterSources(final int value) {
+        putInt(R.string.pref_attributeFilterSources, value);
     }
 
 }

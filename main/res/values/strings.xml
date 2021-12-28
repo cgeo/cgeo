@@ -2003,6 +2003,11 @@
     <string name="cat_surrounding">Around the cache</string>
     <string name="cat_permissions">Permissions</string>
 
+    <!-- cache attribute sources -->
+    <string name="attribute_source_all">All</string>
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
+
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

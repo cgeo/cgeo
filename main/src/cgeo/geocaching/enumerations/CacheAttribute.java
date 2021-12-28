@@ -267,33 +267,15 @@ public enum CacheAttribute {
      * Filter the list of attributes based on the associated connector
      */
     public static List<CacheAttribute> getFilteredAttributeList() {
-        int attributeSources = Settings.getAttributeFilterSources();
-        boolean gcAttributes = false;
-        boolean ocAttributes = false;
-
-        if (attributeSources == 0) {
-            gcAttributes = true;
-            ocAttributes = true;
-        } else if (attributeSources == 1) {
-            gcAttributes = true;
-        } else if (attributeSources == 2) {
-            ocAttributes = true;
-        } else if (attributeSources == -1) {
-            final List<IConnector> activeConnectors = ConnectorFactory.getActiveConnectors();
-            for (final IConnector conn : activeConnectors) {
-                if ("GC".equals(conn.getNameAbbreviated()) || "AL".equals(conn.getNameAbbreviated())) {
-                    gcAttributes = true;
-                } else {
-                    ocAttributes = true;
-                }
-            }
-        }
+        final int attributeSources = Settings.getAttributeFilterSources();
 
         final List<CacheAttribute> filteredAttributes = new ArrayList<>();
         for (CacheAttribute ca : CacheAttribute.values()) {
-            if (gcAttributes && ca.gcid > -1 && ca.gcid < 100) {
+            if (attributeSources == 0) {
                 filteredAttributes.add(ca);
-            } else if (ocAttributes && ca.ocacode > -1) {
+            } else if (attributeSources == 1 && ca.gcid > -1 && ca.gcid < 100) {
+                filteredAttributes.add(ca);
+            } else if (attributeSources == 2 && ca.ocacode > -1) {
                 filteredAttributes.add(ca);
             }
         }
