@@ -54,6 +54,12 @@ import androidx.annotation.StringRes;
 import androidx.appcompat.app.AppCompatDelegate;
 import androidx.preference.PreferenceManager;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.File;
 import java.io.FileFilter;
 import java.util.ArrayList;
@@ -94,6 +100,8 @@ public class Settings {
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
+
+    private static final ObjectMapper MAPPER = new ObjectMapper();
 
     // twitter api keys
     @NonNull private static final String TWITTER_KEY_CONSUMER_PUBLIC = CryptUtils.rot13("ESnsCvAv3kEupF1GCR3jGj");
@@ -160,6 +168,46 @@ public class Settings {
 
         public String getPreferenceValue(final @NonNull Context context) {
             return context.getString(preferenceValue);
+        }
+    }
+
+    public static class PrefLogTemplate {
+        private final @NonNull String key;
+        private final String title;
+        private final String text;
+
+        @JsonCreator
+        public PrefLogTemplate(@JsonProperty("key") final String key, @JsonProperty("title") final String title, @JsonProperty("text") final String text) {
+            this.key = key;
+            this.title = title;
+            this.text = text;
+        }
+
+        @NonNull
+        public String getKey() {
+            return key;
+        }
+
+        public String getTitle() {
+            return title;
+        }
+
+        public String getText() {
+            return text;
+        }
+
+        @Override
+        public boolean equals(final Object o) {
+            if (getClass() != o.getClass()) {
+                return false;
+            }
+            final PrefLogTemplate p = (PrefLogTemplate) o;
+            return p.getKey().equals(this.getKey());
+        }
+
+        @Override
+        public int hashCode() {
+            return key.hashCode();
         }
     }
 
@@ -1962,22 +2010,46 @@ public class Settings {
         return sensitiveKeys;
     }
 
-    public static void putLogTemplate(final String preferenceBaseName, final String title, final String text) {
-        putStringDirect(preferenceBaseName + ".Title", title);
-        putStringDirect(preferenceBaseName, text);
+    public static void putLogTemplate(final PrefLogTemplate template) {
+        final List<PrefLogTemplate> templates = getLogTemplates();
+        final int templateIndex = templates.indexOf(template);
+        if (templateIndex == -1 && template.getText() == null) {
+            return;
+        } else if (templateIndex > -1 && template.getText() == null) {
+            templates.remove(templateIndex);
+        } else if (templateIndex == -1) {
+            templates.add(template);
+        } else {
+            templates.set(templateIndex, template);
+        }
+        try {
+            putString(R.string.pref_logTemplates, MAPPER.writeValueAsString(templates));
+        } catch (JsonProcessingException e) {
+            Log.e("Failure writing log templates: " + e.getMessage());
+        }
     }
 
-    public static ImmutablePair<String, String> getLogTemplate(final String preferenceBaseName) {
-        return new ImmutablePair<>(getStringDirect(preferenceBaseName + ".Title", ""), getStringDirect(preferenceBaseName, ""));
+    @Nullable
+    public static PrefLogTemplate getLogTemplate(final String key) {
+        for (PrefLogTemplate template : getLogTemplates()) {
+            if (template.getKey().equals(key)) {
+                return template;
+            }
+        }
+        return null;
     }
 
-    public static String getLogTemplatePreview(final String preferenceBaseName) {
-        final ImmutablePair<String, String> template = getLogTemplate(preferenceBaseName);
-        return template.getKey() + ": " + template.getValue();
+    @Nullable
+    public static List<PrefLogTemplate> getLogTemplates() {
+        try {
+            return MAPPER.readValue(getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>() { });
+        } catch (JsonProcessingException e) {
+            Log.e("Failure parsing log templates: " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     public static boolean isDTMarkerEnabled() {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
-
 }

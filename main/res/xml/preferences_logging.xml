@@ -20,28 +20,10 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:key="@string/pref_fakekey_category_logTemplate"
         android:title="@string/init_log_templates"
         app:iconSpaceReserved="false">
-        <cgeo.geocaching.settings.TemplateTextPreference
-            android:key="@string/pref_logTemplate1"
-            android:title="@string/init_log_template"
-            app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.TemplateTextPreference
-            android:key="@string/pref_logTemplate2"
-            android:title="@string/init_log_template"
-            app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.TemplateTextPreference
-            android:key="@string/pref_logTemplate3"
-            android:title="@string/init_log_template"
-            app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.TemplateTextPreference
-            android:key="@string/pref_logTemplate4"
-            android:title="@string/init_log_template"
-            app:iconSpaceReserved="false" />
-        <cgeo.geocaching.settings.TemplateTextPreference
-            android:key="@string/pref_logTemplate5"
-            android:title="@string/init_log_template"
-            app:iconSpaceReserved="false" />
+        <!-- Filled dynamically -->
     </PreferenceCategory>
 
     <PreferenceCategory

@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * Provides all the available templates for logging.
@@ -338,7 +337,8 @@ public final class LogTemplateProvider {
     @NonNull
     public static List<LogTemplate> getTemplatesWithSignature() {
         final List<LogTemplate> templates = getTemplatesWithoutSignature();
-        templates.add(new LogTemplate("SIGNATURE", R.string.init_signature) {
+        int index = 0;
+        templates.add(index++, new LogTemplate("SIGNATURE", R.string.init_signature) {
             @Override
             public String getValue(final LogContext context) {
                 final String nestedTemplate = Settings.getSignature();
@@ -348,19 +348,16 @@ public final class LogTemplateProvider {
                 return applyTemplates(nestedTemplate, context);
             }
         });
-        for (int i = 1; i <= 5; i++) {
-            final ImmutablePair<String, String> template = Settings.getLogTemplate("pref_logTemplate" + i);
-            if (!template.getKey().isEmpty()) {
-                templates.add(new LogTemplate("TEMPLATE", template.getKey()) {
-                    @Override
-                    public String getValue(final LogContext context) {
-                        if (StringUtils.contains(template.getValue(), "TEMPLATE")) {
-                            return "invalid template";
-                        }
-                        return applyTemplates(template.getValue(), context);
+        for (Settings.PrefLogTemplate template : Settings.getLogTemplates()) {
+            templates.add(index++, new LogTemplate("TEMPLATE" + template.getKey(), template.getTitle()) {
+                @Override
+                public String getValue(final LogContext context) {
+                    if (StringUtils.contains(template.getText(), "TEMPLATE" + template.getKey())) {
+                        return "invalid template";
                     }
-                });
-            }
+                    return applyTemplates(template.getText(), context);
+                }
+            });
         }
         return templates;
     }
