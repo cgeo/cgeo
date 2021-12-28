@@ -149,7 +149,6 @@ android {
             res.srcDirs = ['res']
             assets.srcDirs = ['assets']
             aidl.srcDirs = ['src'] // default src/main/aidl creates package name conflicts in Eclipse
-            jni.srcDirs = []
         }
         // local unit tests, which can be executed without a device
         test {
@@ -190,6 +189,10 @@ android {
 
         // ExtraTranslation - old translation will be deleted by the next crowdin import
         disable 'ExtraTranslation'
+
+        // analyze all dependency modules in parallel and produce a single report
+        // including issues from the app and all of its dependencies
+        checkDependencies true
     }
 
     packagingOptions {
@@ -639,5 +642,5 @@ tasks.register('checkstyle', Checkstyle) {
 }
 
 tasks.named('check') {
-    dependsOn tasks.named('checkstyle')
+    mustRunAfter tasks.named('checkstyle')
 }
