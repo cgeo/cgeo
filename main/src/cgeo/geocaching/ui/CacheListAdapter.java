@@ -665,7 +665,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
      */
     private void checkSeries() {
         boolean series = false;
-        if (list.size() < 3 || list.size() > 50) {
+        if (list.size() < 3 || list.size() > 500) {
             return;
         }
         final ArrayList<String> names = new ArrayList<>();
