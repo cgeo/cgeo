@@ -1,5 +1,6 @@
 package cgeo.geocaching.filters.gui;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
@@ -9,7 +10,7 @@ import cgeo.geocaching.ui.TextParam;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
 import static cgeo.geocaching.ui.ViewUtils.setTooltip;
 
-import android.graphics.Color;
+import android.content.res.ColorStateList;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,6 +32,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
     private final Map<CacheAttribute, View> attributeViews = new HashMap<>();
     private final Map<CacheAttribute, Boolean> attributeState = new HashMap<>();
     private ButtonToggleGroup inverse;
+    final ColorStateList fadedIconTint = ColorStateList.valueOf(ResourcesCompat.getColor(CgeoApplication.getInstance().getResources(), R.color.attribute_filter_disabled, null));
 
 
     private void toggleAttributeIcon(final CacheAttribute ca) {
@@ -51,21 +53,24 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         // help lint...
         assert v != null;
 
-        final ImageView icon = (ImageView) v.findViewById(R.id.attribute_image);
+        final ImageView icon = v.findViewById(R.id.attribute_image);
+        final ImageView background = v.findViewById(R.id.attribute_background);
+        final ImageView border = v.findViewById(R.id.attribute_border);
         final View strikeThrough = v.findViewById(R.id.attribute_strikethru);
 
+        // defaults: Enabled attribute
+        icon.setImageTintList(null);
+        border.setImageTintList(null);
+        strikeThrough.setVisibility(View.INVISIBLE);
+        icon.setContentDescription(ca.getL10n(true));
+        setTooltip(v, TextParam.text(ca.getL10n(true)));
+
+        background.setImageTintList(ca.category.getCategoryColorStateList(state));
+
         if (state == null) {
-            icon.setColorFilter(Color.argb(150, 200, 200, 200));
-            strikeThrough.setVisibility(View.INVISIBLE);
-            setTooltip(v, TextParam.text(ca.getL10n(true)));
-            icon.setContentDescription(ca.getL10n(true));
-        } else if (state) {
-            icon.clearColorFilter();
-            strikeThrough.setVisibility(View.INVISIBLE);
-            setTooltip(v, TextParam.text(ca.getL10n(true)));
-            icon.setContentDescription(ca.getL10n(true));
-        } else {
-            icon.clearColorFilter();
+            icon.setImageTintList(fadedIconTint);
+            border.setImageTintList(fadedIconTint);
+        } else if (!state) {
             strikeThrough.setVisibility(View.VISIBLE);
             setTooltip(v, TextParam.text(ca.getL10n(false)));
             icon.setContentDescription(ca.getL10n(false));
@@ -79,14 +84,15 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         final ChipGroup cg = new ChipGroup(getActivity());
         cg.setChipSpacing(dpToPixel(10));
 
-        for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
+        for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
             for (CacheAttribute ca : CacheAttribute.values()) {
-                if (ca.category.categoryId == categoryId) {
+                if (ca.category == category) {
                     final View view = createAttributeIcon(ca);
                     view.setOnClickListener(v -> toggleAttributeIcon(ca));
                     this.attributeViews.put(ca, view);
                     this.attributeState.put(ca, null);
                     cg.addView(view);
+                    setAttributeState(ca, null);
                 }
             }
         }
@@ -143,15 +149,9 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
     }
 
     private View createAttributeIcon(final CacheAttribute ca) {
-        final FrameLayout attributeLayout  = (FrameLayout) inflateLayout(R.layout.attribute_image);
-
-        final ImageView imageView = (ImageView) attributeLayout.getChildAt(0);
-
+        final FrameLayout attributeLayout = (FrameLayout) inflateLayout(R.layout.attribute_image);
+        final ImageView imageView = attributeLayout.findViewById(R.id.attribute_image);
         imageView.setImageDrawable(ResourcesCompat.getDrawable(getActivity().getResources(), ca.drawableId, null));
-        imageView.setColorFilter(Color.argb(150, 200, 200, 200));
-
-        setTooltip(attributeLayout, TextParam.text(ca.getL10n(true)));
-
         return attributeLayout;
     }
 

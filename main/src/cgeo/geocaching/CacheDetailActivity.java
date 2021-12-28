@@ -1274,19 +1274,19 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             // traverse by category and attribute order
             final ArrayList<String> a = new ArrayList<>();
             final StringBuilder text = new StringBuilder();
-            int lastCategoryId = -1;
-            for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
+            CacheAttributeCategory lastCategory = null;
+            for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
                 for (CacheAttribute attr : CacheAttribute.values()) {
-                    if (attr.category.categoryId == categoryId) {
+                    if (attr.category == category) {
                         for (Boolean enabled : Arrays.asList(false, true)) {
                             final String key = attr.getValue(enabled);
                             if (attributesSet.contains(key)) {
-                                if (lastCategoryId != categoryId) {
-                                    if (lastCategoryId != -1) {
+                                if (lastCategory != category) {
+                                    if (lastCategory != null) {
                                         text.append("<br /><br />");
                                     }
-                                    text.append("<u>").append(CacheAttributeCategory.getNameById(activity, categoryId)).append("</u>");
-                                    lastCategoryId = categoryId;
+                                    text.append("<u>").append(category.getName(activity)).append("</u>");
+                                    lastCategory = category;
                                 }
                                 a.add(key);
                                 text.append("<br />").append(attr.getL10n(enabled));
