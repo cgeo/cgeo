@@ -1980,4 +1980,8 @@ public class Settings {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
 
+    public static int getAttributeFilterSources() {
+        return getInt(R.string.pref_attributeFilterSources, 0);
+    }
+
 }

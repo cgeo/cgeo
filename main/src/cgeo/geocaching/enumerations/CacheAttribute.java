@@ -2,12 +2,14 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.util.SparseArray;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -257,6 +259,22 @@ public enum CacheAttribute {
      */
     public String getValue(final boolean active) {
         return rawName + (active ? INTERNAL_YES : INTERNAL_NO);
+    }
+
+    public static List<CacheAttribute> getFilteredAttributeList() {
+        final int attributeSources = Settings.getAttributeFilterSources();
+        final List<CacheAttribute> filteredAttributes = new ArrayList<>();
+
+        for (CacheAttribute ca : CacheAttribute.values()) {
+            if (attributeSources == 0) {
+                filteredAttributes.add(ca);
+            } else if (attributeSources == 1 && ca.gcid > -1 && ca.gcid < 100) {
+                filteredAttributes.add(ca);
+            } else if (attributeSources == 2 && ca.ocacode > -1) {
+                filteredAttributes.add(ca);
+            }
+        }
+        return filteredAttributes;
     }
 
 }

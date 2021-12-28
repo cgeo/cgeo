@@ -156,6 +156,7 @@
     <string translatable="false" name="pref_createUDCuseGivenList">createUDCuseGivenList</string>
     <string translatable="false" name="pref_pqShowDownloadableOnly">pqShowDownloadableOnly</string>
     <string translatable="false" name="pref_bookmarklistsShowNewOnly">bookmarklistsShowNewOnly</string>
+    <string translatable="false" name="pref_attributeFilterSources">attributeFilterSources</string>
     <!-- preferences used internally -->
     <string translatable="false" name="pref_temp_twitter_token_secret">temp-token-secret</string>
     <string translatable="false" name="pref_temp_twitter_token_public">temp-token-public</string>

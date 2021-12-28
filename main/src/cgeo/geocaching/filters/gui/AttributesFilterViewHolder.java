@@ -86,7 +86,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         cg.setChipSpacing(dpToPixel(10));
 
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-            for (CacheAttribute ca : CacheAttribute.values()) {
+            for (CacheAttribute ca : CacheAttribute.getFilteredAttributeList()) {
                 if (ca.category == category) {
                     final View view = createAttributeIcon(ca);
                     view.setOnClickListener(v -> toggleAttributeIcon(ca));
