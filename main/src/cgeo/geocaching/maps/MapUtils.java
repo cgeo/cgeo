@@ -2,17 +2,26 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.downloader.BRouterTileDownloader;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
+import cgeo.geocaching.models.Download;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FilterUtils;
+import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
 import android.text.Html;
@@ -22,6 +31,7 @@ import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
@@ -87,5 +97,60 @@ public class MapUtils {
     // @todo remove after switching map ActionBar to Toolbar
     public static Spanned getColoredValue(final String value) {
         return Html.fromHtml("<font color=\"" + String.format("#%06X", 0xFFFFFF & CgeoApplication.getInstance().getResources().getColor(R.color.colorTextActionBar)) + "\">" + value + "</font>");
+    }
+
+    // check whether routing tile data is available for the whole viewport given
+    // and offer to download missing routing data
+    public static void checkRoutingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
+        ActivityMixin.showToast(activity, "Checking available routing data...");
+
+        final HashMap<String, String> existingTiles = new HashMap<>();
+        final HashMap<String, String> missingTiles = new HashMap<>();
+        final ArrayList<Download> missingDownloads = new ArrayList<>();
+
+        AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
+            // calculate affected routing tiles
+            int curLat = (int) Math.floor(minLatitude / 5) * 5;
+            final int maxLat = (int) Math.floor(maxLatitude / 5) * 5;
+            final int maxLon = (int) Math.floor(maxLongitude / 5) * 5;
+            while (curLat <= maxLat) {
+                int curLon = (int) Math.floor(minLongitude / 5) * 5;
+                while (curLon <= maxLon) {
+                    final String filenameBase = (curLon < 0 ? "W" + (-curLon) : "E" + curLon) + "_" + (curLat < 0 ? "S" + (-curLat) : "N" + curLat) + BROUTER_TILE_FILEEXTENSION;
+                    missingTiles.put(filenameBase, filenameBase);
+                    curLon += 5;
+                }
+                curLat += 5;
+            }
+
+            // read tiles already stored
+            final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.ROUTING_TILES.getFolder());
+            for (ContentStorage.FileInformation fi : files) {
+                if (fi.name.endsWith(BROUTER_TILE_FILEEXTENSION) && missingTiles.containsKey(fi.name)) {
+                    existingTiles.put(fi.name, fi.name);
+                    missingTiles.remove(fi.name);
+                }
+            }
+
+            // read list of available tiles from the server, if necessary
+            if (!missingTiles.isEmpty()) {
+                final HashMap<String, Download> tiles = BRouterTileDownloader.getInstance().getAvailableTiles();
+                for (String filename : missingTiles.values()) {
+                    Log.e("checking " + filename + ": " + (tiles.containsKey(filename) ? "available for download" : "not available!"));
+                    if (tiles.containsKey(filename)) {
+                        missingDownloads.add(tiles.get(filename));
+                    } else {
+                        missingTiles.remove(filename);
+                    }
+                }
+            }
+
+        }, () -> {
+            if (missingDownloads.isEmpty()) {
+                ActivityMixin.showShortToast(activity, R.string.check_tiles_found);
+            } else {
+                DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads);
+            }
+        });
     }
 }

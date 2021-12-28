@@ -132,6 +132,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.mapsforge.core.model.BoundingBox;
 import org.mapsforge.core.model.LatLong;
 import org.mapsforge.core.model.MapPosition;
 import org.mapsforge.core.util.Parameters;
@@ -479,6 +480,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
+        } else if (id == R.id.menu_check_routingdata) {
+            final BoundingBox bb = mapView.getBoundingBox();
+            MapUtils.checkRoutingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
                 || this.trackUtils.onOptionsItemSelected(id, tracks)
                 || this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)

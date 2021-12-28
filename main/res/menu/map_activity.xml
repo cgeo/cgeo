@@ -167,6 +167,9 @@
         android:visible="false">
     </item>
     <item
+        android:id="@+id/menu_check_routingdata"
+        android:title="@string/check_tiles_missing" />
+    <item
         android:id="@+id/menu_as_list"
         android:icon="@drawable/ic_menu_list"
         android:title="@string/map_as_list">

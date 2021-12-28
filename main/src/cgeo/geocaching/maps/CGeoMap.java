@@ -826,6 +826,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menuShowHint();
         } else if (id == R.id.menu_compass) {
             menuCompass();
+        } else if (id == R.id.menu_check_routingdata) {
+            final Viewport bb = mapView.getViewport();
+            MapUtils.checkRoutingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
                 || getTrackUtils().onOptionsItemSelected(id, tracks)
                 || getIndividualRouteUtils().onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
