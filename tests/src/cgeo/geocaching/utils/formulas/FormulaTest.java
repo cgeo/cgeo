@@ -32,6 +32,13 @@ public class FormulaTest {
     }
 
     @Test
+    public void numbers() {
+        assertThat(Formula.evaluate("-2.5")).isEqualTo(Value.of(-2.5d));
+        assertThat(Formula.evaluate("2,5")).isEqualTo(Value.of(2.5d));
+        assertThat(Formula.evaluate("2,5.5")).isEqualTo(Value.of("2,5.5"));
+    }
+
+    @Test
     public void complex() {
         assertThat(eval("-2.5 + 3 * (4-1) + 3^3")).isEqualTo(33.5d);
     }
@@ -102,15 +109,27 @@ public class FormulaTest {
         assertThat(Formula.compile("AB1").getNeededVariables()).containsExactlyInAnyOrder("A", "B");
         assertThat(Formula.compile("$AB1").getNeededVariables()).containsExactlyInAnyOrder("AB1");
         assertThat(Formula.compile("$AB(1)").getNeededVariables()).containsExactlyInAnyOrder("AB");
+        assertThat(Formula.compile("${AB}A1").getNeededVariables()).containsExactlyInAnyOrder("AB", "A");
+        assertThat(Formula.compile("${A}A1").getNeededVariables()).containsExactlyInAnyOrder("A");
+
         assertThatThrownBy(() -> eval("$"))
             .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
         assertThatThrownBy(() -> eval("$1"))
             .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+        assertThatThrownBy(() -> eval("${A(B)"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("}");
     }
 
     @Test
     public void strings() {
-        assertThat(eval("'abc'")).isEqualTo(0d);
+        assertThat(Formula.evaluate("'abc'")).isEqualTo(Value.of("abc"));
+        assertThat(Formula.evaluate("'a\"b''c'")).isEqualTo(Value.of("a\"b'c"));
+        assertThat(Formula.evaluate("\"abc\"")).isEqualTo(Value.of("abc"));
+        assertThat(Formula.evaluate("\"a\"\"b'c\"")).isEqualTo(Value.of("a\"b'c"));
+        assertThatThrownBy(() -> eval("\"abc'"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name())
+            .hasMessageContaining("\"");
+
         assertThat(eval("length('abc')")).isEqualTo(3d);
         assertThat(eval("length('abc') + length('def')")).isEqualTo(6d);
         assertThat(eval("length('abc''def')")).isEqualTo(7d);

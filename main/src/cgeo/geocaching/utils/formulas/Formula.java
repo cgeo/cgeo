@@ -327,6 +327,7 @@ public final class Formula {
         CHARS_DIGITS.addAll(CHARS);
         CHARS_DIGITS.addAll(NUMBERS);
         NUMBERS.add((int) '.');
+        NUMBERS.add((int) ',');
     }
 
     public static Formula compile(final String expression) {
@@ -618,11 +619,15 @@ public final class Formula {
     private FormulaNode parseString() {
         final StringBuilder sb = new StringBuilder();
         boolean foundEnd = false;
-        eat('\'');
+        final int openingChar = ch;
+        if (openingChar != '\'' && openingChar != '"') {
+            throw new FormulaException(UNEXPECTED_TOKEN, "' or \"");
+        }
+        eat(openingChar);
         while (ch != -1) {
-            if (ch == '\'') {
+            if (ch == openingChar) {
                 nextChar();
-                if (ch != '\'') {
+                if (ch != openingChar) {
                     foundEnd = true;
                     break;
                 }
@@ -631,7 +636,7 @@ public final class Formula {
             nextChar();
         }
         if (!foundEnd) {
-            throw new FormulaException(UNEXPECTED_TOKEN, "'");
+            throw new FormulaException(UNEXPECTED_TOKEN, "" + ((char) openingChar));
         }
         return createSingleValueNode("string-literal", sb.toString());
     }
@@ -650,7 +655,7 @@ public final class Formula {
                 if (!eat(expectedClosingChar)) {
                     throw new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
                 }
-            } else if (ch == '\'') {
+            } else if (ch == '\'' || ch == '"') {
                 level++;
                 nodes.add(parseString());
                 level--;
@@ -690,7 +695,9 @@ public final class Formula {
         if (!eat('$')) {
             throw new FormulaException(UNEXPECTED_TOKEN, '$');
         }
-        //first char MUST be an alpha
+        //might be var with {} around it
+        final boolean hasParen = eat('{');
+        //first variable name char MUST be an alpha
         if (!CHARS.contains(ch)) {
             throw new FormulaException(UNEXPECTED_TOKEN, "alpha");
         }
@@ -700,6 +707,9 @@ public final class Formula {
             nextChar();
         }
         final String parsed = sb.toString();
+        if (hasParen && !eat('}')) {
+            throw new FormulaException(UNEXPECTED_TOKEN, "}");
+        }
 
         return new FormulaNode("var", null, (objs, vars) -> {
             final Value value = vars.call(parsed);

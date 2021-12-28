@@ -41,6 +41,16 @@ public class FormulaUtilsTest {
     }
 
     @Test
+    public void ifFunction() {
+        assertThat(FormulaUtils.ifFunction(new ValueList())).isEqualTo(Value.of(0));
+        assertThat(FormulaUtils.ifFunction(new ValueList().add(Value.of(""), Value.of("a"), Value.of("b")))).isEqualTo(Value.of("b"));
+        assertThat(FormulaUtils.ifFunction(new ValueList().add(Value.of("true"), Value.of("a"), Value.of("b")))).isEqualTo(Value.of("a"));
+        assertThat(FormulaUtils.ifFunction(new ValueList().add(Value.of(""), Value.of("a")))).isEqualTo(Value.of(0));
+        assertThat(FormulaUtils.ifFunction(new ValueList().add(Value.of(0), Value.of("a"), Value.of(1), Value.of("b"), Value.of("c")))).isEqualTo(Value.of("b"));
+    }
+
+
+    @Test
     public void roman() {
         //I=1, V=5, X=10, L=50, C=100, D=500, M=1000
         assertThat(FormulaUtils.roman("")).isEqualTo(0);

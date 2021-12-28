@@ -88,6 +88,9 @@ public class VariableList {
     }
 
     public int getSortedPos(final String var) {
+        if (var == null) {
+            return 0;
+        }
         int idx = 0;
         while (idx < variableList.size() && variableList.get(idx).compareTo(var) < 0) {
             idx++;

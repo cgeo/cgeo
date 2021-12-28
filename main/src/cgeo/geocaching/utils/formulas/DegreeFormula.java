@@ -176,7 +176,7 @@ public class DegreeFormula {
         boolean foundAny = false;
         for (Object o : nodes) {
             if (o instanceof Character) {
-                if (NEG_CHARS.contains(o)) {
+                if (NEG_CHARS.contains((int) ((Character) o))) {
                     sign = -sign;
                 }
             } else if (o instanceof String) {
