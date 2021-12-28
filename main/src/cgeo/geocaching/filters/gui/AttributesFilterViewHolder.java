@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.enumerations.CacheAttributeCategory;
 import cgeo.geocaching.filters.core.AttributesGeocacheFilter;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ButtonToggleGroup;
 import cgeo.geocaching.ui.TextParam;
 import static cgeo.geocaching.ui.ViewUtils.dpToPixel;
