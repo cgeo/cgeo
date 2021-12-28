@@ -1981,7 +1981,7 @@ public class Settings {
     }
 
     public static int getAttributeFilterSources() {
-        return getInt(R.string.pref_attributeFilterSources, 0);
+        return getInt(R.string.pref_attributeFilterSources, -1);
     }
 
 }
