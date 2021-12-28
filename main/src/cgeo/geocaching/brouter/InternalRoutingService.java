@@ -3,6 +3,7 @@ package cgeo.geocaching.brouter;
 import cgeo.geocaching.brouter.util.DefaultFilesUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.brouter.BRouterConstants.PROFILE_PARAMTERKEY;
 
 import android.app.Service;
 import android.content.Intent;
@@ -21,7 +22,7 @@ public class InternalRoutingService extends Service {
         public String getTrackFromParams(final Bundle params) {
             final BRouterWorker worker = new BRouterWorker();
 
-            worker.profileFilename = params.getString("profile");
+            worker.profileFilename = params.getString(PROFILE_PARAMTERKEY);
             if (StringUtils.isBlank(worker.profileFilename)) {
                 return ""; // cannot calculate a route without a profile
             }
