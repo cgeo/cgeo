@@ -78,7 +78,7 @@ public class AttributesGridAdapter extends BaseAdapter {
 
         final CacheAttribute attrib = CacheAttribute.getByRawName(CacheAttribute.trimAttributeName(attributeName));
         if (attrib != null) {
-            background.setImageTintList(CacheAttribute.isEnabled(attributeName) ? attrib.category.getCategoryColorList() : attrib.category.getCategoryColorNegativeList());
+            background.setImageTintList(attrib.category.getCategoryColorStateList(CacheAttribute.isEnabled(attributeName)));
             imageView.setImageDrawable(ResourcesCompat.getDrawable(resources, attrib.drawableId, null));
             ViewUtils.setTooltip(imageView, TextParam.text(attrib.getL10n(CacheAttribute.isEnabled(attributeName))));
             if (onClickListener != null) {

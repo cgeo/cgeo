@@ -19,4 +19,12 @@
 
     <color name="colorSeparator">#44000000</color>
 
+    <color name="attribute_filter_disabled">#ffcccccc</color>
+    <color name="attribute_category_tools_disabled">#ffb26666</color>
+    <color name="attribute_category_type_disabled">#ff957e7a</color>
+    <color name="attribute_category_location_disabled">#ff769e79</color>
+    <color name="attribute_category_duration_disabled">#ff667caf</color>
+    <color name="attribute_category_surroundings_disabled">#ff848d91</color>
+    <color name="attribute_category_transport_disabled">#ff8a8a8a</color>
+
 </resources>

@@ -280,17 +280,17 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         // traverse by category and attribute order
         final ArrayList<String> a = new ArrayList<>();
         final StringBuilder text = new StringBuilder();
-        int lastCategoryId = -1;
-        for (int categoryId : CacheAttributeCategory.getOrderedCategoryIdList()) {
+        CacheAttributeCategory lastCategory = null;
+        for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
             for (CacheAttribute attr : CacheAttribute.values()) {
-                if (attr.category.categoryId == categoryId) {
+                if (attr.category == category) {
                     for (Boolean enabled : Arrays.asList(false, true)) {
                         final String key = attr.getValue(enabled);
                         final Integer value = attributes.get(key);
                         if (value != null && value > 0) {
-                            if (lastCategoryId != categoryId) {
-                                text.append("\n\n").append(CacheAttributeCategory.getNameById(context, categoryId));
-                                lastCategoryId = categoryId;
+                            if (lastCategory != category) {
+                                text.append("\n\n").append(category.getName(context));
+                                lastCategory = category;
                             }
                             a.add(key);
                             text.append('\n').append(attr.getL10n(enabled)).append(": ").append(value);

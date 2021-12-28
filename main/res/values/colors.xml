@@ -84,12 +84,12 @@
     <color name="marker_rating_45">#ffe64a19</color>
     <color name="marker_rating_50">#ffd32f2f</color>
 
-    <color name="attribute_category_tools">#ffb71c1c</color>
+    <color name="attribute_category_tools">#ff7f0000</color>
     <color name="attribute_category_tools_negative">#ff000000</color>
-    <color name="attribute_category_type">#ff5d4037</color>
-    <color name="attribute_category_location">#ff2e7d32</color>
-    <color name="attribute_category_duration">#ff1565c0</color>
-    <color name="attribute_category_surroundings">#ff455a64</color>
+    <color name="attribute_category_type">#ff4e342e</color>
+    <color name="attribute_category_location">#ff1b5e20</color>
+    <color name="attribute_category_duration">#ff00257a</color>
+    <color name="attribute_category_surroundings">#ff324148</color>
     <color name="attribute_category_transport">#ff000000</color>
     <color name="attribute_strikethrough">#ffb71c1c</color>
 </resources>
