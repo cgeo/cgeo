@@ -1996,7 +1996,7 @@
     <string name="attribute_unknown">Unknown attribute</string>
 
     <!-- cache attribute categories -->
-    <string name="cat_tools">Tools required</string>
+    <string name="cat_tools">Equipment</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cache location</string>
     <string name="cat_duration">Distance / Duration</string>

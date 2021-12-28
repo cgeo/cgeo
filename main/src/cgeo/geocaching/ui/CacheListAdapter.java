@@ -41,6 +41,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
+import androidx.core.text.HtmlCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -278,23 +279,23 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         }
 
         // traverse by category and attribute order
-        final ArrayList<String> a = new ArrayList<>();
+        final ArrayList<String> orderedAttributeNames = new ArrayList<>();
         final StringBuilder text = new StringBuilder();
         CacheAttributeCategory lastCategory = null;
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-            for (CacheAttribute attr : CacheAttribute.values()) {
-                if (attr.category == category) {
-                    for (Boolean enabled : Arrays.asList(false, true)) {
-                        final String key = attr.getValue(enabled);
-                        final Integer value = attributes.get(key);
-                        if (value != null && value > 0) {
-                            if (lastCategory != category) {
-                                text.append("\n\n").append(category.getName(context));
-                                lastCategory = category;
-                            }
-                            a.add(key);
-                            text.append('\n').append(attr.getL10n(enabled)).append(": ").append(value);
+            for (CacheAttribute attr : CacheAttribute.getByCategory(category)) {
+                for (Boolean enabled : Arrays.asList(false, true, null)) {
+                    final String key = attr.getValue(enabled);
+                    final Integer value = attributes.get(key);
+                    if (value != null && value > 0) {
+                        if (lastCategory != category) {
+                            text.append("<h5>").append(category.getName(context)).append("</h5>");
+                            lastCategory = category;
+                        } else {
+                            text.append("<br />");
                         }
+                        orderedAttributeNames.add(key);
+                        text.append(attr.getL10n(enabled == null ? true : enabled)).append(": ").append(value);
                     }
                 }
             }
@@ -305,8 +306,8 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         final View v = LayoutInflater.from(context).inflate(R.layout.cachelist_attributeoverview, null);
         alertDialog.setView (v);
-        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, a, null));
-        ((TextView) v.findViewById(R.id.attributes_text)).setText(text);
+        ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, orderedAttributeNames, null));
+        ((TextView) v.findViewById(R.id.attributes_text)).setText(HtmlCompat.fromHtml(text.toString(), 0));
         alertDialog.show();
     }
 

@@ -146,15 +146,13 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         cg.setChipSpacing(dpToPixel(10));
 
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-            for (CacheAttribute ca : CacheAttribute.getFilteredAttributeList()) {
-                if (ca.category == category) {
-                    final View view = createAttributeIcon(ca);
-                    view.setOnClickListener(v -> toggleAttributeIcon(ca));
-                    this.attributeViews.put(ca, view);
-                    this.attributeState.put(ca, null);
-                    cg.addView(view);
-                    setAttributeState(ca, null);
-                }
+            for (CacheAttribute ca : CacheAttribute.getByCategory(category)) {
+                final View view = createAttributeIcon(ca);
+                view.setOnClickListener(v -> toggleAttributeIcon(ca));
+                this.attributeViews.put(ca, view);
+                this.attributeState.put(ca, null);
+                cg.addView(view);
+                setAttributeState(ca, null);
             }
         }
 

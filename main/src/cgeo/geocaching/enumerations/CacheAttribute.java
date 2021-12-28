@@ -234,6 +234,17 @@ public enum CacheAttribute {
         return FIND_BY_OCACODE.get(ocAcode);
     }
 
+    @Nullable
+    public static List<CacheAttribute> getByCategory(final CacheAttributeCategory category) {
+        final List<CacheAttribute> attributes = new ArrayList<>();
+        for (CacheAttribute attr : CacheAttribute.values()) {
+            if (attr.category == category) {
+                attributes.add(attr);
+            }
+        }
+        return attributes;
+    }
+
     @NonNull
     public static String trimAttributeName(@Nullable final String attributeName) {
         if (attributeName == null) {
@@ -259,8 +270,12 @@ public enum CacheAttribute {
     /**
      * get the value of this attribute for the given activation state, e.g. "dogs_yes" or "wheelchair_no".
      */
-    public String getValue(final boolean active) {
-        return rawName + (active ? INTERNAL_YES : INTERNAL_NO);
+    public String getValue(final Boolean active) {
+        if (active == null) {
+            return rawName;
+        } else {
+            return rawName + (active ? INTERNAL_YES : INTERNAL_NO);
+        }
     }
 
     /**

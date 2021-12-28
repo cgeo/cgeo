@@ -1272,31 +1272,28 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             final HashSet<String> attributesSet = new HashSet<>(attributes);
             // traverse by category and attribute order
-            final ArrayList<String> a = new ArrayList<>();
+            final ArrayList<String> orderedAttributeNames = new ArrayList<>();
             final StringBuilder text = new StringBuilder();
             CacheAttributeCategory lastCategory = null;
             for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-                for (CacheAttribute attr : CacheAttribute.values()) {
-                    if (attr.category == category) {
-                        for (Boolean enabled : Arrays.asList(false, true)) {
-                            final String key = attr.getValue(enabled);
-                            if (attributesSet.contains(key)) {
-                                if (lastCategory != category) {
-                                    if (lastCategory != null) {
-                                        text.append("<br /><br />");
-                                    }
-                                    text.append("<u>").append(category.getName(activity)).append("</u>");
-                                    lastCategory = category;
-                                }
-                                a.add(key);
-                                text.append("<br />").append(attr.getL10n(enabled));
+                for (CacheAttribute attr : CacheAttribute.getByCategory(category)) {
+                    for (Boolean enabled : Arrays.asList(false, true, null)) {
+                        final String key = attr.getValue(enabled);
+                        if (attributesSet.contains(key)) {
+                            if (lastCategory != category) {
+                                text.append("<h5>").append(category.getName(activity)).append("</h5>");
+                                lastCategory = category;
+                            } else {
+                                text.append("<br />");
                             }
+                            orderedAttributeNames.add(key);
+                            text.append(attr.getL10n(enabled == null ? true : enabled));
                         }
                     }
                 }
             }
 
-            binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, a, () -> toggleAttributesView()));
+            binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, orderedAttributeNames, () -> toggleAttributesView()));
             binding.attributesGrid.setVisibility(View.VISIBLE);
 
             binding.attributesText.setText(HtmlCompat.fromHtml(text.toString(), 0));
