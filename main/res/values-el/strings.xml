@@ -698,6 +698,8 @@
     <string name="init_template_title">Τίτλος Προτύπου</string>
     <string name="init_template_text">Κείμενο Προτύπου</string>
     <string name="init_log_template">Πρότυπο Καταγραφής</string>
+    <string name="init_log_template_addnew">Προσθήκη νέου προτύπου</string>
+    <string name="init_log_template_remove_confirm">Θέλετε πραγματικά να αφαιρέσετε το πρότυπο;</string>
     <string name="init_log_templates">Πρότυπα Καταγραφής</string>
     <string name="init_log_template_prefix">Πρότυπο:\u0020</string>
     <string name="init_log_template_missing_error">Πρέπει να παρέχονται τόσο ο τίτλος όσο και το κείμενο.</string>
