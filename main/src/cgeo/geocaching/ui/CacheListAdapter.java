@@ -39,7 +39,6 @@ import android.widget.SectionIndexer;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.core.content.ContextCompat;
 
 import java.lang.ref.WeakReference;
@@ -300,14 +299,10 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
             }
         }
 
-        final AlertDialog.Builder alertDialog = Dialogs.newBuilder(context);
-        alertDialog.setTitle(R.string.cache_filter_attributes);
-
         final View v = LayoutInflater.from(context).inflate(R.layout.cachelist_attributeoverview, null);
-        alertDialog.setView (v);
         ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, a, null));
         ((TextView) v.findViewById(R.id.attributes_text)).setText(text);
-        alertDialog.show();
+        Dialogs.bottomSheetDialogWithActionbar(context, v, R.string.cache_filter_attributes).show();
     }
 
     public void forceSort() {
