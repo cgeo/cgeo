@@ -1982,31 +1982,36 @@ public class Settings {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
 
-    public static int getAttributeFilterSources() {
-        int setting = getInt(R.string.pref_attributeFilterSources, -1);
-        if (setting > -1) {
-            return setting;
-        } else {
-            boolean gcAttributes = false;
-            boolean ocAttributes = false;
+    private static int getAttributeFilterSources() {
+        int setting = getInt(R.string.pref_attributeFilterSources, 0);
+        if (setting == 0) {
+            // guess a reasonable default value based on enabled connectors
+            boolean gc = false;
+            boolean okapi = false;
             final List<IConnector> activeConnectors = ConnectorFactory.getActiveConnectors();
             for (final IConnector conn : activeConnectors) {
                 if ("GC".equals(conn.getNameAbbreviated()) || "AL".equals(conn.getNameAbbreviated())) {
-                    gcAttributes = true;
+                    gc = true;
                 } else {
-                    ocAttributes = true;
+                    okapi = true;
                 }
             }
-            if (gcAttributes && !ocAttributes) {
-                return 1;
-            } else if (!gcAttributes && ocAttributes) {
-                return 2;
-            } else {
-                return 0;
-            }
+            setting = 3 - (!gc ? 1 : 0) + (!okapi ? 2 : 0);
         }
+        return setting;
     }
 
+    public static boolean isAttributeFilterSourcesGC() {
+        return getAttributeFilterSources() != 2;
+    }
+
+    public static boolean isAttributeFilterSourcesOkapi() {
+        return getAttributeFilterSources() >= 2;
+    }
+
+    /**
+     * For which connectors should attributes be shown: 1 GC, 2 Okapi, 3 Both
+     */
     public static void setAttributeFilterSources(final int value) {
         putInt(R.string.pref_attributeFilterSources, value);
     }

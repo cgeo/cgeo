@@ -1270,6 +1270,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.attributesGrid.setVisibility(View.GONE);
                 return;
             }
+            final HashSet<String> attributesSet = new HashSet<>(attributes);
             // traverse by category and attribute order
             final ArrayList<String> orderedAttributeNames = new ArrayList<>();
             final StringBuilder attributesText = new StringBuilder();
@@ -1280,7 +1281,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         final String key = attr.getValue(enabled);
                         if (attributes.contains(key)) {
                             if (lastCategory != category) {
-                                attributesText.append("<h5>").append(category.getName(activity)).append("</h5>");
+                                attributesText.append("<h6>").append(category.getName(activity)).append("</h6>");
                                 lastCategory = category;
                             } else {
                                 attributesText.append("<br />");

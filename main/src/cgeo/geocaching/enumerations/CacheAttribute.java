@@ -12,6 +12,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -281,16 +282,21 @@ public enum CacheAttribute {
     /**
      * Filter the list of attributes based on the associated connector
      */
-    public static List<CacheAttribute> getFilteredAttributeList() {
-        final int attributeSources = Settings.getAttributeFilterSources();
+    public static List<CacheAttribute> getAttributesByCategoryAndConnector(final CacheAttributeCategory cac) {
+        final boolean showGc = Settings.isAttributeFilterSourcesGC();
+        final boolean showOc = Settings.isAttributeFilterSourcesOkapi();
 
         final List<CacheAttribute> filteredAttributes = new ArrayList<>();
-        for (CacheAttribute ca : CacheAttribute.values()) {
-            if (attributeSources == 0) {
+        final List<CacheAttribute> unfilteredAttributes;
+        if (cac == null) {
+            unfilteredAttributes = Arrays.asList(CacheAttribute.values());
+        } else {
+            unfilteredAttributes = getByCategory(cac);
+        }
+        for (CacheAttribute ca : unfilteredAttributes) {
+            if (showGc && ca.gcid > -1 && ca.gcid < 100) {
                 filteredAttributes.add(ca);
-            } else if (attributeSources == 1 && ca.gcid > -1 && ca.gcid < 100) {
-                filteredAttributes.add(ca);
-            } else if (attributeSources == 2 && ca.ocacode > -1) {
+            } else if (showOc && ca.ocacode > -1) {
                 filteredAttributes.add(ca);
             }
         }

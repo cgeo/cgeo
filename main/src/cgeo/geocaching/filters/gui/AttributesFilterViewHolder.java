@@ -96,14 +96,14 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
          sources = new ButtonToggleGroup(getActivity());
          sources.setSingleSelection(false);
          sources.addButtons(R.string.attribute_source_gc, R.string.attribute_source_oc);
-         sources.setCheckedButtonByIndex(Settings.getAttributeFilterSources(), true);
+         sources.setCheckedButtonByIndex(0, Settings.isAttributeFilterSourcesGC());
+         sources.setCheckedButtonByIndex(1, Settings.isAttributeFilterSourcesOkapi());
          sources.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
-             final List<Integer> selectedSources = ((ButtonToggleGroup) group).getCheckedButtonIndexes();
-             if (selectedSources.size() == 2) {
-                 Settings.setAttributeFilterSources(0);
-             } else {
-                 Settings.setAttributeFilterSources(selectedSources.get(0) + 1);
+             int newVal = 0;
+             for (Integer checkedIndex : ((ButtonToggleGroup) group).getCheckedButtonIndexes()) {
+                 newVal += checkedIndex + 1;
              }
+             Settings.setAttributeFilterSources(newVal);
              drawAttributeChip(ll);
          });
 
@@ -116,20 +116,18 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
              }
          });
 
-         final RelativeLayout relLayout = new RelativeLayout(getActivity());
-         RelativeLayout.LayoutParams relp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-         relp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-         relLayout.addView(inverse, relp);
-         relp = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-         relp.addRule(RelativeLayout.CENTER_IN_PARENT);
-         relLayout.addView(sources, relp);
-         relp = new RelativeLayout.LayoutParams(dpToPixel(40), dpToPixel(40));
-         relp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-         relLayout.addView(clear, relp);
+         final LinearLayout toolbar = new LinearLayout(getActivity());
+         toolbar.addView(inverse);
+         final View spacer = new View(getActivity());
+         final LinearLayout.LayoutParams spacerlp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1);
+         toolbar.addView(new View(getActivity()), spacerlp);
+         toolbar.addView(sources);
+         toolbar.addView(new View(getActivity()), spacerlp);
+         toolbar.addView(clear);
 
          LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
          llp.setMargins(0, dpToPixel(20), 0, dpToPixel(5));
-         ll.addView(relLayout, llp);
+         ll.addView(toolbar, llp);
 
          drawAttributeChip(ll);
 
@@ -146,7 +144,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
         cg.setChipSpacing(dpToPixel(10));
 
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
-            for (CacheAttribute ca : CacheAttribute.getByCategory(category)) {
+            for (CacheAttribute ca : CacheAttribute.getAttributesByCategoryAndConnector(category)) {
                 final View view = createAttributeIcon(ca);
                 view.setOnClickListener(v -> toggleAttributeIcon(ca));
                 this.attributeViews.put(ca, view);
@@ -167,7 +165,7 @@ public class AttributesFilterViewHolder extends BaseFilterViewHolder<AttributesG
 
     @Override
     public void setViewFromFilter(final AttributesGeocacheFilter filter) {
-        List<CacheAttribute> activeAttributes = CacheAttribute.getFilteredAttributeList();
+        List<CacheAttribute> activeAttributes = CacheAttribute.getAttributesByCategoryAndConnector(null);
         for (Map.Entry<CacheAttribute, Boolean> entry : filter.getAttributes().entrySet()) {
             if (activeAttributes.contains(entry.getKey())) {
                 setAttributeState(entry.getKey(), entry.getValue());
