@@ -20,7 +20,6 @@ import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FilterUtils;
-import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.brouter.BRouterConstants.BROUTER_TILE_FILEEXTENSION;
 
 import android.app.Activity;
@@ -34,6 +33,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class MapUtils {
 
@@ -104,9 +104,9 @@ public class MapUtils {
     public static void checkRoutingData(final Activity activity, final double minLatitude, final double minLongitude, final double maxLatitude, final double maxLongitude) {
         ActivityMixin.showToast(activity, "Checking available routing data...");
 
-        final HashMap<String, String> existingTiles = new HashMap<>();
         final HashMap<String, String> missingTiles = new HashMap<>();
         final ArrayList<Download> missingDownloads = new ArrayList<>();
+        final AtomicBoolean hasUnsupportedTiles = new AtomicBoolean(false);
 
         AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler, () -> {
             // calculate affected routing tiles
@@ -122,35 +122,41 @@ public class MapUtils {
                 }
                 curLat += 5;
             }
-
-            // read tiles already stored
-            final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.ROUTING_TILES.getFolder());
-            for (ContentStorage.FileInformation fi : files) {
-                if (fi.name.endsWith(BROUTER_TILE_FILEEXTENSION) && missingTiles.containsKey(fi.name)) {
-                    existingTiles.put(fi.name, fi.name);
-                    missingTiles.remove(fi.name);
-                }
-            }
-
-            // read list of available tiles from the server, if necessary
-            if (!missingTiles.isEmpty()) {
-                final HashMap<String, Download> tiles = BRouterTileDownloader.getInstance().getAvailableTiles();
-                for (String filename : missingTiles.values()) {
-                    Log.e("checking " + filename + ": " + (tiles.containsKey(filename) ? "available for download" : "not available!"));
-                    if (tiles.containsKey(filename)) {
-                        missingDownloads.add(tiles.get(filename));
-                    } else {
-                        missingTiles.remove(filename);
-                    }
-                }
-            }
-
+            checkTiles(missingTiles, missingDownloads, hasUnsupportedTiles);
         }, () -> {
+            // give feedback to the user + offer to download missing tiles (if available)
             if (missingDownloads.isEmpty()) {
-                ActivityMixin.showShortToast(activity, R.string.check_tiles_found);
+                ActivityMixin.showShortToast(activity, hasUnsupportedTiles.get() ? R.string.check_tiles_unsupported : R.string.check_tiles_found);
             } else {
+                if (hasUnsupportedTiles.get()) {
+                    ActivityMixin.showShortToast(activity, R.string.check_tiles_unsupported);
+                }
                 DownloaderUtils.triggerDownloads(activity, R.string.downloadtile_title, R.string.check_tiles_missing, missingDownloads);
             }
         });
+    }
+
+    private static void checkTiles(final HashMap<String, String> missingTiles, final ArrayList<Download> missingDownloads, final AtomicBoolean hasUnsupportedTiles) {
+        // read tiles already stored
+        final List<ContentStorage.FileInformation> files = ContentStorage.get().list(PersistableFolder.ROUTING_TILES.getFolder());
+        for (ContentStorage.FileInformation fi : files) {
+            if (fi.name.endsWith(BROUTER_TILE_FILEEXTENSION)) {
+                missingTiles.remove(fi.name);
+            }
+        }
+
+        // read list of available tiles from the server, if necessary
+        if (!missingTiles.isEmpty()) {
+            final HashMap<String, Download> tiles = BRouterTileDownloader.getInstance().getAvailableTiles();
+            final ArrayList<String> filenames = new ArrayList<>(missingTiles.values()); // work on copy to avoid concurrent modification
+            for (String filename : filenames) {
+                if (tiles.containsKey(filename)) {
+                    missingDownloads.add(tiles.get(filename));
+                } else {
+                    missingTiles.remove(filename);
+                    hasUnsupportedTiles.set(true);
+                }
+            }
+        }
     }
 }

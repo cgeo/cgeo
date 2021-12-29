@@ -2336,6 +2336,7 @@
     <string name="check_tiles_menu">Check for missing routing data</string>
     <string name="check_tiles_found">Routing data already present</string>
     <string name="check_tiles_missing">Found missing routing data:\n%1$s\n\nDo you want to download those files?%2$s</string>
+    <string name="check_tiles_unsupported">Warning: Routing data is at least partly not available for the chosen region</string>
     <string name="tileupdate_info">Do you want to check for updates of downloaded routing data files?</string>
     <string name="mapupdate_info">Do you want to check for updates of map and theme files?</string>
     <string name="no_updates_found">No updates found</string>
