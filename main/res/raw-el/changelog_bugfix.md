@@ -1,4 +1,4 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- Διόρθωση: Επανενεργοποιήστε τη δρομολόγηση με εξωτερική εφαρμογή BRouter στην έκδοση 1.6.3
 
 ## 2021.12.24 Bugfix release
 
