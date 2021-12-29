@@ -31,8 +31,8 @@ import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 import java.util.Collection;
 import java.util.Comparator;
@@ -99,7 +99,6 @@ public class VariableListView extends LinearLayout {
     private static class VariableViewHolder extends RecyclerView.ViewHolder {
 
         private final DisplayType displayType;
-        private final View viewVariableListItem;
         private final TextView viewVariableName;
         private final TextView viewVariableFormulaText;
         private final TextView viewVariableResult;
@@ -111,7 +110,6 @@ public class VariableListView extends LinearLayout {
         VariableViewHolder(final View rowView, final DisplayType displayType) {
             super(rowView);
             this.displayType = displayType;
-            this.viewVariableListItem = rowView.findViewById(R.id.variable_list_item);
             this.viewVariableName = rowView.findViewById(R.id.variable_name);
             this.viewVariableFormulaText = rowView.findViewById(R.id.variable_formula_text);
             this.viewVariableResult = rowView.findViewById(R.id.variable_result);
@@ -120,7 +118,7 @@ public class VariableListView extends LinearLayout {
             //binding = VariableListItemBinding.bind(rowView);
         }
 
-        private void setData(final VariableMap.VariableState variableState, final Set<String> visibleVars) {
+        private void setData(final VariableMap.VariableState variableState) {
 
             this.varName = variableState.getVar();
             final String displayVarName = VariableList.isVisible(this.varName) ? this.varName : "-";
@@ -128,11 +126,6 @@ public class VariableListView extends LinearLayout {
 
             if (this.viewVariableFormulaText != null) {
                 this.viewVariableFormulaText.setText(variableState.getFormulaString());
-            }
-
-            if (this.viewVariableListItem != null) {
-                final boolean isVisible = visibleVars.isEmpty() || visibleVars.contains(this.varName);
-                this.viewVariableListItem.setVisibility(isVisible ? VISIBLE : GONE);
             }
 
             setResult(variableState);
@@ -215,7 +208,8 @@ public class VariableListView extends LinearLayout {
             }
 
             this.visibleVariables.addAll(newVars);
-            this.notifyDataSetChanged();
+            this.setFilter(d -> this.visibleVariables.contains(d.getVar()));
+            //this.notifyDataSetChanged();
         }
 
         @SuppressLint("NotifyDataSetChanged")
@@ -228,7 +222,8 @@ public class VariableListView extends LinearLayout {
             }
             this.visibleVariables.clear();
             this.visibleVariables.addAll(newVisibleVariables);
-            this.notifyDataSetChanged();
+            this.setFilter(d -> this.visibleVariables.contains(d.getVar()));
+            //this.notifyDataSetChanged();
         }
 
         public void ensureVariables(final Collection<String> variables) {
@@ -248,7 +243,7 @@ public class VariableListView extends LinearLayout {
                 return;
             }
             textListeningActive = false;
-            holder.setData(data, this.visibleVariables);
+            holder.setData(data);
             textListeningActive = true;
         }
 
@@ -325,10 +320,10 @@ public class VariableListView extends LinearLayout {
                 return;
             }
             final String oldFormula = oldState.getFormulaString();
-            variables.removeVariable(oldState.getVar());
+            final int oldVarPos = variables.removeVariable(oldState.getVar());
             removeVariable(newVar);
 
-            variables.addVariable(newVar, oldFormula, varPos);
+            variables.addVariable(newVar, oldFormula, oldVarPos);
             updateItem(variables.getState(newVar), varPos);
             callCallback();
             recalculateResultsInView();
@@ -338,10 +333,9 @@ public class VariableListView extends LinearLayout {
             if (newVar != null) {
                 removeVariable(newVar);
             }
-            final int pos = variables.getSortedPos(newVar);
 
-            final String var = variables.addVariable(newVar, formula, pos);
-            addItem(pos, variables.getState(var));
+            final String var = variables.addVariable(newVar, formula, TextUtils.getSortedPos(variables.asList(), newVar));
+            addItem(TextUtils.getSortedPos(getItems(), VariableMap.VariableState::getVar, newVar), variables.getState(var));
             callCallback();
             notifyItemRangeChanged(0, getItemCount());
         }
@@ -433,7 +427,7 @@ public class VariableListView extends LinearLayout {
             this.displayType = dtUsed;
             this.displayColumns = dcUsed;
 
-            this.recyclerView.setLayoutManager(new StaggeredGridLayoutManager(this.displayColumns, StaggeredGridLayoutManager.VERTICAL));
+            this.recyclerView.setLayoutManager(new GridLayoutManager(this.recyclerView.getContext(), this.displayColumns));
 
             invalidateView();
 

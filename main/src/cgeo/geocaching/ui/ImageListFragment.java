@@ -124,7 +124,7 @@ public class ImageListFragment extends Fragment {
 
     /** gets the list of images to display in this fragment */
     public List<Image> getImages() {
-        return imageList.getCurrentList();
+        return imageList.getItems();
     }
 
     /** adjusts image persistent state to what is actually in the list */
@@ -164,7 +164,7 @@ public class ImageListFragment extends Fragment {
     @Override
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(SAVED_STATE_IMAGELIST, new ArrayList<>(imageList.getCurrentList()));
+        outState.putParcelableArrayList(SAVED_STATE_IMAGELIST, new ArrayList<>(imageList.getItems()));
         outState.putBundle(SAVED_STATE_IMAGEHELPER, imageHelper.getState());
     }
 
