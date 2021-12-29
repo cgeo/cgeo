@@ -265,10 +265,15 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         // collect attributes and counters
         final Map<String, Integer> attributes = new HashMap<>();
+        CacheAttribute ca;
         final int max = list.size();
         for (int i = 0; i < max; i++) {
-            final Geocache cache = list.get(i);
-            for (String attr : cache.getAttributes()) {
+            for (String attr : list.get(i).getAttributes()) {
+                // OC attributes are always positive, to count them with GC attributes append "_yes"
+                ca = CacheAttribute.getByName(attr);
+                if (attr.equals(ca.rawName)) {
+                    attr = ca.getValue(true);
+                }
                 final Integer count = attributes.get(attr);
                 if (count == null) {
                     attributes.put(attr, 1);
@@ -280,22 +285,22 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         // traverse by category and attribute order
         final ArrayList<String> orderedAttributeNames = new ArrayList<>();
-        final StringBuilder text = new StringBuilder();
+        final StringBuilder attributesText = new StringBuilder();
         CacheAttributeCategory lastCategory = null;
         for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
             for (CacheAttribute attr : CacheAttribute.getByCategory(category)) {
-                for (Boolean enabled : Arrays.asList(false, true, null)) {
+                for (Boolean enabled : Arrays.asList(false, true)) {
                     final String key = attr.getValue(enabled);
                     final Integer value = attributes.get(key);
                     if (value != null && value > 0) {
                         if (lastCategory != category) {
-                            text.append("<h5>").append(category.getName(context)).append("</h5>");
+                            attributesText.append("<h5>").append(category.getName(context)).append("</h5>");
                             lastCategory = category;
                         } else {
-                            text.append("<br />");
+                            attributesText.append("<br />");
                         }
                         orderedAttributeNames.add(key);
-                        text.append(attr.getL10n(enabled == null ? true : enabled)).append(": ").append(value);
+                        attributesText.append(attr.getL10n(enabled)).append(": ").append(value);
                     }
                 }
             }
@@ -307,7 +312,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         final View v = LayoutInflater.from(context).inflate(R.layout.cachelist_attributeoverview, null);
         alertDialog.setView (v);
         ((WrappingGridView) v.findViewById(R.id.attributes_grid)).setAdapter(new AttributesGridAdapter((Activity) context, orderedAttributeNames, null));
-        ((TextView) v.findViewById(R.id.attributes_text)).setText(HtmlCompat.fromHtml(text.toString(), 0));
+        ((TextView) v.findViewById(R.id.attributes_text)).setText(HtmlCompat.fromHtml(attributesText.toString(), 0));
         alertDialog.show();
     }
 

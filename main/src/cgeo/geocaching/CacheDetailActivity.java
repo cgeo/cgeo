@@ -1270,24 +1270,23 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.attributesGrid.setVisibility(View.GONE);
                 return;
             }
-            final HashSet<String> attributesSet = new HashSet<>(attributes);
             // traverse by category and attribute order
             final ArrayList<String> orderedAttributeNames = new ArrayList<>();
-            final StringBuilder text = new StringBuilder();
+            final StringBuilder attributesText = new StringBuilder();
             CacheAttributeCategory lastCategory = null;
             for (CacheAttributeCategory category : CacheAttributeCategory.getOrderedCategoryList()) {
                 for (CacheAttribute attr : CacheAttribute.getByCategory(category)) {
                     for (Boolean enabled : Arrays.asList(false, true, null)) {
                         final String key = attr.getValue(enabled);
-                        if (attributesSet.contains(key)) {
+                        if (attributes.contains(key)) {
                             if (lastCategory != category) {
-                                text.append("<h5>").append(category.getName(activity)).append("</h5>");
+                                attributesText.append("<h5>").append(category.getName(activity)).append("</h5>");
                                 lastCategory = category;
                             } else {
-                                text.append("<br />");
+                                attributesText.append("<br />");
                             }
                             orderedAttributeNames.add(key);
-                            text.append(attr.getL10n(enabled == null ? true : enabled));
+                            attributesText.append(attr.getL10n(enabled == null ? true : enabled));
                         }
                     }
                 }
@@ -1296,7 +1295,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             binding.attributesGrid.setAdapter(new AttributesGridAdapter(activity, orderedAttributeNames, () -> toggleAttributesView()));
             binding.attributesGrid.setVisibility(View.VISIBLE);
 
-            binding.attributesText.setText(HtmlCompat.fromHtml(text.toString(), 0));
+            binding.attributesText.setText(HtmlCompat.fromHtml(attributesText.toString(), 0));
             binding.attributesText.setVisibility(View.GONE);
             binding.attributesText.setOnClickListener(v -> toggleAttributesView());
         }
