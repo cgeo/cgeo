@@ -708,6 +708,8 @@
     <string name="init_template_title">Název šablony</string>
     <string name="init_template_text">Text šablony</string>
     <string name="init_log_template">Šablona logu</string>
+    <string name="init_log_template_addnew">Přidat novou šablonu</string>
+    <string name="init_log_template_remove_confirm">Opravdu chcete odstranit šablonu?</string>
     <string name="init_log_templates">Šablony logu</string>
     <string name="init_log_template_prefix">Šablona:\u0020</string>
     <string name="init_log_template_missing_error">Je třeba uvést název i text šablony.</string>
