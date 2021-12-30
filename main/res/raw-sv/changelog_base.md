@@ -11,9 +11,11 @@
 - Nytt: Attribut-översikt (se Hantera cacher => Attribut-översikt)
 - Nyhet: Lägg till import från bokmärkeslistor (endast GC premium)
 - Nytt: Invertera sorteringsordning med långklick på sorteringsfältet
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Cachedetaljer
 - Nyhet: Skicka aktuella cachekoordinater till geochecker (om detta stöds av geochecker)
+- New: Colored attribute icons (following attribute groups)
 
 ### Övrigt
 - Nyhet: Snabbladda geokoder från urklipp i huvudskärmens sökfält
