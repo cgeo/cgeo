@@ -1858,7 +1858,6 @@
     <string name="cat_location">Lokalizacja skrytki</string>
     <string name="cat_duration">Odległość / Czas trwania</string>
     <string name="cat_surrounding">Otoczenie skrytki</string>
-    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
