@@ -408,6 +408,7 @@
     <string name="caches_clear_offlinelogs">Supprimer les visites hors-ligne</string>
     <string name="caches_clear_offlinelogs_message">Supprimer toutes les visites hors-ligne ?</string>
     <string name="caches_clear_offlinelogs_progress">Suppression des visites hors-ligne</string>
+    <string name="caches_show_attributes">Afficher la liste des attributs</string>
     <string name="caches_set_cache_icon">Définir les icônes de la cache</string>
     <string name="caches_reset_cache_icons_title">Réinitialiser les icônes des caches</string>
     <string name="caches_make_list_unique">Rendre la liste unique</string>
@@ -697,6 +698,8 @@
     <string name="init_template_title">Titre du modèle</string>
     <string name="init_template_text">Texte du modèle</string>
     <string name="init_log_template">Modèle de log</string>
+    <string name="init_log_template_addnew">Ajouter un nouveau modèle</string>
+    <string name="init_log_template_remove_confirm">Voulez-vous vraiment supprimer le modèle ?</string>
     <string name="init_log_templates">Modèles de log</string>
     <string name="init_log_template_prefix">Modèle :\u0020</string>
     <string name="init_log_template_missing_error">Vous devez saisir le titre et le texte du modèle.</string>
@@ -748,6 +751,7 @@
     <string name="init_dtMarkerOnCacheIcon">Notation D/T sur les icônes de cache</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Afficher des icônes pour la Difficulté (à gauche) et pour le Terrain (à droite) dans le coin supérieur droit de la cache (l\'indicateur \"Enregistré\" est alors placé au milieu).</string>
     <string name="init_global_wp_extraction_disable">Désactiver l\'extraction des points de passage</string>
+    <string name="init_summary_global_wp_extraction_disable">Désactive globalement l\'extraction des points de passage des notes personnelles. Elle peut encore être activée pour des caches individuellement en désactivant la case à cocher sous la note personnelle.</string>
     <string name="init_prevent_cache_note_merge">Remplacer la note personnelle de la cache</string>
     <string name="init_summary_prevent_cache_note_merge">Si ce paramètre est activé, c:geo supprimera définitivement la note stockée localement et la remplacera par la note personnelle sur le serveur. Aucune fusion ne sera effectuée.</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
@@ -1825,6 +1829,7 @@
     <string name="cat_location">Emplacement de la cache</string>
     <string name="cat_duration">Distance / Durée</string>
     <string name="cat_surrounding">À proximité de la cache</string>
+    <string name="cat_permissions">Autorisations</string>
     <!-- next things -->
     <string name="quote">Pour faciliter le géocaching.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
