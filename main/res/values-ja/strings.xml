@@ -1801,7 +1801,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="cat_location">キャッシュの場所</string>
     <string name="cat_duration">距離/時間</string>
     <string name="cat_surrounding">キャッシュ周辺</string>
-    <string name="cat_transport">交通</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
