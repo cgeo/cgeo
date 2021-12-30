@@ -11,9 +11,11 @@
 - 신규: 속성 개요(캐시 관리 => 속성 개요 참조)
 - New: Add import from bookmark lists (GC premium only)
 - New: Invert sort-order on long click on sort bar
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### 캐시 상세정보
 - 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
+- New: Colored attribute icons (following attribute groups)
 
 ### 추가 사항
 - 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드
