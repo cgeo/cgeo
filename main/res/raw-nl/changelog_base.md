@@ -11,9 +11,11 @@
 - Nieuw: Attributen overzicht (zie Beheer Caches => Attributen overzicht)
 - Nieuw: Toevoegen import vanuit bladwijzerlijsten (alleen GC premium)
 - Nieuw: Sorteervolgorde inwisselen bij lange klik op sorteerbalk
+- Wijziging: Voer ook automatisch sorteren op afstand uit voor lijsten met cacheseries met meer dan 50 caches (tot 500)
 
 ### Cache details
 - Nieuw: Geef huidige cache coördinaten door aan de geochecker (indien ondersteund door geochecker)
+- Nieuw: Gekleurde attribuutpictogrammen (volgends attribuutgroepen)
 
 ### Overig
 - Nieuw: Snel laden van geocodes uit klembordtekst uit hoofdscherm zoekactie
