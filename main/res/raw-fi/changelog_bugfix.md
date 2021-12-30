@@ -1,4 +1,4 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- Korjaa: Uudelleenmahdollista reititys ulkoisella BRouter-sovelluksella versiossa 1.6.3
 
 ## 2021.12.24 Viankorjausversio
 
