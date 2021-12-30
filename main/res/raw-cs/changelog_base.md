@@ -11,9 +11,11 @@
 - Novinka: Přehled atributů (viz Správa kešek => Přehled atributů)
 - Novinka: Přidána možnost importu ze seznamu záložek (pouze GC prémium)
 - Novinka: Invertované řazení při dlouhém kliknutí na řádek řazení
+- Změna: Automatické řazení podle vzdálenosti také pro seznamy obsahující série kešek s více než 50 keškami (až 500)
 
 ### Detaily kešky
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
+- Novinka: Barevné ikony atributů (po skupinách atributů)
 
 ### Ostatní
 - Novinka: Rychlé načítání geokódů z textu ve schránce při vyhledávání na hlavní obrazovce
