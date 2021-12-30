@@ -92,7 +92,7 @@ public class CalculatedCoordinate implements Parcelable {
         if (config == null) {
             return;
         }
-        final String[] tokens = config.split("::");
+        final String[] tokens = config.split("::", -1);
         this.type = EnumUtils.getEnum(CalculatedCoordinateType.class, tokens.length > 0 ? tokens[0] : null, CalculatedCoordinateType.PLAIN);
         setLatitudePattern(tokens.length > 1 ? tokens[1] : "");
         setLongitudePattern(tokens.length > 2 ? tokens[2] : "");
@@ -119,7 +119,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public boolean isFilled() {
-        return latitudePattern != EMPTY_FORMULA && longitudePattern != EMPTY_FORMULA;
+        return latitudePattern != EMPTY_FORMULA || longitudePattern != EMPTY_FORMULA;
     }
 
     public static CalculatedCoordinate createFromConfig(final String config) {

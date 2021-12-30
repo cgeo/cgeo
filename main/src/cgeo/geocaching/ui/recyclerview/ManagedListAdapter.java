@@ -19,7 +19,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.SortedMap;
 import java.util.TreeMap;
 
@@ -218,7 +220,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     public void setItems(final List<T> list) {
         this.originalItemList.clear();
         this.originalItemList.addAll(list);
-        initializeFromOriginalList(true);
+        initializeFromOriginalList();
     }
 
     public void swapItems(final int srcIdx, final int trgIdx) {
@@ -240,7 +242,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     @SuppressLint("NotifyDataSetChanged")
     public void sortItems(final Comparator<T> comparator) {
         Collections.sort(this.originalItemList, comparator);
-        initializeFromOriginalList(true);
+        initializeFromOriginalList();
     }
 
     public void addItems(final Collection<T> items) {
@@ -338,10 +340,57 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     }
 
     public void setFilter(final Predicate<T> filter) {
-        this.filter = filter;
-        initializeFromOriginalList(true);
+        setFilter(filter, false);
     }
 
+    /**
+     * Sets a new filter.
+     *
+     * If notifyInsertRemove is true, then RecyclerView is notified with a series of insert/remove
+     * events with the goal to preserve existing views as much as possible. However, this will throw
+     * IndexOutOfBoundsExceptions if used LayoutManager has "supportsPredictiveItemAnimations" enabled.
+     * See https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in
+     */
+    public void setFilter(final Predicate<T> filter, final boolean notifyInsertRemove) {
+
+        this.filter = filter;
+
+        if (!notifyInsertRemove) {
+            initializeFromOriginalList();
+            return;
+        }
+
+        final Set<Integer> oldFilteredIndexes = new HashSet<>(this.itemToOriginalItemMap.values());
+        this.itemToOriginalItemMap.clear();
+
+        int origIdx = 0;
+        int idx = 0;
+        for (T origItem : originalItemList) {
+            final boolean isOldFiltered = oldFilteredIndexes.contains(origIdx);
+            final boolean isNewFiltered = isFiltered(origItem);
+            if (isOldFiltered && !isNewFiltered) {
+                itemList.remove(idx);
+                if (this.notifyOnEvents) {
+                    notifyItemRemoved(idx);
+                }
+            } else if (!isOldFiltered && isNewFiltered) {
+                itemList.add(idx, origItem);
+                this.itemToOriginalItemMap.put(idx, origIdx);
+                if (this.notifyOnEvents) {
+                    notifyItemInserted(idx);
+                }
+            } else if (isOldFiltered && isNewFiltered) {
+                this.itemToOriginalItemMap.put(idx, origIdx);
+            }
+            if (isNewFiltered) {
+                idx++;
+            }
+            origIdx++;
+        }
+
+    }
+
+    /** the debug string is used for debug and test purposes. Changing it may break some Unit-Tests */
     @NonNull
     public String getDebugString() {
         return this.itemList + "|" + this.originalItemList + "|" + this.itemToOriginalItemMap;
@@ -357,7 +406,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
     //reinitializes itemList and original-item-mapping from current filter and originalList
     @SuppressLint("NotifyDataSetChanged")
-    private void initializeFromOriginalList(final boolean doNotification) {
+    private void initializeFromOriginalList() {
 
         this.itemList.clear();
         this.itemToOriginalItemMap.clear();
@@ -370,7 +419,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
             idx++;
         }
 
-        if (doNotification && notifyOnEvents) {
+        if (notifyOnEvents) {
             this.notifyDataSetChanged();
         }
     }

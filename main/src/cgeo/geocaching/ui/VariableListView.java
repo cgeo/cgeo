@@ -16,6 +16,8 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.InputType;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -34,10 +36,13 @@ import androidx.core.util.Consumer;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -98,6 +103,8 @@ public class VariableListView extends LinearLayout {
 
     private static class VariableViewHolder extends RecyclerView.ViewHolder {
 
+        private final VariablesListAdapter listAdapter;
+
         private final DisplayType displayType;
         private final TextView viewVariableName;
         private final TextView viewVariableFormulaText;
@@ -107,15 +114,15 @@ public class VariableListView extends LinearLayout {
 
         private String varName;
 
-        VariableViewHolder(final View rowView, final DisplayType displayType) {
+        VariableViewHolder(final View rowView, final VariablesListAdapter listAdapter, final DisplayType displayType) {
             super(rowView);
+            this.listAdapter = listAdapter;
             this.displayType = displayType;
             this.viewVariableName = rowView.findViewById(R.id.variable_name);
             this.viewVariableFormulaText = rowView.findViewById(R.id.variable_formula_text);
             this.viewVariableResult = rowView.findViewById(R.id.variable_result);
             this.viewButtonDelete = rowView.findViewById(R.id.variable_delete);
             this.viewButtonFunction = rowView.findViewById(R.id.variable_function);
-            //binding = VariableListItemBinding.bind(rowView);
         }
 
         private void setData(final VariableMap.VariableState variableState) {
@@ -125,7 +132,19 @@ public class VariableListView extends LinearLayout {
             this.displayType.setVariableName(this.viewVariableName, displayVarName);
 
             if (this.viewVariableFormulaText != null) {
-                this.viewVariableFormulaText.setText(variableState.getFormulaString());
+                final String currentText = this.viewVariableFormulaText.getText().toString();
+                if (!currentText.equals(variableState.getFormulaString())) {
+                    this.viewVariableFormulaText.setText(variableState.getFormulaString());
+
+                    //try to restore cursor position
+                    if (listAdapter.varFormulaCursorPositionMap.containsKey(this.varName)) {
+                        final int sel = listAdapter.varFormulaCursorPositionMap.get(this.varName);
+                        final CharSequence cs = this.viewVariableFormulaText.getText();
+                        if (cs instanceof Spannable) {
+                            Selection.setSelection((Spannable) cs, sel, sel);
+                        }
+                    }
+                }
             }
 
             setResult(variableState);
@@ -159,16 +178,19 @@ public class VariableListView extends LinearLayout {
     public static final class VariablesListAdapter extends ManagedListAdapter<VariableMap.VariableState, VariableViewHolder> {
 
         private DisplayType displayType = DisplayType.ADVANCED;
-        private int displayColumns = 1;
+        private int displayColumns = -1;
 
         private VariableList variables;
         private boolean textListeningActive = true;
         private final RecyclerView recyclerView;
 
         private final Set<String> visibleVariables = new HashSet<>();
+        private boolean filterEnabled = false;
 
         private Action2<String, CharSequence> varChangeCallback;
         private Consumer<VariableList> changeCallback;
+
+        private final Map<String, Integer> varFormulaCursorPositionMap = new HashMap<>();
 
         private VariablesListAdapter(final RecyclerView recyclerView) {
             super(new Config(recyclerView)
@@ -188,10 +210,11 @@ public class VariableListView extends LinearLayout {
 
         public void setVariableList(@NonNull final VariableList variables) {
             this.variables = variables;
-            clearList();
+            final List<VariableMap.VariableState> newList = new ArrayList<>();
             for (String var : this.variables.asList()) {
-                addItem(this.variables.getState(var));
+                newList.add(this.variables.getState(var));
             }
+            setItems(newList);
             callCallback();
         }
 
@@ -199,31 +222,28 @@ public class VariableListView extends LinearLayout {
             setVisibleVariables(this.variables.getDependentVariables(neededVars));
         }
 
-        @SuppressLint("NotifyDataSetChanged")
         public void addVisibleVariables(final Collection<String> newVars) {
             //this is a costly operation
             //Thus check whether new and old set contains same elements (e.g. no change)
-            if (this.visibleVariables.isEmpty() || this.visibleVariables.containsAll(newVars)) {
+            if (filterEnabled && (newVars.isEmpty() || this.visibleVariables.containsAll(newVars))) {
                 return;
             }
 
             this.visibleVariables.addAll(newVars);
-            this.setFilter(d -> this.visibleVariables.contains(d.getVar()));
-            //this.notifyDataSetChanged();
+            this.setFilter(d -> this.visibleVariables.contains(d.getVar()), true);
+            filterEnabled = true;
         }
 
-        @SuppressLint("NotifyDataSetChanged")
         public void setVisibleVariables(@NonNull final Collection<String> newVisibleVariables) {
             //this is a costly operation
             //Thus check whether new and old set contains same elements (e.g. no change)
-            if (newVisibleVariables.size() == this.visibleVariables.size() &&
-                this.visibleVariables.containsAll(newVisibleVariables)) {
+            if (filterEnabled && newVisibleVariables.size() == this.visibleVariables.size() && this.visibleVariables.containsAll(newVisibleVariables)) {
                 return;
             }
             this.visibleVariables.clear();
             this.visibleVariables.addAll(newVisibleVariables);
-            this.setFilter(d -> this.visibleVariables.contains(d.getVar()));
-            //this.notifyDataSetChanged();
+            this.setFilter(d -> this.visibleVariables.contains(d.getVar()), true);
+            filterEnabled = true;
         }
 
         public void ensureVariables(final Collection<String> variables) {
@@ -251,7 +271,7 @@ public class VariableListView extends LinearLayout {
         @Override
         public VariableViewHolder onCreateViewHolder(@NonNull final ViewGroup parent, final int viewType) {
             final View view = LayoutInflater.from(parent.getContext()).inflate(displayType.listItemLayout, parent, false);
-            final VariableViewHolder viewHolder = new VariableViewHolder(view, displayType);
+            final VariableViewHolder viewHolder = new VariableViewHolder(view, this, displayType);
             if (viewHolder.viewButtonDelete != null) {
                 viewHolder.viewButtonDelete.setOnClickListener(v -> removeVarAt(viewHolder.getBindingAdapterPosition()));
             }
@@ -259,6 +279,7 @@ public class VariableListView extends LinearLayout {
             if (viewHolder.viewVariableFormulaText != null) {
                 viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s ->  {
                     if (textListeningActive) {
+                        varFormulaCursorPositionMap.put(viewHolder.getVar(), viewHolder.viewVariableFormulaText.getSelectionStart());
                         changeFormulaFor(viewHolder.getBindingAdapterPosition(), s.toString());
                         if (this.varChangeCallback != null) {
                             this.varChangeCallback.call(viewHolder.getVar(), s);
@@ -427,10 +448,47 @@ public class VariableListView extends LinearLayout {
             this.displayType = dtUsed;
             this.displayColumns = dcUsed;
 
-            this.recyclerView.setLayoutManager(new GridLayoutManager(this.recyclerView.getContext(), this.displayColumns));
+            setVarListLayoutManager();
 
             invalidateView();
 
+        }
+
+        private void setVarListLayoutManager() {
+            this.recyclerView.setLayoutManager(new GridLayoutManager(this.recyclerView.getContext(), this.displayColumns) {
+                //we need to set "supportsPredictiveItemAnimations" to "false"
+                //to prevent exceptions when "setFilter" is called due to complex series of insert/remove notifications.
+                //See e.g. https://stackoverflow.com/questions/31759171/recyclerview-and-java-lang-indexoutofboundsexception-inconsistency-detected-in
+                @Override
+                public boolean supportsPredictiveItemAnimations() {
+                    return false;
+                }
+
+                /** the following overwrite of focus search will always search the next EditText inside same RecyclerView */
+                @Nullable
+                @Override
+                public View onInterceptFocusSearch(@NonNull final View focused, final int direction) {
+                    final View recView = ViewUtils.getParent(focused, v -> v instanceof RecyclerView);
+                    final boolean[] foundFocused = new boolean[] { false };
+                    final View[] nextView = new View[]{ null };
+                    ViewUtils.walkViewTree(recView, v -> {
+                        if (foundFocused[0]) {
+                            // we found the currently focused view just before, so this is the next view
+                            nextView[0] = v;
+                            return false;
+                        } else if (v == focused) {
+                            //we found the currently focused view, mark this
+                            foundFocused[0] = true;
+                        }
+                        return true;
+                    }, v -> v instanceof EditText);
+
+                    if (nextView[0] != null) {
+                        return nextView[0];
+                    }
+                    return super.onInterceptFocusSearch(focused, direction);
+                }
+            });
         }
 
         private void invalidateView() {
