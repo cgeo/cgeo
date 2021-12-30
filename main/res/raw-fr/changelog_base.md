@@ -11,9 +11,11 @@
 - New: Attributes overview (see Manage Caches => Attributes overview)
 - Nouveauté : Ajout de l'import des signets (requiert un compte GC premium)
 - Nouveauté : Inverser le tri lors d'un clic long sur la barre de tri
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Détails de la cache
 - Nouveauté : Envoyer les coordonnées de la cache à geochecker
+- New: Colored attribute icons (following attribute groups)
 
 ### Divers
 - New: Quick-load geocodes from clipboard text in mainscreen search
