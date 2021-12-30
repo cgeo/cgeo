@@ -1830,7 +1830,7 @@
     <string name="cat_location">Τοποθεσία κρύπτης</string>
     <string name="cat_duration">Απόσταση / Διάρκεια</string>
     <string name="cat_surrounding">Γύρω από την κρύπτη</string>
-    <string name="cat_transport">Συγκοινωνία</string>
+    <string name="cat_permissions">\'Αδειες</string>
     <!-- next things -->
     <string name="quote">Για να γίνουν οι γεωκρύπτες πιο εύκολες και οι χρήστες πιο τεμπέληδες.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
