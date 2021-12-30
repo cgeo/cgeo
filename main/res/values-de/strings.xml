@@ -1828,7 +1828,6 @@
     <string name="cat_location">Cache-Ort</string>
     <string name="cat_duration">Distanz / Dauer</string>
     <string name="cat_surrounding">Umgebung des Caches</string>
-    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
