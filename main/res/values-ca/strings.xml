@@ -1830,7 +1830,6 @@
     <string name="cat_location">Ubicació del catxé</string>
     <string name="cat_duration">Distància / Durada</string>
     <string name="cat_surrounding">Al voltant del catxé</string>
-    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
