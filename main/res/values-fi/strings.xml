@@ -698,6 +698,8 @@
     <string name="init_template_title">Mallin nimi</string>
     <string name="init_template_text">Mallin teksti</string>
     <string name="init_log_template">Lokimalli</string>
+    <string name="init_log_template_addnew">Lisää uusi malli</string>
+    <string name="init_log_template_remove_confirm">Haluatko varmasti poistaa mallin?</string>
     <string name="init_log_templates">Lokimallit</string>
     <string name="init_log_template_prefix">Malli:\u0020</string>
     <string name="init_log_template_missing_error">Sekä mallin otsikko että teksti on annettava.</string>
@@ -1828,7 +1830,7 @@
     <string name="cat_location">Kätkön sijainti</string>
     <string name="cat_duration">Etäisyys / Kesto</string>
     <string name="cat_surrounding">Kätkön ympärillä</string>
-    <string name="cat_transport">Siirtyminen</string>
+    <string name="cat_permissions">Käyttöoikeudet</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
