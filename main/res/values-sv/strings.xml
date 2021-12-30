@@ -1824,7 +1824,6 @@
     <string name="cat_location">Cache-plats</string>
     <string name="cat_duration">Avstånd / varaktighet</string>
     <string name="cat_surrounding">Runt cachen</string>
-    <string name="cat_transport">Transport</string>
     <!-- next things -->
     <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
