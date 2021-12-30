@@ -1860,7 +1860,7 @@
     <string name="cat_location">Umístění kešky</string>
     <string name="cat_duration">Vzdálenost / Doba trvání</string>
     <string name="cat_surrounding">Kolem kešky</string>
-    <string name="cat_transport">Doprava</string>
+    <string name="cat_permissions">Oprávnění</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
