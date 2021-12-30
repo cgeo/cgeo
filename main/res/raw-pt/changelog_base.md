@@ -11,9 +11,11 @@
 - Novo: Visão geral de atributos (ver Gerir Caches => Visão geral de atributos)
 - Novo: Adicionar importação de listas de favoritos (apenas membros premium GC)
 - Novo: Inverter a ordenação com um toque sem soltar na barra de ordenação
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Detalhes da cache
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
+- New: Colored attribute icons (following attribute groups)
 
 ### Outro
 - Novo: Carregamento rápido de geo-códigos a partir do texto da área de transferência, na pesquisa do ecrã principal
