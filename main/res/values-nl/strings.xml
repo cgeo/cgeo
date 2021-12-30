@@ -698,6 +698,8 @@
     <string name="init_template_title">Sjabloontitel</string>
     <string name="init_template_text">Sjabloontekst</string>
     <string name="init_log_template">Logsjabloon</string>
+    <string name="init_log_template_addnew">Nieuw sjabloon toevoegen</string>
+    <string name="init_log_template_remove_confirm">Weet je zeker dat je het sjabloon wil verwijderen?</string>
     <string name="init_log_templates">Logsjablonen</string>
     <string name="init_log_template_prefix">Sjabloon:\u0020</string>
     <string name="init_log_template_missing_error">Zowel sjabloontitel als tekst moeten worden verstrekt.</string>
@@ -1828,7 +1830,7 @@
     <string name="cat_location">Cachelocatie</string>
     <string name="cat_duration">Afstand / Duur</string>
     <string name="cat_surrounding">Rondom de cache</string>
-    <string name="cat_transport">Transport</string>
+    <string name="cat_permissions">Machtigingen</string>
     <!-- next things -->
     <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
