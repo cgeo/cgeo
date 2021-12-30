@@ -68,6 +68,26 @@ public final class TextUtils {
         return listToSort;
     }
 
+    /** returns for a list and a text the position to insert the text into the list to keep it sorted */
+    public static int getSortedPos(final List<String> list, final String text) {
+        return getSortedPos(list, s -> s, text);
+    }
+
+    public static <T> int getSortedPos(final List<T> list, final Func1<T, String> sortStringAccessor, final String text) {
+        if (text == null || list == null || sortStringAccessor == null) {
+            return 0;
+        }
+        int idx = 0;
+        while (idx < list.size()) {
+            final String s = sortStringAccessor.call(list.get(idx));
+            if (s == null || COLLATOR.compare(s, text) >= 0) {
+                break;
+            }
+            idx++;
+        }
+        return idx;
+    }
+
     /**
      * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *

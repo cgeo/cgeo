@@ -87,17 +87,6 @@ public class VariableList {
         wasModified = true;
     }
 
-    public int getSortedPos(final String var) {
-        if (var == null) {
-            return 0;
-        }
-        int idx = 0;
-        while (idx < variableList.size() && variableList.get(idx).compareTo(var) < 0) {
-            idx++;
-        }
-        return idx;
-    }
-
     @NonNull
     public String addVariable(@Nullable  final String var, @Nullable final String formula) {
         return addVariable(var, formula, 0);

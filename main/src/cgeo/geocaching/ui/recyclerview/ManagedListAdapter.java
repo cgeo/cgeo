@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Predicate;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,17 +20,20 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.SortedMap;
+import java.util.TreeMap;
 
 /**
  * Adapter for {@link RecyclerView} which also maintains the list of current elements inside it.
  * If provides helper methods to access and modify these items. Usage of these methods will also trigger
- * the necessary "notify" methods on adapter so list animations can work as expected.
+ * the necessary "notify" methods on adapter (unless set otherwise in configuration) so list animations can work as expected.
  *
  * Adapter supports following additional features: <ul>
  * <li>Support for swapping whole lists using {@link #setItems(List)} methods</li>
  * <li>Support for lists where view also changed when position of item is NOT changed (using {@link Config#setNotifyOnPositionChange(boolean)}</li>
  * <li>Support for including drag/drop using {@link Config#setSupportDragDrop(boolean)}, {@link #registerStartDrag(RecyclerView.ViewHolder, View)} and {@link ItemTouchHelper} in the background</li>
- * <li>AUtomatically adapting to dark/light theme of c:geo for drap/drop support</li>
+ * <li>Filtering visible elements by a given filter. Whole list is maintained in background nevertheless and can be retrieved any time</li>
+ * <li>Automatically adapting to dark/light theme of c:geo for drap/drop support</li>
  * </ul>
  *
  * To use this adapter, subclass it, pass an instance of {@link Config} to its constructor and
@@ -43,14 +47,22 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     private final List<T> itemList = new ArrayList<>();
     private final List<T> itemListReadonly = Collections.unmodifiableList(itemList);
 
+    private final boolean notifyOnEvents;
     private final boolean notifyOnPositionChange;
     private ItemTouchHelper touchHelper = null;
+
+    //filtering
+    private Predicate<T> filter;
+    private final List<T> originalItemList = new ArrayList<>();
+    private final List<T> originalItemListReadonly = Collections.unmodifiableList(originalItemList);
+    private final SortedMap<Integer, Integer> itemToOriginalItemMap = new TreeMap<>((i1, i2) -> -i1.compareTo(i2));
 
     /**
      * When subclassing {@link ManagedListAdapter}, pass an instance of Config to its default constructor
      */
     public static class Config {
         private final RecyclerView recyclerView;
+        private boolean notifyOnEvents = true;
         private boolean notifyOnPositionChange = false;
         private boolean supportDragDrop = false;
 
@@ -59,6 +71,14 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
          */
         public Config(final RecyclerView recyclerView) {
             this.recyclerView = recyclerView;
+        }
+
+        /**
+         * Whether calling this adapter's change methods should trigger notification events (defaults to true)
+         */
+        public Config setNotifyOnEvents(final boolean notifyOnEvents) {
+            this.notifyOnEvents = notifyOnEvents;
+            return this;
         }
 
         /**
@@ -80,15 +100,15 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     }
 
     protected ManagedListAdapter(final Config builder) {
-       final boolean supportDragDrop = builder.supportDragDrop;
-        this.notifyOnPositionChange = builder.notifyOnPositionChange;
-
-        //initialize adapter
-        setItems(itemList);
+        final boolean supportDragDrop = builder.supportDragDrop;
+        this.notifyOnEvents = builder.notifyOnEvents;
+        this.notifyOnPositionChange = builder.notifyOnEvents && builder.notifyOnPositionChange;
 
         //initialize recyclerView (but don't store a reference to it!)
-        builder.recyclerView.setAdapter(this);
-        builder.recyclerView.setLayoutManager(new LinearLayoutManager(builder.recyclerView.getContext()));
+        if (builder.recyclerView != null) {
+            builder.recyclerView.setAdapter(this);
+            builder.recyclerView.setLayoutManager(new LinearLayoutManager(builder.recyclerView.getContext()));
+        }
         if (supportDragDrop) {
             this.touchHelper = createItemTouchHelper();
             this.touchHelper.attachToRecyclerView(builder.recyclerView);
@@ -113,7 +133,9 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                 final int trgIdx = target.getBindingAdapterPosition();
                 if (srcIdx != trgIdx) {
                     Collections.swap(itemList, srcIdx, trgIdx);
-                    notifyItemMoved(srcIdx, trgIdx);
+                    if (notifyOnEvents) {
+                        notifyItemMoved(srcIdx, trgIdx);
+                    }
                 }
 
                 return true;
@@ -149,7 +171,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                 //if necessary, pass change event to views with position change
                 if (currentDragItemStart >= 0) {
                     if (notifyOnPositionChange && currentDragItemStart != viewHolder.getBindingAdapterPosition()) {
-                        notifyItemRangeChanged(Math.min(currentDragItemStart, viewHolder.getBindingAdapterPosition()), Math.abs(currentDragItemStart - viewHolder.getAdapterPosition()) + 1);
+                        notifyItemRangeChanged(Math.min(currentDragItemStart, viewHolder.getBindingAdapterPosition()), Math.abs(currentDragItemStart - viewHolder.getBindingAdapterPosition()) + 1);
                     }
                     currentDragItemStart = -1;
 
@@ -167,17 +189,19 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         });
     }
 
+
     /**
      * Return only READONLY list to prevent unwanted modifications
      */
     @NonNull
-    public List<T> getCurrentList() {
+    public List<T> getItems() {
         return itemListReadonly;
     }
 
-    public List<T> getItems() {
-        return getCurrentList();
+    public List<T> getOriginalItems() {
+        return originalItemListReadonly;
     }
+
 
     public T getItem(final int pos) {
         if (!checkIdx(pos)) {
@@ -190,15 +214,11 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         setItems(Collections.emptyList());
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     public void setItems(final List<T> list) {
-        final int oldSize = this.itemList.size();
-        this.itemList.clear();
-        this.itemList.addAll(list);
-        //tell the recycler view that all the old items are gone
-        notifyItemRangeRemoved(0, oldSize);
-        //tell the recycler view how many new items we added
-        notifyItemRangeInserted(0, this.itemList.size());
-        //this.notifyItemRangeChanged(0, this.itemList.size());
+        this.originalItemList.clear();
+        this.originalItemList.addAll(list);
+        initializeFromOriginalList(true);
     }
 
     public void swapItems(final int srcIdx, final int trgIdx) {
@@ -206,7 +226,10 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
             return;
         }
         Collections.swap(this.itemList, srcIdx, trgIdx);
-        this.notifyItemMoved(srcIdx, trgIdx);
+        Collections.swap(this.originalItemList, originalIndex(srcIdx), originalIndex(trgIdx));
+        if (notifyOnEvents) {
+            this.notifyItemMoved(srcIdx, trgIdx);
+        }
 
         if (this.notifyOnPositionChange) {
             this.notifyItemChanged(srcIdx);
@@ -216,13 +239,19 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
     @SuppressLint("NotifyDataSetChanged")
     public void sortItems(final Comparator<T> comparator) {
-        Collections.sort(this.itemList, comparator);
-        this.notifyDataSetChanged();
+        Collections.sort(this.originalItemList, comparator);
+        initializeFromOriginalList(true);
     }
 
     public void addItems(final Collection<T> items) {
-        this.itemList.addAll(items);
-        this.notifyItemRangeInserted(this.itemList.size() - items.size(), items.size());
+        addItems(itemList.size(), items);
+    }
+
+    public void addItems(final int pos, final Collection<T> items) {
+        final int insertedCount = addItemInternal(pos, items);
+        if (notifyOnEvents) {
+            this.notifyItemRangeInserted(pos, insertedCount);
+        }
     }
 
     public void addItem(final T item) {
@@ -230,8 +259,46 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     }
 
     public void addItem(final int pos, final T item) {
-        this.itemList.add(pos, item);
-        this.notifyItemInserted(pos);
+        addItemInternal(pos, Collections.singleton(item));
+        if (notifyOnEvents) {
+            this.notifyItemInserted(pos);
+        }
+    }
+
+    private int addItemInternal(final int pos, final Collection<T> items) {
+        int posInOriginal = 0;
+        if (this.itemToOriginalItemMap.containsKey(pos)) {
+            posInOriginal = originalIndex(pos);
+        } else if (this.itemToOriginalItemMap.containsKey(pos - 1)) {
+            //append to end of filtered list, so after last filtered item in original list
+            posInOriginal = originalIndex(pos - 1) + 1;
+        }
+        this.originalItemList.addAll(posInOriginal, items);
+
+        int insertCount = 0;
+        for (T newItem : items) {
+            if (isFiltered(newItem)) {
+                this.itemList.add(pos + insertCount, newItem);
+                insertCount++;
+            }
+        }
+        for (Integer key : new ArrayList<>(this.itemToOriginalItemMap.keySet())) {
+            if (key < pos) {
+                break;
+            }
+            this.itemToOriginalItemMap.put(key + insertCount, originalIndex(key) + items.size());
+        }
+        int newPos = pos;
+        int i = 0;
+        for (T item : items) {
+            if (isFiltered(item)) {
+                this.itemToOriginalItemMap.put(newPos, posInOriginal + i);
+                newPos++;
+            }
+            i++;
+        }
+
+        return insertCount;
     }
 
     public T removeItem(final int pos) {
@@ -239,7 +306,15 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
             return null;
         }
         final T item = this.itemList.remove(pos);
-        this.notifyItemRemoved(pos);
+        this.originalItemList.remove(originalIndex(pos));
+        for (int p = pos ; p < this.itemList.size(); p++) {
+            this.itemToOriginalItemMap.put(p, originalIndex(p + 1) - 1);
+        }
+        this.itemToOriginalItemMap.remove(this.itemList.size());
+
+        if (notifyOnEvents) {
+            this.notifyItemRemoved(pos);
+        }
 
         if (this.notifyOnPositionChange) {
             this.notifyItemRangeChanged(pos, this.itemList.size() - pos);
@@ -251,8 +326,53 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         if (!checkIdx(pos)) {
             return;
         }
-        this.itemList.set(pos, item);
-        this.notifyItemChanged(pos);
+        this.originalItemList.set(originalIndex(pos), item);
+        if (!isFiltered(item)) {
+            removeItem(pos);
+        } else {
+            this.itemList.set(pos, item);
+            if (notifyOnEvents) {
+                this.notifyItemChanged(pos);
+            }
+        }
+    }
+
+    public void setFilter(final Predicate<T> filter) {
+        this.filter = filter;
+        initializeFromOriginalList(true);
+    }
+
+    @NonNull
+    public String getDebugString() {
+        return this.itemList + "|" + this.originalItemList + "|" + this.itemToOriginalItemMap;
+    }
+
+    private boolean isFiltered(final T item) {
+        return filter == null || filter.test(item);
+    }
+
+    private int originalIndex(final int idx) {
+        return this.itemToOriginalItemMap.get(idx);
+    }
+
+    //reinitializes itemList and original-item-mapping from current filter and originalList
+    @SuppressLint("NotifyDataSetChanged")
+    private void initializeFromOriginalList(final boolean doNotification) {
+
+        this.itemList.clear();
+        this.itemToOriginalItemMap.clear();
+        int idx = 0;
+        for (T item : originalItemList) {
+            if (isFiltered(item)) {
+                this.itemToOriginalItemMap.put(this.itemList.size(), idx);
+                this.itemList.add(item);
+            }
+            idx++;
+        }
+
+        if (doNotification && notifyOnEvents) {
+            this.notifyDataSetChanged();
+        }
     }
 
     private boolean checkIdx(final int... idxs) {
@@ -268,6 +388,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
      * Use this method inside implementations of {@link #onCreateViewHolder(ViewGroup, int)} to
      * register a GUI element as "start drag" action field
      */
+    @SuppressLint("ClickableViewAccessibility")
     protected void registerStartDrag(final RecyclerView.ViewHolder viewHolder, final View button) {
         if (this.touchHelper == null) {
             return;
@@ -285,5 +406,6 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
             return false;
         });
     }
+
 
 }

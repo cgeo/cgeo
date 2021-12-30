@@ -2082,7 +2082,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         @Override
         public void onDestroy() {
             super.onDestroy();
-            cache.getVariables().removeChangeListener(this);
+            if (cache != null && cache.getVariables() != null) {
+                cache.getVariables().removeChangeListener(this);
+            }
         }
 
         protected void fillViewHolder(final CacheDetailActivity activity, final View rowView, final WaypointViewHolder holder, final Waypoint wpt) {
