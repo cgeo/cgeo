@@ -11,9 +11,11 @@
 - Uutta: Attribuuttien yleisnäkymä (ks. Hallitse kätköjä => Attribuuttien yleisnäkymä)
 - Uusi: Lisää tuonti kirjanmerkkiluetteloista (vain GC-premium)
 - Uusi: Käänteinen lajittelujärjestys pitkällä lajittelupalkin napautuksella
+- Muutos: Suorita myös automaattinen etäisyyden mukaan lajittelu listoille, jotka sisältävät yli 50 kätköä sisältävät kätkösarjat (jopa 500)
 
 ### Kätkön tiedot
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
+- Uusi: Värilliset attribuuttikuvakkeet (seuraavat attribuuttiryhmät)
 
 ### Muu
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
