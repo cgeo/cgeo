@@ -11,9 +11,11 @@
 - Neu: Übersicht der Attribute (siehe Caches verwalten => Attributübersicht)
 - Neu: Import von Lesezeichenlisten hinzufügen (nur GC Premium)
 - Neu: Sortierreihenfolge beim langen Klick auf Sortierleiste umkehren
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Cache-Details
 - Neu: Aktuelle Cache-Koordinaten an Geochecker übergeben (falls vom Geochecker unterstützt)
+- New: Colored attribute icons (following attribute groups)
 
 ### Sonstiges
 - Neu: Übernahme von Geocodes aus der Zwischenablage in Suche auf dem Startbildschirm
