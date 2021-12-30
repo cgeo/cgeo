@@ -11,9 +11,11 @@
 - New: Attributes overview (see Manage Caches => Attributes overview)
 - New: Add import from bookmark lists (GC premium only)
 - New: Invert sort-order on long click on sort bar
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Szczegóły skrytki
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- New: Colored attribute icons (following attribute groups)
 
 ### Inne
 - New: Quick-load geocodes from clipboard text in mainscreen search
