@@ -1829,7 +1829,6 @@ Nombre de archivo:%2$s</string>
     <string name="cat_location">Ubicación del caché</string>
     <string name="cat_duration">Distancia / Duración</string>
     <string name="cat_surrounding">Alrededor del caché</string>
-    <string name="cat_transport">Transporte</string>
     <!-- next things -->
     <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
