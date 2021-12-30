@@ -1807,7 +1807,6 @@
     <string name="cat_location">캐시 위치</string>
     <string name="cat_duration">거리 / 시간</string>
     <string name="cat_surrounding">캐시 주변</string>
-    <string name="cat_transport">교통</string>
     <!-- next things -->
     <string name="quote">지오캐싱을 쉽게, 사용자를 편하게</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
