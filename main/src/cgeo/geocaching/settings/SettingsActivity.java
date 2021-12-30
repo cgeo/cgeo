@@ -20,13 +20,23 @@ import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SearchView;
+import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
+import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceScreen;
 
 import java.util.List;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * An {@link AppCompatActivity} that presents a set of application settings. On
@@ -51,6 +61,11 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     private BackupUtils backupUtils = null;
     private ContentStorageActivityHelper contentStorageHelper = null;
     private CharSequence title;
+
+    private SearchView searchView = null;
+    private MenuItem menuSearch = null;
+    private CharSequence lastTitle = null;
+    private Preference lastResult = null;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -83,8 +98,12 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             title = savedInstanceState.getCharSequence(TITLE_TAG);
         }
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
+            final boolean isMainPreferenceScreen = getSupportFragmentManager().getBackStackEntryCount() == 0;
+            if (isMainPreferenceScreen) {
                 setTitle(R.string.settings_titlebar);
+            }
+            if (menuSearch != null) {
+                menuSearch.setVisible(!isMainPreferenceScreen);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -92,6 +111,67 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_activity_options, menu);
+
+        // prepare search in action bar
+        menuSearch = menu.findItem(R.id.menu_gosearch);
+        searchView = (SearchView) menuSearch.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String s) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String s) {
+                if (lastResult != null) {
+                    lastResult.setTitle(lastTitle);
+                }
+
+                final PreferenceFragmentCompat fragment = ((PreferenceFragmentCompat) getSupportFragmentManager().getFragments().get(0));
+                final Preference result = doSearch(s, ((PreferenceScreen) fragment.getPreferenceScreen()));
+                if (result != null) {
+                    fragment.scrollToPreference(result);
+                    if (s.length() > 1) {
+                        lastResult = result;
+                        lastTitle = result.getTitle();
+                        result.setTitle(HtmlCompat.fromHtml("<font color=#00eeee>" + lastTitle + "</font>", 0));
+                    }
+                }
+                return true;
+            }
+        });
+
+        return true;
+    }
+
+    /**
+     * searches recursively in all elements of given prefGroup for first occurrence of s
+     * returns found preference on success, null else
+     * (prefers preference entries over preference groups)
+     */
+    @Nullable
+    private Preference doSearch(final String s, final PreferenceGroup prefGroup) {
+        final int prefCount = prefGroup.getPreferenceCount();
+        for (int i = 0; i < prefCount; i++) {
+            final Preference pref = prefGroup.getPreference(i);
+            final CharSequence title = pref.getTitle();
+            final CharSequence summary = pref.getSummary();
+
+            if (pref instanceof PreferenceGroup) {
+                final Preference result = doSearch(s, (PreferenceGroup) pref);
+                if (result != null) {
+                    return result;
+                }
+            } else if (StringUtils.containsIgnoreCase(title, s) || StringUtils.containsIgnoreCase(summary, s)) {
+                return pref;
+            }
+        }
+        return null;
     }
 
     /**
@@ -186,6 +266,17 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         }
         */
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        // back may exit the app instead of closing the search action bar
+        if (searchView != null && !searchView.isIconified()) {
+            searchView.setIconified(true);
+            menuSearch.collapseActionView();
+        } else {
+            super.onBackPressed();
+        }
     }
 
 }
