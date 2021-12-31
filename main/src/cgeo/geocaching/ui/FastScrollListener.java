@@ -11,7 +11,7 @@ import android.widget.ListView;
  */
 public class FastScrollListener implements AbsListView.OnScrollListener {
     private static final int MIN_COVERED_ENTRIES = 3;       // in number of entries
-    private static final int AUTO_DISABLE_ON_IDLE = 1000;   // is ms
+    private static final int AUTO_DISABLE_ON_IDLE = 500;    // is ms
 
     private long mLastScroll = 0;
     private int mScrollState = 0;
