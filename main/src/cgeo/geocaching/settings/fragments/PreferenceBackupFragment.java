@@ -8,9 +8,8 @@ import cgeo.geocaching.utils.BackupUtils;
 import android.os.Bundle;
 
 import androidx.preference.CheckBoxPreference;
-import androidx.preference.PreferenceFragmentCompat;
 
-public class PreferenceBackupFragment extends PreferenceFragmentCompat {
+public class PreferenceBackupFragment extends BasePreferenceFragment {
     public static final String STATE_BACKUPUTILS = "backuputils";
 
     @Override

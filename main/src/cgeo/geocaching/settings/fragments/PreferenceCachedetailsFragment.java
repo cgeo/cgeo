@@ -4,9 +4,7 @@ import cgeo.geocaching.R;
 
 import android.os.Bundle;
 
-import androidx.preference.PreferenceFragmentCompat;
-
-public class PreferenceCachedetailsFragment extends PreferenceFragmentCompat {
+public class PreferenceCachedetailsFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_cachedetails, rootKey);

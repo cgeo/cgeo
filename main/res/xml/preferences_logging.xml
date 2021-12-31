@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_pen"
     android:summary="@string/settings_summary_logging"
-    android:title="@string/settings_title_logging">
+    android:title="@string/settings_title_logging"
+    app:key="@string/preference_screen_logging">
 
     <PreferenceCategory
         android:title="@string/init_signature"

@@ -2,7 +2,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_nut"
     android:summary="@string/settings_summary_system"
-    android:title="@string/settings_title_system">
+    android:title="@string/settings_title_system"
+    app:key="@string/preference_screen_system">
 
     <PreferenceCategory
         android:key="@string/pref_group_localfilesystem"

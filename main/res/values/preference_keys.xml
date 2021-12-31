@@ -15,6 +15,15 @@
 
     <string translatable="false" name="preference_screen_main">fakekey_main_screen</string>
     <string translatable="false" name="preference_screen_services">fakekey_services_screen</string>
+    <string translatable="false" name="pref_appearance">pref_appearance</string>
+    <string translatable="false" name="preference_screen_cachedetails">fakekey_cachedetails_screen</string>
+    <string translatable="false" name="preference_screen_map">fakekey_map_screen</string>
+    <string translatable="false" name="preference_screen_logging">fakekey_logging_screen</string>
+    <string translatable="false" name="preference_screen_offlinedata">fakekey_offlinedata_screen</string>
+    <string translatable="false" name="preference_screen_navigation">fakekey_navigation_screen</string>
+    <string translatable="false" name="preference_screen_system">fakekey_system_screen</string>
+    <string translatable="false" name="preference_screen_backup">fakekey_backup_screen</string>
+
     <string translatable="false" name="preference_screen_gc">preference_screen_gc</string>
     <string translatable="false" name="preference_screen_basicmembers">fakekey_basicmembers_screen</string>
     <string translatable="false" name="preference_screen_ocde">preference_screen_ocde</string>
@@ -27,11 +36,9 @@
     <string translatable="false" name="preference_screen_lc">preference_screen_lc</string>
     <string translatable="false" name="preference_screen_su">preference_screen_su</string>
     <string translatable="false" name="preference_screen_twitter">preference_screen_twitter</string>
-    <string translatable="false" name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
     <string translatable="false" name="preference_screen_sendtocgeo">preference_screen_sendtocgeo</string>
     <string translatable="false" name="preference_screen_gcvote">preference_screen_gcvote</string>
     <string translatable="false" name="preference_screen_geokrety">preference_screen_geokrety</string>
-    <string translatable="false" name="preference_screen_backup">fakekey_backup_screen</string>
     <string translatable="false" name="pref_fakekey_ocde_authorization">fakekey_ocde_authorization</string>
     <string translatable="false" name="pref_fakekey_ocpl_authorization">fakekey_ocpl_authorization</string>
     <string translatable="false" name="pref_fakekey_ocnl_authorization">fakekey_ocnl_authorization</string>
@@ -44,6 +51,8 @@
     <string translatable="false" name="pref_fakekey_ec_authorization">fakekey_ec_authorization</string>
     <string translatable="false" name="pref_fakekey_su_authorization">fakekey_su_authorization</string>
     <string translatable="false" name="pref_fakekey_gcvote_authorization">fakekey_gcvote_authorization</string>
+    <string translatable="false" name="preference_screen_navigation_menu">fakekey_navigation_menu_screen</string>
+
     <string translatable="false" name="pref_connectorGCActive">connectorGCActive</string>
     <string translatable="false" name="pref_username">username</string>
     <string translatable="false" name="pref_password">password</string>
@@ -282,7 +291,6 @@
     <string translatable="false" name="pref_generate_logcat">generate_logcat</string>
     <string translatable="false" name="pref_generate_infos_downloadmanager">generate_infos_downloadmanager</string>
     <string translatable="false" name="pref_view_settings">view_settings</string>
-    <string translatable="false" name="pref_appearance">pref_appearance</string>
     <string translatable="false" name="pref_changelog_last_checksum">changelog_last_checksum</string>
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>

@@ -9,6 +9,7 @@ import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
+
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 
@@ -16,11 +17,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Collection;
 
-public class PreferenceMapFragment extends PreferenceFragmentCompat {
+public class PreferenceMapFragment extends BasePreferenceFragment {
     private ListPreference prefMapSources;
 
     @Override

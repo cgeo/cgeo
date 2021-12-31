@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_sdcard"
     android:summary="@string/settings_summary_offlinedata"
-    android:title="@string/settings_title_offlinedata">
+    android:title="@string/settings_title_offlinedata"
+    app:key="@string/preference_screen_offlinedata">
     <CheckBoxPreference
         android:defaultValue="false"
         android:key="@string/pref_logimages"

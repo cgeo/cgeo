@@ -14,13 +14,12 @@ import android.app.ProgressDialog;
 import android.os.Bundle;
 
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.concurrent.atomic.AtomicLong;
 
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class PreferenceOfflinedataFragment extends PreferenceFragmentCompat {
+public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_offlinedata, rootKey);

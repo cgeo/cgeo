@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_details"
     android:title="@string/settings_title_cachedetails"
-    android:summary="@string/settings_summary_cachedetails" >
+    android:summary="@string/settings_summary_cachedetails"
+    app:key="@string/preference_screen_cachedetails">
     <CheckBoxPreference
         android:defaultValue="true"
         android:key="@string/pref_friendlogswanted"

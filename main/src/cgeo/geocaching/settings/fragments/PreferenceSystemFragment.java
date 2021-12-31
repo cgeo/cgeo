@@ -10,9 +10,7 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefClick;
 import android.content.Intent;
 import android.os.Bundle;
 
-import androidx.preference.PreferenceFragmentCompat;
-
-public class PreferenceSystemFragment extends PreferenceFragmentCompat {
+public class PreferenceSystemFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_system, rootKey);
