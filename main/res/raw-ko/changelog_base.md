@@ -5,6 +5,7 @@
 - 수정: 여러 트랙이 포함된 GPX 파일을 로드할 때 별도의 연결되지 않은 트랙으로 표시됨
 - 변경: GPX 트랙 파일을 로드할 때 자동으로 트랙 표시 활성화
 - New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션
