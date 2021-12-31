@@ -5,6 +5,7 @@
 - Oprava: Při načítání souborů GPX obsahujících více stop se zobrazí jako samostatné, nespojené stopy
 - Změna: Automatické zapnutí zobrazení trasy při načtení trasy že souboru GPX
 - Novinka: Symboly O/T pro ikony kešek (volitelné)
+- Novinka: Možnost kontroly chybějících směrovacích dat pro aktuální oblast
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
