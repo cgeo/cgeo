@@ -5,6 +5,7 @@
 - Korjaus: ladatessa useita polkuja sisältäviä GPX-tiedostoja näytetään ne erillisinä, yhdistämättöminä kappaleina
 - Muutos: Ota reitin näyttö automaattisesti käyttöön ladattaessa GPX reittitiedosto
 - Uusi: D/T -symbolit kätkökuvakkeille (valinnainen)
+- Uusi: Mahdollisuus tarkistaa puuttuvat reititystiedot nykyiselle näkymälle
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
