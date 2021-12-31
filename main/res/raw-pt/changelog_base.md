@@ -5,6 +5,7 @@
 - Correcção: Ao carregar ficheiros GPX que contém vários percursos, mostra-os em separado, não ligados
 - Alteração: Activa automaticamente a exibição do percurso ao carregar um ficheiro de percurso GPX
 - Novo: símbolos D/T para os ícones de cache (opcional)
+- New: Option to check for missing routing data for current viewport
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
