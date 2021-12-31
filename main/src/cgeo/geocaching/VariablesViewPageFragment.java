@@ -36,6 +36,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         final CachedetailVariablesPageBinding binding = CachedetailVariablesPageBinding.inflate(inflater, container, false);
         final VariableListView varList = binding.variables;
         this.adapter = varList.getAdapter();
+        adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);
         adapter.setChangeCallback(v -> {
             binding.variablesAddnextchar.setText(getAddNextCharText());
             if (activity != null && (previousVarSize < 0 || previousVarSize != v.size())) {
@@ -49,6 +50,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             "* Expect disruptive changes in the future\n" +
             "* No internationalization yet")
             .setMarkdown(true).applyTo(binding.variablesExperimentalWarning);
+
         binding.variablesExperimentalWarning.setOnClickListener(d -> {
             if (adapter.getDisplayType() == VariableListView.DisplayType.MINIMALISTIC) {
                 adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);

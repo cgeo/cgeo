@@ -53,7 +53,7 @@ public class ManagedListAdapterTest {
     @Test
     public void filterAddRemove() {
         final TestManagedListAdapter mla = new TestManagedListAdapter();
-        mla.setFilter(s -> s.startsWith("g"));
+        mla.setFilter(s -> s.startsWith("g"), true);
         mla.addItem(0, "blue");
         assertThat(mla.getDebugString()).isEqualTo("[]|[blue]|{}");
         mla.addItem(0, "gray");
@@ -66,12 +66,12 @@ public class ManagedListAdapterTest {
         assertThat(mla.getItems()).containsExactly("gray", "green");
         assertThat(mla.getOriginalItems()).containsExactly("gray", "red", "green", "blue");
 
-        mla.setFilter(null);
+        mla.setFilter(null, true);
         assertThat(mla.getDebugString()).isEqualTo("[gray, red, green, blue]|[gray, red, green, blue]|{3=3, 2=2, 1=1, 0=0}");
         assertThat(mla.getItems()).containsExactly("gray", "red", "green", "blue");
         assertThat(mla.getOriginalItems()).containsExactly("gray", "red", "green", "blue");
 
-        mla.setFilter(s -> s.startsWith("g"));
+        mla.setFilter(s -> s.startsWith("g"), true);
         assertThat(mla.getDebugString()).isEqualTo("[gray, green]|[gray, red, green, blue]|{1=2, 0=0}");
 
         mla.removeItem(0);
@@ -84,7 +84,7 @@ public class ManagedListAdapterTest {
     public void filterAddMultiple() {
 
         final TestManagedListAdapter mla = new TestManagedListAdapter();
-        mla.setFilter(s -> s.startsWith("g"));
+        mla.setFilter(s -> s.startsWith("g"), true);
         mla.addItems(Arrays.asList("red", "gray", "blue", "green"));
         assertThat(mla.getDebugString()).isEqualTo("[gray, green]|[red, gray, blue, green]|{1=3, 0=1}");
 
@@ -100,7 +100,7 @@ public class ManagedListAdapterTest {
     public void filterSwapSort() {
 
         final TestManagedListAdapter mla = new TestManagedListAdapter();
-        mla.setFilter(s -> s.startsWith("g"));
+        mla.setFilter(s -> s.startsWith("g"), true);
         mla.addItems(Arrays.asList("red", "gray", "blue", "green"));
         assertThat(mla.getDebugString()).isEqualTo("[gray, green]|[red, gray, blue, green]|{1=3, 0=1}");
 

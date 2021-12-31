@@ -44,6 +44,7 @@ import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.util.Consumer;
+import androidx.core.util.Predicate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -437,5 +438,35 @@ public class ViewUtils {
             }
         };
 
+    }
+
+    /**
+     * returns the first (direct or indirect) parent of child satisfying the given condition
+     * if child itself satisfies condition, it is returned
+     * if no parent of child does satisfy condition, then root is returned
+     */
+    public static View getParent(final View child, final Predicate<View> condition) {
+        View result = child;
+        while ((condition == null || !condition.test(result)) && (result.getParent() instanceof View)) {
+            result = (View) result.getParent();
+        }
+        return result;
+    }
+
+    /** traverses a viewtree starting from "root". For each view satisfying "condition", the "callback" is called. If "callback" returns false, then treewalk is aborted */
+    public static boolean walkViewTree(final View root, final Predicate<View> callback, @Nullable final Predicate<View> condition) {
+        if ((condition == null || condition.test(root)) && callback.test(root)) {
+            return false;
+        }
+        if (root instanceof ViewGroup) {
+            final ViewGroup vg = (ViewGroup) root;
+            final int childCnt = vg.getChildCount();
+            for (int i = 0; i < childCnt; i++) {
+                if (!walkViewTree(vg.getChildAt(i), callback, condition)) {
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
