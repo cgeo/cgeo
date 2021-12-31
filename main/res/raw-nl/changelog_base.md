@@ -5,6 +5,7 @@
 - Oplossing: Bij het laden van GPX-bestanden die meerdere sporen bevatten, deze weergeven als gescheiden niet-verbonden sporen
 - Wijziging: automatisch track weergave inschakelen bij het laden van een GPX track bestand
 - Nieuw: D/T symbolen voor cachepictogrammen (optioneel)
+- New: Option to check for missing routing data for current viewport
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
