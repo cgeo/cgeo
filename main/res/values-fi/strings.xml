@@ -2083,6 +2083,10 @@
     <string name="downloadmap_checking_for_updates">Tarkistetaan päivityksiä…</string>
     <string name="downloadtile_title">Puuttuvat reititystiedot</string>
     <string name="downloadtile_info">c:geo ei voi laskea pyydettyä reittiä, koska reititystiedosto puuttuu. Haluatko ladata puuttuvat reititystiedot?</string>
+    <string name="check_tiles_menu">Tarkista puuttuvat reititystiedot</string>
+    <string name="check_tiles_found">Reititystiedot ovat jo olemassa</string>
+    <string name="check_tiles_missing">Löydettiin puuttuvat reititystiedot:\n%1$s\n\nHaluatko ladata nuo tiedostot?%2$s</string>
+    <string name="check_tiles_unsupported">Varoitus: Reititystietoja ei ole ainakin osittain saatavilla valitulle alueelle</string>
     <string name="tileupdate_info">Haluatko tarkistaa ladattujen reititystietojen päivitykset?</string>
     <string name="mapupdate_info">Haluatko tarkistaa kartta- ja teematiedostojen päivitykset?</string>
     <string name="no_updates_found">Päivityksiä ei löytynyt</string>
