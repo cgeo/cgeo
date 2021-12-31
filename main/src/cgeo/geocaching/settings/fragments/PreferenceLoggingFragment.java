@@ -9,11 +9,10 @@ import android.os.Bundle;
 
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
-import androidx.preference.PreferenceFragmentCompat;
 
 import static java.util.UUID.randomUUID;
 
-public class PreferenceLoggingFragment extends PreferenceFragmentCompat {
+public class PreferenceLoggingFragment extends BasePreferenceFragment {
     PreferenceCategory logTemplatesCategory;
 
     @Override

@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_map"
     android:summary="@string/settings_summary_map"
-    android:title="@string/settings_title_map">
+    android:title="@string/settings_title_map"
+    app:key="@string/preference_screen_map">
 
     <PreferenceCategory
         android:title="@string/settings_title_map_data"

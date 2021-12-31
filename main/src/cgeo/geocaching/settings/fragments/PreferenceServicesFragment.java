@@ -6,9 +6,7 @@ import static cgeo.geocaching.utils.SettingsUtils.setPrefSummaryActiveStatus;
 
 import android.os.Bundle;
 
-import androidx.preference.PreferenceFragmentCompat;
-
-public class PreferenceServicesFragment extends PreferenceFragmentCompat {
+public class PreferenceServicesFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_services, rootKey);

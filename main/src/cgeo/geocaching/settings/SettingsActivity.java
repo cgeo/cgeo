@@ -3,11 +3,19 @@ package cgeo.geocaching.settings;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.settings.fragments.BasePreferenceFragment;
+import cgeo.geocaching.settings.fragments.PreferenceAppearanceFragment;
 import cgeo.geocaching.settings.fragments.PreferenceBackupFragment;
+import cgeo.geocaching.settings.fragments.PreferenceCachedetailsFragment;
+import cgeo.geocaching.settings.fragments.PreferenceLoggingFragment;
+import cgeo.geocaching.settings.fragments.PreferenceMapFragment;
+import cgeo.geocaching.settings.fragments.PreferenceNavigationFragment;
+import cgeo.geocaching.settings.fragments.PreferenceOfflinedataFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeocachingComFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceGeokretyOrgFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServiceSendToCgeoFragment;
 import cgeo.geocaching.settings.fragments.PreferenceServicesFragment;
+import cgeo.geocaching.settings.fragments.PreferenceSystemFragment;
 import cgeo.geocaching.settings.fragments.PreferencesFragment;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
@@ -29,11 +37,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
 import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
-import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
@@ -66,6 +75,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     private MenuItem menuSearch = null;
     private CharSequence lastTitle = null;
     private Preference lastResult = null;
+    private final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchdata = new ArrayList<>();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -98,12 +108,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             title = savedInstanceState.getCharSequence(TITLE_TAG);
         }
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
-            final boolean isMainPreferenceScreen = getSupportFragmentManager().getBackStackEntryCount() == 0;
-            if (isMainPreferenceScreen) {
+            if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 setTitle(R.string.settings_titlebar);
-            }
-            if (menuSearch != null) {
-                menuSearch.setVisible(!isMainPreferenceScreen);
             }
         });
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -111,67 +117,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
-    }
 
-    @Override
-    public boolean onCreateOptionsMenu(final Menu menu) {
-        getMenuInflater().inflate(R.menu.settings_activity_options, menu);
-
-        // prepare search in action bar
-        menuSearch = menu.findItem(R.id.menu_gosearch);
-        searchView = (SearchView) menuSearch.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(final String s) {
-                return true;
-            }
-
-            @Override
-            public boolean onQueryTextChange(final String s) {
-                if (lastResult != null) {
-                    lastResult.setTitle(lastTitle);
-                }
-
-                final PreferenceFragmentCompat fragment = ((PreferenceFragmentCompat) getSupportFragmentManager().getFragments().get(0));
-                final Preference result = doSearch(s, ((PreferenceScreen) fragment.getPreferenceScreen()));
-                if (result != null) {
-                    fragment.scrollToPreference(result);
-                    if (s.length() > 1) {
-                        lastResult = result;
-                        lastTitle = result.getTitle();
-                        result.setTitle(HtmlCompat.fromHtml("<font color=#00eeee>" + lastTitle + "</font>", 0));
-                    }
-                }
-                return true;
-            }
-        });
-
-        return true;
-    }
-
-    /**
-     * searches recursively in all elements of given prefGroup for first occurrence of s
-     * returns found preference on success, null else
-     * (prefers preference entries over preference groups)
-     */
-    @Nullable
-    private Preference doSearch(final String s, final PreferenceGroup prefGroup) {
-        final int prefCount = prefGroup.getPreferenceCount();
-        for (int i = 0; i < prefCount; i++) {
-            final Preference pref = prefGroup.getPreference(i);
-            final CharSequence title = pref.getTitle();
-            final CharSequence summary = pref.getSummary();
-
-            if (pref instanceof PreferenceGroup) {
-                final Preference result = doSearch(s, (PreferenceGroup) pref);
-                if (result != null) {
-                    return result;
-                }
-            } else if (StringUtils.containsIgnoreCase(title, s) || StringUtils.containsIgnoreCase(summary, s)) {
-                return pref;
-            }
-        }
-        return null;
+        initFragmentsForSearch();
     }
 
     /**
@@ -181,17 +128,50 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     private void openRequestedFragment() {
         final Intent intent = getIntent();
         final int fragmentId = intent.getIntExtra(INTENT_OPEN_SCREEN, -1);
+        // openRequestedFragment(fragmentId);
+        try {
+            openRequestedFragment(getString(fragmentId), "");
+        } catch (Exception ignore) {
+            openRequestedFragment("", "");
+        }
+    }
+
+    /**
+     * This method sets the fragment given by its base key,
+     * and optionally starts scrolling to a preference identified by its key
+     */
+    private void openRequestedFragment(@NonNull final String baseKey, @Nullable final String scrollToPrefKey) {
         Fragment preferenceFragment = new PreferencesFragment();
-        if (fragmentId == R.string.preference_screen_services) {
+        if (StringUtils.equals(baseKey, getString(R.string.preference_screen_services))) {
             preferenceFragment = new PreferenceServicesFragment();
-        } else if (fragmentId == R.string.preference_screen_sendtocgeo) {
-            preferenceFragment = new PreferenceServiceSendToCgeoFragment();
-        } else if (fragmentId == R.string.preference_screen_backup) {
+        } else if (StringUtils.equals(baseKey, getString(R.string.pref_appearance))) {
+            preferenceFragment = new PreferenceAppearanceFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_cachedetails))) {
+            preferenceFragment = new PreferenceCachedetailsFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map))) {
+            preferenceFragment = new PreferenceMapFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_map))) {
+            preferenceFragment = new PreferenceMapFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_logging))) {
+            preferenceFragment = new PreferenceLoggingFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_offlinedata))) {
+            preferenceFragment = new PreferenceOfflinedataFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_navigation))) {
+            preferenceFragment = new PreferenceNavigationFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_system))) {
+            preferenceFragment = new PreferenceSystemFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_backup))) {
             preferenceFragment = new PreferenceBackupFragment();
-        } else if (fragmentId == R.string.preference_screen_geokrety) {
+
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_sendtocgeo))) {
+            preferenceFragment = new PreferenceServiceSendToCgeoFragment();
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_geokrety))) {
             preferenceFragment = new PreferenceServiceGeokretyOrgFragment();
-        } else if (fragmentId == R.string.preference_screen_gc) {
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_gc))) {
             preferenceFragment = new PreferenceServiceGeocachingComFragment();
+        }
+        if (StringUtils.isNotBlank(scrollToPrefKey)) {
+            ((BasePreferenceFragment) preferenceFragment).setScrollToPrefCallback(this::scrollToCallback, baseKey, scrollToPrefKey);
         }
         getSupportFragmentManager()
             .beginTransaction()
@@ -232,7 +212,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
 
     @Override
-    public boolean onPreferenceStartFragment(final PreferenceFragmentCompat caller, final androidx.preference.Preference pref) {
+    public boolean onPreferenceStartFragment(final PreferenceFragmentCompat caller, final Preference pref) {
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager()
@@ -277,6 +257,91 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         } else {
             super.onBackPressed();
         }
+    }
+
+    // search related extensions
+
+    private void initFragmentsForSearch() {
+        final ArrayList<BasePreferenceFragment> fragments = new ArrayList<>();
+        fragments.add(new PreferenceServicesFragment());
+        fragments.add(new PreferenceAppearanceFragment());
+        fragments.add(new PreferenceCachedetailsFragment());
+        fragments.add(new PreferenceMapFragment());
+        fragments.add(new PreferenceOfflinedataFragment());
+        fragments.add(new PreferenceNavigationFragment());
+        fragments.add(new PreferenceSystemFragment());
+        fragments.add(new PreferenceBackupFragment());
+
+        for (BasePreferenceFragment f : fragments) {
+            f.setSearchdataCallback(this::collectSearchdataCallback);
+        }
+        final FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        for (Fragment f : fragments) {
+            t.add(R.id.settings_fragment_root, f);
+        }
+        t.commit();
+        getSupportFragmentManager()
+            .beginTransaction()
+            .replace(R.id.settings_fragment_root, new PreferencesFragment())
+            .commit();
+    }
+
+    // callback for BasePreferenceFragments to register search data
+    private void collectSearchdataCallback(final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> data) {
+        synchronized (searchdata) {
+            searchdata.addAll(data);
+        }
+    }
+
+    // callback for BasePreferenceFragments for scrolling to a specific pref
+    private void scrollToCallback(final String baseKey, final String prefKey) {
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            final PreferenceScreen prefScreen = ((PreferenceFragmentCompat) fragment).getPreferenceScreen();
+            if (prefScreen != null && StringUtils.equalsIgnoreCase(prefScreen.getKey(), baseKey)) {
+                final Preference pref = prefScreen.findPreference(prefKey);
+                if (pref != null) {
+                    ((PreferenceFragmentCompat) fragment).scrollToPreference(pref);
+                    lastResult = pref;
+                    lastTitle = pref.getTitle();
+                    pref.setTitle(HtmlCompat.fromHtml("<font color=#00eeee>" + lastTitle + "</font>", 0));
+                }
+            }
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(final Menu menu) {
+        getMenuInflater().inflate(R.menu.settings_activity_options, menu);
+
+        // prepare search in action bar
+        menuSearch = menu.findItem(R.id.menu_gosearch);
+        searchView = (SearchView) menuSearch.getActionView();
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(final String s) {
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(final String s) {
+                if (lastResult != null) {
+                    lastResult.setTitle(lastTitle);
+                }
+                if (s.length() > 2) {
+                    synchronized (searchdata) {
+                        for (BasePreferenceFragment.PrefSearchDescriptor desc : searchdata) {
+                            if (StringUtils.containsIgnoreCase(desc.prefTitle, s) || StringUtils.containsIgnoreCase(desc.prefSummary, s)) {
+                                openRequestedFragment(desc.baseKey, desc.prefKey);
+                                break;
+                            }
+                        }
+                    }
+                }
+                return true;
+            }
+        });
+
+        return true;
     }
 
 }

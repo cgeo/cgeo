@@ -3,7 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_arrow"
     android:summary="@string/settings_summary_navigation"
-    android:title="@string/settings_title_navigation">
+    android:title="@string/settings_title_navigation"
+    app:key="@string/preference_screen_navigation">
 
     <PreferenceCategory
         android:title="@string/settings_title_offline_routing"

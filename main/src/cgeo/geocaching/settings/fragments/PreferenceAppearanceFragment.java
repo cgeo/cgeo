@@ -8,13 +8,13 @@ import android.os.Bundle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.Locale;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class PreferenceAppearanceFragment extends PreferenceFragmentCompat {
+public class PreferenceAppearanceFragment extends BasePreferenceFragment {
+
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_appearence, rootKey);

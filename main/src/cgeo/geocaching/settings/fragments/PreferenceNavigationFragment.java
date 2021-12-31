@@ -17,13 +17,12 @@ import android.os.Bundle;
 import androidx.annotation.StringRes;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
-import androidx.preference.PreferenceFragmentCompat;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class PreferenceNavigationFragment extends PreferenceFragmentCompat {
+public class PreferenceNavigationFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_navigation, rootKey);
