@@ -5,6 +5,7 @@
 - Fix: Vid inläsning av GPX-filer med flera spår visas de som separata, oanslutna spår
 - Ändring: Aktivera automatiskt spårvisning vid inläsning av en GPX-spårfil
 - New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
 
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher
