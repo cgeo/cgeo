@@ -5,6 +5,7 @@
 - Corregido: Al cargar archivos GPX que contienen múltiples pistas las muestran como separadas, sin conexión
 - Cambiado: Activar automáticamente la visualización de la pista al cargar un archivo de pista GPX
 - Nuevo: símbolos D/T para iconos de caché (opcional)
+- New: Option to check for missing routing data for current viewport
 
 ### Lista de cachés
 - Nuevo: opción para seleccionar los siguientes 20 cachés
