@@ -2139,6 +2139,10 @@
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
     <string name="downloadtile_title">Chybí údaje o směrování</string>
     <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
+    <string name="check_tiles_menu">Zkontrolovat chybějící směrovací data</string>
+    <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
+    <string name="check_tiles_missing">Nalezena chybějící směrovací data:\n%1$s\n\nChcete tyto soubory stáhnout?%2$s</string>
+    <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
     <string name="tileupdate_info">Chcete zkontrolovat aktualizace stažených souborů pro směrování?</string>
     <string name="mapupdate_info">Chcete zkontrolovat aktualizace map a souborů s motivy?</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
