@@ -5,6 +5,7 @@
 - Solució: En carregar fitxers GPX que contenen diverses pistes, mostreu-los com a pistes separades i no connectades
 - Canvi: Activa automàticament la visualització de la pista en carregar un fitxer GPX
 - Nou: Símbols D/T per a les icones de catxé (opcional)
+- New: Option to check for missing routing data for current viewport
 
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
