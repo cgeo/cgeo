@@ -5,6 +5,7 @@
 - Oprava: Pri načítaní súborov GPX obsahujúcich viac trás ich zobrazuje samostatne, neprepojené trasy
 - Zmena: Automaticky aktivované zobrazenie stopy pri načítaní súboru GPX so stopou
 - Nové: Symboly D/T pre ikony kešiek (voliteľné)
+- New: Option to check for missing routing data for current viewport
 
 ### Zoznam kešiek
 - Nové: Možnosť vybrať ďalších 20 kešiek
