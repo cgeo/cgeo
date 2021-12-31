@@ -5,6 +5,7 @@
 - Corretto: Caricando file GPX contenenti più tracce, queste vengono visualizzate come tracce separate non collegate tra loro
 - Cambiato: Visualizzazione automatica della traccia al caricamento di un file GPX
 - Novità: Simboli D/T per le icone della cache (facoltativo)
+- New: Option to check for missing routing data for current viewport
 
 ### Elenco dei cache
 - Nuovo: Opzione per selezionare i 20 cache succesivi
