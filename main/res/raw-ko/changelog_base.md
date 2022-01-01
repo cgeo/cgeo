@@ -5,15 +5,18 @@
 - 수정: 여러 트랙이 포함된 GPX 파일을 로드할 때 별도의 연결되지 않은 트랙으로 표시됨
 - 변경: GPX 트랙 파일을 로드할 때 자동으로 트랙 표시 활성화
 - New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션
 - 신규: 속성 개요(캐시 관리 => 속성 개요 참조)
 - New: Add import from bookmark lists (GC premium only)
 - New: Invert sort-order on long click on sort bar
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### 캐시 상세정보
 - 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
+- New: Colored attribute icons (following attribute groups)
 
 ### 추가 사항
 - 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드

@@ -698,6 +698,8 @@
     <string name="init_template_title">Vorlagentitel</string>
     <string name="init_template_text">Vorlagentext</string>
     <string name="init_log_template">Log-Vorlage</string>
+    <string name="init_log_template_addnew">Neue Vorlage hinzufügen</string>
+    <string name="init_log_template_remove_confirm">Willst Du die Vorlage wirklich entfernen?</string>
     <string name="init_log_templates">Log-Vorlagen</string>
     <string name="init_log_template_prefix">Vorlage:\u0020</string>
     <string name="init_log_template_missing_error">Sowohl der Vorlagentitel als auch der Text müssen angegeben werden.</string>
@@ -1828,7 +1830,7 @@
     <string name="cat_location">Cache-Ort</string>
     <string name="cat_duration">Distanz / Dauer</string>
     <string name="cat_surrounding">Umgebung des Caches</string>
-    <string name="cat_transport">Transport</string>
+    <string name="cat_permissions">Berechtigungen</string>
     <!-- next things -->
     <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2081,6 +2083,10 @@
     <string name="downloadmap_checking_for_updates">Prüfe auf Updates…</string>
     <string name="downloadtile_title">Fehlende Routing-Daten</string>
     <string name="downloadtile_info">c:geo kann die angeforderte Route nicht berechnen, da einige Routingdaten fehlen. Möchtest du die fehlenden Routingdaten herunterladen?</string>
+    <string name="check_tiles_menu">Auf fehlende Routingdaten prüfen</string>
+    <string name="check_tiles_found">Routingdaten bereits vorhanden</string>
+    <string name="check_tiles_missing">Fehlende Routingdaten gefunden:\n%1$s\n\nMöchtest du diese Dateien herunterladen?%2$s</string>
+    <string name="check_tiles_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Routingdaten verfügbar</string>
     <string name="tileupdate_info">Möchtest du nach Updates der heruntergeladenen Routing-Dateien suchen?</string>
     <string name="mapupdate_info">Möchtest du nach Updates für Karten und Kartendesigns suchen?</string>
     <string name="no_updates_found">Keine Aktualisierungen gefunden</string>

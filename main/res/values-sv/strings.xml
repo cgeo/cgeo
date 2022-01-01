@@ -698,10 +698,12 @@
     <string name="init_template_title">Mallens namn</string>
     <string name="init_template_text">Malltext</string>
     <string name="init_log_template">Loggmall</string>
+    <string name="init_log_template_addnew">Lägg till en ny mall</string>
+    <string name="init_log_template_remove_confirm">Vill du verkligen ta bort mallen?</string>
     <string name="init_log_templates">Loggmallar</string>
     <string name="init_log_template_prefix">Mall:\u0020</string>
     <string name="init_log_template_missing_error">Både mallens namn och text måste anges.</string>
-    <string name="init_template_help">Platshållare strängar - som [NAME] - fylls med den angivna texten när mallen används.</string>
+    <string name="init_template_help">Markörer - som [NAME] - fylls med den angivna texten när mallen används.</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tid</string>
     <string name="init_signature_template_datetime">Datum &amp; Tid</string>
@@ -1824,7 +1826,7 @@
     <string name="cat_location">Cache-plats</string>
     <string name="cat_duration">Avstånd / varaktighet</string>
     <string name="cat_surrounding">Runt cachen</string>
-    <string name="cat_transport">Transport</string>
+    <string name="cat_permissions">Rättigheter</string>
     <!-- next things -->
     <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

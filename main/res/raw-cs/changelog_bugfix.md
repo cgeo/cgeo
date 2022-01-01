@@ -1,3 +1,5 @@
+- Oprava: Znovu povoleno směrování s externí aplikací BRouter ve verzi 1.6.3
+
 ## 2021.12.24 Vydání opravy chyb
 
 - Oprava: Povolena aktualizace z OpenAndroMaps v4 na v5

@@ -5,15 +5,18 @@
 - Solució: En carregar fitxers GPX que contenen diverses pistes, mostreu-los com a pistes separades i no connectades
 - Canvi: Activa automàticament la visualització de la pista en carregar un fitxer GPX
 - Nou: Símbols D/T per a les icones de catxé (opcional)
+- New: Option to check for missing routing data for current viewport
 
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
 - Novetat: Visió general dels atributs (vegeu Gestió de catxé => visió general dels atributs)
 - Nou: Afegiu la importació de les llistes d'adreces d'interès (només GC premium)
 - Nou: Inverteix l'ordre d'ordenació fent clic llarg a la barra d'ordenació
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Detalls del catxé
 - Nou: Passeu les coordenades actuals del catxé al geochecker (si és compatible amb el geochecker)
+- New: Colored attribute icons (following attribute groups)
 
 ### Altres
 - Novetat: carregueu ràpidament geocodis del text del porta-retalls a la cerca de la pantalla principal

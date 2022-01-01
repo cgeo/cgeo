@@ -5,15 +5,18 @@
 - Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
 - Change: Automatically enable track display on loading a GPX track file
 - New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
 
 ### Cache list
 - New: Option to select next 20 caches
 - New: Attributes overview (see Manage Caches => Attributes overview)
 - New: Add import from bookmark lists (GC premium only)
 - New: Invert sort-order on long click on sort bar
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Cache details
 - New: Pass current cache coordinates to geochecker (if supported by geochecker)
+- New: Colored attribute icons (following attribute groups)
 
 ### Other
 - New: Quick-load geocodes from clipboard text in mainscreen search

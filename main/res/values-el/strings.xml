@@ -698,6 +698,8 @@
     <string name="init_template_title">Τίτλος Προτύπου</string>
     <string name="init_template_text">Κείμενο Προτύπου</string>
     <string name="init_log_template">Πρότυπο Καταγραφής</string>
+    <string name="init_log_template_addnew">Προσθήκη νέου προτύπου</string>
+    <string name="init_log_template_remove_confirm">Θέλετε πραγματικά να αφαιρέσετε το πρότυπο;</string>
     <string name="init_log_templates">Πρότυπα Καταγραφής</string>
     <string name="init_log_template_prefix">Πρότυπο:\u0020</string>
     <string name="init_log_template_missing_error">Πρέπει να παρέχονται τόσο ο τίτλος όσο και το κείμενο.</string>
@@ -1828,7 +1830,7 @@
     <string name="cat_location">Τοποθεσία κρύπτης</string>
     <string name="cat_duration">Απόσταση / Διάρκεια</string>
     <string name="cat_surrounding">Γύρω από την κρύπτη</string>
-    <string name="cat_transport">Συγκοινωνία</string>
+    <string name="cat_permissions">\'Αδειες</string>
     <!-- next things -->
     <string name="quote">Για να γίνουν οι γεωκρύπτες πιο εύκολες και οι χρήστες πιο τεμπέληδες.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2077,6 +2079,10 @@
     <string name="downloadmap_checking_for_updates">Έλεγχος για ενημερώσεις…</string>
     <string name="downloadtile_title">Λείπουν δεδομένα δρομολόγησης</string>
     <string name="downloadtile_info">Το c:geo δεν μπορεί να υπολογίσει την ζητούμενη διαδρομή καθώς λείπει κάποιο αρχείο δεδομένων δρομολόγησης. Θέλετε να κατεβάσετε δεδομένα δρομολόγησης που λείπουν;</string>
+    <string name="check_tiles_menu">Έλεγχος για ελλείποντα δεδομένα δρομολόγησης</string>
+    <string name="check_tiles_found">Τα δεδομένα δρομολόγησης υπάρχουν ήδη</string>
+    <string name="check_tiles_missing">Βρέθηκαν δεδομένα δρομολόγησης:\n%1$s\n\nΘέλετε να κατεβάσετε αυτά τα αρχεία?%2$s</string>
+    <string name="check_tiles_unsupported">Προειδοποίηση: Τα δεδομένα δρομολόγησης τουλάχιστον εν μέρει δεν είναι διαθέσιμα για την επιλεγμένη περιοχή</string>
     <string name="tileupdate_info">Θέλετε να ελέγξετε για ενημερώσεις των κατεβασμένων αρχείων δρομολόγησης δεδομένων;</string>
     <string name="mapupdate_info">Θέλετε να ελέγξετε για ενημερώσεις του χάρτη και των αρχείων θέματος;</string>
     <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>

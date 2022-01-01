@@ -708,6 +708,8 @@
     <string name="init_template_title">Název šablony</string>
     <string name="init_template_text">Text šablony</string>
     <string name="init_log_template">Šablona logu</string>
+    <string name="init_log_template_addnew">Přidat novou šablonu</string>
+    <string name="init_log_template_remove_confirm">Opravdu chcete odstranit šablonu?</string>
     <string name="init_log_templates">Šablony logu</string>
     <string name="init_log_template_prefix">Šablona:\u0020</string>
     <string name="init_log_template_missing_error">Je třeba uvést název i text šablony.</string>
@@ -1858,7 +1860,7 @@
     <string name="cat_location">Umístění kešky</string>
     <string name="cat_duration">Vzdálenost / Doba trvání</string>
     <string name="cat_surrounding">Kolem kešky</string>
-    <string name="cat_transport">Doprava</string>
+    <string name="cat_permissions">Oprávnění</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2137,6 +2139,10 @@
     <string name="downloadmap_checking_for_updates">Kontrola aktualizací…</string>
     <string name="downloadtile_title">Chybí údaje o směrování</string>
     <string name="downloadtile_info">c:geo nemůže vypočítat požadovanou trasu, protože chybí některá data. Chcete stáhnout chybějící data pro směrování?</string>
+    <string name="check_tiles_menu">Zkontrolovat chybějící směrovací data</string>
+    <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
+    <string name="check_tiles_missing">Nalezena chybějící směrovací data:\n%1$s\n\nChcete tyto soubory stáhnout?%2$s</string>
+    <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
     <string name="tileupdate_info">Chcete zkontrolovat aktualizace stažených souborů pro směrování?</string>
     <string name="mapupdate_info">Chcete zkontrolovat aktualizace map a souborů s motivy?</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>

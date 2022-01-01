@@ -5,15 +5,18 @@
 - Corregido: Al cargar archivos GPX que contienen múltiples pistas las muestran como separadas, sin conexión
 - Cambiado: Activar automáticamente la visualización de la pista al cargar un archivo de pista GPX
 - Nuevo: símbolos D/T para iconos de caché (opcional)
+- New: Option to check for missing routing data for current viewport
 
 ### Lista de cachés
 - Nuevo: opción para seleccionar los siguientes 20 cachés
 - Nuevo: Resumen de atributos (ver Gestión de cachés => Resumen de atributos)
 - Nuevo: Añadir importación de listas de marcadores (solo para GC premium)
 - Nuevo: Invertir orden al hacer mantener pulsado la barra de ordenación
+- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Detalles del caché
 - Nuevo: Pasar las coordenadas del caché actual al geochecker (si es soportado por el geochecker)
+- New: Colored attribute icons (following attribute groups)
 
 ### Otro
 - Nuevo: Cargar rápidamente los geocódigos del texto del portapapeles en la búsqueda de la pantalla de inicio
