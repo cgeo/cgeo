@@ -275,7 +275,7 @@
     <string name="warn_no_pocket_query_found">オンラインでポケット・クエリが見つかりませんでした</string>
     <string name="warn_invalid_character">入力は文字または数字にする必要があります</string>
     <string name="warn_notloggedin_title">オフラインモード</string>
-    <string name="warn_notloggedin_short">ログインしていません。地図にはローカルに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
+    <string name="warn_notloggedin_short">ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されます。詳細はここをタップしてください。</string>
     <string name="warn_notloggedin_long">(まだ)ログインしていません。地図にはデバイスに保存されたキャッシュのみが表示されオンライン機能は動作しません。\n\nネットワーク接続がないか、サーバーに問題があるか、ジオキャッシングサービスを(再)設定する必要があります。\n\n今すぐサービスの設定をしますか?</string>
     <string name="err_read_pocket_query_list">ポケット・クエリのリストの読み取りエラー</string>
     <string name="err_read_bookmark_list">ブックマークリストの読み取りエラー</string>
@@ -711,6 +711,8 @@
     <string name="init_summary_brouterShowBothDistances">ルート検索が有効な場合にルート距離に加えて直線距離も表示</string>
     <string name="init_useInternalRouting">c:geoルート検索を使用する</string>
     <string name="init_summary_useInternalRouting">c:geoルート検索(Brouter互換)を使用するとルート検索データの自動ダウンロードなどもできます。</string>
+    <string name="init_bigSmileysOnMap">大きなアイコン</string>
+    <string name="init_summary_bigSmileysOnMap">有効にした場合、発見を表すスマイルマークや座標が修正されたことを表す旗マークなどのマーカーがキャッシュの種類アイコンの代わりに地図上に拡大表示されます。c:geoの再起動が必要です</string>
     <string name="init_global_wp_extraction_disable">ウェイポイント抽出を無効化</string>
     <string name="init_summary_global_wp_extraction_disable">ノート作成時に「ウェイポイント抽出をしない」をデフォルトにします。パーソナルノートでチェックボックスを外せば個別に有効化できます</string>
     <string name="init_customtabs_as_browser">Chrome WebViewを使用</string>
@@ -917,10 +919,10 @@
     <string name="localstorage_migrate_status_major">バージョン %1$d</string>
     <!-- proximity notification -->
     <string name="settings_title_proximityNotification">接近通知</string>
-    <string name="init_proximityNotificationGeneral">マップ上の全般的な接近通知</string>
+    <string name="init_proximityNotificationGeneral">地図上の全般的な接近通知</string>
     <string name="init_summary_proximityNotificationGeneral">現在地図上に表示されているキャッシュまたはウェイポイントが「遠い地点」または「近い地点」よりも近い場合に一回通知します。 2つの地点で別の音が使用されます</string>
     <string name="init_proximityNotificationSpecific">ウェイポイント接近通知</string>
-    <string name="init_summary_proximityNotificationSpecific">現在選択されているキャッシュまたはウェイポイントが「遠い地点」または「近い地点」よりも近い場合に繰り返し通知します。 キャッシュまたはウェイポイントの詳細が開かれている時、マップ上のキャッシュまたはウェイポイントのポップアップが表示されている時、またはコンパスがアクティブな時に機能します。 2つの地点で別の音が使用されます</string>
+    <string name="init_summary_proximityNotificationSpecific">現在選択されているキャッシュまたはウェイポイントが「遠い地点」または「近い地点」よりも近い場合に繰り返し通知します。 キャッシュまたはウェイポイントの詳細が開かれている時、地図上のキャッシュまたはウェイポイントのポップアップが表示されている時、またはコンパスがアクティブな時に機能します。 2つの地点で別の音が使用されます</string>
     <string name="far_distance">遠い地点</string>
     <string name="near_distance">近い地点</string>
     <string name="init_proximity_notification_type">通知の種類</string>
@@ -1600,8 +1602,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_snowshoes_no">カンジキ必須ではない</string>
     <string name="attribute_skiis_yes">クロスカントリー・スキー必須</string>
     <string name="attribute_skiis_no">クロスカントリー・スキー必須ではない</string>
-    <string name="attribute_s_tool_yes">特殊用具必須</string>
-    <string name="attribute_s_tool_no">特殊用具必須ではない</string>
+    <string name="attribute_s_tool_yes">特別な道具が必要</string>
+    <string name="attribute_s_tool_no">特別な道具は不要</string>
     <string name="attribute_wirelessbeacon_yes">無線ビーコン受信機必須</string>
     <string name="attribute_wirelessbeacon_no">無線ビーコン受信機必須ではない</string>
     <string name="attribute_treeclimbing_yes">木登り必要</string>

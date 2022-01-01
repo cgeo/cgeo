@@ -1,3 +1,5 @@
+- Oplossing: Schakel routering met externe BRouter app in versie 1.6.3 opnieuw in
+
 ## 2021.12.24 Bugfix release
 
 - Oplossing: Upgraden van OpenAndroMaps v4 naar v5 mogelijk maken

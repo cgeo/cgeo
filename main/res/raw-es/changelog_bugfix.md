@@ -1,3 +1,5 @@
+- Fix: Reenable routing with external BRouter app in version 1.6.3
+
 ## 2021.12.24 Versión de corrección de errores
 
 - Corregido: Habilitar la actualización de OpenAndroMaps v4 a v5
