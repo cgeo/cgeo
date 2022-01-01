@@ -1,7 +1,5 @@
 package cgeo.geocaching.settings.fragments;
 
-import static java.util.UUID.randomUUID;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TemplateTextPreference;
@@ -12,6 +10,8 @@ import android.os.Bundle;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+
+import static java.util.UUID.randomUUID;
 
 public class PreferenceLoggingFragment extends PreferenceFragmentCompat {
     PreferenceCategory logTemplatesCategory;
