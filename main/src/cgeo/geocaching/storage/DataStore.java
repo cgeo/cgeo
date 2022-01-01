@@ -36,7 +36,7 @@ import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.HtmlImage;
-import cgeo.geocaching.search.SearchSuggestionCursor;
+import cgeo.geocaching.search.GeocacheSearchSuggestionCursor;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.sorting.CacheComparator;
 import cgeo.geocaching.storage.extension.DBDowngradeableVersions;
@@ -4661,7 +4661,7 @@ public class DataStore {
             return null;
         }
         init();
-        final SearchSuggestionCursor resultCursor = new SearchSuggestionCursor();
+        final GeocacheSearchSuggestionCursor resultCursor = new GeocacheSearchSuggestionCursor();
         try {
             final String selectionArg = getSuggestionArgument(searchTerm);
             findCaches(resultCursor, selectionArg);
@@ -4672,7 +4672,7 @@ public class DataStore {
         return resultCursor;
     }
 
-    private static void findCaches(final SearchSuggestionCursor resultCursor, final String selectionArg) {
+    private static void findCaches(final GeocacheSearchSuggestionCursor resultCursor, final String selectionArg) {
         final Cursor cursor = database.query(
                 dbTableCaches,
                 new String[] { "geocode", "name", "type" },

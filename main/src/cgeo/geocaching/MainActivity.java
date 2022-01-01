@@ -19,7 +19,8 @@ import cgeo.geocaching.models.Download;
 import cgeo.geocaching.permission.PermissionGrantedCallback;
 import cgeo.geocaching.permission.PermissionHandler;
 import cgeo.geocaching.permission.PermissionRequestContext;
-import cgeo.geocaching.search.SuggestionsAdapter;
+import cgeo.geocaching.search.GeocacheSuggestionsAdapter;
+import cgeo.geocaching.search.SearchUtils;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.GnssStatusProvider;
@@ -31,7 +32,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
 import cgeo.geocaching.ui.AvatarUtils;
-import cgeo.geocaching.ui.RelativeLayoutWithInterceptTouchEventPossibility;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
@@ -62,7 +62,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -70,8 +69,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.widget.SearchView.OnQueryTextListener;
-import androidx.appcompat.widget.SearchView.OnSuggestionListener;
 import androidx.core.view.MenuCompat;
 
 import java.util.ArrayList;
@@ -457,7 +454,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             searchItem = menu.findItem(R.id.menu_gosearch);
             searchView = (SearchView) searchItem.getActionView();
             searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setSuggestionsAdapter(new SuggestionsAdapter(this));
+            searchView.setSuggestionsAdapter(new GeocacheSuggestionsAdapter(this));
 
             // initialize menu items
             menu.findItem(R.id.menu_wizard).setVisible(!InstallWizardActivity.isConfigurationOk(this));
@@ -467,9 +464,9 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             menu.findItem(R.id.menu_pocket_queries).setVisible(isPremiumActive);
             menu.findItem(R.id.menu_bookmarklists).setVisible(isPremiumActive);
 
-            hideKeyboardOnSearchClick();
-            hideActionIconsWhenSearchIsActive(menu);
-            handleDropDownVisibility();
+            SearchUtils.hideKeyboardOnSearchClick(searchView, searchItem);
+            SearchUtils.hideActionIconsWhenSearchIsActive(this, menu, searchItem);
+            SearchUtils.handleDropDownVisibility(this, searchView, searchItem);
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {
@@ -532,86 +529,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                 counter.setText(getResources().getQuantityString(R.plurals.caches_stored_offline, countOfflineCaches, countOfflineCaches));
             }
         }, throwable -> Log.e("Unable to add cache count", throwable));
-    }
-
-    private void hideActionIconsWhenSearchIsActive(final Menu menu) {
-        searchItem.setOnActionExpandListener(new MenuItem.OnActionExpandListener() {
-
-            @Override
-            public boolean onMenuItemActionExpand(final MenuItem item) {
-                for (int i = 0; i < menu.size(); i++) {
-                    if (menu.getItem(i).getItemId() == R.id.menu_paste_search && ConnectorFactory.containsGeocode(ClipboardUtils.getText())) {
-                        menu.getItem(i).setVisible(true);
-                    } else if (menu.getItem(i).getItemId() != R.id.menu_gosearch) {
-                        menu.getItem(i).setVisible(false);
-                    }
-                }
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(final MenuItem item) {
-                invalidateOptionsMenu();
-                return true;
-            }
-        });
-    }
-
-    private void hideKeyboardOnSearchClick() {
-        searchView.setOnSuggestionListener(new OnSuggestionListener() {
-
-            @Override
-            public boolean onSuggestionSelect(final int position) {
-                return false;
-            }
-
-            @Override
-            public boolean onSuggestionClick(final int position) {
-                // needs to run delayed, as it will otherwise change the SuggestionAdapter cursor which results in inconsistent datasets (see #11803)
-                searchView.postDelayed(() -> {
-                    searchItem.collapseActionView();
-                    searchView.setIconified(true);
-                }, 1000);
-
-                // return false to invoke standard behavior of launching the intent for the search result
-                return false;
-            }
-        });
-
-        // Used to collapse searchBar on submit from virtual keyboard
-        searchView.setOnQueryTextListener(new OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(final String s) {
-                searchItem.collapseActionView();
-                searchView.setIconified(true);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(final String s) {
-                ((SuggestionsAdapter) searchView.getSuggestionsAdapter()).changeQuery(s);
-                return true;
-            }
-        });
-    }
-
-    private void handleDropDownVisibility() {
-        final AutoCompleteTextView searchAutoComplete = searchView.findViewById(androidx.appcompat.R.id.search_src_text);
-        searchAutoComplete.setOnDismissListener(() -> {
-            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                searchAutoComplete.showDropDown();
-            }
-        });
-        final RelativeLayoutWithInterceptTouchEventPossibility activityViewroot = findViewById(R.id.bottomnavigation_activity_viewroot);
-        activityViewroot.setOnInterceptTouchEventListener(ev -> {
-            if (!searchView.isIconified() && searchView.getSuggestionsAdapter().getCount() > 0) {
-                searchItem.collapseActionView();
-                searchView.setIconified(true);
-                return true; // intercept touch event to do not trigger an unwanted action
-            }
-            // In general, we don't want to intercept touch events...
-            return false;
-        });
     }
 
     @Override

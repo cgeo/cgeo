@@ -1,8 +1,12 @@
 package cgeo.geocaching.settings;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.search.BaseSearchSuggestionCursor;
+import cgeo.geocaching.search.BaseSuggestionsAdapter;
+import cgeo.geocaching.search.SearchUtils;
 import cgeo.geocaching.settings.fragments.BasePreferenceFragment;
 import cgeo.geocaching.settings.fragments.PreferenceAppearanceFragment;
 import cgeo.geocaching.settings.fragments.PreferenceBackupFragment;
@@ -24,18 +28,26 @@ import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.utils.SettingsUtils.initPublicFolders;
 
+import android.app.SearchManager;
 import android.app.backup.BackupManager;
 import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.BackgroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.SearchView;
-import androidx.core.text.HtmlCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.Preference;
@@ -71,11 +83,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
     private ContentStorageActivityHelper contentStorageHelper = null;
     private CharSequence title;
 
-    private SearchView searchView = null;
-    private MenuItem menuSearch = null;
-    private CharSequence lastTitle = null;
-    private Preference lastResult = null;
-    private final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchdata = new ArrayList<>();
+    private static final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchIndex = new ArrayList<>();
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -102,11 +110,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         setContentView(R.layout.layout_settings);
 
-        if (savedInstanceState == null) {
-            openRequestedFragment();
-        } else {
-            title = savedInstanceState.getCharSequence(TITLE_TAG);
-        }
+        handleIntent(savedInstanceState);
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
             if (getSupportFragmentManager().getBackStackEntryCount() == 0) {
                 setTitle(R.string.settings_titlebar);
@@ -118,22 +122,66 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
         setResult(NO_RESTART_NEEDED);
 
-        initFragmentsForSearch();
+        buildSearchIndex();
+    }
+
+    private void handleIntent(final Bundle savedInstanceState) {
+        if (savedInstanceState == null) {
+            final Intent intent = getIntent();
+            final String action = intent.getAction();
+            boolean found = false;
+            if (Intents.ACTION_SETTINGS.equals(action)) {
+                // user selected a search suggestion
+                openRequestedFragment(intent.getStringExtra(SearchManager.QUERY));
+                found = true;
+            } else if (Intent.ACTION_SEARCH.equals(action)) {
+                // user pressed enter in searchfield => search first pref matching this search string
+                final String query = intent.getStringExtra(SearchManager.QUERY);
+                synchronized (searchIndex) {
+                    for (BasePreferenceFragment.PrefSearchDescriptor item : searchIndex) {
+                        if (StringUtils.containsIgnoreCase(item.prefTitle, query) || StringUtils.containsIgnoreCase(item.prefSummary, query)) {
+                            openRequestedFragment(item.baseKey, item.prefKey);
+                            found = true;
+                            break;
+                        }
+                    }
+                }
+            }
+            if (!found) {
+                openRequestedFragment("", null);
+            }
+        } else {
+            title = savedInstanceState.getCharSequence(TITLE_TAG);
+        }
     }
 
     /**
      * This method sets the fragment which is used upon opening the settings. This may be the user directly or a
      * requesting Intent.
      */
-    private void openRequestedFragment() {
+    private void openRequestedFragment(final String preference) {
         final Intent intent = getIntent();
         final int fragmentId = intent.getIntExtra(INTENT_OPEN_SCREEN, -1);
-        // openRequestedFragment(fragmentId);
-        try {
-            openRequestedFragment(getString(fragmentId), "");
-        } catch (Exception ignore) {
-            openRequestedFragment("", "");
+        String fragment = "";
+        // try to get fragment key from preference name (if necessary)
+        if (fragmentId < 0 && StringUtils.isNotBlank(preference)) {
+            synchronized (searchIndex) {
+                for (BasePreferenceFragment.PrefSearchDescriptor pref : searchIndex) {
+                    if (StringUtils.equals(preference, pref.prefKey)) {
+                        fragment = pref.baseKey;
+                        break;
+                    }
+                }
+            }
+        } else {
+            try {
+                fragment = getString(fragmentId);
+            } catch (Exception ignore) {
+                fragment = "";
+            }
+
         }
+        openRequestedFragment(fragment, preference);
     }
 
     /**
@@ -216,7 +264,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager()
-            .getFragmentFactory()
+                              .getFragmentFactory()
             .instantiate(getClassLoader(), pref.getFragment());
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, 0);
@@ -248,29 +296,24 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     }
 
-    @Override
-    public void onBackPressed() {
-        // back may exit the app instead of closing the search action bar
-        if (searchView != null && !searchView.isIconified()) {
-            searchView.setIconified(true);
-            menuSearch.collapseActionView();
-        } else {
-            super.onBackPressed();
-        }
-    }
-
     // search related extensions
 
-    private void initFragmentsForSearch() {
+    private void buildSearchIndex() {
+        synchronized (searchIndex) {
+            if (searchIndex.size() > 0) {
+                return;
+            }
+        }
         final ArrayList<BasePreferenceFragment> fragments = new ArrayList<>();
-        fragments.add(new PreferenceServicesFragment());
-        fragments.add(new PreferenceAppearanceFragment());
-        fragments.add(new PreferenceCachedetailsFragment());
-        fragments.add(new PreferenceMapFragment());
-        fragments.add(new PreferenceOfflinedataFragment());
-        fragments.add(new PreferenceNavigationFragment());
-        fragments.add(new PreferenceSystemFragment());
-        fragments.add(new PreferenceBackupFragment());
+        fragments.add(new PreferenceServicesFragment().setIcon(R.drawable.settings_cloud));
+        fragments.add(new PreferenceAppearanceFragment().setIcon(R.drawable.settings_eye));
+        fragments.add(new PreferenceCachedetailsFragment().setIcon(R.drawable.settings_details));
+        fragments.add(new PreferenceMapFragment().setIcon(R.drawable.settings_map));
+        fragments.add(new PreferenceLoggingFragment().setIcon(R.drawable.settings_pen));
+        fragments.add(new PreferenceOfflinedataFragment().setIcon(R.drawable.settings_sdcard));
+        fragments.add(new PreferenceNavigationFragment().setIcon(R.drawable.settings_arrow));
+        fragments.add(new PreferenceSystemFragment().setIcon(R.drawable.settings_nut));
+        fragments.add(new PreferenceBackupFragment().setIcon(R.drawable.settings_backup));
 
         for (BasePreferenceFragment f : fragments) {
             f.setSearchdataCallback(this::collectSearchdataCallback);
@@ -288,8 +331,8 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     // callback for BasePreferenceFragments to register search data
     private void collectSearchdataCallback(final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> data) {
-        synchronized (searchdata) {
-            searchdata.addAll(data);
+        synchronized (searchIndex) {
+            searchIndex.addAll(data);
         }
     }
 
@@ -301,9 +344,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
                 final Preference pref = prefScreen.findPreference(prefKey);
                 if (pref != null) {
                     ((PreferenceFragmentCompat) fragment).scrollToPreference(pref);
-                    lastResult = pref;
-                    lastTitle = pref.getTitle();
-                    pref.setTitle(HtmlCompat.fromHtml("<font color=#00eeee>" + lastTitle + "</font>", 0));
+                    pref.setTitle(prepareDisplayString(this, (String) pref.getTitle(), (String) pref.getTitle()));
                 }
             }
         }
@@ -314,34 +355,75 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         getMenuInflater().inflate(R.menu.settings_activity_options, menu);
 
         // prepare search in action bar
-        menuSearch = menu.findItem(R.id.menu_gosearch);
-        searchView = (SearchView) menuSearch.getActionView();
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(final String s) {
-                return true;
-            }
+        final SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+        final MenuItem menuSearch = menu.findItem(R.id.menu_gosearch);
+        final SearchView searchView = (SearchView) menuSearch.getActionView();
+        searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+        searchView.setSuggestionsAdapter(new SettingsSuggestionsAdapter(this, searchIndex));
 
-            @Override
-            public boolean onQueryTextChange(final String s) {
-                if (lastResult != null) {
-                    lastResult.setTitle(lastTitle);
-                }
-                if (s.length() > 2) {
-                    synchronized (searchdata) {
-                        for (BasePreferenceFragment.PrefSearchDescriptor desc : searchdata) {
-                            if (StringUtils.containsIgnoreCase(desc.prefTitle, s) || StringUtils.containsIgnoreCase(desc.prefSummary, s)) {
-                                openRequestedFragment(desc.baseKey, desc.prefKey);
-                                break;
-                            }
+        SearchUtils.hideKeyboardOnSearchClick(searchView, menuSearch);
+        SearchUtils.hideActionIconsWhenSearchIsActive(this, menu, menuSearch);
+        SearchUtils.handleDropDownVisibility(this, searchView, menuSearch);
+
+        return true;
+    }
+
+    static class SettingsSuggestionsAdapter extends BaseSuggestionsAdapter {
+        private final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchdata;
+
+        SettingsSuggestionsAdapter(final SettingsActivity context, final ArrayList<BasePreferenceFragment.PrefSearchDescriptor> searchdata) {
+            super(context, new SettingsSearchSuggestionCursor(), 0);
+            this.searchdata = searchdata;
+        }
+
+        @Override
+        public void bindView(final View view, final Context context, final Cursor cursor) {
+            final TextView tv = view.findViewById(R.id.text);
+            tv.setText(prepareDisplayString(context, cursor.getString(1), searchTerm));
+            tv.setCompoundDrawablesWithIntrinsicBounds(cursor.getInt(5), 0, 0, 0);
+            ((TextView) view.findViewById(R.id.info)).setText(prepareDisplayString(context, cursor.getString(2), searchTerm));
+        }
+
+        @Override
+        protected Cursor query(@NonNull final String searchTerm) {
+            final SettingsSearchSuggestionCursor resultCursor = new SettingsSearchSuggestionCursor();
+            if (searchTerm.length() > 2) {
+                synchronized (searchdata) {
+                    for (BasePreferenceFragment.PrefSearchDescriptor item : searchdata) {
+                        if (StringUtils.containsIgnoreCase(item.prefTitle, searchTerm) || StringUtils.containsIgnoreCase(item.prefSummary, searchTerm)) {
+                            resultCursor.addItem(item.prefTitle, item.prefSummary, item.prefKey, item.prefCategoryIconRes);
                         }
                     }
                 }
-                return true;
             }
-        });
+            return resultCursor;
+        }
+    }
 
-        return true;
+    static class SettingsSearchSuggestionCursor extends BaseSearchSuggestionCursor {
+        public void addItem(@NonNull final CharSequence title, @NonNull final CharSequence summary, final String key, @DrawableRes final int iconRes) {
+            addRow(new String[] {
+                String.valueOf(rowId),
+                (String) title,
+                (String) summary,
+                Intents.ACTION_SETTINGS,
+                key,
+                String.valueOf(iconRes)
+            });
+            rowId++;
+        }
+    }
+
+    private static Spannable prepareDisplayString(final Context context, final String text, final String searchTerm) {
+        if (StringUtils.isBlank(text)) {
+            return null;
+        }
+        final int iPos = StringUtils.indexOfIgnoreCase(text, searchTerm);
+        final Spannable s = new SpannableString(text);
+        if (iPos >= 0) {
+            s.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.colorAccent)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        }
+        return s;
     }
 
 }
