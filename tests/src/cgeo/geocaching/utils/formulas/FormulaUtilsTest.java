@@ -107,6 +107,11 @@ public class FormulaUtilsTest {
 
     }
 
+    @Test
+    public void scanForFormulasGC96KBEFindsAllFormulas() {
+        assertScanFormula("N 48° (F-H)/2-1.((J-H)*I-2*A+E+9) E 008° (A/G+12).(A+D)*B/2-6*C+49", "(F-H)/2-1", "((J-H)*I-2*A+E+9)", "(A/G+12)", "(A+D)*B/2-6*C+49");
+    }
+
     private void assertScanFormula(final String textToScan, final String ... expectedFinds) {
         final List<String> result = FormulaUtils.scanForFormulas(Collections.singleton(textToScan), null);
         if (expectedFinds == null || expectedFinds.length == 0) {

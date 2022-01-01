@@ -18,7 +18,7 @@ import java.util.regex.Pattern;
 public class FormulaUtils {
 
     private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
-        "[^a-zA-Z0-9(](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10})((( *[()] *)*( *[-+/:*x] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9.]{1,10}))+( *\\) *)*)[^a-zA-Z0-9)]");
+        "[^a-zA-Z0-9(](( *\\( *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})((( *[()] *)*( *[-+/:*x] *)+)( *[()] *)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+( *\\) *)*)[^a-zA-Z0-9)]");
 
     private static final Pattern[] TEXT_SCAN_FALSE_POSITIVE_PATTERNS = new Pattern[] {
         Pattern.compile("^[0-9]+[:/.,][0-9]+([:/.,][0-9]+)?$"), // dates or times
@@ -143,7 +143,8 @@ public class FormulaUtils {
     }
 
     private static String processFoundText(final String text) {
-        return text.replaceAll(" x ", " * "); // lowercase x is most likely a multiply char
+        final String trimmed = text.trim();
+        return trimmed.replaceAll(" x ", " * "); // lowercase x is most likely a multiply char
     }
 
     private static boolean checkCandidate(final String candidate) {
