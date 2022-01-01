@@ -6,6 +6,7 @@ import cgeo.geocaching.utils.functions.Action2;
 import android.os.Bundle;
 import android.view.View;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.preference.Preference;
@@ -22,19 +23,28 @@ import java.util.ArrayList;
      protected Action2<String, String> scrolltoCallback = null;
      protected String scrolltoBaseKey = null;
      protected String scrolltoPrefKey = null;
+     protected int icon = 0;
 
      public static class PrefSearchDescriptor {
         public String baseKey;
         public String prefKey;
         public CharSequence prefTitle;
         public CharSequence prefSummary;
+        public int prefCategoryIconRes;
 
-        PrefSearchDescriptor(final String baseKey, final String prefKey, final CharSequence prefTitle, final CharSequence prefSummary) {
+        PrefSearchDescriptor(final String baseKey, final String prefKey, final CharSequence prefTitle, final CharSequence prefSummary, @DrawableRes final int prefCategoryIconRes) {
             this.baseKey = baseKey;
             this.prefKey = prefKey;
             this.prefTitle = prefTitle;
             this.prefSummary = prefSummary;
+            this.prefCategoryIconRes = prefCategoryIconRes;
         }
+    }
+
+    // sets icon resource for search info
+    public BasePreferenceFragment setIcon(@DrawableRes final int icon) {
+         this.icon = icon;
+         return this;
     }
 
     // sets callback to deliver searchable info about prefs to SettingsActivity
@@ -77,7 +87,7 @@ import java.util.ArrayList;
         final int prefCount = start.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = start.getPreference(i);
-            data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary()));
+            data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary(), icon));
             if (pref instanceof PreferenceGroup) {
                 doSearch(baseKey, data, (PreferenceGroup) pref);
             }

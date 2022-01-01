@@ -277,10 +277,16 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/settings_titlebar"
             android:parentActivityName="cgeo.geocaching.MainActivity"
-            android:theme="@style/settings" >
+            android:theme="@style/settings"
+            android:exported="false">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="cgeo.geocaching.MainActivity" />
+            <intent-filter>
+                <action android:name="android.intent.action.SEARCH"/>
+            </intent-filter>
+            <meta-data android:name="android.app.searchable"
+                android:resource="@xml/searchable_settings" />
         </activity>
         <activity android:name=".settings.ViewSettingsActivity" />
         <activity

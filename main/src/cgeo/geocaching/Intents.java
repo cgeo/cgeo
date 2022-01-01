@@ -61,6 +61,7 @@ public class Intents {
     private static final String PREFIX_ACTION = "cgeo.geocaching.intent.action.";
     public static final String ACTION_GEOCACHE = PREFIX_ACTION + "GEOCACHE";
     public static final String ACTION_TRACKABLE = PREFIX_ACTION + "TRACKABLE";
+    public static final String ACTION_SETTINGS = PREFIX_ACTION + "SETTINGS";
 
     private static final String PREFIX_OAUTH = "cgeo.geocaching.intent.oauth.";
     public static final String EXTRA_OAUTH_HOST = PREFIX_OAUTH + "host";
