@@ -1,4 +1,5 @@
 - Korrektur: Reaktiviere Routing mit externer BRouter App in Version 1.6.3
+- Korrektur: Kürzerer Timeout für schnellen Scroll-Mechanismus, um Überschneidungen mit anderen Layout-Elementen zu vermeiden
 
 ## 2021.12.24 Bugfix release
 
