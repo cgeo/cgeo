@@ -296,7 +296,7 @@
     <string translatable="false" name="brouter_downloadurl">http://brouter.de/brouter/segments4/</string>
     <string translatable="false" name="brouter_projecturl">https://www.brouter.de/brouter/</string>
 
-    <string translatable="false" name="maptheme_legend_elevate">yhttps://www.openandromaps.org/wp-content/users/tobias/Elevate_de.pdf</string>
+    <string translatable="false" name="maptheme_legend_elevate">https://www.openandromaps.org/wp-content/users/tobias/Elevate_de.pdf</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_base">https://www.freizeitkarte-osm.de/android/en/legende-freizeitkarte.html</string>
     <string translatable="false" name="maptheme_legend_freizeitkarte_outdoor">https://www.freizeitkarte-osm.de/android/en/legende-outdoor-contrast.html</string>
 

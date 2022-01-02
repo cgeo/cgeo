@@ -1,5 +1,6 @@
 package cgeo.geocaching.maps.mapsforge.v6.legend;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.ui.TextParam;
@@ -21,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.StringRes;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -110,8 +112,8 @@ public class RenderThemeLegend {
         public int columns1;
         public int columns2;
 
-        LegendCategory(final int id1, final int id2, final String category, final int columns1, final int columns2) {
-            this.category = category;
+        LegendCategory(final int id1, final int id2, @StringRes final int category, final int columns1, final int columns2) {
+            this.category = CgeoApplication.getInstance().getString(category);
             this.id1 = id1;
             this.id2 = id2;
             this.columns1 = columns1;
@@ -132,8 +134,16 @@ public class RenderThemeLegend {
             this(category, legend, drawable, "", "");
         }
 
+        LegendEntry(final int category, @DrawableRes final int drawable, @StringRes final int legend) {
+            this(category, CgeoApplication.getInstance().getString(legend), drawable, "", "");
+        }
+
         LegendEntry(final int category, final String relativePath, final String filename) {
             this(category, (StringUtils.equals(filename.substring(1, 2), "_") ? filename.substring(2) : filename).replace("_", " "), 0, relativePath, filename + ".svg");
+        }
+
+        LegendEntry(final int category, final String relativePath, final String filename, @StringRes final int legend) {
+            this(category, CgeoApplication.getInstance().getString(legend), 0, relativePath, filename + ".svg");
         }
 
         LegendEntry(final int category, final String legend, @DrawableRes final int drawable, final String relativePath, final String filename) {
