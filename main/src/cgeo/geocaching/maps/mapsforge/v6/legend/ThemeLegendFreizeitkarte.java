@@ -21,7 +21,7 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
 
         // ---------------------------------------------------------------
 
-        cats.add(new RenderThemeLegend.LegendCategory(11, 12, "Areas", 5, 4));
+        cats.add(new RenderThemeLegend.LegendCategory(11, 12, R.string.rtl_category_areas, 5, 4));
 
         entries.add(new RenderThemeLegend.LegendEntry(11, p, "alm"));
         entries.add(new RenderThemeLegend.LegendEntry(11, p, "feuchtgebiet"));
@@ -90,7 +90,7 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
 
         // ---------------------------------------------------------------
 
-        cats.add(new RenderThemeLegend.LegendCategory(21, 22, "Roads & Paths", 4, 6));
+        cats.add(new RenderThemeLegend.LegendCategory(21, 22, R.string.rtl_category_roads_paths, 4, 6));
 
         entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_motorway : R.drawable.fzk_outdoor_line_motorway, "freeway"));
         entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_trunk : R.drawable.fzk_outdoor_line_trunk, "similar to freeway"));
@@ -111,7 +111,7 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
 
         // ---------------------------------------------------------------
 
-        cats.add(new RenderThemeLegend.LegendCategory(31, 32, "Walking, Cycling, Climbing", 4, 6));
+        cats.add(new RenderThemeLegend.LegendCategory(31, 32, R.string.rtl_category_walking_cycling_climbing, 4, 6));
 
         entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path_foot : R.drawable.fzk_outdoor_line_path_foot, "general foot path"));
         if (isBasic) {
@@ -133,7 +133,7 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
 
         // ---------------------------------------------------------------
 
-        cats.add(new RenderThemeLegend.LegendCategory(41, 42, "POI / Symbols", 7, 7));
+        cats.add(new RenderThemeLegend.LegendCategory(41, 42, R.string.rtl_category_poi_symbols, 7, 7));
 
         // amenities: transport
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bicycle_parking"));
