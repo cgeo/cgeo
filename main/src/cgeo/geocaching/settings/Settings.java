@@ -1561,6 +1561,11 @@ public class Settings {
         putString(R.string.pref_renderthemefile, customRenderThemeFile);
     }
 
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}! */
+    public static void setSelectedMapRenderThemeStyle(final String prefKey, final String style) {
+        putStringDirect(prefKey, style);
+    }
+
     /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
     public static boolean getSyncMapRenderThemeFolder() {
         return getBoolean(R.string.pref_renderthemefolder_synctolocal, false);

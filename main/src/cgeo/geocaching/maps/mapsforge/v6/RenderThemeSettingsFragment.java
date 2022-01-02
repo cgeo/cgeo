@@ -90,6 +90,8 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         baseLayerPreference.setDefaultValue(renderthemeOptions.getDefaultValue());
         baseLayerPreference.setIconSpaceReserved(false);
         baseLayerPreference.setOnPreferenceChangeListener((preference, newValue) -> {
+            // need to persist the new value before recreating the renderthemeMenu
+            Settings.setSelectedMapRenderThemeStyle(preference.getKey(), newValue.toString());
             createRenderthemeMenu();
             return true;
         });
