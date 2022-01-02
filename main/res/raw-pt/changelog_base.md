@@ -5,18 +5,18 @@
 - Correcção: Ao carregar ficheiros GPX que contém vários percursos, mostra-os em separado, não ligados
 - Alteração: Activa automaticamente a exibição do percurso ao carregar um ficheiro de percurso GPX
 - Novo: símbolos D/T para os ícones de cache (opcional)
-- New: Option to check for missing routing data for current viewport
+- Novo: Opção de verificação de falta de dados de encaminhamento na janela em visualização
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
 - Novo: Visão geral de atributos (ver Gerir Caches => Visão geral de atributos)
 - Novo: Adicionar importação de listas de favoritos (apenas membros premium GC)
 - Novo: Inverter a ordenação com um toque sem soltar na barra de ordenação
-- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
+- Alteração: Realizar ordenação automática por distância para listas contendo séries de caches com mais de 50 caches (até 500)
 
 ### Detalhes da cache
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
-- New: Colored attribute icons (following attribute groups)
+- Novo: Ícones de atributos coloridos (seguindo grupos de atributos)
 
 ### Outro
 - Novo: Carregamento rápido de geo-códigos a partir do texto da área de transferência, na pesquisa do ecrã principal
