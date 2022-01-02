@@ -1,4 +1,5 @@
 - Oplossing: Schakel routering met externe BRouter app in versie 1.6.3 opnieuw in
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ## 2021.12.24 Bugfix release
 
