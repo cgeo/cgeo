@@ -1,4 +1,5 @@
 - Oprava: Znovu povoleno směrování s externí aplikací BRouter ve verzi 1.6.3
+- Oprava: Použití kratšího časového limitu pro mechanismus rychlého posouvání, aby méně zasahoval do ostatních prvků rozvržení
 
 ## 2021.12.24 Vydání opravy chyb
 
