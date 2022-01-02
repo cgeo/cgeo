@@ -2467,6 +2467,7 @@
     <string name="rtl_bridleway">bridleway</string>
     <string name="rtl_access_destination">access (destination)</string>
     <string name="rtl_access_private">access (private)</string>
+    <string name="rtl_access_agricultural">restricted to agricultural / forest traffic</string>
     <string name="rtl_access_no">access (no)</string>
     <string name="rtl_cycleway">cycleway</string>
     <string name="rtl_cycleway_steep">cycleway (steep)</string>
@@ -2482,8 +2483,10 @@
 
     <string name="rtl_hiking_T1">hiking T1</string>
     <string name="rtl_hiking_T2">hiking T2</string>
+    <string name="rtl_hiking_T23">hiking T2/T3</string>
     <string name="rtl_hiking_T3">hiking T3</string>
     <string name="rtl_hiking_T4">hiking T4</string>
+    <string name="rtl_hiking_T45">hiking T4/T5</string>
     <string name="rtl_hiking_T5">hiking T5</string>
     <string name="rtl_hiking_T6">hiking T6</string>
     <string name="rtl_mtb_S0">MTB S0</string>
@@ -2616,14 +2619,14 @@
     <string name="rtl_butcher">butcher</string>
     <string name="rtl_chemist">chemist</string>
     <string name="rtl_convenience">convenience</string>
-    <string name="rtl_doityourself">doityourself</string>
+    <string name="rtl_doityourself">DIY</string>
     <string name="rtl_farm_shop">farm shop</string>
     <string name="rtl_laundry">laundry</string>
     <string name="rtl_mall">mall</string>
     <string name="rtl_marketplace">marketplace</string>
     <string name="rtl_organic">organic</string>
     <string name="rtl_postbox">postbox</string>
-    <string name="rtl_postoffice">postoffice</string>
+    <string name="rtl_postoffice">post office</string>
     <string name="rtl_sports_shop">sports shop</string>
     <string name="rtl_supermarket">supermarket</string>
     <string name="rtl_travel_agency">travel agency</string>
@@ -2632,7 +2635,7 @@
     <string name="rtl_doctors">doctors</string>
     <string name="rtl_embassy">embassy</string>
     <string name="rtl_emergency_phone">emergency phone</string>
-    <string name="rtl_firebrigade">firebrigade</string>
+    <string name="rtl_firebrigade">fire brigade</string>
     <string name="rtl_emergency_access_point">emergency access point</string>
     <string name="rtl_hospital">hospital</string>
     <string name="rtl_pharmacy">pharmacy</string>
@@ -2660,7 +2663,7 @@
     <string name="rtl_school">school</string>
     <string name="rtl_tower_communication">communication tower</string>
     <string name="rtl_tower_observation">observation tower</string>
-    <string name="rtl_townhall">townhall</string>
+    <string name="rtl_townhall">town hall</string>
     <string name="rtl_university">university</string>
 
     <string name="rtl_buddhist">buddhist</string>
@@ -2705,5 +2708,94 @@
     <string name="rtl_turnstile">turnstile</string>
     <string name="rtl_viewpoint">viewpoint</string>
     <string name="rtl_waterfall">waterfall</string>
+
+    <string name="rtl_alp">alp</string>
+    <string name="rtl_wetland">wetland</string>
+    <string name="rtl_moor">moor</string>
+    <string name="rtl_coppice">coppice</string>
+    <string name="rtl_plantation">plantation</string>
+    <string name="rtl_reed">reed</string>
+    <string name="rtl_mud">mud</string>
+    <string name="rtl_mudflat">mudflat</string>
+
+    <string name="rtl_cemetery">cemetery</string>
+    <string name="rtl_cemetery_christian">christian cemetery</string>
+    <string name="rtl_cemetery_jewish">jewish cemetery</string>
+    <string name="rtl_cemetery_muslim">muslim cemetery</string>
+
+    <string name="rtl_pedestrian_area">pedestrian area</string>
+    <string name="rtl_trading">trading</string>
+    <string name="rtl_parking_restricted">restricted parking</string>
+
+    <string name="rtl_prison">prison</string>
+    <string name="rtl_corral">corral</string>
+    <string name="rtl_riding_range">riding range</string>
+    <string name="rtl_allotment">allotment</string>
+
+    <string name="rtl_retention_reservoir">retention reservoir</string>
+    <string name="rtl_dump">dump</string>
+    <string name="rtl_driving_range">driving range</string>
+
+    <string name="rtl_ruin">ruin</string>
+    <string name="rtl_saline">saline</string>
+
+    <string name="rtl_reef">reef</string>
+
+    <string name="rtl_beach">beach</string>
+    <string name="rtl_beach_gravel">gravel beach</string>
+
+    <string name="rtl_freeway">freeway</string>
+    <string name="rtl_freeway_similar">similar to freeway</string>
+    <string name="rtl_interstate">interstate / A road</string>
+    <string name="rtl_secondary_road">secondary road</string>
+    <string name="rtl_district_road">district / tertiary road</string>
+    <string name="rtl_side_street">side street</string>
+    <string name="rtl_residential_road">residential road</string>
+    <string name="rtl_access_road">access road</string>
+    <string name="rtl_traffic_calmed_area">traffic-calmed area</string>
+    <string name="rtl_pedestrian_road">pedestrian road</string>
+    <string name="rtl_tunnel">tunnel</string>
+    <string name="rtl_bridge">bridge</string>
+    <string name="rtl_railway">railway</string>
+
+    <string name="rtl_path_foot">general foot path</string>
+    <string name="rtl_path_bicycle">general bicycle path</string>
+    <string name="rtl_path_combined_bicycle_foot">combined bicycle and foot path</string>
+    <string name="rtl_path_narrow">general way or path, not wide enough for cars</string>
+    <string name="rtl_path_badly_visible">badly visible path</string>
+    <string name="rtl_path_quality1">quality 1 (paved: asphalt, …)</string>
+    <string name="rtl_path_quality23">quality 2/3 (paved: gravel, repaired, …)</string>
+    <string name="rtl_path_quality45">quality 4/5 (unpaved)</string>
+
+    <string name="rtl_amenity_bicycle_parking">bicycle parking</string>
+    <string name="rtl_amenity_bicycle_rental">bicycle rental</string>
+    <string name="rtl_amenity_car_rental">car rental</string>
+    <string name="rtl_amenity_car_sharing">car sharing</string>
+    <string name="rtl_amenity_car_wash">car wash</string>
+    <string name="rtl_amenity_fuel">fuel</string>
+    <string name="rtl_amenity_ferry_terminal">ferry terminal</string>
+
+    <string name="rtl_amenity_bbq">amenity_bbq</string>
+
+    <string name="rtl_amenity_clinic">amenity_clinic</string>
+    <string name="rtl_emergency_fire_hydrant">emergency_fire_hydrant</string>
+    <string name="rtl_emergency_suction_point">emergency_suction_point</string>
+
+    <string name="rtl_amenity_college">amenity_college</string>
+
+    <string name="rtl_amenity_arts_centre">amenity_arts_centre</string>
+    <string name="rtl_amenity_casino">amenity_casino</string>
+    <string name="rtl_amenity_nightclub">amenity_nightclub</string>
+    <string name="rtl_amenity_community_centre">amenity_community_centre</string>
+    <string name="rtl_amenity_social_facility">amenity_social_facility</string>
+
+    <string name="rtl_amenity_courthouse">amenity_courthouse</string>
+
+    <string name="rtl_amenity_pow">place of worship</string>
+    <string name="rtl_amenity_pow_christian">christian place of worship</string>
+    <string name="rtl_amenity_pow_jewish">jewish place of worship</string>
+    <string name="rtl_amenity_pow_muslim">muslim place of worship</string>
+
+    <string name="rtl_amenity_water_point">water point</string>
 
 </resources>
