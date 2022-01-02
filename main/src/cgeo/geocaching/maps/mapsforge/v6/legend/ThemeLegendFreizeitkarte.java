@@ -92,39 +92,44 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
 
         cats.add(new RenderThemeLegend.LegendCategory(21, 22, "Roads & Paths", 4, 6));
 
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_motorway, "freeway"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_trunk, "similar to freeway"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_primary, "interstate / A road"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_secondary, "secondary road"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_tertiary, "district / tertiary road"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_unclassified, "side street"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_residential, "residential road"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_service, "access road"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_living_street, "traffic-calmed area"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_pedestrian, "pedestrian road"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_access_no, "usage is not allowed"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_access_destination, "restricted for motor traffic"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_access_agricultural, "restricted to agricultural / forest traffic"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_tunnel, "tunnel"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_bridge, "bridge"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.line_rail, "railway"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_motorway : R.drawable.fzk_outdoor_line_motorway, "freeway"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_trunk : R.drawable.fzk_outdoor_line_trunk, "similar to freeway"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_primary : R.drawable.fzk_outdoor_line_primary, "interstate / A road"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_secondary : R.drawable.fzk_outdoor_line_secondary, "secondary road"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_tertiary : R.drawable.fzk_outdoor_line_tertiary, "district / tertiary road"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_unclassified : R.drawable.fzk_outdoor_line_unclassified, "side street"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_residential : R.drawable.fzk_outdoor_line_residential, "residential road"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_service : R.drawable.fzk_outdoor_line_service, "access road"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_living_street : R.drawable.fzk_outdoor_line_living_street, "traffic-calmed area"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_pedestrian : R.drawable.fzk_outdoor_line_pedestrian, "pedestrian road"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_access_no : R.drawable.fzk_outdoor_line_access_no, "usage is not allowed"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_access_destination : R.drawable.fzk_outdoor_line_access_destination, "restricted for motor traffic"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_access_agricultural : R.drawable.fzk_outdoor_line_access_agricultural, "restricted to agricultural / forest traffic"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_tunnel : R.drawable.fzk_outdoor_line_tunnel, "tunnel"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_bridge : R.drawable.fzk_outdoor_line_bridge, "bridge"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, isBasic ? R.drawable.fzk_line_rail : R.drawable.fzk_outdoor_line_rail, "railway"));
 
         // ---------------------------------------------------------------
 
         cats.add(new RenderThemeLegend.LegendCategory(31, 32, "Walking, Cycling, Climbing", 4, 6));
 
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path_foot, "general foot path"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path_bicycle, "general bicycle path"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path_bicycle_foot, "combined bicycle and foot path"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_bridleway, "bridleway"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path, "general way or path, not wide enough for cars"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_track_1, "quality 1 (paved: asphalt, ...)"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_track_230, "quality 2/3 (paved: gravel, repaired, ...)"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_track_45, "quality 4/5 (unpaved)"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path_t1, "hiking T1"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path_t2, "hiking T2/T3"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_path_t4, "hiking T4/T5"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.line_via_ferrata, "via ferrata"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path_foot : R.drawable.fzk_outdoor_line_path_foot, "general foot path"));
+        if (isBasic) {
+            entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.fzk_line_path_bicycle, "general bicycle path"));
+        }
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path_bicycle_foot : R.drawable.fzk_outdoor_line_path_bicycle_foot, "combined bicycle and foot path"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_bridleway : R.drawable.fzk_outdoor_line_bridleway, "bridleway"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path : R.drawable.fzk_outdoor_line_path, "general way or path, not wide enough for cars"));
+        if (!isBasic) {
+            entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.fzk_outdoor_line_path_visibility, "badly visible path"));
+        }
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_track_1 : R.drawable.fzk_outdoor_line_track_1, "quality 1 (paved: asphalt, ...)"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_track_230 : R.drawable.fzk_outdoor_line_track_230, "quality 2/3 (paved: gravel, repaired, ...)"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_track_45 : R.drawable.fzk_outdoor_line_track_45, "quality 4/5 (unpaved)"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path_t1 : R.drawable.fzk_outdoor_line_path_t1, "hiking T1"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path_t2 : R.drawable.fzk_outdoor_line_path_t2, "hiking T2/T3"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_path_t4 : R.drawable.fzk_outdoor_line_path_t4, "hiking T4/T5"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, isBasic ? R.drawable.fzk_line_via_ferrata : R.drawable.fzk_outdoor_line_via_ferrata, "via ferrata"));
 
         // ---------------------------------------------------------------
 

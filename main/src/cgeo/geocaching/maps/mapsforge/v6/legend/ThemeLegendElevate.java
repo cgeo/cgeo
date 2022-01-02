@@ -52,85 +52,85 @@ class ThemeLegendElevate implements ThemeLegend {
 
         cats.add(new RenderThemeLegend.LegendCategory(11, 12, "Areas", 5, 4));
 
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_fell, "fell / meadow"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_heath, "heath"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_marsh, "marsh"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_rock, "rock"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_scree, "scree"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_scrub, "scrub"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_wood_mixed, "wood (mixed)"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_wood_coniferous, "wood (coniferous)"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_wood_deciduous, "wood (deciduous)"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_glacier, "glacier"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_grass, "grass"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_farmland, "farmland"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_orchard, "orchard"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_vineyard, "vineyard"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_water, "water"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.intermittent, "water (intermittent)"));
-        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.p_military, "military"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_fell, "fell / meadow"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_heath, "heath"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_marsh, "marsh"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_rock, "rock"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_scree, "scree"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_scrub, "scrub"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_wood_mixed, "wood (mixed)"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_wood_coniferous, "wood (coniferous)"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_wood_deciduous, "wood (deciduous)"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_glacier, "glacier"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_grass, "grass"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_farmland, "farmland"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_orchard, "orchard"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_vineyard, "vineyard"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_water, "water"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_intermittent, "water (intermittent)"));
+        entries.add(new RenderThemeLegend.LegendEntry(11, R.drawable.elevate_p_military, "military"));
 
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.pa, "nature reserve"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.pa_strict, "nature reserve (strict)"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.cliff, "cliff"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.ridge, "ridge"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.dyke, "dyke"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.embankment, "embankment"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.spring, "spring"));
-        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.powerline, "powerline"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_pa, "nature reserve"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_pa_strict, "nature reserve (strict)"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_cliff, "cliff"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_ridge, "ridge"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_dyke, "dyke"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_embankment, "embankment"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_spring, "spring"));
+        entries.add(new RenderThemeLegend.LegendEntry(12, R.drawable.elevate_powerline, "powerline"));
 
         // ---------------------------------------------------------------
 
         cats.add(new RenderThemeLegend.LegendCategory(21, 22, "Roads & Paths", 4, 6));
 
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.track1, "paved path"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.track2, "paved path (gravel)"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.track3, "unpaved path"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.track4, "unpaved path, partly grown"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.track5, "unpaved path, grown"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.track_o, "surface unknown"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.path_o, "unpaved footpath"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.footway, "paved footpath"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.bridleway, "bridleway"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.acc_dest, "access (destination)"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.acc_priv, "access (private)"));
-        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.acc_no, "no access"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_track1, "paved path"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_track2, "paved path (gravel)"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_track3, "unpaved path"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_track4, "unpaved path, partly grown"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_track5, "unpaved path, grown"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_track_o, "surface unknown"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_path_o, "unpaved footpath"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_footway, "paved footpath"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_bridleway, "bridleway"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_acc_dest, "access (destination)"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_acc_priv, "access (private)"));
+        entries.add(new RenderThemeLegend.LegendEntry(21, R.drawable.elevate_acc_no, "no access"));
 
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.cycleway, "cycleway"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.cycleway_steep, "cycleway (steep)"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.cycleway_paved, "cycleway paved"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.surface_smooth_paved, "paved (smooth)"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.surface_rough_paved, "paved (rough)"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.surface_compacted, "surface compacted"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.surface_gravel, "surface gravel"));
-        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.surface_raw, "surface raw"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_cycleway, "cycleway"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_cycleway_steep, "cycleway (steep)"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_cycleway_paved, "cycleway paved"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_surface_smooth_paved, "paved (smooth)"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_surface_rough_paved, "paved (rough)"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_surface_compacted, "surface compacted"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_surface_gravel, "surface gravel"));
+        entries.add(new RenderThemeLegend.LegendEntry(22, R.drawable.elevate_surface_raw, "surface raw"));
 
         // ---------------------------------------------------------------
 
         cats.add(new RenderThemeLegend.LegendCategory(31, 32, "Walking, Cycling, Climbing", 4, 6));
 
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.path_t1, "hiking T1"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.path_t2, "hiking T2"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.path_t3, "hiking T3"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.path_t4, "hiking T4"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.path_t5, "hiking T5"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.path_t6, "hiking T6"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtb0, "MTB S0"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtb1, "MTB S1"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtb2, "MTB S2"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtb3, "MTB S3"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtb4, "MTB S4"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtb5, "MTB S5/6"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtbu0, "uphill -15%"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtbu1, "uphill -20%"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtbu2, "uphill -25%"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtbu3, "uphill -30%"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtbu4, "uphill -40%"));
-        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.mtbu5, "uphill too steep"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_path_t1, "hiking T1"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_path_t2, "hiking T2"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_path_t3, "hiking T3"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_path_t4, "hiking T4"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_path_t5, "hiking T5"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_path_t6, "hiking T6"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtb0, "MTB S0"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtb1, "MTB S1"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtb2, "MTB S2"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtb3, "MTB S3"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtb4, "MTB S4"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtb5, "MTB S5/6"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtbu0, "uphill -15%"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtbu1, "uphill -20%"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtbu2, "uphill -25%"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtbu3, "uphill -30%"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtbu4, "uphill -40%"));
+        entries.add(new RenderThemeLegend.LegendEntry(31, R.drawable.elevate_mtbu5, "uphill too steep"));
 
-        entries.add(new RenderThemeLegend.LegendEntry(32, R.drawable.s_rope, "Security: rope"));
-        entries.add(new RenderThemeLegend.LegendEntry(32, R.drawable.s_rungs, "Security: rungs"));
-        entries.add(new RenderThemeLegend.LegendEntry(32, R.drawable.s_ladder, "Security: ladder"));
+        entries.add(new RenderThemeLegend.LegendEntry(32, R.drawable.elevate_s_rope, "Security: rope"));
+        entries.add(new RenderThemeLegend.LegendEntry(32, R.drawable.elevate_s_rungs, "Security: rungs"));
+        entries.add(new RenderThemeLegend.LegendEntry(32, R.drawable.elevate_s_ladder, "Security: ladder"));
 
         // ---------------------------------------------------------------
 
