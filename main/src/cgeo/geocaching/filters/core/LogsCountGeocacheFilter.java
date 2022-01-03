@@ -73,7 +73,7 @@ public  class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer>
         final String newTableId = sqlBuilder.getNewTableId();
         sqlBuilder.addJoin("LEFT JOIN (" + getGroupClause(sqlBuilder.getNewTableId()) + ") " + newTableId + " ON " + sqlBuilder.getMainTableId() + ".geocode = " + newTableId + ".geocode");
         addRangeToSqlBuilder(sqlBuilder,
-            "CASE WHEN " + newTableId + ".log_count IS NULL THEN -1 ELSE " + newTableId + ".log_count END");
+            "CASE WHEN " + newTableId + ".log_count IS NULL THEN 0 ELSE " + newTableId + ".log_count END");
     }
 
     private String getGroupClause(final String tid) {
