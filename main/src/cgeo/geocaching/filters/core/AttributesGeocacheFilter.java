@@ -3,6 +3,7 @@ package cgeo.geocaching.filters.core;
 import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheAttribute;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.SqlBuilder;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.expressions.ExpressionConfig;
@@ -18,10 +19,12 @@ import org.apache.commons.lang3.BooleanUtils;
 public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
     private static final String CONFIG_KEY_INVERSE = "inverse";
+    private static final String CONFIG_KEY_SOURCES = "attributesources";
 
     private final Map<String, String> attributes = new HashMap<>();
     private final Set<String> attributesRaw = new HashSet<>();
     private boolean inverse = false;
+    private int sources = 3;
 
     public void setAttributes(final Map<CacheAttribute, Boolean> atts) {
         this.attributes.clear();
@@ -42,6 +45,14 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
     public boolean isInverse() {
         return inverse;
+    }
+
+    public void setSources(final int sources) {
+        this.sources = sources;
+    }
+
+    public int getSources() {
+        return sources;
     }
 
     public Map<CacheAttribute, Boolean> getAttributes() {
@@ -111,8 +122,8 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
 
     @Override
     public void setConfig(final ExpressionConfig config) {
-
         this.inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
+        this.sources = config.getFirstValue(CONFIG_KEY_SOURCES, Settings.getAttributeFilterSources(), s -> Integer.parseInt(s));
         attributes.clear();
         attributesRaw.clear();
         for (String value : config.getDefaultList()) {
@@ -131,6 +142,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     public ExpressionConfig getConfig() {
         final ExpressionConfig config = new ExpressionConfig();
         config.putList(CONFIG_KEY_INVERSE, Boolean.toString(inverse));
+        config.putList(CONFIG_KEY_SOURCES, Integer.toString(sources));
         config.putDefaultList(new ArrayList<>(attributes.keySet()));
         return config;
     }
