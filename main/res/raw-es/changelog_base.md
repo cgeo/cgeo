@@ -22,11 +22,12 @@
 - Nuevo: Cargar rápidamente los geocódigos del texto del portapapeles en la búsqueda de la pantalla de inicio
 - Nuevo: Añadido soporte para 5 plantillas de registro
 - Nuevo: Hacer Ajustes => Ver Configuración filtrable
-- Nuevo: Añadido asistente GC a la lista de aplicaciones útiles
-- Cambio: Se ha eliminado el escáner de código de barras de la lista de aplicaciones útiles y de la pantalla principal
-- Cambio: BRouter eliminado de la lista de aplicaciones útiles (todavía puede utilizar la navegación externa e interna)
-- Corregido: Evitar comprobaciones repetidas de actualización para mapas/enrutamiento con interval=0
-- Corregido: Optimizar el soporte para autorrellenar contraseñas desde aplicaciones de almacenamiento de contraseñas externas en ajustes
-- Corregido: Habilitar tooltips para sistemas ejecutándose en Android por debajo de la versión 8
-- Ajustes reconfigurados para cumplir con las especificaciones actuales de Android
-- API actualizada de MapsWithMe
+- New: Enable search in preferences
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
