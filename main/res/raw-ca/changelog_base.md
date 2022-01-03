@@ -22,11 +22,12 @@
 - Novetat: carregueu ràpidament geocodis del text del porta-retalls a la cerca de la pantalla principal
 - Nou: S'ha afegit suport per a 5 plantilles de registre
 - Nou: Fes la configuració => Mostra la configuració filtrable
-- Nou: S'ha afegit GC Wizard a la llista d'aplicacions útils
-- Canvi: S'ha eliminat l'escàner de codis de barres de la llista d'aplicacions útils i de la pantalla principal
-- Canvi: S'ha eliminat BRuter de la llista d'aplicacions útils (encara podeu utilitzar la navegació externa i interna)
-- Solució: Eviteu les comprovacions d'actualització repetides per a mapes/'encaminament amb interval=0
-- Solució: Optimitzeu la compatibilitat per emplenar automàticament les contrasenyes des d'aplicacions, de contrasenyes externes a la configuració
-- Solució: activeu els consells sobre eines per als sistemes que s'executen a Android amb la versió 8
-- Configuració refactoritzada per complir amb les especificacions actuals d'Android
-- API MapsWithMe actualitzada
+- New: Enable search in preferences
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
