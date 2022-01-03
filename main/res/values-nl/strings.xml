@@ -2083,6 +2083,10 @@
     <string name="downloadmap_checking_for_updates">Controleren op updates…</string>
     <string name="downloadtile_title">Ontbrekende routering gegevens</string>
     <string name="downloadtile_info">c:geo kan de gevraagde route niet berekenen omdat er enkele routering data ontbreekt. Wil je ontbrekende routering data downloaden?</string>
+    <string name="check_tiles_menu">Controleer op ontbrekende routeringsgegevens</string>
+    <string name="check_tiles_found">Route gegevens zijn al aanwezig</string>
+    <string name="check_tiles_missing">Ontbrekende routegegevens gevonden:\n%1$s\n\nWilt je deze bestanden downloaden?%2$s</string>
+    <string name="check_tiles_unsupported">Waarschuwing: Routegegevens zijn ten minste gedeeltelijk niet beschikbaar voor de gekozen regio</string>
     <string name="tileupdate_info">Wil je controleren op updates van gedownloade routering gegevensbestanden?</string>
     <string name="mapupdate_info">Wil je controleren op updates van kaart en themabestanden?</string>
     <string name="no_updates_found">Geen updates gevonden</string>
