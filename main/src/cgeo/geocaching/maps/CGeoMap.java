@@ -574,7 +574,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
-            getIndividualRouteUtils().showPopup(activity.findViewById(R.id.map_individualroute_popup), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget, this::centerOnPosition, this::setTarget));
+            getRouteTrackUtils().showPopup(individualRoute, tracks, this::setTarget));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -650,7 +650,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            getTrackUtils().loadTracks(this::setTracks, false);
+            getRouteTrackUtils().loadTracks(this::setTracks, false);
         } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
         }
@@ -771,7 +771,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            getIndividualRouteUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            getRouteTrackUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -830,10 +830,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final Viewport bb = mapView.getViewport();
             MapUtils.checkRoutingData(activity, bb.bottomLeft.getLatitude(), bb.bottomLeft.getLongitude(), bb.topRight.getLatitude(), bb.topRight.getLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(activity, id, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null), this::clearTrailHistory)
-                || getTrackUtils().onOptionsItemSelected(id, tracks)
-                || getIndividualRouteUtils().onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
                 || DownloaderUtils.onOptionsItemSelected(activity, id)) {
             return true;
+        } else if (id == R.id.menu_routetrack) {
+            getRouteTrackUtils().showPopup(individualRoute, tracks, this::setTarget);
         } else {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
@@ -888,7 +888,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void setTracks(final Route route) {
         tracks = route;
         resumeTrack(null == tracks);
-        getTrackUtils().showTrackInfo(tracks);
+        getRouteTrackUtils().showTrackInfo(tracks);
     }
 
     @Override
