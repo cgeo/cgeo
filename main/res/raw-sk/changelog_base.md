@@ -22,11 +22,12 @@
 - Nové: Rýchle načítanie geokódov z textu schránky pri vyhľadávaní na hlavnej obrazovke
 - Nové: pridaná podpora pre 5 šablón logu
 - Nové: Urobiť nastavenia => Zobraziť nastavenia filtrovateľné
-- Nové: Do zoznamu užitočných aplikácií pridané GC Wizard
-- Zmena: Zo zoznamu užitočných aplikácií a z hlavnej obrazovky odstránený skener čiarových kódov
-- Zmena: Zo zoznamu užitočných aplikácií odstránený BRouter (naďalej môžete používať externú aj internú navigáciu)
-- Oprava: Odstránenie opakovaných kontrol aktualizácie pre dlaždice mapy/trasovania s intervalom=0
-- Oprava: Optimalizácia podpory automatického vypĺňania hesiel z aplikácií na ukladanie hesiel v nastaveniach
-- Oprava: Povolenie kontextových popisov pre systémy Android vo verzii nižšej než 8
-- Prepracované nastavenia tak, aby spĺňali aktuálne parametre systému Android
-- Aktualizované API MapsWithMe
+- New: Enable search in preferences
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
