@@ -22,11 +22,12 @@
 - New: Quick-load geocodes from clipboard text in mainscreen search
 - New: Added support for 5 log templates
 - New: Make Settings => View Settings filterable
+- New: Enable search in preferences
 - New: Added GC Wizard to useful apps list
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Correction : Optimisation de la prise en charge du remplissage automatique des mots de passe à partir des applications de stockage de mots de passe externes dans les paramètres
+- Fix: Optimize support to autofill passwords from external password store apps in settings
 - Fix: Enable tooltips for systems running on Android below version 8
-- Refonte des paramètres pour s'adapter aux nouvelles spécifications d'Android
-- Mise à jour de l'API MapsWithMe
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
