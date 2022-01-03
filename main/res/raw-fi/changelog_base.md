@@ -22,11 +22,12 @@
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
 - Uusi: Lisätty tuki 5 lokipohjalle
 - Uusi: Tee asetukset => Näytä asetukset suodatettavaksi
-- Uusi: Lisätty GC Wizard hyödyllisten sovellusten luetteloon
-- Muutos: Poistettiin viivakoodiskanneri hyödyllisten sovellusten listalta ja päävalikosta
-- Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
-- Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
-- Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
-- Korjaus: Ota käyttöön vihjeet järjestelmille, jotka käyttävät vanhempaa kuin Androidin versio 8
-- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
-- Päivitetty MapsWithMe API
+- New: Enable search in preferences
+- New: Added GC Wizard to useful apps list
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
