@@ -15,8 +15,6 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.IndividualRouteUtils;
-import cgeo.geocaching.utils.TrackUtils;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -124,7 +122,11 @@ public abstract class AbstractMap {
 
     public abstract void refreshMapData(boolean circlesSwitched);
 
-     @Nullable
+    public boolean isTargetSet() {
+        return StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget;
+    }
+
+    @Nullable
     public Geocache getCurrentTargetCache() {
         if (StringUtils.isNotBlank(targetGeocode)) {
             return DataStore.loadCache(targetGeocode, LoadFlags.LOAD_CACHE_OR_DB);
@@ -147,12 +149,8 @@ public abstract class AbstractMap {
         ActivityMixin.invalidateOptionsMenu(getActivity());
     }
 
-    protected TrackUtils getTrackUtils() {
-        return mapActivity.getTrackUtils();
-    }
-
-    protected IndividualRouteUtils getIndividualRouteUtils() {
-        return mapActivity.getIndividualRouteUtils();
+    protected RouteTrackUtils getRouteTrackUtils() {
+        return mapActivity.getRouteTrackUtils();
     }
 
     public abstract Collection<Geocache> getCaches();

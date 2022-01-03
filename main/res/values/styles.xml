@@ -10,6 +10,11 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="text_default" parent="@style/text">
+        <item name="android:textSize">@dimen/textSize_detailsPrimary</item>
+        <item name="android:textColor">@color/colorText</item>
+    </style>
+
     <style name="text_label" parent="text">
         <item name="android:layout_centerVertical">true</item>
         <item name="android:lines">1</item>

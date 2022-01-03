@@ -12,13 +12,12 @@ import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.MapUtils;
+import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.FilterUtils;
-import cgeo.geocaching.utils.IndividualRouteUtils;
-import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
@@ -46,13 +45,11 @@ import org.apache.commons.lang3.StringUtils;
                                   //       or generify our map handling so that we only have one map activity at all to avoid code duplication
 public class GoogleMapActivity extends AbstractBottomNavigationActivity implements MapActivityImpl, FilteredActivity {
 
-    private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
-    private static final String STATE_TRACKUTILS = "trackutils";
+    private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
     private final AbstractMap mapBase;
 
-    private TrackUtils trackUtils = null;
-    private IndividualRouteUtils individualRouteUtils = null;
+    private RouteTrackUtils routeTrackUtils = null;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -62,12 +59,8 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
         super.setTheme(R.style.cgeo);
     }
 
-    public TrackUtils getTrackUtils() {
-        return trackUtils;
-    }
-
-    public IndividualRouteUtils getIndividualRouteUtils() {
-        return individualRouteUtils;
+    public RouteTrackUtils getRouteTrackUtils() {
+        return routeTrackUtils;
     }
 
     @Override
@@ -78,17 +71,14 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     @Override
     public void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
-        individualRouteUtils = new IndividualRouteUtils(this, icicle == null ? null : icicle.getBundle(STATE_INDIVIDUAlROUTEUTILS),
-            mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute);
-        trackUtils = new TrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_TRACKUTILS),
-            mapBase::setTracks, mapBase::centerOnPosition);
+        routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
+            mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTracks, mapBase::isTargetSet);
     }
 
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         mapBase.onSaveInstanceState(outState);
-        outState.putBundle(STATE_INDIVIDUAlROUTEUTILS, individualRouteUtils.getState());
-        outState.putBundle(STATE_TRACKUTILS, trackUtils.getState());
+        outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
     }
 
     @Override
@@ -211,7 +201,6 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
                     break;
             }
         }
-        this.trackUtils.onPrepareOptionsMenu(menu);
 
         return result;
     }
@@ -245,8 +234,7 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
             mapBase.refreshMapData(false);
         }
 
-        this.trackUtils.onActivityResult(requestCode, resultCode, data);
-        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
+        this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     @Override

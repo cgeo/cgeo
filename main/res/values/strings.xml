@@ -2210,14 +2210,16 @@
     <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->
+    <string name="routes_tracks_dialog_title">Routes / tracks options</string>
     <string name="individual_route">Individual route</string>
     <string name="individual_route_added">added to route</string>
     <string name="individual_route_removed">removed from route</string>
     <string name="individual_route_error_toggling_waypoint">error toggling waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Not available in single waypoint mode</string>
     <string name="map_sort_individual_route">Sort individual route</string>
-    <string name="map_export_individual_route">Export as route</string>
-    <string name="map_export_individual_route_as_track">Export as track</string>
+    <string name="map_export_individual_route">Export individual route</string>
+    <string name="route">Route</string>
+    <string name="track">Track</string>
     <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
     <string name="map_autotarget_individual_route">Set route start as target</string>

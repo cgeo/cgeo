@@ -145,31 +145,8 @@
         </menu>
     </item>
     <item
-        android:id="@+id/menu_individual_track"
-        android:title="@string/individual_track">
-        <menu>
-            <item
-                android:id="@+id/menu_load_track"
-                android:title="@string/map_load_track" />
-            <item
-                android:id="@+id/menu_center_on_track"
-                android:title="@string/center_on_track"
-                android:visible="false" />
-            <item
-                android:id="@+id/menu_unload_track"
-                android:title="@string/map_unload_track"
-                android:visible="false"/>
-        </menu>
-    </item>
-    <item
-        android:id="@+id/menu_load_individual_route"
-        android:title="@string/map_load_individual_route">
-    </item>
-    <item
-        android:id="@+id/menu_clear_targets"
-        android:title="@string/map_clear_manual_targets"
-        android:visible="false">
-    </item>
+        android:id="@+id/menu_routetrack"
+        android:title="Routes / Tracks" />
     <item
         android:id="@+id/menu_check_routingdata"
         android:title="@string/check_tiles_menu" />

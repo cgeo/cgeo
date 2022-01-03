@@ -33,6 +33,7 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.MapUtils;
+import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
@@ -75,9 +76,7 @@ import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HistoryTrackUtils;
-import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.TrackUtils;
 import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.LIVE;
 import static cgeo.geocaching.filters.gui.GeocacheFilterActivity.EXTRA_FILTER_CONTEXT;
 import static cgeo.geocaching.maps.MapProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
@@ -148,8 +147,7 @@ import org.mapsforge.map.model.common.Observer;
 @SuppressLint("ClickableViewAccessibility")
 @SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
 public class NewMap extends AbstractBottomNavigationActivity implements Observer, FilteredActivity {
-    private static final String STATE_INDIVIDUAlROUTEUTILS = "indrouteutils";
-    private static final String STATE_TRACKUTILS = "trackutils";
+    private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
     private static final String ROUTING_SERVICE_KEY = "NewMap";
 
@@ -213,8 +211,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private MapMode mapMode;
 
-    private TrackUtils trackUtils = null;
-    private IndividualRouteUtils individualRouteUtils = null;
+    private RouteTrackUtils routeTrackUtils = null;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -223,8 +220,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         Log.d("NewMap: onCreate");
 
-        trackUtils = new TrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_TRACKUTILS), this::setTracks, this::centerOnPosition);
-        individualRouteUtils = new IndividualRouteUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_INDIVIDUAlROUTEUTILS), this::clearIndividualRoute, this::reloadIndividualRoute);
+        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTracks, this::isTargetSet);
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
@@ -273,8 +269,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         // map settings popup
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
-        // individual route popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> individualRouteUtils.showPopup(findViewById(R.id.map_individualroute_popup), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget, this::centerOnPosition, this::setTarget));
+        // routes / tracks popup
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, tracks, this::setTarget));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -421,12 +417,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            this.individualRouteUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget);
+            this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             HistoryTrackUtils.onPrepareOptionsMenu(menu);
-            this.trackUtils.onPrepareOptionsMenu(menu);
         } catch (final RuntimeException e) {
             Log.e("NewMap.onPrepareOptionsMenu", e);
         }
@@ -489,10 +484,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             final BoundingBox bb = mapView.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.minLatitude, bb.minLongitude, bb.maxLatitude, bb.maxLongitude);
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> historyLayer.requestRedraw(), this::clearTrailHistory)
-                || this.trackUtils.onOptionsItemSelected(id, tracks)
-                || this.individualRouteUtils.onOptionsItemSelected(id, individualRoute, this::centerOnPosition, this::setTarget)
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
+        } else if (id == R.id.menu_routetrack) {
+            routeTrackUtils.showPopup(individualRoute, tracks, this::setTarget);
         } else {
             final String language = MapProviderFactory.getLanguage(id);
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
@@ -753,7 +748,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private void resumeTrack(final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            this.trackUtils.loadTracks(this::setTracks, false);
+            this.routeTrackUtils.loadTracks(this::setTracks, false);
         } else if (null != trackLayer) {
             trackLayer.updateRoute(tracks);
             trackLayer.setHidden(Settings.isHideTrack());
@@ -974,8 +969,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putBundle(STATE_INDIVIDUAlROUTEUTILS, individualRouteUtils.getState());
-        outState.putBundle(STATE_TRACKUTILS, trackUtils.getState());
+        outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
 
         Log.d("New map: onSaveInstanceState");
 
@@ -1627,14 +1621,13 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             refreshMapData(false);
         }
 
-        this.trackUtils.onActivityResult(requestCode, resultCode, data);
-        this.individualRouteUtils.onActivityResult(requestCode, resultCode, data);
+        this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
     private void setTracks(final Route route) {
         tracks = route;
         resumeTrack(null == tracks);
-        this.trackUtils.showTrackInfo(tracks);
+        this.routeTrackUtils.showTrackInfo(tracks);
     }
 
     private void reloadIndividualRoute() {
@@ -1644,6 +1637,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             // try again in 0.25 second
             new Handler(Looper.getMainLooper()).postDelayed(this::reloadIndividualRoute, 250);
         }
+    }
+
+    private Boolean isTargetSet() {
+        return StringUtils.isNotBlank(targetGeocode) && null != lastNavTarget;
     }
 
     private static class ResourceBitmapCacheMonitor {

@@ -15,7 +15,6 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.IndividualRouteUtils;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -133,7 +132,7 @@ public class MapSettingsUtils {
                     if (route == null) {
                         Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
                     } else {
-                        IndividualRouteUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
+                        RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
                     }
                 }
             });

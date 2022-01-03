@@ -1,8 +1,7 @@
 package cgeo.geocaching.maps.interfaces;
 
 import cgeo.geocaching.activity.FilteredActivity;
-import cgeo.geocaching.utils.IndividualRouteUtils;
-import cgeo.geocaching.utils.TrackUtils;
+import cgeo.geocaching.maps.RouteTrackUtils;
 
 import android.content.res.Resources;
 import android.os.Bundle;
@@ -39,8 +38,6 @@ public interface MapActivityImpl extends FilteredActivity {
 
     boolean superOnOptionsItemSelected(MenuItem item);
 
-    TrackUtils getTrackUtils();
-
-    IndividualRouteUtils getIndividualRouteUtils();
+    RouteTrackUtils getRouteTrackUtils();
 
 }
