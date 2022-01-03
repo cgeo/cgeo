@@ -22,6 +22,7 @@
 - New: Quick-load geocodes from clipboard text in mainscreen search
 - New: Added support for 5 log templates
 - New: Make Settings => View Settings filterable
+- New: Enable search in preferences
 - New: Added GC Wizard to useful apps list
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
