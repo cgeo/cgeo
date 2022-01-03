@@ -2059,7 +2059,7 @@ public class Settings {
         return getBoolean(R.string.pref_dtMarkerOnCacheIcon, false);
     }
 
-    private static int getAttributeFilterSources() {
+    public static int getAttributeFilterSources() {
         int setting = getInt(R.string.pref_attributeFilterSources, 0);
         if (setting == 0) {
             // guess a reasonable default value based on enabled connectors
@@ -2076,14 +2076,6 @@ public class Settings {
             setting = 3 - (!gc ? 1 : 0) + (!okapi ? 2 : 0);
         }
         return setting;
-    }
-
-    public static boolean isAttributeFilterSourcesGC() {
-        return getAttributeFilterSources() != 2;
-    }
-
-    public static boolean isAttributeFilterSourcesOkapi() {
-        return getAttributeFilterSources() >= 2;
     }
 
     /**

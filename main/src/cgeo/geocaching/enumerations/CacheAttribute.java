@@ -2,7 +2,7 @@ package cgeo.geocaching.enumerations;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
-import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.filters.gui.AttributesFilterViewHolder;
 
 import android.util.SparseArray;
 
@@ -280,9 +280,9 @@ public enum CacheAttribute {
     /**
      * Filter the list of attributes based on the associated connector
      */
-    public static List<CacheAttribute> getAttributesByCategoryAndConnector(final CacheAttributeCategory cac) {
-        final boolean showGc = Settings.isAttributeFilterSourcesGC();
-        final boolean showOc = Settings.isAttributeFilterSourcesOkapi();
+    public static List<CacheAttribute> getAttributesByCategoryAndConnector(final CacheAttributeCategory cac, final int sources) {
+        final boolean showGc = AttributesFilterViewHolder.isAttributeFilterSourcesGC(sources);
+        final boolean showOc = AttributesFilterViewHolder.isAttributeFilterSourcesOkapi(sources);
 
         final List<CacheAttribute> filteredAttributes = new ArrayList<>();
         final List<CacheAttribute> unfilteredAttributes;
