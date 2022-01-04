@@ -1850,6 +1850,7 @@
     <string name="attribute_blind_people_no">Nie postihnutí: zrakovo</string>
     <string name="attribute_unknown">Neznámy atribút</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
