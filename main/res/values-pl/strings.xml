@@ -1853,11 +1853,11 @@
     <string name="attribute_blind_people_no">Nieodpowiedni dla osób niewidomych</string>
     <string name="attribute_unknown">Nieznany atrybut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Wymagane narzędzia</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Lokalizacja skrytki</string>
     <string name="cat_duration">Odległość / Czas trwania</string>
     <string name="cat_surrounding">Otoczenie skrytki</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Aby uczynić geocaching prostszym, a użytkowników bardziej leniwymi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
