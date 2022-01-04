@@ -1825,12 +1825,16 @@
     <string name="attribute_blind_people_no">Kein Handicap: Blind</string>
     <string name="attribute_unknown">Unbekanntes Attribut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Werkzeuge erforderlich</string>
+    <string name="cat_tools">Ausrüstung</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Cache-Ort</string>
     <string name="cat_duration">Distanz / Dauer</string>
     <string name="cat_surrounding">Umgebung des Caches</string>
     <string name="cat_permissions">Berechtigungen</string>
+    <!-- cache attribute sources -->
+    <string name="attribute_source_all">Alle</string>
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Um Geocachen einfacher zu machen, um es Anwendern bequemer zu machen.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
