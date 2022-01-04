@@ -1346,6 +1346,7 @@
     <string name="attribute_blind_people_yes">Гандикап: Сліпий</string>
     <string name="attribute_blind_people_no">Немає handicap: Сліпий</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Для того, щоб зробити геокешинг легшим, потрібно робити користувачів ледачим.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
