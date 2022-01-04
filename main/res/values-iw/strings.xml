@@ -467,6 +467,7 @@
     <!-- GC attributes -->
     <string name="attribute_no_gps_yes">Without GPS (letterboxes, compass juggling, &#8230;)</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <!-- status (used via string based resource loading) -->
