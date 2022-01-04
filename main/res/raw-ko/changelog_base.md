@@ -20,10 +20,11 @@
 
 ### 추가 사항
 - 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드
-- 신규: 5개의 로그 템플릿 지원 추가
+- New: Added support for user-defined log templates
 - 신규: 설정 만들기 => 필터링 가능한 보기 설정
 - New: Enable search in preferences
 - New: Added GC Wizard to useful apps list
+- New: Attributes filter: Allow selecting from which connectors attributes are shown
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
