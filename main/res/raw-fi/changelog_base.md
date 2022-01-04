@@ -20,10 +20,11 @@
 
 ### Muu
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
-- Uusi: Lisätty tuki 5 lokipohjalle
+- New: Added support for user-defined log templates
 - Uusi: Tee asetukset => Näytä asetukset suodatettavaksi
 - New: Enable search in preferences
 - New: Added GC Wizard to useful apps list
+- New: Attributes filter: Allow selecting from which connectors attributes are shown
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
