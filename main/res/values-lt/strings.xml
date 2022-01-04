@@ -1682,6 +1682,7 @@
     <string name="attribute_historic_yes">Apleisti statiniai / griuvėsiai</string>
     <string name="attribute_historic_no">Nėra apleistų statinių / nėra griuvėsių</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
