@@ -1825,12 +1825,12 @@
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
     <string name="attribute_unknown">Okänt attribut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Verktyg krävs</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Cache-plats</string>
     <string name="cat_duration">Avstånd / varaktighet</string>
     <string name="cat_surrounding">Runt cachen</string>
     <string name="cat_permissions">Rättigheter</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
