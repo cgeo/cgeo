@@ -1824,11 +1824,11 @@ Nombre de archivo:%2$s</string>
     <string name="attribute_blind_people_no">No adecuado a personas invidentes</string>
     <string name="attribute_unknown">Atributo desconocido</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Requiere herramientas</string>
     <string name="cat_type">Tipo</string>
     <string name="cat_location">Ubicación del caché</string>
     <string name="cat_duration">Distancia / Duración</string>
     <string name="cat_surrounding">Alrededor del caché</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Para hacer el geocaching más sencillo, para hacer a los usuarios más vagos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
