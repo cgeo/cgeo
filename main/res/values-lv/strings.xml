@@ -1262,6 +1262,7 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="attribute_offset_cache_yes">Offset slēpnis</string>
     <string name="attribute_offset_cache_no">Nav offset slēpnis</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Lai padarītu slēpņošanu vieglāku un slēpņotāju slinkāku.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
