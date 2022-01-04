@@ -1825,12 +1825,16 @@
     <string name="attribute_blind_people_no">Geen handicap: Blind</string>
     <string name="attribute_unknown">Onbekend attribuut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Gereedschap benodigd</string>
+    <string name="cat_tools">Uitrusting</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cachelocatie</string>
     <string name="cat_duration">Afstand / Duur</string>
     <string name="cat_surrounding">Rondom de cache</string>
     <string name="cat_permissions">Machtigingen</string>
+    <!-- cache attribute sources -->
+    <string name="attribute_source_all">Alle</string>
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Om geocaching makkelijker en gebruikers luier te maken.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
