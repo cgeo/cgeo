@@ -554,6 +554,7 @@
     <!-- export -->
     <!-- GC attributes -->
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Hëllef</string>
