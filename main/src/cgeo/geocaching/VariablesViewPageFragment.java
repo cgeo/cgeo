@@ -8,6 +8,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ShareUtils;
+import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableMap;
 
@@ -134,7 +135,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
     private void scanCache() {
         final List<String> toScan = new ArrayList<>();
-        toScan.add(activity.getCache().getDescription());
+        toScan.add(TextUtils.stripHtml(activity.getCache().getDescription()));
         toScan.add(activity.getCache().getHint());
         for (Waypoint w : activity.getCache().getWaypoints()) {
             toScan.add(w.getNote());
