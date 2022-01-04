@@ -1,5 +1,5 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Correcció: Habiliteu l'encaminament amb l'aplicació externa BRouter versió 1.6.3
+- Correcció: Utilitzeu un temps d'espera més curt per al mecanisme de desplaçament ràpid per a menys interferències amb altres elements de disseny
 
 ## 2021.12.24 Alliberament d'errors
 
