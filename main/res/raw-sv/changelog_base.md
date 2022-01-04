@@ -20,10 +20,11 @@
 
 ### Övrigt
 - Nyhet: Snabbladda geokoder från urklipp i huvudskärmens sökfält
-- Nyhet: Stöd för 5 loggmallar
+- New: Added support for user-defined log templates
 - Nyhet: Gör inställningar => Visa filtrerbara inställningar
 - New: Enable search in preferences
 - New: Added GC Wizard to useful apps list
+- New: Attributes filter: Allow selecting from which connectors attributes are shown
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
