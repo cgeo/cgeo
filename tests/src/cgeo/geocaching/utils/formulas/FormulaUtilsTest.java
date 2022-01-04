@@ -108,6 +108,11 @@ public class FormulaUtilsTest {
     }
 
     @Test
+    public void scanForFormulasNoBreakSpaceDoesNotSplitFormulas() {
+        assertScanFormula("X\u00A0+\u00A0Y", "X + Y");
+    }
+
+    @Test
     public void scanForFormulasGC96KBEFindsAllFormulas() {
         assertScanFormula("N 48° (F-H)/2-1.((J-H)*I-2*A+E+9) E 008° (A/G+12).(A+D)*B/2-6*C+49", "(F-H)/2-1", "((J-H)*I-2*A+E+9)", "(A/G+12)", "(A+D)*B/2-6*C+49");
     }
