@@ -1158,6 +1158,7 @@
     <string name="attribute_offset_cache_yes">Offset láda</string>
     <string name="attribute_offset_cache_no">Nem offset láda</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Az egyszerűbb ládázásért, a lustább játékosokért.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
