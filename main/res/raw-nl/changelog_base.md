@@ -20,12 +20,13 @@
 
 ### Overig
 - Nieuw: Snel laden van geocodes uit klembordtekst uit hoofdscherm zoekactie
-- Nieuw: Ondersteuning toegevoegd voor 5 log-sjablonen
+- Nieuw: Ondersteuning toegevoegd voor gebruiker-gedefinieerde log-sjablonen
 - Nieuw: Maak instellingen => Weergave instellingen filterbaar
 - Nieuw: Zoeken in voorkeuren Inschakelen
 - Nieuw: GC Wizard aan de lijst met nuttige apps toegevoegd
+- Nieuw: Attributen filter: Selectie van welke connectors attributen worden getoond toestaan
 - Wijziging: barcode scanner verwijderd van handige apps lijst en van het hoofdscherm
-- Wijziging: BRouter verwijderd uit de lijst met nuttige apps (je kunt nog steeds zowel externe als interne navigatie gebruiken)
+- Verandering: BRouter verwijderd uit de lijst met nuttige apps (je kunt nog steeds zowel externe als interne navigatie gebruiken)
 - Oplossing: Vermijd herhaalde update controles voor kaarten/routing tegels met interval=0
 - Oplossing: Optimaliseer ondersteuning voor automatisch invullen van wachtwoorden van externe wachtwoord apps in instellingen
 - Oplossing: Schakel tooltips in voor systemen die draaien op Android lager dan versie 8
