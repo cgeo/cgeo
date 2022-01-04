@@ -1056,6 +1056,7 @@
     <string name="attribute_offset_cache_yes">مخبئ تم إزاحته</string>
     <string name="attribute_offset_cache_no">لا يوجد مخبئ تم إزاحته</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">لجعل geocaching أسهل، لجعل المستخدمين أكثر كسلاً.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
