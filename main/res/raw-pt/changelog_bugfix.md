@@ -1,4 +1,5 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- Correcção: Reactivar o encaminhamento com a aplicação externa BRouter, na versão 1.6.3
+- Correcção: Use um tempo limite mais curto para o mecanismo de deslocação rápida para menos interferência com outros elementos do layout
 
 ## 2021.12.24 Pacote de correcção de erros
 

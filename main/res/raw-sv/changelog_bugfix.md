@@ -1,10 +1,11 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- Fix: Återaktivera routing med extern BRouter app i version 1.6.3
+- Fix: Använd en kortare timeout för snabb rullningsmekanism för mindre störningar med andra layoutelement
 
 ## 2021.12.24 Bugfix release
 
 - Fix: Aktivera uppgradering från OpenAndroMaps v4 till v5
 - Fix: Aktivera kontroller för karttema-uppdateringar
-- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+- Fix: Hoppa över rensning av cache för Mapsforge på grund av problem under vissa förutsättningar
 
 ## 2021.12.13 Bugfix release
 
