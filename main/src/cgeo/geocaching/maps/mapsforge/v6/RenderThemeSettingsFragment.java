@@ -1,6 +1,7 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
 import android.os.Bundle;
