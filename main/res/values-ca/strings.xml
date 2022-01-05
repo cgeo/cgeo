@@ -699,6 +699,8 @@
     <string name="init_template_title">Títol de la plantilla</string>
     <string name="init_template_text">Text de la plantilla</string>
     <string name="init_log_template">Plantilla de registre</string>
+    <string name="init_log_template_addnew">Afegeix una nova plantilla</string>
+    <string name="init_log_template_remove_confirm">Realment voleu eliminar la plantilla?</string>
     <string name="init_log_templates">Plantilles de registre</string>
     <string name="init_log_template_prefix">Plantilla:\u0020</string>
     <string name="init_log_template_missing_error">Cal proporcionar tant el títol com el text de la plantilla.</string>
@@ -1825,11 +1827,12 @@
     <string name="attribute_blind_people_no">No adequat a persones invidents</string>
     <string name="attribute_unknown">Atribut desconegut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Eines necessàries</string>
     <string name="cat_type">Tipus</string>
     <string name="cat_location">Ubicació del catxé</string>
     <string name="cat_duration">Distància / Durada</string>
     <string name="cat_surrounding">Al voltant del catxé</string>
+    <string name="cat_permissions">Permisos</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Per fer el geocatxing més fàcil, per fer els usuaris més dropos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2077,6 +2080,10 @@
     <string name="downloadmap_checking_for_updates">S\'estan cercant actualitzacions…</string>
     <string name="downloadtile_title">Falten dades d’encaminament</string>
     <string name="downloadtile_info">C: geo no pot calcular la ruta sol·licitada, ja que falten alguns fitxers de dades d’encaminament. Voleu descarregar les dades d’encaminament que falten?</string>
+    <string name="check_tiles_menu">Comproveu si falten dades d\'encaminament</string>
+    <string name="check_tiles_found">Les dades d\'encaminament ja estan presents</string>
+    <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:\n%1$s\n\nVoleu baixar aquests fitxers?%2$s</string>
+    <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per la regió escollida</string>
     <string name="tileupdate_info">Voleu comprovar si hi ha actualitzacions de fitxers de dades d’encaminament descarregats?</string>
     <string name="mapupdate_info">Voleu buscar actualitzacions de fitxers de mapes i temes?</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>

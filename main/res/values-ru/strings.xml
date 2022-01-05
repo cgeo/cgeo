@@ -1504,6 +1504,7 @@
     <string name="attribute_blind_people_yes">Подходит для слепых</string>
     <string name="attribute_blind_people_no">Не подходит для слепых</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

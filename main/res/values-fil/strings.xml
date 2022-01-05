@@ -1063,6 +1063,7 @@
     <string name="attribute_survey_marker_no">Hindi malapit sa Survey Marker</string>
     <string name="attribute_offset_cache_no">Walang Offset cache</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Upang gawing mas madali ang geocaching, upang gawin ang gumagamit na mas tamad.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

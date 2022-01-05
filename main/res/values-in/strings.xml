@@ -1059,6 +1059,7 @@
     <string name="attribute_offset_cache_yes">Cache offset</string>
     <string name="attribute_offset_cache_no">Tidak ada tembolok offset</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Untuk membuat geocaching lebih mudah, untuk membuat pengguna malas.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

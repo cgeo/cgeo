@@ -1796,11 +1796,11 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_blind_people_no">視覚障がい者に非対応</string>
     <string name="attribute_unknown">属性不明</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">道具が必要</string>
     <string name="cat_type">タイプ</string>
     <string name="cat_location">キャッシュの場所</string>
     <string name="cat_duration">距離/時間</string>
     <string name="cat_surrounding">キャッシュ周辺</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

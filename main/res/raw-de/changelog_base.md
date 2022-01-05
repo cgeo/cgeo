@@ -20,13 +20,15 @@
 
 ### Sonstiges
 - Neu: Übernahme von Geocodes aus der Zwischenablage in Suche auf dem Startbildschirm
-- Neu: Unterstützung für 5 Log-Vorlagen hinzugefügt
+- New: Added support for user-defined log templates
 - Neu: Übersicht der Einstellungen ist nun filterbar
+- Neu: Suche in den Einstellungen
 - Neu: GC Wizard zur Liste der nützlichen Apps hinzugefügt
+- New: Attributes filter: Allow selecting from which connectors attributes are shown
 - Änderung: Barcode-Scanner aus der Liste der nützlichen Apps und aus dem Hauptbildschirm entfernt
 - Änderung: BRouter aus Liste nützlicher Apps entfernt (du kannst weiterhin sowohl die externe als auch die interne Navigation verwenden)
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
-- Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort--Apps in den Einstellungen
+- Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort-Apps in den Einstellungen
 - Korrektur: Aktiviere Tooltips für Systeme, die unter Android-Versionen kleiner 8 laufen
 - Einstellungsmenüs geändert, um den aktuellen Android-Spezifikationen zu entsprechen
 - MapsWithMe API aktualisiert

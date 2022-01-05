@@ -1547,6 +1547,7 @@
     <string name="attribute_trackables_yes">Egnet til at indeholde trackables</string>
     <string name="attribute_unknown">Ukendt attribut</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Gør geocaching nemmere, gør brugere mere dovne.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

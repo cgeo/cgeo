@@ -1528,6 +1528,7 @@
     <string name="attribute_historic_yes">廢墟</string>
     <string name="attribute_historic_no">無廢墟</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">支援</string>

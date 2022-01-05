@@ -725,6 +725,7 @@
     <string name="export_modifiedcoords_error">上传失败</string>
     <!-- GC attributes -->
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <!-- status (used via string based resource loading) -->

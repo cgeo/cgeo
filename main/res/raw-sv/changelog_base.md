@@ -4,29 +4,31 @@
 ### Karta
 - Fix: Vid inläsning av GPX-filer med flera spår visas de som separata, oanslutna spår
 - Ändring: Aktivera automatiskt spårvisning vid inläsning av en GPX-spårfil
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
+- Nyhet: D/T-symboler för cache-ikoner (valfritt)
+- Nyhet: Alternativ för att kontrollera om ruttdata saknas för nuvarande vy
 
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher
 - Nyhet: Attribut-översikt (se Hantera cacher => Attribut-översikt)
 - Nyhet: Lägg till import från bokmärkeslistor (endast GC premium)
 - Nyhet: Invertera sorteringsordning med långklick på sorteringsfältet
-- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
+- Förändring: Gör också automatisk sortering efter distans för listor som innehåller cacheserier med mer än 50 cacher (upp till 500)
 
 ### Cachedetaljer
 - Nyhet: Skicka aktuella cachekoordinater till geochecker (om detta stöds av geochecker)
-- New: Colored attribute icons (following attribute groups)
+- Nyhet: Färgade attributikoner (följande attributgrupper)
 
 ### Övrigt
 - Nyhet: Snabbladda geokoder från urklipp i huvudskärmens sökfält
-- Nyhet: Stöd för 5 loggmallar
+- New: Added support for user-defined log templates
 - Nyhet: Gör inställningar => Visa filtrerbara inställningar
-- Nyhet: Lagt till GC-guiden till listan över användbara appar
-- Förändring: Tog bort streckkodsläsare från listan över användbara appar och från huvudskärmen
-- Förändring: Tog bort BRouter från listan över användbara appar (du kan fortfarande använda både extern och intern navigering)
-- Fix: Undvik upprepade uppdateringskontroller för kartor/ruttfiler med intervall=0
-- Fix: Optimera stöd för autoifyllnad av lösenord från externa lösenords-appar i inställningar
+- New: Enable search in preferences
+- New: Added GC Wizard to useful apps list
+- New: Attributes filter: Allow selecting from which connectors attributes are shown
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API

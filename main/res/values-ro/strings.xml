@@ -1124,6 +1124,7 @@
     <string name="attribute_offset_cache_yes">Cutie decalată</string>
     <string name="attribute_offset_cache_no">Nu este geocutie decalată</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Pentru geocaching mai uşor, pentru căutători mai leneşi.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

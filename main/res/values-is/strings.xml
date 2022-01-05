@@ -642,6 +642,7 @@
     <string name="attribute_food_no">Enginn matur nálægt</string>
     <string name="attribute_no_gps_no">Með GPS</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
     <string name="support_title">Aðstoð</string>

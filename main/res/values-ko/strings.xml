@@ -1802,11 +1802,11 @@
     <string name="attribute_blind_people_no">장애 아님: 장님</string>
     <string name="attribute_unknown">알 수 없는 속성</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">도구 필요</string>
     <string name="cat_type">유형</string>
     <string name="cat_location">캐시 위치</string>
     <string name="cat_duration">거리 / 시간</string>
     <string name="cat_surrounding">캐시 주변</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">지오캐싱을 쉽게, 사용자를 편하게</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

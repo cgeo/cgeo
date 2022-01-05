@@ -698,6 +698,8 @@
     <string name="init_template_title">Titolo del modello</string>
     <string name="init_template_text">Testo del modello</string>
     <string name="init_log_template">Modello Di Log</string>
+    <string name="init_log_template_addnew">Aggiungi un nuovo modello</string>
+    <string name="init_log_template_remove_confirm">Vuoi davvero cancellare questo modello?</string>
     <string name="init_log_templates">Modelli Di Log</string>
     <string name="init_log_template_prefix">Modello:\u0020</string>
     <string name="init_log_template_missing_error">Sia il titolo del modello che il testo devono essere forniti.</string>
@@ -1823,11 +1825,12 @@
     <string name="attribute_blind_people_no">Handicap: non adatto ai ciechi</string>
     <string name="attribute_unknown">Attributo sconosciuto</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Strumenti necessari</string>
     <string name="cat_type">Tipo</string>
     <string name="cat_location">Posizione del cache</string>
     <string name="cat_duration">Distanza / Durata</string>
     <string name="cat_surrounding">Intorno al cache</string>
+    <string name="cat_permissions">Autorizzazioni</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Per rendere il geocaching più facile e gli utenti più pigri.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2080,6 +2083,10 @@
     <string name="downloadmap_checking_for_updates">Controllo aggiornamenti…</string>
     <string name="downloadtile_title">Dati di navigazione mancanti</string>
     <string name="downloadtile_info">c:geo non può calcolare il percorso richiesto in quanto manca un file di navigazione. Vuoi scaricare i dati di navigazione mancanti?</string>
+    <string name="check_tiles_menu">Controlla i dati di routing mancanti</string>
+    <string name="check_tiles_found">Dati di routing già presenti</string>
+    <string name="check_tiles_missing">Trovati dati di routing mancanti:\n%1$s\n\nVuoi scaricare questi file?%2$s</string>
+    <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
     <string name="tileupdate_info">Vuoi controllare gli aggiornamenti dei file di navigazione scaricati?</string>
     <string name="mapupdate_info">Vuoi controllare gli aggiornamenti dei file di mappa e tema?</string>
     <string name="no_updates_found">Nessun aggiornamento trovato</string>

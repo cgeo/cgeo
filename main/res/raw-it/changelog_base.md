@@ -20,13 +20,15 @@
 
 ### Altro
 - Novità: Carica rapidamente i geocode dal testo degli appunti nella ricerca nella schermata principale
-- Nuovo: Aggiunto il supporto per 5 modelli di log
+- New: Added support for user-defined log templates
 - Novità: Rendi le Impostazioni => Visualizza Impostazioni filtrabile
+- Nuovo: abilita la ricerca nelle preferenze
 - Novità: Aggiunto GC Wizard all'elenco delle app utili
-- Modifica: Rimosso lo scanner di codici a barre dall'elenco delle app utili e dalla schermata principale
-- Modifica: Rimosso BRouter dall'elenco delle app utili (puoi ancora usare sia la navigazione esterna che interna)
-- Corretto: Evita i controlli ripetuti degli aggiornamenti per mappe/routing con intervallo=0
-- Corretto: ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
-- Corretto: Abilita suggerimenti per sistemi in esecuzione su Android sotto la versione 8
-- Impostazioni ripristinate per soddisfare le specifiche correnti di Android
-- API di MapsWithMe aggiornata
+- New: Attributes filter: Allow selecting from which connectors attributes are shown
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API

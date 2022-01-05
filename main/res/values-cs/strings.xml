@@ -1855,12 +1855,12 @@
     <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
     <string name="attribute_unknown">Neznámý atribut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Potřebné nástroje</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Umístění kešky</string>
     <string name="cat_duration">Vzdálenost / Doba trvání</string>
     <string name="cat_surrounding">Kolem kešky</string>
     <string name="cat_permissions">Oprávnění</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

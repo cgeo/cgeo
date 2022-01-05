@@ -1722,11 +1722,11 @@
     <string name="attribute_blind_people_yes">Handikap: Blind</string>
     <string name="attribute_blind_people_no">Ikke handicap: Blind</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Verktøy kreves</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cacheplassering</string>
     <string name="cat_duration">Avstand / Varighet</string>
     <string name="cat_surrounding">Rundt cachen</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">For å gjøre geocaching enklere og brukerne latere.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

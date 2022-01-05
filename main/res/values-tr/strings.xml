@@ -1796,6 +1796,7 @@
     <string name="attribute_blind_people_yes">Görme engelli için uygun değil</string>
     <string name="attribute_blind_people_no">Görme engelli için uygun</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

@@ -704,6 +704,7 @@
     <string name="init_log_template_prefix">Mall:\u0020</string>
     <string name="init_log_template_missing_error">Både mallens namn och text måste anges.</string>
     <string name="init_template_help">Markörer - som [NAME] - fylls med den angivna texten när mallen används.</string>
+    <string name="init_signature_template_button">Infoga mall</string>
     <string name="init_signature_template_date">Datum</string>
     <string name="init_signature_template_time">Tid</string>
     <string name="init_signature_template_datetime">Datum &amp; Tid</string>
@@ -746,6 +747,9 @@
     <string name="init_useInternalRouting">Använd intern navigering</string>
     <string name="init_summary_useInternalRouting">Använd c:geos interna routing för att kunna använda automatisk hämtning av routingsdata och andra funktioner</string>
     <string name="init_bigSmileysOnMap">Stora ikoner</string>
+    <string name="init_summary_bigSmileysOnMap">Om aktiverad, kommer symboler som \'funna smiley\' eller \'korrigerade koordinater\' markören visas förstorade på kartan istället för ikonen för cachetypen.</string>
+    <string name="init_dtMarkerOnCacheIcon">D/T-gradering på cache-ikoner</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Visa en markör för svårighet- (vänster) och terränggradering (höger) på cache-markörer i övre högra hörnet (markören för \"sparade\" flyttas till mitten).</string>
     <string name="init_global_wp_extraction_disable">Inaktivera waypoint-extrahering</string>
     <string name="init_summary_global_wp_extraction_disable">Inaktivera extrahering av data från vägpunkter i personliga anteckningar globalt. Det kan fortfarande aktiveras för enskilda cacher genom att inaktivera kryssrutan under den personliga anteckningen på cachen.</string>
     <string name="init_prevent_cache_note_merge">Skriv över personlig cacheanteckning</string>
@@ -1821,12 +1825,12 @@
     <string name="attribute_blind_people_no">Inget handikapp: Blind</string>
     <string name="attribute_unknown">Okänt attribut</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Verktyg krävs</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Cache-plats</string>
     <string name="cat_duration">Avstånd / varaktighet</string>
     <string name="cat_surrounding">Runt cachen</string>
     <string name="cat_permissions">Rättigheter</string>
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">För att göra geocaching enklare, att göra användarna latare.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2074,6 +2078,10 @@
     <string name="downloadmap_checking_for_updates">Söker efter uppdateringar…</string>
     <string name="downloadtile_title">Ruttdata saknas</string>
     <string name="downloadtile_info">c:geo kan inte beräkna den begärda rutten eftersom det saknas datafil med rutter. Vill du ladda ner saknade ruttdata?</string>
+    <string name="check_tiles_menu">Sök efter saknad ruttberäkningsdata</string>
+    <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
+    <string name="check_tiles_missing">Ruttberäkningsdata saknas:\n%1$s\n\nVill du ladda ner de filer som behövs?%2$s</string>
+    <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgänglig för den valda regionen</string>
     <string name="tileupdate_info">Vill du söka efter uppdateringar till nedladdade rutt-datafiler?</string>
     <string name="mapupdate_info">Vill du söka efter uppdateringar av karta och temafiler?</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>

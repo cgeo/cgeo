@@ -1825,12 +1825,16 @@
     <string name="attribute_blind_people_no">Όχι αναπηρία: Τυφλός</string>
     <string name="attribute_unknown">Άγνωστο χαρακτηριστικό</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Απαιτούνται εργαλεία</string>
+    <string name="cat_tools">Εξοπλισμός</string>
     <string name="cat_type">Τύπος</string>
     <string name="cat_location">Τοποθεσία κρύπτης</string>
     <string name="cat_duration">Απόσταση / Διάρκεια</string>
     <string name="cat_surrounding">Γύρω από την κρύπτη</string>
     <string name="cat_permissions">\'Αδειες</string>
+    <!-- cache attribute sources -->
+    <string name="attribute_source_all">Όλα</string>
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Για να γίνουν οι γεωκρύπτες πιο εύκολες και οι χρήστες πιο τεμπέληδες.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->

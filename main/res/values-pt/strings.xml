@@ -698,6 +698,8 @@
     <string name="init_template_title">Título do Modelo</string>
     <string name="init_template_text">Texto do Modelo</string>
     <string name="init_log_template">Modelo de Registo</string>
+    <string name="init_log_template_addnew">Adicionar um novo modelo</string>
+    <string name="init_log_template_remove_confirm">Tem a certeza que quer eliminar este modelo?</string>
     <string name="init_log_templates">Modelos de Registo</string>
     <string name="init_log_template_prefix">Modelo:\u0020</string>
     <string name="init_log_template_missing_error">O título e o texto do modelo precisam ser fornecidos.</string>
@@ -1823,11 +1825,16 @@
     <string name="attribute_blind_people_no">Não é adequada a pessoas cegas</string>
     <string name="attribute_unknown">Atributo desconhecido</string>
     <!-- cache attribute categories -->
-    <string name="cat_tools">Ferramentas necessárias</string>
+    <string name="cat_tools">Equipamento</string>
     <string name="cat_type">Tipo</string>
     <string name="cat_location">Localização da cache</string>
     <string name="cat_duration">Distância / Duração</string>
     <string name="cat_surrounding">Em redor da cache</string>
+    <string name="cat_permissions">Permissões</string>
+    <!-- cache attribute sources -->
+    <string name="attribute_source_all">Todas</string>
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Para tornar o geocaching mais fácil, para tornar os utilizadores mais preguiçosos.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2075,6 +2082,10 @@
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
     <string name="downloadtile_title">Dados de encaminhamento em falta</string>
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
+    <string name="check_tiles_menu">Verificar dados de encaminhamento em falta</string>
+    <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
+    <string name="check_tiles_missing">Foram encontrados dados de encaminhamento em falta:\n%1$s\n\nDeseja transferir esses ficheiros?%2$s</string>
+    <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
     <string name="tileupdate_info">Deseja verificar se há actualizações para os ficheiros de dados de encaminhamento transferidos?</string>
     <string name="mapupdate_info">Deseja verificar por actualizações dos ficheiros 
 do mapa e dos temas?</string>

@@ -1064,6 +1064,7 @@
     <string name="attribute_offset_cache_yes">Ang hindi ginalaw na cache</string>
     <string name="attribute_offset_cache_no">Walang ginalaw na cache</string>
     <!-- cache attribute categories -->
+    <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">Para magkaroon ng madaling geocaching, para magkaroon ng kasinungalingan gumagamit.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
