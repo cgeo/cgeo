@@ -1,5 +1,5 @@
 - Korjaa: Uudelleenmahdollista reititys ulkoisella BRouter-sovelluksella versiossa 1.6.3
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Korjaus: Käytä lyhyempää aikakatkaisua nopean vierityksen mekanismille, jotta muille asettelun elementeille aiheutuu vähemmän häiriötä
 
 ## 2021.12.24 Viankorjausversio
 
