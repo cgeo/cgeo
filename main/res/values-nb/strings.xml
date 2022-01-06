@@ -2012,4 +2012,8 @@
     <string name="back">Tilbake</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Velg alle</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>
