@@ -6,6 +6,7 @@
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
 - Neu: D/T-Markierungen für Cache-Symbole (optional)
 - Neu: Funktion, um nach fehlenden Routingdaten für den aktuellen Bildschirmausschnitt zu suchen
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
