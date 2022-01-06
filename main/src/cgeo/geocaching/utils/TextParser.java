@@ -80,6 +80,12 @@ public final class TextParser {
         }
     }
 
+    public void nextNonWhitespace() {
+        while (Character.isWhitespace(ch)) {
+            next();
+        }
+    }
+
     /** Returns true if end of parseable expression was reached */
     public boolean eof() {
         return ch == 0;
@@ -98,9 +104,7 @@ public final class TextParser {
     }
 
     public boolean eat(final int charToEat) {
-        while (Character.isWhitespace(ch)) {
-            next();
-        }
+        nextNonWhitespace();
         if (ch == charToEat) {
             next();
             return true;
