@@ -2160,4 +2160,8 @@
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>
