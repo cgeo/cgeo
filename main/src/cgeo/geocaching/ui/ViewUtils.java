@@ -455,7 +455,7 @@ public class ViewUtils {
 
     /** traverses a viewtree starting from "root". For each view satisfying "condition", the "callback" is called. If "callback" returns false, then treewalk is aborted */
     public static boolean walkViewTree(final View root, final Predicate<View> callback, @Nullable final Predicate<View> condition) {
-        if ((condition == null || condition.test(root)) && callback.test(root)) {
+        if ((condition == null || condition.test(root)) && !callback.test(root)) {
             return false;
         }
         if (root instanceof ViewGroup) {
@@ -468,5 +468,25 @@ public class ViewUtils {
             }
         }
         return true;
+    }
+
+    public static View nextView(final View start, final Predicate<View> rootCondition, final Predicate<View> condition) {
+        final View root = getParent(start, rootCondition);
+        final boolean[] foundStart = new boolean[] { false };
+        final View[] nextView = new View[]{ null };
+        ViewUtils.walkViewTree(root, v -> {
+            if (foundStart[0]) {
+                // we found the start view just before, so this is the next view
+                nextView[0] = v;
+                return false;
+            } else if (v == start) {
+                //we found the start view, mark this
+                foundStart[0] = true;
+            }
+            return true;
+        }, condition);
+
+        return nextView[0];
+
     }
 }

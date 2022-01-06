@@ -1,0 +1,25 @@
+<merge xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ui.CalculatedCoordinateInputGuideView">
+
+
+    <androidx.gridlayout.widget.GridLayout
+        android:id="@+id/cc_guide_grid"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
+            android:id="@+id/cc_guide_value_layout">
+            <EditText
+                android:id="@+id/cc_guide_value"
+                style="@style/textinput_embedded"
+                android:textSize="@dimen/textSize_detailsPrimary"
+                android:singleLine="true"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+</merge>

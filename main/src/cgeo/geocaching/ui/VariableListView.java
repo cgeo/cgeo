@@ -468,23 +468,10 @@ public class VariableListView extends LinearLayout {
                 @Nullable
                 @Override
                 public View onInterceptFocusSearch(@NonNull final View focused, final int direction) {
-                    final View recView = ViewUtils.getParent(focused, v -> v instanceof RecyclerView);
-                    final boolean[] foundFocused = new boolean[] { false };
-                    final View[] nextView = new View[]{ null };
-                    ViewUtils.walkViewTree(recView, v -> {
-                        if (foundFocused[0]) {
-                            // we found the currently focused view just before, so this is the next view
-                            nextView[0] = v;
-                            return false;
-                        } else if (v == focused) {
-                            //we found the currently focused view, mark this
-                            foundFocused[0] = true;
-                        }
-                        return true;
-                    }, v -> v instanceof EditText);
-
-                    if (nextView[0] != null) {
-                        return nextView[0];
+                    final View nextView = ViewUtils.nextView(focused, v -> v instanceof RecyclerView,
+                        v -> v instanceof EditText);
+                    if (nextView != null) {
+                        return nextView;
                     }
                     return super.onInterceptFocusSearch(focused, direction);
                 }

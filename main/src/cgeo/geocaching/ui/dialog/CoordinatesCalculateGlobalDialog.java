@@ -15,14 +15,15 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
+import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
 import android.app.Activity;
 import android.app.Dialog;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.text.InputFilter;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 import android.view.LayoutInflater;
@@ -35,7 +36,6 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
@@ -151,6 +151,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
 
         binding = CoordinatescalculateglobalDialogBinding.inflate(inflater, container, false);
         binding.NonPlainFormat.setVisibility(View.GONE);
+        binding.ccSwitchGuided.setChecked(false);
+        binding.ccGuidedFormat.setVisibility(View.GONE);
 
         //handle dialog title
         final Dialog dialog = getDialog();
@@ -182,11 +184,11 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             dismiss();
         });
 
-        displayType.setSpinner(binding.spinnerCoordinateFormats)
-            .setValues(Arrays.asList(CalculatedCoordinateType.values()))
+        displayType.setSpinner(binding.ccGuidedFormat)
+            .setValues(CollectionStream.of(CalculatedCoordinateType.values()).filter(t -> PLAIN != t).toList())
             .setDisplayMapper(CalculatedCoordinateType::toUserDisplayableString)
             .set(calcCoord.getType())
-            .setChangeListener(t -> refreshType(false));
+            .setChangeListener(t -> refreshType(t, false));
 
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
@@ -201,7 +203,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
 
         binding.notesText.setText(notes);
 
-        binding.PlainLat.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.PlainLat.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLatitudePattern(s.toString());
             checkAddVariables(calcCoord.getNeededVars());
@@ -209,7 +210,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         }));
         binding.PlainLat.setText(calcCoord.getLatitudePattern());
 
-        binding.PlainLon.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
         binding.PlainLon.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
             calcCoord.setLongitudePattern(s.toString());
             checkAddVariables(calcCoord.getNeededVars());
@@ -224,7 +224,16 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             updateView();
         });
 
-        refreshType(true);
+        binding.ccSwitchGuided.setOnCheckedChangeListener((v, c) -> {
+            if (!c) {
+                refreshType(PLAIN, false);
+            } else {
+                final CalculatedCoordinateType guessType = binding.NonPlainFormat.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
+                refreshType(guessType == null ? displayType.get() : guessType, false);
+            }
+        });
+
+        refreshType(calcCoord.getType(), true);
 
         return binding.getRoot();
     }
@@ -236,8 +245,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    private void refreshType(final boolean initialLoad) {
-        final CalculatedCoordinateType newType = displayType.get();
+    private void refreshType(final CalculatedCoordinateType newType, final boolean initialLoad) {
         if (!initialLoad && calcCoord.getType() == newType) {
             return;
         }
@@ -250,10 +258,18 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         if (currentGp == null) {
             currentGp = geopoint;
         }
-        binding.PlainFormat.setVisibility(newType == CalculatedCoordinateType.PLAIN ? View.VISIBLE : View.GONE);
-        binding.NonPlainFormat.setVisibility(newType != CalculatedCoordinateType.PLAIN ? View.VISIBLE : View.GONE);
+        binding.PlainFormat.setVisibility(newType == PLAIN ? View.VISIBLE : View.GONE);
+        binding.NonPlainFormat.setVisibility(newType != PLAIN ? View.VISIBLE : View.GONE);
+        if (newType == PLAIN) {
+            binding.NonPlainFormat.unmarkButtons();
+        }
+        binding.ccGuidedFormat.setVisibility(newType == PLAIN ? View.GONE : View.VISIBLE);
+        binding.ccSwitchGuided.setChecked(newType != PLAIN);
+        if (newType != PLAIN) {
+            displayType.set(newType);
+        }
 
-        if (newType == CalculatedCoordinateType.PLAIN) {
+        if (newType == PLAIN) {
             if (initialLoad) {
                 binding.PlainLat.setText(calcCoord.getLatitudePattern() == null ? "" : calcCoord.getLatitudePattern());
                 binding.PlainLon.setText(calcCoord.getLongitudePattern() == null ? "" : calcCoord.getLongitudePattern());
@@ -263,8 +279,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
                 binding.PlainLon.setText(coords.second);
             }
         } else {
-            binding.NonPlainFormat.setData(newType,
-                initialLoad ? calcCoord.getLatitudePattern() : null, initialLoad ? calcCoord.getLongitudePattern() : null, currentGp);
+            binding.NonPlainFormat.setData(newType, calcCoord.getLatitudePattern(),  calcCoord.getLongitudePattern(), currentGp);
         }
     }
 
