@@ -2165,4 +2165,14 @@
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
     <string name="touch_again_to_exit">Appuyez à nouveau pour quitter</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_info_board">panneau d\'informations</string>
+    <string name="rtl_picnic_site">lieu de pique-nique</string>
+    <string name="rtl_playground">terrain de jeux</string>
+    <string name="rtl_playground_private">terrain de jeu privé</string>
+    <string name="rtl_shelter_picnic">abri de pique-nique</string>
+    <string name="rtl_parking_restricted">stationnement limité</string>
 </resources>
