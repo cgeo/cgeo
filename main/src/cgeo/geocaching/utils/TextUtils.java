@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
@@ -382,19 +383,42 @@ public final class TextUtils {
      */
     @Nullable
     public static String parseNextDelimitedValue(@NonNull final String text, final char delimiterChar, final char escapeChar) {
-        final String quotedDelim = "\\" + delimiterChar;
-        final String quotedEsc = "\\" + escapeChar;
 
-        final Pattern findNextPattern =
-                compilePattern("(?s)" + quotedDelim +
-                        "((?:" + quotedEsc + ".|" +
-                        "[^" + quotedEsc + quotedDelim + "]++)*)" + quotedDelim);
-
-        final Matcher m = findNextPattern.matcher(text);
-        if (m.find()) {
-            return compilePattern(quotedEsc + "(.)").matcher(m.group(1)).replaceAll("$1");
+        final TextParser tp = new TextParser(text);
+        if (tp.parseUntil(delimiterChar) == null) {
+            return null;
         }
-        return null;
+        return tp.parseUntil(c -> c == delimiterChar, false, delimiterChar == escapeChar ? null : escapeChar, delimiterChar == escapeChar);
+    }
+
+    @NonNull
+    public static String parseUntil(@NonNull final String text, final int startIdx, final Set<Character> delimiterChars, final char escapeChar) {
+        final StringBuilder result = new StringBuilder();
+        int idx = Math.max(startIdx, 0);
+        boolean escape = false;
+        while (idx < text.length()) {
+            final char c = text.charAt(idx);
+            if (escapeChar == c) {
+                if (escape) {
+                    result.append(c);
+                    escape = false;
+                } else {
+                    escape = true;
+                }
+            } else if (delimiterChars.contains(c)) {
+                if (escape) {
+                    result.append(c);
+                    escape = false;
+                } else {
+                    return result.toString();
+                }
+            } else {
+                escape = false;
+                result.append(c);
+            }
+            idx++;
+        }
+        return result.toString();
     }
 
     /**
@@ -404,9 +428,8 @@ public final class TextUtils {
      */
     @NonNull
     public static String createDelimitedValue(@NonNull final String text, final char delimiterChar, final char escapeChar) {
-        final String quotedDelim = "\\" + delimiterChar;
-        final String quotedEsc = "\\" + escapeChar;
-        return delimiterChar + compilePattern("([" + quotedDelim + quotedEsc + "])").matcher(text).replaceAll(quotedEsc + "$1") + delimiterChar;
+
+        return delimiterChar + TextParser.escape(text, c -> c == delimiterChar, escapeChar) + delimiterChar;
     }
 
     /**

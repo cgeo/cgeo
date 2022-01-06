@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -22,7 +23,7 @@ public class DegreeFormula {
     private static final Set<Integer> ALL_CHARS = new HashSet<>();
     private static final Set<Integer> NEG_CHARS = new HashSet<>();
 
-    private static final Formula.StopCharSet scs = Formula.StopCharSet.createFor(" °'\"");
+    private static final KeyableCharSet scs = KeyableCharSet.createFor(" °'\"");
 
     static {
         for (char c : new char[]{'N', 'n', 'E', 'e', 'O', 'o'}) {
