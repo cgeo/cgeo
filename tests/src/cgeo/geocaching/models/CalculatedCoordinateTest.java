@@ -11,7 +11,7 @@ public class CalculatedCoordinateTest {
 
     @Test
     public void basicCalculations() {
-        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig("PLAIN::N48 12.A45::E13 8.67B");
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig("{CC|N48 12.A45|E13 8.67B}");
         assertThat(cc.getLatitudePattern()).isEqualTo("N48 12.A45");
         assertThat(cc.getLongitudePattern()).isEqualTo("E13 8.67B");
         assertThat(cc.getLatitudeString(x -> Value.of(3))).isEqualTo("N48°12.345'");
@@ -23,11 +23,11 @@ public class CalculatedCoordinateTest {
 
     @Test
     public void northSouthEastWest() {
-        CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig("PLAIN::N48.123::W13.456");
+        CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig("{CC|N48.123|W13.456}");
         assertThat(cc.calculateGeopoint(null).getLatitude()).isEqualTo(48.123);
         assertThat(cc.calculateGeopoint(null).getLongitude()).isEqualTo(-13.456);
 
-        cc = CalculatedCoordinate.createFromConfig("PLAIN::S48.123::E13.456");
+        cc = CalculatedCoordinate.createFromConfig("{CC|S48.123|E13.456}");
         assertThat(cc.calculateGeopoint(null).getLatitude()).isEqualTo(-48.123);
         assertThat(cc.calculateGeopoint(null).getLongitude()).isEqualTo(13.456);
     }

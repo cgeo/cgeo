@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.UNEXPECTED_TOKEN;
@@ -195,7 +196,7 @@ public class FormulaTest {
     }
 
     private void assertFormulaPart(final String formulaString, final int startPos, final String stopChars, final String expectedValue, final String expectedFormPart) {
-        final Formula f = Formula.compile(formulaString, startPos, Formula.StopCharSet.createFor(stopChars));
+        final Formula f = Formula.compile(formulaString, startPos, KeyableCharSet.createFor(stopChars));
         assertThat(f.evaluate().getAsString()).isEqualTo(expectedValue);
         assertThat(f.getExpression()).isEqualTo(expectedFormPart);
     }

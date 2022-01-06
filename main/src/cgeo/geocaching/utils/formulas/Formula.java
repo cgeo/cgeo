@@ -1,6 +1,8 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
+import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
@@ -67,48 +69,9 @@ public final class Formula {
     private String expression;
     private FormulaNode compiledExpression;
 
-
-    //needed only during parsing/compilation
-    private int pos = -1;
-    private int ch;
+    private TextParser p;
     private int level;
-    private String rawExpression; //the expression as given to compiler (includes e.g. chars before startPos and after stopChars)
-    private Func1<Character, Boolean> stopChecker;
-
-    private int markedPos = -1;
-    private int markedCh = ch;
     private int markedLevel;
-
-    public static class StopCharSet {
-
-        public static final StopCharSet EMPTY = createFor(null);
-
-        private final Set<Character> stopCharSet;
-        private final String stopCharString;
-
-        private StopCharSet(final String stopCharString) {
-            this.stopCharString = stopCharString == null ? "" : stopCharString;
-            this.stopCharSet = new HashSet<>();
-            if (stopCharString != null) {
-                for (char stopChar : stopCharString.toCharArray()) {
-                    this.stopCharSet.add(stopChar);
-                }
-            }
-        }
-
-        public static StopCharSet createFor(final String stopChars) {
-            return new StopCharSet(stopChars);
-        }
-
-        public String getKey() {
-            return stopCharString;
-        }
-
-        public boolean contains(final char c) {
-            return stopCharSet.contains(c);
-        }
-
-    }
 
     public static Object createErrorSpan() {
         return new ForegroundColorSpan(Color.RED);
@@ -334,8 +297,8 @@ public final class Formula {
         return compile(expression, 0, null);
     }
 
-    public static Formula compile(final String expression, final int startPos, final StopCharSet stopChars) {
-        final StopCharSet stopCharSet = stopChars == null ? StopCharSet.EMPTY : stopChars;
+    public static Formula compile(final String expression, final int startPos, final KeyableCharSet stopChars) {
+        final KeyableCharSet stopCharSet = stopChars == null ? KeyableCharSet.EMPTY : stopChars;
         final String cacheKey = expression + "-" + startPos + "-" + stopCharSet.getKey();
         final Pair<Formula, FormulaException> entry = FORMULA_CACHE.get(cacheKey);
         if (entry != null) {
@@ -364,7 +327,7 @@ public final class Formula {
             return f;
         } catch (FormulaException ce) {
             ce.setExpression(expression);
-            ce.setParsingContext(f.ch, f.pos);
+            ce.setParsingContext(f.p.ch(), f.p.pos());
             throw ce;
         }
     }
@@ -384,14 +347,6 @@ public final class Formula {
 
     public String getExpression() {
         return expression;
-    }
-
-    protected char currChar() {
-        return (char) ch;
-    }
-
-    protected int currPos() {
-        return pos;
     }
 
     public Value evaluate(final Object ... vars) {
@@ -444,51 +399,30 @@ public final class Formula {
     }
 
     protected void doCompile(final String rawExpression, final int startPos, final Func1<Character, Boolean> stopChecker) throws FormulaException {
-        this.rawExpression = rawExpression;
-        this.stopChecker = stopChecker;
+        this.p = new TextParser(rawExpression, stopChecker == null ? null :
+            (c) -> level == 0 && stopChecker.call(c));
+
+        this.p.setPos(startPos);
         this.level = 0;
-        this.pos = startPos - 1; //important to set before the EMPTY_FORMULA check: generates better error message for MultiFormulas
         if (StringUtils.isBlank(rawExpression) || startPos >= rawExpression.length()) {
             throw new FormulaException(EMPTY_FORMULA);
         }
-        nextChar();
         final FormulaNode x = parseExpression();
-        if (ch > -1) {
+        if (!p.eof()) {
             throw new FormulaException(UNEXPECTED_TOKEN, "EOF");
         }
-        this.expression = rawExpression.substring(startPos, pos);
+        this.expression = rawExpression.substring(startPos, p.pos());
         this.compiledExpression = x;
     }
 
-    private void nextChar() {
-        ch = (++pos < rawExpression.length()) ? rawExpression.charAt(pos) : -1;
-        if (level == 0 && stopChecker != null && stopChecker.call((char) ch)) {
-            //stop parsing
-            ch = -1;
-        }
-    }
-
-    private void mark() {
-        markedCh = ch;
-        markedPos = pos;
+    private void markParser() {
+        p.mark();
         markedLevel = level;
     }
 
-    private void reset() {
-        ch = markedCh;
-        pos = markedPos;
+    private void resetParser() {
+        p.reset();
         level = markedLevel;
-    }
-
-    private boolean eat(final int charToEat) {
-        while (Character.isWhitespace(ch)) {
-            nextChar();
-        }
-        if (ch == charToEat) {
-            nextChar();
-            return true;
-        }
-        return false;
     }
 
     private FormulaNode parseExpression() {
@@ -497,12 +431,12 @@ public final class Formula {
 
     private FormulaNode parseRelationalEquality() {
         final FormulaNode x = parsePlusMinus();
-        if (ch == '<' || ch == '>' || ch == '=') {
+        if (p.chIsIn('<', '>', '=')) {
             //handle <, >, <=, >=, ==, <>
-            final int firstChar = ch;
-            nextChar();
-            final boolean nextIsEqual = eat('=');
-            final boolean nextIsGreaterThan = eat('>');
+            final int firstChar = p.chInt();
+            p.next();
+            final boolean nextIsEqual = p.eat('=');
+            final boolean nextIsGreaterThan = p.eat('>');
             if (firstChar == '=' && !nextIsEqual) {
                 throw new FormulaException(UNEXPECTED_TOKEN, "=");
             }
@@ -550,9 +484,9 @@ public final class Formula {
 
         FormulaNode x = parseMultiplyDivision();
         for (;;) {
-            if (eat('+')) {
+            if (p.eat('+')) {
                 x = createNumeric("+", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
-            } else if (eat('-') || eat('—')) { //those are two different chars
+            } else if (p.eat('-') || p.eat('—')) { //those are two different chars
                 x = createNumeric("-", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) - nums.getAsDouble(1)));
             } else {
                 return x;
@@ -563,11 +497,11 @@ public final class Formula {
     private FormulaNode parseMultiplyDivision() {
         FormulaNode x = parseFactor();
         for (;;) {
-            if (eat('*') || eat('•')) {
+            if (p.eat('*') || p.eat('•')) {
                 x = createNumeric("*", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
-            } else if (eat('/') || eat(':') || eat('÷')) {
+            } else if (p.eat('/') || p.eat(':') || p.eat('÷')) {
                 x = createNumeric("/", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) / nums.getAsDouble(1)));
-            } else if (eat('%')) {
+            } else if (p.eat('%')) {
                 x = createNumeric("%", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) % nums.getAsDouble(1)));
             } else {
                 return x;
@@ -576,16 +510,16 @@ public final class Formula {
     }
 
     private FormulaNode parseFactor() {
-        if (eat('+')) {
+        if (p.eat('+')) {
             return parseFactor(); // unary plus
         }
-        if (eat('-') || eat('—')) { // those are two different chars!
+        if (p.eat('-') || p.eat('—')) { // those are two different chars!
             return createNumeric("-", new FormulaNode[]{parseFactor()}, (nums, vars) -> Value.of(-nums.getAsDouble(0)));
         }
 
         FormulaNode x = parseConcatBlock();
 
-        if (eat('!')) {
+        if (p.eat('!')) {
             x = createNumeric("!", new FormulaNode[]{x}, (nums, vars) -> {
                 final int facValue = nums.getAsInt(0, 0);
                 if (!nums.get(0).isInteger() || facValue < 0) {
@@ -599,7 +533,7 @@ public final class Formula {
             });
         }
 
-        if (eat('^')) {
+        if (p.eat('^')) {
             x = createNumeric("^", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
         }
 
@@ -608,70 +542,58 @@ public final class Formula {
 
     private FormulaNode parseNumber() {
         final StringBuilder sb = new StringBuilder();
-        while (NUMBERS.contains(ch)) {
-            sb.append((char) ch);
-            nextChar();
+        while (p.chIsIn(NUMBERS)) {
+            sb.append(p.ch());
+            p.next();
         }
         return createSingleValueNode("number", sb.toString());
 
     }
 
     private FormulaNode parseString() {
-        final StringBuilder sb = new StringBuilder();
-        boolean foundEnd = false;
-        final int openingChar = ch;
+        final int openingChar = p.chInt();
         if (openingChar != '\'' && openingChar != '"') {
             throw new FormulaException(UNEXPECTED_TOKEN, "' or \"");
         }
-        eat(openingChar);
-        while (ch != -1) {
-            if (ch == openingChar) {
-                nextChar();
-                if (ch != openingChar) {
-                    foundEnd = true;
-                    break;
-                }
-            }
-            sb.append((char) ch);
-            nextChar();
-        }
-        if (!foundEnd) {
+        p.eat(openingChar);
+        final String result = p.parseUntil(c -> openingChar == c, false, null, true);
+        if (result == null) {
             throw new FormulaException(UNEXPECTED_TOKEN, "" + ((char) openingChar));
         }
-        return createSingleValueNode("string-literal", sb.toString());
+        return createSingleValueNode("string-literal", result);
     }
 
 
     private FormulaNode parseConcatBlock() {
         final List<FormulaNode> nodes = new ArrayList<>();
         while (true) {
-            if (ch == '(') {
+            if (p.ch() == '(') {
                 final char expectedClosingChar = ')';
-                nextChar();
+                p.next();
                 this.level++;
                 nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v) -> o.get(0),
                     (o, v, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
                 this.level--;
-                if (!eat(expectedClosingChar)) {
+                if (!p.eat(expectedClosingChar)) {
                     throw new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
                 }
-            } else if (ch == '\'' || ch == '"') {
+            } else if (p.chIsIn('\'', '"')) {
                 level++;
                 nodes.add(parseString());
                 level--;
-            } else if (ch == '_') {
+            } else if (p.ch() == '_') {
                 nodes.add(createSingleValueNode("overflow", OVERFLOW_VALUE));
-                nextChar();
+                p.next();
                 //constant numbers directly after overflow shall not spill over -> thus create special node for first number digit
-                if (NUMBERS.contains(ch)) {
-                    nodes.add(createSingleValueNode("digit", "" + (char) ch));
-                    nextChar();
+                if (p.chIsIn(NUMBERS)) {
+                    nodes.add(createSingleValueNode("digit", p.chString()));
+                    p.next();
                 }
-            } else if (ch == '$') {
+            } else if (p.ch() == '$') {
                 nodes.add(parseExplicitVariable());
-            } else if (CHARS.contains(ch)) {
+            } else if (p.chIsIn(CHARS)) {
                 nodes.add(parseAlphaNumericBlock());
-            } else if (NUMBERS.contains(ch)) {
+            } else if (p.chIsIn(NUMBERS)) {
                 nodes.add(parseNumber());
             } else {
                 break;
@@ -692,22 +614,22 @@ public final class Formula {
     }
 
     private FormulaNode parseExplicitVariable() {
-        if (!eat('$')) {
+        if (!p.eat('$')) {
             throw new FormulaException(UNEXPECTED_TOKEN, '$');
         }
         //might be var with {} around it
-        final boolean hasParen = eat('{');
+        final boolean hasParen = p.eat('{');
         //first variable name char MUST be an alpha
-        if (!CHARS.contains(ch)) {
+        if (!p.chIsIn(CHARS)) {
             throw new FormulaException(UNEXPECTED_TOKEN, "alpha");
         }
         final StringBuilder sb = new StringBuilder();
-        while (CHARS_DIGITS.contains(ch)) {
-            sb.append((char) ch);
-            nextChar();
+        while (p.chIsIn(CHARS_DIGITS)) {
+            sb.append(p.ch());
+            p.next();
         }
         final String parsed = sb.toString();
-        if (hasParen && !eat('}')) {
+        if (hasParen && !p.eat('}')) {
             throw new FormulaException(UNEXPECTED_TOKEN, "}");
         }
 
@@ -728,34 +650,34 @@ public final class Formula {
     }
 
     private FormulaNode parseAlphaNumericBlock() {
-        if (!CHARS.contains(ch)) {
+        if (!p.chIsIn(CHARS)) {
             throw new FormulaException(UNEXPECTED_TOKEN, "alpha");
         }
         //An alphanumeric block may either be a function (name) or a block of single-letter variables
         final StringBuilder sbFunction = new StringBuilder();
         final StringBuilder sbSingleLetterVars = new StringBuilder();
         boolean firstAlphaBlock = true;
-        while (CHARS_DIGITS.contains(ch)) {
-            sbFunction.append((char) ch);
-            if (!CHARS.contains(ch)) {
+        while (p.chIsIn(CHARS_DIGITS)) {
+            sbFunction.append(p.ch());
+            if (!p.chIsIn(CHARS)) {
                 firstAlphaBlock = false;
             }
             if (firstAlphaBlock) {
-                sbSingleLetterVars.append((char) ch);
+                sbSingleLetterVars.append(p.ch());
             }
-            nextChar();
+            p.next();
             if (firstAlphaBlock) {
-                mark();
+                markParser();
             }
         }
         final String functionParsed = sbFunction.toString();
 
-        if (ch == '(' && FormulaFunction.findByName(functionParsed) != null) { //function
+        if (p.ch() == '(' && FormulaFunction.findByName(functionParsed) != null) { //function
             return parseFunction(functionParsed);
         }
 
         //not a function -> reset to first parsed alphablock and use this solely
-        reset();
+        resetParser();
         return parseSingleLetterVariableBlock(sbSingleLetterVars.toString());
     }
 
@@ -799,13 +721,13 @@ public final class Formula {
     //this method assumes that functionName is already parsed and ensured, and that ch is on opening parenthesis
     @NonNull
     private FormulaNode parseFunction(final String functionName) {
-        nextChar();
+        p.next();
         final List<FormulaNode> params = new ArrayList<>();
-        if (!eat(')')) {
+        if (!p.eat(')')) {
             do {
                 params.add(parseExpression());
-            } while (eat(';'));
-            if (!eat(')')) {
+            } while (p.eat(';'));
+            if (!p.eat(')')) {
                 throw new FormulaException(UNEXPECTED_TOKEN, "; or )");
             }
         }

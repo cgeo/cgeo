@@ -1,6 +1,7 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.DegreeFormula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.functions.Func1;
@@ -13,20 +14,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.apache.commons.lang3.EnumUtils;
 
 public class CalculatedCoordinate implements Parcelable {
 
-    //Status: type, lonPattern, latPattern
-
-    //setFromGeopoint -> generiert die patterns entsprechend des typs
-    //setFromConfig -> setzt type, lonPattern, latPattern
-    //changeType(varList) -> setzt type. rechnet patterns um (mit zwischenschritt "calcGeopoint", dafür braucht es die varList)
-    //setLat/LonPattern -> setzt die patterns
-    //calculateGeopoint(varList) -> versucht einen Geopoint zu berechnen
-    //getLat/LonString(varList) (mit Errorhandling) -> berechnet ein displayable string gemäß pattern mit error-infos
+    //Config String: {CC|<latPatern>|<lonPattern>|<type-char>}
+    private static final String CONFIG_KEY = "CC";
 
     private static final DegreeFormula EMPTY_FORMULA = DegreeFormula.compile("");
 
@@ -38,7 +34,6 @@ public class CalculatedCoordinate implements Parcelable {
     public CalculatedCoordinate() {
         //empty on purpose
     }
-
 
     protected CalculatedCoordinate(final Parcel in) {
         type = CalculatedCoordinateType.values()[in.readInt()];
@@ -92,14 +87,26 @@ public class CalculatedCoordinate implements Parcelable {
         if (config == null) {
             return;
         }
-        final String[] tokens = config.split("::", -1);
-        this.type = EnumUtils.getEnum(CalculatedCoordinateType.class, tokens.length > 0 ? tokens[0] : null, CalculatedCoordinateType.PLAIN);
-        setLatitudePattern(tokens.length > 1 ? tokens[1] : "");
-        setLongitudePattern(tokens.length > 2 ? tokens[2] : "");
+        final String configToUse = config.trim();
+        if (!configToUse.startsWith("{" + CONFIG_KEY + "|") || !configToUse.endsWith("}")) {
+            return;
+        }
+
+        final TextParser tp = new TextParser(config);
+        tp.parseUntil('|');
+        final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
+        setLatitudePattern(tokens.size() > 0 ? tokens.get(0) : "");
+        setLongitudePattern(tokens.size() > 1 ? tokens.get(1) : "");
+        this.type = EnumUtils.getEnum(CalculatedCoordinateType.class, tokens.size() > 2 ? tokens.get(2) : null, CalculatedCoordinateType.PLAIN);
+
     }
 
     public String toConfig() {
-        return (type != null ? type.name() : "") + "::" + latitudePattern.getExpression() + "::" + longitudePattern.getExpression();
+        return "{" + CONFIG_KEY +
+            "|" + TextParser.escape(latitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
+            '|' + TextParser.escape(longitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
+            (type != null ? '|' + type.name() : "") +
+            '}';
     }
 
     @Override
