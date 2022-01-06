@@ -6,6 +6,7 @@
 - Canvi: Activa automàticament la visualització de la pista en carregar un fitxer GPX
 - Nou: Símbols D/T per a les icones de catxé (opcional)
 - Nou: Opció per comprovar si hi ha dades d'encaminament que falten a la finestra gràfica actual
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
