@@ -2212,4 +2212,8 @@
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
     <string name="touch_again_to_exit">Proszę dotknąć ponownie, aby wyjść</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>
