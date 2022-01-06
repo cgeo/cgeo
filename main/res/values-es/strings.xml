@@ -2152,4 +2152,8 @@ Nombre de archivo:%2$s</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todo</string>
     <string name="touch_again_to_exit">Por favor toque de nuevo para salir</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>
