@@ -2163,4 +2163,8 @@ do mapa e dos temas?</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
     <string name="touch_again_to_exit">Por favor, toque novamente para sair</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>
