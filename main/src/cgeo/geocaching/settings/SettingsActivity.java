@@ -109,6 +109,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             });
 
         setContentView(R.layout.layout_settings);
+        buildSearchIndex();
 
         handleIntent(savedInstanceState);
         getSupportFragmentManager().addOnBackStackChangedListener(() -> {
@@ -121,8 +122,6 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         AndroidBeam.disable(this);
 
         setResult(NO_RESTART_NEEDED);
-
-        buildSearchIndex();
     }
 
     private void handleIntent(final Bundle savedInstanceState) {
@@ -148,7 +147,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
                 }
             }
             if (!found) {
-                openRequestedFragment("", null);
+                openRequestedFragment("");
             }
         } else {
             title = savedInstanceState.getCharSequence(TITLE_TAG);
