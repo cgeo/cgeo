@@ -180,12 +180,13 @@ public final class TextParser {
                 }
             } else {
                 if (stopper != null && stopper.test((char) ch) && !escape) {
+                    stopChar = (char) ch;
                     next();
                     if (!escapeDoubledStoppers || !stopper.test((char) ch)) {
                         foundEnd = true;
-                        stopChar = (char) ch;
                         break;
                     }
+                    stopChar = (int) 0;
                 }
                 escape = false;
                 sb.append((char) ch);

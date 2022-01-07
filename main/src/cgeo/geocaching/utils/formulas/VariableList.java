@@ -77,6 +77,14 @@ public class VariableList {
         return variablesSet.keySet();
     }
 
+    public Map<String, String> toMap() {
+        final Map<String, String> result = new HashMap<>();
+        for (String varName : variableList) {
+            result.put(varName, getState(varName).getFormulaString());
+        }
+        return result;
+    }
+
     public void clear() {
         if (variableList.isEmpty()) {
             return;

@@ -15,6 +15,10 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 public class WaypointParserTest {
 
+    private static WaypointParser createParser(final String prefix) {
+        return new WaypointParser(null, prefix);
+    }
+
     @Test
     public void testParseNoWaypoints() {
         final String note = "1 T 126\n" +
@@ -29,14 +33,14 @@ public class WaypointParserTest {
                 "M 7\n" +
                 "N 5\n" +
                 "5 IFG 257";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         assertThat(waypointParser.parseWaypoints(note)).isEmpty();
     }
 
     @Test
     public void testParseWaypointsOneLine() {
         final String note = "Dummy note\nn 45° 3.5 e 27° 7.5\nNothing else";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         assertWaypoint(waypoints.iterator().next(), "Prefix 1", new Geopoint("N 45°3.5 E 27°7.5"));
@@ -45,7 +49,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointsUserNoteWithDotAndWord() {
         final String note = "1. 0815 - Word 1\n2. 4711 - Word 2\nn 45° 3.565 e 27° 7.578";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Waypoint wp = waypoints.iterator().next();
@@ -56,7 +60,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointsUserNoteWithDot() {
         final String note = "1. 0815\n2. 4711\nn 45° 3.565 e 27° 7.578";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(2);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -71,7 +75,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointsUserNoteWithDotTwice() {
         final String note = "1. 0815  2. 4711. 0815 2.4711 \n n 45° 3.565 e 27° 7.578";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(2);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -84,7 +88,7 @@ public class WaypointParserTest {
     }
 
     private static void parseAndAssertFirstWaypoint(final String text, final String name, final WaypointType wpType, final String userNote) {
-        final WaypointParser waypointParser = new WaypointParser("Praefix");
+        final WaypointParser waypointParser = createParser("Praefix");
         final Collection<Waypoint> coll = waypointParser.parseWaypoints(text);
         assertThat(coll.size()).isEqualTo(1);
         final Iterator<Waypoint> iterator = coll.iterator();
@@ -113,7 +117,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointsMultiLine() {
         final String note2 = "Waypoint on two lines\nN 45°3.5\nE 27°7.5\nNothing else";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note2);
         assertThat(waypoints).hasSize(1);
         assertWaypoint(waypoints.iterator().next(), "Prefix 1", new Geopoint("N 45°3.5 E 27°7.5"));
@@ -129,7 +133,7 @@ public class WaypointParserTest {
                 "You go to Costa Serina ... sanctuary “Mother of the snow” (N45 49.739 E9 45.038); then you have a walk towards Tagliata...\n" +
                 "The path is part of two paths ... is a rural restaurant called \"la Peta\" (N45 50.305 E9 43.991): here you are able to have lunch ...";
 
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(text);
         assertThat(waypoints).hasSize(4);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -142,7 +146,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithNameAndDescription() {
         final String note = "@WPName X N45 49.739 E9 45.038 this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -152,7 +156,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithMultiwordNameAndMultilineDescription() {
         final String note = "@ A   longer  name \twith (r) (o) whitespaces  N45 49.739 E9 45.038 \"this is the \\\"description\\\"\nit goes on and on\" some more text";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -164,7 +168,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithNameAndNoDescription() {
         final String note = "@WPName X N45 49.739 E9 45.038\nthis shall NOT be part of the note";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -182,7 +186,7 @@ public class WaypointParserTest {
                 "@name (F) " + toParseableWpString(gp) + " " +
                         "\"user note with \\\"escaped\\\" text\"");
 
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wp, -1));
         assertThat(parsedWaypoints).hasSize(1);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
@@ -200,7 +204,7 @@ public class WaypointParserTest {
                 "@[EE]name (F) (NO-COORD)\n" +
                         "\"user note with \\\"escaped\\\" text\nand a newline\"");
 
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wp, -1));
         assertThat(parsedWaypoints).hasSize(1);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
@@ -219,7 +223,7 @@ public class WaypointParserTest {
             "@name (F) (NO-COORD)\n" +
                 "\"user note with \\\"escaped\\\" text\nand a newline\"");
 
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(parseableText);
         assertThat(parsedWaypoints).hasSize(1);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
@@ -235,7 +239,7 @@ public class WaypointParserTest {
         "@name (F) (NO-COORD)\n" +
         "\"user note 2 with \\\"escaped\\\" text\nand a newline\"";
 
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(parseableText);
         assertThat(parsedWaypoints).hasSize(2);
 
@@ -248,7 +252,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaAndCreateParseableWaypointText() {
         final String note = "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -266,7 +270,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithCompleteFormulaAndCreateParseableWaypointText() {
         final String note = "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF | A = a + b |B=1|a=2|b=47|C=10|D=4|E=2|F=3| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -283,7 +287,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaWithNameAndDescription() {
         final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + "N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -305,7 +309,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaWithLowerCase() {
         final String note = WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° a.b(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -321,7 +325,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaEvaluateCoordinates() {
         final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a*b|B=3|C=8|D=4|E=b-a|F=b/3|a=2|b=9| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -340,7 +344,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaEvaluateIncompleteCoordinates() {
         final String note = "@WPName X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° 42.ABC  E 9° 7.DEB |A = a*b|B=3|E=b-a|a=2| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -361,7 +365,7 @@ public class WaypointParserTest {
     public void testParseTwoWaypointsWithFormulaAndNameAndDescription() {
         final String note = "@WPName 1 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)'  E 9° (A-B).(2*D)EF\n" +
             "@WPName 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45 C.A(D+B)'  E 9 (D-C).(2*A)EF' |A = a+b|B=|a=2|b=| \"this is the description for the second point\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(2);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -392,7 +396,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaPrefix() {
         final String note = "@[S2]Stage 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF \"this is the description\"\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -409,7 +413,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaWithoutDescription() {
         final String note = "@[S2]Stage 2 X " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a + b|B=|a=|b=3|";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -432,7 +436,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaWithoutName() {
         final String note = WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b||B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
         final Iterator<Waypoint> iterator = waypoints.iterator();
@@ -457,7 +461,7 @@ public class WaypointParserTest {
 
         // one assert is necessary in a Test-method
         final String note = "@final (F) " + formulaTypeStr + formulaStr + variableStrWithDelim + "\"this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note);
         assertThat(waypoints).hasSize(1);
 
@@ -489,7 +493,7 @@ public class WaypointParserTest {
 
         // Then the normal parsing takes places -> no valid coords if not (NO-COORDS) -> no waypoint created
         final String note3 = "@WPName X (FORMULA_PLAIN) | N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> waypoints = waypointParser.parseWaypoints(note3);
         assertThat(waypoints).hasSize(0);
     }
@@ -514,14 +518,14 @@ public class WaypointParserTest {
         wpColl.add(wp2);
         final String gpStr = toParseableWpString(gp);
 
-        assertThat(WaypointParser.getParseableText(wpColl, 10, false)).isNull();
+        assertThat(WaypointParser.getParseableText(wpColl, null, 10, false)).isNull();
 
         final String fullExpected = "@name (F) " + gpStr + " \"This is a user note\"\n@name2 (H) " + gpStr + " \"This is a user note 2\"";
         //no limits
-        assertThat(WaypointParser.getParseableText(wpColl, -1, false)).isEqualTo(fullExpected);
+        assertThat(WaypointParser.getParseableText(wpColl, null, -1, false)).isEqualTo(fullExpected);
 
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
-        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wpColl, -1, false));
+        final WaypointParser waypointParser = createParser("Prefix");
+        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wpColl, null, -1, false));
         assertThat(parsedWaypoints).hasSize(2);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
         assertWaypoint(iterator.next(), wp1);
@@ -529,11 +533,11 @@ public class WaypointParserTest {
 
         //limited user notes
         String expected = "@name (F) " + gpStr + " \"This is a ...\"\n@name2 (H) " + gpStr + " \"This is a ...\"";
-        assertThat(WaypointParser.getParseableText(wpColl, expected.length(), false)).isEqualTo(expected);
+        assertThat(WaypointParser.getParseableText(wpColl, null, expected.length(), false)).isEqualTo(expected);
 
         //no user notes
         expected = "@name (F) " + gpStr + "\n@name2 (H) " + gpStr;
-        assertThat(WaypointParser.getParseableText(wpColl, expected.length(), false)).isEqualTo(expected);
+        assertThat(WaypointParser.getParseableText(wpColl, null, expected.length(), false)).isEqualTo(expected);
 
     }
 
@@ -545,7 +549,7 @@ public class WaypointParserTest {
         final String gp2Str = gp2.toString();
 
         final String note = "@wp1 (x)" + gpStr + "\n@wp2 (f)" + gp2Str;
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         Collection<Waypoint> wps = waypointParser.parseWaypoints(note);
         assertThat(wps.size()).isEqualTo(2);
         Iterator<Waypoint> it = wps.iterator();
@@ -574,21 +578,21 @@ public class WaypointParserTest {
         final String gp2Str = toParseableWpString(gp2);
 
         final String waypoints = "@wp1 (X) " + gpStr + " \"note\"\n@wp2 (F) " + gp2Str + " \"note2\"";
-        final WaypointParser waypointParser = new WaypointParser("Prefix");
+        final WaypointParser waypointParser = createParser("Prefix");
         final Collection<Waypoint> wps = waypointParser.parseWaypoints(waypoints);
 
         final String note = "before {c:geo-start}" + waypoints + "{c:geo-end} after";
-        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, -1);
+        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, null, -1);
         assertThat(noteAfter).isEqualTo("before  after\n\n{c:geo-start}\n" + waypoints + "\n{c:geo-end}");
 
         //check that continuous appliance of same waypoints will result in identical text
-        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, -1);
+        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, null, -1);
         assertThat(noteAfter2).isEqualTo(noteAfter);
     }
 
     @Test
     public void testWaypointParseStability() {
-        final WaypointParser waypointParser = new WaypointParser("Praefix");
+        final WaypointParser waypointParser = createParser("Praefix");
         //try to parse texts with empty input which should not lead to errors or waypoints
         assertThat(waypointParser.parseWaypoints("")).isEmpty();
         assertThat(waypointParser.parseWaypoints("@ ")).isEmpty();

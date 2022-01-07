@@ -11,15 +11,21 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.formulas.VariableList;
 
 import androidx.annotation.NonNull;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -27,9 +33,14 @@ import org.jetbrains.annotations.NotNull;
 
 public class WaypointParser {
 
-    public static final String PARSING_COORD_FORMULA_PLAIN = "(F-PLAIN)";
+
+    //constants for general note parsing
+    private static final String BACKUP_TAG_OPEN = "{c:geo-start}";
+    private static final String BACKUP_TAG_CLOSE = "{c:geo-end}";
 
     //Constants for waypoint parsing
+    public static final String PARSING_COORD_FORMULA_PLAIN = "(F-PLAIN)";
+    public static final String PARSING_CALCULATED_COORD = "{" + CalculatedCoordinate.CONFIG_KEY + "|";
     private static final String PARSING_NAME_PRAEFIX = "@";
     private static final char PARSING_USERNOTE_DELIM = '"';
     private static final char PARSING_USERNOTE_ESCAPE = '\\';
@@ -39,12 +50,23 @@ public class WaypointParser {
     private static final String PARSING_TYPE_OPEN = "(";
     private static final String PARSING_TYPE_CLOSE = ")";
     private static final String PARSING_COORD_EMPTY = "(NO-COORD)";
-    private static final String BACKUP_TAG_OPEN = "{c:geo-start}";
-    private static final String BACKUP_TAG_CLOSE = "{c:geo-end}";
 
+    //Constants for variable parsing
+
+    private static final String PARSING_VAR_NAME_PRAEFIX = "$";
+    private static final Pattern PARSING_VAR_FINDER_PATTERN = Pattern.compile(Pattern.quote(PARSING_VAR_NAME_PRAEFIX) + "\\s*([a-zA-Z][a-zA-Z0-9]*)\\s*=");
+
+
+    //general members
+    private final Geocache cache;
+
+    //Waypoints
     private Collection<Waypoint> waypoints;
     private final String namePrefix;
     private int count;
+
+    //Variables
+    private Map<String, String> variables;
 
     /**
      * Detect coordinates in the given text and converts them to user-defined waypoints.
@@ -52,8 +74,9 @@ public class WaypointParser {
      *
      * @param namePrefix Prefix of the name of the waypoint
      */
-    public WaypointParser(@NonNull final String namePrefix) {
+    public WaypointParser(final Geocache cache, @NonNull final String namePrefix) {
         this.namePrefix = namePrefix;
+        this.cache = cache;
     }
 
     /**
@@ -70,14 +93,26 @@ public class WaypointParser {
         } else {
             waypoints.clear();
         }
+        if (null == variables) {
+            variables = new HashMap<>();
+        } else {
+            variables.clear();
+        }
 
         //if a backup is found, we parse it first
         for (final String backup : TextUtils.getAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE)) {
             parseWaypointsFromString(backup);
+            parseVariablesFromString(backup);
         }
-        parseWaypointsFromString(TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, ""));
+        final String remainder = TextUtils.replaceAll(text, BACKUP_TAG_OPEN, BACKUP_TAG_CLOSE, "");
+        parseWaypointsFromString(remainder);
+        parseVariablesFromString(remainder);
 
         return waypoints;
+    }
+
+    public Map<String, String> getParsedVariables() {
+        return variables;
     }
 
     private void parseWaypointsFromString(final String text) {
@@ -89,6 +124,10 @@ public class WaypointParser {
 
         // search waypoints with formula
         parseWaypointsWithSpecificCoords(text, PARSING_COORD_FORMULA_PLAIN, Settings.CoordInputFormatEnum.Plain);
+
+        //search calculated waypoints
+        parseWaypointsWithSpecificCoords(text, PARSING_CALCULATED_COORD, null);
+
     }
 
     private void parseWaypointsWithCoords(final String text) {
@@ -121,6 +160,7 @@ public class WaypointParser {
         final Integer start = match.getStart();
         final Integer end = match.getEnd();
         final String text = match.getText();
+        final String matchedText = text.substring(start, end);
 
         final String[] wordsBefore = TextUtils.getWords(TextUtils.getTextBeforeIndexUntil(text, start, "\n"));
         final String lastWordBefore = wordsBefore.length == 0 ? "" : wordsBefore[wordsBefore.length - 1];
@@ -156,6 +196,23 @@ public class WaypointParser {
             }
 
             afterCoords = coordFormula.right;
+        }
+
+        if (PARSING_CALCULATED_COORD.equals(matchedText)) {
+            final String configAndMore = text.substring(start);
+            final CalculatedCoordinate cc = new CalculatedCoordinate();
+            final int parseEnd = cc.setFromConfig(configAndMore);
+            if (parseEnd < 0 || parseEnd >= configAndMore.length() ||
+                configAndMore.charAt(parseEnd - 1) != '}' || !cc.isFilled()) {
+                return null;
+            }
+            waypoint.setCalcStateJson(cc.toConfig());
+            // try to evaluate valid coordinates
+            if (this.cache != null && this.cache.getVariables() != null) {
+                waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
+            }
+
+            afterCoords = configAndMore.substring(parseEnd);
         }
 
         //try to get a user note
@@ -332,12 +389,12 @@ public class WaypointParser {
      * @param maxSize   if >0 then total size of returned text may not exceed this parameter
      * @return new text, or null if waypoints could not be placed due to size restrictions
      */
-    public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final int maxSize) {
+    public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final VariableList vars, final int maxSize) {
         final String cleanText = removeParseableWaypointsFromText(text) + "\n\n";
         if (maxSize > -1 && cleanText.length() > maxSize) {
             return null;
         }
-        final String newWaypoints = getParseableText(waypoints, maxSize - cleanText.length(), true);
+        final String newWaypoints = getParseableText(waypoints, vars, maxSize - cleanText.length(), true);
         if (newWaypoints == null) {
             return null;
         }
@@ -352,15 +409,15 @@ public class WaypointParser {
      *
      * @return parseable text for wayppints, or null if maxsize cannot be met
      */
-    public static String getParseableText(final Collection<Waypoint> waypoints, final int maxSize, final boolean includeBackupTags) {
-        String text = getParseableTextWithRestrictedUserNote(waypoints, -1, includeBackupTags);
+    public static String getParseableText(final Collection<Waypoint> waypoints, final VariableList vars, final int maxSize, final boolean includeBackupTags) {
+        String text = getParseableTextWithRestrictedUserNote(waypoints, vars, -1, includeBackupTags);
         if (maxSize < 0 || text.length() <= maxSize) {
             return text;
         }
 
         //try to shrink size by reducing maximum user note length
         for (int maxUserNoteLength = 50; maxUserNoteLength >= 0; maxUserNoteLength -= 10) {
-            text = getParseableTextWithRestrictedUserNote(waypoints, maxUserNoteLength, includeBackupTags);
+            text = getParseableTextWithRestrictedUserNote(waypoints, vars, maxUserNoteLength, includeBackupTags);
             if (text.length() <= maxSize) {
                 return text;
             }
@@ -370,11 +427,14 @@ public class WaypointParser {
         return null;
     }
 
-    public static String getParseableTextWithRestrictedUserNote(final Collection<Waypoint> waypoints, final int maxUserNoteSize, final boolean includeBackupTags) {
+    public static String getParseableTextWithRestrictedUserNote(final Collection<Waypoint> waypoints, final VariableList vars, final int maxUserNoteSize, final boolean includeBackupTags) {
         //no streaming allowed
         final List<String> waypointsAsStrings = new ArrayList<>();
         for (final Waypoint wp : waypoints) {
             waypointsAsStrings.add(getParseableText(wp, maxUserNoteSize));
+        }
+        if (vars != null) {
+            waypointsAsStrings.add(getParseableVariableString(vars.toMap()));
         }
         return (includeBackupTags ? BACKUP_TAG_OPEN + "\n" : "") +
             StringUtils.join(waypointsAsStrings, "\n") +
@@ -431,22 +491,53 @@ public class WaypointParser {
     public static String getParseableFormula(final Waypoint wp) {
         final StringBuilder sb = new StringBuilder();
 
-        final String calcStateJson = wp.getCalcStateJson();
-        if (null != calcStateJson) {
-            final CalcState calcState = CalcState.fromJSON(calcStateJson);
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateJson());
+        if (cc.isFilled()) {
+            sb.append(cc.toConfig());
+        } else {
 
-            if (calcState != null) {
-                final String formulaString = getParseableFormulaString(calcState);
-                if (!formulaString.isEmpty()) {
-                    sb.append(formulaString);
-                    final String variableString = getParseableVariablesString(calcState);
-                    if (!variableString.isEmpty()) {
-                        sb.append(FormulaParser.WPC_DELIM + variableString);
+            final String calcStateJson = wp.getCalcStateJson();
+            if (null != calcStateJson) {
+                final CalcState calcState = CalcState.fromJSON(calcStateJson);
+
+                if (calcState != null) {
+                    final String formulaString = getParseableFormulaString(calcState);
+                    if (!formulaString.isEmpty()) {
+                        sb.append(formulaString);
+                        final String variableString = getParseableVariablesString(calcState);
+                        if (!variableString.isEmpty()) {
+                            sb.append(FormulaParser.WPC_DELIM + variableString);
+                        }
                     }
                 }
             }
         }
         return sb.toString();
+    }
+
+    public static String getParseableVariableString(final Map<String, String> variables) {
+        final StringBuilder sb = new StringBuilder();
+        boolean first = true;
+        for (Map.Entry<String, String> entry : variables.entrySet()) {
+            if (!first) {
+                sb.append(" | ");
+            }
+            first = false;
+            sb.append(PARSING_VAR_NAME_PRAEFIX).append(entry.getKey()).append("=").append(entry.getValue());
+        }
+        return sb.toString();
+    }
+
+    private void parseVariablesFromString(final String text) {
+        final Matcher matcher = PARSING_VAR_FINDER_PATTERN.matcher(text);
+        while (matcher.find()) {
+            final String varName = matcher.group(1);
+            final TextParser valueParser = new TextParser(text.substring(matcher.end()));
+            final String value = valueParser.parseUntil(c -> c == '|' || c == '\n', true, '\\', false);
+            if (value != null) {
+                variables.put(varName, value.trim());
+            }
+        }
     }
 
     private static String getParseableFormulaString(final CalcState calcState) {

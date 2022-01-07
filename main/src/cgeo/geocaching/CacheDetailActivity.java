@@ -2734,11 +2734,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         //if given maxSize is obviously bogus, then make length unlimited
         final int maxSize = maxPersonalNotesChars == 0 ? -1 : maxPersonalNotesChars;
 
-        final String newNote = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, maxSize);
+        final String newNote = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables(), maxSize);
 
         if (newNote != null) {
             setNewPersonalNote(newNote);
-            final String newNoteNonShorted = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, -1);
+            final String newNoteNonShorted = WaypointParser.putParseableWaypointsInText(note, userModifiedWaypoints, cache.getVariables(), -1);
             if (newNoteNonShorted.length() > newNote.length()) {
                 showShortToast(getString(R.string.cache_personal_note_storewaypoints_success_limited, maxSize));
             } else {
