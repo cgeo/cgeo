@@ -457,7 +457,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             binding.buttonLatLongitude.setText(String.format("%s%n%s", getResources().getString(R.string.waypoint_latitude_null), getResources().getString(R.string.waypoint_longitude_null)));
             setProjectionEnabled(false);
         }
-        ((MaterialButton) binding.buttonLatLongitude).setIconResource(CalculatedCoordinate.isValidConfig(calcStateString) ? R.drawable.ic_menu_calculate : 0);
+        ((MaterialButton) binding.buttonLatLongitude).setIconResource(CalculatedCoordinate.isValidConfig(calcStateString) ? R.drawable.ic_menu_variable : 0);
     }
 
     @Override

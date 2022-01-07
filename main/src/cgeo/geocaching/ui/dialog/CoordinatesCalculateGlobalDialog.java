@@ -91,12 +91,11 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         final Bundle args = new Bundle();
         args.putParcelable(ARG_INPUT_DATA, initialState);
         ccd.setArguments(args);
-        ccd.setCancelable(true);
         ccd.show(mgr, "wpcalcglobaldialog");
     }
 
-    private CoordinatesCalculateGlobalDialog() {
-        //empty on purpose
+    public CoordinatesCalculateGlobalDialog() {
+        setCancelable(true);
     }
 
     private void initFromBundle(final Bundle data) {
@@ -233,6 +232,11 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             }
         });
 
+        binding.ccRemoveSpaces.setOnClickListener(v -> {
+            binding.PlainLon.setText(binding.PlainLon.getText().toString().replaceAll(" ", ""));
+            binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
+        });
+
         refreshType(calcCoord.getType(), true);
 
         return binding.getRoot();
@@ -268,6 +272,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         if (newType != PLAIN) {
             displayType.set(newType);
         }
+        binding.ccRemoveSpaces.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
 
         if (newType == PLAIN) {
             if (initialLoad) {
