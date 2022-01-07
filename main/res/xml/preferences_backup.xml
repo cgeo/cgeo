@@ -16,7 +16,7 @@
             android:summary="@string/init_backup_history_length_summary"
             app:iconSpaceReserved="false"/>
         <cgeo.geocaching.settings.BackupSeekbarPreference
-            android:key="@string/pref_backups_backup_history_length"
+            android:key="@string/pref_backup_backup_history_length"
             android:defaultValue="@integer/backup_history_length_default"
             app:min="0"
             app:max="@integer/backup_history_length_max"
@@ -29,7 +29,7 @@
             android:title="@string/init_backup_logins"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_fakekey_preference_backup"
+            android:key="@string/pref_fakekey_preference_startbackup"
             android:layout="@layout/preference_button"
             android:title="@string/init_backup_now"
             app:iconSpaceReserved="false" />
@@ -39,12 +39,12 @@
         android:title="@string/init_restore_title"
         app:iconSpaceReserved="false">
         <Preference
-            android:key="@string/pref_fakekey_preference_restore"
+            android:key="@string/pref_fakekey_startrestore"
             android:layout="@layout/preference_button"
             android:title="@string/init_backup_start_restore"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_fakekey_preference_restore_dirselect"
+            android:key="@string/pref_fakekey_startrestore_dirselect"
             android:layout="@layout/preference_button"
             android:title="@string/init_backup_restore_different_backup"
             app:iconSpaceReserved="false" />

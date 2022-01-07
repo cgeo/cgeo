@@ -2,7 +2,7 @@
 <PreferenceScreen
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:key="@string/preference_screen_lc"
+    android:key="@string/preference_screen_al"
     android:title="@string/settings_title_lc" >
 
     <PreferenceCategory

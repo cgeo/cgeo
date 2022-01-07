@@ -192,7 +192,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         Fragment preferenceFragment = new PreferencesFragment();
         if (StringUtils.equals(baseKey, getString(R.string.preference_screen_services))) {
             preferenceFragment = new PreferenceServicesFragment();
-        } else if (StringUtils.equals(baseKey, getString(R.string.pref_appearance))) {
+        } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_appearance))) {
             preferenceFragment = new PreferenceAppearanceFragment();
         } else if (StringUtils.equals(baseKey, getString(R.string.preference_screen_cachedetails))) {
             preferenceFragment = new PreferenceCachedetailsFragment();

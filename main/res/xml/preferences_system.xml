@@ -6,7 +6,6 @@
     app:key="@string/preference_screen_system">
 
     <PreferenceCategory
-        android:key="@string/pref_group_localfilesystem"
         android:title="@string/init_local_file_system"
         app:iconSpaceReserved="false">
         <Preference
@@ -62,22 +61,22 @@
             android:title="@string/init_debug"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_generate_logcat"
+            android:key="@string/pref_fakekey_generate_logcat"
             android:layout="@layout/preference_button"
             android:title="@string/about_system_write_logcat"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_memory_dump"
+            android:key="@string/pref_fakekey_memory_dump"
             android:layout="@layout/preference_button"
             android:title="@string/init_create_memory_dump"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_generate_infos_downloadmanager"
+            android:key="@string/pref_fakekey_generate_infos_downloadmanager"
             android:layout="@layout/preference_button"
             android:title="@string/about_system_write_infos_downloadmanager"
             app:iconSpaceReserved="false" />
         <Preference
-            android:key="@string/pref_view_settings"
+            android:key="@string/pref_fakekey_view_settings"
             android:layout="@layout/preference_button"
             android:title="@string/view_settings"
             app:iconSpaceReserved="false" />

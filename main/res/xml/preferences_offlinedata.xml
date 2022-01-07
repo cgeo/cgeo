@@ -43,13 +43,6 @@
             android:key="@string/pref_persistablefolder_gpx"
             android:title="@string/init_gpx_importexportdir"
             app:iconSpaceReserved="false" />
-        <!--
-                    <Preference
-                        android:key="@string/pref_gpxExportDir"
-                        android:title="@string/init_gpx_exportdir" />
-                    <Preference
-                        android:key="@string/pref_gpxImportDir"
-                        android:title="@string/init_gpx_importdir" /> -->
     </PreferenceCategory>
 
     <PreferenceCategory
