@@ -327,7 +327,7 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
 
     // Leak Canary, memory leak detection
-    def leakCanaryVersion = '2.7'
+    def leakCanaryVersion = '2.8.1'
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$leakCanaryVersion"
     implementation "com.squareup.leakcanary:plumber-android:$leakCanaryVersion"
 
