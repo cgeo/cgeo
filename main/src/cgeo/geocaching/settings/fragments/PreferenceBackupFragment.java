@@ -18,17 +18,17 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         final BackupUtils backupUtils = new BackupUtils(getActivity(), savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
 
-        findPreference(getString(R.string.pref_fakekey_preference_backup)).setOnPreferenceClickListener(preference -> {
+        findPreference(getString(R.string.pref_fakekey_preference_startbackup)).setOnPreferenceClickListener(preference -> {
             backupUtils.backup(this::updateSummary);
             return true;
         });
 
-        findPreference(getString(R.string.pref_fakekey_preference_restore)).setOnPreferenceClickListener(preference -> {
+        findPreference(getString(R.string.pref_fakekey_startrestore)).setOnPreferenceClickListener(preference -> {
             backupUtils.restore(BackupUtils.newestBackupFolder());
             return true;
         });
 
-        findPreference(getString(R.string.pref_fakekey_preference_restore_dirselect)).setOnPreferenceClickListener(preference -> {
+        findPreference(getString(R.string.pref_fakekey_startrestore_dirselect)).setOnPreferenceClickListener(preference -> {
             backupUtils.selectBackupDirIntent();
             return true;
         });
@@ -44,7 +44,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
 
         updateSummary();
 
-        findPreference(getString(R.string.pref_backups_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
+        findPreference(getString(R.string.pref_backup_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
             backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value);
             return true;
         });
@@ -64,6 +64,6 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         } else {
             textRestore = getString(R.string.init_backup_last_no);
         }
-        findPreference(getString(R.string.pref_fakekey_preference_restore)).setSummary(textRestore);
+        findPreference(getString(R.string.pref_fakekey_startrestore)).setSummary(textRestore);
     }
 }

@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:icon="@drawable/settings_eye"
-    android:key="@string/pref_appearance"
+    android:key="@string/preference_screen_appearance"
     android:title="@string/settings_title_appearance"
     android:summary="@string/settings_summary_appearance" >
     <ListPreference

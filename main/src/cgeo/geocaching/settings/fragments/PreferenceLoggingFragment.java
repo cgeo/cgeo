@@ -18,7 +18,7 @@ public class PreferenceLoggingFragment extends BasePreferenceFragment {
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_logging, rootKey);
-        logTemplatesCategory = findPreference(getString(R.string.pref_fakekey_category_logTemplate));
+        logTemplatesCategory = findPreference(getString(R.string.preference_category_logging_logtemplates));
     }
 
     @Override

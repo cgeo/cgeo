@@ -23,10 +23,10 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
         assert activity != null;
         activity.setTitle(R.string.settings_title_system);
 
-        setPrefClick(this, R.string.pref_memory_dump, () -> DebugUtils.createMemoryDump(activity));
-        setPrefClick(this, R.string.pref_generate_logcat, () -> DebugUtils.createLogcat(activity));
-        setPrefClick(this, R.string.pref_generate_infos_downloadmanager, () -> DebugUtils.dumpDownloadmanagerInfos(activity));
-        setPrefClick(this, R.string.pref_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
+        setPrefClick(this, R.string.pref_fakekey_memory_dump, () -> DebugUtils.createMemoryDump(activity));
+        setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
+        setPrefClick(this, R.string.pref_fakekey_generate_infos_downloadmanager, () -> DebugUtils.dumpDownloadmanagerInfos(activity));
+        setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
 
         initPublicFolders(this, activity.getCsah());
     }

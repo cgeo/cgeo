@@ -276,8 +276,6 @@ public class Settings {
             e.putString(getKey(R.string.pref_temp_twitter_token_secret), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_secret), null));
             e.putString(getKey(R.string.pref_temp_twitter_token_public), prefsV0.getString(getKey(R.string.pref_temp_twitter_token_public), null));
             e.putBoolean(getKey(R.string.pref_help_shown), prefsV0.getInt(getKey(R.string.pref_help_shown), 0) != 0);
-            e.putFloat(getKey(R.string.pref_anylongitude), prefsV0.getFloat(getKey(R.string.pref_anylongitude), 0));
-            e.putFloat(getKey(R.string.pref_anylatitude), prefsV0.getFloat(getKey(R.string.pref_anylatitude), 0));
             e.putString(getKey(R.string.pref_webDeviceCode), prefsV0.getString(getKey(R.string.pref_webDeviceCode), null));
             e.putString(getKey(R.string.pref_webDeviceName), prefsV0.getString(getKey(R.string.pref_webDeviceName), null));
             e.putBoolean(getKey(R.string.pref_maplive), prefsV0.getInt(getKey(R.string.pref_maplive), 1) != 0);
@@ -1174,25 +1172,6 @@ public class Settings {
         return getBoolean(R.string.pref_bookmarklistsShowNewOnly, false);
     }
 
-    public static void setAnyCoordinates(final Geopoint coords) {
-        if (coords != null) {
-            putFloat(R.string.pref_anylatitude, (float) coords.getLatitude());
-            putFloat(R.string.pref_anylongitude, (float) coords.getLongitude());
-        } else {
-            remove(R.string.pref_anylatitude);
-            remove(R.string.pref_anylongitude);
-        }
-    }
-
-    public static Geopoint getAnyCoordinates() {
-        if (contains(R.string.pref_anylatitude) && contains(R.string.pref_anylongitude)) {
-            final float lat = getFloat(R.string.pref_anylatitude, 0);
-            final float lon = getFloat(R.string.pref_anylongitude, 0);
-            return new Geopoint(lat, lon);
-        }
-        return null;
-    }
-
     public static boolean isUseCompass() {
         return useCompass;
     }
@@ -1843,7 +1822,7 @@ public class Settings {
     }
 
     public static int allowedBackupsNumber() {
-        return getInt(R.string.pref_backups_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
+        return getInt(R.string.pref_backup_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 
     /**
