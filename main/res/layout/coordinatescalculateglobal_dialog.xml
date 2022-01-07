@@ -54,6 +54,18 @@
                 android:layout_centerVertical="true"
                 tools:listitem="@android:layout/simple_spinner_item" />
 
+            <Button
+                android:id="@+id/cc_remove_spaces"
+                style="@style/button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_toRightOf="@id/cc_switch_guided"
+                app:icon="@drawable/ic_menu_auto_fix_high"
+                android:text="Remove Spaces"
+                android:layout_centerVertical="true"/>
+
             </RelativeLayout>
 
             <!-- 'Plain' input -->

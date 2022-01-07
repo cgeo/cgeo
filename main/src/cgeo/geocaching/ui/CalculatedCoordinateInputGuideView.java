@@ -11,10 +11,6 @@ import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
-import android.text.Spannable;
-import android.text.SpannableString;
-import android.text.style.ImageSpan;
 import android.util.AttributeSet;
 import android.util.Pair;
 import android.util.TypedValue;
@@ -22,6 +18,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Space;
@@ -31,7 +28,6 @@ import static android.text.InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import androidx.annotation.Nullable;
-import androidx.core.content.res.ResourcesCompat;
 import androidx.core.util.Consumer;
 import androidx.gridlayout.widget.GridLayout;
 
@@ -54,8 +50,9 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     private GridLayout grid;
     private EditText value;
     private View valueLayout;
-    private CharButton markedButton;
+    private View valueHiddenHint;
 
+    private CharButton markedButton;
 
     static {
         final Locale locale = Locale.US;
@@ -118,6 +115,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         if (type != PLAIN) {
             recreate(type, latPattern, lonPattern, gp);
         }
+        markButton(null);
         callChangeListener();
     }
 
@@ -169,6 +167,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         this.grid = findViewById(R.id.cc_guide_grid);
         this.value = findViewById(R.id.cc_guide_value);
         this.valueLayout = findViewById(R.id.cc_guide_value_layout);
+        this.valueHiddenHint = findViewById(R.id.cc_guide_value_hiddenhint);
 
         this.value.addTextChangedListener(ViewUtils.createSimpleWatcher(t -> {
             if (markedButton != null) {
@@ -189,6 +188,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         });
 
         setData(PLAIN, null, null, null);
+        markButton(null);
     }
 
     private void callChangeListener() {
@@ -309,7 +309,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         for (int row = 0; row < 2; row++) {
             final Button hem = ViewUtils.createButton(getContext(), this, TextParam.text("N"));
             hem.setOnClickListener(v -> changeHemisphereButtonValue(hem));
-            final GridLayout.LayoutParams hlp = createLayoutParams(0);
+            final GridLayout.LayoutParams hlp = createGridLayoutParams(0);
             hlp.setMargins(0, 0, ViewUtils.dpToPixel(3), 0);
             this.grid.addView(hem, hlp);
 
@@ -323,14 +323,14 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                         v = new CharButton(getContext());
                         ((CharButton) v).setText("x");
                     }
-                    final GridLayout.LayoutParams lp = createLayoutParams(1);
+                    final GridLayout.LayoutParams lp = createGridLayoutParams(1);
                     lp.setMargins(ViewUtils.dpToPixel(1), ViewUtils.dpToPixel(2), ViewUtils.dpToPixel(1), ViewUtils.dpToPixel(2));
                     this.grid.addView(v, lp);
                 } else {
                     final TextView tv = ViewUtils.createTextItem(getContext(), R.style.text_label, TextParam.text("" + c));
                     tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 22);
 
-                    final GridLayout.LayoutParams lp = createLayoutParams(0);
+                    final GridLayout.LayoutParams lp = createGridLayoutParams(0);
                     lp.setMargins(ViewUtils.dpToPixel(1), ViewUtils.dpToPixel(2), ViewUtils.dpToPixel(1), ViewUtils.dpToPixel(2));
                     tv.setGravity(c == '.' ? Gravity.CENTER : Gravity.TOP);
                     this.grid.addView(tv, lp);
@@ -385,11 +385,12 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         callChangeListener();
     }
 
-    private GridLayout.LayoutParams createLayoutParams(final int colWeight) {
+    private GridLayout.LayoutParams createGridLayoutParams(final int colWeight) {
         final GridLayout.LayoutParams lp = new GridLayout.LayoutParams(
             GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL),
             GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, colWeight));
         lp.width = colWeight == 0 ? WRAP_CONTENT : 20;
+        lp.height = WRAP_CONTENT;
         return lp;
     }
 
@@ -405,20 +406,29 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
 
         if (prevButton != null) {
             prevButton.unmark();
-            this.value.setText("");
-            this.valueLayout.setEnabled(false);
         }
 
         if (newButton != null) {
             newButton.mark();
-            this.valueLayout.setEnabled(true);
+            this.valueLayout.setVisibility(VISIBLE);
+            this.valueHiddenHint.setVisibility(INVISIBLE);
             this.value.setText(newButton.getText());
             this.value.requestFocus();
             this.value.setSelection(0, newButton.getText().length());
             Keyboard.show(getContext(), this.value);
+        } else {
+            this.value.setText("");
+            this.valueLayout.setVisibility(INVISIBLE);
+            this.valueHiddenHint.setVisibility(VISIBLE);
         }
 
         this.markedButton = newButton;
+    }
+
+    @Override
+    public void onDetachedFromWindow() {
+        super.onDetachedFromWindow();
+        markButton(null);
     }
 
 
@@ -428,6 +438,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
          * The actual button used for the most part
          */
         private Button butt;
+        private ImageView image;
 
         private String text;
 
@@ -447,7 +458,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         }
 
         public void mark() {
-            this.setBackgroundResource(R.drawable.textinputlayout_bcg_active);
+            this.setBackgroundResource(R.drawable.calculatecoordinateguide_button_active);
         }
 
         public void unmark() {
@@ -458,20 +469,13 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         public void setText(final String text) {
             this.text = text == null ? null : text.trim();
             if (text != null && text.length() > 1) {
-                this.butt.setText(getImageSpan());
+                this.butt.setText(" ");
+                this.image.setVisibility(VISIBLE);
             } else {
                 this.butt.setText(text == null || text.length() == 0 ? " " : "" + text.charAt(0));
+                this.image.setVisibility(GONE);
             }
             callChangeListener();
-        }
-
-        private Spannable getImageSpan() {
-            final Spannable span = new SpannableString(" ");
-            final Drawable d = ResourcesCompat.getDrawable(getContext().getResources(), R.drawable.ic_menu_variable, null);
-            d.setBounds(0, 0, 64, 64);
-            final ImageSpan image = new ImageSpan(d, ImageSpan.ALIGN_BASELINE);
-            span.setSpan(image, 0, 1, Spannable.SPAN_INCLUSIVE_EXCLUSIVE);
-            return span;
         }
 
         /**
@@ -502,11 +506,23 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
             butt.setGravity(Gravity.CENTER);
             butt.setPadding(0, 0, 0, 0);
 
-            final LayoutParams lp = new LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
-            butt.setLayoutParams(lp);
+            image = new ImageView(ViewUtils.wrap(getContext()));
+            image.setImageResource(R.drawable.ic_menu_variable);
+            image.setScaleType(ImageView.ScaleType.FIT_CENTER);
+            image.setPadding(ViewUtils.dpToPixel(3), ViewUtils.dpToPixel(3), ViewUtils.dpToPixel(3), ViewUtils.dpToPixel(3));
+            image.setVisibility(GONE);
+            image.setElevation(1000f);
 
-            addView(butt);
+            final LayoutParams lp = new LayoutParams(WRAP_CONTENT, WRAP_CONTENT);
+            lp.addRule(RelativeLayout.CENTER_VERTICAL);
+            lp.addRule(RelativeLayout.CENTER_HORIZONTAL);
+            addView(butt, lp);
+            addView(image, lp);
+
+            unmark();
         }
 
     }
+
+
 }

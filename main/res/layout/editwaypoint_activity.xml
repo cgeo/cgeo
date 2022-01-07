@@ -16,7 +16,7 @@
         <Button
             android:id="@+id/buttonLatLongitude"
             style="@style/button_full_double"
-            app:icon="@drawable/ic_menu_calculate"
+            app:icon="@drawable/ic_menu_variable"
             android:freezesText="true"
             android:hint="@string/latlongitude" />
 

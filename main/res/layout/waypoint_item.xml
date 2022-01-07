@@ -44,7 +44,7 @@
             android:scaleType="fitXY"
             android:gravity="left|top"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/ic_menu_calculate"
+            android:src="@drawable/ic_menu_variable"
             android:visibility="gone"
             tools:visibility="visible" />
 
