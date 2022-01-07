@@ -14,6 +14,8 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.util.ArrayList;
 
  public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
@@ -24,6 +26,9 @@ import java.util.ArrayList;
      protected String scrolltoBaseKey = null;
      protected String scrolltoPrefKey = null;
      protected int icon = 0;
+
+     // automatic key generator
+     private int nextKey = 0;
 
      public static class PrefSearchDescriptor {
         public String baseKey;
@@ -87,6 +92,12 @@ import java.util.ArrayList;
         final int prefCount = start.getPreferenceCount();
         for (int i = 0; i < prefCount; i++) {
             final Preference pref = start.getPreference(i);
+            // we can only address prefs that have a key, so create a generic one
+            if (StringUtils.isBlank(pref.getKey())) {
+                synchronized (this) {
+                    pref.setKey(baseKey + "-" + (nextKey++));
+                }
+            }
             data.add(new PrefSearchDescriptor(baseKey, pref.getKey(), pref.getTitle(), pref.getSummary(), icon));
             if (pref instanceof PreferenceGroup) {
                 doSearch(baseKey, data, (PreferenceGroup) pref);
