@@ -1979,8 +1979,6 @@
     <string name="individual_route_error_toggling_waypoint">Σφάλμα στην εναλλαγή της ορατότητας του ενδιαμέσου σταθμού</string>
     <string name="individual_route_error_single_waypoint_mode">Μη διαθέσιμο κατά την λειτουργία μοναδικού ενδιάμεσου σταθμού</string>
     <string name="map_sort_individual_route">Ταξινόμηση μεμονωμένης διαδρομής</string>
-    <string name="map_export_individual_route">Εξαγωγή ως διαδρομή</string>
-    <string name="map_export_individual_route_as_track">Εξαγωγή ίχνους</string>
     <string name="map_load_individual_route">Φόρτωση μεμονωμένης διαδρομής</string>
     <string name="map_load_individual_route_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <string name="map_autotarget_individual_route">Ορισμός έναρξης διαδρομής ως στόχο</string>
