@@ -1973,8 +1973,6 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_error_toggling_waypoint">error alternando waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en modo de un solo waypoint</string>
     <string name="map_sort_individual_route">Ordenar ruta individual</string>
-    <string name="map_export_individual_route">Exportar como ruta</string>
-    <string name="map_export_individual_route_as_track">Exportar como pista</string>
     <string name="map_load_individual_route">Cargar ruta individual</string>
     <string name="map_load_individual_route_confirm">¿Sobrescribir ruta existente?</string>
     <string name="map_autotarget_individual_route">Establecer el inicio de la ruta como objetivo</string>
