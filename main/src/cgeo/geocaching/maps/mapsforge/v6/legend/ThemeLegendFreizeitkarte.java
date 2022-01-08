@@ -60,7 +60,7 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
         entries.add(new RenderThemeLegend.LegendEntry(11, p, "fussgaengerzone", R.string.rtl_pedestrian_area));
         entries.add(new RenderThemeLegend.LegendEntry(11, p, "handel", R.string.rtl_trading));
         entries.add(new RenderThemeLegend.LegendEntry(11, p, "parken-eingeschraenkt", R.string.rtl_parking_restricted));
-        entries.add(new RenderThemeLegend.LegendEntry(11, p, "parken-fahrrad", R.string.rtl_amenity_bicycle_parking));
+        entries.add(new RenderThemeLegend.LegendEntry(11, p, "parken-fahrrad", R.string.rtl_bicycle_parking));
 
         entries.add(new RenderThemeLegend.LegendEntry(11, p, "gefaengnis", R.string.rtl_prison));
         if (isBasic) {
@@ -136,19 +136,19 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
         cats.add(new RenderThemeLegend.LegendCategory(41, 42, R.string.rtl_category_poi_symbols, 7, 7));
 
         // amenities: transport
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bicycle_parking", R.string.rtl_amenity_bicycle_parking));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bicycle_rental", R.string.rtl_amenity_bicycle_rental));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_car_rental", R.string.rtl_amenity_car_rental));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_car_sharing", R.string.rtl_amenity_car_sharing));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_car_wash", R.string.rtl_amenity_car_wash));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_fuel", R.string.rtl_amenity_fuel));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_ferry_terminal", R.string.rtl_amenity_ferry_terminal));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bicycle_parking", R.string.rtl_bicycle_parking));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bicycle_rental", R.string.rtl_bicycle_rental));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_car_rental", R.string.rtl_car_rental));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_car_sharing", R.string.rtl_car_sharing));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_car_wash", R.string.rtl_car_wash));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_fuel", R.string.rtl_fuel));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_ferry_terminal", R.string.rtl_ferry_terminal));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, isBasic ? "parken" : "amenity_parking", R.string.rtl_parking));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, isBasic ? "parken-eingeschraenkt" : "amenity_parking_private", isBasic ? R.string.rtl_parking_restricted : R.string.rtl_parking_private));
 
         // amenities: food & drink
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bar", R.string.rtl_bar));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bbq", R.string.rtl_amenity_bbq));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_bbq", R.string.rtl_bbq));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_biergarten", R.string.rtl_biergarten));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_cafe", R.string.rtl_cafe));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pub", R.string.rtl_pub));
@@ -159,7 +159,7 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
         // amenities: emergency
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pharmacy", R.string.rtl_pharmacy));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_hospital", R.string.rtl_hospital));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_clinic", R.string.rtl_amenity_clinic));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_clinic", R.string.rtl_clinic));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_police", R.string.rtl_police));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_fire_station", R.string.rtl_firebrigade));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "emergency_fire_hydrant", R.string.rtl_emergency_fire_hydrant));
@@ -168,20 +168,20 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
 
         // amenities: education
         if (!isBasic) {
-            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_college", R.string.rtl_amenity_college));
+            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_college", R.string.rtl_college));
             entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_kindergarten", R.string.rtl_kindergarten));
             entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_school", R.string.rtl_school));
             entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_university", R.string.rtl_university));
         }
 
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_arts_centre", R.string.rtl_amenity_arts_centre));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_arts_centre", R.string.rtl_arts_centre));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_library", R.string.rtl_library));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_theatre", R.string.rtl_theatre));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_cinema", R.string.rtl_cinema));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_casino", R.string.rtl_amenity_casino));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_nightclub", R.string.rtl_amenity_nightclub));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_community_centre", R.string.rtl_amenity_community_centre));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_social_facility", R.string.rtl_amenity_social_facility));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_casino", R.string.rtl_casino));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_nightclub", R.string.rtl_nightclub));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_community_centre", R.string.rtl_community_centre));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_social_facility", R.string.rtl_social_facility));
 
         // amenities
         entries.add(new RenderThemeLegend.LegendEntry(41, s, isBasic ? "geldautomat" : "amenity_atm", R.string.rtl_atm));
@@ -189,23 +189,23 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_post_office", R.string.rtl_postoffice));
 
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_townhall", R.string.rtl_townhall));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_courthouse", R.string.rtl_amenity_courthouse));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_courthouse", R.string.rtl_courthouse));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_embassy", R.string.rtl_embassy));
 
         // amenities: places of worship
         if (isBasic) {
-            entries.add(new RenderThemeLegend.LegendEntry(41, s, "kirche", R.string.rtl_amenity_pow));
+            entries.add(new RenderThemeLegend.LegendEntry(41, s, "kirche", R.string.rtl_pow));
         } else {
-            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pow", R.string.rtl_amenity_pow));
-            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pow_christian", R.string.rtl_amenity_pow_christian));
-            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pow_jewish", R.string.rtl_amenity_pow_jewish));
+            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pow", R.string.rtl_pow));
+            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pow_christian", R.string.rtl_pow_christian));
+            entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_pow_jewish", R.string.rtl_pow_jewish));
         }
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, isBasic ? "moschee" : "amenity_pow_muslim", R.string.rtl_amenity_pow_muslim));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, isBasic ? "moschee" : "amenity_pow_muslim", R.string.rtl_pow_muslim));
 
         // amenities: other
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_drinking_water", R.string.rtl_drinking_water));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_fountain", R.string.rtl_fountain));
-        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_water_point", R.string.rtl_amenity_water_point));
+        entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_water_point", R.string.rtl_water_point));
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_toilets", R.string.rtl_toilets));
 
         entries.add(new RenderThemeLegend.LegendEntry(41, s, "amenity_recycling", R.string.rtl_recycling));
