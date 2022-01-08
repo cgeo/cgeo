@@ -417,7 +417,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
-            this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute);
+            this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, tracks);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -516,8 +516,12 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         Tile.cache.clear();
 
         if (null != trackLayer) {
-            trackLayer.setHidden(Settings.isHideTrack());
+            trackLayer.setHidden(tracks.isHidden());
             trackLayer.requestRedraw();
+        }
+        if (null != routeLayer) {
+            routeLayer.setHidden((individualRoute.isHidden()));
+            routeLayer.requestRedraw();
         }
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
@@ -743,6 +747,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             individualRoute.reloadRoute(routeLayer);
         } else {
             individualRoute.updateRoute(routeLayer);
+            routeLayer.setHidden(individualRoute.isHidden());
         }
     }
 
@@ -751,7 +756,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             this.routeTrackUtils.loadTracks(this::setTracks, false);
         } else if (null != trackLayer) {
             trackLayer.updateRoute(tracks);
-            trackLayer.setHidden(Settings.isHideTrack());
+            trackLayer.setHidden(tracks == null || tracks.isHidden());
         }
     }
 
@@ -792,7 +797,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
 
         // TrackLayer
-        this.trackLayer = new TrackLayer(Settings.isHideTrack());
+        this.trackLayer = new TrackLayer(tracks == null || tracks.isHidden());
         this.mapView.getLayerManager().getLayers().add(this.trackLayer);
 
         // NavigationLayer

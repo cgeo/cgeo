@@ -71,7 +71,9 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     private ArrayList<ArrayList<LatLng>> route = null;
     private Viewport lastViewport = null;
+    private boolean routeIsHidden = false;
     private ArrayList<ArrayList<LatLng>> track = null;
+    private boolean trackIsHidden = false;
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
@@ -161,7 +163,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        this.route = route.getAllPointsLatLng();
+        this.route = route == null ? null : route.getAllPointsLatLng();
+        this.routeIsHidden = route == null || route.isHidden();
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
         }
@@ -170,7 +173,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     @Override
     public void updateRoute(final Route track) {
-        this.track = null == track ? null : track.getAllPointsLatLng();
+        this.track = track == null ? null : track.getAllPointsLatLng();
+        this.trackIsHidden = track == null || track.isHidden();
         repaintRequired();
     }
 
@@ -305,7 +309,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     private synchronized void drawRoute() {
         routeObjs.removeAll();
-        if (route != null && route.size() > 1) {
+        if (route != null && route.size() > 1 && !routeIsHidden) {
             for (ArrayList<LatLng> segment : route) {
                 routeObjs.addPolyline(new PolylineOptions()
                     .addAll(segment)
@@ -337,7 +341,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     private synchronized void drawTrack() {
         trackObjs.removeAll();
-        if (track != null && track.size() > 1 && !Settings.isHideTrack()) {
+        if (track != null && track.size() > 1 && !trackIsHidden) {
             for (ArrayList<LatLng> segment : track) {
                 trackObjs.addPolyline(new PolylineOptions()
                     .addAll(segment)

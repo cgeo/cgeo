@@ -33,6 +33,7 @@ public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.Up
     public void updateIndividualRoute(final Route route) {
         super.updateRoute(route);
         this.distance = route.getDistance();
+        this.isHidden = route.isHidden();
 
         if (postRealRouteDistance != null) {
             postRealRouteDistance.postRealDistance(distance);

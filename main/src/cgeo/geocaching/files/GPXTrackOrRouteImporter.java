@@ -2,7 +2,6 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -38,7 +37,8 @@ public class GPXTrackOrRouteImporter {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                         try {
                             if (resetVisibilitySetting) {
-                                Settings.setHideTrack(false);
+                                assert value != null;
+                                value.setHidden(true);
                             }
                             callback.updateRoute(value);
                         } catch (final Throwable t) {
