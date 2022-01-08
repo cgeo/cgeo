@@ -2024,8 +2024,6 @@
     <string name="individual_route_error_toggling_waypoint">błąd przełączenia punktu nawigacji</string>
     <string name="individual_route_error_single_waypoint_mode">Niedostępne w trybie pojedynczego punktu nawigacyjnego</string>
     <string name="map_sort_individual_route">Sortuj indywidualną trasę</string>
-    <string name="map_export_individual_route">Eksportuj jako trasę</string>
-    <string name="map_export_individual_route_as_track">Eksportuj jako ślad</string>
     <string name="map_load_individual_route">Załaduj indywidualną trasę</string>
     <string name="map_load_individual_route_confirm">Zastąpić istniejącą trasę?</string>
     <string name="map_autotarget_individual_route">Ustaw początek trasy jako cel</string>
