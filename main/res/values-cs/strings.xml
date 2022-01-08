@@ -2027,8 +2027,6 @@
     <string name="individual_route_error_toggling_waypoint">chyba při přepínání trasového bodu</string>
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
-    <string name="map_export_individual_route">Exportovat jako trasu</string>
-    <string name="map_export_individual_route_as_track">Exportovat jako stopu</string>
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
