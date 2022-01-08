@@ -1940,8 +1940,6 @@
     <string name="individual_route_error_toggling_waypoint">지점 토글 오류</string>
     <string name="individual_route_error_single_waypoint_mode">단일 지점 모드에서는 사용할 수 없습니다</string>
     <string name="map_sort_individual_route">개별 경로 정렬</string>
-    <string name="map_export_individual_route">경로로 내보내기</string>
-    <string name="map_export_individual_route_as_track">트랙으로 내보내기</string>
     <string name="map_load_individual_route">개별 경로 로드하기</string>
     <string name="map_load_individual_route_confirm">기존 경로를 덮어 쓰시겠습니까?</string>
     <string name="map_autotarget_individual_route">경로 시작을 대상으로 설정</string>
