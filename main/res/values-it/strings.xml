@@ -1975,8 +1975,6 @@
     <string name="individual_route_error_toggling_waypoint">errore cambiando lo stato waypoint</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponibile in modalità waypoint singolo</string>
     <string name="map_sort_individual_route">Ordina percorso individuale</string>
-    <string name="map_export_individual_route">Esporta come percorso</string>
-    <string name="map_export_individual_route_as_track">Esporta come traccia</string>
     <string name="map_load_individual_route">Carica percorso individuale</string>
     <string name="map_load_individual_route_confirm">Sovrascrivere il percorso esistente?</string>
     <string name="map_autotarget_individual_route">Imposta l\'inizio del percorso come obiettivo</string>
