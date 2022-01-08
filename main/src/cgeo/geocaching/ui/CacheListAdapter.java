@@ -135,7 +135,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         this.list.addAll(list);
         this.originalList = null;
 
-        reFilter();
+        forceFilter();
         checkSpecialSortOrder();
         forceSort();
 
@@ -166,19 +166,30 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     /**
      * Refilter list of caches (e.g. after new caches were added to the list after reload)
      */
-    public void reFilter() {
+    public void forceFilter() {
         //simply reapply the existing filter
-        setFilter(this.currentGeocacheFilter);
+        setFilter(this.currentGeocacheFilter, true);
     }
 
     /**
      * Apply a new filter to the adapter (e.g. after filter was changed by user in menu)
      */
     public void setFilter(final GeocacheFilter advancedFilter) {
+        setFilter(advancedFilter, false);
+    }
+
+    private void setFilter(final GeocacheFilter advancedFilter, final boolean force) {
 
         // Backup current caches list if it isn't backed up yet
         if (originalList == null) {
             originalList = new ArrayList<>(list);
+        }
+
+        if (!force && currentGeocacheFilter == advancedFilter) {
+            return;
+        }
+        if (!force && currentGeocacheFilter != null && advancedFilter != null && currentGeocacheFilter.toConfig().equals(advancedFilter.toConfig())) {
+            return;
         }
 
         // If there is already a filter in place, this is a request to change or clear the filter, so we have to
