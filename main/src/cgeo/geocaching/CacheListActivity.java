@@ -673,9 +673,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // save current position
         final LastPositionHelper lastPosition = new LastPositionHelper(this);
 
-        applyAdapterFilter();
-        updateFilterBar();
-
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this, new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CacheListActivity) {
 
@@ -685,21 +682,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             }
         });
 
-
         adapter.setSelectMode(false);
         setAdapterCurrentCoordinates(true);
 
-        if (search != null) {
-            replaceCacheListFromSearch();
-            loadCachesHandler.sendEmptyMessage(0);
-        }
-
-
         lastPosition.refreshListAtLastPosition();
 
-        // refresh list if it might have changed (e.g. due to changed filter, new caches downloaded, cache being added/deleted from list)
-        if (type.isStoredInDatabase) {
-            lastPosition.refreshListAtLastPosition();
+        if (search != null) {
+            loadCachesHandler.sendEmptyMessage(0);
         }
     }
 
@@ -1295,7 +1284,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void updateAdapter() {
         final LastPositionHelper lph = new LastPositionHelper(this);
         adapter.notifyDataSetChanged();
-        adapter.reFilter();
+        adapter.forceFilter();
         adapter.checkSpecialSortOrder();
         adapter.forceSort();
         updateGui();
@@ -1571,8 +1560,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             final CacheListActivity activity = activityRef.get();
             if (activity != null) {
                 activity.adapter.setSelectMode(false);
-                activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
-                activity.replaceCacheListFromSearch();
+                if (activity.type.isStoredInDatabase) {
+                    activity.refreshCurrentList(AfterLoadAction.CHECK_IF_EMPTY);
+                } else {
+                    activity.replaceCacheListFromSearch();
+                }
             }
             setLastListPosition();
         }
