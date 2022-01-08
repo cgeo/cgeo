@@ -6,6 +6,7 @@
 - 변경: GPX 트랙 파일을 로드할 때 자동으로 트랙 표시 활성화
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션

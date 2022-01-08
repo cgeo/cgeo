@@ -6,6 +6,7 @@
 - Ändring: Aktivera automatiskt spårvisning vid inläsning av en GPX-spårfil
 - Nyhet: D/T-symboler för cache-ikoner (valfritt)
 - Nyhet: Alternativ för att kontrollera om ruttdata saknas för nuvarande vy
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher

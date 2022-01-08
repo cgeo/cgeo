@@ -6,6 +6,7 @@
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
 - Neu: D/T-Markierungen für Cache-Symbole (optional)
 - Neu: Funktion, um nach fehlenden Routingdaten für den aktuellen Bildschirmausschnitt zu suchen
+- Neu: Design-Legende für Elevate, Elements und Freizeitkarte-Designs
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
@@ -20,11 +21,11 @@
 
 ### Sonstiges
 - Neu: Übernahme von Geocodes aus der Zwischenablage in Suche auf dem Startbildschirm
-- New: Added support for user-defined log templates
+- Neu: Benutzerdefinierte Log-Vorlagen
 - Neu: Übersicht der Einstellungen ist nun filterbar
 - Neu: Suche in den Einstellungen
 - Neu: GC Wizard zur Liste der nützlichen Apps hinzugefügt
-- New: Attributes filter: Allow selecting from which connectors attributes are shown
+- Neu: Attributfilter: Erlaubt die Auswahl, von welchen Konnektoren Attribute gezeigt werden sollen
 - Änderung: Barcode-Scanner aus der Liste der nützlichen Apps und aus dem Hauptbildschirm entfernt
 - Änderung: BRouter aus Liste nützlicher Apps entfernt (du kannst weiterhin sowohl die externe als auch die interne Navigation verwenden)
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0

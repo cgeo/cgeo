@@ -1619,8 +1619,6 @@
     <string name="individual_route_added">新增至路徑</string>
     <string name="individual_route_removed">從航線中移除</string>
     <string name="map_sort_individual_route">排列個別的路徑</string>
-    <string name="map_export_individual_route">匯出路徑</string>
-    <string name="map_export_individual_route_as_track">匯出航跡</string>
     <string name="map_load_individual_route">載入個別的路徑</string>
     <string name="map_load_individual_route_confirm">覆蓋現有的路徑?</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
@@ -1729,4 +1727,8 @@
     <string name="back">後方</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">選擇全部</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>

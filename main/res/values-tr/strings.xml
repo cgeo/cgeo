@@ -1941,8 +1941,6 @@
     <string name="individual_route_error_toggling_waypoint">ara nokta değiştirilirken hata oluştu</string>
     <string name="individual_route_error_single_waypoint_mode">Tek yol noktası modunda mevcut değil</string>
     <string name="map_sort_individual_route">Özel rotayı sırala</string>
-    <string name="map_export_individual_route">Rota olarak dışa aktar</string>
-    <string name="map_export_individual_route_as_track">İz olarak dışa aktar</string>
     <string name="map_load_individual_route">Özel rotayı yükle</string>
     <string name="map_load_individual_route_confirm">Mevcut rotanın üzerine yazılsın mı?</string>
     <string name="map_autotarget_individual_route">Rota başlangıcını hedef olarak ayarla</string>
@@ -2124,4 +2122,8 @@
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tümünü Seç</string>
     <string name="touch_again_to_exit">Çıkmak için lütfen yeniden dokunun</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>

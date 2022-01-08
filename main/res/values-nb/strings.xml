@@ -1864,8 +1864,6 @@
     <string name="individual_route_error_toggling_waypoint">problem med å veksle veipunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Ikke tilgjengelig i en-veipunktsmodus</string>
     <string name="map_sort_individual_route">Sorter individuell rute</string>
-    <string name="map_export_individual_route">Eksporter som rute</string>
-    <string name="map_export_individual_route_as_track">Eksporter som spor</string>
     <string name="map_load_individual_route">Last inn individuell rute</string>
     <string name="map_load_individual_route_confirm">Overskrive eksisterende rute?</string>
     <string name="map_autotarget_individual_route">Sett rutestart som mål</string>
@@ -2012,4 +2010,8 @@
     <string name="back">Tilbake</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Velg alle</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>

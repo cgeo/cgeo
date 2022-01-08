@@ -6,6 +6,7 @@
 - Change: Automatically enable track display on loading a GPX track file
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Geocache listesi
 - Yeni: Sonraki 20 Geocache'i seçebilme seçeneği

@@ -6,6 +6,7 @@
 - Zmena: Automaticky aktivované zobrazenie stopy pri načítaní súboru GPX so stopou
 - Nové: Symboly D/T pre ikony kešiek (voliteľné)
 - New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Zoznam kešiek
 - Nové: Možnosť vybrať ďalších 20 kešiek

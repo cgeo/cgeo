@@ -2017,8 +2017,6 @@
     <string name="individual_route_error_toggling_waypoint">chyba pri prepnutí bodu trasy</string>
     <string name="individual_route_error_single_waypoint_mode">Nie je dostupné v režime jedného trasového bodu</string>
     <string name="map_sort_individual_route">Zoradiť individuálnu trasu</string>
-    <string name="map_export_individual_route">Exportovať ako trasu</string>
-    <string name="map_export_individual_route_as_track">Exportovať ako stopu</string>
     <string name="map_load_individual_route">Načítať individuálnu trasu</string>
     <string name="map_load_individual_route_confirm">Prepísať existujúcu trasu?</string>
     <string name="map_autotarget_individual_route">Nastaviť začiatok trasy ako cieľ</string>
@@ -2205,4 +2203,8 @@
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
     <string name="touch_again_to_exit">Opakovaným stlačením ukončíte</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>

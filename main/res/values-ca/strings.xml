@@ -1977,8 +1977,6 @@
     <string name="individual_route_error_toggling_waypoint">error en canviar el punt de ruta</string>
     <string name="individual_route_error_single_waypoint_mode">No disponible en mode punt de ruta únic</string>
     <string name="map_sort_individual_route">Ordena la ruta individual</string>
-    <string name="map_export_individual_route">Exporta com a ruta</string>
-    <string name="map_export_individual_route_as_track">Exporta com a track</string>
     <string name="map_load_individual_route">Carrega la ruta individual</string>
     <string name="map_load_individual_route_confirm">Sobreescriure la ruta existent?</string>
     <string name="map_autotarget_individual_route">Estableix l’inici de la ruta com a objectiu</string>
@@ -2160,4 +2158,8 @@
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
+    <!-- render theme legend: category "areas" -->
+    <!-- render theme legend: category "Roads & Paths" -->
+    <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <!-- render theme legend: category "POI / Symbols" -->
 </resources>
