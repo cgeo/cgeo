@@ -1979,8 +1979,6 @@
     <string name="individual_route_error_toggling_waypoint">erreur du basculement du point de passage</string>
     <string name="individual_route_error_single_waypoint_mode">Non disponible en mode point de passage unique</string>
     <string name="map_sort_individual_route">Trier les itinéraires individuels</string>
-    <string name="map_export_individual_route">Exporter comme itinéraire</string>
-    <string name="map_export_individual_route_as_track">Exporter comme trace</string>
     <string name="map_load_individual_route">Charger un itinéraire individuel</string>
     <string name="map_load_individual_route_confirm">Remplacer l\'itinéraire existant ?</string>
     <string name="map_autotarget_individual_route">Définir le départ de l\'itinéraire comme cible</string>
