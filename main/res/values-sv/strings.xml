@@ -1975,8 +1975,6 @@
     <string name="individual_route_error_toggling_waypoint">fel vid växling av vägpunkt</string>
     <string name="individual_route_error_single_waypoint_mode">Inte tillgänglig i singel-vägpunkts läge</string>
     <string name="map_sort_individual_route">Sortera individuell rutt</string>
-    <string name="map_export_individual_route">Exportera som rutt</string>
-    <string name="map_export_individual_route_as_track">Exportera som spår</string>
     <string name="map_load_individual_route">Ladda individuell rutt-fil</string>
     <string name="map_load_individual_route_confirm">Vill du skriva över befintlig rutt?</string>
     <string name="map_autotarget_individual_route">Ange ruttstart som mål</string>
