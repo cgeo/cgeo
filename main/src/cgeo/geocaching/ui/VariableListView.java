@@ -219,7 +219,7 @@ public class VariableListView extends LinearLayout {
         }
 
         public void setVisibleVariablesAndDependent(final Collection<String> neededVars) {
-            setVisibleVariables(this.variables.getDependentVariables(neededVars));
+            setVisibleVariables(neededVars == null ? null : this.variables.getDependentVariables(neededVars));
         }
 
         public void addVisibleVariables(final Collection<String> newVars) {
@@ -234,7 +234,18 @@ public class VariableListView extends LinearLayout {
             filterEnabled = true;
         }
 
-        public void setVisibleVariables(@NonNull final Collection<String> newVisibleVariables) {
+        public void setVisibleVariables(@Nullable final Collection<String> newVisibleVariables) {
+
+            if (newVisibleVariables == null) {
+                if (!filterEnabled) {
+                    return;
+                }
+                //disable filter
+                filterEnabled = false;
+                this.visibleVariables.clear();
+                this.setFilter(d -> true, true);
+
+            }
             //this is a costly operation
             //Thus check whether new and old set contains same elements (e.g. no change)
             if (filterEnabled && newVisibleVariables.size() == this.visibleVariables.size() && this.visibleVariables.containsAll(newVisibleVariables)) {
