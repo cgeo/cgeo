@@ -1695,7 +1695,7 @@ public class Geocache implements IWaypoint {
     public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
         boolean changed = false;
         if (forceExtraction || !preventWaypointsFromNote) {
-            final WaypointParser waypointParser = new WaypointParser(namePrefix);
+            final WaypointParser waypointParser = new WaypointParser(this, namePrefix);
             for (final Waypoint parsedWaypoint : waypointParser.parseWaypoints(StringUtils.defaultString(text))) {
                 final Waypoint existingWaypoint = findWaypoint(parsedWaypoint);
                 if (null == existingWaypoint) {
@@ -1709,6 +1709,12 @@ public class Geocache implements IWaypoint {
                         changed = true;
                     }
                 }
+            }
+            for (Map.Entry<String, String> var : waypointParser.getParsedVariables().entrySet()) {
+                if (!getVariables().contains(var.getKey())) {
+                    getVariables().addVariable(var.getKey(), var.getValue());
+                }
+                getVariables().saveState();
             }
         }
         return changed;
@@ -1724,6 +1730,18 @@ public class Geocache implements IWaypoint {
                     return waypoint;
                 }
             }
+            return null;
+        }
+
+        //try to match calculate coordinate
+        if (searchWp.isCalculated()) {
+            for (final Waypoint waypoint : waypoints) {
+                // calculated waypoints match if they have same config
+                if (waypoint.isCalculated() && waypoint.getCalcStateJson().equals(searchWp.getCalcStateJson())) {
+                    return waypoint;
+                }
+            }
+            //none found -> calculated coords can only be matched´by another cc, so stop searching
             return null;
         }
 

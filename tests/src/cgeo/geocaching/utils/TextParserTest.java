@@ -90,13 +90,15 @@ public class TextParserTest {
 
     @Test
     public void splitUntil() {
-        final TextParser tp = new TextParser("this|is||a\\|test\\\\\\}}");
+        final TextParser tp = new TextParser("this|is||a\\|test\\\\\\}-}a");
 
         assertThat(tp.splitUntil(c -> c == '}', c -> c == '|', true, '\\', true))
-            .containsExactly("this", "is|a|test\\}");
+            .containsExactly("this", "is|a|test\\}-");
+        assertThat(tp.getExpression().charAt(tp.pos() - 1)).isEqualTo('}');
         tp.setPos(0);
         assertThat(tp.splitUntil(c -> c == '}', c -> c == '|', true, '\\', false))
-            .containsExactly("this", "is", "", "a|test\\}");
+            .containsExactly("this", "is", "", "a|test\\}-");
+        assertThat(tp.getExpression().charAt(tp.pos() - 1)).isEqualTo('}');
     }
 
     @Test

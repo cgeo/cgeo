@@ -12,6 +12,7 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableMap;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,6 +109,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         return CacheDetailActivity.Page.VARIABLES.id;
     }
 
+    @SuppressLint("NotifyDataSetChanged")
     @Override
     public void setContent() {
 
@@ -123,6 +125,8 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             return;
         }
         adapter.setVariableList(cache.getVariables());
+        //register for changes of variableslist -> calculated waypoints may have changed
+        cache.getVariables().addChangeListener(this, s -> adapter.setVariableList(cache.getVariables()));
         binding.getRoot().setVisibility(View.VISIBLE);
     }
 
@@ -174,6 +178,10 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         super.onDestroy();
         //called e.g. when user closes cache detail view (after "onDestroy" is called)
         checkUnsavedChanges();
+
+        if (cache != null && cache.getVariables() != null) {
+            cache.getVariables().removeChangeListener(this);
+        }
     }
 
     @Override

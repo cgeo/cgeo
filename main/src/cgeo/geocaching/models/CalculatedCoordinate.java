@@ -22,7 +22,7 @@ import org.apache.commons.lang3.EnumUtils;
 public class CalculatedCoordinate implements Parcelable {
 
     //Config String: {CC|<latPatern>|<lonPattern>|<type-char>}
-    private static final String CONFIG_KEY = "CC";
+    public static final String CONFIG_KEY = "CC";
 
     private static final DegreeFormula EMPTY_FORMULA = DegreeFormula.compile("");
 
@@ -83,13 +83,13 @@ public class CalculatedCoordinate implements Parcelable {
         this.longitudePattern = other.longitudePattern;
     }
 
-    public void setFromConfig(final String config) {
+    public int setFromConfig(final String config) {
         if (config == null) {
-            return;
+            return -1;
         }
         final String configToUse = config.trim();
-        if (!configToUse.startsWith("{" + CONFIG_KEY + "|") || !configToUse.endsWith("}")) {
-            return;
+        if (!configToUse.startsWith("{" + CONFIG_KEY + "|")) {
+            return -1;
         }
 
         final TextParser tp = new TextParser(config);
@@ -98,7 +98,7 @@ public class CalculatedCoordinate implements Parcelable {
         setLatitudePattern(tokens.size() > 0 ? tokens.get(0) : "");
         setLongitudePattern(tokens.size() > 1 ? tokens.get(1) : "");
         this.type = EnumUtils.getEnum(CalculatedCoordinateType.class, tokens.size() > 2 ? tokens.get(2) : null, CalculatedCoordinateType.PLAIN);
-
+        return tp.pos();
     }
 
     public String toConfig() {

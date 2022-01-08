@@ -302,7 +302,7 @@ public class GeocacheTest extends CGeoTestCase {
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.555"), "Final", "", "", WaypointType.FINAL));
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.666"), "Final", "", "", WaypointType.FINAL));
 
-        final String parseableText = WaypointParser.getParseableText(wpList, -1, false);
+        final String parseableText = WaypointParser.getParseableText(wpList, null, -1, false);
         assertWaypointsParsed(cache, parseableText, wpList);
 
         removeCacheCompletely(geocode);
