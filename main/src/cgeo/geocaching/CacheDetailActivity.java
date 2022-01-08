@@ -48,6 +48,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.CacheLogsViewCreator;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
+import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
@@ -131,6 +132,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
+import android.util.Pair;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -162,11 +164,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.EnumSet;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Observable;
@@ -469,6 +473,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
             menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
             menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
+            menu.findItem(R.id.menu_waypoint_generate).setVisible(selectedWaypoint.isCalculated());
         } else {
             if (imagesList != null) {
                 imagesList.onCreateContextMenu(menu, view);
@@ -588,12 +593,56 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final HandlerResetCoordinates handler = new HandlerResetCoordinates(this, progressDialog, false);
                 resetCoords(cache, handler, selectedWaypoint, true, false, progressDialog);
             }
+        } else if (itemId == R.id.menu_waypoint_generate) {
+            ensureSaved();
+            generateWaypointsFrom(selectedWaypoint);
         } else if (itemId == R.id.menu_calendar) {
             CalendarAdder.addToCalendar(this, cache);
         } else if (imagesList == null || !imagesList.onContextItemSelected(item)) {
             return onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void generateWaypointsFrom(final Waypoint selectedWaypoint) {
+
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(selectedWaypoint.getCalcStateJson());
+        if (!cc.isFilled()) {
+            return;
+        }
+
+        SimpleDialog.of(this).setTitle(TextParam.text("Generate Waypoints"))
+            .input(-1, null, null, null, t -> {
+                final Map<String, String> varPatterns = new HashMap<>();
+                final String[] tokens = t.split(";");
+                for (String token : tokens) {
+                    final String[] nameValue = token.split("=");
+                    if (nameValue.length == 2) {
+                        varPatterns.put(nameValue[0], nameValue[1]);
+                    }
+                }
+                if (!varPatterns.isEmpty()) {
+                    final List<Pair<String, Geopoint>> gps = cc.calculateGeopoints(cache.getVariables()::getValue, varPatterns);
+                    if (!gps.isEmpty()) {
+                        SimpleDialog.of(this).setTitle(TextParam.text("Generate Waypoints"))
+                            .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ": " + p.second),  null, s -> {
+                                boolean changed = false;
+                                for (Pair<String, Geopoint> p : s) {
+                                    final Waypoint wp = new Waypoint("Generated: " + p.first, WaypointType.WAYPOINT, true);
+                                    wp.setCoords(p.second);
+                                    wp.setGeocode(cache.getGeocode());
+                                    changed = changed | cache.addOrChangeWaypoint(wp, true);
+                                }
+
+                                if (changed) {
+                                    this.reinitializePage(Page.WAYPOINTS.id);
+                                    ActivityMixin.showShortToast(this, getString(R.string.waypoint_added));
+                                }
+                            });
+                    }
+                }
+            });
+
     }
 
     private abstract static class AbstractWaypointModificationCommand extends AbstractCommand {

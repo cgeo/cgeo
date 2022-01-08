@@ -47,5 +47,10 @@
         android:id="@+id/menu_waypoint_caches_around"
         android:title="@string/cache_menu_around">
     </item>
+    <item
+        android:id="@+id/menu_waypoint_generate"
+        android:title="Generate Waypoints"
+        android:visible="false">
+    </item>
 
 </menu>

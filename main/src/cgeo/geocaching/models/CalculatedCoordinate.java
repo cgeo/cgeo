@@ -13,8 +13,10 @@ import android.util.Pair;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang3.EnumUtils;
@@ -159,6 +161,71 @@ public class CalculatedCoordinate implements Parcelable {
     @NonNull
     public Pair<Double, Double> calculateGeopointData(final Func1<String, Value> varMap) {
         return new Pair<>(latitudePattern.evaluate(varMap), longitudePattern.evaluate(varMap));
+    }
+
+    @NonNull
+    public List<Pair<String, Geopoint>> calculateGeopoints(final Func1<String, Value> varMap, final Map<String, String> varPatterns) {
+        final List<Pair<String, Geopoint>> results = new ArrayList<>();
+        final List<Pair<String, List<Integer>>> varPatternList = new ArrayList<>();
+        for (Map.Entry<String, String> entry : varPatterns.entrySet()) {
+            varPatternList.add(new Pair<>(entry.getKey(), patternToValues(entry.getValue())));
+        }
+        calculateGeopointsRecursive(results, varMap, varPatternList, null,  0);
+        return results;
+    }
+
+    private void calculateGeopointsRecursive(final List<Pair<String, Geopoint>> result, final Func1<String, Value> varMap, final List<Pair<String, List<Integer>>> varPatterns, final String name, final int pos) {
+        if (pos >= varPatterns.size()) {
+            final Geopoint gp = calculateGeopoint(varMap);
+            if (gp != null) {
+                result.add(new Pair<>(name, gp));
+            }
+            return;
+        }
+        final Pair<String, List<Integer>> pattern = varPatterns.get(pos);
+        for (int value : pattern.second) {
+            calculateGeopointsRecursive(result, s -> pattern.first.equals(s) ? Value.of(value) : varMap.call(s), varPatterns,
+                (name == null ? "" : name + ",") + pattern.first + "=" + value, pos + 1);
+        }
+    }
+
+    public static List<Integer> patternToValues(final String pattern) {
+        final List<Integer> result = new ArrayList<>();
+        final TextParser tp = new TextParser(pattern);
+        StringBuilder currentToken = new StringBuilder();
+        String lastToken = null;
+        boolean rangeFound = false;
+        boolean negate = false;
+        while (true) {
+            if (tp.ch() == '^') {
+                negate = !negate;
+            } else if (tp.ch() >= '0' && tp.ch() <= '9') {
+                currentToken.append(tp.ch());
+            } else if (tp.ch() == '-') {
+                rangeFound = true;
+                lastToken = currentToken.toString();
+                currentToken = new StringBuilder();
+            } else if (tp.ch() == ',' || tp.eof()) {
+                final int end = Integer.parseInt(currentToken.toString());
+                final int start = rangeFound ? Integer.parseInt(lastToken) : end;
+                for (int i = start; i <= end; i++) {
+                    if (negate) {
+                        result.remove((Integer) i);
+                    } else {
+                        result.add(i);
+                    }
+                }
+                currentToken = new StringBuilder();
+                negate = false;
+                rangeFound = false;
+                lastToken = null;
+                if (tp.eof()) {
+                    break;
+                }
+            }
+            tp.next();
+        }
+        return result;
     }
 
     @Override
