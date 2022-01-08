@@ -1979,8 +1979,6 @@
     <string name="individual_route_error_toggling_waypoint">erro ao trocar de ponto adicional</string>
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
-    <string name="map_export_individual_route">Exportar como rota</string>
-    <string name="map_export_individual_route_as_track">Exportar como percurso</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
