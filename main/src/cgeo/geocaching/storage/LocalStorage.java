@@ -48,6 +48,7 @@ public final class LocalStorage {
     private static final String OFFLINE_LOG_IMAGES_DIR_NAME = "OfflineLogImages";
     private static final String MAP_THEME_INTERNAL_DIR_NAME = "MapThemeData";
     private static final String MAPSFORGE_SVG_CACHE_DIR_NAME = "mapsforge-svg-cache";
+    private static final String TRACKFILE_CACHE_DIR_NAME = "trackfiles";
     private static final long LOW_DISKSPACE_THRESHOLD = 1024 * 1024 * 100; // 100 MB in bytes
 
     //Legacy directory names which should NO LONGER BE OF USE
@@ -198,6 +199,13 @@ public final class LocalStorage {
     @NonNull
     public static File getMapsforgeSvgCacheDir() {
         final File dir =  new File(getInternalCgeoDirectory(), MAPSFORGE_SVG_CACHE_DIR_NAME);
+        dir.mkdirs();
+        return dir;
+    }
+
+    @NonNull
+    public static File getTrackfilesDir() {
+        final File dir = new File(getInternalCgeoDirectory(), TRACKFILE_CACHE_DIR_NAME);
         dir.mkdirs();
         return dir;
     }

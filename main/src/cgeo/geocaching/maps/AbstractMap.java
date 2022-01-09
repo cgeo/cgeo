@@ -103,7 +103,7 @@ public abstract class AbstractMap {
 
     public abstract void onLowMemory();
 
-    public void setTracks(final Route tracks) {
+    public void setTrack(final String key, final Route track) {
         //
     }
 
@@ -152,14 +152,10 @@ public abstract class AbstractMap {
         ActivityMixin.invalidateOptionsMenu(getActivity());
     }
 
-    protected RouteTrackUtils getRouteTrackUtils() {
-        return mapActivity.getRouteTrackUtils();
-    }
-
     public abstract Collection<Geocache> getCaches();
 
-     public abstract GeocacheFilterContext getFilterContext();
+    public abstract GeocacheFilterContext getFilterContext();
 
-     public abstract MapOptions getMapOptions();
+    public abstract MapOptions getMapOptions();
 
 }

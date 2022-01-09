@@ -158,7 +158,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private final GeoDirHandler geoDirUpdate = new UpdateLoc(this);
     private ProximityNotification proximityNotification;
     private IndividualRoute individualRoute = null;
-    private Route tracks = null;
 
     // status data
     /**
@@ -574,7 +573,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
-            getRouteTrackUtils().showPopup(individualRoute, tracks, this::setTarget));
+            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -648,11 +647,12 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         mapView.getMapController().setZoom(mapOptions.isLiveEnabled ? Math.max(zoom, MIN_LIVEMAP_ZOOM) : zoom);
     }
 
-    private void resumeTrack(final boolean preventReloading) {
+    private void resumeTrack(final String key, final boolean preventReloading) {
+        final Tracks tracks = mapActivity.getTracks();
         if (null == tracks && !preventReloading) {
-            getRouteTrackUtils().loadTracks(this::setTracks, false);
-        } else if (null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
-            ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
+            mapActivity.getRouteTrackUtils().reloadTrack(key, this::setTrack);
+        } else if (null != tracks && null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
+            ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, tracks.getRoute(key));
         }
     }
 
@@ -693,7 +693,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             });
         }
         MapUtils.updateFilterBar(activity, mapOptions.filterContext);
-        resumeTrack(false);
+        final Tracks tracks = mapActivity.getTracks();
+        if (tracks != null) {
+            tracks.resumeAllTracks(this::resumeTrack);
+        }
     }
 
     @Override
@@ -771,7 +774,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
-            getRouteTrackUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute);
+            mapActivity.getRouteTrackUtils().onPrepareOptionsMenu(menu, activity.findViewById(R.id.container_individualroute), individualRoute);
 
             menu.findItem(R.id.menu_hint).setVisible(mapOptions.mapMode == MapMode.SINGLE);
             menu.findItem(R.id.menu_compass).setVisible(mapOptions.mapMode == MapMode.SINGLE);
@@ -836,7 +839,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 || DownloaderUtils.onOptionsItemSelected(activity, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
-            getRouteTrackUtils().showPopup(individualRoute, tracks, this::setTarget);
+            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget);
         } else {
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
             if (mapSource != null) {
@@ -864,6 +867,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
+        final Tracks tracks = mapActivity.getTracks();
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {
             Toast.makeText(activity, R.string.brouter_recalculating, Toast.LENGTH_SHORT).show();
         }
@@ -871,8 +875,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
-                    tracks.calculateNavigationRoute();
-                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(tracks);
+                    tracks.traverse((key, route) -> {
+                        route.calculateNavigationRoute();
+                        ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route);
+                    });
                 }, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
             } catch (RejectedExecutionException e) {
                 Log.e("CGeoMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
@@ -888,10 +894,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
-    public void setTracks(final Route route) {
-        tracks = route;
-        resumeTrack(null == tracks);
-        getRouteTrackUtils().showTrackInfo(tracks);
+    public void setTrack(final String key, final Route route) {
+        mapActivity.getTracks().setRoute(key, route);
+        resumeTrack(key, null == route);
+        mapActivity.getRouteTrackUtils().showTrackInfo(route);
     }
 
     @Override

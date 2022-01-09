@@ -856,10 +856,6 @@ public class Settings {
         return getBoolean(R.string.pref_excludeWpVisited, false);
     }
 
-    public static boolean isHideTrack() {
-        return getBoolean(R.string.pref_hide_track, false);
-    }
-
     public static boolean isStoreLogImages() {
         return getBoolean(R.string.pref_logimages, false);
     }
@@ -1630,10 +1626,6 @@ public class Settings {
 
     public static void setExcludeWpVisited(final boolean exclude) {
         putBoolean(R.string.pref_excludeWpVisited, exclude);
-    }
-
-    public static void setHideTrack(final boolean hide) {
-        putBoolean(R.string.pref_hide_track, hide);
     }
 
     static void setLogin(final String username, final String password) {

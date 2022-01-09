@@ -125,6 +125,7 @@ public class BackupUtils {
                     regrantAccessFolders.remove(0);
                     triggerNextRegrantStep(null, null);
                 });
+/* reactivate this if there will ever be PersistableUri again stored in our preferences
         } else if (!regrantAccessUris.isEmpty()) {
             final Uri uriToBeRestored = Uri.parse(regrantAccessUris.get(0).right);
             final String temp = uriToBeRestored.getPath();
@@ -140,6 +141,7 @@ public class BackupUtils {
                     regrantAccessUris.remove(0);
                     triggerNextRegrantStep(null, null);
                 });
+*/
         } else {
             finishRestoreInternal(activityContext, regrantAccessRestartNeeded, regrantAccessResultString);
         }

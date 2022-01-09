@@ -20,7 +20,7 @@ public class FileNameCreator {
     public static final FileNameCreator INDIVIDUAL_ROUTE_NOSUFFIX = new FileNameCreator("route", null);
     public static final FileNameCreator INDIVIDUAL_TRACK_NOSUFFIX = new FileNameCreator("track", null);
     public static final FileNameCreator TRAIL_HISTORY = new FileNameCreator("trail", "gpx");
-
+    public static final FileNameCreator TRACKFILE = new FileNameCreator("track", "gpx");
     public static final FileNameCreator OFFLINE_LOG_IMAGE = new FileNameCreator("cgeo-image-%s", "jpg");
 
     private final AtomicInteger fileNameCounter = new AtomicInteger(1);
