@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.PositionHistory;
+import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
@@ -22,6 +23,7 @@ import android.location.Location;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -34,7 +36,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
-public class GooglePositionAndHistory implements PositionAndHistory, Route.UpdateRoute, IndividualRoute.UpdateIndividualRoute {
+public class GooglePositionAndHistory implements PositionAndHistory, Tracks.UpdateTrack, IndividualRoute.UpdateIndividualRoute {
 
     public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION = 10;
@@ -71,7 +73,13 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
 
     private ArrayList<ArrayList<LatLng>> route = null;
     private Viewport lastViewport = null;
-    private ArrayList<ArrayList<LatLng>> track = null;
+
+    private final HashMap<String, CachedRoute> cache = new HashMap<>();
+
+    private static class CachedRoute {
+        private boolean isHidden = false;
+        private ArrayList<ArrayList<LatLng>> track = null;
+    }
 
     public GooglePositionAndHistory(final GoogleMap googleMap, final GoogleMapView mapView, final GoogleMapView.PostRealDistance postRealDistance, final GoogleMapView.PostRealDistance postRouteDistance) {
         this.mapRef = new WeakReference<>(googleMap);
@@ -169,9 +177,34 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
     }
 
     @Override
-    public void updateRoute(final Route track) {
-        this.track = null == track ? null : track.getAllPointsLatLng();
+    public void updateRoute(final String key, final Route track) {
+        synchronized (cache) {
+            CachedRoute c = cache.get(key);
+            if (c == null) {
+                c = new CachedRoute();
+                cache.put(key, c);
+            }
+            c.track = null;
+            if (track != null) {
+                c.track = track.getAllPointsLatLng();
+            }
+        }
         repaintRequired();
+    }
+
+    public void removeRoute(final String key) {
+        synchronized (cache) {
+            cache.remove(key);
+        }
+    }
+
+    public void setHidden(final String key, final boolean isHidden) {
+        synchronized (cache) {
+            final CachedRoute c = cache.get(key);
+            if (c != null) {
+                c.isHidden = isHidden;
+            }
+        }
     }
 
     @Override
@@ -180,7 +213,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
         drawHistory();
         drawRoute();
         drawViewport(lastViewport);
-        drawTrack();
+        drawTracks();
     }
 
 
@@ -335,16 +368,21 @@ public class GooglePositionAndHistory implements PositionAndHistory, Route.Updat
         lastViewport = viewport;
     }
 
-    private synchronized void drawTrack() {
+    private synchronized void drawTracks() {
         trackObjs.removeAll();
-        if (track != null && track.size() > 1 && !Settings.isHideTrack()) {
-            for (ArrayList<LatLng> segment : track) {
-                trackObjs.addPolyline(new PolylineOptions()
-                    .addAll(segment)
-                    .color(MapLineUtils.getTrackColor())
-                    .width(MapLineUtils.getTrackLineWidth())
-                    .zIndex(ZINDEX_TRACK)
-                );
+        synchronized (cache) {
+            for (CachedRoute c : cache.values()) {
+                // route hidden, no route or route too short?
+                if (!c.isHidden && c.track != null && c.track.size() > 0) {
+                    for (ArrayList<LatLng> segment : c.track) {
+                        trackObjs.addPolyline(new PolylineOptions()
+                            .addAll(segment)
+                            .color(MapLineUtils.getTrackColor())
+                            .width(MapLineUtils.getTrackLineWidth())
+                            .zIndex(ZINDEX_TRACK)
+                        );
+                    }
+                }
             }
         }
     }

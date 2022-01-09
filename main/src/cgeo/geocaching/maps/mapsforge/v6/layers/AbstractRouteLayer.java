@@ -5,6 +5,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 import org.mapsforge.core.graphics.Canvas;
@@ -21,27 +22,41 @@ abstract class AbstractRouteLayer extends Layer {
     protected float width;
     private Paint paint = null;
     protected int lineColor = 0xD00000A0;
-    protected boolean isHidden = false;
-    private final Boolean pathLock = true;
 
     // used for caching
-    private ArrayList<ArrayList<Geopoint>> track = null;
-    private Path path = null;
+    private final HashMap<String, CachedRoute> cache = new HashMap<>();
     private long mapSize = -1;
-    private Point topLeftPoint = null;
+
+    private static class CachedRoute {
+        private boolean isHidden = false;
+        private ArrayList<ArrayList<Geopoint>> track = null;
+        private Path path = null;
+        private Point topLeftPoint = null;
+    }
 
     protected AbstractRouteLayer() {
         width = MapLineUtils.getDefaultThinLineWidth();
     }
 
-    public void updateRoute(final Route route) {
+    public void updateRoute(final String key, final Route route) {
         resetColor();
-        synchronized (pathLock) {
-            this.track = null;
-            this.path = null;
-            if (route != null) {
-                this.track = route.getAllPoints();
+        synchronized (cache) {
+            CachedRoute c = cache.get(key);
+            if (c == null) {
+                c = new CachedRoute();
+                cache.put(key, c);
             }
+            c.track = null;
+            c.path = null;
+            if (route != null) {
+                c.track = route.getAllPoints();
+            }
+        }
+    }
+
+    public void removeRoute(final String key) {
+        synchronized (cache) {
+            cache.remove(key);
         }
     }
 
@@ -53,57 +68,57 @@ abstract class AbstractRouteLayer extends Layer {
         paint.setTextSize(20);
     }
 
-    public void setHidden(final boolean isHidden) {
-        this.isHidden = isHidden;
+    public void setHidden(final String key, final boolean isHidden) {
+        synchronized (cache) {
+            final CachedRoute c = cache.get(key);
+            if (c != null) {
+                c.isHidden = isHidden;
+            }
+        }
     }
 
     @Override
     public synchronized void draw(final BoundingBox boundingBox, final byte zoomLevel, final Canvas canvas, final Point topLeftPoint) {
-        if (isHidden) {
-            return;
-        }
-
-        // no route or route too short?
-        if (this.track == null || this.track.size() < 1) {
-            return;
-        }
-
-        final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
-        synchronized (pathLock) {
-            if (null == this.path || this.mapSize != mapSize || this.topLeftPoint != topLeftPoint) {
-                translateRouteToPath(mapSize, topLeftPoint);
+        synchronized (cache) {
+            for (CachedRoute c : cache.values()) {
+                // route hidden, no route or route too short?
+                if (!c.isHidden && c.track != null && c.track.size() > 0) {
+                    final long mapSize = MercatorProjection.getMapSize(zoomLevel, this.displayModel.getTileSize());
+                    if (null == c.path || this.mapSize != mapSize || c.topLeftPoint != topLeftPoint) {
+                        translateRouteToPath(mapSize, topLeftPoint, c);
+                    }
+                    if (null != c.path) {
+                        canvas.drawPath(c.path, paint);
+                    }
+                }
             }
-        }
-        if (null != this.path) {
-            canvas.drawPath(path, paint);
         }
     }
 
-    private void translateRouteToPath(final long mapSize, final Point topLeftPoint) {
+    private void translateRouteToPath(final long mapSize, final Point topLeftPoint, final CachedRoute c) {
         this.mapSize = mapSize;
-        this.topLeftPoint = topLeftPoint;
-        this.path = null;
+        c.topLeftPoint = topLeftPoint;
+        c.path = null;
 
-        final Iterator<ArrayList<Geopoint>> segmentIterator = track.iterator();
+        final Iterator<ArrayList<Geopoint>> segmentIterator = c.track.iterator();
         if (!segmentIterator.hasNext()) {
             return;
         }
 
-        path = AndroidGraphicFactory.INSTANCE.createPath();
+        c.path = AndroidGraphicFactory.INSTANCE.createPath();
         ArrayList<Geopoint> segment = segmentIterator.next();
         while (segment != null) {
             final Iterator<Geopoint> geopointIterator = segment.iterator();
             Geopoint geopoint = geopointIterator.next();
-            path.moveTo((float) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - topLeftPoint.y));
+            c.path.moveTo((float) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - topLeftPoint.y));
 
             while (geopointIterator.hasNext()) {
                 geopoint = geopointIterator.next();
-                path.lineTo((float) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - topLeftPoint.y));
+                c.path.lineTo((float) (MercatorProjection.longitudeToPixelX(geopoint.getLongitude(), mapSize) - topLeftPoint.x), (float) (MercatorProjection.latitudeToPixelY(geopoint.getLatitude(), mapSize) - topLeftPoint.y));
             }
 
             segment = segmentIterator.hasNext() ? segmentIterator.next() : null;
         }
-
     }
 
 }

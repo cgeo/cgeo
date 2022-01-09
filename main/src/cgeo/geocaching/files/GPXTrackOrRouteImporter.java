@@ -2,9 +2,7 @@ package cgeo.geocaching.files;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Route;
-import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
-import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.Log;
 
@@ -27,7 +25,7 @@ public class GPXTrackOrRouteImporter {
     private GPXTrackOrRouteImporter() {
     }
 
-    public static void doImport(final Context context, final Uri uri, final Route.UpdateRoute callback, final boolean resetVisibilitySetting) {
+    public static void doImport(final Context context, final Uri uri, final Route.UpdateRoute callback) {
         final AtomicBoolean success = new AtomicBoolean(false);
         Toast.makeText(context, R.string.map_load_track_wait, Toast.LENGTH_SHORT).show();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
@@ -37,12 +35,9 @@ public class GPXTrackOrRouteImporter {
                 if (success.get()) {
                     AndroidSchedulers.mainThread().createWorker().schedule(() -> {
                         try {
-                            if (resetVisibilitySetting) {
-                                Settings.setHideTrack(false);
-                            }
                             callback.updateRoute(value);
                         } catch (final Throwable t) {
-                            //
+                            Log.w("Error on track/route import: " + t.getMessage());
                         }
                     });
                 }
@@ -52,7 +47,6 @@ public class GPXTrackOrRouteImporter {
         }, () -> {
             if (!success.get()) {
                 Toast.makeText(context, R.string.load_track_error, Toast.LENGTH_SHORT).show();
-                ContentStorage.get().setPersistedDocumentUri(PersistableUri.TRACK, null);
                 callback.updateRoute(null);
             }
         });

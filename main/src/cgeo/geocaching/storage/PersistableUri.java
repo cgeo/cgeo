@@ -11,7 +11,7 @@ import androidx.annotation.StringRes;
 /** Enum listing all single-document-Uris which can be persisted */
 public enum PersistableUri {
 
-    TRACK(R.string.pref_persistableuri_track, R.string.persistableuri_track, null);
+    UNUSED_TRACK(R.string.pref_persistableuri_track, R.string.persistableuri_track, null);
 
     @StringRes
     private final int prefKeyId;

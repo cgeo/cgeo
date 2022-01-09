@@ -33,6 +33,7 @@ import cgeo.geocaching.maps.MapSettingsUtils;
 import cgeo.geocaching.maps.MapState;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.RouteTrackUtils;
+import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
@@ -187,7 +188,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private MapOptions mapOptions;
     private TargetView targetView;
     private IndividualRoute individualRoute = null;
-    private Route tracks = null;
+    private Tracks tracks = null;
 
     private static boolean followMyLocation = true;
 
@@ -219,7 +220,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         Log.d("NewMap: onCreate");
 
-        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTracks, this::isTargetSet);
+        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
+        tracks = new Tracks(routeTrackUtils, this::setTrack);
 
         ResourceBitmapCacheMonitor.addRef();
         AndroidGraphicFactory.createInstance(this.getApplication());
@@ -269,7 +271,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
         // routes / tracks popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, tracks, this::setTarget));
+        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
 
         // prepare circular progress spinner
         spinner = (ProgressBar) findViewById(R.id.map_progressbar);
@@ -478,7 +480,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
-            routeTrackUtils.showPopup(individualRoute, tracks, this::setTarget);
+            routeTrackUtils.showPopup(individualRoute, this::setTarget);
         } else {
             final String language = MapProviderFactory.getLanguage(id);
             final MapSource mapSource = MapProviderFactory.getMapSource(id);
@@ -507,7 +509,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         Tile.cache.clear();
 
         if (null != trackLayer) {
-            trackLayer.setHidden(Settings.isHideTrack());
+//            trackLayer.setHidden(Settings.isHideTrack());
             trackLayer.requestRedraw();
         }
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
@@ -522,8 +524,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         if (null != tracks) {
             try {
                 AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
-                    tracks.calculateNavigationRoute();
-                    trackLayer.updateRoute(tracks);
+                    tracks.traverse((key, route) -> {
+                        route.calculateNavigationRoute();
+                        trackLayer.updateRoute(key, route);
+                    });
                 }, () -> trackLayer.requestRedraw());
             } catch (RejectedExecutionException e) {
                 Log.e("NewMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
@@ -737,12 +741,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
     }
 
-    private void resumeTrack(final boolean preventReloading) {
+    private void resumeTrack(final String key, final boolean preventReloading) {
         if (null == tracks && !preventReloading) {
-            this.routeTrackUtils.loadTracks(this::setTracks, false);
-        } else if (null != trackLayer) {
-            trackLayer.updateRoute(tracks);
-            trackLayer.setHidden(Settings.isHideTrack());
+            this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
+        } else if (null != trackLayer && null != tracks) {
+            trackLayer.updateRoute(key, tracks.getRoute(key));
         }
     }
 
@@ -753,7 +756,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         resumeTileLayer();
         resumeRoute(false);
-        resumeTrack(false);
+        if (tracks != null) {
+            tracks.resumeAllTracks(this::resumeTrack);
+        }
         mapView.getModel().mapViewPosition.addObserver(this);
         MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
@@ -783,7 +788,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.mapView.getLayerManager().getLayers().add(this.routeLayer);
 
         // TrackLayer
-        this.trackLayer = new TrackLayer(Settings.isHideTrack());
+        this.trackLayer = new TrackLayer();
         this.mapView.getLayerManager().getLayers().add(this.trackLayer);
 
         // NavigationLayer
@@ -1619,10 +1624,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.routeTrackUtils.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void setTracks(final Route route) {
-        tracks = route;
-        resumeTrack(null == tracks);
-        this.routeTrackUtils.showTrackInfo(tracks);
+    private void setTrack(final String key, final Route route) {
+        tracks.setRoute(key, route);
+        resumeTrack(key, null == route);
+        this.routeTrackUtils.showTrackInfo(route);
     }
 
     private void reloadIndividualRoute() {

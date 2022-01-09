@@ -10,6 +10,8 @@ import org.mapsforge.core.model.Point;
 
 public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.UpdateIndividualRoute {
 
+    private static final String KEY = "INDIVIDUALROUTE";
+
     private float distance = 0.0f;
     private PostRealDistance postRealRouteDistance = null;
 
@@ -31,7 +33,7 @@ public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.Up
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        super.updateRoute(route);
+        super.updateRoute(KEY, route);
         this.distance = route.getDistance();
 
         if (postRealRouteDistance != null) {

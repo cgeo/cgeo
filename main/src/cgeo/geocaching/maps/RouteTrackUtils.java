@@ -10,10 +10,9 @@ import cgeo.geocaching.maps.routing.RouteSortActivity;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.storage.PersistableUri;
+import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Action2;
@@ -42,21 +41,22 @@ public class RouteTrackUtils {
     private final ContentStorageActivityHelper fileSelectorRoute;
     private final ContentStorageActivityHelper fileSelectorTrack;
     private View popup = null;
+    private Tracks tracks = null;
 
     private final Runnable reloadIndividualRoute;
     private final Runnable clearIndividualRoute;
 
-    private final Route.UpdateRoute updateTracks;
+    private final Tracks.UpdateTrack updateTrack;
     private final Route.CenterOnPosition centerOnPosition;
 
     private final Func0<Boolean> isTargetSet;
 
-    public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Route.UpdateRoute updateTracks, final Func0<Boolean> isTargetSet) {
+    public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Tracks.UpdateTrack updateTrack, final Func0<Boolean> isTargetSet) {
         this.activity = activity;
         this.centerOnPosition = centerOnPosition;
         this.clearIndividualRoute = clearIndividualRoute;
         this.reloadIndividualRoute = reloadIndividualRoute;
-        this.updateTracks = updateTracks;
+        this.updateTrack = updateTrack;
         this.isTargetSet = isTargetSet;
 
         this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
@@ -67,18 +67,26 @@ public class RouteTrackUtils {
                 }
             });
         this.fileSelectorTrack = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_TRACK))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_PERSISTED, PersistableUri.class, uri -> {
-                if (uri != null && this.updateTracks != null) {
-                    loadTracks(this.updateTracks, true);
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
+                if (uri != null && this.updateTrack != null) {
+                    GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+                        tracks.add(activity, uri, updateTrack);
+                        updateDialogTracks(popup, tracks);
+                    } /* @todo, true */);
+
                 }
             });
+    }
+
+    public void setTracks(final Tracks tracks) {
+        this.tracks = tracks;
     }
 
     /**
      * Shows a popup menu for individual route related items
      *
      */
-    public void showPopup(final IndividualRoute individualRoute, final Route tracks, final Action2<Geopoint, String> setTarget) {
+    public void showPopup(final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
         this.popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
         updateDialog(this.popup, individualRoute, tracks, setTarget);
         final BottomSheetDialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, this.popup, R.string.routes_tracks_dialog_title);
@@ -86,7 +94,7 @@ public class RouteTrackUtils {
         dialog.show();
     }
 
-    private void updateDialog(final View dialog, final IndividualRoute individualRoute, final Route tracks, final Action2<Geopoint, String> setTarget) {
+    private void updateDialog(final View dialog, final IndividualRoute individualRoute, final Tracks tracks, final Action2<Geopoint, String> setTarget) {
         updateDialogIndividualRoute(dialog, individualRoute, setTarget);
         updateDialogTracks(dialog, tracks);
         updateDialogClearTargets(dialog, individualRoute, setTarget);
@@ -98,10 +106,10 @@ public class RouteTrackUtils {
         }
         dialog.findViewById(R.id.indivroute_load).setOnClickListener(v1 -> {
             if (null == individualRoute || individualRoute.getNumSegments() == 0) {
-                startIndividualRouteFileSelector();
+                startFileSelector(fileSelectorRoute);
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(
-                    (d, w) -> startIndividualRouteFileSelector());
+                    (d, w) -> startFileSelector(fileSelectorRoute));
             }
         });
 
@@ -132,35 +140,30 @@ public class RouteTrackUtils {
         }
     }
 
-    private void updateDialogTracks(final View dialog, final Route tracks) {
+    private void updateDialogTracks(final View dialog, final Tracks tracks) {
         if (dialog == null) {
             return;
         }
-        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> {
-            if (null == tracks || tracks.getNumSegments() == 0) {
-                startIndividualTrackFileSelector();
-            } else {
-                SimpleDialog.of(activity).setTitle(R.string.map_load_track).setMessage(R.string.map_load_track_confirm).confirm((d, w) ->
-                    startIndividualTrackFileSelector());
-            }
-        });
         final LinearLayout tracklist = dialog.findViewById(R.id.tracklist);
         tracklist.removeAllViews();
-        if (PersistableUri.TRACK.hasValue()) {
+        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> startFileSelector(fileSelectorTrack));
+
+        tracks.traverse((key, route) -> {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
-            ((TextView) vt.findViewById(R.id.item_title)).setText(PersistableUri.TRACK.getUri().getLastPathSegment());
+            ((TextView) vt.findViewById(R.id.item_title)).setText(tracks.getDisplayname(key));
             vt.findViewById(R.id.item_center).setOnClickListener(v1 -> {
-                if (null != tracks) {
-                    tracks.setCenter(centerOnPosition);
+                if (null != route) {
+                    route.setCenter(centerOnPosition);
                 }
             });
             vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> {
-                ContentStorage.get().setPersistedDocumentUri(PersistableUri.TRACK, null);
-                updateDialogTracks(dialog, null);
-                updateTracks.updateRoute(null);
+                // @todo: Sicherheitsabfrage ergänzen
+                tracks.remove(key);
+                updateDialogTracks(dialog, tracks);
+                updateTrack.updateRoute(key, null);
             });
             tracklist.addView(vt);
-        }
+        });
     }
 
     private void updateDialogClearTargets(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
@@ -181,22 +184,16 @@ public class RouteTrackUtils {
         return route != null && route.getNumSegments() > 0;
     }
 
-    private void startIndividualRouteFileSelector() {
-        fileSelectorRoute.selectFile(null, PersistableFolder.GPX.getUri());
+    private void startFileSelector(final ContentStorageActivityHelper csah) {
+        csah.selectFile(null, PersistableFolder.GPX.getUri());
     }
 
-    private void startIndividualTrackFileSelector() {
-        fileSelectorTrack.selectPersistableUri(PersistableUri.TRACK);
-    }
-
-    public void loadTracks(final Route.UpdateRoute updateRoute, final boolean resetVisibilitySetting) {
-        final Uri uri = PersistableUri.TRACK.getUri();
-        if (null != uri) {
-            GPXTrackOrRouteImporter.doImport(activity, PersistableUri.TRACK.getUri(), (route) -> {
-                updateDialogTracks(popup, route);
-                updateRoute.updateRoute(route);
-            }, resetVisibilitySetting);
-        }
+    public void reloadTrack(final String key, final Tracks.UpdateTrack updateTrack) {
+        final Uri uri = Trackfiles.getUriFromKey(key);
+        GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+            updateDialogTracks(popup, tracks);
+            updateTrack.updateRoute(key, route);
+        });
     }
 
     public void showTrackInfo(final Route route) {

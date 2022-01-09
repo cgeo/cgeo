@@ -12,6 +12,7 @@ import cgeo.geocaching.maps.CGeoMap;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.RouteTrackUtils;
+import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.models.Geocache;
@@ -49,6 +50,7 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     private final AbstractMap mapBase;
 
     private RouteTrackUtils routeTrackUtils = null;
+    private Tracks tracks = null;
 
     public GoogleMapActivity() {
         mapBase = new CGeoMap(this);
@@ -58,8 +60,14 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
         super.setTheme(R.style.cgeo);
     }
 
+    @Override
     public RouteTrackUtils getRouteTrackUtils() {
         return routeTrackUtils;
+    }
+
+    @Override
+    public Tracks getTracks() {
+        return tracks;
     }
 
     @Override
@@ -71,7 +79,8 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     public void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
         routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
-            mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTracks, mapBase::isTargetSet);
+            mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
+        tracks = new Tracks(routeTrackUtils, mapBase::setTrack);
     }
 
     @Override
