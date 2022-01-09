@@ -1423,6 +1423,8 @@
     <string name="map_show_other_title">Εμφάνιση άλλων:</string>
     <string name="map_settings_cache_filter_too_complex_title">Το φίλτρο κρυπτών είναι πολύ περίπλοκο</string>
     <string name="map_settings_cache_filter_too_complex_message">Το τρέχον φίλτρο κρυπτών είναι πολύ περίπλοκο για να εφαρμόσει πρόσθετες επιλογές εδώ. Συνήθως αυτό σημαίνει ότι το φίλτρο κρυπτών περιέχει επιλογές \" Ή\" και \"ΟΧΙ\" αντί για απλή λογική \"ΚΑΙ\".</string>
+    <string name="map_theme_legend">Υπόμνημα Θεμάτων</string>
+    <string name="map_theme_legend_info">Πατήστε στον τίτλο της κατηγορίας για να ανοίξετε/κλείσετε. Πατήστε παρατεταμένα ένα σύμβολο για μικρές πληροφορίες σχετικά με αυτό το σύμβολο. Πατήστε στο εικονίδιο πληροφοριών για να επισκεφθείτε ένα λεπτομερές υπόμνημα online.</string>
     <!-- search -->
     <string name="geo_search_label">Αναζήτηση κρυπτών κοντά</string>
     <string name="search_bar_hint">Αναζήτηση κρυπτών/ανιχνεύσιμων</string>
@@ -2162,7 +2164,38 @@
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
     <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Περιοχές</string>
+    <string name="rtl_fell_meadow">Λιβάδι</string>
+    <string name="rtl_heath">Ρείκια</string>
+    <string name="rtl_marsh">Βάλτος</string>
+    <string name="rtl_rock">Βράχος</string>
+    <string name="rtl_scree">scree</string>
+    <string name="rtl_scrub">scrub</string>
+    <string name="rtl_wood_mixed">ξύλο (ανάμεικτο)</string>
+    <string name="rtl_wood_coniferous">ξύλο (κωνοφόρων)</string>
+    <string name="rtl_wood_deciduous">ξύλο</string>
+    <string name="rtl_glacier">Παγετώνας</string>
+    <string name="rtl_grass">γρασίδι</string>
+    <string name="rtl_farmland">χωράφι</string>
+    <string name="rtl_orchard">Δενδρόκηπος</string>
+    <string name="rtl_vineyard">αμπελώνας</string>
+    <string name="rtl_water">νερό</string>
+    <string name="rtl_water_intermittent">χείμαρος</string>
+    <string name="rtl_military">Στρατιωτικός</string>
+    <string name="rtl_nature_reserve">Καταφύγιο Αγριας ζωής</string>
+    <string name="rtl_nature_reserve_strict">Καταφύγιο Αγριας Ζωής (αυστηρό)</string>
+    <string name="rtl_cliff">Γκρεμός</string>
+    <string name="rtl_ridge">Ακμή</string>
+    <string name="rtl_reef">Ύφαλος</string>
+    <string name="rtl_beach">παραλία</string>
+    <string name="rtl_beach_gravel">Παραλία με Χαλίκια</string>
+    <string name="rtl_spring">Πηγή</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_drinking_water">πόσιμο νερό</string>
+    <string name="rtl_peak">Κορυφή</string>
+    <string name="rtl_peak_cross">σταυρός κορυφής</string>
+    <string name="rtl_picnic_site">Μέρος για πικ νικ</string>
+    <string name="rtl_playground">Παιδική χαρά</string>
 </resources>
