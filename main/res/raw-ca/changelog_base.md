@@ -18,6 +18,7 @@
 ### Detalls del catxé
 - Nou: Passeu les coordenades actuals del catxé al geochecker (si és compatible amb el geochecker)
 - Nou: Icones d'atributs de colors (grups d'atributs)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Altres
 - Novetat: carregueu ràpidament geocodis del text del porta-retalls a la cerca de la pantalla principal
