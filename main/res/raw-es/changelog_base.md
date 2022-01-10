@@ -18,6 +18,7 @@
 ### Detalles del caché
 - Nuevo: Pasar las coordenadas del caché actual al geochecker (si es soportado por el geochecker)
 - New: Colored attribute icons (following attribute groups)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Otro
 - Nuevo: Cargar rápidamente los geocódigos del texto del portapapeles en la búsqueda de la pantalla de inicio
