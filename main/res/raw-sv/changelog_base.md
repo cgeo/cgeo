@@ -18,6 +18,7 @@
 ### Cachedetaljer
 - Nyhet: Skicka aktuella cachekoordinater till geochecker (om detta stöds av geochecker)
 - Nyhet: Färgade attributikoner (följande attributgrupper)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Övrigt
 - Nyhet: Snabbladda geokoder från urklipp i huvudskärmens sökfält
