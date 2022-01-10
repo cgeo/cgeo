@@ -577,19 +577,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     }
 
     @Override
-    protected void onNewIntent(final Intent intent) {
-        // switching between nearby/offline via bottom navigation.
-        // CacheListActivity is the only one which is used for multiple totally different tasks.
-        // TODO: maybe someone has a better idea instead of closing and reopening the activity with the new intent...
-        if ((intent.getFlags() & Intent.FLAG_ACTIVITY_REORDER_TO_FRONT) != 0) {
-            startActivity(intent);
-            ActivityMixin.finishWithFadeTransition(this);
-        } else {
-            super.onNewIntent(intent);
-        }
-    }
-
-    @Override
     public void onSaveInstanceState(@NonNull final Bundle savedInstanceState) {
         // Always call the superclass so it can save the view hierarchy state
         super.onSaveInstanceState(savedInstanceState);

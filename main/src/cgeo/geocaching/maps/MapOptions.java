@@ -22,7 +22,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class MapOptions {
 
-    public final MapMode mapMode;
+    public MapMode mapMode;
     public boolean isLiveEnabled;
     public boolean isStoredEnabled;
     public SearchResult searchResult;

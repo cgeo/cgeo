@@ -62,19 +62,19 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     private static final AtomicInteger LOGINS_IN_PROGRESS = new AtomicInteger(0);
 
     @Override
+    public void setContentView(final int layoutResID) {
+        final View view = getLayoutInflater().inflate(layoutResID, null);
+        setContentView(view);
+    }
+
+    @Override
     public void setContentView(final View contentView) {
         wrapper = ActivityBottomNavigationBinding.inflate(getLayoutInflater());
         wrapper.activityContent.addView(contentView);
         super.setContentView(wrapper.getRoot());
 
-        // Don't show back button for bottom navigation activities (although they can have a backstack as well)
-        final ActionBar actionBar = getSupportActionBar();
-        if (actionBar != null && getSelectedBottomItemId() != MENU_HIDE_BOTTOM_NAVIGATION) {
-            actionBar.setDisplayHomeAsUpEnabled(false);
-        }
-
         // --- other initialization --- //
-        updateSelectedItemId();
+        updateSelectedBottomNavItemId();
         // long click event listeners
         findViewById(R.id.page_list).setOnLongClickListener(view -> onListsLongClicked());
         // will be called if c:geo cannot log in
@@ -125,7 +125,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     @Override
     protected void onResume() {
         super.onResume();
-        updateSelectedItemId();
+        updateSelectedBottomNavItemId();
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
         registerReceiver(connectivityChangeReceiver, new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION));
     }
@@ -135,12 +135,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         super.onNewIntent(intent);
         // avoid weired transitions
         ActivityMixin.overrideTransitionToFade(this);
-    }
-
-    @Override
-    public void setContentView(final int layoutResID) {
-        final View view = getLayoutInflater().inflate(layoutResID, null);
-        setContentView(view);
     }
 
     @Override
@@ -160,8 +154,8 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
     }
 
-    private void updateSelectedItemId() {
-        // unregister listener as it would otherwise directly trigger the listener
+    public void updateSelectedBottomNavItemId() {
+        // unregister listener before changing anything, as it would otherwise trigger the listener directly
         ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(null);
 
         final int menuId = getSelectedBottomItemId();
@@ -171,6 +165,12 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         } else {
             wrapper.activityBottomNavigation.setVisibility(View.VISIBLE);
             ((NavigationBarView) wrapper.activityBottomNavigation).setSelectedItemId(menuId);
+        }
+
+        // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setDisplayHomeAsUpEnabled(menuId == MENU_HIDE_BOTTOM_NAVIGATION);
         }
 
         // re-register the listener
@@ -217,8 +217,16 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }
 
-        // launch the default behaviour (restore activity if an instance does already exist)
-        startActivity(launchIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+        // Todo?:
+        //  restore activity if an instance does already exist
+        //  -----
+        //      launchIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+        //  -----
+        //  This implementation had unwanted side-effects so we have decided to not go that way.
+        //  Instead, a different solution should be found for persisting the activity state. (see #11926)
+
+        startActivity(launchIntent);
+
         // avoid weired transitions
         ActivityMixin.overrideTransitionToFade(this);
         return true;

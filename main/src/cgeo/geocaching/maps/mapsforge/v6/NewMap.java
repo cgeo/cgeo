@@ -26,7 +26,6 @@ import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.ProximityNotification;
 import cgeo.geocaching.location.Viewport;
-import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapOptions;
 import cgeo.geocaching.maps.MapProviderFactory;
@@ -366,15 +365,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     @Override
     public int getSelectedBottomItemId() {
-        return MENU_MAP;
-    }
-
-    @Override
-    public void onNavigationItemReselected(@NonNull final MenuItem item) {
-        if (item.getItemId() == MENU_MAP && !mapOptions.isLiveEnabled && !mapOptions.isStoredEnabled) {
-            startActivity(DefaultMap.getLiveMapIntent(this));
-            ActivityMixin.finishWithFadeTransition(this);
-        }
+        return mapOptions.mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_BOTTOM_NAVIGATION;
     }
 
     @Override
@@ -454,12 +445,12 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             caches.handleStoredLayers(this, mapOptions);
             caches.handleLiveLayers(this, mapOptions);
             ActivityMixin.invalidateOptionsMenu(this);
-            if (mapOptions.mapMode != MapMode.SINGLE) {
-                mapOptions.title = StringUtils.EMPTY;
-            } else {
-                // reset target cache on single mode map
-                targetGeocode = mapOptions.geocode;
+            if (mapOptions.mapMode == MapMode.SINGLE) {
+                setTarget(mapOptions.coords, mapOptions.geocode);
             }
+            mapOptions.mapMode = MapMode.LIVE;
+            updateSelectedBottomNavItemId();
+            mapOptions.title = StringUtils.EMPTY;
             setTitle();
         } else if (id == R.id.menu_filter) {
             showFilterMenu();

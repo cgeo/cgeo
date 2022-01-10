@@ -4,13 +4,12 @@ import cgeo.geocaching.AbstractDialogFragment;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.FilteredActivity;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.gui.GeocacheFilterActivity;
 import cgeo.geocaching.maps.AbstractMap;
 import cgeo.geocaching.maps.CGeoMap;
-import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.interfaces.MapActivityImpl;
@@ -108,7 +107,12 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
 
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
-        return mapBase.onOptionsItemSelected(item);
+        final boolean result = mapBase.onOptionsItemSelected(item);
+        // in case enable/disable live was selected which is handled in our mapBase implementation
+        if (item.getItemId() == R.id.menu_map_live) {
+            updateSelectedBottomNavItemId();
+        }
+        return result;
     }
 
     @Override
@@ -256,14 +260,6 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
 
     @Override
     public int getSelectedBottomItemId() {
-        return MENU_MAP;
-    }
-
-    @Override
-    public void onNavigationItemReselected(@NonNull final MenuItem item) {
-        if (item.getItemId() == MENU_MAP && !mapBase.getMapOptions().isLiveEnabled && !mapBase.getMapOptions().isStoredEnabled) {
-            startActivity(DefaultMap.getLiveMapIntent(this));
-            ActivityMixin.finishWithFadeTransition(this);
-        }
+        return mapBase.getMapOptions().mapMode == MapMode.LIVE ? MENU_MAP : MENU_HIDE_BOTTOM_NAVIGATION;
     }
 }
