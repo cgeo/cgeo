@@ -18,6 +18,7 @@
 ### Kätkön tiedot
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
 - Uusi: Värilliset attribuuttikuvakkeet (seuraavat attribuuttiryhmät)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Muu
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
