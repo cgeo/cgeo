@@ -18,6 +18,7 @@
 ### Cache details
 - Nieuw: Geef huidige cache coördinaten door aan de geochecker (indien ondersteund door geochecker)
 - Nieuw: Gekleurde attribuutpictogrammen (volgends attribuutgroepen)
+- Oplossing: Probleem bij het openen van foto's uit galerij in externe apps op sommige Samsung-apparaten
 
 ### Overig
 - Nieuw: Snel laden van geocodes uit klembordtekst uit hoofdscherm zoekactie
