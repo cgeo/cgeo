@@ -18,6 +18,7 @@
 ### Detaily kešky
 - Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
 - New: Colored attribute icons (following attribute groups)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Iné
 - Nové: Rýchle načítanie geokódov z textu schránky pri vyhľadávaní na hlavnej obrazovke
