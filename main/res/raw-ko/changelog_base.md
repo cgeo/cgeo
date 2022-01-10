@@ -18,6 +18,7 @@
 ### 캐시 상세정보
 - 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
 - New: Colored attribute icons (following attribute groups)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### 추가 사항
 - 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드
