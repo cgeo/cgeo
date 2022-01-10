@@ -15,7 +15,7 @@ public enum CacheListType {
     ADDRESS(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
     FINDER(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
     OWNER(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true),
-    MAP(false, GeocacheFilterContext.FilterType.TRANSIENT, AbstractBottomNavigationActivity.MENU_MAP, false, false),
+    MAP(false, GeocacheFilterContext.FilterType.TRANSIENT, AbstractBottomNavigationActivity.MENU_HIDE_BOTTOM_NAVIGATION, false, false),
     SEARCH_FILTER(false, GeocacheFilterContext.FilterType.LIVE, AbstractBottomNavigationActivity.MENU_SEARCH, false, true);
 
     /**

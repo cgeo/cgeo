@@ -802,6 +802,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 Settings.setLiveMap(mapOptions.isLiveEnabled);
             }
             if (mapOptions.isLiveEnabled) {
+                mapOptions.isStoredEnabled = true;
                 mapOptions.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.LIVE);
                 refreshMapData(false);
             }
@@ -809,9 +810,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             lastSearchResult = null;
             mapOptions.searchResult = null;
             ActivityMixin.invalidateOptionsMenu(activity);
-            if (mapOptions.mapMode != MapMode.SINGLE) {
-                mapOptions.title = StringUtils.EMPTY;
+            if (mapOptions.mapMode == MapMode.SINGLE) {
+                setTarget(mapOptions.coords, mapOptions.geocode);
             }
+            mapOptions.mapMode = MapMode.LIVE;
+            mapOptions.title = StringUtils.EMPTY;
             updateMapTitle();
         } else if (id == R.id.menu_store_caches) {
             return storeCaches(getGeocodesForCachesInViewport());
