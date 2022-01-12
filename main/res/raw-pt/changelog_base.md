@@ -18,7 +18,7 @@
 ### Detalhes da cache
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
 - Novo: Ícones de atributos coloridos (seguindo grupos de atributos)
-- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- Correcção: Problema ao abrir fotos do separador Galeria em aplicações externas, em alguns dispositivos Samsung
 
 ### Outro
 - Novo: Carregamento rápido de geo-códigos a partir do texto da área de transferência, na pesquisa do ecrã principal
@@ -28,9 +28,9 @@
 - Novo: Assistente de GC adicionado à lista de aplicações úteis
 - Novo: Filtro de atributos: Permitir a selecção da origem dos atributos que são mostrados
 - Alteração: Leitor de código de barras removido da lista de aplicações úteis e do ecrã principal
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
+- Alteração: BRouter removido da lista de aplicações úteis (ainda pode usar a navegação externa e interna)
+- Correcção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
+- Correcção: Optimizado o suporte a aplicações externas de auto-preenchimento de palavras-passe nas definições
+- Correcção: Activação das dicas de contexto (tooltips) em sistemas Android inferiores à versão 8
+- Definições redesenhadas para atender às especificações actuais do Android
 - Actualizada a API de MapsWithMe
