@@ -1451,6 +1451,8 @@
     <string name="map_show_other_title">Zobrazit ostatní:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtr kešek je příliš složitý</string>
     <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
+    <string name="map_theme_legend">Legenda motivu</string>
+    <string name="map_theme_legend_info">Klepnutím na název kategorie otevřete/zavřete kategorii. Dlouhým klepnutím na symbol získáte krátké informace o daném symbolu. Klepnutím na ikonu informace zobrazíte podrobnou legendu online.</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
@@ -1855,12 +1857,16 @@
     <string name="attribute_blind_people_no">Bez postižení: Zrakové</string>
     <string name="attribute_unknown">Neznámý atribut</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Výbava</string>
     <string name="cat_type">Typ</string>
     <string name="cat_location">Umístění kešky</string>
     <string name="cat_duration">Vzdálenost / Doba trvání</string>
     <string name="cat_surrounding">Kolem kešky</string>
     <string name="cat_permissions">Oprávnění</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_all">Vše</string>
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Učinit Geocaching lehčí a uživatele línější.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2218,6 +2224,10 @@
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
     <string name="touch_again_to_exit">Pro ukončení prosím znovu klepněte</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Oblasti</string>
+    <string name="rtl_heath">vřesoviště</string>
+    <string name="rtl_marsh">bažina</string>
+    <string name="rtl_rock">skála</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
