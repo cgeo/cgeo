@@ -2254,4 +2254,26 @@ do mapa e dos temas?</string>
     <string name="rtl_block">quarteirão</string>
     <string name="rtl_bollard">marco</string>
     <string name="rtl_border_control">controlo fronteiriço</string>
+    <string name="rtl_traffic_signal">sinal de tráfego</string>
+    <string name="rtl_viewpoint">miradouro</string>
+    <string name="rtl_waterfall">cascata</string>
+    <string name="rtl_alp">alp</string>
+    <string name="rtl_wetland">húmida</string>
+    <string name="rtl_coppice">talhadia</string>
+    <string name="rtl_plantation">plantação</string>
+    <string name="rtl_reed">canavial</string>
+    <string name="rtl_mud">lama</string>
+    <string name="rtl_mudflat">pântano</string>
+    <string name="rtl_cemetery">cemitério</string>
+    <string name="rtl_cemetery_christian">cemitério cristão</string>
+    <string name="rtl_cemetery_jewish">cemitério judeu</string>
+    <string name="rtl_cemetery_muslim">cemitério muçulmano</string>
+    <string name="rtl_pedestrian_area">zona pedestre</string>
+    <string name="rtl_trading">industrial</string>
+    <string name="rtl_parking_restricted">estacionamento restrito</string>
+    <string name="rtl_prison">prisão</string>
+    <string name="rtl_corral">curral</string>
+    <string name="rtl_path_quality1">qualidade 1 (pavimento: asfalto, …)</string>
+    <string name="rtl_path_quality23">qualidade 2/3 (pavimento: gravilha, consertado, …)</string>
+    <string name="rtl_path_quality45">qualidade 4/5 (por pavimentar)</string>
 </resources>
