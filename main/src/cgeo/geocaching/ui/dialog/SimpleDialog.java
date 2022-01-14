@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
@@ -12,10 +13,8 @@ import cgeo.geocaching.utils.functions.Func2;
 import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.text.Editable;
 import android.text.InputFilter;
 import android.text.InputType;
-import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListAdapter;
+import android.widget.ListView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -321,7 +321,7 @@ public class SimpleDialog {
 
         // Maybe select_dialog_singlechoice_material / select_dialog_item_material instead ?
         // NOT android.R.layout.select_dialog_item -> makes font size too big
-        final ListAdapter adapter = createListAdapter(groupedValues.first, showChoice, groupedValues.second);
+        final ListAdapter adapter = createListAdapterSingle(groupedValues.first, showChoice, groupedValues.second);
 
         //use "setsinglechoiceItems", because otherwise the dialog will close always after selecting an item
         builder.setSingleChoiceItems(adapter, preselectPos, (dialog, clickpos) -> {
@@ -368,37 +368,77 @@ public class SimpleDialog {
      * <p>
      * A 'select multi' dialog allows the user to select multiple (or no) value out of a given list of choices
      *
+     * The method will auto-generate an entry "Select All" to select all/none item
+     *
      * @param items            the list of items to select from
      * @param displayMapper    mapper to get the display value for each of the items
      * @param preselect        mapper defining for each of the given items whether it is preselected or not
      * @param onSelectListener provide the select listener called when user made a selection (called when user clicks on positive button)
      */
     public <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener) {
-        final CharSequence[] itemTexts = new CharSequence[items.size()];
-        final boolean[] itemSelects = new boolean[items.size()];
+
+        final boolean addSelectAll = items.size() > 1;
+        final int offset = addSelectAll ? 1 : 0;
+
+        final CharSequence[] itemTexts = new CharSequence[addSelectAll ? items.size() + 1 : items.size()];
+        final boolean[] itemSelects = new boolean[addSelectAll ? items.size() + 1 : items.size()];
         final Set<T> result = new HashSet<>();
-        int idx = 0;
+        if (addSelectAll) {
+            itemTexts[0] = TextParam.text("<" + LocalizationUtils.getString(R.string.chipchoicegroup_selectall) + " (" + items.size() + ")>")
+                .setMarkdown(true).getText(null);
+        }
+        int idx = offset;
+        boolean allSelected = true;
         for (T item : items) {
             final TextParam tp = displayMapper.call(item, idx);
             itemTexts[idx] = tp == null ? String.valueOf(item) : tp.getText(getContext());
-            itemSelects[idx] = preselect != null && TRUE.equals(preselect.call(item, idx));
+            itemSelects[idx] = preselect != null && TRUE.equals(preselect.call(item, idx - offset));
             if (itemSelects[idx]) {
                 result.add(item);
+            } else {
+                allSelected = false;
             }
             idx++;
+        }
+        if (addSelectAll && allSelected) {
+            itemSelects[0] = true;
         }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext(), R.style.cgeo_compactDialogs);
         applyCommons(builder);
 
+        //final ListView[] listViewHolder = new ListView[]{null};
         builder.setMultiChoiceItems(itemTexts, itemSelects, (d, i, c) -> {
-            if (c) {
-                result.add(items.get(i));
+            final ListView lv = ((AlertDialog) d).getListView();
+
+            if (addSelectAll && i == 0) {
+                //set the AlertDialog's data model and the view model
+                for (int j = 1; j < itemSelects.length; j++) {
+                    itemSelects[j] = c;
+                    lv.setItemChecked(j, c);
+                }
+                //set our own "data model"
+                if (c) {
+                    result.addAll(items);
+                } else {
+                    result.clear();
+                }
+            } else if (c) {
+                result.add(items.get(i - offset));
+                if (addSelectAll && result.size() == items.size() && !lv.isItemChecked(0)) {
+                    lv.setItemChecked(0, true);
+                    itemSelects[0] = true;
+                }
             } else {
-                result.remove(items.get(i));
+                result.remove(items.get(i - offset));
+                if (addSelectAll && result.size() < items.size() && lv.isItemChecked(0)) {
+                    lv.setItemChecked(0, false);
+                    itemSelects[0] = false;
+                }
             }
 
         });
+
         builder.setPositiveButton(getPositiveButton(), (d, w) -> onSelectListener.accept(result));
         builder.setNegativeButton(getNegativeButton(), (d, w) -> d.dismiss());
 
@@ -449,23 +489,9 @@ public class SimpleDialog {
         final AlertDialog dialog = builder.create();
 
         if (inputChecker != null) {
-            textField.second.addTextChangedListener(new TextWatcher() {
-
-                @Override
-                public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
-                    // empty
-                }
-
-                @Override
-                public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
-                    // empty
-                }
-
-                @Override
-                public void afterTextChanged(final Editable editable) {
-                    enableDialogButtonIf(dialog, editable.toString(), inputChecker);
-                }
-            });
+            textField.second.addTextChangedListener(ViewUtils.createSimpleWatcher(editable ->
+                    enableDialogButtonIf(dialog, editable.toString(), inputChecker)
+            ));
         }
         if (allowedChars != null) {
             final Pattern charPattern = Pattern.compile(allowedChars);
@@ -512,7 +538,7 @@ public class SimpleDialog {
 
 
     @NotNull
-    private ListAdapter createListAdapter(@NotNull final List<TextParam> items, final boolean showChoice, final Func1<Integer, Integer> groupMapper) {
+    private ListAdapter createListAdapterSingle(@NotNull final List<TextParam> items, final boolean showChoice, final Func1<Integer, Integer> groupMapper) {
 
         final LayoutInflater inflater = LayoutInflater.from(getContext());
 
@@ -524,8 +550,7 @@ public class SimpleDialog {
             public View getView(final int position, final View convertView, final ViewGroup parent) {
 
                 final boolean isGroupHeading = groupMapper != null && groupMapper.call(position) == null;
-                final int itemLayout = showChoice && !isGroupHeading ?
-                    R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
+                final int itemLayout = showChoice && !isGroupHeading ? R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
                 //or android.R.layout.simple_list_item_single_choice : android.R.layout.simple_list_item_1;
 
                 final View v = convertView != null ? convertView : inflater.inflate(itemLayout, parent, false);
