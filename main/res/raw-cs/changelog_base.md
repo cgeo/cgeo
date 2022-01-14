@@ -6,7 +6,7 @@
 - Změna: Automatické zapnutí zobrazení trasy při načtení trasy že souboru GPX
 - Novinka: Symboly O/T pro ikony kešek (volitelné)
 - Novinka: Možnost kontroly chybějících směrovacích dat pro aktuální oblast
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Novinka: Legenda motivu pro motivy Elevate, Elementy a Freizeitkarte
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
@@ -18,19 +18,19 @@
 ### Detaily kešky
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
 - Novinka: Barevné ikony atributů (po skupinách atributů)
-- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- Oprava: Problém s otevíráním obrázků z karty galerie v externích aplikacích na některých zařízeních Samsung
 
 ### Ostatní
 - Novinka: Rychlé načítání geokódů z textu ve schránce při vyhledávání na hlavní obrazovce
-- New: Added support for user-defined log templates
+- Novinka: Přidána podpora uživatelsky definovaných šablon logů
 - Novinka: Provést nastavení => Zobrazit filtrovatelné nastavení
-- New: Enable search in preferences
-- New: Added GC Wizard to useful apps list
-- New: Attributes filter: Allow selecting from which connectors attributes are shown
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Novinka: Povoleno vyhledávání v předvolbách
+- Novinka: Průvodce GC Wizard přidán do seznamu užitečných aplikací
+- Novinka: Filtr atributů: Umožňuje vybrat, ze kterých konektorů se atributy zobrazí
+- Změna: Čtečka čárových kódů odebrána ze seznamu užitečných aplikací i z hlavní obrazovky
+- Změna: BRouter odebrán ze seznamu užitečných aplikací (stále můžete používat externí i interní navigaci)
+- Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
+- Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
+- Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
+- Přepracováno nastavení pro splnění aktuálních specifikací systému Android
+- Aktualizováno MapsWithMe API
