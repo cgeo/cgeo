@@ -6,7 +6,7 @@
 - Alteração: Activa automaticamente a exibição do percurso ao carregar um ficheiro de percurso GPX
 - Novo: símbolos D/T para os ícones de cache (opcional)
 - Novo: Opção de verificação de falta de dados de encaminhamento na janela em visualização
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Novo: Legenda de tema para Elevação, Elementos e temas de Freizeitkarte
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
