@@ -100,4 +100,7 @@ public class Tracks {
         return null;
     }
 
+    public void hide(@NonNull final String key, final boolean hide) {
+        Trackfiles.hide(key, hide);
+    }
 }

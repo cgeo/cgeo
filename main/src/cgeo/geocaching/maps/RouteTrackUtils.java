@@ -25,9 +25,12 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
 import android.widget.CheckBox;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 
@@ -72,8 +75,7 @@ public class RouteTrackUtils {
                     GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
                         tracks.add(activity, uri, updateTrack);
                         updateDialogTracks(popup, tracks);
-                    } /* @todo, true */);
-
+                    });
                 }
             });
     }
@@ -113,7 +115,7 @@ public class RouteTrackUtils {
             }
         });
 
-        if (isIndividualRouteVisible(individualRoute)) {
+        if (isRouteNonEmpty(individualRoute)) {
             dialog.findViewById(R.id.indivroute).setVisibility(View.VISIBLE);
 
             final View vSort = dialog.findViewById(R.id.item_sort);
@@ -121,6 +123,18 @@ public class RouteTrackUtils {
             vSort.setOnClickListener(v1 -> activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE));
 
             dialog.findViewById(R.id.item_center).setOnClickListener(v1 -> individualRoute.setCenter(centerOnPosition));
+
+            final ImageButton vVisibility = dialog.findViewById(R.id.item_visibility);
+            vVisibility.setVisibility(View.VISIBLE);
+            vVisibility.setImageResource(individualRoute.isHidden() ? R.drawable.visibility : R.drawable.visibility_off);
+            vVisibility.setOnClickListener(v -> {
+                final boolean newValue = !individualRoute.isHidden();
+                vVisibility.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
+                individualRoute.setHidden(newValue);
+                reloadIndividualRoute.run();
+                // @todo: persist new visibility value
+            });
+
             dialog.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm((d, w) -> {
                 clearIndividualRoute.run();
                 updateDialogIndividualRoute(dialog, individualRoute, setTarget);
@@ -156,6 +170,22 @@ public class RouteTrackUtils {
                     route.setCenter(centerOnPosition);
                 }
             });
+
+            final ImageButton vVisibility = vt.findViewById(R.id.item_visibility);
+            if (route == null) {
+                vVisibility.setVisibility(View.GONE);
+            } else {
+                vVisibility.setVisibility(View.VISIBLE);
+                vVisibility.setImageResource(route.isHidden() ? R.drawable.visibility : R.drawable.visibility_off);
+                vVisibility.setOnClickListener(v -> {
+                    final boolean newValue = !route.isHidden();
+                    vVisibility.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
+                    route.setHidden(newValue);
+                    updateTrack.updateRoute(key, route);
+                    tracks.hide(key, newValue);
+                });
+            }
+
             vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> {
                 // @todo: Sicherheitsabfrage ergänzen
                 tracks.remove(key);
@@ -180,7 +210,7 @@ public class RouteTrackUtils {
         });
     }
 
-    private boolean isIndividualRouteVisible(final IndividualRoute route) {
+    private boolean isRouteNonEmpty(final Route route) {
         return route != null && route.getNumSegments() > 0;
     }
 
@@ -203,8 +233,14 @@ public class RouteTrackUtils {
         }
     }
 
-    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route) {
-        anchor.setVisibility(isIndividualRouteVisible(route) ? View.VISIBLE : View.GONE);
+    public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final Tracks tracks) {
+        final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route));
+        tracks.traverse((key, r) -> {
+            if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
+                someTrackAvailable.set(true);
+            }
+        });
+        anchor.setVisibility(someTrackAvailable.get() ? View.VISIBLE : View.GONE);
     }
 
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {

@@ -50,6 +50,7 @@ abstract class AbstractRouteLayer extends Layer {
             c.path = null;
             if (route != null) {
                 c.track = route.getAllPoints();
+                c.isHidden = route.isHidden();
             }
         }
     }
