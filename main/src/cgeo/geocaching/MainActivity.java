@@ -259,12 +259,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             setTitle(R.string.app_name);
 
-            // Show c:geo logo for this activity
-            final ActionBar actionBar = getSupportActionBar();
-            if (actionBar != null) {
-                actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
-                actionBar.setDisplayHomeAsUpEnabled(true);
-            }
             cLog.add("setview");
 
             backupUtils = new BackupUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
@@ -645,5 +639,17 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     @Override
     public int getSelectedBottomItemId() {
         return MENU_HOME;
+    }
+
+    @Override
+    public void updateSelectedBottomNavItemId() {
+        super.updateSelectedBottomNavItemId();
+
+        // Always show c:geo logo for this activity
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            actionBar.setHomeAsUpIndicator(R.drawable.cgeo_actionbar_squircle);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
     }
 }
