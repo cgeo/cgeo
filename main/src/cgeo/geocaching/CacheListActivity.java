@@ -1316,7 +1316,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (moreToShow && type.isStoredInDatabase) {
             final int missingCaches = totalAchievableListSize - unfilteredListSize;
             if (missingCaches > getOfflineListLimitIncrease()) {
-                setView(listFooterLine1, res.getString(R.string.caches_more_caches_next_x, getOfflineListLimitIncrease()), v -> {
+                final String info = res.getQuantityString(R.plurals.caches_more_caches_next_x, getOfflineListLimitIncrease(), getOfflineListLimitIncrease());
+                setView(listFooterLine1, info, v -> {
                     if (offlineListLoadLimit >= 0) {
                         offlineListLoadLimit += getOfflineListLimitIncrease();
                         refreshCurrentList();
