@@ -1996,12 +1996,12 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                 case NEAREST:
                     title = res.getString(R.string.caches_nearby);
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, coords);
+                    loader = new CoordsGeocacheListLoader(this, coords, true);
                     break;
                 case COORDINATE:
                     title = coords.toString();
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, coords);
+                    loader = new CoordsGeocacheListLoader(this, coords, false);
                     break;
                 case KEYWORD:
                     final String keyword = extras.getString(Intents.EXTRA_KEYWORD);
@@ -2019,7 +2019,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
                         title = coords.toString();
                     }
                     markerId = EmojiUtils.NO_EMOJI;
-                    loader = new CoordsGeocacheListLoader(this, coords);
+                    loader = new CoordsGeocacheListLoader(this, coords, false);
                     break;
                 case FINDER:
                     final String username = extras.getString(Intents.EXTRA_USERNAME);

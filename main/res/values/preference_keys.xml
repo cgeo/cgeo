@@ -54,6 +54,9 @@
     <string translatable="false" name="preference_screen_services">preference_screen_services</string>
     <!-- ============================================================================================================================================================================== -->
 
+    <!-- category nearby search -->
+    <string translatable="false" name="pref_nearbySearchLimit">nearbySearchLimit</string>
+
     <!-- category browser -->
     <string translatable="false" name="pref_nativeUa">nativeUa</string>
 

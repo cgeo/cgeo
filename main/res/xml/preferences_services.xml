@@ -83,6 +83,23 @@
     </PreferenceCategory>
 
     <PreferenceCategory
+        android:title="@string/settings_category_nearbysearch"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:summary="@string/init_nearbysearchlimit_description"
+            android:title="@string/init_nearbysearchlimit_title"
+            app:allowDividerBelow="false"
+            app:iconSpaceReserved="false"/>
+        <cgeo.geocaching.settings.ProximityPreference
+            android:key="@string/pref_nearbySearchLimit"
+            android:defaultValue="0"
+            app:min="0"
+            app:max="999"
+            app:highRes="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
+
+    <PreferenceCategory
         android:title="@string/settings_category_geocaching_additionals"
         app:iconSpaceReserved="false" >
 
