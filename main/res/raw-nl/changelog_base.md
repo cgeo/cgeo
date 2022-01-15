@@ -6,7 +6,7 @@
 - Wijziging: automatisch track weergave inschakelen bij het laden van een GPX track bestand
 - Nieuw: D/T symbolen voor cachepictogrammen (optioneel)
 - Nieuw: Optie om te controleren op ontbrekende routeringsgegevens voor huidige viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Nieuw: Thema legenda voor hoogte, elementen en publieke kaarten-thema's
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
