@@ -142,8 +142,6 @@
             android:id="@+id/wpDefaultNavigation"
             android:layout_width="@dimen/buttonSize_iconButton"
             android:layout_height="@dimen/buttonSize_iconButton"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="false"
             android:layout_gravity="right"
             android:background="?android:attr/selectableItemBackgroundBorderless"
             android:clickable="true"
