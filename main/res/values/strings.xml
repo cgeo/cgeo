@@ -366,7 +366,14 @@
     <string name="caches_more_caches_no">No more caches</string>
     <string name="caches_more_caches_loading">Loading caches…</string>
     <string name="caches_more_caches_currently">currently</string>
-    <string name="caches_more_caches_next_x">Load next %1$d caches</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="zero">Load next %1$d caches</item>
+        <item quantity="one">Load next %1$d cache</item>
+        <item quantity="two">Load next %1$d caches</item>
+        <item quantity="few">Load next %1$d caches</item>
+        <item quantity="many">Load next %1$d caches</item>
+        <item quantity="other">Load next %1$d caches</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Load remaining caches (%1$d / %2$d)</string>
     <string name="caches_downloading">Downloading caches…\nETA: </string>
     <string name="caches_eta_ltm">Less than a minute</string>
