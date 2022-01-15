@@ -1572,6 +1572,10 @@ public class Settings {
         putBoolean(R.string.pref_plainLogs, plainLogs);
     }
 
+    public static int getNearbySearchLimit() {
+        return getInt(R.string.pref_nearbySearchLimit, 0);
+    }
+
     public static boolean getUseNativeUa() {
         return getBoolean(R.string.pref_nativeUa, false);
     }
