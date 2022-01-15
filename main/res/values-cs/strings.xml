@@ -2560,7 +2560,7 @@
     <string name="rtl_path_combined_bicycle_foot">společná stezka pro cyklisty a pro pěší</string>
     <string name="rtl_path_narrow">obecná cesta nebo stezka, nedostatečně široká pro automobily</string>
     <string name="rtl_path_badly_visible">špatně viditelná cesta</string>
-    <string name="rtl_path_quality1">kvalita 1 (zpevněná: asfalt, ...)</string>
-    <string name="rtl_path_quality23">kvalita 2/3 (zpevněná: štěrk, opravená, ...)</string>
+    <string name="rtl_path_quality1">kvalita 1 (zpevněná: asfalt, …)</string>
+    <string name="rtl_path_quality23">kvalita 2/3 (zpevněná: štěrk, opravená, …)</string>
     <string name="rtl_path_quality45">kvalita 4/5 (nezpevněná)</string>
 </resources>
