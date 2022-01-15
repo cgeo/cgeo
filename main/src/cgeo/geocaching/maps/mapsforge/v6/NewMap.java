@@ -1510,6 +1510,17 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
     private void setTarget(final Geopoint coords, final String geocode) {
         lastNavTarget = coords;
+        if (StringUtils.isNotBlank(geocode)) {
+            targetGeocode = geocode;
+            final Geocache target = getCurrentTargetCache();
+            targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+            if (lastNavTarget == null && target != null) {
+                lastNavTarget = target.getCoords();
+            }
+        } else {
+            targetGeocode = null;
+            targetView.setTarget(null, null);
+        }
         if (navigationLayer != null) {
             navigationLayer.setDestination(lastNavTarget);
             navigationLayer.requestRedraw();
@@ -1518,14 +1529,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             distanceView.setDestination(lastNavTarget);
             distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
         }
-        if (StringUtils.isNotBlank(geocode)) {
-            targetGeocode = geocode;
-            final Geocache target = getCurrentTargetCache();
-            targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
-        } else {
-            targetGeocode = null;
-            targetView.setTarget(null, null);
-        }
+
         ActivityMixin.invalidateOptionsMenu(this);
     }
 

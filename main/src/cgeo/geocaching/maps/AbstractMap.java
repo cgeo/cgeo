@@ -136,16 +136,19 @@ public abstract class AbstractMap {
 
     public void setTarget(final Geopoint coords, final String geocode) {
         lastNavTarget = coords;
-        mapView.setDestinationCoords(coords);
         mapView.setCoordinates(overlayPositionAndScale.getCoordinates());
         if (StringUtils.isNotBlank(geocode)) {
             targetGeocode = geocode;
             final Geocache target = getCurrentTargetCache();
             targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+            if (lastNavTarget == null && target != null) {
+                lastNavTarget = target.getCoords();
+            }
         } else {
             targetGeocode = null;
             targetView.setTarget(null, null);
         }
+        mapView.setDestinationCoords(lastNavTarget);
         ActivityMixin.invalidateOptionsMenu(getActivity());
     }
 
