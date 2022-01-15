@@ -20,6 +20,7 @@
         android:layout_toLeftOf="@id/item_visibility"
         style="@style/button_icon"
         android:visibility="gone"
+        android:hint="@string/map_sort_individual_route"
         android:layout_centerVertical="true"/>
 
     <ImageButton
@@ -27,14 +28,15 @@
         android:src="@drawable/visibility"
         android:layout_toLeftOf="@id/item_center"
         style="@style/button_icon"
-        android:visibility="gone"
-        android:layout_centerVertical="true"/><!-- @todo -->
+        android:hint="@string/make_visible"
+        android:layout_centerVertical="true"/>
 
     <ImageButton
         android:id="@+id/item_center"
         android:src="@drawable/center"
         android:layout_toLeftOf="@id/item_delete"
         style="@style/button_icon"
+        android:hint="@string/center_on_route_track"
         android:layout_centerVertical="true"/>
 
     <ImageButton
@@ -42,6 +44,7 @@
         android:src="@drawable/ic_menu_delete"
         android:layout_alignParentRight="true"
         style="@style/button_icon"
+        android:hint="@string/unload_route_track"
         android:layout_centerVertical="true"/>
 
 </RelativeLayout>

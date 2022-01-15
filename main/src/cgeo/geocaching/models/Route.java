@@ -16,6 +16,7 @@ public class Route implements Parcelable {
     protected ArrayList<RouteSegment> segments = new ArrayList<>();
     private final boolean routeable;
     protected float distance = 0.0f;
+    protected boolean isHidden = false;
 
     public Route(final boolean routeable) {
         this.routeable = routeable;
@@ -52,6 +53,14 @@ public class Route implements Parcelable {
             }
         }
         return numPoints;
+    }
+
+    public boolean isHidden() {
+        return isHidden;
+    }
+
+    public void setHidden(final boolean hide) {
+        this.isHidden = hide;
     }
 
     public ArrayList<ArrayList<Geopoint>> getAllPoints() {
@@ -186,6 +195,7 @@ public class Route implements Parcelable {
         segments = parcel.readArrayList(RouteSegment.class.getClassLoader());
         routeable = parcel.readInt() != 0;
         distance = parcel.readFloat();
+        isHidden = parcel.readInt() != 0;
     }
 
     @Override
@@ -199,5 +209,6 @@ public class Route implements Parcelable {
         dest.writeList(segments);
         dest.writeInt(routeable ? 1 : 0);
         dest.writeFloat(distance);
+        dest.writeInt(isHidden ? 1 : 0);
     }
 }

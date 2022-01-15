@@ -75,11 +75,14 @@ public class Trackfiles extends DataStore.DBExtension {
     }
 
     public static void hide(@NonNull final String filename, final boolean hide) {
-        final Trackfiles item = (Trackfiles) load(type, filename);
-        if (item != null && item.isHidden() != hide) {
-            item.long1 = hide ? 1 : 0;
-            removeAll(type, filename);
-            add(type, item.key, item.long1, item.long2, item.long3, item.long4, item.string1, item.string2, item.string3, item.string4);
+        final DataStore.DBExtension itemRaw = load(type, filename);
+        if (itemRaw != null) {
+            final Trackfiles item = new Trackfiles(itemRaw);
+            if (item.isHidden() != hide) {
+                item.long1 = hide ? 1 : 0;
+                removeAll(type, filename);
+                add(type, item.key, item.long1, item.long2, item.long3, item.long4, item.string1, item.string2, item.string3, item.string4);
+            }
         }
     }
 

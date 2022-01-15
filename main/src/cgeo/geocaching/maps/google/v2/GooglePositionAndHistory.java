@@ -187,6 +187,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
             c.track = null;
             if (track != null) {
                 c.track = track.getAllPointsLatLng();
+                c.isHidden = track.isHidden();
             }
         }
         repaintRequired();

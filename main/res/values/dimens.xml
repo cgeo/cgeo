@@ -14,7 +14,7 @@
     <!-- fastscroll extra padding -->
     <dimen name="paddingRight_fastscroll">5dp</dimen>
 
-    
+
     <!-- font size dimensions ====================================== -->
 
     <!-- all toolbars except main screen -->

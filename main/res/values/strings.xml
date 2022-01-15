@@ -2212,7 +2212,6 @@
     <string name="notification_download_receiver_title">Importing download</string>
 
     <!-- individual routes -->
-    <string name="routes_tracks_dialog_title">Routes / tracks options</string>
     <string name="individual_route">Individual route</string>
     <string name="individual_route_added">added to route</string>
     <string name="individual_route_removed">removed from route</string>
@@ -2220,8 +2219,6 @@
     <string name="individual_route_error_single_waypoint_mode">Not available in single waypoint mode</string>
     <string name="map_sort_individual_route">Sort individual route</string>
     <string name="map_export_individual_route">Export individual route</string>
-    <string name="route">Route</string>
-    <string name="track">Track</string>
     <string name="map_load_individual_route">Load individual route</string>
     <string name="map_load_individual_route_confirm">Overwrite existing route?</string>
     <string name="map_autotarget_individual_route">Set route start as target</string>
@@ -2258,6 +2255,15 @@
         <item quantity="other">Track/route loaded (%d trackpoints)</item>
     </plurals>
     <string name="load_track_error">Error loading track/route</string>
+
+    <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Routes / tracks options</string>
+    <string name="center_on_route_track">Center on route/track</string>
+    <string name="unload_route_track">Unload route/track</string>
+    <string name="route">Route</string>
+    <string name="track">Track</string>
+    <string name="make_visible">make visible</string>
+    <string name="hide">hide</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -2535,7 +2541,7 @@
     <string name="rtl_toilets">toilets</string>
     <string name="rtl_volcano">volcano</string>
 
-    <string name="rtl_adit_disused">disused adit</string>>
+    <string name="rtl_adit_disused">disused adit</string>
     <string name="rtl_archaeological">archaeological</string>
     <string name="rtl_artwork">artwork</string>
     <string name="rtl_attraction">attraction</string>
