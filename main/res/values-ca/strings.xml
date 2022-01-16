@@ -200,7 +200,6 @@
     <string name="err_server_su">No es pot contactar amb Geocaching.su. Potser el lloc web està inactiu o la connexió a Internet no funciona.</string>
     <string name="err_server_gk">No s\'ha pogut contactar amb GeoKrety.org. La pàgina web pot haver caigut o la connexió a internet no funciona.</string>
     <string name="err_login">No hi ha desada cap informació d\'accés</string>
-    <string name="err_login_failed_toast">El c:geo no pot iniciar la sessió. El c:geo treballa fora línia amb els catxés desats. Comproveu la configuració de la connexió o activeu la connexió a Internet.</string>
     <string name="err_unknown">Error desconegut. Consulteu el nostre document <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> com a orientació.</string>
     <string name="err_unknown_address">c:geo no ha pogut assignar aquesta adreça a una ubicació existent</string>
     <string name="err_comm">Error de comunicació desconegut. Consulteu el nostre document
@@ -292,7 +291,6 @@
     <string name="info_select_logimage_cancelled">La selecció d\'imatge o captura s\'ha cancel·lat.</string>
     <string name="info_cache_saved">El catxé ha estat desat localment</string>
     <string name="warn_calculator_state_save">Assegura\'t de desar el punt de ruta si vols mantenir l\'estat de la calculadora.</string>
-    <string name="feature_info_offline_counter">Teniu catxés amb un registre desat fora de línia, que potser encara no s\'han registrat en línia. Per a la vostra comoditat, el recompte d\'aquests registres es mostra com a \"+ x\" darrere del nombre de catxés trobats al peu de pàgina  principal de c: geo. \n\nA més, aquests registres \"x\" s\'afegiran a la plantilla \"Número\" que podeu utilitzar a la signatura del registre. \n\nSi no us agrada aquesta extensió de comptador, podeu desactivar-la a \"Configuració\"&gt;\"Registre\" i / o utilitzar la plantilla \"Númerto (sense registres fora de línia)\". \n\nPer trobar fàcilment els registres sense connexió restants, aneu a la llista \"Historial\" i filtreu per \"Amb dades personals\" &gt;\"Amb registre sense connexió\".</string>
     <string name="err_trackable_log_not_anonymous">Entreu %1$s des de c:geo no es pot fer anònimament. Voleu obrir la configuració per omplir les vostres credencials de %2$s?</string>
     <string name="err_trackable_no_preference_activity">No es troba la pantalla indicada de preferència.</string>
     <string name="confirm_unsaved_changes_title">Canvis sense desar</string>
@@ -324,11 +322,9 @@
     <string name="menu_update">Actualitzeu les dades fora de línia</string>
     <string name="menu_update_routingdata">Dades d\'encaminament</string>
     <string name="menu_update_mapdata">Dades del mapa</string>
-    <string name="menu_dashboard">Tauler d\'inici de sessió</string>
     <string name="menu_history">Historial</string>
     <string name="menu_search_clipboard">Carrega el Geocodi des del porta-retalls</string>
     <string name="menu_history_longstring">Historial de trobats</string>
-    <string name="menu_filter">Filtre</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Llistes de marcadors</string>
     <string name="menu_invert_order">Inverteix l’ordre</string>
@@ -346,7 +342,6 @@
     <string name="caches_more_caches_no">No hi ha més catxés</string>
     <string name="caches_more_caches_loading">S\'estan carregant els catxés…</string>
     <string name="caches_more_caches_currently">actualment</string>
-    <string name="caches_more_caches_next_x">Carregueu els següents %1$d catxés</string>
     <string name="caches_more_caches_remaining">Carrega els catxés restants (%1$d / %2$d)</string>
     <string name="caches_downloading">S\'estan descarregant els catxés…\nETA:  </string>
     <string name="caches_eta_ltm">Menys d\'un minut</string>
@@ -728,7 +723,6 @@
     <string name="init_address">Mostra l\'adreça</string>
     <string name="init_summary_address">Mostra l\'adreça en lloc de les coordenades a la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
-    <string name="init_summary_select_language">Seleccioneu l\'idioma de l\'aplicació (requereix un reinici)\n</string>
     <string name="init_use_default_language">Utilitzeu l\'idioma predeterminat</string>
     <string name="init_showwaypoints">Mostra punts de referència</string>
     <string name="init_showwaypoint_description">Si la quantitat de catxés mostrats al mapa és menor a l\'especificada, també es mostraran les seves fites.</string>
@@ -835,7 +829,6 @@
     <string name="settings_readingerror">S\'ha produït un error en llegir la configuració</string>
     <string name="settings_restart">c:geo s\'ha de reiniciar  per fer efectiva la nova configuració</string>
     <string name="settings_folder_changed">La carpeta \"%1$s\" es canviarà a \"%2$s\" durant la restauració.\n\nToca \"%4$s\" per continuar. En aquest cas, se us demanarà que retornar l\'accés c: geo a aquesta carpeta.\n\nToca \"%3$s\" per mantenir la configuració de carpeta actual.</string>
-    <string name="settings_file_changed">\"%1$s\" es canviarà a \"%2$s\" durant la restauració.\n\nToca \"%4$s\" per continuar. En aquest cas, se us demanarà que concediu accés c: geo a aquest fitxer.\n\nToca \"%3$s\" per mantenir la configuració actual.</string>
     <string name="settings_info_offline_maps_title">Informació als mapes fora línia</string>
     <string name="settings_info_offline_maps">C:geo admet mapes per a ús fora de línia. Podeu obtenir mapes de diferents proveïdors o fins i tot crear els vostres propis mapes (a partir de dades OSM). Primer heu de seleccionar la carpeta on es desaran els mapes fora de línia.</string>
     <string name="settings_info_themes_title">Informació dels detalls dels mapes</string>
@@ -1392,7 +1385,6 @@
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Aparcament</string>
     <string name="map_showwp_visited">Visitat</string>
-    <string name="map_show_track">GPX track/ruta</string>
     <string name="init_renderthemefolder_synctolocal">Sincronitzeu temes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Això sincronitzarà els temes amb una carpeta privada de l\'aplicació per millorar el rendiment d\'obertura del visor de mapes a costa d\'espai d\'emmagatzematge del dispositiu.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activeu la sincronització de carpetes de temes</string>
@@ -1447,8 +1439,6 @@
     <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Cerca per filtre</string>
     <string name="search_filter_info_message" formatted="false">** Cerqueu per filtre ** cerqueu catxés de tots els serveis en línia actius (per exemple, geocaching.com) mitjançant un filtre proporcionat. Tot i això, les capacitats de cerca d’aquests serveis solen ser més limitades que les capacitats de filtre de C:geo.\n\nTots els serveis només admeten filtres AND (sense filtres OR ni inversió de filtres).\n- Els filtres més bàsics com ** tots els serveis admeten tipus de catxé ** o ** mida de catxé **. Els filtres més complicats sovint no són compatibles o tenen algunes restriccions, per exemple. ** Favorits ** o ** Data d\'amagat **.\n- Es pot trobar una llista detallada dels filtres admesos per servei [here] (https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nEls filtres no admesos pel servei en línia s\'aplicaran per c: geo als resultats rebuts.</string>
-    <string name="search_filter_temporary_user_information_title">Nou marc de filtre</string>
-    <string name="search_filter_temporary_user_information">El C:geo ha introduït un nou sistema de filtratge que admet filtres flexibles, combinables i emmagatzemables. \n\nEl filtre global es pot canviar a partir d\'ara directament a les llistes de catxés i al mapa actiu.</string>
     <string name="search_tb">Traçable</string>
     <string name="search_tb_hint">Identificació del traçable</string>
     <string name="search_tb_button">Cerca de traçables</string>
@@ -1931,7 +1921,6 @@
         <item quantity="one">Definiu %d icona del catxé</item>
         <item quantity="other">Definiu %d icones dels catxéscatxé</item>
     </plurals>
-    <string name="pq_download_and_import">Importa la Pocket query</string>
     <string name="caches_refresh_all_warning">Aquesta acció pot ocasionar un elevat tràfic a la xarxa. Esteu segur de voler actualitzar tots els catxés?</string>
     <string name="list_list_headline">Llistes:</string>
     <plurals name="extract_waypoints_result">
@@ -1993,21 +1982,17 @@
         <item quantity="one">Ruta carregada amb %d punt de ruta</item>
         <item quantity="other">Ruta carregada amb %d punts de ruta</item>
     </plurals>
-    <string name="center_on_route">Centre de la ruta</string>
     <string name="individual_route_set_as_start_title">Estableix com a inici de ruta</string>
     <string name="individual_route_set_as_start_message">Voleu definir aquest element com a inici de ruta i moure tots els elements posteriors a la part superior de la ruta actual?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX track/ruta</string>
     <string name="map_load_track">Carrega track/ruta del GPX</string>
     <string name="map_load_track_wait">S\'està carregant el track / ruta en segon pla…</string>
-    <string name="map_load_track_confirm">Sobreescriu el track/ruta existent?</string>
     <plurals name="load_track_success">
         <item quantity="one">Carregada Track/ruta (%dpunt track)</item>
         <item quantity="other">Carregada Track/ruta (%dPunts track)</item>
     </plurals>
     <string name="load_track_error">S\'ha produït un error en carregar el track/ruta</string>
-    <string name="map_unload_track">Descarregar track/ruta</string>
-    <string name="center_on_track">Centre del track/ruta</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Apagar</string>
@@ -2053,7 +2038,6 @@
     <string name="downloadmap_title">Descarregar mapa fora de línia</string>
     <string name="download_title">Descarrega l\'arxiu</string>
     <string name="downloadmap_info">Seleccioneu un fitxer de mapa per a la vostra regió tocant la icona \"Desa\".\n\nLa baixada es realitza en segon pla. Quan la transferència s\'hagi completat, el fitxer es copia a la carpeta de mapes de C:geo i es defineix com a mapa actual.\n\nVés amb compte: la descàrrega d\'un mapa pot provocar un gran trànsit a la xarxa.</string>
-    <string name="downloadmap_choose">Trieu el mapa</string>
     <string name="downloadmap_filename">S\'està baixant %s</string>
     <string name="downloadmanager_not_available">El fitxer no es pot descarregar, el gestor de descàrregues del sistema no està disponible</string>
     <string name="download_started">La descàrrega s\'ha iniciat en segon pla</string>
