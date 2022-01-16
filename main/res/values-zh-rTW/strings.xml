@@ -192,7 +192,6 @@
     <string name="err_server_su">无法联系Geocaching.su。网站可能已经关闭或您的互联网连接无法正常运行。</string>
     <string name="err_server_gk">無法連線到GeoKrety.com。此網站或者您的網際網路連線可能有問題</string>
     <string name="err_login">沒有以儲存的登入資訊</string>
-    <string name="err_login_failed_toast">無法登入 geocaching.com。c:geo正離線工作中。請檢查您的設定或打開您的網路連線。</string>
     <string name="err_unknown">未知的錯誤。請參考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_unknown_address">c:geo無法顯示這存在的位置。</string>
     <string name="err_comm">未知的錯誤。請參考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
@@ -282,7 +281,6 @@
     <string name="info_select_logimage_cancelled">選擇檔案或擷取圖片已經取消</string>
     <string name="info_cache_saved">這個地理藏寶已經存儲到本地裝置</string>
     <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
-    <string name="feature_info_offline_counter">您有一些擁有離線日誌的cache，這些cache可能尚未在官網登錄。為了顯示您的打寶數，這些離線日誌的計數在c：geo會顯示為“ + x”。 \ n \ n此外，這些“ x”日誌將添加到您可能在日誌簽名中使用的“ NUMBER”模板中。 \ n \ n如果您不喜歡此計數器擴展名，則可以在“設置”＆gt;下將其禁用“記錄”和/或使用“ NUMBER（無脫機日誌）”模板。 \ n \ n要輕鬆查找剩餘的脫機日誌，請轉到“歷史記錄”列表，然後過濾“帶有個人數據”＆gt; “使用脫機日誌”。</string>
     <string name="err_trackable_log_not_anonymous">不可在匿名狀態下從 c:geo 登錄到 %1$s，您是否要從 %2$s 來打開設定檔以便填寫資料?</string>
     <string name="err_trackable_no_preference_activity">抱歉，無法找到適合的螢幕。</string>
     <string name="confirm_unsaved_changes_title">未保存更改</string>
@@ -314,7 +312,6 @@
     <string name="menu_update_routingdata">路線規劃資料</string>
     <string name="menu_update_mapdata">地圖資料</string>
     <string name="menu_history">历史</string>
-    <string name="menu_filter">滤镜</string>
     <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
     <string name="live_map_button">線上即時地圖</string>
@@ -329,7 +326,6 @@
     <string name="caches_more_caches_no">载入更多答案</string>
     <string name="caches_more_caches_loading">正在装入缓存</string>
     <string name="caches_more_caches_currently">当前</string>
-    <string name="caches_more_caches_next_x">載入接下來%1$d的藏寶</string>
     <string name="caches_downloading">正在下載藏寶資訊中</string>
     <string name="caches_eta_ltm">不到一分钟</string>
     <plurals name="caches_eta_mins">
@@ -652,7 +648,6 @@
     <string name="init_address">顯示地址</string>
     <string name="init_summary_address">在主屏幕上顯示地址而不是坐標</string>
     <string name="init_select_language">選擇語言</string>
-    <string name="init_summary_select_language">顯示app的語言</string>
     <string name="init_use_default_language">使用預設語言</string>
     <string name="init_showwaypoint_description">如果在地圖上顯示的cache少於給定的數量，則會另外顯示其它cache的waypoints。</string>
     <string name="init_zoomincludingwaypoints">放大(包含航點)</string>
@@ -1622,12 +1617,10 @@
     <string name="map_load_individual_route">載入個別的路徑</string>
     <string name="map_load_individual_route_confirm">覆蓋現有的路徑?</string>
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
-    <string name="center_on_route">在航線置中</string>
     <!-- individual track -->
-    <string name="individual_track">GPX的軌跡/航跡</string>
     <string name="map_load_track">從GPX載入航線</string>
     <string name="map_load_track_wait">在背景載入航線</string>
-    <string name="map_load_track_confirm">覆蓋現有的航跡/航線?</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">關閉</string>
@@ -1665,7 +1658,6 @@
     <string name="downloadmap_title">下載離線地圖</string>
     <string name="download_title">下載檔案</string>
     <string name="downloadmap_info">點擊“儲存”圖示，為您所在的地區選擇一個地圖檔案。\ n \ n下載將在背景運行。下載完成後，檔案將被複製到c：geo的地圖資料夾中，並設置為c：geo的預設地圖。\ n \ n請注意：下載地圖可能會導致網路流量過大！</string>
-    <string name="downloadmap_choose">選擇地圖</string>
     <string name="downloadmap_filename">下載 %s 中</string>
     <string name="downloadmanager_not_available">檢查更新</string>
     <string name="button_continue">繼續</string>
