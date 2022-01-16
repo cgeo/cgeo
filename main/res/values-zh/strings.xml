@@ -167,7 +167,6 @@
     <string name="err_server_su">无法连接 Geocaching.su。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_server_gk">无法连接 GeoKrety.org。网站可能已经关闭，或者是你的网络连接有问题。</string>
     <string name="err_login">未保存任何登录信息</string>
-    <string name="err_login_failed_toast">c:geo 无法完成登录操作。c:geo 可以使用已保存的藏点离线工作。请检查登录设置或者启用网络连接。</string>
     <string name="err_unknown">未知错误。请参考 <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>。</string>
     <string name="err_unknown_address">c:geo无法将这个地址映射到已有位置上。</string>
     <string name="err_comm">未知通信错误。请参考<a href="https://www.cgeo.org/faq#login-failed">FAQ</a> 。</string>
@@ -257,7 +256,6 @@
     <string name="info_select_logimage_cancelled">图像选择或捕获已取消。</string>
     <string name="info_cache_saved">已存储藏点到本地</string>
     <string name="warn_calculator_state_save">如果你想保持计算器状态, 一定要保存航点。</string>
-    <string name="feature_info_offline_counter">您有一些藏点含有离线保存的日志，这些日志可能尚未在线记录。 为了方便，这些日志的计数在 c:geo 主页面的页脚显示为找到的藏点数量后面的 \"+x\" 。 \n\n此外，这些 “x” 日志将被添加到您可能在日志签名中使用的 “NUMBER” 模板。 \n\n如果您不喜欢此计数扩展， 您可以在“设置” &gt; “登录”下禁用它，和 / 或使用 “NUMBER (无离线日志)” 模板。 \n\n为了轻松找到剩余的离线日志， 请转到列表 \"历史\" 并筛选 \"带个人数据\" &gt; \"带离线日志\"。</string>
     <string name="err_trackable_log_not_anonymous">无法匿名从 c:geo 登录 %1$s 。您想要打开设置来填写您的 %2$s 认证吗？</string>
     <string name="err_trackable_no_preference_activity">抱歉，找不到合适的首选项屏幕。</string>
     <string name="confirm_unsaved_changes_title">未保存的更改</string>
@@ -285,7 +283,6 @@
     <string name="menu_settings">设置</string>
     <string name="menu_backup">备份 / 还原</string>
     <string name="menu_history">历史</string>
-    <string name="menu_filter">过滤器</string>
     <!-- main screen -->
     <string name="live_map_button">实时地图</string>
     <string name="caches_nearby_button">附近</string>
@@ -514,7 +511,6 @@
     <string name="init_address">显示地址</string>
     <string name="init_summary_address">在主屏幕上显示地址而不是坐标</string>
     <string name="init_select_language">选择语言</string>
-    <string name="init_summary_select_language">选择应用内语言 (需要重启)\n</string>
     <string name="init_use_default_language">使用默认语言</string>
     <string name="init_showwaypoint_description">如果地图上显示的藏点少于给定的数量，则额外显示其航点。</string>
     <string name="init_zoomincludingwaypoints">缩放包括航点</string>
@@ -751,6 +747,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->
