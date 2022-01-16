@@ -1423,8 +1423,8 @@
 
     <string name="cache_whereyougo_start">Open WhereYouGo to download and start this cartridge</string>
     <string name="cache_whereyougo_install">Install WhereYouGo player to download and start this cartridge</string>
-    <string name="cache_chirpwolf_start">Open Chirp Wolf to read the chirp data for this cache</string>
-    <string name="cache_chirpwolf_install">Install Chirp Wolf to be able to read chirp data</string>
+    <string name="cache_chirpwolf_start">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can open Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">This cache might use either a chirp transmitter or another kind of wireless beacon. For reading chirp data you can install Chirp Wolf.</string>
     <string name="cache_alc_start">Open Adventure Lab to start playing this adventure</string>
     <string name="cache_alc_install">Install Adventure Lab player to play this adventure</string>
 
