@@ -30,8 +30,6 @@
     <color name="settings_colorTextSecondaryLight">#AA000000</color>
     <color name="settings_colorBackgroundDark">@color/just_black</color>
     <color name="settings_colorBackgroundLight">@color/just_white</color>
-    <color name="settings_colorDialogBackgroundDark">#FF191919</color>
-    <color name="settings_colorDialogBackgroundLight">@color/just_white</color>
 
     <!-- default colors for map lines -->
 
@@ -59,13 +57,11 @@
     <color name="cacheType_unknown">#ff616161</color>
     <color name="cacheType_special">#ffafb42b</color>
     <color name="cacheType_disabled">#ff90a4ae</color>
-    <color name="cacheType_waypoint">#ffffffff</color>
 
     <color name="dotBg_found">#fffdd835</color>
     <color name="dotBg_foundOffline">#ffF57C00</color>
     <color name="dotBg_notFound">#ff448AFF</color>
     <color name="dotBg_calendar">#ffD32F2F</color>
-    <color name="dotBg_usermodifiedCoords">#ff303F9F</color>
     <color name="dotBg_offlineLogNote">#ff4e342e</color>
     <color name="dotBg_offlineLogArchive">#ffD32F2F</color>
     <color name="dotBg_offlineLogMaintanance">#ffC62828</color>
