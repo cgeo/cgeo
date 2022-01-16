@@ -144,7 +144,6 @@
     <string name="err_server_su">Ni bilo mogoče vzpostaviti povezave z Geocaching.su. Spletna stran ali vaša povezava z internetom je lahko nedosegljiva.</string>
     <string name="err_server_gk">Ne morem se povezati na GeoKrety.org. Spletna stran je lahko nedosegljiva ali pa ne deluje internetna povezava.</string>
     <string name="err_login">Prijavni podatki niso shranjeni</string>
-    <string name="err_login_failed_toast">c:geo se ne more prijaviti. c:geo lahko deluje v načinu brez povezave s shranjenimi zakladi. Preverite vaše prijavne podatke in internetno povezavo.</string>
     <string name="err_unknown">Neznana napaka. Več informacij poišči na povezavi <a href="https://www.cgeo.org/faq#login-failed">FAQ</a>.</string>
     <string name="err_missing_auth">Uporabniško ime in geslo še nista nastavljena</string>
     <string name="err_wrong">Napačno uporabniško ime in/ali geslo</string>
@@ -241,7 +240,6 @@
     <string name="menu_helpers">Dodatni programi</string>
     <string name="menu_settings">Nastavitve</string>
     <string name="menu_history">Zgodovina</string>
-    <string name="menu_filter">Filtriraj</string>
     <!-- main screen -->
     <string name="live_map_button">Zemljevid</string>
     <string name="caches_nearby_button">V bližini</string>
@@ -1069,6 +1067,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->
