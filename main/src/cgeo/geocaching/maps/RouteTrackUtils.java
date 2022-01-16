@@ -13,6 +13,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorageActivityHelper;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.Trackfiles;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.functions.Action2;
@@ -187,12 +188,11 @@ public class RouteTrackUtils {
                 });
             }
 
-            vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> {
-                // @todo: Sicherheitsabfrage ergänzen
+            vt.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_track).setMessage(TextParam.text(String.format(activity.getString(R.string.map_clear_track_confirm), tracks.getDisplayname(key)))).confirm((d, w) -> {
                 tracks.remove(key);
                 updateDialogTracks(dialog, tracks);
                 updateTrack.updateRoute(key, null);
-            });
+            }));
             tracklist.addView(vt);
         });
     }
