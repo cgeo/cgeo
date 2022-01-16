@@ -200,7 +200,6 @@
     <string name="err_server_su">Geocaching.suに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_server_gk">GeoKrety.orgに接続できません。サーバが停止中かインターネットに未接続かもしれません</string>
     <string name="err_login">ログイン情報が保存されていません</string>
-    <string name="err_login_failed_toast">ログインできません。保存済みキャッシュのみでオフラインで動作します。 ログインの設定を確認したりネット接続を有効にしてください</string>
     <string name="err_unknown">不明なエラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください</string>
     <string name="err_unknown_address">c:geoがこのアドレスを既存の場所に合わせられませんでした</string>
     <string name="err_comm">不明な通信エラー。<a href="https://www.cgeo.org/faq#login-failed">よくある質問(英語)</a>をご確認ください</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">画像の選択または撮影がキャンセルされました</string>
     <string name="info_cache_saved">キャッシュはローカルディスクに保存されました</string>
     <string name="warn_calculator_state_save">計算した状態を保持したい場合はウェイポイントを保存してください</string>
-    <string name="feature_info_offline_counter">オフラインで書いたログがありますがまだ投稿されていません。未投稿オフラインログ数はc:geoメインページ下部に+ xと表示されます。\n\nまた、ログの署名に使用する「キャッシュ数」[NUMBER]テンプレートにも含まれます。 \n\nお好みでなかったら「設定」&gt;「ログ」で表示を変えられます。また「キャッシュ数(オフラインログ除く)」[ONLINENUM]をお使いください。\n\n残っているオフラインログを確認するには「履歴」(メインページ右上の時計マーク)のフィルタ(ロートのマーク)で「個人データ」&gt;「オフラインログあり」を選択してください</string>
     <string name="err_trackable_log_not_anonymous">c:geoから%1$sに匿名でログは投稿できません。設定を開き%2$sからアカウント情報を入力しますか?</string>
     <string name="err_trackable_no_preference_activity">申し訳ありませんが、適切な設定画面が見つかりませんでした</string>
     <string name="confirm_unsaved_changes_title">変更が保存されていません</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">オフラインデータを更新</string>
     <string name="menu_update_routingdata">ルート検索データ</string>
     <string name="menu_update_mapdata">地図データ</string>
-    <string name="menu_dashboard">ログインダッシュボード</string>
     <string name="menu_history">履歴</string>
     <string name="menu_search_clipboard">クリップボードからGCコードを読み込む</string>
     <string name="menu_history_longstring">履歴</string>
-    <string name="menu_filter">フィルタ</string>
     <string name="menu_lists_pocket_queries">ポケット・クエリ</string>
     <string name="menu_lists_bookmarklists">ブックマークリスト</string>
     <string name="menu_invert_order">逆順</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">キャッシュは以上です</string>
     <string name="caches_more_caches_loading">キャッシュ情報を読み込み中…</string>
     <string name="caches_more_caches_currently">現在</string>
-    <string name="caches_more_caches_next_x">次の%1$dキャッシュを読み込む</string>
     <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
     <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
     <string name="caches_eta_ltm">1分以内</string>
@@ -713,7 +708,6 @@
     <string name="init_address">地名表示</string>
     <string name="init_summary_address">メイン画面での現在地を座標値の代わりに地名で表示</string>
     <string name="init_select_language">言語の選択</string>
-    <string name="init_summary_select_language">アプリ内の言語を選択\n(c:geoの再起動が必要)\n</string>
     <string name="init_use_default_language">システムの言語</string>
     <string name="init_showwaypoints">ウェイポイントを表示</string>
     <string name="init_showwaypoint_description">地図に表示されてるキャッシュ数が入力した数より少ない場合にはウェイポイントも地図に表示</string>
@@ -820,7 +814,6 @@
     <string name="settings_readingerror">設定の読み取りエラー</string>
     <string name="settings_restart">読み込まれた設定を有効にするにはc:geoを再起動する必要があります</string>
     <string name="settings_folder_changed">復元中にフォルダ「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
-    <string name="settings_file_changed">復元中に「%1$s」は「%2$s」に変更されます。\n\n「%4$s」をタップすると完了します。フォルダのアクセス権限の許可を再度求められます。\n\n現在のフォルダ設定のままにするには「%3$s」をタップしてください。</string>
     <string name="settings_info_offline_maps_title">オフライン地図について</string>
     <string name="settings_info_offline_maps">オフライン用の地図に対応しています。さまざまなサイトから地図をダウンロードしたり、(OSMデータからの)自作の地図を使用することもできます。 最初にオフライン地図を保存するフォルダを選択してください。</string>
     <string name="settings_info_themes_title">オフライン地図のテーマについて</string>
@@ -1365,7 +1358,6 @@
     <string name="map_showwp_original">オリジナル</string>
     <string name="map_showwp_parking">駐車場</string>
     <string name="map_showwp_visited">訪問済み</string>
-    <string name="map_show_track">GPXトラック/ルート</string>
     <string name="init_renderthemefolder_synctolocal">地図テーマフォルダの同期</string>
     <string name="init_summary_renderthemefolder_synctolocal">地図テーマフォルダをアプリ専用フォルダと同期すると地図表示時の遅延が軽減されます(ストレージを少し余分に使用します)</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">地図テーマフォルダの同期</string>
@@ -1419,8 +1411,6 @@
     <string name="search_filter">フィルタ</string>
     <string name="search_filter_button">フィルタで検索</string>
     <string name="search_filter_info_message" formatted="false">**フィルタで検索**はすべてのアクティブなジオキャッシングサイト(例:geocaching.com)のキャッシュを検索します。 ただし、オンラインのフィルタ検索機能はc:geoのフィルタよりも制限されています。\n\n- すべてのサイトではANDフィルタのみ対応しています(ORフィルタおよび除外フィルタは使えません)。\n- **キャッシュタイプ**や**キャッシュサイズ**のような基本フィルタはすべてのサイトで対応しています。**お気に入り**や**設置日**のような詳細フィルタは未対応か、いくつか制限があります。\n- サイトごとの対応しているフィルタの詳細なリストは、[こちら](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors)。\n\nサイトでサポートされていないフィルタは、c:geoが受信したデータに対して適用されます。</string>
-    <string name="search_filter_temporary_user_information_title">新しいフィルタシステム</string>
-    <string name="search_filter_temporary_user_information">フィルタ機能が新しくなりました。柔軟に複数の条件を組み合わせられ、保存も可能になります。\n\n今後、グローバルフィルタはキャッシュリストとオンライン地図で直接変更できます。</string>
     <string name="search_tb">トラッカブル</string>
     <string name="search_tb_hint">トラッカブルコード</string>
     <string name="search_tb_button">トラッカブルを検索</string>
@@ -1889,7 +1879,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="command_set_cache_icons_result">
         <item quantity="other">%dキャッシュのアイコンを設定しました</item>
     </plurals>
-    <string name="pq_download_and_import">ポケット・クエリのインポート</string>
     <string name="caches_refresh_all_warning">この操作はネットワーク通信量が大きくなる可能性があります。すべてのキャッシュを一括更新してもよろしいですか?</string>
     <string name="list_list_headline">リスト:</string>
     <plurals name="extract_waypoints_result">
@@ -1942,20 +1931,16 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <plurals name="individual_route_loaded">
         <item quantity="other">ルート(%dルート地点)を読み込みました</item>
     </plurals>
-    <string name="center_on_route">ルートの中心に移動</string>
     <string name="individual_route_set_as_start_title">ルート開始点にする</string>
     <string name="individual_route_set_as_start_message">この場所をルートの開始点にして後続の場所を繰り上げますか?</string>
     <!-- individual track -->
-    <string name="individual_track">GPXトラック/ルート</string>
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>
     <string name="map_load_track_wait">トラック/ルートをバックグラウンドで読み込み中…</string>
-    <string name="map_load_track_confirm">現在のトラック/ルートに上書きしますか?</string>
     <plurals name="load_track_success">
         <item quantity="other">トラック/ルート(%dトラックポイント)を読み込みました</item>
     </plurals>
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
-    <string name="map_unload_track">トラック/ルートをアップロード</string>
-    <string name="center_on_track">トラック/ルートの中心に移動</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">オフ</string>
@@ -2001,7 +1986,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_title">オフライン用に地図をダウンロード</string>
     <string name="download_title">ファイルをダウンロード</string>
     <string name="downloadmap_info">お好みの地域の「保存アイコン」をタップするとダウンロードできます。\n\nダウンロードはバックグラウンドで実行されます。完了後に地図フォルダに保存され、表示する地図に設定されます。\n\n注意: 地図ファイルはサイズがとても大きいので、たくさんのデータ通信量が必要です!</string>
-    <string name="downloadmap_choose">地図を選択</string>
     <string name="downloadmap_filename">%sをダウンロード中</string>
     <string name="downloadmanager_not_available">システムのダウンロードマネージャーが利用できないため、ファイルをダウンロードできません</string>
     <string name="download_started">バックグラウンドでダウンロードを開始しました</string>
