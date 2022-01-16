@@ -200,7 +200,6 @@
     <string name="err_server_su">Não é possível contactar o sítio \'Geocaching.su\'. O sítio web pode estar inoperacional ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_server_gk">Não é possível contactar o sítio \'GeoKrety.org\'. O sítio web pode estar indisponível ou a sua ligação à Internet não está a funcionar.</string>
     <string name="err_login">Nenhuma informação de início de sessão guardada</string>
-    <string name="err_login_failed_toast">O c:geo não consegue iniciar a sessão. No modo offline, o c:geo funciona com as caches guardadas em \'Armazenadas\'. Verifique as definições de Início de Sessão ou active a sua ligação à Internet.</string>
     <string name="err_unknown">Erro desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
     <string name="err_unknown_address">O c:geo não conseguiu mapear a morada para uma localização existente</string>
     <string name="err_comm">Erro de comunicação desconhecido. Por favor, consulte a nossa <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> para orientação.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Foi cancelada a selecção ou captura de imagem.</string>
     <string name="info_cache_saved">A cache foi armazenada localmente</string>
     <string name="warn_calculator_state_save">Assegure a gravação do ponto adicional caso pretenda manter os parâmetros da calculadora.</string>
-    <string name="feature_info_offline_counter">Tem algumas caches com um registo offline gravado, que podem ainda não ter sido registadas online. Para seu conforto, a contagem desses registos é exibida como \"+ x\" a seguir ao seu número de caches encontradas, no rodapé na página principal do c:geo. \n\nAlém disso, caso utilize o modelo \"Número\" na composição da sua assinatura de registo, estes \"x\" número de registos serão-lhe acrescentados. \n\nSe não gosta desta extensão do contador, pode desactiva-la em \"Definições\" &gt; \"Registos\" e/ou usar em alternativa o modelo \"Número (sem registos offline)\". \n\nPara encontrar facilmente os registos offline pendentes, aceda à lista \"Histórico\" e filtre por \"Com informação pessoal\" &gt; \"Com registo offline\".</string>
     <string name="err_trackable_log_not_anonymous">Não é possível registar %1$s de forma anónima a partir do c:geo. Quer abrir as definições para preencher as suas credenciais de %2$s?</string>
     <string name="err_trackable_no_preference_activity">Lamentamos, não foi encontrada uma configuração válida para o serviço pretendido.</string>
     <string name="confirm_unsaved_changes_title">Alterações não guardadas</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Actualizar dados offline</string>
     <string name="menu_update_routingdata">Dados de encaminhamento</string>
     <string name="menu_update_mapdata">Dados do mapa</string>
-    <string name="menu_dashboard">Painel de entrada</string>
     <string name="menu_history">Histórico</string>
     <string name="menu_search_clipboard">Carregar geo-código da área de transferência</string>
     <string name="menu_history_longstring">Histórico de Encontradas</string>
-    <string name="menu_filter">Filtro</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listas de marcadores</string>
     <string name="menu_invert_order">Inverter ordem</string>
@@ -345,7 +341,10 @@
     <string name="caches_more_caches_no">Sem mais caches</string>
     <string name="caches_more_caches_loading">A carregar caches…</string>
     <string name="caches_more_caches_currently">actualmente</string>
-    <string name="caches_more_caches_next_x">Carregar as próximas %1$d caches</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Carregar a próxima %1$d cache</item>
+        <item quantity="other">Carregar as próximas %1$d caches</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Carregar as caches restantes (%1$d / %2$d)</string>
     <string name="caches_downloading">A transferir caches…\nTempo estimado: </string>
     <string name="caches_eta_ltm">Menos de um minuto</string>
@@ -649,6 +648,9 @@
     <string name="settings_title_navigation_menu">Menu de navegação</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Plataforma de Geocaching</string>
+    <string name="settings_category_nearbysearch">Pesquisa nas proximidades</string>
+    <string name="init_nearbysearchlimit_title">Limite de pesquisa próxima</string>
+    <string name="init_nearbysearchlimit_description">Limita a distância até à qual as caches são mostradas com a pesquisa nas proximidades (0=ilimitada)</string>
     <string name="settings_category_geocaching_additionals">Outros serviços e suplementos</string>
     <string name="settings_category_social">Redes sociais</string>
     <string name="settings_category_logging_other">Outras Opções de Registo</string>
@@ -727,7 +729,6 @@
     <string name="init_address">Mostrar endereço</string>
     <string name="init_summary_address">Mostra um endereço em vez das coordenadas no ecrã principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
-    <string name="init_summary_select_language">Selecciona o idioma da aplicação (requer reinício)\n</string>
     <string name="init_use_default_language">Utilizar idioma predefinido</string>
     <string name="init_showwaypoints">Mostrar pontos adicionais</string>
     <string name="init_showwaypoint_description">Se o número de geocaches apresentadas no mapa for inferior ao definido, os respectivos pontos adicionais também são mostrados.</string>
@@ -834,7 +835,6 @@
     <string name="settings_readingerror">Erro ao ler as definições</string>
     <string name="settings_restart">O c:geo precisa de ser reiniciado agora para que entrem em vigor as definições carregadas</string>
     <string name="settings_folder_changed">A pasta \"%1$s\" será alterada para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a essa pasta.\n\nToque em \"%3$s\" para manter a pasta actual na configuração.</string>
-    <string name="settings_file_changed">\"%1$s\" será alterado para \"%2$s\" durante o restauro.\n\nToque em \"%4$s\" para prosseguir. Nesse caso será de novo pedido que garanta o acesso do c:geo a esse ficheiro.\n\nToque em \"%3$s\" para manter a actual configuração.</string>
     <string name="settings_info_offline_maps_title">Informações sobre Mapas Offline</string>
     <string name="settings_info_offline_maps">O c:geo suporta mapas para uso offline. Pode obter mapas de diferentes fornecedores ou até mesmo criar os seus próprios mapas (de dados OSM). Em primeiro lugar, seleccione a pasta na qual os mapas offline serão guardados.</string>
     <string name="settings_info_themes_title">Informações sobre Temas de Mapas</string>
@@ -1391,7 +1391,6 @@
     <string name="map_showwp_original">Originais</string>
     <string name="map_showwp_parking">Estacionamento</string>
     <string name="map_showwp_visited">Visitados</string>
-    <string name="map_show_track">Percurso/rota GPX</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Isto sincronizará os seus temas numa pasta privada da aplicação para melhorar o desempenho de abertura de mapas, à custa de algum espaço de armazenamento do dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronização da pasta de temas</string>
@@ -1448,8 +1447,6 @@
     <string name="search_filter">Filtrar</string>
     <string name="search_filter_button">Pesquisar por Filtro</string>
     <string name="search_filter_info_message" formatted="false">**Pesquisar por filtro** procura caches em todos os serviços online activos (ex: geocaching.com) usando um filtro fornecido. No entanto, as capacidades de pesquisa destes serviços geralmente são mais limitadas do que as capacidades de filtro do c:geo.\n\n- Todos os serviços só suportam filtros AND (sem filtros OR e sem inversão de filtro).\n- Os filtros mais básicos, como **tipo de cache** ou **tamanho da cache** são suportados por todos os serviços. Filtros mais complicados muitas vezes não são suportados ou têm algumas restrições, por exemplo, **favoritos** ou **datas de colocação**.\n- Uma lista detalhada dos filtros suportados por serviço pode ser encontrada [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltros não suportados pelo serviço online serão aplicados pelo c:geo, nos resultados obtidos.</string>
-    <string name="search_filter_temporary_user_information_title">Nova estrutura de filtros</string>
-    <string name="search_filter_temporary_user_information">O c:geo introduziu um novo sistema de filtragem, suportando filtros flexíveis, combináveis e armazenáveis. \n\nO filtro geral pode, a partir de agora, ser alterado directamente nas listas de caches e no mapa em tempo real.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Identificação do trackable</string>
     <string name="search_tb_button">Pesquisar por trackable</string>
@@ -1834,7 +1831,6 @@
     <string name="cat_surrounding">Em redor da cache</string>
     <string name="cat_permissions">Permissões</string>
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">Todas</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
     <!-- next things -->
@@ -1935,7 +1931,6 @@
         <item quantity="one">Definir %d ícone da cache</item>
         <item quantity="other">Definir %d ícones da cache</item>
     </plurals>
-    <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="caches_refresh_all_warning">Esta acção pode originar um consumo de dados elevado. Tem a certeza que deseja actualizar todas as caches?</string>
     <string name="list_list_headline">Listas:</string>
     <plurals name="extract_waypoints_result">
@@ -1975,7 +1970,6 @@
     <string name="notification_proximity_title">notificação de proximidade</string>
     <string name="notification_download_receiver_title">A importar transferência</string>
     <!-- individual routes -->
-    <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
     <string name="individual_route">Rota individual</string>
     <string name="individual_route_added">adicionado à rota</string>
     <string name="individual_route_removed">removido da rota</string>
@@ -1983,8 +1977,6 @@
     <string name="individual_route_error_single_waypoint_mode">Não disponível em modo de ponto adicional único</string>
     <string name="map_sort_individual_route">Ordenar por rota individual</string>
     <string name="map_export_individual_route">Exportar rota individual</string>
-    <string name="route">Rota</string>
-    <string name="track">Percurso</string>
     <string name="map_load_individual_route">Carregar rota individual</string>
     <string name="map_load_individual_route_confirm">Substituir rota existente?</string>
     <string name="map_autotarget_individual_route">Definir início da rota como destino</string>
@@ -2001,21 +1993,20 @@
         <item quantity="one">Rota carregada com %d ponto de rota</item>
         <item quantity="other">Rota carregada com %d pontos de rota</item>
     </plurals>
-    <string name="center_on_route">Centrar na rota</string>
     <string name="individual_route_set_as_start_title">Definir como início da rota</string>
     <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
     <!-- individual track -->
-    <string name="individual_track">Percurso/rota GPX</string>
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
     <string name="map_load_track_wait">A carregar percurso/rota em segundo plano…</string>
-    <string name="map_load_track_confirm">Substituir percurso/rota existente?</string>
     <plurals name="load_track_success">
         <item quantity="one">Percurso/rota carregado (%d ponto do percurso)</item>
         <item quantity="other">Percurso/rota carregado (%d pontos do percurso)</item>
     </plurals>
     <string name="load_track_error">Erro ao carregar o percurso/rota</string>
-    <string name="map_unload_track">Remover percurso/rota</string>
-    <string name="center_on_track">Centrar no percurso/rota</string>
+    <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
+    <string name="route">Rota</string>
+    <string name="track">Percurso</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
@@ -2061,7 +2052,6 @@
     <string name="downloadmap_title">Transferir mapa offline</string>
     <string name="download_title">Transferir ficheiro</string>
     <string name="downloadmap_info">Escolha um ficheiro de mapa para a sua região, tocando no ícone \"Guardar\".\n\nA transferência será executada em segundo plano. Quando estiver concluída, o ficheiro transferido será copiado para a pasta de mapas do c:geo e definido como o mapa actual.\n\nCuidado: Transferir um mapa pode originar tráfego de rede elevado!</string>
-    <string name="downloadmap_choose">Escolher mapa</string>
     <string name="downloadmap_filename">A transferir %s</string>
     <string name="downloadmanager_not_available">O ficheiro não pode ser transferido, o gestor de transferências do sistema não está disponível</string>
     <string name="download_started">Transferência iniciada, em segundo plano</string>
