@@ -4,9 +4,10 @@
 ### Karte
 - Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
-- Neu: D/T-Markierungen für Cache-Symbole (optional)
-- Neu: Funktion, um nach fehlenden Routingdaten für den aktuellen Bildschirmausschnitt zu suchen
-- Neu: Design-Legende für Elevate, Elements und Freizeitkarte-Designs
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
@@ -27,10 +28,11 @@
 - Neu: Suche in den Einstellungen
 - Neu: GC Wizard zur Liste der nützlichen Apps hinzugefügt
 - Neu: Attributfilter: Erlaubt die Auswahl, von welchen Konnektoren Attribute gezeigt werden sollen
+- Neu: Option zur Begrenzung der Distanz in der Nachbereichssuche (siehe Einstellungen => Dienste)
 - Änderung: Barcode-Scanner aus der Liste der nützlichen Apps und aus dem Hauptbildschirm entfernt
 - Änderung: BRouter aus Liste nützlicher Apps entfernt (du kannst weiterhin sowohl die externe als auch die interne Navigation verwenden)
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
-- Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort-Apps in den Einstellungen
+- Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort--Apps in den Einstellungen
 - Korrektur: Aktiviere Tooltips für Systeme, die unter Android-Versionen kleiner 8 laufen
 - Einstellungsmenüs geändert, um den aktuellen Android-Spezifikationen zu entsprechen
 - MapsWithMe API aktualisiert
