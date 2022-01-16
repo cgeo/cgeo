@@ -151,7 +151,6 @@
     <string name="err_server_su">A geocaching.su. nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_server_gk">A geokrety.org nem érhető el. A webhely leállt, vagy az internetkapcsolat nem működik.</string>
     <string name="err_login">Hiányzó bejelentkezési adat</string>
-    <string name="err_login_failed_toast">A c:geo nem tud bejelentkezni. A c:geo hálózat nélküli módban fut. Ellenőrizd a bejelentkezési adataidat a beállításoknál vagy engedélyezd az internetkapcsolatot!</string>
     <string name="err_unknown">Ismeretlen hiba. Kérjük, olvasd el útmutatásként: <a href="https://www.cgeo.org/faq#login-failed">GYIK</a></string>
     <string name="err_unknown_address">A c:geo nem tudta leképezni ezt a címet egy létező helyszínre</string>
     <string name="err_comm">Ismeretlen kommunikációs hiba. Kérjük, olvasd el útmutatásként: <a href="https://www.cgeo.org/faq#login-failed">GYIK</a></string>
@@ -260,7 +259,6 @@
     <string name="menu_settings">Beállítások</string>
     <string name="menu_backup">Biztonsági mentés / Visszaállítás</string>
     <string name="menu_history">Előzmények</string>
-    <string name="menu_filter">Szűrés</string>
     <!-- main screen -->
     <string name="live_map_button">Élő térkép</string>
     <string name="caches_nearby_button">A közelben</string>
@@ -1236,7 +1234,6 @@
         <item quantity="one">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
         <item quantity="other">Hozzáadás a kedvencekhez (%d pontod maradt)</item>
     </plurals>
-    <string name="pq_download_and_import">Pocket lekérdezés importálása</string>
     <string name="caches_refresh_all_warning">Ez a művelet nagy hálózati forgalmat okozhat. Biztosan frissíteni akarod összes ládát?</string>
     <string name="list_list_headline">Listák:</string>
     <plurals name="extract_waypoints_result">
@@ -1263,6 +1260,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->

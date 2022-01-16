@@ -200,7 +200,6 @@
     <string name="err_server_su">No es posible conectar con Geocaching.su. El sitio web puede estar caído o bien tu conexión a internet no está funcionando.</string>
     <string name="err_server_gk">No se pudo contactar con GeoKrety.org. El sitio web puede estar caído o la conexión a internet no funciona.</string>
     <string name="err_login">No hay información de acceso guardada</string>
-    <string name="err_login_failed_toast">c:geo no puede iniciar sesión. c:geo puede funcionar sin conexión con los cachés que hayan sido almacenados. Comprueba las opciones de inicio de sesión o active la conexión a internet.</string>
     <string name="err_unknown">Error desconocido. Por favor consulte nuestra <a href="https://www.cgeo.org/faq#login-failed"> sección de preguntas frecuentes (FAQ) </a> para conseguir ayuda.</string>
     <string name="err_unknown_address">c:geo no ha podido ubicar en el mapa esta dirección</string>
     <string name="err_comm">Error de comunicación desconocido. Por favor, consulte nuestra <a href="https://www.cgeo.org/faq#login-failed"> sección de preguntas frecuentes (FAQ) </a> para obtener ayuda.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">La selección de imagen  o captura ha sido cancelada.</string>
     <string name="info_cache_saved">El caché se ha guardado en el disco local</string>
     <string name="warn_calculator_state_save">Asegúrate de guardar el waypoint si quieres conservar el estado de la calculadora.</string>
-    <string name="feature_info_offline_counter">Tienes algunos cachés con un registro sin conexión, que puede que aún no estén conectados. Para tu comodidad, el recuento de estos registros se muestra como \"+ x\" detrás de tu número de cachés encontrados en el pie de página en la página principal de c:geo. \n\nAdemás, estos registros \"x\" se añadirán a la plantilla \"NUMBER\" que podría utilizar en su firma de registro. \n\nSi no te gusta esta extensión de contador, puede deshabilitarlo en \"Configuración\" &gt; \"Registrar\" y/o utilizar la plantilla \"NUMBER (sin registros sin conexión)\". \n\nPara encontrar fácilmente los registros restantes sin conexión, ir a la lista \"Historial\" y filtrar \"Con datos personales\" &gt; \"Con registro sin conexión\".</string>
     <string name="err_trackable_log_not_anonymous">No puedes registrar %1$s desde c:geo de manera anónima. ¿Quieres abrir los ajustes para rellenar tu identificación desde %2$s?</string>
     <string name="err_trackable_no_preference_activity">Disculpa, no se ha encontrado una pantalla de preferencia adecuada.</string>
     <string name="confirm_unsaved_changes_title">Cambios sin guardar</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Actualizar datos sin conexión</string>
     <string name="menu_update_routingdata">Datos de ruta</string>
     <string name="menu_update_mapdata">Datos del mapa</string>
-    <string name="menu_dashboard">Iniciar sesión en el dashboard</string>
     <string name="menu_history">Historial</string>
     <string name="menu_search_clipboard">Cargar geocódigo desde el portapapeles</string>
     <string name="menu_history_longstring">Historial de búsqueda</string>
-    <string name="menu_filter">Filtro</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
     <string name="menu_lists_bookmarklists">Listas de marcadores</string>
     <string name="menu_invert_order">Invertir orden</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">No hay más cachés</string>
     <string name="caches_more_caches_loading">Cargando cachés…</string>
     <string name="caches_more_caches_currently">actualmente</string>
-    <string name="caches_more_caches_next_x">Cargar siguientes %1$d cachés</string>
     <string name="caches_more_caches_remaining">Cargar cachés restantes (%1$d / %2$d)</string>
     <string name="caches_downloading">Descargando cachés…\nFaltan: </string>
     <string name="caches_eta_ltm">Menos de un minuto</string>
@@ -725,7 +720,6 @@
     <string name="init_address">Mostrar dirección</string>
     <string name="init_summary_address">Mostrar dirección en lugar de coordenadas en la pantalla principal</string>
     <string name="init_select_language">Seleccionar idioma</string>
-    <string name="init_summary_select_language">Seleccionar idioma dentro de la aplicación (requiere reiniciar)\n</string>
     <string name="init_use_default_language">Usar el idioma por defecto</string>
     <string name="init_showwaypoints">Mostrar waypoints</string>
     <string name="init_showwaypoint_description">Mostrar los waypoints de los cachés si en el mapa se muestran menos cachés que el número seleccionado.</string>
@@ -832,7 +826,6 @@
     <string name="settings_readingerror">Error leyendo los ajustes</string>
     <string name="settings_restart">c:geo debe reiniciarse ahora para que la configuración cargada tenga efecto</string>
     <string name="settings_folder_changed">La carpeta \"%1$s\" se cambiará a \"%2$s\" durante la restauración.\n\nPulse \"%4$s\" para continuar. En ese caso se le pedirá que vuelva a conceder acceso a c:geo a esa carpeta.\n\nPulse \"%3$s\" para mantener la configuración de la carpeta actual en su lugar.</string>
-    <string name="settings_file_changed">\"%1$s\" se cambiará a \"%2$s\" durante la restauración.\n\nPulse \"%4$s\" para continuar. En ese caso se le pedirá que vuelva a conceder acceso a c:geo a ese archivo.\n\nPulse \"%3$s\" para mantener la configuración actual en su lugar.</string>
     <string name="settings_info_offline_maps_title">Mapas sin conexión</string>
     <string name="settings_info_offline_maps">c:geo soporta mapas para utilizarse sin conexión. Puedes obtener mapas de diferentes proveedores o incluso crear tus propios mapas (a partir de datos OSM). Primero tiene que seleccionar la carpeta en la que se almacenarán los mapas sin conexión.</string>
     <string name="settings_info_themes_title">Información sobre temas de mapas</string>
@@ -1389,7 +1382,6 @@
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Parking</string>
     <string name="map_showwp_visited">Visitado</string>
-    <string name="map_show_track">Rastreo/ruta GPX</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizar temas</string>
     <string name="init_summary_renderthemefolder_synctolocal">Esto sincronizará sus temas en una carpeta privada de la aplicación para mejorar el rendimiento del visor de mapas a costa de algún espacio de almacenamiento del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activar sincronización de la carpeta de temas</string>
@@ -1444,8 +1436,6 @@
     <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Buscar por filtro</string>
     <string name="search_filter_info_message" formatted="false">**Buscar por filtro** busca cachés en todos los servicios activos en línea (por ejemplo, geocaching.com) usando un filtro proporcionado. Sin embargo, las capacidades de búsqueda de estos servicios suelen ser más limitadas que las capacidades de filtro de c:geo.\n\n- Todos los servicios sólo soportan filtros AND (no hay filtros OR ni inversión de filtros).\n- Los filtros más básicos como **tipo de caché** o **tamaño de caché** son compatibles con todos los servicios. Los filtros más complicados a menudo no son compatibles o tienen algunas restricciones, por ejemplo, **favoritos** o **fecha oculta**.\n- Una lista detallada sobre los filtros soportados por servicio puede ser encontrada [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLos filtros no soportados por el servicio online serán aplicados por c:geo en los resultados recibidos.</string>
-    <string name="search_filter_temporary_user_information_title">Nuevo marco de filtro</string>
-    <string name="search_filter_temporary_user_information">c:geo ha introducido un nuevo sistema de filtrado, soportando filtros flexibles, combinables y almacenables. \n\nA partir de ahora el filtro global puede cambiarse directamente en las listas de cachés y en el mapa activo.</string>
     <string name="search_tb">Rastreable</string>
     <string name="search_tb_hint">Identificación del rastreable</string>
     <string name="search_tb_button">Buscar rastreables</string>
@@ -1927,7 +1917,6 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">Establecer %d icono de caché</item>
         <item quantity="other">Establecer %d iconos de caché</item>
     </plurals>
-    <string name="pq_download_and_import">Importar Pocket Query</string>
     <string name="caches_refresh_all_warning">Esta acción puede ocasionar un alto tráfico de red. ¿Estás seguro de querer actualizar todos los cachés?</string>
     <string name="list_list_headline">Listas:</string>
     <plurals name="extract_waypoints_result">
@@ -1989,21 +1978,17 @@ Nombre de archivo:%2$s</string>
         <item quantity="one">Ruta cargada con %d punto de ruta</item>
         <item quantity="other">Ruta cargada con %d puntos de ruta</item>
     </plurals>
-    <string name="center_on_route">Centrar en la ruta</string>
     <string name="individual_route_set_as_start_title">Establecer como inicio de ruta</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX track/ruta</string>
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
     <string name="map_load_track_wait">Cargando pista/ruta en segundo plano…</string>
-    <string name="map_load_track_confirm">¿Sobrescribir pista/ruta existente?</string>
     <plurals name="load_track_success">
         <item quantity="one">Pista/ruta cargada (%d punto de seguimiento)</item>
         <item quantity="other">Pista/ruta cargada (%d puntos de seguimiento)</item>
     </plurals>
     <string name="load_track_error">Error al cargar pista/ruta</string>
-    <string name="map_unload_track">Descargar pista/ruta</string>
-    <string name="center_on_track">Centrar en la pista/ruta</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">apagado</string>
@@ -2049,7 +2034,6 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_title">Descargar mapa sin conexión</string>
     <string name="download_title">Descargar archivo</string>
     <string name="downloadmap_info">Seleccione un archivo de mapa para su región pulsando el icono \"Guardar\".\n\nLa descarga se realiza en segundo plano. Cuando la transferencia se completa, el archivo se copia a la carpeta de mapa c:geo y se establece como el mapa actual.\n\nTenga cuidado: ¡Descargando un mapa puede causar un gran tráfico de red!</string>
-    <string name="downloadmap_choose">Elegir mapa</string>
     <string name="downloadmap_filename">Descargando %s</string>
     <string name="downloadmanager_not_available">No se puede descargar el archivo, el gestor de descargas del sistema no está disponible</string>
     <string name="download_started">Descarga iniciada en segundo plano</string>

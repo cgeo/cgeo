@@ -162,7 +162,6 @@
     <string name="err_server_su">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_server_gk">Не вдалося зв\'язатися з Geocaching.com. Можливо, сайт перервано або підключення до Інтернету не працює.</string>
     <string name="err_login">інформація про реєстрацію не зберігається</string>
-    <string name="err_login_failed_toast">c:geo не може увійти. c:geo працює в автономному режимі зі збереженими кешами. Перевірте параметри входу або увімкніть підключення до Інтернету.</string>
     <string name="err_unknown">Потрібна капча. Будь ласка, зверніться до наших <a href="https://www.cgeo.org/faq#login-failed"> поширених запитань </a>, щоб отримати вказівки.</string>
     <string name="err_unknown_address">c:geo не вдалося відобразити цю адресу в існуюче розташування</string>
     <string name="err_comm">Невідома помилка зв\'язку. Будь ласка, зверніться до наших <a href="https://www.cgeo.org/faq#login-failed"> спільних записів </a>, щоб отримати отримання.</string>
@@ -250,7 +249,6 @@
     <string name="info_select_logimage_cancelled">Вибір зображення або захоплення скасовано.</string>
     <string name="info_cache_saved">Кеш зберігається локально</string>
     <string name="warn_calculator_state_save">Не забудьте зберегти шляхову точку, якщо ви хочете зберегти стан калькулятора.</string>
-    <string name="feature_info_offline_counter">У вас є деякі кеші з збереженим в автономному режимі, який ще не може увійти в систему. Для вашого комфорту кількість цих журналів буде відображатися як \"+ х\" за вашою кількістю знайдених схованок в футері в c:geo головній сторінці. \n\nЩе один з цих логів \"x\" буде додано до шаблону \"NUMBER\", який ви можете використовувати в ваших підписах журналу. \n\nЯкщо вам не подобається це розширення лічильника, ви можете вимкнути його в розділі \"Налаштування\" &gt; \"Логування\" та/або використовувати шаблон \"NUMBER (без автономних журналів\". \n\nДля полегшення пошуку автономних журналів, перейдіть до списку \"Історія\" і фільтруйте для \"З персональними даними\" &gt; \"Оффлайн журнал\".</string>
     <string name="err_trackable_log_not_anonymous">Лог %1$s з c:geo не може бути зроблений анонімно. Ви хочете відкрити параметри, щоб заповнити свої облікові дані від %2$s?</string>
     <string name="err_trackable_no_preference_activity">На жаль, не вдалося знайти відповідний екран налаштувань.</string>
     <string name="confirm_unsaved_changes_title">Незбережені зміни</string>
@@ -279,7 +277,6 @@
     <string name="menu_settings">Налаштування</string>
     <string name="menu_backup">Резервна копія / Відновлення</string>
     <string name="menu_history">Історія</string>
-    <string name="menu_filter">Фільтр</string>
     <!-- main screen -->
     <string name="live_map_button">Жива мапа</string>
     <string name="caches_nearby_button">Неподалік</string>
@@ -493,7 +490,6 @@
     <string name="init_address">Показати адресу</string>
     <string name="init_summary_address">Відображати адресу замість координат на головному екрані</string>
     <string name="init_select_language">Виберіть мову</string>
-    <string name="init_summary_select_language">Оберіть мову програм (потрібен перезапуск)\n</string>
     <string name="init_use_default_language">Мова за замовчуванням</string>
     <string name="init_showwaypoint_description">Якщо на карті відображається менше заданої кількості схованок, то додатково відображаються їхні шляхові точки.</string>
     <string name="init_zoomincludingwaypoints">Масштабування містить маршрутні точки</string>
@@ -1397,7 +1393,6 @@
     <string name="command_rename_list_result">Перейменований список</string>
     <string name="command_delete_list_result">Усунутий список</string>
     <string name="command_unique_list_result">Видалено кеші з інших списків</string>
-    <string name="pq_download_and_import">Імпортувати Pocket запит</string>
     <string name="caches_refresh_all_warning">Ця дія може призвести до високого мережевого трафіку. Ви впевнені, що хочете пакетно оновити всі кеші?</string>
     <string name="list_list_headline">Списки:</string>
     <string name="link_gc_checker">програма перевірки координат geocaching.com доступна за допомогою браузера</string>
@@ -1441,15 +1436,11 @@
     <string name="sorted_route_saved">Окремий маршрут збережено</string>
     <string name="load_individual_route_error">Помилка при завантаженні окремого маршруту</string>
     <string name="route_item_not_yet_loaded">Елемент маршруту ще не завантажений</string>
-    <string name="center_on_route">Центр на маршруті</string>
     <!-- individual track -->
-    <string name="individual_track">GPX маршрут/маршрут</string>
     <string name="map_load_track">Завантажувати маршрут/маршрут від GPX</string>
     <string name="map_load_track_wait">Завантаження треку/маршруту у фоновому режимі…</string>
-    <string name="map_load_track_confirm">Перезаписати наявну маршрут/маршрут?</string>
     <string name="load_track_error">Помилка при завантаженні маршруту/маршруту</string>
-    <string name="map_unload_track">Вивантажити маршрут/маршрут</string>
-    <string name="center_on_track">Центр на маршруті</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Вимкнено</string>
@@ -1481,7 +1472,6 @@
     <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Завантажити автономну карту</string>
-    <string name="downloadmap_choose">Обрати мапу</string>
     <string name="downloadmap_filename">Завантаження %s</string>
     <string name="download_started">Завантаження розпочалося у фоновому режимі</string>
     <string name="downloadmap_allow_metered_network">Дозволити завантаження по мережі через трафік (наприклад, мобільне з\'єднання)</string>

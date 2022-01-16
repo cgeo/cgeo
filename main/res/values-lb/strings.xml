@@ -162,7 +162,6 @@
     <string name="err_server_su">Onfäeg Geocaching.su ze kontaktéieren. D\'Website kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_server_gk">Onfäeg GeoKrety.org ze kontaktéieren. De Server kéint offline sinn oder Är Internetverbindung funktionéiert net.</string>
     <string name="err_login">Keng Zougangsdaten gespäichert</string>
-    <string name="err_login_failed_toast">c:gro ka sech net aloggen. c:geo funktionéiert offline mat gespäicherte Cachen. Iwwerpréift är Zougangsdonnéeë oder aktivéiert d\'Internetverbindung.</string>
     <string name="err_unknown">Onbekannte Feeler. Gitt op den <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> fir gehollef ze kréien.</string>
     <string name="err_unknown_address">c:geo konnt dës Adresse net mat enger Positioun a Verbindung setzen</string>
     <string name="err_comm">Onbekannte Verbindungsfeeler. Gitt op den <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> fir gehollef ze kréien.</string>
@@ -250,7 +249,6 @@
     <string name="info_select_logimage_cancelled">D\'Auswal vu Biller oder d\'Opnam gouf annuléiert.</string>
     <string name="info_cache_saved">De Cache gouf lokal gespäichert</string>
     <string name="warn_calculator_state_save">Vergiess net de Waypoint ze späicheren fir d\'Berechnung ze halen.</string>
-    <string name="feature_info_offline_counter">Du hues e puer Cachen mat Offline-Logs, déi eventuell nach net eropgelued goufen. Dofir gëtt als Erënnerung ee Compteur (z.B. \"+ 1\") um Startmenü ugewisen.\n\nAusserdeem ginn dës \"x\" Logs der \"NUMMER\"-Virlag dobäigezielt, déi du eventuell. an denger Signatur benotz.\n\nFalls dir de Compteur net gefält, kanns du en ënner \"Astellungen\" &gt; \"Loggen\" desaktivéieren an/oder amplaz d\'\"NUMMER (ouni Offline-Logs)\"-Virlag benotzen.\n\nFir Logs schnell an einfach ze fannen déi nach ausstinn, maach d\'Lëscht \"Historique\" op a filter no \"Mat eegenen Informatiounen\" &gt; \"Mat Offline-Log\".</string>
     <string name="err_trackable_log_not_anonymous">D\'Loggen vun %1$s ka net anonym erfollegen. Wëllt der d\'Astellungen opmaachen fir d\'Benotzerdaten vun %2$s anzeginn?</string>
     <string name="err_trackable_no_preference_activity">Et deet eis Leed, mä mir fannen net dee passende Astellungsmenü.</string>
     <string name="confirm_unsaved_changes_title">Ongespäichert Changementer</string>
@@ -279,7 +277,6 @@
     <string name="menu_settings">Astellungen</string>
     <string name="menu_backup">Sécheren / Restauréieren</string>
     <string name="menu_history">Historique</string>
-    <string name="menu_filter">Filter</string>
     <!-- main screen -->
     <string name="live_map_button">Live Kaart</string>
     <string name="caches_nearby_button">Nobäi</string>
@@ -602,6 +599,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Aus</string>

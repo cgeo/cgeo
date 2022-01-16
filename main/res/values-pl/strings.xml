@@ -200,7 +200,6 @@
     <string name="err_server_su">Nieudane połączenie z geocaching.su. Ta strona albo Twoje połączenie internetowe nie działa.</string>
     <string name="err_server_gk">Nie można nawiązać połączenia ze stroną GeoKrety.org. Strona może nie działać albo nie masz połączenia z internetem.</string>
     <string name="err_login">Brak danych do logowania.</string>
-    <string name="err_login_failed_toast">c:geo nie może zalogować się. c:geo pracuje offline z zapisanymi skrzynkami. Sprawdź ustawienia logowania i połączenie z internetem.</string>
     <string name="err_unknown">Nieznany błąd. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
     <string name="err_unknown_address">c:geo nie mógł dopasować adresu do istniejącej lokalizacji</string>
     <string name="err_comm">Nieznany błąd komunikacji. Sprawdź <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> aby uzyskać poradę.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Wybór obrazu został anulowany.</string>
     <string name="info_cache_saved">Skrzynka jest przechowywana lokalnie</string>
     <string name="warn_calculator_state_save">Pamiętaj aby zapisać punkt orientacyjny jeśli chcesz zachować stan kalkulatora.</string>
-    <string name="feature_info_offline_counter">Masz kilka skrytek z zapisanym logiem offline, które mogą nie być jeszcze zalogowane online. Dla Twojego komfortu liczba wpisów jest wyświetlana jako \"+ x\" za liczbą znalezionych skrytek w stopce na stronie głównej c:geo. \n\nPonadto te \"x\" logi zostaną dodane do szablonu \"NUMBER\", którego możesz użyć w Twoim podpisze logu. \n\nJeśli nie lubisz tego rozszerzenia licznika, możesz wyłączyć go w sekcji \"Ustawienia\" &gt; \"Logowanie\" i/lub zamiast tego użyć szablonu \"NUMBER (bez logów offline). \n\nAby łatwo znaleźć pozostałe logi offline, przejdź do listy \"Historia\" i filtruj \"Z danymi osobowymi\" &gt; \"Z logiem offline\".</string>
     <string name="err_trackable_log_not_anonymous">Zalogowanie %1$s poprzez c:geo nie może być wykonane anonimowo. Czy chcesz otworzyć ustawienia, aby uzupełnić swoje dane do %2$s?</string>
     <string name="err_trackable_no_preference_activity">Przepraszamy, brak odpowiedniego ekranu preferencji.</string>
     <string name="confirm_unsaved_changes_title">Niezapisane zmiany</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Aktualizuj dane offline</string>
     <string name="menu_update_routingdata">Dane nawigowania</string>
     <string name="menu_update_mapdata">Dane mapy</string>
-    <string name="menu_dashboard">Panel logowania</string>
     <string name="menu_history">Historia</string>
     <string name="menu_search_clipboard">Wczytaj geokod ze schowka</string>
     <string name="menu_history_longstring">Historia znalezień</string>
-    <string name="menu_filter">Filtruj</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listy zakładek</string>
     <string name="menu_invert_order">Odwróć kolejność</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Nie ma więcej skrzynek</string>
     <string name="caches_more_caches_loading">Ładuję skrzynki…</string>
     <string name="caches_more_caches_currently">Obecnie</string>
-    <string name="caches_more_caches_next_x">Wczytaj następne %1$d skrytek</string>
     <string name="caches_more_caches_remaining">Wczytaj pozostałe skrytki (%1$d / %2$d)</string>
     <string name="caches_downloading">Pobieram skrzynki…\nSzacowany czas: </string>
     <string name="caches_eta_ltm">Mniej niż minuta</string>
@@ -735,7 +730,6 @@
     <string name="init_address">Pokaż adres</string>
     <string name="init_summary_address">Pokaż adres zamiast współrzędnych na ekranie głównym</string>
     <string name="init_select_language">Wybierz język</string>
-    <string name="init_summary_select_language">Wybierz język aplikacji (wymaga ponownego uruchomienia)\n</string>
     <string name="init_use_default_language">Użyj domyślnego języka</string>
     <string name="init_showwaypoints">Pokaż punkty nawigacyjne</string>
     <string name="init_showwaypoint_description">Jeśli mniej niż podana liczba skrzynek wyświetlana jest na mapie, ich punkty nawigacji są dodatkowo wyświetlane.</string>
@@ -842,7 +836,6 @@
     <string name="settings_readingerror">Błąd odczytu ustawień</string>
     <string name="settings_restart">c:geo należy teraz uruchomić ponownie, aby nowe ustawienia odniosły efekt</string>
     <string name="settings_folder_changed">Folder \"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne przyznanie dostępu c:geo do tego folderu.\n\nDotknij \"%3$s\", aby zachować ustawienia bieżącego folderu.</string>
-    <string name="settings_file_changed">\"%1$s\" zostanie zmieniony na \"%2$s\" podczas przywracania.\n\nDotknij \"%4$s\", aby kontynuować. W takim przypadku zostaniesz poproszony o ponowne udzielenie dostępu do tego pliku.\n\nDotknij \"%3$s\", aby zachować bieżące ustawienia.</string>
     <string name="settings_info_offline_maps_title">Informacje na temat Map Offline</string>
     <string name="settings_info_offline_maps">c:geo obsługuje mapy do użytku offline. Możesz uzyskać mapy od różnych dostawców lub nawet tworzyć własne mapy (z danych OSM). Najpierw musisz wybrać folder, w którym mapy offline mają być przechowywane.</string>
     <string name="settings_info_themes_title">Informacje na temat motywów map</string>
@@ -1417,7 +1410,6 @@
     <string name="map_showwp_original">Oryginalne</string>
     <string name="map_showwp_parking">Parking</string>
     <string name="map_showwp_visited">Odwiedzone</string>
-    <string name="map_show_track">Ślad/trasa GPX</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizuj motywy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Spowoduje to synchronizację Twoich motywów w prywatnym folderze aplikacji, aby poprawić wydajność przeglądarki map kosztem przestrzeni dyskowej urządzenia.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Włącz synchronizację folderu z motywami</string>
@@ -1472,8 +1464,6 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Szukaj według filtru</string>
     <string name="search_filter_info_message" formatted="false">**Szukaj według filtrów** wyszukuje skrytki we wszystkich aktywnych usługach online (np. geocaching.com) za pomocą podanego filtra. Jednakże możliwości wyszukiwania tych usług są zazwyczaj bardziej ograniczone niż możliwości filtrowania c:geo.\n\n- Wszystkie usługi obsługują tylko filtry AND (bez filtrów OR i bez odwrócenia filtrów).\n- Wszystkie usługi obsługują bardziej podstawowe filtry takie jak **typ skrytki** lub **rozmiar skrytki**. Bardziej skomplikowane filtry często nie są obsługiwane lub mają pewne ograniczenia, np. **ulubione** lub **datę ukrycia**.\n- Można znaleźć szczegółową listę obsługiwanych filtrów dla każdej usługi [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry nieobsługiwane przez usługę online zostaną zastosowane przez c:geo na otrzymanych wynikach.</string>
-    <string name="search_filter_temporary_user_information_title">Nowe filtrowanie</string>
-    <string name="search_filter_temporary_user_information">c:geo wprowadził nowy system filtrowania, wspierając elastyczne, kombinowane i przechowywane filtry. \n\nGlobalny filtr można od teraz zmienić bezpośrednio na listach skrytek i mapie na żywo.</string>
     <string name="search_tb">Przedmioty podróżne</string>
     <string name="search_tb_hint">Identyfikacja przedmiotu podróżnego</string>
     <string name="search_tb_button">Szukaj przedmiotów podróżnych</string>
@@ -1976,7 +1966,6 @@
         <item quantity="many">Ustaw %d ikon skrytek</item>
         <item quantity="other">Ustaw %d ikon skrytek</item>
     </plurals>
-    <string name="pq_download_and_import">Importuj Pocket query</string>
     <string name="caches_refresh_all_warning">Ta operacja może doprowadzić do dużego obciążenia sieci. Czy na pewno chcesz przeprowadzić zbiorczą aktualizację wszystkich skrzynek?</string>
     <string name="list_list_headline">Lista:</string>
     <plurals name="extract_waypoints_result">
@@ -2042,14 +2031,11 @@
         <item quantity="many">Trasa załadowana z %d punktami trasy</item>
         <item quantity="other">Trasa załadowana z %d punktami trasy</item>
     </plurals>
-    <string name="center_on_route">Wyśrodkuj na trasie</string>
     <string name="individual_route_set_as_start_title">Ustaw jako początek trasy</string>
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
     <!-- individual track -->
-    <string name="individual_track">Ścieżka/trasa GPX</string>
     <string name="map_load_track">Załaduj ścieżkę/trasę z GPX</string>
     <string name="map_load_track_wait">Ładowanie ścieżki/trasy w tle…</string>
-    <string name="map_load_track_confirm">Zastąpić istniejącą ścieżkę/trasę?</string>
     <plurals name="load_track_success">
         <item quantity="one">Ścieżka/trasa załadowana (%d punkt trasy)</item>
         <item quantity="few">Ścieżka/trasa załadowana (%d punktów trasy)</item>
@@ -2057,8 +2043,7 @@
         <item quantity="other">Ścieżka/trasa załadowana (%d punktów trasy)</item>
     </plurals>
     <string name="load_track_error">Błąd ładowania ścieżki/trasy</string>
-    <string name="map_unload_track">Rozładuj ścieżkę/trasę</string>
-    <string name="center_on_track">Wyśrodkuj na ścieżce/trasie</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2109,7 +2094,6 @@
     <string name="downloadmap_title">Pobierz mapę offline</string>
     <string name="download_title">Pobieranie pliku</string>
     <string name="downloadmap_info">Wybierz plik mapy dla swojego regionu poprzez naciśnięcie ikony \"Zapisz\".\n\n Pobieranie zostanie uruchomione w tle. Po zakończeniu pobierania, plik zostanie skopiowany do folderu z mapami c:geo i ustawiony jako aktualna mapa.\n\n Bądź ostrożny: Pobieranie mapy może spowodować wysoki ruch sieciowy!</string>
-    <string name="downloadmap_choose">Wybierz mapę</string>
     <string name="downloadmap_filename">Pobieranie %s</string>
     <string name="downloadmanager_not_available">Nie można pobrać pliku, systemowy menedżer pobierania plików nie jest dostępny</string>
     <string name="download_started">Pobieranie rozpoczęte w tle</string>

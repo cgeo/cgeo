@@ -200,7 +200,6 @@
     <string name="err_server_su">Impossibile contattare Geocaching.su. Il sito web potrebbe essere offline o la tua connessione internet non funzionante.</string>
     <string name="err_server_gk">Impossibile contattare GeoKrety.org. Il sito Web potrebbe essere inattivo o la tua connessione internet non sta funzionando.</string>
     <string name="err_login">Informazioni di login non memorizzate</string>
-    <string name="err_login_failed_toast">c:geo non può effettuare login. Attivata la modalità offline. Verificare le informazioni di login nelle impostazioni o abilitare una connessione internet.</string>
     <string name="err_unknown">Errore sconosciuto. Fare riferimento alle nostre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per la guida.</string>
     <string name="err_unknown_address">c:geo non è in grado di mappare questo indirizzo su una posizione gps esistente</string>
     <string name="err_comm">Errore di comunicazione sconosciuto. Fare riferimento alle nostre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> per la guida.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Selezione o cattura immagine annulata.</string>
     <string name="info_cache_saved">Il cache è stato salvato localmente</string>
     <string name="warn_calculator_state_save">Assicurarsi di salvare il waypoint se si desidera mantenere lo stato della calcolatrice.</string>
-    <string name="feature_info_offline_counter">Hai alcuni cache con un Log salvato offline, che potrebbero non essere ancora stati caricati online. Per la tua comodità il numero di questi Log viene visualizzato come \"+ x\" dietro il tuo numero di cache trovati in calce alla pagina principale di c:geo. \n\nInoltre questi registri \"x\" saranno aggiunti al modello \"NUMBER\" che potresti usare nella tua firma Log. \n\nSe non ti piace questa estensione con il contatore, puoi disabilitarlo in \"Impostazioni\" &gt; \"Registro Log\" e/o usare invece il modello \"NUMBER (senza log offline)\". \n\nPer trovare facilmente i Log offline rimanenti, vai alla lista \"Cronologia\" e filtra per \"Con dati personali\" &gt; \"Con log offline\".</string>
     <string name="err_trackable_log_not_anonymous">Log di %1$s da c:geo non può essere fatto in forma anonima. Si desidera aprire le impostazioni per completare le credenziali da %2$s?</string>
     <string name="err_trackable_no_preference_activity">La pagina di configurazione del servizio associato al trackable non è disponibile.</string>
     <string name="confirm_unsaved_changes_title">Modifiche non salvate</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Aggiorna dati offline</string>
     <string name="menu_update_routingdata">Dati di navigazione</string>
     <string name="menu_update_mapdata">Dati mappa</string>
-    <string name="menu_dashboard">Dashboard di accesso</string>
     <string name="menu_history">Cronologia</string>
     <string name="menu_search_clipboard">Carica il geocode dagli appunti</string>
     <string name="menu_history_longstring">Trova cronologia</string>
-    <string name="menu_filter">Filtri</string>
     <string name="menu_lists_pocket_queries">Query tascabili</string>
     <string name="menu_lists_bookmarklists">Elenchi di segnalibri</string>
     <string name="menu_invert_order">Inverti ordine</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Nessun altro cache</string>
     <string name="caches_more_caches_loading">Caricamento dei cache…</string>
     <string name="caches_more_caches_currently">attualmente</string>
-    <string name="caches_more_caches_next_x">Carica i prossimi %1$d cache</string>
     <string name="caches_more_caches_remaining">Carica i (%1$d / %2$d) cache rimanenti</string>
     <string name="caches_downloading">Download cache in corso…\nETA: </string>
     <string name="caches_eta_ltm">Meno di un minuto</string>
@@ -727,7 +722,6 @@
     <string name="init_address">Visualizza indirizzo</string>
     <string name="init_summary_address">Visualizza indirizzo invece delle coordinate su pagina principale</string>
     <string name="init_select_language">Seleziona lingua</string>
-    <string name="init_summary_select_language">Seleziona lingua in-app (richiede riavvio)\n</string>
     <string name="init_use_default_language">Usa lingua predefinita</string>
     <string name="init_showwaypoints">Mostra i waypoint</string>
     <string name="init_showwaypoint_description">Se sulla mappa si vedono meno cache del numero indicato, saranno mostrati anche i loro waypoints.</string>
@@ -834,7 +828,6 @@
     <string name="settings_readingerror">Errore di lettura impostazioni</string>
     <string name="settings_restart">c:geo deve essere riavviato ora per rendere effettive le impostazioni caricate</string>
     <string name="settings_folder_changed">La cartella \"%1$s\" sarà cambiata a \"%2$s\" durante il ripristino.\n\nTocca \"%4$s per procedere. In quel caso ti sarà chiesto di garantire a c:geo l\'accesso a quella cartella.\n\nTocca invece \"%3$s\" per mantenere l\'impostazione corrente della cartella.</string>
-    <string name="settings_file_changed">\"%1$s\" sarà cambiato in \"%2$s\" durante il ripristino.\n\nTocca \"%4$s\" per procedere. In questo caso ti verrà chiesto di concedere l\'accesso a c:geo a quella cartella.\n\nTocca \"%3$s\" per mantenere invece l\'impostazione attuale della cartella.</string>
     <string name="settings_info_offline_maps_title">Informazioni su mappe Offline</string>
     <string name="settings_info_offline_maps">c:geo supporta le mappe per l\'uso offline. È possibile ottenere mappe da diversi fornitori o anche creare le proprie mappe (da dati OSM). In primo luogo è necessario selezionare la cartella in cui le mappe offline devono essere memorizzate.</string>
     <string name="settings_info_themes_title">Informazioni sui temi mappa</string>
@@ -1391,7 +1384,6 @@
     <string name="map_showwp_original">Originale</string>
     <string name="map_showwp_parking">Parcheggio</string>
     <string name="map_showwp_visited">Visitato</string>
-    <string name="map_show_track">Traccia/percorso GPX</string>
     <string name="init_renderthemefolder_synctolocal">Sincronizza temi</string>
     <string name="init_summary_renderthemefolder_synctolocal">Questo sincronizzerà i tuoi temi in una cartella privata dell\'app per migliorare le prestazioni di apertura del visualizzatore di mappe occupando un po\' di spazio di archiviazione del dispositivo.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Attiva sincronizzazione cartella tema</string>
@@ -1446,8 +1438,6 @@
     <string name="search_filter">Filtro</string>
     <string name="search_filter_button">Cerca con filtro</string>
     <string name="search_filter_info_message" formatted="false">**Cerca per filtro** cerca cache su tutti i servizi online attivi (ad esempio geocaching.com) utilizzando un filtro fornito. Tuttavia, le capacità di ricerca di questi servizi sono di solito più limitate delle capacità di filtro di c:geo.\n\n- Tutti i servizi supportano solo filtri AND (nessun filtro OR e nessun filtro inverso).\n- I filtri più basilari come **tipo cache** o **dimensione cache** sono supportati da tutti i servizi. I filtri più complessi spesso non sono supportati o hanno alcune restrizioni, ad esempio **preferiti** o **data nascosta**.\n- Una lista dettagliata dei filtri supportati per servizio può essere trovata [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nI filtri non supportati dal servizio online saranno applicati da c:geo sui risultati ricevuti.</string>
-    <string name="search_filter_temporary_user_information_title">Nuovo filtro framework</string>
-    <string name="search_filter_temporary_user_information">c:geo ha introdotto un nuovo sistema di filtri, per supportare filtri flessibili, combinabili e salvabili. \n\nIl filtro globale può da ora in poi essere modificato direttamente negli elenchi di cache e nella mappa.</string>
     <string name="search_tb">Oggetto Trackable</string>
     <string name="search_tb_hint">Identificativo Trackable</string>
     <string name="search_tb_button">Cerca per trackable</string>
@@ -1929,7 +1919,6 @@
         <item quantity="one">%d icona cache impostata</item>
         <item quantity="other">%d icone cache impostate</item>
     </plurals>
-    <string name="pq_download_and_import">Importa una Pocket query</string>
     <string name="caches_refresh_all_warning">Questa azione può causare elevato traffico di rete. Sei sicuro di voler aggiornare tutti i cache?</string>
     <string name="list_list_headline">Liste:</string>
     <plurals name="extract_waypoints_result">
@@ -1991,21 +1980,17 @@
         <item quantity="one">Percorso caricato con %d punto di rotta</item>
         <item quantity="other">Percorso caricato con %d punti di rotta</item>
     </plurals>
-    <string name="center_on_route">Centra sul percorso</string>
     <string name="individual_route_set_as_start_title">Imposta come percorso di partenza</string>
     <string name="individual_route_set_as_start_message">Impostare questo elemento come inizio del percorso e spostare tutti gli elementi successivi in cima al percorso corrente?</string>
     <!-- individual track -->
-    <string name="individual_track">Traccia/percorso GPX</string>
     <string name="map_load_track">Carica traccia/percorso da GPX</string>
     <string name="map_load_track_wait">Caricamento traccia/percorso in background…</string>
-    <string name="map_load_track_confirm">Sovrascrivere traccia/percorso esistente?</string>
     <plurals name="load_track_success">
         <item quantity="one">Traccia/percorso caricata (%d punto traccia)</item>
         <item quantity="other">Traccia/percorso caricata (%d punti traccia)</item>
     </plurals>
     <string name="load_track_error">Errore nel caricare la traccia/percorso</string>
-    <string name="map_unload_track">Rimuove traccia/percorso dalla memoria</string>
-    <string name="center_on_track">Centra su traccia/percorso</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_m">mt</string>
     <string name="unit_km">km</string>
@@ -2056,7 +2041,6 @@
     <string name="downloadmap_title">Scarica mappa offline</string>
     <string name="download_title">Scarica file</string>
     <string name="downloadmap_info">Seleziona un file mappa per la tua regione toccando l\'icona \"Salva\".\n\nIl download viene eseguito in background. Quando il trasferimento è completato, il file viene copiato nella cartella della mappa c:geo e impostato come mappa corrente.\n\nAttenzione: il download di una mappa può consumare una grande quantità di dati internet!</string>
-    <string name="downloadmap_choose">Scegli mappa</string>
     <string name="downloadmap_filename">Scaricamento di %s</string>
     <string name="downloadmanager_not_available">Impossibile scaricare il file, gestore download di sistema non disponibile</string>
     <string name="download_started">Download avviato in background</string>

@@ -200,7 +200,6 @@
     <string name="err_server_su">Verbinding met Geocaching.su mislukt (geen verbinding of server niet bereikbaar).</string>
     <string name="err_server_gk">Niet mogelijk om GeoKrety.org te bereiken. De website kan offline zijn of je internetverbinding werkt niet goed.</string>
     <string name="err_login">Geen login informatie opgeslagen</string>
-    <string name="err_login_failed_toast">Sorry, c:geo kan niet inloggen. c:geo werkt in offline modus. Controleer je gebruikersnaam en wachtwoord en/of zet de internetverbinding aan.</string>
     <string name="err_unknown">Onbekende fout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
     <string name="err_unknown_address">c:geo was niet in staat dit adres te herkennen als bestaande locatie</string>
     <string name="err_comm">Onbekende communicatiefout. Raadpleeg onze <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> voor begeleiding.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Foto selectie of opname is geannuleerd.</string>
     <string name="info_cache_saved">De cache is lokaal opgeslagen</string>
     <string name="warn_calculator_state_save">Zorg dat je een waypoint opslaat als je de staat van de rekenmachine wil behouden.</string>
-    <string name="feature_info_offline_counter">Je hebt enkele caches met een offline opgeslagen log, die mogelijk nog niet online gelogd zijn. Voor het gemak wordt de hoeveelheid van deze logs weergegeven als \"+ x\" achter het aantal gevonden caches onderin c:geo\'s hoofdpagina. \n\nDeze \"x\" logs worden toegevoegd aan de \"NUMBER\" template die je zou kunnen gebruiken in je log handtekening. \n\nAls deze teller-extensie je niet bevalt, kan je deze uitschakelen onder \"Instellingen\" &gt; \"Logging\" en/of in plaats daarvan het \"NUMBER (zonder offline logs)\"-sjabloon gebruiken. \n\nOm gemakkelijk de resterende offline logs te vinden, ga naar de lijst \"Geschiedenis\" en filter op \"Met persoonlijke gegevens\" &gt; \"Met offline log\".</string>
     <string name="err_trackable_log_not_anonymous">Loggen van %1$s in c:geo kan niet anoniem worden gedaan. Wilt u de instellingen openen om uw referenties van %2$s in te vullen?</string>
     <string name="err_trackable_no_preference_activity">Sorry, kan geen geschikt voorkeuren scherm vinden.</string>
     <string name="confirm_unsaved_changes_title">Niet opgeslagen wijzigingen</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Offline-gegevens bijwerken</string>
     <string name="menu_update_routingdata">Routering gegevens</string>
     <string name="menu_update_mapdata">Kaartgegevens</string>
-    <string name="menu_dashboard">Login dashboard</string>
     <string name="menu_history">Geschiedenis</string>
     <string name="menu_search_clipboard">Geocode van klembord laden</string>
     <string name="menu_history_longstring">Gevonden geschiedenis</string>
-    <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bladwijzerlijsten</string>
     <string name="menu_invert_order">Volgorde omkeren</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Einde cachelijst</string>
     <string name="caches_more_caches_loading">Caches laden…</string>
     <string name="caches_more_caches_currently">op dit moment</string>
-    <string name="caches_more_caches_next_x">Laden van volgende %1$d caches</string>
     <string name="caches_more_caches_remaining">Laad resterende caches (%1$d / %2$d)</string>
     <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
     <string name="caches_eta_ltm">Minder dan een minuut</string>
@@ -727,7 +722,6 @@
     <string name="init_address">Toon adres</string>
     <string name="init_summary_address">Toon adres in plaats van positie op hoofdscherm</string>
     <string name="init_select_language">Taal selecteren</string>
-    <string name="init_summary_select_language">In-app taal selecteren (vereist herstart)\n</string>
     <string name="init_use_default_language">Standaardtaal gebruiken</string>
     <string name="init_showwaypoints">Waypoints tonen</string>
     <string name="init_showwaypoint_description">Level vanaf wanneer waypoints weergegeven worden in de map.</string>
@@ -834,7 +828,6 @@
     <string name="settings_readingerror">Fout bij het lezen van de instellingen</string>
     <string name="settings_restart">c:geo dient nu opnieuw gestart te worden om de geladen instellingen uit te voeren</string>
     <string name="settings_folder_changed">Map \"%1$s\" zal worden gewijzigd in \"%2$s\" tijdens herstel.\n\nTik op \"%4$s\" om verder te gaan. In dat geval word je gevraagd om c:geo toegang te geven tot die map.\n\nTik op \"%3$s\" om in plaats daarvan de huidige mapinstelling te behouden.</string>
-    <string name="settings_file_changed">\"%1$s\" zal worden gewijzigd in \"%2$s\" tijdens herstel.\n\nTik op \"%4$s\" om verder te gaan. In dat geval word je gevraagd om c:geo toegang te geven tot dat bestand.\n\nTik op \"%3$s\" om in plaats daarvan de huidige instelling te behouden.</string>
     <string name="settings_info_offline_maps_title">Info over offline kaarten</string>
     <string name="settings_info_offline_maps">c:geo ondersteunt kaarten voor offline gebruik. Je kunt kaarten verkrijgen van verschillende providers of zelfs je eigen kaarten maken (van OSM gegevens). Eerst dien je de map te selecteren waarin offline kaarten moeten worden opgeslagen.</string>
     <string name="settings_info_themes_title">Info over kaart thema\'s</string>
@@ -1391,7 +1384,6 @@
     <string name="map_showwp_original">Origineel</string>
     <string name="map_showwp_parking">Parkeerplaats</string>
     <string name="map_showwp_visited">Bezocht</string>
-    <string name="map_show_track">GPX spoor/route</string>
     <string name="init_renderthemefolder_synctolocal">Thema\'s synchroniseren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dit zal je thema\'s synchroniseren in een app-specifieke map om de prestaties van de kaartviewer te verbeteren ten koste van de opslagruimte van apparaat.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisatie van themamappen inschakelen</string>
@@ -1448,8 +1440,6 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Zoeken op filter</string>
     <string name="search_filter_info_message" formatted="false">**Zoek op filter** zoekt caches op alle actieve online diensten (bijv. geocaching.com) met een opgegeven filter. De zoekmogelijkheden van deze diensten zijn echter meestal beperkter dan de filtermogelijkheden van c:geo.\n\n- Alle diensten ondersteunen alleen EN filters (geen OF filters en geen filterinversie).\n- De meer basisfilters zoals **cache type** of **cache grootte** worden ondersteund door alle diensten. Meer gecompliceerde filters worden vaak niet ondersteund of hebben enkele beperkingen, bijvoorbeeld **favorieten** of **verborgen datum**.\n- Een gedetailleerde lijst met ondersteunde filters per service kan worden gevonden [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters die niet worden ondersteund door de online dienst zullen worden toegepast door c:geo op de ontvangen resultaten.</string>
-    <string name="search_filter_temporary_user_information_title">Nieuw filterframework</string>
-    <string name="search_filter_temporary_user_information">c:geo heeft een nieuw filtersysteem ingevoerd, dat flexibele en combineerbare filters, die opgeslagen kunnen worden, ondersteunt. \n\nHet globale filter kan vanaf nu direct gewijzigd worden in de cachelijsten en de plattegrond.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identificatie</string>
     <string name="search_tb_button">Zoeken naar trackable</string>
@@ -1834,7 +1824,6 @@
     <string name="cat_surrounding">Rondom de cache</string>
     <string name="cat_permissions">Machtigingen</string>
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">Alle</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
     <!-- next things -->
@@ -1935,7 +1924,6 @@
         <item quantity="one">Cache pictogram %d instellen</item>
         <item quantity="other">Cache pictogrammen %d instellen</item>
     </plurals>
-    <string name="pq_download_and_import">Importeer Pocket query</string>
     <string name="caches_refresh_all_warning">Deze actie kan leiden tot veel netwerkverkeer. Weet je zeker dat je alle caches wil verversen?</string>
     <string name="list_list_headline">Lijsten:</string>
     <plurals name="extract_waypoints_result">
@@ -1975,7 +1963,6 @@
     <string name="notification_proximity_title">c:geo nabijheidsmelding</string>
     <string name="notification_download_receiver_title">Download importeren</string>
     <!-- individual routes -->
-    <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
     <string name="individual_route">Individuele route</string>
     <string name="individual_route_added">toegevoegd aan route</string>
     <string name="individual_route_removed">verwijderd van route</string>
@@ -1983,8 +1970,6 @@
     <string name="individual_route_error_single_waypoint_mode">Niet beschikbaar in één waypoint modus</string>
     <string name="map_sort_individual_route">Individuele route sorteren</string>
     <string name="map_export_individual_route">Exporteer individuele route</string>
-    <string name="route">Route</string>
-    <string name="track">Track</string>
     <string name="map_load_individual_route">Individuele route laden</string>
     <string name="map_load_individual_route_confirm">Bestaande route overschrijven?</string>
     <string name="map_autotarget_individual_route">Route startpunt instellen als doel</string>
@@ -2001,21 +1986,20 @@
         <item quantity="one">Route geladen met %d routepunt</item>
         <item quantity="other">Route geladen met %d routepunten</item>
     </plurals>
-    <string name="center_on_route">Centreer op route</string>
     <string name="individual_route_set_as_start_title">Stel in als routebegin</string>
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX spoor/route</string>
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
     <string name="map_load_track_wait">Spoor/route op achtergrond laden…</string>
-    <string name="map_load_track_confirm">Bestaande spoor/route overschrijven?</string>
     <plurals name="load_track_success">
         <item quantity="one">Spoor/route geladen (%d spoorpunten)</item>
         <item quantity="other">Spoor/route geladen (%d spoorpunten)</item>
     </plurals>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
-    <string name="map_unload_track">Spoor/route ontladen</string>
-    <string name="center_on_track">Centreer op spoor/route</string>
+    <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
+    <string name="route">Route</string>
+    <string name="track">Track</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2066,7 +2050,6 @@
     <string name="downloadmap_title">Offline kaart downloaden</string>
     <string name="download_title">Bestand downloaden</string>
     <string name="downloadmap_info">Kies een kaartbestand voor jouw regio door op het \"Opslaan\" pictogram te tikken.\n\nDe download zal op de achtergrond worden uitgevoerd. Wanneer het downloaden is voltooid, zal het gedownloade bestand worden gekopieerd naar c:geo\'s kaartenmap en worden ingesteld als huidige kaart voor c:geo.\n\nWees voorzichtig: het downloaden van een kaart kan veel netwerkverkeer veroorzaken!</string>
-    <string name="downloadmap_choose">Kies kaart</string>
     <string name="downloadmap_filename">%s downloaden</string>
     <string name="downloadmanager_not_available">Bestand kan niet worden gedownload, systeem downloadmanager is niet beschikbaar</string>
     <string name="download_started">Downloaden gestart op de achtergrond</string>

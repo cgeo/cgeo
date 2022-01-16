@@ -197,7 +197,6 @@
     <string name="err_server_su">Får ikke kontakt med Geocaching.su. Nettstedet kan være nede eller Internettilkoblingen din fungerer ikke.</string>
     <string name="err_server_gk">Får ikke kontakt med GeoKrety.org. Nettstedet kan være nede eller Internett-tilkoblingen din fungerer ikke.</string>
     <string name="err_login">Ingen innloggingsopplysninger lagret</string>
-    <string name="err_login_failed_toast">c:geo kan ikke logge inn. c:geo fungerer offline med cacher du har lagret lokalt. Sjekk innloggingsinnstillinger eller aktiver internettforbindelsen.</string>
     <string name="err_unknown">Ukjent feil. Se på vår <a href="https://www.cgeo.org/faq#login-failed">Ofte Stilte Spørsmål</a> for hjelp.</string>
     <string name="err_unknown_address">c:geo klarte ikke finne et sted ut fra denne adressen</string>
     <string name="err_comm">Ukjent kommunikasjonsfeil. Se på vår <a href="https://www.cgeo.org/faq#login-failed">Ofte Stilte Spørsmål</a> for hjelp.</string>
@@ -288,7 +287,6 @@
     <string name="info_select_logimage_cancelled">Valg av bilde ble avbrutt.</string>
     <string name="info_cache_saved">Cachen er nå lagret lokalt</string>
     <string name="warn_calculator_state_save">Husk å lagre veipunkt hvis du vil beholde utregningen.</string>
-    <string name="feature_info_offline_counter">Du har noen cacher med en offline lagret logg, som ennå ikke er logget på nettet. For å hjelpe deg vises antallet av disse loggene som \"+ x\" bak antallet funnede cacher i bunnteksten på c:geos hovedside. \n\nVidere vil disse \"x\"-loggene bli lagt til i malen \"NUMBER\" som du eventuelt vil benytte i loggsignaturen. \n\nHvis du ikke liker denne tellerutvidelsen, kan du deaktivere den under \"Innstillinger\" &gt; \"Logging\" og/eller bruke malen \"NUMMER (uten offline logger)\" i stedet for. \n\nFor å enkelt finne gjenværende offline-logger, Gå til listen \"Historikk\" og filtrer ut \"Med personlige data\" &gt; \"Med offline logg\".</string>
     <string name="err_trackable_log_not_anonymous">Logging av %1$s fra c:geo kan ikke gjøres anonymt. Vil du åpne innstillinger for å fylle inn påloggingsopplysningene fra %2$s?</string>
     <string name="err_trackable_no_preference_activity">Beklager, finner ikke innstilling-skjermen som hører til.</string>
     <string name="confirm_unsaved_changes_title">Ulagrede endringer</string>
@@ -322,7 +320,6 @@
     <string name="menu_history">Historikk</string>
     <string name="menu_search_clipboard">Last GC-kode fra utklippstavlen</string>
     <string name="menu_history_longstring">Finner historikk</string>
-    <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Utvalgsspørringer</string>
     <string name="menu_lists_bookmarklists">Bokmerkelister</string>
     <string name="menu_invert_order">Omvendt rekkefølge</string>
@@ -340,7 +337,6 @@
     <string name="caches_more_caches_no">ingen flere cacher</string>
     <string name="caches_more_caches_loading">Laster cacher…</string>
     <string name="caches_more_caches_currently">for øyeblikket</string>
-    <string name="caches_more_caches_next_x">Last neste %1$d cacher</string>
     <string name="caches_more_caches_remaining">Last gjenværende cacher (%1$d / %2$d)</string>
     <string name="caches_downloading">Laster ned cacher…\nETA: </string>
     <string name="caches_eta_ltm">Mindre enn ett minutt</string>
@@ -686,7 +682,6 @@
     <string name="init_address">Vis adressen i menyen</string>
     <string name="init_summary_address">Vis adressen i menyen</string>
     <string name="init_select_language">Velg språk</string>
-    <string name="init_summary_select_language">Velg språk i appen (krever omstart)\n</string>
     <string name="init_use_default_language">Bruk standard språk</string>
     <string name="init_showwaypoints">Vis veipunkter</string>
     <string name="init_showwaypoint_description">Hvis færre enn et gitt antall cacher vises på kartet, vil veipunktene som hører til også vises.</string>
@@ -1321,7 +1316,6 @@
     <string name="map_showwp_original">Original</string>
     <string name="map_showwp_parking">Parkering</string>
     <string name="map_showwp_visited">Besøkt</string>
-    <string name="map_show_track">GPX-spor/-rute</string>
     <string name="onetime_mapthemefixslow_title">Fikset treg lasting av karttema</string>
     <string name="init_hidewp">Skjul veipunkter</string>
     <string name="init_summary_hidewp_original">Skjul originale veipunkter på kartet</string>
@@ -1823,7 +1817,6 @@
         <item quantity="one">Angi cacheikon for %d</item>
         <item quantity="other">Angi cacheikoner for %d</item>
     </plurals>
-    <string name="pq_download_and_import">Importer Pocket Query</string>
     <string name="caches_refresh_all_warning">Dette kan føre til høy datatrafikk. Er du sikker på at du vil oppdaterer alle cachene?</string>
     <string name="list_list_headline">Lister:</string>
     <plurals name="extract_waypoints_result">
@@ -1880,20 +1873,16 @@
         <item quantity="one">Rute lastet med %d rutepunkt</item>
         <item quantity="other">Rute lastet med %d rutepunkter</item>
     </plurals>
-    <string name="center_on_route">Midtstill på rute</string>
     <string name="individual_route_set_as_start_title">Sett som rutestart</string>
     <!-- individual track -->
-    <string name="individual_track">GPX spor/rute</string>
     <string name="map_load_track">Last inn spor/rute fra GPX</string>
     <string name="map_load_track_wait">Laster inn spor/rute i bakgrunnen…</string>
-    <string name="map_load_track_confirm">Overskrive eksisterende spor/rute?</string>
     <plurals name="load_track_success">
         <item quantity="one">Spor/rute lastet (%d sporpunkt)</item>
         <item quantity="other">Spor/rute lastet (%d sporpunkter)</item>
     </plurals>
     <string name="load_track_error">Feil ved lasting av spor/rute</string>
-    <string name="map_unload_track">Fjern spor/rute</string>
-    <string name="center_on_track">Midtstill på spor/rute</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1939,7 +1928,6 @@
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Last ned offlinekart</string>
     <string name="download_title">Last ned fil</string>
-    <string name="downloadmap_choose">Velg kart</string>
     <string name="downloadmap_filename">Laster ned %s</string>
     <string name="download_started">Nedlasting startet i bakgrunnen</string>
     <string name="downloadmap_allow_metered_network">Tillat nedlasting over nettverk med forbruksmåling (f.eks. mobilnettverk)</string>

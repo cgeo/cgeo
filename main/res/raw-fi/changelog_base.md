@@ -4,9 +4,10 @@
 ### Kartta
 - Korjaus: ladatessa useita polkuja sisältäviä GPX-tiedostoja näytetään ne erillisinä, yhdistämättöminä kappaleina
 - Muutos: Ota reitin näyttö automaattisesti käyttöön ladattaessa GPX reittitiedosto
-- Uusi: D/T -symbolit kätkökuvakkeille (valinnainen)
-- Uusi: Mahdollisuus tarkistaa puuttuvat reititystiedot nykyiselle näkymälle
-- Uusi: Teeman selitteet teemoille Elevate, Elements ja Freizeitkarte
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
@@ -27,10 +28,11 @@
 - Uusi: Ota haku käyttöön asetuksissa
 - Uusi: Lisätty GC Wizard hyödyllisten sovellusten luetteloon
 - Uusi: Attribuuttien suodatin: Sallii valinnan, mistä palveluista attribuutit näytetään
-- Muutos: Poistettiin viivakoodiskanneri hyödyllisten sovellusten listalta ja päävalikosta
-- Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
-- Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
-- Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
-- Korjaus: Ota käyttöön vihjeet järjestelmille, jotka käyttävät vanhempaa kuin Androidin versio 8
-- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
-- Päivitetty MapsWithMe API
+- New: Option to limit distance in nearby search (see Settings => Services)
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API

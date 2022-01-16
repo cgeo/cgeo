@@ -200,7 +200,6 @@
     <string name="err_server_su">Nelze se připojit na Geocaching.su. Stránka může být nedostupná nebo je chyba v tvém připojení k Internetu.</string>
     <string name="err_server_gk">Službu GeoKrety.org nelze kontaktovat. Stránka může mít výpadek a nebo tvé připojení k Internetu nefunguje.</string>
     <string name="err_login">Nejsou uloženy žádné přihlašovací údaje</string>
-    <string name="err_login_failed_toast">Nelze se přihlásit. c:geo bude pracovat s keškami uloženými offline. Zkontroluj nastavení přihlašování a připojení k Internetu.</string>
     <string name="err_unknown">Neznáma chyba. Pomoc najdete v našich <a href="https://www.cgeo.org/faq#login-failed">Často kladených otázkách</a>.</string>
     <string name="err_unknown_address">c:geo nedokázal tuto adresu najít na mapě</string>
     <string name="err_comm">Neznáma chyba komunikace. Pomoc najdete v našich <a href="https://www.cgeo.org/faq#login-failed">Často kladených otázkách</a>.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Výběr nebo focení obrázku pro log bylo zrušeno.</string>
     <string name="info_cache_saved">Keška uložena pro lokální použití</string>
     <string name="warn_calculator_state_save">Nezapomeň si uložit trasový bod, chceš-li zachovat stav kalkulačky.</string>
-    <string name="feature_info_offline_counter">Máte některé kešky s offline uloženým logem, které nemusí být zatím zveřejněny. Pro vaše pohodlí je počet těchto logů zobrazen jako \"+ x\" za počtem nalezených keší v zápatí na hlavní stránce c:geo. \n\nKromě toho budou tyto logy \"x\" přidány do šablony \"NUMBER\", kterou můžete použít ve vašem logu. \n\nPokud se vám toto rozšíření nelíbí můžete jej zakázat v části \"Nastavení\" &gt; \"Logování\" a/nebo použít šablonu \"NUMBER (bez offline logů)\". \n\nChcete-li snadno najít zbývající offline logy, přejděte do seznamu \"Historie\" a filtrujte \"S osobními údaji\" &gt; \"S offline logem\".</string>
     <string name="err_trackable_log_not_anonymous">Zalogování %1$s v c:geu nelze provést anonymně. Chceš otevřít nastavení a vyplnit přihlašovací údaje z %2$s?</string>
     <string name="err_trackable_no_preference_activity">Omlouváme se, požadovanou obrazovku nastavení nelze nalézt.</string>
     <string name="confirm_unsaved_changes_title">Neuložené změny</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Aktualizovat offline data</string>
     <string name="menu_update_routingdata">Data pro směrování</string>
     <string name="menu_update_mapdata">Mapové podklady</string>
-    <string name="menu_dashboard">Přihlášení</string>
     <string name="menu_history">Historie</string>
     <string name="menu_search_clipboard">Načíst geokód ze schránky</string>
     <string name="menu_history_longstring">Historie nálezů</string>
-    <string name="menu_filter">Filtr</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Seznamy záložek</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Žádné další kešky</string>
     <string name="caches_more_caches_loading">Načítání kešek…</string>
     <string name="caches_more_caches_currently">aktuálně</string>
-    <string name="caches_more_caches_next_x">Načíst dalších %1$d kešek</string>
     <string name="caches_more_caches_remaining">Načíst zbývající kešky (%1$d / %2$d)</string>
     <string name="caches_downloading">Stahování kešek…\nETA: </string>
     <string name="caches_eta_ltm">Méně než minuta</string>
@@ -737,7 +732,6 @@
     <string name="init_address">Zobrazovat adresu</string>
     <string name="init_summary_address">Zobrazovat adresu místo souřadnic na hlavní obrazovce</string>
     <string name="init_select_language">Zvolte jazyk</string>
-    <string name="init_summary_select_language">Zvolte jazyk v aplikaci (vyžaduje restart)\n</string>
     <string name="init_use_default_language">Použít výchozí jazyk</string>
     <string name="init_showwaypoints">Zobrazit trasové body</string>
     <string name="init_showwaypoint_description">Pokud je na mapě zobrazeno méně než zadaný počet kešek, zobrazují se i jejich trasové body.</string>
@@ -844,7 +838,6 @@
     <string name="settings_readingerror">Chyba při čtení nastavení</string>
     <string name="settings_restart">Aplikace c:geo se musí nyní restartovat, aby se použili načtená nastavení</string>
     <string name="settings_folder_changed">Složka \"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo do této složky.\n\nKlepnutím na „%3$s“ zachováte místo toho aktuální nastavení složky.</string>
-    <string name="settings_file_changed">\"%1$s\" bude během obnovy změněna na \"%2$s\".\n\nPokračujte klepnutím na \"%4$s\". V takovém případě budete požádáni o opětovné získání přístupu c:geo k danému souboru.\n\nKlepnutím na „%3$s“ místo toho zachováte aktuální nastavení.</string>
     <string name="settings_info_offline_maps_title">Info o offline mapách</string>
     <string name="settings_info_offline_maps">c:geo podporuje používání offline map. Mapy můžete získat od různých poskytovatelů nebo dokonce vytvořit si mapy vlastní (z dat OSM). Nejprve musíte vybrat složku, do které mají být offline mapy uloženy.</string>
     <string name="settings_info_themes_title">Info o stylech mapy</string>
@@ -1419,7 +1412,6 @@
     <string name="map_showwp_original">Původní</string>
     <string name="map_showwp_parking">Parkování</string>
     <string name="map_showwp_visited">Navštívené</string>
-    <string name="map_show_track">GPX stopa/trasa</string>
     <string name="init_renderthemefolder_synctolocal">Synchronizovat motivy</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tím se synchronizují vaše motivy do soukromé složky aplikace, aby se zlepšil výkon otevírání prohlížeče map za cenu nějakého úložného prostoru zařízení.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Zapnout synchronizaci složky s motivy</string>
@@ -1476,8 +1468,6 @@
     <string name="search_filter">Filtr</string>
     <string name="search_filter_button">Hledat podle filtru</string>
     <string name="search_filter_info_message" formatted="false">Funkce **Vyhledávání podle filtru** vyhledává kešky napříč všemi aktivními online službami (např. geocaching.com) pomocí zadaného filtru. Možnosti vyhledávání v těchto službách jsou však obvykle omezenější než možnosti filtrování v aplikaci c:geo.\n\n- Všechny služby podporují pouze filtry AND (nikoliv filtry OR či inverzi filtrů).\n- Základní filtry, jako je **typ kešky** nebo **velikost kešky**, jsou podporovány všemi službami. Složitější filtry často nejsou podporovány nebo mají určitá omezení, např. **oblíbené** nebo **datum skrytí**.\n- Podrobný seznam podporovaných filtrů pro jednotlivé služby naleznete [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFiltry, které online služba nepodporuje, použije c:geo na přijaté výsledky.</string>
-    <string name="search_filter_temporary_user_information_title">Nové filtrování</string>
-    <string name="search_filter_temporary_user_information">c:geo představilo nový systém filtrování, který podporuje flexibilní, kombinovatelné a ukládatelné filtry. \n\nGlobální filtr lze od nynějška měnit přímo v seznamech kešek a v živé mapě.</string>
     <string name="search_tb">Sledovatelný předmět</string>
     <string name="search_tb_hint">ID sledovatelného předmětu</string>
     <string name="search_tb_button">Hledat sledovatelné</string>
@@ -1864,7 +1854,6 @@
     <string name="cat_surrounding">Kolem kešky</string>
     <string name="cat_permissions">Oprávnění</string>
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">Vše</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
     <!-- next things -->
@@ -1985,7 +1974,6 @@
         <item quantity="many">Nastavit %d ikon kešek</item>
         <item quantity="other">Nastavit %d ikon kešek</item>
     </plurals>
-    <string name="pq_download_and_import">Importovat Pocket Query</string>
     <string name="caches_refresh_all_warning">Tato akce může vést k vysokému zatížení sítě. Opravdu chceš provést hromadnou aktualizaci všech kešek?</string>
     <string name="list_list_headline">Seznamy:</string>
     <plurals name="extract_waypoints_result">
@@ -2027,7 +2015,6 @@
     <string name="notification_proximity_title">c:geo upozornění na vzdálenost</string>
     <string name="notification_download_receiver_title">Importování stahování</string>
     <!-- individual routes -->
-    <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
     <string name="individual_route">Individuální trasa</string>
     <string name="individual_route_added">přidáno do trasy</string>
     <string name="individual_route_removed">odstraněno z trasy</string>
@@ -2035,8 +2022,6 @@
     <string name="individual_route_error_single_waypoint_mode">Není dostupné v režimu jednoho trasového bodu</string>
     <string name="map_sort_individual_route">Seřadit individuální trasu</string>
     <string name="map_export_individual_route">Exportovat individuální trasu</string>
-    <string name="route">Trasa</string>
-    <string name="track">Stopa</string>
     <string name="map_load_individual_route">Načíst individuální trasu</string>
     <string name="map_load_individual_route_confirm">Přepsat existující trasu?</string>
     <string name="map_autotarget_individual_route">Nastavit začátek trasy jako cíl</string>
@@ -2055,14 +2040,11 @@
         <item quantity="many">Trasa načtena s %d body trasy</item>
         <item quantity="other">Trasa načtena s %d body trasy</item>
     </plurals>
-    <string name="center_on_route">Vycentrovat na trasu</string>
     <string name="individual_route_set_as_start_title">Nastavit jako začátek trasy</string>
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX stopa/trasa</string>
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
     <string name="map_load_track_wait">Načítání stopy/trasy na pozadí…</string>
-    <string name="map_load_track_confirm">Přepsat existující stopu/trasu?</string>
     <plurals name="load_track_success">
         <item quantity="one">Stopa/trasa načtena (%d bod trasy)</item>
         <item quantity="few">Stopa/trasa načtena (%d body trasy)</item>
@@ -2070,8 +2052,10 @@
         <item quantity="other">Stopa/trasa načtena (%d bodů trasy)</item>
     </plurals>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
-    <string name="map_unload_track">Zrušit stopu/trasu</string>
-    <string name="center_on_track">Vycentrovat na stopu/trasu</string>
+    <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
+    <string name="route">Trasa</string>
+    <string name="track">Stopa</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2122,7 +2106,6 @@
     <string name="downloadmap_title">Stáhnout offline mapu</string>
     <string name="download_title">Stáhnout soubor</string>
     <string name="downloadmap_info">Vyberte mapový soubor pro váš region klepnutím na ikonu \"Uložit\".\n\nStahování se provádí na pozadí. Po dokončení přenosu je soubor zkopírován do složky s mapami c:geo a nastaven jako aktuální mapa.\n\nPozor: Stahování mapy může způsobit velký síťový provoz!</string>
-    <string name="downloadmap_choose">Vybrat mapu</string>
     <string name="downloadmap_filename">Stahování %s</string>
     <string name="downloadmanager_not_available">Soubor nelze stáhnout, systémový správce stahování není k dispozici</string>
     <string name="download_started">Stahování zahájeno na pozadí</string>

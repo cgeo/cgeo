@@ -4,9 +4,10 @@
 ### Mapa
 - Oprava: Při načítání souborů GPX obsahujících více stop se zobrazí jako samostatné, nespojené stopy
 - Změna: Automatické zapnutí zobrazení trasy při načtení trasy že souboru GPX
-- Novinka: Symboly O/T pro ikony kešek (volitelné)
-- Novinka: Možnost kontroly chybějících směrovacích dat pro aktuální oblast
-- Novinka: Legenda motivu pro motivy Elevate, Elementy a Freizeitkarte
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
@@ -27,10 +28,11 @@
 - Novinka: Povoleno vyhledávání v předvolbách
 - Novinka: Průvodce GC Wizard přidán do seznamu užitečných aplikací
 - Novinka: Filtr atributů: Umožňuje vybrat, ze kterých konektorů se atributy zobrazí
-- Změna: Čtečka čárových kódů odebrána ze seznamu užitečných aplikací i z hlavní obrazovky
-- Změna: BRouter odebrán ze seznamu užitečných aplikací (stále můžete používat externí i interní navigaci)
-- Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/trasování s intervalem=0
-- Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
-- Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
-- Přepracováno nastavení pro splnění aktuálních specifikací systému Android
-- Aktualizováno MapsWithMe API
+- New: Option to limit distance in nearby search (see Settings => Services)
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API

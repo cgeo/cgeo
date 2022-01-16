@@ -200,7 +200,6 @@
     <string name="err_server_su">Impossible d\'accéder à geocaching.su ; le site Web est peut-être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_server_gk">Impossible de contacter GeoKrety.org. Le site Web peut être indisponible ou votre connexion Internet ne fonctionne pas.</string>
     <string name="err_login">Aucune compte renseigné</string>
-    <string name="err_login_failed_toast">c:geo est en mode hors-ligne et ne peut pas se connecter. Vérifiez votre connexion Internet.</string>
     <string name="err_unknown">Erreur inconnue. Veuillez consulter notre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pour obtenir de l\'aide.</string>
     <string name="err_unknown_address">c:geo n\'a pas réussi à trouver de coordonnées géographiques pour cette adresse</string>
     <string name="err_comm">Erreur de communication non identifiée. Veuillez consulter notre <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pour obtenir de l\'aide.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">La sélection ou l\'acquisition de l\'image a été annulée.</string>
     <string name="info_cache_saved">La cache a été enregistrée en local</string>
     <string name="warn_calculator_state_save">Veillez à enregistrer le point de passage si vous souhaitez conserver l\'état du calculateur.</string>
-    <string name="feature_info_offline_counter">Vous avez des visites de caches enregistrées hors-ligne qui pourraient ne pas avoir été envoyées. Pour votre confort, le nombre de ces visites s\'affiche comme \"+ x\" après le nombre de caches trouvées en bas de la page d\'accueil de c:geo. \n\nDe plus, ces \"x\" visites seront ajoutées au modèle \"Nombre de visites\" que vous pouvez utiliser comme signature de vos logs. \n\nSi vous n\'aimez pas cet affichage, vous pouvez le désactiver sous \"Paramètres\" &gt; \"Visites\" et/ou utiliser le modèle \"Nombre de visites (sans les visites hors-ligne)\". \n\nPour trouver facilement les visites hors-ligne non envoyées, allez dans \"Historique\" et activez le filtre \"Avec des données personnelles\" &gt; \"Avec visite hors-ligne\".</string>
     <string name="err_trackable_log_not_anonymous">S\'identifier sur %1$s depuis c:geo ne peut se faire anonymement. Souhaitez-vous ouvrir les paramètres et remplir vos informations d\'identification pour %2$s ?</string>
     <string name="err_trackable_no_preference_activity">Désolé, impossible de trouver l\'écran de préférences.</string>
     <string name="confirm_unsaved_changes_title">Modifications non enregistrées</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Mettre à jour les données hors ligne</string>
     <string name="menu_update_routingdata">Données de navigation</string>
     <string name="menu_update_mapdata">Données cartographiques</string>
-    <string name="menu_dashboard">Tableau de bord de connexion</string>
     <string name="menu_history">Historique</string>
     <string name="menu_search_clipboard">Charger le géocode du presse-papiers</string>
     <string name="menu_history_longstring">Historique des trouvailles</string>
-    <string name="menu_filter">Filtre</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Listes de favoris</string>
     <string name="menu_invert_order">Inverser l’ordre</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Pas d\'autres caches</string>
     <string name="caches_more_caches_loading">Recherche de caches…</string>
     <string name="caches_more_caches_currently">trouvées</string>
-    <string name="caches_more_caches_next_x">Charger les %1$d caches suivantes</string>
     <string name="caches_more_caches_remaining">Charger les caches restantes (%1$d / %2$d)</string>
     <string name="caches_downloading">Téléchargement des caches…\nRestant : </string>
     <string name="caches_eta_ltm">Moins d\'une minute</string>
@@ -727,7 +722,6 @@
     <string name="init_address">Afficher l\'adresse sur l\'accueil</string>
     <string name="init_summary_address">Sur l\'écran d\'accueil, afficher l\'adresse plutôt que les coordonnées</string>
     <string name="init_select_language">Sélectionner la langue</string>
-    <string name="init_summary_select_language">Sélectionnez la langue de l\'application (nécessite un redémarrage)\n</string>
     <string name="init_use_default_language">Utiliser la langue par défaut</string>
     <string name="init_showwaypoints">Afficher les points de passage</string>
     <string name="init_showwaypoint_description">Nombre de caches en-dessous duquel les points de passage sont affichés en plus sur la carte.</string>
@@ -834,7 +828,6 @@
     <string name="settings_readingerror">Erreur lors de la lecture des paramètres</string>
     <string name="settings_restart">c:geo doit être redémarré maintenant pour prendre en compte les paramètres chargés</string>
     <string name="settings_folder_changed">Le dossier \"%1$s\" sera changé en \"%2$s\" pendant la restauration.\n\nAppuyez sur \"%4$s\" pour continuer. Dans ce cas, il vous sera demandé d\'accorder à nouveau l\'accès à ce dossier à c:geo.\n\nAppuyez sur \"%3$s\" pour conserver la configuration actuelle du dossier à la place.</string>
-    <string name="settings_file_changed">“%1$s” sera changé en “%2$s” durant la restauration.\n\nAppuyez sur “%4$s” pour commencer. Dans ce cas, il sera demandé d\'accorder à nouveau l\'accès à ce dossier à c:geo.\n\nAppuyez sur “%3$s” pour conserver la configuration actuelle à la place.</string>
     <string name="settings_info_offline_maps_title">Informations sur les cartes hors-ligne</string>
     <string name="settings_info_offline_maps">c:geo prend en charge les cartes pour une utilisation hors ligne. Vous pouvez obtenir des cartes de différents fournisseurs ou même créer vos propres cartes (à partir des données OSM). Vous devez d\'abord sélectionner le dossier dans lequel les cartes hors ligne doivent être stockées.</string>
     <string name="settings_info_themes_title">Informations sur les thèmes de cartes</string>
@@ -1391,7 +1384,6 @@
     <string name="map_showwp_original">Originales</string>
     <string name="map_showwp_parking">Stationnement</string>
     <string name="map_showwp_visited">Visitées</string>
-    <string name="map_show_track">Trace/itinéraire GPX</string>
     <string name="init_renderthemefolder_synctolocal">Synchroniser les thèmes</string>
     <string name="init_summary_renderthemefolder_synctolocal">Cela synchronisera vos thèmes de cartes dans un dossier d\'une application privée pour améliorer les performances d\'ouverture de la carte au détriment de l\'espace de stockage du téléphone.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Activer la synchronisation du dossier des thèmes</string>
@@ -1446,8 +1438,6 @@
     <string name="search_filter">Filtrer</string>
     <string name="search_filter_button">Rechercher par filtre</string>
     <string name="search_filter_info_message" formatted="false">Recherches de caches **par filtre** sur tous les services actifs (ex : geocaching.com) en utilisant un filtre actif. Cependant, les capacités de recherche de ces services sont généralement plus limitées que c:geo.\n\n- Les services ne supportent que les filtres AND (pas de OU, ni d\'inversion de filtre).\n- Les filtres les plus basiques comme **Type de cache** ou **Taille de la cache** sont supportés par tous les services. Les filtres plus compliqués ne sont bien souvent pas supportés ou ont des restrictions (ex : **favoris** ou **Date de création**).\n- Une liste détaillée des filtres supportés par service peut être [trouvée sur ce lien](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nLes filtres non supportés par les services seront appliqués par c:geo sur les résultats reçus.</string>
-    <string name="search_filter_temporary_user_information_title">Nouveau système de filtrage</string>
-    <string name="search_filter_temporary_user_information">c:geo a introduit un nouveau système de filtrage qui supporte les filtres flexibles, combinables et stockables. \n\nLe filtre global peut désormais être modifié directement dans les listes de caches et la carte live.</string>
     <string name="search_tb">Objet voyageur</string>
     <string name="search_tb_hint">Code de l\'objet voyageur</string>
     <string name="search_tb_button">Rechercher l\'Objet voyageur</string>
@@ -1832,7 +1822,6 @@
     <string name="cat_surrounding">À proximité de la cache</string>
     <string name="cat_permissions">Autorisations</string>
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">Tout</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
     <!-- next things -->
@@ -1933,7 +1922,6 @@
         <item quantity="one">%d icône de cache défini</item>
         <item quantity="other">%d icônes de cache définis</item>
     </plurals>
-    <string name="pq_download_and_import">Importer la Pocket query</string>
     <string name="caches_refresh_all_warning">Cette action peut entraîner le téléchargement de gros volumes de données. Êtes-vous sûr(e) de vouloir actualiser toutes les caches ?</string>
     <string name="list_list_headline">Listes :</string>
     <plurals name="extract_waypoints_result">
@@ -1995,21 +1983,19 @@
         <item quantity="one">Itinéraire chargé avec %d points de passage</item>
         <item quantity="other">Itinéraire chargé avec %d points de passage</item>
     </plurals>
-    <string name="center_on_route">Centrer sur l\'itinéraire</string>
     <string name="individual_route_set_as_start_title">Définir comme début d’itinéraire</string>
     <string name="individual_route_set_as_start_message">Définir cet élément comme début d\'itinéraire et déplacer tous les éléments suivants en haut de l’itinéraire actuel ?</string>
     <!-- individual track -->
-    <string name="individual_track">Trace/itinéraire GPX</string>
     <string name="map_load_track">Charger trace/itinéraire GPX</string>
     <string name="map_load_track_wait">Chargement de la trace/itinéraire GPX en tâche de fond …</string>
-    <string name="map_load_track_confirm">Remplacer l\'itinéraire/trace GPX existante ?</string>
     <plurals name="load_track_success">
         <item quantity="one">Trace/itinéraire chargé (%d trackpoint)</item>
         <item quantity="other">Trace/itinéraire chargé (%d points de cheminement)</item>
     </plurals>
     <string name="load_track_error">Erreur lors du changement de la trace/itinéraire</string>
-    <string name="map_unload_track">Décharger la trace/itinéraire</string>
-    <string name="center_on_track">Centrer sur la trace/itinéraire</string>
+    <string name="map_clear_track_confirm">Voulez-vous supprimer la trace \"%s \" ?</string>
+    <!-- route/track commons -->
+    <string name="make_visible">afficher</string>
     <!-- distance units -->
     <string name="unit_ft">pieds</string>
     <string name="unit_yd">yards</string>
@@ -2058,7 +2044,6 @@
     <string name="downloadmap_title">Télécharger des cartes hors ligne</string>
     <string name="download_title">Télécharger le fichier</string>
     <string name="downloadmap_info">Sélectionnez un fichier de carte pour votre région en appuyant sur l\'icône \"Enregistrer\".\n\nLe téléchargement est effectué en arrière-plan. Lorsque le transfert est terminé, le fichier est copié dans le dossier des cartes c:geo et défini comme la carte actuelle.\n\nAttention : Le téléchargement d\'une carte peut causer un trafic réseau élevé !</string>
-    <string name="downloadmap_choose">Sélectionner la carte</string>
     <string name="downloadmap_filename">Téléchargement de %s</string>
     <string name="downloadmanager_not_available">Le fichier ne peut pas être téléchargé, le gestionnaire de téléchargement est indisponible</string>
     <string name="download_started">Téléchargement démarré en arrière plan</string>

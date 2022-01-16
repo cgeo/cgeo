@@ -121,7 +121,6 @@
     <string name="err_server_ec">Dili ma kontak ang Extremecahing.com. Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
     <string name="err_server_gk">Dili ma kontak ang GeoKrety.org, Ang website ay mahimo nga ubos o ang imong koneksyon sa internet kay dili mogana.</string>
     <string name="err_login">Walay pagsulod sa impormasyon nga gitipigan</string>
-    <string name="err_login_failed_toast">ang c:geo dili makasulod sa c:geo kay nagtrabaho sa offline nga gitipigan sa mga caches. Susihon ang mga setting sa pagsulod ug ang pag-aktibo sa imohang linya sa internet.</string>
     <string name="err_unknown_address">ang c:geo wala maka aktibo sa mapa para makit-an ang kasamtangan nga lokasyon</string>
     <string name="err_missing_auth">Walay nabutang nga username ug/o password</string>
     <string name="err_wrong">Sayop nga username ug/o password</string>
@@ -1095,7 +1094,6 @@
         <item quantity="one">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
         <item quantity="other">Ipuno kani nga cache adto sa mga paborito (%d nagpabilin)</item>
     </plurals>
-    <string name="pq_download_and_import">I-mport ang Pocket query</string>
     <string name="caches_refresh_all_warning">Ang kani na aksyon mahimong modulong sa taas nga network trapik. Sigurado ba ka na ganahan ka i-grupo og bag-ohon ang tanan n mga caches?</string>
     <string name="list_list_headline">Mga lista:</string>
     <plurals name="extract_waypoints_result">
@@ -1113,6 +1111,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->

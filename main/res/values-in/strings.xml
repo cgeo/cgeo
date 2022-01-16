@@ -127,7 +127,6 @@
     <string name="err_server_ec">Tidak dapat menghubungi Extremcaching.com. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_server_gk">Tidak dapat menghubungi GeoKrety.org. Situs web mungkin macet atau koneksi internet anda tidak berfungsi.</string>
     <string name="err_login">Tidak ada informasi login yang tersimpan</string>
-    <string name="err_login_failed_toast">c: geo tidak bisa login di c:. geo bekerja secara offline dengan Disimpan cache. Periksa pengaturan Login atau aktifkan koneksi internet anda.</string>
     <string name="err_unknown_address">c: geo tidak dapat memetakan alamat ini ke lokasi yang ada</string>
     <string name="err_missing_auth">Tidak ada nama pengguna dan/atau tetapkan kata sandi</string>
     <string name="err_wrong">Nama pengguna atau kata sandi salah</string>
@@ -1124,7 +1123,6 @@
     <plurals name="fav_points_remaining">
         <item quantity="other">Tambahkan tembolok ini ke favorit (%d tersisa)</item>
     </plurals>
-    <string name="pq_download_and_import">Impor kantong pertanyaan</string>
     <string name="caches_refresh_all_warning">Tindakan ini bisa menimbulkan lalu lintas jaringan yang tinggi. Apakah anda yakin ingin menggabungkan semua cache?</string>
     <string name="list_list_headline">Daftar:</string>
     <plurals name="extract_waypoints_result">
@@ -1141,6 +1139,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->

@@ -175,7 +175,6 @@
     <string name="err_server_su">Не удалось соединиться с Geocaching.su, возможно сайт не работает, или у вас отключено интернет соединение.</string>
     <string name="err_server_gk">Не удается связаться с GeoKrety.org. Веб-сайт может быть недоступен или нет подключения к Интернету.</string>
     <string name="err_login">Нет сохраненной информации о пользователе</string>
-    <string name="err_login_failed_toast">Не удается войти. c:geo будет работать оффлайн с сохраненными тайниками. Проверьте настройки входа или включите интернет-соединение.</string>
     <string name="err_unknown">Неизвестная ошибка. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
     <string name="err_unknown_address">Не удалось получить координаты по данному адресу</string>
     <string name="err_comm">Неизвестная ошибка связи. Пожалуйста, обратитесь к <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> для дополнительной информации.</string>
@@ -263,7 +262,6 @@
     <string name="info_select_logimage_cancelled">Выбор изображения был отменен.</string>
     <string name="info_cache_saved">Тайник был сохранен локально</string>
     <string name="warn_calculator_state_save">Не забудьте сохранить точку, если вы хотите сохранить состояние калькулятора.</string>
-    <string name="feature_info_offline_counter">У вас есть тайники с сохраненной, но еще не отправленной записью. Для вашего удобства, количество таких тайников отображается как \"+ x\" после числа найденных тайников внизу главной страницы c:geo.\n\nБолее того, эти \"x\" тайников также добавляются к шаблону \"ЧИСЛО\", которое может использоваться в подписи к записям.\n\nЕсли вам не нравится эта функция, вы можете ее отключить в Настройках -&gt; \"Запись в блокнот\" и/или использовать шаблон \"ЧИСЛО (без оффлайновых записей)\".\n\nЧтобы найти тайники с оффлайновыми записями, перейдите в список \"История\" и используйте фильтр \"С личными данными\" -&gt; \"С сохраненными записями\".</string>
     <string name="err_trackable_log_not_anonymous">Запись в %1$s из c:geo не может быть сделана анонимно. Вы хотите перейти в настройки и заполнить данные из %2$s?</string>
     <string name="err_trackable_no_preference_activity">Извините, не удается найти подходящую страницу настроек.</string>
     <string name="confirm_unsaved_changes_title">Несохраненные изменения</string>
@@ -292,7 +290,6 @@
     <string name="menu_settings">Настройки</string>
     <string name="menu_backup">Резервная копия / восстановление</string>
     <string name="menu_history">История</string>
-    <string name="menu_filter">Фильтр</string>
     <!-- main screen -->
     <string name="live_map_button">Карта</string>
     <string name="caches_nearby_button">Рядом</string>
@@ -540,7 +537,6 @@
     <string name="init_address">Показывать адрес</string>
     <string name="init_summary_address">Показывать адрес вместо координат на главном экране</string>
     <string name="init_select_language">Выбрать язык</string>
-    <string name="init_summary_select_language">Выберите язык приложения (требуется перезапуск)\n</string>
     <string name="init_use_default_language">Использовать язык по умолчанию</string>
     <string name="init_showwaypoint_description">Если на карте меньше заданного числа тайников, то их этапы будут показаны автоматически.</string>
     <string name="init_zoomincludingwaypoints">Увеличение вместе с точками</string>
@@ -1607,7 +1603,6 @@
         <item quantity="other">Рекомендовать тайники (%d осталось)</item>
     </plurals>
     <string name="command_set_cache_icons_progress">Установка иконок тайника</string>
-    <string name="pq_download_and_import">Импортировать выборку</string>
     <string name="caches_refresh_all_warning">Это действие может привести к большому количеству трафика. Вы точно хотите обновить все тайники?</string>
     <string name="list_list_headline">Списки:</string>
     <plurals name="extract_waypoints_result">
@@ -1661,12 +1656,9 @@
         <item quantity="many">Маршрут загружен с %d точками</item>
         <item quantity="other">Маршрут загружен с %d точками</item>
     </plurals>
-    <string name="center_on_route">Центрировать по треку/маршруту</string>
     <!-- individual track -->
-    <string name="individual_track">GPX трек/маршрут</string>
     <string name="map_load_track">Загрузить трек/маршрут из GPX</string>
     <string name="map_load_track_wait">Загрузка трека/маршрута в фоновом режиме…</string>
-    <string name="map_load_track_confirm">Перезаписать существующий трек/маршрут?</string>
     <plurals name="load_track_success">
         <item quantity="one">Трек/маршрут загружен (%d точка)</item>
         <item quantity="few">Трек/маршрут загружен (%d точки)</item>
@@ -1674,8 +1666,7 @@
         <item quantity="other">Трек/маршрут загружен (%d точек)</item>
     </plurals>
     <string name="load_track_error">Ошибка при загрузке трека/маршрута</string>
-    <string name="map_unload_track">Выгрузить трек/маршрут</string>
-    <string name="center_on_track">Центрировать по треку/маршруту</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_m">м</string>
     <string name="unit_km">км</string>
@@ -1711,7 +1702,6 @@
     <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Скачать оффлайн-карту</string>
-    <string name="downloadmap_choose">Выбрать карту</string>
     <string name="download_started">Загрузка началась в фоновом режиме</string>
     <string name="button_continue">Продолжить</string>
     <string name="downloadmap_onedirup">(вверх)</string>

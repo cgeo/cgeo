@@ -4,8 +4,9 @@
 ### Karta
 - Fix: Vid inläsning av GPX-filer med flera spår visas de som separata, oanslutna spår
 - Ändring: Aktivera automatiskt spårvisning vid inläsning av en GPX-spårfil
-- Nyhet: D/T-symboler för cache-ikoner (valfritt)
-- Nyhet: Alternativ för att kontrollera om ruttdata saknas för nuvarande vy
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Cachelista
@@ -27,10 +28,11 @@
 - Nyhet: Aktivera sökning i inställningar
 - Nyhet: Lagt till GC Wizard till listan över användbara appar
 - Nyhet: Attributfilter: Tillåt val från vilka anslutningar attribut visas
-- Förändring: Tog bort barcode scanner från listan över användbara appar och från huvudskärmen
-- Förändring: Tog bort BRouter från listan över användbara appar (du kan fortfarande använda både extern och intern navigering)
-- Fix: Undvik upprepade uppdateringskontroller för kartor/ruttfiler med intervall=0
-- Fix: Optimera stöd för autoifyllnad av lösenord från externa lösenordsappar i inställningar
-- Fix: Aktivera verktygstips för system som körs på äldre versioner av Android än version 8
-- Omarbetade inställningar för att uppfylla aktuella Android-specifikationer
-- Uppdaterat MapsWithMe API
+- New: Option to limit distance in nearby search (see Settings => Services)
+- Change: Removed barcode scanner from useful apps list and from mainscreen
+- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
+- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
+- Fix: Optimize support to autofill passwords from external password store apps in settings
+- Fix: Enable tooltips for systems running on Android below version 8
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API

@@ -200,7 +200,6 @@
     <string name="err_server_su">Verbindung zu Geocaching.su konnte nicht hergestellt werden. Server nicht verfügbar oder Internetverbindung unterbrochen.</string>
     <string name="err_server_gk">Verbindung zu GeoKrety.org konnte nicht hergestellt werden. Dienst nicht erreichbar oder Internetverbindung unterbrochen.</string>
     <string name="err_login">Keine Anmeldedaten gespeichert.</string>
-    <string name="err_login_failed_toast">c:geo konnte sich nicht anmelden und arbeitet im Offline-Modus. Bitte die Anmeldedaten in den Einstellungen überprüfen oder eine Internetverbindung herstellen.</string>
     <string name="err_unknown">Unbekannter Fehler. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> um Hilfe zu bekommen.</string>
     <string name="err_unknown_address">c:geo konnte keine Koordinaten für diese Adresse ermitteln</string>
     <string name="err_comm">Unbekannter Kommunikationsfehler. Bitte schau in unsere <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> um Hilfe zu bekommen.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Fotoauswahl oder -erstellung abgebrochen.</string>
     <string name="info_cache_saved">Der Cache wurde gespeichert</string>
     <string name="warn_calculator_state_save">Vergiss nicht den Wegpunkt zu speichern um den Stand der Berechnung zu behalten.</string>
-    <string name="feature_info_offline_counter">Du hast einige Caches mit Offline-Logs, die evtl. noch nicht hochgeladen wurden. Daher wird als Erinnerung ein Zähler (z.B. \"+ 1\") auf dem Hauptbildschirm angezeigt.\n\nAußerdem werden diese \"x\" Logs zur \"NUMMER\"-Vorlage addiert, die du evtl. in deiner Signatur nutzt.\n\nFalls dir der Zähler nicht gefällt, kannst du ihn unter \"Einstellungen\" &gt; \"Loggen\" deaktivieren und/oder stattdessen die \"NUMMER (ohne Offline-Logs)\"-Vorlage nutzen.\n\nUm ausstehende Logs schnell und einfach zu finden, öffne die Liste \"Verlauf\" und filtere nach \"Mit eigenen Informationen\" &gt; \"Mit Offline-Log\".</string>
     <string name="err_trackable_log_not_anonymous">Loggen von %1$s aus c:geo kann nicht anonym erfolgen. Möchtest du die Einstellungen öffnen, um deine Anmeldeinformation für %2$s einzugeben?</string>
     <string name="err_trackable_no_preference_activity">Tut mir leid, es kann kein geeignetes Einstellungs-Menü gefunden werden.</string>
     <string name="confirm_unsaved_changes_title">Ungesicherte Änderungen</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Offline-Daten aktualisieren</string>
     <string name="menu_update_routingdata">Routingdaten</string>
     <string name="menu_update_mapdata">Kartendaten</string>
-    <string name="menu_dashboard">Login-Dashboard</string>
     <string name="menu_history">Verlauf</string>
     <string name="menu_search_clipboard">Geocode aus der Zwischenablage laden</string>
     <string name="menu_history_longstring">Fundhistorie</string>
-    <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket-Queries</string>
     <string name="menu_lists_bookmarklists">Lesezeichenlisten</string>
     <string name="menu_invert_order">Reihenfolge umkehren</string>
@@ -345,7 +341,10 @@
     <string name="caches_more_caches_no">Keine weiteren Caches</string>
     <string name="caches_more_caches_loading">Lade Caches…</string>
     <string name="caches_more_caches_currently">aktuell</string>
-    <string name="caches_more_caches_next_x">Nächste %1$d Caches laden</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Nächsten Cache laden</item>
+        <item quantity="other">Nächste %1$d Caches laden</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Verbleibende Caches laden (%1$d / %2$d)</string>
     <string name="caches_downloading">Lade Caches…\nGeschätzte Zeit: </string>
     <string name="caches_eta_ltm">Weniger als eine Minute</string>
@@ -649,6 +648,9 @@
     <string name="settings_title_navigation_menu">Navigationsmenü</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching-Plattform</string>
+    <string name="settings_category_nearbysearch">Suche in der Nähe</string>
+    <string name="init_nearbysearchlimit_title">Limit für Suche in der Nähe</string>
+    <string name="init_nearbysearchlimit_description">Begrenzt die Distanz, bis zu der Caches für die Suche in der Nähe zurückgegeben werden (0=unbegrenzt)</string>
     <string name="settings_category_geocaching_additionals">Weitere Dienste und Addons</string>
     <string name="settings_category_social">Soziale Medien</string>
     <string name="settings_category_logging_other">Andere Log-Optionen</string>
@@ -727,7 +729,6 @@
     <string name="init_address">Ort statt Koordinaten</string>
     <string name="init_summary_address">Adresse statt Koordinaten im Startbildschirm anzeigen</string>
     <string name="init_select_language">Sprache auswählen</string>
-    <string name="init_summary_select_language">Wähle In-App-Sprache (Neustart erforderlich)\n</string>
     <string name="init_use_default_language">Systemsprache verwenden</string>
     <string name="init_showwaypoints">Wegpunkte anzeigen</string>
     <string name="init_showwaypoint_description">Wenn weniger als die angegebene Anzahl an Caches auf der Karte sichtbar sind, werden zusätzlich deren Wegpunkte angezeigt.</string>
@@ -834,7 +835,6 @@
     <string name="settings_readingerror">Fehler beim Lesen der Einstellungen</string>
     <string name="settings_restart">c:geo muss jetzt neu gestartet werden, um die wiederhergestellten Einstellungen zu aktivieren</string>
     <string name="settings_folder_changed">Ordner \"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diesen Ordner zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Ordnereinstellung zu behalten.</string>
-    <string name="settings_file_changed">\"%1$s\" wird während der Wiederherstellung in \"%2$s\" geändert.\n\nTippe \"%4$s\" um fortzufahren. In diesem Fall wirst du aufgefordert, c:geo wieder Zugriff auf diese Datei zu erlauben.\n\nTippe auf \"%3$s\", um stattdessen die aktuelle Einstellung zu behalten.</string>
     <string name="settings_info_offline_maps_title">Info zu Offline-Karten</string>
     <string name="settings_info_offline_maps">c:geo unterstützt Karten für Offline-Nutzung. Du kannst Karten von verschiedenen Anbietern beziehen oder sogar eigene Karten erstellen (aus OSM-Daten). Du musst zuerst den Ordner auswählen, in dem Offline-Karten gespeichert werden sollen.</string>
     <string name="settings_info_themes_title">Info zu Kartendesigns</string>
@@ -1391,7 +1391,6 @@
     <string name="map_showwp_original">Originale</string>
     <string name="map_showwp_parking">Parken</string>
     <string name="map_showwp_visited">Besuchte</string>
-    <string name="map_show_track">GPX-Track/Route</string>
     <string name="init_renderthemefolder_synctolocal">Designs synchronisieren</string>
     <string name="init_summary_renderthemefolder_synctolocal">Dies wird deine Designs in einen app-internen Ordner synchronisieren, um die Startgeschwindigkeit der Karte zu verbessern auf Kosten von etwas Gerätespeicher.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Synchronisierung des Designordners einschalten</string>
@@ -1448,8 +1447,6 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Suchen mit Filter</string>
     <string name="search_filter_info_message" formatted="false">**Suche mit Filter** sucht Caches auf allen aktiven Online-Diensten (z.B. geocaching.com) mit Hilfe eines bereitgestellten Filters. Jedoch sind Suchfunktionen dieser Dienste in der Regel eingeschränkter als die Filtermöglichkeiten von c:geo.\n\n- Alle Dienste unterstützen nur UND Filter (keine ODER Filter und keine Filterinversion).\n- Die grundlegenderen Filter wie **Cache-Typ** oder **Cache-Größe** werden von allen Diensten unterstützt. Kompliziertere Filter werden oft nicht unterstützt oder haben einige Einschränkungen z.B. **Favoriten** oder **Versteckdatum**.\n- Eine detaillierte Liste der unterstützten Filter pro Dienst findest du [hier](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter, die vom Online-Dienst nicht unterstützt werden, werden von c:geo auf die empfangenen Ergebnisse angewendet.</string>
-    <string name="search_filter_temporary_user_information_title">Neues Filtersystem</string>
-    <string name="search_filter_temporary_user_information">c:geo hat ein neues Filtersystem eingeführt, das flexible, kombinierbare und speicherbare Filter unterstützt. \n\nDer globale Filter kann von nun an direkt in Cachelisten und der Live-Karte geändert werden.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Tracking-Code</string>
     <string name="search_tb_button">Suche nach Trackable</string>
@@ -1834,7 +1831,6 @@
     <string name="cat_surrounding">Umgebung des Caches</string>
     <string name="cat_permissions">Berechtigungen</string>
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">Alle</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
     <!-- next things -->
@@ -1935,7 +1931,6 @@
         <item quantity="one">%d Cache-Symbol gespeichert</item>
         <item quantity="other">%d Cache-Symbole gespeichert</item>
     </plurals>
-    <string name="pq_download_and_import">Pocket-Query importieren</string>
     <string name="caches_refresh_all_warning">Diese Aktion kann viel Datenverkehr verursachen. Bist du sicher, dass du alle Caches aktualisieren möchtest?</string>
     <string name="list_list_headline">Listen:</string>
     <plurals name="extract_waypoints_result">
@@ -1975,7 +1970,6 @@
     <string name="notification_proximity_title">c:geo Annäherungsbenachrichtigung</string>
     <string name="notification_download_receiver_title">Importiere Download</string>
     <!-- individual routes -->
-    <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
     <string name="individual_route">Individuelle Route</string>
     <string name="individual_route_added">zur Route hinzugefügt</string>
     <string name="individual_route_removed">von der Route entfernt</string>
@@ -1983,8 +1977,6 @@
     <string name="individual_route_error_single_waypoint_mode">Nicht verfügbar im Einzelwegpunkt-Modus</string>
     <string name="map_sort_individual_route">Individuelle Route sortieren</string>
     <string name="map_export_individual_route">Exportiere individuelle Route</string>
-    <string name="route">Route</string>
-    <string name="track">Track</string>
     <string name="map_load_individual_route">Individuelle Route laden</string>
     <string name="map_load_individual_route_confirm">Bestehende Route überschreiben?</string>
     <string name="map_autotarget_individual_route">Routenstart als Ziel festlegen</string>
@@ -2001,21 +1993,20 @@
         <item quantity="one">Route geladen mit %d Punkt</item>
         <item quantity="other">Route geladen mit %d Punkten</item>
     </plurals>
-    <string name="center_on_route">Route zentrieren</string>
     <string name="individual_route_set_as_start_title">Als Routenstart festlegen</string>
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX-Track/Route</string>
     <string name="map_load_track">Lade Track/Route aus GPX</string>
     <string name="map_load_track_wait">Lade Track/Route im Hintergrund…</string>
-    <string name="map_load_track_confirm">Track/Route überschreiben?</string>
     <plurals name="load_track_success">
         <item quantity="one">Track/Route geladen (%d Wegpunkt)</item>
         <item quantity="other">Track/Route geladen (%d Wegpunkte)</item>
     </plurals>
     <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
-    <string name="map_unload_track">Track/Route entladen</string>
-    <string name="center_on_track">Track/Route zentrieren</string>
+    <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
+    <string name="route">Route</string>
+    <string name="track">Track</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2066,7 +2057,6 @@
     <string name="downloadmap_title">Offline-Karte herunterladen</string>
     <string name="download_title">Datei herunterladen</string>
     <string name="downloadmap_info">Wähle eine Kartendatei für Deine Region aus, indem Du auf das \"Speichern\"-Symbol tippst.\n\nDer Download läuft im Hintergrund. Wenn der Download abgeschlossen ist, wird die heruntergeladene Datei in den Kartenordner von c:geo kopiert und als aktuelle Karte für c:geo gesetzt.\n\nVorsicht: Das Herunterladen einer Karte kann zu hohem Netzwerkverkehr führen!</string>
-    <string name="downloadmap_choose">Karte wählen</string>
     <string name="downloadmap_filename">Lade %s</string>
     <string name="downloadmanager_not_available">Datei kann nicht heruntergeladen werden, System-Download-Manager ist nicht verfügbar</string>
     <string name="download_started">Download im Hintergrund gestartet</string>

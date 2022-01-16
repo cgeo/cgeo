@@ -200,7 +200,6 @@
     <string name="err_server_su">Geocaching.su adresine bağlanılamıyor. Site veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_server_gk">GeoKrety.org\'a bağlanılamıyor. Web sitesi kapalı veya internet bağlantınız çalışmıyor olabilir.</string>
     <string name="err_login">Kayıtlı oturum açma bilgisi yok</string>
-    <string name="err_login_failed_toast">c:geo\'ya giriş yapılamıyor. c:geo kaydedilmiş Geocache\'ler ile çevrimdışı çalışıyor. Giriş ayarlarını kontrol edin veya internet bağlantınızı etkinleştirin.</string>
     <string name="err_unknown">Bilinmeyen hata. Lütfen kılavuz için <a href="https://www.cgeo.org/faq#login-failed">SSS</a> \'a bakın.</string>
     <string name="err_unknown_address">c: geo bu adresi mevcut bir yere eşleyemedi</string>
     <string name="err_comm">Bilinmeyen bağlantı hatası. Lütfen kılavuz için <a href="https://www.cgeo.org/faq#login-failed">SSS</a> \'a bakın.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Görüntü seçimi veya çekimi iptal edildi.</string>
     <string name="info_cache_saved">Geocache yerel olarak kaydedildi</string>
     <string name="warn_calculator_state_save">Hesaplama durumunu korumak isterseniz, Yol Noktasını kaydettiğinizden emin olun.</string>
-    <string name="feature_info_offline_counter">Çevrimdışı kayıt girilmiş Geocache\'leriniz henüz çevrimiçi olarak kaydedilmemiş olabilir. Bu kayıtların sayısı, c: geo\'nun ana sayfasındaki alt bilgide bulunan Geocache sayınızın arkasında \"+ x\" olarak görüntülenir. \n\nAyrıca bu \"x\" kayıtlar, kayıt imzanızda kullanabileceğiniz \"SAYI\" şablonuna eklenecektir. \n\nBu sayaç uzantısını beğenmezseniz, \"Ayarlar\" &gt; \"Kayıt\" altından devre dışı bırakabilir ve/veya bunun yerine \"SAYI (çevrimdışı kayıtlar olmadan)\" şablonunu kullanabilirsiniz. \n\nKalan çevrimdışı kayıtları kolayca bulmak için \"Geçmiş\" listesine gidin ve \"Kişisel verilerle\" &gt;\"Çevrimdışı kayıtlar\" için filtre uygulayın.</string>
     <string name="err_trackable_log_not_anonymous">%1$s\'u c:geo\'ya kaydetme işlemi, anonim olarak yapılamıyor. %2$s\'den kimlik bilgilerinizi doldurmak için ayarları açmayı istiyor musunuz?</string>
     <string name="err_trackable_no_preference_activity">Üzgünüz, uygun bir tercih ekranı bulamıyoruz.</string>
     <string name="confirm_unsaved_changes_title">Kaydedilmemiş değişiklikler</string>
@@ -325,7 +323,6 @@
     <string name="menu_update_mapdata">Harita verisi</string>
     <string name="menu_history">Geçmiş</string>
     <string name="menu_history_longstring">Bulma geçmişi</string>
-    <string name="menu_filter">Filtre</string>
     <string name="menu_lists_pocket_queries">Sorgulama kayıtları</string>
     <string name="menu_lists_bookmarklists">Yer imi listeleri</string>
     <string name="menu_invert_order">Sırayı tersine çevir</string>
@@ -343,7 +340,6 @@
     <string name="caches_more_caches_no">Başka Geocache yok</string>
     <string name="caches_more_caches_loading">Geocache\'ler yükleniyor…</string>
     <string name="caches_more_caches_currently">şu anda</string>
-    <string name="caches_more_caches_next_x">Sonraki %1$d cache\'i yükle</string>
     <string name="caches_more_caches_remaining">Kalan cacheleri yükle (%1$d / %2$d)</string>
     <string name="caches_downloading">Geocache\'ler indiriliyor…\nETA: </string>
     <string name="caches_eta_ltm">Bir dakikadan az</string>
@@ -709,7 +705,6 @@
     <string name="init_address">Adres Göster</string>
     <string name="init_summary_address">Ana ekranda koordinatlar yerine adresi göster</string>
     <string name="init_select_language">Dil seçin</string>
-    <string name="init_summary_select_language">Uygulama dilini seçiniz (yeniden başlatma gerekli)\n</string>
     <string name="init_use_default_language">Varsayılan dili kullan</string>
     <string name="init_showwaypoints">Yol noktalarını göster</string>
     <string name="init_showwaypoint_description">Verilen miktardan daha az Geocache görüntülenirse, bunların yol noktaları ek olarak gösterilir.</string>
@@ -810,7 +805,6 @@
     <string name="settings_readingerror">Ayarları okuma hatası</string>
     <string name="settings_restart">Yüklenen ayarların etkin kılınması için c:geo\'nun yeniden başlatılması gerekiyor</string>
     <string name="settings_folder_changed">\"%1$s\" klasörü, geri yükleme sırasında \"%2$s\" olarak değişecek.\n\nDevam etmek için \"%4$s\" seçeneğine dokunun.Bu durum sonucunda, bu klasör için c:geo\'ya yeniden yetki vermeniz istenecek.\n\nMevcut klasör ayarlarını tutmak için \"%3$s\" seçeneğine dokunun.</string>
-    <string name="settings_file_changed">\"%1$s\" geri yükleme sırasında \"%2$s\" olarak değişecek.\n\nDevam etmek için \"%4$s\" seçeneğine dokunun.Bu durum sonucunda, bu dosya için c:geo\'ya yeniden yetki vermeniz istenecek.\n\nMevcut dosya ayarlarını tutmak için \"%3$s\" seçeneğine dokunun.</string>
     <string name="settings_info_offline_maps_title">Çevrimdışı haritaların bilgisi</string>
     <string name="settings_info_offline_maps">c:geo\'da çevrimdışı harita kullanabilirsiniz. Haritaları diğer kaynaklardan elde edebilir veya kendi haritalarınızı yaratabilirsiniz (OSM verilerinden). Öncelikle, çevrimdışı haritaların depolanacağı klasörü seçmelisiniz.</string>
     <string name="settings_info_themes_title">Harita temalarının bilgisi</string>
@@ -1364,7 +1358,6 @@
     <string name="map_showwp_original">Orijinal</string>
     <string name="map_showwp_parking">Park alanı</string>
     <string name="map_showwp_visited">Ziyaret edildi</string>
-    <string name="map_show_track">GPX yol/rota</string>
     <string name="init_renderthemefolder_synctolocal">Temaları senkronize et</string>
     <string name="init_summary_renderthemefolder_synctolocal">Bu seçenek, harita görüntüleyicisinin açılış performansını arttırmak için temalarınızı uygulamaya özel bir klasöre, depolama alanınızın birazını kullanarak, senkronize eder.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Tema dosyası senkronizasyonunu aç</string>
@@ -1419,8 +1412,6 @@
     <string name="search_filter">Filtre</string>
     <string name="search_filter_button">Filtreye göre ara</string>
     <string name="search_filter_info_message" formatted="false">**Filtreye göre ara**, sağlanan bir filtreyi kullanarak tüm aktif çevrimiçi hizmetlerde (ör. geocaching.com) Geocache\'lerde arama yapar. Ancak, bu hizmetlerin arama yetenekleri genellikle c:geo\'nun filtre yeteneklerinden daha sınırlıdır.\n\n- Tüm hizmetler yalnızca VE filtrelerini destekler (VEYA filtresi ve filtre ters çevirme yok).\n- **Geocache türü** veya **Geocache boyutu** gibi temel filtreler tüm hizmetler tarafından desteklenir. **Favori sayısı** veya **Saklanma tarihi** gibi daha karmaşık filtreler genellikle desteklenmez veya bazı kısıtlıdır.\n- Hizmet başına desteklenen filtrelerle ilgili ayrıntılı bir listeyi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors) bulabilirsiniz.\n\nÇevrimiçi hizmet tarafından desteklenmeyen filtreler, alınan sonuçlara c:geo tarafından uygulanacaktır.</string>
-    <string name="search_filter_temporary_user_information_title">Yeni filtre çerçevesi</string>
-    <string name="search_filter_temporary_user_information">c:geo, esnek, birleştirilebilir ve depolanabilir filtreleri destekleyen yeni bir filtreleme sistemini tanıttı. \n\nKüresel filtre bundan böyle doğrudan cache listelerinde ve canlı haritada değiştirilebilir.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable kimliği</string>
     <string name="search_tb_button">Trackable ara</string>
@@ -1895,7 +1886,6 @@
         <item quantity="one">%d cache simgesini ayarla</item>
         <item quantity="other">%d cache simgelerini ayarla</item>
     </plurals>
-    <string name="pq_download_and_import">Sorgulama kaydı içe aktar</string>
     <string name="caches_refresh_all_warning">Bu seçim yüksek ağ yoğunluğuna neden olabilir. Tüm Geocache\'leri toplu yenilemek istediğinizden emin misiniz?</string>
     <string name="list_list_headline">Listeler:</string>
     <plurals name="extract_waypoints_result">
@@ -1957,21 +1947,17 @@
         <item quantity="one">Rota %d rota noktasıyla yüklendi</item>
         <item quantity="other">Rota %d rota noktasıyla yüklendi</item>
     </plurals>
-    <string name="center_on_route">Rotaya göre ortala</string>
     <string name="individual_route_set_as_start_title">Rota başlangıcı olarak ayarla</string>
     <string name="individual_route_set_as_start_message">Bu öğeyi rota başlangıcı olarak ayarlanıp, sonraki tüm öğeler mevcut rotanın üstüne taşınsın mı?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX yol/rota</string>
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>
     <string name="map_load_track_wait">İz/rota arkaplanda yükleniyor…</string>
-    <string name="map_load_track_confirm">Mevcut iz/rota üzerine yazılsın mı?</string>
     <plurals name="load_track_success">
         <item quantity="one">İz/rota yüklendi (%d iz noktası)</item>
         <item quantity="other">İz/rota yüklendi (%d iz noktası)</item>
     </plurals>
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
-    <string name="map_unload_track">Yol/rota boşa alındı</string>
-    <string name="center_on_track">İze/rotaya göre ortala</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2022,7 +2008,6 @@
     <string name="downloadmap_title">Çevrimdışı harita indir</string>
     <string name="download_title">Dosyayı indir</string>
     <string name="downloadmap_info">\"Kaydet\" düğmesine basarak bölgeniz için harita dosyası seçin.\n\nİndirme arka planda çalışacak. İndirme tamamlandığında, indirilmiş dosya c:geo\'nun harita klasörüne kopyalanacak ve c:geo için mevcut harita olarak ayarlanacak.\n\nDikkat edin: harita indirmek yoğun ağ trafiğine sebep olur!</string>
-    <string name="downloadmap_choose">Harita seç</string>
     <string name="downloadmap_filename">%s İndiriliyor</string>
     <string name="downloadmanager_not_available">Dosya indirilemedi, sistem indirme yöneticisi müsait değil</string>
     <string name="download_started">İndirme arka planda başladı</string>
