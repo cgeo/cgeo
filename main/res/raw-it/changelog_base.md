@@ -4,7 +4,8 @@
 ### Mappa
 - Corretto: Caricando file GPX contenenti più tracce, queste vengono visualizzate come tracce separate non collegate tra loro
 - Cambiato: Visualizzazione automatica della traccia al caricamento di un file GPX
-- Novità: Simboli D/T per le icone della cache (facoltativo)
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
@@ -27,6 +28,7 @@
 - Nuovo: abilita la ricerca nelle preferenze
 - Novità: Aggiunto GC Wizard all'elenco delle app utili
 - New: Attributes filter: Allow selecting from which connectors attributes are shown
+- New: Option to limit distance in nearby search (see Settings => Services)
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
