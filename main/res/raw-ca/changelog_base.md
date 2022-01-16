@@ -4,8 +4,9 @@
 ### Mapa
 - Solució: En carregar fitxers GPX que contenen diverses pistes, mostreu-los com a pistes separades i no connectades
 - Canvi: Activa automàticament la visualització de la pista en carregar un fitxer GPX
-- Nou: Símbols D/T per a les icones de catxé (opcional)
-- Nou: Opció per comprovar si hi ha dades d'encaminament que falten a la finestra gràfica actual
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Llistes de catxés
@@ -27,6 +28,7 @@
 - Nou: Habiliteu la cerca a les preferències
 - Nou: S'ha afegit GC Wizard a la llista d'aplicacions útils
 - New: Attributes filter: Allow selecting from which connectors attributes are shown
+- New: Option to limit distance in nearby search (see Settings => Services)
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
