@@ -18,6 +18,7 @@
 ### Détails de la cache
 - Nouveauté : Envoyer les coordonnées de la cache à geochecker
 - New: Colored attribute icons (following attribute groups)
+- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Divers
 - New: Quick-load geocodes from clipboard text in mainscreen search

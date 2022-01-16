@@ -6,7 +6,7 @@
 - Wijziging: automatisch track weergave inschakelen bij het laden van een GPX track bestand
 - Nieuw: D/T symbolen voor cachepictogrammen (optioneel)
 - Nieuw: Optie om te controleren op ontbrekende routeringsgegevens voor huidige viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Nieuw: Thema legenda voor hoogte, elementen en publieke kaarten-thema's
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
@@ -18,6 +18,7 @@
 ### Cache details
 - Nieuw: Geef huidige cache coördinaten door aan de geochecker (indien ondersteund door geochecker)
 - Nieuw: Gekleurde attribuutpictogrammen (volgends attribuutgroepen)
+- Oplossing: Probleem bij het openen van foto's uit galerij in externe apps op sommige Samsung-apparaten
 
 ### Overig
 - Nieuw: Snel laden van geocodes uit klembordtekst uit hoofdscherm zoekactie

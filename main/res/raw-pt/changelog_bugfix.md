@@ -1,5 +1,5 @@
 - Correcção: Reactivar o encaminhamento com a aplicação externa BRouter, na versão 1.6.3
-- Correcção: Use um tempo limite mais curto para o mecanismo de deslocação rápida para menos interferência com outros elementos do layout
+- Correcção: Use uma pausa mais curta para o mecanismo de deslize rápido, para menos interferência com outros elementos de visualização
 
 ## 2021.12.24 Pacote de correcção de erros
 
