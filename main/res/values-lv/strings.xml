@@ -162,7 +162,6 @@
     <string name="err_server_su">Nav iespējams savienoties ar Geocaching.su. Iespējams mājaslapa vai Jūsu interneta savienojums nestrādā.</string>
     <string name="err_server_gk">Nevar sazināties ar GeoKrety.org. Vietne var būt uz laiku nepieejama vai arī tavs interneta savienojums nedarbojas.</string>
     <string name="err_login">Nav saglabāta pieteikšanās informācija</string>
-    <string name="err_login_failed_toast">c:geo nevar pierakstīties. c:geo darbojas bezsaistē ar saglabātajiem slēpņiem. Pārbaudi ielogošanās iestatījumus vai aktivizē/iespējo interneta savienojumu.</string>
     <string name="err_unknown">Nezināma kļūda. Lūdzu dodieties uz mūsu <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pēc palīdzības.</string>
     <string name="err_unknown_address">c:geo nevarēja atrast kartē šo adresi ar pašreizējo atrašanās vietu</string>
     <string name="err_comm">Nezināma komunikācijas kļūda. Lūdzu dodieties uz mūsu <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pēc palīdzības.</string>
@@ -278,7 +277,6 @@
     <string name="menu_settings">Iestatījumi</string>
     <string name="menu_backup">Dublēt / atjaunot</string>
     <string name="menu_history">Vēsture</string>
-    <string name="menu_filter">Filtrēt</string>
     <!-- main screen -->
     <string name="live_map_button">Karte</string>
     <string name="caches_nearby_button">Tuvumā</string>
@@ -493,7 +491,6 @@
     <string name="init_address">Rādīt adresi</string>
     <string name="init_summary_address">Rādīt adresi, nevis koordinātes galvenajā ekrānā</string>
     <string name="init_select_language">Izvēlieties valodu</string>
-    <string name="init_summary_select_language">Izvēlēties aplikācijas valodu (nepieciešama restartēšana)\n</string>
     <string name="init_use_default_language">Lietot noklusējuma valodu</string>
     <string name="init_showwaypoint_description">Ja skaits ir mazāks nekā norādītais attēlojamo slēpņu skaits, tad papildus kartē tiek parādīti arī to Starpposmi.</string>
     <string name="init_zoomincludingwaypoints">Tālummaiņa iekļauj ceļa punktus</string>
@@ -1346,7 +1343,6 @@ importēti %1$d slēpņi no %2$s</item>
         <item quantity="one">Pievienot šo slēpni favorītiem (%d atlicis)</item>
         <item quantity="other">Pievienot šos slēpņus favorītiem (%d atlikuši)</item>
     </plurals>
-    <string name="pq_download_and_import">Importēt Slēpņu atlasi (PQ)</string>
     <string name="caches_refresh_all_warning">Šī darbība var patērēt daudz interneta apjoma/tīkla trafika. Vai tiešām vēlaties uzsākt atjaunināt visus slēpņus?</string>
     <string name="list_list_headline">Saraksti:</string>
     <plurals name="extract_waypoints_result">
@@ -1369,6 +1365,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_ft">pēda</string>
     <string name="unit_yd">jards</string>
