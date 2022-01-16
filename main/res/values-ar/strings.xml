@@ -133,7 +133,6 @@
     <string name="err_server_ec">غير قادر على الاتصال بـ Extremcaching.com. قد يكون الموقع معطل أو يوجد مشاكل في اتصالك بالانترنات.</string>
     <string name="err_server_gk">غير قادر على الاتصال بـ GeoKrety.org. قد يكون الموقع معطل أو يوجد مشاكل في اتصالك بالانترنات.</string>
     <string name="err_login">لا توجد معلومات تسجيل الدخول مخزنة</string>
-    <string name="err_login_failed_toast">c:geo لا يمكنه تسجيل الدخول. c:gec يعمل في وضع عدم الاتصال فقط عندما تكون المخبآت مخزنة. تحقق من إعدادات تسجيل الدخول أو قم بتمكين الاتصال بالانترنات.</string>
     <string name="err_unknown_address">c:geo كان غير قادر على تحديد العنوان لهذا الموقع الموجود</string>
     <string name="err_missing_auth">لم يتم تعيين اسم المستخدم و/أو كلمة المرور</string>
     <string name="err_wrong">خطأ في اسم المستخدم و/أو كلمة المرور</string>
@@ -235,7 +234,6 @@
     <string name="menu_helpers">البرامج المساعدة</string>
     <string name="menu_settings">الإعدادات</string>
     <string name="menu_history">التأريخ</string>
-    <string name="menu_filter">فلتر</string>
     <!-- main screen -->
     <string name="live_map_button">خريطة على نات</string>
     <string name="caches_nearby_button">قريب</string>
@@ -1100,7 +1098,6 @@
     <string name="command_rename_list_result">تم إعادة تسمية القائمة</string>
     <string name="command_delete_list_result">تم حذف القائمة</string>
     <string name="command_unique_list_result">تم حذف المخبآت من القوائم الأخرى</string>
-    <string name="pq_download_and_import">استيراد الاستفسارات</string>
     <string name="caches_refresh_all_warning">هذا الإجراء قد يؤدي إلى زحام كبير على الشبكة. هل أنت متأكد أنك تريد تحديث كل المخبآت؟</string>
     <string name="list_list_headline">القوائم:</string>
     <!-- calendar adder -->
@@ -1114,6 +1111,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->
