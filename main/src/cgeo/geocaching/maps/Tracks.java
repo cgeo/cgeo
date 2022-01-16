@@ -63,13 +63,15 @@ public class Tracks {
         }
     }
 
-    public void add(final Activity activity, final Uri uri, final UpdateTrack updateTrack) {
+    public String add(final Activity activity, final Uri uri, final UpdateTrack updateTrack) {
         final String key = Trackfiles.createTrackfile(activity, uri);
         for (Trackfiles trackfile : Trackfiles.getTrackfiles()) {
             if (trackfile.getKey().equals(key)) {
                 data.add(new Track(trackfile));
+                return key;
             }
         }
+        return null;
     }
 
     public void remove(@NonNull final String key) {

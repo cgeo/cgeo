@@ -73,7 +73,9 @@ public class RouteTrackUtils {
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
                 if (uri != null && this.updateTrack != null) {
                     GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
-                        tracks.add(activity, uri, updateTrack);
+                        final String key = tracks.add(activity, uri, updateTrack);
+                        tracks.setRoute(key, route);
+                        updateTrack.updateRoute(key, route);
                         updateDialogTracks(popup, tracks);
                     });
                 }
@@ -132,7 +134,6 @@ public class RouteTrackUtils {
                 vVisibility.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
                 individualRoute.setHidden(newValue);
                 reloadIndividualRoute.run();
-                // @todo: persist new visibility value
             });
 
             dialog.findViewById(R.id.item_delete).setOnClickListener(v1 -> SimpleDialog.of(activity).setTitle(R.string.map_clear_individual_route).setMessage(R.string.map_clear_individual_route_confirm).confirm((d, w) -> {
