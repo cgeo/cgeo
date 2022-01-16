@@ -4,9 +4,10 @@
 ### Mapa
 - Correcção: Ao carregar ficheiros GPX que contém vários percursos, mostra-os em separado, não ligados
 - Alteração: Activa automaticamente a exibição do percurso ao carregar um ficheiro de percurso GPX
-- Novo: símbolos D/T para os ícones de cache (opcional)
-- Novo: Opção de verificação de falta de dados de encaminhamento na janela em visualização
-- Novo: Legenda de tema para Elevação, Elementos e temas de Freizeitkarte
+- New: Allow displaying several tracks at once
+- New: D/T symbols for cache icons (optional)
+- New: Option to check for missing routing data for current viewport
+- New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
@@ -27,6 +28,7 @@
 - Novo: Permitir a pesquisa nas preferências
 - Novo: Assistente de GC adicionado à lista de aplicações úteis
 - Novo: Filtro de atributos: Permitir a selecção da origem dos atributos que são mostrados
+- Novo: Opção para limitar a distância da pesquisa nas proximidades (ver Definições => Serviços)
 - Alteração: Leitor de código de barras removido da lista de aplicações úteis e do ecrã principal
 - Alteração: BRouter removido da lista de aplicações úteis (ainda pode usar a navegação externa e interna)
 - Correcção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
