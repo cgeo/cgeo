@@ -46,10 +46,19 @@
 
     <!-- resources loaded by dynamic name lookup -->
     <issue id="UnusedResources">
-        <ignore path="res/drawable-mdpi/attribute_maintenance.png" />
+        <!-- used for notification system -->
+        <ignore path="res/drawable-xhdpi/attribute_maintenance.png" />
+
+        <!-- translations no longer used -->
+        <ignore path="res/values-*/strings.xml" />
+
+        <!-- cache rating markers (drawables and color values used by the drawables) -->
+        <ignore path="res/drawable/marker_rating_*.xml" />
+        <ignore regexp="R\.color\.marker_rating_[0-5]{1,2}" />
+
+        <!-- other -->
         <ignore path="res/*/ic_launcher_*round.xml" />
         <ignore path="res/values/vpi__colors.xml" />
-        <ignore path="res/values-*/strings.xml" />
     </issue>
 
     <issue id="MissingDefaultResource" severity="informational"/>
