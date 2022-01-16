@@ -31,6 +31,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.widget.TooltipCompat;
+
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -129,10 +131,10 @@ public class RouteTrackUtils {
 
             final ImageButton vVisibility = dialog.findViewById(R.id.item_visibility);
             vVisibility.setVisibility(View.VISIBLE);
-            vVisibility.setImageResource(individualRoute.isHidden() ? R.drawable.visibility : R.drawable.visibility_off);
+            setVisibilityInfo(vVisibility, individualRoute.isHidden());
             vVisibility.setOnClickListener(v -> {
                 final boolean newValue = !individualRoute.isHidden();
-                vVisibility.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
+                setVisibilityInfo(vVisibility, newValue);
                 individualRoute.setHidden(newValue);
                 reloadIndividualRoute.run();
             });
@@ -178,10 +180,10 @@ public class RouteTrackUtils {
                 vVisibility.setVisibility(View.GONE);
             } else {
                 vVisibility.setVisibility(View.VISIBLE);
-                vVisibility.setImageResource(route.isHidden() ? R.drawable.visibility : R.drawable.visibility_off);
+                setVisibilityInfo(vVisibility, route.isHidden());
                 vVisibility.setOnClickListener(v -> {
                     final boolean newValue = !route.isHidden();
-                    vVisibility.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
+                    setVisibilityInfo(vVisibility, newValue);
                     route.setHidden(newValue);
                     updateTrack.updateRoute(key, route);
                     tracks.hide(key, newValue);
@@ -196,6 +198,11 @@ public class RouteTrackUtils {
             tracklist.addView(vt);
         });
     }
+
+    private void setVisibilityInfo (final ImageButton v, final boolean newValue) {
+        v.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
+        TooltipCompat.setTooltipText(v, activity.getString(newValue ? R.string.make_visible : R.string.hide));
+    };
 
     private void updateDialogClearTargets(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
         final View vClearTargets = dialog.findViewById(R.id.clear_targets);
