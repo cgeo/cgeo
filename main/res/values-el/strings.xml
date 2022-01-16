@@ -200,7 +200,6 @@
     <string name="err_server_su">Η επικοινωνία με το Geocaching.su απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_server_gk">Η επικοινωνία με το GeoKrety.org απέτυχε. Η ιστοσελίδα ή η σύνδεση σας ενδέχεται να μη λειτουργεί.</string>
     <string name="err_login">Δεν υπάρχουν αποθηκευμένα στοιχεία σύνδεσης</string>
-    <string name="err_login_failed_toast">Δεν ήταν δυνατή η σύνδεση του c:geo. Το c:geo λειτουργεί χωρίς σύνδεση με αποθηκευμένες κρύπτες. Ελέγξτε τις ρυθμίσεις σύνδεσης ή ενεργοποιείστε την σύνδεσή σας στο διαδίκτυο.</string>
     <string name="err_unknown">Άγνωστο σφάλμα. Παρακαλούμε απευθυνθείτε στη σελίδα μας <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> για οδηγίες.</string>
     <string name="err_unknown_address">Το c:geo δεν μπόρεσε να αντιστοιχίσει αυτήν τη διεύθυνση με μια υπάρχουσα τοποθεσία</string>
     <string name="err_comm">Άγνωστο σφάλμα επικοινωνίας. Παρακαλούμε απευθυνθείτε στη σελίδα μας <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> για οδηγίες.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Ακυρώθηκε η επιλογή/απαθανάτιση εικόνας.</string>
     <string name="info_cache_saved">Η κρύπτη έχει αποθηκευτεί τοπικά</string>
     <string name="warn_calculator_state_save">Βεβαιωθείτε ότι θα αποθηκεύσετε το σημείο διαδρομής, εάν θέλετε να παραμείνετε στη φάση υπολογισμού.</string>
-    <string name="feature_info_offline_counter">Έχετε μερικές κρύπτες με ένα αποθηκευμένο \'\'αρχείο καταγραφής εκτός σύνδεσης\'\', το οποίο δεν ανέβηκε λόγω μη σύνδεσης στο διαδίκτυο. Για περισσότερη άνεση, ο αριθμός αυτών των αρχείων καταγράφεται ως \"+ x\" πίσω από τον αριθμό των αποθηκευμένων κρυπτών, στο υποσέλιδο, στην κύρια σελίδα του c: geo.\n\nΕπιπλέον, αυτά τα αρχεία καταγραφής \"x\" θα προστεθούν στο πρότυπο \"ΑΡΙΘΜΟΣ\" που μπορεί να χρησιμοποιήσετε στην υπογραφή σας.\n\nΑν δεν σας αρέσει αυτή η επέκταση μετρητή, μπορείτε να την απενεργοποιήσετε στην ενότητα \"Ρυθμίσεις\" &gt;\"Καταγραφή\" ή / και να χρησιμοποιήσετε το πρότυπο \"ΑΡΙΘΜΟΣ (χωρίς αρχεία καταγραφής εκτός σύνδεσης)\".\n\nΓια να βρείτε εύκολα τα υπόλοιπα \"Με αρχεία καταγραφής εκτός σύνδεσης\", μεταβείτε στη λίστα \"Ιστορικό\" και φιλτράρετε για \"Με προσωπικά δεδομένα\" &gt;\"Με αρχείο καταγραφής εκτός σύνδεσης\".</string>
     <string name="err_trackable_log_not_anonymous">Η καταγραφή %1$s από το c:geo δεν μπορεί να γίνει ανώνυμα. Θέλετε να ανοίξετε τις ρυθμίσεις για να συμπληρώσετε τα διαπιστευτήριά σας από την %2$s;</string>
     <string name="err_trackable_no_preference_activity">Συγνώμη, δεν είναι δυνατό να βρεθεί μία κατάλληλη οθόνη προτίμησης.</string>
     <string name="confirm_unsaved_changes_title">Μη αποθηκευμένες αλλαγές</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Ενημέρωση δεδομένων εκτός σύνδεσης</string>
     <string name="menu_update_routingdata">Δεδομένα δρομολόγησης</string>
     <string name="menu_update_mapdata">Δεδομένα χάρτη</string>
-    <string name="menu_dashboard">Πίνακας σύνδεσης</string>
     <string name="menu_history">Ιστορικό</string>
     <string name="menu_search_clipboard">Φόρτωση γεωκωδικού από το πρόχειρο</string>
     <string name="menu_history_longstring">Ιστορικό ευρέσεων</string>
-    <string name="menu_filter">Φίλτρο</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
     <string name="menu_lists_bookmarklists">Λίστα σελιδοδεικτών</string>
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Δεν υπάρχουν άλλες κρύπτες</string>
     <string name="caches_more_caches_loading">Φόρτωση κρυπτών…</string>
     <string name="caches_more_caches_currently">φορτωμένα</string>
-    <string name="caches_more_caches_next_x">Φόρτωση των επόμενων %1$d κρυπτών</string>
     <string name="caches_more_caches_remaining">Φόρτωση υπολειπόμενων κρυπτών (%1$d / %2$d)</string>
     <string name="caches_downloading">Λήψη κρυπτών…\nETA: </string>
     <string name="caches_eta_ltm">Λιγότερο από ένα λεπτό</string>
@@ -649,6 +644,9 @@
     <string name="settings_title_navigation_menu">Μενού πλοήγησης</string>
     <string name="settings_category_browser">Πρόγραμμα περιήγησης</string>
     <string name="settings_category_geocaching_platform">Πλατφόρμα Geocaching</string>
+    <string name="settings_category_nearbysearch">Κοντινή αναζήτηση</string>
+    <string name="init_nearbysearchlimit_title">Όρια αναζήτησης αποτελεσμάτων</string>
+    <string name="init_nearbysearchlimit_description">Περιορίζει την απόσταση μέχρι την οποία επιστρέφονται κρύπτες με κοντινή αναζήτηση (0=απεριόριστη)</string>
     <string name="settings_category_geocaching_additionals">Περαιτέρω υπηρεσίες και πρόσθετα</string>
     <string name="settings_category_social">Κοινωνικά δίκτυα</string>
     <string name="settings_category_logging_other">Εμφάνιση περισσότερων επιλογών καταγραφής</string>
@@ -727,7 +725,6 @@
     <string name="init_address">Προβολή διεύθυνσης</string>
     <string name="init_summary_address">Εμφάνιση διεύθυνσης αντί για συντεταγμένες στην κύρια οθόνη</string>
     <string name="init_select_language">Επιλέξτε γλώσσα</string>
-    <string name="init_summary_select_language">Επιλλέξτε γλώσσα στην εφαρμογή (Χρειάζεται επανεκκίνηση)\n</string>
     <string name="init_use_default_language">Χρήση προεπιλεγμένης Γλώσσας</string>
     <string name="init_showwaypoints">Εμφάνιση σημείων διαδρομής</string>
     <string name="init_showwaypoint_description">Αν εμφανίζονται στον χάρτη λιγότερες από τις δεδομένες κρύπτες, εμφανίζονται επιπλέον και τα σημεία τους.</string>
@@ -834,7 +831,6 @@
     <string name="settings_readingerror">Ρυθμίσεις ανάγνωσης σφαλμάτων</string>
     <string name="settings_restart">Το c:geo χρειάζεται επανεκκίνηση για την ενεργοποίηση των νέων ρυθμίσεων</string>
     <string name="settings_folder_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
-    <string name="settings_file_changed">\"%1$s\" θα αλλάξει σε \"%2$s\" κατά την επαναφορά.\n\nΠατήστε \"%4$s\" για να συνεχίσετε. Σε αυτή την περίπτωση θα σας ζητηθεί να ξαναδώσετε στο c:geo πρόσβαση σε αυτόν τον φάκελο.\n\nΠατήστε \"%3$s\" για να διατηρήσετε την τρέχουσα ρύθμιση φακέλου.</string>
     <string name="settings_info_offline_maps_title">Πληροφορίες για χάρτες εκτός σύνδεσης</string>
     <string name="settings_info_offline_maps">Το c:geo υποστηρίζει χάρτες για χρήση εκτός σύνδεσης. Μπορείτε να αποκτήσετε χάρτες από διαφορετικούς παρόχους ή ακόμα και να δημιουργήσετε δικούς σας χάρτες (από δεδομένα OSM). Πρώτα θα πρέπει να επιλέξετε το φάκελο στον οποίο θα αποθηκεύονται χάρτες εκτός σύνδεσης.</string>
     <string name="settings_info_themes_title">Πληροφορίες σχετικά με θέματα χαρτών</string>
@@ -1391,7 +1387,6 @@
     <string name="map_showwp_original">Αρχική</string>
     <string name="map_showwp_parking">Πάρκινγκ</string>
     <string name="map_showwp_visited">Επίσκεψη</string>
-    <string name="map_show_track">GPX διαδρομή</string>
     <string name="init_renderthemefolder_synctolocal">Συγχρονισμός θεμάτων</string>
     <string name="init_summary_renderthemefolder_synctolocal">Αυτό θα συγχρονίσει τα θέματα σας σε έναν ιδιωτικό φάκελο εφαρμογών για να βελτιώσει την απόδοση ανοίγματος των χαρτών με κόστος κάποιο χώρο αποθήκευσης ατην συσκευή.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ενεργοποίηση συγχρονισμού φακέλου θεμάτων</string>
@@ -1448,8 +1443,6 @@
     <string name="search_filter">Φίλτρο</string>
     <string name="search_filter_button">Αναζήτηση με φίλτρο</string>
     <string name="search_filter_info_message" formatted="false">**Αναζήτηση με φίλτρο** αναζητά κρύπτες σε όλες τις ενεργές διαδικτυακές υπηρεσίες (π.χ. geocaching.com) χρησιμοποιώντας ένα παρεχόμενο φίλτρο. Ωστόσο, οι δυνατότητες αναζήτησης αυτών των υπηρεσιών είναι συνήθως πιο περιορισμένες από τις δυνατότητες φίλτρου του c:geo.\n\n- Όλες οι υπηρεσίες υποστηρίζουν μόνο \'ΚΑΙ\' φίλτρα (όχι φίλτρα OR και καμία αντιστροφή φίλτρου).\n- Τα πιο βασικά φίλτρα όπως ο **τύπος κρύπτης** ή το **μέγεθος κρύπτης** υποστηρίζονται από όλες τις υπηρεσίες. Τα πιο περίπλοκα φίλτρα συχνά δεν υποστηρίζονται ή έχουν κάποιους περιορισμούς, π.χ. **αγαπημένα** ή **ημερομηνία απόκρυψης**.\n- Μπορεί να βρεθεί μια λεπτομερής λίστα με τα υποστηριζόμενα φίλτρα ανά υπηρεσία [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nΦίλτρα που δεν υποστηρίζονται από την online υπηρεσία θα εφαρμοστούν από το c:geo στα λαμβανόμενα αποτελέσματα.</string>
-    <string name="search_filter_temporary_user_information_title">Πλαίσιο νέου φίλτρου</string>
-    <string name="search_filter_temporary_user_information">Το c:geo εισήγαγε ένα νέο σύστημα φιλτραρίσματος, υποστηρίζοντας ευέλικτα, συνδυασμένα και αποθηκεύσιμα φίλτρα. \n\nΤο καθολικό φίλτρο μπορεί από τώρα και στο εξής να αλλάξει απευθείας στις λίστες κρυπτών και στον ζωντανό χάρτη.</string>
     <string name="search_tb">Ανιχνεύσιμο</string>
     <string name="search_tb_hint">Ταυτοποίηση ανιχνεύσιμου</string>
     <string name="search_tb_button">Αναζήτηση ανιχνεύσιμου</string>
@@ -1834,7 +1827,6 @@
     <string name="cat_surrounding">Γύρω από την κρύπτη</string>
     <string name="cat_permissions">\'Αδειες</string>
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">Όλα</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
     <!-- next things -->
@@ -1935,7 +1927,6 @@
         <item quantity="one">Ορισμός %d εικονιδίου κρύπτης</item>
         <item quantity="other">Ορισμός %d εικονιδίων κρύπτης</item>
     </plurals>
-    <string name="pq_download_and_import">Εισαγωγή προσωποποιημένης αναζήτησης</string>
     <string name="caches_refresh_all_warning">Αυτή η ενέργεια ενδέχεται να προκαλέσει μεγάλη κυκλοφορία δικτύου. Είναι βέβαιοι ότι θέλετε να ανανεώσετε μαζικά όλες τις κρύπτες;</string>
     <string name="list_list_headline">Λίστες:</string>
     <plurals name="extract_waypoints_result">
@@ -1997,21 +1988,17 @@
         <item quantity="one">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
         <item quantity="other">Φορτώθηκε η διαδρομή με %d σημεία διαδρομής</item>
     </plurals>
-    <string name="center_on_route">Κέντρο στη διαδρομή</string>
     <string name="individual_route_set_as_start_title">Ορισμός ως Εναρξη διαδρομής</string>
     <string name="individual_route_set_as_start_message">Να οριστεί αυτό το στοιχείο ως αρχή δρομολόγησης και να μετακινηθούν όλα τα επόμενα στοιχεία προς την κορυφή της τρέχουσας διαδρομής;</string>
     <!-- individual track -->
-    <string name="individual_track">GPX διαδρομή</string>
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
     <string name="map_load_track_wait">Φορτωση διαδρομής στο παρασκήνιο…</string>
-    <string name="map_load_track_confirm">Επανεγγραφή υπάρχουσας διαδρομης;</string>
     <plurals name="load_track_success">
         <item quantity="one">Η διαδρομη φορτώθηκε (%d σημείο αναφοράς)</item>
         <item quantity="other">Η διαδρομη φορτώθηκε (%d σημεία αναφοράς)</item>
     </plurals>
     <string name="load_track_error">Σφάλμα κατά την φόρτωση της διαδρομής</string>
-    <string name="map_unload_track">Αποφόρτωση διαδρομής</string>
-    <string name="center_on_track">Κέντρο στην διαδρομή</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
@@ -2058,7 +2045,6 @@
     <string name="download_title">Λήψη αρχείου</string>
     <string name="downloadmap_info">Επιλέξτε ένα αρχείο χάρτη για την περιοχή σας πατώντας το εικονίδιο \"Αποθήκευση\".\n\n
 Η λήψη θα εκτελεστεί στο παρασκήνιο. Όταν ολοκληρωθεί, το αρχείο θα αντιγραφεί στον κατάλογο χαρτών του c: geo και θα οριστεί ως τρέχων χάρτης. \n\nΠροσοχή: Η λήψη ενός χάρτη μπορεί να προκαλέσει υψηλή κίνηση στο δίκτυο!</string>
-    <string name="downloadmap_choose">Επιλέξτε χάρτη</string>
     <string name="downloadmap_filename">Γίνεται λήψη του %s</string>
     <string name="downloadmanager_not_available">Δεν είναι δυνατή η λήψη του αρχείου, ο διαχειριστής λήψεων δεν είναι διαθέσιμος</string>
     <string name="download_started">Η λήψη ξεκίνησε στο παρασκήνιο</string>
