@@ -200,7 +200,6 @@
     <string name="err_server_su">Geocaching.su-sivustoon ei saada yhteyttä. Sivuston toiminnassa saattaa olla katkos, tai internet-yhteytesi ei toimi.</string>
     <string name="err_server_gk">Yhteys GeoKrety.org:iin ei onnistunut. Verkkosivu saattaa olla alhaalla tai Internet-yhteytesi ei toimi.</string>
     <string name="err_login">Kirjautumistietoja ei ole tallennettu</string>
-    <string name="err_login_failed_toast">c:geo ei onnistu kirjautumaan sisään. c:geo toimii offline-tilassa, jolloin käytössä tallennetut kätköt. Tarkista kirjautumistiedot tai kytke internet-yhteytesi päälle.</string>
     <string name="err_unknown">Tuntematon virhe. Vilkaise <a href="https://www.cgeo.org/faq#login-failed">usein kysytyt kysymykset (englanniksi)</a> avun saamiseksi.</string>
     <string name="err_unknown_address">c:geo ei voi näyttää tätä osoitetta kartalla</string>
     <string name="err_comm">Tuntematon kommunikaatiovirhe. Vilkaise <a href="https://www.cgeo.org/faq#login-failed">usein kysytyt kysymykset (englanniksi)</a> avun saamiseksi.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Kuvan valinta tai kaappaus peruutettiin.</string>
     <string name="info_cache_saved">Kätkö tallennettu paikallisesti</string>
     <string name="warn_calculator_state_save">Muista tallentaa reittipiste jos haluat säilyttää laskimen tilan.</string>
-    <string name="feature_info_offline_counter">Sinulla on kätköjä, joissa on offline-tilassa tallennettu loki, joita ei ole vielä mahdollisesti lähetetty. Näiden määrä näytetään kätevästi aloitusnäytön alaosassa löytämiesi kätköjen määrän jälkeen muodossa \"+ x\". \n\nLisäksi \"x\" lokia lisätään \"NUMBER\"-mallineeseen jota saatat käyttää lokisi allekirjoituksessa. \n\nJos et tykkää tästä laskimen lisäyksestä, voit kytkeä sen pois päältä kohdassa \"Asetukset\" &gt; \"Kirjaus\" ja/tai käyttää sen sijaan mallinetta \"NUMBER (without offline logs)\". \n\nLöytääksesi jäljellä olevat offline-tilassa olevat kirjaukset, mene \"Historia\"-listaan ja käytä suodatinta \"Omia tietoja\" &gt; \"Offline-lokeja\".</string>
     <string name="err_trackable_log_not_anonymous">Kirjautumista %1$s c:geosta ei voi tehdä anonyymisti. Haluatko avata asetukset täyttääksesi tarvittavat tiedot %2$s?</string>
     <string name="err_trackable_no_preference_activity">Valitettavasti ei löydy sopivaa asetusnäyttöä.</string>
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Päivitä offline-tiedot</string>
     <string name="menu_update_routingdata">Reititystiedot</string>
     <string name="menu_update_mapdata">Karttatiedot</string>
-    <string name="menu_dashboard">Kirjautumisnäkymä</string>
     <string name="menu_history">Historia</string>
     <string name="menu_search_clipboard">Lataa geokoodi leikepöydältä</string>
     <string name="menu_history_longstring">Löytöhistoria</string>
-    <string name="menu_filter">Suodatin</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Kirjanmerkkilistat</string>
     <string name="menu_invert_order">Käännä järjestys</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Ei enempää kätköjä</string>
     <string name="caches_more_caches_loading">Ladataan kätköjä…</string>
     <string name="caches_more_caches_currently">tällä hetkellä</string>
-    <string name="caches_more_caches_next_x">Lataa seuraavat %1$d kätköä</string>
     <string name="caches_more_caches_remaining">Lataa loput kätköt (%1$d / %2$d)</string>
     <string name="caches_downloading">Ladataan kätköjä…\nETA: </string>
     <string name="caches_eta_ltm">Alle minuutissa</string>
@@ -727,7 +722,6 @@
     <string name="init_address">Näytä osoite</string>
     <string name="init_summary_address">Näytä osoite koordinaattien sijaan pääsivulla</string>
     <string name="init_select_language">Valitse kieli</string>
-    <string name="init_summary_select_language">Valitse sovelluksen sisäinen kieli (vaatii uudelleenkäynnistyksen)\n</string>
     <string name="init_use_default_language">Käytä oletuskieltä</string>
     <string name="init_showwaypoints">Näytä reittipisteet</string>
     <string name="init_showwaypoint_description">Jos kartalla näkyy vähemmän kätköjä kuin oli tarkoitus, näytetyissä kätköissä saattaa olla välipisteitä.</string>
@@ -834,7 +828,6 @@
     <string name="settings_readingerror">Virhe asetusten lukemisessa</string>
     <string name="settings_restart">c:geo tulee käynnistää uudelleen nyt ladattujen asetusten saattamiseksi voimaan</string>
     <string name="settings_folder_changed">Kansio \"%1$s\" vaihdetaan \"%2$s\"ksi palautuksen aikana.\n\nNapauta \"%4$s\" jatkaaksesi. Tässä tapauksessa sinua pyydetään antamaan c:geolle pääsy kyseiseen kansioon\n\nNapauta \"%3$s\" pitääksesi kansion asetuksen ennallaan.</string>
-    <string name="settings_file_changed">\"%1$s\" vaihdetaan \"%2$s\"ksi palautuksen aikana.\n\nNapauta \"%4$s\" jatkaaksesi. Tässä tapauksessa sinua pyydetään antamaan c:geolle pääsy kyseiseen tiedostoon.\n\nNapauta \"%3$s\" pitääksesi asetuksen ennallaan.</string>
     <string name="settings_info_offline_maps_title">Offline-karttojen tiedot</string>
     <string name="settings_info_offline_maps">c:geo tukee offline-käyttöön tarkoitettuja karttoja. Voit hankkia karttoja eri tarjoajilta tai jopa luoda omia karttoja (OSM-data). Sinun on ensin valittava kansio johon offline-kartat on tallennettava.</string>
     <string name="settings_info_themes_title">Tietoa karttojen teemoista</string>
@@ -1391,7 +1384,6 @@
     <string name="map_showwp_original">Alkuperäinen</string>
     <string name="map_showwp_parking">Pysäköinti</string>
     <string name="map_showwp_visited">Vierailtu</string>
-    <string name="map_show_track">GPX jälki/reitti</string>
     <string name="init_renderthemefolder_synctolocal">Synkronoi teemat</string>
     <string name="init_summary_renderthemefolder_synctolocal">Tämä synkronoi teemasi sovelluksen yksityiseen kansioon karttanäkymän avaamisen suorituskyvyn parantamiseksi, pienellä tallennustilan kustannuksella.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Ota teemakansion synkronointi käyttöön</string>
@@ -1446,8 +1438,6 @@
     <string name="search_filter">Suodata</string>
     <string name="search_filter_button">Hae suodattimella</string>
     <string name="search_filter_info_message" formatted="false">**Etsi suodattumella** etsii kätköjä kaikista aktiivisista geokätköilysivustoista (kuten geocaching.com), käyttäen annettua suodatinta. Näiden palvelujen hakumahdollisuudet kuitenkin ovat yleensä rajatummat kuin c:geossa saatavilla olevat suodatinmahdollisuudet.\n\n - Kaikki palvelut tukevat vain JA-suodatinta (ei TAI-suodatinta tai käänteistä suodatinta).\n- Yksinkertaisimmat suodattimet kuten **kätkötyyppi** tai **kätkön koko** on saatavilla kaikissa palveluissa. Edistyneemmät suodattimet, kuten **suosikkipisteet** tai **piilotuspäivä**, voivat olla vähemmän käytettävissä/saatavilla.\n- Yksityiskohtainen lista saatavilla olevista suodattimista palvelukohtaisesti löytyy englanniksi [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nSuodattimet, joita sivusto ei tue, ajetaan automaattisesti jälkeenpäin c:geon toimesta geokätköilysivustolta vastaanotetuille hakutuloksille.</string>
-    <string name="search_filter_temporary_user_information_title">Uusi suodatinkehys</string>
-    <string name="search_filter_temporary_user_information">c:geo on ottanut käyttöön uuden suodatusjärjestelmän, joka tukee joustavia, yhdistettäviä ja tallennettavia suodattimia. \n\nLöydät globaalin suodattimen nyt kätkölistojen sekä (live-)kartan yläreunan suodatinnapin kautta.</string>
     <string name="search_tb">Reissaaja</string>
     <string name="search_tb_hint">Reissaajan koodi</string>
     <string name="search_tb_button">Etsi reissaajia</string>
@@ -1929,7 +1919,6 @@
         <item quantity="one">Aseta %d kätkökuvake</item>
         <item quantity="other">Aseta %d kätkökuvakkeet</item>
     </plurals>
-    <string name="pq_download_and_import">Tuo Pocket Query</string>
     <string name="caches_refresh_all_warning">Tämä toiminto voi johtaa korkeaan verkkoyhteyden käyttöön. Haluatko todellakin päivittää kaikki kätköt?</string>
     <string name="list_list_headline">Listat:</string>
     <plurals name="extract_waypoints_result">
@@ -1991,21 +1980,17 @@
         <item quantity="one">Reitti ladattu %d reittipisteellä</item>
         <item quantity="other">Reitti ladattu %d reittipisteellä</item>
     </plurals>
-    <string name="center_on_route">Keskitä reittiin</string>
     <string name="individual_route_set_as_start_title">Aseta reitin alkupisteeksi</string>
     <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX jälki/reitti</string>
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
     <string name="map_load_track_wait">Ladataan jälkeä/reittiä taustalla…</string>
-    <string name="map_load_track_confirm">Korvataanko olemassa oleva jälki/reitti?</string>
     <plurals name="load_track_success">
         <item quantity="one">Jälki/reitti ladattu (%d reittipistettä)</item>
         <item quantity="other">Jälki/reitti ladattu (%d reittipistettä)</item>
     </plurals>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
-    <string name="map_unload_track">Poista jälki/reitti</string>
-    <string name="center_on_track">Keskitä jälkeen/reittiin</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2056,7 +2041,6 @@
     <string name="downloadmap_title">Lataa offline-kartta</string>
     <string name="download_title">Lataa tiedosto</string>
     <string name="downloadmap_info">Valitse alueesi kartta tiedosto napauttamalla \"Tallenna\" kuvaketta.\n\nLataus suoritetaan taustalla. Kun siirto on valmis, tiedosto kopioidaan c:geo karttakansioon ja se asetetaan nykyiseksi kartaksi.\n\nOle varovainen: Kartan lataaminen voi aiheuttaa suurta verkkoliikennettä!</string>
-    <string name="downloadmap_choose">Valitse kartta</string>
     <string name="downloadmap_filename">Ladataan %s</string>
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
