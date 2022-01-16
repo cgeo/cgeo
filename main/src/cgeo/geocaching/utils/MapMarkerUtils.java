@@ -28,6 +28,7 @@ import android.util.Pair;
 import android.util.SparseArray;
 import android.view.Gravity;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.res.ResourcesCompat;
@@ -50,6 +51,35 @@ public final class MapMarkerUtils {
     private static final SparseArray<CacheMarker> overlaysCache = new SparseArray<>();
     private static EmojiUtils.EmojiPaint cPaint = null; // cache icons
     private static EmojiUtils.EmojiPaint lPaint = null; // list markers
+
+    // this enum solely serves to make static code analysis happy
+    private enum LintUseCacheRatingDrawables {
+        D00 (R.drawable.marker_rating_d_0),
+        D05 (R.drawable.marker_rating_d_5),
+        D10 (R.drawable.marker_rating_d_10),
+        D15 (R.drawable.marker_rating_d_15),
+        D20 (R.drawable.marker_rating_d_20),
+        D25 (R.drawable.marker_rating_d_25),
+        D30 (R.drawable.marker_rating_d_30),
+        D35 (R.drawable.marker_rating_d_35),
+        D40 (R.drawable.marker_rating_d_40),
+        D45 (R.drawable.marker_rating_d_45),
+        D50 (R.drawable.marker_rating_d_50),
+        T00 (R.drawable.marker_rating_t_0),
+        T05 (R.drawable.marker_rating_t_5),
+        T10 (R.drawable.marker_rating_t_10),
+        T15 (R.drawable.marker_rating_t_15),
+        T20 (R.drawable.marker_rating_t_20),
+        T25 (R.drawable.marker_rating_t_25),
+        T30 (R.drawable.marker_rating_t_30),
+        T35 (R.drawable.marker_rating_t_35),
+        T40 (R.drawable.marker_rating_t_40),
+        T45 (R.drawable.marker_rating_t_45),
+        T50 (R.drawable.marker_rating_t_50);
+
+        LintUseCacheRatingDrawables(@DrawableRes final int res) {
+        }
+    }
 
     private MapMarkerUtils() {
         // Do not instantiate

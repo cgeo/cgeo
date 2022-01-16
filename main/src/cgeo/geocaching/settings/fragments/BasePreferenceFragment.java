@@ -14,9 +14,9 @@ import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.PreferenceGroup;
 import androidx.preference.PreferenceScreen;
 
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
+
+import org.apache.commons.lang3.StringUtils;
 
  public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
 
