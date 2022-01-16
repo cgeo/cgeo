@@ -567,12 +567,12 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                         .setTitle(res.getString(R.string.init_backup_restore))
                         .setMessage(res.getString(R.string.init_restore_confirm))
                         .setCancelable(false)
-                        .setPositiveButton(getString(android.R.string.yes), (dialog, id) -> {
+                        .setPositiveButton(getString(android.R.string.ok), (dialog, id) -> {
                             dialog.dismiss();
                             DataStore.resetNewlyCreatedDatabase();
                             backupUtils.restore(BackupUtils.newestBackupFolder());
                         })
-                        .setNegativeButton(getString(android.R.string.no), (dialog, id) -> {
+                        .setNegativeButton(getString(android.R.string.cancel), (dialog, id) -> {
                             dialog.cancel();
                             DataStore.resetNewlyCreatedDatabase();
                         })
