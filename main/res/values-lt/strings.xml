@@ -195,7 +195,6 @@
     <string name="err_server_su">Nepavyksta susisiekti su Geocaching.su. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_server_gk">Nepavyksta susisiekti su GeoKrety.org. Neveikia svetainė arba jūsų interneto ryšys.</string>
     <string name="err_login">Nėra išsaugotos prisijungimo informacijos</string>
-    <string name="err_login_failed_toast">c:geo negali prisijungti. c:geo veikia be interneto su išsaugotomis slėptuvėmis. Patikrinkite prisijungimo nustatymus arba įjunkite įrenginio interneto ryšį.</string>
     <string name="err_unknown">Nežinoma klaida. Peržvelkite <a href="https://www.cgeo.org/faq#login-failed">DUK</a> paaiškinimui.</string>
     <string name="err_unknown_address">c:geo nepavyko susieti šio adreso su egzistuojančia vietove</string>
     <string name="err_comm">Nežinoma komunikacijos klaida. Peržvelkite <a href="https://www.cgeo.org/faq#login-failed">DUK</a> paaiškinimui.</string>
@@ -317,7 +316,6 @@
     <string name="menu_update_routingdata">Maršruto duomenys</string>
     <string name="menu_update_mapdata">Žemėlapio duomenys</string>
     <string name="menu_history">Istorija</string>
-    <string name="menu_filter">Filtras</string>
     <string name="menu_lists_bookmarklists">Žymių sąrašai</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
@@ -333,7 +331,6 @@
     <string name="caches_more_caches_no">Daugiau slėptuvių nėra</string>
     <string name="caches_more_caches_loading">Įkeliamos slėptuvės…</string>
     <string name="caches_more_caches_currently">dabar</string>
-    <string name="caches_more_caches_next_x">Įkelti kitas %1$d slėptuves</string>
     <string name="caches_more_caches_remaining">Įkelti likusias slėptuves (%1$d / %2$d)</string>
     <string name="caches_downloading">Atsisiunčiamos slėptuvės…\nUžtruks: </string>
     <string name="caches_eta_ltm">mažiau nei minutę</string>
@@ -754,7 +751,6 @@
     <string name="init_backup_settings_restore">Atkurti nustatymus</string>
     <string name="settings_readingerror">Skaitant nustatymus įvyko klaida</string>
     <string name="settings_restart">c:geo reikia iš naujo paleisti, kad įkelti parametrai pradėtų veikti</string>
-    <string name="settings_file_changed">Atkuriant \"%1$s\" bus pakeista į \"%2$s\". \n\nNorėdami tęsti bakstelėkite \"%4$s\". Tokiu atveju jūsų bus paprašyta iš naujo nustatyti c:geo prieigą prie to failo. \n\nBakstelėkite \"%3$s\", jei norite palikti dabartinį nustatymą.</string>
     <string name="settings_info_offline_maps_title">Informacija apie išsaugotus žemėlapius</string>
     <string name="settings_info_offline_maps">c:geo palaiko žemėlapius, skirtus naudoti neprisijungus. Žemėlapius galite gauti iš skirtingų tiekėjų arba net sukurti savo žemėlapius (iš OSM duomenų). Pirmiausia turite pasirinkti aplanką, kuriame bus saugomi neprisijungus pasiekiami žemėlapiai.</string>
     <string name="settings_info_themes_title">Informacija apie žemėlapio temas</string>
@@ -1282,7 +1278,6 @@
     <string name="map_showwp_original">Originalus</string>
     <string name="map_showwp_parking">Parkavimas</string>
     <string name="map_showwp_visited">Aplankytas</string>
-    <string name="map_show_track">GPX kelias/maršrutas</string>
     <string name="init_renderthemefolder_synctolocal">Sinchronizuoti temas</string>
     <string name="init_hidewp">Slėpti papildomus taškus</string>
     <string name="init_summary_hidewp_original">Slėpti originalius papildomus taškus žemėlapyje</string>
@@ -1786,7 +1781,6 @@
         <item quantity="many">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
         <item quantity="other">Pridėti šią slėptuvę prie mėgstamųjų (liko %d)</item>
     </plurals>
-    <string name="pq_download_and_import">Importuoti Pocket query</string>
     <string name="caches_refresh_all_warning">Šis veiksmas gali išnaudoti daug tinklo srauto. Ar tikrai norite atnaujinti visas slėptuves?</string>
     <string name="list_list_headline">Sąrašas:</string>
     <plurals name="extract_waypoints_result">
@@ -1845,14 +1839,11 @@
         <item quantity="many">Maršrutas įkeltas su %d maršruto taškų</item>
         <item quantity="other">Maršrutas įkeltas su %d maršruto taškų</item>
     </plurals>
-    <string name="center_on_route">Centruoti į maršrutą</string>
     <string name="individual_route_set_as_start_title">Nustatyti kaip maršruto pradžią</string>
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX asmeninis kelias/maršrutas</string>
     <string name="map_load_track">Įkelti GPX asmenini kelią/maršrutą</string>
     <string name="map_load_track_wait">Įkeliamas asmeninis kelias/maršrutas fone…</string>
-    <string name="map_load_track_confirm">Perrašyti esamą asmenini kelią/maršrutą?</string>
     <plurals name="load_track_success">
         <item quantity="one">Įkeltas asmeninis kelias/maršrutas (%d papildomas taškas)</item>
         <item quantity="few">Įkeltas asmeninis kelias/maršrutas (%d papildomi taškai)</item>
@@ -1860,8 +1851,7 @@
         <item quantity="other">Įkeltas asmeninis kelias/maršrutas (%d papildomi taškai)</item>
     </plurals>
     <string name="load_track_error">Klaida įkeliant asmenini kelią/maršrutą</string>
-    <string name="map_unload_track">Įkelti asmeninį kelią/maršrutą</string>
-    <string name="center_on_track">Centruoti į asmenini kelią/maršrutą</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_ft">pėdos</string>
     <string name="unit_yd">jardai</string>
@@ -1909,7 +1899,6 @@
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Atsisiųsti žemėlapį naudojimui neprisijungus</string>
     <string name="download_title">Parsisiųsti failą</string>
-    <string name="downloadmap_choose">Pasirinkite žemėlapį</string>
     <string name="downloadmap_filename">Parsisiunčiama %s</string>
     <string name="downloadmanager_not_available">Failo atsisiųsti negalima, sistemos atsisiuntimo tvarkyklė nepasiekiama</string>
     <string name="download_started">Parsiunčiama fone</string>
