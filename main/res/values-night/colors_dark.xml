@@ -11,7 +11,6 @@
     <color name="colorTextHintActionBar">@color/colorTextHint</color>
 
     <color name="colorBackground">#FF141414</color>
-    <color name="colorBackgroundNotice">#FF191919</color>
     <color name="colorBackgroundTransparent">#44000000</color>
     <color name="colorBackgroundDialog">#FF353535</color>
     <color name="colorBackgroundSelected">#FF444444</color>
