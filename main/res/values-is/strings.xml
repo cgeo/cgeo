@@ -120,7 +120,6 @@
     <string name="err_server_ec">Næ ekki sambandi við Extremcaching.com. Síðan gæti legið niðri eða tækið ekki nettengt.</string>
     <string name="err_server_gk">Gat ekki náð sambandi við GeoKrety.org. Vefsíðan gæti legið niðri eða internet tengingin þín virkar ekki.</string>
     <string name="err_login">Engar innskráningarupplýsingar vistaðar</string>
-    <string name="err_login_failed_toast">c:geo getur ekki tengs. Vistuð cache virka í c:geo án netsambands. Athugaðu innskráningarstillingu eða opnaðu fyrir netsamband.</string>
     <string name="err_missing_auth">Ekkert notandanafn og/eða lykilorð skráð</string>
     <string name="err_wrong">Rangt notandanafn og/eða lykilorð</string>
     <string name="err_maintenance">Geocaching.com liggur niðri vegna viðhalds. Vistuð cache virka í c:geo án netsambands.</string>
@@ -184,7 +183,6 @@
     <string name="menu_about">Um c:geo</string>
     <string name="menu_settings">Stillingar</string>
     <string name="menu_history">Saga</string>
-    <string name="menu_filter">Sía</string>
     <!-- main screen -->
     <string name="live_map_button">Virkt kort</string>
     <string name="caches_nearby_button">Í nánd</string>
@@ -710,6 +708,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_ft">fet</string>
     <string name="unit_mi">mílur</string>
