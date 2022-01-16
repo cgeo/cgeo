@@ -293,11 +293,11 @@ public final class Formula {
         NUMBERS.add((int) ',');
     }
 
-    public static Formula compile(final String expression) {
+    public static Formula compile(final String expression) throws FormulaException {
         return compile(expression, 0, null);
     }
 
-    public static Formula compile(final String expression, final int startPos, final KeyableCharSet stopChars) {
+    public static Formula compile(final String expression, final int startPos, final KeyableCharSet stopChars) throws FormulaException {
         final KeyableCharSet stopCharSet = stopChars == null ? KeyableCharSet.EMPTY : stopChars;
         final String cacheKey = expression + "-" + startPos + "-" + stopCharSet.getKey();
         final Pair<Formula, FormulaException> entry = FORMULA_CACHE.get(cacheKey);
