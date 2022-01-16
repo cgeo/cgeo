@@ -141,7 +141,6 @@
     <string name="err_server_ec">אין אפשרות ליצור קשר עם Extremcaching.com. אתר האינטרנט עשוי להיות לא זמין או שחיבור האינטרנט שלך אינו פועל.</string>
     <string name="err_server_gk">אין אפשרות ליצור קשר עם GeoKrety.org. אתר האינטרנט עשוי להיות למטה או את החיבור שלך לאינטרנט אינו פועל.</string>
     <string name="err_login">אין מידע התחברות שמור</string>
-    <string name="err_login_failed_toast">C:geo לא מצליחה להתחבר.C:geo עובד ללא חיבור לרשת עם מטמונים שמורים. בדוק את הגדרות החיבור או אפשר חיבור לאינטרנט.</string>
     <string name="err_unknown_address">לc:geo לא היתה אפשרות למפות כתובת זו</string>
     <string name="err_missing_auth">לא הוגדרו שם המשתמש והסיסמה</string>
     <string name="err_wrong">שם משתמש ו/או סיסמה שגויים</string>
@@ -244,7 +243,6 @@
     <string name="menu_settings">הגדרות</string>
     <string name="menu_backup">גיבוי / שחזור</string>
     <string name="menu_history">היסטוריה</string>
-    <string name="menu_filter">מסנן</string>
     <!-- main screen -->
     <string name="live_map_button">מפה</string>
     <string name="caches_nearby_button">בסמוך</string>
@@ -482,11 +480,10 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
-    <string name="individual_track">מסלול GPX</string>
     <string name="map_load_track">לטעון מסלול מ-GPX</string>
     <string name="map_load_track_wait">טוען מסלול ברקע…</string>
-    <string name="map_load_track_confirm">להחליף מסלול קיים?</string>
     <string name="load_track_error">שגיאה בטעינת מסלול</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->
