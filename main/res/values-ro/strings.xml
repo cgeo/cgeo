@@ -173,7 +173,6 @@
     <string name="err_server_ec">Extremcaching.com nu poate fi contactat. Probabil că site-ul sau conexiunea la internet nu funcţionează.</string>
     <string name="err_server_gk">GeoKrety.org nu poate fi contactat. Conexiunea la internet nu funcţionează sau site-ul s-ar putea să fie indisponibil momentan.</string>
     <string name="err_login">Nu există informaţii de autorizare</string>
-    <string name="err_login_failed_toast">c:geo nu se poate conecta. c:geo va funcţiona deconectat cu cutiile salvate local. Verifică informaţiile de autentificare sau activează conexiunea la internet.</string>
     <string name="err_unknown">Eroare necunoscută. Vă rugăm să consultați <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> pentru îndrumare.</string>
     <string name="err_unknown_address">c:geo nu a putut găsi coordonate pentru această adresă</string>
     <string name="err_comm">Eroare de comunicare necunoscută. Vă rugăm să consultați secțiunea de <a href="https://www.cgeo.org/faq#login-failed">Întrebări Frecvente</a> pentru îndrumare.</string>
@@ -279,7 +278,6 @@
     <string name="menu_helpers">Programe utilitare</string>
     <string name="menu_settings">Setări</string>
     <string name="menu_history">Istoric</string>
-    <string name="menu_filter">Filtru</string>
     <!-- main screen -->
     <string name="live_map_button">Harta</string>
     <string name="caches_nearby_button">În apropiere</string>
@@ -1208,7 +1206,6 @@
         <item quantity="few">Adaugă această geocutie la favorite (%d disponibile)</item>
         <item quantity="other">Adaugă această geocutie la favorite (%d disponibile)</item>
     </plurals>
-    <string name="pq_download_and_import">Importă căutare personalizată</string>
     <string name="caches_refresh_all_warning">Această acţiune poate consuma mult trafic. Eşti sigur că vrei să reîncarci toate geocutiile?</string>
     <string name="list_list_headline">Liste:</string>
     <plurals name="extract_waypoints_result">
@@ -1228,6 +1225,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_yd">zd</string>
     <!-- switch settings -->
