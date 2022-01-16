@@ -89,10 +89,33 @@ public class ManagedListAdapterTest {
         assertThat(mla.getDebugString()).isEqualTo("[gray, green]|[red, gray, blue, green]|{1=3, 0=1}");
 
         mla.addItems(1, Arrays.asList("yellow", "grape"));
-        assertThat(mla.getDebugString()).isEqualTo("[gray, grape, green]|[red, gray, blue, yellow, grape, green]|{2=5, 1=4, 0=1}");
+        assertThat(mla.getDebugString()).isEqualTo("[gray, grape, green]|[red, gray, yellow, grape, blue, green]|{2=5, 1=3, 0=1}");
 
         mla.addItems(Arrays.asList("grump", "brown"));
-        assertThat(mla.getDebugString()).isEqualTo("[gray, grape, green, grump]|[red, gray, blue, yellow, grape, green, grump, brown]|{3=6, 2=5, 1=4, 0=1}");
+        assertThat(mla.getDebugString()).isEqualTo("[gray, grape, green, grump]|[red, gray, yellow, grape, blue, green, grump, brown]|{3=6, 2=5, 1=3, 0=1}");
+    }
+
+    @Test
+    public void filterAddOrder() {
+        final TestManagedListAdapter mla = new TestManagedListAdapter();
+        mla.setOriginalItemListInsertOrderer(String::compareTo);
+        mla.addItems(Arrays.asList("A", "C"));
+        mla.setFilter(s -> false);
+        assertThat(mla.getDebugString()).isEqualTo("[]|[A, C]|{}");
+
+        //add var M at 0 -> should be BEHIND A and B
+        mla.addItem(0, "M");
+        assertThat(mla.getDebugString()).isEqualTo("[]|[A, C, M]|{}");
+
+        //make M visible, add var B at pos 0 -> should be sorted inbetween 0 and 1 and result in A,B,C,M
+        mla.setFilter("M"::equals);
+        mla.addItem(0, "B");
+        assertThat(mla.getDebugString()).isEqualTo("[M]|[A, B, C, M]|{0=3}");
+
+        //add var D at end (after visible M) -> should be put BEHIND M (NOT sorted in!)
+        mla.addItem(1, "D");
+        assertThat(mla.getDebugString()).isEqualTo("[M]|[A, B, C, M, D]|{0=3}");
+
     }
 
 

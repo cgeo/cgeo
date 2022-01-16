@@ -58,6 +58,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
     private final List<T> originalItemList = new ArrayList<>();
     private final List<T> originalItemListReadonly = Collections.unmodifiableList(originalItemList);
     private final SortedMap<Integer, Integer> itemToOriginalItemMap = new TreeMap<>((i1, i2) -> -i1.compareTo(i2));
+    private Comparator<T> originalItemListInsertOrder = null;
 
     /**
      * When subclassing {@link ManagedListAdapter}, pass an instance of Config to its default constructor
@@ -267,14 +268,32 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         }
     }
 
-    private int addItemInternal(final int pos, final Collection<T> items) {
-        int posInOriginal = 0;
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    private int addItemInternal(final int ppos, final Collection<T> items) {
+        if (items == null || items.isEmpty()) {
+            return 0;
+        }
+
+        final int pos = Math.max(0, Math.min(this.itemList.size(), ppos));
+
+        int posOrigStart = 0;
+        int posOrigEnd = originalItemList.size();
+
         if (this.itemToOriginalItemMap.containsKey(pos)) {
-            posInOriginal = originalIndex(pos);
+            posOrigStart = this.itemToOriginalItemMap.containsKey(pos - 1) ? this.itemToOriginalItemMap.get(pos - 1) + 1 : 0;
+            posOrigEnd = this.itemToOriginalItemMap.get(pos);
         } else if (this.itemToOriginalItemMap.containsKey(pos - 1)) {
             //append to end of filtered list, so after last filtered item in original list
-            posInOriginal = originalIndex(pos - 1) + 1;
+            posOrigStart = originalIndex(pos - 1) + 1;
         }
+
+        int posInOriginal = posOrigStart;
+        final T firstItem = items.iterator().next();
+        while (posInOriginal < posOrigEnd && originalItemListInsertOrder != null &&
+            originalItemListInsertOrder.compare(originalItemList.get(posInOriginal), firstItem) < 0) {
+            posInOriginal++;
+        }
+
         this.originalItemList.addAll(posInOriginal, items);
 
         int insertCount = 0;
@@ -337,6 +356,10 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                 this.notifyItemChanged(pos);
             }
         }
+    }
+
+    public void setOriginalItemListInsertOrderer(final Comparator<T> originalItemListInsertOrder) {
+        this.originalItemListInsertOrder = originalItemListInsertOrder;
     }
 
     public void setFilter(final Predicate<T> filter) {

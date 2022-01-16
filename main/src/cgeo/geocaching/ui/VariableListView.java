@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.databinding.VariableListViewBinding;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaFunction;
 import cgeo.geocaching.utils.formulas.Value;
@@ -16,8 +17,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.InputType;
-import android.text.Selection;
-import android.text.Spannable;
 import android.text.style.ForegroundColorSpan;
 import android.util.AttributeSet;
 import android.util.TypedValue;
@@ -39,10 +38,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Pattern;
@@ -135,14 +132,16 @@ public class VariableListView extends LinearLayout {
                 final String currentText = this.viewVariableFormulaText.getText().toString();
                 if (!currentText.equals(variableState.getFormulaString())) {
                     this.viewVariableFormulaText.setText(variableState.getFormulaString());
-
-                    //try to restore cursor position
-                    if (listAdapter.varFormulaCursorPositionMap.containsKey(this.varName)) {
-                        final int sel = listAdapter.varFormulaCursorPositionMap.get(this.varName);
-                        final CharSequence cs = this.viewVariableFormulaText.getText();
-                        if (cs instanceof Spannable) {
-                            Selection.setSelection((Spannable) cs, sel, sel);
-                        }
+                }
+                if (listAdapter.currentFocusKeep && Objects.equals(listAdapter.currentFocusVar, this.varName)) {
+                    // we come here if listview changed due to added view (due to filter being changed)
+                    // This might change focus unwanted to another variable's edit field.
+                    // -> Thus here we try to restore previous focus and cursorpos from previous
+                    if (!this.viewVariableFormulaText.hasFocus()) {
+                        this.viewVariableFormulaText.requestFocus();
+                    }
+                    if (this.viewVariableFormulaText.getSelectionStart() != listAdapter.currentFocusCursorPos) {
+                        ViewUtils.setSelection(this.viewVariableFormulaText, listAdapter.currentFocusCursorPos, listAdapter.currentFocusCursorPos);
                     }
                 }
             }
@@ -190,7 +189,10 @@ public class VariableListView extends LinearLayout {
         private Action2<String, CharSequence> varChangeCallback;
         private Consumer<VariableList> changeCallback;
 
-        private final Map<String, Integer> varFormulaCursorPositionMap = new HashMap<>();
+        //save and restore focus and cursorpos on view change
+        private String currentFocusVar;  // variable whose formula field curently/last had focus
+        private int currentFocusCursorPos; // cursor pos for formula field with current focus
+        private boolean currentFocusKeep; //if false then focus is captured, if true then focus is restored
 
         private VariablesListAdapter(final RecyclerView recyclerView) {
             super(new Config(recyclerView)
@@ -198,6 +200,7 @@ public class VariableListView extends LinearLayout {
                 .setSupportDragDrop(true));
             this.recyclerView = recyclerView;
             setDisplay(DisplayType.ADVANCED, 1);
+            setOriginalItemListInsertOrderer((s1, s2) -> TextUtils.COLLATOR.compare(s1.getVar(), s2.getVar()));
         }
 
         public void setChangeCallback(final Consumer<VariableList> changeCallback) {
@@ -230,7 +233,13 @@ public class VariableListView extends LinearLayout {
             }
 
             this.visibleVariables.addAll(newVars);
+
+            this.currentFocusKeep = true;
             this.setFilter(d -> this.visibleVariables.contains(d.getVar()), true);
+            //recyclerview processes notifications not immediately but instead puts actions on ui thread
+            //-> put setting back currentFocusKeep on ui thread as well so it is done after this update
+            this.recyclerView.post(() -> this.currentFocusKeep = false);
+
             filterEnabled = true;
         }
 
@@ -290,13 +299,22 @@ public class VariableListView extends LinearLayout {
             if (viewHolder.viewVariableFormulaText != null) {
                 viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s ->  {
                     if (textListeningActive) {
-                        varFormulaCursorPositionMap.put(viewHolder.getVar(), viewHolder.viewVariableFormulaText.getSelectionStart());
                         changeFormulaFor(viewHolder.getBindingAdapterPosition(), s.toString());
                         if (this.varChangeCallback != null) {
                             this.varChangeCallback.call(viewHolder.getVar(), s);
                         }
+                        this.currentFocusCursorPos = viewHolder.viewVariableFormulaText.getSelectionStart();
+                        Log.d("[FOCUS-TL]Focus changed to " + currentFocusVar + ":" + currentFocusCursorPos);
                     }
                 }));
+
+                viewHolder.viewVariableFormulaText.setOnFocusChangeListener((v, f) -> {
+                    if (f && !currentFocusKeep) {
+                        this.currentFocusVar = viewHolder.getVar();
+                        this.currentFocusCursorPos = viewHolder.viewVariableFormulaText.getSelectionStart();
+                        Log.d("[FOCUS]Focus changed to " + currentFocusVar + ":" + currentFocusCursorPos);
+                    }
+                });
             }
 
             if (viewHolder.viewButtonFunction != null) {

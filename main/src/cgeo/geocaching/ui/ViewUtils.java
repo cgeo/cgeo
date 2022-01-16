@@ -18,6 +18,8 @@ import android.graphics.Canvas;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.text.Editable;
+import android.text.Selection;
+import android.text.Spannable;
 import android.text.TextWatcher;
 import android.text.method.ScrollingMovementMethod;
 import android.util.Pair;
@@ -438,6 +440,13 @@ public class ViewUtils {
             }
         };
 
+    }
+
+    public static void setSelection(final TextView tv, final int start, final int end) {
+        final CharSequence cs = tv.getText();
+        if (cs instanceof Spannable) {
+            Selection.setSelection((Spannable) cs, start, end);
+        }
     }
 
     /**
