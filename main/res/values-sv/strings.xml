@@ -200,7 +200,6 @@
     <string name="err_server_su">Misslyckades att ansluta till Geocaching.su. Hemsidan kan vara ur funktion eller så är det problem med din anslutning till Internet.</string>
     <string name="err_server_gk">Det gick inte att kontakta GeoKrety.org. Webbplatsen kan vara nere eller så fungerar inte din internet-anslutning.</string>
     <string name="err_login">Inloggningsinformationen ej sparad</string>
-    <string name="err_login_failed_toast">Tyvärr kan c:geo inte logga in. c:geo kommer att köra i offline läge med sparade cacher. Kontrollera dina inloggningsuppgifter och aktivera din internetanslutning.</string>
     <string name="err_unknown">Okänt fel: Vänligen läs i vår <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> för tips och hjälp.</string>
     <string name="err_unknown_address">c:geo kunde inte associera adressen till en plats</string>
     <string name="err_comm">Okänt kommunikationsfel: Vänligen läs i vår <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> för tips och hjälp.</string>
@@ -291,7 +290,6 @@
     <string name="info_select_logimage_cancelled">Val av bild avbröts.</string>
     <string name="info_cache_saved">Cachen har lagrats lokalt</string>
     <string name="warn_calculator_state_save">Glöm inte att spara punkten om du vill behålla kalkylatorläget.</string>
-    <string name="feature_info_offline_counter">Du har några cacher med en offline sparad logg, som kanske ännu inte loggats online. För din bekvämlighet visas dessa loggar som \"+ x\" efter ditt antal hittade cacher i sidfoten på c:geos huvudsida. \n\nDessutom kommer dessa \"x\"-loggar att läggas till i mallen \"NUMBER\" som du kan använda i din loggsignatur. \n\nOm du inte gillar detta räknartillägg, kan du inaktivera det under \"Inställningar\" &gt; \"Loggning\" och/eller använda mallen \"ONLINENUM\" / \"Nummer (utan offline-loggar)\" istället. \n\nFör att enkelt hitta kvarvarande offline-loggar, gå till listan \"Historik\" och filtrera på \"Med personlig info\" &gt; \"Med offlinelogg\".</string>
     <string name="err_trackable_log_not_anonymous">Loggning av %1$s från c:geo kan inte göras anonymt. Vill du öppna inställningarna för att fylla i din inloggningsinformation från %2$s?</string>
     <string name="err_trackable_no_preference_activity">Tyvärr kan inte en lämplig inställningsskärm hittas.</string>
     <string name="confirm_unsaved_changes_title">Osparade ändringar</string>
@@ -323,11 +321,9 @@
     <string name="menu_update">Uppdatera offlinedata</string>
     <string name="menu_update_routingdata">Ruttberäkningsdata</string>
     <string name="menu_update_mapdata">Kartdata</string>
-    <string name="menu_dashboard">Inloggningspanel</string>
     <string name="menu_history">Hittade cacher</string>
     <string name="menu_search_clipboard">Ladda geocode från urklipp</string>
     <string name="menu_history_longstring">\"Hittat\" historik</string>
-    <string name="menu_filter">Filtrera</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bokmärkeslista</string>
     <string name="menu_invert_order">Omvänd sortering</string>
@@ -345,7 +341,6 @@
     <string name="caches_more_caches_no">Inga fler cacher att ladda</string>
     <string name="caches_more_caches_loading">Laddar fler cacher…</string>
     <string name="caches_more_caches_currently">nu</string>
-    <string name="caches_more_caches_next_x">Ladda nästa %1$d cacher</string>
     <string name="caches_more_caches_remaining">Ladda återstående cacher (%1$d / %2$d)</string>
     <string name="caches_downloading">Laddar ner cacher…\nTid kvar: </string>
     <string name="caches_eta_ltm">mindre än en minut</string>
@@ -727,7 +722,6 @@
     <string name="init_address">Adress/koordinater</string>
     <string name="init_summary_address">Visa adress istället för koordinater på startsidan</string>
     <string name="init_select_language">Välj språk</string>
-    <string name="init_summary_select_language">Välj språk i appen (kräver omstart)\n</string>
     <string name="init_use_default_language">Använd standardspråk</string>
     <string name="init_showwaypoints">Visa vägpunkter</string>
     <string name="init_showwaypoint_description">Gräns för antal cacher där extra punkter (parkering eller tillagd lösning) börjar visas i kartan.</string>
@@ -834,7 +828,6 @@
     <string name="settings_readingerror">Fel vid läsning av inställningar</string>
     <string name="settings_restart">c:geo måste startas om nu för att få igång laddade inställningar</string>
     <string name="settings_folder_changed">Mappen%1$s\" kommer att ändras till \"%2$s\" under återställning.\n\nTryck på \"%4$s\" för att fortsätta. I så fall blir du ombedd att ge c:geo åtkomst till mappen.\n\nTryck på \"%3$s\" för att behålla den aktuella mappinställningen istället.</string>
-    <string name="settings_file_changed">\"%1$s\" kommer att ändras till \"%2$s\" under återställning.\n\nTryck på \"%4$s\" för att fortsätta. I så fall blir du ombedd att ge c:geo åtkomst till den filen.\n\nTryck på \"%3$s\" för att behålla den aktuella inställningen istället.</string>
     <string name="settings_info_offline_maps_title">Info om Offline-kartor</string>
     <string name="settings_info_offline_maps">c:geo stöder kartor för offline-användning. Du kan få kartor från olika leverantörer eller till och med skapa egna kartor (från OSM-data). Först måste du välja den mapp där offline-kartor ska lagras.</string>
     <string name="settings_info_themes_title">Info om kartteman</string>
@@ -1391,7 +1384,6 @@
     <string name="map_showwp_original">Ursprunglig</string>
     <string name="map_showwp_parking">Parkering</string>
     <string name="map_showwp_visited">Besökt</string>
-    <string name="map_show_track">GPX-spår/rutt</string>
     <string name="init_renderthemefolder_synctolocal">Synkronisera teman</string>
     <string name="init_summary_renderthemefolder_synctolocal">Detta synkroniserar dina teman till en privat mapp för appen för att förbättra kartvisarens öppningsprestanda på bekostnad av visst lagringsutrymme.</string>
     <string name="init_renderthemefolder_synctolocal_dialog_title">Slå på synkronisering av mapp med teman</string>
@@ -1446,8 +1438,6 @@
     <string name="search_filter">Filtrera</string>
     <string name="search_filter_button">Sök med filter</string>
     <string name="search_filter_info_message" formatted="false">**Sök med filter** söker efter cacher på alla aktiva onlinetjänster (t.ex. geocaching.com) med angivet filter. Ofta är sökfunktionerna för dessa tjänster mer begränsade än filterfunktionerna i c:geo.\n\n- Alla tjänster stöder AND filter (inga OR filter och inga inverterade filter).\n- De mer grundläggande filtren som **cachetyp** eller **cachestorlek** stöds av alla tjänster. Mer komplicerade filter stöds ofta inte eller har vissa begränsningar, t.ex. **favoriter** eller **gömd datum**.\n- En detaljerad lista över filter som stöds per tjänst finns [here](https://github. om/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilter som inte stöds av onlinetjänsten kommer att tillämpas av c:geo på de mottagna resultaten.</string>
-    <string name="search_filter_temporary_user_information_title">Nytt ramverk för filter</string>
-    <string name="search_filter_temporary_user_information">c:geo har infört ett nytt filtreringssystem som stöder flexibla, kombinerbara och lagringsbara filter. \n\nDet globala filtret kan från och med nu ändras direkt i cachelistor och live-kartan.</string>
     <string name="search_tb">Trackables</string>
     <string name="search_tb_hint">Identifiering av trackable</string>
     <string name="search_tb_button">Sök efter trackable</string>
@@ -1929,7 +1919,6 @@
         <item quantity="one">Ange %d cache-ikon</item>
         <item quantity="other">Ange %d cache-ikoner</item>
     </plurals>
-    <string name="pq_download_and_import">Importera Pocket Query</string>
     <string name="caches_refresh_all_warning">Denna åtgärd kan leda till hög datatrafik. Vill du verkligen batch-uppdatera alla cachar?</string>
     <string name="list_list_headline">Listor:</string>
     <plurals name="extract_waypoints_result">
@@ -1991,21 +1980,17 @@
         <item quantity="one">Rutten lästes in med %d punkt</item>
         <item quantity="other">Rutten lästes in med %d punkter</item>
     </plurals>
-    <string name="center_on_route">Centrera på rutt</string>
     <string name="individual_route_set_as_start_title">Ange som ruttstart</string>
     <string name="individual_route_set_as_start_message">Ange detta objekt som ruttstart och flytta alla efterföljande objekt till toppen av den aktuella rutten?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX-spår/rutt</string>
     <string name="map_load_track">Ladda spår/rutt från GPX</string>
     <string name="map_load_track_wait">Laddar spår/rutt i bakgrunden…</string>
-    <string name="map_load_track_confirm">Vill du skriva över befintligt spår/rutt?</string>
     <plurals name="load_track_success">
         <item quantity="one">Spår/rutt laddad (%d punkt)</item>
         <item quantity="other">Spår/rutt laddad (%d punkter)</item>
     </plurals>
     <string name="load_track_error">Fel uppstod när spåret/rutten laddades</string>
-    <string name="map_unload_track">Ta bort spår/rutt</string>
-    <string name="center_on_track">Centrera på spår/rutt</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Av</string>
@@ -2051,7 +2036,6 @@
     <string name="downloadmap_title">Ladda ner kartor för användning offline</string>
     <string name="download_title">Ladda ned fil</string>
     <string name="downloadmap_info">Välj en kartfil för din region genom att trycka på \"Spara\"-ikonen.\n\nNedladdningen sker i bakgrunden. När överföringen är klar kopieras filen till mappen c:geo och anges som den aktuella kartan.\n\nVar försiktig: Att ladda ner en karta kan orsaka hög nätverkstrafik!</string>
-    <string name="downloadmap_choose">Välj karta</string>
     <string name="downloadmap_filename">Laddar ner %s</string>
     <string name="downloadmanager_not_available">Filen kan inte laddas ner, systemets komponent för nerladdning är inte tillgänglig</string>
     <string name="download_started">Nerladdningen startar i bakgrunden</string>
