@@ -198,7 +198,6 @@
     <string name="err_server_su">Kan ikke forbinde til Geocaching.su. Serveren kan være nede eller din enhed mangler forbindelse til Internettet.</string>
     <string name="err_server_gk">Kan ikke oprette forbindelse til GeoKrety.org. Hjemmesiden kan være nede eller internetforbindelsen fungerer ikke.</string>
     <string name="err_login">Loginoplysninger mangler</string>
-    <string name="err_login_failed_toast">c:geo kan ikke logge ind. c:geo fungerer offline med gemte cacher. Kontrollér login-indstillingerne eller aktivér din Internetforbindelse.</string>
     <string name="err_unknown">Ukendt fejl. Se <a href="https://www.cgeo.org/faq#login-failed">Ofte Stillede Spørgsmål</a> for hjælp til fejlsøgning.</string>
     <string name="err_unknown_address">c:geo kunne ikke tilknytte denne adresse til en eksisterende placering</string>
     <string name="err_comm">Ukendt kommunikationsfejl. Se <a href="https://www.cgeo.org/faq#login-failed">Ofte Stillede Spørgsmål</a> for hjælp til fejlsøgning.</string>
@@ -289,7 +288,6 @@
     <string name="info_select_logimage_cancelled">Valg af billede eller foto blev afbrudt.</string>
     <string name="info_cache_saved">Cachen blev gemt lokalt</string>
     <string name="warn_calculator_state_save">Husk at gemme rutepunkt, hvis du vil beholde lommeregnerens tilstand.</string>
-    <string name="feature_info_offline_counter">Du har offline logs på telefonen/tabletten, som muligvis ikke er overført til Geocaching.com. Disse logs er vist som \"+ x\" forneden på c:geo hovedskærmen.\n\nDisse logs bliver også talt med i \"NUMBER\"-feltet, som du kan bruge i din log-signatur.\n\nHvis du ikke vil have disse logs markeret, kan du slå det fra under \"Indstillinger\" &gt; \"Logning\", og du kan bruge \"Antal fund (uden offline logs)\"-feltet.\n\nDu kan finde disse offline logs ved at gå i listen \"Historik\" og filtrere efter \"Med personlige data\" &gt; \"med offline log\".</string>
     <string name="err_trackable_log_not_anonymous">Logning af %1$s kan ikke udføres anonymt fra c:geo. Ønsker du at konfigurere dine legitimationsoplysninger til %2$s?</string>
     <string name="err_trackable_no_preference_activity">Der findes ingen egnet indstillingsskærm.</string>
     <string name="confirm_unsaved_changes_title">Ikke-gemte ændringer</string>
@@ -323,7 +321,6 @@
     <string name="menu_update_mapdata">Kortdata</string>
     <string name="menu_history">Historik</string>
     <string name="menu_history_longstring">Fund-historik</string>
-    <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
     <string name="menu_lists_bookmarklists">Bogmærkelister</string>
     <string name="menu_invert_order">Omvendt rækkefølge</string>
@@ -340,7 +337,6 @@
     <string name="caches_more_caches_no">Ikke flere cacher</string>
     <string name="caches_more_caches_loading">Indlæser cacher…</string>
     <string name="caches_more_caches_currently">indlæst</string>
-    <string name="caches_more_caches_next_x">Indlæs næste %1$d caches</string>
     <string name="caches_more_caches_remaining">Indlæs resterende caches (%1$d / %2$d)</string>
     <string name="caches_downloading">Indlæser cacher…\nETA: </string>
     <string name="caches_eta_ltm">Under et minut</string>
@@ -649,7 +645,6 @@
     <string name="init_address">Vis adresse på hovedskærm</string>
     <string name="init_summary_address">Vis adresse på hovedskærm</string>
     <string name="init_select_language">Vælg sprog</string>
-    <string name="init_summary_select_language">Vælg sproget i appen (kræver genstart)\n</string>
     <string name="init_use_default_language">Brug standardsprog</string>
     <string name="init_showwaypoint_description">Hvis der vises færre end dette antal cacher på kortet, vil de tilhørende rutepunkter også blive vist.</string>
     <string name="init_zoomincludingwaypoints">Medtag alle rutepunkter i zoom</string>
@@ -1629,7 +1624,6 @@
         <item quantity="one">Tilføj denne cache til favoritter (%d resterende)</item>
         <item quantity="other">Tilføj denne cache til favoritter (%d resterende)</item>
     </plurals>
-    <string name="pq_download_and_import">Importér Pocket Query</string>
     <string name="caches_refresh_all_warning">Denne handling kan medføre en stor mængde netværkstrafik. Er du sikker på at du vil genindlæse alle cacher?</string>
     <string name="list_list_headline">Lister:</string>
     <plurals name="extract_waypoints_result">
@@ -1679,21 +1673,17 @@
         <item quantity="one">Rute indlæst med %d rutepunkter</item>
         <item quantity="other">Rute indlæst med %d rutepunkter</item>
     </plurals>
-    <string name="center_on_route">Centrér på ruten</string>
     <string name="individual_route_set_as_start_title">Angiv som rutestart</string>
     <string name="individual_route_set_as_start_message">Start ruten ved dette punkt og flyt alle følgende punkter til starten af denne rute?</string>
     <!-- individual track -->
-    <string name="individual_track">GPX spor/rute</string>
     <string name="map_load_track">Indlæs spor/rute fra GPX</string>
     <string name="map_load_track_wait">Indlæser spor/rute i baggrunden…</string>
-    <string name="map_load_track_confirm">Overskriv eksisterende spor/rute?</string>
     <plurals name="load_track_success">
         <item quantity="one">Spor/rute indlæst (%d rutepunkt)</item>
         <item quantity="other">Spor/rute indlæst (%d rutepunkter)</item>
     </plurals>
     <string name="load_track_error">Fejl ved indlæsning af spor/rute</string>
-    <string name="map_unload_track">Fjern spor/rute</string>
-    <string name="center_on_track">Centrér på spor/rute</string>
+    <!-- route/track commons -->
     <!-- distance units -->
     <string name="unit_ft">fod</string>
     <string name="unit_yd">yards</string>
@@ -1729,7 +1719,6 @@
     <!-- ReceiveDownloadActivity -->
     <!-- Download map preference and menu entry -->
     <string name="downloadmap_title">Hent kort til offline brug</string>
-    <string name="downloadmap_choose">Vælg kort</string>
     <string name="downloadmap_filename">Henter %s</string>
     <string name="download_started">Download kører i baggrunden</string>
     <string name="downloadmap_allow_metered_network">Tillad download via forbrugsbaseret netværk (f.eks. mobilforbindelse)</string>
