@@ -2,8 +2,6 @@
 <resources>
 
     <dimen name="actionbar_height">45dip</dimen>
-    <dimen name="actionbar_separator_height">37dip</dimen>
-    <dimen name="actionbar_separator_width">2dip</dimen>
 
     <dimen name="radioButtonCheckboxPreferredItemHeight">32dp</dimen>
 
@@ -13,15 +11,14 @@
 
     <dimen name="equation_name_width">40dip</dimen>
 
-    <dimen name="dialog_padding_horizontal">24dip</dimen>
-
     <!-- fastscroll extra padding -->
     <dimen name="paddingRight_fastscroll">5dp</dimen>
 
+    
     <!-- font size dimensions ====================================== -->
 
     <!-- all toolbars except main screen -->
-    <!-- (we explicitly use dp for toolbar to avoid cuts offs and follow material guidelines) -->
+    <!-- (we explicitly use dp for toolbar to avoid cut offs and follow material guidelines) -->
     <dimen name="textSize_toolbarPrimary">20dp</dimen>
     <dimen name="textSize_toolbarSecondary">18dp</dimen>
 
@@ -51,11 +48,11 @@
 
     <!-- text input fields -->
     <dimen name="textSize_textinputPrimary">18sp</dimen>
-    <dimen name="textSize_textinputSecondary">16sp</dimen>
 
     <!-- all other text -->
     <dimen name="textSize_detailsPrimary">16sp</dimen>
     <dimen name="textSize_detailsSecondary">14sp</dimen>
+
 
     <!-- button size dimensions ====================================== -->
     <dimen name="buttonSize_iconButton">45dp</dimen>
