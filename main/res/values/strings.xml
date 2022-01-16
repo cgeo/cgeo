@@ -215,7 +215,6 @@
     <string name="err_server_su">Unable to contact Geocaching.su. The website may be down or your internet connection not working.</string>
     <string name="err_server_gk">Unable to contact GeoKrety.org. The website may be down or your internet connection not working.</string>
     <string name="err_login">No Login information stored</string>
-    <string name="err_login_failed_toast">c:geo can\'t log in. c:geo works offline with Stored caches. Check Login settings or enable your internet connection.</string>
     <string name="err_unknown">Unknown error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
     <string name="err_unknown_address">c:geo was unable to map this address to an existing location</string>
     <string name="err_comm">Unknown communication error. Please refer to our <a href="https://www.cgeo.org/faq#login-failed">FAQ</a> for guidance.</string>
@@ -306,7 +305,6 @@
     <string name="info_select_logimage_cancelled">Image selection or capture was cancelled.</string>
     <string name="info_cache_saved">The cache has been stored locally</string>
     <string name="warn_calculator_state_save">Be sure to save waypoint if you want to keep the calculator state.</string>
-    <string name="feature_info_offline_counter">You have some caches with an offline saved log, which might not yet be logged online. For your comfort the count of these logs is displayed as \"+ x\" behind your number of found caches in the footer at c:geo\'s main page. \n\nMoreover these \"x\" logs will be added to the \"NUMBER\" template you might use in your log signature. \n\nIf you don\'t like this counter extension, you can disable it under \"Settings\" > \"Logging\" and/or use the \"NUMBER (without offline logs)\" template instead. \n\nTo easily find remaining offline logs, go to the list \"History\" and filter for \"With personal data\" > \"With offline log\".</string>
     <string name="err_trackable_log_not_anonymous">Logging %1$s from c:geo cannot be done anonymously. Do you want to open the settings to fill in your credentials from %2$s?</string>
     <string name="err_trackable_no_preference_activity">Sorry, cannot find a suitable preference screen.</string>
     <string name="confirm_unsaved_changes_title">Unsaved changes</string>
@@ -342,11 +340,9 @@
     <string name="menu_update">Update offline data</string>
     <string name="menu_update_routingdata">Routing data</string>
     <string name="menu_update_mapdata">Map data</string>
-    <string name="menu_dashboard">Login dashboard</string>
     <string name="menu_history">History</string>
     <string name="menu_search_clipboard">Load geocode from clipboard</string>
     <string name="menu_history_longstring">Finds history</string>
-    <string name="menu_filter">Filter</string>
     <string name="menu_lists_pocket_queries">Pocket queries</string>
     <string name="menu_lists_bookmarklists">Bookmark lists</string>
     <string name="menu_invert_order">Invert order</string>
@@ -818,7 +814,6 @@
     <string name="init_address">Show Address</string>
     <string name="init_summary_address">Show address instead of coordinates on main screen</string>
     <string name="init_select_language">Select language</string>
-    <string name="init_summary_select_language">Select in-app language (requires restart)\n</string>
     <string name="init_use_default_language">Use default language</string>
     <string name="init_showwaypoints">Show waypoints</string>
     <string name="init_showwaypoint_description">If less than the given amount of caches are displayed on the map, their waypoints are shown additionally.</string>
@@ -1617,8 +1612,6 @@
     <string name="search_filter">Filter</string>
     <string name="search_filter_button">Search by filter</string>
     <string name="search_filter_info_message" formatted="false">**Search by filter** searches caches on all active online services (e.g. geocaching.com) using a provided filter. However, search capabilities of these services are usually more limited than filter capabilities of c:geo.\n\n- All services only support AND filters (no OR filters and no filter inversion).\n- The more basic filters like **cache type** or **cache size** are supported by all services. More complicated filters are often not supported or have some restrictions e.g. **favorites** or **hidden date**.\n- A detailed list on supported filters per service can be found [here](https://github.com/cgeo/cgeo/wiki/%22Search-by-Filter%22-support-by-c:geo-Connectors).\n\nFilters not supported by the online service will be applied by c:geo on the received results.</string>
-    <string name="search_filter_temporary_user_information_title">New filter framework</string>
-    <string name="search_filter_temporary_user_information">c:geo has introduced a new filtering system, supporting flexible, combinable and storable filters. \n\nThe global filter can from now on be changed directly in cache lists and the live map.</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable identification</string>
     <string name="search_tb_button">Search for trackable</string>
@@ -2019,7 +2012,6 @@
     <string name="cat_permissions">Permissions</string>
 
     <!-- cache attribute sources -->
-    <string name="attribute_source_all">All</string>
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
 
@@ -2170,7 +2162,6 @@
         <item quantity="other">Set %d cache icons</item>
     </plurals>
 
-    <string name="pq_download_and_import">Import Pocket query</string>
     <string name="caches_refresh_all_warning">This action may lead to high network traffic. Are you sure you want to batch refresh all caches?</string>
 
     <string name="list_list_headline">Lists:</string>
@@ -2251,12 +2242,10 @@
         <item quantity="many">Route loaded with %d route points</item>
         <item quantity="other">Route loaded with %d route points</item>
     </plurals>
-    <string name="center_on_route">Center on route</string>
     <string name="individual_route_set_as_start_title">Set as route start</string>
     <string name="individual_route_set_as_start_message">Set this item as route start and move all subsequent items to the top of the current route?</string>
 
     <!-- individual track -->
-    <string name="individual_track">GPX track/route</string>
     <string name="map_load_track">Load track/route from GPX</string>
     <string name="map_load_track_wait">Loading track/route in background…</string>
     <string name="map_load_track_confirm">Overwrite existing track/route?</string>
@@ -2269,8 +2258,6 @@
         <item quantity="other">Track/route loaded (%d trackpoints)</item>
     </plurals>
     <string name="load_track_error">Error loading track/route</string>
-    <string name="map_unload_track">Unload track/route</string>
-    <string name="center_on_track">Center on track/route</string>
 
     <!-- distance units -->
     <string name="unit_m">m</string>
@@ -2328,7 +2315,6 @@
     <string name="downloadmap_title">Download offline map</string>
     <string name="download_title">Download file</string>
     <string name="downloadmap_info">Select a map file for your region by tapping the \"Save\" icon.\n\nThe download is performed in the background. When the transfer is complete, the file is copied to the c:geo map folder and set as the current map.\n\nBe careful: Downloading a map can cause high network traffic!</string>
-    <string name="downloadmap_choose">Choose map</string>
     <string name="downloadmap_filename">Downloading %s</string>
     <string name="downloadmanager_not_available">File cannot be downloaded, system download manager not available</string>
     <string name="download_started">Downloading started in background</string>
