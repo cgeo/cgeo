@@ -56,9 +56,8 @@
         <ignore path="res/drawable/marker_rating_*.xml" />
         <ignore regexp="R\.color\.marker_rating_[0-5]{1,2}" />
 
-        <!-- other -->
+        <!-- defined in build.gradle android.buildTypes.manifestPlaceholders -->
         <ignore path="res/*/ic_launcher_*round.xml" />
-        <ignore path="res/values/vpi__colors.xml" />
     </issue>
 
     <issue id="MissingDefaultResource" severity="informational"/>
