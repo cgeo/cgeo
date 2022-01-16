@@ -132,7 +132,6 @@
     <string name="err_server_ec">Hindi nakakontak ang Geocaching.com. Maaaring bumaba ang website o ang iyong koneksyon sa internet ay hindi gumagana.</string>
     <string name="err_server_gk">Hindi nakakontak ang Geocaching.com. Maaaring bumaba ang website o ang iyong koneksyon sa internet ay hindi gumagana.</string>
     <string name="err_login">Walang naka-imbak na impormasyon sa pag-login</string>
-    <string name="err_login_failed_toast">ang c:geo ay hindi maka log in. c:geo ay gumagana sa offline sa pag istor ng caches. Suriin ang pagkakasayos ng pag login o pinagana ang iyong internet koneksiyon.</string>
     <string name="err_unknown_address">ang c:geo ay pinagana parai-map itong address sa kasalukuyang lokasyon</string>
     <string name="err_missing_auth">Walang gamit na pangalan at/o password na naka-ayos</string>
     <string name="err_wrong">Mali ang gamit na pangalan at/o password</string>
@@ -234,7 +233,6 @@
     <string name="menu_helpers">Ang programa tungkol sa kagamitan</string>
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang kasaysayan</string>
-    <string name="menu_filter">Ang salaan</string>
     <!-- main screen -->
     <string name="live_map_button">Ang buhay na mapa</string>
     <string name="caches_nearby_button">Kalapit</string>
@@ -1140,7 +1138,6 @@
         <item quantity="one">Idagdag ang cache na ito sa mga paborito (%d ang natitira)</item>
         <item quantity="other">Idagdag ang cache na ito sa mga paborito (%d ang natitira)</item>
     </plurals>
-    <string name="pq_download_and_import">Mag-import ng query sa pocket</string>
     <string name="caches_refresh_all_warning">Itong aksyon ay maaaring humantong sa mataas na trapiko sa network. Ikw ba ay sigurado na gusto mong i-refresh ang lahat ng mga cache?</string>
     <string name="list_list_headline">Ang mga listahan:</string>
     <plurals name="extract_waypoints_result">
@@ -1158,6 +1155,7 @@
     <!-- notification / channel texts -->
     <!-- individual routes -->
     <!-- individual track -->
+    <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
     <!-- view settings -->
