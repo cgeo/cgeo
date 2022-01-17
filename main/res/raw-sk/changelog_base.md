@@ -11,23 +11,23 @@
 
 ### Zoznam kešiek
 - Nové: Možnosť vybrať ďalších 20 kešiek
-- New: Attributes overview (see Manage Caches => Attributes overview)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
-- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
+- Nové: Prehľad atribútov (viď ponuka Spravovať kešky => Prehľad atribútov)
+- Nové; Pridanie importu zo zoznamov záložiek (len pre GC Premium)
+- Nové: Prevrátenie poradia zoradenia stlačením a podržaním panela zoradenia
+- Zmena: Robí sa aj automatické usporiadanie podľa vzdialenosti pre zoznamy obsahujúce série kešiek s viac než 50 keškami (najviac 500)
 
 ### Detaily kešky
 - Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
-- New: Colored attribute icons (following attribute groups)
+- Nové: Farebné ikony atribútov (podľa skupín atribútov)
 - Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
 
 ### Iné
 - Nové: Rýchle načítanie geokódov z textu schránky pri vyhľadávaní na hlavnej obrazovke
-- New: Added support for user-defined log templates
+- Nové: Pridaná podpora pre používateľom definovanú šablónu logu
 - Nové: Urobiť nastavenia => Zobraziť nastavenia filtrovateľné
-- New: Enable search in preferences
-- New: Added GC Wizard to useful apps list
-- New: Attributes filter: Allow selecting from which connectors attributes are shown
+- Nové: Umožnenie vyhľadávania v predvoľbách
+- Nové: Do zoznamu užitočných aplikácií pridaná aplikácia GC Wizard
+- Nové: Filtrovanie atribútov umožňuje vybrať, ktoré atribúty konektorov sa majú zobrazovať
 - New: Option to limit distance in nearby search (see Settings => Services)
 - Change: Removed barcode scanner from useful apps list and from mainscreen
 - Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
