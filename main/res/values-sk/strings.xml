@@ -724,6 +724,8 @@
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
     <string name="init_useInternalRouting">Použiť internú navigáciu</string>
     <string name="init_summary_useInternalRouting">Použitie internej navigácie c:geo, aby bolo možné využívať automatické preberanie údajov navigácie a ďalšie funkcie</string>
+    <string name="init_bigSmileysOnMap">Veľké ikony</string>
+    <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky vyžaduje reštart).</string>
     <string name="init_global_wp_extraction_disable">Zabrániť extrakcii bodu trasy</string>
     <string name="init_summary_global_wp_extraction_disable">Globálne deaktivovanie extrakcie bodu trasy z osobných poznámok pri keške. Pre jednotlivé kešky ju možno naďalej aktivovať zrušením začiarknutia políčka pod osobnou poznámkou ku keške</string>
     <string name="init_customtabs_as_browser">Použiť Chrome WebView</string>
