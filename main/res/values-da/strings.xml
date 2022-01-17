@@ -54,6 +54,7 @@
     <string name="ape_short">APE</string>
     <string name="gchq_short">GC HQ</string>
     <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Udstilling</string>
     <string name="block_short">GCHQ blokken</string>
     <string name="locationless_short">Locationless</string>
     <string name="advlab_short">Adv Lab</string>
@@ -364,6 +365,7 @@
     <string name="caches_sort_favorites">Favoritter</string>
     <string name="caches_sort_favorites_ratio">Favoritter [%]</string>
     <string name="caches_sort_name">Navn</string>
+    <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Vurdering</string>
     <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
@@ -429,8 +431,14 @@
     <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avanceret</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Skift til basisindstillenger</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Ændringer til basis-tilstans vil resultere i tab af filterindstillinger. Vil du fortsætte?</string>
+    <string name="cache_filter_add_button">Tilføj filterkriterier</string>
     <string name="cache_filter_option_and_or">Brug ELLER i stedet for OG</string>
     <string name="cache_filter_option_inverse">Omvendt Filter</string>
+    <string name="cache_filter_option_include_inconclusive">Inkludér inkonklusive matches</string>
+    <string name="cache_filter_option_include_inconclusive_info">Om cachen skal inkluderes i resultatet, når et filter behøver info på cache, som ikke er tilgængelig.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tryk på \'Tilføj filterkriterier\' ovenfor for at tilføje et filter</string>
     <string name="cache_filter_name">Cachenavn</string>
     <string name="cache_filter_type">Cachetype</string>
     <string name="cache_filter_size">Størrelse</string>
@@ -452,21 +460,31 @@
     <string name="cache_filter_location">Placering</string>
     <string name="cache_filter_stored_lists">Gemte Lister</string>
     <string name="cache_filter_origin">Oprindelse</string>
+    <string name="cache_filter_stored_since">Sidste opdatering af detaljer</string>
     <string name="cache_filtergroup_basic">Basal</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Brugerspecifik</string>
+    <string name="cache_filter_contexttype_live_title">Live Filter</string>
+    <string name="cache_filter_contexttype_offline_title">Offline Filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_include">Medtag</string>
     <string name="cache_filter_exclude">Udelad</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Ingen</string>
     <string name="cache_filter_userdisplay_not">IKKE</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d element</item>
+        <item quantity="other">%1$d element</item>
+    </plurals>
     <string name="cache_filter_storage_delete_button">Slet</string>
+    <string name="cache_filter_storage_clear_button">Ryd</string>
     <string name="cache_filter_storage_load_delete_title">Indlæs eller slet et eksisterende filter</string>
     <string name="cache_filter_storage_delete_title">Slet filter</string>
+    <string name="cache_filter_storage_delete_message">Er du sikker på, at du vil slette denne filterdefinition?</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filtre er gemt endnu.</string>
     <string name="cache_filter_storage_save_title">Gem filter med navn</string>
     <string name="cache_filter_storage_save_confirm_title">Gem filter, overskriv</string>
+    <string name="cache_filter_storage_save_confirm_message">Et filter med navnet \'%s\' og forskellige konfigurationer findes allerede. Overskriv det?</string>
     <string name="cache_filter_stringfilter_type_contains">Indeholder</string>
     <string name="cache_filter_stringfilter_type_does_not_contain">Indeholder ikke</string>
     <string name="cache_filter_stringfilter_type_starts_with">Begynder med</string>
