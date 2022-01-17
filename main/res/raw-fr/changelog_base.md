@@ -1,9 +1,9 @@
 ### Général
-- Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
+- Changement : Introduction de la navigation en bas pour un accès direct aux écrans les plus utilisés de c:géo, en remplacement de l'ancien écran principal
 
 ### Carte
-- Fix: On loading GPX files containing multiple tracks display them as separate, unconnected tracks
-- Change: Automatically enable track display on loading a GPX track file
+- Correction : Lors du chargement de fichiers GPX contenant plusieurs traces, les afficher en tant que traces indépendantes
+- Modification : Activer automatiquement l'affichage du parcours lors du chargement d'un fichier de suivi GPX
 - New: Allow displaying several tracks at once
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
@@ -11,22 +11,22 @@
 
 ### Liste des caches
 - Nouveau : Option pour sélectionner les 20 caches suivantes
-- New: Attributes overview (see Manage Caches => Attributes overview)
+- Nouveau: Aperçu des attributs (voir Gérer les caches => Aperçu des attributs)
 - Nouveauté : Ajout de l'import des signets (requiert un compte GC premium)
 - Nouveauté : Inverser le tri lors d'un clic long sur la barre de tri
-- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
+- Changement: Effectuer également un tri automatique par distance pour les listes contenant des séries de caches avec plus de 50 caches (jusqu'à 500)
 
 ### Détails de la cache
 - Nouveauté : Envoyer les coordonnées de la cache à geochecker
-- New: Colored attribute icons (following attribute groups)
-- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- Nouveau : Icônes d'attributs colorés (groupes d'attributs suivants)
+- Correction : Problème lors de l'ouverture des images depuis l'onglet Galerie dans les applications externes sur certains appareils Samsung
 
 ### Divers
-- New: Quick-load geocodes from clipboard text in mainscreen search
+- Nouveau : Charger rapidement les géocodes à partir du texte du presse-papiers dans la recherche de l'écran principal
 - New: Added support for user-defined log templates
-- New: Make Settings => View Settings filterable
-- New: Enable search in preferences
-- New: Added GC Wizard to useful apps list
+- Nouveau : Rendre les paramètres => Voir les paramètres filtrables
+- Nouveau : Activer la recherche dans les préférences
+- Nouveauté : Ajout de l'assistant GC Wizard à la liste des applications utiles
 - New: Attributes filter: Allow selecting from which connectors attributes are shown
 - New: Option to limit distance in nearby search (see Settings => Services)
 - Change: Removed barcode scanner from useful apps list and from mainscreen
@@ -35,4 +35,4 @@
 - Fix: Optimize support to autofill passwords from external password store apps in settings
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Mise à jour de l'API MapsWithMe

@@ -4,22 +4,22 @@
 ### Mappa
 - Corretto: Caricando file GPX contenenti più tracce, queste vengono visualizzate come tracce separate non collegate tra loro
 - Cambiato: Visualizzazione automatica della traccia al caricamento di un file GPX
-- New: Allow displaying several tracks at once
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Nuovo: Possibilità di visualizzare diverse tracce contemporaneamente
+- Nuovo: simboli D/T per le icone della cache (opzionale)
+- Nuovo: Opzione per controllare i dati di routing mancanti per la visualizzazione corrente
+- Nuovo: Leggenda del tema per i temi Elevate, Elements e Freizeitkarte
 
 ### Elenco dei cache
 - Nuovo: Opzione per selezionare i 20 cache succesivi
 - Novità: Panoramica degli attributi (vedi Gestisci i Cache => Panoramica degli attributi)
 - Nuovo: Aggiunta importazione da liste di segnalibri (solo utenti premium GC)
 - Nuovo: Inverti ordinamento con un tocco prolungato sulla barra di ordinamento
-- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
+- Cambio: Effettua anche l'ordinamento automatico in base alla distanza, per le liste contenenti serie di cache con più di 50 cache (fino a 500)
 
 ### Dettagli del cache
 - Nuovo: Passa le coordinate correnti del cache a geochecker (se supportato da geochecker)
-- New: Colored attribute icons (following attribute groups)
-- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- Nuovo: icone di attributi colorate (rispecchia gruppi di attributi)
+- Corretto: Problema durante l'apertura di immagini dalla scheda galleria in applicazioni esterne su alcuni dispositivi Samsung
 
 ### Altro
 - Novità: Carica rapidamente i geocode dal testo degli appunti nella ricerca nella schermata principale
@@ -27,12 +27,12 @@
 - Novità: Rendi le Impostazioni => Visualizza Impostazioni filtrabile
 - Nuovo: abilita la ricerca nelle preferenze
 - Novità: Aggiunto GC Wizard all'elenco delle app utili
-- New: Attributes filter: Allow selecting from which connectors attributes are shown
-- New: Option to limit distance in nearby search (see Settings => Services)
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Nuovo: Filtro attributi: Consente di selezionare gli attributi per cui vengono visualizzati
+- Nuovo: Opzione per limitare la distanza nella ricerca nelle vicinanze (vedere Impostazioni => Servizi)
+- Modifica: Rimosso lo scanner di codici a barre dall'elenco delle app utili e dalla schermata principale
+- Modifica: Rimosso BRouter dall'elenco delle app utili (puoi ancora usare sia la navigazione esterna che interna)
+- Corretto: Evita i controlli ripetuti degli aggiornamenti delle mappe/routing con intervallo=0
+- Corretto: Ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
+- Corretto: Abilita suggerimenti per sistemi in esecuzione su Android in versioni precedenti alla 8
+- Impostazioni ripristinate per soddisfare le attuali specifiche di Android
+- API di MapsWithMe aggiornata

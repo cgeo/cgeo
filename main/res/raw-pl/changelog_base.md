@@ -1,4 +1,4 @@
-### General
+### Ogólne
 - Change: Introducing bottom navigation for direct access to c:geo's most-used screens, replacing the old mainscreen
 
 ### Mapa
@@ -9,11 +9,11 @@
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
 
-### Cache list
-- New: Option to select next 20 caches
+### Lista skrytek
+- Nowość: Opcja wyboru następnych 20 skrytek
 - New: Attributes overview (see Manage Caches => Attributes overview)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
+- Nowość: Dodano import z list (tylko GC premium)
+- Nowość: Odwrotna kolejność sortowania po długim kliknięciu na pasek sortowania
 - Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
 
 ### Szczegóły skrytki
@@ -25,7 +25,7 @@
 - New: Quick-load geocodes from clipboard text in mainscreen search
 - New: Added support for user-defined log templates
 - New: Make Settings => View Settings filterable
-- New: Enable search in preferences
+- Nowość: Włączono wyszukiwanie w ustawieniach
 - New: Added GC Wizard to useful apps list
 - New: Attributes filter: Allow selecting from which connectors attributes are shown
 - New: Option to limit distance in nearby search (see Settings => Services)

@@ -4,10 +4,10 @@
 ### Karte
 - Korrektur: Beim Laden von GPX-Dateien mit mehreren Tracks werden diese als getrennte, nicht verbundene Tracks angezeigt
 - Änderung: Beim Laden von GPX Track-Dateien die Anzeige von Tracks automatisch aktivieren
-- New: Allow displaying several tracks at once
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Neu: Gleichzeitige Anzeige mehrerer Tracks
+- Neu: D/T-Markierungen für Cache-Symbole (optional)
+- Neu: Funktion, um nach fehlenden Routingdaten für den aktuellen Bildschirmausschnitt zu suchen
+- Neu: Design-Legende für Elevate, Elements und Freizeitkarte-Designs
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches

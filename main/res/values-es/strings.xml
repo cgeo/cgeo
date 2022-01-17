@@ -1269,8 +1269,6 @@
     <string name="cache_listed_on">Listado en %s</string>
     <string name="cache_whereyougo_start">Abre WhereYouGo para descargar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descargar e iniciar este cartucho</string>
-    <string name="cache_chirpwolf_start">Abrir Chirp Wolf para leer los datos de chirp para este caché</string>
-    <string name="cache_chirpwolf_install">Instalar Chirp Wolf para poder leer los datos de chirp</string>
     <string name="cache_alc_start">Abrir Adventure Lab para empezar a jugar esta aventura</string>
     <string name="cache_alc_install">Instalar el reproductor de Adventure Lab para jugar a esta aventura</string>
     <string name="context_share_as_text">Compartir texto</string>

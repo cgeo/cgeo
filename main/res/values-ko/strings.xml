@@ -1250,8 +1250,6 @@
     <string name="cache_listed_on">%s에 등록됨</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
-    <string name="cache_chirpwolf_start">이 캐시에 대한 처프 데이터를 읽으려면 Chirp Wolf를 엽니다.</string>
-    <string name="cache_chirpwolf_install">처프 데이터를 읽을 수 있도록 Chirp Wolf 설치하십시오</string>
     <string name="cache_alc_start">이 어드밴처를 시작하려면 어드밴처 랩 앱을 엽니다.</string>
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
     <string name="context_share_as_text">텍스트 공유</string>

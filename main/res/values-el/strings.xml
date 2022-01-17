@@ -1274,8 +1274,6 @@
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
-    <string name="cache_chirpwolf_start">Ανοίχτε το Chirp Wolf ώστε να διαβάσετε τα δεδομένα chirp της κρύπτης</string>
-    <string name="cache_chirpwolf_install">Εγκαταστήστε το Chirp Wolf ώστε να μπορείτε να διαβάσετε δεδομένα chirp</string>
     <string name="cache_alc_start">Ανοίξτε το Adventure Lab, για να αρχίσετε να παίζετε αυτή την περιπέτεια</string>
     <string name="cache_alc_install">Εγκαταστήστε τον Adventure Lab για να παίξετε αυτή την περιπέτεια</string>
     <string name="context_share_as_text">Κοινή χρήση κειμένου</string>

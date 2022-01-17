@@ -405,6 +405,7 @@
     <string name="caches_clear_offlinelogs">Vymazať offline záznamy</string>
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
+    <string name="caches_show_attributes">Zobraziť prehľad atribútov</string>
     <string name="caches_set_cache_icon">Nastaviť ikony kešky</string>
     <string name="caches_reset_cache_icons_title">Obnoviť ikony kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
@@ -702,6 +703,8 @@
     <string name="init_template_title">Názov šablóny</string>
     <string name="init_template_text">Text šablóny</string>
     <string name="init_log_template">Šablóna logu</string>
+    <string name="init_log_template_addnew">Pridať novú šablónu</string>
+    <string name="init_log_template_remove_confirm">Naozaj chcete odstrániť šablónu?</string>
     <string name="init_log_templates">Šablóny logu</string>
     <string name="init_log_template_prefix">Šablóna:\u0020</string>
     <string name="init_log_template_missing_error">Je potrebné uviesť názov aj text šablóny.</string>
@@ -747,6 +750,7 @@
     <string name="init_summary_brouterShowBothDistances">Ak je trasovanie aktívne: zobraziť priamu vzdialenosť okrem vypočítanej dĺžky trasy.</string>
     <string name="init_useInternalRouting">Použiť internú navigáciu</string>
     <string name="init_summary_useInternalRouting">Použitie internej navigácie c:geo, aby bolo možné využívať automatické preberanie údajov navigácie a ďalšie funkcie</string>
+    <string name="init_bigSmileysOnMap">Veľké ikony</string>
     <string name="init_summary_bigSmileysOnMap">Ak je to aktivované, symboly ako napríklad \"smajlík nálezu\" alebo \"upravené súradnice\" sa budú zobrazovať na mape zväčšené, namiesto ikony typu kešky.</string>
     <string name="init_dtMarkerOnCacheIcon">Hodnotenie D/T na ikonách kešiek</string>
     <string name="init_summary_dtMarkerOnCacheIcon">Zobrazenie značky pre hodnotenia Náročnosť (vľavo) a Terén (vpravo) na značení kešky v pravom hornom rohu (značka \"uložené\" je presunutá do stredu).</string>
@@ -1293,8 +1297,6 @@
     <string name="cache_listed_on">Uvedené na %s</string>
     <string name="cache_whereyougo_start">Otvorte WhereYouGo a stiahnite si a spustite cartridge</string>
     <string name="cache_whereyougo_install">Nainštalujte WhereYouGo a stiahnite si a spustite cartridge</string>
-    <string name="cache_chirpwolf_start">Otvorte Chirp Wolf a prečítajte údaje chirpu tejto kešky</string>
-    <string name="cache_chirpwolf_install">Nainštalujte Chirp Wolf a budete môcť čítať údaje chirpu</string>
     <string name="cache_alc_start">Otvorte aplikáciu Adventure Lab a začnite hrať túto adventúru</string>
     <string name="cache_alc_install">Ak chcete hrať túto adventúru, nainštalujte si aplikáciu Adventure Lab</string>
     <string name="context_share_as_text">Zdieľať text</string>
@@ -1559,6 +1561,7 @@
     <string name="helper_where_you_go_description">WhereYouGo umožňuje hľadať skrýše typu Wherigo. c:geo môže automaticky spustiť sťahovanie súborov (cartridge) cez túto aplikáciu.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf umožňuje čítať údaje z chirp tagov ANT+/Garmin, ktoré sú potrebné pre kešky ANT+/chirp.</string>
     <string name="helper_alc_description">Aplikácia Adventure Lab pre váš telefón alebo tablet.</string>
+    <string name="helper_gcwizard_description">Aplikácia GC Wizard obsahuje množstvo nástrojov na jednoduché šifrovanie, geodéziu a vedecké výpočty, ako aj stovky setov rôznych symbolov.</string>
     <!-- export -->
     <string name="share_export">Zdieľať/Export</string>
     <string name="export">Export</string>
@@ -1840,7 +1843,15 @@
     <string name="attribute_blind_people_no">Nie postihnutí: zrakovo</string>
     <string name="attribute_unknown">Neznámy atribút</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Vybavenie</string>
+    <string name="cat_type">Typ</string>
+    <string name="cat_location">Umiestnenie kešky</string>
+    <string name="cat_duration">Vzdialenosť/Trvanie</string>
+    <string name="cat_surrounding">Okolo kešky</string>
+    <string name="cat_permissions">Povolenia</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Pre jednoduchšie hľadanie skrýš a používateľov lenivších.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -2111,6 +2122,10 @@
     <string name="downloadmap_checking_for_updates">Kontrolujú sa aktualizácie…</string>
     <string name="downloadtile_title">Chýbajú údaje navigácie</string>
     <string name="downloadtile_info">Aplikácia c:geo nedokáže vypočítať požadovanú trasu, pretože chýba nejaký súbor s údajmi navigácie. Chcete prevziať chýbajúce údaje navigácie?</string>
+    <string name="check_tiles_menu">Skontrolovať chýbajúce údaje trás</string>
+    <string name="check_tiles_found">Údaje trás už existujú</string>
+    <string name="check_tiles_missing">Našli sa chýbajúce údaje trás.:\n%1$s\n\nChcete prevziať tieto súbory?%2$s</string>
+    <string name="check_tiles_unsupported">Upozornenie: Údaje trás nie sú minimálne sčasti pre zvolenú oblasť k dispozícii</string>
     <string name="tileupdate_info">Chcete skontrolovať aktualizácie prevzatých súborov s údajmi navigácie?</string>
     <string name="mapupdate_info">Chcete skontrolovať aktualizácie súborov máp a tém?</string>
     <string name="no_updates_found">Nenašli sa žiadne aktualizácie</string>

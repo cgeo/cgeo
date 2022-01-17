@@ -54,6 +54,7 @@
     <string name="ape_short">APE</string>
     <string name="gchq_short">GC HQ</string>
     <string name="gchqceleb_short">GC HQ Cel</string>
+    <string name="gps_short">GPS Udstilling</string>
     <string name="block_short">GCHQ blokken</string>
     <string name="locationless_short">Locationless</string>
     <string name="advlab_short">Adv Lab</string>
@@ -320,11 +321,13 @@
     <string name="menu_update_routingdata">Rutevejledningsdata</string>
     <string name="menu_update_mapdata">Kortdata</string>
     <string name="menu_history">Historik</string>
+    <string name="menu_search_clipboard">Indlæs geokode fra udklipsholder</string>
     <string name="menu_history_longstring">Fund-historik</string>
     <string name="menu_lists_pocket_queries">Pocket Queries</string>
     <string name="menu_lists_bookmarklists">Bogmærkelister</string>
     <string name="menu_invert_order">Omvendt rækkefølge</string>
     <!-- main screen -->
+    <string name="home_button">Hjem</string>
     <string name="live_map_button">Live-kort</string>
     <string name="caches_nearby_button">I nærheden</string>
     <string name="advanced_search_button">Søg</string>
@@ -351,6 +354,7 @@
     <string name="caches_history">Historik</string>
     <string name="caches_on_map">Vis på kort</string>
     <string name="caches_sort">Sortér</string>
+    <string name="caches_sort_automatic">Automatisk (%s)</string>
     <string name="caches_sort_distance">Afstand</string>
     <string name="caches_sort_distance_target">Afstand til målet</string>
     <string name="caches_sort_difficulty">Sværhedsgrad</string>
@@ -359,6 +363,7 @@
     <string name="caches_sort_favorites">Favoritter</string>
     <string name="caches_sort_favorites_ratio">Favoritter [%]</string>
     <string name="caches_sort_name">Navn</string>
+    <string name="caches_sort_geocode">Geokode</string>
     <string name="caches_sort_rating">Vurdering</string>
     <string name="caches_sort_vote">Bedømmelse (egen vurdering)</string>
     <string name="caches_sort_inventory">Antal Trackables</string>
@@ -397,12 +402,25 @@
     <string name="caches_clear_offlinelogs">Fjern offline logbeskeder</string>
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
+    <string name="caches_show_attributes">Vis attribut oversigt</string>
     <string name="caches_set_cache_icon">Indstil cache-ikoner</string>
     <string name="caches_reset_cache_icons_title">Nulstil cache-ikoner</string>
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
     <string name="caches_set_listmarker">Sæt listemarkering</string>
     <string name="select_icon">Vælg ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-version understøtter ikke automatisk detektering af understøttede ikoner - nogle tegn kan mangle</string>
+    <plurals name="user_finds">
+        <item quantity="one">%d fund</item>
+        <item quantity="other">%d fund</item>
+    </plurals>
+    <plurals name="user_finds_offline">
+        <item quantity="one">%d logget offline</item>
+        <item quantity="other">%d logget offline</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d gemte cacher</item>
+        <item quantity="other">%d cacher gemt</item>
+    </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Administrér lister</string>
     <string name="list_menu_create">Opret ny liste</string>
@@ -425,8 +443,14 @@
     <string name="list_not_available">Listen er ikke længere tilgængelig, skifter til standard liste</string>
     <!-- caches lists filter -->
     <string name="cache_filter_mode_advanced">Avanceret</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_title">Skift til basisindstillenger</string>
+    <string name="cache_filter_mode_basic_change_confirm_loss_message">Ændringer til basis-tilstans vil resultere i tab af filterindstillinger. Vil du fortsætte?</string>
+    <string name="cache_filter_add_button">Tilføj filterkriterier</string>
     <string name="cache_filter_option_and_or">Brug ELLER i stedet for OG</string>
     <string name="cache_filter_option_inverse">Omvendt Filter</string>
+    <string name="cache_filter_option_include_inconclusive">Inkludér inkonklusive matches</string>
+    <string name="cache_filter_option_include_inconclusive_info">Om cachen skal inkluderes i resultatet, når et filter behøver info på cache, som ikke er tilgængelig.</string>
+    <string name="cache_filter_hint_on_empty_filter_list">Tryk på \'Tilføj filterkriterier\' ovenfor for at tilføje et filter</string>
     <string name="cache_filter_name">Cachenavn</string>
     <string name="cache_filter_type">Cachetype</string>
     <string name="cache_filter_size">Størrelse</string>
@@ -448,21 +472,31 @@
     <string name="cache_filter_location">Placering</string>
     <string name="cache_filter_stored_lists">Gemte Lister</string>
     <string name="cache_filter_origin">Oprindelse</string>
+    <string name="cache_filter_stored_since">Sidste opdatering af detaljer</string>
     <string name="cache_filtergroup_basic">Basal</string>
     <string name="cache_filtergroup_details">Detaljer</string>
     <string name="cache_filtergroup_userspecific">Brugerspecifik</string>
+    <string name="cache_filter_contexttype_live_title">Live Filter</string>
+    <string name="cache_filter_contexttype_offline_title">Offline Filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
     <string name="cache_filter_include">Medtag</string>
     <string name="cache_filter_exclude">Udelad</string>
     <string name="cache_filter_userdisplay_complex">Kompleks</string>
     <string name="cache_filter_userdisplay_none">Ingen</string>
     <string name="cache_filter_userdisplay_not">IKKE</string>
+    <plurals name="cache_filter_userdisplay_multi_item">
+        <item quantity="one">%1$d element</item>
+        <item quantity="other">%1$d element</item>
+    </plurals>
     <string name="cache_filter_storage_delete_button">Slet</string>
+    <string name="cache_filter_storage_clear_button">Ryd</string>
     <string name="cache_filter_storage_load_delete_title">Indlæs eller slet et eksisterende filter</string>
     <string name="cache_filter_storage_delete_title">Slet filter</string>
+    <string name="cache_filter_storage_delete_message">Er du sikker på, at du vil slette denne filterdefinition?</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filtre er gemt endnu.</string>
     <string name="cache_filter_storage_save_title">Gem filter med navn</string>
     <string name="cache_filter_storage_save_confirm_title">Gem filter, overskriv</string>
+    <string name="cache_filter_storage_save_confirm_message">Et filter med navnet \'%s\' og forskellige konfigurationer findes allerede. Overskriv det?</string>
     <string name="cache_filter_stringfilter_type_contains">Indeholder</string>
     <string name="cache_filter_stringfilter_type_does_not_contain">Indeholder ikke</string>
     <string name="cache_filter_stringfilter_type_starts_with">Begynder med</string>
@@ -1065,8 +1099,6 @@
     <string name="cache_listed_on">Fra %s</string>
     <string name="cache_whereyougo_start">Hent og start denne cartridge med WhereYouGo</string>
     <string name="cache_whereyougo_install">Installér WhereYouGo for at hente og starte denne cartridge</string>
-    <string name="cache_chirpwolf_start">Brug Chirp Wolf til at læse chirp-data for denne cache</string>
-    <string name="cache_chirpwolf_install">Installér Chirp Wolf for at læse chirp data</string>
     <string name="context_share_as_text">Del tekst</string>
     <string name="context_share_as_link">Del link</string>
     <string name="create_internal_cache">Opret brugerdefineret cache</string>

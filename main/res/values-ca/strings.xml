@@ -1272,8 +1272,6 @@
     <string name="cache_listed_on">Llistat a %s</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
-    <string name="cache_chirpwolf_start">Inicieu Chirp Wolf per llegir les dades del chirp des d\'aquest catxé</string>
-    <string name="cache_chirpwolf_install">Instal·leu Chirp Wolf per poder llegir les dades del chirp</string>
     <string name="cache_alc_start">Obriu Adventure Lab per començar a jugar a aquesta aventura</string>
     <string name="cache_alc_install">Instal·leu el reproductor Adventure Lab per jugar a aquesta aventura</string>
     <string name="context_share_as_text">Compartir text</string>

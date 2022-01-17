@@ -1245,8 +1245,6 @@
     <string name="cache_listed_on">%s listesinde</string>
     <string name="cache_whereyougo_start">Bu kartuşu indirmek ve başlatmak için WhereYouGo\'yu açın</string>
     <string name="cache_whereyougo_install">Bu kartuşu indirmek ve başlatmak için WhereYouGo oynatıcısını kurun</string>
-    <string name="cache_chirpwolf_start">Bu Geocache\'in chirp verilerini okumak için Chirp Wolf\'u açın</string>
-    <string name="cache_chirpwolf_install">Chirp verilerini okuyabilmek için Chirp Wolf\'u kurun</string>
     <string name="cache_alc_start">Bu macerayı oynayabilmek için Adventure Lab uygulamasını açın</string>
     <string name="cache_alc_install">Bu macerayı oynayabilmek için Adventure Lab uygulamasını yükleyin</string>
     <string name="context_share_as_text">Metni paylaş</string>

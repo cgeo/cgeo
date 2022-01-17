@@ -341,6 +341,12 @@
     <string name="caches_more_caches_no">Žádné další kešky</string>
     <string name="caches_more_caches_loading">Načítání kešek…</string>
     <string name="caches_more_caches_currently">aktuálně</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Načíst další %1$d kešku</item>
+        <item quantity="few">Načíst další %1$d kešky</item>
+        <item quantity="many">Načíst dalších %1$d kešek</item>
+        <item quantity="other">Načíst dalších %1$d kešek</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Načíst zbývající kešky (%1$d / %2$d)</string>
     <string name="caches_downloading">Stahování kešek…\nETA: </string>
     <string name="caches_eta_ltm">Méně než minuta</string>
@@ -654,6 +660,9 @@
     <string name="settings_title_navigation_menu">Navigační menu</string>
     <string name="settings_category_browser">Prohlížeč</string>
     <string name="settings_category_geocaching_platform">Geocachingová platforma</string>
+    <string name="settings_category_nearbysearch">Hledat v okolí</string>
+    <string name="init_nearbysearchlimit_title">Limit hledání v okolí</string>
+    <string name="init_nearbysearchlimit_description">Omezí vzdálenost, do které jsou zobrazeny kešky hledané v okolí (0=neomezeno)</string>
     <string name="settings_category_geocaching_additionals">Další služby a doplňky</string>
     <string name="settings_category_social">Sociální média</string>
     <string name="settings_category_logging_other">Další možnosti logování</string>
@@ -1297,8 +1306,8 @@
     <string name="cache_listed_on">Zveřejněno na %s</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
-    <string name="cache_chirpwolf_start">Otevřete Chirp Wolf a přečtěte údaje chirpu pro tuto kešku</string>
-    <string name="cache_chirpwolf_install">Nainstalujte Chirp Wolf a budete moci číst údaje chirpu</string>
+    <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete nainstalovat aplikaci Chirp Wolf.</string>
     <string name="cache_alc_start">Otevřete Adventure Lab a začněte hrát toto dobrodružství</string>
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
     <string name="context_share_as_text">Sdílet text</string>
@@ -2052,10 +2061,16 @@
         <item quantity="other">Stopa/trasa načtena (%d bodů trasy)</item>
     </plurals>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
+    <string name="map_clear_track">Vymazat trasu/stopu</string>
+    <string name="map_clear_track_confirm">Chcete odstranit trasu/stopu \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
+    <string name="center_on_route_track">Vycentrovat na trasu/stopu</string>
+    <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
     <string name="track">Stopa</string>
+    <string name="make_visible">zviditelnit</string>
+    <string name="hide">skrýt</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
