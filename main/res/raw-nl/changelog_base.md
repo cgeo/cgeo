@@ -4,10 +4,10 @@
 ### Kaart
 - Oplossing: Bij het laden van GPX-bestanden die meerdere sporen bevatten, deze weergeven als gescheiden niet-verbonden sporen
 - Wijziging: automatisch track weergave inschakelen bij het laden van een GPX track bestand
-- New: Allow displaying several tracks at once
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Nieuw: Laat meerdere tracks tegelijk zien
+- Nieuw: D/T symbolen voor cachepictogrammen (optioneel)
+- Nieuw: Optie om te controleren op ontbrekende routeringsgegevens voor huidige viewport
+- Nieuw: Thema legende voor hoogte, elementen en Freizeitkarte thema's
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
@@ -28,11 +28,11 @@
 - Nieuw: Zoeken in voorkeuren Inschakelen
 - Nieuw: GC Wizard aan de lijst met nuttige apps toegevoegd
 - Nieuw: Attributen filter: Selectie van welke connectors attributen worden getoond toestaan
-- New: Option to limit distance in nearby search (see Settings => Services)
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Nieuw: Optie om de afstand te beperken in nabijgelegen zoekopdracht (zie Instellingen => Diensten)
+- Wijziging: barcode scanner verwijderd van handige apps lijst en van het hoofdscherm
+- Verandering: BRouter verwijderd uit de lijst met nuttige apps (je kunt nog steeds zowel externe als interne navigatie gebruiken)
+- Oplossing: Vermijd herhaalde update controles voor kaarten/routing tegels met interval=0
+- Oplossing: Optimaliseer ondersteuning voor automatisch invullen van wachtwoorden van externe wachtwoord apps in instellingen
+- Oplossing: Schakel tooltips in voor systemen die draaien op Android lager dan versie 8
+- instellingen omgebouwd zodat die voldoen aan de huidige Android-specificaties
+- MapsWithMe API bijgewerkt
