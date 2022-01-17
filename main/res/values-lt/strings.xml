@@ -1170,8 +1170,6 @@
     <string name="cache_listed_on">Publikuota %s</string>
     <string name="cache_whereyougo_start">Atidarykite WhereYouGo, kad atsisiųstumėte ir paleistumėte šią kasetę</string>
     <string name="cache_whereyougo_install">Norėdami atsisiųsti ir paleisti šią kasetę, įdiekite WhereYouGo grotuvą</string>
-    <string name="cache_chirpwolf_start">Atidarykite Chirp Wolf, kad perskaitytumėte šios slėptuvės Chirp duomenis</string>
-    <string name="cache_chirpwolf_install">Įdiekite Chirp Wolf, kad galėtumėte perskaityti Chirp duomenis</string>
     <string name="context_share_as_text">Bendrinti tekstą</string>
     <string name="context_share_as_link">Bendrinti nuorodą</string>
     <string name="create_internal_cache">Sukurti vartotojo nustatytą slėptuvę</string>
