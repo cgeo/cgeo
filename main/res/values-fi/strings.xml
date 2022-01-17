@@ -1271,8 +1271,6 @@
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
-    <string name="cache_chirpwolf_start">Avaa Chirp Wolf lukeaksesi chirpin tiedot tälle kätkölle</string>
-    <string name="cache_chirpwolf_install">Asenna Chirp Wolf pystyäksesi lukemaan chirpin tietoja</string>
     <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
     <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
