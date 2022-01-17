@@ -10,6 +10,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.text.style.StrikethroughSpan;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -27,6 +28,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.SortedMap;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.zip.CRC32;
@@ -34,7 +37,6 @@ import java.util.zip.CRC32;
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import org.apache.commons.lang3.CharUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Misc. utils. All methods don't use Android specific stuff to use these methods in plain JUnit tests.
@@ -573,6 +575,27 @@ public final class TextUtils {
         return pattern;
     }
 
+    /**
+     * creates a pad of length 'targetLength' out of given 'padPattern'.
+     * if 'padPattern' is too short to fill 'targetLength' then it is concattenated to fill the length up
+     */
+    public static String getPad(@NonNull final String padPattern, final int targetLength) {
+        //fast-lane
+        if (targetLength < padPattern.length()) {
+            return padPattern.substring(0, targetLength);
+        }
+        //long-lane
+        if (padPattern.isEmpty()) {
+            return "";
+        }
+        final StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < targetLength / padPattern.length(); i++) {
+            sb.append(padPattern);
+        }
+        sb.append(padPattern.substring(0, targetLength % padPattern.length()));
+        return sb.toString();
+    }
+
     /** convenience forward to {@link android.text.TextUtils#concat(java.lang.CharSequence...)} */
     public static CharSequence concat(final CharSequence ... cs) {
         return android.text.TextUtils.concat(cs);
@@ -637,17 +660,26 @@ public final class TextUtils {
         return sp;
     }
 
-    public static List<ImmutableTriple<Object, Integer, Integer>> parseSpans(final CharSequence cs) {
-        if (!(cs instanceof Spannable) || cs.length() == 0) {
-            return Collections.emptyList();
+    public static String annotateSpans(final CharSequence cs, final Func1<Object, Pair<String, String>> annotator) {
+        if (!(cs instanceof Spanned) || cs.length() == 0) {
+            return cs.toString();
         }
-        final Object[] spans = ((Spannable) cs).getSpans(0, cs.length(), Object.class);
+        final Object[] spans = ((Spanned) cs).getSpans(0, cs.length(), Object.class);
         if (spans.length == 0) {
-            return Collections.emptyList();
+            return cs.toString();
         }
-        final List<ImmutableTriple<Object, Integer, Integer>> result = new ArrayList<>(spans.length);
+
+        final SortedMap<Integer, String> data = new TreeMap<>((i1, i2) -> -i1.compareTo(i2));
         for (Object span : spans) {
-            result.add(new ImmutableTriple<>(span, ((Spannable) cs).getSpanStart(span), ((Spannable) cs).getSpanEnd(span)));
+            final int start = ((Spanned) cs).getSpanStart(span);
+            data.put(start, (data.containsKey(start) ? data.get(start) : "") + annotator.call(span).first);
+            final int end = ((Spanned) cs).getSpanEnd(span);
+            data.put(end, annotator.call(span).second + (data.containsKey(end) ? data.get(end) : ""));
+        }
+
+        String result = cs.toString();
+        for (Map.Entry<Integer, String> entry : data.entrySet()) {
+            result = result.substring(0, entry.getKey()) + entry.getValue() + result.substring(entry.getKey());
         }
         return result;
     }

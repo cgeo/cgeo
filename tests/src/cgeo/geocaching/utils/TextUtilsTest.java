@@ -4,6 +4,7 @@ import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.enumerations.CacheType;
 
 import android.text.SpannableString;
+import android.util.Pair;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,13 +13,13 @@ import java.io.InputStreamReader;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import junit.framework.TestCase;
 import org.apache.commons.io.IOUtils;
 import org.assertj.core.api.Assertions;
+import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
 
-public class TextUtilsTest extends TestCase {
+public class TextUtilsTest {
 
     private static String readCachePage(final String geocode) {
         InputStream is = null;
@@ -44,29 +45,34 @@ public class TextUtilsTest extends TestCase {
         return null;
     }
 
-    public static void testRegEx() {
+    @Test
+    public void regEx() {
         final String page = readCachePage("GC2CJPF");
         assertThat(TextUtils.getMatch(page, GCConstants.PATTERN_LOGIN_NAME, true, "???")).isEqualTo("abft");
     }
 
-    public static void testReplaceWhitespaces() {
+    @Test
+    public void replaceWhitespaces() {
         assertThat(TextUtils.replaceWhitespace("  foo\n\tbar   \r   baz  ")).isEqualTo("foo bar baz ");
     }
 
-    public static void testControlCharactersCleanup() {
+    @Test
+    public void controlCharactersCleanup() {
         final Pattern patternAll = Pattern.compile("(.*)", Pattern.DOTALL);
         assertThat(TextUtils.getMatch("some" + '\u001C' + "control" + (char) 0x1D + "characters removed", patternAll, "")).isEqualTo("some control characters removed");
         assertThat(TextUtils.getMatch("newline\nalso\nremoved", patternAll, "")).isEqualTo("newline also removed");
     }
 
-    public static void testGetMatch() {
+    @Test
+    public void getMatch() {
         final Pattern patternAll = Pattern.compile("foo(...)");
         final String text = "abc-foobar-def-fooxyz-ghi-foobaz-jkl";
         assertThat(TextUtils.getMatch(text, patternAll, false, 1, null, false)).isEqualTo("bar");
         assertThat(TextUtils.getMatch(text, patternAll, false, 1, null, true)).isEqualTo("baz");
     }
 
-    public static void testTrimSpanned() {
+    @Test
+    public void trimSpanned() {
         assertTrimSpanned(" ", "");
         assertTrimSpanned("\n", "");
         assertTrimSpanned("a ", "a");
@@ -77,12 +83,14 @@ public class TextUtilsTest extends TestCase {
         assertThat(TextUtils.trimSpanned(new SpannableString(input)).toString()).isEqualTo(new SpannableString(expected).toString());
     }
 
-    public static void testStripHtml() {
+    @Test
+    public void stripHtml() {
         assertThat(TextUtils.stripHtml("foo bar")).isEqualTo("foo bar");
         assertThat(TextUtils.stripHtml("<div><span>foo</span> bar</div>")).isEqualTo("foo bar");
     }
 
-    public static void testGetTextBeforeIndexUntil() {
+    @Test
+    public void getTextBeforeIndexUntil() {
         final String testStr = "this is a test";
         final int aIdx = testStr.indexOf("a");
         assertThat(TextUtils.getTextBeforeIndexUntil(testStr, aIdx, "h")).isEqualTo("is is ");
@@ -99,7 +107,8 @@ public class TextUtilsTest extends TestCase {
 
     }
 
-    public static void testGetTextAfterIndexUntilDelimiter() {
+    @Test
+    public void getTextAfterIndexUntilDelimiter() {
         final String testStr = "this is a test";
         final int aIdx = testStr.indexOf("a");
         assertThat(TextUtils.getTextAfterIndexUntil(testStr, aIdx, "s")).isEqualTo(" te");
@@ -116,7 +125,8 @@ public class TextUtilsTest extends TestCase {
 
     }
 
-    public static void testGetNextDelimValue() {
+    @Test
+    public void getNextDelimValue() {
         assertThat(TextUtils.parseNextDelimitedValue("before \"soon it is \\\"christmas\\\\holiday\\\" again\" after ", '"', '\\'))
                 .isEqualTo("soon it is \"christmas\\holiday\" again");
         //test symbols with special meaning in regerx
@@ -141,14 +151,16 @@ public class TextUtilsTest extends TestCase {
 
     }
 
-    public static void testGetDelimitedValue() {
+    @Test
+    public void getDelimitedValue() {
         final String test = "soon it is 'christmas' again";
         final String expectedDelim = "'soon it is \\'christmas\\' again'";
         assertThat(TextUtils.createDelimitedValue(test, '\'', '\\')).isEqualTo(expectedDelim);
         assertThat(TextUtils.parseNextDelimitedValue(TextUtils.createDelimitedValue(test, '\'', '\\'), '\'', '\\')).isEqualTo(test);
     }
 
-    public static void testGetWords() {
+    @Test
+    public void getWords() {
         assertThat(TextUtils.getWords("this is a test").length).isEqualTo(4);
         assertThat(TextUtils.getWords("this is a test")[0]).isEqualTo("this");
         assertThat(TextUtils.getWords(" this is a test")[0]).isEqualTo("this");
@@ -159,7 +171,8 @@ public class TextUtilsTest extends TestCase {
         assertThat(TextUtils.getWords(null).length).isEqualTo(0);
     }
 
-    public static void testGetAll() {
+    @Test
+    public void getAll() {
         assertThatListIsEqual(TextUtils.getAll("this is a test", "t", "s"), "hi", "e");
         assertThatListIsEqual(TextUtils.getAll("this is a test t", "t", "t"), "his is a ", " ");
         assertThatListIsEqual(TextUtils.getAll("this is a test", "t", "t"), "his is a ");
@@ -186,7 +199,8 @@ public class TextUtilsTest extends TestCase {
     }
 
 
-    public static void testReplaceAll() {
+    @Test
+    public void replaceAll() {
         assertThat(TextUtils.replaceAll("this is a test", "t", "s", "")).isEqualTo(" is a t");
         assertThat(TextUtils.replaceAll("this is a test", "this", "tes", "")).isEqualTo("t");
         assertThat(TextUtils.replaceAll("this is a test", "this", "test", "")).isEqualTo("");
@@ -202,7 +216,8 @@ public class TextUtilsTest extends TestCase {
 
     }
 
-    public static void testShortenText() {
+    @Test
+    public void shortenText() {
         //normal cases
         assertThat(TextUtils.shortenText("1234567890", 9, 1)).isEqualTo("123456...");
         assertThat(TextUtils.shortenText("1234567890", 9, 0)).isEqualTo("...567890");
@@ -225,7 +240,8 @@ public class TextUtilsTest extends TestCase {
 
     }
 
-    public static void testEqualsIgnoreCaseAndSpecialChars() {
+    @Test
+    public void equalsIgnoreCaseAndSpecialChars() {
         assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars(null)).isNull();
         assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars("  ")).isEmpty();
         assertThat(TextUtils.toComparableStringIgnoreCaseAndSpecialChars("abcABC123")).isEqualTo("abcabc123");
@@ -238,11 +254,33 @@ public class TextUtilsTest extends TestCase {
         assertThat(TextUtils.isEqualIgnoreCaseAndSpecialChars(" 123----ABC__DEF   ", "123aBcdEf")).isTrue();
     }
 
-    public static void testGetEnumIgnoreCaseAndSpecialChars() {
+    @Test
+    public void getEnumIgnoreCaseAndSpecialChars() {
         assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, "blOCkparTy", null)).isEqualTo(CacheType.BLOCK_PARTY);
         assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, null, null)).isNull();
         assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, "", null)).isNull();
         assertThat(TextUtils.getEnumIgnoreCaseAndSpecialChars(CacheType.class, "block_party_", null)).isEqualTo(CacheType.BLOCK_PARTY);
+    }
+
+    @Test
+    public void getPad() {
+        assertThat(TextUtils.getPad("123", 0)).isEqualTo("");
+        assertThat(TextUtils.getPad("123", 2)).isEqualTo("12");
+        assertThat(TextUtils.getPad("123", 3)).isEqualTo("123");
+        assertThat(TextUtils.getPad("123", 5)).isEqualTo("12312");
+        assertThat(TextUtils.getPad("123", 7)).isEqualTo("1231231");
+    }
+
+    @Test
+    public void spans() {
+        assertThat(TextUtils.annotateSpans(TextUtils.setSpan("test", new Object()), o -> new Pair<>("[", "]"))).isEqualTo("[test]");
+        assertThat(TextUtils.annotateSpans(TextUtils.setSpan("test", new Object(), 2, 3, 1), o -> new Pair<>("[", "]"))).isEqualTo("te[s]t");
+        assertThat(TextUtils.annotateSpans(
+            TextUtils.setSpan(TextUtils.setSpan("test", new Object(),  2, 3, 1), new Object(), 0, 2, 1),
+            o -> new Pair<>("[", "]"))).isEqualTo("[te][s]t");
+        assertThat(TextUtils.annotateSpans(
+            TextUtils.setSpan(TextUtils.setSpan(TextUtils.setSpan("test", new Object(),  2, 3, 1), new Object(), 0, 2, 1), new Object()),
+            o -> new Pair<>("[", "]"))).isEqualTo("[[te][s]t]");
     }
 
 }

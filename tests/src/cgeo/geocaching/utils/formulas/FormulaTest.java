@@ -9,14 +9,11 @@ import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TY
 
 import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
+import android.util.Pair;
 
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
-import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
@@ -277,30 +274,24 @@ public class FormulaTest {
 
     @Test
     public void evaluateToCharSequence() {
-        assertErrorStringFormats(Formula.compile("3-'a'").evaluateToCharSequence(null), "3 - 'a'", 4, 7);
-        assertErrorStringFormats(Formula.compile("3+4+'a'+5").evaluateToCharSequence(null), "7 + 'a' + 5", 4, 7);
-        assertErrorStringFormats(Formula.compile("3+4+'a'+AB12").evaluateToCharSequence(null), "7 + 'a' + ?A?B12", 4, 7, 10, 12, 12, 14);
-        assertErrorStringFormats(Formula.compile("(5+'a')").evaluateToCharSequence(null), "(5 + 'a')", 5, 8);
+        assertErrorStringFormats(Formula.compile("3-'a'").evaluateToCharSequence(null), "3 - ['a']");
+        assertErrorStringFormats(Formula.compile("3+4+'a'+5").evaluateToCharSequence(null), "7 + ['a'] + 5");
+        assertErrorStringFormats(Formula.compile("3+4+'a'+AB12").evaluateToCharSequence(null), "7 + ['a'] + [?A][?B]12");
+        assertErrorStringFormats(Formula.compile("(5+'a')").evaluateToCharSequence(null), "(5 + ['a'])");
     }
 
     /**
      * checks whether a given error string is correct and has the right places highlighted with an error format
-     * 'params' is a list of int pairs, each denoting start (incl) and end (excl) index of error highlights
      */
-    private void assertErrorStringFormats(final CharSequence cs, final String expectedString, final Object ... params) {
-        assertThat(cs.toString()).isEqualTo(expectedString);
-        final List<ImmutableTriple<Object, Integer, Integer>> spans = TextUtils.parseSpans(cs);
-        assertThat(spans.size()).as("Expected different number of spans than found in " + cs).isEqualTo(params.length / 2 + 1);
-        Collections.sort(spans, Comparator.comparingInt(t -> t.middle));
-        spans.remove(0); //skip first span, it is the overall format of the error string
-        int idx = 0;
-        for (ImmutableTriple<Object, Integer, Integer> span : spans) {
-            assertThat(span.left.getClass()).isEqualTo(ForegroundColorSpan.class);
-            assertThat(((ForegroundColorSpan) span.left).getForegroundColor()).isEqualTo(Color.RED);
-            assertThat(span.middle).isEqualTo(params[idx]);
-            assertThat(span.right).isEqualTo(params[idx + 1]);
-            idx += 2;
-        }
+    private void assertErrorStringFormats(final CharSequence cs, final String expectedString) {
+        final String annotated = TextUtils.annotateSpans(cs, s -> {
+                if (s instanceof ForegroundColorSpan && ((ForegroundColorSpan) s).getForegroundColor() == Color.RED) {
+                    return new Pair<>("[", "]");
+                }
+                return new Pair<>("", "");
+            });
+
+        assertThat(annotated).isEqualTo(expectedString);
     }
 
     @Test

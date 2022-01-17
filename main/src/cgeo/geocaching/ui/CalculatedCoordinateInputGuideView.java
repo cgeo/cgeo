@@ -230,7 +230,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                         }
                         break;
                     }
-                    coordParser.nextNonWhitespace();
+                    coordParser.skipWhitespaces();
                     if (coordParser.eof()) {
                         return false;
                     }
@@ -256,7 +256,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                     break;
                 default:
                     final boolean isWs = Character.isWhitespace(coordParser.ch());
-                    coordParser.nextNonWhitespace();
+                    coordParser.skipWhitespaces();
                     if (!isWs && coordParser.ch() != fp) {
                         return false;
                     }

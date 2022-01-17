@@ -14,7 +14,7 @@ import java.util.Set;
  */
 public final class TextParser {
 
-    private static final int END_CHAR = 0;
+    public static final int END_CHAR = 0;
 
     private final String expression;
     private final Predicate<Character> stopChecker;
@@ -80,10 +80,19 @@ public final class TextParser {
         }
     }
 
-    public void nextNonWhitespace() {
+    public int peek() {
+        return (pos + 1 >= expression.length() ? END_CHAR : (int) expression.charAt(pos + 1));
+    }
+
+    public void skipWhitespaces() {
         while (Character.isWhitespace(ch)) {
             next();
         }
+    }
+
+    public void nextNonWhitespace() {
+        next();
+        skipWhitespaces();
     }
 
     /** Returns true if end of parseable expression was reached */
@@ -104,7 +113,7 @@ public final class TextParser {
     }
 
     public boolean eat(final int charToEat) {
-        nextNonWhitespace();
+        skipWhitespaces();
         if (ch == charToEat) {
             next();
             return true;
