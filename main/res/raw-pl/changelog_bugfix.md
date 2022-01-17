@@ -1,19 +1,19 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Poprawka: Ponowne włączenie nawigowania za pomocą zewnętrznej aplikacji BRouter w wersji 1.6.3
+- Poprawka: Użycie krótszego limitu czasu dla mechanizmu szybkiego przewijania w celu zmniejszenia zakłóceń z innymi elementami interfejsu
 
-## 2021.12.24 Bugfix release
+## 2021.12.24 Wydanie poprawiające błędy
 
-- Fix: Enable upgrading from OpenAndroMaps v4 to v5
-- Fix: Enable checks for map theme updates
-- Fix: Skip Mapsforge cache cleanup due to problems under certain conditions
+- Poprawka: Włączenie aktualizacji z OpenAndroMaps v4 do v5
+- Poprawka: Włączenie sprawdzania aktualizacji motywu mapy
+- Poprawka: Pominięcie czyszczenia pamięci podręcznej Mapsforge z powodu problemów w pewnych warunkach
 
 ## Wydanie łatki 2021.12.13
 
 - Poprawka: pliki cache Mapsforge'a: czyszczenie i nowa lokalizacja (osobny folder)
-- Fix: Freizeitkarte map files: Use 'latest' folder in downloader as workaround for temporary server errors
-- Fix: Avoid null pointer exception in about pages
-- Fix: Enable wrapping for stars in cache popup
+- Poprawka: Pliki map Freizeitkarte: Użyj folderu 'ostatnie' podczas pobierania jako obejście dla tymczasowych błędów serwera
+- Poprawka: Unikanie wyjątku null pointer na stronach informacyjnych (about)
+- Poprawka: Włącz zawijanie gwiazdek w oknie skrytki
 - Poprawka: Wyświetlanie komunikatu o błędzie, jeśli podczas odświeżania nie znaleziono skrytki
 - Poprawka: Wyświetlanie domyślnej przeglądarki systemowej w wyborze aplikacji, gdy używana jest opcja dla skrytki "Otwórz w przeglądarce"
-- Fix: Adapt downloader to use new theme page and new v5 maps for OpenAndroMaps
-- Fix: On changing a path setting don't ask user for copy or move if old path has no files
+- Poprawka: Dostosuj pobieranie, aby używać strony z nowym motywem oraz nowych map v5 dla OpenAndroMaps
+- Poprawka: Przy zmianie ustawienia ścieżki nie pytaj użytkownika o kopiowanie lub przenoszenie jeśli w starej lokalizacji nie ma żadnych plików
