@@ -1,5 +1,5 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Oprava: Opätovné umožnenie trasovania externou aplikáciou BRouter vo verzii 1.6.3
+- Oprava: Použitie kratšieho časového limitu pre mechanizmus rýchleho posúvania kvôli menšiemu rušeniu s ostatnými prvkami vzhľadu
 
 ## 2021.12.24 Vydanie opravy chyby
 
