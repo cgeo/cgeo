@@ -38,6 +38,7 @@
     <string name="userdefined">Brukerdefinert cache</string>
     <string name="unknown">Ukjent Type</string>
     <string name="all_types_short">Alle</string>
+    <string name="traditional_short">Trad</string>
     <string name="multi_short">Multi</string>
     <string name="mystery_short">Mystery</string>
     <string name="letterbox_short">Letterbox</string>
@@ -404,6 +405,7 @@
     <string name="caches_reset_cache_icons_title">Tilbakestill cacheikoner</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
     <string name="caches_set_listmarker">Sett listemarkering</string>
+    <string name="caches_askdeletion">Spør om sletting hvis tom</string>
     <string name="select_icon">Velg ikon</string>
     <string name="onetime_missing_unicode_info">Din Android-versjon støtter ikke automatisk deteksjon av støttede ikoner - noen tegn kan mangle</string>
     <plurals name="user_finds">
@@ -430,6 +432,7 @@
     <string name="list_dialog_remove_title">Fjern liste</string>
     <string name="list_dialog_remove_description">Vil du slette den gjeldende listen? Alle gjenværende cacher i listen blir flyttet til \"Lagret\".</string>
     <string name="list_dialog_remove_nowempty">Listen er tom. Vil du slette denne listen?</string>
+    <string name="list_dialog_do_not_ask_me_again">Ikke spør meg igjen for denne listen</string>
     <string name="list_dialog_remove">Fjern</string>
     <string name="list_dialog_rename_title">Endre listenavn</string>
     <string name="list_dialog_rename">Endre listenavn</string>
@@ -450,6 +453,7 @@
     <string name="cache_filter_owner">Cacheeier</string>
     <string name="cache_filter_difficulty">Vankelighetsgrad</string>
     <string name="cache_filter_terrain">Terrenggrad</string>
+    <string name="cache_filter_difficulty_terrain">Vanskelighetsgrad / Terreng</string>
     <string name="cache_filter_rating">Rangering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cacheattributter</string>
@@ -475,7 +479,9 @@
     <string name="cache_filter_userdisplay_not">IKKE</string>
     <string name="cache_filter_storage_delete_button">Slett</string>
     <string name="cache_filter_storage_clear_button">Tøm</string>
+    <string name="cache_filter_storage_select_title">Velg filter</string>
     <string name="cache_filter_storage_delete_title">Slett filter</string>
+    <string name="cache_filter_storage_select_clear_title">Velg filter eller nullstill gjeldende filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filter er lagret ennå.</string>
     <string name="cache_filter_storage_save_confirm_title">Lagre filter med overskriving</string>
     <string name="cache_filter_stringfilter_matchcase">Skill store og små bokstaver</string>
@@ -491,6 +497,7 @@
     <string name="cache_filter_datefilter_label_to">Til:</string>
     <string name="cache_filter_checkboxlist_selectallnone">Velg alle</string>
     <string name="cache_filter_checkboxlist_add_items">Legg til flere elementer</string>
+    <string name="cache_filter_checkboxlist_add_all_items">Legg til alle elementer</string>
     <string name="cache_filter_checkboxlist_add_items_dialog_title">Legg til elementer</string>
     <string name="cache_filter_favorites_absolute">Absolutt</string>
     <string name="cache_filter_favorites_percentage">Prosent</string>
@@ -548,6 +555,7 @@
     <string name="about_license">Lisens</string>
     <string name="about_apache_license"><a href="">Apache-lisens, versjon 2.0</a></string>
     <string name="about_help">Hjelp</string>
+    <string name="about_system_collecting">Systeminformasjon er samlet inn, vennligst vent…</string>
     <string name="about_system_include">Inkluder den følgende informasjonen når du sender en feilrapport eller ber om mer informasjon fra c:geo:</string>
     <string name="about_system_info_send_button">Send på e-post…</string>
     <string name="about_system_info">Systeminformasjon for c:geo</string>
@@ -1208,8 +1216,6 @@
     <string name="cache_listed_on">Oppført på %s</string>
     <string name="cache_whereyougo_start">Åpne WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
     <string name="cache_whereyougo_install">Installer WhereYouGo-spilleren for å laste ned og starte denne cartridgen</string>
-    <string name="cache_chirpwolf_start">Åpne Chirp Wolf for å lese chirp-data for denne cachen</string>
-    <string name="cache_chirpwolf_install">Installer Chirp Wolf for å kunne lese chirp-data</string>
     <string name="context_share_as_text">Del tekst</string>
     <string name="context_share_as_link">Del kobling</string>
     <string name="create_internal_cache">Opprett en brukerdefinert cache</string>
