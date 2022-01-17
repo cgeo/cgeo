@@ -1016,8 +1016,6 @@
     <string name="cache_listed_on">Упомянут на %s</string>
     <string name="cache_whereyougo_start">Откройте WhereYouGo чтобы скачать и начать этот картридж</string>
     <string name="cache_whereyougo_install">Установить WhereYouGo чтобы скачать и начать этот картридж</string>
-    <string name="cache_chirpwolf_start">Откройте Chirp Wolf, чтобы прочитать chirp данные этого тайника</string>
-    <string name="cache_chirpwolf_install">Установите Chirp Wolf, чтобы иметь возможность читать chirp-данные</string>
     <string name="context_share_as_text">Поделиться текстом</string>
     <string name="context_share_as_link">Поделиться ссылкой</string>
     <string name="create_internal_cache">Создать пользовательский тайник</string>
