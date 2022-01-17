@@ -865,8 +865,6 @@
     <string name="cache_listed_on">Список %s</string>
     <string name="cache_whereyougo_start">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
     <string name="cache_whereyougo_install">Відкрийте WhereYouGo щоб завантажити та розпочати цей кошик</string>
-    <string name="cache_chirpwolf_start">Відкрити Chirp Wolf, щоб прочитати дані chirp</string>
-    <string name="cache_chirpwolf_install">Встановіть Chirp Wolf для зчитування даних chirp</string>
     <string name="context_share_as_text">Поділитися текстом</string>
     <string name="context_share_as_link">Поділитись посиланням</string>
     <string name="create_internal_cache">Створіть кешований користувачем кеш</string>
