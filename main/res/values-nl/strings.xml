@@ -341,6 +341,10 @@
     <string name="caches_more_caches_no">Einde cachelijst</string>
     <string name="caches_more_caches_loading">Caches laden…</string>
     <string name="caches_more_caches_currently">op dit moment</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Volgende %1$d cache laden</item>
+        <item quantity="other">Volgende %1$d caches laden</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Laad resterende caches (%1$d / %2$d)</string>
     <string name="caches_downloading">Caches aan het downloaden…\nGeschatte tijd: </string>
     <string name="caches_eta_ltm">Minder dan een minuut</string>
@@ -644,6 +648,9 @@
     <string name="settings_title_navigation_menu">Navigatiemenu</string>
     <string name="settings_category_browser">Browser</string>
     <string name="settings_category_geocaching_platform">Geocaching Platform</string>
+    <string name="settings_category_nearbysearch">Zoeken in de buurt</string>
+    <string name="init_nearbysearchlimit_title">Zoeken in de buurt limiet</string>
+    <string name="init_nearbysearchlimit_description">Beperkt de afstand tot waar caches geretourneerd worden met zoeken in de buurt (0=ongelimiteerd)</string>
     <string name="settings_category_geocaching_additionals">Overige diensten en addons</string>
     <string name="settings_category_social">Sociale media</string>
     <string name="settings_category_logging_other">Andere opties voor log</string>
@@ -1271,6 +1278,8 @@
     <string name="cache_listed_on">Opgenomen in %s</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
+    <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
+    <string name="cache_chirpwolf_install">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf installeren.</string>
     <string name="cache_alc_start">Open Adventure Lab om te beginnen met het spelen van dit avontuur</string>
     <string name="cache_alc_install">Installeer de Adventure Lab speler om dit avontuur te spelen</string>
     <string name="context_share_as_text">Tekst delen</string>
@@ -1994,10 +2003,16 @@
         <item quantity="other">Spoor/route geladen (%d spoorpunten)</item>
     </plurals>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
+    <string name="map_clear_track">Wis route/track</string>
+    <string name="map_clear_track_confirm">Wil je route/track \"%s\" verwijderen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
+    <string name="center_on_route_track">Centreer op route/track</string>
+    <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
     <string name="track">Track</string>
+    <string name="make_visible">Zichtbaar maken</string>
+    <string name="hide">verbergen</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
