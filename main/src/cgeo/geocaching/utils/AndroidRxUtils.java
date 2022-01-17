@@ -65,6 +65,10 @@ public class AndroidRxUtils {
         });
     }
 
+    public static void runOnUi(final Runnable action) {
+        AndroidSchedulers.mainThread().createWorker().schedule(action);
+    }
+
     public static void andThenOnUi(final Scheduler scheduler, final Runnable background, final Runnable foreground) {
         scheduler.createWorker().schedule(() -> {
             background.run();
