@@ -1,4 +1,4 @@
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- Correzione: ri-abilitato il routing con l'app esterna BRouter nella versione 1.6.3
 - Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ## 2021.12.24 Release di risoluzione dei bug
