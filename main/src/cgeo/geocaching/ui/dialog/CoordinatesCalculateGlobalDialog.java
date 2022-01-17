@@ -237,6 +237,12 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
         });
 
+        //check if type from config is applicable
+        if (calcCoord.getType() != PLAIN) {
+            final CalculatedCoordinateType type = binding.NonPlainFormat.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
+            calcCoord.setType(type == null ? PLAIN : type);
+        }
+
         refreshType(calcCoord.getType(), true);
 
         return binding.getRoot();
@@ -253,6 +259,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         if (!initialLoad && calcCoord.getType() == newType) {
             return;
         }
+
         calcCoord.setType(newType);
 
         Geopoint currentGp = null;

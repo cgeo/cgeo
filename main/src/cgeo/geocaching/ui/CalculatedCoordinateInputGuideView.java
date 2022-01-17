@@ -5,7 +5,10 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.Keyboard;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.CalculatedCoordinateType;
+import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.TextParser;
+import cgeo.geocaching.utils.formulas.Formula;
+import cgeo.geocaching.utils.formulas.FormulaException;
 import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
@@ -46,6 +49,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     private static final Map<CalculatedCoordinateType, Func1<Geopoint, String>> LON_CONVERTERS = new HashMap<>();
 
     private static final Set<Integer> SIGNIFICANT_CHARS = new HashSet<>();
+
+    private static final KeyableCharSet CLOSING_PAREN_SET = KeyableCharSet.createFor(")");
 
     private GridLayout grid;
     private EditText value;
@@ -110,23 +115,26 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         this.changeListener = changeListener;
     }
 
-    public void setData(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Geopoint gp) {
+    /** returns true if latPatternn/lonPattern could be applied, false otherwise */
+    public boolean setData(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Geopoint gp) {
         this.setVisibility(type == PLAIN ? GONE : VISIBLE);
+        boolean result = false;
         if (type != PLAIN) {
-            recreate(type, latPattern, lonPattern, gp);
+            result = recreate(type, latPattern, lonPattern, gp);
         }
         markButton(null);
         callChangeListener();
+        return result;
     }
 
     @Nullable
-    public CalculatedCoordinateType guessType(final String latPattern, final String lonPattern) {
+    public static CalculatedCoordinateType guessType(final String latPattern, final String lonPattern) {
         for (CalculatedCoordinateType type : CalculatedCoordinateType.values()) {
             if (PLAIN == type) {
                 continue;
             }
-            final boolean b1 = checkAndApply(REFILL_PATTERNS.get(type), latPattern, 0, -1);
-            final boolean b2 = checkAndApply(REFILL_PATTERNS.get(type), lonPattern, 1, -1);
+            final boolean b1 = checkAndApply(REFILL_PATTERNS.get(type), latPattern, 0, null, -1);
+            final boolean b2 = checkAndApply(REFILL_PATTERNS.get(type), lonPattern, 1, null, -1);
             if (b1 && b2) {
                 return type;
             }
@@ -149,6 +157,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
             if (v instanceof TextView) {
                 final String text = ((TextView) v).getText().toString();
                 sb.append(text);
+                //add a space after degree/minute/second-marker if it is not the last char
                 if (!".".equals(text) && vIdx + 1 < (row + 1) * this.grid.getColumnCount()) {
                     sb.append(" ");
                 }
@@ -198,10 +207,13 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     }
 
     @SuppressWarnings("PMD.NPathComplexity") // splitting up that method would not help improve readability
-    private boolean checkAndApply(final String fillPattern, final String coordPattern, final int row, final int viewPos) {
+    private static boolean checkAndApply(final String fillPattern, final String coordPattern, final int row, final GridLayout grid, final int viewPos) {
+        if (coordPattern == null) {
+            return false;
+        }
         final TextParser coordParser = new TextParser(coordPattern.trim());
         int vp = viewPos;
-        if (!checkAndApplyHemisphere(row, coordParser, vp)) {
+        if (!checkAndApplyHemisphere(row, coordParser, grid, vp)) {
             return false;
         }
         if (vp >= 0) {
@@ -224,8 +236,13 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
                     }
                     final String digitText;
                     if (coordParser.ch() == '(') {
-                        coordParser.next();
-                        digitText = coordParser.parseUntil(')');
+                        try {
+                            final Formula f = Formula.compile(coordPattern, coordParser.pos() + 1, CLOSING_PAREN_SET);
+                            digitText = f.getExpression();
+                            coordParser.setPos(coordParser.pos() + digitText.length() + 2);
+                        } catch (FormulaException fe) {
+                            return false;
+                        }
                     } else if (coordParser.chIsIn(SIGNIFICANT_CHARS)) {
                         digitText = coordParser.ch() + "";
                         coordParser.next();
@@ -255,7 +272,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
     }
 
     @SuppressLint("SetTextI18n")
-    private boolean checkAndApplyHemisphere(final int row, final TextParser coordParser, final int vp) {
+    private static boolean checkAndApplyHemisphere(final int row, final TextParser coordParser, final GridLayout grid, final int vp) {
         final char hem = Character.toUpperCase(coordParser.ch());
         switch (row) {
             case 0:
@@ -277,7 +294,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         return true;
     }
 
-    private void recreate(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Geopoint gp) {
+    private boolean recreate(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Geopoint gp) {
         changeListenerActive = false;
         this.setVisibility(INVISIBLE);
         recreateViews(REFILL_PATTERNS.get(type));
@@ -300,6 +317,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         this.setVisibility(VISIBLE);
         changeListenerActive = true;
         callChangeListener();
+        return patternSuccess;
     }
 
     private void recreateViews(final String viewPattern) {
@@ -354,8 +372,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
             return false;
         }
 
-        final boolean b1 = checkAndApply(REFILL_PATTERNS.get(type), latPattern, 0, 0);
-        final boolean b2 = checkAndApply(REFILL_PATTERNS.get(type), lonPattern, 1, REFILL_PATTERNS.get(type).length() + 1);
+        final boolean b1 = checkAndApply(REFILL_PATTERNS.get(type), latPattern, 0, grid, 0);
+        final boolean b2 = checkAndApply(REFILL_PATTERNS.get(type), lonPattern, 1, grid, REFILL_PATTERNS.get(type).length() + 1);
 
         return b1 && b2;
     }
@@ -466,8 +484,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         }
 
         @SuppressLint("SetTextI18n")
-        public void setText(final String text) {
-            this.text = text == null ? null : text.trim();
+        public void setText(final String newText) {
+            this.text = newText == null ? null : ("_".equals(newText) ? " " : newText.trim());
             if (text != null && text.length() > 1) {
                 this.butt.setText(" ");
                 this.image.setVisibility(VISIBLE);
