@@ -8,6 +8,7 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Lista de cachés
 - Nuevo: opción para seleccionar los siguientes 20 cachés
@@ -15,6 +16,7 @@
 - Nuevo: Añadir importación de listas de marcadores (solo para GC premium)
 - Nuevo: Invertir orden al hacer mantener pulsado la barra de ordenación
 - Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Detalles del caché
 - Nuevo: Pasar las coordenadas del caché actual al geochecker (si es soportado por el geochecker)
@@ -36,3 +38,4 @@
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API
+
