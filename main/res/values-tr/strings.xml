@@ -402,8 +402,6 @@
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
-    <string name="caches_set_cache_icon">Geocache simgelerini seç</string>
-    <string name="caches_reset_cache_icons_title">Cache simgelerini sıfırla</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
     <string name="caches_askdeletion">Boş ise silmeyi öner</string>
@@ -596,7 +594,7 @@
     <string name="contribution_infrastructure">altyapı</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Bir sorun bildir</string>
+    <string name="debug_user_error_report_title">Sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <string name="debug_current_downloads">Mevcut indirmeler</string>
