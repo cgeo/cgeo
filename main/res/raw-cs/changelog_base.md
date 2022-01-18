@@ -8,6 +8,7 @@
 - Novinka: Symboly O/T pro ikony kešek (volitelné)
 - Novinka: Možnost kontroly chybějících směrovacích dat pro aktuální oblast
 - Novinka: Legenda motivu pro motivy Elevate, Elements a Freizeitkarte
+- Oprava: Znovu povoleno směrování s externí aplikací BRouter ve verzi 1.6.3
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek
@@ -15,6 +16,7 @@
 - Novinka: Přidána možnost importu ze seznamu záložek (pouze GC prémium)
 - Novinka: Invertované řazení při dlouhém kliknutí na řádek řazení
 - Změna: Automatické řazení podle vzdálenosti také pro seznamy obsahující série kešek s více než 50 keškami (až 500)
+- Oprava: Použití kratšího časového limitu pro mechanismus rychlého posouvání, aby méně zasahoval do ostatních prvků rozvržení
 
 ### Detaily kešky
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
@@ -36,3 +38,4 @@
 - Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
 - Přepracováno nastavení pro splnění aktuálních specifikací systému Android
 - Aktualizováno MapsWithMe API
+
