@@ -2043,7 +2043,7 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
