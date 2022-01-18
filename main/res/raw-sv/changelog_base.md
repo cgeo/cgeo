@@ -8,6 +8,7 @@
 - Nyhet: D/T-symboler för cache-ikoner (valfritt)
 - Nyhet: Alternativ för att kontrollera om ruttdata saknas för nuvarande vy
 - Nyhet: Temalegend för Elevate, Elements och Freizeitkarte teman
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher
@@ -15,6 +16,7 @@
 - Nyhet: Lägg till import från bokmärkeslistor (endast GC premium)
 - Nyhet: Invertera sorteringsordning med långklick på sorteringsfältet
 - Förändring: Gör också automatisk sortering efter distans för listor som innehåller cacheserier med mer än 50 cacher (upp till 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Cachedetaljer
 - Nyhet: Skicka aktuella cachekoordinater till geochecker (om detta stöds av geochecker)
@@ -36,3 +38,4 @@
 - Fix: Aktivera verktygstips för system som körs på äldre versioner av Android än version 8
 - Omarbetade inställningar för att uppfylla aktuella Android-specifikationer
 - Uppdaterat MapsWithMe API
+

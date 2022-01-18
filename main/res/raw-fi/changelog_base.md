@@ -8,6 +8,7 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
@@ -15,6 +16,7 @@
 - Uusi: Lisää tuonti kirjanmerkkiluetteloista (vain GC-premium)
 - Uusi: Käänteinen lajittelujärjestys pitkällä lajittelupalkin napautuksella
 - Muutos: Suorita myös automaattinen etäisyyden mukaan lajittelu listoille, jotka sisältävät yli 50 kätköä sisältävät kätkösarjat (jopa 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Kätkön tiedot
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
@@ -36,3 +38,4 @@
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API
+

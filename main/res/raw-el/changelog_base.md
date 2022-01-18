@@ -8,6 +8,7 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Λίστα κρυπτών
 - Νέο: Επιλογή, για να επιλέξετε τις επόμενες 20 κρύπτες
@@ -15,6 +16,7 @@
 - Νέα: Προσθήκη εισαγωγής από λίστες σελιδοδεικτών (μόνο για Premium μέλη)
 - Νέο: Αντιστροφή ταξινόμησης με μακροχρόνο κλικ στη γραμμή ταξινόμησης
 - Αλλαγή: Δυνατότητα αυτόματης ταξινόμησης κατά απόσταση για λίστες που περιέχουν σειρές κρυπτών με περισσότερες από 50 κρύπτες (έως 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Λεπτομέρειες κρύπτης
 - Νέο: Περάστε τις τρέχουσες συντεταγμένες κρύπτης στο geochecker(αν υποστηρίζονται από το geochecker)
@@ -36,3 +38,4 @@
 - Fix: Ενεργοποίηση υποδείξεων για συστήματα που λειτουργούν στο Android κάτω από την έκδοση 8
 - Ρυθμίσεις για να πληρούνται οι τρέχουσες προδιαγραφές Android
 - Ενημερώθηκε Το MapsWithMe API
+
