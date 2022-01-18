@@ -8,6 +8,7 @@
 - Nieuw: D/T symbolen voor cachepictogrammen (optioneel)
 - Nieuw: Optie om te controleren op ontbrekende routeringsgegevens voor huidige viewport
 - Nieuw: Thema legende voor hoogte, elementen en Freizeitkarte thema's
+- Oplossing: Schakel routering met externe BRouter app in versie 1.6.3 opnieuw in
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren
@@ -15,6 +16,7 @@
 - Nieuw: Toevoegen import vanuit bladwijzerlijsten (alleen GC premium)
 - Nieuw: Sorteervolgorde inwisselen bij lange klik op sorteerbalk
 - Wijziging: Voer ook automatisch sorteren op afstand uit voor lijsten met cacheseries met meer dan 50 caches (tot 500)
+- Oplossing: Gebruik een kortere time-out voor snel scrollen voor minder interferentie met andere lay-outelementen
 
 ### Cache details
 - Nieuw: Geef huidige cache coördinaten door aan de geochecker (indien ondersteund door geochecker)
@@ -36,3 +38,4 @@
 - Oplossing: Schakel tooltips in voor systemen die draaien op Android lager dan versie 8
 - instellingen omgebouwd zodat die voldoen aan de huidige Android-specificaties
 - MapsWithMe API bijgewerkt
+
