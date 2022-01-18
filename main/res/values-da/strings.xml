@@ -403,8 +403,6 @@
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline logbeskeder?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline logbeskeder</string>
     <string name="caches_show_attributes">Vis attribut oversigt</string>
-    <string name="caches_set_cache_icon">Indstil cache-ikoner</string>
-    <string name="caches_reset_cache_icons_title">Nulstil cache-ikoner</string>
     <string name="caches_make_list_unique">Fjern cacherne i denne liste fra øvrige lister</string>
     <string name="caches_set_listmarker">Sæt listemarkering</string>
     <string name="select_icon">Vælg ikon</string>
