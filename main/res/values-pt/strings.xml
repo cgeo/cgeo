@@ -408,8 +408,6 @@
     <string name="caches_clear_offlinelogs_message">Deseja limpar os registos offline?</string>
     <string name="caches_clear_offlinelogs_progress">A limpar os registos offline</string>
     <string name="caches_show_attributes">Mostrar visão geral de atributos</string>
-    <string name="caches_set_cache_icon">Definir ícones de geocaches</string>
-    <string name="caches_reset_cache_icons_title">Repor ícones de geocaches</string>
     <string name="caches_make_list_unique">Remover estas caches doutras listas</string>
     <string name="caches_set_listmarker">Definir marcador de lista</string>
     <string name="caches_askdeletion">Perguntar se pretende eliminar, caso esteja vazia</string>
