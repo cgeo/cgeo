@@ -406,8 +406,6 @@
     <string name="caches_clear_offlinelogs_message">Prajete si vymazať offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Vymazanie logov v režime offline</string>
     <string name="caches_show_attributes">Zobraziť prehľad atribútov</string>
-    <string name="caches_set_cache_icon">Nastaviť ikony kešky</string>
-    <string name="caches_reset_cache_icons_title">Obnoviť ikony kešky</string>
     <string name="caches_make_list_unique">Odstrániť tieto skrýše z iných zoznamov</string>
     <string name="caches_set_listmarker">Nastaviť značku zoznamu</string>
     <string name="caches_askdeletion">Požiadať o odstránenie, ak je prázdne</string>
