@@ -359,8 +359,6 @@
     <string name="caches_clear_offlinelogs">Удалить сохраненные записи</string>
     <string name="caches_clear_offlinelogs_message">Вы действительно хотите удалить сохраненные записи?</string>
     <string name="caches_clear_offlinelogs_progress">Очистка сохраненных записей</string>
-    <string name="caches_set_cache_icon">Установить иконки тайника</string>
-    <string name="caches_reset_cache_icons_title">Сбросить иконки тайника</string>
     <string name="caches_make_list_unique">Удалить эти тайники из других списков</string>
     <string name="caches_set_listmarker">Установить маркер списка</string>
     <string name="select_icon">Выбрать иконку</string>
