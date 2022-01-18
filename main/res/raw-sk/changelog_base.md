@@ -8,6 +8,7 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Zoznam kešiek
 - Nové: Možnosť vybrať ďalších 20 kešiek
@@ -15,6 +16,7 @@
 - Nové; Pridanie importu zo zoznamov záložiek (len pre GC Premium)
 - Nové: Prevrátenie poradia zoradenia stlačením a podržaním panela zoradenia
 - Zmena: Robí sa aj automatické usporiadanie podľa vzdialenosti pre zoznamy obsahujúce série kešiek s viac než 50 keškami (najviac 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Detaily kešky
 - Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
@@ -36,3 +38,4 @@
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API
+
