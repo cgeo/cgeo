@@ -199,9 +199,9 @@ public class RouteTrackUtils {
         });
     }
 
-    private void setVisibilityInfo (final ImageButton v, final boolean newValue) {
-        v.setImageResource(newValue ? R.drawable.visibility : R.drawable.visibility_off);
-        TooltipCompat.setTooltipText(v, activity.getString(newValue ? R.string.make_visible : R.string.hide));
+    private void setVisibilityInfo (final ImageButton v, final boolean isHidden) {
+        v.setImageResource(isHidden ? R.drawable.visibility_off : R.drawable.visibility);
+        TooltipCompat.setTooltipText(v, activity.getString(isHidden ? R.string.make_visible : R.string.hide));
     };
 
     private void updateDialogClearTargets(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
