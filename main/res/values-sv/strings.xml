@@ -408,8 +408,6 @@
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_show_attributes">Visa attributöversikt</string>
-    <string name="caches_set_cache_icon">Ange cache-ikon</string>
-    <string name="caches_reset_cache_icons_title">Återställ cache-ikoner</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
     <string name="caches_askdeletion">Fråga om borttagning om tom</string>
