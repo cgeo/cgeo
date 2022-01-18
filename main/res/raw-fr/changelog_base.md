@@ -8,6 +8,7 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Liste des caches
 - Nouveau : Option pour sélectionner les 20 caches suivantes
@@ -15,6 +16,7 @@
 - Nouveauté : Ajout de l'import des signets (requiert un compte GC premium)
 - Nouveauté : Inverser le tri lors d'un clic long sur la barre de tri
 - Changement: Effectuer également un tri automatique par distance pour les listes contenant des séries de caches avec plus de 50 caches (jusqu'à 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Détails de la cache
 - Nouveauté : Envoyer les coordonnées de la cache à geochecker
@@ -36,3 +38,4 @@
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Mise à jour de l'API MapsWithMe
+
