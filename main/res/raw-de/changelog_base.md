@@ -8,6 +8,7 @@
 - Neu: D/T-Markierungen für Cache-Symbole (optional)
 - Neu: Funktion, um nach fehlenden Routingdaten für den aktuellen Bildschirmausschnitt zu suchen
 - Neu: Design-Legende für Elevate, Elements und Freizeitkarte-Designs
+- Korrektur: Reaktiviere Routing mit externer BRouter App in Version 1.6.3
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
@@ -15,6 +16,7 @@
 - Neu: Import von Lesezeichenlisten hinzufügen (nur GC Premium)
 - Neu: Sortierreihenfolge beim langen Klick auf Sortierleiste umkehren
 - Änderung: Automatische Erkennung und Sortierung von Cacheserien auf bis zu 500 Caches ausgeweitet
+- Korrektur: Kürzerer Timeout für schnellen Scroll-Mechanismus, um Überschneidungen mit anderen Layout-Elementen zu vermeiden
 
 ### Cache-Details
 - Neu: Aktuelle Cache-Koordinaten an Geochecker übergeben (falls vom Geochecker unterstützt)
@@ -36,3 +38,4 @@
 - Korrektur: Aktiviere Tooltips für Systeme, die unter Android-Versionen kleiner 8 laufen
 - Einstellungsmenüs geändert, um den aktuellen Android-Spezifikationen zu entsprechen
 - MapsWithMe API aktualisiert
+
