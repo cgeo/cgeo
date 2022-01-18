@@ -404,8 +404,6 @@
     <string name="caches_clear_offlinelogs_message">¿Quieres borrar los registros sin conexión?</string>
     <string name="caches_clear_offlinelogs_progress">Borrando registros sin conexión</string>
     <string name="caches_show_attributes">Mostrar resumen de atributos</string>
-    <string name="caches_set_cache_icon">Establecer iconos de caché</string>
-    <string name="caches_reset_cache_icons_title">Resetear iconos de caché</string>
     <string name="caches_make_list_unique">Hacer la lista exclusiva</string>
     <string name="caches_set_listmarker">Marcar lista</string>
     <string name="caches_askdeletion">Solicitar borrado si está vacío</string>

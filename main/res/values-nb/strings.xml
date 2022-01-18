@@ -268,7 +268,7 @@
     <string name="warn_search_help_tb">Angi koden til en sporbar. For eksempel \"TB29QMZ\".</string>
     <string name="warn_log_text_fill">Vennligst skriv en logg-tekst.</string>
     <string name="warn_load_images">c:geo kunne ikke laste bilder.</string>
-    <string name="warn_pocket_query_select">Ingen utvalgsspørring er valgt.</string>
+    <string name="warn_pocket_query_select">Ingen pocket query er valgt.</string>
     <string name="warn_no_pocket_query_found">Ingen pocket query ble funnet på geocaching.com.</string>
     <string name="warn_invalid_character">Tegnet må være en BOKSTAV eller et SIFFER</string>
     <string name="warn_notloggedin_title">Offline-modus</string>
@@ -401,8 +401,6 @@
     <string name="caches_clear_offlinelogs_message">Vil du fjerne offline-loggene?</string>
     <string name="caches_clear_offlinelogs_progress">Fjerner offline-logger</string>
     <string name="caches_show_attributes">Vis oversikt over attributter</string>
-    <string name="caches_set_cache_icon">Angi cacheikoner</string>
-    <string name="caches_reset_cache_icons_title">Tilbakestill cacheikoner</string>
     <string name="caches_make_list_unique">Gjør listen unik</string>
     <string name="caches_set_listmarker">Sett listemarkering</string>
     <string name="caches_askdeletion">Spør om sletting hvis tom</string>

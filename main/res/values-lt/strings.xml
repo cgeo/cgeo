@@ -393,8 +393,6 @@
     <string name="caches_clear_offlinelogs">Išvalyti išsaugotus įrašus</string>
     <string name="caches_clear_offlinelogs_message">Ar norite išvalyti išsaugotus įrašus?</string>
     <string name="caches_clear_offlinelogs_progress">Išvalomi išsaugoti įrašai</string>
-    <string name="caches_set_cache_icon">Nustatykite slėptuvės piktogramas</string>
-    <string name="caches_reset_cache_icons_title">Iš naujo nustatyti slėptuvės piktogramas</string>
     <string name="caches_make_list_unique">Sąrašą padaryti unikaliu</string>
     <string name="caches_set_listmarker">Nustatyti sąrašo žymeklį</string>
     <string name="select_icon">Pasirinkite piktogramą</string>
@@ -1397,7 +1395,7 @@
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsiųsti kasetes.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp slėptuvėms.</string>
     <!-- export -->
     <string name="share_export">Dalintis/Eksportuoti</string>

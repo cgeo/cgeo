@@ -412,8 +412,8 @@
     <string name="caches_clear_offlinelogs_message">Opravdu chceš vymazat offline logy?</string>
     <string name="caches_clear_offlinelogs_progress">Mazání offline logů</string>
     <string name="caches_show_attributes">Zobrazit přehled atributů</string>
-    <string name="caches_set_cache_icon">Nastavit ikony kešky</string>
-    <string name="caches_reset_cache_icons_title">Obnovit ikony kešek</string>
+    <string name="caches_set_cache_icon">Natavit ikonu kešky</string>
+    <string name="caches_reset_cache_icons_title">Obnovit ikonu kešky</string>
     <string name="caches_make_list_unique">Vytvořit seznam jedinečných</string>
     <string name="caches_set_listmarker">Nastavit značku seznamu</string>
     <string name="caches_askdeletion">Zeptat se na smazání, pokud je prázdný</string>

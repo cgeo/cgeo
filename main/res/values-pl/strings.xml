@@ -412,8 +412,6 @@
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_show_attributes">Pokaż przegląd atrybutów</string>
-    <string name="caches_set_cache_icon">Ustaw ikony skrytek</string>
-    <string name="caches_reset_cache_icons_title">Zresetuj ikony skrytek</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>

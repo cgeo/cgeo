@@ -350,8 +350,6 @@
     <string name="caches_clear_offlinelogs">清除离线服务器</string>
     <string name="caches_clear_offlinelogs_message">您想要清除离线日志吗？</string>
     <string name="caches_clear_offlinelogs_progress">清除离线服务器</string>
-    <string name="caches_set_cache_icon">设置藏点图标</string>
-    <string name="caches_reset_cache_icons_title">重置藏点图标</string>
     <string name="caches_make_list_unique">使列表唯一</string>
     <string name="caches_set_listmarker">设置列表标记</string>
     <string name="select_icon">选择图标</string>

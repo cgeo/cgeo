@@ -404,8 +404,6 @@
     <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
     <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
     <string name="caches_show_attributes">Mostra la panoramica degli attributi</string>
-    <string name="caches_set_cache_icon">Imposta icone cache</string>
-    <string name="caches_reset_cache_icons_title">Reimposta icone cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
     <string name="caches_askdeletion">Chiedi l\'eliminazione se vuota</string>

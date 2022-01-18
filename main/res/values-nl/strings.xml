@@ -408,7 +408,7 @@
     <string name="caches_clear_offlinelogs_message">Wil je de offline logs wissen?</string>
     <string name="caches_clear_offlinelogs_progress">Offline logs worden verwijderd</string>
     <string name="caches_show_attributes">Toon attribuut overzicht</string>
-    <string name="caches_set_cache_icon">Cachepictogrammen instellen</string>
+    <string name="caches_set_cache_icon">Cache pictogram instellen</string>
     <string name="caches_reset_cache_icons_title">Cache pictogrammen terugzetten</string>
     <string name="caches_make_list_unique">Lijst uniek maken</string>
     <string name="caches_set_listmarker">Zet lijst marker</string>

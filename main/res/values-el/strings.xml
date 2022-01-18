@@ -404,8 +404,6 @@
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
     <string name="caches_show_attributes">Εμφάνιση επισκόπησης ιδιοτήτων</string>
-    <string name="caches_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
-    <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίων κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
     <string name="caches_askdeletion">Ερώτηση για διαγραφή αν είναι κενό</string>
