@@ -4,10 +4,11 @@
 ### Mapa
 - Correcção: Ao carregar ficheiros GPX que contém vários percursos, mostra-os em separado, não ligados
 - Alteração: Activa automaticamente a exibição do percurso ao carregar um ficheiro de percurso GPX
-- New: Allow displaying several tracks at once
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Novo: Permitir a exibição de vários percursos de uma só vez
+- Novo: símbolos D/T para os ícones de cache (opcional)
+- Novo: Opção de verificação de falta de dados de encaminhamento na janela em visualização
+- Novo: Legenda de tema para Elevação, Elementos e temas de Freizeitkarte
+- Correcção: Reactivar o encaminhamento com a aplicação externa BRouter, na versão 1.6.3
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches
@@ -15,6 +16,7 @@
 - Novo: Adicionar importação de listas de favoritos (apenas membros premium GC)
 - Novo: Inverter a ordenação com um toque sem soltar na barra de ordenação
 - Alteração: Realizar ordenação automática por distância para listas contendo séries de caches com mais de 50 caches (até 500)
+- Correcção: Utilização de um período mais curto para o mecanismo de deslize rápido, para menos interferência com outros elementos da interface
 
 ### Detalhes da cache
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
@@ -36,3 +38,4 @@
 - Correcção: Activação das dicas de contexto (tooltips) em sistemas Android inferiores à versão 8
 - Definições redesenhadas para atender às especificações actuais do Android
 - Actualizada a API de MapsWithMe
+
