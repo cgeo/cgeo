@@ -403,8 +403,6 @@
     <string name="caches_clear_offlinelogs_message">오프라인 로그를 모두 지우시겠습니까?</string>
     <string name="caches_clear_offlinelogs_progress">오프라인 로그 삭제중</string>
     <string name="caches_show_attributes">속성 개요 표시</string>
-    <string name="caches_set_cache_icon">캐시 아이콘 설정</string>
-    <string name="caches_reset_cache_icons_title">캐시 아이콘 재설정</string>
     <string name="caches_make_list_unique">고유 목록 만들기</string>
     <string name="caches_set_listmarker">목록 표시 설정</string>
     <string name="caches_askdeletion">비어 있으면 삭제 요청</string>
