@@ -408,8 +408,8 @@
     <string name="caches_clear_offlinelogs_message">Möchtest du die Offline-Logs löschen?</string>
     <string name="caches_clear_offlinelogs_progress">Lösche Offline-Logs</string>
     <string name="caches_show_attributes">Attributübersicht anzeigen</string>
-    <string name="caches_set_cache_icon">Cache-Symbole wählen</string>
-    <string name="caches_reset_cache_icons_title">Cache-Symbole zurücksetzen</string>
+    <string name="caches_set_cache_icon">Cache-Symbol wählen</string>
+    <string name="caches_reset_cache_icons_title">Cache-Symbol zurücksetzen</string>
     <string name="caches_make_list_unique">Caches nur auf diese Liste</string>
     <string name="caches_set_listmarker">Listenmarkierung setzen</string>
     <string name="caches_askdeletion">Erinnere ans Löschen wenn leer</string>
