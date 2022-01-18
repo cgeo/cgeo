@@ -8,6 +8,7 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
+- Fix: Reenable routing with external BRouter app in version 1.6.3
 
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
@@ -15,6 +16,7 @@
 - Nou: Afegiu la importació de les llistes d'adreces d'interès (només GC premium)
 - Nou: Inverteix l'ordre d'ordenació fent clic llarg a la barra d'ordenació
 - Canvi: Feu una classificació automàtica per distància per a llistes que contenen sèries de catxés amb més de 50 catxés (fins a 500)
+- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
 
 ### Detalls del catxé
 - Nou: Passeu les coordenades actuals del catxé al geochecker (si és compatible amb el geochecker)
@@ -36,3 +38,4 @@
 - Fix: Enable tooltips for systems running on Android below version 8
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API
+
