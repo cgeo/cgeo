@@ -2495,7 +2495,7 @@
     <string name="rtl_path_combined_bicycle_foot">ruta combinada peatonal/bicicleta</string>
     <string name="rtl_path_narrow">camí, no prou ample per als cotxes</string>
     <string name="rtl_path_badly_visible">camí poca visibilitat</string>
-    <string name="rtl_path_quality1">qualitat 1 (asfaltat...)</string>
+    <string name="rtl_path_quality1">qualitat 1 (asfaltat, …)</string>
     <string name="rtl_path_quality23">qualitat 2/3 (asfaltat: grava, reparat, …)</string>
     <string name="rtl_path_quality45">qualitat 4/5 (sense pavimentar)</string>
 </resources>
