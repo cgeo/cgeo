@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingLeft="6dp"
@@ -8,43 +7,47 @@
 
     <TextView
         android:id="@+id/item_title"
-        android:layout_alignParentLeft="true"
-        android:layout_toLeftOf="@id/item_sort"
-        android:text="@string/individual_route"
         style="@style/text_default"
-        android:layout_centerVertical="true"/>
+        android:layout_alignParentLeft="true"
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_sort"
+        android:text="@string/individual_route" />
 
     <ImageButton
         android:id="@+id/item_sort"
-        android:src="@drawable/ic_menu_swap_vert"
-        android:layout_toLeftOf="@id/item_visibility"
         style="@style/button_icon"
-        android:visibility="gone"
-        android:hint="@string/map_sort_individual_route"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_visibility"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_menu_swap_vert"
+        android:tooltipText="@string/map_sort_individual_route"
+        android:visibility="gone" />
 
     <ImageButton
         android:id="@+id/item_visibility"
-        android:src="@drawable/visibility"
-        android:layout_toLeftOf="@id/item_center"
         style="@style/button_icon"
-        android:hint="@string/make_visible"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_center"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/visibility"
+        android:tooltipText="@string/make_visible" />
 
     <ImageButton
         android:id="@+id/item_center"
-        android:src="@drawable/center"
-        android:layout_toLeftOf="@id/item_delete"
         style="@style/button_icon"
-        android:hint="@string/center_on_route_track"
-        android:layout_centerVertical="true"/>
+        android:layout_centerVertical="true"
+        android:layout_toLeftOf="@id/item_delete"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/center"
+        android:tooltipText="@string/center_on_route_track" />
 
     <ImageButton
         android:id="@+id/item_delete"
-        android:src="@drawable/ic_menu_delete"
-        android:layout_alignParentRight="true"
         style="@style/button_icon"
-        android:hint="@string/unload_route_track"
-        android:layout_centerVertical="true"/>
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:src="@drawable/ic_menu_delete"
+        android:tooltipText="@string/unload_route_track" />
 
 </RelativeLayout>
