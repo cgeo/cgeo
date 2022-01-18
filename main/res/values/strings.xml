@@ -439,8 +439,8 @@
     <string name="caches_clear_offlinelogs_message">Do you want to clear the offline logs?</string>
     <string name="caches_clear_offlinelogs_progress">Clearing offline logs</string>
     <string name="caches_show_attributes">Show attribute overview</string>
-    <string name="caches_set_cache_icon">Set cache icons</string>
-    <string name="caches_reset_cache_icons_title">Reset cache icons</string>
+    <string name="caches_set_cache_icon">Set cache icon</string>
+    <string name="caches_reset_cache_icons_title">Reset cache icon</string>
     <string name="caches_make_list_unique">Make list unique</string>
     <string name="caches_set_listmarker">Set list marker</string>
     <string name="caches_askdeletion">Ask for deletion if empty</string>
