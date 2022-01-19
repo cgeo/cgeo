@@ -154,11 +154,12 @@ public class Settings {
          */
         SYSTEM_DEFAULT(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM, R.string.pref_value_theme_system_default);
 
-        private final int modeId;
+        private final @AppCompatDelegate.NightMode
+        int modeId;
         private final @StringRes
         int preferenceValue;
 
-        DarkModeSetting(final int modeId, final @StringRes int preferenceValue) {
+        DarkModeSetting(final @AppCompatDelegate.NightMode int modeId, final @StringRes int preferenceValue) {
             this.modeId = modeId;
             this.preferenceValue = preferenceValue;
         }
