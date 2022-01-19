@@ -339,7 +339,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private synchronized void drawRoute() {
         routeObjs.removeAll();
-        if (route != null && route.size() > 1) {
+        if (route != null && route.size() > 0) {
             for (ArrayList<LatLng> segment : route) {
                 routeObjs.addPolyline(new PolylineOptions()
                     .addAll(segment)
