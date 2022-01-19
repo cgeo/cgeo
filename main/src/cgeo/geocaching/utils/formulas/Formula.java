@@ -408,6 +408,7 @@ public final class Formula {
             throw new FormulaException(EMPTY_FORMULA);
         }
         final FormulaNode x = parseExpression();
+        // line end or beginning of user comment
         if (!p.eof()) {
             throw new FormulaException(UNEXPECTED_TOKEN, "EOF");
         }
@@ -535,6 +536,9 @@ public final class Formula {
 
         if (p.eat('^')) {
             x = createNumeric("^", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
+        }
+        if (p.eat('#')) {
+            p.parseUntil(c -> '#' == c, false, null, true); // drop potential user comments
         }
 
         return x;
