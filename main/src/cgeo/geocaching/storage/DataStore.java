@@ -5127,36 +5127,23 @@ public class DataStore {
 
         public <T> List<T> selectRows(final SQLiteDatabase db, final Func1<Cursor, T> mapper) {
 
-            Cursor c = null;
-            try {
-                c = openCursorFor(db, null);
+            try (Cursor c = openCursorFor(db, null)) {
                 final List<T> result = new ArrayList<>();
                 while (c.moveToNext()) {
                     result.add(mapper.call(c));
                 }
                 return result;
-
-            } finally {
-                if (c != null) {
-                    c.close();
-                }
             }
         }
 
         public <T> T selectFirstRow(final SQLiteDatabase db, final Func1<Cursor, T> mapper) {
 
-            Cursor c = null;
-            try {
-                c = openCursorFor(db, "1");
+            try (Cursor c = openCursorFor(db, "1")) {
                 final List<T> result = new ArrayList<>();
                 if (c.moveToNext()) {
                     return mapper.call(c);
                 }
                 return null;
-            } finally {
-                if (c != null) {
-                    c.close();
-                }
             }
         }
 
