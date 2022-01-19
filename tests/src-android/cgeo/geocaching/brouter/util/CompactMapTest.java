@@ -23,9 +23,9 @@ public class CompactMapTest {
 
     private void hashMapComparison(final int mapsize, final int trycount) {
         final Random rand = new Random(12345);
-        final HashMap<Long, String> hmap = new HashMap<Long, String>();
-        CompactLongMap<String> cmapSlow = new CompactLongMap<String>();
-        CompactLongMap<String> cmapFast = new CompactLongMap<String>();
+        final HashMap<Long, String> hmap = new HashMap<>();
+        CompactLongMap<String> cmapSlow = new CompactLongMap<>();
+        CompactLongMap<String> cmapFast = new CompactLongMap<>();
 
         for (int i = 0; i < mapsize; i++) {
             final String s = "" + i;
@@ -41,8 +41,8 @@ public class CompactMapTest {
 
         for (int i = 0; i < trycount * 2; i++) {
             if (i == trycount) {
-                cmapSlow = new FrozenLongMap<String>(cmapSlow);
-                cmapFast = new FrozenLongMap<String>(cmapFast);
+                cmapSlow = new FrozenLongMap<>(cmapSlow);
+                cmapFast = new FrozenLongMap<>(cmapFast);
             }
             final long k = mapsize < 10 ? i : rand.nextInt(20000);
             final Long kk = new Long(k);

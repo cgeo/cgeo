@@ -52,7 +52,7 @@ public class VoiceHint {
             return;
         }
         if (badWays == null) {
-            badWays = new ArrayList<MessageData>();
+            badWays = new ArrayList<>();
         }
         badWays.add(badWay);
     }

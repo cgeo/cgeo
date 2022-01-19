@@ -20,7 +20,7 @@ public class FrozenLongMap<V> extends CompactLongMap<V> {
         size = map.size();
 
         faid = new long[size];
-        flv = new ArrayList<V>(size);
+        flv = new ArrayList<>(size);
 
         map.moveToFrozenArrays(faid, flv);
 

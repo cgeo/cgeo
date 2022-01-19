@@ -8,7 +8,7 @@ import org.junit.Test;
 public class SortedHeapTest {
     @Test
     public void sortedHeapTest1() {
-        final SortedHeap<String> sh = new SortedHeap<String>();
+        final SortedHeap<String> sh = new SortedHeap<>();
         final Random rnd = new Random();
         for (int i = 0; i < 100000; i++) {
             int val = rnd.nextInt(1000000);
@@ -36,7 +36,7 @@ public class SortedHeapTest {
 
     @Test
     public void sortedHeapTest2() {
-        final SortedHeap<String> sh = new SortedHeap<String>();
+        final SortedHeap<String> sh = new SortedHeap<>();
         for (int i = 0; i < 100000; i++) {
             sh.add(i, "" + i);
         }

@@ -40,8 +40,8 @@ public final class OsmTrack {
 
     public boolean showspeed;
 
-    public List<OsmNodeNamed> pois = new ArrayList<OsmNodeNamed>();
-    public ArrayList<OsmPathElement> nodes = new ArrayList<OsmPathElement>();
+    public List<OsmNodeNamed> pois = new ArrayList<>();
+    public ArrayList<OsmPathElement> nodes = new ArrayList<>();
     public String message = null;
     public ArrayList<String> messageList = null;
     public String name = "unset";
@@ -167,7 +167,7 @@ public final class OsmTrack {
 
     public void registerDetourForId(final long id, final OsmPathElement detour) {
         if (detourMap == null) {
-            detourMap = new CompactLongMap<OsmPathElementHolder>();
+            detourMap = new CompactLongMap<>();
         }
         final OsmPathElementHolder nh = new OsmPathElementHolder();
         nh.node = detour;
@@ -183,11 +183,11 @@ public final class OsmTrack {
     }
 
     public void copyDetours(final OsmTrack source) {
-        detourMap = source.detourMap == null ? null : new FrozenLongMap<OsmPathElementHolder>(source.detourMap);
+        detourMap = source.detourMap == null ? null : new FrozenLongMap<>(source.detourMap);
     }
 
     public void buildMap() {
-        nodesMap = new CompactLongMap<OsmPathElementHolder>();
+        nodesMap = new CompactLongMap<>();
         for (OsmPathElement node : nodes) {
             final long id = node.getIdFromPos();
             final OsmPathElementHolder nh = new OsmPathElementHolder();
@@ -202,11 +202,11 @@ public final class OsmTrack {
                 nodesMap.fastPut(id, nh);
             }
         }
-        nodesMap = new FrozenLongMap<OsmPathElementHolder>(nodesMap);
+        nodesMap = new FrozenLongMap<>(nodesMap);
     }
 
     private ArrayList<String> aggregateMessages() {
-        final ArrayList<String> res = new ArrayList<String>();
+        final ArrayList<String> res = new ArrayList<>();
         MessageData current = null;
         for (OsmPathElement n : nodes) {
             if (n.message != null && n.message.wayKeyValues != null) {
@@ -228,7 +228,7 @@ public final class OsmTrack {
     }
 
     private ArrayList<String> aggregateSpeedProfile() {
-        final ArrayList<String> res = new ArrayList<String>();
+        final ArrayList<String> res = new ArrayList<>();
         int vmax = -1;
         int vmaxe = -1;
         int vmin = -1;
@@ -883,7 +883,7 @@ public final class OsmTrack {
         }
         int nodeNr = nodes.size() - 1;
         OsmPathElement node = nodes.get(nodeNr);
-        final List<VoiceHint> inputs = new ArrayList<VoiceHint>();
+        final List<VoiceHint> inputs = new ArrayList<>();
         while (node != null) {
             if (node.origin != null) {
                 final VoiceHint input = new VoiceHint();

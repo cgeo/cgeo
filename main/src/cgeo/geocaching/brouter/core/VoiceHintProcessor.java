@@ -51,7 +51,7 @@ public final class VoiceHintProcessor {
      * @return voice hints, in forward order
      */
     public List<VoiceHint> process(final List<VoiceHint> inputs) {
-        final List<VoiceHint> results = new ArrayList<VoiceHint>();
+        final List<VoiceHint> results = new ArrayList<>();
         double distance = 0.;
         float roundAboutTurnAngle = 0.f; // sums up angles in roundabout
 
@@ -178,7 +178,7 @@ public final class VoiceHintProcessor {
         // go through the hint list again in reverse order (=travel direction)
         // and filter out non-signficant hints and hints too close to it's predecessor
 
-        final List<VoiceHint> results2 = new ArrayList<VoiceHint>();
+        final List<VoiceHint> results2 = new ArrayList<>();
         int i = results.size();
         while (i > 0) {
             VoiceHint hint = results.get(--i);

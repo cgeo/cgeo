@@ -3045,7 +3045,7 @@ public class DataStore {
         }
 
         return queryToColl(dbTableVariables, new String[]{"_id", "varname", "formula"},
-            "geocode = ?", new String[]{geocode}, "varorder", null, new ArrayList<VariableList.VariableEntry>(),
+            "geocode = ?", new String[]{geocode}, "varorder", null, new ArrayList<>(),
             c -> new VariableList.VariableEntry(
                 c.getLong(0), c.getString(1), c.getString(2)));
     }

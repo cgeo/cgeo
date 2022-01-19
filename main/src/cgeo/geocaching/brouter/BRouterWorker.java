@@ -72,7 +72,7 @@ public class BRouterWorker {
     }
 
     private List<OsmNodeNamed> readPositions(final Bundle params) {
-        final List<OsmNodeNamed> wplist = new ArrayList<OsmNodeNamed>();
+        final List<OsmNodeNamed> wplist = new ArrayList<>();
 
         final double[] lats = params.getDoubleArray("lats");
         final double[] lons = params.getDoubleArray("lons");

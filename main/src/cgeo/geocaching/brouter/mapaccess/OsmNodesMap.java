@@ -21,7 +21,7 @@ public final class OsmNodesMap {
     public OsmNode endNode1;
     public OsmNode endNode2;
     public int cleanupMode = 0;
-    private final HashMap<OsmNode, OsmNode> hmap = new HashMap<OsmNode, OsmNode>(4096);
+    private final HashMap<OsmNode, OsmNode> hmap = new HashMap<>(4096);
     private final ByteArrayUnifier abUnifier = new ByteArrayUnifier(16384, false);
     private final OsmNode testKey = new OsmNode();
     private long currentmaxmem = 4000000; // start with 4 MB
@@ -220,7 +220,7 @@ public final class OsmNodesMap {
     }
 
     public void collectOutreachers() {
-        nodes2check = new ArrayList<OsmNode>(nodesCreated);
+        nodes2check = new ArrayList<>(nodesCreated);
         nodesCreated = 0;
         for (OsmNode n : hmap.values()) {
             addActiveNode(nodes2check, n);
