@@ -44,7 +44,7 @@ public class OsmNodePairSet {
 
     private void addPair(final long n1, final long n2) {
         if (map == null) {
-            map = new CompactLongMap<OsmNodePair>();
+            map = new CompactLongMap<>();
         }
         npairs++;
 

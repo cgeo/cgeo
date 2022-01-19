@@ -17,7 +17,7 @@ public class DenseLongMapTest {
 
     private void hashMapComparison(final int mapsize, final int trycount, final long keyrange) {
         final Random rand = new Random(12345);
-        final HashMap<Long, Integer> hmap = new HashMap<Long, Integer>();
+        final HashMap<Long, Integer> hmap = new HashMap<>();
         final DenseLongMap dmap = new DenseLongMap(512);
 
         for (int i = 0; i < mapsize; i++) {
@@ -49,7 +49,7 @@ public class DenseLongMapTest {
         final int trycount = 100000;
 
         final Random rand = new Random(12345);
-        final HashSet<Long> hset = new HashSet<Long>();
+        final HashSet<Long> hset = new HashSet<>();
 
         final DenseLongMap dmap = new DenseLongMap(512);
         for (int i = 0; i < mapputs; i++) {

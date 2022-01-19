@@ -23,7 +23,7 @@ public class RoutingEngine extends Thread {
     protected String errorMessage = null;
     protected RoutingContext routingContext;
     private NodesCache nodesCache;
-    private final SortedHeap<OsmPath> openSet = new SortedHeap<OsmPath>();
+    private final SortedHeap<OsmPath> openSet = new SortedHeap<>();
     private boolean finished = false;
     private int linksProcessed = 0;
     private int nodeLimit; // used for target island search
@@ -76,7 +76,7 @@ public class RoutingEngine extends Thread {
             final OsmTrack[] refTracks = new OsmTrack[nsections]; // used ways for alternatives
             final OsmTrack[] lastTracks = new OsmTrack[nsections];
             OsmTrack track = null;
-            final ArrayList<String> messageList = new ArrayList<String>();
+            final ArrayList<String> messageList = new ArrayList<>();
             for (int i = 0; ; i++) {
                 track = findTrack(refTracks, lastTracks);
                 track.message = "track-length = " + track.distance + " filtered ascend = " + track.ascend
@@ -176,7 +176,7 @@ public class RoutingEngine extends Thread {
         }
 
         if (matchedWaypoints == null) { // could exist from the previous alternative level
-            matchedWaypoints = new ArrayList<MatchedWaypoint>();
+            matchedWaypoints = new ArrayList<>();
             for (int i = 0; i < nUnmatched; i++) {
                 final MatchedWaypoint mwp = new MatchedWaypoint();
                 mwp.waypoint = waypoints.get(i);
@@ -512,7 +512,7 @@ public class RoutingEngine extends Thread {
             addToOpenset(startPath1);
             addToOpenset(startPath2);
         }
-        final ArrayList<OsmPath> openBorderList = new ArrayList<OsmPath>(4096);
+        final ArrayList<OsmPath> openBorderList = new ArrayList<>(4096);
         boolean memoryPanicMode = false;
         boolean needNonPanicProcessing = false;
 

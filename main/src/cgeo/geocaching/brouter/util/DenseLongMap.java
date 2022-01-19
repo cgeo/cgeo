@@ -16,7 +16,7 @@ import java.util.ArrayList;
  * @author ab
  */
 public class DenseLongMap {
-    private ArrayList<byte[]> blocklist = new ArrayList<byte[]>(4096);
+    private ArrayList<byte[]> blocklist = new ArrayList<>(4096);
 
     private int blocksize; // bytes per bitplane in one block
     private int blocksizeBits;

@@ -923,12 +923,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
     private String substituteVariables(final String variables) {
 
-        final List<VariableData> equationList = new ArrayList<VariableData>(equations.size());
+        final List<VariableData> equationList = new ArrayList<>(equations.size());
         for (final CalculatorVariable equ : equations
         ) {
             equationList.add(equ.getData());
         }
-        final List<VariableData> freeVariableList = new ArrayList<VariableData>(freeVariables.size());
+        final List<VariableData> freeVariableList = new ArrayList<>(freeVariables.size());
         for (final CalculatorVariable freeVar : freeVariables
         ) {
             freeVariableList.add(freeVar.getData());

@@ -28,7 +28,7 @@ public final class TagValueCoder {
     }
 
     public TagValueCoder() {
-        identityMap = new HashMap<TagValueSet, TagValueSet>();
+        identityMap = new HashMap<>();
     }
 
     public void encodeTagValueSet(final byte[] data) {
@@ -66,7 +66,7 @@ public final class TagValueCoder {
                 final TagValueSet dummy = new TagValueSet(nextTagValueSetId++);
                 identityMap.put(dummy, dummy);
             }
-            final PriorityQueue<TagValueSet> queue = new PriorityQueue<TagValueSet>(2 * identityMap.size(), new TagValueSet.FrequencyComparator());
+            final PriorityQueue<TagValueSet> queue = new PriorityQueue<>(2 * identityMap.size(), new TagValueSet.FrequencyComparator());
             queue.addAll(identityMap.values());
             while (queue.size() > 1) {
                 final TagValueSet node = new TagValueSet(nextTagValueSetId++);

@@ -55,7 +55,7 @@ public final class StatCoderContext extends BitCoderContext {
     public void assignBits(final String name) {
         final long bitpos = getWritingBitPosition();
         if (statsPerName == null) {
-            statsPerName = new TreeMap<String, long[]>();
+            statsPerName = new TreeMap<>();
         }
         long[] stats = statsPerName.get(name);
         if (stats == null) {

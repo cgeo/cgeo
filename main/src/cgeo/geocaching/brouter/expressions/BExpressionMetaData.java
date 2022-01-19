@@ -23,7 +23,7 @@ public final class BExpressionMetaData {
     public short lookupVersion = -1;
     public short lookupMinorVersion = -1;
 
-    private final HashMap<String, BExpressionContext> listeners = new HashMap<String, BExpressionContext>();
+    private final HashMap<String, BExpressionContext> listeners = new HashMap<>();
 
     public void registerListener(final String context, final BExpressionContext ctx) {
         listeners.put(context, ctx);

@@ -35,17 +35,17 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private boolean inOurContext = false;
     private BufferedReader br = null;
     private boolean readerDone = false;
-    private final Map<String, Integer> lookupNumbers = new HashMap<String, Integer>();
-    private final ArrayList<BExpressionLookupValue[]> lookupValues = new ArrayList<BExpressionLookupValue[]>();
-    private final ArrayList<String> lookupNames = new ArrayList<String>();
-    private final ArrayList<int[]> lookupHistograms = new ArrayList<int[]>();
+    private final Map<String, Integer> lookupNumbers = new HashMap<>();
+    private final ArrayList<BExpressionLookupValue[]> lookupValues = new ArrayList<>();
+    private final ArrayList<String> lookupNames = new ArrayList<>();
+    private final ArrayList<int[]> lookupHistograms = new ArrayList<>();
     private boolean[] lookupIdxUsed;
     private boolean lookupDataFrozen = false;
     private int[] lookupData = new int[0];
     private final byte[] abBuf = new byte[256];
     private final BitCoderContext ctxEndode = new BitCoderContext(abBuf);
     private final BitCoderContext ctxDecode = new BitCoderContext(new byte[0]);
-    private final Map<String, Integer> variableNumbers = new HashMap<String, Integer>();
+    private final Map<String, Integer> variableNumbers = new HashMap<>();
     private float[] variableData;
     // hash-cache for function results
     private final CacheNode probeCacheNode = new CacheNode();
@@ -230,7 +230,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     }
 
     public List<String> getKeyValueList(final boolean inverseDirection, final byte[] ab) {
-        final ArrayList<String> res = new ArrayList<String>();
+        final ArrayList<String> res = new ArrayList<>();
         decode(lookupData, inverseDirection, ab);
         for (int inum = 0; inum < lookupValues.size(); inum++) { // loop over lookup names
             final BExpressionLookupValue[] va = lookupValues.get(inum);
@@ -412,7 +412,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
 
 
     public void dumpStatistics() {
-        final TreeMap<String, String> counts = new TreeMap<String, String>();
+        final TreeMap<String, String> counts = new TreeMap<>();
         // first count
         for (String name : lookupNumbers.keySet()) {
             int cnt = 0;
@@ -677,7 +677,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     private List<BExpression> parseFileHelper(final InputStream is) throws Exception {
         br = new BufferedReader(new InputStreamReader(is, "UTF-8"));
         readerDone = false;
-        final List<BExpression> result = new ArrayList<BExpression>();
+        final List<BExpression> result = new ArrayList<>();
         for (; ; ) {
             final BExpression exp = BExpression.parse(this, 0);
             if (exp == null) {

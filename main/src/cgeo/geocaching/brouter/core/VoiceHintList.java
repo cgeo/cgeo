@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 public class VoiceHintList {
     public int turnInstructionMode;
-    public ArrayList<VoiceHint> list = new ArrayList<VoiceHint>();
+    public ArrayList<VoiceHint> list = new ArrayList<>();
     private String transportMode;
 
     public void setTransportMode(final boolean isCar, final boolean isBike) {
