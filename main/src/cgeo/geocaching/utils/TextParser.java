@@ -88,7 +88,7 @@ public final class TextParser {
 
     /** Returns true if end of parseable expression was reached */
     public boolean eof() {
-        return ch == 0;
+        return ch == END_CHAR;
     }
 
     /** Marks current parse position */

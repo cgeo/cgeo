@@ -361,4 +361,21 @@ public class FormulaTest {
         assertThat(String.format(Locale.US, "%c%09.5f°", c, d)).isEqualTo("E009.13246°");
     }
 
+    @Test
+    public void userComments() {
+        assertThat(eval("123#4")).isEqualTo(123d);
+        assertThat(eval("123# 4")).isEqualTo(123d);
+        assertThat(eval("123 #4")).isEqualTo(123d);
+        assertThat(eval("123 # 4")).isEqualTo(123d);
+        assertThat(eval("123##*4")).isEqualTo(123 * 4d);
+        assertThat(eval("123 ## * 4")).isEqualTo(123 * 4d);
+        assertThat(eval("123 #4# * 5")).isEqualTo(123 * 5d);
+        assertThat(eval("123 ### * 4")).isEqualTo(123d);
+        assertThat(eval("123#ABC")).isEqualTo(123d);
+        assertThat(eval("123 # -|=$&/( ABC 456 ÄÖÜäöü πΩ👍")).isEqualTo(123d);
+        assertThat(eval("3.14 #this is pi# * R # this is the radius used # *2    # 2*pi*r", "R", 10)).isEqualTo(3.14 * 10 * 2);
+        assertThat(eval("4! #comment")).isEqualTo(4 * 3 * 2);
+        assertThat(eval("4^2 #comment")).isEqualTo(4 * 4);
+        assertThat(eval("2 * (3 + 4) #comment")).isEqualTo(2 * (3 + 4));
+    }
 }
