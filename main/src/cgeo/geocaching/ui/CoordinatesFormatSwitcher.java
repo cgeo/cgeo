@@ -3,8 +3,6 @@ package cgeo.geocaching.ui;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.TextView;
 
 /**
@@ -26,12 +24,9 @@ public class CoordinatesFormatSwitcher {
 
     public CoordinatesFormatSwitcher setView(final TextView view) {
         this.view = view;
-        this.view.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(final View v) {
-                position = (position + 1) % availableFormats.length;
-                renderView();
-            }
+        this.view.setOnClickListener(v -> {
+            position = (position + 1) % availableFormats.length;
+            renderView();
         });
         renderView();
         return this;

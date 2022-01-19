@@ -141,7 +141,6 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CompoundButton;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -2033,19 +2032,16 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 });
 
                 headerBinding.hideVisitedWaypoints.setChecked(Settings.getHideVisitedWaypoints());
-                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-                    @Override
-                    public void onCheckedChanged(final CompoundButton buttonView, final boolean isChecked) {
-                        Settings.setHideVisitedWaypoints(isChecked);
+                headerBinding.hideVisitedWaypoints.setOnCheckedChangeListener((buttonView, isChecked) -> {
+                    Settings.setHideVisitedWaypoints(isChecked);
 
-                        final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
-                        Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
+                    final List<Waypoint> sortedWaypoints2 = createSortedWaypointList();
+                    Collections.sort(sortedWaypoints2, cache.getWaypointComparator());
 
-                        adapter.clear();
-                        adapter.addAll(sortedWaypoints2);
-                        adapter.notifyDataSetChanged();
-                        activity.reinitializePage(Page.WAYPOINTS.id);
-                    }
+                    adapter.clear();
+                    adapter.addAll(sortedWaypoints2);
+                    adapter.notifyDataSetChanged();
+                    activity.reinitializePage(Page.WAYPOINTS.id);
                 });
 
 
