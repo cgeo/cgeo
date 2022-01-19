@@ -14,7 +14,7 @@ public class TextSpinnerTest {
     @Test
     public void alwaysHasAnEntry() {
         final CallCounter cc = new CallCounter();
-        final TextSpinner<Integer> ts = new TextSpinner<Integer>().setChangeListener(i -> cc.callWith(i));
+        final TextSpinner<Integer> ts = new TextSpinner<Integer>().setChangeListener(cc::callWith);
 
         //freshly initialized Spinner already has a dummy value
         assertThat(ts.get()).isNull();
@@ -44,7 +44,7 @@ public class TextSpinnerTest {
         final CallCounter cc = new CallCounter();
         final TextSpinner<Integer> ts = new TextSpinner<Integer>()
                 .setValues(Arrays.asList(new Integer[]{1, 2, 3}))
-                .setChangeListener(v -> cc.callWith(v));
+                .setChangeListener(cc::callWith);
 
         ts.set(3);
         assertThat(ts.get()).isEqualTo(3);

@@ -31,12 +31,8 @@ public final class GPX11Parser extends GPXParser {
             }
         });
         // only to support other formats, standard is href as attribute
-        linkElement.getChild(namespace, "href").setEndTextElementListener(body -> {
-            setUrl(body);
-        });
-        linkElement.getChild(namespace, "text").setEndTextElementListener(body -> {
-            setUrlName(body);
-        });
+        linkElement.getChild(namespace, "href").setEndTextElementListener(this::setUrl);
+        linkElement.getChild(namespace, "text").setEndTextElementListener(this::setUrlName);
     }
 
     @Override

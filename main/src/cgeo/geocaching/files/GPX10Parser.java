@@ -17,12 +17,8 @@ public class GPX10Parser extends GPXParser {
 
     @Override
     protected void registerUrlAndUrlName(@NonNull final Element element) {
-        element.getChild(namespace, "url").setEndTextElementListener(body -> {
-            setUrl(body);
-        });
-        element.getChild(namespace, "urlname").setEndTextElementListener(body -> {
-            setUrlName(body);
-        });
+        element.getChild(namespace, "url").setEndTextElementListener(this::setUrl);
+        element.getChild(namespace, "urlname").setEndTextElementListener(this::setUrlName);
     }
 
     @Override

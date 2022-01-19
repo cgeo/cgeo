@@ -200,7 +200,7 @@ public class ContentStorageTest extends CGeoTestCase {
         //copy complete
         final List<FolderUtils.FolderProcessStatus> folderProcessStatuses = new ArrayList<>();
         final AtomicBoolean cancelFlag = new AtomicBoolean(false);
-        FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false, cancelFlag, cs -> folderProcessStatuses.add(cs));
+        FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false, cancelFlag, folderProcessStatuses::add);
         assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         //expect one initial status (with files/dirs to copy = -1), one status before (with files/dirs copied = 0 but known nr of files/dirs to copy) and then one for each file/dir
         assertThat(folderProcessStatuses).hasSize(2 + 3 + 7);

@@ -77,7 +77,7 @@ public class CompassActivity extends AbstractActionBarActivity {
             .setDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
             .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
             .setTextClickThrough(true)
-            .setChangeListener(d -> Settings.setDeviceOrientationMode(d));
+            .setChangeListener(Settings::setDeviceOrientationMode);
 
         reconfigureGui();
 
