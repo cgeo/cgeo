@@ -36,9 +36,7 @@ public class GPXIndividualRouteImporter {
             } catch (final Exception e) {
                 //
             }
-        }, () -> {
-            Toast.makeText(context, size.get() > 0 ? context.getResources().getQuantityString(R.plurals.individual_route_loaded, size.get(), size.get()) : context.getString(R.string.load_individual_route_error), Toast.LENGTH_SHORT).show();
-        });
+        }, () -> Toast.makeText(context, size.get() > 0 ? context.getResources().getQuantityString(R.plurals.individual_route_loaded, size.get(), size.get()) : context.getString(R.string.load_individual_route_error), Toast.LENGTH_SHORT).show());
     }
 
     // returns the length of the parsed route / 0 on empty or error

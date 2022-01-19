@@ -174,9 +174,7 @@ public class DownloaderUtils {
                 }
                 dialog.dismiss();
             })
-            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                dialog.dismiss();
-            })
+            .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
             .create()
             .show();
     }

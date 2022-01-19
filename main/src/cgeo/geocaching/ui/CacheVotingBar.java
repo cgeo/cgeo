@@ -36,9 +36,7 @@ public class CacheVotingBar {
             this.votingConnector = (IVotingCapability) connector;
             ratingBar.setVisibility(View.VISIBLE);
             label.setVisibility(View.VISIBLE);
-            ratingBar.setOnRatingBarChangeListener((ratingBar1, stars, fromUser) -> {
-                setRating(stars);
-             });
+            ratingBar.setOnRatingBarChangeListener((ratingBar1, stars, fromUser) -> setRating(stars));
             //initialize setting
             this.rating = cache.getMyVote();
             ratingBar.setRating(this.rating);

@@ -523,12 +523,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         individualRoute.reloadRoute(routeLayer);
         if (null != tracks) {
             try {
-                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
-                    tracks.traverse((key, route) -> {
-                        route.calculateNavigationRoute();
-                        trackLayer.updateRoute(key, route);
-                    });
-                }, () -> trackLayer.requestRedraw());
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
+                    route.calculateNavigationRoute();
+                    trackLayer.updateRoute(key, route);
+                }), () -> trackLayer.requestRedraw());
             } catch (RejectedExecutionException e) {
                 Log.e("NewMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
             }
