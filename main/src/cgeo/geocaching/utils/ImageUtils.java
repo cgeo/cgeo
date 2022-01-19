@@ -571,7 +571,7 @@ public final class ImageUtils {
         final String fileNamePraefix = OFFLINE_LOG_IMAGE_PRAEFIX + geocode;
         CollectionStream.of(LocalStorage.getOfflineLogImageDir(geocode).listFiles())
             .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))
-            .forEach(f -> f.delete());
+            .forEach(File::delete);
     }
 
     public static boolean deleteOfflineLogImageFile(final Image delete) {

@@ -237,7 +237,7 @@ public class DebugUtils {
             final Class<?> c = Class.forName(className);
             sb.append("Cons:[");
             for (Constructor<?> con : c.getDeclaredConstructors()) {
-                sb.append(con.getName()).append("(").append(CollectionStream.of(con.getParameterTypes()).map(p -> p.getName()).toJoinedString(",")).append(");");
+                sb.append(con.getName()).append("(").append(CollectionStream.of(con.getParameterTypes()).map(Class::getName).toJoinedString(",")).append(");");
             }
             sb.append("]");
 

@@ -123,7 +123,7 @@ public class AttributesGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public void setConfig(final ExpressionConfig config) {
         this.inverse = config.getFirstValue(CONFIG_KEY_INVERSE, false, BooleanUtils::toBoolean);
-        this.sources = config.getFirstValue(CONFIG_KEY_SOURCES, Settings.getAttributeFilterSources(), s -> Integer.parseInt(s));
+        this.sources = config.getFirstValue(CONFIG_KEY_SOURCES, Settings.getAttributeFilterSources(), Integer::parseInt);
         attributes.clear();
         attributesRaw.clear();
         for (String value : config.getDefaultList()) {

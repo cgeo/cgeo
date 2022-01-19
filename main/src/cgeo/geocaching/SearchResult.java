@@ -196,7 +196,7 @@ public class SearchResult implements Parcelable {
 
     public int getTotalCount() {
         //this returns the total ACHIEVABLE count by adding the returned total count differences to the
-        return reduceToContext(bb -> bb.getInt(CON_LEFT_TO_FETCH, 0), getCount(), (i1, i2) -> i1 + i2);
+        return reduceToContext(bb -> bb.getInt(CON_LEFT_TO_FETCH, 0), getCount(), Integer::sum);
     }
 
     public void setLeftToFetch(final IConnector con, final int leftToFetch) {

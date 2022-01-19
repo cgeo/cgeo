@@ -86,7 +86,7 @@ public class BackupUtils {
     public BackupUtils(final Activity activityContext, final Bundle savedState) {
         this.activityContext = activityContext;
         this.fileSelector = new ContentStorageActivityHelper(activityContext, savedState == null ? null : savedState.getBundle(STATE_CSAH))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER, Folder.class, f -> restore(f))
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER, Folder.class, this::restore)
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> triggerNextRegrantStep(pf, null))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_PERSISTED, PersistableUri.class, uri -> triggerNextRegrantStep(null, uri));
     }
