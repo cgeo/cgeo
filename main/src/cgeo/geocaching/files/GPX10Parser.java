@@ -23,8 +23,6 @@ public class GPX10Parser extends GPXParser {
 
     @Override
     protected void registerScriptUrl(@NonNull final Element element) {
-        element.getChild(namespace, "url").setEndTextElementListener(body -> {
-            scriptUrl = body;
-        });
+        element.getChild(namespace, "url").setEndTextElementListener(body -> scriptUrl = body);
     }
 }

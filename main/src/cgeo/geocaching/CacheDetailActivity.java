@@ -1160,14 +1160,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final TextView cachename = details.add(R.string.cache_name, span).right;
             activity.addContextMenu(cachename);
             if (cache.supportsNamechange()) {
-                cachename.setOnClickListener(v -> {
-                    Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
-                        cachename.setText(name);
-                        cache.setName(name);
-                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                        Toast.makeText(activity, R.string.cache_name_updated, Toast.LENGTH_SHORT).show();
-                    });
-                });
+                cachename.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_name_set), cache.getName(), activity.getString(R.string.caches_sort_name), name -> {
+                    cachename.setText(name);
+                    cache.setName(name);
+                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                    Toast.makeText(activity, R.string.cache_name_updated, Toast.LENGTH_SHORT).show();
+                }));
             }
 
             details.add(R.string.cache_type, cache.getType().getL10n());
@@ -1789,14 +1787,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             loadDescription(activity, longDescription, true, binding.description, binding.loading);
 
             if (cache.supportsDescriptionchange()) {
-                binding.description.setOnClickListener(v -> {
-                    Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
-                        binding.description.setText(description);
-                        cache.setDescription(description);
-                        DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
-                        Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
-                    });
-                });
+                binding.description.setOnClickListener(v -> Dialogs.input(activity, activity.getString(R.string.cache_description_set), cache.getDescription(), "Description", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_NORMAL | InputType.TYPE_TEXT_FLAG_MULTI_LINE, 5, 10, description -> {
+                    binding.description.setText(description);
+                    cache.setDescription(description);
+                    DataStore.saveCache(cache, LoadFlags.SAVE_ALL);
+                    Toast.makeText(activity, R.string.cache_description_updated, Toast.LENGTH_SHORT).show();
+                }));
             }
         }
 

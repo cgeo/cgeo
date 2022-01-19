@@ -874,12 +874,10 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         individualRoute.reloadRoute(overlayPositionAndScale);
         if (null != tracks) {
             try {
-                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> {
-                    tracks.traverse((key, route) -> {
-                        route.calculateNavigationRoute();
-                        ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route);
-                    });
-                }, () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
+                AndroidRxUtils.andThenOnUi(Schedulers.computation(), () -> tracks.traverse((key, route) -> {
+                    route.calculateNavigationRoute();
+                    ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, route);
+                }), () -> mapView.repaintRequired(overlayPositionAndScale instanceof GeneralOverlay ? ((GeneralOverlay) overlayPositionAndScale) : null));
             } catch (RejectedExecutionException e) {
                 Log.e("CGeoMap.routingModeChanged: RejectedExecutionException: " + e.getMessage());
             }

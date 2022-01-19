@@ -118,9 +118,7 @@ public class BackupUtils {
             SimpleDialog.of(activityContext)
                     .setTitle(R.string.init_backup_settings_restore)
                     .setMessage(R.string.settings_folder_changed, activityContext.getString(current.left.getNameKeyId()), folderToBeRestored.toUserDisplayableString(), activityContext.getString(android.R.string.cancel), activityContext.getString(android.R.string.ok))
-                    .confirm((d, v) -> {
-                    fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored));
-                },
+                    .confirm((d, v) -> fileSelector.restorePersistableFolder(current.left, current.left.getUriForFolder(folderToBeRestored)),
                 (d2, v2) -> {
                     regrantAccessFolders.remove(0);
                     triggerNextRegrantStep(null, null);
@@ -209,9 +207,7 @@ public class BackupUtils {
                     alertDialog.dismiss();
                     restoreInternal(activityContext, backupDir, databaseCheckbox.isChecked(), settingsCheckbox.isChecked());
                 })
-                .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> {
-                    alertDialog.cancel();
-                })
+                .setNegativeButton(activityContext.getString(android.R.string.no), (alertDialog, id) -> alertDialog.cancel())
                 .create();
 
         dialog.setOwnerActivity(activityContext);
@@ -333,9 +329,7 @@ public class BackupUtils {
                 .setView(content)
                 .setTitle(R.string.init_backup_backup_history)
                 .setCancelable(true)
-                .setPositiveButton(android.R.string.yes, (dialog, which) -> {
-                    removeDirs(dirs);
-                })
+                .setPositiveButton(android.R.string.yes, (dialog, which) -> removeDirs(dirs))
                 .setNeutralButton(android.R.string.cancel, (dialog, which) -> dialog.cancel())
                 .setOnCancelListener(dialog -> preference.setValue(Math.min(newValue + dirs.size(), activityContext.getResources().getInteger(R.integer.backup_history_length_max))))
                 .create();
