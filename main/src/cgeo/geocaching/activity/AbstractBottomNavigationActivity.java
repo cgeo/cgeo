@@ -101,7 +101,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
                 startActivity(CacheListActivity.getHistoryIntent(this));
             } else {
                 Settings.setLastDisplayedList(selectedListId);
-                startActivity(CacheListActivity.getActivityOfflineIntent(this).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
+                startActivity(CacheListActivity.getActivityOfflineIntent(this));
             }
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
