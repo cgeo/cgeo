@@ -2178,6 +2178,7 @@ do mapa e dos temas?</string>
     <string name="rtl_nature_reserve_strict">reserva natural (restrita)</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <string name="rtl_category_walking_cycling_climbing">Caminhada, Ciclismo, Escalada</string>
     <string name="rtl_hiking_T1">caminhada T1</string>
     <string name="rtl_hiking_T2">caminhada T2</string>
     <string name="rtl_hiking_T23">caminhada T2/T3</string>
@@ -2323,6 +2324,23 @@ do mapa e dos temas?</string>
     <string name="rtl_parking_restricted">estacionamento restrito</string>
     <string name="rtl_prison">prisão</string>
     <string name="rtl_corral">curral</string>
+    <string name="rtl_dump">aterro</string>
+    <string name="rtl_driving_range">campo de prática de golf</string>
+    <string name="rtl_ruin">ruína</string>
+    <string name="rtl_saline">salina</string>
+    <string name="rtl_freeway">auto-estrada</string>
+    <string name="rtl_freeway_similar">via rápida</string>
+    <string name="rtl_interstate">itinerário principal</string>
+    <string name="rtl_secondary_road">itinerário complementar</string>
+    <string name="rtl_district_road">estrada nacional</string>
+    <string name="rtl_side_street">travessa</string>
+    <string name="rtl_residential_road">estrada residencial</string>
+    <string name="rtl_access_road">caminho de acesso</string>
+    <string name="rtl_traffic_calmed_area">zona de acalmia de tráfego</string>
+    <string name="rtl_pedestrian_road">estrada pedonal</string>
+    <string name="rtl_tunnel">túnel</string>
+    <string name="rtl_bridge">ponte</string>
+    <string name="rtl_railway">linha ferroviária</string>
     <string name="rtl_path_quality1">qualidade 1 (pavimento: asfalto, …)</string>
     <string name="rtl_path_quality23">qualidade 2/3 (pavimento: gravilha, consertado, …)</string>
     <string name="rtl_path_quality45">qualidade 4/5 (por pavimentar)</string>
