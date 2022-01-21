@@ -12,6 +12,7 @@ import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.CalculatedCoordinateInputGuideView;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
@@ -40,6 +41,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
+
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * Dialog to manage calculation of a coordinate
@@ -227,7 +230,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             if (!c) {
                 refreshType(PLAIN, false);
             } else {
-                final CalculatedCoordinateType guessType = binding.NonPlainFormat.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
+                final CalculatedCoordinateType guessType = CalculatedCoordinateInputGuideView.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
                 refreshType(guessType == null ? displayType.get() : guessType, false);
             }
         });
@@ -239,7 +242,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
 
         //check if type from config is applicable
         if (calcCoord.getType() != PLAIN) {
-            final CalculatedCoordinateType type = binding.NonPlainFormat.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
+            final CalculatedCoordinateType type = CalculatedCoordinateInputGuideView.guessType(calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern());
             calcCoord.setType(type == null ? PLAIN : type);
         }
 
@@ -297,16 +300,20 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
 
     private void updateView() {
         //update the displayed coordinate texts
-        final Pair<Double, Double> gpData = calcCoord.calculateGeopointData(varList::getValue);
-        binding.latRes.setText(TextUtils.concat(calcCoord.getLatitudeString(varList::getValue), " ", getStatusText(gpData.first != null)));
-        binding.lonRes.setText(TextUtils.concat(calcCoord.getLongitudeString(varList::getValue), " ", getStatusText(gpData.second != null)));
+        final ImmutableTriple<Double, CharSequence, Boolean> latData = calcCoord.calculateLatitudeData(varList::getValue);
+        final ImmutableTriple<Double, CharSequence, Boolean> lonData = calcCoord.calculateLongitudeData(varList::getValue);
+        binding.latRes.setText(TextUtils.concat(latData.middle, " ", getStatusText(latData.left == null, latData.right)));
+        binding.lonRes.setText(TextUtils.concat(lonData.middle, " ", getStatusText(lonData.left == null, lonData.right)));
     }
 
-    private CharSequence getStatusText(final boolean positive) {
-        if (positive) {
-            return TextUtils.setSpan("✓", new ForegroundColorSpan(Color.GREEN));
+    private CharSequence getStatusText(final boolean error, final boolean warning) {
+        if (error) {
+            return TextUtils.setSpan("✖", new ForegroundColorSpan(Color.RED));
         }
-        return TextUtils.setSpan("✖", new ForegroundColorSpan(Color.RED));
+        if (warning) {
+            return TextUtils.setSpan("⚠", new ForegroundColorSpan(Color.YELLOW));
+        }
+        return TextUtils.setSpan("✓", new ForegroundColorSpan(Color.GREEN));
     }
 
     @Override

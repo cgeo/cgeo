@@ -404,7 +404,7 @@ public final class Formula {
 
         this.p.setPos(startPos);
         this.level = 0;
-        if (StringUtils.isBlank(rawExpression) || startPos >= rawExpression.length()) {
+        if (this.p.eof()) {
             throw new FormulaException(EMPTY_FORMULA);
         }
         final FormulaNode x = parseExpression();

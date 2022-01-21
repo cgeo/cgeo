@@ -2,16 +2,25 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.LeastRecentlyUsedMap;
+import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.util.Pair;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.core.util.Predicate;
+
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import org.apache.commons.collections4.SetUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class DegreeFormula {
 
@@ -19,111 +28,210 @@ public class DegreeFormula {
     private static final LeastRecentlyUsedMap<String, Pair<DegreeFormula, FormulaException>> FORMULA_CACHE =
         new LeastRecentlyUsedMap.LruCache<>(500);
 
+    private static final Formula ZERO_FORMULA = Formula.compile("0");
 
-    private static final Set<Integer> ALL_CHARS = new HashSet<>();
-    private static final Set<Integer> NEG_CHARS = new HashSet<>();
+    private static final Double[] DIVIDERS_PER_TYPE = new Double[] { 1d, 60d, 360d };
 
-    private static final KeyableCharSet scs = KeyableCharSet.createFor(" °'\"");
+    private static final Set<Integer> LAT_ALL_CHARS = SetUtils.hashSet((int) 'N', (int) 'n', (int) 'S', (int) 's');
+    private static final Set<Integer> LAT_NEG_CHARS = SetUtils.hashSet((int) 'S', (int) 's');
+    private static final Set<Integer> LON_ALL_CHARS = SetUtils.hashSet((int) 'E', (int) 'e', (int) 'W', (int) 'w', (int) 'O', (int) 'o');
+    private static final Set<Integer> LON_NEG_CHARS = SetUtils.hashSet((int) 'W', (int) 'w');
 
-    static {
-        for (char c : new char[]{'N', 'n', 'E', 'e', 'O', 'o'}) {
-            ALL_CHARS.add((int) c);
-        }
-        for (char c : new char[]{'S', 's', 'W', 'w'}) {
-            ALL_CHARS.add((int) c);
-            NEG_CHARS.add((int) c);
-        }
+    private static final KeyableCharSet scs = KeyableCharSet.createFor(" °'\".,");
+
+    private final TextParser parser;
+    private final boolean lonCoord;
+
+    private final List<DegreeFormulaNode> nodes = new ArrayList<>();
+    private final Set<String> neededVars = new HashSet<>();
+    private final Set<String> neededVarsReadOnly = Collections.unmodifiableSet(neededVars);
+    private int signum = 0; //0 = not set, 1 = set positive, -1 = set negative, -2 = ERROR
+
+    private interface DegreeFormulaNode {
+        Pair<Double, Boolean> apply(Func1<String, Value> varMap, List<CharSequence> css);
     }
 
-    private final List<Object> nodes = new ArrayList<>();
-    private final Set<String> neededVars;
 
-    private final String expression;
-    private int pos = -1;
-    private int ch = -1;
-
-    private DegreeFormula(final String expression) {
-        this.expression = expression;
+    private DegreeFormula(final String expression, final boolean lonCoord) {
+        this.parser = new TextParser(expression == null ? "" : expression.trim());
+        this.lonCoord = lonCoord;
         parse();
-        this.neededVars = Collections.unmodifiableSet(calculatedNeededVars());
     }
 
     public String getExpression() {
-        return expression;
+        return parser.getExpression();
     }
 
     public Set<String> getNeededVars() {
-        return this.neededVars;
+        return this.neededVarsReadOnly;
+    }
+
+    private boolean isHemisphereChar(final int c, final boolean negChars) {
+        if (this.lonCoord) {
+            return (negChars ? LON_NEG_CHARS : LON_ALL_CHARS).contains(c);
+        }
+        return (negChars ? LAT_NEG_CHARS : LAT_ALL_CHARS).contains(c);
+
+    }
+
+    private boolean checkAndParseHemisphereChar(final boolean checkEof) {
+        if (isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || Character.isWhitespace(parser.peek()))) {
+            signum = signum != 0 ? -2 : (isHemisphereChar(parser.chInt(), true) ? -1 : 1);
+            final String hemi = "" + Character.toUpperCase(parser.ch());
+            parser.nextNonWhitespace();
+            nodes.add((vm, css) -> {
+                if (signum == -2) {
+                    addError(css, hemi);
+                    return new Pair<>(null, false);
+                }
+                add(css, hemi);
+                return new Pair<>(0d, false);
+            });
+            return true;
+        }
+        return false;
+    }
+
+    private Formula parseFormula(final boolean returnZeroOnEmptyFormula) {
+        try {
+            final Formula f = Formula.compile(parser.getExpression(), parser.pos(), scs);
+            parser.setPos(parser.pos() + f.getExpression().length());
+            return f;
+        } catch (FormulaException fe) {
+            if (returnZeroOnEmptyFormula && FormulaException.ErrorType.EMPTY_FORMULA.equals(fe.getErrorType())) {
+                return ZERO_FORMULA;
+            }
+            return null;
+        }
     }
 
     private void parse() {
-        final int c = nextNonWhitespaceChar();
-        if (ALL_CHARS.contains(c)) {
-            nodes.add((char) c);
-            nextNonWhitespaceChar();
+        parser.skipWhitespaces();
+        checkAndParseHemisphereChar(false);
+
+        int lastType = -1; // 0 = degree, 1 = minute, 2 = seconds
+        while (!parser.eof()) {
+            //might be n/s at the end
+            if (checkAndParseHemisphereChar(true)) {
+                continue;
+            }
+
+            final Integer foundType = checkAndParseDegreePart(lastType);
+            if (foundType == null) {
+                break;
+            }
+
+            lastType = foundType;
         }
-        int pValue = 1;
-        boolean stop = false;
-        while (!stop && ch != -1) {
-            if (ALL_CHARS.contains(ch) && (peek() == -1 || Character.isWhitespace(peek()))) {
-                nodes.add((char) ch);
-            } else {
-                try {
-                    final Formula f = Formula.compile(expression, pos, scs);
-                    pos += f.getExpression().length();
-                    switch (ch) {
-                        case (int) '°':
-                            nodes.add(new Pair<>(f, 1));
-                            pValue = 60;
-                            break;
-                        case (int) '\'':
-                            if (peek() == '\'') {
-                                nextChar();
-                                nodes.add(new Pair<>(f, 60));
-                            } else {
-                                nodes.add(new Pair<>(f, 360));
-                            }
-                            pValue = 360;
-                            break;
-                        case (int) '"':
-                            nodes.add(new Pair<>(f, 360));
-                            pValue = 360;
-                            break;
-                        default:
-                            nodes.add(new Pair<>(f, pValue));
-                            if (pValue < 360) {
-                                pValue *= 60;
-                            }
-                            break;
-                    }
+        if (!parser.eof()) {
+            final String errorExp = parser.getExpression().substring(parser.pos()) + "?";
+            nodes.add((vm, css) -> {
+                addError(css, errorExp);
+                return new Pair<>(null, false);
+            });
+        }
+    }
 
+    @Nullable
+    private Integer checkAndParseDegreePart(final int lastType) {
+        parser.mark();
+        final Formula f = parseFormula(false);
+        if (f == null) {
+            return null;
+        }
+        neededVars.addAll(f.getNeededVariables());
+        Formula fAfterDigit = null;
+        if (parser.chIsIn('.', ',')) {
+            parser.next();
+            fAfterDigit = parseFormula(true);
+            if (fAfterDigit == null) {
+                parser.reset();
+                return null;
+            }
+            neededVars.addAll(fAfterDigit.getNeededVariables());
+        }
+        final int foundType = parseFoundType(lastType);
+        if (foundType > 2 || foundType <= lastType) {
+            parser.reset();
+            return null;
+        }
+        parser.nextNonWhitespace();
+        final DegreeFormulaNode node = createDegreePartNode(foundType, f, fAfterDigit);
 
-                } catch (FormulaException fe) {
-                    nodes.add(expression.substring(pos));
-                    stop = true;
+        final List<CharSequence> constCssList = new ArrayList<>();
+        final Pair<Double, Boolean> constResult = node.apply(null, constCssList);
+        final CharSequence constCss = TextUtils.join(constCssList, c -> c, "");
+        if (constResult.first != null) {
+            nodes.add((vm, css) -> {
+                add(css, constCss);
+                return constResult;
+            });
+        } else {
+            nodes.add(node);
+        }
+        return foundType;
+    }
+
+    private DegreeFormulaNode createDegreePartNode(final int foundType, final Formula f, final Formula fAfterDigit) {
+        return (vm, css) -> {
+            final Pair<Double, Boolean> value;
+            switch (foundType) {
+                case 0:
+                    value = evaluateNumber(css, f, fAfterDigit, vm,
+                        d -> d >= (lonCoord ? -180 : -90) && d <= (lonCoord ? 180 : 90), 0);
+                    add(css, "°");
+                    break;
+                case 1:
+                    value = evaluateNumber(css, f, fAfterDigit, vm,
+                        d -> d >= 0 && d < 60, 3);
+                    add(css, "'");
+                    break;
+                case 2:
+                    value = evaluateNumber(css, f, fAfterDigit, vm,
+                        d -> d >= 0 && d < 60, 3);
+                    add(css, "\"");
+                    break;
+                default:
+                    value = null;
+                    break;
+            }
+            if (value == null || value.first == null) {
+                return new Pair<>(null, false);
+            }
+            return new Pair<>(value.first / DIVIDERS_PER_TYPE[foundType], value.second);
+        };
+    }
+
+    private int parseFoundType(final int lastType) {
+        final int foundType;
+        switch (parser.ch()) {
+            case '°':
+                foundType = 0;
+                break;
+            case '\'':
+                if (parser.peek() == (int) '\'') {
+                    parser.next();
+                    foundType = 2;
+                } else {
+                    foundType = 1;
                 }
-            }
-            nextNonWhitespaceChar();
+                break;
+            case '"':
+                foundType = 2;
+                break;
+            default:
+                foundType = lastType + 1;
+                break;
         }
+        return foundType;
     }
 
-    @SuppressWarnings("unchecked")
-    private Set<String> calculatedNeededVars() {
-        final Set<String> result = new HashSet<>();
-        for (Object node : nodes) {
-            if (node instanceof Pair<?, ?>) {
-                result.addAll(((Pair<Formula, Integer>) node).first.getNeededVariables());
-            }
-        }
-        return result;
-    }
-
-    public static DegreeFormula compile(final String expression) throws FormulaException {
-        final String cacheKey = expression;
+    public static DegreeFormula compile(final String expression, final boolean lonCoord) throws FormulaException {
+        final String cacheKey = expression + ":" + lonCoord;
         Pair<DegreeFormula, FormulaException> entry = FORMULA_CACHE.get(cacheKey);
         if (entry == null) {
             try {
-                entry = new Pair<>(new DegreeFormula(expression), null);
+                entry = new Pair<>(new DegreeFormula(expression, lonCoord), null);
             } catch (FormulaException ce) {
                 entry = new Pair<>(null, ce);
             }
@@ -135,80 +243,126 @@ public class DegreeFormula {
         throw entry.second;
     }
 
-
+    @NonNull
     public String evaluateToString(final Func1<String, Value> varMap) {
         return evaluateToCharSequence(varMap).toString();
     }
 
-    @SuppressWarnings("unchecked")
+    @NonNull
     public CharSequence evaluateToCharSequence(final Func1<String, Value> varMap) {
+        return evaluate(varMap).middle;
+    }
 
+    @Nullable
+    public Double evaluateToDouble(final Func1<String, Value> varMap) {
+        return evaluate(varMap).left;
+    }
+
+
+    /**
+     * Evaluates both the double value and the CharSequence representation of this DegreeFormula
+     * to allow for a more performant calculation.
+     *
+     * @param varMap varmap to calculate values for
+     * @return pair with calculated double value as first param (might be null) and text representation as secod (never null)
+     */
+    @NonNull
+    public ImmutableTriple<Double, CharSequence, Boolean> evaluate(final Func1<String, Value> varMap) {
+
+        if (nodes.isEmpty()) {
+            return new ImmutableTriple<>(null, "", false);
+        }
         final List<CharSequence> css = new ArrayList<>();
-        for (Object o : nodes) {
-            if (o instanceof Character) {
-                css.add("" + o);
-            } else if (o instanceof String) {
-                css.add(TextUtils.setSpan((String) o, Formula.createWarningSpan(), -1, -1, 1));
+        Double result = 0d;
+        boolean hasWarning = false;
+        for (DegreeFormulaNode o : nodes) {
+            final Pair<Double, Boolean> res = o.apply(varMap, css);
+            final Double nodeResult = res.first;
+            result = (result == null || nodeResult == null) ? null : result + nodeResult;
+            hasWarning |= res.second;
+        }
+        return new ImmutableTriple<>(result == null ? null : (signum == -1 ? result * -1 : result), TextUtils.join(css, c -> c, ""), hasWarning);
+    }
+
+    @Nullable
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    private Pair<Double, Boolean> evaluateNumber(final List<CharSequence> css, final Formula f, final Formula fAfterDigit, final Func1<String, Value> varMap, final Predicate<Double> checker, final int precision) {
+        final boolean hasDigits = fAfterDigit != null;
+        final Value v = evaluateSingleFormula(f, varMap);
+        final Value vAfter = !hasDigits ? null : evaluateSingleFormula(fAfterDigit, varMap);
+
+        //check for diverse error situations
+        if (v == null || !v.isDouble() ||
+            (signum != 0 && v.getAsDouble() < 0) ||
+            (hasDigits && (vAfter == null || !v.isInteger() || !vAfter.isInteger() || vAfter.getAsInt() < 0))) {
+            if (v == null) {
+                add(css, f.evaluateToCharSequence(varMap));
             } else {
-                final Pair<Formula, Integer> p = (Pair<Formula, Integer>) o;
-                css.add(p.first.evaluateToCharSequence(varMap));
-                switch (p.second) {
-                    case 1:
-                        css.add("°");
-                        break;
-                    case 60:
-                        css.add("'");
-                        break;
-                    case 360:
-                        css.add("\"");
-                        break;
-                    default:
-                        break;
+                addError(css, v.getAsString());
+            }
+            if (hasDigits) {
+                add(css, ".");
+                if (vAfter != null && vAfter.isInteger()) {
+                    addError(css, padDigits(vAfter.getAsString(), precision).first);
+                } else {
+                    add(css, fAfterDigit.evaluateToCharSequence(varMap));
                 }
             }
+            return null;
         }
-        return TextUtils.join(css, c -> c, "");
-    }
 
-    @SuppressWarnings("unchecked")
-    public Double evaluate(final Func1<String, Value> varMap) {
-        int sign = 1;
-        double result = 0d;
-        boolean foundAny = false;
-        for (Object o : nodes) {
-            if (o instanceof Character) {
-                if (NEG_CHARS.contains((int) ((Character) o))) {
-                    sign = -sign;
-                }
-            } else if (o instanceof String) {
-                return null;
+        if (hasDigits) {
+            final String digits = v.getAsString();
+            final Pair<CharSequence, Boolean> digitsAfter = padDigits(vAfter.getAsString(), precision);
+            final double result = Double.parseDouble(digits + "." + digitsAfter.first);
+            if (checker.test(result)) {
+                add(css, digits, ".", digitsAfter.first);
+                return new Pair<>(result, digitsAfter.second);
             } else {
-                foundAny = true;
-                final Pair<Formula, Integer> p = (Pair<Formula, Integer>) o;
-                try {
-                    result += p.first.evaluate(varMap).getAsDouble() / p.second;
-                } catch (FormulaException fe) {
-                    return null;
-                }
+                addError(css, digits, ".", digitsAfter.first);
+                return new Pair<>(null, digitsAfter.second);
             }
         }
-        return foundAny ? result * sign : null;
+
+        if (checker.test(v.getAsDouble())) {
+            add(css, v.getAsString());
+            return new Pair<>(v.getAsDouble(), false);
+        }
+        addError(css, v.getAsString());
+        return null;
     }
 
-    private int nextChar() {
-        pos++;
-        ch = pos >= expression.length() ? -1 : expression.charAt(pos);
-        return (char) ch;
+    private Pair<CharSequence, Boolean> padDigits(final String unpaddedDigits, final int targetSize) {
+        if (targetSize <= 0 || targetSize == unpaddedDigits.length()) {
+            return new Pair<>(unpaddedDigits, false);
+        }
+        if (targetSize < unpaddedDigits.length()) {
+            return new Pair<>(TextUtils.setSpan(unpaddedDigits, Formula.createWarningSpan(), targetSize, -1, 0), true);
+        }
+        final String pad = TextUtils.getPad("0000000000",  targetSize - unpaddedDigits.length());
+        return new Pair<>(TextUtils.setSpan(pad + unpaddedDigits, Formula.createWarningSpan(), 0,  pad.length(), 0), true);
     }
 
-    private int peek() {
-        return (pos + 1 >= expression.length() ? -1 : (int) expression.charAt(pos + 1));
+    private Value evaluateSingleFormula(final Formula f, final Func1<String, Value> varMap) {
+        try {
+            return f.evaluate(varMap);
+        } catch (FormulaException fe) {
+            return null;
+        }
     }
 
-    private int nextNonWhitespaceChar() {
-        do {
-            nextChar();
-        } while (Character.isWhitespace((char) ch));
-        return ch;
+    private static void add(final List<CharSequence> css, final CharSequence ... csse) {
+        if (css != null) {
+            css.addAll(Arrays.asList(csse));
+        }
     }
+
+    private static void addError(final List<CharSequence> css, final CharSequence ... csse) {
+        if (css != null) {
+            for (CharSequence cs : csse) {
+                css.add(TextUtils.setSpan(cs.toString(), Formula.createErrorSpan()));
+            }
+        }
+    }
+
 }

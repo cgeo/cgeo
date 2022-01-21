@@ -5,10 +5,10 @@ import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.DegreeFormula;
 import cgeo.geocaching.utils.formulas.Value;
 import cgeo.geocaching.utils.functions.Func1;
+import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -17,16 +17,16 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.apache.commons.lang3.EnumUtils;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class CalculatedCoordinate implements Parcelable {
 
     //Config String: {CC|<latPatern>|<lonPattern>|<type-char>}
     public static final String CONFIG_KEY = "CC";
 
-    private static final DegreeFormula EMPTY_FORMULA = DegreeFormula.compile("");
+    private static final DegreeFormula EMPTY_FORMULA = DegreeFormula.compile("", false);
 
-    private CalculatedCoordinateType type = CalculatedCoordinateType.PLAIN;
+    private CalculatedCoordinateType type = PLAIN;
     private DegreeFormula latitudePattern = EMPTY_FORMULA;
     private DegreeFormula longitudePattern = EMPTY_FORMULA;
 
@@ -58,7 +58,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public void setType(final CalculatedCoordinateType type) {
-        this.type = type == null ? CalculatedCoordinateType.PLAIN : type;
+        this.type = type == null ? PLAIN : type;
     }
 
     public String getLatitudePattern() {
@@ -66,7 +66,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public void setLatitudePattern(final String latitudePattern) {
-        this.latitudePattern = latitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(latitudePattern);
+        this.latitudePattern = latitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(latitudePattern, false);
     }
 
     public String getLongitudePattern() {
@@ -74,7 +74,7 @@ public class CalculatedCoordinate implements Parcelable {
     }
 
     public void setLongitudePattern(final String longitudePattern) {
-        this.longitudePattern = longitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(longitudePattern);
+        this.longitudePattern = longitudePattern == null ? EMPTY_FORMULA : DegreeFormula.compile(longitudePattern, true);
     }
 
     public void setFrom(final CalculatedCoordinate other) {
@@ -97,7 +97,7 @@ public class CalculatedCoordinate implements Parcelable {
         final List<String> tokens = tp.splitUntil(c -> c == '}', c -> c == '|', false, '\\', false);
         setLatitudePattern(tokens.size() > 0 ? tokens.get(0) : "");
         setLongitudePattern(tokens.size() > 1 ? tokens.get(1) : "");
-        this.type = EnumUtils.getEnum(CalculatedCoordinateType.class, tokens.size() > 2 ? tokens.get(2) : null, CalculatedCoordinateType.PLAIN);
+        this.type = CalculatedCoordinateType.fromName(tokens.size() > 2 ? tokens.get(2) : PLAIN.shortName());
         return tp.pos();
     }
 
@@ -105,7 +105,7 @@ public class CalculatedCoordinate implements Parcelable {
         return "{" + CONFIG_KEY +
             "|" + TextParser.escape(latitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
             '|' + TextParser.escape(longitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
-            (type != null ? '|' + type.name() : "") +
+            (type != null && PLAIN != type ? '|' + type.shortName() : "") +
             '}';
     }
 
@@ -135,14 +135,6 @@ public class CalculatedCoordinate implements Parcelable {
         return state;
     }
 
-    public CharSequence getLatitudeString(final Func1<String, Value> varMap) {
-        return latitudePattern.evaluateToCharSequence(varMap);
-    }
-
-    public CharSequence getLongitudeString(final Func1<String, Value> varMap) {
-        return longitudePattern.evaluateToCharSequence(varMap);
-    }
-
     public Set<String> getNeededVars() {
         final Set<String> neededVars = new HashSet<>();
         neededVars.addAll(latitudePattern.getNeededVars());
@@ -152,13 +144,18 @@ public class CalculatedCoordinate implements Parcelable {
 
     @Nullable
     public Geopoint calculateGeopoint(final Func1<String, Value> varMap) {
-        final Pair<Double, Double> data = calculateGeopointData(varMap);
-        return data.first == null || data.second == null ? null : new Geopoint(data.first, data.second);
+        final ImmutableTriple<Double, CharSequence, Boolean> latData = calculateLatitudeData(varMap);
+        final ImmutableTriple<Double, CharSequence, Boolean> lonData = calculateLongitudeData(varMap);
+        return latData.left == null || lonData.left == null ? null : new Geopoint(latData.left, lonData.left);
     }
 
     @NonNull
-    public Pair<Double, Double> calculateGeopointData(final Func1<String, Value> varMap) {
-        return new Pair<>(latitudePattern.evaluate(varMap), longitudePattern.evaluate(varMap));
+    public ImmutableTriple<Double, CharSequence, Boolean> calculateLatitudeData(final Func1<String, Value> varMap) {
+        return latitudePattern.evaluate(varMap);
+    }
+
+    public ImmutableTriple<Double, CharSequence, Boolean> calculateLongitudeData(final Func1<String, Value> varMap) {
+        return longitudePattern.evaluate(varMap);
     }
 
     @Override
