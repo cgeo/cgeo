@@ -72,6 +72,9 @@ public class BackupUtils {
     private static final String TAG_MAP = "map";
     private static final String SETTINGS_FILENAME = "cgeo-settings.xml";
 
+    private static final int MAX_AUTO_BACKUPS = 4;  // most recent + x more
+    private static final String AUTO_BACKUP_FOLDER = "auto"; // subfolder of PersistableFolder.BACKUP
+
     private static final String STATE_CSAH = "csam";
 
     private final ContentStorageActivityHelper fileSelector;
@@ -319,8 +322,8 @@ public class BackupUtils {
         }
     }
 
-    public void deleteBackupHistoryDialog(final BackupSeekbarPreference preference, final int newValue) {
-        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(newValue + 1);
+    public void deleteBackupHistoryDialog(final BackupSeekbarPreference preference, final int newValue, final boolean autobackup) {
+        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(newValue + 1, autobackup);
 
         if (dirs != null) {
             final View content = activityContext.getLayoutInflater().inflate(R.layout.dialog_text_checkbox, null);
@@ -353,27 +356,32 @@ public class BackupUtils {
     /**
      * Create a backup after confirming to overwrite the existing backup.
      */
-    public void backup(final Runnable runAfterwards) {
+    public void backup(final Runnable runAfterwards, final boolean autobackup) {
 
         // avoid overwriting an existing backup with an empty database
         // (can happen directly after reinstalling the app)
         if (DataStore.getAllCachesCount() == 0) {
             SimpleDialog.of(activityContext).setTitle(R.string.init_backup_backup).setMessage(R.string.init_backup_unnecessary)
-                .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> backupStep2(runAfterwards));
+                .setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> backupStep2(runAfterwards, autobackup));
         } else {
-            backupStep2(runAfterwards);
+            backupStep2(runAfterwards, autobackup);
         }
     }
 
-    private void backupStep2(final Runnable runAfterwards) {
-        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(Settings.allowedBackupsNumber());
+    private void backupStep2(final Runnable runAfterwards, final boolean autobackup) {
+        final List<ContentStorage.FileInformation> dirs = getDirsToRemove(autobackup ? MAX_AUTO_BACKUPS : Settings.allowedBackupsNumber(), autobackup);
         if (dirs != null) {
-            Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), null, true, null, () -> {
+            if (autobackup) {
                 removeDirs(dirs);
-                backupInternal(runAfterwards);
-            });
+                backupInternal(runAfterwards, true);
+            } else {
+                Dialogs.advancedOneTimeMessage(activityContext, OneTimeDialogs.DialogType.DATABASE_CONFIRM_OVERWRITE, activityContext.getString(R.string.init_backup_backup), activityContext.getString(R.string.backup_confirm_overwrite, getBackupDateTime(dirs.get(dirs.size() - 1).dirLocation)), null, true, null, () -> {
+                    removeDirs(dirs);
+                    backupInternal(runAfterwards, false);
+                });
+            }
         } else {
-            backupInternal(runAfterwards);
+            backupInternal(runAfterwards, autobackup);
         }
     }
 
@@ -539,8 +547,8 @@ public class BackupUtils {
         }
     }
 
-    private void backupInternal(final Runnable runAfterwards) {
-        final Folder backupDir = getNewBackupFolder(System.currentTimeMillis());
+    private void backupInternal(final Runnable runAfterwards, final boolean autobackup) {
+        final Folder backupDir = getNewBackupFolder(System.currentTimeMillis(), autobackup);
         if (backupDir == null) {
             Toast.makeText(activityContext, R.string.init_backup_folder_exists_error, Toast.LENGTH_LONG).show();
             return;
@@ -710,20 +718,21 @@ public class BackupUtils {
 
     @Nullable
     public static Folder newestBackupFolder() {
-        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted();
+        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(false);
         return dirs == null ? null : dirs.get(dirs.size() - 1).dirLocation;
     }
 
     @Nullable
-    private static ArrayList<ContentStorage.FileInformation> getExistingBackupFoldersSorted() {
-        final ArrayList<ContentStorage.FileInformation> files = new ArrayList<>(ContentStorage.get().list(PersistableFolder.BACKUP.getFolder(), true, false));
+    private static ArrayList<ContentStorage.FileInformation> getExistingBackupFoldersSorted(final boolean autobackup) {
+        final Folder folder = autobackup ? Folder.fromPersistableFolder(PersistableFolder.BACKUP, AUTO_BACKUP_FOLDER) : PersistableFolder.BACKUP.getFolder();
+        final ArrayList<ContentStorage.FileInformation> files = new ArrayList<>(ContentStorage.get().list(folder, true, false));
         CollectionUtils.filter(files, s -> s.isDirectory && s.name.matches("^[0-9]{4}-[0-9]{2}-[0-9]{2} (20|21|22|23|[01]\\d|\\d)((-[0-5]\\d){1,2})$"));
         return files.size() == 0 ? null : files;
     }
 
     @Nullable
-    private List<ContentStorage.FileInformation> getDirsToRemove(final int maxBackupNumber) {
-        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted();
+    private List<ContentStorage.FileInformation> getDirsToRemove(final int maxBackupNumber, final boolean autobackup) {
+        final ArrayList<ContentStorage.FileInformation> dirs = getExistingBackupFoldersSorted(autobackup);
 
         if (dirs == null || dirs.size() <= maxBackupNumber || maxBackupNumber >= activityContext.getResources().getInteger(R.integer.backup_history_length_max)) {
             Log.i("no old backups to remove");
@@ -741,12 +750,27 @@ public class BackupUtils {
     }
 
     @Nullable
-    public static Folder getNewBackupFolder(final long timestamp) {
-        if (ContentStorage.get().exists(PersistableFolder.BACKUP.getFolder(), Formatter.formatDateForFilename(timestamp))) {
+    public static Folder getNewBackupFolder(final long timestamp, final boolean autobackup) {
+        final Folder folder = autobackup ? Folder.fromPersistableFolder(PersistableFolder.BACKUP, AUTO_BACKUP_FOLDER) : PersistableFolder.BACKUP.getFolder();
+        final String subfoldername = Formatter.formatDateForFilename(timestamp);
+        if (ContentStorage.get().exists(folder, subfoldername)) {
             return null; // We don't want to overwrite a existing backup
         }
-        final Folder subfolder = Folder.fromPersistableFolder(PersistableFolder.BACKUP, Formatter.formatDateForFilename(timestamp));
+        final Folder subfolder = Folder.fromFolder(folder, subfoldername);
         ContentStorage.get().ensureFolder(subfolder, true);
         return subfolder;
     }
+
+    public static void checkForBackupReminder(final Activity activity) {
+        if (Settings.automaticBackupDue()) {
+            SimpleDialog.of(activity).setTitle(R.string.init_backup_automatic).setMessage(R.string.init_backup_automatic_reminder).setNegativeButton(TextParam.id(R.string.later)).confirm((dialog, which) -> {
+                new BackupUtils(activity, null).backup(() -> returnFromAutomaticBackupCheck(true), true);
+            }, (dialog, w) -> returnFromAutomaticBackupCheck(false));
+        }
+    }
+
+    private static void returnFromAutomaticBackupCheck(final boolean updateCheckAllowed) {
+        Settings.setAutomaticBackupLastCheck(!updateCheckAllowed);
+    }
+
 }

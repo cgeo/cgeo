@@ -357,6 +357,8 @@
     <string translatable="false" name="pref_fakekey_startrestore">fakekey_startrestore</string>
     <string translatable="false" name="pref_fakekey_startrestore_dirselect">fakekey_startrestore_dirselect</string>
 
+    <!-- category automatic backup -->
+    <string translatable="false" name="pref_backup_interval">backup_interval</string>
 
     <!-- ============================================================================================================================================================================== -->
     <!-- keys used for preference values -->
@@ -511,6 +513,7 @@
     <string translatable="false" name="pref_hideVisitedWaypoints">hideVisitedWaypoints</string>
     <string translatable="false" name="pref_cache_filter_config">cache_filter_config</string>
     <string translatable="false" name="pref_cache_sort_config">cache_sort_config</string>
+    <string translatable="false" name="pref_automaticBackupLastCheck">automaticBackupLastCheck</string>
 
     <string translatable="false" name="pref_caches_history">caches_history</string>
     <string translatable="false" name="pref_phone_model_and_sdk">phone_model_and_sdk</string>

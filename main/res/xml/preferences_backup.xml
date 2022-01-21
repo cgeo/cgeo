@@ -49,4 +49,20 @@
             android:title="@string/init_backup_restore_different_backup"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="@string/init_backup_automatic"
+        app:iconSpaceReserved="false">
+        <Preference
+            android:title="@string/init_backup_automatic"
+            android:summary="@string/init_backup_automatic_summary"
+            app:iconSpaceReserved="false"/>
+        <cgeo.geocaching.settings.BackupSeekbarPreference
+            android:key="@string/pref_backup_interval"
+            android:defaultValue="@integer/backup_interval_default"
+            app:min="0"
+            app:max="@integer/backup_interval_max"
+            app:hasDecimals="false"
+            app:iconSpaceReserved="false" />
+    </PreferenceCategory>
 </PreferenceScreen>
