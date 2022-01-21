@@ -324,6 +324,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             DownloaderUtils.checkForMapUpdates(this);
             cLog.add("mu");
+
+            // automated backup check
+            BackupUtils.checkForBackupReminder(this);
+            cLog.add("ab");
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {

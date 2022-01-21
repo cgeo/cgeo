@@ -1821,6 +1821,31 @@ public class Settings {
         return getInt(R.string.pref_backup_backup_history_length, getKeyInt(R.integer.backup_history_length_default));
     }
 
+    public static boolean automaticBackupDue() {
+        // update check disabled?
+        final int interval = getAutomaticBackupInterval();
+        if (interval < 1) {
+            return false;
+        }
+        // initialization on first run
+        final long lastCheck = getLong(R.string.pref_automaticBackupLastCheck, 0);
+        if (lastCheck == 0) {
+            setAutomaticBackupLastCheck(false);
+            return false;
+        }
+        // check if interval is completed
+        final long now = System.currentTimeMillis() / 1000;
+        return (lastCheck + (interval * DAYS_TO_SECONDS)) <= now;
+    }
+
+    private static int getAutomaticBackupInterval() {
+        return getInt(R.string.pref_backup_interval, CgeoApplication.getInstance().getResources().getInteger(R.integer.backup_interval_default));
+    }
+
+    public static void setAutomaticBackupLastCheck(final boolean delay) {
+        putLong(R.string.pref_automaticBackupLastCheck, calculateNewTimestamp(delay, getAutomaticBackupInterval()));
+    }
+
     /**
      * sets the user-defined folder-config for a persistable folder. Can be set to null
      * should be called by PersistableFolder class only

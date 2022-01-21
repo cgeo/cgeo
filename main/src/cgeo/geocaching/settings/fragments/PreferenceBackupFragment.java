@@ -19,7 +19,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         final BackupUtils backupUtils = new BackupUtils(getActivity(), savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
 
         findPreference(getString(R.string.pref_fakekey_preference_startbackup)).setOnPreferenceClickListener(preference -> {
-            backupUtils.backup(this::updateSummary);
+            backupUtils.backup(this::updateSummary, false);
             return true;
         });
 
@@ -45,7 +45,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
         updateSummary();
 
         findPreference(getString(R.string.pref_backup_backup_history_length)).setOnPreferenceChangeListener((preference, value) -> {
-            backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value);
+            backupUtils.deleteBackupHistoryDialog((BackupSeekbarPreference) preference, (int) value, false);
             return true;
         });
 
