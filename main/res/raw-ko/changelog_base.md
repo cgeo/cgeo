@@ -4,38 +4,38 @@
 ### 지도
 - 수정: 여러 트랙이 포함된 GPX 파일을 로드할 때 별도의 연결되지 않은 트랙으로 표시됨
 - 변경: GPX 트랙 파일을 로드할 때 자동으로 트랙 표시 활성화
-- New: Allow displaying several tracks at once
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- 신규: 한 번에 여러 트랙 표시 허용
+- 신규: 캐시 아이콘용 D/T 기호 (선택 사항)
+- 신규: 현재 뷰포트에 누락된 라우팅 데이터를 확인하는 옵션
+- 신규: Elevate, Elements 및 Freizeitkarte 테마에 대한 테마 범례
+- 수정: 버전 1.6.3에서 외부 BRouter 앱으로 라우팅 다시 활성화
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션
 - 신규: 속성 개요(캐시 관리 => 속성 개요 참조)
-- New: Add import from bookmark lists (GC premium only)
-- New: Invert sort-order on long click on sort bar
-- Change: Also perform automatic sorting by distance for lists containing cache series with more than 50 caches (up to 500)
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- 신규: 북마크 목록에서 가져오기 추가(GC 프리미엄만 해당)
+- 신규: 정렬 바를 길게 클릭하면 정렬 순서 반전
+- 변경: 50개 이상의 캐시(최대 500개)가 있는 캐시 시리즈를 포함하는 목록에 대해 거리별 자동 정렬도 수행합니다.
+- 수정: 다른 레이아웃 요소와의 간섭을 줄이기 위해 빠른 스크롤 메커니즘에 더 짧은 시간 제한을 사용합니다.
 
 ### 캐시 상세정보
 - 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
-- New: Colored attribute icons (following attribute groups)
-- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- 신규: 컬러 속성 아이콘(속성 그룹 다음)
+- 수정: 일부 삼성 장치의 외부 앱 갤러리 탭에서 사진을 여는 문제
 
 ### 추가 사항
 - 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드
-- New: Added support for user-defined log templates
+- 신규: 사용자 정의 로그 템플릿 지원 추가
 - 신규: 설정 만들기 => 필터링 가능한 보기 설정
-- New: Enable search in preferences
-- New: Added GC Wizard to useful apps list
-- New: Attributes filter: Allow selecting from which connectors attributes are shown
-- New: Option to limit distance in nearby search (see Settings => Services)
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- 신규: 환경설정에서 검색 활성화
+- 신규: 유용한 앱 목록에 GC Wizard 추가
+- 신규: 속성 필터: 표시되는 커넥터 속성 선택 허용
+- 신규: 주변 검색에서 거리를 제한하는 옵션(설정 => 서비스 참조)
+- 변경: 유용한 앱 목록 및 메인 화면에서 바코드 스캐너 제거
+- 변경: 유용한 앱 목록에서 BRouter를 제거했습니다(외부 및 내부 탐색 모두 계속 사용할 수 있음).
+- 수정: 간격이 0인 맵/라우팅 타일에 대한 반복적인 업데이트 확인을 피합니다.
+- 수정: 설정에서 외부 비밀번호 저장소 앱의 비밀번호 자동 완성 지원 최적화
+- 수정: 버전 8 미만의 Android에서 실행되는 시스템에 대한 도구 설명 활성화
+- 현재 Android 사양을 충족하도록 리팩토링된 설정
+- 업데이트된 MapsWithMe API
 
