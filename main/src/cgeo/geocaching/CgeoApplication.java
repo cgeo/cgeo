@@ -23,10 +23,14 @@ import androidx.annotation.NonNull;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class CgeoApplication extends Application {
 
     private static CgeoApplication instance;
+    private static final AtomicInteger lowPrioNotificationCounter = new AtomicInteger(0);
+    private static final AtomicBoolean hasHighPrioNotification = new AtomicBoolean(false);
 
     public CgeoApplication() {
         setInstance(this);
@@ -129,6 +133,14 @@ public class CgeoApplication extends Application {
         config.locale = Settings.getApplicationLocale();
         final Resources resources = getResources();
         resources.updateConfiguration(config, resources.getDisplayMetrics());
+    }
+
+    public AtomicInteger getLowPrioNotificationCounter() {
+        return lowPrioNotificationCounter;
+    }
+
+    public AtomicBoolean getHasHighPrioNotification() {
+        return hasHighPrioNotification;
     }
 
 }

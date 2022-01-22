@@ -16,13 +16,44 @@
         android:layout_marginTop="16dp"
         tools:layout="@layout/status" />
 
+    <FrameLayout
+        android:id="@+id/reminders"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dip"
+        android:layout_marginTop="16dp"
+        android:layout_below="@id/status">
+
+        <include
+            android:id="@+id/autobackup"
+            layout="@layout/mainactivity_action_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/mapupdate"
+            layout="@layout/mainactivity_action_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+        <include
+            android:id="@+id/tilesupdate"
+            layout="@layout/mainactivity_action_item"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="gone" />
+
+    </FrameLayout>
+
     <RelativeLayout
         android:id="@+id/info_notloggedin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dip"
         android:layout_marginTop="16dip"
-        android:layout_below="@id/status"
+        android:layout_below="@id/reminders"
         android:background="@drawable/helper_bcg"
         android:visibility="gone">
 

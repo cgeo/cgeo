@@ -1,5 +1,6 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.models.Download;
@@ -62,9 +63,9 @@ public class DownloaderUtils {
         return false;
     }
 
-    public static void checkForRoutingTileUpdates(final Activity activity) {
+    public static void checkForRoutingTileUpdates(final MainActivity activity) {
         if (Settings.useInternalRouting() && !PersistableFolder.ROUTING_TILES.isLegacy() && Settings.brouterAutoTileDownloadsNeedUpdate()) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.tilesupdate, Download.DownloadType.DOWNLOADTYPE_BROUTER_TILES, R.string.updates_check, R.string.tileupdate_info, DownloaderUtils::returnFromTileUpdateCheck);
         }
     }
 
@@ -72,9 +73,9 @@ public class DownloaderUtils {
         Settings.setBrouterAutoTileDownloadsLastCheck(!updateCheckAllowed);
     }
 
-    public static void checkForMapUpdates(final Activity activity) {
+    public static void checkForMapUpdates(final MainActivity activity) {
         if (Settings.mapAutoDownloadsNeedUpdate()) {
-            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, DownloaderUtils::returnFromMapUpdateCheck);
+            DownloaderUtils.checkForUpdatesAndDownloadAll(activity, R.id.mapupdate, Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED, R.string.updates_check, R.string.mapupdate_info, DownloaderUtils::returnFromMapUpdateCheck);
         }
     }
 
@@ -229,20 +230,19 @@ public class DownloaderUtils {
     }
 
     /**
-     * ask user whether to check for updates
-     * if yes: checks whether updates are available for the type specified
+     * displays an info to the user to check for updates
+     * if button pressed: checks whether updates are available for the type specified
      *      if yes: ask user to download them all
      *              if yes: trigger download(s)
-     * calls callback with user reaction (true=checked for updates / false=user delayed check)
      */
-    public static void checkForUpdatesAndDownloadAll(final Activity activity, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
-        SimpleDialog.of(activity).setTitle(title).setMessage(info).setNegativeButton(TextParam.id(R.string.later)).confirm((dialog, which) -> {
+    public static void checkForUpdatesAndDownloadAll(final MainActivity activity, final int layout, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
+        activity.displayActionItem(layout, info, () -> {
             new CheckForDownloadsTask(activity, title, type).execute();
             callback.call(true);
-        }, (dialog, w) -> callback.call(false));
+        });
     }
 
-    // same as checkForUpdatesAndDownloadAll above, but without question
+    // execute download check
     public static void checkForUpdatesAndDownloadAll(final Activity activity, final Download.DownloadType type, @StringRes final int title, final Action1<Boolean> callback) {
         new CheckForDownloadsTask(activity, title, type).execute();
         callback.call(true);

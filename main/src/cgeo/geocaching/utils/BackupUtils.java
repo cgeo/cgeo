@@ -754,23 +754,16 @@ public class BackupUtils {
         final Folder folder = autobackup ? Folder.fromPersistableFolder(PersistableFolder.BACKUP, AUTO_BACKUP_FOLDER) : PersistableFolder.BACKUP.getFolder();
         final String subfoldername = Formatter.formatDateForFilename(timestamp);
         if (ContentStorage.get().exists(folder, subfoldername)) {
-            return null; // We don't want to overwrite a existing backup
+            return null; // We don't want to overwrite an existing backup
         }
         final Folder subfolder = Folder.fromFolder(folder, subfoldername);
         ContentStorage.get().ensureFolder(subfolder, true);
         return subfolder;
     }
 
-    public static void checkForBackupReminder(final Activity activity) {
+    public static void checkForBackupReminder(final MainActivity activity) {
         if (Settings.automaticBackupDue()) {
-            SimpleDialog.of(activity).setTitle(R.string.init_backup_automatic).setMessage(R.string.init_backup_automatic_reminder).setNegativeButton(TextParam.id(R.string.later)).confirm((dialog, which) -> {
-                new BackupUtils(activity, null).backup(() -> returnFromAutomaticBackupCheck(true), true);
-            }, (dialog, w) -> returnFromAutomaticBackupCheck(false));
+            activity.displayActionItem(R.id.autobackup, R.string.init_backup_automatic_reminder, () -> new BackupUtils(activity, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true));
         }
     }
-
-    private static void returnFromAutomaticBackupCheck(final boolean updateCheckAllowed) {
-        Settings.setAutomaticBackupLastCheck(!updateCheckAllowed);
-    }
-
 }
