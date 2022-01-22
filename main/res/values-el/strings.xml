@@ -404,6 +404,8 @@
     <string name="caches_clear_offlinelogs_message">Θέλετε να διαγράψετε τις καταγραφές εκτός σύνδεσης;</string>
     <string name="caches_clear_offlinelogs_progress">Διαγραφή καταγραφών εκτός σύνδεσης</string>
     <string name="caches_show_attributes">Εμφάνιση επισκόπησης ιδιοτήτων</string>
+    <string name="caches_set_cache_icon">Ορισμός εικονιδίου κρύπτης</string>
+    <string name="caches_reset_cache_icons_title">Επαναφορά εικονιδίου κρύπτης</string>
     <string name="caches_make_list_unique">Αφαίρεση των κρυπτών αυτής της λίστας από τις υπόλοιπες</string>
     <string name="caches_set_listmarker">Ορίστε τον δείκτη της λίστας</string>
     <string name="caches_askdeletion">Ερώτηση για διαγραφή αν είναι κενό</string>
@@ -1272,6 +1274,8 @@
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
+    <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να εγκαταστησετε το Chirp Wolf.</string>
     <string name="cache_alc_start">Ανοίξτε το Adventure Lab, για να αρχίσετε να παίζετε αυτή την περιπέτεια</string>
     <string name="cache_alc_install">Εγκαταστήστε τον Adventure Lab για να παίξετε αυτή την περιπέτεια</string>
     <string name="context_share_as_text">Κοινή χρήση κειμένου</string>
@@ -1994,7 +1998,13 @@
         <item quantity="other">Η διαδρομη φορτώθηκε (%d σημεία αναφοράς)</item>
     </plurals>
     <string name="load_track_error">Σφάλμα κατά την φόρτωση της διαδρομής</string>
+    <string name="map_clear_track">Εκκαθάριση διαδρομής</string>
+    <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\";</string>
     <!-- route/track commons -->
+    <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
+    <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
+    <string name="make_visible">Να γίνει ορατό</string>
+    <string name="hide">απόκρυψη</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Απενεργοποιημένο</string>
