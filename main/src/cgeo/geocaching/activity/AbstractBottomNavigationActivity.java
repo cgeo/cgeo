@@ -1,6 +1,7 @@
 package cgeo.geocaching.activity;
 
 import cgeo.geocaching.CacheListActivity;
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchActivity;
@@ -31,8 +32,10 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
 
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
+import com.google.android.material.badge.BadgeDrawable;
 import com.google.android.material.navigation.NavigationBarView;
 
 
@@ -53,13 +56,15 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     private static Boolean loginSuccessful = null; // must be static so that the login state is stored while switching between activities
 
 
-    private ActivityBottomNavigationBinding wrapper = null;
+    private ActivityBottomNavigationBinding binding = null;
     private boolean doubleBackToExitPressedOnce = false;
 
     private final ConnectivityChangeReceiver connectivityChangeReceiver = new ConnectivityChangeReceiver();
     private final Handler loginHandler = new Handler();
 
     private static final AtomicInteger LOGINS_IN_PROGRESS = new AtomicInteger(0);
+    private static final AtomicInteger lowPrioNotificationCounter = ((CgeoApplication) CgeoApplication.getInstance()).getLowPrioNotificationCounter();
+    private static final AtomicBoolean hasHighPrioNotification = ((CgeoApplication) CgeoApplication.getInstance()).getHasHighPrioNotification();
 
     @Override
     public void setContentView(final int layoutResID) {
@@ -69,9 +74,9 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     @Override
     public void setContentView(final View contentView) {
-        wrapper = ActivityBottomNavigationBinding.inflate(getLayoutInflater());
-        wrapper.activityContent.addView(contentView);
-        super.setContentView(wrapper.getRoot());
+        binding = ActivityBottomNavigationBinding.inflate(getLayoutInflater());
+        binding.activityContent.addView(contentView);
+        super.setContentView(binding.getRoot());
 
         // --- other initialization --- //
         updateSelectedBottomNavItemId();
@@ -88,11 +93,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
 
     protected void onLoginIssue(final boolean issue) {
-        if (issue) {
-            ((NavigationBarView) wrapper.activityBottomNavigation).getOrCreateBadge(MENU_HOME);
-        } else {
-            ((NavigationBarView) wrapper.activityBottomNavigation).removeBadge(MENU_HOME);
+        synchronized (hasHighPrioNotification) {
+            hasHighPrioNotification.set(issue);
         }
+        updateHomeBadge(0);
     }
 
     private boolean onListsLongClicked() {
@@ -156,15 +160,15 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     public void updateSelectedBottomNavItemId() {
         // unregister listener before changing anything, as it would otherwise trigger the listener directly
-        ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(null);
+        ((NavigationBarView) binding.activityBottomNavigation).setOnItemSelectedListener(null);
 
         final int menuId = getSelectedBottomItemId();
 
         if (menuId == MENU_HIDE_BOTTOM_NAVIGATION) {
-            wrapper.activityBottomNavigation.setVisibility(View.GONE);
+            binding.activityBottomNavigation.setVisibility(View.GONE);
         } else {
-            wrapper.activityBottomNavigation.setVisibility(View.VISIBLE);
-            ((NavigationBarView) wrapper.activityBottomNavigation).setSelectedItemId(menuId);
+            binding.activityBottomNavigation.setVisibility(View.VISIBLE);
+            ((NavigationBarView) binding.activityBottomNavigation).setSelectedItemId(menuId);
         }
 
         // Don't show back button if bottom navigation is visible (although they can have a backstack as well)
@@ -174,7 +178,7 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         }
 
         // re-register the listener
-        ((NavigationBarView) wrapper.activityBottomNavigation).setOnItemSelectedListener(this);
+        ((NavigationBarView) binding.activityBottomNavigation).setOnItemSelectedListener(this);
     }
 
     /**
@@ -320,6 +324,20 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
                     }
                 });
             }
+        }
+    }
+
+    public void updateHomeBadge(final int delta) {
+        final int badgeColor;
+        synchronized (hasHighPrioNotification) {
+            badgeColor = hasHighPrioNotification.get() ? 0xffff0000 : 0xff0a67e2;
+        }
+        synchronized (lowPrioNotificationCounter) {
+            lowPrioNotificationCounter.set(lowPrioNotificationCounter.get() + delta);
+            final BadgeDrawable badge = ((NavigationBarView) binding.activityBottomNavigation).getOrCreateBadge(MENU_HOME);
+            badge.clearNumber();
+            badge.setBackgroundColor(badgeColor);
+            badge.setVisible(lowPrioNotificationCounter.get() > 0);
         }
     }
 }
