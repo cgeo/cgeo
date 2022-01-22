@@ -309,9 +309,13 @@ public class VariableListView extends LinearLayout {
                 }));
 
                 viewHolder.viewVariableFormulaText.setOnFocusChangeListener((v, f) -> {
-                    if (f && !currentFocusKeep) {
-                        this.currentFocusVar = viewHolder.getVar();
-                        this.currentFocusCursorPos = viewHolder.viewVariableFormulaText.getSelectionStart();
+                    if (!currentFocusKeep) {
+                        if (f) {
+                            this.currentFocusVar = viewHolder.getVar();
+                            this.currentFocusCursorPos = viewHolder.viewVariableFormulaText.getSelectionStart();
+                        } else {
+                            this.currentFocusVar = null;
+                        }
                         Log.d("[FOCUS]Focus changed to " + currentFocusVar + ":" + currentFocusCursorPos);
                     }
                 });

@@ -4,21 +4,26 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.CoordinatescalculateglobalDialogBinding;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.DefaultMap;
 import cgeo.geocaching.models.CacheVariableList;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.CalculatedCoordinateInputGuideView;
+import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
+import cgeo.geocaching.utils.formulas.VariableMap;
 import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
 
 import android.app.Activity;
@@ -37,8 +42,12 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumSet;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
@@ -186,6 +195,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             dismiss();
         });
 
+        binding.generateRangeCoordinates.setOnClickListener(v -> generateRangeCoordinates());
+
         displayType.setSpinner(binding.ccGuidedFormat)
             .setValues(CollectionStream.of(CalculatedCoordinateType.values()).filter(t -> PLAIN != t).toList())
             .setDisplayMapper(CalculatedCoordinateType::toUserDisplayableString)
@@ -326,4 +337,83 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         }
     }
 
+    private void generateRangeCoordinates() {
+
+        final List<String> varsToConsider = new ArrayList<>(varList.getDependentVariables(calcCoord.getNeededVars()));
+        final Iterator<String> it = varsToConsider.iterator();
+        while (it.hasNext()) {
+            final VariableMap.VariableState state = varList.getState(it.next());
+            if (state == null || state.getFormula() == null || state.getFormula().getRangeIndexSize() == 1) {
+                it.remove();
+            }
+        }
+        TextUtils.sortListLocaleAware(varsToConsider);
+        if (varsToConsider.isEmpty()) {
+            ActivityMixin.showShortToast(this.getActivity(), "No valid variables with ranges found");
+            return;
+        }
+
+        final List<Pair<String, Geopoint>> gps = new ArrayList<>();
+        generateRangeCoordinatesRecursive(varsToConsider, 0, null, gps);
+
+        if (gps.isEmpty()) {
+            ActivityMixin.showShortToast(this.getActivity(), "No combination returned valid geopoints");
+            return;
+        }
+
+        SimpleDialog.of(this.getActivity()).setTitle(TextParam.text("Generate Waypoints"))
+            .setNeutralButton(TextParam.text("Show on Map"))
+            .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second),  null, s -> {
+                if (s.isEmpty()) {
+                    ActivityMixin.showShortToast(this.getActivity(), "No Geopoint selected");
+                    return;
+                }
+                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                generateWaypoints(cache, true, s);
+            }, s -> {
+                if (s.isEmpty()) {
+                    ActivityMixin.showShortToast(this.getActivity(), "No Geopoint selected");
+                    return;
+                }
+                //generate a new fake cache in-memory (without a coordinate) to enable showing the waypoints on a map
+                final String dummyGeocode = "TEMP-SHOWWPS-" + System.currentTimeMillis();
+                final Geocache dummyCache = new Geocache();
+                dummyCache.setGeocode(dummyGeocode);
+                DataStore.saveCache(dummyCache, EnumSet.of(LoadFlags.SaveFlag.CACHE));
+                generateWaypoints(dummyCache, false, s);
+
+                DefaultMap.startActivityGeoCode(this.getActivity(), dummyGeocode);
+            });
+    }
+
+    private void generateWaypoints(final Geocache cache, final boolean updateDatabase, final Collection<Pair<String, Geopoint>> gps) {
+        boolean changed = false;
+        for (Pair<String, Geopoint> p : gps) {
+            final Waypoint wp = new Waypoint("Generated: " + p.first, WaypointType.WAYPOINT, true);
+            wp.setCoords(p.second);
+            wp.setGeocode(cache.getGeocode());
+            changed = changed | cache.addOrChangeWaypoint(wp, updateDatabase);
+        }
+
+        if (changed) {
+            ActivityMixin.showShortToast(this.getActivity(), getString(R.string.waypoint_added));
+        }
+    }
+
+    private void generateRangeCoordinatesRecursive(final List<String> vars, final int idx, final String praefix, final List<Pair<String, Geopoint>> result) {
+        if (idx < vars.size()) {
+            final String var = vars.get(idx);
+            final VariableMap.VariableState state = varList.getState(var);
+            for (int i = 0; i < Objects.requireNonNull(Objects.requireNonNull(state).getFormula()).getRangeIndexSize(); i++) {
+                varList.setRangeIndex(var, i);
+                generateRangeCoordinatesRecursive(vars, idx + 1, (praefix == null ? "" : praefix + ", ") + var + "=" + varList.getValue(var), result);
+            }
+            varList.setRangeIndex(var, 0);
+        } else {
+            final Geopoint gp = calcCoord.calculateGeopoint(varList::getValue);
+            if (gp != null) {
+                result.add(new Pair<>(praefix, gp));
+            }
+        }
+    }
 }

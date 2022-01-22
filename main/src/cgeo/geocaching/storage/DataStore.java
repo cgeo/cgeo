@@ -2628,7 +2628,16 @@ public class DataStore {
         }
 
         final Set<Geocache> caches = loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB);
-        return withWaypoints ? Viewport.containingCachesAndWaypoints(caches) : Viewport.containing(caches);
+
+        Viewport result = null;
+        if (!withWaypoints) {
+            result = Viewport.containing(caches);
+        }
+        //if we have no 'withWaypoints' but don't get any viewport without them then try with waypoints as a fallback
+        if (result == null) {
+            result = Viewport.containingCachesAndWaypoints(caches);
+        }
+        return result;
     }
 
     @Nullable
