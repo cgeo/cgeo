@@ -33,6 +33,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.widget.TooltipCompat;
 
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
@@ -66,23 +67,29 @@ public class RouteTrackUtils {
         this.isTargetSet = isTargetSet;
 
         this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
-                if (uri != null) {
-                    GPXIndividualRouteImporter.doImport(activity, uri);
-                    reloadIndividualRoute.run();
-                }
-            });
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
         this.fileSelectorTrack = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_TRACK))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, uri -> {
-                if (uri != null && this.updateTrack != null) {
-                    GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
-                        final String key = tracks.add(activity, uri, updateTrack);
-                        tracks.setRoute(key, route);
-                        updateTrack.updateRoute(key, route);
-                        updateDialogTracks(popup, tracks);
-                    });
-                }
-            });
+            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importTracks);
+    }
+
+    private void importIndividualRoute(final Uri uri) {
+        if (uri != null) {
+            GPXIndividualRouteImporter.doImport(activity, uri);
+            reloadIndividualRoute.run();
+        }
+    }
+
+    private void importTracks(final List<Uri> uris) {
+        if (uris != null && this.updateTrack != null) {
+            for (Uri uri : uris) {
+                GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+                    final String key = tracks.add(activity, uri, updateTrack);
+                    tracks.setRoute(key, route);
+                    updateTrack.updateRoute(key, route);
+                    updateDialogTracks(popup, tracks);
+                });
+            }
+        }
     }
 
     public void setTracks(final Tracks tracks) {
@@ -107,16 +114,20 @@ public class RouteTrackUtils {
         updateDialogClearTargets(dialog, individualRoute, setTarget);
     }
 
+    private void startFileSelectorIndividualRoute() {
+        fileSelectorRoute.selectFile(null, PersistableFolder.GPX.getUri());
+    }
+
     private void updateDialogIndividualRoute(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
         if (dialog == null) {
             return;
         }
         dialog.findViewById(R.id.indivroute_load).setOnClickListener(v1 -> {
             if (null == individualRoute || individualRoute.getNumSegments() == 0) {
-                startFileSelector(fileSelectorRoute);
+                startFileSelectorIndividualRoute();
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(
-                    (d, w) -> startFileSelector(fileSelectorRoute));
+                    (d, w) -> startFileSelectorIndividualRoute());
             }
         });
 
@@ -164,7 +175,7 @@ public class RouteTrackUtils {
         }
         final LinearLayout tracklist = dialog.findViewById(R.id.tracklist);
         tracklist.removeAllViews();
-        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> startFileSelector(fileSelectorTrack));
+        dialog.findViewById(R.id.trackroute_load).setOnClickListener(v1 -> fileSelectorTrack.selectMultipleFiles(null, PersistableFolder.GPX.getUri()));
 
         tracks.traverse((key, route) -> {
             final View vt = activity.getLayoutInflater().inflate(R.layout.routes_tracks_item, null);
@@ -220,10 +231,6 @@ public class RouteTrackUtils {
 
     private boolean isRouteNonEmpty(final Route route) {
         return route != null && route.getNumSegments() > 0;
-    }
-
-    private void startFileSelector(final ContentStorageActivityHelper csah) {
-        csah.selectFile(null, PersistableFolder.GPX.getUri());
     }
 
     public void reloadTrack(final String key, final Tracks.UpdateTrack updateTrack) {
