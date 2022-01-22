@@ -229,4 +229,19 @@ public final class TextParser {
         return sb.toString();
     }
 
+    @Override
+    public String toString() {
+        return markInString(markInString(expression, pos, "[]"), markedPos, "<>") + "(pos: " + pos + ")";
+    }
+
+    private static String markInString(final String text, final int pos, final String beforeAfter) {
+        if (pos <= 0) {
+            return beforeAfter + text;
+        }
+        if (pos >= text.length()) {
+            return text + beforeAfter;
+        }
+        return text.substring(0, pos - 1) + beforeAfter.charAt(0) + text.charAt(pos) + beforeAfter.charAt(1) + text.substring(pos + 1);
+    }
+
 }

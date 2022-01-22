@@ -46,7 +46,7 @@ public enum FormulaFunction {
         minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), false))),
     ICHECKSUM(new String[]{"ichecksum", "ics" }, FunctionGroup.COMPLEX_NUMERIC, 0, "Iterative Checksum", null, 0,
         minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), true))),
-    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv" }, FunctionGroup.COMPLEX_STRING, 0, "Letter Value", "''", 1,
+    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv", "bww" }, FunctionGroup.COMPLEX_STRING, 0, "Letter Value", "''", 1,
         singleValueStringFunction(FormulaUtils::letterValue)),
     ROMAN("roman", FunctionGroup.COMPLEX_STRING, 0, "Roman", "''", 1,
         singleValueStringFunction(FormulaUtils::roman)),
