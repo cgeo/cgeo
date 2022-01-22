@@ -6,11 +6,15 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.formulas.VariableList;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.util.Consumer;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Stores cache variables including view state (e.g. ordering).
@@ -19,8 +23,7 @@ import java.util.Map;
 public class CacheVariableList extends VariableList {
 
     private final String geocode;
-
-    private Map<Object, Consumer<String>> changeListener = new HashMap<>();
+    private final Map<Object, Consumer<String>> changeListener = new HashMap<>();
 
     public CacheVariableList(@NonNull final String geocode) {
         this.geocode = geocode;
@@ -72,6 +75,28 @@ public class CacheVariableList extends VariableList {
         this.callCallbacks();
     }
 
+    @Override
+    public void tidyUp(@Nullable final Collection<String> varsNeeded) {
+        final Set<String> varsNeededReal = new HashSet<>();
+        if (varsNeeded != null) {
+            varsNeededReal.addAll(varsNeeded);
+        }
+        addAllWaypointNeededVars(varsNeededReal);
+        super.tidyUp(varsNeededReal);
+    }
+
+    private void addAllWaypointNeededVars(final Set<String> neededVars) {
+        final Geocache cache = DataStore.loadCache(this.geocode, LoadFlags.LOAD_CACHE_OR_DB);
+        if (cache != null) {
+            for (Waypoint wp : cache.getWaypoints()) {
+                if (wp.isCalculated()) {
+                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateJson());
+                    neededVars.addAll(cc.getNeededVars());
+                }
+            }
+        }
+    }
+
     private boolean recalculateWaypoints() {
 
         boolean hasCalculatedWp = false;
@@ -91,4 +116,4 @@ public class CacheVariableList extends VariableList {
         }
         return hasCalculatedWp;
     }
-}
+ }
