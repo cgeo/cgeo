@@ -2427,7 +2427,7 @@ public class DataStore {
         values.put("own", waypoint.isUserDefined() ? 1 : 0);
         values.put("visited", waypoint.isVisited() ? 1 : 0);
         values.put("org_coords_empty", waypoint.isOriginalCoordsEmpty() ? 1 : 0);
-        values.put("calc_state", waypoint.getCalcStateJson());
+        values.put("calc_state", waypoint.getCalcStateConfig());
         return values;
     }
 
@@ -3038,7 +3038,7 @@ public class DataStore {
             waypoint.setNote(cursor.getString(cursor.getColumnIndexOrThrow("note")));
             waypoint.setUserNote(cursor.getString(cursor.getColumnIndexOrThrow("user_note")));
             waypoint.setOriginalCoordsEmpty(cursor.getInt(cursor.getColumnIndexOrThrow("org_coords_empty")) != 0);
-            waypoint.setCalcStateJson(cursor.getString(cursor.getColumnIndexOrThrow("calc_state")));
+            waypoint.setCalcStateConfig(cursor.getString(cursor.getColumnIndexOrThrow("calc_state")));
         } catch (final IllegalArgumentException e) {
             Log.e("IllegalArgumentException in createWaypointFromDatabaseContent", e);
         }

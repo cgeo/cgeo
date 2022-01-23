@@ -11,6 +11,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -29,6 +30,7 @@ import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.jetbrains.annotations.NotNull;
 
 public class WaypointParser {
@@ -59,6 +61,7 @@ public class WaypointParser {
 
     //general members
     private final Geocache cache;
+    private final boolean legacyMode;
 
     //Waypoints
     private Collection<Waypoint> waypoints;
@@ -75,6 +78,11 @@ public class WaypointParser {
      * @param namePrefix Prefix of the name of the waypoint
      */
     public WaypointParser(final Geocache cache, @NonNull final String namePrefix) {
+        this(cache, namePrefix, BranchDetectionHelper.isProductionBuild());
+    }
+
+    public WaypointParser(final Geocache cache, @NonNull final String namePrefix, final boolean legacyMode) {
+        this.legacyMode = legacyMode;
         this.namePrefix = namePrefix;
         this.cache = cache;
     }
@@ -185,17 +193,28 @@ public class WaypointParser {
 
         if (null != coordFormat) {
             // try to get a formula
-            final ImmutablePair<CalcState, String> coordFormula = parseFormula(afterCoords, coordFormat);
-            final CalcState calcState = coordFormula.left;
-            if (null != calcState) {
-                waypoint.setCalcStateJson(calcState.toJSON().toString());
-                // try to evaluate valid coordinates
-                final CalcStateEvaluator eval = new CalcStateEvaluator(calcState.equations, calcState.freeVariables, null);
-                final Geopoint gp = eval.evaluate(calcState.plainLat, calcState.plainLon);
-                waypoint.setCoords(gp);
+            final ImmutableTriple<CalculatedCoordinate, String, CalcState> coordFormula = parseFormula(afterCoords, coordFormat);
+            if (this.legacyMode) {
+                final CalcState calcState = coordFormula.right;
+                if (null != calcState) {
+                    waypoint.setCalcStateConfig(calcState.toJSON().toString());
+                    // try to evaluate valid coordinates
+                    final CalcStateEvaluator eval = new CalcStateEvaluator(calcState.equations, calcState.freeVariables, null);
+                    final Geopoint gp = eval.evaluate(calcState.plainLat, calcState.plainLon);
+                    waypoint.setCoords(gp);
+                }
+            } else {
+                final CalculatedCoordinate cc = coordFormula.left;
+                if (null != cc) {
+                    waypoint.setCalcStateConfig(cc.toConfig());
+                    // try to evaluate valid coordinates
+                    if (this.cache != null && this.cache.getVariables() != null) {
+                        waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
+                    }
+                }
             }
 
-            afterCoords = coordFormula.right;
+            afterCoords = coordFormula.middle;
         }
 
         if (PARSING_CALCULATED_COORD.equals(matchedText)) {
@@ -206,7 +225,7 @@ public class WaypointParser {
                 configAndMore.charAt(parseEnd - 1) != '}' || !cc.isFilled()) {
                 return null;
             }
-            waypoint.setCalcStateJson(cc.toConfig());
+            waypoint.setCalcStateConfig(cc.toConfig());
             // try to evaluate valid coordinates
             if (this.cache != null && this.cache.getVariables() != null) {
                 waypoint.setCoords(cc.calculateGeopoint(this.cache.getVariables()::getValue));
@@ -329,9 +348,10 @@ public class WaypointParser {
 
     /**
      * try to parse a name out of given words. If not possible, null is returned
+     * Typical example: @Plain Example 1 (W) (F-PLAIN) N 53° 33.AAA E 009° 59.BCD' |A=1|B=2|C=3|D=4| "Plain_example_1"
      */
     @NotNull
-    private ImmutablePair<CalcState, String> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
+    private ImmutableTriple<CalculatedCoordinate, String, CalcState> parseFormula(final String text, final Settings.CoordInputFormatEnum formulaFormat) {
         try {
             final FormulaParser formulaParser = new FormulaParser(formulaFormat);
             final FormulaWrapper parsedFullCoordinates = formulaParser.parse(text);
@@ -366,15 +386,33 @@ public class WaypointParser {
                         break;
                     }
                 }
+
+                for (VariableData vd : variables) {
+                    addVariable("" + vd.getName(), vd.getExpression(), false);
+                }
+                final CalculatedCoordinate cc = new CalculatedCoordinate();
+                cc.setLatitudePattern(latText);
+                cc.setLongitudePattern(lonText);
+                cc.setType(CalculatedCoordinateType.PLAIN);
+
                 final CalcState calcState = CoordinatesCalculateUtils.createCalcState(latText, lonText, variables);
 
-                return new ImmutablePair<>(calcState, remainingString);
+                return new ImmutableTriple<>(cc, remainingString, calcState);
             }
         } catch (final FormulaParser.ParseException ignored) {
             // no formula
         }
 
-        return new ImmutablePair<>(null, text);
+        return new ImmutableTriple<>(null, text, null);
+    }
+
+    private void addVariable(final String name, final String expression, final boolean highPrio) {
+        if (StringUtils.isBlank(name) || StringUtils.isBlank(expression)) {
+            return;
+        }
+        if (highPrio || !variables.containsKey(name.trim())) {
+            variables.put(name.trim(), expression.trim());
+        }
     }
 
     public static String removeParseableWaypointsFromText(final String text) {
@@ -449,6 +487,10 @@ public class WaypointParser {
      * @return parseable waypoint text
      */
     public static String getParseableText(final Waypoint wp, final int maxUserNoteSize) {
+        return getParseableText(wp, maxUserNoteSize, BranchDetectionHelper.isProductionBuild());
+    }
+
+    public static String getParseableText(final Waypoint wp, final int maxUserNoteSize, final boolean legacyMode) {
         final StringBuilder sb = new StringBuilder();
         //name
         sb.append(PARSING_NAME_PRAEFIX);
@@ -462,7 +504,7 @@ public class WaypointParser {
             .append(PARSING_TYPE_CLOSE).append(" ");
 
         // formula
-        final String formulaString = getParseableFormula(wp);
+        final String formulaString = getParseableFormula(wp, legacyMode);
         if (StringUtils.isNotEmpty(formulaString)) {
             sb.append(formulaString);
         } else {
@@ -488,15 +530,14 @@ public class WaypointParser {
         return sb.toString();
     }
 
-    public static String getParseableFormula(final Waypoint wp) {
+    private static String getParseableFormula(final Waypoint wp, final boolean legacyMode) {
         final StringBuilder sb = new StringBuilder();
 
-        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateJson());
+        final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
         if (cc.isFilled()) {
             sb.append(cc.toConfig());
-        } else {
-
-            final String calcStateJson = wp.getCalcStateJson();
+        } else if (legacyMode) {
+            final String calcStateJson = wp.getCalcStateConfig();
             if (null != calcStateJson) {
                 final CalcState calcState = CalcState.fromJSON(calcStateJson);
 
@@ -534,9 +575,7 @@ public class WaypointParser {
             final String varName = matcher.group(1);
             final TextParser valueParser = new TextParser(text.substring(matcher.end()));
             final String value = valueParser.parseUntil(c -> c == '|' || c == '\n', true, '\\', false);
-            if (value != null) {
-                variables.put(varName, value.trim());
-            }
+            addVariable(varName, value, true);
         }
     }
 

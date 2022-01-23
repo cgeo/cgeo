@@ -1711,7 +1711,7 @@ public class Geocache implements IWaypoint {
                 }
             }
             for (Map.Entry<String, String> var : waypointParser.getParsedVariables().entrySet()) {
-                if (!getVariables().contains(var.getKey())) {
+                if (getVariables().isBlank(var.getKey())) {
                     getVariables().addVariable(var.getKey(), var.getValue());
                 }
                 getVariables().saveState();
@@ -1733,18 +1733,6 @@ public class Geocache implements IWaypoint {
             return null;
         }
 
-        //try to match calculate coordinate
-        if (searchWp.isCalculated()) {
-            for (final Waypoint waypoint : waypoints) {
-                // calculated waypoints match if they have same config
-                if (waypoint.isCalculated() && waypoint.getCalcStateJson().equals(searchWp.getCalcStateJson())) {
-                    return waypoint;
-                }
-            }
-            //none found -> calculated coords can only be matched´by another cc, so stop searching
-            return null;
-        }
-
         //try to match coordinate
         final Geopoint searchWpPoint = searchWp.getCoords();
         if (null != searchWpPoint) {
@@ -1752,6 +1740,16 @@ public class Geocache implements IWaypoint {
                 // waypoint can have no coords such as a Final set by cache owner
                 final Geopoint coords = waypoint.getCoords();
                 if (coords != null && coords.equalsDecMinute(searchWpPoint)) {
+                    return waypoint;
+                }
+            }
+        }
+
+        //try to match calculate coordinate
+        if (searchWp.isCalculated()) {
+            for (final Waypoint waypoint : waypoints) {
+                // calculated waypoints match if they have same config
+                if (waypoint.isCalculated() && Objects.equals(waypoint.getCalcStateConfig(), searchWp.getCalcStateConfig())) {
                     return waypoint;
                 }
             }

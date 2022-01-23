@@ -2,6 +2,7 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.ActivityMixin;
+import cgeo.geocaching.calculator.CalculatedCoordinateMigrator;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.databinding.EditwaypointActivityBinding;
@@ -137,7 +138,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     activity.lookup = waypoint.getLookup();
                     activity.own = waypoint.isUserDefined();
                     activity.originalCoordsEmpty = waypoint.isOriginalCoordsEmpty();
-                    activity.calcStateString = waypoint.getCalcStateJson();
+                    activity.calcStateString = waypoint.getCalcStateConfig();
 
                     if (activity.initViews) {
                         activity.binding.wptVisitedCheckbox.setChecked(waypoint.isVisited());
@@ -373,7 +374,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                     return;
                 }
 
-                calcStateString = waypoint.getCalcStateJson();
+                calcStateString = waypoint.getCalcStateConfig();
                 loadWaypointHandler.sendMessage(Message.obtain());
             } catch (final Exception e) {
                 Log.e("EditWaypointActivity.loadWaypoint.run", e);
@@ -599,7 +600,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 || !StringUtils.equals(currentState.userNoteText, waypoint.getUserNote())
                 || currentState.visited != waypoint.isVisited()
                 || currentState.type != waypoint.getWaypointType()
-                || !StringUtils.equals(currentState.calcStateJson, waypoint.getCalcStateJson());
+                || !StringUtils.equals(currentState.calcStateJson, waypoint.getCalcStateConfig());
     }
 
     private static class FinishWaypointSaveHandler extends WeakReferenceHandler<EditWaypointActivity> {
@@ -665,7 +666,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         waypoint.setVisited(currentState.visited);
         waypoint.setId(waypointId);
         waypoint.setOriginalCoordsEmpty(originalCoordsEmpty);
-        waypoint.setCalcStateJson(currentState.calcStateJson);
+        waypoint.setCalcStateConfig(currentState.calcStateJson);
 
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_WAYPOINTS);
         if (cache == null) {
@@ -719,6 +720,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     public static void startActivityEditWaypoint(final Context context, final Geocache cache, final int waypointId) {
+
+        final Waypoint wp = cache.getWaypointById(waypointId);
+        if (CalculatedCoordinateMigrator.needsMigration(wp)) {
+            CalculatedCoordinateMigrator.performMigration(context, cache, wp, () -> startActivityEditWaypointInternal(context, cache, waypointId));
+        } else {
+            startActivityEditWaypointInternal(context, cache, waypointId);
+        }
+    }
+
+    private static void startActivityEditWaypointInternal(final Context context, final Geocache cache, final int waypointId) {
+
         EditWaypointActivity_.intent(context).geocode(cache.getGeocode()).waypointId(waypointId).start();
     }
 

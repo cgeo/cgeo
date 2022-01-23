@@ -56,6 +56,11 @@ public class VariableList {
         return variablesSet.containsKey(var);
     }
 
+    public boolean isBlank(final String var) {
+        final VariableMap.VariableState state = getState(var);
+        return state == null || StringUtils.isBlank(state.getFormulaString());
+    }
+
     @Nullable
     public VariableMap.VariableState getState(final String var) {
         return variableMap.get(var);
