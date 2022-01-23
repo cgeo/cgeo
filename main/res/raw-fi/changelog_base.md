@@ -1,4 +1,4 @@
-### Yleiset
+### Yleinen
 - Muutos: Esitellään alhaalla sijaitseva navigaatio c:geon useimmin käytettyihin toimintoon pääsemiseksi, korvaten vanhan päävalikon
 
 ### Kartta
