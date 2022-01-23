@@ -4,11 +4,11 @@
 ### Kartta
 - Korjaus: ladatessa useita polkuja sisältäviä GPX-tiedostoja näytetään ne erillisinä, yhdistämättöminä kappaleina
 - Muutos: Ota reitin näyttö automaattisesti käyttöön ladattaessa GPX reittitiedosto
-- New: Allow displaying several tracks at once
-- New: D/T symbols for cache icons (optional)
-- New: Option to check for missing routing data for current viewport
-- New: Theme legend for Elevate, Elements and Freizeitkarte themes
-- Fix: Reenable routing with external BRouter app in version 1.6.3
+- Uusi: Salli useiden polkujen näyttäminen kerralla
+- Uusi: D/T -symbolit kätkökuvakkeille (valinnainen)
+- Uusi: Mahdollisuus tarkistaa puuttuvat reititystiedot nykyiselle näkymälle
+- Uusi: Teeman selitteet teemoille Elevate, Elements ja Freizeitkarte
+- Korjaa: Uudelleenmahdollista reititys ulkoisella BRouter sovellus versiossa 1.6.3
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
@@ -16,12 +16,12 @@
 - Uusi: Lisää tuonti kirjanmerkkiluetteloista (vain GC-premium)
 - Uusi: Käänteinen lajittelujärjestys pitkällä lajittelupalkin napautuksella
 - Muutos: Suorita myös automaattinen etäisyyden mukaan lajittelu listoille, jotka sisältävät yli 50 kätköä sisältävät kätkösarjat (jopa 500)
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Korjaus: Käytä lyhyempää aikakatkaisua nopean vierityksen mekanismille, jotta muille asettelun elementeille aiheutuu vähemmän häiriötä
 
 ### Kätkön tiedot
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
 - Uusi: Värilliset attribuuttikuvakkeet (seuraavat attribuuttiryhmät)
-- Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- Korjaa: Ongelma kuvien avaamisessa gallerian välilehdeltä ulkoisissa sovelluksissa joissakin Samsungin laitteissa
 
 ### Muu
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
@@ -30,12 +30,12 @@
 - Uusi: Ota haku käyttöön asetuksissa
 - Uusi: Lisätty GC Wizard hyödyllisten sovellusten luetteloon
 - Uusi: Attribuuttien suodatin: Sallii valinnan, mistä palveluista attribuutit näytetään
-- New: Option to limit distance in nearby search (see Settings => Services)
-- Change: Removed barcode scanner from useful apps list and from mainscreen
-- Change: Removed BRouter from useful apps list (you can still use both external and internal navigation)
-- Fix: Avoid repeated update checks for maps/routing tiles with interval=0
-- Fix: Optimize support to autofill passwords from external password store apps in settings
-- Fix: Enable tooltips for systems running on Android below version 8
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Uusi: Mahdollisuus rajoittaa etäisyyttä kätköjen lähihaussa (ks. Asetukset => Palvelut)
+- Muutos: Poistettiin viivakoodiskanneri hyödyllisten sovellusten listalta ja päävalikosta
+- Muutos: Poistettiin BRouter hyödyllisten sovellusten luettelosta (voit silti käyttää sekä ulkoista että sisäistä navigointia)
+- Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
+- Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
+- Korjaus: Ota käyttöön vihjeet järjestelmille, jotka käyttävät vanhempaa kuin Androidin versio 8
+- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
+- Päivitetty MapsWithMe API
 

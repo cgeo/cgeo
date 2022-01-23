@@ -1283,7 +1283,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         final String key = attr.getValue(enabled);
                         if (attributes.contains(key)) {
                             if (lastCategory != category) {
-                                attributesText.append("<h6>").append(category.getName(activity)).append("</h6>");
+                                if (lastCategory != null) {
+                                    attributesText.append("<br /><br />");
+                                }
+                                attributesText.append("<b><u>").append(category.getName(activity)).append("</u></b><br />");
                                 lastCategory = category;
                             } else {
                                 attributesText.append("<br />");
