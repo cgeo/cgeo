@@ -341,6 +341,10 @@
     <string name="caches_more_caches_no">Ei enempää kätköjä</string>
     <string name="caches_more_caches_loading">Ladataan kätköjä…</string>
     <string name="caches_more_caches_currently">tällä hetkellä</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Lataa seuraava %1$d kätkö</item>
+        <item quantity="other">Lataa seuraavat %1$d kätköä</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Lataa loput kätköt (%1$d / %2$d)</string>
     <string name="caches_downloading">Ladataan kätköjä…\nETA: </string>
     <string name="caches_eta_ltm">Alle minuutissa</string>
@@ -404,6 +408,8 @@
     <string name="caches_clear_offlinelogs_message">Haluatko poistaa offline lokit?</string>
     <string name="caches_clear_offlinelogs_progress">Poistetaan offline-lokit</string>
     <string name="caches_show_attributes">Näytä attribuuttien yleisnäkymä</string>
+    <string name="caches_set_cache_icon">Aseta kätkökuvake</string>
+    <string name="caches_reset_cache_icons_title">Nollaa kätkökuvake</string>
     <string name="caches_make_list_unique">Poista listan kätköt muilta listoilta</string>
     <string name="caches_set_listmarker">Aseta listan merkki</string>
     <string name="caches_askdeletion">Kysy poistamista, jos tyhjä</string>
@@ -642,6 +648,9 @@
     <string name="settings_title_navigation_menu">Navigointivalikko</string>
     <string name="settings_category_browser">Selain</string>
     <string name="settings_category_geocaching_platform">Geokätköilypalvelu</string>
+    <string name="settings_category_nearbysearch">Etsi lähistöltä</string>
+    <string name="init_nearbysearchlimit_title">Lähietsinnän raja</string>
+    <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
     <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
     <string name="settings_category_social">Sosiaalinen media</string>
     <string name="settings_category_logging_other">Muut lokkausasetukset</string>
@@ -1269,6 +1278,8 @@
     <string name="cache_listed_on">Listattu %s</string>
     <string name="cache_whereyougo_start">Avaa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
     <string name="cache_whereyougo_install">Lataa WhereYouGo lataaksesi ja pelataksesi tätä kasettia</string>
+    <string name="cache_chirpwolf_start">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit käyttää Chirp Wolf -sovellusta lukeaksesi Chirp-dataa.</string>
+    <string name="cache_chirpwolf_install">Voi olla, että tässä kätkössä käytetään Chirp-lähetintä tai muuta vastaavaa langatonta merkkiä. Voit asentaa Chirp Wolf -sovelluksen lukeaksesi Chirp-dataa.</string>
     <string name="cache_alc_start">Avaa Adventure Lab -sovellus aloittaaksesi tämän seikkailun</string>
     <string name="cache_alc_install">Asenna Adventure Lab-sovellus pelataksesi tätä seikkailua</string>
     <string name="context_share_as_text">Jaa teksti</string>
@@ -1411,6 +1422,8 @@
     <string name="map_show_other_title">Näytä muu:</string>
     <string name="map_settings_cache_filter_too_complex_title">Kätkösuodatin liian monimutkainen</string>
     <string name="map_settings_cache_filter_too_complex_message">Nykyinen kätkösuodatin on liian monimutkainen uusien lisävaihtoehtojen lisäämiseksi. Yleensä tämä tarkoittaa, että suodatin sisältää EI tai TAI -ilmauksia yksinkertaisen JA-logiikan sijaan.</string>
+    <string name="map_theme_legend">Teeman selite</string>
+    <string name="map_theme_legend_info">Napauta kategorian otsikkoa avataksesi/sulkeaksesi kategorian. Paina pitkään symbolia saadaksesi lyhyen informaation symbolista. Napauta infokuvaketta vieraillaksesi yksityiskohtaisessa selitteessä verkossa.</string>
     <!-- search -->
     <string name="geo_search_label">Etsi kätköjä lähistöllä</string>
     <string name="search_bar_hint">Etsi kätköjä/matkaajia</string>
@@ -1811,12 +1824,15 @@
     <string name="attribute_blind_people_no">Ei sovellu sokeille</string>
     <string name="attribute_unknown">Tuntematon attribuutti</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Varusteet</string>
     <string name="cat_type">Tyyppi</string>
     <string name="cat_location">Kätkön sijainti</string>
     <string name="cat_duration">Etäisyys / Kesto</string>
     <string name="cat_surrounding">Kätkön ympärillä</string>
     <string name="cat_permissions">Käyttöoikeudet</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1960,6 +1976,7 @@
     <string name="individual_route_error_toggling_waypoint">virhe kytkettäessä reittipiste päälle/pois</string>
     <string name="individual_route_error_single_waypoint_mode">Ei käytettävissä yksittäisen reittipisteen tilassa</string>
     <string name="map_sort_individual_route">Lajittele yksittäinen reitti</string>
+    <string name="map_export_individual_route">Vie yksittäinen reitti</string>
     <string name="map_load_individual_route">Lataa yksittäinen reitti</string>
     <string name="map_load_individual_route_confirm">Korvataanko olemassa oleva reitti?</string>
     <string name="map_autotarget_individual_route">Aseta reitin alku kohteeksi</string>
@@ -1986,7 +2003,16 @@
         <item quantity="other">Jälki/reitti ladattu (%d reittipistettä)</item>
     </plurals>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
+    <string name="map_clear_track">Tyhjennä reitti/polku</string>
+    <string name="map_clear_track_confirm">Poistetaanko reitti/polku \"%s\"?</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">Reitin / polun asetukset</string>
+    <string name="center_on_route_track">Keskitä reittiin / polkuun</string>
+    <string name="unload_route_track">Poista reitti/polku</string>
+    <string name="route">Reitti</string>
+    <string name="track">Polku</string>
+    <string name="make_visible">näytä</string>
+    <string name="hide">piilota</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2142,6 +2168,7 @@
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
     <string name="touch_again_to_exit">Ole hyvä ja kosketa uudelleen poistuaksesi</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Alueet</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->

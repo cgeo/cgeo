@@ -2341,6 +2341,11 @@ do mapa e dos temas?</string>
     <string name="rtl_tunnel">túnel</string>
     <string name="rtl_bridge">ponte</string>
     <string name="rtl_railway">linha ferroviária</string>
+    <string name="rtl_path_foot">caminho maioritariamente pedonal</string>
+    <string name="rtl_path_bicycle">caminho maioritariamente ciclável</string>
+    <string name="rtl_path_combined_bicycle_foot">caminho combinado ciclável/pedonal</string>
+    <string name="rtl_path_narrow">caminho ou via maioritariamente sem largura suficiente para automóveis</string>
+    <string name="rtl_path_badly_visible">caminho com má visibilidade</string>
     <string name="rtl_path_quality1">qualidade 1 (pavimento: asfalto, …)</string>
     <string name="rtl_path_quality23">qualidade 2/3 (pavimento: gravilha, consertado, …)</string>
     <string name="rtl_path_quality45">qualidade 4/5 (por pavimentar)</string>
