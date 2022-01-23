@@ -53,6 +53,7 @@ public class VariableMap {
         private State state = State.OK;
         private CharSequence resultAsCharSequence;
         private Value result;
+        private int rangeIndex = 0;
 
         private final Set<String> needs = new HashSet<>();
         private final Set<String> isNeededBy = new HashSet<>();
@@ -102,6 +103,11 @@ public class VariableMap {
         public CharSequence getResultAsCharSequence() {
             return resultAsCharSequence;
         }
+
+        /** Range index currently used to calculate results of the Formula */
+        public int getRangeIndex() {
+            return this.rangeIndex;
+        }
     }
 
 
@@ -124,6 +130,16 @@ public class VariableMap {
         setFormula(var, formula);
         recalculateDependencies(var);
         recalculate(var);
+    }
+
+    public void setRangeIndex(@NonNull final String var, final int rangeIndex) {
+        final VariableState state = variableStateMap.get(var);
+        if (state == null || state.rangeIndex == rangeIndex) {
+            return;
+        }
+        state.rangeIndex = rangeIndex;
+        recalculate(var);
+
     }
 
     /**
@@ -352,7 +368,7 @@ public class VariableMap {
             }
             try {
                 state.result = state.formula.evaluate(
-                    v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null); //may throw FormulaException
+                    v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null, state.rangeIndex); //may throw FormulaException
                 state.resultAsCharSequence = state.result.toString();
                 if (forceError) {
                     state.state = State.ERROR;

@@ -173,6 +173,13 @@
                 android:text="Convert to plain coordinate" />
 
             <Button
+                android:id="@+id/generate_range_coordinates"
+                style="@style/button_full"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Generate Range coordinates" />
+
+            <Button
                 android:id="@+id/done"
                 style="@style/button_full"
                 android:layout_width="match_parent"

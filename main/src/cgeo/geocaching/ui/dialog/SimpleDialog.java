@@ -375,7 +375,9 @@ public class SimpleDialog {
      * @param preselect        mapper defining for each of the given items whether it is preselected or not
      * @param onSelectListener provide the select listener called when user made a selection (called when user clicks on positive button)
      */
-    public <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener) {
+    @SafeVarargs
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    public final <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>> ... onNeutralListener) {
 
         final boolean addSelectAll = items.size() > 1;
         final int offset = addSelectAll ? 1 : 0;
@@ -441,6 +443,9 @@ public class SimpleDialog {
 
         builder.setPositiveButton(getPositiveButton(), (d, w) -> onSelectListener.accept(result));
         builder.setNegativeButton(getNegativeButton(), (d, w) -> d.dismiss());
+        if (onNeutralListener.length > 0) {
+            builder.setNeutralButton(getNeutralButton(), (d, w) -> onNeutralListener[0].accept(result));
+        }
 
         final AlertDialog dialog = builder.create();
         dialog.show();

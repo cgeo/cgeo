@@ -8,6 +8,7 @@ import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 import cgeo.geocaching.utils.functions.Func3;
+import cgeo.geocaching.utils.functions.Func4;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.EMPTY_FORMULA;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
@@ -62,6 +63,8 @@ public final class Formula {
     private static final Set<Integer> CHARS_DIGITS = new HashSet<>();
     private static final Set<Integer> NUMBERS = new HashSet<>();
 
+    private static final String RANGE_NODE_ID = "range-node";
+
     //Caches last used compiled expressions for performance reasons
     private static final LeastRecentlyUsedMap<String, Pair<Formula, FormulaException>> FORMULA_CACHE = new LeastRecentlyUsedMap.LruCache<>(500);
 
@@ -72,6 +75,8 @@ public final class Formula {
     private TextParser p;
     private int level;
     private int markedLevel;
+
+    private int rangeIndexSize = 1;
 
     public static Object createErrorSpan() {
         return new ForegroundColorSpan(Color.RED);
@@ -109,21 +114,21 @@ public final class Formula {
         private static final FormulaNode[] FORMULA_NODE_EMPTY_ARRAY = new FormulaNode[0];
 
         private final String id;
-        private Func2<ValueList, Func1<String, Value>, Value> function;
-        private Func3<ValueList, Func1<String, Value>, Boolean, CharSequence> functionToErrorString;
+        private Func3<ValueList, Func1<String, Value>, Integer, Value> function;
+        private Func4<ValueList, Func1<String, Value>, Integer, Boolean, CharSequence> functionToErrorString;
         private FormulaNode[] children;
 
         public final Set<String> neededVars;
 
         FormulaNode(final String id, final FormulaNode[] children,
-                    final Func2<ValueList, Func1<String, Value>, Value> function,
-                    final Func3<ValueList, Func1<String, Value>, Boolean, CharSequence> functionToErrorString) {
+                    final Func3<ValueList, Func1<String, Value>, Integer, Value> function,
+                    final Func4<ValueList, Func1<String, Value>, Integer, Boolean, CharSequence> functionToErrorString) {
             this(id, children, function, functionToErrorString, null);
         }
 
         FormulaNode(final String id, final FormulaNode[] children,
-                    final Func2<ValueList, Func1<String, Value>, Value> function,
-                    final Func3<ValueList, Func1<String, Value>, Boolean, CharSequence> functionToErrorString,
+                    final Func3<ValueList, Func1<String, Value>, Integer, Value> function,
+                    final Func4<ValueList, Func1<String, Value>, Integer, Boolean, CharSequence> functionToErrorString,
                     final Action1<Set<String>> explicitelyNeeded) {
 
             this.id = id;
@@ -132,11 +137,11 @@ public final class Formula {
             this.functionToErrorString = functionToErrorString;
             this.neededVars = Collections.unmodifiableSet(calculateNeededVars(explicitelyNeeded, children));
 
-            if (this.neededVars.isEmpty()) {
+            if (this.neededVars.isEmpty() && !hasRanges(this)) {
                 //this means that function is constant!
                 this.function = createConstantFunction();
-                final CharSequence csResult = evalToCharSequenceInternal(y -> null).getAsCharSequence();
-                this.functionToErrorString = (objs, vars, b) -> csResult;
+                final CharSequence csResult = evalToCharSequenceInternal(y -> null, -1).getAsCharSequence();
+                this.functionToErrorString = (objs, vars, rangeIdx, b) -> csResult;
                 this.children = FORMULA_NODE_EMPTY_ARRAY;
             }
         }
@@ -163,17 +168,29 @@ public final class Formula {
             return neededVars;
         }
 
-        private Func2<ValueList, Func1<String, Value>, Value> createConstantFunction() {
+        private static boolean hasRanges(final FormulaNode node) {
+            if (RANGE_NODE_ID.equals(node.id)) {
+                return true;
+            }
+            for (FormulaNode c : node.children) {
+                if (hasRanges(c)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private Func3<ValueList, Func1<String, Value>, Integer, Value> createConstantFunction() {
             Value result = null;
             FormulaException resultException = null;
             try {
-                result = eval(y -> null);
+                result = eval(y -> null, -1);
             } catch (FormulaException fe) {
                 resultException = fe;
             }
             final Value finalResult = result;
             final FormulaException finalResultException = resultException;
-            return (objs, vars) -> {
+            return (objs, vars, idx) -> {
                 if (finalResultException != null) {
                     throw finalResultException;
                 }
@@ -181,31 +198,31 @@ public final class Formula {
             };
         }
 
-        private Value eval(final Func1<String, Value> variables) throws FormulaException {
-            return evalInternal(variables == null ? x -> null : variables);
+        private Value eval(final Func1<String, Value> variables, final int rangeIdx) throws FormulaException {
+            return evalInternal(variables == null ? x -> null : variables, rangeIdx);
         }
 
-        private Value evalInternal(final Func1<String, Value> variables) throws FormulaException {
+        private Value evalInternal(final Func1<String, Value> variables, final int rangeIdx) throws FormulaException {
             final ValueList childValues = new ValueList();
             for (FormulaNode child : children) {
-                childValues.add(child.eval(variables));
+                childValues.add(child.eval(variables, rangeIdx));
             }
-            return this.function.call(childValues, variables);
+            return this.function.call(childValues, variables, rangeIdx);
         }
 
-        private CharSequence evalToCharSequence(final Func1<String, Value> vars) {
-            final Object result = evalToCharSequenceInternal(vars == null ? x -> null : vars);
+        private CharSequence evalToCharSequence(final Func1<String, Value> vars, final int rangeIdx) {
+            final Object result = evalToCharSequenceInternal(vars == null ? x -> null : vars, rangeIdx);
             if (result instanceof ErrorValue) {
                 return TextUtils.setSpan(((ErrorValue) result).getAsCharSequence(), createWarningSpan(), -1, -1, 5);
             }
             return result.toString();
         }
 
-        private Value evalToCharSequenceInternal(final Func1<String, Value> variables) {
+        private Value evalToCharSequenceInternal(final Func1<String, Value> variables, final int rangeIdx) {
             final ValueList childValues = new ValueList();
             boolean hasError = false;
             for (FormulaNode child : children) {
-                final Value v = child.evalToCharSequenceInternal(variables);
+                final Value v = child.evalToCharSequenceInternal(variables, rangeIdx);
                 if (v instanceof ErrorValue) {
                     hasError = true;
                 }
@@ -214,7 +231,7 @@ public final class Formula {
             boolean isDirectError = false;
             if (!hasError) {
                 try {
-                    return this.function.call(childValues, variables);
+                    return this.function.call(childValues, variables, rangeIdx);
                 } catch (FormulaException fe) {
                     //error is right here...
                     isDirectError = true;
@@ -224,7 +241,7 @@ public final class Formula {
             //we had an error in the chain -> produce a String using the error function
             CharSequence cs = null;
             if (this.functionToErrorString != null) {
-                cs = this.functionToErrorString.call(childValues, variables, isDirectError);
+                cs = this.functionToErrorString.call(childValues, variables, rangeIdx, isDirectError);
             }
             if (cs == null) {
                 //default error string function
@@ -242,25 +259,25 @@ public final class Formula {
 
          }
 
-         public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables) {
+         public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables, final int rangeIdx) {
             final ValueList childValues = new ValueList();
             for (FormulaNode child : nodes) {
-                childValues.add(child.eval(variables));
+                childValues.add(child.eval(variables, rangeIdx));
             }
             return childValues;
         }
 
         /** for test/debug purposes only! */
-        public String toDebugString(final Func1<String, Value> variables, final boolean includeId, final boolean recursive) {
+        public String toDebugString(final Func1<String, Value> variables, final int rangeIdx, final boolean includeId, final boolean recursive) {
             final StringBuilder sb = new StringBuilder();
             if (includeId) {
                 sb.append("[").append(getId()).append("]");
             }
-            sb.append(evalToCharSequence(variables));
+            sb.append(evalToCharSequence(variables, rangeIdx));
             if (recursive) {
                 sb.append("{");
                 for (FormulaNode child : children) {
-                    sb.append(child.toDebugString(variables, includeId, recursive));
+                    sb.append(child.toDebugString(variables, rangeIdx, includeId, recursive));
                 }
                 sb.append("}");
             }
@@ -269,10 +286,10 @@ public final class Formula {
     }
 
     private FormulaNode createNumeric(final String id, final FormulaNode[] children, final Func2<ValueList, Func1<String, Value>, Value> function) {
-        return new FormulaNode(id, children, (objs, vars) -> {
+        return new FormulaNode(id, children, (objs, vars, rangeIdx) -> {
             objs.checkAllDouble();
             return function.call(objs, vars);
-        }, (objs, vars, error) ->
+        }, (objs, vars, rangeIdx, error) ->
             TextUtils.join(objs, v -> v.isDouble() || ErrorValue.isError(v) ? v.getAsCharSequence() : TextUtils.setSpan(
             TextUtils.concat("'", v.getAsCharSequence(), "'"), createErrorSpan()), " " + id + " "));
     }
@@ -333,6 +350,10 @@ public final class Formula {
         }
     }
 
+    public static Value evaluateWithRanges(final String expression, final int rangeIdx, final Object ... vars) {
+        return compile(expression).evaluate(toVarProvider(vars), rangeIdx);
+    }
+
     public static Value evaluate(final String expression, final Object ... vars) {
         return compile(expression).evaluate(vars);
     }
@@ -344,6 +365,10 @@ public final class Formula {
 
     private Formula()  {
         //do nothing
+    }
+
+    public int getRangeIndexSize() {
+        return this.rangeIndexSize;
     }
 
     public String getExpression() {
@@ -366,8 +391,12 @@ public final class Formula {
     }
 
     public Value evaluate(final Func1<String, Value> vars) throws FormulaException {
+        return evaluate(vars, 0);
+    }
+
+    public Value evaluate(final Func1<String, Value> vars, final int rangeIdx) throws FormulaException {
         try {
-            return compiledExpression.eval(vars == null ? x -> null : vars);
+            return compiledExpression.eval(vars == null ? x -> null : vars, rangeIdx);
         } catch (FormulaException ce) {
             ce.setExpression(expression);
             ce.setEvaluationContext(calculateEvaluationContext(vars));
@@ -381,7 +410,11 @@ public final class Formula {
     }
 
     public CharSequence evaluateToCharSequence(final Func1<String, Value> vars) {
-        return compiledExpression.evalToCharSequence(vars == null ? x -> null : vars);
+        return evaluateToCharSequence(vars, 0);
+    }
+
+    public CharSequence evaluateToCharSequence(final Func1<String, Value> vars, final int rangeIdx) {
+        return compiledExpression.evalToCharSequence(vars == null ? x -> null : vars, rangeIdx);
     }
 
     private String calculateEvaluationContext(final Func1<String, Value> vars) {
@@ -572,6 +605,28 @@ public final class Formula {
         return createSingleValueNode("string-literal", result);
     }
 
+    private FormulaNode parseRangeBlock() {
+        if (!p.eat('[')) {
+            throw new FormulaException(UNEXPECTED_TOKEN, "[");
+        }
+        final String config = p.parseUntil(c -> ']' == c, false, null, false);
+        if (config == null) {
+            throw new FormulaException(UNEXPECTED_TOKEN, "]");
+        }
+        final IntegerRange range = IntegerRange.createFromConfig(config);
+        if (range == null) {
+            throw new FormulaException(OTHER, "Invalid Range spec: " + config);
+        }
+        final int divisor = registerRange(range);
+        return new FormulaNode(RANGE_NODE_ID, null,
+            (objs, vars, rangeIdx) -> Value.of(range.getValue((rangeIdx % (divisor * range.getSize())) / divisor)), null);
+    }
+
+    private int registerRange(final IntegerRange range) {
+        final int divisor = rangeIndexSize;
+        rangeIndexSize *= range.getSize();
+        return divisor;
+    }
 
     private FormulaNode parseConcatBlock() {
         final List<FormulaNode> nodes = new ArrayList<>();
@@ -581,8 +636,8 @@ public final class Formula {
                 final char expectedClosingChar = ')';
                 p.next();
                 this.level++;
-                nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v) -> o.get(0),
-                    (o, v, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
+                nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v, ri) -> o.get(0),
+                    (o, v, ri, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
                 this.level--;
                 if (!p.eat(expectedClosingChar)) {
                     final FormulaException fe = new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
@@ -607,6 +662,10 @@ public final class Formula {
                 nodes.add(parseAlphaNumericBlock());
             } else if (p.chIsIn(NUMBERS)) {
                 nodes.add(parseNumber());
+            } else if (p.ch() == '[') {
+                level++;
+                nodes.add(parseRangeBlock());
+                level--;
             } else {
                 break;
             }
@@ -617,12 +676,12 @@ public final class Formula {
         if (nodes.size() == 1) {
             return nodes.get(0);
         }
-        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars) -> concat(objs), null);
+        return new FormulaNode("concat", nodes.toArray(new FormulaNode[0]), (objs, vars, ri) -> concat(objs), null);
     }
 
     private static FormulaNode createSingleValueNode(final String nodeId, final Object value) {
         return new FormulaNode(nodeId, null,
-            (objs, vars) -> value instanceof Value ? (Value) value : Value.of(value), null);
+            (objs, vars, ri) -> value instanceof Value ? (Value) value : Value.of(value), null);
     }
 
     private FormulaNode parseExplicitVariable() {
@@ -648,13 +707,13 @@ public final class Formula {
             throw fe;
         }
 
-        return new FormulaNode("var", null, (objs, vars) -> {
+        return new FormulaNode("var", null, (objs, vars, ri) -> {
             final Value value = vars.call(parsed);
             if (value != null) {
                 return value;
             }
             throw createMissingVarsException(vars);
-        }, (objs, vars, error) -> {
+        }, (objs, vars, ri, error) -> {
             final Value value = vars.call(parsed);
             if (value != null) {
                 return value.getAsString();
@@ -699,7 +758,7 @@ public final class Formula {
     @NonNull
     private FormulaNode parseSingleLetterVariableBlock(final String varBlock) {
 
-        return new FormulaNode("varblock", null, (objs, vars) -> {
+        return new FormulaNode("varblock", null, (objs, vars, ri) -> {
             final ValueList varValues = new ValueList();
             for (char l : varBlock.toCharArray()) {
                 final Value value = vars.call("" + l);
@@ -709,7 +768,7 @@ public final class Formula {
                 varValues.add(value);
             }
             return concat(varValues);
-        }, (objs, vars, error) -> TextUtils.join(IteratorUtils.arrayIterator(varBlock.toCharArray()), c -> {
+        }, (objs, vars, ri, error) -> TextUtils.join(IteratorUtils.arrayIterator(varBlock.toCharArray()), c -> {
             final Value value = vars.call("" + c);
             return value == null ? TextUtils.setSpan("?" + c, createErrorSpan()) : value.getAsCharSequence();
         }, ""), result -> {
@@ -748,7 +807,7 @@ public final class Formula {
         }
 
         return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
-            (n, v) -> {
+            (n, v, ri) -> {
                 try {
                     return Objects.requireNonNull(FormulaFunction.findByName(functionName)).execute(n);
                 } catch (FormulaException ce) {
@@ -763,13 +822,13 @@ public final class Formula {
 
                 }
             },
-            (n, v, error) -> functionName + "(" + StringUtils.join(n, ","));
+            (n, v, ri, error) -> functionName + "(" + StringUtils.join(n, ","));
 
     }
 
     /** for test/debug purposes only! */
     public String toDebugString(final Func1<String, Value> variables, final boolean includeId, final boolean recursive) {
-        return compiledExpression.toDebugString(variables == null ? x -> null : variables, includeId, recursive);
+        return compiledExpression.toDebugString(variables == null ? x -> null : variables, 0, includeId, recursive);
     }
 
     private void markParseError(final FormulaException fe, final int start, final int pend) {

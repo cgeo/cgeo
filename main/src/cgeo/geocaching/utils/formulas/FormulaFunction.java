@@ -26,7 +26,7 @@ public enum FormulaFunction {
     TAN("tan", FunctionGroup.SIMPLE_NUMERIC, 0, "Tangens", null, 0,
         singleValueNumericFunction(p -> Math.tan(Math.toRadians(p)))),
     ABS("abs", FunctionGroup.SIMPLE_NUMERIC, 0, "Absolute Value", null, 0,
-        singleValueNumericFunction(Math::round)),
+        singleValueNumericFunction(Math::abs)),
     ROUND("round", FunctionGroup.SIMPLE_NUMERIC, 0, "Round", null, 0,
         p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), p.getAsInt(1, 0)))),
 

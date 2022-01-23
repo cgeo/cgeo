@@ -61,6 +61,10 @@ public class VariableList {
         return variableMap.get(var);
     }
 
+    public void setRangeIndex(final String var, final int rangeIndex) {
+        this.variableMap.setRangeIndex(var, rangeIndex);
+    }
+
     public int size() {
         return variableList.size();
     }

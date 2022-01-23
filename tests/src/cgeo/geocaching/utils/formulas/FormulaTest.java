@@ -2,7 +2,9 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.KeyableCharSet;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.MISSING_VARIABLE_VALUE;
+import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.OTHER;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.UNEXPECTED_TOKEN;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_PARAMETER_COUNT;
 import static cgeo.geocaching.utils.formulas.FormulaException.ErrorType.WRONG_TYPE;
@@ -11,6 +13,8 @@ import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 
@@ -116,6 +120,49 @@ public class FormulaTest {
             .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
         assertThatThrownBy(() -> eval("${A(B)"))
             .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("}");
+    }
+
+    @Test
+    public void ranges() {
+        //assert handling of "normal" formats
+        assertThat(Formula.evaluateWithRanges("[0-9]", 3)).isEqualTo(Value.of(3));
+        assertThat(Formula.compile("[0-9]").getRangeIndexSize()).isEqualTo(10);
+
+        assertThat(Formula.compile("[0-3]*[0-4]").getRangeIndexSize()).isEqualTo(20);
+        assertRangeFormula("[1-2]*[3-4]", null, 3, 6, 4, 8);
+        assertRangeFormula("[1-3, ^2]*[10-20, ^11-19]", null, 10, 30, 20, 60);
+
+        //assert graceful handling of "strange" formats
+        assertRangeFormula("[abc1]", null, 1);
+        assertRangeFormula("[2-]", null, 2);
+        assertRangeFormula("[-3]", null, 3);
+
+        //assert
+        assertThatThrownBy(() -> eval("[0-3"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("]");
+        assertThatThrownBy(() -> eval("[0-5000]")).as("Too many items in range")
+            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name()).hasMessageContaining("0-5000");
+        assertThatThrownBy(() -> eval("[]"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
+        assertThatThrownBy(() -> eval("[  ]"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
+        assertThatThrownBy(() -> eval("[^1-2]"))
+            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
+
+    }
+
+    private void assertRangeFormula(final String formula, final Func1<String, Value> varMap, final Object ... expectedResults) {
+        final Formula f = Formula.compile(formula);
+        assertThat(f.getRangeIndexSize()).isEqualTo(expectedResults.length);
+        final List<Value> results = new ArrayList<>();
+        for (int i = 0; i < f.getRangeIndexSize(); i++) {
+            results.add(f.evaluate(varMap, i));
+        }
+        final List<Value> expectedResultList = new ArrayList<>();
+        for (Object  o : expectedResults) {
+            expectedResultList.add(o instanceof Value ? (Value) o : Value.of(o));
+        }
+        assertThat(results).containsExactlyElementsOf(expectedResultList);
     }
 
     @Test
