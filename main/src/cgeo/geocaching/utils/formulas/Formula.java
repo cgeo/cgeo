@@ -326,6 +326,7 @@ public final class Formula {
             f.doCompile(expression, startPos, stopChecker);
             return f;
         } catch (FormulaException ce) {
+            f.markParseError(ce, -1, -1);
             ce.setExpression(expression);
             ce.setParsingContext(f.p.ch(), f.p.pos());
             throw ce;
@@ -370,6 +371,7 @@ public final class Formula {
         } catch (FormulaException ce) {
             ce.setExpression(expression);
             ce.setEvaluationContext(calculateEvaluationContext(vars));
+            ce.setExpressionFormatted(this.evaluateToCharSequence(vars == null ? x -> null : vars));
             throw ce;
         }
     }
@@ -559,10 +561,13 @@ public final class Formula {
         if (openingChar != '\'' && openingChar != '"') {
             throw new FormulaException(UNEXPECTED_TOKEN, "' or \"");
         }
+        final int posOpening = p.pos();
         p.eat(openingChar);
         final String result = p.parseUntil(c -> openingChar == c, false, null, true);
         if (result == null) {
-            throw new FormulaException(UNEXPECTED_TOKEN, "" + ((char) openingChar));
+            final FormulaException fe = new FormulaException(UNEXPECTED_TOKEN, "" + ((char) openingChar));
+            markParseError(fe, posOpening, -1);
+            throw fe;
         }
         return createSingleValueNode("string-literal", result);
     }
@@ -572,6 +577,7 @@ public final class Formula {
         final List<FormulaNode> nodes = new ArrayList<>();
         while (true) {
             if (p.ch() == '(') {
+                final int parenStartPos = p.pos();
                 final char expectedClosingChar = ')';
                 p.next();
                 this.level++;
@@ -579,7 +585,9 @@ public final class Formula {
                     (o, v, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
                 this.level--;
                 if (!p.eat(expectedClosingChar)) {
-                    throw new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
+                    final FormulaException fe = new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
+                    markParseError(fe, parenStartPos, -1);
+                    throw fe;
                 }
             } else if (p.chIsIn('\'', '"')) {
                 level++;
@@ -623,6 +631,7 @@ public final class Formula {
         }
         //might be var with {} around it
         final boolean hasParen = p.eat('{');
+        final int posOpening = p.pos() - 1;
         //first variable name char MUST be an alpha
         if (!p.chIsIn(CHARS)) {
             throw new FormulaException(UNEXPECTED_TOKEN, "alpha");
@@ -634,7 +643,9 @@ public final class Formula {
         }
         final String parsed = sb.toString();
         if (hasParen && !p.eat('}')) {
-            throw new FormulaException(UNEXPECTED_TOKEN, "}");
+            final FormulaException fe = new FormulaException(UNEXPECTED_TOKEN, "}");
+            markParseError(fe, posOpening, -1);
+            throw fe;
         }
 
         return new FormulaNode("var", null, (objs, vars) -> {
@@ -759,6 +770,26 @@ public final class Formula {
     /** for test/debug purposes only! */
     public String toDebugString(final Func1<String, Value> variables, final boolean includeId, final boolean recursive) {
         return compiledExpression.toDebugString(variables == null ? x -> null : variables, includeId, recursive);
+    }
+
+    private void markParseError(final FormulaException fe, final int start, final int pend) {
+        CharSequence ef = fe.getExpressionFormatted();
+        if (ef == null) {
+            //create initial formatted expression
+            ef = TextUtils.setSpan(p.getExpression(), createWarningSpan(), -1, -1, 1);
+            if (p.pos() < 0 || p.pos() >= ef.length()) {
+                ef = TextUtils.concat(ef, TextUtils.setSpan("?", createErrorSpan()));
+            } else {
+                TextUtils.setSpan(ef, createErrorSpan(), p.pos(), p.pos() + 1, 0);
+            }
+        }
+        if (start >= 0) {
+            final int end = pend < 0 ? start + 1 : pend;
+            if (start < ef.length() && end > start && end <= ef.length()) {
+                ef = TextUtils.setSpan(ef, createErrorSpan(), start, end, 0);
+            }
+        }
+        fe.setExpressionFormatted(ef);
     }
 
     /** concats values Formula-internally. Takes care of the spillover character _ */

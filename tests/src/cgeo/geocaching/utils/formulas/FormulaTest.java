@@ -369,4 +369,5 @@ public class FormulaTest {
         assertThat(eval("4^2 #comment")).isEqualTo(4 * 4);
         assertThat(eval("2 * (3 + 4) #comment")).isEqualTo(2 * (3 + 4));
     }
+
 }

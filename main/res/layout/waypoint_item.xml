@@ -111,6 +111,7 @@
                 android:textColor="@color/colorText_listsPrimary"
                 android:visibility="gone"
                 android:text="@string/waypoint_calculated_coordinates"
+                android:textStyle="italic"
                 tools:visiblity="visible" />
 
             <TextView

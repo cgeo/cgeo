@@ -28,9 +28,7 @@ public class DegreeFormula {
     private static final LeastRecentlyUsedMap<String, Pair<DegreeFormula, FormulaException>> FORMULA_CACHE =
         new LeastRecentlyUsedMap.LruCache<>(500);
 
-    private static final Formula ZERO_FORMULA = Formula.compile("0");
-
-    private static final Double[] DIVIDERS_PER_TYPE = new Double[] { 1d, 60d, 360d };
+    private static final Double[] DIVIDERS_PER_TYPE = new Double[] { 1d, 60d, 3600d };
 
     private static final Set<Integer> LAT_ALL_CHARS = SetUtils.hashSet((int) 'N', (int) 'n', (int) 'S', (int) 's');
     private static final Set<Integer> LAT_NEG_CHARS = SetUtils.hashSet((int) 'S', (int) 's');
@@ -48,7 +46,7 @@ public class DegreeFormula {
     private int signum = 0; //0 = not set, 1 = set positive, -1 = set negative, -2 = ERROR
 
     private interface DegreeFormulaNode {
-        Pair<Double, Boolean> apply(Func1<String, Value> varMap, List<CharSequence> css);
+        ImmutableTriple<Double, Boolean, Boolean> apply(Func1<String, Value> varMap, Double value, List<CharSequence> css, boolean digitsAllowed);
     }
 
 
@@ -75,32 +73,33 @@ public class DegreeFormula {
     }
 
     private boolean checkAndParseHemisphereChar(final boolean checkEof) {
-        if (isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || Character.isWhitespace(parser.peek()))) {
+        if (isParserOnHemisphereChar(checkEof)) {
             signum = signum != 0 ? -2 : (isHemisphereChar(parser.chInt(), true) ? -1 : 1);
             final String hemi = "" + Character.toUpperCase(parser.ch());
             parser.nextNonWhitespace();
-            nodes.add((vm, css) -> {
-                if (signum == -2) {
+            nodes.add((vm, v, css, da) -> {
+                if (signum == -2 || (v != null && v < 0)) {
                     addError(css, hemi);
-                    return new Pair<>(null, false);
+                    return null;
                 }
                 add(css, hemi);
-                return new Pair<>(0d, false);
+                return new ImmutableTriple<>(0d, false, false);
             });
             return true;
         }
         return false;
     }
 
-    private Formula parseFormula(final boolean returnZeroOnEmptyFormula) {
+    private boolean isParserOnHemisphereChar(final boolean checkEof) {
+        return isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || Character.isWhitespace(parser.peek()));
+    }
+
+    private Formula parseFormula() {
         try {
             final Formula f = Formula.compile(parser.getExpression(), parser.pos(), scs);
             parser.setPos(parser.pos() + f.getExpression().length());
             return f;
         } catch (FormulaException fe) {
-            if (returnZeroOnEmptyFormula && FormulaException.ErrorType.EMPTY_FORMULA.equals(fe.getErrorType())) {
-                return ZERO_FORMULA;
-            }
             return null;
         }
     }
@@ -110,40 +109,75 @@ public class DegreeFormula {
         checkAndParseHemisphereChar(false);
 
         int lastType = -1; // 0 = degree, 1 = minute, 2 = seconds
+        boolean digitAllowed = true;
         while (!parser.eof()) {
             //might be n/s at the end
             if (checkAndParseHemisphereChar(true)) {
                 continue;
             }
 
-            final Integer foundType = checkAndParseDegreePart(lastType);
-            if (foundType == null) {
+            final Pair<Integer, Boolean> degreePartParseResult = checkAndParseDegreePart(lastType, digitAllowed);
+            if (degreePartParseResult == null || degreePartParseResult.first == null) {
                 break;
             }
 
-            lastType = foundType;
+            lastType = degreePartParseResult.first;
+            if (degreePartParseResult.second) {
+                digitAllowed = false;
+            }
         }
         if (!parser.eof()) {
             final String errorExp = parser.getExpression().substring(parser.pos()) + "?";
-            nodes.add((vm, css) -> {
+            nodes.add((vm, v, css, da) -> {
                 addError(css, errorExp);
-                return new Pair<>(null, false);
+                return new ImmutableTriple<>(null, false, false);
             });
         }
     }
 
     @Nullable
-    private Integer checkAndParseDegreePart(final int lastType) {
+    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    private Pair<Integer, Boolean> checkAndParseDegreePart(final int lastType, final boolean digitAllowed) {
+        boolean foundDigit = false;
         parser.mark();
-        final Formula f = parseFormula(false);
+        final Formula f = parseFormula();
         if (f == null) {
             return null;
         }
         neededVars.addAll(f.getNeededVariables());
         Formula fAfterDigit = null;
         if (parser.chIsIn('.', ',')) {
-            parser.next();
-            fAfterDigit = parseFormula(true);
+            foundDigit = true;
+            if (!digitAllowed) {
+                parser.reset();
+                return null;
+            }
+            //ignore whitespaces in after-digit-parsing
+            parser.nextNonWhitespace();
+            while (!parser.eof() && !parser.chIsIn('°', '\'', '\"')) {
+                //if we find a hemispehere char then this is probably a closing hem
+                if (isParserOnHemisphereChar(true)) {
+                    parser.setPos(parser.pos() - 1);
+                    break;
+                }
+                //if we find . or , inside afterdigits, this is an error
+                if (parser.chIsIn('.', ',')) {
+                    parser.reset();
+                    return null;
+                }
+                final Formula fAfterDigitAppend = parseFormula();
+                if (fAfterDigitAppend == null) {
+                    parser.reset();
+                    return null;
+                }
+                try {
+                    fAfterDigit = Formula.compile((fAfterDigit == null ? "" : fAfterDigit.getExpression()) + fAfterDigitAppend.getExpression());
+                } catch (FormulaException fe) {
+                    parser.reset();
+                    return null;
+                }
+                parser.skipWhitespaces();
+            }
             if (fAfterDigit == null) {
                 parser.reset();
                 return null;
@@ -159,47 +193,59 @@ public class DegreeFormula {
         final DegreeFormulaNode node = createDegreePartNode(foundType, f, fAfterDigit);
 
         final List<CharSequence> constCssList = new ArrayList<>();
-        final Pair<Double, Boolean> constResult = node.apply(null, constCssList);
+        final ImmutableTriple<Double, Boolean, Boolean> constResult = node.apply(null, null, constCssList, true);
         final CharSequence constCss = TextUtils.join(constCssList, c -> c, "");
-        if (constResult.first != null) {
-            nodes.add((vm, css) -> {
+        if (constResult != null && constResult.left != null) {
+            //create css in case Digits are NOT allowed....
+            final List<CharSequence> constCssListDaNotAllowed = new ArrayList<>();
+            final ImmutableTriple<Double, Boolean, Boolean> constResultDaNotAllowed = node.apply(null, null, constCssListDaNotAllowed, false);
+            final CharSequence constCssDaNotALlowed = TextUtils.join(constCssListDaNotAllowed, c -> c, "");
+            nodes.add((vm, v, css, da) -> {
+                if (!da) {
+                    add(css, constCssDaNotALlowed);
+                    return constResultDaNotAllowed;
+                }
                 add(css, constCss);
                 return constResult;
             });
         } else {
             nodes.add(node);
         }
-        return foundType;
+        return new Pair<>(foundType, foundDigit);
     }
 
     private DegreeFormulaNode createDegreePartNode(final int foundType, final Formula f, final Formula fAfterDigit) {
-        return (vm, css) -> {
+        return (vm, v, css, da) -> {
             final Pair<Double, Boolean> value;
             switch (foundType) {
                 case 0:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                        d -> d >= (lonCoord ? -180 : -90) && d <= (lonCoord ? 180 : 90), 0);
+                        d -> da && d >= (signum != 0 ? 0 : (lonCoord ? -180 : -90)) && d <= (lonCoord ? 180 : 90), 0);
                     add(css, "°");
                     break;
                 case 1:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                        d -> d >= 0 && d < 60, 3);
+                        d -> da && d >= 0 && d < 60, 3);
                     add(css, "'");
                     break;
                 case 2:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                        d -> d >= 0 && d < 60, 3);
+                        d -> da && d >= 0 && d < 60, 3);
                     add(css, "\"");
                     break;
                 default:
                     value = null;
                     break;
             }
-            if (value == null || value.first == null) {
-                return new Pair<>(null, false);
+            if (value == null || value.first == null || (!da && !Value.of(value.first).isInteger())) {
+                return null;
             }
-            return new Pair<>(value.first / DIVIDERS_PER_TYPE[foundType], value.second);
+            return new ImmutableTriple<>(value.first / DIVIDERS_PER_TYPE[foundType], value.second, hasDigits(value.first));
         };
+    }
+
+    private boolean hasDigits(final double value) {
+        return !Value.of(value).isInteger();
     }
 
     private int parseFoundType(final int lastType) {
@@ -275,11 +321,14 @@ public class DegreeFormula {
         final List<CharSequence> css = new ArrayList<>();
         Double result = 0d;
         boolean hasWarning = false;
+        boolean digitsAllowed = true;
         for (DegreeFormulaNode o : nodes) {
-            final Pair<Double, Boolean> res = o.apply(varMap, css);
-            final Double nodeResult = res.first;
-            result = (result == null || nodeResult == null) ? null : result + nodeResult;
-            hasWarning |= res.second;
+            final ImmutableTriple<Double, Boolean, Boolean> res = o.apply(varMap, result, css, digitsAllowed);
+            result = (result == null || res == null || res.left == null) ? null : result + res.left;
+            hasWarning |= (res != null && res.middle);
+            if (res != null && res.right) {
+                digitsAllowed = false;
+            }
         }
         return new ImmutableTriple<>(result == null ? null : (signum == -1 ? result * -1 : result), TextUtils.join(css, c -> c, ""), hasWarning);
     }

@@ -239,11 +239,13 @@ public class VariableMap {
         state.state = State.OK;
         state.formula = null;
         state.result = null;
+        state.resultAsCharSequence = null;
         try {
             state.formula = Formula.compile(formulaString);
         } catch (FormulaException ce) {
             state.state = State.ERROR;
             state.error = ce.getUserDisplayableString();
+            state.resultAsCharSequence = ce.getExpressionFormatted();
         }
     }
 
@@ -329,7 +331,6 @@ public class VariableMap {
     private boolean recalculateSingle(final VariableState state, final boolean forceError) {
 
         state.result = null;
-        state.resultAsCharSequence = null;
 
         if (state.formula == null) {
             state.state = State.ERROR;
@@ -337,6 +338,7 @@ public class VariableMap {
                 state.error = FormulaException.getUserDisplayableMessage(FormulaException.ErrorType.OTHER, "-");
             }
         } else {
+            state.resultAsCharSequence = null;
             boolean hasCycleDep = false;
             for (String n : state.needs) {
                 final VariableState cs = Objects.requireNonNull(get(n));
@@ -361,7 +363,7 @@ public class VariableMap {
                 }
             } catch (FormulaException ce) {
                 state.result = null;
-                state.resultAsCharSequence = state.formula.evaluateToCharSequence(v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null);
+                state.resultAsCharSequence = ce.getExpressionFormatted();
                 state.state = State.ERROR;
                 state.error = ce.getUserDisplayableString();
             }

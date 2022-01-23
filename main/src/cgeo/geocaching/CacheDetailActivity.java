@@ -48,6 +48,7 @@ import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.CacheLogsViewCreator;
 import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
+import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
@@ -91,6 +92,7 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -2096,6 +2098,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             activity.addContextMenu(coordinatesView);
             coordinatesView.setVisibility(null != coordinates ? View.VISIBLE : View.GONE);
             calculatedCoordinatesView.setVisibility(null != calcStateJson ? View.VISIBLE : View.GONE);
+            final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(calcStateJson);
+            calculatedCoordinatesView.setText(cc.isFilled() ? "(x):" + cc.getLatitudePattern() + " | " + cc.getLongitudePattern() : LocalizationUtils.getString(R.string.waypoint_calculated_coordinates));
             holder.binding.calculatedCoordinatesIcon.setVisibility(wpt.isCalculated() ? View.VISIBLE : View.GONE);
 
             // info
