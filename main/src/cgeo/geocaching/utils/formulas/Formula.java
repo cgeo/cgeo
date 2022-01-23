@@ -534,6 +534,18 @@ public final class Formula {
             });
         }
 
+        p.skipWhitespaces();
+        if (p.chIsIn('²', '³')) {
+            final int factor = p.ch() == '³' ? 3 : 2;
+            p.next();
+            x = createNumeric("^" + factor, new FormulaNode[]{x}, (nums, vars) -> {
+                if (!nums.get(0).isDouble()) {
+                    throw new FormulaException(WRONG_TYPE, "numeric", nums.get(0), nums.get(0).getType());
+                }
+                return Value.of(Math.pow(nums.get(0).getAsDouble(), factor));
+            });
+        }
+
         if (p.eat('^')) {
             x = createNumeric("^", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(Math.pow(nums.getAsDouble(0), nums.getAsDouble(1))));
         }

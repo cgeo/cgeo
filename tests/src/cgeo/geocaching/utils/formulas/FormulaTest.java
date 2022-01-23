@@ -320,6 +320,11 @@ public class FormulaTest {
         assertThat(eval("42:2")).isEqualTo(21d);
         assertThat(eval("42—2")).isEqualTo(40d);
         assertThat(eval("—2")).isEqualTo(-2d);
+
+        assertThat(eval("2²")).isEqualTo(4d);
+        assertThat(eval("-4³")).isEqualTo(-64d);
+        assertThat(eval("3!²")).isEqualTo(36d);
+        assertThat(eval("(3²)!")).isEqualTo(2 * 3 * 4 * 5 * 6 * 7 * 8 * 9);
     }
 
     @Test
