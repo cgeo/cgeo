@@ -45,6 +45,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
 
+    private static final String KEY_INDIVIDUAL_ROUTE = "INDIVIDUALROUTE";
+
     /**
      * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
      */
@@ -71,7 +73,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     private static Bitmap locationIcon;
 
-    private ArrayList<ArrayList<LatLng>> route = null;
     private Viewport lastViewport = null;
 
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
@@ -169,11 +170,10 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
 
     @Override
     public void updateIndividualRoute(final Route route) {
-        this.route = route.getAllPointsLatLng();
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route);
         if (postRouteDistance != null) {
             postRouteDistance.postRealDistance(route.getDistance());
         }
-        repaintRequired();
     }
 
     @Override
@@ -212,9 +212,8 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
     public void repaintRequired() {
         drawPosition();
         drawHistory();
-        drawRoute();
         drawViewport(lastViewport);
-        drawTracks();
+        drawRouteAndTracks();
     }
 
 
@@ -337,20 +336,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
     }
 
-    private synchronized void drawRoute() {
-        routeObjs.removeAll();
-        if (route != null && route.size() > 0) {
-            for (ArrayList<LatLng> segment : route) {
-                routeObjs.addPolyline(new PolylineOptions()
-                    .addAll(segment)
-                    .color(MapLineUtils.getRouteColor())
-                    .width(MapLineUtils.getRouteLineWidth())
-                    .zIndex(ZINDEX_ROUTE)
-                );
-            }
-        }
-    }
-
     public synchronized void drawViewport(final Viewport viewport) {
         if (null == viewport) {
             return;
@@ -369,12 +354,26 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         lastViewport = viewport;
     }
 
-    private synchronized void drawTracks() {
+    private synchronized void drawRouteAndTracks() {
+        // draw individual route
+        routeObjs.removeAll();
+        final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
+        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
+            for (ArrayList<LatLng> segment : individualRoute.track) {
+                routeObjs.addPolyline(new PolylineOptions()
+                    .addAll(segment)
+                    .color(MapLineUtils.getRouteColor())
+                    .width(MapLineUtils.getRouteLineWidth())
+                    .zIndex(ZINDEX_ROUTE)
+                );
+            }
+        }
+        // draw tracks
         trackObjs.removeAll();
         synchronized (cache) {
             for (CachedRoute c : cache.values()) {
                 // route hidden, no route or route too short?
-                if (!c.isHidden && c.track != null && c.track.size() > 0) {
+                if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
                     for (ArrayList<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
                             .addAll(segment)

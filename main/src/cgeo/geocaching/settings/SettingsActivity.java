@@ -38,6 +38,7 @@ import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.BackgroundColorSpan;
+import android.text.style.ForegroundColorSpan;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -421,6 +422,7 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         final Spannable s = new SpannableString(text);
         if (iPos >= 0) {
             s.setSpan(new BackgroundColorSpan(context.getResources().getColor(R.color.colorAccent)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            s.setSpan(new ForegroundColorSpan(context.getResources().getColor(R.color.colorText)), iPos, iPos + searchTerm.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return s;
     }
