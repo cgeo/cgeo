@@ -136,10 +136,17 @@ public class ReceiveDownloadService extends AbstractForegroundIntentService {
             ContentStorage.get().delete(companionFile);
         }
 
+        // check for files in different capitalizations
+        final String filenameNormalized = normalized(filename);
         for (ContentStorage.FileInformation fi : files) {
-            if (fi.name.equals(filename)) {
+            final String fiNormalized = normalized(fi.name);
+            if (fiNormalized.equals(filenameNormalized)) {
                 ContentStorage.get().delete(fi.uri);
-                break;
+                // also check companion file for this
+                final Uri cf = downloader.useCompanionFiles ? CompanionFileUtils.companionFileExists(files, fi.name) : null;
+                if (cf != null) {
+                    ContentStorage.get().delete(cf);
+                }
             }
         }
 
@@ -174,6 +181,10 @@ public class ReceiveDownloadService extends AbstractForegroundIntentService {
         notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(
                 this, NotificationChannels.DOWNLOADER_RESULT_NOTIFICATION, R.string.receivedownload_intenttitle, result
         ).build());
+    }
+
+    private String normalized(final String filename) {
+        return StringUtils.replace(StringUtils.lowerCase(filename), "-", "_");
     }
 
     private CopyStates copyInternal(final boolean isZipFile, final String nameWithinZip) {
