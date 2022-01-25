@@ -815,6 +815,9 @@
     <string name="init_backup_history_length_min">Pouze nedávné</string>
     <string name="init_backup_history_length_max">Zachovat všechny</string>
     <string name="init_backup_history_delete_warning">Uložili jste více záloh, než umožňuje vaše nakonfigurovaná maximální hodnota. Opravdu chcete odstranit všechny přebytečné zálohy?</string>
+    <string name="init_backup_automatic">Automatické připomenutí zálohy</string>
+    <string name="init_backup_automatic_summary">Připomene vám každých x dní k vytvoření automatické zálohy (kromě všech ručně vytvořených záloh), 0=vypnuto</string>
+    <string name="init_backup_automatic_reminder">Chcete vytvořit automatickou zálohu? Bude to trvat jen chvíli.</string>
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
