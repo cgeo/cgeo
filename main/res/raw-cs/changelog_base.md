@@ -1,2 +1,2 @@
 ### Obecné
-- New: Automatic reminder to create backups
+- Novinka: Automatické připomenutí pro vytvoření záloh
