@@ -1,2 +1,2 @@
 ### Algemeen
-- New: Automatic reminder to create backups
+- Nieuw: Automatische herinnering om back-ups te maken
