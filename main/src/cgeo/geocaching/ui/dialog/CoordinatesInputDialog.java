@@ -391,7 +391,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             }
         }
 
-        binding.calculateGlobal.setTypeface(null, inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled() ?
+        binding.calculateGlobal.setTypeface(null, inputData != null && inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled() ?
             Typeface.ITALIC : Typeface.NORMAL);
     }
 
