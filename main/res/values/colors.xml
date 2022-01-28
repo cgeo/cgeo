@@ -14,6 +14,7 @@
     <color name="just_black">#FF000000</color>
     <color name="archived_cache_color">#FFAC0B0B</color>
     <color name="text_icon">#FFFFFFFF</color>
+    <color name="shortcut_background">#FFF5F5F5</color>
 
     <color name="colorText_listsPrimary">@color/colorText</color>
     <color name="colorText_listsSecondary">@color/colorTextHint</color>
