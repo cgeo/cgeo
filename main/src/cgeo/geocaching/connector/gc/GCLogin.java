@@ -4,16 +4,14 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.AbstractLogin;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.network.HtmlImage;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.settings.Credentials;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MatcherWrapper;
 import cgeo.geocaching.utils.TextUtils;
-
-import android.graphics.drawable.Drawable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +26,6 @@ import java.util.Locale;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Single;
 import okhttp3.Response;
 import org.apache.commons.lang3.ArrayUtils;
@@ -67,7 +64,9 @@ public class GCLogin extends AbstractLogin {
      *      "roles": [
      *         "Public",
      *         "Premium"
-     *         ]
+     *         ],
+     *     "publicGuid": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx",
+     *     "avatarUrl": "https://img.geocaching.com/avatar/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx.png"
      *      },
      *  "app:options": {
      *       "localRegion": "en-US",
@@ -101,6 +100,10 @@ public class GCLogin extends AbstractLogin {
             String unitSetName;
             @JsonProperty("roles")
             String[] roles;
+            @JsonProperty("publicGuid")
+            String publicGuid;
+            @JsonProperty("avatarUrl")
+            String avatarUrl;
         }
 
         @JsonIgnoreProperties(ignoreUnknown = true)
@@ -230,7 +233,7 @@ public class GCLogin extends AbstractLogin {
     public StatusCode logout() {
         try {
             getResponseBodyOrStatus(Network.postRequest("https://www.geocaching.com/account/logout", null).blockingGet());
-            serverParameters = null;
+            resetServerParameters();
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
@@ -334,44 +337,6 @@ public class GCLogin extends AbstractLogin {
     }
 
     /**
-     * Retrieve avatar url from GC
-     *
-     * @return the avatar url
-     */
-    public String getAvatarUrl() {
-        try {
-            final String responseData = StringUtils.defaultString(Network.getResponseData(Network.getRequest("https://www.geocaching.com/play/serverparameters/params")));
-            final String avatarURL = TextUtils.getMatch(responseData, GCConstants.PATTERN_AVATAR_IMAGE_SERVERPARAMETERS, false, null);
-            if (avatarURL != null) {
-                return avatarURL.replace("avatar", "user/large");
-            }
-            // No match? There may be no avatar set by user.
-            Log.d("No avatar set for user");
-        } catch (final Exception e) {
-            Log.w("Error when retrieving user avatar url", e);
-        }
-        return StringUtils.EMPTY;
-    }
-
-    /**
-     * Download the avatar
-     *
-     * @return the avatar drawable
-     */
-    public Observable<Drawable> downloadAvatar() {
-        try {
-            final String avatarURL = getAvatarUrl();
-            if (!avatarURL.isEmpty()) {
-                final HtmlImage imgGetter = new HtmlImage(HtmlImage.SHARED, false, false, false);
-                return imgGetter.fetchDrawable(avatarURL).cast(Drawable.class);
-            }
-        } catch (final Exception e) {
-            Log.w("Error when retrieving user avatar", e);
-        }
-        return null;
-    }
-
-    /**
      * Retrieve the home location
      *
      * @return a Single containing the home location, or IOException
@@ -412,6 +377,8 @@ public class GCLogin extends AbstractLogin {
             final GCMemberState memberState = GCMemberState.fromString(serverParameters.userInfo.userType);
             Log.d("Setting member status to " + memberState);
             Settings.setGCMemberStatus(memberState);
+
+            AvatarUtils.changeAvatar(GCConnector.getInstance(), serverParameters.userInfo.avatarUrl);
 
         } catch (final IOException e) {
             Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);

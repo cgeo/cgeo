@@ -4,7 +4,6 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.connector.gc.GCConnector;
 import cgeo.geocaching.connector.gc.GCLogin;
 import cgeo.geocaching.enumerations.StatusCode;
-import cgeo.geocaching.ui.AvatarUtils;
 
 public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationActivity {
 
@@ -35,7 +34,7 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
 
         final StatusCode status = GCLogin.getInstance().login(credentials);
         if (status == StatusCode.NO_ERROR) {
-            AvatarUtils.changeAvatar(GCConnector.getInstance(), GCLogin.getInstance().getAvatarUrl());
+            GCLogin.getInstance().getServerParameters(); // This will initialize some settings
         }
         return  status;
     }
