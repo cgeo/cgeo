@@ -68,21 +68,21 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private void promptForShortcut() {
         final List<Shortcut> shortcuts = new ArrayList<>();
 
-        shortcuts.add(new Shortcut(R.string.live_map_button, R.drawable.main_live, new Intent(this, MapActivity.class)));
-        shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.main_nearby, CacheListActivity.getNearestIntent(this)));
+        shortcuts.add(new Shortcut(R.string.live_map_button, R.drawable.sc_map, new Intent(this, MapActivity.class)));
+        shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.sc_nearby, CacheListActivity.getNearestIntent(this)));
 
         // TODO: make logging activities ask for cache/trackable when being invoked externally
         // shortcuts.add(new Shortcut(R.string.cache_menu_visit, new Intent(this, LogCacheActivity.class)));
         // shortcuts.add(new Shortcut(R.string.trackable_log_touch, new Intent(this, LogTrackableActivity.class)));
 
-        final Shortcut offlineShortcut = new Shortcut(R.string.list_title, R.drawable.main_stored, null);
+        final Shortcut offlineShortcut = new Shortcut(R.string.list_title, R.drawable.sc_stored, null);
         shortcuts.add(offlineShortcut);
         final Intent allIntent = new Intent(this, CacheListActivity.class);
         allIntent.putExtra(Intents.EXTRA_LIST_ID, PseudoList.ALL_LIST.id);
-        shortcuts.add(new Shortcut(R.string.list_all_lists, R.drawable.main_stored, allIntent));
-        shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.main_search, new Intent(this, SearchActivity.class)));
-        shortcuts.add(new Shortcut(R.string.any_button, R.drawable.main_any, new Intent(this, NavigateAnyPointActivity.class)));
-        shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.main_stored, CacheListActivity.getHistoryIntent(this)));
+        shortcuts.add(new Shortcut(R.string.list_all_lists, R.drawable.sc_stored, allIntent));
+        shortcuts.add(new Shortcut(R.string.advanced_search_button, R.drawable.sc_search, new Intent(this, SearchActivity.class)));
+        shortcuts.add(new Shortcut(R.string.any_button, R.drawable.sc_goto, new Intent(this, NavigateAnyPointActivity.class)));
+        shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this)));
 
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)
             .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, false, (shortcut, pos) -> {
@@ -107,7 +107,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         targetIntent.putExtra(Intents.EXTRA_LIST_ID, list.id);
 
         // shortcut to be returned
-        createShortcutAndFinish(list.title, targetIntent, R.drawable.main_stored);
+        createShortcutAndFinish(list.title, targetIntent, R.drawable.sc_stored);
     }
 
     private void createShortcutAndFinish(final String title, final Intent targetIntent, @DrawableRes final int iconResourceId) {
