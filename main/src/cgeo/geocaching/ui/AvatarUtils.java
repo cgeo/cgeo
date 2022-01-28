@@ -9,6 +9,8 @@ import android.graphics.drawable.BitmapDrawable;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import java.util.Objects;
+
 import org.apache.commons.lang3.StringUtils;
 
 /** Class to retrieve Avatar images from. This class handles e.g. in-memory image caching */
@@ -21,7 +23,9 @@ public class AvatarUtils {
     }
 
     public static void changeAvatar(@NonNull final IAvatar avatar, final String newUrl) {
-        Settings.setAvatarUrl(avatar, newUrl);
+        if (!Objects.equals(Settings.getAvatarUrl(avatar), newUrl)) {
+            Settings.setAvatarUrl(avatar, newUrl);
+        }
     }
 
 
