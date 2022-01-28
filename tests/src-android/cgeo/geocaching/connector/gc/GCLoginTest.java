@@ -2,6 +2,7 @@ package cgeo.geocaching.connector.gc;
 
 import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.utils.TextUtils;
 
 import junit.framework.TestCase;
@@ -36,7 +37,11 @@ public class GCLoginTest extends TestCase {
     }
 
     public void testAvatar() {
-        assertThat(instance.downloadAvatar()).isNotNull();
+        instance.resetServerParameters();
+        AvatarUtils.changeAvatar(GCConnector.getInstance(), null);
+        assertThat(AvatarUtils.getAvatar(GCConnector.getInstance())).isNull();
+        instance.getServerParameters(); // avatar should automatically be updated here...
+        assertThat(AvatarUtils.getAvatar(GCConnector.getInstance())).isNotNull();
     }
 
 }
