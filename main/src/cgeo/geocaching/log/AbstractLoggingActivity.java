@@ -20,6 +20,7 @@ import android.view.SubMenu;
 import android.widget.EditText;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.Collections;
 import java.util.List;
@@ -43,7 +44,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
         final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
         for (final Smiley smiley : getSmileys()) {
-            menuSmilies.add(Menu.NONE, Menu.NONE, Menu.NONE, smiley.text);
+            menuSmilies.add(Menu.NONE, smiley.getItemId(), Menu.NONE, smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning));
         }
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(false);
 
@@ -62,6 +63,20 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
             return GCSmileysProvider.getSmileys();
         }
         return Collections.emptyList();
+    }
+
+    @Nullable
+    private Smiley getSmiley(final int id) {
+        final Geocache cache = getLogContext().getCache();
+        final SmileyCapability connector = ConnectorFactory.getConnectorAs(cache, SmileyCapability.class);
+        if (connector != null) {
+            return connector.getSmiley(id);
+        }
+        final Trackable trackable = getLogContext().getTrackable();
+        if (trackable != null && ConnectorFactory.getConnector(trackable).equals(TravelBugConnector.getInstance())) {
+            return GCSmileysProvider.getSmiley(id);
+        }
+        return null;
     }
 
     @Override
@@ -84,12 +99,10 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
             return true;
         }
 
-        final CharSequence title = item.getTitle();
-        for (final Smiley smiley : getSmileys()) {
-            if (smiley.text.equals(title)) {
-                insertIntoLog("[" + title + "]", true);
-                return true;
-            }
+        final Smiley smiley = getSmiley(id);
+        if (smiley != null) {
+            insertIntoLog("[" + smiley.symbol + "]", true);
+            return true;
         }
 
         return super.onOptionsItemSelected(item);

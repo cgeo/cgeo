@@ -2801,4 +2801,38 @@
     <string name="rtl_path_quality23">quality 2/3 (paved: gravel, repaired, …)</string>
     <string name="rtl_path_quality45">quality 4/5 (unpaved)</string>
 
+    <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Smiley</string>
+    <string name="smiley_big_smile">Big Smile</string>
+    <string name="smiley_cool">Cool</string>
+    <string name="smiley_blush">Blush</string>
+    <string name="smiley_tongue">Tongue</string>
+    <string name="smiley_evil">Evil</string>
+    <string name="smiley_shocked">Shocked</string>
+    <string name="smiley_wink">Wink</string>
+    <string name="smiley_clown">Clown</string>
+    <string name="smiley_blackeye">Black Eye</string>
+    <string name="smiley_8ball">Eightball</string>
+    <string name="smiley_frown">Frown</string>
+    <string name="smiley_shy">Shy</string>
+    <string name="smiley_angry">Angry</string>
+    <string name="smiley_dead">Dead</string>
+    <string name="smiley_sleepy">Sleepy</string>
+    <string name="smiley_kisses">Kisses</string>
+    <string name="smiley_approve">Approved</string>
+    <string name="smiley_disapprove">Disapproved</string>
+    <string name="smiley_question">Question</string>
+    <string name="smiley_cry">Cry</string>
+    <string name="smiley_embarassed">Embarassed</string>
+    <string name="smiley_footinmouth">Foot in mouth</string>
+    <string name="smiley_innocent">Innocent</string>
+    <string name="smiley_kiss">Kiss</string>
+    <string name="smiley_laughing">Laughing</string>
+    <string name="smiley_money">Money</string>
+    <string name="smiley_sealed">Sealed</string>
+    <string name="smiley_surprised">Surprised</string>
+    <string name="smiley_tongueout">Tongue out</string>
+    <string name="smiley_undecided">Undecided</string>
+    <string name="smiley_yell">Yell</string>
+
 </resources>
