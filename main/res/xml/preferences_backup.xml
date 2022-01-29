@@ -57,12 +57,10 @@
             android:title="@string/init_backup_automatic"
             android:summary="@string/init_backup_automatic_summary"
             app:iconSpaceReserved="false"/>
-        <cgeo.geocaching.settings.BackupSeekbarPreference
+        <cgeo.geocaching.settings.SeekbarPreference0Off
             android:key="@string/pref_backup_interval"
             android:defaultValue="@integer/backup_interval_default"
-            app:min="0"
             app:max="@integer/backup_interval_max"
-            app:hasDecimals="false"
             app:iconSpaceReserved="false" />
     </PreferenceCategory>
 </PreferenceScreen>

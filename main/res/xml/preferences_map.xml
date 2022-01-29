@@ -32,10 +32,9 @@
             android:title="@string/init_updateinterval_title"
             app:allowDividerBelow="false"
             app:iconSpaceReserved="false"/>
-        <cgeo.geocaching.settings.SeekbarPreference
+        <cgeo.geocaching.settings.SeekbarPreference0Off
             android:key="@string/pref_mapAutoDownloadsInterval"
             android:defaultValue="@integer/map_updateinterval_default"
-            app:min="0"
             app:max="@integer/map_updateinterval_max"
             app:iconSpaceReserved="false" />
 
