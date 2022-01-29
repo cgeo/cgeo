@@ -246,7 +246,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         statusHasOwnVote = null;
         statusHasOfflineLog = null;
         statusHasOfflineFoundLog = null;
-        statusHasUserDefineWaypoint = null;//volthai7us
+        statusHasUserDefineWaypoint = null;
         statusPremium = null;
 
         excludeActive = false;
