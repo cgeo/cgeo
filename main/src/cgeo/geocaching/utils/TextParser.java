@@ -84,6 +84,10 @@ public final class TextParser {
         return (pos + 1 >= expression.length() ? END_CHAR : (int) expression.charAt(pos + 1));
     }
 
+    public int previous() {
+        return !expression.isEmpty() && pos > 0 ? (int) expression.charAt(pos - 1) : END_CHAR;
+    }
+
     public void skipWhitespaces() {
         while (Character.isWhitespace(ch)) {
             next();

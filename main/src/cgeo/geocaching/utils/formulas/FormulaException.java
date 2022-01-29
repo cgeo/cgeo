@@ -83,7 +83,7 @@ public class FormulaException extends IllegalArgumentException {
 
     @Override
     public String getMessage() {
-        return super.getMessage() + "/" + functionContext + "/ppos:" + parsingPos + "/pch:" + parsingChar + "[" + expression + ": " + evaluationContext + "]";
+        return super.getMessage() + "/" + functionContext + "/ppos:" + parsingPos + "/pch:'" + (char) parsingChar + "'[" + expression + ": " + evaluationContext + "]";
     }
 
     public static String getUserDisplayableMessage(final ErrorType errorType, final Object ... errorParams) {
