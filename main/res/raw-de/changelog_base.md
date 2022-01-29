@@ -9,6 +9,7 @@
 - Neu: Funktion, um nach fehlenden Routingdaten für den aktuellen Bildschirmausschnitt zu suchen
 - Neu: Design-Legende für Elevate, Elements und Freizeitkarte-Designs
 - Korrektur: Reaktiviere Routing mit externer BRouter App in Version 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Cacheliste
 - Neu: Option zum Auswählen der nächsten 20 Caches
