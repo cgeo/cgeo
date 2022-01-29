@@ -9,6 +9,7 @@
 - 신규: 현재 뷰포트에 누락된 라우팅 데이터를 확인하는 옵션
 - 신규: Elevate, Elements 및 Freizeitkarte 테마에 대한 테마 범례
 - 수정: 버전 1.6.3에서 외부 BRouter 앱으로 라우팅 다시 활성화
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### 캐시 목록
 - 신규: 다음 20개 캐시를 선택하는 옵션
