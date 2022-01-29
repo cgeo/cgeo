@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/shortcut_background" />
+        </shape>
+    </item>
+    <item>
+        <inset android:drawable="@drawable/sc_icon_history" android:inset="13.0dip"  />
+    </item>
+</layer-list>
