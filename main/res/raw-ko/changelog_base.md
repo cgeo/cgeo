@@ -1,2 +1,2 @@
 ### 일반
-- New: Automatic reminder to create backups
+- 신규: 백업 생성을 위한 자동 알림
