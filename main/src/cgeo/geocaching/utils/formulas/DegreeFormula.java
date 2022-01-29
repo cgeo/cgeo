@@ -36,6 +36,7 @@ public class DegreeFormula {
     private static final Set<Integer> LON_NEG_CHARS = SetUtils.hashSet((int) 'W', (int) 'w');
 
     private static final KeyableCharSet scs = KeyableCharSet.createFor(" °'\".,");
+    private static final KeyableCharSet scs_digit = KeyableCharSet.createFor("°'\".,");
 
     private final TextParser parser;
     private final boolean lonCoord;
@@ -94,9 +95,9 @@ public class DegreeFormula {
         return isHemisphereChar(parser.chInt(), false) && (!checkEof || parser.peek() == TextParser.END_CHAR || Character.isWhitespace(parser.peek()));
     }
 
-    private Formula parseFormula() {
+    private Formula parseFormula(final KeyableCharSet kcs) {
         try {
-            final Formula f = Formula.compile(parser.getExpression(), parser.pos(), scs);
+            final Formula f = Formula.compile(parser.getExpression(), parser.pos(), kcs);
             parser.setPos(parser.pos() + f.getExpression().length());
             return f;
         } catch (FormulaException fe) {
@@ -140,7 +141,7 @@ public class DegreeFormula {
     private Pair<Integer, Boolean> checkAndParseDegreePart(final int lastType, final boolean digitAllowed) {
         boolean foundDigit = false;
         parser.mark();
-        final Formula f = parseFormula();
+        final Formula f = parseFormula(scs);
         if (f == null) {
             return null;
         }
@@ -152,32 +153,8 @@ public class DegreeFormula {
                 parser.reset();
                 return null;
             }
-            //ignore whitespaces in after-digit-parsing
-            parser.nextNonWhitespace();
-            while (!parser.eof() && !parser.chIsIn('°', '\'', '\"')) {
-                //if we find a hemispehere char then this is probably a closing hem
-                if (isParserOnHemisphereChar(true)) {
-                    parser.setPos(parser.pos() - 1);
-                    break;
-                }
-                //if we find . or , inside afterdigits, this is an error
-                if (parser.chIsIn('.', ',')) {
-                    parser.reset();
-                    return null;
-                }
-                final Formula fAfterDigitAppend = parseFormula();
-                if (fAfterDigitAppend == null) {
-                    parser.reset();
-                    return null;
-                }
-                try {
-                    fAfterDigit = Formula.compile((fAfterDigit == null ? "" : fAfterDigit.getExpression()) + fAfterDigitAppend.getExpression());
-                } catch (FormulaException fe) {
-                    parser.reset();
-                    return null;
-                }
-                parser.skipWhitespaces();
-            }
+            parser.next();
+            fAfterDigit = parseFormula(scs_digit);
             if (fAfterDigit == null) {
                 parser.reset();
                 return null;
@@ -185,7 +162,7 @@ public class DegreeFormula {
             neededVars.addAll(fAfterDigit.getNeededVariables());
         }
         final int foundType = parseFoundType(lastType);
-        if (foundType > 2 || foundType <= lastType) {
+        if (foundType < 0 || foundType > 2 || foundType <= lastType) {
             parser.reset();
             return null;
         }
@@ -266,7 +243,11 @@ public class DegreeFormula {
                 foundType = 2;
                 break;
             default:
-                foundType = lastType + 1;
+                if (parser.eof() || Character.isWhitespace(parser.ch())) {
+                    foundType = lastType + 1;
+                } else {
+                    foundType = -1; //ERROR
+                }
                 break;
         }
         return foundType;
