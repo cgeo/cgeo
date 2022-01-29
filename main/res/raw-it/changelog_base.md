@@ -9,6 +9,7 @@
 - Nuovo: Opzione per controllare i dati di routing mancanti per la visualizzazione corrente
 - Nuovo: Leggenda del tema per i temi Elevate, Elements e Freizeitkarte
 - Fix: Reenable routing with external BRouter app in version 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Elenco dei cache
 - Nuovo: Opzione per selezionare i 20 cache succesivi
