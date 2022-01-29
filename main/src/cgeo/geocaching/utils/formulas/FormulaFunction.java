@@ -50,7 +50,7 @@ public enum FormulaFunction {
         singleValueStringFunction(FormulaUtils::letterValue)),
     ROMAN("roman", FunctionGroup.COMPLEX_STRING, 0, "Roman", "''", 1,
         singleValueStringFunction(FormulaUtils::roman)),
-    VANITY(new String[]{ "vanity", "vanitycode", "vc" }, FunctionGroup.COMPLEX_STRING, 0, "Roman", "''", 1,
+    VANITY(new String[]{ "vanity", "vanitycode", "vc" }, FunctionGroup.COMPLEX_STRING, 0, "Vanity", "''", 1,
           singleValueStringFunction(FormulaUtils::vanity));
 
     public enum FunctionGroup {
