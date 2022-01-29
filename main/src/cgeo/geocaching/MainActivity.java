@@ -64,7 +64,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -668,11 +667,11 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     // display action notifications, e. g. update or backup reminders
     public void displayActionItem(final int layout, final @StringRes int info, final Runnable action) {
-        final RelativeLayout l = findViewById(layout);
+        final TextView l = findViewById(layout);
         if (l != null) {
             l.setVisibility(View.VISIBLE);
             updateHomeBadge(1);
-            ((TextView) l.findViewById(R.id.action_item_info)).setText(info);
+            l.setText(info);
             l.setOnClickListener(v -> {
                 action.run();
                 l.setVisibility(View.GONE);
