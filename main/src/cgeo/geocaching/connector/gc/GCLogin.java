@@ -378,7 +378,11 @@ public class GCLogin extends AbstractLogin {
             Log.d("Setting member status to " + memberState);
             Settings.setGCMemberStatus(memberState);
 
-            AvatarUtils.changeAvatar(GCConnector.getInstance(), serverParameters.userInfo.avatarUrl);
+            if (StringUtils.isNotBlank(serverParameters.userInfo.avatarUrl)) {
+                final String avatarUrl = serverParameters.userInfo.avatarUrl.replace("/avatar/", "/user/large/");
+                Log.d("Setting avatar to " + avatarUrl);
+                AvatarUtils.changeAvatar(GCConnector.getInstance(), avatarUrl);
+            }
 
         } catch (final IOException e) {
             Settings.setGcCustomDate(GCConstants.DEFAULT_GC_DATE);
