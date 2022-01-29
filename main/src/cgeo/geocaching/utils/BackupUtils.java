@@ -757,7 +757,13 @@ public class BackupUtils {
 
     public static void checkForBackupReminder(final MainActivity activity) {
         if (Settings.automaticBackupDue()) {
-            activity.displayActionItem(R.id.autobackup, R.string.init_backup_automatic_reminder, () -> new BackupUtils(activity, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true));
+            activity.displayActionItem(R.id.autobackup, R.string.init_backup_automatic_reminder, (actionPerformed) -> {
+                if (actionPerformed) {
+                    new BackupUtils(activity, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);
+                } else {
+                    Settings.setAutomaticBackupLastCheck(true);
+                }
+            });
         }
     }
 }
