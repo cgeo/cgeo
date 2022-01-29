@@ -77,7 +77,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusHasOfflineLog = null;
     private Boolean statusHasOfflineFoundLog = null;
     private Boolean statusSolvedMystery = null;
-    private Boolean statusHasUserDefineWaypoint = null;//Volthai7us
+    private Boolean statusHasUserDefineWaypoint = null;
 
 
     @Override
@@ -93,7 +93,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusWatchlist != null && cache.isOnWatchlistRaw() == null) ||
             (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
             (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
-            (statusHasUserDefineWaypoint != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||//volthai7us
+            (statusHasUserDefineWaypoint != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||
             (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null)) {
             return null;
         }
@@ -229,9 +229,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         this.statusSolvedMystery = statusSolvedMystery;
     }
 
-    public Boolean getStatusHasUserDefineWaypoint() { return statusHasUserDefineWaypoint; }//Volthai7us
+    public Boolean getStatusHasUserDefineWaypoint() { return statusHasUserDefineWaypoint; }
 
-    public void setStatusHasUserDefineWaypoint(final Boolean statusHasWaypoint) {//Volthai7us
+    public void setStatusHasUserDefineWaypoint(final Boolean statusHasWaypoint) {
         this.statusHasUserDefineWaypoint = statusHasWaypoint;
     }
 
@@ -263,7 +263,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.HAS_OWN_VOTE, b -> statusHasOwnVote = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_FOUND_LOG, b -> statusHasOfflineFoundLog = b);
-            checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINT, b -> statusHasUserDefineWaypoint = b);//volthai7us
+            checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINT, b -> statusHasUserDefineWaypoint = b);
             checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
@@ -298,7 +298,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         checkAndAddFlagToDefaultList(statusHasOwnVote, StatusType.HAS_OWN_VOTE, result);
         checkAndAddFlagToDefaultList(statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG, result);
         checkAndAddFlagToDefaultList(statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG, result);
-        checkAndAddFlagToDefaultList(statusHasUserDefineWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT, result);//volthai7us
+        checkAndAddFlagToDefaultList(statusHasUserDefineWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT, result);
         checkAndAddFlagToDefaultList(statusSolvedMystery, StatusType.SOLVED_MYSTERY, result);
         if (excludeActive) {
             result.addToDefaultList(FLAG_EXCLUDE_ACTIVE);
@@ -326,7 +326,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         return statusOwned != null || statusFound != null || statusStored != null || statusFavorite != null ||
             statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
             statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
-            statusSolvedMystery != null || statusHasUserDefineWaypoint != null || excludeArchived || excludeDisabled || excludeActive;//volthai7us
+            statusSolvedMystery != null || statusHasUserDefineWaypoint != null || excludeArchived || excludeDisabled || excludeActive;
     }
 
     @Override
@@ -428,7 +428,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasOwnVote, StatusType.HAS_OWN_VOTE);
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
-        count = addIfStillFits(sb, count, statusHasUserDefineWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);//volthai7us
+        count = addIfStillFits(sb, count, statusHasUserDefineWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
         count = addIfTrue(sb, count, excludeDisabled, R.string.cache_filter_status_exclude_disabled);
