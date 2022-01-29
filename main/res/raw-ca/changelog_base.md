@@ -9,6 +9,7 @@
 - Nou: Opció per comprovar si hi ha dades d'encaminament que falten a la finestra gràfica actual
 - Novetat: llegenda del tema per als temes Elevació, Elements i Freizeitkarte
 - Correcció: Habiliteu l'encaminament amb l'aplicació externa BRouter versió 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
