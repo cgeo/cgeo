@@ -1,12 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<layer-list
-    xmlns:android="http://schemas.android.com/apk/res/android">
-    <item>
-        <shape android:shape="oval">
-            <solid android:color="@color/shortcut_background" />
-        </shape>
-    </item>
-    <item>
-        <inset android:drawable="@drawable/sc_icon_search" android:inset="13.0dip"  />
-    </item>
-</layer-list>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+  <path
+      android:pathData="M24,24m-22,0a22,22 0,1 1,44 0a22,22 0,1 1,-44 0"
+      android:fillColor="@color/shortcut_background" />
+  <path
+      android:pathData="m21.75,15.25a6.5,6.5 0,0 1,6.5 6.5c0,1.61 -0.59,3.09 -1.56,4.23l0.27,0.27h0.79l5,5 -1.5,1.5 -5,-5v-0.79l-0.27,-0.27c-1.14,0.97 -2.62,1.56 -4.23,1.56a6.5,6.5 0,0 1,-6.5 -6.5,6.5 6.5,0 0,1 6.5,-6.5m0,2c-2.5,0 -4.5,2 -4.5,4.5s2,4.5 4.5,4.5 4.5,-2 4.5,-4.5 -2,-4.5 -4.5,-4.5z"
+      android:fillColor="@color/colorAccent"/>
+</vector>

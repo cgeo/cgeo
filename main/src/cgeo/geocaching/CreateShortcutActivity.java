@@ -127,8 +127,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
             ResourcesCompat.getDrawable(res, drawableResourceId, null),
             ResourcesCompat.getDrawable(res, R.drawable.cgeo_borderless, null)
         });
-        layerDrawable.setLayerInset(0, 0, 0, 10, 10);
-        layerDrawable.setLayerInset(1, 70, 70, 0, 0);
+        layerDrawable.setLayerInset(1, 140, 140, 0, 0);
         return ImageUtils.convertToBitmap(layerDrawable);
     }
 
