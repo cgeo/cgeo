@@ -331,6 +331,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             // automated backup check
             BackupUtils.checkForBackupReminder(this);
             cLog.add("ab");
+
+            // check for finished, but unreceived downloads
+            DownloaderUtils.checkPendingDownloads(this);
+
         }
 
         if (Log.isEnabled(Log.LogLevel.DEBUG)) {

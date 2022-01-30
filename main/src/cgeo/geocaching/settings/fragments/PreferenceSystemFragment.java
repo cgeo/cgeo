@@ -1,6 +1,7 @@
 package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.utils.DebugUtils;
@@ -25,7 +26,7 @@ public class PreferenceSystemFragment extends BasePreferenceFragment {
 
         setPrefClick(this, R.string.pref_fakekey_memory_dump, () -> DebugUtils.createMemoryDump(activity));
         setPrefClick(this, R.string.pref_fakekey_generate_logcat, () -> DebugUtils.createLogcat(activity));
-        setPrefClick(this, R.string.pref_fakekey_generate_infos_downloadmanager, () -> DebugUtils.dumpDownloadmanagerInfos(activity));
+        setPrefClick(this, R.string.pref_fakekey_generate_infos_downloadmanager, () -> DownloaderUtils.dumpDownloadmanagerInfos(activity));
         setPrefClick(this, R.string.pref_fakekey_view_settings, () -> startActivity(new Intent(activity, ViewSettingsActivity.class)));
 
         initPublicFolders(this, activity.getCsah());
