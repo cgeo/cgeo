@@ -9,6 +9,7 @@
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
 - Fix: Reenable routing with external BRouter app in version 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Lista de cachés
 - Nuevo: opción para seleccionar los siguientes 20 cachés

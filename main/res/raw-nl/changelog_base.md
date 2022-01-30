@@ -9,6 +9,7 @@
 - Nieuw: Optie om te controleren op ontbrekende routeringsgegevens voor huidige viewport
 - Nieuw: Thema legende voor hoogte, elementen en Freizeitkarte thema's
 - Oplossing: Schakel routering met externe BRouter app in versie 1.6.3 opnieuw in
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Cache lijst
 - Nieuw: Optie om volgende 20 caches te selecteren

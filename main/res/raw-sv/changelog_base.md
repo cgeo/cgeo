@@ -9,6 +9,7 @@
 - Nyhet: Alternativ för att kontrollera om ruttdata saknas för nuvarande vy
 - Nyhet: Temalegend för Elevate, Elements och Freizeitkarte teman
 - Fix: Reenable routing with external BRouter app in version 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher

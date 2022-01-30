@@ -2240,6 +2240,14 @@ do mapa e dos temas?</string>
     <string name="rtl_car_wash">lavagem de carros</string>
     <string name="rtl_fuel">combustível</string>
     <string name="rtl_ferry_terminal">terminal de ferry</string>
+    <string name="rtl_chalet">chalé</string>
+    <string name="rtl_hostel">hostel</string>
+    <string name="rtl_hotel">hotel</string>
+    <string name="rtl_shelter_basic_hut">cabana de abrigo básica</string>
+    <string name="rtl_wilderness_hut">cabana de natureza selvagem</string>
+    <string name="rtl_wilderness_hut_private">cabana de natureza selvagem privada</string>
+    <string name="rtl_bar">bar</string>
+    <string name="rtl_cafe">café</string>
     <string name="rtl_bbq">churrasco</string>
     <string name="rtl_water_point">ponto de água</string>
     <string name="rtl_atm">multibanco</string>

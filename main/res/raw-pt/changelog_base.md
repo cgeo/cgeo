@@ -9,6 +9,7 @@
 - Novo: Opção de verificação de falta de dados de encaminhamento na janela em visualização
 - Novo: Legenda de tema para Elevação, Elementos e temas de Freizeitkarte
 - Correcção: Reactivar o encaminhamento com a aplicação externa BRouter, na versão 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Lista de caches
 - Novo: Opção para seleccionar as próximas 20 caches

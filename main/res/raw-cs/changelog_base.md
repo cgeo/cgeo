@@ -9,6 +9,7 @@
 - Novinka: Možnost kontroly chybějících směrovacích dat pro aktuální oblast
 - Novinka: Legenda motivu pro motivy Elevate, Elements a Freizeitkarte
 - Oprava: Znovu povoleno směrování s externí aplikací BRouter ve verzi 1.6.3
+- Oprava: Zamezena duplikace map stahovačem map za určitých podmínek
 
 ### Seznam kešek
 - Novinka: Možnost výběru dalších 20 kešek

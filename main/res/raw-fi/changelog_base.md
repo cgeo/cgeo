@@ -1,4 +1,4 @@
-### Yleiset
+### Yleinen
 - Muutos: Esitellään alhaalla sijaitseva navigaatio c:geon useimmin käytettyihin toimintoon pääsemiseksi, korvaten vanhan päävalikon
 
 ### Kartta
@@ -9,6 +9,7 @@
 - Uusi: Mahdollisuus tarkistaa puuttuvat reititystiedot nykyiselle näkymälle
 - Uusi: Teeman selitteet teemoille Elevate, Elements ja Freizeitkarte
 - Korjaa: Uudelleenmahdollista reititys ulkoisella BRouter sovellus versiossa 1.6.3
+- Fix: Avoid map duplication by map downloader in certain conditions
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
