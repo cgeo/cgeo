@@ -815,6 +815,9 @@
     <string name="init_backup_history_length_min">Pouze nedávné</string>
     <string name="init_backup_history_length_max">Zachovat všechny</string>
     <string name="init_backup_history_delete_warning">Uložili jste více záloh, než umožňuje vaše nakonfigurovaná maximální hodnota. Opravdu chcete odstranit všechny přebytečné zálohy?</string>
+    <string name="init_backup_automatic">Automatické připomenutí zálohy</string>
+    <string name="init_backup_automatic_summary">Připomene vám každých x dní k vytvoření automatické zálohy (kromě všech ručně vytvořených záloh), 0=vypnuto</string>
+    <string name="init_backup_automatic_reminder">Chcete vytvořit automatickou zálohu? Bude to trvat jen chvíli.</string>
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
@@ -988,12 +991,12 @@
     <string name="map_source_osm_offline">Offline</string>
     <string name="map_source_osm_offline_combined">Kombinované (Offline)</string>
     <string name="map_source_attribution_dialog_title">Zdroj mapy</string>
-    <string name="init_sendToCgeo">Poslat do c:geo</string>
+    <string name="init_sendToCgeo">Send2cgeo</string>
     <string name="settings_info_send2cgeo_title">Info o funkci send2cgeo</string>
     <string name="init_sendToCgeo_name">Název tvého zařízení</string>
     <string name="init_sendToCgeo_description"><b>Send2cgeo</b> vám umožňuje odesílat kešky do zařízení se systémem Android přímo ze stránky geocaching.com pomocí speciálního doplňku pro Firefox nebo Chrome. Před registrací navštivte stránku <a href="https://send2.cgeo.org/">https://send2.cgeo.org/</a>. Registrace je nutná jen tehdy, pokud chcete používat doplněk send2cgeo. Aplikace c:geo bude fungovat normálně bez registrace vašeho zařízení.</string>
     <string name="init_sendToCgeo_register">Požádat o registraci</string>
-    <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro funkci Poslat do send2cgeo…</string>
+    <string name="init_sendToCgeo_registering">Registrace tvého zařízení pro send2cgeo…</string>
     <string name="init_sendToCgeo_register_ok">Registrace úspěšně dokončena. PIN kód je %d. Použij ho na stránce c:geo pro přidání zařízení do tvého prohlížeče.</string>
     <string name="init_sendToCgeo_register_fail">Registrace selhala.</string>
     <string name="sendToCgeo_download_fail">c:geo selhalo při stahování kešek. Nefunguje internetové připojení nebo je služba send2cgeo vypnutá.</string>
@@ -1562,7 +1565,7 @@
     <string name="helper_calendar_pastevent_title">Uplynulá událost</string>
     <string name="helper_calendar_pastevent_question">Datum události již uplynulo. Chceš ji i přesto přidat?</string>
     <string name="helper_sendtocgeo_title">Poslat do c:geo</string>
-    <string name="helper_contacts_title">c:geo – Kontakty (doplněk)</string>
+    <string name="helper_contacts_title">Doplněk c:geo – kontakty</string>
     <string name="helper_contacts_description">Umožňuje otevřít vizitku (z tvého seznamu kontaktů) přímo z logu keše, můžeš tak snadněji kontaktovat kamarády o pomoc.</string>
     <string name="helper_sendtocgeo_description">Poslat do c:geo je rozšíření prohlížeče <strong>pro tvůj počítač</strong>. Umožňuje zaslání kešky do tvého mobilního zařízení jediným klepnutím, přímo z prohlížeče, při procházení webu Geocaching.com.</string>
     <string name="helper_locus_description">Outdoorová navigace pro telefon či tablet. Prohlížení offline topo map, záznam trasy, lov kešek, hlasová navigace a mnohem více.</string>

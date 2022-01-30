@@ -1999,7 +1999,7 @@
     </plurals>
     <string name="load_track_error">Σφάλμα κατά την φόρτωση της διαδρομής</string>
     <string name="map_clear_track">Εκκαθάριση διαδρομής</string>
-    <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\";</string>
+    <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
     <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
     <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
