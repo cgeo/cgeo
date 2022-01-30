@@ -1,5 +1,6 @@
 package cgeo.geocaching.downloader;
 
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -24,7 +25,9 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import android.app.Activity;
 import android.app.DownloadManager;
+import android.content.Context;
 import android.content.Intent;
+import android.database.Cursor;
 import android.net.Uri;
 import android.os.Environment;
 import android.view.View;
@@ -33,9 +36,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import static android.content.Context.DOWNLOAD_SERVICE;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
 import androidx.core.util.Consumer;
 
 import java.lang.ref.WeakReference;
@@ -331,6 +336,130 @@ public class DownloaderUtils {
                 }
             }
         }
+    }
+
+    /**
+     * check for successfully completed, but not yet received downloads
+     * and offer to download them
+     */
+    public static void checkPendingDownloads(final Activity activity) {
+        final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+        if (null != downloadManager) {
+            final DownloadManager.Query query = new DownloadManager.Query();
+            try (Cursor c = downloadManager.query(query)) {
+                final int columnId = c.getColumnIndex(DownloadManager.COLUMN_ID);
+                final int columnStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+                final int columnBytesA = c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR);
+                final int columnBytesT = c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
+                while (c.moveToNext()) {
+                    final int status = c.getInt(columnStatus);
+                    if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                        final int bytesA = c.getInt(columnBytesA);
+                        final int bytesT = c.getInt(columnBytesT);
+                        if (bytesA == bytesT) {
+                            final long id = c.getLong(columnId);
+                            final PendingDownload p = PendingDownload.load(id);
+                            if (p != null) {
+                                startReceive(activity, downloadManager, id, p);
+                                Log.d("download #" + id + " retriggered manually");
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    public static void startReceive(final Context context, final DownloadManager downloadManager, final long id, final PendingDownload pendingDownload) {
+        PendingDownload.remove(id);
+        final Intent copyFileIntent = new Intent(context, ReceiveDownloadService.class);
+        final Uri uri = downloadManager.getUriForDownloadedFile(id);
+        copyFileIntent.setData(uri);
+        copyFileIntent.putExtra(Intents.EXTRA_FILENAME, pendingDownload.getFilename());
+        copyFileIntent.putExtra(DownloaderUtils.RESULT_CHOSEN_URL, pendingDownload.getRemoteUrl());
+        copyFileIntent.putExtra(DownloaderUtils.RESULT_DATE, pendingDownload.getDate());
+        copyFileIntent.putExtra(DownloaderUtils.RESULT_TYPEID, pendingDownload.getOfflineMapTypeId());
+        ContextCompat.startForegroundService(context, copyFileIntent);
+    }
+
+    public static void dumpDownloadmanagerInfos(@NonNull final Activity activity) {
+        final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+        final DownloadManager.Query query = new DownloadManager.Query();
+        final StringBuilder sb = new StringBuilder();
+        try (Cursor c = downloadManager.query(query)) {
+            final int columnStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
+            final int columnReason = c.getColumnIndex(DownloadManager.COLUMN_REASON);
+            final int[] columns = {
+                c.getColumnIndex(DownloadManager.COLUMN_ID),
+                c.getColumnIndex(DownloadManager.COLUMN_TITLE),
+                columnStatus,
+                columnReason,
+                c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR),
+                c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES),
+                c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP),
+                c.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE),
+                c.getColumnIndex(DownloadManager.COLUMN_URI),
+                c.getColumnIndex(DownloadManager.COLUMN_MEDIAPROVIDER_URI),
+                c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
+            };
+            while (c.moveToNext()) {
+                for (int column : columns) {
+                    sb.append("- ").append(c.getColumnName(column)).append(" = ");
+                    if (column == columnStatus) {
+                        sb.append(c.getString(column));
+                        final int status = c.getInt(column);
+                        if (status == DownloadManager.STATUS_FAILED) {
+                            sb.append(" - download has failed (and will not be retried)");
+                        } else if (status == DownloadManager.STATUS_PAUSED) {
+                            sb.append(" - download is waiting to retry or resume");
+                        } else if (status == DownloadManager.STATUS_PENDING) {
+                            sb.append(" - download is waiting to start");
+                        } else if (status == DownloadManager.STATUS_RUNNING) {
+                            sb.append(" - download is currently running");
+                        } else if (status == DownloadManager.STATUS_SUCCESSFUL) {
+                            sb.append(" - download has successfully completed");
+                        }
+                    } else if (column == columnReason) {
+                        final int reason = c.getInt(column);
+                        sb.append(reason);
+                        if (reason == DownloadManager.PAUSED_QUEUED_FOR_WIFI) {
+                            sb.append(" - paused: download exceeds a size limit for downloads over mobile network / waiting for Wifi");
+                        } else if (reason == DownloadManager.PAUSED_UNKNOWN) {
+                            sb.append(" - paused: for some other reason");
+                        } else if (reason == DownloadManager.PAUSED_WAITING_FOR_NETWORK) {
+                            sb.append(" - paused: waiting for network connectivity to proceed");
+                        } else if (reason == DownloadManager.PAUSED_WAITING_TO_RETRY) {
+                            sb.append(" - paused: some network error occurred and the download manager is waiting before retrying the request");
+                        } else if (reason == DownloadManager.ERROR_CANNOT_RESUME) {
+                            sb.append(" - error: some possibly transient error occurred but we can't resume the download");
+                        } else if (reason == DownloadManager.ERROR_DEVICE_NOT_FOUND) {
+                            sb.append(" - error: no external storage device was found. SD card mounted?");
+                        } else if (reason == DownloadManager.ERROR_FILE_ALREADY_EXISTS) {
+                            sb.append(" - error: requested destination file already exists, will not be overwritten");
+                        } else if (reason == DownloadManager.ERROR_FILE_ERROR) {
+                            sb.append(" - error: unknown storage issue");
+                        } else if (reason == DownloadManager.ERROR_HTTP_DATA_ERROR) {
+                            sb.append(" - error: HTTP processing error at data level");
+                        } else if (reason == DownloadManager.ERROR_INSUFFICIENT_SPACE) {
+                            sb.append(" - error: insufficient storage space");
+                        } else if (reason == DownloadManager.ERROR_TOO_MANY_REDIRECTS) {
+                            sb.append(" - error: too many redirects");
+                        } else if (reason == DownloadManager.ERROR_UNHANDLED_HTTP_CODE) {
+                            sb.append(" - error: unhandled HTTP cod");
+                        } else if (reason == DownloadManager.ERROR_UNKNOWN) {
+                            sb.append(" - error: unknown error");
+                        }
+
+                    } else {
+                        sb.append(c.getString(column));
+                    }
+                    sb.append("\n");
+                }
+                sb.append("\n---\n\n");
+            }
+        }
+
+        SimpleDialog.of(activity).setTitle(R.string.debug_current_downloads).setMessage(TextParam.text(sb.toString()).setMarkdown(true)).show();
     }
 
 }
