@@ -864,6 +864,8 @@
         <item>Light</item>
         <item>Dark</item>
     </string-array>
+    <string name="init_wallpaper">Wallpaper</string>
+    <string name="init_summary_wallpaper">Display wallpaper as dashboard background</string>
 
     <!-- backup / restore -->
     <string name="init_backup_title">Create Backup</string>
