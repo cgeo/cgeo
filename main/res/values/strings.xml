@@ -891,8 +891,8 @@
     <string name="init_backup_history_length_max">Keep all</string>
     <string name="init_backup_history_delete_warning">You have saved more backups than your configured maximum value allows. Do you really want to remove all excess backups?</string>
     <string name="init_backup_automatic">Automatic backup reminder</string>
-    <string name="init_backup_automatic_summary">Reminds you every x days to create an automatic backup (in addition to any manually created backups), 0=off</string>
-    <string name="init_backup_automatic_reminder">Tap here to create an automatic backup. This will only take a short while. Long-tap to postpone.</string>
+    <string name="init_backup_automatic_summary">Performs an automatic backup every x days (in addition to any manually created backups), 0=off</string>
+    <string name="init_backup_automatic_performing">Creating backup…</string>
     <string name="init_user_confirmation">I know what I\'m doing</string>
     <string name="init_backup_success">c:geo\'s database was successfully copied to:</string>
     <string name="init_backup_failed">Backup of c:geo\'s database failed.</string>
