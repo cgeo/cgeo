@@ -1,9 +1,10 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/scroller"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:fillViewport="true" >
+    android:fillViewport="true">
 
     <LinearLayout
         android:id="@+id/scroller_child"
@@ -53,6 +54,16 @@
                 android:layout_weight="1"
                 android:text="@string/waypoint_calculate_coordinates"
                 android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/calculate_global"
+                style="@style/button_full"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="NEW Calculate Coordinates"
+                app:icon="@drawable/ic_menu_variable"
+                android:visibility="gone" />
+
             <Button
                 android:id="@+id/clear"
                 style="@style/button_full"
