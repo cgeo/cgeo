@@ -49,6 +49,7 @@ import cgeo.geocaching.utils.Version;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SearchManager;
+import android.app.WallpaperManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -408,6 +409,8 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
+
+            binding.getRoot().setBackground(Settings.isWallpaper() ? WallpaperManager.getInstance(this).getDrawable() : null);
 
             init();
         }
