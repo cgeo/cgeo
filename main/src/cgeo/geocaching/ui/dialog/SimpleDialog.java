@@ -565,6 +565,18 @@ public class SimpleDialog {
 
                 return v;
             }
+
+            @Override
+            public int getItemViewType(final int position) {
+                //define 0 as "normal" type and 1 as "group header" type
+                final boolean isGroupHeading = groupMapper != null && groupMapper.call(position) == null;
+                return isGroupHeading ? 1 : 0;
+            }
+
+            @Override
+            public int getViewTypeCount() {
+                return 2; // "normal" and group heading
+            }
         };
     }
 
