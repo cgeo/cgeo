@@ -454,14 +454,6 @@
         <item name="android:progressTint">@color/colorAccent</item>
     </style>
 
-    <!-- map progressbar style -->
-    <style name="map_progressbar" parent="@style/Widget.AppCompat.ProgressBar.Horizontal">
-        <item name="android:height">8dp</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:padding">0dp</item>
-        <item name="android:layout_marginTop">-4dp</item>
-    </style>
-
     <!-- map distance info styles -->
     <style name="map_distanceinfo_no_background">
         <item name="android:paddingTop">0dp</item>
