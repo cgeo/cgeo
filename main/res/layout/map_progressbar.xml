@@ -1,7 +1,6 @@
-<ProgressBar
+<com.google.android.material.progressindicator.LinearProgressIndicator
 	xmlns:android="http://schemas.android.com/apk/res/android"
 	android:id="@+id/map_progressbar"
-	style="@style/map_progressbar"
 	android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:indeterminateOnly="true"
