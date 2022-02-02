@@ -10,6 +10,7 @@ import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.SettingsUtils;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 
@@ -28,7 +29,12 @@ public class PreferenceOfflinedataFragment extends BasePreferenceFragment {
             // disable the button, as the cleanup runs in background and should not be invoked a second time
             preference.setEnabled(false);
             ActivityMixin.showShortToast(getActivity(), R.string.init_maintenance_start);
-            AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, () -> ActivityMixin.showShortToast(getActivity(), R.string.init_maintenance_finished));
+            AndroidRxUtils.andThenOnUi(Schedulers.io(), DataStore::removeObsoleteGeocacheDataDirectories, () -> {
+                final Activity activity = getActivity();
+                if (activity != null) {
+                    ActivityMixin.showShortToast(activity, R.string.init_maintenance_finished);
+                }
+            });
             return true;
         });
 
