@@ -772,6 +772,8 @@
         <item>밝음</item>
         <item>어두움</item>
     </string-array>
+    <string name="init_wallpaper">배경화면</string>
+    <string name="init_summary_wallpaper">배경 화면을 대시보드 배경으로 표시</string>
     <!-- backup / restore -->
     <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup_summary">이 기능은 캐시, 웨이 포인트 및 설정을 백업 할 수 있지만 캐시 이미지는 백업 할 수 없습니다. \n휴대 전화를 분실 한 후에도 데이터를 복원하려면 백업 파일을 독립적 인 위치에 복사해야합니다.</string>

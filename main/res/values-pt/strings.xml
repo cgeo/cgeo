@@ -778,6 +778,8 @@
         <item>Claro</item>
         <item>Escuro</item>
     </string-array>
+    <string name="init_wallpaper">Imagem de fundo</string>
+    <string name="init_summary_wallpaper">Exibir imagem de fundo como fundo do painel</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
@@ -803,6 +805,9 @@
     <string name="init_backup_history_length_min">Apenas recentes</string>
     <string name="init_backup_history_length_max">Manter todas</string>
     <string name="init_backup_history_delete_warning">Armazenou mais cópias de segurança do que o seu valor máximo configurado. Quer realmente remover todas as cópias de segurança em excesso?</string>
+    <string name="init_backup_automatic">Notificação automática para fazer cópia de segurança</string>
+    <string name="init_backup_automatic_summary">Lembra a cada x dias para criar uma cópia de segurança automática (para além das criadas manualmente), 0=off</string>
+    <string name="init_backup_automatic_reminder">Quer criar uma cópia de segurança automática? Isso demora apenas uns instantes.</string>
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
@@ -2011,6 +2016,8 @@
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
     <string name="track">Percurso</string>
+    <string name="make_visible">tornar visível</string>
+    <string name="hide">ocultar</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">Desligado</string>
@@ -2163,6 +2170,12 @@ do mapa e dos temas?</string>
     <string name="touch_again_to_exit">Por favor, toque novamente para sair</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Áreas</string>
+    <string name="rtl_fell_meadow">prado em montanha</string>
+    <string name="rtl_heath">charneca</string>
+    <string name="rtl_marsh">pântano</string>
+    <string name="rtl_rock">rocha</string>
+    <string name="rtl_scree">seixos</string>
+    <string name="rtl_scrub">matagal</string>
     <string name="rtl_wood_mixed">madeira (mista)</string>
     <string name="rtl_wood_coniferous">madeira (conífera)</string>
     <string name="rtl_wood_deciduous">madeira (caducifólia)</string>
@@ -2176,6 +2189,10 @@ do mapa e dos temas?</string>
     <string name="rtl_military">militar</string>
     <string name="rtl_nature_reserve">reserva natural</string>
     <string name="rtl_nature_reserve_strict">reserva natural (restrita)</string>
+    <string name="rtl_cliff">penhasco</string>
+    <string name="rtl_ridge">colina</string>
+    <string name="rtl_reef">recife</string>
+    <string name="rtl_dyke">dique</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Caminhada, Ciclismo, Escalada</string>
@@ -2248,6 +2265,7 @@ do mapa e dos temas?</string>
     <string name="rtl_wilderness_hut_private">cabana de natureza selvagem privada</string>
     <string name="rtl_bar">bar</string>
     <string name="rtl_cafe">café</string>
+    <string name="rtl_restaurant">restaurante</string>
     <string name="rtl_bbq">churrasco</string>
     <string name="rtl_water_point">ponto de água</string>
     <string name="rtl_atm">multibanco</string>

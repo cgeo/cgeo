@@ -1,2 +1,2 @@
 ### Geral
-- New: Automatic reminder to create backups
+- Novo: Notificação automática para criar cópias de segurança

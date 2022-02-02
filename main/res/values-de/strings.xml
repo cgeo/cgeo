@@ -778,6 +778,8 @@
         <item>Hell</item>
         <item>Dunkel</item>
     </string-array>
+    <string name="init_wallpaper">Hintergrundbild</string>
+    <string name="init_summary_wallpaper">Zeige das Hintergrundbild als Dashboard-Hintergrund</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
