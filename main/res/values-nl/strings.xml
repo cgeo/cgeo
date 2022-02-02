@@ -778,6 +778,8 @@
         <item>Licht</item>
         <item>Donker</item>
     </string-array>
+    <string name="init_wallpaper">Achtergrond</string>
+    <string name="init_summary_wallpaper">Achtergrond weergeven als dashboard achtergrond</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
