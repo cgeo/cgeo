@@ -779,7 +779,6 @@
         <item>Escuro</item>
     </string-array>
     <string name="init_wallpaper">Imagem de fundo</string>
-    <string name="init_summary_wallpaper">Exibir imagem de fundo como fundo do painel</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
