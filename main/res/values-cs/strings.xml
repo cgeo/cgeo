@@ -818,8 +818,6 @@
     <string name="init_backup_history_length_max">Zachovat všechny</string>
     <string name="init_backup_history_delete_warning">Uložili jste více záloh, než umožňuje vaše nakonfigurovaná maximální hodnota. Opravdu chcete odstranit všechny přebytečné zálohy?</string>
     <string name="init_backup_automatic">Automatické připomenutí zálohy</string>
-    <string name="init_backup_automatic_summary">Připomene vám každých x dní k vytvoření automatické zálohy (kromě všech ručně vytvořených záloh), 0=vypnuto</string>
-    <string name="init_backup_automatic_reminder">Chcete vytvořit automatickou zálohu? Bude to trvat jen chvíli.</string>
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
@@ -2154,8 +2152,6 @@
     <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
     <string name="check_tiles_missing">Nalezena chybějící směrovací data:\n%1$s\n\nChcete tyto soubory stáhnout?%2$s</string>
     <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
-    <string name="tileupdate_info">Chcete zkontrolovat aktualizace stažených souborů pro směrování?</string>
-    <string name="mapupdate_info">Chcete zkontrolovat aktualizace map a souborů s motivy?</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
