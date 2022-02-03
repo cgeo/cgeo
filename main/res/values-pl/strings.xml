@@ -2145,8 +2145,6 @@
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
     <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:\n%1$s\n\nCzy chcesz pobrać te pliki?%2$s</string>
     <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
-    <string name="tileupdate_info">Czy chcesz sprawdzić dostępność aktualizacji pobranych plików danych nawigacyjnych?</string>
-    <string name="mapupdate_info">Czy chcesz sprawdzić dostępność aktualizacji map i motywów?</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
     <string name="updates_check">Sprawdzanie aktualizacji</string>
     <string name="mapserver_mapsforge_info">Podstawowe mapy, motywy mapy nie są wymagane</string>
