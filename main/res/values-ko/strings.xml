@@ -800,8 +800,6 @@
     <string name="init_backup_history_length_max">모두 유지</string>
     <string name="init_backup_history_delete_warning">구성된 최대 값이 허용하는 것보다 더 많은 백업을 저장했습니다. 초과 백업을 모두 제거 하시겠습니까?</string>
     <string name="init_backup_automatic">자동 백업 알림</string>
-    <string name="init_backup_automatic_summary">자동 백업을 생성하도록 x일마다 알림 (수동으로 생성된 모든 백업에 추가), 0=해제</string>
-    <string name="init_backup_automatic_reminder">자동 백업을 생성하시겠습니까? 잠깐만 걸립니다.</string>
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
@@ -2067,8 +2065,6 @@
     <string name="check_tiles_found">라우팅 데이터가 이미 있음</string>
     <string name="check_tiles_missing">누락된 라우팅 데이터를 찾았습니다: \n%1$s\n\n해당 파일을 다운로드하시겠습니까?%2$s</string>
     <string name="check_tiles_unsupported">경고: 선택한 지역에서 라우팅 데이터를 적어도 부분적으로 사용할 수 없습니다.</string>
-    <string name="tileupdate_info">다운로드한 라우팅 데이터 파일의 업데이트를 확인 하시겠습니까?</string>
-    <string name="mapupdate_info">지도 및 테마 파일의 업데이트를 확인 하시겠습니까?</string>
     <string name="no_updates_found">업데이트가 없음</string>
     <string name="updates_check">업데이트 확인</string>
     <string name="mapserver_mapsforge_info">기본 지도, 지도 테마가 필요하지 않음</string>
