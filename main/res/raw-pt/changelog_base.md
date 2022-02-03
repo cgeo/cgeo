@@ -1,2 +1,3 @@
 ### Geral
-- Novo: Notificação automática para criar cópias de segurança
+- New: Automatically perform backups (optional)
+- Fix: Resume importing finished downloads
