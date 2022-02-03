@@ -806,8 +806,6 @@
     <string name="init_backup_history_length_max">Manter todas</string>
     <string name="init_backup_history_delete_warning">Armazenou mais cópias de segurança do que o seu valor máximo configurado. Quer realmente remover todas as cópias de segurança em excesso?</string>
     <string name="init_backup_automatic">Notificação automática para fazer cópia de segurança</string>
-    <string name="init_backup_automatic_summary">Lembra a cada x dias para criar uma cópia de segurança automática (para além das criadas manualmente), 0=off</string>
-    <string name="init_backup_automatic_reminder">Quer criar uma cópia de segurança automática? Isso demora apenas uns instantes.</string>
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
@@ -2091,9 +2089,6 @@
     <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
     <string name="check_tiles_missing">Foram encontrados dados de encaminhamento em falta:\n%1$s\n\nDeseja transferir esses ficheiros?%2$s</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
-    <string name="tileupdate_info">Deseja verificar se há actualizações para os ficheiros de dados de encaminhamento transferidos?</string>
-    <string name="mapupdate_info">Deseja verificar por actualizações dos ficheiros 
-do mapa e dos temas?</string>
     <string name="no_updates_found">Nenhuma actualização encontrada</string>
     <string name="updates_check">Verificação de actualizações</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
