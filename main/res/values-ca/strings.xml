@@ -2086,8 +2086,6 @@
     <string name="check_tiles_found">Les dades d\'encaminament ja estan presents</string>
     <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:\n%1$s\n\nVoleu baixar aquests fitxers?%2$s</string>
     <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per la regió escollida</string>
-    <string name="tileupdate_info">Voleu comprovar si hi ha actualitzacions de fitxers de dades d’encaminament descarregats?</string>
-    <string name="mapupdate_info">Voleu buscar actualitzacions de fitxers de mapes i temes?</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>
     <string name="updates_check">Revisió de les actualitzacions</string>
     <string name="mapserver_mapsforge_info">Mapes bàsics, no es requereixen temes de mapes</string>
