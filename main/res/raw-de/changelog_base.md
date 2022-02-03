@@ -1,2 +1,3 @@
 ### Allgemein
-- Neu: Automatische Erinnerung an Sicherungen
+- Neu: Automatische Sicherungen durchführen (optional)
+- Korrektur: Importieren von fertigen Downloads fortsetzen
