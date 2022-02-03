@@ -1911,7 +1911,6 @@
     <string name="downloadmap_retrieving_directory_data">Gaunami aplanko duomenys…</string>
     <string name="downloadmap_checking_for_updates">Ieškoma atnaujinimų…</string>
     <string name="downloadtile_title">Trūksta maršrutizavimo duomenų</string>
-    <string name="mapupdate_info">Ar norite patikrinti žemėlapio ir temos failų atnaujinimus?</string>
     <string name="no_updates_found">Naujinių nerasta</string>
     <string name="updates_check">Atnaujinimų patikrinimas</string>
     <string name="mapserver_mapsforge_info">Pagrindiniai žemėlapiai, nereikia jokių žemėlapių temų</string>
