@@ -2054,8 +2054,6 @@ Nombre de archivo:%2$s</string>
     <string name="downloadmap_checking_for_updates">Comprobando actualizaciones…</string>
     <string name="downloadtile_title">Faltan datos de enrutaniento</string>
     <string name="downloadtile_info">c:geo no puede calcular la ruta solicitada ya que falta algún archivo de datos de enrutamiento. ¿Desea descargar los datos de enrutamiento que faltan?</string>
-    <string name="tileupdate_info">¿Quiere comprobar si hay actualizaciones de los archivos de datos de enrutamiento descargados?</string>
-    <string name="mapupdate_info">¿Quiere comprobar si hay actualizaciones de los archivos del mapa y del tema?</string>
     <string name="no_updates_found">No hay actualizaciones disponibles</string>
     <string name="updates_check">Comprobar actualizaciones</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, no se requieren temas de mapa</string>
