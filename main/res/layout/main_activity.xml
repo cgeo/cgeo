@@ -16,19 +16,21 @@
         android:layout_marginTop="16dp"
         tools:layout="@layout/status" />
 
-    <FrameLayout
+    <LinearLayout
         android:id="@+id/reminders"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dip"
         android:layout_marginTop="16dp"
-        android:layout_below="@id/status">
+        android:layout_below="@id/status"
+        android:orientation="vertical">
 
         <include
             android:id="@+id/autobackup"
             layout="@layout/mainactivity_action_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:visibility="gone" />
 
         <include
@@ -36,6 +38,7 @@
             layout="@layout/mainactivity_action_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:visibility="gone" />
 
         <include
@@ -43,9 +46,10 @@
             layout="@layout/mainactivity_action_item"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
             android:visibility="gone" />
 
-    </FrameLayout>
+    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/info_notloggedin"

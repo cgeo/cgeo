@@ -3,7 +3,7 @@
     <shortcut
         android:shortcutId="live_map"
         android:enabled="true"
-        android:icon="@drawable/main_live"
+        android:icon="@drawable/sc_map"
         android:shortcutShortLabel="@string/live_map_button">
         <intent
             android:action="android.intent.action.VIEW"
@@ -13,7 +13,7 @@
     <shortcut
         android:shortcutId="nearby"
         android:enabled="true"
-        android:icon="@drawable/main_nearby"
+        android:icon="@drawable/sc_nearby"
         android:shortcutShortLabel="@string/caches_nearby_button">
         <intent
             android:action="android.intent.action.VIEW"
@@ -25,7 +25,7 @@
     <shortcut
         android:shortcutId="stored"
         android:enabled="true"
-        android:icon="@drawable/main_stored"
+        android:icon="@drawable/sc_stored"
         android:shortcutShortLabel="@string/stored_caches_button">
         <intent
             android:action="android.intent.action.VIEW"
@@ -37,7 +37,7 @@
     <shortcut
         android:shortcutId="search"
         android:enabled="true"
-        android:icon="@drawable/main_search"
+        android:icon="@drawable/sc_search"
         android:shortcutShortLabel="@string/advanced_search_button">
         <intent
             android:action="android.intent.action.VIEW"

@@ -341,6 +341,9 @@
     <string name="caches_more_caches_no">キャッシュは以上です</string>
     <string name="caches_more_caches_loading">キャッシュ情報を読み込み中…</string>
     <string name="caches_more_caches_currently">現在</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="other">次の%1$dキャッシュを読み込む</item>
+    </plurals>
     <string name="caches_more_caches_remaining">残りのキャッシュを読み込む(%1$d/%2$d)</string>
     <string name="caches_downloading">キャッシュ情報をダウンロード中…\n残り時間: </string>
     <string name="caches_eta_ltm">1分以内</string>
@@ -402,6 +405,8 @@
     <string name="caches_clear_offlinelogs_message">オフラインログを削除しますか?</string>
     <string name="caches_clear_offlinelogs_progress">すべてのオフラインログを削除中</string>
     <string name="caches_show_attributes">キャッシュ属性の概要</string>
+    <string name="caches_set_cache_icon">キャッシュアイコン設定</string>
+    <string name="caches_reset_cache_icons_title">キャッシュアイコンをリセット</string>
     <string name="caches_make_list_unique">重複キャッシュを削除</string>
     <string name="caches_set_listmarker">リストマーカーを設定</string>
     <string name="caches_askdeletion">空の時に削除確認する</string>
@@ -630,6 +635,9 @@
     <string name="settings_title_navigation_menu">ナビゲーションメニュー</string>
     <string name="settings_category_browser">ブラウザ</string>
     <string name="settings_category_geocaching_platform">ジオキャッシングサイト</string>
+    <string name="settings_category_nearbysearch">近くの検索</string>
+    <string name="init_nearbysearchlimit_title">近くの検索の範囲</string>
+    <string name="init_nearbysearchlimit_description">近くの検索でキャッシュまでの距離の範囲。0にすると無制限になります</string>
     <string name="settings_category_geocaching_additionals">ほかのサービスとアドオン</string>
     <string name="settings_category_social">ソーシャルメディア</string>
     <string name="settings_category_logging_other">ほかのオプション</string>
@@ -679,6 +687,8 @@
     <string name="init_template_title">テンプレート タイトル(メニューに表示されます)</string>
     <string name="init_template_text">テンプレート テキスト(挿入されるテキストです)</string>
     <string name="init_log_template">テンプレート</string>
+    <string name="init_log_template_addnew">新しいテンプレートを追加</string>
+    <string name="init_log_template_remove_confirm">テンプレートを削除しますか?</string>
     <string name="init_log_templates">ログのテンプレート機能</string>
     <string name="init_log_template_prefix">テンプレート:\u0020</string>
     <string name="init_log_template_missing_error">テンプレートのタイトルとテキストの両方を指定する必要があります</string>
@@ -780,6 +790,9 @@
     <string name="init_backup_history_length_min">最新のみ</string>
     <string name="init_backup_history_length_max">無制限</string>
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
+    <string name="init_backup_automatic">通知間隔</string>
+    <string name="init_backup_automatic_summary">バックアップのお知らせをx日毎にします(手動でしたバックアップも対象です)。0にするとオフになります</string>
+    <string name="init_backup_automatic_reminder">バックアップを作成しますか? 少し時間がかかります</string>
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
@@ -1501,7 +1514,7 @@
     <string name="helper_google_translate_description">キャッシュの説明でロングタップすればGoogle翻訳アプリで簡単に翻訳できます。
 Google翻訳アプリで各言語の辞書をダウンロードしておけばオフラインでも使用できます</string>
     <string name="helper_where_you_go_description">WhereYouGoアプリでWherigoキャッシュを検索して楽しむことができます。Wherigoカートリッジのダウンロードができます</string>
-    <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。Garmin chirpを含むジオキャッシュには必要です</string>
+    <string name="helper_chirpwolf_description">Chirp Wolfを使用するとANT+/Garmin chirp(ジオキャッシュ ビーコン)からデータを読み取ることができます。ANT+/Garmin chirpを含むジオキャッシュには必要です</string>
     <string name="helper_alc_description">スマホやタブレット用のアドベンチャー・ラボのアプリ</string>
     <string name="helper_gcwizard_description">GC Wizardは簡単な暗号、測地系や科学系の計算のための多数のツールが含まれています。また、様々なシンボルの一覧を見ることができます。</string>
     <!-- export -->
@@ -1786,6 +1799,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="cat_location">キャッシュの場所</string>
     <string name="cat_duration">距離/時間</string>
     <string name="cat_surrounding">キャッシュ周辺</string>
+    <string name="cat_permissions">許可</string>
     <!-- cache attribute sources -->
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
@@ -1937,6 +1951,13 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     </plurals>
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
+    <string name="center_on_route_track">ルート/トラックの中心に移動</string>
+    <string name="unload_route_track">ルート/トラックを削除</string>
+    <string name="route">ルート</string>
+    <string name="track">トラック</string>
+    <string name="make_visible">表示</string>
+    <string name="hide">非表示</string>
     <!-- distance units -->
     <!-- switch settings -->
     <string name="switch_off">オフ</string>
@@ -2004,8 +2025,12 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="downloadmap_download">ダウンロード</string>
     <string name="downloadmap_retrieving_directory_data">フォルダ情報を取得中…</string>
     <string name="downloadmap_checking_for_updates">更新を確認中…</string>
-    <string name="downloadtile_title">ルート検索データが見つかりません</string>
+    <string name="downloadtile_title">ルート検索データが不足しています</string>
     <string name="downloadtile_info">ルート検索データが不足しているため、c:geoはルートを検索できません。ルート検索データをダウンロードしますか？</string>
+    <string name="check_tiles_menu">ルート検索データの確認</string>
+    <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
+    <string name="check_tiles_missing">ルート検索に必要なルート検索データが見つかりました:\n%1$s\n\nこれらのファイルをダウンロードしますか?%2$s</string>
+    <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
     <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
     <string name="mapupdate_info">地図とテーマファイルの更新を確認しますか?</string>
     <string name="no_updates_found">更新はありません。</string>
@@ -2083,7 +2108,10 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="chipchoicegroup_selectall">すべて選択</string>
     <string name="touch_again_to_exit">もう一度「戻る」を押すと終了します</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">地域</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">道路</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <string name="rtl_category_walking_cycling_climbing">ウォーキング、サイクリング、登山</string>
     <!-- render theme legend: category "POI / Symbols" -->
 </resources>

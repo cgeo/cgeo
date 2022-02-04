@@ -778,6 +778,8 @@
         <item>Licht</item>
         <item>Donker</item>
     </string-array>
+    <string name="init_wallpaper">Achtergrond</string>
+    <string name="init_summary_wallpaper">Achtergrond weergeven als dashboard achtergrond</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Back-up maken</string>
     <string name="init_backup_summary">Houd er rekening mee dat deze functie een back-up kan maken van caches, waypoints &amp; instellingen, maar niet van cache-afbeeldingen. \nOm de gegevens te kunnen herstellen, zelfs na het verliezen van je telefoon, dienen de back-upbestanden te worden gekopieerd naar een onafhankelijke locatie.</string>
@@ -803,6 +805,9 @@
     <string name="init_backup_history_length_min">Alleen recente</string>
     <string name="init_backup_history_length_max">Alles behouden</string>
     <string name="init_backup_history_delete_warning">Je hebt meer back-ups opgeslagen dan je ingestelde maximale waarde toestaat. Wil je echt alle overtollige back-ups verwijderen?</string>
+    <string name="init_backup_automatic">Automatische backup herinnering</string>
+    <string name="init_backup_automatic_summary">Herinnert je elke x dagen om een automatische back-up te maken (naast andere handmatig gemaakte back-ups), 0=off</string>
+    <string name="init_backup_automatic_reminder">Wil je een automatische back-up maken? Dit duurt maar even.</string>
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>

@@ -3,6 +3,7 @@ package cgeo.geocaching.utils;
 import cgeo.geocaching.InstallWizardActivity;
 import cgeo.geocaching.MainActivity;
 import cgeo.geocaching.R;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.settings.BackupSeekbarPreference;
@@ -549,7 +550,7 @@ public class BackupUtils {
         }
         final boolean settingsResult = createSettingsBackupInternal(backupDir, Settings.getBackupLoginData());
         final Consumer<Boolean> consumer = dbResult -> {
-            showBackupCompletedStatusDialog(backupDir, settingsResult, dbResult);
+            showBackupCompletedStatusDialog(backupDir, settingsResult, dbResult, autobackup);
 
             if (runAfterwards != null) {
                 runAfterwards.run();
@@ -624,7 +625,7 @@ public class BackupUtils {
         });
     }
 
-    private void showBackupCompletedStatusDialog(final Folder backupDir, final Boolean settingsResult, final Boolean databaseResult) {
+    private void showBackupCompletedStatusDialog(final Folder backupDir, final Boolean settingsResult, final Boolean databaseResult, final boolean autobackup) {
         String msg;
         final String title;
         if (settingsResult && databaseResult) {
@@ -654,9 +655,13 @@ public class BackupUtils {
             files.add(fi.uri);
         }
 
-        SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
-            .setButtons(0, 0, R.string.cache_share_field)
-            .show(SimpleDialog.DO_NOTHING, null, (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup));
+        if (autobackup) {
+            ActivityMixin.showShortToast(activityContext, msg);
+        } else {
+            SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
+                .setButtons(0, 0, R.string.cache_share_field)
+                .show(SimpleDialog.DO_NOTHING, null, (dialog, which) -> ShareUtils.shareMultipleFiles(activityContext, files, R.string.init_backup_backup));
+        }
     }
 
 
@@ -755,9 +760,4 @@ public class BackupUtils {
         return subfolder;
     }
 
-    public static void checkForBackupReminder(final MainActivity activity) {
-        if (Settings.automaticBackupDue()) {
-            activity.displayActionItem(R.id.autobackup, R.string.init_backup_automatic_reminder, () -> new BackupUtils(activity, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true));
-        }
-    }
 }
