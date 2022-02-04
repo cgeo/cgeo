@@ -73,29 +73,31 @@
             android:layout_marginBottom="16dp"
             tools:listitem="@android:layout/simple_spinner_item" />
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview"
+            android:hint="@string/waypoint_name" >
             <AutoCompleteTextView
                 android:id="@+id/name"
                 style="@style/textinput_embedded"
-                android:hint="@string/waypoint_name" />
+                />
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/note_layout"
-            style="@style/textinput_edittext">
+            style="@style/textinput_edittext"
+            android:hint="@string/waypoint_note">
             <EditText
                 android:id="@+id/note"
                 style="@style/textinput_embedded"
-                android:hint="@string/waypoint_note"
+
                 android:inputType="textMultiLine|textCapSentences"
                 android:minLines="5"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext">
+        <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext"
+            android:hint="@string/waypoint_user_note">
             <EditText
                 android:id="@+id/user_note"
                 style="@style/textinput_embedded"
-                android:hint="@string/waypoint_user_note"
                 android:inputType="textMultiLine|textCapSentences"
                 android:minLines="5" />
         </com.google.android.material.textfield.TextInputLayout>
