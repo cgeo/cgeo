@@ -56,7 +56,7 @@ public final class GCConstants {
     static final Pattern PATTERN_HIDDENEVENT = Pattern.compile(":\\s*([0-9-/]+)\\s*<div id=\"calLinks\">", Pattern.DOTALL);
     static final Pattern PATTERN_IS_FAVORITE = Pattern.compile("<div id=\"pnlFavoriteCache\">"); // without 'class="hideMe"' inside the tag !
     static final Pattern PATTERN_FAVORITECOUNT = Pattern.compile("<span class=\"favorite-value\">\\D*([0-9]+?)\\D*</span>");
-    static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><p(.+?)</p></span>");
+    static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
 
     /** Two groups ! */
