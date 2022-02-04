@@ -571,26 +571,9 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             }
         }
 
-        final String uri = "https://www.geocaching.com/my/uploadfieldnotes.aspx";
-        final String page = GCLogin.getInstance().getRequestLogged(uri, null);
+        final String uploadRes = Network.getResponseData(Network.postRequest("https://www.geocaching.com/api/proxy/web/v1/LogDrafts/upload", new Parameters(), null, "file-0", "text/plain", exportFile));
 
-        if (StringUtils.isBlank(page)) {
-            Log.e("FieldNoteExport.ExportTask get page: No data from server");
-            return false;
-        }
-
-        final String[] viewstates = GCLogin.getViewstates(page);
-
-        final Parameters uploadParams = new Parameters(
-                "__EVENTTARGET", "",
-                "__EVENTARGUMENT", "",
-                "ctl00$ContentBody$btnUpload", "Upload Field Note");
-
-        GCLogin.putViewstates(uploadParams, viewstates);
-
-        Network.getResponseData(Network.postRequest(uri, uploadParams, null, "ctl00$ContentBody$FieldNoteLoader", "text/plain", exportFile));
-
-        if (StringUtils.isBlank(page)) {
+        if (StringUtils.isBlank(uploadRes)) {
             Log.e("FieldNoteExport.ExportTask upload: No data from server");
             return false;
         }
