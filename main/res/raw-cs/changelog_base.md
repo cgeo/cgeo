@@ -23,6 +23,7 @@
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
 - Novinka: Barevné ikony atributů (po skupinách atributů)
 - Oprava: Problém s otevíráním obrázků z karty galerie v externích aplikacích na některých zařízeních Samsung
+- Fix: Missing log count (website change)
 
 ### Ostatní
 - Novinka: Rychlé načítání geokódů z textu ve schránce při vyhledávání na hlavní obrazovce
