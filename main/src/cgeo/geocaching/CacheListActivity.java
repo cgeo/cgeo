@@ -77,7 +77,6 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
@@ -748,8 +747,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-
-        ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
 
         final boolean isHistory = type == CacheListType.HISTORY;
         final boolean isOffline = type == CacheListType.OFFLINE;
