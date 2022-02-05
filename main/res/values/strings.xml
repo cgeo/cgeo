@@ -1514,7 +1514,6 @@
     <string name="waypoint_set_visited">Waypoint set to visited</string>
     <string name="waypoint_unset_visited">Waypoint set to not visited</string>
     <string name="waypoint_save">Save</string>
-    <string name="waypoint_cancel_edit">Cancel</string>
     <string name="waypoint_loading">Loading waypoint…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">No change to cache coordinates</string>
     <string name="waypoint_set_as_cache_coords">Set as cache coordinates in c:geo</string>
@@ -2429,6 +2428,8 @@
     <string name="finish">Finish</string>
     <string name="back">Back</string>
     <string name="later">Later</string>
+    <string name="cancel">Cancel</string>
+    <string name="ok">Ok</string>
 
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Select All</string>
