@@ -2083,8 +2083,6 @@
     <string name="check_tiles_found">Dati di routing già presenti</string>
     <string name="check_tiles_missing">Trovati dati di routing mancanti:\n%1$s\n\nVuoi scaricare questi file?%2$s</string>
     <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
-    <string name="tileupdate_info">Vuoi controllare gli aggiornamenti dei file di navigazione scaricati?</string>
-    <string name="mapupdate_info">Vuoi controllare gli aggiornamenti dei file di mappa e tema?</string>
     <string name="no_updates_found">Nessun aggiornamento trovato</string>
     <string name="updates_check">Controlla aggiornamenti</string>
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>

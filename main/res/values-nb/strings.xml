@@ -1948,7 +1948,6 @@
     <string name="downloadmap_checking_for_updates">Ser etter oppdateringer…</string>
     <string name="downloadtile_title">Mangler rutedata</string>
     <string name="downloadtile_info">c:geo kan ikke beregne den ønskede ruten fordi det mangler noen datafiler. Vil du laste ned de manglende dataene for ruting?</string>
-    <string name="mapupdate_info">Vil du se etter oppdateringer av kart- og temafiler?</string>
     <string name="no_updates_found">Fant ingen oppdateringer</string>
     <string name="updates_check">Oppdateringssjekk</string>
     <string name="mapserver_mapsforge_info">Grunnleggende kart, ingen karttemaer kreves</string>

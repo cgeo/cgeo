@@ -2028,8 +2028,6 @@
     <string name="downloadmap_checking_for_updates">Güncellemeler denetleniyor…</string>
     <string name="downloadtile_title">Rotalama dosyası eksik</string>
     <string name="downloadtile_info">c:geo, bazı rotalama dosyaları eksik olduğundan istenilen rotayı hesaplayamıyor. Eksik olan rotalama dosyalarını indirmek ister misiniz?</string>
-    <string name="tileupdate_info">İndirilmiş olan rotalama dosyalarının güncellemelerini kontrol etmek ister misiniz?</string>
-    <string name="mapupdate_info">Harita ve tema dosyaları için olan güncellemeleri kontrol etmek ister misiniz?</string>
     <string name="no_updates_found">Güncelleme bulunamadı</string>
     <string name="updates_check">Güncellemelerin kontrolü</string>
     <string name="mapserver_mapsforge_info">Temel harita, harita teması gerekmez</string>

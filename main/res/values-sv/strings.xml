@@ -2082,8 +2082,6 @@
     <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
     <string name="check_tiles_missing">Ruttberäkningsdata saknas:\n%1$s\n\nVill du ladda ner de filer som behövs?%2$s</string>
     <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgänglig för den valda regionen</string>
-    <string name="tileupdate_info">Vill du söka efter uppdateringar till nedladdade rutt-datafiler?</string>
-    <string name="mapupdate_info">Vill du söka efter uppdateringar av karta och temafiler?</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
     <string name="updates_check">Kontrollera uppdateringar</string>
     <string name="mapserver_mapsforge_info">Grundläggande kartor, inga kartteman krävs</string>

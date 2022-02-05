@@ -2091,8 +2091,6 @@
     <string name="check_tiles_found">Reititystiedot ovat jo olemassa</string>
     <string name="check_tiles_missing">Löydettiin puuttuvat reititystiedot:\n%1$s\n\nHaluatko ladata nuo tiedostot?%2$s</string>
     <string name="check_tiles_unsupported">Varoitus: Reititystietoja ei ole ainakin osittain saatavilla valitulle alueelle</string>
-    <string name="tileupdate_info">Haluatko tarkistaa ladattujen reititystietojen päivitykset?</string>
-    <string name="mapupdate_info">Haluatko tarkistaa kartta- ja teematiedostojen päivitykset?</string>
     <string name="no_updates_found">Päivityksiä ei löytynyt</string>
     <string name="updates_check">Päivitysten tarkistus</string>
     <string name="mapserver_mapsforge_info">Peruskartat, karttateemoja ei tarvita</string>

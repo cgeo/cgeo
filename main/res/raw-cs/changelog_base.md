@@ -1,2 +1,3 @@
 ### Obecné
-- Novinka: Automatické připomenutí pro vytvoření záloh
+- New: Automatically perform backups (optional)
+- Fix: Resume importing finished downloads

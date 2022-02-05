@@ -2124,8 +2124,6 @@
     <string name="check_tiles_found">Údaje trás už existujú</string>
     <string name="check_tiles_missing">Našli sa chýbajúce údaje trás.:\n%1$s\n\nChcete prevziať tieto súbory?%2$s</string>
     <string name="check_tiles_unsupported">Upozornenie: Údaje trás nie sú minimálne sčasti pre zvolenú oblasť k dispozícii</string>
-    <string name="tileupdate_info">Chcete skontrolovať aktualizácie prevzatých súborov s údajmi navigácie?</string>
-    <string name="mapupdate_info">Chcete skontrolovať aktualizácie súborov máp a tém?</string>
     <string name="no_updates_found">Nenašli sa žiadne aktualizácie</string>
     <string name="updates_check">Kontrola aktualizácií</string>
     <string name="mapserver_mapsforge_info">Základné mapy, nie sú potrebné žiadne mapové motívy</string>

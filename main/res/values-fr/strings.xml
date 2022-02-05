@@ -2087,8 +2087,6 @@
     <string name="check_tiles_found">Les données de navigation sont déjà présentes</string>
     <string name="check_tiles_missing">Des données de navigation sont manquantes :\n%1$s\n\nSouhaitez-vous télécharger ces fichiers ?%2$s</string>
     <string name="check_tiles_unsupported">Attention : toutes les données de navigation ne sont pas disponibles pour la région sélectionnée</string>
-    <string name="tileupdate_info">Voulez-vous vérifier les mises à jour des fichiers de données de routage téléchargés ?</string>
-    <string name="mapupdate_info">Voulez-vous vérifier les mises à jour des fichiers de carte et de thème ?</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
     <string name="updates_check">Vérification des mises à jour</string>
     <string name="mapserver_mapsforge_info">Cartes de base, aucun thème de carte n\'est requis</string>

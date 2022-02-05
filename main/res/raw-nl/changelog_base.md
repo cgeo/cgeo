@@ -1,2 +1,3 @@
 ### Algemeen
-- Nieuw: Automatische herinnering om back-ups te maken
+- Nieuw: Automatisch back-ups uitvoeren (optioneel)
+- Oplossing: Hervatten van importeren van voltooide downloads

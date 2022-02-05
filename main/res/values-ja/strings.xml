@@ -791,8 +791,6 @@
     <string name="init_backup_history_length_max">無制限</string>
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
     <string name="init_backup_automatic">通知間隔</string>
-    <string name="init_backup_automatic_summary">バックアップのお知らせをx日毎にします(手動でしたバックアップも対象です)。0にするとオフになります</string>
-    <string name="init_backup_automatic_reminder">バックアップを作成しますか? 少し時間がかかります</string>
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
     <string name="init_backup_failed">c:geoのデータベースをバックアップできませんでした</string>
@@ -2031,8 +2029,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
     <string name="check_tiles_missing">ルート検索に必要なルート検索データが見つかりました:\n%1$s\n\nこれらのファイルをダウンロードしますか?%2$s</string>
     <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
-    <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
-    <string name="mapupdate_info">地図とテーマファイルの更新を確認しますか?</string>
     <string name="no_updates_found">更新はありません。</string>
     <string name="updates_check">更新を確認</string>
     <string name="mapserver_mapsforge_info">基本地図(地図テーマは必要ありません)</string>

@@ -806,8 +806,8 @@
     <string name="init_backup_history_length_max">Alles behouden</string>
     <string name="init_backup_history_delete_warning">Je hebt meer back-ups opgeslagen dan je ingestelde maximale waarde toestaat. Wil je echt alle overtollige back-ups verwijderen?</string>
     <string name="init_backup_automatic">Automatische backup herinnering</string>
-    <string name="init_backup_automatic_summary">Herinnert je elke x dagen om een automatische back-up te maken (naast andere handmatig gemaakte back-ups), 0=off</string>
-    <string name="init_backup_automatic_reminder">Wil je een automatische back-up maken? Dit duurt maar even.</string>
+    <string name="init_backup_automatic_summary">Voert elke x dagen een automatische backup uit (in aanvulling op handmatig gemaakte backups), 0=uit</string>
+    <string name="init_backup_automatic_performing">Back-up aan het maken…</string>
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
     <string name="init_backup_success">De database van c:geo was succesvol gekopieerd naar het bestand:</string>
     <string name="init_backup_failed">Backup van c:geo database is niet gelukt.</string>
@@ -2096,8 +2096,8 @@
     <string name="check_tiles_found">Route gegevens zijn al aanwezig</string>
     <string name="check_tiles_missing">Ontbrekende routegegevens gevonden:\n%1$s\n\nWilt je deze bestanden downloaden?%2$s</string>
     <string name="check_tiles_unsupported">Waarschuwing: Routegegevens zijn ten minste gedeeltelijk niet beschikbaar voor de gekozen regio</string>
-    <string name="tileupdate_info">Wil je controleren op updates van gedownloade routering gegevensbestanden?</string>
-    <string name="mapupdate_info">Wil je controleren op updates van kaart en themabestanden?</string>
+    <string name="tileupdate_info">Tik hier om te controleren op updates van gedownloade routeringgegevensbestanden. Lang tikken om dit uit te stellen.</string>
+    <string name="mapupdate_info">Tik hier om te controleren op updates van kaart- en thema-bestanden. Lang tikken om dit uit te stellen.</string>
     <string name="no_updates_found">Geen updates gevonden</string>
     <string name="updates_check">Controle op updates</string>
     <string name="mapserver_mapsforge_info">Basis kaarten, geen kaart thema\'s nodig</string>

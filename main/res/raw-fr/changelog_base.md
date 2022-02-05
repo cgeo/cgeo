@@ -1,2 +1,3 @@
 ### Général
-- New: Automatic reminder to create backups
+- New: Automatically perform backups (optional)
+- Fix: Resume importing finished downloads

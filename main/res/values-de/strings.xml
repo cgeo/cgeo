@@ -806,8 +806,7 @@
     <string name="init_backup_history_length_max">Alle behalten</string>
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
     <string name="init_backup_automatic">Automatische Sicherungserinnerung</string>
-    <string name="init_backup_automatic_summary">Erinnert dich alle x Tage daran, eine automatische Sicherung anzulegen (zusätzlich zu den manuell angelegten), 0=aus</string>
-    <string name="init_backup_automatic_reminder">Möchtest du eine automatische Sicherung anlegen? Das dauert nur kurz.</string>
+    <string name="init_backup_automatic_performing">Erstelle Sicherung…</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>
@@ -2096,8 +2095,6 @@
     <string name="check_tiles_found">Routingdaten bereits vorhanden</string>
     <string name="check_tiles_missing">Fehlende Routingdaten gefunden:\n%1$s\n\nMöchtest du diese Dateien herunterladen?%2$s</string>
     <string name="check_tiles_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Routingdaten verfügbar</string>
-    <string name="tileupdate_info">Möchtest du nach Updates der heruntergeladenen Routing-Dateien suchen?</string>
-    <string name="mapupdate_info">Möchtest du nach Updates für Karten und Kartendesigns suchen?</string>
     <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
     <string name="updates_check">Prüfe auf Aktualisierungen</string>
     <string name="mapserver_mapsforge_info">Basiskarten, keine Kartendesigns erforderlich</string>
