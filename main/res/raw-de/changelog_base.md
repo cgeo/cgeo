@@ -23,6 +23,7 @@
 - Neu: Aktuelle Cache-Koordinaten an Geochecker übergeben (falls vom Geochecker unterstützt)
 - Neu: Farbige Attributsymbole (den Attributgruppen folgend)
 - Korrektur: Problem beim Öffnen von Bildern aus dem Galerie-Tab in externen Apps auf einigen Samsung Geräten
+- Korrektur: Fehlende Log-Anzahl (Änderung auf der Webseite)
 
 ### Sonstiges
 - Neu: Übernahme von Geocodes aus der Zwischenablage in Suche auf dem Startbildschirm
