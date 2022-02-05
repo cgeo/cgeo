@@ -23,6 +23,7 @@
 - Nové: Odoslanie aktuálnych súradníc kešky do overovača (ak to overovač podporuje)
 - Nové: Farebné ikony atribútov (podľa skupín atribútov)
 - Fix: Problem opening pictures from gallery tab in external apps on some Samsung devices
+- Fix: Missing log count (website change)
 
 ### Iné
 - Nové: Rýchle načítanie geokódov z textu schránky pri vyhľadávaní na hlavnej obrazovke
