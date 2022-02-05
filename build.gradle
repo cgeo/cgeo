@@ -128,7 +128,7 @@ subprojects {
         google()
         // integrate as last one - for versions by commit ID
         maven {
-            url 'https://jitpack.io'
+            url 'https://dl.google.com/dl/android/maven2'
         }
     }
 
