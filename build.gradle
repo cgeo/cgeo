@@ -123,9 +123,10 @@ allprojects {
  */
 subprojects {
     repositories {
-        mavenCentral()
-        // Android Support libraries are now in an online Maven repository
         google()
+        // Android Support libraries are now in an oline Maven repository
+        mavenCentral()
+        
         // integrate as last one - for versions by commit ID
         maven {
             url 'https://jitpack.io'
