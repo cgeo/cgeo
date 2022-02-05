@@ -21,10 +21,10 @@ android {
         minSdkVersion 21
         //noinspection OldTargetApi
         targetSdkVersion 30
+        resConfigs 'en', 'ar', 'ca', 'ceb', 'cs', 'da', 'de', 'el', 'es', 'fi', 'fil', 'fr', 'hu', 'in', 'it', 'ja', 'ko', 'lt', 'lv', 'nb', 'nl', 'pl', 'pt', 'ro', 'ru', 'sk', 'sl', 'sv', 'tl', 'tr', 'zh-rTW'
 
         // include only those language resources from libraries which we actively maintain ourselves in the translation project
         // not yet enough translations (~50%): "is","iw" (="he"),"zh"
-        resConfigs "en","ar","ca","ceb","cs","da","de","el","es","fi","fil","fr","hu","in","it","ja","ko","lt","lv","nb","nl","pl","pt","ro","ru","sk","sl","sv","tl","tr","zh-rTW"
     }
 
     sourceSets {
@@ -36,18 +36,19 @@ android {
         }
     }
 
-    lintOptions {
-        // generally we accept lint errors when building
-        abortOnError false
-
-        // abort release builds in case of FATAL errors
-        checkReleaseBuilds true
-    }
 
     buildTypes {
         release {
             signingConfig signingConfigs.release
         }
+    }
+    lint {
+	// generally we accept lint errors when building
+        abortOnError false
+
+
+	// abort release builds in case of FATAL errors
+        checkReleaseBuilds true
     }
 }
 
