@@ -791,7 +791,6 @@
         <item>Tmavý</item>
     </string-array>
     <string name="init_wallpaper">Tapeta</string>
-    <string name="init_summary_wallpaper">Zobrazit tapetu jako pozadí hlavní obrazovky</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
