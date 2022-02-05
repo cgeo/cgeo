@@ -423,7 +423,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             updateUserInfoHandler.sendEmptyMessage(-1);
             cLog.add("perm");
 
-            binding.getRoot().setBackground(Settings.isWallpaper() ? WallpaperManager.getInstance(this).getDrawable() : null);
+            ((ImageView) findViewById(R.id.background)).setImageDrawable(Settings.isWallpaper() ? WallpaperManager.getInstance(this).getDrawable() : null);
 
             init();
         }
