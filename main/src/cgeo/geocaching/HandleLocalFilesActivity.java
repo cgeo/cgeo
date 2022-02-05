@@ -56,7 +56,7 @@ public class HandleLocalFilesActivity extends AbstractActivity {
     private void continueWithForegroundService(@SuppressWarnings("rawtypes") final Class clazz, final Intent intent) {
         final Intent forwarder = new Intent(intent);
         forwarder.setClass(this, clazz);
-        ContextCompat.startForegroundService(this, intent);
+        ContextCompat.startForegroundService(this, forwarder);
         finish();
     }
 

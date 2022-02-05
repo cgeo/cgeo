@@ -52,6 +52,7 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.ui.ViewUtils;
@@ -59,6 +60,7 @@ import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
@@ -769,6 +771,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final Set<String> geocodesInViewport = getGeocodesForCachesInViewport();
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
+            if (!BranchDetectionHelper.isProductionBuild()) {
+                menu.findItem(R.id.menu_store_caches_background).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
+            }
 
             menu.findItem(R.id.menu_theme_mode).setVisible(false); // Always false, this is only used for Google Maps
 
@@ -823,6 +828,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return storeCaches(getGeocodesForCachesInViewport());
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
+        } else if (id == R.id.menu_store_caches_background) {
+            CacheDownloaderService.downloadCaches(activity, getGeocodesForCachesInViewport());
         } else if (id == R.id.menu_theme_mode) {
             //this will never happen, Google does not support mapsforge themes -> do nothing
         } else if (id == R.id.menu_as_list) {

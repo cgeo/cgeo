@@ -65,7 +65,15 @@ public class ReceiveDownloadService extends AbstractForegroundIntentService {
     }
 
     @Override
+    protected int getForegroundNotificationId() {
+        return Notifications.ID_FOREGROUND_NOTIFICATION_MAP_IMPORT;
+    }
+
+    @Override
     protected void onHandleIntent(final @Nullable Intent intent) {
+        if (intent == null) {
+            return;
+        }
 
         uri = intent.getData();
         final String preset = intent.getStringExtra(Intents.EXTRA_FILENAME);
@@ -251,7 +259,7 @@ public class ReceiveDownloadService extends AbstractForegroundIntentService {
                 bytesCopied += length;
                 if ((System.currentTimeMillis() - lastPublishTime) > 500) { // avoid message flooding
                     notification.setContentText(getString(R.string.receivedownload_amount_copied, Formatter.formatBytes(bytesCopied)));
-                    notificationManager.notify(foregroundNotificationId, notification.build());
+                    updateForegroundNotification();
                     lastPublishTime = System.currentTimeMillis();
                 }
             }

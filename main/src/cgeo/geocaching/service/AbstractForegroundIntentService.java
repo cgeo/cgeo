@@ -9,11 +9,10 @@ import android.os.PowerManager;
 import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
 
-public abstract class AbstractForegroundIntentService extends IntentService implements IAbstractForgreoundIntentService {
+public abstract class AbstractForegroundIntentService extends IntentService {
     protected static String logTag = "ForegroundIntentService";
 
     protected final int wakelockTimeout = 10 * 60 * 1000;
-    protected final int foregroundNotificationId = Notifications.ID_FOREGROUND_NOTIFICATION;
 
     protected NotificationCompat.Builder notification;
     protected NotificationManagerCompat notificationManager;
@@ -24,6 +23,9 @@ public abstract class AbstractForegroundIntentService extends IntentService impl
         setIntentRedelivery(true);
     }
 
+    protected abstract NotificationCompat.Builder createInitialNotification();
+
+    protected abstract int getForegroundNotificationId();
 
     @Override
     public void onCreate() {
@@ -38,7 +40,7 @@ public abstract class AbstractForegroundIntentService extends IntentService impl
         notificationManager = Notifications.getNotificationManager(this);
         notification = createInitialNotification();
 
-        startForeground(foregroundNotificationId, notification.build());
+        startForeground(getForegroundNotificationId(), notification.build());
     }
 
 
@@ -48,5 +50,9 @@ public abstract class AbstractForegroundIntentService extends IntentService impl
         Log.v(logTag + ".onDestroy");
         wakeLock.release();
         Log.v(logTag + " - WakeLock released");
+    }
+
+    protected void updateForegroundNotification() {
+        notificationManager.notify(getForegroundNotificationId(), notification.build());
     }
 }
