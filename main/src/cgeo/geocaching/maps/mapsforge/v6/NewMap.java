@@ -62,6 +62,7 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
@@ -71,6 +72,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.ApplicationSettings;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.FilterUtils;
@@ -402,6 +404,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(false);
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!caches.isDownloading() && new SearchResult(visibleCacheGeocodes).hasUnsavedCaches());
+            if (!BranchDetectionHelper.isProductionBuild()) {
+                menu.findItem(R.id.menu_store_caches_background).setVisible(!caches.isDownloading() && !visibleCacheGeocodes.isEmpty());
+            }
 
             final boolean tileLayerHasThemes = tileLayerHasThemes();
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes);
@@ -460,6 +465,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             return storeCaches(caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
+        } else if (id == R.id.menu_store_caches_background) {
+            CacheDownloaderService.downloadCaches(this, caches.getVisibleCacheGeocodes());
         } else if (id == R.id.menu_theme_mode) {
             this.renderThemeHelper.selectMapTheme(this.tileLayer, this.tileCache);
         } else if (id == R.id.menu_theme_options) {

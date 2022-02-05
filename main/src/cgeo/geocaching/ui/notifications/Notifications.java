@@ -14,7 +14,9 @@ public class Notifications {
     public static final int UNIQUE_ID_RANGE_START = 1000;
 
     public static final int ID_PROXIMITY_NOTIFICATION = 101;
-    public static final int ID_FOREGROUND_NOTIFICATION = 111;
+
+    public static final int ID_FOREGROUND_NOTIFICATION_MAP_IMPORT = 111;
+    public static final int ID_FOREGROUND_NOTIFICATION_CACHES_DOWNLOADER = 112;
 
     private Notifications() {
         // no instances

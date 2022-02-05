@@ -70,6 +70,12 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
+        android:id="@+id/menu_store_caches_background"
+        android:title="@string/caches_store_background"
+        android:visible="false"
+        app:showAsAction="ifRoom|withText">
+    </item>
+    <item
         android:id="@+id/menu_map_rotation"
         android:title="@string/map_rotation"
         android:visible="false"

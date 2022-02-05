@@ -921,6 +921,8 @@
 
         <service android:name=".downloader.ReceiveDownloadService" />
 
+        <service android:name=".service.CacheDownloaderService" />
+
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
     </application>
