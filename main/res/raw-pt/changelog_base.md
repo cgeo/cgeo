@@ -23,6 +23,7 @@
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
 - Novo: Ícones de atributos coloridos (seguindo grupos de atributos)
 - Correcção: Problema ao abrir fotos do separador Galeria em aplicações externas, em alguns dispositivos Samsung
+- Fix: Missing log count (website change)
 
 ### Outro
 - Novo: Carregamento rápido de geo-códigos a partir do texto da área de transferência, na pesquisa do ecrã principal
