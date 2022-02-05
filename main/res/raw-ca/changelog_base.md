@@ -9,7 +9,7 @@
 - Nou: Opció per comprovar si hi ha dades d'encaminament que falten a la finestra gràfica actual
 - Novetat: llegenda del tema per als temes Elevació, Elements i Freizeitkarte
 - Correcció: Habiliteu l'encaminament amb l'aplicació externa BRouter versió 1.6.3
-- Fix: Avoid map duplication by map downloader in certain conditions
+- Correcció: Eviteu la duplicació de mapes mitjançant el descarregador de mapes en determinades condicions
 
 ### Llistes de catxés
 - Nou: Opció per seleccionar els 20 cachés següents
@@ -23,6 +23,7 @@
 - Nou: Passeu les coordenades actuals del catxé al geochecker (si és compatible amb el geochecker)
 - Nou: Icones d'atributs de colors (grups d'atributs)
 - Solució: Problema en obrir imatges des de la pestanya de la galeria en aplicacions externes en alguns dispositius Samsung
+- Correcció: Faltava el recompte de registres (canvi de lloc web)
 
 ### Altres
 - Novetat: carregueu ràpidament geocodis del text del porta-retalls a la cerca de la pantalla principal
