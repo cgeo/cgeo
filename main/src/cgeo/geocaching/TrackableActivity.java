@@ -641,7 +641,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
                 clickedItemText = ((TextView) view).getText();
                 final int viewId = view.getId();
                 if (viewId == R.id.value) { // name, TB-code, origin, released, distance
-                    final TextView textView = ((View) view.getParent()).findViewById(R.id.name);
+                    final TextView textView = ((View) view.getParent().getParent()).findViewById(R.id.name);
                     final CharSequence itemTitle = textView.getText();
                     buildDetailsContextMenu(actionMode, menu, itemTitle, true);
                 } else if (viewId == R.id.goal) {
