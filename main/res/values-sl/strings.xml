@@ -670,7 +670,6 @@
     <string name="waypoint_note">Komentar</string>
     <string name="waypoint_visited">Obiskano</string>
     <string name="waypoint_save">Shrani</string>
-    <string name="waypoint_cancel_edit">Razveljavi</string>
     <string name="waypoint_loading">Nalaganje točke…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Koordinate zaklada se niso spremenile</string>
     <string name="waypoint_set_as_cache_coords">Nastavi kot koordinate zaklada v c:geo</string>
@@ -1081,6 +1080,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Razveljavi</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
