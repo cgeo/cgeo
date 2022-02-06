@@ -23,7 +23,7 @@
 - Novo: Passar as coordenadas da cache actual para o geochecker (se suportado pelo geochecker)
 - Novo: Ícones de atributos coloridos (seguindo grupos de atributos)
 - Correcção: Problema ao abrir fotos do separador Galeria em aplicações externas, em alguns dispositivos Samsung
-- Fix: Missing log count (website change)
+- Correcção: Contador de registos em falta (alteração no sítio ‘web’)
 
 ### Outro
 - Novo: Carregamento rápido de geo-códigos a partir do texto da área de transferência, na pesquisa do ecrã principal
@@ -38,6 +38,8 @@
 - Correcção: Evitar verificações sucessivas de actualização de mapas/blocos de encaminhamento, com interval=0
 - Correcção: Optimizado o suporte a aplicações externas de auto-preenchimento de palavras-passe nas definições
 - Correcção: Activação das dicas de contexto (tooltips) em sistemas Android inferiores à versão 8
+- Correcção: Falha da aplicação ao fazer um toque longo no código de um TB, nos detalhes do mesmo
+- Correcção: Envio das notas de campo (mudança do sítio web)
 - Definições redesenhadas para atender às especificações actuais do Android
 - Actualizada a API de MapsWithMe
 
