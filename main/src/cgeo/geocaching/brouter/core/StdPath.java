@@ -238,12 +238,13 @@ final class StdPath extends OsmPath {
         final double fRoll = rc.totalMass * GRAVITY * (rc.defaultCR + incline);
         if (rc.footMode || rc.expctxWay.getCostfactor() > 4.9) {
             // Use Tobler's hiking function for walking sections
-            speed = 6 * FastMathUtils.exp(-3.5 * Math.abs(incline + 0.05)) / 3.6;
+            speed = rc.maxSpeed * 3.6;
+            speed = (speed * FastMathUtils.exp(-3.5 * Math.abs(incline + 0.05))) / 3.6;
         } else if (rc.bikeMode) {
             speed = solveCubic(rc.sCX, fRoll, rc.bikerPower);
             speed = Math.min(speed, wayMaxspeed);
-        } else {
-            return;
+        } else { // all other
+            speed = wayMaxspeed;
         }
         final float dt = (float) (dist / speed);
         totalTime += dt;
