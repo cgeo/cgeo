@@ -806,6 +806,7 @@
     <string name="init_backup_history_length_max">Alle behalten</string>
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
     <string name="init_backup_automatic">Automatische Sicherungserinnerung</string>
+    <string name="init_backup_automatic_summary">Führt alle x Tage eine automatische Sicherung durch (zusätzlich zu manuell erstellten Backups), 0=off</string>
     <string name="init_backup_automatic_performing">Erstelle Sicherung…</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
@@ -1356,7 +1357,6 @@
     <string name="waypoint_set_visited">Wegpunkt auf Besucht gesetzt</string>
     <string name="waypoint_unset_visited">Wegpunkt auf Nicht Besucht gesetzt</string>
     <string name="waypoint_save">Speichern</string>
-    <string name="waypoint_cancel_edit">Abbrechen</string>
     <string name="waypoint_loading">Lade Wegpunkt…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Cache-Koordinaten nicht ändern</string>
     <string name="waypoint_set_as_cache_coords">Als Cache-Koordinaten lokal setzen</string>
@@ -2095,6 +2095,8 @@
     <string name="check_tiles_found">Routingdaten bereits vorhanden</string>
     <string name="check_tiles_missing">Fehlende Routingdaten gefunden:\n%1$s\n\nMöchtest du diese Dateien herunterladen?%2$s</string>
     <string name="check_tiles_unsupported">Warnung: Für die gewählte Region sind (mindestens teilweise) keine Routingdaten verfügbar</string>
+    <string name="tileupdate_info">Tippe hier, um nach Updates für heruntergeladene Routingdaten zu suchen. Lange Tippen um später erinnert zu werden.</string>
+    <string name="mapupdate_info">Tippe hier, um nach Aktualisierungen von Karten- und Design-Dateien zu suchen. Lange Tippen um später erinnert zu werden.</string>
     <string name="no_updates_found">Keine Aktualisierungen gefunden</string>
     <string name="updates_check">Prüfe auf Aktualisierungen</string>
     <string name="mapserver_mapsforge_info">Basiskarten, keine Kartendesigns erforderlich</string>
@@ -2166,6 +2168,7 @@
     <string name="finish">Fertig</string>
     <string name="back">Zurück</string>
     <string name="later">Später</string>
+    <string name="cancel">Abbrechen</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
     <string name="touch_again_to_exit">Zum Beenden erneut tippen</string>
