@@ -1355,7 +1355,6 @@
     <string name="waypoint_set_visited">Punt de ruta definit com a visitat</string>
     <string name="waypoint_unset_visited">Punt de ruta definit com a no visitat</string>
     <string name="waypoint_save">Desa</string>
-    <string name="waypoint_cancel_edit">Cancel•la</string>
     <string name="waypoint_loading">S\'està carregant la fita…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">No s\'ha fet cap canvi a les coordenades del catxé</string>
     <string name="waypoint_set_as_cache_coords">Estableix com a coordenades del catxé al c:geo</string>
@@ -2163,6 +2162,7 @@
     <string name="finish">Acabar</string>
     <string name="back">Enrere</string>
     <string name="later">Més tard</string>
+    <string name="cancel">Cancel•la</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
