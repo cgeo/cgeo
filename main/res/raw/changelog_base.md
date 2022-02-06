@@ -38,6 +38,7 @@
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
 - Fix: Optimize support to autofill passwords from external password store apps in settings
 - Fix: Enable tooltips for systems running on Android below version 8
+- Fix: Crash on long-tap on trackable code in trackable details
 - Refactored settings to meet current Android specifications
 - Updated MapsWithMe API
 
