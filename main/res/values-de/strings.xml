@@ -1354,7 +1354,6 @@
     <string name="waypoint_set_visited">Wegpunkt auf Besucht gesetzt</string>
     <string name="waypoint_unset_visited">Wegpunkt auf Nicht Besucht gesetzt</string>
     <string name="waypoint_save">Speichern</string>
-    <string name="waypoint_cancel_edit">Abbrechen</string>
     <string name="waypoint_loading">Lade Wegpunkt…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Cache-Koordinaten nicht ändern</string>
     <string name="waypoint_set_as_cache_coords">Als Cache-Koordinaten lokal setzen</string>
@@ -2166,6 +2165,8 @@
     <string name="finish">Fertig</string>
     <string name="back">Zurück</string>
     <string name="later">Später</string>
+    <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
     <string name="touch_again_to_exit">Zum Beenden erneut tippen</string>
