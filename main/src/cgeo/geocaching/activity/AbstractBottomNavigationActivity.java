@@ -1,5 +1,6 @@
 package cgeo.geocaching.activity;
 
+import cgeo.geocaching.CacheDetailActivity;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.MainActivity;
@@ -12,8 +13,12 @@ import cgeo.geocaching.databinding.ActivityBottomNavigationBinding;
 import cgeo.geocaching.list.PseudoList;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.maps.DefaultMap;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.GeoItemSelectorUtils;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
 
 import android.content.BroadcastReceiver;
@@ -24,6 +29,9 @@ import android.net.ConnectivityManager;
 import android.os.Handler;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.Toast;
 
 import androidx.annotation.IdRes;
@@ -32,6 +40,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
 
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -81,7 +90,8 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         // --- other initialization --- //
         updateSelectedBottomNavItemId();
         // long click event listeners
-        findViewById(R.id.page_list).setOnLongClickListener(view -> onListsLongClicked());
+        findViewById(MENU_LIST).setOnLongClickListener(view -> onListsLongClicked());
+        findViewById(MENU_SEARCH).setOnLongClickListener(view -> onSearchLongClicked());
         // will be called if c:geo cannot log in
         registerLoginIssueHandler(loginHandler, getUpdateUserInfoHandler(), this::onLoginIssue);
     }
@@ -109,6 +119,22 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             }
             ActivityMixin.overrideTransitionToFade(this);
         }, false, PseudoList.NEW_LIST.id);
+        return true;
+    }
+
+    private boolean onSearchLongClicked() {
+        final ArrayList<Geocache> lastCaches = new ArrayList<>(DataStore.getLastOpenedCaches());
+        final ListAdapter adapter = new ArrayAdapter<Geocache>(this, R.layout.cacheslist_item_select, lastCaches) {
+            @Override
+            public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
+                return GeoItemSelectorUtils.createGeocacheItemView(AbstractBottomNavigationActivity.this, getItem(position),
+                        GeoItemSelectorUtils.getOrCreateView(AbstractBottomNavigationActivity.this, convertView, parent));
+            }
+        };
+        Dialogs.newBuilder(this)
+                .setTitle(R.string.cache_recently_viewed)
+                .setAdapter(adapter, (dialog, which) -> CacheDetailActivity.startActivity(this, lastCaches.get(which).getGeocode()))
+                .show();
         return true;
     }
 
