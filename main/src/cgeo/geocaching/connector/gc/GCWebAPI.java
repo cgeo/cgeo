@@ -639,6 +639,7 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     static final class CallerSpecific {
+        @JsonProperty("favorited")
         boolean favorited;
 
         CallerSpecific(final boolean favorited) {
@@ -696,11 +697,17 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class GeocacheLog {
+        @JsonProperty("geocache")
         final Geocache geocache;
+        @JsonProperty("logType")
         final String logType;
+        @JsonProperty("ownerIsViewing")
         final boolean ownerIsViewing;
+        @JsonProperty("logDate")
         final String logDate;
+        @JsonProperty("logText")
         final String logText;
+        @JsonProperty("usedFavoritePoint")
         final boolean usedFavoritePoint;
 
         GeocacheLog(final String id, final String referenceCode, final double latitude,
@@ -717,9 +724,13 @@ class GCWebAPI {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class Geocache {
+            @JsonProperty("id")
             final String id;
+            @JsonProperty("referenceCode")
             final String referenceCode;
+            @JsonProperty("postedCoordinates")
             final PostedCoordinates postedCoordinates;
+            @JsonProperty("callerSpecific")
             final CallerSpecific callerSpecific;
 
             Geocache(final String id, final String referenceCode, final double latitude,
