@@ -510,7 +510,6 @@
     <string name="waypoint_note">Athugasemd</string>
     <string name="waypoint_visited">Heimsótt</string>
     <string name="waypoint_save">Vista</string>
-    <string name="waypoint_cancel_edit">Hætta við</string>
     <string name="waypoint_set_as_cache_coords">Setja sem hnit kassa í c:geo</string>
     <string name="waypoint_save_and_modify_on_website">Setja sem hnit kassa í c:geo og á vefsíðunni</string>
     <string name="waypoint_reset">Endurstilla</string>
@@ -723,6 +722,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Hætta við</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
