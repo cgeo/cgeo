@@ -1235,7 +1235,6 @@
     <string name="waypoint_set_visited">Kelio taškas nustatytas kaip aplankytas</string>
     <string name="waypoint_unset_visited">Kelio taškas nustatytas kaip neaplankytas</string>
     <string name="waypoint_save">Išsaugoti</string>
-    <string name="waypoint_cancel_edit">Atšaukti</string>
     <string name="waypoint_loading">Įkeliamas papildomas taškas…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Nekeisti slėptuvės koordinačių</string>
     <string name="waypoint_set_as_cache_coords">Nustatyti kaip slėptuvės koordinatės c:geo programoje</string>
@@ -1945,6 +1944,7 @@
     <string name="finish">Baigta</string>
     <string name="back">Atgal</string>
     <string name="later">Vėliau</string>
+    <string name="cancel">Atšaukti</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Pažymėti viską</string>
     <!-- render theme legend: category "areas" -->
