@@ -1,3 +1,3 @@
 ### General
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
+- Nou: Realitza còpies de seguretat automàticament (opcional)
+- Correcció: Reprèn la importació de les descàrregues acabades
