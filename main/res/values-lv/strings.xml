@@ -887,7 +887,6 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_set_visited">Atzīmēt starpposmu kā apmeklētu</string>
     <string name="waypoint_unset_visited">Atzīmēt starpposmu kā neapmeklētu</string>
     <string name="waypoint_save">Saglabāt</string>
-    <string name="waypoint_cancel_edit">Atcelt</string>
     <string name="waypoint_loading">Notiek starpposma ielāde…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Neizmainīt slēpņa koordinātas</string>
     <string name="waypoint_set_as_cache_coords">Iestatīt kā slēpņa koordinātas iekš c:geo</string>
@@ -1386,6 +1385,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Atcelt</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
