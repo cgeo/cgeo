@@ -23,6 +23,7 @@
 - Nouveauté : Envoyer les coordonnées de la cache à geochecker
 - Nouveau : Icônes d'attributs colorés (groupes d'attributs suivants)
 - Correction : Problème lors de l'ouverture des images depuis l'onglet Galerie dans les applications externes sur certains appareils Samsung
+- Fix: Missing log count (website change)
 
 ### Divers
 - Nouveau : Charger rapidement les géocodes à partir du texte du presse-papiers dans la recherche de l'écran principal

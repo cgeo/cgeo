@@ -779,6 +779,8 @@
         <item>Clar</item>
         <item>Fosc</item>
     </string-array>
+    <string name="init_wallpaper">Fons de pantalla</string>
+    <string name="init_summary_wallpaper">Mostra el fons de pantalla del dispositiu com a fons de la pantalla d\'inici</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>

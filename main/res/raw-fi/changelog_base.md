@@ -23,6 +23,7 @@
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
 - Uusi: Värilliset attribuuttikuvakkeet (seuraavat attribuuttiryhmät)
 - Korjaa: Ongelma kuvien avaamisessa gallerian välilehdeltä ulkoisissa sovelluksissa joissakin Samsungin laitteissa
+- Fix: Missing log count (website change)
 
 ### Muu
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
