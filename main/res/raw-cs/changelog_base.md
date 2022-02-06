@@ -38,6 +38,8 @@
 - Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/směrování s intervalem 0
 - Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
 - Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
-- Přepracováno nastavení pro splnění aktuálních specifikací systému Android
-- Aktualizováno MapsWithMe API
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 
