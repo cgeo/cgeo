@@ -768,7 +768,6 @@
     <string name="waypoint_user_note">Notă utilizator</string>
     <string name="waypoint_visited">Vizitat</string>
     <string name="waypoint_save">Salvează</string>
-    <string name="waypoint_cancel_edit">Anulează</string>
     <string name="waypoint_loading">Încărcare punct…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Nu se modifică coordonatele cutiei</string>
     <string name="waypoint_set_as_cache_coords">Salvează ca coordonatele geocutiei în c:geo</string>
@@ -1240,6 +1239,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Anulează</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
