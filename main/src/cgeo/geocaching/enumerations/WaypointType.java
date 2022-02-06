@@ -30,7 +30,8 @@ public enum WaypointType {
     STAGE("stage", "s", "Physical Stage", R.string.wp_stage, R.string.wpnew_stage, R.drawable.waypoint_stage, 2, R.drawable.dot_waypoint_stage),
     TRAILHEAD("trailhead", "t", "Trailhead", R.string.wp_trailhead, R.string.wpnew_trailhead, R.drawable.waypoint_trailhead, 1, R.drawable.dot_waypoint_trailhead),
     WAYPOINT("waypoint", "w", "Reference Point", R.string.wp_waypoint, R.string.wpnew_waypoint, R.drawable.waypoint_waypoint, 2, R.drawable.dot_waypoint_waypoint),
-    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.string.wpnew_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_waypoint);
+    ORIGINAL("original", "h", "Original Coordinates", R.string.wp_original, R.string.wpnew_original, R.drawable.waypoint_waypoint, 4, R.drawable.dot_waypoint_waypoint),
+    GENERATED("generated", "g", "Generated (c:geo)", R.string.wp_generated, R.string.wpnew_generated, R.drawable.waypoint_generated, 0, R.drawable.dot_waypoint_generated);
 
     @NonNull
     public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);

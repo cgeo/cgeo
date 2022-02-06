@@ -1,0 +1,22 @@
+<!-- based on material.io / calculate -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="30"
+    android:viewportHeight="30">
+  <path
+      android:fillColor="#80000000"
+      android:pathData="M9.25,10.72h5v1.5h-5z"/>
+  <path
+      android:fillColor="#80000000"
+      android:pathData="M16,18.75h5v1.5h-5z"/>
+  <path
+      android:fillColor="#80000000"
+      android:pathData="M16,16.25h5v1.5h-5z"/>
+  <path
+      android:fillColor="#80000000"
+      android:pathData="M11,21l1.5,0l0,-2l2,0l0,-1.5l-2,0l0,-2l-1.5,0l0,2l-2,0l0,1.5l2,0z"/>
+  <path
+      android:fillColor="#80000000"
+      android:pathData="M17.09,13.95l1.41,-1.41l1.41,1.41l1.06,-1.06l-1.41,-1.42l1.41,-1.41l-1.06,-1.06l-1.41,1.41l-1.41,-1.41l-1.06,1.06l1.41,1.41l-1.41,1.42z"/>
+</vector>
