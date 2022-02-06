@@ -1378,7 +1378,6 @@
     <string name="waypoint_set_visited">Punkt drogi ustawiony jako odwiedzony</string>
     <string name="waypoint_unset_visited">Punkt drogi ustawiony jako nieodwiedzony</string>
     <string name="waypoint_save">Zapisz</string>
-    <string name="waypoint_cancel_edit">Anuluj</string>
     <string name="waypoint_loading">Ładuję punkt nawigacji…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Współrzędne skrzynki bez zmian</string>
     <string name="waypoint_set_as_cache_coords">Ustaw jako współrzędne skrzynki w c:geo</string>
@@ -2216,6 +2215,7 @@
     <string name="finish">Zakończ</string>
     <string name="back">Wstecz</string>
     <string name="later">Później</string>
+    <string name="cancel">Anuluj</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
     <string name="touch_again_to_exit">Proszę dotknąć ponownie, aby wyjść</string>
