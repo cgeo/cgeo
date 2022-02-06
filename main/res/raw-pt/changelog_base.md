@@ -1,3 +1,3 @@
 ### Geral
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
+- Novo: Executar cópias de segurança automaticamente (opcional)
+- Correcção: Continuar a importação de transferências concluídas
