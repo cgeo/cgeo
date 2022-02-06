@@ -38,6 +38,8 @@
 - Corretto: Evita i controlli ripetuti degli aggiornamenti delle mappe/routing con intervallo=0
 - Corretto: Ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
 - Corretto: Abilita suggerimenti per sistemi in esecuzione su Android in versioni precedenti alla 8
-- Impostazioni ripristinate per soddisfare le attuali specifiche di Android
-- API di MapsWithMe aggiornata
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 
