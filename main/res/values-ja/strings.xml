@@ -765,6 +765,8 @@
         <item>ライト</item>
         <item>ダーク</item>
     </string-array>
+    <string name="init_wallpaper">壁紙</string>
+    <string name="init_summary_wallpaper">端末の壁紙をホーム画面の背景として表示</string>
     <!-- backup / restore -->
     <string name="init_backup_title">バックアップの作成</string>
     <string name="init_backup_summary">キャッシュ、ウェイポイント、c:geo設定がバックアップされますがキャッシュ画像は対象外です。\nデバイスを紛失してもデータを復元するためにはバックアップファイルをほかの場所にコピーしておく必要があります</string>
@@ -1254,6 +1256,8 @@
     <string name="cache_time_full_hours">時</string>
     <string name="cache_whereyougo_start">WhereYouGoアプリでWherigoカートリッジをダウンロードして始めます</string>
     <string name="cache_whereyougo_install">WherigoカートリッジをダウンロードするにはWhereYouGoアプリのインストールが必要です</string>
+    <string name="cache_chirpwolf_start">このキャッシュはGarmin chirp(ジオキャッシュ ビーコン)または別の種類の無線ビーコンを使用してるようです。Chirp Wolfでchirpデータを読み込めます</string>
+    <string name="cache_chirpwolf_install">このキャッシュはGarmin chirp(ジオキャッシュ ビーコン)または別の種類の無線ビーコンを使用してるようです。chirpデータを読み込むにはChirp Wolfのインストールが必要です</string>
     <string name="cache_alc_start">Adventure Labアプリでこのアドベンチャーを始めます</string>
     <string name="cache_alc_install">このアドベンチャーを始めるにはAdventure Labアプリのインストールが必要です</string>
     <string name="context_share_as_text">テキストを共有</string>
@@ -1325,7 +1329,6 @@
     <string name="waypoint_set_visited">ウェイポイントを訪問済に設定しました</string>
     <string name="waypoint_unset_visited">ウェイポイントを未訪問に設定しました</string>
     <string name="waypoint_save">保存</string>
-    <string name="waypoint_cancel_edit">キャンセル</string>
     <string name="waypoint_loading">ウェイポイントを読み込み中…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">キャッシュ座標を変更しない</string>
     <string name="waypoint_set_as_cache_coords">c:geo内部のみでキャッシュ座標を変更</string>
@@ -1395,6 +1398,8 @@
     <string name="map_show_other_title">他の表示:</string>
     <string name="map_settings_cache_filter_too_complex_title">キャッシュフィルタが複雑すぎます</string>
     <string name="map_settings_cache_filter_too_complex_message">現在のキャッシュフィルタは複雑すぎて、フィルタ条件を適用できません。 通常、単純なAND条件の代わりにNOT(除外)またはOR条件が含まれていることを意味します。</string>
+    <string name="map_theme_legend">地図の凡例</string>
+    <string name="map_theme_legend_info">カテゴリをタップするとカテゴリを開いたり閉じたりできます。各凡例をロングタップすると短い情報が表示されます。 詳細な凡例をオンラインで見るには情報アイコンをタップしてください</string>
     <!-- search -->
     <string name="search_bar_hint">キャッシュ/トラッカブルを検索</string>
     <string name="search_bar_hint_settings">検索設定</string>
@@ -1792,12 +1797,15 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="attribute_blind_people_no">視覚障がい者に非対応</string>
     <string name="attribute_unknown">属性不明</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">装備</string>
     <string name="cat_type">タイプ</string>
     <string name="cat_location">キャッシュの場所</string>
     <string name="cat_duration">距離/時間</string>
     <string name="cat_surrounding">キャッシュ周辺</string>
     <string name="cat_permissions">許可</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">To make geocaching easier, to make users lazier.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1923,6 +1931,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="individual_route_error_toggling_waypoint">ルートポイントの切替エラー</string>
     <string name="individual_route_error_single_waypoint_mode">一つだけのウェイポイントでは利用できません</string>
     <string name="map_sort_individual_route">個別ルートの編集</string>
+    <string name="map_export_individual_route">個別ルートのエクスポート</string>
     <string name="map_load_individual_route">個別ルートの読み込み</string>
     <string name="map_load_individual_route_confirm">現在のルートに上書きしますか?</string>
     <string name="map_autotarget_individual_route">ルートの開始地点を目的地に設定</string>
@@ -2028,7 +2037,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
     <string name="check_tiles_missing">ルート検索に必要なルート検索データが見つかりました:\n%1$s\n\nこれらのファイルをダウンロードしますか?%2$s</string>
     <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
-    <string name="tileupdate_info">ダウンロードしたルート検索データの更新を確認しますか?</string>
+    <string name="tileupdate_info">ルート検索データの更新を確認しますか?</string>
     <string name="mapupdate_info">地図とテーマファイルの更新を確認しますか?</string>
     <string name="no_updates_found">更新はありません。</string>
     <string name="updates_check">更新を確認</string>
@@ -2101,6 +2110,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="finish">終了</string>
     <string name="back">戻る</string>
     <string name="later">後で</string>
+    <string name="cancel">キャンセル</string>
+    <string name="ok">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
     <string name="touch_again_to_exit">もう一度「戻る」を押すと終了します</string>
