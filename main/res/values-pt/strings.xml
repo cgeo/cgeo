@@ -779,6 +779,7 @@
         <item>Escuro</item>
     </string-array>
     <string name="init_wallpaper">Imagem de fundo</string>
+    <string name="init_summary_wallpaper">Mostrar o plano de fundo do dispositivo como fundo do ecrã inicial</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Criar Cópia de Segurança</string>
     <string name="init_backup_summary">Tenha em consideração:\n- Na cópia de segurança são guardadas caches, pontos adicionais e configurações, mas não de imagens em caches.\n\n- Para que possa restaurar os dados mesmo depois de perder o seu telemóvel, os ficheiros das cópias de segurança devem ser copiados para um armazenamento externo.</string>
@@ -805,6 +806,8 @@
     <string name="init_backup_history_length_max">Manter todas</string>
     <string name="init_backup_history_delete_warning">Armazenou mais cópias de segurança do que o seu valor máximo configurado. Quer realmente remover todas as cópias de segurança em excesso?</string>
     <string name="init_backup_automatic">Notificação automática para fazer cópia de segurança</string>
+    <string name="init_backup_automatic_summary">Executa uma cópia de segurança automática a cada x dias (para além de outras criadas manualmente), 0=off</string>
+    <string name="init_backup_automatic_performing">A criar cópia de segurança…</string>
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
     <string name="init_backup_success">A base de dados do c:geo foi copiada com sucesso para:</string>
     <string name="init_backup_failed">A cópia de segurança da base de dados do c:geo falhou.</string>
@@ -1354,7 +1357,6 @@
     <string name="waypoint_set_visited">Ponto adicional definido como visitado</string>
     <string name="waypoint_unset_visited">Ponto adicional definido como não visitado</string>
     <string name="waypoint_save">Guardar</string>
-    <string name="waypoint_cancel_edit">Cancelar</string>
     <string name="waypoint_loading">A carregar ponto adicional…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Não alterar as coordenadas da geocache</string>
     <string name="waypoint_set_as_cache_coords">Definir como coordenadas da geocache no c:geo</string>
@@ -2088,6 +2090,8 @@
     <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
     <string name="check_tiles_missing">Foram encontrados dados de encaminhamento em falta:\n%1$s\n\nDeseja transferir esses ficheiros?%2$s</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
+    <string name="tileupdate_info">Toque aqui para verificar por actualizações de ficheiros de encaminhamento transferidos. Toque longo para adiar.</string>
+    <string name="mapupdate_info">Toque aqui para verificar por actualizações de ficheiros de mapas e temas. Toque longo para adiar.</string>
     <string name="no_updates_found">Nenhuma actualização encontrada</string>
     <string name="updates_check">Verificação de actualizações</string>
     <string name="mapserver_mapsforge_info">Mapas básicos, nenhum tema de mapa necessário</string>
@@ -2159,6 +2163,8 @@
     <string name="finish">Concluído</string>
     <string name="back">Anterior</string>
     <string name="later">Mais tarde</string>
+    <string name="cancel">Cancelar</string>
+    <string name="ok">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
     <string name="touch_again_to_exit">Por favor, toque novamente para sair</string>
@@ -2188,6 +2194,9 @@
     <string name="rtl_reef">recife</string>
     <string name="rtl_dyke">dique</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_paved_path">caminho pavimentado</string>
+    <string name="rtl_paved_path_gravel">caminho pavimentado (gravilha)</string>
+    <string name="rtl_unpaved_path">caminho não pavimentado</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Caminhada, Ciclismo, Escalada</string>
     <string name="rtl_hiking_T1">caminhada T1</string>
@@ -2218,6 +2227,11 @@
     <string name="rtl_info_board">painel de informação</string>
     <string name="rtl_info_office">posto de informação</string>
     <string name="rtl_info_terminal">terminal de informação</string>
+    <string name="rtl_playground">parque infantil</string>
+    <string name="rtl_playground_private">parque infantil privado</string>
+    <string name="rtl_recycling">reciclagem</string>
+    <string name="rtl_shelter">abrigo</string>
+    <string name="rtl_shelter_picnic">abrigo de piquenique</string>
     <string name="rtl_telephone">telefone</string>
     <string name="rtl_toilets">casas de banho</string>
     <string name="rtl_volcano">vulcão</string>
@@ -2239,6 +2253,7 @@
     <string name="rtl_ruins">ruínas</string>
     <string name="rtl_stone_historic">pedra histórica</string>
     <string name="rtl_theatre">teatro</string>
+    <string name="rtl_zoo">jardim zoológico</string>
     <string name="rtl_arts_centre">centro de artes</string>
     <string name="rtl_casino">casino</string>
     <string name="rtl_nightclub">clube nocturno</string>
@@ -2325,6 +2340,7 @@
     <string name="rtl_block">quarteirão</string>
     <string name="rtl_bollard">marco</string>
     <string name="rtl_border_control">controlo fronteiriço</string>
+    <string name="rtl_elevator">elevador</string>
     <string name="rtl_traffic_signal">sinal de tráfego</string>
     <string name="rtl_viewpoint">miradouro</string>
     <string name="rtl_waterfall">cascata</string>
