@@ -1354,7 +1354,6 @@
     <string name="waypoint_set_visited">Waypoint ingesteld als bezocht</string>
     <string name="waypoint_unset_visited">Waypoint ingesteld als niet bezocht</string>
     <string name="waypoint_save">Opslaan</string>
-    <string name="waypoint_cancel_edit">Annuleren</string>
     <string name="waypoint_loading">Waypoint laden…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Wijzig cachecoördinaten niet</string>
     <string name="waypoint_set_as_cache_coords">Zet als cachecoördinaten in c:geo</string>
@@ -2166,6 +2165,7 @@
     <string name="finish">Voltooien</string>
     <string name="back">Terug</string>
     <string name="later">Later</string>
+    <string name="cancel">Annuleren</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
     <string name="touch_again_to_exit">Nogmaals aanraken om af te sluiten</string>
