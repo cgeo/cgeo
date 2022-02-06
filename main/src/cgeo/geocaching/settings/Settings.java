@@ -98,6 +98,8 @@ public class Settings {
 
     public static final int DAYS_TO_SECONDS = 24 * 60 * 60;
 
+    private static final int HISTORY_SIZE = 50;
+
     private static final int MAP_SOURCE_DEFAULT = GoogleMapProvider.GOOGLE_MAP_ID.hashCode();
 
     private static final String PHONE_MODEL_AND_SDK = Build.MODEL + "/" + Build.VERSION.SDK_INT;
@@ -1098,8 +1100,6 @@ public class Settings {
         }
         return mapSource;
     }
-
-    private static final int HISTORY_SIZE = 10;
 
     public static synchronized void setMapSource(final MapSource newMapSource) {
         if (newMapSource != null && newMapSource.isAvailable()) {
