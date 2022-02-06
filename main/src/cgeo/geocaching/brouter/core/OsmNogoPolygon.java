@@ -208,7 +208,9 @@ public class OsmNogoPolygon extends OsmNodeNamed {
         int cx = (cxmax + cxmin) / 2; // center of circle
         int cy = (cymax + cymin) / 2;
 
-        final double[] lonlat2m = CheapRulerHelper.getLonLatToMeterScales(cy);
+        double[] lonlat2m = CheapRulerHelper.getLonLatToMeterScales(cy); // conversion-factors at the center of circle
+        double dlon2m = lonlat2m[0];
+        double dlat2m = lonlat2m[1];
 
         double rad = 0;  // radius
 
@@ -219,7 +221,12 @@ public class OsmNogoPolygon extends OsmNodeNamed {
             // now identify the point outside of the circle that has the greatest distance
             for (int i = 0; i < points.size(); i++) {
                 final Point p = points.get(i);
-                final double dist = CheapRulerHelper.distance(p.x, p.y, cx, cy);
+
+                // to get precisely the same results as in RoutingContext.calcDistance()
+                // it's crucial to use the factors of the center!
+                final double x1 = (cx - p.x) * dlon2m;
+                final double y1 = (cy - p.y) * dlat2m;
+                final double dist = Math.sqrt(x1 * x1 + y1 * y1);
                 if (dist <= rad) {
                     continue;
                 }
@@ -238,7 +245,14 @@ public class OsmNogoPolygon extends OsmNodeNamed {
             cx += (int) (dd * (p.x - cx) + 0.5); // shift center toward point
             cy += (int) (dd * (p.y - cy) + 0.5);
 
-            rad = CheapRulerHelper.distance(p.x, p.y, cx, cy);
+            // get new factors at shifted centerpoint
+            lonlat2m = CheapRulerHelper.getLonLatToMeterScales(cy);
+            dlon2m = lonlat2m[0];
+            dlat2m = lonlat2m[1];
+
+            final double x1 = (cx - p.x) * dlon2m;
+            final double y1 = (cy - p.y) * dlat2m;
+            rad = Math.sqrt(x1 * x1 + y1 * y1);
             dmax = rad;
             iMax = -1;
         }
@@ -246,7 +260,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
 
         ilon = cx;
         ilat = cy;
-        radius = rad;
+        radius = rad * 1.001 + 1.0; // ensure the outside-of-enclosing-circle test in RoutingContext.calcDistance() is not passed by segments ending very close to the radius due to limited numerical precision
     }
 
     /**

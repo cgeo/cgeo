@@ -11,6 +11,7 @@ import cgeo.geocaching.brouter.expressions.BExpressionContextNode;
 import cgeo.geocaching.brouter.expressions.BExpressionContextWay;
 import cgeo.geocaching.brouter.mapaccess.GeometryDecoder;
 import cgeo.geocaching.brouter.mapaccess.OsmLink;
+import cgeo.geocaching.brouter.mapaccess.OsmNode;
 import cgeo.geocaching.brouter.util.CheapAngleMeter;
 import cgeo.geocaching.brouter.util.CheapRulerHelper;
 
@@ -51,8 +52,10 @@ public final class RoutingContext {
     public double inittimeadjustment;
     public double starttimeoffset;
     public boolean transitonly;
+    public double waypointCatchingRange;
     public List<OsmNodeNamed> poipoints;
     public List<OsmNodeNamed> nogopoints = null;
+    private List<OsmNodeNamed> nogopointsAll = null; // full list not filtered for wayoints-in-nogos
     public Integer startDirection;
     public boolean startDirectionValid;
     public boolean forceUseStartDirection;
@@ -74,6 +77,7 @@ public final class RoutingContext {
     public double trafficSourceExponent;
     public double trafficSourceMinDist;
     public boolean showspeed;
+    public boolean showSpeedProfile;
     public boolean inverseRouting;
     public OsmPrePath firstPrePath;
     public int turnInstructionMode; // 0=none, 1=auto, 2=locus, 3=osmand, 4=comment-style, 5=gpsies-style
@@ -108,6 +112,66 @@ public final class RoutingContext {
             // Radius of the nogo point in meters
             nogo.radius = ir;
         }
+    }
+
+    /**
+     * restore the full nogolist previously saved by cleanNogoList
+     */
+    public void restoreNogoList() {
+        nogopoints = nogopointsAll;
+    }
+
+    /**
+     * clean the nogolist (previoulsy saved by saveFullNogolist())
+     * by removing nogos with waypoints within
+     *
+     * @return true if all wayoints are all in the same (full-weigth) nogo area (triggering bee-line-mode)
+     */
+    public void cleanNogoList(final List<OsmNode> waypoints) {
+        nogopointsAll = nogopoints;
+        if (nogopoints == null) {
+            return;
+        }
+        final List<OsmNodeNamed> nogos = new ArrayList<>();
+        for (OsmNodeNamed nogo : nogopoints) {
+            boolean goodGuy = true;
+            for (OsmNode wp : waypoints) {
+                if (wp.calcDistance(nogo) < nogo.radius
+                    && (!(nogo instanceof OsmNogoPolygon)
+                    || (((OsmNogoPolygon) nogo).isClosed
+                    ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
+                    : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
+                    goodGuy = false;
+                }
+            }
+            if (goodGuy) {
+                nogos.add(nogo);
+            }
+        }
+        nogopoints = nogos.isEmpty() ? null : nogos;
+    }
+
+    public boolean allInOneNogo(List<OsmNode> waypoints) {
+        if (nogopoints == null) {
+            return false;
+        }
+        boolean allInTotal = false;
+        for (OsmNodeNamed nogo : nogopoints) {
+            boolean allIn = Double.isNaN(nogo.nogoWeight);
+            for (OsmNode wp : waypoints) {
+                final int dist = wp.calcDistance(nogo);
+                if (dist < nogo.radius
+                    && (!(nogo instanceof OsmNogoPolygon)
+                    || (((OsmNogoPolygon) nogo).isClosed
+                    ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
+                    : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
+                    continue;
+                }
+                allIn = false;
+            }
+            allInTotal |= allIn;
+        }
+        return allInTotal;
     }
 
     public void setAlternativeIdx(final int idx) {
@@ -152,6 +216,15 @@ public final class RoutingContext {
     public void readGlobalConfig() {
         final BExpressionContext expctxGlobal = expctxWay; // just one of them...
 
+        if (keyValues != null) {
+            // add parameter to context
+            for (Map.Entry<String, String> e : keyValues.entrySet()) {
+                final float f = Float.parseFloat(e.getValue());
+                expctxWay.setVariableValue(e.getKey(), f, false);
+                expctxNode.setVariableValue(e.getKey(), f, false);
+            }
+        }
+
         setModel(expctxGlobal.useKinematicModel);
 
         downhillcostdiv = (int) expctxGlobal.getVariableValue("downhillcost", 0.f);
@@ -168,8 +241,10 @@ public final class RoutingContext {
         bikeMode = 0.f != expctxGlobal.getVariableValue("validForBikes", 0.f);
         footMode = 0.f != expctxGlobal.getVariableValue("validForFoot", 0.f);
 
+        waypointCatchingRange = expctxGlobal.getVariableValue("waypointCatchingRange", 250.f);
+
         // turn-restrictions used per default for car profiles
-        considerTurnRestrictions = 0.f != expctxGlobal.getVariableValue("considerTurnRestrictions", carMode ? 1.f : 0.f);
+        considerTurnRestrictions = 0.f != expctxGlobal.getVariableValue("considerTurnRestrictions", 1.f);
 
         // process tags not used in the profile (to have them in the data-tab)
         processUnusedTags = 0.f != expctxGlobal.getVariableValue("processUnusedTags", 0.f);
@@ -199,6 +274,7 @@ public final class RoutingContext {
         trafficSourceMinDist = expctxGlobal.getVariableValue("trafficSourceMinDist", 3000.f);
 
         showspeed = 0.f != expctxGlobal.getVariableValue("showspeed", 0.f);
+        showSpeedProfile = 0.f != expctxGlobal.getVariableValue("showSpeedProfile", 0.f);
         inverseRouting = 0.f != expctxGlobal.getVariableValue("inverseRouting", 0.f);
 
         final int tiMode = (int) expctxGlobal.getVariableValue("turnInstructionMode", 0.f);
@@ -212,7 +288,11 @@ public final class RoutingContext {
         // Total mass (biker + bike + luggages or hiker), in kg
         totalMass = expctxGlobal.getVariableValue("totalMass", 90.f);
         // Max speed (before braking), in km/h in profile and m/s in code
-        maxSpeed = expctxGlobal.getVariableValue("maxSpeed", 45.f) / 3.6;
+        if (footMode) {
+            maxSpeed = expctxGlobal.getVariableValue("maxSpeed", 6.f) / 3.6;
+        } else {
+            maxSpeed = expctxGlobal.getVariableValue("maxSpeed", 45.f) / 3.6;
+        }
         // Equivalent surface for wind, S * C_x, F = -1/2 * S * C_x * v^2 = - S_C_x * v^2
         sCX = expctxGlobal.getVariableValue("S_C_x", 0.5f * 0.45f);
         // Default resistance of the road, F = - m * g * C_r (for good quality road)

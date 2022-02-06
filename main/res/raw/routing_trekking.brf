@@ -14,7 +14,7 @@ assign allow_ferries            = true   # %allow_ferries% | set to false to dis
 assign ignore_cycleroutes       = false  # %ignore_cycleroutes% | Set to true for better elevation results | boolean
 assign stick_to_cycleroutes     = false  # %stick_to_cycleroutes% | Set to true to just follow cycleroutes | boolean
 assign avoid_unsafe             = false  # %avoid_unsafe% | Set to true to avoid standard highways | boolean
-assign considerTurnRestrictions = false  # %considerTurnRestrictions% | Set to true to take turn restrictions into account | boolean
+assign considerTurnRestrictions = true   # %considerTurnRestrictions% | Set to true to take turn restrictions into account | boolean
 assign processUnusedTags        = false  # %processUnusedTags% | Set to true to output unused tags in data tab | boolean
 
 # Change elevation parameters
@@ -35,7 +35,7 @@ assign C_r        = 0.01   # %C_r% | Rolling resistance coefficient (dimensionle
 assign bikerPower = 100    # %bikerPower% | Average power (in W) provided by the biker, for travel time computation | number
 
 # Turn instructions settings
-assign turnInstructionMode          = 1     # %turnInstructionMode% | Mode for the generated turn instructions | [0=none, 1=auto-choose, 2=locus-style, 3=osmand-style]
+assign turnInstructionMode          = 1     # %turnInstructionMode% | Mode for the generated turn instructions | [0=none, 1=auto-choose, 2=locus-style, 3=osmand-style, 4=comment-style, 5=gpsies-style, 6=orux-style]
 assign turnInstructionCatchingRange = 40    # %turnInstructionCatchingRange% | Within this distance (in m) several turning instructions are combined into one and the turning angles are better approximated to the general direction | number
 assign turnInstructionRoundabouts   = true  # %turnInstructionRoundabouts% | Set to "false" to avoid generating special turning instructions for roundabouts | boolean
 
@@ -66,7 +66,7 @@ assign is_ldcr =
      else any_cycleroute
 
 assign isbike = or bicycle_road=yes or bicycle=yes or or bicycle=permissive bicycle=designated lcn=yes
-assign ispaved = surface=paved|asphalt|concrete|paving_stones
+assign ispaved = surface=paved|asphalt|concrete|paving_stones|sett
 assign isunpaved = not or surface= or ispaved surface=fine_gravel|cobblestone
 assign probablyGood = or ispaved and ( or isbike highway=footway ) not isunpaved
 
@@ -119,7 +119,7 @@ assign bikeaccess =
          else if vehicle= then ( if highway=footway then false else defaultaccess )
          else not vehicle=private|no
        )
-       else not bicycle=private|no|dismount
+       else not bicycle=private|no|dismount|use_sidepath
 
 #
 # calculate logical foot access
@@ -301,6 +301,8 @@ assign classifiermask add          isbadoneway
                       add multiply islinktype     8
                           multiply isgoodforcars 16
 
+# include `smoothness=` tags in the response's WayTags for track analysis
+assign dummyUsage = smoothness=
 
 ---context:node  # following code refers to node tags
 

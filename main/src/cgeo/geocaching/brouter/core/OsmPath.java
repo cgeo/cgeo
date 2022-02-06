@@ -112,7 +112,7 @@ abstract class OsmPath implements OsmLinkHolder {
     protected void addAddionalPenalty(final OsmTrack refTrack, final boolean detailMode, final OsmPath origin, final OsmLink link, final RoutingContext rc) {
         final byte[] description = link.descriptionBitmap;
         if (description == null) {
-            throw new IllegalArgumentException("null description for: " + link);
+            return; // could be a beeline path
         }
 
         final boolean recordTransferNodes = detailMode || rc.countTraffic;

@@ -25,13 +25,17 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.StringWriter;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
 public final class OsmTrack {
+    static final String version = "1.6.3";
+
     // csv-header-line
-    private static final String MESSAGES_HEADER = "Longitude\tLatitude\tElevation\tDistance\tCostPerKm\tElevCost\tTurnCost\tNodeCost\tInitialCost\tWayTags\tNodeTags";
+    private static final String MESSAGES_HEADER = "Longitude\tLatitude\tElevation\tDistance\tCostPerKm\tElevCost\tTurnCost\tNodeCost\tInitialCost\tWayTags\tNodeTags\tTime\tEnergy";
 
     public MatchedWaypoint endPoint;
     public long[] nogoChecksums;
@@ -39,6 +43,7 @@ public final class OsmTrack {
     public boolean isDirty;
 
     public boolean showspeed;
+    public boolean showSpeedProfile;
 
     public List<OsmNodeNamed> pois = new ArrayList<>();
     public ArrayList<OsmPathElement> nodes = new ArrayList<>();
@@ -56,7 +61,6 @@ public final class OsmTrack {
     private CompactLongMap<OsmPathElementHolder> nodesMap;
     private CompactLongMap<OsmPathElementHolder> detourMap;
     private VoiceHintList voiceHints;
-    private boolean sendSpeedProfile;
 
     public static OsmTrack readBinary(final String filename, final OsmNodeNamed newEp, final long[] nogoChecksums, final long profileChecksum, final StringBuilder debugInfo) {
         OsmTrack t = null;
@@ -325,7 +329,7 @@ public final class OsmTrack {
         energy += t.energy;
 
         showspeed |= t.showspeed;
-        sendSpeedProfile |= t.sendSpeedProfile;
+        showSpeedProfile |= t.showSpeedProfile;
     }
 
     /**
@@ -386,7 +390,7 @@ public final class OsmTrack {
         if (turnInstructionMode == 3) {
             sb.append(" creator=\"OsmAndRouter\" version=\"1.1\">\n");
         } else {
-            sb.append(" creator=\"BRouter-1.6.1\" version=\"1.1\">\n");
+            sb.append(" creator=\"BRouter-" + version + "\" version=\"1.1\">\n");
         }
 
         if (turnInstructionMode == 3) { // osmand style
@@ -623,6 +627,8 @@ public final class OsmTrack {
     }
 
     public String formatAsGeoJson() {
+        final int turnInstructionMode = voiceHints != null ? voiceHints.turnInstructionMode : 0;
+
         final StringBuilder sb = new StringBuilder(8192);
 
         sb.append("{\n");
@@ -631,7 +637,7 @@ public final class OsmTrack {
         sb.append("    {\n");
         sb.append("      \"type\": \"Feature\",\n");
         sb.append("      \"properties\": {\n");
-        sb.append("        \"creator\": \"BRouter-1.1\",\n");
+        sb.append("        \"creator\": \"BRouter-" + version + "\",\n");
         sb.append("        \"name\": \"").append(name).append("\",\n");
         sb.append("        \"track-length\": \"").append(distance).append("\",\n");
         sb.append("        \"filtered ascend\": \"").append(ascend).append("\",\n");
@@ -642,29 +648,56 @@ public final class OsmTrack {
         if (voiceHints != null && !voiceHints.list.isEmpty()) {
             sb.append("        \"voicehints\": [\n");
             for (VoiceHint hint : voiceHints.list) {
-                sb.append("          [").append(hint.indexInTrack).append(',').append(hint.getCommand()).append(',').append(hint.getExitNumber()).append("],\n");
+                sb.append("          [");
+                sb.append(hint.indexInTrack);
+                sb.append(',').append(hint.getCommand());
+                sb.append(',').append(hint.getExitNumber());
+                sb.append(',').append(hint.distanceToNext);
+                sb.append(',').append((int) hint.angle);
+
+                // not always include geometry because longer and only needed for comment style
+                if (turnInstructionMode == 4) { // comment style
+                    sb.append(",\"").append(hint.formatGeometry()).append("\"");
+                }
+
+                sb.append("],\n");
             }
             sb.deleteCharAt(sb.lastIndexOf(","));
             sb.append("        ],\n");
         }
-        if (sendSpeedProfile) { // true if vmax was send
+        if (showSpeedProfile) { // set in profile
             final ArrayList<String> sp = aggregateSpeedProfile();
             if (sp.size() > 0) {
                 sb.append("        \"speedprofile\": [\n");
                 for (int i = sp.size() - 1; i >= 0; i--) {
                     sb.append("          [").append(sp.get(i)).append(i > 0 ? "],\n" : "]\n");
                 }
-                sb.append("        ]\n");
+                sb.append("        ],\n");
             }
-        } else { // ... otherwise traditional message list
+        }
+        { // ... traditional message list
             sb.append("        \"messages\": [\n");
             sb.append("          [\"").append(MESSAGES_HEADER.replaceAll("\t", "\", \"")).append("\"],\n");
             for (String m : aggregateMessages()) {
                 sb.append("          [\"").append(m.replaceAll("\t", "\", \"")).append("\"],\n");
             }
             sb.deleteCharAt(sb.lastIndexOf(","));
-            sb.append("        ]\n");
+            sb.append("        ],\n");
         }
+
+        if (getTotalSeconds() > 0) {
+            sb.append("        \"times\": [");
+            final DecimalFormat decimalFormat = (DecimalFormat) NumberFormat.getInstance(Locale.ENGLISH);
+            decimalFormat.applyPattern("0.###");
+            for (OsmPathElement n : nodes) {
+                sb.append(decimalFormat.format(n.getTime())).append(",");
+            }
+            sb.deleteCharAt(sb.lastIndexOf(","));
+            sb.append("]\n");
+        } else {
+            sb.deleteCharAt(sb.lastIndexOf(","));
+        }
+
         sb.append("      },\n");
         if (iternity != null) {
             sb.append("      \"iternity\": [\n");
@@ -682,15 +715,15 @@ public final class OsmTrack {
         for (OsmPathElement n : nodes) {
             String sele = n.getSElev() == Short.MIN_VALUE ? "" : ", " + n.getElev();
             if (showspeed) { // hack: show speed instead of elevation
-                int speed = 0;
+                double speed = 0;
                 if (nn != null) {
                     final int dist = n.calcDistance(nn);
                     final float dt = n.getTime() - nn.getTime();
                     if (dt != 0.f) {
-                        speed = (int) ((3.6f * dist) / dt + 0.5);
+                        speed = ((3.6f * dist) / dt + 0.5);
                     }
                 }
-                sele = ", " + speed;
+                sele = ", " + (((int) (speed * 10)) / 10.f);
             }
             sb.append("          [").append(formatILon(n.getILon())).append(", ").append(formatILat(n.getILat()))
                 .append(sele).append("],\n");
@@ -870,7 +903,7 @@ public final class OsmTrack {
     }
 
     public void prepareSpeedProfile(final RoutingContext rc) {
-        sendSpeedProfile = rc.keyValues != null && rc.keyValues.containsKey("vmax");
+        // sendSpeedProfile = rc.keyValues != null && rc.keyValues.containsKey("vmax");
     }
 
     public void processVoiceHints(final RoutingContext rc) {

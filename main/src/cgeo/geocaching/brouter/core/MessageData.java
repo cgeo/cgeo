@@ -51,7 +51,9 @@ final class MessageData implements Cloneable {
             + "\t" + linknodecost
             + "\t" + linkinitcost
             + "\t" + wayKeyValues
-            + "\t" + (nodeKeyValues == null ? "" : nodeKeyValues);
+            + "\t" + (nodeKeyValues == null ? "" : nodeKeyValues)
+            + "\t" + ((int) time)
+            + "\t" + ((int) energy);
     }
 
     public void add(final MessageData d) {

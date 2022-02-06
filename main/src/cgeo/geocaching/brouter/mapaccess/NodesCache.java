@@ -272,7 +272,7 @@ public final class NodesCache implements Closeable {
     }
 
     public void matchWaypointsToNodes(final List<MatchedWaypoint> unmatchedWaypoints, final double maxDistance, final OsmNodePairSet islandNodePairs) {
-        waypointMatcher = new WaypointMatcherImpl(unmatchedWaypoints, 250., islandNodePairs);
+        waypointMatcher = new WaypointMatcherImpl(unmatchedWaypoints, maxDistance, islandNodePairs);
         for (MatchedWaypoint mwp : unmatchedWaypoints) {
             preloadPosition(mwp.waypoint);
         }

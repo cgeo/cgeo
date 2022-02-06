@@ -27,10 +27,10 @@ highway;0000079637 tertiary_link
 highway;0000070238 construction
 highway;0000058257 bridleway
 highway;0000039003 platform
-highway;0000037192 proposed
+highway;0000037192 proposed planned virtual
 highway;0000010307 raceway
 highway;0000003152 rest_area
-highway;0000002942 abandoned
+highway;0000002942 abandoned disused razed demolished dismantled
 highway;0000002631 services
 highway;0000002133 corridor
 highway;0000002093 crossing
@@ -227,7 +227,7 @@ cycleway;0000000892 left
 cycleway;0000000399 street
 cycleway;0000000344 shoulder
 cycleway;0000000326 designated
-cycleway;0000000247 proposed
+cycleway;0000000247 proposed planned virtual
 cycleway;0000000224 cyclestreet
 cycleway;0000000172 path
 cycleway;0000000154 sidewalk
