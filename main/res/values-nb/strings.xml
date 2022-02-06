@@ -1284,7 +1284,6 @@
     <string name="waypoint_set_visited">Veipunkt satt til besøkt</string>
     <string name="waypoint_unset_visited">Veipunkt satt til ikke-besøkt</string>
     <string name="waypoint_save">Lagre</string>
-    <string name="waypoint_cancel_edit">Avbryt</string>
     <string name="waypoint_loading">Laster veipunkt…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Ingen endring i cachens koordinater</string>
     <string name="waypoint_set_as_cache_coords">Angi som cachens koordinater i c:geo</string>
@@ -2002,6 +2001,7 @@
     <string name="done">Ferdig</string>
     <string name="finish">Fullfør</string>
     <string name="back">Tilbake</string>
+    <string name="cancel">Avbryt</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Velg alle</string>
     <!-- render theme legend: category "areas" -->
