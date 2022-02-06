@@ -1384,7 +1384,6 @@
     <string name="waypoint_set_visited">Trasový bod nastaven jako navštívený</string>
     <string name="waypoint_unset_visited">Trasový bod nastaven jako nenavštívený</string>
     <string name="waypoint_save">Uložit</string>
-    <string name="waypoint_cancel_edit">Zrušit</string>
     <string name="waypoint_loading">Načítání trasového bodu…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Neměnit souřadnice kešky</string>
     <string name="waypoint_set_as_cache_coords">Nastavit jako souřadnice kešky v c:geo</string>
@@ -2222,6 +2221,7 @@
     <string name="finish">Dokončit</string>
     <string name="back">Zpět</string>
     <string name="later">Později</string>
+    <string name="cancel">Zrušit</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
     <string name="touch_again_to_exit">Pro ukončení prosím znovu klepněte</string>
