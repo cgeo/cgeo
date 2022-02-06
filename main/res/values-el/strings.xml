@@ -1349,7 +1349,6 @@
     <string name="waypoint_set_visited">Το σημείο αναγνωριστηκε</string>
     <string name="waypoint_unset_visited">Ορισμός σημείου ως μη επίσκεψη</string>
     <string name="waypoint_save">Αποθήκευση</string>
-    <string name="waypoint_cancel_edit">Ακύρωση</string>
     <string name="waypoint_loading">Γίνεται φόρτωση σημείου…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Καμία αλλαγή στις συντεταγμένες της κρύπτης</string>
     <string name="waypoint_set_as_cache_coords">Ορισμός ως συντεταγμένες κρύπτης στο c:geo</string>
@@ -2153,6 +2152,7 @@
     <string name="finish">Ολοκληρώθηκε</string>
     <string name="back">Πίσω</string>
     <string name="later">Αργότερα</string>
+    <string name="cancel">Ακύρωση</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
     <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>
