@@ -68,7 +68,7 @@ public class AbstractLocusAppTest {
     // should detect new WaypointType
     public void testToLocusWaypointCount() {
 
-        assertEquals(8, WaypointType.values().length);
+        assertEquals(9, WaypointType.values().length);
     }
 
     @Test

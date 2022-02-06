@@ -88,6 +88,7 @@
     <string name="wp_trailhead">Trailhead</string>
     <string name="wp_waypoint">Reference Point</string>
     <string name="wp_original">Original Coordinates</string>
+    <string name="wp_generated">Generated</string>
 
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Final</string>
@@ -96,6 +97,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Marker</string>
     <string name="wpnew_original">Original</string>
+    <string name="wpnew_generated">Generated</string>
 
     <!-- logs -->
     <string name="log_found">Found it</string>

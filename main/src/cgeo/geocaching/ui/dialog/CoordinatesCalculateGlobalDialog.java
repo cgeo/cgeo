@@ -389,7 +389,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
     private void generateWaypoints(final Geocache cache, final boolean updateDatabase, final Collection<Pair<String, Geopoint>> gps) {
         boolean changed = false;
         for (Pair<String, Geopoint> p : gps) {
-            final Waypoint wp = new Waypoint(LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix) + ": " + p.first, WaypointType.WAYPOINT, true);
+            final Waypoint wp = new Waypoint(LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix) + ": " + p.first, WaypointType.GENERATED, true);
             wp.setCoords(p.second);
             wp.setGeocode(cache.getGeocode());
             changed = changed | cache.addOrChangeWaypoint(wp, updateDatabase);
