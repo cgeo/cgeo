@@ -13,6 +13,7 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapLineUtils;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -298,40 +299,45 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         }
         historyObjs.removeAll();
         if (Settings.isMapTrail()) {
-            final ArrayList<TrailHistoryElement> paintHistory = new ArrayList<>(getHistory());
-            final int size = paintHistory.size();
-            if (size < 2) {
-                return;
-            }
-            // always add current position to drawn history to have a closed connection, even if it's not yet recorded
-            paintHistory.add(new TrailHistoryElement(coordinates));
-
-            Location prev = paintHistory.get(0).getLocation();
-            int current = 1;
-            while (current < size) {
-                final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
-                points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
-
-                boolean paint = false;
-                while (!paint && current < size) {
-                    final Location now = paintHistory.get(current).getLocation();
-                    current++;
-                    if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
-                        points.add(new LatLng(now.getLatitude(), now.getLongitude()));
-                    } else {
-                        paint = true;
-                    }
-                    prev = now;
+            try {
+                final ArrayList<TrailHistoryElement> paintHistory = new ArrayList<>(getHistory());
+                final int size = paintHistory.size();
+                if (size < 2) {
+                    return;
                 }
-                if (points.size() > 1) {
-                    // history line
-                    historyObjs.addPolyline(new PolylineOptions()
+                // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+                paintHistory.add(new TrailHistoryElement(coordinates));
+
+                Location prev = paintHistory.get(0).getLocation();
+                int current = 1;
+                while (current < size) {
+                    final List<LatLng> points = new ArrayList<>(MAX_HISTORY_POINTS);
+                    points.add(new LatLng(prev.getLatitude(), prev.getLongitude()));
+
+                    boolean paint = false;
+                    while (!paint && current < size) {
+                        final Location now = paintHistory.get(current).getLocation();
+                        current++;
+                        if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                            points.add(new LatLng(now.getLatitude(), now.getLongitude()));
+                        } else {
+                            paint = true;
+                        }
+                        prev = now;
+                    }
+                    if (points.size() > 1) {
+                        // history line
+                        historyObjs.addPolyline(new PolylineOptions()
                             .addAll(points)
                             .color(MapLineUtils.getTrailColor())
                             .width(MapLineUtils.getHistoryLineWidth())
                             .zIndex(ZINDEX_HISTORY)
-                    );
+                        );
+                    }
                 }
+            } catch (OutOfMemoryError ignore) {
+                Log.e("drawHistory: out of memory, please reduce max track history size");
+                // better do not draw history than crash the map
             }
         }
     }
