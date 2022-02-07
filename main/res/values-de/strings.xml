@@ -2169,6 +2169,7 @@
     <string name="back">Zurück</string>
     <string name="later">Später</string>
     <string name="cancel">Abbrechen</string>
+    <string name="ok">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
     <string name="touch_again_to_exit">Zum Beenden erneut tippen</string>
