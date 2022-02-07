@@ -20,8 +20,10 @@ import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.TextUtils;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Consumer;
 
 import java.io.File;
 import java.text.DateFormat;
@@ -36,6 +38,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Set;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -58,7 +61,12 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 class GCWebAPI {
 
     private static final Object CACHE_LOCK = new Object();
-    private static final String API_URL = "https://www.geocaching.com/api/proxy";
+    private static final String WEBSITE_URL = "https://www.geocaching.com";
+    private static final String API_URL = WEBSITE_URL + "/api/proxy";
+
+    //<input name="__RequestVerificationToken" type="hidden" value="(token-value)" />
+    private static final Pattern PATTERN_REQUEST_VERIFICATION_TOKEN = Pattern.compile("name=\"__RequestVerificationToken\"\\s+type=\"hidden\"\\s+value=\"([^\"]+)\"");
+
 
     /** maximum number of elements to retrieve with one call */
     private static final int MAX_TAKE = 50;
@@ -774,8 +782,13 @@ class GCWebAPI {
         return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.postRequest(API_URL + path, clazz, parameters, headers, fileFieldName, fileContentType, file).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
-    private static Single<Response> postAPI(final String path, final Object jsonObject) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> Network.postJsonRequest(API_URL + path, headers, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler));
+    private static Single<Response> postAPI(final String path, final Object jsonObject, final Consumer<Parameters> headerAdder) {
+        return getAuthorizationHeader().flatMap((Function<Parameters, Single<Response>>) headers -> {
+            if (headerAdder != null) {
+                headerAdder.accept(headers);
+            }
+            return Network.postJsonRequest(API_URL + path, headers, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler);
+        });
     }
 
     static Single<CacheDetails> getCacheDetails(final String geocode) {
@@ -995,7 +1008,7 @@ class GCWebAPI {
     }
 
     private static Response postLogTrackable(final List<TrackableLog> trackableLogs) {
-        final Response response = postAPI("/trackable/activities", trackableLogs).blockingGet();
+        final Response response = postAPI("/trackable/activities", trackableLogs, (Consumer<Parameters>) null).blockingGet();
         if (!response.isSuccessful()) {
             Log.e("Logging trackables failed: " + response.message());
         }
@@ -1028,6 +1041,9 @@ class GCWebAPI {
      * Post an image and attach it to the log.
      *
      * The following sequence of http requests have to be performed:
+     *
+     * 0) GET to https://www.geocaching.com/play/geocache/(geocode)/log
+     * Grab value of input field "__RequestVerificationToken" from HTML, is needed for request 3) below
      *
      * 1)
      * Post image to: https://www.geocaching.com/api/proxy/web/v1/LogDrafts/images
@@ -1066,12 +1082,25 @@ class GCWebAPI {
      * 3)
      * POST: https://www.geocaching.com/api/proxy/web/v1/geocaches/logs/GL.../images/14242d4d-...
      * Request:
+     * Header: X-Verification-Token: (verificationToken)
+     * Body:
      * <pre>
      *     {"name":"","uuid":"","guid":"14242d4d-ca1f-425e-9496-aa830d769350","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","dateTaken":"2017-09-07","description":"","qqDropTarget":{},"id":3,"filename":"filename.png","lastModified":1494143750916,"lastModifiedDate":"2017-05-07T07:55:50.916Z","webkitRelativePath":"","size":13959,"type":"image/png"}
      * </pre>
      * Response not used
      */
-    static ImmutablePair<StatusCode, String> postLogImage(final String logId, final Image image) {
+    static ImmutablePair<StatusCode, String> postLogImage(final String geocode, final String logId, final Image image) {
+
+        // 0) open log page to get a Request Token
+        final String html = Network.getResponseData(Network.getRequest(WEBSITE_URL + "/play/geocache/" + geocode + "/log"));
+        if (html == null) {
+            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
+        }
+        final String requestVerificationToken = TextUtils.getMatch(html, PATTERN_REQUEST_VERIFICATION_TOKEN, null);
+        if (requestVerificationToken == null) {
+            return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
+        }
+
         // 1) upload image to drafts
         final Parameters params = new Parameters();
         params.put("guid", UUID.randomUUID().toString());
@@ -1094,7 +1123,9 @@ class GCWebAPI {
         attachImageRequest.thumbnailUrl = postImageResponse.thumbnailUrl;
         attachImageRequest.name = StringUtils.defaultString(image.getTitle());
         attachImageRequest.description = StringUtils.defaultString(image.getDescription());
-        final Response attachResponse = postAPI("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid, attachImageRequest).blockingGet();
+        final Response attachResponse = postAPI("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid, attachImageRequest, h -> {
+            h.add("X-Verification-Token", requestVerificationToken);
+        }).blockingGet();
         if (!attachResponse.isSuccessful()) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }

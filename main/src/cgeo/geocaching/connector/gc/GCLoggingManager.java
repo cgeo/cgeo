@@ -172,7 +172,7 @@ class GCLoggingManager extends AbstractLoggingManager implements LoaderManager.L
 
         if (!image.isEmpty()) {
 
-            final ImmutablePair<StatusCode, String> imageResult = GCWebAPI.postLogImage(logId, image);
+            final ImmutablePair<StatusCode, String> imageResult = GCWebAPI.postLogImage(cache.getGeocode(), logId, image);
 
             return new ImageResult(imageResult.left, imageResult.right);
         }
