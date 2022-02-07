@@ -708,7 +708,6 @@
     <string name="waypoint_user_note">Ang gamit na note</string>
     <string name="waypoint_visited">Bisitahin</string>
     <string name="waypoint_save">I-save</string>
-    <string name="waypoint_cancel_edit">Kanselahin</string>
     <string name="waypoint_loading">Nagloload ang waypoint&#8230;</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Walang pagbabago sa cache ng mga koordinado</string>
     <string name="waypoint_set_as_cache_coords">Itakda bilang cache ng koordinado sa c:geo</string>
@@ -1168,6 +1167,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Kanselahin</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->

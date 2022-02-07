@@ -1315,7 +1315,6 @@
     <string name="waypoint_set_visited">Yol noktası ziyaret edilmiş olarak ayarlandı</string>
     <string name="waypoint_unset_visited">Yol noktası ziyaret edilmemiş olarak ayarlandı</string>
     <string name="waypoint_save">Kaydet</string>
-    <string name="waypoint_cancel_edit">İptal</string>
     <string name="waypoint_loading">Yol noktası yükleniyor…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Geocache koordinatları için değişim yok</string>
     <string name="waypoint_set_as_cache_coords">c:geo\'da Geocache koordinatları olarak ayarla</string>
@@ -2098,6 +2097,7 @@
     <string name="finish">Bitir</string>
     <string name="back">Geri</string>
     <string name="later">Sonra</string>
+    <string name="cancel">İptal</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tümünü Seç</string>
     <string name="touch_again_to_exit">Çıkmak için lütfen yeniden dokunun</string>

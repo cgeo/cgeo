@@ -1183,7 +1183,6 @@
     <string name="waypoint_set_visited">Путевая точка отмечена как посещённая</string>
     <string name="waypoint_unset_visited">Путевая точка отмечена как не посещённая</string>
     <string name="waypoint_save">Сохранить</string>
-    <string name="waypoint_cancel_edit">Отмена</string>
     <string name="waypoint_loading">Загрузка путевой точки…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Не изменять координаты тайника</string>
     <string name="waypoint_set_as_cache_coords">Установить как координаты тайника в c:geo</string>
@@ -1878,6 +1877,7 @@
     <string name="finish">Завершить</string>
     <string name="back">Назад</string>
     <string name="later">Позже</string>
+    <string name="cancel">Отмена</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Выбрать всё</string>
     <string name="touch_again_to_exit">Нажмите еще раз для выхода</string>

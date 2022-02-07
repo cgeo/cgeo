@@ -1165,7 +1165,6 @@
     <string name="waypoint_set_visited">把航點設成已拜訪</string>
     <string name="waypoint_unset_visited">把航點設成未拜訪</string>
     <string name="waypoint_save">儲存</string>
-    <string name="waypoint_cancel_edit">取消</string>
     <string name="waypoint_loading">載入航點中</string>
     <string name="waypoint_do_not_touch_cache_coordinates">不改變 cache座標</string>
     <string name="waypoint_set_as_cache_coords">在c:geo設定成cache座標</string>
@@ -1715,6 +1714,7 @@
     <string name="done">已完成</string>
     <string name="finish">完成</string>
     <string name="back">後方</string>
+    <string name="cancel">取消</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">選擇全部</string>
     <!-- render theme legend: category "areas" -->

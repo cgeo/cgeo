@@ -703,7 +703,6 @@
     <string name="waypoint_user_note">Cacatan pengguna</string>
     <string name="waypoint_visited">Telah Dikunjungi</string>
     <string name="waypoint_save">Simpan</string>
-    <string name="waypoint_cancel_edit">Batal</string>
     <string name="waypoint_loading">Memuat waypoint&#8230;</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Tidak ada perubahan pada koordinat cache</string>
     <string name="waypoint_set_as_cache_coords">Tetapkan sebagai koordinat cache di c:geo</string>
@@ -1153,6 +1152,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Batal</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->

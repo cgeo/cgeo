@@ -409,6 +409,8 @@
     <string name="caches_clear_offlinelogs_message">Voleu esborrar els registres fora de línia?</string>
     <string name="caches_clear_offlinelogs_progress">S\'estan netejant els registres fora línia</string>
     <string name="caches_show_attributes">Mostra la visió general d\'atributs</string>
+    <string name="caches_set_cache_icon">Estableix la icona de catxé</string>
+    <string name="caches_reset_cache_icons_title">Restableix la icona de catxé</string>
     <string name="caches_make_list_unique">Fer llista única</string>
     <string name="caches_set_listmarker">Editar llista de marcadors</string>
     <string name="caches_askdeletion">Demaneu la supressió si està buida</string>
@@ -777,6 +779,8 @@
         <item>Clar</item>
         <item>Fosc</item>
     </string-array>
+    <string name="init_wallpaper">Fons de pantalla</string>
+    <string name="init_summary_wallpaper">Mostra el fons de pantalla del dispositiu com a fons de la pantalla d\'inici</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Fer una còpia de seguretat</string>
     <string name="init_backup_summary">Tingueu en compte que aquesta funció permet fer còpies de seguretat de catxés , punts de ruta &amp; configuracions, però sense imatges dels catxés. \n\n Per poder restaurar les dades fins i tot després de perdre el telèfon, els fitxers de còpia de seguretat s\'han de copiar a una ubicació independent.</string>
@@ -802,6 +806,9 @@
     <string name="init_backup_history_length_min">Només les recents</string>
     <string name="init_backup_history_length_max">Guarda-ho tot</string>
     <string name="init_backup_history_delete_warning">Heu desat més còpies de seguretat de les que permet el màxim configurat. Confirmes que vols eliminar el excés de les còpies de seguretat?</string>
+    <string name="init_backup_automatic">Recordatori de còpia de seguretat automàtica</string>
+    <string name="init_backup_automatic_summary">Realitza una còpia de seguretat automàtica cada x dies (a més de qualsevol còpia de seguretat creada manualment), 0=desactivat</string>
+    <string name="init_backup_automatic_performing">S\'està creant una còpia de seguretat…</string>
     <string name="init_user_confirmation">Sé el que estic fent</string>
     <string name="init_backup_success">La base de dades del c:geo s\'ha copiat amb èxit a:</string>
     <string name="init_backup_failed">Ha fallat la còpia de seguretat de la base de dades de c:geo.</string>
@@ -1351,7 +1358,6 @@
     <string name="waypoint_set_visited">Punt de ruta definit com a visitat</string>
     <string name="waypoint_unset_visited">Punt de ruta definit com a no visitat</string>
     <string name="waypoint_save">Desa</string>
-    <string name="waypoint_cancel_edit">Cancel•la</string>
     <string name="waypoint_loading">S\'està carregant la fita…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">No s\'ha fet cap canvi a les coordenades del catxé</string>
     <string name="waypoint_set_as_cache_coords">Estableix com a coordenades del catxé al c:geo</string>
@@ -2086,6 +2092,8 @@
     <string name="check_tiles_found">Les dades d\'encaminament ja estan presents</string>
     <string name="check_tiles_missing">S\'han trobat dades d\'encaminament que falten:\n%1$s\n\nVoleu baixar aquests fitxers?%2$s</string>
     <string name="check_tiles_unsupported">Avís: les dades d\'encaminament no estan disponibles almenys en part per la regió escollida</string>
+    <string name="tileupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de dades d\'encaminament descarregats. Toc llarg per ajornar.</string>
+    <string name="mapupdate_info">Toqueu aquí per comprovar si hi ha actualitzacions dels fitxers de mapes i temes. Toc llarg per ajornar.</string>
     <string name="no_updates_found">No s\'han trobat actualitzacions</string>
     <string name="updates_check">Revisió de les actualitzacions</string>
     <string name="mapserver_mapsforge_info">Mapes bàsics, no es requereixen temes de mapes</string>
@@ -2157,6 +2165,7 @@
     <string name="finish">Acabar</string>
     <string name="back">Enrere</string>
     <string name="later">Més tard</string>
+    <string name="cancel">Cancel•la</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <string name="touch_again_to_exit">Torneu a tocar per sortir</string>

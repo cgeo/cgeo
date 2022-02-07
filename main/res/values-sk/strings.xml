@@ -1369,7 +1369,6 @@
     <string name="waypoint_set_visited">Bod trasy nastavený ako navštívený</string>
     <string name="waypoint_unset_visited">Bod trasy nastavený ako nenavštívený</string>
     <string name="waypoint_save">Uložiť</string>
-    <string name="waypoint_cancel_edit">Zrušiť</string>
     <string name="waypoint_loading">Načítanie bodu trasy…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Bez zmeny súradníc skrýše</string>
     <string name="waypoint_set_as_cache_coords">Nastaviť ako súradnice skrýše v c:geo</string>
@@ -2195,6 +2194,7 @@
     <string name="finish">Dokončiť</string>
     <string name="back">Späť</string>
     <string name="later">Neskôr</string>
+    <string name="cancel">Zrušiť</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrať všetko</string>
     <string name="touch_again_to_exit">Opakovaným stlačením ukončíte</string>

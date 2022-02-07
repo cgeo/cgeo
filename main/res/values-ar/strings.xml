@@ -700,7 +700,6 @@
     <string name="waypoint_user_note">ملاحظة المستخدم</string>
     <string name="waypoint_visited">تمت زيارته</string>
     <string name="waypoint_save">حفظ</string>
-    <string name="waypoint_cancel_edit">إلغاء</string>
     <string name="waypoint_loading">تحميل إحدثيات الطريق&#8230;</string>
     <string name="waypoint_do_not_touch_cache_coordinates">لا تغيير في إحدثيات الطريق</string>
     <string name="waypoint_set_as_cache_coords">قم بتعيين كـ إحدثيات طريق في c:geo</string>
@@ -1125,6 +1124,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">إلغاء</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->
