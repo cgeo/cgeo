@@ -71,7 +71,10 @@ public final class Network {
 
     private static final ObjectMapper mapper = new ObjectMapper();
 
-    private static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
+    protected static final OkHttpClient OK_HTTP_CLIENT = getNewHttpClient();
+
+    protected static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
+    protected static final MediaType MEDIA_TYPE_TEXT_PLAIN = MediaType.parse("text/plain; charset=utf-8");
 
     private static OkHttpClient getNewHttpClient() {
         final OkHttpClient.Builder client = new OkHttpClient.Builder()
@@ -121,8 +124,6 @@ public final class Network {
 
         return builder;
     }
-
-    private static final MediaType MEDIA_TYPE_APPLICATION_JSON = MediaType.parse("application/json; charset=utf-8");
 
     public static final Function<String, Single<? extends ObjectNode>> stringToJson = s -> {
         try {
