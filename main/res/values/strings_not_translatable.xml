@@ -70,32 +70,30 @@
     <string translatable="false" name="contributors_carnero">carnero</string>
     <string translatable="false" name="powered_by">carnero</string>
 
-    <!-- recent contributors, meaning: this year + last year -->
+    <!-- recent contributors, meaning: last 12 months (app.) -->
     <!-- one line per contributor, format is: <name>|<link>|<contribution identifiers>| -->
     <!-- (contribution identifiers are: c=code, d=documentation, g=graphics, i=infrastructure & CI, p=project leader, s=support, t=testing) -->
-    <!-- currently listed: contributions 2020-10 to 2021-10 -->
+    <!-- currently listed: contributions 2021-02 to 2022-02 -->
     <string translatable="false" name="contributors_recent">
     baiti|https://github.com/baiti|c|
-    BeckyDTP|https://github.com/BeckyDTP|c|
     bekuno|https://github.com/bekuno|ci|
-    cayacdev|https://github.com/cayacdev|c|
     eddiemuc|https://github.com/eddiemuc|cd|
     fm-sys|https://github.com/fm-sys|cg|
+    jakedot|https://github.com/jakedot|c|
     jirkavrba|https://github.com/jirkavrba|c|
     jonas-koeritz|https://github.com/jonas-koeritz|c|
+    k3b|https://github.com/k3b|c|
     Lineflyer|https://github.com/Lineflyer|ptsdi|
     MagpieFourtyTwo|https://github.com/MagpieFourtyTwo|t|
     moving-bits|https://github.com/moving-bits|cdgs|
     mucek4||cip|
     murggel|https://github.com/murggel|cdg|
     okainov|https://github.com/okainov|c|
-    osma|https://github.com/osma|c|
     pet0etie|https://github.com/pet0etie|c|
     Rainer S.|https://github.com/rsudev|c|
-    S-Bartfast|https://github.com/S-Bartfast|c|
     SammysHP|https://www.sammyshp.de/|i|
+    SchoolGuy|https://github.com/SchoolGuy|c|
     Surfoo|https://github.com/Surfoo|c|
-    TakoTheDank|https://github.com/TacoTheDank|c|
     UniQP|https://github.com/UniQP|c|
     ztNFny|https://github.com/ztNFny|cg|
     </string>
@@ -106,9 +104,11 @@
     avogadogc|||
     Arne Schwabe||c|
     Bananeweizen||c|
+    BeckyDTP|https://github.com/BeckyDTP|c|
     bjdupuis||c|
     blafoo||c|
     bmuzzin|https://github.com/bmuzzin|c|
+    cayacdev|https://github.com/cayacdev|c|
     campbeb||c|
     capoaira|https://github.com/capoaira|c|
     ControlTheBit||c|
@@ -120,7 +120,6 @@
     HolgerJeromin|||
     Iiro Jäppinen||g|
     Jan Žatecký|https://www.jaytech.cz/|g|
-    jakedot|https://github.com/jakedot|c|
     jgoestl|https://github.com/jgoestl|c|
     JoWi24|https://joachim-wilke.de/|c|
     Karsten Priegnitz|https://github.com/koem|cg|
@@ -133,13 +132,16 @@
     MichielK||c|
     msperkowski|||
     ncorreia||c|
+    osma|https://github.com/osma|c|
     Pavol Babinčák||c|
     Peter Storch|https://github.com/pstorch|c|
     Portree Kid|https://github.com/Portree-Kid|c|
     Ray||c|
     RoadRunner-||c|
     Samuel Tardieu|https://www.rfc1149.net/sam.html||
+    S-Bartfast|https://github.com/S-Bartfast|c|
     stephanme/Geoteufel||c|
+    TakoTheDank|https://github.com/TacoTheDank|c|
     thiasB||c|
     YraFyra||c|
     zenobios||c|
