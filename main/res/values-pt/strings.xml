@@ -2305,6 +2305,8 @@ do mapa e dos temas?</string>
     <string name="rtl_wilderness_hut_private">cabana de natureza selvagem privada</string>
     <string name="rtl_bar">bar</string>
     <string name="rtl_cafe">café</string>
+    <string name="rtl_fastfood"> comida pronta (fast-food)</string>
+    <string name="rtl_ice_cream">gelataria</string>
     <string name="rtl_pub">pub</string>
     <string name="rtl_restaurant">restaurante</string>
     <string name="rtl_bbq">churrasco</string>
@@ -2379,6 +2381,11 @@ do mapa e dos temas?</string>
     <string name="rtl_hot_spring">águas termais</string>
     <string name="rtl_ladder">escada</string>
     <string name="rtl_lift_gate">plataforma elevatória</string>
+    <string name="rtl_oneway">sentido único</string>
+    <string name="rtl_oneway_cycle">sentido único (ciclovia)</string>
+    <string name="rtl_oneway_cycle_rev">sentido único (ciclovia, reversível)</string>
+    <string name="rtl_oneway_rev">sentido único (reversível)</string>
+    <string name="rtl_safety_rope">corda de segurança</string>
     <string name="rtl_stone">pedra</string>
     <string name="rtl_traffic_signal">sinal de tráfego</string>
     <string name="rtl_turnstile">torniquete</string>
