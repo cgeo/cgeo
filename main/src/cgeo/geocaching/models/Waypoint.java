@@ -52,7 +52,7 @@ public class Waypoint implements IWaypoint {
     private boolean visited = false;
     private boolean originalCoordsEmpty = false;
 
-    private String calcStateJson = null;
+    private String calcStateConfig = null;
 
     /**
      * Sort waypoints by their probable order (e.g. parking first, final last).
@@ -116,8 +116,8 @@ public class Waypoint implements IWaypoint {
             userNote = "";
         }
 
-        if (calcStateJson == null) {
-            calcStateJson = old.calcStateJson;
+        if (calcStateConfig == null) {
+            calcStateConfig = old.calcStateConfig;
         }
         if (id < 0) {
             id = old.id;
@@ -160,7 +160,7 @@ public class Waypoint implements IWaypoint {
     public boolean isUserModified() {
         return
             isUserDefined() ||
-            (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateJson() != null)) ||
+            (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
             StringUtils.isNotBlank(getUserNote());
     }
 
@@ -281,7 +281,7 @@ public class Waypoint implements IWaypoint {
     }
 
     public boolean isCalculated() {
-        return CalculatedCoordinate.isValidConfig(calcStateJson);
+        return CalculatedCoordinate.isValidConfig(calcStateConfig);
     }
 
     @Override
@@ -335,8 +335,8 @@ public class Waypoint implements IWaypoint {
         }
 
         //calcState, only if coords are empty, otherwise mismatch between coords and formula can occur
-        if (getCoords() == null && getCalcStateJson() == null && parsedWaypoint.getCalcStateJson() != null) {
-            setCalcStateJson(parsedWaypoint.getCalcStateJson());
+        if (getCoords() == null && getCalcStateConfig() == null && parsedWaypoint.getCalcStateConfig() != null) {
+            setCalcStateConfig(parsedWaypoint.getCalcStateConfig());
             changed = true;
         }
 
@@ -384,12 +384,12 @@ public class Waypoint implements IWaypoint {
         this.originalCoordsEmpty = originalCoordsEmpty;
     }
 
-    public String getCalcStateJson() {
-        return calcStateJson;
+    public String getCalcStateConfig() {
+        return calcStateConfig;
     }
 
-    public void setCalcStateJson(final String calcStateJson) {
-        this.calcStateJson = calcStateJson;
+    public void setCalcStateConfig(final String calcStateConfig) {
+        this.calcStateConfig = calcStateConfig;
     }
 
     /*

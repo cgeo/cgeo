@@ -324,11 +324,9 @@ public class GeocacheTest extends CGeoTestCase {
         final List<Waypoint> waypoints = cache.getWaypoints();
         assertThat(waypoints.size()).isEqualTo(1);
         final Waypoint wp = waypoints.iterator().next();
-        final String calcStateJson = wp.getCalcStateJson();
+        final String calcStateJson = wp.getCalcStateConfig();
         assertThat(calcStateJson).isNotNull();
         assertThat(calcStateJson).contains("N 45° A.B(C+D)");
-        final CalcState calcState = CalcState.fromJSON(calcStateJson);
-        assertThat(calcState).isNotNull();
 
         removeCacheCompletely(geocode);
     }

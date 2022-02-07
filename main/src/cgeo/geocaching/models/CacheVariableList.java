@@ -90,7 +90,7 @@ public class CacheVariableList extends VariableList {
         if (cache != null) {
             for (Waypoint wp : cache.getWaypoints()) {
                 if (wp.isCalculated()) {
-                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateJson());
+                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
                     neededVars.addAll(cc.getNeededVars());
                 }
             }
@@ -105,7 +105,7 @@ public class CacheVariableList extends VariableList {
             for (Waypoint wp : cache.getWaypoints()) {
                 if (wp.isCalculated()) {
                     hasCalculatedWp = true;
-                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateJson());
+                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(wp.getCalcStateConfig());
                     final Geopoint gp = cc.calculateGeopoint(this::getValue);
                     wp.setCoords(gp);
                 }

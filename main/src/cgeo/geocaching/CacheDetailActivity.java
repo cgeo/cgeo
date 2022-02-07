@@ -2086,7 +2086,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final TextView coordinatesView = holder.binding.coordinates;
             final TextView calculatedCoordinatesView = holder.binding.calculatedCoordinates;
             final Geopoint coordinates = wpt.getCoords();
-            final String calcStateJson = wpt.getCalcStateJson();
+            final String calcStateJson = wpt.getCalcStateConfig();
 
             // coordinates
             holder.setCoordinate(coordinates);
