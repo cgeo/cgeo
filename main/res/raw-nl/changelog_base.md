@@ -38,6 +38,8 @@
 - Oplossing: Vermijd herhaalde update controles voor kaarten/routing tegels met interval=0
 - Oplossing: Optimaliseer ondersteuning voor automatisch invullen van wachtwoorden van externe wachtwoord apps in instellingen
 - Oplossing: Schakel tooltips in voor systemen die draaien op Android lager dan versie 8
-- instellingen omgebouwd zodat die voldoen aan de huidige Android-specificaties
-- MapsWithMe API bijgewerkt
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 

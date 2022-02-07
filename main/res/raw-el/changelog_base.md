@@ -38,6 +38,8 @@
 - Διόρθωση: Αποφυγή επαναλαμβανόμενων ελέγχων ενημέρωσης για χάρτες/δρομολόγηση τμημάτων με το χρονικό διάστημα=0
 - Διόρθωση: Βελτιστοποίηση υποστήριξης για αυτόματη συμπλήρωση κωδικών πρόσβασης από εξωτερικές εφαρμογές, στις ρυθμίσεις
 - Fix: Ενεργοποίηση υποδείξεων για συστήματα που λειτουργούν στο Android κάτω από την έκδοση 8
-- Ρυθμίσεις για να πληρούνται οι τρέχουσες προδιαγραφές Android
-- Ενημερώθηκε Το MapsWithMe API
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 

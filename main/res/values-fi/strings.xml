@@ -1352,7 +1352,6 @@
     <string name="waypoint_set_visited">Reittipiste asetettu vierailtuksi</string>
     <string name="waypoint_unset_visited">Reittipiste asetettu ei-vierailtuksi</string>
     <string name="waypoint_save">Tallenna</string>
-    <string name="waypoint_cancel_edit">Peruuta</string>
     <string name="waypoint_loading">Ladataan reittipistettä…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Ei muutoksia kätkön koordinaatteihin</string>
     <string name="waypoint_set_as_cache_coords">Muuta kätkön koordinaateiksi c:geossa</string>
@@ -2164,6 +2163,7 @@
     <string name="finish">Valmis</string>
     <string name="back">Takaisin</string>
     <string name="later">Myöhemmin</string>
+    <string name="cancel">Peruuta</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Valitse kaikki</string>
     <string name="touch_again_to_exit">Ole hyvä ja kosketa uudelleen poistuaksesi</string>

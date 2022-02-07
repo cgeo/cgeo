@@ -38,6 +38,8 @@
 - 수정: 간격이 0인 맵/라우팅 타일에 대한 반복적인 업데이트 확인을 피합니다.
 - 수정: 설정에서 외부 비밀번호 저장소 앱의 비밀번호 자동 완성 지원 최적화
 - 수정: 버전 8 미만의 Android에서 실행되는 시스템에 대한 도구 설명 활성화
-- 현재 Android 사양을 충족하도록 리팩토링된 설정
-- 업데이트된 MapsWithMe API
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 

@@ -38,6 +38,8 @@
 - Fix: Undvik upprepade uppdateringskontroller för kartor/ruttfiler med intervall=0
 - Fix: Optimera stöd för autoifyllnad av lösenord från externa lösenords-appar i inställningar
 - Fix: Aktivera verktygstips för system som körs på äldre versioner av Android än version 8
-- Omarbetade inställningar för att uppfylla aktuella Android-specifikationer
-- Uppdaterat MapsWithMe API
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 

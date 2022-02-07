@@ -927,7 +927,6 @@
     <string name="waypoint_set_visited">пункт маршруту встановлений як відвіданий</string>
     <string name="waypoint_unset_visited">Точку маршруту встановлено як не відвідану</string>
     <string name="waypoint_save">Зберегти</string>
-    <string name="waypoint_cancel_edit">Скасувати</string>
     <string name="waypoint_loading">завантаження маршрутної точки…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Немає зміни до координат кешу</string>
     <string name="waypoint_set_as_cache_coords">Встановити як кеш-координати в c:geo</string>
@@ -1508,6 +1507,7 @@
     <string name="skip">Пропустити</string>
     <string name="next">Наступний</string>
     <string name="finish">Закінчити</string>
+    <string name="cancel">Скасувати</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->

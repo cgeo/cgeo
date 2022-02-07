@@ -1346,7 +1346,6 @@
     <string name="waypoint_set_visited">Waypoint settato come visitato</string>
     <string name="waypoint_unset_visited">Waypoint settato come non visitato</string>
     <string name="waypoint_save">Salva</string>
-    <string name="waypoint_cancel_edit">Annulla</string>
     <string name="waypoint_loading">Caricamento waypoint…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Nessuna modifica alle coordinate cache</string>
     <string name="waypoint_set_as_cache_coords">Setta come coordinate cache in c:geo</string>
@@ -2158,6 +2157,7 @@
     <string name="finish">Fine</string>
     <string name="back">Indietro</string>
     <string name="later">Dopo</string>
+    <string name="cancel">Annulla</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
     <string name="touch_again_to_exit">Tocca di nuovo per uscire</string>

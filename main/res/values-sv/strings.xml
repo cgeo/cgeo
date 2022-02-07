@@ -1350,7 +1350,6 @@
     <string name="waypoint_set_visited">Punkten markerad som besökt</string>
     <string name="waypoint_unset_visited">Punkten markerad som ej besökt</string>
     <string name="waypoint_save">Spara</string>
-    <string name="waypoint_cancel_edit">Avbryt</string>
     <string name="waypoint_loading">Laddar punkt…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">Ingen förändring av cachens koordinater</string>
     <string name="waypoint_set_as_cache_coords">Ange som cachens koordinater i c:geo</string>
@@ -2157,6 +2156,7 @@
     <string name="finish">Slutför</string>
     <string name="back">Tillbaka</string>
     <string name="later">Senare</string>
+    <string name="cancel">Avbryt</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Markera alla</string>
     <string name="touch_again_to_exit">Vänligen tryck igen för att avsluta</string>

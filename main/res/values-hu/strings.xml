@@ -911,7 +911,6 @@
     <string name="waypoint_user_note">Felhasználói megjegyzés</string>
     <string name="waypoint_visited">Meglátogatva</string>
     <string name="waypoint_save">Mentés</string>
-    <string name="waypoint_cancel_edit">Mégsem</string>
     <string name="waypoint_loading">Útpont betöltése…</string>
     <string name="waypoint_do_not_touch_cache_coordinates">A láda koordinátái változatlanok</string>
     <string name="waypoint_set_as_cache_coords">A láda új koordinátái a c:geo-ban</string>
@@ -1396,6 +1395,7 @@
     <!-- install wizard -->
     <!-- Map Theme helper -->
     <!-- default actions in dialogs -->
+    <string name="cancel">Mégsem</string>
     <!-- ChipChoiceGroup -->
     <!-- render theme legend: category "areas" -->
     <!-- render theme legend: category "Roads & Paths" -->

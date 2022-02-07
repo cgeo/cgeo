@@ -38,6 +38,8 @@
 - Solució: Eviteu les comprovacions d'actualització repetides per a mapes/'encaminament amb interval=0
 - Solució: Optimitzeu la compatibilitat per emplenar automàticament les contrasenyes des d'aplicacions, de contrasenyes externes a la configuració
 - Solució: Activeu els consells sobre eines per als sistemes que s'executen a Android versió 8
-- Configuració refactoritzada per complir amb les especificacions actuals d'Android
-- API MapsWithMe actualitzada
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 

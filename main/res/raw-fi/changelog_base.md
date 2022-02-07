@@ -38,6 +38,8 @@
 - Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
 - Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
 - Korjaus: Ota käyttöön vihjeet järjestelmille, jotka käyttävät vanhempaa kuin Androidin versio 8
-- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
-- Päivitetty MapsWithMe API
+- Fix: Crash on long-tap on trackable code in trackable details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 

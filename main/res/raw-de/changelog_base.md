@@ -38,6 +38,8 @@
 - Korrektur: Vermeide wiederholte Update-Prüfungen auf Karte/Routingdaten, falls Intervall=0
 - Korrektur: Optimiere Unterstützung für automatisches Ausfüllen von Passwörtern von externen Passwort--Apps in den Einstellungen
 - Korrektur: Aktiviere Tooltips für Systeme, die unter Android-Versionen kleiner 8 laufen
-- Einstellungsmenüs geändert, um den aktuellen Android-Spezifikationen zu entsprechen
-- MapsWithMe API aktualisiert
+- Korrektur: Absturz beim langen Tippen auf Trackable-Code in TB-Details
+- Fix: Fieldnotes upload (website change)
+- Refactored settings to meet current Android specifications
+- Updated MapsWithMe API
 
