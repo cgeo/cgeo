@@ -2169,6 +2169,7 @@
     <string name="back">Terug</string>
     <string name="later">Later</string>
     <string name="cancel">Annuleren</string>
+    <string name="ok">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
     <string name="touch_again_to_exit">Nogmaals aanraken om af te sluiten</string>
