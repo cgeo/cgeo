@@ -35,7 +35,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     private ButtonToggleGroup statusHasTrackable = null;
     private ButtonToggleGroup statusHasOwnVote = null;
     private ButtonToggleGroup statusSolvedMystery = null;
-    private ButtonToggleGroup statusHasUserDefineWaypoint = null;
+    private ButtonToggleGroup statusHasUserDefinedWaypoint = null;
 
     private final List<ButtonToggleGroup> advancedGroups = new ArrayList<>();
     private final List<View> advancedGroupViews = new ArrayList<>();
@@ -96,7 +96,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         statusHasOwnVote = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OWN_VOTE, true);
         statusHasOfflineLog = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_OFFLINE_LOG, true);
         statusSolvedMystery = createGroup(ll, StatusGeocacheFilter.StatusType.SOLVED_MYSTERY, true);
-        statusHasUserDefineWaypoint = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_USER_DEFINED_WAYPOINT, true);
+        statusHasUserDefinedWaypoint = createGroup(ll, StatusGeocacheFilter.StatusType.HAS_USER_DEFINED_WAYPOINT, true);
 
         setSimpleView(this.simpleView);
 
@@ -143,7 +143,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         setFromBoolean(statusHasTrackable, filter.getStatusHasTrackable());
         setFromBoolean(statusHasOwnVote, filter.getStatusHasOwnVote());
         setFromBoolean(statusSolvedMystery, filter.getStatusSolvedMystery());
-        setFromBoolean(statusHasUserDefineWaypoint, filter.getStatusHasUserDefineWaypoint());
+        setFromBoolean(statusHasUserDefinedWaypoint, filter.getStatusHasUserDefinedWaypoint());
     }
 
 
@@ -167,7 +167,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         filter.setStatusHasTrackable(getFromGroup(statusHasTrackable));
         filter.setStatusHasOwnVote(getFromGroup(statusHasOwnVote));
         filter.setStatusSolvedMystery(getFromGroup(statusSolvedMystery));
-        filter.setStatusHasUserDefineWaypoint(getFromGroup(statusHasUserDefineWaypoint));
+        filter.setStatusHasUserDefinedWaypoint(getFromGroup(statusHasUserDefinedWaypoint));
         return filter;
     }
 
