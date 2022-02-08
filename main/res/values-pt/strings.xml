@@ -2195,6 +2195,7 @@
     <string name="rtl_dyke">dique</string>
     <string name="rtl_beach">praia</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Estradas &amp; Caminhos</string>
     <string name="rtl_paved_path">caminho pavimentado</string>
     <string name="rtl_paved_path_gravel">caminho pavimentado (gravilha)</string>
     <string name="rtl_unpaved_path">caminho não pavimentado</string>
