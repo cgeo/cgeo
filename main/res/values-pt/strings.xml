@@ -2193,6 +2193,7 @@ do mapa e dos temas?</string>
     <string name="rtl_dyke">dique</string>
     <string name="rtl_beach">praia</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Estradas &amp; Caminhos</string>
     <string name="rtl_paved_path">caminho pavimentado</string>
     <string name="rtl_paved_path_gravel">caminho pavimentado (gravilha)</string>
     <string name="rtl_unpaved_path">caminho não pavimentado</string>
@@ -2277,12 +2278,23 @@ do mapa e dos temas?</string>
     <string name="rtl_gym">ginásio</string>
     <string name="rtl_miniature_golf">minigolfe</string>
     <string name="rtl_roller_skating">patins de rodas</string>
+    <string name="rtl_shooting">campo de tiro</string>
+    <string name="rtl_skateboard">skate</string>
+    <string name="rtl_slipway">rampa (de lançamento)</string>
+    <string name="rtl_soccer">futebol</string>
+    <string name="rtl_stadium">estádio</string>
+    <string name="rtl_swimming_area">área de natação</string>
+    <string name="rtl_swimming_outdoor">natação ao ar livre</string>
+    <string name="rtl_tennis">ténis</string>
+    <string name="rtl_via_ferrata">via ferrata</string>
     <string name="rtl_water_park">parque aquático</string>
     <string name="rtl_aerialway_station">estação de transporte teleférico</string>
     <string name="rtl_airport">aeroporto</string>
     <string name="rtl_cable_car">teleférico</string>
     <string name="rtl_chair_lift">telecadeira (teleférico)</string>
     <string name="rtl_goods_lift">monta-cargas</string>
+    <string name="rtl_helipad">heliponto</string>
+    <string name="rtl_rail_funicular">funicular</string>
     <string name="rtl_parking">estacionamento</string>
     <string name="rtl_parking_private">estacionamento privado</string>
     <string name="rtl_bicycle_parking">estacionamento de bicicleta</string>
@@ -2294,6 +2306,9 @@ do mapa e dos temas?</string>
     <string name="rtl_car_shop">concessionário automóvel</string>
     <string name="rtl_fuel">combustível</string>
     <string name="rtl_ferry_terminal">terminal de ferry</string>
+    <string name="rtl_alpine_hut">cabana alpina</string>
+    <string name="rtl_alpine_hut_private">cabana alpina privada</string>
+    <string name="rtl_alpine_hut_winter">cabana de inverno alpina</string>
     <string name="rtl_apartment">apartamento</string>
     <string name="rtl_camp_site">local de acampamento</string>
     <string name="rtl_caravan_site">local de caravanas</string>
@@ -2304,6 +2319,7 @@ do mapa e dos temas?</string>
     <string name="rtl_wilderness_hut">cabana de natureza selvagem</string>
     <string name="rtl_wilderness_hut_private">cabana de natureza selvagem privada</string>
     <string name="rtl_bar">bar</string>
+    <string name="rtl_biergarten">cervejaria (esplanada)</string>
     <string name="rtl_cafe">café</string>
     <string name="rtl_fastfood"> comida pronta (fast-food)</string>
     <string name="rtl_ice_cream">gelataria</string>
@@ -2350,6 +2366,10 @@ do mapa e dos temas?</string>
     <string name="rtl_power_water">energia (água)</string>
     <string name="rtl_power_wind">energia (vento)</string>
     <string name="rtl_wastewater_plant">planta de águas residuais</string>
+    <string name="rtl_watermill">moinho de água</string>
+    <string name="rtl_weir">presa</string>
+    <string name="rtl_windmill">moinho de vento</string>
+    <string name="rtl_windpump">bomba eólica</string>
     <string name="rtl_bunker">bunker</string>
     <string name="rtl_farmyard">quintal</string>
     <string name="rtl_hunting_stand">posição de caça</string>
@@ -2374,6 +2394,8 @@ do mapa e dos temas?</string>
     <string name="rtl_block">quarteirão</string>
     <string name="rtl_bollard">marco</string>
     <string name="rtl_border_control">controlo fronteiriço</string>
+    <string name="rtl_bridge_movable">ponte móvel</string>
+    <string name="rtl_cave_entrance">entrada de gruta</string>
     <string name="rtl_elevator">elevador</string>
     <string name="rtl_gate">portão</string>
     <string name="rtl_gate_private">portão privado</string>
