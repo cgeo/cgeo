@@ -58,6 +58,12 @@
                 android:title="@string/cache_offline_refresh"
                 app:showAsAction="ifRoom|withText"/>
             <item
+                android:id="@+id/menu_store_caches_background"
+                android:title="@string/caches_store_background"
+                android:visible="false"
+                app:showAsAction="ifRoom|withText">
+            </item>
+            <item
                 android:id="@+id/menu_move_to_list"
                 android:title="@string/cache_menu_move_list"
                 app:showAsAction="ifRoom|withText"/>

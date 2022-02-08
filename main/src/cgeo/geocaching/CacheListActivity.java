@@ -65,6 +65,7 @@ import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.sorting.GeocacheSortContext;
@@ -83,6 +84,7 @@ import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -773,6 +775,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
             // Manage Caches submenu
             setEnabled(menu, R.id.menu_refresh_stored, !isEmpty);
+            if (!BranchDetectionHelper.isProductionBuild()) {
+                menu.findItem(R.id.menu_store_caches_background).setVisible(!isEmpty);
+                menu.findItem(R.id.menu_store_caches_background).setTitle(type.isStoredInDatabase ? R.string.caches_store_refresh_background : R.string.caches_store_background);
+            }
             if (!isOffline && !isHistory) {
                 menu.findItem(R.id.menu_refresh_stored).setTitle(R.string.caches_store_offline);
             }
@@ -902,6 +908,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_refresh_stored) {
             refreshStored(adapter.getCheckedOrAllCaches());
+            invalidateOptionsMenuCompatible();
+        } else if (menuItem == R.id.menu_store_caches_background) {
+            refreshInBackground(adapter.getCheckedOrAllCaches());
             invalidateOptionsMenuCompatible();
         } else if (menuItem == R.id.menu_drop_caches) {
             deleteCaches(adapter.getCheckedOrAllCaches());
@@ -1426,6 +1435,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             });
         } else {
             refreshStoredConfirmed(caches);
+        }
+    }
+
+    public void refreshInBackground(final List<Geocache> caches) {
+        if (type.isStoredInDatabase && caches.size() > REFRESH_WARNING_THRESHOLD) {
+            SimpleDialog.of(this).setTitle(R.string.caches_refresh_all).setMessage(R.string.caches_refresh_all_warning).confirm((dialog, id) -> {
+                CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase);
+                dialog.cancel();
+            });
+        } else {
+            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase);
         }
     }
 

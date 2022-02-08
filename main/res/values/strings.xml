@@ -388,6 +388,8 @@
     <string name="caches_store_unsaved">Store Unsaved</string>
     <string name="caches_store_selected">Store Selected</string>
     <string name="caches_store_background">Background download (Experimental!)</string>
+    <string name="caches_store_refresh_background">Background refresh (Experimental!)</string>
+    <string name="caches_store_background_should_force_refresh">Refresh already downloaded caches</string>
     <string name="caches_store_background_title">Download caches</string>
     <string name="caches_history">History</string>
     <string name="caches_on_map">Show on map</string>

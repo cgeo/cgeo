@@ -5,8 +5,8 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.list.StoredList;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.ui.TextParam;
-import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
+import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
 
@@ -30,30 +30,37 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
 
     private static final String GEOCODES = "extra_geocodes";
     private static final String LIST_IDS = "extra_list_ids";
+    private static final String REDOWNLOAD = "extra_redownload";
 
-    public static void downloadCaches(final Activity context, final Set<String> geocodes) {
+    public static void downloadCaches(final Activity context, final Set<String> geocodes, final boolean defaultForceRedownload, final boolean isOffline) {
         if (geocodes.isEmpty()) {
             ActivityMixin.showToast(context, context.getString(R.string.warn_save_nothing));
             return;
         }
 
-        SimpleDialog.of(context)
-                .setTitle(TextParam.text("Warning"))
-                .setMessage(TextParam.text("This feature is untested and can lead to unexpected behaviour or may even break your database.\n\nWe recommend to do a backup before using the feature, just to be save."))
-                .confirm((d, w) -> {
-                    if (Settings.getChooseList()) {
+        Dialogs.confirmWithCheckbox(context, "Warning", "This feature is untested and can lead to unexpected behaviour or may even break your database.\n\nWe recommend to do a backup before using the feature, just to be save.",
+                CheckboxDialogConfig.newCheckbox(R.string.caches_store_background_should_force_refresh)
+                        .setCheckedOnInit(defaultForceRedownload)
+                        .setVisible(!isOffline),
+                forceRedownload -> {
+                    if (isOffline) {
+                        downloadCachesInternal(context, geocodes, null, forceRedownload);
+                    } else if (Settings.getChooseList()) {
                         // let user select list to store cache in
-                        new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, geocodes, selectedListIds), true, Collections.emptySet(), false);
+                        new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, geocodes, selectedListIds, forceRedownload), true, Collections.emptySet(), false);
                     } else {
-                        downloadCachesInternal(context, geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID));
+                        downloadCachesInternal(context, geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID), forceRedownload);
                     }
-                });
+                }, null);
     }
 
-    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, final Set<Integer> listIds) {
+    private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean forceRedownload) {
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(GEOCODES, new ArrayList<>(geocodes));
-        intent.putIntegerArrayListExtra(LIST_IDS, new ArrayList<>(listIds));
+        if (listIds != null) {
+            intent.putIntegerArrayListExtra(LIST_IDS, new ArrayList<>(listIds));
+        }
+        intent.putExtra(REDOWNLOAD, forceRedownload);
         ContextCompat.startForegroundService(context, intent);
     }
 
@@ -76,14 +83,19 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         }
 
         final ArrayList<String> geocodes = intent.getStringArrayListExtra(GEOCODES);
-        final Set<Integer> listIds = new HashSet<>(intent.getIntegerArrayListExtra(LIST_IDS));
+
+        final ArrayList<Integer> listIdArray = intent.getIntegerArrayListExtra(LIST_IDS);
+        final Set<Integer> listIds = listIdArray != null ? new HashSet<>(intent.getIntegerArrayListExtra(LIST_IDS)) : null;
+
+        final boolean forceRedownload = intent.getBooleanExtra(REDOWNLOAD, false);
+
 
         for (int i = 0; i < geocodes.size(); i++) {
             notification.setProgress(geocodes.size(), i, false);
             notification.setContentText(geocodes.get(i));
             updateForegroundNotification();
 
-            Geocache.storeCache(null, geocodes.get(i), listIds, false, null);
+            Geocache.storeCache(null, geocodes.get(i), listIds, forceRedownload, null);
         }
 
         notificationManager.notify(Settings.getUniqueNotificationId(), Notifications.createTextContentNotification(

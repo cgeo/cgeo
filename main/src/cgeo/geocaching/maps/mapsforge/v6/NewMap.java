@@ -466,7 +466,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
         } else if (id == R.id.menu_store_caches_background) {
-            CacheDownloaderService.downloadCaches(this, caches.getVisibleCacheGeocodes());
+            CacheDownloaderService.downloadCaches(this, caches.getVisibleCacheGeocodes(), false, false);
         } else if (id == R.id.menu_theme_mode) {
             this.renderThemeHelper.selectMapTheme(this.tileLayer, this.tileCache);
         } else if (id == R.id.menu_theme_options) {

@@ -829,7 +829,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_store_caches_background) {
-            CacheDownloaderService.downloadCaches(activity, getGeocodesForCachesInViewport());
+            CacheDownloaderService.downloadCaches(activity, getGeocodesForCachesInViewport(), false, false);
         } else if (id == R.id.menu_theme_mode) {
             //this will never happen, Google does not support mapsforge themes -> do nothing
         } else if (id == R.id.menu_as_list) {
