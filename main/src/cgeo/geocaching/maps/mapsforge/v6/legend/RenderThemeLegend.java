@@ -211,4 +211,18 @@ public class RenderThemeLegend {
         }
     }
 
+    public static boolean supportsLegend() {
+        final RenderThemeHelper.RenderThemeType rtt = RenderThemeHelper.getRenderThemeType();
+        switch (rtt) {
+            case RTT_ELEVATE:
+            case RTT_FZK_BASE:
+            case RTT_FZK_OUTDOOR_CONTRAST:
+            case RTT_FZK_OUTDOOR_SOFT:
+                return true;
+            default:
+                return false;
+        }
+
+    }
+
 }

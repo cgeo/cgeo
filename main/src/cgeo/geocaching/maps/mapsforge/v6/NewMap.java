@@ -406,7 +406,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             final boolean tileLayerHasThemes = tileLayerHasThemes();
             menu.findItem(R.id.menu_theme_mode).setVisible(tileLayerHasThemes);
             menu.findItem(R.id.menu_theme_options).setVisible(tileLayerHasThemes && this.renderThemeHelper.themeOptionsAvailable());
-            menu.findItem(R.id.menu_theme_legend).setVisible(tileLayerHasThemes);
+            menu.findItem(R.id.menu_theme_legend).setVisible(tileLayerHasThemes && RenderThemeLegend.supportsLegend());
 
             menu.findItem(R.id.menu_as_list).setVisible(!caches.isDownloading() && caches.getVisibleCachesCount() > 1);
 
