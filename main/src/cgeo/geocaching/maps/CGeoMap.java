@@ -23,6 +23,7 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
+import cgeo.geocaching.maps.google.v2.GoogleMapView;
 import cgeo.geocaching.maps.google.v2.GooglePositionAndHistory;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
@@ -770,7 +771,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(false); // Always false, this is only used for Google Maps
+            menu.findItem(R.id.menu_theme_mode).setVisible(true); // Always false, this is only used for Google Maps
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
@@ -824,6 +825,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_theme_mode) {
+            GoogleMapView.selectMapTheme(activity);
             //this will never happen, Google does not support mapsforge themes -> do nothing
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
