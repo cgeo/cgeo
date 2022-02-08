@@ -78,6 +78,7 @@ import cgeo.geocaching.ui.CacheListAdapter;
 import cgeo.geocaching.ui.FastScrollListener;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
+import cgeo.geocaching.ui.dialog.CheckboxDialogConfig;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -1008,7 +1009,10 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (isNonDefaultList && !preventAskForDeletion && adapter.isEmpty()
             && DataStore.getAllStoredCachesCount(listId) == 0) {
             // ask user, if he wants to delete the now empty list
-            Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty), getString(R.string.list_dialog_do_not_ask_me_again),
+            Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty),
+                    CheckboxDialogConfig.newCheckbox(R.string.list_dialog_do_not_ask_me_again)
+                            .setActionButtonLabel(CheckboxDialogConfig.ActionButtonLabel.YES_NO)
+                            .setPositiveButtonCheckCondition(CheckboxDialogConfig.CheckCondition.UNCHECKED),
                 preventAskForDeletion -> removeListInternal(), this::setPreventAskForDeletion);
         }
     }
