@@ -78,7 +78,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusHasOfflineFoundLog = null;
     private Boolean statusSolvedMystery = null;
     private Boolean statusHasUserDefinedWaypoint = null;
-  
+
     @Override
     public Boolean filter(final Geocache cache) {
 
@@ -433,7 +433,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasOwnVote, StatusType.HAS_OWN_VOTE);
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
-        count = addIfStillFits(sb, count, statusHasUserDefineWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
+        count = addIfStillFits(sb, count, statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
         count = addIfStillFits(sb, count, statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
