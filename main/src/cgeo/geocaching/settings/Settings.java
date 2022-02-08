@@ -2095,7 +2095,7 @@ public class Settings {
     }
 
     public static String getSelectedGoogleMapTheme() {
-        return getString(R.string.pref_google_map_theme, "default");
+        return getString(R.string.pref_google_map_theme, "DEFAULT");
     }
 
 }
