@@ -548,6 +548,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         names.add("Default");
         names.add("Night");
         names.add("Classic");
+        names.add("OSM");
         final int currentItem = Settings.getSelectedGoogleMapTheme();;
 
         builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, newItem) -> {
@@ -567,6 +568,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.googlemap_style_night));
         } else if (mapTheme == 2) {
             googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.googlemap_style_retro));
+        } else if (mapTheme == 3) {
+            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.googlemap_style_osm));
         }
     }
 

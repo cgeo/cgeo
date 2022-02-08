@@ -1,0 +1,101 @@
+[
+  {
+    "featureType": "all",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "administrative.province",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "visibility": "on"
+      }
+    ]
+  },
+  {
+    "featureType": "landscape",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#dcdcdc"
+      },
+      {
+        "saturation": "0"
+      },
+      {
+        "lightness": "25"
+      },
+      {
+        "gamma": "1.00"
+      }
+    ]
+  },
+  {
+    "featureType": "poi.park",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "visibility": "on"
+      },
+      {
+        "color": "#dbe4ab"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#f6cc90"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway",
+    "elementType": "geometry.stroke",
+    "stylers": [
+      {
+        "color": "#f4c179"
+      },
+      {
+        "weight": "0.75"
+      }
+    ]
+  },
+  {
+    "featureType": "road.highway.controlled_access",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#f8afa8"
+      }
+    ]
+  },
+  {
+    "featureType": "road.arterial",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#f8eba8"
+      }
+    ]
+  },
+  {
+    "featureType": "water",
+    "elementType": "geometry.fill",
+    "stylers": [
+      {
+        "color": "#a8c9f8"
+      }
+    ]
+  }
+]
