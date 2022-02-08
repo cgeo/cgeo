@@ -1,6 +1,5 @@
 package cgeo.geocaching.maps.google.v2;
 
-import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.EditWaypointActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.connector.internal.InternalConnector;
@@ -22,13 +21,10 @@ import cgeo.geocaching.maps.interfaces.OnCacheTapListener;
 import cgeo.geocaching.maps.interfaces.OnMapDragListener;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.AbstractMapsforgeMapSource;
-import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
-import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.maps.google.v2.GoogleMapUtils.isGoogleMapsAvailable;
 import static cgeo.geocaching.storage.extension.OneTimeDialogs.DialogType.MAP_AUTOROTATION_DISABLE;
@@ -63,9 +59,6 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MapStyleOptions;
 import com.google.android.gms.maps.model.VisibleRegion;
-
-import org.apache.commons.lang3.StringUtils;
-import org.mapsforge.map.layer.cache.TileCache;
 
 public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOverlayItem>, OnMapReadyCallback {
 
@@ -122,7 +115,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         this.googleMap = googleMap;
         mapController.setGoogleMap(googleMap);
 
-        setMapTheme(googleMap, getContext());
+        applyMapStyle(googleMap, getContext());
 
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(this::recognizePositionChange);
@@ -538,39 +531,63 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     public static void selectMapTheme(AppCompatActivity activity) {
-
-
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         String title = activity.getString(R.string.map_theme_select);
         builder.setTitle(title);
 
         final List<String> names = new ArrayList<>();
-        names.add("Default");
-        names.add("Night");
-        names.add("Classic");
-        names.add("OSM");
-        final int currentItem = Settings.getSelectedGoogleMapTheme();;
+        for (GoogleMapsThemes theme : GoogleMapsThemes.values()) {
+            names.add(theme.getLabelString(activity));
+        }
+        final int currentItem = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()).ordinal();
 
-        builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, newItem) -> {
-            Settings.setSelectedGoogleMapTheme(newItem);
-            setMapTheme(googleMap, activity);
+        builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, selectedItem) -> {
+            Settings.setSelectedGoogleMapTheme(GoogleMapsThemes.values()[selectedItem].name());
+            applyMapStyle(googleMap, activity);
             dialog.cancel();
         });
 
         builder.show();
     }
 
-    private static void setMapTheme(final GoogleMap googleMap, final Context context) {
-        final int mapTheme = Settings.getSelectedGoogleMapTheme();
-        if (mapTheme == 0) {
-            googleMap.setMapStyle(null);
-        } else if (mapTheme == 1) {
-            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.googlemap_style_night));
-        } else if (mapTheme == 2) {
-            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.googlemap_style_retro));
-        } else if (mapTheme == 3) {
-            googleMap.setMapStyle(MapStyleOptions.loadRawResourceStyle(context, R.raw.googlemap_style_osm));
-        }
+    private static void applyMapStyle(final GoogleMap googleMap, final Context context) {
+        final GoogleMapsThemes theme = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme());
+        googleMap.setMapStyle(theme.getMapStyleOptions(context));
     }
 
+    public enum GoogleMapsThemes {
+        DEFAULT(R.string.google_maps_style_default, 0),
+        NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night),
+        RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro),
+        OSM(R.string.google_maps_style_osm, R.raw.googlemap_style_osm),
+        CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast);
+
+        final private int labelRes;
+        final private int jsonRes;
+
+        GoogleMapsThemes(final int labelRes, final int jsonRes) {
+            this.labelRes = labelRes;
+            this.jsonRes = jsonRes;
+        }
+
+        public String getLabelString(final Context context) {
+            return context.getResources().getString(labelRes);
+        }
+
+        public MapStyleOptions getMapStyleOptions(final Context context) {
+            if (jsonRes != 0) {
+                return MapStyleOptions.loadRawResourceStyle(context, jsonRes);
+            }
+            return null;
+        }
+
+        public static GoogleMapsThemes getByName(final String themeName) {
+            for (GoogleMapsThemes theme : GoogleMapsThemes.values()) {
+                if (theme.name().equals(themeName)) {
+                    return theme;
+                }
+            }
+            return DEFAULT;
+        }
+    }
 }

@@ -826,7 +826,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_theme_mode) {
             GoogleMapView.selectMapTheme(activity);
-            //this will never happen, Google does not support mapsforge themes -> do nothing
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
             ActivityMixin.overrideTransitionToFade(activity);

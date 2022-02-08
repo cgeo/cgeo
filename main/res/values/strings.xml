@@ -1590,6 +1590,11 @@
     <string name="map_settings_cache_filter_too_complex_message">The current cache filter is too complex to apply additional options here. Usually this means that the cache filter contains NOT or OR expressions instead of simple AND logic.</string>
     <string name="map_theme_legend">Theme legend</string>
     <string name="map_theme_legend_info">Tap on category title to open/close category. Long tap on a symbol for short info about that symbol. Tap on the info icon to visit a detailed legend online.</string>
+    <string name="google_maps_style_default">Default</string>
+    <string name="google_maps_style_night">Night</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_osm">OSM</string>
+    <string name="google_maps_style_contrast">High Contrast</string>
 
     <!-- search -->
     <string name="geo_search_label">Search caches nearby</string>
