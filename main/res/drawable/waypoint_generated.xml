@@ -1,22 +1,9 @@
-<!-- based on material.io / calculate -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="36dp"
     android:height="36dp"
-    android:viewportWidth="30"
-    android:viewportHeight="30">
+    android:viewportWidth="36"
+    android:viewportHeight="36">
   <path
-      android:fillColor="#80000000"
-      android:pathData="M9.25,10.72h5v1.5h-5z"/>
-  <path
-      android:fillColor="#80000000"
-      android:pathData="M16,18.75h5v1.5h-5z"/>
-  <path
-      android:fillColor="#80000000"
-      android:pathData="M16,16.25h5v1.5h-5z"/>
-  <path
-      android:fillColor="#80000000"
-      android:pathData="M11,21l1.5,0l0,-2l2,0l0,-1.5l-2,0l0,-2l-1.5,0l0,2l-2,0l0,1.5l2,0z"/>
-  <path
-      android:fillColor="#80000000"
-      android:pathData="M17.09,13.95l1.41,-1.41l1.41,1.41l1.06,-1.06l-1.41,-1.42l1.41,-1.41l-1.06,-1.06l-1.41,1.41l-1.41,-1.41l-1.06,1.06l1.41,1.41l-1.41,1.42z"/>
+      android:pathData="m24.6157,11.07c1.0703,2.0867 1.4938,4.4968 1.2243,6.93 -0.154,2.4332 -1.001,4.8433 -2.4409,6.93L22.221,24.16C23.4607,22.2889 24.1845,20.156 24.3,18 24.5618,15.844 24.2153,13.7111 23.299,11.84L24.6157,11.07M12.8809,11.07 L14.059,11.84C12.8193,13.7111 12.0955,15.844 11.98,18 11.7182,20.156 12.0724,22.2889 12.981,24.16L11.6797,24.93C10.6017,22.8433 10.1705,20.4409 10.44,18 10.594,15.5668 11.441,13.1567 12.8809,11.07m5.3207,5.9136 l1.7864,-2.4871l1.9481,0l-2.9106,3.85 1.694,3.7884L18.9793,22.1349L17.9167,19.54 16.0456,22.1041L14.1052,22.1041l3.003,-3.9424 -1.6401,-3.6652l1.7479,0z"
+      android:fillColor="#7b1fa2"/>
 </vector>
