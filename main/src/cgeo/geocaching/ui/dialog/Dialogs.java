@@ -174,20 +174,23 @@ public final class Dialogs {
      * Show dialog with title, message and checkbox
      * Checkbox value is returned to the listeners
      */
-    public static void confirmWithCheckbox(final Context context, final String title, final String message, final String checkboxInfo, final Action1<Boolean> onConfirm, @Nullable final Action1<Boolean> onCancel) {
+    public static void confirmWithCheckbox(final Context context, final String title, final String message, final CheckboxDialogConfig checkboxConfig, final Action1<Boolean> onConfirm, @Nullable final Action1<Boolean> onCancel) {
         final View content = LayoutInflater.from(context).inflate(R.layout.dialog_text_checkbox, null);
         final CheckBox checkbox = (CheckBox) content.findViewById(R.id.check_box);
         final TextView textView = (TextView) content.findViewById(R.id.message);
         textView.setText(message);
-        checkbox.setText(checkboxInfo);
-        checkbox.setChecked(false);
+        checkbox.setText(checkboxConfig.getTextRes());
+        checkbox.setChecked(checkboxConfig.isCheckedOnInit());
+        checkbox.setVisibility(checkboxConfig.isVisible() ? View.VISIBLE : View.GONE);
+
+        final boolean yesNoLabel = checkboxConfig.getActionButtonLabel() == CheckboxDialogConfig.ActionButtonLabel.YES_NO;
 
         final AlertDialog alertDialog = Dialogs.newBuilder(context)
             .setView(content)
             .setTitle(title)
             .setCancelable(true)
-            .setPositiveButton(R.string.yes, (dialog, which) -> onConfirm.call(checkbox.isChecked()))
-            .setNegativeButton(R.string.no, (dialog2, which2) -> {
+            .setPositiveButton(yesNoLabel ? R.string.yes : android.R.string.ok, (dialog, which) -> onConfirm.call(checkbox.isChecked()))
+            .setNegativeButton(yesNoLabel ? R.string.no : android.R.string.cancel, (dialog2, which2) -> {
                 if (onCancel != null) {
                     onCancel.call(checkbox.isChecked());
                 } else {
@@ -197,9 +200,16 @@ public final class Dialogs {
             .create();
         alertDialog.show();
 
-        final Button button = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
-        button.setEnabled(true);
-        checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> button.setEnabled(!isChecked));
+        final Button buttonPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
+        final Button buttonNegative = alertDialog.getButton(AlertDialog.BUTTON_NEGATIVE);
+
+        buttonPositive.setEnabled(checkboxConfig.getPositiveCheckCondition().eval(checkbox.isChecked()));
+        buttonNegative.setEnabled(checkboxConfig.getNegativeCheckCondition().eval(checkbox.isChecked()));
+
+        checkbox.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            buttonPositive.setEnabled(checkboxConfig.getPositiveCheckCondition().eval(isChecked));
+            buttonNegative.setEnabled(checkboxConfig.getNegativeCheckCondition().eval(isChecked));
+        });
 
         if (context instanceof Activity) {
             alertDialog.setOwnerActivity((Activity) context);
