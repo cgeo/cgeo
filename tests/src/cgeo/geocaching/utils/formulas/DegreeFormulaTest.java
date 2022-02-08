@@ -30,7 +30,7 @@ public class DegreeFormulaTest {
         assertParse("N 053 33. 1 2 3", null, 53d + 33.123d / 60, "N053°33.123'");
         assertParse("N 053 33. 1 2", null, 53d + 33.012d / 60, "N053°33.<0>12'");
 
-        assertParse("53° 33. A+B+C S", s -> Value.of(2d), -53d - 33.006d / 60, "53°33.<00>6'S");
+        assertParse("53° 33. A+B+C'S", s -> Value.of(2d), -53d - 33.006d / 60, "53°33.<00>6'S");
         assertParse("53° 33. A+B+C 'S", s -> Value.of(2d), -53d - 33.006d / 60, "53°33.<00>6'S");
         assertParse("53.1° 33. A+B+C 'S", s -> Value.of(2d), null, "53.1°[33. A+B+C 'S?]");
 
@@ -41,6 +41,9 @@ public class DegreeFormulaTest {
 
         assertParse("NA A/100", s -> Value.of(40d), 40d + 40d / 100 / 60, "N40°0.4'");
         assertParse("NA A/100", s -> Value.of(40.5d), null, "N40.5°[0.405]'");
+
+        assertParse("N48° 12.1 A + 2 3", s -> Value.of(5d), 48d + (12.173d) / 60, "N48°12.173'");
+
     }
 
     @Test
@@ -97,11 +100,12 @@ public class DegreeFormulaTest {
     public void parseVariousFormulas() {
         assertParse("N 053° 33.06(4*A)'", null, null, "N053°[33].<06(4 * [?A])>'");
         assertParse("90 3.45", null, 90 + 3.045 / 60, "90°3.<0>45'");
+        assertParse("88. 3.45", null, null, "[88. 3.45?]");
         assertParse("90. 3.45", null, null, "[90. 3.45?]");
         assertParse("89. 345", null, 89.345, "89.345°");
         assertParse("90. 345", null, null, "[90.345]°");
         assertParse("S90 3.45", null, -90 - 3.045 / 60, "S90°3.<0>45'");
-        assertParse("90 3.45 S", null, -90 - 3.045 / 60, "90°3.<0>45'S");
+        assertParse("90 3.45'S", null, -90 - 3.045 / 60, "90°3.<0>45'S");
         assertParse("S53 33.6", null, -53d - 33.006 / 60, "S53°33.<00>6'");
     }
 
@@ -110,7 +114,7 @@ public class DegreeFormulaTest {
     //this is a test to copy/paste single tests into for local analysis e.g. using Debugging
     @Test
     public void parseSingleForDebug() {
-        assertParse("-48 S", null, null , "-48°[S]");
+        assertParse("88. 3.45", null, null, "[88. 3.45?]");
     }
 
     private void assertParse(final String expression, final Func1<String, Value> varMap, final Double expectedValue, final String expectedAnnotatedString) {

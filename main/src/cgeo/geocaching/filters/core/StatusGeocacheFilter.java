@@ -40,7 +40,6 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.marker_usermodifiedcoords), R.string.cache_filter_status_select_infotext_solved_mystery),
         HAS_USER_DEFINED_WAYPOINT(R.string.cache_filter_status_select_label_has_user_defined_waypoint, "has_user_defined_waypoint", ImageParam.id(R.drawable.waypoint_flag));
 
-
         @StringRes public final int labelId;
         public final String yesFlag;
         public final String noFlag;
@@ -79,8 +78,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusHasOfflineFoundLog = null;
     private Boolean statusSolvedMystery = null;
     private Boolean statusHasUserDefinedWaypoint = null;
-
-
+  
     @Override
     public Boolean filter(final Geocache cache) {
 
@@ -267,7 +265,6 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_FOUND_LOG, b -> statusHasOfflineFoundLog = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINT, b -> statusHasUserDefinedWaypoint = b);
-            checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
                 excludeActive = true;
@@ -436,6 +433,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasOwnVote, StatusType.HAS_OWN_VOTE);
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
+        count = addIfStillFits(sb, count, statusHasUserDefineWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
         count = addIfStillFits(sb, count, statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);

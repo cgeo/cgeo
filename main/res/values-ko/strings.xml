@@ -772,6 +772,8 @@
         <item>밝음</item>
         <item>어두움</item>
     </string-array>
+    <string name="init_wallpaper">배경화면</string>
+    <string name="init_summary_wallpaper">배경 화면을 대시보드 배경으로 표시</string>
     <!-- backup / restore -->
     <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup_summary">이 기능은 캐시, 웨이 포인트 및 설정을 백업 할 수 있지만 캐시 이미지는 백업 할 수 없습니다. \n휴대 전화를 분실 한 후에도 데이터를 복원하려면 백업 파일을 독립적 인 위치에 복사해야합니다.</string>
@@ -797,6 +799,9 @@
     <string name="init_backup_history_length_min">최근만</string>
     <string name="init_backup_history_length_max">모두 유지</string>
     <string name="init_backup_history_delete_warning">구성된 최대 값이 허용하는 것보다 더 많은 백업을 저장했습니다. 초과 백업을 모두 제거 하시겠습니까?</string>
+    <string name="init_backup_automatic">자동 백업 알림</string>
+    <string name="init_backup_automatic_summary">자동 백업을 생성하도록 x일마다 알림 (수동으로 생성된 모든 백업에 추가), 0=해제</string>
+    <string name="init_backup_automatic_reminder">자동 백업을 생성하시겠습니까? 잠깐만 걸립니다.</string>
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>

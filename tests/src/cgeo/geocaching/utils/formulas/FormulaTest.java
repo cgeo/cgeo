@@ -58,11 +58,39 @@ public class FormulaTest {
     }
 
     @Test
-    public void concatWithParenthesis() {
+    public void singleTestForDebug() {
+        assertThat(eval("A+1 4", "A", 12)).isEqualTo(134d);
+    }
+
+    @Test
+    public void concat() {
+        assertThat(eval("3A4.3", "A", 1)).isEqualTo(314.3d);
+        assertThat(eval("3A4.3", "A", 1.2)).isEqualTo(0d);
+        assertThat(eval("3A4.3", "A", 12)).isEqualTo(3124.3d);
+
+        //parenthesis
         assertThat(eval("(3(5))")).isEqualTo(35d);
         assertThat(eval("(3(5)AA)", "A", 1)).isEqualTo(3511d);
         assertThat(eval("3(5)A(A+1)", "A", 1)).isEqualTo(3512d);
+
+        //whitespaces
+        assertThat(eval("3 4")).isEqualTo(34d);
+        assertThat(eval("3 A   4.3", "A", 12)).isEqualTo(3124.3d);
+        assertThat(eval("A+1 4", "A", 12)).isEqualTo(134d);
+        assertThat(eval("3 A+1 4.3", "A", 12)).isEqualTo(3134.3d);
+        assertThat(eval("3 A+1+4.3", "A", 12)).isEqualTo(317.3d);
+        assertThat(eval("3 A+1 4.3", "A", 1.2)).isEqualTo(0d);
+
+        assertThat(eval("3 A + 1 4.3", "A", 2)).isEqualTo(334.3d);
+        assertThat(eval("3 (A+1 A + 2) 4.3", "A", 2)).isEqualTo(3344.3d);
+
+        //issue #12610
+        assertThat(eval("2+ 3 4 +5")).isEqualTo(59d);
+        assertThat(eval("2+ 3 4+5")).isEqualTo(59d);
+        assertThat(eval("1 + 2 3")).isEqualTo(33d);
+        assertThat(eval("2+(3 4)+5")).isEqualTo(41d);
     }
+
 
     @Test
     public void variableCalculations() {
@@ -210,6 +238,13 @@ public class FormulaTest {
         assertThat(eval("(1+2)!")).isEqualTo(6);
         assertThat(eval("10--2")).isEqualTo(12);
         assertThat(eval("10- -+ +- -+ +-2")).isEqualTo(8);
+    }
+
+    @Test
+    public void operatorPrecedenceAndEvaluationOrder() {
+        assertThat(eval("100/5/5")).isEqualTo(4);
+        assertThat(eval("100-5-5")).isEqualTo(90);
+        assertThat(eval("100-5*5")).isEqualTo(75);
     }
 
     @Test

@@ -20,6 +20,7 @@ import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
 import androidx.annotation.NonNull;
+import androidx.core.util.Supplier;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -306,8 +307,15 @@ public final class Formula {
         }
         CHARS_DIGITS.addAll(CHARS);
         CHARS_DIGITS.addAll(NUMBERS);
-        NUMBERS.add((int) '.');
-        NUMBERS.add((int) ',');
+
+        addCharsToSet(NUMBERS, '.', ',');
+
+    }
+
+    private static void addCharsToSet(final Set<Integer> set, final char ... charsToAdd) {
+        for (char c: charsToAdd) {
+            set.add((int) c);
+        }
     }
 
     public static Formula compile(final String expression) throws FormulaException {
@@ -425,7 +433,7 @@ public final class Formula {
             }
             return StringUtils.join(list, ",");
         } catch (Exception e) {
-            return "Exc: " + e.toString();
+            return "Exc: " + e;
         }
     }
 
@@ -462,7 +470,27 @@ public final class Formula {
     }
 
     private FormulaNode parseExpression() {
-        return parseRelationalEquality();
+        return parseWhitespaceConcattenatedExpressions(this::parseRelationalEquality);
+    }
+
+    private FormulaNode parseWhitespaceConcattenatedExpressions(final Supplier<FormulaNode> parseNext) {
+        final FormulaNode singleResult = parseNext.get();
+        List<FormulaNode> multiResult = null;
+
+        //check if there are blocks to concat separated by whitespace
+        while (!p.eof() && (Character.isWhitespace(p.ch()) || Character.isWhitespace((char) p.previous()))) {
+            p.skipWhitespaces();
+            if (multiResult == null) {
+                multiResult = new ArrayList<>();
+                multiResult.add(singleResult);
+            }
+            multiResult.add(parseNext.get());
+        }
+        if (multiResult == null) {
+            return singleResult;
+        }
+        return new FormulaNode("concat-exp", multiResult.toArray(new FormulaNode[0]), (objs, vars, ri) -> concat(objs), null);
+
     }
 
     private FormulaNode parseRelationalEquality() {

@@ -778,6 +778,8 @@
         <item>Hell</item>
         <item>Dunkel</item>
     </string-array>
+    <string name="init_wallpaper">Hintergrundbild</string>
+    <string name="init_summary_wallpaper">Zeige das Hintergrundbild als Dashboard-Hintergrund</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Sicherung erstellen</string>
     <string name="init_backup_summary">Bitte beachte, dass diese Funktion Caches, Wegpunkte &amp; Einstellungen, aber keine Cachebilder, sichern kann.\nDamit du die Daten auch nach dem Verlust deines Telefons wiederherstellen kannst, sollten die Sicherungsdateien an einen unabhängigen Ort kopiert werden.</string>
@@ -803,6 +805,9 @@
     <string name="init_backup_history_length_min">Nur neustes</string>
     <string name="init_backup_history_length_max">Alle behalten</string>
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
+    <string name="init_backup_automatic">Automatische Sicherungserinnerung</string>
+    <string name="init_backup_automatic_summary">Erinnert dich alle x Tage daran, eine automatische Sicherung anzulegen (zusätzlich zu den manuell angelegten), 0=aus</string>
+    <string name="init_backup_automatic_reminder">Möchtest du eine automatische Sicherung anlegen? Das dauert nur kurz.</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
     <string name="init_backup_success">Datenbank von c:geo wurde erfolgreich kopiert nach:</string>
     <string name="init_backup_failed">Sicherung der Datenbank von c:geo fehlgeschlagen.</string>

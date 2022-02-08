@@ -1,27 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/action_item_info"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/helper_bcg">
-
-    <TextView
-        android:id="@+id/action_item_info"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_marginHorizontal="8dp"
-        android:layout_toLeftOf="@id/action_item_button"
-        android:gravity="center"
-        android:text="@string/init_backup_automatic_reminder"
-        android:textColor="@color/text_icon"
-        android:textIsSelectable="false"
-        android:textSize="@dimen/textSize_detailsPrimary" />
-
-    <Button
-        android:id="@+id/action_item_button"
-        style="@style/button_icon"
-        android:layout_alignParentRight="true"
-        app:icon="@drawable/ic_menu_done"/>
-
-</RelativeLayout>
+    android:layout_marginHorizontal="8dp"
+    android:padding="8dp"
+    android:background="@drawable/helper_bcg"
+    android:gravity="center"
+    android:textColor="@color/text_icon"
+    android:textIsSelectable="false"
+    android:textSize="@dimen/textSize_detailsPrimary" />
