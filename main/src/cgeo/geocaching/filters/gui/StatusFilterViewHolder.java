@@ -143,7 +143,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         setFromBoolean(statusHasTrackable, filter.getStatusHasTrackable());
         setFromBoolean(statusHasOwnVote, filter.getStatusHasOwnVote());
         setFromBoolean(statusSolvedMystery, filter.getStatusSolvedMystery());
-        setFromBoolean(statusHasUserDefinedWaypoint, filter.getStatusHasUserDefineWaypoint());
+        setFromBoolean(statusHasUserDefinedWaypoint, filter.getStatusHasUserDefinedWaypoint());
     }
 
 
@@ -167,7 +167,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         filter.setStatusHasTrackable(getFromGroup(statusHasTrackable));
         filter.setStatusHasOwnVote(getFromGroup(statusHasOwnVote));
         filter.setStatusSolvedMystery(getFromGroup(statusSolvedMystery));
-        filter.setStatusHasUserDefineWaypoint(getFromGroup(statusHasUserDefinedWaypoint));
+        filter.setStatusHasUserDefinedWaypoint(getFromGroup(statusHasUserDefinedWaypoint));
         return filter;
     }
 

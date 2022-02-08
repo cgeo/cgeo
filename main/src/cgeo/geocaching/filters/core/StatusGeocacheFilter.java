@@ -230,11 +230,11 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         this.statusSolvedMystery = statusSolvedMystery;
     }
 
-    public Boolean getStatusHasUserDefineWaypoint() {
+    public Boolean getStatusHasUserDefinedWaypoint() {
         return statusHasUserDefinedWaypoint;
     }
 
-    public void setStatusHasUserDefineWaypoint(final Boolean statusHasWaypoint) {
+    public void setStatusHasUserDefinedWaypoint(final Boolean statusHasWaypoint) {
         this.statusHasUserDefinedWaypoint = statusHasWaypoint;
     }
 
