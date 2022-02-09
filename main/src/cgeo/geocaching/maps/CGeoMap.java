@@ -520,6 +520,16 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (mapOptions.geocode != null || mapOptions.searchResult != null || savedCoords != null || mapOptions.mapState != null) {
             centerMap(mapOptions.geocode, mapOptions.searchResult, savedCoords, mapOptions.mapState);
         }
+
+
+        if (StringUtils.isNotEmpty(mapOptions.geocode) && mapOptions.mapMode != MapMode.COORDS) {
+            targetGeocode = mapOptions.geocode;
+            final Geocache temp = getCurrentTargetCache();
+            if (temp != null) {
+                lastNavTarget = temp.getCoords();
+            }
+        }
+
     }
 
     @Override
