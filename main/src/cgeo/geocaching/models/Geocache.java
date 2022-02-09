@@ -102,6 +102,7 @@ public class Geocache implements IWaypoint {
     private long updated = 0;
     private long detailedUpdate = 0;
     private long visitedDate = 0;
+    @NonNull
     private Set<Integer> lists = new HashSet<>();
     private boolean detailed = false;
 
