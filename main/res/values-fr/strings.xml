@@ -356,6 +356,10 @@
     <string name="caches_store_all">Tout enregistrer</string>
     <string name="caches_store_unsaved">Enregistrer les non sauvegardées</string>
     <string name="caches_store_selected">Enregistrer la sélection</string>
+    <string name="caches_store_background">Téléchargement en arrière-plan (expérimental)</string>
+    <string name="caches_store_refresh_background">Actualisation en arrière-plan (expérimental)</string>
+    <string name="caches_store_background_should_force_refresh">Actualiser les caches téléchargées</string>
+    <string name="caches_store_background_title">Télécharger les caches</string>
     <string name="caches_history">Historique</string>
     <string name="caches_on_map">Afficher sur la carte</string>
     <string name="caches_sort">Trier</string>
@@ -1276,6 +1280,7 @@
     <string name="cache_share_field">Partager</string>
     <string name="cache_time_full_hours">heures</string>
     <string name="cache_listed_on">Listée le %s</string>
+    <string name="cache_recently_viewed">Vu récemment</string>
     <string name="cache_whereyougo_start">Lancez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_whereyougo_install">Installez WhereYouGo pour télécharger et démarrer cette cartouche</string>
     <string name="cache_chirpwolf_start">Cette cache peut utiliser un transmetteur chirp ou une autre balise sans fil. Pour lire les données du chirp, vous pouvez utiliser l\'application Chirp Wolf.</string>
