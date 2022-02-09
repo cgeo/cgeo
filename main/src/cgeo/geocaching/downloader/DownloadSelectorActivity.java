@@ -26,6 +26,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.database.Cursor;
+import android.database.CursorIndexOutOfBoundsException;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -126,8 +127,14 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                                             final int bytesTotalPos = cursor.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES);
                                             final int progress;
                                             if (bytesDownloadedPos >= 0 && bytesTotalPos >= 0) {
-                                                final int bytesDownloaded = cursor.getInt(bytesDownloadedPos);
-                                                final int bytesTotal = cursor.getInt(bytesTotalPos);
+                                                int bytesDownloaded = 0;
+                                                int bytesTotal = 0;
+                                                try {
+                                                    bytesDownloaded = cursor.getInt(bytesDownloadedPos);
+                                                    bytesTotal = cursor.getInt(bytesTotalPos);
+                                                } catch (CursorIndexOutOfBoundsException ignore) {
+                                                    // should not happen, but...
+                                                }
                                                 progress = bytesTotal == 0 ? 0 : (int) ((bytesDownloaded * 100L) / bytesTotal);
                                             } else {
                                                 progress = 0;
