@@ -771,7 +771,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             menu.findItem(R.id.menu_store_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             menu.findItem(R.id.menu_store_unsaved_caches).setVisible(!isLoading() && CollectionUtils.isNotEmpty(getUnsavedGeocodes(geocodesInViewport)));
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(true); // Always false, this is only used for Google Maps
+            menu.findItem(R.id.menu_theme_mode).setVisible(!GoogleMapProvider.isSatelliteSource(Settings.getMapSource()));
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
