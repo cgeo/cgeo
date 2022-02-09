@@ -249,7 +249,7 @@ public class RouteTrackUtils {
     }
 
     public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final Tracks tracks) {
-        final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route));
+        final AtomicBoolean someTrackAvailable = new AtomicBoolean(isRouteNonEmpty(route) || isTargetSet.call());
         tracks.traverse((key, r) -> {
             if (!someTrackAvailable.get() && isRouteNonEmpty(r)) {
                 someTrackAvailable.set(true);
