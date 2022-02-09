@@ -264,6 +264,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.HAS_OWN_VOTE, b -> statusHasOwnVote = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_FOUND_LOG, b -> statusHasOfflineFoundLog = b);
+            checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINT, b -> statusHasUserDefinedWaypoint = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
@@ -433,7 +434,6 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasOwnVote, StatusType.HAS_OWN_VOTE);
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
-        count = addIfStillFits(sb, count, statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
         count = addIfStillFits(sb, count, statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
