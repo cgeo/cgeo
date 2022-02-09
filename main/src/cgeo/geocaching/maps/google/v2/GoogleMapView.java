@@ -64,7 +64,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
 
     private OnMapDragListener onDragListener;
     private final GoogleMapController mapController = new GoogleMapController();
-    private static GoogleMap googleMap;
+    private GoogleMap googleMap;
     private MapReadyCallback mapReadyCallback;
 
     private LatLng viewCenter;
@@ -534,17 +534,12 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     @Override
     public void selectMapTheme(AppCompatActivity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
-        String title = activity.getString(R.string.map_theme_select);
-        builder.setTitle(title);
+        builder.setTitle(R.string.map_theme_select);
 
-        final List<String> names = new ArrayList<>();
-        for (GoogleMapsThemes theme : GoogleMapsThemes.values()) {
-            names.add(theme.getLabelString(activity));
-        }
-        final int currentItem = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()).ordinal();
+        final int selectedItem = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()).ordinal();
 
-        builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, selectedItem) -> {
-            GoogleMapsThemes theme = GoogleMapsThemes.values()[selectedItem];
+        builder.setSingleChoiceItems(GoogleMapsThemes.getLabels(activity).toArray(new String[0]), selectedItem, (dialog, selection) -> {
+            GoogleMapsThemes theme = GoogleMapsThemes.values()[selection];
             Settings.setSelectedGoogleMapTheme(theme.name());
             googleMap.setMapStyle(theme.getMapStyleOptions(activity));
             dialog.cancel();
@@ -569,21 +564,25 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
             this.jsonRes = jsonRes;
         }
 
-        public String getLabelString(final Context context) {
-            return context.getResources().getString(labelRes);
-        }
-
         public MapStyleOptions getMapStyleOptions(final Context context) {
-            final int jsonRes;
+            final int jsonResId;
             if (this == AUTO) {
-                jsonRes = Settings.isLightSkin(context) ? DEFAULT.jsonRes : NIGHT.jsonRes;
+                jsonResId = Settings.isLightSkin(context) ? DEFAULT.jsonRes : NIGHT.jsonRes;
             } else {
-                jsonRes = this.jsonRes;
+                jsonResId = this.jsonRes;
             }
-            if (jsonRes != 0) {
-                return MapStyleOptions.loadRawResourceStyle(context, jsonRes);
+            if (jsonResId != 0) {
+                return MapStyleOptions.loadRawResourceStyle(context, jsonResId);
             }
             return null;
+        }
+
+        public static List<String> getLabels(final Context context) {
+            final List<String> themeLabels = new ArrayList<>();
+            for (GoogleMapsThemes theme : GoogleMapsThemes.values()) {
+                themeLabels.add(context.getResources().getString(theme.labelRes));
+            }
+            return themeLabels;
         }
 
         public static GoogleMapsThemes getByName(final String themeName) {
