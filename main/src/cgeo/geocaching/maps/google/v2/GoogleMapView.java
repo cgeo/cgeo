@@ -115,7 +115,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         this.googleMap = googleMap;
         mapController.setGoogleMap(googleMap);
 
-        applyMapStyle(googleMap, getContext());
+        final GoogleMapsThemes theme = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme());
+        googleMap.setMapStyle(theme.getMapStyleOptions(getContext()));
 
         cachesList = new GoogleCachesList(googleMap);
         googleMap.setOnCameraMoveListener(this::recognizePositionChange);
@@ -530,7 +531,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         onCacheTapListener = listener;
     }
 
-    public static void selectMapTheme(AppCompatActivity activity) {
+    @Override
+    public void selectMapTheme(AppCompatActivity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         String title = activity.getString(R.string.map_theme_select);
         builder.setTitle(title);
@@ -542,22 +544,19 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         final int currentItem = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()).ordinal();
 
         builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, selectedItem) -> {
-            Settings.setSelectedGoogleMapTheme(GoogleMapsThemes.values()[selectedItem].name());
-            applyMapStyle(googleMap, activity);
+            GoogleMapsThemes theme = GoogleMapsThemes.values()[selectedItem];
+            Settings.setSelectedGoogleMapTheme(theme.name());
+            googleMap.setMapStyle(theme.getMapStyleOptions(activity));
             dialog.cancel();
         });
 
         builder.show();
     }
 
-    private static void applyMapStyle(final GoogleMap googleMap, final Context context) {
-        final GoogleMapsThemes theme = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme());
-        googleMap.setMapStyle(theme.getMapStyleOptions(context));
-    }
-
     public enum GoogleMapsThemes {
         DEFAULT(R.string.google_maps_style_default, 0),
         NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night),
+        AUTO(R.string.google_maps_style_auto, 0),
         RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro),
         OSM(R.string.google_maps_style_osm, R.raw.googlemap_style_osm),
         CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast);
@@ -575,6 +574,12 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         }
 
         public MapStyleOptions getMapStyleOptions(final Context context) {
+            final int jsonRes;
+            if (this == AUTO) {
+                jsonRes = Settings.isLightSkin(context) ? DEFAULT.jsonRes : NIGHT.jsonRes;
+            } else {
+                jsonRes = this.jsonRes;
+            }
             if (jsonRes != 0) {
                 return MapStyleOptions.loadRawResourceStyle(context, jsonRes);
             }

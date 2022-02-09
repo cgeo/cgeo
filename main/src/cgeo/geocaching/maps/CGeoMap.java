@@ -825,7 +825,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_theme_mode) {
-            GoogleMapView.selectMapTheme(activity);
+            mapView.selectMapTheme(activity);
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
             ActivityMixin.overrideTransitionToFade(activity);

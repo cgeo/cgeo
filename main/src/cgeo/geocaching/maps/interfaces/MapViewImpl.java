@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.Collection;
 
@@ -100,4 +101,5 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
     void onDestroy();
     void onSaveInstanceState(@NonNull Bundle b);
     void onLowMemory();
+    void selectMapTheme(AppCompatActivity activity);
 }
