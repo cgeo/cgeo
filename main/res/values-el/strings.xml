@@ -2153,6 +2153,7 @@
     <string name="back">Πίσω</string>
     <string name="later">Αργότερα</string>
     <string name="cancel">Ακύρωση</string>
+    <string name="ok">Οκ</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
     <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>
