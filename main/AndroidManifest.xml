@@ -919,9 +919,12 @@
             </intent-filter>
         </receiver>
 
+        <!-- Map import service -->
         <service android:name=".downloader.ReceiveDownloadService" />
 
+        <!-- Background cache downloader -->
         <service android:name=".service.CacheDownloaderService" />
+        <receiver android:name=".service.StopCacheDownloadServiceReceiver"/>
 
         <!-- Receiver for custom tabs share intent -->
         <receiver android:name=".settings.ShareBroadcastReceiver"/>
