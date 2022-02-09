@@ -356,6 +356,10 @@
     <string name="caches_store_all">Alle speichern</string>
     <string name="caches_store_unsaved">Neue speichern</string>
     <string name="caches_store_selected">Ausgewählte speichern</string>
+    <string name="caches_store_background">Hintergrund-Download (Experimentell!)</string>
+    <string name="caches_store_refresh_background">Hintergrund-Aktualisierung (Experimentell!)</string>
+    <string name="caches_store_background_should_force_refresh">Aktualisiere bereits heruntergeladene Caches</string>
+    <string name="caches_store_background_title">Caches herunterladen</string>
     <string name="caches_history">Verlauf</string>
     <string name="caches_on_map">Zeige auf Karte</string>
     <string name="caches_sort">Sortierung</string>
@@ -1281,6 +1285,7 @@
     <string name="cache_share_field">Teilen</string>
     <string name="cache_time_full_hours">Uhr</string>
     <string name="cache_listed_on">Geführt auf %s</string>
+    <string name="cache_recently_viewed">Zuletzt angesehen</string>
     <string name="cache_whereyougo_start">WhereYouGo aufrufen, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_whereyougo_install">WhereYouGo App installieren, um diese Cartridge herunterzuladen und zu starten</string>
     <string name="cache_chirpwolf_start">Dieser Cache könnte entweder einen Chirp-Sender oder eine andere Art von Funksender verwenden. Zum Lesen von Chip-Daten kannst du Chirp Wolf öffnen.</string>
