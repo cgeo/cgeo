@@ -356,6 +356,10 @@
     <string name="caches_store_all">Alle opslaan</string>
     <string name="caches_store_unsaved">Niet opgeslagen opslaan</string>
     <string name="caches_store_selected">Geselecteerden opslaan</string>
+    <string name="caches_store_background">Downloaden op achtergrond (experimenteel!)</string>
+    <string name="caches_store_refresh_background">Vernieuwen op achtergrond (experimenteel!)</string>
+    <string name="caches_store_background_should_force_refresh">Vernieuwen reeds gedownloade caches</string>
+    <string name="caches_store_background_title">Caches downloaden</string>
     <string name="caches_history">Geschiedenis</string>
     <string name="caches_on_map">Toon op kaart</string>
     <string name="caches_sort">Sorteren</string>
@@ -1281,6 +1285,7 @@
     <string name="cache_share_field">Delen</string>
     <string name="cache_time_full_hours">uur</string>
     <string name="cache_listed_on">Opgenomen in %s</string>
+    <string name="cache_recently_viewed">Recent bekeken</string>
     <string name="cache_whereyougo_start">Open WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_whereyougo_install">Installeer WhereYouGo om deze cartridge te downloaden en te starten</string>
     <string name="cache_chirpwolf_start">Deze cache kan een chirp zender of een ander draadloos baken gebruiken. Voor het lezen van chirp gegevens kan je Chirp Wolf openen.</string>
