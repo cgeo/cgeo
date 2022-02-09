@@ -532,14 +532,14 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     }
 
     @Override
-    public void selectMapTheme(AppCompatActivity activity) {
+    public void selectMapTheme(final AppCompatActivity activity) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.map_theme_select);
 
         final int selectedItem = GoogleMapsThemes.getByName(Settings.getSelectedGoogleMapTheme()).ordinal();
 
         builder.setSingleChoiceItems(GoogleMapsThemes.getLabels(activity).toArray(new String[0]), selectedItem, (dialog, selection) -> {
-            GoogleMapsThemes theme = GoogleMapsThemes.values()[selection];
+            final GoogleMapsThemes theme = GoogleMapsThemes.values()[selection];
             Settings.setSelectedGoogleMapTheme(theme.name());
             googleMap.setMapStyle(theme.getMapStyleOptions(activity));
             dialog.cancel();
@@ -556,8 +556,8 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         OSM(R.string.google_maps_style_osm, R.raw.googlemap_style_osm),
         CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast);
 
-        final private int labelRes;
-        final private int jsonRes;
+        final int labelRes;
+        final int jsonRes;
 
         GoogleMapsThemes(final int labelRes, final int jsonRes) {
             this.labelRes = labelRes;

@@ -23,7 +23,6 @@ import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.location.WaypointDistanceInfo;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapProvider;
-import cgeo.geocaching.maps.google.v2.GoogleMapView;
 import cgeo.geocaching.maps.google.v2.GooglePositionAndHistory;
 import cgeo.geocaching.maps.interfaces.CachesOverlayItemImpl;
 import cgeo.geocaching.maps.interfaces.GeneralOverlay;
