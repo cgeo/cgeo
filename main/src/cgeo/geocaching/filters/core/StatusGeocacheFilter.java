@@ -38,7 +38,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         HAS_OFFLINE_LOG(R.string.cache_filter_status_select_label_has_offline_log, "has_offline_log", ImageParam.id(R.drawable.marker_note)),
         HAS_OFFLINE_FOUND_LOG(R.string.cache_filter_status_select_label_has_offline_found_log, "has_offline_found_log", ImageParam.id(R.drawable.marker_found_offline)),
         SOLVED_MYSTERY(R.string.cache_filter_status_select_label_solved_mystery, "solved_mystery", ImageParam.id(R.drawable.marker_usermodifiedcoords), R.string.cache_filter_status_select_infotext_solved_mystery),
-        HAS_USER_DEFINED_WAYPOINT(R.string.cache_filter_status_select_label_has_user_defined_waypoint, "has_user_defined_waypoint", ImageParam.id(R.drawable.waypoint_flag));
+        HAS_USER_DEFINED_WAYPOINTS(R.string.cache_filter_status_select_label_has_user_defined_waypoints, "has_user_defined_waypoints", ImageParam.id(R.drawable.waypoint_flag));
 
         @StringRes public final int labelId;
         public final String yesFlag;
@@ -77,8 +77,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     private Boolean statusHasOfflineLog = null;
     private Boolean statusHasOfflineFoundLog = null;
     private Boolean statusSolvedMystery = null;
-    private Boolean statusHasUserDefinedWaypoint = null;
-  
+    private Boolean statusHasUserDefinedWaypoints = null;
+
     @Override
     public Boolean filter(final Geocache cache) {
 
@@ -92,28 +92,28 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             (statusWatchlist != null && cache.isOnWatchlistRaw() == null) ||
             (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
             (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
-            (statusHasUserDefinedWaypoint != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||
+            (statusHasUserDefinedWaypoints != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||
             (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null)) {
             return null;
         }
 
         return
             (!excludeActive || cache.isDisabled() || cache.isArchived()) &&
-            (!excludeDisabled || !cache.isDisabled()) &&
-            (!excludeArchived || !cache.isArchived()) &&
-            (statusOwned == null || (cache.isOwner() == statusOwned)) &&
-            (statusFound == null || cache.isFound() == statusFound) &&
-            (statusStored == null || cache.isOffline() == statusStored) &&
-            (statusFavorite == null || cache.isFavorite() == statusFavorite) &&
-            (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
-            (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
-            (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
-            (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
-            (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
-            (statusHasOfflineFoundLog == null || hasFoundOfflineLog(cache) == statusHasOfflineFoundLog) &&
-            (statusHasUserDefinedWaypoint == null || (cache.hasUserdefinedWaypoints()) == statusHasUserDefinedWaypoint) &&
-            (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
-                (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
+                (!excludeDisabled || !cache.isDisabled()) &&
+                (!excludeArchived || !cache.isArchived()) &&
+                (statusOwned == null || (cache.isOwner() == statusOwned)) &&
+                (statusFound == null || cache.isFound() == statusFound) &&
+                (statusStored == null || cache.isOffline() == statusStored) &&
+                (statusFavorite == null || cache.isFavorite() == statusFavorite) &&
+                (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
+                (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
+                (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
+                (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
+                (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
+                (statusHasOfflineFoundLog == null || hasFoundOfflineLog(cache) == statusHasOfflineFoundLog) &&
+                (statusHasUserDefinedWaypoints == null || (cache.hasUserdefinedWaypoints()) == statusHasUserDefinedWaypoints) &&
+                (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
+                    (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
     }
 
     public boolean isExcludeActive() {
@@ -229,11 +229,11 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     public Boolean getStatusHasUserDefinedWaypoint() {
-        return statusHasUserDefinedWaypoint;
+        return statusHasUserDefinedWaypoints;
     }
 
     public void setStatusHasUserDefinedWaypoint(final Boolean statusHasWaypoint) {
-        this.statusHasUserDefinedWaypoint = statusHasWaypoint;
+        this.statusHasUserDefinedWaypoints = statusHasWaypoint;
     }
 
     @Override
@@ -247,7 +247,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         statusHasOwnVote = null;
         statusHasOfflineLog = null;
         statusHasOfflineFoundLog = null;
-        statusHasUserDefinedWaypoint = null;
+        statusHasUserDefinedWaypoints = null;
         statusPremium = null;
 
         excludeActive = false;
@@ -265,7 +265,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_LOG, b -> statusHasOfflineLog = b);
             checkAndSetBooleanFlag(value, StatusType.HAS_OFFLINE_FOUND_LOG, b -> statusHasOfflineFoundLog = b);
             checkAndSetBooleanFlag(value, StatusType.SOLVED_MYSTERY, b -> statusSolvedMystery = b);
-            checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINT, b -> statusHasUserDefinedWaypoint = b);
+            checkAndSetBooleanFlag(value, StatusType.HAS_USER_DEFINED_WAYPOINTS, b -> statusHasUserDefinedWaypoints = b);
 
             if (checkBooleanFlag(FLAG_EXCLUDE_ACTIVE, value)) {
                 excludeActive = true;
@@ -299,7 +299,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         checkAndAddFlagToDefaultList(statusHasOwnVote, StatusType.HAS_OWN_VOTE, result);
         checkAndAddFlagToDefaultList(statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG, result);
         checkAndAddFlagToDefaultList(statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG, result);
-        checkAndAddFlagToDefaultList(statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT, result);
+        checkAndAddFlagToDefaultList(statusHasUserDefinedWaypoints, StatusType.HAS_USER_DEFINED_WAYPOINTS, result);
         checkAndAddFlagToDefaultList(statusSolvedMystery, StatusType.SOLVED_MYSTERY, result);
         if (excludeActive) {
             result.addToDefaultList(FLAG_EXCLUDE_ACTIVE);
@@ -327,7 +327,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         return statusOwned != null || statusFound != null || statusStored != null || statusFavorite != null ||
             statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
             statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
-            statusSolvedMystery != null || statusHasUserDefinedWaypoint != null || excludeArchived || excludeDisabled || excludeActive;
+            statusSolvedMystery != null || statusHasUserDefinedWaypoints != null || excludeArchived || excludeDisabled || excludeActive;
     }
 
     @Override
@@ -374,8 +374,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 final String logTableId = sqlBuilder.getNewTableId();
                 final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
                 sqlBuilder.addWhere((statusHasOfflineFoundLog ? "" : "NOT ") +
-                        "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
-                        " AND " + logTableId + ".type in (" + logIds + ")" + ")");
+                    "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
+                    " AND " + logTableId + ".type in (" + logIds + ")" + ")");
             }
             if (statusSolvedMystery != null) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
@@ -399,9 +399,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 }
                 sqlBuilder.closeWhere();
             }
-            if (statusHasUserDefinedWaypoint != null) {
+            if (statusHasUserDefinedWaypoints != null) {
                 final String waypointTableId = sqlBuilder.getNewTableId();
-                sqlBuilder.addWhere((statusHasUserDefinedWaypoint ? "" : "NOT ") +
+                sqlBuilder.addWhere((statusHasUserDefinedWaypoints ? "" : "NOT ") +
                     "EXISTS(SELECT geocode FROM cg_waypoints " + waypointTableId + " WHERE " + waypointTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND (" + waypointTableId + ".own=1 OR " + waypointTableId + ".type = 'own'))");
             }
             if (excludeActive) {
@@ -435,7 +435,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
         count = addIfStillFits(sb, count, statusHasOfflineLog, StatusType.HAS_OFFLINE_LOG);
         count = addIfStillFits(sb, count, statusHasOfflineFoundLog, StatusType.HAS_OFFLINE_FOUND_LOG);
         count = addIfStillFits(sb, count, statusSolvedMystery, StatusType.SOLVED_MYSTERY);
-        count = addIfStillFits(sb, count, statusHasUserDefinedWaypoint, StatusType.HAS_USER_DEFINED_WAYPOINT);
+        count = addIfStillFits(sb, count, statusHasUserDefinedWaypoints, StatusType.HAS_USER_DEFINED_WAYPOINTS);
         count = addIfTrue(sb, count, excludeActive, R.string.cache_filter_status_exclude_active);
         count = addIfTrue(sb, count, excludeDisabled, R.string.cache_filter_status_exclude_disabled);
         count = addIfTrue(sb, count, excludeArchived, R.string.cache_filter_status_exclude_archived);
