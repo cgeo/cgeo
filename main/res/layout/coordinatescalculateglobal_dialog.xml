@@ -21,16 +21,6 @@
             android:orientation="vertical"
             android:importantForAutofill="noExcludeDescendants">
 
-            <TextView
-                android:id="@+id/variables_experimental_warning"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textSize="@dimen/textSize_headingSecondary"
-                android:background="@drawable/mark_orange"
-                android:text="Experimental New Feature"
-                />
-
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
@@ -42,7 +32,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_margin="6dp"
                 android:layout_centerVertical="true"
-                android:text="Guided Mode" />
+                android:text="@string/calccoord_guided_mode" />
 
             <Spinner
                 android:id="@+id/cc_guided_format"
@@ -63,7 +53,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_toRightOf="@id/cc_switch_guided"
                 app:icon="@drawable/ic_menu_auto_fix_high"
-                android:text="Remove Spaces"
+                android:text="@string/calccoord_remove_spaces"
                 android:layout_centerVertical="true"/>
 
             </RelativeLayout>
@@ -114,7 +104,7 @@
                     android:gravity="center"
                     android:layout_margin="6dp"
                     app:icon="@drawable/ic_menu_auto_fix_high"
-                    android:text="Tidy Up"/>
+                    android:text="@string/variables_tidyup"/>
 
 
             </RelativeLayout>
@@ -170,14 +160,14 @@
                 style="@style/button_full"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Convert to plain coordinate" />
+                android:text="@string/calccoord_convert_to_plain" />
 
             <Button
                 android:id="@+id/generate_range_coordinates"
                 style="@style/button_full"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Generate Range coordinates" />
+                android:text="@string/calccoord_generate_title" />
 
             <Button
                 android:id="@+id/done"

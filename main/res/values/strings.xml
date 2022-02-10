@@ -1502,8 +1502,9 @@
         <item>@string/waypoint_duplicate</item>
     </array>
     <string name="waypoint_cache_coordinates">Cache coordinates</string>
-    <string name="waypoint_calculate_coordinates">Calculate coordinates</string>
-    <string name="waypoint_calculated_coordinates">Calculated coordinates</string>
+    <string name="waypoint_calculate_coordinates">Calculate coordinates</string> <!-- Legacy: button text in coordinate input -->
+    <string name="waypoint_calculated_coordinates">Calculated coordinates</string> <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Calculate coordinates (new)</string>
     <string name="waypoint_custom">Custom</string>
     <string name="waypoint_my_coordinates">My coordinates</string>
     <string name="waypoint_bearing">Bearing in °</string>
@@ -1543,6 +1544,66 @@
     <string name="waypoint_coordinate_formats_plain">Plain</string>
     <string name="from_clipboard">From clipboard</string>
     <string name="copy_to_clipboard">Copy to clipboard</string>
+
+    <!-- Variables -->
+    <string name="variables_titletext">Use this page to note down values and do calculations necessary for this cache.</string>
+    <string name="variables_scanlisting">Scan listing</string>
+    <string name="variables_scanlisting_choosepattern_title">Choose found pattern</string>
+    <string name="variables_tidyup">Tidy Up</string>
+    <string name="variables_deleteall">Delete All</string>
+    <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
+    <string name="variables_info">Help</string>
+
+    <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Guided Mode</string>
+    <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
+    <string name="calccoord_remove_spaces">Remove Spaces</string>
+
+    <string name="calccoord_generate_title">Generate Waypoints</string>
+    <string name="calccoord_generate_showonmap">Show on Map</string>
+    <string name="calccoord_generate_waypointnameprefix">Generated</string>
+    <string name="calccoord_generate_error_novarwithrange">No valid variable with ranges found</string>
+    <string name="calccoord_generate_error_novalidgeopoints">No combination returned valid coordinates</string>
+    <string name="calccoord_generate_error_nogeopointselected">No Coordinate selected</string>
+
+    <string name="calccoord_migrate_title">Waypoint Migration</string>
+    <string name="calccoord_migrate_migrate">Migrate</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migrated from</string>
+    <string name="calccoord_migrate_cancel">Cancel</string>
+    <string name="calccoord_migrate_dismiss">Dismiss data</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Dismissed</string>
+    <string name="calccoord_migrate_infotext_markdown">A legacy coordinate calculation was found in this waypoint:\n\n%1$s\n\nYou can migrate this to the new cache calculation coordinates as follows:\n\n%2$s\n\nwith new cache variables:%3$s\n\nPlease choose:\n- %4$s to perform migration as suggested\n- %5$s to dismiss the found calculation data for good\n- %6$s to continue without migration. You will be asked for migration again next time you open the waypoint for editing. Note however that editing the waypoint coordinates could delete local calculation data.</string>
+
+    <!-- Formula -->
+    <string name="formula_function_sqrt">Square Root</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangent</string>
+    <string name="formula_function_abs">Absolute Value</string>
+    <string name="formula_function_round">Round</string>
+    <string name="formula_function_if">If</string>
+    <string name="formula_function_length">String Length</string>
+    <string name="formula_function_substring">Substring</string>
+    <string name="formula_function_rot13">Rotate characters by 13</string>
+    <string name="formula_function_rot">Rotate Characters</string>
+    <string name="formula_function_checksum">Checksum</string>
+    <string name="formula_function_ichecksum">Iterative Checksum</string>
+    <string name="formula_function_lettervalue">Word Value</string>
+    <string name="formula_function_roman">Roman to Decimal</string>
+    <string name="formula_function_vanity">Vanity Code</string>
+
+    <string name="formula_function_group_simplenumeric">Simple Numeric</string>
+    <string name="formula_function_group_complexnumeric">Complex Numeric</string>
+    <string name="formula_function_group_simplestring">Simple String</string>
+    <string name="formula_function_group_complexstring">Complex String</string>
+
+    <string name="formula_error_unexpectedtoken">Expected \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Wrong parameter count, expected %1$s-%2$s, got %3$s</string>
+    <string name="formula_error_wrongtype">Wrong type, expected \'%1$s\', got \'%2$s\' of type \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Missing: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cycle: %1$s</string>
+    <string name="formula_error_empty">Empty Formula</string>
+    <string name="formula_error_other">Error: \'%1$s\'</string>
 
     <!-- visit -->
     <string name="visit_tweet">Post this find to Twitter</string>
@@ -2437,7 +2498,7 @@
     <string name="back">Back</string>
     <string name="later">Later</string>
     <string name="cancel">Cancel</string>
-    <string name="ok">Ok</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
 
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Select All</string>

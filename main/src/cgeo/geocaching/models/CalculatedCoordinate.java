@@ -1,6 +1,7 @@
 package cgeo.geocaching.models;
 
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.formulas.DegreeFormula;
 import cgeo.geocaching.utils.formulas.Value;
@@ -29,6 +30,11 @@ public class CalculatedCoordinate implements Parcelable {
     private CalculatedCoordinateType type = PLAIN;
     private DegreeFormula latitudePattern = EMPTY_FORMULA;
     private DegreeFormula longitudePattern = EMPTY_FORMULA;
+
+    /** c:geo-global Feature switch to turn on/off the new calculated coordinates */
+    public static boolean isFeatureEnabled() {
+        return !BranchDetectionHelper.isProductionBuild();
+    }
 
 
     public CalculatedCoordinate() {

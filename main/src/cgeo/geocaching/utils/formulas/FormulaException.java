@@ -1,5 +1,6 @@
 package cgeo.geocaching.utils.formulas;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.utils.LocalizationUtils;
 
 import androidx.annotation.StringRes;
@@ -7,14 +8,13 @@ import androidx.annotation.StringRes;
 public class FormulaException extends IllegalArgumentException {
 
     public enum ErrorType {
-        //internationalize later
-        UNEXPECTED_TOKEN(0, "Expected '%1$s'"),
-        WRONG_PARAMETER_COUNT(0, "Wrong parameter count, expected %1$s-%2$s, got %3$s"),
-        WRONG_TYPE(0, "Wrong type, expected '%1$s', got '%2$s' of type '%3$s'"),
-        MISSING_VARIABLE_VALUE(0, "Missing: %1$s"),
-        CYCLIC_DEPENDENCY(0, "Cycle: %1$s"),
-        EMPTY_FORMULA(0, "Empty Formula"),
-        OTHER(0, "Error: '%1$s'");
+        UNEXPECTED_TOKEN(R.string.formula_error_unexpectedtoken, "Expected '%1$s'"),
+        WRONG_PARAMETER_COUNT(R.string.formula_error_wrongparamcount, "Wrong parameter count, expected %1$s-%2$s, got %3$s"),
+        WRONG_TYPE(R.string.formula_error_wrongtype, "Wrong type, expected '%1$s', got '%2$s' of type '%3$s'"),
+        MISSING_VARIABLE_VALUE(R.string.formula_error_missingvarvalue, "Missing: %1$s"),
+        CYCLIC_DEPENDENCY(R.string.formula_error_cyclicdependency, "Cycle: %1$s"),
+        EMPTY_FORMULA(R.string.formula_error_empty, "Empty Formula"),
+        OTHER(R.string.formula_error_other, "Error: '%1$s'");
 
         @StringRes
         public final int messageResId;

@@ -43,7 +43,7 @@
             style="@style/button_full"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="NEW Calculate Coordinates"
+            android:text="@string/waypoint_calculated_coordinates_global"
             app:icon="@drawable/ic_menu_variable"
             android:visibility="gone" />
 

@@ -21,6 +21,7 @@ import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.formulas.VariableMap;
@@ -56,7 +57,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 /**
  * Dialog to manage calculation of a coordinate
  */
-public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implements ClickCompleteCallback, LongClickCompleteCallback {
+public class CoordinatesCalculateGlobalDialog extends DialogFragment {
 
     private static final String ARG_INPUT_DATA = "arg_input_data";
 
@@ -153,7 +154,6 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
     public void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
         outState.putParcelable(ARG_INPUT_DATA, createFromDialog());
-        //outState.putStringArray(ARG_PREFILLED_VARS, varsAlwaysToKeep.toArray(new String[0]));
     }
 
 
@@ -175,7 +175,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
             binding.done.setOnClickListener(view -> saveAndFinishDialog());
         } else {
             final Toolbar toolbar = binding.toolbarWrapper.toolbar;
-            toolbar.setTitle("Calculate Coordinate");
+            toolbar.setTitle(R.string.waypoint_calculated_coordinates_global);
             toolbar.inflateMenu(R.menu.menu_ok_cancel);
             toolbar.setOnMenuItemClickListener(item -> {
                 if (item.getItemId() == R.id.menu_item_save) {
@@ -349,7 +349,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         }
         TextUtils.sortListLocaleAware(varsToConsider);
         if (varsToConsider.isEmpty()) {
-            ActivityMixin.showShortToast(this.getActivity(), "No valid variables with ranges found");
+            ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_novarwithrange);
             return;
         }
 
@@ -357,22 +357,22 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
         generateRangeCoordinatesRecursive(varsToConsider, 0, null, gps);
 
         if (gps.isEmpty()) {
-            ActivityMixin.showShortToast(this.getActivity(), "No combination returned valid geopoints");
+            ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_novalidgeopoints);
             return;
         }
 
-        SimpleDialog.of(this.getActivity()).setTitle(TextParam.text("Generate Waypoints"))
-            .setNeutralButton(TextParam.text("Show on Map"))
+        SimpleDialog.of(this.getActivity()).setTitle(TextParam.id(R.string.calccoord_generate_title))
+            .setNeutralButton(TextParam.id(R.string.calccoord_generate_showonmap))
             .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second),  null, s -> {
                 if (s.isEmpty()) {
-                    ActivityMixin.showShortToast(this.getActivity(), "No Geopoint selected");
+                    ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
                     return;
                 }
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 generateWaypoints(cache, true, s);
             }, s -> {
                 if (s.isEmpty()) {
-                    ActivityMixin.showShortToast(this.getActivity(), "No Geopoint selected");
+                    ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
                     return;
                 }
                 //generate a new fake cache in-memory (without a coordinate) to enable showing the waypoints on a map
@@ -389,7 +389,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment { // implem
     private void generateWaypoints(final Geocache cache, final boolean updateDatabase, final Collection<Pair<String, Geopoint>> gps) {
         boolean changed = false;
         for (Pair<String, Geopoint> p : gps) {
-            final Waypoint wp = new Waypoint("Generated: " + p.first, WaypointType.WAYPOINT, true);
+            final Waypoint wp = new Waypoint(LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix) + ": " + p.first, WaypointType.WAYPOINT, true);
             wp.setCoords(p.second);
             wp.setGeocode(cache.getGeocode());
             changed = changed | cache.addOrChangeWaypoint(wp, updateDatabase);
