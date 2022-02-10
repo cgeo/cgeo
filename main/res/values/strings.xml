@@ -896,7 +896,7 @@
     <string name="init_backup_history_length_min">Only recent</string>
     <string name="init_backup_history_length_max">Keep all</string>
     <string name="init_backup_history_delete_warning">You have saved more backups than your configured maximum value allows. Do you really want to remove all excess backups?</string>
-    <string name="init_backup_automatic">Automatic backup reminder</string>
+    <string name="init_backup_automatic">Automatic backup</string>
     <string name="init_backup_automatic_summary">Performs an automatic backup every x days (in addition to any manually created backups), 0=off</string>
     <string name="init_backup_automatic_performing">Creating backup…</string>
     <string name="init_user_confirmation">I know what I\'m doing</string>
