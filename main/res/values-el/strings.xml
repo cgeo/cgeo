@@ -352,6 +352,10 @@
     <string name="caches_store_all">Αποθήκευση όλων</string>
     <string name="caches_store_unsaved">Αποθήκευση των μη αποθηκευμένων</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
+    <string name="caches_store_background">Λήψη φόντου (Πειραματικό!)</string>
+    <string name="caches_store_refresh_background">Ανανέωση φόντου (Πειραματικό!)</string>
+    <string name="caches_store_background_should_force_refresh">Ανανέωση ήδη κατεβασμένων κρυπτών</string>
+    <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
@@ -775,6 +779,7 @@
         <item>Σκούρο</item>
     </string-array>
     <string name="init_wallpaper">Ταπετσαρία</string>
+    <string name="init_summary_wallpaper">Εμφάνιση ταπετσαρίας συσκευής ως φόντο στην αρχική οθόνη</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
     <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
@@ -800,6 +805,8 @@
     <string name="init_backup_history_length_min">Μονό πρόσφατα</string>
     <string name="init_backup_history_length_max">Διατήρηση όλων</string>
     <string name="init_backup_history_delete_warning">Έχετε αποθηκεύσει περισσότερα αρχεία ασφαλείας από το μέγιστο επιτρεπτό όριο. Θέλετε να διαγραφούν όλα τα πλεονάζοντα αρχεία ασφαλείας;</string>
+    <string name="init_backup_automatic_summary">Εκτελεί ένα αυτόματο αντίγραφο ασφαλείας κάθε x ημέρες (επιπλέον των τυχόν χειροκίνητα δημιουργημένων αντιγράφων ασφαλείας), 0=off</string>
+    <string name="init_backup_automatic_performing">Δημιουργία αντιγράφου ασφαλείας…</string>
     <string name="init_user_confirmation">Ξέρω τι κάνω</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
@@ -1273,6 +1280,7 @@
     <string name="cache_share_field">Κοινή χρήση</string>
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
+    <string name="cache_recently_viewed">Προβλήθηκαν πρόσφατα</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
@@ -2079,6 +2087,8 @@
     <string name="check_tiles_found">Τα δεδομένα δρομολόγησης υπάρχουν ήδη</string>
     <string name="check_tiles_missing">Βρέθηκαν δεδομένα δρομολόγησης:\n%1$s\n\nΘέλετε να κατεβάσετε αυτά τα αρχεία?%2$s</string>
     <string name="check_tiles_unsupported">Προειδοποίηση: Τα δεδομένα δρομολόγησης τουλάχιστον εν μέρει δεν είναι διαθέσιμα για την επιλεγμένη περιοχή</string>
+    <string name="tileupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις των αρχείων δεδομένων δρομολόγησης που έχουν ληφθεί. Πατήστε παρατεταμένα για αναβολή.</string>
+    <string name="mapupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις του χάρτη και των αρχείων θέματος. Πατήστε παρατεταμένα για αναβολή.</string>
     <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
     <string name="updates_check">Έλεγχος ενημερώσεων</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
