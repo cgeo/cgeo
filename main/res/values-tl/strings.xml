@@ -693,6 +693,8 @@
     <string name="waypoint_coordinates">Mga koordinado</string>
     <string name="waypoint_cache_coordinates">Mga cache ng koordinado</string>
     <string name="waypoint_calculate_coordinates">Kalkulahin ang mga koordinado</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Ang pasadya</string>
     <string name="waypoint_my_coordinates">Ang aking mga koordinado</string>
     <string name="waypoint_bearing">Bearing sa °</string>
@@ -728,6 +730,9 @@
     <string name="waypoint_coordinate_formats_plain">Puro</string>
     <string name="from_clipboard">Mula sa clipboard</string>
     <string name="copy_to_clipboard">Kopyahin sa clipboard</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Ipaskil ang paghahanap na ito sa Twitter</string>
     <!-- map -->
