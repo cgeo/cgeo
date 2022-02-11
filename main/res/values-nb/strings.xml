@@ -1264,6 +1264,8 @@
     <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cachens koordinater</string>
     <string name="waypoint_calculate_coordinates">Regn ut koordinater</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Eget veipunkt</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
     <string name="waypoint_bearing">Retning i °</string>
@@ -1303,6 +1305,9 @@
     <string name="waypoint_coordinate_formats_plain">Ren tekst</string>
     <string name="from_clipboard">Fra utklippstavlen.</string>
     <string name="copy_to_clipboard">Kopier til utklippstavle</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Del dette funnet på Twitter</string>
     <!-- map -->
