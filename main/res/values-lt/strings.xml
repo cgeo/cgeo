@@ -1216,7 +1216,9 @@
     <string name="waypoint_coordinates">Koordinatės</string>
     <string name="waypoint_cache_coordinates">Slėptuvės koordinatės</string>
     <string name="waypoint_calculate_coordinates">Skaičiuoti koordinates</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Apskaičiuotos koordinatės</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Savas</string>
     <string name="waypoint_my_coordinates">Mano koordinates</string>
     <string name="waypoint_bearing">Azimutas °</string>
@@ -1256,6 +1258,9 @@
     <string name="waypoint_coordinate_formats_plain">Paprastas</string>
     <string name="from_clipboard">Iš mainų srities</string>
     <string name="copy_to_clipboard">Kopijuoti į mainų sritį</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Paskelbti šį radinį Twitter paskyroje</string>
     <!-- map -->

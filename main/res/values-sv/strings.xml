@@ -1329,7 +1329,9 @@
     <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cache koordinater</string>
     <string name="waypoint_calculate_coordinates">Koordinatkalkylator</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Beräknade koordinater</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Egen</string>
     <string name="waypoint_my_coordinates">Mina koordinater</string>
     <string name="waypoint_bearing">Riktning (°)</string>
@@ -1369,6 +1371,9 @@
     <string name="waypoint_coordinate_formats_plain">Standard</string>
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Skicka att du hittat till Twitter</string>
     <!-- map -->

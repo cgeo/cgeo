@@ -352,6 +352,10 @@
     <string name="caches_store_all">Αποθήκευση όλων</string>
     <string name="caches_store_unsaved">Αποθήκευση των μη αποθηκευμένων</string>
     <string name="caches_store_selected">Αποθήκευση επιλεγμένων</string>
+    <string name="caches_store_background">Λήψη φόντου (Πειραματικό!)</string>
+    <string name="caches_store_refresh_background">Ανανέωση φόντου (Πειραματικό!)</string>
+    <string name="caches_store_background_should_force_refresh">Ανανέωση ήδη κατεβασμένων κρυπτών</string>
+    <string name="caches_store_background_title">Λήψη κρυπτών</string>
     <string name="caches_history">Ιστορικό</string>
     <string name="caches_on_map">Προβολή στο χάρτη</string>
     <string name="caches_sort">Ταξινομηση</string>
@@ -775,6 +779,7 @@
         <item>Σκούρο</item>
     </string-array>
     <string name="init_wallpaper">Ταπετσαρία</string>
+    <string name="init_summary_wallpaper">Εμφάνιση ταπετσαρίας συσκευής ως φόντο στην αρχική οθόνη</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Δημιουργία αντιγράφου ασφαλείας</string>
     <string name="init_backup_summary">Παρακαλώ λάβετε υπ\' όψιν σας ότι το χαρακτηριστικό αυτό μπορεί να δημιουργήσει αντίγραφα ασφαλείας των κρυπτών, των ενδιάμεσων σημείων &amp; των ρυθμίσεων, αλλά όχι των φωτογραφιών των κρυπτών. \nΓια να μπορέσετε να επαναφέρετε τα δεδομένα σας ακόμα και εάν χάσετε το τηλέφωνο σας, το αρχεία του αντιγράφου ασφαλείας πρέπει να είναι αποθηκευμένα σε μια ανεξάρτητη τοποθεσία.</string>
@@ -800,6 +805,8 @@
     <string name="init_backup_history_length_min">Μονό πρόσφατα</string>
     <string name="init_backup_history_length_max">Διατήρηση όλων</string>
     <string name="init_backup_history_delete_warning">Έχετε αποθηκεύσει περισσότερα αρχεία ασφαλείας από το μέγιστο επιτρεπτό όριο. Θέλετε να διαγραφούν όλα τα πλεονάζοντα αρχεία ασφαλείας;</string>
+    <string name="init_backup_automatic_summary">Εκτελεί ένα αυτόματο αντίγραφο ασφαλείας κάθε x ημέρες (επιπλέον των τυχόν χειροκίνητα δημιουργημένων αντιγράφων ασφαλείας), 0=off</string>
+    <string name="init_backup_automatic_performing">Δημιουργία αντιγράφου ασφαλείας…</string>
     <string name="init_user_confirmation">Ξέρω τι κάνω</string>
     <string name="init_backup_success">Η βάση δεδομένων του c:geo αντιγράφτηκε με επιτυχία στο:</string>
     <string name="init_backup_failed">Τα αντίγραφα ασφαλείας της βάσης δεδομένων του c:geo απέτυχαν.</string>
@@ -1273,6 +1280,7 @@
     <string name="cache_share_field">Κοινή χρήση</string>
     <string name="cache_time_full_hours">η ώρα</string>
     <string name="cache_listed_on">Κρύπτη που αναφέρεται στο %s</string>
+    <string name="cache_recently_viewed">Προβλήθηκαν πρόσφατα</string>
     <string name="cache_whereyougo_start">Εκκίνηση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_whereyougo_install">Εγκατάσταση του WhereYouGo για μεταφόρτωση και εκκίνηση της κασέτας</string>
     <string name="cache_chirpwolf_start">Αυτή η κρύπτη μπορεί να χρησιμοποιεί ένα πομπό chirp ή ένα άλλο είδος ασύρματου φάρου. Για την ανάγνωση δεδομένων chirp μπορείτε να ανοίξετε το Chirp Wolf.</string>
@@ -1330,7 +1338,10 @@
     <string name="waypoint_coordinates">Συντεταγμένες</string>
     <string name="waypoint_cache_coordinates">Συντεταγμένες κρύπτης</string>
     <string name="waypoint_calculate_coordinates">Υπολογιστής συντεταγμένων</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Υπολογισμένες συντεταγμένες</string>
+    <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Υπολογισμός συντεταγμένων (νέο)</string>
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
     <string name="waypoint_bearing">Κατεύθυνση σε °</string>
@@ -1370,6 +1381,59 @@
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
     <string name="from_clipboard">Από το πρόχειρο</string>
     <string name="copy_to_clipboard">Αντιγραφή στο πρόχειρο</string>
+    <!-- Variables -->
+    <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
+    <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
+    <string name="variables_scanlisting_choosepattern_title">Επιλέξτε μοτίβο εύρεσης</string>
+    <string name="variables_tidyup">Τακτοποίηση</string>
+    <string name="variables_deleteall">Διαγραφή Όλων</string>
+    <string name="variables_deleteall_confirm_text">Θέλετε πραγματικά να διαγράψετε όλες τις μεταβλητές για αυτήν την κρύπτη;</string>
+    <string name="variables_info">Βοήθεια</string>
+    <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Λειτουργία οδηγού</string>
+    <string name="calccoord_convert_to_plain">Μετατροπή σε απλή Συντεταγμένη</string>
+    <string name="calccoord_remove_spaces">Αφαίρεση καινών</string>
+    <string name="calccoord_generate_title">Δημιουργία Σημείων Πορείας</string>
+    <string name="calccoord_generate_showonmap">Εμφάνιση στο χάρτη</string>
+    <string name="calccoord_generate_waypointnameprefix">Δημιουργήθηκε</string>
+    <string name="calccoord_generate_error_novarwithrange">Δεν βρέθηκε έγκυρη μεταβλητή με εύρη</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Κανένας συνδυασμός δεν επέστρεψε έγκυρες συντεταγμένες</string>
+    <string name="calccoord_generate_error_nogeopointselected">Δεν επιλέχθηκε συντεταγμένη</string>
+    <string name="calccoord_migrate_title">Σύνθεση σημείων διαδρομής</string>
+    <string name="calccoord_migrate_migrate">Σύνθεση</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Σύνθεση από</string>
+    <string name="calccoord_migrate_cancel">Ακύρωση</string>
+    <string name="calccoord_migrate_dismiss">Παράβλεψη δεδομένων</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Απόρριψη</string>
+    <string name="calccoord_migrate_infotext_markdown">Βρέθηκε ένας υπολογισμός συντεταγμένων παλαιού τύπου με αυτόν τον τρόπο:\n\n%1$s\n\nΜπορείτε να μετεγκαταστήσετε αυτό στις νέες συντεταγμένες υπολογισμού της προσωρινής μνήμης ως εξής:\n\n%2$s\n\nμε νέο πρότυπο:%3$s\n\nΠαρακαλώ επιλέξτε:\n- %4$s για να εκτελέσετε τη μετεγκατάσταση όπως προτείνεται\n- %5$s για να απορρίψετε τα δεδομένα υπολογισμού που βρέθηκαν \n- %6$s για να συνεχίσετε χωρίς μετατροπη. Θα σας ζητηθεί να τα μετατρέψετε ξανά την επόμενη φορά που θα ανοίξετε το σημείο για επεξεργασία. Σημειώστε, ωστόσο, ότι η επεξεργασία των συντεταγμένων σημείου θα μπορούσε να διαγράψει τοπικά δεδομένα υπολογισμού.</string>
+    <!-- Formula -->
+    <string name="formula_function_sqrt">Τετραγωνική ρίζα</string>
+    <string name="formula_function_sin">Ημίτονο</string>
+    <string name="formula_function_cos">Συνημίτονο</string>
+    <string name="formula_function_tan">Εφαπτομένη</string>
+    <string name="formula_function_abs">Απόλυτη τιμή</string>
+    <string name="formula_function_round">Κυκλικό</string>
+    <string name="formula_function_if">Αν</string>
+    <string name="formula_function_length">Μήκος κειμένου</string>
+    <string name="formula_function_substring">Τμήμα κειμένου</string>
+    <string name="formula_function_rot13">Περιστροφή χαρακτήρων κατά 13</string>
+    <string name="formula_function_rot">Περιστροφή Χαρακτήρων</string>
+    <string name="formula_function_checksum">Άθροισμα ελέγχου</string>
+    <string name="formula_function_ichecksum">Επαναληπτικό Άθροισμα Ελέγχου</string>
+    <string name="formula_function_lettervalue">Τιμή Λέξης</string>
+    <string name="formula_function_roman">Ρωμαϊκή σε δεκαδική</string>
+    <string name="formula_function_vanity">Vanity Code</string>
+    <string name="formula_function_group_simplenumeric">Απλό Αριθμητικό</string>
+    <string name="formula_function_group_complexnumeric">Complex Numeric</string>
+    <string name="formula_function_group_simplestring">Απλή Συμβολοσειρά</string>
+    <string name="formula_function_group_complexstring">Σύνθετη Συμβολοσειρά</string>
+    <string name="formula_error_unexpectedtoken">Αναμενόταν \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Εσφαλμένη μέτρηση παραμέτρων, αναμενόταν %1$s-%2$s, πήρε %3$s</string>
+    <string name="formula_error_wrongtype">Λάθος τύπος, αναμενόταν \'%1$s\', πήρε \'%2$s\' τύπου \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Λείπει: %1$s</string>
+    <string name="formula_error_cyclicdependency">Κύκλος: %1$s</string>
+    <string name="formula_error_empty">Κενός Τύπος</string>
+    <string name="formula_error_other">Σφάλμα: %1$s</string>
     <!-- visit -->
     <string name="visit_tweet">Δημοσιεύστε αυτή την εύρεση στο Twitter</string>
     <!-- map -->
@@ -2079,6 +2143,8 @@
     <string name="check_tiles_found">Τα δεδομένα δρομολόγησης υπάρχουν ήδη</string>
     <string name="check_tiles_missing">Βρέθηκαν δεδομένα δρομολόγησης:\n%1$s\n\nΘέλετε να κατεβάσετε αυτά τα αρχεία?%2$s</string>
     <string name="check_tiles_unsupported">Προειδοποίηση: Τα δεδομένα δρομολόγησης τουλάχιστον εν μέρει δεν είναι διαθέσιμα για την επιλεγμένη περιοχή</string>
+    <string name="tileupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις των αρχείων δεδομένων δρομολόγησης που έχουν ληφθεί. Πατήστε παρατεταμένα για αναβολή.</string>
+    <string name="mapupdate_info">Πατήστε εδώ για να ελέγξετε για ενημερώσεις του χάρτη και των αρχείων θέματος. Πατήστε παρατεταμένα για αναβολή.</string>
     <string name="no_updates_found">Δεν βρέθηκαν ενημερώσεις</string>
     <string name="updates_check">Έλεγχος ενημερώσεων</string>
     <string name="mapserver_mapsforge_info">Βασικοί χάρτες, δεν απαιτούνται θέματα χάρτη</string>
@@ -2151,6 +2217,7 @@
     <string name="back">Πίσω</string>
     <string name="later">Αργότερα</string>
     <string name="cancel">Ακύρωση</string>
+    <string name="ok" tools:ignore="ButtonCase">Οκ</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Επιλογή όλων</string>
     <string name="touch_again_to_exit">Παρακαλώ αγγίξτε ξανά για έξοδο</string>

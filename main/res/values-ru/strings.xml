@@ -1165,6 +1165,8 @@
     <string name="waypoint_coordinates">Координаты</string>
     <string name="waypoint_cache_coordinates">Координаты тайника</string>
     <string name="waypoint_calculate_coordinates">Вычислить координаты</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Личная</string>
     <string name="waypoint_my_coordinates">Мои координаты</string>
     <string name="waypoint_bearing">Азимут в °</string>
@@ -1204,6 +1206,9 @@
     <string name="waypoint_coordinate_formats_plain">Текст</string>
     <string name="from_clipboard">Из буфера</string>
     <string name="copy_to_clipboard">Копировать в буфер</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Отправить в Twitter</string>
     <!-- map -->

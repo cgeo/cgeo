@@ -685,6 +685,8 @@
     <string name="waypoint_coordinates">الإحداثيات</string>
     <string name="waypoint_cache_coordinates">إحداثيات المخبئ</string>
     <string name="waypoint_calculate_coordinates">حساب الإحداثيات</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">مخصص</string>
     <string name="waypoint_my_coordinates">إحداثياتي</string>
     <string name="waypoint_bearing">الاتجاه بالدرجة °</string>
@@ -720,6 +722,9 @@
     <string name="waypoint_coordinate_formats_plain">بسيط</string>
     <string name="from_clipboard">من الحافظة</string>
     <string name="copy_to_clipboard">نسخ من الحافظة</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">نشر هذا الاكتشاف على التويتر</string>
     <!-- map -->

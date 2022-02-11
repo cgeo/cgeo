@@ -869,6 +869,8 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_coordinates">Koordinātas</string>
     <string name="waypoint_cache_coordinates">Slēpņa koordinātas</string>
     <string name="waypoint_calculate_coordinates">Aprēķināt koordinātas</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Uzstādīt</string>
     <string name="waypoint_my_coordinates">Manas koordinātas</string>
     <string name="waypoint_bearing">Pagrieziena leņķis °</string>
@@ -908,6 +910,9 @@ importēti %1$d slēpņi no %2$s</item>
     <string name="waypoint_coordinate_formats_plain">Vienkāršā</string>
     <string name="from_clipboard">No starpliktuves</string>
     <string name="copy_to_clipboard">Kopēt uz starpliktuvi</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Publicēt šo atradumu Twitter\'ī</string>
     <!-- map -->

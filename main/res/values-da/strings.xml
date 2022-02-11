@@ -1144,6 +1144,8 @@
     <string name="waypoint_coordinates">Position</string>
     <string name="waypoint_cache_coordinates">Cacheposition</string>
     <string name="waypoint_calculate_coordinates">Beregn position</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Tilpasset</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
     <string name="waypoint_bearing">Kompasretning</string>
@@ -1183,6 +1185,9 @@
     <string name="waypoint_coordinate_formats_plain">Simpel</string>
     <string name="from_clipboard">Fra udklipsholder</string>
     <string name="copy_to_clipboard">Kopiér til upklipsholder</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Post fund på Twitter</string>
     <!-- map -->

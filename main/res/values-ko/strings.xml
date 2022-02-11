@@ -1320,7 +1320,9 @@
     <string name="waypoint_coordinates">좌표</string>
     <string name="waypoint_cache_coordinates">캐시 좌표</string>
     <string name="waypoint_calculate_coordinates">좌표 계산</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">계산된 좌표</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">맞춤형</string>
     <string name="waypoint_my_coordinates">내 위치</string>
     <string name="waypoint_bearing">방위각(°)</string>
@@ -1360,6 +1362,9 @@
     <string name="waypoint_coordinate_formats_plain">간단히</string>
     <string name="from_clipboard">클립보드 읽기</string>
     <string name="copy_to_clipboard">클립보드로 복사</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->

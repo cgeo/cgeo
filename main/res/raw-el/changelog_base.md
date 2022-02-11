@@ -1,3 +1,3 @@
 ### Γενικά
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
+- Νέο: Αυτόματη εκτέλεση αντιγράφων ασφαλείας (προαιρετικό)
+- Διόρθωση: Συνέχιση εισαγωγής ολοκληρωμένων λήψεων

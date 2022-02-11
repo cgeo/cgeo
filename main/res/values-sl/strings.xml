@@ -656,6 +656,8 @@
     <string name="waypoint">Dodatna točka</string>
     <string name="waypoint_cache_coordinates">Koordinate zaklada</string>
     <string name="waypoint_calculate_coordinates">Izračunaj koordinate</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Posebno</string>
     <string name="waypoint_my_coordinates">Moje koordinate</string>
     <string name="waypoint_bearing">Smer v stopinjah</string>
@@ -689,6 +691,9 @@
     <string name="waypoint_coordinate_formats_plain">Osnovno</string>
     <string name="from_clipboard">Iz odložišča</string>
     <string name="copy_to_clipboard">Kopiraj v odložišče</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Objavi na Twitter</string>
     <!-- map -->

@@ -896,6 +896,8 @@
     <string name="waypoint_coordinates">Koordináták</string>
     <string name="waypoint_cache_coordinates">A láda koordinátái</string>
     <string name="waypoint_calculate_coordinates">Koordinátaszámolás</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Egyedi</string>
     <string name="waypoint_my_coordinates">Az én koordinátáim</string>
     <string name="waypoint_bearing">Irány</string>
@@ -931,6 +933,9 @@
     <string name="waypoint_coordinate_formats_plain">Egyszerű</string>
     <string name="from_clipboard">A vágólapról</string>
     <string name="copy_to_clipboard">Másolás a vágólapra</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Twitteld ki ezt a megtalálást</string>
     <!-- map -->
