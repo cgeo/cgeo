@@ -40,6 +40,6 @@
 - Fix: Ενεργοποίηση υποδείξεων για συστήματα που λειτουργούν στο Android κάτω από την έκδοση 8
 - Fix: Crash on long-tap on trackable code in trackable details
 - Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Ρυθμίσεις για να πληρούνται οι τρέχουσες προδιαγραφές Android
+- Ενημερώθηκε Το MapsWithMe API
 

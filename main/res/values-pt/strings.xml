@@ -110,7 +110,7 @@
     <string name="log_discovered">Visto</string>
     <string name="log_reviewer">Nota de revisão</string>
     <string name="log_submit_for_review">Enviar para revisão</string>
-    <string name="log_retractlisting">Retracto da publicação</string>
+    <string name="log_retractlisting">Retirada da página da cache</string>
     <string name="log_marked_missing">Dado como desaparecido</string>
     <string name="log_tb_nothing">Sem acção</string>
     <string name="log_tb_visit">Visitar</string>
@@ -2192,10 +2192,20 @@ do mapa e dos temas?</string>
     <string name="rtl_reef">recife</string>
     <string name="rtl_dyke">dique</string>
     <string name="rtl_beach">praia</string>
+    <string name="rtl_beach_gravel">praia de gravilha</string>
+    <string name="rtl_spring">primavera</string>
+    <string name="rtl_powerline">linha eléctrica</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Estradas &amp; Caminhos</string>
     <string name="rtl_paved_path">caminho pavimentado</string>
     <string name="rtl_paved_path_gravel">caminho pavimentado (gravilha)</string>
     <string name="rtl_unpaved_path">caminho não pavimentado</string>
+    <string name="rtl_unpaved_path_partly_grown">caminho não pavimentado (com alguma vegetação)</string>
+    <string name="rtl_unpaved_path_grown">caminho não pavimentado (com vegetação)</string>
+    <string name="rtl_surface_unknown">superfície desconhecida</string>
+    <string name="rtl_unpaved_footpath">caminho pedestre de terra</string>
+    <string name="rtl_paved_footpath">caminho pedestre pavimentado</string>
+    <string name="rtl_bridleway">trilho equestre</string>
     <string name="rtl_access_destination">acesso (destino)</string>
     <string name="rtl_access_private">acesso (particular)</string>
     <string name="rtl_access_agricultural">restrito ao tráfego agrícola / florestal</string>
@@ -2203,6 +2213,11 @@ do mapa e dos temas?</string>
     <string name="rtl_cycleway">ciclovia</string>
     <string name="rtl_cycleway_steep">ciclovia (íngreme)</string>
     <string name="rtl_cycleway_paved">ciclovia (pavimentada)</string>
+    <string name="rtl_paved_smooth">pavimentado (liso)</string>
+    <string name="rtl_paved_rough">pavimentado (deteriorado)</string>
+    <string name="rtl_surface_compacted">superfície compactada</string>
+    <string name="rtl_surface_gravel">superfície de gravilha</string>
+    <string name="rtl_surface_raw">superfície por tratar</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Caminhada, Ciclismo, Escalada</string>
     <string name="rtl_hiking_T1">caminhada T1</string>
@@ -2224,6 +2239,7 @@ do mapa e dos temas?</string>
     <string name="rtl_uphill25">subida -25%</string>
     <string name="rtl_uphill30">subida -30%</string>
     <string name="rtl_uphill40">subida -40%</string>
+    <string name="rtl_uphill_too_steep">subida muito inclinada</string>
     <string name="rtl_security_rope">segurança: corda</string>
     <string name="rtl_security_rungs">segurança: degraus</string>
     <string name="rtl_security_ladder">segurança: escadote</string>
@@ -2277,12 +2293,23 @@ do mapa e dos temas?</string>
     <string name="rtl_gym">ginásio</string>
     <string name="rtl_miniature_golf">minigolfe</string>
     <string name="rtl_roller_skating">patins de rodas</string>
+    <string name="rtl_shooting">campo de tiro</string>
+    <string name="rtl_skateboard">skate</string>
+    <string name="rtl_slipway">rampa (de lançamento)</string>
+    <string name="rtl_soccer">futebol</string>
+    <string name="rtl_stadium">estádio</string>
+    <string name="rtl_swimming_area">área de natação</string>
+    <string name="rtl_swimming_outdoor">natação ao ar livre</string>
+    <string name="rtl_tennis">ténis</string>
+    <string name="rtl_via_ferrata">via ferrata</string>
     <string name="rtl_water_park">parque aquático</string>
     <string name="rtl_aerialway_station">estação de transporte teleférico</string>
     <string name="rtl_airport">aeroporto</string>
     <string name="rtl_cable_car">teleférico</string>
     <string name="rtl_chair_lift">telecadeira (teleférico)</string>
     <string name="rtl_goods_lift">monta-cargas</string>
+    <string name="rtl_helipad">heliponto</string>
+    <string name="rtl_rail_funicular">funicular</string>
     <string name="rtl_parking">estacionamento</string>
     <string name="rtl_parking_private">estacionamento privado</string>
     <string name="rtl_bicycle_parking">estacionamento de bicicleta</string>
@@ -2294,6 +2321,9 @@ do mapa e dos temas?</string>
     <string name="rtl_car_shop">concessionário automóvel</string>
     <string name="rtl_fuel">combustível</string>
     <string name="rtl_ferry_terminal">terminal de ferry</string>
+    <string name="rtl_alpine_hut">cabana alpina</string>
+    <string name="rtl_alpine_hut_private">cabana alpina privada</string>
+    <string name="rtl_alpine_hut_winter">cabana de inverno alpina</string>
     <string name="rtl_apartment">apartamento</string>
     <string name="rtl_camp_site">local de acampamento</string>
     <string name="rtl_caravan_site">local de caravanas</string>
@@ -2304,7 +2334,10 @@ do mapa e dos temas?</string>
     <string name="rtl_wilderness_hut">cabana de natureza selvagem</string>
     <string name="rtl_wilderness_hut_private">cabana de natureza selvagem privada</string>
     <string name="rtl_bar">bar</string>
+    <string name="rtl_biergarten">cervejaria (esplanada)</string>
     <string name="rtl_cafe">café</string>
+    <string name="rtl_fastfood"> comida pronta (fast-food)</string>
+    <string name="rtl_ice_cream">gelataria</string>
     <string name="rtl_pub">pub</string>
     <string name="rtl_restaurant">restaurante</string>
     <string name="rtl_bbq">churrasco</string>
@@ -2348,6 +2381,10 @@ do mapa e dos temas?</string>
     <string name="rtl_power_water">energia (água)</string>
     <string name="rtl_power_wind">energia (vento)</string>
     <string name="rtl_wastewater_plant">planta de águas residuais</string>
+    <string name="rtl_watermill">moinho de água</string>
+    <string name="rtl_weir">presa</string>
+    <string name="rtl_windmill">moinho de vento</string>
+    <string name="rtl_windpump">bomba eólica</string>
     <string name="rtl_bunker">bunker</string>
     <string name="rtl_farmyard">quintal</string>
     <string name="rtl_hunting_stand">posição de caça</string>
@@ -2372,6 +2409,8 @@ do mapa e dos temas?</string>
     <string name="rtl_block">quarteirão</string>
     <string name="rtl_bollard">marco</string>
     <string name="rtl_border_control">controlo fronteiriço</string>
+    <string name="rtl_bridge_movable">ponte móvel</string>
+    <string name="rtl_cave_entrance">entrada de gruta</string>
     <string name="rtl_elevator">elevador</string>
     <string name="rtl_gate">portão</string>
     <string name="rtl_gate_private">portão privado</string>
@@ -2379,6 +2418,11 @@ do mapa e dos temas?</string>
     <string name="rtl_hot_spring">águas termais</string>
     <string name="rtl_ladder">escada</string>
     <string name="rtl_lift_gate">plataforma elevatória</string>
+    <string name="rtl_oneway">sentido único</string>
+    <string name="rtl_oneway_cycle">sentido único (ciclovia)</string>
+    <string name="rtl_oneway_cycle_rev">sentido único (ciclovia, reversível)</string>
+    <string name="rtl_oneway_rev">sentido único (reversível)</string>
+    <string name="rtl_safety_rope">corda de segurança</string>
     <string name="rtl_stone">pedra</string>
     <string name="rtl_traffic_signal">sinal de tráfego</string>
     <string name="rtl_turnstile">torniquete</string>
