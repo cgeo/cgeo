@@ -1401,12 +1401,44 @@
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
     <string name="calccoord_generate_showonmap">Mostrar no Mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Gerada</string>
+    <string name="calccoord_generate_error_novarwithrange">Foi encontrada uma variável com um número inválido</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Nenhuma combinação devolveu coordenadas válidas</string>
+    <string name="calccoord_generate_error_nogeopointselected">Nenhuma coordenada seleccionada</string>
+    <string name="calccoord_migrate_title">Migração de Pontos Adicionais</string>
     <string name="calccoord_migrate_migrate">Migrar</string>
     <string name="calccoord_migrate_migrate_usernote_praefix">Migrar a partir de</string>
     <string name="calccoord_migrate_cancel">Cancelar</string>
     <string name="calccoord_migrate_dismiss">Descartar dados</string>
     <string name="calccoord_migrate_dismiss_usernote_praefix">Dispensada</string>
+    <string name="calccoord_migrate_infotext_markdown">Um cálculo antigo de coordenadas foi encontrado neste ponto adicional:\n\n%1$s\n\nPode migrar isso para o novo cálculo de coordenadas da cache da seguinte forma:\n\n%2$s\n\ncom novas variáveis de cache:%3$s\n\nPor favor, escolha:\n- %4$s para realizar a migração como sugerido\n- %5$s para descartar em definitivo os dados de cálculo encontrados\n- %6$s para continuar sem migração. Será novamente questionado sobre a migração, na próxima vez que abrir o ponto adicional para edição. Note, no entanto, que editar as coordenadas do ponto adicional pode excluir dados de cálculo locais.</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Raiz Quadrada</string>
+    <string name="formula_function_sin">Seno</string>
+    <string name="formula_function_cos">Co-seno</string>
+    <string name="formula_function_tan">Tangente</string>
+    <string name="formula_function_abs">Valor absoluto</string>
+    <string name="formula_function_round">Arredondar</string>
+    <string name="formula_function_if">Se</string>
+    <string name="formula_function_length">Comprimento da Sequência de Caracteres</string>
+    <string name="formula_function_substring">Parte de Sequência de Caracteres</string>
+    <string name="formula_function_rot13">Rodar Caracteres em 13</string>
+    <string name="formula_function_rot">Rodar Caracteres</string>
+    <string name="formula_function_checksum">Soma de verificação</string>
+    <string name="formula_function_ichecksum">Soma de verificação Iterativa</string>
+    <string name="formula_function_lettervalue">Valor da Palavra</string>
+    <string name="formula_function_roman">Romano para Decimal</string>
+    <string name="formula_function_vanity">Código Vanity</string>
+    <string name="formula_function_group_simplenumeric">Número Simples</string>
+    <string name="formula_function_group_complexnumeric">Número Complexo</string>
+    <string name="formula_function_group_simplestring">Sequência de Caracteres Simples</string>
+    <string name="formula_function_group_complexstring">Sequência de Caracteres Complexa</string>
+    <string name="formula_error_unexpectedtoken">Esperado \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Contagem errada de parâmetros, esperado %1$s-%2$s, obtido %3$s</string>
+    <string name="formula_error_wrongtype">Tipo errado, esperado \'%1$s\', obtido \'%2$s\' do tipo \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Em Falta: %1$s</string>
+    <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
+    <string name="formula_error_empty">Fórmula vazia</string>
+    <string name="formula_error_other">Erro: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
@@ -2223,11 +2255,20 @@
     <string name="rtl_reef">recife</string>
     <string name="rtl_dyke">dique</string>
     <string name="rtl_beach">praia</string>
+    <string name="rtl_beach_gravel">praia de gravilha</string>
+    <string name="rtl_spring">primavera</string>
+    <string name="rtl_powerline">linha eléctrica</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Estradas &amp; Caminhos</string>
     <string name="rtl_paved_path">caminho pavimentado</string>
     <string name="rtl_paved_path_gravel">caminho pavimentado (gravilha)</string>
     <string name="rtl_unpaved_path">caminho não pavimentado</string>
+    <string name="rtl_unpaved_path_partly_grown">caminho não pavimentado (com alguma vegetação)</string>
+    <string name="rtl_unpaved_path_grown">caminho não pavimentado (com vegetação)</string>
+    <string name="rtl_surface_unknown">superfície desconhecida</string>
+    <string name="rtl_unpaved_footpath">caminho pedestre de terra</string>
+    <string name="rtl_paved_footpath">caminho pedestre pavimentado</string>
+    <string name="rtl_bridleway">trilho equestre</string>
     <string name="rtl_access_destination">acesso (destino)</string>
     <string name="rtl_access_private">acesso (particular)</string>
     <string name="rtl_access_agricultural">restrito ao tráfego agrícola / florestal</string>
@@ -2235,6 +2276,11 @@
     <string name="rtl_cycleway">ciclovia</string>
     <string name="rtl_cycleway_steep">ciclovia (íngreme)</string>
     <string name="rtl_cycleway_paved">ciclovia (pavimentada)</string>
+    <string name="rtl_paved_smooth">pavimentado (liso)</string>
+    <string name="rtl_paved_rough">pavimentado (deteriorado)</string>
+    <string name="rtl_surface_compacted">superfície compactada</string>
+    <string name="rtl_surface_gravel">superfície de gravilha</string>
+    <string name="rtl_surface_raw">superfície por tratar</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Caminhada, Ciclismo, Escalada</string>
     <string name="rtl_hiking_T1">caminhada T1</string>
@@ -2256,6 +2302,7 @@
     <string name="rtl_uphill25">subida -25%</string>
     <string name="rtl_uphill30">subida -30%</string>
     <string name="rtl_uphill40">subida -40%</string>
+    <string name="rtl_uphill_too_steep">subida muito inclinada</string>
     <string name="rtl_security_rope">segurança: corda</string>
     <string name="rtl_security_rungs">segurança: degraus</string>
     <string name="rtl_security_ladder">segurança: escadote</string>
