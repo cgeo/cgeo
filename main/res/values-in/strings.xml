@@ -688,6 +688,8 @@
     <string name="waypoint_coordinates">Koordinat</string>
     <string name="waypoint_cache_coordinates">Koordinat cache</string>
     <string name="waypoint_calculate_coordinates">Menghitung koordinat</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Tampilan</string>
     <string name="waypoint_my_coordinates">Koordinat saya</string>
     <string name="waypoint_bearing">Bearing dalam °</string>
@@ -723,6 +725,9 @@
     <string name="waypoint_coordinate_formats_plain">Polos</string>
     <string name="from_clipboard">Dari papan tulis kecil</string>
     <string name="copy_to_clipboard">Salin ke papan tulis kecil</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Poskan ini ke kericau</string>
     <!-- map -->
