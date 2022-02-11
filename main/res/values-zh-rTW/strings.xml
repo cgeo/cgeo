@@ -1148,6 +1148,8 @@
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">藏寶座標</string>
     <string name="waypoint_calculate_coordinates">計算座標</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">自定</string>
     <string name="waypoint_my_coordinates">我的座標</string>
     <string name="waypoint_distance">距離：</string>
@@ -1184,6 +1186,9 @@
     <string name="waypointcalc_notes_prompt">在這輸入筆記</string>
     <string name="from_clipboard">從剪貼簿</string>
     <string name="copy_to_clipboard">複製到剪貼簿</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">發佈這個found到推特</string>
     <!-- map -->
