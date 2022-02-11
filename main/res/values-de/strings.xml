@@ -1387,18 +1387,30 @@
     <string name="from_clipboard">Aus der Zwischenablage</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
     <!-- Variables -->
+    <string name="variables_titletext">Benutzen Sie diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
+    <string name="variables_scanlisting">Durchsuche Listing</string>
+    <string name="variables_scanlisting_choosepattern_title">Muster auswählen</string>
+    <string name="variables_tidyup">Aufräumen</string>
     <string name="variables_deleteall">Alle löschen</string>
+    <string name="variables_deleteall_confirm_text">Möchtest du wirklich alle Variablen für diesen Cache löschen?</string>
     <string name="variables_info">Hilfe</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Geführter Modus</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
     <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
+    <string name="calccoord_generate_title">Wegpunkte erzeugen</string>
     <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
+    <string name="calccoord_generate_waypointnameprefix">Erzeugt</string>
+    <string name="calccoord_generate_error_novarwithrange">Keine gültige Variable mit Bereichsdefinition gefunden</string>
     <string name="calccoord_generate_error_novalidgeopoints">Keine Kombination ergab gültige Koordinaten</string>
     <string name="calccoord_generate_error_nogeopointselected">Keine Koordinate ausgewählt</string>
+    <string name="calccoord_migrate_title">Wegpunkt-Migration</string>
+    <string name="calccoord_migrate_migrate">Migrieren</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migriert von</string>
     <string name="calccoord_migrate_cancel">Abbrechen</string>
     <string name="calccoord_migrate_dismiss">Daten verwerfen</string>
     <string name="calccoord_migrate_dismiss_usernote_praefix">Verworfen</string>
+    <string name="calccoord_migrate_infotext_markdown">Eine alte berechnete Koordinate wurde in diesem Wegpunkt gefunden:\n\n%1$s\n\nSie kann in eine neue berechnete Koordinate wie folgt migriert werden:\n\n%2$s\n\nmit neuen Cache-Variablen:%3$s\n\nBitte wählen:\n- %4$s um die Migration wie vorgeschlagen durchzuführen\n- %5$s um die gefundenen Berechnungsdaten zu verwerfen\n- %6$s um ohne Migration fortzufahren. Beim nächsten Öffnen des Wegpunktes wirst du erneut nach einer Migration gefragt. Beachte jedoch, dass das Bearbeiten der Wegpunktkoordinaten lokale Berechnungsdaten löschen kann.</string>
     <!-- Formula -->
     <string name="formula_function_sqrt">Quadratwurzel</string>
     <string name="formula_function_sin">Sinus</string>
@@ -1407,14 +1419,26 @@
     <string name="formula_function_abs">Absoluter Wert</string>
     <string name="formula_function_round">Runden</string>
     <string name="formula_function_if">Wenn</string>
+    <string name="formula_function_length">Zeichenlänge</string>
+    <string name="formula_function_substring">Teilzeichenfolge</string>
+    <string name="formula_function_rot13">Verschiebe Zeichen um 13 Stellen</string>
+    <string name="formula_function_rot">Verschiebe Zeichen</string>
     <string name="formula_function_checksum">Quersumme</string>
+    <string name="formula_function_ichecksum">Iterierte Quersumme</string>
     <string name="formula_function_lettervalue">Buchstabenwortwert</string>
     <string name="formula_function_roman">Römisch nach Dezimal</string>
     <string name="formula_function_vanity">Vanity-Code</string>
+    <string name="formula_function_group_simplenumeric">Einfache numerische Funktionen</string>
+    <string name="formula_function_group_complexnumeric">Komplexe numerische Funktionen</string>
+    <string name="formula_function_group_simplestring">Einfache Zeichenfunktionen</string>
+    <string name="formula_function_group_complexstring">Komplexe Zeichenfunktionen</string>
     <string name="formula_error_unexpectedtoken">Erwartet \'%1$s\'</string>
     <string name="formula_error_wrongparamcount">Falsche Parameteranzahl, erwartete %1$s-%2$s, erhielt %3$s</string>
     <string name="formula_error_wrongtype">Falscher Typ, erwartet \'%1$s\', erhielt \'%2$s\' vom Typ \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Fehlend: %1$s</string>
     <string name="formula_error_cyclicdependency">Zyklus: %1$s</string>
+    <string name="formula_error_empty">Leere Formel</string>
+    <string name="formula_error_other">Fehler: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
     <!-- map -->
