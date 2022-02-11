@@ -1296,7 +1296,9 @@
     <string name="waypoint_coordinates">Koordinatlar</string>
     <string name="waypoint_cache_coordinates">Geocache koordinatları</string>
     <string name="waypoint_calculate_coordinates">Koordinatları hesaplayın</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Hesaplanmış koordinatlar</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Özel</string>
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
     <string name="waypoint_bearing">Azimut açısı</string>
@@ -1336,6 +1338,9 @@
     <string name="waypoint_coordinate_formats_plain">Açık koordinat</string>
     <string name="from_clipboard">Panodan</string>
     <string name="copy_to_clipboard">Panoya kopyala</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
