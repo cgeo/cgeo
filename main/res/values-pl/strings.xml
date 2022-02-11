@@ -1359,7 +1359,9 @@
     <string name="waypoint_coordinates">Współrzędne</string>
     <string name="waypoint_cache_coordinates">Współrzędne skrzynki</string>
     <string name="waypoint_calculate_coordinates">Oblicz współrzędne</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Obliczone współrzędne</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
     <string name="waypoint_bearing">Kierunek w stopniach</string>
@@ -1399,6 +1401,9 @@
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Wyślij informację do Twitter</string>
     <!-- map -->
