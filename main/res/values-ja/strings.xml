@@ -1313,7 +1313,9 @@
     <string name="waypoint_coordinates">座標</string>
     <string name="waypoint_cache_coordinates">キャッシュ座標</string>
     <string name="waypoint_calculate_coordinates">座標を計算</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">計算済み座標</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_bearing">方位(度[°])</string>
@@ -1353,6 +1355,9 @@
     <string name="waypoint_coordinate_formats_plain">プレーン</string>
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
@@ -2114,7 +2119,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="back">戻る</string>
     <string name="later">後で</string>
     <string name="cancel">キャンセル</string>
-    <string name="ok">OK</string>
+    <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">すべて選択</string>
     <string name="touch_again_to_exit">もう一度「戻る」を押すと終了します</string>
