@@ -1343,7 +1343,9 @@
     <string name="waypoint_coordinates">Coördinaten</string>
     <string name="waypoint_cache_coordinates">Cache coördinaten</string>
     <string name="waypoint_calculate_coordinates">Coördinaten berekenen</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Berekende coördinaten</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Aangepast</string>
     <string name="waypoint_my_coordinates">Mijn coördinaten</string>
     <string name="waypoint_bearing">Richting</string>
@@ -1383,6 +1385,9 @@
     <string name="waypoint_coordinate_formats_plain">Plat</string>
     <string name="from_clipboard">Van klembord</string>
     <string name="copy_to_clipboard">Kopieer naar klembord</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Post deze vondst op Twitter</string>
     <!-- map -->
@@ -2174,7 +2179,7 @@
     <string name="back">Terug</string>
     <string name="later">Later</string>
     <string name="cancel">Annuleren</string>
-    <string name="ok">Ok</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles selecteren</string>
     <string name="touch_again_to_exit">Nogmaals aanraken om af te sluiten</string>
