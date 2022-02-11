@@ -83,7 +83,6 @@ import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -2480,7 +2479,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     protected long[] getOrderedPages() {
         final ArrayList<Long> pages = new ArrayList<>();
-        if (!BranchDetectionHelper.isProductionBuild()) {
+        if (CalculatedCoordinate.isFeatureEnabled()) {
             pages.add(Page.VARIABLES.id);
         }
         pages.add(Page.WAYPOINTS.id);

@@ -7,6 +7,7 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
@@ -47,20 +48,6 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         });
 
-        //Experimental warning
-        TextParam.text("**Experimental New Feature** \n" +
-            "* Expect disruptive changes in the future\n" +
-            "* No internationalization yet")
-            .setMarkdown(true).applyTo(binding.variablesExperimentalWarning);
-
-        binding.variablesExperimentalWarning.setOnClickListener(d -> {
-            if (adapter.getDisplayType() == VariableListView.DisplayType.MINIMALISTIC) {
-                adapter.setDisplay(VariableListView.DisplayType.ADVANCED, 1);
-            } else {
-                adapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
-            }
-        });
-
         binding.variablesAdd.setOnClickListener(d -> {
             binding.variables.clearFocus();
             adapter.selectVariableName(null, (o, n) -> adapter.addVariable(n, ""));
@@ -77,8 +64,8 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         binding.variablesDeleteall.setOnClickListener(d -> {
             binding.variables.clearFocus();
             if (!adapter.getVariables().isEmpty()) {
-                SimpleDialog.of(activity).setTitle(TextParam.text("Delete all"))
-                    .setMessage(TextParam.text("Really delete all variables?")).confirm((dd, i) -> adapter.clearAllVariables());
+                SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_deleteall))
+                    .setMessage(TextParam.id(R.string.variables_deleteall_confirm_text)).confirm((dd, i) -> adapter.clearAllVariables());
             }
         });
 
@@ -91,7 +78,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         });
 
         binding.variablesInfo.setOnClickListener(d -> ShareUtils.openUrl(
-            this.getContext(), "https://github.com/cgeo/cgeo/wiki/Calculator-Formula-Syntax", false));
+            this.getContext(), LocalizationUtils.getString(R.string.formula_syntax_url), false));
 
         return binding;
     }
@@ -151,7 +138,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         }
         final List<String> patterns = FormulaUtils.scanForFormulas(toScan, existingFormulas);
-        SimpleDialog.of(activity).setTitle(TextParam.text("Choose found pattern"))
+        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
             .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
                 for (String s : set) {
                     adapter.addVariable(null, s);

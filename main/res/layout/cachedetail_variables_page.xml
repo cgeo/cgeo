@@ -18,24 +18,13 @@
         android:orientation="vertical" >
 
         <TextView
-            android:id="@+id/variables_experimental_warning"
+            android:id="@+id/variables_titletext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textSize="@dimen/textSize_headingSecondary"
-            android:background="@drawable/mark_orange"
-            tools:text="Experimental Feature\n* point one\n* point two"
+            android:text="@string/variables_titletext"
             />
-
-        <TextView
-            android:id="@+id/variables_explanation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:textSize="@dimen/textSize_headingSecondary"
-            android:text="Use this page to note down values and do calculations necessary for this cache. Tap 'Help' for more information."
-            />
-
 
         <LinearLayout
             android:layout_width="fill_parent"
@@ -55,7 +44,6 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="6dp"
-                android:text="A"
                 android:minWidth="2dp"
                 app:icon="@drawable/ic_menu_add" />
 
@@ -66,7 +54,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:layout_margin="6dp"
-                android:text="Scan Listing"
+                android:text="@string/variables_scanlisting"
                 app:icon="@drawable/ic_menu_add" />
 
 
@@ -85,19 +73,19 @@
                 android:gravity="center"
                 android:layout_margin="6dp"
                 app:icon="@drawable/ic_menu_auto_fix_high"
-                android:text="Tidy Up"/>
+                android:text="@string/variables_tidyup"/>
 
             <Button
                 android:id="@+id/variables_deleteall"
                 style="@style/button"
                 android:layout_gravity="center_horizontal"
-                android:text="Delete All"
+                android:text="@string/variables_deleteall"
                 app:icon="@drawable/ic_menu_delete"/>
 
             <Button
                 android:id="@+id/variables_info"
                 style="@style/button"
-                android:text="Help"
+                android:text="@string/variables_info"
                 android:layout_margin="6dp"
                 android:layout_gravity="center_horizontal"
                 app:icon="@drawable/settings_info" />

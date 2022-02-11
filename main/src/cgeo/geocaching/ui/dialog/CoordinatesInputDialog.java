@@ -17,7 +17,6 @@ import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
@@ -245,7 +244,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             bCalculate.setVisibility(View.VISIBLE);
         }
 
-        if (!BranchDetectionHelper.isProductionBuild() && inputData.getGeocode() != null) {
+        if (CalculatedCoordinate.isFeatureEnabled() && inputData.getGeocode() != null) {
             binding.calculateGlobal.setVisibility(View.VISIBLE);
             binding.calculateGlobal.setOnClickListener(vv -> {
                 inputData.setGeopoint(gp);

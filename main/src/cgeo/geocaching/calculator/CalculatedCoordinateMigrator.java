@@ -1,12 +1,13 @@
 package cgeo.geocaching.calculator;
 
+import cgeo.geocaching.R;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
-import cgeo.geocaching.utils.BranchDetectionHelper;
+import cgeo.geocaching.utils.LocalizationUtils;
 
 import android.content.Context;
 
@@ -292,19 +293,19 @@ public class CalculatedCoordinateMigrator {
     }
 
     public String getMigrationInformationMarkup() {
-        final StringBuilder sb = new StringBuilder("Legacy local calculation coordinate data was found in this waypoint:");
-        sb.append("\n\n`" + waypointMigrationData.getMigrationNotes() + "`");
-        sb.append("\n\nIt is suggested to migrate this to global calculation coordinates as follows:");
-        sb.append("\n\n`" + waypointMigrationData.getLatPattern() + " • " + waypointMigrationData.getLonPattern() + "`");
-        sb.append("\n\nwith new cache variables:");
+        final String migNotes = "`" + waypointMigrationData.getMigrationNotes() + "`";
+        final String newCoordinate = "`" + waypointMigrationData.getLatPattern() + " • " + waypointMigrationData.getLonPattern() + "`";
+        final StringBuilder newVariables = new StringBuilder();
         for (Map.Entry<String, String> ve : newCacheVariables.entrySet()) {
-            sb.append("\n- `" + ve.getKey() + " = " + ve.getValue() + "`");
+            newVariables.append("\n- `" + ve.getKey() + " = " + ve.getValue() + "`");
         }
-        sb.append("\n\nPlease choose:");
-        sb.append("\n- **Migrate** to perform migration as suggested");
-        sb.append("\n- **Dismiss Data** to dismiss the found calculation data for good");
-        sb.append("\n- **Cancel** to continue without migration. You will be asked for migration again next time you open the waypoint for editing. Note however that editing the waypoint coordinates could delete local calculation data");
-        return sb.toString();
+
+        final String migrateButtonName = "**" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate) + "**";
+        final String cancelButtonName = "**" + LocalizationUtils.getString(R.string.calccoord_migrate_cancel) + "**";
+        final String dismissButtonName = "**" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss) + "**";
+
+        return LocalizationUtils.getString(R.string.calccoord_migrate_infotext_markdown, migNotes, newCoordinate, newVariables.toString(),
+            migrateButtonName, dismissButtonName, cancelButtonName);
     }
 
     @NonNull
@@ -322,7 +323,7 @@ public class CalculatedCoordinateMigrator {
     }
 
     public static boolean needsMigration(final Waypoint w) {
-        return !BranchDetectionHelper.isProductionBuild() &&
+        return CalculatedCoordinate.isFeatureEnabled() &&
             WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
     }
 
@@ -332,13 +333,14 @@ public class CalculatedCoordinateMigrator {
             return;
         }
         final CalculatedCoordinateMigrator mig = new CalculatedCoordinateMigrator(cache, w);
-        SimpleDialog.ofContext(ctx).setTitle(TextParam.text("Waypoint Migration"))
+        SimpleDialog.ofContext(ctx).setTitle(TextParam.id(R.string.calccoord_migrate_title))
             .setMessage(TextParam.text(mig.getMigrationInformationMarkup()).setMarkdown(true))
-            .setPositiveButton(TextParam.text("Migrate"))
-            .setNegativeButton(TextParam.text("Cancel"))
-            .setNeutralButton(TextParam.text("Dismiss Data"))
+            .setPositiveButton(TextParam.id(R.string.calccoord_migrate_migrate))
+            .setNegativeButton(TextParam.id(R.string.calccoord_migrate_cancel))
+            .setNeutralButton(TextParam.id(R.string.calccoord_migrate_dismiss))
             .show((v, i) -> {
-                w.setUserNote(w.getUserNote() + "\nMigrated from:" + mig.getMigrationData().getMigrationNotes());
+                w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate_usernote_praefix) +
+                    ":" + mig.getMigrationData().getMigrationNotes());
                 for (Map.Entry<String, String> newVar : mig.getNewCacheVariables().entrySet()) {
                     cache.getVariables().addVariable(newVar.getKey(), newVar.getValue());
                 }
@@ -354,7 +356,8 @@ public class CalculatedCoordinateMigrator {
                 actionAfterMigration.run();
             }, (v, i) -> {
                 //dismiss calculated coordinate data
-                w.setUserNote(w.getUserNote() + "\nDismissed:" + mig.getMigrationData().getMigrationNotes());
+                w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
+                    ":" + mig.getMigrationData().getMigrationNotes());
                 w.setCalcStateConfig(null);
                 cache.addOrChangeWaypoint(w, true);
                 actionAfterMigration.run();

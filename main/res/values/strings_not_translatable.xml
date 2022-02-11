@@ -304,4 +304,7 @@
 
     <!-- c:geo mail subject for problem reports -->
     <string translatable="false" name="mailsubject_problem_report">c:geo problem report (%s)</string>
+
+    <!-- Help Ressources -->
+    <string translatable="false" name="formula_syntax_url">https://github.com/cgeo/cgeo/wiki/Calculator-Formula-Syntax</string>
 </resources>

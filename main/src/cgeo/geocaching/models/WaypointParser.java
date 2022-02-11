@@ -11,7 +11,6 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.GeopointParser;
 import cgeo.geocaching.location.GeopointWrapper;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.TextParser;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
@@ -78,7 +77,7 @@ public class WaypointParser {
      * @param namePrefix Prefix of the name of the waypoint
      */
     public WaypointParser(final Geocache cache, @NonNull final String namePrefix) {
-        this(cache, namePrefix, BranchDetectionHelper.isProductionBuild());
+        this(cache, namePrefix, !CalculatedCoordinate.isFeatureEnabled());
     }
 
     public WaypointParser(final Geocache cache, @NonNull final String namePrefix, final boolean legacyMode) {
@@ -487,7 +486,7 @@ public class WaypointParser {
      * @return parseable waypoint text
      */
     public static String getParseableText(final Waypoint wp, final int maxUserNoteSize) {
-        return getParseableText(wp, maxUserNoteSize, BranchDetectionHelper.isProductionBuild());
+        return getParseableText(wp, maxUserNoteSize, !CalculatedCoordinate.isFeatureEnabled());
     }
 
     public static String getParseableText(final Waypoint wp, final int maxUserNoteSize, final boolean legacyMode) {
