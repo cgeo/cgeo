@@ -1320,7 +1320,9 @@
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas del caché</string>
     <string name="waypoint_calculate_coordinates">Calcular coordenadas</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">A medida</string>
     <string name="waypoint_my_coordinates">Mis coordenadas</string>
     <string name="waypoint_bearing">Orientación en º</string>
@@ -1360,6 +1362,9 @@
     <string name="waypoint_coordinate_formats_plain">Sencillo</string>
     <string name="from_clipboard">Desde portapapeles</string>
     <string name="copy_to_clipboard">Copiar al portapapeles</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Publicar en Twitter</string>
     <!-- map -->
