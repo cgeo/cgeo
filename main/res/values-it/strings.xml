@@ -1325,7 +1325,9 @@
     <string name="waypoint_coordinates">Coordinate</string>
     <string name="waypoint_cache_coordinates">Coordinate cache</string>
     <string name="waypoint_calculate_coordinates">Calcola coordinate</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordinate calcolate</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
     <string name="waypoint_bearing">Angolo in gradi</string>
@@ -1365,6 +1367,9 @@
     <string name="waypoint_coordinate_formats_plain">Normale</string>
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
     <!-- map -->
