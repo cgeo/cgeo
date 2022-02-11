@@ -110,7 +110,7 @@
     <string name="log_discovered">Visto</string>
     <string name="log_reviewer">Nota de revisão</string>
     <string name="log_submit_for_review">Enviar para revisão</string>
-    <string name="log_retractlisting">Retracto da publicação</string>
+    <string name="log_retractlisting">Retirada da página da cache</string>
     <string name="log_marked_missing">Dado como desaparecido</string>
     <string name="log_tb_nothing">Sem acção</string>
     <string name="log_tb_visit">Visitar</string>
@@ -2192,11 +2192,20 @@ do mapa e dos temas?</string>
     <string name="rtl_reef">recife</string>
     <string name="rtl_dyke">dique</string>
     <string name="rtl_beach">praia</string>
+    <string name="rtl_beach_gravel">praia de gravilha</string>
+    <string name="rtl_spring">primavera</string>
+    <string name="rtl_powerline">linha eléctrica</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Estradas &amp; Caminhos</string>
     <string name="rtl_paved_path">caminho pavimentado</string>
     <string name="rtl_paved_path_gravel">caminho pavimentado (gravilha)</string>
     <string name="rtl_unpaved_path">caminho não pavimentado</string>
+    <string name="rtl_unpaved_path_partly_grown">caminho não pavimentado (com alguma vegetação)</string>
+    <string name="rtl_unpaved_path_grown">caminho não pavimentado (com vegetação)</string>
+    <string name="rtl_surface_unknown">superfície desconhecida</string>
+    <string name="rtl_unpaved_footpath">caminho pedestre de terra</string>
+    <string name="rtl_paved_footpath">caminho pedestre pavimentado</string>
+    <string name="rtl_bridleway">trilho equestre</string>
     <string name="rtl_access_destination">acesso (destino)</string>
     <string name="rtl_access_private">acesso (particular)</string>
     <string name="rtl_access_agricultural">restrito ao tráfego agrícola / florestal</string>
@@ -2204,6 +2213,11 @@ do mapa e dos temas?</string>
     <string name="rtl_cycleway">ciclovia</string>
     <string name="rtl_cycleway_steep">ciclovia (íngreme)</string>
     <string name="rtl_cycleway_paved">ciclovia (pavimentada)</string>
+    <string name="rtl_paved_smooth">pavimentado (liso)</string>
+    <string name="rtl_paved_rough">pavimentado (deteriorado)</string>
+    <string name="rtl_surface_compacted">superfície compactada</string>
+    <string name="rtl_surface_gravel">superfície de gravilha</string>
+    <string name="rtl_surface_raw">superfície por tratar</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Caminhada, Ciclismo, Escalada</string>
     <string name="rtl_hiking_T1">caminhada T1</string>
@@ -2225,6 +2239,7 @@ do mapa e dos temas?</string>
     <string name="rtl_uphill25">subida -25%</string>
     <string name="rtl_uphill30">subida -30%</string>
     <string name="rtl_uphill40">subida -40%</string>
+    <string name="rtl_uphill_too_steep">subida muito inclinada</string>
     <string name="rtl_security_rope">segurança: corda</string>
     <string name="rtl_security_rungs">segurança: degraus</string>
     <string name="rtl_security_ladder">segurança: escadote</string>
