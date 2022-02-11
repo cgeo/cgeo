@@ -53,7 +53,7 @@ public class BookmarkUtils {
             waitDialog.dismiss();
 
             SimpleDialog.ofContext(context).setTitle(R.string.search_bookmark_select)
-                    .selectSingle(lists, (l, pos) -> TextParam.text(l.getName()), -1, false, (l, pos) -> processSelection(context, geocaches, l));
+                    .selectSingle(lists, (l, pos) -> TextParam.text(l.getName()), -1, SimpleDialog.SingleChoiceMode.NONE, (l, pos) -> processSelection(context, geocaches, l));
 
         });
     }

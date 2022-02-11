@@ -325,7 +325,7 @@ public class VariableListView extends LinearLayout {
                 viewHolder.viewButtonFunction.setOnClickListener(d -> {
                     final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
                     SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
-                        .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, true, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
+                        .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
                             final String newFormula = f.getFunctionInsertString();
                             if (viewHolder.viewVariableFormulaText != null) {
                                 viewHolder.viewVariableFormulaText.setText(newFormula);

@@ -320,7 +320,7 @@ public class TextSpinner<T> implements AdapterView.OnItemSelectedListener {
 
             sd.selectSingleGrouped(values,
                 (v, i) -> TextParam.text((this.textGroupMapper == null ? "" : "   ") + displayMapper.call(v)),
-                getPositionFor(selectedItem, -1), !this.textHideSelectionMarker,
+                getPositionFor(selectedItem, -1), this.textHideSelectionMarker ? SimpleDialog.SingleChoiceMode.NONE : SimpleDialog.SingleChoiceMode.SHOW_RADIO,
                 (v, i) -> this.textGroupMapper == null ? null : this.textGroupMapper.call(v),
                 s -> TextParam.text("**" + s + "**").setMarkdown(true), (dialog, pos) -> set(values.get(pos)));
         }

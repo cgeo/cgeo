@@ -328,6 +328,10 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 postZoomToViewport(viewport);
             }
             targetGeocode = mapOptions.geocode;
+            final Geocache temp = getCurrentTargetCache();
+            if (temp != null) {
+                lastNavTarget = temp.getCoords();
+            }
         } else if (mapOptions.coords != null) {
             postZoomToViewport(new Viewport(mapOptions.coords, 0, 0));
             if (mapOptions.mapMode == MapMode.LIVE) {

@@ -85,7 +85,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this)));
 
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)
-            .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, false, (shortcut, pos) -> {
+            .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, SimpleDialog.SingleChoiceMode.NONE, (shortcut, pos) -> {
 
         //Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, shortcut -> {
             if (offlineShortcut.equals(shortcut)) {
