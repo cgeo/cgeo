@@ -753,6 +753,8 @@
     <string name="waypoint_coordinates">Coordonate</string>
     <string name="waypoint_cache_coordinates">Coordonate cutie</string>
     <string name="waypoint_calculate_coordinates">Calculator de coordonate</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Personalizat</string>
     <string name="waypoint_my_coordinates">Coordonatele mele</string>
     <string name="waypoint_bearing">Azimut în °</string>
@@ -787,6 +789,9 @@
     <string name="waypoint_coordinate_formats_plain">Simplu</string>
     <string name="from_clipboard">Din memoria temporară</string>
     <string name="copy_to_clipboard">Copiază în memoria temporară</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Publică pe Twitter</string>
     <!-- map -->
