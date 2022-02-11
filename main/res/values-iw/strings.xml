@@ -426,6 +426,8 @@
     <!-- waypoint -->
     <string name="waypoint_coordinates">נקודות ציון</string>
     <string name="waypoint_cache_coordinates">נקודות ציון של המטמון</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_my_coordinates">נקוודת הציון שלי</string>
     <string name="waypoint_copy_coordinates">העתק נקודות ציון</string>
     <string name="waypoint_added">נקודת ציון נוספה</string>
@@ -444,6 +446,9 @@
     <string name="waypoint_coordinates_has_been_modified_on_website">נקודות ציון של המטמון עודכנו באתר ל:%s.</string>
     <string name="waypointcalc_notes_prompt">Enter notes here&#8230;</string>
     <string name="waypoint_coordinate_formats_plain">פשוט</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <!-- map -->
     <string name="map_gm_autorotation">סיבוב מפה אוטומטי</string>
