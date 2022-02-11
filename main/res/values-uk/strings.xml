@@ -909,6 +909,8 @@
     <string name="waypoint_coordinates">Координати</string>
     <string name="waypoint_cache_coordinates">координати кешу</string>
     <string name="waypoint_calculate_coordinates">обчислити координати</string>
+    <!-- Legacy: button text in coordinate input -->
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">звичай</string>
     <string name="waypoint_my_coordinates">Мої координати</string>
     <string name="waypoint_bearing">несучи в</string>
@@ -948,6 +950,9 @@
     <string name="waypoint_coordinate_formats_plain">Простий</string>
     <string name="from_clipboard">З буферу обміну</string>
     <string name="copy_to_clipboard">Скопіювати в буфер обміну</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Опублікувати це на Твіттері</string>
     <!-- map -->
