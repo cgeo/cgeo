@@ -110,7 +110,7 @@
     <string name="log_discovered">Visto</string>
     <string name="log_reviewer">Nota de revisão</string>
     <string name="log_submit_for_review">Enviar para revisão</string>
-    <string name="log_retractlisting">Retracto da publicação</string>
+    <string name="log_retractlisting">Retirada da página da cache</string>
     <string name="log_marked_missing">Dado como desaparecido</string>
     <string name="log_tb_nothing">Sem acção</string>
     <string name="log_tb_visit">Visitar</string>
@@ -356,6 +356,10 @@
     <string name="caches_store_all">Armazenar todas, incl. as já guardadas</string>
     <string name="caches_store_unsaved">Armazenar apenas caches por guardar</string>
     <string name="caches_store_selected">Memorizar seleccionada(s)</string>
+    <string name="caches_store_background">Transferência em segundo plano (Experimental!)</string>
+    <string name="caches_store_refresh_background">Actualização em segundo plano (Experimental!)</string>
+    <string name="caches_store_background_should_force_refresh">Actualizar caches já transferidas</string>
+    <string name="caches_store_background_title">Transferir caches</string>
     <string name="caches_history">Histórico</string>
     <string name="caches_on_map">Mostrar no mapa</string>
     <string name="caches_sort">Ordenar</string>
@@ -1281,6 +1285,7 @@
     <string name="cache_share_field">Partilhar</string>
     <string name="cache_time_full_hours">o\'clock</string>
     <string name="cache_listed_on">Listada em %s</string>
+    <string name="cache_recently_viewed">Visualizadas recentemente</string>
     <string name="cache_whereyougo_start">Abrir WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_whereyougo_install">Instalar WhereYouGo para descarregar e iniciar este cartucho</string>
     <string name="cache_chirpwolf_start">Esta cache pode usar um transmissor Chirp ou outro tipo de sinalizador sem fios. Para ler dados Chirp pode abrir a aplicação Chirp Wolf.</string>
@@ -1338,7 +1343,10 @@
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
     <string name="waypoint_calculate_coordinates">Calcular coordenadas</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
+    <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Calcular coordenadas (novo)</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
     <string name="waypoint_bearing">Azimute em º</string>
@@ -1378,6 +1386,27 @@
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
     <string name="copy_to_clipboard">Copiar para a área de transferência</string>
+    <!-- Variables -->
+    <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
+    <string name="variables_scanlisting">Analisar a descrição</string>
+    <string name="variables_scanlisting_choosepattern_title">Escolher o modelo de \'encontrado\'</string>
+    <string name="variables_tidyup">Organizar</string>
+    <string name="variables_deleteall">Eliminar Todas</string>
+    <string name="variables_deleteall_confirm_text">Deseja realmente eliminar todas as variáveis para esta cache?</string>
+    <string name="variables_info">Ajuda</string>
+    <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Modo Guia</string>
+    <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
+    <string name="calccoord_remove_spaces">Remover Espaços</string>
+    <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
+    <string name="calccoord_generate_showonmap">Mostrar no Mapa</string>
+    <string name="calccoord_generate_waypointnameprefix">Gerada</string>
+    <string name="calccoord_migrate_migrate">Migrar</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migrar a partir de</string>
+    <string name="calccoord_migrate_cancel">Cancelar</string>
+    <string name="calccoord_migrate_dismiss">Descartar dados</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Dispensada</string>
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
@@ -2164,7 +2193,7 @@
     <string name="back">Anterior</string>
     <string name="later">Mais tarde</string>
     <string name="cancel">Cancelar</string>
-    <string name="ok">Ok</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar todas</string>
     <string name="touch_again_to_exit">Por favor, toque novamente para sair</string>
