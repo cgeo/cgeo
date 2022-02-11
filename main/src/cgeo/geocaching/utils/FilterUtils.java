@@ -46,7 +46,7 @@ public class FilterUtils {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
                     .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
                     .setSelectionForNeutral(false)
-                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, false,
+                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
                         (f, pos) -> filteredActivity.refreshWithFilter(f),
                         (f, pos) -> {
                         },
@@ -54,7 +54,7 @@ public class FilterUtils {
                     );
             } else {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
-                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, false,
+                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
                         (f, pos) -> filteredActivity.refreshWithFilter(f),
                         (f, pos) -> {
                         }

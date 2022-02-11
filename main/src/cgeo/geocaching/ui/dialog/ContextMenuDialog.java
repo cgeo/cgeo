@@ -79,7 +79,7 @@ public class ContextMenuDialog {
         SimpleDialog.of(this.activity).setTitle(this.title == null ? null : TextParam.text(this.title)).selectSingle(
                 items,
                 (it, pos) -> TextParam.text(it.toString()).setImage(atLeastOneElementHasIcon ? ImageParam.id(it.icon) : null, atLeastOneElementHasIcon ? 30 : 0),
-                -1, false, clickListener);
+                -1, SimpleDialog.SingleChoiceMode.NONE, clickListener);
     }
 
 

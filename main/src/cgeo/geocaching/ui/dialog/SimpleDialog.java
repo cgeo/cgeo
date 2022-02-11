@@ -60,6 +60,11 @@ public class SimpleDialog {
     };
 
     /**
+     * Choices for showing selection when creating singleChoice dialogs
+     */
+    public enum SingleChoiceMode { NONE, SHOW_RADIO, SHOW_RADIO_AND_OK }
+
+    /**
      * Define common button text sets
      */
     public enum ButtonTextSet {
@@ -281,14 +286,13 @@ public class SimpleDialog {
      * @param items            the list of items to select from
      * @param displayMapper    mapper to get the display value for each of the items
      * @param preselect        index of the item to preselect. If this is not a valid index (e.g. -1), no value will be preselected
-     * @param showChoice       if true, then items are shown with radio buttons to see the chosen value, and buttons must be used to end dialog.
-     *                         If false, then no radio buttons and dialog buttons are displayed and clicking an item ends the dialog
+     * @param showMode         mode how to show or not show radio buttons and Ok button
      * @param onSelectListener is called when user made a selection (if showChoice=true then after clicking positive button; otherwise after clicking an item)
      * @param moreListeners    Provide up to two more listeners to define actions for 'negative' and 'neutral' button.
      */
     @SafeVarargs
-    public final <T> void selectSingle(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final boolean showChoice, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
-        selectSingleGrouped(items, displayMapper, preselect, showChoice, null, null, onSelectListener, moreListeners);
+    public final <T> void selectSingle(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final SingleChoiceMode showMode, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
+        selectSingleGrouped(items, displayMapper, preselect, showMode, null, null, onSelectListener, moreListeners);
     }
 
     /**
@@ -299,15 +303,14 @@ public class SimpleDialog {
      * @param items            the list of items to select from
      * @param displayMapper    mapper to get the display value for each of the items
      * @param preselect        index of the item to preselect. If this is not a valid index (e.g. -1), no value will be preselected
-     * @param showChoice       if true, then items are shown with radio buttons to see the chosen value, and buttons must be used to end dialog.
-     *                         If false, then no radio buttons and dialog buttons are displayed and clicking an item ends the dialog
-     * @param groupMapper      if not null, will display grouped display
+     * @param showMode         mode how to show or not show radio buttons and Ok button
+     *      * @param groupMapper      if not null, will display grouped display
      * @param onSelectListener is called when user made a selection (if showChoice=true then after clicking positive button; otherwise after clicking an item)
      * @param moreListeners    Provide up to two more listeners to define actions for 'negative' and 'neutral' button.
      */
     @SafeVarargs
     @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
-    public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final boolean showChoice, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
+    public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final SingleChoiceMode showMode, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
         applyCommons(builder);
@@ -321,7 +324,7 @@ public class SimpleDialog {
 
         // Maybe select_dialog_singlechoice_material / select_dialog_item_material instead ?
         // NOT android.R.layout.select_dialog_item -> makes font size too big
-        final ListAdapter adapter = createListAdapterSingle(groupedValues.first, showChoice, groupedValues.second);
+        final ListAdapter adapter = createListAdapterSingle(groupedValues.first, showMode, groupedValues.second);
 
         //use "setsinglechoiceItems", because otherwise the dialog will close always after selecting an item
         builder.setSingleChoiceItems(adapter, preselectPos, (dialog, clickpos) -> {
@@ -331,7 +334,7 @@ public class SimpleDialog {
             }
 
             enableDisableButtons((AlertDialog) dialog, true);
-            if (!showChoice) {
+            if (showMode != SingleChoiceMode.SHOW_RADIO_AND_OK) {
                 dialog.dismiss();
                 onSelectListener.call(items.get(pos), pos);
             } else {
@@ -339,7 +342,7 @@ public class SimpleDialog {
             }
         });
 
-        if (showChoice) {
+        if (showMode == SingleChoiceMode.SHOW_RADIO_AND_OK) {
             builder.setPositiveButton(getPositiveButton(), (dialog, which) -> onSelectListener.call(items.get(selectedPos[0]), selectedPos[0]));
             if (moreListeners != null) {
                 if (moreListeners.length > 0) {
@@ -538,7 +541,7 @@ public class SimpleDialog {
 
 
     @NotNull
-    private ListAdapter createListAdapterSingle(@NotNull final List<TextParam> items, final boolean showChoice, final Func1<Integer, Integer> groupMapper) {
+    private ListAdapter createListAdapterSingle(@NotNull final List<TextParam> items, final SingleChoiceMode showMode, final Func1<Integer, Integer> groupMapper) {
 
         final LayoutInflater inflater = LayoutInflater.from(getContext());
 
@@ -550,7 +553,7 @@ public class SimpleDialog {
             public View getView(final int position, final View convertView, final ViewGroup parent) {
 
                 final boolean isGroupHeading = groupMapper != null && groupMapper.call(position) == null;
-                final int itemLayout = showChoice && !isGroupHeading ? R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
+                final int itemLayout = showMode != SingleChoiceMode.NONE && !isGroupHeading ? R.layout.select_dialog_singlechoice_material : R.layout.select_dialog_item_material;
                 //or android.R.layout.simple_list_item_single_choice : android.R.layout.simple_list_item_1;
 
                 final View v = convertView != null ? convertView : inflater.inflate(itemLayout, parent, false);
