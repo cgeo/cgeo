@@ -1365,7 +1365,9 @@
     <string name="waypoint_coordinates">Souřadnice</string>
     <string name="waypoint_cache_coordinates">Souřadnice kešky</string>
     <string name="waypoint_calculate_coordinates">Výpočet souřadnic</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Vypočítané souřadnice</string>
+    <!-- Legacy: line in waypoint description -->
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_bearing">Azimut [°]</string>
@@ -1405,6 +1407,9 @@
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
     <string name="from_clipboard">Ze schránky</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
+    <!-- Variables -->
+    <!-- Calculated coordinates -->
+    <!-- Formula -->
     <!-- visit -->
     <string name="visit_tweet">Oznámit nález na Twitteru</string>
     <!-- map -->
