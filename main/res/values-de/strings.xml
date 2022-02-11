@@ -1343,7 +1343,10 @@
     <string name="waypoint_coordinates">Koordinaten</string>
     <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
     <string name="waypoint_calculate_coordinates">Berechne Koordinaten</string>
+    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Berechnete Koordinaten</string>
+    <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Berechne Koordinaten (neu)</string>
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
     <string name="waypoint_bearing">Richtung in °</string>
@@ -1383,6 +1386,35 @@
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
+    <!-- Variables -->
+    <string name="variables_deleteall">Alle löschen</string>
+    <string name="variables_info">Hilfe</string>
+    <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Geführter Modus</string>
+    <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
+    <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
+    <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Keine Kombination ergab gültige Koordinaten</string>
+    <string name="calccoord_generate_error_nogeopointselected">Keine Koordinate ausgewählt</string>
+    <string name="calccoord_migrate_cancel">Abbrechen</string>
+    <string name="calccoord_migrate_dismiss">Daten verwerfen</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Verworfen</string>
+    <!-- Formula -->
+    <string name="formula_function_sqrt">Quadratwurzel</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangens</string>
+    <string name="formula_function_abs">Absoluter Wert</string>
+    <string name="formula_function_round">Runden</string>
+    <string name="formula_function_if">Wenn</string>
+    <string name="formula_function_checksum">Quersumme</string>
+    <string name="formula_function_lettervalue">Buchstabenwortwert</string>
+    <string name="formula_function_roman">Römisch nach Dezimal</string>
+    <string name="formula_function_vanity">Vanity-Code</string>
+    <string name="formula_error_unexpectedtoken">Erwartet \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Falsche Parameteranzahl, erwartete %1$s-%2$s, erhielt %3$s</string>
+    <string name="formula_error_wrongtype">Falscher Typ, erwartet \'%1$s\', erhielt \'%2$s\' vom Typ \'%3$s\'</string>
+    <string name="formula_error_cyclicdependency">Zyklus: %1$s</string>
     <!-- visit -->
     <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
     <!-- map -->
@@ -2174,7 +2206,7 @@
     <string name="back">Zurück</string>
     <string name="later">Später</string>
     <string name="cancel">Abbrechen</string>
-    <string name="ok">OK</string>
+    <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Alles auswählen</string>
     <string name="touch_again_to_exit">Zum Beenden erneut tippen</string>
