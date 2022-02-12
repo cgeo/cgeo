@@ -349,7 +349,6 @@
 
     <!-- main screen -->
     <string name="home_button">Home</string>
-    <string name="live_map_button">@string/map_map</string>
     <string name="caches_nearby_button">Nearby</string>
     <string name="advanced_search_button">Search</string>
     <string name="stored_caches_button">Stored</string>
