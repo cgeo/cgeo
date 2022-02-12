@@ -95,7 +95,7 @@ public final class LoggingUI extends AbstractUIFactory {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
         }
         list.add(new LogTypeEntry(null, SpecialLogType.LOG_CACHE, false));
-        if (Settings.getLogTemplates().size() > 0 && (logTypes.contains(LogType.FOUND_IT) || logTypes.contains(LogType.WEBCAM_PHOTO_TAKEN))) {
+        if (Settings.getLogTemplates().size() > 0 && logTypes.contains(LogType.FOUND_IT)) {
             list.add(1, new LogTypeEntry(null, SpecialLogType.TEMPLATES, false));
         }
 
@@ -159,7 +159,7 @@ public final class LoggingUI extends AbstractUIFactory {
             cache.logOffline(activity, new OfflineLogEntry.Builder<>()
                 .setLog(LogTemplateProvider.applyTemplates(logTemplate.getText(), new LogTemplateProvider.LogContext(cache, null, true)))
                 .setDate(Calendar.getInstance().getTimeInMillis())
-                .setLogType(cache.getPossibleLogTypes().contains(LogType.FOUND_IT) ? LogType.FOUND_IT : LogType.WEBCAM_PHOTO_TAKEN)
+                .setLogType(LogType.FOUND_IT)
                 .build()
             );
             dialog.dismiss();
