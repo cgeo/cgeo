@@ -311,7 +311,6 @@
     <string name="menu_backup">Biztonsági mentés / Visszaállítás</string>
     <string name="menu_history">Előzmények</string>
     <!-- main screen -->
-    <string name="live_map_button">Élő térkép</string>
     <string name="caches_nearby_button">A közelben</string>
     <string name="advanced_search_button">Keresés</string>
     <string name="stored_caches_button">Mentett</string>
