@@ -2008,6 +2008,7 @@
     <string name="map_clear_track_confirm">Möchtest du Route/Track \"%s\" entfernen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
+    <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="center_on_route_track">Auf Route/Track zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>

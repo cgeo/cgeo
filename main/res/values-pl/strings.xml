@@ -790,6 +790,8 @@
         <item>Jasny</item>
         <item>Ciemny</item>
     </string-array>
+    <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Pokaż tapetę urządzenia jako tło ekranu głównego</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -1306,6 +1308,8 @@
     <string name="cache_listed_on">Zapisana w %s</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
+    <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz zainstalować Chirp Wolf.</string>
     <string name="cache_alc_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
     <string name="cache_alc_install">Zainstaluj aplikację Adventure Lab, by rozpocząć tę przygodę</string>
     <string name="context_share_as_text">Udostępnij tekst</string>
@@ -2062,6 +2066,7 @@
     <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
+    <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
@@ -2220,6 +2225,7 @@
     <string name="back">Wstecz</string>
     <string name="later">Później</string>
     <string name="cancel">Anuluj</string>
+    <string name="ok">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
     <string name="touch_again_to_exit">Proszę dotknąć ponownie, aby wyjść</string>

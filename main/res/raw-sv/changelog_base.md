@@ -8,8 +8,8 @@
 - Nyhet: D/T-symboler för cache-ikoner (valfritt)
 - Nyhet: Alternativ för att kontrollera om ruttdata saknas för nuvarande vy
 - Nyhet: Temalegend för Elevate, Elements och Freizeitkarte teman
-- Fix: Reenable routing with external BRouter app in version 1.6.3
-- Fix: Avoid map duplication by map downloader in certain conditions
+- Fix: Återaktivera routing med extern BRouter-app med version 1.6.3
+- Fix: Undvik duplicering av kartan under vissa förhållanden genom kart-nedladdaren
 
 ### Cachelista
 - Nyhet: Alternativ för att välja nästa 20 cacher
@@ -17,13 +17,13 @@
 - Nyhet: Lägg till import från bokmärkeslistor (endast GC premium)
 - Nyhet: Invertera sorteringsordning med långklick på sorteringsfältet
 - Förändring: Gör också automatisk sortering efter distans för listor som innehåller cacheserier med mer än 50 cacher (upp till 500)
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Fix: Använd en kortare timeout för snabb scrollmekanism för mindre störningar med andra layoutelement
 
 ### Cachedetaljer
 - Nyhet: Skicka aktuella cachekoordinater till geochecker (om detta stöds av geochecker)
 - Nyhet: Färgade attributikoner (följande attributgrupper)
 - Fix: Problem att öppna bilder från gallerifliken i externa appar på vissa Samsung-enheter
-- Fix: Missing log count (website change)
+- Fix: Antal loggar saknades (ändring av webbplatsen)
 
 ### Övrigt
 - Nyhet: Snabbladda geokoder från urklipp i huvudskärmens sökfält
@@ -38,8 +38,8 @@
 - Fix: Undvik upprepade uppdateringskontroller för kartor/ruttfiler med intervall=0
 - Fix: Optimera stöd för autoifyllnad av lösenord från externa lösenords-appar i inställningar
 - Fix: Aktivera verktygstips för system som körs på äldre versioner av Android än version 8
-- Fix: Crash on long-tap on trackable code in trackable details
-- Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Fix: Krasch på långtryck på spårbar kod i spårbara detaljer
+- Fix: Uppladdning av fältanteckningar (ändring av webbplatsen)
+- Omarbetade inställningar för att uppfylla aktuella Android-specifikationer
+- Uppdaterat MapsWithMe API
 

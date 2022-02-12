@@ -774,6 +774,8 @@
         <item>Chiaro</item>
         <item>Scuro</item>
     </string-array>
+    <string name="init_wallpaper">Sfondo</string>
+    <string name="init_summary_wallpaper">Mostra sfondo del dispositivo come sfondo della schermata iniziale</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
     <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
@@ -1274,6 +1276,8 @@
     <string name="cache_listed_on">Elencato su %s</string>
     <string name="cache_whereyougo_start">Apri WhereYouGo per scaricare e avviare questa cartuccia</string>
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
+    <string name="cache_chirpwolf_start">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
     <string name="cache_alc_start">Apri Adventure Lab per iniziare a giocare a questa avventura</string>
     <string name="cache_alc_install">Installa l\'app Adventure Lab per giocare a questa avventura</string>
     <string name="context_share_as_text">Condividi testo</string>
@@ -2000,6 +2004,7 @@
     <string name="map_clear_track_confirm">Vuoi rimuovere il percorso/traccia\"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opzioni percorsi / tracce</string>
+    <string name="routes_tracks_menu">Itinerari / Tracce</string>
     <string name="center_on_route_track">Centra sul percorso/traccia</string>
     <string name="unload_route_track">Scarica percorso/binario</string>
     <string name="route">Itinerario</string>
@@ -2158,6 +2163,7 @@
     <string name="back">Indietro</string>
     <string name="later">Dopo</string>
     <string name="cancel">Annulla</string>
+    <string name="ok">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
     <string name="touch_again_to_exit">Tocca di nuovo per uscire</string>

@@ -340,6 +340,10 @@
     <string name="caches_more_caches_no">Başka Geocache yok</string>
     <string name="caches_more_caches_loading">Geocache\'ler yükleniyor…</string>
     <string name="caches_more_caches_currently">şu anda</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Sonraki %1$d cache\'i yükle</item>
+        <item quantity="other">Sonraki %1$d cache\'i yükle</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Kalan cacheleri yükle (%1$d / %2$d)</string>
     <string name="caches_downloading">Geocache\'ler indiriliyor…\nETA: </string>
     <string name="caches_eta_ltm">Bir dakikadan az</string>
@@ -416,6 +420,10 @@
     <plurals name="user_finds_offline">
         <item quantity="one">%d çevrimdışı kayıt girildi</item>
         <item quantity="other">%d çevrimdışı kayıt girildi</item>
+    </plurals>
+    <plurals name="caches_stored_offline">
+        <item quantity="one">%d cache kaydedildi</item>
+        <item quantity="other">%d cache kaydedildi</item>
     </plurals>
     <!-- caches lists -->
     <string name="menu_lists">Listeleri yönet</string>
@@ -682,6 +690,8 @@
     <string name="settings_service_active_unavailable">Aktif/Mevcut değil</string>
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
+    <string name="init_template_text">Şablon Metni</string>
+    <string name="init_log_template_addnew">Yeni bir şablon ekle</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
     <string name="init_signature_template_date">Tarih</string>
     <string name="init_signature_template_time">Saat</string>
@@ -748,6 +758,7 @@
         <item>Açık</item>
         <item>Koyu</item>
     </string-array>
+    <string name="init_wallpaper">Duvar kağıdı</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin Geocache\'leri, yol noktalarını &amp; ayarları yedekleyebileceğini, ancak Geocache görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
@@ -1783,8 +1794,12 @@
     <string name="attribute_historic_no">Terkedilmiş yapı/harabe yok</string>
     <string name="attribute_blind_people_yes">Görme engelli için uygun değil</string>
     <string name="attribute_blind_people_no">Görme engelli için uygun</string>
+    <string name="attribute_unknown">Bilinmeyen öznitelik</string>
     <!-- cache attribute categories -->
+    <string name="cat_type">Tür</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">Geocaching\'i kolaylaştırmak ve kullanıcıların rahatlığı için.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1955,6 +1970,9 @@
     </plurals>
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
     <!-- route/track commons -->
+    <string name="track">İz</string>
+    <string name="make_visible">görünür yap</string>
+    <string name="hide">gizle</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -2102,11 +2120,175 @@
     <string name="back">Geri</string>
     <string name="later">Sonra</string>
     <string name="cancel">İptal</string>
+    <string name="ok">Tamam</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tümünü Seç</string>
     <string name="touch_again_to_exit">Çıkmak için lütfen yeniden dokunun</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Alanlar</string>
+    <string name="rtl_rock">kaya</string>
+    <string name="rtl_glacier">buzul</string>
+    <string name="rtl_grass">çimen</string>
+    <string name="rtl_farmland">tarım arazisi</string>
+    <string name="rtl_vineyard">üzüm bağı</string>
+    <string name="rtl_water">Su</string>
+    <string name="rtl_military">askeri</string>
+    <string name="rtl_cliff">uçurum</string>
+    <string name="rtl_ridge">sırt</string>
+    <string name="rtl_dyke">dayk</string>
+    <string name="rtl_beach">kıyı</string>
+    <string name="rtl_beach_gravel">çakıllı sahil</string>
     <!-- render theme legend: category "Roads & Paths" -->
+    <string name="rtl_category_roads_paths">Yollar &amp; Patikalar</string>
+    <string name="rtl_paved_path">döşenmiş yol</string>
+    <string name="rtl_unpaved_path">döşenmemiş yol</string>
+    <string name="rtl_surface_unknown">yüzey bilinmiyor</string>
+    <string name="rtl_paved_rough">döşenmiş (kaba)</string>
+    <string name="rtl_surface_compacted">sıkıştırılmış yüzey</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <string name="rtl_category_walking_cycling_climbing">Yürüme, Bisiklet, Tırmanış</string>
+    <string name="rtl_mtb_S0">MTB S0</string>
+    <string name="rtl_mtb_S1">MTB S1</string>
+    <string name="rtl_mtb_S2">MTB S2</string>
+    <string name="rtl_mtb_S3">MTB S3</string>
+    <string name="rtl_mtb_S4">MTB S4</string>
+    <string name="rtl_mtb_S56">MTB S5/6</string>
+    <string name="rtl_uphill_too_steep">yukarı eğim çok dik</string>
+    <string name="rtl_security_ladder">güvenlik: merdiven</string>
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_category_poi_symbols">POI / Semboller</string>
+    <string name="rtl_bench">bank</string>
+    <string name="rtl_drinking_water">içme suyu</string>
+    <string name="rtl_peak">zirve</string>
+    <string name="rtl_shelter">sığınak</string>
+    <string name="rtl_telephone">telefon</string>
+    <string name="rtl_toilets">tuvaletler</string>
+    <string name="rtl_volcano">yanardağ</string>
+    <string name="rtl_archaeological">Arkeolojik</string>
+    <string name="rtl_artwork">sanat eseri</string>
+    <string name="rtl_castle">kale</string>
+    <string name="rtl_cinema">sinema</string>
+    <string name="rtl_fountain">çeşme</string>
+    <string name="rtl_memorial">anıt</string>
+    <string name="rtl_memorial_war">savaş anıtı</string>
+    <string name="rtl_monument">heykel</string>
+    <string name="rtl_museum">müze</string>
+    <string name="rtl_ruins">harabeler</string>
+    <string name="rtl_theatre">tiyatro</string>
+    <string name="rtl_water_well">su kuyusu</string>
+    <string name="rtl_zoo">hayvanat bahçesi</string>
+    <string name="rtl_library">Kütüphane</string>
+    <string name="rtl_arts_centre">sanat merkezi</string>
+    <string name="rtl_casino">kumarhane</string>
+    <string name="rtl_nightclub">geceklübü</string>
+    <string name="rtl_beach_resort">sahil mesire yeri</string>
+    <string name="rtl_cliff_diving">uçurumdan atlama</string>
+    <string name="rtl_climbing">tırmanma</string>
+    <string name="rtl_golf">golf</string>
+    <string name="rtl_gym">Spor salonu</string>
+    <string name="rtl_miniature_golf">mini golf</string>
+    <string name="rtl_soccer">futbol</string>
+    <string name="rtl_stadium">stadyum</string>
+    <string name="rtl_swimming_area">yüzme alanı</string>
+    <string name="rtl_tennis">tenis</string>
+    <string name="rtl_water_park">su parkı</string>
+    <string name="rtl_airport">havalimanı</string>
+    <string name="rtl_helipad">helikopter pisti</string>
+    <string name="rtl_rail_funicular">finükiler</string>
+    <string name="rtl_parking">park</string>
+    <string name="rtl_bicycle_parking">bisiklet parkı</string>
+    <string name="rtl_bicycle_shop">bisiklet mağazası</string>
+    <string name="rtl_car_rental">araba kiralama</string>
+    <string name="rtl_car_wash">araba yıkama</string>
+    <string name="rtl_car_shop">araba galerisi</string>
+    <string name="rtl_fuel">yakıt</string>
+    <string name="rtl_ferry_terminal">feribot terminali</string>
+    <string name="rtl_apartment">apartman</string>
+    <string name="rtl_camp_site">kamp alanı</string>
+    <string name="rtl_caravan_site">karavan alanı</string>
+    <string name="rtl_hostel">hostel</string>
+    <string name="rtl_hotel">otel</string>
+    <string name="rtl_bar">bar</string>
+    <string name="rtl_cafe">kafe</string>
+    <string name="rtl_fastfood">fastfood</string>
+    <string name="rtl_ice_cream">dondurma</string>
+    <string name="rtl_pub">Pub</string>
+    <string name="rtl_restaurant">restoran</string>
+    <string name="rtl_bbq">BBQ</string>
+    <string name="rtl_atm">atm</string>
+    <string name="rtl_bakery">fırın</string>
+    <string name="rtl_bank">banka</string>
+    <string name="rtl_beverages">içecekler</string>
+    <string name="rtl_books">kitaplar</string>
+    <string name="rtl_butcher">kasap</string>
+    <string name="rtl_chemist">kimyager</string>
+    <string name="rtl_doityourself">Kendin Yap</string>
+    <string name="rtl_laundry">çamaşırhane</string>
+    <string name="rtl_mall">avm</string>
+    <string name="rtl_organic">organik</string>
+    <string name="rtl_postbox">posta kutusu</string>
+    <string name="rtl_postoffice">postane</string>
+    <string name="rtl_supermarket">süpermarket</string>
+    <string name="rtl_travel_agency">seyahat acentası</string>
+    <string name="rtl_doctors">doktor</string>
+    <string name="rtl_embassy">elçilik</string>
+    <string name="rtl_emergency_phone">acil durum telefonu</string>
+    <string name="rtl_hospital">hastane</string>
+    <string name="rtl_clinic">klinik</string>
+    <string name="rtl_pharmacy">eczane</string>
+    <string name="rtl_police">polis</string>
+    <string name="rtl_emergency_fire_hydrant">su hidrantı</string>
+    <string name="rtl_petroleum_well">petrol kuyusu</string>
+    <string name="rtl_power_coal">enerji (kömür)</string>
+    <string name="rtl_power_gas">enerji (gaz)</string>
+    <string name="rtl_power_nuclear">enerji (nükleer)</string>
+    <string name="rtl_power_water">enerji (su)</string>
+    <string name="rtl_power_wind">enerji (rüzgar)</string>
+    <string name="rtl_wastewater_plant">atıksu tesisi</string>
+    <string name="rtl_watermill">su değirmeni</string>
+    <string name="rtl_windmill">yel değirmeni</string>
+    <string name="rtl_lighthouse">deniz feneri</string>
+    <string name="rtl_tower_observation">gözlem kulesi</string>
+    <string name="rtl_kindergarten">çocuk yuvası</string>
+    <string name="rtl_school">okul</string>
+    <string name="rtl_university">üniversite</string>
+    <string name="rtl_college">kolej</string>
+    <string name="rtl_buddhist">budist</string>
+    <string name="rtl_church">kilise</string>
+    <string name="rtl_hindu">Hindu</string>
+    <string name="rtl_mosque">cami</string>
+    <string name="rtl_place_of_worship">ibadet yeri</string>
+    <string name="rtl_shinto">shinto</string>
+    <string name="rtl_synagogue">sinagog</string>
+    <string name="rtl_pow_christian">hristiyan ibadet yeri</string>
+    <string name="rtl_pow_muslim">müslüman ibadet yeri</string>
+    <string name="rtl_border_control">sınır kontrolü</string>
+    <string name="rtl_bridge_movable">hareketli köprü</string>
+    <string name="rtl_gate">geçit</string>
+    <string name="rtl_geyser">gayzer</string>
+    <string name="rtl_hot_spring">kaplıca</string>
+    <string name="rtl_ladder">merdiven</string>
+    <string name="rtl_log">kayıt</string>
+    <string name="rtl_oneway">tekyön</string>
+    <string name="rtl_peak_small">küçük zirve</string>
+    <string name="rtl_rapids">Rapid</string>
+    <string name="rtl_safety_rope">güvenlik ipi</string>
+    <string name="rtl_stone">taş</string>
+    <string name="rtl_traffic_signal">trafik işareti</string>
+    <string name="rtl_waterfall">şelale</string>
+    <string name="rtl_alp">alp</string>
+    <string name="rtl_mud">çamur</string>
+    <string name="rtl_cemetery">mezarlık</string>
+    <string name="rtl_cemetery_christian">hristiyan mezarlığı</string>
+    <string name="rtl_cemetery_jewish">yahudi mezarlığı</string>
+    <string name="rtl_cemetery_muslim">müslüman mezarlığı</string>
+    <string name="rtl_pedestrian_area">yaya alanı</string>
+    <string name="rtl_prison">hapishane</string>
+    <string name="rtl_ruin">harabe</string>
+    <string name="rtl_secondary_road">ikincil yol</string>
+    <string name="rtl_access_road">ulaşım yolu</string>
+    <string name="rtl_pedestrian_road">yaya geçidi</string>
+    <string name="rtl_tunnel">tünel</string>
+    <string name="rtl_bridge">köprü</string>
+    <string name="rtl_railway">demiyolu</string>
 </resources>
