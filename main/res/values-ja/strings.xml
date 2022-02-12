@@ -792,7 +792,6 @@
     <string name="init_backup_history_length_min">最新のみ</string>
     <string name="init_backup_history_length_max">無制限</string>
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
-    <string name="init_backup_automatic">通知間隔</string>
     <string name="init_backup_automatic_summary">バックアップをx日毎(手動でした日も対象です)にします。0にするとオフになります</string>
     <string name="init_backup_automatic_performing">バックアップを作成中…</string>
     <string name="init_user_confirmation">はい、了承します</string>
