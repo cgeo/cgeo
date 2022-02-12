@@ -5,8 +5,7 @@ import cgeo.geocaching.databinding.MapSettingsDialogBinding;
 import cgeo.geocaching.enumerations.WaypointType;
 import cgeo.geocaching.filters.core.GeocacheFilter;
 import cgeo.geocaching.filters.core.GeocacheFilterContext;
-import cgeo.geocaching.maps.routing.Routing;
-import cgeo.geocaching.maps.routing.RoutingMode;
+import cgeo.geocaching.models.ButtonChoiceModel;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImageParam;
@@ -34,27 +33,21 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
 import static java.lang.Boolean.TRUE;
 
-import com.google.android.material.button.MaterialButtonToggleGroup;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class MapSettingsUtils {
 
     private static boolean isShowCircles;
-    private static boolean isAutotargetIndividualRoute;
-    private static boolean showAutotargetIndividualRoute;
 
     private MapSettingsUtils() {
         // utility class
     }
 
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
-    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
+    public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
         isShowCircles = Settings.isShowCircles();
-        isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
-        showAutotargetIndividualRoute = isAutotargetIndividualRoute || (route != null && route.getNumSegments() > 0);
 
         final GeocacheFilter filter = filterContext.get();
         final Map<GeocacheFilter.QuickFilter, Boolean> quickFilter = filter.getQuickFilter();
@@ -93,20 +86,10 @@ public class MapSettingsUtils {
         rightColumn.addView(ViewUtils.createTextItem(activity, R.style.map_quicksettings_subtitle, TextParam.id(R.string.map_show_other_title)));
         circlesCb.addToViewGroup(activity, rightColumn);
 
-        final ToggleButtonWrapper<Integer> compactIconWrapper = new ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup);
+        final ButtonChoiceModel.ToggleButtonWrapper<Integer> compactIconWrapper = new ButtonChoiceModel.ToggleButtonWrapper<>(Settings.getCompactIconMode(), setCompactIconValue, dialogView.compacticonTooglegroup);
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_off, Settings.COMPACTICON_OFF, activity.getString(R.string.switch_off)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_auto, Settings.COMPACTICON_AUTO, activity.getString(R.string.switch_auto)));
         compactIconWrapper.add(new ButtonChoiceModel<>(R.id.compacticon_on, Settings.COMPACTICON_ON, activity.getString(R.string.switch_on)));
-
-        final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = new ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, dialogView.routingTooglegroup);
-        for (RoutingMode mode : RoutingMode.values()) {
-            routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
-        }
-
-        if (showAutotargetIndividualRoute) {
-            dialogView.mapSettingsAutotargetContainer.setVisibility(View.VISIBLE);
-            dialogView.mapSettingsAutotarget.setChecked(isAutotargetIndividualRoute);
-        }
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
@@ -114,7 +97,6 @@ public class MapSettingsUtils {
                     item.setValue();
                 }
                 compactIconWrapper.setValue();
-                routingChoiceWrapper.setValue();
 
                 if (filter.canSetQuickFilterLossless() && !filter.hasSameQuickFilter(quickFilter)) {
                     filter.setQuickFilterLossless(quickFilter);
@@ -123,38 +105,9 @@ public class MapSettingsUtils {
 
                 onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
 
-                if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
-                    if (route == null) {
-                        Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
-                    } else {
-                        RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
-                    }
-                }
             });
         dialog.show();
-
         compactIconWrapper.init();
-        routingChoiceWrapper.init();
-
-        if (!Routing.isAvailable()) {
-            configureRoutingButtons(false, routingChoiceWrapper);
-            dialogView.routingInfo.setVisibility(View.VISIBLE);
-            dialogView.routingInfo.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.map_routing_activate_title).setMessage(R.string.map_routing_activate).confirm((dialog1, which) -> {
-                Settings.setUseInternalRouting(true);
-                Settings.setBrouterAutoTileDownloads(true);
-                configureRoutingButtons(true, routingChoiceWrapper);
-                dialogView.routingInfo.setVisibility(View.GONE);
-            }));
-        }
-    }
-
-    private static void configureRoutingButtons(final boolean enabled, final ToggleButtonWrapper<RoutingMode> routingChoiceWrapper) {
-        for (final ButtonChoiceModel<RoutingMode> button : routingChoiceWrapper.list) {
-            if (!(button.assignedValue == RoutingMode.OFF || button.assignedValue == RoutingMode.STRAIGHT)) {
-                button.button.setEnabled(enabled);
-                button.button.setAlpha(enabled ? 1f : .3f);
-            }
-        }
     }
 
     private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle, @DrawableRes final int resIcon, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
@@ -217,66 +170,4 @@ public class MapSettingsUtils {
         }
     }
 
-    private static class ButtonChoiceModel<T> {
-        public final int resButton;
-        public final T assignedValue;
-        public final String info;
-        public View button = null;
-
-        ButtonChoiceModel(final int resButton, final T assignedValue, final String info) {
-            this.resButton = resButton;
-            this.assignedValue = assignedValue;
-            this.info = info;
-        }
-    }
-
-    private static class ToggleButtonWrapper<T> {
-        private final MaterialButtonToggleGroup toggleGroup;
-        private final ArrayList<ButtonChoiceModel<T>> list;
-        private final Action1<T> setValue;
-        private final T originalValue;
-
-        ToggleButtonWrapper(final T originalValue, final Action1<T> setValue, final MaterialButtonToggleGroup toggleGroup) {
-            this.originalValue = originalValue;
-            this.toggleGroup = toggleGroup;
-            this.setValue = setValue;
-            this.list = new ArrayList<>();
-        }
-
-        public void add(final ButtonChoiceModel<T> item) {
-            list.add(item);
-        }
-
-        public ButtonChoiceModel<T> getByResId(final int id) {
-            for (ButtonChoiceModel<T> item : list) {
-                if (item.resButton == id) {
-                    return item;
-                }
-            }
-            return null;
-        }
-
-        public ButtonChoiceModel<T> getByAssignedValue(final T value) {
-            for (ButtonChoiceModel<T> item : list) {
-                if (Objects.equals(item.assignedValue, value)) {
-                    return item;
-                }
-            }
-            return null;
-        }
-
-        public void init() {
-            for (final ButtonChoiceModel<T> button : list) {
-                button.button = toggleGroup.findViewById(button.resButton);
-            }
-            toggleGroup.check(getByAssignedValue(originalValue).resButton);
-        }
-
-        public void setValue() {
-            final T currentValue = getByResId(toggleGroup.getCheckedButtonId()).assignedValue;
-            if (setValue != null && !originalValue.equals(currentValue)) {
-                this.setValue.call(currentValue);
-            }
-        }
-    }
 }

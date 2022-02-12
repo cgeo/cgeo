@@ -7,6 +7,9 @@ import cgeo.geocaching.files.GPXIndividualRouteImporter;
 import cgeo.geocaching.files.GPXTrackOrRouteImporter;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.routing.RouteSortActivity;
+import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
+import cgeo.geocaching.models.ButtonChoiceModel;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.settings.Settings;
@@ -16,6 +19,7 @@ import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
@@ -31,6 +35,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.widget.TooltipCompat;
 
 import java.util.List;
@@ -49,22 +54,25 @@ public class RouteTrackUtils {
     private final ContentStorageActivityHelper fileSelectorTrack;
     private View popup = null;
     private Tracks tracks = null;
+    private ButtonChoiceModel.ToggleButtonWrapper<RoutingMode> routingChoiceWrapper = null;
 
     private final Runnable reloadIndividualRoute;
     private final Runnable clearIndividualRoute;
 
     private final Tracks.UpdateTrack updateTrack;
     private final Route.CenterOnPosition centerOnPosition;
+    private final Action1<RoutingMode> setRoutingValue;
 
     private final Func0<Boolean> isTargetSet;
 
-    public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Tracks.UpdateTrack updateTrack, final Func0<Boolean> isTargetSet) {
+    public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Tracks.UpdateTrack updateTrack, final Func0<Boolean> isTargetSet, @NonNull final Action1<RoutingMode> setRoutingValue) {
         this.activity = activity;
         this.centerOnPosition = centerOnPosition;
         this.clearIndividualRoute = clearIndividualRoute;
         this.reloadIndividualRoute = reloadIndividualRoute;
         this.updateTrack = updateTrack;
         this.isTargetSet = isTargetSet;
+        this.setRoutingValue = setRoutingValue;
 
         this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
             .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
@@ -103,12 +111,23 @@ public class RouteTrackUtils {
     public void showPopup(final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
         this.popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
         updateDialog(this.popup, individualRoute, tracks, setTarget);
+
+        routingChoiceWrapper = new ButtonChoiceModel.ToggleButtonWrapper<>(Routing.isAvailable() || Settings.getRoutingMode() == RoutingMode.OFF ? Settings.getRoutingMode() : RoutingMode.STRAIGHT, setRoutingValue, popup.findViewById(R.id.routing_tooglegroup));
+        for (RoutingMode mode : RoutingMode.values()) {
+            routingChoiceWrapper.add(new ButtonChoiceModel<>(mode.buttonResId, mode, activity.getString(mode.infoResId)));
+        }
+
         final BottomSheetDialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, this.popup, R.string.routes_tracks_dialog_title);
-        dialog.setOnDismissListener(dialog1 -> popup = null);
+        dialog.setOnDismissListener(dialog1 -> {
+            routingChoiceWrapper.setValue();
+            popup = null;
+        });
         dialog.show();
+        routingChoiceWrapper.init();
     }
 
     private void updateDialog(final View dialog, final IndividualRoute individualRoute, final Tracks tracks, final Action2<Geopoint, String> setTarget) {
+        updateDialogRoutingMode(dialog);
         updateDialogIndividualRoute(dialog, individualRoute, setTarget);
         updateDialogTracks(dialog, tracks);
         updateDialogClearTargets(dialog, individualRoute, setTarget);
@@ -116,6 +135,29 @@ public class RouteTrackUtils {
 
     private void startFileSelectorIndividualRoute() {
         fileSelectorRoute.selectFile(null, PersistableFolder.GPX.getUri());
+    }
+
+    private void updateDialogRoutingMode(final View dialog) {
+        if (!Routing.isAvailable()) {
+            configureRoutingButtons(false, routingChoiceWrapper);
+            final View routingInfo = dialog.findViewById(R.id.routing_info);
+            routingInfo.setVisibility(View.VISIBLE);
+            routingInfo.setOnClickListener(v -> SimpleDialog.of(activity).setTitle(R.string.map_routing_activate_title).setMessage(R.string.map_routing_activate).confirm((dialog1, which) -> {
+                Settings.setUseInternalRouting(true);
+                Settings.setBrouterAutoTileDownloads(true);
+                configureRoutingButtons(true, routingChoiceWrapper);
+                routingInfo.setVisibility(View.GONE);
+            }));
+        }
+    }
+
+    private static void configureRoutingButtons(final boolean enabled, final ButtonChoiceModel.ToggleButtonWrapper<RoutingMode> routingChoiceWrapper) {
+        for (final ButtonChoiceModel<RoutingMode> button : routingChoiceWrapper.getList()) {
+            if (!(button.assignedValue == RoutingMode.OFF || button.assignedValue == RoutingMode.STRAIGHT)) {
+                button.button.setEnabled(enabled);
+                button.button.setAlpha(enabled ? 1f : .3f);
+            }
+        }
     }
 
     private void updateDialogIndividualRoute(final View dialog, final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {

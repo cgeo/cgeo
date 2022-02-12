@@ -1643,7 +1643,7 @@
     <string name="map_live_disabled_hint">Live mode is disabled. You will only see stored caches. Use the menu to enable live mode.</string>
     <string name="map_as_list">Show as list</string>
     <string name="map_select_multiple_items">Select item</string>
-    <string name="map_routing">Routing</string>
+    <string name="map_routing_mode">Routing mode</string>
     <string name="map_routing_activate_title">Enable routing</string>
     <string name="map_routing_activate">Some routing modes are currently not available, as no routing engine is active.\n\nDo you want to activate c:geo\'s internal routing engine and downloading of routing data?</string>
     <string name="map_gm_autorotation">Map auto rotation</string>

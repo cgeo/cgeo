@@ -1,9 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <!-- Routing mode -->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp">
+
+        <TextView
+            android:layout_alignParentLeft="true"
+            android:layout_toLeftOf="@id/routing_tooglegroup"
+            android:text="@string/map_routing_mode"
+            style="@style/text_default"
+            android:layout_centerVertical="true"/>
+
+        <com.google.android.material.button.MaterialButtonToggleGroup
+            android:id="@+id/routing_tooglegroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:layout_alignParentRight="true"
+            android:layout_toLeftOf="@id/routing_info"
+            app:selectionRequired="true"
+            app:singleSelection="true">
+
+            <Button
+                android:id="@+id/routing_off"
+                style="@style/button_icon_accent"
+                android:layout_margin="0dp"
+                app:icon="@drawable/routing_off" />
+
+            <Button
+                android:id="@+id/routing_straight"
+                style="@style/button_icon_accent"
+                app:icon="@drawable/routing_straight" />
+
+            <Button
+                android:id="@+id/routing_walk"
+                style="@style/button_icon_accent"
+                app:icon="@drawable/routing_walk" />
+
+            <Button
+                android:id="@+id/routing_bike"
+                style="@style/button_icon_accent"
+                app:icon="@drawable/routing_bike" />
+
+            <Button
+                android:id="@+id/routing_car"
+                style="@style/button_icon_accent"
+                app:icon="@drawable/routing_car" />
+        </com.google.android.material.button.MaterialButtonToggleGroup>
+
+        <ImageView
+            android:id="@+id/routing_info"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_info_blue"
+            android:layout_alignParentRight="true"
+            android:layout_alignBottom="@id/routing_tooglegroup"
+            android:visibility="gone"/>
+    </RelativeLayout>
 
     <!-- Individual routes -->
 

@@ -12,6 +12,7 @@ import cgeo.geocaching.maps.interfaces.MapViewImpl;
 import cgeo.geocaching.maps.interfaces.PositionAndHistory;
 import cgeo.geocaching.maps.mapsforge.v6.TargetView;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.maps.routing.RoutingMode;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.DataStore;
@@ -119,6 +120,8 @@ public abstract class AbstractMap {
     public void clearIndividualRoute() {
         //
     }
+
+    public abstract void routingModeChanged(RoutingMode newValue);
 
     public abstract void refreshMapData(boolean circlesSwitched);
 

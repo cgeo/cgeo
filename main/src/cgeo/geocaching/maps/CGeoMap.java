@@ -581,7 +581,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
-            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::compactIconModeChanged, mapOptions.filterContext));
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
@@ -882,7 +882,8 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     }
 
-    private void routingModeChanged(final RoutingMode newValue) {
+    @Override
+    public void routingModeChanged(final RoutingMode newValue) {
         Settings.setRoutingMode(newValue);
         final Tracks tracks = mapActivity.getTracks();
         if ((null != individualRoute && individualRoute.getNumSegments() > 0) || null != tracks) {

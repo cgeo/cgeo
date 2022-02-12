@@ -222,7 +222,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         Log.d("NewMap: onCreate");
 
-        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
+        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerOnPosition, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet, this::routingModeChanged);
         tracks = new Tracks(routeTrackUtils, this::setTrack);
 
         ResourceBitmapCacheMonitor.addRef();
@@ -270,7 +270,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         this.mapAttribution = findViewById(R.id.map_attribution);
 
         // map settings popup
-        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::compactIconModeChanged, mapOptions.filterContext));
 
         // routes / tracks popup
         findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
