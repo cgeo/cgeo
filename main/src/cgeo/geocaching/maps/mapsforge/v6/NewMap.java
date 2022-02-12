@@ -1109,7 +1109,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
                 return cache.getName();
             }
         }
-        return StringUtils.defaultIfEmpty(mapOptions.title, res.getString(R.string.map_map));
+        return StringUtils.defaultIfEmpty(mapOptions.title, res.getString(R.string.map_offline));
     }
 
     private void setSubtitle() {
