@@ -356,6 +356,10 @@
     <string name="caches_store_all">Spara alla</string>
     <string name="caches_store_unsaved">Spara osparade</string>
     <string name="caches_store_selected">Spara valda</string>
+    <string name="caches_store_background">Bakgrundshämtning (Experimentell!)</string>
+    <string name="caches_store_refresh_background">Bakgrundsuppdatering (Experimentell!)</string>
+    <string name="caches_store_background_should_force_refresh">Uppdatera redan hämtade cacher</string>
+    <string name="caches_store_background_title">Ladda ned cacher</string>
     <string name="caches_history">Senast hittade cacher</string>
     <string name="caches_on_map">Visa på karta</string>
     <string name="caches_sort">Sortering</string>
@@ -408,6 +412,8 @@
     <string name="caches_clear_offlinelogs_message">Vill du rensa offline loggarna?</string>
     <string name="caches_clear_offlinelogs_progress">Rensar offline loggar</string>
     <string name="caches_show_attributes">Visa attributöversikt</string>
+    <string name="caches_set_cache_icon">Ange cache-ikon</string>
+    <string name="caches_reset_cache_icons_title">Återställ cache-ikon</string>
     <string name="caches_make_list_unique">Gör listan unik</string>
     <string name="caches_set_listmarker">Ange listmarkör</string>
     <string name="caches_askdeletion">Fråga om borttagning om tom</string>
@@ -776,6 +782,8 @@
         <item>Ljust</item>
         <item>Mörkt</item>
     </string-array>
+    <string name="init_wallpaper">Bakgrund</string>
+    <string name="init_summary_wallpaper">Visa enhetens bakgrundsbild som startskärmens bakgrund</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Skapa säkerhetskopia</string>
     <string name="init_backup_summary">Observera att den här funktionen kan säkerhetskopiera cacher, waypoints &amp; inställningar, men inga bilder från cacher. \nFör att kunna återställa data även om du skulle förlora telefonen bör säkerhetskopieringsfilerna kopieras till en annan enhet eller plats.</string>
@@ -801,6 +809,9 @@
     <string name="init_backup_history_length_min">Enbart nya</string>
     <string name="init_backup_history_length_max">Behåll alla</string>
     <string name="init_backup_history_delete_warning">Du har sparat fler säkerhetskopior än vad den konfigurerade gränsen tillåter. Vill du verkligen ta bort alla överflödiga säkerhetskopior?</string>
+    <string name="init_backup_automatic">Automatisk säkerhetskopiering</string>
+    <string name="init_backup_automatic_summary">Utför en automatisk säkerhetskopiering varje x dagar (utöver eventuella manuellt skapade säkerhetskopior), 0=ingen</string>
+    <string name="init_backup_automatic_performing">Skapar säkerhetskopia…</string>
     <string name="init_user_confirmation">Jag vet vad jag gör</string>
     <string name="init_backup_success">Databasen som används av c:geo har kopierats till filen</string>
     <string name="init_backup_failed">Kopieringen av c:geos databas misslyckades.</string>
@@ -1274,8 +1285,11 @@
     <string name="cache_share_field">Dela</string>
     <string name="cache_time_full_hours">prick</string>
     <string name="cache_listed_on">Listad på %s</string>
+    <string name="cache_recently_viewed">Nyligen visade</string>
     <string name="cache_whereyougo_start">Öppna WhereYouGo för att ladda ner och starta denna cartridge</string>
     <string name="cache_whereyougo_install">Installera WhereYouGo för att ladda ner och starta denna cartridge</string>
+    <string name="cache_chirpwolf_start">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Denna cache kan använda antingen en chirp-sändare eller en annan typ av trådlös sändare. För att läsa chirp-data kan du öppna Chirp Wolf.</string>
     <string name="cache_alc_start">Öppna Adventure Lab för att börja med detta äventyr</string>
     <string name="cache_alc_install">Installera Adventure Lab appen för att spela detta äventyr</string>
     <string name="context_share_as_text">Dela som text</string>
@@ -1332,6 +1346,7 @@
     <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Beräknade koordinater</string>
     <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Beräkna koordinater (nya)</string>
     <string name="waypoint_custom">Egen</string>
     <string name="waypoint_my_coordinates">Mina koordinater</string>
     <string name="waypoint_bearing">Riktning (°)</string>
@@ -1372,8 +1387,53 @@
     <string name="from_clipboard">Från Urklipp</string>
     <string name="copy_to_clipboard">Kopiera till urklipp</string>
     <!-- Variables -->
+    <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
+    <string name="variables_scanlisting">Skanna listning</string>
+    <string name="variables_scanlisting_choosepattern_title">Välj funnet-mönster</string>
+    <string name="variables_tidyup">Städa upp</string>
+    <string name="variables_deleteall">Radera allt</string>
+    <string name="variables_deleteall_confirm_text">Vill du verkligen ta bort alla variabler för denna cache?</string>
+    <string name="variables_info">Hjälp</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Guide-läge</string>
+    <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
+    <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
+    <string name="calccoord_generate_showonmap">Visa på karta</string>
+    <string name="calccoord_generate_waypointnameprefix">genererad</string>
+    <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Ingen kombination returnerade giltiga koordinater</string>
+    <string name="calccoord_generate_error_nogeopointselected">Ingen koordinat vald</string>
+    <string name="calccoord_migrate_migrate">Migrera</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migrerad från</string>
+    <string name="calccoord_migrate_cancel">Avbryt</string>
+    <string name="calccoord_migrate_dismiss">Avfärda data</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Avfärdad</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Kvadratroten</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangens</string>
+    <string name="formula_function_abs">Absolut värde</string>
+    <string name="formula_function_round">Avrunda</string>
+    <string name="formula_function_if">Om</string>
+    <string name="formula_function_length">Stränglängd</string>
+    <string name="formula_function_substring">Substräng</string>
+    <string name="formula_function_rot13">Rotera tecken med 13</string>
+    <string name="formula_function_rot">Rotera tecken</string>
+    <string name="formula_function_checksum">Kontrollsumma</string>
+    <string name="formula_function_ichecksum">Iterativ kontrollsumma</string>
+    <string name="formula_function_lettervalue">Ordvärde</string>
+    <string name="formula_function_roman">Roman till decimal</string>
+    <string name="formula_function_group_simplenumeric">Enkel numerisk</string>
+    <string name="formula_function_group_complexnumeric">Komplext tal</string>
+    <string name="formula_function_group_simplestring">Enkel sträng</string>
+    <string name="formula_function_group_complexstring">Komplex sträng</string>
+    <string name="formula_error_unexpectedtoken">Förväntade \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Fel antal parametrar, förväntade %1$s-%2$s, fick %3$s</string>
+    <string name="formula_error_wrongtype">Fel typ, förväntade \'%1$s\', fick \'%2$s\' av typen \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Saknas: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cykel: %1$s</string>
+    <string name="formula_error_empty">Tom formel</string>
     <!-- visit -->
     <string name="visit_tweet">Skicka att du hittat till Twitter</string>
     <!-- map -->
@@ -2086,6 +2146,8 @@
     <string name="check_tiles_found">Ruttberäkningsdata finns redan</string>
     <string name="check_tiles_missing">Ruttberäkningsdata saknas:\n%1$s\n\nVill du ladda ner de filer som behövs?%2$s</string>
     <string name="check_tiles_unsupported">Varning: Ruttberäkningsdata är åtminstone delvis inte tillgänglig för den valda regionen</string>
+    <string name="tileupdate_info">Tryck här för att söka efter uppdateringar av hämtade routing-datafiler. Långtryck för att skjuta upp.</string>
+    <string name="mapupdate_info">Tryck här för att söka efter uppdateringar av karta- och temafiler. Långtryck för att skjuta upp.</string>
     <string name="no_updates_found">Inga uppdateringar hittades</string>
     <string name="updates_check">Kontrollera uppdateringar</string>
     <string name="mapserver_mapsforge_info">Grundläggande kartor, inga kartteman krävs</string>
@@ -2158,6 +2220,7 @@
     <string name="back">Tillbaka</string>
     <string name="later">Senare</string>
     <string name="cancel">Avbryt</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Markera alla</string>
     <string name="touch_again_to_exit">Vänligen tryck igen för att avsluta</string>
