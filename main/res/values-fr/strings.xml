@@ -545,6 +545,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Log hors ligne</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">A un log Trouvé (hors ligne)</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mystery résolue</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Avec points de passage définis par l’utilisateur</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">La configuration du filtre affectera les mysteries.\n\nUne mystery est considéré “résolue” si elle a soit, les coordonnées modifiées, soit un point de passage final avec des coordonnées.</string>
     <string name="cache_filter_status_active">Active</string>
     <string name="cache_filter_status_disabled">Désactivée</string>
@@ -782,6 +783,8 @@
         <item>Clair</item>
         <item>Sombre</item>
     </string-array>
+    <string name="init_wallpaper">Fond d\'écran</string>
+    <string name="init_summary_wallpaper">Afficher le fond d\'écran de l\'appareil comme fond d\'écran d\'accueil</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
     <string name="init_backup_summary">Veuillez noter que cette fonctionnalité peut sauvegarder les caches, les waypoints &amp; les paramètres, mais pas les images de cache. \nAfin de pouvoir restaurer les données même après avoir perdu votre téléphone, les fichiers de sauvegarde doivent être copiés dans un emplacement indépendant.</string>
@@ -807,6 +810,9 @@
     <string name="init_backup_history_length_min">Seulement les récents</string>
     <string name="init_backup_history_length_max">Conserver tout</string>
     <string name="init_backup_history_delete_warning">Vous avez enregistré plus de sauvegardes que la valeur maximale que vous avez configurée autorise. Voulez-vous vraiment supprimer toutes les sauvegardes excédentaires ?</string>
+    <string name="init_backup_automatic">Sauvegarde automatique</string>
+    <string name="init_backup_automatic_summary">Effectue une sauvegarde automatique tous les x jours (en plus des sauvegardes créées manuellement), 0=off</string>
+    <string name="init_backup_automatic_performing">Création d\'une sauvegarde…</string>
     <string name="init_user_confirmation">Je sais ce que je fais</string>
     <string name="init_backup_success">La base de données de c:geo a été sauvegardée dans un fichier</string>
     <string name="init_backup_failed">La sauvegarde de la base de données de c:geo a échouée.</string>
@@ -1381,8 +1387,28 @@
     <string name="from_clipboard">Depuis le presse-papiers</string>
     <string name="copy_to_clipboard">Copier dans le presse-papiers</string>
     <!-- Variables -->
+    <string name="variables_tidyup">Nettoyer</string>
+    <string name="variables_deleteall">Tout Supprimer</string>
+    <string name="variables_info">Aide</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_remove_spaces">Supprimer les espaces</string>
+    <string name="calccoord_generate_showonmap">Afficher sur la carte</string>
+    <string name="calccoord_generate_waypointnameprefix">Généré</string>
+    <string name="calccoord_generate_error_nogeopointselected">Aucune coordonnées sélectionnées</string>
+    <string name="calccoord_migrate_migrate">Migrer</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migré depuis</string>
+    <string name="calccoord_migrate_cancel">Annuler</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Racine carrée</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_abs">Valeur absolue</string>
+    <string name="formula_function_round">Arrondi</string>
+    <string name="formula_function_if">Si</string>
+    <string name="formula_function_group_simplestring">Chaine simple</string>
+    <string name="formula_function_group_complexstring">Chaine complexe</string>
+    <string name="formula_error_empty">Formule vide</string>
+    <string name="formula_error_other">Erreur : \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Publier votre découverte sur Twitter</string>
     <!-- map -->
@@ -1431,6 +1457,7 @@
     <string name="map_show_other_title">Autres options :</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtre de cache trop complexe</string>
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
+    <string name="map_theme_legend">Légende du thème</string>
     <!-- search -->
     <string name="geo_search_label">Rechercher les caches à proximité</string>
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
@@ -2014,6 +2041,7 @@
     <string name="map_clear_track_confirm">Voulez-vous supprimer la trace \"%s \" ?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Options des itinéraires / traces</string>
+    <string name="routes_tracks_menu">Itinéraires / Traces</string>
     <string name="center_on_route_track">Centrer sur l\'itinéraire</string>
     <string name="unload_route_track">Décharger la trace</string>
     <string name="route">Itinéraire</string>
@@ -2096,6 +2124,8 @@
     <string name="check_tiles_found">Les données de navigation sont déjà présentes</string>
     <string name="check_tiles_missing">Des données de navigation sont manquantes :\n%1$s\n\nSouhaitez-vous télécharger ces fichiers ?%2$s</string>
     <string name="check_tiles_unsupported">Attention : toutes les données de navigation ne sont pas disponibles pour la région sélectionnée</string>
+    <string name="tileupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
+    <string name="mapupdate_info">Appuyez ici pour vérifier les mises à jour des fichiers de données de routage téléchargés. Appuyer longuement pour reporter.</string>
     <string name="no_updates_found">Aucune mise à jour disponible</string>
     <string name="updates_check">Vérification des mises à jour</string>
     <string name="mapserver_mapsforge_info">Cartes de base, aucun thème de carte n\'est requis</string>
@@ -2168,6 +2198,7 @@
     <string name="back">Retour</string>
     <string name="later">Plus tard</string>
     <string name="cancel">Annuler</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
     <string name="touch_again_to_exit">Appuyez à nouveau pour quitter</string>
@@ -2188,10 +2219,19 @@
     <string name="rtl_beach_gravel">plage de galets</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Routes &amp; Chemins</string>
+    <string name="rtl_unpaved_path">Chemin non pavé</string>
     <string name="rtl_surface_unknown">surface inconnue</string>
+    <string name="rtl_unpaved_footpath">chemin piéton non pavé</string>
+    <string name="rtl_paved_footpath">chemin piéton pavé</string>
+    <string name="rtl_access_destination">accès (destination)</string>
+    <string name="rtl_access_private">accès (privé)</string>
     <string name="rtl_access_agricultural">accès limité au trafic agricole / forestier</string>
+    <string name="rtl_access_no">accès (non)</string>
     <string name="rtl_cycleway">piste cyclable</string>
+    <string name="rtl_cycleway_steep">piste cyclable (raide)</string>
+    <string name="rtl_cycleway_paved">piste cyclable (pavée)</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <string name="rtl_category_walking_cycling_climbing">À pied, à vélo, en escaladant</string>
     <string name="rtl_hiking_T1">randonnée pédestre T1</string>
     <string name="rtl_hiking_T2">randonnée pédestre T2</string>
     <string name="rtl_hiking_T23">randonnée pédestre T2/T3</string>
@@ -2206,9 +2246,16 @@
     <string name="rtl_mtb_S3">VTT S3</string>
     <string name="rtl_mtb_S4">VTT S4</string>
     <string name="rtl_mtb_S56">VTT S5/S6</string>
+    <string name="rtl_uphill15">montée à 15%</string>
+    <string name="rtl_uphill20">montée à 20%</string>
+    <string name="rtl_uphill25">montée à 25%</string>
+    <string name="rtl_uphill30">montée à 30%</string>
+    <string name="rtl_uphill40">montée à 40%</string>
+    <string name="rtl_uphill_too_steep">montée trop raide</string>
     <string name="rtl_security_rope">sécurité : corde</string>
     <string name="rtl_security_ladder">sécurité : échelle</string>
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_category_poi_symbols">POI / Symboles</string>
     <string name="rtl_bench">banc</string>
     <string name="rtl_cairn">cairn</string>
     <string name="rtl_drinking_water">eau potable</string>
