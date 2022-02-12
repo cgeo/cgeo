@@ -15,6 +15,8 @@ import cgeo.geocaching.log.LogType;
 import cgeo.geocaching.log.LogTypeTrackable;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.network.HttpRequest;
+import cgeo.geocaching.network.HttpResponse;
 import cgeo.geocaching.network.Network;
 import cgeo.geocaching.network.Parameters;
 import cgeo.geocaching.utils.AndroidRxUtils;
@@ -25,7 +27,6 @@ import cgeo.geocaching.utils.TextUtils;
 import androidx.annotation.NonNull;
 import androidx.core.util.Consumer;
 
-import java.io.File;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -673,7 +674,7 @@ class GCWebAPI {
      * {"guid":"14242d4d-...","url":"https://img.geocaching.com/14242d4d-...jpg","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","success":true}
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class PostLogImageResponse {
+    static final class PostLogImageResponse extends HttpResponse  {
         @JsonProperty("guid")
         String guid;
         @JsonProperty("url")
@@ -775,11 +776,6 @@ class GCWebAPI {
 
     private static <T> Single<T> postAPI(final String path, final Object jsonObject, final Class<T> clazz) throws JsonProcessingException {
         return Network.postJsonRequest(API_URL + path, clazz, jsonObject).subscribeOn(AndroidRxUtils.networkScheduler);
-    }
-
-    private static <T> Single<T> postAPI(final String path, final Parameters parameters,
-                                         final String fileFieldName, final String fileContentType, final File file, final Class<T> clazz) {
-        return getAuthorizationHeader().flatMap((Function<Parameters, SingleSource<T>>) headers -> Network.postRequest(API_URL + path, clazz, parameters, headers, fileFieldName, fileContentType, file).subscribeOn(AndroidRxUtils.networkScheduler));
     }
 
     private static Single<Response> postAPI(final String path, final Object jsonObject, final Consumer<Parameters> headerAdder) {
@@ -1092,7 +1088,7 @@ class GCWebAPI {
     static ImmutablePair<StatusCode, String> postLogImage(final String geocode, final String logId, final Image image) {
 
         // 0) open log page to get a Request Token
-        final String html = Network.getResponseData(Network.getRequest(WEBSITE_URL + "/play/geocache/" + geocode + "/log"));
+        final String html = httpReq().uri(WEBSITE_URL + "/play/geocache/" + geocode + "/log").request().blockingGet().getBodyString();
         if (html == null) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }
@@ -1105,13 +1101,13 @@ class GCWebAPI {
         final Parameters params = new Parameters();
         params.put("guid", UUID.randomUUID().toString());
 
-        final PostLogImageResponse postImageResponse = postAPI("/web/v1/LogDrafts/images", params, "qqfilename", "image/jpeg", image.getFile(), PostLogImageResponse.class).blockingGet();
+        final PostLogImageResponse postImageResponse = apiReq().uri("/web/v1/LogDrafts/images").body(params, "qqfilename", "image/jpeg", image.getFile()).requestJson(PostLogImageResponse.class).blockingGet();
         if (!postImageResponse.success) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }
 
         // 2) patch draft image with logId
-        final Response patchResponse = patchAPI("/web/v1/LogDrafts/images/" + postImageResponse.guid + "?geocacheLogReferenceCode=" + logId).blockingGet();
+        final HttpResponse patchResponse = apiReq().uri("/web/v1/LogDrafts/images/" + postImageResponse.guid + "?geocacheLogReferenceCode=" + logId).method(HttpRequest.Method.PATCH).request().blockingGet();
         if (!patchResponse.isSuccessful()) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }
@@ -1123,13 +1119,27 @@ class GCWebAPI {
         attachImageRequest.thumbnailUrl = postImageResponse.thumbnailUrl;
         attachImageRequest.name = StringUtils.defaultString(image.getTitle());
         attachImageRequest.description = StringUtils.defaultString(image.getDescription());
-        final Response attachResponse = postAPI("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid, attachImageRequest, h -> {
-            h.add("X-Verification-Token", requestVerificationToken);
-        }).blockingGet();
+
+        final HttpResponse attachResponse = apiReq()
+            .uri("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid)
+            .body(attachImageRequest)
+            .headers("X-Verification-Token", requestVerificationToken)
+            .request().blockingGet();
         if (!attachResponse.isSuccessful()) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }
 
         return new ImmutablePair<>(StatusCode.NO_ERROR, postImageResponse.url);
+    }
+
+    private static HttpRequest httpReq() {
+        return new HttpRequest().requestPreparer(reqBuilder -> getCachedAuthorization().map(a -> {
+            reqBuilder.addHeader("Authorization", a.getAuthorizationField());
+            return reqBuilder;
+        }));
+    }
+
+    private static HttpRequest apiReq() {
+        return httpReq().uriBase(API_URL);
     }
 }
