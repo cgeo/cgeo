@@ -778,6 +778,8 @@
         <item>Clair</item>
         <item>Sombre</item>
     </string-array>
+    <string name="init_wallpaper">Fond d\'écran</string>
+    <string name="init_summary_wallpaper">Afficher le fond d\'écran de l\'appareil comme fond d\'écran d\'accueil</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Créer une sauvegarde</string>
     <string name="init_backup_summary">Veuillez noter que cette fonctionnalité peut sauvegarder les caches, les waypoints &amp; les paramètres, mais pas les images de cache. \nAfin de pouvoir restaurer les données même après avoir perdu votre téléphone, les fichiers de sauvegarde doivent être copiés dans un emplacement indépendant.</string>
@@ -1421,6 +1423,7 @@
     <string name="map_show_other_title">Autres options :</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtre de cache trop complexe</string>
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
+    <string name="map_theme_legend">Légende du thème</string>
     <!-- search -->
     <string name="geo_search_label">Rechercher les caches à proximité</string>
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
@@ -2004,6 +2007,7 @@
     <string name="map_clear_track_confirm">Voulez-vous supprimer la trace \"%s \" ?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Options des itinéraires / traces</string>
+    <string name="routes_tracks_menu">Itinéraires / Traces</string>
     <string name="center_on_route_track">Centrer sur l\'itinéraire</string>
     <string name="unload_route_track">Décharger la trace</string>
     <string name="route">Itinéraire</string>
@@ -2160,6 +2164,7 @@
     <string name="back">Retour</string>
     <string name="later">Plus tard</string>
     <string name="cancel">Annuler</string>
+    <string name="ok">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Tout sélectionner</string>
     <string name="touch_again_to_exit">Appuyez à nouveau pour quitter</string>
@@ -2180,10 +2185,19 @@
     <string name="rtl_beach_gravel">plage de galets</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Routes &amp; Chemins</string>
+    <string name="rtl_unpaved_path">Chemin non pavé</string>
     <string name="rtl_surface_unknown">surface inconnue</string>
+    <string name="rtl_unpaved_footpath">chemin piéton non pavé</string>
+    <string name="rtl_paved_footpath">chemin piéton pavé</string>
+    <string name="rtl_access_destination">accès (destination)</string>
+    <string name="rtl_access_private">accès (privé)</string>
     <string name="rtl_access_agricultural">accès limité au trafic agricole / forestier</string>
+    <string name="rtl_access_no">accès (non)</string>
     <string name="rtl_cycleway">piste cyclable</string>
+    <string name="rtl_cycleway_steep">piste cyclable (raide)</string>
+    <string name="rtl_cycleway_paved">piste cyclable (pavée)</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
+    <string name="rtl_category_walking_cycling_climbing">À pied, à vélo, en escaladant</string>
     <string name="rtl_hiking_T1">randonnée pédestre T1</string>
     <string name="rtl_hiking_T2">randonnée pédestre T2</string>
     <string name="rtl_hiking_T23">randonnée pédestre T2/T3</string>
@@ -2198,9 +2212,16 @@
     <string name="rtl_mtb_S3">VTT S3</string>
     <string name="rtl_mtb_S4">VTT S4</string>
     <string name="rtl_mtb_S56">VTT S5/S6</string>
+    <string name="rtl_uphill15">montée à 15%</string>
+    <string name="rtl_uphill20">montée à 20%</string>
+    <string name="rtl_uphill25">montée à 25%</string>
+    <string name="rtl_uphill30">montée à 30%</string>
+    <string name="rtl_uphill40">montée à 40%</string>
+    <string name="rtl_uphill_too_steep">montée trop raide</string>
     <string name="rtl_security_rope">sécurité : corde</string>
     <string name="rtl_security_ladder">sécurité : échelle</string>
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_category_poi_symbols">POI / Symboles</string>
     <string name="rtl_bench">banc</string>
     <string name="rtl_cairn">cairn</string>
     <string name="rtl_drinking_water">eau potable</string>
