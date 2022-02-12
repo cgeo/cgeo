@@ -349,7 +349,7 @@
 
     <!-- main screen -->
     <string name="home_button">Home</string>
-    <string name="live_map_button">Live map</string>
+    <string name="live_map_button">@string/map_map</string>
     <string name="caches_nearby_button">Nearby</string>
     <string name="advanced_search_button">Search</string>
     <string name="stored_caches_button">Stored</string>
@@ -1612,6 +1612,7 @@
     <!-- map -->
     <string name="map_map">Map</string>
     <string name="map_live">Live map</string>
+    <string name="map_offline">Offline map</string>
     <string name="map_view_map">Map view</string>
     <string name="map_rotation">Map rotation</string>
     <string name="map_dot_mode">Use compact icons</string>
