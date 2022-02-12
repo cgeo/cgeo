@@ -545,6 +545,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Tem Registo Offline</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Tem Registo Offline de Encontrada</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistério Resolvido</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Que tenha pontos adic. definidos por si</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Esta configuração de filtro afectará apenas as caches mistério.\n\n Um mistério é considerado \'resolvido\', quer as coordenadas tenham sido alteradas ou haja uma localização final válida, preenchida com coordenadas.</string>
     <string name="cache_filter_status_active">Activas</string>
     <string name="cache_filter_status_disabled">Desactivadas</string>
@@ -809,7 +810,7 @@
     <string name="init_backup_history_length_min">Apenas recentes</string>
     <string name="init_backup_history_length_max">Manter todas</string>
     <string name="init_backup_history_delete_warning">Armazenou mais cópias de segurança do que o seu valor máximo configurado. Quer realmente remover todas as cópias de segurança em excesso?</string>
-    <string name="init_backup_automatic">Notificação automática para fazer cópia de segurança</string>
+    <string name="init_backup_automatic">Cópia de segurança automática</string>
     <string name="init_backup_automatic_summary">Executa uma cópia de segurança automática a cada x dias (para além de outras criadas manualmente), 0=off</string>
     <string name="init_backup_automatic_performing">A criar cópia de segurança…</string>
     <string name="init_user_confirmation">Eu sei o que estou a fazer</string>
@@ -2072,6 +2073,7 @@
     <string name="map_clear_track_confirm">Deseja remover a rota/percurso \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
+    <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="center_on_route_track">Centrar na rota/percurso</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
