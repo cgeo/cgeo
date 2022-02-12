@@ -2010,6 +2010,7 @@
     <string name="map_clear_track_confirm">Voleu eliminar la ruta/track \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcions de rutes / tracks</string>
+    <string name="routes_tracks_menu">Rutes / Tracks</string>
     <string name="center_on_route_track">Centre de la ruta/track</string>
     <string name="unload_route_track">Descarregar ruta/track</string>
     <string name="route">Ruta</string>
@@ -2163,6 +2164,7 @@
     <string name="back">Enrere</string>
     <string name="later">Més tard</string>
     <string name="cancel">Cancel•la</string>
+    <string name="ok">D\'acord</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
