@@ -8,8 +8,8 @@
 - New: D/T symbols for cache icons (optional)
 - New: Option to check for missing routing data for current viewport
 - New: Theme legend for Elevate, Elements and Freizeitkarte themes
-- Fix: Reenable routing with external BRouter app in version 1.6.3
-- Fix: Avoid map duplication by map downloader in certain conditions
+- Correction : Réactiver le routage avec l'application BRouter externe dans la version 1.6.3
+- Correction : Évitez la duplication de carte par le téléchargeur de cartes dans certaines conditions
 
 ### Liste des caches
 - Nouveau : Option pour sélectionner les 20 caches suivantes
@@ -23,7 +23,7 @@
 - Nouveauté : Envoyer les coordonnées de la cache à geochecker
 - Nouveau : Icônes d'attributs colorés (groupes d'attributs suivants)
 - Correction : Problème lors de l'ouverture des images depuis l'onglet Galerie dans les applications externes sur certains appareils Samsung
-- Fix: Missing log count (website change)
+- Correction : Nombre de logs manquant (changement du site web)
 
 ### Divers
 - Nouveau : Charger rapidement les géocodes à partir du texte du presse-papiers dans la recherche de l'écran principal
@@ -38,8 +38,8 @@
 - Fix: Avoid repeated update checks for maps/routing tiles with interval=0
 - Fix: Optimize support to autofill passwords from external password store apps in settings
 - Fix: Enable tooltips for systems running on Android below version 8
-- Fix: Crash on long-tap on trackable code in trackable details
-- Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Correction : Crash lors d'un appui long sur le code d'un objet voyageur dans les détails de l'objet voyageur
+- Correction : Envoi dedes notes de terrain (changement du site)
+- Révision des paramètres pour s'adapter aux nouvelles spécifications Android
+- Mise à jour de l'API MapsWithMe
 
