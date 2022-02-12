@@ -8,8 +8,8 @@
 - Nuovo: simboli D/T per le icone della cache (opzionale)
 - Nuovo: Opzione per controllare i dati di routing mancanti per la visualizzazione corrente
 - Nuovo: Leggenda del tema per i temi Elevate, Elements e Freizeitkarte
-- Fix: Reenable routing with external BRouter app in version 1.6.3
-- Fix: Avoid map duplication by map downloader in certain conditions
+- Corretto: ri-abilitato il routing con l'app esterna BRouter nella versione 1.6.3
+- Corretto: Evitata la duplicazione della mappa dal downloader delle mappe in determinate condizioni
 
 ### Elenco dei cache
 - Nuovo: Opzione per selezionare i 20 cache succesivi
@@ -17,13 +17,13 @@
 - Nuovo: Aggiunta importazione da liste di segnalibri (solo utenti premium GC)
 - Nuovo: Inverti ordinamento con un tocco prolungato sulla barra di ordinamento
 - Cambio: Effettua anche l'ordinamento automatico in base alla distanza, per le liste contenenti serie di cache con più di 50 cache (fino a 500)
-- Fix: Use a shorter timeout for fast scrolling mechanism for less interference with other layout elements
+- Corretto: Viene utilizzato un timeout più breve per lo scorrimento rapido, per ridurre le interferenze con altri elementi di layout
 
 ### Dettagli del cache
 - Nuovo: Passa le coordinate correnti del cache a geochecker (se supportato da geochecker)
 - Nuovo: icone di attributi colorate (rispecchia gruppi di attributi)
 - Corretto: Problema durante l'apertura di immagini dalla scheda galleria in applicazioni esterne su alcuni dispositivi Samsung
-- Fix: Missing log count (website change)
+- Corretto: Conteggio log mancante (modifica del sito web)
 
 ### Altro
 - Novità: Carica rapidamente i geocode dal testo degli appunti nella ricerca nella schermata principale
@@ -39,7 +39,7 @@
 - Corretto: Ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
 - Corretto: Abilita suggerimenti per sistemi in esecuzione su Android in versioni precedenti alla 8
 - Fix: Crash on long-tap on trackable code in trackable details
-- Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Corretto: caricamento note personali (modifica del sito web)
+- Ripristino delle impostazioni per soddisfare le attuali specifiche di Android
+- API di MapsWithMe aggiornata
 
