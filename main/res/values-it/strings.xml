@@ -352,6 +352,10 @@
     <string name="caches_store_all">Archiviare tutto</string>
     <string name="caches_store_unsaved">Archiviare non salvati</string>
     <string name="caches_store_selected">Salva selezionati</string>
+    <string name="caches_store_background">Download in background (Sperimentale!)</string>
+    <string name="caches_store_refresh_background">Aggiornamento sfondo (Sperimentale!)</string>
+    <string name="caches_store_background_should_force_refresh">Aggiorna cache già scaricate</string>
+    <string name="caches_store_background_title">Scarica cache</string>
     <string name="caches_history">Cronologia</string>
     <string name="caches_on_map">Visualizza sulla mappa</string>
     <string name="caches_sort">Ordina</string>
@@ -404,6 +408,8 @@
     <string name="caches_clear_offlinelogs_message">Vuoi cancellare tutti i log offline?</string>
     <string name="caches_clear_offlinelogs_progress">Cancellazione logs offline</string>
     <string name="caches_show_attributes">Mostra la panoramica degli attributi</string>
+    <string name="caches_set_cache_icon">Imposta icona cache</string>
+    <string name="caches_reset_cache_icons_title">Reimposta icona cache</string>
     <string name="caches_make_list_unique">Marca la lista come unica</string>
     <string name="caches_set_listmarker">Imposta marcatore di lista</string>
     <string name="caches_askdeletion">Chiedi l\'eliminazione se vuota</string>
@@ -535,6 +541,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Ha un Log Offline</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Ha un Log \"Trovato\" Offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Mistery Risolto</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Ha Waypoint Definiti Dall\'Utente</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Questa impostazione del filtro riguarderà solo i cache mistery.\n\n Un mistery è considerato \'risolto\' se ha cambiato coordinate o sono state inserite le coordinate di un waypoint finale.</string>
     <string name="cache_filter_status_active">Attivo</string>
     <string name="cache_filter_status_disabled">Disabilitato</string>
@@ -772,6 +779,8 @@
         <item>Chiaro</item>
         <item>Scuro</item>
     </string-array>
+    <string name="init_wallpaper">Sfondo</string>
+    <string name="init_summary_wallpaper">Mostra sfondo del dispositivo come sfondo della schermata iniziale</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Crea backup</string>
     <string name="init_backup_summary">Si prega di notare che questa funzione può eseguire il backup dei cache, waypoint &amp; impostazioni, ma nessuna immagine cache. \nPer poter ripristinare i dati anche dopo aver perso il telefono, i file di backup devono essere copiati in una posizione indipendente.</string>
@@ -797,6 +806,9 @@
     <string name="init_backup_history_length_min">Solo recenti</string>
     <string name="init_backup_history_length_max">Mantieni tutti</string>
     <string name="init_backup_history_delete_warning">Hai salvato più backup di quelli permessi dal valore massimo configurato. Vuoi davvero rimuovere tutti i backup in eccesso?</string>
+    <string name="init_backup_automatic">Backup automatico</string>
+    <string name="init_backup_automatic_summary">Esegue un backup automatico ogni x giorni (in aggiunta a qualsiasi backup creato manualmente), 0=off</string>
+    <string name="init_backup_automatic_performing">Creazione Backup…</string>
     <string name="init_user_confirmation">So cosa sto facendo</string>
     <string name="init_backup_success">Il database di c:geo è stato salvato con successo nel file: </string>
     <string name="init_backup_failed">Backup del database di c:geo fallito.</string>
@@ -1270,8 +1282,11 @@
     <string name="cache_share_field">Condividi</string>
     <string name="cache_time_full_hours">Precise</string>
     <string name="cache_listed_on">Elencato su %s</string>
+    <string name="cache_recently_viewed">Visualizzati di recente</string>
     <string name="cache_whereyougo_start">Apri WhereYouGo per scaricare e avviare questa cartuccia</string>
     <string name="cache_whereyougo_install">Installa WhereYouGo player per scaricare e avviare questa cartuccia</string>
+    <string name="cache_chirpwolf_start">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Questo cache potrebbe utilizzare un trasmettitore chirp o un altro tipo di segnale wireless. Per leggere i dati chirp puoi aprire Chirp Wolf.</string>
     <string name="cache_alc_start">Apri Adventure Lab per iniziare a giocare a questa avventura</string>
     <string name="cache_alc_install">Installa l\'app Adventure Lab per giocare a questa avventura</string>
     <string name="context_share_as_text">Condividi testo</string>
@@ -1328,6 +1343,7 @@
     <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordinate calcolate</string>
     <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Calcola coordinate (nuovo)</string>
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
     <string name="waypoint_bearing">Angolo in gradi</string>
@@ -1368,8 +1384,57 @@
     <string name="from_clipboard">Dagli appunti</string>
     <string name="copy_to_clipboard">Copia nella Clipboard</string>
     <!-- Variables -->
+    <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
+    <string name="variables_scanlisting">Scansiona elenco</string>
+    <string name="variables_scanlisting_choosepattern_title">Seleziona il motivo trovato</string>
+    <string name="variables_tidyup">Riordina</string>
+    <string name="variables_deleteall">Elimina tutto</string>
+    <string name="variables_deleteall_confirm_text">Vuoi veramente cancellare tutte le variabili per questo cache?</string>
+    <string name="variables_info">Aiuto</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Modalità Guidata</string>
+    <string name="calccoord_convert_to_plain">Converti in semplici coordinate</string>
+    <string name="calccoord_remove_spaces">Rimuovi Spazi</string>
+    <string name="calccoord_generate_title">Genera Waypoint</string>
+    <string name="calccoord_generate_showonmap">Mostra sulla Mappa</string>
+    <string name="calccoord_generate_waypointnameprefix">Generato</string>
+    <string name="calccoord_generate_error_novarwithrange">Nessuna variabile valida con gli intervalli trovati</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Nessuna combinazione restituisce coordinate valide</string>
+    <string name="calccoord_generate_error_nogeopointselected">Nessuna coordinata selezionata</string>
+    <string name="calccoord_migrate_title">Migrazione Waypoint</string>
+    <string name="calccoord_migrate_migrate">Migra</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Migrato da</string>
+    <string name="calccoord_migrate_cancel">Annulla</string>
+    <string name="calccoord_migrate_dismiss">Ignora dati</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Ignorato</string>
+    <string name="calccoord_migrate_infotext_markdown">Un vecchio metodo di calcolo delle coordinate è stato trovato in questo waypoint:\n\n%1$s\n\nÈ possibile migrare al nuovo calcolo di coordinate del cache come segue:\n\n%2$s\n\ncon nuove variabili del cache:%3$s\n\nSi prega di scegliere:\n- %4$s per eseguire la migrazione come suggerito\n- %5$s per rimuovere i dati di calcolo trovati per un buon\n- %6$s per continuare senza migrazione. Ti verrà chiesta nuovamente la migrazione la prossima volta che apri il waypoint per la modifica. Notare tuttavia che la modifica delle coordinate del waypoint potrebbe eliminare i dati di calcolo locali.</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Radice quadrata</string>
+    <string name="formula_function_sin">Seno</string>
+    <string name="formula_function_cos">Coseno</string>
+    <string name="formula_function_tan">Tangente</string>
+    <string name="formula_function_abs">Valore Assoluto</string>
+    <string name="formula_function_round">Circolare</string>
+    <string name="formula_function_if">Se</string>
+    <string name="formula_function_length">Lunghezza della stringa</string>
+    <string name="formula_function_substring">Sottostringa</string>
+    <string name="formula_function_rot13">Ruota i caratteri di 13</string>
+    <string name="formula_function_rot">Ruota Caratteri</string>
+    <string name="formula_function_checksum">Checksum</string>
+    <string name="formula_function_ichecksum">Checksum Iterativo</string>
+    <string name="formula_function_lettervalue">Valore della parola</string>
+    <string name="formula_function_roman">Da romano a decimale</string>
+    <string name="formula_function_vanity">Codice Vanity</string>
+    <string name="formula_function_group_simplenumeric">Numerico semplice</string>
+    <string name="formula_function_group_complexnumeric">Numerico semplice</string>
+    <string name="formula_function_group_simplestring">Stringa semplice</string>
+    <string name="formula_function_group_complexstring">Stringa complessa</string>
+    <string name="formula_error_unexpectedtoken">Atteso \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Conteggio dei parametri errato, atteso %1$s-%2$s, ottenuto %3$s</string>
+    <string name="formula_error_wrongtype">Tipo errato, atteso \'%1$s\', ottenuto \'%2$s\' di tipo \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Mancante: %1$s</string>
+    <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
+    <string name="formula_error_other">Errore: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
     <!-- map -->
@@ -2003,6 +2068,7 @@
     <string name="map_clear_track_confirm">Vuoi rimuovere il percorso/traccia\"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opzioni percorsi / tracce</string>
+    <string name="routes_tracks_menu">Itinerari / Tracce</string>
     <string name="center_on_route_track">Centra sul percorso/traccia</string>
     <string name="unload_route_track">Scarica percorso/binario</string>
     <string name="route">Itinerario</string>
@@ -2087,6 +2153,8 @@
     <string name="check_tiles_found">Dati di routing già presenti</string>
     <string name="check_tiles_missing">Trovati dati di routing mancanti:\n%1$s\n\nVuoi scaricare questi file?%2$s</string>
     <string name="check_tiles_unsupported">Attenzione: i dati di routing, o una parte di essi, non sono disponibili per la regione scelta</string>
+    <string name="tileupdate_info">Tocca qui per controllare gli aggiornamenti dei file di routing scaricati. Tocco prolungato per rinviare.</string>
+    <string name="mapupdate_info">Tocca qui per controllare gli aggiornamenti della mappa dei temi. Tocco prolungato per rinviare.</string>
     <string name="no_updates_found">Nessun aggiornamento trovato</string>
     <string name="updates_check">Controlla aggiornamenti</string>
     <string name="mapserver_mapsforge_info">Mappe di base, nessun tema mappa richiesto</string>
@@ -2159,6 +2227,7 @@
     <string name="back">Indietro</string>
     <string name="later">Dopo</string>
     <string name="cancel">Annulla</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleziona Tutto</string>
     <string name="touch_again_to_exit">Tocca di nuovo per uscire</string>
