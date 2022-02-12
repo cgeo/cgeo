@@ -329,7 +329,6 @@
     <string name="menu_invert_order">Omvänd sortering</string>
     <!-- main screen -->
     <string name="home_button">Hem</string>
-    <string name="live_map_button">Live karta</string>
     <string name="caches_nearby_button">Nära</string>
     <string name="advanced_search_button">Sök</string>
     <string name="stored_caches_button">Sparade</string>
