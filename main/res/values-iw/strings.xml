@@ -244,7 +244,6 @@
     <string name="menu_backup">גיבוי / שחזור</string>
     <string name="menu_history">היסטוריה</string>
     <!-- main screen -->
-    <string name="live_map_button">מפה</string>
     <string name="caches_nearby_button">בסמוך</string>
     <string name="advanced_search_button">חיפוש</string>
     <string name="stored_caches_button">מאוחסן</string>
