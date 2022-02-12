@@ -81,7 +81,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     public static final int SAVE_ERROR = 5;
 
     private static final String CALC_STATE_JSON = "calc_state_json";
-    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
+    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_ORIGINAL_AND_GENERATED);
+    private static final ArrayList<WaypointType> POSSIBLE_WAYPOINT_TYPES_WITH_GENERATED = new ArrayList<>(WaypointType.ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL);
 
     @Extra(Intents.EXTRA_GEOCODE) protected String geocode = null;
     @Extra(Intents.EXTRA_WAYPOINT_ID) protected int waypointId = -1;
@@ -155,7 +156,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
                 }
 
                 if (activity.own) {
-                    activity.initializeWaypointTypeSelector();
+                    activity.initializeWaypointTypeSelector(waypoint != null && waypoint.getWaypointType() != WaypointType.GENERATED);
                     if (StringUtils.isNotBlank(activity.binding.note.getText())) {
                         activity.binding.userNote.setText(activity.binding.note.getText().append("\n").append(activity.binding.userNote.getText()));
                         activity.binding.note.setText("");
@@ -232,7 +233,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             waitDialog.setCancelable(true);
             (new LoadWaypointThread()).start();
         } else { // new waypoint
-            initializeWaypointTypeSelector();
+            initializeWaypointTypeSelector(true);
             binding.noteLayout.setVisibility(View.GONE);
             updateCoordinates(initialCoords);
         }
@@ -290,8 +291,9 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         return true;
     }
 
-    private void initializeWaypointTypeSelector() {
-        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, POSSIBLE_WAYPOINT_TYPES.toArray(new WaypointType[0])) {
+    private void initializeWaypointTypeSelector(final boolean excludeGenerated) {
+        final ArrayList<WaypointType> allowedTypes = excludeGenerated ? POSSIBLE_WAYPOINT_TYPES : POSSIBLE_WAYPOINT_TYPES_WITH_GENERATED;
+        final ArrayAdapter<WaypointType> wpAdapter = new ArrayAdapter<WaypointType>(this, android.R.layout.simple_spinner_item, allowedTypes.toArray(new WaypointType[0])) {
             @Override
             public View getView(final int position, final View convertView, @NonNull final ViewGroup parent) {
                 final View view = super.getView(position, convertView, parent);
@@ -308,7 +310,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
             private void addWaypointIcon(final int position, final View view) {
                 final TextView label = view.findViewById(android.R.id.text1);
-                label.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointTypeMarker(res, POSSIBLE_WAYPOINT_TYPES.get(position)), null, null, null);
+                label.setCompoundDrawablesWithIntrinsicBounds(MapMarkerUtils.getWaypointTypeMarker(res, allowedTypes.get(position)), null, null, null);
             }
         };
         wpAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -317,7 +319,7 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
         binding.type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(final AdapterView<?> parent, final View v, final int pos, final long id) {
-                final String oldDefaultName = waypointTypeSelectorPosition >= 0 ? getDefaultWaypointName(cache, POSSIBLE_WAYPOINT_TYPES.get(waypointTypeSelectorPosition)) : StringUtils.EMPTY;
+                final String oldDefaultName = waypointTypeSelectorPosition >= 0 ? getDefaultWaypointName(cache, allowedTypes.get(waypointTypeSelectorPosition)) : StringUtils.EMPTY;
                 waypointTypeSelectorPosition = pos;
                 final String currentName = binding.name.getText().toString().trim();
                 if (StringUtils.isBlank(currentName) || oldDefaultName.equals(currentName)) {
