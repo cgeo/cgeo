@@ -234,7 +234,6 @@
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang kasaysayan</string>
     <!-- main screen -->
-    <string name="live_map_button">Ang buhay na mapa</string>
     <string name="caches_nearby_button">Kalapit</string>
     <string name="advanced_search_button">Maghanap</string>
     <string name="stored_caches_button">Itago</string>
