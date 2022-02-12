@@ -357,6 +357,10 @@
     <string name="caches_store_all">Desar-ho tot</string>
     <string name="caches_store_unsaved">Desa el que manca per desar</string>
     <string name="caches_store_selected">Desa els seleccionats</string>
+    <string name="caches_store_background">Baixada de fons (experimental!)</string>
+    <string name="caches_store_refresh_background">Actualització de fons (experimental!)</string>
+    <string name="caches_store_background_should_force_refresh">Actualitza els catxés ja baixats</string>
+    <string name="caches_store_background_title">Descarregar catxés</string>
     <string name="caches_history">Historial</string>
     <string name="caches_on_map">Mostra al mapa</string>
     <string name="caches_sort">Ordena</string>
@@ -542,6 +546,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Té Registre fora de línia</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Té Registre \"Trobat\" Fora de línia</string>
     <string name="cache_filter_status_select_label_solved_mystery">Misteri Resolt</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Té Punts de ruta definits per l\'usuari</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Aquest paràmetre de filtre només afectarà els catxés misteri.\n\nUn misteri es considera \"resolt\" si ha canviat les coordenades o bé ha completat un punt de ruta final vàlid.</string>
     <string name="cache_filter_status_active">Actiu</string>
     <string name="cache_filter_status_disabled">Desactivat</string>
@@ -806,7 +811,7 @@
     <string name="init_backup_history_length_min">Només les recents</string>
     <string name="init_backup_history_length_max">Guarda-ho tot</string>
     <string name="init_backup_history_delete_warning">Heu desat més còpies de seguretat de les que permet el màxim configurat. Confirmes que vols eliminar el excés de les còpies de seguretat?</string>
-    <string name="init_backup_automatic">Recordatori de còpia de seguretat automàtica</string>
+    <string name="init_backup_automatic">Còpia de seguretat automàtica</string>
     <string name="init_backup_automatic_summary">Realitza una còpia de seguretat automàtica cada x dies (a més de qualsevol còpia de seguretat creada manualment), 0=desactivat</string>
     <string name="init_backup_automatic_performing">S\'està creant una còpia de seguretat…</string>
     <string name="init_user_confirmation">Sé el que estic fent</string>
@@ -1282,6 +1287,7 @@
     <string name="cache_share_field">Comparteix</string>
     <string name="cache_time_full_hours">en punt</string>
     <string name="cache_listed_on">Llistat a %s</string>
+    <string name="cache_recently_viewed">Vist recentment</string>
     <string name="cache_whereyougo_start">Obriu WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_whereyougo_install">Instal·leu  WhereYouGo per descarregar i iniciar aquest cartutx</string>
     <string name="cache_chirpwolf_start">Aquest catxé pot utilitzar un transmissor de xips o un altre tipus de balisa sense fil. Per llegir les dades de xip, podeu obrir Chirp Wolf.</string>
@@ -1342,6 +1348,7 @@
     <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordenades calculades</string>
     <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Calcula les coordenades (nou)</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_bearing">Direcció en º</string>
@@ -1382,8 +1389,58 @@
     <string name="from_clipboard">Des del porta-retalls</string>
     <string name="copy_to_clipboard">Copia al porta-retalls</string>
     <!-- Variables -->
+    <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
+    <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
+    <string name="variables_scanlisting_choosepattern_title">Trieu el patró de trobat</string>
+    <string name="variables_tidyup">Endreçar</string>
+    <string name="variables_deleteall">Eliminar tots</string>
+    <string name="variables_deleteall_confirm_text">Realment voleu suprimir totes les variables d\'aquest catxé?</string>
+    <string name="variables_info">Ajuda</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Mode guiat</string>
+    <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
+    <string name="calccoord_remove_spaces">Elimina els espais</string>
+    <string name="calccoord_generate_title">Generar Punts de ruta</string>
+    <string name="calccoord_generate_showonmap">Mostra al mapa</string>
+    <string name="calccoord_generate_waypointnameprefix">Generat</string>
+    <string name="calccoord_generate_error_novarwithrange">No s\'ha trobat cap variable vàlida amb intervals</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Cap combinació no ha retornat coordenades vàlides</string>
+    <string name="calccoord_generate_error_nogeopointselected">No s\'ha seleccionat cap coordenada</string>
+    <string name="calccoord_migrate_title">Migració de Punt de ruta</string>
+    <string name="calccoord_migrate_migrate">Migrar</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Ha migrat des de</string>
+    <string name="calccoord_migrate_cancel">Cancel•la</string>
+    <string name="calccoord_migrate_dismiss">Descarta les dades</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Descartat</string>
+    <string name="calccoord_migrate_infotext_markdown">S\'ha trobat un càlcul de coordenades heretades en aquest punt de ruta:\n\n%1$s\n\nPodeu migrar-ho a les noves coordenades de càlcul del catxé de la següent manera:\n\n%2$s\n\namb variables de catxé noves: %3$s\n\nSi us plau, trieu:\n- %4$s per dur a terme la migració tal com s\'ha suggerit\n- %5$s per descartar les dades de càlcul trobades perquè\n- %6$s continuï sense migració. Se us demanarà de nou la migració la propera vegada que obriu el punt de ruta per editar-lo. Tingueu en compte, però, que l\'edició de les coordenades del punt de ruta podria suprimir les dades de càlcul local.</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Arrel quadrada</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangent</string>
+    <string name="formula_function_abs">Valor absolut</string>
+    <string name="formula_function_round">Circular</string>
+    <string name="formula_function_if">Si</string>
+    <string name="formula_function_length">Longitud de la corda</string>
+    <string name="formula_function_substring">Subcadena</string>
+    <string name="formula_function_rot13">Gira els caràcters 13</string>
+    <string name="formula_function_rot">Rota els caràcters</string>
+    <string name="formula_function_checksum">Suma de control</string>
+    <string name="formula_function_ichecksum">Suma de control iterativa</string>
+    <string name="formula_function_lettervalue">Valor de paraula</string>
+    <string name="formula_function_roman">Romà a Decimal</string>
+    <string name="formula_function_vanity">Codi Vanity</string>
+    <string name="formula_function_group_simplenumeric">Numèric simple</string>
+    <string name="formula_function_group_complexnumeric">Numèric complex</string>
+    <string name="formula_function_group_simplestring">Cadena simple</string>
+    <string name="formula_function_group_complexstring">Cadena complexa</string>
+    <string name="formula_error_unexpectedtoken">S\'està esperant \"%1$s\"</string>
+    <string name="formula_error_wrongparamcount">Recompte de paràmetres incorrecte, s\'esperava %1$s-%2$s, s\'ha obtingut %3$s</string>
+    <string name="formula_error_wrongtype">Tipus incorrecte, s\'esperava \'%1$s\', s\'ha obtingut \'%2$s\' del tipus \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Falta: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
+    <string name="formula_error_empty">Fórmula buida</string>
+    <string name="formula_error_other">Error: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
     <!-- map -->
@@ -2018,6 +2075,7 @@
     <string name="map_clear_track_confirm">Voleu eliminar la ruta/track \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcions de rutes / tracks</string>
+    <string name="routes_tracks_menu">Rutes / Tracks</string>
     <string name="center_on_route_track">Centre de la ruta/track</string>
     <string name="unload_route_track">Descarregar ruta/track</string>
     <string name="route">Ruta</string>
@@ -2171,6 +2229,7 @@
     <string name="back">Enrere</string>
     <string name="later">Més tard</string>
     <string name="cancel">Cancel•la</string>
+    <string name="ok" tools:ignore="ButtonCase">D\'acord</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Seleccionar tot</string>
     <string name="touch_again_to_exit">Torneu a tocar per sortir</string>
