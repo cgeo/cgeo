@@ -2008,6 +2008,7 @@
     <string name="map_clear_track_confirm">Deseja remover a rota/percurso \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opções de rotas / percursos</string>
+    <string name="routes_tracks_menu">Rotas / Percursos</string>
     <string name="center_on_route_track">Centrar na rota/percurso</string>
     <string name="unload_route_track">Remover rota/percurso</string>
     <string name="route">Rota</string>
