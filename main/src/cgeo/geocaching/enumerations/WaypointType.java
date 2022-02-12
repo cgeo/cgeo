@@ -34,9 +34,10 @@ public enum WaypointType {
     GENERATED("generated", "g", "Generated (c:geo)", R.string.wp_generated, R.string.wpnew_generated, R.drawable.waypoint_generated, 0, R.drawable.dot_waypoint_generated);
 
     @NonNull
-    public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false);
+    public static final List<WaypointType> ALL_TYPES = orderedWaypointTypes(false, false);
     @NonNull
-    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes(true);
+    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_AND_ORIGINAL = orderedWaypointTypes(true, false);
+    public static final List<WaypointType> ALL_TYPES_EXCEPT_OWN_ORIGINAL_AND_GENERATED = orderedWaypointTypes(true, true);
 
     @NonNull
     public final String id;
@@ -75,15 +76,18 @@ public enum WaypointType {
         }
     }
 
-    private static List<WaypointType> orderedWaypointTypes(final boolean excludeInternalTypes) {
+    private static List<WaypointType> orderedWaypointTypes(final boolean excludeInternalTypes, final boolean excludeGenerated) {
         // enforce an order for these types
         final Set<WaypointType> waypointTypes = new LinkedHashSet<>();
         waypointTypes.addAll(Arrays.asList(PARKING, TRAILHEAD, PUZZLE, STAGE, FINAL));
         // then add all remaining except "internal" types
-        waypointTypes.addAll(EnumSet.complementOf(EnumSet.of(OWN, ORIGINAL)));
+        waypointTypes.addAll(EnumSet.complementOf(EnumSet.of(OWN, ORIGINAL, GENERATED)));
         if (!excludeInternalTypes) {
             //if wanted, add internal types at the end
             waypointTypes.addAll(EnumSet.of(OWN, ORIGINAL));
+        }
+        if (!excludeGenerated) {
+            waypointTypes.add(GENERATED);
         }
         return Collections.unmodifiableList(new ArrayList<>(waypointTypes));
     }
