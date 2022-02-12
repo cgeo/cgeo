@@ -56,7 +56,7 @@ public class MapOptions {
             isLiveEnabled = Settings.isLiveMap();
         }
         if (StringUtils.isBlank(title)) {
-            title = context.getString(R.string.map_map);
+            title = context.getString(R.string.map_offline);
         }
     }
 

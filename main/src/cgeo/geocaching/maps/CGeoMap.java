@@ -260,7 +260,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         if (cache != null) {
             return cache.getName();
         }
-        return StringUtils.defaultIfEmpty(mapOptions.title, res.getString(R.string.map_map));
+        return StringUtils.defaultIfEmpty(mapOptions.title, res.getString(R.string.map_offline));
     }
 
     @Nullable
