@@ -368,7 +368,10 @@ dependencies {
     // Metadata Extractor, EXIF location extraction from images
     implementation 'com.drewnoakes:metadata-extractor:2.16.0'
 
-    implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    def okhttpVersion = '4.9.3'
+    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
+    // For local unit tests
+    testImplementation "com.squareup.okhttp3:mockwebserver:$okhttpVersion"
 
     // Play Services
     implementation 'com.google.android.gms:play-services-location:19.0.1'
