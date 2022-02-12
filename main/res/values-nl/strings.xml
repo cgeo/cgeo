@@ -809,7 +809,6 @@
     <string name="init_backup_history_length_min">Alleen recente</string>
     <string name="init_backup_history_length_max">Alles behouden</string>
     <string name="init_backup_history_delete_warning">Je hebt meer back-ups opgeslagen dan je ingestelde maximale waarde toestaat. Wil je echt alle overtollige back-ups verwijderen?</string>
-    <string name="init_backup_automatic">Automatische backup herinnering</string>
     <string name="init_backup_automatic_summary">Voert elke x dagen een automatische backup uit (in aanvulling op handmatig gemaakte backups), 0=uit</string>
     <string name="init_backup_automatic_performing">Back-up aan het maken…</string>
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
