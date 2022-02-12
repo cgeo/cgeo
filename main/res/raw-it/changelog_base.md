@@ -1,3 +1,5 @@
 ### Generale
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
+- Nuovo: Esegui automaticamente i backup (opzionale)
+- Corretto: Riprendi l'importazione degli scaricamenti terminati
+- Nuovo: Aggiunto filtro per "ha waypoint definiti dall'utente"
+- Nuovo: Instradamento interno aggiornato a BRouter v1.6.3

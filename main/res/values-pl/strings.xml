@@ -360,6 +360,10 @@
     <string name="caches_store_all">Zapisz wszystkie</string>
     <string name="caches_store_unsaved">Zapisz niezapisane</string>
     <string name="caches_store_selected">Zapisz wybrane</string>
+    <string name="caches_store_background">Pobieranie w tle (eksperymentalne!)</string>
+    <string name="caches_store_refresh_background">Odświeżanie w tle (eksperymentalne!)</string>
+    <string name="caches_store_background_should_force_refresh">Odśwież już pobrane skrytki</string>
+    <string name="caches_store_background_title">Pobierz skrytki</string>
     <string name="caches_history">Historia</string>
     <string name="caches_on_map">Pokaż na mapie</string>
     <string name="caches_sort">Sortuj</string>
@@ -412,6 +416,8 @@
     <string name="caches_clear_offlinelogs_message">Czy chcesz wyczyścić wpisy offline?</string>
     <string name="caches_clear_offlinelogs_progress">Usuwanie wpisów offline</string>
     <string name="caches_show_attributes">Pokaż przegląd atrybutów</string>
+    <string name="caches_set_cache_icon">Ustaw ikonę skrytki</string>
+    <string name="caches_reset_cache_icons_title">Zresetuj ikonę skrytki</string>
     <string name="caches_make_list_unique">Uczyń listę unikalną</string>
     <string name="caches_set_listmarker">Ustaw znacznik listy</string>
     <string name="caches_askdeletion">Zapytaj o usunięcie jeśli puste</string>
@@ -551,6 +557,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Ma wpis offline</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Ma dziennik offline</string>
     <string name="cache_filter_status_select_label_solved_mystery">Rozwiązana zagadka</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Z punktami nawigacji użytkownika</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">To ustawienie filtra wpłynie tylko na skrytki zagadkowe.\n\n Zagadka jest uważana za „rozwiązaną”, jeśli zmieniła współrzędne lub poprawny końcowy punkt nawigacji ma wpisane współrzędne.</string>
     <string name="cache_filter_status_active">Aktywna</string>
     <string name="cache_filter_status_disabled">Wyłączona</string>
@@ -788,6 +795,8 @@
         <item>Jasny</item>
         <item>Ciemny</item>
     </string-array>
+    <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Pokaż tapetę urządzenia jako tło ekranu głównego</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Utwórz kopię zapasową</string>
     <string name="init_backup_summary">Pamiętaj, że ta funkcja może tworzyć kopię zapasową skrzynek, punktów nawigacyjne i ustawień, ale nie zachowuje obrazów. \nAby móc przywrócić dane nawet po utracie telefonu, pliki kopii zapasowej powinny być kopiowane do niezależnej lokalizacji.</string>
@@ -813,6 +822,9 @@
     <string name="init_backup_history_length_min">Tylko ostatnie</string>
     <string name="init_backup_history_length_max">Zachowaj wszystkie</string>
     <string name="init_backup_history_delete_warning">Zapisałeś więcej kopii zapasowych niż skonfigurowana maksymalna wartość dozwolona. Czy na pewno chcesz usunąć wszystkie nadwyżki kopii zapasowych?</string>
+    <string name="init_backup_automatic">Automatyczna kopia zapasowa</string>
+    <string name="init_backup_automatic_summary">Wykonuje automatyczną kopię zapasową co x dni (oprócz każdej ręcznie utworzonej kopii zapasowej), 0 = wyłączone</string>
+    <string name="init_backup_automatic_performing">Tworzenie kopii zapasowej…</string>
     <string name="init_user_confirmation">Wiem co robię</string>
     <string name="init_backup_success">Baza danych c:geo została pomyślnie skopiowana do pliku</string>
     <string name="init_backup_failed">Tworzenie kopii zapasowej bazy danych c:geo nie powiodło się.</string>
@@ -1302,8 +1314,11 @@
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
     <string name="cache_listed_on">Zapisana w %s</string>
+    <string name="cache_recently_viewed">Ostatnio oglądane</string>
     <string name="cache_whereyougo_start">Otwórz WhereYouGo, aby pobrać i uruchomić kartridż</string>
     <string name="cache_whereyougo_install">Zainstaluj odtwarzacz WhereYouGo, aby pobrać i uruchomić kartridż</string>
+    <string name="cache_chirpwolf_start">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz otworzyć Chirp Wolf.</string>
+    <string name="cache_chirpwolf_install">Ta skrytka może używać nadajnika chirp lub innego rodzaju bezprzewodowej sygnalizacji. Do odczytu danych chirpa możesz zainstalować Chirp Wolf.</string>
     <string name="cache_alc_start">Otwórz aplikację Adventure Lab, aby rozpocząć tę przygodę</string>
     <string name="cache_alc_install">Zainstaluj aplikację Adventure Lab, by rozpocząć tę przygodę</string>
     <string name="context_share_as_text">Udostępnij tekst</string>
@@ -1362,6 +1377,7 @@
     <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Obliczone współrzędne</string>
     <!-- Legacy: line in waypoint description -->
+    <string name="waypoint_calculated_coordinates_global">Oblicz współrzędne (nowe)</string>
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
     <string name="waypoint_bearing">Kierunek w stopniach</string>
@@ -1402,8 +1418,58 @@
     <string name="from_clipboard">Ze schowka</string>
     <string name="copy_to_clipboard">Kopiuj do schowka</string>
     <!-- Variables -->
+    <string name="variables_titletext">Użyj tej strony, aby zanotować wartości i wykonać obliczenia niezbędne dla tej skrytki.</string>
+    <string name="variables_scanlisting">Skanuj wpis</string>
+    <string name="variables_scanlisting_choosepattern_title">Wybierz znaleziony wzór</string>
+    <string name="variables_tidyup">Uporządkuj zmienne</string>
+    <string name="variables_deleteall">Usuń wszystko</string>
+    <string name="variables_deleteall_confirm_text">Czy na pewno chcesz usunąć wszystkie zmienne dla tej skrytki?</string>
+    <string name="variables_info">Pomoc</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Tryb z przewodnikiem</string>
+    <string name="calccoord_convert_to_plain">Konwertuj na zwykłe współrzędne</string>
+    <string name="calccoord_remove_spaces">Usuń spacje</string>
+    <string name="calccoord_generate_title">Wygeneruj punkty nawigacji</string>
+    <string name="calccoord_generate_showonmap">Pokaż na mapie</string>
+    <string name="calccoord_generate_waypointnameprefix">Wygenerowane</string>
+    <string name="calccoord_generate_error_novarwithrange">Nie znaleziono poprawnej zmiennej z zakresami</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Żadna kombinacja nie zwróciła prawidłowych współrzędnych</string>
+    <string name="calccoord_generate_error_nogeopointselected">Nie wybrano współrzędnych</string>
+    <string name="calccoord_migrate_title">Migracja punktu nawigacji</string>
+    <string name="calccoord_migrate_migrate">Migruj</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Przeniesiona z</string>
+    <string name="calccoord_migrate_cancel">Anuluj</string>
+    <string name="calccoord_migrate_dismiss">Odrzuć dane</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Odrzucone</string>
+    <string name="calccoord_migrate_infotext_markdown">W tym punkcji nawigacji odnaleziono współrzędne obliczone dawniej:\n\n%1$s\n\nMożesz przenieść je na nowe współrzędne obliczeniowe skrytki w następujący sposób:\n\n%2$s\n\nz nowymi zmiennymi skrytki:%3$s\n\nProszę wybrać:\n- %4$s aby wykonać migrację zgodnie z sugestią\n- %5$s aby całkowicie odrzucić znalezione dane obliczeniowe\n- %6$s aby kontynuować bez migracji. Zostaniesz poproszony o migrację następnym razem, gdy otworzysz punkt nawigacji do edycji. Zauważ, że edycja współrzędnych punktu nawigacji może usunąć lokalne dane obliczeniowe.</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Pierwiastek kwadratowy</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangens</string>
+    <string name="formula_function_abs">Wartość bezwzględna</string>
+    <string name="formula_function_round">Zaokrąglij</string>
+    <string name="formula_function_if">Jeżeli</string>
+    <string name="formula_function_length">Długość ciągu</string>
+    <string name="formula_function_substring">Podciąg</string>
+    <string name="formula_function_rot13">Obróć znaki o 13</string>
+    <string name="formula_function_rot">Obróć znaki</string>
+    <string name="formula_function_checksum">Suma kontrolna</string>
+    <string name="formula_function_ichecksum">Iteracyjna suma kontrolna</string>
+    <string name="formula_function_lettervalue">Wartość słowa</string>
+    <string name="formula_function_roman">Rzymskie na dziesiętne</string>
+    <string name="formula_function_vanity">Kod Vanity</string>
+    <string name="formula_function_group_simplenumeric">Prosta wartość numeryczna</string>
+    <string name="formula_function_group_complexnumeric">Złożona wartość numeryczna</string>
+    <string name="formula_function_group_simplestring">Prosty ciąg znaków</string>
+    <string name="formula_function_group_complexstring">Złożony ciąg znaków</string>
+    <string name="formula_error_unexpectedtoken">Oczekiwano \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Błędna liczba parametrów, oczekiwano %1$s-%2$s, otrzymano %3$s</string>
+    <string name="formula_error_wrongtype">Nieprawidłowy typ, oczekiwano \'%1$s\', otrzymano \'%2$s\' typu \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Brakuje: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cykl: %1$s</string>
+    <string name="formula_error_empty">Pusta formuła</string>
+    <string name="formula_error_other">Błąd: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Wyślij informację do Twitter</string>
     <!-- map -->
@@ -2065,6 +2131,7 @@
     <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Opcje tras / śladów</string>
+    <string name="routes_tracks_menu">Trasy / ślady</string>
     <string name="center_on_route_track">Wyśrodkuj na trasie/śladzie</string>
     <string name="unload_route_track">Zamknij trasę/ślad</string>
     <string name="route">Trasa</string>
@@ -2149,6 +2216,8 @@
     <string name="check_tiles_found">Dane nawigowania już istnieją</string>
     <string name="check_tiles_missing">Znaleziono brakujące dane nawigowania:\n%1$s\n\nCzy chcesz pobrać te pliki?%2$s</string>
     <string name="check_tiles_unsupported">Ostrzeżenie: Dane nawigowania są przynajmniej częściowo niedostępne dla wybranego regionu</string>
+    <string name="tileupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji plików z danymi nawigowania. Długie dotknięcie, aby odroczyć.</string>
+    <string name="mapupdate_info">Dotknij tutaj, aby sprawdzić dostępność aktualizacji map i plików motywu. Długie dotknięcie, aby odroczyć.</string>
     <string name="no_updates_found">Nie znaleziono aktualizacji</string>
     <string name="updates_check">Sprawdzanie aktualizacji</string>
     <string name="mapserver_mapsforge_info">Podstawowe mapy, motywy mapy nie są wymagane</string>
@@ -2221,6 +2290,7 @@
     <string name="back">Wstecz</string>
     <string name="later">Później</string>
     <string name="cancel">Anuluj</string>
+    <string name="ok" tools:ignore="ButtonCase">OK</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Zaznacz wszystko</string>
     <string name="touch_again_to_exit">Proszę dotknąć ponownie, aby wyjść</string>

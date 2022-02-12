@@ -545,6 +545,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Hat Offline-Log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Hat Offline-Gefunden-Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Gelöster Mystery</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Mit eigenen Wegpunkten</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Diese Filtereinstellung wirkt sich nur auf Mysteries aus.\n\n Ein Mystery gilt als \'gelöst\', wenn entweder die Koordinaten geändert wurden oder ein gültiger Final-Wegpunkt mit gefüllten Koordinaten vorhanden ist.</string>
     <string name="cache_filter_status_active">Aktiv</string>
     <string name="cache_filter_status_disabled">Deaktiviert</string>
@@ -809,7 +810,7 @@
     <string name="init_backup_history_length_min">Nur neustes</string>
     <string name="init_backup_history_length_max">Alle behalten</string>
     <string name="init_backup_history_delete_warning">Du hast mehr Sicherungen als der eingestellte Maximalwert zulässt. Möchtest du wirklich alle überschüssigen Sicherungen löschen?</string>
-    <string name="init_backup_automatic">Automatische Sicherungserinnerung</string>
+    <string name="init_backup_automatic">Automatische Sicherung</string>
     <string name="init_backup_automatic_summary">Führt alle x Tage eine automatische Sicherung durch (zusätzlich zu manuell erstellten Backups), 0=off</string>
     <string name="init_backup_automatic_performing">Erstelle Sicherung…</string>
     <string name="init_user_confirmation">Ich weiß, was ich mache</string>
@@ -1387,11 +1388,11 @@
     <string name="from_clipboard">Aus der Zwischenablage</string>
     <string name="copy_to_clipboard">In Zwischenablage kopieren</string>
     <!-- Variables -->
-    <string name="variables_titletext">Benutzen Sie diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
-    <string name="variables_scanlisting">Durchsuche Listing</string>
+    <string name="variables_titletext">Nutze diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
+    <string name="variables_scanlisting">Scanne Listing</string>
     <string name="variables_scanlisting_choosepattern_title">Muster auswählen</string>
-    <string name="variables_tidyup">Aufräumen</string>
-    <string name="variables_deleteall">Alle löschen</string>
+    <string name="variables_tidyup">Säubern</string>
+    <string name="variables_deleteall">Löschen</string>
     <string name="variables_deleteall_confirm_text">Möchtest du wirklich alle Variablen für diesen Cache löschen?</string>
     <string name="variables_info">Hilfe</string>
     <!-- Calculated coordinates -->
@@ -2072,6 +2073,7 @@
     <string name="map_clear_track_confirm">Möchtest du Route/Track \"%s\" entfernen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Optionen für Routen / Tracks</string>
+    <string name="routes_tracks_menu">Routen / Tracks</string>
     <string name="center_on_route_track">Auf Route/Track zentrieren</string>
     <string name="unload_route_track">Route/Track entfernen</string>
     <string name="route">Route</string>
