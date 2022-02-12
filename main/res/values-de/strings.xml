@@ -329,7 +329,6 @@
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
     <string name="home_button">Start</string>
-    <string name="live_map_button">Live-Karte</string>
     <string name="caches_nearby_button">In der Nähe</string>
     <string name="advanced_search_button">Suche</string>
     <string name="stored_caches_button">Gespeichert</string>
@@ -1380,6 +1379,7 @@
     <!-- map -->
     <string name="map_map">Karte</string>
     <string name="map_live">Live-Karte</string>
+    <string name="map_offline">Offline-Karte</string>
     <string name="map_view_map">Karte</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
