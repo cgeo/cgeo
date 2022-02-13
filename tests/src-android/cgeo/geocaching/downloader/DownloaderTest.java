@@ -166,8 +166,8 @@ public class DownloaderTest extends AbstractResourceInstrumentationTestCase {
         // check one named entry
         final Download d = findByName(list, "E5_N50.rd5");
         assertThat(d).isNotNull();
-        final String sizeInfoString = d.getSizeInfo(); // 124.6 MB
+        final String sizeInfoString = d.getSizeInfo(); // 130.5 MB as of 2022-02-13
         final float sizeInfoFloat = Float.parseFloat(sizeInfoString.substring(0, sizeInfoString.length() - 3));
-        assertThat(sizeInfoFloat).isBetween(120.0F, 130.0F);
+        assertThat(sizeInfoFloat).isBetween(120.0F, 150.0F);
     }
 }
