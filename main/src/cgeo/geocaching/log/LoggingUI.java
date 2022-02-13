@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 public final class LoggingUI extends AbstractUIFactory {
@@ -55,7 +56,8 @@ public final class LoggingUI extends AbstractUIFactory {
 
     private enum SpecialLogType {
         LOG_CACHE(R.string.cache_menu_visit),
-        CLEAR_LOG(R.string.log_clear);
+        CLEAR_LOG(R.string.log_clear),
+        TEMPLATES(R.string.log_templates);
 
         private final int stringId;
 
@@ -93,6 +95,9 @@ public final class LoggingUI extends AbstractUIFactory {
             list.add(new LogTypeEntry(null, SpecialLogType.CLEAR_LOG, false));
         }
         list.add(new LogTypeEntry(null, SpecialLogType.LOG_CACHE, false));
+        if (Settings.getLogTemplates().size() > 0 && logTypes.contains(LogType.FOUND_IT)) {
+            list.add(1, new LogTypeEntry(null, SpecialLogType.TEMPLATES, false));
+        }
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(R.string.cache_menu_visit_offline);
@@ -109,6 +114,10 @@ public final class LoggingUI extends AbstractUIFactory {
 
                     case CLEAR_LOG:
                         cache.clearOfflineLog();
+                        break;
+
+                    case TEMPLATES:
+                        showOfflineTemplateMenu(cache, activity, listener);
                         break;
                 }
             } else {
@@ -129,6 +138,30 @@ public final class LoggingUI extends AbstractUIFactory {
                 }
                 cache.logOffline(activity, logType, reportProblem);
             }
+            dialog.dismiss();
+        });
+
+        final AlertDialog alertDialog = builder.create();
+        alertDialog.setOnDismissListener(listener);
+        alertDialog.show();
+    }
+
+    private static void showOfflineTemplateMenu(final Geocache cache, final Activity activity, final DialogInterface.OnDismissListener listener) {
+        final List<Settings.PrefLogTemplate> templates = Settings.getLogTemplates();
+
+        final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
+        builder.setTitle(R.string.log_templates);
+
+        final ArrayAdapter<Settings.PrefLogTemplate> adapter = new ArrayAdapter<>(activity, android.R.layout.select_dialog_item, templates);
+
+        builder.setAdapter(adapter, (dialog, item) -> {
+            final Settings.PrefLogTemplate logTemplate = adapter.getItem(item);
+            cache.logOffline(activity, new OfflineLogEntry.Builder<>()
+                .setLog(LogTemplateProvider.applyTemplates(logTemplate.getText(), new LogTemplateProvider.LogContext(cache, null, true)))
+                .setDate(Calendar.getInstance().getTimeInMillis())
+                .setLogType(LogType.FOUND_IT)
+                .build()
+            );
             dialog.dismiss();
         });
 

@@ -213,6 +213,12 @@ public class Settings {
         public int hashCode() {
             return key.hashCode();
         }
+
+        @Override
+        @NonNull
+        public String toString() {
+            return title;
+        }
     }
 
     //NO_APPLICATION_MODE will be true if Settings is used in context of local unit tests
