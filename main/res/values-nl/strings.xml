@@ -329,7 +329,6 @@
     <string name="menu_invert_order">Volgorde omkeren</string>
     <!-- main screen -->
     <string name="home_button">Thuis</string>
-    <string name="live_map_button">Live kaart</string>
     <string name="caches_nearby_button">Dichtbij</string>
     <string name="advanced_search_button">Zoeken</string>
     <string name="stored_caches_button">Opgeslagen</string>
@@ -545,6 +544,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Heeft offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Heeft Offline Gevonden Log</string>
     <string name="cache_filter_status_select_label_solved_mystery">Opgeloste Mysterie</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Heeft gebruiker gedefinieerde waypoints</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Deze filterinstelling heeft alleen invloed op mystery caches.\n\n Een mystery wordt beschouwd als \'opgelost\' als het de coördinaten heeft veranderd of een geldig eindpunt gevuld met coördinaten.</string>
     <string name="cache_filter_status_active">Actief</string>
     <string name="cache_filter_status_disabled">Uitgeschakeld</string>
@@ -809,6 +809,7 @@
     <string name="init_backup_history_length_min">Alleen recente</string>
     <string name="init_backup_history_length_max">Alles behouden</string>
     <string name="init_backup_history_delete_warning">Je hebt meer back-ups opgeslagen dan je ingestelde maximale waarde toestaat. Wil je echt alle overtollige back-ups verwijderen?</string>
+    <string name="init_backup_automatic">Automatische back-up</string>
     <string name="init_backup_automatic_summary">Voert elke x dagen een automatische backup uit (in aanvulling op handmatig gemaakte backups), 0=uit</string>
     <string name="init_backup_automatic_performing">Back-up aan het maken…</string>
     <string name="init_user_confirmation">Ik weet wat ik doe</string>
@@ -1392,6 +1393,7 @@
     <!-- map -->
     <string name="map_map">Kaart</string>
     <string name="map_live">Live kaart</string>
+    <string name="map_offline">Offline kaart</string>
     <string name="map_view_map">Kaart weergave</string>
     <string name="map_rotation">Kaart rotatie</string>
     <string name="map_dot_mode">Compacte iconen gebruiken</string>
