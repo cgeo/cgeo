@@ -184,7 +184,6 @@
     <string name="menu_settings">Stillingar</string>
     <string name="menu_history">Saga</string>
     <!-- main screen -->
-    <string name="live_map_button">Virkt kort</string>
     <string name="caches_nearby_button">Í nánd</string>
     <string name="advanced_search_button">Leit</string>
     <string name="stored_caches_button">Vistað</string>
