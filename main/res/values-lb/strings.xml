@@ -278,7 +278,6 @@
     <string name="menu_backup">Sécheren / Restauréieren</string>
     <string name="menu_history">Historique</string>
     <!-- main screen -->
-    <string name="live_map_button">Live Kaart</string>
     <string name="caches_nearby_button">Nobäi</string>
     <string name="advanced_search_button">Sichen</string>
     <string name="stored_caches_button">Geséchert</string>
