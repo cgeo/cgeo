@@ -5,7 +5,7 @@ import cgeo.geocaching.BuildConfig;
 public class BranchDetectionHelper {
 
     // should contain the version name of the last feature release
-    public static final String FEATURE_VERSION_NAME = "2022.01.22-RC";
+    public static final String FEATURE_VERSION_NAME = "2022.02.13";
 
     private BranchDetectionHelper() {
         // utility class
