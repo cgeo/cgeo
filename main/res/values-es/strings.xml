@@ -329,7 +329,6 @@
     <string name="menu_invert_order">Invertir orden</string>
     <!-- main screen -->
     <string name="home_button">Inicio</string>
-    <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Cercanos</string>
     <string name="advanced_search_button">Buscar</string>
     <string name="stored_caches_button">Guardados</string>
