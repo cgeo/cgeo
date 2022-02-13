@@ -1538,6 +1538,15 @@ public class Geocache implements IWaypoint {
         return false;
     }
 
+    public boolean hasGeneratedWaypoints() {
+        for (Waypoint waypoint : waypoints) {
+            if (waypoint.getWaypointType() == WaypointType.GENERATED) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     public boolean hasFinalDefined() {
         return finalDefined;
     }

@@ -675,6 +675,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             // submenu waypoints
             menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
+            menu.findItem(R.id.menu_delete_generated_waypoints).setVisible(cache.isOffline() && cache.hasGeneratedWaypoints());
             menu.findItem(R.id.menu_extract_waypoints).setVisible(!isUDC);
             menu.findItem(R.id.menu_clear_goto_history).setVisible(cache.isGotoHistoryUDC());
             menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
@@ -710,6 +711,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final int menuItem = item.getItemId();
         if (menuItem == R.id.menu_delete_userdefined_waypoints) {
             dropUserdefinedWaypoints();
+        } else if (menuItem == R.id.menu_delete_generated_waypoints) {
+            dropGeneratedWaypoints();
         } else if (menuItem == R.id.menu_refresh) {
             refreshCache();
         } else if (menuItem == R.id.menu_gcvote) {
@@ -1052,6 +1055,22 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     Schedulers.io().scheduleDirect(() -> DataStore.saveCache(cache, EnumSet.of(SaveFlag.DB)));
                 }
                 ActivityMixin.showShortToast(this, R.string.cache_delete_userdefined_waypoints_success);
+                invalidateOptionsMenu();
+                reinitializePage(Page.WAYPOINTS.id);
+            });
+        }
+    }
+
+    private void dropGeneratedWaypoints() {
+        if (null != cache && cache.hasGeneratedWaypoints()) {
+            final String info = getString(R.string.cache_delete_generated_waypoints_confirm);
+            SimpleDialog.of(this).setTitle(R.string.cache_delete_generated_waypoints).setMessage(TextParam.text(info)).confirm((dialog, which) -> {
+                for (Waypoint waypoint : new LinkedList<>(cache.getWaypoints())) {
+                    if (waypoint.getWaypointType() == WaypointType.GENERATED) {
+                        cache.deleteWaypoint(waypoint);
+                    }
+                }
+                ActivityMixin.showShortToast(this, R.string.cache_delete_generated_waypoints_success);
                 invalidateOptionsMenu();
                 reinitializePage(Page.WAYPOINTS.id);
             });
