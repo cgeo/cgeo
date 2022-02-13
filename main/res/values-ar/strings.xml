@@ -235,7 +235,6 @@
     <string name="menu_settings">الإعدادات</string>
     <string name="menu_history">التأريخ</string>
     <!-- main screen -->
-    <string name="live_map_button">خريطة على نات</string>
     <string name="caches_nearby_button">قريب</string>
     <string name="advanced_search_button">بحث</string>
     <string name="stored_caches_button">تم التخزين</string>

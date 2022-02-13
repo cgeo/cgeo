@@ -318,7 +318,6 @@
     <string name="menu_invert_order">Инвертировать порядок</string>
     <!-- main screen -->
     <string name="home_button">Главная</string>
-    <string name="live_map_button">Карта</string>
     <string name="caches_nearby_button">Рядом</string>
     <string name="advanced_search_button">Поиск</string>
     <string name="stored_caches_button">Сохраненные</string>

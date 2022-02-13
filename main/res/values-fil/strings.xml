@@ -225,7 +225,6 @@
     <string name="menu_settings">Ang mga settings</string>
     <string name="menu_history">Historya</string>
     <!-- main screen -->
-    <string name="live_map_button">Ang mapa na live</string>
     <string name="caches_nearby_button">Malapit sa</string>
     <string name="advanced_search_button">Paghahanap</string>
     <string name="stored_caches_button">Inimbak</string>

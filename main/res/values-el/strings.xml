@@ -329,7 +329,6 @@
     <string name="menu_invert_order">Αντιστροφή σειράς</string>
     <!-- main screen -->
     <string name="home_button">Αρχική</string>
-    <string name="live_map_button">Live Χάρτης</string>
     <string name="caches_nearby_button">Σε κοντινή απόσταση</string>
     <string name="advanced_search_button">Αναζήτηση</string>
     <string name="stored_caches_button">Αποθηκευμένα</string>
@@ -1376,6 +1375,7 @@
     <!-- map -->
     <string name="map_map">Χάρτης</string>
     <string name="map_live">Live Χάρτης</string>
+    <string name="map_offline">Χάρτες χωρίς σύνδεση</string>
     <string name="map_view_map">Προβολή χάρτη</string>
     <string name="map_rotation">Περιστροφή χάρτη</string>
     <string name="map_dot_mode">Χρήση συμπαγών εικονιδίων</string>
@@ -2002,6 +2002,7 @@
     <string name="map_clear_track">Εκκαθάριση διαδρομής</string>
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_menu">Διαδρομές / Κομμάτια</string>
     <string name="center_on_route_track">Κεντράρισμα στην διαδρομή</string>
     <string name="unload_route_track">Εκφόρτωση διαδρομής</string>
     <string name="make_visible">Να γίνει ορατό</string>

@@ -279,7 +279,6 @@
     <string name="menu_settings">Setări</string>
     <string name="menu_history">Istoric</string>
     <!-- main screen -->
-    <string name="live_map_button">Harta</string>
     <string name="caches_nearby_button">În apropiere</string>
     <string name="advanced_search_button">Caută</string>
     <string name="stored_caches_button">Stocate</string>

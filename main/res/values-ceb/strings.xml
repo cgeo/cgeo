@@ -221,7 +221,6 @@
     <string name="menu_settings">Ang mga setting</string>
     <string name="menu_history">Ang mga niaagi</string>
     <!-- main screen -->
-    <string name="live_map_button">Buhi nga mapa</string>
     <string name="caches_nearby_button">Sa duol</string>
     <string name="advanced_search_button">Pangitaa</string>
     <string name="stored_caches_button">Gitipigan</string>

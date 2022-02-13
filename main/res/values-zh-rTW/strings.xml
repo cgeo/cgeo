@@ -314,7 +314,6 @@
     <string name="menu_history">历史</string>
     <string name="menu_invert_order">反向排序</string>
     <!-- main screen -->
-    <string name="live_map_button">線上即時地圖</string>
     <string name="caches_nearby_button">鄰近的</string>
     <string name="advanced_search_button">搜索</string>
     <string name="stored_caches_button">已儲存:</string>
