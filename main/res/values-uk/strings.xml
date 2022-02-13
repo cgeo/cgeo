@@ -278,7 +278,6 @@
     <string name="menu_backup">Резервна копія / Відновлення</string>
     <string name="menu_history">Історія</string>
     <!-- main screen -->
-    <string name="live_map_button">Жива мапа</string>
     <string name="caches_nearby_button">Неподалік</string>
     <string name="advanced_search_button">Пошук</string>
     <string name="stored_caches_button">Збережений</string>
