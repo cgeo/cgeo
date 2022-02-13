@@ -319,7 +319,6 @@
     <string name="menu_lists_bookmarklists">Žymių sąrašai</string>
     <string name="menu_invert_order">Apversti tvarką</string>
     <!-- main screen -->
-    <string name="live_map_button">Žemėlapis</string>
     <string name="caches_nearby_button">Netoliese</string>
     <string name="advanced_search_button">Ieškoti</string>
     <string name="stored_caches_button">Išsaugota</string>
