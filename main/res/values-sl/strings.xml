@@ -241,7 +241,6 @@
     <string name="menu_settings">Nastavitve</string>
     <string name="menu_history">Zgodovina</string>
     <!-- main screen -->
-    <string name="live_map_button">Zemljevid</string>
     <string name="caches_nearby_button">V bližini</string>
     <string name="advanced_search_button">Iskanje</string>
     <string name="stored_caches_button">Shranjeni</string>
