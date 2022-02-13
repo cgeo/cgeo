@@ -284,7 +284,6 @@
     <string name="menu_backup">备份 / 还原</string>
     <string name="menu_history">历史</string>
     <!-- main screen -->
-    <string name="live_map_button">实时地图</string>
     <string name="caches_nearby_button">附近</string>
     <string name="advanced_search_button">搜索</string>
     <string name="stored_caches_button">已存储</string>

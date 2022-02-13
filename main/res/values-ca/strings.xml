@@ -330,7 +330,6 @@
     <string name="menu_invert_order">Inverteix l’ordre</string>
     <!-- main screen -->
     <string name="home_button">Pàgina principal</string>
-    <string name="live_map_button">Mapa</string>
     <string name="caches_nearby_button">Propers</string>
     <string name="advanced_search_button">Cerca</string>
     <string name="stored_caches_button">Desats</string>

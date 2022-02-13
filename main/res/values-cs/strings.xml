@@ -329,7 +329,6 @@
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
     <string name="home_button">Domů</string>
-    <string name="live_map_button">Živá mapa</string>
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>

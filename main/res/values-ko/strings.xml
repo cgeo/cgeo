@@ -329,7 +329,6 @@
     <string name="menu_invert_order">순서 반전</string>
     <!-- main screen -->
     <string name="home_button">홈</string>
-    <string name="live_map_button">라이브 지도</string>
     <string name="caches_nearby_button">인근 캐시</string>
     <string name="advanced_search_button">검색</string>
     <string name="stored_caches_button">저장된 캐시</string>

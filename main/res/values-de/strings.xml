@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Ausgangspunkt</string>
     <string name="wp_waypoint">Referenzpunkt</string>
     <string name="wp_original">Ursprüngliche Koordinaten</string>
+    <string name="wp_generated">Generiert</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Finale</string>
     <string name="wpnew_stage">Station</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Markierung</string>
     <string name="wpnew_original">Original</string>
+    <string name="wpnew_generated">Generiert</string>
     <!-- logs -->
     <string name="log_found">Gefunden</string>
     <string name="log_dnf">Nicht gefunden</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Sende Bilder…</string>
     <string name="log_posting_generic_trackable">Sende %1$s %2$d/%3$d</string>
     <string name="log_clear">Leeren</string>
+    <string name="log_templates">Gefunden: Log-Vorlage…</string>
     <string name="log_post_not_possible">Daten werden heruntergeladen…\nBitte in ein paar Sekunden noch einmal versuchen, oder die Internetverbindung prüfen.</string>
     <string name="log_date_future_not_allowed">Logs in der Zukunft sind nicht erlaubt.</string>
     <string name="log_add">Hinzufügen</string>
@@ -329,7 +332,6 @@
     <string name="menu_invert_order">Reihenfolge umkehren</string>
     <!-- main screen -->
     <string name="home_button">Start</string>
-    <string name="live_map_button">Live-Karte</string>
     <string name="caches_nearby_button">In der Nähe</string>
     <string name="advanced_search_button">Suche</string>
     <string name="stored_caches_button">Gespeichert</string>
@@ -1445,6 +1447,7 @@
     <!-- map -->
     <string name="map_map">Karte</string>
     <string name="map_live">Live-Karte</string>
+    <string name="map_offline">Offline-Karte</string>
     <string name="map_view_map">Karte</string>
     <string name="map_rotation">Kartendrehung</string>
     <string name="map_dot_mode">Nutze kompakte Symbole</string>
