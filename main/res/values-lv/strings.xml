@@ -278,7 +278,6 @@
     <string name="menu_backup">Dublēt / atjaunot</string>
     <string name="menu_history">Vēsture</string>
     <!-- main screen -->
-    <string name="live_map_button">Karte</string>
     <string name="caches_nearby_button">Tuvumā</string>
     <string name="advanced_search_button">Meklēt</string>
     <string name="stored_caches_button">Saglabātie bezsaistē</string>
