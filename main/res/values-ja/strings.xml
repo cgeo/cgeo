@@ -329,7 +329,6 @@
     <string name="menu_invert_order">逆順</string>
     <!-- main screen -->
     <string name="home_button">ホーム</string>
-    <string name="live_map_button">地図</string>
     <string name="caches_nearby_button">近く</string>
     <string name="advanced_search_button">検索</string>
     <string name="stored_caches_button">保存済み</string>
