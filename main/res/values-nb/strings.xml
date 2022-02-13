@@ -326,7 +326,6 @@
     <string name="menu_invert_order">Omvendt rekkefølge</string>
     <!-- main screen -->
     <string name="home_button">Hjem</string>
-    <string name="live_map_button">Live-kart</string>
     <string name="caches_nearby_button">I nærheten</string>
     <string name="advanced_search_button">Søk</string>
     <string name="stored_caches_button">Lagret</string>
