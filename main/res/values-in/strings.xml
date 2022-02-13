@@ -228,7 +228,6 @@
     <string name="menu_settings">Pengaturan</string>
     <string name="menu_history">Riwayat</string>
     <!-- main screen -->
-    <string name="live_map_button">Peta online</string>
     <string name="caches_nearby_button">Dekat</string>
     <string name="advanced_search_button">Cari</string>
     <string name="stored_caches_button">Disimpan</string>
