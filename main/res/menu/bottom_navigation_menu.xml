@@ -15,7 +15,7 @@
         android:id="@+id/page_map"
         android:enabled="true"
         android:icon="@drawable/ic_menu_mapmode"
-        android:title="@string/live_map_button" />
+        android:title="@string/map_map" />
     <item
         android:id="@+id/page_search"
         android:enabled="true"

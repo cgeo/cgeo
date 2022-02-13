@@ -4,7 +4,7 @@
         android:shortcutId="live_map"
         android:enabled="true"
         android:icon="@drawable/sc_map"
-        android:shortcutShortLabel="@string/live_map_button">
+        android:shortcutShortLabel="@string/map_map">
         <intent
             android:action="android.intent.action.VIEW"
             android:targetPackage="cgeo.geocaching"

@@ -68,7 +68,7 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     private void promptForShortcut() {
         final List<Shortcut> shortcuts = new ArrayList<>();
 
-        shortcuts.add(new Shortcut(R.string.live_map_button, R.drawable.sc_map, new Intent(this, MapActivity.class)));
+        shortcuts.add(new Shortcut(R.string.map_map, R.drawable.sc_map, new Intent(this, MapActivity.class)));
         shortcuts.add(new Shortcut(R.string.caches_nearby_button, R.drawable.sc_nearby, CacheListActivity.getNearestIntent(this)));
 
         // TODO: make logging activities ask for cache/trackable when being invoked externally
