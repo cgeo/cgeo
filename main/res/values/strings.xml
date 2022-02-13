@@ -1593,7 +1593,6 @@
     <string name="google_maps_style_default">Default</string>
     <string name="google_maps_style_night">Night</string>
     <string name="google_maps_style_retro">Retro</string>
-    <string name="google_maps_style_osm">OSM</string>
     <string name="google_maps_style_contrast">High Contrast</string>
     <string name="google_maps_style_auto">Device theme (Day/Night)</string>
 

@@ -553,7 +553,6 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         NIGHT(R.string.google_maps_style_night, R.raw.googlemap_style_night),
         AUTO(R.string.google_maps_style_auto, 0),
         RETRO(R.string.google_maps_style_retro, R.raw.googlemap_style_retro),
-        OSM(R.string.google_maps_style_osm, R.raw.googlemap_style_osm),
         CONTRAST(R.string.google_maps_style_contrast, R.raw.googlemap_style_contrast);
 
         final int labelRes;
