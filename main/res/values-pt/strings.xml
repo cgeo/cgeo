@@ -1379,6 +1379,7 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa em tempo real</string>
+    <string name="map_offline">Mapa offline</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
@@ -2083,7 +2084,7 @@
     <string name="downloadmap_checking_for_updates">A verificar se há actualizações…</string>
     <string name="downloadtile_title">Dados de encaminhamento em falta</string>
     <string name="downloadtile_info">O c:geo não pode calcular a rota solicitada, pois falta algum ficheiro de dados de encaminhamento. Quer transferir os dados de encaminhamento em falta?</string>
-    <string name="check_tiles_menu">Verificar dados de encaminhamento em falta</string>
+    <string name="check_tiles_menu">Verificar dados de percurso em falta</string>
     <string name="check_tiles_found">Os dados de encaminhamento já existem</string>
     <string name="check_tiles_missing">Foram encontrados dados de encaminhamento em falta:\n%1$s\n\nDeseja transferir esses ficheiros?%2$s</string>
     <string name="check_tiles_unsupported">Aviso: Dados de encaminhamento não estão disponíveis, pelo menos em parte, para a região escolhida</string>
@@ -2191,6 +2192,7 @@ do mapa e dos temas?</string>
     <string name="rtl_ridge">colina</string>
     <string name="rtl_reef">recife</string>
     <string name="rtl_dyke">dique</string>
+    <string name="rtl_embankment">barragem</string>
     <string name="rtl_beach">praia</string>
     <string name="rtl_beach_gravel">praia de gravilha</string>
     <string name="rtl_spring">primavera</string>
@@ -2246,14 +2248,17 @@ do mapa e dos temas?</string>
     <!-- render theme legend: category "POI / Symbols" -->
     <string name="rtl_category_poi_symbols">POI / Símbolos</string>
     <string name="rtl_bench">banco de jardim</string>
+    <string name="rtl_drinking_water">água potável</string>
     <string name="rtl_info_board">painel de informação</string>
     <string name="rtl_info_office">posto de informação</string>
     <string name="rtl_info_terminal">terminal de informação</string>
+    <string name="rtl_picnic_site">parque de merendas</string>
     <string name="rtl_playground">parque infantil</string>
     <string name="rtl_playground_private">parque infantil privado</string>
     <string name="rtl_recycling">reciclagem</string>
     <string name="rtl_shelter">abrigo</string>
     <string name="rtl_shelter_picnic">abrigo de piquenique</string>
+    <string name="rtl_shelter_rock">abrigo rochoso</string>
     <string name="rtl_telephone">telefone</string>
     <string name="rtl_toilets">casas de banho</string>
     <string name="rtl_volcano">vulcão</string>
@@ -2418,6 +2423,7 @@ do mapa e dos temas?</string>
     <string name="rtl_hot_spring">águas termais</string>
     <string name="rtl_ladder">escada</string>
     <string name="rtl_lift_gate">plataforma elevatória</string>
+    <string name="rtl_log">registo</string>
     <string name="rtl_oneway">sentido único</string>
     <string name="rtl_oneway_cycle">sentido único (ciclovia)</string>
     <string name="rtl_oneway_cycle_rev">sentido único (ciclovia, reversível)</string>
