@@ -135,7 +135,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         final String geocode = inputData.getGeocode();
-        if (geocode != null) {
+        if (!StringUtils.isBlank(geocode)) {
             final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
             cacheCoords = cache == null ? null : cache.getCoords();
         }
