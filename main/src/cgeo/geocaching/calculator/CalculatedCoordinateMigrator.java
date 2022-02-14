@@ -323,8 +323,7 @@ public class CalculatedCoordinateMigrator {
     }
 
     public static boolean needsMigration(final Waypoint w) {
-        return CalculatedCoordinate.isFeatureEnabled() &&
-            WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
+        return WaypointMigrationData.createFromJson(w.getId(), w.getName(), w.getCalcStateConfig()) != null;
     }
 
     public static void performMigration(final Context ctx, final Geocache cache, final Waypoint w, final Runnable actionAfterMigration) {

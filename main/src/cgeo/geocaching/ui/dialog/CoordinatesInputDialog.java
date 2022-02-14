@@ -68,7 +68,6 @@ public class CoordinatesInputDialog extends DialogFragment {
     private EditText eLon;
     private Button bLat;
     private Button bLon;
-    private Button bCalculate;
     private EditText eLatDeg;
     private EditText eLatMin;
     private EditText eLatSec;
@@ -238,13 +237,7 @@ public class CoordinatesInputDialog extends DialogFragment {
             binding.cache.setVisibility(View.GONE);
         }
 
-        bCalculate = binding.calculate;
-        if (getActivity() instanceof CalculateState) {
-            bCalculate.setOnClickListener(new CalculateListener());
-            bCalculate.setVisibility(View.VISIBLE);
-        }
-
-        if (CalculatedCoordinate.isFeatureEnabled() && inputData.getGeocode() != null) {
+        if (inputData.getGeocode() != null) {
             binding.calculateGlobal.setVisibility(View.VISIBLE);
             binding.calculateGlobal.setOnClickListener(vv -> {
                 inputData.setGeopoint(gp);
@@ -378,16 +371,6 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         for (final EditText editText : orderedInputs) {
             setSize(editText);
-        }
-
-        if (getActivity() instanceof CalculateState) {
-            final CalculateState calculateState = (CalculateState) getActivity();
-            final CalcState theState = calculateState.fetchCalculatorState();
-
-            if (null != theState) {
-                bCalculate.setText(R.string.waypoint_calculated_coordinates);
-                bCalculate.setTypeface(null, Typeface.ITALIC);
-            }
         }
 
         binding.calculateGlobal.setTypeface(null, inputData != null && inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled() ?
@@ -630,21 +613,6 @@ public class CoordinatesInputDialog extends DialogFragment {
     @Override
     public void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         dismiss();
-    }
-
-    private class CalculateListener implements View.OnClickListener {
-
-        @Override
-        public void onClick(final View v) {
-            if (getActivity() instanceof CalculateState) {
-                final CalculateState calculateState = (CalculateState) getActivity();
-                final CalcState theState = calculateState.fetchCalculatorState();
-                final CoordinatesCalculateDialog calculateDialog = CoordinatesCalculateDialog.getInstance(gp, theState);
-                calculateDialog.setCancelable(true);
-                calculateDialog.show(myContext.getSupportFragmentManager(), "wpcalcdialog");
-                dismiss();
-            }
-        }
     }
 
     private class ClipboardListener implements View.OnClickListener {

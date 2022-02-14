@@ -2479,9 +2479,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
     protected long[] getOrderedPages() {
         final ArrayList<Long> pages = new ArrayList<>();
-        if (CalculatedCoordinate.isFeatureEnabled()) {
-            pages.add(Page.VARIABLES.id);
-        }
+        pages.add(Page.VARIABLES.id);
         pages.add(Page.WAYPOINTS.id);
         pages.add(Page.DETAILS.id);
         pages.add(Page.DESCRIPTION.id);

@@ -31,14 +31,6 @@
             android:text="@string/waypoint_cache_coordinates" />
 
         <Button
-            android:id="@+id/calculate"
-            style="@style/button_full"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/waypoint_calculate_coordinates"
-            android:visibility="gone" />
-
-        <Button
             android:id="@+id/calculate_global"
             style="@style/button_full"
             android:layout_width="fill_parent"

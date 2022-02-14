@@ -77,7 +77,7 @@ public class WaypointParser {
      * @param namePrefix Prefix of the name of the waypoint
      */
     public WaypointParser(final Geocache cache, @NonNull final String namePrefix) {
-        this(cache, namePrefix, !CalculatedCoordinate.isFeatureEnabled());
+        this(cache, namePrefix, false);
     }
 
     public WaypointParser(final Geocache cache, @NonNull final String namePrefix, final boolean legacyMode) {
@@ -486,7 +486,7 @@ public class WaypointParser {
      * @return parseable waypoint text
      */
     public static String getParseableText(final Waypoint wp, final int maxUserNoteSize) {
-        return getParseableText(wp, maxUserNoteSize, !CalculatedCoordinate.isFeatureEnabled());
+        return getParseableText(wp, maxUserNoteSize, false);
     }
 
     public static String getParseableText(final Waypoint wp, final int maxUserNoteSize, final boolean legacyMode) {
