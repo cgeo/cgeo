@@ -785,7 +785,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 menu.findItem(R.id.menu_store_caches_background).setVisible(!isLoading() && CollectionUtils.isNotEmpty(geocodesInViewport));
             }
 
-            menu.findItem(R.id.menu_theme_mode).setVisible(false); // Always false, this is only used for Google Maps
+            menu.findItem(R.id.menu_theme_mode).setVisible(!GoogleMapProvider.isSatelliteSource(Settings.getMapSource()));
 
             menu.findItem(R.id.menu_as_list).setVisible(!isLoading() && caches.size() > 1);
 
@@ -841,7 +841,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_store_caches_background) {
             CacheDownloaderService.downloadCaches(activity, getGeocodesForCachesInViewport(), false, false);
         } else if (id == R.id.menu_theme_mode) {
-            //this will never happen, Google does not support mapsforge themes -> do nothing
+            mapView.selectMapTheme(activity);
         } else if (id == R.id.menu_as_list) {
             CacheListActivity.startActivityMap(activity, new SearchResult(getGeocodesForCachesInViewport()));
             ActivityMixin.overrideTransitionToFade(activity);

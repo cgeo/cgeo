@@ -2096,4 +2096,12 @@ public class Settings {
         putInt(R.string.pref_attributeFilterSources, value);
     }
 
+    public static void setSelectedGoogleMapTheme(final String mapTheme) {
+        putString(R.string.pref_google_map_theme, mapTheme);
+    }
+
+    public static String getSelectedGoogleMapTheme() {
+        return getString(R.string.pref_google_map_theme, "DEFAULT");
+    }
+
 }
