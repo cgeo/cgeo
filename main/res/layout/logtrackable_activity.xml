@@ -54,7 +54,10 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal" >
 
-            <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
+            <com.google.android.material.textfield.TextInputLayout
+                style="@style/textinput_autocompletetextview"
+                android:layout_width="0dp"
+                android:layout_weight="1">
                 <AutoCompleteTextView
                     android:id="@+id/geocode"
                     style="@style/textinput_embedded"
@@ -65,6 +68,8 @@
             <Button
                 android:id="@+id/coordinates"
                 style="@style/button_full"
+                android:layout_width="0dp"
+                android:layout_weight="1"
                 android:hint="@string/cache_coordinates" />
         </LinearLayout>
 

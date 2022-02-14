@@ -52,6 +52,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
@@ -124,7 +125,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         final String oldGeocode = geocode;
         geocode = inputData.getGeocode();
         if (!Objects.equals(oldGeocode, geocode)) {
-            if (geocode != null) {
+            if (!StringUtils.isBlank(geocode)) {
                 final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
                 if (cache != null) {
                     this.varList = cache.getVariables();
