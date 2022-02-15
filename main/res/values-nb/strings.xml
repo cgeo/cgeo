@@ -1262,9 +1262,7 @@
     <string name="waypoint">Veipunkt</string>
     <string name="waypoint_coordinates">Koordinater</string>
     <string name="waypoint_cache_coordinates">Cachens koordinater</string>
-    <string name="waypoint_calculate_coordinates">Regn ut koordinater</string>
-    <!-- Legacy: button text in coordinate input -->
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Eget veipunkt</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
     <string name="waypoint_bearing">Retning i °</string>
