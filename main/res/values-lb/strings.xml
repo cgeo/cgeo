@@ -538,8 +538,7 @@
     <!-- import -->
     <!-- popup -->
     <!-- waypoint -->
-    <!-- Legacy: button text in coordinate input -->
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
