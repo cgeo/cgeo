@@ -1345,11 +1345,9 @@
     <string name="waypoint">Ponto Adicional</string>
     <string name="waypoint_coordinates">Coordenadas</string>
     <string name="waypoint_cache_coordinates">Coordenadas da cache</string>
-    <string name="waypoint_calculate_coordinates">Calcular coordenadas</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordenadas calculadas</string>
-    <!-- Legacy: line in waypoint description -->
-    <string name="waypoint_calculated_coordinates_global">Calcular coordenadas (novo)</string>
+    <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Calcular coordenada</string>
     <string name="waypoint_custom">Personalizado</string>
     <string name="waypoint_my_coordinates">As minhas coordenadas</string>
     <string name="waypoint_bearing">Azimute em º</string>
@@ -1446,8 +1444,8 @@
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa em tempo real</string>
-    <string name="map_offline">Mapa offline</string>
+    <string name="map_live">Mapa (ligado)</string>
+    <string name="map_offline">Mapa (desligado)</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
@@ -1493,6 +1491,11 @@
     <string name="map_settings_cache_filter_too_complex_message">O filtro de cache actual é muito complexo para se aplicarem aqui as opções adicionais. Geralmente, isso significa que o filtro de cache contém expressões do tipo \"NOT\" (não) ou \"OR\" (ou) em vez de expressões simples lógicas do tipo \"AND\" (e).</string>
     <string name="map_theme_legend">Legenda do tema</string>
     <string name="map_theme_legend_info">Toque no título da categoria para abrir/fechar a categoria. Toque longo num símbolo para breves informações sobre esse símbolo. Toque no ícone de informações para visitar uma legenda detalhada online.</string>
+    <string name="google_maps_style_default">Padrão</string>
+    <string name="google_maps_style_night">Noite</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Alto contraste</string>
+    <string name="google_maps_style_auto">Tema do dispositivo (Dia/Noite)</string>
     <!-- search -->
     <string name="geo_search_label">Procurar caches próximas</string>
     <string name="search_bar_hint">Pesquisar caches/trackables</string>
