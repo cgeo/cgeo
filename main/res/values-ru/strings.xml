@@ -1163,9 +1163,7 @@
     <string name="waypoint">Путевая точка</string>
     <string name="waypoint_coordinates">Координаты</string>
     <string name="waypoint_cache_coordinates">Координаты тайника</string>
-    <string name="waypoint_calculate_coordinates">Вычислить координаты</string>
-    <!-- Legacy: button text in coordinate input -->
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Личная</string>
     <string name="waypoint_my_coordinates">Мои координаты</string>
     <string name="waypoint_bearing">Азимут в °</string>
