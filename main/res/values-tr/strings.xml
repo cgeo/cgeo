@@ -1308,10 +1308,8 @@
     <string name="waypoint">Yol noktası</string>
     <string name="waypoint_coordinates">Koordinatlar</string>
     <string name="waypoint_cache_coordinates">Geocache koordinatları</string>
-    <string name="waypoint_calculate_coordinates">Koordinatları hesaplayın</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Hesaplanmış koordinatlar</string>
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Özel</string>
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
     <string name="waypoint_bearing">Azimut açısı</string>

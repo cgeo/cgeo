@@ -683,9 +683,7 @@
     <string name="waypoint">إحداثية الطريق</string>
     <string name="waypoint_coordinates">الإحداثيات</string>
     <string name="waypoint_cache_coordinates">إحداثيات المخبئ</string>
-    <string name="waypoint_calculate_coordinates">حساب الإحداثيات</string>
-    <!-- Legacy: button text in coordinate input -->
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">مخصص</string>
     <string name="waypoint_my_coordinates">إحداثياتي</string>
     <string name="waypoint_bearing">الاتجاه بالدرجة °</string>

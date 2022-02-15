@@ -1331,10 +1331,8 @@
     <string name="waypoint">Reittipiste</string>
     <string name="waypoint_coordinates">Koordinaatit</string>
     <string name="waypoint_cache_coordinates">Kätkön koordinaatit</string>
-    <string name="waypoint_calculate_coordinates">Laske koordinaatit</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Lasketut koordinaatit</string>
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Oma</string>
     <string name="waypoint_my_coordinates">Sijaintini</string>
     <string name="waypoint_bearing">Suunnassa</string>

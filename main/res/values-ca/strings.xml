@@ -1343,11 +1343,8 @@
     <string name="waypoint">Fita</string>
     <string name="waypoint_coordinates">Coordenades</string>
     <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
-    <string name="waypoint_calculate_coordinates">Calcula coordenades</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordenades calculades</string>
-    <!-- Legacy: line in waypoint description -->
-    <string name="waypoint_calculated_coordinates_global">Calcula les coordenades (nou)</string>
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_bearing">Direcció en º</string>

@@ -1362,10 +1362,8 @@
     <string name="waypoint">Trasový bod</string>
     <string name="waypoint_coordinates">Souřadnice</string>
     <string name="waypoint_cache_coordinates">Souřadnice kešky</string>
-    <string name="waypoint_calculate_coordinates">Výpočet souřadnic</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Vypočítané souřadnice</string>
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_bearing">Azimut [°]</string>

@@ -1345,11 +1345,9 @@
     <string name="waypoint">Wegpunkt</string>
     <string name="waypoint_coordinates">Koordinaten</string>
     <string name="waypoint_cache_coordinates">Cache-Koordinaten</string>
-    <string name="waypoint_calculate_coordinates">Berechne Koordinaten</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Berechnete Koordinaten</string>
-    <!-- Legacy: line in waypoint description -->
-    <string name="waypoint_calculated_coordinates_global">Berechne Koordinaten (neu)</string>
+    <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Koordinate berechnen</string>
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
     <string name="waypoint_bearing">Richtung in °</string>
@@ -1493,6 +1491,11 @@
     <string name="map_settings_cache_filter_too_complex_message">Der aktuelle Cache-Filter ist zu komplex, um zusätzliche Optionen anzuwenden. Normalerweise bedeutet dies, dass der Cache-Filter eine Negation oder ODER-Ausdrücke anstelle von einfacher UND-Logik enthält.</string>
     <string name="map_theme_legend">Design-Legende</string>
     <string name="map_theme_legend_info">Tippe auf den Kategorietitel um die Kategorie zu öffnen/schließen. Tippe lange auf ein Symbol für kurze Informationen über darüber. Tippe auf das Info-Symbol, um eine detaillierte Legende online zu besuchen.</string>
+    <string name="google_maps_style_default">Standard</string>
+    <string name="google_maps_style_night">Nacht</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Hoher Kontrast</string>
+    <string name="google_maps_style_auto">Geräte-Design (Tag/Nacht)</string>
     <!-- search -->
     <string name="geo_search_label">Caches in der Nähe suchen</string>
     <string name="search_bar_hint">Caches/Trackables suchen</string>

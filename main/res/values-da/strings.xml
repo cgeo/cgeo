@@ -1142,9 +1142,7 @@
     <string name="waypoint">Rutepunkt</string>
     <string name="waypoint_coordinates">Position</string>
     <string name="waypoint_cache_coordinates">Cacheposition</string>
-    <string name="waypoint_calculate_coordinates">Beregn position</string>
-    <!-- Legacy: button text in coordinate input -->
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Tilpasset</string>
     <string name="waypoint_my_coordinates">Mine koordinater</string>
     <string name="waypoint_bearing">Kompasretning</string>

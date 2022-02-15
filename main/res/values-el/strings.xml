@@ -1339,11 +1339,8 @@
     <string name="waypoint">Σημείο αναφοράς</string>
     <string name="waypoint_coordinates">Συντεταγμένες</string>
     <string name="waypoint_cache_coordinates">Συντεταγμένες κρύπτης</string>
-    <string name="waypoint_calculate_coordinates">Υπολογιστής συντεταγμένων</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Υπολογισμένες συντεταγμένες</string>
-    <!-- Legacy: line in waypoint description -->
-    <string name="waypoint_calculated_coordinates_global">Υπολογισμός συντεταγμένων (νέο)</string>
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
     <string name="waypoint_bearing">Κατεύθυνση σε °</string>
