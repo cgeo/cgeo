@@ -1342,10 +1342,9 @@
     <string name="waypoint">Point de passage</string>
     <string name="waypoint_coordinates">Coordonnées</string>
     <string name="waypoint_cache_coordinates">Coordonnées de la cache</string>
-    <string name="waypoint_calculate_coordinates">Calculer les coordonnées</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Coordonnées calculées</string>
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Calculer les coordonnées</string>
     <string name="waypoint_custom">Personnalisé</string>
     <string name="waypoint_my_coordinates">Ma position</string>
     <string name="waypoint_bearing">Relèvement en °</string>
@@ -1457,6 +1456,10 @@
     <string name="map_settings_cache_filter_too_complex_title">Filtre de cache trop complexe</string>
     <string name="map_settings_cache_filter_too_complex_message">Le filtre de cache actuel est trop complexe pour appliquer des options supplémentaires. Généralement cela est dû à l\'utilisation d\'opérateurs logiques NON ou OU au lieu d\'expressions simples basées sur des ET logiques.</string>
     <string name="map_theme_legend">Légende du thème</string>
+    <string name="google_maps_style_default">Par défaut</string>
+    <string name="google_maps_style_night">Nuit</string>
+    <string name="google_maps_style_contrast">Contraste élevé</string>
+    <string name="google_maps_style_auto">Thème de l\'appareil (Jour/Nuit)</string>
     <!-- search -->
     <string name="geo_search_label">Rechercher les caches à proximité</string>
     <string name="search_bar_hint">Rechercher des caches / objets voyageurs</string>
