@@ -1214,10 +1214,8 @@
     <string name="waypoint">Papildomas taškas</string>
     <string name="waypoint_coordinates">Koordinatės</string>
     <string name="waypoint_cache_coordinates">Slėptuvės koordinatės</string>
-    <string name="waypoint_calculate_coordinates">Skaičiuoti koordinates</string>
-    <!-- Legacy: button text in coordinate input -->
     <string name="waypoint_calculated_coordinates">Apskaičiuotos koordinatės</string>
-    <!-- Legacy: line in waypoint description -->
+    <!-- Marks legacy calculated waypoints in waypoint list -->
     <string name="waypoint_custom">Savas</string>
     <string name="waypoint_my_coordinates">Mano koordinates</string>
     <string name="waypoint_bearing">Azimutas °</string>
