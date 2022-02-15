@@ -76,7 +76,7 @@ public class LooperLogger {
     }
 
     private String getStats() {
-        return "total:#" + totalMsgCount + "/" + totalTime + "ms/avg " + (totalTime / totalMsgCount) + "ms";
+        return "total:#" + totalMsgCount + "/" + totalTime + "ms/avg " + (totalTime / (totalMsgCount == 0 ? 1 : totalMsgCount)) + "ms";
     }
 
 }
