@@ -1378,8 +1378,8 @@
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
-    <string name="map_live">Mapa em tempo real</string>
-    <string name="map_offline">Mapa offline</string>
+    <string name="map_live">Mapa (ligado)</string>
+    <string name="map_offline">Mapa (desligado)</string>
     <string name="map_view_map">Vista de mapa</string>
     <string name="map_rotation">Rotação do mapa</string>
     <string name="map_dot_mode">Utilizar ícones compactos</string>
