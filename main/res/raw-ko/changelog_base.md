@@ -23,7 +23,7 @@
 - 신규: 현재 캐시 좌표를 지오체커에 제공 (지오체커에서 지원하는 경우)
 - 신규: 컬러 속성 아이콘(속성 그룹 다음)
 - 수정: 일부 삼성 장치의 외부 앱 갤러리 탭에서 사진을 여는 문제
-- Fix: Missing log count (website change)
+- 수정: 로그 수 누락(웹사이트 변경)
 
 ### 추가 사항
 - 신규: 메인 화면 검색의 클립보드 텍스트에서 지오코드를 빠르게 로드
@@ -38,8 +38,8 @@
 - 수정: 간격이 0인 맵/라우팅 타일에 대한 반복적인 업데이트 확인을 피합니다.
 - 수정: 설정에서 외부 비밀번호 저장소 앱의 비밀번호 자동 완성 지원 최적화
 - 수정: 버전 8 미만의 Android에서 실행되는 시스템에 대한 도구 설명 활성화
-- Fix: Crash on long-tap on trackable code in trackable details
-- Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- 수정: 추적아이템 정보에서 추적 코드를 길게 누르면 충돌이 발생합니다.
+- 수정: 필드 메모 업로드(웹사이트 변경)
+- 현재 Android 사양을 충족하도록 리팩토링된 설정
+- 업데이트된 MapsWithMe API
 
