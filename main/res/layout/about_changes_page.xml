@@ -12,19 +12,6 @@
         android:layout_height="wrap_content"
         android:orientation="vertical" >
 
-        <!-- ToDo: remove celebration image and corresponding resource as soon as our party is over ;-) -->
-        <ImageView
-            android:id="@+id/about_version_icon"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginBottom="10dip"
-            android:gravity="center"
-            android:scaleType="fitCenter"
-            android:adjustViewBounds="true"
-            android:src="@drawable/cgeo_10th_birthday" />
-        <!-- end of ToDo -->
-
         <TextView
             android:id="@+id/changelog_master"
             style="@style/about_changes"
