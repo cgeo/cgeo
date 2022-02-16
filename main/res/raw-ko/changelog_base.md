@@ -1,7 +1,7 @@
 ### 일반
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
+- 신규: 자동으로 백업 수행(선택 사항)
+- 수정: 완료된 다운로드 가져오기 재개
+- 신규: "사용자 정의 지점 있음" 필터 추가
+- 신규: BRouter v1.6.3으로 내부 라우팅 업데이트
+- 신규: 생성된 지점에 대한 사용자 별도 아이콘
+- 신규: 오프라인 로그용 로그 템플릿

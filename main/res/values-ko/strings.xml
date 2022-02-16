@@ -80,6 +80,7 @@
     <string name="wp_trailhead">출발지점</string>
     <string name="wp_waypoint">참고지점</string>
     <string name="wp_original">오리지날 좌표</string>
+    <string name="wp_generated">생성됨</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">최종</string>
     <string name="wpnew_stage">단계</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">통하여</string>
     <string name="wpnew_waypoint">표식</string>
     <string name="wpnew_original">원본</string>
+    <string name="wpnew_generated">생성됨</string>
     <!-- logs -->
     <string name="log_found">찾음</string>
     <string name="log_dnf">찾지 못함</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">사진 올리는 중…</string>
     <string name="log_posting_generic_trackable">%1$s %2$d/%3$d 를 올리는 중</string>
     <string name="log_clear">지우기</string>
+    <string name="log_templates">찾음: 로그 템플릿…</string>
     <string name="log_post_not_possible">데이터 다운로드 진행 중…\n몇초 후 다시 시도해 보거나, 인터넷 연결상태를 확인 해 보세요.</string>
     <string name="log_date_future_not_allowed">오늘 이후 로그 날짜는 허용 되지 않습니다.</string>
     <string name="log_add">추가</string>
@@ -353,6 +356,10 @@
     <string name="caches_store_all">모두 저장</string>
     <string name="caches_store_unsaved">저장 안된 것 저장</string>
     <string name="caches_store_selected">선택한 것 저장</string>
+    <string name="caches_store_background">백그라운드 다운로드(실험적!)</string>
+    <string name="caches_store_refresh_background">백그라운드 새로 고침(실험적!)</string>
+    <string name="caches_store_background_should_force_refresh">이미 다운로드한 캐시 새로 고침</string>
+    <string name="caches_store_background_title">캐시 다운로드</string>
     <string name="caches_history">지난 기록</string>
     <string name="caches_on_map">지도에 표시</string>
     <string name="caches_sort">정렬</string>
@@ -534,6 +541,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">오프라인 로그 있음</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">오프라인 찾음 로그 있음</string>
     <string name="cache_filter_status_select_label_solved_mystery">해결된 미스터리</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">사용자 정의 지점 있음</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">이 필터 설정은 미스터리 캐시에만 영향을 미칩니다.\n\n좌표가 변경되었거나 좌표로 채워진 유효한 최종 웨이 포인트가있는 경우 미스터리는 \'해결된\'것으로 간주됩니다.</string>
     <string name="cache_filter_status_active">활성</string>
     <string name="cache_filter_status_disabled">일시정지됨</string>
@@ -772,6 +780,7 @@
         <item>어두움</item>
     </string-array>
     <string name="init_wallpaper">배경화면</string>
+    <string name="init_summary_wallpaper">장치 배경 화면을 홈 화면 배경으로 표시</string>
     <!-- backup / restore -->
     <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup_summary">이 기능은 캐시, 웨이 포인트 및 설정을 백업 할 수 있지만 캐시 이미지는 백업 할 수 없습니다. \n휴대 전화를 분실 한 후에도 데이터를 복원하려면 백업 파일을 독립적 인 위치에 복사해야합니다.</string>
@@ -797,6 +806,8 @@
     <string name="init_backup_history_length_min">최근만</string>
     <string name="init_backup_history_length_max">모두 유지</string>
     <string name="init_backup_history_delete_warning">구성된 최대 값이 허용하는 것보다 더 많은 백업을 저장했습니다. 초과 백업을 모두 제거 하시겠습니까?</string>
+    <string name="init_backup_automatic">자동 백업</string>
+    <string name="init_backup_automatic_performing">백업 생성 중…</string>
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
     <string name="init_backup_failed">c:geo 데이터베이스 백업이 실패했습니다.</string>
@@ -1262,6 +1273,7 @@
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
     <string name="cache_listed_on">%s에 등록됨</string>
+    <string name="cache_recently_viewed">최근에 조회됨</string>
     <string name="cache_whereyougo_start">이 카트리지를 다운로드하고 시작하려면 WhereYouGo앱을 여십시오.</string>
     <string name="cache_whereyougo_install">이 카트리지를 다운로드하고 시작하려면 WhereYouGo 앱을 설치하십시오.</string>
     <string name="cache_chirpwolf_start">이 캐시는 처프 송신기 또는 다른 종류의 무선 신호를 사용할 수 있습니다. 처프 데이터를 읽으려면 Chirp Wolf를 열 수 있습니다.</string>
@@ -1319,6 +1331,7 @@
     <string name="waypoint_cache_coordinates">캐시 좌표</string>
     <string name="waypoint_calculated_coordinates">계산된 좌표</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">좌표 계산</string>
     <string name="waypoint_custom">맞춤형</string>
     <string name="waypoint_my_coordinates">내 위치</string>
     <string name="waypoint_bearing">방위각(°)</string>
@@ -1359,13 +1372,28 @@
     <string name="from_clipboard">클립보드 읽기</string>
     <string name="copy_to_clipboard">클립보드로 복사</string>
     <!-- Variables -->
+    <string name="variables_tidyup">정리</string>
+    <string name="variables_deleteall">전체삭제</string>
+    <string name="variables_deleteall_confirm_text">이 캐시의 모든 변수를 삭제하시겠습니까?</string>
+    <string name="variables_info">도움말</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">안내 모드</string>
+    <string name="calccoord_generate_showonmap">지도에 표시</string>
+    <string name="calccoord_generate_waypointnameprefix">생성됨</string>
+    <string name="calccoord_generate_error_nogeopointselected">선택한 좌표 없음</string>
+    <string name="calccoord_migrate_cancel">취소</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">제곱근</string>
+    <string name="formula_function_abs">절댓값</string>
+    <string name="formula_function_lettervalue">단어 값</string>
+    <string name="formula_error_missingvarvalue">부족: %1$s</string>
+    <string name="formula_error_other">오류: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->
     <string name="map_map">지도</string>
     <string name="map_live">라이브 지도</string>
+    <string name="map_offline">오프라인 지도</string>
     <string name="map_view_map">지도 보기</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
@@ -1411,6 +1439,11 @@
     <string name="map_settings_cache_filter_too_complex_message">현재 캐시 필터가 너무 복잡해서 여기에 추가 옵션을 적용할 수 없습니다. 일반적으로 이는 캐시 필터에 단순한 AND 논리 대신 NOT 또는 OR 표현식이 포함되어 있음을 의미합니다.</string>
     <string name="map_theme_legend">테마 범례</string>
     <string name="map_theme_legend_info">카테고리를 열거나 닫으려면 카테고리 제목을 누르세요. 해당 기호에 대한 짧은 정보를 보려면 해당 기호를 길게 누릅니다. 자세한 범례를 온라인으로 보려면 정보 아이콘을 누르세요.</string>
+    <string name="google_maps_style_default">기본 설정</string>
+    <string name="google_maps_style_night">밤</string>
+    <string name="google_maps_style_retro">복고풍 모드</string>
+    <string name="google_maps_style_contrast">고대비</string>
+    <string name="google_maps_style_auto">장치 테마(낮/밤)</string>
     <!-- search -->
     <string name="geo_search_label">주변 캐시 검색</string>
     <string name="search_bar_hint">캐시 / 추적아이템 검색</string>
@@ -1980,6 +2013,7 @@
     <string name="map_clear_track_confirm">경로/트랙 \"%s\" 제거하시겠습니까?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
+    <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="center_on_route_track">경로/트랙 중심</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
@@ -2064,6 +2098,8 @@
     <string name="check_tiles_found">라우팅 데이터가 이미 있음</string>
     <string name="check_tiles_missing">누락된 라우팅 데이터를 찾았습니다: \n%1$s\n\n해당 파일을 다운로드하시겠습니까?%2$s</string>
     <string name="check_tiles_unsupported">경고: 선택한 지역에서 라우팅 데이터를 적어도 부분적으로 사용할 수 없습니다.</string>
+    <string name="tileupdate_info">다운로드한 라우팅 데이터 파일의 업데이트를 확인하려면 여기를 누르십시오. 연기하려면 길게 누르세요.</string>
+    <string name="mapupdate_info">지도 및 테마 파일의 업데이트를 확인하려면 여기를 누르세요. 연기하려면 길게 누르세요.</string>
     <string name="no_updates_found">업데이트가 없음</string>
     <string name="updates_check">업데이트 확인</string>
     <string name="mapserver_mapsforge_info">기본 지도, 지도 테마가 필요하지 않음</string>
@@ -2136,6 +2172,7 @@
     <string name="back">뒤로가기</string>
     <string name="later">나중에</string>
     <string name="cancel">취소 </string>
+    <string name="ok" tools:ignore="ButtonCase">확인</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">모두 선택</string>
     <string name="touch_again_to_exit">종료하려면 다시 누르십시오</string>
