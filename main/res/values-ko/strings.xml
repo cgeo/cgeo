@@ -772,6 +772,7 @@
         <item>어두움</item>
     </string-array>
     <string name="init_wallpaper">배경화면</string>
+    <string name="init_summary_wallpaper">장치 배경 화면을 홈 화면 배경으로 표시</string>
     <!-- backup / restore -->
     <string name="init_backup_title">백업 생성하기</string>
     <string name="init_backup_summary">이 기능은 캐시, 웨이 포인트 및 설정을 백업 할 수 있지만 캐시 이미지는 백업 할 수 없습니다. \n휴대 전화를 분실 한 후에도 데이터를 복원하려면 백업 파일을 독립적 인 위치에 복사해야합니다.</string>
@@ -1363,6 +1364,7 @@
     <!-- map -->
     <string name="map_map">지도</string>
     <string name="map_live">라이브 지도</string>
+    <string name="map_offline">오프라인 지도</string>
     <string name="map_view_map">지도 보기</string>
     <string name="map_rotation">지도 회전</string>
     <string name="map_dot_mode">작은 아이콘 사용하기</string>
@@ -1977,6 +1979,7 @@
     <string name="map_clear_track_confirm">경로/트랙 \"%s\" 제거하시겠습니까?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">경로/트랙 옵션</string>
+    <string name="routes_tracks_menu">경로 / 트랙</string>
     <string name="center_on_route_track">경로/트랙 중심</string>
     <string name="unload_route_track">경로/트랙 내리기</string>
     <string name="route">경로</string>
@@ -2135,6 +2138,7 @@
     <string name="back">뒤로가기</string>
     <string name="later">나중에</string>
     <string name="cancel">취소 </string>
+    <string name="ok">확인</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">모두 선택</string>
     <string name="touch_again_to_exit">종료하려면 다시 누르십시오</string>
