@@ -1,2 +1,3 @@
+2022.02.16
 
-- Fix: Rare crash on startup of cgeo
+- Correcção: Falha rara ao iniciar o cgeo
