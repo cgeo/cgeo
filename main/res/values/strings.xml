@@ -1366,6 +1366,7 @@
     <string name="menu_caches">Manage caches</string>
     <string name="cache_menu_event">Add to calendar</string>
     <string name="cache_menu_extract_waypoints">Extract waypoints</string>
+    <string name="cache_menu_scan_calculated_waypoints">Scan for waypoint formulas</string>
     <string name="cache_menu_set_found">Set as found</string>
     <string name="cache_menu_set_DNF">Set as did not find</string>
     <string name="cache_menu_reset_foundstate">Reset found state</string>
@@ -1552,6 +1553,7 @@
     <string name="variables_titletext">Use this page to note down values and do calculations necessary for this cache.</string>
     <string name="variables_scanlisting">Scan listing</string>
     <string name="variables_scanlisting_choosepattern_title">Choose found pattern</string>
+    <string name="variables_scanlisting_nopatternfound">No pattern found</string>
     <string name="variables_tidyup">Tidy Up</string>
     <string name="variables_deleteall">Delete All</string>
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
@@ -1560,7 +1562,9 @@
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guided Mode</string>
     <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
+    <string name="calccoord_plain_tools_title">Plain Tools</string>
     <string name="calccoord_remove_spaces">Remove Spaces</string>
+    <string name="calccoord_paste_from_clipboard">Paste from clipboard</string>
 
     <string name="calccoord_generate_title">Generate Waypoints</string>
     <string name="calccoord_generate_showonmap">Show on Map</string>

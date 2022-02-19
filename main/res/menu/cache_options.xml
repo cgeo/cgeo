@@ -110,6 +110,12 @@
                 android:visible="false">
             </item>
             <item
+                android:id="@+id/menu_scan_calculated_waypoints"
+                android:title="@string/cache_menu_scan_calculated_waypoints"
+                app:showAsAction="ifRoom"
+                android:visible="false">
+            </item>
+            <item
                 android:id="@+id/menu_toggleWaypointsFromNote"
                 android:title="@string/cache_menu_preventWaypointsFromNote"
                 app:showAsAction="ifRoom"

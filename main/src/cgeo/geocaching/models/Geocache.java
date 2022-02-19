@@ -59,6 +59,7 @@ import android.content.res.Resources;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -1698,18 +1699,7 @@ public class Geocache implements IWaypoint {
         if (forceExtraction || !preventWaypointsFromNote) {
             final WaypointParser waypointParser = new WaypointParser(this, namePrefix);
             for (final Waypoint parsedWaypoint : waypointParser.parseWaypoints(StringUtils.defaultString(text))) {
-                final Waypoint existingWaypoint = findWaypoint(parsedWaypoint);
-                if (null == existingWaypoint) {
-                    //add as new waypoint
-                    addOrChangeWaypoint(parsedWaypoint, updateDb);
-                    changed = true;
-                } else {
-                    //if parsed waypoint contains more up-to-date-information -> overwrite it
-                    if (existingWaypoint.mergeFromParsedText(parsedWaypoint, namePrefix)) {
-                        addOrChangeWaypoint(existingWaypoint, updateDb);
-                        changed = true;
-                    }
-                }
+                changed |= addOrMergeInfoToExistingWaypoint(updateDb, namePrefix, parsedWaypoint);
             }
             for (Map.Entry<String, String> var : waypointParser.getParsedVariables().entrySet()) {
                 if (getVariables().isBlank(var.getKey())) {
@@ -1719,6 +1709,39 @@ public class Geocache implements IWaypoint {
             }
         }
         return changed;
+    }
+
+    private boolean addOrMergeInfoToExistingWaypoint(final boolean updateDb, @NonNull final String namePrefix, final Waypoint wpCandidate) {
+        boolean changed = false;
+        final Waypoint existingWaypoint = findWaypoint(wpCandidate);
+        if (null == existingWaypoint) {
+            //add as new waypoint
+            addOrChangeWaypoint(wpCandidate, updateDb);
+            changed = true;
+        } else {
+            //if parsed waypoint contains more up-to-date-information -> overwrite it
+            if (existingWaypoint.mergeFromParsedText(wpCandidate, namePrefix)) {
+                addOrChangeWaypoint(existingWaypoint, updateDb);
+                changed = true;
+            }
+        }
+        return changed;
+    }
+
+    public int addCalculatedWaypoints(final Collection<Pair<String, String>> foundPatterns, final String namePrefix) {
+        int added = 0;
+        for (final Pair<String, String> pattern : foundPatterns) {
+            final Waypoint wpCandidate = new Waypoint(namePrefix + " " + (added + 1), WaypointType.WAYPOINT, true);
+            final CalculatedCoordinate cc = new CalculatedCoordinate();
+            cc.setLatitudePattern(pattern.first);
+            cc.setLongitudePattern(pattern.second);
+            wpCandidate.setCalculated(cc, f -> variables.getValue(f));
+            final boolean changed = addOrMergeInfoToExistingWaypoint(true, namePrefix, wpCandidate);
+            if (changed) {
+                added++;
+            }
+        }
+        return added;
     }
 
     @Nullable

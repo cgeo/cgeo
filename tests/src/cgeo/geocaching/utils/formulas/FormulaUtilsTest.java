@@ -1,5 +1,7 @@
 package cgeo.geocaching.utils.formulas;
 
+import android.util.Pair;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -124,6 +126,62 @@ public class FormulaUtilsTest {
         } else {
             for (int i = 0; i < expectedFinds.length; i++) {
                 assertThat(result).as("Scan: '" + textToScan).containsExactlyInAnyOrder(expectedFinds);
+            }
+        }
+    }
+
+    @Test
+    public void scanForCoordinatesBasics() {
+        assertScanCoordinates("N48 12.345 E10 67.890", "N48 12.345|E10 67.890");
+        assertScanCoordinates("N48° 12.345' E10° 67.890'", "N48° 12.345'|E10° 67.890'");
+        assertScanCoordinates("N48° 12.ABC' E10 67.DEF", "N48° 12.ABC'|E10 67.DEF");
+
+        assertScanCoordinates("text before N48 12.ABC txt inbetween E10 67.DEF txt after", "N48 12.ABC|E10 67.DEF");
+        assertScanCoordinates("text before N48° 12.ABC' txt inbetween E10° 67.DEF' txt after", "N48° 12.ABC'|E10° 67.DEF'");
+
+        assertScanCoordinates("N48 12.(A+1)(B/2)(C/2) txt inbetween E10 67.(D+D) (E+E) F txt after", "N48 12.(A+1)(B/2)(C/2)|E10 67.(D+D) (E+E) F");
+
+        assertScanCoordinates("N 053°2*a,(c+20*b):2+5  E 009°10*b-1,c:4-a+5", "N 053°2*a.(c+20*b):2+5|E 009°10*b-1.c:4-a+5");
+
+    }
+
+    @Test
+    public void scanCoordinatesRemoveDuplicates() {
+        assertScanCoordinates("N48 12.345 E10 67.890 something else N48 12.345 E10 67.890", "N48 12.345|E10 67.890");
+    }
+
+    @Test
+    public void scanForCoordinatesGC86KMW() {
+        final String description = "Gründungsjahr c.\n" +
+            "\n" +
+            "1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5      E 009°10*b-1,c:4-a+5 \n" +
+            "\n" +
+            "Hier findest du eine Hilfe, um die Koordinaten von Zwischenstation 2 zu bekommen.\n" +
+            "\n" +
+            "2. Zwischenstation:\n" +
+            "\n" +
+            "Hier findest du einen Begriff, wenn auch nicht als Nomen, der typisch ist für Gesellschaften mit kapitalistischer Produktionsweise. BWW = d.\n" +
+            "\n" +
+            "Final: N 053° 33,13*(d+7)+1    E 09° 59,18*(d-6)+2\n" +
+            "\n" +
+            " \n" +
+            "\n" +
+            "English Version";
+
+        assertScanCoordinates(description, "N 053°2*a.(c+20*b):2+5|E 009°10*b-1.c:4-a+5", "N 053° 33.13*(d+7)+1|E 09° 59.18*(d-6)+2");
+    }
+
+    private void assertScanCoordinates(final String textToScan, final String ... expectedFindPairs) {
+        final List<Pair<String, String>> result = FormulaUtils.scanForCoordinates(Collections.singleton(textToScan), null);
+        if (expectedFindPairs == null || expectedFindPairs.length == 0) {
+            assertThat(result).as("ScanCoord: '" + textToScan + "'").isEmpty();
+        } else {
+            assertThat(result.size()).isEqualTo(expectedFindPairs.length);
+            int idx = 0;
+            for (String expectedPair : expectedFindPairs) {
+                final String desc = "-ScanCoord(" + idx + ") in '" + textToScan + "'";
+                assertThat(result.get(idx).first + "|" + result.get(idx).second).as(desc).isEqualTo(expectedPair);
+                idx++;
             }
         }
     }

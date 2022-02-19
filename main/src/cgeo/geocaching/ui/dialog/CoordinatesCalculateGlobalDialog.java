@@ -20,9 +20,11 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.VariableListView;
 import cgeo.geocaching.ui.ViewUtils;
+import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.TextUtils;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 import cgeo.geocaching.utils.formulas.VariableList;
 import cgeo.geocaching.utils.formulas.VariableMap;
 import static cgeo.geocaching.models.CalculatedCoordinateType.PLAIN;
@@ -44,6 +46,7 @@ import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.FragmentManager;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.EnumSet;
@@ -246,9 +249,24 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
             }
         });
 
-        binding.ccRemoveSpaces.setOnClickListener(v -> {
-            binding.PlainLon.setText(binding.PlainLon.getText().toString().replaceAll(" ", ""));
-            binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
+        binding.ccPlainTools.setOnClickListener(v -> {
+            final List<Integer> options = Arrays.asList(R.string.calccoord_remove_spaces, R.string.calccoord_paste_from_clipboard);
+            SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
+                .selectSingle(options, (i, i2) -> TextParam.id(i), -1, SimpleDialog.SingleChoiceMode.NONE, (o, p) -> {
+                    if (o == R.string.calccoord_remove_spaces) {
+                        binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
+                        binding.PlainLon.setText(binding.PlainLon.getText().toString().replaceAll(" ", ""));
+                    } else if (o == R.string.calccoord_paste_from_clipboard) {
+                        final String clip = ClipboardUtils.getText();
+                        final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(Collections.singleton(clip), null);
+                        if (patterns.isEmpty()) {
+                            ActivityMixin.showShortToast(this.getActivity(), R.string.variables_scanlisting_nopatternfound);
+                        } else {
+                            binding.PlainLat.setText(patterns.get(0).first);
+                            binding.PlainLon.setText(patterns.get(0).second);
+                        }
+                    }
+                });
         });
 
         //check if type from config is applicable
@@ -293,7 +311,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         if (newType != PLAIN) {
             displayType.set(newType);
         }
-        binding.ccRemoveSpaces.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
+        binding.ccPlainTools.setVisibility(newType != PLAIN ? View.GONE : View.VISIBLE);
 
         if (newType == PLAIN) {
             if (initialLoad) {

@@ -2,12 +2,15 @@ package cgeo.geocaching.utils.formulas;
 
 import cgeo.geocaching.utils.TextUtils;
 
+import android.util.Pair;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -17,13 +20,26 @@ import java.util.regex.Pattern;
  */
 public class FormulaUtils {
 
-    private static final Pattern TEXT_SCAN_PATTERN = Pattern.compile(
-        "[^a-zA-Z0-9(]((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()]\\h*)*(\\h*[-+/:*x]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)[^a-zA-Z0-9)]");
+    private static final String F_OPS = "-+/:*x";
+    private static final String F_FORMULA = "((\\h*\\(\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7})(((\\h*[()]\\h*)*(\\h*[" + F_OPS + "]\\h*)+)(\\h*[()]\\h*)*([a-zA-Z][a-zA-Z0-9]{0,2}|[0-9]{1,10}|[0-9]{1,3}\\.[0-9]{1,7}))+(\\h*\\)\\h*)*)";
 
-    private static final Pattern[] TEXT_SCAN_FALSE_POSITIVE_PATTERNS = new Pattern[] {
+    private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
+
+
+    private static final Pattern[] FORMULA_SCAN_FALSE_POSITIVE_PATTERNS = new Pattern[] {
         Pattern.compile("^[0-9]+[:/.,][0-9]+([:/.,][0-9]+)?$"), // dates or times
         Pattern.compile("^[a-z]+:[0-9]+$") // URL endings
     };
+
+
+    private static final String COORDINATE_SCAN_DIGIT_PATTERN = "((" + F_FORMULA + "|[0-9a-zA-Z]{1,3})\\h*([°'\".]\\h*)?){1,6}";
+    private static final Pattern COORDINATE_SCAN_PATTERN = Pattern.compile(
+        "(?<lat>[nNsS]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\h+([a-zA-Z]{2,}\\h+)*(?<lon>[eEwWoO]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
+    );
+
+    //\h*([a-zA-Z]{2,}\h+)*
+
+    private static final Pattern DEGREE_TRAILINGWORD_REMOVER = Pattern.compile("\\h+([a-zA-Z]{2,})$");
 
     private FormulaUtils() {
         //no instance
@@ -116,6 +132,54 @@ public class FormulaUtils {
         return sb.toString();
     }
 
+    public static List<Pair<String, String>> scanForCoordinates(final Collection<String> texts, final Collection<Pair<String, String>> excludePairs) {
+        final List<Pair<String, String>> result = new ArrayList<>();
+        final Set<String> patternsFound = new HashSet<>();
+        if (excludePairs != null) {
+            for (Pair<String, String> p : excludePairs) {
+                patternsFound.add(pairToKey(p));
+            }
+        }
+        for (String text : texts) {
+            scanCoordinatePattern(text, result, patternsFound);
+        }
+        Collections.sort(result, (p1, p2) -> TextUtils.COLLATOR.compare(pairToKey(p1), pairToKey(p2)));
+        return result;
+    }
+
+    private static String pairToKey(final Pair<String, String> p) {
+        return p == null ? "null" : pairToKey(p.first, p.second);
+    }
+
+    private static String pairToKey(final String lat, final String lon) {
+        return degreeToKey(lat) + ":" + degreeToKey(lon);
+    }
+
+    private static String degreeToKey(final String degree) {
+        return processFoundDegree(preprocessScanText(degree)).replaceAll("\\h", "");
+    }
+
+    private static void scanCoordinatePattern(final String stext, final List<Pair<String, String>> result, final Set<String> resultSet) {
+        if (stext == null) {
+            return;
+        }
+        final String text = preprocessScanText(stext);
+        final Matcher m = COORDINATE_SCAN_PATTERN.matcher(" " + text + " ");
+        int start = 0;
+        while (m.find(start)) {
+            final String lat = m.group(1); // group("lat") needs SDk level >= 26
+            final String lon = m.group(16); // group("lon") needs SDk level >= 26
+            final String latProcessed = processFoundDegree(lat);
+            final String lonProcessed = processFoundDegree(lon);
+            final String key = pairToKey(latProcessed, lonProcessed);
+            if (!resultSet.contains(key) && checkCandidate(latProcessed) && checkCandidate(lonProcessed)) {
+                result.add(new Pair<>(latProcessed, lonProcessed));
+                resultSet.add(key);
+            }
+            start = m.end();
+        }
+    }
+
     public static List<String> scanForFormulas(final Collection<String> texts, final Collection<String> excludeFormulas) {
         final List<String> patterns = new ArrayList<>();
         final Set<String> patternsFound = new HashSet<>(excludeFormulas == null ? Collections.emptySet() : excludeFormulas);
@@ -126,14 +190,15 @@ public class FormulaUtils {
         return patterns;
     }
 
-    private static void scanText(final String text, final List<String> result, final Set<String> resultSet) {
-        if (text == null) {
+    private static void scanText(final String stext, final List<String> result, final Set<String> resultSet) {
+        if (stext == null) {
             return;
         }
-        final Matcher m = TEXT_SCAN_PATTERN.matcher(" " + text + " ");
+        final String text = preprocessScanText(stext);
+        final Matcher m = FORMULA_SCAN_PATTERN.matcher(" " + text + " ");
         int start = 0;
         while (m.find(start)) {
-            final String found = processFoundText(m.group(1));
+            final String found = processFoundText(Objects.requireNonNull(m.group(1)));
             if (!resultSet.contains(found) && checkCandidate(found)) {
                 result.add(found);
                 resultSet.add(found);
@@ -142,13 +207,32 @@ public class FormulaUtils {
         }
     }
 
+    private static String preprocessScanText(final String text) {
+        return text.replaceAll("\\h", " ").trim()
+            .replace(',', '.').replace('[', '(').replace(']', ')');
+    }
+
+    private static String processFoundDegree(final String degree) {
+        String d = processFoundText(degree);
+        //remove trailing words
+        Matcher m = DEGREE_TRAILINGWORD_REMOVER.matcher(d);
+        while (m.find()) {
+            d = d.substring(0, d.length() - m.group(1).length()).trim();
+            m = DEGREE_TRAILINGWORD_REMOVER.matcher(d);
+        }
+        return d;
+    }
+
     private static String processFoundText(final String text) {
         final String trimmed = text.replaceAll("\\h", " ").trim();
         return trimmed.replaceAll(" x ", " * "); // lowercase x is most likely a multiply char
     }
 
     private static boolean checkCandidate(final String candidate) {
-        for (Pattern p : TEXT_SCAN_FALSE_POSITIVE_PATTERNS) {
+        if (candidate == null) {
+            return false;
+        }
+        for (Pattern p : FORMULA_SCAN_FALSE_POSITIVE_PATTERNS) {
             if (p.matcher(candidate).matches()) {
                 return false;
             }

@@ -1,5 +1,6 @@
 package cgeo.geocaching;
 
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.databinding.CachedetailVariablesPageBinding;
 import cgeo.geocaching.models.Geocache;
@@ -138,12 +139,16 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             }
         }
         final List<String> patterns = FormulaUtils.scanForFormulas(toScan, existingFormulas);
-        SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-            .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
-                for (String s : set) {
-                    adapter.addVariable(null, s);
-                }
-            });
+        if (patterns.isEmpty()) {
+            ActivityMixin.showShortToast(activity, R.string.variables_scanlisting_nopatternfound);
+        } else {
+            SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
+                .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
+                    for (String s : set) {
+                        adapter.addVariable(null, s);
+                    }
+                });
+        }
     }
 
     @Override

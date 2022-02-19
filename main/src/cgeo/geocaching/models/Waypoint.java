@@ -10,6 +10,8 @@ import cgeo.geocaching.maps.mapsforge.v6.caches.GeoitemRef;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
+import cgeo.geocaching.utils.formulas.Value;
+import cgeo.geocaching.utils.functions.Func1;
 import static cgeo.geocaching.utils.Formatter.generateShortGeocode;
 
 import androidx.annotation.NonNull;
@@ -282,6 +284,15 @@ public class Waypoint implements IWaypoint {
 
     public boolean isCalculated() {
         return CalculatedCoordinate.isValidConfig(calcStateConfig);
+    }
+
+    public void setCalculated(final CalculatedCoordinate cc, final Func1<String, Value> varMap) {
+        this.setCalcStateConfig(cc.toConfig());
+        this.setCoords(cc.calculateGeopoint(varMap));
+    }
+
+    public CalculatedCoordinate getCalculated() {
+        return CalculatedCoordinate.createFromConfig(calcStateConfig);
     }
 
     @Override
