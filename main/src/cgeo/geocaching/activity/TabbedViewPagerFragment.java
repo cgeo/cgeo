@@ -59,6 +59,7 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
             contentIsUpToDate = false;
             // do an update anyway to catch situations where currently active view gets updated (and thus no onResume gets called)
             setContent();
+            contentIsUpToDate = true;
         }
     }
 
