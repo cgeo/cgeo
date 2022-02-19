@@ -27,6 +27,7 @@ import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Pair;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -244,11 +245,12 @@ public class CoordinatesInputDialog extends DialogFragment {
                 final CalculatedCoordinate cc = new CalculatedCoordinate();
                 cc.setType(
                     CalculatedCoordinateType.values()[binding.input.spinnerCoordinateFormats.getSelectedItemPosition()]);
-                if (cc.getType() == CalculatedCoordinateType.PLAIN) {
-                    //in case of PLAIn we can take over the text input into calc coord dialog
-                    cc.setLatitudePattern(eLat.getText().toString());
-                    cc.setLongitudePattern(eLon.getText().toString());
-                }
+
+                //try to set patterns from GUI
+                final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
+                cc.setLatitudePattern(patternsFromGui.first);
+                cc.setLongitudePattern(patternsFromGui.second);
+
                 inputData.setCalculatedCoordinate(cc);
                 CoordinatesCalculateGlobalDialog.show(myContext.getSupportFragmentManager(), inputData);
                 dismiss();
@@ -375,6 +377,32 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         binding.calculateGlobal.setTypeface(null, inputData != null && inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled() ?
             Typeface.ITALIC : Typeface.NORMAL);
+    }
+
+    private Pair<String, String> getLatLonPatternFromGui() {
+        String lat = null;
+        String lon = null;
+        switch (currentFormat) {
+            case Deg: // DDD.DDDDD°
+                lat = bLat.getText().toString() + eLatDeg.getText() + "." + eLatMin.getText() + "°";
+                lon = bLon.getText().toString() + eLonDeg.getText() + "." + eLonMin.getText() + "°";
+                break;
+            case Min: // DDD° MM.MMM
+                lat = bLat.getText().toString() + eLatDeg.getText() + "°" + eLatMin.getText() + "." + eLatSec.getText() + "'";
+                lon = bLon.getText().toString() + eLonDeg.getText() + "°" + eLonMin.getText() + "." + eLonSec.getText() + "'";
+                break;
+            case Sec: // DDD° MM SS.SSS
+                lat = bLat.getText().toString() + eLatDeg.getText() + "°" + eLatMin.getText() + "'" + eLatSec.getText() + "." + eLatSub.getText() + "\"";
+                lon = bLon.getText().toString() + eLonDeg.getText() + "°" + eLonMin.getText() + "'" + eLonSec.getText() + "." + eLonSub.getText() + "\"";
+                break;
+            case Plain:
+            default:
+                lat = eLat.getText().toString();
+                lon = eLon.getText().toString();
+                break;
+        }
+        return new Pair<>(lat, lon);
+
     }
 
     private void setSize(final EditText someEditText) {
