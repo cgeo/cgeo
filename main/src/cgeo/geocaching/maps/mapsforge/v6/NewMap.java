@@ -1631,7 +1631,6 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private void setTrack(final String key, final Route route) {
         tracks.setRoute(key, route);
         resumeTrack(key, null == route);
-        this.routeTrackUtils.showTrackInfo(route);
     }
 
     private void reloadIndividualRoute() {

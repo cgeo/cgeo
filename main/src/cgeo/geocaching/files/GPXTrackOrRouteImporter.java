@@ -27,7 +27,6 @@ public class GPXTrackOrRouteImporter {
 
     public static void doImport(final Context context, final Uri uri, final Route.UpdateRoute callback) {
         final AtomicBoolean success = new AtomicBoolean(false);
-        Toast.makeText(context, R.string.map_load_track_wait, Toast.LENGTH_SHORT).show();
         AndroidRxUtils.andThenOnUi(Schedulers.io(), () -> {
             try {
                 final Route value = doInBackground(uri);
