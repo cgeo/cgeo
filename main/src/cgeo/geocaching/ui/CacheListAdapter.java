@@ -282,7 +282,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
                 // OC attributes are always positive, to count them with GC attributes append "_yes"
                 final String attrVal;
                 ca = CacheAttribute.getByName(attr);
-                if (attr.equals(ca.rawName)) {
+                if (ca != null && attr.equals(ca.rawName)) {
                     attrVal = ca.getValue(true);
                 } else {
                     attrVal = attr;
