@@ -2,6 +2,7 @@ package cgeo.geocaching.calculator;
 
 import cgeo.geocaching.models.CalculatedCoordinateType;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -50,7 +51,25 @@ public class CalculatedCoordinateMigratorTest {
         assertThat(ccm.getMigrationData().getLonPattern()).isEqualTo("DEF");
         assertThat(ccm.getNewCacheVariables().get("A2")).isEqualTo("B+2");
         assertThat(ccm.getNewCacheVariables().get("C")).isEqualTo("($A2)-2");
+    }
 
+    @Test
+    public void migrateWithSquareParenthesis() {
+        final Map<String, String> varMap = createMap("A", "1", "B", "[2+3]*5", "C", "3", "D", "3", "E", "2", "F", "1");
+
+        final CalculatedCoordinateMigrator.WaypointMigrationData wmd =
+            CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE,
+                "N48° 45.[A+B](C+D)[E+F]", "E 009° 05.000", varMap);
+
+        final CalculatedCoordinateMigrator ccm = new CalculatedCoordinateMigrator(Collections.emptyMap(), wmd);
+        assertThat(ccm.getMigrationData().getLatPattern()).isEqualTo("N48° 45.(A+B)(C+D)(E+F)");
+        assertThat(ccm.getMigrationData().getLonPattern()).isEqualTo("E 009° 05.000");
+        assertThat(ccm.getNewCacheVariables().size()).isEqualTo(6);
+        assertThat(ccm.getNewCacheVariables().get("C")).isEqualTo("3");
+        assertThat(ccm.getNewCacheVariables().get("B")).isEqualTo("(2+3)*5");
+
+        varMap.put("B", "(2+3)*5");
+        assertThat(ccm.getNewCacheVariables()).containsAllEntriesOf(varMap);
     }
 
     private static Map<String, String> createMap(final String ... keyValue) {
