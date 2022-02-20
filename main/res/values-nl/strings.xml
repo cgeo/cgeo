@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Trailhead</string>
     <string name="wp_waypoint">Referentie punt</string>
     <string name="wp_original">Originele coördinaten</string>
+    <string name="wp_generated">Gegenereerd</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Eindbestemming</string>
     <string name="wpnew_stage">Tussenpunt</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Markeerpunt</string>
     <string name="wpnew_original">Oorspronkelijk</string>
+    <string name="wpnew_generated">Gegenereerd</string>
     <!-- logs -->
     <string name="log_found">Gevonden</string>
     <string name="log_dnf">Niet gevonden</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Afbeeldingen posten…</string>
     <string name="log_posting_generic_trackable">Posten %1$s %2$d/%3$d</string>
     <string name="log_clear">Wissen</string>
+    <string name="log_templates">Gevonden: Log sjabloon…</string>
     <string name="log_post_not_possible">Bezig met downloaden van gegevens…\nProbeer over enkele seconden nogmaals of controleer de internetverbinding.</string>
     <string name="log_date_future_not_allowed">Log datums in de toekomst zijn niet toegestaan.</string>
     <string name="log_add">Toevoegen</string>
@@ -1344,6 +1347,7 @@
     <string name="waypoint_cache_coordinates">Cache coördinaten</string>
     <string name="waypoint_calculated_coordinates">Berekende coördinaten</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Coördinaat berekenen</string>
     <string name="waypoint_custom">Aangepast</string>
     <string name="waypoint_my_coordinates">Mijn coördinaten</string>
     <string name="waypoint_bearing">Richting</string>
@@ -1384,8 +1388,53 @@
     <string name="from_clipboard">Van klembord</string>
     <string name="copy_to_clipboard">Kopieer naar klembord</string>
     <!-- Variables -->
+    <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
+    <string name="variables_scanlisting">Lijst scannen</string>
+    <string name="variables_scanlisting_choosepattern_title">Gevonden patroon kiezen</string>
+    <string name="variables_tidyup">Opschonen</string>
+    <string name="variables_deleteall">Alles Verwijderen</string>
+    <string name="variables_deleteall_confirm_text">Weet je zeker dat je alle variabelen voor deze cache wilt verwijderen?</string>
+    <string name="variables_info">Help</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Begeleide modus</string>
+    <string name="calccoord_convert_to_plain">Converteren naar gewoon coördinaat</string>
+    <string name="calccoord_remove_spaces">Spaties Verwijderen</string>
+    <string name="calccoord_generate_title">Waypoints Genereren</string>
+    <string name="calccoord_generate_showonmap">Toon op Kaart</string>
+    <string name="calccoord_generate_waypointnameprefix">Gegenereerd</string>
+    <string name="calccoord_generate_error_novarwithrange">Geen geldige variabele met bereik gevonden</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Geen combinatie gaf geldige coördinaten terug</string>
+    <string name="calccoord_generate_error_nogeopointselected">Geen Coördinaat geselecteerd</string>
+    <string name="calccoord_migrate_title">Waypoint Migratie</string>
+    <string name="calccoord_migrate_migrate">Migreren</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Gemigreerd van</string>
+    <string name="calccoord_migrate_cancel">Annuleren</string>
+    <string name="calccoord_migrate_dismiss">Gegevens afwijzen</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Afgewezen</string>
+    <string name="calccoord_migrate_infotext_markdown">Er is een verouderde coördinatenberekening gevonden in dit waypoint:\n\n%1$s\n\nje kunt dit als volgt migreren:\n\n%2$s\n\nmet nieuwe cache-variabelen:%3$s\n\nGelieve te kiezen:\n- %4$s om migratie uit te voeren zoals voorgesteld\n- %5$s om de gevonden rekeningsgegevens te verwijderen voor goede\n- %6$s om verder te gaan zonder migratie. Je zal opnieuw worden gevraagd om migratie als je de volgende keer het waypoint opent om te bewerken. Let op dat het bewerken van de waypoint coördinaten lokale berekeningsgegevens kan verwijderen.</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Vierkantswortel</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangens</string>
+    <string name="formula_function_abs">Absolute waarde</string>
+    <string name="formula_function_round">Afronden</string>
+    <string name="formula_function_if">Als</string>
+    <string name="formula_function_length">String Lengte</string>
+    <string name="formula_function_substring">Substring</string>
+    <string name="formula_function_rot13">Roteer karakters met 13</string>
+    <string name="formula_function_rot">Roteer Karakters</string>
+    <string name="formula_function_checksum">Controlesom</string>
+    <string name="formula_function_ichecksum">Iteratieve Checksum</string>
+    <string name="formula_function_lettervalue">Woordwaarde</string>
+    <string name="formula_function_roman">Romeins naar decimaal</string>
+    <string name="formula_function_vanity">Vanity Code</string>
+    <string name="formula_function_group_simplenumeric">Eenvoudig Numeriek</string>
+    <string name="formula_function_group_complexnumeric">Complex Numeriek</string>
+    <string name="formula_function_group_simplestring">Eenvoudige Tekenreeks</string>
+    <string name="formula_function_group_complexstring">Complexe Tekenreeks</string>
+    <string name="formula_error_unexpectedtoken">Verwacht \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Verkeerde aantal parameters, verwacht %1$s-%2$s, ontvangen %3$s</string>
     <!-- visit -->
     <string name="visit_tweet">Post deze vondst op Twitter</string>
     <!-- map -->
