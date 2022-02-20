@@ -24,14 +24,14 @@
                 android:textSize="@dimen/textSize_detailsPrimary"
                 android:singleLine="true"
                 android:inputType="text"
-                android:hint="Value"/>
+                android:hint="@string/calccoord_guided_value"/>
         </com.google.android.material.textfield.TextInputLayout>
 
         <TextView
             android:id="@+id/cc_guide_value_hiddenhint"
             style="@style/text_label"
             android:visibility="invisible"
-            android:text="Tap a digit to edit"
+            android:text="@string/calccoord_guided_edit"
             android:textSize="@dimen/textSize_headingPrimary"
             android:singleLine="true"
             android:layout_width="wrap_content"

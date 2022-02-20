@@ -1563,6 +1563,8 @@
 
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guided Mode</string>
+    <string name="calccoord_guided_edit">Tap a digit to edit</string>
+    <string name="calccoord_guided_value">Value</string>
     <string name="calccoord_convert_to_plain">Convert to plain Coordinate</string>
     <string name="calccoord_plain_tools_title">Plain Tools</string>
     <string name="calccoord_remove_spaces">Remove Spaces</string>
