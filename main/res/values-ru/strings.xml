@@ -1773,13 +1773,6 @@
     </plurals>
     <!-- individual track -->
     <string name="map_load_track">Загрузить трек/маршрут из GPX</string>
-    <string name="map_load_track_wait">Загрузка трека/маршрута в фоновом режиме…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Трек/маршрут загружен (%d точка)</item>
-        <item quantity="few">Трек/маршрут загружен (%d точки)</item>
-        <item quantity="many">Трек/маршрут загружен (%d точек)</item>
-        <item quantity="other">Трек/маршрут загружен (%d точек)</item>
-    </plurals>
     <string name="load_track_error">Ошибка при загрузке трека/маршрута</string>
     <!-- route/track commons -->
     <!-- distance units -->
