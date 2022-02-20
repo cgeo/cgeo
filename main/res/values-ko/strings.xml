@@ -2004,10 +2004,6 @@
     <string name="individual_route_set_as_start_message">이 항목을 경로 시작으로 설정하고 이후의 모든 항목을 현재 경로의 맨 위로 이동하시겠습니까?</string>
     <!-- individual track -->
     <string name="map_load_track">GPX에서 트랙 / 경로 로드</string>
-    <string name="map_load_track_wait">백그라운드에서 트랙/경로 로딩중…</string>
-    <plurals name="load_track_success">
-        <item quantity="other">트랙 / 경로 로드됨 (%d 트랙점)</item>
-    </plurals>
     <string name="load_track_error">트랙/경로 로딩중 오류</string>
     <string name="map_clear_track">경로/트랙 지우기</string>
     <string name="map_clear_track_confirm">경로/트랙 \"%s\" 제거하시겠습니까?</string>
