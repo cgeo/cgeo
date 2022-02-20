@@ -2069,11 +2069,6 @@
     <string name="individual_route_set_as_start_message">Definir este item como início da rota e mover todos os itens subsequentes para o topo da rota actual?</string>
     <!-- individual track -->
     <string name="map_load_track">Carregar percurso/rota do GPX</string>
-    <string name="map_load_track_wait">A carregar percurso/rota em segundo plano…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Percurso/rota carregado (%d ponto do percurso)</item>
-        <item quantity="other">Percurso/rota carregado (%d pontos do percurso)</item>
-    </plurals>
     <string name="load_track_error">Erro ao carregar o percurso/rota</string>
     <string name="map_clear_track">Limpar rota/percurso</string>
     <string name="map_clear_track_confirm">Deseja remover a rota/percurso \"%s\"?</string>
