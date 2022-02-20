@@ -2053,13 +2053,6 @@
     <string name="individual_route_set_as_start_message">Ustaw ten element jako początek trasy i przenieś wszystkie kolejne elementy na górę bieżącej trasy?</string>
     <!-- individual track -->
     <string name="map_load_track">Załaduj ścieżkę/trasę z GPX</string>
-    <string name="map_load_track_wait">Ładowanie ścieżki/trasy w tle…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Ścieżka/trasa załadowana (%d punkt trasy)</item>
-        <item quantity="few">Ścieżka/trasa załadowana (%d punktów trasy)</item>
-        <item quantity="many">Ścieżka/trasa załadowana (%d punktów trasy)</item>
-        <item quantity="other">Ścieżka/trasa załadowana (%d punktów trasy)</item>
-    </plurals>
     <string name="load_track_error">Błąd ładowania ścieżki/trasy</string>
     <string name="map_clear_track">Wyczyść trasę/ślad</string>
     <string name="map_clear_track_confirm">Czy chcesz usunąć trasę/ślad \"%s\"?</string>
