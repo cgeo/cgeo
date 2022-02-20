@@ -1996,11 +1996,6 @@
     <string name="individual_route_set_as_start_message">Définir cet élément comme début d\'itinéraire et déplacer tous les éléments suivants en haut de l’itinéraire actuel ?</string>
     <!-- individual track -->
     <string name="map_load_track">Charger trace/itinéraire GPX</string>
-    <string name="map_load_track_wait">Chargement de la trace/itinéraire GPX en tâche de fond …</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Trace/itinéraire chargé (%d trackpoint)</item>
-        <item quantity="other">Trace/itinéraire chargé (%d points de cheminement)</item>
-    </plurals>
     <string name="load_track_error">Erreur lors du changement de la trace/itinéraire</string>
     <string name="map_clear_track">Supprimer la trace</string>
     <string name="map_clear_track_confirm">Voulez-vous supprimer la trace \"%s \" ?</string>
