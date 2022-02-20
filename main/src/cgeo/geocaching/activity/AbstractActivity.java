@@ -6,23 +6,30 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.enumerations.CacheListType;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.enumerations.LoadFlags;
+import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.storage.DataStore;
+import cgeo.geocaching.ui.TextParam;
+import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.ApplicationSettings;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
+import cgeo.geocaching.utils.formulas.FormulaUtils;
 
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
+import android.util.Pair;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -38,6 +45,8 @@ import androidx.core.content.res.ResourcesCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.viewbinding.ViewBinding;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
@@ -231,6 +240,33 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
                 final Intent intent = new Intent(Intents.INTENT_CACHE_CHANGED);
                 intent.putExtra(Intents.EXTRA_WPT_PAGE_UPDATE, true);
                 LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+            }
+        } else {
+            showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));
+        }
+    }
+
+    protected void scanForCalculatedWaypints(@Nullable final Geocache cache) {
+        if (cache != null) {
+            final List<String> toScan = new ArrayList<>();
+            final List<Pair<String, String>> existingCoords = new ArrayList<>();
+            toScan.add(TextUtils.stripHtml(cache.getDescription()));
+            toScan.add(cache.getHint());
+            for (Waypoint w : cache.getWaypoints()) {
+                toScan.add(w.getNote());
+                if (w.isCalculated()) {
+                    final CalculatedCoordinate cc = CalculatedCoordinate.createFromConfig(w.getCalcStateConfig());
+                    existingCoords.add(new Pair<>(cc.getLatitudePattern(), cc.getLongitudePattern()));
+                }
+            }
+            final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(toScan, existingCoords);
+            if (patterns.isEmpty()) {
+                ActivityMixin.showShortToast(this, R.string.variables_scanlisting_nopatternfound);
+            } else {
+                SimpleDialog.of(this).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
+                    .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s.first + " | " + s.second + "`").setMarkdown(true), null, set -> {
+                        cache.addCalculatedWaypoints(set, LocalizationUtils.getString(R.string.calccoord_generate_waypointnameprefix));
+                    });
             }
         } else {
             showToast(res.getQuantityString(R.plurals.extract_waypoints_result, 0));

@@ -677,6 +677,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             menu.findItem(R.id.menu_delete_userdefined_waypoints).setVisible(cache.isOffline() && cache.hasUserdefinedWaypoints());
             menu.findItem(R.id.menu_delete_generated_waypoints).setVisible(cache.isOffline() && cache.hasGeneratedWaypoints());
             menu.findItem(R.id.menu_extract_waypoints).setVisible(!isUDC);
+            menu.findItem(R.id.menu_scan_calculated_waypoints).setVisible(!isUDC);
             menu.findItem(R.id.menu_clear_goto_history).setVisible(cache.isGotoHistoryUDC());
             menuItemToggleWaypointsFromNote = menu.findItem(R.id.menu_toggleWaypointsFromNote);
             setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
@@ -726,6 +727,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_extract_waypoints) {
             final String searchText = cache.getShortDescription() + ' ' + cache.getDescription();
             extractWaypoints(searchText, cache);
+        } else if (menuItem == R.id.menu_scan_calculated_waypoints) {
+            scanForCalculatedWaypints(cache);
         } else if (menuItem == R.id.menu_toggleWaypointsFromNote) {
             cache.setPreventWaypointsFromNote(!cache.isPreventWaypointsFromNote());
             setMenuPreventWaypointsFromNote(cache.isPreventWaypointsFromNote());
