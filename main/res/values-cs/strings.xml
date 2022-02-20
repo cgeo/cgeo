@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Rozcestník</string>
     <string name="wp_waypoint">Referenční bod</string>
     <string name="wp_original">Původní souřadnice</string>
+    <string name="wp_generated">Vygenerováno</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Finále</string>
     <string name="wpnew_stage">Stage</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Přes</string>
     <string name="wpnew_waypoint">Značka</string>
     <string name="wpnew_original">Původní</string>
+    <string name="wpnew_generated">Vygenerováno</string>
     <!-- logs -->
     <string name="log_found">Nález</string>
     <string name="log_dnf">Nenalezená</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Odesílání obrázků…</string>
     <string name="log_posting_generic_trackable">Odesílání %1$s %2$d/%3$d</string>
     <string name="log_clear">Vyčistit</string>
+    <string name="log_templates">Nalezeno: Šablona logu…</string>
     <string name="log_post_not_possible">Probíhá stahování dat…\nProsím, zkus to znovu za chvíli nebo zkontroluj připojení k internetu.</string>
     <string name="log_date_future_not_allowed">Log s nadcházejícím datem není povolen.</string>
     <string name="log_add">Přidat</string>
@@ -333,7 +336,7 @@
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
     <string name="any_button">Přejít</string>
-    <string name="unknown_scan">Ve výsledku skenu nenalezen žádný geokód.</string>
+    <string name="unknown_scan">Ve výsledku vyhledávání nenalezen žádný geokód.</string>
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>
     <string name="caches_more_caches">Načíst další kešky</string>
@@ -359,6 +362,10 @@
     <string name="caches_store_all">Uložit všechny</string>
     <string name="caches_store_unsaved">Uložit neuložené</string>
     <string name="caches_store_selected">Uložit vybrané</string>
+    <string name="caches_store_background">Stahování na pozadí (experimentální!)</string>
+    <string name="caches_store_refresh_background">Obnovení na pozadí (experimentální!)</string>
+    <string name="caches_store_background_should_force_refresh">Obnovit již stažené kešky</string>
+    <string name="caches_store_background_title">Stáhnout kešky</string>
     <string name="caches_history">Historie</string>
     <string name="caches_on_map">Zobrazit na mapě</string>
     <string name="caches_sort">Řazení</string>
@@ -552,6 +559,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">Má offline log</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">Má offline log nálezu</string>
     <string name="cache_filter_status_select_label_solved_mystery">Vyřešená mysterka</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">Má uživatelsky definované body trasy</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">Toto nastavení filtru ovlivní pouze mystery kešky.\n\n Mysterka je považována za \"vyřešenou\", pokud má změněné souřadnice nebo vyplněný finální bod trasy se souřadnicemi.</string>
     <string name="cache_filter_status_active">Aktivní</string>
     <string name="cache_filter_status_disabled">Deaktivovaná</string>
@@ -790,6 +798,7 @@
         <item>Tmavý</item>
     </string-array>
     <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Zobrazit tapetu zařízení jako pozadí domovské obrazovky</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
@@ -815,6 +824,9 @@
     <string name="init_backup_history_length_min">Pouze nedávné</string>
     <string name="init_backup_history_length_max">Zachovat všechny</string>
     <string name="init_backup_history_delete_warning">Uložili jste více záloh, než umožňuje vaše nakonfigurovaná maximální hodnota. Opravdu chcete odstranit všechny přebytečné zálohy?</string>
+    <string name="init_backup_automatic">Automatické zálohování</string>
+    <string name="init_backup_automatic_summary">Provede automatickou zálohu každých x dní (kromě všech ručně vytvořených záloh), 0=vypnuto</string>
+    <string name="init_backup_automatic_performing">Vytváření zálohy…</string>
     <string name="init_user_confirmation">Vím, co dělám</string>
     <string name="init_backup_success">Databáze c:geo byla úspěšně zkopírována do souboru</string>
     <string name="init_backup_failed">Zálohování databáze c:geo selhalo.</string>
@@ -1108,6 +1120,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Odstranit všechny uživatelsky definovatelné trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
     <string name="cache_delete_userdefined_waypoints_note">Poznámka: Máte povoleny „trasové body z poznámky“. Pokud máte souřadnice v osobní poznámce rozpoznané aplikací c:geo, budou pro ně automaticky vytvořeny trasové body. Tuto funkci můžete deaktivovat v dialogovém okně pro úpravu osobní poznámky.</string>
     <string name="cache_delete_userdefined_waypoints_success">Uživatelsky definovatelné trasové body smazány</string>
+    <string name="cache_delete_generated_waypoints">Odstranit vygenerované trasové body</string>
+    <string name="cache_delete_generated_waypoints_confirm">Odstranit všechny vygenerované trasové body u této kešky?\n\nTrasové body budou okamžitě smazány, akce nelze vrátit zpět.</string>
+    <string name="cache_delete_generated_waypoints_success">Vygenerované trasové body smazány</string>
     <string name="cache_offline_store">Uložit</string>
     <string name="cache_offline_stored">Uloženo v zařízení</string>
     <string name="cache_offline_not_ready">Nedostupné offline</string>
@@ -1240,6 +1255,7 @@
     <string name="menu_caches">Spravovat kešky</string>
     <string name="cache_menu_event">Přidat do kalendáře</string>
     <string name="cache_menu_extract_waypoints">Extrahovat trasové body</string>
+    <string name="cache_menu_scan_calculated_waypoints">Vyhledat vzorce pro trasové body</string>
     <string name="cache_menu_set_found">Nastavit jako nalezená</string>
     <string name="cache_menu_set_DNF">Nastavit jako nenalezená</string>
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
@@ -1304,6 +1320,7 @@
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
     <string name="cache_listed_on">Zveřejněno na %s</string>
+    <string name="cache_recently_viewed">Naposledy zobrazené</string>
     <string name="cache_whereyougo_start">Otevřete WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_whereyougo_install">Nainstalujte WhereYouGo a stáhněte si a spusťte cartridge</string>
     <string name="cache_chirpwolf_start">Tato keška může používat buď chirp vysílač, nebo jiný druh bezdrátového majáku. Pro čtení chirp dat můžete otevřít aplikaci Chirp Wolf.</string>
@@ -1364,6 +1381,7 @@
     <string name="waypoint_cache_coordinates">Souřadnice kešky</string>
     <string name="waypoint_calculated_coordinates">Vypočítané souřadnice</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Vypočítat souřadnice</string>
     <string name="waypoint_custom">Vlastní</string>
     <string name="waypoint_my_coordinates">Moje souřadnice</string>
     <string name="waypoint_bearing">Azimut [°]</string>
@@ -1404,13 +1422,69 @@
     <string name="from_clipboard">Ze schránky</string>
     <string name="copy_to_clipboard">Kopírovat do schránky</string>
     <!-- Variables -->
+    <string name="variables_titletext">Tuto stránku můžete použít k zapisování poznámek a výpočtů nutných pro tuto kešku.</string>
+    <string name="variables_scanlisting">Prohledat listing</string>
+    <string name="variables_scanlisting_choosepattern_title">Vyberte vzor pro nalezené</string>
+    <string name="variables_scanlisting_nopatternfound">Nebyl nalezen žádný vzor</string>
+    <string name="variables_tidyup">Uklidit</string>
+    <string name="variables_deleteall">Smazat vše</string>
+    <string name="variables_deleteall_confirm_text">Opravdu chcete smazat všechny proměnné pro tuto kešku?</string>
+    <string name="variables_info">Nápověda</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Řízený režim</string>
+    <string name="calccoord_guided_edit">Klepněte na číslici, kterou chcete upravit</string>
+    <string name="calccoord_guided_value">Hodnota</string>
+    <string name="calccoord_convert_to_plain">Převod na prosté souřadnice</string>
+    <string name="calccoord_plain_tools_title">Jednoduché nástroje</string>
+    <string name="calccoord_remove_spaces">Odstranit mezery</string>
+    <string name="calccoord_paste_from_clipboard">Vložit ze schránky</string>
+    <string name="calccoord_generate_title">Vygenerovat trasové body</string>
+    <string name="calccoord_generate_showonmap">Zobrazit na mapě</string>
+    <string name="calccoord_generate_waypointnameprefix">Vygenerováno</string>
+    <string name="calccoord_generate_error_novarwithrange">Nebyla nalezena žádná platná proměnná s rozsahy</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Žádná kombinace nevrátila platné souřadnice</string>
+    <string name="calccoord_generate_error_nogeopointselected">Není vybrána žádná souřadnice</string>
+    <string name="calccoord_migrate_title">Přesun trasových bodů</string>
+    <string name="calccoord_migrate_migrate">Přesunout</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">Přesunuto z</string>
+    <string name="calccoord_migrate_cancel">Zrušit</string>
+    <string name="calccoord_migrate_dismiss">Zamítnout data</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Zamítnuto</string>
+    <string name="calccoord_migrate_infotext_markdown">U tohoto trasového bodu byl nalezen starší výpočet souřadnic:\n\n%1$s\n\nTento výpočet můžete přesunout do nového výpočtu souřadnic kešky následovně:\n\n%2$s\n\ns novými proměnnými kešek:%3$s\n\nProsím vyberte:\n- %4$s pro provedení přesunu doporučeným způsobem \n- %5$s pro zrušení nalezených dat výpočtů navždy\n-%6$spro pokračování bez přesunu. Až znovu otevřete úpravu trasového bodu, budete znovu dotázáni na přesun. Nicméně berte na vědomí, že úprava souřadnic trasového bodu může smazat místní data výpočtů.</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">Druhá odmocnina</string>
+    <string name="formula_function_sin">Sinus</string>
+    <string name="formula_function_cos">Cosinus</string>
+    <string name="formula_function_tan">Tangent</string>
+    <string name="formula_function_abs">Absolutní hodnota</string>
+    <string name="formula_function_round">Zaokrouhlit</string>
+    <string name="formula_function_if">Když</string>
+    <string name="formula_function_length">Délka řetězce</string>
+    <string name="formula_function_substring">Podřetězec</string>
+    <string name="formula_function_rot13">Otočit znaky o 13</string>
+    <string name="formula_function_rot">Otočit znaky</string>
+    <string name="formula_function_checksum">Kontrolní součet</string>
+    <string name="formula_function_ichecksum">Iterativní kontrolní součet</string>
+    <string name="formula_function_lettervalue">Hodnota slova</string>
+    <string name="formula_function_roman">Římské na arabské</string>
+    <string name="formula_function_vanity">Kód vanity</string>
+    <string name="formula_function_group_simplenumeric">Jednoduchý číselný</string>
+    <string name="formula_function_group_complexnumeric">Komplexní číselný</string>
+    <string name="formula_function_group_simplestring">Jednoduchý řetězec</string>
+    <string name="formula_function_group_complexstring">Komplexní řetězec</string>
+    <string name="formula_error_unexpectedtoken">Očekáváno \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">Špatný počet parametrů, očekáváno %1$s-%2$s, obdrženo %3$s</string>
+    <string name="formula_error_wrongtype">Špatný typ, očekáváno \'%1$s\', obdrženo \'%2$s\' s typem \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Chybí: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
+    <string name="formula_error_empty">Prázdný vzorec</string>
+    <string name="formula_error_other">Chyba: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Oznámit nález na Twitteru</string>
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Živá mapa</string>
+    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
@@ -1456,6 +1530,11 @@
     <string name="map_settings_cache_filter_too_complex_message">Současný filtr kešek je příliš složitý na to, aby bylo možné použít další možnosti. Obvykle to znamená, že filtr kešek obsahuje výrazy NOT nebo OR namísto jednoduché logiky AND.</string>
     <string name="map_theme_legend">Legenda motivu</string>
     <string name="map_theme_legend_info">Klepnutím na název kategorie otevřete/zavřete kategorii. Dlouhým klepnutím na symbol získáte krátké informace o daném symbolu. Klepnutím na ikonu informace zobrazíte podrobnou legendu online.</string>
+    <string name="google_maps_style_default">Výchozí</string>
+    <string name="google_maps_style_night">Noc</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Vysoký kontrast</string>
+    <string name="google_maps_style_auto">Motiv zařízení (denní/noční)</string>
     <!-- search -->
     <string name="geo_search_label">Hledat kešky v okolí</string>
     <string name="search_bar_hint">Hledat kešky/trackovatelné předměty</string>
@@ -2055,18 +2134,12 @@
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
-    <string name="map_load_track_wait">Načítání stopy/trasy na pozadí…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Stopa/trasa načtena (%d bod trasy)</item>
-        <item quantity="few">Stopa/trasa načtena (%d body trasy)</item>
-        <item quantity="many">Stopa/trasa načtena (%d body trasy)</item>
-        <item quantity="other">Stopa/trasa načtena (%d bodů trasy)</item>
-    </plurals>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
     <string name="map_clear_track">Vymazat trasu/stopu</string>
     <string name="map_clear_track_confirm">Chcete odstranit trasu/stopu \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
+    <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="center_on_route_track">Vycentrovat na trasu/stopu</string>
     <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
@@ -2151,6 +2224,8 @@
     <string name="check_tiles_found">Směrovací data jsou již k dispozici</string>
     <string name="check_tiles_missing">Nalezena chybějící směrovací data:\n%1$s\n\nChcete tyto soubory stáhnout?%2$s</string>
     <string name="check_tiles_unsupported">Upozornění: Směrovací data nejsou pro zvolený region, alespoň částečně, dostupná</string>
+    <string name="tileupdate_info">Klepnutím sem zkontrolujete aktualizace stažených datových souborů směrování. Dlouhým klepnutím odložíte.</string>
+    <string name="mapupdate_info">Klepnutím sem zkontrolujete aktualizace map a souborů motivů. Dlouhým klepnutím odložíte.</string>
     <string name="no_updates_found">Nebyly nalezeny žádné aktualizace</string>
     <string name="updates_check">Kontrola aktualizací</string>
     <string name="mapserver_mapsforge_info">Základní mapy, nejsou vyžadovány mapové motivy</string>
@@ -2223,6 +2298,7 @@
     <string name="back">Zpět</string>
     <string name="later">Později</string>
     <string name="cancel">Zrušit</string>
+    <string name="ok" tools:ignore="ButtonCase">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
     <string name="touch_again_to_exit">Pro ukončení prosím znovu klepněte</string>
