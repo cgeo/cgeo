@@ -1979,11 +1979,6 @@ Nombre de archivo:%2$s</string>
     <string name="individual_route_set_as_start_message">¿Establecer este elemento como inicio de ruta y mover todos los elementos posteriores a la parte superior de la ruta actual?</string>
     <!-- individual track -->
     <string name="map_load_track">Cargar pista/ruta desde GPX</string>
-    <string name="map_load_track_wait">Cargando pista/ruta en segundo plano…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Pista/ruta cargada (%d punto de seguimiento)</item>
-        <item quantity="other">Pista/ruta cargada (%d puntos de seguimiento)</item>
-    </plurals>
     <string name="load_track_error">Error al cargar pista/ruta</string>
     <!-- route/track commons -->
     <!-- distance units -->
