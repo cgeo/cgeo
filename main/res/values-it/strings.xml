@@ -2054,11 +2054,6 @@
     <string name="individual_route_set_as_start_message">Impostare questo elemento come inizio del percorso e spostare tutti gli elementi successivi in cima al percorso corrente?</string>
     <!-- individual track -->
     <string name="map_load_track">Carica traccia/percorso da GPX</string>
-    <string name="map_load_track_wait">Caricamento traccia/percorso in background…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Traccia/percorso caricata (%d punto traccia)</item>
-        <item quantity="other">Traccia/percorso caricata (%d punti traccia)</item>
-    </plurals>
     <string name="load_track_error">Errore nel caricare la traccia/percorso</string>
     <string name="map_clear_track">Cancella percorso/traccia</string>
     <string name="map_clear_track_confirm">Vuoi rimuovere il percorso/traccia\"%s\"?</string>
