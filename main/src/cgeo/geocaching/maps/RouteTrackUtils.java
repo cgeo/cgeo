@@ -29,7 +29,6 @@ import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.TooltipCompat;
 
@@ -239,13 +238,6 @@ public class RouteTrackUtils {
             updateDialogTracks(popup, tracks);
             updateTrack.updateRoute(key, route);
         });
-    }
-
-    public void showTrackInfo(final Route route) {
-        if (null != route) {
-            final int numPoints = route.getNumPoints();
-            Toast.makeText(activity, activity.getResources().getQuantityString(R.plurals.load_track_success, numPoints, numPoints), Toast.LENGTH_SHORT).show();
-        }
     }
 
     public void onPrepareOptionsMenu(final Menu menu, final View anchor, final IndividualRoute route, final Tracks tracks) {

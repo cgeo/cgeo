@@ -2329,15 +2329,6 @@
 
     <!-- individual track -->
     <string name="map_load_track">Load track/route from GPX</string>
-    <string name="map_load_track_wait">Loading track/route in background…</string>
-    <plurals name="load_track_success">
-        <item quantity="zero">Track/route loaded (%d trackpoints)</item>
-        <item quantity="one">Track/route loaded (%d trackpoint)</item>
-        <item quantity="two">Track/route loaded (%d trackpoints)</item>
-        <item quantity="few">Track/route loaded (%d trackpoints)</item>
-        <item quantity="many">Track/route loaded (%d trackpoints)</item>
-        <item quantity="other">Track/route loaded (%d trackpoints)</item>
-    </plurals>
     <string name="load_track_error">Error loading track/route</string>
     <string name="map_clear_track">Clear route/track</string>
     <string name="map_clear_track_confirm">Do you want to remove route/track \"%s\"?</string>

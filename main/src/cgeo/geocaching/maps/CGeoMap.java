@@ -912,7 +912,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     public void setTrack(final String key, final Route route) {
         mapActivity.getTracks().setRoute(key, route);
         resumeTrack(key, null == route);
-        mapActivity.getRouteTrackUtils().showTrackInfo(route);
     }
 
     @Override
