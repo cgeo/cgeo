@@ -123,6 +123,10 @@ android {
                 appIconRound: "@mipmap/ic_launcher_round"
             ]
         }
+        packagingOptions {
+            pickFirst "assets/symbols/**"
+            pickFirst "assets/patterns/**"
+        }
     }
 
     buildTypes.all { buildType ->
@@ -354,6 +358,21 @@ dependencies {
     implementation "$mapsforgeSource:mapsforge-map-android:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-map-reader:$mapsforgeVersion"
     implementation "$mapsforgeSource:mapsforge-themes:$mapsforgeVersion"
+
+    // Mapsforge VTM implementation
+    def mapsforgeVTMSource = 'org.mapsforge';
+    def mapsforgeVTMVersion = '0.17.0';
+
+    implementation "$mapsforgeVTMSource:vtm:$mapsforgeVTMVersion"
+    implementation "$mapsforgeVTMSource:vtm-themes:$mapsforgeVTMVersion"
+
+    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion"
+    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-armeabi-v7a"
+    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-arm64-v8a"
+    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-x86"
+    implementation "$mapsforgeVTMSource:vtm-android:$mapsforgeVTMVersion:natives-x86_64"
+
+    implementation "$mapsforgeVTMSource:vtm-http:$mapsforgeVTMVersion"
 
     configurations {
         all*.exclude group: 'net.sf.kxml', module: 'kxml2' // duplicate XmlPullParser class

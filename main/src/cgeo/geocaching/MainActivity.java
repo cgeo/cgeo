@@ -38,6 +38,7 @@ import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.WeakReferenceHandler;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.unifiedmap.UnifiedMapActivity;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -264,6 +265,9 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             super.onCreate(savedInstanceState);
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
+            binding.testUnifiedMap.setOnClickListener(v -> {
+                startActivity(new Intent(this, UnifiedMapActivity.class));
+            });
 
             // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
             setContentView(binding.getRoot());

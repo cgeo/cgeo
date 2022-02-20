@@ -14,6 +14,7 @@ import org.mapsforge.map.android.graphics.AndroidGraphicFactory;
 import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 import org.mapsforge.map.model.IMapViewPosition;
+import org.oscim.layers.tile.vector.VectorTileLayer;
 
 public abstract class AbstractMapsforgeMapSource extends AbstractMapSource {
 

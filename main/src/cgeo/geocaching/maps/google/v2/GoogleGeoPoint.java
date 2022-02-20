@@ -5,6 +5,8 @@ import cgeo.geocaching.maps.interfaces.GeoPointImpl;
 
 import com.google.android.gms.maps.model.LatLng;
 
+import org.oscim.core.GeoPoint;
+
 public class GoogleGeoPoint implements GeoPointImpl {
 
     protected final int latE6, longE6;
@@ -16,6 +18,10 @@ public class GoogleGeoPoint implements GeoPointImpl {
 
     public GoogleGeoPoint(final LatLng latlng) {
         this((int) (latlng.latitude * 1e6), (int) (latlng.longitude * 1e6));
+    }
+
+    public GoogleGeoPoint(final GeoPoint center) {
+        this(center.latitudeE6, center.longitudeE6);
     }
 
     @Override

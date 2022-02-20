@@ -39,6 +39,8 @@ import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
 import cgeo.geocaching.ui.AvatarUtils;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -237,6 +239,7 @@ public class Settings {
      * underlying map file, leading to delays.
      */
     private static MapSource mapSource;
+    private static AbstractTileProvider tileProvider;
 
     protected Settings() {
         throw new InstantiationError();
@@ -1112,6 +1115,26 @@ public class Settings {
             putString(R.string.pref_mapsource, newMapSource.getId());
             // cache the value
             mapSource = newMapSource;
+        }
+    }
+
+    @NonNull
+    public static synchronized AbstractTileProvider getTileProvider() {
+        if (tileProvider != null) {
+            return tileProvider;
+        }
+        final String tileProviderId = getString(R.string.pref_tileprovider, null);
+        tileProvider = TileProviderFactory.getTileProvider(tileProviderId);
+        if (tileProvider == null /* || !tileProvider.isAvailable() */) {
+            tileProvider = TileProviderFactory.getAnyTileProvider();
+        }
+        return tileProvider;
+    }
+
+    public static synchronized void setTileProvider(final AbstractTileProvider newTileProvider) {
+        if (newTileProvider != null /* && newTileProvider.isAvailable() */) {
+            putString(R.string.pref_tileprovider, newTileProvider.getId());
+            tileProvider = newTileProvider;
         }
     }
 

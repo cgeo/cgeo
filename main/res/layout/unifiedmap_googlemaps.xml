@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    tools:context=".maps.google.v2.GoogleMapProvider" >
+
+    <include layout="@layout/filter_sort_bar" />
+
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" >
+
+        <TextView
+            android:id="@+id/number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dip"
+            android:background="@drawable/icon_bcg"
+            android:ellipsize="end"
+            android:gravity="center_horizontal"
+            android:lines="1"
+            android:paddingLeft="5dip"
+            android:paddingRight="5dip"
+            android:scrollHorizontally="true"
+            android:textSize="@dimen/textSize_detailsSecondary"
+            android:visibility="gone"
+            android:maxLines="1" />
+
+        <!--
+        <com.google.android.gms.maps.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:apiKey="@string/maps_api2_key"
+            android:clickable="true"
+            android:focusable="true"
+            android:enabled="true"
+            android:keepScreenOn="true" />
+        -->
+
+        <fragment
+            android:id="@+id/mapViewGM"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".unifiedmap.UnifiedMapActivity"
+            android:name="com.google.android.gms.maps.SupportMapFragment" />
+
+        <include layout="@layout/map_distanceinfo" />
+        <include layout="@layout/map_settings_button" />
+        <include layout="@layout/map_progressbar" />
+
+    </RelativeLayout>
+
+</LinearLayout>
