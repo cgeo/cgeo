@@ -1998,11 +1998,6 @@
     <string name="individual_route_set_as_start_message">Asetetaanko tämä kohde reitin alkuun ja siirretäänkö kaikki sen jälkeen olevat reittipisteet nykyisen reitin kärkeen?</string>
     <!-- individual track -->
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
-    <string name="map_load_track_wait">Ladataan jälkeä/reittiä taustalla…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Jälki/reitti ladattu (%d reittipistettä)</item>
-        <item quantity="other">Jälki/reitti ladattu (%d reittipistettä)</item>
-    </plurals>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
     <string name="map_clear_track">Tyhjennä reitti/polku</string>
     <string name="map_clear_track_confirm">Poistetaanko reitti/polku \"%s\"?</string>
