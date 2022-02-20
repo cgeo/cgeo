@@ -23,7 +23,7 @@
 - Novinka: Předání aktuálních souřadnic kešky geocheckeru (pokud to geochecker podporuje)
 - Novinka: Barevné ikony atributů (po skupinách atributů)
 - Oprava: Problém s otevíráním obrázků z karty galerie v externích aplikacích na některých zařízeních Samsung
-- Fix: Missing log count (website change)
+- Oprava: chybějící počet logů (změna webové stránky)
 
 ### Ostatní
 - Novinka: Rychlé načítání geokódů z textu ve schránce při vyhledávání na hlavní obrazovce
@@ -38,8 +38,8 @@
 - Oprava: Odstranění opakovaných kontrol aktualizací pro dlaždice map/směrování s intervalem 0
 - Oprava: Optimalizace podpory automatického vyplňování hesel z externích aplikací pro ukládání hesel v nastaveních
 - Oprava: Povoleny kontextové popisky pro systémy Android ve verzi nižší než 8
-- Fix: Crash on long-tap on trackable code in trackable details
-- Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Oprava: pád při dlouhém stisku na trackovatelný kód v podrobnostech o trackovatelném předmětu
+- Oprava: nahrávání Konceptů (změna na webové stránce)
+- Přepracováno nastavení pro splnění aktuálních specifikací systému Android
+- Aktualizováno MapsWithMe API
 
