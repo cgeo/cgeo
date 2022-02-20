@@ -1094,6 +1094,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
     <string name="cache_delete_userdefined_waypoints_note">Σημείωση: Έχετε ενεργοποιήμενη την επιλογή \"σημεία ενδιαφέροντος από τις σημειωσεις\". Εάν το c:geo αναγνωρίσει συντεταγμένες στις προσωπικές σημειώσεις, θα δημιουργήσει αυτόματα σημεία ενδιαφέροντος από αυτές. Μπορείτε να απενεργοποιήσετε την επιλογή αυτή από την επεξεργασία της προσωπικής σημείωσης.</string>
     <string name="cache_delete_userdefined_waypoints_success">Διεγράφησαν σημεία διαδρομης του χρήστη</string>
+    <string name="cache_delete_generated_waypoints">Κατάργηση σημείων που ορίσθηκαν από τον χρήστη</string>
+    <string name="cache_delete_generated_waypoints_confirm">Κατάργηση όλων των σημείων που ορίσθηκαν από τον χρήστη;\n\nΤα σημεία θα σβηστούν οριστικά, δεν υπάρχει αναίρεση.</string>
+    <string name="cache_delete_generated_waypoints_success">Τα δημιουργημένα σημεία διαγράφηκαν</string>
     <string name="cache_offline_store">Αποθήκευση</string>
     <string name="cache_offline_stored">Αποθηκεύθηκε στην συσκευή</string>
     <string name="cache_offline_not_ready">Δεν είναι διαθέσιμο εκτός σύνδεσης</string>
@@ -1218,6 +1221,7 @@
     <string name="menu_caches">Διαχείριση κρυπτών</string>
     <string name="cache_menu_event">Προσθήκη στο ημερολόγιο</string>
     <string name="cache_menu_extract_waypoints">Εξαγωγή σημείων αναφοράς</string>
+    <string name="cache_menu_scan_calculated_waypoints">Σάρωση για τύπους σημείων</string>
     <string name="cache_menu_set_found">Ορισμός ως \'\'Βρέθηκε\'\'</string>
     <string name="cache_menu_set_DNF">Ορισμός ως \'\'Δεν Βρέθηκε\'\'</string>
     <string name="cache_menu_reset_foundstate">Επαναφορά σε \'\'Βρέθηκε\'\'</string>
@@ -1385,6 +1389,7 @@
     <string name="variables_titletext">Χρησιμοποιήστε αυτή τη σελίδα για να σημειώσετε τις τιμές και να κάνετε υπολογισμούς που απαιτούνται για αυτή την προσωρινή κρύπτη.</string>
     <string name="variables_scanlisting">Σάρωση καταχώρησεων</string>
     <string name="variables_scanlisting_choosepattern_title">Επιλέξτε μοτίβο εύρεσης</string>
+    <string name="variables_scanlisting_nopatternfound">Δεν βρέθηκε μοτίβο</string>
     <string name="variables_tidyup">Τακτοποίηση</string>
     <string name="variables_deleteall">Διαγραφή Όλων</string>
     <string name="variables_deleteall_confirm_text">Θέλετε πραγματικά να διαγράψετε όλες τις μεταβλητές για αυτήν την κρύπτη;</string>
@@ -1392,7 +1397,9 @@
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Λειτουργία οδηγού</string>
     <string name="calccoord_convert_to_plain">Μετατροπή σε απλή Συντεταγμένη</string>
+    <string name="calccoord_plain_tools_title">Απλά Εργαλεία</string>
     <string name="calccoord_remove_spaces">Αφαίρεση καινών</string>
+    <string name="calccoord_paste_from_clipboard">Επικόλληση από το πρόχειρο</string>
     <string name="calccoord_generate_title">Δημιουργία Σημείων Πορείας</string>
     <string name="calccoord_generate_showonmap">Εμφάνιση στο χάρτη</string>
     <string name="calccoord_generate_waypointnameprefix">Δημιουργήθηκε</string>
@@ -2062,11 +2069,6 @@
     <string name="individual_route_set_as_start_message">Να οριστεί αυτό το στοιχείο ως αρχή δρομολόγησης και να μετακινηθούν όλα τα επόμενα στοιχεία προς την κορυφή της τρέχουσας διαδρομής;</string>
     <!-- individual track -->
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
-    <string name="map_load_track_wait">Φορτωση διαδρομής στο παρασκήνιο…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Η διαδρομη φορτώθηκε (%d σημείο αναφοράς)</item>
-        <item quantity="other">Η διαδρομη φορτώθηκε (%d σημεία αναφοράς)</item>
-    </plurals>
     <string name="load_track_error">Σφάλμα κατά την φόρτωση της διαδρομής</string>
     <string name="map_clear_track">Εκκαθάριση διαδρομής</string>
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>
