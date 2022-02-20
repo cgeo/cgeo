@@ -1617,7 +1617,6 @@
     <string name="map_clear_individual_route_confirm">要從個別航線裡移除航點嗎</string>
     <!-- individual track -->
     <string name="map_load_track">從GPX載入航線</string>
-    <string name="map_load_track_wait">在背景載入航線</string>
     <!-- route/track commons -->
     <!-- distance units -->
     <!-- switch settings -->
