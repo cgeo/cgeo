@@ -1707,11 +1707,6 @@
     <string name="individual_route_set_as_start_message">Start ruten ved dette punkt og flyt alle følgende punkter til starten af denne rute?</string>
     <!-- individual track -->
     <string name="map_load_track">Indlæs spor/rute fra GPX</string>
-    <string name="map_load_track_wait">Indlæser spor/rute i baggrunden…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Spor/rute indlæst (%d rutepunkt)</item>
-        <item quantity="other">Spor/rute indlæst (%d rutepunkter)</item>
-    </plurals>
     <string name="load_track_error">Fejl ved indlæsning af spor/rute</string>
     <!-- route/track commons -->
     <!-- distance units -->
