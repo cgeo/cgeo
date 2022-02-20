@@ -1997,11 +1997,6 @@
     <string name="individual_route_set_as_start_message">Ange detta objekt som ruttstart och flytta alla efterföljande objekt till toppen av den aktuella rutten?</string>
     <!-- individual track -->
     <string name="map_load_track">Ladda spår/rutt från GPX</string>
-    <string name="map_load_track_wait">Laddar spår/rutt i bakgrunden…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Spår/rutt laddad (%d punkt)</item>
-        <item quantity="other">Spår/rutt laddad (%d punkter)</item>
-    </plurals>
     <string name="load_track_error">Fel uppstod när spåret/rutten laddades</string>
     <string name="map_clear_track">Rensa rutt/spår</string>
     <string name="map_clear_track_confirm">Vill du ta bort rutt/spår \"%s\"?</string>
