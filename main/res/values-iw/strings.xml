@@ -484,7 +484,6 @@
     <!-- individual routes -->
     <!-- individual track -->
     <string name="map_load_track">לטעון מסלול מ-GPX</string>
-    <string name="map_load_track_wait">טוען מסלול ברקע…</string>
     <string name="load_track_error">שגיאה בטעינת מסלול</string>
     <!-- route/track commons -->
     <!-- distance units -->
