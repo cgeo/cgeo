@@ -78,12 +78,15 @@ public class CalculatedCoordinateMigrator {
 
         private String migrationNotes;
 
+        /** used for test cases */
         public static WaypointMigrationData create(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Map<String, String> vars) {
             final WaypointMigrationData ccm = new WaypointMigrationData();
             ccm.type = type;
-            ccm.latPattern = latPattern;
-            ccm.lonPattern = lonPattern;
-            ccm.variables.putAll(vars);
+            ccm.latPattern = convertPattern(latPattern);
+            ccm.lonPattern = convertPattern(lonPattern);
+            for (Map.Entry<String, String> entry : vars.entrySet()) {
+                ccm.variables.put(entry.getKey(), convertPattern(entry.getValue()));
+            }
             ccm.createMigNotes();
 
             return ccm;
@@ -103,11 +106,11 @@ public class CalculatedCoordinateMigrator {
                 final MigrationCalculatedCoordinateType ccmType = MigrationCalculatedCoordinateType.fromMigration(json.optInt("format", 2));
                 ccm.type = ccmType.type;
                 if (ccm.type == CalculatedCoordinateType.PLAIN) {
-                    ccm.latPattern = json.optString("plainLat");
-                    ccm.lonPattern = json.optString("plainLon");
+                    ccm.latPattern = convertPattern(json.optString("plainLat"));
+                    ccm.lonPattern = convertPattern(json.optString("plainLon"));
                 } else {
-                    ccm.latPattern = "" + (char) json.optInt("latHemisphere") + parseButtonDataFromJson(json.optJSONArray("buttons"), 0, ccmType.latPattern);
-                    ccm.lonPattern = "" + (char) json.optInt("lonHemisphere") + parseButtonDataFromJson(json.optJSONArray("buttons"), 11, ccmType.lonPattern);
+                    ccm.latPattern = convertPattern("" + (char) json.optInt("latHemisphere") + parseButtonDataFromJson(json.optJSONArray("buttons"), 0, ccmType.latPattern));
+                    ccm.lonPattern = convertPattern("" + (char) json.optInt("lonHemisphere") + parseButtonDataFromJson(json.optJSONArray("buttons"), 11, ccmType.lonPattern));
                 }
 
                 addVariablesFromJson(ccm.variables, json.optJSONArray("equations"));
@@ -120,6 +123,13 @@ public class CalculatedCoordinateMigrator {
             }
 
             return ccm;
+        }
+
+        private static String convertPattern(final String degreePattern) {
+            if (degreePattern == null) {
+                return "";
+            }
+            return degreePattern.trim().replace('[', '(').replace(']', ')');
         }
 
         private void createMigNotes() {
@@ -236,7 +246,7 @@ public class CalculatedCoordinateMigrator {
                 try {
                     final JSONObject jo = ja.getJSONObject(i);
                     final String varName = "" + ((char) jo.getInt("name"));
-                    final String formula = jo.getString("expression");
+                    final String formula = convertPattern(jo.getString("expression"));
                     varMap.put(varName, formula);
                 } catch (JSONException je) {
                     //do nothing
