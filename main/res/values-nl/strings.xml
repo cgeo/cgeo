@@ -1998,11 +1998,6 @@
     <string name="individual_route_set_as_start_message">Stel dit item in als routebegin en verplaats alle volgende items naar de top van de huidige route?</string>
     <!-- individual track -->
     <string name="map_load_track">Spoor/route laden vanuit GPX</string>
-    <string name="map_load_track_wait">Spoor/route op achtergrond laden…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Spoor/route geladen (%d spoorpunten)</item>
-        <item quantity="other">Spoor/route geladen (%d spoorpunten)</item>
-    </plurals>
     <string name="load_track_error">Fout bij het laden van spoor/route</string>
     <string name="map_clear_track">Wis route/track</string>
     <string name="map_clear_track_confirm">Wil je route/track \"%s\" verwijderen?</string>
