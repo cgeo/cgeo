@@ -2003,6 +2003,7 @@
     <string name="map_clear_track_confirm">Wil je route/track \"%s\" verwijderen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
+    <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="center_on_route_track">Centreer op route/track</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
