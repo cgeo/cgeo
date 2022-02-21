@@ -1100,6 +1100,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Verwijder alle gebruiker gedefinieerde waypoints van deze cache?\n\nWaypoints worden definitief verwijderd, dit kan niet ongedaan worden gemaakt.</string>
     <string name="cache_delete_userdefined_waypoints_note">Opmerking: Je hebt \"waypoints van notitie\" ingeschakeld. Als er coördinaten in je persoonlijke notitie worden herkend door c:geo, worden hiervan automatisch waypoints aangemaakt. Je kunt dit uitschakelen in het persoonlijke notitiebewerkingsvenster.</string>
     <string name="cache_delete_userdefined_waypoints_success">Gebruiker gedefinieerde waypoints verwijderd</string>
+    <string name="cache_delete_generated_waypoints">Gegenereerde waypoints verwijderen</string>
+    <string name="cache_delete_generated_waypoints_confirm">Alle gegenereerde waypoints uit deze cache verwijderen?\n\nWaypoints worden onmiddellijk verwijderd, dit kan niet ongedaan worden gemaakt.</string>
+    <string name="cache_delete_generated_waypoints_success">Gegenereerde waypoints verwijderd</string>
     <string name="cache_offline_store">Opslaan</string>
     <string name="cache_offline_stored">Opgeslagen in apparaat</string>
     <string name="cache_offline_not_ready">Niet gereed voor\n offline gebruik</string>
@@ -1224,6 +1227,7 @@
     <string name="menu_caches">Caches beheren</string>
     <string name="cache_menu_event">Toevoegen aan kalender</string>
     <string name="cache_menu_extract_waypoints">Exporteer waypoints</string>
+    <string name="cache_menu_scan_calculated_waypoints">Scan voor waypoint formules</string>
     <string name="cache_menu_set_found">Instellen als gevonden</string>
     <string name="cache_menu_set_DNF">Instellen als niet gevonden</string>
     <string name="cache_menu_reset_foundstate">Gevonden status resetten</string>
@@ -1391,14 +1395,19 @@
     <string name="variables_titletext">Gebruik deze pagina om waardes te noteren en om berekeningen te doen die nodig zijn voor deze cache.</string>
     <string name="variables_scanlisting">Lijst scannen</string>
     <string name="variables_scanlisting_choosepattern_title">Gevonden patroon kiezen</string>
+    <string name="variables_scanlisting_nopatternfound">Geen patroon gevonden</string>
     <string name="variables_tidyup">Opschonen</string>
     <string name="variables_deleteall">Alles Verwijderen</string>
     <string name="variables_deleteall_confirm_text">Weet je zeker dat je alle variabelen voor deze cache wilt verwijderen?</string>
     <string name="variables_info">Help</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Begeleide modus</string>
+    <string name="calccoord_guided_edit">Tik op een cijfer om te bewerken</string>
+    <string name="calccoord_guided_value">Waarde</string>
     <string name="calccoord_convert_to_plain">Converteren naar gewoon coördinaat</string>
+    <string name="calccoord_plain_tools_title">Eenvoudig gereedschap</string>
     <string name="calccoord_remove_spaces">Spaties Verwijderen</string>
+    <string name="calccoord_paste_from_clipboard">Plakken vanaf klembord</string>
     <string name="calccoord_generate_title">Waypoints Genereren</string>
     <string name="calccoord_generate_showonmap">Toon op Kaart</string>
     <string name="calccoord_generate_waypointnameprefix">Gegenereerd</string>
@@ -1435,6 +1444,11 @@
     <string name="formula_function_group_complexstring">Complexe Tekenreeks</string>
     <string name="formula_error_unexpectedtoken">Verwacht \'%1$s\'</string>
     <string name="formula_error_wrongparamcount">Verkeerde aantal parameters, verwacht %1$s-%2$s, ontvangen %3$s</string>
+    <string name="formula_error_wrongtype">Verkeerd type, verwacht \'%1$s\', ontving \'%2$s\' van type \'%3$s\'</string>
+    <string name="formula_error_missingvarvalue">Missend: %1$s</string>
+    <string name="formula_error_cyclicdependency">Cyclus: %1$s</string>
+    <string name="formula_error_empty">Lege Formule</string>
+    <string name="formula_error_other">Fout: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Post deze vondst op Twitter</string>
     <!-- map -->
@@ -1486,6 +1500,11 @@
     <string name="map_settings_cache_filter_too_complex_message">Het huidige cachefilter is te complex om hier extra opties op toe te passen. Meestal betekent dit dat het cachefilter NIET of OF uitdrukkingen bevat in plaats van eenvoudige EN logica.</string>
     <string name="map_theme_legend">Thema legenda</string>
     <string name="map_theme_legend_info">Tik op de categorietitel om de categorie te openen/sluiten. Druk lang op een symbool voor korte info over dat symbool. Tik op het info pictogram om online een gedetailleerde legenda te bekijken.</string>
+    <string name="google_maps_style_default">Standaard</string>
+    <string name="google_maps_style_night">Nacht</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Hoog contrast</string>
+    <string name="google_maps_style_auto">Apparaat thema (Dag/Nacht)</string>
     <!-- search -->
     <string name="geo_search_label">Zoek caches in de omgeving</string>
     <string name="search_bar_hint">Caches/trackables zoeken</string>
@@ -2064,6 +2083,7 @@
     <string name="map_clear_track_confirm">Wil je route/track \"%s\" verwijderen?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Routes / tracks opties</string>
+    <string name="routes_tracks_menu">Routes / Tracks</string>
     <string name="center_on_route_track">Centreer op route/track</string>
     <string name="unload_route_track">Route/track ontladen</string>
     <string name="route">Route</string>
