@@ -347,7 +347,14 @@ public class VariableListView extends LinearLayout {
         }
 
         private static TextParam getFunctionDisplayString(final FormulaFunction f) {
-            return TextParam.text(f.getUserDisplayableString());
+            //find the shortest abbrevation
+            String fAbbr = f.getMainName();
+            for (String name : f.getNames()) {
+                if (name.length() < fAbbr.length()) {
+                    fAbbr = name;
+                }
+            }
+            return TextParam.text(f.getUserDisplayableString() + " (" + fAbbr + ")");
         }
 
         private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {

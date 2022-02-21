@@ -28,13 +28,13 @@ public enum FormulaFunction {
         singleValueNumericFunction(p -> Math.tan(Math.toRadians(p)))),
     ABS("abs", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_abs, "Absolute Value", null, 0,
         singleValueNumericFunction(Math::abs)),
-    ROUND("round", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_round, "Round", null, 0,
+    ROUND(new String[]{"round", "rd"}, FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_round, "Round", null, 0,
         p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), p.getAsInt(1, 0)))),
 
     IF("if", FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_if, "If", null, 0,
         minMaxParamFunction(2, -1, FormulaUtils::ifFunction)),
 
-    LENGTH("length", FunctionGroup.SIMPLE_STRING, R.string.formula_function_length, "String Length", "''", 1,
+    LENGTH(new String[]{"length", "len"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_length, "String Length", "''", 1,
         singleValueStringFunction(String::length)),
     SUBSTRING(new String[]{"substring", "sub"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_substring, "Substring", "'';0;1", 1,
         minMaxParamFunction(1, 3, p -> FormulaUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
