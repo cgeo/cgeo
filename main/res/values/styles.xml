@@ -269,6 +269,7 @@
         <item name="colorOnSurface">@color/colorText</item>
         <item name="android:gravity">top|left</item>
         <item name="android:textSize">@dimen/textSize_textinputPrimary</item>
+        <item name="android:imeOptions">flagNoFullscreen</item>>
     </style>
 
     <!-- edittext (TODO: should at some point be completely replaced by textinput) -->
