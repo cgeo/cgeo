@@ -1993,11 +1993,6 @@
     <string name="individual_route_set_as_start_message">Να οριστεί αυτό το στοιχείο ως αρχή δρομολόγησης και να μετακινηθούν όλα τα επόμενα στοιχεία προς την κορυφή της τρέχουσας διαδρομής;</string>
     <!-- individual track -->
     <string name="map_load_track">Φορτωση διαδρομής απο αρχείο GPX</string>
-    <string name="map_load_track_wait">Φορτωση διαδρομής στο παρασκήνιο…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Η διαδρομη φορτώθηκε (%d σημείο αναφοράς)</item>
-        <item quantity="other">Η διαδρομη φορτώθηκε (%d σημεία αναφοράς)</item>
-    </plurals>
     <string name="load_track_error">Σφάλμα κατά την φόρτωση της διαδρομής</string>
     <string name="map_clear_track">Εκκαθάριση διαδρομής</string>
     <string name="map_clear_track_confirm">Θέλετε να αφαιρέσετε διαδρομή \"%s\"?</string>

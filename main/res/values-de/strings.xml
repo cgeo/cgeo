@@ -1998,11 +1998,6 @@
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <!-- individual track -->
     <string name="map_load_track">Lade Track/Route aus GPX</string>
-    <string name="map_load_track_wait">Lade Track/Route im Hintergrund…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Track/Route geladen (%d Wegpunkt)</item>
-        <item quantity="other">Track/Route geladen (%d Wegpunkte)</item>
-    </plurals>
     <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
     <string name="map_clear_track">Route/Track löschen</string>
     <string name="map_clear_track_confirm">Möchtest du Route/Track \"%s\" entfernen?</string>

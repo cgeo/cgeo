@@ -1434,7 +1434,6 @@
     <string name="route_item_not_yet_loaded">Елемент маршруту ще не завантажений</string>
     <!-- individual track -->
     <string name="map_load_track">Завантажувати маршрут/маршрут від GPX</string>
-    <string name="map_load_track_wait">Завантаження треку/маршруту у фоновому режимі…</string>
     <string name="load_track_error">Помилка при завантаженні маршруту/маршруту</string>
     <!-- route/track commons -->
     <!-- distance units -->

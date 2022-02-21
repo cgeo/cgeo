@@ -1880,11 +1880,6 @@
     <string name="individual_route_set_as_start_title">Sett som rutestart</string>
     <!-- individual track -->
     <string name="map_load_track">Last inn spor/rute fra GPX</string>
-    <string name="map_load_track_wait">Laster inn spor/rute i bakgrunnen…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Spor/rute lastet (%d sporpunkt)</item>
-        <item quantity="other">Spor/rute lastet (%d sporpunkter)</item>
-    </plurals>
     <string name="load_track_error">Feil ved lasting av spor/rute</string>
     <!-- route/track commons -->
     <!-- distance units -->

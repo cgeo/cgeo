@@ -333,7 +333,7 @@
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
     <string name="any_button">Přejít</string>
-    <string name="unknown_scan">Ve výsledku skenu nenalezen žádný geokód.</string>
+    <string name="unknown_scan">Ve výsledku vyhledávání nenalezen žádný geokód.</string>
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>
     <string name="caches_more_caches">Načíst další kešky</string>
@@ -790,6 +790,7 @@
         <item>Tmavý</item>
     </string-array>
     <string name="init_wallpaper">Tapeta</string>
+    <string name="init_summary_wallpaper">Zobrazit tapetu zařízení jako pozadí domovské obrazovky</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Vytvořit zálohu</string>
     <string name="init_backup_summary">Vezměte prosím na vědomí, že tato funkce může zálohovat kešky, trasové body &amp; nastavení, ale žádné obrázky kešek. \nAby bylo možné obnovit data i po ztrátě telefonu, záložní soubory by měly být zkopírovány do nezávislého umístění.</string>
@@ -1408,6 +1409,7 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Živá mapa</string>
+    <string name="map_offline">Offline mapa</string>
     <string name="map_view_map">Typ mapy…</string>
     <string name="map_rotation">Otáčení mapy</string>
     <string name="map_dot_mode">Použít kompaktní ikony</string>
@@ -2052,18 +2054,12 @@
     <string name="individual_route_set_as_start_message">Nastavit tuto položku jako začátek trasy a přesunout všechny následující položky na začátek aktuální trasy?</string>
     <!-- individual track -->
     <string name="map_load_track">Načíst stopu/trasu z GPX</string>
-    <string name="map_load_track_wait">Načítání stopy/trasy na pozadí…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Stopa/trasa načtena (%d bod trasy)</item>
-        <item quantity="few">Stopa/trasa načtena (%d body trasy)</item>
-        <item quantity="many">Stopa/trasa načtena (%d body trasy)</item>
-        <item quantity="other">Stopa/trasa načtena (%d bodů trasy)</item>
-    </plurals>
     <string name="load_track_error">Chyba při načítání stopy/trasy</string>
     <string name="map_clear_track">Vymazat trasu/stopu</string>
     <string name="map_clear_track_confirm">Chcete odstranit trasu/stopu \"%s\"?</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">Možnosti tras / stop</string>
+    <string name="routes_tracks_menu">Trasy / stopy</string>
     <string name="center_on_route_track">Vycentrovat na trasu/stopu</string>
     <string name="unload_route_track">Zrušit trasu/stopu</string>
     <string name="route">Trasa</string>
@@ -2222,6 +2218,7 @@
     <string name="back">Zpět</string>
     <string name="later">Později</string>
     <string name="cancel">Zrušit</string>
+    <string name="ok">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Vybrat vše</string>
     <string name="touch_again_to_exit">Pro ukončení prosím znovu klepněte</string>

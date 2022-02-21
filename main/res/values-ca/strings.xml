@@ -1999,11 +1999,6 @@
     <string name="individual_route_set_as_start_message">Voleu definir aquest element com a inici de ruta i moure tots els elements posteriors a la part superior de la ruta actual?</string>
     <!-- individual track -->
     <string name="map_load_track">Carrega track/ruta del GPX</string>
-    <string name="map_load_track_wait">S\'està carregant el track / ruta en segon pla…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Carregada Track/ruta (%dpunt track)</item>
-        <item quantity="other">Carregada Track/ruta (%dPunts track)</item>
-    </plurals>
     <string name="load_track_error">S\'ha produït un error en carregar el track/ruta</string>
     <string name="map_clear_track">Neteja la ruta/track</string>
     <string name="map_clear_track_confirm">Voleu eliminar la ruta/track \"%s\"?</string>
