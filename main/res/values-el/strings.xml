@@ -1396,6 +1396,8 @@
     <string name="variables_info">Βοήθεια</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Λειτουργία οδηγού</string>
+    <string name="calccoord_guided_edit">Πατήστε ένα ψηφίο για επεξεργασία</string>
+    <string name="calccoord_guided_value">Τιμή</string>
     <string name="calccoord_convert_to_plain">Μετατροπή σε απλή Συντεταγμένη</string>
     <string name="calccoord_plain_tools_title">Απλά Εργαλεία</string>
     <string name="calccoord_remove_spaces">Αφαίρεση καινών</string>
