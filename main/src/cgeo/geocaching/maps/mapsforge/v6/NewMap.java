@@ -250,8 +250,12 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
             followMyLocation = mapOptions.mapState.followsMyLocation();
         } else {
+            if (mapOptions.mapState != null) {
+                followMyLocation = mapOptions.mapState.followsMyLocation();
+            } else {
+                followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
+            }
             individualRoute = null;
-            followMyLocation = followMyLocation && mapOptions.mapMode == MapMode.LIVE;
             proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
         if (null != proximityNotification) {
