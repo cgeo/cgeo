@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Partenza percorso</string>
     <string name="wp_waypoint">Punto di riferimento</string>
     <string name="wp_original">Coordinate originali</string>
+    <string name="wp_generated">Generato</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Finale</string>
     <string name="wpnew_stage">Fase</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Marcatore</string>
     <string name="wpnew_original">Originale</string>
+    <string name="wpnew_generated">Generato</string>
     <!-- logs -->
     <string name="log_found">Trovato</string>
     <string name="log_dnf">Non trovato (DNF)</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Pubblicazione immagini…</string>
     <string name="log_posting_generic_trackable">Sto pubblicando %1$s %2$d/%3$d</string>
     <string name="log_clear">Azzera</string>
+    <string name="log_templates">Trovato: modello di log…</string>
     <string name="log_post_not_possible">Download dei dati in corso…\nRiprovare tra alcuni secondi o controllare la connessione a internet.</string>
     <string name="log_date_future_not_allowed">Non sono ammesse date future per i log.</string>
     <string name="log_add">Aggiungi</string>
@@ -340,6 +343,10 @@
     <string name="caches_more_caches_no">Nessun altro cache</string>
     <string name="caches_more_caches_loading">Caricamento dei cache…</string>
     <string name="caches_more_caches_currently">attualmente</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Carica il prossimo cache %1$d</item>
+        <item quantity="other">Carica i prossimi %1$d cache</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Carica i (%1$d / %2$d) cache rimanenti</string>
     <string name="caches_downloading">Download cache in corso…\nETA: </string>
     <string name="caches_eta_ltm">Meno di un minuto</string>
@@ -1093,6 +1100,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Rimuovere tutti i waypoint definiti dall\'utente di questa cache?\n\nWaypoints verranno eliminati immediatamente, non puoi annullare.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: è abilitata la funzione \"Estrazione Waypoint\". Se hai coordinate nelle tue note personali riconosciute da c:geo, i waypoint verranno ricreati automaticamente. Puoi disabilitare questo nella finestra di modifica delle note personali.</string>
     <string name="cache_delete_userdefined_waypoints_success">waypoint definiti dall\'utente cancellati</string>
+    <string name="cache_delete_generated_waypoints">Rimuovi waypoint generati</string>
+    <string name="cache_delete_generated_waypoints_confirm">Rimuovere tutti i waypoint generati da questo cache?\n\nWaypoints verranno eliminati immediatamente, non è possibile annullare.</string>
+    <string name="cache_delete_generated_waypoints_success">waypoint cancellati</string>
     <string name="cache_offline_store">Salva</string>
     <string name="cache_offline_stored">Salvato nel dispositivo</string>
     <string name="cache_offline_not_ready">Non disponibile offline</string>
@@ -1217,6 +1227,7 @@
     <string name="menu_caches">Gestisci i cache</string>
     <string name="cache_menu_event">Aggiungi al calendario</string>
     <string name="cache_menu_extract_waypoints">Estrazione dei waypoint</string>
+    <string name="cache_menu_scan_calculated_waypoints">Scansiona per le formule waypoint</string>
     <string name="cache_menu_set_found">Imposta come trovato</string>
     <string name="cache_menu_set_DNF">Imposta come non trovato</string>
     <string name="cache_menu_reset_foundstate">Resetta lo stato trovato</string>
@@ -1340,6 +1351,7 @@
     <string name="waypoint_cache_coordinates">Coordinate cache</string>
     <string name="waypoint_calculated_coordinates">Coordinate calcolate</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Calcola coordinate</string>
     <string name="waypoint_custom">Personalizzato</string>
     <string name="waypoint_my_coordinates">Coordinate attuali</string>
     <string name="waypoint_bearing">Angolo in gradi</string>
@@ -1383,14 +1395,19 @@
     <string name="variables_titletext">Usa questa pagina per annotare i valori e fare i calcoli necessari per questa cache.</string>
     <string name="variables_scanlisting">Scansiona elenco</string>
     <string name="variables_scanlisting_choosepattern_title">Seleziona il motivo trovato</string>
+    <string name="variables_scanlisting_nopatternfound">Pattern non trovato</string>
     <string name="variables_tidyup">Riordina</string>
     <string name="variables_deleteall">Elimina tutto</string>
     <string name="variables_deleteall_confirm_text">Vuoi veramente cancellare tutte le variabili per questo cache?</string>
     <string name="variables_info">Aiuto</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Modalità Guidata</string>
+    <string name="calccoord_guided_edit">Tocca una cifra per modificare</string>
+    <string name="calccoord_guided_value">Valore</string>
     <string name="calccoord_convert_to_plain">Converti in semplici coordinate</string>
+    <string name="calccoord_plain_tools_title">Strumenti Semplici</string>
     <string name="calccoord_remove_spaces">Rimuovi Spazi</string>
+    <string name="calccoord_paste_from_clipboard">Incolla dagli appunti</string>
     <string name="calccoord_generate_title">Genera Waypoint</string>
     <string name="calccoord_generate_showonmap">Mostra sulla Mappa</string>
     <string name="calccoord_generate_waypointnameprefix">Generato</string>
@@ -1430,12 +1447,14 @@
     <string name="formula_error_wrongtype">Tipo errato, atteso \'%1$s\', ottenuto \'%2$s\' di tipo \'%3$s\'</string>
     <string name="formula_error_missingvarvalue">Mancante: %1$s</string>
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
+    <string name="formula_error_empty">Formula Vuota</string>
     <string name="formula_error_other">Errore: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
     <!-- map -->
     <string name="map_map">Mappa</string>
     <string name="map_live">Mappa Live</string>
+    <string name="map_offline">Mappa offline</string>
     <string name="map_view_map">Scegli mappa</string>
     <string name="map_rotation">Rotazione mappa</string>
     <string name="map_dot_mode">Usa icone compatte</string>
@@ -1481,6 +1500,11 @@
     <string name="map_settings_cache_filter_too_complex_message">Il filtro cache attuale è troppo complesso per applicare opzioni aggiuntive qui. Di solito questo significa che il filtro cache contiene espressioni NOT oppure OR invece di semplice logica AND.</string>
     <string name="map_theme_legend">Legenda del tema</string>
     <string name="map_theme_legend_info">Tocca il titolo della categoria per aprire/chiudere la categoria. Tocca a lungo un simbolo per avere brevi informazioni su quel simbolo. Tocca l\'icona delle informazioni per visitare una leggenda dettagliata online.</string>
+    <string name="google_maps_style_default">Predefinito</string>
+    <string name="google_maps_style_night">Notte</string>
+    <string name="google_maps_style_retro">Stile Retrò</string>
+    <string name="google_maps_style_contrast">Contrasto Elevato</string>
+    <string name="google_maps_style_auto">Tema del dispositivo (giorno/notte)</string>
     <!-- search -->
     <string name="geo_search_label">Cerca cache nelle vicinanze</string>
     <string name="search_bar_hint">Cerca caches/trackables</string>
@@ -2224,9 +2248,11 @@
     <string name="touch_again_to_exit">Tocca di nuovo per uscire</string>
     <!-- render theme legend: category "areas" -->
     <string name="rtl_category_areas">Aree</string>
+    <string name="rtl_fell_meadow">pendenza / prato</string>
     <string name="rtl_heath">Brughiera</string>
     <string name="rtl_marsh">palude</string>
     <string name="rtl_rock">roccia</string>
+    <string name="rtl_scree">ghiaione</string>
     <string name="rtl_scrub">boscaglia</string>
     <string name="rtl_wood_mixed">legno (misto)</string>
     <string name="rtl_wood_coniferous">legno (conifere)</string>
@@ -2244,6 +2270,7 @@
     <string name="rtl_cliff">scoglio</string>
     <string name="rtl_ridge">crinale</string>
     <string name="rtl_reef">barriera corallina</string>
+    <string name="rtl_dyke">diga</string>
     <string name="rtl_embankment">argine</string>
     <string name="rtl_beach">spiaggia</string>
     <string name="rtl_beach_gravel">spiaggia di ghiaia</string>
@@ -2286,6 +2313,7 @@
     <string name="rtl_mtb_S1">MTB S1</string>
     <string name="rtl_mtb_S2">MTB S2</string>
     <string name="rtl_mtb_S3">MTB S3</string>
+    <string name="rtl_mtb_S4">MTB S4</string>
     <string name="rtl_mtb_S56">MTB S5/6</string>
     <string name="rtl_uphill15">salita -15%</string>
     <string name="rtl_uphill20">salita -20%</string>
@@ -2301,9 +2329,12 @@
     <string name="rtl_bench">panchina</string>
     <string name="rtl_cairn">cumulo di pietre</string>
     <string name="rtl_drinking_water">acqua potabile</string>
+    <string name="rtl_guidepost">Cartello segnavia</string>
     <string name="rtl_info_board">bacheca informazioni</string>
     <string name="rtl_info_office">ufficio informazioni</string>
     <string name="rtl_info_terminal">terminal informazioni</string>
+    <string name="rtl_peak">Cima</string>
+    <string name="rtl_peak_cross">croce sulla cima</string>
     <string name="rtl_picnic_site">area picnic</string>
     <string name="rtl_playground">parco giochi</string>
     <string name="rtl_playground_private">parco giochi privato</string>
@@ -2314,6 +2345,7 @@
     <string name="rtl_telephone">telefono</string>
     <string name="rtl_toilets">toilet</string>
     <string name="rtl_volcano">vulcano</string>
+    <string name="rtl_adit_disused">posto in disuso</string>
     <string name="rtl_archaeological">archeologico</string>
     <string name="rtl_artwork">opera d\'arte</string>
     <string name="rtl_attraction">attrazione</string>
@@ -2335,6 +2367,8 @@
     <string name="rtl_stone_historic">pietra storica</string>
     <string name="rtl_theatre">teatro</string>
     <string name="rtl_water_well">pozzo</string>
+    <string name="rtl_wayside_cross">incrocio</string>
+    <string name="rtl_wayside_shrine">edicola votiva / santella</string>
     <string name="rtl_zoo">zoo</string>
     <string name="rtl_library">biblioteca</string>
     <string name="rtl_arts_centre">Centro d\'arte</string>
@@ -2345,6 +2379,7 @@
     <string name="rtl_townhall">municipio</string>
     <string name="rtl_courthouse">cortile</string>
     <string name="rtl_beach_resort">località balneare</string>
+    <string name="rtl_cliff_diving">scogliera a picco</string>
     <string name="rtl_climbing">arrampicata</string>
     <string name="rtl_climbing_adventure">avventura d\'arrampicata</string>
     <string name="rtl_free_flying">volo libero</string>
@@ -2362,8 +2397,11 @@
     <string name="rtl_tennis">tennis</string>
     <string name="rtl_via_ferrata">via ferrata</string>
     <string name="rtl_water_park">parco acquatico</string>
+    <string name="rtl_aerialway_station">stazione funivia</string>
     <string name="rtl_airport">aeroporto</string>
+    <string name="rtl_cable_car">funivia</string>
     <string name="rtl_chair_lift">seggiovia</string>
+    <string name="rtl_drag_lift">skilift/manovia</string>
     <string name="rtl_gondola">gondola</string>
     <string name="rtl_goods_lift">ascensore merci</string>
     <string name="rtl_helipad">eliporto</string>
@@ -2371,14 +2409,50 @@
     <string name="rtl_parking">parcheggio</string>
     <string name="rtl_parking_private">parcheggio privato</string>
     <string name="rtl_bicycle_parking">parcheggio per biciclette</string>
+    <string name="rtl_bicycle_rental">noleggio biciclette</string>
+    <string name="rtl_bicycle_shop">negozio di biciclette</string>
     <string name="rtl_car_rental">noleggio auto</string>
     <string name="rtl_car_sharing">car sharing</string>
     <string name="rtl_car_wash">autolavaggio</string>
+    <string name="rtl_car_shop">negozio di auto</string>
     <string name="rtl_fuel">carburante</string>
     <string name="rtl_ferry_terminal">terminal traghetto</string>
     <string name="rtl_alpine_hut">baita alpina</string>
+    <string name="rtl_alpine_hut_private">rifugio privato alpino</string>
+    <string name="rtl_alpine_hut_winter">rifugio alpino</string>
+    <string name="rtl_apartment">appartamento</string>
+    <string name="rtl_camp_site">campeggio</string>
+    <string name="rtl_caravan_site">sito caravan</string>
+    <string name="rtl_chalet">chalet</string>
+    <string name="rtl_hostel">ostello</string>
+    <string name="rtl_hotel">albergo</string>
+    <string name="rtl_shelter_basic_hut">campo base</string>
+    <string name="rtl_wilderness_hut">capanna rustica</string>
+    <string name="rtl_wilderness_hut_private">capanna rustica privata</string>
+    <string name="rtl_bar">bar</string>
+    <string name="rtl_biergarten">birreria all\'aperto</string>
+    <string name="rtl_cafe">caffè</string>
+    <string name="rtl_fastfood">fastfood</string>
+    <string name="rtl_ice_cream">gelati</string>
+    <string name="rtl_pub">pub</string>
+    <string name="rtl_restaurant">ristorante</string>
     <string name="rtl_bbq">BBQ</string>
     <string name="rtl_water_point">acqua</string>
+    <string name="rtl_atm">bancomat</string>
+    <string name="rtl_bakery">panetteria</string>
+    <string name="rtl_bank">banca</string>
+    <string name="rtl_beverages">bevande</string>
+    <string name="rtl_books">libri</string>
+    <string name="rtl_butcher">macellaio</string>
+    <string name="rtl_chemist">farmacia</string>
+    <string name="rtl_convenience">servizi</string>
+    <string name="rtl_doityourself">Fai-da-te</string>
+    <string name="rtl_farm_shop">negozio di fattoria</string>
+    <string name="rtl_laundry">lavanderia</string>
+    <string name="rtl_mall">Centro Commerciale</string>
+    <string name="rtl_marketplace">Mercato</string>
+    <string name="rtl_organic">organico</string>
+    <string name="rtl_postbox">Cassetta postale</string>
     <string name="rtl_postoffice">ufficio postale</string>
     <string name="rtl_sports_shop">negozio sportivo</string>
     <string name="rtl_supermarket">supermercato</string>
@@ -2394,6 +2468,7 @@
     <string name="rtl_pharmacy">farmacia</string>
     <string name="rtl_police">polizia</string>
     <string name="rtl_emergency_fire_hydrant">idrante antincendio</string>
+    <string name="rtl_emergency_suction_point">presa idrica di emergenza</string>
     <string name="rtl_adit">galleria</string>
     <string name="rtl_petroleum_well">pozzo petrolifero</string>
     <string name="rtl_power_coal">energia (carbone)</string>
@@ -2435,6 +2510,56 @@
     <string name="rtl_cave_entrance">entrata della grotta</string>
     <string name="rtl_cycle_barrier">barriera del ciclo</string>
     <string name="rtl_elevator">ascensore</string>
+    <string name="rtl_ford">Guado</string>
+    <string name="rtl_ford_small">piccolo guado</string>
+    <string name="rtl_gate">cancello</string>
+    <string name="rtl_gate_private">cancello privato</string>
+    <string name="rtl_geyser">Geyser</string>
+    <string name="rtl_hot_spring">Sorgente termale</string>
+    <string name="rtl_kissing_gate">cancello pedonale</string>
+    <string name="rtl_ladder">scale a pioli</string>
+    <string name="rtl_lift_gate">cancello sollevabile</string>
+    <string name="rtl_log">ceppo</string>
+    <string name="rtl_oneway">senso unico</string>
+    <string name="rtl_oneway_cycle">senso unico (biciclette)</string>
+    <string name="rtl_oneway_cycle_rev">senso unico (biciclette, verso opposto)</string>
+    <string name="rtl_oneway_rev">senso unico (verso opposto)</string>
+    <string name="rtl_peak_small">piccola cima</string>
+    <string name="rtl_rapids">rapide</string>
+    <string name="rtl_rungs">pioli</string>
+    <string name="rtl_saddle_0">sella 0°</string>
+    <string name="rtl_saddle_45">sella 45°</string>
+    <string name="rtl_saddle_90">sella 90°</string>
+    <string name="rtl_saddle_135">sella 135°</string>
+    <string name="rtl_safety_rope">fune di sicurezza</string>
+    <string name="rtl_stone">pietra</string>
+    <string name="rtl_traffic_signal">segnale stradale</string>
+    <string name="rtl_turnstile">Tornello</string>
+    <string name="rtl_viewpoint">Punto panoramico</string>
+    <string name="rtl_waterfall">cascata</string>
+    <string name="rtl_alp">alpe</string>
+    <string name="rtl_wetland">zona umida</string>
+    <string name="rtl_moor">brughiera</string>
+    <string name="rtl_coppice">bosco ceduo</string>
+    <string name="rtl_plantation">piantagione</string>
+    <string name="rtl_reed">canna</string>
+    <string name="rtl_mud">fango</string>
+    <string name="rtl_mudflat">distesa fangosa</string>
+    <string name="rtl_cemetery">cimitero</string>
+    <string name="rtl_cemetery_christian">cimitero cristiano</string>
+    <string name="rtl_cemetery_jewish">cimitero ebraico</string>
+    <string name="rtl_cemetery_muslim">cimitero mussulmano</string>
+    <string name="rtl_pedestrian_area">zona pedonale</string>
+    <string name="rtl_trading">commercio</string>
+    <string name="rtl_parking_restricted">parcheggio limitato</string>
+    <string name="rtl_prison">carcere</string>
+    <string name="rtl_corral">recinto</string>
+    <string name="rtl_riding_range">campo di equitazione</string>
+    <string name="rtl_allotment">allotment</string>
+    <string name="rtl_retention_reservoir">serbatoio idrico</string>
+    <string name="rtl_dump">fossa/discarica</string>
+    <string name="rtl_driving_range">campo di allenamento golf</string>
+    <string name="rtl_ruin">rovine</string>
     <string name="rtl_saline">salina</string>
     <string name="rtl_freeway">superstrada</string>
     <string name="rtl_freeway_similar">simile alla superstrada</string>
