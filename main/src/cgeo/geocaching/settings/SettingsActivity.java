@@ -125,6 +125,10 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         setResult(NO_RESTART_NEEDED);
     }
 
+    public BackupUtils getBackupUtils() {
+        return backupUtils;
+    }
+
     private void handleIntent(final Bundle savedInstanceState) {
         if (savedInstanceState == null) {
             final Intent intent = getIntent();
@@ -288,12 +292,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         if (contentStorageHelper.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
-        /* @todo - still needed here?
         if (backupUtils.onActivityResult(requestCode, resultCode, data)) {
             return;
         }
-        */
-
     }
 
     // search related extensions
