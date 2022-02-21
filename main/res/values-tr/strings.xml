@@ -1980,11 +1980,6 @@
     <string name="individual_route_set_as_start_message">Bu öğeyi rota başlangıcı olarak ayarlanıp, sonraki tüm öğeler mevcut rotanın üstüne taşınsın mı?</string>
     <!-- individual track -->
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>
-    <string name="map_load_track_wait">İz/rota arkaplanda yükleniyor…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">İz/rota yüklendi (%d iz noktası)</item>
-        <item quantity="other">İz/rota yüklendi (%d iz noktası)</item>
-    </plurals>
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
     <!-- route/track commons -->
     <string name="track">İz</string>

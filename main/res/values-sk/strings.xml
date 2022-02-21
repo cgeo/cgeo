@@ -2040,13 +2040,6 @@
     <string name="individual_route_set_as_start_message">Nastaviť túto položku ako začiatok trasy a presunúť všetky následné položky navrch aktuálnej trasy?</string>
     <!-- individual track -->
     <string name="map_load_track">Načítať stopu/trasu z GPX</string>
-    <string name="map_load_track_wait">Na pozadí sa načítava stopa/trasa…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Stopa/trasa načítaná (%d bod trasy)</item>
-        <item quantity="few">Stopa/trasa načítaná (%d body trasy)</item>
-        <item quantity="many">Stopa/trasa načítaná (%d bodov trasy)</item>
-        <item quantity="other">Stopa/trasa načítaná (%d bodov trasy)</item>
-    </plurals>
     <string name="load_track_error">Chyba pri načítaní stopy/trasy</string>
     <!-- route/track commons -->
     <!-- distance units -->

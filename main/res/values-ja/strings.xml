@@ -1955,10 +1955,6 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="individual_route_set_as_start_message">この場所をルートの開始点にして後続の場所を繰り上げますか?</string>
     <!-- individual track -->
     <string name="map_load_track">GPXファイルからトラック/ルートを読み込み</string>
-    <string name="map_load_track_wait">トラック/ルートをバックグラウンドで読み込み中…</string>
-    <plurals name="load_track_success">
-        <item quantity="other">トラック/ルート(%dトラックポイント)を読み込みました</item>
-    </plurals>
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>

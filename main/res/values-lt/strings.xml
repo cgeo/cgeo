@@ -1840,13 +1840,6 @@
     <string name="individual_route_set_as_start_message">Nustatyti šį elementą kaip maršruto pradžią ir perkelti visus vėlesnius elementus į dabartinio maršruto viršų?</string>
     <!-- individual track -->
     <string name="map_load_track">Įkelti GPX asmenini kelią/maršrutą</string>
-    <string name="map_load_track_wait">Įkeliamas asmeninis kelias/maršrutas fone…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Įkeltas asmeninis kelias/maršrutas (%d papildomas taškas)</item>
-        <item quantity="few">Įkeltas asmeninis kelias/maršrutas (%d papildomi taškai)</item>
-        <item quantity="many">Įkeltas asmeninis kelias/maršrutas (%d papildomi taškai)</item>
-        <item quantity="other">Įkeltas asmeninis kelias/maršrutas (%d papildomi taškai)</item>
-    </plurals>
     <string name="load_track_error">Klaida įkeliant asmenini kelią/maršrutą</string>
     <!-- route/track commons -->
     <!-- distance units -->

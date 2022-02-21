@@ -1100,6 +1100,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Alle benutzerdefinierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, es gibt keine Wiederherstellen-Funktion.</string>
     <string name="cache_delete_userdefined_waypoints_note">Hinweis: Du hast \"Wegpunkte aus der Notiz\" aktiviert. Wenn du Koordinaten in deiner persönlichen Notiz hast, werden diese von c:geo erkannt und Wegpunkte automatisch wiederhergestellt. Du kannst dies im Beareitungsfenster der persönlichen Notiz deaktivieren.</string>
     <string name="cache_delete_userdefined_waypoints_success">Benutzerdefinierte Wegpunkte gelöscht</string>
+    <string name="cache_delete_generated_waypoints">Generierte Wegpunkte löschen</string>
+    <string name="cache_delete_generated_waypoints_confirm">Alle generierten Wegpunkte dieses Caches löschen?\n\nWegpunkte werden direkt gelöscht, keine Wiederherstellung möglich.</string>
+    <string name="cache_delete_generated_waypoints_success">Generierte Wegpunkte gelöscht</string>
     <string name="cache_offline_store">Speichern</string>
     <string name="cache_offline_stored">Auf dem Gerät gespeichert</string>
     <string name="cache_offline_not_ready">Nicht offline verfügbar</string>
@@ -1224,6 +1227,7 @@
     <string name="menu_caches">Caches verwalten</string>
     <string name="cache_menu_event">Zum Kalender hinzufügen</string>
     <string name="cache_menu_extract_waypoints">Extrahiere Wegpunkte</string>
+    <string name="cache_menu_scan_calculated_waypoints">Suche nach Wegpunkt-Formeln</string>
     <string name="cache_menu_set_found">Als gefunden setzen</string>
     <string name="cache_menu_set_DNF">Als nicht gefunden setzen</string>
     <string name="cache_menu_reset_foundstate">Fundstatus zurücksetzen</string>
@@ -1391,14 +1395,19 @@
     <string name="variables_titletext">Nutze diese Seite, um Variablen zu notieren und Berechnungen durchzuführen, die für diesen Cache notwendig sind.</string>
     <string name="variables_scanlisting">Scanne Listing</string>
     <string name="variables_scanlisting_choosepattern_title">Muster auswählen</string>
+    <string name="variables_scanlisting_nopatternfound">Kein Muster gefunden</string>
     <string name="variables_tidyup">Säubern</string>
     <string name="variables_deleteall">Löschen</string>
     <string name="variables_deleteall_confirm_text">Möchtest du wirklich alle Variablen für diesen Cache löschen?</string>
     <string name="variables_info">Hilfe</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Geführter Modus</string>
+    <string name="calccoord_guided_edit">Zum Bearbeiten auf eine Ziffer tippen</string>
+    <string name="calccoord_guided_value">Wert</string>
     <string name="calccoord_convert_to_plain">In einfache Koordinate umwandeln</string>
+    <string name="calccoord_plain_tools_title">Einfache Werkzeuge</string>
     <string name="calccoord_remove_spaces">Leerzeichen entfernen</string>
+    <string name="calccoord_paste_from_clipboard">Aus Zwischenablage einfügen</string>
     <string name="calccoord_generate_title">Wegpunkte erzeugen</string>
     <string name="calccoord_generate_showonmap">Auf Karte anzeigen</string>
     <string name="calccoord_generate_waypointnameprefix">Erzeugt</string>
@@ -2069,11 +2078,6 @@
     <string name="individual_route_set_as_start_message">Dieses Element als Routenstart festlegen und alle nachfolgenden Elemente an die Spitze der aktuellen Route verschieben?</string>
     <!-- individual track -->
     <string name="map_load_track">Lade Track/Route aus GPX</string>
-    <string name="map_load_track_wait">Lade Track/Route im Hintergrund…</string>
-    <plurals name="load_track_success">
-        <item quantity="one">Track/Route geladen (%d Wegpunkt)</item>
-        <item quantity="other">Track/Route geladen (%d Wegpunkte)</item>
-    </plurals>
     <string name="load_track_error">Fehler beim Laden des Tracks/der Route</string>
     <string name="map_clear_track">Route/Track löschen</string>
     <string name="map_clear_track_confirm">Möchtest du Route/Track \"%s\" entfernen?</string>
