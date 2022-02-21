@@ -360,11 +360,13 @@ public class Geocache implements IWaypoint {
             logCounts = other.logCounts;
         }
 
+
+        final boolean takeOverUserModCoords = !hasUserModifiedCoords();
         if (userModifiedCoords == null) {
             userModifiedCoords = other.userModifiedCoords;
         }
 
-        if (!hasUserModifiedCoords() && other.hasUserModifiedCoords()) {
+        if (takeOverUserModCoords && other.hasUserModifiedCoords()) {
             final Waypoint original = other.getOriginalWaypoint();
             if (original != null) {
                 original.setCoords(getCoords());
