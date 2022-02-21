@@ -2,6 +2,7 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.BackupSeekbarPreference;
+import cgeo.geocaching.settings.SettingsActivity;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.utils.BackupUtils;
 
@@ -16,7 +17,7 @@ public class PreferenceBackupFragment extends BasePreferenceFragment {
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(R.xml.preferences_backup, rootKey);
 
-        final BackupUtils backupUtils = new BackupUtils(getActivity(), savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
+        final BackupUtils backupUtils = ((SettingsActivity) getActivity()).getBackupUtils();
 
         findPreference(getString(R.string.pref_fakekey_preference_startbackup)).setOnPreferenceClickListener(preference -> {
             backupUtils.backup(this::updateSummary);
