@@ -60,7 +60,7 @@
         android:layout_alignParentRight="true">
 
         <AutoCompleteTextView
-            style="@style/textinput_embedded"
+            style="@style/textinput_embedded_singleline"
             android:hint="@string/cache_filter_stringfilter_searchtext_hint" />
     </com.google.android.material.textfield.TextInputLayout>
 

@@ -62,7 +62,7 @@
             app:counterMaxLength="50">
             <EditText
                 android:id="@+id/caption"
-                style="@style/textinput_embedded"
+                style="@style/textinput_embedded_singleline"
                 android:layout_height="wrap_content"
                 android:hint="@string/log_image_caption"
                 android:autofillHints="@string/log_image_caption"

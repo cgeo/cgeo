@@ -56,12 +56,12 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/variable_formula"
-                    style="@style/textinput_edittext"
+                    style="@style/textinput_edittext_singleline"
                     android:gravity="center"
                     android:layout_width="0dp"
                     android:layout_weight="1">
 
-                    <EditText style="@style/textinput_embedded"
+                    <EditText style="@style/textinput_embedded_singleline"
                         android:id="@+id/variable_formula_text"
                         android:inputType="text|textNoSuggestions"
                         tools:ignore="LabelFor" />

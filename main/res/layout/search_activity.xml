@@ -56,9 +56,8 @@
             style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/geocode"
-                style="@style/textinput_embedded"
+                style="@style/textinput_embedded_singleline_go"
                 android:hint="@string/search_geo"
-                android:imeOptions="actionGo"
                 android:inputType="textVisiblePassword"
                 android:text="GC"
                 tools:ignore="HardcodedText" />
@@ -98,9 +97,8 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/address"
-                style="@style/textinput_embedded"
-                android:hint="@string/search_address"
-                android:imeOptions="actionGo" />
+                style="@style/textinput_embedded_singleline_go"
+                android:hint="@string/search_address" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -119,9 +117,8 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/keyword"
-                style="@style/textinput_embedded"
-                android:hint="@string/search_kw_prefill"
-                android:imeOptions="actionGo" />
+                style="@style/textinput_embedded_singleline_go"
+                android:hint="@string/search_kw_prefill" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -140,9 +137,8 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/owner"
-                style="@style/textinput_embedded"
-                android:hint="@string/search_hbu_prefill"
-                android:imeOptions="actionGo" />
+                style="@style/textinput_embedded_singleline_go"
+                android:hint="@string/search_hbu_prefill" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -161,9 +157,8 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/finder"
-                style="@style/textinput_embedded"
-                android:hint="@string/search_finder_prefill"
-                android:imeOptions="actionGo" />
+                style="@style/textinput_embedded_singleline_go"
+                android:hint="@string/search_finder_prefill" />
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
@@ -183,9 +178,8 @@
         <com.google.android.material.textfield.TextInputLayout style="@style/textinput_autocompletetextview">
             <AutoCompleteTextView
                 android:id="@+id/trackable"
-                style="@style/textinput_embedded"
+                style="@style/textinput_embedded_singleline_go"
                 android:hint="@string/search_tb_hint"
-                android:imeOptions="actionGo"
                 android:inputType="textVisiblePassword" />
         </com.google.android.material.textfield.TextInputLayout>
 

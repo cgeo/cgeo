@@ -60,7 +60,7 @@
                 android:layout_weight="1">
                 <AutoCompleteTextView
                     android:id="@+id/geocode"
-                    style="@style/textinput_embedded"
+                    style="@style/textinput_embedded_singleline"
                     android:hint="@string/cache_geocode"
                     android:inputType="textCapCharacters" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -78,7 +78,7 @@
             style="@style/textinput_edittext_singleline">
             <EditText
                 android:id="@+id/tracking"
-                style="@style/textinput_embedded"
+                style="@style/textinput_embedded_singleline"
                 android:hint="@string/trackable_code"
                 android:importantForAutofill="no"
                 android:inputType="textCapCharacters" />
