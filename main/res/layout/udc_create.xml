@@ -12,7 +12,7 @@
         app:endIconMode="clear_text">
         <EditText
             android:id="@+id/name"
-            style="@style/textinput_embedded"
+            style="@style/textinput_embedded_singleline"
             android:hint="@string/cache_name"
             android:inputType="text|none"
         android:textSize="@dimen/textSize_detailsPrimary" />

@@ -271,6 +271,14 @@
         <item name="android:textSize">@dimen/textSize_textinputPrimary</item>
     </style>
 
+    <style name="textinput_embedded_singleline" parent="textinput_embedded">
+        <item name="android:imeOptions">flagNoFullscreen</item>
+    </style>
+
+    <style name="textinput_embedded_singleline_go" parent="textinput_embedded_singleline">
+        <item name="android:imeOptions">flagNoFullscreen|actionGo</item>
+    </style>
+
     <!-- edittext (TODO: should at some point be completely replaced by textinput) -->
 
     <style name="edittext" parent="@android:style/Widget.EditText">

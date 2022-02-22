@@ -63,7 +63,7 @@
                 <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
                     <EditText
                         android:id="@+id/PlainLat"
-                        style="@style/textinput_embedded"
+                        style="@style/textinput_embedded_singleline"
                         android:inputType="text"
                         android:hint="@string/latitude" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -71,7 +71,7 @@
                 <com.google.android.material.textfield.TextInputLayout style="@style/textinput_edittext_singleline">
                     <EditText
                         android:id="@+id/PlainLon"
-                        style="@style/textinput_embedded"
+                        style="@style/textinput_embedded_singleline"
                         android:inputType="text"
                         android:hint="@string/longitude" />
                 </com.google.android.material.textfield.TextInputLayout>

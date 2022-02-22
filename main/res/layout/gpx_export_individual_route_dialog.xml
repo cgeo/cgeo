@@ -12,7 +12,7 @@
         app:endIconMode="clear_text">
         <EditText
             android:id="@+id/filename"
-            style="@style/textinput_embedded"
+            style="@style/textinput_embedded_singleline"
             android:inputType="textUri"
             android:hint="@string/filename_without_extension" />
     </com.google.android.material.textfield.TextInputLayout>
