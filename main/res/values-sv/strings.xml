@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Stigstart</string>
     <string name="wp_waypoint">Referensplats</string>
     <string name="wp_original">Ursprungliga koordinater</string>
+    <string name="wp_generated">Genererad</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Steg</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Markering</string>
     <string name="wpnew_original">Ursprunglig</string>
+    <string name="wpnew_generated">Genererad</string>
     <!-- logs -->
     <string name="log_found">Hittad</string>
     <string name="log_dnf">Hittade inte</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Skickar bilder…</string>
     <string name="log_posting_generic_trackable">Skickar %1$s %2$d/%3$d</string>
     <string name="log_clear">Rensa</string>
+    <string name="log_templates">Hittade det: Loggmall…</string>
     <string name="log_post_not_possible">Nerladdning av data pågår…\nFörsök igen om några sekunder eller kontrollera din Internetanslutning.</string>
     <string name="log_date_future_not_allowed">Framtida loggdatum är inte tillåtna.</string>
     <string name="log_add">Lägg till</string>
@@ -1096,6 +1099,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Ta bort alla användardefinierade waypoints i denna cache?\n\nWaypoints kommer att raderas omedelbart, och går inte att ångra.</string>
     <string name="cache_delete_userdefined_waypoints_note">Obs: Du har \"vägpunkter från anteckning\" aktiverat. Om du har koordinater i din personliga anteckning som känns igen av c:geo, kommer waypoints att återskapas för dem automatiskt. Du kan inaktivera detta i dialogrutan för redigering av personliga anteckningar.</string>
     <string name="cache_delete_userdefined_waypoints_success">Användardefinierade waypoints borttagna</string>
+    <string name="cache_delete_generated_waypoints">Ta bort genererade waypoints</string>
+    <string name="cache_delete_generated_waypoints_confirm">Ta bort alla genererade waypoints från denna cache?\n\nWaypoints kommer att tas bort omedelbart, det går inte att ångra.</string>
+    <string name="cache_delete_generated_waypoints_success">Genererade waypoints raderade</string>
     <string name="cache_offline_store">Spara</string>
     <string name="cache_offline_stored">Sparad i enheten</string>
     <string name="cache_offline_not_ready">Inte redo\nför användning offline</string>
@@ -1220,6 +1226,7 @@
     <string name="menu_caches">Hantera cacher</string>
     <string name="cache_menu_event">Lägg till i kalender</string>
     <string name="cache_menu_extract_waypoints">Extrahera punkter</string>
+    <string name="cache_menu_scan_calculated_waypoints">Sök efter vägpunkt-formler</string>
     <string name="cache_menu_set_found">Ange som hittad</string>
     <string name="cache_menu_set_DNF">Ange som inte hittad</string>
     <string name="cache_menu_reset_foundstate">Återställ hittad-status</string>
@@ -1343,6 +1350,7 @@
     <string name="waypoint_cache_coordinates">Cache koordinater</string>
     <string name="waypoint_calculated_coordinates">Beräknade koordinater</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Beräkna koordinat</string>
     <string name="waypoint_custom">Egen</string>
     <string name="waypoint_my_coordinates">Mina koordinater</string>
     <string name="waypoint_bearing">Riktning (°)</string>
@@ -1386,19 +1394,26 @@
     <string name="variables_titletext">Använd denna sida för att notera värden och göra beräkningar som krävs för denna cache.</string>
     <string name="variables_scanlisting">Skanna listning</string>
     <string name="variables_scanlisting_choosepattern_title">Välj funnet-mönster</string>
+    <string name="variables_scanlisting_nopatternfound">Inget mönster hittades</string>
     <string name="variables_tidyup">Städa upp</string>
     <string name="variables_deleteall">Radera allt</string>
     <string name="variables_deleteall_confirm_text">Vill du verkligen ta bort alla variabler för denna cache?</string>
     <string name="variables_info">Hjälp</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guide-läge</string>
+    <string name="calccoord_guided_edit">Tryck på en siffra för att redigera</string>
+    <string name="calccoord_guided_value">Värde</string>
     <string name="calccoord_convert_to_plain">Konvertera till vanlig koordinat</string>
+    <string name="calccoord_plain_tools_title">Enkla verktyg</string>
     <string name="calccoord_remove_spaces">Ta bort mellanslag</string>
+    <string name="calccoord_paste_from_clipboard">Klistra in från urklipp</string>
+    <string name="calccoord_generate_title">Generera waypoints</string>
     <string name="calccoord_generate_showonmap">Visa på karta</string>
     <string name="calccoord_generate_waypointnameprefix">genererad</string>
     <string name="calccoord_generate_error_novarwithrange">Ingen giltig variabel med intervall hittades</string>
     <string name="calccoord_generate_error_novalidgeopoints">Ingen kombination returnerade giltiga koordinater</string>
     <string name="calccoord_generate_error_nogeopointselected">Ingen koordinat vald</string>
+    <string name="calccoord_migrate_title">Migrera waypoints</string>
     <string name="calccoord_migrate_migrate">Migrera</string>
     <string name="calccoord_migrate_migrate_usernote_praefix">Migrerad från</string>
     <string name="calccoord_migrate_cancel">Avbryt</string>
@@ -1430,11 +1445,13 @@
     <string name="formula_error_missingvarvalue">Saknas: %1$s</string>
     <string name="formula_error_cyclicdependency">Cykel: %1$s</string>
     <string name="formula_error_empty">Tom formel</string>
+    <string name="formula_error_other">Fel: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">Skicka att du hittat till Twitter</string>
     <!-- map -->
     <string name="map_map">Karta</string>
     <string name="map_live">Live karta</string>
+    <string name="map_offline">Offline-kartor</string>
     <string name="map_view_map">Karttyp</string>
     <string name="map_rotation">Kartrotering</string>
     <string name="map_dot_mode">Använd kompakta ikoner</string>
@@ -1480,6 +1497,11 @@
     <string name="map_settings_cache_filter_too_complex_message">Det aktuella cachefiltret är för komplext för att lägga till ytterligare alternativ här. Vanligtvis innebär detta att cache-filtret innehåller NOT eller OR uttryck istället för enkel logik med AND.</string>
     <string name="map_theme_legend">Tematecken</string>
     <string name="map_theme_legend_info">Tryck på kategorins titel för att öppna/stänga kategorin. Långtryck på en symbol för kort information om den symbolen. Tryck på info-ikonen för att besöka en detaljerad legend online.</string>
+    <string name="google_maps_style_default">Standard</string>
+    <string name="google_maps_style_night">Natt</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Hög kontrast</string>
+    <string name="google_maps_style_auto">Enhetstema (dag/natt)</string>
     <!-- search -->
     <string name="geo_search_label">Sök cacher i närheten</string>
     <string name="search_bar_hint">Sök cacher/spårbara objekt</string>
