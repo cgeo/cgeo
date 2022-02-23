@@ -339,6 +339,10 @@
     <string name="caches_more_caches_no">Ikke flere cacher</string>
     <string name="caches_more_caches_loading">Indlæser cacher…</string>
     <string name="caches_more_caches_currently">indlæst</string>
+    <plurals name="caches_more_caches_next_x">
+        <item quantity="one">Indlæs næste %1$d cache</item>
+        <item quantity="other">Indlæs næste %1$d caches</item>
+    </plurals>
     <string name="caches_more_caches_remaining">Indlæs resterende caches (%1$d / %2$d)</string>
     <string name="caches_downloading">Indlæser cacher…\nETA: </string>
     <string name="caches_eta_ltm">Under et minut</string>
@@ -459,6 +463,7 @@
     <string name="cache_filter_owner">Cacheejer</string>
     <string name="cache_filter_difficulty">Sværhedsgrad</string>
     <string name="cache_filter_terrain">Terræn</string>
+    <string name="cache_filter_difficulty_terrain">Sværhedsgrad / Terræn</string>
     <string name="cache_filter_rating">Vurdering</string>
     <string name="cache_filter_status">Status</string>
     <string name="cache_filter_attributes">Cacheattributter</string>
@@ -496,6 +501,9 @@
     <string name="cache_filter_storage_save_title">Gem filter med navn</string>
     <string name="cache_filter_storage_save_confirm_title">Gem filter, overskriv</string>
     <string name="cache_filter_storage_save_confirm_message">Et filter med navnet \'%s\' og forskellige konfigurationer findes allerede. Overskriv det?</string>
+    <string name="cache_filter_stringfilter_matchcase">Respektér store/små bogstaver</string>
+    <string name="cache_filter_stringfilter_searchtext_hint">Søg Tekst</string>
+    <string name="cache_filter_stringfilter_info">Med indstillingen \'Mønster\' kan du bruge jokertegn * og ?. * repræsenterer nul eller flere tegn, ? repræsenterer et enkelt tegn. Eksempelvis vil mønsteret \'H?mburg*\' matche f.eks. \'Homburg\' eller \'Hamburg om natten\', men ikke \'A day in Hamburg\' eller \'Hahmburg\'</string>
     <string name="cache_filter_stringfilter_type_contains">Indeholder</string>
     <string name="cache_filter_stringfilter_type_does_not_contain">Indeholder ikke</string>
     <string name="cache_filter_stringfilter_type_starts_with">Begynder med</string>
@@ -503,6 +511,8 @@
     <string name="cache_filter_stringfilter_type_pattern">Mønster</string>
     <string name="cache_filter_datefilter_label_from">Fra:</string>
     <string name="cache_filter_datefilter_label_to">Til:</string>
+    <string name="cache_filter_checkboxlist_selectallnone">Vælg alle</string>
+    <string name="cache_filter_distance_coordinates">Koordinater</string>
     <string name="cache_filter_distance_use_current_position">Brug aktuel position</string>
     <string name="cache_filter_status_select_all">Alle</string>
     <string name="cache_filter_status_select_yes">Ja</string>
@@ -689,6 +699,7 @@
     <string name="init_brouterProfileCar">\"Bil\" profil</string>
     <string name="brouter_recalculating">Genberegner ruten i baggrunden…</string>
     <string name="init_summary_brouterShowBothDistances">Hvis navigation er aktiv, vises afstand i lige linje sammen men beregnet rutelængde.</string>
+    <string name="init_summary_dtMarkerOnCacheIcon">Vis en markering for Sværhedsgrad (til venstre) og Terræn (til højre) på cachemarkører i øverste højre hjørne (\"gemt\" markør flyttes til midten).</string>
     <string name="init_global_wp_extraction_disable">Deaktivér waypoint-udtræk</string>
     <string name="init_summary_customtabs_as_browser">Eksterne hjemmesider vil blive i c:geo-appen (kun muligt, hvis Chrome er installeret)</string>
     <string name="init_save_log_img">Lagring af billeder</string>
@@ -1214,11 +1225,15 @@
     <string name="search_coordinates_button">Søg fra koordinater</string>
     <string name="search_address">Adresse</string>
     <string name="search_address_button">Søg adresse</string>
+    <string name="search_geo_button">Søg efter geokode</string>
+    <string name="search_kw">Nøgleord</string>
     <string name="search_kw_prefill">Nøgleord</string>
     <string name="search_kw_button">Søg efter nøgleord</string>
     <string name="search_hbu">Udlagt af</string>
     <string name="search_hbu_prefill">Ejer</string>
     <string name="search_hbu_button">Søg ejer</string>
+    <string name="search_finder">Fundet af</string>
+    <string name="search_filter_button">Søg med filter</string>
     <string name="search_tb">Trackable</string>
     <string name="search_tb_hint">Trackable id</string>
     <string name="search_tb_button">Søg trackable</string>
