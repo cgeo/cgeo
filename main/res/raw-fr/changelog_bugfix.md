@@ -1,8 +1,8 @@
-- Fix: Keep position on switching from Google map to OpenStreetMap map
+- Correction : Conserver la position lors du passage de Google map à OpenStreetMap map
 - Fix: Rare crash in cache list attribute overview
-- Fix: Re-enable "Restore a different backup" function
+- Correction : Réactivation de la fonction "Restaurer une sauvegarde différente"
 - Change: Remove notifications on loading tracks
 
-## 2022.02.16 Bugfix Release
+## 2022.02.16 Version de maintenance
 
-- Fix: Rare crash on startup of cgeo
+- Correction : rare plantage au démarrage de cgeo
