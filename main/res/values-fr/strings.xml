@@ -1379,6 +1379,7 @@
     <!-- map -->
     <string name="map_map">Carte</string>
     <string name="map_live">Carte temps réel</string>
+    <string name="map_offline">Carte hors ligne</string>
     <string name="map_view_map">Afficher carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
@@ -2221,6 +2222,7 @@
     <string name="rtl_drinking_water">eau potable</string>
     <string name="rtl_info_board">panneau d\'informations</string>
     <string name="rtl_info_office">bureau d\'information</string>
+    <string name="rtl_peak">sommet</string>
     <string name="rtl_picnic_site">lieu de pique-nique</string>
     <string name="rtl_playground">terrain de jeux</string>
     <string name="rtl_playground_private">terrain de jeu privé</string>
@@ -2229,6 +2231,7 @@
     <string name="rtl_telephone">téléphone</string>
     <string name="rtl_toilets">toilettes</string>
     <string name="rtl_volcano">volcan</string>
+    <string name="rtl_archaeological">archéologique</string>
     <string name="rtl_castle">château</string>
     <string name="rtl_cinema">cinéma</string>
     <string name="rtl_cross">croix</string>
@@ -2253,6 +2256,7 @@
     <string name="rtl_climbing">escalade</string>
     <string name="rtl_golf">golf</string>
     <string name="rtl_miniature_golf">mini golf</string>
+    <string name="rtl_soccer">football</string>
     <string name="rtl_stadium">stade</string>
     <string name="rtl_swimming_area">zone de baignade</string>
     <string name="rtl_swimming_outdoor">natation en eau libre</string>
