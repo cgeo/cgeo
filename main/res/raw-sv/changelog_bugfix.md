@@ -1,3 +1,3 @@
-## 2022.02.16
+## 2022-02-16
 
-- Fix: Rare crash on startup of cgeo
+- Fix: Sällsynt krasch vid start av cgeo
