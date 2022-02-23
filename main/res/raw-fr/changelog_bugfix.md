@@ -1,3 +1,3 @@
-## 2022.02.16
+## 16/02/2022
 
-- Fix: Rare crash on startup of cgeo
+- Correction : rare plantage au démarrage de cgeo
