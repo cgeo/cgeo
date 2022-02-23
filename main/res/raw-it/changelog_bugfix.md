@@ -1,3 +1,3 @@
 ## 2022.02.16
 
-- Fix: Rare crash on startup of cgeo
+- Corretto: raro crash all'avvio di c:geo
