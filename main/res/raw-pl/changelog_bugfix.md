@@ -5,4 +5,4 @@
 
 ## 2022.02.16 Bugfix Release
 
-- Fix: Rare crash on startup of cgeo
+- Poprawka: Rzadkie awarie przy uruchamianiu cgeo
