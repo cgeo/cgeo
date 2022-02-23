@@ -478,10 +478,12 @@
     <string name="cache_filter_userdisplay_not">IKKE</string>
     <string name="cache_filter_storage_delete_button">Slett</string>
     <string name="cache_filter_storage_clear_button">Tøm</string>
+    <string name="cache_filter_storage_load_delete_title">Last eller slett et eksisterende filter</string>
     <string name="cache_filter_storage_select_title">Velg filter</string>
     <string name="cache_filter_storage_delete_title">Slett filter</string>
     <string name="cache_filter_storage_select_clear_title">Velg filter eller nullstill gjeldende filter</string>
     <string name="cache_filter_storage_load_delete_nofilter_message">Ingen filter er lagret ennå.</string>
+    <string name="cache_filter_storage_save_title">Lagre filter med navn</string>
     <string name="cache_filter_storage_save_confirm_title">Lagre filter med overskriving</string>
     <string name="cache_filter_stringfilter_matchcase">Skill store og små bokstaver</string>
     <string name="cache_filter_stringfilter_searchtext_hint">Søketekst</string>
@@ -603,6 +605,7 @@
     <string name="settings_title_waypoints">Veipunkter</string>
     <string name="settings_title_map_content">Kartinnhold</string>
     <string name="settings_title_map_behavior">Kartatferd</string>
+    <string name="settings_title_map_style">Kartstil</string>
     <string name="settings_title_data_dir">Mappe for geocache-data</string>
     <string name="settings_title_data_dir_usage">Mappen for geocache-data (%1$s brukt)</string>
     <string name="calculate_dataDir_title">Lagringsplass brukt på geocache-data</string>
@@ -726,6 +729,7 @@
         <item>Lyst</item>
         <item>Mørkt</item>
     </string-array>
+    <string name="init_wallpaper">Bakgrunnsbilde</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Opprett sikkerhetskopi</string>
     <string name="init_backup_summary">Vær oppmerksom på at denne funksjonen kan sikkerhetskopiere cacher, veipunkter &amp; innstillinger, men ingen bilder fra cacher. \nFor å kunne gjenopprette dataene selv etter å ha mistet mobilen din, bør sikkerhetskopiene kopieres til en uavhengig plassering.</string>
@@ -858,6 +862,8 @@
     <string name="init_maintenance">Vedlikehold</string>
     <string name="init_maintenance_directories_note">c:geo lagrer bilder og andre filer relatert til en cache i en dedikert mappe. I enkelte tilfeller (f.eks. når du importerer/eksporterer databasen) kan denne mappen inneholde foreldede filer som kan slettes her.</string>
     <string name="init_maintenance_directories">Slett utdaterte filer</string>
+    <string name="init_maintenance_start">Vedlikehold startet</string>
+    <string name="init_maintenance_finished">Vedlikehold ferdig</string>
     <string name="init_location">Geolokasjon</string>
     <string name="init_location_note">På enheter utstyrt med Google Play-tjenester, kan c:geo automatisk bruke en bedre geolocation-leverandør. Men dette forhindrer bruk av en ekstern BlueTooth GPS-mottaker.</string>
     <string name="init_location_googleplayservices">Bruk Google Play Services</string>
@@ -1058,6 +1064,8 @@
     <string name="cache_menu_preventWaypointsFromNote">Hindre veipunkter fra notat</string>
     <string name="cache_menu_allowWaypointExtraction">Tillat veipunkter fra notat</string>
     <string name="cache_personal_note_edit">Rediger</string>
+    <string name="cache_personal_note_storewaypoints">Legg til/oppdater veipunkter</string>
+    <string name="cache_personal_note_removewaypoints">Fjern veipunkter</string>
     <string name="cache_personal_note_removedwaypoints">Veipunkter fjernet</string>
     <string name="cache_personal_note_storewaypoints_success">Veipunkter ble lagt til personlig notat</string>
     <string name="cache_personal_note_storewaypoints_success_limited">Veipunkter ble lagt til notat, men måtte forkortes (maksimal personlig notat-størrelse: %1$d)</string>
@@ -1336,6 +1344,9 @@
     <string name="map_gm_autorotation_disable">Deaktivere kartrotasjon?\n\nDu kan aktivere det på nytt i menyen for kartrotasjon</string>
     <string name="quick_settings">Hurtiginnstillinger</string>
     <string name="quick_settings_info">Noen kartinnstillinger (Kartinnstillinger, skjul, ruting) er flyttet til det nye \"Hurtiginnstillinger\"-vinduet.\nDu kan åpne dette vinduet ved å bruke ikonet i nederst i midten av kartet.</string>
+    <string name="map_show_caches_title">Vis cacher:</string>
+    <string name="map_show_waypoints_title">Vis veipunkter:</string>
+    <string name="map_show_other_title">Vis annet:</string>
     <!-- search -->
     <string name="search_bar_hint">Søk etter cacher/sporbare</string>
     <string name="search_coordinates">Koordinater</string>
@@ -1720,11 +1731,15 @@
     <string name="attribute_blind_people_yes">Handikap: Blind</string>
     <string name="attribute_blind_people_no">Ikke handicap: Blind</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Utstyr</string>
     <string name="cat_type">Type</string>
     <string name="cat_location">Cacheplassering</string>
     <string name="cat_duration">Avstand / Varighet</string>
     <string name="cat_surrounding">Rundt cachen</string>
+    <string name="cat_permissions">Rettigheter</string>
     <!-- cache attribute sources -->
+    <string name="attribute_source_gc">GC</string>
+    <string name="attribute_source_oc">OC</string>
     <!-- next things -->
     <string name="quote">For å gjøre geocaching enklere og brukerne latere.</string>
     <!-- Note: Links here are just for appearance. See AboutActivity to make changes -->
@@ -1882,6 +1897,11 @@
     <string name="map_load_track">Last inn spor/rute fra GPX</string>
     <string name="load_track_error">Feil ved lasting av spor/rute</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_menu">Ruter / Spor</string>
+    <string name="route">Rute</string>
+    <string name="track">Spor</string>
+    <string name="make_visible">Gjør synlig</string>
+    <string name="hide">Skjul</string>
     <!-- distance units -->
     <string name="unit_m">m</string>
     <string name="unit_km">km</string>
@@ -1995,11 +2015,163 @@
     <string name="done">Ferdig</string>
     <string name="finish">Fullfør</string>
     <string name="back">Tilbake</string>
+    <string name="later">Senere</string>
     <string name="cancel">Avbryt</string>
+    <string name="ok">Ok</string>
     <!-- ChipChoiceGroup -->
     <string name="chipchoicegroup_selectall">Velg alle</string>
+    <string name="touch_again_to_exit">Vennligst trykk igjen for å avslutte</string>
     <!-- render theme legend: category "areas" -->
+    <string name="rtl_category_areas">Områder</string>
+    <string name="rtl_glacier">isbre</string>
+    <string name="rtl_grass">gress</string>
+    <string name="rtl_farmland">dyrket mark</string>
+    <string name="rtl_vineyard">vingård</string>
+    <string name="rtl_water">vann</string>
+    <string name="rtl_military">militært</string>
+    <string name="rtl_cliff">klippe</string>
+    <string name="rtl_beach">strand</string>
+    <string name="rtl_beach_gravel">grusstrand</string>
+    <string name="rtl_spring">kilde</string>
+    <string name="rtl_powerline">kraftlinje</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <!-- render theme legend: category "POI / Symbols" -->
+    <string name="rtl_bench">benk</string>
+    <string name="rtl_cairn">varde</string>
+    <string name="rtl_drinking_water">drikkevann</string>
+    <string name="rtl_info_board">infotavle</string>
+    <string name="rtl_playground">lekeplass</string>
+    <string name="rtl_playground_private">privat lekeplass</string>
+    <string name="rtl_recycling">gjenvinning</string>
+    <string name="rtl_telephone">telefon</string>
+    <string name="rtl_toilets">toaletter</string>
+    <string name="rtl_volcano">vulkan</string>
+    <string name="rtl_attraction">attraksjon</string>
+    <string name="rtl_castle">borg</string>
+    <string name="rtl_cinema">kino</string>
+    <string name="rtl_cross">kryss</string>
+    <string name="rtl_fountain">fontene</string>
+    <string name="rtl_memorial">minnesmerke</string>
+    <string name="rtl_memorial_plaque">minnesmerketavle</string>
+    <string name="rtl_memorial_war">krigsminne</string>
+    <string name="rtl_monument">monument</string>
+    <string name="rtl_museum">museum</string>
+    <string name="rtl_ruins">ruiner</string>
+    <string name="rtl_stone_historic">historisk stein</string>
+    <string name="rtl_theatre">teater</string>
+    <string name="rtl_water_well">brønn</string>
+    <string name="rtl_wayside_cross">kors ved veien</string>
+    <string name="rtl_zoo">dyrehage</string>
+    <string name="rtl_library">bibliotek</string>
+    <string name="rtl_arts_centre">kunstsenter</string>
+    <string name="rtl_casino">kasino</string>
+    <string name="rtl_nightclub">nattklubb</string>
+    <string name="rtl_community_centre">samfunnshus</string>
+    <string name="rtl_townhall">rådhus</string>
+    <string name="rtl_courthouse">tinghus</string>
+    <string name="rtl_cliff_diving">klippedykking</string>
+    <string name="rtl_climbing">klatring</string>
+    <string name="rtl_golf">golf</string>
+    <string name="rtl_gym">treningsstudio</string>
+    <string name="rtl_miniature_golf">minigolf</string>
+    <string name="rtl_soccer">fotball</string>
+    <string name="rtl_stadium">stadion</string>
+    <string name="rtl_tennis">tennis</string>
+    <string name="rtl_via_ferrata">via ferrata</string>
+    <string name="rtl_water_park">vannpark</string>
+    <string name="rtl_airport">flyplass</string>
+    <string name="rtl_cable_car">kabelbane</string>
+    <string name="rtl_chair_lift">stolheis</string>
+    <string name="rtl_gondola">gondol</string>
+    <string name="rtl_goods_lift">vareheis</string>
+    <string name="rtl_helipad">helipad</string>
+    <string name="rtl_parking">parkering</string>
+    <string name="rtl_parking_private">privat parkering</string>
+    <string name="rtl_bicycle_parking">sykkelparkering</string>
+    <string name="rtl_bicycle_rental">sykkelutleie</string>
+    <string name="rtl_bicycle_shop">sykkelbutikk</string>
+    <string name="rtl_car_rental">bilutleie</string>
+    <string name="rtl_car_sharing">bildeling</string>
+    <string name="rtl_car_wash">bilvask</string>
+    <string name="rtl_car_shop">bilbutikk</string>
+    <string name="rtl_fuel">drivstoff</string>
+    <string name="rtl_ferry_terminal">fergeterminal</string>
+    <string name="rtl_alpine_hut">fjellhytte</string>
+    <string name="rtl_alpine_hut_private">privat fjellhytte</string>
+    <string name="rtl_alpine_hut_winter">vinterfjellhytte</string>
+    <string name="rtl_apartment">leilighet</string>
+    <string name="rtl_camp_site">campingplass</string>
+    <string name="rtl_caravan_site">bobilplass</string>
+    <string name="rtl_hostel">hostel</string>
+    <string name="rtl_hotel">hotell</string>
+    <string name="rtl_shelter_basic_hut">nødbu</string>
+    <string name="rtl_wilderness_hut">villmarkshytte</string>
+    <string name="rtl_wilderness_hut_private">privat hytte</string>
+    <string name="rtl_bar">bar</string>
+    <string name="rtl_biergarten">ølhage</string>
+    <string name="rtl_cafe">cafe</string>
+    <string name="rtl_fastfood">hurtigmat</string>
+    <string name="rtl_ice_cream">iskrem</string>
+    <string name="rtl_pub">pub</string>
+    <string name="rtl_restaurant">restaurant</string>
+    <string name="rtl_bbq">grill</string>
+    <string name="rtl_water_point">vannpunkt</string>
+    <string name="rtl_atm">minibank</string>
+    <string name="rtl_bakery">bakeri</string>
+    <string name="rtl_bank">bank</string>
+    <string name="rtl_beverages">drikkevarer</string>
+    <string name="rtl_books">bøker</string>
+    <string name="rtl_butcher">slakter</string>
+    <string name="rtl_chemist">farmasøyt</string>
+    <string name="rtl_convenience">nærbutikk</string>
+    <string name="rtl_farm_shop">gårdsbutikk</string>
+    <string name="rtl_mall">kjøpesenter</string>
+    <string name="rtl_marketplace">marked</string>
+    <string name="rtl_organic">økologisk</string>
+    <string name="rtl_postbox">postkasse</string>
+    <string name="rtl_postoffice">postkontor</string>
+    <string name="rtl_sports_shop">sportsbutikk</string>
+    <string name="rtl_supermarket">supermarked</string>
+    <string name="rtl_travel_agency">reisebyrå</string>
+    <string name="rtl_defibrillator">hjertestarter</string>
+    <string name="rtl_doctors">legekontor</string>
+    <string name="rtl_embassy">ambassade</string>
+    <string name="rtl_emergency_phone">nødtelefon</string>
+    <string name="rtl_firebrigade">brannstasjon</string>
+    <string name="rtl_hospital">sykehus</string>
+    <string name="rtl_clinic">klinikk</string>
+    <string name="rtl_pharmacy">apotek</string>
+    <string name="rtl_police">politi</string>
+    <string name="rtl_emergency_fire_hydrant">brannhydrant</string>
+    <string name="rtl_emergency_suction_point">nødsugepunkt</string>
+    <string name="rtl_border_control">grensekontroll</string>
+    <string name="rtl_bridge_movable">bevegelig bro</string>
+    <string name="rtl_cave_entrance">huleinngang</string>
+    <string name="rtl_elevator">heis</string>
+    <string name="rtl_ford">vadested</string>
+    <string name="rtl_ford_small">lite vadested</string>
+    <string name="rtl_gate">port</string>
+    <string name="rtl_gate_private">privat port</string>
+    <string name="rtl_geyser">geysir</string>
+    <string name="rtl_hot_spring">varm kilde</string>
+    <string name="rtl_ladder">stige</string>
+    <string name="rtl_lift_gate">port</string>
+    <string name="rtl_peak_small">liten topp</string>
+    <string name="rtl_rapids">stryk</string>
+    <string name="rtl_stone">stein</string>
+    <string name="rtl_traffic_signal">trafikklys</string>
+    <string name="rtl_viewpoint">utsiktspunkt</string>
+    <string name="rtl_waterfall">foss</string>
+    <string name="rtl_wetland">våtland</string>
+    <string name="rtl_mud">gjørme</string>
+    <string name="rtl_cemetery">gravplass</string>
+    <string name="rtl_cemetery_christian">kristen gravplass</string>
+    <string name="rtl_cemetery_jewish">jødisk gravplass</string>
+    <string name="rtl_cemetery_muslim">muslimsk gravplass</string>
+    <string name="rtl_pedestrian_area">fotgjengerområde</string>
+    <string name="rtl_trading">handel</string>
+    <string name="rtl_parking_restricted">begrenset parkering</string>
+    <string name="rtl_prison">fengsel</string>
+    <string name="rtl_ruin">ruin</string>
 </resources>
