@@ -1,4 +1,4 @@
-### Generale
+### General
 - Cambio: Introduzione della funzione di navigazione nella parte inferiore per l'accesso diretto alle schermate più utilizzate di c:geo, sostituendo il vecchio schermo principale
 
 ### Mappa
