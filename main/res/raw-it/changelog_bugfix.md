@@ -1,8 +1,8 @@
-- Fix: Keep position on switching from Google map to OpenStreetMap map
-- Fix: Rare crash in cache list attribute overview
-- Fix: Re-enable "Restore a different backup" function
-- Change: Remove notifications on loading tracks
+- Correzione: Mantenimento della posizione passando dalla mappa di Google a quella di OpenStreetMap
+- Correzione: Crash raro nella panoramica dell'attributo dell'elenco della cache
+- Correzione: Riabilita la funzione "Ripristina un backup differente"
+- Modifica: Rimuovi le notifiche al caricamento delle tracce
 
-## 2022.02.16 Bugfix Release
+## 2022.02.16 Release di Correzione di Bug
 
 - Corretto: raro crash all'avvio di c:geo
