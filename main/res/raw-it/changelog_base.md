@@ -1,7 +1,7 @@
-### General
-- New: Automatically perform backups (optional)
+### Generale
+- Nuovo: Esegui automaticamente i backup (opzionale)
 - Corretto: Riprendi l'importazione dei download terminati
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
+- Nuovo: Aggiunto filtro per "ha waypoint definiti dall'utente"
+- Nuovo: Instradamento interno aggiornato a BRouter v1.6.3
 - Nuovo: Icona separata per i waypoint generati dall'utente
-- New: Log templates for offline logs
+- Nuovo: Modelli di log per i log offline
