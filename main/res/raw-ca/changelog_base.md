@@ -3,5 +3,5 @@
 - Correcció: Reprèn la importació de les descàrregues acabades
 - Nou: S'ha afegit un filtre per a "té punts de ruta definits per l'usuari"
 - Nou: s'ha actualitzat l'encaminament intern a BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
+- Nou: Icona separada de l'usuari per als punts de ruta generats
+- Novetat: Plantilles per a registres fora de línia
