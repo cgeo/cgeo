@@ -1,8 +1,8 @@
-- Fix: Keep position on switching from Google map to OpenStreetMap map
-- Fix: Rare crash in cache list attribute overview
-- Fix: Re-enable "Restore a different backup" function
-- Change: Remove notifications on loading tracks
+- 수정: Google 지도에서 OpenStreetMap 지도로 전환할 때 위치 유지
+- 수정: 캐시 목록 속성 개요의 드문 오류
+- 수정: "다른 백업 복원" 기능 다시 활성화
+- 변경: 트랙을 로드할 때 알림을 제거
 
-## 2022.02.16 Bugfix Release
+## 2022.02.16 버그픽스 출시
 
-- Fix: Rare crash on startup of cgeo
+- 수정: cgeo가 시작될 때 드문 오류
