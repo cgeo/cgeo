@@ -1,8 +1,8 @@
-- Fix: Keep position on switching from Google map to OpenStreetMap map
-- Fix: Rare crash in cache list attribute overview
-- Fix: Re-enable "Restore a different backup" function
-- Change: Remove notifications on loading tracks
+- Solució: Mantenir la posició en canviar del mapa de Google al mapa d'OpenStreetMap
+- Correcció: Error rar a la visió general dels atributs de la llista del catxé
+- Correcció: Tornar a habilitar la funció "Restaura una còpia de seguretat diferent"
+- Canvi: Elimina les notificacions en carregar tracks
 
-## 2022.02.16 Bugfix Release
+## 2022.02.16 Correcció d'errors
 
-- Fix: Rare crash on startup of cgeo
+- Correcció: Problema rar a l'inici de cgeo
