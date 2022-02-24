@@ -334,7 +334,7 @@
     <string name="home_button">Pág. inicial</string>
     <string name="caches_nearby_button">Por perto</string>
     <string name="advanced_search_button">Pesquisar</string>
-    <string name="stored_caches_button">Armazenadas</string>
+    <string name="stored_caches_button">Listas</string>
     <string name="any_button">Ir para</string>
     <string name="unknown_scan">O resultado da leitura não contém qualquer geo-código.</string>
     <!-- caches -->
@@ -1411,7 +1411,7 @@
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
     <string name="calccoord_generate_showonmap">Mostrar no Mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Gerada</string>
-    <string name="calccoord_generate_error_novarwithrange">Foi encontrada uma variável com um número inválido</string>
+    <string name="calccoord_generate_error_novarwithrange">Não foi encontrada qualquer variável válida, com o intervalo definido</string>
     <string name="calccoord_generate_error_novalidgeopoints">Nenhuma combinação devolveu coordenadas válidas</string>
     <string name="calccoord_generate_error_nogeopointselected">Nenhuma coordenada seleccionada</string>
     <string name="calccoord_migrate_title">Migração de Pontos Adicionais</string>
