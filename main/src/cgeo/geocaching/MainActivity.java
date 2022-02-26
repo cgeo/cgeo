@@ -29,6 +29,7 @@ import cgeo.geocaching.sensors.GnssStatusProvider.Status;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.settings.ViewSettingsActivity;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
@@ -45,6 +46,7 @@ import cgeo.geocaching.utils.DebugUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
+import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.Version;
 import cgeo.geocaching.utils.functions.Action1;
 
@@ -358,15 +360,14 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         int currentId = 1;
         final Set<String> quicklaunchitems = Settings.getQuicklaunchitems();
         for (QuickLaunchItem item : QuickLaunchItem.values()) {
-            if (quicklaunchitems.contains(item.name())) {
+            if (quicklaunchitems.contains(item.name()) && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
                 final MaterialButton b = findViewById(getResources().getIdentifier("qlb" + currentId, "id", getPackageName()));
                 if (b != null) {
                     b.setIconResource(item.iconRes);
                     b.setVisibility(View.VISIBLE);
-                    TooltipCompat.setTooltipText(b, item.info);
+                    b.setOnClickListener(view -> launchQuickLaunchItem(item));
+                    TooltipCompat.setTooltipText(b, getString(item.info));
                     currentId++;
-
-                    // @todo perform action on click
                 }
             }
         }
@@ -376,6 +377,33 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         }
         // show or hide quicklaunchitems area
         binding.quicklaunchitems.setVisibility(currentId > 1 ? View.VISIBLE : View.GONE);
+    }
+
+    private void launchQuickLaunchItem(final QuickLaunchItem which) {
+        if (which == QuickLaunchItem.GOTO) {
+            InternalConnector.assertHistoryCacheExists(this);
+            CacheDetailActivity.startActivity(this, InternalConnector.GEOCODE_HISTORY_CACHE, true);
+        } else if (which == QuickLaunchItem.POCKETQUERY) {
+            if (Settings.isGCPremiumMember()) {
+                startActivity(new Intent(this, PocketQueryListActivity.class));
+            }
+        } else if (which == QuickLaunchItem.BOOKMARKLIST) {
+            if (Settings.isGCPremiumMember()) {
+                startActivity(new Intent(this, BookmarkListActivity.class));
+            }
+        } else if (which == QuickLaunchItem.SETTINGS) {
+            startActivityForResult(new Intent(this, SettingsActivity.class), Intents.SETTINGS_ACTIVITY_REQUEST_CODE);
+        } else if (which == QuickLaunchItem.BACKUPRESTORE) {
+            SettingsActivity.openForScreen(R.string.preference_screen_backup, this);
+        } else if (which == QuickLaunchItem.MANUAL) {
+            ShareUtils.openUrl(this, getString(R.string.manual_link_full));
+        } else if (which == QuickLaunchItem.FAQ) {
+            ShareUtils.openUrl(this, getString(R.string.faq_link_full));
+        } else if (which == QuickLaunchItem.VIEWSETTINGS) {
+            startActivity(new Intent(this, ViewSettingsActivity.class));
+        } else {
+            throw new IllegalStateException("MainActivity: unknown QuickLaunchItem");
+        }
     }
 
     private void init() {

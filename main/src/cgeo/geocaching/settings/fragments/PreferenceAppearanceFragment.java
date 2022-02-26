@@ -56,7 +56,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
         final String[] qlValues =  new String[QuickLaunchItem.values().length];
         int i = 0;
         for (QuickLaunchItem qlItem : QuickLaunchItem.values()) {
-            qlEntries[i] = qlItem.info;
+            qlEntries[i] = getString(qlItem.info);
             qlValues[i] = qlItem.name();
             i++;
         }
