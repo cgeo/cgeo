@@ -1,30 +1,33 @@
 package cgeo.geocaching.enumerations;
 
-import androidx.annotation.DrawableRes;
+import cgeo.geocaching.R;
 
-import org.apache.commons.lang3.StringUtils;
+import androidx.annotation.DrawableRes;
+import androidx.annotation.StringRes;
 
 import javax.annotation.Nullable;
 
-import cgeo.geocaching.R;
+import org.apache.commons.lang3.StringUtils;
 
 public enum QuickLaunchItem {
     // item names must not be changed
-    GOTO("Go to", R.drawable.ic_menu_goto),
-    POCKETQUERY("Pocket Queries", R.drawable.ic_menu_pocket_query),
-    BOOKMARKLIST("Bookmark Lists", R.drawable.ic_menu_bookmarks),
-    SETTINGS("Settings", R.drawable.settings_nut),
-    BACKUPRESTORE("Backup / Restore", R.drawable.settings_backup),
-    MANUAL("c:geo manual", R.drawable.ic_menu_info_details),
-    FAQ("c:geo FAQ", R.drawable.ic_menu_hint),
-    VIEWSETTINGS("View Settings", R.drawable.settings_eye);
+    GOTO(R.string.any_button, R.drawable.ic_menu_goto, false),
+    POCKETQUERY(R.string.menu_lists_pocket_queries, R.drawable.ic_menu_pocket_query, true),
+    BOOKMARKLIST(R.string.menu_lists_bookmarklists, R.drawable.ic_menu_bookmarks, true),
+    SETTINGS(R.string.menu_settings, R.drawable.settings_nut, false),
+    BACKUPRESTORE(R.string.menu_backup, R.drawable.settings_backup, false),
+    MANUAL(R.string.about_nutshellmanual, R.drawable.ic_menu_info_details, false),
+    FAQ(R.string.faq_title, R.drawable.ic_menu_hint, false),
+    VIEWSETTINGS(R.string.view_settings, R.drawable.settings_eye, false);
 
-    public final String info;
+    @StringRes public final int info;
     @DrawableRes public int iconRes;
+    public boolean gcPremiumOnly;
 
-    QuickLaunchItem(final String info, final @DrawableRes int iconRes) {
+    QuickLaunchItem(final @StringRes int info, final @DrawableRes int iconRes, final boolean gcPremiumOnly) {
         this.info = info;
         this.iconRes = iconRes;
+        this.gcPremiumOnly = gcPremiumOnly;
     }
 
     @Nullable
