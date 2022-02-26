@@ -73,6 +73,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
@@ -1805,6 +1807,14 @@ public class Settings {
 
     public static void putUserLanguage(final String language) {
         putString(R.string.pref_selected_language, language);
+    }
+
+    public static Set<String> getQuicklaunchitems() {
+        final Set<String> empty = Collections.emptySet();
+        if (sharedPrefs == null) {
+            return empty;
+        }
+        return sharedPrefs.getStringSet(getKey(R.string.pref_quicklaunchitems), empty);
     }
 
     public static void setRoutingMode(@NonNull final RoutingMode mode) {

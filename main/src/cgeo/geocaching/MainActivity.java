@@ -11,6 +11,7 @@ import cgeo.geocaching.connector.gc.PocketQueryListActivity;
 import cgeo.geocaching.connector.internal.InternalConnector;
 import cgeo.geocaching.databinding.MainActivityBinding;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Units;
@@ -60,23 +61,30 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
+import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.view.MenuCompat;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
+import com.google.android.material.button.MaterialButton;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -346,6 +354,30 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
     }
 
+    private void prepareQuickLaunchItems() {
+        int currentId = 1;
+        final Set<String> quicklaunchitems = Settings.getQuicklaunchitems();
+        for (QuickLaunchItem item : QuickLaunchItem.values()) {
+            if (quicklaunchitems.contains(item.name())) {
+                final MaterialButton b = findViewById(getResources().getIdentifier("qlb" + currentId, "id", getPackageName()));
+                if (b != null) {
+                    b.setIconResource(item.iconRes);
+                    b.setVisibility(View.VISIBLE);
+                    TooltipCompat.setTooltipText(b, item.info);
+                    currentId++;
+
+                    // @todo perform action on click
+                }
+            }
+        }
+        // hide all other buttons
+        for (int i = currentId; i <= 8; i++) {
+            findViewById(getResources().getIdentifier("qlb" + i, "id", getPackageName())).setVisibility(View.GONE);
+        }
+        // show or hide quicklaunchitems area
+        binding.quicklaunchitems.setVisibility(currentId > 1 ? View.VISIBLE : View.GONE);
+    }
+
     private void init() {
         if (initialized) {
             return;
@@ -356,6 +388,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         checkRestore();
         DataStore.cleanIfNeeded(this);
         updateCacheCounter();
+        prepareQuickLaunchItems();
     }
 
     @Override

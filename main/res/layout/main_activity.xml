@@ -88,7 +88,7 @@
         android:id="@+id/connectorstatus_area"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@id/location_area"
+        android:layout_above="@id/quicklaunchitems"
         android:layout_below="@id/info_notloggedin"
         android:layout_marginTop="32dp"
         android:layout_marginBottom="16dp"
@@ -96,6 +96,64 @@
         android:orientation="vertical"
         android:scrollbars="none"
         tools:listitem="@layout/main_activity_connectorstatus" />
+
+    <LinearLayout
+        android:id="@+id/quicklaunchitems"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/location_area"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb1"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb2"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb3"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb4"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb5"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb6"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb7"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/qlb8"
+            style="@style/button_icon"
+            app:icon="@drawable/ic_menu_refresh"
+            android:layout_marginLeft="2dip"
+            android:visibility="visible" />
+    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/location_area"
