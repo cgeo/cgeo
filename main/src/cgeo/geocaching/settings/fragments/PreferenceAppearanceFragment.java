@@ -2,11 +2,13 @@ package cgeo.geocaching.settings.fragments;
 
 import cgeo.geocaching.BuildConfig;
 import cgeo.geocaching.R;
+import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.settings.Settings;
 
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
 import androidx.preference.Preference;
 
 import java.util.Locale;
@@ -48,6 +50,19 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
             return true;
         });
         setLanguageSummary(languagePref, Settings.getUserLanguage());
+
+        final MultiSelectListPreference quickLaunchItemsPref = findPreference(getString(R.string.pref_quicklaunchitems));
+        final String[] qlEntries = new String[QuickLaunchItem.values().length];
+        final String[] qlValues =  new String[QuickLaunchItem.values().length];
+        int i = 0;
+        for (QuickLaunchItem qlItem : QuickLaunchItem.values()) {
+            qlEntries[i] = qlItem.info;
+            qlValues[i] = qlItem.name();
+            i++;
+        }
+        quickLaunchItemsPref.setEntries(qlEntries);
+        quickLaunchItemsPref.setEntryValues(qlValues);
+
     }
 
     @Override
