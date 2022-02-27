@@ -1,3 +1,3 @@
 ## 2022.02.16
 
-- Fix: Rare crash on startup of cgeo
+- Correcció: Problema rar a l'inici de cgeo

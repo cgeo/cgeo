@@ -4,4 +4,4 @@
 - New: Added filter for "has user defined waypoints"
 - Nyhet: Uppdaterad intern routing till BRouter v1.6.3
 - New: User separate icon for generated waypoints
-- New: Log templates for offline logs
+- Nyhet: Loggmallar för loggar offline

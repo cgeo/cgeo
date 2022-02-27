@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Départ du sentier</string>
     <string name="wp_waypoint">Point de repère</string>
     <string name="wp_original">Coordonnées d\'origine</string>
+    <string name="wp_generated">Généré</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Finale</string>
     <string name="wpnew_stage">Étape</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Marqueur</string>
     <string name="wpnew_original">Originale</string>
+    <string name="wpnew_generated">Généré</string>
     <!-- logs -->
     <string name="log_found">Trouvée</string>
     <string name="log_dnf">Non trouvée</string>
@@ -1097,6 +1099,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Supprimer tous les points de passage définis par l\'utilisateur de cette cache ?\n\nLes points de passage seront immédiatement supprimés, cette action est irréversible.</string>
     <string name="cache_delete_userdefined_waypoints_note">Note : vous avez activé \"extraction des points de passage depuis la note\". Si votre note personnelle contient des coordonnées reconnues par c:geo, les points de passage seront recréés automatiquement. Vous pouvez désactiver ce fonctionnement dans la fenêtre d\'édition de la note personnelle.</string>
     <string name="cache_delete_userdefined_waypoints_success">Les points de passage définis par l\'utilisateur ont été supprimés</string>
+    <string name="cache_delete_generated_waypoints">Supprimer les points de passage générés</string>
+    <string name="cache_delete_generated_waypoints_confirm">Supprimer tous les points de passage générés pour cette cache ?\n\nCette action est définitive.</string>
+    <string name="cache_delete_generated_waypoints_success">Les points de passage générés ont été supprimés</string>
     <string name="cache_offline_store">Enregistrer</string>
     <string name="cache_offline_stored">Enregistrée</string>
     <string name="cache_offline_not_ready">Hors-ligne indisponible</string>
@@ -1221,6 +1226,7 @@
     <string name="menu_caches">Gérer les caches</string>
     <string name="cache_menu_event">Ajouter à l\'agenda</string>
     <string name="cache_menu_extract_waypoints">Extraire les points de passage</string>
+    <string name="cache_menu_scan_calculated_waypoints">Recherche de formules de waypoint</string>
     <string name="cache_menu_set_found">Marquer comme trouvée</string>
     <string name="cache_menu_set_DNF">Marquer comme non trouvée</string>
     <string name="cache_menu_reset_foundstate">Réinitialiser le status trouvée</string>
@@ -1385,18 +1391,33 @@
     <string name="from_clipboard">Depuis le presse-papiers</string>
     <string name="copy_to_clipboard">Copier dans le presse-papiers</string>
     <!-- Variables -->
+    <string name="variables_titletext">Utilisez cette page pour noter les valeurs et faire les calculs nécessaires pour cette cache.</string>
+    <string name="variables_scanlisting">Scanner la liste</string>
+    <string name="variables_scanlisting_choosepattern_title">Choisir le modèle trouvé</string>
+    <string name="variables_scanlisting_nopatternfound">Aucun motif trouvé</string>
     <string name="variables_tidyup">Nettoyer</string>
     <string name="variables_deleteall">Tout Supprimer</string>
+    <string name="variables_deleteall_confirm_text">Voulez-vous vraiment supprimer toutes les variables pour cette cache ?</string>
     <string name="variables_info">Aide</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Mode guidé</string>
     <string name="calccoord_guided_edit">Appuyez sur un chiffre pour le modifier</string>
+    <string name="calccoord_guided_value">Valeur</string>
+    <string name="calccoord_convert_to_plain">Convertir en coordonnées simples</string>
+    <string name="calccoord_plain_tools_title">Outils simples</string>
     <string name="calccoord_remove_spaces">Supprimer les espaces</string>
+    <string name="calccoord_paste_from_clipboard">Coller depuis le presse-papiers</string>
+    <string name="calccoord_generate_title">Générer des Waypoints</string>
     <string name="calccoord_generate_showonmap">Afficher sur la carte</string>
     <string name="calccoord_generate_waypointnameprefix">Généré</string>
+    <string name="calccoord_generate_error_novalidgeopoints">Aucune combinaison n\'a retourné de coordonnées valides</string>
     <string name="calccoord_generate_error_nogeopointselected">Aucune coordonnées sélectionnées</string>
+    <string name="calccoord_migrate_title">Migration de Waypoint</string>
     <string name="calccoord_migrate_migrate">Migrer</string>
     <string name="calccoord_migrate_migrate_usernote_praefix">Migré depuis</string>
     <string name="calccoord_migrate_cancel">Annuler</string>
+    <string name="calccoord_migrate_dismiss">Rejeter les données</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">Rejeté(e)</string>
     <!-- Formula -->
     <string name="formula_function_sqrt">Racine carrée</string>
     <string name="formula_function_sin">Sinus</string>
@@ -1413,6 +1434,7 @@
     <!-- map -->
     <string name="map_map">Carte</string>
     <string name="map_live">Carte temps réel</string>
+    <string name="map_offline">Carte hors ligne</string>
     <string name="map_view_map">Afficher carte</string>
     <string name="map_rotation">Rotation de la carte</string>
     <string name="map_dot_mode">Utiliser des icônes compactes</string>
@@ -1459,6 +1481,7 @@
     <string name="map_theme_legend">Légende du thème</string>
     <string name="google_maps_style_default">Par défaut</string>
     <string name="google_maps_style_night">Nuit</string>
+    <string name="google_maps_style_retro">Rétro</string>
     <string name="google_maps_style_contrast">Contraste élevé</string>
     <string name="google_maps_style_auto">Thème de l\'appareil (Jour/Nuit)</string>
     <!-- search -->
@@ -2259,6 +2282,7 @@
     <string name="rtl_drinking_water">eau potable</string>
     <string name="rtl_info_board">panneau d\'informations</string>
     <string name="rtl_info_office">bureau d\'information</string>
+    <string name="rtl_peak">sommet</string>
     <string name="rtl_picnic_site">lieu de pique-nique</string>
     <string name="rtl_playground">terrain de jeux</string>
     <string name="rtl_playground_private">terrain de jeu privé</string>
@@ -2267,6 +2291,7 @@
     <string name="rtl_telephone">téléphone</string>
     <string name="rtl_toilets">toilettes</string>
     <string name="rtl_volcano">volcan</string>
+    <string name="rtl_archaeological">archéologique</string>
     <string name="rtl_castle">château</string>
     <string name="rtl_cinema">cinéma</string>
     <string name="rtl_cross">croix</string>
@@ -2291,6 +2316,7 @@
     <string name="rtl_climbing">escalade</string>
     <string name="rtl_golf">golf</string>
     <string name="rtl_miniature_golf">mini golf</string>
+    <string name="rtl_soccer">football</string>
     <string name="rtl_stadium">stade</string>
     <string name="rtl_swimming_area">zone de baignade</string>
     <string name="rtl_swimming_outdoor">natation en eau libre</string>

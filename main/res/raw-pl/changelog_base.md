@@ -1,7 +1,7 @@
 ### Ogólne
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
+- Nowość: Automatyczne wykonywanie kopii zapasowych (opcjonalnie)
+- Poprawka: Wznawianie importowania zakończonych pobierań
+- Nowość: Dodano filtr dla „ma punkty nawigacji zdefiniowane przez użytkownika”
+- Nowość: Zaktualizowano BRouter v1.6.3
+- Nowość: Oddzielna ikona dla wygenerowanych punktów nawigacji
+- Nowość: Szablony dla dzienników offline

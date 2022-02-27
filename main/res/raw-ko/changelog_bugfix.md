@@ -1,3 +1,3 @@
 ## 2022.02.16
 
-- Fix: Rare crash on startup of cgeo
+- 수정: cgeo가 시작될 때 드문 오류

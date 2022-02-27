@@ -334,7 +334,7 @@
     <string name="home_button">Pág. inicial</string>
     <string name="caches_nearby_button">Por perto</string>
     <string name="advanced_search_button">Pesquisar</string>
-    <string name="stored_caches_button">Armazenadas</string>
+    <string name="stored_caches_button">Listas</string>
     <string name="any_button">Ir para</string>
     <string name="unknown_scan">O resultado da leitura não contém qualquer geo-código.</string>
     <!-- caches -->
@@ -1100,6 +1100,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: Tem a opção \"pontos adicionais de notas\" activada. Se tiver coordenadas em notas pessoais, reconhecidas pelo c:geo, os pontos adicionais serão recriados automaticamente por elas. Pode desactivar isto na secção de edição de anotações pessoais.</string>
     <string name="cache_delete_userdefined_waypoints_success">Os pontos adicionais definidos pelo utilizador foram removidos</string>
+    <string name="cache_delete_generated_waypoints">Remover pontos adicionais definidos pelo utilizador</string>
+    <string name="cache_delete_generated_waypoints_confirm">Remover todos os pontos adicionais desta cache definidos pelo utilizador?\n\nOs pontos serão excluídos imediatamente, não é possível anular.</string>
+    <string name="cache_delete_generated_waypoints_success">Os pontos adicionais gerados foram eliminados</string>
     <string name="cache_offline_store">Armazenar</string>
     <string name="cache_offline_stored">Armazenada no dispositivo</string>
     <string name="cache_offline_not_ready">Não disponível em modo offline</string>
@@ -1224,6 +1227,7 @@
     <string name="menu_caches">Gerir caches</string>
     <string name="cache_menu_event">Adicionar ao calendário</string>
     <string name="cache_menu_extract_waypoints">Extrair pontos adicionais</string>
+    <string name="cache_menu_scan_calculated_waypoints">Procurar por fórmulas de pontos adicionais</string>
     <string name="cache_menu_set_found">Definir como encontrada</string>
     <string name="cache_menu_set_DNF">Definir como não encontrada</string>
     <string name="cache_menu_reset_foundstate">Redefinir o estado de encontrada</string>
@@ -1391,18 +1395,23 @@
     <string name="variables_titletext">Utilize esta página para anotar valores e fazer os cálculos necessários para esta cache.</string>
     <string name="variables_scanlisting">Analisar a descrição</string>
     <string name="variables_scanlisting_choosepattern_title">Escolher o modelo de \'encontrado\'</string>
+    <string name="variables_scanlisting_nopatternfound">Nenhum padrão encontrado</string>
     <string name="variables_tidyup">Organizar</string>
     <string name="variables_deleteall">Eliminar Todas</string>
     <string name="variables_deleteall_confirm_text">Deseja realmente eliminar todas as variáveis para esta cache?</string>
     <string name="variables_info">Ajuda</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Modo Guia</string>
+    <string name="calccoord_guided_edit">Toque num dígito para editar</string>
+    <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Converter para coordenada simples</string>
+    <string name="calccoord_plain_tools_title">Ferramentas Simples</string>
     <string name="calccoord_remove_spaces">Remover Espaços</string>
+    <string name="calccoord_paste_from_clipboard">Colar da área de transferência</string>
     <string name="calccoord_generate_title">Gerar Pontos de Acesso</string>
     <string name="calccoord_generate_showonmap">Mostrar no Mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Gerada</string>
-    <string name="calccoord_generate_error_novarwithrange">Foi encontrada uma variável com um número inválido</string>
+    <string name="calccoord_generate_error_novarwithrange">Não foi encontrada qualquer variável válida, com o intervalo definido</string>
     <string name="calccoord_generate_error_novalidgeopoints">Nenhuma combinação devolveu coordenadas válidas</string>
     <string name="calccoord_generate_error_nogeopointselected">Nenhuma coordenada seleccionada</string>
     <string name="calccoord_migrate_title">Migração de Pontos Adicionais</string>

@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Inici del camí</string>
     <string name="wp_waypoint">Punt de referència</string>
     <string name="wp_original">Coordenades originals</string>
+    <string name="wp_generated">Generat</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Etapa</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Marcador</string>
     <string name="wpnew_original">Original</string>
+    <string name="wpnew_generated">Generat</string>
     <!-- logs -->
     <string name="log_found">Trobat</string>
     <string name="log_dnf">No trobat</string>
@@ -130,6 +132,7 @@
     <string name="log_posting_image">Publicant imatges…</string>
     <string name="log_posting_generic_trackable">Publicant %1$s %2$d/%3$d</string>
     <string name="log_clear">Esborra</string>
+    <string name="log_templates">Trobat: Plantilla de registre…</string>
     <string name="log_post_not_possible">Descàrrega de dades en procés…\nProva-ho una altra vegada en uns segons o comprova la connexió a internet.</string>
     <string name="log_date_future_not_allowed">No estan permesos els registres amb data futura.</string>
     <string name="log_add">Afegeix</string>
@@ -1098,6 +1101,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">Voleu eliminar tots els punts de ruta definits per l\'usuari d\'aquest catxé? \n\nEls punts de ruta se suprimiran immediatament, no es pot desfer.</string>
     <string name="cache_delete_userdefined_waypoints_note">Nota: teniu activat el \"punts de ruta des de la nota\". Si teniu coordenades a la vostra nota personal reconegudes per c: geo, els punts de ruta es recrearan automàticament per a ells. Podeu desactivar-ho al quadre d\'edició de notes personals.</string>
     <string name="cache_delete_userdefined_waypoints_success">S\'han suprimit els punts de ruta definits per l\'usuari</string>
+    <string name="cache_delete_generated_waypoints">Elimina els punts de ruta generats</string>
+    <string name="cache_delete_generated_waypoints_confirm">Eliminar tots els punts de ruta generats d\'aquest catxé?\n\nEls Punts de ruta s\'eliminaran immediatament, no es pot desfer.</string>
+    <string name="cache_delete_generated_waypoints_success">Els punts de ruta generats s\'han suprimit</string>
     <string name="cache_offline_store">Desa</string>
     <string name="cache_offline_stored">Desat al dispositiu</string>
     <string name="cache_offline_not_ready">No disponible fora de línia</string>
@@ -1222,6 +1228,7 @@
     <string name="menu_caches">Gestiona geoamagatalls</string>
     <string name="cache_menu_event">Afegeix al calendari</string>
     <string name="cache_menu_extract_waypoints">Extreure els punts de ruta</string>
+    <string name="cache_menu_scan_calculated_waypoints">Busca fórmules de punts de ruta</string>
     <string name="cache_menu_set_found">Definiu com trobat</string>
     <string name="cache_menu_set_DNF">Definiu com no trobat</string>
     <string name="cache_menu_reset_foundstate">Restableix l\'estat trobat</string>
@@ -1345,6 +1352,7 @@
     <string name="waypoint_cache_coordinates">Coordenades del catxé</string>
     <string name="waypoint_calculated_coordinates">Coordenades calculades</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Calcula la coordenada</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
     <string name="waypoint_bearing">Direcció en º</string>
@@ -1388,14 +1396,19 @@
     <string name="variables_titletext">Utilitzeu aquesta pàgina per anotar els valors i fer els càlculs necessaris per a aquest catxé.</string>
     <string name="variables_scanlisting">Escaneja la pàgina del catxé</string>
     <string name="variables_scanlisting_choosepattern_title">Trieu el patró de trobat</string>
+    <string name="variables_scanlisting_nopatternfound">No s\'ha trobat cap patró</string>
     <string name="variables_tidyup">Endreçar</string>
     <string name="variables_deleteall">Eliminar tots</string>
     <string name="variables_deleteall_confirm_text">Realment voleu suprimir totes les variables d\'aquest catxé?</string>
     <string name="variables_info">Ajuda</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Mode guiat</string>
+    <string name="calccoord_guided_edit">Toca un dígit per editar</string>
+    <string name="calccoord_guided_value">Valor</string>
     <string name="calccoord_convert_to_plain">Convertir a coordenades simples</string>
+    <string name="calccoord_plain_tools_title">Eines senzilles</string>
     <string name="calccoord_remove_spaces">Elimina els espais</string>
+    <string name="calccoord_paste_from_clipboard">Enganxa des del porta-retalls</string>
     <string name="calccoord_generate_title">Generar Punts de ruta</string>
     <string name="calccoord_generate_showonmap">Mostra al mapa</string>
     <string name="calccoord_generate_waypointnameprefix">Generat</string>
@@ -1442,6 +1455,7 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa en viu</string>
+    <string name="map_offline">Mapa fora de línia</string>
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
@@ -1487,6 +1501,11 @@
     <string name="map_settings_cache_filter_too_complex_message">El filtre del catxé  actual és massa complex per aplicar opcions addicionals aquí. Normalment, això significa que el filtre de catxé conté expressions NOT o OR en lloc del simple i lògic AND </string>
     <string name="map_theme_legend">Llegenda del tema</string>
     <string name="map_theme_legend_info">Toqueu el títol de la categoria per obrir/tancar la categoria. Toqueu llargament un símbol per obtenir informació breu sobre aquest símbol. Toqueu la icona d\'informació per visitar una llegenda detallada en línia.</string>
+    <string name="google_maps_style_default">Per defecte</string>
+    <string name="google_maps_style_night">Nit</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Contrast Alt</string>
+    <string name="google_maps_style_auto">Tema del dispositiu (Dia/Nit)</string>
     <!-- search -->
     <string name="geo_search_label">Cerca catxés propers</string>
     <string name="search_bar_hint">Cerca catxés/rastrejables</string>
