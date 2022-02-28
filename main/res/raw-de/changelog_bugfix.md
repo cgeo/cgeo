@@ -2,6 +2,7 @@
 - Korrektur: Seltener Absturz in der Cachelistenübersicht
 - Korrektur: "Wiederherstellen eines anderen Backups" wieder funktionell
 - Änderung: Benachrichtigungen beim Laden von Tracks entfernen
+- Korrektur: Seltener Absturz bei der Sortierung nach Schwierigkeit, wenn Adventure-Labs auf der Liste sind
 
 ## 2021.12.16 Bugfix -Release
 
