@@ -27,7 +27,7 @@
 
 ### Altro
 - Novità: Carica rapidamente i geocode dal testo degli appunti nella ricerca nella schermata principale
-- New: Added support for user-defined log templates
+- Novità: Aggiunto supporto per i modelli del registro definiti dall'utente
 - Novità: Rendi le Impostazioni => Visualizza Impostazioni filtrabile
 - Nuovo: abilita la ricerca nelle preferenze
 - Novità: Aggiunto GC Wizard all'elenco delle app utili
@@ -38,7 +38,7 @@
 - Corretto: Evita i controlli ripetuti degli aggiornamenti delle mappe/routing con intervallo=0
 - Corretto: Ottimizzato il supporto per la compilazione automatica delle password dalle app di archiviazione di password esterne, nelle impostazioni
 - Corretto: Abilita suggerimenti per sistemi in esecuzione su Android in versioni precedenti alla 8
-- Fix: Crash on long-tap on trackable code in trackable details
+- Correzione: Crash al tocco prolungato sul codice tracciabile nei dettagli tracciabili
 - Corretto: caricamento note personali (modifica del sito web)
 - Ripristino delle impostazioni per soddisfare le attuali specifiche di Android
 - API di MapsWithMe aggiornata

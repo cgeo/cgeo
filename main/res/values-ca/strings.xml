@@ -1380,6 +1380,7 @@
     <!-- map -->
     <string name="map_map">Mapa</string>
     <string name="map_live">Mapa en viu</string>
+    <string name="map_offline">Mapa fora de línia</string>
     <string name="map_view_map">Tria el mapa</string>
     <string name="map_rotation">Mapa rotatori</string>
     <string name="map_dot_mode">Utilitza icones compactes</string>
