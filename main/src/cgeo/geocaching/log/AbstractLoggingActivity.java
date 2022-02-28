@@ -21,6 +21,7 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.emoji.text.EmojiCompat;
 
 import java.util.Collections;
 import java.util.List;
@@ -42,9 +43,9 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
             }
         }
 
-        final SubMenu menuSmilies = menu.findItem(R.id.menu_smilies).getSubMenu();
+        final SubMenu menuSmileys = menu.findItem(R.id.menu_smileys).getSubMenu();
         for (final Smiley smiley : getSmileys()) {
-            menuSmilies.add(Menu.NONE, smiley.getItemId(), Menu.NONE, smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning));
+            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, EmojiCompat.get().process(smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning)));
         }
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(false);
 
@@ -81,7 +82,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
     @Override
     public boolean onPrepareOptionsMenu(final Menu menu) {
-        menu.findItem(R.id.menu_smilies).setVisible(!getSmileys().isEmpty());
+        menu.findItem(R.id.menu_smileys).setVisible(!getSmileys().isEmpty());
         return true;
     }
 
@@ -129,5 +130,4 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
     protected void requestKeyboardForLogging() {
         Keyboard.show(this, findViewById(R.id.log));
     }
-
 }

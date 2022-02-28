@@ -20,6 +20,8 @@ import android.os.UserManager;
 import android.view.ViewConfiguration;
 
 import androidx.annotation.NonNull;
+import androidx.emoji.bundled.BundledEmojiCompatConfig;
+import androidx.emoji.text.EmojiCompat;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -72,6 +74,10 @@ public class CgeoApplication extends Application {
             Cookies.restoreCookies();
 
             LooperLogger.startLogging(Looper.getMainLooper());
+
+            // initialization for log smileys
+            final EmojiCompat.Config config = new BundledEmojiCompatConfig(this);
+            EmojiCompat.init(config);
         }
     }
 

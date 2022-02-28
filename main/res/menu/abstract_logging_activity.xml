@@ -24,7 +24,7 @@
         app:showAsAction="ifRoom|withText">
     </item>
     <item
-        android:id="@+id/menu_smilies"
+        android:id="@+id/menu_smileys"
         android:icon="@drawable/ic_menu_emoticons"
         android:title="@string/log_smilies"
         app:showAsAction="ifRoom|withText">
