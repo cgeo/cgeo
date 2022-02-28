@@ -2,7 +2,6 @@ package cgeo.geocaching.sorting;
 
 import cgeo.geocaching.connector.gc.GCConstants;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.utils.Log;
 
 import java.util.Collections;
 import java.util.List;
@@ -17,25 +16,22 @@ abstract class AbstractCacheComparator implements CacheComparator {
 
     @Override
     public final int compare(final Geocache cache1, final Geocache cache2) {
-        try {
-            final boolean canCompare1 = canCompare(cache1);
-            final boolean canCompare2 = canCompare(cache2);
-            if (!canCompare1) {
-                return canCompare2 ? 1 : fallbackToGeocode(cache1, cache2);
-            }
-            return canCompare2 ? compareCaches(cache1, cache2) : -1;
-        } catch (final Exception e) {
-            Log.e("AbstractCacheComparator.compare", e);
-            // This may violate the Comparator interface if the exception is not systematic.
-            return fallbackToGeocode(cache1, cache2);
+        final boolean canCompare1 = canCompare(cache1);
+        final boolean canCompare2 = canCompare(cache2);
+        if (!canCompare1) {
+            return canCompare2 ? 1 : fallbackToGeocode(cache1, cache2);
         }
+        return canCompare2 ? compareCaches(cache1, cache2) : -1;
     }
 
     private static int fallbackToGeocode(final Geocache cache1, final Geocache cache2) {
         final int comparePrefix = StringUtils.compareIgnoreCase(StringUtils.substring(cache1.getGeocode(), 0, 2), StringUtils.substring(cache2.getGeocode(), 0, 2));
         if (comparePrefix == 0) {
-            return (int) (GCConstants.gccodeToGCId(cache1.getGeocode())
-                    - GCConstants.gccodeToGCId(cache2.getGeocode()));
+            final long l1 = GCConstants.gccodeToGCId(cache1.getGeocode());
+            final long l2 = GCConstants.gccodeToGCId(cache2.getGeocode());
+            if (l1 != l2) {
+                return l1 > l2 ? 1 : -1;
+            }
         }
         return comparePrefix;
     }
