@@ -1,17 +1,16 @@
 package cgeo.geocaching.connector.oc;
 
-import cgeo.geocaching.R;
 import cgeo.geocaching.connector.capability.Smiley;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class OCSmileysProvider {
 
+    /** deactivated until it is realized at OC(.de)
     private static final List<Smiley> SMILEYS = Collections.unmodifiableList(Arrays.asList(
             new Smiley("8)", R.string.smiley_cool, ""),
             new Smiley(":,-(", R.string.smiley_cry, ""),
@@ -29,7 +28,9 @@ public class OCSmileysProvider {
             new Smiley(":/", R.string.smiley_undecided, ""),
             new Smiley(";)", R.string.smiley_wink, ""),
             new Smiley("XO", R.string.smiley_yell, "")
-           ));
+    ));
+    */
+    private static final List<Smiley> SMILEYS = Collections.unmodifiableList(Collections.emptyList());
 
     private OCSmileysProvider() {
         // utility class
