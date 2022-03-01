@@ -37,8 +37,6 @@ import org.apache.commons.lang3.StringUtils;
 
 public class SearchResult implements Parcelable {
 
-    public static final String SEARCHSTATE_FINDER = "ss_finder";
-
     public static final String CON_LEFT_TO_FETCH = "con_lefttofetch";
     public static final String CON_URL = "con_url";
     public static final String CON_ERROR = "con_error";

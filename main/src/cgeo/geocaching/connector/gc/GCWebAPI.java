@@ -163,6 +163,10 @@ class GCWebAPI {
             return this;
         }
 
+        public Set<CacheAttribute> getCacheAttributes() {
+            return this.cacheAttributes;
+        }
+
         /**
          * set to true to show ONLY own caches, false to HIDE own caches, null if both should be shown.
          * Works only for Premium members!
@@ -406,9 +410,9 @@ class GCWebAPI {
             params.put("asc", "" + sortAsc);
 
             //ALWAYS send cgeo as an identifier
-            params.put("app", "cgeo"); //TODO: identification makes v2 not work (but something else too)
+            params.put("app", "cgeo"); //identify us towards Groundspeak due to gentlemens agreement
 
-            return getAPI("/web/search", params, MapSearchResultSet.class).blockingGet(); //TODO: v2 does not seem to work!
+            return getAPI("/web/search/v2", params, MapSearchResultSet.class).blockingGet();
         }
 
     }
@@ -798,6 +802,8 @@ class GCWebAPI {
         result.setLeftToFetch(con, mapSearchResultSet.total - search.getTake() - search.getSkip());
         final List<Geocache> foundCaches = new ArrayList<>();
 
+        final List<String> searchedAttributes = CollectionStream.of(search.cacheAttributes).map(ca -> ca.getValue(true)).toList();
+
         if (mapSearchResultSet.results != null) {
             for (final GCWebAPI.MapSearchResult r : mapSearchResultSet.results) {
 
@@ -841,6 +847,9 @@ class GCWebAPI {
                     c.setOwnerDisplayName(r.owner.username);
                     c.setOwnerUserId(r.owner.username);
                 }
+
+                //if search contains attributes, then we know that cache has these attributes -> add them
+                c.setAttributes(searchedAttributes);
 
                 foundCaches.add(c);
             }
