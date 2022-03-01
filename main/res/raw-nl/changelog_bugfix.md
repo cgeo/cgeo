@@ -2,7 +2,7 @@
 - Oplossing: Zeldzame crash in cache lijst attribuut overzicht
 - Oplossing: Functie "Herstel een andere backup" hersteld
 - Wijziging: Verwijder meldingen bij het laden van tracks
-- Fix: Rare crash when sorting by difficulty if adventure labs are on the list
+- Oplossing: Zeldzame crash bij het sorteren op moeilijkheidsgraad als avonturenlabs op de lijst staan
 
 ## 2022.02.16 Bugfix Release
 
