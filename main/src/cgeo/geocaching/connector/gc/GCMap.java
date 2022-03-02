@@ -265,7 +265,7 @@ public class GCMap {
                 break;
             case FAVORITES:
                 final FavoritesGeocacheFilter favFilter = (FavoritesGeocacheFilter) basicFilter;
-                if (!favFilter.isPercentage()) {
+                if (!favFilter.isPercentage() && favFilter.getMinRangeValue() != null) {
                     search.setMinFavoritepoints(Math.round(favFilter.getMinRangeValue()));
                 }
                 break;
