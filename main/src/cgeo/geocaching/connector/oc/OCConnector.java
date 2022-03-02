@@ -198,6 +198,12 @@ public class OCConnector extends AbstractConnector implements SmileyCapability {
     }
 
     @Override
+    @Nullable
+    public Smiley getSmiley(final int id) {
+        return OCSmileysProvider.getSmiley(id);
+    }
+
+    @Override
     public boolean isHttps() {
         return https;
     }

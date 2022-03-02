@@ -614,6 +614,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     }
 
     @Override
+    @Nullable
+    public Smiley getSmiley(final int id) {
+        return GCSmileysProvider.getSmiley(id);
+    }
+
+    @Override
     public boolean isChallengeCache(@NonNull final Geocache cache) {
         return cache.getType() == CacheType.MYSTERY && StringUtils.containsIgnoreCase(cache.getName(), "challenge");
     }

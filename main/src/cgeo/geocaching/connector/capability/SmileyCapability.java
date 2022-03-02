@@ -9,4 +9,6 @@ import java.util.List;
  */
 public interface SmileyCapability extends IConnector {
     List<Smiley> getSmileys();
+
+    Smiley getSmiley(int id);
 }
