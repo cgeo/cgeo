@@ -2582,4 +2582,37 @@
     <string name="rtl_path_quality1">Qualität: 1 (gepflastert: Asphalt, …)</string>
     <string name="rtl_path_quality23">Qualität 2-3 (gepflastert: Geröll, repariert, …)</string>
     <string name="rtl_path_quality45">Qualität 4-5 (ungepflastert)</string>
+    <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Lächeln</string>
+    <string name="smiley_big_smile">Lachen</string>
+    <string name="smiley_cool">Kalt</string>
+    <string name="smiley_blush">Erröten</string>
+    <string name="smiley_tongue">Zunge raus</string>
+    <string name="smiley_evil">Teufel</string>
+    <string name="smiley_shocked">Schockiert</string>
+    <string name="smiley_wink">Zwinkern</string>
+    <string name="smiley_clown">Clown</string>
+    <string name="smiley_blackeye">Blaues Auge</string>
+    <string name="smiley_8ball">Kugel 8</string>
+    <string name="smiley_frown">Stirnrunzeln</string>
+    <string name="smiley_shy">Schüchtern</string>
+    <string name="smiley_angry">Böse</string>
+    <string name="smiley_dead">Tot</string>
+    <string name="smiley_sleepy">Schläfrig</string>
+    <string name="smiley_kisses">Kuss</string>
+    <string name="smiley_approve">Zustimmung</string>
+    <string name="smiley_disapprove">Ablehnung</string>
+    <string name="smiley_question">Frage</string>
+    <string name="smiley_cry">Weinen</string>
+    <string name="smiley_embarassed">Peinlich</string>
+    <string name="smiley_footinmouth">Maulkorb</string>
+    <string name="smiley_innocent">Unschuldig</string>
+    <string name="smiley_kiss">Kuss</string>
+    <string name="smiley_laughing">Lachen</string>
+    <string name="smiley_money">Geld</string>
+    <string name="smiley_sealed">Verschlossen</string>
+    <string name="smiley_surprised">Überrascht</string>
+    <string name="smiley_tongueout">Zunge raus</string>
+    <string name="smiley_undecided">Unentschlossen</string>
+    <string name="smiley_yell">Schrei</string>
 </resources>
