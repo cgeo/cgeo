@@ -2268,4 +2268,35 @@
     <string name="rtl_picnic_site">Μέρος για πικ νικ</string>
     <string name="rtl_playground">Παιδική χαρά</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Smiley</string>
+    <string name="smiley_big_smile">Μεγάλο Χαμόγελο</string>
+    <string name="smiley_cool">Γουστάρω!</string>
+    <string name="smiley_blush">Κοκκινίζω</string>
+    <string name="smiley_tongue">Γλώσσα</string>
+    <string name="smiley_evil">Κακό!</string>
+    <string name="smiley_shocked">Έκπληξη</string>
+    <string name="smiley_wink">Γνεψιμο</string>
+    <string name="smiley_clown">Κλόουν</string>
+    <string name="smiley_blackeye">Μαύρο Μάτι</string>
+    <string name="smiley_8ball">Eightball</string>
+    <string name="smiley_frown">Συνοφρύωση</string>
+    <string name="smiley_shy">Ντροπή</string>
+    <string name="smiley_angry">Θυμωμένος</string>
+    <string name="smiley_dead">Εξαντλημένo</string>
+    <string name="smiley_sleepy">Υπνηλία</string>
+    <string name="smiley_kisses">Φιλάκια</string>
+    <string name="smiley_approve">Εγκεκριμένο</string>
+    <string name="smiley_disapprove">Απορριπτέο</string>
+    <string name="smiley_question">Ερώτηση</string>
+    <string name="smiley_cry">Κλάμα</string>
+    <string name="smiley_embarassed">Ντροπή</string>
+    <string name="smiley_footinmouth">Είπα χαζομάρα</string>
+    <string name="smiley_innocent">Αθώος</string>
+    <string name="smiley_kiss">Φιλί</string>
+    <string name="smiley_laughing">Γελάω</string>
+    <string name="smiley_money">Χρήματα</string>
+    <string name="smiley_sealed">Σφραγισμένο</string>
+    <string name="smiley_surprised">Έκπληξη</string>
+    <string name="smiley_tongueout">Βγάζω γλώσσα</string>
+    <string name="smiley_undecided">Αναποφάσιστο</string>
 </resources>
