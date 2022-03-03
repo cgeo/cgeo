@@ -2583,4 +2583,36 @@
     <string name="rtl_path_quality23">kwaliteit 2/3 (verhard: grind, gerepareerd, …)</string>
     <string name="rtl_path_quality45">kwaliteit 4/5 (onverhard)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Glimlach</string>
+    <string name="smiley_big_smile">Grote glimlach</string>
+    <string name="smiley_cool">Cool</string>
+    <string name="smiley_blush">Blozen</string>
+    <string name="smiley_tongue">Tong</string>
+    <string name="smiley_evil">Kwaadaardig</string>
+    <string name="smiley_shocked">Geschokt</string>
+    <string name="smiley_wink">Knipoog</string>
+    <string name="smiley_clown">Clown</string>
+    <string name="smiley_blackeye">Blauw oog</string>
+    <string name="smiley_8ball">Achtbal</string>
+    <string name="smiley_frown">Frons</string>
+    <string name="smiley_shy">Verlegen</string>
+    <string name="smiley_angry">Boos</string>
+    <string name="smiley_dead">Dood</string>
+    <string name="smiley_sleepy">Slaperig</string>
+    <string name="smiley_kisses">Kusjes</string>
+    <string name="smiley_approve">Goedgekeurd</string>
+    <string name="smiley_disapprove">Afgekeurd</string>
+    <string name="smiley_question">Vraag</string>
+    <string name="smiley_cry">Huilen</string>
+    <string name="smiley_embarassed">Beschaamd</string>
+    <string name="smiley_footinmouth">Mond vol tanden</string>
+    <string name="smiley_innocent">Onschuldig</string>
+    <string name="smiley_kiss">Kus</string>
+    <string name="smiley_laughing">Lachen</string>
+    <string name="smiley_money">Geld</string>
+    <string name="smiley_sealed">Verzegeld</string>
+    <string name="smiley_surprised">Verrast</string>
+    <string name="smiley_tongueout">Tong uitsteken</string>
+    <string name="smiley_undecided">Onbeslist</string>
+    <string name="smiley_yell">Schreeuw</string>
 </resources>
