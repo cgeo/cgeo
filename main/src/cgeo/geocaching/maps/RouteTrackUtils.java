@@ -133,9 +133,9 @@ public class RouteTrackUtils {
         if (isRouteNonEmpty(individualRoute)) {
             dialog.findViewById(R.id.indivroute).setVisibility(View.VISIBLE);
 
-            final View vSort = dialog.findViewById(R.id.item_sort);
-            vSort.setVisibility(View.VISIBLE);
-            vSort.setOnClickListener(v1 -> activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE));
+            final View vEdit = dialog.findViewById(R.id.item_edit);
+            vEdit.setVisibility(View.VISIBLE);
+            vEdit.setOnClickListener(v1 -> activity.startActivityForResult(new Intent(activity, RouteSortActivity.class), REQUEST_SORT_INDIVIDUAL_ROUTE));
 
             dialog.findViewById(R.id.item_center).setOnClickListener(v1 -> individualRoute.setCenter(centerOnPosition));
 

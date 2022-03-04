@@ -163,7 +163,7 @@ public final class ImageUtils {
      *            The image format
      * @param quality
      *            The image quality
-     * @param pathOfOutputImage
+     * @param targetUri
      *            Path to store to
      */
     public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final Uri targetUri) {
@@ -567,7 +567,7 @@ public final class ImageUtils {
         if (geocode == null) {
             return;
         }
-        final Set<String> filenamesToKeep = CollectionStream.of(keep).map(i -> i.getFile().getName()).toSet();
+        final Set<String> filenamesToKeep = CollectionStream.of(keep).map(i -> i.getFile() == null ? null : i.getFile().getName()).toSet();
         final String fileNamePraefix = OFFLINE_LOG_IMAGE_PRAEFIX + geocode;
         CollectionStream.of(LocalStorage.getOfflineLogImageDir(geocode).listFiles())
             .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))

@@ -10,16 +10,16 @@
         style="@style/text_default"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@id/item_sort"
+        android:layout_toLeftOf="@id/item_edit"
         android:text="@string/individual_route" />
 
     <ImageButton
-        android:id="@+id/item_sort"
+        android:id="@+id/item_edit"
         style="@style/button_icon"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@id/item_visibility"
         android:background="?android:attr/selectableItemBackgroundBorderless"
-        android:src="@drawable/ic_menu_swap_vert"
+        android:src="@drawable/ic_menu_edit"
         android:tooltipText="@string/map_sort_individual_route"
         android:visibility="gone" />
 
