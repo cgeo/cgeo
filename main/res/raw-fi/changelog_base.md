@@ -9,7 +9,7 @@
 - Uusi: Mahdollisuus tarkistaa puuttuvat reititystiedot nykyiselle näkymälle
 - Uusi: Teeman selitteet teemoille Elevate, Elements ja Freizeitkarte
 - Korjaa: Uudelleenmahdollista reititys ulkoisella BRouter sovellus versiossa 1.6.3
-- Fix: Avoid map duplication by map downloader in certain conditions
+- Korjaa: Vältä karttalataajan tietyissä olosuhteissa aiheuttama päällekkäinen kartta
 
 ### Kätkölista
 - Uusi: Mahdollisuus valita seuraavat 20 kätköä
@@ -23,7 +23,7 @@
 - Uusi: Välitä kätkön koordinaatit geocheckeriin (jos geochecker tukee sitä)
 - Uusi: Värilliset attribuuttikuvakkeet (seuraavat attribuuttiryhmät)
 - Korjaa: Ongelma kuvien avaamisessa gallerian välilehdeltä ulkoisissa sovelluksissa joissakin Samsungin laitteissa
-- Fix: Missing log count (website change)
+- Korjaa: Puuttuva lokimäärä (verkkosivuston muutos)
 
 ### Muu
 - Uusi: Pikalataa geokoodit leikepöydällä olevasta tekstistä päänäytön hakukenttään
@@ -38,8 +38,8 @@
 - Korjaus: Vältä toistuvia päivitysten karttojen/reitityslaattojen tarkistuksia välillä = 0
 - Korjaus: Optimoi tuki salasanojen automaattiseen täyttämiseen ulkoisesta salasanasovelluksista asetuksissa
 - Korjaus: Ota käyttöön vihjeet järjestelmille, jotka käyttävät vanhempaa kuin Androidin versio 8
-- Fix: Crash on long-tap on trackable code in trackable details
-- Fix: Fieldnotes upload (website change)
-- Refactored settings to meet current Android specifications
-- Updated MapsWithMe API
+- Korjaa: Kaatuminen napauttaessa pitkään matkaajan koodia matkaajan tiedoissa
+- Korjaa: Kenttämuistiinpanojen lähetys (verkkosivuston muutos)
+- Järjesteltiin uudelleen asetuksia nykyisten Android-spesifikaatioiden mukaiseksi
+- Päivitetty MapsWithMe API
 
