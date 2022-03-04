@@ -3,6 +3,7 @@
 - Correcció: Tornar a habilitar la funció "Restaura una còpia de seguretat diferent"
 - Canvi: Elimina les notificacions en carregar tracks
 - Fix: Rare crash when sorting by difficulty if adventure labs are on the list
+- Change: Use different icon for "edit individual route" in route/track quick settings
 
 ## 2022.02.16 Correcció d'errors
 
