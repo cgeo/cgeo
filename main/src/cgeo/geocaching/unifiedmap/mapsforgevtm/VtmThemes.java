@@ -22,13 +22,13 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
  * this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+import java.io.InputStream;
+
 import org.oscim.backend.AssetAdapter;
 import org.oscim.theme.IRenderTheme.ThemeException;
 import org.oscim.theme.ThemeFile;
 import org.oscim.theme.XmlRenderThemeMenuCallback;
 import org.oscim.theme.XmlThemeResourceProvider;
-
-import java.io.InputStream;
 
 /**
  * Enumeration of all internal rendering themes.
@@ -45,7 +45,7 @@ public enum VtmThemes implements ThemeFile {
 
     private final String mPath;
 
-    VtmThemes(String path) {
+    VtmThemes(final String path) {
         mPath = path;
     }
 
@@ -75,14 +75,17 @@ public enum VtmThemes implements ThemeFile {
     }
 
     @Override
-    public void setMapsforgeTheme(boolean mapsforgeTheme) {
+    public void setMapsforgeTheme(final boolean mapsforgeTheme) {
+        // intentionally left empty
     }
 
     @Override
-    public void setMenuCallback(XmlRenderThemeMenuCallback menuCallback) {
+    public void setMenuCallback(final XmlRenderThemeMenuCallback menuCallback) {
+        // intentionally left empty
     }
 
     @Override
-    public void setResourceProvider(XmlThemeResourceProvider resourceProvider) {
+    public void setResourceProvider(final XmlThemeResourceProvider resourceProvider) {
+        // intentionally left empty
     }
 }

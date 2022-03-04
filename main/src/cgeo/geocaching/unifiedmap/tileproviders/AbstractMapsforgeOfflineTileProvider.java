@@ -17,8 +17,8 @@ import org.oscim.tiling.source.mapfile.MapInfo;
 
 class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider {
 
-    AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri) {
-        super(name, uri);
+    AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
+        super(name, uri, zoomMin, zoomMax);
         supportsThemes = true;
     }
 

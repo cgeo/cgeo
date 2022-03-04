@@ -11,21 +11,16 @@ import okhttp3.Cache;
 import okhttp3.OkHttpClient;
 import org.oscim.layers.tile.bitmap.BitmapTileLayer;
 import org.oscim.map.Map;
-import org.oscim.renderer.MapRenderer;
 import org.oscim.tiling.source.OkHttpEngine;
 import org.oscim.tiling.source.bitmap.BitmapTileSource;
 
 class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider {
 
     private final String tilePath;
-    private final int zoomMin;
-    private final int zoomMax;
 
     AbstractMapsforgeOnlineTileProvider(final String name, final Uri uri, final String tilePath, final int zoomMin, final int zoomMax) {
-        super(name, uri);
+        super(name, uri, zoomMin, zoomMax);
         this.tilePath = tilePath;
-        this.zoomMin = zoomMin;
-        this.zoomMax = zoomMax;
     }
 
     @Override
@@ -40,7 +35,7 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
             .zoomMin(zoomMin)
             .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
-//        tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "vtm-android-example"));
+        tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "vtm-android-example"));
         tileLayer = new BitmapTileLayer(map, tileSource);
         map.layers().add(tileLayer);
     }

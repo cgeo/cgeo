@@ -1,9 +1,9 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+
 import java.util.HashMap;
 import java.util.Map;
-
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 
 public abstract class AbstractTileProvider {
 
@@ -12,6 +12,14 @@ public abstract class AbstractTileProvider {
     protected String tileProviderName;
     private Integer numericId;
     private static final Map<String, Integer> mapSourceIds = new HashMap<>();
+
+    protected final int zoomMin;
+    protected final int zoomMax;
+
+    protected AbstractTileProvider (final int zoomMin, final int zoomMax) {
+        this.zoomMin = zoomMin;
+        this.zoomMax = zoomMax;
+    }
 
     public boolean supportsLanguages() {
         return supportsLanguages;
@@ -46,4 +54,13 @@ public abstract class AbstractTileProvider {
     }
 
     public abstract AbstractUnifiedMap getMap();
+
+    public int getZoomMin() {
+        return zoomMin;
+    }
+
+    public int getZoomMax() {
+        return zoomMax;
+    }
+
 }
