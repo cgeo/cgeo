@@ -51,51 +51,11 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
 
     @Override
     public void setTileSource(final AbstractTileProvider newSource) {
+        super.setTileSource(newSource);
         // mMap.layers().clear();
         ((AbstractMapsforgeTileProvider) newSource).addTileLayer(mMap);
         startMap();
     }
-
-    /** vector file based map source **/
-    /*
-    public void setMapfileTileSource(final FileInputStream fis) {
-        final VectorTileLayer mTileLayer;
-
-        final MapFileTileSource tileSource = new MapFileTileSource();
-        tileSource.setMapFileInputStream(fis);
-        mTileLayer = mMap.setBaseMap(tileSource);
-        startMap();
-        mMap.layers().add(new BuildingLayer(mMap, mTileLayer));
-        mMap.layers().add(new LabelLayer(mMap, mTileLayer));
-        applyTheme();
-
-        final MapInfo info = tileSource.getMapInfo();
-        if (!info.boundingBox.contains(mMap.getMapPosition().getGeoPoint())) {
-            zoomToBounds(info.boundingBox);
-        }
-    }
-    */
-
-    /** online bitmap based map source **/
-    /*
-    public void setOnlineTileSource(final MapSource newSource) {
-        final BitmapTileLayer mBitmapLayer;
-
-        final OkHttpClient.Builder httpBuilder = new OkHttpClient.Builder();
-        final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
-        httpBuilder.cache(cache);
-        final TileSource tileSource = BitmapTileSource.builder()
-            .url("https://tile.openstreetmap.org")
-            .tilePath("/{Z}/{X}/{Y}.png")
-            .zoomMax(18)
-            .httpFactory(new OkHttpEngine.OkHttpFactory(httpBuilder))
-            .build();
-        mBitmapLayer = new BitmapTileLayer(mMap, tileSource);
-        mMap.layers().clear();
-        mMap.layers().add(mBitmapLayer);
-        startMap();
-    }
-    */
 
     @Override
     public void applyTheme() {
@@ -136,6 +96,16 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         pos.setByBoundingBox(bounds, Tile.SIZE * 4, Tile.SIZE * 4);
         mMap.setMapPosition(pos);
     }
+
+    public int getCurrentZoom() {
+        return mMap.getMapPosition().getZoomLevel();
+    };
+
+    public void setZoom(final int zoomLevel) {
+        final MapPosition pos = mMap.getMapPosition();
+        pos.setZoomLevel(zoomLevel);
+        mMap.setMapPosition(pos);
+    };
 
     // Lifecycle methods
 

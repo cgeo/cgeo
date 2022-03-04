@@ -1,7 +1,5 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
-
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -11,6 +9,7 @@ import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVTM;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.TextUtils;
+import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -20,14 +19,14 @@ import android.view.SubMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.tuple.ImmutablePair;
-
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.tuple.ImmutablePair;
 
 public class TileProviderFactory {
     public static final GoogleMaps MAP_GOOGLE = new GoogleMaps();
@@ -46,11 +45,11 @@ public class TileProviderFactory {
     public static void addMapviewMenuItems(final Activity activity, final Menu menu) {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
 
-        final int currentSource = Settings.getMapSource().getNumericalId();
+        final int currentTileProvider = Settings.getTileProvider().getNumericalId();
         int i = 0;
         for (AbstractTileProvider tileProvider : tileProviders.values()) {
             final int id = tileProvider.getNumericalId();
-            parentMenu.add(R.id.menu_group_map_sources, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentSource);
+            parentMenu.add(R.id.menu_group_map_sources, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
             i++;
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
@@ -66,7 +65,10 @@ public class TileProviderFactory {
         registerTileProvider(new GoogleSatelliteSource());
 
         // OSM online tile providers
+        registerTileProvider(new OsmOrgSource());
         registerTileProvider(new OsmDeSource());
+        registerTileProvider(new CyclosmSource());
+        registerTileProvider(new MapyCzSource());
 
         // OSM offline tile providers
         final List<ImmutablePair<String, Uri>> offlineMaps =
@@ -75,7 +77,7 @@ public class TileProviderFactory {
                 .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
         for (ImmutablePair<String, Uri> data : offlineMaps) {
-            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right));
+            registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
         }
         if (offlineMaps.size() > 0) {
             // @todo: add "combined" map type

@@ -59,11 +59,13 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
 
     @Override
     public void setTileSource(final AbstractTileProvider newSource) {
+        super.setTileSource(newSource);
         ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
     }
 
     @Override
     public void applyTheme() {
+        // @todo
     }
 
     @Override
@@ -73,6 +75,16 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
             mapController.animateTo(new GoogleGeoPoint(bounds.getCenterPoint()));
         }
     };
+
+    @Override
+    public int getCurrentZoom() {
+        return 0; // @todo: return actual current zoom level
+    }
+
+    @Override
+    public void setZoom(final int zoomLevel) {
+        // @todo: actually set zoom level
+    }
 
 
     // lifecycle methods

@@ -61,6 +61,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         map.setTileSource(newSource);
         Settings.setTileProvider(newSource);
+
+        // adjust zoom to be in allowed zoom range for current map
+        final int currentZoom = map.getCurrentZoom();
+        if (currentZoom < map.getZoomMin()) {
+            map.setZoom(map.getZoomMin());
+        } else if (currentZoom > map.getZoomMax()) {
+            map.setZoom(map.getZoomMax());
+        }
     }
 
     // Lifecycle methods

@@ -115,6 +115,13 @@ public class Settings {
     private static boolean useCompass = true;
     private static DirectionData.DeviceOrientation deviceOrientationMode = DirectionData.DeviceOrientation.AUTO;
 
+    /**
+     * Cache the mapsource locally. If that is an offline map source, each request would potentially access the
+     * underlying map file, leading to delays.
+     */
+    private static MapSource mapSource;
+    private static AbstractTileProvider tileProvider;
+
     public enum CoordInputFormatEnum {
         Plain,
         Deg,
@@ -233,13 +240,6 @@ public class Settings {
         Log.setDebug(getBoolean(R.string.pref_debug, false));
 
     }
-
-    /**
-     * Cache the mapsource locally. If that is an offline map source, each request would potentially access the
-     * underlying map file, leading to delays.
-     */
-    private static MapSource mapSource;
-    private static AbstractTileProvider tileProvider;
 
     protected Settings() {
         throw new InstantiationError();
