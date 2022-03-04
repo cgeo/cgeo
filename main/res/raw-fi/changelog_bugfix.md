@@ -1,9 +1,10 @@
-- Fix: Keep position on switching from Google map to OpenStreetMap map
-- Fix: Rare crash in cache list attribute overview
-- Fix: Re-enable "Restore a different backup" function
-- Change: Remove notifications on loading tracks
-- Fix: Rare crash when sorting by difficulty if adventure labs are on the list
+- Korjaa: Pidä sijainti siirryttäessä Googlen kartasta OpenStreetMap karttaan
+- Korjaa: Harvinainen kaatuminen kätkön attribuuttien yleiskatsauksessa
+- Korjaa: Ota uudelleen käyttöön "Palauta eri varmuuskopio"-funktio
+- Muutos: Poista ilmoitukset ladatessa ratoja
+- Korjaa: Harvinainen kaatuminen, kun lajitellaan vaikeuden mukaan, jos luettelossa on Adventure Labeja
+- Muutos: Käytä eri kuvaketta kohdassa "muokkaa yksittäistä reittiä" reitin tai kappaleen pika-asetuksissa
 
-## 2022.02.16 Bugfix Release
+## 2022.02.16 Viankorjausversio
 
-- Fix: Rare crash on startup of cgeo
+- Korjaa: Harvinainen kaatuminen cgeon käynnistyessä
