@@ -201,6 +201,15 @@
         <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
     </style>
 
+    <style name="quicklaunch_button" parent="button_icon_accent">
+        <item name="materialThemeOverlay">@style/IconButtonThemeOverlay</item>
+        <item name="backgroundTint">#38808080</item>
+        <item name="cornerRadius">12dip</item>
+        <item name="strokeWidth">0dip</item>
+        <item name="android:layout_margin">7dip</item>
+        <item name="iconSize">24dp</item>
+    </style>
+
     <style name="button_icon_colored" parent="button_icon_accent">
         <!-- display icon as colored image, without reverting all colors to tint color -->
         <item name="iconTint">#FFFFFFFF</item>
