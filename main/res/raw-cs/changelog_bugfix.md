@@ -3,6 +3,7 @@
 - Oprava: Opět povolena funkce "Obnovit jinou zálohu"
 - Změna: Odstraněno oznámení při načítání stop
 - Oprava: Vzácné selhání při řazení podle obtížnosti, pokud jsou na seznamu Adventure Lab kešky
+- Change: Use different icon for "edit individual route" in route/track quick settings
 
 ## 2022.02.16 Vydání opravy chyb
 
