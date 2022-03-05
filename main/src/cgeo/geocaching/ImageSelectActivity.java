@@ -49,9 +49,9 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private boolean imageCaptionMandatory;
     @Nullable private String geocode;
 
-    private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, (rc, imgs) -> {
+    private final ImageActivityHelper imageActivityHelper = new ImageActivityHelper(this, (rc, imgs, uk) -> {
         deleteImageFromDeviceIfNotOriginal(image);
-        image = imgs.isEmpty() ? null : imgs.get(0);
+        image = imgs.isEmpty() ? null : ImageUtils.toLocalLogImage(geocode, imgs.get(0));
         loadImagePreview();
     });
 
@@ -179,11 +179,11 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private void selectImageFromCamera() {
-        imageActivityHelper.getImageFromCamera(this.geocode, false);
+        imageActivityHelper.getImageFromCamera(this.geocode, false, null);
     }
 
     private void selectImageFromStorage() {
-        imageActivityHelper.getImageFromStorage(this.geocode, false);
+        imageActivityHelper.getImageFromStorage(this.geocode, false, null);
     }
 
     private boolean deleteImageFromDeviceIfNotOriginal(final Image img) {

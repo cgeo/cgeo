@@ -723,7 +723,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         for (Image img : imageListFragment.getImages()) {
 
                             //uploader can only deal with files, not with content Uris. Thus scale/compress into a temporary file
-                            final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale);
+                            final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale, 75);
                             final Image imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
                             imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
                             if (!isOkResult(imageResult)) {

@@ -139,7 +139,7 @@ public class ImagesList {
     }
 
     private void display(final RelativeLayout imageViewLayout, final BitmapDrawable image, final Image img, final LinearLayout view) {
-        final ImageView imageView = (ImageView) imageViewLayout.findViewById(R.id.map_image);
+        final ImageView imageView = imageViewLayout.findViewById(R.id.map_image);
         // In case of a failed download happening fast, the imageView seems to not have been added to the layout yet
         if (image != null && imageView != null) {
             bitmaps.add(image.getBitmap());
