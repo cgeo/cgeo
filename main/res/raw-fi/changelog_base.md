@@ -1,7 +1,7 @@
 ### Yleinen
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
+- Uusi: Suorita varmuuskopiot automaattisesti (valinnainen)
+- Korjaus: Jatkaa valmiiden latausten tuontia
+- Uusi: Lisätty suodatin "on käyttäjän määrittämät reittipisteet"
+- Uusi: Päivitetty sisäinen reititys BRouter v1.6.3
+- Uusi: Käyttäjän erillinen kuvake luoduille reittipisteille
+- Uusi: Lokipohjat offline-lokeille

@@ -2638,4 +2638,5 @@
     <string name="rtl_path_quality1">jakość 1 (utwardzenie: asfalt, …)</string>
     <string name="rtl_path_quality23">jakość 2/3 (utwardzenie: żwir, naprawiony, …)</string>
     <string name="rtl_path_quality45">jakość 4/5 (nieutwardzona)</string>
+    <!-- Smileys GC / OC -->
 </resources>

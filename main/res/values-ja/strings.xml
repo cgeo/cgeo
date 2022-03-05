@@ -2037,8 +2037,8 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="check_tiles_found">ルート検索データはダウンロード済みです</string>
     <string name="check_tiles_missing">ルート検索に必要なルート検索データが見つかりました:\n%1$s\n\nこれらのファイルをダウンロードしますか?%2$s</string>
     <string name="check_tiles_unsupported">警告: ルート検索データは一部の地域では利用できません</string>
-    <string name="tileupdate_info">ルート検索データの更新を確認するには、ここをタップします。ロングタップすると延期されます。</string>
-    <string name="mapupdate_info">地図と地図テーマの更新を確認するには、ここをタップします。ロングタップすると延期されます。</string>
+    <string name="tileupdate_info">ルート検索データの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
+    <string name="mapupdate_info">地図と地図テーマの更新を確認するには、ここをタップしてください。ロングタップすると延期されます。</string>
     <string name="no_updates_found">更新はありません。</string>
     <string name="updates_check">更新を確認</string>
     <string name="mapserver_mapsforge_info">基本地図(地図テーマは必要ありません)</string>
@@ -2122,4 +2122,5 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">ウォーキング、サイクリング、登山</string>
     <!-- render theme legend: category "POI / Symbols" -->
+    <!-- Smileys GC / OC -->
 </resources>
