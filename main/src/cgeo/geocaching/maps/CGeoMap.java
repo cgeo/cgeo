@@ -660,7 +660,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private void resumeTrack(final String key, final boolean preventReloading) {
         final Tracks tracks = mapActivity.getTracks();
         if (null == tracks && !preventReloading) {
-            mapActivity.getRouteTrackUtils().reloadTrack(key, this::setTrack);
+            mapActivity.getRouteTrackUtils().reloadTrack(tracks.getTrackfile(key), this::setTrack);
         } else if (null != tracks && null != overlayPositionAndScale && overlayPositionAndScale instanceof GooglePositionAndHistory) {
             ((GooglePositionAndHistory) overlayPositionAndScale).updateRoute(key, tracks.getRoute(key));
         }

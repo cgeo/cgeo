@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 
@@ -38,7 +39,7 @@ public class Tracks {
     public Tracks(final RouteTrackUtils routeTrackUtils, final UpdateTrack updateTrack) {
         this();
         for (Track track : data) {
-            routeTrackUtils.reloadTrack(track.trackfile.getKey(), updateTrack);
+            routeTrackUtils.reloadTrack(track.trackfile, updateTrack);
         }
         routeTrackUtils.setTracks(this);
     }
@@ -104,5 +105,15 @@ public class Tracks {
 
     public void hide(@NonNull final String key, final boolean hide) {
         Trackfiles.hide(key, hide);
+    }
+
+    @Nullable
+    public Trackfiles getTrackfile(@NonNull final String key) {
+        for (Track track : data) {
+            if (track.trackfile.getKey().equals(key)) {
+                return track.trackfile;
+            }
+        }
+        return null;
     }
 }
