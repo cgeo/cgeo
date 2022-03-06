@@ -4,6 +4,8 @@
 - Wijziging: Verwijder meldingen bij het laden van tracks
 - Oplossing: Zeldzame crash bij het sorteren op moeilijkheidsgraad als avonturenlabs op de lijst staan
 - Wijziging: Gebruik een ander pictogram voor "wijzig individuele route" in route/track snelle instellingen
+- Oplossing: Kaart voor een waypoint nu correct gecentreerd met Google Maps
+- Oplossing: Toon betere bestandsnaam in c:geo na het selecteren van een GPX track bestand
 
 ## 2022.02.16 Bugfix Release
 
