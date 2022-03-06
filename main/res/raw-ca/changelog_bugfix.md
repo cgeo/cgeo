@@ -4,6 +4,8 @@
 - Canvi: Elimina les notificacions en carregar tracks
 - Fix: Rare crash when sorting by difficulty if adventure labs are on the list
 - Change: Use different icon for "edit individual route" in route/track quick settings
+- Fix: Map for a waypoint now centered correctly with Google Maps
+- Fix: Show better file name in c:geo after selecting a GPX track file
 
 ## 2022.02.16 Correcció d'errors
 
