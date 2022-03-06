@@ -1642,6 +1642,15 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
             centered = true;
             alreadyCentered = true;
+        } else if (!centered && coordsCenter != null) {
+            try {
+                mapController.setCenter(makeGeoPoint(coordsCenter));
+            } catch (final Exception e) {
+                Log.e("centermap", e);
+            }
+
+            centered = true;
+            alreadyCentered = true;
         } else if (!centered && (geocodeCenter != null || mapOptions.searchResult != null)) {
             try {
                 Viewport viewport = null;
@@ -1661,15 +1670,6 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     mapController.zoomToSpan((int) (viewport.getLatitudeSpan() * 1e6), (int) (viewport.getLongitudeSpan() * 1e6));
                 }
             } catch (final RuntimeException e) {
-                Log.e("centermap", e);
-            }
-
-            centered = true;
-            alreadyCentered = true;
-        } else if (!centered && coordsCenter != null) {
-            try {
-                mapController.setCenter(makeGeoPoint(coordsCenter));
-            } catch (final Exception e) {
                 Log.e("centermap", e);
             }
 
