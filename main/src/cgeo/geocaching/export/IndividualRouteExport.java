@@ -134,6 +134,10 @@ public class IndividualRouteExport {
                 XmlUtils.simpleText(gpx, NS_GPX, "time", timeInfo);
                 gpx.endTag(NS_GPX, "metadata");
 
+                for (RouteSegment loc : trail) {
+                    exportPoint(gpx, "wpt", loc.getItem().getPoint(), loc.getItem().getIdentifier());
+                }
+
                 gpx.startTag(NS_GPX, exportAsTrack ? "trk" : "rte");
                 XmlUtils.simpleText(gpx, NS_GPX, "name", "c:geo individual route " + timeInfo);
                 for (RouteSegment loc : trail) {
