@@ -1,11 +1,11 @@
 package cgeo.geocaching.storage.extension;
 
+import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
-import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.net.Uri;
@@ -56,7 +56,7 @@ public class Trackfiles extends DataStore.DBExtension {
         }
         // add entry to list of trackfiles
         removeAll(type, fn);
-        add(type, fn, 0, 0, 0, 0, UriUtils.getLastPathSegment(uri), "", "", "");
+        add(type, fn, 0, 0, 0, 0, ContentStorage.get().getName(uri), "", "", "");
         return fn;
     }
 
