@@ -4,8 +4,9 @@
 - Muutos: Poista ilmoitukset ladatessa ratoja
 - Korjaa: Harvinainen kaatuminen, kun lajitellaan vaikeuden mukaan, jos luettelossa on Adventure Labeja
 - Muutos: Käytä eri kuvaketta kohdassa "muokkaa yksittäistä reittiä" reitin tai kappaleen pika-asetuksissa
-- Fix: Map for a waypoint now centered correctly with Google Maps
-- Fix: Show better file name in c:geo after selecting a GPX track file
+- Korjaa: Kartta reittipisteelle on nyt keskitetty oikein Google Mapsissa
+- Korjaa: Näytä parempi tiedostonimi c:geossa kun olet valinnut GPX-polkutiedoston
+- Korjaa: Muista "näytä/piilota" asetus reiteille / poluille
 
 ## 2022.02.16 Viankorjausversio
 
