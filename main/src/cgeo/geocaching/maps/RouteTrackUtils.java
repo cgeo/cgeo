@@ -232,11 +232,12 @@ public class RouteTrackUtils {
         return route != null && route.getNumSegments() > 0;
     }
 
-    public void reloadTrack(final String key, final Tracks.UpdateTrack updateTrack) {
-        final Uri uri = Trackfiles.getUriFromKey(key);
+    public void reloadTrack(final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
+        final Uri uri = Trackfiles.getUriFromKey(trackfile.getKey());
         GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+            route.setHidden(trackfile.isHidden());
             updateDialogTracks(popup, tracks);
-            updateTrack.updateRoute(key, route);
+            updateTrack.updateRoute(trackfile.getKey(), route);
         });
     }
 
