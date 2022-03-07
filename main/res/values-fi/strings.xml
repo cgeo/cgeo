@@ -2195,7 +2195,7 @@
     <string name="export_individualroute_title">Vie yksittäinen reitti</string>
     <string name="export_individualroute_success">Viety yksittäinen reitti kohteeseen \"%s\"</string>
     <!-- install wizard -->
-    <string name="wizard">Automaattinen määritys</string>
+    <string name="wizard">Ohjattu määritystoiminto</string>
     <string name="wizard_welcome_title">Tervetuloa c:geoon</string>
     <string name="wizard_migration_title">c:geo kansion siirto</string>
     <string name="wizard_intro">Tarvitset vain muutaman vaiheen c:geon määritykseen ja olet valmis lähtemään. Haluatko apua sen kanssa?</string>
