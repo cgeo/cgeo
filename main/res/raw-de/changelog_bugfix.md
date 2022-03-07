@@ -6,6 +6,7 @@
 - Änderung: Geändertes Symbol für "Individuelle Route bearbeiten" in den Routen/Tracks-Schnelleinstellungen
 - Korrektur: Karte für einen Wegpunkt mit Google Maps jetzt korrekt zentriert
 - Korrektur: Besseren Dateinamen in c:geo nach Auswahl einer GPX-Track-Datei anzeigen
+- Fix: Remember "show/hide" setting for routes / tracks
 
 ## 2021.12.16 Bugfix -Release
 
