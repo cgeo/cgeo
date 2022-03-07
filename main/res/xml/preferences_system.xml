@@ -15,7 +15,8 @@
         <Preference
             android:key="@string/pref_persistablefolder_testdir"
             android:title="Directory for Unit Tests. This setting is only needed for development and only visible in Debug mode"
-            app:iconSpaceReserved="false" />
+            app:iconSpaceReserved="false"
+            app:isPreferenceVisible="false" />
     </PreferenceCategory>
 
     <PreferenceCategory
