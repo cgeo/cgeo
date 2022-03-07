@@ -6,6 +6,7 @@
 - Wijziging: Gebruik een ander pictogram voor "wijzig individuele route" in route/track snelle instellingen
 - Oplossing: Kaart voor een waypoint nu correct gecentreerd met Google Maps
 - Oplossing: Toon betere bestandsnaam in c:geo na het selecteren van een GPX track bestand
+- Fix: Remember "show/hide" setting for routes / tracks
 
 ## 2022.02.16 Bugfix Release
 
