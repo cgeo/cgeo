@@ -6,7 +6,7 @@
 - Change: Use different icon for "edit individual route" in route/track quick settings
 - Fix: Map for a waypoint now centered correctly with Google Maps
 - Fix: Show better file name in c:geo after selecting a GPX track file
-- Fix: Remember "show/hide" setting for routes / tracks
+- Corrigé : Mémorisation du paramètre « afficher / masquer » pour les itinéraires / traces
 
 ## 2022.02.16 Version de maintenance
 
