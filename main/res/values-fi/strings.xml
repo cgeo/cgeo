@@ -361,7 +361,7 @@
     <string name="caches_sort_automatic">Automaattinen (%s)</string>
     <string name="caches_sort_distance">Etäisyys</string>
     <string name="caches_sort_distance_target">Etäisyys kohteeseen</string>
-    <string name="caches_sort_difficulty">Vaikeusaste</string>
+    <string name="caches_sort_difficulty">Vaikeus</string>
     <string name="caches_sort_terrain">Maasto</string>
     <string name="caches_sort_size">Koko</string>
     <string name="caches_sort_favorites">Suosikit</string>
@@ -369,13 +369,13 @@
     <string name="caches_sort_name">Nimi</string>
     <string name="caches_sort_geocode">Geokoodi</string>
     <string name="caches_sort_rating">Arviointi</string>
-    <string name="caches_sort_vote">Äänet (oma arviointi)</string>
-    <string name="caches_sort_inventory">Kätköjen määrä</string>
-    <string name="caches_sort_date_hidden">Piilottamispäivä</string>
-    <string name="caches_sort_date_logged">Lokimerkinnän päivä</string>
-    <string name="caches_sort_finds">Löytöjä</string>
+    <string name="caches_sort_vote">Ääni (oma arviointi)</string>
+    <string name="caches_sort_inventory">Matkaajien määrä</string>
+    <string name="caches_sort_date_hidden">Piilotuspäivä</string>
+    <string name="caches_sort_date_logged">Kirjauspäivä</string>
+    <string name="caches_sort_finds">Löydöt</string>
     <string name="caches_sort_state">Tila</string>
-    <string name="caches_sort_storage">Laitteelle tallentamisen päivämäärä</string>
+    <string name="caches_sort_storage">Tallennuspäivä</string>
     <string name="caches_sort_eventdate">Tapahtuman päivämäärä</string>
     <string name="caches_select_mode">Valintatila</string>
     <string name="caches_select_next">Valitse seuraavat 20 kätköä</string>
@@ -429,7 +429,7 @@
     <!-- caches lists -->
     <string name="menu_lists">Hallitse listoja</string>
     <string name="list_menu_create">Luo uusi lista</string>
-    <string name="list_menu_drop">Poista valittu lista</string>
+    <string name="list_menu_drop">Poista nykyinen lista</string>
     <string name="list_menu_rename">Nimeä uudelleen nykyinen lista</string>
     <string name="list_menu_import">Tuo</string>
     <string name="list_title">Valitse lista</string>
@@ -1548,7 +1548,7 @@
     <string name="helper_gcwizard_description">GC Wizard sisältää lukuisia työkaluja yksinkertaisiin salauksiin, geodeettiset ja tieteelliset laskelmat sekä satoja eri symbolisarjoja.</string>
     <!-- export -->
     <string name="share_export">Jaa / Vie</string>
-    <string name="export">Vienti</string>
+    <string name="export">Vie</string>
     <string name="export_progress">Vienti: %1$s</string>
     <string name="export_exportedto">viety</string>
     <string name="export_failed">Vienti epäonnistui</string>
@@ -2115,7 +2115,7 @@
     <string name="export_individualroute_title">Vie yksittäinen reitti</string>
     <string name="export_individualroute_success">Viety yksittäinen reitti kohteeseen \"%s\"</string>
     <!-- install wizard -->
-    <string name="wizard">Automaattinen määritys</string>
+    <string name="wizard">Ohjattu määritystoiminto</string>
     <string name="wizard_welcome_title">Tervetuloa c:geoon</string>
     <string name="wizard_migration_title">c:geo kansion siirto</string>
     <string name="wizard_intro">Tarvitset vain muutaman vaiheen c:geon määritykseen ja olet valmis lähtemään. Haluatko apua sen kanssa?</string>
