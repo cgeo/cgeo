@@ -1,3 +1,5 @@
+## 2022.03.09 Viankorjausversio
+
 - Korjaa: Pidä sijainti siirryttäessä Googlen kartasta OpenStreetMap karttaan
 - Korjaa: Harvinainen kaatuminen kätkön attribuuttien yleiskatsauksessa
 - Korjaa: Ota uudelleen käyttöön "Palauta eri varmuuskopio"-funktio
