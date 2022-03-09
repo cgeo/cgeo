@@ -298,7 +298,7 @@
     <string name="confirm_unsaved_changes_title">Tallentamattomat muutokset</string>
     <string name="confirm_discard_changes">Hylätäänkö tallentamattomat muutokset?</string>
     <string name="confirm_discard_wp_changes">Hylätäänkö tallentamattomat muutokset?</string>
-    <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) lokkausta varten.</string>
+    <string name="warn_log_load_additional_data">c:geo ei onnistunut lataamaan lisätietoja (matkalaiset/suosikkipisteet) kirjausta varten.</string>
     <string name="more_information">Lisätietoja</string>
     <string name="undo">Kumoa</string>
     <string name="dont_show_again">Älä näytä uudelleen</string>
@@ -629,7 +629,7 @@
     <string name="settings_title_offlinedata">Offline-data</string>
     <string name="settings_summary_offlinedata">Aseta tiedot jotka tallennetaan offline-käyttöön, tallennuspaikan sijainti ja hakemistot GPX-tiedostoille.</string>
     <string name="settings_title_logging">Kirjaaminen</string>
-    <string name="settings_summary_logging">Aseta allekirjoituksesi ja lokkausasetukset.</string>
+    <string name="settings_summary_logging">Aseta allekirjoituksesi ja kirjausasetukset.</string>
     <string name="settings_title_map">Kartta</string>
     <string name="settings_summary_map">Aseta kartan lähde, offline-kartta-asetukset ja kartan tiedot.</string>
     <string name="settings_title_map_data">Kartan tiedot</string>
@@ -660,7 +660,7 @@
     <string name="init_nearbysearchlimit_description">Asettaa etäisyyden, jonka sisällä kätköt etsitään kun kätköjä etsitään lähistöltä (0=rajoittamaton)</string>
     <string name="settings_category_geocaching_additionals">Muut palvelut ja lisäosat</string>
     <string name="settings_category_social">Sosiaalinen media</string>
-    <string name="settings_category_logging_other">Muut lokkausasetukset</string>
+    <string name="settings_category_logging_other">Muut kirjausasetukset</string>
     <string name="settings_goto_url_button">Lisää…</string>
     <string name="settings_service_activate">Aktivoi</string>
     <string name="settings_gc_legal_note">Käyttämällä geocaching.com -palvelua hyväksyt samalla Groundspeakin käyttöehdot.</string>
@@ -768,8 +768,8 @@
     <string name="init_summary_save_log_img">Tallenna lokien kuvat</string>
     <string name="init_units">Käytä brittiläistä yksikköjärjestelmää</string>
     <string name="init_summary_units">Käytä brittiläistä yksikköjärjestelmää metrijärjestelmän sijaan</string>
-    <string name="init_log_offline">Offline-lokkaus</string>
-    <string name="init_summary_log_offline">Käytä offline-lokkausta (Online-lokeja ei näytetä lokatessa, lokeja ei lähetetä)</string>
+    <string name="init_log_offline">Offlinekirjaus</string>
+    <string name="init_summary_log_offline">Käytä offlinekirjausta (Online-kirjausnäyttöä ei näytetä kirjatessa, kirjauksia ei lähetetä)</string>
     <string name="init_choose_list">Kysy listausta</string>
     <string name="init_summary_choose_list">Kysy mihin luetteloon kätköt tallennetaan</string>
     <string name="init_listdisplay">Toiset listat</string>
@@ -1923,7 +1923,7 @@
     <string name="fangroup_link"><a href="">Saksalainen käyttäjäryhmä</a></string>
     <string name="market_title">Google Play</string>
     <string name="market_link"><a href=""> c:geo Google Play:ssä</a></string>
-    <string name="about_twitter">Haluatko, että <b>c:geo</b> julkaisee uuden päivityksen Twitterissä aina kun loggaat kätkön?</string>
+    <string name="about_twitter">Haluatko, että <b>c:geo</b> julkaisee uuden päivityksen Twitterissä aina kun kirjaat kätkön?</string>
     <string name="github_title">Vianjäljitys</string>
     <string name="faq_title">Usein kysytyt kysymykset</string>
     <!-- status (used via string based resource loading) -->
