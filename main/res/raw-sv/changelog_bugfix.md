@@ -1,3 +1,5 @@
+## 2022.03.09 Bugfix Release
+
 - Fix: Behåll positionen vid byte från Google-karta till OpenStreetMap-karta
 - Fix: Sällsynt krasch i cachens attributöversikt
 - Fix: Återaktivera "Återställ en annan backup"-funktion

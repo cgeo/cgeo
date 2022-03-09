@@ -1,3 +1,5 @@
+## 2022.03.09 Bugfix Release
+
 - Fix: Keep position on switching from Google map to OpenStreetMap map
 - Fix: Rare crash in cache list attribute overview
 - Fix: Re-enable "Restore a different backup" function

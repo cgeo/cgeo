@@ -1,3 +1,5 @@
+## 2022.03.09 Bugfix Release
+
 - Oprava: Zachování polohy při přepnutí z Google map na mapu OpenStreetMap
 - Oprava: Přehled chyb v seznamu atributů kešky
 - Oprava: Opět povolena funkce "Obnovit jinou zálohu"

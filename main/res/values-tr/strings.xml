@@ -39,14 +39,14 @@
     <string name="userdefined">Kullanıcı tanımlı cache</string>
     <string name="unknown">Bilinmeyen Tür</string>
     <string name="all_types_short">Tümü</string>
-    <string name="traditional_short">Gele</string>
+    <string name="traditional_short">Gelenek</string>
     <string name="multi_short">Çoklu</string>
     <string name="mystery_short">Gizemli</string>
     <string name="letterbox_short">Letterbox</string>
     <string name="event_short">Etkinlik</string>
     <string name="mega_short">Mega</string>
     <string name="giga_short">Giga</string>
-    <string name="earth_short">Earth</string>
+    <string name="earth_short">Earthcache</string>
     <string name="cito_short">CITO</string>
     <string name="webcam_short">Webcam</string>
     <string name="virtual_short">Sanal</string>
@@ -1353,6 +1353,7 @@
     <!-- map -->
     <string name="map_map">Harita</string>
     <string name="map_live">Canlı Harita</string>
+    <string name="map_offline">Çevrimdışı harita</string>
     <string name="map_view_map">Harita görünümü</string>
     <string name="map_rotation">Haritayı otomatik döndür</string>
     <string name="map_dot_mode">Kompakt ikonları kullan</string>
