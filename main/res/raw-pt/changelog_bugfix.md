@@ -1,3 +1,5 @@
+## 2022.03.09 Bugfix Release
+
 - Correcção: Mantém a posição ao alternar do mapa Google para o mapa OpenStreetMap
 - Correcção: Falha rara na visão geral de atributos, numa lista de caches
 - Correcção: reativar a função "Restaurar uma cópia de segurança diferente"
