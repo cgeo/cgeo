@@ -235,9 +235,11 @@ public class RouteTrackUtils {
     public void reloadTrack(final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
         final Uri uri = Trackfiles.getUriFromKey(trackfile.getKey());
         GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
-            route.setHidden(trackfile.isHidden());
-            updateDialogTracks(popup, tracks);
-            updateTrack.updateRoute(trackfile.getKey(), route);
+            if (route != null) {
+                route.setHidden(trackfile.isHidden());
+                updateDialogTracks(popup, tracks);
+                updateTrack.updateRoute(trackfile.getKey(), route);
+            }
         });
     }
 
