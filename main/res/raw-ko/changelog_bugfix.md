@@ -1,3 +1,7 @@
+## 2022.03.10 Bugfix Release
+
+- Fix: Crash on opening map when active track/route files are missing
+
 ## 2022.03.09 Bugfix Release
 
 - 수정: Google 지도에서 OpenStreetMap 지도로 전환할 때 위치 유지
