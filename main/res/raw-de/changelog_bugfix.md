@@ -1,3 +1,7 @@
+## 2022.03.10 Bugfix-Release
+
+- Korrektur: Absturz beim Öffnen der Karte, wenn aktive Track/Routendateien fehlen
+
 ## 2022.03.09 Bugfix-Release
 
 - Korrektur: Positionierung beim Wechsel von Google Map auf OpenStreetMap beibehalten
@@ -10,6 +14,6 @@
 - Korrektur: Besseren Dateinamen in c:geo nach Auswahl einer GPX-Track-Datei anzeigen
 - Korrektur: Einstellung "Anzeigen/Verstecken" für Routen / Tracks merken
 
-## 2021.12.16 Bugfix -Release
+## 2022.02.16 Bugfix-Release
 
 - Korrektur: Seltener Absturz beim Start von cgeo
