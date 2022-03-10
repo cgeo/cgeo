@@ -10,6 +10,6 @@
 - Korrektur: Besseren Dateinamen in c:geo nach Auswahl einer GPX-Track-Datei anzeigen
 - Korrektur: Einstellung "Anzeigen/Verstecken" für Routen / Tracks merken
 
-## 2021.12.16 Bugfix -Release
+## 2022.02.16 Bugfix-Release
 
 - Korrektur: Seltener Absturz beim Start von cgeo
