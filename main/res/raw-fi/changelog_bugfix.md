@@ -1,6 +1,6 @@
-## 2022.03.10 Bugfix Release
+## 2022.03.10 Viankorjausversio
 
-- Fix: Crash on opening map when active track/route files are missing
+- Korjaa: Kaatuminen kartan avaamisessa kun aktiiviset reittitiedostot puuttuvat
 
 ## 2022.03.09 Viankorjausversio
 
