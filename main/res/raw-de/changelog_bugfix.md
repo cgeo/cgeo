@@ -1,3 +1,7 @@
+## 2022.03.10 Bugfix-Release
+
+- Korrektur: Absturz beim Öffnen der Karte, wenn aktive Track/Routendateien fehlen
+
 ## 2022.03.09 Bugfix-Release
 
 - Korrektur: Positionierung beim Wechsel von Google Map auf OpenStreetMap beibehalten
