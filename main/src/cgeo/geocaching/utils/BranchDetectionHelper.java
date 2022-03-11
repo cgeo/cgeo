@@ -7,6 +7,10 @@ public class BranchDetectionHelper {
     // should contain the version name of the last feature release
     public static final String FEATURE_VERSION_NAME = "2022.02.13";
 
+    // should contain version names of active bugfix releases since last feature release, oldest first
+    // empty the part within curly brackets when creating a new release branch from master
+    public static final String[] BUGFIX_VERSION_NAME = new String[]{"2022.02.16", "2022.03.09", "2022.03.10"};
+
     private BranchDetectionHelper() {
         // utility class
     }

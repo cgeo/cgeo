@@ -19,6 +19,7 @@ import cgeo.geocaching.utils.ProcessUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.SystemInformation;
 import cgeo.geocaching.utils.Version;
+import static cgeo.geocaching.utils.BranchDetectionHelper.BUGFIX_VERSION_NAME;
 
 import android.app.Activity;
 import android.content.Context;
@@ -37,12 +38,16 @@ import androidx.annotation.RawRes;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
 import androidx.core.util.Consumer;
+import androidx.core.util.Pair;
 
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import io.noties.markwon.Markwon;
 import org.apache.commons.compress.utils.IOUtils;
@@ -51,6 +56,7 @@ import org.apache.commons.lang3.StringUtils;
 public class AboutActivity extends TabbedViewPagerActivity {
 
     private static final String EXTRA_ABOUT_STARTPAGE = "cgeo.geocaching.extra.about.startpage";
+    public static final Pattern VERSION_PLACEHOLDER_PATTERN = Pattern.compile("((^|[\\r\\n]+)[ \\t]*##[ \\t]*[\\r\\n]+)");
 
     private final GatherSystemInformationTask systemInformationTask = new GatherSystemInformationTask();
 
@@ -221,7 +227,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
             final Markwon markwon = Markwon.create(activity);
 
             final String changelogBase = FileUtils.getChangelogMaster(activity).trim();
-            final String changelogBugfix = FileUtils.getChangelogRelease(activity).trim();
+            final String changelogBugfix = prepareChangelogBugfix(activity);
             if (BranchDetectionHelper.isProductionBuild()) {
                 // we are on release branch
                 if (StringUtils.isNotEmpty(changelogBugfix)) {
@@ -237,6 +243,26 @@ public class AboutActivity extends TabbedViewPagerActivity {
             }
             binding.changelogGithub.setOnClickListener(v -> ShareUtils.openUrl(activity, "https://github.com/cgeo/cgeo/blob/master/main/res/raw/changelog_full.md"));
         }
+    }
+
+    private static String prepareChangelogBugfix(final Activity activity) {
+        String changelog = FileUtils.getChangelogRelease(activity).trim();
+        final Matcher match = VERSION_PLACEHOLDER_PATTERN.matcher(changelog);
+
+        // need to replace bottom-up, therefore store matches in array and reverse
+        final ArrayList<Pair<Integer, Integer>> matches = new ArrayList<>();
+        while (match.find()) {
+            matches.add(new Pair<>(match.start(0), match.end(0)));
+        }
+        Collections.reverse(matches);
+
+        int current = 0;
+        final int max = BUGFIX_VERSION_NAME.length;
+        for (Pair<Integer, Integer> pos : matches) {
+            changelog = changelog.substring(0, pos.first) + "\r\n## " + (current < max ? BUGFIX_VERSION_NAME[current] + " " + activity.getString(R.string.about_changelog_bugfix_release) : activity.getString(R.string.about_changelog_next_release)) + "\r\n" + changelog.substring(pos.second);
+            current++;
+        }
+        return changelog;
     }
 
     public static class SystemViewCreator extends TabbedViewPagerFragment<AboutSystemPageBinding> {
