@@ -307,7 +307,7 @@
     <string name="switched_to_mf">Oletuskartta vaihdettu Mapsforge-karttapalveluun. Ole hyvä ja uudelleenkäynnistä karttasi nyt.</string>
     <!-- location service -->
     <string name="loc_last">Viimeisin tunnettu</string>
-    <string name="loc_net">Verkkoyhteys</string>
+    <string name="loc_net">Verkko</string>
     <string name="loc_fused">Yhdistetty</string>
     <string name="loc_low_power">Virransäästö</string>
     <string name="loc_home">Kotikoordinaatit</string>
@@ -877,10 +877,10 @@
     <string name="init_routecolor_summary">Valitse yksittäisen reittiviivan väri ja läpinäkyvyys. Yksittäinen reitti on kokoelma reittipisteitä ja/tai kätköjä jotka olet valinnut painamalla pitkään reittipistettä/kätköä. (Sinun tulee aktivoida pitkän painalluksen toiminto ensin, katso kartan asetukset.)</string>
     <string name="init_routewidth">Yksittäisen reittiviivan leveys</string>
     <string name="init_routewidth_summary">Valitse yksittäisen reittiviivan leveys</string>
-    <string name="init_trackcolor">GPX-reitin viivan väri</string>
-    <string name="init_trackcolor_summary">Valitse reitin väri ja läpinäkyvyys. Reitti voidaan ladata GPX-reittitiedostosta ja koostuu useista reittipisteistä.</string>
-    <string name="init_trackwidth">GPX-reitin viivan leveys</string>
-    <string name="init_trackwidth_summary">Valitse GPX-reitin viivan leveys</string>
+    <string name="init_trackcolor">GPX-jäljen/reitin viivan väri</string>
+    <string name="init_trackcolor_summary">Valitse jälki/reittiviivan väri ja läpinäkyvyys. Jälki/reitti voidaan ladata GPX-jälki/reittitiedostosta ja koostuu useista reittipisteistä.</string>
+    <string name="init_trackwidth">GPX-jäljen/reitin viivan leveys</string>
+    <string name="init_trackwidth_summary">Valitse GPX-jäljen/reitin viivan leveys</string>
     <string name="init_circlecolor">Ympyräviivan väri</string>
     <string name="init_circlecolor_summary">Valitse ympyräviivan väri ja läpinäkyvyys. Ympyräviivaa käytetään visuaalisena esityksenä minimialueesta kätkön tai fyysisen reittipisteen ympärillä, jonka sisälle ei voida laittaa toista kätköä tai fyysistä reittipistettä. (Pätee geocaching.com:iin)</string>
     <string name="init_circlefillcolor">Ympyräviivan leveys</string>
@@ -952,7 +952,7 @@
     <string name="settings_ec_icons_oc">Kuten OC</string>
     <string name="settings_features">Tuetut ominaisuudet</string>
     <string name="feature_personal_notes">Omat merkinnät</string>
-    <string name="feature_online_logging">Online-lokkaaminen</string>
+    <string name="feature_online_logging">Online-kirjaaminen</string>
     <string name="feature_log_images">Liitä kuvia lokeihin</string>
     <string name="feature_watch_list">Seurantalista</string>
     <string name="feature_own_coordinates">Muokattujen koordinaattien tallennus</string>
@@ -1032,7 +1032,7 @@
     <string name="persistablefolder_spoilerimages">Spoiler-kuvat</string>
     <string name="persistablefolder_routingbase">Reititys</string>
     <string name="persistablefolder_routingtiles">Reititystiedot</string>
-    <string name="persistableuri_track">Reittitiedosto</string>
+    <string name="persistableuri_track">Jälkitiedosto</string>
     <!-- FolderUtils: async processing -->
     <string name="folder_process_status_done">%1$s/%2$s, %3$s/%4$s valmiina</string>
     <string name="folder_process_status_currentfile">Eteneminen %1$s</string>
@@ -1175,7 +1175,7 @@
     <string name="cache_hint">Vihje</string>
     <string name="cache_hint_not_available">Ei vihjettä</string>
     <string name="cache_logs">Lokikirja</string>
-    <string name="cache_latest_logs">Viimeaikaiset lokit</string>
+    <string name="cache_latest_logs">Viim. lokit</string>
     <string name="cache_logs_friends_and_own">Ystävien/omat lokit</string>
     <string name="cache_dialog_loading_details">Ladataan kätkön tietoja…</string>
     <string name="cache_dialog_loading_details_status_loadpage">Lataa sivua</string>
@@ -1549,7 +1549,7 @@
     <!-- trackable -->
     <string name="trackable">Reissaaja</string>
     <string name="trackable_details_loading">Ladataan reissaajan tietoja…</string>
-    <string name="trackable_log_touch">Lokkaa</string>
+    <string name="trackable_log_touch">Kirjaa kosketus</string>
     <string name="trackable_browser_open">Avaa selaimessa</string>
     <string name="trackable_refresh">Päivitä</string>
     <string name="trackable_goal">Tavoite</string>
@@ -1616,7 +1616,7 @@
     <string name="helper_contacts_title">c:geo yhteystiedot -lisäosa</string>
     <string name="helper_contacts_description">Voit avata kontaktit (puhelimen osoitekirjasta) suoraan kätkön sivulta, joten voit helpommin pyytää ystävän apua.</string>
     <string name="helper_sendtocgeo_description">Lähetä c:geo on selaimen laajennus <strong>tietokoneellesi</strong>. Geocaching.com sivua selattaessa kätköt voi lähettää älypuhelimeen napin painalluksella suoraan selaimesta.</string>
-    <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, reititä, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
+    <string name="helper_locus_description">Navigointisovellus puhelimeen tai tablettiin. Katso topo-karttoja offline-tilassa, jäljitä reittisi, etsi geokätköjä, käytä ääniopastusta ja paljon muuta.</string>
     <string name="helper_gpsstatus_description">Voit käyttää GPS Status sovellusta yhdessä c:geon kanssa. Se tarjoaa paljon GPS-tarkkuuteen liittyviä tietoja.</string>
     <string name="helper_bluetoothgps_description">Voit käyttää ulkoista GPS-vastaanotinta saadaksesi tarkempia sijaintitietoja ja säästääksesi laitteen akkua.</string>
     <string name="helper_gps_locker_description">GPS Locker pitää GPS-signaalin aktiivisena vaihtaessasi sovellusten välillä sekä laitteen näytön ollessa pois päältä.</string>
@@ -2079,15 +2079,15 @@
     <!-- individual track -->
     <string name="map_load_track">Lataa jälki/reitti GPX:stä</string>
     <string name="load_track_error">Virhe ladattaessa jälkeä/reittiä</string>
-    <string name="map_clear_track">Tyhjennä reitti/polku</string>
-    <string name="map_clear_track_confirm">Poistetaanko reitti/polku \"%s\"?</string>
+    <string name="map_clear_track">Tyhjennä reitti/jälki</string>
+    <string name="map_clear_track_confirm">Poistetaanko reitti/jälki \"%s\"?</string>
     <!-- route/track commons -->
-    <string name="routes_tracks_dialog_title">Reitin / polun asetukset</string>
+    <string name="routes_tracks_dialog_title">Reitin / jäljen asetukset</string>
     <string name="routes_tracks_menu">Reitit / Polut</string>
-    <string name="center_on_route_track">Keskitä reittiin / polkuun</string>
-    <string name="unload_route_track">Poista reitti/polku</string>
+    <string name="center_on_route_track">Keskitä reittiin / jälkeen</string>
+    <string name="unload_route_track">Tyhjennä reitti/jälki</string>
     <string name="route">Reitti</string>
-    <string name="track">Polku</string>
+    <string name="track">Jälki</string>
     <string name="make_visible">näytä</string>
     <string name="hide">piilota</string>
     <!-- distance units -->
@@ -2209,7 +2209,7 @@
     <string name="wizard_basefolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen tietoja kuten GPX-tiedostoja, varmuuskopioita, kenttämerkintöjä ja lokitiedostoja. Oletusarvoisesti nämä tiedostot tallennetaan kansioihin, jotka sijaitsevat \"juurikansiossa\". Valitse tai luo tällainen kansio seuraavassa vaiheessa.\n\nJos olet päivittänyt c:geon edellisestä versiosta, valitse olemassa oleva kansio \"cgeo\" laitteen tallennustilan juuritasolla.\nVihje: Saatat joutua poistamaan piilotuksen laitteesi sisäisestä tallennustilasta kun tiedostovalitsin näytetään seuraavaksi.</string>
     <string name="wizard_mapfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen offline-karttatiedostoja.</string>
     <string name="wizard_mapthemesfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen teematiedostoja offline-karttoja varten.</string>
-    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja (esim. jos haluat tuoda tai viedä kätköjä tai reittejä).</string>
+    <string name="wizard_gpxfolder_request_explanation">c:geo tarvitsee paikallisen kansion tallentaakseen GPX-tiedostoja (esim. jos haluat tuoda tai viedä kätköjä tai jälkiä).</string>
     <string name="wizard_broutertilesfolder_request_explanation">Jotta voit käyttää integroitua reitityslaattadataa automaattiseen lataukseen ja päivitykseen, sinun täytyy asettaa laattojen kansio.</string>
     <string name="wizard_select_or_create">Valitse tai luo tällainen kansio seuraavassa vaiheessa.</string>
     <string name="wizard_platforms_title">Määritä palvelut</string>
