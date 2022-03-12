@@ -34,6 +34,9 @@
         <attr name="highRes" format="boolean" />
     </declare-styleable>
 
+    <!-- button style for home screen's quick launch buttons -->
+    <attr name="quickLaunchButtonStyle" format="reference"/>
+
     <!-- others -->
     <attr name="compass" format="integer" />
     <attr name="progressSpinnerLarge" format="integer" />

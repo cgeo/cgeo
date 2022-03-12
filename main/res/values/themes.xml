@@ -29,6 +29,9 @@
         <!-- some components aren't fully compatible with AppCompat, therefore we need these legacy style definitions -->
         <item name="android:indeterminateTint">@color/colorAccent</item>
         <item name="android:progressTint">@color/colorAccent</item>
+
+        <!-- forward style references to make them accessible in code -->
+        <item name="quickLaunchButtonStyle">@style/quicklaunch_button</item>
     </style>
 
     <!-- theme for alert dialogs -->

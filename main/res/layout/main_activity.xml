@@ -105,52 +105,8 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb1"
-            style="@style/quicklaunch_button"
-            android:visibility="visible"
-            app:icon="@drawable/ic_menu_refresh" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb2"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:visibility="visible" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb3"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="2dip"
-            android:visibility="visible" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb4"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="2dip"
-            android:visibility="visible" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb5"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="2dip"
-            android:visibility="visible" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb6"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="2dip"
-            android:visibility="visible" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb7"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="2dip"
-            android:visibility="visible" />
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/qlb8"
-            style="@style/quicklaunch_button"
-            app:icon="@drawable/ic_menu_refresh"
-            android:layout_marginLeft="2dip"
-            android:visibility="visible" />
+        <!-- will be filled dynamically with quick launch buttons -->
+
     </LinearLayout>
 
     <LinearLayout
