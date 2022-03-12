@@ -42,6 +42,8 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
+        activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
+        activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
     }
 
     @Override
@@ -89,17 +91,6 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         renderer.setPosition(GLViewport.Position.BOTTOM_LEFT);
         renderer.setOffset(5 * CanvasAdapter.getScale(), 0);
         addLayer(mapScaleBarLayer);
-
-/*
-        mMap.setBuiltInZoomControls(true);
-        // style zoom controls
-        final MapZoomControls zoomControls = mapView.getMapZoomControls();
-        zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
-        zoomControls.setZoomInResource(R.drawable.map_zoomin);
-        zoomControls.setZoomOutResource(R.drawable.map_zoomout);
-        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(13.0f), ViewUtils.dpToPixel(18.0f));
-        zoomControls.setAutoHide(false);
-*/
     }
 
     @Override
@@ -165,6 +156,11 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         pos.setZoomLevel(zoomLevel);
         mMap.setMapPosition(pos);
     };
+
+    private void zoomInOut(final boolean zoomIn) {
+        final int zoom = getCurrentZoom();
+        setZoom(zoomIn ? zoom + 1 : zoom - 1);
+    }
 
     // Lifecycle methods
 
