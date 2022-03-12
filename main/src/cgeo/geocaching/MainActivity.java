@@ -43,6 +43,7 @@ import cgeo.geocaching.utils.BackupUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.ContextLogger;
 import cgeo.geocaching.utils.DebugUtils;
+import cgeo.geocaching.utils.DisplayUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ProcessUtils;
@@ -63,7 +64,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Pair;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -71,13 +71,11 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.TooltipCompat;
 import androidx.core.view.MenuCompat;
@@ -357,26 +355,26 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     }
 
     private void prepareQuickLaunchItems() {
-        int currentId = 1;
+        final int dimSize = DisplayUtils.getPxFromDp(getResources(), 48.0f, 1.0f);
+        final int dimMargin = DisplayUtils.getPxFromDp(getResources(), 7.0f, 1.0f);
+        final LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(dimSize, dimSize);
+        lp.setMargins(dimMargin, 0, dimMargin, 0);
+
         final Set<String> quicklaunchitems = Settings.getQuicklaunchitems();
+        binding.quicklaunchitems.removeAllViews();
+        binding.quicklaunchitems.setVisibility(View.GONE);
         for (QuickLaunchItem item : QuickLaunchItem.values()) {
             if (quicklaunchitems.contains(item.name()) && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                final MaterialButton b = findViewById(getResources().getIdentifier("qlb" + currentId, "id", getPackageName()));
-                if (b != null) {
-                    b.setIconResource(item.iconRes);
-                    b.setVisibility(View.VISIBLE);
-                    b.setOnClickListener(view -> launchQuickLaunchItem(item));
-                    TooltipCompat.setTooltipText(b, getString(item.info));
-                    currentId++;
-                }
+                final MaterialButton b = new MaterialButton(this, null, R.attr.quickLaunchButtonStyle);
+                b.setIconResource(item.iconRes);
+                b.setLayoutParams(lp);
+                b.setVisibility(View.VISIBLE);
+                b.setOnClickListener(view -> launchQuickLaunchItem(item));
+                TooltipCompat.setTooltipText(b, getString(item.info));
+                binding.quicklaunchitems.addView(b);
+                binding.quicklaunchitems.setVisibility(View.VISIBLE);
             }
         }
-        // hide all other buttons
-        for (int i = currentId; i <= 8; i++) {
-            findViewById(getResources().getIdentifier("qlb" + i, "id", getPackageName())).setVisibility(View.GONE);
-        }
-        // show or hide quicklaunchitems area
-        binding.quicklaunchitems.setVisibility(currentId > 1 ? View.VISIBLE : View.GONE);
     }
 
     private void launchQuickLaunchItem(final QuickLaunchItem which) {
