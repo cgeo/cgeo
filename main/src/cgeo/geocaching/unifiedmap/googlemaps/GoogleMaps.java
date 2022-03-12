@@ -28,6 +28,12 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+    @Override
+    public void prepareForTileSourceChange() {
+        // nothing yet to do
+    }
+
+
     /* retrieve fingerprint with getKeyHash(activity, "SHA")
     private String getKeyHash(final Activity activity, final String hashStrategy) {
         final char[] hexChars = "0123456789ABCDEF".toCharArray();

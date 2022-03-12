@@ -7,11 +7,15 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
 import org.oscim.core.MapPosition;
 import org.oscim.core.Tile;
+import org.oscim.layers.Layer;
+import org.oscim.layers.tile.TileLayer;
 import org.oscim.map.Map;
 import org.oscim.renderer.BitmapRenderer;
 import org.oscim.renderer.GLViewport;
@@ -21,6 +25,7 @@ import org.oscim.scalebar.MapScaleBar;
 import org.oscim.scalebar.MapScaleBarLayer;
 import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.theme.IRenderTheme;
+import org.oscim.tiling.TileSource;
 
 public class MapsforgeVTM extends AbstractUnifiedMap {
 
@@ -28,11 +33,47 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
     private MapView mMapView;
     private Map mMap;
 
+    protected TileLayer baseMap;
+    protected final ArrayList<Layer> layers = new ArrayList<>();
+
     @Override
     public void init(final AppCompatActivity activity) {
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
+    }
+
+    @Override
+    public synchronized void prepareForTileSourceChange() {
+        // remove layers from currently displayed Mapsforge map
+        removeBaseMap();
+        synchronized (layers) {
+            for (Layer layer : layers) {
+                layer.setEnabled(false);
+                mMap.layers().remove(layer);
+            }
+        }
+        mMap.clearMap();
+    }
+
+    /** call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider */
+    public synchronized TileLayer setBaseMap(final TileSource tileSource) {
+        removeBaseMap();
+        baseMap = mMap.setBaseMap(tileSource);
+        return baseMap;
+    }
+
+    /** call this instead of VTM.setBaseMap so that we can keep track of layers added by the tile provider */
+    public synchronized void addLayer(final Layer layer) {
+        layers.add(layer);
+        mMap.layers().add(layer);
+    }
+
+    private void removeBaseMap() {
+        if (baseMap != null) {
+            mMap.layers().remove(1);
+        }
+        baseMap = null;
     }
 
     private void startMap() {
@@ -52,7 +93,6 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
     @Override
     public void setTileSource(final AbstractTileProvider newSource) {
         super.setTileSource(newSource);
-        // mMap.layers().clear();
         ((AbstractMapsforgeTileProvider) newSource).addTileLayer(mMap);
         startMap();
     }

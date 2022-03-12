@@ -55,6 +55,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private void changeMapSource(final AbstractTileProvider newSource) {
         final AbstractUnifiedMap oldMap = map;
+        if (oldMap != null) {
+            oldMap.prepareForTileSourceChange();
+        }
         map = newSource.getMap();
         if (map != oldMap) {
             map.init(this);

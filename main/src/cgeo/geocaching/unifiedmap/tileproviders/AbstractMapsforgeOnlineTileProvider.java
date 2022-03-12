@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.storage.LocalStorage;
+import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.net.Uri;
 
@@ -36,8 +37,7 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
             .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
         tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "vtm-android-example"));
-        tileLayer = new BitmapTileLayer(map, tileSource);
-        map.layers().add(tileLayer);
+        MAP_MAPSFORGE.addLayer(new BitmapTileLayer(map, tileSource));
     }
 
 }
