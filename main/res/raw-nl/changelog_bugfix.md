@@ -1,6 +1,6 @@
 ## 2022.03.10 Bugfix Release
 
-- Fix: Crash on opening map when active track/route files are missing
+- Oplossing: Crash bij het openen van kaart als er actieve track/route bestanden ontbreken
 
 ## 2022.02.16 Bugfix Release
 
