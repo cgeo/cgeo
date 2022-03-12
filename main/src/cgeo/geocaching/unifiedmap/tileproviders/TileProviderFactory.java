@@ -27,6 +27,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -52,17 +53,34 @@ public class TileProviderFactory {
         final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
 
         final int currentTileProvider = Settings.getTileProvider().getNumericalId();
+        final Set<String> hideTileproviders = Settings.getHideTileproviders();
         int i = 0;
         for (AbstractTileProvider tileProvider : tileProviders.values()) {
-            final int id = tileProvider.getNumericalId();
-            parentMenu.add(R.id.menu_group_map_sources, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+            boolean hide = false;
+            for (String comp : hideTileproviders) {
+                if (StringUtils.equals(comp, tileProvider.getId())) {
+                    hide = true;
+                }
+            }
+            if (!hide) {
+                final int id = tileProvider.getNumericalId();
+                parentMenu.add(R.id.menu_group_map_sources, id, i, tileProvider.getTileProviderName()).setCheckable(true).setChecked(id == currentTileProvider);
+            }
             i++;
         }
         parentMenu.setGroupCheckable(R.id.menu_group_map_sources, true, true);
         parentMenu.add(R.id.menu_group_map_sources, R.id.menu_download_offlinemap, tileProviders.size(), '<' + activity.getString(R.string.downloadmap_title) + '>');
     }
 
-    private static void buildTileProviderList() {
+    public static HashMap<String, AbstractTileProvider> getTileProviders() {
+        buildTileProviderList(false);
+        return tileProviders;
+    }
+
+    private static void buildTileProviderList(final boolean force) {
+        if (!(tileProviders.isEmpty() || force)) {
+            return;
+        }
         tileProviders.clear();
 
         // Google Map based tile providers
@@ -116,9 +134,7 @@ public class TileProviderFactory {
 
     @Nullable
     public static AbstractTileProvider getTileProvider(final String stringId) {
-        if (tileProviders.isEmpty()) {
-            buildTileProviderList();
-        }
+        buildTileProviderList(false);
         return tileProviders.get(stringId);
     }
 
@@ -133,9 +149,7 @@ public class TileProviderFactory {
     }
 
     public static AbstractTileProvider getAnyTileProvider() {
-        if (tileProviders.isEmpty()) {
-            buildTileProviderList();
-        }
+        buildTileProviderList(false);
         return tileProviders.isEmpty() ? null : tileProviders.entrySet().iterator().next().getValue();
     }
 

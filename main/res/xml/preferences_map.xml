@@ -16,6 +16,11 @@
             android:summary="%s"
             android:title="@string/init_mapsource_select"
             app:iconSpaceReserved="false" />
+        <MultiSelectListPreference
+            android:key="@string/pref_tileprovider_hidden"
+            android:title="@string/settings_hide_tileproviders_title"
+            android:summary="@string/settings_hide_tileproviders_summary"
+            app:iconSpaceReserved="false" />
         <Preference
             android:key="@string/pref_fakekey_info_offline_maps"
             android:title="@string/settings_info_offline_maps_title"
