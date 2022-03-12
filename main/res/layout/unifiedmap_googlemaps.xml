@@ -28,18 +28,6 @@
             android:visibility="gone"
             android:maxLines="1" />
 
-        <!--
-        <com.google.android.gms.maps.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:apiKey="@string/maps_api2_key"
-            android:clickable="true"
-            android:focusable="true"
-            android:enabled="true"
-            android:keepScreenOn="true" />
-        -->
-
         <fragment
             android:id="@+id/mapViewGM"
             android:layout_width="match_parent"
