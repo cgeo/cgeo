@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
@@ -8,6 +9,7 @@ import cgeo.geocaching.unifiedmap.googlemaps.GoogleMaps;
 import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVTM;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.TextUtils;
 import static cgeo.geocaching.maps.mapsforge.MapsforgeMapProvider.isValidMapFile;
 
@@ -64,9 +66,10 @@ public class TileProviderFactory {
         tileProviders.clear();
 
         // Google Map based tile providers
-        // @todo: Check for availability
-        registerTileProvider(new GoogleMapSource());
-        registerTileProvider(new GoogleSatelliteSource());
+        if (isGoogleMapsInstalled()) {
+            registerTileProvider(new GoogleMapSource());
+            registerTileProvider(new GoogleSatelliteSource());
+        }
 
         // OSM online tile providers
         registerTileProvider(new OsmOrgSource());
@@ -86,6 +89,25 @@ public class TileProviderFactory {
         if (offlineMaps.size() > 1) {
             registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
         }
+    }
+
+    private static boolean isGoogleMapsInstalled() {
+        // Check if API key is available
+        final String mapsKey = CgeoApplication.getInstance().getString(R.string.maps_api2_key);
+        if (StringUtils.length(mapsKey) < 30 || StringUtils.contains(mapsKey, "key")) {
+            Log.w("No Google API key available.");
+            return false;
+        }
+
+        // Check if API is available
+        try {
+            Class.forName("com.google.android.gms.maps.SupportMapFragment");
+        } catch (final ClassNotFoundException ignored) {
+            return false;
+        }
+
+        // Assume that Google Maps is available and working
+        return true;
     }
 
     private static void registerTileProvider(final AbstractTileProvider tileProvider) {
