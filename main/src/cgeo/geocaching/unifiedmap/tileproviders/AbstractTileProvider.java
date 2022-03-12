@@ -25,6 +25,10 @@ public abstract class AbstractTileProvider {
         return supportsLanguages;
     }
 
+    public void setPreferredLanguage(final String language) {
+        // default: do nothing
+    }
+
     public boolean supportsThemes() {
         return supportsThemes;
     }

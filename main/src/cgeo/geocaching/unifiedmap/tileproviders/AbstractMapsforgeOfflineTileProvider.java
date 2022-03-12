@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
@@ -17,6 +18,8 @@ import org.oscim.tiling.source.mapfile.MapInfo;
 
 class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider {
 
+    MapFileTileSource tileSource;
+
     AbstractMapsforgeOfflineTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {
         super(name, uri, zoomMin, zoomMax);
         supportsThemes = true;
@@ -24,7 +27,8 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
 
     @Override
     public void addTileLayer(final Map map) {
-        final MapFileTileSource tileSource = new MapFileTileSource();
+        tileSource = new MapFileTileSource();
+        tileSource.setPreferredLanguage(Settings.getMapLanguage());
         tileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(mapUri));
         final VectorTileLayer tileLayer = (VectorTileLayer) MAP_MAPSFORGE.setBaseMap(tileSource);
         MAP_MAPSFORGE.addLayer(new BuildingLayer(map, tileLayer));
@@ -33,9 +37,16 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
 
         final MapInfo info = tileSource.getMapInfo();
         supportsLanguages = StringUtils.isNotBlank(info.languagesPreference);
+        if (supportsLanguages) {
+            TileProviderFactory.setLanguages(info.languagesPreference.split(","));
+        }
         if (!info.boundingBox.contains(map.getMapPosition().getGeoPoint())) {
             MAP_MAPSFORGE.zoomToBounds(info.boundingBox);
         }
     }
 
+    @Override
+    public void setPreferredLanguage(final String language) {
+        tileSource.setPreferredLanguage(language);
+    }
 }
