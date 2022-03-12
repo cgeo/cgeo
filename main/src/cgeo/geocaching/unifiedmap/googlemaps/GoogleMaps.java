@@ -59,8 +59,8 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
     @Override
     public void onMapReady(@NonNull final GoogleMap googleMap) {
         mMap = googleMap;
-        // mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(center.getLatitudeE6(), center.getLongitudeE6())));
         mapController.setGoogleMap(googleMap);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
     }
 
     @Override
