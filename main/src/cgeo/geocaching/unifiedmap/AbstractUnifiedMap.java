@@ -21,6 +21,10 @@ public abstract class AbstractUnifiedMap {
         // default is empty
     };
 
+    public void setPreferredLanguage(final String language) {
+        // default: do nothing
+    }
+
     public abstract void zoomToBounds(BoundingBox bounds);
 
     // Lifecycle methods

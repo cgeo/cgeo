@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
+import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.os.Bundle;
 import android.view.Menu;
@@ -42,6 +43,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (false) {
             // @todo: add other menu options
         } else {
+            final String language = TileProviderFactory.getLanguage(id);
+            if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
+                item.setChecked(true);
+                Settings.setMapLanguage(language);
+                map.setPreferredLanguage(language);
+                return true;
+            }
             final AbstractTileProvider tileProvider = TileProviderFactory.getTileProvider(id);
             if (tileProvider != null) {
                 item.setChecked(true);
@@ -62,6 +70,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (map != oldMap) {
             map.init(this);
         }
+        TileProviderFactory.resetLanguages();
         map.setTileSource(newSource);
         Settings.setTileProvider(newSource);
 
@@ -72,6 +81,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (currentZoom > map.getZoomMax()) {
             map.setZoom(map.getZoomMax());
         }
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(final Menu menu) {
+         final boolean result = super.onPrepareOptionsMenu(menu);
+         TileProviderFactory.addMapViewLanguageMenuItems(menu);
+         return result;
     }
 
     // Lifecycle methods

@@ -33,6 +33,7 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
     private MapView mMapView;
     private Map mMap;
 
+    protected AbstractMapsforgeTileProvider tileProvider;
     protected TileLayer baseMap;
     protected final ArrayList<Layer> layers = new ArrayList<>();
 
@@ -87,14 +88,32 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         final BitmapRenderer renderer = mapScaleBarLayer.getRenderer();
         renderer.setPosition(GLViewport.Position.BOTTOM_LEFT);
         renderer.setOffset(5 * CanvasAdapter.getScale(), 0);
-        mMap.layers().add(mapScaleBarLayer);
+        addLayer(mapScaleBarLayer);
+
+/*
+        mMap.setBuiltInZoomControls(true);
+        // style zoom controls
+        final MapZoomControls zoomControls = mapView.getMapZoomControls();
+        zoomControls.setZoomControlsOrientation(MapZoomControls.Orientation.VERTICAL_IN_OUT);
+        zoomControls.setZoomInResource(R.drawable.map_zoomin);
+        zoomControls.setZoomOutResource(R.drawable.map_zoomout);
+        zoomControls.setPadding(0, 0, ViewUtils.dpToPixel(13.0f), ViewUtils.dpToPixel(18.0f));
+        zoomControls.setAutoHide(false);
+*/
     }
 
     @Override
     public void setTileSource(final AbstractTileProvider newSource) {
         super.setTileSource(newSource);
-        ((AbstractMapsforgeTileProvider) newSource).addTileLayer(mMap);
+        tileProvider = (AbstractMapsforgeTileProvider) newSource;
+        tileProvider.addTileLayer(mMap);
         startMap();
+    }
+
+    @Override
+    public void setPreferredLanguage(final String language) {
+        tileProvider.setPreferredLanguage(language);
+        mMap.clearMap();
     }
 
     @Override
