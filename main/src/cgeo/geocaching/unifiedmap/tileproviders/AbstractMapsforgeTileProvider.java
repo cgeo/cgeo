@@ -6,12 +6,10 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import org.oscim.layers.tile.TileLayer;
 import org.oscim.map.Map;
 
 public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider {
 
-    protected TileLayer tileLayer;
     protected final Uri mapUri;
 
     public AbstractMapsforgeTileProvider(final String name, final Uri uri, final int zoomMin, final int zoomMax) {

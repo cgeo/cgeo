@@ -11,6 +11,7 @@ public abstract class AbstractUnifiedMap {
     protected AbstractTileProvider currentTileProvider;
 
     public abstract void init(AppCompatActivity activity);
+    public abstract void prepareForTileSourceChange();
 
     public void setTileSource(final AbstractTileProvider newSource) {
         currentTileProvider = newSource;

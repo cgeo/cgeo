@@ -26,10 +26,9 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
     public void addTileLayer(final Map map) {
         final MapFileTileSource tileSource = new MapFileTileSource();
         tileSource.setMapFileInputStream((FileInputStream) ContentStorage.get().openForRead(mapUri));
-        tileLayer = map.setBaseMap(tileSource);
-
-        map.layers().add(new BuildingLayer(map, (VectorTileLayer) tileLayer));
-        map.layers().add(new LabelLayer(map, (VectorTileLayer) tileLayer));
+        final VectorTileLayer tileLayer = (VectorTileLayer) MAP_MAPSFORGE.setBaseMap(tileSource);
+        MAP_MAPSFORGE.addLayer(new BuildingLayer(map, tileLayer));
+        MAP_MAPSFORGE.addLayer(new LabelLayer(map, tileLayer));
         MAP_MAPSFORGE.applyTheme();
 
         final MapInfo info = tileSource.getMapInfo();
