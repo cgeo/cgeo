@@ -83,8 +83,8 @@ public class TileProviderFactory {
         for (ImmutablePair<String, Uri> data : offlineMaps) {
             registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
         }
-        if (offlineMaps.size() > 0) {
-            // @todo: add "combined" map type
+        if (offlineMaps.size() > 1) {
+            registerTileProvider(new MapsforgeMultiOfflineTileProvider(offlineMaps));
         }
     }
 

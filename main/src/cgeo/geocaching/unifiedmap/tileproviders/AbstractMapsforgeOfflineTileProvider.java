@@ -36,12 +36,15 @@ class AbstractMapsforgeOfflineTileProvider extends AbstractMapsforgeTileProvider
         MAP_MAPSFORGE.applyTheme();
 
         final MapInfo info = tileSource.getMapInfo();
-        supportsLanguages = StringUtils.isNotBlank(info.languagesPreference);
-        if (supportsLanguages) {
-            TileProviderFactory.setLanguages(info.languagesPreference.split(","));
-        }
-        if (!info.boundingBox.contains(map.getMapPosition().getGeoPoint())) {
-            MAP_MAPSFORGE.zoomToBounds(info.boundingBox);
+        if (info != null) {
+            supportsLanguages = StringUtils.isNotBlank(info.languagesPreference);
+            if (supportsLanguages) {
+                TileProviderFactory.setLanguages(info.languagesPreference.split(","));
+            }
+            parseZoomLevel(info.zoomLevel);
+            if (!info.boundingBox.contains(map.getMapPosition().getGeoPoint())) {
+                MAP_MAPSFORGE.zoomToBounds(info.boundingBox);
+            }
         }
     }
 

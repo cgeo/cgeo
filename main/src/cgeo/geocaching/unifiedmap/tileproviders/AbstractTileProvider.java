@@ -13,8 +13,8 @@ public abstract class AbstractTileProvider {
     private Integer numericId;
     private static final Map<String, Integer> mapSourceIds = new HashMap<>();
 
-    protected final int zoomMin;
-    protected final int zoomMax;
+    protected int zoomMin;
+    protected int zoomMax;
 
     protected AbstractTileProvider (final int zoomMin, final int zoomMax) {
         this.zoomMin = zoomMin;

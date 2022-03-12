@@ -5,6 +5,7 @@ import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import android.net.Uri;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import org.oscim.map.Map;
 
@@ -22,6 +23,15 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
 
     public AbstractUnifiedMap getMap() {
         return TileProviderFactory.MAP_MAPSFORGE;
+    }
+
+    protected void parseZoomLevel(@Nullable final int[] zoomLevel) {
+        if (zoomLevel != null) {
+            for (int level : zoomLevel) {
+                zoomMin = Math.min(zoomMin, level);
+                zoomMax = Math.max(zoomMax, level);
+            }
+        }
     }
 
     @Override
