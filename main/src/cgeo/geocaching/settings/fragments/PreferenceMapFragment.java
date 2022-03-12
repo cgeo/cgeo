@@ -6,6 +6,8 @@ import cgeo.geocaching.maps.MapProviderFactory;
 import cgeo.geocaching.maps.interfaces.MapSource;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.SettingsActivity;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 import cgeo.geocaching.utils.ShareUtils;
@@ -16,8 +18,10 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.preference.ListPreference;
+import androidx.preference.MultiSelectListPreference;
 
 import java.util.Collection;
+import java.util.HashMap;
 
 public class PreferenceMapFragment extends BasePreferenceFragment {
     private ListPreference prefMapSources;
@@ -28,6 +32,21 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
         prefMapSources = findPreference(getString(R.string.pref_mapsource));
 
         initMapSourcePreference();
+
+        // new unified map providers
+        final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
+        final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
+        final String[] tpEntries = new String[tileproviders.size()];
+        final String[] tpValues =  new String[tileproviders.size()];
+        int i = 0;
+        for (AbstractTileProvider tileProvider : tileproviders.values()) {
+            tpEntries[i] = tileProvider.getTileProviderName();
+            tpValues[i] = tileProvider.getId();
+            i++;
+        }
+        hideTileprovidersPref.setEntries(tpEntries);
+        hideTileprovidersPref.setEntryValues(tpValues);
+
     }
 
     @Override

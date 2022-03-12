@@ -1138,6 +1138,14 @@ public class Settings {
         }
     }
 
+    public static Set<String> getHideTileproviders() {
+        final Set<String> empty = Collections.emptySet();
+        if (sharedPrefs == null) {
+            return empty;
+        }
+        return sharedPrefs.getStringSet(getKey(R.string.pref_tileprovider_hidden), empty);
+    }
+
     public static void setMapLanguage(@Nullable final String language) {
         putString(R.string.pref_mapLanguage, StringUtils.isBlank(language) ? "" : language);
     }

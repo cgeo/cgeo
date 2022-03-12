@@ -182,6 +182,7 @@
     <!-- category map data -->
     <string translatable="false" name="pref_mapsource">mapsource</string>
     <string translatable="false" name="pref_tileprovider">tileprovider</string>
+    <string translatable="false" name="pref_tileprovider_hidden">tileprovider_hidden</string>
     <string translatable="false" name="pref_fakekey_info_offline_maps">fakekey_info_offline_maps</string>
     <string translatable="false" name="pref_fakekey_start_downloader">fakekey_start_downloader</string>
     <string translatable="false" name="pref_mapAutoDownloadsInterval">mapAutoDownloadsInterval</string>
