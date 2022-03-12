@@ -2639,4 +2639,36 @@
     <string name="rtl_path_quality23">kvalita 2/3 (zpevněná: štěrk, opravená, …)</string>
     <string name="rtl_path_quality45">kvalita 4/5 (nezpevněná)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Úsměv</string>
+    <string name="smiley_big_smile">Velký úsměv</string>
+    <string name="smiley_cool">Cool</string>
+    <string name="smiley_blush">Červenání</string>
+    <string name="smiley_tongue">Jazyk</string>
+    <string name="smiley_evil">Zlý</string>
+    <string name="smiley_shocked">Vyděšený</string>
+    <string name="smiley_wink">Mrkající</string>
+    <string name="smiley_clown">Klaun</string>
+    <string name="smiley_blackeye">Černé oči</string>
+    <string name="smiley_8ball">Osmička</string>
+    <string name="smiley_frown">Zamračený</string>
+    <string name="smiley_shy">Plachý</string>
+    <string name="smiley_angry">Naštvaný</string>
+    <string name="smiley_dead">Mrtvý</string>
+    <string name="smiley_sleepy">Ospalý</string>
+    <string name="smiley_kisses">Polibky</string>
+    <string name="smiley_approve">Schváleno</string>
+    <string name="smiley_disapprove">Neschváleno</string>
+    <string name="smiley_question">Otázka</string>
+    <string name="smiley_cry">Plačící</string>
+    <string name="smiley_embarassed">Vyčerpaný</string>
+    <string name="smiley_footinmouth">Noha v puse</string>
+    <string name="smiley_innocent">Nevinný</string>
+    <string name="smiley_kiss">Polibek</string>
+    <string name="smiley_laughing">Smějící se</string>
+    <string name="smiley_money">Peníze</string>
+    <string name="smiley_sealed">Zapečetěný</string>
+    <string name="smiley_surprised">Překvapený</string>
+    <string name="smiley_tongueout">Vyplazující jazyk</string>
+    <string name="smiley_undecided">Nerozhodný</string>
+    <string name="smiley_yell">Křičící</string>
 </resources>
