@@ -5,3 +5,4 @@
 - Novinka: Aktualizováno interní směrování na BRouter v1.6.3
 - Novinka: Samostatná uživatelská ikona pro vygenerované body trasy
 - Novinka: Šablony pro offline logy
+- Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
