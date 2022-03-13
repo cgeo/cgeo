@@ -2554,4 +2554,10 @@
     <string name="rtl_path_quality23">qualidade 2/3 (pavimento: gravilha, consertado, …)</string>
     <string name="rtl_path_quality45">qualidade 4/5 (por pavimentar)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_money">Dinheiro</string>
+    <string name="smiley_sealed">Selado</string>
+    <string name="smiley_surprised">Surpreso</string>
+    <string name="smiley_tongueout">Língua de fora</string>
+    <string name="smiley_undecided">Indeciso</string>
+    <string name="smiley_yell">Gritar</string>
 </resources>
