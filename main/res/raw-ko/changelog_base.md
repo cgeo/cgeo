@@ -5,3 +5,4 @@
 - 신규: BRouter v1.6.3으로 내부 라우팅 업데이트
 - 신규: 생성된 지점에 대한 사용자 별도 아이콘
 - 신규: 오프라인 로그용 로그 템플릿
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
