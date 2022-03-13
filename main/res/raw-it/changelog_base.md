@@ -5,3 +5,4 @@
 - Nuovo: Instradamento interno aggiornato a BRouter v1.6.3
 - Nuovo: Icona separata per i waypoint generati dall'utente
 - Nuovo: Modelli di log per i log offline
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
