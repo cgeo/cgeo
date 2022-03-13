@@ -5,3 +5,4 @@
 - Nowość: Zaktualizowano BRouter v1.6.3
 - Nowość: Oddzielna ikona dla wygenerowanych punktów nawigacji
 - Nowość: Szablony dla dzienników offline
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
