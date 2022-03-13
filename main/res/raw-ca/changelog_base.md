@@ -5,3 +5,4 @@
 - Nou: s'ha actualitzat l'encaminament intern a BRouter v1.6.3
 - Nou: Icona separada de l'usuari per als punts de ruta generats
 - Novetat: Plantilles per a registres fora de línia
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
