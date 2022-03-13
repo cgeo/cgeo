@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    tools:context=".ImagesActivity">
+
+    <!-- category header -->
+    <RelativeLayout
+        android:id="@+id/img_gallery_category"
+        style="@style/separator_horizontal_layout">
+
+        <View style="@style/separator_horizontal_heading" />
+        <TextView
+            android:id="@+id/img_gallery_category_title"
+            style="@style/separator_horizontal_heading_text"
+            tools:text="category title"/>
+    </RelativeLayout>
+
+    <!-- Image add buttons -->
+    <RelativeLayout
+        android:id="@+id/img_gallery_add_buttons"
+        android:visibility="gone"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="3dp"
+        >
+
+        <Button
+            android:id="@+id/img_gallery_add_multi"
+            style="@style/button_icon"
+            android:layout_gravity="left"
+            app:icon="@drawable/ic_menu_image_multi" />
+
+        <Button
+            android:id="@+id/img_gallery_add_camera"
+            style="@style/button_icon"
+            android:layout_gravity="left"
+            android:layout_toRightOf="@+id/img_gallery_add_multi"
+            app:icon="@drawable/ic_menu_camera" />
+
+    </RelativeLayout>
+
+    <android.widget.Space
+        android:layout_width="match_parent"
+        android:layout_height="10dp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/img_gallery_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="MissingConstraints">
+
+        <androidx.constraintlayout.helper.widget.Flow
+            android:id="@+id/img_gallery_list_flow"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            app:flow_horizontalAlign="start"
+            app:flow_horizontalBias="0"
+            app:flow_maxElementsWrap="30"
+            app:flow_verticalBias="0"
+            app:flow_verticalGap="8dp"
+            app:flow_horizontalGap="8dp"
+            app:flow_horizontalStyle="spread"
+            app:flow_verticalAlign="top"
+            app:flow_wrapMode="aligned" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</LinearLayout>

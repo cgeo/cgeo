@@ -948,7 +948,7 @@ public class Geocache implements IWaypoint {
         if (spoilers == null) {
             spoilers = new ArrayList<>();
         }
-        spoilers.add(spoiler);
+        spoilers.add(spoiler.buildUpon().setCategory(Image.ImageCategory.LISTING).build());
     }
 
     @NonNull
@@ -2061,11 +2061,11 @@ public class Geocache implements IWaypoint {
     @NonNull
     public Collection<Image> getImages() {
         final List<Image> result = new LinkedList<>(getSpoilers());
-        addLocalSpoilersTo(result);
-        for (final LogEntry log : getLogs()) {
-            result.addAll(log.getLogImages());
-        }
         ImageUtils.addImagesFromHtml(result, geocode, getShortDescription(), getDescription());
+        for (final LogEntry log : getLogs()) {
+            result.addAll(log.logImages);
+        }
+        addLocalSpoilersTo(result);
         return result;
     }
 
@@ -2102,7 +2102,7 @@ public class Geocache implements IWaypoint {
                 if (imageFile.isDirectory) {
                     continue;
                 }
-                spoilers.add(new Image.Builder().setUrl(imageFile.uri).setTitle(imageFile.name).build());
+                spoilers.add(new Image.Builder().setUrl(imageFile.uri).setTitle(imageFile.name).setCategory(Image.ImageCategory.OWN).build());
             }
         }
     }

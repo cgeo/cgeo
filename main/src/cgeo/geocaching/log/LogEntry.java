@@ -324,7 +324,7 @@ public class LogEntry implements Parcelable {
             if (logImages.isEmpty()) {
                 logImages = new ArrayList<>();
             }
-            logImages.add(image);
+            logImages.add(image.buildUpon().setCategory(Image.ImageCategory.LOG).build());
             return (T) this;
         }
 

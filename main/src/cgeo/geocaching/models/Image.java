@@ -3,6 +3,7 @@ package cgeo.geocaching.models;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.FileUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
@@ -14,11 +15,13 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.StringRes;
 
 import java.io.File;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
+import org.apache.commons.text.WordUtils;
 
 /**
  * Represent an Image along with Title and Description.
@@ -26,15 +29,34 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  */
 public class Image implements Parcelable {
 
+    public enum ImageCategory {
+        UNCATEGORIZED(0),
+        LISTING(0),
+        LOG(0),
+        OWN(0);
+
+        @StringRes
+        private final int textId;
+
+        ImageCategory(@StringRes final int textId) {
+            this.textId = textId;
+        }
+
+        public String getI18n() {
+            return LocalizationUtils.getStringWithFallback(textId, WordUtils.capitalizeFully(this.name()));
+        }
+    }
+
     /**
      * Static empty image, linked to nothing.
      */
-    public static final Image NONE = new Image(Uri.EMPTY, null, null, -1);
+    public static final Image NONE = new Image(Uri.EMPTY, null, null, -1, null);
 
     @NonNull public final Uri uri;
     @Nullable public final String title;
     public final int targetScale; //for offline log images
     @Nullable final String description;
+    @NonNull public final ImageCategory category;
 
     /**
      * Helper class for building or manipulating Image references.
@@ -46,6 +68,7 @@ public class Image implements Parcelable {
         @Nullable private String title;
         @Nullable private String description;
         private int targetScale; //needed for offline log images
+        private ImageCategory category;
 
         /**
          * Create a new Image.
@@ -56,6 +79,7 @@ public class Image implements Parcelable {
             title = null;
             description = null;
             targetScale = -1;
+            category = ImageCategory.UNCATEGORIZED;
         }
 
         /**
@@ -64,7 +88,7 @@ public class Image implements Parcelable {
          */
         @NonNull
         public Image build() {
-            return new Image(uri, title, description, targetScale);
+            return new Image(uri, title, description, targetScale, category);
         }
 
         /**
@@ -143,6 +167,12 @@ public class Image implements Parcelable {
             this.targetScale = targetScale;
             return this;
         }
+
+        @NonNull
+        public Builder setCategory(final ImageCategory category) {
+            this.category = category;
+            return this;
+        }
     }
 
 
@@ -156,17 +186,19 @@ public class Image implements Parcelable {
      * @param description
      *          The image description
      */
-    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale) {
+    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat) {
         this.uri = uri;
         this.title = title;
         this.description = description;
         this.targetScale = targetScale;
+        this.category = cat == null ? ImageCategory.UNCATEGORIZED : cat;
     }
 
     private Image(@NonNull final Parcel in) {
         uri = in.readParcelable(Uri.class.getClassLoader());
         title = in.readString();
         description = in.readString();
+        category = ImageCategory.values()[in.readInt()];
         targetScale = in.readInt();
     }
 
@@ -180,6 +212,7 @@ public class Image implements Parcelable {
         dest.writeParcelable(uri, 0);
         dest.writeString(title);
         dest.writeString(description);
+        dest.writeInt(category.ordinal());
         dest.writeInt(targetScale);
     }
 
@@ -206,7 +239,8 @@ public class Image implements Parcelable {
                 .setUrl(uri)
                 .setTitle(title)
                 .setDescription(description)
-                .setTargetScale(targetScale);
+                .setTargetScale(targetScale)
+                .setCategory(category);
     }
 
     /**
@@ -377,7 +411,8 @@ public class Image implements Parcelable {
         return uri.equals(image.uri)
                 && StringUtils.equals(title, image.title)
                 && StringUtils.equals(description, image.description)
-                && targetScale == image.targetScale;
+                && targetScale == image.targetScale
+                && category == image.category;
     }
 
     @Override
@@ -385,8 +420,9 @@ public class Image implements Parcelable {
         return new HashCodeBuilder().append(uri).append(title).append(description).build();
     }
 
+    @NonNull
     @Override
     public String toString() {
-        return "[Uri:" + uri + "/Title:" + title + "/Desc:" + description + "/targetScale:" + targetScale + "]";
+        return "[Uri:" + uri + "/Title:" + title + "/Desc:" + description + "/cat:" + category + "/targetScale:" + targetScale + "]";
     }
 }

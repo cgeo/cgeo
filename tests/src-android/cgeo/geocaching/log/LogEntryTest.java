@@ -42,7 +42,7 @@ public class LogEntryTest extends CGeoTestCase {
         final LogEntry logEntry1 = new LogEntry.Builder()
                 .addLogImage(mockedImage1)
                 .build();
-        assertThat(logEntry1.getLogImages()).hasSize(0);
+        assertThat(logEntry1.logImages).hasSize(0);
 
         final Image mockedImage2 = new Image.Builder().setTitle("").build();
         final LogEntry logEntry2 = new LogEntry.Builder()
@@ -51,8 +51,8 @@ public class LogEntryTest extends CGeoTestCase {
                 .addLogImage(mockedImage2)
                 .build();
 
-        assertThat(logEntry2.getLogImages()).hasSize(1);
-        assertThat(logEntry2.getLogImages().get(0)).isEqualTo(mockedImage2);
+        assertThat(logEntry2.logImages).hasSize(1);
+        assertThat(logEntry2.logImages.get(0)).isEqualTo(mockedImage2.buildUpon().setCategory(Image.ImageCategory.LOG).build());
     }
 
     public static void testGetImageTitles() {
@@ -193,8 +193,8 @@ public class LogEntryTest extends CGeoTestCase {
         assertThat(otherLogEntry.imageTitlePraefix).isEqualTo("praefix");
 
         assertThat(otherLogEntry.logImages.size()).isEqualTo(2);
-        assertThat(otherLogEntry.logImages.get(0)).isEqualTo(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").build());
-        assertThat(otherLogEntry.logImages.get(1)).isEqualTo(new Image.Builder().setUrl("abc2").setTitle("def2").setDescription("ghi2").build());
+        assertThat(otherLogEntry.logImages.get(0)).isEqualTo(new Image.Builder().setUrl("abc").setTitle("def").setDescription("ghi").setCategory(Image.ImageCategory.LOG).build());
+        assertThat(otherLogEntry.logImages.get(1)).isEqualTo(new Image.Builder().setUrl("abc2").setTitle("def2").setDescription("ghi2").setCategory(Image.ImageCategory.LOG).build());
         assertThat(otherLogEntry.trackableActions.size()).isEqualTo(1);
         assertThat(otherLogEntry.trackableActions.get("TBFake1")).isEqualTo(LogTypeTrackable.DROPPED_OFF);
     }

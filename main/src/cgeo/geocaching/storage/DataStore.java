@@ -3109,6 +3109,7 @@ public class DataStore {
                         .setUrl(cursor.getString(0))
                         .setTitle(cursor.getString(1))
                         .setDescription(cursor.getString(2))
+                        .setCategory(Image.ImageCategory.LISTING)
                         .build());
     }
 

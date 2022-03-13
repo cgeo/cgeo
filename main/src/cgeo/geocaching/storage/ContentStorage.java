@@ -154,11 +154,11 @@ public class ContentStorage {
 
     /** Creates a new file in a folder location and returns its Uri */
     public Uri create(final Folder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
-        final String name = (nameCreator == null ? FileNameCreator.DEFAULT : nameCreator).createName();
         if (folder == null) {
             return null;
         }
 
+        final String name = (nameCreator == null ? FileNameCreator.DEFAULT : nameCreator).createName();
         if (onlyIfNotExisting) {
             final FileInformation fi = getFileInfo(folder, name);
             if (fi != null) {
@@ -380,7 +380,7 @@ public class ContentStorage {
         return null;
     }
 
-    public Uri copy(final Uri source, final Folder target, final FileNameCreator newName, final boolean move) {
+    public Uri copy(final Uri source, final Folder target, @Nullable final FileNameCreator newName, final boolean move) {
         boolean success = true;
         Exception failureEx = null;
 
@@ -388,7 +388,15 @@ public class ContentStorage {
         OutputStream out = null;
         Uri outputUri = null;
         try {
-            outputUri = create(target, newName != null ? newName : FileNameCreator.forName(UriUtils.getLastPathSegment(source)), false);
+            FileNameCreator fnc = newName;
+            if (fnc == null) {
+                String displayName = getName(source);
+                if (displayName == null) {
+                    displayName = UriUtils.getLastPathSegment(source);
+                }
+                fnc = FileNameCreator.forName(displayName);
+            }
+            outputUri = create(target, fnc, false);
             if (outputUri == null) {
                 success = false;
                 return null;

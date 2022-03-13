@@ -4,10 +4,13 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.storage.ContentStorage;
+import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
 
+import android.app.Activity;
 import android.app.Application;
 import android.content.ContentValues;
+import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -23,6 +26,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Base64InputStream;
+import android.webkit.MimeTypeMap;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -177,14 +181,18 @@ public final class ImageUtils {
         }
     }
 
-    public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY) {
+    public static File compressImageToFile(@NonNull final Uri imageUri) {
+        return scaleAndCompressImageToTemporaryFile(imageUri, -1, 100);
+    }
+
+    public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
         final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY);
         if (image == null) {
             return null;
         }
 
-        final File targetFile = FileUtils.getUniqueNamedFile(new File(LocalStorage.getInternalCgeoDirectory(), "offline_log_image.tmp"));
+        final File targetFile = FileUtils.getUniqueNamedFile(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "temporary_image.jpg"));
         final Uri newImageUri = Uri.fromFile(targetFile);
         if (newImageUri == null) {
             Log.e("ImageUtils.readScaleAndWriteImage: unable to write scaled image");
@@ -192,7 +200,7 @@ public final class ImageUtils {
         }
 
         final BitmapDrawable scaledImage = scaleBitmapTo(image, maxXY, maxXY);
-        storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, 75, newImageUri);
+        storeBitmap(scaledImage.getBitmap(), Bitmap.CompressFormat.JPEG, compressQuality <= 0 ? 75 : compressQuality, newImageUri);
 
         return targetFile;
     }
@@ -369,6 +377,7 @@ public final class ImageUtils {
                     images.add(new Image.Builder()
                             .setUrl(source)
                             .setTitle(StringUtils.defaultString(geocode))
+                            .setCategory(Image.ImageCategory.LISTING)
                             .build());
                     urls.add(source);
                 }
@@ -563,6 +572,15 @@ public final class ImageUtils {
         return new ImmutablePair<>(imageFileName, Uri.fromFile(getFileForOfflineLogImage(imageFileName)));
     }
 
+    public static Image toLocalLogImage(final String geocode, final Uri imageUri) {
+        //create new image
+        final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
+        final Folder folder = Folder.fromFile(getFileForOfflineLogImage(imageFileName).getParentFile());
+        final Uri targetUri = ContentStorage.get().copy(imageUri, folder, FileNameCreator.forName(imageFileName), false);
+
+        return new Image.Builder().setUrl(targetUri).build();
+    }
+
     public static void deleteOfflineLogImagesFor(final String geocode, final List<Image> keep) {
         if (geocode == null) {
             return;
@@ -606,6 +624,31 @@ public final class ImageUtils {
         }
 
         return imageUri;
+    }
+
+    public static void viewImageInStandardApp(final Activity activity, final Uri imageUri) {
+        try {
+            final Intent intent = new Intent().setAction(Intent.ACTION_VIEW);
+            File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
+            final String mimeType;
+            if (file == null || !file.exists()) {
+                file = compressImageToFile(imageUri);
+                file.deleteOnExit();
+                mimeType = "image/jpeg";
+            } else {
+                mimeType = mimeTypeForUrl(imageUri.toString());
+            }
+            final String authority = activity.getString(R.string.file_provider_authority);
+            intent.setDataAndType(FileProvider.getUriForFile(activity, authority, file), mimeType);
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+            activity.startActivity(intent);
+        } catch (final Exception e) {
+            Log.e("ImageUtils.viewImageInStandardApp", e);
+        }
+    }
+
+    private static String mimeTypeForUrl(final String url) {
+        return StringUtils.defaultString(MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url)), "image/*");
     }
 
 }

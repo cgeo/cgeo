@@ -25,6 +25,7 @@ import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableConnector;
 import cgeo.geocaching.databinding.CachedetailDescriptionPageBinding;
 import cgeo.geocaching.databinding.CachedetailDetailsPageBinding;
+import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.CachedetailInventoryPageBinding;
 import cgeo.geocaching.databinding.CachedetailWaypointsHeaderBinding;
@@ -50,6 +51,7 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointParser;
@@ -71,6 +73,7 @@ import cgeo.geocaching.ui.CacheDetailsCreator;
 import cgeo.geocaching.ui.CoordinatesFormatSwitcher;
 import cgeo.geocaching.ui.DecryptTextClickListener;
 import cgeo.geocaching.ui.FastScrollListener;
+import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.IndexOutOfBoundsAvoidingTextView;
 import cgeo.geocaching.ui.TextParam;
@@ -83,6 +86,7 @@ import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -226,6 +230,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private TextView cacheDistanceView;
 
     protected ImagesList imagesList;
+
+    private ImageGalleryView imageGallery;
+
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     /**
      * waypoint selected in context menu. This variable will be gone when the waypoint context menu is a fragment.
@@ -915,6 +922,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
         // reset imagesList so Images view page will be redrawn
         imagesList = null;
+        imageGallery = null;
         setOrderedPages(getOrderedPages());
         reinitializeViewPager();
 
@@ -988,6 +996,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         WAYPOINTS(R.string.cache_waypoints),
         INVENTORY(R.string.cache_inventory),
         IMAGES(R.string.cache_images),
+        IMAGEGALLERY(R.string.cache_images),
         VARIABLES(R.string.cache_variables),
         ;
 
@@ -2258,6 +2267,43 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
     }
 
+    public static class ImageGalleryCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
+
+        @Override
+        public CachedetailImagegalleryPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return CachedetailImagegalleryPageBinding.inflate(inflater, container, false);
+        }
+
+        @Override
+        public long getPageId() {
+            return Page.IMAGEGALLERY.id;
+        }
+
+        @Override
+        public void setContent() {
+            // retrieve activity and cache - if either if this is null, something is really wrong...
+            final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
+            if (activity == null) {
+                return;
+            }
+            final Geocache cache = activity.getCache();
+            if (cache == null) {
+                return;
+            }
+            binding.getRoot().setVisibility(View.VISIBLE);
+
+            if (activity.imageGallery == null) {
+                final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
+                imageGallery.clear();
+                imageGallery.setup(cache.getGeocode());
+                imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(),
+                    new ImageGalleryView.FolderCategoryHandler(cache.getGeocode()));
+                imageGallery.addImages(cache.getNonStaticImages());
+                activity.imageGallery = imageGallery;
+            }
+        }
+    }
+
     public static void startActivity(final Context context, final String geocode, final String cacheName) {
         final Intent cachesIntent = new Intent(context, CacheDetailActivity.class);
         cachesIntent.putExtra(Intents.EXTRA_GEOCODE, geocode);
@@ -2310,6 +2356,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             selectedTextView = null;
         }
         super.onSupportActionModeFinished(mode);
+    }
+
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, @Nullable final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (imageGallery != null) {
+            imageGallery.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
     @Override
@@ -2495,6 +2549,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (pageId == Page.VARIABLES.id) {
             final int varCount = cache == null ? 0 : cache.getVariables().size();
             return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
+        } else if (pageId == Page.IMAGEGALLERY.id) {
+            return this.getString(Page.IMAGEGALLERY.titleStringId) + "*";
         }
         return this.getString(Page.find(pageId).titleStringId);
     }
@@ -2518,6 +2574,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
                 pages.add(Page.IMAGES.id);
+                if (!BranchDetectionHelper.isProductionBuild()) {
+                    pages.add(Page.IMAGEGALLERY.id);
+                }
             }
         }
         final long[] result = new long[pages.size()];
@@ -2544,6 +2603,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new InventoryViewCreator();
         } else if (pageId == Page.IMAGES.id) {
             return new ImagesViewCreator();
+        } else if (pageId == Page.IMAGEGALLERY.id) {
+            return new ImageGalleryCreator();
         } else if (pageId == Page.VARIABLES.id) {
             return new VariablesViewPageFragment();
         }

@@ -144,16 +144,16 @@ public class ImageListFragment extends Fragment {
     @Override
     public void onViewCreated(final View view, @Nullable final Bundle savedState) {
 
-        imageHelper = new ImageActivityHelper(this.getActivity(), (r, imgs) -> {
-            final List<Image> imagesToAdd = CollectionStream.of(imgs).map(img -> img.buildUpon().setTargetScale(getFastImageAutoScale()).build()).toList();
+        imageHelper = new ImageActivityHelper(this.getActivity(), (r, imgs, uk) -> {
+            final List<Image> imagesToAdd = CollectionStream.of(imgs).map(img -> ImageUtils.toLocalLogImage(geocode, img).buildUpon().setTargetScale(getFastImageAutoScale()).build()).toList();
             imageList.addItems(imagesToAdd);
         });
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.binding.imageAddMulti.setOnClickListener(v ->
-            imageHelper.getMultipleImagesFromStorage(geocode, false));
+            imageHelper.getMultipleImagesFromStorage(geocode, false, null));
         this.binding.imageAddCamera.setOnClickListener(v ->
-            imageHelper.getImageFromCamera(geocode, false));
+            imageHelper.getImageFromCamera(geocode, false, null));
 
         if (savedState != null) {
             imageList.setItems(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));
