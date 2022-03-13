@@ -5,3 +5,4 @@
 - Uusi: Päivitetty sisäinen reititys BRouter v1.6.3
 - Uusi: Käyttäjän erillinen kuvake luoduille reittipisteille
 - Uusi: Lokipohjat offline-lokeille
+- Uusi: Lisätty konfiguroitavissa olevat pikakäynnistyspainikkeet aloitusnäyttöön, katso Asetukset => Ulkoasu
