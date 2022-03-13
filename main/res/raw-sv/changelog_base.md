@@ -5,3 +5,4 @@
 - Nyhet: Uppdaterad intern routing till BRouter v1.6.3
 - New: User separate icon for generated waypoints
 - Nyhet: Loggmallar för loggar offline
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
