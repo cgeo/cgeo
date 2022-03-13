@@ -5,3 +5,4 @@
 - Novo: Encaminhamento interno de BRouter actualizado para a versão 1.6.3
 - Novo: Ícone dedicado para pontos adicionais gerados pelo utilizador
 - Novo: Modelos de registo para registos offline
+- Novo: Adicionados botões de lançamento rápido configuráveis para o ecrã inicial, ver Definições => Aparência
