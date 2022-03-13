@@ -5,3 +5,4 @@
 - New: Updated internal routing to BRouter v1.6.3
 - Νέο: Ξεχωριστό εικονίδιο χρήστη για τα παραγόμενα σημεία
 - Νέα: Πρότυπα καταγραφής για αρχεία καταγραφής εκτός σύνδεσης
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
