@@ -5,3 +5,4 @@
 - Nieuw: interne routing bijgewerkt naar BRouter v1.6.3
 - Nieuw: Gebruikersspecifiek icoon voor gegenereerde waypoints
 - Nieuw: Log templates voor offline logs
+- Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
