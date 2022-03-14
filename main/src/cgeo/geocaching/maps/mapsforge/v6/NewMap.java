@@ -1029,11 +1029,13 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     }
 
     public void showAddWaypoint(final LatLong tapLatLong) {
-        final Geocache cache = getCurrentTargetCache();
-        if (cache != null) {
-            EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
-        } else if (Settings.isLongTapOnMapActivated()) {
-            InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), mapOptions.fromList, true);
+        if (Settings.isLongTapOnMapActivated()) {
+            final Geocache cache = getCurrentTargetCache();
+            if (cache != null) {
+                EditWaypointActivity.startActivityAddWaypoint(this, cache, new Geopoint(tapLatLong.latitude, tapLatLong.longitude));
+            } else {
+                InternalConnector.interactiveCreateCache(this, new Geopoint(tapLatLong.latitude, tapLatLong.longitude), mapOptions.fromList, true);
+            }
         }
     }
 

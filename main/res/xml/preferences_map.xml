@@ -142,7 +142,7 @@
         android:title="@string/settings_title_map_behavior"
         app:iconSpaceReserved="false">
         <CheckBoxPreference
-            android:defaultValue="false"
+            android:defaultValue="true"
             android:key="@string/pref_longTapOnMapActivated"
             android:summary="@string/init_summary_longtap_map"
             android:title="@string/init_longtap_map"
