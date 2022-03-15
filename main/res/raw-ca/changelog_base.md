@@ -6,3 +6,4 @@
 - Nou: Icona separada de l'usuari per als punts de ruta generats
 - Novetat: Plantilles per a registres fora de línia
 - New: Added configurable quick launch buttons to home screen, see Settings => Appearance
+- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
