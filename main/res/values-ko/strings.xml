@@ -807,6 +807,7 @@
     <string name="init_backup_history_length_max">모두 유지</string>
     <string name="init_backup_history_delete_warning">구성된 최대 값이 허용하는 것보다 더 많은 백업을 저장했습니다. 초과 백업을 모두 제거 하시겠습니까?</string>
     <string name="init_backup_automatic">자동 백업</string>
+    <string name="init_backup_automatic_summary">X일마다 자동 백업을 수행합니다(수동으로 생성된 백업 외에), 0=해제</string>
     <string name="init_backup_automatic_performing">백업 생성 중…</string>
     <string name="init_user_confirmation">뭘하는지 알고 있습니다</string>
     <string name="init_backup_success">c:geo 데이터베이스가 다음 위치로 성공적으로 복사되었습니다. :</string>
@@ -1089,6 +1090,9 @@
     <string name="cache_delete_userdefined_waypoints_confirm">이 캐시의 모든 사용자 정의 지점을 제거 하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
     <string name="cache_delete_userdefined_waypoints_note">참고: \"메모의 지점\"이 활성화되어 있습니다. 개인 메모에 c:geo가 인식 한 좌표가있는 경우 지점이 자동으로 다시 생성됩니다. 개인 메모 편집 대화 상자에서 비활성화 할 수 있습니다.</string>
     <string name="cache_delete_userdefined_waypoints_success">사용자 정의 지점이 삭제되었습니다.</string>
+    <string name="cache_delete_generated_waypoints">생성된 지점 제거</string>
+    <string name="cache_delete_generated_waypoints_confirm">이 캐시에서 생성된 모든 지점을 제거하시겠습니까?\n\n지점은 즉시 삭제되며 실행 취소할 수 없습니다.</string>
+    <string name="cache_delete_generated_waypoints_success">생성된 지점이 삭제되었습니다</string>
     <string name="cache_offline_store">저장</string>
     <string name="cache_offline_stored">기기에 저장됨</string>
     <string name="cache_offline_not_ready">오프라인 사용 불가능</string>
@@ -1209,6 +1213,7 @@
     <string name="menu_caches">캐시 관리</string>
     <string name="cache_menu_event">캘린더에 추가</string>
     <string name="cache_menu_extract_waypoints">중간 지점 추출</string>
+    <string name="cache_menu_scan_calculated_waypoints">지점 공식 검색</string>
     <string name="cache_menu_set_found">찾은대로 설정</string>
     <string name="cache_menu_set_DNF">찾지 못한 것으로 설정</string>
     <string name="cache_menu_reset_foundstate">찾은 상태 재설정</string>
@@ -1372,21 +1377,40 @@
     <string name="from_clipboard">클립보드 읽기</string>
     <string name="copy_to_clipboard">클립보드로 복사</string>
     <!-- Variables -->
+    <string name="variables_titletext">이 페이지를 사용하여 값을 기록하고 이 캐시에 필요한 계산을 수행합니다.</string>
+    <string name="variables_scanlisting">지오캐시 스캔</string>
+    <string name="variables_scanlisting_choosepattern_title">찾은 패턴 선택</string>
+    <string name="variables_scanlisting_nopatternfound">패턴을 찾을 수 없습니다</string>
     <string name="variables_tidyup">정리</string>
     <string name="variables_deleteall">전체삭제</string>
     <string name="variables_deleteall_confirm_text">이 캐시의 모든 변수를 삭제하시겠습니까?</string>
     <string name="variables_info">도움말</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">안내 모드</string>
+    <string name="calccoord_guided_edit">편집할 숫자를 누르세요</string>
+    <string name="calccoord_guided_value">값</string>
+    <string name="calccoord_convert_to_plain">일반 좌표로 변환</string>
+    <string name="calccoord_plain_tools_title">일반 도구</string>
+    <string name="calccoord_remove_spaces">공백 제거</string>
+    <string name="calccoord_paste_from_clipboard">클립보드에서 붙여넣기</string>
+    <string name="calccoord_generate_title">지점 생성</string>
     <string name="calccoord_generate_showonmap">지도에 표시</string>
     <string name="calccoord_generate_waypointnameprefix">생성됨</string>
+    <string name="calccoord_generate_error_novarwithrange">범위가 있는 유효한 변수가 없습니다.</string>
+    <string name="calccoord_generate_error_novalidgeopoints">유효한 좌표를 반환한 조합이 없습니다.</string>
     <string name="calccoord_generate_error_nogeopointselected">선택한 좌표 없음</string>
+    <string name="calccoord_migrate_title">지점 이전</string>
+    <string name="calccoord_migrate_migrate">이전하기</string>
+    <string name="calccoord_migrate_migrate_usernote_praefix">이전 위치</string>
     <string name="calccoord_migrate_cancel">취소</string>
+    <string name="calccoord_migrate_dismiss">데이터 닫기</string>
+    <string name="calccoord_migrate_dismiss_usernote_praefix">닫았음</string>
     <!-- Formula -->
     <string name="formula_function_sqrt">제곱근</string>
     <string name="formula_function_abs">절댓값</string>
     <string name="formula_function_lettervalue">단어 값</string>
     <string name="formula_error_missingvarvalue">부족: %1$s</string>
+    <string name="formula_error_empty">빈 공식</string>
     <string name="formula_error_other">오류: \'%1$s\'</string>
     <!-- visit -->
     <string name="visit_tweet">이 기록을 트위터로 보내기</string>
@@ -2509,4 +2533,36 @@
     <string name="rtl_path_quality23">품질 2/3(포장: 자갈, 수리됨, 등)</string>
     <string name="rtl_path_quality45">품질 4/5(비포장)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">스마일리</string>
+    <string name="smiley_big_smile">큰 미소</string>
+    <string name="smiley_cool">쿨</string>
+    <string name="smiley_blush">블러시</string>
+    <string name="smiley_tongue">혀</string>
+    <string name="smiley_evil">악마</string>
+    <string name="smiley_shocked">충격을 받음</string>
+    <string name="smiley_wink">윙크</string>
+    <string name="smiley_clown">광대</string>
+    <string name="smiley_blackeye">검은 눈</string>
+    <string name="smiley_8ball">팔볼</string>
+    <string name="smiley_frown">울상</string>
+    <string name="smiley_shy">수줍</string>
+    <string name="smiley_angry">화남</string>
+    <string name="smiley_dead">사망</string>
+    <string name="smiley_sleepy">졸림</string>
+    <string name="smiley_kisses">뽀뽀</string>
+    <string name="smiley_approve">승인</string>
+    <string name="smiley_disapprove">승인되지 않음</string>
+    <string name="smiley_question">질문</string>
+    <string name="smiley_cry">울음</string>
+    <string name="smiley_embarassed">부끄러움</string>
+    <string name="smiley_footinmouth">입에 발</string>
+    <string name="smiley_innocent">무고함</string>
+    <string name="smiley_kiss">키스</string>
+    <string name="smiley_laughing">웃음</string>
+    <string name="smiley_money">현금</string>
+    <string name="smiley_sealed">봉인</string>
+    <string name="smiley_surprised">놀람</string>
+    <string name="smiley_tongueout">메롱</string>
+    <string name="smiley_undecided">결정하지 못함</string>
+    <string name="smiley_yell">고함</string>
 </resources>
