@@ -6,3 +6,4 @@
 - Nieuw: Gebruikersspecifiek icoon voor gegenereerde waypoints
 - Nieuw: Log templates voor offline logs
 - Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
+- Wijziging: Instellingen => Kaart => Lang tikken op kaart zal nu ook aanzetten/uitschakelen van lange tap in de cache kaart (relevant voor het maken van nieuwe waypoints voor huidige cache)
