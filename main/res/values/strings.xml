@@ -657,6 +657,7 @@
     <string name="about_changelog">Changelog</string>
     <string name="about_changelog_nightly_build">Nightly build</string>
     <string name="about_changelog_next_release">Next release</string>
+    <string name="about_changelog_bugfix_release">Bugfix Release</string>
     <string name="about_system">System</string>
     <string name="about_donate">Support us</string>
     <string name="about_donation_more">Visit website for info</string>
