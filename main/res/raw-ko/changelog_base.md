@@ -5,4 +5,5 @@
 - 신규: BRouter v1.6.3으로 내부 라우팅 업데이트
 - 신규: 생성된 지점에 대한 사용자 별도 아이콘
 - 신규: 오프라인 로그용 로그 템플릿
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
+- 신규: 구성 가능한 빠른 실행 버튼을 홈 화면에 추가했습니다. 설정 => 외관 디자인
+- 변경: 설정 => 지도 => 지도를 길게 누르면 이제 캐시 지도에서도 길게 누름이 활성화/비활성화됩니다(현재 캐시에 대한 새 지점 생성과 관련됨).
