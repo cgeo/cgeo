@@ -1,8 +1,8 @@
-## 2022.03.10 Bugfix Release
+##
 
 - Oplossing: Crash bij het openen van kaart als er actieve track/route bestanden ontbreken
 
-## 2022.02.16 Bugfix Release
+##
 
 - Oplossing: Behoud de positie bij het overschakelen van Google Maps naar OpenStreetMap
 - Oplossing: Zeldzame crash in cache lijst attribuut overzicht
@@ -14,6 +14,6 @@
 - Oplossing: Toon betere bestandsnaam in c:geo na het selecteren van een GPX track bestand
 - Oplossing: Onthoud de instelling "tonen/verbergen" voor routes / tracks
 
-## 2022.02.16 Bugfix Release
+##
 
 - Fix: Zeldzame crash bij het opstarten van cgeo
