@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -145,6 +146,19 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         final MapPosition pos = new MapPosition();
         pos.setByBoundingBox(bounds, Tile.SIZE * 4, Tile.SIZE * 4);
         mMap.setMapPosition(pos);
+    }
+
+    @Override
+    public void setCenter(final Geopoint geopoint) {
+        final MapPosition pos = mMap.getMapPosition();
+        pos.setPosition(geopoint.getLatitude(), geopoint.getLongitude());
+        mMap.setMapPosition(pos);
+    }
+
+    @Override
+    public Geopoint getCenter() {
+        final MapPosition pos = mMap.getMapPosition();
+        return new Geopoint(pos.getLatitude(), pos.getLongitude());
     }
 
     public int getCurrentZoom() {

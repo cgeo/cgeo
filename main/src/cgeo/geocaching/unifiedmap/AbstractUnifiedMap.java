@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -26,6 +27,8 @@ public abstract class AbstractUnifiedMap {
     }
 
     public abstract void zoomToBounds(BoundingBox bounds);
+    public abstract void setCenter(Geopoint geopoint);
+    public abstract Geopoint getCenter();
 
     // Lifecycle methods
 
