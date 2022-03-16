@@ -580,6 +580,7 @@
     <string name="about_changelog">Änderungen</string>
     <string name="about_changelog_nightly_build">Nightly-Build</string>
     <string name="about_changelog_next_release">Nächste Version</string>
+    <string name="about_changelog_bugfix_release">Bugfix-Release</string>
     <string name="about_system">System</string>
     <string name="about_donate">Unterstütze uns</string>
     <string name="about_donation_more">Besuche Webseite für Infos</string>
