@@ -1,5 +1,9 @@
 ##
 
+- Fix: Crash in OpenStreetMap maps under certain conditions
+
+##
+
 - Fix: Crash on opening map when active track/route files are missing
 
 ##
