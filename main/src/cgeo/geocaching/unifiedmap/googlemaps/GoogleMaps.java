@@ -1,6 +1,7 @@
 package cgeo.geocaching.unifiedmap.googlemaps;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
@@ -13,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
 import org.oscim.core.BoundingBox;
 
 public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback {
@@ -81,6 +83,22 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
             mapController.animateTo(new GoogleGeoPoint(bounds.getCenterPoint()));
         }
     };
+
+    @Override
+    public void setCenter(final Geopoint geopoint) {
+        if (mMap != null) {
+            mapController.animateTo(new GoogleGeoPoint(geopoint.getLatitudeE6(), geopoint.getLongitudeE6()));
+        }
+    }
+
+    @Override
+    public Geopoint getCenter() {
+        if (mMap != null) {
+            final LatLng pos = mMap.getCameraPosition().target;
+            return new Geopoint(pos.latitude, pos.longitude);
+        }
+        return new Geopoint(0.0d, 0.0d);
+    }
 
     @Override
     public int getCurrentZoom() {
