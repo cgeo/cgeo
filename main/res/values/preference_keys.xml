@@ -465,6 +465,7 @@
     <string translatable="false" name="pref_webDeviceCode">webDeviceCode</string>
 
     <!-- additional map settings -->
+    <string translatable="false" name="pref_showUnifiedMap">showUnifiedMap</string>
     <string translatable="false" name="pref_showCircles">showCircles</string>
     <string translatable="false" name="pref_supersizeDistance">supersizeDistanceToggle</string>
     <string translatable="false" name="pref_mapLanguage">mapLanguage</string>

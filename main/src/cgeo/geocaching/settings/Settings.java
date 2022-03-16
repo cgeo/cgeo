@@ -513,7 +513,7 @@ public class Settings {
         return sharedPrefs == null ? defaultValue : sharedPrefs.getLong(getKey(prefKeyId), defaultValue);
     }
 
-    private static boolean getBoolean(final int prefKeyId, final boolean defaultValue) {
+    public static boolean getBoolean(final int prefKeyId, final boolean defaultValue) {
         return getBooleanDirect(getKey(prefKeyId), defaultValue);
     }
 
