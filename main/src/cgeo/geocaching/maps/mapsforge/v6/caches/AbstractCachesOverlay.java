@@ -296,7 +296,11 @@ public abstract class AbstractCachesOverlay {
         synchronized (this.bundleRef.get().getMapView()) {
             for (final GeoitemLayer layer : layerList) {
                 geoEntries.remove(new GeoEntry(layer.getItemCode(), overlayId));
-                layers.remove(layer);
+                try {
+                    layers.remove(layer);
+                } catch (IllegalStateException e) {
+                    Log.d("Ignored exception on layer removal", e);
+                }
                 final Layer circle = layer.getCircle();
                 if (circle != null) {
                     layers.remove(circle);
