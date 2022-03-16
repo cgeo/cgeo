@@ -584,6 +584,7 @@
     <string name="about_changelog">Změny</string>
     <string name="about_changelog_nightly_build">Noční sestavení</string>
     <string name="about_changelog_next_release">Další vydání</string>
+    <string name="about_changelog_bugfix_release">Vydání opravy chyb</string>
     <string name="about_system">Systém</string>
     <string name="about_donate">Podpoř nás</string>
     <string name="about_donation_more">Navštivte webovou stránku pro informace</string>
