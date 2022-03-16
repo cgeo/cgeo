@@ -71,11 +71,14 @@ public class WatchdogTest extends CGeoTestCase {
 
     private static void checkWebsite(final String connectorName, final String url) {
 
-        // temporarily disable extremcaching.com
+        // temporarily disable extremcaching.com test
         // It fails if the SSL certificate of the API has expired, which happens quite regular due to bad maintenance of the site
         // As it blocks more relevant test results we keep it disabled for the time being
 
-        if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com")) {
+        // temporarily disable geocaching.su test
+        // it keeps failing regularly at the moment, so disable it temporarily to reduce maintenance info emails
+
+        if (connectorName.equalsIgnoreCase("geocaching website extremcaching.com") || (connectorName.equalsIgnoreCase("geocaching website Geocaching.su"))) {
             return;
         }
 
