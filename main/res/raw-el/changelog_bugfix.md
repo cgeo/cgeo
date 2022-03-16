@@ -1,8 +1,12 @@
-## 2022.03.10 Bugfix Release
+##
+
+- Fix: Crash in OpenStreetMap maps under certain conditions
+
+##
 
 - Fix: Crash on opening map when active track/route files are missing
 
-## 2022.03.09 Bugfix Release
+##
 
 - Διόρθωση: Διατηρήστε τη θέση σας για τη μετάβαση από το χάρτη Google στο OpenStreetMap
 - Διόρθωση: Σπάνια κατάρρευση στο χαρακτηριστικό cache
@@ -14,6 +18,6 @@
 - Fix: Show better file name in c:geo after selecting a GPX track file
 - Fix: Remember "show/hide" setting for routes / tracks
 
-## 2022.02.16 Bugfix Release
+##
 
 - Fix: Rare crash on startup of cgeo
