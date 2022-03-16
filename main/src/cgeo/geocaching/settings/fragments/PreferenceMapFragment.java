@@ -33,19 +33,23 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
 
         initMapSourcePreference();
 
-        // new unified map providers
+        final boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false);
         final MultiSelectListPreference hideTileprovidersPref = findPreference(getString(R.string.pref_tileprovider_hidden));
-        final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
-        final String[] tpEntries = new String[tileproviders.size()];
-        final String[] tpValues =  new String[tileproviders.size()];
-        int i = 0;
-        for (AbstractTileProvider tileProvider : tileproviders.values()) {
-            tpEntries[i] = tileProvider.getTileProviderName();
-            tpValues[i] = tileProvider.getId();
-            i++;
+        hideTileprovidersPref.setVisible(showUnifiedMap);
+        if (showUnifiedMap) {
+            // new unified map providers
+            final HashMap<String, AbstractTileProvider> tileproviders = TileProviderFactory.getTileProviders();
+            final String[] tpEntries = new String[tileproviders.size()];
+            final String[] tpValues = new String[tileproviders.size()];
+            int i = 0;
+            for (AbstractTileProvider tileProvider : tileproviders.values()) {
+                tpEntries[i] = tileProvider.getTileProviderName();
+                tpValues[i] = tileProvider.getId();
+                i++;
+            }
+            hideTileprovidersPref.setEntries(tpEntries);
+            hideTileprovidersPref.setEntryValues(tpValues);
         }
-        hideTileprovidersPref.setEntries(tpEntries);
-        hideTileprovidersPref.setEntryValues(tpValues);
 
     }
 
