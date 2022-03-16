@@ -55,16 +55,16 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
          * weak reference to the outer class
          */
         @NonNull
-        private final WeakReference<UnifiedMapActivity> mapRef;
+        private final WeakReference<UnifiedMapActivity> mapActivityRef;
 
-        UpdateLoc(@NonNull final UnifiedMapActivity map) {
-            mapRef = new WeakReference<>(map);
+        UpdateLoc(@NonNull final UnifiedMapActivity mapActivity) {
+            mapActivityRef = new WeakReference<>(mapActivity);
         }
 
         @Override
         public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
             currentLocation = geo;
-            currentHeading = AngleUtils.getDirectionNow(dir);
+            currentHeading = AngleUtils.getDirectionNow(dir /* test */ + 360.0f * (float) Math.random());
             repaintPositionOverlay();
         }
 
@@ -82,17 +82,19 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 timeLastPositionOverlayCalculation = currentTimeMillis;
 
                 try {
-                    final UnifiedMapActivity map = mapRef.get();
-                    if (map != null) {
+                    final UnifiedMapActivity mapActivity = mapActivityRef.get();
+                    if (mapActivity != null) {
                         final boolean needsRepaintForDistanceOrAccuracy = needsRepaintForDistanceOrAccuracy();
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                         if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
-                            map.centerMap(new Geopoint(currentLocation));
+                            mapActivity.centerMap(new Geopoint(currentLocation));
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                            // @todo: update coordinates & heading for different layers
+                            if (mapActivity.map.positionLayer != null) {
+                                mapActivity.map.positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
+                            }
                             // @todo: check if proximity notification needs an update
                         }
                     }
@@ -103,16 +105,15 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
 
         boolean needsRepaintForHeading() {
-            final UnifiedMapActivity map = mapRef.get();
-            if (map == null) {
+            final UnifiedMapActivity mapActivity = mapActivityRef.get();
+            if (mapActivity == null) {
                 return false;
             }
-            return false; // @todo
-            // return Math.abs(AngleUtils.difference(currentHeading, map.positionLayer.getHeading())) > MIN_HEADING_DELTA;
+            return Math.abs(AngleUtils.difference(currentHeading, mapActivity.map.getHeading())) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistanceOrAccuracy() {
-            final UnifiedMapActivity map = mapRef.get();
+            final UnifiedMapActivity map = mapActivityRef.get();
             if (map == null) {
                 return false;
             }

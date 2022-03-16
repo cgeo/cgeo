@@ -10,9 +10,14 @@ import org.oscim.core.BoundingBox;
 public abstract class AbstractUnifiedMap {
 
     protected AbstractTileProvider currentTileProvider;
+    protected AbstractPositionLayer positionLayer;
+
 
     public abstract void init(AppCompatActivity activity);
-    public abstract void prepareForTileSourceChange();
+
+    public void prepareForTileSourceChange() {
+        positionLayer = configPositionLayer(false);
+    };
 
     public void setTileSource(final AbstractTileProvider newSource) {
         currentTileProvider = newSource;
@@ -29,15 +34,17 @@ public abstract class AbstractUnifiedMap {
     public abstract void zoomToBounds(BoundingBox bounds);
     public abstract void setCenter(Geopoint geopoint);
     public abstract Geopoint getCenter();
+    protected abstract AbstractPositionLayer configPositionLayer(boolean create);
 
+    // ========================================================================
     // Lifecycle methods
 
     protected void onResume() {
-        // default is empty
+        positionLayer = configPositionLayer(true);
     }
 
     protected void onPause() {
-        // default is empty
+        positionLayer = configPositionLayer(false);
     }
 
     protected void onDestroy() {
@@ -55,4 +62,8 @@ public abstract class AbstractUnifiedMap {
     public abstract int getCurrentZoom();
 
     public abstract void setZoom(int zoomLevel);
+
+    public float getHeading() {
+        return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
+    }
 }

@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -54,10 +55,16 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         synchronized (layers) {
             for (Layer layer : layers) {
                 layer.setEnabled(false);
-                mMap.layers().remove(layer);
+                try {
+                    mMap.layers().remove(layer);
+                } catch (IndexOutOfBoundsException ignore) {
+                    // ignored
+                }
             }
+            layers.clear();
         }
         mMap.clearMap();
+        super.prepareForTileSourceChange();
     }
 
     /** call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider */
@@ -75,7 +82,11 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
 
     private void removeBaseMap() {
         if (baseMap != null) {
-            mMap.layers().remove(1);
+            try {
+                mMap.layers().remove(1);
+            } catch (IndexOutOfBoundsException ignore) {
+                // ignored
+            }
         }
         baseMap = null;
     }
@@ -176,6 +187,18 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
         setZoom(zoomIn ? zoom + 1 : zoom - 1);
     }
 
+    @Override
+    protected AbstractPositionLayer configPositionLayer(final boolean create) {
+        if (create) {
+            return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap);
+        } else if (positionLayer != null) {
+            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
+        }
+        return null;
+    }
+
+
+    // ========================================================================
     // Lifecycle methods
 
     @Override
