@@ -1,8 +1,12 @@
-## 2022.03.10 Vydání opravy chyb
+##
+
+- Oprava: Pád map OpenStreetMap za určitých podmínek
+
+##
 
 - Oprava: Chyba při otevírání mapy, pokud chybí aktivní soubory stopy/trasy
 
-## 2022.03.09 Vydání opravy chyb
+##
 
 - Oprava: Zachování polohy při přepnutí z Google map na mapu OpenStreetMap
 - Oprava: Přehled chyb v seznamu atributů kešky
@@ -14,6 +18,6 @@
 - Oprava: Zobrazení lepšího názvu souboru v c:geo po výběru GPX souboru trasy
 - Oprava: Zapamatovat si nastavení "zobrazit/skrýt" pro trasy/stopy
 
-## 2022.02.16 Vydání opravy chyb
+##
 
 - Oprava: Vzácný pád při spuštění c:geo
