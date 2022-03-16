@@ -44,20 +44,7 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeTileProvider {
             final MapInfo info = source.getMapInfo();
             source.close();
             if (info != null) {
-                if (StringUtils.isNotBlank(info.languagesPreference)) {
-                    for (String language : info.languagesPreference.split(",")) {
-                        boolean found = false;
-                        for (String comp : languages) {
-                            if (StringUtils.equals(comp, language)) {
-                                found = true;
-                                break;
-                            }
-                        }
-                        if (!found) {
-                            languages.add(language);
-                        }
-                    }
-                }
+                checkLanguage(languages, info.languagesPreference);
                 parseZoomLevel(info.zoomLevel);
                 boundingBox = boundingBox == null ? info.boundingBox : boundingBox.extendBoundingBox(info.boundingBox);
             }
@@ -83,6 +70,23 @@ class MapsforgeMultiOfflineTileProvider extends AbstractMapsforgeTileProvider {
 
         if (boundingBox != null && !boundingBox.contains(map.getMapPosition().getGeoPoint())) {
             MAP_MAPSFORGE.zoomToBounds(boundingBox);
+        }
+    }
+
+    private void checkLanguage(final ArrayList<String> languages, final String languagesPreference) {
+        if (StringUtils.isNotBlank(languagesPreference)) {
+            for (String language : languagesPreference.split(",")) {
+                boolean found = false;
+                for (String comp : languages) {
+                    if (StringUtils.equals(comp, language)) {
+                        found = true;
+                        break;
+                    }
+                }
+                if (!found) {
+                    languages.add(language);
+                }
+            }
         }
     }
 
