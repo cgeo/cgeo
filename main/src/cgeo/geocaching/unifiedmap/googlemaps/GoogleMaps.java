@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
+import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -32,7 +33,7 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
 
     @Override
     public void prepareForTileSourceChange() {
-        // nothing yet to do
+        super.prepareForTileSourceChange();
     }
 
 
@@ -63,6 +64,7 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
         mMap = googleMap;
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+        positionLayer = configPositionLayer(true);
     }
 
     @Override
@@ -110,8 +112,16 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
         // @todo: actually set zoom level
     }
 
+    @Override
+    protected AbstractPositionLayer configPositionLayer(final boolean create) {
+        if (create) {
+            return positionLayer != null ? positionLayer : mMap == null ? null : new GoogleMapsPositionLayer(mMap);
+        }
+        return null;
+    }
 
-    // lifecycle methods
+    // ========================================================================
+    // Lifecycle methods
 
     @Override
     protected void onResume() {
