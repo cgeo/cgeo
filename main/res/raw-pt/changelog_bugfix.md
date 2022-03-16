@@ -1,8 +1,8 @@
-## 2022.03.10: Pacote de correcção de erros
+##
 
 - Correcção: Falha ao abrir mapa quando estão em falta ficheiros de percurso/rota
 
-## 2022.03.09: Pacote de correcção de erros
+##
 
 - Correcção: Mantém a posição ao alternar do mapa Google para o mapa OpenStreetMap
 - Correcção: Falha rara na visão geral de atributos, numa lista de caches
@@ -14,6 +14,6 @@
 - Correcção: Mostrar um melhor nome de ficheiro no c:geo, após selecionar um ficheiro GPX
 - Correcção: Lembrar a configuração "mostrar/ocultar" para rotas / percursos
 
-## 2022.02.16 Pacote de correcção de erros
+##
 
 - Correcção: Falha rara ao iniciar o cgeo
