@@ -572,6 +572,7 @@
     <string name="about_changelog">Muutoshistoria</string>
     <string name="about_changelog_nightly_build">Yöllinen koontiversio</string>
     <string name="about_changelog_next_release">Seuraava julkaisu</string>
+    <string name="about_changelog_bugfix_release">Virheenkorjausversio</string>
     <string name="about_system">Järjestelmä</string>
     <string name="about_donate">Tue meitä</string>
     <string name="about_donation_more">Webbisivuilla on lisää tietoa</string>
