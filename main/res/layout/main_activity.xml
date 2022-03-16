@@ -97,14 +97,6 @@
         android:scrollbars="none"
         tools:listitem="@layout/main_activity_connectorstatus" />
 
-    <Button
-        android:id="@+id/testUnifiedMap"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        style="@style/button_full"
-        android:layout_above="@id/location_area"
-        android:text="Test Unified Map" />
-
     <LinearLayout
         android:id="@+id/quicklaunchitems"
         android:layout_width="match_parent"

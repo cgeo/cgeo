@@ -73,6 +73,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -265,9 +266,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             super.onCreate(savedInstanceState);
 
             binding = MainActivityBinding.inflate(getLayoutInflater());
-            binding.testUnifiedMap.setOnClickListener(v -> {
-                startActivity(new Intent(this, UnifiedMapActivity.class));
-            });
 
             // adding the bottom navigation component is handled by {@link AbstractBottomNavigationActivity#setContentView}
             setContentView(binding.getRoot());
@@ -369,16 +367,25 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         binding.quicklaunchitems.setVisibility(View.GONE);
         for (QuickLaunchItem item : QuickLaunchItem.values()) {
             if (quicklaunchitems.contains(item.name()) && (!item.gcPremiumOnly || Settings.isGCPremiumMember())) {
-                final MaterialButton b = new MaterialButton(this, null, R.attr.quickLaunchButtonStyle);
-                b.setIconResource(item.iconRes);
-                b.setLayoutParams(lp);
-                b.setVisibility(View.VISIBLE);
-                b.setOnClickListener(view -> launchQuickLaunchItem(item));
-                TooltipCompat.setTooltipText(b, getString(item.info));
-                binding.quicklaunchitems.addView(b);
-                binding.quicklaunchitems.setVisibility(View.VISIBLE);
+                addButton(item.iconRes, lp, () -> launchQuickLaunchItem(item), getString(item.info));
             }
         }
+
+        // temporarily add button for unified map, if enabled in settings
+        if (Settings.getBoolean(R.string.pref_showUnifiedMap, false)) {
+            addButton(R.drawable.sc_icon_map, lp, () -> startActivity(new Intent(this, UnifiedMapActivity.class)), "Start unified map");
+        }
+    }
+
+    private void addButton(@DrawableRes final int iconRes, final LinearLayout.LayoutParams lp, final Runnable action, final String tooltip) {
+        final MaterialButton b = new MaterialButton(this, null, R.attr.quickLaunchButtonStyle);
+        b.setIconResource(iconRes);
+        b.setLayoutParams(lp);
+        b.setVisibility(View.VISIBLE);
+        b.setOnClickListener(view -> action.run());
+        TooltipCompat.setTooltipText(b, tooltip);
+        binding.quicklaunchitems.addView(b);
+        binding.quicklaunchitems.setVisibility(View.VISIBLE);
     }
 
     private void launchQuickLaunchItem(final QuickLaunchItem which) {
