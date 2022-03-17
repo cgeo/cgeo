@@ -1,10 +1,10 @@
 ##
 
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- Διόρθωση: κατάρρευση σε χάρτες OpenStreetMap υπό ορισμένες συνθήκες
 
 ##
 
-- Fix: Crash on opening map when active track/route files are missing
+- Διόρθωση: Κατάρρευση στο άνοιγμα του χάρτη όταν λείπουν τα αρχεία ενεργών κομματιών/διαδρομών
 
 ##
 
