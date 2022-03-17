@@ -1,6 +1,6 @@
 ##
 
-- Fix: Crash on opening map when active track/route files are missing
+- Διόρθωση: Κατάρρευση στο άνοιγμα του χάρτη όταν λείπουν τα αρχεία ενεργών κομματιών/διαδρομών
 
 ##
 
