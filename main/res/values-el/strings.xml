@@ -575,6 +575,7 @@
     <string name="about_changelog">Τι νέο υπάρχει;</string>
     <string name="about_changelog_nightly_build">Νυχτερινή έκδοση</string>
     <string name="about_changelog_next_release">Επόμενη έκδοση</string>
+    <string name="about_changelog_bugfix_release">Έκδοση Bugfix</string>
     <string name="about_system">Σύστημα</string>
     <string name="about_donate">Υποστηρίξτε μας</string>
     <string name="about_donation_more">Επισκεφθείτε την ιστοσελίδα για πληροφορίες</string>
