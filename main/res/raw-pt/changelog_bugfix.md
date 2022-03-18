@@ -1,6 +1,6 @@
 ##
 
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- Correcção: Falha nos mapas OpenStreetMap, sob certas condições
 
 ##
 
