@@ -2,12 +2,20 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.maps.PositionHistory;
+import cgeo.geocaching.models.TrailHistoryElement;
+import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func2;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -17,15 +25,26 @@ import java.util.Objects;
  * - direction line
  * - target and distance infos (target cache, distance to target, length of individual route)
  * - individual route
- * - track(s)
+ * - route(s)/track(s)
  */
 public abstract class AbstractPositionLayer {
 
     protected Location currentLocation = null;
     protected float currentHeading = 0.0f;
+
+    // position and heading arrow
     protected Bitmap positionAndHeadingArrow = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
     protected int arrowWidth = positionAndHeadingArrow.getWidth();
     protected int arrowHeight = positionAndHeadingArrow.getHeight();
+
+    // position history
+    protected final PositionHistory history = new PositionHistory();
+    private static final int MAX_HISTORY_POINTS = 230;
+
+    /**
+     * maximum distance (in meters) up to which two points in the trail get connected by a drawn line
+     */
+    protected static final float LINE_MAXIMUM_DISTANCE_METERS = 10000;
 
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
@@ -42,7 +61,8 @@ public abstract class AbstractPositionLayer {
         }
 
         if (coordChanged) {
-            // history.rememberTrailPosition(coordinates);
+            history.rememberTrailPosition(location);
+            repaintHistory();
 
             /*
             if (mapRotation == MAPROTATION_AUTO) {
@@ -90,5 +110,53 @@ public abstract class AbstractPositionLayer {
 
     public float getCurrentHeading() {
         return currentHeading;
+    }
+
+    public ArrayList<TrailHistoryElement> getHistory() {
+        return history.getHistory();
+    }
+
+    public <T> void repaintHistoryHelper(final Func2<Double, Double, T> createNewPoint, final Action1<List<T>> addSegment) {
+        if (null == currentLocation) {
+            return;
+        }
+        if (Settings.isMapTrail()) {
+            try {
+                final ArrayList<TrailHistoryElement> paintHistory = new ArrayList<>(getHistory());
+                final int size = paintHistory.size();
+                if (size < 2) {
+                    return;
+                }
+                // always add current position to drawn history to have a closed connection, even if it's not yet recorded
+                paintHistory.add(new TrailHistoryElement(currentLocation));
+
+                Location prev = paintHistory.get(0).getLocation();
+                int current = 1;
+                while (current < size) {
+                    final List<T> points = new ArrayList<>(MAX_HISTORY_POINTS);
+                    points.add(createNewPoint.call(prev.getLatitude(), prev.getLongitude()));
+
+                    boolean paint = false;
+                    while (!paint && current < size) {
+                        final Location now = paintHistory.get(current).getLocation();
+                        current++;
+                        // split into segments if distance between adjacent points is too far
+                        if (now.distanceTo(prev) < LINE_MAXIMUM_DISTANCE_METERS) {
+                            points.add(createNewPoint.call(now.getLatitude(), now.getLongitude()));
+                        } else {
+                            paint = true;
+                        }
+                        prev = now;
+                    }
+                    if (points.size() > 1) {
+                        addSegment.call(points);
+                    }
+                }
+            } catch (OutOfMemoryError ignore) {
+                Log.e("drawHistory: out of memory, please reduce max track history size");
+                // better do not draw history than crash the map
+            }
+        }
+
     }
 }

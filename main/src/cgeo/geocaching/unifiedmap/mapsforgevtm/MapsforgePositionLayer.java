@@ -5,18 +5,24 @@ import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Matrix;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
 import org.oscim.core.GeoPoint;
 import org.oscim.layers.marker.ItemizedLayer;
 import org.oscim.layers.marker.MarkerItem;
 import org.oscim.layers.marker.MarkerSymbol;
+import org.oscim.layers.vector.PathLayer;
 import org.oscim.layers.vector.VectorLayer;
 import org.oscim.layers.vector.geometries.CircleDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
 
 class MapsforgePositionLayer extends AbstractPositionLayer {
+
+    final Map map;
 
     // position and heading arrow
     private final ItemizedLayer arrowLayer;
@@ -30,12 +36,19 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
         .fillColor(MapLineUtils.getAccuracyCircleFillColor())
         .build();
 
+    // position history
+    private final List<PathLayer> historyLayers = new ArrayList<>();
+
     MapsforgePositionLayer(final Map map) {
+        this.map = map;
+
+        // position and heading arrow
         accuracyCircleLayer = new VectorLayer(map);
         map.layers().add(accuracyCircleLayer);
         arrowLayer = new ItemizedLayer(map, new MarkerSymbol(new AndroidBitmap(positionAndHeadingArrow), MarkerSymbol.HotspotPlace.CENTER));
         map.layers().add(arrowLayer);
         repaintArrow();
+
     }
 
     @Override
@@ -64,7 +77,14 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
 
     @Override
     protected void repaintHistory() {
-        // @todo
+        map.layers().removeAll(historyLayers);
+        historyLayers.clear();
+        repaintHistoryHelper(GeoPoint::new, (points) -> {
+            final PathLayer historyLayer = new PathLayer(map, MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth());
+            historyLayers.add(historyLayer);
+            map.layers().add(historyLayer);
+            historyLayer.setPoints(points);
+        });
     };
 
     @Override
@@ -74,5 +94,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
 
     protected void destroyLayer(final Map map) {
         map.layers().remove(arrowLayer);
+        map.layers().removeAll(historyLayers);
+        historyLayers.clear();
     }
 }
