@@ -6,4 +6,4 @@
 - Novo: Ícone dedicado para pontos adicionais gerados pelo utilizador
 - Novo: Modelos de registo para registos offline
 - Novo: Adicionados botões de lançamento rápido configuráveis para o ecrã inicial, ver Definições => Aparência
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
+- Alteração: Configurações => Mapa => Toque longo no mapa irá agora também activar/desactivar um toque longo no mapa da cache (relevante para a criação de novos pontos adicionais para a cache actual)
