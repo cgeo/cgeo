@@ -622,6 +622,8 @@
     <string name="cache_filter_status_exclude_disabled">Exclude Disabled</string>
     <string name="cache_filter_status_exclude_archived">Exclude Archived</string>
 
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Include caches without D/T</string>
+
     <string name="cache_filter_log_entry_foundby">Found by</string>
     <string name="cache_filter_log_entry_logtext">Log text</string>
 

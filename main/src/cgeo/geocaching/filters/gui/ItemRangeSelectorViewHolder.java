@@ -72,6 +72,7 @@ public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends B
         final int minIdx = itemsToPosition.get(range.left);
         final int maxIdx = itemsToPosition.get(range.right);
         final Set<T> values = new HashSet<>();
+        //if NO value is selected or complete range is selected -> don't set any range
         if (minIdx > 0 || maxIdx + 1 < filterAccessor.getSelectableValuesAsArray().length) {
             for (int i = minIdx; i <= maxIdx; i++) {
                 values.add(filterAccessor.getSelectableValuesAsArray()[i]);

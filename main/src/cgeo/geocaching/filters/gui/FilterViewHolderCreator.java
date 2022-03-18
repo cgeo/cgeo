@@ -183,7 +183,7 @@ public class FilterViewHolderCreator {
             new ValueGroupFilterAccessor<Float, NumberRangeGeocacheFilter<Float>>()
                 .setSelectableValues(range)
                 .setFilterValueGetter(f -> f.getValuesInRange(range))
-                .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)
+                .setFilterValueSetter((f, v) -> f.setRangeFromValues(v, 1f, 5f))
                 .setValueDisplayTextGetter(f -> String.format(Locale.getDefault(), "%.1f", f)),
             (i, f) -> i % 2 == 0 ? String.format(Locale.getDefault(), "%.1f", f) : null);
     }
