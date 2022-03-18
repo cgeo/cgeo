@@ -9,16 +9,20 @@ import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 class GoogleMapsPositionLayer extends AbstractPositionLayer {
 
     public static final float ZINDEX_POSITION = 10;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
+    public static final float ZINDEX_HISTORY = 2;
 
     private final GoogleMapObjects positionObjs;
+    private final GoogleMapObjects historyObjs;
 
     GoogleMapsPositionLayer(final GoogleMap googleMap) {
         positionObjs = new GoogleMapObjects(googleMap);
+        historyObjs = new GoogleMapObjects(googleMap);
     }
 
     @Override
@@ -62,7 +66,13 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer {
 
     @Override
     protected void repaintHistory() {
-        // @todo
+        historyObjs.removeAll();
+        repaintHistoryHelper(LatLng::new, (points) -> historyObjs.addPolyline(new PolylineOptions()
+            .addAll(points)
+            .color(MapLineUtils.getTrailColor())
+            .width(MapLineUtils.getHistoryLineWidth())
+            .zIndex(ZINDEX_HISTORY)
+        ));
     };
 
     @Override
