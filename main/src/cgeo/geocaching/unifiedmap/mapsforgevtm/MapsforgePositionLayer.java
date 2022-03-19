@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.utils.MapLineUtils;
 
@@ -20,7 +21,7 @@ import org.oscim.layers.vector.geometries.CircleDrawable;
 import org.oscim.layers.vector.geometries.Style;
 import org.oscim.map.Map;
 
-class MapsforgePositionLayer extends AbstractPositionLayer {
+class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     final Map map;
 
@@ -39,6 +40,9 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
     // position history
     private final List<PathLayer> historyLayers = new ArrayList<>();
 
+    // individual route, routes & tracks
+    private final PathLayer routeLayer;
+
     MapsforgePositionLayer(final Map map) {
         this.map = map;
 
@@ -49,7 +53,21 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
         map.layers().add(arrowLayer);
         repaintArrow();
 
+        // individual route
+        routeLayer = new PathLayer(map, MapLineUtils.getRouteColor(), MapLineUtils.getRouteLineWidth());
+        map.layers().add(routeLayer);
     }
+
+    // ========================================================================
+    // route / track handling
+
+    @Override
+    public void updateIndividualRoute(final Route route) {
+        super.updateIndividualRoute(route, Route::getAllPointsGeoPoint);
+    }
+
+    // ========================================================================
+    // repaint methods
 
     @Override
     protected void repaintArrow() {
@@ -89,6 +107,13 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
 
     @Override
     protected void repaintRouteAndTracks() {
+        // draw individual route
+        final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
+        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
+            for (ArrayList<GeoPoint> segment : individualRoute.track) {
+                routeLayer.setPoints(segment);
+            }
+        }
         // @todo
     };
 
@@ -96,5 +121,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer {
         map.layers().remove(arrowLayer);
         map.layers().removeAll(historyLayers);
         historyLayers.clear();
+        map.layers().remove(routeLayer);
     }
 }
