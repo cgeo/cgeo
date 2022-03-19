@@ -5,8 +5,6 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.utils.MapLineUtils;
 
-import java.util.ArrayList;
-
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -17,17 +15,18 @@ import com.google.android.gms.maps.model.PolylineOptions;
 class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
 
     public static final float ZINDEX_POSITION = 10;
+    public static final float ZINDEX_TRACK = 6;
     public static final float ZINDEX_ROUTE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
 
     private final GoogleMapObjects positionObjs;
-    private final GoogleMapObjects routeObjs;
+    private final GoogleMapObjects trackObjs;
     private final GoogleMapObjects historyObjs;
 
     GoogleMapsPositionLayer(final GoogleMap googleMap) {
         positionObjs = new GoogleMapObjects(googleMap);
-        routeObjs = new GoogleMapObjects(googleMap);
+        trackObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
     }
 
@@ -39,11 +38,16 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
         super.updateIndividualRoute(route, Route::getAllPointsLatLng);
     }
 
+    @Override
+    public void updateTrack(final String key, final Route track) {
+        super.updateTrack(key, track, Route::getAllPointsLatLng);
+    };
+
     // ========================================================================
     // repaint methods
 
     @Override
-    protected void repaintArrow() {
+    protected void repaintPosition() {
         positionObjs.removeAll();
         if (currentLocation == null) {
             return;
@@ -77,11 +81,6 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     };
 
     @Override
-    protected void repaintPosition() {
-        // @todo
-    };
-
-    @Override
     protected void repaintHistory() {
         historyObjs.removeAll();
         repaintHistoryHelper(LatLng::new, (points) -> historyObjs.addPolyline(new PolylineOptions()
@@ -94,20 +93,13 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
 
     @Override
     protected void repaintRouteAndTracks() {
-        // draw individual route
-        routeObjs.removeAll();
-        final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
-        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
-            for (ArrayList<LatLng> segment : individualRoute.track) {
-                routeObjs.addPolyline(new PolylineOptions()
-                    .addAll(segment)
-                    .color(MapLineUtils.getRouteColor())
-                    .width(MapLineUtils.getRouteLineWidth())
-                    .zIndex(ZINDEX_ROUTE)
-                );
-            }
-        }
-        // @todo
+        trackObjs.removeAll();
+        repaintRouteAndTracksHelper((segment, isTrack) -> trackObjs.addPolyline(new PolylineOptions()
+            .addAll(segment)
+            .color(isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor())
+            .width(isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth())
+            .zIndex(isTrack ? ZINDEX_TRACK : ZINDEX_ROUTE)
+        ));
     };
 
 }

@@ -2,11 +2,11 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -19,6 +19,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
+import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
@@ -38,6 +39,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String BUNDLE_ROUTE = "route";
+
+    private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
     private AbstractUnifiedMap map = null;
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
@@ -171,6 +174,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         // routes / tracks popup
         findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
 
+
+        Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
+        CompactIconModeUtils.setCompactIconModeThreshold(getResources());
+
+//        MapUtils.showMapOneTimeMessages(this, mapMode);
+
     }
 
     private void changeMapSource(final AbstractTileProvider newSource) {
@@ -234,7 +243,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     }
 
     private void setTrack(final String key, final Route route) {
-        // @todo
+        tracks.setRoute(key, route);
+        resumeTrack(key, null == route);
     }
 
     private void reloadIndividualRoute() {
@@ -276,11 +286,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         getMenuInflater().inflate(R.menu.map_activity, menu);
 
         TileProviderFactory.addMapviewMenuItems(this, menu);
-//        MapProviderFactory.addMapViewLanguageMenuItems(menu);     // available for mapsforge offline maps only
 
         followMyLocationItem = menu.findItem(R.id.menu_toggle_mypos);
         initFollowMyLocationButton();
-//        FilterUtils.initializeFilterMenu(this, this);
 
         return result;
     }
@@ -329,7 +337,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-//        outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
+        outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
 
 //        final MapState state = prepareMapState();
 //        outState.putParcelable(BUNDLE_MAP_STATE, state);
@@ -373,6 +381,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         super.onResume();
         map.onResume();
         resumeRoute(false);
+        if (tracks != null) {
+            tracks.resumeAllTracks(this::resumeTrack);
+        }
+//        MapUtils.updateFilterBar(this, mapOptions.filterContext);
     }
 
     private void resumeRoute(final boolean force) {
@@ -381,6 +393,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             reloadIndividualRoute();
         } else {
             individualRoute.updateRoute((route) -> map.positionLayer.updateIndividualRoute(route));
+        }
+    }
+
+    private void resumeTrack(final String key, final boolean preventReloading) {
+        if (null == tracks && !preventReloading) {
+            this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
+        } else if (null != tracks) {
+            map.positionLayer.updateTrack(key, tracks.getRoute(key));
         }
     }
 
