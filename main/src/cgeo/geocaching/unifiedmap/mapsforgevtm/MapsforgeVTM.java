@@ -7,6 +7,8 @@ import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
+import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -14,6 +16,7 @@ import java.util.ArrayList;
 import org.oscim.android.MapView;
 import org.oscim.backend.CanvasAdapter;
 import org.oscim.core.BoundingBox;
+import org.oscim.core.GeoPoint;
 import org.oscim.core.MapPosition;
 import org.oscim.core.Tile;
 import org.oscim.layers.Layer;
@@ -29,10 +32,11 @@ import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.theme.IRenderTheme;
 import org.oscim.tiling.TileSource;
 
-public class MapsforgeVTM extends AbstractUnifiedMap {
+public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
 
     private IRenderTheme mTheme;
     private MapView mMapView;
+    private View rootView;
     private Map mMap;
 
     protected AbstractMapsforgeTileProvider tileProvider;
@@ -42,6 +46,7 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
     @Override
     public void init(final AppCompatActivity activity) {
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
+        rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
@@ -188,9 +193,9 @@ public class MapsforgeVTM extends AbstractUnifiedMap {
     }
 
     @Override
-    protected AbstractPositionLayer configPositionLayer(final boolean create) {
+    protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
         if (create) {
-            return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap);
+            return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap, rootView);
         } else if (positionLayer != null) {
             ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
         }

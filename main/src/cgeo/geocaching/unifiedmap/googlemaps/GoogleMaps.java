@@ -9,6 +9,8 @@ import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,14 +20,16 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import org.oscim.core.BoundingBox;
 
-public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback {
+public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReadyCallback {
 
     private GoogleMap mMap;
+    private View rootView;
     private final GoogleMapController mapController = new GoogleMapController();
 
     @Override
     public void init(final AppCompatActivity activity) {
         activity.setContentView(R.layout.unifiedmap_googlemaps);
+        rootView = activity.findViewById(R.id.unifiedmap_gm);
         final SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.mapViewGM);
         assert mapFragment != null;
         mapFragment.getMapAsync(this);
@@ -113,9 +117,9 @@ public class GoogleMaps extends AbstractUnifiedMap implements OnMapReadyCallback
     }
 
     @Override
-    protected AbstractPositionLayer configPositionLayer(final boolean create) {
+    protected AbstractPositionLayer<LatLng> configPositionLayer(final boolean create) {
         if (create) {
-            return positionLayer != null ? positionLayer : mMap == null ? null : new GoogleMapsPositionLayer(mMap);
+            return positionLayer != null ? positionLayer : mMap == null ? null : new GoogleMapsPositionLayer(mMap, rootView);
         }
         return null;
     }

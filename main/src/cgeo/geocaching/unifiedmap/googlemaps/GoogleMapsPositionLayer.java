@@ -5,6 +5,9 @@ import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.utils.MapLineUtils;
 
+import android.location.Location;
+import android.view.View;
+
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CircleOptions;
@@ -17,6 +20,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     public static final float ZINDEX_POSITION = 10;
     public static final float ZINDEX_TRACK = 6;
     public static final float ZINDEX_ROUTE = 5;
+    public static final float ZINDEX_DIRECTION_LINE = 5;
     public static final float ZINDEX_POSITION_ACCURACY_CIRCLE = 3;
     public static final float ZINDEX_HISTORY = 2;
 
@@ -24,10 +28,20 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     private final GoogleMapObjects trackObjs;
     private final GoogleMapObjects historyObjs;
 
-    GoogleMapsPositionLayer(final GoogleMap googleMap) {
+    GoogleMapsPositionLayer(final GoogleMap googleMap, final View root) {
+        super(root, LatLng::new);
         positionObjs = new GoogleMapObjects(googleMap);
         trackObjs = new GoogleMapObjects(googleMap);
         historyObjs = new GoogleMapObjects(googleMap);
+    }
+
+    public void setCurrentPositionAndHeading(final Location location, final float heading) {
+        setCurrentPositionAndHeadingHelper(location, heading, (directionLine) -> positionObjs.addPolyline(new PolylineOptions()
+            .addAll(directionLine)
+            .color(MapLineUtils.getDirectionColor())
+            .width(MapLineUtils.getDirectionLineWidth())
+            .zIndex(ZINDEX_DIRECTION_LINE)
+        ));
     }
 
     // ========================================================================
@@ -48,6 +62,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
 
     @Override
     protected void repaintPosition() {
+        super.repaintPosition();
         positionObjs.removeAll();
         if (currentLocation == null) {
             return;
@@ -83,7 +98,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     @Override
     protected void repaintHistory() {
         historyObjs.removeAll();
-        repaintHistoryHelper(LatLng::new, (points) -> historyObjs.addPolyline(new PolylineOptions()
+        repaintHistoryHelper((points) -> historyObjs.addPolyline(new PolylineOptions()
             .addAll(points)
             .color(MapLineUtils.getTrailColor())
             .width(MapLineUtils.getHistoryLineWidth())

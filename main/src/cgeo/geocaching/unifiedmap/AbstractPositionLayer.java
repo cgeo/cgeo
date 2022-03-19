@@ -2,7 +2,10 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.maps.MapDistanceDrawerCommons;
 import cgeo.geocaching.maps.PositionHistory;
+import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
@@ -16,11 +19,16 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.location.Location;
+import android.view.View;
+
+import androidx.annotation.Nullable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
+
+import org.oscim.core.GeoPoint;
 
 /**
  * layer for positioning the following elements on the map
@@ -37,6 +45,15 @@ public abstract class AbstractPositionLayer<T> {
 
     protected Location currentLocation = null;
     protected float currentHeading = 0.0f;
+    protected Func2<Double, Double, T> createNewPoint;
+
+    // distance view
+    protected GeoPoint destination;
+    protected float routedDistance = 0.0f;
+    protected float directDistance = 0.0f;
+    protected float individualRouteDistance = 0.0f;
+    private final boolean showBothDistances = Settings.isBrouterShowBothDistances();
+    private final MapDistanceDrawerCommons mapDistanceDrawer;
 
     // position and heading arrow
     protected Bitmap positionAndHeadingArrow = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
@@ -64,7 +81,76 @@ public abstract class AbstractPositionLayer<T> {
         private ArrayList<ArrayList<T>> track = null;
     }
 
-    public void setCurrentPositionAndHeading(final Location location, final float heading) {
+    protected AbstractPositionLayer(final View root, final Func2<Double, Double, T> createNewPoint) {
+        mapDistanceDrawer = new MapDistanceDrawerCommons(root);
+        this.createNewPoint = createNewPoint;
+    }
+
+    public abstract void setCurrentPositionAndHeading(Location location, float heading);
+
+    public float getCurrentHeading() {
+        return currentHeading;
+    }
+
+    public ArrayList<TrailHistoryElement> getHistory() {
+        return history.getHistory();
+    }
+
+    // ========================================================================
+    // distance view handling
+
+    public final void setDestination(final GeoPoint destination) {
+        this.destination = destination;
+        repaintDestinationHelper(null);
+    }
+
+    // ========================================================================
+    // route / track handling
+
+    private void updateRoute(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+        synchronized (cache) {
+            CachedRoute c = cache.get(key);
+            if (track == null) {
+                if (c != null) {
+                    cache.remove(key);
+                }
+            } else {
+                if (c == null) {
+                    c = new CachedRoute();
+                    cache.put(key, c);
+                }
+                c.track = getAllPoints.call(track);
+                c.isHidden = track.isHidden();
+            }
+        }
+        repaintRouteAndTracks();
+    }
+
+    public abstract void updateIndividualRoute(Route route);
+    public abstract void updateTrack(String key, Route track);
+
+    public void updateIndividualRoute(final Route route, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route, getAllPoints);
+        repaintRouteAndTracks();
+        individualRouteDistance = route.getDistance();
+        mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
+    }
+
+    public void updateTrack(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+        updateRoute(key, track, getAllPoints);
+        repaintRouteAndTracks();
+    }
+
+    // ========================================================================
+    // repaint methods
+
+    public void repaintRequired() {
+        repaintPosition();
+        repaintHistory();
+        repaintRouteAndTracks();
+    }
+
+    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection) {
         final boolean coordChanged = !Objects.equals(location, currentLocation);
         final boolean headingChanged = heading != currentHeading;
         currentLocation = location;
@@ -77,6 +163,12 @@ public abstract class AbstractPositionLayer<T> {
         if (coordChanged) {
             history.rememberTrailPosition(location);
             repaintHistory();
+
+            final Location l = new Location("UnifiedMap");
+            l.setLatitude(destination.getLatitude());
+            l.setLongitude(destination.getLongitude());
+            directDistance = currentLocation.distanceTo(l) / 1000f;
+            repaintDestinationHelper(drawDirection);
 
             /*
             if (mapRotation == MAPROTATION_AUTO) {
@@ -104,73 +196,20 @@ public abstract class AbstractPositionLayer<T> {
                     lastBearingCoordinates = coordinates;
                 }
             }
-
-             */
+            */
 
         }
     }
 
-    public float getCurrentHeading() {
-        return currentHeading;
-    }
+    protected void repaintPosition() {
+        mapDistanceDrawer.drawDistance(showBothDistances, directDistance, routedDistance);
+        mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
+    };
 
-    public ArrayList<TrailHistoryElement> getHistory() {
-        return history.getHistory();
-    }
-
-    // ========================================================================
-    // route / track handling
-
-    private void updateRoute(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
-        synchronized (cache) {
-            CachedRoute c = cache.get(key);
-            if (track == null) {
-                if (c != null) {
-                    cache.remove(key);
-                }
-            } else {
-                if (c == null) {
-                    c = new CachedRoute();
-                    cache.put(key, c);
-                }
-                c.track = null;
-                if (track != null) {
-                    c.track = getAllPoints.call(track);
-                    c.isHidden = track.isHidden();
-                }
-            }
-        }
-        repaintRouteAndTracks();
-    }
-
-    public abstract void updateIndividualRoute(Route route);
-    public abstract void updateTrack(String key, Route track);
-
-    public void updateIndividualRoute(final Route route, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
-        updateRoute(KEY_INDIVIDUAL_ROUTE, route, getAllPoints);
-        repaintRouteAndTracks();
-        // @todo update distance info
-    }
-
-    public void updateTrack(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
-        updateRoute(key, track, getAllPoints);
-        repaintRouteAndTracks();
-    }
-
-    // ========================================================================
-    // repaint methods
-
-    public void repaintRequired() {
-        repaintPosition();
-        repaintHistory();
-        repaintRouteAndTracks();
-    }
-
-    protected abstract void repaintPosition();
     protected abstract void repaintHistory();
     protected abstract void repaintRouteAndTracks();
 
-    protected void repaintHistoryHelper(final Func2<Double, Double, T> createNewPoint, final Action1<List<T>> addSegment) {
+    protected void repaintHistoryHelper(final Action1<List<T>> addSegment) {
         if (null == currentLocation) {
             return;
         }
@@ -212,6 +251,26 @@ public abstract class AbstractPositionLayer<T> {
             }
         }
 
+    }
+
+    private void repaintDestinationHelper(final @Nullable Action1<List<T>> drawSegment) {
+        if (destination != null) {
+            final Geopoint[] routingPoints = Routing.getTrack(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()), new Geopoint(destination.getLatitude(), destination.getLongitude()));
+            final ArrayList<T> points = new ArrayList<>();
+            points.add(createNewPoint.call(routingPoints[0].getLatitude(), routingPoints[0].getLongitude()));
+
+            routedDistance = 0.0f;
+            if (routingPoints.length > 2 || Settings.isMapDirection()) {
+                for (int i = 1; i < routingPoints.length; i++) {
+                    points.add(createNewPoint.call(routingPoints[i].getLatitude(), routingPoints[i].getLongitude()));
+                    routedDistance += routingPoints[i - 1].distanceTo(routingPoints[i]);
+                }
+                if (drawSegment != null) {
+                    drawSegment.call(points);
+                }
+            }
+            mapDistanceDrawer.drawDistance(showBothDistances, directDistance, routedDistance);
+        }
     }
 
     protected void repaintRouteAndTracksHelper(final Action2<List<T>, Boolean> addSegment) {

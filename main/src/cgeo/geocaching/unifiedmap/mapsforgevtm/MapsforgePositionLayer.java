@@ -5,6 +5,8 @@ import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.utils.MapLineUtils;
 
 import android.graphics.Matrix;
+import android.location.Location;
+import android.view.View;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,9 +43,11 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     private final List<PathLayer> historyLayers = new ArrayList<>();
 
     // individual route, routes & tracks
+    private final PathLayer navigationLayer;
     private final List<PathLayer> trackLayers = new ArrayList<>();
 
-    MapsforgePositionLayer(final Map map) {
+    MapsforgePositionLayer(final Map map, final View root) {
+        super(root, GeoPoint::new);
         this.map = map;
 
         // position and heading arrow
@@ -52,6 +56,10 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         arrowLayer = new ItemizedLayer(map, new MarkerSymbol(new AndroidBitmap(positionAndHeadingArrow), MarkerSymbol.HotspotPlace.CENTER));
         map.layers().add(arrowLayer);
         repaintPosition();
+
+        // navigation
+        navigationLayer = new PathLayer(map, MapLineUtils.getDirectionColor(), MapLineUtils.getDirectionLineWidth());
+        map.layers().add(navigationLayer);
     }
 
     protected void destroyLayer(final Map map) {
@@ -59,12 +67,17 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         map.layers().remove(arrowLayer);
         clearLayers(historyLayers);
         clearLayers(trackLayers);
+        map.layers().remove(navigationLayer);
     }
 
     private void clearLayers(final List<PathLayer> layers) {
         map.layers().removeAll(layers);
         layers.clear();
     }
+
+    public void setCurrentPositionAndHeading(final Location location, final float heading) {
+        setCurrentPositionAndHeadingHelper(location, heading, navigationLayer::setPoints);
+    };
 
     // ========================================================================
     // route / track handling
@@ -84,6 +97,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     @Override
     protected void repaintPosition() {
+        super.repaintPosition();
         if (currentLocation != null) {
             // accuracy circle
             final float accuracy = currentLocation.getAccuracy() / 1000.0f;
@@ -104,7 +118,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     @Override
     protected void repaintHistory() {
         clearLayers(historyLayers);
-        repaintHistoryHelper(GeoPoint::new, (points) -> {
+        repaintHistoryHelper((points) -> {
             final PathLayer historyLayer = new PathLayer(map, MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth());
             historyLayers.add(historyLayer);
             map.layers().add(historyLayer);
