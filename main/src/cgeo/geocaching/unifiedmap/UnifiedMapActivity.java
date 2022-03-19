@@ -34,6 +34,7 @@ import androidx.annotation.NonNull;
 import java.lang.ref.WeakReference;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import org.oscim.core.GeoPoint;
 
 public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
@@ -112,6 +113,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             if (mapActivity.map.positionLayer != null) {
                                 mapActivity.map.positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
+                                // @test
+                                mapActivity.map.positionLayer.setDestination(new GeoPoint(51.2, 7.13));
+
                             }
                             // @todo: check if proximity notification needs an update
                         }
@@ -228,6 +232,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // Routes, tracks and targets handling
 
     private void setTarget(final Geopoint geopoint, final String s) {
+        if (map.positionLayer != null) {
+            map.positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
+        }
         // @todo
     }
 

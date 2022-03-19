@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.oscim.core.BoundingBox;
 
-public abstract class AbstractUnifiedMap {
+public abstract class AbstractUnifiedMap<T> {
 
     protected AbstractTileProvider currentTileProvider;
-    protected AbstractPositionLayer positionLayer;
+    protected AbstractPositionLayer<T> positionLayer;
 
 
     public abstract void init(AppCompatActivity activity);
@@ -34,7 +34,7 @@ public abstract class AbstractUnifiedMap {
     public abstract void zoomToBounds(BoundingBox bounds);
     public abstract void setCenter(Geopoint geopoint);
     public abstract Geopoint getCenter();
-    protected abstract AbstractPositionLayer configPositionLayer(boolean create);
+    protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
 
     // ========================================================================
     // Lifecycle methods
