@@ -572,6 +572,7 @@
     <string name="about_changelog">Registo de alterações</string>
     <string name="about_changelog_nightly_build">Compilação diária (Nightly build)</string>
     <string name="about_changelog_next_release">Próxima versão</string>
+    <string name="about_changelog_bugfix_release">Versão de manutenção (correcção de erros)</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Apoie-nos</string>
     <string name="about_donation_more">Visite o website p/ saber mais</string>
@@ -2243,10 +2244,14 @@ do mapa e dos temas?</string>
     <!-- render theme legend: category "POI / Symbols" -->
     <string name="rtl_category_poi_symbols">POI / Símbolos</string>
     <string name="rtl_bench">banco de jardim</string>
+    <string name="rtl_cairn">moledros</string>
     <string name="rtl_drinking_water">água potável</string>
+    <string name="rtl_guidepost">placas de sinalização</string>
     <string name="rtl_info_board">painel de informação</string>
     <string name="rtl_info_office">posto de informação</string>
     <string name="rtl_info_terminal">terminal de informação</string>
+    <string name="rtl_peak">cume</string>
+    <string name="rtl_peak_cross">cruz no cume</string>
     <string name="rtl_picnic_site">parque de merendas</string>
     <string name="rtl_playground">parque infantil</string>
     <string name="rtl_playground_private">parque infantil privado</string>
@@ -2257,6 +2262,7 @@ do mapa e dos temas?</string>
     <string name="rtl_telephone">telefone</string>
     <string name="rtl_toilets">casas de banho</string>
     <string name="rtl_volcano">vulcão</string>
+    <string name="rtl_adit_disused">galeria (mina) abandonada</string>
     <string name="rtl_archaeological">arqueológico</string>
     <string name="rtl_artwork">obra de arte</string>
     <string name="rtl_attraction">atracção</string>
