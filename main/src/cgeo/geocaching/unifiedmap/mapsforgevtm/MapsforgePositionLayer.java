@@ -41,7 +41,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     private final List<PathLayer> historyLayers = new ArrayList<>();
 
     // individual route, routes & tracks
-    private final PathLayer routeLayer;
+    private final List<PathLayer> trackLayers = new ArrayList<>();
 
     MapsforgePositionLayer(final Map map) {
         this.map = map;
@@ -51,11 +51,19 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         map.layers().add(accuracyCircleLayer);
         arrowLayer = new ItemizedLayer(map, new MarkerSymbol(new AndroidBitmap(positionAndHeadingArrow), MarkerSymbol.HotspotPlace.CENTER));
         map.layers().add(arrowLayer);
-        repaintArrow();
+        repaintPosition();
+    }
 
-        // individual route
-        routeLayer = new PathLayer(map, MapLineUtils.getRouteColor(), MapLineUtils.getRouteLineWidth());
-        map.layers().add(routeLayer);
+    protected void destroyLayer(final Map map) {
+        map.layers().remove(accuracyCircleLayer);
+        map.layers().remove(arrowLayer);
+        clearLayers(historyLayers);
+        clearLayers(trackLayers);
+    }
+
+    private void clearLayers(final List<PathLayer> layers) {
+        map.layers().removeAll(layers);
+        layers.clear();
     }
 
     // ========================================================================
@@ -66,11 +74,16 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         super.updateIndividualRoute(route, Route::getAllPointsGeoPoint);
     }
 
+    @Override
+    public void updateTrack(final String key, final Route track) {
+        super.updateTrack(key, track, Route::getAllPointsGeoPoint);
+    };
+
     // ========================================================================
     // repaint methods
 
     @Override
-    protected void repaintArrow() {
+    protected void repaintPosition() {
         if (currentLocation != null) {
             // accuracy circle
             final float accuracy = currentLocation.getAccuracy() / 1000.0f;
@@ -89,14 +102,8 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     }
 
     @Override
-    protected void repaintPosition() {
-        // @todo
-    };
-
-    @Override
     protected void repaintHistory() {
-        map.layers().removeAll(historyLayers);
-        historyLayers.clear();
+        clearLayers(historyLayers);
         repaintHistoryHelper(GeoPoint::new, (points) -> {
             final PathLayer historyLayer = new PathLayer(map, MapLineUtils.getTrailColor(), MapLineUtils.getHistoryLineWidth());
             historyLayers.add(historyLayer);
@@ -107,20 +114,13 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     @Override
     protected void repaintRouteAndTracks() {
-        // draw individual route
-        final CachedRoute individualRoute = cache.get(KEY_INDIVIDUAL_ROUTE);
-        if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
-            for (ArrayList<GeoPoint> segment : individualRoute.track) {
-                routeLayer.setPoints(segment);
-            }
-        }
-        // @todo
+        clearLayers(trackLayers);
+        repaintRouteAndTracksHelper((segment, isTrack) -> {
+            final PathLayer trackLayer = new PathLayer(map, isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor() , isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth());
+            trackLayers.add(trackLayer);
+            map.layers().add(trackLayer);
+            trackLayer.setPoints(segment);
+        });
     };
 
-    protected void destroyLayer(final Map map) {
-        map.layers().remove(arrowLayer);
-        map.layers().removeAll(historyLayers);
-        historyLayers.clear();
-        map.layers().remove(routeLayer);
-    }
 }
