@@ -3,10 +3,12 @@ package cgeo.geocaching.unifiedmap;
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.maps.PositionHistory;
+import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
+import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
@@ -15,6 +17,7 @@ import android.graphics.BitmapFactory;
 import android.location.Location;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Objects;
 
@@ -26,8 +29,10 @@ import java.util.Objects;
  * - target and distance infos (target cache, distance to target, length of individual route)
  * - individual route
  * - route(s)/track(s)
+ *
+ * T is the type the map expects its coordinates in (LatLng for Google Maps, GeoPoint for Mapsforge)
  */
-public abstract class AbstractPositionLayer {
+public abstract class AbstractPositionLayer<T> {
 
     protected Location currentLocation = null;
     protected float currentHeading = 0.0f;
@@ -49,6 +54,14 @@ public abstract class AbstractPositionLayer {
     // settings for map auto rotation
     private Location lastBearingCoordinates = null;
     private int mapRotation = MAPROTATION_MANUAL;
+
+    // routes & tracks
+    protected static final String KEY_INDIVIDUAL_ROUTE = "INDIVIDUALROUTE";
+    protected final HashMap<String, CachedRoute> cache = new HashMap<>();
+    protected class CachedRoute {
+        public boolean isHidden = false;
+        public ArrayList<ArrayList<T>> track = null;
+    }
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
         final boolean coordChanged = !Objects.equals(location, currentLocation);
@@ -96,6 +109,51 @@ public abstract class AbstractPositionLayer {
         }
     }
 
+    public float getCurrentHeading() {
+        return currentHeading;
+    }
+
+    public ArrayList<TrailHistoryElement> getHistory() {
+        return history.getHistory();
+    }
+
+    // ========================================================================
+    // route / track handling
+
+    private void updateRoute(final String key, final Route track, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+        synchronized (cache) {
+            CachedRoute c = cache.get(key);
+            if (c == null) {
+                c = new CachedRoute();
+                cache.put(key, c);
+            }
+            c.track = null;
+            if (track != null) {
+                c.track = getAllPoints.call(track);
+                c.isHidden = track.isHidden();
+            }
+        }
+        repaintRouteAndTracks();
+    }
+
+    private void removeRoute(final String key) {
+        synchronized (cache) {
+            cache.remove(key);
+        }
+    }
+
+    public abstract void updateIndividualRoute(Route route);
+
+    public void updateIndividualRoute(final Route route, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
+        updateRoute(KEY_INDIVIDUAL_ROUTE, route, getAllPoints);
+        repaintRouteAndTracks();
+        // @todo update distance info
+    }
+
+
+    // ========================================================================
+    // repaint methods
+
     public void repaintRequired() {
         repaintArrow();
         repaintPosition();
@@ -108,15 +166,7 @@ public abstract class AbstractPositionLayer {
     protected abstract void repaintHistory();
     protected abstract void repaintRouteAndTracks();
 
-    public float getCurrentHeading() {
-        return currentHeading;
-    }
-
-    public ArrayList<TrailHistoryElement> getHistory() {
-        return history.getHistory();
-    }
-
-    public <T> void repaintHistoryHelper(final Func2<Double, Double, T> createNewPoint, final Action1<List<T>> addSegment) {
+    public void repaintHistoryHelper(final Func2<Double, Double, T> createNewPoint, final Action1<List<T>> addSegment) {
         if (null == currentLocation) {
             return;
         }
