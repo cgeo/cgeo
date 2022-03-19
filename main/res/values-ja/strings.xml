@@ -791,7 +791,7 @@
     <string name="init_backup_history_length_min">最新のみ</string>
     <string name="init_backup_history_length_max">無制限</string>
     <string name="init_backup_history_delete_warning">設定した最大数(世代数)よりも多くのバックアップがあります。超過したバックアップをすべて削除してもよろしいですか?</string>
-    <string name="init_backup_automatic_summary">バックアップをx日毎(手動でした日も対象です)にします。0にするとオフになります</string>
+    <string name="init_backup_automatic_summary">バックアップをx日毎(手動でした日も対象)にします。0にするとオフになります</string>
     <string name="init_backup_automatic_performing">バックアップを作成中…</string>
     <string name="init_user_confirmation">はい、了承します</string>
     <string name="init_backup_success">c:geoのデータベースは正常にバックアップされました: </string>
@@ -1192,6 +1192,7 @@
     <string name="menu_caches">キャッシュを管理</string>
     <string name="cache_menu_event">カレンダーに登録</string>
     <string name="cache_menu_extract_waypoints">ウェイポイントを抽出</string>
+    <string name="cache_menu_scan_calculated_waypoints">座標式を検索</string>
     <string name="cache_menu_set_found">「発見」に設定</string>
     <string name="cache_menu_set_DNF">「未発見」に設定</string>
     <string name="cache_menu_reset_foundstate">「発見」状態をリセット</string>
@@ -1312,6 +1313,7 @@
     <string name="waypoint_cache_coordinates">キャッシュ座標</string>
     <string name="waypoint_calculated_coordinates">計算済み座標</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">座標計算</string>
     <string name="waypoint_custom">カスタム</string>
     <string name="waypoint_my_coordinates">現在地</string>
     <string name="waypoint_bearing">方位(度[°])</string>
@@ -1352,8 +1354,49 @@
     <string name="from_clipboard">クリップボードから</string>
     <string name="copy_to_clipboard">クリップボードにコピー</string>
     <!-- Variables -->
+    <string name="variables_titletext">座標計算や数値のメモにお使いください</string>
+    <string name="variables_scanlisting">スキャン</string>
+    <string name="variables_scanlisting_choosepattern_title">パターンを選択</string>
+    <string name="variables_scanlisting_nopatternfound">パターンが見つかりません</string>
+    <string name="variables_tidyup">片付ける</string>
+    <string name="variables_deleteall">すべて削除</string>
+    <string name="variables_deleteall_confirm_text">すべての変数を削除しますか?</string>
+    <string name="variables_info">ヘルプ</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">ガイドモード</string>
+    <string name="calccoord_guided_edit">数字をタップして編集</string>
+    <string name="calccoord_guided_value">数値</string>
+    <string name="calccoord_convert_to_plain">プレーン座標に変換</string>
+    <string name="calccoord_plain_tools_title">プレーンツール</string>
+    <string name="calccoord_remove_spaces">空白を削除</string>
+    <string name="calccoord_paste_from_clipboard">クリップボードから貼付け</string>
     <!-- Formula -->
+    <string name="formula_function_sqrt">平方根</string>
+    <string name="formula_function_sin">サイン</string>
+    <string name="formula_function_cos">コサイン</string>
+    <string name="formula_function_tan">タンジェント</string>
+    <string name="formula_function_abs">絶対値</string>
+    <string name="formula_function_round">四捨五入</string>
+    <string name="formula_function_if">条件式</string>
+    <string name="formula_function_length">文字数</string>
+    <string name="formula_function_substring">文字列の切り取り</string>
+    <string name="formula_function_rot13">文字を13だけローテーション</string>
+    <string name="formula_function_rot">文字をローテーション</string>
+    <string name="formula_function_checksum">チェックサム</string>
+    <string name="formula_function_ichecksum">反復チェックサム</string>
+    <string name="formula_function_lettervalue">単語値</string>
+    <string name="formula_function_roman">ローマ数字</string>
+    <string name="formula_function_vanity">バニティコード</string>
+    <string name="formula_function_group_simplenumeric">単純な数値関数</string>
+    <string name="formula_function_group_complexnumeric">複雑な数値関数</string>
+    <string name="formula_function_group_simplestring">単純な文字列関数</string>
+    <string name="formula_function_group_complexstring">複雑な文字列関数</string>
+    <string name="formula_error_unexpectedtoken">期待値:%1$s</string>
+    <string name="formula_error_wrongparamcount">引数の数が違います。期待値:%1$s-%2$s, 現在:%3$s</string>
+    <string name="formula_error_wrongtype">引数の型が違います。期待値:%1$s型, 現在:%3$s型「%2$s」</string>
+    <string name="formula_error_missingvarvalue">不明:%1$s</string>
+    <string name="formula_error_empty">未入力</string>
+    <string name="formula_error_other">エラー:%1$s</string>
     <!-- visit -->
     <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
@@ -1958,6 +2001,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
+    <string name="routes_tracks_menu">ルート/トラック</string>
     <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>
