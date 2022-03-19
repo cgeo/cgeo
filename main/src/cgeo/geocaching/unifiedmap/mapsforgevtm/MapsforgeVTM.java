@@ -158,10 +158,13 @@ public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
     }
 
     @Override
-    public void zoomToBounds(final BoundingBox bounds) {
-        final MapPosition pos = new MapPosition();
-        pos.setByBoundingBox(bounds, Tile.SIZE * 4, Tile.SIZE * 4);
-        mMap.setMapPosition(pos);
+    protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
+        if (create) {
+            return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap, rootView);
+        } else if (positionLayer != null) {
+            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
+        }
+        return null;
     }
 
     @Override
@@ -175,6 +178,21 @@ public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
     public Geopoint getCenter() {
         final MapPosition pos = mMap.getMapPosition();
         return new Geopoint(pos.getLatitude(), pos.getLongitude());
+    }
+
+    @Override
+    public BoundingBox getBoundingBox() {
+        return mMap.getBoundingBox(0);
+    };
+
+    // ========================================================================
+    // zoom & heading methods
+
+    @Override
+    public void zoomToBounds(final BoundingBox bounds) {
+        final MapPosition pos = new MapPosition();
+        pos.setByBoundingBox(bounds, Tile.SIZE * 4, Tile.SIZE * 4);
+        mMap.setMapPosition(pos);
     }
 
     public int getCurrentZoom() {
@@ -191,17 +209,6 @@ public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
         final int zoom = getCurrentZoom();
         setZoom(zoomIn ? zoom + 1 : zoom - 1);
     }
-
-    @Override
-    protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
-        if (create) {
-            return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap, rootView);
-        } else if (positionLayer != null) {
-            ((MapsforgePositionLayer) positionLayer).destroyLayer(mMap);
-        }
-        return null;
-    }
-
 
     // ========================================================================
     // Lifecycle methods

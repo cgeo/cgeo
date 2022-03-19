@@ -2,8 +2,10 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.routing.Routing;
@@ -20,6 +22,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
+import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
@@ -34,6 +37,7 @@ import androidx.annotation.NonNull;
 import java.lang.ref.WeakReference;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
+import org.oscim.core.BoundingBox;
 import org.oscim.core.GeoPoint;
 
 public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
@@ -107,14 +111,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                         if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
-                            mapActivity.centerMap(new Geopoint(currentLocation));
+                            mapActivity.map.setCenter(new Geopoint(currentLocation));
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             if (mapActivity.map.positionLayer != null) {
                                 mapActivity.map.positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
                                 // @test
-                                mapActivity.map.positionLayer.setDestination(new GeoPoint(51.2, 7.13));
+                                mapActivity.map.positionLayer.setDestination(new GeoPoint(50.0, 8.0));
 
                             }
                             // @todo: check if proximity notification needs an update
@@ -208,6 +212,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
     }
 
+    /** centers map on coords given + resets "followMyLocation" state **/
     private void centerMap(final Geopoint geopoint) {
         followMyLocation = false;
         initFollowMyLocationButton();
@@ -303,6 +308,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull final MenuItem item) {
         final int id = item.getItemId();
+        /* yet missing:
+        - live mode
+        - all cache related menu entries
+        - all target related menu entries
+        - filter related menu entries
+        - theme related menu entries (select theme, theme options, theme legend)
+         */
         if (id == R.id.menu_toggle_mypos) {
             followMyLocation = !followMyLocation;
             Settings.setLiveMap(followMyLocation);
@@ -311,6 +323,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 map.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
             }
             initFollowMyLocationButton();
+        } else if (id == R.id.menu_check_routingdata) {
+            final BoundingBox bb = map.getBoundingBox();
+            MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> map.positionLayer.repaintHistory(), () -> map.positionLayer.clearHistory())
+            || DownloaderUtils.onOptionsItemSelected(this, id)) {
+            return true;
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);
         } else {

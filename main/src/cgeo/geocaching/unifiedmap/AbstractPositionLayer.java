@@ -92,6 +92,14 @@ public abstract class AbstractPositionLayer<T> {
         return currentHeading;
     }
 
+    // ========================================================================
+    // history handling
+
+    public void clearHistory() {
+        history.reset();
+        repaintHistory();
+    }
+
     public ArrayList<TrailHistoryElement> getHistory() {
         return history.getHistory();
     }

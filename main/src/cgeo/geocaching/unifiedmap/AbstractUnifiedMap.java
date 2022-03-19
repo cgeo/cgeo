@@ -31,25 +31,15 @@ public abstract class AbstractUnifiedMap<T> {
         // default: do nothing
     }
 
-    public abstract void zoomToBounds(BoundingBox bounds);
     public abstract void setCenter(Geopoint geopoint);
     public abstract Geopoint getCenter();
+    public abstract BoundingBox getBoundingBox();
     protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
 
     // ========================================================================
-    // Lifecycle methods
+    // zoom & heading methods
 
-    protected void onResume() {
-        positionLayer = configPositionLayer(true);
-    }
-
-    protected void onPause() {
-        positionLayer = configPositionLayer(false);
-    }
-
-    protected void onDestroy() {
-        // default is empty
-    }
+    public abstract void zoomToBounds(BoundingBox bounds);
 
     public int getZoomMin() {
         return currentTileProvider == null ? 0 : currentTileProvider.getZoomMin();
@@ -66,4 +56,20 @@ public abstract class AbstractUnifiedMap<T> {
     public float getHeading() {
         return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
     }
+
+    // ========================================================================
+    // Lifecycle methods
+
+    protected void onResume() {
+        positionLayer = configPositionLayer(true);
+    }
+
+    protected void onPause() {
+        positionLayer = configPositionLayer(false);
+    }
+
+    protected void onDestroy() {
+        // default is empty
+    }
+
 }

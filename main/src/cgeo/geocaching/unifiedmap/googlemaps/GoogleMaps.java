@@ -18,6 +18,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import org.oscim.core.BoundingBox;
 
 public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReadyCallback {
@@ -83,14 +84,6 @@ public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReady
     }
 
     @Override
-    public void zoomToBounds(final BoundingBox bounds) {
-        if (mMap != null) {
-            mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
-            mapController.animateTo(new GoogleGeoPoint(bounds.getCenterPoint()));
-        }
-    };
-
-    @Override
     public void setCenter(final Geopoint geopoint) {
         if (mMap != null) {
             mapController.animateTo(new GoogleGeoPoint(geopoint.getLatitudeE6(), geopoint.getLongitudeE6()));
@@ -105,6 +98,23 @@ public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReady
         }
         return new Geopoint(0.0d, 0.0d);
     }
+
+    @Override
+    public BoundingBox getBoundingBox() {
+        final LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
+        return new BoundingBox(bounds.southwest.latitude, bounds.southwest.longitude, bounds.northeast.latitude, bounds.northeast.longitude);
+    };
+
+    // ========================================================================
+    // zoom & heading methods
+
+    @Override
+    public void zoomToBounds(final BoundingBox bounds) {
+        if (mMap != null) {
+            mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
+            mapController.animateTo(new GoogleGeoPoint(bounds.getCenterPoint()));
+        }
+    };
 
     @Override
     public int getCurrentZoom() {

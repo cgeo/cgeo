@@ -33,6 +33,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     private final int arrowHeightHalf = arrowHeight / 2;
 
     private final VectorLayer accuracyCircleLayer;
+    private CircleDrawable accuracyCircle;
     private final Style accuracyCircleStyle = Style.builder()
         .strokeWidth(1.0f)
         .strokeColor(MapLineUtils.getAccuracyCircleColor())
@@ -101,7 +102,11 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
         if (currentLocation != null) {
             // accuracy circle
             final float accuracy = currentLocation.getAccuracy() / 1000.0f;
-            accuracyCircleLayer.add(new CircleDrawable(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()), accuracy, accuracyCircleStyle));
+            if (accuracyCircle != null) {
+                accuracyCircleLayer.remove(accuracyCircle);
+            }
+            accuracyCircle = new CircleDrawable(new GeoPoint(currentLocation.getLatitude(), currentLocation.getLongitude()), accuracy, accuracyCircleStyle);
+            accuracyCircleLayer.add(accuracyCircle);
             accuracyCircleLayer.update();
 
             // position and heading arrow
