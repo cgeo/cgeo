@@ -66,7 +66,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
 
     private ActivityBottomNavigationBinding binding = null;
-    private boolean doubleBackToExitPressedOnce = false;
 
     private final ConnectivityChangeReceiver connectivityChangeReceiver = new ConnectivityChangeReceiver();
     private final Handler loginHandler = new Handler();
@@ -74,6 +73,12 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
     private static final AtomicInteger LOGINS_IN_PROGRESS = new AtomicInteger(0);
     private static final AtomicInteger lowPrioNotificationCounter = ((CgeoApplication) CgeoApplication.getInstance()).getLowPrioNotificationCounter();
     private static final AtomicBoolean hasHighPrioNotification = ((CgeoApplication) CgeoApplication.getInstance()).getHasHighPrioNotification();
+
+    // max backstack depth handling
+    private static final AtomicBoolean PRESS_AGAIN_TO_EXIT = new AtomicBoolean(false);
+    private static final AtomicInteger MAX_BACKSTACK_POSITION = new AtomicInteger(0);
+    private static final AtomicInteger CURRENT_BACKSTACK_POSITION = new AtomicInteger(0);
+    private static final int MAX_BACKSTACK_DEPTH = 5;
 
     @Override
     public void setContentView(final int layoutResID) {
@@ -169,19 +174,35 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     @Override
     public void onBackPressed() {
-        if (!isTaskRoot() || doubleBackToExitPressedOnce) {
+        // max backstack depth handling
+        CURRENT_BACKSTACK_POSITION.set(CURRENT_BACKSTACK_POSITION.get() - 1);
+        if ((MAX_BACKSTACK_POSITION.get() - CURRENT_BACKSTACK_POSITION.get() >= MAX_BACKSTACK_DEPTH)) {
+            if (PRESS_AGAIN_TO_EXIT.get()) {
+                finishAffinity();
+                System.exit(0);
+            } else {
+                prepareForExit();
+            }
+        }
+
+        // regular backstack handling
+        if (!isTaskRoot() || PRESS_AGAIN_TO_EXIT.get()) {
             super.onBackPressed();
             // avoid weired transitions
             ActivityMixin.overrideTransitionToFade(this);
         } else if (this instanceof MainActivity) {
-            this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, R.string.touch_again_to_exit, Toast.LENGTH_SHORT).show();
-            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
+            prepareForExit();
         } else {
             startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
             // avoid weired transitions
             ActivityMixin.finishWithFadeTransition(this);
         }
+    }
+
+    private void prepareForExit() {
+        PRESS_AGAIN_TO_EXIT.set(true);
+        Toast.makeText(this, R.string.touch_again_to_exit, Toast.LENGTH_SHORT).show();
+        new Handler().postDelayed(() -> PRESS_AGAIN_TO_EXIT.set(false), 2000);
     }
 
     public void updateSelectedBottomNavItemId() {
@@ -255,6 +276,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
         //  This implementation had unwanted side-effects so we have decided to not go that way.
         //  Instead, a different solution should be found for persisting the activity state. (see #11926)
 
+        CURRENT_BACKSTACK_POSITION.set(CURRENT_BACKSTACK_POSITION.get() + 1);
+        if (CURRENT_BACKSTACK_POSITION.get() > MAX_BACKSTACK_POSITION.get()) {
+            MAX_BACKSTACK_POSITION.set(CURRENT_BACKSTACK_POSITION.get());
+        }
         startActivity(launchIntent);
 
         // avoid weired transitions
