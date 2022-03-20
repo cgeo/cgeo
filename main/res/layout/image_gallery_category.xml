@@ -10,7 +10,8 @@
     <!-- category header -->
     <RelativeLayout
         android:id="@+id/img_gallery_category"
-        style="@style/separator_horizontal_layout">
+        style="@style/separator_horizontal_layout"
+        android:layout_marginTop="5dp">
 
         <View style="@style/separator_horizontal_heading" />
         <TextView
@@ -46,33 +47,5 @@
     <android.widget.Space
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/img_gallery_list"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:ignore="MissingConstraints">
-
-        <androidx.constraintlayout.helper.widget.Flow
-            android:id="@+id/img_gallery_list_flow"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-            app:flow_horizontalAlign="start"
-            app:flow_horizontalBias="0"
-            app:flow_maxElementsWrap="30"
-            app:flow_verticalBias="0"
-            app:flow_verticalGap="8dp"
-            app:flow_horizontalGap="8dp"
-            app:flow_horizontalStyle="spread"
-            app:flow_verticalAlign="top"
-            app:flow_wrapMode="aligned" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </LinearLayout>
