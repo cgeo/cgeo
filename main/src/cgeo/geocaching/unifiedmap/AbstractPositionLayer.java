@@ -9,11 +9,13 @@ import cgeo.geocaching.maps.routing.Routing;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.models.TrailHistoryElement;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action1;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 import cgeo.geocaching.utils.functions.Func2;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.graphics.Bitmap;
@@ -158,7 +160,7 @@ public abstract class AbstractPositionLayer<T> {
         repaintRouteAndTracks();
     }
 
-    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection) {
+    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection, final AbstractUnifiedMap map) {
         final boolean coordChanged = !Objects.equals(location, currentLocation);
         final boolean headingChanged = heading != currentHeading;
         currentLocation = location;
@@ -178,33 +180,23 @@ public abstract class AbstractPositionLayer<T> {
             directDistance = currentLocation.distanceTo(l) / 1000f;
             repaintDestinationHelper(drawDirection);
 
-            /*
             if (mapRotation == MAPROTATION_AUTO) {
                 if (null != lastBearingCoordinates) {
-                    final GoogleMap map = mapRef.get();
                     if (null != map) {
-                        final CameraPosition currentCameraPosition = map.getCameraPosition();
-                        final float bearing = AngleUtils.normalize(lastBearingCoordinates.bearingTo(coordinates));
-                        final float bearingDiff = Math.abs(AngleUtils.difference(bearing, currentCameraPosition.bearing));
+                        final float currentBearing = map.getCurrentBearing();
+                        final float bearing = AngleUtils.normalize(lastBearingCoordinates.bearingTo(currentLocation));
+                        final float bearingDiff = Math.abs(AngleUtils.difference(bearing, currentBearing));
                         if (bearingDiff > 15.0f) {
-                            lastBearingCoordinates = coordinates;
-                            // adjust bearing of map, keep position and zoom level
-                            final CameraPosition cameraPosition = new CameraPosition.Builder()
-                                    .target(currentCameraPosition.target)
-                                    .zoom(currentCameraPosition.zoom)
-                                    .bearing(bearing)
-                                    .tilt(0)
-                                    .build();
-                            map.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+                            lastBearingCoordinates = currentLocation;
+                            map.setBearing(bearing);
                         }
                     } else {
                         lastBearingCoordinates = null;
                     }
                 } else {
-                    lastBearingCoordinates = coordinates;
+                    lastBearingCoordinates = currentLocation;
                 }
             }
-            */
 
         }
     }
