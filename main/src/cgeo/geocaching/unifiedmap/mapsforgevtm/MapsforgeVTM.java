@@ -100,7 +100,7 @@ public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
         return baseMap;
     }
 
-    /** call this instead of VTM.setBaseMap so that we can keep track of layers added by the tile provider */
+    /** call this instead of VTM.layers().add so that we can keep track of layers added by the tile provider */
     public synchronized void addLayer(final Layer layer) {
         layers.add(layer);
         mMap.layers().add(layer);

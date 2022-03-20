@@ -56,7 +56,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private RouteTrackUtils routeTrackUtils = null;
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
-    private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition(0, 0, 0, 0);
+    private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
 
     // class: update location
     private static class UpdateLoc extends GeoDirHandler {
@@ -88,7 +88,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         @Override
         public void updateGeoDir(@NonNull final GeoData geo, final float dir) {
             currentLocation = geo;
-            currentHeading = AngleUtils.getDirectionNow(dir /* test */ + 360.0f * (float) Math.random());
+            currentHeading = AngleUtils.getDirectionNow(dir);
             repaintPositionOverlay();
         }
 
@@ -113,14 +113,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
                         if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
                             mapActivity.map.setCenter(new Geopoint(currentLocation));
+                            mapActivity.currentMapPosition.resetFollowMyLocation = false;
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
                             if (mapActivity.map.positionLayer != null) {
                                 mapActivity.map.positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
-                                // @test
-                                mapActivity.map.positionLayer.setDestination(new GeoPoint(50.0, 8.0));
-
                             }
                             // @todo: check if proximity notification needs an update
                         }
@@ -224,6 +222,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 }
                 if (currentMapPosition.latitude != old.latitude || currentMapPosition.longitude != old.longitude) {
                     Log.e("position change from [" + old.latitude + "/" + old.longitude + "] to [" + currentMapPosition.latitude + "/" + currentMapPosition.longitude + "]");
+                    if (old.resetFollowMyLocation) {
+                        followMyLocation = false;
+                        initFollowMyLocationButton();
+                    }
                 }
                 if (currentMapPosition.bearing != old.bearing) {
                     Log.e("bearing change from " + old.bearing + " to " + currentMapPosition.bearing);
@@ -343,6 +345,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (followMyLocation) {
                 final Location currentLocation = geoDirUpdate.getCurrentLocation();
                 map.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+                currentMapPosition.resetFollowMyLocation = false;
             }
             initFollowMyLocationButton();
         } else if (id == R.id.menu_check_routingdata) {
