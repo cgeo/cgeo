@@ -2,8 +2,10 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
@@ -42,13 +44,16 @@ public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
     protected AbstractMapsforgeTileProvider tileProvider;
     protected TileLayer baseMap;
     protected final ArrayList<Layer> layers = new ArrayList<>();
+    protected Map.UpdateListener mapUpdateListener;
 
     @Override
     public void init(final AppCompatActivity activity) {
+        super.init(activity);
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
+        mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
     }
@@ -70,6 +75,22 @@ public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
         }
         mMap.clearMap();
         super.prepareForTileSourceChange();
+    }
+
+    /** keep track of rotation and zoom level changes **/
+    protected void configMapChangeListener(final boolean enable) {
+        if (mapUpdateListener != null) {
+            mMap.events.unbind(mapUpdateListener);
+            mapUpdateListener = null;
+        }
+        if (enable) {
+            mapUpdateListener = (event, mapPosition) -> {
+                if ((activityMapChangeListener != null) && (event == Map.POSITION_EVENT || event == Map.ROTATE_EVENT)) {
+                    activityMapChangeListener.call(new UnifiedMapPosition(mapPosition.getLatitude(), mapPosition.getLongitude(), mapPosition.zoomLevel, mapPosition.bearing));
+                }
+            };
+            mMap.events.bind(mapUpdateListener);
+        }
     }
 
     /** call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider */

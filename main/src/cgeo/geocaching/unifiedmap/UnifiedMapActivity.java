@@ -56,6 +56,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private RouteTrackUtils routeTrackUtils = null;
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
+    private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition(0, 0, 0, 0);
 
     // class: update location
     private static class UpdateLoc extends GeoDirHandler {
@@ -198,6 +199,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         map = newSource.getMap();
         if (map != oldMap) {
             map.init(this);
+            configMapChangeListener(true);
         }
         TileProviderFactory.resetLanguages();
         map.setTileSource(newSource);
@@ -209,6 +211,26 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             map.setZoom(map.getZoomMin());
         } else if (currentZoom > map.getZoomMax()) {
             map.setZoom(map.getZoomMax());
+        }
+    }
+
+    private void configMapChangeListener(final boolean enabled) {
+        if (enabled) {
+            map.setActivityMapChangeListener(unifiedMapPosition -> {
+                final UnifiedMapPosition old = currentMapPosition;
+                currentMapPosition = (UnifiedMapPosition) unifiedMapPosition;
+                if (currentMapPosition.zoomLevel != old.zoomLevel) {
+                    Log.e("zoom level changed from " + old.zoomLevel + " to " + currentMapPosition.zoomLevel);
+                }
+                if (currentMapPosition.latitude != old.latitude || currentMapPosition.longitude != old.longitude) {
+                    Log.e("position change from [" + old.latitude + "/" + old.longitude + "] to [" + currentMapPosition.latitude + "/" + currentMapPosition.longitude + "]");
+                }
+                if (currentMapPosition.bearing != old.bearing) {
+                    Log.e("bearing change from " + old.bearing + " to " + currentMapPosition.bearing);
+                }
+            });
+        } else {
+            map.setActivityMapChangeListener(null);
         }
     }
 
@@ -398,6 +420,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onPause() {
         map.onPause();
+        configMapChangeListener(false);
         super.onPause();
     }
 
@@ -405,6 +428,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     protected void onResume() {
         super.onResume();
         map.onResume();
+        configMapChangeListener(true);
         resumeRoute(false);
         if (tracks != null) {
             tracks.resumeAllTracks(this::resumeTrack);
