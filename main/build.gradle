@@ -123,10 +123,6 @@ android {
                 appIconRound: "@mipmap/ic_launcher_round"
             ]
         }
-        packagingOptions {
-            pickFirst "assets/symbols/**"
-            pickFirst "assets/patterns/**"
-        }
     }
 
     buildTypes.all { buildType ->
@@ -229,6 +225,10 @@ android {
         // rxjava
         exclude 'META-INF/rxandroid.properties'
         exclude 'META-INF/rxjava.properties'
+
+        // vtm-themes
+        resources.pickFirsts.add("assets/symbols/**")
+        resources.pickFirsts.add("assets/patterns/**")
     }
 
     flavorDimensions "javaCompilerTime" // all flavours must be assigned a dimension
