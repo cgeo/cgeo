@@ -524,7 +524,7 @@
         <item name="android:insetBottom">0dp</item>
         <item name="android:padding">8dp</item>
         <item name="android:background">@drawable/white_bcg</item>
-        <item name="android:tint">@color/osm_zoomcontrol</item>
+        <!--<item name="android:tint">@color/osm_zoomcontrol</item>-->
     </style>
 
     <!-- authorization styles -->
