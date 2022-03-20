@@ -4,6 +4,7 @@ import cgeo.geocaching.maps.google.v2.GoogleMapObjects;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.utils.MapLineUtils;
+import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_GOOGLE;
 
 import android.location.Location;
 import android.view.View;
@@ -41,7 +42,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
             .color(MapLineUtils.getDirectionColor())
             .width(MapLineUtils.getDirectionLineWidth())
             .zIndex(ZINDEX_DIRECTION_LINE)
-        ));
+        ), MAP_GOOGLE);
     }
 
     // ========================================================================

@@ -24,6 +24,9 @@ import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.content.Intent;
@@ -302,7 +305,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public int getSelectedBottomItemId() {
-        return MENU_MAP;    // @todo
+        return MENU_MAP;
     }
 
     // ========================================================================
@@ -313,6 +316,24 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         final boolean result = super.onPrepareOptionsMenu(menu);
         TileProviderFactory.addMapViewLanguageMenuItems(menu);
         this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, tracks);
+
+        // map rotation state
+        menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always when CGeoMap/NewMap is removed
+        final int mapRotation = Settings.getMapRotation();
+        switch (mapRotation) {
+            case MAPROTATION_OFF:
+                menu.findItem(R.id.menu_map_rotation_off).setChecked(true);
+                break;
+            case MAPROTATION_MANUAL:
+                menu.findItem(R.id.menu_map_rotation_manual).setChecked(true);
+                break;
+            case MAPROTATION_AUTO:
+                menu.findItem(R.id.menu_map_rotation_auto).setChecked(true);
+                break;
+            default:
+                break;
+        }
+
         return result;
     }
 
@@ -348,6 +369,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 currentMapPosition.resetFollowMyLocation = false;
             }
             initFollowMyLocationButton();
+        } else if (id == R.id.menu_map_rotation_off) {
+                setMapRotation(item, MAPROTATION_OFF);
+            } else if (id == R.id.menu_map_rotation_manual) {
+                setMapRotation(item, MAPROTATION_MANUAL);
+            } else if (id == R.id.menu_map_rotation_auto) {
+                setMapRotation(item, MAPROTATION_AUTO);
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = map.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
@@ -373,6 +400,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private void setMapRotation(final MenuItem item, final int mapRotation) {
+        Settings.setMapRotation(mapRotation);
+        map.setMapRotation(mapRotation);
+        item.setChecked(true);
     }
 
     @Override

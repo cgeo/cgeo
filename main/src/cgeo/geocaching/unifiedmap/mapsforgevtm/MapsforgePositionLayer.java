@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.utils.MapLineUtils;
+import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_MAPSFORGE;
 
 import android.graphics.Matrix;
 import android.location.Location;
@@ -77,7 +78,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     }
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
-        setCurrentPositionAndHeadingHelper(location, heading, navigationLayer::setPoints);
+        setCurrentPositionAndHeadingHelper(location, heading, navigationLayer::setPoints, MAP_MAPSFORGE);
     };
 
     // ========================================================================

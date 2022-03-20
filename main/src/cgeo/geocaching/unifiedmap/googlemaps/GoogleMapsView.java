@@ -9,12 +9,15 @@ import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
+import cgeo.geocaching.utils.AngleUtils;
+import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
@@ -77,6 +80,7 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
         configMapChangeListener(true);
+        setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
     }
 
@@ -85,6 +89,23 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         super.setTileSource(newSource);
         ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
     }
+
+    @Override
+    public void setMapRotation(final int mapRotation) {
+        mMap.getUiSettings().setRotateGesturesEnabled(mapRotation == MAPROTATION_MANUAL);
+        super.setMapRotation(mapRotation);
+    }
+
+    @Override
+    public float getCurrentBearing() {
+        return mMap.getCameraPosition().bearing;
+    };
+
+    @Override
+    public void setBearing(final float bearing) {
+        // @todo: it looks like we need to take current heading into account, otherwise the map is rotated into heading arrows direction when called with bearing=0
+        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
+    };
 
     /** keep track of rotation and zoom level changes **/
     protected void configMapChangeListener(final boolean enable) {

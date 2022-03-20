@@ -37,6 +37,16 @@ public abstract class AbstractUnifiedMap<T> {
         // default: do nothing
     }
 
+    public abstract float getCurrentBearing();
+    public abstract void setBearing(float bearing);
+
+    public void setMapRotation(final int mapRotation) {
+        this.mapRotation = mapRotation;
+        if (mapRotation == Settings.MAPROTATION_OFF) {
+            setBearing(0);
+        }
+    }
+
     protected abstract void configMapChangeListener(boolean enable);
     public void setActivityMapChangeListener(@Nullable final Action1<UnifiedMapPosition> listener) {
         activityMapChangeListener = listener;

@@ -57,7 +57,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
         mMap = mMapView.map();
-        mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
+        setMapRotation(mapRotation);
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
     }
@@ -80,6 +80,24 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         mMap.clearMap();
         super.prepareForTileSourceChange();
     }
+
+    @Override
+    public void setMapRotation(final int mapRotation) {
+        mMap.getEventLayer().enableRotation(mapRotation != Settings.MAPROTATION_OFF);
+        super.setMapRotation(mapRotation);
+    }
+
+    @Override
+    public float getCurrentBearing() {
+        return mMap.getMapPosition().bearing;
+    };
+
+    @Override
+    public void setBearing(final float bearing) {
+        final MapPosition pos = mMap.getMapPosition();
+        pos.setBearing(bearing);
+        mMap.setMapPosition(pos);
+    };
 
     /** keep track of rotation and zoom level changes **/
     protected void configMapChangeListener(final boolean enable) {
