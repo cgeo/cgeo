@@ -5,8 +5,8 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.PersistableFolder;
-import cgeo.geocaching.unifiedmap.googlemaps.GoogleMaps;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVTM;
+import cgeo.geocaching.unifiedmap.googlemaps.GoogleMapsView;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmView;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Log;
@@ -35,8 +35,8 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public class TileProviderFactory {
     public static final int MAP_LANGUAGE_DEFAULT_ID = 432198765;
 
-    public static final GoogleMaps MAP_GOOGLE = new GoogleMaps();
-    public static final MapsforgeVTM MAP_MAPSFORGE = new MapsforgeVTM();
+    public static final GoogleMapsView MAP_GOOGLE = new GoogleMapsView();
+    public static final MapsforgeVtmView MAP_MAPSFORGE = new MapsforgeVtmView();
     private static final HashMap<String, AbstractTileProvider> tileProviders = new LinkedHashMap<>();
     private static String[] languages;
 

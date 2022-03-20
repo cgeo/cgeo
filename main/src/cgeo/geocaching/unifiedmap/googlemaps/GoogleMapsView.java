@@ -23,7 +23,11 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import org.oscim.core.BoundingBox;
 
-public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReadyCallback {
+/**
+ * GoogleMapsView - Contains the view handling parts specific to Google Maps
+ * To be called by UnifiedMapActivity (mostly)
+ */
+public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private View rootView;

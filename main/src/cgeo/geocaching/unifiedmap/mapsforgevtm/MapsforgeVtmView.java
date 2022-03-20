@@ -34,7 +34,11 @@ import org.oscim.scalebar.MetricUnitAdapter;
 import org.oscim.theme.IRenderTheme;
 import org.oscim.tiling.TileSource;
 
-public class MapsforgeVTM extends AbstractUnifiedMap<GeoPoint> {
+/**
+ * MapsforgeVtmView - Contains the view handling parts specific to MapsforgeVtm
+ * To be called by UnifiedMapActivity (mostly)
+ */
+public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
 
     private IRenderTheme mTheme;
     private MapView mMapView;
