@@ -6,6 +6,7 @@ import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
@@ -17,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import org.oscim.core.BoundingBox;
@@ -29,6 +31,7 @@ public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReady
 
     @Override
     public void init(final AppCompatActivity activity) {
+        super.init(activity);
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
         final SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.mapViewGM);
@@ -69,6 +72,7 @@ public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReady
         mMap = googleMap;
         mapController.setGoogleMap(googleMap);
         googleMap.getUiSettings().setZoomControlsEnabled(true);
+        configMapChangeListener(true);
         positionLayer = configPositionLayer(true);
     }
 
@@ -76,6 +80,21 @@ public class GoogleMaps extends AbstractUnifiedMap<LatLng> implements OnMapReady
     public void setTileSource(final AbstractTileProvider newSource) {
         super.setTileSource(newSource);
         ((AbstractGoogleTileProvider) newSource).setMapType(mMap);
+    }
+
+    /** keep track of rotation and zoom level changes **/
+    protected void configMapChangeListener(final boolean enable) {
+        if (mMap != null) {
+            mMap.setOnCameraIdleListener(null);
+            if (enable) {
+                mMap.setOnCameraIdleListener(() -> {
+                    if (activityMapChangeListener != null) {
+                        final CameraPosition pos = mMap.getCameraPosition();
+                        activityMapChangeListener.call(new UnifiedMapPosition(pos.target.latitude, pos.target.longitude, (int) pos.zoom, pos.bearing));
+                    }
+                });
+            }
+        }
     }
 
     @Override
