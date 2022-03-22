@@ -1,4 +1,8 @@
 ### Všeobecné
+
+- New: Redesigned coordinates calculator (supporting formulas)
+- Change: Variables for waypoint calculation are now cache-global
+- New: Variables tab in cache details
 - New: Automatically perform backups (optional)
 - Fix: Resume importing finished downloads
 - New: Added filter for "has user defined waypoints"
