@@ -1,9 +1,13 @@
 ### Algemeen
-- Nieuw: Automatisch back-ups uitvoeren (optioneel)
-- Oplossing: Hervatten van importeren van voltooide downloads
-- Nieuw: Filter toegevoegd voor "heeft gebruiker gedefinieerde waypoints"
-- Nieuw: interne routing bijgewerkt naar BRouter v1.6.3
-- Nieuw: Gebruikersspecifiek icoon voor gegenereerde waypoints
-- Nieuw: Log templates voor offline logs
-- Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
-- Wijziging: Instellingen => Kaart => Lang tikken op kaart zal nu ook aanzetten/uitschakelen van lange tap in de cache kaart (relevant voor het maken van nieuwe waypoints voor huidige cache)
+
+- New: Redesigned coordinates calculator (supporting formulas)
+- Change: Variables for waypoint calculation are now cache-global
+- New: Variables tab in cache details
+- New: Automatically perform backups (optional)
+- Fix: Resume importing finished downloads
+- New: Added filter for "has user defined waypoints"
+- New: Updated internal routing to BRouter v1.6.3
+- New: User separate icon for generated waypoints
+- New: Log templates for offline logs
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
+- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
