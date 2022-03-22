@@ -9,6 +9,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Objects;
 import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
@@ -19,6 +20,9 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     private T minRangeValue;
     private T maxRangeValue;
 
+    private T specialNumber;
+    private Boolean includeSpecialNumber;
+
     private final Func1<String, T> numberParser;
 
     public NumberRangeFilter(final Func1<String, T> numberParser) {
@@ -26,6 +30,10 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public boolean isInRange(final T value) {
+        if (includeSpecialNumber != null && specialNumber != null && isEqualValue(value, specialNumber)) {
+            return includeSpecialNumber;
+        }
+
         if (minRangeValue != null && minRangeValue.compareTo(value) > 0) {
             return false;
         }
@@ -45,6 +53,17 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return maxRangeValue;
     }
 
+    public void setSpecialNumber(final T specialNumber) {
+        this.specialNumber = specialNumber;
+    }
+
+    public Boolean getIncludeSpecialNumber() {
+        return includeSpecialNumber;
+    }
+
+    public void setIncludeSpecialNumber(final Boolean includeSpecialNumber) {
+        this.includeSpecialNumber = includeSpecialNumber;
+    }
 
     public Collection<T> getValuesInRange(final T[] values) {
         final Set<T> set = new HashSet<>();
@@ -56,12 +75,21 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return set;
     }
 
-    public void setRangeFromValues(final Collection<T> values) {
+    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    public void setRangeFromValues(final Collection<T> values, final T minUnlimitedValue, final T maxUnlimitedValue) {
         T min = null;
         T max = null;
+        boolean foundMinUnlimited = false;
+        boolean foundMaxUnlimited = false;
         for (T v : values) {
             if (v == null) {
                 continue;
+            }
+            if (isEqualValue(v, minUnlimitedValue)) {
+                foundMinUnlimited = true;
+            }
+            if (isEqualValue(v, maxUnlimitedValue)) {
+                foundMaxUnlimited = true;
             }
             if (min == null || min.compareTo(v) >= 0) {
                 min = v;
@@ -70,7 +98,7 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
                 max = v;
             }
         }
-        setMinMaxRange(min, max);
+        setMinMaxRange(foundMinUnlimited ? null : min, foundMaxUnlimited ? null : max);
     }
 
 
@@ -81,10 +109,19 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
 
         minRangeValue = parseString(config.get(0));
         maxRangeValue = parseString(config.get(1));
+        specialNumber = config.size() >= 3 ? parseString(config.get(2)) : null;
+        includeSpecialNumber = config.size() >= 4 ? Boolean.valueOf(config.get(3)) : null;
     }
 
     public List<String> getConfig() {
-        return new ArrayList<>(Arrays.asList(minRangeValue == null ? "-" : String.valueOf(minRangeValue), maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
+        final List<String>  config = new ArrayList<>(Arrays.asList(
+            minRangeValue == null ? "-" : String.valueOf(minRangeValue),
+            maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
+        if (specialNumber != null && includeSpecialNumber != null) {
+            config.add(String.valueOf(specialNumber));
+            config.add(Boolean.toString(includeSpecialNumber));
+        }
+        return config;
     }
 
     private T parseString(final String text) {
@@ -100,7 +137,7 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public boolean isFilled() {
-        return minRangeValue != null || maxRangeValue != null;
+        return minRangeValue != null || maxRangeValue != null || (specialNumber != null && includeSpecialNumber != null);
     }
 
     public void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression) {
@@ -108,7 +145,21 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public void addRangeToSqlBuilder(final SqlBuilder sqlBuilder, final String valueExpression, final Func1<T, T> valueConverter) {
-        if (valueExpression != null && (minRangeValue != null || maxRangeValue != null)) {
+        final boolean hasSpecial = specialNumber != null && includeSpecialNumber != null;
+        final boolean hasMinMax = minRangeValue != null || maxRangeValue != null;
+
+        if (valueExpression == null || (!hasSpecial && !hasMinMax)) {
+            sqlBuilder.addWhereAlwaysInclude();
+        } else {
+            if (hasSpecial) {
+                sqlBuilder.openWhere(includeSpecialNumber ? SqlBuilder.WhereType.OR : SqlBuilder.WhereType.AND);
+                final T sn = valueConverter == null ? specialNumber : valueConverter.call(specialNumber);
+                if (includeSpecialNumber) {
+                    sqlBuilder.addWhere(valueExpression + " = " + sn);
+                } else {
+                    sqlBuilder.addWhere(valueExpression + " <> " + sn);
+                }
+            }
             sqlBuilder.openWhere(SqlBuilder.WhereType.AND);
             if (minRangeValue != null) {
                 sqlBuilder.addWhere(valueExpression + " >= " + (valueConverter == null ? minRangeValue : valueConverter.call(minRangeValue)));
@@ -116,14 +167,31 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
             if (maxRangeValue != null) {
                 sqlBuilder.addWhere(valueExpression + " <= " + (valueConverter == null ? maxRangeValue : valueConverter.call(maxRangeValue)));
             }
+            if (minRangeValue == null && maxRangeValue == null) {
+                sqlBuilder.addWhereTrue();
+            }
             sqlBuilder.closeWhere();
-        } else {
-            sqlBuilder.addWhereTrue();
+
+            if (hasSpecial) {
+                sqlBuilder.closeWhere();
+            }
+
         }
     }
 
     protected String getUserDisplayableConfig() {
-        return (minRangeValue == null ? "*" : minRangeValue) + "-" + (maxRangeValue == null ? "*" : maxRangeValue);
+        final StringBuilder sb = new StringBuilder((minRangeValue == null ? "*" : minRangeValue) + "-" + (maxRangeValue == null ? "*" : maxRangeValue));
+        if (specialNumber != null && includeSpecialNumber != null) {
+            sb.append(includeSpecialNumber ? "+" : "^").append(specialNumber);
+        }
+        return sb.toString();
+    }
+
+    private boolean isEqualValue(final T v1, final T v2) {
+        if (Objects.equals(v1, v2)) {
+            return true;
+        }
+        return v1 != null && v2 != null && Math.abs(v1.doubleValue() - v2.doubleValue()) < 0.00000001d;
     }
 
 }

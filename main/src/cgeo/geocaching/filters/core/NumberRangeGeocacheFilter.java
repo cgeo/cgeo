@@ -16,6 +16,15 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         numberRangeFilter = new NumberRangeFilter<>(numberParser);
     }
 
+    public void setSpecialNumber(final T specialNumber, final Boolean include) {
+        numberRangeFilter.setSpecialNumber(specialNumber);
+        numberRangeFilter.setIncludeSpecialNumber(include);
+    }
+
+    public Boolean getIncludeSpecialNumber() {
+        return numberRangeFilter.getIncludeSpecialNumber();
+    }
+
     protected abstract T getValue(Geocache cache);
 
     protected String getSqlColumnName() {
@@ -60,7 +69,12 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
     }
 
     public void setRangeFromValues(final Collection<T> values) {
-        numberRangeFilter.setRangeFromValues(values);
+        setRangeFromValues(values, null, null);
+    }
+
+    public void setRangeFromValues(final Collection<T> values, final T minUnlimitedValue, final T maxUnlimitedValue) {
+
+        numberRangeFilter.setRangeFromValues(values, minUnlimitedValue, maxUnlimitedValue);
     }
 
    @Override
