@@ -1,9 +1,13 @@
 ### General
-- Nou: Realitza còpies de seguretat automàticament (opcional)
-- Correcció: Reprèn la importació de les descàrregues acabades
-- Nou: S'ha afegit un filtre per a "té punts de ruta definits per l'usuari"
-- Nou: s'ha actualitzat l'encaminament intern a BRouter v1.6.3
-- Nou: Icona separada de l'usuari per als punts de ruta generats
-- Novetat: Plantilles per a registres fora de línia
+
+- New: Redesigned coordinates calculator (supporting formulas)
+- Change: Variables for waypoint calculation are now cache-global
+- New: Variables tab in cache details
+- New: Automatically perform backups (optional)
+- Fix: Resume importing finished downloads
+- New: Added filter for "has user defined waypoints"
+- New: Updated internal routing to BRouter v1.6.3
+- New: User separate icon for generated waypoints
+- New: Log templates for offline logs
 - New: Added configurable quick launch buttons to home screen, see Settings => Appearance
 - Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
