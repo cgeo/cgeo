@@ -22,9 +22,9 @@ import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
-import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
+import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
@@ -73,6 +73,8 @@ public class ImageGalleryView extends LinearLayout {
 
     private String geocode;
 
+    private int imageSizeDp = 150;
+
     private final Map<String, Geopoint> imageCoordMap = new HashMap<>();
     private final Map<String, Integer> categoryCounts = new HashMap<>();
     private final Map<String, EditableCategoryHandler> editableCategoryHandlerMap = new HashMap<>();
@@ -94,14 +96,22 @@ public class ImageGalleryView extends LinearLayout {
     }
 
     private void resetListLayout(final RecyclerView view, final Configuration newConfig) {
-        final int colCount = newConfig.screenWidthDp /
-            (ViewUtils.pixelToDp(view.getResources().getDimension(R.dimen.imageGallery_imageSize)) + 20);
+
+        this.imageSizeDp = 160;
+        int colCount = newConfig.screenWidthDp / (this.imageSizeDp + 10);
+
+        //provide at least 2 columns
+        if (colCount == 1 && newConfig.screenWidthDp > 100) {
+            colCount = 2;
+            this.imageSizeDp = (newConfig.screenWidthDp / 2) / 10;
+        }
+        final int colCountFinal = colCount;
 
         final GridLayoutManager lm = new GridLayoutManager(view.getContext(), colCount);
         lm.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
             @Override
             public int getSpanSize(final int position) {
-                return adapter.getItem(position).isCategoryHeader ? colCount : 1;
+                return adapter.getItem(position).isCategoryHeader ? colCountFinal : 1;
             }
         });
         lm.getSpanSizeLookup().setSpanIndexCacheEnabled(true);
@@ -113,6 +123,25 @@ public class ImageGalleryView extends LinearLayout {
         ((GridLayoutManager) this.view.getLayoutManager()).getSpanSizeLookup().invalidateSpanIndexCache();
         ((GridLayoutManager) this.view.getLayoutManager()).getSpanSizeLookup().invalidateSpanGroupIndexCache();
     }
+
+    private static void setImageLayoutSizes(final ImageGalleryImageBinding image, final int imageSizeInDp) {
+        final int imageSizeInner = imageSizeInDp - 10;
+        setLayoutSize(image.imageComplete, imageSizeInDp, -1);
+        setLayoutSize(image.imageWrapper, imageSizeInner, imageSizeInner);
+        setLayoutSize(image.imageImage, imageSizeInner, imageSizeInner);
+        setLayoutSize(image.imageTitle, imageSizeInner, -1);
+    }
+
+    private static void setLayoutSize(final View view, final int widthInDp, final int heightInDp) {
+        final ViewGroup.LayoutParams lp = view.getLayoutParams();
+        if (widthInDp > 0) {
+            lp.width = ViewUtils.dpToPixel(widthInDp);
+        }
+        if (heightInDp > 0) {
+            lp.height = ViewUtils.dpToPixel(heightInDp);
+        }
+    }
+
 
     public static class FolderCategoryHandler implements EditableCategoryHandler {
 
@@ -221,6 +250,7 @@ public class ImageGalleryView extends LinearLayout {
             } else {
                 final Image img = getItem(position).image;
                 final ImageGalleryImageBinding binding = holder.imageBinding;
+                setImageLayoutSizes(binding, imageSizeDp);
                 if (!StringUtils.isBlank(img.getTitle())) {
                     binding.imageTitle.setText(TextParam.text(img.getTitle()).setHtml(true).getText(getContext()));
                     binding.imageTitle.setVisibility(View.VISIBLE);

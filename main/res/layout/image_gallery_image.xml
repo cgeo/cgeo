@@ -6,10 +6,17 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <!--
+       General note wrt this layout: width/height sizes (150dp/160dp) will be changed in code
+       according to concrete screen size and layout
+    -->
+
+
     <!-- following LinearLayout is needed so image is centered inside column of gridlayout -->
     <LinearLayout
+        android:id="@+id/image_complete"
         android:orientation="vertical"
-        android:layout_width="@dimen/imageGallery_imageSize"
+        android:layout_width="160dp"
         android:layout_height="wrap_content"
         android:background="@drawable/border"
         android:padding="5dp"
@@ -18,8 +25,9 @@
         tools:ignore="UselessParent">
 
         <RelativeLayout
-            android:layout_width="@dimen/imageGallery_imageSize"
-            android:layout_height="@dimen/imageGallery_imageSize">
+            android:id="@+id/image_wrapper"
+            android:layout_width="150dp"
+            android:layout_height="150dp">
 
             <com.google.android.material.progressindicator.CircularProgressIndicator
                 android:id="@+id/image_progress_bar"
@@ -30,10 +38,12 @@
                 android:layout_centerInParent="true"
                 android:foregroundGravity="center"/>
 
-            <ImageView
+            <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/image_image"
-                android:layout_width="@dimen/imageGallery_imageSize"
-                android:layout_height="@dimen/imageGallery_imageSize"
+                app:materialThemeOverlay="@style/shapeRoundedCorner"
+                app:cornerRadius="12dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 android:adjustViewBounds="true"
@@ -66,7 +76,7 @@
         <TextView
             android:id="@+id/image_title"
             style="@style/text_label"
-            android:layout_width="@dimen/imageGallery_imageSize"
+            android:layout_width="150dp"
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:padding="3dip"

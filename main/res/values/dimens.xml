@@ -57,7 +57,4 @@
     <!-- button size dimensions ====================================== -->
     <dimen name="buttonSize_iconButton">45dp</dimen>
 
-    <!-- Image Gallery Size dimensions ====================================== -->
-    <dimen name="imageGallery_imageSize">150dp</dimen>
-
 </resources>
