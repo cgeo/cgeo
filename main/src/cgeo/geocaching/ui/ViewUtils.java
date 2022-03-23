@@ -46,8 +46,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StyleRes;
 import androidx.appcompat.widget.TooltipCompat;
-import androidx.constraintlayout.helper.widget.Flow;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.util.Consumer;
 import androidx.core.util.Predicate;
 
@@ -431,43 +429,6 @@ public class ViewUtils {
         return ((ViewGroup) v.getParent()).indexOfChild(v);
     }
 
-
-    /**
-     * Helper method when dealing with dynamic views in ConstraintLayouts using Flow.
-     *
-     * This method will find a flow object in given layout, and if found apply it to all other child views
-     * of the layout. If necessary, views will get unique new ids assigned in this process
-     *
-     * @param viewGroup layout to search in
-     */
-    public static void applyFlowToChildren(final ConstraintLayout viewGroup) {
-        if (viewGroup == null || viewGroup.getChildCount() < 2) {
-            //function does not makes sense if there isn't at least one flow and one other child
-            return;
-        }
-
-        //find flow and children in one loop
-        Flow flow = null;
-        final int[] allIds = new int[viewGroup.getChildCount() - 1];
-        int allIdsIdx = 0;
-        for (int i = 0; i < viewGroup.getChildCount(); i++) {
-            final View child = viewGroup.getChildAt(i);
-            if (flow == null && child instanceof Flow) {
-                flow = (Flow) child;
-            } else {
-                int childId = child.getId();
-                if (childId == View.NO_ID) {
-                    childId = View.generateViewId();
-                    child.setId(childId);
-                }
-                allIds[allIdsIdx++] = childId;
-            }
-        }
-
-        if (flow != null) {
-            flow.setReferencedIds(allIds);
-        }
-    }
 
     public static Bitmap drawableToBitmap (final Drawable drawable) {
         final Bitmap bitmap;

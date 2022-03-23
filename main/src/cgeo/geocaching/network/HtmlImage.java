@@ -28,11 +28,15 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.drew.imaging.ImageMetadataReader;
+import com.drew.imaging.ImageProcessingException;
+import com.drew.metadata.Metadata;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.Observable;
@@ -46,6 +50,7 @@ import okhttp3.Response;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.ImmutablePair;
+import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 /**
  * All-purpose image getter that can also be used as a ImageGetter interface when displaying caches.
@@ -82,9 +87,11 @@ public class HtmlImage implements Html.ImageGetter {
     private final int maxHeight;
     private final Resources resources;
     final WeakReference<TextView> viewRef;
+    private boolean loadMetadata = false;
+
     private final Map<String, BitmapDrawable> cache = new HashMap<>();
 
-    private final ObservableCache<String, BitmapDrawable> observableCache = new ObservableCache<>(this::fetchDrawableUncached);
+    private final ObservableCache<String, ImmutablePair<BitmapDrawable, Metadata>> observableCache = new ObservableCache<>(this::fetchDrawableUncached);
 
     // Background loading
     // .cache() is not yet available on Completable instances as of RxJava 2.0.0, so we have to go back
@@ -162,6 +169,7 @@ public class HtmlImage implements Html.ImageGetter {
     @Nullable
     @Override
     public BitmapDrawable getDrawable(final String url) {
+
         if (cache.containsKey(url)) {
             return cache.get(url);
         }
@@ -192,66 +200,70 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
-        return observableCache.get(url);
+        return fetchDrawableWithMetadata(url).map(p -> p.left);
     }
 
+    public Observable<ImmutablePair<BitmapDrawable, Metadata>> fetchDrawableWithMetadata(final String url) {
+        return observableCache.get(url);
+    }
     // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
     // the image. Downloads happen on downloadScheduler, in parallel with image decoding.
-    private Observable<BitmapDrawable> fetchDrawableUncached(final String url) {
+    @SuppressWarnings("PMD.NPathComplexity") // splitting up that method would not help improve readability
+    private Observable<ImmutablePair<BitmapDrawable, Metadata>> fetchDrawableUncached(final String url) {
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
-            return Observable.just(ImageUtils.getTransparent1x1Drawable(resources));
+            return Observable.just(ImmutablePair.of(ImageUtils.getTransparent1x1Drawable(resources), null));
         }
 
         // Explicit local file URLs are loaded from the filesystem regardless of their age. The IO part is short
         // enough to make the whole operation on the computation scheduler.
         if (FileUtils.isFileUrl(url)) {
             return Observable.defer(() -> {
-                final Bitmap bitmap = loadCachedImage(FileUtils.urlToFile(url), true).left;
-                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.empty();
+                final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(FileUtils.urlToFile(url), true);
+                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) : Observable.empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
         // Content Uris are also loaded regardless of their age (needed for spoiler images)
         final Uri uri = Uri.parse(url);
         if (UriUtils.isContentUri(uri)) {
             return Observable.defer(() -> {
-                final Bitmap bitmap = loadCachedImage(uri, true, -1).left;
-                return bitmap != null ? Observable.just(ImageUtils.scaleBitmapToFitDisplay(bitmap)) : Observable.empty();
+                final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(uri, true, -1);
+                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) : Observable.empty();
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 
         final boolean shared = url.contains("/images/icons/icon_");
         final String pseudoGeocode = shared ? SHARED : geocode;
 
-        return Observable.create(new ObservableOnSubscribe<BitmapDrawable>() {
+        return Observable.create(new ObservableOnSubscribe<ImmutablePair<BitmapDrawable, Metadata>>() {
             @Override
-            public void subscribe(final ObservableEmitter<BitmapDrawable> emitter) throws Exception {
+            public void subscribe(final ObservableEmitter<ImmutablePair<BitmapDrawable, Metadata>> emitter) throws Exception {
                 // Canceling disposable must sever this connection
                 final CancellableDisposable aborter = new CancellableDisposable(emitter::onComplete);
                 disposable.add(aborter);
                 // Canceling this subscription must dispose the data retrieval
                 emitter.setDisposable(AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
-                    final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                    final ImmutableTriple<BitmapDrawable, Metadata, Boolean> loaded = loadFromDisk();
                     final BitmapDrawable bitmap = loaded.left;
                     if (loaded.right) {
                         if (!onlySave) {
-                            emitter.onNext(bitmap);
+                            emitter.onNext(ImmutablePair.of(bitmap, loaded.middle));
                         }
                         emitter.onComplete();
                         return;
                     }
                     if (bitmap != null && !onlySave) {
-                        emitter.onNext(bitmap);
+                        emitter.onNext(ImmutablePair.of(bitmap, loaded.middle));
                     }
                     AndroidRxUtils.networkScheduler.scheduleDirect(() -> downloadAndSave(emitter, aborter));
                 }));
             }
 
-            private ImmutablePair<BitmapDrawable, Boolean> loadFromDisk() {
-                final ImmutablePair<Bitmap, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
+            private ImmutableTriple<BitmapDrawable, Metadata, Boolean> loadFromDisk() {
+                final ImmutableTriple<Bitmap, Metadata, Boolean> loadResult = loadImageFromStorage(url, pseudoGeocode, shared);
                 return scaleImage(loadResult);
             }
 
-            private void downloadAndSave(final ObservableEmitter<BitmapDrawable> emitter, final Disposable disposable) {
+            private void downloadAndSave(final ObservableEmitter<ImmutablePair<BitmapDrawable, Metadata>> emitter, final Disposable disposable) {
                 final File file = LocalStorage.getGeocacheDataFile(pseudoGeocode, url, true, true);
                 if (url.startsWith("data:image/")) {
                     if (url.contains(";base64,")) {
@@ -271,14 +283,14 @@ public class HtmlImage implements Html.ImageGetter {
                     return;
                 }
                 AndroidRxUtils.computationScheduler.scheduleDirect(() -> {
-                    final ImmutablePair<BitmapDrawable, Boolean> loaded = loadFromDisk();
+                    final ImmutableTriple<BitmapDrawable, Metadata, Boolean> loaded = loadFromDisk();
                     final BitmapDrawable image = loaded.left;
                     if (image != null) {
-                        emitter.onNext(image);
+                        emitter.onNext(ImmutablePair.of(image, loaded.middle));
                     } else {
                         emitter.onNext(returnErrorImage ?
-                                new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)) :
-                                ImageUtils.getTransparent1x1Drawable(resources));
+                            ImmutablePair.of(new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)), null) :
+                            ImmutablePair.of(ImageUtils.getTransparent1x1Drawable(resources), null));
                     }
                     emitter.onComplete();
                 });
@@ -286,9 +298,9 @@ public class HtmlImage implements Html.ImageGetter {
         });
     }
 
-    protected ImmutablePair<BitmapDrawable, Boolean> scaleImage(final ImmutablePair<Bitmap, Boolean> loadResult) {
+    protected ImmutableTriple<BitmapDrawable, Metadata, Boolean> scaleImage(final ImmutableTriple<Bitmap, Metadata, Boolean> loadResult) {
         final Bitmap bitmap = loadResult.left;
-        return ImmutablePair.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.right);
+        return ImmutableTriple.of(bitmap != null ? ImageUtils.scaleBitmapToFitDisplay(bitmap) : null, loadResult.middle, loadResult.right);
     }
 
     public Completable waitForEndCompletable(@Nullable final DisposableHandler handler) {
@@ -297,6 +309,10 @@ public class HtmlImage implements Html.ImageGetter {
         }
         loading.onComplete();
         return waitForEnd;
+    }
+
+    public void setLoadMetadata(final boolean loadMetadata) {
+        this.loadMetadata = loadMetadata;
     }
 
     /**
@@ -355,17 +371,17 @@ public class HtmlImage implements Html.ImageGetter {
      * @return A pair whose first element is the bitmap if available, and the second one is {@code true} if the image is present and fresh enough.
      */
     @NonNull
-    private ImmutablePair<Bitmap, Boolean> loadImageFromStorage(final String url, @NonNull final String pseudoGeocode, final boolean forceKeep) {
+    private ImmutableTriple<Bitmap, Metadata, Boolean> loadImageFromStorage(final String url, @NonNull final String pseudoGeocode, final boolean forceKeep) {
         try {
             final File file = LocalStorage.getGeocacheDataFile(pseudoGeocode, url, true, false);
-            final ImmutablePair<Bitmap, Boolean> image = loadCachedImage(file, forceKeep);
+            final ImmutableTriple<Bitmap, Metadata, Boolean> image = loadCachedImage(file, forceKeep);
             if (image.right || image.left != null) {
                 return image;
             }
         } catch (final Exception e) {
             Log.w("HtmlImage.loadImageFromStorage", e);
         }
-        return ImmutablePair.of((Bitmap) null, false);
+        return ImmutableTriple.of((Bitmap) null, null, false);
     }
 
     @Nullable
@@ -400,21 +416,22 @@ public class HtmlImage implements Html.ImageGetter {
      *
      * @param file the file on disk
      * @param forceKeep keep the image if it is there, without checking its freshness
-     * @return a pair with {@code true} in the second component if the image was there and is fresh enough or {@code false} otherwise,
-     *         and the image (possibly {@code null} if the second component is {@code false} and the image
-     *         could not be loaded, or if the second component is {@code true} and {@code onlySave} is also
+     * @return a triplet with image in the first component, Metadata in second (only if loadMetadata=true) and
+     *          {@code true} in the third component if the image was there and is fresh enough or {@code false} otherwise,
+     *         and the image (possibly {@code null} if the third component is {@code false} and the image
+     *         could not be loaded, or if the third component is {@code true} and {@code onlySave} is also
      *         {@code true})
      */
     @NonNull
-    private ImmutablePair<Bitmap, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
+    private ImmutableTriple<Bitmap, Metadata, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
         if (file.isFile()) {
             return loadCachedImage(Uri.fromFile(file), forceKeep, file.lastModified());
         }
-        return ImmutablePair.of((Bitmap) null, false);
+        return ImmutableTriple.of((Bitmap) null, null, false);
     }
 
     @NonNull
-    private ImmutablePair<Bitmap, Boolean> loadCachedImage(final Uri uri, final boolean forceKeep, final long lastModified) {
+    private ImmutableTriple<Bitmap, Metadata, Boolean> loadCachedImage(final Uri uri, final boolean forceKeep, final long lastModified) {
 
     // An image is considered fresh enough if the image exists and one of those conditions is true:
         //  - forceKeep is true and the image has not been modified in the last 24 hours, to avoid reloading shared images;
@@ -425,23 +442,38 @@ public class HtmlImage implements Html.ImageGetter {
         final boolean freshEnough = (forceKeep && (recentlyModified || !userInitiatedRefresh)) ||
                 (recentlyModified && !userInitiatedRefresh);
         if (freshEnough && onlySave) {
-            return ImmutablePair.of((Bitmap) null, true);
+            return ImmutableTriple.of((Bitmap) null, null, true);
         }
         final BitmapFactory.Options bfOptions = new BitmapFactory.Options();
         bfOptions.inTempStorage = new byte[16 * 1024];
         bfOptions.inPreferredConfig = Bitmap.Config.RGB_565;
         setSampleSize(uri, bfOptions);
-        final InputStream imageStream = ContentStorage.get().openForRead(uri);
+        InputStream imageStream = ContentStorage.get().openForRead(uri);
         if (imageStream == null) {
             Log.i("Cannot open file from " + uri + ", maybe it doesnt exist");
-            return ImmutablePair.of((Bitmap) null, false);
+            return ImmutableTriple.of((Bitmap) null, null, false);
         }
         final Bitmap image = BitmapFactory.decodeStream(imageStream, null, bfOptions);
         if (image == null) {
             Log.e("Cannot decode bitmap from " + uri);
-            return ImmutablePair.of((Bitmap) null, false);
+            return ImmutableTriple.of((Bitmap) null, null, false);
         }
-        return ImmutablePair.of(image, freshEnough);
+        Metadata metadata = null;
+        if (loadMetadata) {
+            imageStream = ContentStorage.get().openForRead(uri);
+            if (imageStream == null) {
+                Log.i("Cannot open file from " + uri + " again for metadata, maybe it doesnt exist");
+                return ImmutableTriple.of(image, null, true);
+            }
+            try {
+                metadata = ImageMetadataReader.readMetadata(imageStream);
+            } catch (IOException | ImageProcessingException ie) {
+                Log.w("Problem reading metadata from " + uri, ie);
+            } finally {
+                IOUtils.closeQuietly(imageStream);
+            }
+        }
+        return ImmutableTriple.of(image, metadata, freshEnough);
     }
 
     private void setSampleSize(final Uri uri, final BitmapFactory.Options bfOptions) {

@@ -1432,6 +1432,7 @@
     <string name="cache_image">Image</string>
     <string name="cache_image_open_file">Open as file</string>
     <string name="cache_image_open_browser">Open in browser</string>
+    <string name="cache_image_show_description">Show description</string>
     <string name="cache_image_add_waypoint">Add waypoint</string>
     <string name="cache_image_background">Cache listing background image</string>
     <string name="cache_share_field">Share</string>
