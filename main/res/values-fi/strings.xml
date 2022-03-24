@@ -555,6 +555,7 @@
     <string name="cache_filter_status_exclude_active">Rajaa pois aktiiviset</string>
     <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
     <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Sisällytä kätköt ilman D/T:tä</string>
     <string name="cache_filter_log_entry_foundby">Löytänyt</string>
     <string name="cache_filter_log_entry_logtext">Lokiteksti</string>
     <string name="cache_filter_stored_since_notstored">Ei tallennettu</string>
@@ -1288,6 +1289,7 @@
     <string name="cache_image">Kuva</string>
     <string name="cache_image_open_file">Avaa tiedosto</string>
     <string name="cache_image_open_browser">Avaa selaimessa</string>
+    <string name="cache_image_show_description">Näytä kuvaus</string>
     <string name="cache_image_add_waypoint">Lisää reittipiste</string>
     <string name="cache_image_background">Kätkölistauksen taustakuva</string>
     <string name="cache_share_field">Jaa</string>
