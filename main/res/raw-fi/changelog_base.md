@@ -1,13 +1,13 @@
 ### Yleinen
 
-- New: Redesigned coordinates calculator (supporting formulas)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
+- Uusi: Uudelleen suunniteltu koordinaattien laskin (tukevat kaavoja)
+- Muutos: Muuttujat reittipisteen laskennassa ovat nyt kätkö-globaaleja
+- Uusi: Muuttujien välilehti kätkön tiedoissa
+- Uusi: Suorita varmuuskopiot automaattisesti (valinnainen)
+- Korjaus: Jatka valmiiden latausten tuontia
+- Uusi: Lisätty suodatin "on käyttäjän määrittämät reittipisteet"
+- Uusi: Päivitetty sisäinen reititys BRouter v1.6.3
+- Uusi: Käyttäjän erillinen kuvake luoduille reittipisteille
+- Uusi: Lokipohjat offline-kirjauksille
+- Uusi: Lisätty konfiguroitavissa olevat pikakäynnistyspainikkeet aloitusnäyttöön, katso Asetukset => Ulkoasu
+- Muutos: Asetukset => Kartta => Pitkä napautus kartalla ottaa nyt käyttöön/pois käytöstä myös kartan pitkä napautuksen (liittyy luoda uusia reittipisteitä nykyiselle kätkölle)
