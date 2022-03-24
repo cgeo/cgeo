@@ -567,6 +567,7 @@
     <string name="cache_filter_status_exclude_active">Vyloučit aktivní</string>
     <string name="cache_filter_status_exclude_disabled">Vyloučit deaktivované</string>
     <string name="cache_filter_status_exclude_archived">Vyloučit archivované</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Zahrnout kešky bez O/T</string>
     <string name="cache_filter_log_entry_foundby">Nalezené kým</string>
     <string name="cache_filter_log_entry_logtext">Text logu</string>
     <string name="cache_filter_stored_since_notstored">Neuložené</string>
@@ -1316,6 +1317,7 @@
     <string name="cache_image">Obrázek</string>
     <string name="cache_image_open_file">Otevřít jako soubor</string>
     <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
+    <string name="cache_image_show_description">Zobrazit popis</string>
     <string name="cache_image_add_waypoint">Přidat trasový bod</string>
     <string name="cache_image_background">Obrázek na pozadí popisu kešky</string>
     <string name="cache_share_field">Sdílet</string>
