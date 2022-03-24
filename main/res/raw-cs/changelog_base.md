@@ -1,13 +1,13 @@
 ### Obecné
 
-- New: Redesigned coordinates calculator (supporting formulas)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
+- Novinka: Přepracovaný kalkulátor souřadnic (podpora vzorců)
+- Změna: Proměnné pro výpočet trasových bodů jsou nyní cache-global
+- Novinka: Karta "Proměnné" v podrobnostech o kešce
+- Novinka: Automaticky provádět zálohy (volitelné)
+- Oprava: Pokračovat v importu dokončených stahování
+- Novinka: Přidán filtr pro „mé uživatelsky definované body trasy”
+- Novinka: Aktualizováno interní směrování na BRouter v1.6.3
+- Novinka: Samostatná uživatelská ikona pro vygenerované trasové body
+- Novinka: Šablony pro offline logy
+- Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
+- Změna: Nastavení => Mapa => Dlouhé klepnutí na mapu nyní povolí/zakáže dlouhé klepnutí i v mapě kešky (důležité pro vytváření nových trasových bodů pro aktuální kešku)
