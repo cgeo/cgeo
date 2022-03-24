@@ -1,6 +1,6 @@
 ##
 
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- Korjaa: Kaatuminen tietyissä olosuhteissa käyttäen OpenStreetMapsia
 
 ##
 
