@@ -555,6 +555,7 @@
     <string name="cache_filter_status_exclude_active">Actieve uitsluiten</string>
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclusief caches zonder D/T</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door</string>
     <string name="cache_filter_log_entry_logtext">Log tekst</string>
     <string name="cache_filter_stored_since_notstored">Niet opgeslagen</string>
@@ -1288,6 +1289,7 @@
     <string name="cache_image">Afbeelding</string>
     <string name="cache_image_open_file">Open als bestand</string>
     <string name="cache_image_open_browser">Openen in browser</string>
+    <string name="cache_image_show_description">Toon beschrijving</string>
     <string name="cache_image_add_waypoint">Waypoint toevoegen</string>
     <string name="cache_image_background">Achtergrondafbeelding van de cache-lijst</string>
     <string name="cache_share_field">Delen</string>
