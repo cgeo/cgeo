@@ -44,6 +44,30 @@
 
     </RelativeLayout>
 
+     <!-- Wrapping RecyclerView with a RelativeLayout is necessary for "wrap_content" to
+       work properly. See e.g. https://stackoverflow.com/questions/27475178/how-do-i-make-wrap-content-work-on-a-recyclerview -->
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+
+            android:id="@+id/image_gallery_list"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:footerDividersEnabled="false"
+            android:headerDividersEnabled="false"
+            android:nestedScrollingEnabled="false"
+            android:orientation="vertical"
+            android:paddingHorizontal="4dip"
+            android:scrollbars="none"
+            tools:ignore="NestedScrolling"
+            tools:listitem="@layout/image_gallery_image">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </RelativeLayout>
+
     <android.widget.Space
         android:layout_width="match_parent"
         android:layout_height="10dp"/>
