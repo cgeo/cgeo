@@ -529,6 +529,7 @@
     <string name="cache_filter_status_select_label_has_offline_log">オフラインログあり</string>
     <string name="cache_filter_status_select_label_has_offline_found_log">発見(オフラインログ)</string>
     <string name="cache_filter_status_select_label_solved_mystery">解決済みのミステリー</string>
+    <string name="cache_filter_status_select_label_has_user_defined_waypoints">ユーザー定義ウェイポイントあり</string>
     <string name="cache_filter_status_select_infotext_solved_mystery">このフィルタ項目はミステリー・キャッシュにのみ影響します。\n\n座標が変更された場合、または座標の確定した最終ウェイポイントがある場合、ミステリーは「解決済み」とみなされます。</string>
     <string name="cache_filter_status_active">有効</string>
     <string name="cache_filter_status_disabled">一時停止中</string>
@@ -536,6 +537,7 @@
     <string name="cache_filter_status_exclude_active">アクティブを除外</string>
     <string name="cache_filter_status_exclude_disabled">一時停止中キャッシュを除外</string>
     <string name="cache_filter_status_exclude_archived">アーカイブ済みを除外</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">難易度/地形なしのキャッシュを含める</string>
     <string name="cache_filter_log_entry_foundby">発見したユーザー名</string>
     <string name="cache_filter_log_entry_logtext">ログの本文</string>
     <string name="cache_filter_stored_since_notstored">未保存</string>
