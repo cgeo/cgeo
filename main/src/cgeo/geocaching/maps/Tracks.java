@@ -2,6 +2,7 @@ package cgeo.geocaching.maps;
 
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.storage.extension.Trackfiles;
+import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.functions.Action2;
 
 import android.app.Activity;
@@ -31,17 +32,27 @@ public class Tracks {
     }
 
     public Tracks() {
-        for (Trackfiles trackfile : Trackfiles.getTrackfiles()) {
-            data.add(new Track(trackfile));
-        }
+        getListOfTrackfilesInBackground(null);
     }
 
     public Tracks(final RouteTrackUtils routeTrackUtils, final UpdateTrack updateTrack) {
-        this();
-        for (Track track : data) {
-            routeTrackUtils.reloadTrack(track.trackfile, updateTrack);
-        }
-        routeTrackUtils.setTracks(this);
+        getListOfTrackfilesInBackground(() -> {
+            for (Track track : data) {
+                routeTrackUtils.reloadTrack(track.trackfile, updateTrack);
+            }
+            routeTrackUtils.setTracks(this);
+        });
+    }
+
+    private void getListOfTrackfilesInBackground(@Nullable final Runnable runAfterLoad) {
+        AndroidRxUtils.refreshScheduler.scheduleDirect(() -> {
+            for (Trackfiles trackfile : Trackfiles.getTrackfiles()) {
+                data.add(new Track(trackfile));
+            }
+            if (runAfterLoad != null) {
+                runAfterLoad.run();
+            }
+        });
     }
 
     public void setRoute(@NonNull final String key, final Route route) {
