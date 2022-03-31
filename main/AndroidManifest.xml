@@ -737,6 +737,22 @@
             android:label="@string/log_image" >
         </activity>
 
+        <activity
+            android:name=".ImageViewActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/log_image"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data android:mimeType="image/*"/>
+            </intent-filter>
+        </activity>
+
         <service
             android:name=".speech.SpeechService"
             android:label="@string/tts_service" >

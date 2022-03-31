@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.ImageViewActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
@@ -75,6 +76,7 @@ public class ImageGalleryView extends LinearLayout {
     private int categoryHorizontalMargin = 2;
 
     private final Map<String, Geopoint> imageCoordMap = new HashMap<>();
+    private final List<String> categoryList = new ArrayList<>();
     private final Map<String, ImageGalleryCategoryBinding> categoryViews = new HashMap<>();
     private final Map<String, ImageListAdapter> categoryAdapters = new HashMap<>();
     private final Map<String, EditableCategoryHandler> editableCategoryHandlerMap = new HashMap<>();
@@ -266,12 +268,12 @@ public class ImageGalleryView extends LinearLayout {
             });
 
             binding.imageImage.setOnClickListener(v -> {
-                final Image image = getItem(holder.getBindingAdapterPosition()).image;
-                viewInStandardApp(image);
+                final ImageListData ild = getItem(holder.getBindingAdapterPosition());
+                openImageViewer(ild.category, holder.getBindingAdapterPosition());
             });
             binding.imageImage.setOnLongClickListener(v -> {
                 final ImageListData ild = getItem(holder.getBindingAdapterPosition());
-                showContextOptions(ild.image, holder.getBindingAdapterPosition(), ild.category, this);
+                showContextOptions(ild.image, ild.category, holder.getBindingAdapterPosition(),  this);
                 return true;
             });
         }
@@ -361,6 +363,7 @@ public class ImageGalleryView extends LinearLayout {
 
         this.addView(binding.getRoot(), category == null ? 0 : this.getChildCount(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+        this.categoryList.add(category == null ? 0 : this.categoryList.size(), category);
         this.categoryViews.put(category, binding);
         final ImageListAdapter adapter = new ImageListAdapter(binding.imageGalleryList);
         this.categoryAdapters.put(category, adapter);
@@ -398,6 +401,7 @@ public class ImageGalleryView extends LinearLayout {
         this.removeAllViews();
         this.categoryAdapters.clear();
         this.categoryViews.clear();
+        this.categoryList.clear();
     }
 
     public void removeCategory(final String category) {
@@ -413,6 +417,7 @@ public class ImageGalleryView extends LinearLayout {
             }
         }
         categoryViews.remove(category);
+        categoryList.remove(category);
         categoryAdapters.remove(category);
     }
 
@@ -422,6 +427,25 @@ public class ImageGalleryView extends LinearLayout {
 
         //clear image cache
         this.imageDataMemoryCache.clear();
+    }
+
+    private void openImageViewer(final String category, final int pos) {
+        if (activity == null) {
+            return;
+        }
+        final List<Image> images = new ArrayList<>();
+        int intentPos = -1;
+        for (String cat : categoryList) {
+            int idx = 0;
+            for (ImageListData imgData : categoryAdapters.get(cat).getItems()) {
+                if (Objects.equals(category, cat) && pos == idx) {
+                    intentPos = images.size();
+                }
+                images.add(imgData.image);
+                idx++;
+            }
+        }
+        ImageViewActivity.openImageView(this.activity, geocode, images, intentPos);
     }
 
     private void viewInStandardApp(final Image img) {
@@ -440,12 +464,15 @@ public class ImageGalleryView extends LinearLayout {
         ImageUtils.viewImageInStandardApp(activity, imgUri);
     }
 
-    private void showContextOptions(final Image img, final int pos, final String category, final ImageListAdapter adapter) {
+    private void showContextOptions(final Image img, final String category, final int pos,  final ImageListAdapter adapter) {
         if (activity == null) {
             return;
         }
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
+
+        ctxMenu.addItem("Open", R.drawable.ic_menu_info_details,
+            v -> openImageViewer(category, pos));
 
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_info_details,
             v -> viewInStandardApp(img));

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/imageview_activity_viewroot"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:padding="4dip"
+    tools:context=".ImageViewActivity">
+
+    <com.github.chrisbanes.photoview.PhotoView
+        android:id="@+id/image_full"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="5dip"
+        android:layout_marginTop="5dip"
+        android:background="#000000"
+        android:padding="1dp"
+        android:visibility="gone"
+        tools:visibility="visible"
+        tools:src="@drawable/cgeo_notification"/>
+
+    <TextView android:id="@+id/imageview_headline"
+        style="@style/text_default"
+        android:layout_alignParentTop="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:layout_below="@+id/imageview_headline"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dip"
+        android:baselineAligned="false"
+        android:orientation="horizontal" >
+
+        <Button
+            android:id="@+id/previous"
+            style="@style/button_full"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:text="Previous" />
+
+        <Button
+            android:id="@+id/next"
+            style="@style/button_full"
+            android:layout_width="0dip"
+            android:layout_weight="1"
+            android:text="Next" />
+    </LinearLayout>
+
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:orientation="vertical">
+
+        <TextView android:id="@+id/imageview_title"
+            style="@style/text_default"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView android:id="@+id/imageview_description"
+            style="@style/text_default"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView android:id="@+id/imageview_comment"
+            style="@style/text_default"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+        <TextView android:id="@+id/imageview_geocode"
+            style="@style/text_default"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"/>
+
+<com.google.android.material.bottomnavigation.BottomNavigationView
+    android:id="@+id/activity_bottom_navigation"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:labelVisibilityMode="labeled"
+    app:menu="@menu/image_view_menu" />
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+

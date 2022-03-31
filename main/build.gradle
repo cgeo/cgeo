@@ -435,6 +435,9 @@ dependencies {
 
     // MarkDown view
     implementation 'io.noties.markwon:core:4.6.2'
+
+    // PhotoView for zoomable ImageViews
+    implementation 'com.github.chrisbanes:PhotoView:2.3.0'
 }
 
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray
