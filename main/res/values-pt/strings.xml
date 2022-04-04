@@ -555,6 +555,7 @@
     <string name="cache_filter_status_exclude_active">Excluir Activas</string>
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluir caches sem D/T</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto do registo</string>
     <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
@@ -580,6 +581,7 @@
     <string name="about_changelog">Registo de alterações</string>
     <string name="about_changelog_nightly_build">Compilação diária (Nightly build)</string>
     <string name="about_changelog_next_release">Próxima versão</string>
+    <string name="about_changelog_bugfix_release">Versão de manutenção (correcção de erros)</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Apoie-nos</string>
     <string name="about_donation_more">Visite o website p/ saber mais</string>
@@ -1287,6 +1289,7 @@
     <string name="cache_image">Imagem</string>
     <string name="cache_image_open_file">Abrir como ficheiro</string>
     <string name="cache_image_open_browser">Abrir no browser</string>
+    <string name="cache_image_show_description">Mostrar descrição</string>
     <string name="cache_image_add_waypoint">Adicionar ponto adicional</string>
     <string name="cache_image_background">Imagem de fundo da descrição da cache</string>
     <string name="cache_share_field">Partilhar</string>
@@ -2322,10 +2325,14 @@
     <!-- render theme legend: category "POI / Symbols" -->
     <string name="rtl_category_poi_symbols">POI / Símbolos</string>
     <string name="rtl_bench">banco de jardim</string>
+    <string name="rtl_cairn">moledros</string>
     <string name="rtl_drinking_water">água potável</string>
+    <string name="rtl_guidepost">placas de sinalização</string>
     <string name="rtl_info_board">painel de informação</string>
     <string name="rtl_info_office">posto de informação</string>
     <string name="rtl_info_terminal">terminal de informação</string>
+    <string name="rtl_peak">cume</string>
+    <string name="rtl_peak_cross">cruz no cume</string>
     <string name="rtl_picnic_site">parque de merendas</string>
     <string name="rtl_playground">parque infantil</string>
     <string name="rtl_playground_private">parque infantil privado</string>
@@ -2336,6 +2343,7 @@
     <string name="rtl_telephone">telefone</string>
     <string name="rtl_toilets">casas de banho</string>
     <string name="rtl_volcano">vulcão</string>
+    <string name="rtl_adit_disused">galeria (mina) abandonada</string>
     <string name="rtl_archaeological">arqueológico</string>
     <string name="rtl_artwork">obra de arte</string>
     <string name="rtl_attraction">atracção</string>
@@ -2554,4 +2562,36 @@
     <string name="rtl_path_quality23">qualidade 2/3 (pavimento: gravilha, consertado, …)</string>
     <string name="rtl_path_quality45">qualidade 4/5 (por pavimentar)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Sorridente</string>
+    <string name="smiley_big_smile">Sorriso Grande</string>
+    <string name="smiley_cool">Fixe</string>
+    <string name="smiley_blush">Corado</string>
+    <string name="smiley_tongue">Língua de fora</string>
+    <string name="smiley_evil">Diabo</string>
+    <string name="smiley_shocked">Chocado</string>
+    <string name="smiley_wink">Piscar o olho</string>
+    <string name="smiley_clown">Palhaço</string>
+    <string name="smiley_blackeye">Olho Negro</string>
+    <string name="smiley_8ball">Bola 8</string>
+    <string name="smiley_frown">Franzir</string>
+    <string name="smiley_shy">Tímido</string>
+    <string name="smiley_angry">Zangado</string>
+    <string name="smiley_dead">Cansado</string>
+    <string name="smiley_sleepy">Sonolento</string>
+    <string name="smiley_kisses">Beijos</string>
+    <string name="smiley_approve">Aprovado</string>
+    <string name="smiley_disapprove">Reprovado</string>
+    <string name="smiley_question">Questão</string>
+    <string name="smiley_cry">Chorar</string>
+    <string name="smiley_embarassed">Envergonhado</string>
+    <string name="smiley_footinmouth">Pé na boca</string>
+    <string name="smiley_innocent">Inocente</string>
+    <string name="smiley_kiss">Beijo</string>
+    <string name="smiley_laughing">Gargalhadas</string>
+    <string name="smiley_money">Dinheiro</string>
+    <string name="smiley_sealed">Selado</string>
+    <string name="smiley_surprised">Surpreso</string>
+    <string name="smiley_tongueout">Língua de fora</string>
+    <string name="smiley_undecided">Indeciso</string>
+    <string name="smiley_yell">Gritar</string>
 </resources>

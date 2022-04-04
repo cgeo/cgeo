@@ -1286,6 +1286,7 @@
     <string name="cache_image">Image</string>
     <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
     <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
+    <string name="cache_image_show_description">Afficher la description</string>
     <string name="cache_image_add_waypoint">Ajouter un point de passage</string>
     <string name="cache_image_background">Image d\'arrière-plan pour la liste des caches</string>
     <string name="cache_share_field">Partager</string>

@@ -1,8 +1,12 @@
-## 2022.03.10 Bugfix Release
+##
 
-- Fix: Crash on opening map when active track/route files are missing
+- Korjaa: Kaatuminen tietyissä olosuhteissa käyttäen OpenStreetMapsia
 
-## 2022.03.09 Viankorjausversio
+##
+
+- Korjaa: Kaatuminen kartan avaamisessa kun aktiiviset reittitiedostot puuttuvat
+
+##
 
 - Korjaa: Pidä sijainti siirryttäessä Googlen kartasta OpenStreetMap karttaan
 - Korjaa: Harvinainen kaatuminen kätkön attribuuttien yleiskatsauksessa
@@ -14,6 +18,6 @@
 - Korjaa: Näytä parempi tiedostonimi c:geossa kun olet valinnut GPX-polkutiedoston
 - Korjaa: Muista "näytä/piilota" asetus reiteille / poluille
 
-## 2022.02.16 Viankorjausversio
+##
 
 - Korjaa: Harvinainen kaatuminen cgeon käynnistyessä

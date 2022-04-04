@@ -550,6 +550,7 @@
     <string name="cache_filter_status_exclude_active">Εξαίρεση Ενεργών</string>
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Συμπερίληψη κρυπτών χωρίς Δ/Ε</string>
     <string name="cache_filter_log_entry_foundby">Βρέθηκε από</string>
     <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής</string>
     <string name="cache_filter_stored_since_notstored">Μη αποθηκευμένες</string>
@@ -575,6 +576,7 @@
     <string name="about_changelog">Τι νέο υπάρχει;</string>
     <string name="about_changelog_nightly_build">Νυχτερινή έκδοση</string>
     <string name="about_changelog_next_release">Επόμενη έκδοση</string>
+    <string name="about_changelog_bugfix_release">Έκδοση Bugfix</string>
     <string name="about_system">Σύστημα</string>
     <string name="about_donate">Υποστηρίξτε μας</string>
     <string name="about_donation_more">Επισκεφθείτε την ιστοσελίδα για πληροφορίες</string>
@@ -1281,6 +1283,7 @@
     <string name="cache_image">Εικόνα</string>
     <string name="cache_image_open_file">Άνοιγμα ως αρχείο</string>
     <string name="cache_image_open_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
+    <string name="cache_image_show_description">Εμφάνιση περιγραφής</string>
     <string name="cache_image_add_waypoint">Προσθήκη Σημείου Αναφοράς</string>
     <string name="cache_image_background">Εικόνα φόντου κρύπτης</string>
     <string name="cache_share_field">Κοινή χρήση</string>
