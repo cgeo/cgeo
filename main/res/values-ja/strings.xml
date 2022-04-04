@@ -1953,6 +1953,7 @@ Google翻訳アプリで各言語の辞書をダウンロードしておけば�
     <string name="load_track_error">トラック/ルートの読み込みに失敗しました</string>
     <!-- route/track commons -->
     <string name="routes_tracks_dialog_title">ルート/トラック設定</string>
+    <string name="routes_tracks_menu">ルート/トラック</string>
     <string name="center_on_route_track">ルート/トラックの中心に移動</string>
     <string name="unload_route_track">ルート/トラックを削除</string>
     <string name="route">ルート</string>

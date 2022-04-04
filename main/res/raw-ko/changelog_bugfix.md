@@ -1,8 +1,8 @@
-## 2022.03.10 Bugfix Release
+##
 
 - Fix: Crash on opening map when active track/route files are missing
 
-## 2022.03.09 Bugfix Release
+##
 
 - 수정: Google 지도에서 OpenStreetMap 지도로 전환할 때 위치 유지
 - 수정: 캐시 목록 속성 개요의 드문 오류
@@ -14,6 +14,6 @@
 - Fix: Show better file name in c:geo after selecting a GPX track file
 - Fix: Remember "show/hide" setting for routes / tracks
 
-## 2022.02.16 버그픽스 출시
+##
 
 - 수정: cgeo가 시작될 때 드문 오류

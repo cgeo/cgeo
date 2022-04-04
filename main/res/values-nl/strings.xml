@@ -572,6 +572,7 @@
     <string name="about_changelog">Changelog</string>
     <string name="about_changelog_nightly_build">Nachtelijke build</string>
     <string name="about_changelog_next_release">Volgende release</string>
+    <string name="about_changelog_bugfix_release">Bugfix release</string>
     <string name="about_system">Systeem</string>
     <string name="about_donate">Steun ons</string>
     <string name="about_donation_more">Bezoek de website voor info</string>

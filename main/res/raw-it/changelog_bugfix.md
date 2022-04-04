@@ -1,8 +1,8 @@
-## 2022.03.10 Bugfix Release
+##
 
 - Fix: Crash on opening map when active track/route files are missing
 
-## 2022.03.09 Bugfix Release
+##
 
 - Correzione: Mantenimento della posizione passando dalla mappa di Google a quella di OpenStreetMap
 - Correzione: Crash raro nella panoramica dell'attributo dell'elenco della cache
@@ -14,6 +14,6 @@
 - Fix: Show better file name in c:geo after selecting a GPX track file
 - Fix: Remember "show/hide" setting for routes / tracks
 
-## 2022.02.16 Release di Correzione di Bug
+##
 
 - Corretto: raro crash all'avvio di c:geo
