@@ -68,6 +68,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.androidannotations.annotations.EActivity;
 import org.androidannotations.annotations.Extra;
 import org.androidannotations.annotations.InstanceState;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 
 @EActivity
@@ -333,11 +334,11 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
             }
         });
 
-        binding.type.setSelection(getDefaultWaypointType());
+        binding.type.setSelection(getDefaultWaypointTypePosition(wpAdapter));
         binding.type.setVisibility(View.VISIBLE);
     }
 
-    private int getDefaultWaypointType() {
+    private int getDefaultWaypointTypePosition(final ArrayAdapter<WaypointType> wpAdapter) {
         // potentially restore saved instance state
         if (waypointTypeSelectorPosition >= 0) {
             return waypointTypeSelectorPosition;
@@ -345,17 +346,17 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
 
         // when editing, use the existing type
         if (waypoint != null) {
-            return POSSIBLE_WAYPOINT_TYPES.indexOf(waypoint.getWaypointType());
+            return wpAdapter.getPosition(waypoint.getWaypointType());
         }
 
         // make default for new waypoint depend on cache type
         switch (cache.getType()) {
             case MYSTERY:
-                return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.FINAL);
+                return wpAdapter.getPosition(WaypointType.FINAL);
             case MULTI:
-                return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.STAGE);
+                return wpAdapter.getPosition(WaypointType.STAGE);
             default:
-                return POSSIBLE_WAYPOINT_TYPES.indexOf(WaypointType.WAYPOINT);
+                return wpAdapter.getPosition(WaypointType.WAYPOINT);
         }
     }
 
@@ -512,8 +513,8 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     }
 
     private WaypointType getSelectedWaypointType() {
-        final int selectedTypeIndex = binding.type.getSelectedItemPosition();
-        return selectedTypeIndex >= 0 ? POSSIBLE_WAYPOINT_TYPES.get(selectedTypeIndex) : waypoint.getWaypointType();
+        final WaypointType selectedType = (WaypointType) binding.type.getSelectedItem();
+        return selectedType != null ? selectedType : waypoint.getWaypointType();
     }
 
     private void finishConfirmDiscard() {
