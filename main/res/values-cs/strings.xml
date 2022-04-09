@@ -331,7 +331,7 @@
     <string name="menu_lists_bookmarklists">Seznamy záložek</string>
     <string name="menu_invert_order">Obrátit pořadí</string>
     <!-- main screen -->
-    <string name="home_button">Domů</string>
+    <string name="home_button">Hlavní</string>
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
