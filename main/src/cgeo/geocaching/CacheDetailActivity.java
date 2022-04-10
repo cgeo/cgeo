@@ -2840,7 +2840,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
      * @param newPreventWaypointsFromNote new preventWaypointsFromNote flag to set
      */
     private void setNewPersonalNote(final String newNote, final boolean newPreventWaypointsFromNote) {
-        cache.setPersonalNote(newNote);
+        // trim note to avoid unnecessary uploads for whitespace only changes
+        final String trimmedNote = StringUtils.trim(newNote);
+
+        cache.setPersonalNote(trimmedNote);
         cache.setPreventWaypointsFromNote(newPreventWaypointsFromNote);
         if (cache.addWaypointsFromNote()) {
             reinitializePage(Page.WAYPOINTS.id);
@@ -2856,7 +2859,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final TextView personalNoteView = findViewById(R.id.personalnote);
         final View separator = findViewById(R.id.personalnote_button_separator);
         if (personalNoteView != null) {
-            setPersonalNote(personalNoteView, separator, newNote);
+            setPersonalNote(personalNoteView, separator, trimmedNote);
         } else {
             reinitializePage(Page.DESCRIPTION.id);
         }

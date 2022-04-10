@@ -80,9 +80,7 @@ public class EditNoteDialog extends AbstractFullscreenDialog {
         toolbar.inflateMenu(R.menu.menu_ok_cancel);
         toolbar.setOnMenuItemClickListener(item -> {
             if (item.getItemId() == R.id.menu_item_save) {
-                // trim note to avoid unnecessary uploads for whitespace only changes
-                final String personalNote = StringUtils.trim(mEditText.getText().toString());
-                ((EditNoteDialogListener) requireActivity()).onFinishEditNoteDialog(personalNote, mPreventCheckbox.isChecked());
+                ((EditNoteDialogListener) requireActivity()).onFinishEditNoteDialog(mEditText.getText().toString(), mPreventCheckbox.isChecked());
             }
             dismiss();
             return true;
