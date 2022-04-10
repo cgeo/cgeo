@@ -44,8 +44,10 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
         }
 
         final SubMenu menuSmileys = menu.findItem(R.id.menu_smileys).getSubMenu();
+        final boolean isSmileyLoadOk = EmojiCompat.get().getLoadState() == EmojiCompat.LOAD_STATE_SUCCEEDED;
         for (final Smiley smiley : getSmileys()) {
-            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, EmojiCompat.get().process(smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning)));
+            final String menuText = smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning);
+            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, isSmileyLoadOk ? EmojiCompat.get().process(menuText) : menuText);
         }
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(false);
 

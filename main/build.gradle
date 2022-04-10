@@ -416,9 +416,7 @@ dependencies {
     androidTestImplementation "androidx.annotation:annotation:$annotationVersion"
 
     // emoji compat support
-    def emojiVersion = '1.1.0'
-    implementation "androidx.emoji:emoji:$emojiVersion"
-    implementation "androidx.emoji:emoji-bundled:$emojiVersion"
+    implementation 'androidx.emoji:emoji:1.1.0'
 
     // Testing Support Libraries
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
