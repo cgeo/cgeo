@@ -19,8 +19,9 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.Location;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -30,7 +31,6 @@ import java.util.Objects;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
@@ -217,14 +217,6 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         drawRouteAndTracks();
     }
 
-
-    private static Bitmap getLocationIcon() {
-        if (locationIcon == null) {
-            locationIcon = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
-        }
-        return locationIcon;
-    }
-
     private PolylineOptions getDirectionPolyline(final Geopoint from, final Geopoint to) {
         final PolylineOptions options = new PolylineOptions()
                 .width(MapLineUtils.getDirectionLineWidth())
@@ -273,7 +265,7 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         );
 
         positionObjs.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromBitmap(getLocationIcon()))
+                .icon(BitmapDescriptorCache.toBitmapDescriptor(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null)))
                 .position(latLng)
                 .rotation(heading)
                 .anchor(0.5f, 0.5f)
