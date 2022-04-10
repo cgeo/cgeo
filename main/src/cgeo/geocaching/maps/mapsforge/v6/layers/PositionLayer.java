@@ -2,13 +2,15 @@ package cgeo.geocaching.maps.mapsforge.v6.layers;
 
 import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.MapLineUtils;
 
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
+
+import androidx.core.content.res.ResourcesCompat;
 
 import org.mapsforge.core.graphics.Bitmap;
 import org.mapsforge.core.graphics.Canvas;
@@ -71,7 +73,7 @@ public class PositionLayer extends Layer {
         final int centerY = (int) (pixelY - topLeftPoint.y);
 
         if (arrow == null) {
-            arrowNative = BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron);
+            arrowNative = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.my_location_chevron, null));
             rotateArrow();
         }
 
