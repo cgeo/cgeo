@@ -2186,7 +2186,9 @@ public class Geocache implements IWaypoint {
     }
 
     public boolean applyDistanceRule() {
-        return (getType().applyDistanceRule() || hasUserModifiedCoords()) && (getConnector() == GCConnector.getInstance() || getConnector() == InternalConnector.getInstance());
+        return !isArchived()
+            && (getType().applyDistanceRule() || hasUserModifiedCoords())
+            && (getConnector() == GCConnector.getInstance() || getConnector() == InternalConnector.getInstance());
     }
 
     @NonNull
