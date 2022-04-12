@@ -414,33 +414,6 @@
                 android:textColor="@color/colorText"
                 tools:text="some license text"/>
         </LinearLayout>
-
-        <!-- Map Preview Box -->
-
-        <LinearLayout
-            android:id="@+id/map_preview_box"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:visibility="gone"
-            tools:visibility="visible">
-
-            <View
-                style="@style/separator_horizontal"
-                android:layout_marginBottom="9dp"
-                android:layout_marginTop="9dp" />
-
-            <ImageView
-                android:id="@+id/map_preview"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:onClick="showNavigationMenu"
-                android:scaleType="fitCenter"
-                android:src="@null"
-                tools:src="@drawable/ic_menu_mapmode"/>
-        </LinearLayout>
     </LinearLayout>
 
 </androidx.core.widget.NestedScrollView>
