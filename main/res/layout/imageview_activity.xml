@@ -11,13 +11,12 @@
 
     <com.github.chrisbanes.photoview.PhotoView
         android:id="@+id/image_full"
-        android:scaleType="centerCrop"
+        android:scaleType="centerInside"
         android:adjustViewBounds="true"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="5dip"
         android:layout_marginTop="5dip"
-        android:background="#000000"
         android:padding="1dp"
         android:visibility="gone"
         tools:visibility="visible"

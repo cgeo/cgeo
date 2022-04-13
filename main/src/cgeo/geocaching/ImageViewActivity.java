@@ -12,12 +12,15 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.GestureDetector;
 import android.view.MotionEvent;
 import android.view.ScaleGestureDetector;
 import android.view.View;
 
 import androidx.annotation.NonNull;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -116,8 +119,10 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         final Image currentImage = imageList.get(imagePos);
         final String headline = (imagePos + 1) + " / " + imageList.size() + "     " + currentImage.category.getI18n();
         binding.imageviewHeadline.setText(headline);
-        binding.imageviewTitle.setText("Title: " + currentImage.title);
-        binding.imageviewDescription.setText("Desc: " + currentImage.getDescription());
+        binding.imageviewTitle.setText("Title: " + Html.fromHtml(currentImage.title));
+        binding.imageviewTitle.setVisibility(StringUtils.isEmpty(currentImage.title) ? View.GONE : View.VISIBLE);
+        binding.imageviewDescription.setText("Desc: " + Html.fromHtml(currentImage.getDescription()));
+        binding.imageviewDescription.setVisibility(StringUtils.isEmpty(currentImage.getDescription()) ? View.GONE : View.VISIBLE);
         binding.imageviewGeocode.setText("");
         binding.imageviewComment.setText("");
 
@@ -125,7 +130,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             binding.imageFull.setImageDrawable(p.first);
             binding.imageFull.setVisibility(View.VISIBLE);
             binding.imageviewComment.setText("Comment: " + MetadataUtils.getComment(p.second));
+            binding.imageviewComment.setVisibility(StringUtils.isEmpty(MetadataUtils.getComment(p.second)) ? View.GONE : View.VISIBLE);
             binding.imageviewGeocode.setText("Geopoint: " + MetadataUtils.getFirstGeopoint(p.second));
+            binding.imageviewGeocode.setVisibility(MetadataUtils.getFirstGeopoint(p.second) == null ? View.GONE : View.VISIBLE);
         }, () -> binding.imageFull.setVisibility(View.GONE));
     }
 
