@@ -2574,10 +2574,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
             if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
                 pages.add(Page.IMAGES.id);
-                if (!BranchDetectionHelper.isProductionBuild()) {
-                    pages.add(Page.IMAGEGALLERY.id);
-                }
             }
+        }
+        if (!BranchDetectionHelper.isProductionBuild()) {
+            pages.add(Page.IMAGEGALLERY.id);
         }
         final long[] result = new long[pages.size()];
         for (int i = 0; i < pages.size(); i++) {
