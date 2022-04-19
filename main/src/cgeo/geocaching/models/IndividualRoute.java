@@ -5,6 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.Log;
 
 import android.content.Context;
 import android.os.Parcel;
@@ -43,6 +44,7 @@ public class IndividualRoute extends Route implements Parcelable {
 
     public void toggleItem(final Context context, final RouteItem item, final UpdateIndividualRoute routeUpdater) {
         if (loadingRoute) {
+            Log.d("[RouteTrackDebug] Individual route: Cannot toggle item, route still loading");
             return;
         }
 
@@ -52,6 +54,9 @@ public class IndividualRoute extends Route implements Parcelable {
         }
 
         final ToggleItemState result = toggleItemInternal(item);
+        if (result == ToggleItemState.REMOVED) {
+            Log.d("[RouteTrackDebug] Individual route: Removed first element from route (" + item.getIdentifier() + ")");
+        }
         Toast.makeText(context, result == ToggleItemState.ADDED ? R.string.individual_route_added : result == ToggleItemState.REMOVED ? R.string.individual_route_removed : R.string.individual_route_error_toggling_waypoint, Toast.LENGTH_SHORT).show();
         updateRoute(routeUpdater);
         saveRoute();
@@ -78,15 +83,19 @@ public class IndividualRoute extends Route implements Parcelable {
 
     public void triggerTargetUpdate(final boolean resetTarget) {
         if (setTarget == null) {
+            Log.d("[RouteTrackDebug] Individual route: Cannot set target, setTarget is null");
             return;
         }
         if (resetTarget) {
+            Log.d("[RouteTrackDebug] Individual route: Reset target to null");
             setTarget.setTarget(null, "");
         } else if (Settings.isAutotargetIndividualRoute()) {
             if (getNumSegments() == 0) {
+                Log.d("[RouteTrackDebug] Individual route: Reset target to null");
                 setTarget.setTarget(null, "");
             } else {
                 final RouteItem firstItem = segments.get(0).getItem();
+                Log.d("[RouteTrackDebug] Individual route: Reset target to " + firstItem.getIdentifier());
                 setTarget.setTarget(firstItem.getPoint(), firstItem.getGeocode());
             }
         }
@@ -94,10 +103,13 @@ public class IndividualRoute extends Route implements Parcelable {
 
     private synchronized void loadRouteInternal() {
         loadingRoute = true;
+        Log.d("[RouteTrackDebug] Individual route: Start loading from database");
         final ArrayList<RouteItem> routeItems = DataStore.loadIndividualRoute();
         for (int i = 0; i < routeItems.size(); i++) {
+            Log.d("[RouteTrackDebug] Individual route: Add item #" + i + " (" + routeItems.get(i).getIdentifier() + ")");
             toggleItemInternal(routeItems.get(i));
         }
+        Log.d("[RouteTrackDebug] Individual route: Finished loading from database");
         loadingRoute = false;
     }
 
