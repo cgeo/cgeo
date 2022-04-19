@@ -16,6 +16,7 @@ import cgeo.geocaching.storage.extension.Trackfiles;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func0;
 
@@ -58,6 +59,7 @@ public class RouteTrackUtils {
     private final Func0<Boolean> isTargetSet;
 
     public RouteTrackUtils(final Activity activity, final Bundle savedState, final Route.CenterOnPosition centerOnPosition, final Runnable clearIndividualRoute, final Runnable reloadIndividualRoute, final Tracks.UpdateTrack updateTrack, final Func0<Boolean> isTargetSet) {
+        Log.d("[RouteTrackDebug] RouteTrackUtils initialized");
         this.activity = activity;
         this.centerOnPosition = centerOnPosition;
         this.clearIndividualRoute = clearIndividualRoute;
@@ -73,6 +75,7 @@ public class RouteTrackUtils {
 
     private void importIndividualRoute(final Uri uri) {
         if (uri != null) {
+            Log.d("[RouteTrackDebug] Start import of individual route");
             GPXIndividualRouteImporter.doImport(activity, uri);
             reloadIndividualRoute.run();
         }
@@ -81,7 +84,9 @@ public class RouteTrackUtils {
     private void importTracks(final List<Uri> uris) {
         if (uris != null && this.updateTrack != null) {
             for (Uri uri : uris) {
+                Log.d("[RouteTrackDebug] Start import of track " + uri);
                 GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
+                    Log.d("[RouteTrackDebug] Finished import of track " + uri + ": " + (route == null ? "null returned" : "updating map"));
                     final String key = tracks.add(activity, uri, updateTrack);
                     tracks.setRoute(key, route);
                     updateTrack.updateRoute(key, route);
@@ -234,11 +239,15 @@ public class RouteTrackUtils {
 
     public void reloadTrack(final Trackfiles trackfile, final Tracks.UpdateTrack updateTrack) {
         final Uri uri = Trackfiles.getUriFromKey(trackfile.getKey());
+        Log.d("[RouteTrackDebug] Start reloading track from trackfile " + trackfile.getFilename());
         GPXTrackOrRouteImporter.doImport(activity, uri, (route) -> {
             if (route != null) {
+                Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " finished, updating map");
                 route.setHidden(trackfile.isHidden());
                 updateDialogTracks(popup, tracks);
                 updateTrack.updateRoute(trackfile.getKey(), route);
+            } else {
+                Log.d("[RouteTrackDebug] Reloading track from trackfile " + trackfile.getFilename() + " returned null");
             }
         });
     }
