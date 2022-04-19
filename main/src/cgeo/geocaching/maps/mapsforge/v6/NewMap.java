@@ -383,7 +383,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     @Override
     public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if (mapOptions != null && (mapOptions.isLiveEnabled || mapOptions.isStoredEnabled)) {
+        if (mapOptions != null) {
             ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
         }
 

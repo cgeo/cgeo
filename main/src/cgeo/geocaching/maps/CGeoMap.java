@@ -757,7 +757,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     @Override
     public boolean onPrepareOptionsMenu(@NonNull final Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        if (mapOptions != null && (mapOptions.isLiveEnabled || mapOptions.isStoredEnabled)) {
+        if (mapOptions != null) {
             ViewUtils.extendMenuActionBarDisplayItemCount(getActivity(), menu);
         }
         for (final MapSource mapSource : MapProviderFactory.getMapSources()) {
