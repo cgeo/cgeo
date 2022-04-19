@@ -35,6 +35,7 @@
     <string name="gps">GPS Adventures Exhibit</string>
     <string name="block">Geocaching HQ Block Party</string>
     <string name="locationless">Posisjonsløs cache (omvendt)</string>
+    <string name="advlab">Adventure Lab Cache</string>
     <string name="userdefined">Brukerdefinert cache</string>
     <string name="unknown">Ukjent Type</string>
     <string name="all_types_short">Alle</string>
