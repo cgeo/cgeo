@@ -11,4 +11,4 @@
 - Novo: Modelos de registo para registos offline
 - Novo: Adicionados botões de lançamento rápido configuráveis ao ecrã inicial, ver Definições => Aparência
 - Alteração: Definições => Mapa => Toque longo no mapa irá agora também activar/desactivar um toque longo no mapa da cache (relevante para a criação de novos pontos adicionais para a cache actual)
-- Change: Don't show distance-circle for archived caches
+- Alteração: Não mostrar círculos de distância para caches arquivadas
