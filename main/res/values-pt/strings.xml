@@ -2266,6 +2266,8 @@ do mapa e dos temas?</string>
     <string name="rtl_archaeological">arqueológico</string>
     <string name="rtl_artwork">obra de arte</string>
     <string name="rtl_attraction">atracção</string>
+    <string name="rtl_boundary_stone">fronteira (marco de pedra)</string>
+    <string name="rtl_bunker_disused">bunker (sem utilização)</string>
     <string name="rtl_castle">castelo</string>
     <string name="rtl_cinema">cinema</string>
     <string name="rtl_cross">cruz</string>
@@ -2281,6 +2283,9 @@ do mapa e dos temas?</string>
     <string name="rtl_ruins">ruínas</string>
     <string name="rtl_stone_historic">pedra histórica</string>
     <string name="rtl_theatre">teatro</string>
+    <string name="rtl_water_well">poço de água</string>
+    <string name="rtl_wayside_cross">cruzeiro</string>
+    <string name="rtl_wayside_shrine">ermida</string>
     <string name="rtl_zoo">jardim zoológico</string>
     <string name="rtl_library">biblioteca</string>
     <string name="rtl_arts_centre">centro de artes</string>
