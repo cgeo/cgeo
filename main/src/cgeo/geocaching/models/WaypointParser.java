@@ -427,7 +427,10 @@ public class WaypointParser {
      * @return new text, or null if waypoints could not be placed due to size restrictions
      */
     public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final VariableList vars, final int maxSize) {
-        final String cleanText = removeParseableWaypointsFromText(text) + "\n\n";
+        String cleanText = removeParseableWaypointsFromText(text);
+        if (!cleanText.isEmpty()) {
+            cleanText = cleanText + "\n\n";
+        }
         if (maxSize > -1 && cleanText.length() > maxSize) {
             return null;
         }

@@ -569,6 +569,26 @@ public class WaypointParserTest {
     }
 
     @Test
+    public void putParseableWaypointsInText() {
+        final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
+        final String gpStr = toParseableWpString(gp);
+        final Geopoint gp2 = new Geopoint("N 45°49.745 E 9°45.038");
+        final String gp2Str = toParseableWpString(gp2);
+
+        final String waypoints = "@wp1 (X) " + gpStr + " \"note\"\n@wp2 (F) " + gp2Str + " \"note2\"";
+        final WaypointParser waypointParser = createParser("Prefix");
+        final Collection<Waypoint> wps = waypointParser.parseWaypoints(waypoints);
+
+        final String note = "";
+        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, null, -1);
+        assertThat(noteAfter).isEqualTo("{c:geo-start}\n" + waypoints + "\n{c:geo-end}");
+
+        //check that continuous appliance of same waypoints will result in identical text
+        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, null, -1);
+        assertThat(noteAfter2).isEqualTo(noteAfter);
+    }
+
+    @Test
     public void testGetAndReplaceExistingStoredWaypoints() {
         final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
         final String gpStr = toParseableWpString(gp);
