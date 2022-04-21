@@ -865,7 +865,7 @@
     <string name="init_dataDir_note">Pode optar por armazenar os dados adicionais de geocaches (spoilers, imagens de registos, etc…) no seu armazenamento externo (cartão SD emulado ou real, dependendo do seu dispositivo).</string>
     <string name="init_maptrail">Mostrar histórico de percurso</string>
     <string name="init_maptrail_length">Comprimento máx. do histórico de percurso</string>
-    <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos - ajuste de acordo com a memória disponível.</string>
+    <string name="init_maptrail_length_summary">Definir o comprimento máximo do histórico de percurso (aplicado em cada arranque do c:geo). O valor padrão é 700 pontos — ajustar conforme a memória disponível.</string>
     <string name="init_summary_maptrail">Quando activado (e o GPS estiver ligado) o c:geo guarda o histórico dos seus movimentos gerando um percurso e mostra-o no mapa.</string>
     <string name="init_trailcolor">Cor da linha do histórico de percurso</string>
     <string name="init_trailcolor_summary">Seleccionar a cor e opacidade para a linha do histórico de percurso</string>
@@ -2180,7 +2180,7 @@
     <string name="brouter_info">Serviço de encaminhamento offline</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
     <!-- history track -->
-    <string name="map_clear_trailhistory">Limpar o histórico de percurso</string>
+    <string name="map_clear_trailhistory">Limpar histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
     <string name="map_trail_show">Mostrar histórico de percurso</string>
     <string name="map_trail_hide">Ocultar histórico de percurso</string>
@@ -2347,6 +2347,8 @@
     <string name="rtl_archaeological">arqueológico</string>
     <string name="rtl_artwork">obra de arte</string>
     <string name="rtl_attraction">atracção</string>
+    <string name="rtl_boundary_stone">fronteira (marco de pedra)</string>
+    <string name="rtl_bunker_disused">bunker (sem utilização)</string>
     <string name="rtl_castle">castelo</string>
     <string name="rtl_cinema">cinema</string>
     <string name="rtl_cross">cruz</string>
@@ -2362,6 +2364,9 @@
     <string name="rtl_ruins">ruínas</string>
     <string name="rtl_stone_historic">pedra histórica</string>
     <string name="rtl_theatre">teatro</string>
+    <string name="rtl_water_well">poço de água</string>
+    <string name="rtl_wayside_cross">cruzeiro</string>
+    <string name="rtl_wayside_shrine">ermida</string>
     <string name="rtl_zoo">jardim zoológico</string>
     <string name="rtl_library">biblioteca</string>
     <string name="rtl_arts_centre">centro de artes</string>
