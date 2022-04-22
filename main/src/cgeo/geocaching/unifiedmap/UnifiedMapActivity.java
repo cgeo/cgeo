@@ -18,6 +18,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmView;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
@@ -157,8 +158,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        changeMapSource(Settings.getTileProvider());
-
+        changeMapSource(Settings.getTileProvider(), false);
         routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
         tracks = new Tracks(routeTrackUtils, this::setTrack);
 
@@ -192,7 +192,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     }
 
-    private void changeMapSource(final AbstractTileProvider newSource) {
+    private void changeMapSource(final AbstractTileProvider newSource, final boolean resumeTracksAndRoutes) {
         final AbstractUnifiedMap oldMap = map;
         if (oldMap != null) {
             oldMap.prepareForTileSourceChange();
@@ -212,6 +212,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             map.setZoom(map.getZoomMin());
         } else if (currentZoom > map.getZoomMax()) {
             map.setZoom(map.getZoomMax());
+        }
+
+        // refresh routes/tracks for VTM (for GoogleMapsView this will be done implicitly by onMapReady)
+        if (resumeTracksAndRoutes && map instanceof MapsforgeVtmView) {
+            onResume();
         }
     }
 
@@ -394,7 +399,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             final AbstractTileProvider tileProvider = TileProviderFactory.getTileProvider(id);
             if (tileProvider != null) {
                 item.setChecked(true);
-                changeMapSource(tileProvider);
+                changeMapSource(tileProvider, true);
                 return true;
             }
             return super.onOptionsItemSelected(item);
