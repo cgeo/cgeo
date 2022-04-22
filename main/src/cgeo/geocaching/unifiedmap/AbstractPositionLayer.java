@@ -160,7 +160,7 @@ public abstract class AbstractPositionLayer<T> {
         repaintRouteAndTracks();
     }
 
-    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection, final AbstractUnifiedMap map) {
+    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection, final AbstractUnifiedMap<T> map) {
         final boolean coordChanged = !Objects.equals(location, currentLocation);
         final boolean headingChanged = heading != currentHeading;
         currentLocation = location;
@@ -174,11 +174,13 @@ public abstract class AbstractPositionLayer<T> {
             history.rememberTrailPosition(location);
             repaintHistory();
 
-            final Location l = new Location("UnifiedMap");
-            l.setLatitude(destination.getLatitude());
-            l.setLongitude(destination.getLongitude());
-            directDistance = currentLocation.distanceTo(l) / 1000f;
-            repaintDestinationHelper(drawDirection);
+            if (destination != null) {
+                final Location l = new Location("UnifiedMap");
+                l.setLatitude(destination.getLatitude());
+                l.setLongitude(destination.getLongitude());
+                directDistance = currentLocation.distanceTo(l) / 1000f;
+                repaintDestinationHelper(drawDirection);
+            }
 
             if (mapRotation == MAPROTATION_AUTO) {
                 if (null != lastBearingCoordinates) {
@@ -197,14 +199,13 @@ public abstract class AbstractPositionLayer<T> {
                     lastBearingCoordinates = currentLocation;
                 }
             }
-
         }
     }
 
     protected void repaintPosition() {
         mapDistanceDrawer.drawDistance(showBothDistances, directDistance, routedDistance);
         mapDistanceDrawer.drawRouteDistance(individualRouteDistance);
-    };
+    }
 
     protected abstract void repaintHistory();
     protected abstract void repaintRouteAndTracks();
@@ -254,7 +255,7 @@ public abstract class AbstractPositionLayer<T> {
     }
 
     private void repaintDestinationHelper(final @Nullable Action1<List<T>> drawSegment) {
-        if (destination != null) {
+        if (currentLocation != null && destination != null) {
             final Geopoint[] routingPoints = Routing.getTrack(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()), new Geopoint(destination.getLatitude(), destination.getLongitude()));
             final ArrayList<T> points = new ArrayList<>();
             points.add(createNewPoint.call(routingPoints[0].getLatitude(), routingPoints[0].getLongitude()));
