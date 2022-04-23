@@ -29,12 +29,11 @@
             android:visibility="gone"
             android:maxLines="1" />
 
-        <fragment
+        <androidx.fragment.app.FragmentContainerView
             android:id="@+id/mapViewGM"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".unifiedmap.UnifiedMapActivity"
-            android:name="com.google.android.gms.maps.SupportMapFragment" />
+            tools:context=".unifiedmap.UnifiedMapActivity" />
 
         <include layout="@layout/map_distanceinfo" />
         <include layout="@layout/map_settings_button" />

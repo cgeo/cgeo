@@ -51,8 +51,8 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
     protected Map.UpdateListener mapUpdateListener;
 
     @Override
-    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo) {
-        super.init(activity, delayedZoomTo, delayedCenterTo);
+    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+        super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
         activity.setContentView(R.layout.unifiedmap_mapsforgevtm);
         rootView = activity.findViewById(R.id.unifiedmap_vtm);
         mMapView = activity.findViewById(R.id.mapViewVTM);
@@ -60,6 +60,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         setMapRotation(mapRotation);
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
+        onMapReadyTasks.run();
     }
 
     @Override
@@ -151,9 +152,6 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         renderer.setPosition(GLViewport.Position.BOTTOM_LEFT);
         renderer.setOffset(5 * CanvasAdapter.getScale(), 0);
         addLayer(mapScaleBarLayer);
-
-        setDelayedZoomTo();
-        setDelayedCenterTo();
     }
 
     @Override

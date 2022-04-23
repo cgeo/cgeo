@@ -37,12 +37,19 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
     private final GoogleMapController mapController = new GoogleMapController();
 
     @Override
-    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo) {
-        super.init(activity, delayedZoomTo, delayedCenterTo);
+    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
+        super.init(activity, delayedZoomTo, delayedCenterTo, onMapReadyTasks);
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
-        final SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.mapViewGM);
-        assert mapFragment != null;
+
+        // add map fragment
+        final SupportMapFragment mapFragment = SupportMapFragment.newInstance();
+        activity.getSupportFragmentManager()
+            .beginTransaction()
+            .add(R.id.mapViewGM, mapFragment)
+            .commit();
+
+        // start map
         mapFragment.getMapAsync(this);
     }
 
@@ -82,9 +89,7 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         configMapChangeListener(true);
         setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
-
-        setDelayedZoomTo();
-        setDelayedCenterTo();
+        onMapReadyTasks.run();
     }
 
     @Override
