@@ -69,6 +69,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // minimum time in milliseconds between position overlay updates
         private static final long MIN_UPDATE_INTERVAL = 500;
+        private long timeLastPositionOverlayCalculation = 0;
         // minimum change of heading in grad for position overlay update
         private static final float MIN_HEADING_DELTA = 15f;
         // minimum change of location in fraction of map width/height (whatever is smaller) for position overlay update
@@ -78,8 +79,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         Location currentLocation = Sensors.getInstance().currentGeo();
         float currentHeading;
 
-        private long timeLastPositionOverlayCalculation = 0;
-        private long timeLastDistanceCheck = 0;
         /**
          * weak reference to the outer class
          */
@@ -265,6 +264,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // ========================================================================
     // Routes, tracks and targets handling
 
+    @SuppressWarnings("unused") // @todo
     private void setTarget(final Geopoint geopoint, final String s) {
         if (map.positionLayer != null) {
             map.positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
@@ -274,6 +274,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     // glue method for old map
     // can be removed when removing CGeoMap and NewMap, routeTrackUtils need to be adapted then
+    @SuppressWarnings("unused")
     private void centerMap(final double latitude, final double longitude, final Viewport viewport) {
         centerMap(new Geopoint(latitude, longitude));
     }
