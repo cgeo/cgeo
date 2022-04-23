@@ -37,8 +37,8 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
     private final GoogleMapController mapController = new GoogleMapController();
 
     @Override
-    public void init(final AppCompatActivity activity) {
-        super.init(activity);
+    public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo) {
+        super.init(activity, delayedZoomTo, delayedCenterTo);
         activity.setContentView(R.layout.unifiedmap_googlemaps);
         rootView = activity.findViewById(R.id.unifiedmap_gm);
         final SupportMapFragment mapFragment = (SupportMapFragment) activity.getSupportFragmentManager().findFragmentById(R.id.mapViewGM);
@@ -82,6 +82,9 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         configMapChangeListener(true);
         setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
+
+        setDelayedZoomTo();
+        setDelayedCenterTo();
     }
 
     @Override
@@ -160,14 +163,23 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         }
     };
 
+    /** returns -1 if error while retrieving zoom level */
     @Override
     public int getCurrentZoom() {
-        return 0; // @todo: return actual current zoom level
+        try {
+            return (int) mMap.getCameraPosition().zoom;
+        } catch (Exception ignore) {
+            return -1;
+        }
     }
 
     @Override
     public void setZoom(final int zoomLevel) {
-        // @todo: actually set zoom level
+        if (mMap != null) {
+            mMap.moveCamera(CameraUpdateFactory.zoomTo(zoomLevel));
+        } else {
+            delayedZoomTo = zoomLevel;
+        }
     }
 
     @Override
