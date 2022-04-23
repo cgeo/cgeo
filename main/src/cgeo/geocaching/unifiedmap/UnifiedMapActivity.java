@@ -218,7 +218,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
         }
 
-        // refresh routes/tracks
+        // refresh options menu and routes/tracks display
+        invalidateOptionsMenu();
         onResume();
     }
 
