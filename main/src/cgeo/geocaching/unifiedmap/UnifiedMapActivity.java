@@ -19,7 +19,6 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
-import cgeo.geocaching.unifiedmap.mapsforgevtm.MapsforgeVtmView;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
@@ -158,9 +157,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        changeMapSource(Settings.getTileProvider(), false);
-        routeTrackUtils = new RouteTrackUtils(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS), this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
-        tracks = new Tracks(routeTrackUtils, this::setTrack);
+        changeMapSource(Settings.getTileProvider());
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
@@ -178,13 +175,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
         }
 
-        // map settings popup
-//        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
-
-        // routes / tracks popup
-        findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
-
-
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
 
@@ -192,7 +182,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     }
 
-    private void changeMapSource(final AbstractTileProvider newSource, final boolean resumeTracksAndRoutes) {
+    private void changeMapSource(final AbstractTileProvider newSource) {
         final AbstractUnifiedMap oldMap = map;
         if (oldMap != null) {
             oldMap.prepareForTileSourceChange();
@@ -200,20 +190,36 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         map = newSource.getMap();
         if (map != oldMap) {
             if (oldMap != null) {
-                map.init(this, oldMap.getCurrentZoom(), oldMap.getCenter());
+                map.init(this, oldMap.getCurrentZoom(), oldMap.getCenter(), () -> onMapReadyTasks(newSource, true));
             } else {
-                map.init(this, Settings.getMapZoom(MapMode.LIVE), null);   // @todo: use actual mapmode
+                map.init(this, Settings.getMapZoom(MapMode.LIVE), null, () -> onMapReadyTasks(newSource, true));   // @todo: use actual mapmode
             }
             configMapChangeListener(true);
+        } else {
+            onMapReadyTasks(newSource, false);
         }
+    }
+
+    private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged) {
         TileProviderFactory.resetLanguages();
         map.setTileSource(newSource);
         Settings.setTileProvider(newSource);
+        map.setDelayedZoomTo();
+        map.setDelayedCenterTo();
 
-        // refresh routes/tracks for VTM (for GoogleMapsView this will be done implicitly by onMapReady)
-        if (resumeTracksAndRoutes && map instanceof MapsforgeVtmView) {
-            onResume();
+        if (mapChanged) {
+            routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
+            tracks = new Tracks(routeTrackUtils, this::setTrack);
+
+            // map settings popup
+//        findViewById(R.id.map_settings_popup).setOnClickListener(v -> MapSettingsUtils.showSettingsPopup(this, individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+
+            // routes / tracks popup
+            findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
         }
+
+        // refresh routes/tracks
+        onResume();
     }
 
     private void configMapChangeListener(final boolean enabled) {
@@ -397,7 +403,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             final AbstractTileProvider tileProvider = TileProviderFactory.getTileProvider(id);
             if (tileProvider != null) {
                 item.setChecked(true);
-                changeMapSource(tileProvider, true);
+                changeMapSource(tileProvider);
                 return true;
             }
             return super.onOptionsItemSelected(item);
@@ -479,7 +485,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (null == individualRoute || force) {
             individualRoute = new IndividualRoute(this::setTarget);
             reloadIndividualRoute();
-        } else {
+        } else if (map.positionLayer != null) {
             individualRoute.updateRoute((route) -> map.positionLayer.updateIndividualRoute(route));
         }
     }
