@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
+import cgeo.geocaching.maps.MapMode;
 import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
@@ -199,20 +200,16 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         map = newSource.getMap();
         if (map != oldMap) {
-            map.init(this);
+            if (oldMap != null) {
+                map.init(this, oldMap.getCurrentZoom(), oldMap.getCenter());
+            } else {
+                map.init(this, Settings.getMapZoom(MapMode.LIVE), null);   // @todo: use actual mapmode
+            }
             configMapChangeListener(true);
         }
         TileProviderFactory.resetLanguages();
         map.setTileSource(newSource);
         Settings.setTileProvider(newSource);
-
-        // adjust zoom to be in allowed zoom range for current map
-        final int currentZoom = map.getCurrentZoom();
-        if (currentZoom < map.getZoomMin()) {
-            map.setZoom(map.getZoomMin());
-        } else if (currentZoom > map.getZoomMax()) {
-            map.setZoom(map.getZoomMax());
-        }
 
         // refresh routes/tracks for VTM (for GoogleMapsView this will be done implicitly by onMapReady)
         if (resumeTracksAndRoutes && map instanceof MapsforgeVtmView) {

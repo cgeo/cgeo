@@ -16,9 +16,13 @@ public abstract class AbstractUnifiedMap<T> {
     protected AbstractPositionLayer<T> positionLayer;
     protected Action1<UnifiedMapPosition> activityMapChangeListener = null;
     protected int mapRotation = Settings.MAPROTATION_OFF;
+    protected int delayedZoomTo = -1;
+    protected Geopoint delayedCenterTo = null;
 
-    public void init(final AppCompatActivity activity) {
+    public void init(final AppCompatActivity activity, final int delayedZoomTo, @Nullable final Geopoint delayedCenterTo) {
         mapRotation = Settings.getMapRotation();
+        this.delayedZoomTo = delayedZoomTo;
+        this.delayedCenterTo = delayedCenterTo;
     };
 
     public void prepareForTileSourceChange() {
@@ -57,6 +61,13 @@ public abstract class AbstractUnifiedMap<T> {
     public abstract BoundingBox getBoundingBox();
     protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
 
+    protected void setDelayedCenterTo() {
+        if (delayedCenterTo != null) {
+            setCenter(delayedCenterTo);
+            delayedCenterTo = null;
+        }
+    }
+
     // ========================================================================
     // zoom & heading methods
 
@@ -76,6 +87,14 @@ public abstract class AbstractUnifiedMap<T> {
 
     public float getHeading() {
         return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
+    }
+
+    /** adjust zoom to be in allowed zoom range for current map */
+    protected void setDelayedZoomTo() {
+        if (delayedZoomTo != -1) {
+            setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));
+            delayedZoomTo = -1;
+        }
     }
 
     // ========================================================================
