@@ -300,13 +300,20 @@ final class ALApi {
 
                 String note = "<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc + "<p><p>" + wptResponse.get("Question").asText();
 
-                if (wptResponse.get(MULTICHOICEOPTIONS).asText() != null) {
-                    final ArrayNode multiChoiceOptions = (ArrayNode) wptResponse.path(MULTICHOICEOPTIONS);
-                    for (final JsonNode mc: multiChoiceOptions) {
-                        note += "<ul>";
-                        note += "<li>" + mc.get("Text").asText() + "</li>";
-                        note += "</ul>";
+                try {
+                    final JsonNode jn = wptResponse.path(MULTICHOICEOPTIONS);
+                    if (jn instanceof ArrayNode) { // implicitly covers null case as well
+                        final ArrayNode multiChoiceOptions = (ArrayNode) jn;
+                        if (!multiChoiceOptions.isEmpty()) {
+                            note += "<ul>";
+                            for (final JsonNode mc : multiChoiceOptions) {
+                                note += "<li>" + mc.get("Text").asText() + "</li>";
+                            }
+                            note += "</ul>";
+                        }
                     }
+                } catch (Exception ignore) {
+                    // ignore exception
                 }
                 wpt.setNote(note);
 
