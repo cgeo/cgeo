@@ -55,6 +55,7 @@ final class ALApi {
     private static final String LONGITUDE = "Longitude";
     private static final String LATITUDE  = "Latitude";
     private static final String TITLE     = "Title";
+    private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
 
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
 
@@ -297,7 +298,17 @@ final class ALApi {
                 wpt.setGeocode(String.valueOf(stageCounter));
                 wpt.setPrefix(String.valueOf(stageCounter));
 
-                wpt.setNote("<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc + "<p><p>" + wptResponse.get("Question").asText());
+                String note = "<img style=\"width: 100%;\" src=\"" + ilink + "\"</img><p><p>" + desc + "<p><p>" + wptResponse.get("Question").asText();
+
+                if (wptResponse.get(MULTICHOICEOPTIONS).asText() != null) {
+                    final ArrayNode multiChoiceOptions = (ArrayNode) wptResponse.path(MULTICHOICEOPTIONS);
+                    for (final JsonNode mc: multiChoiceOptions) {
+                        note += "<ul>";
+                        note += "<li>" + mc.get("Text").asText() + "</li>";
+                        note += "</ul>";
+                    }
+                }
+                wpt.setNote(note);
 
                 final Geopoint pt = new Geopoint(location.get(LATITUDE).asDouble(), location.get(LONGITUDE).asDouble());
                 if (!pt.equals(pointZero)) {
