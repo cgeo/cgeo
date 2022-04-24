@@ -1,17 +1,17 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    android:width="35dp"
-    android:height="35dp"
+    android:width="38dp"
+    android:height="38dp"
     android:viewportWidth="42"
     android:viewportHeight="42">
   <path
-      android:pathData="m21,10.103 l-9.2153,22.526 0.8724,0.8744 8.3429,-3.6947 8.3429,3.6947 0.8724,-0.8744z"
-      android:strokeWidth="6"
+      android:pathData="m21,10.103s0,0 -9.2153,22.526c-0.1559,0.3811 0.4959,1.0411 0.8724,0.8744 8.3429,-3.6947 8.3429,-3.6947 8.3429,-3.6947l8.3429,3.6947c0.3765,0.1667 1.0283,-0.4933 0.8724,-0.8744 -9.2153,-22.526 -9.2153,-22.526 -9.2153,-22.526z"
+      android:strokeWidth="5.5"
       android:strokeColor="@color/cacheMarker_border"/>
   <path
-      android:pathData="m21,10.103 l-9.2153,22.526 0.8724,0.8744 8.3429,-3.6947 8.3429,3.6947 0.8724,-0.8744z"
-      android:strokeWidth="4.2"
+      android:pathData="m21,10.103s0,0 -9.2153,22.526c-0.1559,0.3811 0.4959,1.0411 0.8724,0.8744 8.3429,-3.6947 8.3429,-3.6947 8.3429,-3.6947l8.3429,3.6947c0.3765,0.1667 1.0283,-0.4933 0.8724,-0.8744 -9.2153,-22.526 -9.2153,-22.526 -9.2153,-22.526z"
+      android:strokeWidth="4"
       android:strokeColor="@color/cacheMarker_background"/>
   <path
-      android:pathData="m21,10.103 l-9.2153,22.526 0.8724,0.8744 8.3429,-3.6947 8.3429,3.6947 0.8724,-0.8744z"
+      android:pathData="m21,10.103s0,0 -9.2153,22.526c-0.1559,0.3811 0.4959,1.0411 0.8724,0.8744 8.3429,-3.6947 8.3429,-3.6947 8.3429,-3.6947l8.3429,3.6947c0.3765,0.1667 1.0283,-0.4933 0.8724,-0.8744 -9.2153,-22.526 -9.2153,-22.526 -9.2153,-22.526z"
       android:fillColor="#ff007ae3"/>
 </vector>
