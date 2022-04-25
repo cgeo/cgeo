@@ -324,18 +324,6 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         super.onPause();
 
     }
-    /*
-    super.onResume();
-        // resume location access
-        PermissionHandler.executeIfLocationPermissionGranted(getActivity(),
-                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.AbstractDialogFragment) {
-
-                    @Override
-                    public void executeAfter() {
-                        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
-                    }
-                });
-     */
 
     private void setLogText(final String newText) {
         binding.log.setText(newText == null ? StringUtils.EMPTY : newText);
