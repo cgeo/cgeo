@@ -7,6 +7,7 @@ import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.enumerations.CacheType;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
@@ -296,6 +297,12 @@ public final class LogTemplateProvider {
                     return cacheType.getL10n();
                 }
                 return StringUtils.EMPTY;
+            }
+        });
+        templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
+            @Override
+            public String getValue(LogContext context) {
+                return Sensors.getInstance().currentGeo().getCoords().toString();
             }
         });
         return templates;
