@@ -1517,6 +1517,7 @@
     <string name="waypoint_calculated_coordinates_global">Calculate coordinate</string>
     <string name="waypoint_custom">Custom</string>
     <string name="waypoint_my_coordinates">My coordinates</string>
+    <string name="waypoint_my_coordinates_accuracy">My coordinates (±%s)</string>
     <string name="waypoint_bearing">Bearing in °</string>
     <string name="waypoint_distance">Distance</string>
     <string name="waypoint_name">Name</string>

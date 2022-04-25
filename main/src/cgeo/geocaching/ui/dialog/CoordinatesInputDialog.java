@@ -8,17 +8,25 @@ import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Geopoint.ParseException;
 import cgeo.geocaching.location.GeopointFormatter;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.CalcState;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.CalculatedCoordinateType;
 import cgeo.geocaching.models.CoordinateInputData;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.Settings.CoordInputFormatEnum;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
+
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -92,6 +100,14 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     private FragmentActivity myContext;
 
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
+    private final GeoDirHandler geoUpdate = new GeoDirHandler() {
+        @Override
+        public void updateGeoData(final GeoData geo) {
+            binding.current.setText(getString(R.string.waypoint_my_coordinates_accuracy, Units.getDistanceFromMeters(geo.getAccuracy())));
+        }
+    };
+
     @NonNull
     private static Geopoint currentCoords() {
         return Sensors.getInstance().currentGeo().getCoords();
@@ -149,8 +165,21 @@ public class CoordinatesInputDialog extends DialogFragment {
     @Override
     public void onPause() {
         super.onPause();
+        resumeDisposables.clear();
         Keyboard.hide(getActivity());
 
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(this.getActivity(), new RestartLocationPermissionGrantedCallback(PermissionRequestContext.EditWaypointActivity) {
+            @Override
+            protected void executeAfter() {
+                resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
+            }
+        });
     }
 
     @Override
