@@ -299,12 +299,6 @@ public final class LogTemplateProvider {
                 return StringUtils.EMPTY;
             }
         });
-        templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
-            @Override
-            public String getValue(final LogContext context) {
-                return Sensors.getInstance().currentGeo().getCoords().toString();
-            }
-        });
         return templates;
     }
 
@@ -366,6 +360,13 @@ public final class LogTemplateProvider {
                 }
             });
         }
+        // Add the location log template to the bottom of the list instead of at a certain index
+        templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
+            @Override
+            public String getValue(final LogContext context) {
+                return Sensors.getInstance().currentGeo().getCoords().toString();
+            }
+        });
         return templates;
     }
 
