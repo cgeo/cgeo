@@ -21,7 +21,6 @@ import android.widget.EditText;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.emoji.text.EmojiCompat;
 
 import java.util.Collections;
 import java.util.List;
@@ -45,7 +44,7 @@ public abstract class AbstractLoggingActivity extends AbstractActionBarActivity 
 
         final SubMenu menuSmileys = menu.findItem(R.id.menu_smileys).getSubMenu();
         for (final Smiley smiley : getSmileys()) {
-            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, EmojiCompat.get().process(smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning)));
+            menuSmileys.add(Menu.NONE, smiley.getItemId(), Menu.NONE, smiley.emoji + "  [" + smiley.symbol + "]  " + getString(smiley.meaning));
         }
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(false);
 
