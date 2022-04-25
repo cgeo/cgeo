@@ -16,6 +16,7 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:descendantFocusability="blocksDescendants"
+        android:paddingLeft="5dip"
         android:orientation="horizontal" >
 
         <LinearLayout
