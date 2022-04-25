@@ -301,7 +301,7 @@ public final class LogTemplateProvider {
         });
         templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
             @Override
-            public String getValue(LogContext context) {
+            public String getValue(final LogContext context) {
                 return Sensors.getInstance().currentGeo().getCoords().toString();
             }
         });
