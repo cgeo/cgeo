@@ -30,6 +30,8 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class LogTemplateProvider {
 
+    private static final String TEMPLATE_LOCATION_ACCURACY_FORMAT = "%s (±%s)";
+
     private LogTemplateProvider() {
         // utility class
     }
@@ -425,6 +427,4 @@ public final class LogTemplateProvider {
     public static String applyTemplatesNoIncrement(@NonNull final String signature, final LogContext context) {
         return applyTemplates(signature.replace("[NUMBER]", "[NUMBER$NOINC]").replace("[ONLINENUM]", "[NUMBER$NOINC]"), context);
     }
-
-    private static final String TEMPLATE_LOCATION_ACCURACY_FORMAT = "%s (±%s)";
 }
