@@ -5,8 +5,10 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
@@ -364,7 +366,8 @@ public final class LogTemplateProvider {
         templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
             @Override
             public String getValue(final LogContext context) {
-                return Sensors.getInstance().currentGeo().getCoords().toString();
+                final GeoData geo = Sensors.getInstance().currentGeo();
+                return String.format(TEMPLATE_LOCATION_ACCURACY_FORMAT, geo.getCoords(), Units.getDistanceFromMeters(geo.getAccuracy()));
             }
         });
         return templates;
@@ -422,4 +425,6 @@ public final class LogTemplateProvider {
     public static String applyTemplatesNoIncrement(@NonNull final String signature, final LogContext context) {
         return applyTemplates(signature.replace("[NUMBER]", "[NUMBER$NOINC]").replace("[ONLINENUM]", "[NUMBER$NOINC]"), context);
     }
+
+    private static final String TEMPLATE_LOCATION_ACCURACY_FORMAT = "%s (±%s)";
 }
