@@ -103,6 +103,6 @@ public class LogTemplateProviderTest extends TestCase {
         final LogContext context = createCache();
         Sensors.getInstance().currentGeo().reset();
         final String log = LogTemplateProvider.applyTemplates("[LOCATION]", context);
-        assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000'");
+        assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000' (±0.00 m)");
     }
 }
