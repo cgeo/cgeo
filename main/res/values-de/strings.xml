@@ -555,6 +555,7 @@
     <string name="cache_filter_status_exclude_active">Aktive ausschließen</string>
     <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
     <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Caches ohne D/T einbeziehen</string>
     <string name="cache_filter_log_entry_foundby">Gefunden von</string>
     <string name="cache_filter_log_entry_logtext">Logtext</string>
     <string name="cache_filter_stored_since_notstored">Nicht gespeichert</string>
@@ -1288,6 +1289,7 @@
     <string name="cache_image">Bild</string>
     <string name="cache_image_open_file">Als Datei öffnen</string>
     <string name="cache_image_open_browser">Im Browser öffnen</string>
+    <string name="cache_image_show_description">Beschreibung anzeigen</string>
     <string name="cache_image_add_waypoint">Wegpunkt hinzufügen</string>
     <string name="cache_image_background">Hintergrundbild der Cache-Beschreibung</string>
     <string name="cache_share_field">Teilen</string>
@@ -1355,6 +1357,7 @@
     <string name="waypoint_calculated_coordinates_global">Koordinate berechnen</string>
     <string name="waypoint_custom">Benutzerdefiniert</string>
     <string name="waypoint_my_coordinates">Meine Koordinaten</string>
+    <string name="waypoint_my_coordinates_accuracy">Meine Koordinaten (±%s)</string>
     <string name="waypoint_bearing">Richtung in °</string>
     <string name="waypoint_distance">Entfernung</string>
     <string name="waypoint_name">Name</string>
