@@ -1,14 +1,14 @@
 ### Allgemein
 
-- New: Redesigned coordinates calculator (supporting formulas)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
+- Neu: Umgestalteter Koordinatenrechner (unterstützt nun auch Funktionen)
+- Änderung: Variablen zur Wegpunkte-Berechnung haben nun Gültigkeit innerhalb aller Wegpunkte des Caches
+- Neu: Variablen-Tab in Cache-Details
+- Neu: Automatische Sicherungen durchführen (optional)
+- Korrektur: Importieren von fertigen Downloads fortsetzen
+- Neu: Filter für "Hat benutzerdefinierte Wegpunkte" hinzugefügt
+- Neu: Internes Routing auf BRouter v1.6.3 aktualisiert
+- Neu: Eigenes Icon für generierte Wegpunkte
+- Neu: Log-Vorlagen für Offline-Logs
+- Neu: Konfigurierbare Schnellstart-Buttons zum Startbildschirm hinzugefügt, siehe Einstellungen => Erscheinungsbild
+- Änderung: Einstellungen => Karte => Langes Tippen auf Karte berücksichtigt nun auch die Cache-Karte (relevant für das Erstellen neuer Wegpunkte für den aktuellen Cache)
+- Änderung: Entfernungskreis für archivierte Caches nicht anzeigen
