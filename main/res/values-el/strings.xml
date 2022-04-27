@@ -1351,6 +1351,7 @@
     <string name="waypoint_calculated_coordinates_global">Υπολογιστής συντεταγμένων</string>
     <string name="waypoint_custom">Προσαρμογή</string>
     <string name="waypoint_my_coordinates">Οι συντεταγμένες μου</string>
+    <string name="waypoint_my_coordinates_accuracy">Οι συντεταγμένες μου (±%s)</string>
     <string name="waypoint_bearing">Κατεύθυνση σε °</string>
     <string name="waypoint_distance">Απόσταση</string>
     <string name="waypoint_name">Όνομα</string>
