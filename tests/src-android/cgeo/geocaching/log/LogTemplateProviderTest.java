@@ -13,8 +13,6 @@ import java.util.Calendar;
 import junit.framework.TestCase;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-import org.apache.commons.lang3.tuple.Pair;
-
 public class LogTemplateProviderTest extends TestCase {
 
     public static void testApplyTemplatesNone() {
