@@ -1,6 +1,7 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.sensors.Sensors;
@@ -11,6 +12,8 @@ import java.util.Calendar;
 
 import junit.framework.TestCase;
 import static org.assertj.core.api.Java6Assertions.assertThat;
+
+import org.apache.commons.lang3.tuple.Pair;
 
 public class LogTemplateProviderTest extends TestCase {
 
@@ -102,7 +105,8 @@ public class LogTemplateProviderTest extends TestCase {
     public static void testLocationTemplate() {
         final LogContext context = createCache();
         Sensors.getInstance().currentGeo().reset();
+        final String distance = Units.getDistanceFromMeters(0);
         final String log = LogTemplateProvider.applyTemplates("[LOCATION]", context);
-        assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000' (±0.00 m)");
+        assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000' (±" + distance + ")");
     }
 }
