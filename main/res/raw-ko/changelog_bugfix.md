@@ -1,10 +1,10 @@
 ##
 
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- 수정: 특정 조건에서 OpenStreetMap 지도의 충돌
 
 ##
 
-- Fix: Crash on opening map when active track/route files are missing
+- 수정: 활성 트랙/경로 파일이 없을 때 지도를 열 때 충돌
 
 ##
 
@@ -12,11 +12,11 @@
 - 수정: 캐시 목록 속성 개요의 드문 오류
 - 수정: "다른 백업 복원" 기능 다시 활성화
 - 변경: 트랙을 로드할 때 알림을 제거
-- Fix: Rare crash when sorting by difficulty if adventure labs are on the list
-- Change: Use different icon for "edit individual route" in route/track quick settings
-- Fix: Map for a waypoint now centered correctly with Google Maps
-- Fix: Show better file name in c:geo after selecting a GPX track file
-- Fix: Remember "show/hide" setting for routes / tracks
+- 수정: 어드벤처 랩이 목록에 있는 경우 난이도별로 정렬할 때 드물게 충돌이 발생함
+- 변경: 경로/추적 빠른 설정에서 "개별 경로 편집"에 다른 아이콘 사용
+- 수정: 이제 Google 지도에서 지점에 대한 지도가 올바르게 중앙에 위치함
+- 수정: GPX 트랙 파일을 선택한 후 c:geo에 더 나은 파일 이름 표시
+- 수정: 경로/트랙에 대한 "표시/숨기기" 설정 기억
 
 ##
 
