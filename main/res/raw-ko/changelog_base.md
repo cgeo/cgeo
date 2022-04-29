@@ -1,14 +1,14 @@
 ### 일반
 
-- New: Redesigned coordinates calculator (supporting formulas)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added filter for "has user defined waypoints"
-- New: Updated internal routing to BRouter v1.6.3
-- New: User separate icon for generated waypoints
-- New: Log templates for offline logs
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
+- 신규: 재설계된 좌표 계산기(공식 지원)
+- 변경: 지점 계산을 위한 변수가 이제 캐시 전역입니다.
+- 신규: 캐시 세부정보의 변수 탭
+- 신규: 자동으로 백업 수행(선택 사항)
+- 수정: 완료된 다운로드 가져오기 재개
+- 신규: "사용자 정의 지점 있음" 필터 추가
+- 신규: BRouter v1.6.3으로 내부 라우팅 업데이트
+- 신규: 생성된 지점에 대한 사용자 별도 아이콘
+- 신규: 오프라인 로그용 로그 템플릿
+- 신규: 구성 가능한 빠른 실행 버튼을 홈 화면에 추가했습니다. 설정 => 외관 디자인
+- 변경: 설정 => 지도 => 지도를 길게 누르면 이제 캐시 지도에서도 길게 누름이 활성화/비활성화됩니다(현재 캐시에 대한 새 지점 생성과 관련됨).
+- 변경: 영구보관된 캐시에 대한 거리 원을 표시하지 않음

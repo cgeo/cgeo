@@ -1357,6 +1357,7 @@
     <string name="waypoint_calculated_coordinates_global">Laske koordinaatit</string>
     <string name="waypoint_custom">Oma</string>
     <string name="waypoint_my_coordinates">Sijaintini</string>
+    <string name="waypoint_my_coordinates_accuracy">Omat koordinaatit (±%s)</string>
     <string name="waypoint_bearing">Suunnassa</string>
     <string name="waypoint_distance">Etäisyys</string>
     <string name="waypoint_name">Nimi</string>

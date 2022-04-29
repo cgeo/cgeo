@@ -549,6 +549,7 @@
     <string name="cache_filter_status_exclude_active">활성캐시 제외</string>
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
     <string name="cache_filter_log_entry_logtext">로그 내용</string>
     <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
@@ -574,6 +575,7 @@
     <string name="about_changelog">변경내역</string>
     <string name="about_changelog_nightly_build">나이틀리 빌드</string>
     <string name="about_changelog_next_release">다음 릴리스</string>
+    <string name="about_changelog_bugfix_release">버그 수정 릴리스</string>
     <string name="about_system">시스템</string>
     <string name="about_donate">지원하기</string>
     <string name="about_donation_more">웹사이트 방문하여 정보 보기</string>
@@ -1273,6 +1275,7 @@
     <string name="cache_image">사진</string>
     <string name="cache_image_open_file">파일로 열기</string>
     <string name="cache_image_open_browser">브라우저에서 열기</string>
+    <string name="cache_image_show_description">설명 보기</string>
     <string name="cache_image_add_waypoint">지점 추가</string>
     <string name="cache_image_background">캐시정보 배경 이미지</string>
     <string name="cache_share_field">공유</string>
@@ -1339,6 +1342,7 @@
     <string name="waypoint_calculated_coordinates_global">좌표 계산</string>
     <string name="waypoint_custom">맞춤형</string>
     <string name="waypoint_my_coordinates">내 위치</string>
+    <string name="waypoint_my_coordinates_accuracy">내 좌표 (±%s)</string>
     <string name="waypoint_bearing">방위각(°)</string>
     <string name="waypoint_distance">거리</string>
     <string name="waypoint_name">이름</string>
@@ -1405,11 +1409,33 @@
     <string name="calccoord_migrate_cancel">취소</string>
     <string name="calccoord_migrate_dismiss">데이터 닫기</string>
     <string name="calccoord_migrate_dismiss_usernote_praefix">닫았음</string>
+    <string name="calccoord_migrate_infotext_markdown">다음과 같이 지점에서 레거시 좌표 계산이 발견되었습니다:\n\n%1$s\n\n다음과 같이 이를 새 캐시 계산 좌표로 이동할 수 있습니다:\n\n%2$s\n\n새로운 캐시 변수 사용:%3$s\n\n다음 중 하나를 선택하십시오:\n- 제안된 대로 이동을 수행하려면 %4$s\n- 찾은 계산 데이터를 영구적으로 닫으려면 %5$s\n- 이동하지 않고 계속하려면 %6$s. 다음에 편집을 위해 지점을 열 때 이동을 다시 요청하게 됩니다. 참고: 그러나 지점 좌표를 편집하면 로컬 계산 데이터가 삭제될 수 있습니다.</string>
     <!-- Formula -->
     <string name="formula_function_sqrt">제곱근</string>
+    <string name="formula_function_sin">사인</string>
+    <string name="formula_function_cos">코사인</string>
+    <string name="formula_function_tan">탄젠트</string>
     <string name="formula_function_abs">절댓값</string>
+    <string name="formula_function_round">반올림</string>
+    <string name="formula_function_if">만약</string>
+    <string name="formula_function_length">스트링 길이</string>
+    <string name="formula_function_substring">부스트링</string>
+    <string name="formula_function_rot13">문자를 13만큼 회전</string>
+    <string name="formula_function_rot">문자 회전</string>
+    <string name="formula_function_checksum">체크섬</string>
+    <string name="formula_function_ichecksum">반복 체크섬</string>
     <string name="formula_function_lettervalue">단어 값</string>
+    <string name="formula_function_roman">로마자에서 10진수로</string>
+    <string name="formula_function_vanity">배니티 코드</string>
+    <string name="formula_function_group_simplenumeric">단순수</string>
+    <string name="formula_function_group_complexnumeric">복소수</string>
+    <string name="formula_function_group_simplestring">단순 스트링</string>
+    <string name="formula_function_group_complexstring">복수 스트링</string>
+    <string name="formula_error_unexpectedtoken">예상 \'%1$s\'</string>
+    <string name="formula_error_wrongparamcount">잘못된 매개변수 개수, %1$s-%2$s 예상, %3$s 가져옴</string>
+    <string name="formula_error_wrongtype">잘못된 유형입니다. \'%1$s\'가 예상 \'%3$s\' 유형의 \'%2$s\'이(가) 있습니다.</string>
     <string name="formula_error_missingvarvalue">부족: %1$s</string>
+    <string name="formula_error_cyclicdependency">주기: %1$s</string>
     <string name="formula_error_empty">빈 공식</string>
     <string name="formula_error_other">오류: \'%1$s\'</string>
     <!-- visit -->
