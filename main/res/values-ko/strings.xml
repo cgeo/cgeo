@@ -566,6 +566,7 @@
     <string name="about_changelog">변경내역</string>
     <string name="about_changelog_nightly_build">나이틀리 빌드</string>
     <string name="about_changelog_next_release">다음 릴리스</string>
+    <string name="about_changelog_bugfix_release">버그 수정 릴리스</string>
     <string name="about_system">시스템</string>
     <string name="about_donate">지원하기</string>
     <string name="about_donation_more">웹사이트 방문하여 정보 보기</string>
