@@ -1,8 +1,10 @@
 package cgeo.geocaching.log;
 
 import cgeo.geocaching.enumerations.CacheSize;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.settings.TestSettings;
 
@@ -96,5 +98,13 @@ public class LogTemplateProviderTest extends TestCase {
         context.getCache().setSize(CacheSize.VERY_LARGE);
         final String log = LogTemplateProvider.applyTemplates("[SIZE]", context);
         assertThat(log).isEqualTo(CacheSize.VERY_LARGE.getL10n());
+    }
+
+    public static void testLocationTemplate() {
+        final LogContext context = createCache();
+        Sensors.getInstance().currentGeo().reset();
+        final String distance = Units.getDistanceFromMeters(0);
+        final String log = LogTemplateProvider.applyTemplates("[LOCATION]", context);
+        assertThat(log).isEqualTo("N 00° 00.000' · E 000° 00.000' (±" + distance + ")");
     }
 }

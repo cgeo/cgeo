@@ -5,8 +5,11 @@ import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.IConnector;
 import cgeo.geocaching.connector.capability.ILogin;
 import cgeo.geocaching.enumerations.CacheType;
+import cgeo.geocaching.location.Units;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Trackable;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.extension.FoundNumCounter;
@@ -26,6 +29,8 @@ import org.apache.commons.lang3.StringUtils;
  *
  */
 public final class LogTemplateProvider {
+
+    private static final String TEMPLATE_LOCATION_ACCURACY_FORMAT = "%s (±%s)";
 
     private LogTemplateProvider() {
         // utility class
@@ -359,6 +364,14 @@ public final class LogTemplateProvider {
                 }
             });
         }
+        // Add the location log template to the bottom of the list instead of at a certain index
+        templates.add(new LogTemplate("LOCATION", R.string.init_signature_template_location) {
+            @Override
+            public String getValue(final LogContext context) {
+                final GeoData geo = Sensors.getInstance().currentGeo();
+                return String.format(TEMPLATE_LOCATION_ACCURACY_FORMAT, geo.getCoords(), Units.getDistanceFromMeters(geo.getAccuracy()));
+            }
+        });
         return templates;
     }
 

@@ -19,6 +19,7 @@ public enum PermissionRequestContext {
     CompassActivity(2227, R.string.location_permission_request_explanation),
     AbstractDialogFragment(2228, R.string.location_permission_request_explanation),
     NavigateAnyPointActivity(2229, R.string.location_permission_request_explanation),
+    LogCacheActivity(2230, R.string.location_permission_request_explanation),
     InstallWizardActivity(3001, R.string.location_permission_request_explanation);
 
     private final int requestCode;

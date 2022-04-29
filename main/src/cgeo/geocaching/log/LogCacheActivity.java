@@ -22,6 +22,11 @@ import cgeo.geocaching.enumerations.StatusCode;
 import cgeo.geocaching.log.LogTemplateProvider.LogContext;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.permission.PermissionHandler;
+import cgeo.geocaching.permission.PermissionRequestContext;
+import cgeo.geocaching.permission.RestartLocationPermissionGrantedCallback;
+import cgeo.geocaching.sensors.GeoData;
+import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.twitter.Twitter;
@@ -69,6 +74,7 @@ import java.util.List;
 import java.util.Set;
 
 import io.reactivex.rxjava3.core.Observable;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import org.apache.commons.lang3.StringUtils;
 
@@ -98,6 +104,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private final TextSpinner<ReportProblemType> reportProblem = new TextSpinner<>();
     private final TextSpinner<LogTypeTrackable> trackableActionsChangeAll = new TextSpinner<>();
 
+    private final CompositeDisposable resumeDisposables = new CompositeDisposable();
+    private final GeoDirHandler geoUpdate = new GeoDirHandler() {
+
+        @Override
+        public void updateGeoData(final GeoData geo) {
+            // Do nothing explicit, listening to location updates is sufficient
+        }
+    };
 
     public static Intent getLogCacheIntent(final Activity context, final String cacheId, final String geocode) {
         final Intent logVisitIntent = new Intent(context, LogCacheActivity.class);
@@ -289,6 +303,26 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         });
 
         requestKeyboardForLogging();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        // Resume location access
+        PermissionHandler.executeIfLocationPermissionGranted(this,
+            new RestartLocationPermissionGrantedCallback(PermissionRequestContext.LogCacheActivity) {
+                @Override
+                protected void executeAfter() {
+                    resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
+                }
+            });
+    }
+
+    @Override
+    public void onPause() {
+        resumeDisposables.clear();
+        super.onPause();
+
     }
 
     private void setLogText(final String newText) {
