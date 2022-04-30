@@ -18,6 +18,7 @@ import java.io.Closeable;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 
 import org.apache.commons.io.IOUtils;
@@ -46,6 +47,18 @@ public final class NodesCache implements Closeable {
     private long ghostWakeup = 0;
 
     private final boolean directWeaving = !Boolean.getBoolean("disableDirectWeaving");
+
+    private static final Hashtable<String, FileInformationCacheEntry> folderInfoCache = new Hashtable<>();
+
+    private static class FileInformationCacheEntry {
+        public ContentStorage.FileInformation fi;
+        public long fiTimestamp;
+
+        FileInformationCacheEntry (final ContentStorage.FileInformation fi) {
+            this.fi = fi;
+            this.fiTimestamp = System.currentTimeMillis();
+        }
+    }
 
     public NodesCache(final BExpressionContextWay ctxWay, final long maxmem, final NodesCache oldCache, final boolean detailed) {
         this.maxmemtiles = maxmem / 8;
@@ -319,7 +332,16 @@ public final class NodesCache implements Closeable {
 
         PhysicalFile ra = null;
         if (!fileCache.containsKey(filenameBase)) {
-            final ContentStorage.FileInformation fi = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_TILES.getFolder(), filenameBase + BRouterConstants.BROUTER_TILE_FILEEXTENSION);
+
+            final FileInformationCacheEntry fice = folderInfoCache.get(filenameBase);
+            final ContentStorage.FileInformation fi;
+            if (fice != null && (System.currentTimeMillis() - fice.fiTimestamp) < 60000) {
+                fi = fice.fi;
+            } else {
+                fi = ContentStorage.get().getFileInfo(PersistableFolder.ROUTING_TILES.getFolder(), filenameBase + BRouterConstants.BROUTER_TILE_FILEEXTENSION);
+                folderInfoCache.put(filenameBase, new FileInformationCacheEntry(fi));
+            }
+
             if (fi != null && !fi.isDirectory) {
                 currentFileName = fi.name;
 
