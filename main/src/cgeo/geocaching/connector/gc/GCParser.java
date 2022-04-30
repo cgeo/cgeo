@@ -584,7 +584,7 @@ public final class GCParser {
         }
         String gcChecker = StringUtils.EMPTY;
         if (page.contains(GCConstants.PATTERN_GC_CHECKER)) {
-            gcChecker = "<br/><br/><a href=\"" + cache.getUrl() + "\">" + CgeoApplication.getInstance().getString(R.string.link_gc_checker) + "</a>";
+            gcChecker = "<!--" + CgeoApplication.getInstance().getString(R.string.link_gc_checker) + "-->";
         }
         cache.setDescription(longDescription + relatedWebPage + gcChecker);
 
