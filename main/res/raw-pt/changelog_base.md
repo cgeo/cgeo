@@ -12,3 +12,4 @@
 - Novo: Adicionados botões de lançamento rápido configuráveis ao ecrã inicial, ver Definições => Aparência
 - Alteração: Definições => Mapa => Toque longo no mapa irá agora também activar/desactivar um toque longo no mapa da cache (relevante para a criação de novos pontos adicionais para a cache actual)
 - Alteração: Não mostrar círculos de distância para caches arquivadas
+- New: Add \[location\] to log template menu
