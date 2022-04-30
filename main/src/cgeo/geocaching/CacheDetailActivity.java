@@ -726,7 +726,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         } else if (menuItem == R.id.menu_gcvote) {
             showVoteDialog();
         } else if (menuItem == R.id.menu_checker) {
-            ShareUtils.openUrl(this, CheckerUtils.getCheckerUrl(cache), true);
+            openGeochecker(this, cache);
         } else if (menuItem == R.id.menu_challenge_checker) {
             ShareUtils.openUrl(this, "https://project-gc.com/Challenges/" + cache.getGeocode());
         } else if (menuItem == R.id.menu_ignore) {
@@ -779,6 +779,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return super.onOptionsItemSelected(item);
         }
         return true;
+    }
+
+    private static void openGeochecker(final Activity activity, final Geocache cache) {
+        ShareUtils.openUrl(activity, CheckerUtils.getCheckerUrl(cache), true);
     }
 
     private void setCacheIcon(final int newCacheIcon) {
@@ -1691,6 +1695,14 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 loadLongDescription(activity, container);
             }
 
+            fixOldGeocheckerLink(activity);
+            final String checkerUrl = CheckerUtils.getCheckerUrl(cache);
+            binding.descriptionChecker.setVisibility(checkerUrl == null ? View.GONE : View.VISIBLE);
+            if (checkerUrl != null) {
+                binding.descriptionChecker.setOnClickListener(v -> openGeochecker(activity, cache));
+                binding.descriptionCheckerButton.setOnClickListener(v -> openGeochecker(activity, cache));
+            }
+
             // extra description
             final String geocode = cache.getGeocode();
             boolean hasExtraDescription = ALConnector.getInstance().canHandle(geocode); // could be generalized, but currently it's only AL
@@ -1907,6 +1919,35 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                     final Uri absoluteUri = Uri.parse(baseUrl + uri.toString());
                     spannable.removeSpan(span);
                     spannable.setSpan(new URLSpan(absoluteUri.toString()), start, end, flags);
+                }
+            }
+        }
+
+        /**
+         * Old GCParser logic inserted an HTML link to their geochecker (when applicable)
+         * directly into the description text.
+         * When running on Android 12 this direct URL might be redirected to c:geo under
+         * specific system settings, leading to a loop (see #12889), so let's reassign
+         * this link to the proper openGeochecker method.
+         * @param activity calling activity
+         */
+        private void fixOldGeocheckerLink(final Activity activity) {
+            final String gcLinkInfo = activity.getString(R.string.link_gc_checker);
+            final Spannable spannable = (Spannable) binding.description.getText();
+
+            final URLSpan[] spans = spannable.getSpans(0, spannable.length(), URLSpan.class);
+            for (final URLSpan span : spans) {
+                final int start = spannable.getSpanStart(span);
+                final int end = spannable.getSpanEnd(span);
+                if (StringUtils.equals(spannable.subSequence(start, end), gcLinkInfo)) {
+                    final int flags = spannable.getSpanFlags(span);
+                    spannable.removeSpan(span);
+                    spannable.setSpan(new ClickableSpan() {
+                        @Override
+                        public void onClick(final @NonNull View widget) {
+                            openGeochecker(activity, cache);
+                        }
+                    }, start, end, flags);
                 }
             }
         }

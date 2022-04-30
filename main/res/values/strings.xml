@@ -2267,6 +2267,7 @@
         <item quantity="other">%d waypoints extracted</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coordinate checker available via browser</string>
+    <string name="geochecker_available">Geochecker available via browser</string>
 
     <!-- calendar adder -->
     <string name="event_fail">Failed to add event cache to calendar</string>
