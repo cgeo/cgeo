@@ -12,3 +12,4 @@
 - Neu: Konfigurierbare Schnellstart-Buttons zum Startbildschirm hinzugefügt, siehe Einstellungen => Erscheinungsbild
 - Änderung: Einstellungen => Karte => Langes Tippen auf Karte berücksichtigt nun auch die Cache-Karte (relevant für das Erstellen neuer Wegpunkte für den aktuellen Cache)
 - Änderung: Entfernungskreis für archivierte Caches nicht anzeigen
+- Neu: \[Standort\] als Log-Vorlage hinzugefügt
