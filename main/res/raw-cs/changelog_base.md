@@ -12,3 +12,4 @@
 - Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
 - Změna: Nastavení => Mapa => Dlouhé klepnutí na mapu nyní povolí/zakáže dlouhé klepnutí i v mapě kešky (důležité pro vytváření nových trasových bodů pro aktuální kešku)
 - Změna: Nezobrazovat kruh vzdálenosti u archivovaných kešek
+- Novinka: Přidáno \[umístění\] do nabídky šablony protokolu

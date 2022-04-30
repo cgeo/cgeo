@@ -642,6 +642,7 @@
     <string name="settings_title_map_content">Conteúdo do Mapa</string>
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
     <string name="settings_title_map_style">Estilo do mapa</string>
+    <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>

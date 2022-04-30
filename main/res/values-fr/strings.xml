@@ -639,6 +639,8 @@
     <string name="settings_title_map_content">Contenu de la carte</string>
     <string name="settings_title_map_behavior">Comportement de la carte</string>
     <string name="settings_title_map_style">Style de carte</string>
+    <string name="settings_hide_tileproviders_title">Masquer les sources de la carte</string>
+    <string name="settings_hide_tileproviders_summary">Exclure une ou plusieurs sources de carte de la sélection des sources de la carte</string>
     <string name="settings_title_data_dir">Dossier de données des Geocaches</string>
     <string name="settings_title_data_dir_usage">Dossier de stockage des géocaches (actuellement %1$s)</string>
     <string name="calculate_dataDir_title">Espace utilisé par les Geocaches</string>

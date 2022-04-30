@@ -12,3 +12,4 @@
 - Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
 - Wijziging: Instellingen => Kaart => Lang tikken op kaart zal nu ook aanzetten/uitschakelen van lange tik in de cache kaart (relevant voor het maken van nieuwe waypoints voor huidige cache)
 - Wijziging: Toon geen afstand-cirkel voor gearchiveerde caches
+- Nieuw: Voeg \[locatie\] toe aan logsjabloon menu

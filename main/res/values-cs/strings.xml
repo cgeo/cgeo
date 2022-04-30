@@ -654,6 +654,8 @@
     <string name="settings_title_map_content">Obsah map</string>
     <string name="settings_title_map_behavior">Chování mapy</string>
     <string name="settings_title_map_style">Styl mapy</string>
+    <string name="settings_hide_tileproviders_title">Skrýt zdroje mapy</string>
+    <string name="settings_hide_tileproviders_summary">Vyloučit jeden nebo více zdrojů map z výběru zdrojů map</string>
     <string name="settings_title_data_dir">Složka s údaji o keškách</string>
     <string name="settings_title_data_dir_usage">Složka s údaji o keškách (%1$s použito)</string>
     <string name="calculate_dataDir_title">Využití úložiště keškami</string>
@@ -741,6 +743,7 @@
     <string name="init_signature_template_log">Text logu</string>
     <string name="init_signature_template_size">Velikost</string>
     <string name="init_signature_template_type">Typ</string>
+    <string name="init_signature_template_location">Umístění</string>
     <string name="init_ratingwanted">Načítat hodnocení</string>
     <string name="init_summary_ratingwanted">Načítat hodnocení kešek z GCVote.com</string>
     <string name="init_friends_and_own_logs_wanted">Zobrazovat mé logy a logy přátel</string>
