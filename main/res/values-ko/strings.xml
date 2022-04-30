@@ -636,6 +636,8 @@
     <string name="settings_title_map_content">지도 내용</string>
     <string name="settings_title_map_behavior">지도 동작</string>
     <string name="settings_title_map_style">지도 스타일</string>
+    <string name="settings_hide_tileproviders_title">지도 소스 숨기기</string>
+    <string name="settings_hide_tileproviders_summary">지도 소스 선택에서 하나 이상의 지도 소스 제외</string>
     <string name="settings_title_data_dir">지오캐시 데이터 폴더</string>
     <string name="settings_title_data_dir_usage">지오캐시 데이터 폴더 (%1$s 사용)</string>
     <string name="calculate_dataDir_title">지오캐시 데이터 사용</string>
@@ -723,6 +725,7 @@
     <string name="init_signature_template_log">로그 작성</string>
     <string name="init_signature_template_size">크기</string>
     <string name="init_signature_template_type">유형</string>
+    <string name="init_signature_template_location">위치</string>
     <string name="init_ratingwanted">GCvote 평점</string>
     <string name="init_summary_ratingwanted">GCvote.com으로부터 캐시 평점 불러오기</string>
     <string name="init_friends_and_own_logs_wanted">친구/나의 로그 보기</string>
