@@ -12,3 +12,4 @@
 - Uusi: Lisätty konfiguroitavissa olevat pikakäynnistyspainikkeet aloitusnäyttöön, katso Asetukset => Ulkoasu
 - Muutos: Asetukset => Kartta => Pitkä napautus kartalla ottaa nyt käyttöön/pois käytöstä myös kartan pitkä napautuksen (liittyy luoda uusia reittipisteitä nykyiselle kätkölle)
 - Muutos: Älä näytä etäisyysympyrää arkistoiduille kätköille
+- Uusi: Lisää \[location\] lokimallien valikkoon
