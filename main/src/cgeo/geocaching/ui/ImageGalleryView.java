@@ -15,12 +15,12 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.Folder;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -48,7 +48,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -163,7 +162,11 @@ public class ImageGalleryView extends LinearLayout {
         @Override
         public Collection<Image> getAllImages() {
             return CollectionStream.of(ContentStorage.get().list(folder))
-                .map(fi -> new Image.Builder().setUrl(fi.uri).setTitle(getTitleFromName(fi.name)).build()).toList();
+                .map(fi -> new Image.Builder().setUrl(fi.uri)
+                    .setTitle(getTitleFromName(fi.name))
+                    .setCategory(Image.ImageCategory.OWN)
+                    .setContextInformation("Stored: " + Formatter.formatDateTime(fi.lastModified))
+                    .build()).toList();
         }
 
         @Override
@@ -172,7 +175,10 @@ public class ImageGalleryView extends LinearLayout {
             for (Image img : images) {
                 final String title = getTitleFromName(ContentStorage.get().getName(img.getUri()));
                 final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, null, false);
-                resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title).build());
+                resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title)
+                .setCategory(Image.ImageCategory.OWN)
+                .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
+                .build());
             }
             return resultCollection;
         }
@@ -448,24 +454,8 @@ public class ImageGalleryView extends LinearLayout {
         ImageViewActivity.openImageView(this.activity, geocode, images, intentPos);
     }
 
-    private void viewInStandardApp(final Image img) {
-        if (activity == null) {
-            return;
-        }
-
-        Uri imgUri = img.getUri();
-        if (!UriUtils.isFileUri(imgUri)) {
-            final File file = LocalStorage.getGeocacheDataFile(geocode, img.getUri().toString(), true, true);
-            if (file.exists()) {
-                imgUri = Uri.fromFile(file);
-            }
-        }
-
-        ImageUtils.viewImageInStandardApp(activity, imgUri);
-    }
-
     private void showContextOptions(final Image img, final String category, final int pos,  final ImageListAdapter adapter) {
-        if (activity == null) {
+        if (activity == null || img == null) {
             return;
         }
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
@@ -475,7 +465,7 @@ public class ImageGalleryView extends LinearLayout {
             v -> openImageViewer(category, pos));
 
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_info_details,
-            v -> viewInStandardApp(img));
+            v -> ImageUtils.viewImageInStandardApp(activity, img.getUri(), geocode));
 
         if (!UriUtils.isFileUri(img.getUri()) && !UriUtils.isContentUri(img.getUri())) {
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_browser), R.drawable.ic_menu_share,

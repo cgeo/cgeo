@@ -50,13 +50,14 @@ public class Image implements Parcelable {
     /**
      * Static empty image, linked to nothing.
      */
-    public static final Image NONE = new Image(Uri.EMPTY, null, null, -1, null);
+    public static final Image NONE = new Image(Uri.EMPTY, null, null, -1, null, null);
 
     @NonNull public final Uri uri;
     @Nullable public final String title;
     public final int targetScale; //for offline log images
     @Nullable final String description;
     @NonNull public final ImageCategory category;
+    @Nullable public final String contextInformation;
 
     /**
      * Helper class for building or manipulating Image references.
@@ -69,6 +70,7 @@ public class Image implements Parcelable {
         @Nullable private String description;
         private int targetScale; //needed for offline log images
         private ImageCategory category;
+        private String contextInformation;
 
         /**
          * Create a new Image.
@@ -80,6 +82,7 @@ public class Image implements Parcelable {
             description = null;
             targetScale = -1;
             category = ImageCategory.UNCATEGORIZED;
+            contextInformation = null;
         }
 
         /**
@@ -88,7 +91,7 @@ public class Image implements Parcelable {
          */
         @NonNull
         public Image build() {
-            return new Image(uri, title, description, targetScale, category);
+            return new Image(uri, title, description, targetScale, category, contextInformation);
         }
 
         /**
@@ -173,6 +176,12 @@ public class Image implements Parcelable {
             this.category = category;
             return this;
         }
+
+        @NonNull
+        public Builder setContextInformation(final String contextInformation) {
+            this.contextInformation = contextInformation;
+            return this;
+        }
     }
 
 
@@ -186,12 +195,13 @@ public class Image implements Parcelable {
      * @param description
      *          The image description
      */
-    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat) {
+    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat, final String contextInformation) {
         this.uri = uri;
         this.title = title;
         this.description = description;
         this.targetScale = targetScale;
         this.category = cat == null ? ImageCategory.UNCATEGORIZED : cat;
+        this.contextInformation = contextInformation;
     }
 
     private Image(@NonNull final Parcel in) {
@@ -199,6 +209,7 @@ public class Image implements Parcelable {
         title = in.readString();
         description = in.readString();
         category = ImageCategory.values()[in.readInt()];
+        contextInformation = in.readString();
         targetScale = in.readInt();
     }
 
@@ -213,6 +224,7 @@ public class Image implements Parcelable {
         dest.writeString(title);
         dest.writeString(description);
         dest.writeInt(category.ordinal());
+        dest.writeString(contextInformation);
         dest.writeInt(targetScale);
     }
 
@@ -240,7 +252,8 @@ public class Image implements Parcelable {
                 .setTitle(title)
                 .setDescription(description)
                 .setTargetScale(targetScale)
-                .setCategory(category);
+                .setCategory(category)
+                .setContextInformation(contextInformation);
     }
 
     /**

@@ -4,6 +4,7 @@ import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.MatcherWrapper;
 
@@ -90,8 +91,9 @@ public class LogEntry implements Parcelable {
         found = in.readInt();
         friend = in.readInt() == 1;
         reportProblem = (ReportProblemType) in.readSerializable();
-        logImages = new ArrayList();
-        in.readList(logImages, Image.class.getClassLoader());
+        final List<Image> localLogImages = new ArrayList<>();
+        in.readList(localLogImages, Image.class.getClassLoader());
+        logImages = processLogImages(localLogImages);
         cacheName = in.readString();
         cacheGuid = in.readString();
         cacheGeocode = in.readString();
@@ -129,6 +131,16 @@ public class LogEntry implements Parcelable {
 
     // Parcelable END
 
+
+    private List<Image> processLogImages(final List<Image> logImages) {
+        final List<Image> result = new ArrayList<>();
+        for (Image img : logImages) {
+            result.add(img.buildUpon()
+                .setContextInformation(author + " - " + Formatter.formatShortDateVerbally(this.date) + " - " + logType.getL10n())
+                .build());
+        }
+        return result;
+    }
 
     /**
      * Helper class for building or manipulating {@link LogEntry} references.
@@ -349,7 +361,7 @@ public class LogEntry implements Parcelable {
         this.date = builder.date;
         this.found = builder.found;
         this.friend = builder.friend;
-        this.logImages = Collections.unmodifiableList(builder.logImages);
+        this.logImages = Collections.unmodifiableList(processLogImages(builder.logImages));
         this.cacheName = builder.cacheName;
         this.cacheGuid = builder.cacheGuid;
         this.cacheGeocode = builder.cacheGeocode;
