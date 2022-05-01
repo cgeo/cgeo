@@ -352,6 +352,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
         for (final CompassMiniView compass : compasses) {
             compass.updateCurrentCoords(coords);
         }
+        if (isSortedByDistance()) {
+            forceSort();
+        }
     }
 
     private void checkUpdateGlobalGPS(final boolean force) {
