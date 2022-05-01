@@ -1,5 +1,6 @@
 package cgeo.geocaching.ui;
 
+import cgeo.geocaching.ImageViewActivity;
 import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.apps.navi.NavigationAppFactory;
@@ -14,12 +15,12 @@ import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.storage.Folder;
-import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
+import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -47,7 +48,6 @@ import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -75,6 +75,7 @@ public class ImageGalleryView extends LinearLayout {
     private int categoryHorizontalMargin = 2;
 
     private final Map<String, Geopoint> imageCoordMap = new HashMap<>();
+    private final List<String> categoryList = new ArrayList<>();
     private final Map<String, ImageGalleryCategoryBinding> categoryViews = new HashMap<>();
     private final Map<String, ImageListAdapter> categoryAdapters = new HashMap<>();
     private final Map<String, EditableCategoryHandler> editableCategoryHandlerMap = new HashMap<>();
@@ -161,7 +162,11 @@ public class ImageGalleryView extends LinearLayout {
         @Override
         public Collection<Image> getAllImages() {
             return CollectionStream.of(ContentStorage.get().list(folder))
-                .map(fi -> new Image.Builder().setUrl(fi.uri).setTitle(getTitleFromName(fi.name)).build()).toList();
+                .map(fi -> new Image.Builder().setUrl(fi.uri)
+                    .setTitle(getTitleFromName(fi.name))
+                    .setCategory(Image.ImageCategory.OWN)
+                    .setContextInformation("Stored: " + Formatter.formatDateTime(fi.lastModified))
+                    .build()).toList();
         }
 
         @Override
@@ -170,7 +175,10 @@ public class ImageGalleryView extends LinearLayout {
             for (Image img : images) {
                 final String title = getTitleFromName(ContentStorage.get().getName(img.getUri()));
                 final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, null, false);
-                resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title).build());
+                resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title)
+                .setCategory(Image.ImageCategory.OWN)
+                .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
+                .build());
             }
             return resultCollection;
         }
@@ -266,12 +274,12 @@ public class ImageGalleryView extends LinearLayout {
             });
 
             binding.imageImage.setOnClickListener(v -> {
-                final Image image = getItem(holder.getBindingAdapterPosition()).image;
-                viewInStandardApp(image);
+                final ImageListData ild = getItem(holder.getBindingAdapterPosition());
+                openImageViewer(ild.category, holder.getBindingAdapterPosition());
             });
             binding.imageImage.setOnLongClickListener(v -> {
                 final ImageListData ild = getItem(holder.getBindingAdapterPosition());
-                showContextOptions(ild.image, holder.getBindingAdapterPosition(), ild.category, this);
+                showContextOptions(ild.image, ild.category, holder.getBindingAdapterPosition(),  this);
                 return true;
             });
         }
@@ -361,6 +369,7 @@ public class ImageGalleryView extends LinearLayout {
 
         this.addView(binding.getRoot(), category == null ? 0 : this.getChildCount(), new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
 
+        this.categoryList.add(category == null ? 0 : this.categoryList.size(), category);
         this.categoryViews.put(category, binding);
         final ImageListAdapter adapter = new ImageListAdapter(binding.imageGalleryList);
         this.categoryAdapters.put(category, adapter);
@@ -398,6 +407,7 @@ public class ImageGalleryView extends LinearLayout {
         this.removeAllViews();
         this.categoryAdapters.clear();
         this.categoryViews.clear();
+        this.categoryList.clear();
     }
 
     public void removeCategory(final String category) {
@@ -413,6 +423,7 @@ public class ImageGalleryView extends LinearLayout {
             }
         }
         categoryViews.remove(category);
+        categoryList.remove(category);
         categoryAdapters.remove(category);
     }
 
@@ -424,31 +435,37 @@ public class ImageGalleryView extends LinearLayout {
         this.imageDataMemoryCache.clear();
     }
 
-    private void viewInStandardApp(final Image img) {
+    private void openImageViewer(final String category, final int pos) {
         if (activity == null) {
             return;
         }
-
-        Uri imgUri = img.getUri();
-        if (!UriUtils.isFileUri(imgUri)) {
-            final File file = LocalStorage.getGeocacheDataFile(geocode, img.getUri().toString(), true, true);
-            if (file.exists()) {
-                imgUri = Uri.fromFile(file);
+        final List<Image> images = new ArrayList<>();
+        int intentPos = -1;
+        for (String cat : categoryList) {
+            int idx = 0;
+            for (ImageListData imgData : categoryAdapters.get(cat).getItems()) {
+                if (Objects.equals(category, cat) && pos == idx) {
+                    intentPos = images.size();
+                }
+                images.add(imgData.image);
+                idx++;
             }
         }
-
-        ImageUtils.viewImageInStandardApp(activity, imgUri);
+        ImageViewActivity.openImageView(this.activity, geocode, images, intentPos);
     }
 
-    private void showContextOptions(final Image img, final int pos, final String category, final ImageListAdapter adapter) {
-        if (activity == null) {
+    private void showContextOptions(final Image img, final String category, final int pos,  final ImageListAdapter adapter) {
+        if (activity == null || img == null) {
             return;
         }
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
 
+        ctxMenu.addItem("Open", R.drawable.ic_menu_info_details,
+            v -> openImageViewer(category, pos));
+
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_info_details,
-            v -> viewInStandardApp(img));
+            v -> ImageUtils.viewImageInStandardApp(activity, img.getUri(), geocode));
 
         if (!UriUtils.isFileUri(img.getUri()) && !UriUtils.isContentUri(img.getUri())) {
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_browser), R.drawable.ic_menu_share,

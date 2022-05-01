@@ -41,6 +41,7 @@ public class ShareUtils {
     public static final String TYPE_EMAIL = "message/rfc822";
     public static final String TYPE_TEXT = "text/plain";
     public static final String TYPE_XML = "application/xml";
+    public static final String TYPE_IMAGE = "image/*";
 
     private ShareUtils() {
         // utility class
@@ -61,6 +62,12 @@ public class ShareUtils {
 
     public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId) {
         shareAsEmail(context, subject, body, uri, titleResourceId, null);
+    }
+
+    public static void shareImage(final Context context, final Uri imageUri, final String geocode, @StringRes final int titleResourceId) {
+        final Uri localFileImageUri = ImageUtils.getLocalImageFileUriForSharing(context, imageUri, geocode);
+        final Intent intent = createShareIntentInternal(context, TYPE_IMAGE, null, null, localFileImageUri, null);
+        shareInternal(context, intent, titleResourceId);
     }
 
     private static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId, final String receiver) {

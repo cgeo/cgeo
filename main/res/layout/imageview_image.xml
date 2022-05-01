@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/imageview_viewroot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="4dip"
+    android:orientation="vertical"
+    android:background="@android:color/transparent"
+    tools:context=".ImageViewActivity">
+
+    <TextView android:id="@+id/imageview_headline"
+        style="@style/text_default"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"/>
+
+    <FrameLayout
+        android:id="@+id/image_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:background="@android:color/transparent">
+        <ImageView
+            android:id="@+id/image_full"
+            android:scaleType="centerInside"
+            android:adjustViewBounds="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="5dip"
+            android:layout_marginTop="5dip"
+            android:padding="1dp"
+            android:visibility="gone"
+            tools:visibility="visible"
+            tools:src="@drawable/cgeo_notification"/>
+    </FrameLayout>
+
+    <TextView android:id="@+id/imageview_information"
+        style="@style/text_default"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <LinearLayout
+        android:id="@+id/imageview_actions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <Button
+            style="@style/button_icon_actionbar"
+            android:id="@+id/image_open_file"
+            android:enabled="true"
+            app:icon="@drawable/ic_menu_info_details"
+            android:text="@string/cache_image_open_file" />
+        <Button
+            style="@style/button_icon_actionbar"
+            android:id="@+id/image_open_browser"
+            android:enabled="true"
+            app:icon="@drawable/ic_menu_info_details"
+            android:text="@string/cache_image_open_browser" />
+        <Button
+            style="@style/button_icon_actionbar"
+            android:id="@+id/image_share"
+            android:enabled="true"
+            app:icon="@drawable/ic_menu_share"
+            android:text="Share" />
+
+    </LinearLayout>
+
+</LinearLayout>
+
+

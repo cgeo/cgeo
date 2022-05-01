@@ -451,6 +451,10 @@ dependencies {
 
     // MarkDown view
     implementation 'io.noties.markwon:core:4.6.2'
+
+    // Loupe for ImageGallery and zoomable ImageViews
+    implementation 'io.github.igreenwood.loupe:loupe:1.2.2'
+    //implementation 'io.github.igreenwood.loupe:extensions:1.0.1' //as of now not needed
 }
 
 // un-mocking of Android classes that don't depend on the Android device, but are portable Java only, like SparseArray

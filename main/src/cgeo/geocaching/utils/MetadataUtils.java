@@ -10,8 +10,12 @@ import com.drew.imaging.ImageMetadataReader;
 import com.drew.imaging.ImageProcessingException;
 import com.drew.lang.GeoLocation;
 import com.drew.metadata.Metadata;
+import com.drew.metadata.exif.ExifDirectoryBase;
+import com.drew.metadata.exif.ExifIFD0Directory;
 import com.drew.metadata.exif.GpsDirectory;
+import com.drew.metadata.jpeg.JpegCommentDirectory;
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utilitles to access an image's metadata.
@@ -69,7 +73,40 @@ public final class MetadataUtils {
             Log.i("[MetadataUtils] Problem reading coordinates", e);
         }
         return null;
-
     }
+
+    public static String getComment(final Metadata metadata) {
+        if (metadata == null) {
+            return null;
+        }
+        final StringBuilder comment = new StringBuilder();
+
+        try {
+            final Collection<ExifIFD0Directory> exifDirs = metadata.getDirectoriesOfType(ExifIFD0Directory.class);
+            for (ExifIFD0Directory dir : exifDirs) {
+                addIf(comment, dir.getString(ExifDirectoryBase.TAG_IMAGE_DESCRIPTION));
+                addIf(comment, dir.getString(ExifDirectoryBase.TAG_USER_COMMENT));
+            }
+
+            final Collection<JpegCommentDirectory> commentDirectories = metadata.getDirectoriesOfType(JpegCommentDirectory.class);
+
+            for (final JpegCommentDirectory commentDirectory : commentDirectories) {
+                addIf(comment, commentDirectory.getString(0));
+            }
+        } catch (final Exception e) {
+            Log.i("[MetadataUtils] Problem reading comments", e);
+        }
+        return comment.toString();
+    }
+
+    private static void addIf(final StringBuilder sb, final String s) {
+        if (!StringUtils.isBlank(s)) {
+            if (!sb.toString().isEmpty()) {
+                sb.append(" - ");
+            }
+            sb.append(s);
+        }
+    }
+
 
 }

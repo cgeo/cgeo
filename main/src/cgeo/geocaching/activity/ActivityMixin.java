@@ -43,6 +43,19 @@ public final class ActivityMixin {
         }
     }
 
+    public static void showHideActionBar(final Activity activity, final boolean show) {
+        if (activity instanceof AppCompatActivity) {
+            final ActionBar actionBar = ((AppCompatActivity) activity).getSupportActionBar();
+            if (actionBar != null) {
+                if (show) {
+                    actionBar.show();
+                } else {
+                    actionBar.hide();
+                }
+            }
+        }
+    }
+
     public static void showProgress(final AppCompatActivity activity, final boolean show) {
         if (activity == null) {
             return;

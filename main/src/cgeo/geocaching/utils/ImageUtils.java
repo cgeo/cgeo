@@ -10,6 +10,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import android.app.Activity;
 import android.app.Application;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -626,25 +627,51 @@ public final class ImageUtils {
         return imageUri;
     }
 
-    public static void viewImageInStandardApp(final Activity activity, final Uri imageUri) {
+    public static void viewImageInStandardApp(final Activity activity, final Uri imgUri, final String geocode) {
+
+        if (activity == null || imgUri == null) {
+            return;
+        }
+
+        final Uri imageFileUri = getLocalImageFileUriForSharing(activity, imgUri, geocode);
+
         try {
             final Intent intent = new Intent().setAction(Intent.ACTION_VIEW);
-            File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
-            final String mimeType;
-            if (file == null || !file.exists()) {
-                file = compressImageToFile(imageUri);
-                file.deleteOnExit();
-                mimeType = "image/jpeg";
-            } else {
-                mimeType = mimeTypeForUrl(imageUri.toString());
-            }
-            final String authority = activity.getString(R.string.file_provider_authority);
-            intent.setDataAndType(FileProvider.getUriForFile(activity, authority, file), mimeType);
+            intent.setDataAndType(imageFileUri, mimeTypeForUrl(imageFileUri.toString()));
             intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
             activity.startActivity(intent);
         } catch (final Exception e) {
             Log.e("ImageUtils.viewImageInStandardApp", e);
         }
+    }
+
+    /** gets or creates local file and shareable Uri for given image */
+    public static Uri getLocalImageFileUriForSharing(final Context context, final Uri imgUri, final String geocode) {
+
+        if (imgUri == null) {
+            return null;
+        }
+
+        final String storeCode = StringUtils.isBlank(geocode) ? "shared" : geocode;
+
+        Uri imageUri = imgUri;
+
+        if (!UriUtils.isFileUri(imgUri)) {
+            //try to find local file in cache image storage
+            final File file = LocalStorage.getGeocacheDataFile(storeCode, imgUri.toString(), true, true);
+            if (file.exists()) {
+                imageUri = Uri.fromFile(file);
+            }
+        }
+
+       File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
+        if (file == null || !file.exists()) {
+            file = compressImageToFile(imageUri);
+            file.deleteOnExit();
+        }
+        final String authority = context.getString(R.string.file_provider_authority);
+        return FileProvider.getUriForFile(context, authority, file);
+
     }
 
     private static String mimeTypeForUrl(final String url) {
