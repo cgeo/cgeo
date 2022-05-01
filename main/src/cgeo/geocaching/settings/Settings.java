@@ -2143,4 +2143,8 @@ public class Settings {
         return getString(R.string.pref_google_map_theme, "DEFAULT");
     }
 
+    public static String getRenderThemeScale() {
+        return getString(R.string.pref_rendertheme_scale, null);
+    }
+
 }

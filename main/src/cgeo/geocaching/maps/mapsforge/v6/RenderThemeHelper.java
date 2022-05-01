@@ -157,6 +157,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         //try to apply stored value
         ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
 
+
         if (selectedTheme == null) {
             rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
         } else {
@@ -166,7 +167,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
                 // Validate the theme
                 org.mapsforge.map.rendertheme.rule.RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
-                rendererLayer.setXmlRenderTheme(xmlRenderTheme);
+                rendererLayer.setXmlRenderTheme(new XmlThemeWrapper(xmlRenderTheme, Settings.getRenderThemeScale()));
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
@@ -317,8 +318,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
      *
-     * @param namTheme theme to set
-     * @param theme really set (might be corrected if given value is not correct/incomplete)
+     * @param themeIdCandidate theme to set
      */
     public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
         return setSelectedMapThemeInternal(themeIdCandidate) != null;

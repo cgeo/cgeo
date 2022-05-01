@@ -215,6 +215,23 @@ public final class TextUtils {
     }
 
     /**
+     * searches for the regex pattern "patternWithOneParen" in text and replaces
+     * every occurence with the result of the given replacer
+     */
+    public static String replacePattern(final String text, final String patternWithOneParen, final Func1<String, String> replacer) {
+        final Pattern patt = compilePattern(patternWithOneParen);
+        final Matcher m = patt.matcher(text);
+        final StringBuffer sb = new StringBuffer(text.length());
+        while (m.find()) {
+            final String found = m.groupCount() > 0 ? m.group(1) : m.group(0);
+            final String replace = replacer == null ? found : replacer.call(found);
+            m.appendReplacement(sb, Matcher.quoteReplacement(replace == null ? found : replace));
+        }
+        m.appendTail(sb);
+        return sb.toString();
+    }
+
+    /**
      * @param str input string
      *            As of performance reasons we non't use a REGEX here. Don't use this function for strings which could contain new-line characters like "\r\n" or "\r"
      * @return normalized String Length like it is counted at the gc website (count UNIX new-line character "\n" as two characters)
