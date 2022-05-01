@@ -7,6 +7,14 @@
 - New: Log templates for offline logs
 - New: Add \[location\] to log template menu
 - New: Allow selecting log texts
+- Fix: GC checker link leading to loop in certain conditions on Android 12
+- New: Added geochecker button at end of description text (when appropriate)
+- New: Added 'log in browser' option to cache menu
+
+### Cache list
+
+- New: Added option for "has user defined waypoints" to advanced status filter
+- Fix: Resort cache list on every location change on distance sort order
 
 ### Map
 
@@ -18,5 +26,4 @@
 - New: Automatically perform backups (optional)
 - Fix: Resume importing finished downloads
 - New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Added option for "has user defined waypoints" to advanced status filter
 - New: Updated internal routing to BRouter v1.6.3
