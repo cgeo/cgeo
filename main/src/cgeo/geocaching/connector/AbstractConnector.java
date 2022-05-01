@@ -194,6 +194,12 @@ public abstract class AbstractConnector implements IConnector {
 
     @Override
     @Nullable
+    public String getCacheCreateNewLogUrl(@NonNull final Geocache cache) {
+        return null; //by default, Connector does not support creating new logs online
+    }
+
+    @Override
+    @Nullable
     public String getServiceSpecificLogId(@Nullable final String serviceLogId) {
         return serviceLogId; //by default, log id is directly usable
     }

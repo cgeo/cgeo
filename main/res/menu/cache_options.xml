@@ -87,6 +87,12 @@
         app:showAsAction="ifRoom">
     </item>
     <item
+        android:id="@+id/menu_log_in_browser"
+        android:title="@string/cache_menu_log_in_browser"
+        android:visible="false"
+        app:showAsAction="ifRoom">
+    </item>
+    <item
         android:id="@+id/menu_edit_fieldnote"
         android:icon="@drawable/ic_menu_edit"
         android:title="@string/cache_personal_note"

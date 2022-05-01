@@ -69,10 +69,13 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     public static final String SEARCH_CONTEXT_TOOK_TOTAL = "sc_gc_took_total";
 
     @NonNull
+    private static final String GC_BASE_URL = "https://www.geocaching.com/";
+
+    @NonNull
     private static final String CACHE_URL_SHORT = "https://coord.info/";
 
     @NonNull
-    private static final String CACHE_URL_LONG = "https://www.geocaching.com/geocache/";
+    private static final String CACHE_URL_LONG = GC_BASE_URL + "geocache/";
     /**
      * Pocket queries downloaded from the website use a numeric prefix. The pocket query creator Android app adds a
      * verbatim "pocketquery" prefix.
@@ -174,6 +177,12 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
             return CACHE_URL_SHORT + logEntry.serviceLogId;
         }
         return null;
+    }
+
+    @NonNull
+    @Override
+    public String getCacheCreateNewLogUrl(@NonNull final Geocache cache) {
+        return GC_BASE_URL + "play/geocache/" + cache.getGeocode() + "/log";
     }
 
     @Override

@@ -26,8 +26,6 @@ import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.ClipboardUtils;
 import cgeo.geocaching.utils.EditUtils;
 
-import io.reactivex.rxjava3.disposables.CompositeDisposable;
-
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -63,6 +61,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.google.android.material.textfield.TextInputLayout;
+import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.lang3.StringUtils;
 
 public class CoordinatesInputDialog extends DialogFragment {
