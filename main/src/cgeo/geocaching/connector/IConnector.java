@@ -67,6 +67,12 @@ public interface IConnector {
     String getCacheLogUrl(@NonNull Geocache cache, @NonNull LogEntry logEntry);
 
     /**
+     * Get a browser URL to create a new log entry. May return null if connector does not support this.
+     */
+    @Nullable
+    String getCacheCreateNewLogUrl(@NonNull Geocache cache);
+
+    /**
      * For a given service-log-id (as assigned by this IConnector and stored as service log id in log entries),
      * returns the logid ready for usage in scenarios such as GUI display or GPX export
      * May return null if there is no such log id.

@@ -1392,6 +1392,7 @@
     <string name="cache_menu_vote">Vote</string>
     <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Search challenge checker</string>
+    <string name="cache_menu_log_in_browser">Log in browser</string>
     <string name="cache_menu_ignore">Ignore cache</string>
     <string name="cache_log_menu_decrypt">Decrypt/Encrypt</string>
     <string name="cache_log_menu_popup_title">Log of %s</string>

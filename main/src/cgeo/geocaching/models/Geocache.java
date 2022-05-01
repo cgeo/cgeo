@@ -624,6 +624,10 @@ public class Geocache implements IWaypoint {
         ShareUtils.openUrl(context, getConnector().getCacheLogUrl(this, logEntry), true);
     }
 
+    public void openCreateNewLogInBrowser(final Context context) {
+        ShareUtils.openUrl(context, getConnector().getCacheCreateNewLogUrl(this), true);
+    }
+
     @NonNull
     private IConnector getConnector() {
         return ConnectorFactory.getConnector(this);
@@ -646,6 +650,10 @@ public class Geocache implements IWaypoint {
     public boolean supportsLogging() {
         return getConnector().supportsLogging();
     }
+    public boolean supportsLoggingOnline() {
+        return getConnector().getCacheCreateNewLogUrl(this) != null;
+    }
+
 
     public boolean supportsLogImages() {
         return getConnector().supportsLogImages();

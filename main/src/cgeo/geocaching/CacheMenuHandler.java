@@ -81,6 +81,9 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         } else if (menuItem == R.id.menu_show_in_browser) {
             cache.openInBrowser(activity);
             return true;
+        } else if (menuItem == R.id.menu_log_in_browser) {
+            cache.openCreateNewLogInBrowser(activity);
+            return true;
         } else if (menuItem == R.id.menu_share || menuItem == R.id.menu_share_from_popup) {
             cache.shareCache(activity, res);
             return true;
@@ -124,6 +127,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
             NavigationSelectionActionProvider.initialize(menu.findItem(R.id.menu_navigate), cache);
         }
         menu.findItem(R.id.menu_log_visit).setVisible(cache.supportsLogging() && !Settings.getLogOffline());
+        menu.findItem(R.id.menu_log_in_browser).setVisible(cache.supportsLoggingOnline());
         menu.findItem(R.id.menu_log_visit_offline).setVisible(cache.supportsLogging() && Settings.getLogOffline());
         menu.findItem(R.id.menu_set_found).setVisible(cache.supportsSettingFoundState() && !cache.isFound());
         menu.findItem(R.id.menu_set_DNF).setVisible(cache.supportsSettingFoundState() && !cache.isDNF());
