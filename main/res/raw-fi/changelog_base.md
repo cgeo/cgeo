@@ -7,23 +7,24 @@
 - Uusi: Lokipohjat offline-lokeille
 - Uusi: Lisää \[location\] lokimallien valikkoon
 - Uusi: Salli lokitekstien valinta
-- Fix: GC checker link leading to loop in certain conditions on Android 12
-- New: Added geochecker button at end of description text (when appropriate)
-- New: Added 'log in browser' option to cache menu
+- Fix: GC checker linkki johtaa silmukkaan tietyissä olosuhteissa Android 12
+- Uusi: Lisätty geochecker-painike kuvauksen lopussa (tarvittaessa)
+- Uusi: Lisätty 'kirjaa selaimessa' -vaihtoehto kätkövalikkoon
 
 ### Kätkölista
 
-- New: Added option for "has user defined waypoints" to advanced status filter
-- Fix: Resort cache list on every location change on distance sort order
+- Uusi: Lisätty vaihtoehto "on käyttäjän määrittämät reittipisteet" edistyneisiin tilasuodattimiin
+- Korjaa: Lajittele kätkölista uudelleen sijainnin muuttuessa kun lista lajitellaan etäisyyden mukaan
 
 ### Kartta
 
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
+- Muutos: Asetukset => Kartta => Pitkä napautus kartalla ottaa nyt käyttöön/pois käytöstä myös kartan pitkä napautuksen (liittyy luoda uusia reittipisteitä nykyiselle kätkölle)
+- Muutos: Älä näytä etäisyysympyrää arkistoiduille kätköille
+- Korjaa: Kaatuminen tietyissä olosuhteissa käyttäen OpenStreetMapsia
 
 ### Yleinen
 
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Updated internal routing to BRouter v1.6.3
+- Uusi: Suorita varmuuskopiot automaattisesti (valinnainen)
+- Korjaus: Jatka valmiiden latausten tuontia
+- Uusi: Lisätty konfiguroitavissa olevat pikakäynnistyspainikkeet aloitusnäyttöön, katso Asetukset => Ulkoasu
+- Uusi: Päivitetty sisäinen reititys BRouter v1.6.3
