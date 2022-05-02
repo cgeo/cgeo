@@ -1235,6 +1235,7 @@
     <string name="cache_menu_vote">투표</string>
     <string name="cache_menu_checker">Geochecker 열기</string>
     <string name="cache_menu_challenge_checker">도전 확인프로그램 찾기</string>
+    <string name="cache_menu_log_in_browser">브라우저에서 로그하기</string>
     <string name="cache_menu_ignore">캐시 제외시키기</string>
     <string name="cache_log_menu_decrypt">복호화/암호화</string>
     <string name="cache_log_menu_popup_title">%s의 로그</string>
@@ -1999,6 +2000,7 @@
         <item quantity="other">%d 개의 웨이포인트가 추출됨</item>
     </plurals>
     <string name="link_gc_checker">지오캐싱닷컴 좌표 확인기는 브라우저를 통해 사용할 수 있습니다.</string>
+    <string name="geochecker_available">브라우저를 통해 사용 가능한 지오체커</string>
     <!-- calendar adder -->
     <string name="event_fail">이벤트 캐시를 캘린더에 추가하지 못했습니다.</string>
     <string name="init_low_disk_space">디스크 공간 부족</string>
