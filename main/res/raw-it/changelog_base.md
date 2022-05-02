@@ -1,29 +1,30 @@
 ### Dettagli del cache
 
-- New: Redesigned coordinates calculator (supporting functions)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Generating waypoints using formulas and variables with ranges
-- New: Log templates for offline logs
-- New: Add \[location\] to log template menu
-- New: Allow selecting log texts
-- Fix: GC checker link leading to loop in certain conditions on Android 12
-- New: Added geochecker button at end of description text (when appropriate)
-- New: Added 'log in browser' option to cache menu
+- Nuovo: Ridisegnato il calcolatore di coordinate (con supporto alle formule)
+- Modifica: Le variabili per il calcolo del waypoint sono ora cache-global
+- Nuovo: Scheda Variabili nei dettagli del cache
+- Nuovo: Generazione di waypoint utilizzando formule e variabili con intervalli
+- Nuovo: Modelli per i log offline
+- Nuovo: Aggiunto \[location\] al menu del modello di log
+- Nuovo: Consentita la selezione del testo dei log
+- Corretto: Link GC check in certe condizioni va in loop su Android 12
+- Nuovo: Aggiunto il pulsante geochecker alla fine del testo di descrizione (se appropriato)
+- Nuovo: Aggiunta l'opzione 'log nel browser' al menu cache
 
 ### Elenco dei cache
 
-- New: Added option for "has user defined waypoints" to advanced status filter
-- Fix: Resort cache list on every location change on distance sort order
+- Nuovo: Aggiunta l'opzione "ha waypoint definiti dall'utente" al filtro di stato avanzato
+- Corretto: Riordino dell'elenco cache per ogni cambiamento di posizione, nell'ordinamento in base alla distanza
 
 ### Mappa
 
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
+- Modifica: Impostazioni => Mappa => Pressione prolungata sulla mappa abiliterà/disabiliterà anche il tocco prolungato nella mappa del cache (rilevante per creare nuovi waypoint per il cache corrente)
+- Cambiato: non viene mostrato il cerchio di distanza per i cache archiviati
+- Corretto: Crash con mappe OpenStreetMap in certe condizioni
 
 ### Generale
 
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Updated internal routing to BRouter v1.6.3
+- Nuovo: Esecuzione automatica dei backup (opzionale)
+- Corretto: Riprendi l'importazione dei download terminati
+- Nuovo: Aggiunti, alla schermata iniziale, i pulsanti di avvio rapido configurabili. Vedere Impostazioni => Aspetto
+- Nuovo: Instradamento interno aggiornato a BRouter v1.6.3
