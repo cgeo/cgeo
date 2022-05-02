@@ -20,6 +20,7 @@
 
 - Änderung: Einstellungen => Karte => Langes Tippen auf Karte berücksichtigt nun auch die Cache-Karte (relevant für das Erstellen neuer Wegpunkte für den aktuellen Cache)
 - Änderung: Entfernungskreis für archivierte Caches nicht anzeigen
+- Fix: Crash in OpenStreetMap maps under certain conditions
 
 ### Allgemein
 
