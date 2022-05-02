@@ -7,24 +7,24 @@
 - Νέα: Πρότυπα καταγραφής για αρχεία καταγραφής εκτός σύνδεσης
 - Νέο: Προσθήκη \[τοποθεσία\] για καταγραφή προτύπου μενού
 - Νέο: Να επιτρέπεται η επιλογή κειμένων καταγραφής
-- Fix: GC checker link leading to loop in certain conditions on Android 12
-- New: Added geochecker button at end of description text (when appropriate)
-- New: Added 'log in browser' option to cache menu
+- Διόρθωση: GC σύνδεση ελεγκτή που οδηγεί σε βρόχο σε ορισμένες συνθήκες στο Android 12
+- Νέο: Προστέθηκε κουμπί geochecker στο τέλος του κειμένου περιγραφής (κατά περίπτωση)
+- Νέα: Προστέθηκε η επιλογή 'log in browser' στο μενού cache
 
 ### Λίστα κρυπτών
 
-- New: Added option for "has user defined waypoints" to advanced status filter
-- Fix: Resort cache list on every location change on distance sort order
+- Νέα: Προστέθηκε επιλογή για "έχει οριοθετημένα σημεία από τον χρήστη" στο προηγμένο φίλτρο κατάστασης
+- Fix: Λίστα cache Resort σε κάθε αλλαγή τοποθεσίας για την σειρά ταξινόμησης απόστασης
 
 ### Χάρτης
 
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- Αλλαγή: Ρυθμίσεις => Χάρτης => Αν πατήσετε παρατεταμένα στο χάρτη θα ενεργοποιήσετε/απενεργοποιήσετε το παρατεταμένο πάτημα και στο χάρτη κρύπτης (σχετικό με τη δημιουργία νέων σημείων για την τρέχουσα κρύπτη)
+- Αλλαγή: Χωρίς κύκλο απόστασης, για αρχειοθετημένες κρύπτες
+- Διόρθωση: κατάρρευση σε χάρτες OpenStreetMap υπό ορισμένες συνθήκες
 
 ### Γενικά
 
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
+- Νέο: Αυτόματη εκτέλεση αντιγράφων ασφαλείας (προαιρετικό)
+- Διόρθωση: Συνέχιση εισαγωγής ολοκληρωμένων λήψεων
 - New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Updated internal routing to BRouter v1.6.3
+- Νέο: Ενημερώθηκε εσωτερική δρομολόγηση στο BRouter v1.6.3
