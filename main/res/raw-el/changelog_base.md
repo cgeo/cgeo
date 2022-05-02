@@ -1,15 +1,30 @@
-### Γενικά
+### Λεπτομέρειες κρύπτης
 
 - Νέο: Επανασχεδιασμένη αριθμομηχανή συντεταγμένων (υποστηρίζει τύπους)
 - Αλλαγή: Μεταβλητές για τον υπολογισμό σημείου διαδρομής είναι πλέον καθολικές
 - Νέα: καρτέλα Μεταβλητές στις λεπτομέρειες της κρύπτης
-- Νέο: Αυτόματη εκτέλεση αντιγράφων ασφαλείας (προαιρετικό)
-- Διόρθωση: Συνέχιση εισαγωγής ολοκληρωμένων λήψεων
-- Νέο: Προστέθηκε φίλτρο για "έχει καθορισμένα σημεία από τον χρήστη"
-- Νέο: Ενημερώθηκε εσωτερική δρομολόγηση στο BRouter v1.6.3
-- Νέο: Ξεχωριστό εικονίδιο χρήστη για τα παραγόμενα σημεία
+- Νέα: Δημιουργία σημείων αναφοράς χρησιμοποιώντας τύπους και μεταβλητές με εύρη
 - Νέα: Πρότυπα καταγραφής για αρχεία καταγραφής εκτός σύνδεσης
-- Νέα: Προστέθηκαν διαμορφώσιμα κουμπιά γρήγορης εκκίνησης στην αρχική οθόνη, δείτε Ρυθμίσεις => Εμφάνιση
-- Αλλαγή: Ρυθμίσεις => Χάρτης => Αν πατήσετε παρατεταμένα στο χάρτη θα ενεργοποιήσετε/απενεργοποιήσετε το παρατεταμένο πάτημα και στο χάρτη κρύπτης (σχετικό με τη δημιουργία νέων σημείων για την τρέχουσα κρύπτη)
-- Αλλαγή: Χωρίς κύκλο απόστασης, για αρχειοθετημένες κρύπτες
 - Νέο: Προσθήκη \[τοποθεσία\] για καταγραφή προτύπου μενού
+- Νέο: Να επιτρέπεται η επιλογή κειμένων καταγραφής
+- Fix: GC checker link leading to loop in certain conditions on Android 12
+- New: Added geochecker button at end of description text (when appropriate)
+- New: Added 'log in browser' option to cache menu
+
+### Λίστα κρυπτών
+
+- New: Added option for "has user defined waypoints" to advanced status filter
+- Fix: Resort cache list on every location change on distance sort order
+
+### Χάρτης
+
+- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
+- Change: Don't show distance-circle for archived caches
+- Fix: Crash in OpenStreetMap maps under certain conditions
+
+### Γενικά
+
+- New: Automatically perform backups (optional)
+- Fix: Resume importing finished downloads
+- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
+- New: Updated internal routing to BRouter v1.6.3

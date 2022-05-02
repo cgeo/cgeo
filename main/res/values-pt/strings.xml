@@ -643,6 +643,7 @@
     <string name="settings_title_map_behavior">Comportamento do mapa</string>
     <string name="settings_title_map_style">Estilo do mapa</string>
     <string name="settings_hide_tileproviders_title">Ocultar indicação da origem do mapa</string>
+    <string name="settings_hide_tileproviders_summary">Permite a exclusão de uma ou mais cartografias do menu de selecção de mapas</string>
     <string name="settings_title_data_dir">Pasta de dados de geocaches</string>
     <string name="settings_title_data_dir_usage">Pasta de dados de geocaches (a usar %1$s)</string>
     <string name="calculate_dataDir_title">Utilização de dados de geocache</string>
@@ -730,6 +731,7 @@
     <string name="init_signature_template_log">Texto de registo</string>
     <string name="init_signature_template_size">Tamanho</string>
     <string name="init_signature_template_type">Tipo</string>
+    <string name="init_signature_template_location">Localização</string>
     <string name="init_ratingwanted">Avaliação de GCvote</string>
     <string name="init_summary_ratingwanted">Carregar a avaliação da cache de \'GCvote.com\'</string>
     <string name="init_friends_and_own_logs_wanted">Mostrar de amigos/meus</string>
@@ -1247,6 +1249,7 @@
     <string name="cache_menu_vote">Voto</string>
     <string name="cache_menu_checker">Abrir Geochecker</string>
     <string name="cache_menu_challenge_checker">Procurar verificador de Challenge</string>
+    <string name="cache_menu_log_in_browser">Registar no browser</string>
     <string name="cache_menu_ignore">Ignorar a cache</string>
     <string name="cache_log_menu_decrypt">Decifrar/Cifrar</string>
     <string name="cache_log_menu_popup_title">Registo de %s</string>
@@ -2024,6 +2027,7 @@
         <item quantity="other">%d pontos adicionais extraídos</item>
     </plurals>
     <string name="link_gc_checker">Verificador de coordenadas do \'geocaching.com\' disponível via browser</string>
+    <string name="geochecker_available">Geochecker disponível via browser</string>
     <!-- calendar adder -->
     <string name="event_fail">Falha ao adicionar o evento ao calendário</string>
     <string name="init_low_disk_space">A ficar sem espaço de armazenamento</string>

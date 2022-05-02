@@ -1249,6 +1249,7 @@
     <string name="cache_menu_vote">Anna ääni</string>
     <string name="cache_menu_checker">Avaa Geochecker</string>
     <string name="cache_menu_challenge_checker">Etsi Haastetarkistin</string>
+    <string name="cache_menu_log_in_browser">Kirjaa selaimessa</string>
     <string name="cache_menu_ignore">Ohita kätkö</string>
     <string name="cache_log_menu_decrypt">Pura salaus/Salaa</string>
     <string name="cache_log_menu_popup_title">Loki %s</string>
@@ -2026,6 +2027,7 @@
         <item quantity="other">%d reittipistettä purettu</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com:in koordinaattien tarkistin saatavilla selaimen kautta</string>
+    <string name="geochecker_available">Geochecker saatavilla selaimen kautta</string>
     <!-- calendar adder -->
     <string name="event_fail">Tapahtumakätkön lisääminen kalenteriin epäonnistui</string>
     <string name="init_low_disk_space">Tallennustila on vähissä</string>
@@ -2151,7 +2153,7 @@
     <string name="downloadmanager_not_available">Tiedostoa ei voi ladata, järjestelmän lataushallinta ei ole käytettävissä</string>
     <string name="download_started">Lataus aloitettiin taustalla</string>
     <string name="downloadmap_target_not_writable">Valittu kohde \"%s\" ei ole kirjoitettavissa - ladattu karttatiedosto on tallennettu järjestelmän latauskansioon ja se on siirrettävä manuaalisesti karttakansioon.</string>
-    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (esim. mobiiliyhteys)</string>
+    <string name="downloadmap_allow_metered_network">Salli lataaminen mitatun verkon kautta (kuten mobiiliyhteys)</string>
     <string name="download_confirmation">%1$sLataa tiedosto \"%2$s\"?%3$s</string>
     <string name="download_confirmation_updates">Päivityksiä löytyi kohteelle:\n%1$s\n\nHaluatko päivittää?%2$s</string>
     <string name="download_warning">Tämä voi kestää jonkin aikaa ja voi aiheuttaa merkittäviä kustannuksia verkkoyhteydestäsi riippuen.</string>
