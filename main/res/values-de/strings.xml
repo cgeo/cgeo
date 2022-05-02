@@ -1249,6 +1249,7 @@
     <string name="cache_menu_vote">Bewerten</string>
     <string name="cache_menu_checker">Öffne Geochecker</string>
     <string name="cache_menu_challenge_checker">Suche Challenge-Checker</string>
+    <string name="cache_menu_log_in_browser">Im Browser loggen</string>
     <string name="cache_menu_ignore">Cache ignorieren</string>
     <string name="cache_log_menu_decrypt">Ver- / Entschlüsseln</string>
     <string name="cache_log_menu_popup_title">Log von %s</string>
@@ -2026,6 +2027,7 @@
         <item quantity="other">%d Wegpunkte extrahiert</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com Koordinatenchecker im Browser verfügbar</string>
+    <string name="geochecker_available">Geochecker im Browser verfügbar</string>
     <!-- calendar adder -->
     <string name="event_fail">Hinzufügen des Events zum Kalender fehlgeschlagen</string>
     <string name="init_low_disk_space">Wenig Speicherplatz verfügbar</string>
