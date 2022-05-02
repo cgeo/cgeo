@@ -1243,6 +1243,7 @@
     <string name="cache_menu_vote">Ψηφίστε</string>
     <string name="cache_menu_checker">Άνοιγμα Geochecker</string>
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
+    <string name="cache_menu_log_in_browser">Συνδεθείτε στο πρόγραμμα περιήγησης</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
     <string name="cache_log_menu_decrypt">Αποκρυπτογράφιση/Κρυπτογράφιση</string>
     <string name="cache_log_menu_popup_title">Καταγραφή από %s</string>
@@ -2020,6 +2021,7 @@
         <item quantity="other">Έγινε εξαγωγή %d σημείων αναφοράς</item>
     </plurals>
     <string name="link_gc_checker">Ο ελεγκτής συντεταγμένων του geocaching.com είναι διαθέσιμος μέσω του προγράμματος περιήγησης</string>
+    <string name="geochecker_available">Geochecker διαθέσιμος μέσω του προγράμματος περιήγησης</string>
     <!-- calendar adder -->
     <string name="event_fail">Απέτυχε η προσθήκη της εκδήλωσης στο ημερολόγιο</string>
     <string name="init_low_disk_space">Εξαντλείται ο αποθηκευτικός χώρος</string>
