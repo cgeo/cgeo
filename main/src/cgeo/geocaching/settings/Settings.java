@@ -122,6 +122,8 @@ public class Settings {
     private static MapSource mapSource;
     private static AbstractTileProvider tileProvider;
 
+    public static final String RENDERTHEMESCALE_DEFAULTKEY = "renderthemescale_default";
+
     public enum CoordInputFormatEnum {
         Plain,
         Deg,
@@ -229,6 +231,8 @@ public class Settings {
             return title;
         }
     }
+
+    public enum RenderThemeScaleType { MAP, TEXT, SYMBOL }
 
     //NO_APPLICATION_MODE will be true if Settings is used in context of local unit tests
     private static final boolean NO_APPLICATION_MODE = CgeoApplication.getInstance() == null;
@@ -492,7 +496,11 @@ public class Settings {
     }
 
     private static int getInt(final int prefKeyId, final int defaultValue) {
-        return sharedPrefs == null ? defaultValue : sharedPrefs.getInt(getKey(prefKeyId), defaultValue);
+        return getIntDirect(getKey(prefKeyId), defaultValue);
+    }
+
+    private static int getIntDirect(final String prefKey, final int defaultValue) {
+        return sharedPrefs == null ? defaultValue : sharedPrefs.getInt(prefKey, defaultValue);
     }
 
     public static int getPreferencesCount() {
@@ -1591,6 +1599,17 @@ public class Settings {
     /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
     public static void setSyncMapRenderThemeFolder(final boolean syncMapRenderThemeFolder) {
         putBoolean(R.string.pref_renderthemefolder_synctolocal, syncMapRenderThemeFolder);
+    }
+
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}! */
+    public static String getMapRenderScalePreferenceKey(final String themeStyleId, final RenderThemeScaleType scaleType) {
+        return themeStyleId + "-" + scaleType;
+    }
+
+    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    public static int getMapRenderScale(final String themeStyleId, final RenderThemeScaleType scaleType) {
+        final int value = getIntDirect(getMapRenderScalePreferenceKey(themeStyleId, scaleType), 100);
+        return Math.min(500, Math.max(value, 10));
     }
 
     /**

@@ -1,16 +1,22 @@
 package cgeo.geocaching.maps.mapsforge.v6;
 
 import cgeo.geocaching.R;
+import cgeo.geocaching.settings.SeekbarPreference;
 import cgeo.geocaching.settings.Settings;
 
 import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.StringRes;
 import androidx.preference.CheckBoxPreference;
 import androidx.preference.ListPreference;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceCategory;
 import androidx.preference.PreferenceFragmentCompat;
+import androidx.preference.PreferenceGroup;
+import androidx.preference.PreferenceManager;
+import androidx.preference.PreferenceViewHolder;
 
 import java.util.Locale;
 import java.util.Map;
@@ -22,6 +28,7 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
     public static final String RENDERTHEME_MENU = "renderthememenu";
 
     ListPreference baseLayerPreference;
+
     XmlRenderThemeStyleMenu renderthemeOptions;
     PreferenceCategory renderthemeMenu;
 
@@ -31,11 +38,9 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
 
         // if the render theme has a style menu, its data is delivered via the intent
         renderthemeOptions = (XmlRenderThemeStyleMenu) getActivity().getIntent().getSerializableExtra(RENDERTHEME_MENU);
-        if (renderthemeOptions != null) {
-            // the preference category serves as the hook to add a list preference to allow users to select a style
-            this.renderthemeMenu = (PreferenceCategory) findPreference(getString(R.string.pref_theme_menu));
-            createRenderthemeMenu();
-        }
+        // the preference category serves as the hook to add a list preference to allow users to select a style
+        this.renderthemeMenu = (PreferenceCategory) findPreference(getString(R.string.pref_theme_menu));
+        createRenderthemeMenu();
     }
 
     @Override
@@ -49,12 +54,33 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
 
         this.renderthemeMenu.removeAll();
 
+        final String themeStylePrefKey;
+        if (renderthemeOptions != null) {
+            final String themePrefKey = createThemePreferences(activity);
+            themeStylePrefKey = themePrefKey + "-" + PreferenceManager.getDefaultSharedPreferences(activity).getString(themePrefKey, "none");
+        } else {
+            themeStylePrefKey = Settings.RENDERTHEMESCALE_DEFAULTKEY;
+        }
+
+        //scale preferences for theme
+        addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.MAP),
+            R.string.maptheme_scale_map_title, R.string.maptheme_scale_map_summary);
+        addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.TEXT),
+            R.string.maptheme_scale_text_title, R.string.maptheme_scale_text_summary);
+        addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.SYMBOL),
+            R.string.maptheme_scale_symbol_title, R.string.maptheme_scale_symbol_summary);
+
+    }
+
+    private String createThemePreferences(final Activity activity) {
         this.baseLayerPreference = new ListPreference(activity);
         baseLayerPreference.setTitle(R.string.settings_title_map_style);
 
         // the id of the setting is the id of the stylemenu, that allows this
         // app to store different settings for different render themes.
-        baseLayerPreference.setKey(this.renderthemeOptions.getId());
+        final String themePrefKey = this.renderthemeOptions.getId();
+        baseLayerPreference.setKey(themePrefKey);
+
 
         // this is the user language for the app, in 'en', 'de' etc format
         // no dialects are supported at the moment
@@ -96,6 +122,7 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
         });
         renderthemeMenu.addPreference(baseLayerPreference);
 
+
         // additional theme info
         if (RenderThemeHelper.getRenderThemeType() == RenderThemeHelper.RenderThemeType.RTT_ELEVATE) {
             final Preference info = new Preference(activity);
@@ -124,6 +151,28 @@ public class RenderThemeSettingsFragment extends PreferenceFragmentCompat {
             checkbox.setIconSpaceReserved(false);
             this.renderthemeMenu.addPreference(checkbox);
         }
+        return themePrefKey;
+    }
+
+    private void addScalePreference(final Context context, final PreferenceGroup cat, final String prefKey, @StringRes final int titleId, @StringRes final int summaryId) {
+
+        final Preference info = new Preference(context) {
+            public void onBindViewHolder(final PreferenceViewHolder holder) {
+                super.onBindViewHolder(holder);
+                holder.setDividerAllowedAbove(false);
+                holder.setDividerAllowedBelow(false);
+            }
+        };
+        info.setTitle(titleId);
+        info.setSummary(summaryId);
+        info.setIconSpaceReserved(false);
+        cat.addPreference(info);
+
+        final SeekbarPreference seek = new SeekbarPreference(context, 10, 500, "", "%",
+            new SeekbarPreference.FactorizeValueMapper(10));
+        seek.setDefaultValue(100);
+        seek.setKey(prefKey);
+        cat.addPreference(seek);
     }
 
 }
