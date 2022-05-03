@@ -674,7 +674,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         if (cache != null) {
             // top level menu items
             menu.findItem(R.id.menu_tts_toggle).setVisible(!cache.isGotoHistoryUDC());
-            menu.findItem(R.id.menu_checker).setVisible(StringUtils.isNotEmpty(CheckerUtils.getCheckerUrl(cache)));
             if (connector instanceof PgcChallengeCheckerCapability) {
                 menu.findItem(R.id.menu_challenge_checker).setVisible(((PgcChallengeCheckerCapability) connector).isChallengeCache(cache));
             }
@@ -725,8 +724,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             refreshCache();
         } else if (menuItem == R.id.menu_gcvote) {
             showVoteDialog();
-        } else if (menuItem == R.id.menu_checker) {
-            openGeochecker(this, cache);
         } else if (menuItem == R.id.menu_challenge_checker) {
             ShareUtils.openUrl(this, "https://project-gc.com/Challenges/" + cache.getGeocode());
         } else if (menuItem == R.id.menu_ignore) {

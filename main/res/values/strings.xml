@@ -1390,7 +1390,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Vote</string>
-    <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Search challenge checker</string>
     <string name="cache_menu_log_in_browser">Log in browser</string>
     <string name="cache_menu_ignore">Ignore cache</string>
