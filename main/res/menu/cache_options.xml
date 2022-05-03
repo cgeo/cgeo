@@ -75,12 +75,6 @@
         android:visible="false">
     </item>
     <item
-        android:id="@+id/menu_checker"
-        android:title="@string/cache_menu_checker"
-        android:visible="false"
-        app:showAsAction="ifRoom">
-    </item>
-    <item
         android:id="@+id/menu_challenge_checker"
         android:title="@string/cache_menu_challenge_checker"
         android:visible="false"
