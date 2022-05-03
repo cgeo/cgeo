@@ -7,13 +7,17 @@ import android.util.Pair;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * Holds implementations for functions in Formula
@@ -37,9 +41,23 @@ public class FormulaUtils {
         "(?<lat>[nNsS]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\h+([a-zA-Z]{2,}\\h+)*(?<lon>[eEwWoO]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );
 
-    //\h*([a-zA-Z]{2,}\h+)*
-
     private static final Pattern DEGREE_TRAILINGWORD_REMOVER = Pattern.compile("\\h+([a-zA-Z]{2,})$");
+
+    private static final Map<Character, Integer> SPECIAL_LETTER_VALUE_MAP = new HashMap<>();
+
+    static {
+        //fill in special letter values
+        addSpecialLetterValue('ä', 27);
+        addSpecialLetterValue('ö', 28);
+        addSpecialLetterValue('ü', 29);
+        addSpecialLetterValue('ß', 30);
+    }
+
+    private static void addSpecialLetterValue(final char c, final int lettervalue) {
+        //add both uppercase and lowercase
+        SPECIAL_LETTER_VALUE_MAP.put(Character.toUpperCase(c), lettervalue);
+        SPECIAL_LETTER_VALUE_MAP.put(Character.toLowerCase(c), lettervalue);
+    }
 
     private FormulaUtils() {
         //no instance
@@ -91,15 +109,21 @@ public class FormulaUtils {
     }
 
     public static int letterValue(final String value) {
+        if (value == null) {
+            return 0;
+        }
         int lv = 0;
-        for (char c : value.toCharArray()) {
-            if (c >= 'a' && c <= 'z') {
+        final String strippedValue = StringUtils.stripAccents(value);
+        for (int i = 0; i < value.length(); i++) {
+            final char c = strippedValue.charAt(i);
+            final Integer v = SPECIAL_LETTER_VALUE_MAP.get(value.charAt(i));
+            if (v != null) {
+                lv += v;
+            } else if (c >= 'a' && c <= 'z') {
                 lv += (int) c - (int) 'a' + 1;
-            }
-            if (c >= 'A' && c <= 'Z') {
+            } else if (c >= 'A' && c <= 'Z') {
                 lv += (int) c - (int) 'A' + 1;
-            }
-            if (c >= '0' && c <= '9') {
+            } else if (c >= '0' && c <= '9') {
                 lv += (int) c - (int) '0';
             }
         }
