@@ -1277,6 +1277,7 @@
     <string name="cache_menu_vote">Hlasovat</string>
     <string name="cache_menu_checker">Otevřít Geocheck</string>
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
+    <string name="cache_menu_log_in_browser">Zalogovat v prohlížeči</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
@@ -2080,6 +2081,7 @@
         <item quantity="other">%d trasových bodů extrahováno</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com ověřovač souřadnic dostupný přes prohlížeč</string>
+    <string name="geochecker_available">Geochecker k dispozici prostřednictvím prohlížeče</string>
     <!-- calendar adder -->
     <string name="event_fail">Přidat událost do kalendáře se nepodařilo</string>
     <string name="init_low_disk_space">V úložišti dochází volné místo</string>
