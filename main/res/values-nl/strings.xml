@@ -1249,6 +1249,7 @@
     <string name="cache_menu_vote">Stem</string>
     <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Zoek challenge checker</string>
+    <string name="cache_menu_log_in_browser">Log bezoek in browser</string>
     <string name="cache_menu_ignore">Negeer cache</string>
     <string name="cache_log_menu_decrypt">Decoderen/Versleutelen</string>
     <string name="cache_log_menu_popup_title">Log van %s</string>
@@ -2026,6 +2027,7 @@
         <item quantity="other">%d waypoints geëxtraheerd</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coördinaat checker beschikbaar via browser</string>
+    <string name="geochecker_available">Geochecker beschikbaar via browser</string>
     <!-- calendar adder -->
     <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
     <string name="init_low_disk_space">Weinig schijfruimte</string>
