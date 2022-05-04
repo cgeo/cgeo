@@ -32,6 +32,12 @@ public class FormulaUtilsTest {
         assertThat(FormulaUtils.letterValue("ABC")).isEqualTo(6);
         assertThat(FormulaUtils.letterValue("")).isEqualTo(0);
         assertThat(FormulaUtils.letterValue("1234")).isEqualTo(10);
+        assertThat(FormulaUtils.letterValue("äöüß")).isEqualTo(27 + 28 + 29 + 30);
+        assertThat(FormulaUtils.letterValue("ÄÖÜß")).isEqualTo(27 + 28 + 29 + 30);
+        assertThat(FormulaUtils.letterValue("--")).isEqualTo(0);
+        assertThat(FormulaUtils.letterValue("Ç")).isEqualTo(3);
+        assertThat(FormulaUtils.letterValue("eêéè")).isEqualTo(20);
+        assertThat(FormulaUtils.letterValue("^ee^ä")).isEqualTo(37);
     }
 
     @Test
