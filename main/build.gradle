@@ -387,7 +387,7 @@ dependencies {
     implementation project(":mapswithme-api")
 
     // Metadata Extractor, EXIF location extraction from images
-    implementation 'com.drewnoakes:metadata-extractor:2.16.0'
+    implementation 'com.drewnoakes:metadata-extractor:2.18.0'
 
     def okhttpVersion = '4.9.3'
     implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
