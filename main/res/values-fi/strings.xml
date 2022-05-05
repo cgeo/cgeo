@@ -2190,6 +2190,12 @@
     <string name="mapserver_hylly_themes_info">Yksityiskohtainen karttateema, rakennettu \"Hylly\" karttoja varten</string>
     <string name="brouter_info">Offline-reitityspalvelu</string>
     <string name="maptheme_elevate_categoryinfo">Liittyy: [A] Alueet, [P] POI, [R] Reitit, [W] Tiet</string>
+    <string name="maptheme_scale_map_title">Kartan skaalauskerroin</string>
+    <string name="maptheme_scale_map_summary">Skaalaa karttaa, 100% = ei skaalausta</string>
+    <string name="maptheme_scale_text_title">Tekstin skaalauskerroin</string>
+    <string name="maptheme_scale_text_summary">Skaalaa automaattisesti tekstejä kartalla, 100% = ei ylimääräistä skaalausta</string>
+    <string name="maptheme_scale_symbol_title">Symbolien skaalauskerroin</string>
+    <string name="maptheme_scale_symbol_summary">Skaalaa automaattisesti symboleja kartalla, 100% = ei ylimääräistä skaalausta</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Poista jälkihistoria</string>
     <string name="map_trailhistory_cleared">Jälkihistoria tyhjennetty</string>
