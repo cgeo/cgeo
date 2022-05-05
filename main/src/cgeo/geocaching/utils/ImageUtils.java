@@ -6,6 +6,8 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.LocalStorage;
+import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.ui.ImageGalleryView;
 
 import android.app.Activity;
 import android.app.Application;
@@ -77,6 +79,57 @@ public final class ImageUtils {
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
     private static final String[] NO_EXTERNAL = { "geocheck.org" };
+
+    public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
+
+        private final Folder folder;
+
+        public ImageFolderCategoryHandler(final String geocode) {
+            final String suffix = StringUtils.right(geocode, 2);
+            folder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
+                suffix.substring(1) + "/" + suffix.charAt(0)  + "/" + geocode);
+        }
+
+        @Override
+        public Collection<Image> getAllImages() {
+            return CollectionStream.of(ContentStorage.get().list(folder))
+                .map(fi -> new Image.Builder().setUrl(fi.uri)
+                    .setTitle(getTitleFromName(fi.name))
+                    .setCategory(Image.ImageCategory.OWN)
+                    .setContextInformation("Stored: " + Formatter.formatDateTime(fi.lastModified))
+                    .build()).toList();
+        }
+
+        @Override
+        public Collection<Image> add(final Collection<Image> images) {
+            final Collection<Image> resultCollection = new ArrayList<>();
+            for (Image img : images) {
+                final String title = getTitleFromName(ContentStorage.get().getName(img.getUri()));
+                final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, null, false);
+                resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title)
+                    .setCategory(Image.ImageCategory.OWN)
+                    .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
+                    .build());
+            }
+            return resultCollection;
+        }
+
+        @Override
+        public void delete(final Image image) {
+            ContentStorage.get().delete(image.uri);
+        }
+
+        private String getTitleFromName(final String filename) {
+            String title = filename == null ? "-" : filename;
+            final int idx = title.lastIndexOf(".");
+            if (idx > 0) {
+                title = title.substring(0, idx);
+            }
+            return title;
+
+        }
+    }
+
 
     private ImageUtils() {
         // Do not let this class be instantiated, this is a utility class.
@@ -676,6 +729,17 @@ public final class ImageUtils {
 
     private static String mimeTypeForUrl(final String url) {
         return StringUtils.defaultString(MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url)), "image/*");
+    }
+
+    public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images) {
+        imageGallery.clear();
+        imageGallery.setup(geocode);
+        if (geocode != null) {
+            imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
+        }
+        if (images != null) {
+            imageGallery.addImages(images);
+        }
     }
 
 }

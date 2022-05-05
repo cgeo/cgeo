@@ -51,7 +51,6 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
-import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointParser;
@@ -95,6 +94,7 @@ import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
 import cgeo.geocaching.utils.Formatter;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
@@ -1793,7 +1793,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                         activity.showToast(getString(R.string.err_detail_no_spoiler));
                         return;
                     }
-                    ImagesActivity.startActivity(activity, cache.getGeocode(), cache.getSpoilers());
+                    ImageGalleryActivity.startActivity(activity, cache.getGeocode(), cache.getSpoilers());
                 });
 
                 // if there is only a listing background image without other additional pictures, change the text to better explain the content.
@@ -2335,11 +2335,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
 
             if (activity.imageGallery == null) {
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
-                imageGallery.clear();
-                imageGallery.setup(cache.getGeocode());
-                imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(),
-                    new ImageGalleryView.FolderCategoryHandler(cache.getGeocode()));
-                imageGallery.addImages(cache.getNonStaticImages());
+                ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages());
                 activity.imageGallery = imageGallery;
             }
         }
@@ -2616,10 +2612,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
                 pages.add(Page.IMAGES.id);
             }
+            if (!BranchDetectionHelper.isProductionBuild()) {
+                pages.add(Page.IMAGEGALLERY.id);
+            }
         }
-        if (!BranchDetectionHelper.isProductionBuild()) {
-            pages.add(Page.IMAGEGALLERY.id);
-        }
+
         final long[] result = new long[pages.size()];
         for (int i = 0; i < pages.size(); i++) {
             result[i] = pages.get(i);

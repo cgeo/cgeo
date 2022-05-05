@@ -12,15 +12,11 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Waypoint;
-import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.storage.DataStore;
-import cgeo.geocaching.storage.Folder;
-import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.dialog.ContextMenuDialog;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.ManagedListAdapter;
 import cgeo.geocaching.utils.CollectionStream;
-import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -34,7 +30,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.graphics.drawable.BitmapDrawable;
-import android.net.Uri;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
 import android.view.LayoutInflater;
@@ -145,57 +140,6 @@ public class ImageGalleryView extends LinearLayout {
         }
         if (heightInDp > 0) {
             lp.height = ViewUtils.dpToPixel(heightInDp);
-        }
-    }
-
-
-    public static class FolderCategoryHandler implements EditableCategoryHandler {
-
-        private final Folder folder;
-
-        public FolderCategoryHandler(final String geocode) {
-            final String suffix = StringUtils.right(geocode, 2);
-            folder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
-                suffix.substring(1) + "/" + suffix.charAt(0)  + "/" + geocode);
-        }
-
-        @Override
-        public Collection<Image> getAllImages() {
-            return CollectionStream.of(ContentStorage.get().list(folder))
-                .map(fi -> new Image.Builder().setUrl(fi.uri)
-                    .setTitle(getTitleFromName(fi.name))
-                    .setCategory(Image.ImageCategory.OWN)
-                    .setContextInformation("Stored: " + Formatter.formatDateTime(fi.lastModified))
-                    .build()).toList();
-        }
-
-        @Override
-        public Collection<Image> add(final Collection<Image> images) {
-            final Collection<Image> resultCollection = new ArrayList<>();
-            for (Image img : images) {
-                final String title = getTitleFromName(ContentStorage.get().getName(img.getUri()));
-                final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, null, false);
-                resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title)
-                .setCategory(Image.ImageCategory.OWN)
-                .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
-                .build());
-            }
-            return resultCollection;
-        }
-
-        @Override
-        public void delete(final Image image) {
-            ContentStorage.get().delete(image.uri);
-        }
-
-        private String getTitleFromName(final String filename) {
-            String title = filename == null ? "-" : filename;
-            final int idx = title.lastIndexOf(".");
-            if (idx > 0) {
-                title = title.substring(0, idx);
-            }
-            return title;
-
         }
     }
 

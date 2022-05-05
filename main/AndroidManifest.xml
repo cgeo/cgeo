@@ -466,6 +466,11 @@
             android:label="@string/app_name" >
         </activity>
         <activity
+            android:name=".ImageGalleryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
             android:name=".CacheDetailActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/app_name"

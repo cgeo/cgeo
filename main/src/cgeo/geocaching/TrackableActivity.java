@@ -6,6 +6,7 @@ import cgeo.geocaching.activity.TabbedViewPagerFragment;
 import cgeo.geocaching.connector.ConnectorFactory;
 import cgeo.geocaching.connector.trackable.TrackableBrand;
 import cgeo.geocaching.connector.trackable.TrackableTrackingCode;
+import cgeo.geocaching.databinding.CachedetailImagegalleryPageBinding;
 import cgeo.geocaching.databinding.CachedetailImagesPageBinding;
 import cgeo.geocaching.databinding.TrackableDetailsViewBinding;
 import cgeo.geocaching.location.Units;
@@ -24,12 +25,15 @@ import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.AnchorAwareLinkMovementMethod;
 import cgeo.geocaching.ui.CacheDetailsCreator;
+import cgeo.geocaching.ui.ImageGalleryView;
 import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
+import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -70,7 +74,8 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     public enum Page {
         DETAILS(R.string.detail),
         LOGS(R.string.cache_logs),
-        IMAGES(R.string.cache_images);
+        IMAGES(R.string.cache_images),
+        IMAGEGALLERY(R.string.cache_images);
 
         @StringRes
         private final int resId;
@@ -102,6 +107,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     private ProgressDialog waitDialog = null;
     private CharSequence clickedItemText = null;
     private ImagesList imagesList = null;
+    private ImageGalleryView imageGallery = null;
     private String fallbackKeywordSearch = null;
     private final CompositeDisposable createDisposables = new CompositeDisposable();
     private final CompositeDisposable geoDataDisposable = new CompositeDisposable();
@@ -238,6 +244,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         displayTrackable();
         // reset imagelist // @todo mb: more to do?
         imagesList = null;
+        imageGallery = null;
     }
 
     private void refreshTrackable(final String message) {
@@ -371,6 +378,8 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             return new TrackableLogsViewCreator();
         } else if (pageId == Page.IMAGES.id) {
             return new ImagesViewCreator();
+        } else if (pageId == Page.IMAGEGALLERY.id) {
+            return new ImageGalleryViewCreator();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
     }
@@ -407,8 +416,43 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
 
     }
 
+    public static class ImageGalleryViewCreator extends TabbedViewPagerFragment<CachedetailImagegalleryPageBinding> {
+
+        @Override
+        public CachedetailImagegalleryPageBinding createView(@NonNull final LayoutInflater inflater, final ViewGroup container, final Bundle savedInstanceState) {
+            return CachedetailImagegalleryPageBinding.inflate(inflater, container, false);
+        }
+
+        @Override
+        public long getPageId() {
+            return Page.IMAGEGALLERY.id;
+        }
+
+        @Override
+        public void setContent() {
+            final TrackableActivity activity = (TrackableActivity) getActivity();
+            if (activity == null) {
+                return;
+            }
+            final Trackable trackable = activity.getTrackable();
+            if (trackable == null) {
+                return;
+            }
+            binding.getRoot().setVisibility(View.VISIBLE);
+
+            if (activity.imageGallery == null) {
+                ImageUtils.initializeImageGallery(binding.imageGallery, trackable.getGeocode(), trackable.getImages());
+                activity.imageGallery = binding.imageGallery;
+            }
+        }
+
+    }
+
     @Override
     protected String getTitle(final long pageId) {
+        if (pageId == Page.IMAGEGALLERY.id) {
+            return this.getString(Page.find(pageId).resId) + "*";
+        }
         return this.getString(Page.find(pageId).resId);
     }
 
@@ -421,6 +465,9 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             }
             if (CollectionUtils.isNotEmpty(trackable.getImages())) {
                 pages.add(Page.IMAGES.id);
+            }
+            if (!BranchDetectionHelper.isProductionBuild()) {
+                pages.add(Page.IMAGEGALLERY.id);
             }
         }
         final long[] result = new long[pages.size()];
@@ -682,12 +729,17 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         // Refresh the logs view after coming back from logging a trackable
         if (requestCode == LogTrackableActivity.LOG_TRACKABLE && resultCode == RESULT_OK) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
+        } else {
+            imageGallery.onActivityResult(requestCode, resultCode, data);
         }
     }
 
     @Override
     protected void onDestroy() {
         createDisposables.clear();
+        if (imageGallery != null) {
+            imageGallery.clear();
+        }
         super.onDestroy();
     }
 

@@ -1,6 +1,6 @@
 package cgeo.geocaching.log;
 
-import cgeo.geocaching.ImagesActivity;
+import cgeo.geocaching.ImageGalleryActivity;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.activity.TabbedViewPagerFragment;
@@ -105,7 +105,7 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
         if (log.hasLogImages()) {
             holder.binding.logImages.setText(log.getImageTitles());
             holder.binding.logImages.setVisibility(View.VISIBLE);
-            holder.binding.logImages.setOnClickListener(v -> ImagesActivity.startActivity(getActivity(), getGeocode(), new ArrayList<>(log.logImages)));
+            holder.binding.logImages.setOnClickListener(v -> ImageGalleryActivity.startActivity(getActivity(), getGeocode(), new ArrayList<>(log.logImages)));
         } else {
             holder.binding.logImages.setVisibility(View.GONE);
         }
