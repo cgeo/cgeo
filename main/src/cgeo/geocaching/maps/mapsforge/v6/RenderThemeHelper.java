@@ -96,6 +96,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     //current Theme style menu settings
     private XmlRenderThemeStyleMenu themeStyleMenu;
     private String prefThemeOptionMapStyle = "";
+    private String prefThemeStyleKey = "";
 
     //the last used Zip Resource Provider is cached.
     private static String cachedZipProviderFilename = null;
@@ -157,8 +158,9 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         //try to apply stored value
         ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
 
+
         if (selectedTheme == null) {
-            rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+            applyDefaultTheme(rendererLayer);
         } else {
             try {
                 //get the theme
@@ -167,6 +169,8 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
                 // Validate the theme
                 org.mapsforge.map.rendertheme.rule.RenderThemeHandler.getRenderTheme(AndroidGraphicFactory.INSTANCE, new DisplayModel(), xmlRenderTheme);
                 rendererLayer.setXmlRenderTheme(xmlRenderTheme);
+                //setting xmlrendertheme has filled prefThemeStyleKey -> now apply scales
+                applyScales(rendererLayer, prefThemeStyleKey);
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
@@ -186,6 +190,23 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
             tileCache.purge();
         }
         rendererLayer.requestRedraw();
+    }
+
+    private void applyDefaultTheme(final TileRendererLayer rendererLayer) {
+        rendererLayer.setXmlRenderTheme(InternalRenderTheme.OSMARENDER);
+        applyScales(rendererLayer, Settings.RENDERTHEMESCALE_DEFAULTKEY);
+    }
+
+    private void applyScales(final TileRendererLayer rendererLayer, final String themeStyleId) {
+
+        final int mapScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.MAP);
+        final int textScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.TEXT);
+        final int symbolScale = Settings.getMapRenderScale(themeStyleId, Settings.RenderThemeScaleType.SYMBOL);
+
+        rendererLayer.getDisplayModel().setUserScaleFactor(mapScale / 100f);
+        rendererLayer.setTextScale(textScale / 100f);
+        DisplayModel.symbolScale = symbolScale / 100f;
+
     }
 
     private XmlRenderTheme createThemeFor(@NonNull final ThemeData theme) throws IOException {
@@ -272,7 +293,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     public void selectMapThemeOptions() {
         final Intent intent = new Intent(activity, RenderThemeSettings.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        if (themeStyleMenu != null) {
+        if (themeOptionsAvailable() && themeStyleMenu != null) {
             intent.putExtra(RenderThemeSettingsFragment.RENDERTHEME_MENU, themeStyleMenu);
         }
         activity.startActivity(intent);
@@ -295,7 +316,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
         themeStyleMenu = menu;
         prefThemeOptionMapStyle = menu.getId();
         final String id = this.sharedPreferences.getString(themeStyleMenu.getId(), themeStyleMenu.getDefaultValue());
-
+        prefThemeStyleKey = menu.getId() + "-" + id;
         final XmlRenderThemeStyleLayer baseLayer = themeStyleMenu.getLayer(id);
         if (baseLayer == null) {
             Log.w("Invalid style " + id);
@@ -316,9 +337,6 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
     /**
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
-     *
-     * @param namTheme theme to set
-     * @param theme really set (might be corrected if given value is not correct/incomplete)
      */
     public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
         return setSelectedMapThemeInternal(themeIdCandidate) != null;

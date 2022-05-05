@@ -30,7 +30,35 @@ public class SeekbarPreference extends Preference {
     protected final int defaultValue = 10;
     protected boolean hasDecimals = false;
     protected String label = "";
+    protected String unitValue = "";
     protected Context context = null;
+    private ValueProgressMapper valueProgressMapper = null;
+
+    public interface ValueProgressMapper {
+        int valueToProgress(int value);
+
+        int progressToValue(int progress);
+
+    }
+
+    public static class FactorizeValueMapper implements ValueProgressMapper {
+        private final int factor;
+
+        public FactorizeValueMapper(final int factor) {
+            this.factor = factor;
+        }
+
+
+        @Override
+        public int valueToProgress(final int value) {
+            return value / factor;
+        }
+
+        @Override
+        public int progressToValue(final int progress) {
+            return progress * factor;
+        }
+    }
 
     public SeekbarPreference(final Context context) {
         this(context, null);
@@ -43,6 +71,22 @@ public class SeekbarPreference extends Preference {
     public SeekbarPreference(final Context context, final AttributeSet attrs, final int defStyle) {
         super(context, attrs, defStyle);
         this.context = context;
+        initInternal(attrs);
+    }
+
+    /** for programmatic creation */
+    public SeekbarPreference(final Context context, final int min, final int max, final String label, final String unitValue, final ValueProgressMapper valueProgressMapper) {
+        super(context, null, android.R.attr.preferenceStyle);
+        this.context = context;
+        this.minProgress = min;
+        this.maxProgress = max;
+        this.label = label == null ? "" : label;
+        this.unitValue = unitValue == null ? "" : unitValue;
+        this.valueProgressMapper = valueProgressMapper;
+        initInternal(null);
+    }
+
+    private void initInternal(final AttributeSet attrs) {
         setPersistent(true);
         setLayoutResource(R.layout.preference_seekbar);
 
@@ -70,11 +114,11 @@ public class SeekbarPreference extends Preference {
     }
 
     protected int valueToProgress(final int value) {
-        return valueToProgressHelper(value);
+        return valueProgressMapper == null ? valueToProgressHelper(value) : valueProgressMapper.valueToProgress(value);
     }
 
     protected int progressToValue(final int progress) {
-        return progress;
+        return valueProgressMapper == null ? progress : valueProgressMapper.progressToValue(progress);
     }
 
     protected String valueToShownValue(final int value) {
@@ -99,7 +143,7 @@ public class SeekbarPreference extends Preference {
      * @return string for the unit label
      */
     protected String getUnitString() {
-        return "";
+        return unitValue;
     }
 
     /**

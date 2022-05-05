@@ -2450,6 +2450,12 @@
     <string name="mapserver_hylly_themes_info">Detailed map theme, built for \"Hylly\" maps</string>
     <string name="brouter_info">Offline routing service</string>
     <string name="maptheme_elevate_categoryinfo">Relevant for: [A] Areas, [P] POI, [R] Routes, [W] Ways</string>
+    <string name="maptheme_scale_map_title">Map Scale Factor</string>
+    <string name="maptheme_scale_map_summary">Scales map; 100% = no scaling</string>
+    <string name="maptheme_scale_text_title">Text Scale factor</string>
+    <string name="maptheme_scale_text_summary">Additionally scales text labels in map; 100% = no extra scaling</string>
+    <string name="maptheme_scale_symbol_title">Symbol Scale factor</string>
+    <string name="maptheme_scale_symbol_summary">Additionally scales symbol sizes in map; 100% = no extra scaling</string>
 
     <!-- history track -->
     <string name="map_clear_trailhistory">Clear history track</string>
