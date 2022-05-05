@@ -13,9 +13,14 @@ env:
   RELEASE_BRANCH: release
   MASTER_BRANCH: master
 
+permissions:
+  contents: read
+
 jobs:
   # This workflow contains a single job called "merge-branches"
   merge-branches:
+    permissions:
+      contents: write  # for Git to git push
     runs-on: ubuntu-latest
 
     steps:
