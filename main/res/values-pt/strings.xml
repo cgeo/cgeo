@@ -2185,6 +2185,12 @@
     <string name="mapserver_hylly_themes_info">Tema de mapa detalhado, feito para mapas \"Hylly\"</string>
     <string name="brouter_info">Serviço de encaminhamento offline</string>
     <string name="maptheme_elevate_categoryinfo">Relevante para: [A] Áreas, [P] POI, [R] Rotas, [W] Vias</string>
+    <string name="maptheme_scale_map_title">Factor de Escala do Mapa</string>
+    <string name="maptheme_scale_map_summary">Redimensionar mapa; 100% = sem dimensionamento</string>
+    <string name="maptheme_scale_text_title">Factor de Escala do Texto</string>
+    <string name="maptheme_scale_text_summary">Adicionalmente, permite redimensionar o texto das etiquetas no mapa; 100% = sem dimensionamento extra</string>
+    <string name="maptheme_scale_symbol_title">Factor de escala do símbolo</string>
+    <string name="maptheme_scale_symbol_summary">Adicionalmente, permite redimensionar o tamanho dos símbolos no mapa; 100% = sem dimensionamento extra</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Limpar histórico de percurso</string>
     <string name="map_trailhistory_cleared">O histórico de percurso foi limpo</string>
