@@ -2162,6 +2162,12 @@
     <string name="mapserver_hylly_themes_info">\"Hylly\"지도를 위해 제작 된 상세한지도 테마</string>
     <string name="brouter_info">오프라인 라우팅 서비스</string>
     <string name="maptheme_elevate_categoryinfo">관련 항목: [A] 지역, [P] 관심 지점, [R] 경로, [W] 길</string>
+    <string name="maptheme_scale_map_title">지도 축척 비율</string>
+    <string name="maptheme_scale_map_summary">지도 축척; 100% = 축척 없음</string>
+    <string name="maptheme_scale_text_title">문자 축척 비율</string>
+    <string name="maptheme_scale_text_summary">그리고 지도에서 문자 레이블의 크기를 축척합니다. 100% = 추가 축척 없음</string>
+    <string name="maptheme_scale_symbol_title">기호 축척 비율</string>
+    <string name="maptheme_scale_symbol_summary">그리고 지도에서 기호 크기의 크기를 축척합니다. 100% = 추가 축척 없음</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">트레일 역사 지우기</string>
     <string name="map_trailhistory_cleared">트레일 역사가 삭제되었습니다.</string>
