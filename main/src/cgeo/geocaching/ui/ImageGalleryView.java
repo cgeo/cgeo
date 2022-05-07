@@ -29,6 +29,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Rect;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
 import android.view.ContextThemeWrapper;
@@ -343,7 +344,40 @@ public class ImageGalleryView extends LinearLayout {
 
     /** include this method in your activity to support activity-related tasks */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        return imageHelper.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == ImageViewActivity.RESULTCODE_IMAGEVIEW) {
+            scrollToIndex(data.getIntExtra(Intents.EXTRA_INDEX, -1));
+            return true;
+        } else {
+            return imageHelper.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
+    private void scrollToIndex(final int index) {
+        if (index < 0) {
+            return;
+        }
+
+        int pos = 0;
+        String category = null;
+        for (String cat : categoryList) {
+            category = cat;
+            final ImageListAdapter adapter = Objects.requireNonNull(categoryAdapters.get(cat));
+            if (pos + adapter.getItemCount() > index) {
+                break;
+            }
+            pos += adapter.getItemCount();
+        }
+        final int idx = index - pos;
+        final ImageListAdapter adapter = categoryAdapters.get(category);
+        if (category == null || adapter == null || idx < 0 || idx >= adapter.getItemCount()) {
+            return;
+        }
+
+        final RecyclerView recyclerView = categoryViews.get(category).imageGalleryList;
+        final View view = recyclerView.getChildAt(idx);
+        //scroll view into visibility
+        final Rect rect = new Rect(0, -100, view.getWidth(), view.getHeight() + 100);
+        view.requestRectangleOnScreen(rect, true);
     }
 
     public void clear() {
