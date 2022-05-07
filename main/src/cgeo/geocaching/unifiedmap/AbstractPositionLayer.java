@@ -161,7 +161,7 @@ public abstract class AbstractPositionLayer<T> {
         repaintRouteAndTracks();
     }
 
-    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection, final AbstractUnifiedMap<T> map) {
+    protected void setCurrentPositionAndHeadingHelper(final Location location, final float heading, final Action1<List<T>> drawDirection, final AbstractUnifiedMapView<T> map) {
         final boolean coordChanged = !Objects.equals(location, currentLocation);
         final boolean headingChanged = heading != currentHeading;
         currentLocation = location;

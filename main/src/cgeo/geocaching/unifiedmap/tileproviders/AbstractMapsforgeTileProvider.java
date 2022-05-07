@@ -1,6 +1,6 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 
 import android.net.Uri;
 
@@ -21,7 +21,7 @@ public abstract class AbstractMapsforgeTileProvider extends AbstractTileProvider
 
     public abstract void addTileLayer(Map map);
 
-    public AbstractUnifiedMap getMap() {
+    public AbstractUnifiedMapView getMap() {
         return TileProviderFactory.MAP_MAPSFORGE;
     }
 
