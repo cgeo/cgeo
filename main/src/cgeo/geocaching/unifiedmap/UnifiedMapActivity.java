@@ -2,6 +2,7 @@ package cgeo.geocaching.unifiedmap;
 
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
+import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
@@ -406,6 +407,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 item.setChecked(true);
                 changeMapSource(tileProvider);
                 return true;
+            }
+            // @todo: remove this if-block after having completed implementation of UnifiedMap
+            if (item.getItemId() != android.R.id.home) {
+                ActivityMixin.showShortToast(this, "menu item '" + item.getTitle() + "' not yet implemented for UnifiedMap");
             }
             return super.onOptionsItemSelected(item);
         }
