@@ -4,11 +4,12 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractMapsforgeTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 
+import android.app.Activity;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -31,16 +32,14 @@ import org.oscim.scalebar.ImperialUnitAdapter;
 import org.oscim.scalebar.MapScaleBar;
 import org.oscim.scalebar.MapScaleBarLayer;
 import org.oscim.scalebar.MetricUnitAdapter;
-import org.oscim.theme.IRenderTheme;
 import org.oscim.tiling.TileSource;
 
 /**
  * MapsforgeVtmView - Contains the view handling parts specific to MapsforgeVtm
  * To be called by UnifiedMapActivity (mostly)
  */
-public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
+public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
-    private IRenderTheme mTheme;
     private MapView mMapView;
     private View rootView;
     private Map mMap;
@@ -49,6 +48,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
     protected TileLayer baseMap;
     protected final ArrayList<Layer> layers = new ArrayList<>();
     protected Map.UpdateListener mapUpdateListener;
+    protected MapsforgeThemeHelper themeHelper;
 
     @Override
     public void init(final AppCompatActivity activity, final int delayedZoomTo, final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
@@ -60,6 +60,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         setMapRotation(mapRotation);
         activity.findViewById(R.id.map_zoomin).setOnClickListener(v -> zoomInOut(true));
         activity.findViewById(R.id.map_zoomout).setOnClickListener(v -> zoomInOut(false));
+        themeHelper = new MapsforgeThemeHelper(activity);
         onMapReadyTasks.run();
     }
 
@@ -169,39 +170,6 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
     }
 
     @Override
-    public void applyTheme() {
-        if (mTheme != null) {
-            mTheme.dispose();
-        }
-
-        /*
-        // zip based theme
-        try {
-            final List<String> xmlThemes = ZipXmlThemeResourceProvider.scanXmlThemes(new ZipInputStream(new BufferedInputStream(ContentStorage.get().openForRead(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), "Elevate.zip"))));
-            StringBuilder sb = new StringBuilder();
-            for (String s : xmlThemes) {
-                sb.append('"').append(s).append("\" ");
-            }
-            Log.e("found themes: " + sb.toString());
-        } catch (IOException e) {
-            Log.e(e.getMessage());
-        }
-
-
-        ThemeFile theme = null;
-        try {
-            theme = new ZipRenderTheme("Elevate.xml", new ZipXmlThemeResourceProvider(new ZipInputStream(new BufferedInputStream(ContentStorage.get().openForRead(PersistableFolder.OFFLINE_MAP_THEMES.getFolder(), "Elevate.zip")))));
-        } catch (Exception ignore) {
-            Log.e(ignore.getMessage());
-        }
-        mTheme = mMap.setTheme(theme);
-        */
-
-        mTheme = mMap.setTheme(VtmThemes.OSMARENDER);
-
-    }
-
-    @Override
     protected AbstractPositionLayer<GeoPoint> configPositionLayer(final boolean create) {
         if (create) {
             return positionLayer != null ? positionLayer : new MapsforgePositionLayer(mMap, rootView);
@@ -228,6 +196,24 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
     public BoundingBox getBoundingBox() {
         return mMap.getBoundingBox(0);
     };
+
+    // ========================================================================
+    // theme related methods
+
+    @Override
+    public void selectTheme(final Activity activity) {
+        themeHelper.selectMapTheme(activity, mMap);
+    }
+
+    @Override
+    public void selectThemeOptions() {
+        // @todo
+    }
+
+    @Override
+    public void applyTheme() {
+        themeHelper.reapplyMapTheme(mMap);
+    }
 
     // ========================================================================
     // zoom & heading methods
@@ -272,7 +258,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
     @Override
     protected void onDestroy() {
         mMapView.onDestroy();
-        mTheme.dispose();
+        themeHelper.disposeTheme();
         super.onDestroy();
     }
 }

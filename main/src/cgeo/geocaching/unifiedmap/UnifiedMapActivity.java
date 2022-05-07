@@ -52,7 +52,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
-    private AbstractUnifiedMap map = null;
+    private AbstractTileProvider tileProvider = null;
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private static boolean followMyLocation = Settings.isLiveMap();
@@ -116,13 +116,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                         final boolean needsRepaintForHeading = needsRepaintForHeading();
 
                         if (needsRepaintForDistanceOrAccuracy && followMyLocation) {
-                            mapActivity.map.setCenter(new Geopoint(currentLocation));
+                            mapActivity.tileProvider.getMap().setCenter(new Geopoint(currentLocation));
                             mapActivity.currentMapPosition.resetFollowMyLocation = false;
                         }
 
                         if (needsRepaintForDistanceOrAccuracy || needsRepaintForHeading) {
-                            if (mapActivity.map.positionLayer != null) {
-                                mapActivity.map.positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
+                            if (mapActivity.tileProvider.getMap().positionLayer != null) {
+                                mapActivity.tileProvider.getMap().positionLayer.setCurrentPositionAndHeading(currentLocation, currentHeading);
                             }
                             // @todo: check if proximity notification needs an update
                         }
@@ -138,7 +138,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (mapActivity == null) {
                 return false;
             }
-            return Math.abs(AngleUtils.difference(currentHeading, mapActivity.map.getHeading())) > MIN_HEADING_DELTA;
+            return Math.abs(AngleUtils.difference(currentHeading, mapActivity.tileProvider.getMap().getHeading())) > MIN_HEADING_DELTA;
         }
 
         boolean needsRepaintForDistanceOrAccuracy() {
@@ -184,16 +184,16 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     }
 
     private void changeMapSource(final AbstractTileProvider newSource) {
-        final AbstractUnifiedMap oldMap = map;
-        if (oldMap != null) {
-            oldMap.prepareForTileSourceChange();
+        final AbstractTileProvider oldProvider = tileProvider;
+        if (oldProvider != null) {
+            oldProvider.getMap().prepareForTileSourceChange();
         }
-        map = newSource.getMap();
-        if (map != oldMap) {
-            if (oldMap != null) {
-                map.init(this, oldMap.getCurrentZoom(), oldMap.getCenter(), () -> onMapReadyTasks(newSource, true));
+        tileProvider = newSource;
+        if (tileProvider != oldProvider) {
+            if (oldProvider != null) {
+                tileProvider.getMap().init(this, oldProvider.getMap().getCurrentZoom(), oldProvider.getMap().getCenter(), () -> onMapReadyTasks(newSource, true));
             } else {
-                map.init(this, Settings.getMapZoom(MapMode.LIVE), null, () -> onMapReadyTasks(newSource, true));   // @todo: use actual mapmode
+                tileProvider.getMap().init(this, Settings.getMapZoom(MapMode.LIVE), null, () -> onMapReadyTasks(newSource, true));   // @todo: use actual mapmode
             }
             configMapChangeListener(true);
         } else {
@@ -203,10 +203,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private void onMapReadyTasks(final AbstractTileProvider newSource, final boolean mapChanged) {
         TileProviderFactory.resetLanguages();
-        map.setTileSource(newSource);
+        tileProvider.getMap().setTileSource(newSource);
         Settings.setTileProvider(newSource);
-        map.setDelayedZoomTo();
-        map.setDelayedCenterTo();
+        tileProvider.getMap().setDelayedZoomTo();
+        tileProvider.getMap().setDelayedCenterTo();
 
         if (mapChanged) {
             routeTrackUtils = new RouteTrackUtils(this, null /* @todo: savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_ROUTETRACKUTILS) */, this::centerMap, this::clearIndividualRoute, this::reloadIndividualRoute, this::setTrack, this::isTargetSet);
@@ -226,7 +226,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private void configMapChangeListener(final boolean enabled) {
         if (enabled) {
-            map.setActivityMapChangeListener(unifiedMapPosition -> {
+            tileProvider.getMap().setActivityMapChangeListener(unifiedMapPosition -> {
                 final UnifiedMapPosition old = currentMapPosition;
                 currentMapPosition = (UnifiedMapPosition) unifiedMapPosition;
                 if (currentMapPosition.zoomLevel != old.zoomLevel) {
@@ -244,7 +244,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 }
             });
         } else {
-            map.setActivityMapChangeListener(null);
+            tileProvider.getMap().setActivityMapChangeListener(null);
         }
     }
 
@@ -252,11 +252,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private void centerMap(final Geopoint geopoint) {
         followMyLocation = false;
         initFollowMyLocationButton();
-        map.setCenter(geopoint);
+        tileProvider.getMap().setCenter(geopoint);
     }
 
     private Location getLocation() {
-        final Geopoint center = map.getCenter();
+        final Geopoint center = tileProvider.getMap().getCenter();
         final Location loc = new Location("UnifiedMap");
         loc.setLatitude(center.getLatitude());
         loc.setLongitude(center.getLongitude());
@@ -274,8 +274,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     @SuppressWarnings("unused") // @todo
     private void setTarget(final Geopoint geopoint, final String s) {
-        if (map.positionLayer != null) {
-            map.positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
+        if (tileProvider.getMap().positionLayer != null) {
+            tileProvider.getMap().positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
         }
         // @todo
     }
@@ -299,14 +299,14 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private void reloadIndividualRoute() {
         individualRoute.reloadRoute((route) -> {
-            if (map.positionLayer != null) {
-                map.positionLayer.updateIndividualRoute(route);
+            if (tileProvider.getMap().positionLayer != null) {
+                tileProvider.getMap().positionLayer.updateIndividualRoute(route);
             }
         });
     }
 
     private void clearIndividualRoute() {
-        individualRoute.clearRoute((route) -> map.positionLayer.updateIndividualRoute(route));
+        individualRoute.clearRoute((route) -> tileProvider.getMap().positionLayer.updateIndividualRoute(route));
 //        ActivityMixin.invalidateOptionsMenu(this); // @todo still needed since introduction of route popup?
         showToast(res.getString(R.string.map_individual_route_cleared));
     }
@@ -345,6 +345,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 break;
         }
 
+        // theming options
+        menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
+//@todo        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemes());
+//@todo        menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
+
         return result;
     }
 
@@ -369,14 +374,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         - all cache related menu entries
         - all target related menu entries
         - filter related menu entries
-        - theme related menu entries (select theme, theme options, theme legend)
          */
         if (id == R.id.menu_toggle_mypos) {
             followMyLocation = !followMyLocation;
             Settings.setLiveMap(followMyLocation);
             if (followMyLocation) {
                 final Location currentLocation = geoDirUpdate.getCurrentLocation();
-                map.setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
+                tileProvider.getMap().setCenter(new Geopoint(currentLocation.getLatitude(), currentLocation.getLongitude()));
                 currentMapPosition.resetFollowMyLocation = false;
             }
             initFollowMyLocationButton();
@@ -387,11 +391,18 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             } else if (id == R.id.menu_map_rotation_auto) {
                 setMapRotation(item, MAPROTATION_AUTO);
         } else if (id == R.id.menu_check_routingdata) {
-            final BoundingBox bb = map.getBoundingBox();
+            final BoundingBox bb = tileProvider.getMap().getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
-        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> map.positionLayer.repaintHistory(), () -> map.positionLayer.clearHistory())
+        } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
             || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
+        } else if (id == R.id.menu_theme_mode) {
+            tileProvider.getMap().selectTheme(this);
+        } else if (id == R.id.menu_theme_options) {
+            tileProvider.getMap().selectThemeOptions();
+        } else if (id == R.id.menu_theme_legend) {
+            // @todo
+            // RenderThemeLegend.showLegend(this, this.renderThemeHelper, mapView.getModel().displayModel);
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);
         } else {
@@ -399,7 +410,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
                 item.setChecked(true);
                 Settings.setMapLanguage(language);
-                map.setPreferredLanguage(language);
+                tileProvider.getMap().setPreferredLanguage(language);
                 return true;
             }
             final AbstractTileProvider tileProvider = TileProviderFactory.getTileProvider(id);
@@ -419,7 +430,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private void setMapRotation(final MenuItem item, final int mapRotation) {
         Settings.setMapRotation(mapRotation);
-        map.setMapRotation(mapRotation);
+        tileProvider.getMap().setMapRotation(mapRotation);
         item.setChecked(true);
     }
 
@@ -470,7 +481,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     @Override
     public void onPause() {
-        map.onPause();
+        tileProvider.getMap().onPause();
         configMapChangeListener(false);
         super.onPause();
     }
@@ -478,7 +489,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        map.onResume();
+        tileProvider.getMap().onResume();
         configMapChangeListener(true);
         resumeRoute(false);
         if (tracks != null) {
@@ -491,8 +502,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (null == individualRoute || force) {
             individualRoute = new IndividualRoute(this::setTarget);
             reloadIndividualRoute();
-        } else if (map.positionLayer != null) {
-            individualRoute.updateRoute((route) -> map.positionLayer.updateIndividualRoute(route));
+        } else if (tileProvider.getMap().positionLayer != null) {
+            individualRoute.updateRoute((route) -> tileProvider.getMap().positionLayer.updateIndividualRoute(route));
         }
     }
 
@@ -500,13 +511,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         if (null == tracks && !preventReloading) {
             this.tracks = new Tracks(this.routeTrackUtils, this::setTrack);
         } else if (null != tracks) {
-            map.positionLayer.updateTrack(key, tracks.getRoute(key));
+            tileProvider.getMap().positionLayer.updateTrack(key, tracks.getRoute(key));
         }
     }
 
     @Override
     protected void onDestroy() {
-        map.onDestroy();
+        tileProvider.getMap().onDestroy();
         super.onDestroy();
     }
 

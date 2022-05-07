@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractGoogleTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
@@ -30,7 +30,7 @@ import org.oscim.core.BoundingBox;
  * GoogleMapsView - Contains the view handling parts specific to Google Maps
  * To be called by UnifiedMapActivity (mostly)
  */
-public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapReadyCallback {
+public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private View rootView;

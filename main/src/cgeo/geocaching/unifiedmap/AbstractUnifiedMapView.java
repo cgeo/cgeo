@@ -5,12 +5,14 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.functions.Action1;
 
+import android.app.Activity;
+
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import org.oscim.core.BoundingBox;
 
-public abstract class AbstractUnifiedMap<T> {
+public abstract class AbstractUnifiedMapView<T> {
 
     protected AbstractTileProvider currentTileProvider;
     protected AbstractPositionLayer<T> positionLayer;
@@ -33,10 +35,6 @@ public abstract class AbstractUnifiedMap<T> {
 
     public void setTileSource(final AbstractTileProvider newSource) {
         currentTileProvider = newSource;
-    };
-
-    public void applyTheme() {
-        // default is empty
     };
 
     public void setPreferredLanguage(final String language) {
@@ -69,6 +67,21 @@ public abstract class AbstractUnifiedMap<T> {
             delayedCenterTo = null;
         }
     }
+
+    // ========================================================================
+    // theme related methods
+
+    public void selectTheme(final Activity activity) {
+        // default is empty
+    }
+
+    public void selectThemeOptions() {
+        // default is empty
+    }
+
+    public void applyTheme() {
+        // default is empty
+    };
 
     // ========================================================================
     // zoom & heading methods

@@ -1,7 +1,7 @@
 package cgeo.geocaching.unifiedmap.tileproviders;
 
 import cgeo.geocaching.CgeoApplication;
-import cgeo.geocaching.unifiedmap.AbstractUnifiedMap;
+import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 
 import androidx.annotation.StringRes;
 
@@ -23,7 +23,7 @@ public class AbstractGoogleTileProvider extends AbstractTileProvider {
         }
     }
 
-    public AbstractUnifiedMap getMap() {
+    public AbstractUnifiedMapView getMap() {
         return TileProviderFactory.MAP_GOOGLE;
     }
 
