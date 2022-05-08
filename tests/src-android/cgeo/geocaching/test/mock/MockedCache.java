@@ -29,6 +29,7 @@ public abstract class MockedCache extends Geocache {
     private String mockedDataUser;
 
     public static final List<MockedCache> MOCKED_CACHES;
+
     static {
         MOCKED_CACHES = Collections.unmodifiableList(Arrays.asList(new GC2CJPF(), new GC1ZXX2(), new GC2JVEH(), new GC3XX5J(), new GC3FJ5F()));
     }

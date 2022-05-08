@@ -102,9 +102,9 @@ public class Trackable implements ILogable {
      */
     public void mergeLogEntry(final List<LogEntry> newLogs) {
         for (final LogEntry newLog : newLogs) {
-           if (!logs.contains(newLog)) {
-               logs.add(newLog);
-           }
+            if (!logs.contains(newLog)) {
+                logs.add(newLog);
+            }
         }
         Collections.sort(logs, LogEntry.DESCENDING_DATE_COMPARATOR);
     }
@@ -343,8 +343,7 @@ public class Trackable implements ILogable {
     /**
      * Set the trackable missing status
      *
-     * @param missing
-     *          the new missing status
+     * @param missing the new missing status
      */
     public void setMissing(final Boolean missing) {
         this.missing = missing;

@@ -42,7 +42,9 @@ public class AndroidBeam {
     // these are so few that we don't want to deal with the older (non Android Beam) API
 
     public interface ActivitySharingInterface {
-        /** Return an URL that represent the current activity for sharing or null for no sharing. */
+        /**
+         * Return an URL that represent the current activity for sharing or null for no sharing.
+         */
         @Nullable
         String getAndroidBeamUri();
     }

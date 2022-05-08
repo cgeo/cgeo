@@ -115,7 +115,6 @@ public class EditWaypointActivity extends AbstractActionBarActivity implements C
     private final Handler loadWaypointHandler = new LoadWaypointHandler(this);
 
 
-
     private static final class LoadWaypointHandler extends WeakReferenceHandler<EditWaypointActivity> {
         LoadWaypointHandler(final EditWaypointActivity activity) {
             super(activity);

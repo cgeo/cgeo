@@ -26,6 +26,7 @@ public class WaypointUserNoteCombinerTest {
         final String mergedNote = combiner.getCombinedNoteAndUserNote();
         assertThat(mergedNote).isEqualTo("User Note");
     }
+
     @Test
     public void testGetNoteWithUserNoteEmptyNote() {
         final Waypoint wp = new Waypoint("Stage 1", WaypointType.STAGE, false);

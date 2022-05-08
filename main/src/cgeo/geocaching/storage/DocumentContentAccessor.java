@@ -55,19 +55,23 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
     private static final int DOCUMENT_FILE_CACHESIZE = 100;
 
-    private static final String[] FILE_INFO_COLUMNS = new String[] {
-        DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-        DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-        DocumentsContract.Document.COLUMN_MIME_TYPE,
-        DocumentsContract.Document.COLUMN_LAST_MODIFIED,
-        DocumentsContract.Document.COLUMN_SIZE
+    private static final String[] FILE_INFO_COLUMNS = new String[]{
+            DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+            DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+            DocumentsContract.Document.COLUMN_MIME_TYPE,
+            DocumentsContract.Document.COLUMN_LAST_MODIFIED,
+            DocumentsContract.Document.COLUMN_SIZE
     };
 
 
-    /** cache for Uri permissions */
+    /**
+     * cache for Uri permissions
+     */
     private final Map<String, UriPermission> uriPermissionCache = new HashMap<>();
 
-    /** LRU-cache for previously retrieved directory Uri's for Folders */
+    /**
+     * LRU-cache for previously retrieved directory Uri's for Folders
+     */
     private final Map<String, Uri> folderUriCache = Collections.synchronizedMap(new LinkedHashMap<String, Uri>(DOCUMENT_FILE_CACHESIZE, 0.75f, true) {
         @Override
         protected boolean removeEldestEntry(final Entry<String, Uri> eldest) {
@@ -113,13 +117,15 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         if (folderUri == null) {
             return null;
         }
-        final String docName = FileUtils.createUniqueFilename(name, queryDir(folderUri, new String[]{ DocumentsContract.Document.COLUMN_DISPLAY_NAME }, c -> c.getString(0)));
+        final String docName = FileUtils.createUniqueFilename(name, queryDir(folderUri, new String[]{DocumentsContract.Document.COLUMN_DISPLAY_NAME}, c -> c.getString(0)));
         try (ContextLogger cLog = new ContextLogger("DocumentFolderAccessor.create %s: %s", folder, name)) {
             return DocumentsContract.createDocument(getContext().getContentResolver(), folderUri, guessMimeTypeFor(docName), docName);
         }
     }
 
-    /** method tested on SDK21, 23, 29 and 30; both with targetSDK=29 and targetSDk=30 */
+    /**
+     * method tested on SDK21, 23, 29 and 30; both with targetSDK=29 and targetSDk=30
+     */
     private String guessMimeTypeFor(final String filename) {
 
         if (StringUtils.isBlank(filename)) {
@@ -201,17 +207,19 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
         //using dir.listFiles() is FAR too slow. Thus we have to create an explicit query
 
-        return queryDir(dir, new String[] {
-            DocumentsContract.Document.COLUMN_DOCUMENT_ID,
-            DocumentsContract.Document.COLUMN_DISPLAY_NAME,
-            DocumentsContract.Document.COLUMN_MIME_TYPE,
-            DocumentsContract.Document.COLUMN_LAST_MODIFIED,
-            DocumentsContract.Document.COLUMN_SIZE,
+        return queryDir(dir, new String[]{
+                DocumentsContract.Document.COLUMN_DOCUMENT_ID,
+                DocumentsContract.Document.COLUMN_DISPLAY_NAME,
+                DocumentsContract.Document.COLUMN_MIME_TYPE,
+                DocumentsContract.Document.COLUMN_LAST_MODIFIED,
+                DocumentsContract.Document.COLUMN_SIZE,
 
         }, c -> fileInfoFromCursor(c, null, dir, folder));
     }
 
-    /** retrieves a FileInformation object from the current cursor row retrieved by using {@Link } columns */
+    /**
+     * retrieves a FileInformation object from the current cursor row retrieved by using {@Link } columns
+     */
     private static ContentStorage.FileInformation fileInfoFromCursor(final Cursor c, final Uri docUri, final Uri parentDirUri, final Folder parentFolder) {
         final String documentId = c.getString(0);
         final String name = c.getString(1);
@@ -221,7 +229,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
 
         final boolean isDir = DocumentsContract.Document.MIME_TYPE_DIR.equals(mimeType);
         final Uri uri = docUri != null ? docUri :
-            (parentDirUri != null ? DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId) : null);
+                (parentDirUri != null ? DocumentsContract.buildDocumentUriUsingTree(parentDirUri, documentId) : null);
 
         return new ContentStorage.FileInformation(name, uri, isDir, isDir && parentFolder != null ? Folder.fromFolder(parentFolder, name) : null, mimeType, size, lastMod);
     }
@@ -254,7 +262,7 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     private ContentStorage.FileInformation getFileInfo(@NonNull final Uri uri, final Folder folder) throws IOException {
         try {
             return queryDoc(uri, FILE_INFO_COLUMNS, null,
-                c -> fileInfoFromCursor(c, uri, null, folder));
+                    c -> fileInfoFromCursor(c, uri, null, folder));
         } catch (IllegalArgumentException iae) {
             //this means that the uri does not exist or is not accessible. Return null
             return null;
@@ -295,8 +303,8 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     private boolean isValidDirectoryUri(final Uri dirUri, final boolean needsWrite) throws IOException {
         try {
             return queryDoc(dirUri, new String[]{DocumentsContract.Document.COLUMN_MIME_TYPE, DocumentsContract.Document.COLUMN_FLAGS}, false, c ->
-                DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(0)) &&
-                    (!needsWrite || (c.getInt(1) & DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE) != 0));
+                    DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(0)) &&
+                            (!needsWrite || (c.getInt(1) & DocumentsContract.Document.FLAG_DIR_SUPPORTS_CREATE) != 0));
         } catch (IllegalArgumentException iae) {
             //this is thrown if dirUri does not exist
             return false;
@@ -338,13 +346,13 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     }
 
     private Uri findCreateSubdirectory(final Uri dirUri, final String dirName, final boolean createIfNotExisting) throws IOException {
-        final List<Uri> result = queryDir(dirUri, new String[]{ DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE }, c -> {
-                if (dirName.equals(c.getString(1)) && DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(2))) {
-                    return DocumentsContract.buildDocumentUriUsingTree(dirUri, c.getString(0));
-                }
-                return null;
+        final List<Uri> result = queryDir(dirUri, new String[]{DocumentsContract.Document.COLUMN_DOCUMENT_ID, DocumentsContract.Document.COLUMN_DISPLAY_NAME, DocumentsContract.Document.COLUMN_MIME_TYPE}, c -> {
+            if (dirName.equals(c.getString(1)) && DocumentsContract.Document.MIME_TYPE_DIR.equals(c.getString(2))) {
+                return DocumentsContract.buildDocumentUriUsingTree(dirUri, c.getString(0));
+            }
+            return null;
 
-            });
+        });
         for (Uri uri : result) {
             if (uri != null) {
                 return uri;
@@ -475,7 +483,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         return (read ? Intent.FLAG_GRANT_READ_URI_PERMISSION : 0) | (write ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0);
     }
 
-    /** Checks and releases all Uri Permissions which are no longer needed */
+    /**
+     * Checks and releases all Uri Permissions which are no longer needed
+     */
     public void releaseOutdatedUriPermissions() {
         final Set<String> usedUris = new HashSet<>();
         for (PersistableFolder folder : PersistableFolder.values()) {
@@ -499,7 +509,9 @@ class DocumentContentAccessor extends AbstractContentAccessor {
         refreshUriPermissionCache();
     }
 
-    /** refreshes internal Uri Permission cache */
+    /**
+     * refreshes internal Uri Permission cache
+     */
     public void refreshUriPermissionCache() {
         this.uriPermissionCache.clear();
         for (UriPermission uriPerm : getContext().getContentResolver().getPersistedUriPermissions()) {

@@ -49,7 +49,7 @@ public class WaypointUserNoteCombiner {
         if (combinedNote != null) {
             String fixedCombinedNote = combinedNote;
             // \n was removed via validate
-            if (combinedNote.startsWith (SEPARATOR + "\n")) {
+            if (combinedNote.startsWith(SEPARATOR + "\n")) {
                 fixedCombinedNote = "\n" + combinedNote;
             }
 

@@ -356,7 +356,9 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         MapThemeFolderSynchronizer.requestResynchronization(MAP_THEMES_FOLDER.getFolder(), MAP_THEMES_INTERNAL_FOLDER, isThemeSynchronizationActive());
     }
 
-    /** recalculate available themes out of the currently active folder */
+    /**
+     * recalculate available themes out of the currently active folder
+     */
     private static void recalculateAvailableThemes() {
         final List<ThemeData> newAvailableThemes = new ArrayList<>();
         addAvailableThemes(isThemeSynchronizationActive() ? Folder.fromFile(MAP_THEMES_INTERNAL_FOLDER) : MAP_THEMES_FOLDER.getFolder(), newAvailableThemes, "", 0);
@@ -410,7 +412,8 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     /**
      * Calculates a xml theme name fit for user display (in dropdown etc)
-     * @param file theme file name
+     *
+     * @param file    theme file name
      * @param zipPath if theme file is a ZIP, then this contains the zip-internal path to the xml. Otherwise null
      * @return user display theme name
      */
@@ -456,7 +459,9 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             this.doSync = doSync;
         }
 
-        /** Requests for a running task to redo sync after finished. May fail if task is already done, but in this case the task may safely be discarted */
+        /**
+         * Requests for a running task to redo sync after finished. May fail if task is already done, but in this case the task may safely be discarted
+         */
         public boolean requestAfter(final AfterSyncRequest afterSyncRequest) {
             synchronized (requestRedoMutex) {
                 if (taskIsDone || !doSync) {
@@ -515,9 +520,9 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             //show toast only if something actually happened
             if (result != null && result.filesModified > 0) {
                 showToast(R.string.mapthemes_foldersync_finished_toast,
-                    LocalizationUtils.getString(R.string.persistablefolder_offline_maps_themes),
-                    Formatter.formatDuration(System.currentTimeMillis() - startTime),
-                    result.filesModified, LocalizationUtils.getPlural(R.plurals.file_count, result.filesInSource, "file(s)"));
+                        LocalizationUtils.getString(R.string.persistablefolder_offline_maps_themes),
+                        Formatter.formatDuration(System.currentTimeMillis() - startTime),
+                        result.filesModified, LocalizationUtils.getPlural(R.plurals.file_count, result.filesInSource, "file(s)"));
             }
             Log.i("[MapThemeFolderSync] Finished synchronization callback");
         }
@@ -526,7 +531,7 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             return fileInfo != null && !fileInfo.name.endsWith(".map") && fileInfo.size <= FILESYNC_MAX_FILESIZE;
         }
 
-        private static void showToast(final int resId, final Object ... params) {
+        private static void showToast(final int resId, final Object... params) {
             final ImmutablePair<String, String> msgs = LocalizationUtils.getMultiPurposeString(resId, "RenderTheme", params);
             ActivityMixin.showApplicationToast(msgs.left);
             Log.iForce("[RenderThemeHelper.ThemeFolderSyncTask]" + msgs.right);
@@ -542,7 +547,9 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         return Settings.getSyncMapRenderThemeFolder();
     }
 
-    /** Method is called after user has changed the sync state in Settings Activity */
+    /**
+     * Method is called after user has changed the sync state in Settings Activity
+     */
     public static boolean changeSyncSetting(final Activity activity, final boolean doSync, final Consumer<Boolean> callback) {
         if (doSync) {
             //this means user just turned sync on. Ask user if he/she is really shure about this.-
@@ -550,21 +557,21 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             final String folderName = MAP_THEMES_FOLDER.getFolder().toUserDisplayableString();
             final ImmutableTriple<String, String, String> folderInfoStrings = themeFolderInfo.getUserDisplayableFolderInfoStrings();
             Dialogs.newBuilder(activity)
-                .setTitle(R.string.init_renderthemefolder_synctolocal_dialog_title)
-                .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, folderInfoStrings.left, folderInfoStrings.middle, folderInfoStrings.right))
-                .setPositiveButton(android.R.string.ok, (d, c) -> {
-                    d.dismiss();
-                    //start sync
-                    resynchronizeOrDeleteMapThemeFolder();
-                    callback.accept(true);
-                })
-                .setNegativeButton(android.R.string.cancel, (d, c) -> {
-                    d.dismiss();
-                    callback.accept(false);
-                    //following method will DELETE any existing data in sync folder (because sync is set to off in settings)
-                    resynchronizeOrDeleteMapThemeFolder();
-                })
-                .create().show();
+                    .setTitle(R.string.init_renderthemefolder_synctolocal_dialog_title)
+                    .setMessage(LocalizationUtils.getString(R.string.init_renderthemefolder_synctolocal_dialog_message, folderName, folderInfoStrings.left, folderInfoStrings.middle, folderInfoStrings.right))
+                    .setPositiveButton(android.R.string.ok, (d, c) -> {
+                        d.dismiss();
+                        //start sync
+                        resynchronizeOrDeleteMapThemeFolder();
+                        callback.accept(true);
+                    })
+                    .setNegativeButton(android.R.string.cancel, (d, c) -> {
+                        d.dismiss();
+                        callback.accept(false);
+                        //following method will DELETE any existing data in sync folder (because sync is set to off in settings)
+                        resynchronizeOrDeleteMapThemeFolder();
+                    })
+                    .create().show();
         } else {
             //this means user just turned sync OFF
             Settings.setSyncMapRenderThemeFolder(false);

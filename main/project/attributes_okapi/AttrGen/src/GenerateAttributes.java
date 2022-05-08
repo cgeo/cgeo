@@ -44,7 +44,7 @@ public class GenerateAttributes {
 
     private static void writeHeader() {
         System.out.print("// This is a generated file, do not change manually!\n" + "\n"
-            + "# internal name   | gcid | ocid(de) | acode | ocid(pl) | ocid(nl) | ocid(ro) | ocid(uk) | ocid(us) |\n");
+                + "# internal name   | gcid | ocid(de) | acode | ocid(pl) | ocid(nl) | ocid(ro) | ocid(uk) | ocid(us) |\n");
     }
 
     private static String formattedId(int id, int width) {
@@ -55,9 +55,9 @@ public class GenerateAttributes {
     private static void writeAttr(AttrInfo attr) {
 
         System.out.println("                  | " + formattedId(attr.idGC, 4) + " | " + formattedId(attr.idOCDE, 8)
-            + " | " + formattedId(attr.acode, 5) + " | " + formattedId(attr.idOCPL, 8)
-            + " | " + formattedId(attr.idOCNL, 8) + " | " + formattedId(attr.idOCRO, 8)
-            + " | " + formattedId(attr.idOCUK, 8) + " | " + formattedId(attr.idOCUS, 8) + " |");
+                + " | " + formattedId(attr.acode, 5) + " | " + formattedId(attr.idOCPL, 8)
+                + " | " + formattedId(attr.idOCNL, 8) + " | " + formattedId(attr.idOCRO, 8)
+                + " | " + formattedId(attr.idOCUK, 8) + " | " + formattedId(attr.idOCUS, 8) + " |");
     }
 
     private static void writeTrailer() {
@@ -78,7 +78,7 @@ public class GenerateAttributes {
 
                 @Override
                 public void startElement(String uri, String localName, String qName, Attributes attributes)
-                    throws SAXException {
+                        throws SAXException {
 
                     if (qName.equalsIgnoreCase("attr")) {
                         attr = new AttrInfo();
@@ -118,7 +118,7 @@ public class GenerateAttributes {
                 public void endElement(final String uri, final String localName, final String qName) throws SAXException {
 
                     if (attr != null && qName.equalsIgnoreCase("name")) {
-                        attr.names = names.toArray(new String[] {});
+                        attr.names = names.toArray(new String[]{});
                         names = null;
                         writeAttr(attr);
                         attr = null;

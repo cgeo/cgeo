@@ -35,14 +35,15 @@ public class DateTimeEditor {
     private FragmentManager fragmentManager;
 
     private Calendar date;
-    private final boolean[] dateUnset = new boolean[]{ false };
+    private final boolean[] dateUnset = new boolean[]{false};
     private Action1<Date> changeListener = null;
 
     /**
      * Initializes the instance. Typically called in an activities 'onCreate' method.
-     * @param dateView textview to use for date display and picker handling. Usually this is a text button
-     * @param timeView textview to use for time display and picker handling. Might be null
-     * @param resetButton view to use for resetting the date. Might be null
+     *
+     * @param dateView        textview to use for date display and picker handling. Usually this is a text button
+     * @param timeView        textview to use for time display and picker handling. Might be null
+     * @param resetButton     view to use for resetting the date. Might be null
      * @param fragmentManager manager to use for creating sub dialogs (date picker)
      */
     public DateTimeEditor init(@NonNull final TextView dateView, @Nullable final TextView timeView, @Nullable final View resetButton, @NonNull final FragmentManager fragmentManager) {

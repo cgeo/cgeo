@@ -38,21 +38,33 @@ public class Folder {
 
 
     public enum FolderType {
-        /** a 'classic' folder based on a file. Folder locations for this type are immutable */
+        /**
+         * a 'classic' folder based on a file. Folder locations for this type are immutable
+         */
         FILE,
-        /** Folder based on Storage Access Frameworks and retrieved by {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE}. Folder locations for this type are immutable */
+        /**
+         * Folder based on Storage Access Frameworks and retrieved by {@link android.content.Intent#ACTION_OPEN_DOCUMENT_TREE}. Folder locations for this type are immutable
+         */
         DOCUMENT,
-        /** (Volatile type) A Folder based on a PersistableFolder. Folder locations for this type can change when based folder is reconfigured */
+        /**
+         * (Volatile type) A Folder based on a PersistableFolder. Folder locations for this type can change when based folder is reconfigured
+         */
         PERSISTABLE_FOLDER,
     }
 
-    /** cGeo's private internal Files directory */
+    /**
+     * cGeo's private internal Files directory
+     */
     public static final Folder CGEO_PRIVATE_FILES = Folder.fromFile(CgeoApplication.getInstance().getApplicationContext().getFilesDir());
 
-    /** Root folder for documents (deprecated since API29 but still works somehow) */
+    /**
+     * Root folder for documents (deprecated since API29 but still works somehow)
+     */
     public static final Folder DOCUMENTS_FOLDER_DEPRECATED = Folder.fromFile(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS));
 
-    /** Legacy public root folder of c:geo until API29 (will no longer work in API30) */
+    /**
+     * Legacy public root folder of c:geo until API29 (will no longer work in API30)
+     */
     public static final Folder LEGACY_CGEO_PUBLIC_ROOT = Folder.fromFile(new File(Environment.getExternalStorageDirectory().getAbsolutePath(), "cgeo"));
 
     private static final String CONFIG_SEP = "::";
@@ -76,7 +88,9 @@ public class Folder {
 
     }
 
-    /** registers a listener which is fired each time the actual location of this folder changes */
+    /**
+     * registers a listener which is fired each time the actual location of this folder changes
+     */
     public void registerChangeListener(final Object lifecycleRef, final Consumer<PersistableFolder> listener) {
 
         //currently, this folders location can only change if it is based on a Public Folder
@@ -85,24 +99,32 @@ public class Folder {
         }
     }
 
-    /** returns this folder's type. This value is immutable */
+    /**
+     * returns this folder's type. This value is immutable
+     */
     public FolderType getType() {
         return type;
     }
 
-    /** returns current Uri for this folder. This value is volatile and retrieved from {@link ContentStorage} */
+    /**
+     * returns current Uri for this folder. This value is volatile and retrieved from {@link ContentStorage}
+     */
     @Nullable
     public Uri getUri() {
         return ContentStorage.get().getUriForFolder(this);
     }
 
-    /** returns this folder's current BaseUri (below all subfolders). This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
+    /**
+     * returns this folder's current BaseUri (below all subfolders). This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER})
+     */
     @NonNull
     public Uri getBaseUri() {
         return persistableFolder != null ? persistableFolder.getFolder().getBaseUri() : this.uri;
     }
 
-    /** The current base type, which is always an immutable type (e.g. may never be {@link FolderType#PERSISTABLE_FOLDER}). Return value is volatile */
+    /**
+     * The current base type, which is always an immutable type (e.g. may never be {@link FolderType#PERSISTABLE_FOLDER}). Return value is volatile
+     */
     @NonNull
     public FolderType getBaseType() {
         if (persistableFolder != null) {
@@ -111,20 +133,26 @@ public class Folder {
         return getType();
     }
 
-    /** Gets all subdirs down to the base folder's baseUri. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
+    /**
+     * Gets all subdirs down to the base folder's baseUri. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER})
+     */
     public List<String> getSubdirsToBase() {
-        final List<String > result = persistableFolder != null ? persistableFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
+        final List<String> result = persistableFolder != null ? persistableFolder.getFolder().getSubdirsToBase() : new ArrayList<>();
         result.addAll(subfolders);
         return result;
     }
 
-    /** If this instance is of type {@link FolderType#PERSISTABLE_FOLDER}, then the base {@link PersistableFolder} is returned. Otherwise null is returned */
+    /**
+     * If this instance is of type {@link FolderType#PERSISTABLE_FOLDER}, then the base {@link PersistableFolder} is returned. Otherwise null is returned
+     */
     @Nullable
     public PersistableFolder getRootPersistableFolder() {
         return persistableFolder;
     }
 
-    /** Returns a representation of this folder's location fit to show to an end user. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER}) */
+    /**
+     * Returns a representation of this folder's location fit to show to an end user. This value is volatile if this folder's type is volatile (e.g. {@link FolderType#PERSISTABLE_FOLDER})
+     */
     @NonNull
     public String toUserDisplayableString() {
         return toUserDisplayableString(false, false);
@@ -135,7 +163,7 @@ public class Folder {
         String result = "";
         if (addLegacyFlag && getBaseType() == Folder.FolderType.FILE) {
             result += "[" + (CgeoApplication.getInstance() == null || forceEnglish ? "Legacy" :
-                CgeoApplication.getInstance().getApplicationContext().getString(R.string.persistablefolder_legacy)) + "]";
+                    CgeoApplication.getInstance().getApplicationContext().getString(R.string.persistablefolder_legacy)) + "]";
         }
         result += UriUtils.toUserDisplayableString(getBaseUri(), getSubdirsToBase());
         return result;
@@ -187,7 +215,9 @@ public class Folder {
         return new Folder(FolderType.PERSISTABLE_FOLDER, null, persistableFolder, toFolderNames(subfolder));
     }
 
-    /** Creates Folder instance from a previously deserialized representation using {@link Folder#toConfig()}. */
+    /**
+     * Creates Folder instance from a previously deserialized representation using {@link Folder#toConfig()}.
+     */
     @Nullable
     public static Folder fromConfig(final String config) {
         if (config == null) {
@@ -214,7 +244,9 @@ public class Folder {
 
     }
 
-    /** porses config strictly according to #toConfig */
+    /**
+     * porses config strictly according to #toConfig
+     */
     private static Folder fromConfigStrict(@NonNull final String config) {
         final String[] tokens = config.split(CONFIG_SEP, -1);
         if (tokens.length != 3) {
@@ -254,7 +286,9 @@ public class Folder {
         return this.toConfig(true).hashCode();
     }
 
-    /** returns a config string for this folder fit for reconstructing it using {@link Folder#fromConfig(String)}. This value is ALWAYS immutable even when folder type is volatile */
+    /**
+     * returns a config string for this folder fit for reconstructing it using {@link Folder#fromConfig(String)}. This value is ALWAYS immutable even when folder type is volatile
+     */
     public String toConfig() {
         return toConfig(false);
     }
@@ -287,12 +321,12 @@ public class Folder {
     public String toString() {
         //We can't print the REAL Uri this Folder points to since this would require a call to ContentStorage
         return toUserDisplayableString() +
-            "[" +
-            getType() +
-            (getRootPersistableFolder() == null ? "" : "(" + getRootPersistableFolder().name() + ")") +
-            "#" + subfolders.size() +
-            ":" + UriUtils.getPseudoUriString(getBaseUri(), getSubdirsToBase(), -1) +
-            "]";
+                "[" +
+                getType() +
+                (getRootPersistableFolder() == null ? "" : "(" + getRootPersistableFolder().name() + ")") +
+                "#" + subfolders.size() +
+                ":" + UriUtils.getPseudoUriString(getBaseUri(), getSubdirsToBase(), -1) +
+                "]";
     }
 
     @NonNull

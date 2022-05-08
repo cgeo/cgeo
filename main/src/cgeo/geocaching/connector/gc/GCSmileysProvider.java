@@ -33,7 +33,7 @@ public class GCSmileysProvider {
             new Smiley("^", R.string.smiley_approve, "\uD83D\uDC4C"),
             new Smiley("V", R.string.smiley_disapprove, "\uD83D\uDE12"),
             new Smiley("?", R.string.smiley_question, "❓")
-           ));
+    ));
 
     private GCSmileysProvider() {
         // utility class

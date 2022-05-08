@@ -10,7 +10,7 @@ import java.util.Arrays;
 
 import org.apache.commons.lang3.BooleanUtils;
 
-public  class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
+public class FavoritesGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     private static final String CONFIG_KEY_PERCENTAGE = "percentage";
 

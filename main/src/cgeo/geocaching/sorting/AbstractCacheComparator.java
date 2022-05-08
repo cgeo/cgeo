@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * abstract super implementation for all cache comparators
- *
  */
 abstract class AbstractCacheComparator implements CacheComparator {
 
@@ -42,9 +41,7 @@ abstract class AbstractCacheComparator implements CacheComparator {
      *
      * The default implementation returns {@code true} and can be overridden if needed in sub classes.
      *
-     * @param cache
-     *            the cache to be sorted
-     *
+     * @param cache the cache to be sorted
      * @return {@code true} if the cache holds the necessary data to be compared meaningfully
      */
     protected boolean canCompare(final Geocache cache) {
@@ -58,21 +55,27 @@ abstract class AbstractCacheComparator implements CacheComparator {
      * For example, a highly rated cache must be considered smaller than a poorly rated one.
      *
      * @return an integer < 0 if cache1 is less than cache2, 0 if they are equal, and > 0 if cache1 is greater than
-     *         cache2.
+     * cache2.
      */
     protected abstract int compareCaches(Geocache cache1, Geocache cache2);
 
-    /** Can optinally be overridden to perform preparation (e.g. caching of values) before sort of a list via {@link #sort(List)} */
+    /**
+     * Can optinally be overridden to perform preparation (e.g. caching of values) before sort of a list via {@link #sort(List)}
+     */
     protected void beforeSort(final List<Geocache> list) {
         //by default, do nothing
     }
 
-    /** Can optinally be overridden to perform cleanup (e.g. deleting cached values) before sort of a list via {@link #sort(List)} */
+    /**
+     * Can optinally be overridden to perform cleanup (e.g. deleting cached values) before sort of a list via {@link #sort(List)}
+     */
     protected void afterSort(final List<Geocache> list) {
         //by default, do nothing
     }
 
-    /** Sorts the given list of caches using this comparator. Respects implementations of {@link #beforeSort(List)} and{@link #afterSort(List)} */
+    /**
+     * Sorts the given list of caches using this comparator. Respects implementations of {@link #beforeSort(List)} and{@link #afterSort(List)}
+     */
     public void sort(final List<Geocache> list) {
         beforeSort(list);
         Collections.sort(list, this);

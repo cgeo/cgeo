@@ -13,7 +13,7 @@ class AbstractServiceConnection implements ServiceConnection {
     protected android.os.IInterface routingService;
     private Runnable onServiceConnectedCallback = null;
 
-    AbstractServiceConnection (final @Nullable Runnable onServiceConnectedCallback) {
+    AbstractServiceConnection(final @Nullable Runnable onServiceConnectedCallback) {
         this.onServiceConnectedCallback = onServiceConnectedCallback;
     }
 

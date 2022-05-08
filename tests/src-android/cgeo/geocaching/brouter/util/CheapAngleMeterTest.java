@@ -30,10 +30,10 @@ public class CheapAngleMeterTest {
         lon2 = toOsmLon(2.317471);
         lat2 = toOsmLat(48.818043);
         assertEquals(
-            "Works for an angle between -pi/4 and pi/4",
-            -10.,
-            am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
-            0.05 * 10.
+                "Works for an angle between -pi/4 and pi/4",
+                -10.,
+                am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
+                0.05 * 10.
         );
 
         lon0 = toOsmLon(2.317020662874013);
@@ -43,10 +43,10 @@ public class CheapAngleMeterTest {
         lon2 = lon0;
         lat2 = lat0;
         assertEquals(
-            "Works for an angle between 3*pi/4 and 5*pi/4",
-            180.,
-            am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
-            0.05 * 180.
+                "Works for an angle between 3*pi/4 and 5*pi/4",
+                180.,
+                am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
+                0.05 * 180.
         );
 
         lon0 = toOsmLon(2.317112);
@@ -56,10 +56,10 @@ public class CheapAngleMeterTest {
         lon2 = toOsmLon(2.317673);
         lat2 = toOsmLat(48.817799);
         assertEquals(
-            "Works for an angle between -3*pi/4 and -pi/4",
-            100.,
-            am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
-            0.1 * 100.
+                "Works for an angle between -3*pi/4 and -pi/4",
+                100.,
+                am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
+                0.1 * 100.
         );
 
         lon0 = toOsmLon(2.317128);
@@ -69,10 +69,10 @@ public class CheapAngleMeterTest {
         lon2 = toOsmLon(2.317497);
         lat2 = toOsmLat(48.818264);
         assertEquals(
-            "Works for an angle between pi/4 and 3*pi/4",
-            -100.,
-            am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
-            0.1 * 100.
+                "Works for an angle between pi/4 and 3*pi/4",
+                -100.,
+                am.calcAngle(lon0, lat0, lon1, lat1, lon2, lat2),
+                0.1 * 100.
         );
     }
 

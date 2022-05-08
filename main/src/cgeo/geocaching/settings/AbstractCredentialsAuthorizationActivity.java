@@ -108,9 +108,9 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
                 finish();
             } else {
                 SimpleDialog.of(authorizationActivity).setTitle(R.string.init_login_popup)
-                    .setMessage(TextParam.concat(TextParam.id(R.string.init_login_popup_failed_reason, ""),
-                        TextParam.id(statusCode.errorString)).setMovement(true))
-                    .show();
+                        .setMessage(TextParam.concat(TextParam.id(R.string.init_login_popup_failed_reason, ""),
+                                TextParam.id(statusCode.errorString)).setMovement(true))
+                        .show();
                 binding.check.setText(getAuthCheckAgain());
                 binding.check.setOnClickListener(new CheckListener());
                 binding.check.setEnabled(true);
@@ -194,7 +194,6 @@ public abstract class AbstractCredentialsAuthorizationActivity extends AbstractA
     /**
      * Enable or disable the start button depending on login/password field.
      * If both fields are not empty, button is enabled.
-     *
      */
     protected void enableCheckButtonIfReady() {
         binding.check.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&

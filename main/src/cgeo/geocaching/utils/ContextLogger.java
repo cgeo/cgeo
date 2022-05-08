@@ -21,6 +21,7 @@ public class ContextLogger implements Closeable {
 
     @SuppressLint("ConstantLocale")
     private static final DateFormat DATETIME_FORMAT = new SimpleDateFormat("MM-dd HH:mm:ss.SSS", Locale.getDefault());
+
     static {
         DATETIME_FORMAT.setTimeZone(Calendar.getInstance().getTimeZone());
     }
@@ -35,19 +36,19 @@ public class ContextLogger implements Closeable {
     private final Log.LogLevel logLevel;
     private boolean hasLogged = false;
 
-    public ContextLogger(final String context, final Object ... params) {
+    public ContextLogger(final String context, final Object... params) {
         this(Log.LogLevel.VERBOSE, context, params);
     }
 
-    public ContextLogger(final boolean forceInfo, final String context, final Object ... params) {
+    public ContextLogger(final boolean forceInfo, final String context, final Object... params) {
         this(Log.LogLevel.INFO, forceInfo, context, params);
     }
 
-    public ContextLogger(final Log.LogLevel logLevel, final String context, final Object ... params) {
+    public ContextLogger(final Log.LogLevel logLevel, final String context, final Object... params) {
         this(logLevel, false, context, params);
     }
 
-    private ContextLogger(final Log.LogLevel logLevel, final boolean forceInfo, final String context, final Object ... params) {
+    private ContextLogger(final Log.LogLevel logLevel, final boolean forceInfo, final String context, final Object... params) {
 
         this.startTime = System.currentTimeMillis();
         this.logLevel = logLevel;
@@ -69,18 +70,18 @@ public class ContextLogger implements Closeable {
         return this.doLog;
     }
 
-    public <T> String  toStringLimited(final Collection<T> collection, final int limit) {
+    public <T> String toStringLimited(final Collection<T> collection, final int limit) {
         return toStringLimited(collection, limit, String::valueOf);
     }
 
-    public <T> String  toStringLimited(final Collection<T> collection, final int limit, final Func1<T, String> mapper) {
+    public <T> String toStringLimited(final Collection<T> collection, final int limit, final Func1<T, String> mapper) {
         if (collection == null || !isActive()) {
             return "#-[]";
         }
         return "#" + collection.size() + "[" + CollectionStream.of(collection).limit(limit).map(mapper).toJoinedString(",") + "]";
     }
 
-    public ContextLogger add(final String msg, final Object ... params) {
+    public ContextLogger add(final String msg, final Object... params) {
         if (doLog) {
             if (params != null && params.length > 0) {
                 message.append(String.format(msg, params));

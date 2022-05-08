@@ -26,7 +26,6 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
 
     /**
      * Get geocode from Geolutins id
-     *
      */
     public static String geocode(final int id) {
         return String.format("GL%05X", id);
@@ -139,10 +138,8 @@ public final class GeolutinsConnector extends AbstractTrackableConnector {
     /**
      * Lookup Trackable Geocode from Tracking Code.
      *
-     * @param trackingCode
-     *          the Trackable Tracking Code to lookup
-     * @return
-     *          the Trackable Geocode
+     * @param trackingCode the Trackable Tracking Code to lookup
+     * @return the Trackable Geocode
      */
     @Nullable
     public static String getGeocodeFromTrackingCode(final String trackingCode) {

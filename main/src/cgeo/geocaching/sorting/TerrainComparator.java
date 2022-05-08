@@ -9,7 +9,6 @@ import java.util.Locale;
 
 /**
  * sorts caches by terrain rating
- *
  */
 class TerrainComparator extends AbstractCacheComparator {
 

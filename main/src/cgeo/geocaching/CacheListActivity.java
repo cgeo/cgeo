@@ -148,7 +148,7 @@ import org.apache.commons.lang3.StringUtils;
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
     private static final int CACHE_LOADER_ID = 5; //arbitrary number, but must be fixed
-    private static final String EXTRAS_NEXTPAGE  = "extras_nextpage";
+    private static final String EXTRAS_NEXTPAGE = "extras_nextpage";
 
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
@@ -172,7 +172,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private Geopoint coords = null;
     private final GeocacheSortContext sortContext = new GeocacheSortContext();
     private SearchResult search = null;
-    /** The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler */
+    /**
+     * The list of shown caches shared with Adapter. Don't manipulate outside of main thread only with Handler
+     */
     //private final List<Geocache> cacheList = new ArrayList<>();
     private CacheListAdapter adapter = null;
     private View listFooter = null;
@@ -517,7 +519,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         setTheme();
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CONTENT_STORAGE_ACTIVITY_HELPER))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importGpx);
 
         // get parameters
         final Bundle extras = getIntent().getExtras();
@@ -620,7 +622,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         final AbstractList list = AbstractList.getListById(listId);
 
-        for (final AbstractList l: StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
+        for (final AbstractList l : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
             mCacheListSpinnerAdapter.add(l);
         }
 
@@ -792,8 +794,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
             if (isOffline || type == CacheListType.HISTORY) { // only offline list
                 final boolean removeFromDevice = removeWillDeleteFromDevice(listId);
                 setMenuItemLabel(menu, R.id.menu_drop_caches,
-                    removeFromDevice ? R.string.caches_remove_selected_completely : R.string.caches_remove_selected,
-                    removeFromDevice ? R.string.caches_remove_all_completely : R.string.caches_remove_all);
+                        removeFromDevice ? R.string.caches_remove_selected_completely : R.string.caches_remove_selected,
+                        removeFromDevice ? R.string.caches_remove_all_completely : R.string.caches_remove_all);
                 setMenuItemLabel(menu, R.id.menu_refresh_stored, R.string.caches_refresh_selected, R.string.caches_refresh_all);
                 setMenuItemLabel(menu, R.id.menu_move_to_list, R.string.caches_move_selected, R.string.caches_move_all);
                 setMenuItemLabel(menu, R.id.menu_copy_to_list, R.string.caches_copy_selected, R.string.caches_copy_all);
@@ -945,7 +947,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_export_gpx) {
             new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_export_fieldnotes) {
-                new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
+            new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
             new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_upload_modifiedcoords) {
@@ -1016,13 +1018,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         // Check local cacheList first, and Datastore only if needed (because of filtered lists)
         // Checking is done in this order for performance reasons
         if (isNonDefaultList && !preventAskForDeletion && adapter.isEmpty()
-            && DataStore.getAllStoredCachesCount(listId) == 0) {
+                && DataStore.getAllStoredCachesCount(listId) == 0) {
             // ask user, if he wants to delete the now empty list
             Dialogs.confirmWithCheckbox(this, getString(R.string.list_dialog_remove), getString(R.string.list_dialog_remove_nowempty),
                     CheckboxDialogConfig.newCheckbox(R.string.list_dialog_do_not_ask_me_again)
                             .setActionButtonLabel(CheckboxDialogConfig.ActionButtonLabel.YES_NO)
                             .setPositiveButtonCheckCondition(CheckboxDialogConfig.CheckCondition.UNCHECKED),
-                preventAskForDeletion -> removeListInternal(), this::setPreventAskForDeletion);
+                    preventAskForDeletion -> removeListInternal(), this::setPreventAskForDeletion);
         }
     }
 
@@ -1218,8 +1220,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Extract a cache from adapter data.
      *
-     * @param adapterInfo
-     *            an adapterInfo
+     * @param adapterInfo an adapterInfo
      * @return the pointed cache
      */
     private Geocache getCacheFromAdapter(final AdapterContextMenuInfo adapterInfo) {
@@ -1240,7 +1241,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     private void applyAdapterFilter() {
         final GeocacheFilter filter = currentAddFilterCriteria == null ?
-            currentCacheFilter.get() : currentCacheFilter.get().clone().and(currentAddFilterCriteria);
+                currentCacheFilter.get() : currentCacheFilter.get().clone().and(currentAddFilterCriteria);
         adapter.setFilter(filter);
     }
 
@@ -1418,9 +1419,9 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     private void refreshFilterForOnlineSearch() {
         //not supported yet for all online searches
         if (type != CacheListType.SEARCH_FILTER && type != CacheListType.KEYWORD
-            && type != CacheListType.COORDINATE && type != CacheListType.FINDER
-            && type != CacheListType.OWNER && type != CacheListType.ADDRESS
-            && type != CacheListType.NEAREST) {
+                && type != CacheListType.COORDINATE && type != CacheListType.FINDER
+                && type != CacheListType.OWNER && type != CacheListType.ADDRESS
+                && type != CacheListType.NEAREST) {
             return;
         }
 
@@ -1776,7 +1777,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         // ask him, if there are caches on the list
         SimpleDialog.of(this).setTitle(R.string.list_dialog_remove_title).setMessage(R.string.list_dialog_remove_description)
-            .setPositiveButton(TextParam.id(R.string.list_dialog_remove)).confirm((dialog, whichButton) -> removeListInternal());
+                .setPositiveButton(TextParam.id(R.string.list_dialog_remove)).confirm((dialog, whichButton) -> removeListInternal());
     }
 
     public void goMap() {
@@ -1835,7 +1836,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * Check if a given username is valid (non blank), and show a toast if it isn't.
      *
-     * @param context an activity
+     * @param context  an activity
      * @param username the username to check
      * @return <tt>true</tt> if the username is not blank, <tt>false</tt> otherwise
      */
@@ -1888,9 +1889,8 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     /**
      * start list activity, by searching around the given point.
      *
-     * @param name
-     *            name of coordinates, will lead to a title like "Around ..." instead of directly showing the
-     *            coordinates as title
+     * @param name name of coordinates, will lead to a title like "Around ..." instead of directly showing the
+     *             coordinates as title
      */
     public static void startActivityCoordinates(final AbstractActivity context, final Geopoint coords, @Nullable final String name) {
         if (!isValidCoords(context, coords)) {
@@ -2142,7 +2142,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     /**
      * Allow the title bar spinner to show the same subtitle like the activity itself would show.
-     *
      */
     public CharSequence getCacheListSubtitle(@NonNull final AbstractList list) {
         // if this is the current list, be aware of filtering
@@ -2159,7 +2158,6 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
     /**
      * Calculate the subtitle of the current list depending on (optional) filters.
-     *
      */
     private CharSequence getCurrentSubtitle() {
         if (search == null) {
@@ -2190,9 +2188,13 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
      * Used to indicate if an action should be taken after the AbstractSearchLoader has finished
      */
     public enum AfterLoadAction {
-        /** Take no action */
+        /**
+         * Take no action
+         */
         NO_ACTION,
-        /** Check if the list is empty and prompt for deletion */
+        /**
+         * Check if the list is empty and prompt for deletion
+         */
         CHECK_IF_EMPTY
     }
 

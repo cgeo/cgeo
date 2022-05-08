@@ -9,7 +9,6 @@ import android.view.View;
  * the tagging of views.
  *
  * TODO: Use {@link AbstractRecyclerViewHolder} and the recycler view instead.
- *
  */
 public abstract class AbstractViewHolder {
 

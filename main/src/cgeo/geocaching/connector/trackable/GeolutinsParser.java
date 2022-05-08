@@ -148,10 +148,8 @@ public class GeolutinsParser {
         /**
          * Convert states from GL to c:geo spotted types.
          *
-         * @param type
-         *          the GL Log type
-         * @return
-         *          The LogType
+         * @param type the GL Log type
+         * @return The LogType
          */
         private static LogType getLogType(final String type) {
             switch (type) {

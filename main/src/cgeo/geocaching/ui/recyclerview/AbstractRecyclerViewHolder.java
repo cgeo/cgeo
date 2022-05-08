@@ -6,7 +6,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 /**
  * Abstract super class for all view holders. It is responsible for the invocation of the view injection code.
- *
  */
 public abstract class AbstractRecyclerViewHolder extends RecyclerView.ViewHolder {
 

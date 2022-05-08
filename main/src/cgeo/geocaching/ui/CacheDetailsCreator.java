@@ -55,7 +55,7 @@ public final class CacheDetailsCreator {
      * Create a "name: value" line.
      *
      * @param nameId the resource of the name field
-     * @param value the initial value
+     * @param value  the initial value
      * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
      */
     public ImmutablePair<RelativeLayout, TextView> add(final int nameId, final CharSequence value) {
@@ -67,8 +67,8 @@ public final class CacheDetailsCreator {
     /**
      * Create a "name: value" line with html content.
      *
-     * @param nameId the resource of the name field
-     * @param value the initial value
+     * @param nameId  the resource of the name field
+     * @param value   the initial value
      * @param geocode the geocode for image getter
      * @return a pair made of the whole "name: value" line (to be able to hide it for example) and of the value (to update it)
      */

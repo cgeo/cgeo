@@ -29,7 +29,6 @@ public final class ProcessUtils {
 
     /**
      * Preferred method to detect the availability of an external app
-     *
      */
     public static boolean isLaunchable(@Nullable final String packageName) {
         return getLaunchIntent(packageName) != null;
@@ -46,12 +45,10 @@ public final class ProcessUtils {
     }
 
 
-
     /**
      * Checks whether a launch intent is available or if the package is just installed
      * This function is relatively costly, so if you know that the package in question has
      * a launch intent, use isLaunchable() instead.
-     *
      */
     public static boolean isInstalled(@NonNull final String packageName) {
         return isLaunchable(packageName) || hasPackageInstalled(packageName);
@@ -98,13 +95,10 @@ public final class ProcessUtils {
      * respond to an intent with the specified action. If no suitable package is
      * found, this method returns false.
      *
-     * @param action
-     *            The Intent action to check for availability.
-     * @param uri
-     *            The Intent URI to check for availability.
-     *
+     * @param action The Intent action to check for availability.
+     * @param uri    The Intent URI to check for availability.
      * @return True if an Intent with the specified action can be sent and
-     *         responded to, false otherwise.
+     * responded to, false otherwise.
      */
     public static boolean isIntentAvailable(@NonNull final String action, @Nullable final Uri uri) {
         final PackageManager packageManager = CgeoApplication.getInstance().getPackageManager();

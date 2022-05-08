@@ -25,7 +25,7 @@ public abstract class LiveFilterGeocacheListLoader extends AbstractSearchLoader 
         final GeocacheFilter useFilter = GeocacheFilterContext.getForType(LIVE).and(getAdditionalFilterParameter());
 
         return nonEmptyCombineActive(ConnectorFactory.getSearchByFilterConnectors(getFilterType()),
-            connector -> connector.searchByFilter(useFilter));
+                connector -> connector.searchByFilter(useFilter));
     }
 
 }

@@ -10,5 +10,6 @@ interface ThemeLegend {
 
     RenderThemeLegend.LegendCategory[] loadLegend(RenderThemeHelper.RenderThemeType rtt, ArrayList<RenderThemeLegend.LegendEntry> entries);
 
-    @StringRes int getInfoUrl();
+    @StringRes
+    int getInfoUrl();
 }

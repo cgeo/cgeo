@@ -19,10 +19,8 @@ enum OkapiService {
     SERVICE_API_INSTALLATION("/okapi/services/apisrv/installation", OAuthLevel.Level0),
     SERVICE_LOG_ENTRY("/okapi/services/logs/entry", OAuthLevel.Level1);
 
-    @NonNull
-    final String methodName;
-    @NonNull
-    final OAuthLevel level;
+    @NonNull final String methodName;
+    @NonNull final OAuthLevel level;
 
     OkapiService(@NonNull final String methodName, @NonNull final OAuthLevel level) {
         this.methodName = methodName;

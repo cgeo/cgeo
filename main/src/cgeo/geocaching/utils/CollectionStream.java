@@ -58,7 +58,6 @@ public class CollectionStream<T> {
 
     /**
      * creates CollectionStream with an array as its source
-     *
      */
     public static <TT> CollectionStream<TT> of(final TT[] coll) {
         return new CollectionStream<>(coll == null ? Collections.emptyList() : Arrays.asList(coll), false);
@@ -118,6 +117,7 @@ public class CollectionStream<T> {
         }
         return this;
     }
+
     /**
      * mimics {@link java.util.stream.Collectors#joining()}
      */
@@ -140,6 +140,7 @@ public class CollectionStream<T> {
         }
         return sb.toString();
     }
+
     /**
      * mimics {@link java.util.stream.Stream#count}
      */

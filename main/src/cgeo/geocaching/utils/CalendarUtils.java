@@ -63,8 +63,7 @@ public final class CalendarUtils {
      * Return whether the given date is *more* than 1 day away. We allow 1 day to be "present time" to compensate for
      * potential timezone issues.
      *
-     * @param date
-     *            the date
+     * @param date the date
      */
     public static boolean isFuture(final Calendar date) {
         return daysSince(date) < -1;
@@ -83,6 +82,7 @@ public final class CalendarUtils {
 
     /**
      * returns current date/time formatted according to the supplied {SimpleDateFormat} string
+     *
      * @param format string
      * @return formatted date
      */
@@ -94,6 +94,7 @@ public final class CalendarUtils {
 
     /**
      * returns given date in format yyyy-mm, or empty string if null given
+     *
      * @param date Date to be formatted
      * @return String formatted date
      */
@@ -104,6 +105,7 @@ public final class CalendarUtils {
 
     /**
      * returns given date in format yyyy-mm, or empty string if 0 given
+     *
      * @param date Date to be formatted
      * @return String formatted date
      */
@@ -114,6 +116,7 @@ public final class CalendarUtils {
 
     /**
      * returns given date in format yyyy-mm-dd, or empty string if 0 given
+     *
      * @param date Date to be formatted
      * @return String formatted date
      */
@@ -124,6 +127,7 @@ public final class CalendarUtils {
 
     /**
      * parses given date to a long
+     *
      * @param date in Format yyyy-mm-dd
      * @return time value or 0 on error
      */
@@ -139,6 +143,7 @@ public final class CalendarUtils {
 
     /**
      * parses given date to a long
+     *
      * @param date in Format dd-mmm-yyyy with mmm=Jan,Feb,Mar,...
      * @return time value or 0 on error
      */

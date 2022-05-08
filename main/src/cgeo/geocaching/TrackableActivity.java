@@ -224,13 +224,13 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         PermissionHandler.executeIfLocationPermissionGranted(this,
                 new RestartLocationPermissionGrantedCallback(PermissionRequestContext.TrackableActivity) {
 
-            @Override
-            public void executeAfter() {
-                if (!Settings.useLowPowerMode()) {
-                    geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
-                }
-            }
-        });
+                    @Override
+                    public void executeAfter() {
+                        if (!Settings.useLowPowerMode()) {
+                            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
+                        }
+                    }
+                });
     }
 
     @Override

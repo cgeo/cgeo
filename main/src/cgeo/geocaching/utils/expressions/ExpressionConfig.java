@@ -12,7 +12,9 @@ import java.util.List;
 
 public class ExpressionConfig extends HashMap<String, List<String>> {
 
-    /** IF this config has only one single String value then this value is returned. Otherwise null is returned */
+    /**
+     * IF this config has only one single String value then this value is returned. Otherwise null is returned
+     */
     public String getSingleValue() {
         final List<String> defaultList = getDefaultList();
         return size() == 1 && defaultList.size() == 1 ? defaultList.get(0) : null;
@@ -23,7 +25,7 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
         return values != null && !values.isEmpty() ? converter.call(values.get(0)) : defaultValue;
     }
 
-    public void putList(final String key, final String ... values) {
+    public void putList(final String key, final String... values) {
         put(key, new ArrayList<>(Arrays.asList(values)));
     }
 
@@ -33,7 +35,7 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
         return result == null ? Collections.emptyList() : result;
     }
 
-    public ExpressionConfig addToDefaultList(final String ... values) {
+    public ExpressionConfig addToDefaultList(final String... values) {
         if (get(null) == null) {
             put(null, new ArrayList<>());
         }
@@ -45,7 +47,9 @@ public class ExpressionConfig extends HashMap<String, List<String>> {
         put(null, list);
     }
 
-    /** creates a new config object, taking the content of one key of this config and putting it into the default list */
+    /**
+     * creates a new config object, taking the content of one key of this config and putting it into the default list
+     */
     public ExpressionConfig getSubConfig(final String key) {
         final ExpressionConfig subConfig = new ExpressionConfig();
         subConfig.putDefaultList(this.get(key));

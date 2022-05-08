@@ -7,7 +7,6 @@ import android.widget.TextView;
 
 /**
  * view click listener to automatically switch different coordinate formats
- *
  */
 public class CoordinatesFormatSwitcher {
 

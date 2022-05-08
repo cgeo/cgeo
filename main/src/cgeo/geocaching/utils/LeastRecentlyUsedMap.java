@@ -81,8 +81,7 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
      * Sets a handler for remove notifications. Currently only one handler
      * instance is supported
      *
-     * @param removeHandler
-     *            The new handler to receive notifications or null to remove a handler
+     * @param removeHandler The new handler to receive notifications or null to remove a handler
      */
     public void setRemoveHandler(final RemoveHandler<V> removeHandler) {
         this.removeHandler = removeHandler;
@@ -116,15 +115,13 @@ public abstract class LeastRecentlyUsedMap<K, V> extends LinkedHashMap<K, V> {
     /**
      * Interface for handlers that wish to get notified when items are
      * removed from the LRUMap
-     *
      */
     public interface RemoveHandler<V> {
 
         /**
          * Method will be called on remove
          *
-         * @param removed
-         *            Item that has been removed
+         * @param removed Item that has been removed
          */
         void onRemove(V removed);
 

@@ -50,14 +50,14 @@ public class StringFilterViewHolder<F extends StringGeocacheFilter> extends Base
         this.binding = CacheFilterGenericStringBinding.bind(view);
         selectSpinner.setTextView(this.binding.select);
         selectSpinner
-            .setValues(Arrays.asList(StringFilter.StringFilterType.values()))
-            .setDisplayMapper(StringFilter.StringFilterType::toUserDisplayableString)
-            .setChangeListener(sft -> {
-                final boolean textEnabled = sft != StringFilter.StringFilterType.IS_NOT_PRESENT && sft != StringFilter.StringFilterType.IS_PRESENT;
-                binding.searchtext.setVisibility(textEnabled ? VISIBLE : GONE);
-                binding.matchCase.setVisibility(textEnabled ? VISIBLE : GONE);
-            }, true)
-            .set(StringFilter.getDefaultFilterType());
+                .setValues(Arrays.asList(StringFilter.StringFilterType.values()))
+                .setDisplayMapper(StringFilter.StringFilterType::toUserDisplayableString)
+                .setChangeListener(sft -> {
+                    final boolean textEnabled = sft != StringFilter.StringFilterType.IS_NOT_PRESENT && sft != StringFilter.StringFilterType.IS_PRESENT;
+                    binding.searchtext.setVisibility(textEnabled ? VISIBLE : GONE);
+                    binding.matchCase.setVisibility(textEnabled ? VISIBLE : GONE);
+                }, true)
+                .set(StringFilter.getDefaultFilterType());
         this.binding.itemInfo.setOnClickListener(d -> SimpleDialog.of(getActivity()).setMessage(R.string.cache_filter_stringfilter_info).show());
 
         //initialize autocomplete,

@@ -15,7 +15,6 @@ import io.reactivex.rxjava3.core.Observable;
 
 /**
  * Methods to be implemented by any connector for handling trackables
- *
  */
 public interface TrackableConnector {
 
@@ -53,8 +52,7 @@ public interface TrackableConnector {
      * on a connector which does not have URLs for trackables. This might be checked using
      * {@link #hasTrackableUrls()}.
      *
-     * @param trackable
-     *            the trackable
+     * @param trackable the trackable
      * @return the URL corresponding to this trackable
      */
     @NonNull
@@ -77,12 +75,9 @@ public interface TrackableConnector {
      * Return a Trackable corresponding to the Trackable Geocode (Tracking Code) or Guid.
      * Note: Only GC connector support guid.
      *
-     * @param geocode
-     *            the trackable Tracking Code
-     * @param guid
-     *            the trackable guid
-     * @param id
-     *            the trackable id
+     * @param geocode the trackable Tracking Code
+     * @param guid    the trackable guid
+     * @param id      the trackable id
      * @return the Trackable object.
      */
     @Nullable
@@ -91,8 +86,7 @@ public interface TrackableConnector {
     /**
      * Return a Trackable corresponding to the Trackable Geocode.
      *
-     * @param geocode
-     *            the trackable
+     * @param geocode the trackable
      * @return the Trackable object.
      */
     @NonNull
@@ -101,8 +95,7 @@ public interface TrackableConnector {
     /**
      * Return a Trackable id from an url.
      *
-     * @param url
-     *            for one trackable
+     * @param url for one trackable
      * @return the Trackable Geocode.
      */
     @Nullable
@@ -146,8 +139,7 @@ public interface TrackableConnector {
     /**
      * Return the Trackable Logging Manager for the Trackable.
      *
-     * @param activity
-     *            currently running
+     * @param activity currently running
      * @return the Trackable logging manager.
      */
     @Nullable
@@ -208,7 +200,6 @@ public interface TrackableConnector {
 
     /**
      * Get url to use when testing website availability (because host url may redirect)
-     *
      */
     @NonNull
     String getTestUrl();

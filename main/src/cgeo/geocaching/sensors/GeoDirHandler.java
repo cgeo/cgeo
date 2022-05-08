@@ -57,11 +57,11 @@ public abstract class GeoDirHandler {
      * Update method called when new data is available. This method is called on the UI thread.
      * {@link #start(int)} must be called with the {@link #UPDATE_GEODIR} flag set.
      *
-     * @param geoData the new geographical data
+     * @param geoData   the new geographical data
      * @param direction the new direction
      *
-     * If the device goes fast enough, or if the compass use is not enabled in the settings,
-     * the GPS direction information will be used instead of the compass one.
+     *                  If the device goes fast enough, or if the compass use is not enabled in the settings,
+     *                  the GPS direction information will be used instead of the compass one.
      */
     public void updateGeoDir(@NonNull final GeoData geoData, final float direction) {
     }
@@ -88,9 +88,9 @@ public abstract class GeoDirHandler {
     /**
      * Register the current GeoDirHandler for GeoData and direction information (if the preferences allow it).
      *
-     * @param flags a combination of UPDATE_GEODATA, UPDATE_DIRECTION, UPDATE_GEODIR, and LOW_POWER
+     * @param flags          a combination of UPDATE_GEODATA, UPDATE_DIRECTION, UPDATE_GEODIR, and LOW_POWER
      * @param windowDuration if greater than 0, the size of the window duration during which no new value will be presented
-     * @param unit the unit for the windowDuration
+     * @param unit           the unit for the windowDuration
      * @return a disposable which can be used to stop the handler
      */
     public Disposable start(final int flags, final long windowDuration, final TimeUnit unit) {

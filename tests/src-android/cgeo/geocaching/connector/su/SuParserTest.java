@@ -374,6 +374,7 @@ public class SuParserTest extends AbstractResourceInstrumentationTestCase {
         parseCache(cacheJson);
         assertThat(cache.isOnWatchlist()).isTrue();
     }
+
     public void testCanHandleWrongUserJson() throws Exception {
         parseUser(emptyUserJson);
 

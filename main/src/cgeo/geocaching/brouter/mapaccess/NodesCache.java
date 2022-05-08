@@ -54,7 +54,7 @@ public final class NodesCache implements Closeable {
         public ContentStorage.FileInformation fi;
         public long fiTimestamp;
 
-        FileInformationCacheEntry (final ContentStorage.FileInformation fi) {
+        FileInformationCacheEntry(final ContentStorage.FileInformation fi) {
             this.fi = fi;
             this.fiTimestamp = System.currentTimeMillis();
         }

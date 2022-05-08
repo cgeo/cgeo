@@ -20,7 +20,9 @@ import java.util.Map;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-/** View displays and maintains a slider where user can select single or range of items from a sorted item list. */
+/**
+ * View displays and maintains a slider where user can select single or range of items from a sorted item list.
+ */
 public class ItemRangeSlider<T> extends LinearLayout {
 
     private final List<T> items = new ArrayList<>();
@@ -126,7 +128,7 @@ public class ItemRangeSlider<T> extends LinearLayout {
         return new ImmutablePair<>(items.get(Math.round(binding.sliderInternal.getValues().get(0))), items.get(Math.round(binding.sliderInternal.getValues().get(1))));
     }
 
-    private String getLabel(final int idx, final  T value) {
+    private String getLabel(final int idx, final T value) {
         if (value == null) {
             return "-";
         }
@@ -136,4 +138,4 @@ public class ItemRangeSlider<T> extends LinearLayout {
         return String.valueOf(value);
     }
 
- }
+}

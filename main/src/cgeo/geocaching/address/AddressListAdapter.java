@@ -1,4 +1,5 @@
 package cgeo.geocaching.address;
+
 import cgeo.geocaching.R;
 import cgeo.geocaching.databinding.AddresslistItemBinding;
 import cgeo.geocaching.location.Geopoint;

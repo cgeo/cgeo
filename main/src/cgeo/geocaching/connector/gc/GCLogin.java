@@ -313,8 +313,7 @@ public class GCLogin extends AbstractLogin {
     /**
      * Ensure that the web site is in English.
      *
-     * @param previousPage
-     *            the content of the last loaded page
+     * @param previousPage the content of the last loaded page
      * @return {@code true} if a switch was necessary and successfully performed (non-English -> English)
      */
     private boolean switchToEnglish(final String previousPage) {
@@ -503,7 +502,6 @@ public class GCLogin extends AbstractLogin {
 
     /**
      * POST HTTP request. Do the request a second time if the user is not logged in
-     *
      */
     String postRequestLogged(final String uri, final Parameters params) {
         final String data = Network.getResponseData(Network.postRequest(uri, params));
@@ -522,7 +520,6 @@ public class GCLogin extends AbstractLogin {
 
     /**
      * GET HTTP request. Do the request a second time if the user is not logged in
-     *
      */
     @Nullable
     String getRequestLogged(@NonNull final String uri, @Nullable final Parameters params) {
@@ -550,7 +547,6 @@ public class GCLogin extends AbstractLogin {
     /**
      * Unfortunately the cache details page contains user generated whitespace in the personal note, therefore we cannot
      * remove the white space from cache details pages.
-     *
      */
     private static boolean canRemoveWhitespace(final String uri) {
         return !StringUtils.contains(uri, "cache_details");

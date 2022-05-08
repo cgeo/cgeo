@@ -43,9 +43,9 @@ public class VariableMapTest {
         final VariableMap cMap = createTestMap();
         cMap.put("A", "D");
         assertCalculatorMap(cMap, "A", CYCLE, "e:A->D",
-            "B", CYCLE, "e:B->A->D->B",
-            "C", CYCLE, "e:C->A->D->C",
-            "D", CYCLE);
+                "B", CYCLE, "e:B->A->D->B",
+                "C", CYCLE, "e:C->A->D->C",
+                "D", CYCLE);
         cMap.remove("D");
         cMap.put("D", "1");
         assertCalculatorMap(cMap, "A", 1d, "B", 4d, "C", 2d, "D", 1d);
@@ -77,7 +77,7 @@ public class VariableMapTest {
         cMap.put("D", "C+E");
         cMap.put("E", "C+D");
         assertCalculatorMap(cMap, "A", CYCLE, "e:B->A", "B", CYCLE, "e:B->A", "C", ERROR,
-            "D", CYCLE, "e:D->E", "E", CYCLE, "e:D->E");
+                "D", CYCLE, "e:D->E", "E", CYCLE, "e:D->E");
 
         cMap.put("A", "3");
         assertCalculatorMap(cMap, "A", 3d, "B", 5d, "C", 5d, "D", CYCLE, "e:D->E", "E", CYCLE, "e:D->E");

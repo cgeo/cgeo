@@ -56,7 +56,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public final class ConnectorFactory {
     @NonNull public static final UnknownConnector UNKNOWN_CONNECTOR = new UnknownConnector();
-    @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector> asList(
+    @NonNull private static final Collection<IConnector> CONNECTORS = Collections.unmodifiableCollection(Arrays.<IConnector>asList(
             GCConnector.getInstance(),
             ECConnector.getInstance(),
             ALConnector.getInstance(),
@@ -89,7 +89,7 @@ public final class ConnectorFactory {
     @NonNull public static final UnknownTrackableConnector UNKNOWN_TRACKABLE_CONNECTOR = new UnknownTrackableConnector();
 
     @NonNull
-    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector> asList(
+    private static final Collection<TrackableConnector> TRACKABLE_CONNECTORS = Collections.unmodifiableCollection(Arrays.<TrackableConnector>asList(
             new GeokretyConnector(),
             new GeolutinsConnector(),
             TravelBugConnector.getInstance(), // travel bugs last, as their secret codes overlap with other connectors
@@ -326,10 +326,8 @@ public final class ConnectorFactory {
      * Obtain the connector by it's name.
      * If connector is not found, return UNKNOWN_CONNECTOR.
      *
-     * @param connectorName
-     *          connector name String
-     * @return
-     *          The connector matching name
+     * @param connectorName connector name String
+     * @return The connector matching name
      */
     @NonNull
     public static IConnector getConnectorByName(final String connectorName) {
@@ -384,7 +382,8 @@ public final class ConnectorFactory {
 
     /**
      * Checks if text can be interpreted as a geocode, either directly or by extracting one
-     * @param text  String containing a geocode (or not)
+     *
+     * @param text String containing a geocode (or not)
      * @return true if a geocode is found
      */
     public static boolean containsGeocode(@Nullable final String text) {
@@ -399,8 +398,7 @@ public final class ConnectorFactory {
     /**
      * Get trackable geocode from an URL.
      *
-     * @return
-     *          the geocode, {@code null} if the URL cannot be decoded
+     * @return the geocode, {@code null} if the URL cannot be decoded
      */
     @Nullable
     public static String getTrackableFromURL(final String url) {
@@ -419,8 +417,7 @@ public final class ConnectorFactory {
     /**
      * Get trackable Tracking Code from an URL.
      *
-     * @return
-     *          the TrackableTrackingCode object, {@code null} if the URL cannot be decoded
+     * @return the TrackableTrackingCode object, {@code null} if the URL cannot be decoded
      */
     @NonNull
     public static TrackableTrackingCode getTrackableTrackingCodeFromURL(final String url) {
@@ -443,16 +440,11 @@ public final class ConnectorFactory {
      * We return the first positive result coming from a connector, or, if none, the result of loading from
      * the local storage.
      *
-     * @param geocode
-     *          trackable geocode
-     * @param guid
-     *          trackable guid
-     * @param id
-     *          trackable id
-     * @param brand
-     *          trackable brand
-     * @return
-     *          The Trackable observable
+     * @param geocode trackable geocode
+     * @param guid    trackable guid
+     * @param id      trackable id
+     * @param brand   trackable brand
+     * @return The Trackable observable
      */
     public static Maybe<Trackable> loadTrackable(final String geocode, final String guid, final String id, final TrackableBrand brand) {
         if (StringUtils.isEmpty(geocode)) {

@@ -62,8 +62,7 @@ public class GPXImporter {
     /**
      * Import GPX file. Currently supports *.gpx, *.zip (containing gpx files, e.g. PQ queries), *.ggz or *.loc files.
      *
-     * @param file
-     *            the file to import
+     * @param file the file to import
      */
     public void importGPX(final File file) {
         if (StringUtils.endsWithIgnoreCase(file.getName(), FileUtils.GPX_FILE_EXTENSION)) {
@@ -78,8 +77,7 @@ public class GPXImporter {
     /**
      * Import GPX file from URI.
      *
-     * @param uri
-     *            URI of the file to import
+     * @param uri URI of the file to import
      */
     public void importGPX(final Uri uri, @Nullable final String mimeType, @Nullable final String pathName) {
         final ContentResolver contentResolver = fromActivity.getContentResolver();
@@ -135,7 +133,7 @@ public class GPXImporter {
     }
 
     private AbstractImportThread getImporterFromFileType(final Uri uri,
-            final ContentResolver contentResolver, final FileType fileType) {
+                                                         final ContentResolver contentResolver, final FileType fileType) {
 
         switch (fileType) {
             case ZIP:
@@ -257,8 +255,7 @@ public class GPXImporter {
     }
 
     /**
-     * @param gpxfile
-     *            the gpx file
+     * @param gpxfile the gpx file
      * @return the expected file name of the waypoints file
      */
     static String getWaypointsFileNameForGpxFile(final File gpxfile) {

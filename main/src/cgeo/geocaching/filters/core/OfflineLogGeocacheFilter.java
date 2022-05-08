@@ -19,7 +19,7 @@ public class OfflineLogGeocacheFilter extends StringGeocacheFilter {
     public void addToSql(final SqlBuilder sqlBuilder) {
         final String logTableId = sqlBuilder.getNewTableId();
         getStringFilter().addToSqlForSubquery(sqlBuilder,
-            "SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode",
-            true, logTableId + ".log");
+                "SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode",
+                true, logTableId + ".log");
     }
 }

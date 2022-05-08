@@ -13,7 +13,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-/** Helper class, gaining and logging statistics about a looper */
+/**
+ * Helper class, gaining and logging statistics about a looper
+ */
 public class LooperLogger {
 
     private static final Format DATE_FORMATTER = new SimpleDateFormat("HH:mm:ss.SSS", Locale.US);
@@ -36,8 +38,8 @@ public class LooperLogger {
             }
             synchronized (ll.collectedInfos) {
                 ll.collectedInfos.add(
-                    DATE_FORMATTER.format(new Date(System.currentTimeMillis())) + "/" + looper.getThread().getState() + ": " +
-                    Log.stackTraceToShortString(looper.getThread().getStackTrace(), 0, null));
+                        DATE_FORMATTER.format(new Date(System.currentTimeMillis())) + "/" + looper.getThread().getState() + ": " +
+                                Log.stackTraceToShortString(looper.getThread().getStackTrace(), 0, null));
             }
         }, 0, 200);
         Log.iForce("LooperLogger: started for Thread: " + looper.getThread().getName());

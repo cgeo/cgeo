@@ -47,8 +47,7 @@ public class Credentials {
      * Stored username information.
      *
      * @return the username if valid
-     * @throws IllegalArgumentException
-     *         if credentials are invalid
+     * @throws IllegalArgumentException if credentials are invalid
      */
     @NonNull
     public String getUserName() {
@@ -70,8 +69,7 @@ public class Credentials {
      * Stored password information.
      *
      * @return the password if valid
-     * @throws IllegalArgumentException
-     *         if credentials are invalid
+     * @throws IllegalArgumentException if credentials are invalid
      */
     @NonNull
     public String getPassword() {

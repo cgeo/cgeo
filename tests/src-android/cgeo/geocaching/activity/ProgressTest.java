@@ -11,7 +11,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 
 /**
  * This test uses the about activity to avoid side effects like network and GPS being triggered by the main activity.
- *
  */
 @TargetApi(8)
 public class ProgressTest extends ActivityInstrumentationTestCase2<AboutActivity> {

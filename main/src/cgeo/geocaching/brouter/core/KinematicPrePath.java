@@ -33,7 +33,7 @@ final class KinematicPrePath extends OsmPrePath {
         rc.expctxWay.evaluate(rc.inverseDirection ^ isReverse, description);
 
         final OsmTransferNode transferNode = link.geometry == null ? null
-            : rc.geometryDecoder.decodeGeometry(link.geometry, p1, targetNode, isReverse);
+                : rc.geometryDecoder.decodeGeometry(link.geometry, p1, targetNode, isReverse);
 
         final int lon2;
         final int lat2;

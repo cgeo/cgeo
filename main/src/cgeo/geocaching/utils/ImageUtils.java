@@ -73,12 +73,12 @@ public final class ImageUtils {
             ExifInterface.ORIENTATION_ROTATE_270
     };
 
-    private static final int[] ROTATION = { 90, 180, 270 };
+    private static final int[] ROTATION = {90, 180, 270};
     private static final int MAX_DISPLAY_IMAGE_XY = 800;
 
     // Images whose URL contains one of those patterns will not be available on the Images tab
     // for opening into an external application.
-    private static final String[] NO_EXTERNAL = { "geocheck.org" };
+    private static final String[] NO_EXTERNAL = {"geocheck.org"};
 
     public static class ImageFolderCategoryHandler implements ImageGalleryView.EditableCategoryHandler {
 
@@ -87,17 +87,17 @@ public final class ImageUtils {
         public ImageFolderCategoryHandler(final String geocode) {
             final String suffix = StringUtils.right(geocode, 2);
             folder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
-                suffix.substring(1) + "/" + suffix.charAt(0)  + "/" + geocode);
+                    suffix.substring(1) + "/" + suffix.charAt(0) + "/" + geocode);
         }
 
         @Override
         public Collection<Image> getAllImages() {
             return CollectionStream.of(ContentStorage.get().list(folder))
-                .map(fi -> new Image.Builder().setUrl(fi.uri)
-                    .setTitle(getTitleFromName(fi.name))
-                    .setCategory(Image.ImageCategory.OWN)
-                    .setContextInformation("Stored: " + Formatter.formatDateTime(fi.lastModified))
-                    .build()).toList();
+                    .map(fi -> new Image.Builder().setUrl(fi.uri)
+                            .setTitle(getTitleFromName(fi.name))
+                            .setCategory(Image.ImageCategory.OWN)
+                            .setContextInformation("Stored: " + Formatter.formatDateTime(fi.lastModified))
+                            .build()).toList();
         }
 
         @Override
@@ -108,9 +108,9 @@ public final class ImageUtils {
                 final String title = getTitleFromName(filename);
                 final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, FileNameCreator.forName(filename), false);
                 resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title)
-                    .setCategory(Image.ImageCategory.OWN)
-                    .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
-                    .build());
+                        .setCategory(Image.ImageCategory.OWN)
+                        .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
+                        .build());
             }
             return resultCollection;
         }
@@ -150,8 +150,7 @@ public final class ImageUtils {
     /**
      * Scales a bitmap to the device display size.
      *
-     * @param image
-     *            The image Bitmap representation to scale
+     * @param image The image Bitmap representation to scale
      * @return BitmapDrawable The scaled image
      */
     @NonNull
@@ -165,8 +164,7 @@ public final class ImageUtils {
     /**
      * Reads and scales an image to the device display size.
      *
-     * @param imageData
-     *            The image data to read and scale
+     * @param imageData The image data to read and scale
      * @return Bitmap The scaled image or Null if source image can't be read
      */
     @Nullable
@@ -187,8 +185,7 @@ public final class ImageUtils {
     /**
      * Scales a bitmap to the given bounds if it is larger, otherwise returns the original bitmap (except when "force" is set to true)
      *
-     * @param image
-     *            The bitmap to scale
+     * @param image The bitmap to scale
      * @return BitmapDrawable The scaled image
      */
     @NonNull
@@ -227,14 +224,10 @@ public final class ImageUtils {
     /**
      * Store a bitmap to uri.
      *
-     * @param bitmap
-     *            The bitmap to store
-     * @param format
-     *            The image format
-     * @param quality
-     *            The image quality
-     * @param targetUri
-     *            Path to store to
+     * @param bitmap    The bitmap to store
+     * @param format    The image format
+     * @param quality   The image quality
+     * @param targetUri Path to store to
      */
     public static void storeBitmap(final Bitmap bitmap, final Bitmap.CompressFormat format, final int quality, final Uri targetUri) {
         final BufferedOutputStream bos = null;
@@ -275,8 +268,8 @@ public final class ImageUtils {
      * Reads and scales an image with downsampling in one step to prevent memory consumption.
      *
      * @param imageUri image to read
-     * @param maxX The desired width. If <= 0 then actual bitmap width is used
-     * @param maxY The desired height. If <= 0 then actual bitmap height is used
+     * @param maxX     The desired width. If <= 0 then actual bitmap width is used
+     * @param maxY     The desired height. If <= 0 then actual bitmap height is used
      * @return Bitmap the image or null if image can't be read
      */
     @Nullable
@@ -334,7 +327,9 @@ public final class ImageUtils {
         return orientation;
     }
 
-    /** stream will be consumed and closed by method */
+    /**
+     * stream will be consumed and closed by method
+     */
     @NonNull
     private static BitmapFactory.Options getBitmapSizeOptions(@NonNull final InputStream imageStream) {
         if (imageStream == null) {
@@ -372,7 +367,7 @@ public final class ImageUtils {
     /**
      * Check if the URL contains one of the given substrings.
      *
-     * @param url the URL to check
+     * @param url      the URL to check
      * @param patterns a list of substrings to check against
      * @return <tt>true</tt> if the URL contains at least one of the patterns, <tt>false</tt> otherwise
      */
@@ -389,7 +384,7 @@ public final class ImageUtils {
      * Decode a base64-encoded string and save the result into a file.
      *
      * @param inString the encoded string
-     * @param outFile the file to save the decoded result into
+     * @param outFile  the file to save the decoded result into
      */
     public static void decodeBase64ToFile(final String inString, final File outFile) {
         FileOutputStream out = null;
@@ -406,10 +401,8 @@ public final class ImageUtils {
     /**
      * Decode a base64-encoded string and save the result into a stream.
      *
-     * @param inString
-     *            the encoded string
-     * @param out
-     *            the stream to save the decoded result into
+     * @param inString the encoded string
+     * @param out      the stream to save the decoded result into
      */
     public static void decodeBase64ToStream(final String inString, final OutputStream out) throws IOException {
         Base64InputStream in = null;
@@ -428,8 +421,9 @@ public final class ImageUtils {
 
     /**
      * Add images present in the HTML description to the existing collection.
-     * @param images a collection of images
-     * @param geocode the common title for images in the description
+     *
+     * @param images   a collection of images
+     * @param geocode  the common title for images in the description
      * @param htmlText the HTML description to be parsed, can be repeated
      */
     public static void addImagesFromHtml(final Collection<Image> images, final String geocode, final String... htmlText) {
@@ -437,7 +431,7 @@ public final class ImageUtils {
         for (final Image image : images) {
             urls.add(image.getUrl());
         }
-        for (final String text: htmlText) {
+        for (final String text : htmlText) {
             HtmlCompat.fromHtml(StringUtils.defaultString(text), HtmlCompat.FROM_HTML_MODE_LEGACY, source -> {
                 if (!urls.contains(source) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
@@ -597,7 +591,9 @@ public final class ImageUtils {
         return false;
     }
 
-    /** Returns image name and size in bytes */
+    /**
+     * Returns image name and size in bytes
+     */
     public static ContentStorage.FileInformation getImageFileInfos(final Image image) {
         return ContentStorage.get().getFileInfo(image.getUri());
     }
@@ -605,6 +601,7 @@ public final class ImageUtils {
     /**
      * Creates a new image Uri for a public image.
      * Just the filename and uri is created, no data is stored.
+     *
      * @param geocode an identifier which will become part of the filename. Might be e.g. the gccode
      * @return left: created filename, right: uri for the image
      */
@@ -618,7 +615,7 @@ public final class ImageUtils {
             values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg");
             values.put(MediaStore.Images.Media.RELATIVE_PATH, Environment.DIRECTORY_PICTURES);
             return new ImmutablePair<>(imageFileName,
-                CgeoApplication.getInstance().getApplicationContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values));
+                    CgeoApplication.getInstance().getApplicationContext().getContentResolver().insert(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, values));
         }
 
         //the following only works until Version Q
@@ -627,12 +624,14 @@ public final class ImageUtils {
 
         //go through file provider so we can share the Uri with e.g. camera app
         return new ImmutablePair<>(imageFileName, FileProvider.getUriForFile(
-            CgeoApplication.getInstance().getApplicationContext(),
-            CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
-            image));
+                CgeoApplication.getInstance().getApplicationContext(),
+                CgeoApplication.getInstance().getApplicationContext().getString(R.string.file_provider_authority),
+                image));
     }
 
-    /** Create a new image Uri for an offline log image */
+    /**
+     * Create a new image Uri for an offline log image
+     */
     public static ImmutablePair<String, Uri> createNewOfflineLogImageUri(final String geocode) {
         final String imageFileName = FileNameCreator.OFFLINE_LOG_IMAGE.createName(geocode == null ? "shared" : geocode);
         return new ImmutablePair<>(imageFileName, Uri.fromFile(getFileForOfflineLogImage(imageFileName)));
@@ -654,8 +653,8 @@ public final class ImageUtils {
         final Set<String> filenamesToKeep = CollectionStream.of(keep).map(i -> i.getFile() == null ? null : i.getFile().getName()).toSet();
         final String fileNamePraefix = OFFLINE_LOG_IMAGE_PRAEFIX + geocode;
         CollectionStream.of(LocalStorage.getOfflineLogImageDir(geocode).listFiles())
-            .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))
-            .forEach(File::delete);
+                .filter(f -> f.getName().startsWith(fileNamePraefix) && !filenamesToKeep.contains(f.getName()))
+                .forEach(File::delete);
     }
 
     public static boolean deleteOfflineLogImageFile(final Image delete) {
@@ -675,7 +674,9 @@ public final class ImageUtils {
         return new File(LocalStorage.getOfflineLogImageDir(geocode), imageFileName);
     }
 
-    /** adjusts a previously stored offline log image uri to maybe changed realities on the file system */
+    /**
+     * adjusts a previously stored offline log image uri to maybe changed realities on the file system
+     */
     public static Uri adjustOfflineLogImageUri(final Uri imageUri) {
         if (imageUri == null) {
             return imageUri;
@@ -710,7 +711,9 @@ public final class ImageUtils {
         }
     }
 
-    /** gets or creates local file and shareable Uri for given image */
+    /**
+     * gets or creates local file and shareable Uri for given image
+     */
     public static Uri getLocalImageFileUriForSharing(final Context context, final Uri imgUri, final String geocode) {
 
         if (imgUri == null) {
@@ -729,7 +732,7 @@ public final class ImageUtils {
             }
         }
 
-       File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
+        File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
         if (file == null || !file.exists()) {
             file = compressImageToFile(imageUri);
             file.deleteOnExit();

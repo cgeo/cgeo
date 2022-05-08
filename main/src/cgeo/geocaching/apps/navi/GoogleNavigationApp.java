@@ -84,7 +84,6 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
 
         /**
          * show a selection of all parking places and the cache itself, when using the navigation for driving
-         *
          */
         private void selectDriveTarget(final Context context, final ArrayList<IWaypoint> targets) {
             final Context themeContext = Dialogs.newContextThemeWrapper(context);
@@ -97,16 +96,16 @@ abstract class GoogleNavigationApp extends AbstractPointNavigationApp {
             };
 
             Dialogs.newBuilder(context)
-                .setTitle(R.string.cache_menu_navigation_drive_select_target)
-                .setAdapter(adapter, (dialog, which) -> {
-                    final IWaypoint target = targets.get(which);
-                    if (target instanceof Geocache) {
-                        GoogleNavigationDrivingApp.super.navigate(context, (Geocache) target);
-                    }
-                    if (target instanceof Waypoint) {
-                        navigate(context, (Waypoint) target);
-                    }
-                }).show();
+                    .setTitle(R.string.cache_menu_navigation_drive_select_target)
+                    .setAdapter(adapter, (dialog, which) -> {
+                        final IWaypoint target = targets.get(which);
+                        if (target instanceof Geocache) {
+                            GoogleNavigationDrivingApp.super.navigate(context, (Geocache) target);
+                        }
+                        if (target instanceof Waypoint) {
+                            navigate(context, (Waypoint) target);
+                        }
+                    }).show();
         }
     }
 

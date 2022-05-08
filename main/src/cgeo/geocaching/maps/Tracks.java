@@ -65,7 +65,7 @@ public class Tracks {
 
     public void resumeAllTracks(final Action2<String, Boolean> resumeTrack) {
         for (Track track : data) {
-           resumeTrack.call(track.trackfile.getKey(), false);
+            resumeTrack.call(track.trackfile.getKey(), false);
         }
     }
 

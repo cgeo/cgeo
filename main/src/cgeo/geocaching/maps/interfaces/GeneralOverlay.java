@@ -12,7 +12,7 @@ public interface GeneralOverlay {
     void draw(Canvas canvas, MapViewImpl mapView, boolean shadow);
 
     void drawOverlayBitmap(Canvas canvas, Point drawPosition,
-            MapProjectionImpl projection, byte drawZoomLevel);
+                           MapProjectionImpl projection, byte drawZoomLevel);
 
     OverlayImpl getOverlayImpl();
 }

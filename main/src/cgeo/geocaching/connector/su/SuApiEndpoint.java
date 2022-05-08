@@ -20,10 +20,8 @@ enum SuApiEndpoint {
     USER("/api/profile.php", OAuthLevel.Level1),
     PERSONAL_NOTE("/api/personal_note.php", OAuthLevel.Level1);
 
-    @NonNull
-    final String methodName;
-    @NonNull
-    final OAuthLevel level;
+    @NonNull final String methodName;
+    @NonNull final OAuthLevel level;
 
     SuApiEndpoint(@NonNull final String methodName, @NonNull final OAuthLevel level) {
         this.methodName = methodName;

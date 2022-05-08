@@ -24,7 +24,7 @@ public class SmileyImage extends HtmlImage {
     protected ImmutableTriple<BitmapDrawable, Metadata, Boolean> scaleImage(final ImmutableTriple<Bitmap, Metadata, Boolean> loadResult) {
         final Bitmap bitmap = loadResult.left;
         if (bitmap == null) {
-            return ImmutableTriple.of(null, null,  loadResult.right);
+            return ImmutableTriple.of(null, null, loadResult.right);
         }
         final TextView view = viewRef.get();
         final BitmapDrawable drawable = new BitmapDrawable(view.getResources(), bitmap);

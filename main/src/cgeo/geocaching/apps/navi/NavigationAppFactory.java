@@ -37,37 +37,69 @@ public final class NavigationAppFactory {
     }
 
     public enum NavigationAppsEnum {
-        /** The internal compass activity */
+        /**
+         * The internal compass activity
+         */
         COMPASS(new CompassApp(), 0, R.string.pref_navigation_menu_compass),
-        /** The external radar app */
+        /**
+         * The external radar app
+         */
         RADAR(new RadarApp(), 1, R.string.pref_navigation_menu_radar),
-        /** The selected map */
+        /**
+         * The selected map
+         */
         INTERNAL_MAP(new InternalMap(), 2, R.string.pref_navigation_menu_internal_map),
-        /** The external Locus app */
+        /**
+         * The external Locus app
+         */
         LOCUS(new LocusApp(), 4, R.string.pref_navigation_menu_locus),
-        /** Google Maps */
+        /**
+         * Google Maps
+         */
         GOOGLE_MAPS(new GoogleMapsApp(), 6, R.string.pref_navigation_menu_google_maps),
-        /** Google Navigation */
+        /**
+         * Google Navigation
+         */
         GOOGLE_NAVIGATION(new GoogleNavigationDrivingApp(), 7, R.string.pref_navigation_menu_google_navigation),
-        /** Google Streetview */
+        /**
+         * Google Streetview
+         */
         GOOGLE_STREETVIEW(new StreetviewApp(), 8, R.string.pref_navigation_menu_google_streetview),
-        /** The external OruxMaps app */
+        /**
+         * The external OruxMaps app
+         */
         ORUX_MAPS(new OruxOnlineMapApp(), 9, R.string.pref_navigation_menu_oruxmaps),
-        /** The external OruxMaps app */
+        /**
+         * The external OruxMaps app
+         */
         ORUX_MAPS_OFFLINE(new OruxOfflineMapApp(), 24, R.string.pref_navigation_menu_oruxmaps_offline),
-        /** The external Sygic app in walking mode */
+        /**
+         * The external Sygic app in walking mode
+         */
         SYGIC_WALKING(new SygicNavigationWalkingApp(), 11, R.string.pref_navigation_menu_sygic_walking),
-        /** The external Sygic app in driving mode */
+        /**
+         * The external Sygic app in driving mode
+         */
         SYGIC_DRIVING(new SygicNavigationDrivingApp(), 23, R.string.pref_navigation_menu_sygic_driving),
-        /** The external OsmAnd app */
+        /**
+         * The external OsmAnd app
+         */
         OSM_AND(new OsmAndApp(), 26, R.string.pref_navigation_menu_osmand),
-        /** Google Navigation in walking mode */
+        /**
+         * Google Navigation in walking mode
+         */
         GOOGLE_NAVIGATION_WALK(new GoogleNavigationWalkingApp(), 12, R.string.pref_navigation_menu_google_walk),
-        /** Google Navigation in bike mode */
+        /**
+         * Google Navigation in bike mode
+         */
         GOOGLE_NAVIGATION_BIKE(new GoogleNavigationBikeApp(), 21, R.string.pref_navigation_menu_google_bike),
-        /** Google Navigation in transit mode */
+        /**
+         * Google Navigation in transit mode
+         */
         GOOGLE_NAVIGATION_TRANSIT(new GoogleNavigationTransitApp(), 14, R.string.pref_navigation_menu_google_transit),
-        /** Google Maps Directions */
+        /**
+         * Google Maps Directions
+         */
         GOOGLE_MAPS_DIRECTIONS(new GoogleMapsDirectionApp(), 13, R.string.pref_navigation_menu_google_maps_directions),
 
         WHERE_YOU_GO(new WhereYouGoApp(), 16, R.string.pref_navigation_menu_where_you_go),
@@ -114,10 +146,9 @@ public final class NavigationAppFactory {
      * <p />
      * Delegates to {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint, boolean, boolean)} with
      * {@code showInternalMap = true} and {@code showDefaultNavigation = false}
-     *
      */
     public static void showNavigationMenu(final Activity activity,
-            final Geocache cache, final Waypoint waypoint, final Geopoint destination) {
+                                          final Geocache cache, final Waypoint waypoint, final Geopoint destination) {
         showNavigationMenu(activity, cache, waypoint, destination, true, false);
     }
 
@@ -125,22 +156,16 @@ public final class NavigationAppFactory {
      * Specialized way to handle selection of navigation tool.<br />
      * A dialog is created for tool selection and the selected tool is started afterwards.
      *
-     * @param cache
-     *            may be {@code null}
-     * @param waypoint
-     *            may be {@code null}
-     * @param destination
-     *            may be {@code null}
-     * @param showInternalMap
-     *            should be {@code false} only when called from within the internal map
-     * @param showDefaultNavigation
-     *            should be {@code false} by default
-     *
+     * @param cache                 may be {@code null}
+     * @param waypoint              may be {@code null}
+     * @param destination           may be {@code null}
+     * @param showInternalMap       should be {@code false} only when called from within the internal map
+     * @param showDefaultNavigation should be {@code false} by default
      * @see #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)
      */
     public static void showNavigationMenu(final Activity activity,
-            final Geocache cache, final Waypoint waypoint, final Geopoint destination,
-            final boolean showInternalMap, final boolean showDefaultNavigation) {
+                                          final Geocache cache, final Waypoint waypoint, final Geopoint destination,
+                                          final boolean showInternalMap, final boolean showDefaultNavigation) {
         final List<NavigationAppsEnum> items = new ArrayList<>();
         final int defaultNavigationTool = Settings.getDefaultNavigationTool();
         for (final NavigationAppsEnum navApp : getActiveNavigationApps()) {
@@ -185,7 +210,6 @@ public final class NavigationAppFactory {
 
     /**
      * Returns all installed navigation apps.
-     *
      */
     @NonNull
     static List<NavigationAppsEnum> getInstalledNavigationApps() {
@@ -214,7 +238,6 @@ public final class NavigationAppFactory {
 
     /**
      * Returns all installed navigation apps for default navigation.
-     *
      */
     @NonNull
     public static List<NavigationAppsEnum> getInstalledDefaultNavigationApps() {
@@ -230,7 +253,6 @@ public final class NavigationAppFactory {
     /**
      * Handles menu selections for menu entries created with
      * {@link #showNavigationMenu(Activity, Geocache, Waypoint, Geopoint)}.
-     *
      */
     public static boolean onMenuItemSelected(final MenuItem item, final Activity activity, final Geocache cache) {
         final App menuItem = getAppFromMenuItem(item);
@@ -278,8 +300,6 @@ public final class NavigationAppFactory {
 
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
-     *
-     *
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geocache cache) {
         if (cache == null || cache.getCoords() == null) {
@@ -300,7 +320,6 @@ public final class NavigationAppFactory {
 
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
-     *
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Waypoint waypoint) {
         if (waypoint == null || waypoint.getCoords() == null) {
@@ -312,7 +331,6 @@ public final class NavigationAppFactory {
 
     /**
      * Starts the default navigation tool if correctly set and installed or the compass app as default fallback.
-     *
      */
     public static void startDefaultNavigationApplication(final int defaultNavigation, final Activity activity, final Geopoint destination) {
         if (destination == null) {

@@ -25,14 +25,14 @@ public class PersonalNoteTest {
         note.gatherMissingDataFrom(createNote("provider2 note", true));
         assertThat(note.getNote()).contains("provider note");
         assertThat(note.getNote()).doesNotContain("provider2 note");
-      }
+    }
 
-      @Test
-      public void testPreserveProviderNote() {
-          final PersonalNote note = createNote("provider note", true);
-          note.gatherMissingDataFrom(createNote("local note", false));
-          assertThat(note.getNote()).contains("provider note");
-      }
+    @Test
+    public void testPreserveProviderNote() {
+        final PersonalNote note = createNote("provider note", true);
+        note.gatherMissingDataFrom(createNote("local note", false));
+        assertThat(note.getNote()).contains("provider note");
+    }
 
     @Test
     public void testCorrectMergeOfProviderNote() {

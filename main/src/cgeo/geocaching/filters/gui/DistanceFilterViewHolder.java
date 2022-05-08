@@ -67,8 +67,8 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         useCurrentPosition.setChecked(filter.isUseCurrentPosition());
         coordinate.setText(filter.getCoordinate() == null ? "" : GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, filter.getCoordinate()));
         slider.setRange(
-            filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue() / conversion,
-            filter.getMaxRangeValue() == null ? maxDistance + 500f : filter.getMaxRangeValue() / conversion);
+                filter.getMinRangeValue() == null ? -10f : filter.getMinRangeValue() / conversion,
+                filter.getMaxRangeValue() == null ? maxDistance + 500f : filter.getMaxRangeValue() / conversion);
     }
 
     @Override
@@ -78,8 +78,8 @@ public class DistanceFilterViewHolder extends BaseFilterViewHolder<DistanceGeoca
         filter.setCoordinate(GeopointParser.parse(coordinate.getText().toString(), null));
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(
-            range.left < 0 ? null : (float) Math.round(range.left * conversion),
-            range.right > maxDistance ? null : (float) Math.round(range.right * conversion));
+                range.left < 0 ? null : (float) Math.round(range.left * conversion),
+                range.right > maxDistance ? null : (float) Math.round(range.right * conversion));
         return filter;
     }
 

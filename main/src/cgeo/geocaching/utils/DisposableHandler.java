@@ -73,8 +73,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
      * Handle a non-dispose message.<br>
      * Subclasses must implement this to handle messages.
      *
-     * @param message
-     *            the message to handle
+     * @param message the message to handle
      */
     protected abstract void handleRegularMessage(Message message);
 
@@ -120,8 +119,7 @@ public abstract class DisposableHandler extends Handler implements Disposable {
     /**
      * Check if a handler has been disposed.
      *
-     * @param handler
-     *            a handler, or null
+     * @param handler a handler, or null
      * @return true if the handler is not null and has been disposed
      */
     public static boolean isDisposed(final DisposableHandler handler) {

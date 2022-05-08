@@ -64,7 +64,7 @@ public class HttpRequest {
         return this;
     }
 
-    public HttpRequest uriParams(final String ... keyValues) {
+    public HttpRequest uriParams(final String... keyValues) {
         uriParams.put(keyValues);
         return this;
     }
@@ -74,7 +74,7 @@ public class HttpRequest {
         return this;
     }
 
-    public HttpRequest headers(final String ... keyValues) {
+    public HttpRequest headers(final String... keyValues) {
         headers.put(keyValues);
         return this;
     }
@@ -191,7 +191,7 @@ public class HttpRequest {
                 }
             }
             entity.addFormDataPart(fileFieldName, file.getName(),
-                RequestBody.create(file, MediaType.parse(fileContentType)));
+                    RequestBody.create(file, MediaType.parse(fileContentType)));
             return entity.build();
         };
         return this;

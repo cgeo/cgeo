@@ -12,7 +12,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
 /**
  * This test is meant for performance measurements of different whitespace replacement implementations.
  * It does not test semantical correctness.
- *
  */
 public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
 
@@ -28,7 +27,6 @@ public class WhitespaceTest extends AbstractResourceInstrumentationTestCase {
     /**
      * The place for the implementation to prove that the new version of replaceWhitespace is faster than
      * BaseUtils.replaceWhitespace()
-     *
      */
     public static String replaceWhitespaceManually(final String data) {
         final int length = data.length();

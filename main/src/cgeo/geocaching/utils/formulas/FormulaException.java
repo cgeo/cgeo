@@ -38,13 +38,13 @@ public class FormulaException extends IllegalArgumentException {
     private int parsingChar = 0;
     private String evaluationContext;
 
-    public FormulaException(final Throwable cause, final ErrorType errorType, final Object ... errorParams) {
+    public FormulaException(final Throwable cause, final ErrorType errorType, final Object... errorParams) {
         super("[" + errorType + "]" + getUserDisplayableMessage(errorType, errorParams), cause);
         this.localizedMessage = getUserDisplayableMessage(errorType, errorParams);
         this.errorType = errorType;
     }
 
-    public FormulaException(final ErrorType errorType, final Object ...errorParams) {
+    public FormulaException(final ErrorType errorType, final Object... errorParams) {
         this(null, errorType, errorParams);
     }
 
@@ -86,10 +86,9 @@ public class FormulaException extends IllegalArgumentException {
         return super.getMessage() + "/" + functionContext + "/ppos:" + parsingPos + "/pch:'" + (char) parsingChar + "'[" + expression + ": " + evaluationContext + "]";
     }
 
-    public static String getUserDisplayableMessage(final ErrorType errorType, final Object ... errorParams) {
+    public static String getUserDisplayableMessage(final ErrorType errorType, final Object... errorParams) {
         return LocalizationUtils.getStringWithFallback(errorType.messageResId, errorType.messageFallback, errorParams);
     }
-
 
 
 }

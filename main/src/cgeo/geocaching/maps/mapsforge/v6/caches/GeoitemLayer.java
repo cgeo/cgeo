@@ -65,7 +65,7 @@ public class GeoitemLayer extends Marker {
     public static void resetColors() {
         strokePaint = AndroidGraphicFactory.INSTANCE.createPaint();
         strokePaint.setStrokeWidth(2.0f);
-        strokePaint.setDashPathEffect(new float[] { 3, 2 });
+        strokePaint.setDashPathEffect(new float[]{3, 2});
         strokePaint.setColor(MapLineUtils.getCircleColor());
         strokePaint.setStyle(Style.STROKE);
 

@@ -47,16 +47,16 @@ public class LocationProvider extends LocationCallback {
             if (mostPreciseCount.get() > 0) {
                 Log.d("LocationProvider: requesting most precise locations");
                 fusedLocationClient.requestLocationUpdates(
-                    LOCATION_REQUEST,
-                    this,
-                    AndroidRxUtils.looperCallbacksLooper
+                        LOCATION_REQUEST,
+                        this,
+                        AndroidRxUtils.looperCallbacksLooper
                 );
             } else if (lowPowerCount.get() > 0) {
                 Log.d("LocationProvider: requesting low-power locations");
                 fusedLocationClient.requestLocationUpdates(
-                    LOCATION_REQUEST_LOW_POWER,
-                    this,
-                    AndroidRxUtils.looperCallbacksLooper
+                        LOCATION_REQUEST_LOW_POWER,
+                        this,
+                        AndroidRxUtils.looperCallbacksLooper
                 );
             } else {
                 Log.d("LocationProvider: stopping location requests");

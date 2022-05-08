@@ -151,7 +151,8 @@ public class ImageActivityHelper {
      * It will create a local image copy for the selected images in c:geo private storage for further processing.
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
-     * @param fileid an id which will be part of resulting image name (e.g. a cache code)
+     *
+     * @param fileid        an id which will be part of resulting image name (e.g. a cache code)
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      */
     public void getImageFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
@@ -166,7 +167,8 @@ public class ImageActivityHelper {
      * It will create local image copies for all selected images in c:geo private storage for further processing.
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
-     * @param fileid an id which will be part of resulting image name (e.g. a cache code)
+     *
+     * @param fileid        an id which will be part of resulting image name (e.g. a cache code)
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      */
     public void getMultipleImagesFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
@@ -183,7 +185,8 @@ public class ImageActivityHelper {
      * in private app storage for further processing by c:geo
      * This function wil only work if you call {@link #onActivityResult(int, int, Intent)} in
      * your activity as explained there.
-     * @param fileid an id which will be part of resulting image name (e.g. a cache code)
+     *
+     * @param fileid        an id which will be part of resulting image name (e.g. a cache code)
      * @param callOnFailure if true, then callback will be called also on image shooting failure (with img=null)
      */
     public void getImageFromCamera(final String fileid, final boolean callOnFailure, final String userKey) {

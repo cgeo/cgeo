@@ -13,7 +13,7 @@ public final class OCDEConnector extends OCApiLiveConnector {
      * Alternate Opencaching domains which are managed by Opencaching.DE.
      * current: no mapped domain; opencaching.es is a direct forward to opencaching.de/?locale=ES
      */
-    private static final String[] MAPPED_DOMAINS = new String[] { null };
+    private static final String[] MAPPED_DOMAINS = new String[]{null};
 
     public OCDEConnector() {
         super("opencaching.de", "www.opencaching.de", true, "OC", "CC BY-NC-ND, alle Logeinträge © jeweiliger Autor",

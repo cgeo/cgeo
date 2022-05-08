@@ -17,7 +17,7 @@ public class GoogleCachesList {
     protected static final double CIRCLE_RADIUS = 528.0 * IConversion.FEET_TO_KILOMETER * 1000.0;
     public static final float ZINDEX_GEOCACHE = 4;
     public static final float ZINDEX_WAYPOINT = 3;
-    public static final float ZINDEX_CIRCLE   = 2;
+    public static final float ZINDEX_CIRCLE = 2;
 
     private Collection<MapObjectOptions> options;
 

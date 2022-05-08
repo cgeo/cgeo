@@ -46,6 +46,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
     int getHeight();
 
     void setDestinationCoords(Geopoint destCoords);
+
     void setCoordinates(Location coordinates);
 
     MapProjectionImpl getMapProjection();
@@ -61,8 +62,7 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
      * a specific overlay, that changed, or the mapview as a whole
      * (if overlay is null)
      *
-     * @param overlay
-     *            Overlay to repaint or null if the mapview has changed
+     * @param overlay Overlay to repaint or null if the mapview has changed
      */
     void repaintRequired(GeneralOverlay overlay);
 
@@ -96,10 +96,16 @@ public interface MapViewImpl<T extends CachesOverlayItemImpl> {
      * forward on the following methods:
      */
     void onCreate(Bundle b);
+
     void onResume();
+
     void onPause();
+
     void onDestroy();
+
     void onSaveInstanceState(@NonNull Bundle b);
+
     void onLowMemory();
+
     void selectMapTheme(AppCompatActivity activity);
 }

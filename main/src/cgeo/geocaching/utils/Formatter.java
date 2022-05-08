@@ -29,7 +29,9 @@ public final class Formatter {
 
     private static final int SHORT_GEOCODE_MAX_LENGTH = 8;
 
-    /** Text separator used for formatting texts */
+    /**
+     * Text separator used for formatting texts
+     */
     public static final String SEPARATOR = " · ";
     public static final int MINUTES_PER_DAY = 24 * 60;
     public static final float DAYS_PER_MONTH = 365F / 12; // on average
@@ -46,8 +48,7 @@ public final class Formatter {
      * Generate a time string according to system-wide settings (locale, 12/24 hour)
      * such as "13:24".
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -59,8 +60,7 @@ public final class Formatter {
      * Generate a date string according to system-wide settings (locale, date format)
      * such as "20 December" or "20 December 2010". The year will only be included when necessary.
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -73,8 +73,7 @@ public final class Formatter {
      * such as "20 December 2010". The year will always be included, making it suitable
      * to generate long-lived log entries.
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -100,8 +99,7 @@ public final class Formatter {
     /**
      * Generate a numeric date string with date format "yyyy-MM-dd HH-mm"
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -113,8 +111,7 @@ public final class Formatter {
      * Generate a numeric date string according to system-wide settings (locale, date format)
      * such as "10/20/2010".
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -131,8 +128,7 @@ public final class Formatter {
      * Generate a numeric date string according to system-wide settings (locale, date format)
      * such as "10/20/2010". Today and yesterday will be presented as strings "today" and "yesterday".
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -160,8 +156,7 @@ public final class Formatter {
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 sept. at 12:35".
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull
@@ -173,8 +168,7 @@ public final class Formatter {
      * Generate a numeric date and time string according to system-wide settings (locale,
      * date format) such as "7 september at 12:35".
      *
-     * @param date
-     *            milliseconds since the epoch
+     * @param date milliseconds since the epoch
      * @return the formatted string
      */
     @NonNull

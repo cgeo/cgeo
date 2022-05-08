@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- *  Simple Parser, able to perform common parsing operations on a string
+ * Simple Parser, able to perform common parsing operations on a string
  */
 public final class TextParser {
 
@@ -32,7 +32,7 @@ public final class TextParser {
     /**
      * creates a new TextParser with position set on the first char of given expression
      */
-    public TextParser(final String expression, final Predicate<Character> stopChecker)  {
+    public TextParser(final String expression, final Predicate<Character> stopChecker) {
         this.expression = expression == null ? "" : expression;
         this.stopChecker = stopChecker;
         next();
@@ -43,12 +43,16 @@ public final class TextParser {
         return expression;
     }
 
-    /** returns current char . Returns 0-char if end of expression is reached */
+    /**
+     * returns current char . Returns 0-char if end of expression is reached
+     */
     public char ch() {
         return (char) ch;
     }
 
-    /** returns current char as int. Returns 0 if end of expression is reached */
+    /**
+     * returns current char as int. Returns 0 if end of expression is reached
+     */
     public int chInt() {
         return ch;
     }
@@ -57,7 +61,9 @@ public final class TextParser {
         return "" + (char) ch;
     }
 
-    /** returns current parse position. Returns parsed-expression-length+1 after parse end was reached */
+    /**
+     * returns current parse position. Returns parsed-expression-length+1 after parse end was reached
+     */
     public int pos() {
         return pos;
     }
@@ -68,7 +74,9 @@ public final class TextParser {
         next();
     }
 
-    /** Moves parser to next parseable char */
+    /**
+     * Moves parser to next parseable char
+     */
     public void next() {
         if (ch == END_CHAR) { //end was reached
             return;
@@ -99,18 +107,24 @@ public final class TextParser {
         skipWhitespaces();
     }
 
-    /** Returns true if end of parseable expression was reached */
+    /**
+     * Returns true if end of parseable expression was reached
+     */
     public boolean eof() {
         return ch == END_CHAR;
     }
 
-    /** Marks current parse position */
+    /**
+     * Marks current parse position
+     */
     public void mark() {
         markedCh = ch;
         markedPos = pos;
     }
 
-    /** Resets to previously marked parse position */
+    /**
+     * Resets to previously marked parse position
+     */
     public void reset() {
         ch = markedCh;
         pos = markedPos;
@@ -125,7 +139,9 @@ public final class TextParser {
         return false;
     }
 
-    /** Parses text as long as chars are contained in given chars. Places pos after parsed text */
+    /**
+     * Parses text as long as chars are contained in given chars. Places pos after parsed text
+     */
     public String parseChars(final Set<Integer> chars) {
         final StringBuilder sb = new StringBuilder();
         while (chars.contains(ch)) {
@@ -142,9 +158,10 @@ public final class TextParser {
     /**
      * Parses text until a 'stopper' char is reached. Places pos after this stopper char and returns parsed text.
      * Returns null if no stopper char is found
-     * @param stopper chars to stop parsing at
-     * @param endIsDelim if true, then 'end-of-expression' is treated like finding a stopper char
-     * @param escapeChar if not null, then characters escapced with this char will not be considered stopper chars but parsed as literal char
+     *
+     * @param stopper               chars to stop parsing at
+     * @param endIsDelim            if true, then 'end-of-expression' is treated like finding a stopper char
+     * @param escapeChar            if not null, then characters escapced with this char will not be considered stopper chars but parsed as literal char
      * @param escapeDoubledStoppers if true, then doubled up stopper chars will not be considered stoppers but parsed as single literal chars
      */
     public String parseUntil(final Predicate<Character> stopper, final boolean endIsDelim, final Character escapeChar, final boolean escapeDoubledStoppers) {
@@ -160,7 +177,7 @@ public final class TextParser {
         final List<String> result = new ArrayList<>();
         while (ch != END_CHAR) {
             final Pair<String, Character> nextToken =
-                parseUntilWithDelim(c -> tokenStopper.test(c) || parseStopper.test(c), endIsDelim, escapeChar, escapeDoubledStoppers);
+                    parseUntilWithDelim(c -> tokenStopper.test(c) || parseStopper.test(c), endIsDelim, escapeChar, escapeDoubledStoppers);
             if (nextToken == null) {
                 break;
             }
@@ -210,7 +227,7 @@ public final class TextParser {
         return foundEnd || endIsDelim ? (includeStopper ? new Pair<>(sb.toString(), stopChar) : sb.toString()) : null;
     }
 
-    public boolean chIsIn(final char ... chars) {
+    public boolean chIsIn(final char... chars) {
         for (char c : chars) {
             if (ch == c) {
                 return true;

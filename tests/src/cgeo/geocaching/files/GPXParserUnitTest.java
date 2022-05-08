@@ -7,7 +7,7 @@ import java.util.GregorianCalendar;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-public class GPXParserUnitTest  {
+public class GPXParserUnitTest {
 
     @Test
     public void testParseDateWithFractionalSeconds() throws ParseException {

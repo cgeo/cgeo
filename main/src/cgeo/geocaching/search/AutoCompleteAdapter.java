@@ -14,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * The standard auto completion only matches user input at word boundaries. Therefore searching "est" will not match
  * "test". This adapter matches everywhere.
- *
  */
 public class AutoCompleteAdapter extends ArrayAdapter<String> {
 

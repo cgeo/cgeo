@@ -21,6 +21,6 @@ public interface ItemizedOverlayImpl extends OverlayImpl {
     void superDraw(Canvas canvas, MapViewImpl mapView, boolean shadow);
 
     void superDrawOverlayBitmap(Canvas canvas, Point drawPosition, MapProjectionImpl projection,
-            byte drawZoomLevel);
+                                byte drawZoomLevel);
 
 }

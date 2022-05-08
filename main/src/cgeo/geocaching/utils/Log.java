@@ -28,17 +28,29 @@ public final class Log {
 
     public enum LogLevel { VERBOSE, DEBUG, INFO, WARN, ERROR, NONE }
 
-    /** Name of File containing Log properties which will be searched for in logfiles-directory */
+    /**
+     * Name of File containing Log properties which will be searched for in logfiles-directory
+     */
     private static final String LOGPROPERTY_FILENAME = "log-properties.txt";
-    /** Minimum log level. Value should be one of {@link LogLevel} in textual form */
+    /**
+     * Minimum log level. Value should be one of {@link LogLevel} in textual form
+     */
     public static final String PROP_MIN_LOG_LEVEL = "logging.minlevel";
-    /** Minimum log level to add callerinfo to log message. Value should be one of {@link LogLevel} in textual form */
+    /**
+     * Minimum log level to add callerinfo to log message. Value should be one of {@link LogLevel} in textual form
+     */
     public static final String PROP_MIN_CALLERINFO_LEVEL = "logging.mincallerinfolevel";
-    /** max stack trace depth to log when caller info is logged */
+    /**
+     * max stack trace depth to log when caller info is logged
+     */
     public static final String PROP_CALLERINFO_MAXDEPTH = "logging.callerinfomaxdepth";
-    /** Whether to throw an exception when an error is logged. Value should be true or false */
+    /**
+     * Whether to throw an exception when an error is logged. Value should be true or false
+     */
     public static final String PROP_THROW_ON_ERROR_LOG = "logging.throwonerror";
-    /** Logfile to log to */
+    /**
+     * Logfile to log to
+     */
     public static final String PROP_LOGFILE = "logging.logfile";
 
     private static final DateFormat LOGFILE_ENTRY_FORMAT = new SimpleDateFormat("yy-MM-dd HH:mm:ss.SSS", Locale.US);
@@ -98,7 +110,6 @@ public final class Log {
 
     /**
      * Save a copy of the debug flag from the settings for performance reasons.
-     *
      */
     public static void setDebug(final boolean isDebug) {
         if (Log.isDebug() != isDebug) {
@@ -227,12 +238,22 @@ public final class Log {
     public static void log(final LogLevel level, final String msg) {
         if (SETTING_DO_LOGGING[level.ordinal()]) {
             switch (level) {
-                case ERROR: e(msg); break;
-                case WARN:  w(msg); break;
-                case INFO:  i(msg); break;
-                case DEBUG: d(msg); break;
+                case ERROR:
+                    e(msg);
+                    break;
+                case WARN:
+                    w(msg);
+                    break;
+                case INFO:
+                    i(msg);
+                    break;
+                case DEBUG:
+                    d(msg);
+                    break;
                 case VERBOSE:
-                default: v(msg); break;
+                default:
+                    v(msg);
+                    break;
             }
         }
     }
@@ -240,12 +261,22 @@ public final class Log {
     public static void log(final LogLevel level, final String msg, final Throwable thr) {
         if (SETTING_DO_LOGGING[level.ordinal()]) {
             switch (level) {
-                case ERROR: e(msg, thr); break;
-                case WARN:  w(msg, thr); break;
-                case INFO:  i(msg, thr); break;
-                case DEBUG: d(msg, thr); break;
+                case ERROR:
+                    e(msg, thr);
+                    break;
+                case WARN:
+                    w(msg, thr);
+                    break;
+                case INFO:
+                    i(msg, thr);
+                    break;
+                case DEBUG:
+                    d(msg, thr);
+                    break;
                 case VERBOSE:
-                default: v(msg, thr); break;
+                default:
+                    v(msg, thr);
+                    break;
             }
         }
     }
@@ -340,7 +371,7 @@ public final class Log {
         final String contextLoggerClassname = ContextLogger.class.getName();
 
         return stackTraceToShortString(new RuntimeException().getStackTrace(), maxDepth, st ->
-            !st.getClassName().equals(logClassName) && !st.getClassName().equals(contextLoggerClassname));
+                !st.getClassName().equals(logClassName) && !st.getClassName().equals(contextLoggerClassname));
     }
 
     public static String stackTraceToShortString(final StackTraceElement[] stackTraceElements, final int maxDepth, final Func1<StackTraceElement, Boolean> filter) {

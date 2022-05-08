@@ -71,6 +71,7 @@ public class WaypointsOverlay extends AbstractCachesOverlay {
 
     /**
      * get waypoint IDs for geocodes and invalidate them
+     *
      * @param geocodes the codes
      */
     public void invalidateWaypoints(final Collection<String> geocodes) {

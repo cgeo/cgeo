@@ -127,7 +127,7 @@ public class ManagedListAdapterTest {
         mla.addItems(Arrays.asList("red", "gray", "blue", "green"));
         assertThat(mla.getDebugString()).isEqualTo("[gray, green]|[red, gray, blue, green]|{1=3, 0=1}");
 
-        mla.swapItems(0 , 1);
+        mla.swapItems(0, 1);
         assertThat(mla.getDebugString()).isEqualTo("[green, gray]|[red, green, blue, gray]|{1=3, 0=1}");
 
         mla.sortItems(TextUtils.COLLATOR::compare);

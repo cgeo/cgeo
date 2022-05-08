@@ -44,7 +44,9 @@ public final class Viewport {
         topRight = point.getCoords();
     }
 
-    /** Creates a Viewport with given center which covers the area around it with given radius */
+    /**
+     * Creates a Viewport with given center which covers the area around it with given radius
+     */
     public Viewport(@NonNull final ICoordinates center, final float radiusInKilometers) {
         this.center = center.getCoords();
         this.topRight = this.center.project(0, radiusInKilometers).project(90, radiusInKilometers);
@@ -83,8 +85,7 @@ public final class Viewport {
     /**
      * Check whether a point is contained in this viewport.
      *
-     * @param point
-     *            the coordinates to check
+     * @param point the coordinates to check
      * @return true if the point is contained in this viewport, false otherwise or if the point contains no coordinates
      */
     public boolean contains(@NonNull final ICoordinates point) {
@@ -104,7 +105,7 @@ public final class Viewport {
      */
     public int count(@NonNull final Collection<? extends ICoordinates> points) {
         int total = 0;
-        for (final ICoordinates point: points) {
+        for (final ICoordinates point : points) {
             if (point != null && contains(point)) {
                 total += 1;
             }
@@ -115,8 +116,7 @@ public final class Viewport {
     /**
      * Filter return the points present in the viewport.
      *
-     * @param points
-     *            a collection of (possibly null) points
+     * @param points a collection of (possibly null) points
      * @return a new collection containing the points in the viewport
      */
     public <T extends ICoordinates> Collection<T> filter(@NonNull final Collection<T> points) {
@@ -137,8 +137,7 @@ public final class Viewport {
     /**
      * Check whether another viewport is fully included into the current one.
      *
-     * @param vp
-     *            the other viewport
+     * @param vp the other viewport
      * @return true if the viewport is fully included into this one, false otherwise
      */
     public boolean includes(@NonNull final Viewport vp) {
@@ -148,8 +147,7 @@ public final class Viewport {
     /**
      * Return the "where" part of the string appropriate for a SQL query.
      *
-     * @param dbTable
-     *            the database table to use as prefix, or null if no prefix is required
+     * @param dbTable the database table to use as prefix, or null if no prefix is required
      * @return the string without the "where" keyword
      */
     @NonNull
@@ -171,8 +169,7 @@ public final class Viewport {
     /**
      * Return a widened or shrunk viewport.
      *
-     * @param factor
-     *            multiplicative factor for the latitude and longitude span (> 1 to widen, < 1 to shrink)
+     * @param factor multiplicative factor for the latitude and longitude span (> 1 to widen, < 1 to shrink)
      * @return a widened or shrunk viewport
      */
     @NonNull
@@ -183,8 +180,7 @@ public final class Viewport {
     /**
      * Return the smallest viewport containing all the given points.
      *
-     * @param points
-     *            a set of points. Points with null coordinates (or null themselves) will be ignored
+     * @param points a set of points. Points with null coordinates (or null themselves) will be ignored
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
      */
     @Nullable
@@ -196,8 +192,7 @@ public final class Viewport {
      * Return the smallest viewport containing all those of the given geocaches,
      * which are from geocaching.com and not stored in our database
      *
-     * @param geocaches
-     *            a set of geocaches. Geocaches with null coordinates (or null themselves) will be ignored
+     * @param geocaches a set of geocaches. Geocaches with null coordinates (or null themselves) will be ignored
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
      */
     @Nullable
@@ -208,8 +203,7 @@ public final class Viewport {
     /**
      * Return the smallest viewport containing all given geocaches including all their waypoints
      *
-     * @param geocaches
-     *            a set of geocaches. Geocaches/waypoints with null coordinates (or null themselves) will be ignored
+     * @param geocaches a set of geocaches. Geocaches/waypoints with null coordinates (or null themselves) will be ignored
      * @return the smallest viewport containing the non-null coordinates, or null if no coordinates are non-null
      */
     @Nullable

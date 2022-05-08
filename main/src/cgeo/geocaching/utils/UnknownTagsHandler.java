@@ -26,7 +26,7 @@ public class UnknownTagsHandler implements TagHandler {
 
     @Override
     public void handleTag(final boolean opening, final String tag, final Editable output,
-            final XMLReader xmlReader) {
+                          final XMLReader xmlReader) {
         if ("strike".equalsIgnoreCase(tag) || "s".equals(tag)) {
             handleStrike(opening, output);
         } else if ("table".equalsIgnoreCase(tag)) {

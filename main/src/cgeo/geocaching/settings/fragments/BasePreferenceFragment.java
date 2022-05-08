@@ -18,19 +18,19 @@ import java.util.ArrayList;
 
 import org.apache.commons.lang3.StringUtils;
 
- public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
+public abstract class BasePreferenceFragment extends PreferenceFragmentCompat {
 
-     // callback data
-     protected Action1<ArrayList<PrefSearchDescriptor>> searchdataCallback = null;
-     protected Action2<String, String> scrolltoCallback = null;
-     protected String scrolltoBaseKey = null;
-     protected String scrolltoPrefKey = null;
-     protected int icon = 0;
+    // callback data
+    protected Action1<ArrayList<PrefSearchDescriptor>> searchdataCallback = null;
+    protected Action2<String, String> scrolltoCallback = null;
+    protected String scrolltoBaseKey = null;
+    protected String scrolltoPrefKey = null;
+    protected int icon = 0;
 
-     // automatic key generator
-     private int nextKey = 0;
+    // automatic key generator
+    private int nextKey = 0;
 
-     public static class PrefSearchDescriptor {
+    public static class PrefSearchDescriptor {
         public String baseKey;
         public String prefKey;
         public CharSequence prefTitle;
@@ -48,8 +48,8 @@ import org.apache.commons.lang3.StringUtils;
 
     // sets icon resource for search info
     public BasePreferenceFragment setIcon(@DrawableRes final int icon) {
-         this.icon = icon;
-         return this;
+        this.icon = icon;
+        return this;
     }
 
     // sets callback to deliver searchable info about prefs to SettingsActivity

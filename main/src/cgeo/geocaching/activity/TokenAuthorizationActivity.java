@@ -253,8 +253,7 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     /**
      * Allows deriving classes to check the response for error messages specific to their Token implementation
      *
-     * @param response
-     *            The error response of the token request
+     * @param response The error response of the token request
      * @return String with a more detailed error message (user-facing, localized), can be empty
      */
     protected String getExtendedErrorMsg(final Response response) {
@@ -292,7 +291,6 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
     /**
      * Enable or disable the start button depending on login/password field.
      * If both fields are not empty, button is enabled.
-     *
      */
     protected void enableStartButtonIfReady() {
         binding.start.setEnabled(StringUtils.isNotEmpty(binding.username.getText()) &&
@@ -326,8 +324,8 @@ public abstract class TokenAuthorizationActivity extends AbstractActivity {
         @NonNull public final String fieldPassword;
 
         public TokenAuthParameters(@NonNull final String urlToken,
-                               @NonNull final String fieldUsername,
-                               @NonNull final String fieldPassword) {
+                                   @NonNull final String fieldUsername,
+                                   @NonNull final String fieldPassword) {
             this.urlToken = urlToken;
             this.fieldUsername = fieldUsername;
             this.fieldPassword = fieldPassword;

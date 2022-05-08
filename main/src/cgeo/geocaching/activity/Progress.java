@@ -111,7 +111,7 @@ public class Progress {
         setProgress(progress + increment);
     }
 
-    public void setOnCancelListener (final DialogInterface.OnClickListener cancelListener) {
+    public void setOnCancelListener(final DialogInterface.OnClickListener cancelListener) {
         this.cancelListener = cancelListener;
     }
 }

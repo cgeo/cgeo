@@ -74,7 +74,6 @@ public class Image implements Parcelable {
 
         /**
          * Create a new Image.
-         *
          */
         public Builder() {
             uri = Uri.EMPTY;
@@ -87,7 +86,6 @@ public class Image implements Parcelable {
 
         /**
          * Set image url from String.
-         *
          */
         @NonNull
         public Image build() {
@@ -97,8 +95,7 @@ public class Image implements Parcelable {
         /**
          * Set image url from String.
          *
-         * @param url
-         *          The image url from String
+         * @param url The image url from String
          */
         @NonNull
         public Builder setUrl(@NonNull final String url) {
@@ -119,8 +116,7 @@ public class Image implements Parcelable {
         /**
          * Set image from Uri.
          *
-         * @param uri
-         *          The image url from Uri
+         * @param uri The image url from Uri
          */
         @NonNull
         public Builder setUrl(@NonNull final Uri uri) {
@@ -131,8 +127,7 @@ public class Image implements Parcelable {
         /**
          * Set image from Image.
          *
-         * @param image
-         *          The image url from Image
+         * @param image The image url from Image
          */
         @NonNull
         public Builder setUrl(@NonNull final Image image) {
@@ -143,8 +138,7 @@ public class Image implements Parcelable {
         /**
          * Set image title.
          *
-         * @param title
-         *          The image title
+         * @param title The image title
          */
         @NonNull
         public Builder setTitle(@Nullable final String title) {
@@ -155,8 +149,7 @@ public class Image implements Parcelable {
         /**
          * Set image description.
          *
-         * @param description
-         *          The image description
+         * @param description The image description
          */
         @NonNull
         public Builder setDescription(@Nullable final String description) {
@@ -164,7 +157,9 @@ public class Image implements Parcelable {
             return this;
         }
 
-        /** For Offline Log Images: set wanted scaling factor when sending image to provider. */
+        /**
+         * For Offline Log Images: set wanted scaling factor when sending image to provider.
+         */
         @NonNull
         public Builder setTargetScale(final int targetScale) {
             this.targetScale = targetScale;
@@ -188,12 +183,9 @@ public class Image implements Parcelable {
     /**
      * Create a new Image from Url.
      *
-     * @param uri
-     *          The image uri
-     * @param title
-     *          The image title
-     * @param description
-     *          The image description
+     * @param uri         The image uri
+     * @param title       The image title
+     * @param description The image description
      */
     private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat, final String contextInformation) {
         this.uri = uri;
@@ -243,8 +235,7 @@ public class Image implements Parcelable {
     /**
      * Constructs a new builder, copying the attributes from this Image.
      *
-     * @return
-     *          A new Image Builder
+     * @return A new Image Builder
      */
     public Builder buildUpon() {
         return new Builder()
@@ -259,8 +250,7 @@ public class Image implements Parcelable {
     /**
      * Get image title.
      *
-     * @return
-     *          the image title
+     * @return the image title
      */
     @Nullable
     public String getTitle() {
@@ -270,8 +260,7 @@ public class Image implements Parcelable {
     /**
      * Get image description.
      *
-     * @return
-     *          the image description
+     * @return the image description
      */
     @Nullable
     public String getDescription() {
@@ -281,8 +270,7 @@ public class Image implements Parcelable {
     /**
      * Get the image Url.
      *
-     * @return
-     *          the image url
+     * @return the image url
      */
     @NonNull
     public String getUrl() {
@@ -295,8 +283,7 @@ public class Image implements Parcelable {
     /**
      * Get the image Uri.
      *
-     * @return
-     *          the image uri
+     * @return the image uri
      */
     @NonNull
     public Uri getUri() {
@@ -306,8 +293,7 @@ public class Image implements Parcelable {
     /**
      * Get the image filesystem path.
      *
-     * @return
-     *          the image url path
+     * @return the image url path
      */
     @NonNull
     public String getPath() {
@@ -315,15 +301,14 @@ public class Image implements Parcelable {
     }
 
     public String getFileName() {
-        return  isLocalFile() ? getFile().getName() : "";
+        return isLocalFile() ? getFile().getName() : "";
     }
 
     /**
      * Get the image as File.
      * If file is not local, return Null
      *
-     * @return
-     *          the image File
+     * @return the image File
      */
     @Nullable
     public File getFile() {
@@ -336,8 +321,7 @@ public class Image implements Parcelable {
     /**
      * Check if image has a title.
      *
-     * @return
-     *          True if the image has a title
+     * @return True if the image has a title
      */
     public boolean hasTitle() {
         return StringUtils.isNotBlank(title);
@@ -346,8 +330,7 @@ public class Image implements Parcelable {
     /**
      * Check if the image has a description.
      *
-     * @return
-     *          True if the image has a description
+     * @return True if the image has a description
      */
     public boolean hasDescription() {
         return StringUtils.isNotBlank(description);
@@ -357,8 +340,7 @@ public class Image implements Parcelable {
      * Open the image in an external activity.
      * Do nothing if image url is empty.
      *
-     * @param fromActivity
-     *          The calling activity
+     * @param fromActivity The calling activity
      */
     public void openInBrowser(final Activity fromActivity) {
         if (isEmpty()) {
@@ -395,8 +377,7 @@ public class Image implements Parcelable {
     /**
      * Check if the image Uri is Empty.
      *
-     * @return
-     *          True if Uri is Empty or blank
+     * @return True if Uri is Empty or blank
      */
     public boolean isEmpty() {
         return uri.equals(Uri.EMPTY) || StringUtils.isBlank(uri.toString());
@@ -405,10 +386,8 @@ public class Image implements Parcelable {
     /**
      * Compare two Images.
      *
-     * @param o
-     *          The Object to compare
-     * @return
-     *          True if all fields match
+     * @param o The Object to compare
+     * @return True if all fields match
      */
     @Override
     public boolean equals(final Object o) {

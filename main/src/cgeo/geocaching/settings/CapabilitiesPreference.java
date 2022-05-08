@@ -44,7 +44,7 @@ public class CapabilitiesPreference extends AbstractAttributeBasedPreference {
 
     @Override
     protected int[] getAttributeNames() {
-        return new int[] { R.attr.connector };
+        return new int[]{R.attr.connector};
     }
 
     @Override

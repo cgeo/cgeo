@@ -74,7 +74,7 @@ public class MapDistanceDrawerCommons {
         final boolean showRealDistance = realDistance != 0.0f && distance != realDistance && Settings.getRoutingMode() != RoutingMode.STRAIGHT;
         bothViewsNeeded = showBothDistances && showRealDistance;
         final int supersize = distance == 0 ? 0 : Settings.getSupersizeDistance() % (bothViewsNeeded ? 3 : 2);
-        final String[] values = { "", "", ""};
+        final String[] values = {"", "", ""};
         String superValue = "";
         int current = 0;
 

@@ -23,7 +23,9 @@ public class HttpResponse {
     @JsonIgnore
     private String bodyString;
 
-    /** to be used by HtmlRequest only */
+    /**
+     * to be used by HtmlRequest only
+     */
     protected HttpResponse() {
         //empty on purpose
     }
@@ -33,12 +35,16 @@ public class HttpResponse {
         return response.isSuccessful();
     }
 
-    /** to be used by HtmlRequest only */
+    /**
+     * to be used by HtmlRequest only
+     */
     protected void setResponse(final Response response) {
         this.response = response;
     }
 
-    /** to be used by HtmlRequest only */
+    /**
+     * to be used by HtmlRequest only
+     */
     protected void setBodyString(final String bodyString) {
         this.bodyConsumed = true;
         this.bodyString = bodyString;
@@ -57,7 +63,9 @@ public class HttpResponse {
         return bodyString;
     }
 
-    /** to be used by HtmlRequest only */
+    /**
+     * to be used by HtmlRequest only
+     */
     protected static String getBodyString(final Response response) {
         final ResponseBody body = response.body();
         if (body != null) {

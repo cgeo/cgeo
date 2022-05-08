@@ -69,7 +69,6 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     }
 
 
-
     @Override
     public boolean isFiltering() {
         return foundByFilter.isFilled() || logTextFilter.isFilled();
@@ -117,8 +116,8 @@ public class LogEntryGeocacheFilter extends BaseGeocacheFilter {
     @Override
     protected String getUserDisplayableConfig() {
         return (inverse ? "-(" : "") +
-            (foundByFilter.isFilled() ? foundByFilter.getTextValue() : "") + ":" +
-            (logTextFilter.isFilled() ? logTextFilter.getTextValue() : "") +
-            (inverse ? ")" : "");
+                (foundByFilter.isFilled() ? foundByFilter.getTextValue() : "") + ":" +
+                (logTextFilter.isFilled() ? logTextFilter.getTextValue() : "") +
+                (inverse ? ")" : "");
     }
 }

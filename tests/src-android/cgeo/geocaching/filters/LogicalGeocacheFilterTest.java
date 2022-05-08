@@ -42,7 +42,7 @@ public class LogicalGeocacheFilterTest {
         testLogicFilter(new NotGeocacheFilter(), null, getConstantFilter(null));
     }
 
-    private static void testLogicFilter(final LogicalGeocacheFilter filter, final Boolean expectedResult, final IGeocacheFilter ... children) {
+    private static void testLogicFilter(final LogicalGeocacheFilter filter, final Boolean expectedResult, final IGeocacheFilter... children) {
         for (IGeocacheFilter child : children) {
             filter.addChild(child);
         }

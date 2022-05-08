@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 
 /**
  * Class for hiding/showing the soft keyboard on Android.
- *
  */
 public class Keyboard {
 

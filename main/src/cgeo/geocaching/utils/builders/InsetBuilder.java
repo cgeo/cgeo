@@ -57,7 +57,7 @@ public class InsetBuilder {
             if (markerSizeUnscaled == 0) {
                 markerSizeUnscaled = DisplayUtils.getPxFromDp(res, SIZE_CACHE_MARKER_DP, 1.0f);
             }
-            return new int[]{ doubleSize ? markerSizeUnscaled : 0, pos == 0 ? Gravity.CENTER : pos};
+            return new int[]{doubleSize ? markerSizeUnscaled : 0, pos == 0 ? Gravity.CENTER : pos};
         } else {
             // solution for API < 23, returns parameters for LayerDrawable.setLayerInset
             final int[] insetPadding = {0, 0, 0, 0}; // left, top, right, bottom padding for inset

@@ -11,22 +11,22 @@ import androidx.annotation.Nullable;
 import java.util.List;
 
 
-
-
 /**
  * Through out this implementation:
  *
  * 'Equations' are used to represent 'Variables' that appear in the description of the cache coordinated themselves.
- *             As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
- *             All 'equations' must have a CAPITAL-LETTER name.
+ * As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
+ * All 'equations' must have a CAPITAL-LETTER name.
  *
  * 'FreeVariables' are used to represent 'Variables' that appear in the 'expression' of an equation
- *                 As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
- *                 All 'freeVariables' must have a lower-case name.
+ * As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
+ * All 'freeVariables' must have a lower-case name.
  */
 public final class CalcStateEvaluator {
 
-    /** Flag values used to designate that no AutoChar has been set */
+    /**
+     * Flag values used to designate that no AutoChar has been set
+     */
     public static final char EMPTY_CHAR = '-';
 
     // TODO: as parameter
@@ -74,7 +74,7 @@ public final class CalcStateEvaluator {
      * @param values The string to perform the substitutions on
      * @return String with the substitutions performed
      */
-    public  String evaluate(final String values) {
+    public String evaluate(final String values) {
         String returnValue = "";
 
         if (values.length() > 0) {

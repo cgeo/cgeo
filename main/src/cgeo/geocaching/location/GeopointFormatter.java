@@ -18,74 +18,112 @@ public class GeopointFormatter {
      * Predefined formats.
      */
     public enum Format {
-        /** Example: "10,123456 -0,123456" */
+        /**
+         * Example: "10,123456 -0,123456"
+         */
         LAT_LON_DECDEGREE,
 
-        /** Example: "10.123456,-0.123456" (unlocalized) */
+        /**
+         * Example: "10.123456,-0.123456" (unlocalized)
+         */
         LAT_LON_DECDEGREE_COMMA,
 
-        /** Example: "N 10° 12,345 · W 5° 12,345" */
+        /**
+         * Example: "N 10° 12,345 · W 5° 12,345"
+         */
         LAT_LON_DECMINUTE,
 
-        /** Example: "N10 12,345 W5 12,345" */
+        /**
+         * Example: "N10 12,345 W5 12,345"
+         */
         LAT_LON_DECMINUTE_SHORT,
 
-        /** Example: "N10 12.345 W5 12.345" (unlocalized) */
+        /**
+         * Example: "N10 12.345 W5 12.345" (unlocalized)
+         */
         LAT_LON_DECMINUTE_SHORT_RAW,
 
-        /** Example: "N 10° 12.345 W 5° 12.345" */
+        /**
+         * Example: "N 10° 12.345 W 5° 12.345"
+         */
         LAT_LON_DECMINUTE_RAW,
 
-        /** Example: "N 10° 12' 34" W 5° 12' 34" */
+        /**
+         * Example: "N 10° 12' 34" W 5° 12' 34"
+         */
         LAT_LON_DECSECOND,
 
-        /** Example: "N 0.123456°" */
+        /**
+         * Example: "N 0.123456°"
+         */
         LAT_DECDEGREE,
 
-        /** Example: "-0.123456" (unlocalized latitude) */
+        /**
+         * Example: "-0.123456" (unlocalized latitude)
+         */
         LAT_DECDEGREE_RAW,
 
-        /** Example: "N 01° 02.034" */
+        /**
+         * Example: "N 01° 02.034"
+         */
         LAT_DECMINUTE,
 
-        /** Example: "N 10 12,345" */
+        /**
+         * Example: "N 10 12,345"
+         */
         LAT_DECMINUTE_RAW,
 
-        /** Example: "n 01° 02' 03.045" */
+        /**
+         * Example: "n 01° 02' 03.045"
+         */
         LAT_DECMINSEC,
 
-        /** Example: "W 0.123456°" */
+        /**
+         * Example: "W 0.123456°"
+         */
         LON_DECDEGREE,
 
-        /** Example: "-0.123456" (unlocalized longitude) */
+        /**
+         * Example: "-0.123456" (unlocalized longitude)
+         */
         LON_DECDEGREE_RAW,
 
-        /** Example: "W 001° 02.034" */
+        /**
+         * Example: "W 001° 02.034"
+         */
         LON_DECMINUTE,
 
-        /** Example: "W 5 12,345" */
+        /**
+         * Example: "W 5 12,345"
+         */
         LON_DECMINUTE_RAW,
 
-        /** Example: "W 001° 02' 03.045" */
+        /**
+         * Example: "W 001° 02' 03.045"
+         */
         LON_DECMINSEC,
 
-        /** Example: "32U E 549996 N 5600860" */
+        /**
+         * Example: "32U E 549996 N 5600860"
+         */
         UTM,
 
-        /** Example: N48+12.345+E11+12.345 **/
+        /**
+         * Example: N48+12.345+E11+12.345
+         **/
         GEOCHECKERCOM,
 
-        /** Example: N5536498E01305095 **/
+        /**
+         * Example: N5536498E01305095
+         **/
         GEOCHECKORG
     }
 
     /**
      * Formats a Geopoint.
      *
-     * @param gp
-     *            the Geopoint to format
-     * @param format
-     *            one of the predefined formats
+     * @param gp     the Geopoint to format
+     * @param format one of the predefined formats
      * @return the formatted coordinates
      */
     public static String format(final Format format, final Geopoint gp) {
@@ -112,8 +150,8 @@ public class GeopointFormatter {
 
             case LAT_LON_DECMINUTE_SHORT_RAW:
                 return String.format((Locale) null, "%c%d %02d.%03d %c%d %02d.%03d",
-                    gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
-                    gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
+                        gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
+                        gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
 
             case LAT_LON_DECMINUTE_RAW:
                 return String.format((Locale) null, "%c %02d° %06.3f %c %03d° %06.3f",
@@ -165,13 +203,13 @@ public class GeopointFormatter {
 
             case GEOCHECKERCOM:
                 return String.format((Locale) null, "%c%d+%02d.%03d+%c%d+%02d.%03d",
-                    gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
-                    gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
+                        gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
+                        gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
 
             case GEOCHECKORG:
                 return String.format((Locale) null, "%c%02d%02d%03d%c%03d%02d%03d",
-                    gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
-                    gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
+                        gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), gp.getDecMinuteLatMinFrac(),
+                        gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), gp.getDecMinuteLonMinFrac());
 
         }
         throw new IllegalStateException(); // cannot happen, if switch case is enum complete

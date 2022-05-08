@@ -30,7 +30,7 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 public final class LocalizationUtils {
 
     private static final Context APPLICATION_CONTEXT =
-        CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
+            CgeoApplication.getInstance() == null ? null : CgeoApplication.getInstance().getApplicationContext();
 
     private LocalizationUtils() {
         //Util class, no instance
@@ -40,11 +40,11 @@ public final class LocalizationUtils {
         return APPLICATION_CONTEXT != null;
     }
 
-    public static String getString(@StringRes final int resId, final Object ... params) {
+    public static String getString(@StringRes final int resId, final Object... params) {
         return getStringWithFallback(resId, null, params);
     }
 
-    public static String getStringWithFallback(@StringRes final int resId, final String fallback, final Object ... params) {
+    public static String getStringWithFallback(@StringRes final int resId, final String fallback, final Object... params) {
         if ((APPLICATION_CONTEXT == null || resId == 0) && fallback == null) {
             return "(NoCtx/NoResId/NoFallback)[" + StringUtils.join(params, ";") + "]";
         }
@@ -70,14 +70,14 @@ public final class LocalizationUtils {
         return APPLICATION_CONTEXT.getResources().getQuantityString(pluralId, quantity, quantity);
     }
 
-    public static String[] getStringArray(@ArrayRes final int arrayId, final String ... fallback) {
+    public static String[] getStringArray(@ArrayRes final int arrayId, final String... fallback) {
         if (APPLICATION_CONTEXT == null) {
             return fallback == null ? new String[0] : fallback;
         }
         return APPLICATION_CONTEXT.getResources().getStringArray(arrayId);
     }
 
-    public static int[] getIntArray(@ArrayRes final int arrayId, final int ... fallback) {
+    public static int[] getIntArray(@ArrayRes final int arrayId, final int... fallback) {
         if (APPLICATION_CONTEXT == null) {
             return fallback == null ? new int[0] : fallback;
         }
@@ -88,7 +88,7 @@ public final class LocalizationUtils {
      * Given a resource id and parameters to fill it, constructs one message fit for user display (left) and one for log file
      * (right). Difference is that the one for the log file will contain more detailled information than that for the end user
      */
-    public static ImmutablePair<String, String> getMultiPurposeString(@StringRes final int messageId, final String fallback, final Object ... params) {
+    public static ImmutablePair<String, String> getMultiPurposeString(@StringRes final int messageId, final String fallback, final Object... params) {
 
         //prepare params message
         final Object[] paramsForLog = new Object[params.length];

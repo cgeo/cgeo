@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * sorts caches by name
- *
  */
 public class NameComparator extends AbstractCacheComparator {
 

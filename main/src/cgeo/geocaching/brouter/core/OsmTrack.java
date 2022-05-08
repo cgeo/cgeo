@@ -105,8 +105,8 @@ public final class OsmTrack {
                             pchecksum = dis.readLong();
                         } catch (EOFException eof) { /* kind of expected */ }
                         final boolean nogoCheckOk = Math.abs(al[0] - nogoChecksums[0]) <= 20
-                            && Math.abs(al[1] - nogoChecksums[1]) <= 20
-                            && Math.abs(al[2] - nogoChecksums[2]) <= 20;
+                                && Math.abs(al[1] - nogoChecksums[1]) <= 20
+                                && Math.abs(al[2] - nogoChecksums[2]) <= 20;
                         final boolean profileCheckOk = pchecksum == profileChecksum;
 
                         if (debugInfo != null) {
@@ -375,7 +375,7 @@ public final class OsmTrack {
             sb.append("<!-- $turn-instruction-start$\n");
             for (VoiceHint hint : voiceHints.list) {
                 sb.append(String.format(Locale.getDefault(), "     $turn$%6s;%6d;%10s;%10s;%6d;%s$\n", hint.getCommandString(), hint.indexInTrack,
-                    formatILon(hint.ilon), formatILat(hint.ilat), (int) (hint.distanceToNext), hint.formatGeometry()));
+                        formatILon(hint.ilon), formatILat(hint.ilat), (int) (hint.distanceToNext), hint.formatGeometry()));
             }
             sb.append("    $turn-instruction-end$ -->\n");
         }
@@ -399,8 +399,8 @@ public final class OsmTrack {
             sb.append(" <rte>\n");
 
             sb.append("  <rtept lat=\"").append(formatILat(nodes.get(0).getILat())).append("\" lon=\"")
-                .append(formatILon(nodes.get(0).getILon())).append("\">\n")
-                .append("   <desc>start</desc>\n   <extensions>\n");
+                    .append(formatILon(nodes.get(0).getILon())).append("\">\n")
+                    .append("   <desc>start</desc>\n   <extensions>\n");
 
             float rteTime = getVoiceHintTime(0);
 
@@ -414,8 +414,8 @@ public final class OsmTrack {
             for (int i = 0; i < voiceHints.list.size(); i++) {
                 final VoiceHint hint = voiceHints.list.get(i);
                 sb.append("  <rtept lat=\"").append(formatILat(hint.ilat)).append("\" lon=\"")
-                    .append(formatILon(hint.ilon)).append("\">\n")
-                    .append("   <desc>").append(hint.getMessageString()).append("</desc>\n   <extensions>\n");
+                        .append(formatILon(hint.ilon)).append("\">\n")
+                        .append("   <desc>").append(hint.getMessageString()).append("</desc>\n   <extensions>\n");
 
                 rteTime = getVoiceHintTime(i + 1);
 
@@ -425,11 +425,11 @@ public final class OsmTrack {
                     lastRteTime = rteTime;
                 }
                 sb.append("    <turn>").append(hint.getCommandString()).append("</turn>\n    <turn-angle>").append("" + (int) hint.angle)
-                    .append("</turn-angle>\n    <offset>").append("" + hint.indexInTrack).append("</offset>\n  </extensions>\n </rtept>\n");
+                        .append("</turn-angle>\n    <offset>").append("" + hint.indexInTrack).append("</offset>\n  </extensions>\n </rtept>\n");
             }
             sb.append("  <rtept lat=\"").append(formatILat(nodes.get(nodes.size() - 1).getILat())).append("\" lon=\"")
-                .append(formatILon(nodes.get(nodes.size() - 1).getILon())).append("\">\n")
-                .append("   <desc>destination</desc>\n   <extensions>\n");
+                    .append(formatILon(nodes.get(nodes.size() - 1).getILon())).append("\">\n")
+                    .append("   <desc>destination</desc>\n   <extensions>\n");
             sb.append("    <time>0</time>\n");
             sb.append("    <offset>").append("" + (nodes.size() - 1)).append("</offset>\n  </extensions>\n </rtept>\n");
 
@@ -442,62 +442,62 @@ public final class OsmTrack {
             for (int i = 0; i < voiceHints.list.size(); i++) {
                 final VoiceHint hint = voiceHints.list.get(i);
                 sb.append(" <wpt lon=\"").append(formatILon(hint.ilon)).append("\" lat=\"")
-                    .append(formatILat(hint.ilat)).append("\">")
-                    .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
-                    .append("<name>").append(hint.getMessageString()).append("</name>")
-                    .append("<extensions><locus:rteDistance>").append("" + hint.distanceToNext).append("</locus:rteDistance>");
+                        .append(formatILat(hint.ilat)).append("\">")
+                        .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
+                        .append("<name>").append(hint.getMessageString()).append("</name>")
+                        .append("<extensions><locus:rteDistance>").append("" + hint.distanceToNext).append("</locus:rteDistance>");
                 final float rteTime = getVoiceHintTime(i + 1);
                 if (rteTime != lastRteTime) { // add timing only if available
                     final double t = rteTime - lastRteTime;
                     final double speed = hint.distanceToNext / t;
                     sb.append("<locus:rteTime>").append("" + t).append("</locus:rteTime>")
-                        .append("<locus:rteSpeed>").append("" + speed).append("</locus:rteSpeed>");
+                            .append("<locus:rteSpeed>").append("" + speed).append("</locus:rteSpeed>");
                     lastRteTime = rteTime;
                 }
                 sb.append("<locus:rtePointAction>").append("" + hint.getLocusAction()).append("</locus:rtePointAction></extensions>")
-                    .append("</wpt>\n");
+                        .append("</wpt>\n");
             }
         }
         if (turnInstructionMode == 5) { // gpsies style
             for (VoiceHint hint : voiceHints.list) {
                 sb.append(" <wpt lon=\"").append(formatILon(hint.ilon)).append("\" lat=\"")
-                    .append(formatILat(hint.ilat)).append("\">")
-                    .append("<name>").append(hint.getMessageString()).append("</name>")
-                    .append("<sym>").append(hint.getSymbolString().toLowerCase(Locale.getDefault())).append("</sym>")
-                    .append("<type>").append(hint.getSymbolString()).append("</type>")
-                    .append("</wpt>\n");
+                        .append(formatILat(hint.ilat)).append("\">")
+                        .append("<name>").append(hint.getMessageString()).append("</name>")
+                        .append("<sym>").append(hint.getSymbolString().toLowerCase(Locale.getDefault())).append("</sym>")
+                        .append("<type>").append(hint.getSymbolString()).append("</type>")
+                        .append("</wpt>\n");
             }
         }
 
         if (turnInstructionMode == 6) { // orux style
             for (VoiceHint hint : voiceHints.list) {
                 sb.append(" <wpt lat=\"").append(formatILat(hint.ilat)).append("\" lon=\"")
-                    .append(formatILon(hint.ilon)).append("\">")
-                    .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
-                    .append("<extensions>\n" +
-                        "<om:oruxmapsextensions xmlns:om=\"http://www.oruxmaps.com/oruxmapsextensions/1/0\">\n" +
-                        "<om:ext type=\"ICON\" subtype=\"0\">").append("" + hint.getOruxAction())
-                    .append("</om:ext>\n" +
-                        "</om:oruxmapsextensions>\n" +
-                        "</extensions>\n" +
-                        "</wpt>");
+                        .append(formatILon(hint.ilon)).append("\">")
+                        .append(hint.selev == Short.MIN_VALUE ? "" : "<ele>" + (hint.selev / 4.) + "</ele>")
+                        .append("<extensions>\n" +
+                                "<om:oruxmapsextensions xmlns:om=\"http://www.oruxmaps.com/oruxmapsextensions/1/0\">\n" +
+                                "<om:ext type=\"ICON\" subtype=\"0\">").append("" + hint.getOruxAction())
+                        .append("</om:ext>\n" +
+                                "</om:oruxmapsextensions>\n" +
+                                "</extensions>\n" +
+                                "</wpt>");
             }
         }
 
         for (int i = 0; i <= pois.size() - 1; i++) {
             final OsmNodeNamed poi = pois.get(i);
             sb.append(" <wpt lon=\"").append(formatILon(poi.ilon)).append("\" lat=\"")
-                .append(formatILat(poi.ilat)).append("\">\n")
-                .append("  <name>").append(StringUtils.escapeXml10(poi.name)).append("</name>\n")
-                .append(" </wpt>\n");
+                    .append(formatILat(poi.ilat)).append("\">\n")
+                    .append("  <name>").append(StringUtils.escapeXml10(poi.name)).append("</name>\n")
+                    .append(" </wpt>\n");
         }
 
         if (exportWaypoints) {
             for (int i = 0; i <= matchedWaypoints.size() - 1; i++) {
                 final MatchedWaypoint wt = matchedWaypoints.get(i);
                 sb.append(" <wpt lon=\"").append(formatILon(wt.waypoint.ilon)).append("\" lat=\"")
-                    .append(formatILat(wt.waypoint.ilat)).append("\">\n")
-                    .append("  <name>").append(StringUtils.escapeXml10(wt.name)).append("</name>\n");
+                        .append(formatILat(wt.waypoint.ilat)).append("\">\n")
+                        .append("  <name>").append(StringUtils.escapeXml10(wt.name)).append("</name>\n");
                 if (i == 0) {
                     sb.append("  <type>from</type>\n");
                 } else if (i == matchedWaypoints.size() - 1) {
@@ -532,7 +532,7 @@ public final class OsmTrack {
                 }
             }
             sb.append("   <trkpt lon=\"").append(formatILon(n.getILon())).append("\" lat=\"")
-                .append(formatILat(n.getILat())).append("\">").append(sele).append("</trkpt>\n");
+                    .append(formatILat(n.getILat())).append("\">").append(sele).append("</trkpt>\n");
         }
 
         sb.append("  </trkseg>\n");
@@ -726,7 +726,7 @@ public final class OsmTrack {
                 sele = ", " + (((int) (speed * 10)) / 10.f);
             }
             sb.append("          [").append(formatILon(n.getILon())).append(", ").append(formatILat(n.getILat()))
-                .append(sele).append("],\n");
+                    .append(sele).append("],\n");
             nn = n;
         }
         sb.deleteCharAt(sb.lastIndexOf(","));

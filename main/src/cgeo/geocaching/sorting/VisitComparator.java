@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 /**
  * sorts caches by last visited date
- *
  */
 public class VisitComparator extends AbstractCacheComparator {
 

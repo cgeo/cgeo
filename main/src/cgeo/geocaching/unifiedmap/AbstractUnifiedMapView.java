@@ -42,6 +42,7 @@ public abstract class AbstractUnifiedMapView<T> {
     }
 
     public abstract float getCurrentBearing();
+
     public abstract void setBearing(float bearing);
 
     public void setMapRotation(final int mapRotation) {
@@ -52,13 +53,17 @@ public abstract class AbstractUnifiedMapView<T> {
     }
 
     protected abstract void configMapChangeListener(boolean enable);
+
     public void setActivityMapChangeListener(@Nullable final Action1<UnifiedMapPosition> listener) {
         activityMapChangeListener = listener;
     }
 
     public abstract void setCenter(Geopoint geopoint);
+
     public abstract Geopoint getCenter();
+
     public abstract BoundingBox getBoundingBox();
+
     protected abstract AbstractPositionLayer<T> configPositionLayer(boolean create);
 
     protected void setDelayedCenterTo() {
@@ -104,7 +109,9 @@ public abstract class AbstractUnifiedMapView<T> {
         return positionLayer != null ? positionLayer.getCurrentHeading() : 0.0f;
     }
 
-    /** adjust zoom to be in allowed zoom range for current map */
+    /**
+     * adjust zoom to be in allowed zoom range for current map
+     */
     protected void setDelayedZoomTo() {
         if (delayedZoomTo != -1) {
             setZoom(Math.max(Math.min(delayedZoomTo, getZoomMax()), getZoomMin()));

@@ -383,8 +383,7 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
     /**
      * Allows deriving classes to check the response for error messages specific to their OAuth implementation
      *
-     * @param response
-     *            The error response of the token request
+     * @param response The error response of the token request
      * @return String with a more detailed error message (user-facing, localized), can be empty
      */
     protected String getExtendedErrorMsg(final Response response) {
@@ -426,13 +425,13 @@ public abstract class OAuthAuthorizationActivity extends AbstractActivity {
         @NonNull public final String callback;
 
         public OAuthParameters(@NonNull final String host,
-                @NonNull final String pathRequest,
-                @NonNull final String pathAuthorize,
-                @NonNull final String pathAccess,
-                final boolean https,
-                @NonNull final String consumerKey,
-                @NonNull final String consumerSecret,
-                @NonNull final String callback) {
+                               @NonNull final String pathRequest,
+                               @NonNull final String pathAuthorize,
+                               @NonNull final String pathAccess,
+                               final boolean https,
+                               @NonNull final String consumerKey,
+                               @NonNull final String consumerSecret,
+                               @NonNull final String callback) {
             this.host = host;
             this.pathRequest = pathRequest;
             this.pathAuthorize = pathAuthorize;

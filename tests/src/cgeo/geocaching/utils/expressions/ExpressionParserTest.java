@@ -20,22 +20,22 @@ public class ExpressionParserTest {
     @Before
     public void before() {
         calculator
-            .register(() -> LambdaExpression.createValueSingleConfig("", (s, i) -> Integer.parseInt(s.trim())))
-            .register(() -> LambdaExpression.createValueSingleConfig("x", (s, i) -> i))
-            .register(() -> LambdaExpression.createValue("length", (sa, i) -> {
-                int res = 0;
-                if (sa != null && sa.get(null) != null) {
-                    for (String s : sa.get(null)) {
-                        res = res * 10 + s.length();
+                .register(() -> LambdaExpression.createValueSingleConfig("", (s, i) -> Integer.parseInt(s.trim())))
+                .register(() -> LambdaExpression.createValueSingleConfig("x", (s, i) -> i))
+                .register(() -> LambdaExpression.createValue("length", (sa, i) -> {
+                    int res = 0;
+                    if (sa != null && sa.get(null) != null) {
+                        for (String s : sa.get(null)) {
+                            res = res * 10 + s.length();
+                        }
                     }
-                }
-                return res;
-            }))
-            .register(ExpressionParserTest::getPlusExpression)
-            .register(ExpressionParserTest::getMinusExpression)
-            .register(ExpressionParserTest::getTimesExpression)
-            .register(ExpressionParserTest::getDivideExpression)
-            .register(ExpressionParserTest::getPowExpression);
+                    return res;
+                }))
+                .register(ExpressionParserTest::getPlusExpression)
+                .register(ExpressionParserTest::getMinusExpression)
+                .register(ExpressionParserTest::getTimesExpression)
+                .register(ExpressionParserTest::getDivideExpression)
+                .register(ExpressionParserTest::getPowExpression);
     }
 
     private static LambdaExpression<Integer, Integer> getPlusExpression() {
@@ -233,7 +233,7 @@ public class ExpressionParserTest {
     public void parseIgnoreSpecialChars() throws ParseException {
         final ExpressionParser<LambdaExpression<String, String>> parser = new ExpressionParser<>(true);
         parser.register(() -> LambdaExpression.createValueSingleConfig("a_b-c%D[1]", (config, param) ->
-            config.toUpperCase(Locale.getDefault()) + "-" + param.toUpperCase(Locale.getDefault())));
+                config.toUpperCase(Locale.getDefault()) + "-" + param.toUpperCase(Locale.getDefault())));
 
         assertThat(parser.create("abcd1:test").call("abc")).isEqualTo("TEST-ABC");
         assertThat(parser.create("AB--cd\n1:test").call("abc")).isEqualTo("TEST-ABC");
@@ -248,7 +248,7 @@ public class ExpressionParserTest {
         }
     }
 
-    private void assertLambdaExpression(final String expressionString, final boolean testConfigEquality, final Integer ... paramExpextedResultPairs) throws ParseException {
+    private void assertLambdaExpression(final String expressionString, final boolean testConfigEquality, final Integer... paramExpextedResultPairs) throws ParseException {
         final LambdaExpression<Integer, Integer> exp = calculator.create(expressionString);
         for (int i = 0; i < paramExpextedResultPairs.length; i += 2) {
             assertThat(exp.call(paramExpextedResultPairs[i])).isEqualTo(paramExpextedResultPairs[i + 1]);

@@ -148,40 +148,40 @@ public class OsmNogoPolygonTest {
         int lon2 = toOsmLon(2.33378201723099, 0);
         int lat2 = toOsmLat(48.8239585098974, 0);
         assertEquals(
-            "Should give the correct length for a segment with a single intersection",
-            17.5,
-            polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
-            0.05 * 17.5
+                "Should give the correct length for a segment with a single intersection",
+                17.5,
+                polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
+                0.05 * 17.5
         );
 
         // Check with a segment crossing multiple times the polygon
         lon2 = toOsmLon(2.33488172292709, 0);
         lat2 = toOsmLat(48.8240891862353, 0);
         assertEquals(
-            "Should give the correct length for a segment with multiple intersections",
-            85,
-            polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
-            0.05 * 85
+                "Should give the correct length for a segment with multiple intersections",
+                85,
+                polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
+                0.05 * 85
         );
 
         // Check that it works when a point is within the polygon
         lon2 = toOsmLon(2.33433187007904, 0);
         lat2 = toOsmLat(48.8240238480664, 0);
         assertEquals(
-            "Should give the correct length when last point is within the polygon",
-            50,
-            polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
-            0.05 * 50
+                "Should give the correct length when last point is within the polygon",
+                50,
+                polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
+                0.05 * 50
         );
         lon1 = toOsmLon(2.33433187007904, 0);
         lat1 = toOsmLat(48.8240238480664, 0);
         lon2 = toOsmLon(2.33488172292709, 0);
         lat2 = toOsmLat(48.8240891862353, 0);
         assertEquals(
-            "Should give the correct length when first point is within the polygon",
-            35,
-            polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
-            0.05 * 35
+                "Should give the correct length when first point is within the polygon",
+                35,
+                polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
+                0.05 * 35
         );
 
         lon1 = toOsmLon(2.333523, 0);
@@ -189,10 +189,10 @@ public class OsmNogoPolygonTest {
         lon2 = toOsmLon(2.333432, 0);
         lat2 = toOsmLat(48.824091, 0);
         assertEquals(
-            "Should give the correct length if the segment overlaps with an edge of the polygon",
-            CheapRulerHelper.distance(lon1, lat1, lon2, lat2),
-            polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
-            0.05 * CheapRulerHelper.distance(lon1, lat1, lon2, lat2)
+                "Should give the correct length if the segment overlaps with an edge of the polygon",
+                CheapRulerHelper.distance(lon1, lat1, lon2, lat2),
+                polygon.distanceWithinPolygon(lon1, lat1, lon2, lat2),
+                0.05 * CheapRulerHelper.distance(lon1, lat1, lon2, lat2)
         );
 
         lon1 = toOsmLon(2.333523, 0);
@@ -200,10 +200,10 @@ public class OsmNogoPolygonTest {
         lon2 = toOsmLon(2.3334775, 0);
         lat2 = toOsmLat(48.8239345, 0);
         assertEquals(
-            "Should give the correct length if the segment overlaps with a polyline",
-            CheapRulerHelper.distance(lon1, lat1, lon2, lat2),
-            polyline.distanceWithinPolygon(lon1, lat1, lon2, lat2),
-            0.05 * CheapRulerHelper.distance(lon1, lat1, lon2, lat2)
+                "Should give the correct length if the segment overlaps with a polyline",
+                CheapRulerHelper.distance(lon1, lat1, lon2, lat2),
+                polyline.distanceWithinPolygon(lon1, lat1, lon2, lat2),
+                0.05 * CheapRulerHelper.distance(lon1, lat1, lon2, lat2)
         );
     }
 }

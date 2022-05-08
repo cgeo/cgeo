@@ -10,13 +10,13 @@ public class OAuth {
     }
 
     public static void signOAuth(final String host,
-            final String path,
-            final String method,
-            final boolean https,
-            final Parameters params,
-            final OAuthTokens tokens,
-            final String consumerKey,
-            final String consumerSecret) {
+                                 final String path,
+                                 final String method,
+                                 final boolean https,
+                                 final Parameters params,
+                                 final OAuthTokens tokens,
+                                 final String consumerKey,
+                                 final String consumerSecret) {
         params.put(
                 "oauth_consumer_key", consumerKey,
                 "oauth_nonce", CryptUtils.md5(Long.toString(System.currentTimeMillis())),

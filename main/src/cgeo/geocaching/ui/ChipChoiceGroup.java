@@ -19,7 +19,9 @@ import java.util.Set;
 
 import com.google.android.material.chip.ChipGroup;
 
-/** A group of text chips with multiselect allowed */
+/**
+ * A group of text chips with multiselect allowed
+ */
 public class ChipChoiceGroup extends ChipGroup {
 
     private boolean withSelectAllChip = true;
@@ -60,7 +62,9 @@ public class ChipChoiceGroup extends ChipGroup {
     }
 
 
-    /** adds chips to this group programatically */
+    /**
+     * adds chips to this group programatically
+     */
     public void addChips(final List<TextParam> texts) {
         final LayoutInflater inflater = LayoutInflater.from(getContext());
         this.valueButtons.clear();
@@ -76,7 +80,7 @@ public class ChipChoiceGroup extends ChipGroup {
         relayout();
     }
 
-    public void setCheckedButtonByIndex(final boolean checked, final int ... indexes) {
+    public void setCheckedButtonByIndex(final boolean checked, final int... indexes) {
         for (int idx : indexes) {
             if (idx >= 0 && idx < this.valueButtons.size()) {
                 this.valueButtons.get(idx).setChecked(checked);

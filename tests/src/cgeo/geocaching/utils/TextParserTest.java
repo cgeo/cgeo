@@ -82,10 +82,10 @@ public class TextParserTest {
     public void parseUntilSpecial() {
         //symbol and escape char are the same
         assertThat(new TextParser("soon it is ''christmas'' again' after ").parseUntil(c -> c == '\'', false, null, true))
-            .isEqualTo("soon it is 'christmas' again");
+                .isEqualTo("soon it is 'christmas' again");
         //other chars are escaped
         assertThat(new TextParser("soon it \\is \\'christmas\\' \\again' after ").parseUntil(c -> c == '\'', false, '\\', false))
-            .isEqualTo("soon it is 'christmas' again");
+                .isEqualTo("soon it is 'christmas' again");
     }
 
     @Test
@@ -93,11 +93,11 @@ public class TextParserTest {
         final TextParser tp = new TextParser("this|is||a\\|test\\\\\\}-}a");
 
         assertThat(tp.splitUntil(c -> c == '}', c -> c == '|', true, '\\', true))
-            .containsExactly("this", "is|a|test\\}-");
+                .containsExactly("this", "is|a|test\\}-");
         assertThat(tp.getExpression().charAt(tp.pos() - 1)).isEqualTo('}');
         tp.setPos(0);
         assertThat(tp.splitUntil(c -> c == '}', c -> c == '|', true, '\\', false))
-            .containsExactly("this", "is", "", "a|test\\}-");
+                .containsExactly("this", "is", "", "a|test\\}-");
         assertThat(tp.getExpression().charAt(tp.pos() - 1)).isEqualTo('}');
     }
 

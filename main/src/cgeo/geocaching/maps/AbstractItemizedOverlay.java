@@ -46,7 +46,7 @@ public abstract class AbstractItemizedOverlay implements GeneralOverlay {
 
     @Override
     public void drawOverlayBitmap(final Canvas canvas, final Point drawPosition,
-            final MapProjectionImpl projection, final byte drawZoomLevel) {
+                                  final MapProjectionImpl projection, final byte drawZoomLevel) {
         ovlImpl.superDrawOverlayBitmap(canvas, drawPosition, projection, drawZoomLevel);
     }
 

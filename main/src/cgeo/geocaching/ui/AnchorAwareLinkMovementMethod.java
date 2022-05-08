@@ -22,7 +22,6 @@ import androidx.annotation.NonNull;
 /**
  * {@code LinkMovementMethod} with built-in suppression of errors for links, where the URL cannot be handled
  * correctly by Android.
- *
  */
 public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
 
@@ -108,7 +107,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public boolean canSelectArbitrarily () {
+    public boolean canSelectArbitrarily() {
         return true;
     }
 }

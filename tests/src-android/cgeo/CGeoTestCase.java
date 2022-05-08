@@ -22,7 +22,9 @@ public abstract class CGeoTestCase extends ApplicationTestCase<CgeoApplication> 
         super.setUp();
     }
 
-    /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
+    /**
+     * Remove cache from DB and cache to ensure that the cache is not loaded from the database
+     */
     protected static void deleteCacheFromDB(final String geocode) {
         DataStore.removeCache(geocode, LoadFlags.REMOVE_ALL);
     }

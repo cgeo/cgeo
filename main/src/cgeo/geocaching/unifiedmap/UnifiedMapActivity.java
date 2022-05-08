@@ -248,7 +248,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
     }
 
-    /** centers map on coords given + resets "followMyLocation" state **/
+    /**
+     * centers map on coords given + resets "followMyLocation" state
+     **/
     private void centerMap(final Geopoint geopoint) {
         followMyLocation = false;
         initFollowMyLocationButton();
@@ -385,16 +387,16 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             }
             initFollowMyLocationButton();
         } else if (id == R.id.menu_map_rotation_off) {
-                setMapRotation(item, MAPROTATION_OFF);
-            } else if (id == R.id.menu_map_rotation_manual) {
-                setMapRotation(item, MAPROTATION_MANUAL);
-            } else if (id == R.id.menu_map_rotation_auto) {
-                setMapRotation(item, MAPROTATION_AUTO);
+            setMapRotation(item, MAPROTATION_OFF);
+        } else if (id == R.id.menu_map_rotation_manual) {
+            setMapRotation(item, MAPROTATION_MANUAL);
+        } else if (id == R.id.menu_map_rotation_auto) {
+            setMapRotation(item, MAPROTATION_AUTO);
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = tileProvider.getMap().getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> tileProvider.getMap().positionLayer.repaintHistory(), () -> tileProvider.getMap().positionLayer.clearHistory())
-            || DownloaderUtils.onOptionsItemSelected(this, id)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_theme_mode) {
             tileProvider.getMap().selectTheme(this);
@@ -464,13 +466,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this,
-            new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NewMap) {
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NewMap) {
 
-                @Override
-                public void executeAfter() {
-                    resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
-                }
-            });
+                    @Override
+                    public void executeAfter() {
+                        resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
+                    }
+                });
     }
 
     @Override

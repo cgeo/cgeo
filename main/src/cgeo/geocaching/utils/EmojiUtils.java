@@ -83,58 +83,58 @@ public class EmojiUtils {
 
 
     private static final EmojiSet[] symbols = {
-        // category symbols
-        new EmojiSet(0x2764, new int[]{
-            /* hearts */        0x2764, 0x1f9e1, 0x1f49b, 0x1f49a, 0x1f499, 0x1f49c, 0x1f90e, 0x1f5a4, 0x1f90d,
-            /* geometric */     0x1f7e5, 0x1f7e7, 0x1f7e8, 0x1f7e9, 0x1f7e6, 0x1f7ea, 0x1f7eb, 0x2b1b, 0x2b1c,
-            /* geometric */     0x1f536, 0x1f537,
-            /* events */        0x1f383, 0x1f380, 0x1f384, 0x1f389,
-            /* award-medal */   0x1f947, 0x1f948, 0x1f949, 0x1f3c6,
-            /* office */        0x1f4c6,
-            /* warning */       0x26a0, 0x26d4, 0x1f6ab, 0x1f6b3, 0x1f6d1, 0x2622,
-            /* av-symbol */     0x1f505, 0x1f506,
-            /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757,
-            /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3,
-            /* numbers */       NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
-        }),
-        // category custom symbols - will be filled dynamically below; has to be at position CUSTOM_GLYPHS_ID within EmojiSet[]
-        new EmojiSet(CUSTOM_ICONS_START_CIRCLES + 18 + CUSTOM_SET_SIZE_PER_OPACITY, new int[CUSTOM_SET_SIZE_PER_OPACITY]),    // "18" to pick red circle instead of black
-        // category places
-        new EmojiSet(0x1f30d, new int[]{
-            /* globe */         0x1f30d, 0x1f30e, 0x1f30f, 0x1f5fa,
-            /* geographic */    0x26f0, 0x1f3d4, 0x1f3d6, 0x1f3dc, 0x1f3dd, 0x1f3de,
-            /* buildings */     0x1f3e0, 0x1f3e1, 0x1f3e2, 0x1f3d9, 0x1f3eb, 0x1f3ea, 0x1F3ed, 0x1f3e5, 0x1f3da, 0x1f3f0,
-            /* other */         0x1f5fd, 0x26f2, 0x2668, 0x1f6d2, 0x1f3ad, 0x1f3a8,
-            /* plants */        0x1f332, 0x1f333, 0x1f334, 0x1f335, 0x1f340,
-            /* transport */     0x1f682, 0x1f683, 0x1f686, 0x1f687, 0x1f68d, 0x1f695, 0x1f6b2, 0x1f697, 0x1f699, 0x2693, 0x26f5, 0x2708, 0x1f680,
-            /* transp.-sign */  0x267f, 0x1f6bb,
-            /* time */          0x23f3, 0x231a, 0x23f1, 0x1f324, 0x2600, 0x1f319, 0x1f318, SPARKLES
-        }),
-        // category food
-        new EmojiSet(0x2615, new int[]{
-            /* fruits */        0x1f34a, 0x1f34b, 0x1f34d, 0x1f34e, 0x1f34f, 0x1f95d, 0x1f336, 0x1f344,
-            /* other */         0x1f968, 0x1f354, 0x1f355,
-            /* food-sweet */    0x1f366, 0x1f370, 0x1f36d,
-            /* drink */         0x1f964, 0x2615, 0x1f37a
-        }),
-        // category activity
-        new EmojiSet(0x1f3c3, new int[]{
-            /* person-sport */  0x26f7, 0x1f3c4, 0x1f6a3, 0x1f3ca, 0x1f6b4,
-            /* p.-activity */   0x1f6b5, 0x1f9d7,
-            /* person-role */   0x1f575,
-            /* sport */         0x26bd, 0x1f94e, 0x1f3c0, 0x1f3c8, 0x1f93f, 0x1f3bf, 0x1f3af, 0x1f9ff,
-            /* tool */          0x1fa9c, 0x1f3a3, 0x1f6e0, 0x1fa9b, 0x1f512, 0x1f511, 0x1f50b, 0x1f9f2,
-            /* science */       0x2697, 0x1f9ea, 0x1f52c,
-            /* other things */  0x1f50e, 0x1f526, 0x1f4a1, 0x1f4d4, 0x1f4dc, 0x1f4ec, 0x1f3f7
+            // category symbols
+            new EmojiSet(0x2764, new int[]{
+                    /* hearts */        0x2764, 0x1f9e1, 0x1f49b, 0x1f49a, 0x1f499, 0x1f49c, 0x1f90e, 0x1f5a4, 0x1f90d,
+                    /* geometric */     0x1f7e5, 0x1f7e7, 0x1f7e8, 0x1f7e9, 0x1f7e6, 0x1f7ea, 0x1f7eb, 0x2b1b, 0x2b1c,
+                    /* geometric */     0x1f536, 0x1f537,
+                    /* events */        0x1f383, 0x1f380, 0x1f384, 0x1f389,
+                    /* award-medal */   0x1f947, 0x1f948, 0x1f949, 0x1f3c6,
+                    /* office */        0x1f4c6,
+                    /* warning */       0x26a0, 0x26d4, 0x1f6ab, 0x1f6b3, 0x1f6d1, 0x2622,
+                    /* av-symbol */     0x1f505, 0x1f506,
+                    /* other-symbol */  0x2b55, 0x2705, 0x2611, 0x2714, 0x2716, 0x2795, 0x2796, 0x274c, 0x274e, 0x2733, 0x2734, 0x2747, 0x203c, 0x2049, 0x2753, 0x2757,
+                    /* flags */         0x1f3c1, 0x1f6a9, 0x1f3f4, 0x1f3f3,
+                    /* numbers */       NUMBER_START, 0x31, 0x32, 0x33, 0x34, 0x35, 0x36, 0x37, 0x38, NUMBER_END,
+            }),
+            // category custom symbols - will be filled dynamically below; has to be at position CUSTOM_GLYPHS_ID within EmojiSet[]
+            new EmojiSet(CUSTOM_ICONS_START_CIRCLES + 18 + CUSTOM_SET_SIZE_PER_OPACITY, new int[CUSTOM_SET_SIZE_PER_OPACITY]),    // "18" to pick red circle instead of black
+            // category places
+            new EmojiSet(0x1f30d, new int[]{
+                    /* globe */         0x1f30d, 0x1f30e, 0x1f30f, 0x1f5fa,
+                    /* geographic */    0x26f0, 0x1f3d4, 0x1f3d6, 0x1f3dc, 0x1f3dd, 0x1f3de,
+                    /* buildings */     0x1f3e0, 0x1f3e1, 0x1f3e2, 0x1f3d9, 0x1f3eb, 0x1f3ea, 0x1F3ed, 0x1f3e5, 0x1f3da, 0x1f3f0,
+                    /* other */         0x1f5fd, 0x26f2, 0x2668, 0x1f6d2, 0x1f3ad, 0x1f3a8,
+                    /* plants */        0x1f332, 0x1f333, 0x1f334, 0x1f335, 0x1f340,
+                    /* transport */     0x1f682, 0x1f683, 0x1f686, 0x1f687, 0x1f68d, 0x1f695, 0x1f6b2, 0x1f697, 0x1f699, 0x2693, 0x26f5, 0x2708, 0x1f680,
+                    /* transp.-sign */  0x267f, 0x1f6bb,
+                    /* time */          0x23f3, 0x231a, 0x23f1, 0x1f324, 0x2600, 0x1f319, 0x1f318, SPARKLES
+            }),
+            // category food
+            new EmojiSet(0x2615, new int[]{
+                    /* fruits */        0x1f34a, 0x1f34b, 0x1f34d, 0x1f34e, 0x1f34f, 0x1f95d, 0x1f336, 0x1f344,
+                    /* other */         0x1f968, 0x1f354, 0x1f355,
+                    /* food-sweet */    0x1f366, 0x1f370, 0x1f36d,
+                    /* drink */         0x1f964, 0x2615, 0x1f37a
+            }),
+            // category activity
+            new EmojiSet(0x1f3c3, new int[]{
+                    /* person-sport */  0x26f7, 0x1f3c4, 0x1f6a3, 0x1f3ca, 0x1f6b4,
+                    /* p.-activity */   0x1f6b5, 0x1f9d7,
+                    /* person-role */   0x1f575,
+                    /* sport */         0x26bd, 0x1f94e, 0x1f3c0, 0x1f3c8, 0x1f93f, 0x1f3bf, 0x1f3af, 0x1f9ff,
+                    /* tool */          0x1fa9c, 0x1f3a3, 0x1f6e0, 0x1fa9b, 0x1f512, 0x1f511, 0x1f50b, 0x1f9f2,
+                    /* science */       0x2697, 0x1f9ea, 0x1f52c,
+                    /* other things */  0x1f50e, 0x1f526, 0x1f4a1, 0x1f4d4, 0x1f4dc, 0x1f4ec, 0x1f3f7
 
-        }),
-        // category people
-        new EmojiSet(0x1f600, new int[]{
-            /* smileys */       SMILEY_LIKE, SMILEY_LOVE, 0x1f641, 0x1f621, SMILEY_MONOCLE,
-            /* silhouettes */   0x1f47b, 0x1f464, 0x1f465, 0x1f5e3,
-            /* people */        0x1f466, 0x1f467, 0x1f468, 0x1f469, 0x1f474, 0x1f475, 0x1f46a,
-            /* hands */         0x1f44d, 0x1f44e, 0x1f4aa, 0x270d
-        }),
+            }),
+            // category people
+            new EmojiSet(0x1f600, new int[]{
+                    /* smileys */       SMILEY_LIKE, SMILEY_LOVE, 0x1f641, 0x1f621, SMILEY_MONOCLE,
+                    /* silhouettes */   0x1f47b, 0x1f464, 0x1f465, 0x1f5e3,
+                    /* people */        0x1f466, 0x1f467, 0x1f468, 0x1f469, 0x1f474, 0x1f475, 0x1f46a,
+                    /* hands */         0x1f44d, 0x1f44e, 0x1f4aa, 0x270d
+            }),
     };
     private static final int CUSTOM_GLYPHS_ID = 1;
 
@@ -192,9 +192,9 @@ public class EmojiUtils {
         final EmojiselectorBinding dialogView = EmojiselectorBinding.inflate(LayoutInflater.from(context));
         final DialogTitleButtonButtonBinding customTitle = DialogTitleButtonButtonBinding.inflate(LayoutInflater.from(context));
         final AlertDialog dialog = Dialogs.newBuilder(context)
-            .setView(dialogView.getRoot())
-            .setCustomTitle(customTitle.getRoot())
-            .create();
+                .setView(dialogView.getRoot())
+                .setCustomTitle(customTitle.getRoot())
+                .create();
 
         // calc sizes for markers
         final int wantedEmojiSizeInDp = 24;
@@ -373,6 +373,7 @@ public class EmojiUtils {
 
     /**
      * get emoji string from codepoint
+     *
      * @param emoji codepoint of the emoji to display
      * @return string emoji with protection from rendering as black-and-white glyphs
      */
@@ -382,6 +383,7 @@ public class EmojiUtils {
 
     /**
      * builds a drawable the size of a marker with a given text
+     *
      * @param paint - paint data structure for Emojis
      * @param emoji codepoint of the emoji to display
      * @return drawable bitmap with text on it
@@ -402,10 +404,10 @@ public class EmojiUtils {
             final int bIndex = v % COLOR_VALUES;
 
             final int color = Color.argb(
-                255 - (aIndex * OPACITY_SPREAD),
-                COLOR_OFFSET + rIndex * COLOR_SPREAD,
-                COLOR_OFFSET + gIndex * COLOR_SPREAD,
-                COLOR_OFFSET + bIndex * COLOR_SPREAD);
+                    255 - (aIndex * OPACITY_SPREAD),
+                    COLOR_OFFSET + rIndex * COLOR_SPREAD,
+                    COLOR_OFFSET + gIndex * COLOR_SPREAD,
+                    COLOR_OFFSET + bIndex * COLOR_SPREAD);
             cPaint.setColor(color);
             cPaint.setStyle(Paint.Style.FILL);
             canvas.drawCircle((int) (paint.bitmapDimensions.first / 2), (int) (paint.bitmapDimensions.second / 2) - paint.offsetTop, radius, cPaint);
@@ -429,6 +431,7 @@ public class EmojiUtils {
 
     /**
      * get a drawable the size of a marker with a given text (either from cache or freshly built)
+     *
      * @param paint - paint data structure for Emojis
      * @param emoji codepoint of the emoji to display
      * @return drawable bitmap with text on it
@@ -436,11 +439,11 @@ public class EmojiUtils {
     @NonNull
     public static BitmapDrawable getEmojiDrawable(final EmojiPaint paint, final int emoji) {
         final int hashcode = new HashCodeBuilder()
-            .append(paint.bitmapDimensions.first)
-            .append(paint.availableSize)
-            .append(paint.fontsize)
-            .append(emoji)
-            .toHashCode();
+                .append(paint.bitmapDimensions.first)
+                .append(paint.availableSize)
+                .append(paint.fontsize)
+                .append(emoji)
+                .toHashCode();
 
         synchronized (emojiCache) {
             CacheMarker marker = emojiCache.get(hashcode);
@@ -454,8 +457,9 @@ public class EmojiUtils {
 
     /**
      * get a drawable with given "wantedSize" as both width and height (either from cache or freshly built)
+     *
      * @param wantedSize wanted size of drawable (width and height) in pixel
-     * @param emoji codepoint of the emoji to display
+     * @param emoji      codepoint of the emoji to display
      * @return drawable bitmap with emoji on it
      */
     @NonNull

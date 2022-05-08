@@ -26,19 +26,33 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class OfflineLogEntry extends LogEntry {
 
-    /** log image title praefix to use for publishing images with log */
+    /**
+     * log image title praefix to use for publishing images with log
+     */
     public final String imageTitlePraefix;
-    /** log image scale to which images should be scaled before publishing this log */
+    /**
+     * log image scale to which images should be scaled before publishing this log
+     */
     public final int imageScale;
-    /** whether cache should be set as favorite with this log */
+    /**
+     * whether cache should be set as favorite with this log
+     */
     public final boolean favorite;
-    /** whether tweet for this log shall be published */
+    /**
+     * whether tweet for this log shall be published
+     */
     public final boolean tweet;
-    /** cache rating to be set with this log */
+    /**
+     * cache rating to be set with this log
+     */
     public final Float rating;
-    /** password to use for password-protected caches (e.g. Opencaching.de) */
+    /**
+     * password to use for password-protected caches (e.g. Opencaching.de)
+     */
     public final String password;
-    /** trackable trackable log settings:  "action" to invoke with log */
+    /**
+     * trackable trackable log settings:  "action" to invoke with log
+     */
     public final Map<String, LogTypeTrackable> trackableActions;
 
     // Parcelable START

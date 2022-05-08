@@ -36,12 +36,12 @@ public class GPXImporterTest extends AbstractResourceInstrumentationTestCase {
     private HandlerThread serviceThread;
 
     public void testGetWaypointsFileNameForGpxFile() throws IOException {
-        final String[] gpxFiles = { "1234567.gpx", "1.gpx", "1234567.9.gpx",
+        final String[] gpxFiles = {"1234567.gpx", "1.gpx", "1234567.9.gpx",
                 "1234567.GPX", "gpx.gpx.gpx", ".gpx",
-                "1234567_query.gpx", "123-4.gpx", "123(5).gpx" };
-        final String[] wptsFiles = { "1234567-wpts.gpx", "1-wpts.gpx", "1234567.9-wpts.gpx",
+                "1234567_query.gpx", "123-4.gpx", "123(5).gpx"};
+        final String[] wptsFiles = {"1234567-wpts.gpx", "1-wpts.gpx", "1234567.9-wpts.gpx",
                 "1234567-wpts.GPX", "gpx.gpx-wpts.gpx", "-wpts.gpx",
-                "1234567_query-wpts.gpx", "123-wpts-4.gpx", "123-wpts(5).gpx" };
+                "1234567_query-wpts.gpx", "123-wpts-4.gpx", "123-wpts(5).gpx"};
         for (int i = 0; i < gpxFiles.length; i++) {
             final String gpxFileName = gpxFiles[i];
             final String wptsFileName = wptsFiles[i];

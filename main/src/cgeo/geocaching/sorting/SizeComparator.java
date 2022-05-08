@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 /**
  * sorts caches by size
- *
  */
 class SizeComparator extends AbstractCacheComparator {
 

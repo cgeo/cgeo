@@ -84,10 +84,8 @@ public final class ActivityMixin {
     /**
      * Show a long toast message to the user. This can be called from any thread.
      *
-     * @param context
-     *            the activity the user is facing
-     * @param resId
-     *            the message
+     * @param context the activity the user is facing
+     * @param resId   the message
      */
     public static void showToast(final Context context, @StringRes final int resId) {
         showToast(context, context.getString(resId));
@@ -123,7 +121,7 @@ public final class ActivityMixin {
      * Show a long toast message to the user. This can be called from any thread.
      *
      * @param activity the activity the user is facing
-     * @param text the message
+     * @param text     the message
      */
     public static void showToast(final Activity activity, final String text) {
         postShowToast(activity, text, Toast.LENGTH_LONG);
@@ -132,10 +130,8 @@ public final class ActivityMixin {
     /**
      * Show a long toast message to the user. This can be called from any thread.
      *
-     * @param context
-     *            any context. If this is not an activity, then the application context will be used.
-     * @param text
-     *            the message
+     * @param context any context. If this is not an activity, then the application context will be used.
+     * @param text    the message
      */
     public static void showToast(final Context context, final String text) {
         if (context instanceof Activity) {
@@ -148,10 +144,8 @@ public final class ActivityMixin {
     /**
      * Show a short toast message to the user. This can be called from any thread.
      *
-     * @param activity
-     *            the activity the user is facing
-     * @param text
-     *            the message
+     * @param activity the activity the user is facing
+     * @param text     the message
      */
     public static void showShortToast(final Activity activity, final String text) {
         postShowToast(activity, text, Toast.LENGTH_SHORT);
@@ -179,8 +173,7 @@ public final class ActivityMixin {
     /**
      * insert text into the EditText at the current cursor position
      *
-     * @param moveCursor
-     *            place the cursor after the inserted text
+     * @param moveCursor place the cursor after the inserted text
      */
     public static void insertAtPosition(final EditText editText, final String insertText, final boolean moveCursor) {
         final int selectionStart = editText.getSelectionStart();
@@ -201,7 +194,9 @@ public final class ActivityMixin {
         editText.setSelection(newCursor);
     }
 
-    /** method should solely be used by class {@link AbstractActivity} */
+    /**
+     * method should solely be used by class {@link AbstractActivity}
+     */
     public static boolean navigateUp(@NonNull final Activity activity) {
         // first check if there is a parent declared in the manifest
         Intent upIntent = NavUtils.getParentActivityIntent(activity);

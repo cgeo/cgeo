@@ -161,9 +161,9 @@ public class Waypoint implements IWaypoint {
      */
     public boolean isUserModified() {
         return
-            isUserDefined() ||
-            (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
-            StringUtils.isNotBlank(getUserNote());
+                isUserDefined() ||
+                        (isOriginalCoordsEmpty() && (getCoords() != null || getCalcStateConfig() != null)) ||
+                        StringUtils.isNotBlank(getUserNote());
     }
 
     public void setUserDefined() {

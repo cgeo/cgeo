@@ -93,22 +93,30 @@ public class GeocacheSortContext {
         }
     }
 
-    /** Returns current sort type */
+    /**
+     * Returns current sort type
+     */
     public SortType getType() {
         return currentType;
     }
 
-    /** Returns true if current selected type is inversed (in reference to the type's default 'inverse' flag) */
+    /**
+     * Returns true if current selected type is inversed (in reference to the type's default 'inverse' flag)
+     */
     public boolean isInverse() {
         return currentIsInverse;
     }
 
-    /** Returns current Cache Comparator (inverse or not is already included in it) */
+    /**
+     * Returns current Cache Comparator (inverse or not is already included in it)
+     */
     public CacheComparator getComparator() {
         return getComparatorFor(currentType, currentIsInverse);
     }
 
-    /** Sets a new sorttype. If already selected type is set, then the search order is inversed */
+    /**
+     * Sets a new sorttype. If already selected type is set, then the search order is inversed
+     */
     public void setAndToggle(final SortType type) {
         if (currentType.equals(type)) {
             currentIsInverse = !currentIsInverse;
@@ -119,7 +127,9 @@ public class GeocacheSortContext {
         persistSortConfig();
     }
 
-    /** Returns the currently available sort types (together with their user-displayable name) for user selection */
+    /**
+     * Returns the currently available sort types (together with their user-displayable name) for user selection
+     */
     public List<Pair<SortType, String>> getAvailableTypes() {
         final Set<SortType> types = new HashSet<>(Arrays.asList(SortType.values()));
         if (isEventList) {
@@ -166,7 +176,9 @@ public class GeocacheSortContext {
         isSeriesList = seriesList;
     }
 
-    /** Saves to bundle (for state handling in activity lifecycle */
+    /**
+     * Saves to bundle (for state handling in activity lifecycle
+     */
     public Bundle saveToBundle() {
         final Bundle b = new Bundle();
         b.putInt(STATE_TYPE, currentType.ordinal());
@@ -179,7 +191,9 @@ public class GeocacheSortContext {
         return b;
     }
 
-    /** Loads from bundle (for state handling in activity lifecycle */
+    /**
+     * Loads from bundle (for state handling in activity lifecycle
+     */
     public void loadFromBundle(final Bundle b) {
         currentType = SortType.values()[b.getInt(STATE_TYPE, SortType.AUTO.ordinal())];
         currentIsInverse = b.getBoolean(STATE_INVERSE);
@@ -192,7 +206,9 @@ public class GeocacheSortContext {
         listContextTypeParam = b.getString(STATE_LISTCONTEXTPARAM);
     }
 
-    /** Sets sort context depending on a list context. This list context is used to load/persist current sort state in it */
+    /**
+     * Sets sort context depending on a list context. This list context is used to load/persist current sort state in it
+     */
     public void setListContext(final CacheListType listType, final String listContextTypeParam) {
         this.listContextType = listType;
         this.listContextTypeParam = listContextTypeParam;
@@ -219,7 +235,7 @@ public class GeocacheSortContext {
         }
 
         Settings.setSortConfig(createListContextKey(this.listContextType, this.listContextTypeParam),
-            this.currentType.name() + "-" + this.currentIsInverse);
+                this.currentType.name() + "-" + this.currentIsInverse);
     }
 
 
@@ -240,7 +256,7 @@ public class GeocacheSortContext {
             return LocalizationUtils.getString(SortType.AUTO.resId, getNameFor(getAutoType(), inverted));
         }
         return LocalizationUtils.getString(type.resId) + " " +
-            (inverted ^ type.sortDefaultLargeToSmall ? "↑" : "↓");
+                (inverted ^ type.sortDefaultLargeToSmall ? "↑" : "↓");
     }
 
     private CacheComparator getComparatorFor(final SortType type, final boolean inverted) {

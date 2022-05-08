@@ -61,7 +61,7 @@ public class FolderUtils {
 
     public static final String FOLDER_SYNC_INFO_FILENAME = "_cgeoFolderSyncInfo.txt";
 
-    private static final int COPY_FLAG_DIR_BEFORE  = 1;
+    private static final int COPY_FLAG_DIR_BEFORE = 1;
     private static final int COPY_FLAG_DIR_NEEDED_FOR_TARGET = 2;
 
     private final ContentStorage pls = ContentStorage.get();
@@ -100,7 +100,7 @@ public class FolderUtils {
                 if (!fi.left.isDirectory && (filter == null || filter.test(fi.left))) {
                     result.add(new ImmutablePair<>(fi.left, paths.peek() + fi.left.name));
                 }
-                return  TreeWalkResult.CONTINUE;
+                return TreeWalkResult.CONTINUE;
             });
             cLog.add("#e:%d", result.size());
             return result;
@@ -109,7 +109,7 @@ public class FolderUtils {
 
     public static class FolderInfo {
 
-        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l, true, null);
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0, 0l, true, null);
 
         public final int fileCount;
         public final int dirCount;
@@ -135,10 +135,10 @@ public class FolderUtils {
             }
             final FolderInfo that = (FolderInfo) o;
             return fileCount == that.fileCount &&
-                resultIsIncomplete == that.resultIsIncomplete &&
-                dirCount == that.dirCount &&
-                totalFileSize == that.totalFileSize &&
-                topLevelFiles.equals(that.topLevelFiles);
+                    resultIsIncomplete == that.resultIsIncomplete &&
+                    dirCount == that.dirCount &&
+                    totalFileSize == that.totalFileSize &&
+                    topLevelFiles.equals(that.topLevelFiles);
         }
 
         @Override
@@ -158,13 +158,15 @@ public class FolderUtils {
 
             if (includeFileInfo) {
                 result +=
-                    ", topLevel(" + (topLevelFiles.size() > topLevelFilesMaximumDisplayCount ? "first " + topLevelFilesMaximumDisplayCount + " of " : "") +
-                        topLevelFiles.size() + "):[" + CollectionStream.of(topLevelFiles).limit(topLevelFilesMaximumDisplayCount).toJoinedString(";") + "]";
+                        ", topLevel(" + (topLevelFiles.size() > topLevelFilesMaximumDisplayCount ? "first " + topLevelFilesMaximumDisplayCount + " of " : "") +
+                                topLevelFiles.size() + "):[" + CollectionStream.of(topLevelFiles).limit(topLevelFilesMaximumDisplayCount).toJoinedString(";") + "]";
             }
             return result;
         }
 
-        /** returns internationalized strings for file count (left), dir count (middle) and total file size (right) */
+        /**
+         * returns internationalized strings for file count (left), dir count (middle) and total file size (right)
+         */
         public ImmutableTriple<String, String, String> getUserDisplayableFolderInfoStrings() {
 
             //create the message
@@ -179,18 +181,22 @@ public class FolderUtils {
     }
 
 
-    /** returns folder informations with regards to files/dirs currently in folder */
+    /**
+     * returns folder informations with regards to files/dirs currently in folder
+     */
     public FolderInfo getFolderInfo(final Folder folder) {
         return getFolderInfo(folder, 5);
     }
 
-    /** returns folder informations with regards to files/dirs currently in folder, restricts scan to a maximum of subfolders e.g. to reduce info gathering time */
+    /**
+     * returns folder informations with regards to files/dirs currently in folder, restricts scan to a maximum of subfolders e.g. to reduce info gathering time
+     */
     public FolderInfo getFolderInfo(final Folder folder, final int maxSubfolderScan) {
         try (ContextLogger cLog = new ContextLogger("FolderUtils.getFolderInfo: %s", folder)) {
 
-            final int[] counts = new int[]{0, 0 };
-            final long[] size = new long[]{0 };
-            final int[] level = new int[] { 0 };
+            final int[] counts = new int[]{0, 0};
+            final long[] size = new long[]{0};
+            final int[] level = new int[]{0};
             final List<String> topLevelFiles = new ArrayList<>();
             final boolean result = treeWalk(folder, fi -> {
                 final boolean subdirLimitReached = maxSubfolderScan >= 0 && counts[1] >= maxSubfolderScan;
@@ -249,9 +255,9 @@ public class FolderUtils {
      * This implementation does NOT support overlapping source and target folders. If such parameters
      * are given, then behaviour is undefined.
      *
-     * @param source source for synchronization
-     * @param target target for synchronization
-     * @param cancelFlag optional. If not null and flag is set to true during sync, then running process is aborted. Will result in a Result ABORTED to be returned.*
+     * @param source         source for synchronization
+     * @param target         target for synchronization
+     * @param cancelFlag     optional. If not null and flag is set to true during sync, then running process is aborted. Will result in a Result ABORTED to be returned.*
      * @param statusListener callback for status information, useable to implement GUI progress bar. See {@link #copyAll(Folder, Folder, boolean)} for details.
      * @return result of synchroioozation attempt
      */
@@ -267,14 +273,14 @@ public class FolderUtils {
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetList = getAllFiles(Folder.fromFile(target));
 
         final Set<String> targetFilesToDelete = CollectionStream.of(targetList)
-            .filter(e -> !e.left.isDirectory && !e.right.endsWith("/" + FOLDER_SYNC_INFO_FILENAME))
-            .map(e -> e.right).toSet();
+                .filter(e -> !e.left.isDirectory && !e.right.endsWith("/" + FOLDER_SYNC_INFO_FILENAME))
+                .map(e -> e.right).toSet();
         final Set<String> targetSyncPropsToUpdate = new HashSet<>();
 
         final Map<String, Properties> targetSyncProps = getTargetFolderSyncProperties(target, targetList);
 
         //Array stores values for: filesProcessed, filesModified, dirsProcessed, dirsModified
-        final int[] processStates = new int[]{ 0, 0, 0, 0};
+        final int[] processStates = new int[]{0, 0, 0, 0};
         final ContentStorage.FileInformation failedFile = synchronizeFolderProcessAllFiles(target, cancelFlag, statusListener, sourceInfo, sourceList, targetFilesToDelete, targetSyncPropsToUpdate, targetSyncProps, processStates);
         if (failedFile != null) {
             return createFolderProcessResult(ProcessResult.FAILURE, failedFile, processStates[1], processStates[3], sourceInfo);
@@ -304,10 +310,10 @@ public class FolderUtils {
 
     @Nullable
     private ContentStorage.FileInformation synchronizeFolderProcessAllFiles(
-        final File target, final AtomicBoolean cancelFlag,
-        final Consumer<FolderProcessStatus> statusListener, final ImmutablePair<Integer, Integer> sourceInfo,
-        final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceList, final Set<String> targetFilesToDelete,
-        final Set<String> targetSyncPropsToUpdate, final Map<String, Properties> targetSyncProps, final int[] processStates) {
+            final File target, final AtomicBoolean cancelFlag,
+            final Consumer<FolderProcessStatus> statusListener, final ImmutablePair<Integer, Integer> sourceInfo,
+            final List<ImmutablePair<ContentStorage.FileInformation, String>> sourceList, final Set<String> targetFilesToDelete,
+            final Set<String> targetSyncPropsToUpdate, final Map<String, Properties> targetSyncProps, final int[] processStates) {
 
         for (ImmutablePair<ContentStorage.FileInformation, String> sourceFile : sourceList) {
             sendCopyStatus(statusListener, sourceFile.left, processStates[0], processStates[2], sourceInfo);
@@ -353,7 +359,9 @@ public class FolderUtils {
         }
     }
 
-    /** returns null in case of failre, true if file needed copy (and was copied), false if file didn't need copy) */
+    /**
+     * returns null in case of failre, true if file needed copy (and was copied), false if file didn't need copy)
+     */
     private Boolean synchronizeSingleFileInternal(final ImmutablePair<ContentStorage.FileInformation, String> sourceFile, final File targetRootDir,
                                                   final Set<String> targetSyncPropsToUpdate, final Map<String, Properties> targetSyncProps) {
         final String dirPath = getParentPath(sourceFile.right);
@@ -383,19 +391,19 @@ public class FolderUtils {
         return CollectionStream.of(targetList)
                 .filter(e -> e.right.endsWith("/" + FOLDER_SYNC_INFO_FILENAME))
                 .toMap(e -> e.right.substring(0, e.right.length() - 1 - FOLDER_SYNC_INFO_FILENAME.length()),
-                    e -> {
-                    final Properties p = new Properties();
-                    try {
-                        p.load(new FileInputStream(new File(target, e.right)));
-                    } catch (IOException ioe) {
-                        //ignore, Prop will be empty
-                    }
-                    return p;
-            });
+                        e -> {
+                            final Properties p = new Properties();
+                            try {
+                                p.load(new FileInputStream(new File(target, e.right)));
+                            } catch (IOException ioe) {
+                                //ignore, Prop will be empty
+                            }
+                            return p;
+                        });
     }
 
     private static String getFileSyncToken(final ContentStorage.FileInformation fi) {
-        return fi.lastModified + "-"  + fi.size;
+        return fi.lastModified + "-" + fi.size;
     }
 
 
@@ -413,7 +421,7 @@ public class FolderUtils {
      * value class holding the result of a completed folder process
      * Note that "filesModified/dirsModified" in this class should denote how much files/dirs were actually in need of processing (not the files/dirs which were looked upon)
      * This meaning contrasts with "filesProcessed/dirsProcessed" in the FolderProcessStatus class.
-     * */
+     */
     public static class FolderProcessResult {
         public final ProcessResult result;
         public final ContentStorage.FileInformation failedFile;
@@ -432,7 +440,9 @@ public class FolderUtils {
         }
     }
 
-    /** value class holding the current state of a concrete folder process which is currently running */
+    /**
+     * value class holding the current state of a concrete folder process which is currently running
+     */
     public static class FolderProcessStatus {
         public final ContentStorage.FileInformation currentFile;
         public final int filesProcessed;
@@ -457,7 +467,7 @@ public class FolderUtils {
      *
      * @param source source folder with content to copy
      * @param target target folder to copy content to
-     * @param move if true, content is MOVED (e.g. sdeleted in source)
+     * @param move   if true, content is MOVED (e.g. sdeleted in source)
      * @return result of copyAll call.
      */
     public FolderProcessResult copyAll(final Folder source, final Folder target, final boolean move) {
@@ -467,18 +477,19 @@ public class FolderUtils {
     /**
      * Like {@link #copyAll(Folder, Folder, boolean)}, but performs the copy process asynchronously
      * and provides a GUI for it (progress bar and final screen with copy result)
+     *
      * @param activity activity to display copy Gui to
-     * @param source source folder with content to copy
-     * @param target target folder to copy content to
-     * @param move if true, content is MOVED (e.g. sdeleted in source)
+     * @param source   source folder with content to copy
+     * @param target   target folder to copy content to
+     * @param move     if true, content is MOVED (e.g. sdeleted in source)
      * @param callback called after copying was done with copy result
      */
     public void copyAllAsynchronousWithGui(final Activity activity, final Folder source, final Folder target, final boolean move, final Consumer<FolderProcessResult> callback) {
         FolderProcessTask.process(
-            activity,
-            activity.getString(move ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
-            ci -> copyAll(source, target, move, null, ci),
-            folderProcessResult -> displayCopyAllDoneDialog(activity, folderProcessResult, source, target, move, callback)
+                activity,
+                activity.getString(move ? R.string.folder_move_progressbar_title : R.string.folder_copy_progressbar_title, source.toUserDisplayableString(), target.toUserDisplayableString()),
+                ci -> copyAll(source, target, move, null, ci),
+                folderProcessResult -> displayCopyAllDoneDialog(activity, folderProcessResult, source, target, move, callback)
         );
     }
 
@@ -486,22 +497,22 @@ public class FolderUtils {
         final String message = getCopyAllDoneMessage(activity, folderProcessResult, source, target, move);
 
         Dialogs.newBuilder(activity)
-            .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
-            .setMessage(message)
-            .setCancelable(false)
-            .setPositiveButton(android.R.string.ok, (dd, pp) -> {
-                dd.dismiss();
-                if (callback != null) {
-                    callback.accept(folderProcessResult);
-                }
-            })
-            .setNegativeButton(android.R.string.cancel, (dd, pp) -> {
-                dd.dismiss();
-                if (callback != null) {
-                    callback.accept(null);
-                }
-            })
-            .create().show();
+                .setTitle(activity.getString(move ? R.string.folder_move_finished_title : R.string.folder_copy_finished_title))
+                .setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(android.R.string.ok, (dd, pp) -> {
+                    dd.dismiss();
+                    if (callback != null) {
+                        callback.accept(folderProcessResult);
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, (dd, pp) -> {
+                    dd.dismiss();
+                    if (callback != null) {
+                        callback.accept(null);
+                    }
+                })
+                .create().show();
     }
 
     @NotNull
@@ -513,13 +524,13 @@ public class FolderUtils {
         final String foldersTotal = folderProcessResult.dirsInSource < 0 ? "-" : plurals(activity, R.plurals.folder_count, folderProcessResult.dirsInSource);
 
         String message =
-            activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
-                source.toUserDisplayableString(), target.toUserDisplayableString(),
-                filesCopied, filesTotal, foldersCopied, foldersTotal);
+                activity.getString(move ? R.string.folder_move_finished_dialog_message : R.string.folder_copy_finished_dialog_message,
+                        source.toUserDisplayableString(), target.toUserDisplayableString(),
+                        filesCopied, filesTotal, foldersCopied, foldersTotal);
 
         if (folderProcessResult.result != ProcessResult.OK) {
             message += "\n\n" + activity.getString(R.string.folder_copy_move_finished_dialog_message_failure, folderProcessResult.result.toString(),
-                folderProcessResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(folderProcessResult.failedFile.uri));
+                    folderProcessResult.failedFile == null ? "---" : UriUtils.toUserDisplayableString(folderProcessResult.failedFile.uri));
         }
 
         message += "\n\n" + activity.getString(R.string.folder_move_finished_dialog_tap);
@@ -532,16 +543,16 @@ public class FolderUtils {
      * Implementation supports handling of case when source and target point to same folder (maybe via different APIs e.g. File vs Document)
      * as well as when source folder is inside target or vice versa
      *
-     * @param source source folder with content to copy
-     * @param target target folder to copy content to
-     * @param move if true, content is MOVED (e.g. sdeleted in source)
-     * @param cancelFlag optional. If not null and flag is set to true during copy, then running copy/move process is aborted. Will result in a Copy Result ABORTED to be returned.
+     * @param source         source folder with content to copy
+     * @param target         target folder to copy content to
+     * @param move           if true, content is MOVED (e.g. sdeleted in source)
+     * @param cancelFlag     optional. If not null and flag is set to true during copy, then running copy/move process is aborted. Will result in a Copy Result ABORTED to be returned.
      * @param statusListener optional callback. This is called many times during copying to inform about copy status. May be used e.g. to implement a progress bar.
-     *   status listener is called once initially (with files/dirsToCopy set to -1), then each time when a new file/dir is about to be copied, then one time when copying process is finished
-     *   so when a dir is copied with e.g. 3 dirs and 7 files inside, then the statuslistener is called 2 + 3 + 7 times.
+     *                       status listener is called once initially (with files/dirsToCopy set to -1), then each time when a new file/dir is about to be copied, then one time when copying process is finished
+     *                       so when a dir is copied with e.g. 3 dirs and 7 files inside, then the statuslistener is called 2 + 3 + 7 times.
      * @return result of copyAll call.
      */
-    public FolderProcessResult copyAll(final Folder source, final Folder target, final boolean move, final AtomicBoolean cancelFlag, final Consumer<FolderProcessStatus> statusListener)  {
+    public FolderProcessResult copyAll(final Folder source, final Folder target, final boolean move, final AtomicBoolean cancelFlag, final Consumer<FolderProcessStatus> statusListener) {
 
         try (ContextLogger cLog = new ContextLogger("FolderUtils.copyAll: %s -> %s (move=%s)", source, target, move)) {
 
@@ -581,7 +592,7 @@ public class FolderUtils {
             cLog.add("p2:#%s#%s", copyResult.middle, copyResult.right);
 
             return createFolderProcessResult(
-                isCancelled(cancelFlag) ? ProcessResult.ABORTED : (copyResult.left == null ? ProcessResult.OK : ProcessResult.FAILURE), copyResult.left, copyResult.middle, copyResult.right, sourceCopyCount);
+                    isCancelled(cancelFlag) ? ProcessResult.ABORTED : (copyResult.left == null ? ProcessResult.OK : ProcessResult.FAILURE), copyResult.left, copyResult.middle, copyResult.right, sourceCopyCount);
         }
 
     }
@@ -589,7 +600,7 @@ public class FolderUtils {
     /**
      * copyAll First Pass: collect all files to copy, create target folder for each file, mark source folders to keep on move (if target is in source)
      * returns in left the list of files. Returns in right the files/dirs found in source for copying
-     * */
+     */
     @Nullable
     private ImmutablePair<List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>>, ImmutablePair<Integer, Integer>> copyAllFirstPassCollectInfo(final Folder source, final Folder target, final AtomicBoolean cancelFlag) {
 
@@ -604,8 +615,8 @@ public class FolderUtils {
 
         final int[] copyCounts = new int[]{0, 0};
 
-        final int[] onTargetNeededPath = { -1 }; //helper counter to flag forlders needed for target
-        final boolean[] markerFoundInSubdir = { false, false }; //helper flags to flag forlders needed for target
+        final int[] onTargetNeededPath = {-1}; //helper counter to flag forlders needed for target
+        final boolean[] markerFoundInSubdir = {false, false}; //helper flags to flag forlders needed for target
         //triplet of each entry will contain: source file, target folder for that file, flags as above
         final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> listToCopy = new ArrayList<>();
         final Stack<Folder> targetFolderStack = new Stack<>();
@@ -651,7 +662,7 @@ public class FolderUtils {
 
     @NotNull
     private ImmutableTriple<ContentStorage.FileInformation, Integer, Integer> copyAllSecondPassCopyMove(
-        final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList, final boolean move, final Consumer<FolderProcessStatus> statusListener, final AtomicBoolean cancelFlag, final ImmutablePair<Integer, Integer> sourceCopyCount) {
+            final List<ImmutableTriple<ContentStorage.FileInformation, Folder, Integer>> fileList, final boolean move, final Consumer<FolderProcessStatus> statusListener, final AtomicBoolean cancelFlag, final ImmutablePair<Integer, Integer> sourceCopyCount) {
 
         // -- second pass: make all necessary file copies and create necessary target subfolders
         int dirsCopied = 0;
@@ -710,9 +721,10 @@ public class FolderUtils {
 
     /**
      * Generates a string representation of given folder as JSON string
-     * @param root folder to generate string rep from
+     *
+     * @param root         folder to generate string rep from
      * @param extendedInfo if false then only folder/file names are contained. If true, then more detailled info per file is contained
-     * @param pretty if false then info is delivered as "flat string". If true, info is delivered "pretty-printed" with line-breaks etc
+     * @param pretty       if false then info is delivered as "flat string". If true, info is delivered "pretty-printed" with line-breaks etc
      * @return string rep of folder
      */
     public String folderContentToString(final Folder root, final boolean extendedInfo, final boolean pretty) {
@@ -778,7 +790,9 @@ public class FolderUtils {
         return false;
     }
 
-    /** returns: left: free space on folder device (in bytes), right: number of files on device (may be -1 if not calculateable) */
+    /**
+     * returns: left: free space on folder device (in bytes), right: number of files on device (may be -1 if not calculateable)
+     */
     public ImmutablePair<Long, Long> getDeviceInfo(final Folder folder) {
         try {
 
@@ -791,7 +805,7 @@ public class FolderUtils {
                 case FILE:
                 default:
                     freeSpaceAndNumberOfFiles = new ImmutablePair<>(FileUtils.getFreeDiskSpace(
-                        new File(ContentStorage.get().getUriForFolder(folder).getPath())), -1L);
+                            new File(ContentStorage.get().getUriForFolder(folder).getPath())), -1L);
                     break;
             }
             return freeSpaceAndNumberOfFiles;
@@ -802,7 +816,9 @@ public class FolderUtils {
     }
 
 
-    /** Returns a pair of longs where left one is free space in bytes and right one is number of files */
+    /**
+     * Returns a pair of longs where left one is free space in bytes and right one is number of files
+     */
     private ImmutablePair<Long, Long> getDeviceInfoForDocument(final Folder folder) throws Exception {
 
         if (CgeoApplication.getInstance() == null) {
@@ -831,7 +847,6 @@ public class FolderUtils {
 
         return new ImmutablePair<>(stats.f_bavail * stats.f_bsize, stats.f_files);
     }
-
 
 
     private boolean treeWalk(final Folder root, final Func1<ImmutablePair<ContentStorage.FileInformation, Boolean>, TreeWalkResult> callback) {

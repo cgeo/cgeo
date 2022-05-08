@@ -6,6 +6,7 @@ import android.widget.ListView;
 
 public abstract class AbstractListActivity extends AbstractBottomNavigationActivity {
     private ListView mListView;
+
     protected ListView getListView() {
         if (mListView == null) {
             mListView = (ListView) findViewById(android.R.id.list);

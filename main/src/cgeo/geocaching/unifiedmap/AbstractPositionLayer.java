@@ -79,6 +79,7 @@ public abstract class AbstractPositionLayer<T> {
     // routes & tracks
     private static final String KEY_INDIVIDUAL_ROUTE = "INDIVIDUALROUTE";
     private final HashMap<String, CachedRoute> cache = new HashMap<>();
+
     private class CachedRoute {
         private boolean isHidden = false;
         private ArrayList<ArrayList<T>> track = null;
@@ -138,6 +139,7 @@ public abstract class AbstractPositionLayer<T> {
     }
 
     public abstract void updateIndividualRoute(Route route);
+
     public abstract void updateTrack(String key, Route track);
 
     public void updateIndividualRoute(final Route route, final Func1<Route, ArrayList<ArrayList<T>>> getAllPoints) {
@@ -209,6 +211,7 @@ public abstract class AbstractPositionLayer<T> {
     }
 
     protected abstract void repaintHistory();
+
     protected abstract void repaintRouteAndTracks();
 
     protected void repaintHistoryHelper(final Action1<List<T>> addSegment) {

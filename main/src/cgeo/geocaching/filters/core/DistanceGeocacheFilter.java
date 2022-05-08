@@ -26,7 +26,9 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
         super(Float::valueOf);
     }
 
-    /** Gets fixed-value coordinate set to this filter, may be null */
+    /**
+     * Gets fixed-value coordinate set to this filter, may be null
+     */
     @Nullable
     public Geopoint getCoordinate() {
         return coordinate;
@@ -46,17 +48,19 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     @Override
     protected Float getValue(final Geocache cache) {
-        final Geopoint gp = (useCurrentPosition || coordinate == null)  ?
-            Sensors.getInstance().currentGeo().getCoords() : coordinate;
+        final Geopoint gp = (useCurrentPosition || coordinate == null) ?
+                Sensors.getInstance().currentGeo().getCoords() : coordinate;
 
         return gp.distanceTo(cache.getCoords());
     }
 
-    /** Returns the coordinate which will effectively be used for calculation (either fixed-value or current position) */
+    /**
+     * Returns the coordinate which will effectively be used for calculation (either fixed-value or current position)
+     */
     @NonNull
     public Geopoint getEffectiveCoordinate() {
-        return (useCurrentPosition || coordinate == null)  ?
-            Sensors.getInstance().currentGeo().getCoords() : coordinate;
+        return (useCurrentPosition || coordinate == null) ?
+                Sensors.getInstance().currentGeo().getCoords() : coordinate;
     }
 
     @Override
@@ -76,10 +80,10 @@ public class DistanceGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     @Override
     public void addToSql(final SqlBuilder sqlBuilder) {
-        final Geopoint gp = (useCurrentPosition || coordinate == null)  ?
-            Sensors.getInstance().currentGeo().getCoords() : coordinate;
+        final Geopoint gp = (useCurrentPosition || coordinate == null) ?
+                Sensors.getInstance().currentGeo().getCoords() : coordinate;
         final String sql = DataStore.getSqlDistanceSquare(
-            sqlBuilder.getMainTableId() + ".latitude", sqlBuilder.getMainTableId() + ".longitude", gp);
+                sqlBuilder.getMainTableId() + ".latitude", sqlBuilder.getMainTableId() + ".longitude", gp);
 
         addRangeToSqlBuilder(sqlBuilder, sql, v -> v * v);
     }

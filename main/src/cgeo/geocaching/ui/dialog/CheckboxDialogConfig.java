@@ -20,7 +20,7 @@ public class CheckboxDialogConfig {
 
         private final Func1<Boolean, Boolean> condition;
 
-        CheckCondition (final Func1<Boolean, Boolean> condition) {
+        CheckCondition(final Func1<Boolean, Boolean> condition) {
             this.condition = condition;
         }
 

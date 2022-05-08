@@ -142,8 +142,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         super.onCreate(savedInstanceState);
 
         final CoordinateInputData cid = savedInstanceState != null && savedInstanceState.containsKey(INPUT_DATA_ARG) ?
-            savedInstanceState.getParcelable(INPUT_DATA_ARG) :
-            (getArguments() == null ? null : getArguments().getParcelable(INPUT_DATA_ARG));
+                savedInstanceState.getParcelable(INPUT_DATA_ARG) :
+                (getArguments() == null ? null : getArguments().getParcelable(INPUT_DATA_ARG));
         inputData = cid == null ? new CoordinateInputData() : cid;
         gp = inputData.getGeopoint();
         if (gp == null && !supportsNullCoordinates()) {
@@ -217,9 +217,9 @@ public class CoordinatesInputDialog extends DialogFragment {
 
         final Spinner spinner = binding.input.spinnerCoordinateFormats;
         final ArrayAdapter<CharSequence> adapter =
-            ArrayAdapter.createFromResource(getActivity(),
-                R.array.waypoint_coordinate_formats,
-                android.R.layout.simple_spinner_item);
+                ArrayAdapter.createFromResource(getActivity(),
+                        R.array.waypoint_coordinate_formats,
+                        android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
         spinner.setSelection(Settings.getCoordInputFormat().ordinal());
@@ -272,7 +272,7 @@ public class CoordinatesInputDialog extends DialogFragment {
                 inputData.setGeopoint(gp);
                 final CalculatedCoordinate cc = new CalculatedCoordinate();
                 cc.setType(
-                    CalculatedCoordinateType.values()[binding.input.spinnerCoordinateFormats.getSelectedItemPosition()]);
+                        CalculatedCoordinateType.values()[binding.input.spinnerCoordinateFormats.getSelectedItemPosition()]);
 
                 //try to set patterns from GUI
                 final Pair<String, String> patternsFromGui = getLatLonPatternFromGui();
@@ -332,18 +332,26 @@ public class CoordinatesInputDialog extends DialogFragment {
 
             tLatSep1.setText(sep1);
             tLonSep1.setText(sep1);
-            eLatMin.setHint(bSecVisible ? R.string.cc_hint_minutes : R.string.cc_hint_fraction); eLatMin.setGravity(bSecVisible ? Gravity.RIGHT : Gravity.NO_GRAVITY);
-            eLonMin.setHint(bSecVisible ? R.string.cc_hint_minutes : R.string.cc_hint_fraction); eLonMin.setGravity(bSecVisible ? Gravity.RIGHT : Gravity.NO_GRAVITY);
+            eLatMin.setHint(bSecVisible ? R.string.cc_hint_minutes : R.string.cc_hint_fraction);
+            eLatMin.setGravity(bSecVisible ? Gravity.RIGHT : Gravity.NO_GRAVITY);
+            eLonMin.setHint(bSecVisible ? R.string.cc_hint_minutes : R.string.cc_hint_fraction);
+            eLonMin.setGravity(bSecVisible ? Gravity.RIGHT : Gravity.NO_GRAVITY);
 
             tLatSep2.setText(sep2);
             tLonSep2.setText(sep2);
-            eLatSec.setVisibility(bSecVisible ? View.VISIBLE : View.GONE); eLatSec.setHint(bFracVisible ? R.string.cc_hint_seconds : R.string.cc_hint_fraction); eLatSec.setGravity(bFracVisible ? Gravity.RIGHT : Gravity.LEFT);
-            eLonSec.setVisibility(bSecVisible ? View.VISIBLE : View.GONE); eLonSec.setHint(bFracVisible ? R.string.cc_hint_seconds : R.string.cc_hint_fraction); eLonSec.setGravity(bFracVisible ? Gravity.RIGHT : Gravity.LEFT);
+            eLatSec.setVisibility(bSecVisible ? View.VISIBLE : View.GONE);
+            eLatSec.setHint(bFracVisible ? R.string.cc_hint_seconds : R.string.cc_hint_fraction);
+            eLatSec.setGravity(bFracVisible ? Gravity.RIGHT : Gravity.LEFT);
+            eLonSec.setVisibility(bSecVisible ? View.VISIBLE : View.GONE);
+            eLonSec.setHint(bFracVisible ? R.string.cc_hint_seconds : R.string.cc_hint_fraction);
+            eLonSec.setGravity(bFracVisible ? Gravity.RIGHT : Gravity.LEFT);
 
             tLatSep3.setText(sep3);
             tLonSep3.setText(sep3);
-            eLatSub.setVisibility(bFracVisible ? View.VISIBLE : View.GONE); eLatSub.setHint(R.string.cc_hint_fraction);
-            eLonSub.setVisibility(bFracVisible ? View.VISIBLE : View.GONE); eLonSub.setHint(R.string.cc_hint_fraction);
+            eLatSub.setVisibility(bFracVisible ? View.VISIBLE : View.GONE);
+            eLatSub.setHint(R.string.cc_hint_fraction);
+            eLonSub.setVisibility(bFracVisible ? View.VISIBLE : View.GONE);
+            eLonSub.setHint(R.string.cc_hint_fraction);
         }
     }
 
@@ -405,7 +413,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
 
         binding.calculateGlobal.setTypeface(null, inputData != null && inputData.getCalculatedCoordinate() != null && inputData.getCalculatedCoordinate().isFilled() ?
-            Typeface.ITALIC : Typeface.NORMAL);
+                Typeface.ITALIC : Typeface.NORMAL);
     }
 
     private Pair<String, String> getLatLonPatternFromGui() {
@@ -446,7 +454,6 @@ public class CoordinatesInputDialog extends DialogFragment {
     private static String addZeros(final int value, final int len) {
         return StringUtils.leftPad(Integer.toString(value), len, '0');
     }
-
 
 
     private static class ButtonClickListener implements View.OnClickListener {
@@ -684,7 +691,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
-    private void saveAndFinishDialog () {
+    private void saveAndFinishDialog() {
         if (!areCurrentCoordinatesValid(true)) {
             return;
         }
@@ -707,6 +714,7 @@ public class CoordinatesInputDialog extends DialogFragment {
 
     public interface CoordinateUpdate {
         void updateCoordinates(Geopoint gp);
+
         boolean supportsNullCoordinates();
 
         default void updateCoordinates(CoordinateInputData coordinateInputData) {
@@ -717,6 +725,7 @@ public class CoordinatesInputDialog extends DialogFragment {
     // Interface used by the coordinate calculator dialog too preserve its state in the waypoint itself.
     public interface CalculateState {
         void saveCalculatorState(CalcState calc);
+
         CalcState fetchCalculatorState();
     }
 

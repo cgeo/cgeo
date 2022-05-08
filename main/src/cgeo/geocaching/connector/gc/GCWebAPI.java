@@ -69,7 +69,9 @@ class GCWebAPI {
     private static final Pattern PATTERN_REQUEST_VERIFICATION_TOKEN = Pattern.compile("name=\"__RequestVerificationToken\"\\s+type=\"hidden\"\\s+value=\"([^\"]+)\"");
 
 
-    /** maximum number of elements to retrieve with one call */
+    /**
+     * maximum number of elements to retrieve with one call
+     */
     private static final int MAX_TAKE = 50;
 
     private static Authorization cachedAuthorization;
@@ -79,7 +81,9 @@ class GCWebAPI {
         // Utility class, do not instantiate
     }
 
-    /** This class encapsulates, explains and mimics the search against gc.com WebApi at https://www.geocaching.com/api/proxy/web/search/v2 */
+    /**
+     * This class encapsulates, explains and mimics the search against gc.com WebApi at https://www.geocaching.com/api/proxy/web/search/v2
+     */
     public static class WebApiSearch {
 
         public enum SortType { DISTANCE, FAVORITEPOINT, DIFFICULTY, TERRAIN }
@@ -143,22 +147,27 @@ class GCWebAPI {
             return this.sortAsc;
         }
 
-        /** filters for given cache types. Works for V1 */
+        /**
+         * filters for given cache types. Works for V1
+         */
         public WebApiSearch addCacheTypes(final Collection<CacheType> ct) {
             cacheTypes.addAll(CollectionStream.of(ct).filter(type -> type != CacheType.ALL).toList());
             return this;
         }
 
-        /** filters for given cache sizes. Works for V1 */
+        /**
+         * filters for given cache sizes. Works for V1
+         */
         public WebApiSearch addCacheSizes(final Collection<CacheSize> cs) {
             cacheSizes.addAll(cs);
             return this;
         }
 
-        /** filters for given cache attriutes. Only positive attributes can be filtered, no exclude possible
-         *  TODO does not work with V1, only works with V2!
-         * */
-        public WebApiSearch addCacheAttributes(final CacheAttribute ... ca) {
+        /**
+         * filters for given cache attriutes. Only positive attributes can be filtered, no exclude possible
+         * TODO does not work with V1, only works with V2!
+         */
+        public WebApiSearch addCacheAttributes(final CacheAttribute... ca) {
             cacheAttributes.addAll(Arrays.asList(ca));
             return this;
         }
@@ -171,7 +180,7 @@ class GCWebAPI {
          * set to true to show ONLY own caches, false to HIDE own caches, null if both should be shown.
          * Works only for Premium members!
          * Works with V1
-         * */
+         */
         public WebApiSearch setStatusOwn(final Boolean statusOwn) {
             this.statusOwn = statusOwn;
             return this;
@@ -187,43 +196,57 @@ class GCWebAPI {
             return this;
         }
 
-        /** set to true to show ONLY basic caches, false show ONLY premium caches, null if both should be shown.  */
+        /**
+         * set to true to show ONLY basic caches, false show ONLY premium caches, null if both should be shown.
+         */
         public WebApiSearch setStatusMembership(final Boolean statusMembership) {
             this.statusMembership = statusMembership;
             return this;
         }
 
-        /** set to true to show ONLY enabled caches, false show ONLY disabled caches, null if both should be shown. */
+        /**
+         * set to true to show ONLY enabled caches, false show ONLY disabled caches, null if both should be shown.
+         */
         public WebApiSearch setStatusEnabled(final Boolean statusEnabled) {
             this.statusEnabled = statusEnabled;
             return this;
         }
 
-        /** set to true to show ONLY caches with original coordinates, false show ONLY caches with corrected coordinates, null if both should be shown. */
+        /**
+         * set to true to show ONLY caches with original coordinates, false show ONLY caches with corrected coordinates, null if both should be shown.
+         */
         public WebApiSearch setStatusCorrectedCoordinates(final Boolean statusCorrectedCoordinates) {
             this.statusCorrectedCoordinates = statusCorrectedCoordinates;
             return this;
         }
 
-        /** Works only if 'hiddenBy' is the exact owner name, also case muist match! Withs with V1 */
+        /**
+         * Works only if 'hiddenBy' is the exact owner name, also case muist match! Withs with V1
+         */
         public WebApiSearch setHiddenBy(final String hiddenBy) {
             this.hiddenBy = hiddenBy;
             return this;
         }
 
-        /** Works only if 'notFoundBy' is the exact name of a geocache user. case does not need to match though. Works with V1 */
+        /**
+         * Works only if 'notFoundBy' is the exact name of a geocache user. case does not need to match though. Works with V1
+         */
         public WebApiSearch setNotFoundBy(final String notFoundBy) {
             this.notFoundBy = notFoundBy;
             return this;
         }
 
-        /** set to a value > 0 to trigger search. Works with V1 */
+        /**
+         * set to a value > 0 to trigger search. Works with V1
+         */
         public WebApiSearch setMinFavoritepoints(final int minFavoritePoints) {
             this.minFavoritePoints = minFavoritePoints;
             return this;
         }
 
-        /** Searches on DAY level only. from or to may be null, then "before"/"After" search logic is used. Works for V1 */
+        /**
+         * Searches on DAY level only. from or to may be null, then "before"/"After" search logic is used. Works for V1
+         */
         public WebApiSearch setPlacementDate(final Date from, final Date to) {
             // after: pad
             // between: psd - ped
@@ -243,7 +266,7 @@ class GCWebAPI {
                 // -> after "from", set "placedFrom" to one day BEFORE
                 placedFrom = PARAM_DATE_FORMATTER.format(new Date(from.getTime() - ONE_DAY_MILLISECONDS));
                 placedTo = null;
-            } else  {
+            } else {
                 final boolean fromBeforeTo = from.before(to);
                 placedFrom = PARAM_DATE_FORMATTER.format(fromBeforeTo ? from : to);
                 placedTo = PARAM_DATE_FORMATTER.format(fromBeforeTo ? to : from);
@@ -262,13 +285,17 @@ class GCWebAPI {
             return this;
         }
 
-        /** Sets the area to search in. Woirks with V1 */
+        /**
+         * Sets the area to search in. Woirks with V1
+         */
         public WebApiSearch setBox(final Viewport box) {
             this.box = box;
             return this;
         }
 
-        /** Sets the starting point of the search and the reference point for sort by distance. Does not restrict/filter the result. Works with V1 */
+        /**
+         * Sets the starting point of the search and the reference point for sort by distance. Does not restrict/filter the result. Works with V1
+         */
         public WebApiSearch setOrigin(final Geopoint origin) {
             this.origin = origin;
             return this;
@@ -278,19 +305,25 @@ class GCWebAPI {
             return this.origin;
         }
 
-        /** Works with V1 */
+        /**
+         * Works with V1
+         */
         public WebApiSearch setDifficulty(final Float pFrom, final Float pTo) {
             this.difficulty = getRangeString(pFrom, pTo);
             return this;
         }
 
-        /** Works with V1 */
+        /**
+         * Works with V1
+         */
         public WebApiSearch setTerrain(final Float pFrom, final Float pTo) {
             this.terrain = getRangeString(pFrom, pTo);
             return this;
         }
 
-        /** Returns a string specifying a range from 1-5 (in 0.5-steps) as used for parameters difficulty and terrain */
+        /**
+         * Returns a string specifying a range from 1-5 (in 0.5-steps) as used for parameters difficulty and terrain
+         */
         private String getRangeString(final Float pFrom, final Float pTo) {
             if (pFrom == null && pTo == null) {
                 return null;
@@ -318,7 +351,7 @@ class GCWebAPI {
                     return new MapSearchResultSet();
                 }
                 params.put("box", String.valueOf(this.box.getLatitudeMax()) + ',' + this.box.getLongitudeMin() +
-                    ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
+                        ',' + this.box.getLatitudeMin() + ',' + this.box.getLongitudeMax());
 
                 //set origin to middle of viewport (will be overridden if origin is set explicitely later)
                 params.put("origin", String.valueOf(this.box.getCenter().getLatitude()) + ',' + this.box.getCenter().getLongitude());
@@ -334,7 +367,7 @@ class GCWebAPI {
 
             if (!this.cacheSizes.isEmpty()) {
                 params.put("cs", CollectionStream.of(this.cacheSizes).filter(cs -> CacheSize.getGcIdsForSize(cs).length > 0)
-                    .map(cs -> CollectionStream.of(ArrayUtils.toObject(CacheSize.getGcIdsForSize(cs))).toJoinedString(",")).toJoinedString(","));
+                        .map(cs -> CollectionStream.of(ArrayUtils.toObject(CacheSize.getGcIdsForSize(cs))).toJoinedString(",")).toJoinedString(","));
             }
 
             if (!this.cacheAttributes.isEmpty()) {
@@ -433,14 +466,10 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class TrackableLog {
-        @JsonProperty("logType")
-        final TrackableLogType logType;
-        @JsonProperty("date")
-        final String date;
-        @JsonProperty("geocache")
-        final Geocache geocache;
-        @JsonProperty("referenceCode")
-        final String referenceCode;
+        @JsonProperty("logType") final TrackableLogType logType;
+        @JsonProperty("date") final String date;
+        @JsonProperty("geocache") final Geocache geocache;
+        @JsonProperty("referenceCode") final String referenceCode;
 
         TrackableLog(final String logTypeId, final String date, final String geocode, final String referenceCode) {
             this.logType = new TrackableLogType(logTypeId);
@@ -451,8 +480,7 @@ class GCWebAPI {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class TrackableLogType {
-            @JsonProperty("id")
-            final String id;
+            @JsonProperty("id") final String id;
 
             TrackableLogType(final String id) {
                 this.id = id;
@@ -461,8 +489,7 @@ class GCWebAPI {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class Geocache {
-            @JsonProperty("gcCode")
-            final String geocode;
+            @JsonProperty("gcCode") final String geocode;
 
             Geocache(final String geocode) {
                 this.geocode = geocode;
@@ -678,7 +705,7 @@ class GCWebAPI {
      * {"guid":"14242d4d-...","url":"https://img.geocaching.com/14242d4d-...jpg","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","success":true}
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class PostLogImageResponse extends HttpResponse  {
+    static final class PostLogImageResponse extends HttpResponse {
         @JsonProperty("guid")
         String guid;
         @JsonProperty("url")
@@ -710,18 +737,12 @@ class GCWebAPI {
 
     @JsonIgnoreProperties(ignoreUnknown = true)
     public static final class GeocacheLog {
-        @JsonProperty("geocache")
-        final Geocache geocache;
-        @JsonProperty("logType")
-        final String logType;
-        @JsonProperty("ownerIsViewing")
-        final boolean ownerIsViewing;
-        @JsonProperty("logDate")
-        final String logDate;
-        @JsonProperty("logText")
-        final String logText;
-        @JsonProperty("usedFavoritePoint")
-        final boolean usedFavoritePoint;
+        @JsonProperty("geocache") final Geocache geocache;
+        @JsonProperty("logType") final String logType;
+        @JsonProperty("ownerIsViewing") final boolean ownerIsViewing;
+        @JsonProperty("logDate") final String logDate;
+        @JsonProperty("logText") final String logText;
+        @JsonProperty("usedFavoritePoint") final boolean usedFavoritePoint;
 
         GeocacheLog(final String id, final String referenceCode, final double latitude,
                     final double longitude, final boolean favorited, final String logType,
@@ -737,14 +758,10 @@ class GCWebAPI {
 
         @JsonIgnoreProperties(ignoreUnknown = true)
         static final class Geocache {
-            @JsonProperty("id")
-            final String id;
-            @JsonProperty("referenceCode")
-            final String referenceCode;
-            @JsonProperty("postedCoordinates")
-            final PostedCoordinates postedCoordinates;
-            @JsonProperty("callerSpecific")
-            final CallerSpecific callerSpecific;
+            @JsonProperty("id") final String id;
+            @JsonProperty("referenceCode") final String referenceCode;
+            @JsonProperty("postedCoordinates") final PostedCoordinates postedCoordinates;
+            @JsonProperty("callerSpecific") final CallerSpecific callerSpecific;
 
             Geocache(final String id, final String referenceCode, final double latitude,
                      final double longitude, final boolean favorited) {
@@ -865,7 +882,9 @@ class GCWebAPI {
         return result;
     }
 
-    /** For BASIC members, PREMIUM caches don't contain coordinates. This helper methods guesses distances for those caches */
+    /**
+     * For BASIC members, PREMIUM caches don't contain coordinates. This helper methods guesses distances for those caches
+     */
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity"})
     private static void tryGuessMissingDistances(final List<Geocache> caches, final WebApiSearch search) {
@@ -1131,10 +1150,10 @@ class GCWebAPI {
         attachImageRequest.description = StringUtils.defaultString(image.getDescription());
 
         final HttpResponse attachResponse = apiReq()
-            .uri("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid)
-            .body(attachImageRequest)
-            .headers("X-Verification-Token", requestVerificationToken)
-            .request().blockingGet();
+                .uri("/web/v1/geocaches/logs/" + logId + "/images/" + postImageResponse.guid)
+                .body(attachImageRequest)
+                .headers("X-Verification-Token", requestVerificationToken)
+                .request().blockingGet();
         if (!attachResponse.isSuccessful()) {
             return new ImmutablePair<>(StatusCode.LOGIMAGE_POST_ERROR, null);
         }

@@ -89,8 +89,8 @@ public class FavoritesFilterViewHolder extends BaseFilterViewHolder<FavoritesGeo
         filter.setPercentage(percentage.getCheckedButtonIndex() == 1);
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(
-            range.left < 0 ? null : Math.round(range.left * granularity) / granularity,
-            range.right > maxValue ? null : Math.round(range.right * granularity) / granularity);
+                range.left < 0 ? null : Math.round(range.left * granularity) / granularity,
+                range.right > maxValue ? null : Math.round(range.right * granularity) / granularity);
         return filter;
     }
 

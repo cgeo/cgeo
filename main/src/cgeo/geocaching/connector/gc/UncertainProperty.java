@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 
 /**
  * Property with certainty. When merging properties, the one with higher certainty wins.
- *
  */
 public class UncertainProperty<T> {
 

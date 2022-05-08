@@ -175,7 +175,7 @@ public final class GpxSerializer {
     private void writeGsakExtensions(@NonNull final Geocache cache) throws IOException {
         gpx.startTag(NS_GSAK, "wptExtension");
         XmlUtils.multipleTexts(gpx, NS_GSAK, "Watch", gpxBoolean(cache.isOnWatchlist()), "IsPremium", gpxBoolean(cache.isPremiumMembersOnly()), "FavPoints", Integer.toString(cache.getFavoritePoints()),
-            "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
+                "GcNote", StringUtils.trimToEmpty(cache.getPersonalNote()));
 
         if (Settings.getIncludeFoundStatus()) {
             final long visited = cache.getVisitedDate();
@@ -302,7 +302,7 @@ public final class GpxSerializer {
 
         final String waypointTypeGpx = wp.getWaypointType().gpx;
         // combine note and user note with SEPARATOR "\n--\n"
-        final WaypointUserNoteCombiner wpCombiner = new  WaypointUserNoteCombiner(wp);
+        final WaypointUserNoteCombiner wpCombiner = new WaypointUserNoteCombiner(wp);
         final String waypointNote = wpCombiner.getCombinedNoteAndUserNote();
         XmlUtils.multipleTexts(gpx, NS_GPX, "name", wp.getGpxId(), "cmt", waypointNote, "desc", wp.getName(), "sym", waypointTypeGpx, "type", "Waypoint|" + waypointTypeGpx);
 
@@ -335,7 +335,7 @@ public final class GpxSerializer {
                 logId = Integer.toString(log.id);
             }
 
-           gpx.attribute("", "id", logId);
+            gpx.attribute("", "id", logId);
 
             XmlUtils.multipleTexts(gpx, NS_GROUNDSPEAK, "date", dateFormatZ.format(new Date(log.date)), "type", log.logType.type);
 

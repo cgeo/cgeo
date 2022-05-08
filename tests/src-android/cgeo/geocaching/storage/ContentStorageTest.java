@@ -134,7 +134,7 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(ContentStorage.get().delete(uri2)).isTrue();
     }
 
-    public void testFileStrangeNames()  {
+    public void testFileStrangeNames() {
         final Folder folder = createTestFolder(Folder.FolderType.FILE, "strangeNames");
         ContentStorage.get().ensureFolder(folder, true);
 
@@ -242,7 +242,7 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(folderProcessStatuses.get(abortAfter).dirsProcessed).isEqualTo(result.dirsModified);
 
         assertFileDirCount(targetFolder2, result.filesModified, result.dirsModified);
-     }
+    }
 
     public void testFileCopyAllSameDir() {
         performCopyAllSameDir(Folder.FolderType.FILE);
@@ -283,15 +283,15 @@ public class ContentStorageTest extends CGeoTestCase {
         FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
         assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
-            "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
-                "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
-                    "[ \"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
+                "[\"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
                         "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
-                            "[\"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\" ] }, " +
+                        "[ \"aaa.txt\", \"bbb.txt\", {\"name\": \"ccc\", \"files\": " +
+                        "[ \"ccc-aaa.txt\", { \"name\": \"ccc-bbb\", \"files\": [] }, { \"name\": \"ccc-ccc\", \"files\": " +
+                        "[\"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\" ] }, " +
                         "\"ccc-ddd.txt\" ] " +
-                    "}, \"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\", \"ddd.txt\" ] " +
-                "}, \"ccc-ddd.txt\" ] " +
-            "}, \"ddd.txt\"]");
+                        "}, \"ccc-ccc-aaa.txt\", \"ccc-ccc-bbb.txt\", \"ddd.txt\" ] " +
+                        "}, \"ccc-ddd.txt\" ] " +
+                        "}, \"ddd.txt\"]");
 
         //move
         FolderUtils.get().deleteAll(sourceFolder);
@@ -300,8 +300,8 @@ public class ContentStorageTest extends CGeoTestCase {
         assertCopyResult(result, FolderUtils.ProcessResult.OK, 7, 3);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false), COMPLEX_FOLDER_STRUCTURE);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(sourceFolder, false, false),
-            "[{\"name\": \"ccc\", \"files\": [ { \"name\": \"ccc-ccc\", \"files\": " +
-                COMPLEX_FOLDER_STRUCTURE + "} ] } ]");
+                "[{\"name\": \"ccc\", \"files\": [ { \"name\": \"ccc-ccc\", \"files\": " +
+                        COMPLEX_FOLDER_STRUCTURE + "} ] } ]");
     }
 
     public void testFileCopyAllSourceInTarget() {
@@ -322,8 +322,8 @@ public class ContentStorageTest extends CGeoTestCase {
         FolderUtils.FolderProcessResult result = FolderUtils.get().copyAll(sourceFolder, targetFolder, false);
         assertCopyResult(result, FolderUtils.ProcessResult.OK, 4, 2);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
-            "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
-            );
+                "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
+        );
 
         //move
         FolderUtils.get().deleteAll(targetFolder);
@@ -331,9 +331,9 @@ public class ContentStorageTest extends CGeoTestCase {
         result = FolderUtils.get().copyAll(sourceFolder, targetFolder, true);
         assertCopyResult(result, FolderUtils.ProcessResult.OK, 4, 2);
         assertEqualsWithoutWhitespaces(FolderUtils.get().folderContentToString(targetFolder, false, false),
-            "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[" +
-                //"\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"" +
-                "]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
+                "[\"aaa.txt\",\"bbb.txt\",{\"name\":\"ccc\",\"files\":[" +
+                        //"\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\"" +
+                        "]},\"ccc-aaa.txt\",{\"name\":\"ccc-bbb\",\"files\":[]},{\"name\":\"ccc-ccc\",\"files\":[\"ccc-ccc-aaa.txt\",\"ccc-ccc-bbb.txt\"]},\"ccc-ddd.txt\",\"ddd.txt\"]"
         );
     }
 
@@ -453,7 +453,7 @@ public class ContentStorageTest extends CGeoTestCase {
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetFiles = FolderUtils.get().getAllFiles(targetFolder);
         Collections.sort(targetFiles, (e1, e2) -> e1.right.compareTo(e2.right));
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetFilesWithoutSyncFiles = CollectionStream.of(targetFiles)
-            .filter(e -> !e.right.endsWith("/" + folderSyncInfoFilename)).toList();
+                .filter(e -> !e.right.endsWith("/" + folderSyncInfoFilename)).toList();
 
         assertThat(targetFilesWithoutSyncFiles).hasSize(sourceFiles.size());
         for (int i = 0; i < sourceFiles.size(); i++) {
@@ -470,19 +470,19 @@ public class ContentStorageTest extends CGeoTestCase {
 
         //check if written synchronization info files contain expected content
         final List<ImmutablePair<ContentStorage.FileInformation, String>> targetSyncFiles = CollectionStream.of(targetFiles)
-            .filter(e -> e.right.endsWith("/" + folderSyncInfoFilename)).toList();
+                .filter(e -> e.right.endsWith("/" + folderSyncInfoFilename)).toList();
         assertThat(targetSyncFiles).hasSize(3); //root dir, "ccc" dir and "/ccc/ccc-ccc". (/ccc/ccc-bbb is empty and has no sync info file)
 
         assertPropertyContent(targetSyncFiles.get(0), folderSyncInfoFilename, "/",
-            "aaa.txt", getFileSyncToken(sourceFiles.get(0).left),
+                "aaa.txt", getFileSyncToken(sourceFiles.get(0).left),
                 "bbb.txt", getFileSyncToken(sourceFiles.get(1).left),
                 "ddd.txt", getFileSyncToken(sourceFiles.get(9).left));
         assertPropertyContent(targetSyncFiles.get(1), folderSyncInfoFilename, "/ccc/",
-            "ccc-aaa.txt", getFileSyncToken(sourceFiles.get(3).left),
-            "ccc-ddd.txt", getFileSyncToken(sourceFiles.get(8).left));
+                "ccc-aaa.txt", getFileSyncToken(sourceFiles.get(3).left),
+                "ccc-ddd.txt", getFileSyncToken(sourceFiles.get(8).left));
         assertPropertyContent(targetSyncFiles.get(2), folderSyncInfoFilename, "/ccc/ccc-ccc/",
-            "ccc-ccc-aaa.txt", getFileSyncToken(sourceFiles.get(6).left),
-            "ccc-ccc-bbb.txt", getFileSyncToken(sourceFiles.get(7).left));
+                "ccc-ccc-aaa.txt", getFileSyncToken(sourceFiles.get(6).left),
+                "ccc-ccc-bbb.txt", getFileSyncToken(sourceFiles.get(7).left));
 
     }
 
@@ -490,7 +490,7 @@ public class ContentStorageTest extends CGeoTestCase {
         return fi.lastModified + "-" + fi.size;
     }
 
-    private void assertPropertyContent(final ImmutablePair<ContentStorage.FileInformation, String> propFile, final String name, final String path, final String ... entries) {
+    private void assertPropertyContent(final ImmutablePair<ContentStorage.FileInformation, String> propFile, final String name, final String path, final String... entries) {
         assertThat(propFile.left.name).isEqualTo(name);
         assertThat(propFile.right).isEqualTo(path + name);
 
@@ -506,7 +506,6 @@ public class ContentStorageTest extends CGeoTestCase {
         }
 
     }
-
 
 
     private void assertEqualsWithoutWhitespaces(final String value, final String expected) {
@@ -715,8 +714,8 @@ public class ContentStorageTest extends CGeoTestCase {
         final Folder testFolder = createTestFolder(type, "mimeType");
 
         performMimeTypeTests(testFolder,
-            new String[]{"txt", "jpg", "jpeg", "map", "hprof", "gpx", null},
-            new String[]{"text/plain", "image/jpeg", "image/jpeg", "application/octet-stream", "application/octet-stream", "application/octet-stream", "application/octet-stream" });
+                new String[]{"txt", "jpg", "jpeg", "map", "hprof", "gpx", null},
+                new String[]{"text/plain", "image/jpeg", "image/jpeg", "application/octet-stream", "application/octet-stream", "application/octet-stream", "application/octet-stream"});
     }
 
     private void performMimeTypeTests(final Folder testLocation, final String[] suffix, final String[] expectedMimeType) {
@@ -752,7 +751,7 @@ public class ContentStorageTest extends CGeoTestCase {
             final JsonNode n = it.next();
             if (n.isObject()) {
                 //this is a subfolder
-               final String folderName = n.get("name").asText();
+                final String folderName = n.get("name").asText();
                 final Folder newFolder = Folder.fromFolder(folder, folderName);
                 ContentStorage.get().ensureFolder(newFolder, true);
                 createTree(newFolder, n.get("files"), content);
@@ -775,7 +774,7 @@ public class ContentStorageTest extends CGeoTestCase {
     }
 
 
-    private String readFromUri(final Uri uri)  {
+    private String readFromUri(final Uri uri) {
         try {
             return IOUtils.readLines(ContentStorage.get().openForRead(uri), "UTF-8").get(0);
         } catch (IOException ioe) {
@@ -797,7 +796,7 @@ public class ContentStorageTest extends CGeoTestCase {
 
     private boolean hasValidDocumentTestFolder() {
         return PersistableFolder.TEST_FOLDER.isUserDefined() &&
-            ContentStorage.get().ensureFolder(PersistableFolder.TEST_FOLDER.getFolder(), PersistableFolder.TEST_FOLDER.needsWrite(), true);
+                ContentStorage.get().ensureFolder(PersistableFolder.TEST_FOLDER.getFolder(), PersistableFolder.TEST_FOLDER.needsWrite(), true);
     }
 
     private Folder createTestFolder(final Folder.FolderType type, final String context) {
@@ -813,7 +812,7 @@ public class ContentStorageTest extends CGeoTestCase {
                         throw new IllegalArgumentException("Document Folder not accessible, test fails: " + PersistableFolder.TEST_FOLDER.getFolder());
                     }
                     Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
-                    testFolder =  Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
+                    testFolder = Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
                 } else {
                     testFolder = Folder.fromFolder(getBaseTestFolder(Folder.FolderType.DOCUMENT), context);
                 }
@@ -842,11 +841,11 @@ public class ContentStorageTest extends CGeoTestCase {
         }
     }
 
-     private void cleanup() {
+    private void cleanup() {
         if (KEEP_RESULTS) {
             return;
         }
-         FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.FILE));
+        FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.FILE));
         if (hasValidDocumentTestFolder()) {
             FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.DOCUMENT));
         }

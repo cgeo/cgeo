@@ -62,9 +62,13 @@ import org.jsoup.nodes.Document;
 
 public final class Network {
 
-    /** User agent id */
+    /**
+     * User agent id
+     */
     private static final String PC_USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64; rv:9.0.1) Gecko/20100101 Firefox/9.0.1";
-    /** Native user agent, taken from a Android 2.2 Nexus **/
+    /**
+     * Native user agent, taken from a Android 2.2 Nexus
+     **/
     private static final String NATIVE_USER_AGENT = "Mozilla/5.0 (Linux; U; Android 2.2; en-us; Nexus One Build/FRF91) AppleWebKit/533.1 (KHTML, like Gecko) Version/4.0 Mobile Safari/533.1";
 
     private static final Pattern PATTERN_PASSWORD = Pattern.compile("(?<=[\\?&])[Pp]ass(w(or)?d)?=[^&#$]+");
@@ -142,7 +146,7 @@ public final class Network {
     /**
      * PATCH HTTP request
      *
-     * @param uri the URI to request
+     * @param uri     the URI to request
      * @param headers the headers to add to the request
      * @return a Single with the HTTP response, or an IOException
      */
@@ -154,7 +158,7 @@ public final class Network {
     /**
      * POST HTTP request
      *
-     * @param uri the URI to request
+     * @param uri    the URI to request
      * @param params the parameters to add to the POST request
      * @return a Single with the HTTP response, or an IOException
      */
@@ -166,8 +170,8 @@ public final class Network {
     /**
      * POST HTTP request
      *
-     * @param uri the URI to request
-     * @param params the parameters to add to the POST request
+     * @param uri     the URI to request
+     * @param params  the parameters to add to the POST request
      * @param headers the headers to add to the request
      * @return a single with the HTTP response, or an IOException
      */
@@ -179,11 +183,11 @@ public final class Network {
     /**
      * POST HTTP request and deserialize JSON answer
      *
-     * @param uri the URI to request
-     * @param clazz the class to deserialize the JSON result to
-     * @param params the parameters to add to the GET request
+     * @param uri     the URI to request
+     * @param clazz   the class to deserialize the JSON result to
+     * @param params  the parameters to add to the GET request
      * @param headers the headers to add to the GET request
-     * @param <T> the type to deserialize to
+     * @param <T>     the type to deserialize to
      * @return a single with the deserialized value, or an IO exception
      */
     public static <T> Single<T> postRequest(final String uri, final Class<T> clazz, final Parameters params, final Parameters headers) {
@@ -193,14 +197,14 @@ public final class Network {
     /**
      * POST HTTP request and deserialize JSON answer
      *
-     * @param uri the URI to request
-     * @param clazz the class to deserialize the JSON result to
-     * @param params the parameters to add to the GET request
-     * @param headers the headers to add to the GET request
-     * @param fileFieldName the name of the file field name
+     * @param uri             the URI to request
+     * @param clazz           the class to deserialize the JSON result to
+     * @param params          the parameters to add to the GET request
+     * @param headers         the headers to add to the GET request
+     * @param fileFieldName   the name of the file field name
      * @param fileContentType the content-type of the file
-     * @param file the file to include in the request
-     * @param <T> the type to deserialize to
+     * @param file            the file to include in the request
+     * @param <T>             the type to deserialize to
      * @return a single with the deserialized value, or an IO exception
      */
     public static <T> Single<T> postRequest(final String uri, final Class<T> clazz, final Parameters params, final Parameters headers,
@@ -210,10 +214,10 @@ public final class Network {
 
 
     /**
-     *  POST HTTP request with Json POST DATA
+     * POST HTTP request with Json POST DATA
      *
-     * @param uri the URI to request
-     * @param headers http headers
+     * @param uri        the URI to request
+     * @param headers    http headers
      * @param jsonObject the object to be serialized as json and added to the POST request
      * @return a single with the HTTP response, or an IOException
      */
@@ -235,9 +239,9 @@ public final class Network {
     }
 
     /**
-     *  DELETE HTTP request with Json POST DATA
+     * DELETE HTTP request with Json POST DATA
      *
-     * @param uri the URI to request
+     * @param uri  the URI to request
      * @param json the json object to add to the POST request
      * @return a single with the HTTP response, or an IOException
      */
@@ -249,9 +253,9 @@ public final class Network {
     }
 
     /**
-     *  POST HTTP request with Json POST DATA
+     * POST HTTP request with Json POST DATA
      *
-     * @param uri the URI to request
+     * @param uri  the URI to request
      * @param json the json object to add to the POST request
      * @return a single with the HTTP response, or an IOException
      */
@@ -263,9 +267,9 @@ public final class Network {
     }
 
     /**
-     *  PUT HTTP request with Json POST DATA
+     * PUT HTTP request with Json POST DATA
      *
-     * @param uri the URI to request
+     * @param uri  the URI to request
      * @param json the json object to add to the POST request
      * @return a single with the HTTP response, or an IOException
      */
@@ -279,12 +283,12 @@ public final class Network {
     /**
      * Multipart POST HTTP request
      *
-     * @param uri the URI to request
-     * @param params the parameters to add to the POST request
-     * @param headers the headers to add to the POST request
-     * @param fileFieldName the name of the file field name
+     * @param uri             the URI to request
+     * @param params          the parameters to add to the POST request
+     * @param headers         the headers to add to the POST request
+     * @param fileFieldName   the name of the file field name
      * @param fileContentType the content-type of the file
-     * @param file the file to include in the request
+     * @param file            the file to include in the request
      * @return a single with the HTTP response, or an IOException
      */
     @NonNull
@@ -304,16 +308,11 @@ public final class Network {
     /**
      * Make an HTTP request
      *
-     * @param method
-     *            the HTTP method to use ("GET" or "POST")
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add to the URI
-     * @param headers
-     *            the headers to add to the request
-     * @param cacheFile
-     *            the cache file used to cache this query
+     * @param method    the HTTP method to use ("GET" or "POST")
+     * @param uri       the URI to request
+     * @param params    the parameters to add to the URI
+     * @param headers   the headers to add to the request
+     * @param cacheFile the cache file used to cache this query
      * @return a single with the HTTP response, or an IOException
      */
     @NonNull
@@ -353,12 +352,10 @@ public final class Network {
 
     /**
      * Add headers to HTTP request.
-     * @param request
-     *            the request builder to add headers to
-     * @param headers
-     *            the headers to add (in addition to the standard headers), can be null
-     * @param cacheFile
-     *            if non-null, the file to take ETag and If-Modified-Since information from
+     *
+     * @param request   the request builder to add headers to
+     * @param headers   the headers to add (in addition to the standard headers), can be null
+     * @param cacheFile if non-null, the file to take ETag and If-Modified-Since information from
      */
     private static void addHeaders(final Builder request, @Nullable final Parameters headers, @Nullable final File cacheFile) {
         for (final ImmutablePair<String, String> header : Parameters.extend(Parameters.merge(headers, cacheHeaders(cacheFile)))) {
@@ -442,11 +439,11 @@ public final class Network {
     /**
      * Get HTTP request and deserialize JSON answer
      *
-     * @param uri the URI to request
-     * @param clazz the class to deserialize the JSON result to
-     * @param params the parameters to add to the GET request
+     * @param uri     the URI to request
+     * @param clazz   the class to deserialize the JSON result to
+     * @param params  the parameters to add to the GET request
      * @param headers the headers to add to the GET request
-     * @param <T> the type to deserialize to
+     * @param <T>     the type to deserialize to
      * @return a single with the deserialized value, or an IO exception
      */
     @NonNull
@@ -457,12 +454,9 @@ public final class Network {
     /**
      * GET HTTP request
      *
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add to the GET request
-     * @param cacheFile
-     *            the name of the file storing the cached resource, or null not to use one
+     * @param uri       the URI to request
+     * @param params    the parameters to add to the GET request
+     * @param cacheFile the name of the file storing the cached resource, or null not to use one
      * @return a single with the HTTP response, or an IOException
      */
     @NonNull
@@ -474,10 +468,8 @@ public final class Network {
     /**
      * GET HTTP request
      *
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add to the GET request
+     * @param uri    the URI to request
+     * @param params the parameters to add to the GET request
      * @return a single with the HTTP response, or an IOException
      */
     public static Single<Response> getRequest(final String uri, @Nullable final Parameters params) {
@@ -487,12 +479,9 @@ public final class Network {
     /**
      * GET HTTP request
      *
-     * @param uri
-     *            the URI to request
-     * @param params
-     *            the parameters to add to the GET request
-     * @param headers
-     *            the headers to add to the GET request
+     * @param uri     the URI to request
+     * @param params  the parameters to add to the GET request
+     * @param headers the headers to add to the GET request
      * @return a single with the HTTP response, or an IOException
      */
     @NonNull
@@ -503,8 +492,7 @@ public final class Network {
     /**
      * GET HTTP request
      *
-     * @param uri
-     *            the URI to request
+     * @param uri the URI to request
      * @return a single with the HTTP response, or an IOException
      */
     public static Single<Response> getRequest(final String uri) {
@@ -514,7 +502,7 @@ public final class Network {
     /**
      * Get the result of a GET HTTP request returning a JSON body.
      *
-     * @param uri the base URI of the GET HTTP request
+     * @param uri    the base URI of the GET HTTP request
      * @param params the query parameters, or {@code null} if there are none
      * @return a Single with a JSON object if the request was successful and the body could be decoded, an error otherwise
      */
@@ -569,7 +557,7 @@ public final class Network {
     /**
      * Get the body of a HTTP response.
      *
-     * @param response a HTTP response
+     * @param response          a HTTP response
      * @param replaceWhitespace {@code true} if {@link TextUtils#replaceWhitespace(String)}
      *                          should be called on the body
      * @return the body if the response comes from a successful HTTP request, {@code null} otherwise
@@ -599,7 +587,7 @@ public final class Network {
      *
      * @param response a HTTP response
      * @return a Single containing a document corresponding to the body if the response comes from a
-     *   successful HTTP request with Content-Type "text/html", or containing an IOException otherwise.
+     * successful HTTP request with Content-Type "text/html", or containing an IOException otherwise.
      */
     public static Single<Document> getResponseDocument(final Single<Response> response) {
         return response.flatMap((Function<Response, Single<Document>>) resp -> {
@@ -628,7 +616,7 @@ public final class Network {
     /**
      * Get the body of a HTTP response.
      *
-     * @param response a HTTP response
+     * @param response          a HTTP response
      * @param replaceWhitespace {@code true} if {@link TextUtils#replaceWhitespace(String)}
      *                          should be called on the body
      * @return the body if the response comes from a successful HTTP request, {@code null} otherwise

@@ -33,7 +33,6 @@ class LocusApp extends AbstractLocusApp implements CacheNavigationApp, WaypointN
     /**
      * Show a single cache with waypoints or a single waypoint in Locus.
      * This method constructs a list of cache and waypoints only.
-     *
      */
     @Override
     public void navigate(@NonNull final Context context, @NonNull final Waypoint waypoint) {

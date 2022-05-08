@@ -159,8 +159,7 @@ public class CacheLogsViewCreator extends LogsViewCreator {
     }
 
 
-
-        @Override
+    @Override
     protected void fillCountOrLocation(final LogViewHolder holder, final LogEntry log) {
         // finds count
         if (log.found == -1) {

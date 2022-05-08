@@ -77,10 +77,8 @@ public abstract class AbstractLocusApp extends AbstractApp {
     /**
      * Display a list of caches / waypoints in Locus
      *
-     * @param objectsToShow
-     *            which caches/waypoints to show
-     * @param withCacheWaypoints
-     *            Whether to give waypoints of caches to Locus or not
+     * @param objectsToShow      which caches/waypoints to show
+     * @param withCacheWaypoints Whether to give waypoints of caches to Locus or not
      */
     protected void showInLocus(final List<?> objectsToShow, final boolean withCacheWaypoints, final boolean export,
                                final Context context) {
@@ -146,11 +144,9 @@ public abstract class AbstractLocusApp extends AbstractApp {
     /**
      * This method constructs a {@code Point} for displaying in Locus
      *
-     * @param withWaypoints
-     *            whether to give waypoints to Locus or not
-     * @param withCacheDetails
-     *            whether to give cache details (description, hint) to Locus or not
-     *            should be false for all if more than 200 Caches are transferred
+     * @param withWaypoints    whether to give waypoints to Locus or not
+     * @param withCacheDetails whether to give cache details (description, hint) to Locus or not
+     *                         should be false for all if more than 200 Caches are transferred
      * @return null, when the {@code Point} could not be constructed
      */
     @Nullable
@@ -391,7 +387,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
     static ArrayList<GeocachingAttribute> toLocusAttributes(final List<String> attributes) {
         final ArrayList<GeocachingAttribute> loAttributes = new ArrayList<>();
 
-        for (String attribute:attributes) {
+        for (String attribute : attributes) {
             String rawAttribute = CacheAttribute.trimAttributeName(attribute);
             if (rawAttribute.equals("")) {
                 continue;

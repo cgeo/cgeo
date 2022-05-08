@@ -7,7 +7,7 @@ public class EnvironmentUtils {
     private static final boolean DEFAULT_TRANSPARENT_BACKGROUND;
 
     static {
-        DEFAULT_TRANSPARENT_BACKGROUND = ! isSailfishOs();
+        DEFAULT_TRANSPARENT_BACKGROUND = !isSailfishOs();
     }
 
     private EnvironmentUtils() {

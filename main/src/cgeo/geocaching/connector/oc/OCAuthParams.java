@@ -44,7 +44,7 @@ public class OCAuthParams extends OAuthParameters {
     public final int tempTokenSecretPrefKey;
 
     public OCAuthParams(@NonNull final String host, @StringRes final int consumerKeyResId, @StringRes final int consumerSecretResId, @NonNull final String callback, final boolean https,
-            @StringRes final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokenPublicPrefKey, final int tempTokenSecretPrefKey) {
+                        @StringRes final int authTitleResId, final int tokenPublicPrefKey, final int tokenSecretPrefKey, final int tempTokenPublicPrefKey, final int tempTokenSecretPrefKey) {
         super(host, "/okapi/services/oauth/request_token",
                 "/okapi/services/oauth/authorize",
                 "/okapi/services/oauth/access_token",

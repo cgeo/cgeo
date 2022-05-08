@@ -11,7 +11,6 @@ import java.lang.reflect.Field;
 
 /**
  * Modified progress dialog class which allows hiding the absolute numbers.
- *
  */
 public class CustomProgressDialog extends ProgressDialog {
 

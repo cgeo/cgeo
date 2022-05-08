@@ -57,7 +57,7 @@ public abstract class BaseFilterViewHolder<T extends IGeocacheFilter> implements
     }
 
     protected View inflateLayout(@LayoutRes final int layoutId) {
-       return LayoutInflater.from(ViewUtils.wrap(getActivity())).inflate(layoutId, getRoot(), false);
+        return LayoutInflater.from(ViewUtils.wrap(getActivity())).inflate(layoutId, getRoot(), false);
     }
 
     @Override

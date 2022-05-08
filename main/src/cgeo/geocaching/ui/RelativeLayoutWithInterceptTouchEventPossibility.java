@@ -41,7 +41,6 @@ public class RelativeLayoutWithInterceptTouchEventPossibility extends RelativeLa
          * Called when the view group is touched.
          *
          * @param ev The motion event
-         *
          * @return true if the touch event should be intercepted, otherwise false.
          */
         boolean onTouchEvent(MotionEvent ev);

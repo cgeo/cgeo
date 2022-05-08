@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Locale;
 
-/** Base class for all content accessors */
+/**
+ * Base class for all content accessors
+ */
 abstract class AbstractContentAccessor {
 
     private final Context context;
@@ -29,10 +31,14 @@ abstract class AbstractContentAccessor {
 
     public abstract List<ContentStorage.FileInformation> list(@NonNull Folder folder) throws IOException;
 
-    /** If a file with given name exists in folder, it is returned. Otherwise null is returned */
+    /**
+     * If a file with given name exists in folder, it is returned. Otherwise null is returned
+     */
     public abstract ContentStorage.FileInformation getFileInfo(@NonNull Folder folder, String name) throws IOException;
 
-    /** creates physical folder on device if it is not already there anyway */
+    /**
+     * creates physical folder on device if it is not already there anyway
+     */
     public abstract boolean ensureFolder(@NonNull Folder folder, boolean needsWrite) throws IOException;
 
     public abstract Uri getUriForFolder(@NonNull Folder folder) throws IOException;

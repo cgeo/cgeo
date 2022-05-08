@@ -55,7 +55,7 @@ public class OsmNogoPolygon extends OsmNodeNamed {
     /**
      * inSegment(): determine if a point is inside a segment
      *
-     * @param p      a point
+     * @param p     a point
      * @param segP0 starting point of segment
      * @param segP1 ending point of segment
      * @return 1 = P is inside S
@@ -409,21 +409,21 @@ public class OsmNogoPolygon extends OsmNodeNamed {
                 final long dEdge = (long) edgePoint1.x * (long) edgePoint2.y - (long) edgePoint2.x * (long) edgePoint1.y;
                 // Coordinates of the intersection
                 final Point intersection = new Point(
-                    (int) ((dSegment * xdiffEdge - dEdge * xdiffSegment) / div),
-                    (int) ((dSegment * ydiffEdge - dEdge * ydiffSegment) / div)
+                        (int) ((dSegment * xdiffEdge - dEdge * xdiffSegment) / div),
+                        (int) ((dSegment * ydiffEdge - dEdge * ydiffSegment) / div)
                 );
                 if (
-                    previousIntersectionOnSegment != null
-                        && isWithin(
-                        (intersection.x + previousIntersectionOnSegment.x) >> 1,
-                        (intersection.y + previousIntersectionOnSegment.y) >> 1
-                    )
+                        previousIntersectionOnSegment != null
+                                && isWithin(
+                                (intersection.x + previousIntersectionOnSegment.x) >> 1,
+                                (intersection.y + previousIntersectionOnSegment.y) >> 1
+                        )
                 ) {
                     // There was a previous match within the polygon and this part of the
                     // segment is within the polygon.
                     distance += CheapRulerHelper.distance(
-                        previousIntersectionOnSegment.x, previousIntersectionOnSegment.y,
-                        intersection.x, intersection.y
+                            previousIntersectionOnSegment.x, previousIntersectionOnSegment.y,
+                            intersection.x, intersection.y
                     );
                 }
                 previousIntersectionOnSegment = intersection;
@@ -431,14 +431,14 @@ public class OsmNogoPolygon extends OsmNodeNamed {
                 // Segment and edge overlaps
                 // FIXME: Could probably be done in a smarter way
                 distance += Math.min(
-                    CheapRulerHelper.distance(p1.x, p1.y, p2.x, p2.y),
-                    Math.min(
-                        CheapRulerHelper.distance(edgePoint1.x, edgePoint1.y, edgePoint2.x, edgePoint2.y),
+                        CheapRulerHelper.distance(p1.x, p1.y, p2.x, p2.y),
                         Math.min(
-                            CheapRulerHelper.distance(p1.x, p1.y, edgePoint2.x, edgePoint2.y),
-                            CheapRulerHelper.distance(edgePoint1.x, edgePoint1.y, p2.x, p2.y)
+                                CheapRulerHelper.distance(edgePoint1.x, edgePoint1.y, edgePoint2.x, edgePoint2.y),
+                                Math.min(
+                                        CheapRulerHelper.distance(p1.x, p1.y, edgePoint2.x, edgePoint2.y),
+                                        CheapRulerHelper.distance(edgePoint1.x, edgePoint1.y, p2.x, p2.y)
+                                )
                         )
-                    )
                 );
                 // FIXME: We could store intersection.
                 previousIntersectionOnSegment = null;
@@ -446,13 +446,13 @@ public class OsmNogoPolygon extends OsmNodeNamed {
         }
 
         if (
-            previousIntersectionOnSegment != null
-                && isWithin(lon2, lat2)
+                previousIntersectionOnSegment != null
+                        && isWithin(lon2, lat2)
         ) {
             // Last point is within the polygon, add the remaining missing distance.
             distance += CheapRulerHelper.distance(
-                previousIntersectionOnSegment.x, previousIntersectionOnSegment.y,
-                lon2, lat2
+                    previousIntersectionOnSegment.x, previousIntersectionOnSegment.y,
+                    lon2, lat2
             );
         }
         return distance;

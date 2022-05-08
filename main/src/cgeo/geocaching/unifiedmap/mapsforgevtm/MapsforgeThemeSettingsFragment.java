@@ -64,11 +64,11 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
 
         //scale preferences for theme
         addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.MAP),
-            R.string.maptheme_scale_map_title, R.string.maptheme_scale_map_summary);
+                R.string.maptheme_scale_map_title, R.string.maptheme_scale_map_summary);
         addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.TEXT),
-            R.string.maptheme_scale_text_title, R.string.maptheme_scale_text_summary);
+                R.string.maptheme_scale_text_title, R.string.maptheme_scale_text_summary);
         addScalePreference(activity, renderthemeMenu, Settings.getMapRenderScalePreferenceKey(themeStylePrefKey, Settings.RenderThemeScaleType.SYMBOL),
-            R.string.maptheme_scale_symbol_title, R.string.maptheme_scale_symbol_summary);
+                R.string.maptheme_scale_symbol_title, R.string.maptheme_scale_symbol_summary);
     }
 
     private String createThemePreferences(final Activity activity) {
@@ -169,7 +169,7 @@ public class MapsforgeThemeSettingsFragment extends PreferenceFragmentCompat {
         cat.addPreference(info);
 
         final SeekbarPreference seek = new SeekbarPreference(context, 10, 500, "", "%",
-            new SeekbarPreference.FactorizeValueMapper(10));
+                new SeekbarPreference.FactorizeValueMapper(10));
         seek.setDefaultValue(100);
         seek.setKey(prefKey);
         cat.addPreference(seek);

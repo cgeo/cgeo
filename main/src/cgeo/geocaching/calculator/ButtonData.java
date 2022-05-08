@@ -12,7 +12,9 @@ import org.json.JSONObject;
  */
 public final class ButtonData implements JSONAble, Serializable {
 
-    /** The three states the button can be put into */
+    /**
+     * The three states the button can be put into
+     */
     public enum ValueType {
         INPUT_VAL {
             @Override
@@ -72,28 +74,38 @@ public final class ButtonData implements JSONAble, Serializable {
         };
 
         public abstract char getLabel(ButtonData buttonData);
+
         public abstract char setAutoChar(ButtonData buttonData, char nextChar);
     }
 
     private static final long serialVersionUID = -9043775643928797403L;
 
-    /** Character used to 'hide' button **/
+    /**
+     * Character used to 'hide' button
+     **/
     public static final char BLANK = ' ';
 
     public ValueType type = ValueType.INPUT_VAL;
-    /** Value obtained from CoordinateInputDialog */
+    /**
+     * Value obtained from CoordinateInputDialog
+     */
     public char inputVal;
-    /** Character obtained by automatically 'counting up' variable names */
+    /**
+     * Character obtained by automatically 'counting up' variable names
+     */
     public char autoChar = CoordinatesCalculateUtils.EMPTY_CHAR;
-    /** User defined character */
+    /**
+     * User defined character
+     */
     public char customChar;
 
-    public ButtonData() { }
+    public ButtonData() {
+    }
 
     protected ButtonData(final JSONObject json) {
         type = ValueType.values()[json.optInt("type", 0)];
-        inputVal   = (char) json.optInt("inputVal",   ERROR_CHAR);
-        autoChar   = (char) json.optInt("autoChar",   ERROR_CHAR);
+        inputVal = (char) json.optInt("inputVal", ERROR_CHAR);
+        autoChar = (char) json.optInt("autoChar", ERROR_CHAR);
         customChar = (char) json.optInt("customChar", ERROR_CHAR);
     }
 

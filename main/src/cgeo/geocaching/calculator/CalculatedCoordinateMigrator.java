@@ -78,7 +78,9 @@ public class CalculatedCoordinateMigrator {
 
         private String migrationNotes;
 
-        /** used for test cases */
+        /**
+         * used for test cases
+         */
         public static WaypointMigrationData create(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Map<String, String> vars) {
             final WaypointMigrationData ccm = new WaypointMigrationData();
             ccm.type = type;
@@ -320,7 +322,7 @@ public class CalculatedCoordinateMigrator {
         final String dismissButtonName = "**" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss) + "**";
 
         return LocalizationUtils.getString(R.string.calccoord_migrate_infotext_markdown, migNotes, newCoordinate, newVariables.toString(),
-            migrateButtonName, dismissButtonName, cancelButtonName);
+                migrateButtonName, dismissButtonName, cancelButtonName);
     }
 
     @NonNull
@@ -348,34 +350,34 @@ public class CalculatedCoordinateMigrator {
         }
         final CalculatedCoordinateMigrator mig = new CalculatedCoordinateMigrator(cache, w);
         SimpleDialog.ofContext(ctx).setTitle(TextParam.id(R.string.calccoord_migrate_title))
-            .setMessage(TextParam.text(mig.getMigrationInformationMarkup()).setMarkdown(true))
-            .setPositiveButton(TextParam.id(R.string.calccoord_migrate_migrate))
-            .setNegativeButton(TextParam.id(R.string.calccoord_migrate_cancel))
-            .setNeutralButton(TextParam.id(R.string.calccoord_migrate_dismiss))
-            .show((v, i) -> {
-                w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate_usernote_praefix) +
-                    ":" + mig.getMigrationData().getMigrationNotes());
-                for (Map.Entry<String, String> newVar : mig.getNewCacheVariables().entrySet()) {
-                    cache.getVariables().addVariable(newVar.getKey(), newVar.getValue());
-                }
-                cache.getVariables().saveState();
-                final CalculatedCoordinate cc = new CalculatedCoordinate();
-                cc.setType(mig.getMigrationData().getType());
-                cc.setLatitudePattern(mig.getMigrationData().getLatPattern());
-                cc.setLongitudePattern(mig.getMigrationData().getLonPattern());
-                w.setCalcStateConfig(cc.toConfig());
-                cache.addOrChangeWaypoint(w, true);
-                actionAfterMigration.run();
-            }, (v, i) -> {
-                actionAfterMigration.run();
-            }, (v, i) -> {
-                //dismiss calculated coordinate data
-                w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
-                    ":" + mig.getMigrationData().getMigrationNotes());
-                w.setCalcStateConfig(null);
-                cache.addOrChangeWaypoint(w, true);
-                actionAfterMigration.run();
-            });
+                .setMessage(TextParam.text(mig.getMigrationInformationMarkup()).setMarkdown(true))
+                .setPositiveButton(TextParam.id(R.string.calccoord_migrate_migrate))
+                .setNegativeButton(TextParam.id(R.string.calccoord_migrate_cancel))
+                .setNeutralButton(TextParam.id(R.string.calccoord_migrate_dismiss))
+                .show((v, i) -> {
+                    w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_migrate_usernote_praefix) +
+                            ":" + mig.getMigrationData().getMigrationNotes());
+                    for (Map.Entry<String, String> newVar : mig.getNewCacheVariables().entrySet()) {
+                        cache.getVariables().addVariable(newVar.getKey(), newVar.getValue());
+                    }
+                    cache.getVariables().saveState();
+                    final CalculatedCoordinate cc = new CalculatedCoordinate();
+                    cc.setType(mig.getMigrationData().getType());
+                    cc.setLatitudePattern(mig.getMigrationData().getLatPattern());
+                    cc.setLongitudePattern(mig.getMigrationData().getLonPattern());
+                    w.setCalcStateConfig(cc.toConfig());
+                    cache.addOrChangeWaypoint(w, true);
+                    actionAfterMigration.run();
+                }, (v, i) -> {
+                    actionAfterMigration.run();
+                }, (v, i) -> {
+                    //dismiss calculated coordinate data
+                    w.setUserNote(w.getUserNote() + "\n" + LocalizationUtils.getString(R.string.calccoord_migrate_dismiss_usernote_praefix) +
+                            ":" + mig.getMigrationData().getMigrationNotes());
+                    w.setCalcStateConfig(null);
+                    cache.addOrChangeWaypoint(w, true);
+                    actionAfterMigration.run();
+                });
     }
 
     private static String createNewUniqueVar(final String oldVar, final Set<String> existingVars) {
