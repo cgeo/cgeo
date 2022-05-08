@@ -780,7 +780,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (tiešsaistes)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (bezsaistes)</string>
     <string name="cache_menu_vote">Balsot</string>
-    <string name="cache_menu_checker">Atvērt Geochecker</string>
     <string name="cache_menu_challenge_checker">Meklēt izaicinājuma (challenge cache) pārbaudītāju</string>
     <string name="cache_menu_ignore">Ignorēt slēpni</string>
     <string name="ignore_confirm_title">Esi uzmanīgs</string>

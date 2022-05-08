@@ -1243,7 +1243,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (en ligne)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (hors ligne)</string>
     <string name="cache_menu_vote">Voter</string>
-    <string name="cache_menu_checker">Ouvrir le geovérificateur</string>
     <string name="cache_menu_challenge_checker">Chercher le vérificateur de défis</string>
     <string name="cache_menu_ignore">Ignorer la cache</string>
     <string name="cache_log_menu_decrypt">Déchiffrer/Chiffrer</string>

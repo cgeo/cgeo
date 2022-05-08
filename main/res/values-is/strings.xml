@@ -446,7 +446,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (með neti)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (án nets)</string>
     <string name="cache_menu_vote">Kjósa</string>
-    <string name="cache_menu_checker">Opna Geochecker</string>
     <string name="cache_menu_ignore">Hunsa kassa</string>
     <string name="ignore_confirm_title">Varaðu þig</string>
     <string name="cache_status_offline_log">Vistuð skráning</string>

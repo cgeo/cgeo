@@ -1061,7 +1061,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Bedøm</string>
-    <string name="cache_menu_checker">Åben Geochecker</string>
     <string name="cache_menu_challenge_checker">Søg efter cacher med geo-checker</string>
     <string name="cache_menu_ignore">Ignorér cache</string>
     <string name="cache_log_menu_decrypt">Dekryptér/kryptér</string>

@@ -1119,7 +1119,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (be interneto)</string>
     <string name="cache_menu_vote">Balsuoti</string>
-    <string name="cache_menu_checker">Atidaryti Geochecker</string>
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
     <string name="cache_log_menu_decrypt">Iššifruoti/Užšifruoti</string>
@@ -1396,7 +1395,7 @@
     <string name="helper_gps_locker_description">GPS užraktas palaiko GPS signalą, kai perjungiama iš vienos programos į kitą ir kai įrenginio ekranas išjungtas.</string>
     <string name="helper_google_translate_title">\"Google\" vertėjas</string>
     <string name="helper_google_translate_description">Atsisiuntę vertimo paketą Google Translate programai galėsite lengvai išversti slėptuvės aprašymus ilgai paspaudę ant slėptuvės aprašymo teksto (tam nereikės interneto ryšio).</string>
-    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsisiųsti kasetes.</string>
+    <string name="helper_where_you_go_description">WhereYouGo leidžia žaisti ir ieškoti Wherigo tipo slėptuves. c:geo gali automatiškai per šią programą atsiųsti kasetes.</string>
     <string name="helper_chirpwolf_description">Chirp Wolf leidžia jums nuskaityti duomenis iš ANT+/Garmin Chirp žymelių, reikalingų ANT+/Chirp slėptuvėms.</string>
     <!-- export -->
     <string name="share_export">Dalintis/Eksportuoti</string>

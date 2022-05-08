@@ -1247,8 +1247,8 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Stem</string>
-    <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Zoek challenge checker</string>
+    <string name="cache_menu_log_in_browser">Log bezoek in browser</string>
     <string name="cache_menu_ignore">Negeer cache</string>
     <string name="cache_log_menu_decrypt">Decoderen/Versleutelen</string>
     <string name="cache_log_menu_popup_title">Log van %s</string>
@@ -2026,6 +2026,7 @@
         <item quantity="other">%d waypoints geëxtraheerd</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com coördinaat checker beschikbaar via browser</string>
+    <string name="geochecker_available">Geochecker beschikbaar via browser</string>
     <!-- calendar adder -->
     <string name="event_fail">Niet gelukt om event cache toe te voegen aan kalender</string>
     <string name="init_low_disk_space">Weinig schijfruimte</string>
@@ -2188,6 +2189,12 @@
     <string name="mapserver_hylly_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Hylly\" kaarten</string>
     <string name="brouter_info">Offline routering service</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
+    <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
+    <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
+    <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
+    <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
+    <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>

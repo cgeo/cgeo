@@ -1241,7 +1241,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Σε σύνδεση)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (χωρίς σύνδεση)</string>
     <string name="cache_menu_vote">Ψηφίστε</string>
-    <string name="cache_menu_checker">Άνοιγμα Geochecker</string>
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_log_in_browser">Συνδεθείτε στο πρόγραμμα περιήγησης</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
@@ -2176,6 +2175,12 @@
     <string name="mapserver_hylly_themes_info">Λεπτομερές θέμα χάρτη, χτισμένο για χάρτες \"Hylly\"</string>
     <string name="brouter_info">Offline υπηρεσία δρομολόγησης</string>
     <string name="maptheme_elevate_categoryinfo">Σχετικό για: [A] Περιοχή, [P] POI, [R] Διαδρομές, [W] Τρόποι</string>
+    <string name="maptheme_scale_map_title">Συντελεστής Κλίμακας Χάρτη</string>
+    <string name="maptheme_scale_map_summary">Χάρτης κλιμάκων; 100% = καμία κλιμάκωση</string>
+    <string name="maptheme_scale_text_title">Συντελεστής Κλίμακας Κειμένου</string>
+    <string name="maptheme_scale_text_summary">Επιπλέον κλιμακώνει ετικέτες κειμένου στο χάρτη; 100% = χωρίς κλιμάκωση</string>
+    <string name="maptheme_scale_symbol_title">Συντελεστής κλίμακας συμβόλων</string>
+    <string name="maptheme_scale_symbol_summary">Επιπλέον κλιμακώνει ετικέτες κειμένου στο χάρτη; 100% = χωρίς κλιμάκωση</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Εκκαθάριση ιστορικού διαδρομών</string>
     <string name="map_trailhistory_cleared">Το ιστορικό διαγράφηκε</string>

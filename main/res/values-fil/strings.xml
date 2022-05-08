@@ -629,7 +629,6 @@
     <string name="cache_menu_oruxmaps_online">Ang (Online) OruxMaps</string>
     <string name="cache_menu_oruxmaps_offline">Ang (Offline) OruxMaps</string>
     <string name="cache_menu_vote">Ang Boto</string>
-    <string name="cache_menu_checker">Ang Geochecker ay bukas</string>
     <string name="cache_menu_challenge_checker">Paghahanap ng hamon checker</string>
     <string name="cache_menu_ignore">Ang cache ay huwag pansinin</string>
     <string name="ignore_confirm_title">Maging maingat ka</string>

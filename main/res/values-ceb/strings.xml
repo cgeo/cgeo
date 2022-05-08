@@ -593,7 +593,6 @@
     <string name="cache_menu_move_list">Balhin sa laing listahan</string>
     <string name="cache_menu_copy_list">Ikopya sa laing listahan</string>
     <string name="cache_menu_vote">Boto</string>
-    <string name="cache_menu_checker">Ablihi ang Geochecker</string>
     <string name="cache_menu_challenge_checker">Pagpangita sa hagit sa checker</string>
     <string name="cache_menu_ignore">Ibalewala ang cache</string>
     <string name="ignore_confirm_title">Pag amping</string>

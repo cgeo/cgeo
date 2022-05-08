@@ -617,7 +617,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (اونلاين)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (في وضع عدم الاتصال)</string>
     <string name="cache_menu_vote">قم بالتصويت</string>
-    <string name="cache_menu_checker">افتح Geochecker</string>
     <string name="cache_menu_challenge_checker">البحث عن مدقق المخبآت</string>
     <string name="cache_menu_ignore">تجاهل المخبئ</string>
     <string name="ignore_confirm_title">انتبه</string>

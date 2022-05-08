@@ -827,7 +827,6 @@
     <string name="cache_menu_move_list">Mozgatás másik listára</string>
     <string name="cache_menu_copy_list">Másolás másik listára</string>
     <string name="cache_menu_vote">Értékelés</string>
-    <string name="cache_menu_checker">Geochecker megnyitása</string>
     <string name="cache_menu_challenge_checker">Kihívásellenőrző keresése</string>
     <string name="cache_menu_ignore">Láda mellőzése</string>
     <string name="ignore_confirm_title">Légy óvatos</string>

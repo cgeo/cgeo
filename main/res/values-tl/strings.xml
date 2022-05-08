@@ -625,7 +625,6 @@
     <string name="cache_menu_move_list">Ilipat sa ibang listahan</string>
     <string name="cache_menu_copy_list">Kopyahin sa magkakaibang listahan</string>
     <string name="cache_menu_vote">Bumoto</string>
-    <string name="cache_menu_checker">Buksan ang Geochecker</string>
     <string name="cache_menu_challenge_checker">Ang pagsearch ay challenge sa taga-tsek</string>
     <string name="cache_menu_ignore">Huwag pansinin ang cache</string>
     <string name="ignore_confirm_title">Mag-ingat</string>

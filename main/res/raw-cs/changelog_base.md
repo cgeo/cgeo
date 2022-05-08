@@ -7,24 +7,28 @@
 - Novinka: Šablony pro offline logy
 - Novinka: Přidáno \[umístění\] do nabídky šablony protokolu
 - Novinka: Povolen výběr textů protokolu
-- Fix: GC checker link leading to loop in certain conditions on Android 12
-- New: Added geochecker button at end of description text (when appropriate)
-- New: Added 'log in browser' option to cache menu
+- Oprava: Odkaz na GC checker vedoucí v určitých podmínkách k zacyklení v systému Android 12
+- Novinka: Přidáno tlačítko geochecker na konec textu popisu (pokud je to vhodné)
+- Novinka: Do nabídky kešky byla přidána možnost "zalogovat se v prohlížeči"
 
 ### Seznam kešek
 
-- New: Added option for "has user defined waypoints" to advanced status filter
-- Fix: Resort cache list on every location change on distance sort order
+- Novinka: Do filtru pokročilých stavů byla přidána možnost "má uživatelem definované trasové body"
+- New: Allow inclusion of caches without D/T in filter
+- Oprava: Uspořádat seznam kešek při každé změně polohy podle pořadí vzdálenosti
 
 ### Mapa
 
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- New: Map theming for Google Maps
+- New: Map scaling options for OpenStreetMap (see theme options)
+- Změna: Nastavení => Mapa => Dlouhé klepnutí na mapu nyní povolí/zakáže dlouhé klepnutí i v mapě kešky (důležité pro vytváření nových trasových bodů pro aktuální kešku)
+- Změna: Nezobrazovat kruh vzdálenosti u archivovaných kešek
+- Oprava: Pád map OpenStreetMap za určitých podmínek
+- Fix: Routing becoming unresponsive when many routing tiles are installed
 
 ### Obecné
 
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Updated internal routing to BRouter v1.6.3
+- Novinka: Automaticky provádět zálohy (volitelné)
+- Oprava: Pokračovat v importu dokončených stahování
+- Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
+- Novinka: Aktualizováno interní směrování BRouter na verzi v1.6.3

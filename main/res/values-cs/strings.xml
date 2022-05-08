@@ -795,6 +795,8 @@
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
+    <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
+    <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motiv</string>
     <string-array name="settings_theme_entries">
@@ -1275,8 +1277,8 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
     <string name="cache_menu_vote">Hlasovat</string>
-    <string name="cache_menu_checker">Otevřít Geocheck</string>
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
+    <string name="cache_menu_log_in_browser">Zalogovat v prohlížeči</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
     <string name="cache_log_menu_decrypt">Dešifrovat/Zašifrovat</string>
     <string name="cache_log_menu_popup_title">Log z %s</string>
@@ -2080,6 +2082,7 @@
         <item quantity="other">%d trasových bodů extrahováno</item>
     </plurals>
     <string name="link_gc_checker">geocaching.com ověřovač souřadnic dostupný přes prohlížeč</string>
+    <string name="geochecker_available">Geochecker k dispozici prostřednictvím prohlížeče</string>
     <!-- calendar adder -->
     <string name="event_fail">Přidat událost do kalendáře se nepodařilo</string>
     <string name="init_low_disk_space">V úložišti dochází volné místo</string>
@@ -2244,6 +2247,12 @@
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
+    <string name="maptheme_scale_map_title">Měřítko mapy</string>
+    <string name="maptheme_scale_map_summary">Měřítko mapy; 100 % = bez měřítka</string>
+    <string name="maptheme_scale_text_title">Měřítko textu</string>
+    <string name="maptheme_scale_text_summary">Dodatečně škáluje textové popisky v mapě; 100% = žádné další škálování</string>
+    <string name="maptheme_scale_symbol_title">Měřítko symbolu</string>
+    <string name="maptheme_scale_symbol_summary">Dodatečně škáluje velikosti symbolů v mapě; 100% = žádné další škálování</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
