@@ -44,7 +44,7 @@
         app:iconSpaceReserved="false" />
     <MultiSelectListPreference
         android:key="@string/pref_quicklaunchitems"
-        android:title="Quick launch buttons"
-        android:summary="Select one or more items as quick launch buttons on home screen"
+        android:title="@string/init_quicklaunchitems"
+        android:summary="@string/init_summary_quicklaunchitems"
         app:iconSpaceReserved="false" />
 </PreferenceScreen>
