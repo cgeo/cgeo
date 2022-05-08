@@ -592,7 +592,6 @@
     <string name="cache_menu_share">Deli povezavo</string>
     <string name="cache_menu_move_list">Premakni v drug seznam</string>
     <string name="cache_menu_copy_list">Kopiraj v drugi seznam</string>
-    <string name="cache_menu_checker">Odpri Geochecker</string>
     <string name="cache_menu_challenge_checker">Poišči Challenge-Checker</string>
     <string name="cache_menu_ignore">Prezri zaklad</string>
     <string name="ignore_confirm_title">Previdno</string>
