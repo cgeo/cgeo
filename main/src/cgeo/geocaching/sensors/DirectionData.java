@@ -13,15 +13,24 @@ public class DirectionData {
 
     public static final DirectionData EMPTY = createFor(0.0f);
 
-    /** enums for different device orientations */
+    /**
+     * enums for different device orientations
+     */
     public enum DeviceOrientation {
         UNKNOWN(R.string.do_unknown),
-        /** special value for 'auto selection' mode. */
+        /**
+         * special value for 'auto selection' mode.
+         */
         AUTO(R.string.do_auto),
-        /** device is "lying" near-flat somewhere (portrait or landscape). */
+        /**
+         * device is "lying" near-flat somewhere (portrait or landscape).
+         */
         FLAT(R.string.do_flat),
-        /** device is standing "upright" (portrait or landscape). */
-        UPRIGHT(R.string.do_upright),;
+        /**
+         * device is standing "upright" (portrait or landscape).
+         */
+        UPRIGHT(R.string.do_upright),
+        ;
 
         public final int resId;
 
@@ -78,7 +87,9 @@ public class DirectionData {
         return direction;
     }
 
-    /** Returns device orientation, calculated from raw orientation values (pitch and roll) */
+    /**
+     * Returns device orientation, calculated from raw orientation values (pitch and roll)
+     */
     public DeviceOrientation getDeviceOrientation() {
         return deviceOrientation;
     }

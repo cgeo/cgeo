@@ -29,7 +29,8 @@ public class IntegerRange {
         return parsed == null ? null : new IntegerRange(ArrayUtils.toPrimitive(parsed.toArray(new Integer[0])));
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
+    // method readability will not improve by splitting it up
     private static List<Integer> parseConfig(final String pattern, final int maxLength) {
         final List<Integer> result = new ArrayList<>();
         final TextParser tp = new TextParser(pattern);

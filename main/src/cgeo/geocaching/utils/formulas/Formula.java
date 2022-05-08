@@ -52,7 +52,6 @@ import org.apache.commons.lang3.StringUtils;
  * * Ability to use string type was added (in addition to numeric)
  * * concated expressions were added. For example '3(5+1)4' is now interpreted as '364'. Likewise, if A=1, then 'AA5(A+1)3' will  be parsed to '11523'
  * * Localizable, user-displayable error message handling was added.
- *
  */
 public final class Formula {
 
@@ -268,7 +267,9 @@ public final class Formula {
             return childValues;
         }
 
-        /** for test/debug purposes only! */
+        /**
+         * for test/debug purposes only!
+         */
         public String toDebugString(final Func1<String, Value> variables, final int rangeIdx, final boolean includeId, final boolean recursive) {
             final StringBuilder sb = new StringBuilder();
             if (includeId) {
@@ -291,8 +292,8 @@ public final class Formula {
             objs.checkAllDouble();
             return function.call(objs, vars);
         }, (objs, vars, rangeIdx, error) ->
-            TextUtils.join(objs, v -> v.isDouble() || ErrorValue.isError(v) ? v.getAsCharSequence() : TextUtils.setSpan(
-            TextUtils.concat("'", v.getAsCharSequence(), "'"), createErrorSpan()), " " + id + " "));
+                TextUtils.join(objs, v -> v.isDouble() || ErrorValue.isError(v) ? v.getAsCharSequence() : TextUtils.setSpan(
+                        TextUtils.concat("'", v.getAsCharSequence(), "'"), createErrorSpan()), " " + id + " "));
     }
 
     static {
@@ -312,8 +313,8 @@ public final class Formula {
 
     }
 
-    private static void addCharsToSet(final Set<Integer> set, final char ... charsToAdd) {
-        for (char c: charsToAdd) {
+    private static void addCharsToSet(final Set<Integer> set, final char... charsToAdd) {
+        for (char c : charsToAdd) {
             set.add((int) c);
         }
     }
@@ -358,16 +359,16 @@ public final class Formula {
         }
     }
 
-    public static Value evaluateWithRanges(final String expression, final int rangeIdx, final Object ... vars) {
+    public static Value evaluateWithRanges(final String expression, final int rangeIdx, final Object... vars) {
         return compile(expression).evaluate(toVarProvider(vars), rangeIdx);
     }
 
-    public static Value evaluate(final String expression, final Object ... vars) {
+    public static Value evaluate(final String expression, final Object... vars) {
         return compile(expression).evaluate(vars);
     }
 
 
-    public static double eval(final String expression, final Object ... vars) {
+    public static double eval(final String expression, final Object... vars) {
         return evaluate(expression, vars).getAsDouble();
     }
 
@@ -383,11 +384,11 @@ public final class Formula {
         return expression;
     }
 
-    public Value evaluate(final Object ... vars) {
+    public Value evaluate(final Object... vars) {
         return evaluate(toVarProvider(vars));
     }
 
-    public static Func1<String, Value> toVarProvider(final Object ... vars) {
+    public static Func1<String, Value> toVarProvider(final Object... vars) {
         if (vars == null || vars.length == 0) {
             return x -> null;
         }
@@ -443,7 +444,7 @@ public final class Formula {
 
     protected void doCompile(final String rawExpression, final int startPos, final Func1<Character, Boolean> stopChecker) throws FormulaException {
         this.p = new TextParser(rawExpression, stopChecker == null ? null :
-            (c) -> level == 0 && stopChecker.call(c));
+                (c) -> level == 0 && stopChecker.call(c));
 
         this.p.setPos(startPos);
         this.level = 0;
@@ -547,7 +548,7 @@ public final class Formula {
     private FormulaNode parsePlusMinus() {
 
         FormulaNode x = parseMultiplyDivision();
-        for (;;) {
+        for (; ; ) {
             if (p.eat('+')) {
                 x = createNumeric("+", new FormulaNode[]{x, parseMultiplyDivision()}, (nums, vars) -> Value.of(nums.getAsDouble(0) + nums.getAsDouble(1)));
             } else if (p.eat('-') || p.eat('—')) { //those are two different chars
@@ -560,7 +561,7 @@ public final class Formula {
 
     private FormulaNode parseMultiplyDivision() {
         FormulaNode x = parseFactor();
-        for (;;) {
+        for (; ; ) {
             if (p.eat('*') || p.eat('•')) {
                 x = createNumeric("*", new FormulaNode[]{x, parseFactor()}, (nums, vars) -> Value.of(nums.getAsDouble(0) * nums.getAsDouble(1)));
             } else if (p.eat('/') || p.eat(':') || p.eat('÷')) {
@@ -659,7 +660,7 @@ public final class Formula {
         }
         final int divisor = registerRange(range);
         return new FormulaNode(RANGE_NODE_ID, null,
-            (objs, vars, rangeIdx) -> Value.of(range.getValue((rangeIdx % (divisor * range.getSize())) / divisor)), null);
+                (objs, vars, rangeIdx) -> Value.of(range.getValue((rangeIdx % (divisor * range.getSize())) / divisor)), null);
     }
 
     private int registerRange(final IntegerRange range) {
@@ -677,7 +678,7 @@ public final class Formula {
                 p.next();
                 this.level++;
                 nodes.add(new FormulaNode("paren", new FormulaNode[]{parseExpression()}, (o, v, ri) -> o.get(0),
-                    (o, v, ri, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
+                        (o, v, ri, error) -> TextUtils.concat("(", o.get(0).getAsCharSequence(), ")")));
                 this.level--;
                 if (!p.eat(expectedClosingChar)) {
                     final FormulaException fe = new FormulaException(UNEXPECTED_TOKEN, "" + expectedClosingChar);
@@ -721,7 +722,7 @@ public final class Formula {
 
     private static FormulaNode createSingleValueNode(final String nodeId, final Object value) {
         return new FormulaNode(nodeId, null,
-            (objs, vars, ri) -> value instanceof Value ? (Value) value : Value.of(value), null);
+                (objs, vars, ri) -> value instanceof Value ? (Value) value : Value.of(value), null);
     }
 
     private FormulaNode parseExplicitVariable() {
@@ -847,26 +848,28 @@ public final class Formula {
         }
 
         return new FormulaNode("f:" + functionName, params.toArray(new FormulaNode[0]),
-            (n, v, ri) -> {
-                try {
-                    return Objects.requireNonNull(FormulaFunction.findByName(functionName)).execute(n);
-                } catch (FormulaException ce) {
-                    ce.setExpression(expression);
-                    ce.setFunction(functionName);
-                    throw ce;
-                } catch (RuntimeException re) {
-                    final FormulaException ce = new FormulaException(re, OTHER, re.getMessage());
-                    ce.setExpression(expression);
-                    ce.setFunction(functionName);
-                    throw ce;
+                (n, v, ri) -> {
+                    try {
+                        return Objects.requireNonNull(FormulaFunction.findByName(functionName)).execute(n);
+                    } catch (FormulaException ce) {
+                        ce.setExpression(expression);
+                        ce.setFunction(functionName);
+                        throw ce;
+                    } catch (RuntimeException re) {
+                        final FormulaException ce = new FormulaException(re, OTHER, re.getMessage());
+                        ce.setExpression(expression);
+                        ce.setFunction(functionName);
+                        throw ce;
 
-                }
-            },
-            (n, v, ri, error) -> functionName + "(" + StringUtils.join(n, ","));
+                    }
+                },
+                (n, v, ri, error) -> functionName + "(" + StringUtils.join(n, ","));
 
     }
 
-    /** for test/debug purposes only! */
+    /**
+     * for test/debug purposes only!
+     */
     public String toDebugString(final Func1<String, Value> variables, final boolean includeId, final boolean recursive) {
         return compiledExpression.toDebugString(variables == null ? x -> null : variables, 0, includeId, recursive);
     }
@@ -891,7 +894,9 @@ public final class Formula {
         fe.setExpressionFormatted(ef);
     }
 
-    /** concats values Formula-internally. Takes care of the spillover character _ */
+    /**
+     * concats values Formula-internally. Takes care of the spillover character _
+     */
     private static Value concat(final ValueList values) {
         if (values.size() == 0) {
             return Value.of("");

@@ -88,9 +88,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             final ImageviewImageBinding binding = ImageviewImageBinding.inflate(LayoutInflater.from(context));
             final Image currentImg = imageList.get(position);
             binding.imageOpenFile.setOnClickListener(v ->
-                ImageUtils.viewImageInStandardApp(ImageViewActivity.this, currentImg.getUri(), imageContextCode));
+                    ImageUtils.viewImageInStandardApp(ImageViewActivity.this, currentImg.getUri(), imageContextCode));
             binding.imageOpenBrowser.setOnClickListener(v ->
-                ShareUtils.openUrl(ImageViewActivity.this, currentImg.getUrl(), true));
+                    ShareUtils.openUrl(ImageViewActivity.this, currentImg.getUrl(), true));
             binding.imageShare.setOnClickListener(v ->
                     ShareUtils.shareImage(ImageViewActivity.this, currentImg.getUri(), imageContextCode, R.string.about_system_info_send_chooser));
             container.addView(binding.getRoot());
@@ -242,7 +242,8 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     }
 
     @SuppressLint("ClickableViewAccessibility") //this is due to Loupe hack
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    // splitting up that method would not help improve readability
     private void loadImageView(final int imagePos, final ImageviewImageBinding binding) {
         final Image currentImage = imageList.get(imagePos);
         if (currentImage == null) {
@@ -274,11 +275,11 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         binding.imageviewInformation.setText(TextUtils.join(imageInfos, d -> d, "\n"));
         binding.imageviewInformation.setOnClickListener(v -> {
             binding.imageviewInformation.setMaxLines(
-                binding.imageviewInformation.getMaxLines() == 1 ? 1000 : 1);
+                    binding.imageviewInformation.getMaxLines() == 1 ? 1000 : 1);
         });
 
         binding.imageOpenBrowser.setEnabled(
-            !UriUtils.isFileUri(currentImage.getUri()) && !UriUtils.isContentUri(currentImage.getUri()));
+                !UriUtils.isFileUri(currentImage.getUri()) && !UriUtils.isContentUri(currentImage.getUri()));
 
         imageCache.loadImage(currentImage.getUrl(), p -> {
             binding.imageFull.setImageDrawable(p.first);
@@ -380,7 +381,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             final View posImageView = getImageView.call(pos);
             posImageView.setTransitionName(TRANSITION_ID);
             activity.startActivity(intent,
-                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
+                    ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
         }
     }
 

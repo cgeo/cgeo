@@ -63,19 +63,21 @@ import org.apache.commons.lang3.StringUtils;
  * Through out this implementation:
  *
  * 'Equations' are used to represent 'Variables' that appear in the description of the cache coordinated themselves.
- *             As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
- *             All 'equations' must have a CAPITAL-LETTER name.
+ * As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
+ * All 'equations' must have a CAPITAL-LETTER name.
  *
  * 'FreeVariables' are used to represent 'Variables' that appear in the 'expression' of an equation
- *                 As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
- *                 All 'freeVariables' must have a lower-case name.
+ * As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
+ * All 'freeVariables' must have a lower-case name.
  */
 public class CoordinatesCalculateDialog extends DialogFragment implements ClickCompleteCallback, LongClickCompleteCallback {
 
 
     private static final String GEOPOINT_ARG = "gp_arg";
 
-    /** Character used to represent a "blanked-out" CoordinateButton */
+    /**
+     * Character used to represent a "blanked-out" CoordinateButton
+     */
     private static final String PLACE_HOLDER = "~";
     private static final Pattern PRE_DECIMAL_PATTERN = Pattern.compile("(.*)[.,]");
     private static final Pattern DECIMAL_PATTERN = Pattern.compile("[.,](\\d*)");
@@ -94,30 +96,40 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     private int lonLeadingZerosAdded;
     private CalcState savedState;
 
-    /** List of equations to be displayed in the calculator */
+    /**
+     * List of equations to be displayed in the calculator
+     */
     private List<CalculatorVariable> equations;
-    /** List of freeVariables to be displayed in the calculator */
+    /**
+     * List of freeVariables to be displayed in the calculator
+     */
     private List<CalculatorVariable> freeVariables;
-    /** List of previously assigned variables that have since been removed */
+    /**
+     * List of previously assigned variables that have since been removed
+     */
     private List<VariableData> variableBank;
 
     private Spinner spinner;
 
     private String inputLatHem;
-    /** Latitude hemisphere (North or South) */
+    /**
+     * Latitude hemisphere (North or South)
+     */
     private Button bLatHem;
     private final CalculateButton[] bLatDeg = new CalculateButton[2],
-                                    bLatMin = new CalculateButton[2],
-                                    bLatSec = new CalculateButton[2],
-                                    bLatPnt = new CalculateButton[5];
+            bLatMin = new CalculateButton[2],
+            bLatSec = new CalculateButton[2],
+            bLatPnt = new CalculateButton[5];
 
     private String inputLonHem;
-    /** Longitude hemisphere (East or West) */
+    /**
+     * Longitude hemisphere (East or West)
+     */
     private Button bLonHem;
     private final CalculateButton[] bLonDeg = new CalculateButton[3],
-                                    bLonMin = new CalculateButton[2],
-                                    bLonSec = new CalculateButton[2],
-                                    bLonPnt = new CalculateButton[5];
+            bLonMin = new CalculateButton[2],
+            bLonSec = new CalculateButton[2],
+            bLonPnt = new CalculateButton[5];
 
     private EditText ePlainLat, ePlainLon;
 
@@ -172,10 +184,12 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
             // Intentionally left empty
         }
+
         @Override
         public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
             // Intentionally left empty
         }
+
         @Override
         public void afterTextChanged(final Editable s) {
             stateSaved = false;
@@ -241,7 +255,9 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
     }
 
     private class CoordinateFormatListener implements AdapterView.OnItemSelectedListener {
-        /** One shot marker */
+        /**
+         * One shot marker
+         */
         private boolean shot = false;
 
         @Override
@@ -260,6 +276,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
             resortEquations();
             updateResult();
         }
+
         @Override
         public void onNothingSelected(final AdapterView<?> arg0) {
             // do nothing
@@ -435,50 +452,50 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         notes.setText(((EditWaypointActivity) getActivity()).getUserNotes().getText());
 
         latButtons = Arrays.asList(bLatDeg[1], bLatDeg[0],
-                                               bLatMin[1], bLatMin[0],
-                                               bLatSec[1], bLatSec[0],
-           bLatPnt[4], bLatPnt[3], bLatPnt[2], bLatPnt[1], bLatPnt[0]);
+                bLatMin[1], bLatMin[0],
+                bLatSec[1], bLatSec[0],
+                bLatPnt[4], bLatPnt[3], bLatPnt[2], bLatPnt[1], bLatPnt[0]);
 
         lonButtons = Arrays.asList(bLonDeg[2], bLonDeg[1], bLonDeg[0],
-                                               bLonMin[1], bLonMin[0],
-                                               bLonSec[1], bLonSec[0],
-           bLonPnt[4], bLonPnt[3], bLonPnt[2], bLonPnt[1], bLonPnt[0]);
+                bLonMin[1], bLonMin[0],
+                bLonSec[1], bLonSec[0],
+                bLonPnt[4], bLonPnt[3], bLonPnt[2], bLonPnt[1], bLonPnt[0]);
 
         coordButtons = new ArrayList<>(latButtons.size() + lonButtons.size());
         coordButtons.addAll(latButtons);
         coordButtons.addAll(lonButtons);
 
         minButtons = Arrays.asList(tLatDegChar, bLatMin[1], bLatMin[0],
-                                   tLonDegChar, bLonMin[1], bLonMin[0]);
+                tLonDegChar, bLonMin[1], bLonMin[0]);
         secButtons = Arrays.asList(tLatMinChar, bLatSec[1], bLatSec[0],
-                                   tLonMinChar, bLonSec[1], bLonSec[0]);
+                tLonMinChar, bLonSec[1], bLonSec[0]);
         pointLowButtons = Arrays.asList(bLatPnt[4], bLatPnt[3],
-                                        bLonPnt[4], bLonPnt[3]);
+                bLonPnt[4], bLonPnt[3]);
         lastUnits = Arrays.asList(tLatLastUnits, tLonLastUnits);
 
         bLatDeg[1].setNextButton(bLatDeg[0])
-                  .setNextButton(bLatMin[1])
-                  .setNextButton(bLatMin[0])
-                  .setNextButton(bLatSec[1])
-                  .setNextButton(bLatSec[0])
-                  .setNextButton(bLatPnt[4])
-                  .setNextButton(bLatPnt[3])
-                  .setNextButton(bLatPnt[2])
-                  .setNextButton(bLatPnt[1])
-                  .setNextButton(bLatPnt[0])
+                .setNextButton(bLatMin[1])
+                .setNextButton(bLatMin[0])
+                .setNextButton(bLatSec[1])
+                .setNextButton(bLatSec[0])
+                .setNextButton(bLatPnt[4])
+                .setNextButton(bLatPnt[3])
+                .setNextButton(bLatPnt[2])
+                .setNextButton(bLatPnt[1])
+                .setNextButton(bLatPnt[0])
 
-                  .setNextButton(bLonDeg[2])
-                  .setNextButton(bLonDeg[1])
-                  .setNextButton(bLonDeg[0])
-                  .setNextButton(bLonMin[1])
-                  .setNextButton(bLonMin[0])
-                  .setNextButton(bLonSec[1])
-                  .setNextButton(bLonSec[0])
-                  .setNextButton(bLonPnt[4])
-                  .setNextButton(bLonPnt[3])
-                  .setNextButton(bLonPnt[2])
-                  .setNextButton(bLonPnt[1])
-                  .setNextButton(bLonPnt[0]);
+                .setNextButton(bLonDeg[2])
+                .setNextButton(bLonDeg[1])
+                .setNextButton(bLonDeg[0])
+                .setNextButton(bLonMin[1])
+                .setNextButton(bLonMin[0])
+                .setNextButton(bLonSec[1])
+                .setNextButton(bLonSec[0])
+                .setNextButton(bLonPnt[4])
+                .setNextButton(bLonPnt[3])
+                .setNextButton(bLonPnt[2])
+                .setNextButton(bLonPnt[1])
+                .setNextButton(bLonPnt[0]);
 
         final Button buttonDone = v.findViewById(R.id.done);
         if (noTitle) {
@@ -488,10 +505,10 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         ePlainLat.addTextChangedListener(new PlainWatcher());
-        ePlainLat.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        ePlainLat.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         ePlainLon.addTextChangedListener(new PlainWatcher());
-        ePlainLon.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        ePlainLon.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         bLatHem.setOnClickListener(new HemisphereClickListener());
         bLonHem.setOnClickListener(new HemisphereClickListener());
@@ -709,7 +726,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     equ,
                     getString(R.string.equation_hint),
                     new EquationWatcher(),
-                    new InputFilter[] {new EquationFilter()})
+                    new InputFilter[]{new EquationFilter()})
             );
         }
 
@@ -718,7 +735,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                     var,
                     getString(R.string.free_variable_hint),
                     new VariableWatcher(),
-                    new InputFilter[] {new VariableFilter()}));
+                    new InputFilter[]{new VariableFilter()}));
 
         }
 
@@ -765,14 +782,14 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         }
 
         return new CalcState(currentFormat,
-                             ePlainLat.getText().toString(),
-                             ePlainLon.getText().toString(),
-                             latHem,
-                             lonHem,
-                             butData,
-                             equData,
-                             freeVarData,
-                             varBankData);
+                ePlainLat.getText().toString(),
+                ePlainLon.getText().toString(),
+                latHem,
+                lonHem,
+                butData,
+                equData,
+                freeVarData,
+                varBankData);
     }
 
     private static void setCoordValue(final int val,
@@ -838,20 +855,20 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
 
             case Sec:
                 returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
-                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_MIN
-                            + " " + values.substring(degDigits + 2, degDigits + 4) + SYMBOL_POINT
-                                  + values.substring(degDigits + 4) + SYMBOL_SEC;
+                        + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_MIN
+                        + " " + values.substring(degDigits + 2, degDigits + 4) + SYMBOL_POINT
+                        + values.substring(degDigits + 4) + SYMBOL_SEC;
                 break;
 
             case Min:
                 returnValue = " " + values.substring(0, degDigits) + SYMBOL_DEG
-                            + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_POINT
-                                  + values.substring(degDigits + 2) + SYMBOL_MIN;
+                        + " " + values.substring(degDigits, degDigits + 2) + SYMBOL_POINT
+                        + values.substring(degDigits + 2) + SYMBOL_MIN;
                 break;
 
             case Deg:
                 returnValue = " " + values.substring(0, degDigits) + SYMBOL_POINT
-                                  + values.substring(degDigits) + SYMBOL_DEG;
+                        + values.substring(degDigits) + SYMBOL_DEG;
                 break;
 
             default:
@@ -946,8 +963,8 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * will take you to the appropriate variable.
      *
      * @param variables Variables to be included in the table
-     * @param grid The table the variables are to be placed in
-     * @param startId ID to be used for the first variable in the list
+     * @param grid      The table the variables are to be placed in
+     * @param startId   ID to be used for the first variable in the list
      */
     private void updateGrid(final List<CalculatorVariable> variables, final GridLayout grid, final int startId) {
         int id = startId;
@@ -1125,39 +1142,39 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
      * The list returned will return the variables in the order in which they first appear in the 'names' string.
      * This method is responsible for using and maintaining the 'variableBank'.
      *
-     * @param variables List of variables as they currently are.
+     * @param variables     List of variables as they currently are.
      * @param variableNames String containing all the names for which variables are required
-     * @param useUpper case for which variables are to be created (ie. Uppercase or Lowercase)
-     * @param hintText text to be used as a hint when new variables are created
+     * @param useUpper      case for which variables are to be created (ie. Uppercase or Lowercase)
+     * @param hintText      text to be used as a hint when new variables are created
      * @return full list of variables in the appropriate order
      */
-     private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
+    private List<CalculatorVariable> sortVariables(final List<CalculatorVariable> variables,
                                                    final String variableNames,
                                                    final boolean useUpper,
                                                    final String hintText,
                                                    final TextWatcher textWatcher,
                                                    final InputFilter[] filters) {
-         final List<CalculatorVariable> returnList = new ArrayList<>();
+        final List<CalculatorVariable> returnList = new ArrayList<>();
 
-         List<VariableData> varDataList = new ArrayList<>(variables.size());
-         for (CalculatorVariable calcVar : variables
-         ) {
-             varDataList.add(calcVar.getData());
-         }
-         varDataList = CoordinatesCalculateUtils.updateVariablesList(varDataList, variableBank, variableNames, useUpper);
+        List<VariableData> varDataList = new ArrayList<>(variables.size());
+        for (CalculatorVariable calcVar : variables
+        ) {
+            varDataList.add(calcVar.getData());
+        }
+        varDataList = CoordinatesCalculateUtils.updateVariablesList(varDataList, variableBank, variableNames, useUpper);
 
-         for (VariableData data : varDataList) {
-             final CalculatorVariable thisEquation = new CalculatorVariable(getContext(),
-                 data,
-                 hintText,
-                 textWatcher,
-                 filters);
+        for (VariableData data : varDataList) {
+            final CalculatorVariable thisEquation = new CalculatorVariable(getContext(),
+                    data,
+                    hintText,
+                    textWatcher,
+                    filters);
 
-             returnList.add(thisEquation);
-         }
+            returnList.add(thisEquation);
+        }
 
-         return returnList;
-     }
+        return returnList;
+    }
 
     /**
      * Re-sort the equations into the order in which they first appear in the 'buttons' or 'plain-text' fields as appropriate
@@ -1199,7 +1216,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 true,
                 getString(R.string.equation_hint),
                 new EquationWatcher(),
-                new InputFilter[] {new EquationFilter()});
+                new InputFilter[]{new EquationFilter()});
         updateGrid(equations, equationGrid, 0);
         resortFreeVariables();
     }
@@ -1221,7 +1238,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
                 false,
                 getString(R.string.free_variable_hint),
                 new VariableWatcher(),
-                new InputFilter[] {new VariableFilter()});
+                new InputFilter[]{new VariableFilter()});
         updateGrid(freeVariables, variableGrid, equations.size());
     }
 

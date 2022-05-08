@@ -20,7 +20,7 @@ public abstract class AbstractApp implements App {
     private final String name;
 
     protected AbstractApp(@NonNull final String name, @Nullable final String intent,
-            @Nullable final String packageName) {
+                          @Nullable final String packageName) {
         this.name = name;
         this.intent = intent;
         this.packageName = packageName;

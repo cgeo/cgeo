@@ -24,13 +24,19 @@ import androidx.gridlayout.widget.GridLayout;
  */
 public class CalculatorVariable extends LinearLayout {
 
-    /** actual name and expression used */
+    /**
+     * actual name and expression used
+     */
     private final VariableData variableData;
 
-    /** view to display the name of the variable */
+    /**
+     * view to display the name of the variable
+     */
     private final TextView name;
 
-    /** view to display the expression of the variable */
+    /**
+     * view to display the expression of the variable
+     */
     private final EditText expression;
 
 

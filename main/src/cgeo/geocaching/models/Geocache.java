@@ -216,8 +216,7 @@ public class Geocache implements IWaypoint {
      * This is called in the new Geocache parsed from website to set information not yet
      * parsed.
      *
-     * @param other
-     *            the other version, or null if non-existent
+     * @param other the other version, or null if non-existent
      * @return true if this cache is "equal" to the other version
      */
     public boolean gatherMissingFrom(final Geocache other) {
@@ -419,8 +418,7 @@ public class Geocache implements IWaypoint {
     /**
      * Compare two caches quickly. For map and list fields only the references are compared !
      *
-     * @param other
-     *            the other cache to compare this one to
+     * @param other the other cache to compare this one to
      * @return true if both caches have the same content
      */
     @SuppressFBWarnings("FE_FLOATING_POINT_EQUALITY")
@@ -539,11 +537,11 @@ public class Geocache implements IWaypoint {
         final String initial = mustIncludeSignature ? LogTemplateProvider.applyTemplates(Settings.getSignature(), new LogContext(this, null, true)) : "";
 
         logOffline(fromActivity, new OfflineLogEntry.Builder<>()
-            .setLog(initial)
-            .setDate(Calendar.getInstance().getTimeInMillis())
-            .setLogType(logType)
-            .setReportProblem(reportProblem)
-            .build()
+                .setLog(initial)
+                .setDate(Calendar.getInstance().getTimeInMillis())
+                .setLogType(logType)
+                .setReportProblem(reportProblem)
+                .build()
         );
     }
 
@@ -575,8 +573,7 @@ public class Geocache implements IWaypoint {
     /**
      * Get the Offline Log entry if any.
      *
-     * @return
-     *          The Offline LogEntry
+     * @return The Offline LogEntry
      */
     @Nullable
     public OfflineLogEntry getOfflineLog() {
@@ -590,8 +587,7 @@ public class Geocache implements IWaypoint {
     /**
      * Get the Offline Log entry if any.
      *
-     * @return
-     *          The Offline LogEntry else Null
+     * @return The Offline LogEntry else Null
      */
     @Nullable
     public LogType getOfflineLogType() {
@@ -650,6 +646,7 @@ public class Geocache implements IWaypoint {
     public boolean supportsLogging() {
         return getConnector().supportsLogging();
     }
+
     public boolean supportsLoggingOnline() {
         return getConnector().getCacheCreateNewLogUrl(this) != null;
     }
@@ -725,7 +722,6 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     *
      * @return {@code true} if the user is the owner of the cache, {@code false} otherwise
      */
     public boolean isOwner() {
@@ -753,7 +749,6 @@ public class Geocache implements IWaypoint {
 
     /**
      * After lazy loading the lazily loaded field must be non {@code null}.
-     *
      */
     private static void assertTextNotNull(final String field, final String name) throws InternalError {
         if (field == null) {
@@ -907,7 +902,6 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     *
      * @return {@code true} if the user has put a favorite point onto this cache
      */
     public boolean isFavorite() {
@@ -1154,7 +1148,7 @@ public class Geocache implements IWaypoint {
      * Get the current inventory
      *
      * @return the inventory of Trackables as unmodifiable collection. Use {@link #setInventory(List)} or
-     *         {@link #addInventoryItem(Trackable)} for modifications.
+     * {@link #addInventoryItem(Trackable)} for modifications.
      */
     @NonNull
     public List<Trackable> getInventory() {
@@ -1165,8 +1159,7 @@ public class Geocache implements IWaypoint {
      * Replace the inventory with new content.
      * No checks are performed.
      *
-     * @param newInventory
-     *            to set on Geocache
+     * @param newInventory to set on Geocache
      */
     public void setInventory(final List<Trackable> newInventory) {
         inventory = newInventory;
@@ -1178,8 +1171,7 @@ public class Geocache implements IWaypoint {
      * This takes care of removing old items if they are from the same brand.
      * If items are present, data is merged, not duplicated.
      *
-     * @param newTrackables
-     *            to be added to the Geocache
+     * @param newTrackables to be added to the Geocache
      */
     public void mergeInventory(@NonNull final List<Trackable> newTrackables, final EnumSet<TrackableBrand> processedBrands) {
 
@@ -1246,8 +1238,8 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     *
      * Set the number of users watching this geocache
+     *
      * @param watchlistCount Number of users watching this geocache
      */
     public void setWatchlistCount(final int watchlistCount) {
@@ -1255,8 +1247,8 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     *
      * get the number of users watching this geocache
+     *
      * @return watchlistCount Number of users watching this geocache
      */
     public int getWatchlistCount() {
@@ -1274,11 +1266,9 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * @param waypoints
-     *            List of waypoints to set for cache
-     * @param saveToDatabase
-     *            Indicates whether to add the waypoints to the database. Should be false if
-     *            called while loading or building a cache
+     * @param waypoints      List of waypoints to set for cache
+     * @param saveToDatabase Indicates whether to add the waypoints to the database. Should be false if
+     *                       called while loading or building a cache
      * @return {@code true} if waypoints successfully added to waypoint database
      */
     public boolean setWaypoints(@Nullable final List<Waypoint> waypoints, final boolean saveToDatabase) {
@@ -1481,8 +1471,7 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * @param storageLocation
-     *            the storageLocation to set
+     * @param storageLocation the storageLocation to set
      */
     public void addStorageLocation(final StorageLocation storageLocation) {
         this.storageLocation.add(storageLocation);
@@ -1496,11 +1485,9 @@ public class Geocache implements IWaypoint {
     }
 
     /**
-     * @param waypoint
-     *            Waypoint to add to the cache
-     * @param saveToDatabase
-     *            Indicates whether to add the waypoint to the database. Should be false if
-     *            called while loading or building a cache
+     * @param waypoint       Waypoint to add to the cache
+     * @param saveToDatabase Indicates whether to add the waypoint to the database. Should be false if
+     *                       called while loading or building a cache
      * @return {@code true} if waypoint successfully added to waypoint database
      */
     public boolean addOrChangeWaypoint(final Waypoint waypoint, final boolean saveToDatabase) {
@@ -1590,8 +1577,7 @@ public class Geocache implements IWaypoint {
     /**
      * Duplicate a waypoint.
      *
-     * @param original
-     *            the waypoint to duplicate
+     * @param original the waypoint to duplicate
      * @return the copy of the waypoint if it was duplicated, {@code null} otherwise (invalid index)
      */
     public Waypoint duplicateWaypoint(final Waypoint original, final boolean addPrefix) {
@@ -1609,8 +1595,7 @@ public class Geocache implements IWaypoint {
     /**
      * delete a user-defined waypoint
      *
-     * @param waypoint
-     *            to be removed from cache
+     * @param waypoint to be removed from cache
      * @return {@code true}, if the waypoint was deleted
      */
     public boolean deleteWaypoint(final Waypoint waypoint) {
@@ -1649,8 +1634,7 @@ public class Geocache implements IWaypoint {
     /**
      * Find index of given {@code waypoint} in cache's {@code waypoints} list
      *
-     * @param waypoint
-     *            to find index for
+     * @param waypoint to find index for
      * @return index in {@code waypoints} if found, -1 otherwise
      */
     private int getWaypointIndex(final Waypoint waypoint) {
@@ -1666,8 +1650,7 @@ public class Geocache implements IWaypoint {
     /**
      * Lookup a waypoint by its id.
      *
-     * @param id
-     *            the id of the waypoint to look for
+     * @param id the id of the waypoint to look for
      * @return waypoint or {@code null}
      */
     @Nullable
@@ -1683,8 +1666,7 @@ public class Geocache implements IWaypoint {
     /**
      * Lookup a waypoint by its prefix.
      *
-     * @param prefix
-     *            the prefix of the waypoint to look for
+     * @param prefix the prefix of the waypoint to look for
      * @return waypoint or {@code null}
      */
     @Nullable
@@ -1708,9 +1690,9 @@ public class Geocache implements IWaypoint {
      * Detect waypoints (identified by coordinates) in the given text and add them to user-defined waypoints
      * or updates existing ones with meta information.
      *
-     * @param text text which might contain coordinates
-     * @param updateDb if true the added waypoints are stored in DB right away
-     * @param namePrefix prefix for default waypoint names (if names cannot be extracted from text)
+     * @param text            text which might contain coordinates
+     * @param updateDb        if true the added waypoints are stored in DB right away
+     * @param namePrefix      prefix for default waypoint names (if names cannot be extracted from text)
      * @param forceExtraction if extraction should be enforced, regardless of cache setting
      */
     public boolean addWaypointsFromText(@Nullable final String text, final boolean updateDb, @NonNull final String namePrefix, final boolean forceExtraction) {
@@ -2105,7 +2087,7 @@ public class Geocache implements IWaypoint {
         if (StringUtils.length(geocode) >= 2) {
             final String suffix = StringUtils.right(geocode, 2);
             final Folder spoilerFolder = Folder.fromFolder(PersistableFolder.SPOILER_IMAGES.getFolder(),
-                suffix.substring(1) + "/" + suffix.substring(0, 1)  + "/" + geocode);
+                    suffix.substring(1) + "/" + suffix.substring(0, 1) + "/" + geocode);
             for (ContentStorage.FileInformation imageFile : ContentStorage.get().list(spoilerFolder)) {
                 if (imageFile.isDirectory) {
                     continue;
@@ -2195,8 +2177,8 @@ public class Geocache implements IWaypoint {
 
     public boolean applyDistanceRule() {
         return !isArchived()
-            && (getType().applyDistanceRule() || hasUserModifiedCoords())
-            && (getConnector() == GCConnector.getInstance() || getConnector() == InternalConnector.getInstance());
+                && (getType().applyDistanceRule() || hasUserModifiedCoords())
+                && (getConnector() == GCConnector.getInstance() || getConnector() == InternalConnector.getInstance());
     }
 
     @NonNull
@@ -2281,12 +2263,16 @@ public class Geocache implements IWaypoint {
         return variables;
     }
 
-    /** used for online search metainfos (e.g. finder) */
+    /**
+     * used for online search metainfos (e.g. finder)
+     */
     public Bundle getSearchContext() {
         return searchContext;
     }
 
-    /** used for online search metainfos (e.g. finder) */
+    /**
+     * used for online search metainfos (e.g. finder)
+     */
     public void setSearchContext(final Bundle searchContext) {
         this.searchContext = searchContext;
     }

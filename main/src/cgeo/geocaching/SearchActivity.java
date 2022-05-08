@@ -110,7 +110,7 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
                 name = null;
             }
             Log.i("Received a geo intent: lat=" + geo.getLatitude() + ", lon=" + geo.getLongitude() + ", name=" + name
-                + " form " + getIntent().getDataString());
+                    + " form " + getIntent().getDataString());
             if (!GeoPointDto.isEmpty(geo)) {
                 // non-fuzzy-geo that already has lat/lon => search via lat/lon
                 CacheListActivity.startActivityCoordinates(this, new Geopoint(geo.getLatitude(), geo.getLongitude()), name);
@@ -154,12 +154,9 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     /**
      * Performs a search for query either as geocode, trackable code or keyword
      *
-     * @param nonTrimmedQuery
-     *            String to search for
-     * @param keywordSearch
-     *            Set to true if keyword search should be performed if query isn't GC or TB
-     * @param isClipboardSearch
-     *            Set to true if search should try to extract a geocode from the search string
+     * @param nonTrimmedQuery   String to search for
+     * @param keywordSearch     Set to true if keyword search should be performed if query isn't GC or TB
+     * @param isClipboardSearch Set to true if search should try to extract a geocode from the search string
      * @return true if a search was performed, else false
      */
     private boolean instantSearch(final String nonTrimmedQuery, final boolean keywordSearch, final boolean isClipboardSearch) {
@@ -188,11 +185,9 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     /**
      * try to interpret query as a geocode
      *
-     * @param query
-     *            Trimmed string to search for
-     * @param isClipboardSearch
-     *            Set to true if search should try to extract a geocode from the search string
-     * @return  true if geocache was found
+     * @param query             Trimmed string to search for
+     * @param isClipboardSearch Set to true if search should try to extract a geocode from the search string
+     * @return true if geocache was found
      */
     private boolean instantSearchGeocache(final String query, final Boolean isClipboardSearch) {
         IConnector connector = null;
@@ -227,11 +222,9 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
     /**
      * try to interpret query as trackable
      *
-     * @param query
-     *            Trimmed string to search for
-     * @param keywordSearch
-     *            Set to true if keyword search should be performed if query isn't GC or TB
-     * @return  true if trackable was found
+     * @param query         Trimmed string to search for
+     * @param keywordSearch Set to true if keyword search should be performed if query isn't GC or TB
+     * @return true if trackable was found
      */
     private boolean instantSearchTrackable(final String query, final Boolean keywordSearch) {
         String trackableCode = "";
@@ -291,8 +284,8 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
         setGeocacheSearchAction(binding.geocode, binding.displayGeocode, () -> findByGeocodeFn(binding.geocode.getText().toString()), DataStore::getSuggestionsGeocode);
         setGeocacheSearchAction(binding.keyword, binding.searchKeyword, this::findByKeywordFn, DataStore::getSuggestionsKeyword);
 
-        binding.geocode.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
-        binding.trackable.setFilters(new InputFilter[] { new InputFilter.AllCaps() });
+        binding.geocode.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
+        binding.trackable.setFilters(new InputFilter[]{new InputFilter.AllCaps()});
 
         binding.searchFilterInfo.setOnClickListener(v -> SimpleDialog.of(this).setMessage(TextParam.id(R.string.search_filter_info_message).setMarkdown(true)).show());
 
@@ -506,9 +499,9 @@ public class SearchActivity extends AbstractBottomNavigationActivity implements 
 
         // check temporaribly disabled due to #7617
         // if (ConnectorFactory.anyTrackableConnectorActive()) {
-            final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
-            trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
-            startActivity(trackablesIntent);
+        final Intent trackablesIntent = new Intent(this, TrackableActivity.class);
+        trackablesIntent.putExtra(Intents.EXTRA_GEOCODE, trackableText.toUpperCase(Locale.US));
+        startActivity(trackablesIntent);
         /*
         } else {
             showToast(getString(R.string.warn_no_connector));

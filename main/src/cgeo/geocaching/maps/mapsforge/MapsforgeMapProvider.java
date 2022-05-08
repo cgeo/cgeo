@@ -138,7 +138,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return isValidMapFile(mapUri);
         }
 
-        /** Create new render layer, if mapfile exists */
+        /**
+         * Create new render layer, if mapfile exists
+         */
         @Override
         public ITileLayer createTileLayer(final TileCache tileCache, final IMapViewPosition mapViewPosition) {
             final InputStream mapStream = createMapFileInputStream(this.mapUri);
@@ -159,19 +161,19 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return new ImmutablePair<>(MapsforgeMapProvider.getInstance().getAttributionFor(this.mapUri), true);
         }
 
-   }
+    }
 
-   public static final class MapyCzMapSource extends AbstractMapsforgeMapSource {
+    public static final class MapyCzMapSource extends AbstractMapsforgeMapSource {
 
-       MapyCzMapSource(final MapProvider mapProvider, final String name) {
-           super(mapProvider, name, TileSourceMapyCz.INSTANCE);
-       }
+        MapyCzMapSource(final MapProvider mapProvider, final String name) {
+            super(mapProvider, name, TileSourceMapyCz.INSTANCE);
+        }
 
-       @Override
-       public ImmutablePair<String, Boolean> calculateMapAttribution(final Context context) {
+        @Override
+        public ImmutablePair<String, Boolean> calculateMapAttribution(final Context context) {
             return new ImmutablePair<>(context.getString(R.string.map_attribution_mapy_cz_html), false);
-       }
-   }
+        }
+    }
 
     public static final class CyclosmMapSource extends AbstractMapsforgeMapSource {
 
@@ -363,9 +365,9 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
         MapProviderFactory.deleteOfflineMapSources();
         final Resources resources = CgeoApplication.getInstance().getResources();
         final List<ImmutablePair<String, Uri>> offlineMaps =
-            CollectionStream.of(getOfflineMaps())
-                .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
-                .map(fi -> new ImmutablePair<>(fi.name, fi.uri)).toList();
+                CollectionStream.of(getOfflineMaps())
+                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
+                        .map(fi -> new ImmutablePair<>(fi.name, fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
         if (offlineMaps.size() > 1) {
             registerMapSource(new OfflineMultiMapSource(offlineMaps, this, resources.getString(R.string.map_source_osm_offline_combined)));

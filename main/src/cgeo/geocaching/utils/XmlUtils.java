@@ -14,9 +14,9 @@ public final class XmlUtils {
      * Insert an attribute-less tag with enclosed text in a XML serializer output.
      *
      * @param serializer an XML serializer
-     * @param prefix an XML prefix, see {@link XmlSerializer#startTag(String, String)}
-     * @param tag an XML tag
-     * @param text some text to insert, or <tt>null</tt> to omit completely this tag
+     * @param prefix     an XML prefix, see {@link XmlSerializer#startTag(String, String)}
+     * @param tag        an XML tag
+     * @param text       some text to insert, or <tt>null</tt> to omit completely this tag
      */
     public static void simpleText(final XmlSerializer serializer, final String prefix, final String tag, final String text) throws IOException {
         if (text != null) {
@@ -30,7 +30,7 @@ public final class XmlUtils {
      * Insert pairs of attribute-less tags and enclosed texts in a XML serializer output
      *
      * @param serializer an XML serializer
-     * @param prefix an XML prefix, see {@link XmlSerializer#startTag(String, String)} shared by all tags
+     * @param prefix     an XML prefix, see {@link XmlSerializer#startTag(String, String)} shared by all tags
      * @param tagAndText an XML tag, the corresponding text, another XML tag, the corresponding text. <tt>null</tt> texts
      *                   will be omitted along with their respective tag.
      */

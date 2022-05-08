@@ -36,41 +36,67 @@ import org.apache.commons.lang3.builder.HashCodeBuilder;
  *
  * This object should not be referenced directly from a Geocache object to reduce the memory usage
  * of the Geocache objects.
- *
  */
 public class LogEntry implements Parcelable {
 
     private static final Pattern PATTERN_REMOVE_COLORS = Pattern.compile("</?font.*?>", Pattern.CASE_INSENSITIVE);
 
-    /** Log id */
+    /**
+     * Log id
+     */
     public final int id;
-    /** service-specific log id (only filled if log was loaded from a service) */
+    /**
+     * service-specific log id (only filled if log was loaded from a service)
+     */
     @Nullable public final String serviceLogId;
-    /** The {@link LogType} */
+    /**
+     * The {@link LogType}
+     */
     @NonNull public final LogType logType;
-    /** The author */
+    /**
+     * The author
+     */
     @NonNull public final String author;
-    /** The author guid */
+    /**
+     * The author guid
+     */
     @NonNull public final String authorGuid;
-    /** The log message */
+    /**
+     * The log message
+     */
     @NonNull public final String log;
-    /** The log date */
+    /**
+     * The log date
+     */
     public final long date;
-    /** Is a found log */
+    /**
+     * Is a found log
+     */
     public final int found;
-    /** Own's or Friend's log entry indicator.
+    /**
+     * Own's or Friend's log entry indicator.
      * Such logs will be visible in separated tab "Friends/Own Logs" in addition to main Logbook
-     * */
+     */
     public final boolean friend;
-    /** Report problem */
+    /**
+     * Report problem
+     */
     public final ReportProblemType reportProblem;
-    /** log {@link Image} List */
+    /**
+     * log {@link Image} List
+     */
     @NonNull public final List<Image> logImages;
-    /** Spotted cache name */
+    /**
+     * Spotted cache name
+     */
     @NonNull public final String cacheName; // used for trackables
-    /** Spotted cache guid */
+    /**
+     * Spotted cache guid
+     */
     @NonNull public final String cacheGuid; // used for trackables
-    /** Spotted cache geocode */
+    /**
+     * Spotted cache geocode
+     */
     @NonNull public final String cacheGeocode; // used for trackables
 
     // Parcelable START
@@ -136,8 +162,8 @@ public class LogEntry implements Parcelable {
         final List<Image> result = new ArrayList<>();
         for (Image img : logImages) {
             result.add(img.buildUpon()
-                .setContextInformation(author + " - " + Formatter.formatShortDateVerbally(this.date) + " - " + logType.getL10n())
-                .build());
+                    .setContextInformation(author + " - " + Formatter.formatShortDateVerbally(this.date) + " - " + logType.getL10n())
+                    .build());
         }
         return result;
     }
@@ -435,7 +461,7 @@ public class LogEntry implements Parcelable {
      * Return {@code true} if passed {@link LogType} Object is equal to the current {@link LogType} Object.
      * Object are also detected as equal if date, {@link LogType}, author and log are the same.
      *
-     * @return  {@code true} if objects are identical
+     * @return {@code true} if objects are identical
      */
     @Override
     public boolean equals(final Object obj) {
@@ -456,7 +482,7 @@ public class LogEntry implements Parcelable {
      * Check if current LogType has Images.
      * Check if current {@link LogType} has {@link Image}.
      *
-     * @return  {@code true} if {@link LogType} has images
+     * @return {@code true} if {@link LogType} has images
      */
     public boolean hasLogImages() {
         return CollectionUtils.isNotEmpty(logImages);

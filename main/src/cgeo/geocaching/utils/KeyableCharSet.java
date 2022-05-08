@@ -9,7 +9,9 @@ import java.util.Set;
 
 import org.apache.commons.lang3.StringUtils;
 
-/** A charset identifiable by a string key. The later can be used e.g. for caching purposes */
+/**
+ * A charset identifiable by a string key. The later can be used e.g. for caching purposes
+ */
 public class KeyableCharSet {
 
     public static final KeyableCharSet EMPTY = new KeyableCharSet(null);

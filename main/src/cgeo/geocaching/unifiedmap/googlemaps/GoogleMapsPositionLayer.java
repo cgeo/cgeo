@@ -38,10 +38,10 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
         setCurrentPositionAndHeadingHelper(location, heading, (directionLine) -> positionObjs.addPolyline(new PolylineOptions()
-            .addAll(directionLine)
-            .color(MapLineUtils.getDirectionColor())
-            .width(MapLineUtils.getDirectionLineWidth())
-            .zIndex(ZINDEX_DIRECTION_LINE)
+                .addAll(directionLine)
+                .color(MapLineUtils.getDirectionColor())
+                .width(MapLineUtils.getDirectionLineWidth())
+                .zIndex(ZINDEX_DIRECTION_LINE)
         ), MAP_GOOGLE);
     }
 
@@ -75,23 +75,23 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
         final float accuracy = currentLocation.getAccuracy();
         if (accuracy > 0.001f) {
             positionObjs.addCircle(new CircleOptions()
-                .center(latLng)
-                .strokeColor(MapLineUtils.getAccuracyCircleColor())
-                .strokeWidth(3)
-                .fillColor(MapLineUtils.getAccuracyCircleFillColor())
-                .radius(accuracy)
-                .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
+                    .center(latLng)
+                    .strokeColor(MapLineUtils.getAccuracyCircleColor())
+                    .strokeWidth(3)
+                    .fillColor(MapLineUtils.getAccuracyCircleFillColor())
+                    .radius(accuracy)
+                    .zIndex(ZINDEX_POSITION_ACCURACY_CIRCLE)
             );
         }
 
         // position and heading arrow
         positionObjs.addMarker(new MarkerOptions()
-            .icon(BitmapDescriptorFactory.fromBitmap(positionAndHeadingArrow))
-            .position(latLng)
-            .rotation(currentHeading)
-            .anchor(0.5f, 0.5f)
-            .flat(true)
-            .zIndex(ZINDEX_POSITION)
+                .icon(BitmapDescriptorFactory.fromBitmap(positionAndHeadingArrow))
+                .position(latLng)
+                .rotation(currentHeading)
+                .anchor(0.5f, 0.5f)
+                .flat(true)
+                .zIndex(ZINDEX_POSITION)
         );
 
     }
@@ -100,10 +100,10 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     protected void repaintHistory() {
         historyObjs.removeAll();
         repaintHistoryHelper((points) -> historyObjs.addPolyline(new PolylineOptions()
-            .addAll(points)
-            .color(MapLineUtils.getTrailColor())
-            .width(MapLineUtils.getHistoryLineWidth())
-            .zIndex(ZINDEX_HISTORY)
+                .addAll(points)
+                .color(MapLineUtils.getTrailColor())
+                .width(MapLineUtils.getHistoryLineWidth())
+                .zIndex(ZINDEX_HISTORY)
         ));
     }
 
@@ -111,10 +111,10 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     protected void repaintRouteAndTracks() {
         trackObjs.removeAll();
         repaintRouteAndTracksHelper((segment, isTrack) -> trackObjs.addPolyline(new PolylineOptions()
-            .addAll(segment)
-            .color(isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor())
-            .width(isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth())
-            .zIndex(isTrack ? ZINDEX_TRACK : ZINDEX_ROUTE)
+                .addAll(segment)
+                .color(isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor())
+                .width(isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth())
+                .zIndex(isTrack ? ZINDEX_TRACK : ZINDEX_ROUTE)
         ));
     }
 

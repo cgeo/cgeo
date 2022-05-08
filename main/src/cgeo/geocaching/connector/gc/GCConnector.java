@@ -101,7 +101,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     /**
      * Indicates whether voting is possible for this cache for this type of log entry
      *
-     * @param cache cache to check
+     * @param cache   cache to check
      * @param logType log type to check
      */
     @Override
@@ -304,10 +304,10 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
     @Override
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
-            GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
-            GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
-            GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
-            GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
+                GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
+                GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
+                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
+                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.HIDDEN, GeocacheFilterType.LOG_ENTRY);
     }
 
 
@@ -351,8 +351,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      *
      * This must not be called from the UI thread.
      *
-     * @param cache
-     *            the cache to add
+     * @param cache the cache to add
      * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
     @Override
@@ -369,8 +368,7 @@ public class GCConnector extends AbstractConnector implements ISearchByGeocode, 
      *
      * This must not be called from the UI thread.
      *
-     * @param cache
-     *            the cache to add
+     * @param cache the cache to add
      * @return {@code true} if the cache was successfully added, {@code false} otherwise
      */
     @Override

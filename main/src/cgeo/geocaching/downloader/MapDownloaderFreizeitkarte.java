@@ -32,7 +32,7 @@ public class MapDownloaderFreizeitkarte extends AbstractMapDownloader {
     private static final MapDownloaderFreizeitkarte INSTANCE = new MapDownloaderFreizeitkarte();
 
     private MapDownloaderFreizeitkarte() {
-        super (Download.DownloadType.DOWNLOADTYPE_MAP_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_name, R.string.mapserver_freizeitkarte_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl);
+        super(Download.DownloadType.DOWNLOADTYPE_MAP_FREIZEITKARTE, R.string.mapserver_freizeitkarte_downloadurl, R.string.mapserver_freizeitkarte_name, R.string.mapserver_freizeitkarte_info, R.string.mapserver_freizeitkarte_projecturl, R.string.mapserver_freizeitkarte_likeiturl);
         companionType = Download.DownloadType.DOWNLOADTYPE_THEME_FREIZEITKARTE;
     }
 

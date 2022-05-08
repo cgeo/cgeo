@@ -39,10 +39,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import org.apache.commons.lang3.StringUtils;
 
-@SuppressLint("MissingSuperCall") // super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...)
-                                  // TODO: Why is it done like that?
-                                  //       Either merge GoogleMapActivity with CGeoMap
-                                  //       or generify our map handling so that we only have one map activity at all to avoid code duplication
+@SuppressLint("MissingSuperCall")
+// super calls are handled via mapBase (mapBase.onCreate, mapBase.onSaveInstanceState, ...)
+// TODO: Why is it done like that?
+//       Either merge GoogleMapActivity with CGeoMap
+//       or generify our map handling so that we only have one map activity at all to avoid code duplication
 public class GoogleMapActivity extends AbstractBottomNavigationActivity implements MapActivityImpl, FilteredActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
@@ -79,7 +80,7 @@ public class GoogleMapActivity extends AbstractBottomNavigationActivity implemen
     public void onCreate(final Bundle icicle) {
         mapBase.onCreate(icicle);
         routeTrackUtils = new RouteTrackUtils(this, icicle == null ? null : icicle.getBundle(STATE_ROUTETRACKUTILS), mapBase::centerOnPosition,
-            mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
+                mapBase::clearIndividualRoute, mapBase::reloadIndividualRoute, mapBase::setTrack, mapBase::isTargetSet);
         tracks = new Tracks(routeTrackUtils, mapBase::setTrack);
     }
 

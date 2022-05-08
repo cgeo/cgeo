@@ -97,10 +97,8 @@ public class ImagesList {
     /**
      * Load images into a view.
      *
-     * @param parentView
-     *            a view to load the images into
-     * @param images
-     *            the images to load
+     * @param parentView a view to load the images into
+     * @param images     the images to load
      * @return a disposable which, when disposed, interrupts the loading and clears up resources
      */
     public Disposable loadImages(final View parentView, final Collection<Image> images) {

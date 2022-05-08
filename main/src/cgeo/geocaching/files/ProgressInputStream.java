@@ -12,7 +12,6 @@ import java.io.InputStream;
  * The method @link ProgressInputStream#read(byte[]) does not need to be overridden as it delegates to @link
  * ProgressInputStream#read(byte[], int, int) anyway.
  * </p>
- *
  */
 public class ProgressInputStream extends FilterInputStream {
 

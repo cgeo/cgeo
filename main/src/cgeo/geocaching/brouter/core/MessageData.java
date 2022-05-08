@@ -42,18 +42,18 @@ final class MessageData implements Cloneable {
 
         final int iCost = (int) (costfactor * 1000 + 0.5f);
         return (lon - 180000000) + "\t"
-            + (lat - 90000000) + "\t"
-            + ele / 4 + "\t"
-            + linkdist + "\t"
-            + iCost + "\t"
-            + linkelevationcost
-            + "\t" + linkturncost
-            + "\t" + linknodecost
-            + "\t" + linkinitcost
-            + "\t" + wayKeyValues
-            + "\t" + (nodeKeyValues == null ? "" : nodeKeyValues)
-            + "\t" + ((int) time)
-            + "\t" + ((int) energy);
+                + (lat - 90000000) + "\t"
+                + ele / 4 + "\t"
+                + linkdist + "\t"
+                + iCost + "\t"
+                + linkelevationcost
+                + "\t" + linkturncost
+                + "\t" + linknodecost
+                + "\t" + linkinitcost
+                + "\t" + wayKeyValues
+                + "\t" + (nodeKeyValues == null ? "" : nodeKeyValues)
+                + "\t" + ((int) time)
+                + "\t" + ((int) energy);
     }
 
     public void add(final MessageData d) {

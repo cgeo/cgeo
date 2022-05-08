@@ -75,7 +75,8 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return set;
     }
 
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
+    // splitting up that method would not help improve readability
     public void setRangeFromValues(final Collection<T> values, final T minUnlimitedValue, final T maxUnlimitedValue) {
         T min = null;
         T max = null;
@@ -114,9 +115,9 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public List<String> getConfig() {
-        final List<String>  config = new ArrayList<>(Arrays.asList(
-            minRangeValue == null ? "-" : String.valueOf(minRangeValue),
-            maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
+        final List<String> config = new ArrayList<>(Arrays.asList(
+                minRangeValue == null ? "-" : String.valueOf(minRangeValue),
+                maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
         if (specialNumber != null && includeSpecialNumber != null) {
             config.add(String.valueOf(specialNumber));
             config.add(Boolean.toString(includeSpecialNumber));

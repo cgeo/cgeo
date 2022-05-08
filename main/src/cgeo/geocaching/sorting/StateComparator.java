@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 /**
  * sort caches by state (normal, disabled, archived)
- *
  */
 class StateComparator extends AbstractCacheComparator {
     private final String stateActive = CgeoApplication.getInstance().getString(R.string.cache_status_active);

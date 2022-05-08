@@ -521,7 +521,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
         for (int i = 0; i < nv; i++) {
             if (variableData[i] != other.variableData[i]) {
                 throw new RuntimeException("mismatch in variable " + variableName(i) + " " + variableData[i] + "<->" + other.variableData[i]
-                    + "\ntags = " + getKeyValueDescription(false, encode()));
+                        + "\ntags = " + getKeyValueDescription(false, encode()));
             }
         }
     }
@@ -543,7 +543,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
      *
      * @return a newly created value element, if any, to optionally add aliases
      */
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // external code, do not refactor
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    // external code, do not refactor
     public BExpressionLookupValue addLookupValue(final String name, final String value, final int[] lookupData2) {
         String valueMutable = value;
         BExpressionLookupValue newValue = null;
@@ -559,7 +560,7 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
             lookupNumbers.put(name, num);
             lookupNames.add(name);
             lookupValues.add(new BExpressionLookupValue[]{new BExpressionLookupValue("")
-                , new BExpressionLookupValue("unknown")});
+                    , new BExpressionLookupValue("unknown")});
             lookupHistograms.add(new int[2]);
             final int[] ndata = new int[lookupData.length + 1];
             System.arraycopy(lookupData, 0, ndata, 0, lookupData.length);

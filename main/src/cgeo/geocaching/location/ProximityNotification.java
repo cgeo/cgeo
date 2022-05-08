@@ -127,12 +127,12 @@ public class ProximityNotification implements Parcelable {
     protected void showNotification(final boolean near, final String notification) {
         if (useTextNotifications) {
             final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.PROXIMITY_NOTIFICATION.name())
-                .setSmallIcon(near ? R.drawable.proximity_notification_near : R.drawable.proximity_notification_far)
-                .setContentTitle(context.getString(R.string.notification_proximity_title))
-                .setContentText(notification)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(notification))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+                    .setSmallIcon(near ? R.drawable.proximity_notification_near : R.drawable.proximity_notification_far)
+                    .setContentTitle(context.getString(R.string.notification_proximity_title))
+                    .setContentText(notification)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(notification))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
             Notifications.getNotificationManager(context).notify(Notifications.ID_PROXIMITY_NOTIFICATION, builder.build());
         }

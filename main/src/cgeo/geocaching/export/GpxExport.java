@@ -99,8 +99,7 @@ public class GpxExport extends AbstractExport {
         /**
          * Instantiates and configures the task for exporting field notes.
          *
-         * @param activity
-         *            optional: Show a progress bar and toasts
+         * @param activity optional: Show a progress bar and toasts
          */
         public ExportTask(final Activity activity) {
             super(activity, getProgressTitle());
@@ -143,7 +142,7 @@ public class GpxExport extends AbstractExport {
             final Activity activityLocal = activity;
             if (activityLocal != null) {
                 if (uri != null) {
-                        ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
+                    ShareUtils.shareOrDismissDialog(activityLocal, uri, "application/xml", R.string.export, getName() + ' ' + activityLocal.getString(R.string.export_exportedto) + ": " + UriUtils.toUserDisplayableString(uri));
                 } else {
                     ActivityMixin.showToast(activityLocal, activityLocal.getString(R.string.export_failed));
                 }

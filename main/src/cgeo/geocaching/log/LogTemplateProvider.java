@@ -26,7 +26,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Provides all the available templates for logging.
- *
  */
 public final class LogTemplateProvider {
 
@@ -42,7 +41,6 @@ public final class LogTemplateProvider {
      * Some log templates need additional information. To provide that information, it can be encapsulated in this log
      * context.
      * </p>
-     *
      */
     public static class LogContext {
         private Geocache cache;

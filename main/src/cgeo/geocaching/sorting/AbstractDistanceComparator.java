@@ -12,7 +12,6 @@ import java.util.List;
 
 /**
  * sorts caches by distance to given position
- *
  */
 public abstract class AbstractDistanceComparator extends AbstractCacheComparator {
 

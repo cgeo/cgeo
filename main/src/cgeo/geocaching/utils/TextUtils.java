@@ -71,7 +71,9 @@ public final class TextUtils {
         return listToSort;
     }
 
-    /** returns for a list and a text the position to insert the text into the list to keep it sorted */
+    /**
+     * returns for a list and a text the position to insert the text into the list to keep it sorted
+     */
     public static int getSortedPos(final List<String> list, final String text) {
         return getSortedPos(list, s -> s, text);
     }
@@ -94,18 +96,12 @@ public final class TextUtils {
     /**
      * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
-     * @param data
-     *            Data to search in
-     * @param pattern
-     *            Pattern to search for
-     * @param trim
-     *            Set to true if the group found should be trim'ed
-     * @param group
-     *            Number of the group to return if found
-     * @param defaultValue
-     *            Value to return if the pattern is not found
-     * @param last
-     *            Find the last occurring value
+     * @param data         Data to search in
+     * @param pattern      Pattern to search for
+     * @param trim         Set to true if the group found should be trim'ed
+     * @param group        Number of the group to return if found
+     * @param defaultValue Value to return if the pattern is not found
+     * @param last         Find the last occurring value
      * @return defaultValue or the n-th group if the pattern matches (trimmed if wanted)
      */
     @Nullable
@@ -140,14 +136,10 @@ public final class TextUtils {
     /**
      * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
-     * @param data
-     *            Data to search in
-     * @param pattern
-     *            Pattern to search for
-     * @param trim
-     *            Set to true if the group found should be trim'ed
-     * @param defaultValue
-     *            Value to return if the pattern is not found
+     * @param data         Data to search in
+     * @param pattern      Pattern to search for
+     * @param trim         Set to true if the group found should be trim'ed
+     * @param defaultValue Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed if wanted)
      */
     @Nullable
@@ -158,12 +150,9 @@ public final class TextUtils {
     /**
      * Searches for the pattern pattern in the data. If the pattern is not found defaultValue is returned
      *
-     * @param data
-     *            Data to search in
-     * @param pattern
-     *            Pattern to search for
-     * @param defaultValue
-     *            Value to return if the pattern is not found
+     * @param data         Data to search in
+     * @param pattern      Pattern to search for
+     * @param defaultValue Value to return if the pattern is not found
      * @return defaultValue or the first group if the pattern matches (trimmed)
      */
     @Nullable
@@ -190,8 +179,7 @@ public final class TextUtils {
      * You are only allowed to change this code if you can prove it became faster on a device.
      * see cgeo.geocaching.test.WhiteSpaceTest#replaceWhitespaceManually in the test project.
      *
-     * @param data
-     *            complete HTML page
+     * @param data complete HTML page
      * @return the HTML page as a very long single "line"
      */
     public static String replaceWhitespace(final String data) {
@@ -227,10 +215,9 @@ public final class TextUtils {
     /**
      * Quick and naive check for possible rich HTML content in a string.
      *
-     * @param str
-     *            A string containing HTML code.
+     * @param str A string containing HTML code.
      * @return <tt>true</tt> if <tt>str</tt> contains HTML code that needs to go through a HTML renderer before
-     *         being displayed, <tt>false</tt> if it can be displayed as-is without any loss
+     * being displayed, <tt>false</tt> if it can be displayed as-is without any loss
      */
     public static boolean containsHtml(@Nullable final String str) {
         if (StringUtils.isBlank(str)) {
@@ -242,7 +229,6 @@ public final class TextUtils {
     /**
      * Remove all control characters (which are not valid in XML or HTML), as those should not appear in cache texts
      * anyway
-     *
      */
     public static String removeControlCharacters(final String input) {
         final Matcher remover = PATTERN_REMOVE_NONPRINTABLE.matcher(input);
@@ -252,8 +238,7 @@ public final class TextUtils {
     /**
      * Calculate a simple checksum for change-checking (not usable for security/cryptography!)
      *
-     * @param input
-     *            String to check
+     * @param input String to check
      * @return resulting checksum
      */
     public static long checksum(final String input) {
@@ -495,10 +480,11 @@ public final class TextUtils {
     /**
      * Shortens a given text to a maximum given number of characters. In case the text is too long it
      * is shortened according to a given begin-end-distribution-value. Deleted text part is marked with '...'
-     * @param text text to shorten. If text is shorter than maxLength it remains unchanged
-     * @param maxLength maxLength to shorten text to.
+     *
+     * @param text                 text to shorten. If text is shorter than maxLength it remains unchanged
+     * @param maxLength            maxLength to shorten text to.
      * @param beginEndDistribution begin-end-distribution to obey on shortening. If >=1 then text is shortened at the end.
-     *      If <=0 then text is shortened at the beginning. If between 0-1 then text is shortened at beginning and end in relation to this value.
+     *                             If <=0 then text is shortened at the beginning. If between 0-1 then text is shortened at beginning and end in relation to this value.
      * @return the shortened text
      */
     @NonNull
@@ -596,8 +582,10 @@ public final class TextUtils {
         return sb.toString();
     }
 
-    /** convenience forward to {@link android.text.TextUtils#concat(java.lang.CharSequence...)} */
-    public static CharSequence concat(final CharSequence ... cs) {
+    /**
+     * convenience forward to {@link android.text.TextUtils#concat(java.lang.CharSequence...)}
+     */
+    public static CharSequence concat(final CharSequence... cs) {
         return android.text.TextUtils.concat(cs);
     }
 
@@ -623,7 +611,9 @@ public final class TextUtils {
         return concat(list.toArray(new CharSequence[0]));
     }
 
-    /** Convenience method to apply a span to a Charsequence */
+    /**
+     * Convenience method to apply a span to a Charsequence
+     */
     public static CharSequence setSpan(final CharSequence cs, final Object span) {
         return setSpan(cs, span, -1, -1, 0);
     }
@@ -631,10 +621,10 @@ public final class TextUtils {
     /**
      * Convenience method to apply a span to a CharSequence. See {@link Spannable#setSpan(Object, int, int, int)} for details.
      *
-     * @param cs CharSequence to apply span to
-     * @param span the span to use. Usually a class implementing {@link android.text.style.CharacterStyle}, e.g. {@link ForegroundColorSpan}
-     * @param start start index to add span. if <0 then 0 is used
-     * @param end end index to add span. if <0 then cs.length() is used. if end<start, then no span is applied
+     * @param cs       CharSequence to apply span to
+     * @param span     the span to use. Usually a class implementing {@link android.text.style.CharacterStyle}, e.g. {@link ForegroundColorSpan}
+     * @param start    start index to add span. if <0 then 0 is used
+     * @param end      end index to add span. if <0 then cs.length() is used. if end<start, then no span is applied
      * @param priority span priority. Values > 255 will be set to 255
      * @return CharSequence with span applied
      */

@@ -320,10 +320,10 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                     if (points.size() > 1) {
                         // history line
                         historyObjs.addPolyline(new PolylineOptions()
-                            .addAll(points)
-                            .color(MapLineUtils.getTrailColor())
-                            .width(MapLineUtils.getHistoryLineWidth())
-                            .zIndex(ZINDEX_HISTORY)
+                                .addAll(points)
+                                .color(MapLineUtils.getTrailColor())
+                                .width(MapLineUtils.getHistoryLineWidth())
+                                .zIndex(ZINDEX_HISTORY)
                         );
                     }
                 }
@@ -359,10 +359,10 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
         if (individualRoute != null && !individualRoute.isHidden && individualRoute.track != null && individualRoute.track.size() > 0) {
             for (ArrayList<LatLng> segment : individualRoute.track) {
                 routeObjs.addPolyline(new PolylineOptions()
-                    .addAll(segment)
-                    .color(MapLineUtils.getRouteColor())
-                    .width(MapLineUtils.getRouteLineWidth())
-                    .zIndex(ZINDEX_ROUTE)
+                        .addAll(segment)
+                        .color(MapLineUtils.getRouteColor())
+                        .width(MapLineUtils.getRouteLineWidth())
+                        .zIndex(ZINDEX_ROUTE)
                 );
             }
         }
@@ -374,10 +374,10 @@ public class GooglePositionAndHistory implements PositionAndHistory, Tracks.Upda
                 if (c != individualRoute && !c.isHidden && c.track != null && c.track.size() > 0) {
                     for (ArrayList<LatLng> segment : c.track) {
                         trackObjs.addPolyline(new PolylineOptions()
-                            .addAll(segment)
-                            .color(MapLineUtils.getTrackColor())
-                            .width(MapLineUtils.getTrackLineWidth())
-                            .zIndex(ZINDEX_TRACK)
+                                .addAll(segment)
+                                .color(MapLineUtils.getTrackColor())
+                                .width(MapLineUtils.getTrackLineWidth())
+                                .zIndex(ZINDEX_TRACK)
                         );
                     }
                 }

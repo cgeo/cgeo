@@ -28,15 +28,11 @@ abstract class FileParser {
     /**
      * Parses caches from input stream.
      *
-     * @param stream
-     *         the input stream
-     * @param progressHandler
-     *         for reporting parsing progress (in bytes read from input stream)
+     * @param stream          the input stream
+     * @param progressHandler for reporting parsing progress (in bytes read from input stream)
      * @return collection of caches
-     * @throws IOException
-     *         if the input stream can't be read
-     * @throws ParserException
-     *         if the input stream contains data not matching the file format of the parser
+     * @throws IOException     if the input stream can't be read
+     * @throws ParserException if the input stream contains data not matching the file format of the parser
      */
     @NonNull
     public abstract Collection<Geocache> parse(@NonNull InputStream stream, @Nullable DisposableHandler progressHandler) throws IOException, ParserException;

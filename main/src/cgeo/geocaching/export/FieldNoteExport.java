@@ -40,7 +40,6 @@ import java.util.Locale;
 
 /**
  * Exports offline logs in the Groundspeak Field Note format.
- *
  */
 public class FieldNoteExport extends AbstractExport {
     private static int fieldNotesCount = 0;
@@ -107,12 +106,9 @@ public class FieldNoteExport extends AbstractExport {
         /**
          * Instantiates and configures the task for exporting field notes.
          *
-         * @param activity
-         *            optional: Show a progress bar and toasts
-         * @param upload
-         *            Upload the Field Note to geocaching.com
-         * @param onlyNew
-         *            Upload/export only new logs since last export
+         * @param activity optional: Show a progress bar and toasts
+         * @param upload   Upload the Field Note to geocaching.com
+         * @param onlyNew  Upload/export only new logs since last export
          */
         ExportTask(@Nullable final Activity activity, final boolean upload, final boolean onlyNew) {
             super(activity, getProgressTitle(), CgeoApplication.getInstance().getString(R.string.export_fieldnotes_creating), true);

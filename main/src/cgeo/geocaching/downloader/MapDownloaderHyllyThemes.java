@@ -18,7 +18,7 @@ public class MapDownloaderHyllyThemes extends AbstractThemeDownloader {
     private static final MapDownloaderHyllyThemes INSTANCE = new MapDownloaderHyllyThemes();
 
     private MapDownloaderHyllyThemes() {
-        super (Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY, R.string.mapserver_hylly_themes_updatecheckurl, R.string.mapserver_hylly_themes_name, R.string.mapserver_hylly_themes_info, R.string.mapserver_hylly_projecturl, R.string.mapserver_hylly_likeiturl);
+        super(Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY, R.string.mapserver_hylly_themes_updatecheckurl, R.string.mapserver_hylly_themes_name, R.string.mapserver_hylly_themes_info, R.string.mapserver_hylly_projecturl, R.string.mapserver_hylly_likeiturl);
     }
 
     @Override

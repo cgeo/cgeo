@@ -22,13 +22,13 @@ public class EncodeDecodeTest {
         expctxWay.parseFile(fi.uri, "global");
 
         final String[] tags = {
-            "highway=residential",
-            "oneway=yes",
-            "depth=1'6\"",
+                "highway=residential",
+                "oneway=yes",
+                "depth=1'6\"",
 //          "depth=6 feet",
-            "maxheight=5.1m",
-            "maxdraft=~3 mt",
-            "reversedirection=yes"
+                "maxheight=5.1m",
+                "maxdraft=~3 mt",
+                "reversedirection=yes"
         };
 
         // encode the tags into 64 bit description word

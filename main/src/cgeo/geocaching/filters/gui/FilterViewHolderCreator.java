@@ -63,18 +63,18 @@ public class FilterViewHolderCreator {
                 break;
             case TYPE:
                 result = new CheckboxFilterViewHolder<>(
-                    ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
-                        .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
-                            CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
-                        .setValueDisplayTextGetter(CacheType::getShortL10n)
-                        .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
+                        ValueGroupFilterAccessor.<CacheType, TypeGeocacheFilter>createForValueGroupFilter()
+                                .setSelectableValues(Arrays.asList(CacheType.TRADITIONAL, CacheType.MULTI, CacheType.MYSTERY, CacheType.LETTERBOX, CacheType.EVENT,
+                                        CacheType.EARTH, CacheType.CITO, CacheType.WEBCAM, CacheType.VIRTUAL, CacheType.WHERIGO, CacheType.ADVLAB, CacheType.USER_DEFINED))
+                                .setValueDisplayTextGetter(CacheType::getShortL10n)
+                                .setValueDrawableGetter(ct -> ImageParam.drawable(MapMarkerUtils.getCacheTypeMarker(activity.getResources(), ct))),
                         2, null);
                 break;
             case SIZE:
                 result = new ChipChoiceFilterViewHolder<>(
-                    ValueGroupFilterAccessor.<CacheSize, SizeGeocacheFilter>createForValueGroupFilter()
-                        .setSelectableValues(CacheSize.values())
-                        .setValueDisplayTextGetter(CacheSize::getL10n));
+                        ValueGroupFilterAccessor.<CacheSize, SizeGeocacheFilter>createForValueGroupFilter()
+                                .setSelectableValues(CacheSize.values())
+                                .setValueDisplayTextGetter(CacheSize::getL10n));
                 break;
             case DIFFICULTY:
             case TERRAIN:
@@ -116,11 +116,11 @@ public class FilterViewHolderCreator {
                 break;
             case ORIGIN:
                 result = new CheckboxFilterViewHolder<>(
-                    ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
-                        .setSelectableValues(ConnectorFactory.getConnectors())
-                        .setValueDisplayTextGetter(IConnector::getName)
-                        .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)) , 1,
-                    new HashSet<>(ConnectorFactory.getActiveConnectors()));
+                        ValueGroupFilterAccessor.<IConnector, OriginGeocacheFilter>createForValueGroupFilter()
+                                .setSelectableValues(ConnectorFactory.getConnectors())
+                                .setValueDisplayTextGetter(IConnector::getName)
+                                .setValueDrawableGetter(ct -> ImageParam.id(R.drawable.ic_menu_upload)), 1,
+                        new HashSet<>(ConnectorFactory.getActiveConnectors()));
                 break;
             case STORED_SINCE:
                 result = createStoredSinceFilterViewHolder();
@@ -180,12 +180,12 @@ public class FilterViewHolderCreator {
     private static IFilterViewHolder<?> create1to5ItemRangeSelectorViewHolder() {
         final Float[] range = new Float[]{1.0f, 1.5f, 2.0f, 2.5f, 3.0f, 3.5f, 4.0f, 4.5f, 5.0f};
         return new ItemRangeSelectorViewHolder<>(
-            new ValueGroupFilterAccessor<Float, NumberRangeGeocacheFilter<Float>>()
-                .setSelectableValues(range)
-                .setFilterValueGetter(f -> f.getValuesInRange(range))
-                .setFilterValueSetter((f, v) -> f.setRangeFromValues(v, 1f, 5f))
-                .setValueDisplayTextGetter(f -> String.format(Locale.getDefault(), "%.1f", f)),
-            (i, f) -> i % 2 == 0 ? String.format(Locale.getDefault(), "%.1f", f) : null);
+                new ValueGroupFilterAccessor<Float, NumberRangeGeocacheFilter<Float>>()
+                        .setSelectableValues(range)
+                        .setFilterValueGetter(f -> f.getValuesInRange(range))
+                        .setFilterValueSetter((f, v) -> f.setRangeFromValues(v, 1f, 5f))
+                        .setValueDisplayTextGetter(f -> String.format(Locale.getDefault(), "%.1f", f)),
+                (i, f) -> i % 2 == 0 ? String.format(Locale.getDefault(), "%.1f", f) : null);
     }
 
     private static IFilterViewHolder<?> createStoredListFilterViewHolder() {
@@ -197,25 +197,25 @@ public class FilterViewHolderCreator {
         }
 
         final ValueGroupFilterAccessor<StoredList, StoredListGeocacheFilter> vgfa =
-            new ValueGroupFilterAccessor<StoredList, StoredListGeocacheFilter>()
-            .setSelectableValues(allLists)
-            .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
-            .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
-            .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_manage_list))
-            .setValueDisplayTextGetter(f -> f.title)
-            .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
+                new ValueGroupFilterAccessor<StoredList, StoredListGeocacheFilter>()
+                        .setSelectableValues(allLists)
+                        .setFilterValueGetter(StoredListGeocacheFilter::getFilterLists)
+                        .setFilterValueSetter(StoredListGeocacheFilter::setFilterLists)
+                        .setValueDrawableGetter(f -> f.markerId > 0 ? ImageParam.emoji(f.markerId) : ImageParam.id(R.drawable.ic_menu_manage_list))
+                        .setValueDisplayTextGetter(f -> f.title)
+                        .setGeocacheValueGetter((f, c) -> CollectionStream.of(c.getLists()).map(allListsById::get).toSet());
 
         return new CheckboxFilterViewHolder<>(vgfa, 1, Collections.emptySet());
     }
 
     private static IFilterViewHolder<?> createStoredSinceFilterViewHolder() {
         return new ItemRangeSelectorViewHolder<>(
-            new ValueGroupFilterAccessor<Long, StoredSinceGeocacheFilter>()
-                .setSelectableValues(StoredSinceGeocacheFilter.getValueRange())
-                .setFilterValueGetter(f -> f.getValuesInRange(StoredSinceGeocacheFilter.getValueRange()))
-                .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)
-                .setValueDisplayTextGetter(s -> StoredSinceGeocacheFilter.toUserDisplayValue(s, false)),
-            (i, s) -> StoredSinceGeocacheFilter.toUserDisplayValue(s, true));
+                new ValueGroupFilterAccessor<Long, StoredSinceGeocacheFilter>()
+                        .setSelectableValues(StoredSinceGeocacheFilter.getValueRange())
+                        .setFilterValueGetter(f -> f.getValuesInRange(StoredSinceGeocacheFilter.getValueRange()))
+                        .setFilterValueSetter(NumberRangeGeocacheFilter::setRangeFromValues)
+                        .setValueDisplayTextGetter(s -> StoredSinceGeocacheFilter.toUserDisplayValue(s, false)),
+                (i, s) -> StoredSinceGeocacheFilter.toUserDisplayValue(s, true));
     }
 
 }

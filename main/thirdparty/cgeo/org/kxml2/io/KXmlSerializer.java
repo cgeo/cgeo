@@ -40,7 +40,9 @@ public class KXmlSerializer implements XmlSerializer {
     //    static final String UNDEFINED = ":";
 
     // BEGIN android-added
-    /** size (in characters) for the write buffer */
+    /**
+     * size (in characters) for the write buffer
+     */
     private static final int WRITE_BUFFER_SIZE = 500;
     // END android-added
 
@@ -200,7 +202,7 @@ public class KXmlSerializer implements XmlSerializer {
         //return false;
         return ("http://xmlpull.org/v1/doc/features.html#indent-output"
                 .equals(
-                name))
+                        name))
                 ? indent[depth]
                 : false;
     }
@@ -506,8 +508,8 @@ public class KXmlSerializer implements XmlSerializer {
 
         if (!pending) {
             depth--;
-        //        if (namespace == null)
-        //          namespace = "";
+            //        if (namespace == null)
+            //          namespace = "";
         }
 
         if ((namespace == null

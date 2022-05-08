@@ -45,9 +45,9 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         // add map fragment
         final SupportMapFragment mapFragment = SupportMapFragment.newInstance();
         activity.getSupportFragmentManager()
-            .beginTransaction()
-            .add(R.id.mapViewGM, mapFragment)
-            .commit();
+                .beginTransaction()
+                .add(R.id.mapViewGM, mapFragment)
+                .commit();
 
         // start map
         mapFragment.getMapAsync(this);
@@ -115,7 +115,9 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
     }
 
-    /** keep track of rotation and zoom level changes **/
+    /**
+     * keep track of rotation and zoom level changes
+     **/
     protected void configMapChangeListener(final boolean enable) {
         if (mMap != null) {
             mMap.setOnCameraIdleListener(null);
@@ -168,7 +170,9 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
         }
     }
 
-    /** returns -1 if error while retrieving zoom level */
+    /**
+     * returns -1 if error while retrieving zoom level
+     */
     @Override
     public int getCurrentZoom() {
         try {

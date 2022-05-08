@@ -22,7 +22,7 @@ public class RxOkHttpUtils {
     /**
      * Create a Single for running a cancellable request.
      *
-     * @param client the client to use for this request
+     * @param client  the client to use for this request
      * @param request the request
      * @return a Single containing the response or an IOException
      */

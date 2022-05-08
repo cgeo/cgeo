@@ -8,10 +8,10 @@ public class GeoPointWrapperTest {
     @Test
     public void testIsBetterThan() {
         final GeopointWrapper better = new GeopointWrapper(null, 0, 24,
-            "n48 01.194 · e011 43.814 note");
+                "n48 01.194 · e011 43.814 note");
 
         final GeopointWrapper worse = new GeopointWrapper(null, 0, 23,
-            "n48 01.194 · e011 43.814 note");
+                "n48 01.194 · e011 43.814 note");
 
         assertThat(better.isBetterThan(worse)).isTrue();
         assertThat(worse.isBetterThan(better)).isFalse();
@@ -20,7 +20,7 @@ public class GeoPointWrapperTest {
     @Test
     public void testIsBetterThanNull() {
         final GeopointWrapper better = new GeopointWrapper(null, 0, 24,
-            "n48 01.194 · e011 43.814 note");
+                "n48 01.194 · e011 43.814 note");
 
         assertThat(better.isBetterThan(null)).isTrue();
     }
@@ -28,10 +28,10 @@ public class GeoPointWrapperTest {
     @Test
     public void testIsBetterThanReturnEqual() {
         final GeopointWrapper better = new GeopointWrapper(null, 0, 24,
-            "n48 01.194 · e011 43.814 note");
+                "n48 01.194 · e011 43.814 note");
 
         final GeopointWrapper worse = new GeopointWrapper(null, 0, 24,
-            "n48 01.194 · e011 43.814 note");
+                "n48 01.194 · e011 43.814 note");
 
         assertThat(better.isBetterThan(worse)).isFalse();
         assertThat(worse.isBetterThan(better)).isFalse();

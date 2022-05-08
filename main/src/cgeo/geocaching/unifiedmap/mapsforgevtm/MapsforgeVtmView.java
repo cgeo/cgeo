@@ -100,7 +100,9 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         mMap.setMapPosition(pos);
     }
 
-    /** keep track of rotation and zoom level changes **/
+    /**
+     * keep track of rotation and zoom level changes
+     **/
     protected void configMapChangeListener(final boolean enable) {
         if (mapUpdateListener != null) {
             mMap.events.unbind(mapUpdateListener);
@@ -116,14 +118,18 @@ public class MapsforgeVtmView extends AbstractUnifiedMap<GeoPoint> {
         }
     }
 
-    /** call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider */
+    /**
+     * call this instead of VTM.setBaseMap so that we can keep track of baseMap set by tile provider
+     */
     public synchronized TileLayer setBaseMap(final TileSource tileSource) {
         removeBaseMap();
         baseMap = mMap.setBaseMap(tileSource);
         return baseMap;
     }
 
-    /** call this instead of VTM.layers().add so that we can keep track of layers added by the tile provider */
+    /**
+     * call this instead of VTM.layers().add so that we can keep track of layers added by the tile provider
+     */
     public synchronized void addLayer(final Layer layer) {
         layers.add(layer);
         mMap.layers().add(layer);

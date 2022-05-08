@@ -27,9 +27,13 @@ import java.util.ArrayList;
  */
 public class EditButton extends RelativeLayout {
 
-    /** EditText used to facilitate keyboard entry */
+    /**
+     * EditText used to facilitate keyboard entry
+     */
     private EditText edit;
-    /** The actual button used for the most part */
+    /**
+     * The actual button used for the most part
+     */
     Button butt;
 
     private ArrayList<ClickCompleteCallback> clickCompleteCallbacks;

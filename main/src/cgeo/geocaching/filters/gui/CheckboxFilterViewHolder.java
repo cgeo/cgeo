@@ -147,8 +147,6 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
     }
 
 
-
-
     private void relayout() {
 
         for (ViewGroup column : this.columns) {
@@ -178,7 +176,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         ImmutablePair<View, CheckBox> cb = this.valueCheckboxes.get(value);
         if (cb == null) {
             final String vText = this.filterAccessor.getDisplayText(value) +
-                (statistics != null ? " (" + (statistics.containsKey(value) ? "" + statistics.get(value) : "0") + (statsAreComplete ? "" : "+") + ")" : "");
+                    (statistics != null ? " (" + (statistics.containsKey(value) ? "" + statistics.get(value) : "0") + (statsAreComplete ? "" : "+") + ")" : "");
 
             cb = ViewUtils.createCheckboxItem(getActivity(), columns.get(0), TextParam.text(vText), this.filterAccessor.getIconFor(value), null);
             cb.right.setChecked(this.alwaysVisibleItems == null);

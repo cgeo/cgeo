@@ -23,9 +23,10 @@ import java.util.Set;
  *
  * This class supports grouping of selectable values, e.g. a bunch of selectable values can be grouped,
  * and by selecing the group the filter checks for the cache to have any "raw" value assigned to this group
+ *
  * @param <T> class for "raw" cache values to filter
  * @param <G> class for "Groups". Might be same as T, in this case the filter has autosupport for
- *           the case that each group (of class G) has exactly one (=the same) element of class T
+ *            the case that each group (of class G) has exactly one (=the same) element of class T
  */
 public abstract class ValueGroupGeocacheFilter<G, T> extends BaseGeocacheFilter {
 

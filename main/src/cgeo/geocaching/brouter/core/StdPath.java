@@ -175,7 +175,7 @@ final class StdPath extends OsmPath {
     @Override
     public int elevationCorrection(final RoutingContext rc) {
         return (rc.downhillcostdiv > 0 ? ehbd / rc.downhillcostdiv : 0)
-            + (rc.uphillcostdiv > 0 ? ehbu / rc.uphillcostdiv : 0);
+                + (rc.uphillcostdiv > 0 ? ehbu / rc.uphillcostdiv : 0);
     }
 
     @Override

@@ -10,26 +10,27 @@ import java.util.List;
 
 public class OCSmileysProvider {
 
-    /** deactivated until it is realized at OC(.de)
-    private static final List<Smiley> SMILEYS = Collections.unmodifiableList(Arrays.asList(
-            new Smiley("8)", R.string.smiley_cool, ""),
-            new Smiley(":,-(", R.string.smiley_cry, ""),
-            new Smiley("::|", R.string.smiley_embarassed, ""),
-            new Smiley(":-!", R.string.smiley_footinmouth, ""),
-            new Smiley(":(", R.string.smiley_frown, ""),
-            new Smiley("O:)", R.string.smiley_innocent, ""),
-            new Smiley(":-*", R.string.smiley_kiss, ""),
-            new Smiley(":D", R.string.smiley_laughing, ""),
-            new Smiley(":-($)", R.string.smiley_money, ""),
-            new Smiley(":x", R.string.smiley_sealed, ""),
-            new Smiley(":)", R.string.smiley_smile, ""),
-            new Smiley(":o", R.string.smiley_surprised, ""),
-            new Smiley(":P", R.string.smiley_tongueout, ""),
-            new Smiley(":/", R.string.smiley_undecided, ""),
-            new Smiley(";)", R.string.smiley_wink, ""),
-            new Smiley("XO", R.string.smiley_yell, "")
-    ));
-    */
+    /**
+     * deactivated until it is realized at OC(.de)
+     * private static final List<Smiley> SMILEYS = Collections.unmodifiableList(Arrays.asList(
+     * new Smiley("8)", R.string.smiley_cool, ""),
+     * new Smiley(":,-(", R.string.smiley_cry, ""),
+     * new Smiley("::|", R.string.smiley_embarassed, ""),
+     * new Smiley(":-!", R.string.smiley_footinmouth, ""),
+     * new Smiley(":(", R.string.smiley_frown, ""),
+     * new Smiley("O:)", R.string.smiley_innocent, ""),
+     * new Smiley(":-*", R.string.smiley_kiss, ""),
+     * new Smiley(":D", R.string.smiley_laughing, ""),
+     * new Smiley(":-($)", R.string.smiley_money, ""),
+     * new Smiley(":x", R.string.smiley_sealed, ""),
+     * new Smiley(":)", R.string.smiley_smile, ""),
+     * new Smiley(":o", R.string.smiley_surprised, ""),
+     * new Smiley(":P", R.string.smiley_tongueout, ""),
+     * new Smiley(":/", R.string.smiley_undecided, ""),
+     * new Smiley(";)", R.string.smiley_wink, ""),
+     * new Smiley("XO", R.string.smiley_yell, "")
+     * ));
+     */
     private static final List<Smiley> SMILEYS = Collections.unmodifiableList(Collections.emptyList());
 
     private OCSmileysProvider() {

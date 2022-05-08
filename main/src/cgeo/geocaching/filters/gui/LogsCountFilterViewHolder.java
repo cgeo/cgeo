@@ -34,9 +34,9 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
 
         selectSpinner.setTextView(spinnerView);
         selectSpinner
-            .setDisplayMapper(v -> v == UNKNOWN ? getActivity().getString(R.string.all_types_short) : v.getL10n())
-            .setValues(Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, UNKNOWN))
-            .set(LogType.FOUND_IT);
+                .setDisplayMapper(v -> v == UNKNOWN ? getActivity().getString(R.string.all_types_short) : v.getL10n())
+                .setValues(Arrays.asList(LogType.FOUND_IT, LogType.DIDNT_FIND_IT, UNKNOWN))
+                .set(LogType.FOUND_IT);
 
         LinearLayout.LayoutParams llp = new LinearLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         llp.setMargins(0, dpToPixel(5), 0, dpToPixel(5));
@@ -76,8 +76,8 @@ public class LogsCountFilterViewHolder extends BaseFilterViewHolder<LogsCountGeo
         final LogsCountGeocacheFilter filter = createFilter();
         final ImmutablePair<Float, Float> range = slider.getRange();
         filter.setMinMaxRange(
-            range.left < 0 ? null : Math.round(range.left),
-            range.right > 1000 ? null : Math.round(range.right));
+                range.left < 0 ? null : Math.round(range.left),
+                range.right > 1000 ? null : Math.round(range.right));
         filter.setLogType(selectSpinner.get() == UNKNOWN ? null : selectSpinner.get());
         return filter;
     }

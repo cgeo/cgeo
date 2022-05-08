@@ -77,7 +77,7 @@ public class RoutingEngine extends Thread {
             for (int i = 0; ; i++) {
                 track = findTrack(refTracks, lastTracks);
                 track.message = "track-length = " + track.distance + " filtered ascend = " + track.ascend
-                    + " plain-ascend = " + track.plainAscend + " cost=" + track.cost;
+                        + " plain-ascend = " + track.plainAscend + " cost=" + track.cost;
                 if (track.energy != 0) {
                     track.message += " energy=" + track.getFormattedEnergy() + " time=" + track.getFormattedTime2();
                 }
@@ -657,7 +657,7 @@ public class RoutingEngine extends Thread {
                     }
 
                     if ((sourceNodeId == endNodeId1 && currentNodeId == endNodeId2)
-                        || (sourceNodeId == endNodeId2 && currentNodeId == endNodeId1)) {
+                            || (sourceNodeId == endNodeId2 && currentNodeId == endNodeId1)) {
                         // track found, compile
                         logInfo("found track at cost " + path.cost + " nodesVisited = " + nodesVisited);
                         final OsmTrack t = compileTrack(path);
@@ -684,8 +684,8 @@ public class RoutingEngine extends Thread {
                             }
 
                             final int costEstimate = path.cost
-                                + path.elevationCorrection(routingContext)
-                                + (costCuttingTrack.cost - pe.cost);
+                                    + path.elevationCorrection(routingContext)
+                                    + (costCuttingTrack.cost - pe.cost);
                             if (costEstimate <= maxTotalCost) {
                                 matchPath = OsmPathElement.create(path, routingContext.countTraffic);
                             }

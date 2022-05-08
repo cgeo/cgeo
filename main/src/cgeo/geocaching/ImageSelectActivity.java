@@ -41,7 +41,6 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     private static final String SAVED_STATE_IMAGEHELPER = "cgeo.geocaching.saved_state_imagehelper";
 
 
-
     private Image originalImage;
     private Image image;
     private int imageIndex = -1;
@@ -221,7 +220,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
         imageScale.setDisplayMapper(scaleSize -> {
             if (width < 0 || height < 0) {
                 return scaleSize < 0 ? getResources().getString(R.string.log_image_scale_option_noscaling) :
-                    getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);
+                        getResources().getString(R.string.log_image_scale_option_entry_noimage, scaleSize);
             }
 
             final ImmutableTriple<Integer, Integer, Boolean> scales = ImageUtils.calculateScaledImageSizes(width, height, scaleSize, scaleSize);

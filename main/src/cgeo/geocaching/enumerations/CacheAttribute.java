@@ -17,7 +17,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass") // static maps need to be initialized later in enums
+@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
+// static maps need to be initialized later in enums
 public enum CacheAttribute {
     // read project/attributes/readme.txt
 
@@ -179,8 +180,7 @@ public enum CacheAttribute {
     /**
      * get localized text
      *
-     * @param enabled
-     *            true: for positive text, false: for negative text
+     * @param enabled true: for positive text, false: for negative text
      * @return the localized text
      */
     @NonNull
@@ -197,6 +197,7 @@ public enum CacheAttribute {
     private static final SparseArray<CacheAttribute> FIND_BY_ID = new SparseArray<>();
     @NonNull
     private static final SparseArray<CacheAttribute> FIND_BY_OCACODE = new SparseArray<>();
+
     static {
         for (final CacheAttribute attr : values()) {
             FIND_BY_GCRAWNAME.put(attr.rawName, attr);
@@ -217,7 +218,9 @@ public enum CacheAttribute {
         return rawName != null ? FIND_BY_GCRAWNAME.get(rawName) : null;
     }
 
-    /** Finds by either raw name, yes-name or no-name */
+    /**
+     * Finds by either raw name, yes-name or no-name
+     */
     @Nullable
     public static CacheAttribute getByName(@Nullable final String rawName) {
         return rawName != null ? FIND_BY_GCNAME.get(rawName) : null;

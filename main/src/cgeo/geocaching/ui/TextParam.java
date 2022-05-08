@@ -48,62 +48,78 @@ public class TextParam {
     private int imageSizeInDp = -1;
 
 
-    /** create from text string resource id, optionally with parameters */
-    public static TextParam id(@StringRes final int drawableId, final Object ... params) {
+    /**
+     * create from text string resource id, optionally with parameters
+     */
+    public static TextParam id(@StringRes final int drawableId, final Object... params) {
         return new TextParam(drawableId, null, null, params);
     }
 
-    /** create from pure text, optionally with parameters */
-    public static TextParam text(final CharSequence text, final Object ... params) {
+    /**
+     * create from pure text, optionally with parameters
+     */
+    public static TextParam text(final CharSequence text, final Object... params) {
         return new TextParam(0, text, null, params);
     }
 
     /**
-     *  create from concatenated texts.
+     * create from concatenated texts.
      *
      * Texts are concatenated CharSequence-aware, so {@link android.text.Spanned} formattings (if present) get preserved
      */
-    public static TextParam concat(final TextParam ... texts) {
+    public static TextParam concat(final TextParam... texts) {
         return new TextParam(0, null, texts);
     }
 
-    /** sets Linkify mask */
+    /**
+     * sets Linkify mask
+     */
     public TextParam setLinkify(final int linkifyMask) {
         this.linkifyMask = linkifyMask;
         return this;
     }
 
-    /** sets whether text shall be interpreted as markdown */
+    /**
+     * sets whether text shall be interpreted as markdown
+     */
     public TextParam setMarkdown(final boolean useMarkdown) {
         this.useMarkdown = useMarkdown;
         return this;
     }
 
-    /** sets whether text shall be interpreted as HTML */
+    /**
+     * sets whether text shall be interpreted as HTML
+     */
     public TextParam setHtml(final boolean useHtml) {
         this.useHtml = useHtml;
         return this;
     }
 
-    /** sets movement method */
+    /**
+     * sets movement method
+     */
     public TextParam setMovement(final boolean useMovement) {
         this.useMovement = useMovement;
         return this;
     }
 
-    /** sets whether text shall be accompanied by an image/icon */
+    /**
+     * sets whether text shall be accompanied by an image/icon
+     */
     public TextParam setImage(final ImageParam image) {
         return setImage(image, -1);
     }
 
-        /** sets whether text shall be accompanied by an image/icon */
+    /**
+     * sets whether text shall be accompanied by an image/icon
+     */
     public TextParam setImage(final ImageParam image, final int imageSizeInDp) {
         this.image = image;
         this.imageSizeInDp = imageSizeInDp;
         return this;
     }
 
-    private TextParam(@StringRes final int textId, final CharSequence text, final TextParam[] concatTexts, final Object ... params) {
+    private TextParam(@StringRes final int textId, final CharSequence text, final TextParam[] concatTexts, final Object... params) {
         this.textId = textId;
         this.text = text;
         this.concatTexts = concatTexts;
@@ -138,8 +154,11 @@ public class TextParam {
         }
     }
 
-    /** creates text (CharSequence) to assign to a TextView according to this TextParam settings */
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    /**
+     * creates text (CharSequence) to assign to a TextView according to this TextParam settings
+     */
+    @SuppressWarnings({"PMD.NPathComplexity"})
+    // splitting up that method would not help improve readability
     public CharSequence getText(@Nullable final Context ctx) {
         final Context context = ctx == null && CgeoApplication.getInstance() != null ? CgeoApplication.getInstance().getApplicationContext() : ctx;
         CharSequence text;
@@ -183,7 +202,9 @@ public class TextParam {
         return text;
     }
 
-    /** Adjusts TextView properties other than the text itself so it conforms to this TextParam (e.g. MovementMethod) */
+    /**
+     * Adjusts TextView properties other than the text itself so it conforms to this TextParam (e.g. MovementMethod)
+     */
     public void adjust(final TextView view) {
         adjust(view, false);
     }
@@ -199,7 +220,7 @@ public class TextParam {
         }
         if (image != null || imageSizeInDp > 0) {
             final Drawable imageDrawable = (image == null ? ImageParam.id(android.R.color.transparent) : image)
-                .getAsDrawable(view.getContext(), imageSizeInDp < 0 ? ViewUtils.pixelToDp(view.getTextSize() * 1.5f) : imageSizeInDp);
+                    .getAsDrawable(view.getContext(), imageSizeInDp < 0 ? ViewUtils.pixelToDp(view.getTextSize() * 1.5f) : imageSizeInDp);
             if (imageSizeInDp < 0) {
                 view.setCompoundDrawablesWithIntrinsicBounds(imageDrawable, null, null, null);
             } else {

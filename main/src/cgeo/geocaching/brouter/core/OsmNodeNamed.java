@@ -77,17 +77,17 @@ public class OsmNodeNamed extends OsmNode {
         // Distance between the initial point and projection of center of
         // the circle on the current segment.
         final double initialToProject = (
-            (lon2 - lon1) * (ilon - lon1) * lonlat2m[0] * lonlat2m[0]
-                + (lat2 - lat1) * (ilat - lat1) * lonlat2m[1] * lonlat2m[1]
+                (lon2 - lon1) * (ilon - lon1) * lonlat2m[0] * lonlat2m[0]
+                        + (lat2 - lat1) * (ilat - lat1) * lonlat2m[1] * lonlat2m[1]
         ) / totalSegmentLength;
         // Distance between the initial point and the center of the circle.
         final double initialToCenter = CheapRulerHelper.distance(ilon, ilat, lon1, lat1);
         // Half length of the segment within the circle
         final double halfDistanceWithin = Math.sqrt(
-            radius * radius - (
-                initialToCenter * initialToCenter -
-                    initialToProject * initialToProject
-            )
+                radius * radius - (
+                        initialToCenter * initialToCenter -
+                                initialToProject * initialToProject
+                )
         );
         // Last point is within the circle
         if (isLastPointWithinCircle) {

@@ -25,7 +25,7 @@ import static org.assertj.core.api.Java6Assertions.assertThatThrownBy;
 public class FormulaTest {
 
 
-    private static double eval(final String expression, final Object ... vars) {
+    private static double eval(final String expression, final Object... vars) {
         return Formula.eval(expression, vars);
     }
 
@@ -105,7 +105,7 @@ public class FormulaTest {
         assertThat(eval("-A$A$AB", "A", 1, "AB", 2)).isEqualTo(-112);
         assertThat(eval("-A$A$AB", "A", 0, "AB", 2)).isEqualTo(-2);
         assertThatThrownBy(() -> eval("AA$", "A", 1))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
 
         assertThat(eval("-A", "A", 1)).isEqualTo(-1);
         assertThat(eval("A", "A", -1)).isEqualTo(-1);
@@ -143,11 +143,11 @@ public class FormulaTest {
         assertThat(Formula.compile("${A}A1").getNeededVariables()).containsExactlyInAnyOrder("A");
 
         assertThatThrownBy(() -> eval("$"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
         assertThatThrownBy(() -> eval("$1"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
         assertThatThrownBy(() -> eval("${A(B)"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("}");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("}");
     }
 
     @Test
@@ -167,19 +167,19 @@ public class FormulaTest {
 
         //assert
         assertThatThrownBy(() -> eval("[0-3"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("]");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("]");
         assertThatThrownBy(() -> eval("[0-5000]")).as("Too many items in range")
-            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name()).hasMessageContaining("0-5000");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name()).hasMessageContaining("0-5000");
         assertThatThrownBy(() -> eval("[]"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
         assertThatThrownBy(() -> eval("[  ]"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
         assertThatThrownBy(() -> eval("[^1-2]"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(OTHER.name());
 
     }
 
-    private void assertRangeFormula(final String formula, final Func1<String, Value> varMap, final Object ... expectedResults) {
+    private void assertRangeFormula(final String formula, final Func1<String, Value> varMap, final Object... expectedResults) {
         final Formula f = Formula.compile(formula);
         assertThat(f.getRangeIndexSize()).isEqualTo(expectedResults.length);
         final List<Value> results = new ArrayList<>();
@@ -200,8 +200,8 @@ public class FormulaTest {
         assertThat(Formula.evaluate("\"abc\"")).isEqualTo(Value.of("abc"));
         assertThat(Formula.evaluate("\"a\"\"b'c\"")).isEqualTo(Value.of("a\"b'c"));
         assertThatThrownBy(() -> eval("\"abc'"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name())
-            .hasMessageContaining("\"");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name())
+                .hasMessageContaining("\"");
 
         assertThat(eval("length('abc')")).isEqualTo(3d);
         assertThat(eval("length('abc') + length('def')")).isEqualTo(6d);
@@ -218,7 +218,7 @@ public class FormulaTest {
         assertThat(Formula.evaluate("''''").getRaw()).isEqualTo("'");
         assertThat(Formula.evaluate("''''''").getRaw()).isEqualTo("''");
         assertThatThrownBy(() -> eval("'''''"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("'");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("'");
         assertThat(Formula.evaluate("'''test'''").getRaw()).isEqualTo("'test'");
 
     }
@@ -250,19 +250,19 @@ public class FormulaTest {
     @Test
     public void unknownOperator() {
         assertThatThrownBy(() -> eval("2 & 5"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
-     }
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+    }
 
     @Test
     public void unknownVariables() {
         assertThatThrownBy(() -> eval("unknown(42)"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(MISSING_VARIABLE_VALUE.name()).hasMessageContaining("k, n, o, u, w");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(MISSING_VARIABLE_VALUE.name()).hasMessageContaining("k, n, o, u, w");
     }
 
     @Test
     public void unclosedParentheses() {
         assertThatThrownBy(() -> eval("3 * (2 + 4 * 2"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name());
     }
 
     @Test
@@ -283,9 +283,9 @@ public class FormulaTest {
     @Test
     public void incorrectFunctionCall() {
         assertThatThrownBy(() -> eval("sin('abc')"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(WRONG_TYPE.name()).hasMessageContaining("sin").hasMessageContaining("abc");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(WRONG_TYPE.name()).hasMessageContaining("sin").hasMessageContaining("abc");
         assertThatThrownBy(() -> eval("sin()"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(WRONG_PARAMETER_COUNT.name()).hasMessageContaining("sin");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(WRONG_PARAMETER_COUNT.name()).hasMessageContaining("sin");
     }
 
     @Test
@@ -347,11 +347,11 @@ public class FormulaTest {
         assertThat(Formula.compile("A.B").evaluateToString(Formula.toVarProvider("A", 1))).isEqualTo("1.?B");
         assertThat(Formula.compile("A*5").evaluateToString(Formula.toVarProvider("A", "eddie"))).isEqualTo("'eddie' * 5");
         assertThat(Formula.compile("(A*4+(3+4))").evaluateToString(Formula.toVarProvider("A", 2)))
-            .isEqualTo("15");
+                .isEqualTo("15");
         assertThat(Formula.compile("(A*4+(3+4))").evaluateToString(Formula.toVarProvider("A", "e")))
-            .isEqualTo("('e' * 4 + 7)");
+                .isEqualTo("('e' * 4 + 7)");
         assertThat(Formula.compile("123(4*3)B_A(A*4+(3+4))").evaluateToString(Formula.toVarProvider("A", "eddie")))
-            .isEqualTo("12312?Beddie('eddie' * 4 + 7)");
+                .isEqualTo("12312?Beddie('eddie' * 4 + 7)");
     }
 
     @Test
@@ -367,11 +367,11 @@ public class FormulaTest {
      */
     private void assertErrorStringFormats(final CharSequence cs, final String expectedString) {
         final String annotated = TextUtils.annotateSpans(cs, s -> {
-                if (s instanceof ForegroundColorSpan && ((ForegroundColorSpan) s).getForegroundColor() == Color.RED) {
-                    return new Pair<>("[", "]");
-                }
-                return new Pair<>("", "");
-            });
+            if (s instanceof ForegroundColorSpan && ((ForegroundColorSpan) s).getForegroundColor() == Color.RED) {
+                return new Pair<>("[", "]");
+            }
+            return new Pair<>("", "");
+        });
 
         assertThat(annotated).isEqualTo(expectedString);
     }
@@ -379,17 +379,17 @@ public class FormulaTest {
     @Test
     public void efficientFormulaNodeTrees() {
         assertThat(Formula.compile("13.123").toDebugString(null, false, true))
-            .as("constant value should be in one node").isEqualTo("13.123{}");
+                .as("constant value should be in one node").isEqualTo("13.123{}");
         assertThat(Formula.compile("13.123(4+5)").toDebugString(null, false, true))
-            .as("constant value should be in one node").isEqualTo("13.1239{}");
+                .as("constant value should be in one node").isEqualTo("13.1239{}");
         assertThat(Formula.compile("13.123 + length('abc')").toDebugString(null, false, true))
-            .as("constant value should be in one node").isEqualTo("16.123{}");
+                .as("constant value should be in one node").isEqualTo("16.123{}");
 
         assertThat(Formula.compile("A + (length('abc') + 3)").toDebugString(null, false, true))
-            .as("constant parts should be in one subnode").isEqualTo("?A + 6{?A{}6{}}");
+                .as("constant parts should be in one subnode").isEqualTo("?A + 6{?A{}6{}}");
 
         assertThat(Formula.compile("12A.456B8901").toDebugString(null, false, true))
-            .as("decimals should be stored as efficiently as possible").isEqualTo("12?A.456?B8901{12{}?A{}.456{}?B{}8901{}}");
+                .as("decimals should be stored as efficiently as possible").isEqualTo("12?A.456?B8901{12{}?A{}.456{}?B{}8901{}}");
 
 
     }
@@ -421,11 +421,11 @@ public class FormulaTest {
         assertThat(eval("(3+5) < (4+7)")).isEqualTo(1d);
 
         assertThatThrownBy(() -> eval("3>>4"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining(">");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining(">");
         assertThatThrownBy(() -> eval("3<<4"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("<");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining("<");
         assertThatThrownBy(() -> eval("3=>4"))
-            .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining(">");
+                .isInstanceOf(FormulaException.class).hasMessageContaining(UNEXPECTED_TOKEN.name()).hasMessageContaining(">");
 
         assertThat(eval("if(3>4;1;2)")).isEqualTo(2d);
         assertThat(eval("if(3<4;1;2)")).isEqualTo(1d);

@@ -100,7 +100,6 @@ import org.apache.commons.lang3.StringUtils;
  * Client for the OpenCaching API (Okapi).
  *
  * @see <a href="http://www.opencaching.de/okapi/introduction.html">Okapi overview</a>
- *
  */
 final class OkapiClient {
 
@@ -351,14 +350,14 @@ final class OkapiClient {
         switch (basicFilter.getType()) {
             case TYPE:
                 valueMap.put("type", CollectionStream.of(((TypeGeocacheFilter) basicFilter).getRawValues())
-                    .map(OkapiClient::getFilterFromType).filter(StringUtils::isNotBlank).toJoinedString("|"));
+                        .map(OkapiClient::getFilterFromType).filter(StringUtils::isNotBlank).toJoinedString("|"));
                 break;
             case NAME:
                 valueMap.put("name", "*" + ((NameGeocacheFilter) basicFilter).getStringFilter().getTextValue().replace('?', '_') + "*");
                 break;
             case SIZE:
                 valueMap.put("size2", CollectionStream.of(((SizeGeocacheFilter) basicFilter).getRawValues())
-                    .map(CacheSize::getOcSize2).filter(StringUtils::isNotBlank).toJoinedString("|"));
+                        .map(CacheSize::getOcSize2).filter(StringUtils::isNotBlank).toJoinedString("|"));
                 break;
             case DISTANCE:
                 final DistanceGeocacheFilter distanceFilter = (DistanceGeocacheFilter) basicFilter;
@@ -374,7 +373,7 @@ final class OkapiClient {
                 final NumberRangeGeocacheFilter<Float> nrFilter = (NumberRangeGeocacheFilter<Float>) basicFilter;
                 if (nrFilter.isFiltering()) {
                     valueMap.put(nrFilter.getType() == GeocacheFilterType.DIFFICULTY ? "difficulty" : "terrain",
-                        (nrFilter.getMinRangeValue() == null ? "1" : ((int) Math.floor(nrFilter.getMinRangeValue()))) + "-" + (nrFilter.getMaxRangeValue() == null ? "5" : Math.round(nrFilter.getMaxRangeValue())));
+                            (nrFilter.getMinRangeValue() == null ? "1" : ((int) Math.floor(nrFilter.getMinRangeValue()))) + "-" + (nrFilter.getMaxRangeValue() == null ? "5" : Math.round(nrFilter.getMaxRangeValue())));
                 }
                 break;
             case DIFFICULTY_TERRAIN:
@@ -467,9 +466,9 @@ final class OkapiClient {
     public static void fillSearchParameterBox(@NonNull final Map<String, String> valueMap, @NonNull final Parameters params, @Nullable final Viewport viewport) {
 
         final String bboxString = GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.bottomLeft)
-            + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
-            + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
-            + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.bottomLeft)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LAT_DECDEGREE_RAW, viewport.topRight)
+                + SEPARATOR + GeopointFormatter.format(GeopointFormatter.Format.LON_DECDEGREE_RAW, viewport.topRight);
         valueMap.put("bbox", bboxString);
 
         fillSearchParameterCenter(valueMap, params, viewport.getCenter());
@@ -478,8 +477,9 @@ final class OkapiClient {
     }
 
 
-
-    /** pass 'null' as value for 'my' to exclude the legacy global application of own/filtered/disabled/archived-flags */
+    /**
+     * pass 'null' as value for 'my' to exclude the legacy global application of own/filtered/disabled/archived-flags
+     */
     @NonNull
     private static List<Geocache> requestCaches(@NonNull final OCApiConnector connector, @NonNull final Parameters params, @NonNull final Map<String, String> valueMap, final boolean forFilterSearch) {
         return requestCachesWithMore(connector, params, valueMap, forFilterSearch).first;
@@ -664,7 +664,9 @@ final class OkapiClient {
         return false;
     }
 
-    /** returns list of parsed geocaches (left) and a floag indicating whether there are more results on serer (right) */
+    /**
+     * returns list of parsed geocaches (left) and a floag indicating whether there are more results on serer (right)
+     */
     @NonNull
     private static Pair<List<Geocache>, Boolean> parseCaches(final ObjectNode response) {
         try {
@@ -1284,8 +1286,7 @@ final class OkapiClient {
     /**
      * Retrieves error information from an unsuccessful Okapi-response
      *
-     * @param response
-     *            response containing an error object
+     * @param response response containing an error object
      * @return OkapiError object with detailed information
      */
     @NonNull

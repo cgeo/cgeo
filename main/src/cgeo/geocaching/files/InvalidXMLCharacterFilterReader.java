@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Filter reader which can filter out invalid XML characters and character references.
- *
  */
 public class InvalidXMLCharacterFilterReader extends FilterReader {
 
@@ -24,7 +23,7 @@ public class InvalidXMLCharacterFilterReader extends FilterReader {
      * valid character there will be some unused chars in the buffer.
      *
      * @return Number of read valid characters or {@code -1} if end of the
-     *         underling reader was reached.
+     * underling reader was reached.
      */
     @Override
     public int read(final char[] cbuf, final int off, final int len) throws IOException {

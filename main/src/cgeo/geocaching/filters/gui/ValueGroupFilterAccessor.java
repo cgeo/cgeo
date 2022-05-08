@@ -32,9 +32,9 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
 
     public static <DD, FF extends ValueGroupGeocacheFilter<DD, ?>> ValueGroupFilterAccessor<DD, FF> createForValueGroupFilter() {
         return new ValueGroupFilterAccessor<DD, FF>()
-            .setFilterValueGetter(ValueGroupGeocacheFilter::getValues)
-            .setFilterValueSetter(ValueGroupGeocacheFilter::setValues)
-            .setGeocacheSingleValueGetter(ValueGroupGeocacheFilter::getCacheValue);
+                .setFilterValueGetter(ValueGroupGeocacheFilter::getValues)
+                .setFilterValueSetter(ValueGroupGeocacheFilter::setValues)
+                .setGeocacheSingleValueGetter(ValueGroupGeocacheFilter::getCacheValue);
     }
 
     @SuppressWarnings("unchecked")

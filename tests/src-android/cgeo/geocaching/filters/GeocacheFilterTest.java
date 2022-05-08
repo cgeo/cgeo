@@ -12,17 +12,17 @@ public class GeocacheFilterTest {
 
     @Test
     public void emptyFilter() {
-        assertFilterFromConfig("",  "", null);
-        assertFilterFromConfig(null,  "", null);
-        assertFilterFromConfig("   ",  "", null);
+        assertFilterFromConfig("", "", null);
+        assertFilterFromConfig(null, "", null);
+        assertFilterFromConfig("   ", "", null);
     }
 
     @Test
     public void emptyFilterWithName() {
-        assertFilterFromConfig("[myname]",  "myname", null);
-        assertFilterFromConfig("[myname",  "myname", null);
-        assertFilterFromConfig("[]",  "", null);
-        assertFilterFromConfig("[test\\]\\:test]",  "test]:test", null);
+        assertFilterFromConfig("[myname]", "myname", null);
+        assertFilterFromConfig("[myname", "myname", null);
+        assertFilterFromConfig("[]", "", null);
+        assertFilterFromConfig("[test\\]\\:test]", "test]:test", null);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class GeocacheFilterTest {
     public void bothfilled() {
         assertFilterFromConfig("[myfilter]name", "myfilter", NameGeocacheFilter.class);
         assertFilterFromConfig("[myfilter] name", "myfilter", NameGeocacheFilter.class);
-        assertFilterFromConfig("[myfilter] AND(name)",  "myfilter", AndGeocacheFilter.class);
+        assertFilterFromConfig("[myfilter] AND(name)", "myfilter", AndGeocacheFilter.class);
     }
 
     @Test

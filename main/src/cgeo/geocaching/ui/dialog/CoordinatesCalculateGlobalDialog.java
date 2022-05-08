@@ -202,10 +202,10 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         binding.generateRangeCoordinates.setOnClickListener(v -> generateRangeCoordinates());
 
         displayType.setSpinner(binding.ccGuidedFormat)
-            .setValues(CollectionStream.of(CalculatedCoordinateType.values()).filter(t -> PLAIN != t).toList())
-            .setDisplayMapper(CalculatedCoordinateType::toUserDisplayableString)
-            .set(calcCoord.getType())
-            .setChangeListener(t -> refreshType(t, false));
+                .setValues(CollectionStream.of(CalculatedCoordinateType.values()).filter(t -> PLAIN != t).toList())
+                .setDisplayMapper(CalculatedCoordinateType::toUserDisplayableString)
+                .set(calcCoord.getType())
+                .setChangeListener(t -> refreshType(t, false));
 
         varListAdapter = binding.variableList.getAdapter();
         varListAdapter.setDisplay(VariableListView.DisplayType.MINIMALISTIC, 2);
@@ -253,21 +253,21 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         binding.ccPlainTools.setOnClickListener(v -> {
             final List<Integer> options = Arrays.asList(R.string.calccoord_remove_spaces, R.string.calccoord_paste_from_clipboard);
             SimpleDialog.of(this.getActivity()).setTitle(R.string.calccoord_plain_tools_title)
-                .selectSingle(options, (i, i2) -> TextParam.id(i), -1, SimpleDialog.SingleChoiceMode.NONE, (o, p) -> {
-                    if (o == R.string.calccoord_remove_spaces) {
-                        binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
-                        binding.PlainLon.setText(binding.PlainLon.getText().toString().replaceAll(" ", ""));
-                    } else if (o == R.string.calccoord_paste_from_clipboard) {
-                        final String clip = ClipboardUtils.getText();
-                        final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(Collections.singleton(clip), null);
-                        if (patterns.isEmpty()) {
-                            ActivityMixin.showShortToast(this.getActivity(), R.string.variables_scanlisting_nopatternfound);
-                        } else {
-                            binding.PlainLat.setText(patterns.get(0).first);
-                            binding.PlainLon.setText(patterns.get(0).second);
+                    .selectSingle(options, (i, i2) -> TextParam.id(i), -1, SimpleDialog.SingleChoiceMode.NONE, (o, p) -> {
+                        if (o == R.string.calccoord_remove_spaces) {
+                            binding.PlainLat.setText(binding.PlainLat.getText().toString().replaceAll(" ", ""));
+                            binding.PlainLon.setText(binding.PlainLon.getText().toString().replaceAll(" ", ""));
+                        } else if (o == R.string.calccoord_paste_from_clipboard) {
+                            final String clip = ClipboardUtils.getText();
+                            final List<Pair<String, String>> patterns = FormulaUtils.scanForCoordinates(Collections.singleton(clip), null);
+                            if (patterns.isEmpty()) {
+                                ActivityMixin.showShortToast(this.getActivity(), R.string.variables_scanlisting_nopatternfound);
+                            } else {
+                                binding.PlainLat.setText(patterns.get(0).first);
+                                binding.PlainLon.setText(patterns.get(0).second);
+                            }
                         }
-                    }
-                });
+                    });
         });
 
         //check if type from config is applicable
@@ -287,7 +287,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         varListAdapter.addVisibleVariables(neededVars);
     }
 
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    // splitting up that method would not help improve readability
     private void refreshType(final CalculatedCoordinateType newType, final boolean initialLoad) {
         if (!initialLoad && calcCoord.getType() == newType) {
             return;
@@ -381,28 +382,28 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         }
 
         SimpleDialog.of(this.getActivity()).setTitle(TextParam.id(R.string.calccoord_generate_title))
-            .setNeutralButton(TextParam.id(R.string.calccoord_generate_showonmap))
-            .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second),  null, s -> {
-                if (s.isEmpty()) {
-                    ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
-                    return;
-                }
-                final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                generateWaypoints(cache, true, s);
-            }, s -> {
-                if (s.isEmpty()) {
-                    ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
-                    return;
-                }
-                //generate a new fake cache in-memory (without a coordinate) to enable showing the waypoints on a map
-                final String dummyGeocode = "TEMP-SHOWWPS-" + System.currentTimeMillis();
-                final Geocache dummyCache = new Geocache();
-                dummyCache.setGeocode(dummyGeocode);
-                DataStore.saveCache(dummyCache, EnumSet.of(LoadFlags.SaveFlag.CACHE));
-                generateWaypoints(dummyCache, false, s);
+                .setNeutralButton(TextParam.id(R.string.calccoord_generate_showonmap))
+                .selectMultiple(gps, (p, i) -> TextParam.text(p.first + ":\n" + p.second), null, s -> {
+                    if (s.isEmpty()) {
+                        ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
+                        return;
+                    }
+                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                    generateWaypoints(cache, true, s);
+                }, s -> {
+                    if (s.isEmpty()) {
+                        ActivityMixin.showShortToast(this.getActivity(), R.string.calccoord_generate_error_nogeopointselected);
+                        return;
+                    }
+                    //generate a new fake cache in-memory (without a coordinate) to enable showing the waypoints on a map
+                    final String dummyGeocode = "TEMP-SHOWWPS-" + System.currentTimeMillis();
+                    final Geocache dummyCache = new Geocache();
+                    dummyCache.setGeocode(dummyGeocode);
+                    DataStore.saveCache(dummyCache, EnumSet.of(LoadFlags.SaveFlag.CACHE));
+                    generateWaypoints(dummyCache, false, s);
 
-                DefaultMap.startActivityGeoCode(this.getActivity(), dummyGeocode);
-            });
+                    DefaultMap.startActivityGeoCode(this.getActivity(), dummyGeocode);
+                });
     }
 
     private void generateWaypoints(final Geocache cache, final boolean updateDatabase, final Collection<Pair<String, Geopoint>> gps) {

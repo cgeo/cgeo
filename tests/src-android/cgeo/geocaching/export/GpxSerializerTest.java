@@ -60,7 +60,6 @@ public class GpxSerializerTest extends AbstractResourceInstrumentationTestCase {
 
     /**
      * This test verifies that a loop of import, export, import leads to the same cache information.
-     *
      */
     public void testStableExportImportExport() throws IOException, ParserException {
         final String geocode = "GC1BKP3";

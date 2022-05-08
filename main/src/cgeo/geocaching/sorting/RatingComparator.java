@@ -9,7 +9,6 @@ import java.util.Locale;
 
 /**
  * sorts caches by gcvote.com rating
- *
  */
 class RatingComparator extends AbstractCacheComparator {
 

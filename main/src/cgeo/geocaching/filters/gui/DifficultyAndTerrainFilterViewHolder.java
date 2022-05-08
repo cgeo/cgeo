@@ -76,7 +76,7 @@ public class DifficultyAndTerrainFilterViewHolder extends BaseFilterViewHolder<D
 
         // create range selector
         final ItemRangeSelectorViewHolder<Float, T> rangeView =
-            (ItemRangeSelectorViewHolder<Float, T>) FilterViewHolderCreator.createFor(filterType, getActivity());
+                (ItemRangeSelectorViewHolder<Float, T>) FilterViewHolderCreator.createFor(filterType, getActivity());
         linearLayout.addView(rangeView.getView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         return rangeView;
     }

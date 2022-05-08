@@ -160,10 +160,11 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
                         currentDragItemStart = viewHolder.getBindingAdapterPosition();
                     }
 
-                     //mark view as "selected"
+                    //mark view as "selected"
                     viewHolder.itemView.setBackgroundColor(CgeoApplication.getInstance().getResources().getColor(R.color.colorBackgroundSelected));
                 }
             }
+
             @Override
             public void clearView(@NonNull final RecyclerView recyclerView, @NonNull final RecyclerView.ViewHolder viewHolder) {
                 super.clearView(recyclerView, viewHolder);
@@ -268,7 +269,8 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         }
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
+    // method readability will not improve by splitting it up
     private int addItemInternal(final int ppos, final Collection<T> items) {
         if (items == null || items.isEmpty()) {
             return 0;
@@ -290,7 +292,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         int posInOriginal = posOrigStart;
         final T firstItem = items.iterator().next();
         while (posInOriginal < posOrigEnd && originalItemListInsertOrder != null &&
-            originalItemListInsertOrder.compare(originalItemList.get(posInOriginal), firstItem) < 0) {
+                originalItemListInsertOrder.compare(originalItemList.get(posInOriginal), firstItem) < 0) {
             posInOriginal++;
         }
 
@@ -413,7 +415,9 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
 
     }
 
-    /** the debug string is used for debug and test purposes. Changing it may break some Unit-Tests */
+    /**
+     * the debug string is used for debug and test purposes. Changing it may break some Unit-Tests
+     */
     @NonNull
     public String getDebugString() {
         return this.itemList + "|" + this.originalItemList + "|" + this.itemToOriginalItemMap;

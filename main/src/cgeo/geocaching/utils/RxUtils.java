@@ -20,7 +20,7 @@ public class RxUtils {
         // Utility class, not to be instantiated
     }
 
-    public static<T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
+    public static <T> Observable<T> rememberLast(final Observable<T> observable, final T initialValue) {
         final AtomicReference<T> lastValue = new AtomicReference<>(initialValue);
         return observable.doOnNext(lastValue::set).startWith(Observable.defer(() -> {
             final T last = lastValue.get();

@@ -168,8 +168,7 @@ public final class LocalStorage {
      * Get the primary geocache data directory for a geocode. A null or empty geocode will be replaced by a default
      * value.
      *
-     * @param geocode
-     *            the geocode
+     * @param geocode the geocode
      * @return the geocache data directory
      */
     @NonNull
@@ -180,6 +179,7 @@ public final class LocalStorage {
     /**
      * Get the internal directory to store offline log images (c:geo-copies) while they are not
      * sent to the server
+     *
      * @return the offline log images directory
      */
     @NonNull
@@ -215,12 +215,9 @@ public final class LocalStorage {
      * filename will be built by hashing it. The directory structure will be created if needed.
      * A null or empty geocode will be replaced by a default value.
      *
-     * @param geocode
-     *            the geocode
-     * @param fileNameOrUrl
-     *            the file name or url
-     * @param isUrl
-     *            true if an url was given, false if a file name was given
+     * @param geocode       the geocode
+     * @param fileNameOrUrl the file name or url
+     * @param isUrl         true if an url was given, false if a file name was given
      * @return the file
      */
     @NonNull
@@ -240,10 +237,8 @@ public final class LocalStorage {
     /**
      * Deletes all files from geocode cache directory with the given prefix.
      *
-     * @param geocode
-     *            The geocode identifying the cache directory
-     * @param prefix
-     *            The filename prefix
+     * @param geocode The geocode identifying the cache directory
+     * @param prefix  The filename prefix
      */
     public static void deleteCacheFilesWithPrefix(@NonNull final String geocode, @NonNull final String prefix) {
         FileUtils.deleteFilesWithPrefix(getGeocacheDataDirectory(geocode), prefix);
@@ -278,7 +273,7 @@ public final class LocalStorage {
                 }
             } catch (final IOException e) {
                 Log.e("Could not get additional mount points for user content. " +
-                    "Proceeding with external storage only (" + extStorage + ")", e);
+                        "Proceeding with external storage only (" + extStorage + ")", e);
             }
         }
         return storages;
@@ -426,9 +421,9 @@ public final class LocalStorage {
 
         MigrateTask(@NonNull final Activity activity, final int currentVersion, final int finalVersion) {
             super(
-                activity,
-                activity.getString(R.string.localstorage_migrate_title),
-                "---");
+                    activity,
+                    activity.getString(R.string.localstorage_migrate_title),
+                    "---");
             this.currentVersion = currentVersion;
             this.finalVersion = finalVersion;
         }
@@ -442,9 +437,9 @@ public final class LocalStorage {
 
         private void displayProgress(final String minorStatus) {
             publishProgress(
-                activity.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
-                    (this.currentMigrateVersionTitle == null ? "" : ": " + currentMigrateVersionTitle) +
-                    (minorStatus == null ? "" : "\n" + minorStatus));
+                    activity.getString(R.string.localstorage_migrate_status_major, this.currentMigrateVersion) +
+                            (this.currentMigrateVersionTitle == null ? "" : ": " + currentMigrateVersionTitle) +
+                            (minorStatus == null ? "" : "\n" + minorStatus));
         }
 
         @Override

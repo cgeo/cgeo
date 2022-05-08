@@ -9,7 +9,7 @@ package cgeo.geocaching.brouter.expressions;
 
 public final class BExpressionContextNode extends BExpressionContext {
     private static final String[] buildInVariables =
-        {"initialcost"};
+            {"initialcost"};
 
     public BExpressionContextNode(final BExpressionMetaData meta) {
         super("node", meta);

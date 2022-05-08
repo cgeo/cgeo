@@ -19,13 +19,13 @@ import org.apache.commons.text.StringEscapeUtils;
 
 public final class CheckerUtils {
     private static final GeoChecker[] CHECKERS = {
-        new GeoChecker("certitudes.org/certitude?"),
-        new GeoChecker("gc-apps.com/checker/"),
-        new GeoChecker("geocheck.org/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
-        new GeoChecker("geochecker.com/index.php?", "&lastcoords=", GeopointFormatter.Format.GEOCHECKERCOM),
-        new GeoChecker("geochecker.gps-cache.de/check.aspx?"),
-        new GeoChecker("geotjek.dk/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
-        new GeoChecker("geocache-planer.de/CAL/checker.php?")
+            new GeoChecker("certitudes.org/certitude?"),
+            new GeoChecker("gc-apps.com/checker/"),
+            new GeoChecker("geocheck.org/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
+            new GeoChecker("geochecker.com/index.php?", "&lastcoords=", GeopointFormatter.Format.GEOCHECKERCOM),
+            new GeoChecker("geochecker.gps-cache.de/check.aspx?"),
+            new GeoChecker("geotjek.dk/geo_inputchkcoord.php?", "&coord=", GeopointFormatter.Format.GEOCHECKORG),
+            new GeoChecker("geocache-planer.de/CAL/checker.php?")
     };
 
     private CheckerUtils() {

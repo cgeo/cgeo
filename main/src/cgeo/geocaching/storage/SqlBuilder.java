@@ -15,7 +15,7 @@ import org.apache.commons.lang3.tuple.ImmutableTriple;
 
 public class SqlBuilder {
 
-    public enum WhereType { AND, OR, NOT }
+    public enum WhereType {AND, OR, NOT}
 
     private int tableIdCnt = 1;
 
@@ -69,7 +69,7 @@ public class SqlBuilder {
         return addWhere(whereClause, (List<String>) null);
     }
 
-    public SqlBuilder addWhere(final String whereClause, final String ... whereArgs) {
+    public SqlBuilder addWhere(final String whereClause, final String... whereArgs) {
         return addWhere(whereClause, Arrays.asList(whereArgs));
     }
 
@@ -143,9 +143,9 @@ public class SqlBuilder {
     }
 
     /**
-     *  Returns SQL as currently defined by this builder.
+     * Returns SQL as currently defined by this builder.
      *
-     *  Method does not change the classes state. It may return incomplete SQL e.g. if not all where's are closed yet
+     * Method does not change the classes state. It may return incomplete SQL e.g. if not all where's are closed yet
      */
     @NonNull
     public String getSql() {
@@ -163,7 +163,7 @@ public class SqlBuilder {
     }
 
     /**
-     *  Returns an SQL statement ready to count(*) the number of rows which would be returned by this statement. If limit is set, this is ignored
+     * Returns an SQL statement ready to count(*) the number of rows which would be returned by this statement. If limit is set, this is ignored
      * Note: if order is set, this is ignored in returend statement as well because order does not change the count(*)
      */
     @NonNull
@@ -171,7 +171,8 @@ public class SqlBuilder {
         return constructSqlInternal("count(*)", false, false);
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // readability of this method would decrease signigicantly if splitted across submethods
+    @SuppressWarnings("PMD.NPathComplexity")
+    // readability of this method would decrease signigicantly if splitted across submethods
     private String constructSqlInternal(final String columnString, final boolean includeOrderBy, final boolean includeLimit) {
 
         final StringBuilder sb = new StringBuilder("SELECT " + columnString + " FROM " + mainTable + " " + getMainTableId());
@@ -199,12 +200,16 @@ public class SqlBuilder {
 
     }
 
-    /** Helper method for escaping text when building SQL */
+    /**
+     * Helper method for escaping text when building SQL
+     */
     public static String escape(final String text) {
         return escape(text, false);
     }
 
-    /** Helper method for escaping text when building SQL */
+    /**
+     * Helper method for escaping text when building SQL
+     */
     public static String escape(final String text, final boolean forLike) {
         if (text == null) {
             return "";
@@ -212,14 +217,15 @@ public class SqlBuilder {
         String escapedText = text.replaceAll("'", "''");
         if (forLike) {
             escapedText = escapedText.replaceAll("_", "\\\\_")
-                .replaceAll("%", "\\\\%")
-                .replaceAll("\\\\", "\\\\\\\\");
+                    .replaceAll("%", "\\\\%")
+                    .replaceAll("\\\\", "\\\\\\\\");
         }
         return escapedText;
     }
 
-    /** creates an SQL LIKE expression. E.g. given escapedPattern "test%" it will return "like 'test%'".
-     *  Backslash ('\') can be used to escape % and _. E.g. "test\%%" will result in "like 'test\%%' escape '\'
+    /**
+     * creates an SQL LIKE expression. E.g. given escapedPattern "test%" it will return "like 'test%'".
+     * Backslash ('\') can be used to escape % and _. E.g. "test\%%" will result in "like 'test\%%' escape '\'
      */
     public static String createLikeExpression(final String escapedPattern) {
         if (escapedPattern == null) {

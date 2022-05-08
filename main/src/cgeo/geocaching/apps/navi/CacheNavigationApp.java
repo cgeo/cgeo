@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 
 /**
  * interface for navigation to a cache
- *
  */
 public interface CacheNavigationApp extends App {
     /**

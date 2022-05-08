@@ -25,7 +25,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Service to speak the compass directions.
- *
  */
 public class SpeechService extends Service implements OnInitListener {
 
@@ -92,8 +91,7 @@ public class SpeechService extends Service implements OnInitListener {
     /**
      * Return distance required to be moved based on overall distance.<br>
      *
-     * @param distance
-     *            in km
+     * @param distance in km
      * @return delta in km
      */
     private static float getDeltaForDistance(final float distance) {

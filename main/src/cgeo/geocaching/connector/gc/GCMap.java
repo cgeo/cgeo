@@ -129,8 +129,7 @@ public class GCMap {
     /**
      * Searches the view port on the live map with Strategy.AUTO
      *
-     * @param viewport
-     *            Area to search
+     * @param viewport Area to search
      */
     @NonNull
     public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport) {
@@ -184,7 +183,6 @@ public class GCMap {
     }
 
 
-
     private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
         return createSearchForFilter(connector, filter, 200, 0);
     }
@@ -232,8 +230,8 @@ public class GCMap {
                 break;
             case ATTRIBUTES: //TODO: does not work for v1!
                 search.addCacheAttributes(
-                    CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
-                    .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
+                        CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
+                                .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
                 break;
             case SIZE:
                 search.addCacheSizes(((SizeGeocacheFilter) basicFilter).getValues());

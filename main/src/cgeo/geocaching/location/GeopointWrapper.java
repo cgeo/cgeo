@@ -46,6 +46,7 @@ public class GeopointWrapper {
 
     /**
      * compares to parsed infos
+     *
      * @param match object to compare
      * @return true: Geopoint which comes first in text or is longer
      */

@@ -71,7 +71,9 @@ public class GCConnectorTest extends AbstractResourceInstrumentationTestCase {
         assertCanHandle("TB3F651").isFalse();
     }
 
-    /** Tile computation with different zoom levels */
+    /**
+     * Tile computation with different zoom levels
+     */
     public static void testTile() {
         // http://coord.info/GC2CT8K = N 52° 30.462 E 013° 27.906
         assertTileAt(8804, 5374, new Tile(new Geopoint(52.5077, 13.4651), 14));

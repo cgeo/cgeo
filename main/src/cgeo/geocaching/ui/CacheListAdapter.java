@@ -76,7 +76,9 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
     private List<AbstractList> storedLists = null;
     private String currentListTitle = "";
     private final Resources res;
-    /** Resulting list of caches */
+    /**
+     * Resulting list of caches
+     */
     private final List<Geocache> list;
 
 
@@ -100,7 +102,6 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
     /**
      * view holder for the cache list adapter
-     *
      */
     public static class ViewHolder extends AbstractViewHolder {
         private CacheListType cacheListType;
@@ -163,6 +164,7 @@ public class CacheListAdapter extends ArrayAdapter<Geocache> implements SectionI
 
         return null;
     }
+
     /**
      * Refilter list of caches (e.g. after new caches were added to the list after reload)
      */

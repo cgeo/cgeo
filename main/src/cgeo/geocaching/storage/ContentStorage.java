@@ -44,10 +44,10 @@ import static org.apache.commons.io.IOUtils.closeQuietly;
  * accessible folders when a folder is not accessible.
  *
  * Implementation reference(s) with regards to SAF:
- *  * Android Doku: https://developer.android.com/preview/privacy/storage
- *  * Android Doku on use cases: https://developer.android.com/training/data-storage/use-cases#handle-non-media-files
- *  * Introduction: https://www.androidcentral.com/what-scoped-storage
- *  * Helpers: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
+ * * Android Doku: https://developer.android.com/preview/privacy/storage
+ * * Android Doku on use cases: https://developer.android.com/training/data-storage/use-cases#handle-non-media-files
+ * * Introduction: https://www.androidcentral.com/what-scoped-storage
+ * * Helpers: https://stackoverflow.com/questions/34927748/android-5-0-documentfile-from-tree-uri
  */
 public class ContentStorage {
 
@@ -62,12 +62,16 @@ public class ContentStorage {
         return INSTANCE;
     }
 
-    /** Class which is used to return basic File information */
+    /**
+     * Class which is used to return basic File information
+     */
     public static class FileInformation {
         public final String name;
         public final Uri uri;
         public final boolean isDirectory;
-        /** if this is a directory: location of that directory. If this is not a directory: null */
+        /**
+         * if this is a directory: location of that directory. If this is not a directory: null
+         */
         public final Folder dirLocation;
         public final String mimeType;
         public final long size;
@@ -88,11 +92,11 @@ public class ContentStorage {
         @Override
         public String toString() {
             return
-                "name='" + name + '\'' +
-                    ", uri=" + uri +
-                    ", isDirectory=" + isDirectory +
-                    ", dirLocation=" + dirLocation +
-                    ", mimeType=" + mimeType;
+                    "name='" + name + '\'' +
+                            ", uri=" + uri +
+                            ", isDirectory=" + isDirectory +
+                            ", dirLocation=" + dirLocation +
+                            ", mimeType=" + mimeType;
         }
     }
 
@@ -105,7 +109,9 @@ public class ContentStorage {
         }
     }
 
-    /** checks if folder is available and can be used, creates it if need be. */
+    /**
+     * checks if folder is available and can be used, creates it if need be.
+     */
     public boolean ensureFolder(final PersistableFolder publicFolder) {
         final Folder folder = getFolder(publicFolder, false);
         if (folder == null) {
@@ -137,22 +143,30 @@ public class ContentStorage {
         return success;
     }
 
-    /** Creates a new file in folder and returns its Uri */
+    /**
+     * Creates a new file in folder and returns its Uri
+     */
     public Uri create(final PersistableFolder folder, final String name) {
         return create(folder, FileNameCreator.forName(name), false);
     }
 
-    /** Creates a new file in folder and returns its Uri */
+    /**
+     * Creates a new file in folder and returns its Uri
+     */
     public Uri create(final PersistableFolder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
         return create(getFolder(folder, false), nameCreator, onlyIfNotExisting);
     }
 
-    /** Creates a new file in folder and returns its Uri */
+    /**
+     * Creates a new file in folder and returns its Uri
+     */
     public Uri create(final Folder folder, final String name) {
         return create(folder, FileNameCreator.forName(name), false);
     }
 
-    /** Creates a new file in a folder location and returns its Uri */
+    /**
+     * Creates a new file in a folder location and returns its Uri
+     */
     public Uri create(final Folder folder, final FileNameCreator nameCreator, final boolean onlyIfNotExisting) {
         if (folder == null) {
             return null;
@@ -173,7 +187,10 @@ public class ContentStorage {
         }
         return null;
     }
-     /** Deletes the file represented by given Uri */
+
+    /**
+     * Deletes the file represented by given Uri
+     */
     public boolean delete(final Uri uri) {
         if (isEmpty(uri)) {
             return false;
@@ -186,25 +203,33 @@ public class ContentStorage {
         return false;
     }
 
-    /** Lists all direct content of given folder */
+    /**
+     * Lists all direct content of given folder
+     */
     @NonNull
     public List<FileInformation> list(final PersistableFolder folder) {
         return list(folder, false);
     }
 
-    /** Lists all direct content of given folder */
+    /**
+     * Lists all direct content of given folder
+     */
     @NonNull
     public List<FileInformation> list(final PersistableFolder folder, final boolean suppressWarningForUser) {
         return list(getFolder(folder, suppressWarningForUser), false, suppressWarningForUser);
     }
 
-    /** Lists all direct content of given folder location */
+    /**
+     * Lists all direct content of given folder location
+     */
     @NonNull
     public List<FileInformation> list(final Folder folder) {
         return list(folder, false, false);
     }
 
-    /** Lists all direct content of given folder location */
+    /**
+     * Lists all direct content of given folder location
+     */
     @NonNull
     public List<FileInformation> list(final Folder folder, final boolean sortByName, final boolean suppressWarningForUser) {
         try (ContextLogger cLog = new ContextLogger("ContentStorage.list: %s", folder)) {
@@ -227,7 +252,9 @@ public class ContentStorage {
         return getFileInfo(folder, name) != null;
     }
 
-    /** Retrieves file information for a file in a folder. See {@link #getParentFolderAndFileInfo(Folder, String)}  for details. */
+    /**
+     * Retrieves file information for a file in a folder. See {@link #getParentFolderAndFileInfo(Folder, String)}  for details.
+     */
     @Nullable
     public FileInformation getFileInfo(final Folder rootFolder, final String subfolderAndName) {
         final ImmutablePair<FileInformation, Folder> info = getParentFolderAndFileInfo(rootFolder, subfolderAndName);
@@ -239,10 +266,10 @@ public class ContentStorage {
      * This file name may be a simple file name (e.g. "myfile.txt"), but it may also include a
      * subfolder structure (e.g. "subfolder/deepersubfolder/myfile.txt").
      *
-     * @param rootFolder root Folder
+     * @param rootFolder       root Folder
      * @param subfolderAndName file name to get information for, optionally with a subfolder structure before it
      * @return information about file (left) and direct parent folder of this file (right).
-     *    Note that file (left) might be null although its parent folder (right) is not null - e.g. if folder does exist, but not the file within it
+     * Note that file (left) might be null although its parent folder (right) is not null - e.g. if folder does exist, but not the file within it
      */
     public ImmutablePair<FileInformation, Folder> getParentFolderAndFileInfo(final Folder rootFolder, final String subfolderAndName) {
 
@@ -275,7 +302,9 @@ public class ContentStorage {
         return null;
     }
 
-    /** Returns Uri for a folder. Returns null if this folder does not yet exist */
+    /**
+     * Returns Uri for a folder. Returns null if this folder does not yet exist
+     */
     public Uri getUriForFolder(final Folder folder) {
         if (folder == null) {
             return null;
@@ -290,7 +319,9 @@ public class ContentStorage {
         return null;
     }
 
-    /** Helper method to get the display name for a Uri. Returns null if Uri does not exist. */
+    /**
+     * Helper method to get the display name for a Uri. Returns null if Uri does not exist.
+     */
     public String getName(final Uri uri) {
         final FileInformation fi = getFileInfo(uri);
         return fi == null ? null : fi.name;
@@ -301,7 +332,7 @@ public class ContentStorage {
      *
      * Note carefully: in case this Uri is not a File-Uri and points to a directory, the Folder field of the returned object is NOT FILLED
      * Unfortunately it is not possible to retrieve this info from an Uri alone.
-     * */
+     */
     public FileInformation getFileInfo(final Uri uri) {
         if (isEmpty(uri)) {
             return null;
@@ -316,7 +347,9 @@ public class ContentStorage {
     }
 
 
-    /** Opens an Uri for writing. Remember to close stream after usage! Returns null if Uri can't be opened for writing. */
+    /**
+     * Opens an Uri for writing. Remember to close stream after usage! Returns null if Uri can't be opened for writing.
+     */
     public OutputStream openForWrite(final Uri uri) {
         return openForWrite(uri, false);
     }
@@ -355,7 +388,9 @@ public class ContentStorage {
         return null;
     }
 
-    /** Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading. */
+    /**
+     * Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading.
+     */
     @Nullable
     public InputStream openForRead(final Uri uri) {
         return openForRead(uri, false);
@@ -363,6 +398,7 @@ public class ContentStorage {
 
     /**
      * Opens an Uri for reading. Remember to close stream after usage! Returns null if Uri can't be opened for reading.
+     *
      * @param suppressWarningForUser if true then failure to open will NOT result in a toast to user
      */
     public InputStream openForRead(final Uri uri, final boolean suppressWarningForUser) {
@@ -422,12 +458,16 @@ public class ContentStorage {
         return outputUri;
     }
 
-    /** Write an (internal's) file content to external storage */
+    /**
+     * Write an (internal's) file content to external storage
+     */
     public Uri writeFileToFolder(final PersistableFolder folder, final FileNameCreator nameCreator, final File file, final boolean deleteFileOnSuccess) {
         return copy(Uri.fromFile(file), getFolder(folder, false), nameCreator, deleteFileOnSuccess);
     }
 
-    /** Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PersistableFolder, FileNameCreator, File, boolean)} */
+    /**
+     * Helper method, meant for usage in conjunction with {@link #writeFileToFolder(PersistableFolder, FileNameCreator, File, boolean)}
+     */
     public File createTempFile() {
         return createTempFile(null);
     }
@@ -447,7 +487,9 @@ public class ContentStorage {
         return null;
     }
 
-    /** Writes the content of given Uri to a (temporary!) File */
+    /**
+     * Writes the content of given Uri to a (temporary!) File
+     */
     public File writeUriToTempFile(final Uri uri, final String fileName) {
         File file = null;
         InputStream is = null;
@@ -472,7 +514,9 @@ public class ContentStorage {
     }
 
 
-    /** Sets a new User-defined Folder for a {@link PersistableFolder}. */
+    /**
+     * Sets a new User-defined Folder for a {@link PersistableFolder}.
+     */
     public void setUserDefinedFolder(final PersistableFolder folder, final Folder userDefinedFolder, final boolean setByUser) {
         folder.setUserDefinedFolder(userDefinedFolder, setByUser);
         documentAccessor.releaseOutdatedUriPermissions();
@@ -492,7 +536,9 @@ public class ContentStorage {
 
     // ---- private methods ----
 
-    /** Tries to read and (optionally) write something to the given folder location, returns whether this was successful or not */
+    /**
+     * Tries to read and (optionally) write something to the given folder location, returns whether this was successful or not
+     */
     private boolean tryTestReadWriteToFolder(final Folder folder, final boolean testWrite) {
 
         try {
@@ -519,7 +565,9 @@ public class ContentStorage {
         }
     }
 
-    /** Gets this folder's current location. If it is not accessible, then null is returned */
+    /**
+     * Gets this folder's current location. If it is not accessible, then null is returned
+     */
     @Nullable
     private Folder getFolder(final PersistableFolder folder, final boolean suppressWarningForUser) {
 
@@ -560,11 +608,11 @@ public class ContentStorage {
         return Folder.fromFolder(CGEO_PRIVATE_FILES, "public/" + fallbackName);
     }
 
-    private void reportProblem(@StringRes final int messageId, final boolean suppressForUser, final Object ... params) {
+    private void reportProblem(@StringRes final int messageId, final boolean suppressForUser, final Object... params) {
         reportProblem(messageId, null, suppressForUser, params);
     }
 
-    private void reportProblem(@StringRes final int messageId, final Exception ex, final boolean suppressForUser, final Object ... params) {
+    private void reportProblem(@StringRes final int messageId, final Exception ex, final boolean suppressForUser, final Object... params) {
 
         if (reportRunningFlag.get() != null && reportRunningFlag.get()) {
             return;

@@ -456,8 +456,6 @@ public class LogTrackableActivity extends AbstractLoggingActivity implements Coo
         /**
          * Adds the new log to the list of log entries for this trackable to be able to show it in the trackable
          * activity.
-         *
-         *
          */
         private void addLocalTrackableLog(final String logText) {
             // TODO create a LogTrackableEntry. For now use "oldLogtype" as a temporary migration path

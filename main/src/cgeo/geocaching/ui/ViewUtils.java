@@ -61,7 +61,7 @@ public class ViewUtils {
     private static final boolean DEBUG_LAYOUT = false;
 
     private static final Resources APP_RESOURCES = CgeoApplication.getInstance() == null || CgeoApplication.getInstance().getApplicationContext() == null ? null :
-        CgeoApplication.getInstance().getApplicationContext().getResources();
+            CgeoApplication.getInstance().getApplicationContext().getResources();
 
     private ViewUtils() {
         //no instance
@@ -71,19 +71,21 @@ public class ViewUtils {
         return DEBUG_LAYOUT;
     }
 
-    public static int dpToPixel(final float dp)  {
+    public static int dpToPixel(final float dp) {
         return (int) (dp * (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
-    public static int pixelToDp(final float px)  {
-        return  (int) (px / (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
+    public static int pixelToDp(final float px) {
+        return (int) (px / (APP_RESOURCES == null ? 20f : APP_RESOURCES.getDisplayMetrics().density));
     }
 
     public static void setTooltip(final View view, final TextParam text) {
         TooltipCompat.setTooltipText(view, text.getText(view.getContext()));
     }
 
-    /** Sets enabled/disabled flag for given view and all nested child views recursively */
+    /**
+     * Sets enabled/disabled flag for given view and all nested child views recursively
+     */
     public static void setEnabledDeep(final View view, final boolean enabled) {
         if (view == null) {
             return;
@@ -98,10 +100,11 @@ public class ViewUtils {
 
     /**
      * creates a standard column layout and adds it to a given parent view. A standard layout consists of a vertically orientated LinearLayout per column.
-     * @param ctx context to use for creating views
-     * @param root optional. If given, then the column layout will be created IN the given view instead of returning a new one.
-     * @param parent the parent layout to add the new column view to. May be null (if root is not null)
-     * @param columnCount number of columns the layout shall have
+     *
+     * @param ctx           context to use for creating views
+     * @param root          optional. If given, then the column layout will be created IN the given view instead of returning a new one.
+     * @param parent        the parent layout to add the new column view to. May be null (if root is not null)
+     * @param columnCount   number of columns the layout shall have
      * @param withSeparator if true, a vertical separator line will be drawn between columns
      * @return created linearlayouts, one per column
      */
@@ -124,12 +127,13 @@ public class ViewUtils {
 
     /**
      * creates a column layout and returns it. Provides the option to specify individual layouts per column.
-     * @param ctx context to use for creating views
-     * @param root optional. If given, then the column layout will be created IN the given view instead of returning a new one.
-     * @param columnCount number of columns the layout shall have
-     * @param withSeparator if true, a vertical separator line will be drawn between columns
+     *
+     * @param ctx               context to use for creating views
+     * @param root              optional. If given, then the column layout will be created IN the given view instead of returning a new one.
+     * @param columnCount       number of columns the layout shall have
+     * @param withSeparator     if true, a vertical separator line will be drawn between columns
      * @param columnViewCreator will be called for each column index (0 - "columnCount-1") and shall return the columns content view.
-     *    May return null for some columns, in which case those are empty
+     *                          May return null for some columns, in which case those are empty
      * @return new ViewGroup holding the column layout. If "root" was not null, then "root" is returned.
      */
     public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Func1<Integer, View> columnViewCreator) {
@@ -363,7 +367,7 @@ public class ViewUtils {
      * Sometimes it is only possible to return width OR height. In this case the other parameter is set to 0.
      *
      * @return Pair where first is width in pixel and second is height in pixel
-     * */
+     */
     @Nullable
     public static Pair<Integer, Integer> getViewSize(final View view) {
         view.measure(0, 0);
@@ -407,7 +411,9 @@ public class ViewUtils {
         return new ContextThemeWrapperWrapper(ctx, R.style.cgeo);
     }
 
-    /** Wrapper for the ContextThemeWrapper, so we can remember the style/theme id. Should SOLELY be used by method @{link {@link #wrap(Context)}}! */
+    /**
+     * Wrapper for the ContextThemeWrapper, so we can remember the style/theme id. Should SOLELY be used by method @{link {@link #wrap(Context)}}!
+     */
     private static class ContextThemeWrapperWrapper extends ContextThemeWrapper {
 
         private final int themeResId;
@@ -455,10 +461,12 @@ public class ViewUtils {
             public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
                 // Intentionally left empty
             }
+
             @Override
             public void onTextChanged(final CharSequence s, final int start, final int before, final int count) {
                 // Intentionally left empty
             }
+
             @Override
             public void afterTextChanged(final Editable s) {
                 callback.accept(s);
@@ -487,7 +495,9 @@ public class ViewUtils {
         return result;
     }
 
-    /** traverses a viewtree starting from "root". For each view satisfying "condition", the "callback" is called. If "callback" returns false, then treewalk is aborted */
+    /**
+     * traverses a viewtree starting from "root". For each view satisfying "condition", the "callback" is called. If "callback" returns false, then treewalk is aborted
+     */
     public static boolean walkViewTree(final View root, final Predicate<View> callback, @Nullable final Predicate<View> condition) {
         if ((condition == null || condition.test(root)) && !callback.test(root)) {
             return false;
@@ -506,8 +516,8 @@ public class ViewUtils {
 
     public static View nextView(final View start, final Predicate<View> rootCondition, final Predicate<View> condition) {
         final View root = getParent(start, rootCondition);
-        final boolean[] foundStart = new boolean[] { false };
-        final View[] nextView = new View[]{ null };
+        final boolean[] foundStart = new boolean[]{false};
+        final View[] nextView = new View[]{null};
         ViewUtils.walkViewTree(root, v -> {
             if (foundStart[0]) {
                 // we found the start view just before, so this is the next view

@@ -64,22 +64,16 @@ public final class Dialogs {
      * Show a onetime message dialog with title icon, "OK" and an "don't shown again" checkbox.
      * The check if the message should be shown is not done by this function, so be aware when using it!
      *
-     * @param context
-     *            activity owning the dialog
-     * @param title
-     *            message dialog title
-     * @param message
-     *            message dialog content
-     * @param dialogType
-     *            the dialogs individual identification type
-     * @param iconObservable
-     *            observable (may be <tt>null</tt>) containing the icon(s) to set
-     * @param cancellable
-     *            if true, a cancel button will be displayed additionally
-     * @param runAfterwards
-     *            runnable (may be <tt>null</tt>) will be executed when ok button is clicked
+     * @param context        activity owning the dialog
+     * @param title          message dialog title
+     * @param message        message dialog content
+     * @param dialogType     the dialogs individual identification type
+     * @param iconObservable observable (may be <tt>null</tt>) containing the icon(s) to set
+     * @param cancellable    if true, a cancel button will be displayed additionally
+     * @param runAfterwards  runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
+    // method readability will not improve by splitting it up
     private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
         final DialogTextCheckboxBinding content = DialogTextCheckboxBinding.inflate(LayoutInflater.from(context));
 
@@ -138,29 +132,25 @@ public final class Dialogs {
      * Message dialog which is shown max one time each c:geo session, until "don't shown again" is checked.
      * Please define your dialog name/message strings at OneTimeDialogs.DialogType.
      *
-     * @param context
-     *            activity owning the dialog
-     * @param dialogType
-     *            sets title and message of the dialog
-     *            used for storing the dialog status in the DB
+     * @param context    activity owning the dialog
+     * @param dialogType sets title and message of the dialog
+     *                   used for storing the dialog status in the DB
      */
     public static void basicOneTimeMessage(@NonNull final Context context, final OneTimeDialogs.DialogType dialogType) {
 
         if (OneTimeDialogs.showDialog(dialogType)) {
             OneTimeDialogs.setStatus(dialogType, OneTimeDialogs.DialogStatus.DIALOG_HIDE, OneTimeDialogs.DialogStatus.DIALOG_SHOW);
             internalOneTimeMessage(context, LocalizationUtils.getString(dialogType.messageTitle), LocalizationUtils.getString(dialogType.messageText), dialogType.moreInfoURLResId > 0 ? LocalizationUtils.getString(dialogType.moreInfoURLResId) : null, dialogType,
-                Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
+                    Observable.just(Objects.requireNonNull(ResourcesCompat.getDrawable(context.getResources(), R.drawable.ic_info_blue, context.getTheme()))), false, null);
         }
     }
-
 
 
     /**
      * OK (+ cancel) dialog which is shown, until "don't shown again" is checked. Title, text, icon and runAfterwards can be set.
      * If "don't shown again" is selected for this dialog, runAfterwards will be executed directly.
      *
-     * @param dialogType
-     *            used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
+     * @param dialogType used for storing the dialog status in the DB, title and message defined in the dialogType are ignored
      */
     public static void advancedOneTimeMessage(final Context context, final OneTimeDialogs.DialogType dialogType, final String title, final String message, final String moreInfoURL, final boolean cancellable, @Nullable final Observable<Drawable> iconObservable, @Nullable final Runnable runAfterwards) {
         if (OneTimeDialogs.showDialog(dialogType)) {
@@ -186,18 +176,18 @@ public final class Dialogs {
         final boolean yesNoLabel = checkboxConfig.getActionButtonLabel() == CheckboxDialogConfig.ActionButtonLabel.YES_NO;
 
         final AlertDialog alertDialog = Dialogs.newBuilder(context)
-            .setView(content)
-            .setTitle(title)
-            .setCancelable(true)
-            .setPositiveButton(yesNoLabel ? R.string.yes : android.R.string.ok, (dialog, which) -> onConfirm.call(checkbox.isChecked()))
-            .setNegativeButton(yesNoLabel ? R.string.no : android.R.string.cancel, (dialog2, which2) -> {
-                if (onCancel != null) {
-                    onCancel.call(checkbox.isChecked());
-                } else {
-                    dialog2.dismiss();
-                }
-            })
-            .create();
+                .setView(content)
+                .setTitle(title)
+                .setCancelable(true)
+                .setPositiveButton(yesNoLabel ? R.string.yes : android.R.string.ok, (dialog, which) -> onConfirm.call(checkbox.isChecked()))
+                .setNegativeButton(yesNoLabel ? R.string.no : android.R.string.cancel, (dialog2, which2) -> {
+                    if (onCancel != null) {
+                        onCancel.call(checkbox.isChecked());
+                    } else {
+                        dialog2.dismiss();
+                    }
+                })
+                .create();
         alertDialog.show();
 
         final Button buttonPositive = alertDialog.getButton(AlertDialog.BUTTON_POSITIVE);
@@ -221,7 +211,7 @@ public final class Dialogs {
      */
     public static <T> void selectItemDialogWithAdditionalDeleteButton(final Context context, final @StringRes int title, @NonNull final List<T> items, @NotNull final Func1<T, TextParam> displayMapper, final Action1<T> onSelectListener, final Action1<T> onDeleteListener) {
         final AlertDialog.Builder builder = Dialogs.newBuilder(context).setTitle(title);
-        final AlertDialog[] dialog = new AlertDialog[] { null };
+        final AlertDialog[] dialog = new AlertDialog[]{null};
 
         final ListAdapter adapter = new ArrayAdapter<T>(context, R.layout.select_or_delete_item, android.R.id.text1, items) {
             public View getView(final int position, final View convertView, final ViewGroup parent) {
@@ -259,7 +249,6 @@ public final class Dialogs {
 
     /**
      * Move the cursor to the end of the input field.
-     *
      */
     public static void moveCursorToEnd(final EditText input) {
         input.setSelection(input.getText().length(), input.getText().length());
@@ -344,30 +333,31 @@ public final class Dialogs {
      *
      * short form of input(), with default parameters for {@link InputType}, minLines and maxLines
      */
-     public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {
+    public static void input(final Activity activity, final String title, final String currentValue, final String label, final Consumer<String> callback) {
         input(activity, title, currentValue, label, -1, 1, 1, callback);
     }
 
     /**
      * displays an input dialog (one or multiple lines)
      *
-     * @param activity      calling activity
-     * @param title         dialog title
-     * @param currentValue  if non-null, this will be the prefilled value of the input field
-     * @param label         label / hint for the input field
-     * @param inputType     input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed
-     * @param minLines      minimum amount of input lines to display
-     * @param maxLines      maximum amount of input lines to display (make dialog scrollable, if > 1)
-     * @param callback      method to call on positive confirmation, gets current text as parameter
+     * @param activity     calling activity
+     * @param title        dialog title
+     * @param currentValue if non-null, this will be the prefilled value of the input field
+     * @param label        label / hint for the input field
+     * @param inputType    input type flag mask, use constants defined in class {@link InputType}. If a value below 0 is given then standard input type settings (text) are assumed
+     * @param minLines     minimum amount of input lines to display
+     * @param maxLines     maximum amount of input lines to display (make dialog scrollable, if > 1)
+     * @param callback     method to call on positive confirmation, gets current text as parameter
      */
     public static void input(final Activity activity, final String title, final String currentValue, final String label, final int inputType, final int minLines, final int maxLines, final Consumer<String> callback) {
         final Pair<View, EditText> textField = ViewUtils.createTextField(activity, currentValue, TextParam.text(label), null, inputType, minLines, maxLines);
         newBuilder(activity)
-            .setView(textField.first)
-            .setTitle(title)
-            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(textField.second.getText().toString().trim()))
-            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> { })
-            .show();
+                .setView(textField.first)
+                .setTitle(title)
+                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> callback.accept(textField.second.getText().toString().trim()))
+                .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> {
+                })
+                .show();
     }
 
     public static AlertDialog.Builder newBuilder(final Context context) {

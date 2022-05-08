@@ -8,7 +8,6 @@ import java.io.File;
 
 /**
  * Connector interface to implement an upload of (already exported) field notes
- *
  */
 public interface FieldNotesCapability extends IConnector {
     /**

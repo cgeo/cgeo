@@ -12,7 +12,8 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
     boolean isBasic = true;
 
     @Override
-    @SuppressWarnings({"PMD.ExcessiveMethodLength", "PMD.NPathComplexity"}) // method is long, but trivial; splitting it into submethods would not improve readability
+    @SuppressWarnings({"PMD.ExcessiveMethodLength", "PMD.NPathComplexity"})
+    // method is long, but trivial; splitting it into submethods would not improve readability
     public RenderThemeLegend.LegendCategory[] loadLegend(final RenderThemeHelper.RenderThemeType rtt, final ArrayList<RenderThemeLegend.LegendEntry> entries) {
         isBasic = rtt == RenderThemeHelper.RenderThemeType.RTT_FZK_BASE;
         final String p = rtt.relPath + "/patterns";
@@ -229,7 +230,8 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
     }
 
     @Override
-    public @StringRes int getInfoUrl() {
+    public @StringRes
+    int getInfoUrl() {
         return isBasic ? R.string.maptheme_legend_freizeitkarte_base : R.string.maptheme_legend_freizeitkarte_outdoor;
     }
 }

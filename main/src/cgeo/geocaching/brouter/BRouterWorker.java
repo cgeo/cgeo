@@ -23,7 +23,8 @@ public class BRouterWorker {
     public List<OsmNodeNamed> nogoList;
     public List<OsmNodeNamed> nogoPolygonsList;
 
-    @SuppressWarnings({"PMD.ExcessiveMethodLength", "DuplicateBranchesInSwitch"}) // external code, do not refactor
+    @SuppressWarnings({"PMD.ExcessiveMethodLength", "DuplicateBranchesInSwitch"})
+    // external code, do not refactor
     public String getTrackFromParams(final Bundle params) {
         long maxRunningTime = 60000;
         final String sMaxRunningTime = params.getString("maxRunningTime");

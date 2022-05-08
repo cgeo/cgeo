@@ -253,11 +253,11 @@ public final class StoredList extends AbstractList {
                 return;
             }
             SimpleDialog.of(activity).setTitle(dialogTitle).setPositiveButton(TextParam.id(buttonTitle))
-                .input(-1, defaultValue, null, null, input -> {
-                if (StringUtils.isNotBlank(input)) {
-                    runnable.call(input);
-                }
-            });
+                    .input(-1, defaultValue, null, null, input -> {
+                        if (StringUtils.isNotBlank(input)) {
+                            runnable.call(input);
+                        }
+                    });
         }
 
         public void promptForListRename(final int listId, @NonNull final Runnable runAfterRename) {

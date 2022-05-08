@@ -47,7 +47,7 @@ public class ColorpickerPreference extends Preference {
     private int iconSize = 0;
     private final DisplayMetrics dm = DisplayUtils.getDisplayMetrics();
     private final float radius = DisplayUtils.getDisplayDensity() * 2.0f;
-    private final float[] radii = { radius, radius, radius, radius, radius, radius, radius, radius };
+    private final float[] radii = {radius, radius, radius, radius, radius, radius, radius, radius};
     private final int strokeWidth = (int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 2, dm);
 
     public ColorpickerPreference(final Context context) {
@@ -161,28 +161,29 @@ public class ColorpickerPreference extends Preference {
                 final int max = 255;
 
                 Dialogs.newBuilder(context)
-                    .setTitle(String.format(context.getString(R.string.number_input_title), "" + min, "" + max))
-                    .setView(editText)
-                    .setPositiveButton(android.R.string.ok, (dialog2, whichButton) -> {
-                        int newValue;
-                        try {
-                            newValue = Integer.parseInt(editText.getText().toString());
-                            if (newValue > max) {
-                                newValue = max;
-                                Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                        .setTitle(String.format(context.getString(R.string.number_input_title), "" + min, "" + max))
+                        .setView(editText)
+                        .setPositiveButton(android.R.string.ok, (dialog2, whichButton) -> {
+                            int newValue;
+                            try {
+                                newValue = Integer.parseInt(editText.getText().toString());
+                                if (newValue > max) {
+                                    newValue = max;
+                                    Toast.makeText(context, R.string.number_input_err_boundarymax, Toast.LENGTH_SHORT).show();
+                                }
+                                if (newValue < min) {
+                                    newValue = min;
+                                    Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
+                                }
+                                opaquenessSlider.setProgress(newValue);
+                                selectOpaqueness(opaquenessSlider.getProgress());
+                            } catch (NumberFormatException e) {
+                                Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
                             }
-                            if (newValue < min) {
-                                newValue = min;
-                                Toast.makeText(context, R.string.number_input_err_boundarymin, Toast.LENGTH_SHORT).show();
-                            }
-                            opaquenessSlider.setProgress(newValue);
-                            selectOpaqueness(opaquenessSlider.getProgress());
-                        } catch (NumberFormatException e) {
-                            Toast.makeText(context, R.string.number_input_err_format, Toast.LENGTH_SHORT).show();
-                        }
-                    })
-                    .setNegativeButton(android.R.string.cancel, (dialog2, whichButton) -> { })
-                    .show()
+                        })
+                        .setNegativeButton(android.R.string.cancel, (dialog2, whichButton) -> {
+                        })
+                        .show()
                 ;
             });
         } else {

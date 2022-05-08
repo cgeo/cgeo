@@ -335,9 +335,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         locationUpdater = new CacheDetailsGeoDirHandler(this);
 
         final long pageToOpen = forceWaypointsPage ? Page.WAYPOINTS.id :
-            savedInstanceState != null ?
-                savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
-                Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
+                savedInstanceState != null ?
+                        savedInstanceState.getLong(STATE_PAGE_INDEX, Page.DETAILS.id) :
+                        Settings.isOpenLastDetailsPage() ? Settings.getLastDetailsPage() : Page.DETAILS.id;
 
         createViewPager(pageToOpen, getOrderedPages(), currentPageId -> {
             if (Settings.isOpenLastDetailsPage()) {
@@ -370,11 +370,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         // Load Generic Trackables
         if (StringUtils.isNotBlank(geocode)) {
             AndroidRxUtils.bindActivity(this,
-                // Obtain the active connectors and load trackables in parallel.
-                Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
-                    processedBrands.add(trackableConnector.getBrand());
-                    return Observable.defer(() -> Observable.fromIterable(trackableConnector.searchTrackables(geocode))).subscribeOn(AndroidRxUtils.networkScheduler);
-                }).toList()).subscribe(trackables -> {
+                    // Obtain the active connectors and load trackables in parallel.
+                    Observable.fromIterable(ConnectorFactory.getGenericTrackablesConnectors()).flatMap((Function<TrackableConnector, Observable<Trackable>>) trackableConnector -> {
+                        processedBrands.add(trackableConnector.getBrand());
+                        return Observable.defer(() -> Observable.fromIterable(trackableConnector.searchTrackables(geocode))).subscribeOn(AndroidRxUtils.networkScheduler);
+                    }).toList()).subscribe(trackables -> {
                 // Todo: this is not really a good method, it may lead to duplicates ; ie: in OC connectors.
                 // Store trackables.
                 genericTrackables.addAll(trackables);
@@ -517,7 +517,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final Geopoint coordinates = selectedWaypoint.getCoords();
                 if (coordinates != null) {
                     ClipboardUtils.copyToClipboard(
-                        GeopointFormatter.reformatForClipboard(coordinates.toString()));
+                            GeopointFormatter.reformatForClipboard(coordinates.toString()));
                     showToast(getString(R.string.clipboard_copy_ok));
                 }
             }
@@ -1175,7 +1175,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
-        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+        // splitting up that method would not help improve readability
         public void setContent() {
             // retrieve activity and cache - if either of them is null, something's really wrong!
             final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
@@ -1440,7 +1441,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        /** Add this cache to the watchlist of the user */
+        /**
+         * Add this cache to the watchlist of the user
+         */
         private void watchListAdd(final SimpleDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToWatchlist(cache)) {
@@ -1450,7 +1453,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        /** Remove this cache from the watchlist of the user */
+        /**
+         * Remove this cache from the watchlist of the user
+         */
         private void watchListRemove(final SimpleDisposableHandler handler) {
             final WatchListCapability connector = (WatchListCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromWatchlist(cache)) {
@@ -1460,7 +1465,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        /** Add this cache to the favorite list of the user */
+        /**
+         * Add this cache to the favorite list of the user
+         */
         private void favoriteAdd(final SimpleDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.addToFavorites(cache)) {
@@ -1470,7 +1477,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             }
         }
 
-        /** Remove this cache to the favorite list of the user */
+        /**
+         * Remove this cache to the favorite list of the user
+         */
         private void favoriteRemove(final SimpleDisposableHandler handler) {
             final IFavoriteCapability connector = (IFavoriteCapability) ConnectorFactory.getConnector(cache);
             if (connector.removeFromFavorites(cache)) {
@@ -1669,7 +1678,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
-        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+        // splitting up that method would not help improve readability
         public void setContent() {
             // retrieve activity and cache - if either of them is null, something's really wrong!
             final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
@@ -1854,12 +1864,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         /**
          * Load the description in the background.
          *
-         * @param descriptionString
-         *            the HTML description as retrieved from the connector
-         * @param descriptionView
-         *            the view to fill
-         * @param loadingIndicatorView
-         *            the loading indicator view, will be hidden when completed
+         * @param descriptionString    the HTML description as retrieved from the connector
+         * @param descriptionView      the view to fill
+         * @param loadingIndicatorView the loading indicator view, will be hidden when completed
          */
         private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final boolean isLongDescription, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
@@ -1929,6 +1936,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          * When running on Android 12 this direct URL might be redirected to c:geo under
          * specific system settings, leading to a loop (see #12889), so let's reassign
          * this link to the proper openGeochecker method.
+         *
          * @param activity calling activity
          */
         private void fixOldGeocheckerLink(final Activity activity) {
@@ -2503,7 +2511,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         final AlertDialog.Builder builder = Dialogs.newBuilder(this);
         builder.setTitle(R.string.waypoint_reset_cache_coords);
 
-        final String[] items = { res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords) };
+        final String[] items = {res.getString(R.string.waypoint_localy_reset_cache_coords), res.getString(R.string.waypoint_reset_local_and_remote_cache_coords)};
         builder.setSingleChoiceItems(items, 0, (dialog, which) -> {
             dialog.dismiss();
             final ProgressDialog progressDialog = ProgressDialog.show(CacheDetailActivity.this, getString(R.string.cache), getString(R.string.waypoint_reset), true);
@@ -2663,12 +2671,12 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     }
 
     static void updateOfflineBox(final View view, final Geocache cache, final Resources res,
-            final OnClickListener refreshCacheClickListener,
-            final OnClickListener dropCacheClickListener,
-            final OnClickListener storeCacheClickListener,
-            final OnClickListener showHintClickListener,
-            final OnLongClickListener moveCacheListener,
-            final OnLongClickListener storeCachePreselectedListener) {
+                                 final OnClickListener refreshCacheClickListener,
+                                 final OnClickListener dropCacheClickListener,
+                                 final OnClickListener storeCacheClickListener,
+                                 final OnClickListener showHintClickListener,
+                                 final OnLongClickListener moveCacheListener,
+                                 final OnLongClickListener storeCachePreselectedListener) {
         // offline use
         final TextView offlineText = view.findViewById(R.id.offline_text);
         final View offlineRefresh = view.findViewById(R.id.offline_refresh);

@@ -104,7 +104,8 @@ public final class GCParser {
     }
 
     @Nullable
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    // splitting up that method would not help improve readability
     private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent, final int alreadyTaken) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");
@@ -386,12 +387,10 @@ public final class GCParser {
      * Parse cache from text and return either an error code or a cache object in a pair. Note that inline logs are
      * not parsed nor saved, while the cache itself is.
      *
-     * @param pageIn
-     *            the page text to parse
-     * @param handler
-     *            the handler to send the progress notifications to
+     * @param pageIn  the page text to parse
+     * @param handler the handler to send the progress notifications to
      * @return a pair, with a {@link StatusCode} on the left, and a non-null cache object on the right
-     *         iff the status code is {@link StatusCode#NO_ERROR}.
+     * iff the status code is {@link StatusCode#NO_ERROR}.
      */
     @NonNull
     private static ImmutablePair<StatusCode, Geocache> parseCacheFromText(@Nullable final String pageIn, @Nullable final DisposableHandler handler) {
@@ -447,7 +446,7 @@ public final class GCParser {
         final Geocache cache = new Geocache();
         cache.setDisabled(page.contains(GCConstants.STRING_STATUS_DISABLED));
         cache.setArchived(page.contains(GCConstants.STRING_STATUS_ARCHIVED)
-                        || page.contains(GCConstants.STRING_STATUS_LOCKED));
+                || page.contains(GCConstants.STRING_STATUS_LOCKED));
 
         cache.setPremiumMembersOnly(TextUtils.matches(page, GCConstants.PATTERN_PREMIUMMEMBERS));
 
@@ -1157,9 +1156,7 @@ public final class GCParser {
     /**
      * Reads the downloadable pocket queries from the uxOfflinePQTable
      *
-     * @param document
-     *            the page as Document
-     *
+     * @param document the page as Document
      * @return Map with downloadable PQs keyed by guid
      */
     @NonNull
@@ -1218,7 +1215,7 @@ public final class GCParser {
      */
     @NonNull
     public static StatusCode postLogTrackable(final String tbid, final String trackingCode, final String[] viewstates,
-            final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
+                                              final LogTypeTrackable logType, final int year, final int month, final int day, final String log) {
         if (GCLogin.isEmpty(viewstates)) {
             Log.e("GCParser.postLogTrackable: No viewstate given");
             return StatusCode.LOG_POST_ERROR;
@@ -1271,15 +1268,16 @@ public final class GCParser {
     /**
      * Adds the cache to the watchlist of the user.
      *
-     * @param cache
-     *            the cache to add
+     * @param cache the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean addToWatchlist(@NonNull final Geocache cache) {
         return addToOrRemoveFromWatchlist(cache, true);
     }
 
-    /** internal method to handle add to / remove from watchlist */
+    /**
+     * internal method to handle add to / remove from watchlist
+     */
     private static boolean addToOrRemoveFromWatchlist(@NonNull final Geocache cache, final boolean doAdd) {
 
         final String logContext = "GCParser.addToOrRemoveFromWatchlist(cache = " + cache.getGeocode() + ", add = " + doAdd + ")";
@@ -1308,6 +1306,7 @@ public final class GCParser {
 
     /**
      * This method extracts the amount of people watching on a geocache out of the HTMl website passed to it
+     *
      * @param page Page containing the information about how many people watching on geocache
      * @return Number of people watching geocache, -1 when error
      */
@@ -1327,8 +1326,7 @@ public final class GCParser {
     /**
      * Removes the cache from the watch list
      *
-     * @param cache
-     *            the cache to remove
+     * @param cache the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean removeFromWatchlist(@NonNull final Geocache cache) {
@@ -1354,8 +1352,7 @@ public final class GCParser {
      *
      * This must not be called from the UI thread.
      *
-     * @param cache
-     *            the cache to add
+     * @param cache the cache to add
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean addToFavorites(@NonNull final Geocache cache) {
@@ -1395,8 +1392,7 @@ public final class GCParser {
      *
      * This must not be called from the UI thread.
      *
-     * @param cache
-     *            the cache to remove
+     * @param cache the cache to remove
      * @return {@code false} if an error occurred, {@code true} otherwise
      */
     static boolean removeFromFavorites(@NonNull final Geocache cache) {
@@ -1406,8 +1402,7 @@ public final class GCParser {
     /**
      * Parse a trackable HTML description into a Trackable object
      *
-     * @param page
-     *            the HTML page to parse, already processed through {@link TextUtils#replaceWhitespace}
+     * @param page the HTML page to parse, already processed through {@link TextUtils#replaceWhitespace}
      * @return the parsed trackable, or null if none could be parsed
      */
     static Trackable parseTrackable(final String page, final String possibleTrackingcode) {
@@ -1672,10 +1667,8 @@ public final class GCParser {
     /**
      * Extract special logs (friends, own) through separate request.
      *
-     * @param userToken
-     *            the user token extracted from the web page
-     * @param logType
-     *            the logType to request
+     * @param userToken the user token extracted from the web page
+     * @param logType   the logType to request
      * @return Observable<LogEntry> The logs
      */
     private static Observable<LogEntry> getLogs(final String userToken, final Logs logType) {
@@ -1883,10 +1876,8 @@ public final class GCParser {
      * Merge log entries and mark them as friends logs (personal and friends) to identify
      * them on friends/personal logs tab.
      *
-     * @param mergedLogs
-     *            the list to merge logs with
-     * @param logsToMerge
-     *            the list of logs to merge
+     * @param mergedLogs  the list to merge logs with
+     * @param logsToMerge the list of logs to merge
      */
     private static void mergeFriendsLogs(final List<LogEntry> mergedLogs, final Iterable<LogEntry> logsToMerge) {
         for (final LogEntry log : logsToMerge) {

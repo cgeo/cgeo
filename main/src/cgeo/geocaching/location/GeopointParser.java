@@ -48,8 +48,7 @@ public class GeopointParser {
         /**
          * Parses coordinates out of the given string.
          *
-         * @param text
-         *            the string to be parsed
+         * @param text the string to be parsed
          * @return a wrapper with the parsed coordinates and the length of the match, or null if parsing failed
          */
         @Nullable
@@ -58,10 +57,8 @@ public class GeopointParser {
         /**
          * Parses latitude or longitude out of the given string.
          *
-         * @param text
-         *            the string to be parsed
-         * @param latlon
-         *            whether to parse latitude or longitude
+         * @param text   the string to be parsed
+         * @param latlon whether to parse latitude or longitude
          * @return a wrapper with the parsed latitude/longitude and the length of the match, or null if parsing failed
          */
         @Nullable
@@ -85,14 +82,10 @@ public class GeopointParser {
         /**
          * Creates latitude or longitude out of matches groups for sign, degrees, minutes and seconds.
          *
-         * @param signGroup
-         *            a string representing the sign of the coordinate, ignored if empty
-         * @param degreesGroup
-         *            a string representing the degrees of the coordinate, ignored if empty
-         * @param minutesGroup
-         *            a string representing the minutes of the coordinate, ignored if empty
-         * @param secondsGroup
-         *            a string representing the seconds of the coordinate, ignored if empty
+         * @param signGroup    a string representing the sign of the coordinate, ignored if empty
+         * @param degreesGroup a string representing the degrees of the coordinate, ignored if empty
+         * @param minutesGroup a string representing the minutes of the coordinate, ignored if empty
+         * @param secondsGroup a string representing the seconds of the coordinate, ignored if empty
          * @return the latitude/longitude in decimal degrees, or null if creation failed
          */
         @Nullable
@@ -130,12 +123,9 @@ public class GeopointParser {
         /**
          * Parses latitude or longitude out of a given range of matched groups.
          *
-         * @param matcher
-         *            the matcher that holds the matches groups
-         * @param first
-         *            the first group to parse
-         * @param last
-         *            the last group to parse
+         * @param matcher the matcher that holds the matches groups
+         * @param first   the first group to parse
+         * @param last    the last group to parse
          * @return the parsed latitude/longitude, or null if parsing failed
          */
         @Nullable
@@ -195,8 +185,7 @@ public class GeopointParser {
         /**
          * Parses latitude or longitude from matched groups of corresponding pattern.
          *
-         * @param groups
-         *            the groups matched by latitude/longitude pattern
+         * @param groups the groups matched by latitude/longitude pattern
          * @return parsed latitude/longitude, or null if parsing failed
          */
         @Nullable
@@ -481,8 +470,7 @@ public class GeopointParser {
      *
      * The generated inputs use different delimiters for fractional numbers.
      *
-     * @param text
-     *            the text to parse
+     * @param text the text to parse
      * @return the set of parser inputs
      */
     @NonNull
@@ -495,8 +483,7 @@ public class GeopointParser {
     /**
      * Removes all single spaces after a comma (see #2404)
      *
-     * @param text
-     *            the string to substitute
+     * @param text the string to substitute
      * @return the substituted string without the single spaces
      */
     @NonNull
@@ -521,10 +508,8 @@ public class GeopointParser {
     /**
      * Parses latitude/longitude from the given string.
      *
-     * @param text
-     *            the text to parse
-     * @param latlon
-     *            whether to parse latitude or longitude
+     * @param text   the text to parse
+     * @param latlon whether to parse latitude or longitude
      * @return a wrapper with the best latitude/longitude and the length of the match, or null if parsing failed
      */
     @Nullable
@@ -542,7 +527,9 @@ public class GeopointParser {
         return null;
     }
 
-    /** same as {@link #parse(String)}, but returns a provided default Value (instead of throwing exception) if parsing fails */
+    /**
+     * same as {@link #parse(String)}, but returns a provided default Value (instead of throwing exception) if parsing fails
+     */
     @NonNull
     public static Geopoint parse(@NonNull final String text, @Nullable final Geopoint defaultValue) {
         try {
@@ -567,11 +554,9 @@ public class GeopointParser {
      *
      * Both . and , are accepted, also variable count of spaces (also 0)
      *
-     * @param text
-     *            the string to be parsed
+     * @param text the string to be parsed
      * @return an Geopoint with parsed latitude and longitude
-     * @throws Geopoint.ParseException
-     *             if coordinates could not be parsed
+     * @throws Geopoint.ParseException if coordinates could not be parsed
      */
     @NonNull
     public static Geopoint parse(@NonNull final String text) {
@@ -601,7 +586,7 @@ public class GeopointParser {
      *
      * @param initialText Text to parse for coordinates
      * @return a collection of parsed geopoints as well as their starting and ending position and the appropriate text
-     *   'start' points at the first char of the coordinate text, 'end' points at the first char AFTER the coordinate text
+     * 'start' points at the first char of the coordinate text, 'end' points at the first char AFTER the coordinate text
      */
     @NonNull
     public static Collection<GeopointWrapper> parseAll(@NonNull final String initialText) {
@@ -642,12 +627,10 @@ public class GeopointParser {
      *
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
-     * @see #parse(String)
-     * @param text
-     *            the string to be parsed
+     * @param text the string to be parsed
      * @return the latitude as decimal degrees
-     * @throws Geopoint.ParseException
-     *             if latitude could not be parsed
+     * @throws Geopoint.ParseException if latitude could not be parsed
+     * @see #parse(String)
      */
     public static double parseLatitude(@Nullable final String text) {
         if (text != null) {
@@ -665,12 +648,10 @@ public class GeopointParser {
      *
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
-     * @see #parse(String)
-     * @param text
-     *            the string to be parsed
+     * @param text the string to be parsed
      * @return the longitude as decimal degrees
-     * @throws Geopoint.ParseException
-     *             if longitude could not be parsed
+     * @throws Geopoint.ParseException if longitude could not be parsed
+     * @see #parse(String)
      */
     public static double parseLongitude(@Nullable final String text) {
         if (text != null) {

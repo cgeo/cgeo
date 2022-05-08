@@ -10,12 +10,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-/** Encapsulates a list of {@link cgeo.geocaching.utils.formulas.Value}'s for handling as parameter lists in {@link Formula} */
+/**
+ * Encapsulates a list of {@link cgeo.geocaching.utils.formulas.Value}'s for handling as parameter lists in {@link Formula}
+ */
 public class ValueList implements Iterable<Value> {
 
     private final List<Value> list = new ArrayList<>();
 
-    public ValueList add(final Value ... values) {
+    public ValueList add(final Value... values) {
         Collections.addAll(list, values);
         return this;
     }
@@ -66,7 +68,7 @@ public class ValueList implements Iterable<Value> {
 
     public void checkCount(final int minCount, final int maxCount) {
         if ((minCount > 0 && (size() < minCount)) ||
-            (maxCount > 0 && (size() > maxCount))) {
+                (maxCount > 0 && (size() > maxCount))) {
             throw new FormulaException(WRONG_PARAMETER_COUNT, minCount < 0 ? "*" : "" + minCount, maxCount < 0 ? "*" : "" + maxCount, size());
         }
 

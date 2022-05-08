@@ -34,8 +34,7 @@ public class CacheCache {
     }
 
     /**
-     * @param geocode
-     *            Geocode of the cache to remove from the cache
+     * @param geocode Geocode of the cache to remove from the cache
      */
     public void removeCacheFromCache(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
@@ -49,9 +48,7 @@ public class CacheCache {
     /**
      * "Store" a cache in the CacheCache. If the cache is already in the CacheCache the cache gets replaced.
      *
-     * @param cache
-     *            Cache
-     *
+     * @param cache Cache
      */
     public void putCacheInCache(final Geocache cache) {
         if (cache == null) {
@@ -67,8 +64,7 @@ public class CacheCache {
     }
 
     /**
-     * @param geocode
-     *            Geocode of the cache to retrieve from the cache
+     * @param geocode Geocode of the cache to retrieve from the cache
      * @return cache if found, null else
      */
     public Geocache getCacheFromCache(final String geocode) {

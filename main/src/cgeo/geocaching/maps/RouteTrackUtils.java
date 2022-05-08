@@ -68,9 +68,9 @@ public class RouteTrackUtils {
         this.isTargetSet = isTargetSet;
 
         this.fileSelectorRoute = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_ROUTE))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE, Uri.class, this::importIndividualRoute);
         this.fileSelectorTrack = new ContentStorageActivityHelper(activity, savedState == null ? null : savedState.getBundle(STATE_CSAH_TRACK))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importTracks);
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FILE_MULTIPLE, List.class, this::importTracks);
     }
 
     private void importIndividualRoute(final Uri uri) {
@@ -102,7 +102,6 @@ public class RouteTrackUtils {
 
     /**
      * Shows a popup menu for individual route related items
-     *
      */
     public void showPopup(final IndividualRoute individualRoute, final Action2<Geopoint, String> setTarget) {
         this.popup = activity.getLayoutInflater().inflate(R.layout.routes_tracks_dialog, null);
@@ -131,7 +130,7 @@ public class RouteTrackUtils {
                 startFileSelectorIndividualRoute();
             } else {
                 SimpleDialog.of(activity).setTitle(R.string.map_load_individual_route).setMessage(R.string.map_load_individual_route_confirm).confirm(
-                    (d, w) -> startFileSelectorIndividualRoute());
+                        (d, w) -> startFileSelectorIndividualRoute());
             }
         });
 

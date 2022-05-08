@@ -105,18 +105,17 @@ public class VariableList {
     }
 
     @NonNull
-    public String addVariable(@Nullable  final String var, @Nullable final String formula) {
+    public String addVariable(@Nullable final String var, @Nullable final String formula) {
         return addVariable(var, formula, 0);
     }
 
 
-
     /**
-         * puts a new variable into the cache. If same var already exists it is overridden.
-         * If varname given is 'null', a nonvisible var name (starting with NONVISIBLE_PREFIX) is created and returned
-         */
+     * puts a new variable into the cache. If same var already exists it is overridden.
+     * If varname given is 'null', a nonvisible var name (starting with NONVISIBLE_PREFIX) is created and returned
+     */
     @NonNull
-    public String addVariable(@Nullable  final String var, @Nullable final String formula, final int ppos) {
+    public String addVariable(@Nullable final String var, @Nullable final String formula, final int ppos) {
         int pos = Math.min(variableList.size(), Math.max(0, ppos));
         final String varname = var == null ? variableMap.createNonContainedKey("" + INVISIBLE_VAR_PREFIX) : var;
         if (variablesSet.containsKey(varname)) {
@@ -133,10 +132,12 @@ public class VariableList {
         return varname;
     }
 
-    /** returns true if there actually was a change (var is contained and formula is different), false otherwise */
+    /**
+     * returns true if there actually was a change (var is contained and formula is different), false otherwise
+     */
     public boolean changeVariable(final String var, final String formula) {
         if (!variablesSet.containsKey(var) ||
-            Objects.equals(Objects.requireNonNull(variableMap.get(var)).getFormulaString(), formula)) {
+                Objects.equals(Objects.requireNonNull(variableMap.get(var)).getFormulaString(), formula)) {
             return false;
         }
         variableMap.put(var, formula);
@@ -148,7 +149,9 @@ public class VariableList {
         return !StringUtils.isBlank(varname) && varname.charAt(0) != INVISIBLE_VAR_PREFIX;
     }
 
-    /** returns the list position where variable was removed, or -1 if var was not found */
+    /**
+     * returns the list position where variable was removed, or -1 if var was not found
+     */
     public int removeVariable(@NonNull final String var) {
         if (!variablesSet.containsKey(var)) {
             return -1;
@@ -233,8 +236,8 @@ public class VariableList {
         final List<VariableEntry> rows = new ArrayList<>();
         for (String v : this.variableList) {
             rows.add(new VariableEntry(
-                this.variablesSet.get(v) == null ? -1 : Objects.requireNonNull(this.variablesSet.get(v)),
-                v, Objects.requireNonNull(this.variableMap.get(v)).getFormulaString()));
+                    this.variablesSet.get(v) == null ? -1 : Objects.requireNonNull(this.variablesSet.get(v)),
+                    v, Objects.requireNonNull(this.variableMap.get(v)).getFormulaString()));
         }
         return rows;
     }

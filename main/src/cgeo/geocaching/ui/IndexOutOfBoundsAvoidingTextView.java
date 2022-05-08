@@ -9,7 +9,6 @@ import androidx.appcompat.widget.AppCompatTextView;
  * Jelly beans can crash when calculating the layout of a textview.
  *
  * https://code.google.com/p/android/issues/detail?id=35466
- *
  */
 public class IndexOutOfBoundsAvoidingTextView extends AppCompatTextView {
 

@@ -160,7 +160,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
     /**
      * Set the login data to the cgeo login, run the given Runnable, and restore the login.
-     *
      */
     private static void withMockedLoginDo(final Runnable runnable) {
         final Credentials credentials = Settings.getGcCredentials();
@@ -221,7 +220,6 @@ public class CgeoApplicationTest extends CGeoTestCase {
 
     /**
      * mock the "exclude disabled caches" and "exclude my caches" options for the execution of the runnable
-     *
      */
     private static void withMockedFilters(final Runnable runnable) {
         runnable.run();
@@ -313,7 +311,9 @@ public class CgeoApplicationTest extends CGeoTestCase {
         assertThat(gc1zxez.getOwnerGuid()).isEqualTo("b66a625c-0266-43a7-9e7c-efecb9b2929a");
     }
 
-    /** Remove cache from DB and cache to ensure that the cache is not loaded from the database */
+    /**
+     * Remove cache from DB and cache to ensure that the cache is not loaded from the database
+     */
     private void deleteCacheFromDBAndLogout(final String geocode) {
         deleteCacheFromDB(geocode);
 

@@ -36,28 +36,28 @@ public class OsmNodeNamedTest {
         lat2 = toOsmLat(48.824105);
         double totalSegmentLength = CheapRulerHelper.distance(lon1, lat1, lon2, lat2);
         assertEquals(
-            "Works for segment aligned with the nogo center",
-            2 * node.radius,
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.01 * (2 * node.radius)
+                "Works for segment aligned with the nogo center",
+                2 * node.radius,
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.01 * (2 * node.radius)
         );
 
         // Check distance within radius is correctly computed for a given circle
         node.ilon = toOsmLon(2.33438);
         node.ilat = toOsmLat(48.824275);
         assertEquals(
-            "Works for a segment with no particular properties",
-            27.5,
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.1 * 27.5
+                "Works for a segment with no particular properties",
+                27.5,
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.1 * 27.5
         );
 
         // Check distance within radius is the same if we reverse start and end point
         assertEquals(
-            "Works if we switch firs and last point",
-            node.distanceWithinRadius(lon2, lat2, lon1, lat1, totalSegmentLength),
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.01
+                "Works if we switch firs and last point",
+                node.distanceWithinRadius(lon2, lat2, lon1, lat1, totalSegmentLength),
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.01
         );
 
         // Check distance within radius is correctly computed if a point is inside the circle
@@ -65,10 +65,10 @@ public class OsmNodeNamedTest {
         lat2 = toOsmLat(48.824045);
         totalSegmentLength = CheapRulerHelper.distance(lon1, lat1, lon2, lat2);
         assertEquals(
-            "Works if last point is within the circle",
-            17,
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.1 * 17
+                "Works if last point is within the circle",
+                17,
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.1 * 17
         );
 
         lon1 = toOsmLon(2.334495);
@@ -77,10 +77,10 @@ public class OsmNodeNamedTest {
         lat2 = toOsmLat(48.824105);
         totalSegmentLength = CheapRulerHelper.distance(lon1, lat1, lon2, lat2);
         assertEquals(
-            "Works if first point is within the circle",
-            9,
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.1 * 9
+                "Works if first point is within the circle",
+                9,
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.1 * 9
         );
 
         lon1 = toOsmLon(2.33427);
@@ -89,10 +89,10 @@ public class OsmNodeNamedTest {
         lat2 = toOsmLat(48.824061);
         totalSegmentLength = CheapRulerHelper.distance(lon1, lat1, lon2, lat2);
         assertEquals(
-            "Works if both points are within the circle",
-            25,
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.1 * 25
+                "Works if both points are within the circle",
+                25,
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.1 * 25
         );
 
         // Check distance within radius is correctly computed if both points are on
@@ -106,10 +106,10 @@ public class OsmNodeNamedTest {
         lat2 = toOsmLat(48.824027);
         totalSegmentLength = CheapRulerHelper.distance(lon1, lat1, lon2, lat2);
         assertEquals(
-            "Works if both points are on the same side of the circle center",
-            5,
-            node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
-            0.1 * 5
+                "Works if both points are on the same side of the circle center",
+                5,
+                node.distanceWithinRadius(lon1, lat1, lon2, lat2, totalSegmentLength),
+                0.1 * 5
         );
     }
 }

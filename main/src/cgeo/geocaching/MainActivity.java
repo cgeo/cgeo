@@ -154,39 +154,39 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                             connectorStatus.setOnClickListener(v -> SettingsActivity.openForScreen(R.string.preference_screen_services, activity));
 
                             AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                                () -> {
-                                    final StringBuilder userFoundCount = new StringBuilder();
+                                    () -> {
+                                        final StringBuilder userFoundCount = new StringBuilder();
 
-                                    final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
-                                    if (count >= 0) {
-                                        userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
+                                        final int count = FoundNumCounter.getAndUpdateFoundNum(conn);
+                                        if (count >= 0) {
+                                            userFoundCount.append(activity.getResources().getQuantityString(R.plurals.user_finds, count, count));
 
-                                        if (Settings.isDisplayOfflineLogsHomescreen()) {
-                                            final int offlinefounds = DataStore.getFoundsOffline(conn);
-                                            if (offlinefounds > 0) {
-                                                userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
+                                            if (Settings.isDisplayOfflineLogsHomescreen()) {
+                                                final int offlinefounds = DataStore.getFoundsOffline(conn);
+                                                if (offlinefounds > 0) {
+                                                    userFoundCount.append(" + ").append(activity.getResources().getQuantityString(R.plurals.user_finds_offline, offlinefounds, offlinefounds));
+                                                }
                                             }
                                         }
-                                    }
-                                    final String userNameText = FoundNumCounter.getNotBlankUserName(conn);
-                                    return new Pair<>(userFoundCount, userNameText);
-                                },
-                                p -> {
-                                    final TextView userName = connectorInfo.findViewById(R.id.item_title);
-                                    final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
-                                    userName.setText(p.second);
-                                    final String userFoundCount = p.first.toString();
-                                    if (userFoundCount.isEmpty()) {
-                                        userFounds.setVisibility(View.GONE);
-                                    } else {
-                                        userFounds.setVisibility(View.VISIBLE);
-                                        userFounds.setText(userFoundCount);
-                                        userFounds.setOnClickListener(v -> {
-                                            activity.startActivity(CacheListActivity.getHistoryIntent(activity));
-                                            ActivityMixin.overrideTransitionToFade(activity);
-                                        });
-                                    }
-                                });
+                                        final String userNameText = FoundNumCounter.getNotBlankUserName(conn);
+                                        return new Pair<>(userFoundCount, userNameText);
+                                    },
+                                    p -> {
+                                        final TextView userName = connectorInfo.findViewById(R.id.item_title);
+                                        final TextView userFounds = connectorInfo.findViewById(R.id.item_info);
+                                        userName.setText(p.second);
+                                        final String userFoundCount = p.first.toString();
+                                        if (userFoundCount.isEmpty()) {
+                                            userFounds.setVisibility(View.GONE);
+                                        } else {
+                                            userFounds.setVisibility(View.VISIBLE);
+                                            userFounds.setText(userFoundCount);
+                                            userFounds.setOnClickListener(v -> {
+                                                activity.startActivity(CacheListActivity.getHistoryIntent(activity));
+                                                ActivityMixin.overrideTransitionToFade(activity);
+                                            });
+                                        }
+                                    });
 
                             final ImageView userAvatar = connectorInfo.findViewById(R.id.item_icon);
 
@@ -195,15 +195,15 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                                 userAvatar.setVisibility(View.INVISIBLE);
 
                                 AndroidRxUtils.andThenOnUi(AndroidRxUtils.networkScheduler,
-                                    () -> AvatarUtils.getAvatar((IAvatar) conn),
-                                    img -> {
-                                        userAvatar.setVisibility(View.VISIBLE);
-                                        if (img == null) {
-                                            userAvatar.setImageResource(R.drawable.avartar_placeholder);
-                                        } else {
-                                            userAvatar.setImageDrawable(img);
-                                        }
-                                    });
+                                        () -> AvatarUtils.getAvatar((IAvatar) conn),
+                                        img -> {
+                                            userAvatar.setVisibility(View.VISIBLE);
+                                            if (img == null) {
+                                                userAvatar.setImageResource(R.drawable.avartar_placeholder);
+                                            } else {
+                                                userAvatar.setImageDrawable(img);
+                                            }
+                                        });
                             } else {
                                 userAvatar.setVisibility(View.GONE);
                             }
@@ -319,7 +319,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
             confirmDebug();
 
             binding.infoNotloggedin.setOnClickListener(v ->
-                SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
+                    SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
             binding.locationArea.setOnClickListener(v -> openNavSettings());
 

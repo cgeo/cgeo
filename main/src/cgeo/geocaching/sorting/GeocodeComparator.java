@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
 
 /**
  * sorts caches by geo code, therefore effectively sorting by cache age
- *
  */
 public class GeocodeComparator extends AbstractCacheComparator {
 

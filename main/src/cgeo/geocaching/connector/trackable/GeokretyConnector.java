@@ -183,8 +183,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
         try {
             final String geocodeEncoded = URLEncoder.encode(geocode, "utf-8");
             final String[] gkUlrs = {
-                    URLPROXY +  "/wpt/" + geocodeEncoded,
-                    URL +  "/export2.php?wpt=" + geocodeEncoded,
+                    URLPROXY + "/wpt/" + geocodeEncoded,
+                    URL + "/export2.php?wpt=" + geocodeEncoded,
             };
             InputStream response = null;
             for (final String urlDetails : gkUlrs) {
@@ -310,10 +310,8 @@ public class GeokretyConnector extends AbstractTrackableConnector {
     /**
      * Lookup Trackable Geocode from Tracking Code.
      *
-     * @param trackingCode
-     *          the Trackable Tracking Code to lookup
-     * @return
-     *          the Trackable Geocode
+     * @param trackingCode the Trackable Tracking Code to lookup
+     * @return the Trackable Geocode
      */
     @Nullable
     private static String getGeocodeFromTrackingCode(final String trackingCode) {
@@ -358,7 +356,6 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
     /**
      * Get geocode from GeoKrety id
-     *
      */
     public static String geocode(final int id) {
         return String.format("GK%04X", id);

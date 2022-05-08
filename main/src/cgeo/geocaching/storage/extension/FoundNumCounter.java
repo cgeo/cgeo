@@ -12,7 +12,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Offline storage for the connector specific found number counter, mainly used in the NUMBER log template.
- *
  */
 public class FoundNumCounter extends DataStore.DBExtension {
 
@@ -72,7 +71,6 @@ public class FoundNumCounter extends DataStore.DBExtension {
 
     /**
      * If connector is not logged in, gather the last known stored username, so that we can always show a username even if the user is offline.
-     *
      */
     public static String getNotBlankUserName(final ILogin conn) {
         return StringUtils.isNotBlank(conn.getUserName()) ? conn.getUserName() : getStoredUsernameOrUnknown(conn);

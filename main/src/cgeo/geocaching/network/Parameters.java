@@ -17,7 +17,6 @@ import org.apache.commons.lang3.tuple.ImmutablePair;
 
 /**
  * List of key/values pairs to be used in a GET or POST request.
- *
  */
 public class Parameters extends ArrayList<ImmutablePair<String, String>> {
 
@@ -25,10 +24,8 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     private boolean percentEncoding = false;
 
     /**
-     * @param keyValues
-     *            list of initial key/value pairs
-     * @throws InvalidParameterException
-     *             if the number of key/values is unbalanced
+     * @param keyValues list of initial key/value pairs
+     * @throws InvalidParameterException if the number of key/values is unbalanced
      */
     public Parameters(final String... keyValues) {
         put(keyValues);
@@ -49,11 +46,9 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     /**
      * Add new key/value pairs to the current parameters.
      *
-     * @param keyValues
-     *            list of key/value pairs
-     * @throws InvalidParameterException
-     *             if the number of key/values is unbalanced
+     * @param keyValues list of key/value pairs
      * @return the object itself to facilitate chaining
+     * @throws InvalidParameterException if the number of key/values is unbalanced
      */
     public Parameters put(final String... keyValues) {
         if (keyValues.length % 2 == 1) {
@@ -116,13 +111,10 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     /**
      * Extend or create a Parameters object with new key/value pairs.
      *
-     * @param params
-     *            an existing object or null to create a new one
-     * @param keyValues
-     *            list of key/value pair
-     * @throws InvalidParameterException
-     *             if the number of key/values is unbalanced
+     * @param params    an existing object or null to create a new one
+     * @param keyValues list of key/value pair
      * @return the object itself if it is non-null, a new one otherwise
+     * @throws InvalidParameterException if the number of key/values is unbalanced
      */
     @NonNull
     public static Parameters extend(@Nullable final Parameters params, final String... keyValues) {
@@ -132,10 +124,9 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     /**
      * Merge two or more (possibly null) Parameters object.
      *
-     * @param params
-     *            the objects to merge
+     * @param params the objects to merge
      * @return the first non-null Parameters object enriched with the others, or null if all
-     *         of params were null
+     * of params were null
      */
     @Nullable
     public static Parameters merge(@Nullable final Parameters... params) {

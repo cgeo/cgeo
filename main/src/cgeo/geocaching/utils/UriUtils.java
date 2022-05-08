@@ -21,7 +21,6 @@ import java.util.Map;
 import org.apache.commons.lang3.StringUtils;
 
 
-
 /**
  * Utility class prvoding helper methods when dealing with Uris
  */
@@ -41,7 +40,9 @@ public final class UriUtils {
         //no instance wanted
     }
 
-    /** Tries to format the given Uri in a user-displayable way */
+    /**
+     * Tries to format the given Uri in a user-displayable way
+     */
     @NonNull
     public static String toUserDisplayableString(final Uri uri, final List<String> subfolders) {
         String uriString = toUserDisplayableString(uri);
@@ -53,7 +54,9 @@ public final class UriUtils {
         return uriString;
     }
 
-    /** Tries to format the given Uri in a user-displayable way */
+    /**
+     * Tries to format the given Uri in a user-displayable way
+     */
     @NonNull
     public static String toUserDisplayableString(final Uri uri) {
 
@@ -157,7 +160,9 @@ public final class UriUtils {
         return volumeMap;
     }
 
-    /** Tries to extract the last path segment name of a given Uri, removing "/" and such */
+    /**
+     * Tries to extract the last path segment name of a given Uri, removing "/" and such
+     */
     @Nullable
     public static String getLastPathSegment(final Uri uri) {
         if (uri == null) {
@@ -174,7 +179,9 @@ public final class UriUtils {
         return tokens[tokens.length - 1] == null ? null : tokens[tokens.length - 1].trim();
     }
 
-    /** Returns whether this Uri is a file Uri */
+    /**
+     * Returns whether this Uri is a file Uri
+     */
     public static boolean isFileUri(final Uri uri) {
         if (uri == null) {
             return false;
@@ -182,7 +189,9 @@ public final class UriUtils {
         return SCHEME_FILE.equals(uri.getScheme());
     }
 
-    /** Returns whether this Uri is a content Uri */
+    /**
+     * Returns whether this Uri is a content Uri
+     */
     public static boolean isContentUri(final Uri uri) {
         if (uri == null) {
             return false;
@@ -190,7 +199,9 @@ public final class UriUtils {
         return SCHEME_CONTENT.equals(uri.getScheme());
     }
 
-    /** if given Uri is a file uri, then the corresponding file is returned. Otherwise null is returned */
+    /**
+     * if given Uri is a file uri, then the corresponding file is returned. Otherwise null is returned
+     */
     public static File toFile(final Uri uri) {
         if (isFileUri(uri)) {
             return new File(uri.getPath());
@@ -222,9 +233,9 @@ public final class UriUtils {
      * Note that the returned Uri String CAN'T and SHOULDN'T be used to construct an Uri to retrieve documents etc since it is NOT constructred according to its type.
      * For example, content:-Uris can't be constructed at all and must be queries via ContentResolver
      *
-     * @param base baseUri
+     * @param base    baseUri
      * @param subdirs (sub)directories or file
-     * @param max if >=0 then only up to max subdirs are considered. if < 0 then all subdirs are
+     * @param max     if >=0 then only up to max subdirs are considered. if < 0 then all subdirs are
      * @return pseudo-uri-string
      */
     @NonNull
@@ -265,7 +276,6 @@ public final class UriUtils {
      * two Uris pointing to the same physical folder will get same string rep (this is simply not possible to achieve)
      *
      * Returned strings may NOT be used to reconstruct an Uri using Uri.parse()!
-
      */
     public static String toCompareString(final Uri uri) {
         if (uri == null) {
@@ -281,13 +291,15 @@ public final class UriUtils {
         return uriString;
     }
 
-    /** toString()-method for {@link UriPermission} */
+    /**
+     * toString()-method for {@link UriPermission}
+     */
     public static String uriPermissionToString(final UriPermission uriPerm) {
         if (uriPerm == null) {
             return "---";
         }
         return uriPerm.getUri() + " (" + Formatter.formatShortDateTime(uriPerm.getPersistedTime()) +
-            "):" + (uriPerm.isReadPermission() ? "R" : "-") + (uriPerm.isWritePermission() ? "W" : "-");
+                "):" + (uriPerm.isReadPermission() ? "R" : "-") + (uriPerm.isWritePermission() ? "W" : "-");
     }
 
 
@@ -331,10 +343,10 @@ public final class UriUtils {
 
         // Construct TREE Uri
         return new Uri.Builder()
-            .scheme(SCHEME_CONTENT)
-            .authority("com.android.externalstorage.documents")
-            .encodedPath("/tree/" + common + "/document/" + common)
-            .build();
+                .scheme(SCHEME_CONTENT)
+                .authority("com.android.externalstorage.documents")
+                .encodedPath("/tree/" + common + "/document/" + common)
+                .build();
     }
 
 }

@@ -39,7 +39,7 @@ public class StatusUpdater {
 
         public static final Status NO_STATUS = new Status(null, null, null, null);
         private static final Status VERSION_DEPRECATED_STATUS =
-            new Status("", "status_version_deprecated", "attribute_abandonedbuilding", "https://www.cgeo.org/faq");
+                new Status("", "status_version_deprecated", "attribute_abandonedbuilding", "https://www.cgeo.org/faq");
 
         public final String message;
         public final String messageId;
@@ -107,8 +107,8 @@ public class StatusUpdater {
             }
             Network.requestJSON("https://status.cgeo.org/api/status.json",
                     Parameters.merge(new Parameters("version_code", String.valueOf(Version.getVersionCode(app)),
-                            "version_name", Version.getVersionName(app),
-                            "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
+                                    "version_name", Version.getVersionName(app),
+                                    "locale", Locale.getDefault().toString()), installerParameters, gcMembershipParameters,
                             new Parameters("active_connectors", getActiveConnectorsString())))
                     .subscribe(json -> LATEST_STATUS.onNext(Status.defaultStatus(new Status(json))), throwable -> {
                         // Error has already been signaled during the request

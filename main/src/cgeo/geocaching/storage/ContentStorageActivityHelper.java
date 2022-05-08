@@ -74,7 +74,7 @@ public class ContentStorageActivityHelper {
     private final Activity activity;
     private final Map<SelectAction, Consumer<Object>> selectActionCallbacks = new HashMap<>();
 
-    private enum CopyChoice { ASK_IF_DIFFERENT, GO_BACK, DO_NOTHING, COPY, MOVE }
+    private enum CopyChoice {ASK_IF_DIFFERENT, GO_BACK, DO_NOTHING, COPY, MOVE}
 
     //stores intermediate data of a running intent by return code. (This will no longer be neccessary with Activity Result API)
     private IntentData runningIntentData;
@@ -162,9 +162,10 @@ public class ContentStorageActivityHelper {
         return folder.isUserDefined() && ContentStorage.get().ensureFolder(folder);
     }
 
-    /** Asks user to select a folder for single-time-usage (location and permission is not persisted)
-     *  if a callback for action {@link SelectAction#SELECT_FOLDER} is registered, it will be called after selection has finished
-     * */
+    /**
+     * Asks user to select a folder for single-time-usage (location and permission is not persisted)
+     * if a callback for action {@link SelectAction#SELECT_FOLDER} is registered, it will be called after selection has finished
+     */
     public void selectFolder(@Nullable final Uri startUri) {
         selectFolderInternal(SelectAction.SELECT_FOLDER, null, startUri, null);
     }
@@ -173,6 +174,7 @@ public class ContentStorageActivityHelper {
      * Starts user selection of a new Location for the given persisted folder.
      * Persisted folder handling is a bit more complex and involved e.g. optional copying from previous location and provides a default-option to user
      * if a callback for action {@link SelectAction#SELECT_FOLDER_PERSISTED} is registered, it will be called after selection has finished
+     *
      * @param folder folder to request a new place from user
      */
     public void selectPersistableFolder(final PersistableFolder folder) {
@@ -181,39 +183,43 @@ public class ContentStorageActivityHelper {
 
         //create the message;
         final String folderData = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_folderdata,
-            folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
+                folder.toUserDisplayableName(), folder.toUserDisplayableValue(), folderInfo.left, folderInfo.middle, folderInfo.right);
         final String defaultFolder = activity.getString(R.string.contentstorage_selectfolder_dialog_msg_defaultfolder, folder.getDefaultFolder().toUserDisplayableString(true, false));
 
         final AlertDialog.Builder dialog = Dialogs.newBuilder(activity);
         dialog
-            .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
-            .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
-            .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
-                d.dismiss();
-                selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);
-                })
-            .setNegativeButton(android.R.string.cancel, (d, p) -> {
-                d.dismiss();
-                finalizePersistableFolderSelection(false, folder, null, SelectAction.SELECT_FOLDER_PERSISTED);
-            });
-
-            //only allow default selection if folder is currently NOT at default
-            if (folder.isUserDefined()) {
-                dialog.setNeutralButton(R.string.persistablefolder_usedefault, (d, p) -> {
+                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                .setMessage(folderData + (folder.isUserDefined() ? "\n\n" + defaultFolder : ""))
+                .setPositiveButton(R.string.persistablefolder_pickfolder, (d, p) -> {
                     d.dismiss();
-                    continuePersistableFolderSelectionCheckFoldersAreEqual(folder, null, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION, CopyChoice.ASK_IF_DIFFERENT, SelectAction.SELECT_FOLDER_PERSISTED);
+                    selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);
+                })
+                .setNegativeButton(android.R.string.cancel, (d, p) -> {
+                    d.dismiss();
+                    finalizePersistableFolderSelection(false, folder, null, SelectAction.SELECT_FOLDER_PERSISTED);
                 });
-            }
+
+        //only allow default selection if folder is currently NOT at default
+        if (folder.isUserDefined()) {
+            dialog.setNeutralButton(R.string.persistablefolder_usedefault, (d, p) -> {
+                d.dismiss();
+                continuePersistableFolderSelectionCheckFoldersAreEqual(folder, null, Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION, CopyChoice.ASK_IF_DIFFERENT, SelectAction.SELECT_FOLDER_PERSISTED);
+            });
+        }
 
         dialog.create().show();
     }
 
-    /** Simplified form of selectPersistableFolder without initial dialog */
+    /**
+     * Simplified form of selectPersistableFolder without initial dialog
+     */
     public void migratePersistableFolder(final PersistableFolder folder) {
         selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, null, CopyChoice.ASK_IF_DIFFERENT);
     }
 
-    /** Simplified form of selectPersistableFolder used on settings' restore */
+    /**
+     * Simplified form of selectPersistableFolder used on settings' restore
+     */
     public void restorePersistableFolder(final PersistableFolder folder, final Uri newUri) {
         selectFolderInternal(SelectAction.SELECT_FOLDER_PERSISTED, folder, newUri, CopyChoice.ASK_IF_DIFFERENT);
     }
@@ -221,7 +227,8 @@ public class ContentStorageActivityHelper {
     /**
      * Asks user to select a file for single usage (e.g. to import something into c:geo
      * if a callback for action {@link SelectAction#SELECT_FILE} is registered, it will be called after selection has finished
-     * @param type mime type, used for intent search
+     *
+     * @param type     mime type, used for intent search
      * @param startUri hint for intent where to start search
      */
     public void selectFile(@Nullable final String type, @Nullable final Uri startUri) {
@@ -231,7 +238,7 @@ public class ContentStorageActivityHelper {
     /**
      * Asks user to select multiple files at once
      * if a callback for action {@link SelectAction#SELECT_FILE_MULTIPLE} is registered, it will be called after selection has finished
-     * */
+     */
     public void selectMultipleFiles(@Nullable final String type, @Nullable final Uri startUri) {
         selectFilesInternal(type, startUri, SelectAction.SELECT_FILE_MULTIPLE, null);
     }
@@ -239,17 +246,21 @@ public class ContentStorageActivityHelper {
     /**
      * Asks user to select a new location for a persisted uri (used e.g. for Track file). Permission is persisted as well.
      * if a callback for action {@link SelectAction#SELECT_FILE_PERSISTED} is registered, it will be called after selection has finished
-     * */
+     */
     public void selectPersistableUri(@NonNull final PersistableUri persistedDocUri) {
         selectFilesInternal(persistedDocUri.getMimeType(), persistedDocUri.getUri(), SelectAction.SELECT_FILE_PERSISTED, persistedDocUri);
     }
 
-    /** Simplified form of selectPersistableUri used on settings' restore */
+    /**
+     * Simplified form of selectPersistableUri used on settings' restore
+     */
     public void restorePersistableUri(final PersistableUri persistableUri, final Uri newUri) {
         selectFilesInternal(persistableUri.getMimeType(), newUri, SelectAction.SELECT_FILE_PERSISTED, persistableUri);
     }
 
-    /** You MUST include in {@link Activity#onActivityResult(int, int, Intent)} of using Activity */
+    /**
+     * You MUST include in {@link Activity#onActivityResult(int, int, Intent)} of using Activity
+     */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent intent) {
         final SelectAction action = SelectAction.getByRequestCode(requestCode);
         if (action == null) {
@@ -299,8 +310,8 @@ public class ContentStorageActivityHelper {
         if (action == SelectAction.SELECT_FILE_MULTIPLE) {
             intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         }
-        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION  |
-            (docUri == null ? 0 : Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION));
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION |
+                (docUri == null ? 0 : Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION));
 
         runningIntentData = new IntentData(docUri, action);
 
@@ -312,8 +323,8 @@ public class ContentStorageActivityHelper {
         // call for document tree dialog
         final Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT_TREE);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION |
-            (folder == null || folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) |
-            (folder != null ? Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION : 0));
+                (folder == null || folder.needsWrite() ? Intent.FLAG_GRANT_WRITE_URI_PERMISSION : 0) |
+                (folder != null ? Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION : 0));
         Uri realStartUri = startUri != null ? startUri : (folder != null ? folder.getUri() : null);
 
         // show internal storage
@@ -356,7 +367,7 @@ public class ContentStorageActivityHelper {
             } else {
                 if (runningIntentData.persistedDocUri != null) {
                     activity.getContentResolver().takePersistableUriPermission(selectedUris.get(0),
-                        Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+                            Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
 
                     ContentStorage.get().setPersistedDocumentUri(runningIntentData.persistedDocUri, selectedUris.get(0));
                 }
@@ -365,8 +376,8 @@ public class ContentStorageActivityHelper {
         }
 
         callCallback(action, action == SelectAction.SELECT_FILE_MULTIPLE ? selectedUris :
-            (action == SelectAction.SELECT_FILE_PERSISTED ? runningIntentData.persistedDocUri :
-                (selectedUris.isEmpty() ? null : selectedUris.get(0))));
+                (action == SelectAction.SELECT_FILE_PERSISTED ? runningIntentData.persistedDocUri :
+                        (selectedUris.isEmpty() ? null : selectedUris.get(0))));
     }
 
     private void handleResultFolderSelection(final Intent intent, final boolean resultOk) {
@@ -401,7 +412,9 @@ public class ContentStorageActivityHelper {
         }
     }
 
-    /** releases a folder grant */
+    /**
+     * releases a folder grant
+     */
     private void releaseGrant(final Uri uri, final int flags) {
         if (uri != null) {
             activity.getContentResolver().releasePersistableUriPermission(uri, flags);
@@ -412,7 +425,7 @@ public class ContentStorageActivityHelper {
     private void continuePersistableFolderSelectionCheckFoldersAreEqual(final PersistableFolder folder, final Uri targetUri, final int flags, final CopyChoice copyChoice, final SelectAction action) {
         final Folder before = folder.getFolder();
         boolean askUserForCopyMove =
-            copyChoice == CopyChoice.ASK_IF_DIFFERENT && before != null && !FolderUtils.get().foldersAreEqual(before, Folder.fromDocumentUri(targetUri));
+                copyChoice == CopyChoice.ASK_IF_DIFFERENT && before != null && !FolderUtils.get().foldersAreEqual(before, Folder.fromDocumentUri(targetUri));
         FolderUtils.FolderInfo folderInfoBeforeRaw = null;
 
         if (askUserForCopyMove) {
@@ -435,24 +448,24 @@ public class ContentStorageActivityHelper {
             dialogView.findViewById(R.id.copymove_move).setOnClickListener(v -> cc[0] = CopyChoice.MOVE);
             dialogView.findViewById(R.id.copymove_copy).setOnClickListener(v -> cc[0] = CopyChoice.COPY);
             dialog
-                .setView(dialogView)
-                .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
-                .setPositiveButton(android.R.string.ok, (d, p) -> {
-                    d.dismiss();
-                    continuePersistableFolderSelectionCopyMove(folder, targetUri, cc[0], action);
-                })
-                .setNegativeButton(android.R.string.cancel, (d, p) -> {
-                    d.dismiss();
-                    releaseGrant(targetUri, flags);
-                    finalizePersistableFolderSelection(false, folder, null, action);
-                })
-                .setNeutralButton(R.string.back, (d, p) -> {
-                    d.dismiss();
-                    releaseGrant(targetUri, flags);
-                    migratePersistableFolder(folder);
-                })
-                .create()
-                .show();
+                    .setView(dialogView)
+                    .setTitle(activity.getString(R.string.contentstorage_selectfolder_dialog_title, folder.toUserDisplayableName()))
+                    .setPositiveButton(android.R.string.ok, (d, p) -> {
+                        d.dismiss();
+                        continuePersistableFolderSelectionCopyMove(folder, targetUri, cc[0], action);
+                    })
+                    .setNegativeButton(android.R.string.cancel, (d, p) -> {
+                        d.dismiss();
+                        releaseGrant(targetUri, flags);
+                        finalizePersistableFolderSelection(false, folder, null, action);
+                    })
+                    .setNeutralButton(R.string.back, (d, p) -> {
+                        d.dismiss();
+                        releaseGrant(targetUri, flags);
+                        migratePersistableFolder(folder);
+                    })
+                    .create()
+                    .show();
         } else {
             continuePersistableFolderSelectionCopyMove(folder, targetUri, runningIntentData.copyChoice == CopyChoice.ASK_IF_DIFFERENT ? CopyChoice.DO_NOTHING : runningIntentData.copyChoice, action);
         }
@@ -485,13 +498,15 @@ public class ContentStorageActivityHelper {
         callCallback(action, folder);
     }
 
-    private void report(final boolean isWarning, @StringRes final int messageId, final Object ... params) {
+    private void report(final boolean isWarning, @StringRes final int messageId, final Object... params) {
         final ImmutablePair<String, String> messages = LocalizationUtils.getMultiPurposeString(messageId, "CSActivityHelper", params);
         Log.log(isWarning ? Log.LogLevel.WARN : Log.LogLevel.INFO, messages.right);
         ActivityMixin.showToast(activity, messages.left);
     }
 
-    /** returns for a folder internationalized strings for file count (left), dir count (middle) and total file size (right) */
+    /**
+     * returns for a folder internationalized strings for file count (left), dir count (middle) and total file size (right)
+     */
     private static ImmutableTriple<String, String, String> getInternationalizedFolderInfoStrings(final Folder folder) {
         final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder, -1);
         return folderInfo.getUserDisplayableFolderInfoStrings();

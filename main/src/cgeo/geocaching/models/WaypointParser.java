@@ -90,7 +90,7 @@ public class WaypointParser {
      * Detect coordinates in the given text and converts them to user-defined waypoints.
      * Works by rule of thumb.
      *
-     * @param text       Text to parse for waypoints
+     * @param text Text to parse for waypoints
      * @return a collection of found waypoints
      */
     public Collection<Waypoint> parseWaypoints(@NonNull final String text) {
@@ -221,7 +221,7 @@ public class WaypointParser {
             final CalculatedCoordinate cc = new CalculatedCoordinate();
             final int parseEnd = cc.setFromConfig(configAndMore);
             if (parseEnd < 0 || parseEnd >= configAndMore.length() ||
-                configAndMore.charAt(parseEnd - 1) != '}' || !cc.isFilled()) {
+                    configAndMore.charAt(parseEnd - 1) != '}' || !cc.isFilled()) {
                 return null;
             }
             waypoint.setCalcStateConfig(cc.toConfig());
@@ -281,18 +281,19 @@ public class WaypointParser {
 
     private boolean useWordForParsedName(final String word, final boolean isLast, final WaypointType wpType) {
         return
-            (!StringUtils.isBlank(word)) &&
-                //remove words which are in parenthesis (is usually the waypoint type)
-                !(word.startsWith(PARSING_TYPE_OPEN) && word.endsWith(PARSING_TYPE_CLOSE)) &&
-                //remove last word if it is just the waypoint type id
-                !(isLast && word.toLowerCase(Locale.getDefault()).equals(wpType.getShortId().toLowerCase(Locale.getDefault())));
+                (!StringUtils.isBlank(word)) &&
+                        //remove words which are in parenthesis (is usually the waypoint type)
+                        !(word.startsWith(PARSING_TYPE_OPEN) && word.endsWith(PARSING_TYPE_CLOSE)) &&
+                        //remove last word if it is just the waypoint type id
+                        !(isLast && word.toLowerCase(Locale.getDefault()).equals(wpType.getShortId().toLowerCase(Locale.getDefault())));
     }
 
     /**
      * Detect waypoint types in the personal note text. Tries to find various ways that
      * the waypoints name or id is written in given text.
      */
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up or using lambda-expressions
+    @SuppressWarnings("PMD.NPathComplexity")
+    // method readability will not improve by splitting it up or using lambda-expressions
     private WaypointType parseWaypointType(final String input, final String lastWord) {
         final String lowerInput = input.toLowerCase(Locale.getDefault());
         final String lowerLastWord = lastWord.toLowerCase(Locale.getDefault());
@@ -477,8 +478,8 @@ public class WaypointParser {
             waypointsAsStrings.add(getParseableVariableString(vars.toMap()));
         }
         return (includeBackupTags ? BACKUP_TAG_OPEN + "\n" : "") +
-            StringUtils.join(waypointsAsStrings, "\n") +
-            (includeBackupTags ? "\n" + BACKUP_TAG_CLOSE : "");
+                StringUtils.join(waypointsAsStrings, "\n") +
+                (includeBackupTags ? "\n" + BACKUP_TAG_CLOSE : "");
     }
 
     /**
@@ -503,14 +504,14 @@ public class WaypointParser {
 
         //type
         sb.append(PARSING_TYPE_OPEN).append(wp.getWaypointType().getShortId().toUpperCase(Locale.US))
-            .append(PARSING_TYPE_CLOSE).append(" ");
+                .append(PARSING_TYPE_CLOSE).append(" ");
 
         // formula
         final String formulaString = getParseableFormula(wp, legacyMode);
         if (StringUtils.isNotEmpty(formulaString)) {
             sb.append(formulaString);
         } else {
-        //coordinate
+            //coordinate
             if (wp.getCoords() == null) {
                 sb.append(PARSING_COORD_EMPTY);
             } else {

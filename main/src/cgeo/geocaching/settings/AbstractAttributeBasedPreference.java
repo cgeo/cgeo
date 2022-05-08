@@ -9,7 +9,6 @@ import androidx.preference.Preference;
 
 /**
  * Base class for preferences which evaluate their XML attributes for further processing.
- *
  */
 public abstract class AbstractAttributeBasedPreference extends Preference {
 
@@ -41,7 +40,6 @@ public abstract class AbstractAttributeBasedPreference extends Preference {
 
     /**
      * Evaluate the attributes which where requested in {@link AbstractAttributeBasedPreference#getAttributeNames()}.
-     *
      */
     protected abstract void processAttributeValues(TypedArray values);
 

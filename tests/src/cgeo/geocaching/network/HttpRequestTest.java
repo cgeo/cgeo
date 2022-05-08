@@ -106,11 +106,11 @@ public class HttpRequestTest {
     public void requestPrepare() {
         mockServerEnqueue(new MockResponse().setResponseCode(200));
         final HttpResponse resp = new HttpRequest().uri(mockServerBaseUrl + "/cgeo")
-            .headers("h1", "v1")
-            .requestPreparer(r -> {
-                r.addHeader("h2", "v2");
-                return Single.just(r);
-            }).request().blockingGet();
+                .headers("h1", "v1")
+                .requestPreparer(r -> {
+                    r.addHeader("h2", "v2");
+                    return Single.just(r);
+                }).request().blockingGet();
         assertThat(resp).isNotNull();
         final RecordedRequest req = mockServerTakeRequest();
         assertThat(req.getHeader("h1")).isEqualTo("v1");

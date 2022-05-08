@@ -276,11 +276,11 @@ public class TextUtilsTest {
         assertThat(TextUtils.annotateSpans(TextUtils.setSpan("test", new Object()), o -> new Pair<>("[", "]"))).isEqualTo("[test]");
         assertThat(TextUtils.annotateSpans(TextUtils.setSpan("test", new Object(), 2, 3, 1), o -> new Pair<>("[", "]"))).isEqualTo("te[s]t");
         assertThat(TextUtils.annotateSpans(
-            TextUtils.setSpan(TextUtils.setSpan("test", new Object(),  2, 3, 1), new Object(), 0, 2, 1),
-            o -> new Pair<>("[", "]"))).isEqualTo("[te][s]t");
+                TextUtils.setSpan(TextUtils.setSpan("test", new Object(), 2, 3, 1), new Object(), 0, 2, 1),
+                o -> new Pair<>("[", "]"))).isEqualTo("[te][s]t");
         assertThat(TextUtils.annotateSpans(
-            TextUtils.setSpan(TextUtils.setSpan(TextUtils.setSpan("test", new Object(),  2, 3, 1), new Object(), 0, 2, 1), new Object()),
-            o -> new Pair<>("[", "]"))).isEqualTo("[[te][s]t]");
+                TextUtils.setSpan(TextUtils.setSpan(TextUtils.setSpan("test", new Object(), 2, 3, 1), new Object(), 0, 2, 1), new Object()),
+                o -> new Pair<>("[", "]"))).isEqualTo("[[te][s]t]");
     }
 
 }

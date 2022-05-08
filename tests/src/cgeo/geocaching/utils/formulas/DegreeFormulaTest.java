@@ -18,7 +18,7 @@ public class DegreeFormulaTest {
 
         assertParse("N48 12.345", null, 48d + 12.345d / 60d, "N48°12.345'");
         assertParse("N48 1A.345", s -> Value.of(3d), 48d + 13.345d / 60d, "N48°13.345'");
-        assertParse("S48 1A.345", s -> Value.of(3d), - 48d - 13.345d / 60d, "S48°13.345'");
+        assertParse("S48 1A.345", s -> Value.of(3d), -48d - 13.345d / 60d, "S48°13.345'");
 
         assertParse("N 053° 33.06(3*A)'", s -> Value.of(3d), 53d + 33.069d / 60, "N053°33.069'");
         assertParse("N 053° 33.6(3*A)'", s -> Value.of(3d), 53d + 33.069d / 60, "N053°33.<0>69'");
@@ -107,7 +107,6 @@ public class DegreeFormulaTest {
         assertParse("90 3.45'S", null, -90 - 3.045 / 60, "90°3.<0>45'S");
         assertParse("S53 33.6", null, -53d - 33.006 / 60, "S53°33.<00>6'");
     }
-
 
 
     //this is a test to copy/paste single tests into for local analysis e.g. using Debugging

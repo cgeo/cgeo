@@ -115,13 +115,15 @@ public class VariableListTest {
 
         //D is removed (empty and no uses), C, G and K are added with empty formulas, list is sorted
         assertVariableList(cv,
-            "A", "f:B", "B", "f:C", "C", "f:", "E", "f:F", "F", "f:G", "G", "f:", "K", "f:");
+                "A", "f:B", "B", "f:C", "C", "f:", "E", "f:F", "F", "f:G", "G", "f:", "K", "f:");
 
     }
 
 
-    /** expectedParams syntax: pure string = expected var, prefix with f: to assert formula */
-    private void assertVariableList(final VariableList cv, final String ... expectedParams) {
+    /**
+     * expectedParams syntax: pure string = expected var, prefix with f: to assert formula
+     */
+    private void assertVariableList(final VariableList cv, final String... expectedParams) {
         final List<String> vars = new ArrayList<>();
         String currentVar = null;
         for (String p : expectedParams) {

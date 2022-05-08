@@ -81,35 +81,35 @@ abstract class GPXParser extends FileParser {
      * supported groundspeak extensions of the GPX format
      */
     private static final String[] GROUNDSPEAK_NAMESPACE = {
-        "http://www.groundspeak.com/cache/1/1", // PQ 1.1
-        "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
-        "http://www.groundspeak.com/cache/1/0", // PQ 1.0
+            "http://www.groundspeak.com/cache/1/1", // PQ 1.1
+            "http://www.groundspeak.com/cache/1/0/1", // PQ 1.0.1
+            "http://www.groundspeak.com/cache/1/0", // PQ 1.0
     };
 
     /**
      * supported GSAK extension of the GPX format
      */
     private static final String[] GSAK_NS = {
-        "http://www.gsak.net/xmlv1/1",
-        "http://www.gsak.net/xmlv1/2",
-        "http://www.gsak.net/xmlv1/3",
-        "http://www.gsak.net/xmlv1/4",
-        "http://www.gsak.net/xmlv1/5",
-        "http://www.gsak.net/xmlv1/6"
+            "http://www.gsak.net/xmlv1/1",
+            "http://www.gsak.net/xmlv1/2",
+            "http://www.gsak.net/xmlv1/3",
+            "http://www.gsak.net/xmlv1/4",
+            "http://www.gsak.net/xmlv1/5",
+            "http://www.gsak.net/xmlv1/6"
     };
 
     /**
      * c:geo extensions of the gpx format
      */
     private static final String[] CGEO_NS = {
-        "http://www.cgeo.org/wptext/1/0"
+            "http://www.cgeo.org/wptext/1/0"
     };
 
     /**
      * opencaching extensions of the gpx format
      */
     private static final String[] OPENCACHING_NS = {
-        "https://github.com/opencaching/gpx-extension-v1"
+            "https://github.com/opencaching/gpx-extension-v1"
     };
 
     private static final Pattern PATTERN_MILLISECONDS = Pattern.compile("\\.\\d{3,7}");
@@ -223,7 +223,7 @@ abstract class GPXParser extends FileParser {
                     // latitude and longitude are required attributes, but we export them (0/0) for waypoints without coordinates
                     if (StringUtils.isNotBlank(latitude) && StringUtils.isNotBlank(longitude)) {
                         final Geopoint latLon = new Geopoint(Double.parseDouble(latitude),
-                            Double.parseDouble(longitude));
+                                Double.parseDouble(longitude));
                         final Geopoint pt0 = new Geopoint(0, 0);
                         if (!latLon.equals(pt0)) {
                             cache.setCoords(latLon);
@@ -283,7 +283,7 @@ abstract class GPXParser extends FileParser {
                     DataStore.removeCache(geocode, EnumSet.of(RemoveFlag.CACHE));
                     showProgressMessage(progressHandler, progressStream.getProgress());
                 } else if (StringUtils.isNotBlank(cache.getName())
-                    && (StringUtils.containsIgnoreCase(type, "waypoint") || terraChildWaypoint)) {
+                        && (StringUtils.containsIgnoreCase(type, "waypoint") || terraChildWaypoint)) {
                     addWaypointToCache();
                 }
 
@@ -452,7 +452,8 @@ abstract class GPXParser extends FileParser {
     /**
      * Add listeners for Groundspeak cache
      */
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
+    // method readability will not improve by splitting it up
     private void registerGsakExtensionsCache(final String nsGC, final Element gcCache) {
         gcCache.setStartElementListener(attrs -> {
             try {
@@ -539,9 +540,9 @@ abstract class GPXParser extends FileParser {
         gcCache.getChild(nsGC, "long_description").setEndTextElementListener(desc -> cache.setDescription(validate(desc)));
     }
 
-     /**
-      * Add listeners for Groundspeak attributes
-      */
+    /**
+     * Add listeners for Groundspeak attributes
+     */
     private void registerGsakExtensionsAttribute(final String nsGC, final Element gcCache) {
         // waypoint.cache.getAttributes()
         // @see issue #299
@@ -901,7 +902,8 @@ abstract class GPXParser extends FileParser {
      * GPX 1.0 and 1.1 use different XML elements to put the cache into, therefore needs to be overwritten in the
      * version specific subclasses
      */
-    protected abstract @Nullable Element getNodeForExtension(@NonNull Element waypoint);
+    protected abstract @Nullable
+    Element getNodeForExtension(@NonNull Element waypoint);
 
     protected abstract void registerUrlAndUrlName(@NonNull Element waypoint);
 
@@ -1006,10 +1008,10 @@ abstract class GPXParser extends FileParser {
             return false;
         }
         final boolean valid = (type == null && subtype == null && sym == null)
-            || StringUtils.contains(type, "geocache")
-            || StringUtils.contains(sym, "geocache")
-            || StringUtils.containsIgnoreCase(sym, "waymark")
-            || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
+                || StringUtils.contains(type, "geocache")
+                || StringUtils.contains(sym, "geocache")
+                || StringUtils.containsIgnoreCase(sym, "waymark")
+                || (StringUtils.containsIgnoreCase(sym, "terracache") && !terraChildWaypoint);
         if ("GC_WayPoint1".equals(cache.getShortDescription())) {
             terraChildWaypoint = true;
         }

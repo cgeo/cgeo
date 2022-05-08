@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 
 /**
  * Clipboard Utilities. Functions to copy data to the Android clipboard.
- *
  */
 public final class ClipboardUtils {
 
@@ -22,8 +21,7 @@ public final class ClipboardUtils {
     /**
      * Places the text passed in onto the clipboard as text
      *
-     * @param text
-     *            The text to place in the clipboard.
+     * @param text The text to place in the clipboard.
      */
     public static void copyToClipboard(@NonNull final CharSequence text) {
         final ClipboardManager clipboard = (ClipboardManager) CgeoApplication.getInstance().getSystemService(Context.CLIPBOARD_SERVICE);
@@ -35,7 +33,6 @@ public final class ClipboardUtils {
 
     /**
      * get clipboard content
-     *
      */
     @Nullable
     public static String getText() {

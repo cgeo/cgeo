@@ -50,7 +50,8 @@ public class MapSettingsUtils {
         // utility class
     }
 
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+    // splitting up that method would not help improve readability
     public static void showSettingsPopup(final Activity activity, @Nullable final IndividualRoute route, @NonNull final Action1<Boolean> onMapSettingsPopupFinished, @NonNull final Action1<RoutingMode> setRoutingValue, @NonNull final Action1<Integer> setCompactIconValue, final GeocacheFilterContext filterContext) {
         isShowCircles = Settings.isShowCircles();
         isAutotargetIndividualRoute = Settings.isAutotargetIndividualRoute();
@@ -110,27 +111,27 @@ public class MapSettingsUtils {
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
-                for (SettingsCheckboxModel item : allCbs) {
-                    item.setValue();
-                }
-                compactIconWrapper.setValue();
-                routingChoiceWrapper.setValue();
+            for (SettingsCheckboxModel item : allCbs) {
+                item.setValue();
+            }
+            compactIconWrapper.setValue();
+            routingChoiceWrapper.setValue();
 
-                if (filter.canSetQuickFilterLossless() && !filter.hasSameQuickFilter(quickFilter)) {
-                    filter.setQuickFilterLossless(quickFilter);
-                    filterContext.set(filter);
-                }
+            if (filter.canSetQuickFilterLossless() && !filter.hasSameQuickFilter(quickFilter)) {
+                filter.setQuickFilterLossless(quickFilter);
+                filterContext.set(filter);
+            }
 
-                onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
+            onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
 
-                if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
-                    if (route == null) {
-                        Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
-                    } else {
-                        RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
-                    }
+            if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
+                if (route == null) {
+                    Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
+                } else {
+                    RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
                 }
-            });
+            }
+        });
         dialog.show();
 
         compactIconWrapper.init();
@@ -209,7 +210,7 @@ public class MapSettingsUtils {
             if (disableView) {
                 ip.right.setEnabled(false);
                 ip.left.setOnClickListener(v -> SimpleDialog.of(ctx).setTitle(R.string.map_settings_cache_filter_too_complex_title)
-                    .setMessage(R.string.map_settings_cache_filter_too_complex_message).show());
+                        .setMessage(R.string.map_settings_cache_filter_too_complex_message).show());
             }
 
             ip.right.setChecked(currentValue);

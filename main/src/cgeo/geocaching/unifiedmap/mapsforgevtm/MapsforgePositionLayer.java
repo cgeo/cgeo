@@ -36,10 +36,10 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     private final VectorLayer accuracyCircleLayer;
     private CircleDrawable accuracyCircle;
     private final Style accuracyCircleStyle = Style.builder()
-        .strokeWidth(1.0f)
-        .strokeColor(MapLineUtils.getAccuracyCircleColor())
-        .fillColor(MapLineUtils.getAccuracyCircleFillColor())
-        .build();
+            .strokeWidth(1.0f)
+            .strokeColor(MapLineUtils.getAccuracyCircleColor())
+            .fillColor(MapLineUtils.getAccuracyCircleFillColor())
+            .build();
 
     // position history
     private final List<PathLayer> historyLayers = new ArrayList<>();

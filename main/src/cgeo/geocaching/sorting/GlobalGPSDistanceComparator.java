@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicLong;
 
 /**
  * sorts caches by distance to given GPS position
- *
  */
 public class GlobalGPSDistanceComparator extends AbstractDistanceComparator {
 

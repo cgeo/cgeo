@@ -28,10 +28,8 @@ public class AndroidGeocoder {
      * Retrieve addresses from a textual location using Android geocoding API. The work happens on the network
      * scheduler.
      *
-     * @param keyword
-     *            the location
+     * @param keyword the location
      * @return an observable containing zero or more locations
-     *
      * @see Geocoder#getFromLocationName(String, int)
      */
     public Observable<Address> getFromLocationName(@NonNull final String keyword) {

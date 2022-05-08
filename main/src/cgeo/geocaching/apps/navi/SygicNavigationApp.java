@@ -13,7 +13,6 @@ import androidx.annotation.StringRes;
 
 /**
  * http://developers.sygic.com/documentation.php?action=customurl_android
- *
  */
 abstract class SygicNavigationApp extends AbstractPointNavigationApp {
 

@@ -579,11 +579,11 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // map settings popup
         activity.findViewById(R.id.map_settings_popup).setOnClickListener(v ->
-            MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
+                MapSettingsUtils.showSettingsPopup(getActivity(), individualRoute, this::refreshMapData, this::routingModeChanged, this::compactIconModeChanged, mapOptions.filterContext));
 
         // individual route popup
         activity.findViewById(R.id.map_individualroute_popup).setOnClickListener(v ->
-            mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget));
+                mapActivity.getRouteTrackUtils().showPopup(individualRoute, this::setTarget));
 
         // If recreating from an obsolete map source, we may need a restart
         if (changeMapSource(Settings.getMapSource())) {
@@ -673,14 +673,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this.activity,
-            new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CGeoMap) {
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.CGeoMap) {
 
-                @Override
-                public void executeAfter() {
-                    mapView.onResume();
-                    resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
-                }
-            });
+                    @Override
+                    public void executeAfter() {
+                        mapView.onResume();
+                        resumeDisposables.addAll(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR), startTimer());
+                    }
+                });
 
         final List<String> toRefresh;
         synchronized (dirtyCaches) {
@@ -979,6 +979,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             cache.showHintToast(getActivity());
         }
     }
+
     /**
      * @return a non-null Set of geocodes corresponding to the caches that are shown on screen.
      */
@@ -1044,7 +1045,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
             final View mapAttributionView = activity.findViewById(mapAttributionViewId);
             if (mapAttributionView != null) {
                 mapAttributionView.setOnClickListener(
-                    new NewMap.MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(mapAttributionView.getContext())));
+                        new NewMap.MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(mapAttributionView.getContext())));
             }
         }
 
@@ -1239,7 +1240,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                 // check if map moved or zoomed
                 //TODO Portree Use Rectangle inside with bigger search window. That will stop reloading on every move
                 final boolean moved = map.markersInvalidated || (map.mapOptions.isLiveEnabled && !map.downloaded) || previousViewport == null || zoomNow != previousZoom ||
-                    (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
+                        (mapMoved(previousViewport, viewportNow) && (map.cachesCnt <= 0 || CollectionUtils.isEmpty(map.caches) || !previousViewport.includes(viewportNow)));
 
                 // update title on any change
                 if (moved || !viewportNow.equals(previousViewport)) {
@@ -1269,9 +1270,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
      */
     private boolean isLoading() {
         return !loadTimer.isDisposed() &&
-            (loadExecutor.getActiveCount() > 0 ||
-                downloadExecutor.getActiveCount() > 0 ||
-                displayExecutor.getActiveCount() > 0);
+                (loadExecutor.getActiveCount() > 0 ||
+                        downloadExecutor.getActiveCount() > 0 ||
+                        displayExecutor.getActiveCount() > 0);
     }
 
     /**
@@ -1607,9 +1608,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     private static boolean mapMoved(final Viewport referenceViewport, final Viewport newViewport) {
         return Math.abs(newViewport.getLatitudeSpan() - referenceViewport.getLatitudeSpan()) > 50e-6 ||
-            Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
-            Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 ||
-            Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
+                Math.abs(newViewport.getLongitudeSpan() - referenceViewport.getLongitudeSpan()) > 50e-6 ||
+                Math.abs(newViewport.center.getLatitude() - referenceViewport.center.getLatitude()) > referenceViewport.getLatitudeSpan() / 4 ||
+                Math.abs(newViewport.center.getLongitude() - referenceViewport.center.getLongitude()) > referenceViewport.getLongitudeSpan() / 4;
     }
 
     // center map to desired location

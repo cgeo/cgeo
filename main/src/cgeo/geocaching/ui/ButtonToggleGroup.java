@@ -47,14 +47,19 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
         this.setSelectionRequired(true);
     }
 
-    /** select whether buttons should be layouted relative (using LinearLayout.width parameter) or absolute (using "WRAP_CONTENT" for width) */
+    /**
+     * select whether buttons should be layouted relative (using LinearLayout.width parameter) or absolute (using "WRAP_CONTENT" for width)
+     */
     public void setUseRelativeWidth(final boolean useRelativeWidth) {
         this.useRelativeWidth = useRelativeWidth;
         relayout();
     }
 
-    /** adds text buttons to this buttontogglegroup */
-    public @IdRes int[] addButtons(@StringRes final int ... textIds) {
+    /**
+     * adds text buttons to this buttontogglegroup
+     */
+    public @IdRes
+    int[] addButtons(@StringRes final int... textIds) {
         final LayoutInflater inflater = LayoutInflater.from(getContext());
         final int[] result = new int[textIds.length];
 
@@ -81,13 +86,17 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
         }
     }
 
-    /** Like {@link MaterialButtonToggleGroup#getCheckedButtonId()}, but returns the INDEX of the view instead of it's id */
+    /**
+     * Like {@link MaterialButtonToggleGroup#getCheckedButtonId()}, but returns the INDEX of the view instead of it's id
+     */
     public int getCheckedButtonIndex() {
         final List<Integer> checkedButtonIndexes = getCheckedButtonIndexes();
         return checkedButtonIndexes.size() == 1 ? checkedButtonIndexes.get(0) : View.NO_ID;
     }
 
-    /** Like {@link MaterialButtonToggleGroup#getCheckedButtonIds()}, but returns the INDEXEX of the checked views instead of their ids */
+    /**
+     * Like {@link MaterialButtonToggleGroup#getCheckedButtonIds()}, but returns the INDEXEX of the checked views instead of their ids
+     */
     @NonNull
     public List<Integer> getCheckedButtonIndexes() {
         final List<Integer> checkedButtonIndexes = new ArrayList<>();
@@ -101,8 +110,10 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
         return checkedButtonIndexes;
     }
 
-    /** Aligns the widths of the buttons of given ButtonToggleGroups so they match */
-    public static void alignWidths(final ButtonToggleGroup ... groups) {
+    /**
+     * Aligns the widths of the buttons of given ButtonToggleGroups so they match
+     */
+    public static void alignWidths(final ButtonToggleGroup... groups) {
         //get max widths
         final List<Integer> maxWidths = new ArrayList<>();
         int pos = 0;
@@ -132,7 +143,6 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
     }
 
 
-
     private void setMinWidths(final List<Integer> minWidths) {
         this.minWidths = minWidths;
         relayout();
@@ -144,7 +154,7 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
             lp = new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.WRAP_CONTENT, totalMinWidth == 0 ? 1 : ((float) minWidth) / totalMinWidth);
         } else {
             lp = new LinearLayout.LayoutParams(totalMinWidth == 0 ? ViewGroup.LayoutParams.WRAP_CONTENT : minWidth,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                    ViewGroup.LayoutParams.WRAP_CONTENT);
         }
         addView(b, lp);
     }

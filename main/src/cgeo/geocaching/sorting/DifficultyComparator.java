@@ -9,7 +9,6 @@ import java.util.Locale;
 
 /**
  * sorts caches by difficulty
- *
  */
 class DifficultyComparator extends AbstractCacheComparator {
 

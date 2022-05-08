@@ -203,6 +203,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     /**
      * creates a new cache with the given id, if it does not exist yet
+     *
      * @param context       context in which this function gets called
      * @param id            internal (numeric) id of the cache
      * @param name          cache's name (or null for default name)
@@ -249,7 +250,8 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     /**
      * makes sure that the pseudo cache storing the "go to" targets exists
-     * @param context   context in which this function gets called
+     *
+     * @param context context in which this function gets called
      */
     public static void assertHistoryCacheExists(final Context context) {
         assertCacheExists(context, ID_HISTORY_CACHE, context.getString(R.string.internal_goto_targets_title), context.getString(R.string.internal_goto_targets_description), 0, null, UDC_LIST);
@@ -257,6 +259,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     /**
      * creates a new cache for the internal connector
+     *
      * @param context       context in which this function gets called
      * @param name          cache's name (or null for default name)
      * @param description   cache's description (or null for default description)
@@ -273,10 +276,11 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
 
     /**
      * asks user for cache name and creates a new cache if name has been entered
-     * @param geopoint      cache's current location (or null if none)
-     * @param listId        cache list's id (either InternalConnector.UDC_LIST or interpreted as offline list id)
-     * @param askUser       false: store in given list / true: ask for list & default list (if offline list given)
-     * default list is InternalConnector.UDC_LIST
+     *
+     * @param geopoint cache's current location (or null if none)
+     * @param listId   cache list's id (either InternalConnector.UDC_LIST or interpreted as offline list id)
+     * @param askUser  false: store in given list / true: ask for list & default list (if offline list given)
+     *                 default list is InternalConnector.UDC_LIST
      */
     public static void interactiveCreateCache(final Context context, final Geopoint geopoint, final int listId, final boolean askUser) {
         final boolean showStoreInCurrentList = askUser && ((listId == StoredList.STANDARD_LIST_ID || listId >= DataStore.customListIdOffset));
@@ -302,16 +306,16 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
         }));
 
         Dialogs.newBuilder(context)
-            .setCustomTitle(titleViewBinding.getRoot())
-            .setView(binding.getRoot())
-            .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
-                final boolean useGivenList = binding.givenList.isChecked();
-                Settings.setCreateUDCuseGivenList(useGivenList);
-                final String geocode = createCache(context, binding.name.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, showStoreInCurrentList && !useGivenList ? InternalConnector.UDC_LIST : listId);
-                CacheDetailActivity.startActivity(context, geocode);
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
-            .show();
+                .setCustomTitle(titleViewBinding.getRoot())
+                .setView(binding.getRoot())
+                .setPositiveButton(android.R.string.ok, (dialog, whichButton) -> {
+                    final boolean useGivenList = binding.givenList.isChecked();
+                    Settings.setCreateUDCuseGivenList(useGivenList);
+                    final String geocode = createCache(context, binding.name.getText().toString(), null, temporaryCache.getAssignedEmoji(), geopoint, showStoreInCurrentList && !useGivenList ? InternalConnector.UDC_LIST : listId);
+                    CacheDetailActivity.startActivity(context, geocode);
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, whichButton) -> dialog.cancel())
+                .show();
         Keyboard.show(context, binding.name);
     }
 }

@@ -19,10 +19,8 @@ public final class AngleUtils {
     /**
      * Return the angle to turn of to go from an angle to the other
      *
-     * @param from
-     *            the origin angle in degrees
-     * @param to
-     *            the target angle in degrees
+     * @param from the origin angle in degrees
+     * @param to   the target angle in degrees
      * @return a value in degrees, in the [-180, 180[ range
      */
     public static float difference(final float from, final float to) {
@@ -31,6 +29,7 @@ public final class AngleUtils {
 
     /**
      * Normalize an angle so that it belongs to the [0, 360[ range.
+     *
      * @param angle the angle in degrees
      * @return the same angle in the [0, 360[ range
      */

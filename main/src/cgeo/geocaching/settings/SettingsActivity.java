@@ -95,19 +95,19 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         backupUtils = new BackupUtils(SettingsActivity.this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_BACKUPUTILS));
 
         this.contentStorageHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(STATE_CSAH))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder -> {
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, folder -> {
 
-                final List<Fragment> fragments = getSupportFragmentManager().getFragments();
-                for (Fragment f : fragments) {
-                    if (f instanceof PreferenceFragmentCompat) {
-                        initPublicFolders((PreferenceFragmentCompat) f, contentStorageHelper);
+                    final List<Fragment> fragments = getSupportFragmentManager().getFragments();
+                    for (Fragment f : fragments) {
+                        if (f instanceof PreferenceFragmentCompat) {
+                            initPublicFolders((PreferenceFragmentCompat) f, contentStorageHelper);
+                        }
                     }
-                }
 
-                if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
-                    RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
-                }
-            });
+                    if (PersistableFolder.OFFLINE_MAP_THEMES.equals(folder)) {
+                        RenderThemeHelper.resynchronizeOrDeleteMapThemeFolder();
+                    }
+                });
 
         setContentView(R.layout.layout_settings);
         buildSearchIndex();
@@ -226,9 +226,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
             ((BasePreferenceFragment) preferenceFragment).setScrollToPrefCallback(this::scrollToCallback, baseKey, scrollToPrefKey);
         }
         getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.settings_fragment_root, preferenceFragment)
-            .commit();
+                .beginTransaction()
+                .replace(R.id.settings_fragment_root, preferenceFragment)
+                .commit();
     }
 
     @Override
@@ -268,15 +268,15 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         // Instantiate the new Fragment
         final Bundle args = pref.getExtras();
         final Fragment fragment = getSupportFragmentManager()
-                              .getFragmentFactory()
-            .instantiate(getClassLoader(), pref.getFragment());
+                .getFragmentFactory()
+                .instantiate(getClassLoader(), pref.getFragment());
         fragment.setArguments(args);
         fragment.setTargetFragment(caller, 0);
         // Replace the existing Fragment with the new Fragment
         getSupportFragmentManager().beginTransaction()
-            .replace(R.id.settings_fragment_root, fragment)
-            .addToBackStack(null)
-            .commit();
+                .replace(R.id.settings_fragment_root, fragment)
+                .addToBackStack(null)
+                .commit();
         title = pref.getTitle();
         return true;
     }
@@ -325,9 +325,9 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
         }
         t.commit();
         getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.settings_fragment_root, new PreferencesFragment())
-            .commit();
+                .beginTransaction()
+                .replace(R.id.settings_fragment_root, new PreferencesFragment())
+                .commit();
     }
 
     // callback for BasePreferenceFragments to register search data
@@ -403,13 +403,13 @@ public class SettingsActivity extends AppCompatActivity implements PreferenceFra
 
     static class SettingsSearchSuggestionCursor extends BaseSearchSuggestionCursor {
         public void addItem(@NonNull final CharSequence title, @NonNull final CharSequence summary, final String key, @DrawableRes final int iconRes) {
-            addRow(new String[] {
-                String.valueOf(rowId),
-                (String) title,
-                (String) summary,
-                Intents.ACTION_SETTINGS,
-                key,
-                String.valueOf(iconRes)
+            addRow(new String[]{
+                    String.valueOf(rowId),
+                    (String) title,
+                    (String) summary,
+                    Intents.ACTION_SETTINGS,
+                    key,
+                    String.valueOf(iconRes)
             });
             rowId++;
         }

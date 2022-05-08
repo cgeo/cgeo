@@ -68,7 +68,6 @@ public class CacheVotingBar {
     }
 
 
-
     public interface OnRatingChangeListener {
         void onRatingChanged(float stars);
     }

@@ -232,13 +232,14 @@ public class Settings {
         }
     }
 
-    public enum RenderThemeScaleType { MAP, TEXT, SYMBOL }
+    public enum RenderThemeScaleType {MAP, TEXT, SYMBOL}
 
     //NO_APPLICATION_MODE will be true if Settings is used in context of local unit tests
     private static final boolean NO_APPLICATION_MODE = CgeoApplication.getInstance() == null;
 
     private static final SharedPreferences sharedPrefs = NO_APPLICATION_MODE ? null : PreferenceManager
             .getDefaultSharedPreferences(CgeoApplication.getInstance().getBaseContext());
+
     static {
         migrateSettings();
         Log.setDebug(getBoolean(R.string.pref_debug, false));
@@ -771,7 +772,8 @@ public class Settings {
         for (final String lastSelectedListString : getStringList(R.string.pref_last_selected_lists, StringUtils.EMPTY)) {
             try {
                 lastSelectedLists.add(Integer.valueOf(lastSelectedListString));
-            } catch (final NumberFormatException ignored) { }
+            } catch (final NumberFormatException ignored) {
+            }
         }
         return lastSelectedLists;
     }
@@ -953,6 +955,7 @@ public class Settings {
     public static boolean isAutoInsertSignature() {
         return getBoolean(R.string.pref_sigautoinsert, false);
     }
+
     public static boolean isDisplayOfflineLogsHomescreen() {
         return getBoolean(R.string.pref_offlinelogs_homescreen, true);
     }
@@ -968,8 +971,8 @@ public class Settings {
     private static boolean useImperialUnitsByDefault() {
         final String countryCode = Locale.getDefault().getCountry();
         return "US".equals(countryCode)  // USA
-            || "LR".equals(countryCode)  // Liberia
-            || "MM".equals(countryCode); // Burma
+                || "LR".equals(countryCode)  // Liberia
+                || "MM".equals(countryCode); // Burma
     }
 
     public static boolean isLiveMap() {
@@ -1437,7 +1440,7 @@ public class Settings {
     }
 
     public static void setTwitterTokens(@Nullable final String tokenPublic,
-            @Nullable final String tokenSecret, final boolean enableTwitter) {
+                                        @Nullable final String tokenSecret, final boolean enableTwitter) {
         putString(R.string.pref_twitter_token_public, tokenPublic);
         putString(R.string.pref_twitter_token_secret, tokenSecret);
         if (tokenPublic != null) {
@@ -1448,7 +1451,7 @@ public class Settings {
     }
 
     public static void setTwitterTempTokens(@Nullable final String tokenPublic,
-            @Nullable final String tokenSecret) {
+                                            @Nullable final String tokenSecret) {
         putString(R.string.pref_temp_twitter_token_public, tokenPublic);
         putString(R.string.pref_temp_twitter_token_secret, tokenSecret);
     }
@@ -1540,8 +1543,7 @@ public class Settings {
     /**
      * Get Trackable inventory sort method based on the last Trackable inventory sort method.
      *
-     * @return
-     *         The Trackable Sort Method previously used.
+     * @return The Trackable Sort Method previously used.
      */
     public static TrackableComparator getTrackableComparator() {
         return TrackableComparator.findByName(getString(R.string.pref_trackable_inventory_sort, ""));
@@ -1550,17 +1552,16 @@ public class Settings {
     /**
      * Set Trackable inventory sort method.
      *
-     * @param trackableSortMethod
-     *          The Trackable Sort Method to remember
+     * @param trackableSortMethod The Trackable Sort Method to remember
      */
     public static void setTrackableComparator(final TrackableComparator trackableSortMethod) {
         putString(R.string.pref_trackable_inventory_sort, trackableSortMethod.name());
     }
+
     /**
      * Obtain Trackable action from the last Trackable log.
      *
-     * @return
-     *          The last Trackable Action or RETRIEVED_IT
+     * @return The last Trackable Action or RETRIEVED_IT
      */
     public static int getTrackableAction() {
         return getInt(R.string.pref_trackableaction, LogTypeTrackable.RETRIEVED_IT.id);
@@ -1569,44 +1570,57 @@ public class Settings {
     /**
      * Save Trackable action from the last Trackable log.
      *
-     * @param trackableAction
-     *          The Trackable Action to remember
+     * @param trackableAction The Trackable Action to remember
      */
     public static void setTrackableAction(final int trackableAction) {
         putInt(R.string.pref_trackableaction, trackableAction);
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     */
     public static String getSelectedMapRenderTheme() {
         return getString(R.string.pref_renderthemefile, "");
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     */
     public static void setSelectedMapRenderTheme(final String customRenderThemeFile) {
         putString(R.string.pref_renderthemefile, customRenderThemeFile);
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}!
+     */
     public static void setSelectedMapRenderThemeStyle(final String prefKey, final String style) {
         putStringDirect(prefKey, style);
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     */
     public static boolean getSyncMapRenderThemeFolder() {
         return getBoolean(R.string.pref_renderthemefolder_synctolocal, false);
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     */
     public static void setSyncMapRenderThemeFolder(final boolean syncMapRenderThemeFolder) {
         putBoolean(R.string.pref_renderthemefolder_synctolocal, syncMapRenderThemeFolder);
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeSettingsFragment}!
+     */
     public static String getMapRenderScalePreferenceKey(final String themeStyleId, final RenderThemeScaleType scaleType) {
         return themeStyleId + "-" + scaleType;
     }
 
-    /** Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}! */
+    /**
+     * Shall SOLELY be used by {@link cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper}!
+     */
     public static int getMapRenderScale(final String themeStyleId, final RenderThemeScaleType scaleType) {
         final int value = getIntDirect(getMapRenderScalePreferenceKey(themeStyleId, scaleType), 100);
         return Math.min(500, Math.max(value, 10));
@@ -1622,8 +1636,7 @@ public class Settings {
     /**
      * Force set the plain text log preference
      *
-     * @param plainLogs
-     *            wanted or not
+     * @param plainLogs wanted or not
      */
     public static void setPlainLogs(final boolean plainLogs) {
         putBoolean(R.string.pref_plainLogs, plainLogs);
@@ -1815,7 +1828,7 @@ public class Settings {
     public static boolean useOrientationSensor(final Context context) {
         return OrientationProvider.hasOrientationSensor(context) &&
                 (getBoolean(R.string.pref_force_orientation_sensor, false) ||
-                    !(RotationProvider.hasRotationSensor(context) || MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context))
+                        !(RotationProvider.hasRotationSensor(context) || MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context))
                 );
     }
 
@@ -2038,22 +2051,30 @@ public class Settings {
         putInt(R.string.pref_localstorage_version, newVersion);
     }
 
-    /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
+    /**
+     * Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}!
+     */
     public static String getCacheFilterConfig(final String type) {
         return getStringDirect(getKey(R.string.pref_cache_filter_config) + "." + type, null);
     }
 
-    /** Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}! */
+    /**
+     * Should SOLELY be called by class {@link cgeo.geocaching.filters.core.GeocacheFilter}!
+     */
     public static void setCacheFilterConfig(final String type, final String config) {
         putStringDirect(getKey(R.string.pref_cache_filter_config) + "." + type, config);
     }
 
-    /** Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}! */
+    /**
+     * Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}!
+     */
     public static String getSortConfig(final String sortContextKey) {
         return getStringDirect(getKey(R.string.pref_cache_sort_config) + "." + sortContextKey, null);
     }
 
-    /** Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}! */
+    /**
+     * Should SOLELY be called by class {@link cgeo.geocaching.sorting.GeocacheSortContext}!
+     */
     public static void setSortConfig(final String sortContextKey, final String sortConfig) {
         if (sortConfig == null) {
             removeDirect(getKey(R.string.pref_cache_sort_config) + "." + sortContextKey);
@@ -2066,22 +2087,24 @@ public class Settings {
         return getInt(R.string.pref_list_initial_load_limit, getKeyInt(R.integer.list_load_limit_default));
     }
 
-    /** return a list of preference keys containing sensitive data */
+    /**
+     * return a list of preference keys containing sensitive data
+     */
     public static HashSet<String> getSensitivePreferenceKeys(final Context context) {
         final HashSet<String> sensitiveKeys = new HashSet<>();
         Collections.addAll(sensitiveKeys,
-            context.getString(R.string.pref_username), context.getString(R.string.pref_password),
-            context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
-            context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
-            context.getString(R.string.pref_twitter), context.getString(R.string.pref_temp_twitter_token_secret), context.getString(R.string.pref_temp_twitter_token_public), context.getString(R.string.pref_twitter_token_secret), context.getString(R.string.pref_twitter_token_public),
-            context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
-            context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
-            context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
-            context.getString(R.string.pref_ocus_tokensecret), context.getString(R.string.pref_ocus_tokenpublic), context.getString(R.string.pref_temp_ocus_token_secret), context.getString(R.string.pref_temp_ocus_token_public),
-            context.getString(R.string.pref_ocro_tokensecret), context.getString(R.string.pref_ocro_tokenpublic), context.getString(R.string.pref_temp_ocro_token_secret), context.getString(R.string.pref_temp_ocro_token_public),
-            context.getString(R.string.pref_ocuk2_tokensecret), context.getString(R.string.pref_ocuk2_tokenpublic), context.getString(R.string.pref_temp_ocuk2_token_secret), context.getString(R.string.pref_temp_ocuk2_token_public),
-            context.getString(R.string.pref_su_tokensecret), context.getString(R.string.pref_su_tokenpublic), context.getString(R.string.pref_temp_su_token_secret), context.getString(R.string.pref_temp_su_token_public),
-            context.getString(R.string.pref_fakekey_geokrety_authorization)
+                context.getString(R.string.pref_username), context.getString(R.string.pref_password),
+                context.getString(R.string.pref_ecusername), context.getString(R.string.pref_ecpassword),
+                context.getString(R.string.pref_user_vote), context.getString(R.string.pref_pass_vote),
+                context.getString(R.string.pref_twitter), context.getString(R.string.pref_temp_twitter_token_secret), context.getString(R.string.pref_temp_twitter_token_public), context.getString(R.string.pref_twitter_token_secret), context.getString(R.string.pref_twitter_token_public),
+                context.getString(R.string.pref_ocde_tokensecret), context.getString(R.string.pref_ocde_tokenpublic), context.getString(R.string.pref_temp_ocde_token_secret), context.getString(R.string.pref_temp_ocde_token_public),
+                context.getString(R.string.pref_ocpl_tokensecret), context.getString(R.string.pref_ocpl_tokenpublic), context.getString(R.string.pref_temp_ocpl_token_secret), context.getString(R.string.pref_temp_ocpl_token_public),
+                context.getString(R.string.pref_ocnl_tokensecret), context.getString(R.string.pref_ocnl_tokenpublic), context.getString(R.string.pref_temp_ocnl_token_secret), context.getString(R.string.pref_temp_ocnl_token_public),
+                context.getString(R.string.pref_ocus_tokensecret), context.getString(R.string.pref_ocus_tokenpublic), context.getString(R.string.pref_temp_ocus_token_secret), context.getString(R.string.pref_temp_ocus_token_public),
+                context.getString(R.string.pref_ocro_tokensecret), context.getString(R.string.pref_ocro_tokenpublic), context.getString(R.string.pref_temp_ocro_token_secret), context.getString(R.string.pref_temp_ocro_token_public),
+                context.getString(R.string.pref_ocuk2_tokensecret), context.getString(R.string.pref_ocuk2_tokenpublic), context.getString(R.string.pref_temp_ocuk2_token_secret), context.getString(R.string.pref_temp_ocuk2_token_public),
+                context.getString(R.string.pref_su_tokensecret), context.getString(R.string.pref_su_tokenpublic), context.getString(R.string.pref_temp_su_token_secret), context.getString(R.string.pref_temp_su_token_public),
+                context.getString(R.string.pref_fakekey_geokrety_authorization)
         );
         return sensitiveKeys;
     }
@@ -2118,7 +2141,8 @@ public class Settings {
     @Nullable
     public static List<PrefLogTemplate> getLogTemplates() {
         try {
-            return MAPPER.readValue(getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>() { });
+            return MAPPER.readValue(getString(R.string.pref_logTemplates, "[]"), new TypeReference<List<PrefLogTemplate>>() {
+            });
         } catch (JsonProcessingException e) {
             Log.e("Failure parsing log templates: " + e.getMessage());
             return new ArrayList<>();

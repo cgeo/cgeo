@@ -119,7 +119,7 @@ public final class Routing {
      * In some cases (e.g., destination is too close or too far, path could not be found),
      * a straight line will be returned.
      *
-     * @param start the starting point
+     * @param start       the starting point
      * @param destination the destination point
      * @return a track with at least two points including the start and destination points
      */
@@ -165,7 +165,7 @@ public final class Routing {
      * Return a valid track (with at least two points, including the start and destination).
      * no caching
      *
-     * @param start the starting point
+     * @param start       the starting point
      * @param destination the destination point
      * @return a track with at least two points including the start and destination points
      */
@@ -199,7 +199,7 @@ public final class Routing {
 
     @NonNull
     private static Geopoint[] defaultTrack(final Geopoint start, final Geopoint destination) {
-        return new Geopoint[] { start, destination };
+        return new Geopoint[]{start, destination};
     }
 
     @Nullable
@@ -296,22 +296,30 @@ public final class Routing {
         timeLastUpdate = 0;
     }
 
-    /** Are we currently connected to any routing service (internal/external)? */
+    /**
+     * Are we currently connected to any routing service (internal/external)?
+     */
     public static boolean isConnected() {
         return routingServiceConnection != null && routingServiceConnection.isConnected();
     }
 
-    /** Is any routing service available (internal/external) */
+    /**
+     * Is any routing service available (internal/external)
+     */
     public static boolean isAvailable() {
         return isConnected() || Settings.useInternalRouting() || isExternalRoutingInstalled();
     }
 
-    /** Is external routing app installed? */
+    /**
+     * Is external routing app installed?
+     */
     public static boolean isExternalRoutingInstalled() {
         return ProcessUtils.isInstalled(getExternalRoutingPackageName());
     }
 
-    /** Get Android package name for external routing app */
+    /**
+     * Get Android package name for external routing app
+     */
     public static String getExternalRoutingPackageName() {
         return getContext().getString(R.string.package_brouter);
     }

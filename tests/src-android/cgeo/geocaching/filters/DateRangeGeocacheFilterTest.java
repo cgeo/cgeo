@@ -13,7 +13,9 @@ import java.util.Locale;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 
-/** This class tests the Date filters, using HIDDEN filter as an example */
+/**
+ * This class tests the Date filters, using HIDDEN filter as an example
+ */
 public class DateRangeGeocacheFilterTest {
 
     private static final long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;

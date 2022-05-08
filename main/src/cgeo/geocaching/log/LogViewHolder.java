@@ -28,8 +28,7 @@ public class LogViewHolder extends AbstractViewHolder {
      * Set the position of the cursor pointed to by this holder. <br/>
      * This must be called by the UI thread.
      *
-     * @param position
-     *            the cursor position
+     * @param position the cursor position
      */
     public void setPosition(final int position) {
         this.position = position;

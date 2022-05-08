@@ -67,19 +67,19 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         REFILL_PATTERNS.put(CalculatedCoordinateType.DEGREE_MINUTE_SEC, "1__°__'__.___\"");
 
         LAT_CONVERTERS.put(CalculatedCoordinateType.DEGREE, gp ->
-            String.format(locale, "%c %08.5f°", gp.getLatDir(), Math.abs(gp.getLatitude())));
+                String.format(locale, "%c %08.5f°", gp.getLatDir(), Math.abs(gp.getLatitude())));
         LON_CONVERTERS.put(CalculatedCoordinateType.DEGREE, gp ->
-            String.format(locale, "%c%09.5f°", gp.getLonDir(), Math.abs(gp.getLongitude())));
+                String.format(locale, "%c%09.5f°", gp.getLonDir(), Math.abs(gp.getLongitude())));
 
         LAT_CONVERTERS.put(CalculatedCoordinateType.DEGREE_MINUTE, gp ->
-            String.format(locale, "%c %02d°%02d%c%03d'", gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), decSep, gp.getDecMinuteLatMinFrac()));
+                String.format(locale, "%c %02d°%02d%c%03d'", gp.getLatDir(), gp.getDecMinuteLatDeg(), gp.getDecMinuteLatMin(), decSep, gp.getDecMinuteLatMinFrac()));
         LON_CONVERTERS.put(CalculatedCoordinateType.DEGREE_MINUTE, gp ->
-            String.format(locale, "%c%03d°%02d%c%03d'", gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), decSep, gp.getDecMinuteLonMinFrac()));
+                String.format(locale, "%c%03d°%02d%c%03d'", gp.getLonDir(), gp.getDecMinuteLonDeg(), gp.getDecMinuteLonMin(), decSep, gp.getDecMinuteLonMinFrac()));
 
         LAT_CONVERTERS.put(CalculatedCoordinateType.DEGREE_MINUTE_SEC, gp ->
-            String.format(Locale.getDefault(), "%c %02d°%02d'%02d%c%03d\"", gp.getLatDir(), gp.getDMSLatDeg(), gp.getDMSLatMin(), gp.getDMSLatSec(), decSep, gp.getDMSLatSecFrac()));
+                String.format(Locale.getDefault(), "%c %02d°%02d'%02d%c%03d\"", gp.getLatDir(), gp.getDMSLatDeg(), gp.getDMSLatMin(), gp.getDMSLatSec(), decSep, gp.getDMSLatSecFrac()));
         LON_CONVERTERS.put(CalculatedCoordinateType.DEGREE_MINUTE_SEC, gp ->
-            String.format(Locale.getDefault(), "%c%03d°%02d'%02d%c%03d\"", gp.getLonDir(), gp.getDMSLonDeg(), gp.getDMSLonMin(), gp.getDMSLonSec(), decSep, gp.getDMSLonSecFrac()));
+                String.format(Locale.getDefault(), "%c%03d°%02d'%02d%c%03d\"", gp.getLonDir(), gp.getDMSLonDeg(), gp.getDMSLonMin(), gp.getDMSLonSec(), decSep, gp.getDMSLonSecFrac()));
 
         for (int c = 'A'; c <= 'Z'; c++) {
             SIGNIFICANT_CHARS.add(c);
@@ -115,7 +115,9 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         this.changeListener = changeListener;
     }
 
-    /** returns true if latPatternn/lonPattern could be applied, false otherwise */
+    /**
+     * returns true if latPatternn/lonPattern could be applied, false otherwise
+     */
     public boolean setData(final CalculatedCoordinateType type, final String latPattern, final String lonPattern, final Geopoint gp) {
         this.setVisibility(type == PLAIN ? GONE : VISIBLE);
         boolean result = false;
@@ -206,7 +208,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         }
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // splitting up that method would not help improve readability
+    @SuppressWarnings("PMD.NPathComplexity")
+    // splitting up that method would not help improve readability
     private static boolean checkAndApply(final String fillPattern, final String coordPattern, final int row, final GridLayout grid, final int viewPos) {
         if (coordPattern == null) {
             return false;
@@ -405,8 +408,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
 
     private GridLayout.LayoutParams createGridLayoutParams(final int colWeight) {
         final GridLayout.LayoutParams lp = new GridLayout.LayoutParams(
-            GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL),
-            GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, colWeight));
+                GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL),
+                GridLayout.spec(GridLayout.UNDEFINED, GridLayout.FILL, colWeight));
         lp.width = colWeight == 0 ? WRAP_CONTENT : 20;
         lp.height = WRAP_CONTENT;
         return lp;

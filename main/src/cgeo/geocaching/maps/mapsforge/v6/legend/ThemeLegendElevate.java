@@ -9,7 +9,8 @@ import java.util.ArrayList;
 
 class ThemeLegendElevate implements ThemeLegend {
 
-    @SuppressWarnings("PMD.ExcessiveMethodLength") // method is long, but trivial; splitting it into submethods would not improve readability
+    @SuppressWarnings("PMD.ExcessiveMethodLength")
+    // method is long, but trivial; splitting it into submethods would not improve readability
     public RenderThemeLegend.LegendCategory[] loadLegend(final RenderThemeHelper.RenderThemeType rtt, final ArrayList<RenderThemeLegend.LegendEntry> entries) {
         final String p = "ele-res";
         final ArrayList<RenderThemeLegend.LegendCategory> cats = new ArrayList<>();
@@ -367,7 +368,8 @@ class ThemeLegendElevate implements ThemeLegend {
     }
 
     @Override
-    public @StringRes int getInfoUrl() {
+    public @StringRes
+    int getInfoUrl() {
         return R.string.maptheme_legend_elevate;
     }
 

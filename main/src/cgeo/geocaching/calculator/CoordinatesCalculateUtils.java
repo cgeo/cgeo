@@ -12,15 +12,15 @@ import java.util.List;
  * Through out this implementation:
  *
  * 'Equations' are used to represent 'Variables' that appear in the description of the cache coordinated themselves.
- *             As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
- *             All 'equations' must have a CAPITAL-LETTER name.
+ * As in "N 42° 127.ABC".  In this example 'A', 'B' and 'C' are all 'equations'.
+ * All 'equations' must have a CAPITAL-LETTER name.
  *
  * 'FreeVariables' are used to represent 'Variables' that appear in the 'expression' of an equation
- *                 As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
- *                 All 'freeVariables' must have a lower-case name.
+ * As in "X = a^2 + b^2".  In this example 'a' and 'b' are both 'freeVariables'.
+ * All 'freeVariables' must have a lower-case name.
  *
  * variables in the 'Bank' are unused variables, for which equations already exists. e.g. once defined and removed by user,
- *                 but equation will be saved, if user will use the variable once again.
+ * but equation will be saved, if user will use the variable once again.
  */
 public final class CoordinatesCalculateUtils {
 
@@ -133,14 +133,14 @@ public final class CoordinatesCalculateUtils {
         final List<ButtonData> butData = new ArrayList<>();
 
         final CalcState calcState = new CalcState(Settings.CoordInputFormatEnum.Plain,
-            latText,
-            lonText,
-            latHem,
-            lonHem,
-            butData,
-            equData,
-            freeVarData,
-            variableDataList);
+                latText,
+                lonText,
+                latHem,
+                lonHem,
+                butData,
+                equData,
+                freeVarData,
+                variableDataList);
 
         return calcState;
     }

@@ -164,9 +164,11 @@ public enum LogType {
         return this == FOUND_IT || this == ATTENDED || this == WEBCAM_PHOTO_TAKEN;
     }
 
-    /** gets Ids for all log types standing for a "found". Must be synchronized with {@link #isFoundLog()} */
+    /**
+     * gets Ids for all log types standing for a "found". Must be synchronized with {@link #isFoundLog()}
+     */
     public static Integer[] getFoundLogIds() {
-        return new Integer[]{ FOUND_IT.id, ATTENDED.id, WEBCAM_PHOTO_TAKEN.id};
+        return new Integer[]{FOUND_IT.id, ATTENDED.id, WEBCAM_PHOTO_TAKEN.id};
     }
 
     /**

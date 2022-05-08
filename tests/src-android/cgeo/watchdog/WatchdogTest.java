@@ -22,7 +22,6 @@ import static org.assertj.core.api.Java6Assertions.assertThat;
  * <p>
  * You need all the opencaching API keys for this test to run.
  * </p>
- *
  */
 
 public class WatchdogTest extends CGeoTestCase {

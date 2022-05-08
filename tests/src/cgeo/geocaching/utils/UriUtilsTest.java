@@ -18,22 +18,22 @@ public class UriUtilsTest {
     //real-world Uri examples and their wanted display
     //Each test case has entries "Description", "expected display Uri", "raw Uri
     public static final String[][] URI_DISPLAY_TESTS = new String[][]{
-        new String[]{"Internal /cgeo", "/cgeo", "content://com.android.externalstorage.documents/tree/primary%3Acgeo"},
-        new String[]{"Internal /cgeo/maps", "/cgeo/maps", "content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo%2Fmaps"},
-        new String[]{"Internal /cgeo/logfiles", "/cgeo/logfiles", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles"},
-        new String[]{"Internal file in /cgeo/logfiles", "/cgeo/logfiles/log.txt", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles%2Flog.txt"},
-        new String[]{"SDCARD /cgeo with known volume id", "TEST-SDCARD/cgeo", "content://com.android.externalstorage.documents/tree/TEST-1111-2222%3Acgeo"},
-        new String[]{"SDCARD /Music/cgeo with unknown volume id", "TEST-UNKNOWNID/Music/cgeo", "content://com.android.externalstorage.documents/tree/TEST-UNKNOWNID%3AMusic%2Fcgeo"},
-        new String[]{"SDCARD /cgeo with unknown volume id", "TEST-UNKNOWNID/cgeo", "content://com.android.externalstorage.documents/tree/TEST-UNKNOWNID%3Acgeo"},
-        new String[]{"Internal /Documents/cgeo (special home handling)", "[Documents]/cgeo", "content://com.android.externalstorage.documents/tree/home%3Acgeo"},
-        new String[]{"Download root (special provider handling)", "Downloads:/downloads", "content://com.android.providers.downloads.documents/tree/downloads"},
-        new String[]{"Download /cgeo (special provider handling)", "Downloads:raw/storage/emulated/0/Download/cgeo", "content://com.android.providers.downloads.documents/tree/raw%3A%2Fstorage%2Femulated%2F0%2FDownload%2Fcgeo"},
-        new String[]{"Download /cgeo (provider handling + numbers)", "Downloads:msd/29", "content://com.android.providers.downloads.documents/tree/msd%3A29"},
-        new String[]{"File", "/storage/emulated/0/cgeo", "file:///storage/emulated/0/cgeo"},
-        new String[]{"A null uri", "---", null},
-        new String[]{"An empty uri", "---", ""},
-        new String[]{"A strange uri", "/strange", "content://////strange"},
-        new String[]{"A public web uri", "http://www.cgeo.org/test", "http://www.cgeo.org/test"},
+            new String[]{"Internal /cgeo", "/cgeo", "content://com.android.externalstorage.documents/tree/primary%3Acgeo"},
+            new String[]{"Internal /cgeo/maps", "/cgeo/maps", "content://com.android.externalstorage.documents/tree/primary%3Acgeo/document/primary%3Acgeo%2Fmaps"},
+            new String[]{"Internal /cgeo/logfiles", "/cgeo/logfiles", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles"},
+            new String[]{"Internal file in /cgeo/logfiles", "/cgeo/logfiles/log.txt", "content://com.android.externalstorage.documents/tree/primary%3Acgeo%2Flogfiles%2Flog.txt"},
+            new String[]{"SDCARD /cgeo with known volume id", "TEST-SDCARD/cgeo", "content://com.android.externalstorage.documents/tree/TEST-1111-2222%3Acgeo"},
+            new String[]{"SDCARD /Music/cgeo with unknown volume id", "TEST-UNKNOWNID/Music/cgeo", "content://com.android.externalstorage.documents/tree/TEST-UNKNOWNID%3AMusic%2Fcgeo"},
+            new String[]{"SDCARD /cgeo with unknown volume id", "TEST-UNKNOWNID/cgeo", "content://com.android.externalstorage.documents/tree/TEST-UNKNOWNID%3Acgeo"},
+            new String[]{"Internal /Documents/cgeo (special home handling)", "[Documents]/cgeo", "content://com.android.externalstorage.documents/tree/home%3Acgeo"},
+            new String[]{"Download root (special provider handling)", "Downloads:/downloads", "content://com.android.providers.downloads.documents/tree/downloads"},
+            new String[]{"Download /cgeo (special provider handling)", "Downloads:raw/storage/emulated/0/Download/cgeo", "content://com.android.providers.downloads.documents/tree/raw%3A%2Fstorage%2Femulated%2F0%2FDownload%2Fcgeo"},
+            new String[]{"Download /cgeo (provider handling + numbers)", "Downloads:msd/29", "content://com.android.providers.downloads.documents/tree/msd%3A29"},
+            new String[]{"File", "/storage/emulated/0/cgeo", "file:///storage/emulated/0/cgeo"},
+            new String[]{"A null uri", "---", null},
+            new String[]{"An empty uri", "---", ""},
+            new String[]{"A strange uri", "/strange", "content://////strange"},
+            new String[]{"A public web uri", "http://www.cgeo.org/test", "http://www.cgeo.org/test"},
     };
 
     @Test

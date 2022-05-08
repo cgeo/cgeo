@@ -40,6 +40,7 @@ public interface MapActivityImpl extends FilteredActivity {
     boolean superOnOptionsItemSelected(MenuItem item);
 
     RouteTrackUtils getRouteTrackUtils();
+
     Tracks getTracks();
 
 }

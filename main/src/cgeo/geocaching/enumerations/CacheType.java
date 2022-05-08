@@ -42,7 +42,9 @@ public enum CacheType {
     // insert other official cache types before USER_DEFINED and UNKNOWN
     USER_DEFINED("userdefined", "User defined cache", "", R.string.userdefined, R.string.userdefined_short, R.drawable.type_cgeo, "", R.color.cacheType_cgeo),
     UNKNOWN("unknown", "unknown", "", R.string.unknown, R.string.unknown_short, R.drawable.type_unknown, "", R.color.cacheType_unknown),
-    /** No real cache type -> filter */
+    /**
+     * No real cache type -> filter
+     */
     ALL("all", "display all caches", "9a79e6ce-3344-409c-bbe9-496530baf758", R.string.all_types, R.string.all_types_short, R.drawable.type_unknown, "", R.color.cacheType_unknown);
 
     /**
@@ -160,7 +162,7 @@ public enum CacheType {
 
     public boolean isEvent() {
         return this == EVENT || this == MEGA_EVENT || this == CITO || this == GIGA_EVENT || this == COMMUN_CELEBRATION ||
-            this == BLOCK_PARTY || this == GPS_EXHIBIT  || this == GCHQ_CELEBRATION;
+                this == BLOCK_PARTY || this == GPS_EXHIBIT || this == GCHQ_CELEBRATION;
     }
 
     @Override

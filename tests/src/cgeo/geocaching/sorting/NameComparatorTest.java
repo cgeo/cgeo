@@ -39,7 +39,6 @@ public class NameComparatorTest {
 
     /**
      * Assert that a given collection of names is already sorted correctly.
-     *
      */
     private void assertSortedNames(final String... names) {
         final ArrayList<Geocache> caches = new ArrayList<>(names.length);

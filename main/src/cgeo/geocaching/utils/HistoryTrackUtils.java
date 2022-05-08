@@ -16,6 +16,7 @@ public class HistoryTrackUtils {
 
     /**
      * Enable/disable history track related menu entries
+     *
      * @param menu menu to be configured
      */
     public static void onPrepareOptionsMenu(final Menu menu) {
@@ -25,8 +26,9 @@ public class HistoryTrackUtils {
 
     /**
      * Check if selected menu entry is for "load track" or hide/unhide track
+     *
      * @param activity calling activity
-     * @param id menu entry id
+     * @param id       menu entry id
      * @return true, if selected menu entry is track related and consumed / false else
      */
     public static boolean onOptionsItemSelected(final Activity activity, final int id, final Runnable redrawHistoryTrack, final Runnable clearTrailHistory) {
@@ -47,9 +49,6 @@ public class HistoryTrackUtils {
         }
         return true;
     }
-
-
-
 
 
 }

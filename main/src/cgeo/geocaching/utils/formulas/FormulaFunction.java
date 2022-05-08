@@ -15,44 +15,46 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-/** Maintains all functions available in {@link Formula}'s */
+/**
+ * Maintains all functions available in {@link Formula}'s
+ */
 public enum FormulaFunction {
 
     SQRT("sqrt", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_sqrt, "Square Root", null, 0,
-        singleValueNumericFunction(Math::sqrt)),
+            singleValueNumericFunction(Math::sqrt)),
     SIN("sin", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_sin, "Sinus", null, 0,
-        singleValueNumericFunction(p -> Math.sin(Math.toRadians(p)))),
+            singleValueNumericFunction(p -> Math.sin(Math.toRadians(p)))),
     COS("cos", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_cos, "Cosinus", null, 0,
-        singleValueNumericFunction(p -> Math.cos(Math.toRadians(p)))),
+            singleValueNumericFunction(p -> Math.cos(Math.toRadians(p)))),
     TAN("tan", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_tan, "Tangens", null, 0,
-        singleValueNumericFunction(p -> Math.tan(Math.toRadians(p)))),
+            singleValueNumericFunction(p -> Math.tan(Math.toRadians(p)))),
     ABS("abs", FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_abs, "Absolute Value", null, 0,
-        singleValueNumericFunction(Math::abs)),
+            singleValueNumericFunction(Math::abs)),
     ROUND(new String[]{"round", "rd"}, FunctionGroup.SIMPLE_NUMERIC, R.string.formula_function_round, "Round", null, 0,
-        p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), p.getAsInt(1, 0)))),
+            p -> Value.of(FormulaUtils.round(p.getAsDouble(0, -1), p.getAsInt(1, 0)))),
 
     IF("if", FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_if, "If", null, 0,
-        minMaxParamFunction(2, -1, FormulaUtils::ifFunction)),
+            minMaxParamFunction(2, -1, FormulaUtils::ifFunction)),
 
     LENGTH(new String[]{"length", "len"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_length, "String Length", "''", 1,
-        singleValueStringFunction(String::length)),
+            singleValueStringFunction(String::length)),
     SUBSTRING(new String[]{"substring", "sub"}, FunctionGroup.SIMPLE_STRING, R.string.formula_function_substring, "Substring", "'';0;1", 1,
-        minMaxParamFunction(1, 3, p -> FormulaUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
+            minMaxParamFunction(1, 3, p -> FormulaUtils.substring(p.getAsString(0, ""), p.getAsInt(1, 0), p.getAsInt(2, 1)))),
 
     ROT13("rot13", FunctionGroup.COMPLEX_STRING, R.string.formula_function_rot13, "Rotate characters by 13", "''", 1,
-        minMaxParamFunction(1, 1, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), 13)))),
+            minMaxParamFunction(1, 1, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), 13)))),
     ROT("rot", FunctionGroup.COMPLEX_STRING, R.string.formula_function_rot, "Rotate characters by x", "'';13", 1,
-        minMaxParamFunction(1, 2, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 13))))),
-    CHECKSUM(new String[]{"checksum", "cs" }, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_checksum, "Checksum", null, 0,
-        minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), false))),
-    ICHECKSUM(new String[]{"ichecksum", "ics" }, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_ichecksum, "Iterative Checksum", null, 0,
-        minMaxParamFunction(1, 1,  p -> FormulaUtils.valueChecksum(p.get(0), true))),
-    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv", "bww" }, FunctionGroup.COMPLEX_STRING, R.string.formula_function_lettervalue, "Letter Value", "''", 1,
-        singleValueStringFunction(FormulaUtils::letterValue)),
+            minMaxParamFunction(1, 2, p -> Value.of(FormulaUtils.rot(p.get(0).getAsString(), p.getAsInt(1, 13))))),
+    CHECKSUM(new String[]{"checksum", "cs"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_checksum, "Checksum", null, 0,
+            minMaxParamFunction(1, 1, p -> FormulaUtils.valueChecksum(p.get(0), false))),
+    ICHECKSUM(new String[]{"ichecksum", "ics"}, FunctionGroup.COMPLEX_NUMERIC, R.string.formula_function_ichecksum, "Iterative Checksum", null, 0,
+            minMaxParamFunction(1, 1, p -> FormulaUtils.valueChecksum(p.get(0), true))),
+    LETTERVALUE(new String[]{"lettervalue", "lv", "wordvalue", "wv", "bww"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_lettervalue, "Letter Value", "''", 1,
+            singleValueStringFunction(FormulaUtils::letterValue)),
     ROMAN("roman", FunctionGroup.COMPLEX_STRING, R.string.formula_function_roman, "Roman", "''", 1,
-        singleValueStringFunction(FormulaUtils::roman)),
-    VANITY(new String[]{ "vanity", "vanitycode", "vc" }, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
-          singleValueStringFunction(FormulaUtils::vanity));
+            singleValueStringFunction(FormulaUtils::roman)),
+    VANITY(new String[]{"vanity", "vanitycode", "vc"}, FunctionGroup.COMPLEX_STRING, R.string.formula_function_vanity, "Vanity", "''", 1,
+            singleValueStringFunction(FormulaUtils::vanity));
 
     public enum FunctionGroup {
         SIMPLE_NUMERIC(R.string.formula_function_group_simplenumeric, "Simple Numeric"),

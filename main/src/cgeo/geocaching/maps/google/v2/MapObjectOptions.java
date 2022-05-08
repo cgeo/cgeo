@@ -34,8 +34,8 @@ public class MapObjectOptions {
         }
         if (!(
                 options instanceof MarkerOptions ||
-                options instanceof CircleOptions ||
-                options instanceof PolylineOptions
+                        options instanceof CircleOptions ||
+                        options instanceof PolylineOptions
         )) {
             throw new IllegalArgumentException("Options not valid google maps object options, instance of " + options.getClass().getName());
         }

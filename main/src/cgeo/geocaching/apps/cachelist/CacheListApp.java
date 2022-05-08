@@ -13,6 +13,6 @@ import java.util.List;
 public interface CacheListApp extends App {
 
     void invoke(@NonNull List<Geocache> caches,
-            @NonNull Activity activity, @NonNull SearchResult search);
+                @NonNull Activity activity, @NonNull SearchResult search);
 
 }

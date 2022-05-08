@@ -38,7 +38,9 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
     }
 
     public abstract ViewBindingClass createView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState);
+
     public abstract void setContent();
+
     public abstract long getPageId();
 
     @Override

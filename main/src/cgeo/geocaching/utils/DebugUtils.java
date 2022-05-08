@@ -36,34 +36,34 @@ public class DebugUtils {
         final File file = ContentStorage.get().createTempFile();
 
         new Handler(Looper.getMainLooper()).postDelayed(() -> {
-                try {
-                    android.os.Debug.dumpHprofData(file.getPath());
-                } catch (IOException e) {
-                    Log.e("createMemoryDump", e);
-                }
+            try {
+                android.os.Debug.dumpHprofData(file.getPath());
+            } catch (IOException e) {
+                Log.e("createMemoryDump", e);
+            }
             final Uri dumpFileUri = ContentStorage.get().writeFileToFolder(PersistableFolder.LOGFILES, FileNameCreator.MEMORY_DUMP, file, true);
 
             ShareUtils.shareOrDismissDialog(context, dumpFileUri, "*/*", R.string.init_memory_dump, context.getString(R.string.init_memory_dumped, UriUtils.toUserDisplayableString(dumpFileUri)));
-                }, 1000);
+        }, 1000);
     }
 
     public static void askUserToReportProblem(@NonNull final Activity context, @Nullable final String errorMsg) {
         final StringBuilder message = new StringBuilder();
         if (errorMsg != null) {
             message.append(context.getString(R.string.debug_user_error_errortext)).append("\n[")
-                .append(errorMsg).append("]\n\n");
+                    .append(errorMsg).append("]\n\n");
             Log.w("User was asked to report problem: " + errorMsg);
         }
         message.append(context.getString(R.string.debug_user_error_explain_options));
 
         SimpleDialog.of(context)
-            .setTitle(R.string.debug_user_error_report_title)
-            .setMessage(TextParam.text(message.toString()))
-            .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
-            .confirm(
-                (dialog, which) -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg),
-                SimpleDialog.DO_NOTHING
-            );
+                .setTitle(R.string.debug_user_error_report_title)
+                .setMessage(TextParam.text(message.toString()))
+                .setPositiveButton(TextParam.id(R.string.about_system_info_send_button))
+                .confirm(
+                        (dialog, which) -> createLogcatHelper(context, true, true, errorMsg == null ? null : context.getString(R.string.debug_user_error_report_title) + ": " + errorMsg),
+                        SimpleDialog.DO_NOTHING
+                );
     }
 
     public static void createLogcat(@NonNull final Activity activity) {
@@ -72,14 +72,14 @@ public class DebugUtils {
             createLogcatHelper(activity, true, false, null);
         } else {
             SimpleDialog.of(activity)
-                .setTitle(R.string.about_system_write_logcat)
-                .setMessage(R.string.about_system_write_logcat_type)
-                .setButtons(R.string.about_system_write_logcat_type_standard, 0, R.string.about_system_write_logcat_type_extended)
-                .confirm(
-                    (dialog, which) -> createLogcatHelper(activity, false, false, null),
-                    SimpleDialog.DO_NOTHING,
-                    (dialog, which) -> createLogcatHelper(activity, true, false, null)
-                );
+                    .setTitle(R.string.about_system_write_logcat)
+                    .setMessage(R.string.about_system_write_logcat_type)
+                    .setButtons(R.string.about_system_write_logcat_type_standard, 0, R.string.about_system_write_logcat_type_extended)
+                    .confirm(
+                            (dialog, which) -> createLogcatHelper(activity, false, false, null),
+                            SimpleDialog.DO_NOTHING,
+                            (dialog, which) -> createLogcatHelper(activity, true, false, null)
+                    );
         }
     }
 
@@ -119,14 +119,14 @@ public class DebugUtils {
                     shareLogfileAsEmail(activity, additionalMessage, result.get());
                 } else {
                     SimpleDialog.of(activity)
-                        .setTitle(R.string.about_system_write_logcat)
-                        .setMessage(R.string.about_system_write_logcat_success, UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString())
-                        .setButtons(0, 0, R.string.about_system_info_send_button)
-                        .confirm(
-                            SimpleDialog.DO_NOTHING,
-                            null,
-                            (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get())
-                        );
+                            .setTitle(R.string.about_system_write_logcat)
+                            .setMessage(R.string.about_system_write_logcat_success, UriUtils.getLastPathSegment(result.get()), PersistableFolder.LOGFILES.getFolder().toUserDisplayableString())
+                            .setButtons(0, 0, R.string.about_system_info_send_button)
+                            .confirm(
+                                    SimpleDialog.DO_NOTHING,
+                                    null,
+                                    (dialog, which) -> shareLogfileAsEmail(activity, additionalMessage, result.get())
+                            );
 
                 }
             } else {

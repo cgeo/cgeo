@@ -81,7 +81,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         activeDisabledArchivedGroup.setWithSelectAllChip(false);
 
         activeDisabledArchivedGroup.addChips(Arrays.asList(TextParam.id(R.string.cache_filter_status_active),
-            TextParam.id(R.string.cache_filter_status_disabled), TextParam.id(R.string.cache_filter_status_archived)));
+                TextParam.id(R.string.cache_filter_status_disabled), TextParam.id(R.string.cache_filter_status_archived)));
         activeDisabledArchivedGroup.setCheckedButtonByIndex(true, 0, 1, 2);
         ll.addView(activeDisabledArchivedGroup, ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
 
@@ -102,6 +102,7 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
 
         return ll;
     }
+
     private ButtonToggleGroup createGroup(final LinearLayout ll, final StatusGeocacheFilter.StatusType statusType, final boolean isAdvanced) {
         final View view = inflateLayout(R.layout.buttontogglegroup_labeled_item);
         final ButtontogglegroupLabeledItemBinding binding = ButtontogglegroupLabeledItemBinding.bind(view);
@@ -128,9 +129,9 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
     public void setViewFromFilter(final StatusGeocacheFilter filter) {
         activeDisabledArchivedGroup.setCheckedButtonByIndex(false, 0, 1, 2);
         activeDisabledArchivedGroup.setCheckedButtonByIndex(true,
-            filter.isExcludeActive() ? -1 : 0,
-            filter.isExcludeDisabled() ? -1 : 1,
-            filter.isExcludeArchived() ? -1 : 2);
+                filter.isExcludeActive() ? -1 : 0,
+                filter.isExcludeDisabled() ? -1 : 1,
+                filter.isExcludeArchived() ? -1 : 2);
 
         setFromBoolean(statusFound, filter.getStatusFound());
         setFromBoolean(statusOwn, filter.getStatusOwned());
@@ -175,11 +176,15 @@ public class StatusFilterViewHolder extends BaseFilterViewHolder<StatusGeocacheF
         btg.setCheckedButtonByIndex(status == null ? 0 : (status ? 1 : 2), true);
     }
 
-   private Boolean getFromGroup(final ButtonToggleGroup btg) {
+    private Boolean getFromGroup(final ButtonToggleGroup btg) {
         switch (btg.getCheckedButtonIndex()) {
-            case 1: return true;
-            case 2: return false;
+            case 1:
+                return true;
+            case 2:
+                return false;
             case 0:
-            default: return null;
-        }    }
+            default:
+                return null;
+        }
+    }
 }

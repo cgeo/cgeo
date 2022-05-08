@@ -343,8 +343,7 @@ public class Trackable implements ILogable {
     /**
      * Set the trackable missing status
      *
-     * @param missing
-     *          the new missing status
+     * @param missing the new missing status
      */
     public void setMissing(final Boolean missing) {
         this.missing = missing;

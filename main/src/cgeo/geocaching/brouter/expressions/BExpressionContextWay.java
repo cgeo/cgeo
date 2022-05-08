@@ -10,7 +10,7 @@ import cgeo.geocaching.brouter.codec.TagValueValidator;
 
 public final class BExpressionContextWay extends BExpressionContext implements TagValueValidator {
     private static final String[] buildInVariables =
-        {"costfactor", "turncost", "uphillcostfactor", "downhillcostfactor", "initialcost", "nodeaccessgranted", "initialclassifier", "trafficsourcedensity", "istrafficbackbone", "priorityclassifier", "classifiermask", "maxspeed"};
+            {"costfactor", "turncost", "uphillcostfactor", "downhillcostfactor", "initialcost", "nodeaccessgranted", "initialclassifier", "trafficsourcedensity", "istrafficbackbone", "priorityclassifier", "classifiermask", "maxspeed"};
     private boolean decodeForbidden = true;
 
     public BExpressionContextWay(final BExpressionMetaData meta) {

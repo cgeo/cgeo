@@ -30,11 +30,11 @@ class AbstractMapsforgeOnlineTileProvider extends AbstractMapsforgeTileProvider 
         final Cache cache = new Cache(new File(LocalStorage.getExternalPrivateCgeoDirectory(), "tiles"), 20 * 1024 * 1024);
         httpBuilder.cache(cache);
         final BitmapTileSource tileSource = BitmapTileSource.builder()
-            .url(mapUri.toString())
-            .tilePath(tilePath)
-            .zoomMax(zoomMax)
-            .zoomMin(zoomMin)
-            .build();
+                .url(mapUri.toString())
+                .tilePath(tilePath)
+                .zoomMax(zoomMax)
+                .zoomMin(zoomMin)
+                .build();
         tileSource.setHttpEngine(new OkHttpEngine.OkHttpFactory(httpBuilder));
         tileSource.setHttpRequestHeaders(Collections.singletonMap("User-Agent", "vtm-android-example"));
         MAP_MAPSFORGE.addLayer(new BitmapTileLayer(map, tileSource));

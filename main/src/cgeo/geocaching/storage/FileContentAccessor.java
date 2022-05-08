@@ -17,7 +17,9 @@ import java.util.List;
 import java.util.Objects;
 
 
-/** Implementation for File-based content  */
+/**
+ * Implementation for File-based content
+ */
 class FileContentAccessor extends AbstractContentAccessor {
 
     FileContentAccessor(@NonNull final Context context) {
@@ -57,7 +59,7 @@ class FileContentAccessor extends AbstractContentAccessor {
             return Collections.emptyList();
         }
         return CollectionStream.of(dir.listFiles())
-            .map(f -> fileToInformation(folder, f)).toList();
+                .map(f -> fileToInformation(folder, f)).toList();
     }
 
     public boolean ensureFolder(@NonNull final Folder folder, final boolean needsWrite) {
@@ -68,7 +70,9 @@ class FileContentAccessor extends AbstractContentAccessor {
         return dir.mkdirs() && dir.canRead() && (!needsWrite || dir.canWrite());
     }
 
-    /** Must return null if folder does not yet exist */
+    /**
+     * Must return null if folder does not yet exist
+     */
     public Uri getUriForFolder(@NonNull final Folder folder) {
         final Uri folderUri = folderToUri(folder);
         if (new File(folderUri.getPath()).isDirectory()) {
@@ -77,7 +81,9 @@ class FileContentAccessor extends AbstractContentAccessor {
         return null;
     }
 
-    /** Must return null if file does not yet exist */
+    /**
+     * Must return null if file does not yet exist
+     */
     public ContentStorage.FileInformation getFileInfo(@NonNull final Uri uri) {
         final File file = new File(uri.getPath());
         if (!file.exists()) {
@@ -99,9 +105,9 @@ class FileContentAccessor extends AbstractContentAccessor {
 
     private ContentStorage.FileInformation fileToInformation(final Folder folder, final File file) {
         return new ContentStorage.FileInformation(
-            file.getName(), UriUtils.appendPath(folderToUri(folder), file.getName()),
-            file.isDirectory(),
-            file.isDirectory() ? Folder.fromFolder(folder, file.getName()) : null, getTypeForName(file.getName()),
-            file.length(), file.lastModified());
+                file.getName(), UriUtils.appendPath(folderToUri(folder), file.getName()),
+                file.isDirectory(),
+                file.isDirectory() ? Folder.fromFolder(folder, file.getName()) : null, getTypeForName(file.getName()),
+                file.length(), file.lastModified());
     }
 }

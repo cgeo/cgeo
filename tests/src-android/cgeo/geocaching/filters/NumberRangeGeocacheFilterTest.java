@@ -9,7 +9,9 @@ import java.util.Arrays;
 
 import org.junit.Test;
 
-/** This class tests the number range filters, using DIFFICULTY filter as an example */
+/**
+ * This class tests the number range filters, using DIFFICULTY filter as an example
+ */
 public class NumberRangeGeocacheFilterTest {
 
     @Test
@@ -41,7 +43,8 @@ public class NumberRangeGeocacheFilterTest {
     @Test
     @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert") // is done in called test method
     public void specialNumber() {
-        testSingle(c -> c.setDifficulty(5f), f -> { }, true);
+        testSingle(c -> c.setDifficulty(5f), f -> {
+        }, true);
         testSingle(c -> c.setDifficulty(5f), f -> f.setSpecialNumber(5f, true), true);
         testSingle(c -> c.setDifficulty(5f), f -> f.setSpecialNumber(5f, false), false);
         testSingle(c -> c.setDifficulty(3f), f -> f.setSpecialNumber(5f, true), true);

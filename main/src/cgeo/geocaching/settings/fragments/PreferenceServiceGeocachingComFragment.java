@@ -35,11 +35,11 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
         loginFacebook.setOnPreferenceClickListener(preference -> {
             final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
             builder.setMessage(R.string.settings_info_facebook_login)
-                .setIcon(android.R.drawable.ic_dialog_info)
-                .setTitle(R.string.settings_info_facebook_login_title)
-                .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
-                .setNegativeButton(R.string.more_information,
-                    (dialog, id) -> ShareUtils.openUrl(getContext(), getString(R.string.settings_facebook_login_url)));
+                    .setIcon(android.R.drawable.ic_dialog_info)
+                    .setTitle(R.string.settings_info_facebook_login_title)
+                    .setPositiveButton(android.R.string.ok, (dialog, id) -> dialog.cancel())
+                    .setNegativeButton(R.string.more_information,
+                            (dialog, id) -> ShareUtils.openUrl(getContext(), getString(R.string.settings_facebook_login_url)));
             builder.create().show();
             return true;
         });
@@ -60,8 +60,8 @@ public class PreferenceServiceGeocachingComFragment extends PreferenceFragmentCo
 
     void initBasicMemberPreferences() {
         findPreference(getString((R.string.preference_screen_basicmembers)))
-            .setEnabled(!Settings.isGCPremiumMember());
+                .setEnabled(!Settings.isGCPremiumMember());
         findPreference(getString((R.string.pref_loaddirectionimg)))
-            .setEnabled(!Settings.isGCPremiumMember());
+                .setEnabled(!Settings.isGCPremiumMember());
     }
 }

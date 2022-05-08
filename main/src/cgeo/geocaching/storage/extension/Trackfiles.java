@@ -42,15 +42,17 @@ public class Trackfiles extends DataStore.DBExtension {
         return long1 != 0;
     }
 
-    /** to be called by Tracks only, not intended for direct usage */
+    /**
+     * to be called by Tracks only, not intended for direct usage
+     */
     public static String createTrackfile(final Activity activity, final Uri uri) {
         // copy file to c:geo internal storage
         final String fn = FileNameCreator.TRACKFILE.createName();
         final Uri targetUri = Uri.fromFile(new File(LocalStorage.getTrackfilesDir(), fn));
         try {
             IOUtils.copy(
-                activity.getContentResolver().openInputStream(uri),
-                activity.getContentResolver().openOutputStream(targetUri));
+                    activity.getContentResolver().openInputStream(uri),
+                    activity.getContentResolver().openOutputStream(targetUri));
         } catch (IOException ioe) {
             Log.e("Problem copying trackfile from '" + uri.getLastPathSegment() + "' to '" + targetUri + "'", ioe);
         }
@@ -60,13 +62,17 @@ public class Trackfiles extends DataStore.DBExtension {
         return fn;
     }
 
-    /** to be called by Tracks only, not intended for direct usage */
+    /**
+     * to be called by Tracks only, not intended for direct usage
+     */
     public static void removeTrackfile(@NonNull final String filename) {
         removeAll(type, filename);
         FileUtils.delete(new File(LocalStorage.getTrackfilesDir(), filename));
     }
 
-    /** to be called by Tracks only, not intended for direct usage */
+    /**
+     * to be called by Tracks only, not intended for direct usage
+     */
     public static ArrayList<Trackfiles> getTrackfiles() {
         final ArrayList<Trackfiles> result = new ArrayList<>();
         for (DataStore.DBExtension item : getAll(type, null)) {

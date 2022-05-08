@@ -8,7 +8,9 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import org.junit.Test;
 
-/** This class tests the string filters, using NAME filter as an example */
+/**
+ * This class tests the string filters, using NAME filter as an example
+ */
 public class StringGeocacheFilterTest {
 
     @Test

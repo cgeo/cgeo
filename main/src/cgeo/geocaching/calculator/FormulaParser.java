@@ -24,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
  *
  * For plain-format the keyword defined in WaypointParser::PARSING_COORD_FORMULA_PLAIN has to be used. Use '|' to separate the variables and the user note.
  * example:
+ *
  * @name (x) (F-PLAIN) N48 AB.(C*D/2) E 9 (C-D).(A+B) |A=a+b|a=5| user note
  */
 public final class FormulaParser {
@@ -88,10 +89,8 @@ public final class FormulaParser {
         /**
          * Parses latitude or longitude out of the given string.
          *
-         * @param text
-         *            the string to be parsed
-         * @param latlon
-         *            whether to parse latitude or longitude
+         * @param text   the string to be parsed
+         * @param latlon whether to parse latitude or longitude
          * @return a wrapper with the parsed latitude/longitude and the length of the match, or null if parsing failed
          */
         @Nullable
@@ -99,6 +98,7 @@ public final class FormulaParser {
 
         /**
          * Indicates which format is parsed
+         *
          * @return coordInputFormat which can be parsed
          */
         Settings.CoordInputFormatEnum formulaFormat();
@@ -121,12 +121,9 @@ public final class FormulaParser {
         /**
          * Parses latitude or longitude out of a given range of matched groups.
          *
-         * @param matcher
-         *            the matcher that holds the matches groups
-         * @param first
-         *            the first group to parse
-         * @param last
-         *            the last group to parse
+         * @param matcher the matcher that holds the matches groups
+         * @param first   the first group to parse
+         * @param last    the last group to parse
          * @return the parsed latitude/longitude, or null if parsing failed
          */
         @Nullable
@@ -186,8 +183,7 @@ public final class FormulaParser {
         /**
          * Parses latitude or longitude from matched groups of corresponding pattern.
          *
-         * @param groups
-         *            the groups matched by latitude/longitude pattern
+         * @param groups the groups matched by latitude/longitude pattern
          * @return parsed latitude/longitude, or null if parsing failed
          */
         @Nullable
@@ -242,8 +238,7 @@ public final class FormulaParser {
      *
      * The generated inputs use different delimiters for fractional numbers.
      *
-     * @param text
-     *            the text to parse
+     * @param text the text to parse
      * @return the set of parser inputs
      */
     @NonNull
@@ -256,8 +251,7 @@ public final class FormulaParser {
     /**
      * Removes all single spaces after a comma (see #2404)
      *
-     * @param text
-     *            the string to substitute
+     * @param text the string to substitute
      * @return the substituted string without the single spaces
      */
     @NonNull
@@ -283,10 +277,8 @@ public final class FormulaParser {
     /**
      * Parses latitude/longitude from the given string.
      *
-     * @param text
-     *            the text to parse
-     * @param latlon
-     *            whether to parse latitude or longitude
+     * @param text   the text to parse
+     * @param latlon whether to parse latitude or longitude
      * @return a wrapper with the best latitude/longitude and the length of the match, or null if parsing failed
      */
     @Nullable
@@ -315,8 +307,7 @@ public final class FormulaParser {
      *
      * @param text the string to be parsed
      * @return an pair of strings with parsed formula for latitude and longitude
-     * @throws FormulaParser.ParseException
-     *             if coordinates could not be parsed
+     * @throws FormulaParser.ParseException if coordinates could not be parsed
      */
     @NonNull
     public FormulaWrapper parse(@NonNull final String text) {
@@ -348,12 +339,10 @@ public final class FormulaParser {
      *
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
-     * @see #parse(String)
-     * @param text
-     *            the string to be parsed
+     * @param text the string to be parsed
      * @return the latitude as decimal degrees
-     * @throws FormulaParser.ParseException
-     *             if latitude could not be parsed
+     * @throws FormulaParser.ParseException if latitude could not be parsed
+     * @see #parse(String)
      */
     public String parseLatitude(@Nullable final String text) {
         if (text != null) {
@@ -371,12 +360,10 @@ public final class FormulaParser {
      *
      * The parsing fails if the string contains additional characters (except whitespaces).
      *
-     * @see #parse(String)
-     * @param text
-     *            the string to be parsed
+     * @param text the string to be parsed
      * @return the longitude as decimal degrees
-     * @throws FormulaParser.ParseException
-     *             if longitude could not be parsed
+     * @throws FormulaParser.ParseException if longitude could not be parsed
+     * @see #parse(String)
      */
     public String parseLongitude(@Nullable final String text) {
         if (text != null) {

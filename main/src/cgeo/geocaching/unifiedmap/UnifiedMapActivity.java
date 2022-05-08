@@ -247,7 +247,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
     }
 
-    /** centers map on coords given + resets "followMyLocation" state **/
+    /**
+     * centers map on coords given + resets "followMyLocation" state
+     **/
     private void centerMap(final Geopoint geopoint) {
         followMyLocation = false;
         initFollowMyLocationButton();
@@ -389,7 +391,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             final BoundingBox bb = map.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());
         } else if (HistoryTrackUtils.onOptionsItemSelected(this, id, () -> map.positionLayer.repaintHistory(), () -> map.positionLayer.clearHistory())
-            || DownloaderUtils.onOptionsItemSelected(this, id)) {
+                || DownloaderUtils.onOptionsItemSelected(this, id)) {
             return true;
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);
@@ -448,13 +450,13 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this,
-            new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NewMap) {
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.NewMap) {
 
-                @Override
-                public void executeAfter() {
-                    resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
-                }
-            });
+                    @Override
+                    public void executeAfter() {
+                        resumeDisposables.add(geoDirUpdate.start(GeoDirHandler.UPDATE_GEODIR));
+                    }
+                });
     }
 
     @Override

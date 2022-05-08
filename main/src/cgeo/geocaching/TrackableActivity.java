@@ -224,13 +224,13 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         PermissionHandler.executeIfLocationPermissionGranted(this,
                 new RestartLocationPermissionGrantedCallback(PermissionRequestContext.TrackableActivity) {
 
-            @Override
-            public void executeAfter() {
-                if (!Settings.useLowPowerMode()) {
-                    geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
-                }
-            }
-        });
+                    @Override
+                    public void executeAfter() {
+                        if (!Settings.useLowPowerMode()) {
+                            geoDataDisposable.add(locationUpdater.start(GeoDirHandler.UPDATE_GEODATA));
+                        }
+                    }
+                });
     }
 
     @Override
@@ -490,7 +490,8 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         }
 
         @Override
-        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
+        // splitting up that method would not help improve readability
         public void setContent() {
             final TrackableActivity activity = (TrackableActivity) getActivity();
             if (activity == null) {

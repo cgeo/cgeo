@@ -36,9 +36,9 @@ public class GeocacheFilter implements Cloneable {
     private static final String CONFIG_KEY_INCLUDE_INCLUSIVE = "inconclusive";
 
     private static final ExpressionParser<IGeocacheFilter> FILTER_PARSER = new ExpressionParser<IGeocacheFilter>(true)
-        .register(AndGeocacheFilter::new)
-        .register(OrGeocacheFilter::new)
-        .register(NotGeocacheFilter::new);
+            .register(AndGeocacheFilter::new)
+            .register(OrGeocacheFilter::new)
+            .register(NotGeocacheFilter::new);
 
     static {
         for (GeocacheFilterType gcf : GeocacheFilterType.values()) {
@@ -71,8 +71,8 @@ public class GeocacheFilter implements Cloneable {
             ensureInit();
             final GeocacheFilter other = storedFilters.get(newName);
             return other != null &&
-                (!Objects.equals(other.getTreeConfig(), filter.getTreeConfig()) ||
-                    filter.isIncludeInconclusive() != other.isIncludeInconclusive());
+                    (!Objects.equals(other.getTreeConfig(), filter.getTreeConfig()) ||
+                            filter.isIncludeInconclusive() != other.isIncludeInconclusive());
         }
 
         public static synchronized void save(final GeocacheFilter filter) {
@@ -244,7 +244,7 @@ public class GeocacheFilter implements Cloneable {
      * New filters are added BEFORE existing one (assuming that they have priority in case it is necessary to decide to filter one or the other)
      * returns this for convenience
      */
-    public GeocacheFilter and(final IGeocacheFilter ... filters) {
+    public GeocacheFilter and(final IGeocacheFilter... filters) {
 
         if (filters == null || filters.length == 0) {
             return this;

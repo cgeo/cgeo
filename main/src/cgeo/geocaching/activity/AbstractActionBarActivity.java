@@ -34,8 +34,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
     /**
-     * @param view
-     *            view to activate the context ActionBar for
+     * @param view view to activate the context ActionBar for
      */
     public void addContextMenu(final View view) {
         // placeholder for derived implementations

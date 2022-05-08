@@ -30,15 +30,15 @@ public class FormulaUtils {
     private static final Pattern FORMULA_SCAN_PATTERN = Pattern.compile("[^a-zA-Z0-9(]" + F_FORMULA + "[^a-zA-Z0-9)]");
 
 
-    private static final Pattern[] FORMULA_SCAN_FALSE_POSITIVE_PATTERNS = new Pattern[] {
-        Pattern.compile("^[0-9]+[:/.,][0-9]+([:/.,][0-9]+)?$"), // dates or times
-        Pattern.compile("^[a-z]+:[0-9]+$") // URL endings
+    private static final Pattern[] FORMULA_SCAN_FALSE_POSITIVE_PATTERNS = new Pattern[]{
+            Pattern.compile("^[0-9]+[:/.,][0-9]+([:/.,][0-9]+)?$"), // dates or times
+            Pattern.compile("^[a-z]+:[0-9]+$") // URL endings
     };
 
 
     private static final String COORDINATE_SCAN_DIGIT_PATTERN = "((" + F_FORMULA + "|[0-9a-zA-Z]{1,3})\\h*([°'\".]\\h*)?){1,6}";
     private static final Pattern COORDINATE_SCAN_PATTERN = Pattern.compile(
-        "(?<lat>[nNsS]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\h+([a-zA-Z]{2,}\\h+)*(?<lon>[eEwWoO]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
+            "(?<lat>[nNsS]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")\\h+([a-zA-Z]{2,}\\h+)*(?<lon>[eEwWoO]\\h*[0-9]" + COORDINATE_SCAN_DIGIT_PATTERN + ")"
     );
 
     private static final Pattern DEGREE_TRAILINGWORD_REMOVER = Pattern.compile("\\h+([a-zA-Z]{2,})$");
@@ -233,7 +233,7 @@ public class FormulaUtils {
 
     private static String preprocessScanText(final String text) {
         return text.replaceAll("\\h", " ").trim()
-            .replace(',', '.').replace('[', '(').replace(']', ')');
+                .replace(',', '.').replace('[', '(').replace(']', ')');
     }
 
     private static String processFoundDegree(final String degree) {

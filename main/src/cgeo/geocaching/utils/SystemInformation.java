@@ -67,52 +67,52 @@ public final class SystemInformation {
         }
         final String hideWaypoints = (Settings.isExcludeWpOriginal() ? "original " : "") + (Settings.isExcludeWpParking() ? "parking " : "") + (Settings.isExcludeWpVisited() ? "visited" : "");
         final StringBuilder body = new StringBuilder("## System information").append("\n")
-            .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
+                .append("\nc:geo version: ").append(Version.getVersionName(context)).append("\n")
 
-            .append("\nDevice:")
-            .append("\n-------")
-            .append("\n- Device type: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
-            .append("\n- Available processors: ").append(Runtime.getRuntime().availableProcessors())
-            .append("\n- Android version: ").append(VERSION.RELEASE)
-            .append("\n- Android build: ").append(Build.DISPLAY);
+                .append("\nDevice:")
+                .append("\n-------")
+                .append("\n- Device type: ").append(Build.MODEL).append(" (").append(Build.PRODUCT).append(", ").append(Build.BRAND).append(')')
+                .append("\n- Available processors: ").append(Runtime.getRuntime().availableProcessors())
+                .append("\n- Android version: ").append(VERSION.RELEASE)
+                .append("\n- Android build: ").append(Build.DISPLAY);
         appendScreenResolution(context, body);
         body.append("\n- Sailfish OS detected: ").append(EnvironmentUtils.isSailfishOs());
         appendGooglePlayServicesVersion(context, body);
         body.append("\n")
-            .append("\nSensor and location:")
-            .append("\n-------")
-            .append("\n- Low power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
-            .append("\n- Compass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
-            .append("\n- Rotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
-            .append("\n- Orientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
-            .append("\n- Magnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
-            .append("\n- Direction sensor used: ").append(usedDirectionSensor)
+                .append("\nSensor and location:")
+                .append("\n-------")
+                .append("\n- Low power mode: ").append(Settings.useLowPowerMode() ? "active" : "inactive")
+                .append("\n- Compass capabilities: ").append(Sensors.getInstance().hasCompassCapabilities() ? "yes" : "no")
+                .append("\n- Rotation vector sensor: ").append(presence(RotationProvider.hasRotationSensor(context)))
+                .append("\n- Orientation sensor: ").append(presence(OrientationProvider.hasOrientationSensor(context)))
+                .append("\n- Magnetometer & Accelerometer sensor: ").append(presence(MagnetometerAndAccelerometerProvider.hasMagnetometerAndAccelerometerSensors(context)))
+                .append("\n- Direction sensor used: ").append(usedDirectionSensor)
 
-            .append("\n")
-            .append("\nProgram settings:")
-            .append("\n-------");
-            appendSettings(body);
-            body
-            .append("\n- Set language: ").append(Settings.getUserLanguage().isEmpty() ? Locale.getDefault() + " (system default)" : Settings.getUserLanguage())
-            .append("\n- System date format: ").append(Formatter.getShortDateFormat())
-            .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
-            .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
-            .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
-            .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
-            .append("\n- Live map mode: ").append(Settings.isLiveMap())
-            .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
+                .append("\n")
+                .append("\nProgram settings:")
+                .append("\n-------");
+        appendSettings(body);
+        body
+                .append("\n- Set language: ").append(Settings.getUserLanguage().isEmpty() ? Locale.getDefault() + " (system default)" : Settings.getUserLanguage())
+                .append("\n- System date format: ").append(Formatter.getShortDateFormat())
+                .append("\n- Time zone: ").append(CalendarUtils.getUserTimeZoneString())
+                .append("\n- Debug mode active: ").append(Settings.isDebug() ? "yes" : "no")
+                .append("\n- Last backup: ").append(BackupUtils.hasBackup(BackupUtils.newestBackupFolder()) ? BackupUtils.getNewestBackupDateTime() : "never")
+                .append("\n- Routing mode: ").append(LocalizationUtils.getEnglishString(context, Settings.getRoutingMode().infoResId))
+                .append("\n- Live map mode: ").append(Settings.isLiveMap())
+                .append("\n- OSM multi-threading: ").append(Settings.hasOSMMultiThreading()).append(" / threads: ").append(Settings.getMapOsmThreads());
         appendMapSourceInformation(body, context);
         body
-            .append("\n")
-            .append("\nFilters:")
-            .append("\n-------")
-            .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints);
+                .append("\n")
+                .append("\nFilters:")
+                .append("\n-------")
+                .append("\n- Hide waypoints: ").append(hideWaypoints.isEmpty() ? "-" : hideWaypoints);
         appendFilters(body);
 
         body
-            .append("\n")
-            .append("\nServices:")
-            .append("\n-------");
+                .append("\n")
+                .append("\nServices:")
+                .append("\n-------");
         appendConnectors(body);
         if (GCConnector.getInstance().isActive()) {
             body.append("\n- Geocaching.com date format: ").append(Settings.getGcCustomDate());
@@ -121,8 +121,8 @@ public final class SystemInformation {
         appendAddons(body);
 
         body.append("\n")
-            .append("\nPermissions & paths:")
-            .append("\n-------");
+                .append("\nPermissions & paths:")
+                .append("\n-------");
         appendPermissions(context, body);
         appendDirectory(body, "\n- System internal c:geo dir: ", LocalStorage.getInternalCgeoDirectory());
         appendDirectory(body, "\n- Legacy User storage c:geo dir: ", LocalStorage.getExternalPublicCgeoDirectory());
@@ -141,14 +141,14 @@ public final class SystemInformation {
     private static void appendDatabase(@NonNull final StringBuilder body) {
         final File dbFile = DataStore.databasePath();
         body.append("\n- Database: ").append(dbFile)
-            .append(" (").append(versionInfoToString(DataStore.getActualDBVersion(), DataStore.getExpectedDBVersion()))
-            .append(", Size:").append(Formatter.formatBytes(dbFile.length())).append(") on ")
-            .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
+                .append(" (").append(versionInfoToString(DataStore.getActualDBVersion(), DataStore.getExpectedDBVersion()))
+                .append(", Size:").append(Formatter.formatBytes(dbFile.length())).append(") on ")
+                .append(Settings.isDbOnSDCard() ? "user storage" : "system internal storage");
     }
 
     private static void appendSettings(@NonNull final StringBuilder body) {
         body.append("\n- Settings: ").append(versionInfoToString(Settings.getActualVersion(), Settings.getExpectedVersion()))
-            .append(", Count:").append(Settings.getPreferencesCount());
+                .append(", Count:").append(Settings.getPreferencesCount());
     }
 
     private static void appendFilters(@NonNull final StringBuilder body) {
@@ -169,7 +169,7 @@ public final class SystemInformation {
 
     private static void appendDirectory(@NonNull final StringBuilder body, @NonNull final String label, @NonNull final File directory) {
         body.append(label).append(directory).append(" (").append(Formatter.formatBytes(FileUtils.getFreeDiskSpace(directory))).append(" free)")
-            .append(" ").append(versionInfoToString(LocalStorage.getCurrentVersion(), LocalStorage.getExpectedVersion()));
+                .append(" ").append(versionInfoToString(LocalStorage.getCurrentVersion(), LocalStorage.getExpectedVersion()));
         try {
             if (directory.getAbsolutePath().startsWith(LocalStorage.getInternalCgeoDirectory().getAbsolutePath())) {
                 body.append(" internal");
@@ -198,9 +198,9 @@ public final class SystemInformation {
             final FolderUtils.FolderInfo folderInfo = FolderUtils.get().getFolderInfo(folder.getFolder());
             final ImmutablePair<Long, Long> freeSpace = FolderUtils.get().getDeviceInfo(folder.getFolder());
             body.append("\n  - ").append(folder.toString())
-                .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
-                .append(", Av:").append(isAvailable).append(", ").append(folderInfo)
-                .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
+                    .append(" (Uri: ").append(ContentStorage.get().getUriForFolder(folder.getFolder()))
+                    .append(", Av:").append(isAvailable).append(", ").append(folderInfo)
+                    .append(", free space: ").append(Formatter.formatBytes(freeSpace.left)).append(", files on device: ").append(freeSpace.right).append(")");
         }
     }
 
@@ -301,6 +301,6 @@ public final class SystemInformation {
 
     private static String versionInfoToString(final int actualVersion, final int expectedVersion) {
         return "v" + actualVersion +
-            (actualVersion == expectedVersion ? "" : "[Expected v" + expectedVersion + "]");
+                (actualVersion == expectedVersion ? "" : "[Expected v" + expectedVersion + "]");
     }
 }

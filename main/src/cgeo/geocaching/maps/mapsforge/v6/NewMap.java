@@ -147,7 +147,8 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.model.common.Observer;
 
 @SuppressLint("ClickableViewAccessibility")
-@SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
+@SuppressWarnings("PMD.ExcessiveClassLength")
+// This is definitely a valid issue, but can't be refactored in one step
 public class NewMap extends AbstractBottomNavigationActivity implements Observer, FilteredActivity {
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 
@@ -619,7 +620,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     @Override
     public void showFilterMenu() {
         FilterUtils.openFilterActivity(this, mapOptions.filterContext,
-            new SearchResult(caches.getVisibleCacheGeocodes()).getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
+                new SearchResult(caches.getVisibleCacheGeocodes()).getCachesFromSearchResult(LoadFlags.LOAD_CACHE_OR_DB));
     }
 
     @Override
@@ -683,7 +684,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         if (this.mapAttribution != null) {
             this.mapAttribution.setOnClickListener(
-                new MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(this)));
+                    new MapAttributionDisplayHandler(() -> this.mapSource.calculateMapAttribution(this)));
         }
 
         if (newSource instanceof AbstractMapsforgeMapSource) {
@@ -1742,11 +1743,11 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         }
 
         final AlertDialog alertDialog = Dialogs.newBuilder(ctx)
-            .setTitle(ctx.getString(R.string.map_source_attribution_dialog_title))
-            .setCancelable(true)
-            .setMessage(message)
-            .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
-            .create();
+                .setTitle(ctx.getString(R.string.map_source_attribution_dialog_title))
+                .setCancelable(true)
+                .setMessage(message)
+                .setPositiveButton(android.R.string.ok, (dialog, pos) -> dialog.dismiss())
+                .create();
         alertDialog.show();
 
         // Make the URLs in TextView clickable. Must be called after show()

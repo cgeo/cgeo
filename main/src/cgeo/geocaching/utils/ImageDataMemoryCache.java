@@ -66,18 +66,18 @@ public class ImageDataMemoryCache {
             imgGetter.setLoadMetadata(true);
             //TODO: continue editing here
             final Disposable disposable = imgGetter.fetchDrawableWithMetadata(imageUrl).observeOn(AndroidSchedulers.mainThread())
-                .subscribe(img -> {
-                    synchronized (imageCacheMutex) {
-                        final Pair<BitmapDrawable, Metadata> imgData = Pair.create(img.left, img.right);
-                        imageCache.put(imageUrl, imgData);
-                        if (imageCacheListeners.containsKey(imageUrl)) {
-                            for (Action1<Pair<BitmapDrawable, Metadata>> a : imageCacheListeners.get(imageUrl)) {
-                                a.call(imgData);
+                    .subscribe(img -> {
+                        synchronized (imageCacheMutex) {
+                            final Pair<BitmapDrawable, Metadata> imgData = Pair.create(img.left, img.right);
+                            imageCache.put(imageUrl, imgData);
+                            if (imageCacheListeners.containsKey(imageUrl)) {
+                                for (Action1<Pair<BitmapDrawable, Metadata>> a : imageCacheListeners.get(imageUrl)) {
+                                    a.call(imgData);
+                                }
                             }
+                            imageCacheListeners.remove(imageUrl);
                         }
-                        imageCacheListeners.remove(imageUrl);
-                    }
-                });
+                    });
             imageCacheDisposable.add(disposable);
         }
     }

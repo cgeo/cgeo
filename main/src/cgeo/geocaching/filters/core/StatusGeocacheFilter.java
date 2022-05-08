@@ -89,31 +89,31 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
 
         //handle a few "inconclusive" cases
         if ((statusFavorite != null && cache.isFavoriteRaw() == null) ||
-            (statusWatchlist != null && cache.isOnWatchlistRaw() == null) ||
-            (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
-            (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
-            (statusHasUserDefinedWaypoints != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||
-            (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null)) {
+                (statusWatchlist != null && cache.isOnWatchlistRaw() == null) ||
+                (statusPremium != null && cache.isPremiumMembersOnlyRaw() == null) ||
+                (statusHasTrackable != null && !cache.hasInventoryItemsSet()) ||
+                (statusHasUserDefinedWaypoints != null && cache.getFirstMatchingWaypoint(Waypoint::isUserDefined) == null) && cache.hasUserdefinedWaypoints() ||
+                (statusSolvedMystery != null && cache.getType() == CacheType.MYSTERY && cache.getUserModifiedCoordsRaw() == null)) {
             return null;
         }
 
         return
-            (!excludeActive || cache.isDisabled() || cache.isArchived()) &&
-                (!excludeDisabled || !cache.isDisabled()) &&
-                (!excludeArchived || !cache.isArchived()) &&
-                (statusOwned == null || (cache.isOwner() == statusOwned)) &&
-                (statusFound == null || cache.isFound() == statusFound) &&
-                (statusStored == null || cache.isOffline() == statusStored) &&
-                (statusFavorite == null || cache.isFavorite() == statusFavorite) &&
-                (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
-                (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
-                (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
-                (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
-                (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
-                (statusHasOfflineFoundLog == null || hasFoundOfflineLog(cache) == statusHasOfflineFoundLog) &&
-                (statusHasUserDefinedWaypoints == null || (cache.hasUserdefinedWaypoints()) == statusHasUserDefinedWaypoints) &&
-                (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
-                    (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
+                (!excludeActive || cache.isDisabled() || cache.isArchived()) &&
+                        (!excludeDisabled || !cache.isDisabled()) &&
+                        (!excludeArchived || !cache.isArchived()) &&
+                        (statusOwned == null || (cache.isOwner() == statusOwned)) &&
+                        (statusFound == null || cache.isFound() == statusFound) &&
+                        (statusStored == null || cache.isOffline() == statusStored) &&
+                        (statusFavorite == null || cache.isFavorite() == statusFavorite) &&
+                        (statusWatchlist == null || cache.isOnWatchlist() == statusWatchlist) &&
+                        (statusPremium == null || cache.isPremiumMembersOnly() == statusPremium) &&
+                        (statusHasTrackable == null || (cache.getInventoryItems() > 0) == statusHasTrackable) &&
+                        (statusHasOwnVote == null || (cache.getMyVote() > 0) == statusHasOwnVote) &&
+                        (statusHasOfflineLog == null || cache.hasLogOffline() == statusHasOfflineLog) &&
+                        (statusHasOfflineFoundLog == null || hasFoundOfflineLog(cache) == statusHasOfflineFoundLog) &&
+                        (statusHasUserDefinedWaypoints == null || (cache.hasUserdefinedWaypoints()) == statusHasUserDefinedWaypoints) &&
+                        (statusSolvedMystery == null || cache.getType() != CacheType.MYSTERY ||
+                                (cache.hasUserModifiedCoords() || cache.hasFinalDefined()) == statusSolvedMystery);
     }
 
     public boolean isExcludeActive() {
@@ -325,9 +325,9 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     @Override
     public boolean isFiltering() {
         return statusOwned != null || statusFound != null || statusStored != null || statusFavorite != null ||
-            statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
-            statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
-            statusSolvedMystery != null || statusHasUserDefinedWaypoints != null || excludeArchived || excludeDisabled || excludeActive;
+                statusWatchlist != null || statusPremium != null || statusHasTrackable != null ||
+                statusHasOwnVote != null || statusHasOfflineLog != null || statusHasOfflineFoundLog != null ||
+                statusSolvedMystery != null || statusHasUserDefinedWaypoints != null || excludeArchived || excludeDisabled || excludeActive;
     }
 
     @Override
@@ -368,14 +368,14 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusHasOfflineLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasOfflineLog ? "" : "NOT ") +
-                    "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
+                        "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode)");
             }
             if (statusHasOfflineFoundLog != null) {
                 final String logTableId = sqlBuilder.getNewTableId();
                 final String logIds = CollectionStream.of(Arrays.asList(LogType.getFoundLogIds())).toJoinedString(",");
                 sqlBuilder.addWhere((statusHasOfflineFoundLog ? "" : "NOT ") +
-                    "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
-                    " AND " + logTableId + ".type in (" + logIds + ")" + ")");
+                        "EXISTS(SELECT geocode FROM cg_logs_offline " + logTableId + " WHERE " + logTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode" +
+                        " AND " + logTableId + ".type in (" + logIds + ")" + ")");
             }
             if (statusSolvedMystery != null) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
@@ -383,8 +383,8 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                 final String wptId = sqlBuilder.getNewTableId();
                 final String coordsChangedWhere = sqlBuilder.getMainTableId() + ".coordsChanged = " + (statusSolvedMystery ? "1" : "0");
                 final String existsFilledFinalWpWhere = "EXISTS (select " + wptId + ".geocode from cg_waypoints " + wptId + " WHERE " +
-                    wptId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND " + wptId + ".type = '" + WaypointType.FINAL.id + "' AND " +
-                    wptId + ".latitude IS NOT NULL AND " + wptId + ".longitude IS NOT NULL)";
+                        wptId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND " + wptId + ".type = '" + WaypointType.FINAL.id + "' AND " +
+                        wptId + ".latitude IS NOT NULL AND " + wptId + ".longitude IS NOT NULL)";
                 if (statusSolvedMystery) {
                     //solved mysteries have either changed coord OR a filled final waypoint
                     sqlBuilder.addWhere(coordsChangedWhere);
@@ -402,7 +402,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
             if (statusHasUserDefinedWaypoints != null) {
                 final String waypointTableId = sqlBuilder.getNewTableId();
                 sqlBuilder.addWhere((statusHasUserDefinedWaypoints ? "" : "NOT ") +
-                    "EXISTS(SELECT geocode FROM cg_waypoints " + waypointTableId + " WHERE " + waypointTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND (" + waypointTableId + ".own=1 OR " + waypointTableId + ".type = 'own'))");
+                        "EXISTS(SELECT geocode FROM cg_waypoints " + waypointTableId + " WHERE " + waypointTableId + ".geocode = " + sqlBuilder.getMainTableId() + ".geocode AND (" + waypointTableId + ".own=1 OR " + waypointTableId + ".type = 'own'))");
             }
             if (excludeActive) {
                 sqlBuilder.openWhere(SqlBuilder.WhereType.OR);
@@ -450,7 +450,6 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
 
-
     private int addIfStillFits(final StringBuilder sb, final int cnt, final Boolean status, final StatusType statusType) {
         if (status != null) {
             if (cnt < USERDISPLAY_MAXELEMENTS) {
@@ -458,7 +457,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
                     sb.append(",");
                 }
                 sb.append(LocalizationUtils.getString(statusType.labelId)).append("=")
-                    .append(LocalizationUtils.getString(status ? R.string.cache_filter_status_select_yes : R.string.cache_filter_status_select_no));
+                        .append(LocalizationUtils.getString(status ? R.string.cache_filter_status_select_yes : R.string.cache_filter_status_select_no));
             }
             return cnt + 1;
         }

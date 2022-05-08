@@ -26,10 +26,14 @@ public final class VariableData implements JSONAble, Serializable {
      */
     private String expression;
 
-    /** cached result of the expression */
+    /**
+     * cached result of the expression
+     */
     private double cachedValue;
 
-    /** indicates if recomputation needs to be done */
+    /**
+     * indicates if recomputation needs to be done
+     */
     private boolean cacheDirty;
 
     public VariableData(final char name) {

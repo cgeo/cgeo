@@ -190,7 +190,7 @@ public class AboutActivity extends TabbedViewPagerActivity {
 
             activity.getSystemInformationTask().getSystemInformation(si -> {
                 setClickListener(binding.support, "mailto:support@cgeo.org?subject=" + Uri.encode("cgeo " + Version.getVersionName(activity)) +
-                    "&body=" + Uri.encode(si) + "\n");
+                        "&body=" + Uri.encode(si) + "\n");
                 binding.support.setEnabled(true);
             });
 
@@ -408,18 +408,18 @@ public class AboutActivity extends TabbedViewPagerActivity {
                     }
                     final String temp = s.substring(p2 + 1, p3);
                     roles = checkRoles(checkRoles(checkRoles(checkRoles(checkRoles(checkRoles(checkRoles("",
-                        temp, 'c', R.string.contribution_code),
-                        temp, 'd', R.string.contribution_documentation),
-                        temp, 'g', R.string.contribution_graphics),
-                        temp, 'i', R.string.contribution_infrastructure),
-                        temp, 'p', R.string.contribution_projectleader),
-                        temp, 's', R.string.contribution_support),
-                        temp, 't', R.string.contribution_tester);
+                            temp, 'c', R.string.contribution_code),
+                            temp, 'd', R.string.contribution_documentation),
+                            temp, 'g', R.string.contribution_graphics),
+                            temp, 'i', R.string.contribution_infrastructure),
+                            temp, 'p', R.string.contribution_projectleader),
+                            temp, 's', R.string.contribution_support),
+                            temp, 't', R.string.contribution_tester);
 
                     sb.append("- ")
-                        .append(link.isEmpty() ? name : "[" + name + "](" + link + ")")
-                        .append(roles.isEmpty() ? "" : " (" + roles + ")")
-                        .append("\n");
+                            .append(link.isEmpty() ? name : "[" + name + "](" + link + ")")
+                            .append(roles.isEmpty() ? "" : " (" + roles + ")")
+                            .append("\n");
 
                     s = s.substring(p3 + 1);
                     p1 = s.indexOf("|");

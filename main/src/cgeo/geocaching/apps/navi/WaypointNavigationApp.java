@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 
 /**
  * interface for navigation to a waypoint
- *
  */
 interface WaypointNavigationApp {
     /**

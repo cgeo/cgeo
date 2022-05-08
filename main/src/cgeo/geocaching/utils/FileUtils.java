@@ -34,7 +34,6 @@ import org.apache.commons.lang3.StringUtils;
 
 /**
  * Utility class for files
- *
  */
 public final class FileUtils {
 
@@ -50,7 +49,7 @@ public final class FileUtils {
     private static final int MAX_DIRECTORY_SCAN_DEPTH = 30;
     private static final String FILE_PROTOCOL = "file://";
 
-    private static final String FORBIDDEN_FILENAME_CHARS_HEX = new String(new byte[] { 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x7f });
+    private static final String FORBIDDEN_FILENAME_CHARS_HEX = new String(new byte[]{0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 0x08, 0x09, 0x0a, 0x0b, 0x0c, 0x0d, 0x0e, 0x0f, 0x10, 0x11, 0x12, 0x13, 0x14, 0x15, 0x16, 0x17, 0x18, 0x19, 0x1a, 0x1b, 0x1c, 0x1d, 0x1e, 0x1f, 0x7f});
     public static final String FORBIDDEN_FILENAME_CHARS = "\"*/:<>?\\|" + FORBIDDEN_FILENAME_CHARS_HEX;
 
     private FileUtils() {
@@ -124,10 +123,8 @@ public final class FileUtils {
      * Moves a file/directory to a new name. Tries a rename first (faster) and falls back
      * to a copy + delete. Target directories are created if needed.
      *
-     * @param source
-     *            source file or directory
-     * @param target
-     *            target file or directory
+     * @param source source file or directory
+     * @param target target file or directory
      * @return true, if successfully
      */
     public static boolean move(final File source, final File target) {
@@ -151,10 +148,8 @@ public final class FileUtils {
     /**
      * Moves a file/directory into the targetDirectory.
      *
-     * @param source
-     *            source file or directory
-     * @param targetDirectory
-     *            target directory
+     * @param source          source file or directory
+     * @param targetDirectory target directory
      * @return success true or false
      */
     public static boolean moveTo(final File source, final File targetDirectory) {
@@ -164,10 +159,8 @@ public final class FileUtils {
     /**
      * Copies a file/directory into the targetDirectory.
      *
-     * @param source
-     *            source file or directory
-     * @param targetDirectory
-     *            target directory
+     * @param source          source file or directory
+     * @param targetDirectory target directory
      * @return success true or false
      */
     public static boolean copyTo(final File source, final File targetDirectory) {
@@ -177,8 +170,7 @@ public final class FileUtils {
     /**
      * Get the guessed file extension of an URL. A file extension can contain up-to 4 characters in addition to the dot.
      *
-     * @param url
-     *            the relative or absolute URL
+     * @param url the relative or absolute URL
      * @return the file extension, including the leading dot, or the empty string if none could be determined
      */
     @NonNull
@@ -197,8 +189,7 @@ public final class FileUtils {
     /**
      * Get the guessed filename from a path
      *
-     * @param path
-     *          filename, optionally including path
+     * @param path filename, optionally including path
      * @return the filename without path
      */
     @NonNull
@@ -210,10 +201,8 @@ public final class FileUtils {
     /**
      * Copy a file into another. The directory structure of target file will be created if needed.
      *
-     * @param source
-     *            the source file
-     * @param destination
-     *            the target file
+     * @param source      the source file
+     * @param destination the target file
      * @return true if the copy happened without error, false otherwise
      */
     public static boolean copy(@NonNull final File source, @NonNull final File destination) {
@@ -233,10 +222,8 @@ public final class FileUtils {
     /**
      * Deletes all files from a directory with the given prefix.
      *
-     * @param directory
-     *            The directory to remove the files from
-     * @param prefix
-     *            The filename prefix
+     * @param directory The directory to remove the files from
+     * @param prefix    The filename prefix
      */
     public static void deleteFilesWithPrefix(@NonNull final File directory, @NonNull final String prefix) {
         deleteFilesWithFilter(directory, (dir, filename) -> filename.startsWith(prefix));
@@ -270,10 +257,8 @@ public final class FileUtils {
      * If the response could not be saved to the file due, for example, to a network error, the file will not exist when
      * this method returns.
      *
-     * @param inputStream
-     *            the stream whose content will be saved
-     * @param targetFile
-     *            the target file, which will be created if necessary
+     * @param inputStream the stream whose content will be saved
+     * @param targetFile  the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise
      */
     public static boolean saveToFile(@Nullable final InputStream inputStream, @NonNull final File targetFile) {
@@ -309,10 +294,8 @@ public final class FileUtils {
     /**
      * Save an HTTP response to a file.
      *
-     * @param response
-     *            the response whose entity content will be saved
-     * @param targetFile
-     *            the target file, which will be created if necessary
+     * @param response   the response whose entity content will be saved
+     * @param targetFile the target file, which will be created if necessary
      * @return true if the operation was successful, false otherwise, in which case the file will not exist
      */
     public static boolean saveEntityToFile(@NonNull final Response response, @NonNull final File targetFile) {
@@ -348,10 +331,8 @@ public final class FileUtils {
     /**
      * Get the saved header value for this file.
      *
-     * @param baseFile
-     *            the name of the cached resource
-     * @param name
-     *            the name of the header ("etag" or "last-modified")
+     * @param baseFile the name of the cached resource
+     * @param name     the name of the header ("etag" or "last-modified")
      * @return the cached value, or <tt>null</tt> if none has been cached
      */
     @Nullable
@@ -377,6 +358,7 @@ public final class FileUtils {
 
     public interface FileSelector {
         boolean isSelected(File file);
+
         boolean shouldEnd();
     }
 
@@ -455,7 +437,7 @@ public final class FileUtils {
      * Creates the directory named by the given file, creating any missing parent directories in the process.
      *
      * @return {@code true} if the directory was created, {@code false} on failure or if the directory already
-     *         existed.
+     * existed.
      */
     public static boolean mkdirs(final File file) {
         final boolean success = file.mkdirs() || file.isDirectory(); // mkdirs returns false on existing directories
@@ -543,7 +525,8 @@ public final class FileUtils {
 
     /**
      * searches a given directory for readable files ending with a certain string
-     * @param dir - directory to look in
+     *
+     * @param dir       - directory to look in
      * @param extension - extension to be searched for
      * @return List of found files, may be empty
      */

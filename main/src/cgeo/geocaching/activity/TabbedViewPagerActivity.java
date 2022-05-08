@@ -68,9 +68,9 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
             // initialize and register listener for pull-to-refresh gesture
             swipeRefreshLayout.setDistanceToTriggerSync(mDistanceToTriggerSync);
             swipeRefreshLayout.setOnRefreshListener(() -> {
-                    swipeRefreshLayout.setRefreshing(false);
-                    pullToRefreshActionTrigger();
-                }
+                        swipeRefreshLayout.setRefreshing(false);
+                        pullToRefreshActionTrigger();
+                    }
             );
         }
 
@@ -143,6 +143,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
     }
 
     protected abstract String getTitle(long pageId);
+
     @SuppressWarnings("rawtypes")
     protected abstract TabbedViewPagerFragment createNewFragment(long pageId);
 

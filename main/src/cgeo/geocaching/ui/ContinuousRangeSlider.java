@@ -17,7 +17,9 @@ import java.util.List;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 
-/** View displays and maintains a slider where user can select single or range of items from a sorted item list. */
+/**
+ * View displays and maintains a slider where user can select single or range of items from a sorted item list.
+ */
 public class ContinuousRangeSlider extends LinearLayout {
 
     private float min = 0f;

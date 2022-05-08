@@ -63,8 +63,8 @@ public class CalcState implements Serializable {
         plainLon = json.optString("plainLon");
         latHemisphere = (char) json.optInt("latHemisphere", ERROR_CHAR);
         lonHemisphere = (char) json.optInt("lonHemisphere", ERROR_CHAR);
-        buttons       = createJSONAbleList(json.optJSONArray("buttons"),       new ButtonDataFactory());
-        equations     = createJSONAbleList(json.optJSONArray("equations"),     new VariableDataFactory());
+        buttons = createJSONAbleList(json.optJSONArray("buttons"), new ButtonDataFactory());
+        equations = createJSONAbleList(json.optJSONArray("equations"), new VariableDataFactory());
         freeVariables = createJSONAbleList(json.optJSONArray("freeVariables"), new VariableDataFactory());
         variableBank = new ArrayList<>(); // "variableBank" intentionally not loaded.
     }

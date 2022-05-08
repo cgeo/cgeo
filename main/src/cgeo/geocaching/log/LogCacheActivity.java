@@ -83,7 +83,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private static final String SAVED_STATE_LOGENTRY = "cgeo.geocaching.saved_state_logentry";
     private static final int LOG_MAX_LENGTH = 4000;
 
-    private enum SaveMode { NORMAL, FORCE, SKIP }
+    private enum SaveMode {NORMAL, FORCE, SKIP}
 
     private final Set<TrackableLog> trackables = new HashSet<>();
     protected LogcacheActivityBinding binding;
@@ -310,12 +310,12 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         super.onResume();
         // Resume location access
         PermissionHandler.executeIfLocationPermissionGranted(this,
-            new RestartLocationPermissionGrantedCallback(PermissionRequestContext.LogCacheActivity) {
-                @Override
-                protected void executeAfter() {
-                    resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
-                }
-            });
+                new RestartLocationPermissionGrantedCallback(PermissionRequestContext.LogCacheActivity) {
+                    @Override
+                    protected void executeAfter() {
+                        resumeDisposables.add(geoUpdate.start(GeoDirHandler.UPDATE_GEODATA));
+                    }
+                });
     }
 
     @Override
@@ -373,6 +373,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
         return builder.build();
     }
+
     /**
      * Checks whether there are favorite points available and sets the corresponding visibility of
      * "add to favorite" checkbox.
@@ -879,11 +880,11 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                 finish(SaveMode.SKIP);
             } else {
                 SimpleDialog.of(activity)
-                    .setTitle(R.string.info_log_post_failed)
-                    .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
-                        TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
-                    .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
-                    .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(SaveMode.FORCE));
+                        .setTitle(R.string.info_log_post_failed)
+                        .setMessage(TextParam.concat(TextParam.id(R.string.info_log_post_failed_reason, ""),
+                                TextParam.id(StatusCode.UNKNOWN_ERROR.errorString)).setMovement(true))
+                        .setButtons(R.string.info_log_post_retry, 0, R.string.info_log_post_save)
+                        .confirm((dialog, which) -> sendLogInternal(), SimpleDialog.DO_NOTHING, (dialogInterface, i) -> finish(SaveMode.FORCE));
 
             }
         }

@@ -62,7 +62,7 @@ public class SimpleDialog {
     /**
      * Choices for showing selection when creating singleChoice dialogs
      */
-    public enum SingleChoiceMode { NONE, SHOW_RADIO, SHOW_RADIO_AND_OK }
+    public enum SingleChoiceMode {NONE, SHOW_RADIO, SHOW_RADIO_AND_OK}
 
     /**
      * Define common button text sets
@@ -149,7 +149,7 @@ public class SimpleDialog {
     /**
      * Up to three parameters will be processed. First is positive button, second is negative button, third is neutral button
      */
-    public SimpleDialog setButtons(@StringRes final int ... buttonIds) {
+    public SimpleDialog setButtons(@StringRes final int... buttonIds) {
         final TextParam[] buttonTps = new TextParam[buttonIds.length];
         for (int idx = 0; idx < buttonIds.length; idx++) {
             buttonTps[idx] = buttonIds[idx] == 0 ? null : TextParam.id(buttonIds[idx]);
@@ -304,12 +304,13 @@ public class SimpleDialog {
      * @param displayMapper    mapper to get the display value for each of the items
      * @param preselect        index of the item to preselect. If this is not a valid index (e.g. -1), no value will be preselected
      * @param showMode         mode how to show or not show radio buttons and Ok button
-     *      * @param groupMapper      if not null, will display grouped display
+     *                         * @param groupMapper      if not null, will display grouped display
      * @param onSelectListener is called when user made a selection (if showChoice=true then after clicking positive button; otherwise after clicking an item)
      * @param moreListeners    Provide up to two more listeners to define actions for 'negative' and 'neutral' button.
      */
     @SafeVarargs
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
+    // splitting up that method would not help improve readability
     public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final SingleChoiceMode showMode, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
@@ -379,8 +380,9 @@ public class SimpleDialog {
      * @param onSelectListener provide the select listener called when user made a selection (called when user clicks on positive button)
      */
     @SafeVarargs
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
-    public final <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>> ... onNeutralListener) {
+    @SuppressWarnings("PMD.NPathComplexity")
+    // method readability will not improve by splitting it up
+    public final <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>>... onNeutralListener) {
 
         final boolean addSelectAll = items.size() > 1;
         final int offset = addSelectAll ? 1 : 0;
@@ -390,7 +392,7 @@ public class SimpleDialog {
         final Set<T> result = new HashSet<>();
         if (addSelectAll) {
             itemTexts[0] = TextParam.text("<" + LocalizationUtils.getString(R.string.chipchoicegroup_selectall) + " (" + items.size() + ")>")
-                .setMarkdown(true).getText(null);
+                    .setMarkdown(true).getText(null);
         }
         int idx = offset;
         boolean allSelected = true;
@@ -510,7 +512,7 @@ public class SimpleDialog {
                     }
                 }
                 return null;
-            } });
+            }});
         }
         // force keyboard
         Keyboard.show(getContext(), textField.second);
@@ -551,10 +553,10 @@ public class SimpleDialog {
         final LayoutInflater inflater = LayoutInflater.from(getContext());
 
         return new ArrayAdapter<TextParam>(
-            getContext(),
-            0, //itemLayout,
-            0, // android.R.id.text1,
-            items) {
+                getContext(),
+                0, //itemLayout,
+                0, // android.R.id.text1,
+                items) {
             public View getView(final int position, final View convertView, final ViewGroup parent) {
 
                 final boolean isGroupHeading = groupMapper != null && groupMapper.call(position) == null;
@@ -583,8 +585,11 @@ public class SimpleDialog {
         };
     }
 
-    /** creates a group-including and group-styled list of elements along with a mapping from visual list to value indexes */
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    /**
+     * creates a group-including and group-styled list of elements along with a mapping from visual list to value indexes
+     */
+    @SuppressWarnings({"PMD.NPathComplexity"})
+    // splitting up that method would not help improve readability
     private static <T, G> Pair<List<TextParam>, Func1<Integer, Integer>> createGroupedDisplayValues(final List<T> items, @NotNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper) {
 
         final Map<G, List<Pair<Integer, TextParam>>> groupedMapList = new HashMap<>();
