@@ -869,6 +869,8 @@
     <string name="init_summary_listdisplay">Show membership of caches to additional lists in a cache list</string>
     <string name="init_livelist">Show Direction</string>
     <string name="init_summary_livelist">Show an arrow with compass direction for caches in a list</string>
+    <string name="init_quicklaunchitems">Quick launch buttons</string>
+    <string name="init_summary_quicklaunchitems">Select one or more items as quick launch buttons on home screen</string>
 
     <!-- app theme -->
     <string name="settings_theme_title">Theme</string>
