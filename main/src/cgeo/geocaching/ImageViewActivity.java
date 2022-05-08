@@ -41,6 +41,8 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ImageViewActivity extends AbstractActionBarActivity {
 
+    public static final int RESULTCODE_IMAGEVIEW = 173563576; //random number
+
     private static final String PARAM_IMAGE_LIST = "param_image_list";
     private static final String PARAM_IMAGE_LIST_POS = "param_image_list_pos";
     private static final String PARAM_IMAGE_CONTEXT_CODE = "param_image_context_code";
@@ -54,15 +56,20 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     private class ImageAdapter extends PagerAdapter {
 
+        private static final int ENDLESS_MULTIPLIER = 1000;
+
         private final Context context;
+        private final int realImageSize;
 
         ImageAdapter(final Context context) {
             this.context = context;
+            this.realImageSize = Math.max(1, imageList.size());
         }
 
         @NonNull
         @Override
-        public Object instantiateItem(@NonNull final ViewGroup container, final int position) {
+        public Object instantiateItem(@NonNull final ViewGroup container, final int pos) {
+            final int position = pos % realImageSize;
             final ImageviewImageBinding binding = ImageviewImageBinding.inflate(LayoutInflater.from(context));
             final Image currentImg = imageList.get(position);
             binding.imageOpenFile.setOnClickListener(v ->
@@ -85,12 +92,12 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         @Override
         public void setPrimaryItem(@NonNull final ViewGroup container, final int position, @NonNull final Object object) {
             super.setPrimaryItem(container, position, object);
-            imagePos = position;
+            imagePos = position % realImageSize;
         }
 
         @Override
         public int getCount() {
-            return Math.max(1, imageList.size());
+            return realImageSize * ENDLESS_MULTIPLIER;
         }
 
         @Override
@@ -143,9 +150,16 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         imageAdapter = new ImageAdapter(this);
         binding.imageviewViewpager.setAdapter(imageAdapter);
-        binding.imageviewViewpager.setCurrentItem(imagePos);
+        binding.imageviewViewpager.setCurrentItem(imagePos + imageAdapter.getCount() / 2);
+        binding.imageviewViewpager.setOffscreenPageLimit(1);
 
    }
+
+    @Override
+    public void onBackPressed() {
+        setFinishResult();
+        super.onBackPressed();
+    }
 
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
@@ -237,6 +251,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                 @Override
                 public void onDismiss(@NonNull final ImageView imageView) {
                     //close detail view on "fling down"
+                    setFinishResult();
                     finish();
                 }
 
@@ -283,7 +298,14 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         intent.putExtra(PARAM_IMAGE_CONTEXT_CODE, contextCode);
         intent.putExtra(PARAM_IMAGE_LIST, new ArrayList<>(images));
         intent.putExtra(PARAM_IMAGE_LIST_POS, pos);
-        activity.startActivity(intent);
+        activity.startActivityForResult(intent, RESULTCODE_IMAGEVIEW);
+    }
+
+    private void setFinishResult() {
+        //pass back selected image index
+        final Intent intent = new Intent();
+        intent.putExtra(Intents.EXTRA_INDEX, this.imagePos);
+        setResult(RESULT_OK, intent);
     }
 
 }
