@@ -1241,7 +1241,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Σε σύνδεση)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (χωρίς σύνδεση)</string>
     <string name="cache_menu_vote">Ψηφίστε</string>
-    <string name="cache_menu_checker">Άνοιγμα Geochecker</string>
     <string name="cache_menu_challenge_checker">Αναζήτηση στον έλεγχο δοκιμασίας</string>
     <string name="cache_menu_log_in_browser">Συνδεθείτε στο πρόγραμμα περιήγησης</string>
     <string name="cache_menu_ignore">Παράβλεψη κρύπτης</string>
