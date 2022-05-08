@@ -104,8 +104,9 @@ public final class ImageUtils {
         public Collection<Image> add(final Collection<Image> images) {
             final Collection<Image> resultCollection = new ArrayList<>();
             for (Image img : images) {
-                final String title = getTitleFromName(ContentStorage.get().getName(img.getUri()));
-                final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, null, false);
+                final String filename = getFilenameFromUri(img.getUri());
+                final String title = getTitleFromName(filename);
+                final Uri newUri = ContentStorage.get().copy(img.getUri(), folder, FileNameCreator.forName(filename), false);
                 resultCollection.add(img.buildUpon().setUrl(newUri).setTitle(title)
                     .setCategory(Image.ImageCategory.OWN)
                     .setContextInformation("Stored: " + Formatter.formatDateTime(System.currentTimeMillis()))
@@ -117,6 +118,17 @@ public final class ImageUtils {
         @Override
         public void delete(final Image image) {
             ContentStorage.get().delete(image.uri);
+        }
+
+        private String getFilenameFromUri(final Uri uri) {
+            String filename = ContentStorage.get().getName(uri);
+            if (filename == null) {
+                filename = UriUtils.getLastPathSegment(uri);
+            }
+            if (!filename.contains(".")) {
+                filename += ".jpg";
+            }
+            return filename;
         }
 
         private String getTitleFromName(final String filename) {

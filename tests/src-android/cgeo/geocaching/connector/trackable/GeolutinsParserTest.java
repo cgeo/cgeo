@@ -48,7 +48,7 @@ public class GeolutinsParserTest extends AbstractResourceInstrumentationTestCase
         assertThat(trackable3.getLogs()).hasSize(23);
     }
 
-    public static void testService() {
+    public static void ignoreTestService() {
         final InputStream page = Network.getResponseStream(Network.getRequest("http://www.geolutins.com/xml/api.php?G=GL007B8"));
         assertThat(page).isNotNull();
 
