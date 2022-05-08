@@ -139,7 +139,8 @@ public class TextParam {
     }
 
     /** creates text (CharSequence) to assign to a TextView according to this TextParam settings */
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
     public CharSequence getText(@Nullable final Context ctx) {
         final Context context = ctx == null && CgeoApplication.getInstance() != null ? CgeoApplication.getInstance().getApplicationContext() : ctx;
         CharSequence text;

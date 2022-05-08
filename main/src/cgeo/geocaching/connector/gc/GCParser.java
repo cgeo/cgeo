@@ -104,7 +104,8 @@ public final class GCParser {
     }
 
     @Nullable
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private static SearchResult parseSearch(final IConnector con, final String url, final String pageContent, final int alreadyTaken) {
         if (StringUtils.isBlank(pageContent)) {
             Log.e("GCParser.parseSearch: No page given");

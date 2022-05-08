@@ -115,7 +115,8 @@ public final class MapMarkerUtils {
      * @return a drawable representing the current cache status
      */
     @NonNull
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
     private static LayerDrawable createCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType, final ArrayList<Integer> assignedMarkers) {
         final int useEmoji = cache.getAssignedEmoji();
 

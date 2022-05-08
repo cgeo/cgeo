@@ -172,7 +172,8 @@ public final class TextParser {
         return result;
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings("PMD.NPathComplexity")
     private Object parseUntilInternal(final Predicate<Character> stopper, final boolean endIsDelim, final Character escapeChar, final boolean escapeDoubledStoppers, final boolean includeStopper) {
 
         if (escapeChar != null && stopper != null && stopper.test(escapeChar)) {

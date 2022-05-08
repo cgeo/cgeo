@@ -309,7 +309,8 @@ public class SimpleDialog {
      * @param moreListeners    Provide up to two more listeners to define actions for 'negative' and 'neutral' button.
      */
     @SafeVarargs
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
     public final <T, G> void selectSingleGrouped(@NonNull final List<T> items, @NonNull final Func2<T, Integer, TextParam> displayMapper, final int preselect, final SingleChoiceMode showMode, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper, final Action2<T, Integer> onSelectListener, final Action2<T, Integer>... moreListeners) {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(getContext());
@@ -379,7 +380,8 @@ public class SimpleDialog {
      * @param onSelectListener provide the select listener called when user made a selection (called when user clicks on positive button)
      */
     @SafeVarargs
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
     public final <T> void selectMultiple(final List<T> items, final Func2<T, Integer, TextParam> displayMapper, final Func2<T, Integer, Boolean> preselect, final Consumer<Set<T>> onSelectListener, final Consumer<Set<T>> ... onNeutralListener) {
 
         final boolean addSelectAll = items.size() > 1;
@@ -584,7 +586,8 @@ public class SimpleDialog {
     }
 
     /** creates a group-including and group-styled list of elements along with a mapping from visual list to value indexes */
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
     private static <T, G> Pair<List<TextParam>, Func1<Integer, Integer>> createGroupedDisplayValues(final List<T> items, @NotNull final Func2<T, Integer, TextParam> displayMapper, @Nullable final Func2<T, Integer, G> groupMapper, @Nullable final Func1<G, TextParam> groupDisplayMapper) {
 
         final Map<G, List<Pair<Integer, TextParam>>> groupedMapList = new HashMap<>();

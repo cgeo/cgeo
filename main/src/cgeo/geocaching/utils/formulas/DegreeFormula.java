@@ -137,7 +137,8 @@ public class DegreeFormula {
     }
 
     @Nullable
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
     private Pair<Integer, Boolean> checkAndParseDegreePart(final int lastType, final boolean digitAllowed) {
         boolean foundDigit = false;
         parser.mark();
@@ -315,7 +316,8 @@ public class DegreeFormula {
     }
 
     @Nullable
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
     private Pair<Double, Boolean> evaluateNumber(final List<CharSequence> css, final Formula f, final Formula fAfterDigit, final Func1<String, Value> varMap, final Predicate<Double> checker, final int precision) {
         final boolean hasDigits = fAfterDigit != null;
         final Value v = evaluateSingleFormula(f, varMap);

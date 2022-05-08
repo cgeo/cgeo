@@ -206,7 +206,8 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         }
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings("PMD.NPathComplexity")
     private static boolean checkAndApply(final String fillPattern, final String coordPattern, final int row, final GridLayout grid, final int viewPos) {
         if (coordPattern == null) {
             return false;

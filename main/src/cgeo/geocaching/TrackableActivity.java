@@ -490,7 +490,8 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         }
 
         @Override
-        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
         public void setContent() {
             final TrackableActivity activity = (TrackableActivity) getActivity();
             if (activity == null) {

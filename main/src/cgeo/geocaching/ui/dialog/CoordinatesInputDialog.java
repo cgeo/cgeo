@@ -320,7 +320,8 @@ public class CoordinatesInputDialog extends DialogFragment {
         return true;
     }
 
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void config(final boolean plain, final String sep1, final String sep2, final String sep3) {
         eLatFrame.setVisibility(plain ? View.VISIBLE : View.GONE);
         eLonFrame.setVisibility(plain ? View.VISIBLE : View.GONE);

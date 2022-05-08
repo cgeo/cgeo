@@ -1172,7 +1172,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
-        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
         public void setContent() {
             // retrieve activity and cache - if either of them is null, something's really wrong!
             final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
@@ -1666,7 +1667,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
         @Override
-        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+        // splitting up that method would not help improve readability
+        @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
         public void setContent() {
             // retrieve activity and cache - if either of them is null, something's really wrong!
             final CacheDetailActivity activity = (CacheDetailActivity) getActivity();
