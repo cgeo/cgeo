@@ -27,15 +27,15 @@ public abstract class AbstractUnifiedMapView<T> {
         this.delayedZoomTo = delayedZoomTo;
         this.delayedCenterTo = delayedCenterTo;
         this.onMapReadyTasks = onMapReadyTasks;
-    };
+    }
 
     public void prepareForTileSourceChange() {
         positionLayer = configPositionLayer(false);
-    };
+    }
 
     public void setTileSource(final AbstractTileProvider newSource) {
         currentTileProvider = newSource;
-    };
+    }
 
     public void setPreferredLanguage(final String language) {
         // default: do nothing
@@ -81,7 +81,7 @@ public abstract class AbstractUnifiedMapView<T> {
 
     public void applyTheme() {
         // default is empty
-    };
+    }
 
     // ========================================================================
     // zoom & heading methods
@@ -90,11 +90,11 @@ public abstract class AbstractUnifiedMapView<T> {
 
     public int getZoomMin() {
         return currentTileProvider == null ? 0 : currentTileProvider.getZoomMin();
-    };
+    }
 
     public int getZoomMax() {
         return currentTileProvider == null ? 0 : currentTileProvider.getZoomMax();
-    };
+    }
 
     public abstract int getCurrentZoom();
 

@@ -92,14 +92,14 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     public float getCurrentBearing() {
         return mMap.getMapPosition().bearing;
-    };
+    }
 
     @Override
     public void setBearing(final float bearing) {
         final MapPosition pos = mMap.getMapPosition();
         pos.setBearing(bearing);
         mMap.setMapPosition(pos);
-    };
+    }
 
     /** keep track of rotation and zoom level changes **/
     protected void configMapChangeListener(final boolean enable) {
@@ -195,7 +195,7 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     public BoundingBox getBoundingBox() {
         return mMap.getBoundingBox(0);
-    };
+    }
 
     // ========================================================================
     // theme related methods
@@ -227,13 +227,13 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     public int getCurrentZoom() {
         return mMap.getMapPosition().getZoomLevel();
-    };
+    }
 
     public void setZoom(final int zoomLevel) {
         final MapPosition pos = mMap.getMapPosition();
         pos.setZoomLevel(zoomLevel);
         mMap.setMapPosition(pos);
-    };
+    }
 
     private void zoomInOut(final boolean zoomIn) {
         final int zoom = getCurrentZoom();

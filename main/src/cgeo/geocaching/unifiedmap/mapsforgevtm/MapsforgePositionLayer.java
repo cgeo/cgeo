@@ -79,7 +79,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
 
     public void setCurrentPositionAndHeading(final Location location, final float heading) {
         setCurrentPositionAndHeadingHelper(location, heading, navigationLayer::setPoints, MAP_MAPSFORGE);
-    };
+    }
 
     // ========================================================================
     // route / track handling
@@ -92,7 +92,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     @Override
     public void updateTrack(final String key, final Route track) {
         super.updateTrack(key, track, Route::getAllPointsGeoPoint);
-    };
+    }
 
     // ========================================================================
     // repaint methods
@@ -130,7 +130,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
             map.layers().add(historyLayer);
             historyLayer.setPoints(points);
         });
-    };
+    }
 
     @Override
     protected void repaintRouteAndTracks() {
@@ -141,6 +141,6 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
             map.layers().add(trackLayer);
             trackLayer.setPoints(segment);
         });
-    };
+    }
 
 }

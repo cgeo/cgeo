@@ -2644,7 +2644,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new VariablesViewPageFragment();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
-    };
+    }
 
     @SuppressLint("SetTextI18n")
     static boolean setOfflineHintText(final OnClickListener showHintClickListener, final TextView offlineHintTextView, final String hint, final String personalNote) {
