@@ -505,14 +505,16 @@ public class SimpleDialog {
         }
         if (allowedChars != null) {
             final Pattern charPattern = Pattern.compile(allowedChars);
-            textField.second.setFilters(new InputFilter[]{(source, start, end, dest, dstart, dend) -> {
-                for (int i = start; i < end; i++) {
-                    if (!charPattern.matcher("" + source.charAt(i)).matches()) {
-                        return "";
+            textField.second.setFilters(new InputFilter[]{
+                (source, start, end, dest, dstart, dend) -> {
+                    for (int i = start; i < end; i++) {
+                        if (!charPattern.matcher("" + source.charAt(i)).matches()) {
+                            return "";
+                        }
                     }
+                    return null;
                 }
-                return null;
-            } });
+            });
         }
         // force keyboard
         Keyboard.show(getContext(), textField.second);
