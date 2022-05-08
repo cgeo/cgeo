@@ -14,13 +14,17 @@
 ### 캐시 목록
 
 - 신규: 고급 상태 필터에 "사용자 정의 지점 있음" 옵션 추가
+- New: Allow inclusion of caches without D/T in filter
 - 수정: 거리 정렬 순서에 따라 모든 위치 변경 시 캐시 목록 재정렬
 
 ### 지도
 
+- New: Map theming for Google Maps
+- New: Map scaling options for OpenStreetMap (see theme options)
 - 변경: 설정 => 지도 => 지도를 길게 누르면 이제 캐시 지도에서도 길게 누름이 활성화/비활성화됩니다(현재 캐시에 대한 새 지점 생성과 관련됨).
 - 변경: 영구보관된 캐시에 대한 거리 원을 표시하지 않음
 - 수정: 특정 조건에서 OpenStreetMap 지도의 충돌
+- Fix: Routing becoming unresponsive when many routing tiles are installed
 
 ### 일반
 
