@@ -206,8 +206,8 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     }
 
     @Override
-    public void selectThemeOptions() {
-        // @todo
+    public void selectThemeOptions(final Activity activity) {
+        themeHelper.selectMapThemeOptions(activity);
     }
 
     @Override
@@ -246,6 +246,8 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     protected void onResume() {
         super.onResume();
+        // @todo: There must be a less resource-intensive way of applying style-changes...
+        applyTheme();
         mMapView.onResume();
     }
 

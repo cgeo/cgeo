@@ -10,6 +10,7 @@ import cgeo.geocaching.storage.Folder;
 import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
+import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -20,6 +21,7 @@ import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.content.ContentResolver;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 
@@ -81,7 +83,6 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     //current Theme style menu settings
     private XmlRenderThemeStyleMenu themeStyleMenu;
-    private String prefThemeOptionMapStyle = "";
     private String prefThemeStyleKey = "";
 
     //the last used Zip Resource Provider is cached.
@@ -160,10 +161,8 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         }
         setSelectedTheme(selectedTheme);
 
-        // @test
+        map.updateMap(true);
         map.render();
-        //rendererLayer.requestRedraw();
-
     }
 
     private void applyDefaultTheme(final Map map) {
@@ -196,7 +195,7 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
                     xmlRenderTheme = new ExternalRenderTheme(theme.fileInfo.uri.toString(), this);
                 } else {
                     //this is the SLOW THEME path. Show OneTimeDialog to warn user about this
-                    // Dialogs.basicOneTimeMessage(activity, OneTimeDialogs.DialogType.MAP_THEME_FIX_SLOWNESS);
+                    Dialogs.basicOneTimeMessage(CgeoApplication.getInstance(), OneTimeDialogs.DialogType.MAP_THEME_FIX_SLOWNESS);
                     xmlRenderTheme = new ContentRenderTheme(getContentResolver(), theme.fileInfo.uri, this);
                     xmlRenderTheme.setResourceProvider(new ContentResolverResourceProvider(getContentResolver(), ContentStorage.get().getUriForFolder(theme.containingFolder), true));
                 }
@@ -253,18 +252,27 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         builder.show();
     }
 
+    public void selectMapThemeOptions(final Activity activity) {
+        final Intent intent = new Intent(activity, MapsforgeThemeSettings.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
+        if (themeOptionsAvailable() && themeStyleMenu != null) {
+            intent.putExtra(MapsforgeThemeSettingsFragment.RENDERTHEME_MENU, themeStyleMenu);
+        }
+        activity.startActivity(intent);
+    }
+
+    public boolean themeOptionsAvailable() {
+        return StringUtils.isNotBlank(Settings.getSelectedMapRenderTheme());
+    }
+
     /**
-     * Callback handling for theme settings upon new Map Theme selection
-     * Note: code was copied 1:1 in February 2021 from NewMap and might need refactoring.
-     * <p>
-     * Code works in conjunction with {@link RenderThemeSettings} somehow.
-     * Apparently map theme settings are "spilled" into c:geo shared preferences
+     * Callback handling for theme settings upon MapsforgeVTM theme options selection
+     * Note: map theme settings are "spilled" into c:geo shared preferences
      * (Observation: when using OpenAndroMaps Elevate, those settings usually related settings start with "elmt-")
      */
     @Override
     public Set<String> getCategories(final XmlRenderThemeStyleMenu menu) {
         themeStyleMenu = menu;
-        prefThemeOptionMapStyle = menu.getId();
         final String id = this.sharedPreferences.getString(themeStyleMenu.getId(), themeStyleMenu.getDefaultValue());
         prefThemeStyleKey = menu.getId() + "-" + id;
         final XmlRenderThemeStyleLayer baseLayer = themeStyleMenu.getLayer(id);
@@ -284,18 +292,18 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         return result;
     }
 
+    /** set new theme and report result, gets called after successful download of a new theme */
+    /* @todo
+    public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
+        return setSelectedMapThemeInternal(themeIdCandidate) != null;
+    }
+    */
+
     /**
      * Set a new map theme. The theme is evaluated against available themes and possibly corrected.
      * Next time a map viewer is opened, the theme will be evaluated and used if possible
      */
-	/* @todo
-    public static boolean setSelectedMapThemeDirect(final String themeIdCandidate) {
-        return setSelectedMapThemeInternal(themeIdCandidate) != null;
-    }
-	*/
-
     private static ThemeData setSelectedMapThemeInternal(final String themeIdCandidate) {
-
         //try to apply stored value
         ThemeData selectedTheme = null;
         final List<ThemeData> avThemes = getAvailableThemes();
@@ -350,7 +358,6 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
 
     /** recalculate available themes out of the currently active folder */
     private static void recalculateAvailableThemes() {
-
         final List<ThemeData> newAvailableThemes = new ArrayList<>();
         addAvailableThemes(isThemeSynchronizationActive() ? Folder.fromFile(MAP_THEMES_INTERNAL_FOLDER) : MAP_THEMES_FOLDER.getFolder(), newAvailableThemes, "", 0);
 
