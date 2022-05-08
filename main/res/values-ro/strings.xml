@@ -686,7 +686,6 @@
     <string name="cache_menu_move_list">Mută în altă listă</string>
     <string name="cache_menu_copy_list">Copiază în altă listă</string>
     <string name="cache_menu_vote">Votează</string>
-    <string name="cache_menu_checker">Accesează Geochecker</string>
     <string name="cache_menu_challenge_checker">Caută provocări</string>
     <string name="cache_menu_ignore">Ignoră geocutia</string>
     <string name="ignore_confirm_title">Atenţie</string>
