@@ -1203,7 +1203,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Çevrimiçi)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Çevrimdışı)</string>
     <string name="cache_menu_vote">Oyla</string>
-    <string name="cache_menu_checker">Geochecker\'ı aç</string>
     <string name="cache_menu_challenge_checker">Challenge Denetleyicisi ara</string>
     <string name="cache_menu_ignore">Geocache\'i yoksay</string>
     <string name="cache_log_menu_decrypt">Şifresini Çöz/Şifrele</string>
