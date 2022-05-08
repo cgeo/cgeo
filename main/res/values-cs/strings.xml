@@ -795,6 +795,8 @@
     <string name="init_summary_listdisplay">Zobrazit v seznamu kešek přítomnost kešek v dalších seznamech</string>
     <string name="init_livelist">Zobrazovat směr</string>
     <string name="init_summary_livelist">Zobrazit šipku se směrem kompasu pro kešky v seznamu</string>
+    <string name="init_quicklaunchitems">Tlačítka rychlého spuštění</string>
+    <string name="init_summary_quicklaunchitems">Vyberte jednu nebo více položek jako tlačítka rychlého spuštění na domovské obrazovce</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motiv</string>
     <string-array name="settings_theme_entries">
@@ -1275,7 +1277,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
     <string name="cache_menu_vote">Hlasovat</string>
-    <string name="cache_menu_checker">Otevřít Geocheck</string>
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
     <string name="cache_menu_log_in_browser">Zalogovat v prohlížeči</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
