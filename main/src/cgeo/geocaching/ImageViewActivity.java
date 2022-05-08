@@ -1,7 +1,6 @@
 package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
-import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.databinding.ImageviewActivityBinding;
 import cgeo.geocaching.databinding.ImageviewImageBinding;
 import cgeo.geocaching.location.Geopoint;
@@ -10,13 +9,16 @@ import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.functions.Func1;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.SharedElementCallback;
 import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
@@ -30,22 +32,27 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.app.ActivityOptionsCompat;
 import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.igreenwood.loupe.Loupe;
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageViewActivity extends AbstractActionBarActivity {
 
-    public static final int RESULTCODE_IMAGEVIEW = 173563576; //random number
+    private static final String TRANSITION_ID = "image_transition";
+    private static final String TRANSITION_ID_BACK = "image_transition_back";
 
     private static final String PARAM_IMAGE_LIST = "param_image_list";
     private static final String PARAM_IMAGE_LIST_POS = "param_image_list_pos";
     private static final String PARAM_IMAGE_CONTEXT_CODE = "param_image_context_code";
+    private static final String PARAM_FULLIMAGEVIEW = "param_full_image_view";
 
     private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
     private ImageAdapter imageAdapter;
@@ -53,6 +60,8 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private final ArrayList<Image> imageList = new ArrayList<>();
     private int imagePos = 0;
     private String imageContextCode = "shared";
+    private boolean fullImageView = false;
+    private boolean transactionEnterActive = false;
 
     private class ImageAdapter extends PagerAdapter {
 
@@ -60,10 +69,16 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         private final Context context;
         private final int realImageSize;
+        private final Map<Integer, ImageviewImageBinding> cachedPages = new HashMap<>();
+        private int cachedPosition;
 
         ImageAdapter(final Context context) {
             this.context = context;
             this.realImageSize = Math.max(1, imageList.size());
+        }
+
+        public ImageviewImageBinding getCurrentBinding() {
+            return cachedPages.get(cachedPosition);
         }
 
         @NonNull
@@ -78,20 +93,29 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                 ShareUtils.openUrl(ImageViewActivity.this, currentImg.getUrl(), true));
             binding.imageShare.setOnClickListener(v ->
                     ShareUtils.shareImage(ImageViewActivity.this, currentImg.getUri(), imageContextCode, R.string.about_system_info_send_chooser));
-
             container.addView(binding.getRoot());
             loadImageView(position, binding);
+            cachedPages.put(pos, binding);
             return binding.getRoot();
         }
 
         @Override
         public void destroyItem(@NonNull final ViewGroup container, final int position, @NonNull final Object object) {
             container.removeView((View) object);
+            cachedPages.remove(position);
         }
 
         @Override
         public void setPrimaryItem(@NonNull final ViewGroup container, final int position, @NonNull final Object object) {
             super.setPrimaryItem(container, position, object);
+            applyFullImageView(ImageviewImageBinding.bind((View) object));
+
+            //strip transition name from all cache objects and set it on current object
+            for (ImageviewImageBinding b : cachedPages.values()) {
+                b.imageFull.setTransitionName(null);
+            }
+            cachedPosition = position;
+            cachedPages.get(position).imageFull.setTransitionName("test" + position % realImageSize);
             imagePos = position % realImageSize;
         }
 
@@ -108,12 +132,48 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         public void clear() {
             //imageViewMap.clear();
         }
+
+        private void toggleFullImageView() {
+            fullImageView = !fullImageView;
+            for (ImageviewImageBinding cachedBinding : cachedPages.values()) {
+                applyFullImageView(cachedBinding);
+            }
+        }
+
+    }
+
+    private void applyFullImageView(final ImageviewImageBinding binding) {
+        final boolean turnOn = fullImageView;
+        binding.imageviewHeadline.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        binding.imageviewInformation.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        binding.imageviewActions.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().hide();
         setThemeAndContentView(R.layout.imageview_activity);
+        postponeEnterTransition();
+        transactionEnterActive = true;
+        setEnterSharedElementCallback(new SharedElementCallback() {
+
+            public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
+                Log.i("enter");
+                final ImageView imageView = imageAdapter.getCurrentBinding().imageFull;
+                sharedElements.clear();
+                if (transactionEnterActive) {
+                    imageView.setTransitionName(TRANSITION_ID);
+                    sharedElements.put(TRANSITION_ID, imageView);
+                    return;
+                }
+                imageView.setTransitionName(TRANSITION_ID_BACK + imagePos);
+                names.clear();
+                names.add(TRANSITION_ID_BACK + imagePos);
+                sharedElements.put(TRANSITION_ID_BACK + imagePos, imageAdapter.getCurrentBinding().imageFull);
+            }
+        });
+
         final ImageviewActivityBinding binding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_viewpager));
         imageList.clear();
 
@@ -131,6 +191,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             }
             imageContextCode = extras.getString(PARAM_IMAGE_CONTEXT_CODE);
             imagePos = extras.getInt(PARAM_IMAGE_LIST_POS, 0);
+            fullImageView = extras.getBoolean(PARAM_FULLIMAGEVIEW, false);
         }
 
         // Restore previous state
@@ -142,6 +203,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             }
             imageContextCode = savedInstanceState.getString(PARAM_IMAGE_CONTEXT_CODE);
             imagePos = savedInstanceState.getInt(PARAM_IMAGE_LIST_POS, 0);
+            fullImageView = savedInstanceState.getBoolean(PARAM_FULLIMAGEVIEW, false);
         }
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
 
@@ -167,6 +229,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         outState.putParcelableArrayList(PARAM_IMAGE_LIST, imageList);
         outState.putString(PARAM_IMAGE_CONTEXT_CODE, imageContextCode);
         outState.putInt(PARAM_IMAGE_LIST_POS, imagePos);
+        outState.putBoolean(PARAM_FULLIMAGEVIEW, fullImageView);
     }
 
     @Override
@@ -183,13 +246,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private void loadImageView(final int imagePos, final ImageviewImageBinding binding) {
         final Image currentImage = imageList.get(imagePos);
         if (currentImage == null) {
-            binding.imageviewHeadline.setText("no image");
+            binding.imageviewHeadline.setVisibility(View.INVISIBLE);
             binding.imageFull.setVisibility(View.GONE);
             return;
         }
-        final String headline = (imagePos + 1) + " / " + imageList.size() +
-            (Image.ImageCategory.UNCATEGORIZED == currentImage.category ? "" : "     " + currentImage.category.getI18n());
-        binding.imageviewHeadline.setText(headline);
+        applyFullImageView(binding);
+        binding.imageviewBackbutton.setOnClickListener(v -> {
+            setFinishResult();
+            finishAfterTransition();
+        });
+        binding.imageviewPosition.setText((imagePos + 1) + " / " + imageList.size());
+        binding.imageviewCategory.setText(currentImage.category.getI18n());
 
         final List<CharSequence> imageInfos = new ArrayList<>();
         if (!StringUtils.isEmpty(currentImage.title)) {
@@ -216,6 +283,8 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         imageCache.loadImage(currentImage.getUrl(), p -> {
             binding.imageFull.setImageDrawable(p.first);
             binding.imageFull.setVisibility(View.VISIBLE);
+            startPostponedEnterTransition();
+            transactionEnterActive = false;
 
             final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
             final String comment = MetadataUtils.getComment(p.second);
@@ -252,7 +321,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                 public void onDismiss(@NonNull final ImageView imageView) {
                     //close detail view on "fling down"
                     setFinishResult();
-                    finish();
+                    finishAfterTransition();
                 }
 
                 @Override
@@ -268,7 +337,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                 @Override
                 public boolean onSingleTapConfirmed(final MotionEvent e) {
                     //Logic to happen on single tap:
-                    inverseFullImageView(binding);
+                    imageAdapter.toggleFullImageView();
                     return true;
                 }
             });
@@ -285,20 +354,34 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     }
 
-    private void inverseFullImageView(final ImageviewImageBinding binding) {
-        final boolean gone = binding.imageviewHeadline.getVisibility() != View.GONE;
-        binding.imageviewHeadline.setVisibility(gone ? View.GONE : View.VISIBLE);
-        binding.imageviewInformation.setVisibility(gone ? View.GONE : View.VISIBLE);
-        binding.imageviewActions.setVisibility(gone ? View.GONE : View.VISIBLE);
-        ActivityMixin.showHideActionBar(ImageViewActivity.this, !gone);
-    }
 
-    public static void openImageView(final Activity activity, final String contextCode, final Collection<Image> images, final int pos) {
+    public static void openImageView(final Activity activity, final String contextCode, final Collection<Image> images, final int pos, final Func1<Integer, View> getImageView) {
         final Intent intent = new Intent(activity, ImageViewActivity.class);
         intent.putExtra(PARAM_IMAGE_CONTEXT_CODE, contextCode);
         intent.putExtra(PARAM_IMAGE_LIST, new ArrayList<>(images));
         intent.putExtra(PARAM_IMAGE_LIST_POS, pos);
-        activity.startActivityForResult(intent, RESULTCODE_IMAGEVIEW);
+        if (getImageView == null) {
+            activity.startActivity(intent);
+        } else {
+            activity.setExitSharedElementCallback(new SharedElementCallback() {
+
+                public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
+                    Log.i("exit");
+                    if (names == null || names.isEmpty() || !names.get(0).startsWith(TRANSITION_ID_BACK)) {
+                        return;
+                    }
+                    final int pos = Integer.valueOf(names.get(0).substring(TRANSITION_ID_BACK.length()));
+                    final View targetView = getImageView.call(pos);
+                    targetView.setTransitionName(names.get(0));
+                    sharedElements.clear();
+                    sharedElements.put(names.get(0), targetView);
+                }
+            });
+            final View posImageView = getImageView.call(pos);
+            posImageView.setTransitionName(TRANSITION_ID);
+            activity.startActivity(intent,
+                ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
+        }
     }
 
     private void setFinishResult() {

@@ -32,6 +32,11 @@
 
         <!-- forward style references to make them accessible in code -->
         <item name="quickLaunchButtonStyle">@style/quicklaunch_button</item>
+
+        <item name="android:windowSharedElementsUseOverlay">true</item>
+        <item name="android:windowSharedElementEnterTransition">@transition/smooth_transition</item>
+        <item name="android:windowSharedElementExitTransition">@transition/smooth_transition</item>
+
     </style>
 
     <!-- theme for alert dialogs -->

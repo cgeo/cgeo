@@ -192,6 +192,7 @@ public class ImageGalleryView extends LinearLayout {
             }
             setImageLayoutSizes(binding, imageSizeDp);
             binding.imageDescriptionMarker.setVisibility(img.hasDescription() ? View.VISIBLE : View.GONE);
+            binding.imageImage.setTransitionName("test" + position);
 
             imageDataMemoryCache.loadImage(img.getUrl(), p -> {
                 final BitmapDrawable bd = p.first;
@@ -344,17 +345,12 @@ public class ImageGalleryView extends LinearLayout {
 
     /** include this method in your activity to support activity-related tasks */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
-        if (requestCode == ImageViewActivity.RESULTCODE_IMAGEVIEW) {
-            scrollToIndex(data.getIntExtra(Intents.EXTRA_INDEX, -1));
-            return true;
-        } else {
-            return imageHelper.onActivityResult(requestCode, resultCode, data);
-        }
+        return imageHelper.onActivityResult(requestCode, resultCode, data);
     }
 
-    private void scrollToIndex(final int index) {
+    private View getImageViewForIndex(final int index, final boolean scrollToIndex) {
         if (index < 0) {
-            return;
+            return null;
         }
 
         int pos = 0;
@@ -370,14 +366,19 @@ public class ImageGalleryView extends LinearLayout {
         final int idx = index - pos;
         final ImageListAdapter adapter = categoryAdapters.get(category);
         if (category == null || adapter == null || idx < 0 || idx >= adapter.getItemCount()) {
-            return;
+            return null;
         }
 
         final RecyclerView recyclerView = categoryViews.get(category).imageGalleryList;
-        final View view = recyclerView.getChildAt(idx);
-        //scroll view into visibility
-        final Rect rect = new Rect(0, -100, view.getWidth(), view.getHeight() + 100);
-        view.requestRectangleOnScreen(rect, true);
+        final View view = recyclerView.getLayoutManager().findViewByPosition(idx);
+
+        if (scrollToIndex && view != null) {
+            //scroll view into visibility
+            final Rect rect = new Rect(0, -100, view.getWidth(), view.getHeight() + 100);
+            view.requestRectangleOnScreen(rect, true);
+        }
+
+        return view.findViewById(R.id.image_image);
     }
 
     public void clear() {
@@ -429,7 +430,9 @@ public class ImageGalleryView extends LinearLayout {
                 idx++;
             }
         }
-        ImageViewActivity.openImageView(this.activity, geocode, images, intentPos);
+        ImageViewActivity.openImageView(this.activity, geocode, images, intentPos,
+            p -> getImageViewForIndex(p, true));
+            //categoryViews.get(category).imageGalleryList.getChildAt(pos).findViewById(R.id.image_image));
     }
 
     private void showContextOptions(final Image img, final String category, final int pos,  final ImageListAdapter adapter) {
