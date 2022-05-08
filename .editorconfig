@@ -9,3 +9,10 @@ trim_trailing_whitespace = true
 [*.{gradle,java}]
 indent_size = 4
 indent_style = space
+
+# IntelliJ-specific configurations
+ij_continuation_indent_size = 8
+ij_java_do_not_wrap_after_single_annotation = true
+ij_java_doc_add_p_tag_on_empty_lines = false
+ij_java_imports_layout = cgeo.**,$cgeo.**,|,android.**,$android.**,|,androidx.**,$androidx.**,|,java.**,$java.**,|,javax.**,$javax.**,|,*,$*
+ij_java_space_inside_one_line_enum_braces = true
