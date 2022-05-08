@@ -171,7 +171,8 @@ public class SqlBuilder {
         return constructSqlInternal("count(*)", false, false);
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // readability of this method would decrease signigicantly if splitted across submethods
+    // readability of this method would decrease signigicantly if splitted across submethods
+    @SuppressWarnings("PMD.NPathComplexity")
     private String constructSqlInternal(final String columnString, final boolean includeOrderBy, final boolean includeLimit) {
 
         final StringBuilder sb = new StringBuilder("SELECT " + columnString + " FROM " + mainTable + " " + getMainTableId());

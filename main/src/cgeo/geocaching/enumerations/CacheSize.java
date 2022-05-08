@@ -15,7 +15,8 @@ import org.apache.commons.lang3.StringUtils;
 /**
  * Enum listing cache sizes
  */
-@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass") // static maps need to be initialized later in the class
+// static maps need to be initialized later in the class
+@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
 public enum CacheSize {
     NANO("Nano", 0, R.string.cache_size_nano, "nano", null, "XXS"), // used by OC only
     MICRO("Micro", 1, R.string.cache_size_micro, "micro", new int[]{2}, "XS"),

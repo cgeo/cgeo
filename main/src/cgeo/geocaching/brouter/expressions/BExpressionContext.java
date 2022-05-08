@@ -179,7 +179,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
     /**
      * decode a byte-array into a lookup data array
      */
-    @SuppressWarnings("PMD.NPathComplexity") // external code, do not refactor
+    // external code, do not refactor
+    @SuppressWarnings("PMD.NPathComplexity")
     private void decode(final int[] ld, final boolean inverseDirection, final byte[] ab) {
         final BitCoderContext ctx = ctxDecode;
         ctx.reset(ab);
@@ -543,7 +544,8 @@ public abstract class BExpressionContext implements IByteArrayUnifier {
      *
      * @return a newly created value element, if any, to optionally add aliases
      */
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // external code, do not refactor
+    // external code, do not refactor
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     public BExpressionLookupValue addLookupValue(final String name, final String value, final int[] lookupData2) {
         String valueMutable = value;
         BExpressionLookupValue newValue = null;

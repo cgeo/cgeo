@@ -17,7 +17,8 @@ import java.util.Map;
 
 import org.apache.commons.lang3.StringUtils;
 
-@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass") // static maps need to be initialized later in enums
+// static maps need to be initialized later in enums
+@SuppressWarnings("PMD.FieldDeclarationsShouldBeAtStartOfClass")
 public enum CacheAttribute {
     // read project/attributes/readme.txt
 

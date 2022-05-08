@@ -75,7 +75,8 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
         return set;
     }
 
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
     public void setRangeFromValues(final Collection<T> values, final T minUnlimitedValue, final T maxUnlimitedValue) {
         T min = null;
         T max = null;

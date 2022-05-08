@@ -268,7 +268,8 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         }
     }
 
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
     private int addItemInternal(final int ppos, final Collection<T> items) {
         if (items == null || items.isEmpty()) {
             return 0;

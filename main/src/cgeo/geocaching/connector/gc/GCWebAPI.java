@@ -866,7 +866,8 @@ class GCWebAPI {
     }
 
     /** For BASIC members, PREMIUM caches don't contain coordinates. This helper methods guesses distances for those caches */
-    @SuppressWarnings({"PMD.NPathComplexity"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity"})
     private static void tryGuessMissingDistances(final List<Geocache> caches, final WebApiSearch search) {
         if (caches == null || caches.isEmpty()) {
             return;

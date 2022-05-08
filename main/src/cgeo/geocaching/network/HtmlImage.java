@@ -206,9 +206,13 @@ public class HtmlImage implements Html.ImageGetter {
     public Observable<ImmutablePair<BitmapDrawable, Metadata>> fetchDrawableWithMetadata(final String url) {
         return observableCache.get(url);
     }
-    // Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
-    // the image. Downloads happen on downloadScheduler, in parallel with image decoding.
-    @SuppressWarnings("PMD.NPathComplexity") // splitting up that method would not help improve readability
+
+    /**
+     * Caches are loaded from disk on a computation scheduler to avoid using more threads than cores while decoding
+     * the image. Downloads happen on downloadScheduler, in parallel with image decoding.
+     */
+    // splitting up that method would not help improve readability
+    @SuppressWarnings("PMD.NPathComplexity")
     private Observable<ImmutablePair<BitmapDrawable, Metadata>> fetchDrawableUncached(final String url) {
         if (StringUtils.isBlank(url) || ImageUtils.containsPattern(url, BLOCKED)) {
             return Observable.just(ImmutablePair.of(ImageUtils.getTransparent1x1Drawable(resources), null));

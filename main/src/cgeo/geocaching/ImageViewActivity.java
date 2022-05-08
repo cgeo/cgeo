@@ -242,7 +242,8 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     }
 
     @SuppressLint("ClickableViewAccessibility") //this is due to Loupe hack
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void loadImageView(final int imagePos, final ImageviewImageBinding binding) {
         final Image currentImage = imageList.get(imagePos);
         if (currentImage == null) {

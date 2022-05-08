@@ -147,7 +147,8 @@ import org.mapsforge.map.layer.cache.TileCache;
 import org.mapsforge.map.model.common.Observer;
 
 @SuppressLint("ClickableViewAccessibility")
-@SuppressWarnings("PMD.ExcessiveClassLength") // This is definitely a valid issue, but can't be refactored in one step
+// This is definitely a valid issue, but can't be refactored in one step
+@SuppressWarnings("PMD.ExcessiveClassLength")
 public class NewMap extends AbstractBottomNavigationActivity implements Observer, FilteredActivity {
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
 

@@ -79,7 +79,8 @@ public final class Dialogs {
      * @param runAfterwards
      *            runnable (may be <tt>null</tt>) will be executed when ok button is clicked
      */
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up
+    // method readability will not improve by splitting it up
+    @SuppressWarnings("PMD.NPathComplexity")
     private static void internalOneTimeMessage(@NonNull final Context context, @Nullable final String title, final String message, @Nullable final String moreInfoURL, final OneTimeDialogs.DialogType dialogType, @Nullable final Observable<Drawable> iconObservable, final boolean cancellable, final Runnable runAfterwards) {
         final DialogTextCheckboxBinding content = DialogTextCheckboxBinding.inflate(LayoutInflater.from(context));
 

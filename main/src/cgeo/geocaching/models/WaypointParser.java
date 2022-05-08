@@ -292,7 +292,8 @@ public class WaypointParser {
      * Detect waypoint types in the personal note text. Tries to find various ways that
      * the waypoints name or id is written in given text.
      */
-    @SuppressWarnings("PMD.NPathComplexity") // method readability will not improve by splitting it up or using lambda-expressions
+    // method readability will not improve by splitting it up or using lambda-expressions
+    @SuppressWarnings("PMD.NPathComplexity")
     private WaypointType parseWaypointType(final String input, final String lastWord) {
         final String lowerInput = input.toLowerCase(Locale.getDefault());
         final String lowerLastWord = lastWord.toLowerCase(Locale.getDefault());

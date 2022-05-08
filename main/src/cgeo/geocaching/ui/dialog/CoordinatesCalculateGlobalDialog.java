@@ -287,7 +287,8 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         varListAdapter.addVisibleVariables(neededVars);
     }
 
-    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"}) // splitting up that method would not help improve readability
+    // splitting up that method would not help improve readability
+    @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void refreshType(final CalculatedCoordinateType newType, final boolean initialLoad) {
         if (!initialLoad && calcCoord.getType() == newType) {
             return;
