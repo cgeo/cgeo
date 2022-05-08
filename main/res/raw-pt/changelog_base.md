@@ -14,13 +14,17 @@
 ### Lista de caches
 
 - Novo: Adicionada opção "tem pontos adicionais definidos pelo utilizador" às opções avançadas do filtro
+- New: Allow inclusion of caches without D/T in filter
 - Correção: Lista de caches em cada mudança de localização, na ordenação por distância
 
 ### Mapa
 
+- New: Map theming for Google Maps
+- New: Map scaling options for OpenStreetMap (see theme options)
 - Alteração: Definições => Mapa => Toque longo no mapa irá agora também activar/desactivar um toque longo no mapa da cache (relevante para a criação de novos pontos adicionais para a cache actual)
 - Alteração: Não mostrar círculos de distância para caches arquivadas
 - Correcção: Encerramento inesperado com mapas OpenStreetMap em certas condições
+- Fix: Routing becoming unresponsive when many routing tiles are installed
 
 ### Geral
 
