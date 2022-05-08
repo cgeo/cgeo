@@ -75,7 +75,7 @@ public abstract class AbstractUnifiedMapView<T> {
         // default is empty
     }
 
-    public void selectThemeOptions() {
+    public void selectThemeOptions(final Activity activity) {
         // default is empty
     }
 

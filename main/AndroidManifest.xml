@@ -924,6 +924,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".maps.mapsforge.v6.RenderThemeSettings" />
+        <activity android:name=".unifiedmap.mapsforgevtm.MapsforgeThemeSettings" />
 
         <!-- fileprovider to be able to share files -->
         <provider

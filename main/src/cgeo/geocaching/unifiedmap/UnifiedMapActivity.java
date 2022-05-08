@@ -347,7 +347,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // theming options
         menu.findItem(R.id.menu_theme_mode).setVisible(tileProvider.supportsThemes());
-//@todo        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemes());
+        menu.findItem(R.id.menu_theme_options).setVisible(tileProvider.supportsThemes());
 //@todo        menu.findItem(R.id.menu_theme_legend).setVisible(tileProvider.supportsThemes() && RenderThemeLegend.supportsLegend());
 
         return result;
@@ -399,7 +399,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         } else if (id == R.id.menu_theme_mode) {
             tileProvider.getMap().selectTheme(this);
         } else if (id == R.id.menu_theme_options) {
-            tileProvider.getMap().selectThemeOptions();
+            tileProvider.getMap().selectThemeOptions(this);
         } else if (id == R.id.menu_theme_legend) {
             // @todo
             // RenderThemeLegend.showLegend(this, this.renderThemeHelper, mapView.getModel().displayModel);
