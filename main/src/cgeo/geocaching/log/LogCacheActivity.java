@@ -500,7 +500,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
                         }
                     }
                 }.execute();
-        }
+            }
         }
     }
 
@@ -705,7 +705,7 @@ public class LogCacheActivity extends AbstractLoggingActivity {
     private class Poster extends AsyncTaskWithProgressText<String, StatusCode> {
 
         Poster(final Activity activity, final String progressMessage) {
-            super(activity, res.getString(imageListFragment.getImages().isEmpty()  ?
+            super(activity, res.getString(imageListFragment.getImages().isEmpty() ?
                     R.string.log_posting_log :
                     R.string.log_saving_and_uploading), progressMessage);
         }

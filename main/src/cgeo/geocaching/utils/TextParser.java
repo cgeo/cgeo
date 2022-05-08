@@ -32,7 +32,7 @@ public final class TextParser {
     /**
      * creates a new TextParser with position set on the first char of given expression
      */
-    public TextParser(final String expression, final Predicate<Character> stopChecker)  {
+    public TextParser(final String expression, final Predicate<Character> stopChecker) {
         this.expression = expression == null ? "" : expression;
         this.stopChecker = stopChecker;
         next();

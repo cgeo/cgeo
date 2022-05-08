@@ -28,9 +28,9 @@ import org.apache.commons.lang3.StringUtils;
  */
 public final class FormulaParser {
 
-    public  static final char WPC_DELIM = '|';
-    public  static final String WPC_DELIM_STRING = "|";
-    public  static final String WPC_DELIM_PATTERN_STRING = "\\|";
+    public static final char WPC_DELIM = '|';
+    public static final String WPC_DELIM_STRING = "|";
+    public static final String WPC_DELIM_PATTERN_STRING = "\\|";
 
     private static final String COORD_FORMULA_PATTERN_STRING = "[\\[\\]\\(\\){}" + Formula.VALID_OPERATOR_PATTERN + "A-Z\\d]+";
     private static final Pattern PATTERN_BAD_BLANK_COMMA = Pattern.compile("(" + COORD_FORMULA_PATTERN_STRING + "), (" + COORD_FORMULA_PATTERN_STRING + ")");

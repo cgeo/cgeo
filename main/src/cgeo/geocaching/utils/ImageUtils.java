@@ -425,7 +425,7 @@ public final class ImageUtils {
         for (final Image image : images) {
             urls.add(image.getUrl());
         }
-        for (final String text: htmlText) {
+        for (final String text : htmlText) {
             HtmlCompat.fromHtml(StringUtils.defaultString(text), HtmlCompat.FROM_HTML_MODE_LEGACY, source -> {
                 if (!urls.contains(source) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
@@ -717,7 +717,7 @@ public final class ImageUtils {
             }
         }
 
-       File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
+        File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
         if (file == null || !file.exists()) {
             file = compressImageToFile(imageUri);
             file.deleteOnExit();

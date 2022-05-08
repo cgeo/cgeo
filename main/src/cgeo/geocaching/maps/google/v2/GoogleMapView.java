@@ -90,7 +90,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private int fromList = StoredList.TEMPORARY_LIST.id;
 
     public interface PostRealDistance {
-        void postRealDistance (float realDistance);
+        void postRealDistance(float realDistance);
     }
 
     public GoogleMapView(final Context context, final AttributeSet attrs) {

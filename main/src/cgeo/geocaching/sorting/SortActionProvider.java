@@ -84,4 +84,4 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         onClickListener.call(type);
         return true;
     }
- }
+}

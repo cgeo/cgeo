@@ -318,7 +318,7 @@ public class GeocacheFilter implements Cloneable {
             for (IGeocacheFilter fChild : filterToCheck.getChildren()) {
                 getAndChainIfPossibleInternal(fChild, chain);
             }
-        } else if (filterToCheck instanceof  BaseGeocacheFilter) {
+        } else if (filterToCheck instanceof BaseGeocacheFilter) {
             chain.add((BaseGeocacheFilter) filterToCheck);
         }
     }

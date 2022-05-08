@@ -380,11 +380,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             }
             initFollowMyLocationButton();
         } else if (id == R.id.menu_map_rotation_off) {
-                setMapRotation(item, MAPROTATION_OFF);
-            } else if (id == R.id.menu_map_rotation_manual) {
-                setMapRotation(item, MAPROTATION_MANUAL);
-            } else if (id == R.id.menu_map_rotation_auto) {
-                setMapRotation(item, MAPROTATION_AUTO);
+            setMapRotation(item, MAPROTATION_OFF);
+        } else if (id == R.id.menu_map_rotation_manual) {
+            setMapRotation(item, MAPROTATION_MANUAL);
+        } else if (id == R.id.menu_map_rotation_auto) {
+            setMapRotation(item, MAPROTATION_AUTO);
         } else if (id == R.id.menu_check_routingdata) {
             final BoundingBox bb = map.getBoundingBox();
             MapUtils.checkRoutingData(this, bb.getMinLatitude(), bb.getMinLongitude(), bb.getMaxLatitude(), bb.getMaxLongitude());

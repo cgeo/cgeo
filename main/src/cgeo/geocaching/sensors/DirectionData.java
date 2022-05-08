@@ -108,7 +108,7 @@ public class DirectionData {
         return this.azimuth == null ? 0.0f : this.azimuth;
     }
 
-     public static float radianToDegree(final float rad) {
+    public static float radianToDegree(final float rad) {
         return (float) (rad * 180 / Math.PI);
     }
 

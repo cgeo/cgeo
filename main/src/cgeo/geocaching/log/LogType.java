@@ -47,7 +47,7 @@ public enum LogType {
     PLACED_IT(14, "14", "placed it", "", R.string.log_placed, R.drawable.mark_green_more, R.drawable.tb_drop),
     GRABBED_IT(19, "19", "grabbed it", "", R.string.log_grabbed, R.drawable.mark_green_more, R.drawable.tb_grab),
     DISCOVERED_IT(48, "48", "Discovered It", "", R.string.log_discovered, R.drawable.mark_green, R.drawable.tb_discover),
-    VISIT(1001, "75", "visit", "", R.string.log_tb_visit, R.drawable.mark_green,  R.drawable.tb_visit),
+    VISIT(1001, "75", "visit", "", R.string.log_tb_visit, R.drawable.mark_green, R.drawable.tb_visit),
     MOVE_COLLECTION(69, "69", "unused_collection", "", R.string.log_movecollection, R.drawable.mark_gray, R.drawable.tb_collection),
     MOVE_INVENTORY(70, "70", "unused_inventory", "", R.string.log_moveinventory, R.drawable.mark_gray, R.drawable.tb_inventory),
     MARKED_MISSING(16, "16", "marked missing", "", R.string.log_marked_missing, R.drawable.mark_red, R.drawable.marker_archive),

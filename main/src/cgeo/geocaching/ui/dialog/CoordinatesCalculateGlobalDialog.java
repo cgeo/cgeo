@@ -85,7 +85,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
         return cid;
     }
 
-    private void saveAndFinishDialog () {
+    private void saveAndFinishDialog() {
         ActivityMixin.showToast(this.getActivity(), R.string.warn_calculator_state_save);
 
         final Activity activity = requireActivity();
@@ -324,7 +324,7 @@ public class CoordinatesCalculateGlobalDialog extends DialogFragment {
                 binding.PlainLon.setText(coords.second);
             }
         } else {
-            binding.NonPlainFormat.setData(newType, calcCoord.getLatitudePattern(),  calcCoord.getLongitudePattern(), currentGp);
+            binding.NonPlainFormat.setData(newType, calcCoord.getLatitudePattern(), calcCoord.getLongitudePattern(), currentGp);
         }
     }
 

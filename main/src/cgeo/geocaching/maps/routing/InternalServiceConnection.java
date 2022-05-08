@@ -11,7 +11,7 @@ import androidx.annotation.Nullable;
 
 public class InternalServiceConnection extends AbstractServiceConnection {
 
-    InternalServiceConnection (final @Nullable Runnable onServiceConnectedCallback) {
+    InternalServiceConnection(final @Nullable Runnable onServiceConnectedCallback) {
         super(onServiceConnectedCallback);
     }
 

@@ -689,7 +689,7 @@ public final class MapMarkerUtils {
         listsRead = false;
     }
 
-    private static ArrayList<Integer> getAssignedMarkers (final Geocache cache) {
+    private static ArrayList<Integer> getAssignedMarkers(final Geocache cache) {
         readLists();
 
         final ArrayList<Integer> result = new ArrayList<>();

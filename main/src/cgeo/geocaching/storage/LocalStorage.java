@@ -191,14 +191,14 @@ public final class LocalStorage {
 
     @NonNull
     public static File getMapThemeInternalSyncDir() {
-        final File dir =  new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
+        final File dir = new File(getInternalCgeoDirectory(), MAP_THEME_INTERNAL_DIR_NAME);
         dir.mkdirs();
         return dir;
     }
 
     @NonNull
     public static File getMapsforgeSvgCacheDir() {
-        final File dir =  new File(getInternalCgeoDirectory(), MAPSFORGE_SVG_CACHE_DIR_NAME);
+        final File dir = new File(getInternalCgeoDirectory(), MAPSFORGE_SVG_CACHE_DIR_NAME);
         dir.mkdirs();
         return dir;
     }
@@ -452,7 +452,7 @@ public final class LocalStorage {
             try (ContextLogger ignore = new ContextLogger(true, "LocalStorage: perform Migration from " + currentMigrateVersion + " to " + finalVersion)) {
                 return doMigration();
             } catch (RuntimeException re) {
-                Log.e("LocalStorage: Exception during Migration to v" + finalVersion + ", stays in v" + currentMigrateVersion , re);
+                Log.e("LocalStorage: Exception during Migration to v" + finalVersion + ", stays in v" + currentMigrateVersion, re);
                 return currentMigrateVersion;
             }
 
@@ -496,7 +496,7 @@ public final class LocalStorage {
             }
 
             return finalVersion;
-         }
+        }
 
         protected void onPostExecuteInternal(final Integer result) {
             Log.iForce("LocalStorage: migrated to v" + result);

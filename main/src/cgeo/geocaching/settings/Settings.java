@@ -1069,7 +1069,7 @@ public class Settings {
      * @return zoom used for the (live) map
      */
     private static int getMapZoom() {
-        return  Math.max(0, getInt(R.string.pref_lastmapzoom, 14));
+        return Math.max(0, getInt(R.string.pref_lastmapzoom, 14));
     }
 
     private static void setMapZoom(final int mapZoomLevel) {
@@ -1950,7 +1950,8 @@ public class Settings {
      */
     public static void setPersistableUri(@NonNull final PersistableUri persistedUri, @Nullable final String uri) {
         putString(persistedUri.getPrefKeyId(), uri);
-        handleLegacyValuesOnSet(persistedUri.getPrefKeyId());   }
+        handleLegacyValuesOnSet(persistedUri.getPrefKeyId());
+    }
 
     /**
      * gets the persisted uri for a persistable uris. Can be null

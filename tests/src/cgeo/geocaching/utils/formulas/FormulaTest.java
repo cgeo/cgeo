@@ -187,7 +187,7 @@ public class FormulaTest {
             results.add(f.evaluate(varMap, i));
         }
         final List<Value> expectedResultList = new ArrayList<>();
-        for (Object  o : expectedResults) {
+        for (Object o : expectedResults) {
             expectedResultList.add(o instanceof Value ? (Value) o : Value.of(o));
         }
         assertThat(results).containsExactlyElementsOf(expectedResultList);
@@ -234,7 +234,7 @@ public class FormulaTest {
     }
 
     @Test
-    public void  unaryOperators() {
+    public void unaryOperators() {
         assertThat(eval("(1+2)!")).isEqualTo(6);
         assertThat(eval("10--2")).isEqualTo(12);
         assertThat(eval("10- -+ +- -+ +-2")).isEqualTo(8);

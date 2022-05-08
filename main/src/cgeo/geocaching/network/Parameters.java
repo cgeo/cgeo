@@ -141,7 +141,7 @@ public class Parameters extends ArrayList<ImmutablePair<String, String>> {
     public static Parameters merge(@Nullable final Parameters... params) {
         Parameters result = null;
         if (params != null) {
-            for (final Parameters p: params) {
+            for (final Parameters p : params) {
                 if (result == null) {
                     result = p;
                 } else if (p != null) {

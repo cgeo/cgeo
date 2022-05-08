@@ -104,7 +104,7 @@ public final class Viewport {
      */
     public int count(@NonNull final Collection<? extends ICoordinates> points) {
         int total = 0;
-        for (final ICoordinates point: points) {
+        for (final ICoordinates point : points) {
             if (point != null && contains(point)) {
                 total += 1;
             }

@@ -148,7 +148,7 @@ import org.apache.commons.lang3.StringUtils;
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
 
     private static final int CACHE_LOADER_ID = 5; //arbitrary number, but must be fixed
-    private static final String EXTRAS_NEXTPAGE  = "extras_nextpage";
+    private static final String EXTRAS_NEXTPAGE = "extras_nextpage";
 
     private static final int REFRESH_WARNING_THRESHOLD = 100;
 
@@ -620,7 +620,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
 
         final AbstractList list = AbstractList.getListById(listId);
 
-        for (final AbstractList l: StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
+        for (final AbstractList l : StoredList.UserInterface.getMenuLists(false, PseudoList.NEW_LIST.id)) {
             mCacheListSpinnerAdapter.add(l);
         }
 
@@ -945,7 +945,7 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (menuItem == R.id.menu_export_gpx) {
             new GpxExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_export_fieldnotes) {
-                new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
+            new FieldNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_export_persnotes) {
             new PersonalNoteExport().export(adapter.getCheckedOrAllCaches(), this);
         } else if (menuItem == R.id.menu_upload_modifiedcoords) {

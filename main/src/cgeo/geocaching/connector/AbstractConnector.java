@@ -44,7 +44,7 @@ public abstract class AbstractConnector implements IConnector {
     @Override
     public Set<String> handledGeocodes(@NonNull final Set<String> geocodes) {
         final Set<String> strippedList = new HashSet<>();
-        for (final String geocode: geocodes) {
+        for (final String geocode : geocodes) {
             if (canHandle(geocode)) {
                 strippedList.add(geocode);
             }

@@ -20,7 +20,7 @@ public enum CacheType {
 
     TRADITIONAL("traditional", "Traditional Cache", "32bc9333-5e52-4957-b0f6-5a2c8fc7b257", R.string.traditional, R.string.traditional_short, R.drawable.type_traditional, "2", R.color.cacheType_traditional),
     MULTI("multi", "Multi-cache", "a5f6d0ad-d2f2-4011-8c14-940a9ebf3c74", R.string.multi, R.string.multi_short, R.drawable.type_multi, "3", R.color.cacheType_multi),
-    MYSTERY("mystery", "Unknown Cache", "40861821-1835-4e11-b666-8d41064d03fe", R.string.mystery, R.string.mystery_short, R.drawable.type_mystery,  "8", R.color.cacheType_mystery),
+    MYSTERY("mystery", "Unknown Cache", "40861821-1835-4e11-b666-8d41064d03fe", R.string.mystery, R.string.mystery_short, R.drawable.type_mystery, "8", R.color.cacheType_mystery),
     LETTERBOX("letterbox", "Letterbox hybrid", "4bdd8fb2-d7bc-453f-a9c5-968563b15d24", R.string.letterbox, R.string.letterbox_short, R.drawable.type_letterbox, "5", R.color.cacheType_mystery),
     EVENT("event", "Event Cache", "69eb8534-b718-4b35-ae3c-a856a55b0874", R.string.event, R.string.event_short, R.drawable.type_event, "6", R.color.cacheType_event),
     MEGA_EVENT("mega", "Mega-Event Cache", "69eb8535-b718-4b35-ae3c-a856a55b0874", R.string.mega, R.string.mega_short, R.drawable.type_mega, "453", R.color.cacheType_event),

@@ -16,7 +16,7 @@ public abstract class AbstractTileProvider {
     protected int zoomMin;
     protected int zoomMax;
 
-    protected AbstractTileProvider (final int zoomMin, final int zoomMax) {
+    protected AbstractTileProvider(final int zoomMin, final int zoomMax) {
         this.zoomMin = zoomMin;
         this.zoomMax = zoomMax;
     }

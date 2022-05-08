@@ -221,12 +221,12 @@ public final class SystemInformation {
         final ImmutablePair<String, Boolean> mapAtts = source.calculateMapAttribution(ctx);
         body.append(source.getName()) // unfortunately localized but an English string would require large refactoring. The sourceId provides an unlocalized and unique identifier.
                 .append("\n  - Id: ").append(source.getId())
-                .append("\n  - Atts: ").append(mapAtts == null ? "none" :  HtmlUtils.extractText(mapAtts.left).replace("\n", " / "))
+                .append("\n  - Atts: ").append(mapAtts == null ? "none" : HtmlUtils.extractText(mapAtts.left).replace("\n", " / "))
                 .append("\n  - Theme: ").append(StringUtils.isBlank(Settings.getSelectedMapRenderTheme()) ? "none" : Settings.getSelectedMapRenderTheme());
     }
 
 
-    private static void appendPersistedUriPermission(@NonNull final StringBuilder body, @NonNull  final Context context) {
+    private static void appendPersistedUriPermission(@NonNull final StringBuilder body, @NonNull final Context context) {
         final List<UriPermission> uriPerms = context.getContentResolver().getPersistedUriPermissions();
         body.append("\n- Persisted Uri Permissions: #").append(uriPerms.size());
         for (UriPermission uriPerm : uriPerms) {

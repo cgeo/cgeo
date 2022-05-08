@@ -418,7 +418,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
 
     protected void countVisibleCaches() {
         final Viewport viewport = mapView.getViewport();
-        cachesCnt =  viewport == null ? caches.size() : viewport.count(caches.getAsList());
+        cachesCnt = viewport == null ? caches.size() : viewport.count(caches.getAsList());
     }
 
     @Override
@@ -443,8 +443,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     protected Geopoint getIntentCoords() {
         if (mapOptions.coords != null) {
             return mapOptions.coords;
-        } else
-        if (mapOptions.geocode != null) {
+        } else if (mapOptions.geocode != null) {
             final Viewport bounds = DataStore.getBounds(mapOptions.geocode, false);
             if (bounds != null) {
                 return bounds.center;
@@ -456,8 +455,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     protected Viewport getIntentViewport() {
         if (mapOptions.coords != null) {
             return new Viewport(mapOptions.coords);
-        } else
-        if (mapOptions.geocode != null) {
+        } else if (mapOptions.geocode != null) {
             return DataStore.getBounds(mapOptions.geocode, Settings.getZoomIncludingWaypoints());
         }
         return null;
@@ -1591,9 +1589,9 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
                     final Message updateProgressMessage = new Message();
                     updateProgressMessage.what = UPDATE_PROGRESS;
 
-                    final Bundle updateProgressData =  new Bundle();
+                    final Bundle updateProgressData = new Bundle();
 
-                    updateProgressData.putLong(KEY_ELAPSED_MS,  System.currentTimeMillis() - loadDetailsStartTime);
+                    updateProgressData.putLong(KEY_ELAPSED_MS, System.currentTimeMillis() - loadDetailsStartTime);
                     updateProgressData.putInt(KEY_PROGRESS, progress);
                     updateProgressData.putInt(KEY_TOTAL, geocodes.size());
 

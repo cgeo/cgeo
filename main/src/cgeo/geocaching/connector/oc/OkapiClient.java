@@ -321,7 +321,7 @@ final class OkapiClient {
 
         String finder = null;
 
-        for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
             if (baseFilter instanceof OriginGeocacheFilter && !((OriginGeocacheFilter) baseFilter).allowsCachesOf(connector)) {
                 return new SearchResult(); //no need to search if connector is filtered out itself
             }
@@ -679,7 +679,7 @@ final class OkapiClient {
 
             // Get and iterate result list
             final List<Geocache> caches = new ArrayList<>(results.size());
-            for (final JsonNode cache: results) {
+            for (final JsonNode cache : results) {
                 caches.add(parseSmallCache((ObjectNode) cache));
             }
             return new Pair(caches, more);
@@ -734,7 +734,7 @@ final class OkapiClient {
 
             final ArrayNode images = (ArrayNode) response.get(CACHE_IMAGES);
             if (images != null) {
-                for (final JsonNode imageResponse: images) {
+                for (final JsonNode imageResponse : images) {
                     final String title = imageResponse.get(CACHE_IMAGE_CAPTION).asText();
                     final String url = absoluteUrl(imageResponse.get(CACHE_IMAGE_URL).asText(), cache.getGeocode());
                     // all images are added as spoiler images, although OKAPI has spoiler and non spoiler images
@@ -850,7 +850,7 @@ final class OkapiClient {
     @NonNull
     private static List<LogEntry> parseLogs(final ArrayNode logsJSON, final String geocode) {
         final List<LogEntry> result = new LinkedList<>();
-        for (final JsonNode logResponse: logsJSON) {
+        for (final JsonNode logResponse : logsJSON) {
             try {
                 final Date date = parseDate(logResponse.get(LOG_DATE).asText());
                 if (date == null) {
@@ -883,7 +883,7 @@ final class OkapiClient {
     private static List<Waypoint> parseWaypoints(final ArrayNode wptsJson) {
         List<Waypoint> result = null;
         final Geopoint pt0 = new Geopoint(0, 0);
-        for (final JsonNode wptResponse: wptsJson) {
+        for (final JsonNode wptResponse : wptsJson) {
             try {
                 final Waypoint wpt = new Waypoint(wptResponse.get(WPT_NAME).asText(),
                         parseWptType(wptResponse.get(WPT_TYPE).asText()),
@@ -913,7 +913,7 @@ final class OkapiClient {
             return Collections.emptyList();
         }
         final List<Trackable> result = new ArrayList<>();
-        for (final JsonNode trackableResponse: trackablesJson) {
+        for (final JsonNode trackableResponse : trackablesJson) {
             try {
                 final Trackable trk = new Trackable();
                 trk.setGeocode(trackableResponse.get(TRK_GEOCODE).asText());
@@ -1172,7 +1172,7 @@ final class OkapiClient {
                 OAuth.signOAuth(host, service.methodName, method, connector.isHttps(), params, tokens, connector.getCK(), connector.getCS());
                 break;
             }
-            case Level1 : {
+            case Level1: {
                 connector.addAuthentication(params);
                 break;
             }

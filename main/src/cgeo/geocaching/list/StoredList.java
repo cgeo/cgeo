@@ -97,7 +97,7 @@ public final class StoredList extends AbstractList {
             final CharSequence[] listTitles = new CharSequence[lists.size()];
             final boolean[] selectedItems = new boolean[lists.size()];
             final Set<Integer> allListIds = new HashSet<>(lists.size());
-            for (int i = 0 ; i < lists.size() ; i++) {
+            for (int i = 0; i < lists.size(); i++) {
                 final AbstractList list = lists.get(i);
                 listTitles[i] = list.getTitleAndCount();
                 selectedItems[i] = selectedListIds.contains(list.id);
@@ -309,7 +309,7 @@ public final class StoredList extends AbstractList {
                 selectedListIds.clear();
                 selectedListIds.addAll(lastSelectedLists);
                 final ListView listView = dialog.getListView();
-                for (int i = 0; i < lists.size() ; i++) {
+                for (int i = 0; i < lists.size(); i++) {
                     selectedItems[i] = selectedListIds.contains(lists.get(i).id);
                     listView.setItemChecked(i, selectedItems[i]);
                 }

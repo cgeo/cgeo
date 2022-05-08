@@ -72,7 +72,7 @@ public class CheckboxFilterViewHolder<T, F extends IGeocacheFilter> extends Base
         ll.setOrientation(LinearLayout.VERTICAL);
 
         //selectall/none
-        ll.addView(ViewUtils.createColumnView(getActivity(), null, columnCount, false,  i -> {
+        ll.addView(ViewUtils.createColumnView(getActivity(), null, columnCount, false, i -> {
             if (i < columnCount - 1) {
                 return null;
             }

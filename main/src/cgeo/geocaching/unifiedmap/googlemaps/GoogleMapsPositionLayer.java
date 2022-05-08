@@ -56,7 +56,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
     @Override
     public void updateTrack(final String key, final Route track) {
         super.updateTrack(key, track, Route::getAllPointsLatLng);
-    };
+    }
 
     // ========================================================================
     // repaint methods
@@ -94,7 +94,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
             .zIndex(ZINDEX_POSITION)
         );
 
-    };
+    }
 
     @Override
     protected void repaintHistory() {
@@ -105,7 +105,7 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
             .width(MapLineUtils.getHistoryLineWidth())
             .zIndex(ZINDEX_HISTORY)
         ));
-    };
+    }
 
     @Override
     protected void repaintRouteAndTracks() {
@@ -116,6 +116,6 @@ class GoogleMapsPositionLayer extends AbstractPositionLayer<LatLng> {
             .width(isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth())
             .zIndex(isTrack ? ZINDEX_TRACK : ZINDEX_ROUTE)
         ));
-    };
+    }
 
 }

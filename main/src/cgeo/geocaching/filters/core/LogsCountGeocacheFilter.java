@@ -14,7 +14,7 @@ import java.util.Map;
 
 import org.apache.commons.lang3.EnumUtils;
 
-public  class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> {
+public class LogsCountGeocacheFilter extends NumberRangeGeocacheFilter<Integer> {
 
     private static final String CONFIG_KEY_LOGTYPE = "logtype";
 

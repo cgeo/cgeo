@@ -187,7 +187,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     }
 
     private boolean deleteImageFromDeviceIfNotOriginal(final Image img) {
-        if (img != null &&  img.getUri() != null  && (originalImage == null || !img.getUri().equals(originalImage.getUri()))) {
+        if (img != null && img.getUri() != null && (originalImage == null || !img.getUri().equals(originalImage.getUri()))) {
             return ImageUtils.deleteImage(img.getUri());
         }
         return false;
@@ -197,7 +197,7 @@ public class ImageSelectActivity extends AbstractActionBarActivity {
     protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);  // call super to make lint happy
         imageActivityHelper.onActivityResult(requestCode, resultCode, data);
-   }
+    }
 
     private void loadImagePreview() {
         ImageActivityHelper.displayImageAsync(image, binding.imagePreview);

@@ -61,7 +61,7 @@ public class ExpressionParser<T extends IExpression<T>> {
         return new Parser(config).parse();
     }
 
-    public T createWithNull(final String config)  {
+    public T createWithNull(final String config) {
         try {
             return create(config);
         } catch (ParseException pe) {
@@ -114,7 +114,7 @@ public class ExpressionParser<T extends IExpression<T>> {
         return config == null ? null : config.getSingleValue();
     }
 
-    public static int parseToNextDelim(final String text, final int startIdx, final Set<Character> endChars, final StringBuilder result)  {
+    public static int parseToNextDelim(final String text, final int startIdx, final Set<Character> endChars, final StringBuilder result) {
         int idx = startIdx;
         boolean nextCharIsEscaped = false;
         while (true) {
@@ -288,7 +288,7 @@ public class ExpressionParser<T extends IExpression<T>> {
                 expression = registeredExpressions.get("").get();
                 typeConfig.put(null, Collections.singletonList(typeId));
                 expression.setConfig(typeConfig);
-            } else  {
+            } else {
                 expression = null; //make compiler happy, value will never be used
                 throwParseException("No expression type found for id '" + typeId + "' and no default expression could be applied");
             }
@@ -296,7 +296,7 @@ public class ExpressionParser<T extends IExpression<T>> {
             return Objects.requireNonNull(expression);
         }
 
-        private String parseToNextDelim()  {
+        private String parseToNextDelim() {
             final StringBuilder result = new StringBuilder();
 
             idx = ExpressionParser.parseToNextDelim(config, idx, endChars, result);

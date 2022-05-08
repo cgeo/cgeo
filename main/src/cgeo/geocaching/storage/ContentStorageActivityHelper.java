@@ -343,7 +343,7 @@ public class ContentStorageActivityHelper {
                 selectedUris.add(intent.getData());
             }
             if (intent.getClipData() != null) {
-                for (int idx = 0; idx < intent.getClipData().getItemCount(); idx ++) {
+                for (int idx = 0; idx < intent.getClipData().getItemCount(); idx++) {
                     final Uri uri = intent.getClipData().getItemAt(idx).getUri();
                     if (uri != null) {
                         selectedUris.add(uri);

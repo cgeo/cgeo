@@ -1792,7 +1792,7 @@ public class DataStore {
      * @param sequence      immutable name of sequence
      * @return id           next free sequence number reserved for caller
      */
-    private static long incSequence (final String sequence, final long minValue) {
+    private static long incSequence(final String sequence, final long minValue) {
         init();
 
         database.beginTransaction();
@@ -2731,7 +2731,7 @@ public class DataStore {
             new LinkedList<>(),
             GET_STRING_0);
         final ArrayList<Geocache> caches = new ArrayList<>(loadCaches(geocodes, LoadFlags.LOAD_CACHE_OR_DB));
-        Collections.sort(caches, (final Geocache cache1, final Geocache cache2) -> - Long.compare(cache1.getUpdated(), cache2.getUpdated()));
+        Collections.sort(caches, (final Geocache cache1, final Geocache cache2) -> -Long.compare(cache1.getUpdated(), cache2.getUpdated()));
         return caches;
     }
 
@@ -3299,7 +3299,7 @@ public class DataStore {
             LogEntry.Builder log = null;
             int cnt = 0;
             while (cursor.moveToNext() && logs.size() < 100) {
-                cnt ++;
+                cnt++;
                 if (log == null || log.getId() != cursor.getInt(0)) {
                     // Start of a new log entry group (we may have several entries if the log has several images).
                     if (log != null) {
@@ -3320,7 +3320,7 @@ public class DataStore {
                     }
                 } else {
                     // We cannot get several lines for the same log entry if it does not contain an image.
-                  log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
+                    log.addLogImage(new Image.Builder().setUrl(cursor.getString(12)).setTitle(cursor.getString(11)).setDescription(cursor.getString(13)).build());
                 }
             }
             if (log != null) {
@@ -3490,7 +3490,7 @@ public class DataStore {
     }
 
     // get number of offline founds for a specific connector
-    public static int getFoundsOffline (final ILogin connector) {
+    public static int getFoundsOffline(final ILogin connector) {
         int counter = 0;
 
         try {
@@ -3501,7 +3501,7 @@ public class DataStore {
 
             for (String geocode : geocodes) {
                 if (ConnectorFactory.getConnector(geocode).getName().equals(connector.getName())) {
-                    counter ++;
+                    counter++;
                 }
             }
         } catch (final Exception e) {

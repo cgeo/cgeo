@@ -116,4 +116,4 @@ public class CacheVariableList extends VariableList {
         }
         return hasCalculatedWp;
     }
- }
+}

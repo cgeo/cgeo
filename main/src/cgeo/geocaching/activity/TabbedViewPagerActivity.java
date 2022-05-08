@@ -59,7 +59,7 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
 
         swipeRefreshLayout = findViewById(R.id.swipe_refresh);
         if (swipeRefreshLayout != null) {
-            final DisplayMetrics outMetrics = new DisplayMetrics ();
+            final DisplayMetrics outMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(outMetrics);
 
             final float dpHeight = outMetrics.heightPixels / getResources().getDisplayMetrics().density;

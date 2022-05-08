@@ -328,7 +328,7 @@ public abstract class ManagedListAdapter<T, V extends RecyclerView.ViewHolder> e
         }
         final T item = this.itemList.remove(pos);
         this.originalItemList.remove(originalIndex(pos));
-        for (int p = pos ; p < this.itemList.size(); p++) {
+        for (int p = pos; p < this.itemList.size(); p++) {
             this.itemToOriginalItemMap.put(p, originalIndex(p + 1) - 1);
         }
         this.itemToOriginalItemMap.remove(this.itemList.size());

@@ -215,7 +215,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         binding.imageviewViewpager.setCurrentItem(imagePos + imageAdapter.getCount() / 2);
         binding.imageviewViewpager.setOffscreenPageLimit(1);
 
-   }
+    }
 
     @Override
     public void onBackPressed() {
@@ -313,7 +313,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                 }
 
                 @Override
-                public void onViewTranslate(@NonNull final ImageView imageView, final  float v) {
+                public void onViewTranslate(@NonNull final ImageView imageView, final float v) {
                     //empty on purpose
                 }
 

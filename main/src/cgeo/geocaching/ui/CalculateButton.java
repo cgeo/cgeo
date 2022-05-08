@@ -84,7 +84,7 @@ public class CalculateButton extends EditButton {
     /**
      * Buttons displaying a custom value are given a 'steel-like' appearance so as to distinguish them from regular buttons
      */
-    private  void setBackgroundColour() {
+    private void setBackgroundColour() {
         /* @todo adapt to new Material theme
         switch (buttonData.type) {
 

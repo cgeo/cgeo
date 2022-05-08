@@ -147,7 +147,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * Instead of a message set with cancelMessage parameter you may set an cancelListener to the progress dialog
      * @param cancelListener
      */
-    public void setOnCancelListener (final DialogInterface.OnClickListener cancelListener) {
+    public void setOnCancelListener(final DialogInterface.OnClickListener cancelListener) {
         progress.setOnCancelListener(cancelListener);
     }
 }

@@ -126,7 +126,7 @@ public class ItemRangeSlider<T> extends LinearLayout {
         return new ImmutablePair<>(items.get(Math.round(binding.sliderInternal.getValues().get(0))), items.get(Math.round(binding.sliderInternal.getValues().get(1))));
     }
 
-    private String getLabel(final int idx, final  T value) {
+    private String getLabel(final int idx, final T value) {
         if (value == null) {
             return "-";
         }
@@ -136,4 +136,4 @@ public class ItemRangeSlider<T> extends LinearLayout {
         return String.valueOf(value);
     }
 
- }
+}

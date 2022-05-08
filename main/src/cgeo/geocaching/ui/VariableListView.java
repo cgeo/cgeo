@@ -297,7 +297,7 @@ public class VariableListView extends LinearLayout {
             }
 
             if (viewHolder.viewVariableFormulaText != null) {
-                viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s ->  {
+                viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
                     if (textListeningActive) {
                         changeFormulaFor(viewHolder.getBindingAdapterPosition(), s.toString());
                         if (this.varChangeCallback != null) {

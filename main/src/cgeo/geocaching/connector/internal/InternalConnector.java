@@ -72,7 +72,7 @@ public class InternalConnector extends AbstractConnector implements ISearchByGeo
     }
 
 
-    public static String geocodeFromId (final long id) {
+    public static String geocodeFromId(final long id) {
         return PREFIX + id;
     }
 

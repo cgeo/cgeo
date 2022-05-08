@@ -61,7 +61,7 @@ public class FolderUtils {
 
     public static final String FOLDER_SYNC_INFO_FILENAME = "_cgeoFolderSyncInfo.txt";
 
-    private static final int COPY_FLAG_DIR_BEFORE  = 1;
+    private static final int COPY_FLAG_DIR_BEFORE = 1;
     private static final int COPY_FLAG_DIR_NEEDED_FOR_TARGET = 2;
 
     private final ContentStorage pls = ContentStorage.get();
@@ -72,7 +72,7 @@ public class FolderUtils {
         return INSTANCE;
     }
 
-    private enum TreeWalkResult { CONTINUE, STOP, STOP_AFTER_FOLDER };
+    private enum TreeWalkResult { CONTINUE, STOP, STOP_AFTER_FOLDER }
 
 
     public List<ImmutablePair<ContentStorage.FileInformation, String>> getAllFiles(final Folder folder) {
@@ -100,7 +100,7 @@ public class FolderUtils {
                 if (!fi.left.isDirectory && (filter == null || filter.test(fi.left))) {
                     result.add(new ImmutablePair<>(fi.left, paths.peek() + fi.left.name));
                 }
-                return  TreeWalkResult.CONTINUE;
+                return TreeWalkResult.CONTINUE;
             });
             cLog.add("#e:%d", result.size());
             return result;
@@ -109,7 +109,7 @@ public class FolderUtils {
 
     public static class FolderInfo {
 
-        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0,  0l, true, null);
+        public static final FolderInfo EMPTY_FOLDER = new FolderInfo(0, 0, 0l, true, null);
 
         public final int fileCount;
         public final int dirCount;
@@ -395,7 +395,7 @@ public class FolderUtils {
     }
 
     private static String getFileSyncToken(final ContentStorage.FileInformation fi) {
-        return fi.lastModified + "-"  + fi.size;
+        return fi.lastModified + "-" + fi.size;
     }
 
 

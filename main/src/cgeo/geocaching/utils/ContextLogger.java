@@ -69,11 +69,11 @@ public class ContextLogger implements Closeable {
         return this.doLog;
     }
 
-    public <T> String  toStringLimited(final Collection<T> collection, final int limit) {
+    public <T> String toStringLimited(final Collection<T> collection, final int limit) {
         return toStringLimited(collection, limit, String::valueOf);
     }
 
-    public <T> String  toStringLimited(final Collection<T> collection, final int limit, final Func1<T, String> mapper) {
+    public <T> String toStringLimited(final Collection<T> collection, final int limit, final Func1<T, String> mapper) {
         if (collection == null || !isActive()) {
             return "#-[]";
         }

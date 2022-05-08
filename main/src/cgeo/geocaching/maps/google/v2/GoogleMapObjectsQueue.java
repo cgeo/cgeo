@@ -52,7 +52,7 @@ public class GoogleMapObjectsQueue {
 
     void requestRepaint() {
         lock.lock();
-        if (!repaintRequested)  {
+        if (!repaintRequested) {
             repaintRequested = true;
             runOnUIThread(repaintRunner);
         }
@@ -72,11 +72,9 @@ public class GoogleMapObjectsQueue {
         }
         if (obj instanceof Marker) {
             ((Marker) obj).remove();
-        } else
-        if (obj instanceof Circle) {
+        } else if (obj instanceof Circle) {
             ((Circle) obj).remove();
-        } else
-        if (obj instanceof Polyline) {
+        } else if (obj instanceof Polyline) {
             ((Polyline) obj).remove();
         } else {
             throw new IllegalStateException();

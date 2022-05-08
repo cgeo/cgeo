@@ -281,13 +281,13 @@ final class ALApi {
         List<Waypoint> result = null;
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
-        for (final JsonNode wptResponse: wptsJson) {
+        for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
                 final Waypoint wpt = new Waypoint(wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
-                final String desc  = wptResponse.get("Description").asText();
+                final String desc = wptResponse.get("Description").asText();
 
                 // For ALCs, waypoints don't have a geocode, of course they have an id (a uuid) though.
                 // We artificially create a geocode and a prefix as at least the prefix is used when

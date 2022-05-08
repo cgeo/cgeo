@@ -262,7 +262,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         try (ContextLogger cLog = new ContextLogger(Log.LogLevel.DEBUG, "MainActivity.onCreate")) {
-           // don't call the super implementation with the layout argument, as that would set the wrong theme
+            // don't call the super implementation with the layout argument, as that would set the wrong theme
             super.onCreate(savedInstanceState);
 
             binding = MainActivityBinding.inflate(getLayoutInflater());

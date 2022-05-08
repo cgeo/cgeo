@@ -91,7 +91,7 @@ public class SqlBuilder {
     }
 
     public SqlBuilder addWhereTrue() {
-       return addWhere("1=1");
+        return addWhere("1=1");
     }
 
     /**

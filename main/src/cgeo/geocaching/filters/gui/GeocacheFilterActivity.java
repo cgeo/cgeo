@@ -554,5 +554,5 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         super.onDestroy();
     }
 
- }
+}
 

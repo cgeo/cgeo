@@ -30,7 +30,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
     private Func1<D, String> valueDisplayTextGetter;
     private Func1<D, ImageParam> valueDrawableGetter;
 
-   public static <DD, FF extends ValueGroupGeocacheFilter<DD, ?>>  ValueGroupFilterAccessor<DD, FF> createForValueGroupFilter() {
+    public static <DD, FF extends ValueGroupGeocacheFilter<DD, ?>> ValueGroupFilterAccessor<DD, FF> createForValueGroupFilter() {
         return new ValueGroupFilterAccessor<DD, FF>()
             .setFilterValueGetter(ValueGroupGeocacheFilter::getValues)
             .setFilterValueSetter(ValueGroupGeocacheFilter::setValues)
@@ -69,7 +69,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
         return this;
     }
 
-    public ValueGroupFilterAccessor<D, F> setGeocacheValueGetter(final Func2< F, Geocache, Set<D>> geocacheValueGetter) {
+    public ValueGroupFilterAccessor<D, F> setGeocacheValueGetter(final Func2<F, Geocache, Set<D>> geocacheValueGetter) {
         this.geocacheValueGetter = geocacheValueGetter;
         return this;
     }
@@ -116,7 +116,7 @@ public class ValueGroupFilterAccessor<D, F extends IGeocacheFilter> {
     }
 
     public boolean hasCacheValueGetter() {
-       return this.geocacheValueGetter != null;
+        return this.geocacheValueGetter != null;
     }
 
     public Set<D> getCacheValues(final F filter, final Geocache cache) {

@@ -114,7 +114,7 @@ public class ButtonToggleGroup extends MaterialButtonToggleGroup {
                     final Button child = (Button) group.getChildAt(pos);
                     child.measure(0, 0);
                     maxWidth = Math.max(maxWidth, child.getMeasuredWidth());
-                    foundCnt ++;
+                    foundCnt++;
                 }
             }
             if (foundCnt < 1) {

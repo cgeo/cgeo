@@ -391,7 +391,7 @@ public abstract class AbstractLocusApp extends AbstractApp {
     static ArrayList<GeocachingAttribute> toLocusAttributes(final List<String> attributes) {
         final ArrayList<GeocachingAttribute> loAttributes = new ArrayList<>();
 
-        for (String attribute:attributes) {
+        for (String attribute : attributes) {
             String rawAttribute = CacheAttribute.trimAttributeName(attribute);
             if (rawAttribute.equals("")) {
                 continue;

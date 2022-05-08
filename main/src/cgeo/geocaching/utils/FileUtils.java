@@ -283,11 +283,11 @@ public final class FileUtils {
 
         File tempFile = null;
         try {
-                tempFile = File.createTempFile("download", null, targetFile.getParentFile());
-                final FileOutputStream fos = new FileOutputStream(tempFile);
-                IOUtils.copy(inputStream, fos);
-                fos.close();
-                return tempFile.renameTo(targetFile);
+            tempFile = File.createTempFile("download", null, targetFile.getParentFile());
+            final FileOutputStream fos = new FileOutputStream(tempFile);
+            IOUtils.copy(inputStream, fos);
+            fos.close();
+            return tempFile.renameTo(targetFile);
         } catch (final IOException e) {
             Log.e("FileUtils.saveToFile", e);
             deleteIgnoringFailure(tempFile);

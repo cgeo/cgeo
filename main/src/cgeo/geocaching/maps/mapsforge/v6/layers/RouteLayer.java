@@ -16,7 +16,7 @@ public class RouteLayer extends AbstractRouteLayer implements IndividualRoute.Up
     private PostRealDistance postRealRouteDistance = null;
 
     public interface PostRealDistance {
-        void postRealDistance (float realDistance);
+        void postRealDistance(float realDistance);
     }
 
     public RouteLayer(final PostRealDistance postRealRouteDistance) {

@@ -84,7 +84,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
 
     private static final int AVAILABLE_THEMES_SCAN_MAXDEPTH = 2;
 
-    private  static final Object availableThemesMutex = new Object();
+    private static final Object availableThemesMutex = new Object();
     private static final List<ThemeData> availableThemes = new ArrayList<>();
     private static boolean availableThemesInitialized = false;
 
@@ -360,7 +360,7 @@ public class RenderThemeHelper implements XmlRenderThemeMenuCallback {
             for (ThemeData avTheme : avThemes) {
                 final String avThemeId = avTheme.id;
 
-               //might be a legacy value. Try to find a matching theme ending with stored value
+                //might be a legacy value. Try to find a matching theme ending with stored value
                 if (themeIdCandidate.endsWith("/" + avThemeId)) {
                     selectedTheme = avTheme;
                     break;

@@ -225,7 +225,7 @@ public class ImageGalleryView extends LinearLayout {
             });
             binding.imageImage.setOnLongClickListener(v -> {
                 final ImageListData ild = getItem(holder.getBindingAdapterPosition());
-                showContextOptions(ild.image, ild.category, holder.getBindingAdapterPosition(),  this);
+                showContextOptions(ild.image, ild.category, holder.getBindingAdapterPosition(), this);
                 return true;
             });
         }
@@ -253,7 +253,7 @@ public class ImageGalleryView extends LinearLayout {
         this.context = new ContextThemeWrapper(getContext(), R.style.cgeo);
         this.activity = ViewUtils.toActivity(this.context);
         recalculateLayout(getContext().getResources().getConfiguration());
-     }
+    }
 
     public void setup(final String geocode) {
         this.geocode = geocode;
@@ -435,7 +435,7 @@ public class ImageGalleryView extends LinearLayout {
             //categoryViews.get(category).imageGalleryList.getChildAt(pos).findViewById(R.id.image_image));
     }
 
-    private void showContextOptions(final Image img, final String category, final int pos,  final ImageListAdapter adapter) {
+    private void showContextOptions(final Image img, final String category, final int pos, final ImageListAdapter adapter) {
         if (activity == null || img == null) {
             return;
         }

@@ -24,7 +24,7 @@ import java.util.Set;
  * <p>
  * It is vital that these methods are IGNORED/SUPPRESSED by default!
  */
-public class DataStoreTestHelpers extends CGeoTestCase  {
+public class DataStoreTestHelpers extends CGeoTestCase {
 
     private static final boolean EXECUTE_METHODS = false;
 

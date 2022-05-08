@@ -683,7 +683,7 @@ public class CoordinatesInputDialog extends DialogFragment {
         }
     }
 
-    private void saveAndFinishDialog () {
+    private void saveAndFinishDialog() {
         if (!areCurrentCoordinatesValid(true)) {
             return;
         }

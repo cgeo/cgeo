@@ -378,7 +378,7 @@ public class CalculatedCoordinateInputGuideView extends LinearLayout {
         return b1 && b2;
     }
 
- @SuppressLint("SetTextI18n")
+    @SuppressLint("SetTextI18n")
     private void changeHemisphereButtonValue(final Button hem) {
         final char newChar;
         switch (Character.toUpperCase(hem.getText().charAt(0))) {

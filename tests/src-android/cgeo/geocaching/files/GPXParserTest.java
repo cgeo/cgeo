@@ -484,7 +484,7 @@ public class GPXParserTest extends AbstractResourceInstrumentationTestCase {
         final List<Geocache> caches = readGPX11(R.raw.lab_stary_prostejov);
         assertThat(caches).hasSize(5);
 
-        for (final Geocache lab :caches) {
+        for (final Geocache lab : caches) {
             assertThat(lab).isNotNull();
 
             // cache type

@@ -243,7 +243,7 @@ class GCWebAPI {
                 // -> after "from", set "placedFrom" to one day BEFORE
                 placedFrom = PARAM_DATE_FORMATTER.format(new Date(from.getTime() - ONE_DAY_MILLISECONDS));
                 placedTo = null;
-            } else  {
+            } else {
                 final boolean fromBeforeTo = from.before(to);
                 placedFrom = PARAM_DATE_FORMATTER.format(fromBeforeTo ? from : to);
                 placedTo = PARAM_DATE_FORMATTER.format(fromBeforeTo ? to : from);
@@ -678,7 +678,7 @@ class GCWebAPI {
      * {"guid":"14242d4d-...","url":"https://img.geocaching.com/14242d4d-...jpg","thumbnailUrl":"https://img.geocaching.com/large/14242d4d-...jpg","success":true}
      */
     @JsonIgnoreProperties(ignoreUnknown = true)
-    static final class PostLogImageResponse extends HttpResponse  {
+    static final class PostLogImageResponse extends HttpResponse {
         @JsonProperty("guid")
         String guid;
         @JsonProperty("url")

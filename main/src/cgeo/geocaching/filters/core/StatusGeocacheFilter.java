@@ -479,7 +479,7 @@ public class StatusGeocacheFilter extends BaseGeocacheFilter {
     }
 
     private boolean hasFoundOfflineLog(final Geocache cache) {
-        if  (cache.hasLogOffline()) {
+        if (cache.hasLogOffline()) {
             return cache.getOfflineLog().logType.isFoundLog();
         }
         return false;

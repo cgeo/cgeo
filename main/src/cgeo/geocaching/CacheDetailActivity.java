@@ -1637,9 +1637,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.sendToAlc.setOnClickListener(v -> {
                     // re-check installation state, might have changed since creating the view
                     if (alc != null) {
-                      final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getUrl()));
-                      intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                      activity.startActivity(intent);
+                        final Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(cache.getUrl()));
+                        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        activity.startActivity(intent);
                     } else {
                         ProcessUtils.openMarket(activity, getString(R.string.package_alc));
                     }
@@ -2647,7 +2647,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return new VariablesViewPageFragment();
         }
         throw new IllegalStateException(); // cannot happen as long as switch case is enum complete
-    };
+    }
 
     @SuppressLint("SetTextI18n")
     static boolean setOfflineHintText(final OnClickListener showHintClickListener, final TextView offlineHintTextView, final String hint, final String personalNote) {

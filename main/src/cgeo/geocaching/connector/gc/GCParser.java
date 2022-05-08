@@ -1013,7 +1013,7 @@ public final class GCParser {
      * @return A non-null list (which might be empty) on success. Null on error.
      */
     @Nullable
-    public static List<GCList> searchBookmarkLists () {
+    public static List<GCList> searchBookmarkLists() {
         final Parameters params = new Parameters();
         params.add("skip", "0");
         params.add("take", "100");
@@ -1062,7 +1062,7 @@ public final class GCParser {
      * @return guid of the new list.
      */
     @Nullable
-    public static String createBookmarkList (final String name) {
+    public static String createBookmarkList(final String name) {
         final ObjectNode jo = new ObjectNode(JsonUtils.factory).put("name", name);
         jo.putObject("type").put("code", "bm");
 
@@ -1094,7 +1094,7 @@ public final class GCParser {
      *
      * @return successful?
      */
-    public static boolean addCachesToBookmarkList (final String listGuid, final List<Geocache> geocaches) {
+    public static boolean addCachesToBookmarkList(final String listGuid, final List<Geocache> geocaches) {
         final ArrayNode arrayNode = JsonUtils.createArrayNode();
 
         for (Geocache geocache : geocaches) {
@@ -1121,7 +1121,7 @@ public final class GCParser {
      * @return A non-null list (which might be empty) on success. Null on error.
      */
     @Nullable
-    public static List<GCList> searchPocketQueries () {
+    public static List<GCList> searchPocketQueries() {
         final String page = GCLogin.getInstance().getRequestLogged("https://www.geocaching.com/pocket/default.aspx", null);
         if (StringUtils.isBlank(page)) {
             Log.e("GCParser.searchPocketQueryList: No data from server");
@@ -1719,7 +1719,7 @@ public final class GCParser {
                 }
 
                 final ArrayNode data = (ArrayNode) resp.get("data");
-                for (final JsonNode entry: data) {
+                for (final JsonNode entry : data) {
                     final String logType = entry.path("LogType").asText();
 
                     final long date;
@@ -1748,7 +1748,7 @@ public final class GCParser {
                             .setFriend(markAsFriendsLog);
 
                     final ArrayNode images = (ArrayNode) entry.get("Images");
-                    for (final JsonNode image: images) {
+                    for (final JsonNode image : images) {
                         final String url = "https://imgcdn.geocaching.com/cache/log/large/" + image.path("FileName").asText();
                         final String title = TextUtils.removeControlCharacters(image.path("Name").asText());
                         String description = image.path("Descr").asText();

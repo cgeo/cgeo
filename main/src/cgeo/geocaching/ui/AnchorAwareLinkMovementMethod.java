@@ -108,7 +108,7 @@ public class AnchorAwareLinkMovementMethod extends LinkMovementMethod {
     }
 
     @Override
-    public boolean canSelectArbitrarily () {
+    public boolean canSelectArbitrarily() {
         return true;
     }
 }

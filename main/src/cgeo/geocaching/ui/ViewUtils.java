@@ -135,7 +135,7 @@ public class ViewUtils {
     public static ViewGroup createColumnView(final Context ctx, final LinearLayout root, final int columnCount, final boolean withSeparator, final Func1<Integer, View> columnViewCreator) {
 
         final List<Float> columnWidths = new ArrayList<>();
-        for (int c = 0 ; c < columnCount * 2 - 1; c++) {
+        for (int c = 0; c < columnCount * 2 - 1; c++) {
             columnWidths.add(c % 2 == 0 ? 1f : 0.1f);
         }
 
@@ -430,7 +430,7 @@ public class ViewUtils {
     }
 
 
-    public static Bitmap drawableToBitmap (final Drawable drawable) {
+    public static Bitmap drawableToBitmap(final Drawable drawable) {
         final Bitmap bitmap;
 
         if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
@@ -445,12 +445,12 @@ public class ViewUtils {
         return bitmap;
     }
 
-    public static BitmapDrawable bitmapToDrawable (final Bitmap bitmap) {
+    public static BitmapDrawable bitmapToDrawable(final Bitmap bitmap) {
         return new BitmapDrawable(APP_RESOURCES, bitmap);
     }
 
     public static TextWatcher createSimpleWatcher(final Consumer<Editable> callback) {
-        return  new TextWatcher() {
+        return new TextWatcher() {
             @Override
             public void beforeTextChanged(final CharSequence s, final int start, final int count, final int after) {
                 // Intentionally left empty

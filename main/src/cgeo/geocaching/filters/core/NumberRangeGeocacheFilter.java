@@ -77,7 +77,7 @@ public abstract class NumberRangeGeocacheFilter<T extends Number & Comparable<T>
         numberRangeFilter.setRangeFromValues(values, minUnlimitedValue, maxUnlimitedValue);
     }
 
-   @Override
+    @Override
     public void setConfig(final ExpressionConfig config) {
         numberRangeFilter.setConfig(config.getDefaultList());
     }

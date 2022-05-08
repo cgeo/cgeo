@@ -163,7 +163,7 @@ public class BackupUtils {
 
     /* Public methods containing question dialogs, etc */
 
-    public void selectBackupDirIntent () {
+    public void selectBackupDirIntent() {
         Toast.makeText(activityContext, R.string.init_backup_restore_different_backup_explanation, Toast.LENGTH_LONG).show();
         fileSelector.selectFolder(PersistableFolder.BACKUP.getUri());
     }

@@ -264,7 +264,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
             return new ImmutablePair<>(attributation.toString(), true);
         }
 
-     }
+    }
 
     @NonNull
     public String getAttributionFor(final Uri filePath) {
@@ -321,7 +321,7 @@ public final class MapsforgeMapProvider extends AbstractMapProvider {
                 //map file is valid but has no attribution -> return default value
                 return OFFLINE_MAP_DEFAULT_ATTRIBUTION;
             }
-        }  catch (MapFileException ex) {
+        } catch (MapFileException ex) {
             Log.w(String.format("Exception reading mapfile '%s'", mapFileCtx), ex);
         } finally {
             closeMapFileQuietly(mapFile);

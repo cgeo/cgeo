@@ -21,7 +21,7 @@ public class JsonUtils {
         // Do not instantiate
     }
 
-    public static JsonNode toNode(final String jsonString)  {
+    public static JsonNode toNode(final String jsonString) {
         if (jsonString == null) {
             return null;
         }

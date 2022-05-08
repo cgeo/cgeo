@@ -434,7 +434,7 @@ public class GeokretyConnector extends AbstractTrackableConnector {
 
             final List<String> errors = response.getRight();
             if (CollectionUtils.isNotEmpty(errors)) {
-                for (final String error: errors) {
+                for (final String error : errors) {
                     Log.w("GeokretyConnector.postLogTrackable: " + error);
                 }
                 return new ImmutablePair<>(StatusCode.LOG_POST_ERROR_GK, errors);

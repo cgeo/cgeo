@@ -100,7 +100,7 @@ public class GCMap {
             }
 
             final List<Geocache> caches = new ArrayList<>();
-            for (final JsonNode dataObject: dataArray) {
+            for (final JsonNode dataObject : dataArray) {
                 final Geocache cache = new Geocache();
                 cache.setName(dataObject.path("name").asText());
                 cache.setGeocode(dataObject.path("gc").asText());
@@ -147,7 +147,7 @@ public class GCMap {
             final SearchResult searchResult = GCWebAPI.searchCaches(con, search, false);
 
             if (Settings.isDebug()) {
-                    searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+                searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
             }
             cLog.add("returning " + searchResult.getCount() + " caches");
             return searchResult;
@@ -201,7 +201,7 @@ public class GCMap {
             return null;
         }
 
-        for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
             //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
             if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
                 return new Pair<>(null, searchByFinder(connector, ((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
@@ -289,4 +289,4 @@ public class GCMap {
                 break;
         }
     }
- }
+}

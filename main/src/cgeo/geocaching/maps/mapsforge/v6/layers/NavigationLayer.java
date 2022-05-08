@@ -26,7 +26,7 @@ public class NavigationLayer extends Layer {
     private PostRealDistance postRealDistance = null;
 
     public interface PostRealDistance {
-        void postRealDistance (float realDistance);
+        void postRealDistance(float realDistance);
     }
 
     public NavigationLayer(final Geopoint coords, final PostRealDistance postRealDistance) {

@@ -107,13 +107,13 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
     @Override
     public float getCurrentBearing() {
         return mMap.getCameraPosition().bearing;
-    };
+    }
 
     @Override
     public void setBearing(final float bearing) {
         // @todo: it looks like we need to take current heading into account, otherwise the map is rotated into heading arrows direction when called with bearing=0
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(new CameraPosition.Builder(mMap.getCameraPosition()).bearing(AngleUtils.normalize(bearing)).build()));
-    };
+    }
 
     /** keep track of rotation and zoom level changes **/
     protected void configMapChangeListener(final boolean enable) {
@@ -155,7 +155,7 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
     public BoundingBox getBoundingBox() {
         final LatLngBounds bounds = mMap.getProjection().getVisibleRegion().latLngBounds;
         return new BoundingBox(bounds.southwest.latitude, bounds.southwest.longitude, bounds.northeast.latitude, bounds.northeast.longitude);
-    };
+    }
 
     // ========================================================================
     // zoom & heading methods
@@ -166,7 +166,7 @@ public class GoogleMapsView extends AbstractUnifiedMap<LatLng> implements OnMapR
             mapController.zoomToSpan((int) (bounds.getLatitudeSpan() * 1E6), (int) (bounds.getLongitudeSpan() * 1E6));
             mapController.animateTo(new GoogleGeoPoint(bounds.getCenterPoint()));
         }
-    };
+    }
 
     /** returns -1 if error while retrieving zoom level */
     @Override

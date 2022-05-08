@@ -680,7 +680,7 @@ public class Geocache implements IWaypoint {
 
     @NonNull
     public String getShortGeocode() {
-       return generateShortGeocode(geocode);
+        return generateShortGeocode(geocode);
     }
 
     /**
@@ -1215,7 +1215,7 @@ public class Geocache implements IWaypoint {
             inventory = new ArrayList<>();
         }
         boolean foundTrackable = false;
-        for (final Trackable trackable: inventory) {
+        for (final Trackable trackable : inventory) {
             if (trackable.getUniqueID().equals(newTrackable.getUniqueID())) {
                 // Trackable already present, merge data
                 foundTrackable = true;

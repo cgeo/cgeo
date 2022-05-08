@@ -91,12 +91,12 @@ public final class UriUtils {
 
         //add volumne name if available/feasible
         if (volumeId != null) {
-           final String volumeName = VOLUME_MAP.get(volumeId);
-           if (volumeName != null) {
-               uriString = volumeName + uriString;
-           } else if (!"primary".equals(volumeId)) {
-               uriString = volumeId + uriString;
-           }
+            final String volumeName = VOLUME_MAP.get(volumeId);
+            if (volumeName != null) {
+                uriString = volumeName + uriString;
+            } else if (!"primary".equals(volumeId)) {
+                uriString = volumeId + uriString;
+            }
         }
 
         //add provider info if available/feasible

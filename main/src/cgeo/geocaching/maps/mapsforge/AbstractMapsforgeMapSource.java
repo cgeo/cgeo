@@ -6,7 +6,6 @@ import cgeo.geocaching.maps.interfaces.MapProvider;
 import cgeo.geocaching.maps.mapsforge.v6.layers.DownloadLayer;
 import cgeo.geocaching.maps.mapsforge.v6.layers.ITileLayer;
 
-
 import android.content.Context;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;

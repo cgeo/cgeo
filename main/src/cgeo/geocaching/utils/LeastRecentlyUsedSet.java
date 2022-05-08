@@ -111,7 +111,7 @@ public class LeastRecentlyUsedSet<E> extends AbstractSet<E> {
     @Override
     public synchronized boolean removeAll(final Collection<?> c) {
         boolean changed = false;
-        for (final Object o: c) {
+        for (final Object o : c) {
             changed |= remove(o);
         }
         return changed;

@@ -258,9 +258,9 @@ public final class Formula {
 
             return ErrorValue.of(cs);
 
-         }
+        }
 
-         public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables, final int rangeIdx) {
+        public static ValueList toValueList(final Collection<FormulaNode> nodes, final Func1<String, Value> variables, final int rangeIdx) {
             final ValueList childValues = new ValueList();
             for (FormulaNode child : nodes) {
                 childValues.add(child.eval(variables, rangeIdx));
@@ -336,7 +336,7 @@ public final class Formula {
 
         //no entry found. Compile expression, put it into cache and return it
         try {
-            final Formula c =  compileInternal(expression, startPos, stopCharSet::contains);
+            final Formula c = compileInternal(expression, startPos, stopCharSet::contains);
             FORMULA_CACHE.put(cacheKey, new Pair<>(c, null));
             return c;
         } catch (FormulaException ce) {
@@ -371,7 +371,7 @@ public final class Formula {
         return evaluate(expression, vars).getAsDouble();
     }
 
-    private Formula()  {
+    private Formula() {
         //do nothing
     }
 

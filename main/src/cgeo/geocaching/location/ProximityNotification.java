@@ -38,7 +38,7 @@ public class ProximityNotification implements Parcelable {
     protected static final long MIN_TIME_DELTA_NEAR = 5000;
 
     // how many consecutive distance peaks to ignore?
-    protected  static final int IGNORE_PEAKS = 3;
+    protected static final int IGNORE_PEAKS = 3;
 
     // config options - get initialized in constructor
     protected int distanceFar;
@@ -174,7 +174,7 @@ public class ProximityNotification implements Parcelable {
         }
     }
 
-    private int checkDistanceInternal (final int meters) {
+    private int checkDistanceInternal(final int meters) {
         // no precise distances
         if (meters > PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
             return TONE_NONE;

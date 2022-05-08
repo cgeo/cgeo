@@ -54,7 +54,7 @@ public class CalcState implements Serializable {
         this.buttons = buttons;
         this.equations = equations;
         this.freeVariables = freeVariables;
-        this.variableBank  = bankVariables;
+        this.variableBank = bankVariables;
     }
 
     public CalcState(final JSONObject json) {
@@ -83,7 +83,7 @@ public class CalcState implements Serializable {
         return returnValue;
     }
 
-    public static CalcState fromJSON(final String json)  {
+    public static CalcState fromJSON(final String json) {
         if (json == null) {
             return null;
         }

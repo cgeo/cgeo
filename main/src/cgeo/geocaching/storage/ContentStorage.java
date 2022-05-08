@@ -102,7 +102,7 @@ public class ContentStorage {
             this.documentAccessor = new DocumentContentAccessor(this.context);
             this.fileAccessor = new FileContentAccessor(this.context);
             this.documentAccessor.refreshUriPermissionCache();
-         }
+        }
     }
 
     /** checks if folder is available and can be used, creates it if need be. */
@@ -112,7 +112,7 @@ public class ContentStorage {
             return false;
         }
         return ensureFolder(folder, publicFolder.needsWrite(), false);
-     }
+    }
 
     public boolean ensureFolder(final Folder folder, final boolean needsWrite) {
         return ensureFolder(folder, needsWrite, false);

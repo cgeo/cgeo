@@ -36,7 +36,7 @@ class FileContentAccessor extends AbstractContentAccessor {
         final String fileName = FileUtils.createUniqueFilename(name, Arrays.asList(Objects.requireNonNull(dir.list())), dir);
         try {
             final File newFile = new File(dir, fileName);
-           return newFile.createNewFile() ? Uri.fromFile(newFile) : null;
+            return newFile.createNewFile() ? Uri.fromFile(newFile) : null;
         } catch (IOException ioe) {
             throw new IOException("Could not create file '" + fileName + "' in dir '" + dir + "'", ioe);
         }

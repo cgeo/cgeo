@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
-
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -54,14 +53,14 @@ public class DegreeFormulaTest {
 
     @Test
     public void parseDegree() {
-        assertParse("-A/100", s -> Value.of(40d), -0.4d , "-0.4°");
-        assertParse("NA/100", s -> Value.of(-40d), null , "N[-0.4]°");
+        assertParse("-A/100", s -> Value.of(40d), -0.4d, "-0.4°");
+        assertParse("NA/100", s -> Value.of(-40d), null, "N[-0.4]°");
     }
 
     @Test
     public void parseReverseDMS() {
-        assertParse("13°24'57.8\"S", null, -13d - 24d / 60 - 57.008 / 3600d , "13°24'57.<00>8\"S");
-        assertParse("13°24'57.8''S", null, -13d - 24d / 60 - 57.008 / 3600d , "13°24'57.<00>8\"S");
+        assertParse("13°24'57.8\"S", null, -13d - 24d / 60 - 57.008 / 3600d, "13°24'57.<00>8\"S");
+        assertParse("13°24'57.8''S", null, -13d - 24d / 60 - 57.008 / 3600d, "13°24'57.<00>8\"S");
     }
 
     @Test
@@ -81,9 +80,9 @@ public class DegreeFormulaTest {
         assertThat(DegreeFormula.compile("N90", false).evaluateToDouble(null)).isEqualTo(90);
         assertThat(DegreeFormula.compile("N90.1", false).evaluateToDouble(null)).isEqualTo(null);
 
-        assertParse("48 S", null, -48d , "48°S");
-        assertParse("S-48", null, null , "S[-48]°");
-        assertParse("-48 S", null, null , "-48°[S]");
+        assertParse("48 S", null, -48d, "48°S");
+        assertParse("S-48", null, null, "S[-48]°");
+        assertParse("-48 S", null, null, "-48°[S]");
     }
 
     @Test

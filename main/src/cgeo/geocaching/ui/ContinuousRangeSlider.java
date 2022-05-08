@@ -133,4 +133,4 @@ public class ContinuousRangeSlider extends LinearLayout {
         return String.valueOf(value);
     }
 
- }
+}

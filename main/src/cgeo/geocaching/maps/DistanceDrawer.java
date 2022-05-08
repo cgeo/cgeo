@@ -28,7 +28,7 @@ public class DistanceDrawer {
         } else {
             distance = new Geopoint(location).distanceTo(destinationCoords);
         }
-     }
+    }
 
     public Geopoint getDestinationCoords() {
         return destinationCoords;

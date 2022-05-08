@@ -464,7 +464,7 @@ public class WaypointParserTest {
         assertThat(waypoints).hasSize(1);
 
         // without delimiter between formula and equations, should work
-        parseAndAssertFirstWaypoint("@final (f)" + formulaTypeStr + formulaStr + variableStrWithoutDelim + "|"  + "\"this is the description\"\n\"this shall NOT be part of the note\"", "final", WaypointType.FINAL, "this is the description");
+        parseAndAssertFirstWaypoint("@final (f)" + formulaTypeStr + formulaStr + variableStrWithoutDelim + "|" + "\"this is the description\"\n\"this shall NOT be part of the note\"", "final", WaypointType.FINAL, "this is the description");
         parseAndAssertFirstWaypoint("@final (f)" + formulaTypeStr + formulaStr + variableStrWithoutDelim + "|" + "this is the description", "final", WaypointType.FINAL, "this is the description");
 
         // incomplete variables
@@ -482,7 +482,7 @@ public class WaypointParserTest {
     @Test
     public void testParseWaypointWithFormulaStabilityWrongKeyword() {
 
-         //  with (NO-COORD) formula should not be parsed and goes there in the user note
+        //  with (NO-COORD) formula should not be parsed and goes there in the user note
         final String note1 = "@WPName X (NO-COORD) N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description\n\"this shall NOT be part of the note\"";
         parseAndAssertFirstWaypoint(note1, "WPName", WaypointType.PUZZLE, "N 45° A.B(C+D)  E 9° (A-B).(2*D)EF |A = a+b|B=|a=2|b=| this is the description");
 

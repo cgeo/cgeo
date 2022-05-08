@@ -134,7 +134,7 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(ContentStorage.get().delete(uri2)).isTrue();
     }
 
-    public void testFileStrangeNames()  {
+    public void testFileStrangeNames() {
         final Folder folder = createTestFolder(Folder.FolderType.FILE, "strangeNames");
         ContentStorage.get().ensureFolder(folder, true);
 
@@ -242,7 +242,7 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(folderProcessStatuses.get(abortAfter).dirsProcessed).isEqualTo(result.dirsModified);
 
         assertFileDirCount(targetFolder2, result.filesModified, result.dirsModified);
-     }
+    }
 
     public void testFileCopyAllSameDir() {
         performCopyAllSameDir(Folder.FolderType.FILE);
@@ -752,7 +752,7 @@ public class ContentStorageTest extends CGeoTestCase {
             final JsonNode n = it.next();
             if (n.isObject()) {
                 //this is a subfolder
-               final String folderName = n.get("name").asText();
+                final String folderName = n.get("name").asText();
                 final Folder newFolder = Folder.fromFolder(folder, folderName);
                 ContentStorage.get().ensureFolder(newFolder, true);
                 createTree(newFolder, n.get("files"), content);
@@ -775,7 +775,7 @@ public class ContentStorageTest extends CGeoTestCase {
     }
 
 
-    private String readFromUri(final Uri uri)  {
+    private String readFromUri(final Uri uri) {
         try {
             return IOUtils.readLines(ContentStorage.get().openForRead(uri), "UTF-8").get(0);
         } catch (IOException ioe) {
@@ -813,7 +813,7 @@ public class ContentStorageTest extends CGeoTestCase {
                         throw new IllegalArgumentException("Document Folder not accessible, test fails: " + PersistableFolder.TEST_FOLDER.getFolder());
                     }
                     Log.iForce("Trying to test for DocumentUri fails; unfortunately there is no DocumentUri configured for TEST-FOLDER. Test with file instead");
-                    testFolder =  Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
+                    testFolder = Folder.fromFolder(getBaseTestFolder(Folder.FolderType.FILE), "doc-" + context);
                 } else {
                     testFolder = Folder.fromFolder(getBaseTestFolder(Folder.FolderType.DOCUMENT), context);
                 }
@@ -842,11 +842,11 @@ public class ContentStorageTest extends CGeoTestCase {
         }
     }
 
-     private void cleanup() {
+    private void cleanup() {
         if (KEEP_RESULTS) {
             return;
         }
-         FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.FILE));
+        FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.FILE));
         if (hasValidDocumentTestFolder()) {
             FolderUtils.get().deleteAll(getBaseTestFolder(Folder.FolderType.DOCUMENT));
         }

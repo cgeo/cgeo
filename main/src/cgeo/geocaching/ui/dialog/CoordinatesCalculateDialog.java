@@ -152,7 +152,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         updateResult();
     }
 
-    private void saveAndFinishDialog () {
+    private void saveAndFinishDialog() {
         // Save calculator state regardless of weather the coordinates are valid or not.
         final CalcState currentState = getCurrentState();
         setSavedState(currentState);
@@ -915,7 +915,7 @@ public class CoordinatesCalculateDialog extends DialogFragment implements ClickC
         if (currentFormat == Settings.CoordInputFormatEnum.Plain) {
             returnValue = ePlainLon.getText().toString();
         } else {
-            returnValue =  bLonHem.getText() + getValues(lonButtons, 3);
+            returnValue = bLonHem.getText() + getValues(lonButtons, 3);
         }
 
         return substituteVariables(returnValue);

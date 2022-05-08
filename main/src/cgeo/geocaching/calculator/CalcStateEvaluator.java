@@ -74,7 +74,7 @@ public final class CalcStateEvaluator {
      * @param values The string to perform the substitutions on
      * @return String with the substitutions performed
      */
-    public  String evaluate(final String values) {
+    public String evaluate(final String values) {
         String returnValue = "";
 
         if (values.length() > 0) {
