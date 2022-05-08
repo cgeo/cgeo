@@ -1214,7 +1214,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (En línea)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (sin conexión)</string>
     <string name="cache_menu_vote">Votar</string>
-    <string name="cache_menu_checker">Abrir Geochecker</string>
     <string name="cache_menu_challenge_checker">Buscar checker del challenge</string>
     <string name="cache_menu_ignore">Ignorar caché</string>
     <string name="cache_log_menu_decrypt">Descifrar/Cifrar</string>
