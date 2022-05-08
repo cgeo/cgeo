@@ -621,7 +621,6 @@
     <string name="cache_menu_copy_list">Salin ke daftar yang berbeda</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
     <string name="cache_menu_vote">Suara</string>
-    <string name="cache_menu_checker">Buka Geochecker</string>
     <string name="cache_menu_challenge_checker">Cari pemeriksa penolakan</string>
     <string name="cache_menu_ignore">Mengabaikan cache</string>
     <string name="ignore_confirm_title">Berhati-hati</string>
