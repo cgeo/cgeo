@@ -284,7 +284,12 @@ public class CalculatedCoordinateMigrator {
     public CalculatedCoordinateMigrator(final Map<String, String> initialVars, final WaypointMigrationData wmd) {
         this.initialVars = initialVars;
         waypointMigrationData = wmd;
-        final Map<String, String> cacheVars = new HashMap<>(initialVars);
+        final Map<String, String> cacheVars = new HashMap<>();
+        for (Map.Entry<String, String> iv : initialVars.entrySet()) {
+            if (iv.getKey() != null && iv.getValue() != null) {
+                cacheVars.put(iv.getKey(), iv.getValue());
+            }
+        }
 
         //find out what needs to be replaced and do it
         final Map<String, String> replacements = new HashMap<>();
