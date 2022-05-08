@@ -2609,11 +2609,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
                 pages.add(Page.INVENTORY.id);
             }
-            if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
-                pages.add(Page.IMAGES.id);
-            }
             if (!BranchDetectionHelper.isProductionBuild()) {
                 pages.add(Page.IMAGEGALLERY.id);
+            }
+            if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {
+                pages.add(Page.IMAGES.id);
             }
         }
 
