@@ -72,7 +72,7 @@ public class FolderUtils {
         return INSTANCE;
     }
 
-    private enum TreeWalkResult { CONTINUE, STOP, STOP_AFTER_FOLDER };
+    private enum TreeWalkResult { CONTINUE, STOP, STOP_AFTER_FOLDER }
 
 
     public List<ImmutablePair<ContentStorage.FileInformation, String>> getAllFiles(final Folder folder) {

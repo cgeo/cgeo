@@ -112,7 +112,7 @@ public final class CacheMenuHandler extends AbstractUIFactory {
         if (notifyDataSetChanged != null) {
             notifyDataSetChanged.run();
         }
-    };
+    }
 
     public static void onPrepareOptionsMenu(final Menu menu, final Geocache cache, final boolean fromPopup) {
         if (cache == null) {
