@@ -120,8 +120,11 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
 
     private void checkUnsavedChanges() {
         if (cache != null && cache.getVariables() != null && cache.getVariables().wasModified()) {
-            activity.ensureSaved();
-            cache.getVariables().saveState();
+            //make call asynchronous due to possible fragment transaction conflicts, see #12977
+            binding.getRoot().post(() -> {
+                activity.ensureSaved();
+                cache.getVariables().saveState();
+           });
         }
     }
 

@@ -124,14 +124,14 @@ public class VariableListView extends LinearLayout {
 
         private void setData(final VariableMap.VariableState variableState) {
 
-            this.varName = variableState.getVar();
+            this.varName = variableState == null ? "?" : variableState.getVar();
             final String displayVarName = VariableList.isVisible(this.varName) ? this.varName : "-";
             this.displayType.setVariableName(this.viewVariableName, displayVarName);
 
             if (this.viewVariableFormulaText != null) {
                 final String currentText = this.viewVariableFormulaText.getText().toString();
-                if (!currentText.equals(variableState.getFormulaString())) {
-                    this.viewVariableFormulaText.setText(variableState.getFormulaString());
+                if (!currentText.equals(variableState == null ? "" : variableState.getFormulaString())) {
+                    this.viewVariableFormulaText.setText(variableState == null ? "" : variableState.getFormulaString());
                 }
                 if (listAdapter.currentFocusKeep && Objects.equals(listAdapter.currentFocusVar, this.varName)) {
                     // we come here if listview changed due to added view (due to filter being changed)
@@ -155,10 +155,10 @@ public class VariableListView extends LinearLayout {
             if (viewVariableResult == null) {
                 return;
             }
-            final boolean isError = variableState.getError() != null;
+            final boolean isError = variableState == null || variableState.getError() != null;
             if (isError) {
-                final CharSequence errorText = TextUtils.setSpan(variableState.getError(), new ForegroundColorSpan(Color.RED));
-                if (variableState.getResultAsCharSequence() != null) {
+                final CharSequence errorText = variableState == null ? "?" : TextUtils.setSpan(variableState.getError(), new ForegroundColorSpan(Color.RED));
+                if (variableState != null && variableState.getResultAsCharSequence() != null) {
                     viewVariableResult.setText(TextUtils.concat(variableState.getResultAsCharSequence(), " | ", errorText));
                 } else {
                     viewVariableResult.setText(errorText);
