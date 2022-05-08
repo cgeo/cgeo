@@ -112,22 +112,30 @@ public class ImageListFragment extends Fragment {
         return false;
     }
 
-    /** sets the list of images to display in this fragment */
+    /**
+     * sets the list of images to display in this fragment
+     */
     public void setImages(final List<Image> images) {
         imageList.setItems(images);
     }
 
-    /** clears the list of images to display in this fragment */
+    /**
+     * clears the list of images to display in this fragment
+     */
     public void clearImages() {
         imageList.clearList();
     }
 
-    /** gets the list of images to display in this fragment */
+    /**
+     * gets the list of images to display in this fragment
+     */
     public List<Image> getImages() {
         return imageList.getItems();
     }
 
-    /** adjusts image persistent state to what is actually in the list */
+    /**
+     * adjusts image persistent state to what is actually in the list
+     */
     public void adjustImagePersistentState() {
         ImageUtils.deleteOfflineLogImagesFor(geocode, getImages());
     }
@@ -151,9 +159,9 @@ public class ImageListFragment extends Fragment {
         imageList = new ImageListAdapter(view.findViewById(R.id.image_list));
 
         this.binding.imageAddMulti.setOnClickListener(v ->
-            imageHelper.getMultipleImagesFromStorage(geocode, false, null));
+                imageHelper.getMultipleImagesFromStorage(geocode, false, null));
         this.binding.imageAddCamera.setOnClickListener(v ->
-            imageHelper.getImageFromCamera(geocode, false, null));
+                imageHelper.getImageFromCamera(geocode, false, null));
 
         if (savedState != null) {
             imageList.setItems(savedState.getParcelableArrayList(SAVED_STATE_IMAGELIST));
@@ -188,8 +196,8 @@ public class ImageListFragment extends Fragment {
 
         private ImageListAdapter(final RecyclerView recyclerView) {
             super(new ManagedListAdapter.Config(recyclerView)
-                .setNotifyOnPositionChange(true)
-                .setSupportDragDrop(true));
+                    .setNotifyOnPositionChange(true)
+                    .setSupportDragDrop(true));
         }
 
         private void fillViewHolder(final ImageViewHolder holder, final Image image, final int position) {
@@ -226,7 +234,7 @@ public class ImageListFragment extends Fragment {
             // * linear scale by pixel size
             // * round to full KB
             final long roughCompressedSize = width * height == 0 ? 0 :
-                ((fileSize * (scaledHeight * scaledWidth) / 10 / (width * height)) / 1024) * 1024;
+                    ((fileSize * (scaledHeight * scaledWidth) / 10 / (width * height)) / 1024) * 1024;
 
             return getString(R.string.log_image_info2, isScaled, scaledWidth, scaledHeight, Formatter.formatBytes(roughCompressedSize));
         }
@@ -249,12 +257,16 @@ public class ImageListFragment extends Fragment {
 
     }
 
-    /** trigger the start of the detailed "add image" dialog */
+    /**
+     * trigger the start of the detailed "add image" dialog
+     */
     public void startAddImageDialog() {
         addOrEditImage(-1);
     }
 
-    /** internally start the detail image edit dialog */
+    /**
+     * internally start the detail image edit dialog
+     */
     private void addOrEditImage(final int imageIndex) {
         final Intent selectImageIntent = new Intent(this.getActivity(), ImageSelectActivity.class);
         if (imageIndex >= 0 && imageIndex < imageList.getItemCount()) {

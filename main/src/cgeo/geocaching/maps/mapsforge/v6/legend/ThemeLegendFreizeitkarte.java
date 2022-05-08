@@ -230,7 +230,8 @@ class ThemeLegendFreizeitkarte implements ThemeLegend {
     }
 
     @Override
-    public @StringRes int getInfoUrl() {
+    public @StringRes
+    int getInfoUrl() {
         return isBasic ? R.string.maptheme_legend_freizeitkarte_base : R.string.maptheme_legend_freizeitkarte_outdoor;
     }
 }

@@ -167,7 +167,9 @@ public abstract class LogsViewCreator extends TabbedViewPagerFragment<LogsPageBi
 
     }
 
-    /** for subclasses to overwrite and add own entries */
+    /**
+     * for subclasses to overwrite and add own entries
+     */
     protected ContextMenuDialog extendContextMenu(final ContextMenuDialog ctxMenu, final LogEntry log) {
         return ctxMenu;
     }

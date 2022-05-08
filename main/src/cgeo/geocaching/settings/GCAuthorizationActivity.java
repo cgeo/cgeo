@@ -36,6 +36,6 @@ public class GCAuthorizationActivity extends AbstractCredentialsAuthorizationAct
         if (status == StatusCode.NO_ERROR) {
             GCLogin.getInstance().getServerParameters(); // This will initialize some settings
         }
-        return  status;
+        return status;
     }
 }

@@ -17,7 +17,6 @@ import android.app.ProgressDialog;
  * <p>
  * Use {@code publishProgress(Integer)} to change the current progress.
  * </p>
- *
  */
 public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyncTaskWithProgress<Params, Integer, Result> {
 
@@ -25,7 +24,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage) {
         this(activity, progressTitle, progressMessage, false);
@@ -33,7 +31,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle) {
         this(activity, progressTitle, null);
@@ -41,7 +38,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final String progressMessage, final boolean indeterminate) {
         super(activity, progressTitle, progressMessage);
@@ -50,7 +46,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AsyncTaskWithProgress(final Activity activity, final String progressTitle, final boolean indeterminate) {
         this(activity, progressTitle, null, indeterminate);
@@ -58,7 +53,6 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
 
     /**
      * Show the progress dialog.
-     *
      */
     @Override
     protected final void onPreExecute() {
@@ -75,8 +69,7 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
     /**
      * Define the progress logic.
      *
-     * @param status
-     *          The new progress status
+     * @param status The new progress status
      */
     @Override
     protected final void onProgressUpdate(final Integer... status) {
@@ -90,10 +83,8 @@ public abstract class AsyncTaskWithProgress<Params, Result> extends AbstractAsyn
     /**
      * Launch the process in background.
      *
-     * @param params
-     *          The parameters of the task.
-     * @return
-     *          A result, defined by the subclass of this task.
+     * @param params The parameters of the task.
+     * @return A result, defined by the subclass of this task.
      */
     @SuppressWarnings("unchecked")
     @Override

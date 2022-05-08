@@ -115,9 +115,9 @@ public class NumberRangeFilter<T extends Number & Comparable<T>> {
     }
 
     public List<String> getConfig() {
-        final List<String>  config = new ArrayList<>(Arrays.asList(
-            minRangeValue == null ? "-" : String.valueOf(minRangeValue),
-            maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
+        final List<String> config = new ArrayList<>(Arrays.asList(
+                minRangeValue == null ? "-" : String.valueOf(minRangeValue),
+                maxRangeValue == null ? "-" : String.valueOf(maxRangeValue)));
         if (specialNumber != null && includeSpecialNumber != null) {
             config.add(String.valueOf(specialNumber));
             config.add(Boolean.toString(includeSpecialNumber));

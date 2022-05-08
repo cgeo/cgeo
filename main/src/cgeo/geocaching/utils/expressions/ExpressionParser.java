@@ -31,7 +31,7 @@ public class ExpressionParser<T extends IExpression<T>> {
     private static final char CLOSE_SQUARE_PAREN = ']';
 
     private static final Set<Character> ESCAPE_CHARS = new HashSet<>(Arrays.asList(
-        OPEN_PAREN, CLOSE_PAREN, LOGIC_SEPARATOR, CONFIG_SEPARATOR, KEYVALUE_SEPARATOR, OPEN_SQUARE_PAREN, CLOSE_SQUARE_PAREN));
+            OPEN_PAREN, CLOSE_PAREN, LOGIC_SEPARATOR, CONFIG_SEPARATOR, KEYVALUE_SEPARATOR, OPEN_SQUARE_PAREN, CLOSE_SQUARE_PAREN));
     private static final Pattern ESCAPE_CHAR_FINDER = Pattern.compile("([\\\\();:=\\[\\]])");
 
     private final Map<String, Supplier<T>> registeredExpressions = new HashMap<>();
@@ -49,8 +49,8 @@ public class ExpressionParser<T extends IExpression<T>> {
     public ExpressionParser<T> register(final Supplier<T> expressionCreator) {
         final String typeId = expressionCreator.get().getId();
         this.registeredExpressions.put(typeId == null ? "" :
-            this.ignoreSpecialCharsInTypeIds ? TextUtils.toComparableStringIgnoreCaseAndSpecialChars(typeId) : typeId.trim().toLowerCase(Locale.getDefault()),
-            expressionCreator);
+                        this.ignoreSpecialCharsInTypeIds ? TextUtils.toComparableStringIgnoreCaseAndSpecialChars(typeId) : typeId.trim().toLowerCase(Locale.getDefault()),
+                expressionCreator);
         return this;
     }
 
@@ -61,7 +61,7 @@ public class ExpressionParser<T extends IExpression<T>> {
         return new Parser(config).parse();
     }
 
-    public T createWithNull(final String config)  {
+    public T createWithNull(final String config) {
         try {
             return create(config);
         } catch (ParseException pe) {
@@ -114,7 +114,7 @@ public class ExpressionParser<T extends IExpression<T>> {
         return config == null ? null : config.getSingleValue();
     }
 
-    public static int parseToNextDelim(final String text, final int startIdx, final Set<Character> endChars, final StringBuilder result)  {
+    public static int parseToNextDelim(final String text, final int startIdx, final Set<Character> endChars, final StringBuilder result) {
         int idx = startIdx;
         boolean nextCharIsEscaped = false;
         while (true) {
@@ -139,7 +139,8 @@ public class ExpressionParser<T extends IExpression<T>> {
         return idx;
     }
 
-    /** parses a configuration from string 'text', starting at position 'idx'. Config read is filled into 'result'.
+    /**
+     * parses a configuration from string 'text', starting at position 'idx'. Config read is filled into 'result'.
      * Method will ALWAYS fill in at least an empty List for key 'null' into result
      */
     public static int parseConfiguration(final String text, final int startIdx, @NonNull final Map<String, List<String>> result) {
@@ -177,6 +178,7 @@ public class ExpressionParser<T extends IExpression<T>> {
     /**
      * Escapes all characters with a backslash (\) which could have a special meaning in context of expressions.
      * Those are: ()=:[]; and the backslash \ itself
+     *
      * @param raw string to escape
      * @return escaped string
      */
@@ -238,7 +240,9 @@ public class ExpressionParser<T extends IExpression<T>> {
             return result;
         }
 
-        /** Parses next expression starting from idx and leaving idx at next token AFTER expression */
+        /**
+         * Parses next expression starting from idx and leaving idx at next token AFTER expression
+         */
         private T parseNext() throws ParseException {
             checkEndOfExpression();
 
@@ -264,10 +268,11 @@ public class ExpressionParser<T extends IExpression<T>> {
             }
         }
 
-        @NonNull private T parseNextRawExpression() throws ParseException {
+        @NonNull
+        private T parseNextRawExpression() throws ParseException {
             final String typeId = ignoreSpecialCharsInTypeIds ?
-                TextUtils.toComparableStringIgnoreCaseAndSpecialChars(parseToNextDelim().trim()) :
-                parseToNextDelim().trim().toLowerCase(Locale.getDefault());
+                    TextUtils.toComparableStringIgnoreCaseAndSpecialChars(parseToNextDelim().trim()) :
+                    parseToNextDelim().trim().toLowerCase(Locale.getDefault());
 
             final ExpressionConfig typeConfig = new ExpressionConfig();
             if (currentCharIs(CONFIG_SEPARATOR, false)) {
@@ -288,7 +293,7 @@ public class ExpressionParser<T extends IExpression<T>> {
                 expression = registeredExpressions.get("").get();
                 typeConfig.put(null, Collections.singletonList(typeId));
                 expression.setConfig(typeConfig);
-            } else  {
+            } else {
                 expression = null; //make compiler happy, value will never be used
                 throwParseException("No expression type found for id '" + typeId + "' and no default expression could be applied");
             }
@@ -296,7 +301,7 @@ public class ExpressionParser<T extends IExpression<T>> {
             return Objects.requireNonNull(expression);
         }
 
-        private String parseToNextDelim()  {
+        private String parseToNextDelim() {
             final StringBuilder result = new StringBuilder();
 
             idx = ExpressionParser.parseToNextDelim(config, idx, endChars, result);

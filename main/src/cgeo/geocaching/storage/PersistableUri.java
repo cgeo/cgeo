@@ -8,7 +8,9 @@ import android.net.Uri;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
 
-/** Enum listing all single-document-Uris which can be persisted */
+/**
+ * Enum listing all single-document-Uris which can be persisted
+ */
 public enum PersistableUri {
 
     UNUSED_TRACK(R.string.pref_persistableuri_track, R.string.persistableuri_track, null);
@@ -49,7 +51,9 @@ public enum PersistableUri {
         return getUri() != null;
     }
 
-    /** Sets a new user-defined location ("null" is allowed). Should be called ONLY by {@link ContentStorage} */
+    /**
+     * Sets a new user-defined location ("null" is allowed). Should be called ONLY by {@link ContentStorage}
+     */
     protected void setPersistedUri(@Nullable final Uri uri) {
         Settings.setPersistableUri(this, uri == null ? null : uri.toString());
     }

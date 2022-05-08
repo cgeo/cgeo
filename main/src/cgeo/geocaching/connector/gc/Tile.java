@@ -22,7 +22,7 @@ import okhttp3.Response;
  *
  * @see <a href="http://msdn.microsoft.com/en-us/library/bb259689.aspx">MSDN</a>
  * @see <a
- *      href="http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/OsmMercator.java">OSM</a>
+ * href="http://svn.openstreetmap.org/applications/viewer/jmapviewer/src/org/openstreetmap/gui/jmapviewer/OsmMercator.java">OSM</a>
  */
 public class Tile {
 
@@ -33,6 +33,7 @@ public class Tile {
 
     private static final int[] NUMBER_OF_TILES = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
     private static final int[] NUMBER_OF_PIXELS = new int[ZOOMLEVEL_MAX - ZOOMLEVEL_MIN + 1];
+
     static {
         for (int z = ZOOMLEVEL_MIN; z <= ZOOMLEVEL_MAX; z++) {
             NUMBER_OF_TILES[z] = 1 << z;
@@ -73,7 +74,7 @@ public class Tile {
      * Calculate the tile for a Geopoint based on the Spherical Mercator.
      *
      * @see <a
-     *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
+     * href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     private static int calcX(final Geopoint origin, final int zoomlevel) {
         // The cut of the fractional part instead of rounding to the nearest integer is intentional and part of the algorithm
@@ -82,7 +83,6 @@ public class Tile {
 
     /**
      * Calculate the tile for a Geopoint based on the Spherical Mercator.
-     *
      */
     private static int calcY(final Geopoint origin, final int zoomlevel) {
         // Optimization from Bing
@@ -103,7 +103,7 @@ public class Tile {
      * Calculate latitude/longitude for a given x/y position in this tile.
      *
      * @see <a
-     *      href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
+     * href="http://developers.cloudmade.com/projects/tiles/examples/convert-coordinates-to-tile-numbers">Cloudmade</a>
      */
     @NonNull
     Geopoint getCoord(final UTFGridPosition pos) {
@@ -132,10 +132,8 @@ public class Tile {
      *
      * The order of the points (left/right) is irrelevant.
      *
-     * @param left
-     *            First point
-     * @param right
-     *            Second point
+     * @param left  First point
+     * @param right Second point
      */
     static int calcZoomLon(final Geopoint left, final Geopoint right, final int numberOfTiles) {
 
@@ -164,10 +162,8 @@ public class Tile {
      *
      * The order of the points (bottom/top) is irrelevant.
      *
-     * @param bottom
-     *            First point
-     * @param top
-     *            Second point
+     * @param bottom First point
+     * @param top    Second point
      */
     static int calcZoomLat(final Geopoint bottom, final Geopoint top, final int numberOfTiles) {
 
@@ -176,9 +172,9 @@ public class Tile {
                         Math.abs(
                                 asinh(tanGrad(bottom.getLatitude()))
                                         - asinh(tanGrad(top.getLatitude()))
-                                ) * 2.0)
-                        ) / Math.log(2)
-                );
+                        ) * 2.0)
+                ) / Math.log(2)
+        );
 
         final Tile tileBottom = new Tile(bottom, zoom);
         final Tile tileTop = new Tile(top, zoom);
@@ -197,7 +193,6 @@ public class Tile {
     /**
      * Calculates the inverted hyperbolic sine
      * (after Bronstein, Semendjajew: Taschenbuch der Mathematik)
-     *
      */
     private static double asinh(final double x) {
         return Math.log(x + Math.sqrt(x * x + 1.0));
@@ -222,7 +217,8 @@ public class Tile {
         return toString().hashCode();
     }
 
-    /** Request JSON informations for a tile. Return as soon as the request has been made, before the answer has been
+    /**
+     * Request JSON informations for a tile. Return as soon as the request has been made, before the answer has been
      * read.
      *
      * @return A single with one element, or an IOException
@@ -248,7 +244,6 @@ public class Tile {
     /**
      * Calculate needed tiles for the given viewport to cover it with
      * max 2x2 tiles
-     *
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport) {
         return getTilesForViewport(viewport, 2, ZOOMLEVEL_MIN);
@@ -258,7 +253,6 @@ public class Tile {
      * Calculate needed tiles for the given viewport.
      * You can define the minimum number of tiles on the longer axis
      * and/or the minimum zoom level.
-     *
      */
     protected static Set<Tile> getTilesForViewport(final Viewport viewport, final int tilesOnAxis, final int minZoom) {
         final Set<Tile> tiles = new HashSet<>();

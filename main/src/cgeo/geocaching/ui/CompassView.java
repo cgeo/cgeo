@@ -158,10 +158,8 @@ public class CompassView extends View {
     /**
      * Compute the new value, moving by small increments.
      *
-     * @param goal
-     *            the goal to reach
-     * @param actual
-     *            the actual value
+     * @param goal   the goal to reach
+     * @param actual the actual value
      * @return the new value
      */
     protected static float smoothUpdate(final float goal, final float actual) {

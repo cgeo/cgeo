@@ -90,10 +90,10 @@ public class TemplateTextPreference extends Preference {
         Dialogs.moveCursorToEnd(editText);
 
         final AlertDialog dialog = Dialogs.newBuilder(getContext())
-            .setView(v)
-            .setPositiveButton(android.R.string.ok, null)
-            .setNeutralButton(R.string.init_signature_template_button, null)
-            .show();
+                .setView(v)
+                .setPositiveButton(android.R.string.ok, null)
+                .setNeutralButton(R.string.init_signature_template_button, null)
+                .show();
 
         // override onClick listener to prevent closing dialog on pressing the "default" button
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener(v2 -> {

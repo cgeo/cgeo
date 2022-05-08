@@ -36,14 +36,11 @@ public abstract class AbstractSearchLoader extends AsyncTaskLoader<SearchResult>
      * Run {@link SearchResult#parallelCombineActive(Collection, Function)} if there is at least one active connector
      * in <tt>connectors</tt>, and throw <tt>NoConnectorException</tt> otherwise.
      *
-     * @param connectors
-     *            a collection of connectors
-     * @param func
-     *            a function to apply to every connector
-     * @param <C>
-     *            the type of connectors
+     * @param connectors a collection of connectors
+     * @param func       a function to apply to every connector
+     * @param <C>        the type of connectors
      * @return the result of {@link SearchResult#parallelCombineActive(Collection, Function)} if there is at least one
-     *         active connector
+     * active connector
      */
     protected static <C extends IConnector> SearchResult nonEmptyCombineActive(final Collection<C> connectors,
                                                                                final Function<C, SearchResult> func) {

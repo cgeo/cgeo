@@ -5,7 +5,6 @@ import cgeo.geocaching.R;
 
 /**
  * provide write-access proxy to settings for testing purposes
- *
  */
 public final class TestSettings extends Settings {
 

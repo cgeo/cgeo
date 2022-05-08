@@ -53,7 +53,7 @@ public class PreferenceAppearanceFragment extends BasePreferenceFragment {
 
         final MultiSelectListPreference quickLaunchItemsPref = findPreference(getString(R.string.pref_quicklaunchitems));
         final String[] qlEntries = new String[QuickLaunchItem.values().length];
-        final String[] qlValues =  new String[QuickLaunchItem.values().length];
+        final String[] qlValues = new String[QuickLaunchItem.values().length];
         int i = 0;
         for (QuickLaunchItem qlItem : QuickLaunchItem.values()) {
             qlEntries[i] = getString(qlItem.info);

@@ -52,10 +52,11 @@ public class DisplayUtils {
 
     /**
      * calculate maximum font size a text can use to fit into given size
+     *
      * @param initialFontsize - font size to start tests with
-     * @param minFontsize - minimum font size to return
-     * @param maxFontsize - maximum font size to use
-     * @param availableSize - available space for text
+     * @param minFontsize     - minimum font size to return
+     * @param maxFontsize     - maximum font size to use
+     * @param availableSize   - available space for text
      * @return maximum font size within given ranges
      */
     public static int calculateMaxFontsize(final int initialFontsize, final int minFontsize, final int maxFontsize, final int availableSize) {
@@ -79,8 +80,9 @@ public class DisplayUtils {
 
     /**
      * returns the height a text in the given fontSize would use
-     * @param tPaint - paint object
-     * @param fontSize - font size to use
+     *
+     * @param tPaint        - paint object
+     * @param fontSize      - font size to use
      * @param availableSize - available size for layout
      * @return actual size
      */

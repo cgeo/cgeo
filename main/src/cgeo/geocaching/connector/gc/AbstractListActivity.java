@@ -44,8 +44,11 @@ public abstract class AbstractListActivity extends AbstractActionBarActivity {
     @StringRes protected int errorReadingList;
 
     abstract boolean getFiltersetting();
+
     abstract void setFiltersetting(boolean value);
+
     abstract List<GCList> getList();
+
     abstract boolean alwaysShow(GCList list);
 
     @Override

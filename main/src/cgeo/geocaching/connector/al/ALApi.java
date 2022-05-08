@@ -47,14 +47,14 @@ import org.apache.commons.lang3.StringUtils;
 final class ALApi {
 
     @NonNull
-    private static final String API_HOST        = "https://labs-api.geocaching.com/Api/Adventures/";
+    private static final String API_HOST = "https://labs-api.geocaching.com/Api/Adventures/";
     private static final String CONSUMER_HEADER = "X-Consumer-Key";
-    private static final String CONSUMER_KEY    = LocalizationUtils.getString(R.string.alc_consumer_key);
+    private static final String CONSUMER_KEY = LocalizationUtils.getString(R.string.alc_consumer_key);
 
-    private static final String LOCATION  = "/Location";
+    private static final String LOCATION = "/Location";
     private static final String LONGITUDE = "Longitude";
-    private static final String LATITUDE  = "Latitude";
-    private static final String TITLE     = "Title";
+    private static final String LATITUDE = "Latitude";
+    private static final String TITLE = "Title";
     private static final String MULTICHOICEOPTIONS = "MultiChoiceOptions";
 
     private static final int DEFAULT_RADIUS = 10 * 1000; // 10km
@@ -281,13 +281,13 @@ final class ALApi {
         List<Waypoint> result = null;
         final Geopoint pointZero = new Geopoint(0, 0);
         int stageCounter = 0;
-        for (final JsonNode wptResponse: wptsJson) {
+        for (final JsonNode wptResponse : wptsJson) {
             stageCounter++;
             try {
                 final Waypoint wpt = new Waypoint(wptResponse.get(TITLE).asText(), WaypointType.PUZZLE, false);
                 final JsonNode location = wptResponse.at(LOCATION);
                 final String ilink = wptResponse.get("KeyImageUrl").asText();
-                final String desc  = wptResponse.get("Description").asText();
+                final String desc = wptResponse.get("Description").asText();
 
                 // For ALCs, waypoints don't have a geocode, of course they have an id (a uuid) though.
                 // We artificially create a geocode and a prefix as at least the prefix is used when

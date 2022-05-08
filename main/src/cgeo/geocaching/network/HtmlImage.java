@@ -118,20 +118,15 @@ public class HtmlImage implements Html.ImageGetter {
      * the image and then got a new one from the network.</li>
      * </ul>
      *
-     * @param geocode
-     *            the geocode of the item for which we are requesting the image, or {@link #SHARED} to use the shared
-     *            cache directory
-     * @param returnErrorImage
-     *            set to <tt>true</tt> if an error image should be returned in case of a problem, <tt>false</tt> to get
-     *            a transparent 1x1 image instead
-     * @param onlySave
-     *            if set to <tt>true</tt>, {@link #getDrawable(String)} will only fetch and store the image, not return
-     *            it
-     * @param view
-     *            if non-null, {@link #getDrawable(String)} will return an initially empty drawable which will be
-     *            redrawn when the image is ready through an invalidation of the given view
-     * @param userInitiatedRefresh
-     *            if `true`, even fresh images will be refreshed if they have changed
+     * @param geocode              the geocode of the item for which we are requesting the image, or {@link #SHARED} to use the shared
+     *                             cache directory
+     * @param returnErrorImage     set to <tt>true</tt> if an error image should be returned in case of a problem, <tt>false</tt> to get
+     *                             a transparent 1x1 image instead
+     * @param onlySave             if set to <tt>true</tt>, {@link #getDrawable(String)} will only fetch and store the image, not return
+     *                             it
+     * @param view                 if non-null, {@link #getDrawable(String)} will return an initially empty drawable which will be
+     *                             redrawn when the image is ready through an invalidation of the given view
+     * @param userInitiatedRefresh if `true`, even fresh images will be refreshed if they have changed
      */
     public HtmlImage(@NonNull final String geocode, final boolean returnErrorImage, final boolean onlySave,
                      final TextView view, final boolean userInitiatedRefresh) {
@@ -162,8 +157,7 @@ public class HtmlImage implements Html.ImageGetter {
      * Retrieve and optionally display an image.
      * See {@link #HtmlImage(String, boolean, boolean, TextView, boolean)} for the various behaviors.
      *
-     * @param url
-     *            the URL to fetch from cache or network
+     * @param url the URL to fetch from cache or network
      * @return a drawable containing the image, or <tt>null</tt> if <tt>onlySave</tt> is <tt>true</tt>
      */
     @Nullable
@@ -278,9 +272,9 @@ public class HtmlImage implements Html.ImageGetter {
                         return;
                     }
                 } else if (disposable.isDisposed() || downloadOrRefreshCopy(url, file)) {
-                        // The existing copy was fresh enough or we were unsubscribed earlier.
-                        emitter.onComplete();
-                        return;
+                    // The existing copy was fresh enough or we were unsubscribed earlier.
+                    emitter.onComplete();
+                    return;
                 }
                 if (onlySave) {
                     emitter.onComplete();
@@ -293,8 +287,8 @@ public class HtmlImage implements Html.ImageGetter {
                         emitter.onNext(ImmutablePair.of(image, loaded.middle));
                     } else {
                         emitter.onNext(returnErrorImage ?
-                            ImmutablePair.of(new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)), null) :
-                            ImmutablePair.of(ImageUtils.getTransparent1x1Drawable(resources), null));
+                                ImmutablePair.of(new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)), null) :
+                                ImmutablePair.of(ImageUtils.getTransparent1x1Drawable(resources), null));
                     }
                     emitter.onComplete();
                 });
@@ -322,7 +316,7 @@ public class HtmlImage implements Html.ImageGetter {
     /**
      * Download or refresh the copy of {@code url} in {@code file}.
      *
-     * @param url the url of the document
+     * @param url  the url of the document
      * @param file the file to save the document in
      * @return {@code true} if the existing file was up-to-date, {@code false} otherwise
      */
@@ -369,9 +363,9 @@ public class HtmlImage implements Html.ImageGetter {
     /**
      * Load an image from primary or secondary storage.
      *
-     * @param url the image URL
+     * @param url           the image URL
      * @param pseudoGeocode the geocode or the shared name
-     * @param forceKeep keep the image if it is there, without checking its freshness
+     * @param forceKeep     keep the image if it is there, without checking its freshness
      * @return A pair whose first element is the bitmap if available, and the second one is {@code true} if the image is present and fresh enough.
      */
     @NonNull
@@ -418,13 +412,13 @@ public class HtmlImage implements Html.ImageGetter {
     /**
      * Load a previously saved image.
      *
-     * @param file the file on disk
+     * @param file      the file on disk
      * @param forceKeep keep the image if it is there, without checking its freshness
      * @return a triplet with image in the first component, Metadata in second (only if loadMetadata=true) and
-     *          {@code true} in the third component if the image was there and is fresh enough or {@code false} otherwise,
-     *         and the image (possibly {@code null} if the third component is {@code false} and the image
-     *         could not be loaded, or if the third component is {@code true} and {@code onlySave} is also
-     *         {@code true})
+     * {@code true} in the third component if the image was there and is fresh enough or {@code false} otherwise,
+     * and the image (possibly {@code null} if the third component is {@code false} and the image
+     * could not be loaded, or if the third component is {@code true} and {@code onlySave} is also
+     * {@code true})
      */
     @NonNull
     private ImmutableTriple<Bitmap, Metadata, Boolean> loadCachedImage(final File file, final boolean forceKeep) {
@@ -437,7 +431,7 @@ public class HtmlImage implements Html.ImageGetter {
     @NonNull
     private ImmutableTriple<Bitmap, Metadata, Boolean> loadCachedImage(final Uri uri, final boolean forceKeep, final long lastModified) {
 
-    // An image is considered fresh enough if the image exists and one of those conditions is true:
+        // An image is considered fresh enough if the image exists and one of those conditions is true:
         //  - forceKeep is true and the image has not been modified in the last 24 hours, to avoid reloading shared images;
         //    with every refreshed cache;
         //  - forceKeep is true and userInitiatedRefresh is false, as shared images are unlikely to change at all;

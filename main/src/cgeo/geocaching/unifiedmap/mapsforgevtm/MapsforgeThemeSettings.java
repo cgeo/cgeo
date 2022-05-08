@@ -29,9 +29,9 @@ public class MapsforgeThemeSettings extends AppCompatActivity {
         setContentView(R.layout.layout_settings);
 
         getSupportFragmentManager()
-            .beginTransaction()
-            .replace(R.id.settings_fragment_root, new MapsforgeThemeSettingsFragment())
-            .commit();
+                .beginTransaction()
+                .replace(R.id.settings_fragment_root, new MapsforgeThemeSettingsFragment())
+                .commit();
     }
 
 }

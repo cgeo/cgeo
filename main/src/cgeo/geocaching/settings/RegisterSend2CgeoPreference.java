@@ -71,10 +71,10 @@ public class RegisterSend2CgeoPreference extends AbstractClickablePreference {
                 progressDialog.dismiss();
                 if (pin > 0) {
                     SimpleDialog.of(activity).setTitle(R.string.init_sendToCgeo)
-                        .setMessage(R.string.init_sendToCgeo_register_ok, pin).show();
+                            .setMessage(R.string.init_sendToCgeo_register_ok, pin).show();
                 } else {
                     SimpleDialog.of(activity).setTitle(R.string.init_sendToCgeo)
-                        .setMessage(R.string.init_sendToCgeo_register_fail).show();
+                            .setMessage(R.string.init_sendToCgeo_register_fail).show();
                 }
             });
 

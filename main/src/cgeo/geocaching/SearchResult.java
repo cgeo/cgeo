@@ -94,11 +94,9 @@ public class SearchResult implements Parcelable {
     /**
      * Build a search result from an existing collection of geocodes.
      *
-     * @param geocodes
-     *            a non-null collection of geocodes
-     * @param totalCount
-     *            the total number of caches matching that search on geocaching.com (as we always get only the next 20
-     *            from a web page)
+     * @param geocodes   a non-null collection of geocodes
+     * @param totalCount the total number of caches matching that search on geocaching.com (as we always get only the next 20
+     *                   from a web page)
      */
     public SearchResult(final IConnector con, final Collection<String> geocodes, final int totalCount) {
         this.geocodes.clear();
@@ -278,7 +276,9 @@ public class SearchResult implements Parcelable {
         return DataStore.loadCaches(geocodes, loadFlags);
     }
 
-    /** Add the geocode to the search. No cache is loaded into the CacheCache */
+    /**
+     * Add the geocode to the search. No cache is loaded into the CacheCache
+     */
     public boolean addGeocode(final String geocode) {
         if (StringUtils.isBlank(geocode)) {
             throw new IllegalArgumentException("geocode must not be blank");
@@ -286,12 +286,16 @@ public class SearchResult implements Parcelable {
         return geocodes.add(geocode);
     }
 
-    /** Add the geocodes to the search. No caches are loaded into the CacheCache */
+    /**
+     * Add the geocodes to the search. No caches are loaded into the CacheCache
+     */
     public boolean addGeocodes(final Set<String> geocodes) {
         return this.geocodes.addAll(geocodes);
     }
 
-    /** Add the cache geocode to the search and store the cache in the CacheCache */
+    /**
+     * Add the cache geocode to the search and store the cache in the CacheCache
+     */
     public void addAndPutInCache(@NonNull final Collection<Geocache> caches) {
         for (final Geocache geocache : caches) {
             addGeocode(geocache.getGeocode());
@@ -345,19 +349,19 @@ public class SearchResult implements Parcelable {
     }
 
     public static <C extends IConnector> SearchResult parallelCombineActive(
-        final Collection<C> connectors, final Function<C, SearchResult> func) {
+            final Collection<C> connectors, final Function<C, SearchResult> func) {
         return parallelCombineActive(null, connectors, func);
     }
 
-        /**
-         * execute the given connector request in parallel on all active connectors
-         *
-         * @param initial optional initial SearchResult. If given, new results are added to this, otherwise a new one is created
-         * @param connectors connectors to be considered in request
-         * @param func connector request
-         */
+    /**
+     * execute the given connector request in parallel on all active connectors
+     *
+     * @param initial    optional initial SearchResult. If given, new results are added to this, otherwise a new one is created
+     * @param connectors connectors to be considered in request
+     * @param func       connector request
+     */
     public static <C extends IConnector> SearchResult parallelCombineActive(
-        @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
+            @Nullable final SearchResult initial, final Collection<C> connectors, final Function<C, SearchResult> func) {
         return Observable.fromIterable(connectors).flatMapMaybe((Function<C, Maybe<SearchResult>>) connector -> {
             if (!connector.isActive()) {
                 return Maybe.empty();

@@ -7,7 +7,6 @@ import android.content.Intent;
 
 /**
  * Application for communication with the Pebble watch.
- *
  */
 class PebbleApp extends AbstractRadarApp {
 

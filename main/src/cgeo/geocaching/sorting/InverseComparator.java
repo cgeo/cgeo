@@ -10,7 +10,6 @@ import java.util.List;
 
 /**
  * comparator which inverses the sort order of the given other comparator
- *
  */
 public class InverseComparator implements CacheComparator {
 

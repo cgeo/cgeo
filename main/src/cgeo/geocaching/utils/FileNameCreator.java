@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  *
  * Static method {@link #forName(String, String)} can be used for constant names, while various predefined instances of this
  * class can be used to create unique filenames for certain file types (e.g. {@link #LOGFILE}).
- * */
+ */
 public class FileNameCreator {
 
     public static final FileNameCreator DEFAULT = new FileNameCreator("cgeo-file", "txt");
@@ -39,21 +39,23 @@ public class FileNameCreator {
         this.suffix = suffix;
     }
 
-    /** Creates instance of FileNameCreator which returns a constant name always (non-unique!) */
+    /**
+     * Creates instance of FileNameCreator which returns a constant name always (non-unique!)
+     */
     public static FileNameCreator forName(final String name) {
         return new FileNameCreator(name, null, null);
     }
 
-    public String createName(final Object ... params) {
+    public String createName(final Object... params) {
         if (fixedName != null) {
             return fixedName;
         }
 
         //create new unique filename
         return (praefix == null ? "" : String.format(praefix, params) + "-") +
-            CalendarUtils.formatDateTime("yyyy-MM-dd-HH-mm-ss") + "-" +
-            (fileNameCounter.addAndGet(1))
-            + (suffix == null ? "" : "." + suffix);
+                CalendarUtils.formatDateTime("yyyy-MM-dd-HH-mm-ss") + "-" +
+                (fileNameCounter.addAndGet(1))
+                + (suffix == null ? "" : "." + suffix);
 
     }
 

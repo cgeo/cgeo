@@ -102,10 +102,10 @@ public class CalculatedCoordinate implements Parcelable {
 
     public String toConfig() {
         return "{" + CONFIG_KEY +
-            "|" + TextParser.escape(latitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
-            '|' + TextParser.escape(longitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
-            (type != null && PLAIN != type ? '|' + type.shortName() : "") +
-            '}';
+                "|" + TextParser.escape(latitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
+                '|' + TextParser.escape(longitudePattern.getExpression(), c -> c == '}' || c == '|', '\\') +
+                (type != null && PLAIN != type ? '|' + type.shortName() : "") +
+                '}';
     }
 
     @Override

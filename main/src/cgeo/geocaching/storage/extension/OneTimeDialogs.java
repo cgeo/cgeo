@@ -59,7 +59,7 @@ public class OneTimeDialogs extends DataStore.DBExtension {
         // values for id must not be changed, as there are database entries depending on it
         NONE(0),
         DIALOG_SHOW(1),
-        DIALOG_HIDE (2);
+        DIALOG_HIDE(2);
 
         public final int id;
 

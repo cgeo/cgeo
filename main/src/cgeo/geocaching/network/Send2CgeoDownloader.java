@@ -23,7 +23,7 @@ public class Send2CgeoDownloader {
      * Asynchronously load caches from the send2cgeo server.
      *
      * @param handler the handler to which progress information will be sent
-     * @param listId the list into which caches will be stored
+     * @param listId  the list into which caches will be stored
      */
     public static void loadFromWeb(final DisposableHandler handler, final int listId) {
         final Scheduler.Worker worker = AndroidRxUtils.networkScheduler.createWorker();

@@ -118,6 +118,7 @@ public class IndividualRoute extends Route implements Parcelable {
             Schedulers.io().scheduleDirect(() -> DataStore.saveIndividualRoute(this));
         }
     }
+
     private void clearRouteInternal(final UpdateIndividualRoute routeUpdater, final boolean deleteInDatabase) {
         distance = 0.0f;
         if (deleteInDatabase) {

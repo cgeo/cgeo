@@ -59,8 +59,8 @@ public class TextFactory {
     }
 
     private static String getDistance(final float farDistance, final int nearDistance,
-            final float farFarAway, final float farNearAway, final int nearFarAway,
-            @PluralsRes final int farId, @StringRes final int farOneId, @PluralsRes final int nearId, @StringRes final int nearOneId) {
+                                      final float farFarAway, final float farNearAway, final int nearFarAway,
+                                      @PluralsRes final int farId, @StringRes final int farOneId, @PluralsRes final int nearId, @StringRes final int nearOneId) {
         if (farDistance >= farFarAway) {
             // example: "5 kilometers" - always without decimal digits
             final int quantity = Math.round(farDistance);

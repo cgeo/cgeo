@@ -137,10 +137,10 @@ public final class RoutingContext {
             boolean goodGuy = true;
             for (OsmNode wp : waypoints) {
                 if (wp.calcDistance(nogo) < nogo.radius
-                    && (!(nogo instanceof OsmNogoPolygon)
-                    || (((OsmNogoPolygon) nogo).isClosed
-                    ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
-                    : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
+                        && (!(nogo instanceof OsmNogoPolygon)
+                        || (((OsmNogoPolygon) nogo).isClosed
+                        ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
+                        : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
                     goodGuy = false;
                 }
             }
@@ -161,10 +161,10 @@ public final class RoutingContext {
             for (OsmNode wp : waypoints) {
                 final int dist = wp.calcDistance(nogo);
                 if (dist < nogo.radius
-                    && (!(nogo instanceof OsmNogoPolygon)
-                    || (((OsmNogoPolygon) nogo).isClosed
-                    ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
-                    : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
+                        && (!(nogo instanceof OsmNogoPolygon)
+                        || (((OsmNogoPolygon) nogo).isClosed
+                        ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
+                        : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
                     continue;
                 }
                 allIn = false;
@@ -310,10 +310,10 @@ public final class RoutingContext {
             boolean goodGuy = true;
             for (OsmNodeNamed wp : waypoints) {
                 if (wp.calcDistance(nogo) < nogo.radius
-                    && (!(nogo instanceof OsmNogoPolygon)
-                    || (((OsmNogoPolygon) nogo).isClosed
-                    ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
-                    : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
+                        && (!(nogo instanceof OsmNogoPolygon)
+                        || (((OsmNogoPolygon) nogo).isClosed
+                        ? ((OsmNogoPolygon) nogo).isWithin(wp.ilon, wp.ilat)
+                        : ((OsmNogoPolygon) nogo).isOnPolyline(wp.ilon, wp.ilat)))) {
                     goodGuy = false;
                     break;
                 }

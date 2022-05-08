@@ -33,16 +33,27 @@ public class VariableMap {
 
     private final Map<String, VariableState> variableStateMap = new HashMap<>();
 
-    /** State of a variable */
+    /**
+     * State of a variable
+     */
     public enum State {
-        /** Variable has a valid formula and a valid, calculated value */
+        /**
+         * Variable has a valid formula and a valid, calculated value
+         */
         OK,
-        /** Variable has either an invalid formula or its value was not calculateable (e.g. because dependencies are not available or also in an error state) */
+        /**
+         * Variable has either an invalid formula or its value was not calculateable (e.g. because dependencies are not available or also in an error state)
+         */
         ERROR,
-        /** Variable is part of a cyclic dependency, e.g. if formula for A depends on B and formula for B depends on A */
-        CYCLE }
+        /**
+         * Variable is part of a cyclic dependency, e.g. if formula for A depends on B and formula for B depends on A
+         */
+        CYCLE
+    }
 
-    /** Represents one variable-forumula assignment including its current state (e.g. current variable value or error state) */
+    /**
+     * Represents one variable-forumula assignment including its current state (e.g. current variable value or error state)
+     */
     public static class VariableState {
         private final String var;
         private String formulaString;
@@ -62,49 +73,65 @@ public class VariableMap {
             this.var = var;
         }
 
-        /** The variable this state is for */
+        /**
+         * The variable this state is for
+         */
         @NonNull
         public String getVar() {
             return var;
         }
 
-        /** Returns currently assigned Formula string. May be null if this is an empty state */
+        /**
+         * Returns currently assigned Formula string. May be null if this is an empty state
+         */
         @Nullable
         public String getFormulaString() {
             return formulaString;
         }
 
-        /** returns state of this state */
+        /**
+         * returns state of this state
+         */
         @NonNull
         public State getState() {
             return state;
         }
 
-        /** The Formula assigned to this var. May be null if Formula is invalid / not parseable */
+        /**
+         * The Formula assigned to this var. May be null if Formula is invalid / not parseable
+         */
         @Nullable
         public Formula getFormula() {
             return formula;
         }
 
-        /** If State is {@link State#ERROR} or {@link State#CYCLE}, returns a user-displayable reason for this state. null otherwise */
+        /**
+         * If State is {@link State#ERROR} or {@link State#CYCLE}, returns a user-displayable reason for this state. null otherwise
+         */
         @Nullable
         public String getError() {
             return error;
         }
 
-        /** If State is {@link State#OK} returns the calculated value for the formula. null otherwise */
+        /**
+         * If State is {@link State#OK} returns the calculated value for the formula. null otherwise
+         */
         @Nullable
         public Value getResult() {
             return result;
         }
 
-        /** If State is {@link State#OK} or {@link State#ERROR} with compiled Formula, returns the calculated value as a (formatted) CharSequence. null otherwise */
+        /**
+         * If State is {@link State#OK} or {@link State#ERROR} with compiled Formula, returns the calculated value as a (formatted) CharSequence. null otherwise
+         */
         @Nullable
         public CharSequence getResultAsCharSequence() {
             return resultAsCharSequence;
         }
 
-        /** Range index currently used to calculate results of the Formula */
+        /**
+         * Range index currently used to calculate results of the Formula
+         */
         public int getRangeIndex() {
             return this.rangeIndex;
         }
@@ -167,13 +194,17 @@ public class VariableMap {
 
     }
 
-    /** Mimics method of same name in {@link Map} interface. Same as {@link #getVars} */
+    /**
+     * Mimics method of same name in {@link Map} interface. Same as {@link #getVars}
+     */
     @NonNull
     public Set<String> keySet() {
         return getVars();
     }
 
-    /** returns a set of all vars currently present in this map. This includes vars with empty state (created due to existing dependencies) */
+    /**
+     * returns a set of all vars currently present in this map. This includes vars with empty state (created due to existing dependencies)
+     */
     @NonNull
     public Set<String> getVars() {
         return variableStateMap.keySet();
@@ -193,7 +224,9 @@ public class VariableMap {
         return state == null || (StringUtils.isBlank(state.getFormulaString()) && state.isNeededBy.isEmpty());
     }
 
-    /** Returns all variables in this map which have a null state (e.g. are not explicitely created but only as dependencies of other vars */
+    /**
+     * Returns all variables in this map which have a null state (e.g. are not explicitely created but only as dependencies of other vars
+     */
     public Set<String> getNullEntries() {
         final Set<String> result = new HashSet<>();
         for (Map.Entry<String, VariableState> entry : variableStateMap.entrySet()) {
@@ -204,13 +237,17 @@ public class VariableMap {
         return result;
     }
 
-    /** returns a state of a var existing in this instance */
+    /**
+     * returns a state of a var existing in this instance
+     */
     @Nullable
     public VariableState get(final String var) {
         return variableStateMap.get(var);
     }
 
-    /** returns number of vars in this instance */
+    /**
+     * returns number of vars in this instance
+     */
     public int size() {
         return variableStateMap.size();
     }
@@ -223,7 +260,9 @@ public class VariableMap {
         return prefix + idx;
     }
 
-    /** Calculates a set of all variables which are needed (directly or indirectly) to calculate the given vars */
+    /**
+     * Calculates a set of all variables which are needed (directly or indirectly) to calculate the given vars
+     */
     public Set<String> calculateDependentVariables(final Collection<String> variables) {
         final Set<String> result = new HashSet<>();
         if (variables != null) {
@@ -368,7 +407,7 @@ public class VariableMap {
             }
             try {
                 state.result = state.formula.evaluate(
-                    v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null, state.rangeIndex); //may throw FormulaException
+                        v -> state.needs.contains(v) ? Objects.requireNonNull(get(v)).getResult() : null, state.rangeIndex); //may throw FormulaException
                 state.resultAsCharSequence = state.result.toString();
                 if (forceError) {
                     state.state = State.ERROR;

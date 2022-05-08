@@ -87,8 +87,8 @@ public class UTMPoint {
      *
      * @param zoneNumber The zone of the coordinate.
      * @param zoneLetter For UTM, 'A' .. 'Z'
-     * @param easting The easting component.
-     * @param northing The northing component.
+     * @param easting    The easting component.
+     * @param northing   The northing component.
      * @throws IllegalArgumentException zoneLetter is out of range.
      */
     public UTMPoint(final int zoneNumber, final char zoneLetter, final double easting, final double northing) {
@@ -210,13 +210,13 @@ public class UTMPoint {
                 K_0
                         * n
                         * (a + (1 - t + c) * a * a * a / 6.0d + (5 - 18 * t + t * t + 72 * c - 58 * ECC_PRIME_SQUARED) * a * a * a
-                                * a * a / 120.0d) + FALSE_EASTING;
+                        * a * a / 120.0d) + FALSE_EASTING;
 
         final double utmNorthing =
                 K_0 * (m + n
                         * Math.tan(latRad)
                         * (a * a / 2 + (5 - t + 9 * c + 4 * c * c) * a * a * a * a / 24.0d + (61 - 58 * t + t * t + 600 * c - 330 * ECC_PRIME_SQUARED)
-                                * a * a * a * a * a * a / 720.0d));
+                        * a * a * a * a * a * a / 720.0d));
 
         final char zoneLetter = getLetterDesignator(geopoint.getLatitude());
 

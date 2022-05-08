@@ -26,9 +26,9 @@ public class DegreeFormula {
 
     //Caches last used compiled expressions for performance reasons
     private static final LeastRecentlyUsedMap<String, Pair<DegreeFormula, FormulaException>> FORMULA_CACHE =
-        new LeastRecentlyUsedMap.LruCache<>(500);
+            new LeastRecentlyUsedMap.LruCache<>(500);
 
-    private static final Double[] DIVIDERS_PER_TYPE = new Double[] { 1d, 60d, 3600d };
+    private static final Double[] DIVIDERS_PER_TYPE = new Double[]{1d, 60d, 3600d};
 
     private static final Set<Integer> LAT_ALL_CHARS = SetUtils.hashSet((int) 'N', (int) 'n', (int) 'S', (int) 's');
     private static final Set<Integer> LAT_NEG_CHARS = SetUtils.hashSet((int) 'S', (int) 's');
@@ -198,17 +198,17 @@ public class DegreeFormula {
             switch (foundType) {
                 case 0:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                        d -> da && d >= (signum != 0 ? 0 : (lonCoord ? -180 : -90)) && d <= (lonCoord ? 180 : 90), 0);
+                            d -> da && d >= (signum != 0 ? 0 : (lonCoord ? -180 : -90)) && d <= (lonCoord ? 180 : 90), 0);
                     add(css, "°");
                     break;
                 case 1:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                        d -> da && d >= 0 && d < 60, 3);
+                            d -> da && d >= 0 && d < 60, 3);
                     add(css, "'");
                     break;
                 case 2:
                     value = evaluateNumber(css, f, fAfterDigit, vm,
-                        d -> da && d >= 0 && d < 60, 3);
+                            d -> da && d >= 0 && d < 60, 3);
                     add(css, "\"");
                     break;
                 default:
@@ -325,8 +325,8 @@ public class DegreeFormula {
 
         //check for diverse error situations
         if (v == null || !v.isDouble() ||
-            (signum != 0 && v.getAsDouble() < 0) ||
-            (hasDigits && (vAfter == null || !v.isInteger() || !vAfter.isInteger() || vAfter.getAsInt() < 0))) {
+                (signum != 0 && v.getAsDouble() < 0) ||
+                (hasDigits && (vAfter == null || !v.isInteger() || !vAfter.isInteger() || vAfter.getAsInt() < 0))) {
             if (v == null) {
                 add(css, f.evaluateToCharSequence(varMap));
             } else {
@@ -371,8 +371,8 @@ public class DegreeFormula {
         if (targetSize < unpaddedDigits.length()) {
             return new Pair<>(TextUtils.setSpan(unpaddedDigits, Formula.createWarningSpan(), targetSize, -1, 0), true);
         }
-        final String pad = TextUtils.getPad("0000000000",  targetSize - unpaddedDigits.length());
-        return new Pair<>(TextUtils.setSpan(pad + unpaddedDigits, Formula.createWarningSpan(), 0,  pad.length(), 0), true);
+        final String pad = TextUtils.getPad("0000000000", targetSize - unpaddedDigits.length());
+        return new Pair<>(TextUtils.setSpan(pad + unpaddedDigits, Formula.createWarningSpan(), 0, pad.length(), 0), true);
     }
 
     private Value evaluateSingleFormula(final Formula f, final Func1<String, Value> varMap) {
@@ -383,13 +383,13 @@ public class DegreeFormula {
         }
     }
 
-    private static void add(final List<CharSequence> css, final CharSequence ... csse) {
+    private static void add(final List<CharSequence> css, final CharSequence... csse) {
         if (css != null) {
             css.addAll(Arrays.asList(csse));
         }
     }
 
-    private static void addError(final List<CharSequence> css, final CharSequence ... csse) {
+    private static void addError(final List<CharSequence> css, final CharSequence... csse) {
         if (css != null) {
             for (CharSequence cs : csse) {
                 css.add(TextUtils.setSpan(cs.toString(), Formula.createErrorSpan()));

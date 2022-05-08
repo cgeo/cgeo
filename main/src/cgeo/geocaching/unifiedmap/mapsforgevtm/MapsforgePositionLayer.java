@@ -36,10 +36,10 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     private final VectorLayer accuracyCircleLayer;
     private CircleDrawable accuracyCircle;
     private final Style accuracyCircleStyle = Style.builder()
-        .strokeWidth(1.0f)
-        .strokeColor(MapLineUtils.getAccuracyCircleColor())
-        .fillColor(MapLineUtils.getAccuracyCircleFillColor())
-        .build();
+            .strokeWidth(1.0f)
+            .strokeColor(MapLineUtils.getAccuracyCircleColor())
+            .fillColor(MapLineUtils.getAccuracyCircleFillColor())
+            .build();
 
     // position history
     private final List<PathLayer> historyLayers = new ArrayList<>();
@@ -136,7 +136,7 @@ class MapsforgePositionLayer extends AbstractPositionLayer<GeoPoint> {
     protected void repaintRouteAndTracks() {
         clearLayers(trackLayers);
         repaintRouteAndTracksHelper((segment, isTrack) -> {
-            final PathLayer trackLayer = new PathLayer(map, isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor() , isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth());
+            final PathLayer trackLayer = new PathLayer(map, isTrack ? MapLineUtils.getTrackColor() : MapLineUtils.getRouteColor(), isTrack ? MapLineUtils.getTrackLineWidth() : MapLineUtils.getRouteLineWidth());
             trackLayers.add(trackLayer);
             map.layers().add(trackLayer);
             trackLayer.setPoints(segment);

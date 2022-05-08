@@ -93,7 +93,7 @@ public class FormulaUtilsTest {
 
         //from cache GC86KMW
         assertScanFormula("1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5    E 009°10*b-1,c:4-a+5",
-            "2*a", "(c+20*b):2+5", "10*b-1", "c:4-a+5");
+                "2*a", "(c+20*b):2+5", "10*b-1", "c:4-a+5");
 
         //DON't find dates, times and URLs
         assertScanFormula("13:00");
@@ -125,7 +125,7 @@ public class FormulaUtilsTest {
         assertScanFormula("N 48° (F-H)/2-1.((J-H)*I-2*A+E+9) E 008° (A/G+12).(A+D)*B/2-6*C+49", "(F-H)/2-1", "((J-H)*I-2*A+E+9)", "(A/G+12)", "(A+D)*B/2-6*C+49");
     }
 
-    private void assertScanFormula(final String textToScan, final String ... expectedFinds) {
+    private void assertScanFormula(final String textToScan, final String... expectedFinds) {
         final List<String> result = FormulaUtils.scanForFormulas(Collections.singleton(textToScan), null);
         if (expectedFinds == null || expectedFinds.length == 0) {
             assertThat(result).as("Scan: '" + textToScan + "'").isEmpty();
@@ -159,25 +159,25 @@ public class FormulaUtilsTest {
     @Test
     public void scanForCoordinatesGC86KMW() {
         final String description = "Gründungsjahr c.\n" +
-            "\n" +
-            "1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5      E 009°10*b-1,c:4-a+5 \n" +
-            "\n" +
-            "Hier findest du eine Hilfe, um die Koordinaten von Zwischenstation 2 zu bekommen.\n" +
-            "\n" +
-            "2. Zwischenstation:\n" +
-            "\n" +
-            "Hier findest du einen Begriff, wenn auch nicht als Nomen, der typisch ist für Gesellschaften mit kapitalistischer Produktionsweise. BWW = d.\n" +
-            "\n" +
-            "Final: N 053° 33,13*(d+7)+1    E 09° 59,18*(d-6)+2\n" +
-            "\n" +
-            " \n" +
-            "\n" +
-            "English Version";
+                "\n" +
+                "1. Zwischenstation (Zingg´s Hotel): N 053°2*a,(c+20*b):2+5      E 009°10*b-1,c:4-a+5 \n" +
+                "\n" +
+                "Hier findest du eine Hilfe, um die Koordinaten von Zwischenstation 2 zu bekommen.\n" +
+                "\n" +
+                "2. Zwischenstation:\n" +
+                "\n" +
+                "Hier findest du einen Begriff, wenn auch nicht als Nomen, der typisch ist für Gesellschaften mit kapitalistischer Produktionsweise. BWW = d.\n" +
+                "\n" +
+                "Final: N 053° 33,13*(d+7)+1    E 09° 59,18*(d-6)+2\n" +
+                "\n" +
+                " \n" +
+                "\n" +
+                "English Version";
 
         assertScanCoordinates(description, "N 053°2*a.(c+20*b):2+5|E 009°10*b-1.c:4-a+5", "N 053° 33.13*(d+7)+1|E 09° 59.18*(d-6)+2");
     }
 
-    private void assertScanCoordinates(final String textToScan, final String ... expectedFindPairs) {
+    private void assertScanCoordinates(final String textToScan, final String... expectedFindPairs) {
         final List<Pair<String, String>> result = FormulaUtils.scanForCoordinates(Collections.singleton(textToScan), null);
         if (expectedFindPairs == null || expectedFindPairs.length == 0) {
             assertThat(result).as("ScanCoord: '" + textToScan + "'").isEmpty();

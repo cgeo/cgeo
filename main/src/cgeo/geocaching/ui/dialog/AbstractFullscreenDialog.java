@@ -12,14 +12,13 @@ import androidx.fragment.app.DialogFragment;
 /**
  * Fullscreen dialogs should be used if the dialog meets any of the following criteria:
  *
- *     - Dialogs that include components which require keyboard input, such as form fields
- *     - When changes aren’t saved instantly
- *     - When components within the dialog open additional dialogs
+ * - Dialogs that include components which require keyboard input, such as form fields
+ * - When changes aren’t saved instantly
+ * - When components within the dialog open additional dialogs
  *
  * See also:
  * https://material.io/components/dialogs/android#full-screen-dialog
  * https://medium.com/alexander-schaefer/implementing-the-new-material-design-full-screen-dialog-for-android-e9dcc712cb38
- *
  */
 public abstract class AbstractFullscreenDialog extends DialogFragment {
     @Override

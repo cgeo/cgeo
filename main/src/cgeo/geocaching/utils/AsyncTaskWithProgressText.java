@@ -13,13 +13,11 @@ import org.apache.commons.lang3.StringUtils;
  * <p>
  * Use {@code publishProgress(String)} to change the text message.
  * </p>
- *
  */
 public abstract class AsyncTaskWithProgressText<Params, Result> extends AbstractAsyncTaskWithProgress<Params, String, Result> {
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AsyncTaskWithProgressText(final Activity activity, final String progressTitle, final String progressMessage) {
         super(activity, progressTitle, progressMessage);
@@ -28,8 +26,7 @@ public abstract class AsyncTaskWithProgressText<Params, Result> extends Abstract
     /**
      * Define the progress logic.
      *
-     * @param status
-     *          The new progress status
+     * @param status The new progress status
      */
     @Override
     protected final void onProgressUpdate(final String... status) {

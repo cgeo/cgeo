@@ -32,8 +32,7 @@ public class WaypointSelectionActionProvider extends AbstractMenuActionProvider 
      * Creates a new instance. ActionProvider classes should always implement a
      * constructor that takes a single Context parameter for inflating from menu XML.
      *
-     * @param context
-     *            Context for accessing resources.
+     * @param context Context for accessing resources.
      */
     public WaypointSelectionActionProvider(final Context context) {
         super(context);

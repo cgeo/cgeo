@@ -273,7 +273,7 @@ public class CachePopupFragment extends AbstractDialogFragmentWithProximityNotif
     private static class ShowHintClickListener implements View.OnClickListener {
         private final PopupBinding binding;
 
-        ShowHintClickListener (final PopupBinding binding) {
+        ShowHintClickListener(final PopupBinding binding) {
             this.binding = binding;
         }
 

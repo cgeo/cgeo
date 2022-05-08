@@ -26,20 +26,17 @@ public interface ILogin extends IConnector {
 
     /**
      * Returns the status of the last {@link #login()} request.
-     *
      */
     boolean isLoggedIn();
 
     /**
      * User-centered string describing the current login/connection status
-     *
      */
     String getLoginStatusString();
 
     /**
      * Name the user has in this connector or empty string if not applicable.
      * It might be necessary to execute {@link #login(Handler, Activity)} before this information is valid.
-     *
      */
     String getUserName();
 
@@ -49,7 +46,6 @@ public interface ILogin extends IConnector {
      * Might be stale as changes on the connectors site are generally not notified.
      *
      * Consider using {@link cgeo.geocaching.storage.extension.FoundNumCounter#getAndUpdateFoundNum(ILogin)} instead, which provides cached data if user has no internet connection.
-     *
      */
     int getCachesFound();
 

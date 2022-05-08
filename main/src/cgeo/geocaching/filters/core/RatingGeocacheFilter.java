@@ -2,7 +2,7 @@ package cgeo.geocaching.filters.core;
 
 import cgeo.geocaching.models.Geocache;
 
-public  class RatingGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
+public class RatingGeocacheFilter extends NumberRangeGeocacheFilter<Float> {
 
     public RatingGeocacheFilter() {
         super(Float::valueOf);

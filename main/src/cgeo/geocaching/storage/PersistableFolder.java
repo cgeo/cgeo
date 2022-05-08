@@ -25,32 +25,52 @@ import java.util.WeakHashMap;
  */
 public enum PersistableFolder {
 
-    /** Base directory  */
-    BASE (R.string.pref_persistablefolder_basedir, R.string.persistablefolder_base, LEGACY_CGEO_PUBLIC_ROOT),
+    /**
+     * Base directory
+     */
+    BASE(R.string.pref_persistablefolder_basedir, R.string.persistablefolder_base, LEGACY_CGEO_PUBLIC_ROOT),
 
-    /** Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps) */
+    /**
+     * Offline Maps folder where cgeo looks for offline map files (also the one where c:geo downloads its own offline maps)
+     */
     //legacy setting: "mapDirectory", a pure file path is stored
     OFFLINE_MAPS(R.string.pref_persistablefolder_offlinemaps, R.string.persistablefolder_offline_maps, Folder.fromPersistableFolder(BASE, "maps")),
-    /** Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data */
+    /**
+     * Offline Maps: optional folder for map themes (configured in settings) with user-supplied theme data
+     */
     //legacy setting: "renderthemepath", a pure file path is stored
     OFFLINE_MAP_THEMES(R.string.pref_persistablefolder_offlinemapthemes, R.string.persistablefolder_offline_maps_themes, Folder.fromPersistableFolder(OFFLINE_MAPS, "_themes")),
-    /** Target folder for written logfiles */
+    /**
+     * Target folder for written logfiles
+     */
     LOGFILES(R.string.pref_persistablefolder_logfiles, R.string.persistablefolder_logfiles, Folder.fromPersistableFolder(BASE, "logfiles")),
-    /** GPX Files */
+    /**
+     * GPX Files
+     */
     GPX(R.string.pref_persistablefolder_gpx, R.string.persistablefolder_gpx, Folder.fromPersistableFolder(BASE, "gpx")),
-    /** Backup storage folder */
+    /**
+     * Backup storage folder
+     */
     BACKUP(R.string.pref_persistablefolder_backup, R.string.persistablefolder_backup, Folder.fromPersistableFolder(BASE, "backup")),
-    /** Field Note folder */
+    /**
+     * Field Note folder
+     */
     FIELD_NOTES(R.string.pref_persistablefolder_fieldnotes, R.string.persistablefolder_fieldnotes, Folder.fromPersistableFolder(BASE, "field-notes")),
     ///** Spoiler Image folder */
     SPOILER_IMAGES(R.string.pref_persistablefolder_spoilerimages, R.string.persistablefolder_spoilerimages, Folder.fromPersistableFolder(BASE, "GeocachePhotos")),
-    /** Routing base & config folder */
+    /**
+     * Routing base & config folder
+     */
     ROUTING_BASE(R.string.pref_persistablefolder_routingbase, R.string.persistablefolder_routingbase, Folder.fromPersistableFolder(BASE, "routing")),
-    /** Routing tile files */
+    /**
+     * Routing tile files
+     */
     ROUTING_TILES(R.string.pref_persistablefolder_routingtiles, R.string.persistablefolder_routingtiles, Folder.fromPersistableFolder(ROUTING_BASE, "segments4")),
 
-    /** A Folder to use solely for Unit Test */
-    TEST_FOLDER(R.string.pref_persistablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES,  "unittest"));
+    /**
+     * A Folder to use solely for Unit Test
+     */
+    TEST_FOLDER(R.string.pref_persistablefolder_testdir, 0, Folder.fromFolder(CGEO_PRIVATE_FILES, "unittest"));
 
     @AnyRes
     private final int prefKeyId;
@@ -76,7 +96,7 @@ public enum PersistableFolder {
         return nameKeyId;
     }
 
-    PersistableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @NonNull final Folder ... defaultFolderCandidates) {
+    PersistableFolder(@AnyRes final int prefKeyId, @AnyRes final int nameKeyId, @NonNull final Folder... defaultFolderCandidates) {
         this.prefKeyId = prefKeyId;
         this.nameKeyId = nameKeyId;
         this.needsWrite = true;
@@ -98,7 +118,9 @@ public enum PersistableFolder {
         }
     }
 
-    /** registers a listener which is fired each time the actual location of this folder changes */
+    /**
+     * registers a listener which is fired each time the actual location of this folder changes
+     */
     public void registerChangeListener(final Object lifecycleRef, final Consumer<PersistableFolder> listener) {
         List<Consumer<PersistableFolder>> listeners = changeListeners.get(lifecycleRef);
         if (listeners == null) {
@@ -110,18 +132,22 @@ public enum PersistableFolder {
 
     private void notifyChanged() {
         for (List<Consumer<PersistableFolder>> list : this.changeListeners.values()) {
-            for (Consumer<PersistableFolder> listener :list) {
+            for (Consumer<PersistableFolder> listener : list) {
                 listener.accept(this);
             }
         }
     }
 
-    /** The folder this {@link PersistableFolder} currently points to */
+    /**
+     * The folder this {@link PersistableFolder} currently points to
+     */
     public Folder getFolder() {
         return this.userDefinedFolder == null ? getDefaultFolder() : this.userDefinedFolder;
     }
 
-    /** The (FolderType-specific) Uri this {@link PersistableFolder} currently points to */
+    /**
+     * The (FolderType-specific) Uri this {@link PersistableFolder} currently points to
+     */
     public Uri getUri() {
         return ContentStorage.get().getUriForFolder(getFolder());
     }
@@ -144,7 +170,9 @@ public enum PersistableFolder {
         return this.defaultFolder;
     }
 
-    /** reevaluate folder defaults. Careful, this might run several seconds! */
+    /**
+     * reevaluate folder defaults. Careful, this might run several seconds!
+     */
     public static void reevaluateDefaultFolders() {
         try (ContextLogger ignored = new ContextLogger(true, "PersistableFolder.reevaluateDefaultFolders")) {
             for (PersistableFolder folder : PersistableFolder.values()) {
@@ -157,14 +185,18 @@ public enum PersistableFolder {
         return this.userDefinedFolder != null;
     }
 
-    /** Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link ContentStorage} */
+    /**
+     * Sets a new user-defined location (or "null" if default shall be used). Should be called ONLY by {@link ContentStorage}
+     */
     protected void setUserDefinedFolder(@Nullable final Folder userDefinedFolder, final boolean setByUser) {
         this.userDefinedFolder = userDefinedFolder;
         Settings.setPersistableFolder(this, userDefinedFolder == null ? null : userDefinedFolder.toConfig(), setByUser);
         notifyChanged();
     }
 
-   /** Returns an internationalized ID for this folder (e.g. "GPX" or "Offline Maps"). Does not return the actual value/path (see {@link #toUserDisplayableValue()} for that) */
+    /**
+     * Returns an internationalized ID for this folder (e.g. "GPX" or "Offline Maps"). Does not return the actual value/path (see {@link #toUserDisplayableValue()} for that)
+     */
     @NonNull
     public String toUserDisplayableName() {
         if (this.nameKeyId == 0 || CgeoApplication.getInstance() == null) {
@@ -174,13 +206,17 @@ public enum PersistableFolder {
         return CgeoApplication.getInstance().getApplicationContext().getString(this.nameKeyId);
     }
 
-    /** Returns a representation of this folder's location fit to show to an end user */
+    /**
+     * Returns a representation of this folder's location fit to show to an end user
+     */
     @NonNull
     public String toUserDisplayableValue() {
         return toUserDisplayableValue(false);
     }
 
-    /** Returns a representation of this folder's location fit to show to an end user */
+    /**
+     * Returns a representation of this folder's location fit to show to an end user
+     */
     @NonNull
     public String toUserDisplayableValue(final boolean forceEnglish) {
         String result = getFolder().toUserDisplayableString(true, forceEnglish);
@@ -197,7 +233,9 @@ public enum PersistableFolder {
         return result;
     }
 
-    /** Returns whether this persistable folder currently points to a legacy (=FILE-based) folder */
+    /**
+     * Returns whether this persistable folder currently points to a legacy (=FILE-based) folder
+     */
     public boolean isLegacy() {
         return getFolder().getBaseType() == Folder.FolderType.FILE;
     }

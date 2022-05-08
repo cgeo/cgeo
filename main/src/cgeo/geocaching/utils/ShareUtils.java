@@ -52,12 +52,12 @@ public class ShareUtils {
      */
     public static void shareOrDismissDialog(final Activity context, @NonNull final Uri uri, @NonNull final String mimeType, @StringRes final int title, final String msg) {
         SimpleDialog.of(context).setTitle(title).setMessage(TextParam.text(msg))
-            .setButtons(0, 0, R.string.cache_share_field)
-            .show(SimpleDialog.DO_NOTHING, null,
-            (dialog, which) -> {
-                final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
-                shareInternal(context, intent, title);
-            });
+                .setButtons(0, 0, R.string.cache_share_field)
+                .show(SimpleDialog.DO_NOTHING, null,
+                        (dialog, which) -> {
+                            final Intent intent = createShareIntentInternal(context, mimeType, null, msg, uri, null);
+                            shareInternal(context, intent, title);
+                        });
     }
 
     public static void shareAsEmail(final Context context, final String subject, final String body, @Nullable final Uri uri, @StringRes final int titleResourceId) {
@@ -94,7 +94,9 @@ public class ShareUtils {
         return null;
     }
 
-    /** context needs to be filled only when file is not null */
+    /**
+     * context needs to be filled only when file is not null
+     */
     private static Intent createShareIntentInternal(@NonNull final Context context, @NonNull final String mimeType, @Nullable final String subject, @Nullable final String body, @Nullable final Uri uri, @Nullable final String receiver) {
 
         final Intent intent = new Intent(Intent.ACTION_SEND);
@@ -152,7 +154,9 @@ public class ShareUtils {
 
     }
 
-    /** Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs */
+    /**
+     * Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs
+     */
     public static void openUrl(final Context context, final String url, final boolean forceIntentChooser) {
         if (StringUtils.isBlank(url)) {
             return;
@@ -182,7 +186,7 @@ public class ShareUtils {
                 // Therefore we need to query the installed browsers and check, whether it is already listed in the intent chooser.
                 for (ResolveInfo resolveInfo : ProcessUtils.getInstalledBrowsers(context)) {
                     if (IterableUtils.find(alreadyExistingShareIntents,
-                        info -> resolveInfo.activityInfo.packageName.equals(info.activityInfo.packageName)) == null) {
+                            info -> resolveInfo.activityInfo.packageName.equals(info.activityInfo.packageName)) == null) {
                         final Intent targetedShare = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         targetedShare.setPackage(resolveInfo.activityInfo.packageName);
                         additionalTargetedShareIntents.add(targetedShare);
@@ -191,7 +195,7 @@ public class ShareUtils {
 
                 chooser.putExtra(Intent.EXTRA_INITIAL_INTENTS, additionalTargetedShareIntents.toArray(new Parcelable[]{}));
                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
-                    chooser.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, new Parcelable[] {new ComponentName(context, CacheDetailActivity.class)});
+                    chooser.putExtra(Intent.EXTRA_EXCLUDE_COMPONENTS, new Parcelable[]{new ComponentName(context, CacheDetailActivity.class)});
                 }
 
                 context.startActivity(chooser);
@@ -205,12 +209,14 @@ public class ShareUtils {
         }
     }
 
-    /** Don't call this method, if you don't know whether Chrome is installed */
+    /**
+     * Don't call this method, if you don't know whether Chrome is installed
+     */
     public static void openCustomTab(final Context context, final String url) {
         final CustomTabsIntent.Builder builder = new CustomTabsIntent.Builder()
-            .setUrlBarHidingEnabled(true)
-            .setShowTitle(true)
-            .setShareState(CustomTabsIntent.SHARE_STATE_ON);
+                .setUrlBarHidingEnabled(true)
+                .setShowTitle(true)
+                .setShareState(CustomTabsIntent.SHARE_STATE_ON);
 
         final Intent actionIntent = new Intent(context, ShareBroadcastReceiver.class);
         final PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT);

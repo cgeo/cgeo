@@ -100,7 +100,7 @@ public class GCMap {
             }
 
             final List<Geocache> caches = new ArrayList<>();
-            for (final JsonNode dataObject: dataArray) {
+            for (final JsonNode dataObject : dataArray) {
                 final Geocache cache = new Geocache();
                 cache.setName(dataObject.path("name").asText());
                 cache.setGeocode(dataObject.path("gc").asText());
@@ -129,8 +129,7 @@ public class GCMap {
     /**
      * Searches the view port on the live map with Strategy.AUTO
      *
-     * @param viewport
-     *            Area to search
+     * @param viewport Area to search
      */
     @NonNull
     public static SearchResult searchByViewport(final IConnector con, @NonNull final Viewport viewport) {
@@ -147,7 +146,7 @@ public class GCMap {
             final SearchResult searchResult = GCWebAPI.searchCaches(con, search, false);
 
             if (Settings.isDebug()) {
-                    searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
+                searchResult.setUrl(con, viewport.getCenter().format(Format.LAT_LON_DECMINUTE));
             }
             cLog.add("returning " + searchResult.getCount() + " caches");
             return searchResult;
@@ -184,7 +183,6 @@ public class GCMap {
     }
 
 
-
     private static Pair<GCWebAPI.WebApiSearch, SearchResult> createSearchForFilter(final IConnector connector, @NonNull final GeocacheFilter filter) {
         return createSearchForFilter(connector, filter, 200, 0);
     }
@@ -201,7 +199,7 @@ public class GCMap {
             return null;
         }
 
-        for (BaseGeocacheFilter baseFilter: filter.getAndChainIfPossible()) {
+        for (BaseGeocacheFilter baseFilter : filter.getAndChainIfPossible()) {
             //special case: search by finder (->not supported by WebAPISearch, fall back to Website parsing search)
             if (LOG_ENTRY.equals(baseFilter.getType()) && (baseFilter instanceof LogEntryGeocacheFilter) && (!((LogEntryGeocacheFilter) baseFilter).isInverse())) {
                 return new Pair<>(null, searchByFinder(connector, ((LogEntryGeocacheFilter) baseFilter).getFoundByUser(), filter));
@@ -232,8 +230,8 @@ public class GCMap {
                 break;
             case ATTRIBUTES: //TODO: does not work for v1!
                 search.addCacheAttributes(
-                    CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
-                    .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
+                        CollectionStream.of(((AttributesGeocacheFilter) basicFilter).getAttributes().entrySet())
+                                .filter(e -> Boolean.TRUE.equals(e.getValue())).map(Map.Entry::getKey).toArray(CacheAttribute.class));
                 break;
             case SIZE:
                 search.addCacheSizes(((SizeGeocacheFilter) basicFilter).getValues());
@@ -289,4 +287,4 @@ public class GCMap {
                 break;
         }
     }
- }
+}

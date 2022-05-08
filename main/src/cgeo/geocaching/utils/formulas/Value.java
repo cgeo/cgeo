@@ -11,7 +11,9 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
-/** Encapsulates a single value for handling in {@link Formula}. Provides e.g. type conversions. */
+/**
+ * Encapsulates a single value for handling in {@link Formula}. Provides e.g. type conversions.
+ */
 public class Value {
 
     public static final Value EMPTY = Value.of(null);
@@ -119,7 +121,7 @@ public class Value {
 
     @Override
     public boolean equals(@Nullable final Object obj) {
-        if (! (obj instanceof Value)) {
+        if (!(obj instanceof Value)) {
             return false;
         }
         final Value other = (Value) obj;

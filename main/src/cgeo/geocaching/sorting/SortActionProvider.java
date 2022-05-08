@@ -14,7 +14,6 @@ import androidx.core.view.ActionProvider;
 
 /**
  * Provides a sub menu for sorting caches. Register your listener in the onCreateOptionsMenu of the containing activity.
- *
  */
 public class SortActionProvider extends ActionProvider implements OnMenuItemClickListener {
 
@@ -32,8 +31,7 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
      * Creates a new instance. ActionProvider classes should always implement a
      * constructor that takes a single Context parameter for inflating from menu XML.
      *
-     * @param context
-     *            Context for accessing resources.
+     * @param context Context for accessing resources.
      */
     public SortActionProvider(final Context context) {
         super(context);
@@ -42,7 +40,6 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
     public void setSortContext(final GeocacheSortContext sortContext) {
         this.sortContext = sortContext;
     }
-
 
 
     @Override
@@ -84,4 +81,4 @@ public class SortActionProvider extends ActionProvider implements OnMenuItemClic
         onClickListener.call(type);
         return true;
     }
- }
+}

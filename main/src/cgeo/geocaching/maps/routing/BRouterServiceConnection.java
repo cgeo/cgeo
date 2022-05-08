@@ -11,7 +11,7 @@ import btools.routingapp.IBRouterService;
 
 public class BRouterServiceConnection extends AbstractServiceConnection {
 
-    BRouterServiceConnection (final @Nullable Runnable onServiceConnectedCallback) {
+    BRouterServiceConnection(final @Nullable Runnable onServiceConnectedCallback) {
         super(onServiceConnectedCallback);
     }
 

@@ -32,7 +32,6 @@ import java.util.Collections;
 /**
  * Shared menu handling for all activities having menu items related to a cache. <br>
  * TODO: replace by a fragment
- *
  */
 public final class CacheMenuHandler extends AbstractUIFactory {
 
@@ -42,7 +41,6 @@ public final class CacheMenuHandler extends AbstractUIFactory {
 
     /**
      * Methods to be implemented by the activity to react to the cache menu selections.
-     *
      */
     interface ActivityInterface {
         void navigateTo();

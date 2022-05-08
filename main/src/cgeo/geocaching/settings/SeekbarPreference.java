@@ -74,7 +74,9 @@ public class SeekbarPreference extends Preference {
         initInternal(attrs);
     }
 
-    /** for programmatic creation */
+    /**
+     * for programmatic creation
+     */
     public SeekbarPreference(final Context context, final int min, final int max, final String label, final String unitValue, final ValueProgressMapper valueProgressMapper) {
         super(context, null, android.R.attr.preferenceStyle);
         this.context = context;
@@ -140,6 +142,7 @@ public class SeekbarPreference extends Preference {
 
     /**
      * Get unit-label for progress value.
+     *
      * @return string for the unit label
      */
     protected String getUnitString() {
@@ -149,6 +152,7 @@ public class SeekbarPreference extends Preference {
     /**
      * hasDecimals is parameter from SeekbarPreference, but can be overwritten.
      * So use useDecimals instead of member
+     *
      * @return hasDecimals
      */
     protected boolean useDecimals() {
@@ -215,10 +219,12 @@ public class SeekbarPreference extends Preference {
                     valueView.setText(getValueString(progress));
                 }
             }
+
             @Override
             public void onStartTrackingTouch(final SeekBar seekBar) {
                 // abstract method needs to be implemented, but is not used here
             }
+
             @Override
             public void onStopTrackingTouch(final SeekBar seekBar) {
                 if (atLeastMin(seekBar, seekBar.getProgress())) {

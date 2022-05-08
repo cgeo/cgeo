@@ -106,41 +106,41 @@ public class DownloaderUtils {
         downloadInfo.setText(String.format(activity.getString(R.string.download_confirmation), StringUtils.isNotBlank(additionalInfo) ? additionalInfo + "\n\n" : "", filename, "\n\n" + activity.getString(R.string.download_warning) + (StringUtils.isNotBlank(sizeInfo) ? "\n\n" + sizeInfo : "")));
 
         builder
-            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
-                final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
-                if (null != downloadManager) {
-                    final long id = addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
-                    if (downloadStartedCallback != null) {
-                        downloadStartedCallback.accept(id);
-                    }
-
-                    // check for required extra files (e. g.: map theme)
-                    final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
-                    if (downloader != null) {
-                        final DownloadDescriptor extraFile = downloader.getExtrafile(activity);
-                        if (extraFile != null) {
-                            addDownload(activity, downloadManager, extraFile.type, extraFile.uri, extraFile.filename, allowMeteredNetwork);
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
+                    final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+                    if (null != downloadManager) {
+                        final long id = addDownload(activity, downloadManager, type, uri, filename, allowMeteredNetwork);
+                        if (downloadStartedCallback != null) {
+                            downloadStartedCallback.accept(id);
                         }
-                    }
 
-                    ActivityMixin.showShortToast(activity, R.string.download_started);
-                } else {
-                    ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
-                }
-                dialog.dismiss();
-                if (dialogDismissedCallback != null) {
-                    dialogDismissedCallback.run();
-                }
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
-                dialog.dismiss();
-                if (dialogDismissedCallback != null) {
-                    dialogDismissedCallback.run();
-                }
-            })
-            .create()
-            .show();
+                        // check for required extra files (e. g.: map theme)
+                        final AbstractDownloader downloader = Download.DownloadType.getInstance(type);
+                        if (downloader != null) {
+                            final DownloadDescriptor extraFile = downloader.getExtrafile(activity);
+                            if (extraFile != null) {
+                                addDownload(activity, downloadManager, extraFile.type, extraFile.uri, extraFile.filename, allowMeteredNetwork);
+                            }
+                        }
+
+                        ActivityMixin.showShortToast(activity, R.string.download_started);
+                    } else {
+                        ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
+                    }
+                    dialog.dismiss();
+                    if (dialogDismissedCallback != null) {
+                        dialogDismissedCallback.run();
+                    }
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> {
+                    dialog.dismiss();
+                    if (dialogDismissedCallback != null) {
+                        dialogDismissedCallback.run();
+                    }
+                })
+                .create()
+                .show();
     }
 
     public static void triggerDownloads(final Activity activity, @StringRes final int title, @StringRes final int confirmation, final List<Download> downloads) {
@@ -157,41 +157,41 @@ public class DownloaderUtils {
         downloadInfo.setText(String.format(activity.getString(confirmation), updates, "\n\n" + activity.getString(R.string.download_warning)));
 
         builder
-            .setPositiveButton(android.R.string.ok, (dialog, which) -> {
-                final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
+                .setPositiveButton(android.R.string.ok, (dialog, which) -> {
+                    final boolean allowMeteredNetwork = ((CheckBox) layout.findViewById(R.id.allow_metered_network)).isChecked();
 
-                final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
-                if (null != downloadManager) {
-                    for (Download download : downloads) {
-                        final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
-                            .setTitle(download.getName())
-                            .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
-                            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-                            .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
-                            .setAllowedOverMetered(allowMeteredNetwork)
-                            .setAllowedOverRoaming(allowMeteredNetwork);
-                        Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
-                        AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                    final DownloadManager downloadManager = (DownloadManager) activity.getSystemService(DOWNLOAD_SERVICE);
+                    if (null != downloadManager) {
+                        for (Download download : downloads) {
+                            final DownloadManager.Request request = new DownloadManager.Request(download.getUri())
+                                    .setTitle(download.getName())
+                                    .setDescription(String.format(activity.getString(R.string.downloadmap_filename), download.getName()))
+                                    .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                                    .setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, download.getName())
+                                    .setAllowedOverMetered(allowMeteredNetwork)
+                                    .setAllowedOverRoaming(allowMeteredNetwork);
+                            Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + download.getName());
+                            AndroidRxUtils.networkScheduler.scheduleDirect(() -> PendingDownload.add(downloadManager.enqueue(request), download.getName(), download.getUri().toString(), download.getDateInfo(), download.getType().id));
+                        }
+                        ActivityMixin.showShortToast(activity, R.string.download_started);
+                    } else {
+                        ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
                     }
-                    ActivityMixin.showShortToast(activity, R.string.download_started);
-                } else {
-                    ActivityMixin.showToast(activity, R.string.downloadmanager_not_available);
-                }
-                dialog.dismiss();
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
-            .create()
-            .show();
+                    dialog.dismiss();
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
     }
 
     private static long addDownload(final Activity activity, final DownloadManager downloadManager, final int type, final Uri uri, final String filename, final boolean allowMeteredNetwork) {
         final DownloadManager.Request request = new DownloadManager.Request(uri)
-            .setTitle(filename)
-            .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
-            .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
-            .setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, filename)
-            .setAllowedOverMetered(allowMeteredNetwork)
-            .setAllowedOverRoaming(allowMeteredNetwork);
+                .setTitle(filename)
+                .setDescription(String.format(activity.getString(R.string.downloadmap_filename), filename))
+                .setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED)
+                .setDestinationInExternalFilesDir(activity, Environment.DIRECTORY_DOWNLOADS, filename)
+                .setAllowedOverMetered(allowMeteredNetwork)
+                .setAllowedOverRoaming(allowMeteredNetwork);
         Log.i("Download enqueued: " + Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/" + filename);
         final long id = downloadManager.enqueue(request);
         PendingDownload.add(id, filename, uri.toString(), System.currentTimeMillis(), type);
@@ -224,7 +224,7 @@ public class DownloaderUtils {
                     callback.run(folder, true);
                 } else if (beforeDownload) {
                     SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).setPositiveButton(TextParam.id(R.string.button_continue)).confirm(
-                        (dialog, which) -> callback.run(folder, true), (dialog, w) -> callback.run(folder, false));
+                            (dialog, which) -> callback.run(folder, true), (dialog, w) -> callback.run(folder, false));
                 } else {
                     SimpleDialog.of(activity).setTitle(R.string.download_title).setMessage(R.string.downloadmap_target_not_writable, folder).show((dialog, which) -> callback.run(folder, false));
                 }
@@ -235,8 +235,8 @@ public class DownloaderUtils {
     /**
      * displays an info to the user to check for updates
      * if button pressed: checks whether updates are available for the type specified
-     *      if yes: ask user to download them all
-     *              if yes: trigger download(s)
+     * if yes: ask user to download them all
+     * if yes: trigger download(s)
      */
     public static void checkForUpdatesAndDownloadAll(final MainActivity activity, final int layout, final Download.DownloadType type, @StringRes final int title, @StringRes final int info, final Action1<Boolean> callback) {
         activity.displayActionItem(layout, info, (actionRequested) -> {
@@ -270,7 +270,7 @@ public class DownloaderUtils {
             final List<Download> result = new ArrayList<>();
             final ArrayList<CompanionFileUtils.DownloadedFileData> existingFiles = new ArrayList<>();
             if (currentType.equals(Download.DownloadType.DOWNLOADTYPE_ALL_MAPRELATED)) {
-                final ArrayList<Download.DownloadTypeDescriptor> typeDescriptors =  Download.DownloadType.getOfflineAllMapRelatedTypes();
+                final ArrayList<Download.DownloadTypeDescriptor> typeDescriptors = Download.DownloadType.getOfflineAllMapRelatedTypes();
                 for (Download.DownloadTypeDescriptor typeDescriptor : typeDescriptors) {
                     existingFiles.addAll(CompanionFileUtils.availableOfflineMaps(typeDescriptor.type));
                 }
@@ -392,17 +392,17 @@ public class DownloaderUtils {
             final int columnStatus = c.getColumnIndex(DownloadManager.COLUMN_STATUS);
             final int columnReason = c.getColumnIndex(DownloadManager.COLUMN_REASON);
             final int[] columns = {
-                c.getColumnIndex(DownloadManager.COLUMN_ID),
-                c.getColumnIndex(DownloadManager.COLUMN_TITLE),
-                columnStatus,
-                columnReason,
-                c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR),
-                c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES),
-                c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP),
-                c.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE),
-                c.getColumnIndex(DownloadManager.COLUMN_URI),
-                c.getColumnIndex(DownloadManager.COLUMN_MEDIAPROVIDER_URI),
-                c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
+                    c.getColumnIndex(DownloadManager.COLUMN_ID),
+                    c.getColumnIndex(DownloadManager.COLUMN_TITLE),
+                    columnStatus,
+                    columnReason,
+                    c.getColumnIndex(DownloadManager.COLUMN_BYTES_DOWNLOADED_SO_FAR),
+                    c.getColumnIndex(DownloadManager.COLUMN_TOTAL_SIZE_BYTES),
+                    c.getColumnIndex(DownloadManager.COLUMN_LAST_MODIFIED_TIMESTAMP),
+                    c.getColumnIndex(DownloadManager.COLUMN_MEDIA_TYPE),
+                    c.getColumnIndex(DownloadManager.COLUMN_URI),
+                    c.getColumnIndex(DownloadManager.COLUMN_MEDIAPROVIDER_URI),
+                    c.getColumnIndex(DownloadManager.COLUMN_LOCAL_URI)
             };
             while (c.moveToNext()) {
                 for (int column : columns) {

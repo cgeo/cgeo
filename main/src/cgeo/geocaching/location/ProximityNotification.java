@@ -38,7 +38,7 @@ public class ProximityNotification implements Parcelable {
     protected static final long MIN_TIME_DELTA_NEAR = 5000;
 
     // how many consecutive distance peaks to ignore?
-    protected  static final int IGNORE_PEAKS = 3;
+    protected static final int IGNORE_PEAKS = 3;
 
     // config options - get initialized in constructor
     protected int distanceFar;
@@ -127,12 +127,12 @@ public class ProximityNotification implements Parcelable {
     protected void showNotification(final boolean near, final String notification) {
         if (useTextNotifications) {
             final NotificationCompat.Builder builder = new NotificationCompat.Builder(context, NotificationChannels.PROXIMITY_NOTIFICATION.name())
-                .setSmallIcon(near ? R.drawable.proximity_notification_near : R.drawable.proximity_notification_far)
-                .setContentTitle(context.getString(R.string.notification_proximity_title))
-                .setContentText(notification)
-                .setStyle(new NotificationCompat.BigTextStyle().bigText(notification))
-                .setPriority(NotificationCompat.PRIORITY_HIGH)
-                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
+                    .setSmallIcon(near ? R.drawable.proximity_notification_near : R.drawable.proximity_notification_far)
+                    .setContentTitle(context.getString(R.string.notification_proximity_title))
+                    .setContentText(notification)
+                    .setStyle(new NotificationCompat.BigTextStyle().bigText(notification))
+                    .setPriority(NotificationCompat.PRIORITY_HIGH)
+                    .setVisibility(NotificationCompat.VISIBILITY_PUBLIC);
 
             Notifications.getNotificationManager(context).notify(Notifications.ID_PROXIMITY_NOTIFICATION, builder.build());
         }
@@ -174,7 +174,7 @@ public class ProximityNotification implements Parcelable {
         }
     }
 
-    private int checkDistanceInternal (final int meters) {
+    private int checkDistanceInternal(final int meters) {
         // no precise distances
         if (meters > PROXIMITY_NOTIFICATION_MAX_DISTANCE) {
             return TONE_NONE;

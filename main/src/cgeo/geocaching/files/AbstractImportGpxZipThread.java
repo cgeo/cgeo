@@ -49,10 +49,10 @@ abstract class AbstractImportGpxZipThread extends AbstractImportGpxThread {
     /**
      * parse the zip archive for GPX files which match the criteria given in the filename matcher
      *
-     * @param parser the GPXParser object
+     * @param parser          the GPXParser object
      * @param filenameMatcher pass true if the GPX file should be progressed in this run
-     * @param importStep the GPXImporter step
-     * @param stepText the description @StringRes which should be displayed
+     * @param importStep      the GPXImporter step
+     * @param stepText        the description @StringRes which should be displayed
      * @return true if at least one file is a GPX
      */
     private boolean parseZipFileGpxContent(final GPXParser parser, final Predicate<String> filenameMatcher, final int importStep, final @StringRes int stepText) throws IOException, ParserException {

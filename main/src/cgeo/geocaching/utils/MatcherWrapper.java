@@ -11,7 +11,6 @@ import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 /**
  * Wrapper around the regex {@link Matcher} class. This implementation optimizes the memory usage of the matched
  * Strings.
- *
  */
 public class MatcherWrapper {
     private final Matcher matcher;
@@ -45,7 +44,6 @@ public class MatcherWrapper {
      * removing the huge input String.
      * <p>
      * Do not change this method, even if Findbugs and other tools will report a violation for that line!
-     *
      */
     @SuppressWarnings("RedundantStringConstructorCall")
     @Nullable

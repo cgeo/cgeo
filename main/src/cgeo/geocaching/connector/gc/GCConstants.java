@@ -19,15 +19,25 @@ public final class GCConstants {
 
     static final String GC_URL = "https://www.geocaching.com/";
     private static final String GC_TILE_URL = "https://tiles.geocaching.com/";
-    /** Live Map */
+    /**
+     * Live Map
+     */
     @NonNull static final String URL_LIVE_MAP = GC_URL + "map/default.aspx";
-    /** Live Map pop-up */
+    /**
+     * Live Map pop-up
+     */
     @NonNull static final String URL_LIVE_MAP_DETAILS = GC_TILE_URL + "map.details";
-    /** Caches in a tile */
+    /**
+     * Caches in a tile
+     */
     @NonNull static final String URL_MAP_INFO = GC_TILE_URL + "map.info";
-    /** Tile itself */
+    /**
+     * Tile itself
+     */
     @NonNull static final String URL_MAP_TILE = GC_TILE_URL + "map.png";
-    /** Format used by geocaching.com when user is not logged in. */
+    /**
+     * Format used by geocaching.com when user is not logged in.
+     */
     public static final String DEFAULT_GC_DATE = "MM/dd/yyyy";
     public static final String GEOCODE_PATTERN = "(?<!\\w)(GC[0-9A-Z&&[^ILOSU]]{1,5})(?=$|\\W|\\s|_)";
 
@@ -59,11 +69,15 @@ public final class GCConstants {
     static final Pattern PATTERN_COUNTLOGS = Pattern.compile("<span id=\"ctl00_ContentBody_lblFindCounts\"><ul(.+?)</ul></span>");
     static final Pattern PATTERN_WATCHLIST_COUNT = Pattern.compile("data-watchcount=\"(\\d+)\"");
 
-    /** Two groups ! */
+    /**
+     * Two groups !
+     */
     static final Pattern PATTERN_COUNTLOG = Pattern.compile("logtypes/([0-9]+)\\.[^>]+>\\s*([0-9,.]+)");
     static final Pattern PATTERN_PREMIUMMEMBERS = Pattern.compile("<p class=\"Warning NoBottomSpacing\"");
     static final Pattern PATTERN_ATTRIBUTES = Pattern.compile("(<img src=\"/images/attributes.*?)</p");
-    /** Two groups ! */
+    /**
+     * Two groups !
+     */
     static final Pattern PATTERN_ATTRIBUTESINSIDE = Pattern.compile("<img src=\"([^\"]+)\" alt=\"([^\"]+?)\"");
     private static final String IMAGE_FORMATS = "jpg|jpeg|png|gif|bmp";
     static final Pattern PATTERN_SPOILER_IMAGE = Pattern.compile("<a href=\"(https?://img(?:cdn)?\\.geocaching\\.com[^.]+\\.(?:" + IMAGE_FORMATS + "))\"[^>]+>" + "([^<]*)</a>" + ".*?(?:description\"[^>]*>([^<]+)</span>)?</li>", Pattern.DOTALL);
@@ -77,7 +91,9 @@ public final class GCConstants {
 
     // Info box top-right
     public static final Pattern PATTERN_LOGIN_NAME = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"username\":\\s*\"([^\"]*)\",?[\\S\\s]*\\}");
-    /** Use replaceAll("[,.]","") on the resulting string before converting to an int */
+    /**
+     * Use replaceAll("[,.]","") on the resulting string before converting to an int
+     */
     static final Pattern PATTERN_CACHES_FOUND = Pattern.compile("\\swindow(?>\\.|\\[')(?:headerSettings|chromeSettings)(?>'\\])?\\s*=\\s*\\{[\\S\\s]*\"findCount\":\\s*([0-9]*)[\\S\\s]*\\}");
 
     // Patterns for parsing trackables
@@ -96,20 +112,28 @@ public final class GCConstants {
      * trackable name that needs HTML encoding
      */
     static final Pattern PATTERN_TRACKABLE_NAME = Pattern.compile("<span id=\"ctl00_ContentBody_lbHeading\">(.*?)</span>");
-    /** Three groups ! */
+    /**
+     * Three groups !
+     */
     static final Pattern PATTERN_TRACKABLE_OWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugOwner\"[^>]+href=\"https?://www.geocaching.com/p(rofile)?/\\?guid=(.*?)\">(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_RELEASES = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugReleaseDate\">([^<]+)<\\/span>[^<]*</dd>");
     static final Pattern PATTERN_TRACKABLE_FOUND_LOG = Pattern.compile("<span id=\"ctl00_ContentBody_InteractionLogTypeText\"[^>]*>(.*?)!</span>");
     static final Pattern PATTERN_TRACKABLE_DISPOSITION_LOG = Pattern.compile("<a id=\"ctl00_ContentBody_InteractionLogLink\"[^>]*href=\"/track/log.aspx\\?LUID=([a-z0-9\\-]+)\">[^0-9]+(.*?)</a>");
     static final Pattern PATTERN_TRACKABLE_ORIGIN = Pattern.compile("<span id=\"ctl00_ContentBody_BugDetails_BugOrigin\">([^<]+)<\\/span>[^<]*</dd>");
-    /** Two groups ! */
+    /**
+     * Two groups !
+     */
     static final Pattern PATTERN_TRACKABLE_SPOTTEDCACHE = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" title=\"[^\"]*\" href=\"[^\"]*/seek/cache_details.aspx\\?guid=([a-z0-9\\-]+)\">In ([^<]+)</a>");
-    /** Three groups ! */
+    /**
+     * Three groups !
+     */
     static final Pattern PATTERN_TRACKABLE_SPOTTEDUSER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\" href=\"[^\"]*/p(rofile)?/\\?guid=([a-z0-9\\-]+)\">In the hands of ([^<]+).</a>");
     static final Pattern PATTERN_TRACKABLE_SPOTTEDUNKNOWN = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">Unknown Location[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_SPOTTEDOWNER = Pattern.compile("<a id=\"ctl00_ContentBody_BugDetails_BugLocation\">In the hands of the owner[^<]*</a>");
     static final Pattern PATTERN_TRACKABLE_GOAL = Pattern.compile("<div id=\"TrackableGoal\">[^<]*<p>(.*?)</p>[^<]*</div>", Pattern.DOTALL);
-    /** Four groups */
+    /**
+     * Four groups
+     */
     static final Pattern PATTERN_TRACKABLE_DETAILSIMAGE = Pattern.compile("<div id=\"TrackableDetails\">([^<]*<p>([^<]*<img id=\"ctl00_ContentBody_BugDetails_BugImage\" class=\"[^\"]+\" src=\"([^\"]+)\"[^>]*>)?[^<]*</p>)?[^<]*<p[^>]*>(.*)</p>[^<]*</div> <div class=\"Clear\">");
     static final Pattern PATTERN_TRACKABLE_ICON = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"([^\"]+)\"[^>]*>");
     static final Pattern PATTERN_TRACKABLE_TYPE = Pattern.compile("<img id=\"ctl00_ContentBody_BugTypeImage\" class=\"TravelBugHeaderIcon\" src=\"[^\"]+\" alt=\"([^\"]+)\"[^>]*>");
@@ -123,9 +147,13 @@ public final class GCConstants {
 
     static final Pattern PATTERN_SEARCH_TYPE = Pattern.compile("<img src=\"[^\"]*/images/WptTypes/(.*?)\\.", Pattern.CASE_INSENSITIVE);
     static final Pattern PATTERN_SEARCH_GUIDANDDISABLED = Pattern.compile("SearchResultsWptType.*?<a href=\"[^\"]*\" class=\"lnk ([^\"]*)\"><span>([^<]*)</span>[^|]*[|][^|]*[|]([^<]*)<");
-    /** Two groups **/
+    /**
+     * Two groups
+     **/
     static final Pattern PATTERN_SEARCH_TRACKABLES = Pattern.compile("<a id=\"ctl00_ContentBody_dlResults_ctl[0-9]+_uxTravelBugList\" class=\"tblist\" data-tbcount=\"([0-9]+)\" data-id=\"[^\"]*\"[^>]*>(.*)</a>");
-    /** Second group used */
+    /**
+     * Second group used
+     */
     static final Pattern PATTERN_SEARCH_TRACKABLESINSIDE = Pattern.compile("<img src=\"[^\"]+\" alt=\"([^\"]+)\" title=\"[^\"]*\" />[^<]*");
     static final Pattern PATTERN_SEARCH_DIRECTION_DISTANCE = Pattern.compile("<img src=\"/images/icons/compass/([^\\.]+)\\.gif\"[^>]*>[^<]*<br />([0-9.,]+)\\s*?(m|km|ft|yd|mi|)?</span>");
     static final Pattern PATTERN_SEARCH_DIFFICULTY_TERRAIN = Pattern.compile("<span class=\"small\">([0-5]([\\.,]5)?)/([0-5]([\\.,]5)?)</span><br />");
@@ -145,7 +173,9 @@ public final class GCConstants {
 
     // Patterns for different purposes
 
-    /** replace line break and paragraph tags */
+    /**
+     * replace line break and paragraph tags
+     */
     static final Pattern PATTERN_LINEBREAK = Pattern.compile("<(br|p)[^>]*>");
     static final Pattern PATTERN_TYPEBOX = Pattern.compile("<select name=\"ctl00\\$ContentBody\\$LogBookPanel1\\$ddLogType\" id=\"ctl00_ContentBody_LogBookPanel1_ddLogType\"[^>]*>"
             + "(([^<]*<option[^>]*>[^<]+</option>)+)[^<]*</select>", Pattern.CASE_INSENSITIVE);
@@ -158,10 +188,14 @@ public final class GCConstants {
     static final Pattern PATTERN_VIEWSTATES = Pattern.compile("id=\"__VIEWSTATE(\\d*)\"[^(value)]+value=\"([^\"]+)\"[^>]+>", Pattern.CASE_INSENSITIVE | Pattern.MULTILINE);
     static final Pattern PATTERN_USERTOKEN = Pattern.compile("userToken\\s*=\\s*'([^']+)'");
 
-    /** downloadable PQs */
+    /**
+     * downloadable PQs
+     */
     static final Pattern PATTERN_PQ_LAST_GEN = Pattern.compile("([^(]*)(\\(([\\d]+)?)?");
 
-    /** Live Map since 14.02.2012 */
+    /**
+     * Live Map since 14.02.2012
+     */
     static final Pattern PATTERN_USERSESSION = Pattern.compile("UserSession\\('([^']+)'");
     static final Pattern PATTERN_SESSIONTOKEN = Pattern.compile("sessionToken:'([^']+)'");
 
@@ -186,7 +220,9 @@ public final class GCConstants {
     // Pages with such title seem to be returned with a 200 code instead of 404
     static final String STRING_404_FILE_NOT_FOUND = "<title>404 - File Not Found</title>";
 
-    /** Number of logs to retrieve from GC.com */
+    /**
+     * Number of logs to retrieve from GC.com
+     */
     static final int NUMBER_OF_LOGS = 35;
 
     /**

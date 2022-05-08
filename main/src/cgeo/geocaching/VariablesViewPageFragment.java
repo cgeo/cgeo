@@ -66,7 +66,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             binding.variables.clearFocus();
             if (!adapter.getVariables().isEmpty()) {
                 SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_deleteall))
-                    .setMessage(TextParam.id(R.string.variables_deleteall_confirm_text)).confirm((dd, i) -> adapter.clearAllVariables());
+                        .setMessage(TextParam.id(R.string.variables_deleteall_confirm_text)).confirm((dd, i) -> adapter.clearAllVariables());
             }
         });
 
@@ -79,7 +79,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         });
 
         binding.variablesInfo.setOnClickListener(d -> ShareUtils.openUrl(
-            this.getContext(), LocalizationUtils.getString(R.string.formula_syntax_url), false));
+                this.getContext(), LocalizationUtils.getString(R.string.formula_syntax_url), false));
 
         return binding;
     }
@@ -124,7 +124,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             binding.getRoot().post(() -> {
                 activity.ensureSaved();
                 cache.getVariables().saveState();
-           });
+            });
         }
     }
 
@@ -146,11 +146,11 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
             ActivityMixin.showShortToast(activity, R.string.variables_scanlisting_nopatternfound);
         } else {
             SimpleDialog.of(activity).setTitle(TextParam.id(R.string.variables_scanlisting_choosepattern_title))
-                .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
-                    for (String s : set) {
-                        adapter.addVariable(null, s);
-                    }
-                });
+                    .selectMultiple(patterns, (s, i) -> TextParam.text("`" + s + "`").setMarkdown(true), null, set -> {
+                        for (String s : set) {
+                            adapter.addVariable(null, s);
+                        }
+                    });
         }
     }
 

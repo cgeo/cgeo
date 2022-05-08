@@ -53,7 +53,7 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View createWaypointItemView (final Context context, final Waypoint waypoint, final View view) {
+    public static View createWaypointItemView(final Context context, final Waypoint waypoint, final View view) {
 
         final TextView tv = (TextView) view.findViewById(R.id.text);
         tv.setText(waypoint.getName());
@@ -88,7 +88,7 @@ public class GeoItemSelectorUtils {
         throw new IllegalArgumentException("unsupported IWaypoint type"); // can never happen
     }
 
-    public static View createGeoItemView (final Context context, final GeoitemRef geoitemRef, final View view) {
+    public static View createGeoItemView(final Context context, final GeoitemRef geoitemRef, final View view) {
         if (StringUtils.isNotEmpty(geoitemRef.getGeocode())) {
             if (geoitemRef.getType() == CoordinatesType.CACHE) {
                 final Geocache cache = DataStore.loadCache(geoitemRef.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
@@ -117,7 +117,7 @@ public class GeoItemSelectorUtils {
         return view;
     }
 
-    public static View getOrCreateView (final Context context, final View convertView, final ViewGroup parent) {
+    public static View getOrCreateView(final Context context, final View convertView, final ViewGroup parent) {
         final View view = convertView == null ? LayoutInflater.from(context).inflate(R.layout.cacheslist_item_select, parent, false) : convertView;
         setTitleTextStyle(context, view.findViewById(R.id.text), null); // reset title style
         return view;

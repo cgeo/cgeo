@@ -112,8 +112,7 @@ public class CgeoTestsActivity extends Activity {
     }
 
     /**
-     * @param v
-     *            referenced from XML layout
+     * @param v referenced from XML layout
      */
     public void runTests(final View v) {
         final Button button = findViewById(R.id.buttonRun);

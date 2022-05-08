@@ -30,10 +30,8 @@ public class MapQuestGeocoder {
      * Retrieve addresses from a textual location using MapQuest geocoding API. The work happens on the network
      * scheduler.
      *
-     * @param address
-     *            the location
+     * @param address the location
      * @return an observable containing zero or more locations
-     *
      * @see android.location.Geocoder#getFromLocationName(String, int)
      */
     public static Observable<Address> getFromLocationName(@NonNull final String address) {
@@ -81,8 +79,8 @@ public class MapQuestGeocoder {
         }
         setComponent(address, mapquestAddress, "postalCode", "PostalCode");
         int index = 0;
-        for (final String addressComponent: new String[]{ mapquestAddress.path("street").asText(), address.getSubLocality(), address.getLocality(),
-                address.getPostalCode(), address.getSubAdminArea(), address.getAdminArea(), address.getCountryCode() }) {
+        for (final String addressComponent : new String[]{mapquestAddress.path("street").asText(), address.getSubLocality(), address.getLocality(),
+                address.getPostalCode(), address.getSubAdminArea(), address.getAdminArea(), address.getCountryCode()}) {
             if (StringUtils.isNotBlank(addressComponent)) {
                 address.setAddressLine(index++, addressComponent);
             }

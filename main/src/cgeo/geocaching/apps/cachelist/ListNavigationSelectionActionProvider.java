@@ -27,8 +27,7 @@ public class ListNavigationSelectionActionProvider extends AbstractMenuActionPro
      * Creates a new instance. ActionProvider classes should always implement a
      * constructor that takes a single Context parameter for inflating from menu XML.
      *
-     * @param context
-     *            Context for accessing resources.
+     * @param context Context for accessing resources.
      */
     public ListNavigationSelectionActionProvider(final Context context) {
         super(context);

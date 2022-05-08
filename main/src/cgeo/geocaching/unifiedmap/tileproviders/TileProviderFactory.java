@@ -97,9 +97,9 @@ public class TileProviderFactory {
 
         // OSM offline tile providers
         final List<ImmutablePair<String, Uri>> offlineMaps =
-            CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
-                .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
-                .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
+                CollectionStream.of(ContentStorage.get().list(PersistableFolder.OFFLINE_MAPS, true))
+                        .filter(fi -> !fi.isDirectory && fi.name.toLowerCase(Locale.getDefault()).endsWith(FileUtils.MAP_FILE_EXTENSION) && isValidMapFile(fi.uri))
+                        .map(fi -> new ImmutablePair<>(StringUtils.capitalize(StringUtils.substringBeforeLast(fi.name, ".")), fi.uri)).toList();
         Collections.sort(offlineMaps, (o1, o2) -> TextUtils.COLLATOR.compare(o1.left, o2.left));
         for (ImmutablePair<String, Uri> data : offlineMaps) {
             registerTileProvider(new AbstractMapsforgeOfflineTileProvider(data.left, data.right, 0, 18));   // @todo: get actual values for zoomMin/zoomMax
@@ -206,6 +206,7 @@ public class TileProviderFactory {
     }
 
     // -----------------------------------------------------------------------------------------------
+
     /**
      * initialization on demand holder pattern
      */

@@ -68,22 +68,22 @@ public class IndividualRouteExport {
         builder.setView(binding.getRoot());
 
         final EditText editFilename = binding.filename;
-        editFilename.setFilters(new InputFilter[] { filter });
+        editFilename.setFilters(new InputFilter[]{filter});
         editFilename.setText(filename);
 
         final TextView text = binding.infoinclude.info;
         text.setText(activity.getString(R.string.export_confirm_message, PersistableFolder.GPX.toUserDisplayableValue(), filename + FileUtils.GPX_FILE_EXTENSION));
 
         builder
-            .setPositiveButton(R.string.export, (dialog, which) -> {
-                final String temp = StringUtils.trim(editFilename.getText().toString());
-                filename = (StringUtils.isNotBlank(temp) ? temp : filename) + FileUtils.GPX_FILE_EXTENSION;
-                dialog.dismiss();
-                new Export(activity).execute(route.getSegments());
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
-            .create()
-            .show();
+                .setPositiveButton(R.string.export, (dialog, which) -> {
+                    final String temp = StringUtils.trim(editFilename.getText().toString());
+                    filename = (StringUtils.isNotBlank(temp) ? temp : filename) + FileUtils.GPX_FILE_EXTENSION;
+                    dialog.dismiss();
+                    new Export(activity).execute(route.getSegments());
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, which) -> dialog.dismiss())
+                .create()
+                .show();
     }
 
     private class Export extends AsyncTaskWithProgress<RouteSegment, Uri> {

@@ -78,7 +78,7 @@ public class VariableListTest {
 
         final String name = cv.addVariable(null, "5", 1); //add BEFORE old var
         assertThat(name).isEqualTo("_1");
-        assertVariableList(cv, "a", "f:1", "_1", "f:5",  "b", "f:a", "c", "f:b");
+        assertVariableList(cv, "a", "f:1", "_1", "f:5", "b", "f:a", "c", "f:b");
     }
 
     @Test
@@ -87,7 +87,7 @@ public class VariableListTest {
         assertVariableList(cv, "a", "f:1", "b", "f:a", "c", "f:b");
 
         cv.sortVariables((s1, s2) -> -s1.compareTo(s2)); //sort backwards
-        assertVariableList(cv, "c", "f:b", "b", "f:a",  "a", "f:1");
+        assertVariableList(cv, "c", "f:b", "b", "f:a", "a", "f:1");
     }
 
     @Test
@@ -115,13 +115,15 @@ public class VariableListTest {
 
         //D is removed (empty and no uses), C, G and K are added with empty formulas, list is sorted
         assertVariableList(cv,
-            "A", "f:B", "B", "f:C", "C", "f:", "E", "f:F", "F", "f:G", "G", "f:", "K", "f:");
+                "A", "f:B", "B", "f:C", "C", "f:", "E", "f:F", "F", "f:G", "G", "f:", "K", "f:");
 
     }
 
 
-    /** expectedParams syntax: pure string = expected var, prefix with f: to assert formula */
-    private void assertVariableList(final VariableList cv, final String ... expectedParams) {
+    /**
+     * expectedParams syntax: pure string = expected var, prefix with f: to assert formula
+     */
+    private void assertVariableList(final VariableList cv, final String... expectedParams) {
         final List<String> vars = new ArrayList<>();
         String currentVar = null;
         for (String p : expectedParams) {

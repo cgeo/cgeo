@@ -5,7 +5,7 @@ import cgeo.geocaching.location.Geopoint;
 import android.os.Parcel;
 import android.os.Parcelable;
 
-public class CoordinateInputData implements Parcelable  {
+public class CoordinateInputData implements Parcelable {
 
     private Geopoint geopoint;
     private String geocode;

@@ -48,7 +48,7 @@ public enum CalculatedCoordinateType {
 
 
     public String toUserDisplayableString() {
-           return userDisplay;
+        return userDisplay;
     }
 
     public String shortName() {

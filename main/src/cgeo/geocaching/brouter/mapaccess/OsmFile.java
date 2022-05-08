@@ -82,7 +82,7 @@ final class OsmFile {
     }
 
     public MicroCache createMicroCache(final int ilon, final int ilat, final DataBuffers dataBuffers, final TagValueValidator wayValidator, final WaypointMatcher waypointMatcher, final OsmNodesMap hollowNodes)
-        throws Exception {
+            throws Exception {
         final int lonIdx = ilon / cellsize;
         final int latIdx = ilat / cellsize;
         final MicroCache segment = createMicroCache(lonIdx, latIdx, dataBuffers, wayValidator, waypointMatcher, true, hollowNodes);

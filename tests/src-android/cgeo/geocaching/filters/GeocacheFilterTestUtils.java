@@ -21,7 +21,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import static org.assertj.core.api.Java6Assertions.assertThat;
 import static org.junit.Assert.fail;
 
-/** Unit test helpers for Geocache filters */
+/**
+ * Unit test helpers for Geocache filters
+ */
 public class GeocacheFilterTestUtils {
 
     private static final AtomicInteger DB_CACHE_INDEX = new AtomicInteger(0);

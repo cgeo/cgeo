@@ -54,7 +54,7 @@ public class CalcState implements Serializable {
         this.buttons = buttons;
         this.equations = equations;
         this.freeVariables = freeVariables;
-        this.variableBank  = bankVariables;
+        this.variableBank = bankVariables;
     }
 
     public CalcState(final JSONObject json) {
@@ -63,8 +63,8 @@ public class CalcState implements Serializable {
         plainLon = json.optString("plainLon");
         latHemisphere = (char) json.optInt("latHemisphere", ERROR_CHAR);
         lonHemisphere = (char) json.optInt("lonHemisphere", ERROR_CHAR);
-        buttons       = createJSONAbleList(json.optJSONArray("buttons"),       new ButtonDataFactory());
-        equations     = createJSONAbleList(json.optJSONArray("equations"),     new VariableDataFactory());
+        buttons = createJSONAbleList(json.optJSONArray("buttons"), new ButtonDataFactory());
+        equations = createJSONAbleList(json.optJSONArray("equations"), new VariableDataFactory());
         freeVariables = createJSONAbleList(json.optJSONArray("freeVariables"), new VariableDataFactory());
         variableBank = new ArrayList<>(); // "variableBank" intentionally not loaded.
     }
@@ -83,7 +83,7 @@ public class CalcState implements Serializable {
         return returnValue;
     }
 
-    public static CalcState fromJSON(final String json)  {
+    public static CalcState fromJSON(final String json) {
         if (json == null) {
             return null;
         }

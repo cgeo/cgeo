@@ -175,7 +175,7 @@ public class MapProviderFactory {
         return null;
     }
 
-    public static void setLanguages (final String[] newLanguages) {
+    public static void setLanguages(final String[] newLanguages) {
         languages = newLanguages;
     }
 

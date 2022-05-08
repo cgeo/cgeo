@@ -103,7 +103,7 @@ public class ImageGalleryView extends LinearLayout {
             this.imageSizeDp = (newConfig.screenWidthDp / 2) - 10;
         }
         this.categoryHorizontalMargin = Math.max(0,
-            (newConfig.screenWidthDp - this.columnCount * (this.imageSizeDp + IMAGE_SPACE_DB)) / 2 - 10);
+                (newConfig.screenWidthDp - this.columnCount * (this.imageSizeDp + IMAGE_SPACE_DB)) / 2 - 10);
 
         //apply new layout
         for (ImageGalleryCategoryBinding categoryView : this.categoryViews.values()) {
@@ -225,7 +225,7 @@ public class ImageGalleryView extends LinearLayout {
             });
             binding.imageImage.setOnLongClickListener(v -> {
                 final ImageListData ild = getItem(holder.getBindingAdapterPosition());
-                showContextOptions(ild.image, ild.category, holder.getBindingAdapterPosition(),  this);
+                showContextOptions(ild.image, ild.category, holder.getBindingAdapterPosition(), this);
                 return true;
             });
         }
@@ -253,7 +253,7 @@ public class ImageGalleryView extends LinearLayout {
         this.context = new ContextThemeWrapper(getContext(), R.style.cgeo);
         this.activity = ViewUtils.toActivity(this.context);
         recalculateLayout(getContext().getResources().getConfiguration());
-     }
+    }
 
     public void setup(final String geocode) {
         this.geocode = geocode;
@@ -343,7 +343,9 @@ public class ImageGalleryView extends LinearLayout {
         }
     }
 
-    /** include this method in your activity to support activity-related tasks */
+    /**
+     * include this method in your activity to support activity-related tasks
+     */
     public boolean onActivityResult(final int requestCode, final int resultCode, final Intent data) {
         return imageHelper.onActivityResult(requestCode, resultCode, data);
     }
@@ -431,11 +433,11 @@ public class ImageGalleryView extends LinearLayout {
             }
         }
         ImageViewActivity.openImageView(this.activity, geocode, images, intentPos,
-            p -> getImageViewForIndex(p, true));
-            //categoryViews.get(category).imageGalleryList.getChildAt(pos).findViewById(R.id.image_image));
+                p -> getImageViewForIndex(p, true));
+        //categoryViews.get(category).imageGalleryList.getChildAt(pos).findViewById(R.id.image_image));
     }
 
-    private void showContextOptions(final Image img, final String category, final int pos,  final ImageListAdapter adapter) {
+    private void showContextOptions(final Image img, final String category, final int pos, final ImageListAdapter adapter) {
         if (activity == null || img == null) {
             return;
         }
@@ -443,19 +445,19 @@ public class ImageGalleryView extends LinearLayout {
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
 
         ctxMenu.addItem("Open", R.drawable.ic_menu_info_details,
-            v -> openImageViewer(category, pos));
+                v -> openImageViewer(category, pos));
 
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_info_details,
-            v -> ImageUtils.viewImageInStandardApp(activity, img.getUri(), geocode));
+                v -> ImageUtils.viewImageInStandardApp(activity, img.getUri(), geocode));
 
         if (!UriUtils.isFileUri(img.getUri()) && !UriUtils.isContentUri(img.getUri())) {
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_browser), R.drawable.ic_menu_share,
-                v -> ShareUtils.openUrl(context, img.getUrl(), false));
+                    v -> ShareUtils.openUrl(context, img.getUrl(), false));
         }
         if (img.hasDescription()) {
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_show_description), R.drawable.ic_menu_hint,
-                v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.log_image_description)
-                    .setMessage(TextParam.text(img.getDescription()).setHtml(true)).show());
+                    v -> SimpleDialog.ofContext(getContext()).setTitle(R.string.log_image_description)
+                            .setMessage(TextParam.text(img.getDescription()).setHtml(true)).show());
         }
         final Geopoint gp = imageCoordMap.get(img.getUrl());
         if (gp != null && geocode != null) {
@@ -471,7 +473,7 @@ public class ImageGalleryView extends LinearLayout {
                 }
             });
             ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_menu_navigate), R.drawable.ic_menu_navigate,
-                v -> NavigationAppFactory.showNavigationMenu(activity, null, null, gp));
+                    v -> NavigationAppFactory.showNavigationMenu(activity, null, null, gp));
         }
 
         final EditableCategoryHandler editHandler = editableCategoryHandlerMap.get(category);

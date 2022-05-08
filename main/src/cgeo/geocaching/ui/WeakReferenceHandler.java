@@ -9,7 +9,6 @@ import java.lang.ref.WeakReference;
  * memory due to references from the handler to the activity (see Android Lint warning "HandlerLeak")
  *
  * Create static private subclasses of this handler class in your activity.
- *
  */
 public abstract class WeakReferenceHandler<ActivityType> extends Handler {
 

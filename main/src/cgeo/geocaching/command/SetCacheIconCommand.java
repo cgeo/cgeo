@@ -41,7 +41,7 @@ public abstract class SetCacheIconCommand extends AbstractCachesCommand {
     @Override
     protected void undoCommand() {
         DataStore.setCacheIcons(getCaches(), this.undo);
-     }
+    }
 
     @Override
     @Nullable

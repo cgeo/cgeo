@@ -40,7 +40,7 @@ public final class PhysicalFile implements Closeable {
             final short readVersion = (short) (lv >> 48);
             if (i == 0 && lookupVersion != -1 && readVersion != lookupVersion) {
                 throw new IllegalArgumentException("lookup version mismatch (old rd5?) lookups.dat="
-                    + lookupVersion + " " + fileName + "=" + readVersion);
+                        + lookupVersion + " " + fileName + "=" + readVersion);
             }
             fileIndex[i] = lv & 0xffffffffffffL;
         }

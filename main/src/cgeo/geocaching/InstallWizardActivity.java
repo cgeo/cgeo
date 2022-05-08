@@ -128,30 +128,30 @@ public class InstallWizardActivity extends AppCompatActivity {
         nextOutlined = binding.wizardNextOutlined;
 
         this.contentStorageActivityHelper = new ContentStorageActivityHelper(this, savedInstanceState == null ? null : savedInstanceState.getBundle(BUNDLE_CSAH))
-            .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> {
-                final boolean needsMigration;
-                switch (pf) {
-                    case GPX:
-                        needsMigration = gpxFolderNeedsMigration();
-                        break;
-                    case BASE:
-                        needsMigration = !ContentStorageActivityHelper.baseFolderIsSet();
-                        break;
-                    case OFFLINE_MAPS:
-                        needsMigration = mapFolderNeedsMigration();
-                        break;
-                    case OFFLINE_MAP_THEMES:
-                        needsMigration = mapThemeFolderNeedsMigration();
-                        break;
-                    case ROUTING_TILES:
-                        needsMigration = broutertilesFolderNeedsMigration();
-                        break;
-                    default:
-                        needsMigration = false;
-                        break;
-                }
-                onReturnFromFolderMigration(!needsMigration);
-            });
+                .addSelectActionCallback(ContentStorageActivityHelper.SelectAction.SELECT_FOLDER_PERSISTED, PersistableFolder.class, pf -> {
+                    final boolean needsMigration;
+                    switch (pf) {
+                        case GPX:
+                            needsMigration = gpxFolderNeedsMigration();
+                            break;
+                        case BASE:
+                            needsMigration = !ContentStorageActivityHelper.baseFolderIsSet();
+                            break;
+                        case OFFLINE_MAPS:
+                            needsMigration = mapFolderNeedsMigration();
+                            break;
+                        case OFFLINE_MAP_THEMES:
+                            needsMigration = mapThemeFolderNeedsMigration();
+                            break;
+                        case ROUTING_TILES:
+                            needsMigration = broutertilesFolderNeedsMigration();
+                            break;
+                        default:
+                            needsMigration = false;
+                            break;
+                    }
+                    onReturnFromFolderMigration(!needsMigration);
+                });
 
         updateDialog();
     }
@@ -248,10 +248,10 @@ public class InstallWizardActivity extends AppCompatActivity {
                 title.setText(R.string.wizard_welcome_title);
                 final StringBuilder info = new StringBuilder();
                 info.append(getString(R.string.wizard_status_title)).append(":\n")
-                    .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
-                    .append(getString(R.string.wizard_status_platform));
+                        .append(getString(R.string.wizard_status_storage_permission)).append(": ").append(hasStoragePermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                        .append(getString(R.string.wizard_status_location_permission)).append(": ").append(hasLocationPermission(this) ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                        .append(getString(R.string.wizard_status_basefolder)).append(": ").append(ContentStorageActivityHelper.baseFolderIsSet() ? getString(android.R.string.ok) : getString(R.string.status_not_ok)).append("\n")
+                        .append(getString(R.string.wizard_status_platform));
                 boolean platformConfigured = false;
                 final StringBuilder platforms = new StringBuilder();
                 for (final IConnector conn : ConnectorFactory.getActiveConnectorsWithValidCredentials()) {
@@ -365,16 +365,16 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private boolean stepCanBeSkipped() {
         return (step == WizardStep.WIZARD_PERMISSIONS && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || (hasStoragePermission(this) && hasLocationPermission(this))))
-            || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission(this)))
-            || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
-            || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
-            || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
-            || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
-            || (step == WizardStep.WIZARD_PERMISSIONS_GPXFOLDER && !gpxFolderNeedsMigration())
-            || (step == WizardStep.WIZARD_PERMISSIONS_BROUTERTILESFOLDER && !broutertilesFolderNeedsMigration())
-            || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
-            || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
-            ;
+                || (step == WizardStep.WIZARD_PERMISSIONS_STORAGE && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasStoragePermission(this)))
+                || (step == WizardStep.WIZARD_PERMISSIONS_LOCATION && (Build.VERSION.SDK_INT < Build.VERSION_CODES.M || hasLocationPermission(this)))
+                || (step == WizardStep.WIZARD_PERMISSIONS_BASEFOLDER && ContentStorageActivityHelper.baseFolderIsSet())
+                || (step == WizardStep.WIZARD_PERMISSIONS_MAPFOLDER && !mapFolderNeedsMigration())
+                || (step == WizardStep.WIZARD_PERMISSIONS_MAPTHEMEFOLDER && !mapThemeFolderNeedsMigration())
+                || (step == WizardStep.WIZARD_PERMISSIONS_GPXFOLDER && !gpxFolderNeedsMigration())
+                || (step == WizardStep.WIZARD_PERMISSIONS_BROUTERTILESFOLDER && !broutertilesFolderNeedsMigration())
+                || (step == WizardStep.WIZARD_PLATFORMS && mode == WizardMode.WIZARDMODE_MIGRATION)
+                || (step == WizardStep.WIZARD_ADVANCED && mode == WizardMode.WIZARDMODE_MIGRATION)
+                ;
     }
 
     private void skipWizard() {
@@ -409,7 +409,7 @@ public class InstallWizardActivity extends AppCompatActivity {
 
     private static boolean hasLocationPermission(final Context context) {
         return (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED)
-            || (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
+                || (ContextCompat.checkSelfPermission(context, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED);
     }
 
     private void requestStorage() {
@@ -552,7 +552,8 @@ public class InstallWizardActivity extends AppCompatActivity {
                 SimpleDialog.of(this).setTitle(R.string.settings_title_gc).setMessage(R.string.settings_gc_legal_note).confirm((dialog, which) -> {
                     Settings.setGCConnectorActive(true);
                     gotoNext();
-                }, (dialog, i) -> { });
+                }, (dialog, i) -> {
+                });
             }
             return;
         }

@@ -55,7 +55,7 @@ public class ItemRangeSelectorViewHolder<T, F extends IGeocacheFilter> extends B
         } else {
             slider.setRange(filterAccessor.getSelectableValuesAsArray()[min], filterAccessor.getSelectableValuesAsArray()[max]);
         }
-   }
+    }
 
     @Override
     public View createView() {

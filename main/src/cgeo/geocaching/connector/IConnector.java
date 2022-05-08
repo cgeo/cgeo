@@ -16,7 +16,6 @@ import java.util.Set;
 public interface IConnector {
     /**
      * get name for display. Also used for unique identification of this connector, so make sure its uniqueness!
-     *
      */
     @NonNull
     String getName();
@@ -24,8 +23,7 @@ public interface IConnector {
     /**
      * Check if this connector is responsible for the given geocode.
      *
-     * @param geocode
-     *            geocode of a cache
+     * @param geocode geocode of a cache
      * @return return {@code true}, if this connector is responsible for the cache
      */
     boolean canHandle(@NonNull String geocode);
@@ -40,22 +38,19 @@ public interface IConnector {
     /**
      * Return a new geocodes list, with only geocodes for which this connector is responsible.
      *
-     * @param geocodes
-     *            list of geocodes of a cache
+     * @param geocodes list of geocodes of a cache
      * @return return a new stripped list
      */
     Set<String> handledGeocodes(@NonNull Set<String> geocodes);
 
     /**
      * Get the browser URL for the given cache.
-     *
      */
     @Nullable
     String getCacheUrl(@NonNull Geocache cache);
 
     /**
      * get long browser URL for the given cache
-     *
      */
     @Nullable
     String getLongCacheUrl(@NonNull Geocache cache);
@@ -83,32 +78,27 @@ public interface IConnector {
 
     /**
      * enable/disable logging controls in cache details
-     *
      */
     boolean supportsLogging();
 
     /**
      * enable/disable attaching image to log
-     *
      */
     boolean supportsLogImages();
 
     /**
      * Get an ILoggingManager to guide the logging process.
-     *
      */
     @NonNull
     ILoggingManager getLoggingManager(@NonNull LogCacheActivity activity, @NonNull Geocache cache);
 
     /**
      * enable/disable changing the name of a cache
-     *
      */
     boolean supportsNamechange();
 
     /**
      * enable/disable changing the description of a cache
-     *
      */
     boolean supportsDescriptionchange();
 
@@ -125,7 +115,6 @@ public interface IConnector {
 
     /**
      * Get host name of the connector server for dynamic loading of data.
-     *
      */
     @NonNull
     String getHost();
@@ -145,34 +134,29 @@ public interface IConnector {
 
     /**
      * Get url to use when testing website availability (because host url may redirect)
-     *
      */
     @NonNull
     String getTestUrl();
 
     /**
      * Get cache data license text. This is displayed somewhere near the cache details.
-     *
      */
     @NonNull
     String getLicenseText(@NonNull Geocache cache);
 
     /**
      * return true if this is a ZIP file containing a GPX file
-     *
      */
     boolean isZippedGPXFile(@NonNull String fileName);
 
     /**
      * extract a geocode from the given URL, if this connector can handle that URL somehow
-     *
      */
     @Nullable
     String getGeocodeFromUrl(@NonNull String url);
 
     /**
      * extract a geocode from the given Text, if this connector can handle that text somehow
-     *
      */
     @Nullable
     String getGeocodeFromText(@NonNull String text);
@@ -201,7 +185,6 @@ public interface IConnector {
     /**
      * Return {@code true} if this connector is active for online interaction (download details, do searches, ...). If
      * this is {@code false}, the connector will still be used for already stored offline caches.
-     *
      */
 
     boolean isActive();
@@ -217,7 +200,6 @@ public interface IConnector {
     /**
      * Check if the cache information is complete enough to be
      * able to log online.
-     *
      */
     boolean canLog(@NonNull Geocache geocache);
 
@@ -248,7 +230,6 @@ public interface IConnector {
     /**
      * Get the list of <b>potentially</b> possible log types for a cache. Those may still be filtered further during the
      * actual logging activity.
-     *
      */
     @NonNull
     List<LogType> getPossibleLogTypes(@NonNull Geocache geocache);
@@ -256,26 +237,22 @@ public interface IConnector {
     /**
      * Get the GPX id for a waypoint when exporting. For some connectors there is an inherent name logic,
      * for others its just the 'prefix'.
-     *
      */
     String getWaypointGpxId(String prefix, @NonNull String geocode);
 
     /**
      * Get the 'prefix' (key) for a waypoint from the 'name' in the GPX file
-     *
      */
     @NonNull
     String getWaypointPrefix(String name);
 
     /**
      * Get the maximum value for Terrain
-     *
      */
     int getMaxTerrain();
 
     /**
      * Get a user readable collection of all online features of this connector.
-     *
      */
     @NonNull
     Collection<String> getCapabilities();

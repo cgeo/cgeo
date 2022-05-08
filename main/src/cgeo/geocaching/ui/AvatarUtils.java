@@ -13,7 +13,9 @@ import java.util.Objects;
 
 import org.apache.commons.lang3.StringUtils;
 
-/** Class to retrieve Avatar images from. This class handles e.g. in-memory image caching */
+/**
+ * Class to retrieve Avatar images from. This class handles e.g. in-memory image caching
+ */
 public class AvatarUtils {
 
     private static final HtmlImage HTML_IMAGE = new HtmlImage(HtmlImage.SHARED, false, false, false);

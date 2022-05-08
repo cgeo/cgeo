@@ -83,7 +83,7 @@ public class GeocacheTest extends CGeoTestCase {
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.888 E007 03.444"), "", "", "Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", WaypointType.OWN));
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 13.233 E007 03.444"), "", "", "Test N51 09.123 E007 03.444", WaypointType.OWN));
         wpList.add(createWaypointWithUserNote(new Geopoint("N51 09.123 E007 03.444"), "", "", "", WaypointType.OWN));
-        assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444",  wpList);
+        assertWaypointsParsed("Test N51 13.888 E007 03.444 Test N51 13.233 E007 03.444 Test N51 09.123 E007 03.444", wpList);
     }
 
     /**
@@ -95,7 +95,7 @@ public class GeocacheTest extends CGeoTestCase {
         wpList.add(new Waypoint("", new Geopoint("N51 13.888 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", new Geopoint("N51 13.233 E007 03.444"), "", "", "", WaypointType.OWN));
         wpList.add(new Waypoint("", new Geopoint("N51 09.123 E007 03.444"), "", "", "", WaypointType.OWN));
-        assertWaypointsParsed("Test N51 13.888 E007 03.444 \nTest N51 13.233 E007 03.444 \nTest N51 09.123 E007 03.444",  wpList);
+        assertWaypointsParsed("Test N51 13.888 E007 03.444 \nTest N51 13.233 E007 03.444 \nTest N51 09.123 E007 03.444", wpList);
     }
 
     /**

@@ -23,7 +23,9 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
     private Geocache geocache;
     private final Activity activity;
 
-    /** Constructor MUST (!) be of type Context, NOT Activity! Otherwise it can't be instantiated by Android infrastructure. See #11251 */
+    /**
+     * Constructor MUST (!) be of type Context, NOT Activity! Otherwise it can't be instantiated by Android infrastructure. See #11251
+     */
     public NavigationSelectionActionProvider(final Context context) {
         super(context);
 
@@ -35,8 +37,8 @@ public class NavigationSelectionActionProvider extends AbstractMenuActionProvide
         this.activity = baseContext instanceof Activity ? (Activity) baseContext : null;
         if (this.activity == null) {
             Log.w("NavigationSelectionActionProvider called with Non-Activity-class: " +
-                (context == null ? "null" : context.getClass().getName()) + "/" +
-                (baseContext == null ? "null" : baseContext.getClass().getName()));
+                    (context == null ? "null" : context.getClass().getName()) + "/" +
+                    (baseContext == null ? "null" : baseContext.getClass().getName()));
         }
     }
 

@@ -9,7 +9,6 @@ import java.util.Locale;
 
 /**
  * sorts caches by popularity (favorite count)
- *
  */
 class PopularityComparator extends AbstractCacheComparator {
 

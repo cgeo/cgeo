@@ -73,11 +73,11 @@ public class CompassActivity extends AbstractActionBarActivity {
         binding = CompassActivityBinding.bind(getWindow().getDecorView().findViewById(android.R.id.content));
 
         deviceOrientationMode
-            .setValues(Arrays.asList(new DirectionData.DeviceOrientation[]{DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT}))
-            .setDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
-            .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
-            .setTextClickThrough(true)
-            .setChangeListener(Settings::setDeviceOrientationMode);
+                .setValues(Arrays.asList(new DirectionData.DeviceOrientation[]{DirectionData.DeviceOrientation.AUTO, DirectionData.DeviceOrientation.FLAT, DirectionData.DeviceOrientation.UPRIGHT}))
+                .setDisplayMapper(d -> getString(R.string.device_orientation) + ": " + getString(d.resId))
+                .setCheckedMapper(d -> d == DirectionData.DeviceOrientation.AUTO)
+                .setTextClickThrough(true)
+                .setChangeListener(Settings::setDeviceOrientationMode);
 
         reconfigureGui();
 
@@ -168,7 +168,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         geoDirHandler.updateGeoDir(sensors.currentGeo(), sensors.currentDirection());
     }
 
-    /** refresh GUI elements which can be changed e.g. after a new configuration was issued (e.g. turning from portrait into landscape and vice versa */
+    /**
+     * refresh GUI elements which can be changed e.g. after a new configuration was issued (e.g. turning from portrait into landscape and vice versa
+     */
     private void reconfigureGui() {
         // Force a refresh of location and direction when data is available.
         final Sensors sensors = Sensors.getInstance();
@@ -308,7 +310,7 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     };
 
-    private static final double[] altitudeReadings = { 0.0d, 0.0d, 0.0d, 0.0d, 0.0d };
+    private static final double[] altitudeReadings = {0.0d, 0.0d, 0.0d, 0.0d, 0.0d};
     private static int altitudeReadingPos = 0;
 
     @SuppressLint("SetTextI18n")
@@ -356,7 +358,7 @@ public class CompassActivity extends AbstractActionBarActivity {
     private void updateNorthHeading(final DirectionData dir) {
         if (binding.rose != null) {
             binding.rose.updateNorth(dir.getDeviceOrientation() == DirectionData.DeviceOrientation.UPRIGHT ?
-                dir.getDirection() : AngleUtils.getDirectionNow(dir.getDirection()), cacheHeading);
+                    dir.getDirection() : AngleUtils.getDirectionNow(dir.getDirection()), cacheHeading);
         }
     }
 
@@ -395,7 +397,9 @@ public class CompassActivity extends AbstractActionBarActivity {
         }
     }
 
-    /** formats a float to a decimal with length 4 and no places behind comma. Handles "-0" case. */
+    /**
+     * formats a float to a decimal with length 4 and no places behind comma. Handles "-0" case.
+     */
     private static String formatDecimalFloat(final float value) {
         final String formattedValue = String.format(Locale.US, "% 4.0f", value);
         if (formattedValue.endsWith("-0")) {

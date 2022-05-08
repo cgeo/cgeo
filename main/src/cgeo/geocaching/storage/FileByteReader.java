@@ -29,9 +29,10 @@ public class FileByteReader implements Closeable {
 
     /**
      * Reads bytes from a file
+     *
      * @param startPos position to read from in the file
-     * @param length number of bytes to read
-     * @param buffer buffer to store read bytes in
+     * @param length   number of bytes to read
+     * @param buffer   buffer to store read bytes in
      * @throws IOException in case anything goes wrong
      */
     public void readFully(final long startPos, final int length, @NonNull final byte[] buffer) throws IOException {

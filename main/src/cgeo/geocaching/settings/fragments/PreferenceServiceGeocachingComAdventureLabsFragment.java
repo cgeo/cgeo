@@ -17,8 +17,8 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
     @Override
     public void onCreatePreferences(final Bundle savedInstanceState, final String rootKey) {
         setPreferencesFromResource(
-            R.xml.preferences_services_geocaching_com_adventure_lab,
-            rootKey);
+                R.xml.preferences_services_geocaching_com_adventure_lab,
+                rootKey);
 
         // Open website Preference
         final Preference openWebsite = findPreference(getString(R.string.pref_fakekey_al_website));
@@ -41,7 +41,7 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
     private void initLCServicePreference(final boolean gcConnectorActive) {
         final boolean isActiveGCPM = gcConnectorActive && Settings.isGCPremiumMember();
         findPreference(getString((R.string.preference_screen_al))).setSummary(
-            getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
+                getLcServiceSummary(Settings.isALConnectorActive(), gcConnectorActive));
         if (isActiveGCPM) {
             findPreference(getString(R.string.pref_connectorALActive)).setEnabled(true);
         }
@@ -54,7 +54,7 @@ public class PreferenceServiceGeocachingComAdventureLabsFragment extends Prefere
 
         //lc service is set to active by user. Check whether it can actually be actived due to GC conditions
         final int lcStatusTextId = gcConnectorActive && Settings.isGCPremiumMember() ?
-            R.string.settings_service_active : R.string.settings_service_active_unavailable;
+                R.string.settings_service_active : R.string.settings_service_active_unavailable;
 
         return CgeoApplication.getInstance().getString(lcStatusTextId);
     }

@@ -85,15 +85,15 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
         shortcuts.add(new Shortcut(R.string.menu_history, R.drawable.sc_history, CacheListActivity.getHistoryIntent(this)));
 
         SimpleDialog.of(this).setTitle(R.string.create_shortcut)
-            .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, SimpleDialog.SingleChoiceMode.NONE, (shortcut, pos) -> {
+                .selectSingle(shortcuts, (s, i) -> TextParam.text(s.toString()).setImage(ImageParam.id(s.getIcon()), 30), -1, SimpleDialog.SingleChoiceMode.NONE, (shortcut, pos) -> {
 
-        //Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, shortcut -> {
-            if (offlineShortcut.equals(shortcut)) {
-                promptForListShortcut();
-            } else {
-                createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);
-            }
-        });
+                    //Dialogs.select(this, getString(R.string.create_shortcut), shortcuts, shortcut -> {
+                    if (offlineShortcut.equals(shortcut)) {
+                        promptForListShortcut();
+                    } else {
+                        createShortcutAndFinish(shortcut.toString(), shortcut.intent, shortcut.drawableResourceId);
+                    }
+                });
     }
 
     protected void promptForListShortcut() {
@@ -123,9 +123,9 @@ public class CreateShortcutActivity extends AbstractActionBarActivity {
     }
 
     private Bitmap createOverlay(@DrawableRes final int drawableResourceId) {
-        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] {
-            ResourcesCompat.getDrawable(res, drawableResourceId, null),
-            ResourcesCompat.getDrawable(res, R.drawable.cgeo_borderless, null)
+        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{
+                ResourcesCompat.getDrawable(res, drawableResourceId, null),
+                ResourcesCompat.getDrawable(res, R.drawable.cgeo_borderless, null)
         });
         layerDrawable.setLayerInset(1, 140, 140, 0, 0);
         return ImageUtils.convertToBitmap(layerDrawable);

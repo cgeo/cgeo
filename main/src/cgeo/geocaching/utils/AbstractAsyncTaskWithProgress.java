@@ -14,7 +14,6 @@ import androidx.annotation.Nullable;
  * middle template parameter. Override {@link #doInBackgroundInternal(Object[])} and related methods.
  *
  * Do not use this class directly, instead use either AsyncTaskWithProgress or AsyncTaskWithProgressText.
- *
  */
 public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends AsyncTask<Params, T, Result> {
 
@@ -25,7 +24,6 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AbstractAsyncTaskWithProgress(@Nullable final Activity activity, final String progressTitle, final String progressMessage) {
         this.activity = activity;
@@ -35,7 +33,6 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
 
     /**
      * Creates an AsyncTask with progress dialog.
-     *
      */
     public AbstractAsyncTaskWithProgress(@Nullable final Activity activity, final String progressTitle) {
         this(activity, progressTitle, null);
@@ -43,7 +40,6 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
 
     /**
      * Show the progress dialog.
-     *
      */
     @Override
     protected void onPreExecute() {
@@ -55,7 +51,6 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
 
     /**
      * This method should typically be overridden by final sub classes instead of {@link #onPreExecute()}.
-     *
      */
     @SuppressWarnings("EmptyMethod")
     protected void onPreExecuteInternal() {
@@ -66,8 +61,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * Hide the progress dialog.
      * This method won't be invoked if the task was cancelled.
      *
-     * @param result
-     *          The result of the operation computed by doInBackground(Params...).
+     * @param result The result of the operation computed by doInBackground(Params...).
      */
     @Override
     protected final void onPostExecute(final Result result) {
@@ -80,8 +74,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
     /**
      * This method should typically be overridden by final sub classes instead of {@link #onPostExecute(Object)}.
      *
-     * @param result
-     *          The result of the operation computed by {@link #doInBackground(Object...)}.
+     * @param result The result of the operation computed by {@link #doInBackground(Object...)}.
      */
     protected void onPostExecuteInternal(final Result result) {
         // empty by default
@@ -90,8 +83,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
     /**
      * Subclasses must implement the logic for the progress updates.
      *
-     * @param status
-     *          The new progress status
+     * @param status The new progress status
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -102,8 +94,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
     /**
      * This method should typically be overridden by final sub classes instead of {@link #onProgressUpdate(T...)}.
      *
-     * @param status
-     *          The new progress status
+     * @param status The new progress status
      */
     protected void onProgressUpdateInternal(final T status) {
         // empty by default
@@ -113,8 +104,7 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
      * Force a new message to be shown in the dialog.
      * Call this only on the UI-Thread.
      *
-     * @param message
-     *          The new message to show
+     * @param message The new message to show
      */
     protected void setMessage(final String message) {
         progress.setMessage(message);
@@ -123,10 +113,8 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
     /**
      * Launch the process in background.
      *
-     * @param params
-     *          The parameters of the task.
-     * @return
-     *          A result, defined by the subclass of this task.
+     * @param params The parameters of the task.
+     * @return A result, defined by the subclass of this task.
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -136,18 +124,18 @@ public abstract class AbstractAsyncTaskWithProgress<Params, T, Result> extends A
 
     /**
      * This method should typically be overridden by final sub classes instead of {@link #onProgressUpdate(T...)}.
-     * @param params
-     *          The parameters of the task.
-     * @return
-     *          A result, defined by the subclass of this task.
+     *
+     * @param params The parameters of the task.
+     * @return A result, defined by the subclass of this task.
      */
     protected abstract Result doInBackgroundInternal(Params[] params);
 
     /**
      * Instead of a message set with cancelMessage parameter you may set an cancelListener to the progress dialog
+     *
      * @param cancelListener
      */
-    public void setOnCancelListener (final DialogInterface.OnClickListener cancelListener) {
+    public void setOnCancelListener(final DialogInterface.OnClickListener cancelListener) {
         progress.setOnCancelListener(cancelListener);
     }
 }

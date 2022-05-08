@@ -30,9 +30,9 @@ public class FilterUtils {
     public static void openFilterActivity(final Activity activity, final GeocacheFilterContext filterContext, final Collection<Geocache> filteredList) {
 
         GeocacheFilterActivity.selectFilter(
-            activity,
-            filterContext,
-            filteredList, true);
+                activity,
+                filterContext,
+                filteredList, true);
     }
 
     public static <T extends Activity & FilteredActivity> boolean openFilterList(final T filteredActivity, final GeocacheFilterContext filterContext) {
@@ -44,21 +44,21 @@ public class FilterUtils {
             final boolean isFilterActive = filterContext.get().isFiltering();
             if (isFilterActive) {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_clear_title)
-                    .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
-                    .setSelectionForNeutral(false)
-                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
-                        (f, pos) -> filteredActivity.refreshWithFilter(f),
-                        (f, pos) -> {
-                        },
-                        (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
-                    );
+                        .setButtons(0, 0, R.string.cache_filter_storage_clear_button)
+                        .setSelectionForNeutral(false)
+                        .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
+                                (f, pos) -> filteredActivity.refreshWithFilter(f),
+                                (f, pos) -> {
+                                },
+                                (f, pos) -> filteredActivity.refreshWithFilter(GeocacheFilter.createEmpty(filterContext.get().isOpenInAdvancedMode()))
+                        );
             } else {
                 SimpleDialog.of(filteredActivity).setTitle(R.string.cache_filter_storage_select_title)
-                    .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
-                        (f, pos) -> filteredActivity.refreshWithFilter(f),
-                        (f, pos) -> {
-                        }
-                    );
+                        .selectSingle(filters, (f, pos) -> TextParam.text(f.getName()), -1, SimpleDialog.SingleChoiceMode.NONE,
+                                (f, pos) -> filteredActivity.refreshWithFilter(f),
+                                (f, pos) -> {
+                                }
+                        );
             }
         }
         return true;
@@ -75,7 +75,9 @@ public class FilterUtils {
         }
     }
 
-    /** filterView must exist */
+    /**
+     * filterView must exist
+     */
     public static void initializeFilterBar(@NonNull final Activity activity, @NonNull final FilteredActivity filteredActivity) {
         final View filterView = activity.findViewById(R.id.filter_bar);
         filterView.setOnClickListener(v -> filteredActivity.showFilterMenu());

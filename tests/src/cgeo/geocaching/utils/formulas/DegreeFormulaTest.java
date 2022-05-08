@@ -7,7 +7,6 @@ import android.graphics.Color;
 import android.text.style.ForegroundColorSpan;
 import android.util.Pair;
 
-
 import org.apache.commons.lang3.tuple.ImmutableTriple;
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -19,7 +18,7 @@ public class DegreeFormulaTest {
 
         assertParse("N48 12.345", null, 48d + 12.345d / 60d, "N48°12.345'");
         assertParse("N48 1A.345", s -> Value.of(3d), 48d + 13.345d / 60d, "N48°13.345'");
-        assertParse("S48 1A.345", s -> Value.of(3d), - 48d - 13.345d / 60d, "S48°13.345'");
+        assertParse("S48 1A.345", s -> Value.of(3d), -48d - 13.345d / 60d, "S48°13.345'");
 
         assertParse("N 053° 33.06(3*A)'", s -> Value.of(3d), 53d + 33.069d / 60, "N053°33.069'");
         assertParse("N 053° 33.6(3*A)'", s -> Value.of(3d), 53d + 33.069d / 60, "N053°33.<0>69'");
@@ -54,14 +53,14 @@ public class DegreeFormulaTest {
 
     @Test
     public void parseDegree() {
-        assertParse("-A/100", s -> Value.of(40d), -0.4d , "-0.4°");
-        assertParse("NA/100", s -> Value.of(-40d), null , "N[-0.4]°");
+        assertParse("-A/100", s -> Value.of(40d), -0.4d, "-0.4°");
+        assertParse("NA/100", s -> Value.of(-40d), null, "N[-0.4]°");
     }
 
     @Test
     public void parseReverseDMS() {
-        assertParse("13°24'57.8\"S", null, -13d - 24d / 60 - 57.008 / 3600d , "13°24'57.<00>8\"S");
-        assertParse("13°24'57.8''S", null, -13d - 24d / 60 - 57.008 / 3600d , "13°24'57.<00>8\"S");
+        assertParse("13°24'57.8\"S", null, -13d - 24d / 60 - 57.008 / 3600d, "13°24'57.<00>8\"S");
+        assertParse("13°24'57.8''S", null, -13d - 24d / 60 - 57.008 / 3600d, "13°24'57.<00>8\"S");
     }
 
     @Test
@@ -81,9 +80,9 @@ public class DegreeFormulaTest {
         assertThat(DegreeFormula.compile("N90", false).evaluateToDouble(null)).isEqualTo(90);
         assertThat(DegreeFormula.compile("N90.1", false).evaluateToDouble(null)).isEqualTo(null);
 
-        assertParse("48 S", null, -48d , "48°S");
-        assertParse("S-48", null, null , "S[-48]°");
-        assertParse("-48 S", null, null , "-48°[S]");
+        assertParse("48 S", null, -48d, "48°S");
+        assertParse("S-48", null, null, "S[-48]°");
+        assertParse("-48 S", null, null, "-48°[S]");
     }
 
     @Test
@@ -108,7 +107,6 @@ public class DegreeFormulaTest {
         assertParse("90 3.45'S", null, -90 - 3.045 / 60, "90°3.<0>45'S");
         assertParse("S53 33.6", null, -53d - 33.006 / 60, "S53°33.<00>6'");
     }
-
 
 
     //this is a test to copy/paste single tests into for local analysis e.g. using Debugging

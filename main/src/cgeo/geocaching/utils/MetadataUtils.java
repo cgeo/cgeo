@@ -30,9 +30,10 @@ public final class MetadataUtils {
 
     /**
      * Tries to read metadata from given stream, assuming it is an image data stream
+     *
      * @param description describes the stream. Used for logging in case of errors
      * @param imageStream image data stream
-     * @param closeAfter if true, stream is closed after read
+     * @param closeAfter  if true, stream is closed after read
      * @return Metadata read, or null if metadata could not be read
      */
     public static Metadata readImageMetadata(final String description, final InputStream imageStream, final boolean closeAfter) {

@@ -55,17 +55,19 @@ public class MapUtils {
             final Geocache cache = DataStore.loadCache(wp.getGeocode(), LoadFlags.LOAD_CACHE_OR_DB);
             final WaypointType wpt = wp.getWaypointType();
             if (cache == null ||
-                !filter.filter(cache) ||
-                (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
-                (excludeWpParking && wpt == WaypointType.PARKING) ||
-                (excludeWpVisited && wp.isVisited())) {
+                    !filter.filter(cache) ||
+                    (excludeWpOriginal && wpt == WaypointType.ORIGINAL) ||
+                    (excludeWpParking && wpt == WaypointType.PARKING) ||
+                    (excludeWpVisited && wp.isVisited())) {
                 removeList.add(wp);
             }
         }
         waypoints.removeAll(removeList);
     }
 
-    /** Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required */
+    /**
+     * Applies given filter to cache list. Additionally, creates a second list additionally filtered by own/found/disabled caches if required
+     */
     public static void filter(final Collection<Geocache> caches, final GeocacheFilterContext filterContext) {
         final GeocacheFilter filter = filterContext.get();
         filter.filterList(caches);

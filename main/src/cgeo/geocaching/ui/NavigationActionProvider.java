@@ -23,8 +23,7 @@ public class NavigationActionProvider extends ActionProvider {
      * Creates a new instance. ActionProvider classes should always implement a
      * constructor that takes a single Context parameter for inflating from menu XML.
      *
-     * @param context
-     *            Context for accessing resources.
+     * @param context Context for accessing resources.
      */
     public NavigationActionProvider(final Context context) {
         super(context);

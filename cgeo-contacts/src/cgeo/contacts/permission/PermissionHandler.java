@@ -51,7 +51,7 @@ public class PermissionHandler {
     }
 
     private static void askFor(final Activity activity, final String permission, final PermissionRequestContext perm) {
-        askFor(activity, new String[] {permission}, perm);
+        askFor(activity, new String[]{permission}, perm);
     }
 
     private static void askFor(final Activity activity, final String[] permissions, final PermissionRequestContext perm) {
@@ -72,7 +72,7 @@ public class PermissionHandler {
             new AlertDialog.Builder(activity)
                     .setMessage(perm.getAskAgainResource())
                     .setCancelable(false)
-                    .setNeutralButton(R.string.ask_again, (dialog, which) -> askFor(activity, new String[] {contactsPermission}, perm))
+                    .setNeutralButton(R.string.ask_again, (dialog, which) -> askFor(activity, new String[]{contactsPermission}, perm))
                     .create()
                     .show();
         } else {
@@ -96,12 +96,12 @@ public class PermissionHandler {
     }
 
     private static boolean hasPermission(final Activity activity, final String permission) {
-        return hasPermission(activity, new String[] {permission});
+        return hasPermission(activity, new String[]{permission});
     }
 
     private static boolean hasPermission(final Activity activity, final String[] permissions) {
         boolean hasPermission = true;
-        for (String permission: permissions) {
+        for (String permission : permissions) {
             if (ContextCompat.checkSelfPermission(activity, permission) != PackageManager.PERMISSION_GRANTED) {
                 hasPermission = false;
             }

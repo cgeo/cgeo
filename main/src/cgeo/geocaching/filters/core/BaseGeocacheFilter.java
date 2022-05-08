@@ -5,7 +5,9 @@ import cgeo.geocaching.utils.functions.Action1;
 
 import java.util.List;
 
-/** Base implementation for common (non-logical) geocache filters */
+/**
+ * Base implementation for common (non-logical) geocache filters
+ */
 public abstract class BaseGeocacheFilter implements IGeocacheFilter {
 
     private GeocacheFilterType type;
@@ -48,17 +50,23 @@ public abstract class BaseGeocacheFilter implements IGeocacheFilter {
         return sb.toString();
     }
 
-    /** To be overwrite potentially by subclasses wishing to provide user-displayable filter config information */
+    /**
+     * To be overwrite potentially by subclasses wishing to provide user-displayable filter config information
+     */
     protected String getUserDisplayableConfig() {
         return null;
     }
 
-    /** Helper method to read boolean config values as flags */
+    /**
+     * Helper method to read boolean config values as flags
+     */
     protected static boolean checkBooleanFlag(final String expectedFlag, final String value) {
         return TextUtils.isEqualIgnoreCaseAndSpecialChars(value, expectedFlag);
     }
 
-    /** Helper method to read enum config values */
+    /**
+     * Helper method to read enum config values
+     */
     protected static <E extends Enum<E>> void checkEnumValue(final Class<E> enumClass, final String value, final Action1<E> executeIfFound) {
         final E enumValue = TextUtils.getEnumIgnoreCaseAndSpecialChars(enumClass, value, null);
         if (enumValue != null) {

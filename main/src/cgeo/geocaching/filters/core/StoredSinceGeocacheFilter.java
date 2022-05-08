@@ -34,7 +34,9 @@ public class StoredSinceGeocacheFilter extends NumberRangeGeocacheFilter<Long> {
         super(Long::valueOf);
     }
 
-    /** returns stored time in SECONDS, or -1 if cache is not stored at all */
+    /**
+     * returns stored time in SECONDS, or -1 if cache is not stored at all
+     */
     @Override
     public Long getValue(final Geocache cache) {
         if (!cache.isOffline()) {

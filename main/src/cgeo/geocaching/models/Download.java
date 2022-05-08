@@ -86,7 +86,8 @@ public class Download {
         return downloader != null ? downloader.mapSourceName : "???";
     }
 
-    @DrawableRes public int getIconRes() {
+    @DrawableRes
+    public int getIconRes() {
         return iconRes;
     }
 
@@ -138,7 +139,8 @@ public class Download {
             return null;
         }
 
-        @StringRes public int getTypeNameResId() {
+        @StringRes
+        public int getTypeNameResId() {
             return typeNameResId;
         }
 

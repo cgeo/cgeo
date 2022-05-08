@@ -20,7 +20,7 @@ public class MapDownloaderHylly extends AbstractMapDownloader {
     private static final MapDownloaderHylly INSTANCE = new MapDownloaderHylly();
 
     private MapDownloaderHylly() {
-        super (Download.DownloadType.DOWNLOADTYPE_MAP_HYLLY, R.string.mapserver_hylly_updatecheckurl, R.string.mapserver_hylly_name, R.string.mapserver_hylly_info, R.string.mapserver_hylly_projecturl, R.string.mapserver_hylly_likeiturl);
+        super(Download.DownloadType.DOWNLOADTYPE_MAP_HYLLY, R.string.mapserver_hylly_updatecheckurl, R.string.mapserver_hylly_name, R.string.mapserver_hylly_info, R.string.mapserver_hylly_projecturl, R.string.mapserver_hylly_likeiturl);
         companionType = Download.DownloadType.DOWNLOADTYPE_THEME_HYLLY;
     }
 

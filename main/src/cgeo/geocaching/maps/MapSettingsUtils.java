@@ -65,7 +65,7 @@ public class MapSettingsUtils {
         final SettingsCheckboxModel foundCb = createCb(allCbs, R.string.map_showc_found, ImageParam.id(R.drawable.marker_found), quickFilter.get(GeocacheFilter.QuickFilter.FOUND), f -> quickFilter.put(GeocacheFilter.QuickFilter.FOUND, f), false);
         final SettingsCheckboxModel offlineLogCb = createCb(allCbs, R.string.map_showc_found_offline, R.drawable.marker_found_offline, quickFilter.get(GeocacheFilter.QuickFilter.HAS_OFFLINE_FOUND_LOG), f -> quickFilter.put(GeocacheFilter.QuickFilter.HAS_OFFLINE_FOUND_LOG, f), false);
         final SettingsCheckboxModel ownCb = createCb(allCbs, R.string.map_showc_own, ImageParam.id(R.drawable.marker_own), quickFilter.get(GeocacheFilter.QuickFilter.OWNED), f -> quickFilter.put(GeocacheFilter.QuickFilter.OWNED, f), false);
-        final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled,  R.drawable.map_status_disabled, quickFilter.get(GeocacheFilter.QuickFilter.DISABLED), f -> quickFilter.put(GeocacheFilter.QuickFilter.DISABLED, f), false);
+        final SettingsCheckboxModel disabledCb = createCb(allCbs, R.string.map_showc_disabled, R.drawable.map_status_disabled, quickFilter.get(GeocacheFilter.QuickFilter.DISABLED), f -> quickFilter.put(GeocacheFilter.QuickFilter.DISABLED, f), false);
         final SettingsCheckboxModel archivedCb = createCb(allCbs, R.string.map_showc_archived, R.drawable.map_status_archived, quickFilter.get(GeocacheFilter.QuickFilter.ARCHIVED), f -> quickFilter.put(GeocacheFilter.QuickFilter.ARCHIVED, f), false);
         final SettingsCheckboxModel wpOriginalCb = createCb(allCbs, R.string.map_showwp_original, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.ORIGINAL)), Settings.isExcludeWpOriginal(), Settings::setExcludeWpOriginal, true);
         final SettingsCheckboxModel wpParkingCb = createCb(allCbs, R.string.map_showwp_parking, ImageParam.drawable(MapMarkerUtils.getWaypointTypeMarker(activity.getResources(), WaypointType.PARKING)), Settings.isExcludeWpParking(), Settings::setExcludeWpParking, true);
@@ -111,27 +111,27 @@ public class MapSettingsUtils {
 
         final Dialog dialog = Dialogs.bottomSheetDialogWithActionbar(activity, dialogView.getRoot(), R.string.quick_settings);
         dialog.setOnDismissListener(d -> {
-                for (SettingsCheckboxModel item : allCbs) {
-                    item.setValue();
-                }
-                compactIconWrapper.setValue();
-                routingChoiceWrapper.setValue();
+            for (SettingsCheckboxModel item : allCbs) {
+                item.setValue();
+            }
+            compactIconWrapper.setValue();
+            routingChoiceWrapper.setValue();
 
-                if (filter.canSetQuickFilterLossless() && !filter.hasSameQuickFilter(quickFilter)) {
-                    filter.setQuickFilterLossless(quickFilter);
-                    filterContext.set(filter);
-                }
+            if (filter.canSetQuickFilterLossless() && !filter.hasSameQuickFilter(quickFilter)) {
+                filter.setQuickFilterLossless(quickFilter);
+                filterContext.set(filter);
+            }
 
-                onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
+            onMapSettingsPopupFinished.call(isShowCircles != Settings.isShowCircles());
 
-                if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
-                    if (route == null) {
-                        Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
-                    } else {
-                        RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
-                    }
+            if (showAutotargetIndividualRoute && isAutotargetIndividualRoute != dialogView.mapSettingsAutotarget.isChecked()) {
+                if (route == null) {
+                    Settings.setAutotargetIndividualRoute(dialogView.mapSettingsAutotarget.isChecked());
+                } else {
+                    RouteTrackUtils.setAutotargetIndividualRoute(activity, route, dialogView.mapSettingsAutotarget.isChecked());
                 }
-            });
+            }
+        });
         dialog.show();
 
         compactIconWrapper.init();
@@ -164,7 +164,7 @@ public class MapSettingsUtils {
         return result;
     }
 
-    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle,  final ImageParam imageParam, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
+    private static SettingsCheckboxModel createCb(final Collection<SettingsCheckboxModel> coll, @StringRes final int resTitle, final ImageParam imageParam, final Boolean currentValue, final Action1<Boolean> setValue, final boolean isNegated) {
         final SettingsCheckboxModel result = new SettingsCheckboxModel(resTitle, imageParam, currentValue, setValue, isNegated);
         coll.add(result);
         return result;
@@ -210,7 +210,7 @@ public class MapSettingsUtils {
             if (disableView) {
                 ip.right.setEnabled(false);
                 ip.left.setOnClickListener(v -> SimpleDialog.of(ctx).setTitle(R.string.map_settings_cache_filter_too_complex_title)
-                    .setMessage(R.string.map_settings_cache_filter_too_complex_message).show());
+                        .setMessage(R.string.map_settings_cache_filter_too_complex_message).show());
             }
 
             ip.right.setChecked(currentValue);

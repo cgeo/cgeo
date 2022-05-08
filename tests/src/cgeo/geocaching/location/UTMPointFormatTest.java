@@ -79,7 +79,7 @@ public class UTMPointFormatTest {
         assertThat(utm.getNorthing()).isEqualTo(3915114, offset(1.1d));
     }
 
-    @SuppressWarnings({ "unused" })
+    @SuppressWarnings({"unused"})
     @Test(expected = UTMPoint.ParseException.class)
     public void testParseUTMStringWithException() {
         new UTMPoint("5S blah blub");

@@ -368,7 +368,8 @@ class ThemeLegendElevate implements ThemeLegend {
     }
 
     @Override
-    public @StringRes int getInfoUrl() {
+    public @StringRes
+    int getInfoUrl() {
         return R.string.maptheme_legend_elevate;
     }
 

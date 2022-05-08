@@ -48,7 +48,7 @@ public final class Cookies {
         public List<Cookie> loadForRequest(@NonNull final HttpUrl url) {
             final List<Cookie> cookies = new LinkedList<>();
             synchronized (this) {
-                for (final Cookie cookie: allCookies.values()) {
+                for (final Cookie cookie : allCookies.values()) {
                     if (cookie.matches(url)) {
                         cookies.add(cookie);
                     }

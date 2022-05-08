@@ -90,7 +90,7 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
     private int fromList = StoredList.TEMPORARY_LIST.id;
 
     public interface PostRealDistance {
-        void postRealDistance (float realDistance);
+        void postRealDistance(float realDistance);
     }
 
     public GoogleMapView(final Context context, final AttributeSet attrs) {
@@ -383,7 +383,9 @@ public class GoogleMapView extends MapView implements MapViewImpl<GoogleCacheOve
         return 0;
     }
 
-    /** can be made static if nonstatic inner clases could have static methods */
+    /**
+     * can be made static if nonstatic inner clases could have static methods
+     */
     private boolean insideCachePointDrawable(final Point p, final Point drawP, final Drawable d) {
         final int width = d.getIntrinsicWidth();
         final int height = d.getIntrinsicHeight();

@@ -35,7 +35,7 @@ public class WaymarkingConnector extends AbstractConnector {
         return "www.waymarking.com";
     }
 
-   @Override
+    @Override
     public boolean isOwner(@NonNull final Geocache cache) {
         // this connector has no user management
         return false;

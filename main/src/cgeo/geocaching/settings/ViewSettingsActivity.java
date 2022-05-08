@@ -273,39 +273,39 @@ public class ViewSettingsActivity extends AbstractActivity {
         }
 
         Dialogs.newBuilder(this)
-            .setTitle(R.string.add_setting)
-            .setView(binding.getRoot())
-            .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
-            .setPositiveButton(android.R.string.ok, (d, which) -> {
-                final String preferenceName = binding.preferenceName.getText().toString().trim();
-                final int rbId = rg.getCheckedRadioButtonId();
-                if (rbId == -1) {
-                    Toast.makeText(this, R.string.add_setting_missing_type, Toast.LENGTH_SHORT).show();
-                } else {
-                    final SettingsUtils.SettingsType preferenceType = getType(((RadioButton) rg.findViewById(rbId)).getText().toString());
-                    if (StringUtils.isBlank(preferenceName)) {
-                        Toast.makeText(this, R.string.add_setting_missing_name, Toast.LENGTH_SHORT).show();
-                    } else if (findItem(preferenceName) != -1) {
-                        Toast.makeText(this, R.string.add_setting_already_exists, Toast.LENGTH_SHORT).show();
+                .setTitle(R.string.add_setting)
+                .setView(binding.getRoot())
+                .setNegativeButton(android.R.string.cancel, (d, which) -> d.dismiss())
+                .setPositiveButton(android.R.string.ok, (d, which) -> {
+                    final String preferenceName = binding.preferenceName.getText().toString().trim();
+                    final int rbId = rg.getCheckedRadioButtonId();
+                    if (rbId == -1) {
+                        Toast.makeText(this, R.string.add_setting_missing_type, Toast.LENGTH_SHORT).show();
                     } else {
-                        final KeyValue newItem = new KeyValue(preferenceName, preferenceType.getDefaultString(), preferenceType);
-                        final SharedPreferences.Editor editor = prefs.edit();
-                        try {
-                            SettingsUtils.putValue(editor, newItem.type, newItem.key, newItem.value);
-                            editor.apply();
-                            final int position = findPosition(newItem.key);
-                            debugAdapter.insert(newItem, position);
-                            editItem(position);
-                        } catch (XmlPullParserException e) {
-                            showToast(R.string.edit_setting_error_unknown_type);
-                        } catch (NumberFormatException e) {
-                            showToast(String.format(getString(R.string.edit_setting_error_invalid_data), preferenceName));
+                        final SettingsUtils.SettingsType preferenceType = getType(((RadioButton) rg.findViewById(rbId)).getText().toString());
+                        if (StringUtils.isBlank(preferenceName)) {
+                            Toast.makeText(this, R.string.add_setting_missing_name, Toast.LENGTH_SHORT).show();
+                        } else if (findItem(preferenceName) != -1) {
+                            Toast.makeText(this, R.string.add_setting_already_exists, Toast.LENGTH_SHORT).show();
+                        } else {
+                            final KeyValue newItem = new KeyValue(preferenceName, preferenceType.getDefaultString(), preferenceType);
+                            final SharedPreferences.Editor editor = prefs.edit();
+                            try {
+                                SettingsUtils.putValue(editor, newItem.type, newItem.key, newItem.value);
+                                editor.apply();
+                                final int position = findPosition(newItem.key);
+                                debugAdapter.insert(newItem, position);
+                                editItem(position);
+                            } catch (XmlPullParserException e) {
+                                showToast(R.string.edit_setting_error_unknown_type);
+                            } catch (NumberFormatException e) {
+                                showToast(String.format(getString(R.string.edit_setting_error_invalid_data), preferenceName));
+                            }
                         }
                     }
-                }
-            })
-            .create()
-            .show();
+                })
+                .create()
+                .show();
     }
 
     private int findItem(final String key) {

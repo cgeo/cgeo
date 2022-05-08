@@ -31,10 +31,8 @@ public final class TranslationUtils {
     /**
      * Build a URI for Google Translate.
      *
-     * @param toLang
-     *            The two-letter lowercase ISO language codes as defined by ISO 639-1
-     * @param text
-     *            The text to be translated
+     * @param toLang The two-letter lowercase ISO language codes as defined by ISO 639-1
+     * @param text   The text to be translated
      * @return URI ready to be parsed
      */
     private static String buildTranslationURI(final String toLang, final String text) {
@@ -49,12 +47,9 @@ public final class TranslationUtils {
     /**
      * Send Intent for Google Translate. Should only be used if InAppTranslationPopup is not available.
      *
-     * @param activity
-     *            The activity starting the process
-     * @param toLang
-     *            The two-letter lowercase ISO language codes as defined by ISO 639-1
-     * @param text
-     *            The text to be translated
+     * @param activity The activity starting the process
+     * @param toLang   The two-letter lowercase ISO language codes as defined by ISO 639-1
+     * @param text     The text to be translated
      */
     public static void startActivityTranslate(final Activity activity, final String toLang, final String text) {
         if (text.length() > TRANSLATION_TEXT_LENGTH_WARN) {

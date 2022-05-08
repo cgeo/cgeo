@@ -33,13 +33,13 @@ import org.xmlpull.v1.XmlPullParserException;
 public class SettingsUtils {
 
     public enum SettingsType {
-        TYPE_STRING     ("string", ""),
-        TYPE_BOOLEAN    ("boolean", "false"),
-        TYPE_INTEGER    ("integer", "0"),
-        TYPE_INTEGER_COMPATIBILITY ("int", "0"),     // for reading compatibility with early backups
-        TYPE_LONG       ("long", "0"),
-        TYPE_FLOAT      ("float", "0.0"),
-        TYPE_UNKNOWN    ("unknown", "");
+        TYPE_STRING("string", ""),
+        TYPE_BOOLEAN("boolean", "false"),
+        TYPE_INTEGER("integer", "0"),
+        TYPE_INTEGER_COMPATIBILITY("int", "0"),     // for reading compatibility with early backups
+        TYPE_LONG("long", "0"),
+        TYPE_FLOAT("float", "0.0"),
+        TYPE_UNKNOWN("unknown", "");
 
         private final String id;
         private final String defaultString;
@@ -203,8 +203,8 @@ public class SettingsUtils {
         final AlertDialog.Builder builder = Dialogs.newBuilder(activity);
         builder.setTitle(activity.getString(R.string.settings_title_data_dir_usage, Formatter.formatBytes(usedBytes)));
         builder.setSingleChoiceItems(new ArrayAdapter<CharSequence>(activity,
-            android.R.layout.simple_list_item_single_choice,
-            formatDirectoryNames(activity, directories, freeSpaces)) {
+                android.R.layout.simple_list_item_single_choice,
+                formatDirectoryNames(activity, directories, freeSpaces)) {
             @Override
             public boolean areAllItemsEnabled() {
                 return false;

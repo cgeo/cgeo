@@ -44,7 +44,6 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
     }
 
 
-
     @Override
     public void onStart() {
         super.onStart();

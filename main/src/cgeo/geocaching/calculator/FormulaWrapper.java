@@ -54,6 +54,7 @@ public class FormulaWrapper {
 
     /**
      * compares to parsed infos
+     *
      * @param match object to compare
      * @return true: formula which comes first in text or is longer
      */

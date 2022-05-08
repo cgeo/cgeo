@@ -14,7 +14,7 @@ import java.util.Locale;
 import org.apache.commons.lang3.StringUtils;
 
 
-public class DateFilter  {
+public class DateFilter {
 
     private static final long MILLIS_PER_DAY = 24 * 60 * 60 * 1000;
 
@@ -83,7 +83,7 @@ public class DateFilter  {
         return config;
     }
 
-     private Date parseDate(final String text) {
+    private Date parseDate(final String text) {
         if (StringUtils.isBlank(text) || "-".equals(text)) {
             return null;
         }

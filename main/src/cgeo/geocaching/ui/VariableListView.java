@@ -196,8 +196,8 @@ public class VariableListView extends LinearLayout {
 
         private VariablesListAdapter(final RecyclerView recyclerView) {
             super(new Config(recyclerView)
-                .setNotifyOnPositionChange(true)
-                .setSupportDragDrop(true));
+                    .setNotifyOnPositionChange(true)
+                    .setSupportDragDrop(true));
             this.recyclerView = recyclerView;
             setDisplay(DisplayType.ADVANCED, 1);
             setOriginalItemListInsertOrderer((s1, s2) -> TextUtils.COLLATOR.compare(s1.getVar(), s2.getVar()));
@@ -297,7 +297,7 @@ public class VariableListView extends LinearLayout {
             }
 
             if (viewHolder.viewVariableFormulaText != null) {
-                viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s ->  {
+                viewHolder.viewVariableFormulaText.addTextChangedListener(ViewUtils.createSimpleWatcher(s -> {
                     if (textListeningActive) {
                         changeFormulaFor(viewHolder.getBindingAdapterPosition(), s.toString());
                         if (this.varChangeCallback != null) {
@@ -325,31 +325,31 @@ public class VariableListView extends LinearLayout {
                 viewHolder.viewButtonFunction.setOnClickListener(d -> {
                     final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
                     SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
-                        .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
-                            if (viewHolder.viewVariableFormulaText != null) {
-                                final String current = viewHolder.viewVariableFormulaText.getText().toString();
-                                final int currentPos = viewHolder.viewVariableFormulaText.getSelectionStart();
+                            .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
+                                if (viewHolder.viewVariableFormulaText != null) {
+                                    final String current = viewHolder.viewVariableFormulaText.getText().toString();
+                                    final int currentPos = viewHolder.viewVariableFormulaText.getSelectionStart();
 
-                                final String function = f.getFunctionInsertString();
-                                final int functionPos = f.getFunctionInsertCursorPosition();
+                                    final String function = f.getFunctionInsertString();
+                                    final int functionPos = f.getFunctionInsertCursorPosition();
 
-                                final String newFormula = current.substring(0, currentPos) + function + current.substring(currentPos);
-                                final int newPos = currentPos + functionPos;
+                                    final String newFormula = current.substring(0, currentPos) + function + current.substring(currentPos);
+                                    final int newPos = currentPos + functionPos;
 
-                                viewHolder.viewVariableFormulaText.setText(newFormula);
-                                changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
-                                if (viewHolder.viewVariableFormulaText instanceof EditText) {
-                                    ((EditText) viewHolder.viewVariableFormulaText).setSelection(newPos);
+                                    viewHolder.viewVariableFormulaText.setText(newFormula);
+                                    changeFormulaFor(viewHolder.getBindingAdapterPosition(), newFormula);
+                                    if (viewHolder.viewVariableFormulaText instanceof EditText) {
+                                        ((EditText) viewHolder.viewVariableFormulaText).setSelection(newPos);
+                                    }
+                                    Keyboard.show(parent.getContext(), viewHolder.viewVariableFormulaText);
                                 }
-                                Keyboard.show(parent.getContext(), viewHolder.viewVariableFormulaText);
-                            }
-                        });
+                            });
                 });
             }
 
             if (viewHolder.viewVariableName != null) {
                 viewHolder.viewVariableName.setOnClickListener((d ->
-                    selectVariableName(viewHolder.getVar(), (o, n) -> changeVarAt(viewHolder.getBindingAdapterPosition(), n))));
+                        selectVariableName(viewHolder.getVar(), (o, n) -> changeVarAt(viewHolder.getBindingAdapterPosition(), n))));
             }
             return viewHolder;
         }
@@ -367,7 +367,7 @@ public class VariableListView extends LinearLayout {
 
         private static TextParam getFunctionGroupDisplayString(final FormulaFunction.FunctionGroup g) {
             return
-                TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
+                    TextParam.text("**" + g.getUserDisplayableString() + "**").setMarkdown(true);
         }
 
         @Override
@@ -442,15 +442,15 @@ public class VariableListView extends LinearLayout {
             final boolean oldNameIsInvisible = !VariableList.isVisible(oldName);
             final String nameToShow = oldNameIsInvisible ? "" : oldName;
             SimpleDialog.ofContext(recyclerView.getContext()).setTitle(TextParam.text("Variable Name")).setMessage(TextParam.text("Enter variable name (may be left empty)"))
-                .input(InputType.TYPE_CLASS_TEXT, nameToShow, null, null, s -> StringUtils.isBlank(s) || isValidVarName(s), "[a-zA-Z0-9]", t -> {
-                    final boolean newNameIsInvisible = StringUtils.isBlank(t);
-                    if ((oldName != null && oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {
-                        //nothing to do
-                        return;
-                    }
-                    final String newName = StringUtils.isBlank(t) ? null : t;
-                    callback.call(oldName, newName);
-                });
+                    .input(InputType.TYPE_CLASS_TEXT, nameToShow, null, null, s -> StringUtils.isBlank(s) || isValidVarName(s), "[a-zA-Z0-9]", t -> {
+                        final boolean newNameIsInvisible = StringUtils.isBlank(t);
+                        if ((oldName != null && oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {
+                            //nothing to do
+                            return;
+                        }
+                        final String newName = StringUtils.isBlank(t) ? null : t;
+                        callback.call(oldName, newName);
+                    });
         }
 
         private boolean isValidVarName(final String varName) {
@@ -517,7 +517,7 @@ public class VariableListView extends LinearLayout {
                 @Override
                 public View onInterceptFocusSearch(@NonNull final View focused, final int direction) {
                     final View nextView = ViewUtils.nextView(focused, v -> v instanceof RecyclerView,
-                        v -> v instanceof EditText);
+                            v -> v instanceof EditText);
                     if (nextView != null) {
                         return nextView;
                     }

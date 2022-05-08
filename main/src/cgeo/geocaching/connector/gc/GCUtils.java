@@ -53,18 +53,24 @@ public final class GCUtils {
         return codeToId(code.substring(0, 2), code, true);
     }
 
-    /** Converts (old) GCIds to GCCode. For invalid id's, empty string will be returned (never null) */
+    /**
+     * Converts (old) GCIds to GCCode. For invalid id's, empty string will be returned (never null)
+     */
     @NonNull
     public static String gcIdToGcCode(final long gcId) {
         return idToCode("GC", gcId);
     }
 
-    /** Converts LogCode to LogId. For invalid logCodes (including null), 0 will be returned */
+    /**
+     * Converts LogCode to LogId. For invalid logCodes (including null), 0 will be returned
+     */
     public static long logCodeToLogId(@Nullable final String logCode) {
         return codeToId("GL", logCode);
     }
 
-    /** Converts logId to LogCode. For invalid id's, empty string will be returned (never null) */
+    /**
+     * Converts logId to LogCode. For invalid id's, empty string will be returned (never null)
+     */
     @NonNull
     public static String logIdToLogCode(final long gcId) {
         return idToCode("GL", gcId);

@@ -185,7 +185,7 @@ abstract class OsmPath implements OsmLinkHolder {
 
 
         OsmTransferNode transferNode = link.geometry == null ? null
-            : rc.geometryDecoder.decodeGeometry(link.geometry, sourceNode, targetNode, isReverse);
+                : rc.geometryDecoder.decodeGeometry(link.geometry, sourceNode, targetNode, isReverse);
 
         for (int nsection = 0; ; nsection++) {
 
@@ -210,8 +210,8 @@ abstract class OsmPath implements OsmLinkHolder {
 
             // check turn restrictions (n detail mode (=final pass) no TR to not mess up voice hints)
             if (nsection == 0 && rc.considerTurnRestrictions && !detailMode && !isStartpoint && (rc.inverseDirection
-                ? TurnRestriction.isTurnForbidden(sourceNode.firstRestriction, lon2, lat2, lon0, lat0, rc.bikeMode, rc.carMode)
-                : TurnRestriction.isTurnForbidden(sourceNode.firstRestriction, lon0, lat0, lon2, lat2, rc.bikeMode, rc.carMode))) {
+                    ? TurnRestriction.isTurnForbidden(sourceNode.firstRestriction, lon2, lat2, lon0, lat0, rc.bikeMode, rc.carMode)
+                    : TurnRestriction.isTurnForbidden(sourceNode.firstRestriction, lon0, lat0, lon2, lat2, rc.bikeMode, rc.carMode))) {
                 cost = -1;
                 return;
             }

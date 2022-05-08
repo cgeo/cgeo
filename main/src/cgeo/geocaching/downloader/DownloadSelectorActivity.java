@@ -101,10 +101,10 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
                 final String addInfo = offlineMap.getAddInfo();
                 final String sizeInfo = offlineMap.getSizeInfo();
                 holder.binding.info.setText(getString(typeResId > 0 ? typeResId : R.string.downloadmap_download)
-                    + Formatter.SEPARATOR + offlineMap.getDateInfoAsString()
-                    + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
-                    + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
-                    + Formatter.SEPARATOR + offlineMap.getTypeAsString());
+                        + Formatter.SEPARATOR + offlineMap.getDateInfoAsString()
+                        + (StringUtils.isNotBlank(addInfo) ? " (" + addInfo + ")" : "")
+                        + (StringUtils.isNotBlank(sizeInfo) ? Formatter.SEPARATOR + offlineMap.getSizeInfo() : "")
+                        + Formatter.SEPARATOR + offlineMap.getTypeAsString());
                 holder.binding.action.setImageResource(offlineMap.getIconRes());
                 holder.binding.getRoot().setOnClickListener(v -> {
 
@@ -362,7 +362,7 @@ public class DownloadSelectorActivity extends AbstractActionBarActivity {
     }
 
     private void setUpdateButtonVisibility() {
-        binding.checkForUpdates.setVisibility (installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
+        binding.checkForUpdates.setVisibility(installedOfflineMaps != null && installedOfflineMaps.size() > 0 ? View.VISIBLE : View.GONE);
     }
 
     private synchronized void setMaps(final List<Download> maps, @NonNull final String selectionTitle, final boolean noUpdatesFound) {

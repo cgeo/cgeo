@@ -91,8 +91,7 @@ public class OCAuthorizationActivity extends OAuthAuthorizationActivity {
     /**
      * Return an extended error in case of an invalid time stamp
      *
-     * @param response
-     *            network response
+     * @param response network response
      */
     @Override
     @NonNull

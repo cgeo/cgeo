@@ -61,40 +61,36 @@ public final class MapMarkerUtils {
      *
      * cacheListType should be Null if the requesting activity is Map.
      *
-     * @param res
-     *          the resources to use
-     * @param cache
-     *          the cache to build the drawable for
-     * @param cacheListType
-     *          the current CacheListType or Null
-     * @return
-     *          a drawable representing the current cache status
+     * @param res           the resources to use
+     * @param cache         the cache to build the drawable for
+     * @param cacheListType the current CacheListType or Null
+     * @return a drawable representing the current cache status
      */
     @NonNull
     public static CacheMarker getCacheMarker(final Resources res, final Geocache cache, @Nullable final CacheListType cacheListType) {
         final ArrayList<Integer> assignedMarkers = getAssignedMarkers(cache);
         final int hashcode = new HashCodeBuilder()
-            .append(cache.getAssignedEmoji())
-            .append(cache.getType().id)
-            .append(cache.isDisabled())
-            .append(cache.isArchived())
-            .append(cache.getMapMarkerId())
-            .append(cache.isOwner())
-            .append(cache.isFound())
-            .append(cache.isDNF())
-            .append(cache.hasWillAttendForFutureEvent())
-            .append(cache.hasUserModifiedCoords())
-            .append(cache.hasFinalDefined())
-            .append(cache.getPersonalNote())
-            .append(cache.hasLogOffline())
-            .append(cache.getLists().isEmpty())
-            .append(cache.getOfflineLogType())
-            .append(showPin(cacheListType))
-            .append(showFloppyOverlay(cacheListType))
-            .append(assignedMarkers)
-            .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
-            .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
-            .toHashCode();
+                .append(cache.getAssignedEmoji())
+                .append(cache.getType().id)
+                .append(cache.isDisabled())
+                .append(cache.isArchived())
+                .append(cache.getMapMarkerId())
+                .append(cache.isOwner())
+                .append(cache.isFound())
+                .append(cache.isDNF())
+                .append(cache.hasWillAttendForFutureEvent())
+                .append(cache.hasUserModifiedCoords())
+                .append(cache.hasFinalDefined())
+                .append(cache.getPersonalNote())
+                .append(cache.hasLogOffline())
+                .append(cache.getLists().isEmpty())
+                .append(cache.getOfflineLogType())
+                .append(showPin(cacheListType))
+                .append(showFloppyOverlay(cacheListType))
+                .append(assignedMarkers)
+                .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
+                .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
+                .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -195,12 +191,9 @@ public final class MapMarkerUtils {
      * Obtain the drawable for a given waypoint.
      * Return a drawable from the cache, if a similar drawable was already generated.
      *
-     * @param res
-     *          the resources to use
-     * @param waypoint
-     *          the waypoint to build the drawable for
-     * @return
-     *          a drawable representing the current waypoint status
+     * @param res      the resources to use
+     * @param waypoint the waypoint to build the drawable for
+     * @return a drawable representing the current waypoint status
      */
     @NonNull
     public static CacheMarker getWaypointMarker(final Resources res, final Waypoint waypoint, final boolean showPin) {
@@ -216,14 +209,14 @@ public final class MapMarkerUtils {
             cacheIsArchived = cache.isArchived();
         }
         final int hashcode = new HashCodeBuilder()
-            .append(waypoint.isVisited())
-            .append(id)
-            .append(waypoint.getMapMarkerId())
-            .append(assignedMarkers)
-            .append(cacheIsDisabled)
-            .append(cacheIsArchived)
-            .append(showPin)
-            .toHashCode();
+                .append(waypoint.isVisited())
+                .append(id)
+                .append(waypoint.getMapMarkerId())
+                .append(assignedMarkers)
+                .append(cacheIsDisabled)
+                .append(cacheIsArchived)
+                .append(showPin)
+                .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -238,12 +231,9 @@ public final class MapMarkerUtils {
     /**
      * Build the drawable for a given waypoint.
      *
-     * @param res
-     *          the resources to use
-     * @param waypoint
-     *          the waypoint to build the drawable for
-     * @return
-     *          a drawable representing the current waypoint status
+     * @param res      the resources to use
+     * @param waypoint the waypoint to build the drawable for
+     * @return a drawable representing the current waypoint status
      */
     @NonNull
     private static LayerDrawable createWaypointMarker(final Resources res, final Waypoint waypoint, final ArrayList<Integer> assignedMarkers, final boolean cacheIsDisabled, final boolean cacheIsArchived, final boolean showPin) {
@@ -283,26 +273,23 @@ public final class MapMarkerUtils {
      *
      * cacheListType should be Null if the requesting activity is Map.
      *
-     * @param res
-     *          the resources to use
-     * @param cache
-     *          the cache to build the drawable for
-     * @return
-     *          a drawable representing the current cache status
+     * @param res   the resources to use
+     * @param cache the cache to build the drawable for
+     * @return a drawable representing the current cache status
      */
     @NonNull
     public static CacheMarker getCacheDotMarker(final Resources res, final Geocache cache) {
         final int hashcode = new HashCodeBuilder()
-            .append(cache.getType().typeColor)
-            .append(cache.getMapDotMarkerId())
-            .append(cache.isFound())
-            .append(cache.isDisabled())
-            .append(cache.isArchived())
-            .append(cache.hasLogOffline())
-            .append(cache.getOfflineLogType())
-            .append(cache.hasUserModifiedCoords())
-            .append(cache.hasFinalDefined())
-            .toHashCode();
+                .append(cache.getType().typeColor)
+                .append(cache.getMapDotMarkerId())
+                .append(cache.isFound())
+                .append(cache.isDisabled())
+                .append(cache.isArchived())
+                .append(cache.hasLogOffline())
+                .append(cache.getOfflineLogType())
+                .append(cache.hasUserModifiedCoords())
+                .append(cache.hasFinalDefined())
+                .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -317,12 +304,9 @@ public final class MapMarkerUtils {
     /**
      * Build the drawable for a given cache.
      *
-     * @param res
-     *          the resources to use
-     * @param cache
-     *          the cache to build the drawable for
-     * @return
-     *          a drawable representing the current cache status
+     * @param res   the resources to use
+     * @param cache the cache to build the drawable for
+     * @return a drawable representing the current cache status
      */
     @NonNull
     private static LayerDrawable createCacheDotMarker(final Resources res, final Geocache cache) {
@@ -388,12 +372,9 @@ public final class MapMarkerUtils {
      * Obtain the drawable for a given waypoint.
      * Return a drawable from the cache, if a similar drawable was already generated.
      *
-     * @param res
-     *          the resources to use
-     * @param waypoint
-     *          the waypoint to build the drawable for
-     * @return
-     *          a drawable representing the current waypoint status
+     * @param res      the resources to use
+     * @param waypoint the waypoint to build the drawable for
+     * @return a drawable representing the current waypoint status
      */
     @NonNull
     public static CacheMarker getWaypointDotMarker(final Resources res, final Waypoint waypoint) {
@@ -408,11 +389,11 @@ public final class MapMarkerUtils {
             }
         }
         final int hashcode = new HashCodeBuilder()
-            .append(waypoint.getMapDotMarkerId())
-            .append(waypoint.getWaypointType())
-            .append(cacheIsDisabled)
-            .append(cacheIsArchived)
-            .toHashCode();
+                .append(waypoint.getMapDotMarkerId())
+                .append(waypoint.getWaypointType())
+                .append(cacheIsDisabled)
+                .append(cacheIsArchived)
+                .toHashCode();
 
         synchronized (overlaysCache) {
             CacheMarker marker = overlaysCache.get(hashcode);
@@ -427,12 +408,9 @@ public final class MapMarkerUtils {
     /**
      * Build the drawable for a given waypoint.
      *
-     * @param res
-     *          the resources to use
-     * @param waypoint
-     *          the waypoint to build the drawable for
-     * @return
-     *          a drawable representing the current waypoint status
+     * @param res      the resources to use
+     * @param waypoint the waypoint to build the drawable for
+     * @return a drawable representing the current waypoint status
      */
     @NonNull
     private static LayerDrawable createWaypointDotMarker(final Resources res, final Waypoint waypoint) {
@@ -466,7 +444,7 @@ public final class MapMarkerUtils {
      *
      * @param res   Android Resources
      * @param cache Geocache to get the icon for
-     * @return  Layered Drawable
+     * @return Layered Drawable
      */
     public static Drawable getCacheTypeMarker(final Resources res, final Geocache cache) {
         final int hashcode = new HashCodeBuilder().append(cache.getMapMarkerId()).append(cache.getType().id).toHashCode();
@@ -484,9 +462,9 @@ public final class MapMarkerUtils {
     /**
      * Create a cache from a cache type to select the proper background shape
      *
-     * @param res   Android Resources
-     * @param type  CacheType to get the icon for
-     * @return  Layered Drawable
+     * @param res  Android Resources
+     * @param type CacheType to get the icon for
+     * @return Layered Drawable
      */
     public static Drawable getCacheTypeMarker(final Resources res, final CacheType type) {
         final Geocache tempCache = new Geocache();
@@ -501,13 +479,13 @@ public final class MapMarkerUtils {
      *
      * @param res   Android Resources
      * @param cache Geocache to get the icon for
-     * @return  Layered Drawable
+     * @return Layered Drawable
      */
     private static Drawable createCacheTypeMarker(final Resources res, final Geocache cache) {
         // make drawable mutatable, as setting tint will otherwise change the background for all markers (on Android 7-9)!
         final Drawable background = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, cache.getMapMarkerBackgroundId(), null)).mutate();
         DrawableCompat.setTint(background, ResourcesCompat.getColor(res, cache.getType().typeColor, null));
-        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { background, ResourcesCompat.getDrawable(res, cache.getType().markerId, null) });
+        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{background, ResourcesCompat.getDrawable(res, cache.getType().markerId, null)});
 
         // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 27.02*23.4dp). Drawable must be square!
         final int diffWidth = background.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 27.02f, 1);
@@ -521,9 +499,9 @@ public final class MapMarkerUtils {
     /**
      * Create a waypoint marker without background - basically the zoomed in waypoint icon
      *
-     * @param res   Android Resources
-     * @param waypoint  Waypoint to get the icon for
-     * @return  Layered Drawable
+     * @param res      Android Resources
+     * @param waypoint Waypoint to get the icon for
+     * @return Layered Drawable
      */
     public static Drawable getWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
         final int hashcode = new HashCodeBuilder().append(waypoint.markerId).toHashCode();
@@ -541,13 +519,13 @@ public final class MapMarkerUtils {
     /**
      * Build the layered drawable for a waypoint marker without background - basically the zoomed in waypoint icon
      *
-     * @param res   Android Resources
+     * @param res      Android Resources
      * @param waypoint Waypoint to get the icon for
-     * @return  Layered Drawable
+     * @return Layered Drawable
      */
     private static Drawable createWaypointTypeMarker(final Resources res, final WaypointType waypoint) {
         final Drawable waypointMarker = DrawableCompat.wrap(ResourcesCompat.getDrawable(res, waypoint.markerId, null)).mutate();
-        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[] { waypointMarker });
+        final LayerDrawable layerDrawable = new LayerDrawable(new Drawable[]{waypointMarker});
 
         // "zoom" into the cache icon by setting negative offsets to hide the empty space (drawable is 36dp but icon only 17,25dp). Drawable must be square!
         final int diffWidth = waypointMarker.getIntrinsicWidth() - DisplayUtils.getPxFromDp(res, 19f, 1);
@@ -652,10 +630,8 @@ public final class MapMarkerUtils {
     /**
      * Conditional expression to choose if we need the pin on markers (on map).
      *
-     * @param cacheListType
-     *            The cache list currently used
-     * @return
-     *         True if the background circle should be displayed
+     * @param cacheListType The cache list currently used
+     * @return True if the background circle should be displayed
      */
     private static boolean showPin(@Nullable final CacheListType cacheListType) {
         return cacheListType == null;
@@ -664,10 +640,8 @@ public final class MapMarkerUtils {
     /**
      * Conditional expression to choose if we need the floppy overlay or not.
      *
-     * @param cacheListType
-     *            The cache list currently used
-     * @return
-     *         True if the floppy overlay should be displayed
+     * @param cacheListType The cache list currently used
+     * @return True if the floppy overlay should be displayed
      */
     private static boolean showFloppyOverlay(@Nullable final CacheListType cacheListType) {
         return cacheListType != CacheListType.OFFLINE; // also covers null check
@@ -690,7 +664,7 @@ public final class MapMarkerUtils {
         listsRead = false;
     }
 
-    private static ArrayList<Integer> getAssignedMarkers (final Geocache cache) {
+    private static ArrayList<Integer> getAssignedMarkers(final Geocache cache) {
         readLists();
 
         final ArrayList<Integer> result = new ArrayList<>();

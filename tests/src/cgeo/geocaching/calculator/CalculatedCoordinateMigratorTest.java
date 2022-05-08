@@ -21,10 +21,10 @@ public class CalculatedCoordinateMigratorTest {
     private static final String JSON_PLAIN_EXAMPLE_1 = "{\"format\":0,\"plainLat\":\"N 53° 33.AAA\",\"plainLon\":\"E 009° 59.BCD'\",\"latHemisphere\":78,\"lonHemisphere\":69,\"buttons\":[{\"type\":0,\"inputVal\":53,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":48,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":56,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":57,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":57,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":48,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":48,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":57,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":53,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":57,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":51,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":55,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":0,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":50,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":53,\"autoChar\":45,\"customChar\":0},{\"type\":0,\"inputVal\":53,\"autoChar\":45,\"customChar\":0}],\"equations\":[{\"name\":65,\"expression\":\"1\"},{\"name\":66,\"expression\":\"2\"},{\"name\":67,\"expression\":\"3\"},{\"name\":68,\"expression\":\"4\"}],\"freeVariables\":[]}";
 
     private static final String[][] EXPECTED_DATA = new String[][]{
-        new String[]{ JSON_DEGREE_EXAMPLE_1, CalculatedCoordinateType.DEGREE.toString(), "S53.A_F08°", "W009.G93_8°"},
-        new String[]{ JSON_DEGMIN_EXAMPLE_1, CalculatedCoordinateType.DEGREE_MINUTE.toString(), "N53°A3.0_5'", "E009°5R.621'"},
-        new String[]{ JSON_DEGMINSEC_EXAMPLE_1, CalculatedCoordinateType.DEGREE_MINUTE_SEC.toString(), "N5W°33'0_._D9\"", "W0_9°59'3A.259\""},
-        new String[]{ JSON_PLAIN_EXAMPLE_1, CalculatedCoordinateType.PLAIN.toString(), "N 53° 33.AAA", "E 009° 59.BCD'"}
+            new String[]{JSON_DEGREE_EXAMPLE_1, CalculatedCoordinateType.DEGREE.toString(), "S53.A_F08°", "W009.G93_8°"},
+            new String[]{JSON_DEGMIN_EXAMPLE_1, CalculatedCoordinateType.DEGREE_MINUTE.toString(), "N53°A3.0_5'", "E009°5R.621'"},
+            new String[]{JSON_DEGMINSEC_EXAMPLE_1, CalculatedCoordinateType.DEGREE_MINUTE_SEC.toString(), "N5W°33'0_._D9\"", "W0_9°59'3A.259\""},
+            new String[]{JSON_PLAIN_EXAMPLE_1, CalculatedCoordinateType.PLAIN.toString(), "N 53° 33.AAA", "E 009° 59.BCD'"}
     };
 
     @Test
@@ -44,7 +44,7 @@ public class CalculatedCoordinateMigratorTest {
         final Map<String, String> varMap = createMap("A", "B+2", "C", "A-2");
 
         final CalculatedCoordinateMigrator.WaypointMigrationData wmd =
-            CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE, "ABC", "DEF", varMap);
+                CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE, "ABC", "DEF", varMap);
 
         final CalculatedCoordinateMigrator ccm = new CalculatedCoordinateMigrator(initialVars, wmd);
         assertThat(ccm.getMigrationData().getLatPattern()).isEqualTo("($A2)BC");
@@ -58,8 +58,8 @@ public class CalculatedCoordinateMigratorTest {
         final Map<String, String> varMap = createMap("A", "1", "B", "[2+3]*5", "C", "3", "D", "3", "E", "2", "F", "1");
 
         final CalculatedCoordinateMigrator.WaypointMigrationData wmd =
-            CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE,
-                "N48° 45.[A+B](C+D)[E+F]", "E 009° 05.000", varMap);
+                CalculatedCoordinateMigrator.WaypointMigrationData.create(CalculatedCoordinateType.DEGREE_MINUTE,
+                        "N48° 45.[A+B](C+D)[E+F]", "E 009° 05.000", varMap);
 
         final CalculatedCoordinateMigrator ccm = new CalculatedCoordinateMigrator(Collections.emptyMap(), wmd);
         assertThat(ccm.getMigrationData().getLatPattern()).isEqualTo("N48° 45.(A+B)(C+D)(E+F)");
@@ -72,7 +72,7 @@ public class CalculatedCoordinateMigratorTest {
         assertThat(ccm.getNewCacheVariables()).containsAllEntriesOf(varMap);
     }
 
-    private static Map<String, String> createMap(final String ... keyValue) {
+    private static Map<String, String> createMap(final String... keyValue) {
         final Map<String, String> map = new HashMap<>();
         for (int i = 0; i < keyValue.length; i += 2) {
             map.put(keyValue[i], keyValue[i + 1]);

@@ -9,15 +9,15 @@ import org.mapsforge.map.layer.download.tilesource.AbstractTileSource;
 public class TileSourceMapyCz extends AbstractTileSource {
 
     public static final TileSourceMapyCz INSTANCE =
-        new TileSourceMapyCz(new String[]
-            {
-                "m1.mapserver.mapy.cz",
-                "m2.mapserver.mapy.cz",
-                "m3.mapserver.mapy.cz",
-                "m4.mapserver.mapy.cz"
-            }
-            , 443
-        );
+            new TileSourceMapyCz(new String[]
+                    {
+                            "m1.mapserver.mapy.cz",
+                            "m2.mapserver.mapy.cz",
+                            "m3.mapserver.mapy.cz",
+                            "m4.mapserver.mapy.cz"
+                    }
+                    , 443
+            );
 
     private static final int PARALLEL_REQUESTS_LIMIT = 8;
 

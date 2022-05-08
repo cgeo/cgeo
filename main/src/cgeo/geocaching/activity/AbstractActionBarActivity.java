@@ -19,11 +19,11 @@ public class AbstractActionBarActivity extends AbstractActivity {
 
 
     private void initUpAction() {
-       final ActionBar actionBar = getSupportActionBar();
-       if (actionBar != null) {
-           // don't display a back button it the activity is running as top-level activity with bottom navigation attached
-           actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractBottomNavigationActivity));
-       }
+        final ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null) {
+            // don't display a back button it the activity is running as top-level activity with bottom navigation attached
+            actionBar.setDisplayHomeAsUpEnabled(!isTaskRoot() || !(this instanceof AbstractBottomNavigationActivity));
+        }
     }
 
     @Override
@@ -34,8 +34,7 @@ public class AbstractActionBarActivity extends AbstractActivity {
     }
 
     /**
-     * @param view
-     *            view to activate the context ActionBar for
+     * @param view view to activate the context ActionBar for
      */
     public void addContextMenu(final View view) {
         // placeholder for derived implementations

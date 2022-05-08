@@ -8,7 +8,6 @@ import android.widget.GridView;
  * GridView that will adjust its height to really use wrap_content. The standard GridView only shows one line of items.
  *
  * @see <a href="https://gist.github.com/runemart/9781609">https://gist.github.com/runemart/9781609</a>
- *
  */
 public class WrappingGridView extends GridView {
 

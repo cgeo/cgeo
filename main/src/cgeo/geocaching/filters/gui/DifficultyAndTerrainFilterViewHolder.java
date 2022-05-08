@@ -65,7 +65,7 @@ public class DifficultyAndTerrainFilterViewHolder extends BaseFilterViewHolder<D
 
     @NonNull
     @SuppressWarnings("unchecked")
-    private <T extends IGeocacheFilter> ItemRangeSelectorViewHolder<Float, T> createItemRangeSelectorLayout(final GeocacheFilterType  filterType, final TextParam textParam, final ViewGroup viewGroup) {
+    private <T extends IGeocacheFilter> ItemRangeSelectorViewHolder<Float, T> createItemRangeSelectorLayout(final GeocacheFilterType filterType, final TextParam textParam, final ViewGroup viewGroup) {
         // create view holder
         final LinearLayout linearLayout = new LinearLayout(getActivity());
         linearLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -76,7 +76,7 @@ public class DifficultyAndTerrainFilterViewHolder extends BaseFilterViewHolder<D
 
         // create range selector
         final ItemRangeSelectorViewHolder<Float, T> rangeView =
-            (ItemRangeSelectorViewHolder<Float, T>) FilterViewHolderCreator.createFor(filterType, getActivity());
+                (ItemRangeSelectorViewHolder<Float, T>) FilterViewHolderCreator.createFor(filterType, getActivity());
         linearLayout.addView(rangeView.getView(), ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         return rangeView;
     }

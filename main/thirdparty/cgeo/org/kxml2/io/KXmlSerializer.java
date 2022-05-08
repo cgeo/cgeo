@@ -31,7 +31,6 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.util.Locale;
 
-
 import org.apache.commons.lang3.StringUtils;
 import org.xmlpull.v1.XmlSerializer;
 
@@ -41,7 +40,9 @@ public class KXmlSerializer implements XmlSerializer {
     //    static final String UNDEFINED = ":";
 
     // BEGIN android-added
-    /** size (in characters) for the write buffer */
+    /**
+     * size (in characters) for the write buffer
+     */
     private static final int WRITE_BUFFER_SIZE = 500;
     // END android-added
 
@@ -84,8 +85,7 @@ public class KXmlSerializer implements XmlSerializer {
             if (StringUtils.isNotEmpty(nspStack[i * 2])) {
                 writer.write(':');
                 writer.write(nspStack[i * 2]);
-            }
-            else if (StringUtils.isEmpty(getNamespace()) && StringUtils.isNotEmpty(nspStack[i * 2 + 1])) {
+            } else if (StringUtils.isEmpty(getNamespace()) && StringUtils.isNotEmpty(nspStack[i * 2 + 1])) {
                 throw new IllegalStateException("Cannot set default namespace for elements in no namespace");
             }
             writer.write("=\"");
@@ -115,7 +115,7 @@ public class KXmlSerializer implements XmlSerializer {
                     if (quot == -1) {
                         writer.write(c);
                     } else {
-                        writer.write("&#"+((int) c)+';');
+                        writer.write("&#" + ((int) c) + ';');
                     }
                     break;
                 case '&':
@@ -202,7 +202,7 @@ public class KXmlSerializer implements XmlSerializer {
         //return false;
         return ("http://xmlpull.org/v1/doc/features.html#indent-output"
                 .equals(
-                name))
+                        name))
                 ? indent[depth]
                 : false;
     }
@@ -506,11 +506,10 @@ public class KXmlSerializer implements XmlSerializer {
     public XmlSerializer endTag(String namespace, String name)
             throws IOException {
 
-        if (!pending)
-         {
+        if (!pending) {
             depth--;
-        //        if (namespace == null)
-        //          namespace = "";
+            //        if (namespace == null)
+            //          namespace = "";
         }
 
         if ((namespace == null
@@ -518,14 +517,13 @@ public class KXmlSerializer implements XmlSerializer {
                 || (namespace != null
                 && !namespace.equals(elementStack[depth * 3]))
                 || !elementStack[depth * 3 + 2].equals(name)) {
-            throw new IllegalArgumentException("</{"+namespace+"}"+name+"> does not match start");
+            throw new IllegalArgumentException("</{" + namespace + "}" + name + "> does not match start");
         }
 
         if (pending) {
             check(true);
             depth--;
-        }
-        else {
+        } else {
             if (indent[depth + 1]) {
                 writer.write("\r\n");
                 for (int i = 0; i < depth; i++) {

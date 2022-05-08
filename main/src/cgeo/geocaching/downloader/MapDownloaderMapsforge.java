@@ -20,7 +20,7 @@ public class MapDownloaderMapsforge extends AbstractMapDownloader {
     private static final MapDownloaderMapsforge INSTANCE = new MapDownloaderMapsforge();
 
     private MapDownloaderMapsforge() {
-        super (Download.DownloadType.DOWNLOADTYPE_MAP_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl);
+        super(Download.DownloadType.DOWNLOADTYPE_MAP_MAPSFORGE, R.string.mapserver_mapsforge_downloadurl, R.string.mapserver_mapsforge_name, R.string.mapserver_mapsforge_info, R.string.mapserver_mapsforge_projecturl, R.string.mapserver_mapsforge_likeiturl);
     }
 
     @Override

@@ -14,7 +14,7 @@ public class TypeGeocacheFilter extends ValueGroupGeocacheFilter<CacheType, Cach
         //-> unlike gc.com, currently CITO is an OWN search box below (to make number even)
         addDisplayValues(CacheType.TRADITIONAL, CacheType.TRADITIONAL, CacheType.GCHQ, CacheType.PROJECT_APE);
         addDisplayValues(CacheType.EVENT, CacheType.EVENT, CacheType.MEGA_EVENT, CacheType.GIGA_EVENT, CacheType.COMMUN_CELEBRATION,
-            CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY);
+                CacheType.GCHQ_CELEBRATION, CacheType.GPS_EXHIBIT, CacheType.BLOCK_PARTY);
         addDisplayValues(CacheType.VIRTUAL, CacheType.VIRTUAL, CacheType.LOCATIONLESS);
         addDisplayValues(CacheType.USER_DEFINED, CacheType.USER_DEFINED, CacheType.UNKNOWN);
     }

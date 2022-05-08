@@ -178,12 +178,12 @@ public class OCApiLiveConnector extends OCApiConnector implements ISearchByViewP
     @Override
     public EnumSet<GeocacheFilterType> getFilterCapabilities() {
         return EnumSet.of(GeocacheFilterType.DISTANCE, GeocacheFilterType.ORIGIN,
-            GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
-            GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
-            GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
-            GeocacheFilterType.RATING,
-            GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.LOG_ENTRY,
-            GeocacheFilterType.LOGS_COUNT);
+                GeocacheFilterType.NAME, GeocacheFilterType.OWNER,
+                GeocacheFilterType.TYPE, GeocacheFilterType.SIZE,
+                GeocacheFilterType.DIFFICULTY, GeocacheFilterType.TERRAIN, GeocacheFilterType.DIFFICULTY_TERRAIN,
+                GeocacheFilterType.RATING,
+                GeocacheFilterType.FAVORITES, GeocacheFilterType.STATUS, GeocacheFilterType.LOG_ENTRY,
+                GeocacheFilterType.LOGS_COUNT);
     }
 
     @NonNull

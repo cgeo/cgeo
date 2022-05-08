@@ -47,8 +47,8 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
             final IGeoPointInfo geo = parser.fromUri(getIntent().getDataString());
             if (geo != null && !GeoPointDto.isEmpty(geo)) {
                 Log.i("Received a geo intent: lat=" + geo.getLatitude()
-                    + ", lon=" + geo.getLongitude() + ", name=" + geo.getName()
-                    + " form " + getIntent().getDataString());
+                        + ", lon=" + geo.getLongitude() + ", name=" + geo.getName()
+                        + " form " + getIntent().getDataString());
                 selectTargetType(this, geo.getLatitude(), geo.getLongitude(), geo.getName());
                 geoActionRequested = true;
             }
@@ -91,25 +91,25 @@ public class NavigateAnyPointActivity extends AbstractActionBarActivity {
         };
 
         final AlertDialog dialog = Dialogs.newBuilder(context)
-            .setTitle(R.string.add_target_to)
-            .setAdapter(adapter, (dialog1, which) -> {
-                final String geocode;
-                if (which == 0) {
-                    // create new UDC
-                    geocode = InternalConnector.createCache(context, name, null, 0, new Geopoint(latitude, longitude), StoredList.STANDARD_LIST_ID);
-                } else {
-                    // add to an existing UDC
-                    geocode = items.get(which).getGeocode();
-                    final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
-                    final Waypoint newWaypoint = new Waypoint(null != name ? name : Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
-                    newWaypoint.setCoords(new Geopoint(latitude, longitude));
-                    newWaypoint.setGeocode(geocode);
-                    cache.addOrChangeWaypoint(newWaypoint, true);
-                }
-                CacheDetailActivity.startActivity(context, geocode, which != 0);
-                context.finish();
-            })
-            .create();
+                .setTitle(R.string.add_target_to)
+                .setAdapter(adapter, (dialog1, which) -> {
+                    final String geocode;
+                    if (which == 0) {
+                        // create new UDC
+                        geocode = InternalConnector.createCache(context, name, null, 0, new Geopoint(latitude, longitude), StoredList.STANDARD_LIST_ID);
+                    } else {
+                        // add to an existing UDC
+                        geocode = items.get(which).getGeocode();
+                        final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+                        final Waypoint newWaypoint = new Waypoint(null != name ? name : Waypoint.getDefaultWaypointName(cache, WaypointType.WAYPOINT), WaypointType.WAYPOINT, true);
+                        newWaypoint.setCoords(new Geopoint(latitude, longitude));
+                        newWaypoint.setGeocode(geocode);
+                        cache.addOrChangeWaypoint(newWaypoint, true);
+                    }
+                    CacheDetailActivity.startActivity(context, geocode, which != 0);
+                    context.finish();
+                })
+                .create();
         dialog.setCanceledOnTouchOutside(true);
         dialog.show();
     }

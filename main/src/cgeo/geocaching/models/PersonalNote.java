@@ -8,7 +8,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.lang3.StringUtils;
 
 
-
 public class PersonalNote {
 
     private static final String SEPARATOR = "\n--\n";

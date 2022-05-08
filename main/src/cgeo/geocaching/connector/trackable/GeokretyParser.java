@@ -282,10 +282,8 @@ class GeokretyParser {
         /**
          * Convert states from GK to c:geo spotted types. See: http://geokrety.org/api.php
          *
-         * @param state
-         *          the GK state read from xml
-         * @return
-         *          The spotted types as defined in Trackables
+         * @param state the GK state read from xml
+         * @return The spotted types as defined in Trackables
          */
         private static int getSpottedType(final int state) {
             switch (state) {
@@ -305,10 +303,8 @@ class GeokretyParser {
         /**
          * Convert states from GK to c:geo spotted types.
          *
-         * @param type
-         *          the GK Log type
-         * @return
-         *          The LogType
+         * @param type the GK Log type
+         * @return The LogType
          */
         private static LogType getLogType(final int type) {
             switch (type) {
@@ -447,13 +443,11 @@ class GeokretyParser {
      * Determine from the newest logs (ignoring Notes) if the GK is spotted
      * in the hand of someone.
      *
-     * @param logsEntries
-     *          the log entries to analyze
-     * @return
-     *          The spotted username (or unknown)
+     * @param logsEntries the log entries to analyze
+     * @return The spotted username (or unknown)
      */
     static String getLastSpottedUsername(final List<LogEntry> logsEntries) {
-        for (final LogEntry log: logsEntries) {
+        for (final LogEntry log : logsEntries) {
             final LogType logType = log.getType();
             if (logType == LogType.GRABBED_IT || logType == LogType.VISIT) {
                 return log.author;

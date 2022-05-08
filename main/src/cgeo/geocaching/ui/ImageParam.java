@@ -30,17 +30,23 @@ public class ImageParam {
     //if needed, then this can be extended e.g. with Icon or Bitmap
 
 
-    /** create from drawable resource id */
+    /**
+     * create from drawable resource id
+     */
     public static ImageParam id(@DrawableRes final int drawableId) {
         return new ImageParam(drawableId, -1, null);
     }
 
-    /** create from emoji code */
+    /**
+     * create from emoji code
+     */
     public static ImageParam emoji(final int emojiSymbol) {
         return new ImageParam(-1, emojiSymbol, null);
     }
 
-    /** create from emoji code */
+    /**
+     * create from emoji code
+     */
     public static ImageParam drawable(final Drawable drawable) {
         return new ImageParam(-1, -1, drawable);
     }

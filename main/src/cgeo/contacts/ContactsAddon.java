@@ -18,7 +18,7 @@ public class ContactsAddon {
     public static void openContactCard(@NonNull final Context context, @NonNull final String userName) {
         final Parameters params = new Parameters(
                 IContacts.PARAM_NAME, userName
-                );
+        );
 
         context.startActivity(new Intent(IContacts.INTENT,
                 Uri.parse(IContacts.URI_SCHEME + "://" + IContacts.URI_HOST + "?" + params.toString())));

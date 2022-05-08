@@ -14,8 +14,7 @@ public abstract class AbstractMenuActionProvider extends ActionProvider {
      * Creates a new instance. ActionProvider classes should always implement a
      * constructor that takes a single Context parameter for inflating from menu XML.
      *
-     * @param context
-     *            Context for accessing resources.
+     * @param context Context for accessing resources.
      */
     protected AbstractMenuActionProvider(final Context context) {
         super(context);

@@ -23,13 +23,13 @@ abstract class AbstractClickablePreference extends Preference {
 
         final AlertDialog.Builder builder = Dialogs.newBuilder(v.getContext());
         builder.setMessage(R.string.auth_forget_message)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle(R.string.auth_forget_title)
-            .setPositiveButton(android.R.string.yes, (dialog, id) -> {
-                revokeAuthorization();
-                setSummary(R.string.auth_unconnected);
-            })
-            .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel());
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle(R.string.auth_forget_title)
+                .setPositiveButton(android.R.string.yes, (dialog, id) -> {
+                    revokeAuthorization();
+                    setSummary(R.string.auth_unconnected);
+                })
+                .setNegativeButton(android.R.string.cancel, (dialog, id) -> dialog.cancel());
         builder.create().show();
 
         return true;
