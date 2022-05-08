@@ -712,6 +712,9 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
             layers.add(index, newLayer.getTileLayer());
             this.tileLayer = newLayer;
             this.renderThemeHelper.reapplyMapTheme(this.tileLayer, this.tileCache);
+            //trigger mapscalebar redraw - otherwise the shown distances will be wrong.
+            //See https://github.com/mapsforge/mapsforge/discussions/1313
+            this.mapView.getMapScaleBar().setDistanceUnitAdapter(this.mapView.getMapScaleBar().getDistanceUnitAdapter());
             this.tileLayer.onResume();
         } else {
             this.tileLayer = null;
