@@ -1233,7 +1233,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps(온라인)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps(오프라인)</string>
     <string name="cache_menu_vote">투표</string>
-    <string name="cache_menu_checker">Geochecker 열기</string>
     <string name="cache_menu_challenge_checker">도전 확인프로그램 찾기</string>
     <string name="cache_menu_log_in_browser">브라우저에서 로그하기</string>
     <string name="cache_menu_ignore">캐시 제외시키기</string>
