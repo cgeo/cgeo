@@ -56,6 +56,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
     private ImageAdapter imageAdapter;
+    private ImageviewActivityBinding mainBinding;
 
     private final ArrayList<Image> imageList = new ArrayList<>();
     private int imagePos = 0;
@@ -69,8 +70,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         private final Context context;
         private final int realImageSize;
-        private final Map<Integer, ImageviewImageBinding> cachedPages = new HashMap<>();
+        private final Map<Integer, PageData> cachedPages = new HashMap<>();
         private int cachedPosition;
+
+        class PageData {
+            public final ImageviewImageBinding binding;
+            public boolean isBrowseable = false;
+
+            PageData(final ImageviewImageBinding binding) {
+                this.binding = binding;
+            }
+        }
 
         ImageAdapter(final Context context) {
             this.context = context;
@@ -78,7 +88,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         }
 
         public ImageviewImageBinding getCurrentBinding() {
-            return cachedPages.get(cachedPosition);
+            return cachedPages.get(cachedPosition).binding;
         }
 
         @NonNull
@@ -86,16 +96,14 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         public Object instantiateItem(@NonNull final ViewGroup container, final int pos) {
             final int position = pos % realImageSize;
             final ImageviewImageBinding binding = ImageviewImageBinding.inflate(LayoutInflater.from(context));
-            final Image currentImg = imageList.get(position);
-            binding.imageOpenFile.setOnClickListener(v ->
-                    ImageUtils.viewImageInStandardApp(ImageViewActivity.this, currentImg.getUri(), imageContextCode));
-            binding.imageOpenBrowser.setOnClickListener(v ->
-                    ShareUtils.openUrl(ImageViewActivity.this, currentImg.getUrl(), true));
-            binding.imageShare.setOnClickListener(v ->
-                    ShareUtils.shareImage(ImageViewActivity.this, currentImg.getUri(), imageContextCode, R.string.about_system_info_send_chooser));
             container.addView(binding.getRoot());
+            final PageData pd = new PageData(binding);
+
+            final Image currentImage = imageList.get(position);
+            pd.isBrowseable = currentImage != null && !UriUtils.isFileUri(currentImage.getUri()) && !UriUtils.isContentUri(currentImage.getUri());
+
+            cachedPages.put(pos, pd);
             loadImageView(position, binding);
-            cachedPages.put(pos, binding);
             return binding.getRoot();
         }
 
@@ -110,13 +118,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             super.setPrimaryItem(container, position, object);
             applyFullImageView(ImageviewImageBinding.bind((View) object));
 
-            //strip transition name from all cache objects and set it on current object
-            for (ImageviewImageBinding b : cachedPages.values()) {
-                b.imageFull.setTransitionName(null);
-            }
             cachedPosition = position;
-            cachedPages.get(position).imageFull.setTransitionName("test" + position % realImageSize);
             imagePos = position % realImageSize;
+            mainBinding.imageOpenBrowser.setEnabled(cachedPages.get(cachedPosition).isBrowseable);
         }
 
         @Override
@@ -130,13 +134,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         }
 
         public void clear() {
-            //imageViewMap.clear();
+            cachedPages.clear();
         }
 
         private void toggleFullImageView() {
             fullImageView = !fullImageView;
-            for (ImageviewImageBinding cachedBinding : cachedPages.values()) {
-                applyFullImageView(cachedBinding);
+            for (PageData cachedData : cachedPages.values()) {
+                applyFullImageView(cachedData.binding);
             }
         }
 
@@ -146,13 +150,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         final boolean turnOn = fullImageView;
         binding.imageviewHeadline.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
         binding.imageviewInformation.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
-        binding.imageviewActions.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        mainBinding.imageviewActions.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
     }
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide(); //do not use normal Action Bar
         setThemeAndContentView(R.layout.imageview_activity);
         postponeEnterTransition();
         transactionEnterActive = true;
@@ -174,7 +178,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             }
         });
 
-        final ImageviewActivityBinding binding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_viewpager));
         imageList.clear();
 
         final Uri uri = AndroidBeam.getUri(getIntent());
@@ -208,12 +211,25 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
 
         imageCache.setCode(imageContextCode);
-        setTitle("Images for " + imageContextCode);
 
         imageAdapter = new ImageAdapter(this);
-        binding.imageviewViewpager.setAdapter(imageAdapter);
-        binding.imageviewViewpager.setCurrentItem(imagePos + imageAdapter.getCount() / 2);
-        binding.imageviewViewpager.setOffscreenPageLimit(1);
+
+        mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_activityroot));
+        mainBinding.imageviewViewpager.setAdapter(imageAdapter);
+        mainBinding.imageviewViewpager.setCurrentItem(imagePos + imageAdapter.getCount() / 2);
+        mainBinding.imageviewViewpager.setOffscreenPageLimit(1);
+
+        mainBinding.imageviewBackbutton.setOnClickListener(v -> {
+            setFinishResult();
+            finishAfterTransition();
+        });
+        mainBinding.imageOpenFile.setOnClickListener(v ->
+                ImageUtils.viewImageInStandardApp(ImageViewActivity.this, imageList.get(imagePos).getUri(), imageContextCode));
+        mainBinding.imageOpenBrowser.setOnClickListener(v ->
+                ShareUtils.openUrl(ImageViewActivity.this, imageList.get(imagePos).getUrl(), true));
+        mainBinding.imageShare.setOnClickListener(v ->
+                ShareUtils.shareImage(ImageViewActivity.this, imageList.get(imagePos).getUri(), imageContextCode, R.string.about_system_info_send_chooser));
+
 
     }
 
@@ -252,10 +268,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             return;
         }
         applyFullImageView(binding);
-        binding.imageviewBackbutton.setOnClickListener(v -> {
-            setFinishResult();
-            finishAfterTransition();
-        });
         binding.imageviewPosition.setText((imagePos + 1) + " / " + imageList.size());
         binding.imageviewCategory.setText(currentImage.category.getI18n());
 
@@ -277,9 +289,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             binding.imageviewInformation.setMaxLines(
                     binding.imageviewInformation.getMaxLines() == 1 ? 1000 : 1);
         });
-
-        binding.imageOpenBrowser.setEnabled(
-                !UriUtils.isFileUri(currentImage.getUri()) && !UriUtils.isContentUri(currentImage.getUri()));
 
         imageCache.loadImage(currentImage.getUrl(), p -> {
             binding.imageFull.setImageDrawable(p.first);

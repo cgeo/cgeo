@@ -37,24 +37,16 @@
         android:layout_alignParentTop="true"
         android:background="@color/colorBackgroundTransparent">
 
-        <ImageView
-            android:id="@+id/imageview_backbutton"
-            android:src="@drawable/ic_arrow_back"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:scaleType="center"
-            android:layout_width="48dp"
-            android:layout_height="48dp"/>
-
         <TextView android:id="@+id/imageview_position"
             style="@style/text_label"
             android:textSize="@dimen/textSize_buttonsDouble"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:paddingHorizontal="5dp"
+            android:paddingRight="5dp"
+            android:paddingLeft="55dp"
             android:gravity="center_vertical"
             tools:text="4/25"
-            android:layout_toRightOf="@+id/imageview_backbutton"/>
+            android:layout_alignParentLeft="true"/>
 
         <TextView android:id="@+id/imageview_category"
             style="@style/text_label"
@@ -72,36 +64,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorBackgroundTransparent"
-        android:layout_above="@+id/imageview_actions"/>
+        android:paddingBottom="64dp"
+        android:layout_alignParentBottom="true"/>
 
-    <LinearLayout
-        android:id="@+id/imageview_actions"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/colorBackgroundTransparent"
-        android:layout_alignParentBottom="true">
 
-        <Button
-            style="@style/button_icon_actionbar"
-            android:id="@+id/image_open_file"
-            android:enabled="true"
-            app:icon="@drawable/ic_menu_info_details"
-            android:text="@string/cache_image_open_file" />
-        <Button
-            style="@style/button_icon_actionbar"
-            android:id="@+id/image_open_browser"
-            android:enabled="true"
-            app:icon="@drawable/ic_menu_info_details"
-            android:text="@string/cache_image_open_browser" />
-        <Button
-            style="@style/button_icon_actionbar"
-            android:id="@+id/image_share"
-            android:enabled="true"
-            app:icon="@drawable/ic_menu_share"
-            android:text="Share" />
-
-    </LinearLayout>
 
 </RelativeLayout>
 
