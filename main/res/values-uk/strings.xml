@@ -818,7 +818,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (онлайн)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (онлайн)</string>
     <string name="cache_menu_vote">голосувати</string>
-    <string name="cache_menu_checker">Відкрити Geochecker</string>
     <string name="cache_menu_challenge_checker">Перевірка завдання пошуку</string>
     <string name="cache_menu_ignore">ігнорувати кеш</string>
     <string name="cache_log_menu_decrypt">Дешифр/Шифрувати</string>
