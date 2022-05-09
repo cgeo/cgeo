@@ -1119,7 +1119,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (internetu)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (be interneto)</string>
     <string name="cache_menu_vote">Balsuoti</string>
-    <string name="cache_menu_checker">Atidaryti Geochecker</string>
     <string name="cache_menu_challenge_checker">Ieškoti iššukio tikrintuvo</string>
     <string name="cache_menu_ignore">Ignoruoti slėptuvę</string>
     <string name="cache_log_menu_decrypt">Iššifruoti/Užšifruoti</string>
