@@ -14,13 +14,17 @@
 ### Cacheliste
 
 - Neu: Option für "hat benutzerdefinierte Wegpunkte" zum erweiterten Statusfilter hinzugefügt
+- Neu: Erlaube die Aufnahme von Caches ohne D/T in Filter
 - Korrektur: Nach Entfernung sortierte Cacheliste bei Positionsänderungen neu sortieren
 
 ### Karte
 
+- Neu: Kartendesign-Optionen für Google Maps
+- Neu: Skalierungsoptionen für OpenStreetMap (siehe Design-Optionen)
 - Änderung: Einstellungen => Karte => Langes Tippen auf Karte berücksichtigt nun auch die Cache-Karte (relevant für das Erstellen neuer Wegpunkte für den aktuellen Cache)
 - Änderung: Entfernungskreis für archivierte Caches nicht anzeigen
 - Korrektur: Absturz bei OpenStreetMap unter bestimmten Bedingungen
+- Korrektur: Routing unvollständig oder langsam nach Installation vieler Routing-Kacheln
 
 ### Allgemein
 
