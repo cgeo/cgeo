@@ -1209,7 +1209,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (オンライン)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (オフライン)</string>
     <string name="cache_menu_vote">評価を投稿</string>
-    <string name="cache_menu_checker">Geochecker を開く</string>
     <string name="cache_menu_challenge_checker">チャレンジチェッカーを検索</string>
     <string name="cache_menu_ignore">キャッシュを無視</string>
     <string name="cache_log_menu_decrypt">暗号化/復号化</string>
