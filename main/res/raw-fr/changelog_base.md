@@ -14,13 +14,17 @@
 ### Liste des caches
 
 - New: Added option for "has user defined waypoints" to advanced status filter
-- Fix: Resort cache list on every location change on distance sort order
+- New: Allow inclusion of caches without D/T in filter
+- Correction : Retri de la liste des caches à chaque changement de localisation sur l'ordre de tri des distances
 
 ### Carte
 
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
-- Fix: Crash in OpenStreetMap maps under certain conditions
+- New: Map theming for Google Maps
+- New: Map scaling options for OpenStreetMap (see theme options)
+- Modification : Paramètres => Carte => Appui long sur la carte active/désactive aussi l'appui long sur la carte de cache (utile pour la création de nouveaux points de passage)
+- Modification : Ne plus afficher des cercles de distance pour les caches archivées
+- Correction : Plantage des cartes OpenStreetMap dans certaines conditions
+- Fix: Routing becoming unresponsive when many routing tiles are installed
 
 ### Général
 
