@@ -783,6 +783,8 @@
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
+    <string name="init_quicklaunchitems">Snelstartknoppen</string>
+    <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
@@ -1247,7 +1249,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Stem</string>
-    <string name="cache_menu_checker">Open Geochecker</string>
     <string name="cache_menu_challenge_checker">Zoek challenge checker</string>
     <string name="cache_menu_log_in_browser">Log bezoek in browser</string>
     <string name="cache_menu_ignore">Negeer cache</string>
@@ -2190,6 +2191,12 @@
     <string name="mapserver_hylly_themes_info">Gedetailleerd kaart thema, gebouwd voor \"Hylly\" kaarten</string>
     <string name="brouter_info">Offline routering service</string>
     <string name="maptheme_elevate_categoryinfo">Relevant voor: [A] Gebieden, [P] POI, [R] Routes, [W] Manieren</string>
+    <string name="maptheme_scale_map_title">Kaart Schaalfactor</string>
+    <string name="maptheme_scale_map_summary">Schaalt kaart; 100% = niet schalen</string>
+    <string name="maptheme_scale_text_title">Tekst schaalfactor</string>
+    <string name="maptheme_scale_text_summary">Aanvullend tekstlabels op kaart schalen; 100% = niet extra schalen</string>
+    <string name="maptheme_scale_symbol_title">Symbool Schaalfactor</string>
+    <string name="maptheme_scale_symbol_summary">Aanvullend symbool labels op kaart schalen; 100% = niet extra schalen</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Geschiedenisspoor wissen</string>
     <string name="map_trailhistory_cleared">Geschiedenisspoor gewist</string>
