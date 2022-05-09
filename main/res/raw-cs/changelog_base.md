@@ -14,13 +14,17 @@
 ### Seznam kešek
 
 - Novinka: Do filtru pokročilých stavů byla přidána možnost "má uživatelem definované trasové body"
+- Novinka: Povolit zařazení kešek bez O/T do filtru
 - Oprava: Uspořádat seznam kešek při každé změně polohy podle pořadí vzdálenosti
 
 ### Mapa
 
+- Novinka: Témata mapy pro Mapy Google
+- Novinka: Možnosti měřítka mapy pro OpenStreetMap (viz možnosti tématu)
 - Změna: Nastavení => Mapa => Dlouhé klepnutí na mapu nyní povolí/zakáže dlouhé klepnutí i v mapě kešky (důležité pro vytváření nových trasových bodů pro aktuální kešku)
 - Změna: Nezobrazovat kruh vzdálenosti u archivovaných kešek
 - Oprava: Pád map OpenStreetMap za určitých podmínek
+- Oprava: Směrování přestane reagovat, když je nainstalováno mnoho směrovacích dlaždic
 
 ### Obecné
 
