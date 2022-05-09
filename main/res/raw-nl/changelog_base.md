@@ -14,13 +14,17 @@
 ### Cache lijst
 
 - Nieuw: Optie toegevoegd voor "heeft gebruiker gedefinieerde waypoints" voor de geavanceerde status filter
-- Fix: Resort cache list on every location change on distance sort order
+- Nieuw: Sta opname van caches toe zonder D/T in het filter
+- Oplossing: Hersorteer cache lijst op elke locatie wijzigen in sorteervolgorde op afstand
 
 ### Kaart
 
+- Nieuw: Kaart thema voor Google Maps
+- Nieuw: Kaart schaalopties voor OpenStreetMap (zie thema opties)
 - Wijziging: Instellingen => Kaart => Lang tikken op kaart zal nu ook het aanzetten/uitschakelen van lange tik in de cache kaart instellen (relevant voor het maken van nieuwe waypoints voor huidige cache)
 - Wijziging: Toon geen afstand-cirkel voor gearchiveerde caches
 - Oplossing: Crash in OpenStreetMap kaarten onder bepaalde voorwaarden
+- Oplossing: Routering die niet reageert wanneer veel tegels zijn geïnstalleerd
 
 ### Algemeen
 
