@@ -579,6 +579,7 @@
     <string name="about_changelog">Versions</string>
     <string name="about_changelog_nightly_build">Nightly Build</string>
     <string name="about_changelog_next_release">Prochaine version</string>
+    <string name="about_changelog_bugfix_release">Version de maintenance</string>
     <string name="about_system">Système</string>
     <string name="about_donate">Nous soutenir</string>
     <string name="about_donation_more">Visitez le site web pour plus d\'informations</string>
@@ -779,6 +780,8 @@
     <string name="init_summary_listdisplay">Afficher l\'adhésion des caches à des listes supplémentaires dans une liste de caches</string>
     <string name="init_livelist">Afficher la direction des caches dans les listes</string>
     <string name="init_summary_livelist">Affiche une flèche \"direction de la boussole\" dans la liste des caches</string>
+    <string name="init_quicklaunchitems">Boutons de lancement rapide</string>
+    <string name="init_summary_quicklaunchitems">Sélectionnez un ou plusieurs éléments pour ajouter des boutons de lancement rapide à l\'écran d\'accueil</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thème</string>
     <string-array name="settings_theme_entries">
