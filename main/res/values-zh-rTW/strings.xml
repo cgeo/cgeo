@@ -1055,7 +1055,6 @@
     <string name="cache_menu_oruxmaps_online">歐魯妹(線上)</string>
     <string name="cache_menu_oruxmaps_offline">歐魯妹(離線)</string>
     <string name="cache_menu_vote">投票</string>
-    <string name="cache_menu_checker">開啟藏寶檢查器</string>
     <string name="cache_menu_challenge_checker">搜尋挑戰寶的檢查器</string>
     <string name="cache_menu_ignore">忽略藏寶</string>
     <string name="cache_log_menu_decrypt">解密/加密</string>
