@@ -14,17 +14,17 @@
 ### Kätkölista
 
 - Uusi: Lisätty vaihtoehto "on käyttäjän määrittämät reittipisteet" edistyneisiin tilasuodattimiin
-- New: Allow inclusion of caches without D/T in filter
+- Uusi: Salli ilman D/T:tä olevien kätköjen sisällyttäminen suodattimeen
 - Korjaa: Lajittele kätkölista uudelleen sijainnin muuttuessa kun lista lajitellaan etäisyyden mukaan
 
 ### Kartta
 
-- New: Map theming for Google Maps
-- New: Map scaling options for OpenStreetMap (see theme options)
+- Uusi: Google Mapsin karttateema
+- Uusi: Kartan skaalaus vaihtoehtoja OpenStreetMapille (katso teeman vaihtoehdot)
 - Muutos: Asetukset => Kartta => Pitkä napautus kartalla ottaa nyt käyttöön/pois käytöstä myös kartan pitkä napautuksen (liittyy luoda uusia reittipisteitä nykyiselle kätkölle)
 - Muutos: Älä näytä etäisyysympyrää arkistoiduille kätköille
 - Korjaa: Kaatuminen tietyissä olosuhteissa käyttäen OpenStreetMapsia
-- Fix: Routing becoming unresponsive when many routing tiles are installed
+- Korjaus: Reititys tulee reagoimattomaksi, kun monet reitityslaatat on asennettu
 
 ### Yleinen
 
