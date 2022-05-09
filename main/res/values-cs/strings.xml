@@ -1277,7 +1277,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (offline)</string>
     <string name="cache_menu_vote">Hlasovat</string>
-    <string name="cache_menu_checker">Otevřít Geocheck</string>
     <string name="cache_menu_challenge_checker">Hledat ověření výzvy</string>
     <string name="cache_menu_log_in_browser">Zalogovat v prohlížeči</string>
     <string name="cache_menu_ignore">Ignorovat kešku</string>
@@ -2248,6 +2247,12 @@
     <string name="mapserver_hylly_themes_info">Podrobný motiv mapy, vytvořený pro mapy „Hylly“</string>
     <string name="brouter_info">Offline směrovací služba</string>
     <string name="maptheme_elevate_categoryinfo">Relevantní pro: [A] Oblasti, [P] POI, [R] Trasy, [W] Cesty</string>
+    <string name="maptheme_scale_map_title">Měřítko mapy</string>
+    <string name="maptheme_scale_map_summary">Měřítko mapy; 100 % = bez měřítka</string>
+    <string name="maptheme_scale_text_title">Měřítko textu</string>
+    <string name="maptheme_scale_text_summary">Dodatečně škáluje textové popisky v mapě; 100% = žádné další škálování</string>
+    <string name="maptheme_scale_symbol_title">Měřítko symbolu</string>
+    <string name="maptheme_scale_symbol_summary">Dodatečně škáluje velikosti symbolů v mapě; 100% = žádné další škálování</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Vymazat historii trasy</string>
     <string name="map_trailhistory_cleared">Historie trasy vymazána</string>
