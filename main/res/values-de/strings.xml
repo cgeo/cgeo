@@ -783,6 +783,8 @@
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
+    <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
+    <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
     <string-array name="settings_theme_entries">
@@ -1247,7 +1249,6 @@
     <string name="cache_menu_oruxmaps_online">OruxMaps (Online)</string>
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Bewerten</string>
-    <string name="cache_menu_checker">Öffne Geochecker</string>
     <string name="cache_menu_challenge_checker">Suche Challenge-Checker</string>
     <string name="cache_menu_log_in_browser">Im Browser loggen</string>
     <string name="cache_menu_ignore">Cache ignorieren</string>
@@ -2190,6 +2191,12 @@
     <string name="mapserver_hylly_themes_info">Detailliertes Kartendesign, passend für \"Hylly\"-Karten</string>
     <string name="brouter_info">Offline Routing-Dienst</string>
     <string name="maptheme_elevate_categoryinfo">Relevant für: [A] Flächen, [P] Symbole, [R] Routen, [W] Wege</string>
+    <string name="maptheme_scale_map_title">Kartenskalierungsfaktor</string>
+    <string name="maptheme_scale_map_summary">Skaliert die Karte; 100% = keine Skalierung</string>
+    <string name="maptheme_scale_text_title">Textskalierungsfaktor</string>
+    <string name="maptheme_scale_text_summary">Skaliert zusätzlich angezeigte Texte in der Karte; 100% = keine zusätzliche Skalierung</string>
+    <string name="maptheme_scale_symbol_title">Symbolskalierungsfaktor</string>
+    <string name="maptheme_scale_symbol_summary">Skaliert zusätzlich angezeigte Symbole in der Karte; 100% = keine zusätzliche Skalierung</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Positionsverlauf löschen</string>
     <string name="map_trailhistory_cleared">Positionsverlauf gelöscht</string>
