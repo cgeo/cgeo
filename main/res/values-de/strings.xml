@@ -783,6 +783,8 @@
     <string name="init_summary_listdisplay">Zeige in der Cacheliste die Zugehörigkeit von Caches zu weiteren Listen an</string>
     <string name="init_livelist">Richtung zum Cache</string>
     <string name="init_summary_livelist">Zeige einen Pfeil in Kompassrichtung für Caches in einer Liste</string>
+    <string name="init_quicklaunchitems">Schnellstart-Schaltflächen</string>
+    <string name="init_summary_quicklaunchitems">Wähle einen oder mehrere Einträge als Schnellstart-Schaltfläche für den Startbildschirm aus</string>
     <!-- app theme -->
     <string name="settings_theme_title">Design</string>
     <string-array name="settings_theme_entries">
