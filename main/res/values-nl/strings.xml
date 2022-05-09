@@ -783,6 +783,8 @@
     <string name="init_summary_listdisplay">Lidmaatschap van caches aan extra lijsten weergeven in een cachelijst</string>
     <string name="init_livelist">Toon richting</string>
     <string name="init_summary_livelist">Toon een pijl met kompasrichting voor caches in een lijst</string>
+    <string name="init_quicklaunchitems">Snelstartknoppen</string>
+    <string name="init_summary_quicklaunchitems">Selecteer een of meer items als snelstartknoppen op het startscherm</string>
     <!-- app theme -->
     <string name="settings_theme_title">Thema</string>
     <string-array name="settings_theme_entries">
