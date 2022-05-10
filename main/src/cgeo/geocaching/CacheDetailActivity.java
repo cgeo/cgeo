@@ -1772,9 +1772,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
                     binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
-                    binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
+                    binding.hint.setText(Settings.getHintAsRot13() ? CryptUtils.rot13((Spannable) binding.hint.getText()) : binding.hint.getText());
                 } else {
-                    binding.hint.setText(CryptUtils.rot13(cache.getHint()));
+                    binding.hint.setText(Settings.getHintAsRot13() ? CryptUtils.rot13(cache.getHint()) : cache.getHint());
                 }
                 binding.hint.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 binding.hint.setVisibility(View.VISIBLE);

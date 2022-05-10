@@ -2192,4 +2192,8 @@ public class Settings {
         return getString(R.string.pref_google_map_theme, "DEFAULT");
     }
 
+    public static boolean getHintAsRot13() {
+        return getBoolean(R.string.pref_rot13_hint, true);
+    }
+
 }

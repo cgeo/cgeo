@@ -42,5 +42,11 @@
         android:title="@string/init_customtabs_as_browser"
         android:summary="@string/init_summary_customtabs_as_browser"
         app:iconSpaceReserved="false" />
+    <CheckBoxPreference
+        android:defaultValue="true"
+        android:key="@string/pref_rot13_hint"
+        android:title="@string/init_rot13_hint"
+        android:summary="@string/init_summary_rot13_hint"
+        app:iconSpaceReserved="false" />
 
 </PreferenceScreen>
