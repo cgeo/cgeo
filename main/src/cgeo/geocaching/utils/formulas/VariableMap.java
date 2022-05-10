@@ -336,7 +336,10 @@ public class VariableMap {
     }
 
     private void recalculate(final String var) {
-        final VariableState state = Objects.requireNonNull(get(var));
+        final VariableState state = get(var);
+        if (state == null) {
+            return;
+        }
         state.state = State.OK;
         final List<List<String>> cyclesFound = new ArrayList<>();
         recalculate(state, var, true, new LinkedList<>(), cyclesFound);
