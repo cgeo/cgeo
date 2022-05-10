@@ -783,6 +783,8 @@
     <string name="init_summary_listdisplay">Ao aceder a uma lista de caches armazenadas, é mostrado o nome de outras listas das quais essas caches possam estar associadas</string>
     <string name="init_livelist">Mostrar direcção</string>
     <string name="init_summary_livelist">Mostra uma seta com a direcção da bússola para as caches numa lista</string>
+    <string name="init_quicklaunchitems">Botões de início rápido</string>
+    <string name="init_summary_quicklaunchitems">Seleccione um ou mais itens como botões de início rápido, no ecrã inicial</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
