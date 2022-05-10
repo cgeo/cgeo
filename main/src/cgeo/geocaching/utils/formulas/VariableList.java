@@ -235,6 +235,9 @@ public class VariableList {
     public List<VariableEntry> getEntries() {
         final List<VariableEntry> rows = new ArrayList<>();
         for (String v : this.variableList) {
+            if (this.variableMap.get(v) == null) {
+                continue;
+            }
             rows.add(new VariableEntry(
                     this.variablesSet.get(v) == null ? -1 : Objects.requireNonNull(this.variablesSet.get(v)),
                     v, Objects.requireNonNull(this.variableMap.get(v)).getFormulaString()));
