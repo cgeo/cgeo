@@ -23,4 +23,5 @@ public class BranchDetectionHelper {
     public static boolean isProductionBuild() {
         return !(BuildConfig.BUILD_TYPE.equals("debug") || BuildConfig.BUILD_TYPE.equals("nightly"));
     }
+
 }

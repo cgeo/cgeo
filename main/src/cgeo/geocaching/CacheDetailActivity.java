@@ -85,7 +85,6 @@ import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
@@ -2614,7 +2613,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (CollectionUtils.isNotEmpty(cache.getInventory()) || CollectionUtils.isNotEmpty(genericTrackables)) {
                 pages.add(Page.INVENTORY.id);
             }
-            if (!BranchDetectionHelper.isProductionBuild()) {
+            if (Settings.enableFeatureNewImageGallery()) {
                 pages.add(Page.IMAGEGALLERY.id);
             }
             if (CollectionUtils.isNotEmpty(cache.getNonStaticImages())) {

@@ -2,8 +2,8 @@ package cgeo.geocaching;
 
 import cgeo.geocaching.activity.AbstractActionBarActivity;
 import cgeo.geocaching.models.Image;
+import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.ui.ImageGalleryView;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.ImageUtils;
 
 import android.content.Context;
@@ -62,7 +62,7 @@ public class ImageGalleryActivity extends AbstractActionBarActivity {
 
     public static void startActivity(final Context fromActivity, final String geocode, final List<Image> images) {
 
-        if (BranchDetectionHelper.isProductionBuild()) {
+        if (!Settings.enableFeatureNewImageGallery()) {
             ImagesActivity.startActivity(fromActivity, geocode, images);
             return;
         }

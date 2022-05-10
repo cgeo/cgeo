@@ -30,7 +30,6 @@ import cgeo.geocaching.ui.ImagesList;
 import cgeo.geocaching.ui.UserClickListener;
 import cgeo.geocaching.ui.dialog.Dialogs;
 import cgeo.geocaching.utils.AndroidRxUtils;
-import cgeo.geocaching.utils.BranchDetectionHelper;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.HtmlUtils;
 import cgeo.geocaching.utils.ImageUtils;
@@ -466,7 +465,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (CollectionUtils.isNotEmpty(trackable.getImages())) {
                 pages.add(Page.IMAGES.id);
             }
-            if (!BranchDetectionHelper.isProductionBuild()) {
+            if (Settings.enableFeatureNewImageGallery()) {
                 pages.add(Page.IMAGEGALLERY.id);
             }
         }

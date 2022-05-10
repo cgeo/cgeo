@@ -7,6 +7,7 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Image;
 import cgeo.geocaching.network.AndroidBeam;
+import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
@@ -16,6 +17,10 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.UriUtils;
 import cgeo.geocaching.utils.functions.Func1;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SharedElementCallback;
@@ -53,6 +58,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private static final String PARAM_IMAGE_LIST_POS = "param_image_list_pos";
     private static final String PARAM_IMAGE_CONTEXT_CODE = "param_image_context_code";
     private static final String PARAM_FULLIMAGEVIEW = "param_full_image_view";
+    private static final String PARAM_SHOWIMAGEINFO = "param_show_image_information";
 
     private final ImageDataMemoryCache imageCache = new ImageDataMemoryCache(2);
     private ImageAdapter imageAdapter;
@@ -62,6 +68,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     private int imagePos = 0;
     private String imageContextCode = "shared";
     private boolean fullImageView = false;
+    private boolean showImageInformation = true;
     private boolean transactionEnterActive = false;
 
     private class ImageAdapter extends PagerAdapter {
@@ -116,7 +123,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         @Override
         public void setPrimaryItem(@NonNull final ViewGroup container, final int position, @NonNull final Object object) {
             super.setPrimaryItem(container, position, object);
-            applyFullImageView(ImageviewImageBinding.bind((View) object));
+            setFullImageViewOnOff(ImageviewImageBinding.bind((View) object), fullImageView);
 
             cachedPosition = position;
             imagePos = position % realImageSize;
@@ -139,18 +146,62 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         private void toggleFullImageView() {
             fullImageView = !fullImageView;
-            for (PageData cachedData : cachedPages.values()) {
-                applyFullImageView(cachedData.binding);
+            for (Map.Entry<Integer, PageData> cachedData : cachedPages.entrySet()) {
+                if (cachedData.getKey() == cachedPosition) {
+                    animateFullImageView(cachedData.getValue().binding, fullImageView);
+                } else {
+                    setFullImageViewOnOff(cachedData.getValue().binding, fullImageView);
+                }
+
+            }
+        }
+
+        public void toggleShowInformationView() {
+            showImageInformation = !showImageInformation;
+            for (Map.Entry<Integer, PageData> cachedData : cachedPages.entrySet()) {
+                if (cachedData.getKey() == cachedPosition) {
+                    animateInfoOutIn(cachedData.getValue().binding, !showImageInformation);
+                } else {
+                    setInfoShowHide(cachedData.getValue().binding, showImageInformation);
+                }
             }
         }
 
     }
 
-    private void applyFullImageView(final ImageviewImageBinding binding) {
-        final boolean turnOn = fullImageView;
+    private void setFullImageViewOnOff(final ImageviewImageBinding binding, final boolean turnOn) {
         binding.imageviewHeadline.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
         binding.imageviewInformation.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        binding.imageviewActionSpace.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
         mainBinding.imageviewActions.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+        mainBinding.imageviewBackbutton.setVisibility(turnOn ? View.INVISIBLE : View.VISIBLE);
+    }
+
+    private void animateFullImageView(final ImageviewImageBinding binding, final boolean turnOn) {
+
+        final float end = turnOn ? 0.0f : 1.0f;
+
+        final ObjectAnimator headline = ObjectAnimator.ofFloat(binding.imageviewHeadline, "alpha", end);
+        final ObjectAnimator info = ObjectAnimator.ofFloat(binding.imageviewInformation, "alpha", end);
+        final ObjectAnimator actionSpace = ObjectAnimator.ofFloat(binding.imageviewActionSpace, "alpha", end);
+        final ObjectAnimator actions = ObjectAnimator.ofFloat(mainBinding.imageviewActions, "alpha", end);
+        final ObjectAnimator backButton = ObjectAnimator.ofFloat(mainBinding.imageviewBackbutton, "alpha", end);
+        final AnimatorSet as = new AnimatorSet();
+        as.playTogether(headline, info, actionSpace, actions, backButton);
+        as.setDuration(100);
+        as.addListener(new AnimatorListenerAdapter() {
+
+            @Override
+            public void onAnimationStart(final Animator animation) {
+                setFullImageViewOnOff(binding, false); //views must be visible, otherwise we don#t see the animation
+            }
+
+            @Override
+            public void onAnimationEnd(final Animator animation) {
+                setFullImageViewOnOff(binding, fullImageView);
+            }
+        });
+        as.start();
     }
 
     @Override
@@ -195,6 +246,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageContextCode = extras.getString(PARAM_IMAGE_CONTEXT_CODE);
             imagePos = extras.getInt(PARAM_IMAGE_LIST_POS, 0);
             fullImageView = extras.getBoolean(PARAM_FULLIMAGEVIEW, false);
+            showImageInformation = extras.getBoolean(PARAM_SHOWIMAGEINFO, true);
         }
 
         // Restore previous state
@@ -207,6 +259,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageContextCode = savedInstanceState.getString(PARAM_IMAGE_CONTEXT_CODE);
             imagePos = savedInstanceState.getInt(PARAM_IMAGE_LIST_POS, 0);
             fullImageView = savedInstanceState.getBoolean(PARAM_FULLIMAGEVIEW, false);
+            showImageInformation = savedInstanceState.getBoolean(PARAM_SHOWIMAGEINFO, true);
         }
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
 
@@ -246,6 +299,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         outState.putString(PARAM_IMAGE_CONTEXT_CODE, imageContextCode);
         outState.putInt(PARAM_IMAGE_LIST_POS, imagePos);
         outState.putBoolean(PARAM_FULLIMAGEVIEW, fullImageView);
+        outState.putBoolean(PARAM_SHOWIMAGEINFO, showImageInformation);
     }
 
     @Override
@@ -267,7 +321,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             binding.imageFull.setVisibility(View.GONE);
             return;
         }
-        applyFullImageView(binding);
+        setFullImageViewOnOff(binding, fullImageView);
         binding.imageviewPosition.setText((imagePos + 1) + " / " + imageList.size());
         binding.imageviewCategory.setText(currentImage.category.getI18n());
 
@@ -284,11 +338,14 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         if (imageInfos.isEmpty()) {
             imageInfos.add(Html.fromHtml("<b>No title</b>"));
         }
-        binding.imageviewInformation.setText(TextUtils.join(imageInfos, d -> d, "\n"));
-        binding.imageviewInformation.setOnClickListener(v -> {
-            binding.imageviewInformation.setMaxLines(
-                    binding.imageviewInformation.getMaxLines() == 1 ? 1000 : 1);
+        binding.imageviewInformationText.setText(TextUtils.join(imageInfos, d -> d, "\n"));
+        binding.imageviewInformation.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
+            setInfoShowHide(binding, showImageInformation);
         });
+        binding.imageviewInformation.setOnClickListener(v -> {
+            imageAdapter.toggleShowInformationView();
+        });
+        setInfoShowHide(binding, showImageInformation);
 
         imageCache.loadImage(currentImage.getUrl(), p -> {
             binding.imageFull.setImageDrawable(p.first);
@@ -300,7 +357,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             final String comment = MetadataUtils.getComment(p.second);
             if (gp != null || !StringUtils.isBlank(comment)) {
                 final List<CharSequence> imageInfosNew = new ArrayList<>();
-                imageInfosNew.add(binding.imageviewInformation.getText());
+                imageInfosNew.add(binding.imageviewInformationText.getText());
                 if (gp != null) {
                     final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
                     imageInfosNew.add(Html.fromHtml("<b>Geopoint:</b> <i>" + gpAsHtml + "</i>"));
@@ -312,7 +369,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     }
                     imageInfosNew.add(Html.fromHtml("<b>Metadata Comment:</b> <i>" + commentInView + "</i>"));
                 }
-                binding.imageviewInformation.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
+                binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
+                setInfoShowHide(binding, showImageInformation);
+
             }
 
             final Loupe loupe = new Loupe(binding.imageFull, binding.imageviewViewroot);
@@ -364,6 +423,31 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     }
 
+    private static void setInfoShowHide(final ImageviewImageBinding binding, final boolean show) {
+        final int infoheight = binding.imageviewInformation.getHeight();
+        binding.imageviewInformation.setTranslationY(show ? 0 : infoheight == 0 ? 0 : infoheight - ViewUtils.dpToPixel(24));
+        binding.imageviewInformationIconLess.setAlpha(show ? 1.0f : 0.0f);
+        binding.imageviewInformationIconMore.setAlpha(show ? 0.0f : 1.0f);
+    }
+
+    private static void animateInfoOutIn(final ImageviewImageBinding binding, final boolean out) {
+        setInfoShowHide(binding, out);
+        final int infoheight = binding.imageviewInformation.getHeight();
+        final ObjectAnimator textAnim = ObjectAnimator.ofFloat(binding.imageviewInformation, "translationY", out ? infoheight - ViewUtils.dpToPixel(24) : 0);
+        final ObjectAnimator lessAnim = ObjectAnimator.ofFloat(binding.imageviewInformationIconLess, "alpha", out ? 0.0f : 1.0f);
+        final ObjectAnimator moreAnim = ObjectAnimator.ofFloat(binding.imageviewInformationIconMore, "alpha", out ? 1.0f : 0.0f);
+        final AnimatorSet as = new AnimatorSet();
+        as.playTogether(textAnim, lessAnim, moreAnim);
+        as.setDuration(200);
+        as.addListener(new AnimatorListenerAdapter() {
+            @Override
+            public void onAnimationEnd(final Animator animation) {
+                setInfoShowHide(binding, !out);
+            }
+        });
+        as.start();
+    }
+
 
     public static void openImageView(final Activity activity, final String contextCode, final Collection<Image> images, final int pos, final Func1<Integer, View> getImageView) {
         final Intent intent = new Intent(activity, ImageViewActivity.class);
@@ -380,7 +464,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     if (names == null || names.isEmpty() || !names.get(0).startsWith(TRANSITION_ID_BACK)) {
                         return;
                     }
-                    final int pos = Integer.valueOf(names.get(0).substring(TRANSITION_ID_BACK.length()));
+                    final int pos = Integer.parseInt(names.get(0).substring(TRANSITION_ID_BACK.length()));
                     final View targetView = getImageView.call(pos);
                     targetView.setTransitionName(names.get(0));
                     sharedElements.clear();
