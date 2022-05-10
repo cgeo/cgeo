@@ -25,7 +25,10 @@ import cgeo.geocaching.utils.TextUtils;
 import cgeo.geocaching.utils.TranslationUtils;
 import cgeo.geocaching.utils.formulas.FormulaUtils;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.AndroidRuntimeException;
@@ -60,6 +63,14 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final CompositeDisposable resumeDisposable = new CompositeDisposable();
 
     private final String logToken = "[" + this.getClass().getName() + "]";
+
+    private static final String ACTION_CLEAR_BACKSTACK = "cgeo.geocaching.ACTION_CLEAR_BACKSTACK";
+    private final BroadcastReceiver finisBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            finish();
+        }
+    };
 
     protected final void showProgress(final boolean show) {
         try {
@@ -139,6 +150,17 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             throw e;
         }
         onCreateCommon();
+        registerReceiver(finisBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
+    }
+
+    public void clearBackStack() {
+        sendBroadcast(new Intent(ACTION_CLEAR_BACKSTACK));
+    }
+
+    @Override
+    protected void onDestroy() {
+        unregisterReceiver(finisBroadcastReceiver);
+        super.onDestroy();
     }
 
     protected void setThemeAndContentView(@LayoutRes final int resourceLayoutID) {
