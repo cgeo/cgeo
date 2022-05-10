@@ -6,7 +6,6 @@
     android:id="@+id/imageview_viewroot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="4dip"
     android:orientation="vertical"
     android:background="@android:color/transparent"
     tools:context=".ImageViewActivity">
@@ -59,12 +58,42 @@
             android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
-    <TextView android:id="@+id/imageview_information"
-        style="@style/text_default"
+
+    <!-- encapsulate the info box with a Frame Layout so translation Y will lead to "fade out of view" instead of "overlay view under it" -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_above="@+id/imageview_action_space">
+        <RelativeLayout android:id="@+id/imageview_information"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/colorBackgroundTransparent">
+            <TextView android:id="@+id/imageview_information_text"
+                style="@style/text_default"
+                android:layout_toLeftOf="@+id/imageview_information_icon_less"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+            <ImageView android:id="@+id/imageview_information_icon_less"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/expand_more"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+            <ImageView android:id="@+id/imageview_information_icon_more"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentTop="true"
+                android:src="@drawable/expand_less"
+                android:layout_width="24dp"
+                android:layout_height="24dp" />
+        </RelativeLayout>
+    </FrameLayout>
+
+    <!-- placeholder to cover the space occupied by action buttons -->
+    <View
+        android:id="@+id/imageview_action_space"
+        android:layout_height="80dp"
+        android:layout_width="match_parent"
         android:background="@color/colorBackgroundTransparent"
-        android:paddingBottom="64dp"
         android:layout_alignParentBottom="true"/>
 
 

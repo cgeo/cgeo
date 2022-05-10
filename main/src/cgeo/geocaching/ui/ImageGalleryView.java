@@ -444,14 +444,14 @@ public class ImageGalleryView extends LinearLayout {
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
 
-        ctxMenu.addItem("Open", R.drawable.ic_menu_info_details,
+        ctxMenu.addItem("Open", R.drawable.ic_menu_image,
                 v -> openImageViewer(category, pos));
 
-        ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_info_details,
+        ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_image,
                 v -> ImageUtils.viewImageInStandardApp(activity, img.getUri(), geocode));
 
         if (!UriUtils.isFileUri(img.getUri()) && !UriUtils.isContentUri(img.getUri())) {
-            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_browser), R.drawable.ic_menu_share,
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_browser), R.drawable.ic_menu_open_in_browser,
                     v -> ShareUtils.openUrl(context, img.getUrl(), false));
         }
         if (img.hasDescription()) {
