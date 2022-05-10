@@ -32,7 +32,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
-import android.widget.Toast;
 
 import androidx.annotation.IdRes;
 import androidx.annotation.NonNull;
@@ -66,7 +65,6 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
 
     private ActivityBottomNavigationBinding binding = null;
-    private boolean doubleBackToExitPressedOnce = false;
 
     private final ConnectivityChangeReceiver connectivityChangeReceiver = new ConnectivityChangeReceiver();
     private final Handler loginHandler = new Handler();
@@ -169,19 +167,13 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
 
     @Override
     public void onBackPressed() {
-        if (!isTaskRoot() || doubleBackToExitPressedOnce) {
-            super.onBackPressed();
-            // avoid weired transitions
-            ActivityMixin.overrideTransitionToFade(this);
-        } else if (this instanceof MainActivity) {
-            this.doubleBackToExitPressedOnce = true;
-            Toast.makeText(this, R.string.touch_again_to_exit, Toast.LENGTH_SHORT).show();
-            new Handler().postDelayed(() -> doubleBackToExitPressedOnce = false, 2000);
-        } else {
-            startActivity(new Intent(this, MainActivity.class).addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT));
-            // avoid weired transitions
-            ActivityMixin.finishWithFadeTransition(this);
+        if (isTaskRoot() && !(this instanceof MainActivity)) {
+            startActivity(new Intent(this, MainActivity.class));
         }
+        super.onBackPressed();
+
+        // avoid weired transitions
+        ActivityMixin.overrideTransitionToFade(this);
     }
 
     public void updateSelectedBottomNavItemId() {
@@ -247,15 +239,10 @@ public abstract class AbstractBottomNavigationActivity extends AbstractActionBar
             throw new IllegalStateException("unknown navigation item selected"); // should never happen
         }
 
-        // Todo?:
-        //  restore activity if an instance does already exist
-        //  -----
-        //      launchIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-        //  -----
-        //  This implementation had unwanted side-effects so we have decided to not go that way.
-        //  Instead, a different solution should be found for persisting the activity state. (see #11926)
-
         startActivity(launchIntent);
+
+        // Clear activity stack if the user actively navigates via the bottom navigation
+        clearBackStack();
 
         // avoid weired transitions
         ActivityMixin.overrideTransitionToFade(this);
