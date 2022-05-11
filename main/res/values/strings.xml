@@ -855,8 +855,8 @@
     <string name="init_summary_prevent_cache_note_merge">If this setting is enabled c:geo will delete the locally stored note permanently and replace it by the personal note on the server. No merging will be done.</string>
     <string name="init_customtabs_as_browser">Use Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">External websites will be displayed without leaving c:geo (only possible if Chrome is installed)</string>
-    <string name="init_rot13_hint">Obfuscate Hint</string>
-    <string name="init_summary_rot13_hint">Show hint text as ROT-13 until clicked</string>
+    <string name="init_rot13_hint">Encrypt hint</string>
+    <string name="init_summary_rot13_hint">Show hint text ROT-13 encrypted until tapped</string>
     <string name="init_save_log_img">Save Images</string>
     <string name="init_summary_save_log_img">Save Images from Logs</string>
     <string name="init_units">Use Imperial Units</string>
