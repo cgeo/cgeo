@@ -442,6 +442,8 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
             if (activity.imageGallery == null) {
                 ImageUtils.initializeImageGallery(binding.imageGallery, trackable.getGeocode(), trackable.getImages());
                 activity.imageGallery = binding.imageGallery;
+                reinitializeTitle();
+                activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
             }
         }
 
@@ -450,7 +452,11 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
     @Override
     protected String getTitle(final long pageId) {
         if (pageId == Page.IMAGEGALLERY.id) {
-            return this.getString(Page.find(pageId).resId) + "*";
+            String title = "*" + this.getString(Page.find(pageId).resId) + "*";
+            if (this.imageGallery != null) {
+                title += " (" + this.imageGallery.getCount() + ")";
+            }
+            return title;
         }
         return this.getString(Page.find(pageId).resId);
     }

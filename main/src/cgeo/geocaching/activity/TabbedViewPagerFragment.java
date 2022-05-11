@@ -77,6 +77,12 @@ public abstract class TabbedViewPagerFragment<ViewBindingClass extends ViewBindi
         }
     }
 
+    public void reinitializeTitle() {
+        if (getActivity() instanceof TabbedViewPagerActivity) {
+            ((TabbedViewPagerActivity) getActivity()).reinitializeTitle(getPageId());
+        }
+    }
+
 
     // Fragment lifecycle methods - for testing purposes
 

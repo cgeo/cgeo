@@ -2341,6 +2341,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 final ImageGalleryView imageGallery = binding.getRoot().findViewById(R.id.image_gallery);
                 ImageUtils.initializeImageGallery(imageGallery, cache.getGeocode(), cache.getNonStaticImages());
                 activity.imageGallery = imageGallery;
+                reinitializeTitle();
+                activity.imageGallery.setImageCountChangeCallback((ig, c) -> reinitializeTitle());
             }
         }
     }
@@ -2591,7 +2593,11 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final int varCount = cache == null ? 0 : cache.getVariables().size();
             return this.getString(Page.VARIABLES.titleStringId) + " (" + varCount + ")";
         } else if (pageId == Page.IMAGEGALLERY.id) {
-            return this.getString(Page.IMAGEGALLERY.titleStringId) + "*";
+            String title = "*" + this.getString(Page.IMAGEGALLERY.titleStringId);
+            if (this.imageGallery != null) {
+                title += " (" + this.imageGallery.getCount() + ")";
+            }
+            return  title;
         }
         return this.getString(Page.find(pageId).titleStringId);
     }
