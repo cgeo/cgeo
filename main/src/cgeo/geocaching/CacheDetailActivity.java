@@ -1766,16 +1766,18 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             if (StringUtils.isNotBlank(cache.getHint())) {
                 if (TextUtils.containsHtml(cache.getHint())) {
                     binding.hint.setText(HtmlCompat.fromHtml(cache.getHint(), HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), false, false, false), null), TextView.BufferType.SPANNABLE);
-                    binding.hint.setText(Settings.getHintAsRot13() ? CryptUtils.rot13((Spannable) binding.hint.getText()) : binding.hint.getText());
                 } else {
-                    binding.hint.setText(Settings.getHintAsRot13() ? CryptUtils.rot13(cache.getHint()) : cache.getHint());
+                    binding.hint.setText(cache.getHint());
                 }
                 binding.hint.setMovementMethod(AnchorAwareLinkMovementMethod.getInstance());
                 binding.hint.setVisibility(View.VISIBLE);
-                binding.hint.setClickable(true);
-                binding.hint.setOnClickListener(new DecryptTextClickListener(binding.hint));
-                binding.hintBox.setOnClickListener(new DecryptTextClickListener(binding.hint));
-                binding.hintBox.setClickable(true);
+                if (Settings.getHintAsRot13()) {
+                    binding.hint.setText(CryptUtils.rot13((Spannable) binding.hint.getText()));
+                    binding.hint.setClickable(true);
+                    binding.hint.setOnClickListener(new DecryptTextClickListener(binding.hint));
+                    binding.hintBox.setOnClickListener(new DecryptTextClickListener(binding.hint));
+                    binding.hintBox.setClickable(true);
+                }
                 activity.addContextMenu(binding.hint);
             } else {
                 binding.hint.setVisibility(View.GONE);
