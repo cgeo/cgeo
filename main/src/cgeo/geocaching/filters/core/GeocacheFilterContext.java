@@ -22,6 +22,7 @@ public class GeocacheFilterContext implements Parcelable {
         FilterType(@StringRes final int titleId) {
             this.titleId = titleId;
         }
+
     }
 
     private FilterType type;

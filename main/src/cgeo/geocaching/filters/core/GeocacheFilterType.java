@@ -32,7 +32,8 @@ public enum GeocacheFilterType {
     LOCATION("location", R.string.cache_filter_location, R.string.cache_filtergroup_details, LocationGeocacheFilter::new),
     STORED_LISTS("stored_list", R.string.cache_filter_stored_lists, R.string.cache_filtergroup_userspecific, StoredListGeocacheFilter::new),
     ORIGIN("origin", R.string.cache_filter_origin, R.string.cache_filtergroup_details, OriginGeocacheFilter::new),
-    STORED_SINCE("stored_since", R.string.cache_filter_stored_since, R.string.cache_filtergroup_userspecific, StoredSinceGeocacheFilter::new);
+    STORED_SINCE("stored_since", R.string.cache_filter_stored_since, R.string.cache_filtergroup_userspecific, StoredSinceGeocacheFilter::new),
+    LOGICAL_FILTER_GROUP(null, R.string.cache_filter_logical_filter_group, R.string.cache_filtergroup_special, AndGeocacheFilter::new);
 
 
     private final String typeId;

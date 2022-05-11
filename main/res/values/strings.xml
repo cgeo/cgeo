@@ -534,14 +534,17 @@
     <string name="cache_filter_stored_lists">Stored Lists</string>
     <string name="cache_filter_origin">Origin</string>
     <string name="cache_filter_stored_since">Last details update</string>
+    <string name="cache_filter_logical_filter_group">Nested Filter</string>
 
     <string name="cache_filtergroup_basic">Basic</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">User specific</string>
+    <string name="cache_filtergroup_special">Special</string>
 
     <string name="cache_filter_contexttype_live_title">Live Filter</string>
     <string name="cache_filter_contexttype_offline_title">Offline Filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Nested Filter</string>
 
 
     <string name="cache_filter_include">Include</string>
@@ -623,6 +626,9 @@
     <string name="cache_filter_status_exclude_archived">Exclude Archived</string>
 
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Include caches without D/T</string>
+
+    <string name="cache_filter_nested_filter_modify">modify</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">The sub-filter is currently empty</string>
 
     <string name="cache_filter_log_entry_foundby">Found by</string>
     <string name="cache_filter_log_entry_logtext">Log text</string>

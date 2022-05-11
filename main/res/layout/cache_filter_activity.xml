@@ -30,7 +30,7 @@
         <Button
             android:id="@+id/filter_additem"
             style="@style/button"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
             android:layout_toRightOf="@+id/filter_basic_advanced"
@@ -65,18 +65,17 @@
             android:layout_centerVertical="true"
             app:icon="@drawable/ic_menu_save" />
 
-        <TextView
-            android:id="@+id/filter_storage_name"
-            android:textSize="@dimen/textSize_detailsPrimary"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_marginLeft="5dp"
-            android:layout_toRightOf="@+id/filter_storage_save"
-            android:layout_alignParentRight="true"
-            android:ellipsize="end"
-            android:maxLines="1"
-            />
+         <TextView
+             android:id="@+id/filter_storage_name"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentRight="true"
+             android:layout_centerVertical="true"
+             android:layout_marginLeft="5dp"
+             android:layout_toRightOf="@+id/filter_storage_save"
+             android:ellipsize="end"
+             android:maxLines="1"
+             android:textSize="@dimen/textSize_detailsPrimary" />
 
     </RelativeLayout>
 

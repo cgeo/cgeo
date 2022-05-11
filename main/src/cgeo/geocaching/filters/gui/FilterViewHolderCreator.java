@@ -125,6 +125,9 @@ public class FilterViewHolderCreator {
             case STORED_SINCE:
                 result = createStoredSinceFilterViewHolder();
                 break;
+            case LOGICAL_FILTER_GROUP:
+                result = new LogicalFilterViewHolder();
+                break;
             default:
                 result = null;
                 break;
@@ -219,4 +222,3 @@ public class FilterViewHolderCreator {
     }
 
 }
-
