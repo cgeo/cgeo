@@ -7,12 +7,12 @@ import cgeo.geocaching.utils.expressions.ExpressionConfig;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class LogicalGeocacheFilter implements IGeocacheFilter {
+public abstract class LogicalGeocacheFilter extends BaseGeocacheFilter {
 
     private final List<IGeocacheFilter> children = new ArrayList<>();
 
-    public GeocacheFilterType getType() {
-        return null;
+    LogicalGeocacheFilter() {
+        setType(GeocacheFilterType.LOGICAL_FILTER_GROUP);
     }
 
     @Override

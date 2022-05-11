@@ -22,7 +22,6 @@ import cgeo.geocaching.storage.FolderUtils;
 import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.PersistableUri;
-import static cgeo.geocaching.filters.core.GeocacheFilterContext.FilterType.TRANSIENT;
 
 import android.Manifest;
 import android.content.Context;
@@ -153,7 +152,7 @@ public final class SystemInformation {
 
     private static void appendFilters(@NonNull final StringBuilder body) {
         for (GeocacheFilterContext.FilterType filterType : GeocacheFilterContext.FilterType.values()) {
-            if (TRANSIENT.equals(filterType)) {
+            if (filterType == GeocacheFilterContext.FilterType.TRANSIENT) {
                 continue;
             }
             body.append("\n- ").append(filterType.name()).append(": ");

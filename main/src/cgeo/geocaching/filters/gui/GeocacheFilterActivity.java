@@ -14,6 +14,7 @@ import cgeo.geocaching.filters.core.LogicalGeocacheFilter;
 import cgeo.geocaching.filters.core.NotGeocacheFilter;
 import cgeo.geocaching.filters.core.OrGeocacheFilter;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.ui.ImageParam;
 import cgeo.geocaching.ui.TextParam;
 import cgeo.geocaching.ui.TextSpinner;
 import cgeo.geocaching.ui.ViewUtils;
@@ -48,6 +49,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.jetbrains.annotations.NotNull;
 
 
@@ -58,6 +60,8 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     public static final int REQUEST_SELECT_FILTER = 456;
     public static final String EXTRA_FILTER_CONTEXT = "efc";
+    public static final String EXTRA_IS_NESTED = "extra_is_nested";
+    public static final String EXTRA_NESTED_FILTER_POSITION = "extra_nested_pos";
 
     private static final String STATE_CURRENT_FILTER = "state_current_filter";
     private static final String STATE_ADVANCED_VIEW = "state_advanced_view";
@@ -85,6 +89,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     private final TextSpinner<GeocacheFilterType> addFilter = new TextSpinner<>();
 
     private boolean processBasicAdvancedListener = true;
+    private boolean isNested = false;
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -95,8 +100,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         binding.filterPropsCheckboxes.removeAllViews();
         this.andOrFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_and_or), R.drawable.ic_menu_logic);
         this.inverseFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_inverse), R.drawable.ic_menu_invert);
-        this.includeInconclusiveFilterCheckbox = ViewUtils.addCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_include_inconclusive), R.drawable.ic_menu_vague,
-                TextParam.id(R.string.cache_filter_option_include_inconclusive_info));
+
+        final ImmutablePair<View, CheckBox> includeInconclusiveFilterCheckboxItem = ViewUtils.createCheckboxItem(this, binding.filterPropsCheckboxes, TextParam.id(R.string.cache_filter_option_include_inconclusive), ImageParam.id(R.drawable.ic_menu_vague), TextParam.id(R.string.cache_filter_option_include_inconclusive_info));
+        binding.filterPropsCheckboxes.addView(includeInconclusiveFilterCheckboxItem.left);
+        this.includeInconclusiveFilterCheckbox = includeInconclusiveFilterCheckboxItem.right;
 
         filterListAdapter = new FilterListAdapter(binding.filterList);
         initializeFilterAdd();
@@ -107,15 +114,24 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
         if (extras != null) {
             filterContext = extras.getParcelable(EXTRA_FILTER_CONTEXT);
+            isNested = extras.getBoolean(EXTRA_IS_NESTED);
         }
         if (filterContext == null) {
             filterContext = new GeocacheFilterContext(TRANSIENT);
         }
 
-
         setTitle(getString(filterContext.getType().titleId));
         fillViewFromFilter(filterContext.get().toConfig(), false);
         originalFilterConfig = getFilterFromView().toConfig();
+
+        // Some features do not work / make no sense for nested filters
+        if (isNested) {
+            setTitle(getString(R.string.cache_filter_contexttype_nestedfilter_title));
+            binding.filterBasicAdvanced.setVisibility(View.GONE);
+            binding.filterStorageOptions.setVisibility(View.GONE);
+            binding.filterStorageOptionsLine.setVisibility(View.GONE);
+            includeInconclusiveFilterCheckboxItem.left.setVisibility(View.GONE);
+        }
 
         this.binding.filterBasicAdvanced.setOnCheckedChangeListener((v, c) -> {
             if (!processBasicAdvancedListener) {
@@ -246,6 +262,17 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         return false;
     }
 
+    @Override
+    protected void onActivityResult(final int requestCode, final int resultCode, final Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_SELECT_FILTER && resultCode == Activity.RESULT_OK) {
+            final int index = data.getIntExtra(EXTRA_NESTED_FILTER_POSITION, -1);
+            if (index >= 0 && filterListAdapter.getItems().get(index) instanceof LogicalFilterViewHolder) {
+                final LogicalGeocacheFilter newFilter = (LogicalGeocacheFilter) ((GeocacheFilterContext) data.getParcelableExtra(EXTRA_FILTER_CONTEXT)).get().getTree();
+                ((LogicalFilterViewHolder) filterListAdapter.getItems().get(index)).setViewFromFilter(newFilter);
+            }
+        }
+    }
 
     private void fillViewFromFilter(final String inputFilter, final boolean forceAdvanced) {
         includeInconclusiveFilterCheckbox.setChecked(false);
@@ -270,14 +297,11 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
                     for (IGeocacheFilter c : filterTree.getChildren()) {
                         filterList.add(FilterViewHolderCreator.createFor(c, this));
                     }
-                }
-                if (filterTree instanceof BaseGeocacheFilter) {
+                } else if (filterTree instanceof BaseGeocacheFilter) {
                     filterList.add(FilterViewHolderCreator.createFor(filterTree, this));
                 }
                 filterListAdapter.setItems(filterList);
                 adjustFilterEmptyView();
-                //filterListAdapter.submitList(filterList, this::adjustFilterEmptyView);
-
             } catch (ParseException pe) {
                 Log.w("Exception parsing input filter", pe);
             }
@@ -335,6 +359,7 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         final GeocacheFilter newFilter = getFilterFromView();
         filterContext.set(newFilter);
         resultIntent.putExtra(EXTRA_FILTER_CONTEXT, filterContext);
+        resultIntent.putExtra(EXTRA_NESTED_FILTER_POSITION, getIntent().getIntExtra(EXTRA_NESTED_FILTER_POSITION, -1));
         FilterViewHolderCreator.clearListInfo();
         setResult(Activity.RESULT_OK, resultIntent);
         finish();
@@ -383,6 +408,18 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
         context.startActivityForResult(intent, REQUEST_SELECT_FILTER);
     }
 
+    public void selectNestedFilter(final LogicalFilterViewHolder holder) {
+        final GeocacheFilterContext nestedFilterContext = new GeocacheFilterContext(TRANSIENT);
+        nestedFilterContext.set(GeocacheFilter.create(null, true,
+                includeInconclusiveFilterCheckbox.isChecked(), holder.createFilterFromView()));
+
+        final Intent intent = new Intent(this, GeocacheFilterActivity.class);
+        intent.putExtra(EXTRA_FILTER_CONTEXT, nestedFilterContext);
+        intent.putExtra(EXTRA_NESTED_FILTER_POSITION, filterListAdapter.getItems().indexOf(holder));
+        intent.putExtra(EXTRA_IS_NESTED, true);
+        this.startActivityForResult(intent, REQUEST_SELECT_FILTER);
+    }
+
     private boolean isBasicPossibleWithoutLoss() {
         if (this.inverseFilterCheckbox.isChecked() ||
                 this.andOrFilterCheckbox.isChecked() ||
@@ -405,8 +442,10 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
 
     private void switchToAdvanced(final boolean removeNonFiltering) {
         this.binding.filterBasicAdvanced.setChecked(true);
-        this.binding.filterStorageOptions.setVisibility(View.VISIBLE);
-        this.binding.filterStorageOptionsLine.setVisibility(View.VISIBLE);
+        if (!isNested) {
+            this.binding.filterStorageOptions.setVisibility(View.VISIBLE);
+            this.binding.filterStorageOptionsLine.setVisibility(View.VISIBLE);
+        }
         this.binding.filterPropsCheckboxes.setVisibility(View.VISIBLE);
         this.binding.filterPropsCheckboxesLine.setVisibility(View.VISIBLE);
         this.binding.filterAdditem.setVisibility(View.VISIBLE);
@@ -556,4 +595,3 @@ public class GeocacheFilterActivity extends AbstractActionBarActivity {
     }
 
 }
-
