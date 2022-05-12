@@ -781,6 +781,8 @@
     <string name="init_summary_prevent_cache_note_merge">Pokud je toto nastavení povoleno, c:geo trvale odstraní uloženou poznámku a nahradí ji osobní poznámkou ze serveru. K žádnému sloučení nedojde.</string>
     <string name="init_customtabs_as_browser">Použít Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externí webové stránky budou zobrazeny bez opuštění c:geo (pouze pokud je nainstalován Chrome)</string>
+    <string name="init_rot13_hint">Zašifrovat nápovědu</string>
+    <string name="init_summary_rot13_hint">Zobrazit text nápovědy ROT-13 zašifrovaný až do klepnutí</string>
     <string name="init_save_log_img">Ukládat obrázky</string>
     <string name="init_summary_save_log_img">Ukládat obrázky z logů</string>
     <string name="init_units">Používat imperiální jednotky</string>
