@@ -14,17 +14,17 @@
 ### Elenco dei cache
 
 - Nuovo: Aggiunta l'opzione "ha waypoint definiti dall'utente" al filtro di stato avanzato
-- New: Allow inclusion of caches without D/T in filter
+- Nuovo: Consentita l'inclusione di cache senza D/T nel filtro
 - Corretto: Riordino dell'elenco cache per ogni cambiamento di posizione, nell'ordinamento in base alla distanza
 
 ### Mappa
 
-- New: Map theming for Google Maps
-- New: Map scaling options for OpenStreetMap (see theme options)
+- Novità: Tema mappa per Google Maps
+- Nuovo: Opzioni di scala mappa per OpenStreetMap (vedi opzioni tema)
 - Modifica: Impostazioni => Mappa => Pressione prolungata sulla mappa abiliterà/disabiliterà anche il tocco prolungato nella mappa del cache (rilevante per creare nuovi waypoint per il cache corrente)
 - Cambiato: non viene mostrato il cerchio di distanza per i cache archiviati
 - Corretto: Crash con mappe OpenStreetMap in certe condizioni
-- Fix: Routing becoming unresponsive when many routing tiles are installed
+- Corretto: il routing diventa non reattivo quando molti tile di routing sono installati
 
 ### Generale
 
