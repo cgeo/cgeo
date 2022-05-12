@@ -29,11 +29,14 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Html;
+import android.transition.Transition;
+import android.transition.TransitionInflater;
 import android.view.GestureDetector;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -209,6 +212,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide(); //do not use normal Action Bar
         setThemeAndContentView(R.layout.imageview_activity);
+        enableViewTransitions(this);
         postponeEnterTransition();
         transactionEnterActive = true;
         setEnterSharedElementCallback(new SharedElementCallback() {
@@ -476,6 +480,18 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             activity.startActivity(intent,
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
         }
+    }
+
+    /** sets properties for activity to enable smooth image transation between master/list and detail activity */
+    public static void enableViewTransitions(final Activity activity) {
+        if (activity == null || activity.getWindow() == null) {
+            return;
+        }
+        final Window w = activity.getWindow();
+        w.setSharedElementsUseOverlay(true);
+        final Transition trans = TransitionInflater.from(activity).inflateTransition(R.transition.imageview_smooth_transition);
+        w.setSharedElementEnterTransition(trans);
+        w.setSharedElementExitTransition(trans);
     }
 
     private void setFinishResult() {

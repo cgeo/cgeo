@@ -17,12 +17,17 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Objects;
 
+import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity {
     @SuppressWarnings("rawtypes")
     private final Map<Long, TabbedViewPagerFragment> fragmentMap = new LinkedHashMap<>();
+    /** Maps POSITION to Tab */
+    private final Map<Integer, TabLayout.Tab> fragmentTabMap = new LinkedHashMap<>();
+
 
     private long initialPageId;
     private boolean initialPageShown;
@@ -74,8 +79,12 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
             );
         }
 
-        new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, (tab, position) -> tab.setText(getTitle(getItemId(position)))).attach();
+        new TabLayoutMediator(findViewById(R.id.tab_layout), viewPager, (tab, position) -> {
+            this.fragmentTabMap.put(position, tab);
+            tab.setText(getTitle(getItemId(position)));
+        }).attach();
     }
+
 
     private final ViewPager2.OnPageChangeCallback pageChangeCallback = new ViewPager2.OnPageChangeCallback() {
         /*
@@ -233,6 +242,16 @@ public abstract class TabbedViewPagerActivity extends AbstractActionBarActivity 
         }
 
         notifyAdapterDataSetChanged();
+    }
+
+    public void reinitializeTitle(final long pageId) {
+        final TabLayout.Tab tab = fragmentTabMap.get(pageIdToPosition(pageId));
+        final String title = getTitle(pageId);
+        if (tab != null && !Objects.equals(tab.getText(), title)) {
+            tab.setText(title);
+            //triggering adapter change will re-layout the view pager tabs
+            viewPager.post(this::notifyAdapterDataSetChanged);
+        }
     }
 
     /**

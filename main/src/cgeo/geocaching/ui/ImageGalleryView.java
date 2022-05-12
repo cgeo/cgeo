@@ -23,6 +23,7 @@ import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.UriUtils;
+import cgeo.geocaching.utils.functions.Action2;
 import cgeo.geocaching.utils.functions.Func1;
 
 import android.app.Activity;
@@ -65,10 +66,13 @@ public class ImageGalleryView extends LinearLayout {
     private final ImageDataMemoryCache imageDataMemoryCache = new ImageDataMemoryCache(2);
 
     private String geocode;
+    private int imageCount = 0;
 
     private int imageSizeDp = 150;
     private int columnCount = 2;
     private int categoryHorizontalMargin = 2;
+
+    private Action2<ImageGalleryView, Integer> imageCountChangeCallback = null;
 
     private final Map<String, Geopoint> imageCoordMap = new HashMap<>();
     private final List<String> categoryList = new ArrayList<>();
@@ -253,11 +257,18 @@ public class ImageGalleryView extends LinearLayout {
         this.context = new ContextThemeWrapper(getContext(), R.style.cgeo);
         this.activity = ViewUtils.toActivity(this.context);
         recalculateLayout(getContext().getResources().getConfiguration());
+
+        //enable transitions between gallery and image detail activity
+        ImageViewActivity.enableViewTransitions(this.activity);
     }
 
     public void setup(final String geocode) {
         this.geocode = geocode;
         this.imageDataMemoryCache.setCode(this.geocode);
+    }
+
+    public int getCount() {
+        return imageCount;
     }
 
     public void addImages(final Collection<Image> images) {
@@ -286,12 +297,26 @@ public class ImageGalleryView extends LinearLayout {
             catImages.get(category).add(new ImageListData(category, img));
         }
 
+        int changeCount = 0;
+
         for (Map.Entry<String, List<ImageListData>> catImage : catImages.entrySet()) {
             if (!categoryViews.containsKey(catImage.getKey())) {
                 createCategory(catImage.getKey());
             }
             final ImageListAdapter adapter = categoryAdapters.get(catImage.getKey());
             adapter.addItems(adapter.getItemCount(), catImage.getValue());
+            changeCount += catImage.getValue().size();
+        }
+        changeImageCount(changeCount);
+    }
+
+    private void changeImageCount(final int by) {
+        if (by == 0) {
+            return;
+        }
+        imageCount += by;
+        if (imageCountChangeCallback != null) {
+            imageCountChangeCallback.call(this, imageCount);
         }
     }
 
@@ -350,6 +375,10 @@ public class ImageGalleryView extends LinearLayout {
         return imageHelper.onActivityResult(requestCode, resultCode, data);
     }
 
+    public void setImageCountChangeCallback(final Action2<ImageGalleryView, Integer> callback) {
+        this.imageCountChangeCallback = callback;
+    }
+
     private View getImageViewForIndex(final int index, final boolean scrollToIndex) {
         if (index < 0) {
             return null;
@@ -395,6 +424,8 @@ public class ImageGalleryView extends LinearLayout {
         if (!categoryViews.containsKey(category)) {
             return;
         }
+
+        changeImageCount(-categoryAdapters.get(category).getItemCount());
 
         for (int i = 0; i < getChildCount(); i++) {
             final ImageGalleryCategoryBinding view = ImageGalleryCategoryBinding.bind(getChildAt(i));
@@ -481,6 +512,7 @@ public class ImageGalleryView extends LinearLayout {
             ctxMenu.addItem(LocalizationUtils.getString(R.string.log_image_delete), R.drawable.ic_menu_delete, v -> {
                 adapter.removeItem(pos);
                 editHandler.delete(img);
+                changeImageCount(-1);
             });
         }
         ctxMenu.show();
