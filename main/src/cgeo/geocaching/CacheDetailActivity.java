@@ -51,6 +51,7 @@ import cgeo.geocaching.log.LogCacheActivity;
 import cgeo.geocaching.log.LoggingUI;
 import cgeo.geocaching.models.CalculatedCoordinate;
 import cgeo.geocaching.models.Geocache;
+import cgeo.geocaching.models.Image;
 import cgeo.geocaching.models.Trackable;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.models.WaypointParser;
@@ -1762,8 +1763,10 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.uploadPersonalnote.setVisibility(View.GONE);
             }
 
+            final List<Image> spoilerImages = cache.getFilteredSpoilers();
+            final boolean hasSpoilerImages = CollectionUtils.isNotEmpty(spoilerImages);
             // cache hint and spoiler images
-            if (StringUtils.isNotBlank(cache.getHint()) || CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+            if (StringUtils.isNotBlank(cache.getHint()) || hasSpoilerImages) {
                 binding.hintBox.setVisibility(View.VISIBLE);
             } else {
                 binding.hintBox.setVisibility(View.GONE);
@@ -1791,19 +1794,21 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 binding.hintBox.setOnClickListener(null);
             }
 
-            if (CollectionUtils.isNotEmpty(cache.getSpoilers())) {
+
+            if (hasSpoilerImages) {
                 binding.hintSpoilerlink.setVisibility(View.VISIBLE);
                 binding.hintSpoilerlink.setClickable(true);
                 binding.hintSpoilerlink.setOnClickListener(arg0 -> {
-                    if (cache == null || CollectionUtils.isEmpty(cache.getSpoilers())) {
+                    final List<Image> sis = cache.getFilteredSpoilers();
+                    if (cache == null || sis.isEmpty()) {
                         activity.showToast(getString(R.string.err_detail_no_spoiler));
                         return;
                     }
-                    ImageGalleryActivity.startActivity(activity, cache.getGeocode(), cache.getSpoilers());
+                    ImageGalleryActivity.startActivity(activity, cache.getGeocode(), sis);
                 });
 
                 // if there is only a listing background image without other additional pictures, change the text to better explain the content.
-                if (cache.getSpoilers().size() == 1 && getString(R.string.cache_image_background).equals(cache.getSpoilers().get(0).title)) {
+                if (spoilerImages.size() == 1 && getString(R.string.cache_image_background).equals(spoilerImages.get(0).title)) {
                     binding.hintSpoilerlink.setText(R.string.cache_image_background);
                 } else {
                     binding.hintSpoilerlink.setText(R.string.cache_menu_spoilers);

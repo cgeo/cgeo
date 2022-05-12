@@ -431,8 +431,7 @@ public final class ImageUtils {
         for (final Image image : images) {
             urls.add(image.getUrl());
         }
-        for (final String text : htmlText) {
-            HtmlCompat.fromHtml(StringUtils.defaultString(text), HtmlCompat.FROM_HTML_MODE_LEGACY, source -> {
+        forEachImageUrlInHtml(source -> {
                 if (!urls.contains(source) && canBeOpenedExternally(source)) {
                     images.add(new Image.Builder()
                             .setUrl(source)
@@ -441,6 +440,13 @@ public final class ImageUtils {
                             .build());
                     urls.add(source);
                 }
+            }, htmlText);
+    }
+
+    public static void forEachImageUrlInHtml(final androidx.core.util.Consumer<String> callback, final String ... htmlText) {
+        for (final String text : htmlText) {
+            HtmlCompat.fromHtml(StringUtils.defaultString(text), HtmlCompat.FROM_HTML_MODE_LEGACY, source -> {
+                callback.accept(source);
                 return null;
             }, null);
         }
