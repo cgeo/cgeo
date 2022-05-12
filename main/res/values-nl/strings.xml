@@ -769,6 +769,8 @@
     <string name="init_summary_prevent_cache_note_merge">Als deze instelling is ingeschakeld zal c:geo de lokaal opgeslagen notitie permanent verwijderen en vervangen door de persoonlijke notitie op de server. Samenvoegen is niet mogelijk.</string>
     <string name="init_customtabs_as_browser">Gebruik Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Externe websites worden weergegeven zonder c:geo te verlaten (alleen mogelijk als Chrome is geïnstalleerd)</string>
+    <string name="init_rot13_hint">Hint versleutelen</string>
+    <string name="init_summary_rot13_hint">Toon hint tekst ROT-13 versleuteld totdat deze geklikt is</string>
     <string name="init_save_log_img">Afbeeldingen opslaan</string>
     <string name="init_summary_save_log_img">Sla afbeeldingen van logs op</string>
     <string name="init_units">Gebruik imperiale stelsel voor afstanden</string>
