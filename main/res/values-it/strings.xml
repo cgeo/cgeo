@@ -769,6 +769,8 @@
     <string name="init_summary_prevent_cache_note_merge">Se questa impostazione è abilitata, c:geo eliminerà definitivamente la nota memorizzata localmente e la sostituirà con la nota personale sul server. Nessuna fusione sarà fatta.</string>
     <string name="init_customtabs_as_browser">Usa Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">I siti web esterni saranno visualizzati senza lasciare c:geo (possibile solo se Chrome è installato)</string>
+    <string name="init_rot13_hint">Crittografa suggerimento</string>
+    <string name="init_summary_rot13_hint">Mostra testo suggerimento crittografato ROT-13 fino a quando toccato</string>
     <string name="init_save_log_img">Salva immagini</string>
     <string name="init_summary_save_log_img">Salva immagini contenute nei log</string>
     <string name="init_units">Usa sistema imperiale</string>
@@ -783,6 +785,8 @@
     <string name="init_summary_listdisplay">Mostra l\'appartenenza dei cache a liste aggiuntive in un elenco di cache</string>
     <string name="init_livelist">Visualizza direzione</string>
     <string name="init_summary_livelist">Mostra la direzione con la bussola per i cache in un elenco</string>
+    <string name="init_quicklaunchitems">Pulsanti di avvio rapido</string>
+    <string name="init_summary_quicklaunchitems">Seleziona uno o più elementi come pulsanti di avvio rapido nella schermata iniziale</string>
     <!-- app theme -->
     <string name="settings_theme_title">Tema</string>
     <string-array name="settings_theme_entries">
@@ -2189,6 +2193,12 @@
     <string name="mapserver_hylly_themes_info">Tema mappa dettagliato, creato per le mappe \"Hylly\"</string>
     <string name="brouter_info">Servizio di navigazione offline</string>
     <string name="maptheme_elevate_categoryinfo">Rilevante per: [A] Aree, [P] POI, [R] Percorsi, [W] Vie</string>
+    <string name="maptheme_scale_map_title">Fattore di scala della mappa</string>
+    <string name="maptheme_scale_map_summary">Scala della mappa; 100% = nessuna scala</string>
+    <string name="maptheme_scale_text_title">Fattore di Scala del testo</string>
+    <string name="maptheme_scale_text_summary">Scala aggiuntiva delle etichette di testo nella mappa; 100% = nessun ridimensionamento extra</string>
+    <string name="maptheme_scale_symbol_title">Fattore di scala dei simboli</string>
+    <string name="maptheme_scale_symbol_summary">Scala aggiuntiva dei simboli nella mappa; 100% = nessun ridimensionamento extra</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Cancella traccia cronologia movimenti</string>
     <string name="map_trailhistory_cleared">Traccia cronologia cancellata</string>
