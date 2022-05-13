@@ -764,6 +764,8 @@
     <string name="init_summary_prevent_cache_note_merge">Αν αυτή η ρύθμιση είναι ενεργοποιημένη το c:geo θα διαγράψει την τοπικά αποθηκευμένη σημείωση μόνιμα και θα την αντικαταστήσει με την προσωπική σημείωση στο διακομιστή. Δεν θα γίνει συγχώνευση.</string>
     <string name="init_customtabs_as_browser">Χρήση του Chrome webview</string>
     <string name="init_summary_customtabs_as_browser">Η προβολή των εξωτερικών ιστοσελίδων θα γίνεται χωρίς έξοδο από το c:geo (αυτό είναι δυνατόν μόνο εάν είναι εγκατεστημένο το Chrome)</string>
+    <string name="init_rot13_hint">Κρυπτογράφηση υπόδειξης</string>
+    <string name="init_summary_rot13_hint">Εμφάνιση υπόδειξης κειμένου ROT-13 κρυπτογραφημένα μέχρι να πατηθεί</string>
     <string name="init_save_log_img">Αποθήκευση εικόνων</string>
     <string name="init_summary_save_log_img">Αποθήκευση εικόνων από αρχεία καταγραφής</string>
     <string name="init_units">Αγγλοσαξονικές Μονάδες</string>
