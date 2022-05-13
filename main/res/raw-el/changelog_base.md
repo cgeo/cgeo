@@ -32,3 +32,5 @@
 - Διόρθωση: Συνέχιση εισαγωγής ολοκληρωμένων λήψεων
 - New: Added configurable quick launch buttons to home screen, see Settings => Appearance
 - Νέο: Ενημερώθηκε εσωτερική δρομολόγηση στο BRouter v1.6.3
+- Νέο: Περιορίζει την ανάγκη επαναληπτικής χρήσης του πλήκτρου 'πίσω' ξεκινώντας μια νέα ομάδα δραστηριοτήτων όταν αλλάζετε σε άλλο μέρος της εφαρμογής
+- New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
