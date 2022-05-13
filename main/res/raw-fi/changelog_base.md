@@ -32,3 +32,5 @@
 - Korjaus: Jatka valmiiden latausten tuontia
 - Uusi: Lisätty konfiguroitavissa olevat pikakäynnistyspainikkeet aloitusnäyttöön, katso Asetukset => Ulkoasu
 - Uusi: Päivitetty sisäinen reititys BRouter v1.6.3
+- Uusi: Rajoita toistuvan paluunapin käytön tarvetta aloittamalla uusi aktiviteettipino siirryttäessä sovelluksen toiseen osaan
+- Uusi: Lisää asetus salauksen purkamiseen oletusarvoisesti (sen sijaan että vain napauttamalla sitä)
