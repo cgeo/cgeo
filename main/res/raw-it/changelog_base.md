@@ -32,3 +32,5 @@
 - Corretto: Riprendi l'importazione dei download terminati
 - Nuovo: Aggiunti, alla schermata iniziale, i pulsanti di avvio rapido configurabili. Vedere Impostazioni => Aspetto
 - Nuovo: Instradamento interno aggiornato a BRouter v1.6.3
+- New: Limit the need of repetitive back key usage by starting a new activity stack when changing to another part of the app
+- New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
