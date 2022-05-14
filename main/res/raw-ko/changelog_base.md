@@ -32,3 +32,5 @@
 - 수정: 완료된 다운로드 가져오기 재개
 - 신규: 구성 가능한 빠른 실행 버튼을 홈 화면에 추가했습니다. 설정 => 외관 디자인
 - 신규: BRouter v1.6.3으로 내부 라우팅 업데이트
+- New: Limit the need of repetitive back key usage by starting a new activity stack when changing to another part of the app
+- New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
