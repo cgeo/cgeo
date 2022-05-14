@@ -769,6 +769,8 @@
     <string name="init_summary_prevent_cache_note_merge">Se esta definição estiver activada, o c:geo irá eliminar permanentemente a nota armazenada localmente e substituí-la pela nota pessoal no servidor. A junção das duas não será feita.</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
+    <string name="init_rot13_hint">Cifrar a dica</string>
+    <string name="init_summary_rot13_hint">Mostrar o texto da dica com a cifra ROT-13 a menos que seja tocado</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
     <string name="init_units">Usar Unidades Imperiais</string>
