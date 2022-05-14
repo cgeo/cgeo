@@ -483,12 +483,15 @@
     <string name="cache_filter_stored_lists">Αποθηκευμένες Λίστες</string>
     <string name="cache_filter_origin">Προέλευση</string>
     <string name="cache_filter_stored_since">Τελευταία ενημέρωση λεπτομερειών</string>
+    <string name="cache_filter_logical_filter_group">Ένθετο φίλτρο</string>
     <string name="cache_filtergroup_basic">Βασικό</string>
     <string name="cache_filtergroup_details">Λεπτομέρειες</string>
     <string name="cache_filtergroup_userspecific">Επιλογές χρήστη</string>
+    <string name="cache_filtergroup_special">Σπέσιαλ</string>
     <string name="cache_filter_contexttype_live_title">Ζωντανό Φίλτρο</string>
     <string name="cache_filter_contexttype_offline_title">Φίλτρο Χωρίς Σύνδεση</string>
     <string name="cache_filter_contexttype_transient_title">Φίλτρο</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Ένθετο φίλτρο</string>
     <string name="cache_filter_include">Συμπερίληψη</string>
     <string name="cache_filter_exclude">Εξαίρεση</string>
     <string name="cache_filter_userdisplay_complex">Σύνθετο</string>
@@ -551,6 +554,8 @@
     <string name="cache_filter_status_exclude_disabled">Εξαίρεση Απενεργοποιημένων</string>
     <string name="cache_filter_status_exclude_archived">Εξαίρεση των αρχειοθετημένων</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Συμπερίληψη κρυπτών χωρίς Δ/Ε</string>
+    <string name="cache_filter_nested_filter_modify">τροποποίηση</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Το υπο- φίλτρο είναι επί του παρόντος άδειο</string>
     <string name="cache_filter_log_entry_foundby">Βρέθηκε από</string>
     <string name="cache_filter_log_entry_logtext">Κείμενο καταγραφής</string>
     <string name="cache_filter_stored_since_notstored">Μη αποθηκευμένες</string>
