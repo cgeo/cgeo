@@ -90,8 +90,8 @@
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
     <!-- logs -->
-    <string name="log_found">Nález</string>
-    <string name="log_dnf">Nenalezená</string>
+    <string name="log_found">Nalezeno</string>
+    <string name="log_dnf">Nenalezeno</string>
     <string name="log_note">Poznámka</string>
     <string name="log_published">Zveřejněno</string>
     <string name="log_enabled">Aktivováno</string>
@@ -1266,7 +1266,7 @@
     <string name="cache_menu_extract_waypoints">Extrahovat trasové body</string>
     <string name="cache_menu_scan_calculated_waypoints">Vyhledat vzorce pro trasové body</string>
     <string name="cache_menu_set_found">Nastavit jako nalezená</string>
-    <string name="cache_menu_set_DNF">Nastavit jako nenalezená</string>
+    <string name="cache_menu_set_DNF">Nastavit jako nenalezeno</string>
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
     <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
@@ -1289,7 +1289,7 @@
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
-    <string name="cache_not_status_found">Nenalezená</string>
+    <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
