@@ -482,12 +482,15 @@
     <string name="cache_filter_stored_lists">저장된 목록</string>
     <string name="cache_filter_origin">출발지</string>
     <string name="cache_filter_stored_since">마지막 상세내용 업데이트</string>
+    <string name="cache_filter_logical_filter_group">중첩 필터</string>
     <string name="cache_filtergroup_basic">기본</string>
     <string name="cache_filtergroup_details">상세내용</string>
     <string name="cache_filtergroup_userspecific">사용자의 특정</string>
+    <string name="cache_filtergroup_special">특수</string>
     <string name="cache_filter_contexttype_live_title">라이브 필터</string>
     <string name="cache_filter_contexttype_offline_title">오프라인 필터</string>
     <string name="cache_filter_contexttype_transient_title">필터</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">중첩 필터</string>
     <string name="cache_filter_include">포함</string>
     <string name="cache_filter_exclude">제외</string>
     <string name="cache_filter_userdisplay_complex">복잡하게</string>
@@ -550,6 +553,8 @@
     <string name="cache_filter_status_exclude_disabled">비활성캐시 제외하기</string>
     <string name="cache_filter_status_exclude_archived">영구보관 제외</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">난이도/지형등급 없는 캐시 포함</string>
+    <string name="cache_filter_nested_filter_modify">편집</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">하위 필터가 현재 비어 있습니다.</string>
     <string name="cache_filter_log_entry_foundby">찾은 사용자</string>
     <string name="cache_filter_log_entry_logtext">로그 내용</string>
     <string name="cache_filter_stored_since_notstored">저장되지 않음</string>
@@ -763,6 +768,8 @@
     <string name="init_summary_prevent_cache_note_merge">이 설정이 활성화되면 c:geo는 로컬에 저장된 메모를 영구적으로 삭제하고 서버의 개인 메모로 대체합니다. 병합이 수행되지 않습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
     <string name="init_summary_customtabs_as_browser">c:geo를 떠나지 않고 외부 웹 사이트가 표시됩니다 (그롬이 설치된 경우에만 가능).</string>
+    <string name="init_rot13_hint">힌트 암호화</string>
+    <string name="init_summary_rot13_hint">누를 때까지 힌트 텍스트 ROT-13 암호화 표시</string>
     <string name="init_save_log_img">사진 저장하기</string>
     <string name="init_summary_save_log_img">로그에 있는 사진을 저장합니다.</string>
     <string name="init_units">영미식 단위 사용하기</string>
@@ -777,6 +784,8 @@
     <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
+    <string name="init_quicklaunchitems">빠른 실행 버튼</string>
+    <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
     <!-- app theme -->
     <string name="settings_theme_title">테마</string>
     <string-array name="settings_theme_entries">
