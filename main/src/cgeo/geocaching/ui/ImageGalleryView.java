@@ -409,7 +409,7 @@ public class ImageGalleryView extends LinearLayout {
             view.requestRectangleOnScreen(rect, true);
         }
 
-        return view.findViewById(R.id.image_image);
+        return view == null ? null : view.findViewById(R.id.image_image);
     }
 
     public void clear() {

@@ -737,7 +737,7 @@ public class BackupUtils {
             Log.i("no old backups to remove");
             return null;
         }
-        Log.e("old backups to remove: " + dirs);
+        Log.w("old backups to remove: " + dirs);
         return dirs.subList(0, dirs.size() - maxBackupNumber);
     }
 

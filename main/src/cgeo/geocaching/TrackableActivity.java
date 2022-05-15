@@ -735,7 +735,7 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
         // Refresh the logs view after coming back from logging a trackable
         if (requestCode == LogTrackableActivity.LOG_TRACKABLE && resultCode == RESULT_OK) {
             refreshTrackable(StringUtils.defaultIfBlank(trackable.getName(), trackable.getGeocode()));
-        } else {
+        } else if (imageGallery != null) {
             imageGallery.onActivityResult(requestCode, resultCode, data);
         }
     }

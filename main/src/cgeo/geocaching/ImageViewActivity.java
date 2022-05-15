@@ -470,9 +470,11 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     }
                     final int pos = Integer.parseInt(names.get(0).substring(TRANSITION_ID_BACK.length()));
                     final View targetView = getImageView.call(pos);
-                    targetView.setTransitionName(names.get(0));
-                    sharedElements.clear();
-                    sharedElements.put(names.get(0), targetView);
+                    if (targetView != null) {
+                        targetView.setTransitionName(names.get(0));
+                        sharedElements.clear();
+                        sharedElements.put(names.get(0), targetView);
+                    }
                 }
             });
             final View posImageView = getImageView.call(pos);
