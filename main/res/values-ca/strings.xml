@@ -488,12 +488,15 @@
     <string name="cache_filter_stored_lists">Llistes emmagatzemades</string>
     <string name="cache_filter_origin">Origen</string>
     <string name="cache_filter_stored_since">Última actualització de detalls</string>
+    <string name="cache_filter_logical_filter_group">Filtre agrupat</string>
     <string name="cache_filtergroup_basic">Bàsic</string>
     <string name="cache_filtergroup_details">Detalls</string>
     <string name="cache_filtergroup_userspecific">Específic de l\'usuari</string>
+    <string name="cache_filtergroup_special">Especial</string>
     <string name="cache_filter_contexttype_live_title">Filtre en viu</string>
     <string name="cache_filter_contexttype_offline_title">Filtre fora de línia</string>
     <string name="cache_filter_contexttype_transient_title">Filtre</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtre agrupat</string>
     <string name="cache_filter_include">Incloure</string>
     <string name="cache_filter_exclude">Excloure</string>
     <string name="cache_filter_userdisplay_complex">Complex</string>
@@ -556,6 +559,9 @@
     <string name="cache_filter_status_exclude_active">Exclou Actiu</string>
     <string name="cache_filter_status_exclude_disabled">Exclou desactivat</string>
     <string name="cache_filter_status_exclude_archived">Exclou arxivats</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclou catxés sense D/T</string>
+    <string name="cache_filter_nested_filter_modify">modificar</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">El subfiltre està buit actualment</string>
     <string name="cache_filter_log_entry_foundby">Trobat per</string>
     <string name="cache_filter_log_entry_logtext">Text del registre</string>
     <string name="cache_filter_stored_since_notstored">No desat</string>
@@ -581,6 +587,7 @@
     <string name="about_changelog">Historial de canvis</string>
     <string name="about_changelog_nightly_build">Versions Nightly</string>
     <string name="about_changelog_next_release">Pròxima versió</string>
+    <string name="about_changelog_bugfix_release">Correcció d\'errors</string>
     <string name="about_system">Sistema</string>
     <string name="about_donate">Dona\'ns suport</string>
     <string name="about_donation_more">Visiteu el lloc web per obtenir informació</string>
@@ -641,6 +648,8 @@
     <string name="settings_title_map_content">Contingut del mapa</string>
     <string name="settings_title_map_behavior">Comportament del mapa</string>
     <string name="settings_title_map_style">Estil de mapa</string>
+    <string name="settings_hide_tileproviders_title">Amaga les fonts del mapa</string>
+    <string name="settings_hide_tileproviders_summary">Exclou una o més fonts de mapes de la selecció de fonts de mapes</string>
     <string name="settings_title_data_dir">Carpeta de dades Geocatxes</string>
     <string name="settings_title_data_dir_usage">Carpeta de dades Geocatxes (s\'utilitza %1$s)</string>
     <string name="calculate_dataDir_title">Us de dades dels geoamagatalls</string>
@@ -728,6 +737,7 @@
     <string name="init_signature_template_log">Text del registre</string>
     <string name="init_signature_template_size">Mida</string>
     <string name="init_signature_template_type">Tipus</string>
+    <string name="init_signature_template_location">Ubicació</string>
     <string name="init_ratingwanted">Valoració del GCvote</string>
     <string name="init_summary_ratingwanted">Descarrega la valoració des de GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Mostra els dels amics i els propis</string>
@@ -765,6 +775,8 @@
     <string name="init_summary_prevent_cache_note_merge">Si aquesta configuració està activada, c:geo suprimirà la nota emmagatzemada localment de manera permanent i la substituirà per la nota personal al servidor. No es farà cap fusió.</string>
     <string name="init_customtabs_as_browser">Utilitzeu Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Els llocs web externs es mostraran sense deixar c: geo (només és possible si hi ha instal·lat Chrome)</string>
+    <string name="init_rot13_hint">Encripta la pista</string>
+    <string name="init_summary_rot13_hint">Mostra el text de la pista xifrat ROT-13 fins que es toqui</string>
     <string name="init_save_log_img">Desa les imatges</string>
     <string name="init_summary_save_log_img">Desa les imatges dels registres</string>
     <string name="init_units">Utilitza les unitats imperials (milles/peus)</string>
@@ -779,6 +791,8 @@
     <string name="init_summary_listdisplay">Mostra la pertinença del catxé a una llista addicionals a la llista de catxés</string>
     <string name="init_livelist">Mostra la direcció</string>
     <string name="init_summary_livelist">Mostra una fletxa amb la direcció de la brúixola als catxés en una llista</string>
+    <string name="init_quicklaunchitems">Botons d\'inici ràpid</string>
+    <string name="init_summary_quicklaunchitems">Seleccioneu un o més elements com a botons d\'inici ràpid a la pantalla d\'inici</string>
     <!-- app theme -->
     <string name="settings_theme_title">Aspecte</string>
     <string-array name="settings_theme_entries">
@@ -1244,6 +1258,7 @@
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Fora de línia)</string>
     <string name="cache_menu_vote">Vota</string>
     <string name="cache_menu_challenge_checker">Cerca comprovador de reptes</string>
+    <string name="cache_menu_log_in_browser">Inicieu sessió al navegador</string>
     <string name="cache_menu_ignore">Ignora el catxé</string>
     <string name="cache_log_menu_decrypt">Desxifra / Xifra</string>
     <string name="cache_log_menu_popup_title">Registre de %s</string>
@@ -1287,6 +1302,7 @@
     <string name="cache_image">Imatge</string>
     <string name="cache_image_open_file">Obre com a fitxer</string>
     <string name="cache_image_open_browser">Obre al navegador</string>
+    <string name="cache_image_show_description">Mostra descripció</string>
     <string name="cache_image_add_waypoint">Afegeix fita</string>
     <string name="cache_image_background">Imatge de fons del geoamagatall</string>
     <string name="cache_share_field">Comparteix</string>
@@ -1354,6 +1370,7 @@
     <string name="waypoint_calculated_coordinates_global">Calcula la coordenada</string>
     <string name="waypoint_custom">Personal</string>
     <string name="waypoint_my_coordinates">Les meves coordenades</string>
+    <string name="waypoint_my_coordinates_accuracy">Les meves coordenades (±%s)</string>
     <string name="waypoint_bearing">Direcció en º</string>
     <string name="waypoint_distance">Distància</string>
     <string name="waypoint_name">Nom</string>
@@ -2020,6 +2037,7 @@
         <item quantity="other">%d punts de ruta extrets</item>
     </plurals>
     <string name="link_gc_checker">El comprovador de coordenades de geocaching.com està disponible des del navegador</string>
+    <string name="geochecker_available">Geochecker disponible a través del navegador</string>
     <!-- calendar adder -->
     <string name="event_fail">S\'ha produït un error en afegir la trobada al calendari</string>
     <string name="init_low_disk_space">S\'està exhaurint l\'espai d\'emmagatzematge</string>
@@ -2177,6 +2195,12 @@
     <string name="mapserver_hylly_themes_info">Tema detallat del mapa, creat per als mapes \"Hylly\"</string>
     <string name="brouter_info">Servei d’encaminament fora de línia</string>
     <string name="maptheme_elevate_categoryinfo">Rellevant per a: [A] Àrees, [P] POI, [R] Rutes, [W] Camins</string>
+    <string name="maptheme_scale_map_title">Factor d\'escala del mapa</string>
+    <string name="maptheme_scale_map_summary">Mapa d\'escales; 100% = sense escala</string>
+    <string name="maptheme_scale_text_title">Factor d\'escala del text</string>
+    <string name="maptheme_scale_text_summary">Escala les etiquetes de text al mapa; 100% = sense escala addicional</string>
+    <string name="maptheme_scale_symbol_title">Factor d\'escala del símbol</string>
+    <string name="maptheme_scale_symbol_summary">Escala les mides dels símbols al mapa; 100% = sense escala addicional</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Esborra el traçat</string>
     <string name="map_trailhistory_cleared">S\'ha esborrat el traçat</string>
@@ -2579,4 +2603,36 @@
     <string name="rtl_path_quality23">qualitat 2/3 (asfaltat: grava, reparat, …)</string>
     <string name="rtl_path_quality45">qualitat 4/5 (sense pavimentar)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Somrient</string>
+    <string name="smiley_big_smile">Gran Somriure</string>
+    <string name="smiley_cool">Guai</string>
+    <string name="smiley_blush">Posar-de vermell</string>
+    <string name="smiley_tongue">Llengua</string>
+    <string name="smiley_evil">Dolent</string>
+    <string name="smiley_shocked">Impressionat</string>
+    <string name="smiley_wink">Fer l\'ullet</string>
+    <string name="smiley_clown">Pallasso</string>
+    <string name="smiley_blackeye">Ull blau</string>
+    <string name="smiley_8ball">Bola vuit</string>
+    <string name="smiley_frown">Arrufar el front</string>
+    <string name="smiley_shy">Tímid</string>
+    <string name="smiley_angry">Enfadat</string>
+    <string name="smiley_dead">Mort</string>
+    <string name="smiley_sleepy">Endormiscat</string>
+    <string name="smiley_kisses">Petons</string>
+    <string name="smiley_approve">Aprovat</string>
+    <string name="smiley_disapprove">Desaprovat</string>
+    <string name="smiley_question">Pregunta</string>
+    <string name="smiley_cry">Plorar</string>
+    <string name="smiley_embarassed">Avergonyit</string>
+    <string name="smiley_footinmouth">Ficar la pota</string>
+    <string name="smiley_innocent">Innocent</string>
+    <string name="smiley_kiss">Petó</string>
+    <string name="smiley_laughing">Rient</string>
+    <string name="smiley_money">Diners</string>
+    <string name="smiley_sealed">Segellat</string>
+    <string name="smiley_surprised">Sorprès</string>
+    <string name="smiley_tongueout">Treu la llengua</string>
+    <string name="smiley_undecided">Indecisos</string>
+    <string name="smiley_yell">Crida</string>
 </resources>
