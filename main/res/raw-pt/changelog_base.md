@@ -32,3 +32,5 @@
 - Correcção: Continuar a importação de transferências concluídas
 - Novo: Adicionados botões de lançamento rápido configuráveis ao ecrã inicial, ver Definições => Aparência
 - Novo: Encaminhamento interno de BRouter actualizado para a versão 1.6.3
+- Novo: Limitada a necessidade de utilizar repetidamente a tecla voltar ao iniciar uma nova sequência de actividades quando mudar para outra secção da aplicação
+- Novo: Adicionada uma configuração para desencriptar a dica da cache por defeito (ao invés de apenas ser desencriptada quando se tocar nela)
