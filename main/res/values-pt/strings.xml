@@ -487,12 +487,15 @@
     <string name="cache_filter_stored_lists">Listas guardadas</string>
     <string name="cache_filter_origin">Origem</string>
     <string name="cache_filter_stored_since">Última actualização de detalhes</string>
+    <string name="cache_filter_logical_filter_group">Filtro agrupado</string>
     <string name="cache_filtergroup_basic">Básico</string>
     <string name="cache_filtergroup_details">Detalhes</string>
     <string name="cache_filtergroup_userspecific">Definido pelo utilizador</string>
+    <string name="cache_filtergroup_special">Especial</string>
     <string name="cache_filter_contexttype_live_title">Filtro em Tempo Real</string>
     <string name="cache_filter_contexttype_offline_title">Filtro em Modo Offline</string>
     <string name="cache_filter_contexttype_transient_title">Filtro</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtro agrupado</string>
     <string name="cache_filter_include">Incluir</string>
     <string name="cache_filter_exclude">Excluir</string>
     <string name="cache_filter_userdisplay_complex">Complexo</string>
@@ -556,6 +559,8 @@
     <string name="cache_filter_status_exclude_disabled">Excluir Desactivadas</string>
     <string name="cache_filter_status_exclude_archived">Excluir Arquivadas</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Incluir caches sem D/T</string>
+    <string name="cache_filter_nested_filter_modify">modificar</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">O subfiltro está limpo</string>
     <string name="cache_filter_log_entry_foundby">Encontrado por</string>
     <string name="cache_filter_log_entry_logtext">Texto do registo</string>
     <string name="cache_filter_stored_since_notstored">Não está armazenada</string>
@@ -769,6 +774,8 @@
     <string name="init_summary_prevent_cache_note_merge">Se esta definição estiver activada, o c:geo irá eliminar permanentemente a nota armazenada localmente e substituí-la pela nota pessoal no servidor. A junção das duas não será feita.</string>
     <string name="init_customtabs_as_browser">Usar visualizador web do Chrome</string>
     <string name="init_summary_customtabs_as_browser">Sítios web externos serão exibidos sem sair do c:geo (apenas possível se o Chrome estiver instalado)</string>
+    <string name="init_rot13_hint">Cifrar a dica</string>
+    <string name="init_summary_rot13_hint">Mostrar o texto da dica com a cifra ROT-13 a menos que seja tocado</string>
     <string name="init_save_log_img">Guardar imagens</string>
     <string name="init_summary_save_log_img">Guarda as imagens dos registos</string>
     <string name="init_units">Usar Unidades Imperiais</string>
