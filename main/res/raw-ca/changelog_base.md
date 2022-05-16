@@ -1,34 +1,36 @@
 ### Detalls del catxé
 
-- New: Redesigned coordinates calculator (supporting functions)
-- Change: Variables for waypoint calculation are now cache-global
-- New: Variables tab in cache details
-- New: Generating waypoints using formulas and variables with ranges
-- New: Log templates for offline logs
-- New: Add \[location\] to log template menu
-- New: Allow selecting log texts
-- Fix: GC checker link leading to loop in certain conditions on Android 12
-- New: Added geochecker button at end of description text (when appropriate)
-- New: Added 'log in browser' option to cache menu
+- Nou: Calculadora de coordenades redissenyada (funcions de suport)
+- Canvi: Les variables per al càlcul de waypoints són ara globals de catxé
+- Nou: Pestanya Variables als detalls del catxé
+- Novetat: Generació de waypoints mitjançant fórmules i variables amb intervals
+- Novetat: Plantilles de registre per a fora de línia
+- Nou: Afegir \[ubicació\] al menú de plantilla de registre
+- Nou: Permet seleccionar textos de registre
+- Correcció: L'enllaç del verificador GC condueix al bucle en determinades condicions a Android 12
+- Nou: S'ha afegit un botó de verificació geogràfica al final del text de descripció (quan escaigui)
+- Nou: S'ha afegit l'opció "iniciar sessió al navegador" al menú del catxé
 
 ### Llistes de catxés
 
-- New: Added option for "has user defined waypoints" to advanced status filter
-- New: Allow inclusion of caches without D/T in filter
-- Fix: Resort cache list on every location change on distance sort order
+- Nou: S'ha afegit l'opció "té punts de ruta definits per l'usuari" al filtre d'estat avançat
+- Nou: Permet la inclusió de catxé sense D/T al filtre
+- Correcció: Llista de catxé a cada canvi d'ubicació per ordre de distància
 
 ### Mapa
 
-- New: Map theming for Google Maps
-- New: Map scaling options for OpenStreetMap (see theme options)
-- Change: Settings => Map => Long tap on map will now enable/disable long tap in cache map as well (relevant for creating new waypoints for current cache)
-- Change: Don't show distance-circle for archived caches
-- Fix: Crash in OpenStreetMap maps under certain conditions
-- Fix: Routing becoming unresponsive when many routing tiles are installed
+- Novetat: Tematització de mapes per a Google Maps
+- Novetat: Opcions d'escala de mapes per a OpenStreetMap (vegeu les opcions del tema)
+- Canvi: Configuració => Mapa => El toc llarg al mapa també habilitarà/desactivarà el toc llarg al mapa del catxé (rellevant per crear waypoints pel catxé)
+- Canvi: No mostrar el cercle de distància dels catxés arxivats
+- Correcció: Del bloqueig als mapes d'OpenStreetMap en determinades condicions
+- Solució: L'encaminament no responia quan s'instal·len moltes fitxes d'encaminament
 
 ### General
 
-- New: Automatically perform backups (optional)
-- Fix: Resume importing finished downloads
-- New: Added configurable quick launch buttons to home screen, see Settings => Appearance
-- New: Updated internal routing to BRouter v1.6.3
+- Nou: Realitza còpies de seguretat automàticament (opcional)
+- Correcció: Reprèn la importació de les descàrregues tancades
+- Nou: S'han afegit botons d'inici ràpid configurables a la pantalla d'inici, vegeu Configuració => Aparença
+- Nou: S'ha actualitzat l'encaminament intern a BRouter v1.6.3
+- Nou: limiteu la necessitat d'utilitzar repetitivament la clau enrere iniciant una nova pila d'activitats quan canvieu a una altra part de l'aplicació
+- Nou: Afegit la configuració per desxifrar la pista del catxé de manera predeterminada (en lloc de només quan hi toqueu)
