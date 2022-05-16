@@ -32,3 +32,5 @@
 - Oplossing: Hervatten van importeren van voltooide downloads
 - Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
 - Nieuw: interne routing bijgewerkt naar BRouter v1.6.3
+- Nieuw: Limiteer de noodzaak van herhalende terug tik gebruik door het starten van een nieuwe activiteitstack wanneer je overschakelt naar een ander deel van de app
+- Nieuw: Instelling toegevoegd om de cache hint standaard te ontcijferen (in plaats van alleen wanneer erop geklikt wordt)
