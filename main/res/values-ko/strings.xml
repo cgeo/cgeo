@@ -763,6 +763,8 @@
     <string name="init_summary_prevent_cache_note_merge">이 설정이 활성화되면 c:geo는 로컬에 저장된 메모를 영구적으로 삭제하고 서버의 개인 메모로 대체합니다. 병합이 수행되지 않습니다.</string>
     <string name="init_customtabs_as_browser">크롬 웹뷰 사용</string>
     <string name="init_summary_customtabs_as_browser">c:geo를 떠나지 않고 외부 웹 사이트가 표시됩니다 (그롬이 설치된 경우에만 가능).</string>
+    <string name="init_rot13_hint">힌트 암호화</string>
+    <string name="init_summary_rot13_hint">누를 때까지 힌트 텍스트 ROT-13 암호화 표시</string>
     <string name="init_save_log_img">사진 저장하기</string>
     <string name="init_summary_save_log_img">로그에 있는 사진을 저장합니다.</string>
     <string name="init_units">영미식 단위 사용하기</string>
@@ -777,6 +779,8 @@
     <string name="init_summary_listdisplay">캐시 목록의 다른 목록에 캐시가 있는지 표시</string>
     <string name="init_livelist">방향 보이기</string>
     <string name="init_summary_livelist">목록의 캐시에 대한 나침반 방향이있는 화살표 표시</string>
+    <string name="init_quicklaunchitems">빠른 실행 버튼</string>
+    <string name="init_summary_quicklaunchitems">홈 화면에서 빠른 실행 버튼으로 하나 이상의 항목 선택</string>
     <!-- app theme -->
     <string name="settings_theme_title">테마</string>
     <string-array name="settings_theme_entries">
