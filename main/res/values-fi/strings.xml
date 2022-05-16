@@ -487,12 +487,15 @@
     <string name="cache_filter_stored_lists">Tallennetut listat</string>
     <string name="cache_filter_origin">Alkuperä</string>
     <string name="cache_filter_stored_since">Viimeisin yksityiskohtien päivitys</string>
+    <string name="cache_filter_logical_filter_group">Sisäkkäinen suodatin</string>
     <string name="cache_filtergroup_basic">Perus</string>
     <string name="cache_filtergroup_details">Yksityiskohdat</string>
     <string name="cache_filtergroup_userspecific">Käyttäjäkohtainen</string>
+    <string name="cache_filtergroup_special">Erikois</string>
     <string name="cache_filter_contexttype_live_title">Live-suodatin</string>
     <string name="cache_filter_contexttype_offline_title">Offline-suodatin</string>
     <string name="cache_filter_contexttype_transient_title">Suodatin</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Sisäkkäinen suodatin</string>
     <string name="cache_filter_include">Sisällytä</string>
     <string name="cache_filter_exclude">Rajaa pois</string>
     <string name="cache_filter_userdisplay_complex">Monimutkainen</string>
@@ -556,6 +559,8 @@
     <string name="cache_filter_status_exclude_disabled">Rajaa pois hyllytetyt</string>
     <string name="cache_filter_status_exclude_archived">Rajaa pois arkistoidut</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Sisällytä kätköt ilman D/T:tä</string>
+    <string name="cache_filter_nested_filter_modify">muokkaa</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Alisuodatin on tällä hetkellä tyhjä</string>
     <string name="cache_filter_log_entry_foundby">Löytänyt</string>
     <string name="cache_filter_log_entry_logtext">Lokiteksti</string>
     <string name="cache_filter_stored_since_notstored">Ei tallennettu</string>
