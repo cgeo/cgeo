@@ -769,6 +769,8 @@
     <string name="init_summary_prevent_cache_note_merge">Wenn diese Einstellung aktiviert ist, wird c:geo die lokal gespeicherte Notiz dauerhaft löschen und durch die persönliche Notiz auf dem Server ersetzen. Es wird keine Zusammenführung der Versionen geben.</string>
     <string name="init_customtabs_as_browser">Chrome WebView verwenden</string>
     <string name="init_summary_customtabs_as_browser">Externe Websites werden angezeigt, ohne c:geo zu verlassen (nur möglich, wenn Chrome installiert ist)</string>
+    <string name="init_rot13_hint">Hinweis verschlüsseln</string>
+    <string name="init_summary_rot13_hint">Hinweistext ROT-13 verschlüsselt anzeigen bis darauf getippt wird</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
     <string name="init_units">Imperiale Einheiten</string>
