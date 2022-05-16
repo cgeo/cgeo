@@ -487,12 +487,15 @@
     <string name="cache_filter_stored_lists">Opgeslagen lijsten</string>
     <string name="cache_filter_origin">Oorsprong</string>
     <string name="cache_filter_stored_since">Laatste details update</string>
+    <string name="cache_filter_logical_filter_group">Geneste filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Gebruikerspecifiek</string>
+    <string name="cache_filtergroup_special">Speciaal</string>
     <string name="cache_filter_contexttype_live_title">Live filter</string>
     <string name="cache_filter_contexttype_offline_title">Offline filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Geneste filter</string>
     <string name="cache_filter_include">Opnemen</string>
     <string name="cache_filter_exclude">Uitsluiten</string>
     <string name="cache_filter_userdisplay_complex">Complex</string>
@@ -556,6 +559,8 @@
     <string name="cache_filter_status_exclude_disabled">Uitgeschakeld uitsluiten</string>
     <string name="cache_filter_status_exclude_archived">Gearchiveerden uitsluiten</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Inclusief caches zonder D/T</string>
+    <string name="cache_filter_nested_filter_modify">bewerk</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Het subfilter is momenteel leeg</string>
     <string name="cache_filter_log_entry_foundby">Gevonden door</string>
     <string name="cache_filter_log_entry_logtext">Log tekst</string>
     <string name="cache_filter_stored_since_notstored">Niet opgeslagen</string>
