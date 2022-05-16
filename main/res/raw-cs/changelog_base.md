@@ -32,3 +32,5 @@
 - Oprava: Pokračovat v importu dokončených stahování
 - Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
 - Novinka: Aktualizováno interní směrování BRouter na verzi v1.6.3
+- Novinka: Omezení nutnosti opakovaného používání klávesy zpět spuštěním nového zásobníku aktivit při přechodu do jiné části aplikace
+- Novinka: Přidáno nastavení pro dešifrování nápovědy ke kešce ve výchozím nastavení (místo pouze při klepnutí na ni)
