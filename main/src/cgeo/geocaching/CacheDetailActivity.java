@@ -85,11 +85,11 @@ import cgeo.geocaching.ui.dialog.EditNoteDialog;
 import cgeo.geocaching.ui.dialog.EditNoteDialog.EditNoteDialogListener;
 import cgeo.geocaching.ui.dialog.SimpleDialog;
 import cgeo.geocaching.ui.recyclerview.RecyclerViewProvider;
+import cgeo.geocaching.ui.renderer.HtmlSpannableRenderer;
 import cgeo.geocaching.utils.AndroidRxUtils;
 import cgeo.geocaching.utils.CalendarUtils;
 import cgeo.geocaching.utils.CheckerUtils;
 import cgeo.geocaching.utils.ClipboardUtils;
-import cgeo.geocaching.utils.ColorUtils;
 import cgeo.geocaching.utils.CryptUtils;
 import cgeo.geocaching.utils.DisposableHandler;
 import cgeo.geocaching.utils.EmojiUtils;
@@ -117,7 +117,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
-import android.graphics.Typeface;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -130,10 +129,7 @@ import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.method.LinkMovementMethod;
-import android.text.style.BackgroundColorSpan;
 import android.text.style.ClickableSpan;
-import android.text.style.ForegroundColorSpan;
-import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
 import android.view.ContextMenu;
@@ -194,15 +190,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
     private static final int MESSAGE_SUCCEEDED = 1;
 
     private static final String EXTRA_FORCE_WAYPOINTSPAGE = "cgeo.geocaching.extra.cachedetail.forceWaypointsPage";
-
-    /**
-     * Minimal contrast ratio. If description:background contrast ratio is less than this value
-     * for some string, foreground color will be removed and gray background will be used
-     * in order to highlight the string
-     *
-     * @see <a href="https://www.w3.org/TR/UNDERSTANDING-WCAG20/visual-audio-contrast-contrast.html">W3 Minimum Contrast</a>
-     **/
-    private static final float CONTRAST_THRESHOLD = 4.5f;
 
     public static final String STATE_PAGE_INDEX = "cgeo.geocaching.pageIndex";
 
@@ -1873,12 +1860,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
          */
         private void loadDescription(final CacheDetailActivity activity, final String descriptionString, final boolean isLongDescription, final IndexOutOfBoundsAvoidingTextView descriptionView, final View loadingIndicatorView) {
             try {
-                final UnknownTagsHandler unknownTagsHandler = new UnknownTagsHandler();
-                final Editable description = new SpannableStringBuilder(HtmlCompat.fromHtml(descriptionString, HtmlCompat.FROM_HTML_MODE_LEGACY, new HtmlImage(cache.getGeocode(), true, false, descriptionView, false), unknownTagsHandler));
-                activity.addWarning(unknownTagsHandler, description);
+                final Editable description = new SpannableStringBuilder(new HtmlSpannableRenderer(cache.getGeocode(), descriptionView).fromHtml(descriptionString));
                 if (StringUtils.isNotBlank(description)) {
                     fixRelativeLinks(description);
-                    fixTextColor(description, R.color.colorBackground);
 
                     // check if short description is contained in long description
                     boolean longDescriptionContainsShortDescription = false;
@@ -1912,7 +1896,8 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 if (loadingIndicatorView != null) {
                     loadingIndicatorView.setVisibility(View.GONE);
                 }
-            } catch (final RuntimeException ignored) {
+            } catch (final RuntimeException e) {
+                Log.e("c:geo can't load description", e);
                 activity.showToast(getString(R.string.err_load_descr_failed));
             }
         }
@@ -1964,37 +1949,6 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
         }
 
     }
-
-    // If description has an HTML construct which may be problematic to render, add a note at the end of the long description.
-    // Technically, it may not be a table, but a pre, which has the same problems as a table, so the message is ok even though
-    // sometimes technically incorrect.
-    private void addWarning(final UnknownTagsHandler unknownTagsHandler, final Editable description) {
-        if (unknownTagsHandler.isProblematicDetected()) {
-            final int startPos = description.length();
-            final IConnector connector = ConnectorFactory.getConnector(cache);
-            if (StringUtils.isNotEmpty(cache.getUrl())) {
-                final Spanned tableNote = HtmlCompat.fromHtml(res.getString(R.string.cache_description_table_note, "<a href=\"" + cache.getUrl() + "\">" + connector.getName() + "</a>"), HtmlCompat.FROM_HTML_MODE_LEGACY);
-                description.append("\n\n").append(tableNote);
-                description.setSpan(new StyleSpan(Typeface.ITALIC), startPos, description.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-    }
-
-    private static void fixTextColor(final Spannable spannable, final int backgroundColor) {
-        final ForegroundColorSpan[] spans = spannable.getSpans(0, spannable.length(), ForegroundColorSpan.class);
-
-        for (final ForegroundColorSpan span : spans) {
-            if (ColorUtils.getContrastRatio(span.getForegroundColor(), backgroundColor) < CONTRAST_THRESHOLD) {
-                final int start = spannable.getSpanStart(span);
-                final int end = spannable.getSpanEnd(span);
-
-                //  Assuming that backgroundColor can be either white or black,
-                // this will set opposite background color (white for black and black for white)
-                spannable.setSpan(new BackgroundColorSpan(backgroundColor ^ 0x00ffffff), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            }
-        }
-    }
-
 
     protected void ensureSaved() {
         if (!cache.isOffline()) {

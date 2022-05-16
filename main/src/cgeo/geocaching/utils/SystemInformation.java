@@ -28,11 +28,10 @@ import android.content.Context;
 import android.content.UriPermission;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.Point;
 import android.os.Build;
 import android.os.Build.VERSION;
 import android.os.Environment;
-import android.view.WindowManager;
+import android.util.DisplayMetrics;
 
 import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
@@ -290,11 +289,10 @@ public final class SystemInformation {
 
     private static void appendScreenResolution(final Context context, final StringBuilder body) {
         final Configuration config = context.getResources().getConfiguration();
-        final Point size = new Point();
-        ((WindowManager) context.getSystemService(Context.WINDOW_SERVICE)).getDefaultDisplay().getSize(size);
+        final DisplayMetrics metrics = context.getResources().getDisplayMetrics();
 
-        body.append("\n- Screen resolution: ").append(size.x).append("x").append(size.y).append("px (").append(config.screenWidthDp).append("x").append(config.screenHeightDp).append("dp)");
-        body.append("\n- Pixel density: ").append(context.getResources().getDisplayMetrics().scaledDensity);
+        body.append("\n- Screen resolution: ").append(metrics.widthPixels).append("x").append(metrics.heightPixels).append("px (").append(config.screenWidthDp).append("x").append(config.screenHeightDp).append("dp)");
+        body.append("\n- Pixel density: ").append(metrics.scaledDensity);
         body.append("\n- System font scale: ").append(android.provider.Settings.System.getFloat(context.getContentResolver(), android.provider.Settings.System.FONT_SCALE, 1f)).append(" / used scale: ").append(config.fontScale);
     }
 
