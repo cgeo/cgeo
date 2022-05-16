@@ -14,17 +14,17 @@
 ### 캐시 목록
 
 - 신규: 고급 상태 필터에 "사용자 정의 지점 있음" 옵션 추가
-- New: Allow inclusion of caches without D/T in filter
+- 신규: 필터에 난이도/지형 없이 캐시 포함 허용
 - 수정: 거리 정렬 순서에 따라 모든 위치 변경 시 캐시 목록 재정렬
 
 ### 지도
 
-- New: Map theming for Google Maps
-- New: Map scaling options for OpenStreetMap (see theme options)
+- 신규: Google 지도용 지도 테마
+- 신규: OpenStreetMap용 지도 크기 조정 옵션 (테마 옵션 참조)
 - 변경: 설정 => 지도 => 지도를 길게 누르면 이제 캐시 지도에서도 길게 누름이 활성화/비활성화됩니다(현재 캐시에 대한 새 지점 생성과 관련됨).
 - 변경: 영구보관된 캐시에 대한 거리 원을 표시하지 않음
 - 수정: 특정 조건에서 OpenStreetMap 지도의 충돌
-- Fix: Routing becoming unresponsive when many routing tiles are installed
+- 수정: 많은 라우팅 타일이 설치된 경우 라우팅이 응답하지 않음
 
 ### 일반
 
@@ -32,3 +32,5 @@
 - 수정: 완료된 다운로드 가져오기 재개
 - 신규: 구성 가능한 빠른 실행 버튼을 홈 화면에 추가했습니다. 설정 => 외관 디자인
 - 신규: BRouter v1.6.3으로 내부 라우팅 업데이트
+- 신규: 앱의 다른 부분으로 변경할 때 새로운 액티비티 스택을 시작하여 반복적인 백 키 사용의 필요성 제한
+- 신규: 기본적으로 캐시 힌트를 해독하는 설정 추가(누를 때만 사용하는 대신)
