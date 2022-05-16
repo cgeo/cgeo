@@ -90,8 +90,8 @@
     <string name="wpnew_original">Původní</string>
     <string name="wpnew_generated">Vygenerováno</string>
     <!-- logs -->
-    <string name="log_found">Nález</string>
-    <string name="log_dnf">Nenalezená</string>
+    <string name="log_found">Nalezeno</string>
+    <string name="log_dnf">Nenalezeno</string>
     <string name="log_note">Poznámka</string>
     <string name="log_published">Zveřejněno</string>
     <string name="log_enabled">Aktivováno</string>
@@ -335,7 +335,7 @@
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
-    <string name="any_button">Přejít</string>
+    <string name="any_button">Navigovat na</string>
     <string name="unknown_scan">Ve výsledku vyhledávání nenalezen žádný geokód.</string>
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>
@@ -1266,7 +1266,7 @@
     <string name="cache_menu_extract_waypoints">Extrahovat trasové body</string>
     <string name="cache_menu_scan_calculated_waypoints">Vyhledat vzorce pro trasové body</string>
     <string name="cache_menu_set_found">Nastavit jako nalezená</string>
-    <string name="cache_menu_set_DNF">Nastavit jako nenalezená</string>
+    <string name="cache_menu_set_DNF">Nastavit jako nenalezeno</string>
     <string name="cache_menu_reset_foundstate">Obnovit stav nálezu</string>
     <string name="cache_foundstate_updated">Stav nálezu aktualizován</string>
     <string name="cache_menu_set_cache_icon">Natavit ikonu kešky</string>
@@ -1289,7 +1289,7 @@
     <string name="cache_status">Stav</string>
     <string name="cache_status_offline_log">Připravený log</string>
     <string name="cache_status_found">Nalezena</string>
-    <string name="cache_not_status_found">Nenalezená</string>
+    <string name="cache_not_status_found">Nenalezeno</string>
     <string name="cache_status_archived">Archivována</string>
     <string name="cache_status_disabled">Deaktivovaná</string>
     <string name="cache_status_active">Aktivní</string>
@@ -1345,8 +1345,8 @@
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
-    <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
-    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
+    <string name="internal_goto_targets_title">Cíle „Navigovat na“</string>
+    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Navigovat na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Navigovat na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku)</string>
     <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešky.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
