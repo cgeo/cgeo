@@ -487,12 +487,15 @@
     <string name="cache_filter_stored_lists">Gespeicherte Listen</string>
     <string name="cache_filter_origin">Herkunft</string>
     <string name="cache_filter_stored_since">Letzte Detailaktualisierung</string>
+    <string name="cache_filter_logical_filter_group">Verschachtelter Filter</string>
     <string name="cache_filtergroup_basic">Basis</string>
     <string name="cache_filtergroup_details">Details</string>
     <string name="cache_filtergroup_userspecific">Benutzerspezifisch</string>
+    <string name="cache_filtergroup_special">Speziell</string>
     <string name="cache_filter_contexttype_live_title">Live-Filter</string>
     <string name="cache_filter_contexttype_offline_title">Offline-Filter</string>
     <string name="cache_filter_contexttype_transient_title">Filter</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Verschachtelter Filter</string>
     <string name="cache_filter_include">Mit</string>
     <string name="cache_filter_exclude">Ohne</string>
     <string name="cache_filter_userdisplay_complex">Komplex</string>
@@ -556,6 +559,8 @@
     <string name="cache_filter_status_exclude_disabled">Deaktivierte ausschließen</string>
     <string name="cache_filter_status_exclude_archived">Archivierte ausschließen</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Caches ohne D/T einbeziehen</string>
+    <string name="cache_filter_nested_filter_modify">Bearbeiten</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Der Unter-Filter ist aktuell leer</string>
     <string name="cache_filter_log_entry_foundby">Gefunden von</string>
     <string name="cache_filter_log_entry_logtext">Logtext</string>
     <string name="cache_filter_stored_since_notstored">Nicht gespeichert</string>
@@ -769,6 +774,8 @@
     <string name="init_summary_prevent_cache_note_merge">Wenn diese Einstellung aktiviert ist, wird c:geo die lokal gespeicherte Notiz dauerhaft löschen und durch die persönliche Notiz auf dem Server ersetzen. Es wird keine Zusammenführung der Versionen geben.</string>
     <string name="init_customtabs_as_browser">Chrome WebView verwenden</string>
     <string name="init_summary_customtabs_as_browser">Externe Websites werden angezeigt, ohne c:geo zu verlassen (nur möglich, wenn Chrome installiert ist)</string>
+    <string name="init_rot13_hint">Hinweis verschlüsseln</string>
+    <string name="init_summary_rot13_hint">Hinweistext ROT-13 verschlüsselt anzeigen bis darauf getippt wird</string>
     <string name="init_save_log_img">Logbilder</string>
     <string name="init_summary_save_log_img">Logbilder abspeichern</string>
     <string name="init_units">Imperiale Einheiten</string>
