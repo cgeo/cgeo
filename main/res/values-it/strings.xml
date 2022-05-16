@@ -487,12 +487,15 @@
     <string name="cache_filter_stored_lists">Elenchi Archiviati</string>
     <string name="cache_filter_origin">Origine</string>
     <string name="cache_filter_stored_since">Ultimo aggiornamento dei dettagli</string>
+    <string name="cache_filter_logical_filter_group">Filtro Nested</string>
     <string name="cache_filtergroup_basic">Base</string>
     <string name="cache_filtergroup_details">Dettagli</string>
     <string name="cache_filtergroup_userspecific">Specifico dell\'utente</string>
+    <string name="cache_filtergroup_special">Speciale</string>
     <string name="cache_filter_contexttype_live_title">Filtro Live</string>
     <string name="cache_filter_contexttype_offline_title">Filtro Offline</string>
     <string name="cache_filter_contexttype_transient_title">Filtro</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Filtro Nested</string>
     <string name="cache_filter_include">Includi</string>
     <string name="cache_filter_exclude">Escludi</string>
     <string name="cache_filter_userdisplay_complex">Complesso</string>
@@ -556,6 +559,8 @@
     <string name="cache_filter_status_exclude_disabled">Escludi Disabilitato</string>
     <string name="cache_filter_status_exclude_archived">Escludi Archiviato</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Includi cache senza D/T</string>
+    <string name="cache_filter_nested_filter_modify">modifica</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Il sotto-filtro è attualmente vuoto</string>
     <string name="cache_filter_log_entry_foundby">Trovato da</string>
     <string name="cache_filter_log_entry_logtext">Testo del Log</string>
     <string name="cache_filter_stored_since_notstored">Non salvato</string>
