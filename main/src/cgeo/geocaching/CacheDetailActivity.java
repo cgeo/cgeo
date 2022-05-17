@@ -2605,6 +2605,9 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 title += " (" + this.imageGallery.getCount() + ")";
             }
             return  title;
+        }  else if (pageId == Page.LOGSFRIENDS.id) {
+            final int logCount = cache == null ? 0 : cache.getFriendsLogs().size();
+            return this.getString(Page.LOGSFRIENDS.titleStringId) + " (" + logCount + ")";
         }
         return this.getString(Page.find(pageId).titleStringId);
     }
