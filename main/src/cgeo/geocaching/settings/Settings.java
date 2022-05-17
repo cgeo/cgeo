@@ -1406,7 +1406,7 @@ public class Settings {
     }
 
     public static boolean isLongTapOnMapActivated() {
-        return getBoolean(R.string.pref_longTapOnMapActivated, true);
+        return getBoolean(R.string.pref_longTapOnMap, true);
     }
 
     public static boolean getCreateUDCuseGivenList() {

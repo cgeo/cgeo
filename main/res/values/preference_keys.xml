@@ -207,7 +207,7 @@
     <string translatable="false" name="pref_dtMarkerOnCacheIcon">pref_dtMarkerOnCacheIcon</string>
 
     <!-- category map behavior -->
-    <string translatable="false" name="pref_longTapOnMapActivated">pref_longTapCreateUDC</string>
+    <string translatable="false" name="pref_longTapOnMap">pref_longTapOnMap</string>
 
     <!-- category proximity notfication -->
     <string translatable="false" name="pref_proximityDistanceFar">pref_proximityDistanceFar</string>
