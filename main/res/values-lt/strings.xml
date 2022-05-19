@@ -1176,7 +1176,6 @@
     <string name="internal_cache_default_owner">Jūs</string>
     <string name="internal_goto_targets_title">\'Eiti į\' tikslus</string>
     <string name="init_longtap_map">Ilgas paspaudimas ant žemėlapio</string>
-    <string name="init_summary_longtap_map">Įjungti ilgą paspaudimą ant žemėlapio piktogramos (asmeninio maršruto kūrimui) ar ant tuščios vietos žemėlapyje (sukurti vartotojo slėptuvę)</string>
     <string name="goto_targets_list">Vartotojo nustatytos slėptuvės</string>
     <string name="clear_goto_history_title">Valyti Eiti į istoriją</string>
     <!-- coordinate calculator hints -->
