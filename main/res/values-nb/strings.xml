@@ -1285,9 +1285,6 @@
     <string name="internal_goto_targets_title">\'Gå til\'-mål</string>
     <string name="internal_goto_targets_description">Denne cachen lagrer dine siste \"Gå til\"-mål. Den opprettes automatisk når du har brukt \"Gå til\"-funksjonen i hovedmenyen. Koordinatene du legger inn der blir lagret som veipunkter i denne cachen. Hvis du ikke lenger trenger disse koordinatene, kan du trygt slette denne cachen eller tilhørende veipunkter. Du kan også flytte cachen til hvilken som helst liste.</string>
     <string name="init_longtap_map">Langt trykk i kartet</string>
-    <string name="init_summary_longtap_map">Aktiver langt trykk på kartikonet (opprett en enkelt rute) eller på ledig plass på kartet (lag en brukerdefinert cache)</string>
-    <string name="onetime_info_longtap_disabled">Ved langt trykk på kartet kan du lage individuelle ruter og brukerdefinerte cacher.\n\nLangt trykk på kartet er deaktivert.\n\nDu kan endre dette i Innstillinger → Vis på kartet → Kartatferd</string>
-    <string name="onetime_info_longtap_enabled">Ved langt trykk på kartet kan du lage individuelle ruter og brukerdefinerte cacher.\n\nLangt trykk på kartet er aktivert.\n\nDu kan endre dette i Innstillinger → Vis på kartet → Kartatferd</string>
     <string name="goto_targets_list">Interne cacher</string>
     <string name="clear_goto_history_title">Slett goto historikk</string>
     <string name="clear_goto_history">Dette vil slette alle historiske veipunkter unntatt de fem siste</string>
