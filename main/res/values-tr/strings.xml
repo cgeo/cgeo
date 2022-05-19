@@ -602,7 +602,7 @@
     <string name="contribution_infrastructure">altyapı</string>
     <string name="contribution_projectleader">Açık kaynak proje lideri</string>
     <string name="contribution_graphics">grafik</string>
-    <string name="debug_user_error_report_title">Bir sorun bildir</string>
+    <string name="debug_user_error_report_title">Sorun bildir</string>
     <string name="debug_user_error_errortext">Bize bildirmenizi istediğimiz beklenmedik bir sorun oluştu, lütfen bildirin:</string>
     <string name="debug_user_error_explain_options">Lütfen, yaşadığınız sorunları, hata dosyası ve sistem verilerini içeren eposta ile bize raporlayarak c:geo\'yu düzeltmemize yardımcı olun.\nHatanın detaylı bir açıklamasını Epostanıza ekleyin!\n\nEpostanızı göndermeden önce bilinen sorunları görüntülemek için SSS ve/veya sosyal medya hesaplarımıza göz atın.\nDiğer iletişim seçenekleri \'c:geo Hakkında\' sekmesinde bulunabilir.</string>
     <string name="debug_current_downloads">Mevcut indirmeler</string>
@@ -1268,9 +1268,6 @@
     <string name="internal_goto_targets_title">\'Konuma git\' hedefleri</string>
     <string name="internal_goto_targets_description">Bu Geocache, son \"Git\" hedeflerinizi kaydeder. Ana menüdeki \"Git\" işlevini kullandığınızda otomatik olarak oluşturulur. Oraya girilen koordinatlar bu Geocache\'in ara noktalarında saklanacaktır. Bu koordinatlara artık ihtiyacınız yoksa, bu Geocache\'i veya ara noktalarından herhangi birini güvenle silebilirsiniz. Ayrıca, Geocache\'i istediğiniz başka bir listeye taşıyabilirsiniz.</string>
     <string name="init_longtap_map">Haritaya uzun basın</string>
-    <string name="init_summary_longtap_map">Harita simgesine uzun dokunuşu etkinleştirin (bireysel bir rota oluşturun) veya boş harita alanında (kullanıcı tanımlı Geocache oluşturun)</string>
-    <string name="onetime_info_longtap_disabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun süre basmak şu an için devre dışı.\n\nBunu Ayarlar → Harita → Harita davranışından değiştirebilirsiniz</string>
-    <string name="onetime_info_longtap_enabled">Haritaya uzun süre basarak özel rotalar ve kullanıcı tanımlı cache\'ler oluşturabilirsiniz.\n\nHaritaya uzun süre basmak şu an için etkin.\n\nBunu Ayarlar → Harita → Harita davranışından değiştirebilirsiniz</string>
     <string name="goto_targets_list">Kullanıcı tarafından belirlenen Cache\'ler</string>
     <string name="clear_goto_history_title">Konuma git geçmişini temizle</string>
     <string name="clear_goto_history">Bu işlem en yeni 5 yol noktası hariç eski tüm yol noktalarını silecektir.</string>
