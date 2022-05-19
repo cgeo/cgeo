@@ -114,7 +114,7 @@ public class VariablesViewPageFragment extends TabbedViewPagerFragment<Cachedeta
         }
         adapter.setVariableList(cache.getVariables());
         //register for changes of variableslist -> calculated waypoints may have changed
-        cache.getVariables().addChangeListener(this, s -> adapter.setVariableList(cache.getVariables()));
+        cache.getVariables().addChangeListener(this, s -> activity.runOnUiThread(() -> adapter.setVariableList(cache.getVariables())));
         binding.getRoot().setVisibility(View.VISIBLE);
     }
 
