@@ -1323,9 +1323,6 @@
     <string name="internal_goto_targets_title">Cibles \'Aller à\'</string>
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points de passage de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points de passage. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
-    <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache personnelle à l\'utilisateur)</string>
-    <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
-    <string name="onetime_info_longtap_enabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement activé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
