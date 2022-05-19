@@ -1320,9 +1320,6 @@
     <string name="internal_goto_targets_title">\'Gå till\' mål</string>
     <string name="internal_goto_targets_description">Denna cache lagrar dina senaste \"Gå till\" mål. Den skapas automatiskt när du har använt funktionen \"Gå till\" i huvudmenyn. Koordinaterna som anges där kommer att lagras i vägpunkter för denna cache. Om du inte längre behöver dessa koordinater kan du ta bort cachen eller någon av dess vägpunkter på ett säkert sätt. Du kan också flytta cachen till någon annan lista som du väljer.</string>
     <string name="init_longtap_map">Långtryck på kartan</string>
-    <string name="init_summary_longtap_map">Aktivera långtryck på kart-ikonen (för att skapa en egen rutt) eller på själva kartan (för att skapa en egen-definierad cache)</string>
-    <string name="onetime_info_longtap_disabled">Genom ett långtryck på kartan kan du skapa enskilda rutter och användardefinierade cacher.\n\nLångtryck på kartan är för närvarande inaktiverat.\n\nDu kan ändra detta i Inställningar - Karta - Kartbeteende</string>
-    <string name="onetime_info_longtap_enabled">Genom ett långtryck på kartan kan du skapa enskilda rutter och användardefinierade cacher.\n\nLångtryck på kartan är för närvarande aktiverat.\n\nDu kan ändra detta i Inställningar - Karta - Kartbeteende</string>
     <string name="goto_targets_list">Interna cacher</string>
     <string name="clear_goto_history_title">Rensa \"gå till\" historik</string>
     <string name="clear_goto_history">Detta kommer att ta bort alla historiska vägpunkter utom de fem senaste</string>
