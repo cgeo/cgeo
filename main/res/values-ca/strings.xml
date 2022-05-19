@@ -1321,9 +1321,6 @@
     <string name="internal_goto_targets_title">Objectius \"Vés a\"</string>
     <string name="internal_goto_targets_description">Aquest catxé emmagatzema els vostres objectius recents \"Vés a\". Es crea automàticament un cop heu utilitzat la funció \"Vés a\" al menú principal. Les coordenades que hi introduïu s’emmagatzemaran en punts de ruta d’aquest catxé. Si ja no necessiteu aquestes coordenades, podeu suprimir amb seguretat aquest catxé o qualsevol dels seus punts de ruta. També podeu moure el catxé a qualsevol altra llista.</string>
     <string name="init_longtap_map">Feu un toc llarg al mapa</string>
-    <string name="init_summary_longtap_map">Activeu el toc llarg sobre la icona del mapa (creeu una ruta individual) o sobre un espai del mapa (creeu un catxé definit per l’usuari)</string>
-    <string name="onetime_info_longtap_disabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés definiis per l\'usuari.\n\nEl toc llarg al mapa està desactivat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
-    <string name="onetime_info_longtap_enabled">Fent un toc llarg al mapa podeu crear rutes individuals i catxés definits per l\'usuari.\n\nEl toc llarg al mapa està activat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
