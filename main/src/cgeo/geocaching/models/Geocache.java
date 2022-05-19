@@ -1736,6 +1736,7 @@ public class Geocache implements IWaypoint {
                     getVariables().addVariable(var.getKey(), var.getValue());
                 }
                 getVariables().saveState();
+                getVariables().recalculateWaypoints(this); //need to do this because new wps are not saved to DB yet
             }
         }
         return changed;
