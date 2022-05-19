@@ -1325,9 +1325,6 @@
     <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
-    <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache definida pelo utilizador)</string>
-    <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa, pode criar rotas individuais e caches definidos pelo utilizador.\n\nA função \"toque sem soltar no mapa\" está desactivada neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
-    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa, pode criar rotas individuais e caches personalizadas (lista: \"caches internas\").\n\nA função \"toque sem soltar no mapa\" está activa neste momento.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
