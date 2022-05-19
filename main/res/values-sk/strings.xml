@@ -1308,9 +1308,6 @@
     <string name="internal_goto_targets_title">Ciele \"Choď k\"</string>
     <string name="internal_goto_targets_description">V tejto keške sú uložené všetky vaše nedávne ciele funkcie \"Choď k\". Vytvorí sa automaticky, keď v hlavnej ponuke použijete funkciu \"Choď k\". Zadané súradnice sa uložia ako body trasy tejto kešky. Ak už tieto súradnice nepotrebujete, môžete bez obáv túto kešku a všetky jej body trasy odstrániť. Podľa potreby tiež môžete túto kešku presunúť do nejakého iného zoznamu.</string>
     <string name="init_longtap_map">Ťuknutie na mapu a podržanie</string>
-    <string name="init_summary_longtap_map">Aktivovať ťuknutie a podržanie ikony mapy (vytvoriť individuálnu trasu) alebo voľného miesta na mape (vytvoriť používateľom definovanú kešku)</string>
-    <string name="onetime_info_longtap_disabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky.\n\nŤuknutie a podržanie na mape je momentálne vypnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
-    <string name="onetime_info_longtap_enabled">Ťuknutím a podržaním na mape môžete vytvárať vlastné trasy a používateľom zadávané kešky.\n\nŤuknutie a podržanie na mape je momentálne zapnuté.\n\nZmeniť to môžete cez ponuku Nastavenia → Mapa → Správanie mapy</string>
     <string name="goto_targets_list">Interné kešky</string>
     <string name="clear_goto_history_title">Vymazať históriu Choď k</string>
     <string name="clear_goto_history">Týmto sa odstránia všetky historické body trasy okrem piatich posledných</string>
