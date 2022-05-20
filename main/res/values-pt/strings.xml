@@ -1320,6 +1320,9 @@
     <string name="internal_goto_targets_title">Destinos de \'Ir para\'</string>
     <string name="internal_goto_targets_description">Esta cache guarda os seus destinos recentes de \"Ir para\". Isto é gerado automaticamente assim que tiver utilizado a funcionalidade \"Ir para\" no menu principal.\n\nAs coordenadas inseridas serão guardadas como pontos adicionais dessa cache. Se não precisar mais dessas coordenadas pode, de forma segura, eliminar esta cache ou quaisquer dos seus pontos adicionais. Também pode mover esta cache para qualquer lista à sua escolha.</string>
     <string name="init_longtap_map">Toque sem soltar no mapa</string>
+    <string name="init_summary_longtap_map">Activa o toque sem soltar no ícone do mapa (cria uma rota individual) ou no espaço livre do mapa (cria uma cache / ponto adicional definidos pelo utilizador)</string>
+    <string name="onetime_info_longtap_disabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está desactivada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
+    <string name="onetime_info_longtap_enabled">Ao manter premido o toque no mapa pode criar rotas individuais e caches / pontos adicionais definidos pelo utilizador.\n\nActualmente a função \"toque sem soltar no mapa\" está activada.\n\nPode alterar isso em Definições → Mapa → Comportamento do mapa</string>
     <string name="goto_targets_list">Caches internas</string>
     <string name="clear_goto_history_title">Limpar o histórico de \'Ir para\'</string>
     <string name="clear_goto_history">Esta acção irá eliminar os pontos adicionais antigos exceptuando os cinco mais recentes</string>
@@ -2485,6 +2488,7 @@
     <string name="rtl_power_water">energia (água)</string>
     <string name="rtl_power_wind">energia (vento)</string>
     <string name="rtl_wastewater_plant">planta de águas residuais</string>
+    <string name="rtl_water_works">água potável</string>
     <string name="rtl_watermill">moinho de água</string>
     <string name="rtl_weir">presa</string>
     <string name="rtl_windmill">moinho de vento</string>
@@ -2527,6 +2531,9 @@
     <string name="rtl_oneway_cycle">sentido único (ciclovia)</string>
     <string name="rtl_oneway_cycle_rev">sentido único (ciclovia, reversível)</string>
     <string name="rtl_oneway_rev">sentido único (reversível)</string>
+    <string name="rtl_peak_small">pequeno cume</string>
+    <string name="rtl_rapids">corredeira</string>
+    <string name="rtl_rungs">postos</string>
     <string name="rtl_safety_rope">corda de segurança</string>
     <string name="rtl_stone">pedra</string>
     <string name="rtl_traffic_signal">sinal de tráfego</string>
