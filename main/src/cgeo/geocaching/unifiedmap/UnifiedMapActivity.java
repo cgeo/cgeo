@@ -1,5 +1,6 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.CgeoApplication;
 import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
@@ -25,6 +26,7 @@ import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
 import cgeo.geocaching.utils.CompactIconModeUtils;
 import cgeo.geocaching.utils.HistoryTrackUtils;
+import cgeo.geocaching.utils.ImageUtils;
 import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
@@ -32,12 +34,16 @@ import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
 
@@ -62,6 +68,11 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
+
+    // rotation indicator
+    protected Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
+    protected int rotationWidth = rotationIndicator.getWidth();
+    protected int rotationHeight = rotationIndicator.getHeight();
 
     // class: update location
     private static class UpdateLoc extends GeoDirHandler {
@@ -240,6 +251,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                     }
                 }
                 if (currentMapPosition.bearing != old.bearing) {
+                    repaintRotationIndicator(currentMapPosition.bearing);
                     Log.e("bearing change from " + old.bearing + " to " + currentMapPosition.bearing);
                 }
             });
@@ -268,6 +280,23 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private void initFollowMyLocationButton() {
         if (followMyLocationItem != null) {
             followMyLocationItem.setIcon(followMyLocation ? R.drawable.ic_menu_mylocation : R.drawable.ic_menu_mylocation_off);
+        }
+    }
+
+    protected void repaintRotationIndicator(final float bearing) {
+        if (!tileProvider.getMap().usesOwnBearingIndicator) {
+            final ImageView compassrose = findViewById(R.id.bearingIndicator);
+            if (bearing == 0.0f) {
+                compassrose.setImageBitmap(null);
+            } else {
+                final Matrix matrix = new Matrix();
+                matrix.setRotate(bearing, rotationWidth / 2.0f, rotationHeight / 2.0f);
+                compassrose.setImageBitmap(Bitmap.createBitmap(rotationIndicator, 0, 0, rotationWidth, rotationHeight, matrix, true));
+                compassrose.setOnClickListener(v -> {
+                    tileProvider.getMap().setBearing(0.0f);
+                    repaintRotationIndicator(0.0f);
+                });
+            }
         }
     }
 
