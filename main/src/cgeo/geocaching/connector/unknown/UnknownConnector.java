@@ -56,4 +56,8 @@ public class UnknownConnector extends AbstractConnector {
         return null;
     }
 
+    @Override
+    public boolean supportsSettingFoundState() {
+        return true;
+    }
 }
