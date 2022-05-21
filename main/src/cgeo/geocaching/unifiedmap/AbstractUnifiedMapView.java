@@ -21,6 +21,7 @@ public abstract class AbstractUnifiedMapView<T> {
     protected int delayedZoomTo = -1;
     protected Geopoint delayedCenterTo = null;
     protected Runnable onMapReadyTasks = null;
+    protected boolean usesOwnBearingIndicator = true;
 
     public void init(final AppCompatActivity activity, final int delayedZoomTo, @Nullable final Geopoint delayedCenterTo, final Runnable onMapReadyTasks) {
         mapRotation = Settings.getMapRotation();
