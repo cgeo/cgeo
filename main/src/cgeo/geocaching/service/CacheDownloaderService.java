@@ -16,6 +16,7 @@ import android.app.Activity;
 import android.app.PendingIntent;
 import android.content.Intent;
 import android.os.Build;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.core.app.NotificationCompat;
@@ -70,6 +71,8 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
         }
         intent.putExtra(REDOWNLOAD, forceRedownload);
         ContextCompat.startForegroundService(context, intent);
+
+        Toast.makeText(context, R.string.download_started, Toast.LENGTH_LONG).show();
     }
 
     public static void requestStopService() {
@@ -110,7 +113,7 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
             int cachesDownloaded = 0;
             while (cachesDownloaded < geocodes.size() && !shouldStop) {
                 notification.setProgress(geocodes.size(), cachesDownloaded, false);
-                notification.setContentText(geocodes.get(cachesDownloaded));
+                notification.setContentText(cachesDownloaded + "/" + geocodes.size());
                 updateForegroundNotification();
 
                 final Set<Integer> combinedListIds = new HashSet<>(listIds);
