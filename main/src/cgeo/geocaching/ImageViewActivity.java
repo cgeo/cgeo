@@ -458,7 +458,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         intent.putExtra(PARAM_IMAGE_CONTEXT_CODE, contextCode);
         intent.putExtra(PARAM_IMAGE_LIST, new ArrayList<>(images));
         intent.putExtra(PARAM_IMAGE_LIST_POS, pos);
-        if (getImageView == null) {
+        if (getImageView == null || getImageView.call(pos) == null) {
             activity.startActivity(intent);
         } else {
             activity.setExitSharedElementCallback(new SharedElementCallback() {
