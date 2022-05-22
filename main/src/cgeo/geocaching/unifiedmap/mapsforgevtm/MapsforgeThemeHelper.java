@@ -12,6 +12,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.storage.extension.OneTimeDialogs;
 import cgeo.geocaching.ui.dialog.Dialogs;
+import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
 import cgeo.geocaching.utils.LocalizationUtils;
@@ -112,28 +113,19 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         this.sharedPreferences = PreferenceManager.getDefaultSharedPreferences(activity);
     }
 
-    protected void reapplyMapTheme(final Map map) {
+    protected void reapplyMapTheme(final Map map, final AbstractTileProvider tileProvider) {
         if (mTheme != null) {
             disposeTheme();
         }
-
-/* @todo
-        if (tileLayer == null || tileLayer.getTileLayer() == null) {
+        if (!tileProvider.supportsThemes()) {
             return;
         }
 
-        if (!tileLayer.hasThemes()) {
-            tileLayer.getTileLayer().requestRedraw();
-            return;
-        }
-
-        //final TileRendererLayer rendererLayer = (TileRendererLayer) tileLayer.getTileLayer();
-*/
         //try to apply stored value
         ThemeData selectedTheme = setSelectedMapThemeInternal(Settings.getSelectedMapRenderTheme());
 
         if (selectedTheme == null) {
-            applyDefaultTheme(map);
+            applyDefaultTheme(map, tileProvider);
         } else {
             try {
                 //get the theme
@@ -150,12 +142,12 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
             } catch (final IOException e) {
                 Log.w("Failed to set render theme", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_file_unreadable));
-                applyDefaultTheme(map);
+                applyDefaultTheme(map, tileProvider);
                 selectedTheme = null;
             } catch (final Exception e) {
                 Log.w("render theme invalid", e);
                 ActivityMixin.showApplicationToast(LocalizationUtils.getString(R.string.err_rendertheme_invalid));
-                applyDefaultTheme(map);
+                applyDefaultTheme(map, tileProvider);
                 selectedTheme = null;
             }
         }
@@ -165,8 +157,10 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         map.render();
     }
 
-    private void applyDefaultTheme(final Map map) {
-        mTheme = map.setTheme(VtmThemes.OSMARENDER);
+    private void applyDefaultTheme(final Map map, final AbstractTileProvider tileProvider) {
+        if (tileProvider.supportsThemes()) {
+            mTheme = map.setTheme(VtmThemes.OSMARENDER);
+        }
         applyScales(Settings.RENDERTHEMESCALE_DEFAULTKEY);
     }
 
@@ -224,7 +218,10 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         return xmlRenderTheme;
     }
 
-    protected void selectMapTheme(final Activity activity, final Map map) {
+    protected void selectMapTheme(final Activity activity, final Map map, final AbstractTileProvider tileProvider) {
+        if (!tileProvider.supportsThemes()) {
+            return;
+        }
         final String currentThemeId = Settings.getSelectedMapRenderTheme();
 
         final List<String> names = new ArrayList<>();
@@ -245,14 +242,18 @@ class MapsforgeThemeHelper implements XmlRenderThemeMenuCallback {
         builder.setSingleChoiceItems(names.toArray(new String[0]), currentItem, (dialog, newItem) -> {
             // Adjust index because of <default> selection
             setSelectedTheme(newItem > 0 ? selectableAvThemes.get(newItem - 1) : null);
-            reapplyMapTheme(map);
+            reapplyMapTheme(map, tileProvider);
             dialog.cancel();
         });
 
         builder.show();
     }
 
-    public void selectMapThemeOptions(final Activity activity) {
+    public void selectMapThemeOptions(final Activity activity, final AbstractTileProvider tileProvider) {
+        if (!tileProvider.supportsThemes()) {
+            return;
+        }
+
         final Intent intent = new Intent(activity, MapsforgeThemeSettings.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         if (themeOptionsAvailable() && themeStyleMenu != null) {
