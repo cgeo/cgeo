@@ -55,6 +55,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String BUNDLE_ROUTE = "route";
+    private static final String BUNDLE_MAPTYPE = "maptype";
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
@@ -68,6 +69,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private IndividualRoute individualRoute = null;
     private Tracks tracks = null;
     private UnifiedMapPosition currentMapPosition = new UnifiedMapPosition();
+    private UnifiedMapType mapType = null;
 
     // rotation indicator
     protected Bitmap rotationIndicator = ImageUtils.convertToBitmap(ResourcesCompat.getDrawable(CgeoApplication.getInstance().getResources(), R.drawable.bearing_indicator, null));
@@ -173,7 +175,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
-//            mapOptions.mapState = savedInstanceState.getParcelable(BUNDLE_MAP_STATE);
+            if (savedInstanceState.containsKey(BUNDLE_MAPTYPE)) {
+                mapType = savedInstanceState.getParcelable(BUNDLE_MAPTYPE);
+            }
 //            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
 //            followMyLocation = mapOptions.mapState.followsMyLocation();
@@ -185,6 +189,10 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 //            }
             individualRoute = null;
 //            proximityNotification = Settings.isGeneralProximityNotificationActive() ? new ProximityNotification(true, false) : null;
+        }
+        // make sure we have a defined mapType
+        if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
+            mapType = UnifiedMapType.getPlainMap();
         }
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
@@ -480,7 +488,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         outState.putBundle(STATE_ROUTETRACKUTILS, routeTrackUtils.getState());
 
 //        final MapState state = prepareMapState();
-//        outState.putParcelable(BUNDLE_MAP_STATE, state);
+        outState.putParcelable(BUNDLE_MAPTYPE, mapType);
 //        if (proximityNotification != null) {
 //            outState.putParcelable(BUNDLE_PROXIMITY_NOTIFICATION, proximityNotification);
 //        }
