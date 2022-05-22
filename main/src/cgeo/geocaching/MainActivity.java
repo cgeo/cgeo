@@ -14,6 +14,7 @@ import cgeo.geocaching.downloader.DownloaderUtils;
 import cgeo.geocaching.enumerations.QuickLaunchItem;
 import cgeo.geocaching.helper.UsefulAppsActivity;
 import cgeo.geocaching.location.Geopoint;
+import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.location.Units;
 import cgeo.geocaching.maps.mapsforge.v6.RenderThemeHelper;
 import cgeo.geocaching.models.Download;
@@ -106,7 +107,10 @@ public class MainActivity extends AbstractBottomNavigationActivity {
      */
     private SearchView searchView;
     private MenuItem searchItem;
+
     private Geopoint addCoords = null;
+    private Geopoint currentCoords = null;
+
     private boolean initialized = false;
     private boolean restoreMessageShown = false;
 
@@ -229,7 +233,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                 binding.navAccuracy.setText(null);
             }
 
-            final Geopoint currentCoords = geo.getCoords();
+            currentCoords = geo.getCoords();
             if (Settings.isShowAddress()) {
                 if (addCoords == null) {
                     binding.navLocation.setText(R.string.loc_no_addr);
@@ -322,6 +326,11 @@ public class MainActivity extends AbstractBottomNavigationActivity {
                     SimpleDialog.of(this).setTitle(R.string.warn_notloggedin_title).setMessage(R.string.warn_notloggedin_long).setButtons(SimpleDialog.ButtonTextSet.YES_NO).confirm((dialog, which) -> SettingsActivity.openForScreen(R.string.preference_screen_services, this)));
 
             binding.locationArea.setOnClickListener(v -> openNavSettings());
+            binding.locationArea.setOnLongClickListener(v -> {
+                ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(currentCoords.toString()));
+                showToast(R.string.loc_copied_clipboard);
+                return true;
+            });
 
             //do file migrations if necessary
             LocalStorage.migrateLocalStorage(this);
@@ -707,7 +716,7 @@ public class MainActivity extends AbstractBottomNavigationActivity {
         return StringUtils.join(addressParts, ", ");
     }
 
-    public void openNavSettings() {
+    private void openNavSettings() {
         startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
     }
 
