@@ -60,12 +60,14 @@ import androidx.appcompat.view.ActionMode;
 import androidx.core.text.HtmlCompat;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class TrackableActivity extends TabbedViewPagerActivity implements AndroidBeam.ActivitySharingInterface {
@@ -661,7 +663,13 @@ public class TrackableActivity extends TabbedViewPagerActivity implements Androi
 
                 trackableImage.setImageResource(R.drawable.image_not_loaded);
                 trackableImage.setClickable(true);
-                trackableImage.setOnClickListener(view -> ShareUtils.openUrl(activity, trackable.getImage()));
+
+                if (Settings.enableFeatureNewImageGallery()) {
+                    trackableImage.setOnClickListener(view -> ImageViewActivity.openImageView(activity, trackable.getGeocode(), Collections.singletonList(IterableUtils.find(trackable.getImages(), i -> trackable.getImage().equals(i.getUrl()))), 0, p -> view));
+                } else {
+                    trackableImage.setOnClickListener(view -> ShareUtils.openUrl(activity, trackable.getImage()));
+                }
+
 
                 AndroidRxUtils.bindActivity(activity, new HtmlImage(activity.geocode, true, false, false).fetchDrawable(trackable.getImage())).subscribe(trackableImage::setImageDrawable);
 
