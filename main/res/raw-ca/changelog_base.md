@@ -34,3 +34,5 @@
 - Nou: S'ha actualitzat l'encaminament intern a BRouter v1.6.3
 - Nou: limiteu la necessitat d'utilitzar repetitivament la clau enrere iniciant una nova pila d'activitats quan canvieu a una altra part de l'aplicació
 - Nou: Afegit la configuració per desxifrar la pista del catxé de manera predeterminada (en lloc de només quan hi toqueu)
+- New: Support setting caches from unknown source as found locally
+- Removed: Geolutin trackable service as it was discontinued
