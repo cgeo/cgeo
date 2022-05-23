@@ -150,16 +150,16 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             throw e;
         }
         onCreateCommon();
-        registerReceiver(finisBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
+        LocalBroadcastManager.getInstance(this).registerReceiver(finisBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
     }
 
     public void clearBackStack() {
-        sendBroadcast(new Intent(ACTION_CLEAR_BACKSTACK));
+        LocalBroadcastManager.getInstance(this).sendBroadcast(new Intent(ACTION_CLEAR_BACKSTACK));
     }
 
     @Override
     protected void onDestroy() {
-        unregisterReceiver(finisBroadcastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(finisBroadcastReceiver);
         super.onDestroy();
     }
 

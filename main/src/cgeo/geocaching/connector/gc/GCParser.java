@@ -1618,6 +1618,7 @@ public final class GCParser {
                     final Image logImage = new Image.Builder()
                             .setUrl(matcherLogImages.group(1))
                             .setTitle(matcherLogImages.group(2))
+                            .setCategory(Image.ImageCategory.LOG)
                             .build();
                     logDoneBuilder.addLogImage(logImage);
                 }

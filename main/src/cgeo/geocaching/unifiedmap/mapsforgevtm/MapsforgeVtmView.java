@@ -44,7 +44,6 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     private View rootView;
     private Map mMap;
 
-    protected AbstractMapsforgeTileProvider tileProvider;
     protected TileLayer baseMap;
     protected final ArrayList<Layer> layers = new ArrayList<>();
     protected Map.UpdateListener mapUpdateListener;
@@ -165,14 +164,13 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
     @Override
     public void setTileSource(final AbstractTileProvider newSource) {
         super.setTileSource(newSource);
-        tileProvider = (AbstractMapsforgeTileProvider) newSource;
-        tileProvider.addTileLayer(mMap);
+        ((AbstractMapsforgeTileProvider) currentTileProvider).addTileLayer(mMap);
         startMap();
     }
 
     @Override
     public void setPreferredLanguage(final String language) {
-        tileProvider.setPreferredLanguage(language);
+        currentTileProvider.setPreferredLanguage(language);
         mMap.clearMap();
     }
 
@@ -209,17 +207,17 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
 
     @Override
     public void selectTheme(final Activity activity) {
-        themeHelper.selectMapTheme(activity, mMap);
+        themeHelper.selectMapTheme(activity, mMap, currentTileProvider);
     }
 
     @Override
     public void selectThemeOptions(final Activity activity) {
-        themeHelper.selectMapThemeOptions(activity);
+        themeHelper.selectMapThemeOptions(activity, currentTileProvider);
     }
 
     @Override
     public void applyTheme() {
-        themeHelper.reapplyMapTheme(mMap);
+        themeHelper.reapplyMapTheme(mMap, currentTileProvider);
     }
 
     // ========================================================================
