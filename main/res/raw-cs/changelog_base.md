@@ -35,4 +35,4 @@
 - Novinka: Omezení nutnosti opakovaného používání klávesy zpět spuštěním nového zásobníku aktivit při přechodu do jiné části aplikace
 - Novinka: Přidáno nastavení pro dešifrování nápovědy ke kešce ve výchozím nastavení (místo pouze při klepnutí na ni)
 - New: Support setting caches from unknown source as found locally
-- Removed: Geolutin trackable service as it was discontinued
+- Odstraněno: Skladovací služba Geolutin, protože byla ukončena
