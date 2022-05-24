@@ -315,6 +315,7 @@
     <string name="loc_trying">Proberen te lokaliseren</string>
     <string name="loc_no_addr">Adres onbekend</string>
     <string name="loc_gps_disabled">GPS uitgeschakeld</string>
+    <string name="loc_copied_clipboard">Huidige locatie is gekopieerd naar klembord</string>
     <string name="menu_centerposition">Centreer op mijn positie</string>
     <!-- standard menu -->
     <string name="menu_about">Over c:geo</string>
