@@ -315,6 +315,7 @@
     <string name="loc_trying">Lokalisierung</string>
     <string name="loc_no_addr">Adresse unbekannt</string>
     <string name="loc_gps_disabled">GPS nicht aktiv</string>
+    <string name="loc_copied_clipboard">Aktuelle Position wurde in die Zwischenablage kopiert</string>
     <string name="menu_centerposition">Zentriere meine Position</string>
     <!-- standard menu -->
     <string name="menu_about">Über c:geo</string>
