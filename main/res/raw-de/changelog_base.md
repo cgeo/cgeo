@@ -34,3 +34,5 @@
 - Neu: Internes Routing auf BRouter v1.6.3 aktualisiert
 - Neu: Begrenzen der Notwendigkeit der wiederholten Verwendung der Zurück-Taste durch das Starten eines neuen Aktivitätsstapels, wenn zu einem anderen Teil der App gewechselt wird
 - Neu: Einstellung hinzugefügt, um den Cache-Hinweis standardmäßig zu entschlüsseln (statt nur nach Tippen darauf)
+- Neu: Caches aus unbekannten Quellen als gefunden markieren
+- Entfernt: Geolutin Trackable-Service, da er eingestellt wurde
