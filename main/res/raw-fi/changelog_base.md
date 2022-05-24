@@ -34,5 +34,5 @@
 - Uusi: Päivitetty sisäinen reititys BRouter v1.6.3
 - Uusi: Rajoita toistuvan paluunapin käytön tarvetta aloittamalla uusi aktiviteettipino siirryttäessä sovelluksen toiseen osaan
 - Uusi: Lisää asetus salauksen purkamiseen oletusarvoisesti (sen sijaan että vain napauttamalla sitä)
-- New: Support setting caches from unknown source as found locally
-- Removed: Geolutin trackable service as it was discontinued
+- Uusi: Tue tuntemattomasta lähteestä peräisin olevien kätköjen merkkaamista löydetyksi paikallisesti
+- Poistettu: Geolutin-matkaajapalvelu koska se on lopetettu
