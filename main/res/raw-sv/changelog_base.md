@@ -34,3 +34,5 @@
 - Nytt: Uppdaterad intern routing till BRouter v1.6.3
 - New: Limit the need of repetitive back key usage by starting a new activity stack when changing to another part of the app
 - New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
+- New: Support setting caches from unknown source as found locally
+- Removed: Geolutin trackable service as it was discontinued
