@@ -315,6 +315,7 @@
     <string name="loc_trying">Zjišťování pozice</string>
     <string name="loc_no_addr">Neznámá adresa</string>
     <string name="loc_gps_disabled">GPS zakázáno</string>
+    <string name="loc_copied_clipboard">Aktuální poloha byla zkopírována do schránky</string>
     <string name="menu_centerposition">Vycentrovat na mou polohu</string>
     <!-- standard menu -->
     <string name="menu_about">O aplikaci</string>
