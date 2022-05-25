@@ -315,6 +315,7 @@
     <string name="loc_trying">Προσπάθεια εντοπισμού</string>
     <string name="loc_no_addr">Άγνωστη διεύθυνση</string>
     <string name="loc_gps_disabled">Το GPS είναι απενεργοποιημένο</string>
+    <string name="loc_copied_clipboard">Η τρέχουσα θέση σας έχει αντιγραφεί στο πρόχειρο</string>
     <string name="menu_centerposition">Με κέντρο τη θέση μου</string>
     <!-- standard menu -->
     <string name="menu_about">Σχετικά με το c:geo</string>
