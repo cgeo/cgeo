@@ -336,7 +336,7 @@
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
-    <string name="any_button">Navigovat na</string>
+    <string name="any_button">Přejít na</string>
     <string name="unknown_scan">Ve výsledku vyhledávání nenalezen žádný geokód.</string>
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>
@@ -1351,8 +1351,8 @@
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
-    <string name="internal_goto_targets_title">Cíle „Navigovat na“</string>
-    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Navigovat na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Navigovat na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
+    <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
+    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku / trasový bod)</string>
     <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešk / trasové body.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
