@@ -315,6 +315,7 @@
     <string name="loc_trying">Yritetään paikantaa</string>
     <string name="loc_no_addr">Tuntematon osoite</string>
     <string name="loc_gps_disabled">GPS ei käytössä</string>
+    <string name="loc_copied_clipboard">Nykyinen sijainti kopioitiin leikepöydälle</string>
     <string name="menu_centerposition">Keskitä omaan sijaintiini</string>
     <!-- standard menu -->
     <string name="menu_about">Tietoja c:geosta</string>
