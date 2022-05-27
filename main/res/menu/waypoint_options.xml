@@ -47,5 +47,9 @@
         android:id="@+id/menu_waypoint_caches_around"
         android:title="@string/cache_menu_around">
     </item>
+    <item
+        android:id="@+id/menu_waypoint_open_geochecker"
+        android:title="@string/waypoint_open_geochecker">
+    </item>
 
 </menu>
