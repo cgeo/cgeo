@@ -2860,7 +2860,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 userModifiedWaypoints.add(w);
             }
         }
-        if (userModifiedWaypoints.isEmpty()) {
+        if (userModifiedWaypoints.isEmpty() && cache.getVariables().isEmpty()) {
             showShortToast(getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
             return;
         }
