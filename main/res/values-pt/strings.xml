@@ -315,6 +315,7 @@
     <string name="loc_trying">A tentar localizar</string>
     <string name="loc_no_addr">Endereço desconhecido</string>
     <string name="loc_gps_disabled">GPS desactivado</string>
+    <string name="loc_copied_clipboard">A localização actual foi copiada para a área de transferência</string>
     <string name="menu_centerposition">Centrar na minha posição</string>
     <!-- standard menu -->
     <string name="menu_about">Acerca do c:geo</string>
