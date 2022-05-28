@@ -10,7 +10,6 @@ import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
-import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -54,8 +53,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public class ImageViewActivity extends AbstractActionBarActivity {
 
-    private static final String TRANSITION_ID = "image_transition";
-    private static final String TRANSITION_ID_BACK = "image_transition_back";
+    private static final String TRANSITION_ID = "image_transition_";
 
     private static final String PARAM_IMAGE_LIST = "param_image_list";
     private static final String PARAM_IMAGE_LIST_POS = "param_image_list_pos";
@@ -69,6 +67,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     private final ArrayList<Image> imageList = new ArrayList<>();
     private int imagePos = 0;
+    private int startImagePos = 0;
     private String imageContextCode = "shared";
     private boolean fullImageView = false;
     private boolean showImageInformation = true;
@@ -215,21 +214,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         enableViewTransitions(this);
         postponeEnterTransition();
         transactionEnterActive = true;
-        setEnterSharedElementCallback(new SharedElementCallback() {
 
+        setEnterSharedElementCallback(new SharedElementCallback() {
             public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
-                Log.i("enter");
-                final ImageView imageView = imageAdapter.getCurrentBinding().imageFull;
-                sharedElements.clear();
                 if (transactionEnterActive) {
-                    imageView.setTransitionName(TRANSITION_ID);
-                    sharedElements.put(TRANSITION_ID, imageView);
                     return;
                 }
-                imageView.setTransitionName(TRANSITION_ID_BACK + imagePos);
                 names.clear();
-                names.add(TRANSITION_ID_BACK + imagePos);
-                sharedElements.put(TRANSITION_ID_BACK + imagePos, imageAdapter.getCurrentBinding().imageFull);
+                names.add(getTransitionNameForIndex(imagePos));
+                sharedElements.clear();
+                sharedElements.put(getTransitionNameForIndex(imagePos), imageAdapter.getCurrentBinding().imageFull);
+
             }
         });
 
@@ -266,6 +261,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             showImageInformation = savedInstanceState.getBoolean(PARAM_SHOWIMAGEINFO, true);
         }
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
+        startImagePos = imagePos;
 
         imageCache.setCode(imageContextCode);
 
@@ -318,16 +314,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @SuppressLint("ClickableViewAccessibility") //this is due to Loupe hack
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private void loadImageView(final int imagePos, final ImageviewImageBinding binding) {
-        final Image currentImage = imageList.get(imagePos);
+    private void loadImageView(final int loadImagePos, final ImageviewImageBinding binding) {
+        final Image currentImage = imageList.get(loadImagePos);
         if (currentImage == null) {
             binding.imageviewHeadline.setVisibility(View.INVISIBLE);
             binding.imageFull.setVisibility(View.GONE);
             return;
         }
         setFullImageViewOnOff(binding, fullImageView);
-        binding.imageviewPosition.setText((imagePos + 1) + " / " + imageList.size());
+        binding.imageviewPosition.setText((loadImagePos + 1) + " / " + imageList.size());
         binding.imageviewCategory.setText(currentImage.category.getI18n());
+        binding.imageFull.setTransitionName(getTransitionNameForIndex(loadImagePos));
 
         final List<CharSequence> imageInfos = new ArrayList<>();
         if (!StringUtils.isEmpty(currentImage.title)) {
@@ -354,8 +351,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         imageCache.loadImage(currentImage.getUrl(), p -> {
             binding.imageFull.setImageDrawable(p.first);
             binding.imageFull.setVisibility(View.VISIBLE);
-            startPostponedEnterTransition();
-            transactionEnterActive = false;
 
             final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
             final String comment = MetadataUtils.getComment(p.second);
@@ -423,7 +418,20 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             });
             //Workaround END
 
-        }, () -> binding.imageFull.setVisibility(View.GONE));
+            //trigger enter transition if this is start
+            if (loadImagePos == startImagePos) {
+                startPostponedEnterTransition();
+                transactionEnterActive = false;
+            }
+
+        }, () -> {
+            binding.imageFull.setVisibility(View.GONE);
+            //trigger enter transition if this is start
+            if (loadImagePos == startImagePos) {
+                startPostponedEnterTransition();
+                transactionEnterActive = false;
+            }
+        });
 
     }
 
@@ -461,27 +469,31 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         if (getImageView == null || getImageView.call(pos) == null) {
             activity.startActivity(intent);
         } else {
-            activity.setExitSharedElementCallback(new SharedElementCallback() {
-
-                public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
-                    Log.i("exit");
-                    if (names == null || names.isEmpty() || !names.get(0).startsWith(TRANSITION_ID_BACK)) {
-                        return;
-                    }
-                    final int pos = Integer.parseInt(names.get(0).substring(TRANSITION_ID_BACK.length()));
-                    final View targetView = getImageView.call(pos);
-                    if (targetView != null) {
-                        targetView.setTransitionName(names.get(0));
-                        sharedElements.clear();
-                        sharedElements.put(names.get(0), targetView);
-                    }
-                }
-            });
+            registerActivity(activity, getImageView);
             final View posImageView = getImageView.call(pos);
-            posImageView.setTransitionName(TRANSITION_ID);
+            //posImageView.setTransitionName(TRANSITION_ID);
             activity.startActivity(intent,
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
         }
+    }
+
+    public static String getTransitionNameForIndex(final int idx) {
+        return TRANSITION_ID + idx;
+    }
+
+    public static void registerActivity(final Activity activity, final Func1<Integer, View> getImageView) {
+
+        activity.setExitSharedElementCallback(new SharedElementCallback() {
+
+            public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
+                if (names.size() == 1 && sharedElements.isEmpty()) {
+                    final int pos = Integer.valueOf(names.get(0).substring(TRANSITION_ID.length()));
+                    final View v = getImageView.call(pos);
+                    sharedElements.clear();
+                    sharedElements.put(names.get(0), v);
+                }
+            }
+        });
     }
 
     /** sets properties for activity to enable smooth image transation between master/list and detail activity */

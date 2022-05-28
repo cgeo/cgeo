@@ -2326,6 +2326,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             return CachedetailImagegalleryPageBinding.inflate(inflater, container, false);
         }
 
+
         @Override
         public long getPageId() {
             return Page.IMAGEGALLERY.id;

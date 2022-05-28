@@ -755,6 +755,7 @@ public final class ImageUtils {
     public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images) {
         imageGallery.clear();
         imageGallery.setup(geocode);
+        imageGallery.registerActivity();
         if (geocode != null) {
             imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
         }
