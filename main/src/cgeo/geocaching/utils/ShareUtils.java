@@ -155,6 +155,28 @@ public class ShareUtils {
     }
 
     /**
+     * opens system's standard viewer for content.
+     * This method is explicitely designed for uris pointing to content/files, not for http/browser-Uris
+     **/
+    public static void openContentForView(final Context context, final String url) {
+
+        final Uri uri = Uri.parse(url);
+
+        final Intent viewIntent = new Intent(Intent.ACTION_VIEW);
+
+        try {
+            //mimeType must be set explicitely, otherwise some apps have problems e.g. Google Sheets with xlsx or csv files
+            viewIntent.setDataAndType(uri, UriUtils.getMimeType(uri));
+
+            viewIntent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_ACTIVITY_NEW_TASK);
+            context.startActivity(viewIntent);
+        } catch (final ActivityNotFoundException e) {
+            Log.e("Cannot find suitable activity for URL '" + url + "'", e);
+            ActivityMixin.showToast(context, R.string.err_application_no);
+        }
+    }
+
+    /**
      * Opens a URL in browser, in the registered default application or if activated by the user in the settings with customTabs
      */
     public static void openUrl(final Context context, final String url, final boolean forceIntentChooser) {

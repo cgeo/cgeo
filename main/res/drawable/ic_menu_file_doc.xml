@@ -1,0 +1,11 @@
+<!-- taken from docs / materialdesignicons-google -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48"
+    android:tint="?android:textColorPrimary">
+  <path
+      android:fillColor="@android:color/white"
+      android:pathData="M36,44H12Q10.35,44 9.175,42.825Q8,41.65 8,40V8Q8,6.35 9.175,5.175Q10.35,4 12,4H28L40,16V40Q40,41.65 38.825,42.825Q37.65,44 36,44ZM26,18V8H12V40H36V18ZM12,18V8V40ZM16,26H32V22H16ZM16,32H32V28H16ZM16,38H26V34H16Z"/>
+</vector>

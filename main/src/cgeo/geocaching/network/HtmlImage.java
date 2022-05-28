@@ -76,6 +76,8 @@ public class HtmlImage implements Html.ImageGetter {
     };
     public static final String SHARED = "shared";
 
+    public static final ImmutablePair<BitmapDrawable, Metadata> IMAGE_ERROR_DATA = new ImmutablePair<>(null, null);
+
     @NonNull private final String geocode;
     /**
      * on error: return large error image, if {@code true}, otherwise empty 1x1 image
@@ -194,7 +196,7 @@ public class HtmlImage implements Html.ImageGetter {
     }
 
     public Observable<BitmapDrawable> fetchDrawable(final String url) {
-        return fetchDrawableWithMetadata(url).map(p -> p.left);
+        return fetchDrawableWithMetadata(url).map(p -> p.left == null ? getErrorImage() : p.left);
     }
 
     public Observable<ImmutablePair<BitmapDrawable, Metadata>> fetchDrawableWithMetadata(final String url) {
@@ -217,7 +219,8 @@ public class HtmlImage implements Html.ImageGetter {
         if (FileUtils.isFileUrl(url)) {
             return Observable.defer(() -> {
                 final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(FileUtils.urlToFile(url), true);
-                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) : Observable.empty();
+                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) :
+                        Observable.just(IMAGE_ERROR_DATA);
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
         // Content Uris are also loaded regardless of their age (needed for spoiler images)
@@ -225,7 +228,8 @@ public class HtmlImage implements Html.ImageGetter {
         if (UriUtils.isContentUri(uri)) {
             return Observable.defer(() -> {
                 final ImmutableTriple<Bitmap, Metadata, Boolean> data = loadCachedImage(uri, true, -1);
-                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) : Observable.empty();
+                return data != null && data.left != null ? Observable.just(ImmutablePair.of(ImageUtils.scaleBitmapToFitDisplay(data.left), data.middle)) :
+                        Observable.just(IMAGE_ERROR_DATA);
             }).subscribeOn(AndroidRxUtils.computationScheduler);
         }
 
@@ -286,14 +290,19 @@ public class HtmlImage implements Html.ImageGetter {
                     if (image != null) {
                         emitter.onNext(ImmutablePair.of(image, loaded.middle));
                     } else {
-                        emitter.onNext(returnErrorImage ?
-                                ImmutablePair.of(new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded)), null) :
-                                ImmutablePair.of(ImageUtils.getTransparent1x1Drawable(resources), null));
+                        emitter.onNext(ImmutablePair.of(getErrorImage(), null));
                     }
                     emitter.onComplete();
                 });
             }
         });
+    }
+
+    private BitmapDrawable getErrorImage() {
+        if (returnErrorImage) {
+            return new BitmapDrawable(resources, BitmapFactory.decodeResource(resources, R.drawable.image_not_loaded));
+        }
+        return ImageUtils.getTransparent1x1Drawable(resources);
     }
 
     protected ImmutableTriple<BitmapDrawable, Metadata, Boolean> scaleImage(final ImmutableTriple<Bitmap, Metadata, Boolean> loadResult) {
@@ -453,7 +462,7 @@ public class HtmlImage implements Html.ImageGetter {
         }
         final Bitmap image = BitmapFactory.decodeStream(imageStream, null, bfOptions);
         if (image == null) {
-            Log.e("Cannot decode bitmap from " + uri);
+            Log.w("Cannot decode bitmap from " + uri);
             return ImmutableTriple.of((Bitmap) null, null, false);
         }
         Metadata metadata = null;

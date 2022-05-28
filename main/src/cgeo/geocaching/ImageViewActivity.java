@@ -20,7 +20,6 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.AnimatorSet;
 import android.animation.ObjectAnimator;
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.SharedElementCallback;
 import android.content.Context;
@@ -30,13 +29,10 @@ import android.os.Bundle;
 import android.text.Html;
 import android.transition.Transition;
 import android.transition.TransitionInflater;
-import android.view.GestureDetector;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.core.app.ActivityOptionsCompat;
@@ -44,18 +40,20 @@ import androidx.viewpager.widget.PagerAdapter;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.igreenwood.loupe.Loupe;
 import org.apache.commons.lang3.StringUtils;
 
 public class ImageViewActivity extends AbstractActionBarActivity {
 
-    private static final String TRANSITION_ID = "image_transition_";
+    private static final String TRANSITION_ID_ENTER = "image_enter_transition_id";
+    private static final String TRANSITION_ID_EXIT = "image_exit_transition_id_";
 
     private static final String PARAM_IMAGE_LIST = "param_image_list";
+    private static final String PARAM_IMAGEDATA_LIST_SAVE = "param_image_list_save";
     private static final String PARAM_IMAGE_LIST_POS = "param_image_list_pos";
     private static final String PARAM_IMAGE_CONTEXT_CODE = "param_image_context_code";
     private static final String PARAM_FULLIMAGEVIEW = "param_full_image_view";
@@ -221,9 +219,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     return;
                 }
                 names.clear();
-                names.add(getTransitionNameForIndex(imagePos));
+                names.add(TRANSITION_ID_EXIT + imagePos);
                 sharedElements.clear();
-                sharedElements.put(getTransitionNameForIndex(imagePos), imageAdapter.getCurrentBinding().imageFull);
+                sharedElements.put(TRANSITION_ID_EXIT + imagePos, imageAdapter.getCurrentBinding().imageFull);
 
             }
         });
@@ -276,8 +274,15 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             setFinishResult();
             finishAfterTransition();
         });
-        mainBinding.imageOpenFile.setOnClickListener(v ->
-                ImageUtils.viewImageInStandardApp(ImageViewActivity.this, imageList.get(imagePos).getUri(), imageContextCode));
+        mainBinding.imageOpenFile.setOnClickListener(v -> {
+            final Image img = imageList.get(imagePos);
+
+            if (img.isImageUri()) {
+                ImageUtils.viewImageInStandardApp(ImageViewActivity.this, img.getUri(), imageContextCode);
+            } else {
+                ShareUtils.openContentForView(this, img.getUrl());
+            }
+        });
         mainBinding.imageOpenBrowser.setOnClickListener(v ->
                 ShareUtils.openUrl(ImageViewActivity.this, imageList.get(imagePos).getUrl(), true));
         mainBinding.imageShare.setOnClickListener(v ->
@@ -295,7 +300,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
     @Override
     protected void onSaveInstanceState(@NonNull final Bundle outState) {
         super.onSaveInstanceState(outState);
-        outState.putParcelableArrayList(PARAM_IMAGE_LIST, imageList);
+        outState.putParcelableArrayList(PARAM_IMAGEDATA_LIST_SAVE, imageList);
         outState.putString(PARAM_IMAGE_CONTEXT_CODE, imageContextCode);
         outState.putInt(PARAM_IMAGE_LIST_POS, imagePos);
         outState.putBoolean(PARAM_FULLIMAGEVIEW, fullImageView);
@@ -311,7 +316,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         }
     }
 
-    @SuppressLint("ClickableViewAccessibility") //this is due to Loupe hack
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
     private void loadImageView(final int loadImagePos, final ImageviewImageBinding binding) {
@@ -324,11 +328,13 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         setFullImageViewOnOff(binding, fullImageView);
         binding.imageviewPosition.setText((loadImagePos + 1) + " / " + imageList.size());
         binding.imageviewCategory.setText(currentImage.category.getI18n());
-        binding.imageFull.setTransitionName(getTransitionNameForIndex(loadImagePos));
 
         final List<CharSequence> imageInfos = new ArrayList<>();
         if (!StringUtils.isEmpty(currentImage.title)) {
-            imageInfos.add(Html.fromHtml("<b>" + currentImage.title + "</b>"));
+            imageInfos.add(Html.fromHtml("<b>" + currentImage.title + (currentImage.isImageUri() ? "" : " (" + currentImage.getMimeFileExtension() + ")") + "</b>"));
+        }
+        if (!currentImage.isImageUri()) {
+            imageInfos.add(Html.fromHtml("<b>MimeType:</b> " + currentImage.getMimeType()));
         }
         if (!StringUtils.isEmpty(currentImage.getDescription())) {
             imageInfos.add(Html.fromHtml(currentImage.getDescription()));
@@ -348,91 +354,62 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         });
         setInfoShowHide(binding, showImageInformation);
 
-        imageCache.loadImage(currentImage.getUrl(), p -> {
-            binding.imageFull.setImageDrawable(p.first);
-            binding.imageFull.setVisibility(View.VISIBLE);
+        if (!currentImage.isImageUri()) {
+            binding.imageFull.setImageResource(UriUtils.getMimeTypeIcon(currentImage.getMimeType()));
+            showImage(loadImagePos, binding);
+        } else {
+            imageCache.loadImage(currentImage.getUrl(), p -> {
 
-            final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
-            final String comment = MetadataUtils.getComment(p.second);
-            if (gp != null || !StringUtils.isBlank(comment)) {
-                final List<CharSequence> imageInfosNew = new ArrayList<>();
-                imageInfosNew.add(binding.imageviewInformationText.getText());
-                if (gp != null) {
-                    final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
-                    imageInfosNew.add(Html.fromHtml("<b>Geopoint:</b> <i>" + gpAsHtml + "</i>"));
-                }
-                if (!StringUtils.isBlank(comment)) {
-                    String commentInView = comment;
-                    if (comment.length() > 300) {
-                        commentInView = comment.substring(0, 280) + "...(" + comment.length() + " chars)";
+                binding.imageFull.setImageDrawable(p.first);
+
+                //enhance description with metadata
+                final Geopoint gp = MetadataUtils.getFirstGeopoint(p.second);
+                final String comment = MetadataUtils.getComment(p.second);
+                if (gp != null || !StringUtils.isBlank(comment)) {
+                    final List<CharSequence> imageInfosNew = new ArrayList<>();
+                    imageInfosNew.add(binding.imageviewInformationText.getText());
+                    if (gp != null) {
+                        final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
+                        imageInfosNew.add(Html.fromHtml("<b>Geopoint:</b> <i>" + gpAsHtml + "</i>"));
                     }
-                    imageInfosNew.add(Html.fromHtml("<b>Metadata Comment:</b> <i>" + commentInView + "</i>"));
-                }
-                binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
-                setInfoShowHide(binding, showImageInformation);
-
-            }
-
-            final Loupe loupe = new Loupe(binding.imageFull, binding.imageviewViewroot);
-            loupe.setOnViewTranslateListener(new Loupe.OnViewTranslateListener() {
-                @Override
-                public void onStart(@NonNull final ImageView imageView) {
-                    //empty on purpose
+                    if (!StringUtils.isBlank(comment)) {
+                        String commentInView = comment;
+                        if (comment.length() > 300) {
+                            commentInView = comment.substring(0, 280) + "...(" + comment.length() + " chars)";
+                        }
+                        imageInfosNew.add(Html.fromHtml("<b>Metadata Comment:</b> <i>" + commentInView + "</i>"));
+                    }
+                    binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
+                    setInfoShowHide(binding, showImageInformation);
                 }
 
-                @Override
-                public void onViewTranslate(@NonNull final ImageView imageView, final float v) {
-                    //empty on purpose
-                }
+                showImage(loadImagePos, binding);
 
-                @Override
-                public void onDismiss(@NonNull final ImageView imageView) {
-                    //close detail view on "fling down"
-                    setFinishResult();
-                    finishAfterTransition();
-                }
-
-                @Override
-                public void onRestore(@NonNull final ImageView imageView) {
-                    //empty on purpose
-                }
+            }, () -> {
+                binding.imageFull.setVisibility(View.GONE);
             });
+        }
 
-            //Loupe is unable to detect single clicks (see https://github.com/igreenwood/loupe/issues/25)
-            //As a workaround we register a second GestureDetector on top of the one installed by Loupe to detect single taps
-            //Workaround START
-            final GestureDetector singleTapDetector = new GestureDetector(this, new GestureDetector.SimpleOnGestureListener() {
-                @Override
-                public boolean onSingleTapConfirmed(final MotionEvent e) {
-                    //Logic to happen on single tap:
-                    imageAdapter.toggleFullImageView();
-                    return true;
-                }
-            });
-            //Registering an own touch listener overrides the TouchListener registered by Loupe
-            binding.imageviewViewroot.setOnTouchListener((v, event) -> {
-                //perform singleTap detection
-                singleTapDetector.onTouchEvent(event);
-                //pass through event to Loupe so it handles all other gestures correctly
-                return loupe.onTouch(v, event);
-            });
-            //Workaround END
+    }
 
-            //trigger enter transition if this is start
-            if (loadImagePos == startImagePos) {
-                startPostponedEnterTransition();
-                transactionEnterActive = false;
-            }
-
+    private void showImage(final int loadImagePos, final ImageviewImageBinding binding) {
+        binding.imageFull.setVisibility(View.VISIBLE);
+        ImageUtils.createZoomableImageView(this, binding.imageFull, binding.imageviewViewroot, () -> {
+            setFinishResult();
+            finishAfterTransition();
         }, () -> {
-            binding.imageFull.setVisibility(View.GONE);
-            //trigger enter transition if this is start
-            if (loadImagePos == startImagePos) {
-                startPostponedEnterTransition();
-                transactionEnterActive = false;
-            }
+            imageAdapter.toggleFullImageView();
         });
 
+        //trigger enter transition if this is start
+        if (loadImagePos == startImagePos) {
+            binding.imageFull.setTransitionName(TRANSITION_ID_ENTER);
+            //trigger transition for NEXT GUI cycle. If triggered immediately, ViewPager is not ready
+            binding.imageFull.post(() -> {
+                startPostponedEnterTransition();
+                transactionEnterActive = false;
+            });
+        }
     }
 
     private static void setInfoShowHide(final ImageviewImageBinding binding, final boolean show) {
@@ -460,6 +437,9 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         as.start();
     }
 
+    public static void openImageView(final Activity activity, final String contextCode, final Image image, final View imageView) {
+        openImageView(activity, contextCode, Collections.singleton(image), 0, p -> imageView);
+    }
 
     public static void openImageView(final Activity activity, final String contextCode, final Collection<Image> images, final int pos, final Func1<Integer, View> getImageView) {
         final Intent intent = new Intent(activity, ImageViewActivity.class);
@@ -469,25 +449,21 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         if (getImageView == null || getImageView.call(pos) == null) {
             activity.startActivity(intent);
         } else {
-            registerActivity(activity, getImageView);
+            registerCallerActivity(activity, getImageView);
             final View posImageView = getImageView.call(pos);
-            //posImageView.setTransitionName(TRANSITION_ID);
+            posImageView.setTransitionName(TRANSITION_ID_ENTER);
             activity.startActivity(intent,
                     ActivityOptionsCompat.makeSceneTransitionAnimation(activity, posImageView, posImageView.getTransitionName()).toBundle());
         }
     }
 
-    public static String getTransitionNameForIndex(final int idx) {
-        return TRANSITION_ID + idx;
-    }
-
-    public static void registerActivity(final Activity activity, final Func1<Integer, View> getImageView) {
+    public static void registerCallerActivity(final Activity activity, final Func1<Integer, View> getImageView) {
 
         activity.setExitSharedElementCallback(new SharedElementCallback() {
 
             public void onMapSharedElements(final List<String> names, final Map<String, View> sharedElements) {
-                if (names.size() == 1 && sharedElements.isEmpty()) {
-                    final int pos = Integer.valueOf(names.get(0).substring(TRANSITION_ID.length()));
+                if (names.size() == 1 && names.get(0) != null && names.get(0).startsWith(TRANSITION_ID_EXIT)) {
+                    final int pos = Integer.valueOf(names.get(0).substring(TRANSITION_ID_EXIT.length()));
                     final View v = getImageView.call(pos);
                     sharedElements.clear();
                     sharedElements.put(names.get(0), v);
