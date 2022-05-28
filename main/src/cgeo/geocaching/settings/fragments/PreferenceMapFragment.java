@@ -19,6 +19,7 @@ import android.os.Bundle;
 
 import androidx.preference.ListPreference;
 import androidx.preference.MultiSelectListPreference;
+import androidx.preference.Preference;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -74,6 +75,13 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
             MapMarkerUtils.clearCachedItems();
             return true;
         });
+
+        // display checkbox pref for unified map, if showUnifiedMap is enabled
+        Preference p = findPreference(activity.getString(R.string.pref_useUnifiedMap));
+        boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false);
+        if (p != null) {
+            p.setVisible(showUnifiedMap);
+        }
     }
 
     /**
