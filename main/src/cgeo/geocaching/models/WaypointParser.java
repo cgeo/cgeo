@@ -55,7 +55,11 @@ public class WaypointParser {
     //Constants for variable parsing
 
     private static final String PARSING_VAR_NAME_PRAEFIX = "$";
-    private static final Pattern PARSING_VAR_FINDER_PATTERN = Pattern.compile(Pattern.quote(PARSING_VAR_NAME_PRAEFIX) + "\\s*([a-zA-Z][a-zA-Z0-9]*)\\s*=");
+    private static final Pattern[] PARSING_VAR_FINDER_PATTERNS = new Pattern[] {
+            Pattern.compile("\\s+([A-Za-z])\\s*="), //any one-letter-varname
+            Pattern.compile(Pattern.quote(PARSING_VAR_NAME_PRAEFIX) + "\\s*([a-zA-Z][a-zA-Z0-9]*)\\s*=")
+    };
+    private static final Pattern PARSING_VAR_SINGLE_LETTER_NUMERIC = Pattern.compile("\\s+([A-Za-z])([0-9]+)\\s+");
 
 
     //general members
@@ -572,14 +576,25 @@ public class WaypointParser {
         return sb.toString();
     }
 
-    private void parseVariablesFromString(final String text) {
-        final Matcher matcher = PARSING_VAR_FINDER_PATTERN.matcher(text);
+    private void parseVariablesFromString(final String pText) {
+        final String text = " " + pText + " ";
+        final Matcher matcher = PARSING_VAR_SINGLE_LETTER_NUMERIC.matcher(text);
         while (matcher.find()) {
             final String varName = matcher.group(1);
-            final TextParser valueParser = new TextParser(text.substring(matcher.end()));
-            final String value = valueParser.parseUntil(c -> c == '|' || c == '\n', true, '\\', false);
+            final String value = matcher.group(2);
             addVariable(varName, value, true);
         }
+        for (Pattern p : PARSING_VAR_FINDER_PATTERNS) {
+            final Matcher m = p.matcher(text);
+            while (m.find()) {
+                final String varName = m.group(1);
+                final TextParser valueParser = new TextParser(text.substring(m.end()));
+                final String value = valueParser.parseUntil(c -> c == '|' || c == '\n', true, '\\', false);
+                addVariable(varName, value, true);
+            }
+        }
+
+
     }
 
     private static String getParseableFormulaString(final CalcState calcState) {
