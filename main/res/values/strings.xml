@@ -1558,6 +1558,7 @@
     <string name="waypoint_duplicate">Duplicate waypoint</string>
     <string name="waypoint_toclipboard">Copy waypoint to clipboard</string>
     <string name="waypoint_copy_of">Copy of</string>
+    <string name="waypoint_open_geochecker">Open Geochecker</string>
     <string name="waypointcalc_notes_prompt">Enter notes here…</string>
     <string name="waypoint_coordinate_formats_plain">Plain</string>
     <string name="from_clipboard">From clipboard</string>

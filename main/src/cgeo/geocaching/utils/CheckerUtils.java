@@ -7,6 +7,7 @@ import cgeo.geocaching.location.GeopointFormatter;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
 
+import android.util.Pair;
 import android.util.Patterns;
 
 import androidx.annotation.NonNull;
@@ -28,12 +29,26 @@ public final class CheckerUtils {
             new GeoChecker("geocache-planer.de/CAL/checker.php?")
     };
 
+    private static final GeoChecker GC_CHECKER = new GeoChecker("geocaching.com");
+
     private CheckerUtils() {
         // utility class
     }
 
     @Nullable
     public static String getCheckerUrl(@NonNull final Geocache cache) {
+        final Geopoint coordinateToCheck;
+        if (!cache.hasUserModifiedCoords() && cache.hasFinalDefined()) {
+            coordinateToCheck = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords).getCoords();
+        } else {
+            coordinateToCheck = cache.getCoords();
+        }
+        final Pair<String, GeoChecker> p = getCheckerData(cache, coordinateToCheck);
+        return p == null ? null : p.first;
+    }
+
+    @Nullable
+    public static Pair<String, GeoChecker> getCheckerData(@NonNull final Geocache cache, @Nullable final Geopoint coordinateToCheck) {
         final String description = cache.getDescription();
         final Matcher matcher = Patterns.WEB_URL.matcher(description);
         while (matcher.find()) {
@@ -41,23 +56,17 @@ public final class CheckerUtils {
             for (final GeoChecker checker : CHECKERS) {
                 if (StringUtils.containsIgnoreCase(url, checker.getUrlPattern())) {
                     if (checker.getCoordinateFormat() != null) {
-                        final Geopoint coordinateToCheck;
-                        if (!cache.hasUserModifiedCoords() && cache.hasFinalDefined()) {
-                            coordinateToCheck = cache.getFirstMatchingWaypoint(Waypoint::isFinalWithCoords).getCoords();
-                        } else {
-                            coordinateToCheck = cache.getCoords();
-                        }
                         if (coordinateToCheck != null) {
                             url = url + checker.getUrlCoordinateParam() + coordinateToCheck.format(checker.getCoordinateFormat());
                         }
                     }
-                    return StringEscapeUtils.unescapeHtml4(url);
+                    return new Pair<>(StringEscapeUtils.unescapeHtml4(url), checker);
                 }
             }
         }
         // GC's own checker
         if (cache.getDescription().contains(CgeoApplication.getInstance().getString(R.string.link_gc_checker))) {
-            return cache.getUrl();
+            return new Pair<>(cache.getUrl(), GC_CHECKER);
         }
         return null;
     }
@@ -75,6 +84,10 @@ public final class CheckerUtils {
             this.urlPattern = urlPattern;
             this.urlCoordinateParam = coordinateParam;
             this.coordinateFormat = coordinateFormat;
+        }
+
+        public boolean allowsCoordinate() {
+            return coordinateFormat != null;
         }
 
         public String getUrlPattern() {
