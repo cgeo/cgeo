@@ -5,6 +5,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.activity.AbstractBottomNavigationActivity;
 import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.downloader.DownloaderUtils;
+import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.location.Viewport;
 import cgeo.geocaching.maps.MapMode;
@@ -12,6 +13,7 @@ import cgeo.geocaching.maps.MapUtils;
 import cgeo.geocaching.maps.RouteTrackUtils;
 import cgeo.geocaching.maps.Tracks;
 import cgeo.geocaching.maps.routing.Routing;
+import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.IndividualRoute;
 import cgeo.geocaching.models.Route;
 import cgeo.geocaching.permission.PermissionHandler;
@@ -21,6 +23,7 @@ import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.sensors.Sensors;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.unifiedmap.tileproviders.AbstractTileProvider;
 import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.AngleUtils;
@@ -31,6 +34,7 @@ import cgeo.geocaching.utils.Log;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_AUTO;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_MANUAL;
 import static cgeo.geocaching.settings.Settings.MAPROTATION_OFF;
+import static cgeo.geocaching.unifiedmap.UnifiedMapType.BUNDLE_MAPTYPE;
 import static cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory.MAP_LANGUAGE_DEFAULT_ID;
 
 import android.content.Intent;
@@ -55,7 +59,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
     private static final String STATE_ROUTETRACKUTILS = "routetrackutils";
     private static final String BUNDLE_ROUTE = "route";
-    private static final String BUNDLE_MAPTYPE = "maptype";
 
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
@@ -173,13 +176,19 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     @Override
     public void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        changeMapSource(Settings.getTileProvider());
+
+        // get data from intent
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            mapType = extras.getParcelable(BUNDLE_MAPTYPE);
+        }
 
         // Get fresh map information from the bundle if any
         if (savedInstanceState != null) {
             if (savedInstanceState.containsKey(BUNDLE_MAPTYPE)) {
                 mapType = savedInstanceState.getParcelable(BUNDLE_MAPTYPE);
             }
+            Log.e("mapType=" + mapType);
 //            proximityNotification = savedInstanceState.getParcelable(BUNDLE_PROXIMITY_NOTIFICATION);
             individualRoute = savedInstanceState.getParcelable(BUNDLE_ROUTE);
 //            followMyLocation = mapOptions.mapState.followsMyLocation();
@@ -194,8 +203,9 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         }
         // make sure we have a defined mapType
         if (mapType == null || mapType.type == UnifiedMapType.UnifiedMapTypeType.UMTT_Undefined) {
-            mapType = UnifiedMapType.getPlainMap();
+            mapType = new UnifiedMapType();
         }
+        changeMapSource(Settings.getTileProvider());
 
         Routing.connect(ROUTING_SERVICE_KEY, () -> resumeRoute(true));
         CompactIconModeUtils.setCompactIconModeThreshold(getResources());
@@ -241,7 +251,30 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
             // create geoitem layers
             geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
+
+            // react to mapType
+            switch(mapType.type) {
+                case UMTT_PlainMap:
+                    // @todo: set bounds to last known viewport
+                    break;
+                case UMTT_TargetGeocode:
+                    Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
+                    if (cache != null && cache.getCoords() != null) {
+                        geoitemLayer.add(cache);
+                        tileProvider.getMap().setCenter(cache.getCoords());
+                        setTarget(cache.getCoords(), cache.getName());
+                        // @todo: adjust zoom if needed
+                    }
+                    break;
+                case UMTT_TargetCoords:
+                    tileProvider.getMap().setCenter(mapType.coords);
+                    break;
+                default:
+                    // nothing to do
+                    break;
+            }
             // @todo for testing purposes only
+            /*
             if (geoitemLayer != null) {
                 geoitemLayer.add("GC9C8G5");
                 geoitemLayer.add("GC9RZT2");
@@ -249,6 +282,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
                 geoitemLayer.add("GC360D1");
                 geoitemLayer.add("GC8902H");
             }
+            */
         }
 
         // refresh options menu and routes/tracks display
@@ -324,12 +358,36 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     // ========================================================================
     // Routes, tracks and targets handling
 
-    @SuppressWarnings("unused") // @todo
     private void setTarget(final Geopoint geopoint, final String s) {
         if (tileProvider.getMap().positionLayer != null) {
             tileProvider.getMap().positionLayer.setDestination(new GeoPoint(geopoint.getLatitude(), geopoint.getLongitude()));
         }
         // @todo
+        /*
+        lastNavTarget = coords;
+        if (StringUtils.isNotBlank(geocode)) {
+            targetGeocode = geocode;
+            final Geocache target = getCurrentTargetCache();
+            targetView.setTarget(targetGeocode, target != null ? target.getName() : StringUtils.EMPTY);
+            if (lastNavTarget == null && target != null) {
+                lastNavTarget = target.getCoords();
+            }
+        } else {
+            targetGeocode = null;
+            targetView.setTarget(null, null);
+        }
+        if (navigationLayer != null) {
+            navigationLayer.setDestination(lastNavTarget);
+            navigationLayer.requestRedraw();
+        }
+        if (distanceView != null) {
+            distanceView.setDestination(lastNavTarget);
+            distanceView.setCoordinates(geoDirUpdate.getCurrentLocation());
+        }
+
+        ActivityMixin.invalidateOptionsMenu(this);
+
+         */
     }
 
     // glue method for old map

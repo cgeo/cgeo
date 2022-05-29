@@ -1177,6 +1177,10 @@ public class Settings {
         return StringUtils.isBlank(language) ? MAP_LANGUAGE_DEFAULT_ID : language.hashCode();
     }
 
+    public static boolean useUnifiedMap() {
+        return getBoolean(R.string.pref_useUnifiedMap, false);
+    }
+
     public static void setMapDownloaderSource(final int source) {
         putInt(R.string.pref_mapdownloader_source, source);
     }
