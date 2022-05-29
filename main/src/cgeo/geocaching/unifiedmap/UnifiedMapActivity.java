@@ -60,6 +60,8 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     private static final String ROUTING_SERVICE_KEY = "UnifiedMap";
 
     private AbstractTileProvider tileProvider = null;
+    private AbstractGeoitemLayer geoitemLayer = null;
+
     private final UpdateLoc geoDirUpdate = new UpdateLoc(this);
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
     private static boolean followMyLocation = Settings.isLiveMap();
@@ -236,6 +238,17 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
 
             // routes / tracks popup
             findViewById(R.id.map_individualroute_popup).setOnClickListener(v -> routeTrackUtils.showPopup(individualRoute, this::setTarget));
+
+            // create geoitem layers
+            geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
+            // @todo for testing purposes only
+            if (geoitemLayer != null) {
+                geoitemLayer.add("GC9C8G5");
+                geoitemLayer.add("GC9RZT2");
+                geoitemLayer.add("GC37RRG");
+                geoitemLayer.add("GC360D1");
+                geoitemLayer.add("GC8902H");
+            }
         }
 
         // refresh options menu and routes/tracks display

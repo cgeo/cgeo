@@ -3,6 +3,7 @@ package cgeo.geocaching.unifiedmap.mapsforgevtm;
 import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
@@ -145,6 +146,11 @@ public class MapsforgeVtmView extends AbstractUnifiedMapView<GeoPoint> {
             }
         }
         baseMap = null;
+    }
+
+    @Override
+    protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
+        return new MapsforgeGeoitemLayer(tileProvider, mMap);
     }
 
     private void startMap() {

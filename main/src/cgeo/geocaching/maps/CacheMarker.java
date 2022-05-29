@@ -1,17 +1,26 @@
 package cgeo.geocaching.maps;
 
-
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.drawable.Drawable;
-
 
 public class CacheMarker {
 
     private final int hashCode;
     protected final Drawable drawable;
+    protected final Bitmap bitmap;
 
     public CacheMarker(final int hashCode, final Drawable drawable) {
         this.hashCode = hashCode;
         this.drawable = drawable;
+
+        // prepare bitmap from drawable (used as map markers)
+        int width = drawable.getIntrinsicWidth();
+        int height = drawable.getIntrinsicHeight();
+        bitmap = android.graphics.Bitmap.createBitmap(width, height, android.graphics.Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), canvas.getHeight());
+        drawable.draw(canvas);
     }
 
     /**
@@ -25,6 +34,10 @@ public class CacheMarker {
 
     public Drawable getDrawable() {
         return drawable;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
     }
 
     @Override

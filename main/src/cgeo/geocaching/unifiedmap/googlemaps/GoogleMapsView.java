@@ -4,6 +4,7 @@ import cgeo.geocaching.R;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.maps.google.v2.GoogleGeoPoint;
 import cgeo.geocaching.maps.google.v2.GoogleMapController;
+import cgeo.geocaching.unifiedmap.AbstractGeoitemLayer;
 import cgeo.geocaching.unifiedmap.AbstractPositionLayer;
 import cgeo.geocaching.unifiedmap.AbstractUnifiedMapView;
 import cgeo.geocaching.unifiedmap.UnifiedMapPosition;
@@ -90,6 +91,11 @@ public class GoogleMapsView extends AbstractUnifiedMapView<LatLng> implements On
         setMapRotation(mapRotation);
         positionLayer = configPositionLayer(true);
         onMapReadyTasks.run();
+    }
+
+    @Override
+    protected AbstractGeoitemLayer createGeoitemLayers(final AbstractTileProvider tileProvider) {
+        return new GoogleGeoitemLayer(mMap);
     }
 
     @Override
