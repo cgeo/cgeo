@@ -8,6 +8,7 @@ import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.ContentStorage;
 import cgeo.geocaching.ui.notifications.NotificationChannels;
 import cgeo.geocaching.ui.notifications.Notifications;
+import cgeo.geocaching.unifiedmap.tileproviders.TileProviderFactory;
 import cgeo.geocaching.utils.FileNameCreator;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.Formatter;
@@ -172,6 +173,7 @@ public class ReceiveDownloadService extends AbstractForegroundIntentService {
                 if (downloader.useCompanionFiles && StringUtils.isNotBlank(sourceURL)) {
                     CompanionFileUtils.writeInfo(sourceURL, filename, CompanionFileUtils.getDisplayName(fileinfo), sourceDate, offlineMapTypeId);
                 }
+                TileProviderFactory.buildTileProviderList(true);
                 break;
             case CANCELLED:
                 result = getString(R.string.receivedownload_cancelled);
