@@ -6,6 +6,8 @@ import cgeo.geocaching.filters.core.GeocacheFilterContext;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Waypoint;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.unifiedmap.UnifiedMapType;
+import cgeo.geocaching.utils.Log;
 
 import android.app.Activity;
 import android.content.Context;
@@ -34,33 +36,68 @@ public final class DefaultMap {
     }
 
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Waypoint waypoint) {
-        new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in waypoint mode (1)");
+            new UnifiedMapType(waypoint.getGeocode()).launchMap(fromActivity);
+        } else {
+            new MapOptions(waypoint.getCoords(), waypoint.getWaypointType(), waypoint.getName(), waypoint.getGeocode()).startIntent(fromActivity, cls);
+        }
     }
 
     public static void startActivityCoords(final Context fromActivity, final Waypoint waypoint) {
-        startActivityCoords(fromActivity, getDefaultMapClass(), waypoint);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in waypoint mode (2)");
+            new UnifiedMapType(waypoint.getGeocode()).launchMap(fromActivity);
+        } else {
+            startActivityCoords(fromActivity, getDefaultMapClass(), waypoint);
+        }
     }
 
     public static void startActivityCoords(final Activity fromActivity, final Geopoint coords) {
-        startActivityCoords(fromActivity, getDefaultMapClass(), coords, null);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in coords mode");
+            new UnifiedMapType(coords).launchMap(fromActivity);
+        } else {
+            startActivityCoords(fromActivity, getDefaultMapClass(), coords, null);
+        }
     }
 
     public static void startActivityCoords(final Context fromActivity, final Class<?> cls, final Geopoint coords, final WaypointType type) {
-        new MapOptions(coords, type).startIntent(fromActivity, cls);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in coords with WaypointType mode");
+            new UnifiedMapType(coords).launchMap(fromActivity);
+        } else {
+            new MapOptions(coords, type).startIntent(fromActivity, cls);
+        }
     }
 
     public static void startActivityInitialCoords(final Context fromActivity, final Geopoint coords) {
-        new MapOptions(coords).startIntent(fromActivity, getDefaultMapClass());
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in coords mode");
+            new UnifiedMapType(coords).launchMap(fromActivity);
+        } else {
+            new MapOptions(coords).startIntent(fromActivity, getDefaultMapClass());
+        }
     }
 
     public static void startActivityGeoCode(final Context fromActivity, final Class<?> cls, final String geocode) {
-        final MapOptions mo = new MapOptions(geocode);
-        mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
-        mo.startIntent(fromActivity, cls);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in geocode mode");
+            new UnifiedMapType(geocode).launchMap(fromActivity);
+        } else {
+            final MapOptions mo = new MapOptions(geocode);
+            mo.filterContext = new GeocacheFilterContext(GeocacheFilterContext.FilterType.TRANSIENT);
+            mo.startIntent(fromActivity, cls);
+        }
     }
 
     public static void startActivityGeoCode(final Activity fromActivity, final String geocode) {
-        startActivityGeoCode(fromActivity, getDefaultMapClass(), geocode);
+        if (Settings.useUnifiedMap()) {
+            Log.e("Launching UnifiedMap in geocode mode");
+            new UnifiedMapType(geocode).launchMap(fromActivity);
+        } else {
+            startActivityGeoCode(fromActivity, getDefaultMapClass(), geocode);
+        }
     }
 
     public static void startActivitySearch(final Activity fromActivity, final Class<?> cls, final SearchResult search, final String title, final int fromList) {
