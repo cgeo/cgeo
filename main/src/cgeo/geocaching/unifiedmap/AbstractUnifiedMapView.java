@@ -74,6 +74,8 @@ public abstract class AbstractUnifiedMapView<T> {
         }
     }
 
+    abstract protected AbstractGeoitemLayer createGeoitemLayers(AbstractTileProvider tileProvider);
+
     // ========================================================================
     // theme related methods
 
