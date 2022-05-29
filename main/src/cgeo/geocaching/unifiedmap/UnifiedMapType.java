@@ -1,11 +1,11 @@
 package cgeo.geocaching.unifiedmap;
 
+import cgeo.geocaching.location.Geopoint;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import cgeo.geocaching.location.Geopoint;
 
 public class UnifiedMapType implements Parcelable {
 

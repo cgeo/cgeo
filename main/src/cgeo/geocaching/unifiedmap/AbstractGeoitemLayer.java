@@ -1,13 +1,13 @@
 package cgeo.geocaching.unifiedmap;
 
-import androidx.annotation.Nullable;
-
-import java.util.HashMap;
-
 import cgeo.geocaching.enumerations.LoadFlags;
 import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.storage.DataStore;
+
+import androidx.annotation.Nullable;
+
+import java.util.HashMap;
 
 public abstract class AbstractGeoitemLayer<T> {
 
@@ -17,7 +17,7 @@ public abstract class AbstractGeoitemLayer<T> {
     protected abstract T add(Geocache cache);
 
     @Nullable
-    T add(String geocode) {
+    T add(final String geocode) {
         final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);  // @todo check load flags
         if (cache == null) {
             return null;
@@ -32,7 +32,7 @@ public abstract class AbstractGeoitemLayer<T> {
     }
 
     /** removes item from internal data structure, needs to be removed from actual layer by superclass */
-    protected void remove(String geocode) {
+    protected void remove(final String geocode) {
         synchronized (items) {
             items.remove(geocode);
         }

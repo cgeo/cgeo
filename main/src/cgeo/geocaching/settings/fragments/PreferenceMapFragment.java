@@ -77,10 +77,9 @@ public class PreferenceMapFragment extends BasePreferenceFragment {
         });
 
         // display checkbox pref for unified map, if showUnifiedMap is enabled
-        Preference p = findPreference(activity.getString(R.string.pref_useUnifiedMap));
-        boolean showUnifiedMap = Settings.getBoolean(R.string.pref_showUnifiedMap, false);
+        final Preference p = findPreference(activity.getString(R.string.pref_useUnifiedMap));
         if (p != null) {
-            p.setVisible(showUnifiedMap);
+            p.setVisible(Settings.getBoolean(R.string.pref_showUnifiedMap, false));
         }
     }
 
