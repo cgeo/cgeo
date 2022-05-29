@@ -21,6 +21,7 @@ import android.view.SubMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.widget.PopupMenu;
 
 import java.util.Collections;
 import java.util.HashMap;
@@ -49,8 +50,8 @@ public class TileProviderFactory {
         return Holder.INSTANCE;
     }
 
-    public static void addMapviewMenuItems(final Activity activity, final Menu menu) {
-        final SubMenu parentMenu = menu.findItem(R.id.menu_select_mapview).getSubMenu();
+    public static void addMapviewMenuItems(final Activity activity, final PopupMenu menu) {
+        final Menu parentMenu = menu.getMenu();
 
         final int currentTileProvider = Settings.getTileProvider().getNumericalId();
         final Set<String> hideTileproviders = Settings.getHideTileproviders();
@@ -77,7 +78,7 @@ public class TileProviderFactory {
         return tileProviders;
     }
 
-    private static void buildTileProviderList(final boolean force) {
+    public static void buildTileProviderList(final boolean force) {
         if (!(tileProviders.isEmpty() || force)) {
             return;
         }

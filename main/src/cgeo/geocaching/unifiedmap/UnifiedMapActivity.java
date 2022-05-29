@@ -43,11 +43,14 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.location.Location;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.content.res.ResourcesCompat;
 
 import java.lang.ref.WeakReference;
@@ -439,7 +442,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         TileProviderFactory.addMapViewLanguageMenuItems(menu);
         this.routeTrackUtils.onPrepareOptionsMenu(menu, findViewById(R.id.container_individualroute), individualRoute, tracks);
         ViewUtils.extendMenuActionBarDisplayItemCount(this, menu);
-        
+
         // map rotation state
         menu.findItem(R.id.menu_map_rotation).setVisible(true); // @todo: can be visible always when CGeoMap/NewMap is removed
         final int mapRotation = Settings.getMapRotation();
@@ -469,8 +472,6 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
     public boolean onCreateOptionsMenu(@NonNull final Menu menu) {
         final boolean result = super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.map_activity, menu);
-
-        TileProviderFactory.addMapviewMenuItems(this, menu);
 
         followMyLocationItem = menu.findItem(R.id.menu_toggle_mypos);
         initFollowMyLocationButton();
@@ -517,6 +518,16 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             // RenderThemeLegend.showLegend(this, this.renderThemeHelper, mapView.getModel().displayModel);
         } else if (id == R.id.menu_routetrack) {
             routeTrackUtils.showPopup(individualRoute, this::setTarget);
+        } else if (id == R.id.menu_select_mapview) {
+            // dynamically create submenu to reflect possible changes in map sources
+            final View v = findViewById(R.id.menu_select_mapview);
+            if (v != null) {
+                final PopupMenu menu = new PopupMenu(this, v, Gravity.TOP);
+                menu.inflate(R.menu.map_downloader);
+                TileProviderFactory.addMapviewMenuItems(this, menu);
+                menu.setOnMenuItemClickListener(this::onOptionsItemSelected);
+                menu.show();
+            }
         } else {
             final String language = TileProviderFactory.getLanguage(id);
             if (language != null || id == MAP_LANGUAGE_DEFAULT_ID) {
