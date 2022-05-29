@@ -12,7 +12,6 @@ import cgeo.geocaching.utils.Log;
 import cgeo.geocaching.utils.MapMarkerUtils;
 
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
 
 import org.oscim.android.canvas.AndroidBitmap;
 import org.oscim.backend.canvas.Bitmap;
@@ -28,7 +27,7 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
     MarkerSymbol mDefaultMarkerSymbol;
 
     MapsforgeGeoitemLayer(final AbstractTileProvider tileProvider, final Map map) {
-        Bitmap bitmap = new AndroidBitmap(BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.cgeo_notification));
+        final Bitmap bitmap = new AndroidBitmap(BitmapFactory.decodeResource(CgeoApplication.getInstance().getResources(), R.drawable.cgeo_notification));
         mDefaultMarkerSymbol = new MarkerSymbol(bitmap, MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
         mMarkerLayer = new ItemizedLayer(map, mDefaultMarkerSymbol);
         ((MapsforgeVtmView) tileProvider.getMap()).addLayer(mMarkerLayer);
@@ -37,11 +36,11 @@ class MapsforgeGeoitemLayer extends AbstractGeoitemLayer<MarkerItem> {
 
     @Override
     protected MarkerItem add(final Geocache cache) {
-        Geopoint coords = cache.getCoords();
+        final Geopoint coords = cache.getCoords();
         final MarkerItem item = new MarkerItem(cache.getGeocode(), "", new GeoPoint(coords.getLatitudeE6(), coords.getLongitudeE6())); // @todo add marker touch handling
 
-        CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
-        MarkerSymbol symbol = new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
+        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
+        final MarkerSymbol symbol = new MarkerSymbol(new AndroidBitmap(cm.getBitmap()), MarkerSymbol.HotspotPlace.BOTTOM_CENTER);
         item.setMarker(symbol);
         mMarkerLayer.addItem(item);
         Log.e("addGeoitem");

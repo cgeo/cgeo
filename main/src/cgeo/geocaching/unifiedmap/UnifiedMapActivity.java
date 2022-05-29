@@ -178,7 +178,7 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
         super.onCreate(savedInstanceState);
 
         // get data from intent
-        Bundle extras = getIntent().getExtras();
+        final Bundle extras = getIntent().getExtras();
         if (extras != null) {
             mapType = extras.getParcelable(BUNDLE_MAPTYPE);
         }
@@ -253,12 +253,12 @@ public class UnifiedMapActivity extends AbstractBottomNavigationActivity {
             geoitemLayer = tileProvider.getMap().createGeoitemLayers(tileProvider);
 
             // react to mapType
-            switch(mapType.type) {
+            switch (mapType.type) {
                 case UMTT_PlainMap:
                     // @todo: set bounds to last known viewport
                     break;
                 case UMTT_TargetGeocode:
-                    Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
+                    final Geocache cache = DataStore.loadCache(mapType.target, LoadFlags.LOAD_CACHE_OR_DB);
                     if (cache != null && cache.getCoords() != null) {
                         geoitemLayer.add(cache);
                         tileProvider.getMap().setCenter(cache.getCoords());

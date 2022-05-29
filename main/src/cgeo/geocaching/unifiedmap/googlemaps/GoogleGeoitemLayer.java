@@ -21,20 +21,20 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
 
     WeakReference<GoogleMap> mapRef;
 
-    GoogleGeoitemLayer(GoogleMap map) {
+    GoogleGeoitemLayer(final GoogleMap map) {
         this.mapRef = new WeakReference<>(map);
     }
 
     @Override
     protected Marker add(final Geocache cache) {
-        GoogleMap map = mapRef.get();
+        final GoogleMap map = mapRef.get();
         if (map == null) {
             return null;
         }
 
-        Geopoint coords = cache.getCoords();
-        CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
-        Marker item = map.addMarker(new MarkerOptions()
+        final Geopoint coords = cache.getCoords();
+        final CacheMarker cm = MapMarkerUtils.getCacheMarker(CgeoApplication.getInstance().getResources(), cache, CacheListType.MAP);
+        final Marker item = map.addMarker(new MarkerOptions()
             .position(new LatLng(coords.getLatitude(), coords.getLongitude()))
             .title(cache.getGeocode())
             .anchor(0.5f, 1f)
@@ -50,10 +50,10 @@ class GoogleGeoitemLayer extends AbstractGeoitemLayer<Marker> {
 
     @Override
     protected void remove(final String geocode) {
-        GoogleMap map = mapRef.get();
+        final GoogleMap map = mapRef.get();
         if (map != null) {
             synchronized (items) {
-                Marker item = items.get(geocode);
+                final Marker item = items.get(geocode);
                 if (item != null) {
                     item.remove();
                 }
