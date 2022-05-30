@@ -5,6 +5,7 @@ import cgeo.geocaching.activity.ActivityMixin;
 import cgeo.geocaching.utils.FileUtils;
 import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.Log;
+import cgeo.geocaching.utils.UriUtils;
 
 import android.app.Activity;
 import android.content.ActivityNotFoundException;
@@ -12,6 +13,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Pair;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -58,6 +60,8 @@ public class Image implements Parcelable {
     @Nullable final String description;
     @NonNull public final ImageCategory category;
     @Nullable public final String contextInformation;
+
+    private Pair<String, String> mimeInformation = null;
 
     /**
      * Helper class for building or manipulating Image references.
@@ -187,7 +191,7 @@ public class Image implements Parcelable {
      * @param title       The image title
      * @param description The image description
      */
-    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat, final String contextInformation) {
+    private Image(@NonNull final Uri uri, @Nullable final String title, @Nullable final String description, final int targetScale, final ImageCategory cat, @Nullable final String contextInformation) {
         this.uri = uri;
         this.title = title;
         this.description = description;
@@ -204,6 +208,7 @@ public class Image implements Parcelable {
         contextInformation = in.readString();
         targetScale = in.readInt();
     }
+
 
     @Override
     public int describeContents() {
@@ -371,6 +376,29 @@ public class Image implements Parcelable {
      */
     public File localFile() {
         return FileUtils.urlToFile(uri.toString());
+    }
+
+    @Nullable
+    public String getMimeType() {
+        ensureMimeInformation();
+        return mimeInformation.first;
+    }
+
+    @Nullable
+    public String getMimeFileExtension() {
+        ensureMimeInformation();
+        return mimeInformation.second;
+    }
+
+    public boolean isImageUri() {
+        final String mimeType = getMimeType();
+        return mimeType != null && mimeType.startsWith("image/");
+    }
+
+    private void ensureMimeInformation() {
+        if (mimeInformation == null) {
+            mimeInformation = new Pair<>(UriUtils.getMimeType(getUri()), UriUtils.getMimeFileExtension(getUri()));
+        }
     }
 
 

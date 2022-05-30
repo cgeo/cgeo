@@ -30,7 +30,7 @@
         >
 
         <Button
-            android:id="@+id/img_gallery_add_multi"
+            android:id="@+id/img_gallery_add_multi_images"
             style="@style/button_icon"
             android:layout_gravity="left"
             app:icon="@drawable/ic_menu_image_multi" />
@@ -39,8 +39,15 @@
             android:id="@+id/img_gallery_add_camera"
             style="@style/button_icon"
             android:layout_gravity="left"
-            android:layout_toRightOf="@+id/img_gallery_add_multi"
+            android:layout_toRightOf="@+id/img_gallery_add_multi_images"
             app:icon="@drawable/ic_menu_camera" />
+
+        <Button
+            android:id="@+id/img_gallery_add_multi_files"
+            style="@style/button_icon"
+            android:layout_gravity="left"
+            android:layout_toRightOf="@+id/img_gallery_add_camera"
+            app:icon="@drawable/ic_menu_file_add" />
 
     </RelativeLayout>
 

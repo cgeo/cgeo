@@ -55,13 +55,15 @@ public class ImageActivityHelper {
         public final Uri uri;
         public final boolean callOnFailure;
         public final String userKey;
+        public final boolean onlyImages;
 
-        IntentContextData(final int requestCode, final String fileid, final Uri uri, final boolean callOnFailure, final String userKey) {
+        IntentContextData(final int requestCode, final String fileid, final Uri uri, final boolean callOnFailure, final String userKey, final boolean onlyImages) {
             this.requestCode = requestCode;
             this.fileid = fileid;
             this.uri = uri;
             this.callOnFailure = callOnFailure;
             this.userKey = userKey;
+            this.onlyImages = onlyImages;
         }
 
         protected IntentContextData(final Parcel in) {
@@ -70,6 +72,7 @@ public class ImageActivityHelper {
             uri = in.readParcelable(Uri.class.getClassLoader());
             callOnFailure = in.readByte() > 0;
             userKey = in.readString();
+            onlyImages = in.readInt() == 1;
         }
 
         public static final Creator<IntentContextData> CREATOR = new Creator<IntentContextData>() {
@@ -96,6 +99,7 @@ public class ImageActivityHelper {
             dest.writeParcelable(uri, flags);
             dest.writeByte((byte) (callOnFailure ? 1 : 0));
             dest.writeString(userKey);
+            dest.writeInt(onlyImages ? 1 : 0);
         }
     }
 
@@ -159,7 +163,7 @@ public class ImageActivityHelper {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startIntent(Intent.createChooser(intent, "Select Image"),
-                new IntentContextData(REQUEST_CODE_STORAGE_SELECT, fileid, null, callOnFailure, userKey));
+                new IntentContextData(REQUEST_CODE_STORAGE_SELECT, fileid, null, callOnFailure, userKey, true));
     }
 
     /**
@@ -172,11 +176,20 @@ public class ImageActivityHelper {
      * @param callOnFailure if true, then callback will be called also on image select failure (with img=null)
      */
     public void getMultipleImagesFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
+        getMultipleItemsFromStorage(fileid, callOnFailure, userKey, true);
+    }
+
+    /** like above, but allows also for selection of non-image-files */
+    public void getMultipleFilesFromStorage(final String fileid, final boolean callOnFailure, final String userKey) {
+        getMultipleItemsFromStorage(fileid, callOnFailure, userKey, false);
+    }
+
+    private void getMultipleItemsFromStorage(final String fileid, final boolean callOnFailure, final String userKey, final boolean onlyImages) {
         final Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-        intent.setType("image/*");
+        intent.setType(onlyImages ? "image/*" : "*/*");
         intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
         startIntent(Intent.createChooser(intent, "Select Multiple Images"),
-                new IntentContextData(REQUEST_CODE_STORAGE_SELECT_MULTI, fileid, null, callOnFailure, userKey));
+                new IntentContextData(REQUEST_CODE_STORAGE_SELECT_MULTI, fileid, null, callOnFailure, userKey, onlyImages));
     }
 
     /**
@@ -203,7 +216,7 @@ public class ImageActivityHelper {
         intent.putExtra(MediaStore.EXTRA_OUTPUT, imageUri); // set the image uri
 
         // start the image capture Intent
-        startIntent(intent, new IntentContextData(REQUEST_CODE_CAMERA, fileid, imageUri, callOnFailure, userKey));
+        startIntent(intent, new IntentContextData(REQUEST_CODE_CAMERA, fileid, imageUri, callOnFailure, userKey, false));
     }
 
     private void onImageFromCameraResult(final IntentContextData intentContextData) {
@@ -228,7 +241,7 @@ public class ImageActivityHelper {
         final Uri imageUri = data.getData();
         if (imageUri != null) {
             singleUri = imageUri;
-            if (checkImageContent(imageUri, true)) {
+            if (checkImageContent(imageUri, intentContextData.onlyImages)) {
                 result.add(imageUri);
             }
         }
@@ -238,7 +251,7 @@ public class ImageActivityHelper {
                 final Uri uri = data.getClipData().getItemAt(idx).getUri();
                 // compare with "singleUri" to prevent duplicate image adding
                 // (in some cases on multiselect, "getData()" is filled with first entry of "getClipData()" e.g. when Google Photos is used)
-                if (uri != null && !uri.equals(singleUri) && checkImageContent(uri, true)) {
+                if (uri != null && !uri.equals(singleUri) && checkImageContent(uri, intentContextData.onlyImages)) {
                     result.add(uri);
                 }
             }

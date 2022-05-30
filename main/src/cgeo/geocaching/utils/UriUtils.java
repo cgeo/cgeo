@@ -1,6 +1,7 @@
 package cgeo.geocaching.utils;
 
 import cgeo.geocaching.CgeoApplication;
+import cgeo.geocaching.R;
 
 import android.content.Context;
 import android.content.UriPermission;
@@ -8,7 +9,9 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.storage.StorageManager;
 import android.os.storage.StorageVolume;
+import android.webkit.MimeTypeMap;
 
+import androidx.annotation.DrawableRes;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
@@ -38,6 +41,57 @@ public final class UriUtils {
 
     private UriUtils() {
         //no instance wanted
+    }
+
+    @DrawableRes
+    public static int getMimeTypeIcon(@Nullable final Uri uri) {
+        return getMimeTypeIcon(getMimeType(uri));
+    }
+
+    @DrawableRes
+    public static int getMimeTypeIcon(@Nullable final String mimeType) {
+
+        if (mimeType == null) {
+            return R.drawable.ic_menu_file;
+        }
+        if (mimeType.contains("spreadsheet")) {
+            return R.drawable.ic_menu_file_sheet;
+        }
+        if (mimeType.contains("pdf")) {
+            return R.drawable.ic_menu_file_pdf;
+        }
+        if (mimeType.startsWith("text/")) {
+            return R.drawable.ic_menu_file_doc;
+        }
+        return R.drawable.ic_menu_file;
+    }
+
+    @Nullable
+    public static String getMimeFileExtension(@Nullable final Uri uri) {
+        if (uri == null) {
+            return null;
+        }
+        String extension = MimeTypeMap.getFileExtensionFromUrl(uri.toString());
+        if (extension == null) {
+            extension = MimeTypeMap.getSingleton().getExtensionFromMimeType(getMimeType(uri));
+        }
+        return extension;
+    }
+
+    @Nullable
+    public static String getMimeType(@Nullable final Uri uri) {
+        if (uri == null) {
+            return null;
+        }
+        String mimeType = null;
+        final Context context = CgeoApplication.getInstance();
+        if (context != null && context.getContentResolver() != null) {
+            mimeType = context.getContentResolver().getType(uri);
+        }
+        if (mimeType == null) {
+            mimeType = MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(uri.toString()));
+        }
+        return mimeType;
     }
 
     /**

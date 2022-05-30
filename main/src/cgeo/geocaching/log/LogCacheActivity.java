@@ -582,12 +582,10 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         menu.findItem(R.id.clear).setVisible(true);
         menu.findItem(R.id.menu_sort_trackables_by).setVisible(true);
         switch (Settings.getTrackableComparator()) {
-            case TRACKABLE_COMPARATOR_NAME:
-                menu.findItem(R.id.menu_sort_trackables_name).setChecked(true);
-                break;
             case TRACKABLE_COMPARATOR_TRACKCODE:
                 menu.findItem(R.id.menu_sort_trackables_code).setChecked(true);
                 break;
+            case TRACKABLE_COMPARATOR_NAME:
             default:
                 menu.findItem(R.id.menu_sort_trackables_name).setChecked(true);
         }
@@ -759,8 +757,14 @@ public class LogCacheActivity extends AbstractLoggingActivity {
 
                             //uploader can only deal with files, not with content Uris. Thus scale/compress into a temporary file
                             final File imageFileForUpload = ImageUtils.scaleAndCompressImageToTemporaryFile(img.getUri(), img.targetScale, 75);
-                            final Image imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
-                            imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
+                            final Image imgToSend;
+                            if (imageFileForUpload == null) {
+                                imgToSend = null;
+                                imageResult = new ImageResult(StatusCode.LOGIMAGE_POST_ERROR, img.getUrl());
+                            } else {
+                                imgToSend = img.buildUpon().setUrl(Uri.fromFile(imageFileForUpload)).setTitle(imageListFragment.getImageTitle(img, pos++)).build();
+                                imageResult = loggingManager.postLogImage(logResult.getLogId(), imgToSend);
+                            }
                             if (!isOkResult(imageResult)) {
                                 break;
                             }

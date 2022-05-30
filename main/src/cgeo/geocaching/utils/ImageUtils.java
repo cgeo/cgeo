@@ -9,6 +9,7 @@ import cgeo.geocaching.storage.LocalStorage;
 import cgeo.geocaching.storage.PersistableFolder;
 import cgeo.geocaching.ui.ImageGalleryView;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Application;
 import android.content.ContentValues;
@@ -29,7 +30,10 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Base64InputStream;
-import android.webkit.MimeTypeMap;
+import android.view.GestureDetector;
+import android.view.MotionEvent;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -55,6 +59,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.LinkedBlockingQueue;
 
+import com.igreenwood.loupe.Loupe;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Consumer;
@@ -240,10 +245,12 @@ public final class ImageUtils {
         }
     }
 
-    public static File compressImageToFile(@NonNull final Uri imageUri) {
+    @Nullable
+    private static File compressImageToFile(@NonNull final Uri imageUri) {
         return scaleAndCompressImageToTemporaryFile(imageUri, -1, 100);
     }
 
+    @Nullable
     public static File scaleAndCompressImageToTemporaryFile(@NonNull final Uri imageUri, final int maxXY, final int compressQuality) {
 
         final Bitmap image = readDownsampledImage(imageUri, maxXY, maxXY);
@@ -706,6 +713,9 @@ public final class ImageUtils {
         }
 
         final Uri imageFileUri = getLocalImageFileUriForSharing(activity, imgUri, geocode);
+        if (imageFileUri == null) {
+            return;
+        }
 
         try {
             final Intent intent = new Intent().setAction(Intent.ACTION_VIEW);
@@ -718,8 +728,9 @@ public final class ImageUtils {
     }
 
     /**
-     * gets or creates local file and shareable Uri for given image
+     * gets or creates local file and shareable Uri for given image. Returns null if creation fails
      */
+    @Nullable
     public static Uri getLocalImageFileUriForSharing(final Context context, final Uri imgUri, final String geocode) {
 
         if (imgUri == null) {
@@ -741,27 +752,98 @@ public final class ImageUtils {
         File file = UriUtils.isFileUri(imageUri) ? UriUtils.toFile(imageUri) : null;
         if (file == null || !file.exists()) {
             file = compressImageToFile(imageUri);
-            file.deleteOnExit();
         }
+        if (file == null) {
+            return null;
+        }
+        file.deleteOnExit();
         final String authority = context.getString(R.string.file_provider_authority);
         return FileProvider.getUriForFile(context, authority, file);
 
     }
 
     private static String mimeTypeForUrl(final String url) {
-        return StringUtils.defaultString(MimeTypeMap.getSingleton().getMimeTypeFromExtension(MimeTypeMap.getFileExtensionFromUrl(url)), "image/*");
+        return StringUtils.defaultString(UriUtils.getMimeType(Uri.parse(url)), "image/*");
+    }
+
+    public static boolean isImageUrl(final String url) {
+        if (StringUtils.isBlank(url)) {
+            return false;
+        }
+        final String mimeType = UriUtils.getMimeType(Uri.parse(url));
+        return (mimeType != null && mimeType.startsWith("image/"));
     }
 
     public static void initializeImageGallery(final ImageGalleryView imageGallery, final String geocode, final Collection<Image> images) {
         imageGallery.clear();
         imageGallery.setup(geocode);
-        imageGallery.registerActivity();
+        imageGallery.registerCallerActivity();
         if (geocode != null) {
             imageGallery.setEditableCategory(Image.ImageCategory.OWN.getI18n(), new ImageFolderCategoryHandler(geocode));
         }
         if (images != null) {
             imageGallery.addImages(images);
         }
+    }
+
+    /**
+     * transforms an ImageView in a zoomable, pinchable ImageView. This method uses Loupe under the hood
+     * @param activity activity where the view resides in
+     * @param imageView imageView to make zoomable/pinchable
+     * @param imageContainer container around the imageView. See loupe doc for details
+     * @param onFlingUpDown optional: action to happen on fling down or fling up
+     * @param onSingleTap optiona: action to happen on single tap. Note that this action is registered / exceuted for whole activity
+     */
+    @SuppressLint("ClickableViewAccessibility") //this is due to Loupe hack
+    public static void createZoomableImageView(final Activity activity, final ImageView imageView, final ViewGroup imageContainer,
+                                               final Runnable onFlingUpDown, final Runnable onSingleTap) {
+        final Loupe loupe = new Loupe(imageView, imageContainer);
+        if (onFlingUpDown != null) {
+            loupe.setOnViewTranslateListener(new Loupe.OnViewTranslateListener() {
+                @Override
+                public void onStart(@NonNull final ImageView imageView) {
+                    //empty on purpose
+                }
+
+                @Override
+                public void onViewTranslate(@NonNull final ImageView imageView, final float v) {
+                    //empty on purpose
+                }
+
+                @Override
+                public void onDismiss(@NonNull final ImageView imageView) {
+                    //this method is called on "fling down" or "fling up"
+                    onFlingUpDown.run();
+                }
+
+                @Override
+                public void onRestore(@NonNull final ImageView imageView) {
+                    //empty on purpose
+                }
+            });
+        }
+
+        if (onSingleTap != null) {
+            //Loupe is unable to detect single clicks (see https://github.com/igreenwood/loupe/issues/25)
+            //As a workaround we register a second GestureDetector on top of the one installed by Loupe to detect single taps
+            //Workaround START
+            final GestureDetector singleTapDetector = new GestureDetector(activity, new GestureDetector.SimpleOnGestureListener() {
+                @Override
+                public boolean onSingleTapConfirmed(final MotionEvent e) {
+                    //Logic to happen on single tap
+                    onSingleTap.run();
+                    return true;
+                }
+            });
+            //Registering an own touch listener overrides the TouchListener registered by Loupe
+            imageContainer.setOnTouchListener((v, event) -> {
+                //perform singleTap detection
+                singleTapDetector.onTouchEvent(event);
+                //pass through event to Loupe so it handles all other gestures correctly
+                return loupe.onTouch(v, event);
+            });
+        }
+        //Workaround END
     }
 
 }
