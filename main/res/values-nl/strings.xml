@@ -1398,6 +1398,7 @@
     <string name="waypoint_duplicate">Dubbel waypoint</string>
     <string name="waypoint_toclipboard">Kopieer waypoint naar klembord</string>
     <string name="waypoint_copy_of">Kopie van</string>
+    <string name="waypoint_open_geochecker">Open Geochecker</string>
     <string name="waypointcalc_notes_prompt">Voer hier notities in…</string>
     <string name="waypoint_coordinate_formats_plain">Plat</string>
     <string name="from_clipboard">Van klembord</string>
