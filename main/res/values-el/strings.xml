@@ -1392,6 +1392,7 @@
     <string name="waypoint_duplicate">Δημιουργία διπλού σημείου αναφοράς</string>
     <string name="waypoint_toclipboard">Αντιγραφή ενδιαμέσου σημείου στο πρόχειρο</string>
     <string name="waypoint_copy_of">Αντίγραφο του</string>
+    <string name="waypoint_open_geochecker">Άνοιγμα Geochecker</string>
     <string name="waypointcalc_notes_prompt">Εισάγετε σημειώσεις εδώ…</string>
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
     <string name="from_clipboard">Από το πρόχειρο</string>
