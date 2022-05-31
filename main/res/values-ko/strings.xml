@@ -1383,6 +1383,7 @@
     <string name="waypoint_duplicate">웨이포인트 복제</string>
     <string name="waypoint_toclipboard">지점을 클립보드에 복사</string>
     <string name="waypoint_copy_of">복사 :</string>
+    <string name="waypoint_open_geochecker">솔루션체커 열기</string>
     <string name="waypointcalc_notes_prompt">여기에 메모를 입력…</string>
     <string name="waypoint_coordinate_formats_plain">간단히</string>
     <string name="from_clipboard">클립보드 읽기</string>
