@@ -1398,6 +1398,7 @@
     <string name="waypoint_duplicate">Wegpunkt duplizieren</string>
     <string name="waypoint_toclipboard">Wegpunkt in die Zwischenablage kopieren</string>
     <string name="waypoint_copy_of">Kopie von</string>
+    <string name="waypoint_open_geochecker">Öffne Geochecker</string>
     <string name="waypointcalc_notes_prompt">Notizen hier eingeben…</string>
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
