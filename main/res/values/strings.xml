@@ -1444,10 +1444,15 @@
     <string name="cache_remove_from_history">Remove from history</string>
     <string name="cache_license">License</string>
     <string name="cache_image">Image</string>
+    <string name="cache_image_open">Open</string>
     <string name="cache_image_open_file">Open as file</string>
     <string name="cache_image_open_browser">Open in browser</string>
+    <string name="cache_image_share">Share</string>
     <string name="cache_image_show_description">Show description</string>
     <string name="cache_image_add_waypoint">Add waypoint</string>
+    <string name="cache_image_rename">Rename</string>
+    <string name="cache_image_delete">Delete</string>
+    <string name="cache_image_title_camera_prefix">Photo</string>
     <string name="cache_image_background">Cache listing background image</string>
     <string name="cache_share_field">Share</string>
     <string name="cache_time_full_hours">o\'clock</string>
@@ -1464,6 +1469,11 @@
 
     <string name="context_share_as_text">Share text</string>
     <string name="context_share_as_link">Share link</string>
+
+    <string name="image_category_uncategorized">Uncategorized</string>
+    <string name="image_category_own">Own</string>
+    <string name="image_category_listing">Listing</string>
+    <string name="image_category_log">Log</string>
 
 
     <string name="create_internal_cache">Create user-defined cache</string>
@@ -1634,6 +1644,12 @@
     <string name="formula_error_cyclicdependency">Cycle: %1$s</string>
     <string name="formula_error_empty">Empty Formula</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
+
+    <!-- ImageView -->
+    <string name="imageview_notitle">Untitled</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Comment</string>
 
     <!-- visit -->
     <string name="visit_tweet">Post this find to Twitter</string>

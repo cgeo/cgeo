@@ -10,6 +10,7 @@ import cgeo.geocaching.network.AndroidBeam;
 import cgeo.geocaching.ui.ViewUtils;
 import cgeo.geocaching.utils.ImageDataMemoryCache;
 import cgeo.geocaching.utils.ImageUtils;
+import cgeo.geocaching.utils.LocalizationUtils;
 import cgeo.geocaching.utils.MetadataUtils;
 import cgeo.geocaching.utils.ShareUtils;
 import cgeo.geocaching.utils.TextUtils;
@@ -334,7 +335,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageInfos.add(Html.fromHtml("<b>" + currentImage.title + (currentImage.isImageUri() ? "" : " (" + currentImage.getMimeFileExtension() + ")") + "</b>"));
         }
         if (!currentImage.isImageUri()) {
-            imageInfos.add(Html.fromHtml("<b>MimeType:</b> " + currentImage.getMimeType()));
+            imageInfos.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_mimetype) + ":</b> " + currentImage.getMimeType()));
         }
         if (!StringUtils.isEmpty(currentImage.getDescription())) {
             imageInfos.add(Html.fromHtml(currentImage.getDescription()));
@@ -343,7 +344,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             imageInfos.add(Html.fromHtml("<i>" + currentImage.contextInformation + "</i>"));
         }
         if (imageInfos.isEmpty()) {
-            imageInfos.add(Html.fromHtml("<b>No title</b>"));
+            imageInfos.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_notitle) + "</b>"));
         }
         binding.imageviewInformationText.setText(TextUtils.join(imageInfos, d -> d, "\n"));
         binding.imageviewInformation.addOnLayoutChangeListener((v, left, top, right, bottom, oldLeft, oldTop, oldRight, oldBottom) -> {
@@ -370,14 +371,14 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     imageInfosNew.add(binding.imageviewInformationText.getText());
                     if (gp != null) {
                         final String gpAsHtml = Html.escapeHtml(GeopointFormatter.format(GeopointFormatter.Format.LAT_LON_DECMINUTE, gp));
-                        imageInfosNew.add(Html.fromHtml("<b>Geopoint:</b> <i>" + gpAsHtml + "</i>"));
+                        imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_geopoint) + ":</b> <i>" + gpAsHtml + "</i>"));
                     }
                     if (!StringUtils.isBlank(comment)) {
                         String commentInView = comment;
                         if (comment.length() > 300) {
                             commentInView = comment.substring(0, 280) + "...(" + comment.length() + " chars)";
                         }
-                        imageInfosNew.add(Html.fromHtml("<b>Metadata Comment:</b> <i>" + commentInView + "</i>"));
+                        imageInfosNew.add(Html.fromHtml("<b>" + LocalizationUtils.getString(R.string.imageview_metadata_comment) + ":</b> <i>" + commentInView + "</i>"));
                     }
                     binding.imageviewInformationText.setText(TextUtils.join(imageInfosNew, d -> d, "\n"));
                     setInfoShowHide(binding, showImageInformation);

@@ -50,7 +50,7 @@
             android:id="@+id/image_share"
             android:enabled="true"
             app:icon="@drawable/ic_menu_share"
-            android:text="Share" />
+            android:text="@string/cache_image_share" />
 
     </LinearLayout>
 

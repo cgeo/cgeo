@@ -121,6 +121,16 @@ public final class ImageUtils {
         }
 
         @Override
+        public Image setTitle(final Image image, final String title) {
+            final String newFilename = getNewFilename(getFilenameFromUri(image.getUri()), title);
+            final Uri newUri = ContentStorage.get().rename(image.getUri(), FileNameCreator.forName(newFilename));
+            if (newUri == null) {
+                return null;
+            }
+            return image.buildUpon().setUrl(newUri).setTitle(getTitleFromName(getFilenameFromUri(newUri))).build();
+        }
+
+        @Override
         public void delete(final Image image) {
             ContentStorage.get().delete(image.uri);
         }
@@ -143,7 +153,12 @@ public final class ImageUtils {
                 title = title.substring(0, idx);
             }
             return title;
+        }
 
+        private String getNewFilename(final String oldFilename, final String newTitle) {
+            final int idx = oldFilename.lastIndexOf(".");
+            final String suffix = idx >= 0 ? "." + oldFilename.substring(idx + 1) : "";
+            return newTitle + suffix;
         }
     }
 
