@@ -183,12 +183,12 @@ public class WaypointParserTest {
         wp.setCoords(gp);
         wp.setPrefix("PR");
         wp.setUserNote("user note with \"escaped\" text");
-        assertThat(WaypointParser.getParseableText(wp, -1)).isEqualTo(
+        assertThat(WaypointParser.getParseableText(wp)).isEqualTo(
                 "@name (F) " + toParseableWpString(gp) + " " +
                         "\"user note with \\\"escaped\\\" text\"");
 
         final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wp, -1));
+        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wp));
         assertThat(parsedWaypoints).hasSize(1);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
         assertWaypoint(iterator.next(), wp);
@@ -201,12 +201,12 @@ public class WaypointParserTest {
         wp.setCoords(null);
         wp.setPrefix("EE");
         wp.setUserNote("user note with \"escaped\" text\nand a newline");
-        assertThat(WaypointParser.getParseableText(wp, -1)).isEqualTo(
+        assertThat(WaypointParser.getParseableText(wp)).isEqualTo(
                 "@[EE]name (F) (NO-COORD)\n" +
                         "\"user note with \\\"escaped\\\" text\nand a newline\"");
 
         final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wp, -1));
+        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wp));
         assertThat(parsedWaypoints).hasSize(1);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
         assertWaypoint(iterator.next(), wp);
@@ -219,7 +219,7 @@ public class WaypointParserTest {
         wp.setCoords(null);
         wp.setUserDefined();
         wp.setUserNote("user note with \"escaped\" text\nand a newline");
-        final String parseableText = WaypointParser.getParseableText(wp, -1);
+        final String parseableText = WaypointParser.getParseableText(wp);
         assertThat(parseableText).isEqualTo(
                 "@name (F) (NO-COORD)\n" +
                         "\"user note with \\\"escaped\\\" text\nand a newline\"");
@@ -259,7 +259,7 @@ public class WaypointParserTest {
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp = iterator.next();
 
-        final String parseableText = WaypointParser.getParseableText(wp, -1, true);
+        final String parseableText = WaypointParser.getParseableText(wp, true);
         assertThat(parseableText).isEqualTo(
                 "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|a=2| \"this is the description\"");
     }
@@ -277,7 +277,7 @@ public class WaypointParserTest {
         final Iterator<Waypoint> iterator = waypoints.iterator();
         final Waypoint wp = iterator.next();
 
-        final String parseableText = WaypointParser.getParseableText(wp, -1, true);
+        final String parseableText = WaypointParser.getParseableText(wp, true);
         assertThat(parseableText).isEqualTo(
                 "@name (F) " + WaypointParser.PARSING_COORD_FORMULA_PLAIN + " N 45° A.B(C+D)' E 9° (A-B).(2*D)EF' |A=a + b|B=1|C=10|D=4|E=2|F=3|a=2|b=47| \"this is the description\"");
     }
@@ -504,7 +504,7 @@ public class WaypointParserTest {
     }
 
     @Test
-    public void testCreateReducedParseableWaypointText() {
+    public void testCreateNotReducedParseableWaypointText() {
         final Waypoint wp1 = new Waypoint("name", WaypointType.FINAL, true);
         final Geopoint gp = new Geopoint("N 45°49.739 E 9°45.038");
         wp1.setCoords(gp);
@@ -518,27 +518,18 @@ public class WaypointParserTest {
         wpColl.add(wp2);
         final String gpStr = toParseableWpString(gp);
 
-        assertThat(WaypointParser.getParseableText(wpColl, null, 10, false)).isNull();
+        assertThat(WaypointParser.getParseableText(wpColl, null, false)).isNotNull();
 
         final String fullExpected = "@name (F) " + gpStr + " \"This is a user note\"\n@name2 (H) " + gpStr + " \"This is a user note 2\"";
         //no limits
-        assertThat(WaypointParser.getParseableText(wpColl, null, -1, false)).isEqualTo(fullExpected);
+        assertThat(WaypointParser.getParseableText(wpColl, null, false)).isEqualTo(fullExpected);
 
         final WaypointParser waypointParser = createParser("Prefix");
-        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wpColl, null, -1, false));
+        final Collection<Waypoint> parsedWaypoints = waypointParser.parseWaypoints(WaypointParser.getParseableText(wpColl, null, false));
         assertThat(parsedWaypoints).hasSize(2);
         final Iterator<Waypoint> iterator = parsedWaypoints.iterator();
         assertWaypoint(iterator.next(), wp1);
         assertWaypoint(iterator.next(), wp2);
-
-        //limited user notes
-        String expected = "@name (F) " + gpStr + " \"This is a ...\"\n@name2 (H) " + gpStr + " \"This is a ...\"";
-        assertThat(WaypointParser.getParseableText(wpColl, null, expected.length(), false)).isEqualTo(expected);
-
-        //no user notes
-        expected = "@name (F) " + gpStr + "\n@name2 (H) " + gpStr;
-        assertThat(WaypointParser.getParseableText(wpColl, null, expected.length(), false)).isEqualTo(expected);
-
     }
 
     @Test
@@ -582,11 +573,11 @@ public class WaypointParserTest {
         final Collection<Waypoint> wps = waypointParser.parseWaypoints(waypoints);
 
         final String note = "";
-        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, null, -1);
+        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, null);
         assertThat(noteAfter).isEqualTo("{c:geo-start}\n" + waypoints + "\n{c:geo-end}");
 
         //check that continuous appliance of same waypoints will result in identical text
-        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, null, -1);
+        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, null);
         assertThat(noteAfter2).isEqualTo(noteAfter);
     }
 
@@ -602,11 +593,11 @@ public class WaypointParserTest {
         final Collection<Waypoint> wps = waypointParser.parseWaypoints(waypoints);
 
         final String note = "before {c:geo-start}" + waypoints + "{c:geo-end} after";
-        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, null, -1);
+        final String noteAfter = WaypointParser.putParseableWaypointsInText(note, wps, null);
         assertThat(noteAfter).isEqualTo("before  after\n\n{c:geo-start}\n" + waypoints + "\n{c:geo-end}");
 
         //check that continuous appliance of same waypoints will result in identical text
-        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, null, -1);
+        final String noteAfter2 = WaypointParser.putParseableWaypointsInText(noteAfter, wps, null);
         assertThat(noteAfter2).isEqualTo(noteAfter);
     }
 

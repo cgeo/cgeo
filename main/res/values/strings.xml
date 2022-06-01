@@ -1298,8 +1298,7 @@
     <string name="cache_personal_note_removedwaypoints">Waypoints removed</string>
     <string name="cache_personal_note_removewaypoints_nowaypoints">No waypoints found to remove</string>
     <string name="cache_personal_note_storewaypoints_success">Waypoints were added to personal note</string>
-    <string name="cache_personal_note_storewaypoints_success_limited">Waypoints were added to note but had to be shortened (max personal note size: %1$d)</string>
-    <string name="cache_personal_note_storewaypoints_failed">Waypoints could not be stored in note due to size limits (max personal note size: %1$d)</string>
+    <string name="cache_personal_note_storewaypoints_limited_reduce">Waypoints were added to personal note (%d characters more than supported by Geocaching.com)</string>
     <string name="cache_personal_note_storewaypoints_nowaypoints">No storable waypoints found</string>
     <string name="cache_personal_note_preventWaypointsExtraction">Prevent waypoints extraction</string>
     <string name="cache_personal_note_limit">Personal note limit</string>
