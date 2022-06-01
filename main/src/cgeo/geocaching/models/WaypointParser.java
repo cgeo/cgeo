@@ -431,18 +431,13 @@ public class WaypointParser {
      * @param maxSize   if >0 then total size of returned text may not exceed this parameter
      * @return new text, or null if waypoints could not be placed due to size restrictions
      */
-    public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final VariableList vars, final int maxSize) {
+    public static String putParseableWaypointsInText(final String text, final Collection<Waypoint> waypoints, final VariableList vars) {
         String cleanText = removeParseableWaypointsFromText(text);
         if (!cleanText.isEmpty()) {
             cleanText = cleanText + "\n\n";
         }
-        if (maxSize > -1 && cleanText.length() > maxSize) {
-            return null;
-        }
-        final String newWaypoints = getParseableText(waypoints, vars, maxSize - cleanText.length(), true);
-        if (newWaypoints == null) {
-            return null;
-        }
+
+        final String newWaypoints = getParseableText(waypoints, vars, true);
         return cleanText + newWaypoints;
     }
 
@@ -454,29 +449,11 @@ public class WaypointParser {
      *
      * @return parseable text for wayppints, or null if maxsize cannot be met
      */
-    public static String getParseableText(final Collection<Waypoint> waypoints, final VariableList vars, final int maxSize, final boolean includeBackupTags) {
-        String text = getParseableTextWithRestrictedUserNote(waypoints, vars, -1, includeBackupTags);
-        if (maxSize < 0 || text.length() <= maxSize) {
-            return text;
-        }
-
-        //try to shrink size by reducing maximum user note length
-        for (int maxUserNoteLength = 50; maxUserNoteLength >= 0; maxUserNoteLength -= 10) {
-            text = getParseableTextWithRestrictedUserNote(waypoints, vars, maxUserNoteLength, includeBackupTags);
-            if (text.length() <= maxSize) {
-                return text;
-            }
-        }
-
-        //not possible to meet size requirements
-        return null;
-    }
-
-    public static String getParseableTextWithRestrictedUserNote(final Collection<Waypoint> waypoints, final VariableList vars, final int maxUserNoteSize, final boolean includeBackupTags) {
+    public static String getParseableText(final Collection<Waypoint> waypoints, final VariableList vars, final boolean includeBackupTags) {
         //no streaming allowed
         final List<String> waypointsAsStrings = new ArrayList<>();
         for (final Waypoint wp : waypoints) {
-            waypointsAsStrings.add(getParseableText(wp, maxUserNoteSize));
+            waypointsAsStrings.add(getParseableText(wp));
         }
         if (vars != null) {
             waypointsAsStrings.add(getParseableVariableString(vars.toMap()));
@@ -489,15 +466,13 @@ public class WaypointParser {
     /**
      * creates parseable waypoint text
      *
-     * @param maxUserNoteSize if -1, user notes size is not limited. if 0, user note is omitted.
-     *                        if >0 user note size is limited to given size
      * @return parseable waypoint text
      */
-    public static String getParseableText(final Waypoint wp, final int maxUserNoteSize) {
-        return getParseableText(wp, maxUserNoteSize, false);
+    public static String getParseableText(final Waypoint wp) {
+        return getParseableText(wp, false);
     }
 
-    public static String getParseableText(final Waypoint wp, final int maxUserNoteSize, final boolean legacyMode) {
+    public static String getParseableText(final Waypoint wp, final boolean legacyMode) {
         final StringBuilder sb = new StringBuilder();
         //name
         sb.append(PARSING_NAME_PRAEFIX);
@@ -524,11 +499,8 @@ public class WaypointParser {
         }
 
         //user note
-        String userNote = wp.getUserNote();
-        if (maxUserNoteSize != 0 && !StringUtils.isBlank(userNote)) {
-            if (maxUserNoteSize > 0 && userNote.length() > maxUserNoteSize) {
-                userNote = userNote.substring(0, maxUserNoteSize) + PARSING_USERNOTE_CONTINUED;
-            }
+        final String userNote = wp.getUserNote();
+        if (!StringUtils.isBlank(userNote)) {
             //if user note contains itself newlines, then start user note on a second line
             sb.append(userNote.contains("\n") ? "\n" : " ");
             sb.append(TextUtils.createDelimitedValue(userNote, PARSING_USERNOTE_DELIM, PARSING_USERNOTE_ESCAPE));
