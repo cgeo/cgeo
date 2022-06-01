@@ -567,6 +567,7 @@
     <string name="cache_filter_status_exclude_active">Wyklucz aktywne</string>
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
     <string name="cache_filter_log_entry_foundby">Znaleziona przez</string>
     <string name="cache_filter_log_entry_logtext">Tekst dziennika</string>
     <string name="cache_filter_stored_since_notstored">Nieprzechowywane</string>
@@ -592,6 +593,7 @@
     <string name="about_changelog">Zmiany</string>
     <string name="about_changelog_nightly_build">Kompilacja nocna</string>
     <string name="about_changelog_next_release">Następne wydanie</string>
+    <string name="about_changelog_bugfix_release">Wersja z poprawkami błędów</string>
     <string name="about_system">System</string>
     <string name="about_donate">Wesprzyj nas</string>
     <string name="about_donation_more">Odwiedź stronę po więcej informacji</string>
@@ -652,6 +654,8 @@
     <string name="settings_title_map_content">Zawartość mapy</string>
     <string name="settings_title_map_behavior">Zachowanie mapy</string>
     <string name="settings_title_map_style">Styl mapy</string>
+    <string name="settings_hide_tileproviders_title">Ukryj źródła mapy</string>
+    <string name="settings_hide_tileproviders_summary">Wyklucz jedno lub więcej źródeł mapy z wyboru źródła mapy</string>
     <string name="settings_title_data_dir">Folder z danymi skrytek</string>
     <string name="settings_title_data_dir_usage">Folder z danymi skrytek (użyto %1$s)</string>
     <string name="calculate_dataDir_title">Użycie danych</string>
@@ -739,6 +743,7 @@
     <string name="init_signature_template_log">Wpis</string>
     <string name="init_signature_template_size">Rozmiar</string>
     <string name="init_signature_template_type">Typ</string>
+    <string name="init_signature_template_location">Lokalizacja</string>
     <string name="init_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_summary_ratingwanted">Załaduj ocenę skrzynki z GCvote.com</string>
     <string name="init_friends_and_own_logs_wanted">Pokaż przyjaciół/własne</string>
@@ -776,6 +781,8 @@
     <string name="init_summary_prevent_cache_note_merge">Jeśli to ustawienie jest włączone, c:geo usunie lokalnie zapisaną notatkę i zastąpi ją notatką osobistą z serwera. Scalanie nie zostanie wykonane.</string>
     <string name="init_customtabs_as_browser">Użyj widoku internetowego Chrome</string>
     <string name="init_summary_customtabs_as_browser">Witryny zewnętrzne będą wyświetlane bez opuszczania c:geo (możliwe tylko, jeśli jest zainstalowany Chrome)</string>
+    <string name="init_rot13_hint">Szyfruj wskazówkę</string>
+    <string name="init_summary_rot13_hint">Pokaż tekst wskazówek zaszyfrowany ROT-13 aż do naciśnięcia</string>
     <string name="init_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_summary_save_log_img">Zapisz zdjęcia z wpisów</string>
     <string name="init_units">Używaj angielskich jednostek miary\n(mile)</string>
@@ -790,6 +797,8 @@
     <string name="init_summary_listdisplay">Pokaż członkostwo skrytek w dodatkowych listach na liście skrytek</string>
     <string name="init_livelist">Pokazuj kierunek do skrzynek na liście</string>
     <string name="init_summary_livelist">Pokaż strzałkę z kierunkiem kompasu dla skrytek na liście</string>
+    <string name="init_quicklaunchitems">Przyciski szybkiego uruchamiania</string>
+    <string name="init_summary_quicklaunchitems">Wybierz jeden lub więcej elementów jako przyciski szybkiego uruchamiania na ekranie głównym</string>
     <!-- app theme -->
     <string name="settings_theme_title">Motyw</string>
     <string-array name="settings_theme_entries">
@@ -1271,6 +1280,7 @@
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Offline)</string>
     <string name="cache_menu_vote">Głosuj</string>
     <string name="cache_menu_challenge_checker">Szukaj Challenge-Checker</string>
+    <string name="cache_menu_log_in_browser">Utwórz wpis w dzienniku w przeglądarce</string>
     <string name="cache_menu_ignore">Ignoruj skrzynkę</string>
     <string name="cache_log_menu_decrypt">Odszyfruj/Szyfruj</string>
     <string name="cache_log_menu_popup_title">Dziennik z %s</string>
@@ -1314,6 +1324,7 @@
     <string name="cache_image">Zdjęcie</string>
     <string name="cache_image_open_file">Otwórz jako plik</string>
     <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
+    <string name="cache_image_show_description">Pokaż opis</string>
     <string name="cache_image_add_waypoint">Dodaj punkt nawigacyjny</string>
     <string name="cache_image_background">Obrazek tła listy skrzynek</string>
     <string name="cache_share_field">Współdziel</string>
@@ -1337,6 +1348,9 @@
     <string name="internal_goto_targets_title">Cele \'Idź do\'</string>
     <string name="internal_goto_targets_description">Ta skrytka przechowuje Twoje ostatnie cele \"Idź do\". Jest ona automatycznie tworzona po użyciu funkcji \"Idź do\" w głównym menu. Wprowadzone współrzędne będą przechowywane w punktach nawigacyjnych tej skrytki. Jeśli nie potrzebujesz już tych współrzędnych, możesz bezpiecznie usunąć tę skrytkę lub dowolny punkt nawigacyjny. Możesz również przenieść skrytkę do dowolnej wybranej przez siebie listy.</string>
     <string name="init_longtap_map">Długie dotknięcie na mapie</string>
+    <string name="init_summary_longtap_map">Aktywuj długie dotknięcie ikony mapy (utwórz indywidualną trasę) lub na wolnej przestrzeni na mapie (utwórz punkt nawigacyjny lub skrzynkę zdefiniowaną przez użytkownika)</string>
+    <string name="onetime_info_longtap_disabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie wyłączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
+    <string name="onetime_info_longtap_enabled">Poprzez długie dotknięcie na mapie możesz tworzyć indywidualne trasy oraz punkty nawigacyjne / skrytki zdefiniowane przez użytkownika.\n\nDługie dotknięcie na mapie jest obecnie włączone.\n\nMożesz to zmienić w Ustawienia → Mapa → Zachowanie mapy</string>
     <string name="goto_targets_list">Wewnętrzne skrzynki</string>
     <string name="clear_goto_history_title">Wyczyść historię \'Idź do\'</string>
     <string name="clear_goto_history">Spowoduje to usunięcie wszystkich historycznych punktów nawigacyjnych z wyjątkiem pięciu najnowszych</string>
@@ -1380,6 +1394,7 @@
     <string name="waypoint_calculated_coordinates_global">Oblicz współrzędne</string>
     <string name="waypoint_custom">Zdefiniowane przez użytkownika</string>
     <string name="waypoint_my_coordinates">Moje współrzędne</string>
+    <string name="waypoint_my_coordinates_accuracy">Moje współrzędne (+%s)</string>
     <string name="waypoint_bearing">Kierunek w stopniach</string>
     <string name="waypoint_distance">Odległość</string>
     <string name="waypoint_name">Nazwa</string>
@@ -1413,6 +1428,7 @@
     <string name="waypoint_duplicate">Duplikuj punkt orientacyjny</string>
     <string name="waypoint_toclipboard">Skopiuj punkt nawigacyjny do schowka</string>
     <string name="waypoint_copy_of">Kopia</string>
+    <string name="waypoint_open_geochecker">Otwórz Geochecker</string>
     <string name="waypointcalc_notes_prompt">Wprowadź uwagi tutaj…</string>
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
@@ -2069,6 +2085,7 @@
         <item quantity="other">%d punktów orientacyjnych zostało wyciągniętych</item>
     </plurals>
     <string name="link_gc_checker">sprawdzanie współrzędnych w serwisie geocaching.com dostępne jest przez przeglądarkę</string>
+    <string name="geochecker_available">Geochecker dostępny przez przeglądarkę</string>
     <!-- calendar adder -->
     <string name="event_fail">Nie udało się dodać wydarzenia do kalendarza</string>
     <string name="init_low_disk_space">Zaczyna brakować miejsca</string>
@@ -2233,6 +2250,12 @@
     <string name="mapserver_hylly_themes_info">Szczegółowy motyw mapy, zbudowany dla map „Hylly”</string>
     <string name="brouter_info">Usługa nawigacji offline</string>
     <string name="maptheme_elevate_categoryinfo">Dotyczy: [A] Obszarów, [P] POI, [R] Tras, [W] Dróg</string>
+    <string name="maptheme_scale_map_title">Współczynnik skali mapy</string>
+    <string name="maptheme_scale_map_summary">Skalowanie mapy; 100% = brak skalowania</string>
+    <string name="maptheme_scale_text_title">Współczynnik skali tekstu</string>
+    <string name="maptheme_scale_text_summary">Dodatkowo skaluje etykiety tekstowe na mapie; 100% = bez dodatkowego skalowania</string>
+    <string name="maptheme_scale_symbol_title">Współczynnik skali symboli</string>
+    <string name="maptheme_scale_symbol_summary">Dodatkowo skaluje rozmiary symboli na mapie; 100% = brak dodatkowego skalowania</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Wyczyść historię ścieżki</string>
     <string name="map_trailhistory_cleared">Historia ścieżki wyczyszczona</string>
@@ -2635,4 +2658,36 @@
     <string name="rtl_path_quality23">jakość 2/3 (utwardzenie: żwir, naprawiony, …)</string>
     <string name="rtl_path_quality45">jakość 4/5 (nieutwardzona)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_smile">Uśmiech</string>
+    <string name="smiley_big_smile">Duży uśmiech</string>
+    <string name="smiley_cool">Fajny</string>
+    <string name="smiley_blush">Rumieniec</string>
+    <string name="smiley_tongue">Język</string>
+    <string name="smiley_evil">Zły</string>
+    <string name="smiley_shocked">Zszokowany</string>
+    <string name="smiley_wink">Puszcza oko</string>
+    <string name="smiley_clown">Klaun</string>
+    <string name="smiley_blackeye">Czarne oko</string>
+    <string name="smiley_8ball">Kula nr 8</string>
+    <string name="smiley_frown">Niezadowolony</string>
+    <string name="smiley_shy">Nieśmiały</string>
+    <string name="smiley_angry">Zagniewany</string>
+    <string name="smiley_dead">Martwy</string>
+    <string name="smiley_sleepy">Senny</string>
+    <string name="smiley_kisses">Buziaki</string>
+    <string name="smiley_approve">Zatwierdzone</string>
+    <string name="smiley_disapprove">Odrzucone</string>
+    <string name="smiley_question">Pytanie</string>
+    <string name="smiley_cry">Płacz</string>
+    <string name="smiley_embarassed">Zawstydzony</string>
+    <string name="smiley_footinmouth">Stopa w ustach</string>
+    <string name="smiley_innocent">Niewinny</string>
+    <string name="smiley_kiss">Pocałunek</string>
+    <string name="smiley_laughing">Śmiech</string>
+    <string name="smiley_money">Pieniądze</string>
+    <string name="smiley_sealed">Zapieczętowany</string>
+    <string name="smiley_surprised">Zaskoczony</string>
+    <string name="smiley_tongueout">Język na wierzchu</string>
+    <string name="smiley_undecided">Niezdecydowany</string>
+    <string name="smiley_yell">Krzyk</string>
 </resources>
