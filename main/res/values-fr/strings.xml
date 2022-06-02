@@ -1460,6 +1460,7 @@
     <string name="formula_error_cyclicdependency">cicle : %1$s</string>
     <string name="formula_error_empty">Formule vide</string>
     <string name="formula_error_other">Erreur : \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Publier votre découverte sur Twitter</string>
     <!-- map -->
