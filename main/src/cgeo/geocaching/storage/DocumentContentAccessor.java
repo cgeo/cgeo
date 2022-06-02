@@ -97,6 +97,18 @@ class DocumentContentAccessor extends AbstractContentAccessor {
     }
 
     @Override
+    public Uri rename(@NonNull final Uri uri, @NonNull final String newName) throws IOException {
+        removeFromUriCache(uri); //rename might change Uri. Thus very important to prevent IllegalArgumentExceptions due to nonexisting Uris!
+        try {
+            return DocumentsContract.renameDocument(getContext().getContentResolver(), uri, newName);
+        } catch (IllegalArgumentException iae) {
+            //this happens if uri is invalid, e.g. because document or containing folder was deleted externally to c:geo
+            Log.d("Exception on trying to rename '" + uri + "' to '" + newName + "' (assuming it was invalid): " + iae);
+            return null;
+        }
+    }
+
+    @Override
     public Uri create(@NonNull final Folder folder, @NonNull final String name) throws IOException {
         try {
             return createInternal(folder, name, false);

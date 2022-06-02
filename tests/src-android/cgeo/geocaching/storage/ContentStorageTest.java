@@ -615,10 +615,20 @@ public class ContentStorageTest extends CGeoTestCase {
         assertThat(ContentStorage.get().getName(null)).isNull();
 
         //create a new file
-        final Uri fileUri = ContentStorage.get().create(testFolder, "test.txt");
+        final Uri fileBeforeUri = ContentStorage.get().create(testFolder, "test-before.txt");
         list = ContentStorage.get().list(testFolder);
         assertThat(list).hasSize(1);
-        assertThat(list.get(0).name).isEqualTo("test.txt");
+        assertThat(list.get(0).name).isEqualTo("test-before.txt");
+
+        //get that file
+        assertThat(ContentStorage.get().getFileInfo(testFolder, "test-before.txt").name).isEqualTo("test-before.txt");
+        assertThat(ContentStorage.get().getFileInfo(testFolder, "test-before.txt").uri).isEqualTo(fileBeforeUri);
+        assertThat(ContentStorage.get().exists(testFolder, "test-before.txt")).isTrue();
+
+
+        //rename the file
+        final Uri fileUri = ContentStorage.get().rename(fileBeforeUri, FileNameCreator.forName("test.txt"));
+        assertThat(list.get(0).name).isEqualTo("test-before.txt");
 
         //get that file
         assertThat(ContentStorage.get().getFileInfo(testFolder, "test.txt").name).isEqualTo("test.txt");

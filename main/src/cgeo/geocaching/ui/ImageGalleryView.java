@@ -84,6 +84,8 @@ public class ImageGalleryView extends LinearLayout {
 
         void delete(Image image);
 
+        Image setTitle(Image image, String title);
+
     }
 
     @Override
@@ -168,12 +170,7 @@ public class ImageGalleryView extends LinearLayout {
     public void fillView(final ImageData imgData, final ImageGalleryImageBinding binding) {
 
         final Image img = imgData.image;
-        if (!StringUtils.isBlank(img.getTitle())) {
-            binding.imageTitle.setText(TextParam.text(img.getTitle()).setHtml(true).getText(getContext()));
-            binding.imageTitle.setVisibility(View.VISIBLE);
-        } else {
-            binding.imageTitle.setVisibility(View.GONE);
-        }
+        setImageTitle(binding, img.getTitle());
         setImageLayoutSizes(binding, imageSizeDp);
         binding.imageDescriptionMarker.setVisibility(img.hasDescription() ? View.VISIBLE : View.GONE);
 
@@ -217,6 +214,15 @@ public class ImageGalleryView extends LinearLayout {
             showContextOptions(imgData, binding);
             return true;
         });
+    }
+
+    private void setImageTitle(final ImageGalleryImageBinding binding, final CharSequence text) {
+        if (!StringUtils.isBlank(text)) {
+            binding.imageTitle.setText(TextParam.text(text).setHtml(true).getText(getContext()));
+            binding.imageTitle.setVisibility(View.VISIBLE);
+        } else {
+            binding.imageTitle.setVisibility(View.GONE);
+        }
     }
 
     public ImageGalleryView(final Context context) {
@@ -351,6 +357,22 @@ public class ImageGalleryView extends LinearLayout {
             imageHelper = new ImageActivityHelper(activity, (r, imgUris, uk) -> {
                 final Collection<Image> imgs = CollectionStream.of(imgUris).map(uri -> new Image.Builder().setUrl(uri).build()).toList();
                 final Collection<Image> addedImgs = editableCategoryHandlerMap.get(uk).add(imgs);
+                if (r == ImageActivityHelper.REQUEST_CODE_CAMERA) {
+                    //change title of camera photos
+                    final Collection<Image> copy = new ArrayList<>(addedImgs);
+                    addedImgs.clear();
+                    int idx = this.categoryDataMap.get(uk).imageList.size() + 1;
+                    for (Image i : copy) {
+                        final Image newImage = editableCategoryHandlerMap.get(uk).setTitle(i, LocalizationUtils.getString(R.string.cache_image_title_camera_prefix) + " " + idx);
+                        if (newImage == null) {
+                            addedImgs.add(i);
+                        } else {
+                            addedImgs.add(newImage);
+                            idx++;
+                        }
+                    }
+                }
+
                 addImagesInternal(addedImgs, i -> uk, true);
             });
         }
@@ -472,7 +494,7 @@ public class ImageGalleryView extends LinearLayout {
         final ContextMenuDialog ctxMenu = new ContextMenuDialog(activity);
         ctxMenu.setTitle(LocalizationUtils.getString(R.string.cache_image));
 
-        ctxMenu.addItem("Open", R.drawable.ic_menu_image,
+        ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open), R.drawable.ic_menu_image,
                 v -> openImageViewer(imgData, binding));
 
         ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_open_file), R.drawable.ic_menu_image,
@@ -506,8 +528,24 @@ public class ImageGalleryView extends LinearLayout {
 
         final EditableCategoryHandler editHandler = editableCategoryHandlerMap.get(category);
         if (editHandler != null) {
-            ctxMenu.addItem(LocalizationUtils.getString(R.string.log_image_delete), R.drawable.ic_menu_delete, v -> {
-                final ImageCategoryData icd = categoryDataMap.get(category);
+
+            final ImageCategoryData icd = categoryDataMap.get(category);
+            final Image oldImg = icd.imageList.get(pos).image;
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_rename), R.drawable.ic_menu_edit, v -> {
+                SimpleDialog.ofContext(getContext()).setTitle(TextParam.id(R.string.cache_image_rename))
+                        .input(-1, oldImg.getTitle(), null, null, newTitle -> {
+                            if (!StringUtils.isBlank(newTitle)) {
+                                final Image newImg = editHandler.setTitle(oldImg, newTitle);
+                                if (newImg != null) {
+                                    icd.imageList.set(pos, new ImageData(category, newImg));
+                                    final ImageGalleryImageBinding imgBinding = ImageGalleryImageBinding.bind(icd.view.imageGalleryList.getChildAt(pos));
+                                    setImageTitle(imgBinding, newTitle);
+                                }
+                            }
+                        });
+            });
+
+            ctxMenu.addItem(LocalizationUtils.getString(R.string.cache_image_delete), R.drawable.ic_menu_delete, v -> {
                 icd.imageList.remove(pos);
                 editHandler.delete(img);
                 icd.view.imageGalleryList.removeView(icd.view.imageGalleryList.getChildAt(pos));

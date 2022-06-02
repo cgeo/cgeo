@@ -30,6 +30,13 @@ class FileContentAccessor extends AbstractContentAccessor {
         return new File(uri.getPath()).delete();
     }
 
+    @Override
+    public Uri rename(@NonNull final Uri uri, @NonNull final String newName) throws IOException {
+        final File current = new File(uri.getPath());
+        final File newFile = new File(current.getParent(), newName);
+        return (current.renameTo(newFile) ? Uri.fromFile(newFile) : null);
+    }
+
     public Uri create(@NonNull final Folder folder, @NonNull final String name) throws IOException {
         final File dir = toFile(folder, true);
         if (dir == null || !dir.isDirectory()) {

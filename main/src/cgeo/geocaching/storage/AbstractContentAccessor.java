@@ -27,6 +27,8 @@ abstract class AbstractContentAccessor {
 
     public abstract boolean delete(@NonNull Uri uri) throws IOException;
 
+    public abstract Uri rename(@NonNull Uri uri, @NonNull String newName) throws IOException;
+
     public abstract Uri create(@NonNull Folder folder, @NonNull String name) throws IOException;
 
     public abstract List<ContentStorage.FileInformation> list(@NonNull Folder folder) throws IOException;

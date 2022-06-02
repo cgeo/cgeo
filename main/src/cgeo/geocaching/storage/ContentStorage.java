@@ -204,6 +204,23 @@ public class ContentStorage {
     }
 
     /**
+     * Renames the file represented by given Uri. This might change the Uri, the new Uri is returned.
+     * If rename is unsuccessful then null is returned
+     */
+    public Uri rename(final Uri uri, final FileNameCreator fileNameCreator) {
+        if (isEmpty(uri)) {
+            return null;
+        }
+
+        try {
+            return getAccessorFor(uri).rename(uri, fileNameCreator.createName());
+        } catch (IOException ioe) {
+            reportProblem(R.string.contentstorage_err_delete_failed, ioe, false, uri);
+        }
+        return null;
+    }
+
+    /**
      * Lists all direct content of given folder
      */
     @NonNull
