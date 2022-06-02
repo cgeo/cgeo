@@ -1286,10 +1286,15 @@
     <string name="cache_remove_from_history">기록에서 제거</string>
     <string name="cache_license">라이센스</string>
     <string name="cache_image">사진</string>
+    <string name="cache_image_open">열기</string>
     <string name="cache_image_open_file">파일로 열기</string>
     <string name="cache_image_open_browser">브라우저에서 열기</string>
+    <string name="cache_image_share">공유</string>
     <string name="cache_image_show_description">설명 보기</string>
     <string name="cache_image_add_waypoint">지점 추가</string>
+    <string name="cache_image_rename">이름변경</string>
+    <string name="cache_image_delete">삭제</string>
+    <string name="cache_image_title_camera_prefix">사진</string>
     <string name="cache_image_background">캐시정보 배경 이미지</string>
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
@@ -1303,6 +1308,10 @@
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
+    <string name="image_category_uncategorized">카테고리 없음</string>
+    <string name="image_category_own">소유</string>
+    <string name="image_category_listing">목록</string>
+    <string name="image_category_log">로그</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
     <string name="create_internal_cache_currentlist">현재 목록 사용</string>
@@ -1389,6 +1398,7 @@
     <string name="waypoint_duplicate">웨이포인트 복제</string>
     <string name="waypoint_toclipboard">지점을 클립보드에 복사</string>
     <string name="waypoint_copy_of">복사 :</string>
+    <string name="waypoint_open_geochecker">솔루션체커 열기</string>
     <string name="waypointcalc_notes_prompt">여기에 메모를 입력…</string>
     <string name="waypoint_coordinate_formats_plain">간단히</string>
     <string name="from_clipboard">클립보드 읽기</string>
@@ -1451,6 +1461,11 @@
     <string name="formula_error_cyclicdependency">주기: %1$s</string>
     <string name="formula_error_empty">빈 공식</string>
     <string name="formula_error_other">오류: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">제목 없음</string>
+    <string name="imageview_mimetype">MIME형식</string>
+    <string name="imageview_metadata_geopoint">지오포인트</string>
+    <string name="imageview_metadata_comment">코멘트</string>
     <!-- visit -->
     <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->
