@@ -324,7 +324,7 @@ public class VariableListView extends LinearLayout {
             if (viewHolder.viewButtonFunction != null) {
                 viewHolder.viewButtonFunction.setOnClickListener(d -> {
                     final List<FormulaFunction> functions = FormulaFunction.valuesAsUserDisplaySortedList();
-                    SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.text("Choose function"))
+                    SimpleDialog.ofContext(parent.getContext()).setTitle(TextParam.id(R.string.formula_choose_function))
                             .selectSingleGrouped(functions, (f, i) -> getFunctionDisplayString(f), -1, SimpleDialog.SingleChoiceMode.SHOW_RADIO, (f, i) -> f.getGroup(), VariablesListAdapter::getFunctionGroupDisplayString, (f, i) -> {
                                 if (viewHolder.viewVariableFormulaText != null) {
                                     final String current = viewHolder.viewVariableFormulaText.getText().toString();
@@ -441,7 +441,8 @@ public class VariableListView extends LinearLayout {
 
             final boolean oldNameIsInvisible = !VariableList.isVisible(oldName);
             final String nameToShow = oldNameIsInvisible ? "" : oldName;
-            SimpleDialog.ofContext(recyclerView.getContext()).setTitle(TextParam.text("Variable Name")).setMessage(TextParam.text("Enter variable name (may be left empty)"))
+            SimpleDialog.ofContext(recyclerView.getContext()).setTitle(TextParam.id(R.string.variables_varname_dialog_title))
+                    .setMessage(TextParam.id(R.string.variables_varname_dialog_message))
                     .input(InputType.TYPE_CLASS_TEXT, nameToShow, null, null, s -> StringUtils.isBlank(s) || isValidVarName(s), "[a-zA-Z0-9]", t -> {
                         final boolean newNameIsInvisible = StringUtils.isBlank(t);
                         if ((oldName != null && oldNameIsInvisible && newNameIsInvisible) || Objects.equals(oldName, t)) {

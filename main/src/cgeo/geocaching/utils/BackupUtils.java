@@ -575,6 +575,9 @@ public class BackupUtils {
         try {
 
             final OutputStream os = ContentStorage.get().openForWrite(backupFile);
+            if (os == null) {
+                throw new IOException("Could not open backup file uri for writing:" + backupFile);
+            }
             writer = new OutputStreamWriter(os, StandardCharsets.UTF_8);
 
             final XmlSerializer xmlSerializer = Xml.newSerializer();

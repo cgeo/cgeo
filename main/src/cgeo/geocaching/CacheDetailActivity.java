@@ -136,6 +136,7 @@ import android.text.style.ForegroundColorSpan;
 import android.text.style.StyleSpan;
 import android.text.style.URLSpan;
 import android.text.util.Linkify;
+import android.util.Pair;
 import android.view.ContextMenu;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -476,6 +477,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
             final boolean canClearCoords = hasCoords && (selectedWaypoint.isUserDefined() || selectedWaypoint.isOriginalCoordsEmpty());
             menu.findItem(R.id.menu_waypoint_clear_coordinates).setVisible(canClearCoords);
             menu.findItem(R.id.menu_waypoint_toclipboard).setVisible(true);
+            menu.findItem(R.id.menu_waypoint_open_geochecker).setVisible(CheckerUtils.getCheckerUrl(cache) != null);
         } else {
             if (imagesList != null) {
                 imagesList.onCreateContextMenu(menu, view);
@@ -550,6 +552,20 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 ensureSaved();
                 ClipboardUtils.copyToClipboard(selectedWaypoint.reformatForClipboard());
                 showToast(getString(R.string.clipboard_copy_ok));
+            }
+        } else if (itemId == R.id.menu_waypoint_open_geochecker) {
+            if (selectedWaypoint != null) {
+                ensureSaved();
+                final Pair<String, CheckerUtils.GeoChecker> geocheckerData = CheckerUtils.getCheckerData(cache, selectedWaypoint.getCoords());
+                if (geocheckerData != null) {
+                    if (!geocheckerData.second.allowsCoordinate()) {
+                        final Geopoint coordinates = selectedWaypoint.getCoords();
+                        if (coordinates != null) {
+                            ClipboardUtils.copyToClipboard(GeopointFormatter.reformatForClipboard(coordinates.toString()));
+                        }
+                    }
+                    ShareUtils.openUrl(this, geocheckerData.first, true);
+                }
             }
         } else if (itemId == R.id.menu_waypoint_delete) {
             ensureSaved();
@@ -2864,7 +2880,7 @@ public class CacheDetailActivity extends TabbedViewPagerActivity
                 userModifiedWaypoints.add(w);
             }
         }
-        if (userModifiedWaypoints.isEmpty()) {
+        if (userModifiedWaypoints.isEmpty() && cache.getVariables().isEmpty()) {
             showShortToast(getString(R.string.cache_personal_note_storewaypoints_nowaypoints));
             return;
         }

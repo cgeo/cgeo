@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
+import java.util.Map;
 
 import org.junit.Test;
 import static org.assertj.core.api.Java6Assertions.assertThat;
@@ -629,5 +630,16 @@ public class WaypointParserTest {
         parseAndAssertFirstWaypoint(gpStr + "\n\"\\'note'\"", "Praefix 1", WaypointType.WAYPOINT, "'note'");
         parseAndAssertFirstWaypoint(gpStr + "\n\"note\"", "Praefix 1", WaypointType.WAYPOINT, "note");
         parseAndAssertFirstWaypoint(gpStr + "\nnote", "Praefix 1", WaypointType.WAYPOINT, "");
+    }
+
+    @Test
+    public void testParseVariables() {
+        final WaypointParser parser = createParser("Praefix");
+        parser.parseWaypoints("$TEST=3+4\n B=4+5\n c6");
+        final Map<String, String> vars = parser.getParsedVariables();
+        assertThat(vars).containsEntry("TEST", "3+4");
+        assertThat(vars).containsEntry("B", "4+5");
+        assertThat(vars).containsEntry("c", "6");
+
     }
 }
