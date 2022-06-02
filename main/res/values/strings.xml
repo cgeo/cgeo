@@ -1572,6 +1572,8 @@
     <string name="variables_deleteall">Delete All</string>
     <string name="variables_deleteall_confirm_text">Do you really want to delete all variables for this cache?</string>
     <string name="variables_info">Help</string>
+    <string name="variables_varname_dialog_title">Variable Name</string>
+    <string name="variables_varname_dialog_message">Enter variable name (may be left empty)</string>
 
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Guided Mode</string>
@@ -1598,6 +1600,8 @@
     <string name="calccoord_migrate_infotext_markdown">A legacy coordinate calculation was found in this waypoint:\n\n%1$s\n\nYou can migrate this to the new cache calculation coordinates as follows:\n\n%2$s\n\nwith new cache variables:%3$s\n\nPlease choose:\n- %4$s to perform migration as suggested\n- %5$s to dismiss the found calculation data for good\n- %6$s to continue without migration. You will be asked for migration again next time you open the waypoint for editing. Note however that editing the waypoint coordinates could delete local calculation data.</string>
 
     <!-- Formula -->
+    <string name="formula_choose_function">Choose function</string>
+
     <string name="formula_function_sqrt">Square Root</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
