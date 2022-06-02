@@ -1428,6 +1428,7 @@
     <string name="waypoint_duplicate">Duplikuj punkt orientacyjny</string>
     <string name="waypoint_toclipboard">Skopiuj punkt nawigacyjny do schowka</string>
     <string name="waypoint_copy_of">Kopia</string>
+    <string name="waypoint_open_geochecker">Otwórz Geochecker</string>
     <string name="waypointcalc_notes_prompt">Wprowadź uwagi tutaj…</string>
     <string name="waypoint_coordinate_formats_plain">zwykłe</string>
     <string name="from_clipboard">Ze schowka</string>
@@ -1490,6 +1491,7 @@
     <string name="formula_error_cyclicdependency">Cykl: %1$s</string>
     <string name="formula_error_empty">Pusta formuła</string>
     <string name="formula_error_other">Błąd: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Wyślij informację do Twitter</string>
     <!-- map -->
