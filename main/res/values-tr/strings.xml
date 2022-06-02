@@ -1394,6 +1394,7 @@
     <string name="formula_error_missingvarvalue">Eksik: %1$s</string>
     <string name="formula_error_cyclicdependency">Döngü: %1$s</string>
     <string name="formula_error_other">Hata: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
