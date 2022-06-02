@@ -1404,6 +1404,7 @@
     <string name="waypoint_duplicate">Duplica waypoint</string>
     <string name="waypoint_toclipboard">Copia waypoint negli appunti</string>
     <string name="waypoint_copy_of">Copia di</string>
+    <string name="waypoint_open_geochecker">Apri Geochecker</string>
     <string name="waypointcalc_notes_prompt">Inserire le note qui…</string>
     <string name="waypoint_coordinate_formats_plain">Normale</string>
     <string name="from_clipboard">Dagli appunti</string>
@@ -1466,6 +1467,7 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Formula Vuota</string>
     <string name="formula_error_other">Errore: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
     <!-- map -->
