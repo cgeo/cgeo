@@ -1395,6 +1395,7 @@
     <string name="formula_error_missingvarvalue">不明:%1$s</string>
     <string name="formula_error_empty">未入力</string>
     <string name="formula_error_other">エラー:%1$s</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">この発見をTwitterでつぶやく</string>
     <!-- map -->
