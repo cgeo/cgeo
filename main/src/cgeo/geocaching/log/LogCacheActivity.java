@@ -147,6 +147,8 @@ public class LogCacheActivity extends AbstractLoggingActivity {
         if (loggingManager.getPossibleLogTypes().isEmpty()) {
             showErrorLoadingData();
             return;
+        } else {
+            logType.setValues(loggingManager.getPossibleLogTypes());
         }
 
         refreshGui();
