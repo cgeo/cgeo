@@ -315,6 +315,7 @@
     <string name="loc_trying">Localisation en cours…</string>
     <string name="loc_no_addr">Position inconnue</string>
     <string name="loc_gps_disabled">GPS désactivé</string>
+    <string name="loc_copied_clipboard">La position actuelle a été copiée dans le presse-papiers</string>
     <string name="menu_centerposition">Centrer sur ma position</string>
     <!-- standard menu -->
     <string name="menu_about">À propos de c:geo</string>
@@ -774,6 +775,8 @@
     <string name="init_summary_prevent_cache_note_merge">Si ce paramètre est activé, c:geo supprimera définitivement la note stockée localement et la remplacera par la note personnelle sur le serveur. Aucune fusion ne sera effectuée.</string>
     <string name="init_customtabs_as_browser">Utiliser Chrome WebView</string>
     <string name="init_summary_customtabs_as_browser">Les sites web externes seront affichés sans quitter c:geo (uniquement possible si Chrome est installé)</string>
+    <string name="init_rot13_hint">Coder l\'indice</string>
+    <string name="init_summary_rot13_hint">Afficher le texte d\'indice codé en ROT-13 jusqu\'à ce qu\'il soit tapé</string>
     <string name="init_save_log_img">Enregistrer les images</string>
     <string name="init_summary_save_log_img">Enregistrer les images des visites</string>
     <string name="init_units">Unités impériales</string>
@@ -1297,10 +1300,15 @@
     <string name="cache_remove_from_history">Supprimer de l\'historique</string>
     <string name="cache_license">Licence</string>
     <string name="cache_image">Image</string>
+    <string name="cache_image_open">Ouvrir</string>
     <string name="cache_image_open_file">Ouvrir en tant que fichier</string>
     <string name="cache_image_open_browser">Ouvrir dans le navigateur</string>
+    <string name="cache_image_share">Partager</string>
     <string name="cache_image_show_description">Afficher la description</string>
     <string name="cache_image_add_waypoint">Ajouter un point de passage</string>
+    <string name="cache_image_rename">Renommer</string>
+    <string name="cache_image_delete">Supprimer</string>
+    <string name="cache_image_title_camera_prefix">Photo</string>
     <string name="cache_image_background">Image d\'arrière-plan pour la liste des caches</string>
     <string name="cache_share_field">Partager</string>
     <string name="cache_time_full_hours">heures</string>
@@ -1314,6 +1322,10 @@
     <string name="cache_alc_install">Installez l\'application Adventure Lab pour jouer à cette aventure</string>
     <string name="context_share_as_text">Partager comme texte</string>
     <string name="context_share_as_link">Partager le lien</string>
+    <string name="image_category_uncategorized">Sans catégorie</string>
+    <string name="image_category_own">Mes caches</string>
+    <string name="image_category_listing">Liste</string>
+    <string name="image_category_log">Signaler votre visite</string>
     <string name="create_internal_cache">Créer une cache personnelle</string>
     <string name="create_internal_cache_short">Nouvelle cache</string>
     <string name="create_internal_cache_currentlist">Utiliser la liste actuelle</string>
@@ -1323,6 +1335,9 @@
     <string name="internal_goto_targets_title">Cibles \'Aller à\'</string>
     <string name="internal_goto_targets_description">Cette cache enregistre vos cibles récentes \"Aller à\". Elle est automatiquement créée à la première utilisation de la fonction \"Aller à\" du menu principal. Les coordonnées entrées ici seront stockées dans les points de passage de cette cache. Dès que vous n\'avez plus besoin de ces coordonnées, vous pouvez supprimer sans risque cette cache ou n\'importe lequel de ses points de passage. Vous pouvez également déplacer la cache dans n\'importe quelle autre liste de votre choix.</string>
     <string name="init_longtap_map">Appui long sur la carte</string>
+    <string name="init_summary_longtap_map">Activer un appui long sur une icône de la carte (pour créer un itinéraire personnel) ou sur un emplacement libre de la carte (pour créer une cache ou une étape définie par l\'utilisateur)</string>
+    <string name="onetime_info_longtap_disabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement désactivé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
+    <string name="onetime_info_longtap_enabled">En procédant à un appui long sur la carte, vous pouvez créer des itinéraires individuels et des caches ou des étapes définies par l\'utilisateur.\n\nL\'appui long sur la carte est actuellement activé.\n\nVous pouvez modifier cela dans Paramètres → Carte → Comportement de la carte</string>
     <string name="goto_targets_list">Caches personnalisées</string>
     <string name="clear_goto_history_title">Effacer l\'historique des destinations</string>
     <string name="clear_goto_history">Vous allez supprimer l\'historique des points de passage hormis les cinq plus récents</string>
@@ -1398,6 +1413,7 @@
     <string name="waypoint_duplicate">Dupliquer le point de passage</string>
     <string name="waypoint_toclipboard">Copier le point de passage dans le presse-papiers</string>
     <string name="waypoint_copy_of">Copie de</string>
+    <string name="waypoint_open_geochecker">Ouvrir Geochecker</string>
     <string name="waypointcalc_notes_prompt">Entrez les notes ici…</string>
     <string name="waypoint_coordinate_formats_plain">Texte</string>
     <string name="from_clipboard">Depuis le presse-papiers</string>
@@ -1411,6 +1427,8 @@
     <string name="variables_deleteall">Tout Supprimer</string>
     <string name="variables_deleteall_confirm_text">Voulez-vous vraiment supprimer toutes les variables pour cette cache ?</string>
     <string name="variables_info">Aide</string>
+    <string name="variables_varname_dialog_title">Nom de variable</string>
+    <string name="variables_varname_dialog_message">Indiquez le nom de la variable (peut être laissé vide)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Mode guidé</string>
     <string name="calccoord_guided_edit">Appuyez sur un chiffre pour le modifier</string>
@@ -1433,6 +1451,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Rejeté(e)</string>
     <string name="calccoord_migrate_infotext_markdown">Un ancien calcul de coordonnées a été trouvé dans ce waypoint : \n\n%1$s\n\nVous pouvez le migrer vers le nouveau calculateur de coordonnée de cache comme cela : \n\n%2$s\n\navec les nouvelles variables de la cache : %3$s\n\nVeuillez choisir : \n- %4$s pour effectuer la migration comme suggéré\n- %5$s pour rejeter définitivement les données de calcul trouvées\n- %6$s pour continuer sans migration. La migration vous sera à nouveau proposée la prochaine fois que vous ouvrirez le waypoint pour le modifier. Notez cependant que l\'édition des coordonnées du waypoint pourrait supprimer les données de calcul locales.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Sélectionner une fonction</string>
     <string name="formula_function_sqrt">Racine carrée</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
@@ -1461,6 +1480,10 @@
     <string name="formula_error_empty">Formule vide</string>
     <string name="formula_error_other">Erreur : \'%1$s\'</string>
     <!-- ImageView -->
+    <string name="imageview_notitle">Sans titre</string>
+    <string name="imageview_mimetype">Type MIME</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Commentaire</string>
     <!-- visit -->
     <string name="visit_tweet">Publier votre découverte sur Twitter</string>
     <!-- map -->
@@ -2193,6 +2216,11 @@
     <string name="brouter_info">Service hors-ligne de calcul d\'itinéraire</string>
     <string name="maptheme_elevate_categoryinfo">Pertinent pour : [A] Zones, [P] POI, [R] Itinéraires, [W] Voies</string>
     <string name="maptheme_scale_map_title">Facteur d\'échelle pour la carte</string>
+    <string name="maptheme_scale_map_summary">Met la carte à l\'échelle ; 100% = sans mise à l\'échelle</string>
+    <string name="maptheme_scale_text_title">Facteur de mise à l\'échelle du texte</string>
+    <string name="maptheme_scale_text_summary">Redimensionne également les étiquettes de texte sur la carte ; 100% = sans redimensionnement supplémentaire</string>
+    <string name="maptheme_scale_symbol_title">Facteur de mise à l\'échelle des symboles</string>
+    <string name="maptheme_scale_symbol_summary">Redimensionne également la taille des symboles sur la carte ; 100% = sans redimensionnement supplémentaire</string>
     <!-- history track -->
     <string name="map_clear_trailhistory">Effacer l\'historique du parcours</string>
     <string name="map_trailhistory_cleared">L\'historique des parcours a été effacé</string>
@@ -2291,6 +2319,7 @@
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Routes &amp; Chemins</string>
     <string name="rtl_paved_path">sentier pavé</string>
+    <string name="rtl_paved_path_gravel">sentier revêtu (gravier)</string>
     <string name="rtl_unpaved_path">Chemin non pavé</string>
     <string name="rtl_unpaved_path_partly_grown">sentier non revêtu (partiellement cultivé)</string>
     <string name="rtl_unpaved_path_grown">sentier non revêtu (terre)</string>
