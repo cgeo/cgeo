@@ -1412,6 +1412,8 @@
     <string name="variables_deleteall">Elimina tutto</string>
     <string name="variables_deleteall_confirm_text">Vuoi veramente cancellare tutte le variabili per questo cache?</string>
     <string name="variables_info">Aiuto</string>
+    <string name="variables_varname_dialog_title">Nome della variabile</string>
+    <string name="variables_varname_dialog_message">Inserire il nome della variabile (può essere lasciato vuoto)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Modalità Guidata</string>
     <string name="calccoord_guided_edit">Tocca una cifra per modificare</string>
@@ -1434,6 +1436,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Ignorato</string>
     <string name="calccoord_migrate_infotext_markdown">Un vecchio metodo di calcolo delle coordinate è stato trovato in questo waypoint:\n\n%1$s\n\nÈ possibile migrare al nuovo calcolo di coordinate del cache come segue:\n\n%2$s\n\ncon nuove variabili del cache:%3$s\n\nSi prega di scegliere:\n- %4$s per eseguire la migrazione come suggerito\n- %5$s per rimuovere i dati di calcolo trovati per un buon\n- %6$s per continuare senza migrazione. Ti verrà chiesta nuovamente la migrazione la prossima volta che apri il waypoint per la modifica. Notare tuttavia che la modifica delle coordinate del waypoint potrebbe eliminare i dati di calcolo locali.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Scegli la funzione</string>
     <string name="formula_function_sqrt">Radice quadrata</string>
     <string name="formula_function_sin">Seno</string>
     <string name="formula_function_cos">Coseno</string>
