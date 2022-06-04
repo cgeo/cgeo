@@ -26,14 +26,6 @@
         android:orientation="vertical">
 
         <include
-            android:id="@+id/autobackup"
-            layout="@layout/mainactivity_action_item"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
-            android:visibility="gone" />
-
-        <include
             android:id="@+id/mapupdate"
             layout="@layout/mainactivity_action_item"
             android:layout_width="match_parent"
