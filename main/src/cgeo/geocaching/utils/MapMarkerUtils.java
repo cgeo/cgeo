@@ -13,6 +13,7 @@ import cgeo.geocaching.log.ReportProblemType;
 import cgeo.geocaching.maps.CacheMarker;
 import cgeo.geocaching.models.Geocache;
 import cgeo.geocaching.models.Waypoint;
+import cgeo.geocaching.service.CacheDownloaderService;
 import cgeo.geocaching.settings.Settings;
 import cgeo.geocaching.storage.DataStore;
 import cgeo.geocaching.utils.builders.InsetBuilder;
@@ -90,6 +91,7 @@ public final class MapMarkerUtils {
                 .append(assignedMarkers)
                 .append(Settings.isDTMarkerEnabled() ? cache.getTerrain() : false)
                 .append(Settings.isDTMarkerEnabled() ? cache.getDifficulty() : false)
+                .append(CacheDownloaderService.isDownloadPending(cache))
                 .toHashCode();
 
         synchronized (overlaysCache) {
@@ -154,15 +156,19 @@ public final class MapMarkerUtils {
         if (cache.isArchived()) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.type_overlay_archived, Gravity.CENTER, false));
         }
-        // top-right: DT marker / stored
+        // top-right: DT marker / sync / stored
         if (Settings.isDTMarkerEnabled()) {
             insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain()), Gravity.TOP | Gravity.RIGHT));
+        } else if (CacheDownloaderService.isDownloadPending(cache)) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_sync, Gravity.TOP | Gravity.RIGHT));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
         }
-        // top-center: stored (if DT marker enabled)
-        if (Settings.isDTMarkerEnabled() && !cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+        // top-center: sync / stored (if DT marker enabled)
+        if (Settings.isDTMarkerEnabled() && CacheDownloaderService.isDownloadPending(cache)) {
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_sync, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+        } else if (Settings.isDTMarkerEnabled() && !cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
+                insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
         }
         // top-left: will attend / found / not found / offline-logs
         if (!showBigSmileys(cacheListType)) {
