@@ -629,6 +629,9 @@ public class BackupUtils {
         String msg;
         final String title;
         if (settingsResult && databaseResult) {
+            if (autobackup) {
+                return; // We don't need to inform the user if everything went right
+            }
             title = activityContext.getString(R.string.init_backup_finished);
             msg = activityContext.getString(R.string.backup_saved) + "\n" + backupDir.toUserDisplayableString();
         } else {
@@ -656,7 +659,7 @@ public class BackupUtils {
         }
 
         if (autobackup) {
-            ActivityMixin.showShortToast(activityContext, msg);
+            ActivityMixin.showToast(activityContext, msg);
         } else {
             SimpleDialog.of(activityContext).setTitle(TextParam.text(title)).setMessage(TextParam.text(msg))
                     .setButtons(0, 0, R.string.cache_share_field)

@@ -349,7 +349,6 @@ public class MainActivity extends AbstractBottomNavigationActivity {
 
             // automated backup check
             if (Settings.automaticBackupDue()) {
-                ActivityMixin.showShortToast(this, R.string.init_backup_automatic_performing);
                 new BackupUtils(this, null).backup(() -> Settings.setAutomaticBackupLastCheck(false), true);
             }
             cLog.add("ab");
