@@ -35,7 +35,7 @@ public abstract class AbstractForegroundIntentService extends IntentService {
         final PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
         wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "cgeo:" + logTag);
         wakeLock.acquire(wakelockTimeout); // set timeout in case something got really wrong. Will be released earlier if work is done.
-        Log.v(logTag + " - WakeLock acquired");
+        Log.w(logTag + " - WakeLock acquired");
 
         notificationManager = Notifications.getNotificationManager(this);
         notification = createInitialNotification();
@@ -46,10 +46,10 @@ public abstract class AbstractForegroundIntentService extends IntentService {
 
     @Override
     public void onDestroy() {
-        super.onDestroy();
         Log.v(logTag + ".onDestroy");
         wakeLock.release();
-        Log.v(logTag + " - WakeLock released");
+        Log.w(logTag + " - WakeLock released");
+        super.onDestroy();
     }
 
     protected void updateForegroundNotification() {

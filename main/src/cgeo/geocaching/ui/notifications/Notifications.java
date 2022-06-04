@@ -17,6 +17,7 @@ public class Notifications {
 
     public static final int ID_FOREGROUND_NOTIFICATION_MAP_IMPORT = 111;
     public static final int ID_FOREGROUND_NOTIFICATION_CACHES_DOWNLOADER = 112;
+    public static final int ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE = 113;
 
     private Notifications() {
         // no instances
