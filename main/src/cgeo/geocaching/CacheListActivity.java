@@ -1225,7 +1225,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         } else if (itemId == R.id.menu_copy_to_list) {
             copyCachesToOtherList(Collections.singletonList(cache));
         } else if (itemId == R.id.menu_store_cache || itemId == R.id.menu_refresh) {
-            refreshStored(Collections.singletonList(cache));
+            if (BranchDetectionHelper.isProductionBuild()) {
+                refreshStored(Collections.singletonList(cache));
+            } else {
+                CacheDownloaderService.refreshCache(this, cache.getGeocode(), itemId == R.id.menu_refresh);
+            }
         } else {
             // we must remember the menu info for the sub menu, there is a bug
             // in Android:
