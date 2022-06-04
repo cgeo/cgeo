@@ -65,7 +65,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
     private final String logToken = "[" + this.getClass().getName() + "]";
 
     private static final String ACTION_CLEAR_BACKSTACK = "cgeo.geocaching.ACTION_CLEAR_BACKSTACK";
-    private final BroadcastReceiver finisBroadcastReceiver = new BroadcastReceiver() {
+    private final BroadcastReceiver finishBroadcastReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(final Context context, final Intent intent) {
             finish();
@@ -150,7 +150,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
             throw e;
         }
         onCreateCommon();
-        LocalBroadcastManager.getInstance(this).registerReceiver(finisBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
+        LocalBroadcastManager.getInstance(this).registerReceiver(finishBroadcastReceiver, new IntentFilter(ACTION_CLEAR_BACKSTACK));
     }
 
     public void clearBackStack() {
@@ -159,7 +159,7 @@ public abstract class AbstractActivity extends AppCompatActivity implements IAbs
 
     @Override
     protected void onDestroy() {
-        LocalBroadcastManager.getInstance(this).unregisterReceiver(finisBroadcastReceiver);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(finishBroadcastReceiver);
         super.onDestroy();
     }
 

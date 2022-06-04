@@ -97,8 +97,10 @@ import cgeo.geocaching.utils.functions.Action1;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources;
 import android.net.Uri;
@@ -124,6 +126,7 @@ import androidx.core.util.Consumer;
 import androidx.core.view.MenuItemCompat;
 import androidx.loader.app.LoaderManager;
 import androidx.loader.content.Loader;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -143,6 +146,7 @@ import io.reactivex.rxjava3.disposables.CompositeDisposable;
 import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.collections4.IterableUtils;
 import org.apache.commons.lang3.StringUtils;
 
 public class CacheListActivity extends AbstractListActivity implements FilteredActivity, LoaderManager.LoaderCallbacks<SearchResult> {
@@ -216,6 +220,17 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         }
 
     };
+
+    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
+            if (IterableUtils.matchesAny(adapter.getFilteredList(), geocache -> geocache.getGeocode().equals(geocode))) {
+                refreshCurrentList();
+            }
+        }
+    };
+
     private ContextMenuInfo lastMenuInfo;
     private String contextMenuGeocode = "";
     private final CompositeDisposable resumeDisposables = new CompositeDisposable();
@@ -688,6 +703,18 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
         if (forceSort) {
             adapter.forceSort();
         }
+    }
+
+    @Override
+    protected void onStart() {
+        LocalBroadcastManager.getInstance(this).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
+        super.onStart();
+    }
+
+    @Override
+    protected void onStop() {
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
+        super.onStop();
     }
 
     @Override
@@ -1442,11 +1469,11 @@ public class CacheListActivity extends AbstractListActivity implements FilteredA
     public void refreshInBackground(final List<Geocache> caches) {
         if (type.isStoredInDatabase && caches.size() > REFRESH_WARNING_THRESHOLD) {
             SimpleDialog.of(this).setTitle(R.string.caches_refresh_all).setMessage(R.string.caches_refresh_all_warning).confirm((dialog, id) -> {
-                CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase);
+                CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, null);
                 dialog.cancel();
             });
         } else {
-            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase);
+            CacheDownloaderService.downloadCaches(this, Geocache.getGeocodes(caches), true, type.isStoredInDatabase, null);
         }
     }
 

@@ -87,9 +87,11 @@ import static cgeo.geocaching.maps.mapsforge.v6.caches.CachesBundle.NO_OVERLAY_I
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Configuration;
 import android.content.res.Resources.NotFoundException;
 import android.location.Location;
@@ -117,6 +119,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.text.HtmlCompat;
 import androidx.core.util.Supplier;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -215,6 +218,14 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
     private MapMode mapMode;
 
     private RouteTrackUtils routeTrackUtils = null;
+
+    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
+            caches.invalidate(Collections.singleton(geocode));
+        }
+    };
 
     @Override
     public void onCreate(final Bundle savedInstanceState) {
@@ -475,7 +486,8 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(caches.getVisibleCacheGeocodes()));
         } else if (id == R.id.menu_store_caches_background) {
-            CacheDownloaderService.downloadCaches(this, caches.getVisibleCacheGeocodes(), false, false);
+            final Set<String> visibleCacheGeocodes = caches.getVisibleCacheGeocodes();
+            CacheDownloaderService.downloadCaches(this, visibleCacheGeocodes, false, false, () -> caches.invalidate(visibleCacheGeocodes));
         } else if (id == R.id.menu_theme_mode) {
             this.renderThemeHelper.selectMapTheme(this.tileLayer, this.tileCache);
         } else if (id == R.id.menu_theme_options) {
@@ -786,6 +798,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
         Log.d("NewMap: onStart");
 
         initializeLayers();
+        LocalBroadcastManager.getInstance(this).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
     }
 
     private void initializeLayers() {
@@ -896,6 +909,7 @@ public class NewMap extends AbstractBottomNavigationActivity implements Observer
 
         waitDialog = null;
         terminateLayers();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(cacheRefreshedBroadcastReceiver);
 
         super.onStop();
     }

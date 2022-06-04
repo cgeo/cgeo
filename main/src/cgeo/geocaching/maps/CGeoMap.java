@@ -3,6 +3,7 @@ package cgeo.geocaching.maps;
 import cgeo.geocaching.CacheListActivity;
 import cgeo.geocaching.CachePopup;
 import cgeo.geocaching.CompassActivity;
+import cgeo.geocaching.Intents;
 import cgeo.geocaching.R;
 import cgeo.geocaching.SearchResult;
 import cgeo.geocaching.WaypointPopup;
@@ -72,6 +73,10 @@ import cgeo.geocaching.utils.MapMarkerUtils;
 import static cgeo.geocaching.location.Viewport.containingGCliveCaches;
 
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.location.Location;
 import android.os.Bundle;
@@ -93,6 +98,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
@@ -211,6 +217,21 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     private static final BlockingQueue<Runnable> loadQueue = new ArrayBlockingQueue<>(1);
     private static final ThreadPoolExecutor loadExecutor = new ThreadPoolExecutor(1, 1, 60, TimeUnit.SECONDS, loadQueue, new ThreadPoolExecutor.DiscardOldestPolicy());
     private MapOptions mapOptions;
+
+    private final BroadcastReceiver cacheRefreshedBroadcastReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(final Context context, final Intent intent) {
+            final String geocode = intent.getStringExtra(Intents.EXTRA_GEOCODE);
+            final Geocache cache = DataStore.loadCache(geocode, LoadFlags.LOAD_CACHE_OR_DB);
+
+            // only add cache if it is currently visible
+            if (caches.remove(cache)) {
+                caches.add(cache);
+                displayExecutor.execute(new DisplayRunnable(CGeoMap.this));
+            }
+        }
+    };
+
     // handlers
 
     /**
@@ -725,7 +746,14 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
     }
 
     @Override
+    public void onStart() {
+        LocalBroadcastManager.getInstance(activity).registerReceiver(cacheRefreshedBroadcastReceiver, new IntentFilter(Intents.ACTION_GEOCACHE_REFRESHED));
+        super.onStart();
+    }
+
+    @Override
     public void onStop() {
+        LocalBroadcastManager.getInstance(activity).unregisterReceiver(cacheRefreshedBroadcastReceiver);
         // Ensure that handlers will not try to update the dialog once the view is detached.
         waitDialog = null;
         super.onStop();
@@ -837,7 +865,7 @@ public class CGeoMap extends AbstractMap implements ViewFactory, OnCacheTapListe
         } else if (id == R.id.menu_store_unsaved_caches) {
             return storeCaches(getUnsavedGeocodes(getGeocodesForCachesInViewport()));
         } else if (id == R.id.menu_store_caches_background) {
-            CacheDownloaderService.downloadCaches(activity, getGeocodesForCachesInViewport(), false, false);
+            CacheDownloaderService.downloadCaches(activity, getGeocodesForCachesInViewport(), false, false, () -> displayExecutor.execute(new DisplayRunnable(CGeoMap.this)));
         } else if (id == R.id.menu_theme_mode) {
             mapView.selectMapTheme(activity);
         } else if (id == R.id.menu_as_list) {
