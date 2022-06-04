@@ -7,12 +7,16 @@ import cgeo.geocaching.location.Geopoint;
 import cgeo.geocaching.sensors.GeoData;
 import cgeo.geocaching.sensors.GeoDirHandler;
 import cgeo.geocaching.settings.Settings;
+import cgeo.geocaching.ui.notifications.Notifications;
 import cgeo.geocaching.utils.Log;
+import static cgeo.geocaching.ui.notifications.NotificationChannels.FOREGROUND_SERVICE_NOTIFICATION;
+import static cgeo.geocaching.ui.notifications.Notifications.ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE;
 
 import android.app.Activity;
 import android.app.Service;
 import android.content.Intent;
 import android.os.IBinder;
+import android.os.PowerManager;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.TextToSpeech.Engine;
 import android.speech.tts.TextToSpeech.OnInitListener;
@@ -82,6 +86,7 @@ public class SpeechService extends Service implements OnInitListener {
     private float lastSpeechDistance = 0.0f;
     private Geopoint target;
     private final CompositeDisposable initDisposable = new CompositeDisposable();
+    private PowerManager.WakeLock wakeLock;
 
     @Override
     public IBinder onBind(final Intent intent) {
@@ -108,6 +113,18 @@ public class SpeechService extends Service implements OnInitListener {
     public void onCreate() {
         super.onCreate();
         tts = new TextToSpeech(this, this);
+
+        final PowerManager powerManager = (PowerManager) getSystemService(POWER_SERVICE);
+        wakeLock = powerManager.newWakeLock(PowerManager.PARTIAL_WAKE_LOCK, "cgeo:SpeechService");
+        // Set timeout to protect battery life. It's acceptable that the service can get killed after one hour.
+        wakeLock.acquire(60 * 60 * 1000);
+        Log.w("SpeechService - WakeLock acquired");
+
+
+        startForeground(ID_FOREGROUND_NOTIFICATION_SPEECH_SERVICE, Notifications
+                .createNotification(this, FOREGROUND_SERVICE_NOTIFICATION, R.string.tts_service)
+                .setContentText(getString(R.string.tts_running))
+                .build());
     }
 
     @Override
@@ -117,6 +134,8 @@ public class SpeechService extends Service implements OnInitListener {
             tts.stop();
             tts.shutdown();
         }
+        wakeLock.release();
+        Log.w("SpeechService - WakeLock released");
         super.onDestroy();
     }
 
