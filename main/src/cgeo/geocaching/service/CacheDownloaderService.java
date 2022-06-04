@@ -65,16 +65,22 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 CheckboxDialogConfig.newCheckbox(R.string.caches_store_background_should_force_refresh)
                         .setCheckedOnInit(defaultForceRedownload)
                         .setVisible(!isOffline),
-                forceRedownload -> {
-                    if (isOffline) {
-                        downloadCachesInternal(context, geocodes, null, forceRedownload, onStartCallback);
-                    } else if (Settings.getChooseList()) {
-                        // let user select list to store cache in
-                        new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, geocodes, selectedListIds, forceRedownload, onStartCallback), true, Collections.emptySet(), false);
-                    } else {
-                        downloadCachesInternal(context, geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID), forceRedownload, onStartCallback);
-                    }
-                }, null);
+                forceRedownload -> askForListsIfNecessaryAndDownload(context, geocodes, forceRedownload, isOffline, onStartCallback), null);
+    }
+
+    public static void refreshCache(final Activity context, final String geocode, final boolean isOffline) {
+        askForListsIfNecessaryAndDownload(context, Collections.singleton(geocode), true, isOffline, null);
+    }
+
+    private static void askForListsIfNecessaryAndDownload(final Activity context, final Set<String> geocodes, final boolean forceRedownload, final boolean isOffline, @Nullable final Runnable onStartCallback) {
+        if (isOffline) {
+            downloadCachesInternal(context, geocodes, null, forceRedownload, onStartCallback);
+        } else if (Settings.getChooseList()) {
+            // let user select list to store cache in
+            new StoredList.UserInterface(context).promptForMultiListSelection(R.string.lists_title, selectedListIds -> downloadCachesInternal(context, geocodes, selectedListIds, forceRedownload, onStartCallback), true, Collections.emptySet(), false);
+        } else {
+            downloadCachesInternal(context, geocodes, Collections.singleton(StoredList.STANDARD_LIST_ID), forceRedownload, onStartCallback);
+        }
     }
 
     private static void downloadCachesInternal(final Activity context, final Set<String> geocodes, @Nullable final Set<Integer> listIds, final boolean forceRedownload, @Nullable final Runnable onStartCallback) {
@@ -93,7 +99,6 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
                 newGeocodes.add(geocode);
             }
         }
-
         final Intent intent = new Intent(context, CacheDownloaderService.class);
         intent.putStringArrayListExtra(EXTRA_GEOCODES, newGeocodes);
         ContextCompat.startForegroundService(context, intent);
