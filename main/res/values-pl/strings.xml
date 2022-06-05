@@ -315,6 +315,7 @@
     <string name="loc_trying">Próba lokalizacji</string>
     <string name="loc_no_addr">Nieznany adres</string>
     <string name="loc_gps_disabled">GPS wyłączony</string>
+    <string name="loc_copied_clipboard">Bieżąca lokalizacja została skopiowana do schowka</string>
     <string name="menu_centerposition">Wyśrodkuj na moje położenie</string>
     <!-- standard menu -->
     <string name="menu_about">O c:geo</string>
@@ -497,12 +498,15 @@
     <string name="cache_filter_stored_lists">Zapisane listy</string>
     <string name="cache_filter_origin">Współrzędne początkowe</string>
     <string name="cache_filter_stored_since">Ostatnia aktualizacja</string>
+    <string name="cache_filter_logical_filter_group">Zagnieżdżony filtr</string>
     <string name="cache_filtergroup_basic">Podstawowy</string>
     <string name="cache_filtergroup_details">Szczegóły</string>
     <string name="cache_filtergroup_userspecific">Własny</string>
+    <string name="cache_filtergroup_special">Specjalne</string>
     <string name="cache_filter_contexttype_live_title">Filtr na żywo</string>
     <string name="cache_filter_contexttype_offline_title">Filtr offline</string>
     <string name="cache_filter_contexttype_transient_title">Filtr</string>
+    <string name="cache_filter_contexttype_nestedfilter_title">Zagnieżdżony filtr</string>
     <string name="cache_filter_include">Dołącz</string>
     <string name="cache_filter_exclude">Wyklucz</string>
     <string name="cache_filter_userdisplay_complex">Złożone</string>
@@ -568,6 +572,8 @@
     <string name="cache_filter_status_exclude_disabled">Wyklucz wyłączone</string>
     <string name="cache_filter_status_exclude_archived">Wyklucz zarchiwizowane</string>
     <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Dołącz skrytki bez D/T</string>
+    <string name="cache_filter_nested_filter_modify">modyfikuj</string>
+    <string name="cache_filter_nested_filter_empty_filterconfic">Podfiltr jest obecnie pusty</string>
     <string name="cache_filter_log_entry_foundby">Znaleziona przez</string>
     <string name="cache_filter_log_entry_logtext">Tekst dziennika</string>
     <string name="cache_filter_stored_since_notstored">Nieprzechowywane</string>
@@ -1322,10 +1328,15 @@
     <string name="cache_remove_from_history">Usuń z historii</string>
     <string name="cache_license">Licencja</string>
     <string name="cache_image">Zdjęcie</string>
+    <string name="cache_image_open">Otwórz</string>
     <string name="cache_image_open_file">Otwórz jako plik</string>
     <string name="cache_image_open_browser">Otwórz w przeglądarce</string>
+    <string name="cache_image_share">Udostępnij</string>
     <string name="cache_image_show_description">Pokaż opis</string>
     <string name="cache_image_add_waypoint">Dodaj punkt nawigacyjny</string>
+    <string name="cache_image_rename">Zmień nazwę</string>
+    <string name="cache_image_delete">Usuń</string>
+    <string name="cache_image_title_camera_prefix">Zdjęcie</string>
     <string name="cache_image_background">Obrazek tła listy skrzynek</string>
     <string name="cache_share_field">Współdziel</string>
     <string name="cache_time_full_hours">godzina</string>
@@ -1339,6 +1350,10 @@
     <string name="cache_alc_install">Zainstaluj aplikację Adventure Lab, by rozpocząć tę przygodę</string>
     <string name="context_share_as_text">Udostępnij tekst</string>
     <string name="context_share_as_link">Udostępnij link</string>
+    <string name="image_category_uncategorized">Bez kategorii</string>
+    <string name="image_category_own">Własne</string>
+    <string name="image_category_listing">Lista</string>
+    <string name="image_category_log">Log</string>
     <string name="create_internal_cache">Utwórz skrzynkę zdefiniowaną przez użytkownika</string>
     <string name="create_internal_cache_short">Nowa skrzynka</string>
     <string name="create_internal_cache_currentlist">Użyj aktualnej listy</string>
@@ -1442,6 +1457,8 @@
     <string name="variables_deleteall">Usuń wszystko</string>
     <string name="variables_deleteall_confirm_text">Czy na pewno chcesz usunąć wszystkie zmienne dla tej skrytki?</string>
     <string name="variables_info">Pomoc</string>
+    <string name="variables_varname_dialog_title">Nazwa zmiennej</string>
+    <string name="variables_varname_dialog_message">Wprowadź nazwę zmiennej (może pozostać pusta)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Tryb z przewodnikiem</string>
     <string name="calccoord_guided_edit">Dotknij cyfry, aby edytować</string>
@@ -1464,6 +1481,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Odrzucone</string>
     <string name="calccoord_migrate_infotext_markdown">W tym punkcji nawigacji odnaleziono współrzędne obliczone dawniej:\n\n%1$s\n\nMożesz przenieść je na nowe współrzędne obliczeniowe skrytki w następujący sposób:\n\n%2$s\n\nz nowymi zmiennymi skrytki:%3$s\n\nProszę wybrać:\n- %4$s aby wykonać migrację zgodnie z sugestią\n- %5$s aby całkowicie odrzucić znalezione dane obliczeniowe\n- %6$s aby kontynuować bez migracji. Zostaniesz poproszony o migrację następnym razem, gdy otworzysz punkt nawigacji do edycji. Zauważ, że edycja współrzędnych punktu nawigacji może usunąć lokalne dane obliczeniowe.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Wybierz funkcję</string>
     <string name="formula_function_sqrt">Pierwiastek kwadratowy</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
@@ -1492,6 +1510,10 @@
     <string name="formula_error_empty">Pusta formuła</string>
     <string name="formula_error_other">Błąd: \'%1$s\'</string>
     <!-- ImageView -->
+    <string name="imageview_notitle">Bez nazwy</string>
+    <string name="imageview_mimetype">Typ MIME</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Komentarz</string>
     <!-- visit -->
     <string name="visit_tweet">Wyślij informację do Twitter</string>
     <!-- map -->
