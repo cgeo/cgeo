@@ -1457,6 +1457,7 @@
     <string name="formula_error_cyclicdependency">Cykel: %1$s</string>
     <string name="formula_error_empty">Tom formel</string>
     <string name="formula_error_other">Fel: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Skicka att du hittat till Twitter</string>
     <!-- map -->

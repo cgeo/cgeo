@@ -315,6 +315,7 @@
     <string name="loc_trying">A tentar localizar</string>
     <string name="loc_no_addr">Endereço desconhecido</string>
     <string name="loc_gps_disabled">GPS desactivado</string>
+    <string name="loc_copied_clipboard">A localização actual foi copiada para a área de transferência</string>
     <string name="menu_centerposition">Centrar na minha posição</string>
     <!-- standard menu -->
     <string name="menu_about">Acerca do c:geo</string>
@@ -1299,10 +1300,15 @@
     <string name="cache_remove_from_history">Remover do histórico</string>
     <string name="cache_license">Licença</string>
     <string name="cache_image">Imagem</string>
+    <string name="cache_image_open">Abrir</string>
     <string name="cache_image_open_file">Abrir como ficheiro</string>
     <string name="cache_image_open_browser">Abrir no browser</string>
+    <string name="cache_image_share">Partilhar</string>
     <string name="cache_image_show_description">Mostrar descrição</string>
     <string name="cache_image_add_waypoint">Adicionar ponto adicional</string>
+    <string name="cache_image_rename">Mudar o nome</string>
+    <string name="cache_image_delete">Eliminar</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Imagem de fundo da descrição da cache</string>
     <string name="cache_share_field">Partilhar</string>
     <string name="cache_time_full_hours">o\'clock</string>
@@ -1316,6 +1322,10 @@
     <string name="cache_alc_install">Instale a aplicação Adventure Lab para dar início a esta aventura</string>
     <string name="context_share_as_text">Partilhar texto</string>
     <string name="context_share_as_link">Partilhar hiperligação</string>
+    <string name="image_category_uncategorized">Sem categoria</string>
+    <string name="image_category_own">Minhas</string>
+    <string name="image_category_listing">Listagem</string>
+    <string name="image_category_log">Registar</string>
     <string name="create_internal_cache">Criar cache definida pelo utilizador</string>
     <string name="create_internal_cache_short">Nova cache</string>
     <string name="create_internal_cache_currentlist">Usar a lista actual</string>
@@ -1403,6 +1413,7 @@
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>
     <string name="waypoint_toclipboard">Copiar waypoint p/ área de transferência</string>
     <string name="waypoint_copy_of">Cópia de</string>
+    <string name="waypoint_open_geochecker">Abrir Geochecker</string>
     <string name="waypointcalc_notes_prompt">Introduzir notas aqui…</string>
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
@@ -1416,6 +1427,8 @@
     <string name="variables_deleteall">Eliminar Todas</string>
     <string name="variables_deleteall_confirm_text">Deseja realmente eliminar todas as variáveis para esta cache?</string>
     <string name="variables_info">Ajuda</string>
+    <string name="variables_varname_dialog_title">Nome da Variável</string>
+    <string name="variables_varname_dialog_message">Indique o nome da variável (pode ser deixado em branco)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Modo Guia</string>
     <string name="calccoord_guided_edit">Toque num dígito para editar</string>
@@ -1438,6 +1451,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Dispensada</string>
     <string name="calccoord_migrate_infotext_markdown">Um cálculo antigo de coordenadas foi encontrado neste ponto adicional:\n\n%1$s\n\nPode migrar isso para o novo cálculo de coordenadas da cache da seguinte forma:\n\n%2$s\n\ncom novas variáveis de cache:%3$s\n\nPor favor, escolha:\n- %4$s para realizar a migração como sugerido\n- %5$s para descartar em definitivo os dados de cálculo encontrados\n- %6$s para continuar sem migração. Será novamente questionado sobre a migração, na próxima vez que abrir o ponto adicional para edição. Note, no entanto, que editar as coordenadas do ponto adicional pode excluir dados de cálculo locais.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Escolher função</string>
     <string name="formula_function_sqrt">Raiz Quadrada</string>
     <string name="formula_function_sin">Seno</string>
     <string name="formula_function_cos">Co-seno</string>
@@ -1465,6 +1479,11 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Fórmula vazia</string>
     <string name="formula_error_other">Erro: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Sem título</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Comentário</string>
     <!-- visit -->
     <string name="visit_tweet">Publicar esta descoberta no Twitter</string>
     <!-- map -->
@@ -2419,6 +2438,8 @@
     <string name="rtl_airport">aeroporto</string>
     <string name="rtl_cable_car">teleférico</string>
     <string name="rtl_chair_lift">telecadeira (teleférico)</string>
+    <string name="rtl_drag_lift">telesqui</string>
+    <string name="rtl_gondola">teleférico</string>
     <string name="rtl_goods_lift">monta-cargas</string>
     <string name="rtl_helipad">heliponto</string>
     <string name="rtl_rail_funicular">funicular</string>
@@ -2524,11 +2545,15 @@
     <string name="rtl_border_control">controlo fronteiriço</string>
     <string name="rtl_bridge_movable">ponte móvel</string>
     <string name="rtl_cave_entrance">entrada de gruta</string>
+    <string name="rtl_cycle_barrier">barreira de ciclovia</string>
     <string name="rtl_elevator">elevador</string>
+    <string name="rtl_ford">vau</string>
+    <string name="rtl_ford_small">pequeno vau</string>
     <string name="rtl_gate">portão</string>
     <string name="rtl_gate_private">portão privado</string>
     <string name="rtl_geyser">géiser</string>
     <string name="rtl_hot_spring">águas termais</string>
+    <string name="rtl_kissing_gate">portão para pessoas</string>
     <string name="rtl_ladder">escada</string>
     <string name="rtl_lift_gate">plataforma elevatória</string>
     <string name="rtl_log">registo</string>
@@ -2539,6 +2564,10 @@
     <string name="rtl_peak_small">pequeno cume</string>
     <string name="rtl_rapids">corredeira</string>
     <string name="rtl_rungs">postos</string>
+    <string name="rtl_saddle_0">passo de montanha 0°</string>
+    <string name="rtl_saddle_45">passo de montanha 45°</string>
+    <string name="rtl_saddle_90">passo de montanha 90°</string>
+    <string name="rtl_saddle_135">passo de montanha 135°</string>
     <string name="rtl_safety_rope">corda de segurança</string>
     <string name="rtl_stone">pedra</string>
     <string name="rtl_traffic_signal">sinal de tráfego</string>

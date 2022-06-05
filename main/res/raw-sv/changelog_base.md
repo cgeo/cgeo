@@ -1,4 +1,4 @@
-### Cachedetaljer
+### Cache details
 
 - Nytt: Omgjord koordinat-kalkylator (stöder funktioner)
 - Förändring: Variabler för waypoint-beräkning är nu cache-global

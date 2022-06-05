@@ -336,7 +336,7 @@
     <string name="caches_nearby_button">Nejbližší</string>
     <string name="advanced_search_button">Hledání</string>
     <string name="stored_caches_button">Uložené</string>
-    <string name="any_button">Navigovat na</string>
+    <string name="any_button">Přejít na</string>
     <string name="unknown_scan">Ve výsledku vyhledávání nenalezen žádný geokód.</string>
     <!-- caches -->
     <string name="caches_no_cache">Žádná keška</string>
@@ -1328,10 +1328,15 @@
     <string name="cache_remove_from_history">Odstranit z historie</string>
     <string name="cache_license">Licence</string>
     <string name="cache_image">Obrázek</string>
+    <string name="cache_image_open">Otevřít</string>
     <string name="cache_image_open_file">Otevřít jako soubor</string>
     <string name="cache_image_open_browser">Otevřít v prohlížeči</string>
+    <string name="cache_image_share">Sdílet</string>
     <string name="cache_image_show_description">Zobrazit popis</string>
     <string name="cache_image_add_waypoint">Přidat trasový bod</string>
+    <string name="cache_image_rename">Přejmenovat</string>
+    <string name="cache_image_delete">Odstranit</string>
+    <string name="cache_image_title_camera_prefix">Fotografie</string>
     <string name="cache_image_background">Obrázek na pozadí popisu kešky</string>
     <string name="cache_share_field">Sdílet</string>
     <string name="cache_time_full_hours">hodin</string>
@@ -1345,14 +1350,18 @@
     <string name="cache_alc_install">Nainstalujte Adventure Lab pro hraní tohoto dobrodružství</string>
     <string name="context_share_as_text">Sdílet text</string>
     <string name="context_share_as_link">Sdílet odkaz</string>
+    <string name="image_category_uncategorized">Nezařazené</string>
+    <string name="image_category_own">Vlastní</string>
+    <string name="image_category_listing">Listing</string>
+    <string name="image_category_log">Log</string>
     <string name="create_internal_cache">Vytvořit uživatelem definovanou kešku</string>
     <string name="create_internal_cache_short">Nová keška</string>
     <string name="create_internal_cache_currentlist">Použít aktuální seznam</string>
     <string name="internal_cache_default_name">Uživatelem definovaná keška #%1$d</string>
     <string name="internal_cache_default_description">Toto je uživatelem definovaná keška</string>
     <string name="internal_cache_default_owner">Vy</string>
-    <string name="internal_goto_targets_title">Cíle „Navigovat na“</string>
-    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Navigovat na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Navigovat na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
+    <string name="internal_goto_targets_title">Cíle „Přejít na“</string>
+    <string name="internal_goto_targets_description">V této kešce jsou uloženy všechny vaše nedávné cíle \"Přejít na\". Vytvoří se automaticky, když v hlavní nabídce použijete funkci \"Přejít na\". Zadané souřadnice se uloží jako trasový bod této kešky. Pokud už tyto souřadnice nepotřebujete, můžete bez obav tuto kešku a všechny její trasové body odstranit. Podle potřeby také můžete tuto kešku přesunout do některého jiného seznamu.</string>
     <string name="init_longtap_map">Dlouhé klepnutí na mapu</string>
     <string name="init_summary_longtap_map">Aktivovat stisknutí a podržení ikony mapy (vytvořit individuální trasu) a nebo do volného místa na mapě (vytvořit uživatelem definovanou kešku / trasový bod)</string>
     <string name="onetime_info_longtap_disabled">Dlouhým klepnutím na mapu můžete vytvořit jednotlivé trasy a uživatelem definované kešk / trasové body.\n\nDlouhé klepnutí na mapu je momentálně zakázáno.\n\nTo můžete změnit v Nastavení → Mapa → Chování mapy</string>
@@ -1434,6 +1443,7 @@
     <string name="waypoint_duplicate">Duplikovat trasový bod</string>
     <string name="waypoint_toclipboard">Kopírovat trasový bod do schránky</string>
     <string name="waypoint_copy_of">Kopie</string>
+    <string name="waypoint_open_geochecker">Otevřít Geochecker</string>
     <string name="waypointcalc_notes_prompt">Text poznámky…</string>
     <string name="waypoint_coordinate_formats_plain">Prostý</string>
     <string name="from_clipboard">Ze schránky</string>
@@ -1447,6 +1457,8 @@
     <string name="variables_deleteall">Smazat vše</string>
     <string name="variables_deleteall_confirm_text">Opravdu chcete smazat všechny proměnné pro tuto kešku?</string>
     <string name="variables_info">Nápověda</string>
+    <string name="variables_varname_dialog_title">Název proměnné</string>
+    <string name="variables_varname_dialog_message">Zadejte název proměnné (může být prázdný)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Řízený režim</string>
     <string name="calccoord_guided_edit">Klepněte na číslici, kterou chcete upravit</string>
@@ -1469,6 +1481,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Zamítnuto</string>
     <string name="calccoord_migrate_infotext_markdown">U tohoto trasového bodu byl nalezen starší výpočet souřadnic:\n\n%1$s\n\nTento výpočet můžete přesunout do nového výpočtu souřadnic kešky následovně:\n\n%2$s\n\ns novými proměnnými kešek:%3$s\n\nProsím vyberte:\n- %4$s pro provedení přesunu doporučeným způsobem \n- %5$s pro zrušení nalezených dat výpočtů navždy\n-%6$spro pokračování bez přesunu. Až znovu otevřete úpravu trasového bodu, budete znovu dotázáni na přesun. Nicméně berte na vědomí, že úprava souřadnic trasového bodu může smazat místní data výpočtů.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Zvolte funkci</string>
     <string name="formula_function_sqrt">Druhá odmocnina</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
@@ -1496,6 +1509,11 @@
     <string name="formula_error_cyclicdependency">Cyklus: %1$s</string>
     <string name="formula_error_empty">Prázdný vzorec</string>
     <string name="formula_error_other">Chyba: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Bez názvu</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Komentář</string>
     <!-- visit -->
     <string name="visit_tweet">Oznámit nález na Twitteru</string>
     <!-- map -->

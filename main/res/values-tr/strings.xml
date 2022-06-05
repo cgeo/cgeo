@@ -80,6 +80,7 @@
     <string name="wp_trailhead">Trail Başlangıcı</string>
     <string name="wp_waypoint">Referans Noktası</string>
     <string name="wp_original">Orijinal Koordinatlar</string>
+    <string name="wp_generated">Oluşturuldu</string>
     <!-- waypoints short names for new waypoints -->
     <string name="wpnew_final">Final</string>
     <string name="wpnew_stage">Adım</string>
@@ -87,6 +88,7 @@
     <string name="wpnew_trailhead">Via</string>
     <string name="wpnew_waypoint">Mevcut konum</string>
     <string name="wpnew_original">Orijinal</string>
+    <string name="wpnew_generated">Oluşturuldu</string>
     <!-- logs -->
     <string name="log_found">Buldum</string>
     <string name="log_dnf">Bulamadım</string>
@@ -406,6 +408,9 @@
     <string name="caches_clear_offlinelogs">Çevrimdışı kayıtları temizle</string>
     <string name="caches_clear_offlinelogs_message">Çevrimdışı kayıtları temizlemek istiyor musunuz?</string>
     <string name="caches_clear_offlinelogs_progress">Çevrimdışı kayıtlar temizleniyor</string>
+    <string name="caches_show_attributes">Özellikleri göster</string>
+    <string name="caches_set_cache_icon">Geocache simgesi seç</string>
+    <string name="caches_reset_cache_icons_title">Cache simgesini sıfırla</string>
     <string name="caches_make_list_unique">Listeyi özgün kıl</string>
     <string name="caches_set_listmarker">İşaretleyici ayarla</string>
     <string name="caches_askdeletion">Boş ise silmeyi öner</string>
@@ -479,6 +484,7 @@
     <string name="cache_filtergroup_basic">Temel</string>
     <string name="cache_filtergroup_details">Detaylar</string>
     <string name="cache_filtergroup_userspecific">Kullanıcıya özgün</string>
+    <string name="cache_filtergroup_special">Özel</string>
     <string name="cache_filter_contexttype_live_title">Canlı Filtre</string>
     <string name="cache_filter_contexttype_offline_title">Çevrimdışı Filtre</string>
     <string name="cache_filter_contexttype_transient_title">Filtre</string>
@@ -543,6 +549,8 @@
     <string name="cache_filter_status_exclude_active">Aktifleri Dahil Etme</string>
     <string name="cache_filter_status_exclude_disabled">Devredışıları Hariç Tut</string>
     <string name="cache_filter_status_exclude_archived">Arşivlenmişleri Hariç Tut</string>
+    <string name="cache_filter_difficulty_terrain_include_caches_without_dt">Z/A belirli olmayan Cache\'leri dahil et</string>
+    <string name="cache_filter_nested_filter_modify">düzenle</string>
     <string name="cache_filter_log_entry_foundby">Bulan</string>
     <string name="cache_filter_log_entry_logtext">Kayıt metni</string>
     <string name="cache_filter_stored_since_notstored">Kaydedilmemiş</string>
@@ -568,6 +576,7 @@
     <string name="about_changelog">Changelog</string>
     <string name="about_changelog_nightly_build">Son sürüm</string>
     <string name="about_changelog_next_release">Sonraki sürüm</string>
+    <string name="about_changelog_bugfix_release">Hata Düzeltme Sürümü</string>
     <string name="about_system">Sistem</string>
     <string name="about_donate">Bizi destekleyin</string>
     <string name="about_donation_more">Bilgi için web sitesini ziyaret edin</string>
@@ -627,6 +636,7 @@
     <string name="settings_title_waypoints">Yol noktaları</string>
     <string name="settings_title_map_content">Harita içeriği</string>
     <string name="settings_title_map_behavior">Harita davranışı</string>
+    <string name="settings_title_map_style">Harita stili</string>
     <string name="settings_title_data_dir">Geocache veri klasörü</string>
     <string name="settings_title_data_dir_usage">Geocache veri klasörü (%1$s kullanılmış)</string>
     <string name="calculate_dataDir_title">Geocache veri kullanımı</string>
@@ -688,8 +698,12 @@
     <string name="settings_service_active_unavailable">Aktif/Mevcut değil</string>
     <string name="settings_navigation_disabled">Bu uygulama yüklü değil gibi görünüyor</string>
     <string name="init_signature">İmza</string>
+    <string name="init_template_title">Şablon Başlığı</string>
     <string name="init_template_text">Şablon Metni</string>
+    <string name="init_log_template">Kayıt şablonu</string>
     <string name="init_log_template_addnew">Yeni bir şablon ekle</string>
+    <string name="init_log_templates">Kayıt Şablonları</string>
+    <string name="init_log_template_prefix">Şablon:\u0020</string>
     <string name="init_template_help">Yer tutucu metinler - [NAME] gibi- şablon kullanıldığında belirlenen metinle doldurulur.</string>
     <string name="init_signature_template_date">Tarih</string>
     <string name="init_signature_template_time">Saat</string>
@@ -704,6 +718,7 @@
     <string name="init_signature_template_log">Kayıt metni</string>
     <string name="init_signature_template_size">Boyut</string>
     <string name="init_signature_template_type">Tür</string>
+    <string name="init_signature_template_location">Konum</string>
     <string name="init_ratingwanted">GCvote Puanlaması</string>
     <string name="init_summary_ratingwanted">GCvote.com\'dan Geocache puanlamasını yükle</string>
     <string name="init_friends_and_own_logs_wanted">Arkadaşının/Kendi Kaydını Göster</string>
@@ -733,6 +748,7 @@
     <string name="init_summary_useInternalRouting">Otomatik yönledirme dosyası indirmek ve diğer işlevleri kullanabilmek için c:geo dahili yönlendirmesini kullanın</string>
     <string name="init_bigSmileysOnMap">Büyük simgeler</string>
     <string name="init_global_wp_extraction_disable">Ara nokta çıkarmayı devre dışı bırak</string>
+    <string name="init_prevent_cache_note_merge">Kişisel Cache Notu Üzerine Yaz</string>
     <string name="init_customtabs_as_browser">Chrome web görüntüsünü kullan</string>
     <string name="init_summary_customtabs_as_browser">Harici siteler c:geo\'dan ayrılmadan gösterilecek (sadece Chrome yüklenmişse çalışır)</string>
     <string name="init_save_log_img">Resimleri Kaydet</string>
@@ -757,6 +773,7 @@
         <item>Koyu</item>
     </string-array>
     <string name="init_wallpaper">Duvar kağıdı</string>
+    <string name="init_summary_wallpaper">Cihaz arka planını ana ekran arka planı olarak göster</string>
     <!-- backup / restore -->
     <string name="init_backup_title">Yedek Oluştur</string>
     <string name="init_backup_summary">Lütfen bu özelliğin Geocache\'leri, yol noktalarını &amp; ayarları yedekleyebileceğini, ancak Geocache görüntülerini yedekleyemeyeceğini unutmayın. \n Telefonunuzu kaybettikten sonra bile verileri geri yükleyebilmek için, yedekleme dosyalarının bağımsız bir konuma kopyalanması gerekir.</string>
@@ -782,6 +799,7 @@
     <string name="init_backup_history_length_min">Sadece yeni</string>
     <string name="init_backup_history_length_max">Hepsini tut</string>
     <string name="init_backup_history_delete_warning">Yapılandırdığınız maksimum değerin izin verdiğinden daha fazla yedekleme kaydettiniz. Tüm fazla yedeklemeleri gerçekten kaldırmak istiyor musunuz?</string>
+    <string name="init_backup_automatic">Otomatik yedekleme</string>
     <string name="init_backup_automatic_performing">Yedek oluşturuluyor…</string>
     <string name="init_user_confirmation">Ne yaptığımı biliyorum</string>
     <string name="init_backup_success">c:geo\'nun veritabanı başarıyla kopyalandı:</string>
@@ -892,6 +910,7 @@
     <string name="init_maintenance">Bakım</string>
     <string name="init_maintenance_directories_note">c:geo resimleri ve kutuyla ilgili diğer dosyaları belirli bir klasörde saklar. Bazı durumlarda (örn. veri tabanını içe/dışa aktarmak gerektiğinde) bu klasör, buradan silinebilecek eski veriler içerebilir.</string>
     <string name="init_maintenance_directories">Artık dosyaları sil</string>
+    <string name="init_maintenance_finished">Bakım tamamlandı</string>
     <string name="init_location">Geolocation</string>
     <string name="init_location_note">Google Play Hizmetleri ile donatılmış cihazlarda, c:geo daha iyi bir geolokasyon sağlayıcısını otomatik olarak kullanabilir. Ancak, bu harici bir Bluetooth GPS alıcısının kullanımını engeller.</string>
     <string name="init_location_googleplayservices">Google Play kullanın</string>
@@ -1204,6 +1223,7 @@
     <string name="cache_menu_oruxmaps_offline">OruxMaps (Çevrimdışı)</string>
     <string name="cache_menu_vote">Oyla</string>
     <string name="cache_menu_challenge_checker">Challenge Denetleyicisi ara</string>
+    <string name="cache_menu_log_in_browser">Tarayıcıda aç</string>
     <string name="cache_menu_ignore">Geocache\'i yoksay</string>
     <string name="cache_log_menu_decrypt">Şifresini Çöz/Şifrele</string>
     <string name="cache_log_menu_popup_title">%s\'un kaydı</string>
@@ -1247,6 +1267,7 @@
     <string name="cache_image">Görsel</string>
     <string name="cache_image_open_file">Dosya olarak aç</string>
     <string name="cache_image_open_browser">Tarayıcıda aç</string>
+    <string name="cache_image_show_description">Açıklamayı göster</string>
     <string name="cache_image_add_waypoint">Yol noktası ekle</string>
     <string name="cache_image_background">Geocache listeleme sayfası arkaplan resmi</string>
     <string name="cache_share_field">Paylaş</string>
@@ -1306,6 +1327,7 @@
     <string name="waypoint_cache_coordinates">Geocache koordinatları</string>
     <string name="waypoint_calculated_coordinates">Hesaplanmış koordinatlar</string>
     <!-- Marks legacy calculated waypoints in waypoint list -->
+    <string name="waypoint_calculated_coordinates_global">Koordinatları hesapla</string>
     <string name="waypoint_custom">Özel</string>
     <string name="waypoint_my_coordinates">Benim koordinatlarım</string>
     <string name="waypoint_bearing">Azimut açısı</string>
@@ -1347,10 +1369,15 @@
     <string name="copy_to_clipboard">Panoya kopyala</string>
     <!-- Variables -->
     <string name="variables_tidyup">Temizle</string>
+    <string name="variables_deleteall">Tümünü Sil</string>
     <string name="variables_info">Yardım</string>
     <!-- Calculated coordinates -->
+    <string name="calccoord_guided_mode">Rehber Modu</string>
+    <string name="calccoord_guided_value">Değer</string>
+    <string name="calccoord_remove_spaces">boşlukları sil</string>
     <string name="calccoord_generate_title">Yol noktası Oluştur</string>
     <string name="calccoord_generate_showonmap">Haritada göster</string>
+    <string name="calccoord_generate_waypointnameprefix">Oluşturuldu</string>
     <string name="calccoord_generate_error_nogeopointselected">Koordinat seçilmedi</string>
     <string name="calccoord_migrate_cancel">İptal</string>
     <!-- Formula -->
@@ -1359,9 +1386,15 @@
     <string name="formula_function_cos">Kosinüs</string>
     <string name="formula_function_tan">Tanjant</string>
     <string name="formula_function_if">Eğer</string>
+    <string name="formula_function_length">Metin Uzunluğu</string>
     <string name="formula_function_rot">Karakterleri Döndür</string>
+    <string name="formula_function_lettervalue">Kelime Değeri</string>
+    <string name="formula_function_vanity">Vanity Kod</string>
     <string name="formula_function_group_complexnumeric">Karmaşık Sayı</string>
     <string name="formula_error_missingvarvalue">Eksik: %1$s</string>
+    <string name="formula_error_cyclicdependency">Döngü: %1$s</string>
+    <string name="formula_error_other">Hata: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Bunu Twitter\'da paylaş</string>
     <!-- map -->
@@ -1411,6 +1444,10 @@
     <string name="map_show_other_title">Diğerlerini göster:</string>
     <string name="map_settings_cache_filter_too_complex_title">Filtre çok karmaşık</string>
     <string name="map_settings_cache_filter_too_complex_message">Mevcut filtre daha fazla seçenek uygulamak için çok karmaşık. Bu genellikle filtrenin basit VE mantığı yerine DEĞİL veya VEYA içermesiyle alakalıdır.</string>
+    <string name="google_maps_style_default">Varsayılan</string>
+    <string name="google_maps_style_night">Gece</string>
+    <string name="google_maps_style_retro">Retro</string>
+    <string name="google_maps_style_contrast">Yüksek Kontrast</string>
     <!-- search -->
     <string name="geo_search_label">Yakın Geocache\'leri Ara</string>
     <string name="search_bar_hint">Cache/trackable ara</string>
@@ -1810,7 +1847,10 @@
     <string name="attribute_blind_people_no">Görme engelli için uygun</string>
     <string name="attribute_unknown">Bilinmeyen öznitelik</string>
     <!-- cache attribute categories -->
+    <string name="cat_tools">Ekipman</string>
     <string name="cat_type">Tür</string>
+    <string name="cat_location">Cache konumu</string>
+    <string name="cat_permissions">İzinler</string>
     <!-- cache attribute sources -->
     <string name="attribute_source_gc">GC</string>
     <string name="attribute_source_oc">OC</string>
@@ -1979,6 +2019,8 @@
     <string name="map_load_track">GPX\'ten yol/rota yükle</string>
     <string name="load_track_error">Yol/rota yüklenirken hata oluştu</string>
     <!-- route/track commons -->
+    <string name="routes_tracks_menu">Rotalar / Yollar</string>
+    <string name="route">Rota</string>
     <string name="track">İz</string>
     <string name="make_visible">görünür yap</string>
     <string name="hide">gizle</string>
@@ -2140,26 +2182,50 @@
     <string name="rtl_vineyard">üzüm bağı</string>
     <string name="rtl_water">Su</string>
     <string name="rtl_military">askeri</string>
+    <string name="rtl_nature_reserve">Doğal koruma alanı</string>
     <string name="rtl_cliff">uçurum</string>
     <string name="rtl_ridge">sırt</string>
     <string name="rtl_dyke">dayk</string>
     <string name="rtl_beach">kıyı</string>
     <string name="rtl_beach_gravel">çakıllı sahil</string>
+    <string name="rtl_powerline">enerjihattı</string>
     <!-- render theme legend: category "Roads & Paths" -->
     <string name="rtl_category_roads_paths">Yollar &amp; Patikalar</string>
     <string name="rtl_paved_path">döşenmiş yol</string>
+    <string name="rtl_paved_path_gravel">döşenmiş patika (çakıl)</string>
     <string name="rtl_unpaved_path">döşenmemiş yol</string>
+    <string name="rtl_unpaved_path_partly_grown">döşenmemiş patika (kısmen otlu)</string>
+    <string name="rtl_unpaved_path_grown">döşenmemiş yürüme yolu (otlar büyümüş)</string>
     <string name="rtl_surface_unknown">yüzey bilinmiyor</string>
+    <string name="rtl_unpaved_footpath">döşenmemiş yürüme yolu</string>
+    <string name="rtl_paved_footpath">döşenmiş yürüme yolu</string>
+    <string name="rtl_cycleway">bisiklet yolu</string>
+    <string name="rtl_cycleway_steep">bisiklet yolu (dik)</string>
+    <string name="rtl_cycleway_paved">bisiklet yolu (döşenmiş)</string>
+    <string name="rtl_paved_smooth">döşenmiş (düzgün)</string>
     <string name="rtl_paved_rough">döşenmiş (kaba)</string>
     <string name="rtl_surface_compacted">sıkıştırılmış yüzey</string>
     <!-- render theme legend: category "Walking, Cycling, Climbing -->
     <string name="rtl_category_walking_cycling_climbing">Yürüme, Bisiklet, Tırmanış</string>
+    <string name="rtl_hiking_T1">hiking T1</string>
+    <string name="rtl_hiking_T2">hiking T2</string>
+    <string name="rtl_hiking_T23">hiking T2/T3</string>
+    <string name="rtl_hiking_T3">hiking T3</string>
+    <string name="rtl_hiking_T4">hiking T4</string>
+    <string name="rtl_hiking_T45">hiking T4/T5</string>
+    <string name="rtl_hiking_T5">hiking T5</string>
+    <string name="rtl_hiking_T6">hiking T6</string>
     <string name="rtl_mtb_S0">MTB S0</string>
     <string name="rtl_mtb_S1">MTB S1</string>
     <string name="rtl_mtb_S2">MTB S2</string>
     <string name="rtl_mtb_S3">MTB S3</string>
     <string name="rtl_mtb_S4">MTB S4</string>
     <string name="rtl_mtb_S56">MTB S5/6</string>
+    <string name="rtl_uphill15">yokuş yukarı -15%</string>
+    <string name="rtl_uphill20">yokuş yukarı -20%</string>
+    <string name="rtl_uphill25">yokuş yukarı -25%</string>
+    <string name="rtl_uphill30">yokuş yukarı -30%</string>
+    <string name="rtl_uphill40">yokuş yukarı -40%</string>
     <string name="rtl_uphill_too_steep">yukarı eğim çok dik</string>
     <string name="rtl_security_ladder">güvenlik: merdiven</string>
     <!-- render theme legend: category "POI / Symbols" -->
@@ -2167,6 +2233,10 @@
     <string name="rtl_bench">bank</string>
     <string name="rtl_drinking_water">içme suyu</string>
     <string name="rtl_peak">zirve</string>
+    <string name="rtl_picnic_site">Piknik alanı</string>
+    <string name="rtl_playground">oyun alanı</string>
+    <string name="rtl_playground_private">özel oyun alanı</string>
+    <string name="rtl_recycling">geri dönüşüm</string>
     <string name="rtl_shelter">sığınak</string>
     <string name="rtl_telephone">telefon</string>
     <string name="rtl_toilets">tuvaletler</string>
@@ -2200,10 +2270,12 @@
     <string name="rtl_tennis">tenis</string>
     <string name="rtl_water_park">su parkı</string>
     <string name="rtl_airport">havalimanı</string>
+    <string name="rtl_cable_car">teleferik</string>
     <string name="rtl_helipad">helikopter pisti</string>
     <string name="rtl_rail_funicular">finükiler</string>
     <string name="rtl_parking">park</string>
     <string name="rtl_bicycle_parking">bisiklet parkı</string>
+    <string name="rtl_bicycle_rental">bisiklet kiralama</string>
     <string name="rtl_bicycle_shop">bisiklet mağazası</string>
     <string name="rtl_car_rental">araba kiralama</string>
     <string name="rtl_car_wash">araba yıkama</string>
@@ -2230,11 +2302,14 @@
     <string name="rtl_butcher">kasap</string>
     <string name="rtl_chemist">kimyager</string>
     <string name="rtl_doityourself">Kendin Yap</string>
+    <string name="rtl_farm_shop">çiftlik mağazası</string>
     <string name="rtl_laundry">çamaşırhane</string>
     <string name="rtl_mall">avm</string>
+    <string name="rtl_marketplace">pazaryeri</string>
     <string name="rtl_organic">organik</string>
     <string name="rtl_postbox">posta kutusu</string>
     <string name="rtl_postoffice">postane</string>
+    <string name="rtl_sports_shop">spor mağazası</string>
     <string name="rtl_supermarket">süpermarket</string>
     <string name="rtl_travel_agency">seyahat acentası</string>
     <string name="rtl_doctors">doktor</string>
@@ -2267,21 +2342,28 @@
     <string name="rtl_place_of_worship">ibadet yeri</string>
     <string name="rtl_shinto">shinto</string>
     <string name="rtl_synagogue">sinagog</string>
+    <string name="rtl_pow">ibadet yeri</string>
     <string name="rtl_pow_christian">hristiyan ibadet yeri</string>
     <string name="rtl_pow_muslim">müslüman ibadet yeri</string>
     <string name="rtl_border_control">sınır kontrolü</string>
     <string name="rtl_bridge_movable">hareketli köprü</string>
+    <string name="rtl_cave_entrance">mağara girişi</string>
+    <string name="rtl_cycle_barrier">döngü bariyer</string>
+    <string name="rtl_elevator">asansör</string>
     <string name="rtl_gate">geçit</string>
     <string name="rtl_geyser">gayzer</string>
     <string name="rtl_hot_spring">kaplıca</string>
     <string name="rtl_ladder">merdiven</string>
     <string name="rtl_log">kayıt</string>
     <string name="rtl_oneway">tekyön</string>
+    <string name="rtl_oneway_cycle">tek yön (döngü)</string>
+    <string name="rtl_oneway_cycle_rev">tek yön (döngü, tersine)</string>
     <string name="rtl_peak_small">küçük zirve</string>
     <string name="rtl_rapids">Rapid</string>
     <string name="rtl_safety_rope">güvenlik ipi</string>
     <string name="rtl_stone">taş</string>
     <string name="rtl_traffic_signal">trafik işareti</string>
+    <string name="rtl_turnstile">turnike</string>
     <string name="rtl_waterfall">şelale</string>
     <string name="rtl_alp">alp</string>
     <string name="rtl_mud">çamur</string>
@@ -2298,5 +2380,11 @@
     <string name="rtl_tunnel">tünel</string>
     <string name="rtl_bridge">köprü</string>
     <string name="rtl_railway">demiyolu</string>
+    <string name="rtl_path_bicycle">genel bisiklet yolu</string>
+    <string name="rtl_path_combined_bicycle_foot">kombine bisiklet ve yürüme yolu</string>
+    <string name="rtl_path_quality1">kalite 1 (döşenmiş: asfalt, …)</string>
+    <string name="rtl_path_quality23">kalite 2/3 (döşenmiş: çakıl, tamir edilmiş, …)</string>
+    <string name="rtl_path_quality45">kalite 4/5 (döşenmemiş)</string>
     <!-- Smileys GC / OC -->
+    <string name="smiley_approve">Onaylandı</string>
 </resources>

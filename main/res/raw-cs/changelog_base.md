@@ -34,5 +34,5 @@
 - Novinka: Aktualizováno interní směrování BRouter na verzi v1.6.3
 - Novinka: Omezení nutnosti opakovaného používání klávesy zpět spuštěním nového zásobníku aktivit při přechodu do jiné části aplikace
 - Novinka: Přidáno nastavení pro dešifrování nápovědy ke kešce ve výchozím nastavení (místo pouze při klepnutí na ni)
-- New: Support setting caches from unknown source as found locally
+- Novinka: Podpora nastavení kešek z neznámého zdroje jako lokálně nalezených
 - Odstraněno: Skladovací služba Geolutin, protože byla ukončena

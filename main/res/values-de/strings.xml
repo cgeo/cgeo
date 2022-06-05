@@ -1300,10 +1300,15 @@
     <string name="cache_remove_from_history">Aus Verlauf löschen</string>
     <string name="cache_license">Lizenz</string>
     <string name="cache_image">Bild</string>
+    <string name="cache_image_open">Öffnen</string>
     <string name="cache_image_open_file">Als Datei öffnen</string>
     <string name="cache_image_open_browser">Im Browser öffnen</string>
+    <string name="cache_image_share">Teilen</string>
     <string name="cache_image_show_description">Beschreibung anzeigen</string>
     <string name="cache_image_add_waypoint">Wegpunkt hinzufügen</string>
+    <string name="cache_image_rename">Umbenennen</string>
+    <string name="cache_image_delete">Löschen</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Hintergrundbild der Cache-Beschreibung</string>
     <string name="cache_share_field">Teilen</string>
     <string name="cache_time_full_hours">Uhr</string>
@@ -1317,6 +1322,10 @@
     <string name="cache_alc_install">Installiere den Adventure Lab-Player um dieses Adventure zu spielen</string>
     <string name="context_share_as_text">Text teilen</string>
     <string name="context_share_as_link">Link teilen</string>
+    <string name="image_category_uncategorized">Unkategorisiert</string>
+    <string name="image_category_own">Eigene</string>
+    <string name="image_category_listing">Listing</string>
+    <string name="image_category_log">Log</string>
     <string name="create_internal_cache">Benutzerdefinierten Cache anlegen</string>
     <string name="create_internal_cache_short">Neuer Cache</string>
     <string name="create_internal_cache_currentlist">Verwende aktuelle Liste</string>
@@ -1404,6 +1413,7 @@
     <string name="waypoint_duplicate">Wegpunkt duplizieren</string>
     <string name="waypoint_toclipboard">Wegpunkt in die Zwischenablage kopieren</string>
     <string name="waypoint_copy_of">Kopie von</string>
+    <string name="waypoint_open_geochecker">Öffne Geochecker</string>
     <string name="waypointcalc_notes_prompt">Notizen hier eingeben…</string>
     <string name="waypoint_coordinate_formats_plain">Schlicht</string>
     <string name="from_clipboard">Aus der Zwischenablage</string>
@@ -1417,6 +1427,8 @@
     <string name="variables_deleteall">Löschen</string>
     <string name="variables_deleteall_confirm_text">Möchtest du wirklich alle Variablen für diesen Cache löschen?</string>
     <string name="variables_info">Hilfe</string>
+    <string name="variables_varname_dialog_title">Variablenname</string>
+    <string name="variables_varname_dialog_message">Variablenname eingeben (kann leer bleiben)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Geführter Modus</string>
     <string name="calccoord_guided_edit">Zum Bearbeiten auf eine Ziffer tippen</string>
@@ -1439,6 +1451,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Verworfen</string>
     <string name="calccoord_migrate_infotext_markdown">Eine alte berechnete Koordinate wurde in diesem Wegpunkt gefunden:\n\n%1$s\n\nSie kann in eine neue berechnete Koordinate wie folgt migriert werden:\n\n%2$s\n\nmit neuen Cache-Variablen:%3$s\n\nBitte wählen:\n- %4$s um die Migration wie vorgeschlagen durchzuführen\n- %5$s um die gefundenen Berechnungsdaten zu verwerfen\n- %6$s um ohne Migration fortzufahren. Beim nächsten Öffnen des Wegpunktes wirst du erneut nach einer Migration gefragt. Beachte jedoch, dass das Bearbeiten der Wegpunktkoordinaten lokale Berechnungsdaten löschen kann.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Funktion auswählen</string>
     <string name="formula_function_sqrt">Quadratwurzel</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
@@ -1466,6 +1479,11 @@
     <string name="formula_error_cyclicdependency">Zyklus: %1$s</string>
     <string name="formula_error_empty">Leere Formel</string>
     <string name="formula_error_other">Fehler: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Ohne Titel</string>
+    <string name="imageview_mimetype">MIME-Typ</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Kommentar</string>
     <!-- visit -->
     <string name="visit_tweet">Diesen Eintrag auf Twitter veröffentlichen</string>
     <!-- map -->

@@ -315,6 +315,7 @@
     <string name="loc_trying">Localizzazione in corso</string>
     <string name="loc_no_addr">Indirizzo sconosciuto</string>
     <string name="loc_gps_disabled">GPS non attivo</string>
+    <string name="loc_copied_clipboard">La posizione attuale è stata copiata negli appunti</string>
     <string name="menu_centerposition">Centra sulla mia posizione</string>
     <!-- standard menu -->
     <string name="menu_about">Info su c:geo</string>
@@ -1299,10 +1300,15 @@
     <string name="cache_remove_from_history">Rimuovi dalla cronologia</string>
     <string name="cache_license">Licenza</string>
     <string name="cache_image">Immagine</string>
+    <string name="cache_image_open">Apri</string>
     <string name="cache_image_open_file">Apri come file</string>
     <string name="cache_image_open_browser">Apri nel browser</string>
+    <string name="cache_image_share">Condividi</string>
     <string name="cache_image_show_description">Mostra descrizione</string>
     <string name="cache_image_add_waypoint">Aggiungi waypoint</string>
+    <string name="cache_image_rename">Rinomina</string>
+    <string name="cache_image_delete">Elimina</string>
+    <string name="cache_image_title_camera_prefix">Foto</string>
     <string name="cache_image_background">Immagine di sfondo della lista cache</string>
     <string name="cache_share_field">Condividi</string>
     <string name="cache_time_full_hours">Precise</string>
@@ -1316,6 +1322,10 @@
     <string name="cache_alc_install">Installa l\'app Adventure Lab per giocare a questa avventura</string>
     <string name="context_share_as_text">Condividi testo</string>
     <string name="context_share_as_link">Condividi link</string>
+    <string name="image_category_uncategorized">Senza categoria</string>
+    <string name="image_category_own">Propri</string>
+    <string name="image_category_listing">Descrizione</string>
+    <string name="image_category_log">Log</string>
     <string name="create_internal_cache">Crea cache definito dall\'utente</string>
     <string name="create_internal_cache_short">Nuova cache</string>
     <string name="create_internal_cache_currentlist">Usa la lista corrente</string>
@@ -1325,6 +1335,9 @@
     <string name="internal_goto_targets_title">Obiettivi \"Vai a\"</string>
     <string name="internal_goto_targets_description">Questo cache memorizza i tuoi recenti obiettivi \"Vai a\" e viene creato automaticamente una volta che usi la funzione \"Vai a\" nel menu principale. Le coordinate inserite saranno immagazzinate nei waypoint di questo cache. Se non hai più bisogno di queste coordinate puoi eliminare in sicurezza questo cache o uno dei sui waypoint. Puoi anche spostare il cache in qualsiasi altra lista di tua scelta.</string>
     <string name="init_longtap_map">Tocco lungo sulla mappa</string>
+    <string name="init_summary_longtap_map">Attiva tocco prolungato sudi un\'icona nella mappa (crea un percorso personalizzato) o sullo spazio libero sulla mappa (crea un cache/waypoint definito dall\'utente)</string>
+    <string name="onetime_info_longtap_disabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
+    <string name="onetime_info_longtap_enabled">Con un tocco prolungato sulla mappa è possibile creare itinerari personali e cache definiti dall\'utente.\n\nQuesta modalità è attualmente disabilitata.\n\nPuoi cambiarla in Impostazioni → Mappa → Comportamento mappa</string>
     <string name="goto_targets_list">Cache definiti dall\'utente</string>
     <string name="clear_goto_history_title">Cancella cronologia dei percorsi</string>
     <string name="clear_goto_history">Questo eliminerà tutti i waypoint storici eccetto i cinque più recenti</string>
@@ -1400,6 +1413,7 @@
     <string name="waypoint_duplicate">Duplica waypoint</string>
     <string name="waypoint_toclipboard">Copia waypoint negli appunti</string>
     <string name="waypoint_copy_of">Copia di</string>
+    <string name="waypoint_open_geochecker">Apri Geochecker</string>
     <string name="waypointcalc_notes_prompt">Inserire le note qui…</string>
     <string name="waypoint_coordinate_formats_plain">Normale</string>
     <string name="from_clipboard">Dagli appunti</string>
@@ -1413,6 +1427,8 @@
     <string name="variables_deleteall">Elimina tutto</string>
     <string name="variables_deleteall_confirm_text">Vuoi veramente cancellare tutte le variabili per questo cache?</string>
     <string name="variables_info">Aiuto</string>
+    <string name="variables_varname_dialog_title">Nome della variabile</string>
+    <string name="variables_varname_dialog_message">Inserire il nome della variabile (può essere lasciato vuoto)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Modalità Guidata</string>
     <string name="calccoord_guided_edit">Tocca una cifra per modificare</string>
@@ -1435,6 +1451,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Ignorato</string>
     <string name="calccoord_migrate_infotext_markdown">Un vecchio metodo di calcolo delle coordinate è stato trovato in questo waypoint:\n\n%1$s\n\nÈ possibile migrare al nuovo calcolo di coordinate del cache come segue:\n\n%2$s\n\ncon nuove variabili del cache:%3$s\n\nSi prega di scegliere:\n- %4$s per eseguire la migrazione come suggerito\n- %5$s per rimuovere i dati di calcolo trovati per un buon\n- %6$s per continuare senza migrazione. Ti verrà chiesta nuovamente la migrazione la prossima volta che apri il waypoint per la modifica. Notare tuttavia che la modifica delle coordinate del waypoint potrebbe eliminare i dati di calcolo locali.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Scegli la funzione</string>
     <string name="formula_function_sqrt">Radice quadrata</string>
     <string name="formula_function_sin">Seno</string>
     <string name="formula_function_cos">Coseno</string>
@@ -1462,6 +1479,11 @@
     <string name="formula_error_cyclicdependency">Ciclo: %1$s</string>
     <string name="formula_error_empty">Formula Vuota</string>
     <string name="formula_error_other">Errore: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Senza titolo</string>
+    <string name="imageview_mimetype">Tipo MIME</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Commento</string>
     <!-- visit -->
     <string name="visit_tweet">Segnala questo ritrovamento su Twitter</string>
     <!-- map -->

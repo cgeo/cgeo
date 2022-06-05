@@ -315,6 +315,7 @@
     <string name="loc_trying">Προσπάθεια εντοπισμού</string>
     <string name="loc_no_addr">Άγνωστη διεύθυνση</string>
     <string name="loc_gps_disabled">Το GPS είναι απενεργοποιημένο</string>
+    <string name="loc_copied_clipboard">Η τρέχουσα θέση σας έχει αντιγραφεί στο πρόχειρο</string>
     <string name="menu_centerposition">Με κέντρο τη θέση μου</string>
     <!-- standard menu -->
     <string name="menu_about">Σχετικά με το c:geo</string>
@@ -1293,10 +1294,15 @@
     <string name="cache_remove_from_history">Αφαίρεση από το ιστορικό</string>
     <string name="cache_license">Άδεια χρήσης</string>
     <string name="cache_image">Εικόνα</string>
+    <string name="cache_image_open">Άνοιγμα</string>
     <string name="cache_image_open_file">Άνοιγμα ως αρχείο</string>
     <string name="cache_image_open_browser">Άνοιγμα σε πρόγραμμα περιήγησης</string>
+    <string name="cache_image_share">Κοινή χρήση</string>
     <string name="cache_image_show_description">Εμφάνιση περιγραφής</string>
     <string name="cache_image_add_waypoint">Προσθήκη Σημείου Αναφοράς</string>
+    <string name="cache_image_rename">Μετονομασία</string>
+    <string name="cache_image_delete">Διαγραφή</string>
+    <string name="cache_image_title_camera_prefix">Φωτογραφία</string>
     <string name="cache_image_background">Εικόνα φόντου κρύπτης</string>
     <string name="cache_share_field">Κοινή χρήση</string>
     <string name="cache_time_full_hours">η ώρα</string>
@@ -1310,6 +1316,10 @@
     <string name="cache_alc_install">Εγκαταστήστε τον Adventure Lab για να παίξετε αυτή την περιπέτεια</string>
     <string name="context_share_as_text">Κοινή χρήση κειμένου</string>
     <string name="context_share_as_link">Κοινή χρήση συνδέσμου</string>
+    <string name="image_category_uncategorized">Χωρίς κατηγορία</string>
+    <string name="image_category_own">Ιδιόκτητη</string>
+    <string name="image_category_listing">Λίστα</string>
+    <string name="image_category_log">Αρχείο καταγραφής</string>
     <string name="create_internal_cache">Δημιουργία user-defined κρύπτης</string>
     <string name="create_internal_cache_short">Νέα κρύπτη</string>
     <string name="create_internal_cache_currentlist">Χρήση τρέχουσας λίστας</string>
@@ -1397,6 +1407,7 @@
     <string name="waypoint_duplicate">Δημιουργία διπλού σημείου αναφοράς</string>
     <string name="waypoint_toclipboard">Αντιγραφή ενδιαμέσου σημείου στο πρόχειρο</string>
     <string name="waypoint_copy_of">Αντίγραφο του</string>
+    <string name="waypoint_open_geochecker">Άνοιγμα Geochecker</string>
     <string name="waypointcalc_notes_prompt">Εισάγετε σημειώσεις εδώ…</string>
     <string name="waypoint_coordinate_formats_plain">Απλή</string>
     <string name="from_clipboard">Από το πρόχειρο</string>
@@ -1410,6 +1421,8 @@
     <string name="variables_deleteall">Διαγραφή Όλων</string>
     <string name="variables_deleteall_confirm_text">Θέλετε πραγματικά να διαγράψετε όλες τις μεταβλητές για αυτήν την κρύπτη;</string>
     <string name="variables_info">Βοήθεια</string>
+    <string name="variables_varname_dialog_title">Όνομα Μεταβλητής</string>
+    <string name="variables_varname_dialog_message">Εισάγετε όνομα μεταβλητής (μπορεί να μείνει κενό)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Λειτουργία οδηγού</string>
     <string name="calccoord_guided_edit">Πατήστε ένα ψηφίο για επεξεργασία</string>
@@ -1432,6 +1445,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Απόρριψη</string>
     <string name="calccoord_migrate_infotext_markdown">Βρέθηκε ένας υπολογισμός συντεταγμένων παλαιού τύπου με αυτόν τον τρόπο:\n\n%1$s\n\nΜπορείτε να μετεγκαταστήσετε αυτό στις νέες συντεταγμένες υπολογισμού της προσωρινής μνήμης ως εξής:\n\n%2$s\n\nμε νέο πρότυπο:%3$s\n\nΠαρακαλώ επιλέξτε:\n- %4$s για να εκτελέσετε τη μετεγκατάσταση όπως προτείνεται\n- %5$s για να απορρίψετε τα δεδομένα υπολογισμού που βρέθηκαν \n- %6$s για να συνεχίσετε χωρίς μετατροπη. Θα σας ζητηθεί να τα μετατρέψετε ξανά την επόμενη φορά που θα ανοίξετε το σημείο για επεξεργασία. Σημειώστε, ωστόσο, ότι η επεξεργασία των συντεταγμένων σημείου θα μπορούσε να διαγράψει τοπικά δεδομένα υπολογισμού.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Επιλογή λειτουργίας</string>
     <string name="formula_function_sqrt">Τετραγωνική ρίζα</string>
     <string name="formula_function_sin">Ημίτονο</string>
     <string name="formula_function_cos">Συνημίτονο</string>
@@ -1459,6 +1473,11 @@
     <string name="formula_error_cyclicdependency">Κύκλος: %1$s</string>
     <string name="formula_error_empty">Κενός Τύπος</string>
     <string name="formula_error_other">Σφάλμα: %1$s</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">Χωρίς τίτλο</string>
+    <string name="imageview_mimetype">MimeType</string>
+    <string name="imageview_metadata_geopoint">Geopoint</string>
+    <string name="imageview_metadata_comment">Σχόλιο</string>
     <!-- visit -->
     <string name="visit_tweet">Δημοσιεύστε αυτή την εύρεση στο Twitter</string>
     <!-- map -->

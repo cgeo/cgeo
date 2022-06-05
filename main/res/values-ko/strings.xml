@@ -315,6 +315,7 @@
     <string name="loc_trying">위치 찾는 중</string>
     <string name="loc_no_addr">알 수 없는 주소</string>
     <string name="loc_gps_disabled">GPS 비활성화</string>
+    <string name="loc_copied_clipboard">현재 위치가 클립보드에 복사되었습니다.</string>
     <string name="menu_centerposition">내위치를 중심으로</string>
     <!-- standard menu -->
     <string name="menu_about">c:geo에 대해</string>
@@ -1285,10 +1286,15 @@
     <string name="cache_remove_from_history">기록에서 제거</string>
     <string name="cache_license">라이센스</string>
     <string name="cache_image">사진</string>
+    <string name="cache_image_open">열기</string>
     <string name="cache_image_open_file">파일로 열기</string>
     <string name="cache_image_open_browser">브라우저에서 열기</string>
+    <string name="cache_image_share">공유</string>
     <string name="cache_image_show_description">설명 보기</string>
     <string name="cache_image_add_waypoint">지점 추가</string>
+    <string name="cache_image_rename">이름변경</string>
+    <string name="cache_image_delete">삭제</string>
+    <string name="cache_image_title_camera_prefix">사진</string>
     <string name="cache_image_background">캐시정보 배경 이미지</string>
     <string name="cache_share_field">공유</string>
     <string name="cache_time_full_hours">시</string>
@@ -1302,6 +1308,10 @@
     <string name="cache_alc_install">이 어드벤처를 하려면 어드밴처 랩 앱을 설치하십시오.</string>
     <string name="context_share_as_text">텍스트 공유</string>
     <string name="context_share_as_link">링크 공유</string>
+    <string name="image_category_uncategorized">카테고리 없음</string>
+    <string name="image_category_own">소유</string>
+    <string name="image_category_listing">목록</string>
+    <string name="image_category_log">로그</string>
     <string name="create_internal_cache">사용자 정의 캐시 작성</string>
     <string name="create_internal_cache_short">새로운 캐시</string>
     <string name="create_internal_cache_currentlist">현재 목록 사용</string>
@@ -1311,6 +1321,9 @@
     <string name="internal_goto_targets_title">\'이동으로\' 목표</string>
     <string name="internal_goto_targets_description">이 캐시는 최근 \"이동으로\" 목표를 저장합니다. 메인 메뉴에서 \"이동으로\" 기능을 사용하면 자동으로 생성됩니다. 거기에 입력 된 좌표는이 캐시의 웨이포인트에 저장됩니다. 이 좌표가 더 이상 필요하지 않으면이 캐시 또는 웨이포인트를 안전하게 삭제할 수 있습니다. 또한 캐시를 원하는 다른 목록으로 옮길 수 있습니다. </string>
     <string name="init_longtap_map">지도에서 길게 탭</string>
+    <string name="init_summary_longtap_map">지도 아이콘 (개인 경로 만들기) 또는 빈지도 공간을 (사용자 정의 캐시/지점 작성) 길게 탭하는 게 활동시킵니다.</string>
+    <string name="onetime_info_longtap_disabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 비활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
+    <string name="onetime_info_longtap_enabled">지도를 길게 누르면 개별 경로와 사용자 정의 캐시나 지점을 만들 수 있습니다.\n\n지도에서 길게 누르기가 현재 활성화되어 있습니다.\n\n설정 →지도 →지도 동작에서 변경할 수 있습니다.</string>
     <string name="goto_targets_list">사용자 정의 캐시</string>
     <string name="clear_goto_history_title">\"이동으로\" 역사 지우기</string>
     <string name="clear_goto_history">가장 최근 5 개를 제외한 모든 역사적인 지점이 삭제하겠습니다</string>
@@ -1385,6 +1398,7 @@
     <string name="waypoint_duplicate">웨이포인트 복제</string>
     <string name="waypoint_toclipboard">지점을 클립보드에 복사</string>
     <string name="waypoint_copy_of">복사 :</string>
+    <string name="waypoint_open_geochecker">솔루션체커 열기</string>
     <string name="waypointcalc_notes_prompt">여기에 메모를 입력…</string>
     <string name="waypoint_coordinate_formats_plain">간단히</string>
     <string name="from_clipboard">클립보드 읽기</string>
@@ -1447,6 +1461,11 @@
     <string name="formula_error_cyclicdependency">주기: %1$s</string>
     <string name="formula_error_empty">빈 공식</string>
     <string name="formula_error_other">오류: \'%1$s\'</string>
+    <!-- ImageView -->
+    <string name="imageview_notitle">제목 없음</string>
+    <string name="imageview_mimetype">MIME형식</string>
+    <string name="imageview_metadata_geopoint">지오포인트</string>
+    <string name="imageview_metadata_comment">코멘트</string>
     <!-- visit -->
     <string name="visit_tweet">이 기록을 트위터로 보내기</string>
     <!-- map -->

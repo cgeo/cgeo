@@ -316,6 +316,7 @@
     <string name="loc_trying">Intentant ubicar</string>
     <string name="loc_no_addr">L\'adreça és desconeguda</string>
     <string name="loc_gps_disabled">El GPS està desactivat</string>
+    <string name="loc_copied_clipboard">La ubicació actual s\'ha copiat al porta-retalls</string>
     <string name="menu_centerposition">Centra a la meva posició</string>
     <!-- standard menu -->
     <string name="menu_about">Quant al c:geo</string>
@@ -1326,6 +1327,9 @@
     <string name="internal_goto_targets_title">Objectius \"Vés a\"</string>
     <string name="internal_goto_targets_description">Aquest catxé emmagatzema els vostres objectius recents \"Vés a\". Es crea automàticament un cop heu utilitzat la funció \"Vés a\" al menú principal. Les coordenades que hi introduïu s’emmagatzemaran en punts de ruta d’aquest catxé. Si ja no necessiteu aquestes coordenades, podeu suprimir amb seguretat aquest catxé o qualsevol dels seus punts de ruta. També podeu moure el catxé a qualsevol altra llista.</string>
     <string name="init_longtap_map">Feu un toc llarg al mapa</string>
+    <string name="init_summary_longtap_map">Activeu un toc llarg a la icona del mapa (crear una ruta individual) o a l\'espai del mapa (crear un catxé / waypoint definit per l\'usuari)</string>
+    <string name="onetime_info_longtap_disabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està desactivat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
+    <string name="onetime_info_longtap_enabled">Si feu un toc llarg al mapa, podeu crear rutes individuals i catxés/punts d\'interès definits per l\'usuari.\n\nEl toc llarg al mapa està activat actualment.\n\nPodeu canviar-ho a Configuració → Mapa → Comportament del mapa</string>
     <string name="goto_targets_list">Catxé definit per l\'usuari</string>
     <string name="clear_goto_history_title">Esborreu l\'historial de destinacions</string>
     <string name="clear_goto_history">Això suprimirà tots el historial de punts de ruta, excepte els cinc més recents</string>
@@ -1401,6 +1405,7 @@
     <string name="waypoint_duplicate">Duplica punt de ruta</string>
     <string name="waypoint_toclipboard">Copia els punts de ruta al porta-retalls</string>
     <string name="waypoint_copy_of">Còpia de</string>
+    <string name="waypoint_open_geochecker">Obre el Geochecker</string>
     <string name="waypointcalc_notes_prompt">Afegeix aquí les notes…</string>
     <string name="waypoint_coordinate_formats_plain">Senzill</string>
     <string name="from_clipboard">Des del porta-retalls</string>
@@ -1463,6 +1468,7 @@
     <string name="formula_error_cyclicdependency">Cicle: %1$s</string>
     <string name="formula_error_empty">Fórmula buida</string>
     <string name="formula_error_other">Error: \'%1$s\'</string>
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Envia aquest \"trobat\" al Twitter</string>
     <!-- map -->

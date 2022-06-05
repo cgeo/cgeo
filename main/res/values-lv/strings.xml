@@ -909,6 +909,7 @@ importēti %1$d slēpņi no %2$s</item>
     <!-- Variables -->
     <!-- Calculated coordinates -->
     <!-- Formula -->
+    <!-- ImageView -->
     <!-- visit -->
     <string name="visit_tweet">Publicēt šo atradumu Twitter\'ī</string>
     <!-- map -->
