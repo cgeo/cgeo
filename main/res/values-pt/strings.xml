@@ -1398,6 +1398,7 @@
     <string name="waypoint_duplicate">Duplicar ponto adicional</string>
     <string name="waypoint_toclipboard">Copiar waypoint p/ área de transferência</string>
     <string name="waypoint_copy_of">Cópia de</string>
+    <string name="waypoint_open_geochecker">Abrir Geochecker</string>
     <string name="waypointcalc_notes_prompt">Introduzir notas aqui…</string>
     <string name="waypoint_coordinate_formats_plain">Simples</string>
     <string name="from_clipboard">Da área de transferência</string>
@@ -1411,6 +1412,8 @@
     <string name="variables_deleteall">Eliminar Todas</string>
     <string name="variables_deleteall_confirm_text">Deseja realmente eliminar todas as variáveis para esta cache?</string>
     <string name="variables_info">Ajuda</string>
+    <string name="variables_varname_dialog_title">Nome da Variável</string>
+    <string name="variables_varname_dialog_message">Indique o nome da variável (pode ser deixado em branco)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Modo Guia</string>
     <string name="calccoord_guided_edit">Toque num dígito para editar</string>
@@ -1433,6 +1436,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Dispensada</string>
     <string name="calccoord_migrate_infotext_markdown">Um cálculo antigo de coordenadas foi encontrado neste ponto adicional:\n\n%1$s\n\nPode migrar isso para o novo cálculo de coordenadas da cache da seguinte forma:\n\n%2$s\n\ncom novas variáveis de cache:%3$s\n\nPor favor, escolha:\n- %4$s para realizar a migração como sugerido\n- %5$s para descartar em definitivo os dados de cálculo encontrados\n- %6$s para continuar sem migração. Será novamente questionado sobre a migração, na próxima vez que abrir o ponto adicional para edição. Note, no entanto, que editar as coordenadas do ponto adicional pode excluir dados de cálculo locais.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Escolher função</string>
     <string name="formula_function_sqrt">Raiz Quadrada</string>
     <string name="formula_function_sin">Seno</string>
     <string name="formula_function_cos">Co-seno</string>
@@ -2414,6 +2418,8 @@
     <string name="rtl_airport">aeroporto</string>
     <string name="rtl_cable_car">teleférico</string>
     <string name="rtl_chair_lift">telecadeira (teleférico)</string>
+    <string name="rtl_drag_lift">telesqui</string>
+    <string name="rtl_gondola">teleférico</string>
     <string name="rtl_goods_lift">monta-cargas</string>
     <string name="rtl_helipad">heliponto</string>
     <string name="rtl_rail_funicular">funicular</string>
@@ -2519,11 +2525,15 @@
     <string name="rtl_border_control">controlo fronteiriço</string>
     <string name="rtl_bridge_movable">ponte móvel</string>
     <string name="rtl_cave_entrance">entrada de gruta</string>
+    <string name="rtl_cycle_barrier">barreira de ciclovia</string>
     <string name="rtl_elevator">elevador</string>
+    <string name="rtl_ford">vau</string>
+    <string name="rtl_ford_small">pequeno vau</string>
     <string name="rtl_gate">portão</string>
     <string name="rtl_gate_private">portão privado</string>
     <string name="rtl_geyser">géiser</string>
     <string name="rtl_hot_spring">águas termais</string>
+    <string name="rtl_kissing_gate">portão para pessoas</string>
     <string name="rtl_ladder">escada</string>
     <string name="rtl_lift_gate">plataforma elevatória</string>
     <string name="rtl_log">registo</string>
@@ -2534,6 +2544,10 @@
     <string name="rtl_peak_small">pequeno cume</string>
     <string name="rtl_rapids">corredeira</string>
     <string name="rtl_rungs">postos</string>
+    <string name="rtl_saddle_0">passo de montanha 0°</string>
+    <string name="rtl_saddle_45">passo de montanha 45°</string>
+    <string name="rtl_saddle_90">passo de montanha 90°</string>
+    <string name="rtl_saddle_135">passo de montanha 135°</string>
     <string name="rtl_safety_rope">corda de segurança</string>
     <string name="rtl_stone">pedra</string>
     <string name="rtl_traffic_signal">sinal de tráfego</string>

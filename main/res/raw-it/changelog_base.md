@@ -34,5 +34,5 @@
 - Nuovo: Instradamento interno aggiornato a BRouter v1.6.3
 - Nuovo: Limita la necessità di un utilizzo ripetitivo del tasto indietro avviando una nuova serie di attività quando si passa a un'altra parte dell'app
 - Nuovo: Aggiunta l'impostazione per decrittografare il suggerimento per il cache per impostazione predefinita (invece di toccarlo)
-- New: Support setting caches from unknown source as found locally
-- Removed: Geolutin trackable service as it was discontinued
+- Nuovo: Supporto delle impostazioni cache da sorgente sconosciuta come trovato localmente
+- Rimosso: Il servizio di tracciabili Geolutin è stato interrotto
