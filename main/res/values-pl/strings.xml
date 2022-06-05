@@ -1442,6 +1442,8 @@
     <string name="variables_deleteall">Usuń wszystko</string>
     <string name="variables_deleteall_confirm_text">Czy na pewno chcesz usunąć wszystkie zmienne dla tej skrytki?</string>
     <string name="variables_info">Pomoc</string>
+    <string name="variables_varname_dialog_title">Nazwa zmiennej</string>
+    <string name="variables_varname_dialog_message">Wprowadź nazwę zmiennej (może pozostać pusta)</string>
     <!-- Calculated coordinates -->
     <string name="calccoord_guided_mode">Tryb z przewodnikiem</string>
     <string name="calccoord_guided_edit">Dotknij cyfry, aby edytować</string>
@@ -1464,6 +1466,7 @@
     <string name="calccoord_migrate_dismiss_usernote_praefix">Odrzucone</string>
     <string name="calccoord_migrate_infotext_markdown">W tym punkcji nawigacji odnaleziono współrzędne obliczone dawniej:\n\n%1$s\n\nMożesz przenieść je na nowe współrzędne obliczeniowe skrytki w następujący sposób:\n\n%2$s\n\nz nowymi zmiennymi skrytki:%3$s\n\nProszę wybrać:\n- %4$s aby wykonać migrację zgodnie z sugestią\n- %5$s aby całkowicie odrzucić znalezione dane obliczeniowe\n- %6$s aby kontynuować bez migracji. Zostaniesz poproszony o migrację następnym razem, gdy otworzysz punkt nawigacji do edycji. Zauważ, że edycja współrzędnych punktu nawigacji może usunąć lokalne dane obliczeniowe.</string>
     <!-- Formula -->
+    <string name="formula_choose_function">Wybierz funkcję</string>
     <string name="formula_function_sqrt">Pierwiastek kwadratowy</string>
     <string name="formula_function_sin">Sinus</string>
     <string name="formula_function_cos">Cosinus</string>
