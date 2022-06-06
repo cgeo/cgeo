@@ -28,6 +28,7 @@
 
 ### Yleinen
 
+- New: Download / update caches in background (experimental)
 - Uusi: Suorita varmuuskopiot automaattisesti (valinnainen)
 - Korjaus: Jatka valmiiden latausten tuontia
 - Uusi: Lisätty konfiguroitavissa olevat pikakäynnistyspainikkeet aloitusnäyttöön, katso Asetukset => Ulkoasu
@@ -36,3 +37,5 @@
 - Uusi: Lisää asetus salauksen purkamiseen oletusarvoisesti (sen sijaan että vain napauttamalla sitä)
 - Uusi: Tue tuntemattomasta lähteestä peräisin olevien kätköjen merkkaamista löydetyksi paikallisesti
 - Poistettu: Geolutin-matkaajapalvelu koska se on lopetettu
+- New: Copy current coordinates when long-clicking location on home screen
+
