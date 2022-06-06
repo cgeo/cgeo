@@ -153,10 +153,15 @@ public class GCLogin extends AbstractLogin {
         return status;
     }
 
+    private void logLastLoginError(final String status) {
+        Settings.setLastLoginErrorGC(status);
+        Log.w("Login.login: " + status);
+    }
+
     private StatusCode loginInternal(final boolean retry, @NonNull final Credentials credentials) {
         if (credentials.isInvalid()) {
             clearLoginInfo();
-            Log.w("Login.login: No login information stored");
+            logLastLoginError("No login information stored");
             return resetGcCustomDate(StatusCode.NO_LOGIN_INFO_STORED);
         }
 
@@ -167,7 +172,7 @@ public class GCLogin extends AbstractLogin {
             final String tryLoggedInData = getLoginPage();
 
             if (StringUtils.isBlank(tryLoggedInData)) {
-                Log.w("Login.login: Failed to retrieve login page (1st)");
+                logLastLoginError("Failed to retrieve login page (1st)");
                 return StatusCode.CONNECTION_FAILED; // no login page
             }
 
@@ -181,13 +186,13 @@ public class GCLogin extends AbstractLogin {
 
             final String requestVerificationToken = extractRequestVerificationToken(tryLoggedInData);
             if (StringUtils.isEmpty(requestVerificationToken)) {
-                Log.w("GCLogin.login: failed to find request verification token");
+                logLastLoginError("failed to find request verification token");
                 return StatusCode.LOGIN_PARSE_ERROR;
             }
 
             final String loginData = postCredentials(credentials, requestVerificationToken);
             if (StringUtils.isBlank(loginData)) {
-                Log.w("Login.login: Failed to retrieve login page (2nd)");
+                logLastLoginError("Failed to retrieve login page (2nd)");
                 // FIXME: should it be CONNECTION_FAILED to match the first attempt?
                 return StatusCode.COMMUNICATION_ERROR; // no login page
             }
@@ -201,31 +206,32 @@ public class GCLogin extends AbstractLogin {
             }
 
             if (loginData.contains("<div class=\"g-recaptcha\" data-sitekey=\"")) {
-                Log.i("Failed to log in to geocaching.com due to captcha required");
+                logLastLoginError("Failed to log in to geocaching.com due to captcha required");
                 return resetGcCustomDate(StatusCode.LOGIN_CAPTCHA_ERROR);
             }
 
             if (loginData.contains("id=\"signup-validation-error\"")) {
-                Log.i("Failed to log in to geocaching.com as " + username + " because of wrong username/password");
+                logLastLoginError("Failed to log in to geocaching.com as " + username + " because of wrong username/password");
                 return resetGcCustomDate(StatusCode.WRONG_LOGIN_DATA); // wrong login
             }
 
             if (loginData.contains("You must validate your account before you can log in.")) {
-                Log.i("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
+                logLastLoginError("Failed to log in Geocaching.com as " + username + " because account needs to be validated first");
                 return resetGcCustomDate(StatusCode.UNVALIDATED_ACCOUNT);
             }
 
-            Log.i("Failed to log in Geocaching.com as " + username + " for some unknown reason");
+            logLastLoginError("Failed to log in Geocaching.com as " + username + " for some unknown reason");
             if (retry) {
                 switchToEnglish(loginData);
                 return login(false, credentials);
             }
 
+            logLastLoginError("Unknown error");
             return resetGcCustomDate(StatusCode.UNKNOWN_ERROR); // can't login
         } catch (final StatusException status) {
             return status.statusCode;
         } catch (final Exception ignored) {
-            Log.w("Login.login: communication error");
+            logLastLoginError("communication error");
             return StatusCode.CONNECTION_FAILED;
         }
     }
@@ -557,6 +563,7 @@ public class GCLogin extends AbstractLogin {
         getServerParameters();
         // Force token retrieval to avoid avalanche requests
         GCWebAPI.getAuthorizationHeader().subscribe();
+        Settings.setLastLoginSuccessGC();
         return StatusCode.NO_ERROR; // logged in
     }
 
