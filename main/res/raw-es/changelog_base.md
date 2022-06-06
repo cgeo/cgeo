@@ -28,6 +28,7 @@
 
 ### General
 
+- New: Download / update caches in background (experimental)
 - New: Automatically perform backups (optional)
 - Fix: Resume importing finished downloads
 - New: Added configurable quick launch buttons to home screen, see Settings => Appearance
@@ -36,3 +37,5 @@
 - New: Add setting to decrypt the cache hint by default (instead of only when tapping on it)
 - New: Support setting caches from unknown source as found locally
 - Removed: Geolutin trackable service as it was discontinued
+- New: Copy current coordinates when long-clicking location on home screen
+

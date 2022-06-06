@@ -28,6 +28,7 @@
 
 ### Général
 
+- New: Download / update caches in background (experimental)
 - Nouveauté : Sauvegardes automatiques (optionnel)
 - Correction : reprendre l'importation des téléchargements terminés
 - Nouveau : ajout de boutons de lancement rapide configurables à l'écran d'accueil, voir Paramètres => Apparence
@@ -36,3 +37,5 @@
 - Nouveau : ajoute d'un paramètre pour décoder l'indice de la cache par défaut (au lieu de le faire uniquement en appuyant dessus)
 - Nouveau : accepte de marquer des caches provenant de sources inconnues comme étant trouvées localement
 - Supprimé : service d'objets voyageurs Geolutin (car il n'existe plus)
+- New: Copy current coordinates when long-clicking location on home screen
+

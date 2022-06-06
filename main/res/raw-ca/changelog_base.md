@@ -28,6 +28,7 @@
 
 ### General
 
+- New: Download / update caches in background (experimental)
 - Nou: Realitza còpies de seguretat automàticament (opcional)
 - Correcció: Reprèn la importació de les descàrregues tancades
 - Nou: S'han afegit botons d'inici ràpid configurables a la pantalla d'inici, vegeu Configuració => Aparença
@@ -36,3 +37,5 @@
 - Nou: Afegit la configuració per desxifrar la pista del catxé de manera predeterminada (en lloc de només quan hi toqueu)
 - Nou: Admet la configuració d'un catxé d'una font desconeguda tal com es troba localment
 - Eliminat: servei rastrejable de Geolutin, ja que es va suspendre
+- New: Copy current coordinates when long-clicking location on home screen
+

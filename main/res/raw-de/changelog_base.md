@@ -28,6 +28,7 @@
 
 ### Allgemein
 
+- New: Download / update caches in background (experimental)
 - Neu: Automatische Sicherungen durchführen (optional)
 - Korrektur: Importieren von fertigen Downloads fortsetzen
 - Neu: Konfigurierbare Schnellstart-Buttons zum Startbildschirm hinzugefügt, siehe Einstellungen => Erscheinungsbild
@@ -36,3 +37,5 @@
 - Neu: Einstellung hinzugefügt, um den Cache-Hinweis standardmäßig zu entschlüsseln (statt nur nach Tippen darauf)
 - Neu: Caches aus unbekannten Quellen als gefunden markieren
 - Entfernt: Geolutin Trackable-Service, da er eingestellt wurde
+- New: Copy current coordinates when long-clicking location on home screen
+

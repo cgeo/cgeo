@@ -28,6 +28,7 @@
 
 ### 일반
 
+- New: Download / update caches in background (experimental)
 - 신규: 자동으로 백업 수행(선택 사항)
 - 수정: 완료된 다운로드 가져오기 재개
 - 신규: 구성 가능한 빠른 실행 버튼을 홈 화면에 추가했습니다. 설정 => 외관 디자인
@@ -36,3 +37,5 @@
 - 신규: 기본적으로 캐시 힌트를 해독하는 설정 추가(누를 때만 사용하는 대신)
 - 신규: 로컬에서 찾은 알 수 없는 소스의 캐시 설정 지원
 - 제거됨: 중단된 Geolutin 추적아이템 서비스
+- New: Copy current coordinates when long-clicking location on home screen
+

@@ -28,6 +28,7 @@
 
 ### Ogólne
 
+- New: Download / update caches in background (experimental)
 - Nowość: Automatyczne wykonywanie kopii zapasowych (opcjonalnie)
 - Poprawka: Wznawianie importowania zakończonych pobierań
 - Nowość: Dodano konfigurowalne przyciski szybkiego uruchamiania do ekranu głównego, zobacz Ustawienia => Wygląd
@@ -36,3 +37,5 @@
 - Nowość: Dodano ustawienie, które pozwala domyślnie odszyfrowywać wskazówkę do skrytki (zamiast tylko po naciśnięciu)
 - Nowość: Obsługa ustawień skrytek z nieznanego źródła jako znalezione lokalnie
 - Usunięto: Usługę Geolutin, serwis zakończył działalność
+- New: Copy current coordinates when long-clicking location on home screen
+

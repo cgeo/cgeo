@@ -983,6 +983,8 @@
     <string name="init_map_other">Outro</string>
     <string name="init_map_osm_multithreaded">Múltiplos elementos (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Usar vários elementos para renderizar mapas do OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Utilizar mapa unificado</string>
+    <string name="init_summary_useUnifiedMap">Utiliza o novo mapa unificado em vez do Google Maps / Mapsforge (em testes / longe de estar acabado)</string>
     <string name="localstorage_migrate_title">Migração de ficheiros locais</string>
     <string name="localstorage_migrate_status_major">Versão %1$d</string>
     <!-- proximity notification -->
@@ -1975,6 +1977,7 @@
     <string name="tts_toggle">Ligar/desligar a fala</string>
     <string name="tts_started">Início das instruções de voz</string>
     <string name="tts_stopped">Fala interrompida</string>
+    <string name="tts_running">Serviço de fala está activo…</string>
     <string name="err_tts_lang_not_supported">A linguagem actual não é suportada pela conversão de texto em voz.</string>
     <string name="tts_one_kilometer">um quilómetro</string>
     <plurals name="tts_kilometers">

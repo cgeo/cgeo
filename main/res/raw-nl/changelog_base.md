@@ -28,6 +28,7 @@
 
 ### Algemeen
 
+- Nieuw: Download / update caches op de achtergrond (experimenteel)
 - Nieuw: Automatisch back-ups uitvoeren (optioneel)
 - Oplossing: Hervatten van importeren van voltooide downloads
 - Nieuw: configureerbare snelstartknoppen toegevoegd aan startscherm, zie Instellingen => Uiterlijk
@@ -36,3 +37,5 @@
 - Nieuw: Instelling toegevoegd om de cache hint standaard te ontcijferen (in plaats van alleen wanneer erop geklikt wordt)
 - Nieuw: Ondersteuning om caches uit onbekende bron lokaal als gevonden te loggen
 - Verwijderd: Geolutin trackable service omdat deze niet langer bestaat
+- Nieuw: Kopieer huidige coördinaten bij lang klikken op locatie op startscherm
+

@@ -995,6 +995,8 @@
     <string name="init_map_other">Jiná</string>
     <string name="init_map_osm_multithreaded">Vícevrstvá (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Použít více vrstev k vykreslení mapy OpenStreetMap</string>
+    <string name="init_title_useUnifiedMap">Použít jednotnou mapu</string>
+    <string name="init_summary_useUnifiedMap">Použít novou jednotnou mapu místo vestavěných map Google Maps / Mapsforge (OSM) (experimentální / zdaleka ne kompletní / pouze pro testování)</string>
     <string name="localstorage_migrate_title">Přenos místních souborů</string>
     <string name="localstorage_migrate_status_major">Verze %1$d</string>
     <!-- proximity notification -->
@@ -2007,6 +2009,7 @@
     <string name="tts_toggle">Přepnout hlasové pokyny</string>
     <string name="tts_started">Řeč zahájena</string>
     <string name="tts_stopped">Řeč ukončena</string>
+    <string name="tts_running">Hlasová služba je spuštěna…</string>
     <string name="err_tts_lang_not_supported">Převod textu na řeč není pro tento jazyk k dispozici.</string>
     <string name="tts_one_kilometer">jeden kilometr</string>
     <plurals name="tts_kilometers">
