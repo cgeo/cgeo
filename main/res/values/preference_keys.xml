@@ -413,6 +413,9 @@
     <string translatable="false" name="pref_gc_avatar">gc_avatar</string>
     <string translatable="false" name="pref_memberstatus">memberstatus</string>
     <string translatable="false" name="pref_gccustomdate">gccustomdate</string>
+    <string translatable="false" name="pref_gcLastLoginErrorStatus">gcLastLoginErrorStatus</string>
+    <string translatable="false" name="pref_gcLastLoginError">gcLastLoginError</string>
+    <string translatable="false" name="pref_gcLastLoginSuccess">gcLastLoginSuccess</string>
 
     <string translatable="false" name="pref_ocde_tokensecret">ocde_tokensecret</string>
     <string translatable="false" name="pref_ocde_tokenpublic">ocde_tokenpublic</string>
