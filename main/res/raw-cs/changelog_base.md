@@ -28,6 +28,7 @@
 
 ### Obecné
 
+- Novinka: Stahování / aktualizace kešek na pozadí (experimentální)
 - Novinka: Automaticky provádět zálohy (volitelné)
 - Oprava: Pokračovat v importu dokončených stahování
 - Novinka: Přidána konfigurovatelná tlačítka rychlého spuštění na domovskou obrazovku, viz Nastavení => Vzhled
@@ -36,3 +37,5 @@
 - Novinka: Přidáno nastavení pro dešifrování nápovědy ke kešce ve výchozím nastavení (místo pouze při klepnutí na ni)
 - Novinka: Podpora nastavení kešek z neznámého zdroje jako lokálně nalezených
 - Odstraněno: Skladovací služba Geolutin, protože byla ukončena
+- Novinka: Kopírování aktuálních souřadnic při dlouhém kliknutí na polohu na domovské obrazovce
+
