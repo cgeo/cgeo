@@ -28,6 +28,7 @@
 
 ### Generale
 
+- New: Download / update caches in background (experimental)
 - Nuovo: Esecuzione automatica dei backup (opzionale)
 - Corretto: Riprendi l'importazione dei download terminati
 - Nuovo: Aggiunti, alla schermata iniziale, i pulsanti di avvio rapido configurabili. Vedere Impostazioni => Aspetto
@@ -36,3 +37,5 @@
 - Nuovo: Aggiunta l'impostazione per decrittografare il suggerimento per il cache per impostazione predefinita (invece di toccarlo)
 - Nuovo: Supporto delle impostazioni cache da sorgente sconosciuta come trovato localmente
 - Rimosso: Il servizio di tracciabili Geolutin è stato interrotto
+- New: Copy current coordinates when long-clicking location on home screen
+
