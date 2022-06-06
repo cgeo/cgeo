@@ -28,6 +28,7 @@
 
 ### Geral
 
+- Novo: Transferência / actualização de caches em segundo plano (experimental)
 - Novo: Executar cópias de segurança automaticamente (opcional)
 - Correcção: Continuar a importação de transferências concluídas
 - Novo: Adicionados botões de lançamento rápido configuráveis ao ecrã inicial, ver Definições => Aparência
@@ -36,3 +37,5 @@
 - Novo: Adicionada uma configuração para desencriptar a dica da cache por defeito (ao invés de apenas ser desencriptada quando se tocar nela)
 - Novo: Suporte à definição de caches de fonte desconhecida como encontradas, localmente
 - Removido: O serviço Geolutin, pois foi descontinuado
+- Novo: Cópia das coordenadas actuais quando toque prolongadamente na página inicial
+
