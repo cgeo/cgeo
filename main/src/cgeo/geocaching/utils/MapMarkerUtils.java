@@ -160,15 +160,15 @@ public final class MapMarkerUtils {
         if (Settings.isDTMarkerEnabled()) {
             insetsBuilder.withInset(new InsetBuilder(getDTRatingMarker(res, cache.getDifficulty(), cache.getTerrain()), Gravity.TOP | Gravity.RIGHT));
         } else if (CacheDownloaderService.isDownloadPending(cache)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_sync, Gravity.TOP | Gravity.RIGHT));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.RIGHT));
         } else if (!cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
             insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.RIGHT));
         }
         // top-center: sync / stored (if DT marker enabled)
         if (Settings.isDTMarkerEnabled() && CacheDownloaderService.isDownloadPending(cache)) {
-            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_sync, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_storing, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
         } else if (Settings.isDTMarkerEnabled() && !cache.getLists().isEmpty() && showFloppyOverlay(cacheListType)) {
-                insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
+            insetsBuilder.withInset(new InsetBuilder(R.drawable.marker_stored, Gravity.TOP | Gravity.CENTER_HORIZONTAL));
         }
         // top-left: will attend / found / not found / offline-logs
         if (!showBigSmileys(cacheListType)) {
