@@ -983,6 +983,8 @@
     <string name="init_map_other">Sonstiges</string>
     <string name="init_map_osm_multithreaded">Parallelisiert (OpenStreetMap)</string>
     <string name="init_summary_map_osm_multithreaded">Parallelisiere das Zeichnen von OpenStreetMap-Karten</string>
+    <string name="init_title_useUnifiedMap">Einheitliche Karte verwenden</string>
+    <string name="init_summary_useUnifiedMap">Verwende die neue einheitliche Karte anstelle der eingebauten Google- und Mapsforge (OSM)-Karten (experimentell / bei weitem nicht komplett / nur zum Testen)</string>
     <string name="localstorage_migrate_title">Migration der lokalen Dateien</string>
     <string name="localstorage_migrate_status_major">Version %1$d</string>
     <!-- proximity notification -->
@@ -1975,6 +1977,7 @@
     <string name="tts_toggle">Sprachausgabe Ein-/Ausschalten</string>
     <string name="tts_started">Sprachausgabe gestartet</string>
     <string name="tts_stopped">Sprachausgabe gestoppt</string>
+    <string name="tts_running">Sprachdienst läuft…</string>
     <string name="err_tts_lang_not_supported">Die aktuelle Sprache wird von TTS nicht unterstützt.</string>
     <string name="tts_one_kilometer">ein Kilometer</string>
     <plurals name="tts_kilometers">
