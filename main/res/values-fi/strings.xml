@@ -983,6 +983,8 @@
     <string name="init_map_other">Muu</string>
     <string name="init_map_osm_multithreaded">Monisäikeinen (OSM)</string>
     <string name="init_summary_map_osm_multithreaded">Käytä useita säikeitä OpenStreetMap-karttojen renderöintiin</string>
+    <string name="init_title_useUnifiedMap">Käytä yhtenäistä karttaa</string>
+    <string name="init_summary_useUnifiedMap">Käytä uutta yhtenäistä karttaa sisäänrakennettujen Google Map / Mapsforge (OSM) -karttojen sijaan (kokeellinen / kaukana täydellisestä / vain testaukseen)</string>
     <string name="localstorage_migrate_title">Paikallisten tiedostojen siirtäminen</string>
     <string name="localstorage_migrate_status_major">Versio %1$d</string>
     <!-- proximity notification -->
@@ -1975,6 +1977,7 @@
     <string name="tts_toggle">Kytke puhuminen päälle/pois</string>
     <string name="tts_started">Puhuminen aloitettu</string>
     <string name="tts_stopped">Puhuminen lopetettu</string>
+    <string name="tts_running">Puhepalvelu on käynnissä…</string>
     <string name="err_tts_lang_not_supported">Teksti puheeksi -toiminto ei tue valittua kieltä.</string>
     <string name="tts_one_kilometer">yksi kilometri</string>
     <plurals name="tts_kilometers">
