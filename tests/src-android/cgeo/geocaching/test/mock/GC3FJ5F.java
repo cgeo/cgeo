@@ -71,12 +71,12 @@ public class GC3FJ5F extends MockedCache {
 
     @Override
     public String getHint() {
-        return "[FINAL] Geteilter Baumstumpf, dann ganz unten (Spoiler-Bild)";
+        return "[FINAL] Unter umgestürztem Baumstumpf (siehe Spoilerbild)";
     }
 
     @Override
     public String getDescription() {
-        return "<b>Update 31.12.2014:</b><br> Koordinaten für Station 2 neu eingemessen.<br>";
+        return "<b>Update 07.06.2022:</b><br> Hint und Spoilerbild den neuen Gegebenheiten nach 10 Jahren angepasst :)<br>";
     }
 
     @Override
