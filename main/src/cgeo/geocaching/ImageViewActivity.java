@@ -66,7 +66,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     private final ArrayList<Image> imageList = new ArrayList<>();
     private int imagePos = 0;
-    private int startImagePos = 0;
+    private int startPagerPos = 0;
     private String imageContextCode = "shared";
     private boolean fullImageView = false;
     private boolean showImageInformation = true;
@@ -101,17 +101,17 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         @NonNull
         @Override
-        public Object instantiateItem(@NonNull final ViewGroup container, final int pos) {
-            final int position = pos % realImageSize;
+        public Object instantiateItem(@NonNull final ViewGroup container, final int pagerPos) {
+            final int imagePos = pagerPos % realImageSize;
             final ImageviewImageBinding binding = ImageviewImageBinding.inflate(LayoutInflater.from(context));
             container.addView(binding.getRoot());
             final PageData pd = new PageData(binding);
 
-            final Image currentImage = imageList.get(position);
+            final Image currentImage = imageList.get(imagePos);
             pd.isBrowseable = currentImage != null && !UriUtils.isFileUri(currentImage.getUri()) && !UriUtils.isContentUri(currentImage.getUri());
 
-            cachedPages.put(pos, pd);
-            loadImageView(position, binding);
+            cachedPages.put(pagerPos, pd);
+            loadImageView(pagerPos, imagePos, binding);
             return binding.getRoot();
         }
 
@@ -260,7 +260,6 @@ public class ImageViewActivity extends AbstractActionBarActivity {
             showImageInformation = savedInstanceState.getBoolean(PARAM_SHOWIMAGEINFO, true);
         }
         imagePos = Math.max(0, Math.min(imageList.size() - 1, imagePos));
-        startImagePos = imagePos;
 
         imageCache.setCode(imageContextCode);
 
@@ -268,7 +267,8 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         mainBinding = ImageviewActivityBinding.bind(findViewById(R.id.imageview_activityroot));
         mainBinding.imageviewViewpager.setAdapter(imageAdapter);
-        mainBinding.imageviewViewpager.setCurrentItem(imagePos + imageAdapter.getCount() / 2);
+        startPagerPos = imagePos + imageAdapter.getCount() / 2;
+        mainBinding.imageviewViewpager.setCurrentItem(startPagerPos);
         mainBinding.imageviewViewpager.setOffscreenPageLimit(1);
 
         mainBinding.imageviewBackbutton.setOnClickListener(v -> {
@@ -319,7 +319,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     // splitting up that method would not help improve readability
     @SuppressWarnings({"PMD.NPathComplexity", "PMD.ExcessiveMethodLength"})
-    private void loadImageView(final int loadImagePos, final ImageviewImageBinding binding) {
+    private void loadImageView(final int pagerPos, final int loadImagePos, final ImageviewImageBinding binding) {
         final Image currentImage = imageList.get(loadImagePos);
         if (currentImage == null) {
             binding.imageviewHeadline.setVisibility(View.INVISIBLE);
@@ -357,7 +357,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
         if (!currentImage.isImageUri()) {
             binding.imageFull.setImageResource(UriUtils.getMimeTypeIcon(currentImage.getMimeType()));
-            showImage(loadImagePos, binding);
+            showImage(pagerPos, binding);
         } else {
             imageCache.loadImage(currentImage.getUrl(), p -> {
 
@@ -384,7 +384,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
                     setInfoShowHide(binding, showImageInformation);
                 }
 
-                showImage(loadImagePos, binding);
+                showImage(pagerPos, binding);
 
             }, () -> {
                 binding.imageFull.setVisibility(View.GONE);
@@ -393,7 +393,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
 
     }
 
-    private void showImage(final int loadImagePos, final ImageviewImageBinding binding) {
+    private void showImage(final int pagerPos, final ImageviewImageBinding binding) {
         binding.imageFull.setVisibility(View.VISIBLE);
         ImageUtils.createZoomableImageView(this, binding.imageFull, binding.imageviewViewroot, () -> {
             setFinishResult();
@@ -403,7 +403,7 @@ public class ImageViewActivity extends AbstractActionBarActivity {
         });
 
         //trigger enter transition if this is start
-        if (loadImagePos == startImagePos) {
+        if (pagerPos == startPagerPos) {
             binding.imageFull.setTransitionName(TRANSITION_ID_ENTER);
             //trigger transition for NEXT GUI cycle. If triggered immediately, ViewPager is not ready
             binding.imageFull.post(() -> {
