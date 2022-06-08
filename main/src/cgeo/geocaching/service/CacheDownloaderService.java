@@ -192,9 +192,10 @@ public class CacheDownloaderService extends AbstractForegroundIntentService {
     @Override
     public void onDestroy() {
         if (downloadQuery.size() > 0) {
-            showEndNotification("Download " + (shouldStop ? "canceled" : "failed") + ", " + cachesDownloaded + "/" + (cachesDownloaded + downloadQuery.size()) + " caches were downloaded");
+            showEndNotification(getString(shouldStop ? R.string.caches_store_background_result_canceled : R.string.caches_store_background_result_failed,
+                    cachesDownloaded, cachesDownloaded + downloadQuery.size()));
         } else {
-            showEndNotification(cachesDownloaded + " caches downloaded");
+            showEndNotification(getResources().getQuantityString(R.plurals.caches_store_background_result, cachesDownloaded, cachesDownloaded));
         }
         downloadQuery.clear();
         super.onDestroy();
